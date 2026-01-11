@@ -124,8 +124,7 @@ useballdrone(var_00, var_01) {
 
   if(scripts\mp\utility\game::isusingremote()) {
     return 0;
-  }
-  else if(exceededmaxballdrones()) {
+  } else if(exceededmaxballdrones()) {
     scripts\mp\hud_message::showerrormessage("KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   } else if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_02 >= scripts\mp\utility\game::maxvehiclesallowed()) {
@@ -250,8 +249,7 @@ createballdrone(var_00, var_01) {
 
   if(level.teambased) {
     var_14 scripts\mp\entityheadicons::setteamheadicon(var_14.team, (0, 0, 25));
-  }
-  else {
+  } else {
     var_14 scripts\mp\entityheadicons::setplayerheadicon(var_14.owner, (0, 0, 25));
   }
 
@@ -497,8 +495,7 @@ watchconnectedplayFX() {
       if(level.teambased) {
         if(var_0.team == self.team) {
           self[[var_1.playfxcallback]]("friendly", var_00);
-        }
-        else {
+        } else {
           self[[var_1.playfxcallback]]("enemy", var_00);
         }
 
@@ -527,8 +524,7 @@ watchjoinedteamplayFX() {
       if(level.teambased) {
         if(var_0.team == self.team) {
           self[[var_1.playfxcallback]]("friendly", var_00);
-        }
-        else {
+        } else {
           self[[var_1.playfxcallback]]("enemy", var_00);
         }
 
@@ -559,8 +555,7 @@ startballdrone(var_00) {
     case "ball_drone_backup":
       if(isDefined(var_0.turret) && isDefined(var_0.turret.idletarget)) {
         var_00 setlookatent(var_0.turret.idletarget);
-      }
-      else {
+      } else {
         var_00 setlookatent(self);
       }
 
@@ -606,8 +601,7 @@ balldrone_followplayer() {
 
   if(self.balldronetype != "ball_drone_eng_lethal") {
     self vehicle_setspeed(self.followspeed, 20, 20);
-  }
-  else {
+  } else {
     self vehicle_setspeed(self.followspeed, 25, 50);
   }
 
@@ -737,7 +731,7 @@ findnewpatrolpoint(var_00) {
     }
     if(scripts\mp\utility\game::istrue(var_6.used) && var_10 == var_3.size - 1) {
       foreach(var_08 in var_03) {
-      var_8.used = undefined;
+        var_8.used = undefined;
       }
 
       var_02 = 1;
@@ -1120,8 +1114,7 @@ low_entries_watcher() {
       while(self istouching(var_02) || self.owner istouching(var_02)) {
         if(isDefined(var_2.script_parameters)) {
           self.func_B0C9 = float(var_2.script_parameters);
-        }
-        else {
+        } else {
           self.func_B0C9 = 0.5;
         }
 
@@ -1228,11 +1221,9 @@ createobjective_engineer(var_00, var_01, var_02) {
 
   if(!isDefined(self getlinkedparent()) && !scripts\mp\utility\game::istrue(var_01)) {
     scripts\mp\objidpoolmanager::minimap_objective_position(var_03, self.origin);
-  }
-  else if(scripts\mp\utility\game::istrue(var_01) && scripts\mp\utility\game::istrue(var_02)) {
+  } else if(scripts\mp\utility\game::istrue(var_01) && scripts\mp\utility\game::istrue(var_02)) {
     scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_03, self);
-  }
-  else {
+  } else {
     scripts\mp\objidpoolmanager::minimap_objective_onentity(var_03, self);
   }
 
@@ -1465,8 +1456,7 @@ removeballdrone() {
 exceededmaxballdrones() {
   if(level.balldrones.size >= scripts\mp\utility\game::maxvehiclesallowed()) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

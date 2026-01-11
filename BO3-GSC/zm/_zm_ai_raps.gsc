@@ -104,9 +104,7 @@ function raps_round_tracker() {
       level.round_spawn_func = &raps_round_spawning;
       level.round_wait_func = &raps_round_wait_func;
       if(isDefined(level.zm_custom_get_next_raps_round)) {
-        level.n_next_raps_round = [
-          [level.zm_custom_get_next_raps_round]
-        ]();
+        level.n_next_raps_round = [[level.zm_custom_get_next_raps_round]]();
       } else {
         level.n_next_raps_round = (10 + (level.raps_round_count * 10)) + (randomintrange(-1, 1));
       }
@@ -188,9 +186,7 @@ function raps_round_spawning() {
         continue;
       }
       if(isDefined(level.zm_mixed_wasp_raps_spawning)) {
-        [
-          [level.zm_mixed_wasp_raps_spawning]
-        ]();
+        [[level.zm_mixed_wasp_raps_spawning]]();
       } else {
         spawn_raps();
       }

@@ -455,8 +455,7 @@ sfx_fire_tower_triggers_init(var_0, var_1, var_2, var_3, var_4, var_5, var_6, va
 
   if(isDefined(var_12)) {
     var_13.lookatnum = var_12;
-  }
-  else {
+  } else {
     var_13.lookatnum = 0;
   }
 
@@ -1239,8 +1238,7 @@ sfx_lever_rumbles() {
 
   if(common_scripts\utility::flag("sfx_lever_red")) {
     sfx_lever_rumbles();
-  }
-  else {
+  } else {
     common_scripts\utility::flag_clear("sfx_rumbles_playing");
   }
 }

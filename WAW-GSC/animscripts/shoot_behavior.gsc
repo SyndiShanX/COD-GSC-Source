@@ -46,14 +46,11 @@ decideWhatAndHowToShoot(objective) {
     result = undefined;
     if(self.weapon == "none") {
       noGunShoot();
-    }
-    else if(self weaponAnims() == "rocketlauncher") {
+    } else if(self weaponAnims() == "rocketlauncher") {
       result = rpgShoot();
-    }
-    else if(usingSidearm()) {
+    } else if(usingSidearm()) {
       result = pistolShoot();
-    }
-    else if(weaponclass(self.weapon) == "spread") {
+    } else if(weaponclass(self.weapon) == "spread") {
       result = shotgunshoot();
     } else if(WeaponClass(self.weapon) == "gas") {
       result = flamethrower_shoot();
@@ -117,8 +114,7 @@ rifleShoot() {
         markEnemyPosInvisible();
         if((self.provideCoveringFire || randomint(5) > 0) && shouldSuppress()) {
           self.shootObjective = "suppress";
-        }
-        else {
+        } else {
           self.shootObjective = "ambush";
         }
         return "retry";
@@ -147,8 +143,7 @@ rifleShoot() {
         if(!isDefined(likelyEnemyDir)) {
           if(isDefined(self.coverNode)) {
             likelyEnemyDir = self.coverNode.angles;
-          }
-          else {
+          } else {
             likelyEnemyDir = self.angles;
           }
         }
@@ -195,8 +190,7 @@ shouldStopAmbushing() {
   if(!isDefined(self.ambushEndTime)) {
     if(self.team == "axis") {
       self.ambushEndTime = gettime() + randomintrange(40000, 60000);
-    }
-    else {
+    } else {
       self.ambushEndTime = gettime() + randomintrange(4000, 10000);
     }
   }
@@ -379,8 +373,7 @@ setShootStyleForVisibleEnemy() {
   if(distanceSq < 300 * 300) {
     if(isDefined(self.shootEnt) && isDefined(self.shootEnt.magic_bullet_shield)) {
       return setShootStyle("single", false);
-    }
-    else {
+    } else {
       return setShootStyle("full", false);
     }
   } else if(distanceSq < 900 * 900 || shouldBeAJerk()) {
@@ -389,8 +382,7 @@ setShootStyleForVisibleEnemy() {
   if(self.provideCoveringFire || distanceSq < 1600 * 1600) {
     if(shouldDoSemiForVariety()) {
       return setShootStyle("semi", false);
-    }
-    else {
+    } else {
       return setShootStyle("burst", false);
     }
   }
@@ -417,8 +409,7 @@ setShootStyleForSuppression() {
   if(self.provideCoveringFire || distanceSq < 1300 * 1300) {
     if(shouldDoSemiForVariety()) {
       return setShootStyle("semi", false);
-    }
-    else {
+    } else {
       return setShootStyle("burst", false);
     }
   }

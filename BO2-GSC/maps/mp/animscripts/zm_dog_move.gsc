@@ -105,8 +105,7 @@ moveloop() {
 
     if(self.disablearrivals) {
       self.stopanimdistsq = 0;
-    }
-    else {
+    } else {
       self.stopanimdistsq = level.dogstoppingdistsq;
     }
 

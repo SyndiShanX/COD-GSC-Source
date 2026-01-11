@@ -301,8 +301,7 @@ func_BA6A(var_00, var_01, var_02) {
   while(gettime() < var_01) {
     if(var_02) {
       var_06 = self.cannon getturrettarget(0).origin;
-    }
-    else {
+    } else {
       var_06 = self.cannon.func_11512.origin;
     }
 

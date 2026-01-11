@@ -10,7 +10,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace activecamo;
 
 autoexec __init__system__() {
@@ -74,7 +73,7 @@ on_weapon_change(params) {
 function_c887f58e() {
   self notify("6d4a62e5d12fa266");
   self endon("6d4a62e5d12fa266");
-  self endon(#"death", #"weapon_change");
+  self endon(#"death", # "weapon_change");
   weapon = self function_d2c2b168();
 
   if(!(isDefined(isDefined(level.var_ab319180[weapon.rootweapon])) && isDefined(level.var_ab319180[weapon.rootweapon]))) {
@@ -125,7 +124,7 @@ function_ae141bf2(camoindex) {
   activecamoinfo = undefined;
   activecamoname = getactivecamo(camoindex);
 
-  if(isDefined(activecamoname) && activecamoname != #"") {
+  if(isDefined(activecamoname) && activecamoname != # "") {
     activecamoinfo = getscriptbundle(activecamoname);
   }
 
@@ -282,12 +281,12 @@ update_active_camo(localclientnum, weapon, tagname, stagenum, impulse, var_d71e8
 
         if(isDefined(weapon)) {
           switch (weapon.weapclass) {
-            case #"rocketlauncher":
-            case #"mg":
-            case #"rifle":
+            case # "rocketlauncher":
+            case # "mg":
+            case # "rifle":
               fx = stage.var_69896523;
               break;
-            case #"pistol":
+            case # "pistol":
               fx = stage.var_bafc7841;
               break;
             default:
@@ -382,7 +381,7 @@ function_16d7447b(localclientnum, tagname) {
 }
 
 function_c55b3123(stage, tagname, var_eb6a239c, lerptime, var_f023ca7d, var_d71e8c6e) {
-  self endon(#"death", #"weapon_change");
+  self endon(#"death", # "weapon_change");
 
   if(!var_d71e8c6e && lerptime > 0) {
     endtime = gettime() + stage.var_2eeeee1b * 1000;
@@ -410,7 +409,7 @@ function_c55b3123(stage, tagname, var_eb6a239c, lerptime, var_f023ca7d, var_d71e
 }
 
 function_42887bfe(stage, tagname, layer, impulse, var_d71e8c6e) {
-  self endon(#"death", #"weapon_change");
+  self endon(#"death", # "weapon_change");
   var_238c3eeb = "Layer" + layer;
   var_604ae5c3 = var_238c3eeb + " Brightness";
   var_d6637dc6 = var_238c3eeb + " Fade";

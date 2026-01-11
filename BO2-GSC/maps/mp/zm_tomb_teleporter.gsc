@@ -48,14 +48,14 @@ teleporter_init() {
   a_exits = getstructarray("portal_exit", "script_noteworthy");
 
   foreach(s_portal in a_exits) {
-  level.a_teleport_exits[s_portal.script_int] = s_portal;
+    level.a_teleport_exits[s_portal.script_int] = s_portal;
   }
 
   level.a_teleport_exit_triggers = [];
   a_trigs = getstructarray("chamber_exit_trigger", "script_noteworthy");
 
   foreach(s_trig in a_trigs) {
-  level.a_teleport_exit_triggers[s_trig.script_int] = s_trig;
+    level.a_teleport_exit_triggers[s_trig.script_int] = s_trig;
   }
 
   a_s_teleporters = getstructarray("trigger_teleport_pad", "targetname");
@@ -314,11 +314,9 @@ stargate_teleport_player(str_teleport_to, player, n_teleport_time_sec, show_fx) 
 
   if(player getstance() == "prone") {
     desired_origin = image_room.origin + prone_offset;
-  }
-  else if(player getstance() == "crouch") {
+  } else if(player getstance() == "crouch") {
     desired_origin = image_room.origin + crouch_offset;
-  }
-  else {
+  } else {
     desired_origin = image_room.origin + stand_offset;
   }
 

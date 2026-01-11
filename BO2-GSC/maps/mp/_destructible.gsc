@@ -54,11 +54,9 @@ destructible_event_callback(destructible_event, attacker, weapon) {
 
     if(explosion_radius == "sm") {
       explosion_radius = 150;
-    }
-    else if(explosion_radius == "lg") {
+    } else if(explosion_radius == "lg") {
       explosion_radius = 450;
-    }
-    else {
+    } else {
       explosion_radius = int(explosion_radius);
     }
 
@@ -119,8 +117,7 @@ simple_explosion(attacker) {
 
   if(isDefined(attacker)) {
     self dodamage(self.health + 10000, self.origin + offset, attacker);
-  }
-  else {
+  } else {
     self dodamage(self.health + 10000, self.origin + offset);
   }
 }
@@ -149,8 +146,7 @@ complex_explosion(attacker, max_radius) {
 
   if(isDefined(attacker)) {
     self radiusdamage(self.origin + offset, max_radius, 300, 100, attacker);
-  }
-  else {
+  } else {
     self radiusdamage(self.origin + offset, max_radius, 300, 100);
   }
 
@@ -160,8 +156,7 @@ complex_explosion(attacker, max_radius) {
 
   if(isDefined(attacker)) {
     self dodamage(20000, self.origin + offset, attacker);
-  }
-  else {
+  } else {
     self dodamage(20000, self.origin + offset);
   }
 }
@@ -198,8 +193,7 @@ destructible_car_explosion(attacker, physics_explosion) {
 
   if(isDefined(attacker)) {
     self radiusdamage(self.origin, 256, 300, 75, attacker, "MOD_EXPLOSIVE", "destructible_car_mp");
-  }
-  else {
+  } else {
     self radiusdamage(self.origin, 256, 300, 75);
   }
 
@@ -218,8 +212,7 @@ destructible_car_explosion(attacker, physics_explosion) {
 
   if(isDefined(attacker)) {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1), attacker);
-  }
-  else {
+  } else {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1));
   }
 
@@ -258,8 +251,7 @@ destructible_tank_grenade_stuck_explode(missile) {
 
   if(isDefined(owner)) {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1), owner);
-  }
-  else {
+  } else {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1));
   }
 }
@@ -318,8 +310,7 @@ destructible_car_grenade_stuck_explode(missile) {
 
   if(isDefined(owner)) {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1), owner);
-  }
-  else {
+  } else {
     self dodamage(self.health + 10000, self.origin + (0, 0, 1));
   }
 }

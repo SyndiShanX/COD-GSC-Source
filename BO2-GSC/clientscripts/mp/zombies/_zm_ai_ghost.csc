@@ -61,8 +61,7 @@ play_fx_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   }
   if(newval > 0) {
     self play_fx(localclientnum, newval);
-  }
-  else if(isDefined(self._fx_array) && isDefined(self._fx_array[localclientnum])) {
+  } else if(isDefined(self._fx_array) && isDefined(self._fx_array[localclientnum])) {
     deletefx(localclientnum, self._fx_array[localclientnum], 0);
   }
 }
@@ -96,8 +95,7 @@ play_fx_internal(localclientnum, newval) {
 
   if(newval == 1 || newval == 5) {
     self._fx_array[localclientnum] = playFX(localclientnum, effect, self.origin);
-  }
-  else {
+  } else {
     self._fx_array[localclientnum] = playFXOnTag(localclientnum, effect, self, linktag);
   }
 }

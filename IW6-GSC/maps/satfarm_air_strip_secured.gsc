@@ -634,7 +634,7 @@ remove_ally_tanks() {
 
   if(isDefined(level.herotanks)) {
     foreach(var_1 in level.herotanks) {
-    var_1 delete();
+      var_1 delete();
     }
   }
 }

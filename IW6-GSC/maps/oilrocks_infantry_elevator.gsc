@@ -48,7 +48,7 @@ main() {
   thread cleanup_infantry_area();
 
   foreach(var_10, var_4 in level.infantry_guys) {
-  var_4 thread forceteleport_maintain(var_7[var_10].origin + (0, 0, var_8), (0, 0, 0));
+    var_4 thread forceteleport_maintain(var_7[var_10].origin + (0, 0, var_8), (0, 0, 0));
   }
 
   var_6.origin = var_6.origin + (0, 0, var_8);

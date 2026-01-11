@@ -13,11 +13,10 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_bgb_phoenix_up;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_phoenix_up", &__init__, undefined, #"bgb");
+  system::register(#"zm_bgb_phoenix_up", &__init__, undefined, # "bgb");
 }
 
 __init__() {

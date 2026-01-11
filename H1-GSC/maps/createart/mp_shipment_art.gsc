@@ -9,8 +9,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\mp_shipment_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\mp_shipment_fog::main();
   }
 

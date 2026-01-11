@@ -59,8 +59,7 @@ getfootorigin(note) {
 
   if(!isDefined(boneorigin)) {
     boneorigin = self.origin;
-  }
-  else {
+  } else {
     boneorigin = boneorigin - vectorscale((0, 0, 1), 2.0);
   }
 
@@ -77,8 +76,7 @@ horse_feet(localclientnum, note, ground_type) {
 
   if(self islocalclientdriver(localclientnum)) {
     sound_alias = sound_alias + "_plr";
-  }
-  else {
+  } else {
     sound_alias = sound_alias + "_npc";
   }
 

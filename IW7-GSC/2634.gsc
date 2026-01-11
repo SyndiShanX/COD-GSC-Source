@@ -14,8 +14,7 @@ spawnnewagent(var_00, var_01, var_02, var_03, var_04) {
 
     if(is_scripted_agent(var_00)) {
       var_05 = spawn_scripted_agent(var_05, var_00, var_02, var_03);
-    }
-    else {
+    } else {
       var_05 = spawn_regular_agent(var_05, var_02, var_03);
     }
 
@@ -35,13 +34,12 @@ set_agent_model(var_00, var_01) {
 
   if(isDefined(level.zombieattachfunction) && level.agent_definition[var_01]["traversal_unit_type"] == "zombie") {
     var_00[[level.zombieattachfunction]](var_01);
-  }
-  else {
+  } else {
     var_00 setModel(level.agent_definition[var_01]["body_model"]);
     var_02 = strtok(level.agent_definition[var_01]["other_body_parts"], " ");
 
     foreach(var_04 in var_02) {
-    var_00 attach(var_04, "", 1);
+      var_00 attach(var_04, "", 1);
     }
   }
 
@@ -90,8 +88,7 @@ setup_agent(var_00) {
 agent_go_to_pos(var_00, var_01, var_02, var_03, var_04) {
   if(is_agent_scripted(self)) {
     self ghostskulls_complete_status(var_00);
-  }
-  else {
+  } else {
     self botsetscriptgoal(var_00, var_01, var_02, var_03, var_04);
   }
 }
@@ -114,8 +111,7 @@ assign_agent_func(var_00, var_01) {
   if(!isDefined(level.agent_funcs[var_02][var_00])) {
     if(!isDefined(level.species_funcs[self.species]) || !isDefined(level.species_funcs[self.species][var_00])) {
       level.agent_funcs[var_02][var_00] = var_01;
-    }
-    else {
+    } else {
       level.agent_funcs[var_02][var_00] = level.species_funcs[self.species][var_00];
     }
   }
@@ -274,8 +270,7 @@ default_spawn_func(var_00, var_01, var_02) {
 
   if(isDefined(var_02)) {
     var_03 giveweapon(var_02);
-  }
-  else {
+  } else {
     var_03 giveweapon("iw6_dlcweap02_mp");
   }
 
@@ -454,8 +449,7 @@ on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, 
 
   if(should_do_immediate_ragdoll(self)) {
     do_immediate_ragdoll(self.body);
-  }
-  else {
+  } else {
     thread delaystartragdoll(self.body, var_06, var_05, var_04, var_00, var_03);
   }
 
@@ -546,8 +540,7 @@ func_E08D(var_00) {
 
   if(isDefined(var_01) && var_1.size == 2) {
     return var_1[1];
-  }
-  else {
+  } else {
     return var_00;
   }
 }
@@ -565,8 +558,7 @@ process_damage_feedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06, 
 
     if(isDefined(var_1.nexthittime) && var_1.nexthittime > var_11) {
       return;
-    }
-    else {
+    } else {
       var_1.nexthittime = var_11 + 250;
     }
   }
@@ -596,43 +588,32 @@ process_damage_feedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06, 
 
   if(scripts\cp\cp_damage::func_A010(var_05)) {
     var_12 = "special_weapon";
-  }
-  else if(var_16 || var_17 || var_18 || var_20) {
+  } else if(var_16 || var_17 || var_18 || var_20) {
     var_12 = "card_boosted";
-  }
-  else if(issubstr(var_05, "arkyellow") && var_04 == "MOD_EXPLOSIVE_BULLET" && var_08 == "none") {
+  } else if(issubstr(var_05, "arkyellow") && var_04 == "MOD_EXPLOSIVE_BULLET" && var_08 == "none") {
     var_12 = "yellow_arcane_cp";
-  }
-  else if(isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_22) {
+  } else if(isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_boom") && var_22) {
     var_12 = "high_damage";
-  }
-  else if(isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_23) {
+  } else if(isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_smack") && var_23) {
     var_12 = "high_damage";
-  }
-  else if(isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15) {
+  } else if(isplayer(var_01) && var_01 scripts\cp\utility::has_zombie_perk("perk_machine_rat_a_tat") && var_15) {
     var_12 = "high_damage";
-  }
-  else if(isplayer(var_01) && scripts\engine\utility::is_true(var_1.deadeye_charge) && var_15) {
+  } else if(isplayer(var_01) && scripts\engine\utility::is_true(var_1.deadeye_charge) && var_15) {
     var_12 = "dewdrops_cp";
-  }
-  else if(scripts\engine\utility::is_true(level.insta_kill)) {
+  } else if(scripts\engine\utility::is_true(level.insta_kill)) {
     var_12 = "high_damage";
-  }
-  else if(var_05 == "incendiary_ammo_mp") {
+  } else if(var_05 == "incendiary_ammo_mp") {
     var_12 = "red_arcane_cp";
-  }
-  else if(var_05 == "stun_ammo_mp") {
+  } else if(var_05 == "stun_ammo_mp") {
     var_12 = "blue_arcane_cp";
-  }
-  else if(var_05 == "slayer_ammo_mp") {
+  } else if(var_05 == "slayer_ammo_mp") {
     var_12 = "pink_arcane_cp";
   }
 
   if(isDefined(var_01)) {
     if(isDefined(var_1.owner)) {
       var_1.owner thread scripts\cp\cp_damage::updatedamagefeedback(var_12, var_13, var_02, var_10.riotblock);
-    }
-    else {
+    } else {
       var_01 thread scripts\cp\cp_damage::updatedamagefeedback(var_12, var_13, var_02, var_10.riotblock);
     }
   }
@@ -647,7 +628,9 @@ process_kill_rewards(var_00, var_01, var_02, var_03, var_04) {
     scripts\cp\cp_persistence::record_player_kills(var_03, var_02, var_04, var_06);
 
     if(isDefined(level.loot_func) && isDefined(var_05)) {
-      [[level.loot_func]](var_05, self.origin, var_00);
+      [
+        [level.loot_func]
+      ](var_05, self.origin, var_00);
     }
   }
 }

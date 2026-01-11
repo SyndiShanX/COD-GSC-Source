@@ -39,22 +39,19 @@ init() {
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowfrag")) {
     level.weapons["frag"] = "frag_grenade_mp";
-  }
-  else {
+  } else {
     level.weapons["frag"] = "";
   }
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowsmoke")) {
     level.weapons["smoke"] = "smoke_grenade_mp";
-  }
-  else {
+  } else {
     level.weapons["smoke"] = "";
   }
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowflash")) {
     level.weapons["flash"] = "flash_grenade_mp";
-  }
-  else {
+  } else {
     level.weapons["flash"] = "";
   }
 
@@ -62,22 +59,19 @@ init() {
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowsatchel")) {
     level.weapons["satchel_charge"] = "satchel_charge_mp";
-  }
-  else {
+  } else {
     level.weapons["satchel_charge"] = "";
   }
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowbetty")) {
     level.weapons["betty"] = "mine_bouncing_betty_mp";
-  }
-  else {
+  } else {
     level.weapons["betty"] = "";
   }
 
   if(maps\mp\gametypes\_tweakables::gettweakablevalue("weapon", "allowrpgs")) {
     level.weapons["rpg"] = "rpg_mp";
-  }
-  else {
+  } else {
     level.weapons["rpg"] = "";
   }
 
@@ -206,20 +200,15 @@ load_default_loadout(class, classnum) {
 weapon_class_register(weapon, weapon_type) {
   if(issubstr("weapon_smg weapon_cqb weapon_assault weapon_lmg weapon_sniper weapon_shotgun weapon_launcher weapon_special", weapon_type)) {
     level.primary_weapon_array[weapon] = 1;
-  }
-  else if(issubstr("weapon_pistol", weapon_type)) {
+  } else if(issubstr("weapon_pistol", weapon_type)) {
     level.side_arm_array[weapon] = 1;
-  }
-  else if(weapon_type == "weapon_grenade") {
+  } else if(weapon_type == "weapon_grenade") {
     level.grenade_array[weapon] = 1;
-  }
-  else if(weapon_type == "weapon_explosive") {
+  } else if(weapon_type == "weapon_explosive") {
     level.inventory_array[weapon] = 1;
-  }
-  else if(weapon_type == "weapon_rifle") {
+  } else if(weapon_type == "weapon_rifle") {
     level.inventory_array[weapon] = 1;
-  }
-  else {
+  } else {
     assert(0, "Weapon group info is missing from statsTable for: " + weapon_type);
   }
 }
@@ -319,8 +308,7 @@ getattachmentstring(weaponnum, attachmentnum) {
 
   if(attachmentstring != "none" && !is_attachment_excluded(attachmentstring)) {
     attachmentstring = attachmentstring + "_";
-  }
-  else {
+  } else {
     attachmentstring = "";
   }
 
@@ -341,8 +329,7 @@ getkillstreakindex(class, killstreaknum) {
 
   if(getdvarint(#"_id_826EB3B9") == 2) {
     return getdvarint(#"_id_E1D3321F" + killstreakstring);
-  }
-  else {
+  } else {
     return self getloadoutitem(class, killstreakstring);
   }
 }
@@ -437,8 +424,7 @@ givekillstreaks(classnum) {
 is_warlord_perk(itemindex) {
   if(itemindex == 168 || itemindex == 169) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -592,8 +578,7 @@ giveloadout(team, class) {
 
   if(isDefined(self.pers["weapon"]) && self.pers["weapon"] != "none" && !maps\mp\killstreaks\_killstreaks::iskillstreakweapon(self.pers["weapon"])) {
     weapon = self.pers["weapon"];
-  }
-  else {
+  } else {
     weapon = self getloadoutweapon(class_num, "primary");
     weapon = removeduplicateattachments(weapon);
 
@@ -718,8 +703,7 @@ giveloadout(team, class) {
   if(!(grenadetypeprimary != "" && grenadetypeprimary != "weapon_null_mp" && isequipmentallowed(grenadetypeprimary))) {
     if(grenadetypesecondary != level.weapons["frag"]) {
       grenadetypeprimary = level.weapons["frag"];
-    }
-    else {
+    } else {
       grenadetypeprimary = level.weapons["flash"];
     }
   }
@@ -784,8 +768,7 @@ giveloadout(team, class) {
   if(!isDefined(self.firstspawn)) {
     if(isDefined(spawnweapon)) {
       self initialweaponraise(spawnweapon);
-    }
-    else {
+    } else {
       self initialweaponraise(weapon);
     }
   } else
@@ -798,8 +781,7 @@ giveloadout(team, class) {
 setweaponammooverall(weaponname, amount) {
   if(isweaponcliponly(weaponname)) {
     self setweaponammoclip(weaponname, amount);
-  }
-  else {
+  } else {
     self setweaponammoclip(weaponname, amount);
     diff = amount - self getweaponammoclip(weaponname);
     assert(diff >= 0);
@@ -887,8 +869,7 @@ cac_get_dvar_int(dvar, def) {
 cac_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }
@@ -995,8 +976,7 @@ cac_modified_damage(victim, attacker, damage, mod, weapon, inflictor, hitloc) {
 
     if(level.teambased && attacker.team != victim.team) {
       victim thread maps\mp\_challenges::flakjacketprotected(weapon, attacker);
-    }
-    else if(attacker != victim) {
+    } else if(attacker != victim) {
       victim thread maps\mp\_challenges::flakjacketprotected(weapon, attacker);
     }
 

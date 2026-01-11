@@ -21,8 +21,7 @@ init_vehicles() {
 
   if(isDefined(level.optimizedvehicletriggerprocess)) {
     common_scripts\utility::array_levelthread(level.vehicle_processtriggers, ::trigger_process_set);
-  }
-  else {
+  } else {
     common_scripts\utility::array_levelthread(level.vehicle_processtriggers, maps\_vehicle_code::trigger_process);
   }
 
@@ -45,7 +44,7 @@ create_vehicle_from_spawngroup_and_gopath(var_0) {
   var_1 = scripted_spawn(var_0);
 
   foreach(var_3 in var_1) {
-  level thread gopath(var_3);
+    level thread gopath(var_3);
   }
 
   return var_1;
@@ -60,7 +59,7 @@ scripted_spawn(var_0) {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-  var_2[var_2.size] = vehicle_spawn(var_4);
+    var_2[var_2.size] = vehicle_spawn(var_4);
   }
 
   return var_2;
@@ -344,8 +343,7 @@ move_truck_junk_here(var_0) {
 dummy_to_vehicle() {
   if(ishelicopter()) {
     self.modeldummy.origin = self gettagorigin("tag_ground");
-  }
-  else {
+  } else {
     self.modeldummy.origin = self.origin;
     self.modeldummy.angles = self.angles;
   }
@@ -415,7 +413,7 @@ spawn_vehicles_from_targetname_and_drive(var_0) {
   var_1 = spawn_vehicles_from_targetname(var_0);
 
   foreach(var_3 in var_1) {
-  thread gopath(var_3);
+    thread gopath(var_3);
   }
 
   return var_1;
@@ -591,7 +589,7 @@ build_all_treadfx(var_0, var_1) {
   var_2 = get_surface_types();
 
   foreach(var_4 in var_2) {
-  set_vehicle_effect(var_0, var_4);
+    set_vehicle_effect(var_0, var_4);
   }
 }
 
@@ -607,8 +605,7 @@ set_vehicle_effect(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     level._vehicle_effect[var_0][var_1] = loadfx(var_2);
-  }
-  else if(isDefined(level._vehicle_effect[var_0]) && isDefined(level._vehicle_effect[var_0][var_1])) {
+  } else if(isDefined(level._vehicle_effect[var_0]) && isDefined(level._vehicle_effect[var_0][var_1])) {
     level._vehicle_effect[var_0][var_1] = undefined;
   }
 }

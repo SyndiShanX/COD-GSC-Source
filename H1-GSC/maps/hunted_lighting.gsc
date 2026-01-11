@@ -62,7 +62,7 @@ setup_fade_angle_lights() {
   var_0 = getEntArray("fade_angle_light", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread update_fade_angle_lights();
+    var_2 thread update_fade_angle_lights();
   }
 }
 

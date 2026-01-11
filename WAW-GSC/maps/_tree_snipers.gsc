@@ -94,8 +94,7 @@ tree_death(guy, anim_point) {
     end = (0, 0, 0);
     if(randomint(10) < 5) {
       createrope(start, end, 70, guy, "j_ankle_le", 1);
-    }
-    else {
+    } else {
       createrope(start, end, 70, guy, "j_ankle_ri", 1);
     }
     wait 1.0;

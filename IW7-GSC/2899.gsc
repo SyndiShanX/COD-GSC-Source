@@ -200,8 +200,7 @@ func_B90B(var_00, var_01, var_02, var_03) {
 
       if(isDefined(level.func_B901[var_00].func_756F[var_04][var_07].func_CE63)) {
         scripts\engine\utility::waittill_any_timeout(level.func_B901[var_00].func_756F[var_04][var_07].func_CE63, "entitydeleted");
-      }
-      else {
+      } else {
         self waittill("entitydeleted");
       }
 
@@ -252,11 +251,9 @@ func_B90A(var_00, var_01, var_02, var_03, var_04, var_05) {
 
     if(var_08 < 0.5) {
       var_10 = var_10 + "_sml";
-    }
-    else if(var_08 < 0.9) {
+    } else if(var_08 < 0.9) {
       var_10 = var_10 + "_med";
-    }
-    else {
+    } else {
       var_10 = var_10 + "_lrg";
     }
   }
@@ -283,14 +280,13 @@ func_B90A(var_00, var_01, var_02, var_03, var_04, var_05) {
 
     if(isDefined(var_0.target)) {
       foreach(var_19 in getEntArray(var_0.target, "targetname")) {
-      thread func_B90A(var_19, var_02, var_03, 0.0, var_05);
+        thread func_B90A(var_19, var_02, var_03, 0.0, var_05);
       }
     }
 
     if(isDefined(level.func_B901[var_06].func_756F[var_10][var_15].func_CE63)) {
       scripts\engine\utility::waittill_any_timeout(level.func_B901[var_06].func_756F[var_10][var_15].func_CE63, "entitydeleted");
-    }
-    else {
+    } else {
       self waittill("entitydeleted");
     }
 

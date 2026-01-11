@@ -178,8 +178,7 @@ dig_spots_init() {
 
     if(isDefined(s_dig_spot.script_noteworthy) && s_dig_spot.script_noteworthy == "initial_spot") {
       s_dig_spot thread dig_spot_spawn();
-    }
-    else {
+    } else {
       s_dig_spot.dug = 1;
     }
 
@@ -208,8 +207,7 @@ dig_spots_respawn(a_dig_spots) {
 
     if(level.weather_snow > 0) {
       n_respawned_max = 0;
-    }
-    else if(level.weather_rain > 0) {
+    } else if(level.weather_rain > 0) {
       n_respawned_max = 5;
     }
 
@@ -275,8 +273,7 @@ dig_spot_spawn() {
 dig_spot_trigger_visibility(player) {
   if(isDefined(player.dig_vars["has_shovel"]) && player.dig_vars["has_shovel"]) {
     self sethintstring(&"ZM_TOMB_X2D");
-  }
-  else {
+  } else {
     self sethintstring(&"ZM_TOMB_NS");
   }
 
@@ -469,8 +466,7 @@ dig_up_weapon(digger) {
 
   if(randomint(100) < 90) {
     str_weapon = a_common_weapons[getarraykeys(a_common_weapons)[randomint(getarraykeys(a_common_weapons).size)]];
-  }
-  else {
+  } else {
     str_weapon = a_rare_weapons[getarraykeys(a_rare_weapons)[randomint(getarraykeys(a_rare_weapons).size)]];
   }
 
@@ -535,8 +531,7 @@ swap_weapon(str_weapon, e_player) {
   if(is_player_valid(e_player) && !e_player.is_drinking && !is_placeable_mine(str_current_weapon) && !is_equipment(str_current_weapon) && level.revive_tool != str_current_weapon && "none" != str_current_weapon && !e_player hacker_active()) {
     if(!e_player hasweapon(str_weapon)) {
       e_player take_old_weapon_and_give_new(str_current_weapon, str_weapon);
-    }
-    else {
+    } else {
       e_player givemaxammo(str_weapon);
     }
   }
@@ -730,7 +725,7 @@ dig_powerups_tracking() {
     level waittill("end_of_round");
 
     foreach(str_powerup, value in level.dig_powerups_tracking) {
-    level.dig_powerups_tracking[str_powerup] = 0;
+      level.dig_powerups_tracking[str_powerup] = 0;
     }
 
     level.dig_n_zombie_bloods_spawned = 0;

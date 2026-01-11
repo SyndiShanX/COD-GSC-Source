@@ -46,8 +46,7 @@ main() {
 
   if(self.a.pose != "prone") {
     self transitionto("prone");
-  }
-  else {
+  } else {
     self enterpronewrapper(0);
   }
 
@@ -162,8 +161,7 @@ trythrowinggrenade(throwat, safe) {
 
   if(isDefined(safe) && safe) {
     theanim = animarraypickrandom("grenade_safe");
-  }
-  else {
+  } else {
     theanim = animarraypickrandom("grenade_exposed");
   }
 
@@ -204,8 +202,7 @@ transitionto(newpose) {
 
   if(shouldfirewhilechangingpose()) {
     transanim = animarray(self.a.pose + "_2_" + newpose + "_firing", "cover_prone");
-  }
-  else {
+  } else {
     transanim = animarray(self.a.pose + "_2_" + newpose, "cover_prone");
   }
 
@@ -241,8 +238,7 @@ proneto(newpose, rate) {
   if(shouldfirewhilechangingpose()) {
     if(newpose == "crouch") {
       transanim = animarray("prone_2_crouch_firing", "cover_prone");
-    }
-    else if(newpose == "stand") {
+    } else if(newpose == "stand") {
       transanim = animarray("prone_2_stand_firing", "cover_prone");
     }
   } else if(newpose == "crouch")

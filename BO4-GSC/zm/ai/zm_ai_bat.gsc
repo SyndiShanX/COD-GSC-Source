@@ -33,7 +33,6 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_transformation;
 #include scripts\zm_common\zm_utility;
-
 #namespace bat;
 
 class class_726d8173 {
@@ -56,7 +55,7 @@ autoexec __init__system__() {
 __init__() {
   vehicle::add_main_callback("bat", &function_6c223039);
   spawner::function_89a2cd87(#"bat", &function_141c342b);
-  zm_transform::function_cfca77a7(#"spawner_zm_nosferatu", #"hash_791d597ac0457860", undefined, 0, undefined, undefined);
+  zm_transform::function_cfca77a7(#"spawner_zm_nosferatu", # "hash_791d597ac0457860", undefined, 0, undefined, undefined);
   level thread function_1b029905();
   zm_round_spawning::register_archetype(#"bat", &function_84cd2223, &function_9471b7f9, &function_2e37549f, 25);
   zm_score::function_e5d6e6dd(#"bat", 60);
@@ -106,7 +105,7 @@ function_141c342b() {
 }
 
 function_ab7568e0() {
-  self endon(#"change_state", #"death");
+  self endon(#"change_state", # "death");
 
   while(true) {
     if(self function_c48c2d66() && self vehicle_ai::get_current_state() != "transform") {
@@ -157,7 +156,7 @@ private gettarget() {
 }
 
 private function_1076a2e0() {
-  self endon(#"change_state", #"death");
+  self endon(#"change_state", # "death");
 
   while(true) {
     if(isDefined(self.ignoreall) && self.ignoreall) {
@@ -186,8 +185,8 @@ private function_1076a2e0() {
 }
 
 private function_776e45e5() {
-  self endon(#"change_state", #"death");
-  self waittilltimeout(10, #"reached_end_node");
+  self endon(#"change_state", # "death");
+  self waittilltimeout(10, # "reached_end_node");
 
   while(true) {
     players = getplayers();
@@ -251,7 +250,7 @@ function_607df9c6(ai) {
   actors = getentitiesinradius(ai.origin, 80, 15);
 
   foreach(actor in actors) {
-    if(actor.team !== level.zombie_team || actor.archetype !== #"zombie") {
+    if(actor.team !== level.zombie_team || actor.archetype !== # "zombie") {
       continue;
     }
 
@@ -261,7 +260,7 @@ function_607df9c6(ai) {
   ai.var_e21c1964 = 1;
   var_cd1cfeed = ai animmappingsearch(#"hash_605e435c80f0d33b");
   pos = physicstrace(ai.origin, ai.origin + (0, 0, -10000), (-2, -2, -2), (2, 2, 2), ai, 1);
-  pos = pos[#"position"];
+  pos = pos[# "position"];
 
   if(isDefined(level.var_84b2907f)) {
     level thread[[level.var_84b2907f]](ai);
@@ -281,7 +280,7 @@ private function_1b029905() {
   while(true) {
     waitresult = level waittill(#"transformation_complete");
 
-    if(waitresult.id === #"hash_791d597ac0457860" && isDefined(waitresult.data)) {
+    if(waitresult.id === # "hash_791d597ac0457860" && isDefined(waitresult.data)) {
       newai = waitresult.new_ai[0];
       newai.maxhealth *= waitresult.data.healthmultiplier;
       newai.health = newai.maxhealth;
@@ -294,31 +293,31 @@ private function_1b029905() {
 function_1fff2d() {
   pos = physicstrace(self.origin, self.origin + (0, 0, -10000), (-2, -2, -2), (2, 2, 2), self, 1);
 
-  if(isDefined(pos) && isDefined(pos[#"position"]) && !isDefined(pos[#"entity"])) {
-    pos = pos[#"position"];
+  if(isDefined(pos) && isDefined(pos[# "position"]) && !isDefined(pos[# "entity"])) {
+    pos = pos[# "position"];
 
     recordline(self.origin, pos, (0, 1, 1), "<dev string:x3e>");
     recordsphere(pos, 8, (0, 1, 1), "<dev string:x3e>");
 
-      posonnavmesh = getclosestpointonnavmesh(pos, 256, 30);
+    posonnavmesh = getclosestpointonnavmesh(pos, 256, 30);
 
     if(isDefined(posonnavmesh)) {
       pos = physicstrace(posonnavmesh + (0, 0, 70), posonnavmesh + (0, 0, -70), (-2, -2, -2), (2, 2, 2), self, 1);
-      pos = pos[#"position"];
+      pos = pos[# "position"];
 
       recordline(pos, posonnavmesh, (0, 0, 1), "<dev string:x3e>");
       recordsphere(posonnavmesh, 8, (0, 0, 1), "<dev string:x3e>");
 
-        if(isDefined(pos)) {
-          scriptmodel = util::spawn_model("tag_origin", self.origin, self.angles);
+      if(isDefined(pos)) {
+        scriptmodel = util::spawn_model("tag_origin", self.origin, self.angles);
 
-          if(isDefined(scriptmodel)) {
-            self.ai.var_15916e52 = new class_726d8173();
-            self.ai.var_15916e52.pos = pos;
-            self.ai.var_15916e52.mover = scriptmodel;
-            return true;
-          }
+        if(isDefined(scriptmodel)) {
+          self.ai.var_15916e52 = new class_726d8173();
+          self.ai.var_15916e52.pos = pos;
+          self.ai.var_15916e52.mover = scriptmodel;
+          return true;
         }
+      }
     }
   }
 
@@ -373,7 +372,7 @@ private function_88d81715() {
 }
 
 function_47c795bc(params) {
-  self endoncallback(&function_630752f6, #"death", #"state_change");
+  self endoncallback(&function_630752f6, # "death", # "state_change");
   assert(isDefined(self.ai.var_15916e52));
   self.ai.var_15916e52.healthmultiplier = self.var_b008e588;
   movepos = self.ai.var_15916e52.pos;
@@ -397,7 +396,7 @@ function_47c795bc(params) {
   mover waittill(#"movedone");
   self clientfield::set("bat_transform_fx", 1);
   self.overridevehicledamage = undefined;
-  zm_transform::function_9acf76e6(self, #"hash_791d597ac0457860", &function_607df9c6, 0);
+  zm_transform::function_9acf76e6(self, # "hash_791d597ac0457860", &function_607df9c6, 0);
   radiusdamage(self.origin, 200, 15, 5, self);
   self.ai.var_15916e52 = undefined;
 
@@ -420,7 +419,7 @@ state_death_update(params) {
   }
 
   self vehicle_death::death_fx();
-  self val::set(#"zm_ai_bat", #"hide", 2);
+  self val::set(#"zm_ai_bat", # "hide", 2);
   wait 1;
   self delete();
 }
@@ -434,16 +433,14 @@ state_combat_enter(params) {
 }
 
 function_2b369c9f() {
-  self endon(#"change_state", #"death");
+  self endon(#"change_state", # "death");
   self.ai.var_e7d26c0f = 0;
 
   while(true) {
     if(self.ai.var_e7d26c0f > 3) {
       if(isDefined(level.var_d9f4b654)) {
         self.ai.var_e7d26c0f = 0;
-        [
-          [level.var_d9f4b654]
-        ](self);
+        [[level.var_d9f4b654]](self);
       }
     }
 
@@ -461,14 +458,14 @@ function_1c4cd527(origin, owner, innerradius, outerradius, halfheight, spacing) 
         point._scoredebug = [];
       }
 
-      if(!isDefined(point._scoredebug[#"no visibility"])) {
-        point._scoredebug[#"no visibility"] = spawnStruct();
+      if(!isDefined(point._scoredebug[# "no visibility"])) {
+        point._scoredebug[# "no visibility"] = spawnStruct();
       }
 
-      point._scoredebug[#"no visibility"].score = -5000;
-      point._scoredebug[#"no visibility"].scorename = "<dev string:x47>";
+      point._scoredebug[# "no visibility"].score = -5000;
+      point._scoredebug[# "no visibility"].scorename = "<dev string:x47>";
 
-        point.score += -5000;
+      point.score += -5000;
     }
   }
 
@@ -522,11 +519,11 @@ function_66d3e7c2() {
     if(isDefined(self.var_c8c5a7d3)) {
       recordsphere(self.var_c8c5a7d3, 8, (0, 0, 1), "<dev string:x3e>");
 
-        if(isDefined(self.var_d6acaac4)) {
-          recordsphere(self.var_c8c5a7d3, 8, (0, 1, 0), "<dev string:x3e>");
-          recordline(self.var_c8c5a7d3, self.var_d6acaac4, (0, 1, 0), "<dev string:x3e>");
+      if(isDefined(self.var_d6acaac4)) {
+        recordsphere(self.var_c8c5a7d3, 8, (0, 1, 0), "<dev string:x3e>");
+        recordline(self.var_c8c5a7d3, self.var_d6acaac4, (0, 1, 0), "<dev string:x3e>");
 
-        }
+      }
     }
 
     waitframe(1);
@@ -534,7 +531,7 @@ function_66d3e7c2() {
 }
 
 state_combat_update(params) {
-  self endon(#"change_state", #"death");
+  self endon(#"change_state", # "death");
   self asmrequestsubstate(#"locomotion@movement");
 
   for(;;) {
@@ -598,8 +595,8 @@ function_2e37549f(b_force_spawn = 0, var_eb3a8721, n_round_number) {
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.var_29a8e07)) {
     s_spawn_loc = [[level.var_29a8e07]]();
-  } else if(isDefined(level.zm_loc_types[#"bat_location"]) && level.zm_loc_types[#"bat_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[#"bat_location"]);
+  } else if(isDefined(level.zm_loc_types[# "bat_location"]) && level.zm_loc_types[# "bat_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[# "bat_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {

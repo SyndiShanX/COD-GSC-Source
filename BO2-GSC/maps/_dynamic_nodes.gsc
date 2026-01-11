@@ -101,7 +101,7 @@ entity_connect_dynamic_nodes_to_navigation_mesh() {
     wait 0.05;
 
     foreach(node in self.a_dynamic_nodes) {
-    dropnodetofloor(node);
+      dropnodetofloor(node);
     }
   }
 }

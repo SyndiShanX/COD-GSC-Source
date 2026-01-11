@@ -170,7 +170,7 @@ spawn_mason_intro_snipers() {
   e_target.health = 100;
 
   foreach(guy in a_ai_pdf) {
-  guy thread wait_and_shoot_at(e_target);
+    guy thread wait_and_shoot_at(e_target);
   }
 }
 
@@ -185,14 +185,14 @@ give_pdf_forcecolor() {
   a_ai_pdf = get_ai_array("mason_intro_hill_runners", "script_noteworthy");
 
   foreach(guy in a_ai_pdf) {
-  guy set_force_color("p");
+    guy set_force_color("p");
   }
 
   level waittill("mason_intro_move_pdf_down_hill");
   a_ai_pdf = get_ai_array("mason_intro_hill_runners2", "script_noteworthy");
 
   foreach(guy in a_ai_pdf) {
-  guy set_force_color("p");
+    guy set_force_color("p");
   }
 }
 
@@ -208,8 +208,7 @@ mason_intro_end_vo() {
 
   if(is_mature()) {
     level.woods queue_dialog("wood_alright_about_fuck_0");
-  }
-  else {
+  } else {
     level.woods queue_dialog("wood_alright_about_time_0");
   }
 }
@@ -222,8 +221,7 @@ mason_intro_rundown_vo() {
 
   if(is_mature()) {
     level.woods queue_dialog("wood_i_ain_t_keen_on_figh_0", 2.0);
-  }
-  else {
+  } else {
     level.woods queue_dialog("wood_i_ain_t_keen_on_figh_1", 2.0);
   }
 
@@ -253,8 +251,7 @@ mason_intro_rain_overlay(e_trigger) {
     while(true) {
       if(self istouching(e_trigger)) {
         self setclientflag(14);
-      }
-      else {
+      } else {
         self clearclientflag(14);
         break;
       }

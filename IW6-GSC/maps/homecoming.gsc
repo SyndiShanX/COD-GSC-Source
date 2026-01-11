@@ -484,7 +484,7 @@ start_tower_retreat() {
   var_1 = getEntArray("retreat_start_friendlies", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 maps\_utility::add_spawn_function(maps\homecoming_trench::trench_main_friendlies);
+    var_3 maps\_utility::add_spawn_function(maps\homecoming_trench::trench_main_friendlies);
   }
 
   maps\_utility::array_spawn(var_1);
@@ -598,7 +598,7 @@ start_balcony_fall() {
   var_0 = getglassarray("balcony_glass");
 
   foreach(var_2 in var_0) {
-  deleteglass(var_2);
+    deleteglass(var_2);
   }
 
   maps\homecoming_beach::player_fall_off_balcony();

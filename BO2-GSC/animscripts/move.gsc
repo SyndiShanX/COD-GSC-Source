@@ -61,11 +61,9 @@ main() {
 moveinit() {
   if((self.combatmode == "ambush" || self.combatmode == "ambush_nodes_only" || self.combatmode == "exposed_nodes_only") && (isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > 10000)) {
     self.tacticalwalkrate = 1.5;
-  }
-  else if(self aihasonlypistolorsmg()) {
+  } else if(self aihasonlypistolorsmg()) {
     self.tacticalwalkrate = 1.2 + randomfloat(0.3);
-  }
-  else {
+  } else {
     self.tacticalwalkrate = 0.9 + randomfloat(0.4);
   }
 
@@ -141,8 +139,7 @@ movemainloop() {
 
     if(self.movemode == "run" || istacticalwalking || self.a.pose == "prone") {
       self animscripts\run::moverun();
-    }
-    else {
+    } else {
       self animscripts\walk::movewalk();
     }
 
@@ -238,14 +235,11 @@ lookatpath() {
 
       if(isDefined(self.enemy) && self cansee(self.enemy)) {
         lookatpos = undefined;
-      }
-      else if(self canseepathgoal()) {
+      } else if(self canseepathgoal()) {
         lookatpos = self.pathgoalpos;
-      }
-      else if(self.lookaheaddist > 100) {
+      } else if(self.lookaheaddist > 100) {
         lookatpos = self.origin + vectorscale(self.lookaheaddir, self.lookaheaddist) + (0, 0, 0);
-      }
-      else {
+      } else {
         currentlookahead = self calclookaheadpos(self.origin, 0);
 
         if(isDefined(currentlookahead)) {
@@ -371,8 +365,7 @@ movecovertocover_getshufflestartanim(shuffleleft, startnode, endnode) {
   } else if(endnode.type == "Cover Stand" && startnode.type == endnode.type) {
     if(shuffleleft) {
       shuffleanim = animarray("coverStand_shuffleL_start");
-    }
-    else {
+    } else {
       shuffleanim = animarray("coverStand_shuffleR_start");
     }
   } else if(shuffleleft)
@@ -397,8 +390,7 @@ movecovertocover_getshuffleloopanim(shuffleleft, startnode, endnode) {
   else if(endnode.type == "Cover Stand" && startnode.type == endnode.type) {
     if(shuffleleft) {
       shuffleanim = animarray("coverStand_shuffleL");
-    }
-    else {
+    } else {
       shuffleanim = animarray("coverStand_shuffleR");
     }
   } else if(shuffleleft)
@@ -424,8 +416,7 @@ movecovertocover_getshuffleendanim(shuffleleft, startnode, endnode) {
   } else if(endnode.type == "Cover Stand" && startnode.type == endnode.type) {
     if(shuffleleft) {
       shuffleanim = animarray("coverStand_shuffleL_end");
-    }
-    else {
+    } else {
       shuffleanim = animarray("coverStand_shuffleR_end");
     }
   } else if(shuffleleft)
@@ -495,8 +486,7 @@ movecovertocover() {
   }
   if(movecovertocover_checkstartpose(startnode, node)) {
     blendtime = 0.1;
-  }
-  else {
+  } else {
     blendtime = 0.4;
   }
 
@@ -508,8 +498,7 @@ movecovertocover() {
 
   if(animhasnotetrack(startanim, "finish")) {
     startendtime = getnotetracktimes(startanim, "finish")[0];
-  }
-  else {
+  } else {
     startendtime = 1;
   }
 
@@ -565,8 +554,7 @@ movecovertocover() {
   if(playend) {
     if(movecovertocover_checkendpose(node)) {
       blendtime = 0.2;
-    }
-    else {
+    } else {
       blendtime = 0.4;
     }
 
@@ -597,8 +585,7 @@ movedoorsidetoside(shuffleleft, startnode, endnode) {
 
   if(startnode.type == "Cover Right" && endnode.type == "Cover Left" && !shuffleleft) {
     sidetosideanim = animarray("corner_door_R2L");
-  }
-  else if(startnode.type == "Cover Left" && endnode.type == "Cover Right" && shuffleleft) {
+  } else if(startnode.type == "Cover Left" && endnode.type == "Cover Right" && shuffleleft) {
     sidetosideanim = animarray("corner_door_L2R");
   }
 

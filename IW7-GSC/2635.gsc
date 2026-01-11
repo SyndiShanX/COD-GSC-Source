@@ -192,7 +192,7 @@ set_game_data(var_00, var_01) {
   var_03 = level.func_13F0B;
 
   foreach(var_07, var_05 in var_3.single_value_stats) {
-  var_06 = validate_value(var_5.value, var_5.value_type);
+    var_06 = validate_value(var_5.value, var_5.value_type);
   }
 
   foreach(var_10, var_09 in var_3.challenge_results) {}
@@ -227,8 +227,7 @@ set_custom_stats() {
 
   if(isDefined(self.wave_num_when_joined)) {
     setmatchdata("players", self.clientid, "waveEnd", level.wave_num - self.wave_num_when_joined);
-  }
-  else {
+  } else {
     setmatchdata("players", self.clientid, "waveEnd", level.wave_num);
   }
 
@@ -521,7 +520,7 @@ write_clientmatchdata_for_player(var_00, var_01) {
 
   if(isDefined(var_02)) {
     foreach(var_05, var_04 in var_02) {
-    setclientmatchdata("player", var_01, var_05, int(var_04));
+      setclientmatchdata("player", var_01, var_05, int(var_04));
     }
   }
 

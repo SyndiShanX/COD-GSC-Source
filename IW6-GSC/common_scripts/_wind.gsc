@@ -27,8 +27,7 @@ wind(var_0, var_1, var_2, var_3) {
 
     if(var_4 < 0) {
       var_4 = var_4 * -1;
-    }
-    else if(var_4 > 1) {
+    } else if(var_4 > 1) {
       var_4 = 2 - var_4;
     }
 
@@ -64,8 +63,7 @@ wind_internal_blendovertime(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_5 = var_2 * var_4 / var_1;
-  }
-  else {
+  } else {
     var_5 = var_2 * 0.5;
   }
 

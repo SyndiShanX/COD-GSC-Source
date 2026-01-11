@@ -123,11 +123,9 @@ enemywatcher(localclientnum) {
 getotherteam(team) {
   if(team == "allies") {
     return "axis";
-  }
-  else if(team == "axis") {
+  } else if(team == "axis") {
     return "allies";
-  }
-  else if(team == "free") {
+  } else if(team == "free") {
     return "free";
   }
 
@@ -176,8 +174,7 @@ getmovementsoundstate() {
 
   if(has_enemy) {
     enemy_distance = distancesquared(self.origin, self.enemy.origin);
-  }
-  else {
+  } else {
     return "normal";
   }
 
@@ -276,8 +273,7 @@ dog_get_dvar_int(dvar, def) {
 dog_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     return def;
   }
 }

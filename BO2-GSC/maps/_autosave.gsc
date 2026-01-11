@@ -44,8 +44,7 @@ autosave_description() {
 autosave_names(num) {
   if(num == 0) {
     savedescription = &"AUTOSAVE_GAME";
-  }
-  else {
+  } else {
     savedescription = &"AUTOSAVE_NOGAME";
   }
 
@@ -134,8 +133,7 @@ auto_save_print(msg, msg2) {
   if(getdebugdvarint("scr_autosave_debug") == 1) {
     if(isDefined(msg2)) {
       println(msg + "[localized description]");
-    }
-    else {
+    } else {
       println(msg);
     }
 
@@ -144,8 +142,7 @@ auto_save_print(msg, msg2) {
 
   if(isDefined(msg2)) {
     println(msg, msg2);
-  }
-  else {
+  } else {
     println(msg);
   }
 }
@@ -169,8 +166,7 @@ autosave_game_now(suppress_print) {
 
   if(isDefined(suppress_print)) {
     saveid = savegamenocommit(filename, descriptionstring, "$default", 1);
-  }
-  else {
+  } else {
     saveid = savegamenocommit(filename, descriptionstring);
   }
 

@@ -14,8 +14,7 @@
 init() {
   if(!maps\mp\zombies\_zm_weapons::is_weapon_included("blundergat_zm")) {
     return;
-  }
-  else {
+  } else {
     precacheitem("blundersplat_bullet_zm");
     precacheitem("blundersplat_explosive_dart_zm");
   }
@@ -53,8 +52,7 @@ zombie_wait_for_blundersplat_hit() {
               while(true) {
                 if(!isDefined(e_grenade.fuse_time)) {
                   wait_network_frame();
-                }
-                else {
+                } else {
                   break;
                 }
               }
@@ -122,8 +120,7 @@ _titus_locate_target(is_not_upgraded) {
 
   if(is_not_upgraded) {
     n_fuse_timer = randomfloatrange(1.0, 2.5);
-  }
-  else {
+  } else {
     n_fuse_timer = randomfloatrange(3.0, 4.0);
   }
 
@@ -247,8 +244,7 @@ _titus_reset_grenade_fuse(n_fuse_timer, is_not_upgraded) {
 
       if(is_not_upgraded) {
         e_grenade create_zombie_point_of_interest(250, 5, 10000);
-      }
-      else {
+      } else {
         e_grenade create_zombie_point_of_interest(500, 10, 10000);
       }
 
@@ -269,8 +265,7 @@ gib_on_blundergat_damage(refs, point, weaponname) {
 
   if(self.health <= 0) {
     return refs;
-  }
-  else if(weaponname == "blundergat_zm" || weaponname == "blundergat_upgraded_zm") {
+  } else if(weaponname == "blundergat_zm" || weaponname == "blundergat_upgraded_zm") {
     new_gib_ref = self maps\mp\zombies\_zm_spawner::derive_damage_refs(point);
     return new_gib_ref;
   }
@@ -290,8 +285,7 @@ _blundersplat_target_acid_stun_anim() {
 
     if(is_true(self.has_legs)) {
       self animscripted(self.origin, self.angles, "zm_blundersplat_stun");
-    }
-    else {
+    } else {
       self animscripted(self.origin, self.angles, "zm_blundersplat_stun_crawl");
     }
 

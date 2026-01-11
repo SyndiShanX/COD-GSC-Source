@@ -134,8 +134,7 @@ piano_run_chords() {
 
         if(correct_notes_playing == 3) {
           chord_solved = 1;
-        }
-        else {
+        } else {
           a_players = getplayers();
 
           foreach(e_player in a_players) {
@@ -206,7 +205,7 @@ electric_puzzle_2_init() {
   level.electric_relays["village"] = spawnStruct();
 
   foreach(s_relay in level.electric_relays) {
-  s_relay.connections = [];
+    s_relay.connections = [];
   }
 
   level.electric_relays["tank_platform"].connections[0] = "ruins";
@@ -227,7 +226,7 @@ electric_puzzle_2_init() {
   a_switches = getEntArray("puzzle_relay_switch", "script_noteworthy");
 
   foreach(e_switch in a_switches) {
-  level.electric_relays[e_switch.script_string].e_switch = e_switch;
+    level.electric_relays[e_switch.script_string].e_switch = e_switch;
   }
 
   array_thread(level.electric_relays, ::relay_switch_run);

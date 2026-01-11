@@ -240,8 +240,7 @@ func_5A4E() {
 
           if(self.func_5A53 == "pushpull") {
             self.func_1212 = self.func_5A52;
-          }
-          else if(self.func_5A53 == "push") {
+          } else if(self.func_5A53 == "push") {
             if(scripts\sp\utility::func_65DB("push_triggered")) {
               self.func_1212 = self.func_5A52;
             }
@@ -285,8 +284,7 @@ func_5A4E() {
 func_5A34(var_00) {
   if(func_5A3D(self)) {
     var_01 = "pull";
-  }
-  else {
+  } else {
     var_01 = "push";
   }
 
@@ -311,8 +309,7 @@ func_5A3D(var_00) {
 
   if(var_01 > 0) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -320,8 +317,7 @@ func_5A3D(var_00) {
 func_5A2E(var_00, var_01, var_02) {
   if(isstring(var_00)) {
     var_03 = level.doors[var_00];
-  }
-  else {
+  } else {
     var_03 = var_00;
   }
 
@@ -353,8 +349,7 @@ func_5A52(var_00, var_01, var_02, var_03) {
 
   if(!isDefined(var_02)) {
     var_4.func_5A54 = 1;
-  }
-  else {
+  } else {
     var_4.func_5A54 = var_02;
   }
 }
@@ -441,7 +436,7 @@ func_5A36(var_00, var_01) {
 
   if(isarray(var_01)) {
     foreach(var_04 in var_01) {
-    scripts\engine\utility::flag_wait(var_04);
+      scripts\engine\utility::flag_wait(var_04);
     }
   } else
     scripts\engine\utility::flag_wait(var_01);
@@ -468,8 +463,7 @@ func_11EB(var_00, var_01, var_02, var_03, var_04) {
 
   if(isDefined(var_03)) {
     scripts\sp\anim::func_1EC1(var_07, var_00 + "_open");
-  }
-  else {
+  } else {
     scripts\sp\anim::func_1EC1(var_07, var_00);
   }
 

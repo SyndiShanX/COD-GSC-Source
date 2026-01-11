@@ -73,8 +73,7 @@ status_meter_update(vehicle) {
 
     if(self attackButtonPressed() && !self.overheat.overheated) {
       self.overheat.turret_heat_status += TURRET_HEAT_RATE;
-    }
-    else {
+    } else {
       self.overheat.turret_heat_status -= TURRET_COOL_RATE;
     }
 

@@ -40,39 +40,33 @@ init() {
   precacheModel(level.axisShadesModel);
   if(level.onlineGame) {
     level.defaultClass = "CLASS_ASSAULT";
-  }
-  else {
+  } else {
     level.defaultClass = "OFFLINE_CLASS1";
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowfrag")) {
     level.weapons["frag"] = "frag_grenade_mp";
-  }
-  else {
+  } else {
     level.weapons["frag"] = "";
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowsmoke")) {
     level.weapons["smoke"] = "smoke_grenade_mp";
-  }
-  else {
+  } else {
     level.weapons["smoke"] = "";
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowflash")) {
     level.weapons["flash"] = "flash_grenade_mp";
-  }
-  else {
+  } else {
     level.weapons["flash"] = "";
   }
   level.weapons["concussion"] = "concussion_grenade_mp";
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowsatchel")) {
     level.weapons["satchel_charge"] = "satchel_charge_mp";
-  }
-  else {
+  } else {
     level.weapons["satchel_charge"] = "";
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowbetty")) {
     level.weapons["betty"] = "mine_bouncing_betty_mp";
-  }
-  else {
+  } else {
     level.weapons["betty"] = "";
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowrpgs")) {
@@ -120,8 +114,7 @@ init() {
       if(isDefined(attachment_tokens)) {
         if(attachment_tokens.size == 0) {
           weapon_class_register(weapon + "_" + attachment + "_mp", weapon_type);
-        }
-        else {
+        } else {
           for(k = 0; k < attachment_tokens.size; k++) {
             weapon_class_register(weapon + "_" + attachment_tokens[k] + "_mp", weapon_type);
           }
@@ -155,8 +148,7 @@ load_default_loadout_raw(class_dataTable, team, class, stat_num) {
   primary_attachment = tablelookup(class_dataTable, 1, stat_num + 2, 4);
   if(primary_attachment != "" && primary_attachment != "none") {
     level.classWeapons[team][class][0] = tablelookup(class_dataTable, 1, stat_num + 1, 4) + "_" + primary_attachment + "_mp";
-  }
-  else {
+  } else {
     level.classWeapons[team][class][0] = tablelookup(class_dataTable, 1, stat_num + 1, 4) + "_mp";
   }
   level.classWeapons[team][class][1] = tablelookup(class_dataTable, 1, stat_num + 1, 13) + "_mp";
@@ -165,8 +157,7 @@ load_default_loadout_raw(class_dataTable, team, class, stat_num) {
     secondary_attachment = tablelookup(class_dataTable, 1, stat_num + 4, 4);
     if(secondary_attachment != "" && secondary_attachment != "none") {
       level.classSidearm[team][class] = tablelookup(class_dataTable, 1, stat_num + 3, 4) + "_" + secondary_attachment + "_mp";
-    }
-    else {
+    } else {
       level.classSidearm[team][class] = tablelookup(class_dataTable, 1, stat_num + 3, 4) + "_mp";
     }
   } else {
@@ -206,20 +197,15 @@ load_default_loadout_raw(class_dataTable, team, class, stat_num) {
 weapon_class_register(weapon, weapon_type) {
   if(isSubstr("weapon_smg weapon_assault weapon_projectile weapon_sniper weapon_shotgun weapon_lmg weapon_hmg", weapon_type)) {
     level.primary_weapon_array[weapon] = 1;
-  }
-  else if(weapon_type == "weapon_pistol") {
+  } else if(weapon_type == "weapon_pistol") {
     level.side_arm_array[weapon] = 1;
-  }
-  else if(weapon_type == "weapon_grenade") {
+  } else if(weapon_type == "weapon_grenade") {
     level.grenade_array[weapon] = 1;
-  }
-  else if(weapon_type == "weapon_explosive") {
+  } else if(weapon_type == "weapon_explosive") {
     level.inventory_array[weapon] = 1;
-  }
-  else if(weapon_type == "weapon_rifle") {
+  } else if(weapon_type == "weapon_rifle") {
     level.inventory_array[weapon] = 1;
-  }
-  else {
+  } else {
     assertex(false, "Weapon group info is missing from statsTable for: " + weapon_type);
   }
 }
@@ -333,8 +319,7 @@ getWeaponChoice(response) {
   tokens = strtok(response, ",");
   if(tokens.size > 1) {
     return int(tokens[1]);
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -447,14 +432,12 @@ getCacDataGroup(statRange, cacRange, numClasses) {
     }
     if(primary_attachment_flag != 0 && primary_attachment_ref != "") {
       self.custom_class[i]["primary"] = level.tbl_weaponIDs[primary_num]["reference"] + "_" + primary_attachment_ref + "_mp";
-    }
-    else {
+    } else {
       self.custom_class[i]["primary"] = level.tbl_weaponIDs[primary_num]["reference"] + "_mp";
     }
     if(secondary_attachment_flag != 0 && secondary_attachment_ref != "") {
       self.custom_class[i]["secondary"] = level.tbl_weaponIDs[secondary_num]["reference"] + "_" + secondary_attachment_ref + "_mp";
-    }
-    else {
+    } else {
       self.custom_class[i]["secondary"] = level.tbl_weaponIDs[secondary_num]["reference"] + "_mp";
     }
     assertex(isDefined(level.tbl_PerkData[specialty1]), "Specialty #:" + specialty1 + "'s data is undefined");
@@ -590,8 +573,7 @@ giveLoadout(team, class) {
     self register_perks();
     if(isDefined(self.pers["weapon"]) && self.pers["weapon"] != "none") {
       weapon = self.pers["weapon"];
-    }
-    else {
+    } else {
       weapon = self.custom_class[class_num]["primary"];
     }
     sidearm = self.custom_class[class_num]["secondary"];
@@ -630,8 +612,7 @@ giveLoadout(team, class) {
       grenadeCount = self.custom_class[class_num]["specialgrenades_count"];
       if(grenadeTypeSecondary == level.weapons["flash"]) {
         self setOffhandSecondaryClass("flash");
-      }
-      else {
+      } else {
         self setOffhandSecondaryClass("smoke");
       }
       self giveWeapon(grenadeTypeSecondary);
@@ -655,8 +636,7 @@ giveLoadout(team, class) {
     }
     if(isDefined(self.pers["weapon"]) && self.pers["weapon"] != "none") {
       weapon = self.pers["weapon"];
-    }
-    else {
+    } else {
       weapon = level.classWeapons[team][class][primaryIndex];
     }
     sidearm = level.classSidearm[team][class];
@@ -701,8 +681,7 @@ giveLoadout(team, class) {
       grenadeCount = level.classGrenades[class]["secondary"]["count"];
       if(grenadeTypeSecondary == level.weapons["flash"]) {
         self setOffhandSecondaryClass("flash");
-      }
-      else {
+      } else {
         self setOffhandSecondaryClass("smoke");
       }
       println("^5GiveWeapon( " + grenadeTypeSecondary + " ) -- grneadeTypeSecondary");

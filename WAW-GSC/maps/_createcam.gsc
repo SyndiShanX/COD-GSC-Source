@@ -952,9 +952,7 @@ scene_editor_menu(strings, func) {
           skip++;
           continue;
         }
-        [
-          [func]
-        ]("new", huds[i - skip].value, i - skip);
+        [[func]]("new", huds[i - skip].value, i - skip);
       }
       play_scene("new");
       wait(0.2);

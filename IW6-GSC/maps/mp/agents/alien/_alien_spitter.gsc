@@ -89,8 +89,7 @@ spit_attack(enemy) {
 
   if(isEnemyChopper) {
     targetedEnemy = enemy;
-  }
-  else {
+  } else {
     targetedEnemy = self.spit_target;
   }
 
@@ -129,8 +128,7 @@ spit_attack(enemy) {
       forward = VectorNormalize(targetedEnemy.origin - self.origin);
       if(isDefined(self.current_spit_node)) {
         up = AnglesToUp(self.current_spit_node.angles);
-      }
-      else {
+      } else {
         up = AnglesToUp(self.angles);
       }
       left = VectorCross(up, forward);
@@ -142,8 +140,7 @@ spit_attack(enemy) {
 
     if(self.oriented) {
       self ScrAgentSetAnimMode("anim angle delta");
-    }
-    else {
+    } else {
       self ScrAgentSetAnimMode("anim deltas");
     }
     play_spit_anim();
@@ -265,8 +262,7 @@ is_valid_spit_target(spit_target, check_attacker_values) {
 
   if((isPlayer(spit_target) || IsSentient(spit_target)) && !isDefined(spit_target.usingRemote)) {
     endPos = spit_target getEye();
-  }
-  else {
+  } else {
     endPos = spit_target.origin;
   }
 
@@ -305,8 +301,7 @@ fire_spit_projectile() {
   isTargetChopper = isDefined(self.spit_target.code_classname) && self.spit_target.code_classname == "script_vehicle";
   if(hasValidTarget && !isTargetChopper) {
     targetLocation = self.spit_target.origin;
-  }
-  else {
+  } else {
     targetLocation = self.spit_target_location;
   }
 
@@ -332,8 +327,7 @@ get_lookahead_target_location(projectile_speed, target, use_eye_location) {
 
   if(use_eye_location && !isDefined(target.usingRemote)) {
     targetLocation = target getEye();
-  }
-  else {
+  } else {
     targetLocation = target.origin;
   }
 
@@ -463,12 +457,10 @@ damage_player(player, trigger) {
 disorient_player(player) {
   if(is_chaos_mode() && player maps\mp\alien\_perk_utility::perk_GetGasDamageScalar() == 0) {
     return;
-  }
-  else if(!player maps\mp\alien\_perk_utility::has_perk("perk_medic", [1, 2, 3, 4])) {
+  } else if(!player maps\mp\alien\_perk_utility::has_perk("perk_medic", [1, 2, 3, 4])) {
     if(isDefined(level.shell_shock_override)) {
       player[[level.shell_shock_override]](0.5);
-    }
-    else {
+    } else {
       player ShellShock("alien_spitter_gas_cloud", 0.5);
     }
   }
@@ -562,8 +554,7 @@ enemy_proximity_during_move_monitor() {
 get_possible_spitter_attack_nodes(target_entity) {
   if(get_alien_type() == "seeder") {
     attackNodes = GetNodesInRadius(target_entity.origin, 768, 128, 512, "jump attack");
-  }
-  else {
+  } else {
     attackNodes = GetNodesInRadius(target_entity.origin, 1000, 300, 512, "jump attack");
   }
 
@@ -586,8 +577,7 @@ is_pet() {
 get_current_possible_targets() {
   if(is_pet()) {
     return level.agentArray;
-  }
-  else {
+  } else {
     return level.players;
   }
 }
@@ -678,7 +668,7 @@ get_central_enemies_direction() {
   centralLocation = (0, 0, 0);
 
   foreach(possibleTarget in possibleTargets) {
-  centralLocation += possibleTarget.origin;
+    centralLocation += possibleTarget.origin;
   }
 
   centralLocation = centralLocation / possibleTargets.size;
@@ -728,8 +718,7 @@ spitter_attack(enemy) {
 choose_spit_type(default_type) {
   if(!is_pet() && can_spit_gas_cloud()) {
     self.spit_type = "gas_cloud";
-  }
-  else {
+  } else {
     self.spit_type = default_type;
   }
 }

@@ -15,8 +15,7 @@ getdefinitionvalue(var_0, var_1) {
   if(!isstring(var_0)) {
     if(!issubstr(var_2, ".")) {
       var_2 = int(var_2);
-    }
-    else {
+    } else {
       var_2 = float(var_2);
     }
   }
@@ -80,8 +79,7 @@ loadkrakenattributes() {
 
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.kraken_attribute_table = "mp/alien/alien_kraken_definition_solo.csv";
-  }
-  else {
+  } else {
     level.kraken_attribute_table = "mp/alien/alien_kraken_definition.csv";
   }
 
@@ -352,8 +350,7 @@ thin_alien_herd() {
       if(isalive(var_3) || var_3.model == "alien_spore") {
         if(var_3.team == "axis" && isDefined(var_3.alien_type) && var_3.model != "alien_spore") {
           var_3 thread waittil_goal_and_suicide(var_1[randomint(var_1.size)]);
-        }
-        else if(var_3.model == "alien_spore") {
+        } else if(var_3.model == "alien_spore") {
           var_3 notify("death");
         }
       }
@@ -502,15 +499,13 @@ runphase(var_0, var_1, var_2, var_3, var_4) {
 runemergephase() {
   if(self.stage == "stage_1") {
     thread run_intro_emissive();
-  }
-  else {
+  } else {
     maps\mp\alien\_utility::set_alien_emissive_default(2.0);
   }
 
   if(level.alien_types["kraken"].attributes[self.stage]["ship_side"] == "port") {
     common_scripts\utility::exploder(102);
-  }
-  else {
+  } else {
     common_scripts\utility::exploder(106);
   }
 
@@ -681,8 +676,7 @@ runsubmergephase() {
 
   if(level.alien_types["kraken"].attributes[self.stage]["ship_side"] == "port") {
     common_scripts\utility::exploder(103);
-  }
-  else {
+  } else {
     common_scripts\utility::exploder(107);
   }
 
@@ -826,8 +820,7 @@ monitortargetintrigger(var_0, var_1) {
 
     if(var_8.size != 0) {
       var_4 = var_7;
-    }
-    else {
+    } else {
       var_9 = 1;
     }
 
@@ -979,8 +972,7 @@ alienkrakendamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8
   if(isDefined(var_1)) {
     if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
       var_1.owner thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_10);
-    }
-    else {
+    } else {
       var_1 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_10);
     }
   }

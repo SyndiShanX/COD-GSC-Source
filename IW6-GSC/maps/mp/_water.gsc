@@ -244,8 +244,7 @@ inWaterWake(waterShallowSplashZ) {
   while(true) {
     if(fxPlayedRecently) {
       wait(0.05);
-    }
-    else {
+    } else {
       wait(0.3);
     }
 

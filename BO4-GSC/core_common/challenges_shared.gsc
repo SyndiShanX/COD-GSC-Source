@@ -15,7 +15,6 @@
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace challenges;
 
 autoexec __init__system__() {
@@ -79,33 +78,33 @@ destroyedequipment(weapon) {
 }
 
 destroyedtacticalinsert() {
-  if(!isDefined(self.pers[#"tacticalinsertsdestroyed"])) {
-    self.pers[#"tacticalinsertsdestroyed"] = 0;
+  if(!isDefined(self.pers[# "tacticalinsertsdestroyed"])) {
+    self.pers[# "tacticalinsertsdestroyed"] = 0;
   }
 
-  self.pers[#"tacticalinsertsdestroyed"]++;
+  self.pers[# "tacticalinsertsdestroyed"]++;
 
-  if(self.pers[#"tacticalinsertsdestroyed"] >= 5) {
-    self.pers[#"tacticalinsertsdestroyed"] = 0;
+  if(self.pers[# "tacticalinsertsdestroyed"] >= 5) {
+    self.pers[# "tacticalinsertsdestroyed"] = 0;
     self stats::function_dad108fa(#"destroy_5_tactical_inserts", 1);
   }
 }
 
 addflyswatterstat(weapon, aircraft) {
-  if(!isDefined(self.pers[#"flyswattercount"])) {
-    self.pers[#"flyswattercount"] = 0;
+  if(!isDefined(self.pers[# "flyswattercount"])) {
+    self.pers[# "flyswattercount"] = 0;
   }
 
-  self stats::function_e24eec31(weapon, #"destroyed_aircraft", 1);
-  self.pers[#"flyswattercount"]++;
+  self stats::function_e24eec31(weapon, # "destroyed_aircraft", 1);
+  self.pers[# "flyswattercount"]++;
 
-  if(self.pers[#"flyswattercount"] == 5) {
-    self stats::function_e24eec31(weapon, #"destroyed_5_aircraft", 1);
+  if(self.pers[# "flyswattercount"] == 5) {
+    self stats::function_e24eec31(weapon, # "destroyed_5_aircraft", 1);
   }
 
   if(isDefined(aircraft) && isDefined(aircraft.birthtime)) {
     if(gettime() - aircraft.birthtime < 20000) {
-      self stats::function_e24eec31(weapon, #"destroyed_aircraft_under20s", 1);
+      self stats::function_e24eec31(weapon, # "destroyed_aircraft_under20s", 1);
     }
   }
 
@@ -114,7 +113,7 @@ addflyswatterstat(weapon, aircraft) {
   }
 
   if(isDefined(self.destroyedaircrafttime[weapon]) && gettime() - self.destroyedaircrafttime[weapon] < 10000) {
-    self stats::function_e24eec31(weapon, #"destroyed_2aircraft_quickly", 1);
+    self stats::function_e24eec31(weapon, # "destroyed_2aircraft_quickly", 1);
     self.destroyedaircrafttime[weapon] = undefined;
     return;
   }
@@ -141,12 +140,12 @@ initteamchallenges(team) {
 
   if(!isDefined(game.challenge[team])) {
     game.challenge[team] = [];
-    game.challenge[team][#"plantedbomb"] = 0;
-    game.challenge[team][#"destroyedbombsite"] = 0;
-    game.challenge[team][#"capturedflag"] = 0;
+    game.challenge[team][# "plantedbomb"] = 0;
+    game.challenge[team][# "destroyedbombsite"] = 0;
+    game.challenge[team][# "capturedflag"] = 0;
   }
 
-  game.challenge[team][#"allalive"] = 1;
+  game.challenge[team][# "allalive"] = 1;
 }
 
 registerchallengescallback(callback, func) {
@@ -189,13 +188,13 @@ on_player_connect() {
 }
 
 initchallengedata() {
-  self.pers[#"stickexplosivekill"] = 0;
-  self.pers[#"carepackagescalled"] = 0;
+  self.pers[# "stickexplosivekill"] = 0;
+  self.pers[# "carepackagescalled"] = 0;
   self.explosiveinfo = [];
 }
 
 isdamagefromplayercontrolledaitank(eattacker, einflictor, weapon) {
-  if(weapon.name == #"ai_tank_drone_gun") {
+  if(weapon.name == # "ai_tank_drone_gun") {
     if(isDefined(eattacker) && isDefined(eattacker.remoteweapon) && isDefined(einflictor)) {
       if(isDefined(einflictor.controlled) && einflictor.controlled) {
         if(eattacker.remoteweapon == einflictor) {
@@ -203,7 +202,7 @@ isdamagefromplayercontrolledaitank(eattacker, einflictor, weapon) {
         }
       }
     }
-  } else if(weapon.name == #"ai_tank_drone_rocket") {
+  } else if(weapon.name == # "ai_tank_drone_rocket") {
     if(isDefined(einflictor) && !isDefined(einflictor.from_ai)) {
       return true;
     }
@@ -213,7 +212,7 @@ isdamagefromplayercontrolledaitank(eattacker, einflictor, weapon) {
 }
 
 isdamagefromplayercontrolledsentry(eattacker, einflictor, weapon) {
-  if(weapon.name == #"auto_gun_turret") {
+  if(weapon.name == # "auto_gun_turret") {
     if(isDefined(eattacker) && isDefined(eattacker.remoteweapon) && isDefined(einflictor)) {
       if(eattacker.remoteweapon == einflictor) {
         if(isDefined(einflictor.controlled) && einflictor.controlled) {
@@ -335,7 +334,7 @@ perkkills(victim, isstunned, time) {
 }
 
 flakjacketprotected(weapon, attacker) {
-  if(weapon.name == #"claymore") {
+  if(weapon.name == # "claymore") {
     self.flakjacketclaymore[attacker.clientid] = 1;
   }
 
@@ -347,7 +346,7 @@ flakjacketprotected(weapon, attacker) {
 earnedkillstreak() {
   gear = self function_b958b70d(self.class_num, "tacticalgear");
 
-  if(gear === #"gear_scorestreakcharge") {
+  if(gear === # "gear_scorestreakcharge") {
     self stats::function_dad108fa(#"hash_656a2ab7e777796b", 1);
 
     if(isDefined(self.var_ea1458aa)) {
@@ -370,7 +369,7 @@ genericbulletkill(data, victim, weapon) {
   time = data.time;
 
   if(data.victim.idflagstime == time) {
-    if(data.victim.idflags& 8) {
+    if(data.victim.idflags & 8) {
       player stats::function_dad108fa(#"kill_enemy_through_objects", 1);
 
       if(isDefined(weapon) && weaponhasattachment(weapon, "fmj")) {
@@ -387,12 +386,12 @@ function_80327323(data) {
   attackerstance = data.attackerstance;
 
   if(isDefined(attackerstance)) {
-    if(attackerstance == #"crouch") {
+    if(attackerstance == # "crouch") {
       player stats::function_dad108fa(#"kill_enemy_while_crouched", 1);
       return;
     }
 
-    if(attackerstance == #"prone") {
+    if(attackerstance == # "prone") {
       player stats::function_dad108fa(#"kill_enemy_while_prone", 1);
     }
   }
@@ -406,7 +405,7 @@ ishighestscoringplayer(player) {
   players = level.players;
 
   if(level.teambased) {
-    team = player.pers[#"team"];
+    team = player.pers[# "team"];
   } else {
     team = "all";
   }
@@ -426,7 +425,7 @@ ishighestscoringplayer(player) {
       continue;
     }
 
-    if(team != "all" && players[i].pers[#"team"] != team) {
+    if(team != "all" && players[i].pers[# "team"] != team) {
       continue;
     }
 
@@ -439,15 +438,15 @@ ishighestscoringplayer(player) {
 }
 
 spawnwatcher() {
-  self endon(#"disconnect", #"killspawnmonitor");
-  self.pers[#"stickexplosivekill"] = 0;
-  self.pers[#"pistolheadshot"] = 0;
-  self.pers[#"assaultrifleheadshot"] = 0;
-  self.pers[#"killnemesis"] = 0;
+  self endon(#"disconnect", # "killspawnmonitor");
+  self.pers[# "stickexplosivekill"] = 0;
+  self.pers[# "pistolheadshot"] = 0;
+  self.pers[# "assaultrifleheadshot"] = 0;
+  self.pers[# "killnemesis"] = 0;
 
   while(true) {
     self waittill(#"spawned_player");
-    self.pers[#"longshotsperlife"] = 0;
+    self.pers[# "longshotsperlife"] = 0;
     self.weaponkills = [];
     self.attachmentkills = [];
     self.retreivedblades = 0;
@@ -460,7 +459,7 @@ spawnwatcher() {
 }
 
 watchfordtp() {
-  self endon(#"disconnect", #"death", #"killdtpmonitor");
+  self endon(#"disconnect", # "death", # "killdtpmonitor");
   self.dtptime = 0;
 
   while(true) {
@@ -470,7 +469,7 @@ watchfordtp() {
 }
 
 watchformantle() {
-  self endon(#"disconnect", #"death", #"killmantlemonitor");
+  self endon(#"disconnect", # "death", # "killmantlemonitor");
   self.mantletime = 0;
 
   while(true) {
@@ -492,14 +491,14 @@ destroyed_car() {
 }
 
 killednemesis() {
-  if(!isDefined(self.pers[#"killnemesis"])) {
-    self.pers[#"killnemesis"] = 0;
+  if(!isDefined(self.pers[# "killnemesis"])) {
+    self.pers[# "killnemesis"] = 0;
   }
 
-  self.pers[#"killnemesis"]++;
+  self.pers[# "killnemesis"]++;
 
-  if(self.pers[#"killnemesis"] >= 5) {
-    self.pers[#"killnemesis"] = 0;
+  if(self.pers[# "killnemesis"] >= 5) {
+    self.pers[# "killnemesis"] = 0;
     self stats::function_dad108fa(#"kill_nemesis", 1);
   }
 }
@@ -517,10 +516,10 @@ blockedsatellite() {
 }
 
 longdistancekill() {
-  self.pers[#"longshotsperlife"]++;
+  self.pers[# "longshotsperlife"]++;
 
-  if(self.pers[#"longshotsperlife"] >= 3) {
-    self.pers[#"longshotsperlife"] = 0;
+  if(self.pers[# "longshotsperlife"] >= 3) {
+    self.pers[# "longshotsperlife"] = 0;
     self stats::function_dad108fa(#"longshot_3_onelife", 1);
   }
 }
@@ -534,14 +533,14 @@ challengeroundend(data) {
   }
 
   if(level.teambased) {
-    winnerscore = game.stat[#"teamscores"][winner];
+    winnerscore = game.stat[# "teamscores"][winner];
     loserscore = getlosersteamscores(winner);
   }
 
   switch (level.gametype) {
-    case #"sd":
+    case # "sd":
       if(player.team == winner) {
-        if(game.challenge[winner][#"allalive"]) {
+        if(game.challenge[winner][# "allalive"]) {
           player stats::function_d40764f3(#"round_win_no_deaths", 1);
         }
 
@@ -579,8 +578,8 @@ roundend(winner) {
     data.winner = winner;
   }
 
-  for(index = 0; index < level.placement[#"all"].size; index++) {
-    data.player = level.placement[#"all"][index];
+  for(index = 0; index < level.placement[# "all"].size; index++) {
+    data.player = level.placement[# "all"][index];
 
     if(isDefined(data.player)) {
       data.place = index;
@@ -618,7 +617,7 @@ function_90185171(totaltimeplayed, credits, casexp) {
   println("<dev string:x50>" + (isDefined(credits) ? credits : "<dev string:x65>"));
   println("<dev string:x69>" + (isDefined(casexp) ? casexp : "<dev string:x65>"));
   println("<dev string:x7e>" + (isDefined(totaltimeplayed) ? totaltimeplayed : "<dev string:x65>"));
-  println("<dev string:x9b>" + (isDefined(player.pers[#"participation"]) ? player.pers[#"participation"] : "<dev string:x65>"));
+  println("<dev string:x9b>" + (isDefined(player.pers[# "participation"]) ? player.pers[# "participation"] : "<dev string:x65>"));
 
   if(credits <= 0 && casexp <= 0) {
     return;
@@ -633,36 +632,36 @@ function_90185171(totaltimeplayed, credits, casexp) {
 
     if(var_dfa63097 > 0) {
       credits = var_dfa63097;
-      player.timeplayed[#"total"]++;
-      player.pers[#"participation"]++;
+      player.timeplayed[# "total"]++;
+      player.pers[# "participation"]++;
     }
 
     var_159015d5 = getdvarint(#"hash_69a151539f8595de", 0);
 
     if(var_159015d5 > 0) {
       casexp = var_159015d5;
-      player.timeplayed[#"total"]++;
-      player.pers[#"participation"]++;
+      player.timeplayed[# "total"]++;
+      player.pers[# "participation"]++;
     }
 
-    if(!isDefined(player.pers[#"participation"]) || player.pers[#"participation"] < 1) {
+    if(!isDefined(player.pers[# "participation"]) || player.pers[# "participation"] < 1) {
       if(!sessionmodeiswarzonegame()) {
         println(player.name + "<dev string:xb2>");
         return;
       }
     }
 
-    if(!sessionmodeiswarzonegame() && isDefined(player.pers[#"controllerparticipation"])) {
-      if(isDefined(player.pers[#"controllerparticipationchecks"]) && player.pers[#"controllerparticipationchecks"]) {
-        if(player.pers[#"controllerparticipationchecks"] >= level.var_42dca1dd) {
-          var_7be1e671 = player.pers[#"controllerparticipation"] / player.pers[#"controllerparticipationchecks"];
+    if(!sessionmodeiswarzonegame() && isDefined(player.pers[# "controllerparticipation"])) {
+      if(isDefined(player.pers[# "controllerparticipationchecks"]) && player.pers[# "controllerparticipationchecks"]) {
+        if(player.pers[# "controllerparticipationchecks"] >= level.var_42dca1dd) {
+          var_7be1e671 = player.pers[# "controllerparticipation"] / player.pers[# "controllerparticipationchecks"];
 
           if(var_7be1e671 < level.var_8e1c2aa1) {
-            self.pers[#"controllerparticipationendgameresult"] = 0;
+            self.pers[# "controllerparticipationendgameresult"] = 0;
             println(player.name + "<dev string:xdf>" + var_7be1e671 + "<dev string:x11a>" + level.var_8e1c2aa1 + "<dev string:x121>");
             return;
           } else {
-            self.pers[#"controllerparticipationendgameresult"] = 1;
+            self.pers[# "controllerparticipationendgameresult"] = 1;
           }
         }
       }
@@ -721,11 +720,11 @@ function_90185171(totaltimeplayed, credits, casexp) {
 
       if(credits > 0) {
         if(getdvarint(#"loot_tier_skips_enabled", 0) == 1 && getdvarint(#"lootcontracts_daily_tier_skip", 0) != 1) {
-          if(!isDefined(player.pers[#"hash_6344af0b142ed0b6"])) {
-            player.pers[#"hash_6344af0b142ed0b6"] = 0;
+          if(!isDefined(player.pers[# "hash_6344af0b142ed0b6"])) {
+            player.pers[# "hash_6344af0b142ed0b6"] = 0;
           }
 
-          if(player.pers[#"hash_6344af0b142ed0b6"]) {
+          if(player.pers[# "hash_6344af0b142ed0b6"]) {
             player function_cce105c8(#"tier_skip", 1, 1, 2, modeindex);
           }
         }
@@ -768,8 +767,8 @@ private function_d6f929d6() {
   var_7f6396f0 = getdvarfloat(#"hash_5b9ffb659d9e0093", 0);
 
   foreach(player in level.players) {
-    if(isDefined(player.pers[#"hash_150795bee4d46ce4"])) {
-      var_28ee869a = gettime() - player.pers[#"hash_150795bee4d46ce4"];
+    if(isDefined(player.pers[# "hash_150795bee4d46ce4"])) {
+      var_28ee869a = gettime() - player.pers[# "hash_150795bee4d46ce4"];
       player function_659f7dc(var_28ee869a, var_b50d0caa, var_7f6396f0);
     }
   }
@@ -790,8 +789,8 @@ gameend(winner, var_c1e98979) {
     data.winner = winner;
   }
 
-  for(index = 0; index < level.placement[#"all"].size; index++) {
-    data.player = level.placement[#"all"][index];
+  for(index = 0; index < level.placement[# "all"].size; index++) {
+    data.player = level.placement[# "all"][index];
     data.place = index;
 
     if(isDefined(data.player)) {
@@ -811,15 +810,15 @@ gameend(winner, var_c1e98979) {
 }
 
 function_1e064861(type, var_a7674114) {
-  if(type == self.pers[#"hash_4a01db5796cf12b1"]) {
-    self.pers[#"hash_3b7fc8c62a7d4420"]++;
+  if(type == self.pers[# "hash_4a01db5796cf12b1"]) {
+    self.pers[# "hash_3b7fc8c62a7d4420"]++;
   } else {
-    self.pers[#"hash_3b7fc8c62a7d4420"] = 1;
-    self.pers[#"hash_4a01db5796cf12b1"] = type;
+    self.pers[# "hash_3b7fc8c62a7d4420"] = 1;
+    self.pers[# "hash_4a01db5796cf12b1"] = type;
   }
 
-  if(self.pers[#"hash_3b7fc8c62a7d4420"] > self.pers[var_a7674114]) {
-    self.pers[var_a7674114] = self.pers[#"hash_3b7fc8c62a7d4420"];
+  if(self.pers[# "hash_3b7fc8c62a7d4420"] > self.pers[var_a7674114]) {
+    self.pers[var_a7674114] = self.pers[# "hash_3b7fc8c62a7d4420"];
   }
 }
 
@@ -828,42 +827,42 @@ controllerparticipationcheck() {
     return false;
   }
 
-  if(!isDefined(self.pers[#"controllerparticipationchecksskipped"])) {
-    self.pers[#"controllerparticipationchecksskipped"] = 0;
+  if(!isDefined(self.pers[# "controllerparticipationchecksskipped"])) {
+    self.pers[# "controllerparticipationchecksskipped"] = 0;
   }
 
   if(self.sessionstate != "playing" || isDefined(self.var_4c45f505) && self.var_4c45f505) {
-    self.pers[#"controllerparticipationchecksskipped"]++;
+    self.pers[# "controllerparticipationchecksskipped"]++;
     return false;
   }
 
-  self.pers[#"controllerparticipationchecks"]++;
-  var_51ba979b = #"failure";
+  self.pers[# "controllerparticipationchecks"]++;
+  var_51ba979b = # "failure";
   var_a7674114 = "controllerParticipationConsecutiveFailureMax";
   var_fb144707 = self function_1bc04df9();
 
   if(var_fb144707 >= level.var_5b7e9056) {
-    self.pers[#"controllerparticipation"]++;
-    var_51ba979b = #"success";
+    self.pers[# "controllerparticipation"]++;
+    var_51ba979b = # "success";
     var_a7674114 = "controllerParticipationConsecutiveSuccessMax";
 
-    if(self.pers[#"controllerparticipationinactivitywarnings"]) {
-      self.pers[#"controllerparticipationsuccessafterinactivitywarning"] = 1;
+    if(self.pers[# "controllerparticipationinactivitywarnings"]) {
+      self.pers[# "controllerparticipationsuccessafterinactivitywarning"] = 1;
     }
   }
 
   self function_1e064861(var_51ba979b, var_a7674114);
 
-  if(!self.pers[#"controllerparticipationsuccessafterinactivitywarning"]) {
-    if(self.pers[#"controllerparticipationchecks"] >= level.var_5d96cc20) {
-      var_b06a954d = self.pers[#"controllerparticipation"] / self.pers[#"controllerparticipationchecks"];
+  if(!self.pers[# "controllerparticipationsuccessafterinactivitywarning"]) {
+    if(self.pers[# "controllerparticipationchecks"] >= level.var_5d96cc20) {
+      var_b06a954d = self.pers[# "controllerparticipation"] / self.pers[# "controllerparticipationchecks"];
 
       if(var_b06a954d < level.var_b6752258) {
-        if(!self.pers[#"controllerparticipationinactivitywarnings"]) {
-          self.pers[#"controllerparticipationinactivitywarnings"]++;
+        if(!self.pers[# "controllerparticipationinactivitywarnings"]) {
+          self.pers[# "controllerparticipationinactivitywarnings"]++;
           self iprintlnbold(#"hash_59bd89e170a924ac");
         } else {
-          self.pers[#"controllerparticipationendgameresult"] = -2;
+          self.pers[# "controllerparticipationendgameresult"] = -2;
 
           if(isDefined(level.gamehistoryplayerkicked)) {
             self thread[[level.gamehistoryplayerkicked]]();
@@ -967,7 +966,7 @@ destroyscorestreak(weapon, playercontrolled, groundbased, countaskillstreakvehic
   } else {
     weaponclass = util::getweaponclass(weapon);
 
-    if(isDefined(weaponclass) && weaponclass == #"weapon_launcher") {
+    if(isDefined(weaponclass) && weaponclass == # "weapon_launcher") {
       self stats::function_dad108fa(#"hash_be93d1227e6db1", 1);
     }
   }
@@ -980,33 +979,33 @@ destroyscorestreak(weapon, playercontrolled, groundbased, countaskillstreakvehic
     if(self util::has_cold_blooded_perk_purchased_and_equipped()) {
       if(self util::has_blind_eye_perk_purchased_and_equipped()) {
         if(groundbased) {
-          self.pers[#"challenge_destroyed_ground"]++;
+          self.pers[# "challenge_destroyed_ground"]++;
         } else {
-          self.pers[#"challenge_destroyed_air"]++;
+          self.pers[# "challenge_destroyed_air"]++;
         }
 
-        if(self.pers[#"challenge_destroyed_ground"] > 0 && self.pers[#"challenge_destroyed_air"] > 0) {
+        if(self.pers[# "challenge_destroyed_ground"] > 0 && self.pers[# "challenge_destroyed_air"] > 0) {
           self stats::function_dad108fa(#"destroy_air_and_ground_blindeye_coldblooded", 1);
-          self.pers[#"challenge_destroyed_air"] = 0;
-          self.pers[#"challenge_destroyed_ground"] = 0;
+          self.pers[# "challenge_destroyed_air"] = 0;
+          self.pers[# "challenge_destroyed_ground"] = 0;
         }
       }
     }
   }
 
-  if(!isDefined(self.pers[#"challenge_destroyed_killstreak"])) {
-    self.pers[#"challenge_destroyed_killstreak"] = 0;
+  if(!isDefined(self.pers[# "challenge_destroyed_killstreak"])) {
+    self.pers[# "challenge_destroyed_killstreak"] = 0;
   }
 
-  self.pers[#"challenge_destroyed_killstreak"]++;
+  self.pers[# "challenge_destroyed_killstreak"]++;
 
-  if(self.pers[#"challenge_destroyed_killstreak"] >= 5) {
-    self.pers[#"challenge_destroyed_killstreak"] = 0;
-    self stats::function_e24eec31(weapon, #"destroy_5_killstreak", 1);
-    self stats::function_e24eec31(weapon, #"destroy_5_killstreak_vehicle", 1);
+  if(self.pers[# "challenge_destroyed_killstreak"] >= 5) {
+    self.pers[# "challenge_destroyed_killstreak"] = 0;
+    self stats::function_e24eec31(weapon, # "destroy_5_killstreak", 1);
+    self stats::function_e24eec31(weapon, # "destroy_5_killstreak_vehicle", 1);
   }
 
-  self stats::function_e24eec31(weapon, #"destroy_killstreak", 1);
+  self stats::function_e24eec31(weapon, # "destroy_killstreak", 1);
 
   if(self hastalent(#"talent_engineer")) {
     self stats::function_dad108fa(#"destroy_scorestreaks_equipment_engineer", 1);
@@ -1021,7 +1020,7 @@ destroyscorestreak(weapon, playercontrolled, groundbased, countaskillstreakvehic
       self stats::function_dad108fa(#"destroy_scorestreak_rapidfire_fmj", 1);
     }
 
-    if(isDefined(weaponclass) && weaponclass == #"weapon_launcher") {
+    if(isDefined(weaponclass) && weaponclass == # "weapon_launcher") {
       if(self weaponhasattachmentandunlocked(weapon, "fastreload")) {
         self stats::function_dad108fa(#"hash_4b19afce40dfc918", 1);
       }
@@ -1051,13 +1050,13 @@ function_24db0c33(weapon, destroyedobject) {
     weaponpickedup = 1;
   }
 
-  self stats::function_eec52333(weapon, #"destroyed", 1, self.class_num, weaponpickedup);
+  self stats::function_eec52333(weapon, # "destroyed", 1, self.class_num, weaponpickedup);
 
   if(self hastalent(#"talent_engineer")) {
     self stats::function_dad108fa(#"destroy_scorestreaks_equipment_engineer", 1);
   }
 
-  if(isDefined(weaponclass) && weaponclass == #"weapon_launcher") {
+  if(isDefined(weaponclass) && weaponclass == # "weapon_launcher") {
     self stats::function_dad108fa(#"hash_be93d1227e6db1", 1);
 
     if(isDefined(weapon.attachments) && weapon.attachments.size > 0) {
@@ -1081,7 +1080,7 @@ function_24db0c33(weapon, destroyedobject) {
     }
   }
 
-  if(sessionmodeiswarzonegame() && !(destroyedobject.name === #"eq_sensor")) {
+  if(sessionmodeiswarzonegame() && !(destroyedobject.name === # "eq_sensor")) {
     self stats::function_dad108fa(#"destroy_equipment", 1);
     callback::callback(#"hash_67dd51a5d529c64c");
   }
@@ -1100,7 +1099,7 @@ watchforrapiddestroy(weapon) {
   self waittilltimeoutordeath(4);
 
   if(self.challenge_previousdestroycount > 1) {
-    self stats::function_e24eec31(weapon, #"destroy_2_killstreaks_rapidly", 1);
+    self stats::function_e24eec31(weapon, # "destroy_2_killstreaks_rapidly", 1);
   }
 }
 
@@ -1114,7 +1113,7 @@ capturedobjective(capturetime, objective) {
           self stats::function_dad108fa(#"capture_objective_in_smoke", 1);
         }
 
-        self stats::function_e24eec31(getweapon(#"willy_pete"), #"combatrecordstat", 1);
+        self stats::function_e24eec31(getweapon(#"willy_pete"), # "combatrecordstat", 1);
         return;
       }
     }
@@ -1155,14 +1154,14 @@ hackedordestroyedequipment() {
 }
 
 bladekill() {
-  if(!isDefined(self.pers[#"bladekills"])) {
-    self.pers[#"bladekills"] = 0;
+  if(!isDefined(self.pers[# "bladekills"])) {
+    self.pers[# "bladekills"] = 0;
   }
 
-  self.pers[#"bladekills"]++;
+  self.pers[# "bladekills"]++;
 
-  if(self.pers[#"bladekills"] >= 15) {
-    self.pers[#"bladekills"] = 0;
+  if(self.pers[# "bladekills"] >= 15) {
+    self.pers[# "bladekills"] = 0;
     self stats::function_dad108fa(#"kill_15_with_blade", 1);
   }
 }
@@ -1179,40 +1178,40 @@ assisted() {
 earnedmicrowaveassistscore(score) {
   self stats::function_dad108fa(#"assist_score_microwave_turret", score);
   self stats::function_dad108fa(#"assist_score_killstreak", score);
-  self stats::function_e24eec31(getweapon(#"microwave_turret_deploy"), #"assists", 1);
-  self stats::function_e24eec31(getweapon(#"microwave_turret_deploy"), #"assist_score", score);
+  self stats::function_e24eec31(getweapon(#"microwave_turret_deploy"), # "assists", 1);
+  self stats::function_e24eec31(getweapon(#"microwave_turret_deploy"), # "assist_score", score);
   self contracts::increment_contract(#"hash_4840654e4b2597a5", score);
 }
 
 earnedcuavassistscore(score) {
   self stats::function_dad108fa(#"assist_score_cuav", score);
   self stats::function_dad108fa(#"assist_score_killstreak", score);
-  self stats::function_e24eec31(getweapon(#"counteruav"), #"assists", 1);
-  self stats::function_e24eec31(getweapon(#"counteruav"), #"assist_score", score);
+  self stats::function_e24eec31(getweapon(#"counteruav"), # "assists", 1);
+  self stats::function_e24eec31(getweapon(#"counteruav"), # "assist_score", score);
   self contracts::increment_contract(#"hash_4840654e4b2597a5", score);
 }
 
 earneduavassistscore(score) {
   self stats::function_dad108fa(#"assist_score_uav", score);
   self stats::function_dad108fa(#"assist_score_killstreak", score);
-  self stats::function_e24eec31(getweapon(#"uav"), #"assists", 1);
-  self stats::function_e24eec31(getweapon(#"uav"), #"assist_score", score);
+  self stats::function_e24eec31(getweapon(#"uav"), # "assists", 1);
+  self stats::function_e24eec31(getweapon(#"uav"), # "assist_score", score);
   self contracts::increment_contract(#"hash_4840654e4b2597a5", score);
 }
 
 earnedsatelliteassistscore(score) {
   self stats::function_dad108fa(#"assist_score_satellite", score);
   self stats::function_dad108fa(#"assist_score_killstreak", score);
-  self stats::function_e24eec31(getweapon(#"satellite"), #"assists", 1);
-  self stats::function_e24eec31(getweapon(#"satellite"), #"assist_score", score);
+  self stats::function_e24eec31(getweapon(#"satellite"), # "assists", 1);
+  self stats::function_e24eec31(getweapon(#"satellite"), # "assist_score", score);
   self contracts::increment_contract(#"hash_4840654e4b2597a5", score);
 }
 
 earnedempassistscore(score) {
   self stats::function_dad108fa(#"assist_score_emp", score);
   self stats::function_dad108fa(#"assist_score_killstreak", score);
-  self stats::function_e24eec31(getweapon(#"emp_turret"), #"assists", 1);
-  self stats::function_e24eec31(getweapon(#"emp_turret"), #"assist_score", score);
+  self stats::function_e24eec31(getweapon(#"emp_turret"), # "assists", 1);
+  self stats::function_e24eec31(getweapon(#"emp_turret"), # "assist_score", score);
   self contracts::increment_contract(#"hash_4840654e4b2597a5", score);
 }
 
@@ -1252,7 +1251,7 @@ getlosersteamscores(winner) {
       continue;
     }
 
-    teamscores += game.stat[#"teamscores"][team];
+    teamscores += game.stat[# "teamscores"][team];
   }
 
   return teamscores;
@@ -1281,7 +1280,7 @@ challengegameend(data) {
   }
 
   if(level.teambased) {
-    winnerscore = game.stat[#"teamscores"][winner];
+    winnerscore = game.stat[# "teamscores"][winner];
     loserscore = getlosersteamscores(winner);
   }
 }
@@ -1294,7 +1293,7 @@ multikill(killcount, weapon) {
   doublekill = int(killcount / 2);
 
   if(doublekill > 0) {
-    self stats::function_e24eec31(weapon, #"doublekill", doublekill);
+    self stats::function_e24eec31(weapon, # "doublekill", doublekill);
 
     if(weapon.isheavyweapon) {
       self stats::function_dad108fa(#"multikill_2_with_heroweapon", doublekill);
@@ -1310,7 +1309,7 @@ multikill(killcount, weapon) {
       }
     }
 
-    self stats::function_e24eec31(weapon, #"triplekill", triplekill);
+    self stats::function_e24eec31(weapon, # "triplekill", triplekill);
 
     if(weapon.isheavyweapon) {
       self stats::function_dad108fa(#"multikill_3_with_heroweapon", triplekill);
@@ -1357,13 +1356,13 @@ totaldomination(team) {
 
 holdflagentirematch(team, label) {
   switch (label) {
-    case #"_a":
+    case # "_a":
       event = "hold_a_entire_match";
       break;
-    case #"_b":
+    case # "_b":
       event = "hold_b_entire_match";
       break;
-    case #"_c":
+    case # "_c":
       event = "hold_c_entire_match";
       break;
     default:
@@ -1386,7 +1385,7 @@ multi_lmg_smg_kill() {
 }
 
 killedzoneattacker(weapon) {
-  if(weapon.statname == #"planemortar" || weapon.statname == "remote_missile_missile" || weapon.name == #"remote_missile_bomblet") {
+  if(weapon.statname == # "planemortar" || weapon.statname == "remote_missile_missile" || weapon.name == # "remote_missile_bomblet") {
     self thread updatezonemultikills();
   }
 }
@@ -1461,11 +1460,11 @@ bothbombsdetonatewithintime() {
 }
 
 calledincarepackage() {
-  self.pers[#"carepackagescalled"]++;
+  self.pers[# "carepackagescalled"]++;
 
-  if(self.pers[#"carepackagescalled"] >= 3) {
+  if(self.pers[# "carepackagescalled"] >= 3) {
     self stats::function_dad108fa(#"call_in_3_care_packages", 1);
-    self.pers[#"carepackagescalled"] = 0;
+    self.pers[# "carepackagescalled"] = 0;
   }
 }
 
@@ -1512,9 +1511,9 @@ destroyedaircraft(attacker, weapon, playercontrolled, lethal = 1) {
   }
 
   if(isDefined(weapon)) {
-    if(weapon.name == #"emp" && attacker util::is_item_purchased(#"killstreak_emp")) {
+    if(weapon.name == # "emp" && attacker util::is_item_purchased(#"killstreak_emp")) {
       attacker stats::function_dad108fa(#"destroy_aircraft_with_emp", 1);
-    } else if(weapon.name == #"missile_drone_projectile" || weapon.name == #"missile_drone") {
+    } else if(weapon.name == # "missile_drone_projectile" || weapon.name == # "missile_drone") {
       attacker stats::function_dad108fa(#"destroy_aircraft_with_missile_drone", 1);
     } else if(weapon.isbulletweapon) {
       attacker stats::function_dad108fa(#"shoot_aircraft", 1);
@@ -1575,7 +1574,7 @@ killstreakten() {
 }
 
 scavengedgrenade() {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
   self notify(#"scavengedgrenade");
   self endon(#"scavengedgrenade");
   self notify(#"scavenged_primary_grenade");
@@ -2031,7 +2030,7 @@ eventreceived(eventname) {
   util::waittillslowprocessallowed();
 
   switch (level.gametype) {
-    case #"tdm":
+    case # "tdm":
       if(eventname == "killstreak_10") {
         self stats::function_d40764f3(#"killstreak_10", 1);
       } else if(eventname == "killstreak_15") {
@@ -2047,7 +2046,7 @@ eventreceived(eventname) {
       }
 
       break;
-    case #"dm":
+    case # "dm":
       if(eventname == "killstreak_10") {
         self stats::function_d40764f3(#"killstreak_10", 1);
       } else if(eventname == "killstreak_15") {
@@ -2059,7 +2058,7 @@ eventreceived(eventname) {
       }
 
       break;
-    case #"sd":
+    case # "sd":
       if(eventname == "defused_bomb_last_man_alive") {
         self stats::function_d40764f3(#"defused_bomb_last_man_alive", 1);
       } else if(eventname == "elimination_and_last_player_alive") {
@@ -2071,7 +2070,7 @@ eventreceived(eventname) {
       }
 
       break;
-    case #"ctf":
+    case # "ctf":
       if(eventname == "kill_flag_carrier") {
         self stats::function_d40764f3(#"kill_flag_carrier", 1);
       } else if(eventname == "defend_flag_carrier") {
@@ -2079,7 +2078,7 @@ eventreceived(eventname) {
       }
 
       break;
-    case #"dem":
+    case # "dem":
       if(eventname == "killed_bomb_planter") {
         self stats::function_d40764f3(#"killed_bomb_planter", 1);
       } else if(eventname == "killed_bomb_defuser") {
@@ -2093,7 +2092,7 @@ eventreceived(eventname) {
 }
 
 monitor_player_sprint() {
-  self endon(#"disconnect", #"killplayersprintmonitor", #"death");
+  self endon(#"disconnect", # "killplayersprintmonitor", # "death");
   self.lastsprinttime = undefined;
 
   while(true) {

@@ -115,17 +115,13 @@ func_7CDF(param_00, param_01) {
 }
 
 func_16F7(param_00, param_01, param_02) {
-  [
-    [func_77D1(param_01)]
-  ](param_00);
+  [[func_77D1(param_01)]](param_00);
   level.var_D928[param_01].var_D926[param_02][level.var_D928[param_01].var_D926[param_02].size] = param_00;
 }
 
 func_E062(param_00, param_01) {
   var_02 = func_7B49(param_00, param_01);
-  [
-    [func_7966(param_00)]
-  ](var_02);
+  [[func_7966(param_00)]](var_02);
   level.var_D928[param_00].var_D926[param_01] = ::scripts\engine\utility::array_remove(level.var_D928[param_00].var_D926[param_01], var_02);
 }
 

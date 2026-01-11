@@ -60,11 +60,9 @@ watch_chamber_wall() {
 cap_value(val, min, max) {
   if(val < min) {
     return min;
-  }
-  else if(val > max) {
+  } else if(val > max) {
     return max;
-  }
-  else {
+  } else {
     return val;
   }
 }
@@ -249,8 +247,7 @@ tomb_is_valid_target_in_chamber() {
 is_player_in_chamber() {
   if(is_point_in_chamber(self.origin)) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -265,8 +262,7 @@ tomb_watch_chamber_player_activity() {
     if(is_chamber_occupied()) {
       if(tomb_is_valid_target_in_chamber()) {
         flag_set("player_active_in_chamber");
-      }
-      else {
+      } else {
         flag_clear("player_active_in_chamber");
         chamber_zombies_find_poi();
       }

@@ -122,8 +122,7 @@ statAdd(dataName, value, optionalArrayInd) {
 statGetChild(parent, child) {
   if(parent == "round") {
     return self getCommonPlayerData(parent, child);
-  }
-  else {
+  } else {
     return self getRankedPlayerData(parent, child);
   }
 }
@@ -137,8 +136,7 @@ statSetChild(parent, child, value) {
   }
   if(parent == "round") {
     self setCommonPlayerData(parent, child, value);
-  }
-  else {
+  } else {
     self setRankedPlayerData(parent, child, value);
   }
 }
@@ -325,8 +323,7 @@ writeBufferedStats() {
     foreach(childStatName, childStatVal in statVal) {
       if(statName == "round") {
         self setCommonPlayerData(statName, childStatName, childStatVal);
-      }
-      else if(rankingEnabled) {
+      } else if(rankingEnabled) {
         self setRankedPlayerData(statName, childStatName, childStatVal);
       }
     }
@@ -370,8 +367,7 @@ incrementRankedReservedHistory(kills, deaths) {
 incrementWeaponStat(weaponName, stat, incValue) {
   if(weaponName == "iw6_pdwauto") {
     weaponName = "iw6_pdw";
-  }
-  else if(weaponName == "iw6_knifeonlyfast") {
+  } else if(weaponName == "iw6_knifeonlyfast") {
     weaponName = "iw6_knifeonly";
   }
 

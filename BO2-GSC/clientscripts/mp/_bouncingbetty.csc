@@ -35,8 +35,7 @@ playflarefx(localclientnum) {
 
   if(friendnotfoe(localclientnum)) {
     fx_handle = playFXOnTag(localclientnum, level._effect["fx_betty_friendly_light"], self, "tag_origin");
-  }
-  else {
+  } else {
     fx_handle = playFXOnTag(localclientnum, level._effect["fx_betty_enemy_light"], self, "tag_origin");
   }
 

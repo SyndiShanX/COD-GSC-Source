@@ -196,7 +196,7 @@ find_vanguard_spawn_angles() {
   var_0 = (0, 0, 0);
 
   foreach(var_2 in level.scanned_obelisks) {
-  var_0 = var_0 + var_2.scriptables[0].origin;
+    var_0 = var_0 + var_2.scriptables[0].origin;
   }
 
   var_0 = var_0 / level.scanned_obelisks.size;
@@ -730,8 +730,7 @@ vanguard_watch_distance() {
 
         if(isDefined(self.heliinproximity)) {
           var_1 = distance(self.origin, self.heliinproximity.origin);
-        }
-        else {
+        } else {
           var_1 = distance(self.origin, var_0);
         }
 

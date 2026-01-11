@@ -66,7 +66,7 @@ main() {
   }
 
   foreach(player in level.players) {
-  player.reviving_buddy = false;
+    player.reviving_buddy = false;
   }
 
   // Used to keep one player alive for a few seconds when the other player goes down
@@ -244,8 +244,7 @@ create_fresh_friendly_icon(material) {
 
   if(flag("coop_show_constant_icon")) {
     self.friendlyIcon.alpha = 1.0;
-  }
-  else {
+  } else {
     self.friendlyIcon.alpha = 0.0;
   }
 }
@@ -351,7 +350,7 @@ player_coop_create_use_target() {
 
 player_coop_destroy_use_target() {
   foreach(player in level.players) {
-  player.reviving_buddy = false;
+    player.reviving_buddy = false;
   }
 
   if(isDefined(level.revive_ent)) {
@@ -607,8 +606,7 @@ player_coop_downed_hud() {
   foreach(player in level.players) {
     if(player == self) {
       player.revive_text settext(&"SCRIPT_COOP_BLEEDING_OUT");
-    }
-    else {
+    } else {
       player.revive_text settext(&"SCRIPT_COOP_BLEEDING_OUT_PARTNER");
     }
     player.revive_timer setTimer(self.coop.bleedout_time_default - 1);
@@ -695,19 +693,19 @@ player_coop_countdown_timer(time) {
   while(self.coop.bleedout_time > 0) {
     if(self ent_flag("coop_pause_bleedout_timer")) {
       foreach(player in level.players) {
-      player.revive_timer.alpha = 0;
+        player.revive_timer.alpha = 0;
       }
       self ent_flag_waitopen("coop_pause_bleedout_timer");
 
       //need this check because was setting a time that wasn't greater than 0 which would give an error
       if(self.coop.bleedout_time >= 1) {
         foreach(player in level.players) {
-        player.revive_timer settimer(self.coop.bleedout_time - 1);
+          player.revive_timer settimer(self.coop.bleedout_time - 1);
         }
       }
     } else {
       foreach(player in level.players) {
-      player.revive_timer.alpha = 1;
+        player.revive_timer.alpha = 1;
       }
     }
 
@@ -846,8 +844,7 @@ player_coop_revive_buddy() {
       foreach(player in level.players) {
         if(player == downed_buddy) {
           player.revive_text settext(&"SCRIPT_COOP_REVIVING");
-        }
-        else {
+        } else {
           player.revive_text settext(&"SCRIPT_COOP_REVIVING_PARTNER");
         }
       }
@@ -862,7 +859,7 @@ player_coop_revive_buddy() {
       while(player_coop_is_reviving()) {
         downed_buddy ent_flag_set("coop_pause_bleedout_timer");
         foreach(bar in level.bars) {
-        bar updateBar(buttonTime / totalTime);
+          bar updateBar(buttonTime / totalTime);
         }
 
         wait(0.05);
@@ -915,8 +912,7 @@ player_coop_revive_buddy_cleanup(downed_buddy) {
   foreach(player in level.players) {
     if(player == downed_buddy) {
       player.revive_text settext(&"SCRIPT_COOP_BLEEDING_OUT");
-    }
-    else {
+    } else {
       player.revive_text settext(&"SCRIPT_COOP_BLEEDING_OUT_PARTNER");
     }
   }
@@ -1158,8 +1154,7 @@ player_dying_effect() {
   //allow this thread to only be run once
   if(!ent_flag_exist("coop_dying_effect")) {
     ent_flag_init("coop_dying_effect");
-  }
-  else if(ent_flag("coop_dying_effect")) {
+  } else if(ent_flag("coop_dying_effect")) {
     return;
   }
   ent_flag_set("coop_dying_effect");

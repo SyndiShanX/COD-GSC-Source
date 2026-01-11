@@ -217,8 +217,7 @@ base_array_hints() {
   if(!common_scripts\utility::flag("PLAYER_ZOOMED_ONCE")) {
     if(level.player usinggamepad()) {
       level.player thread maps\_utility::display_hint_timeout("HINT_ZOOM_SPEED_THROW", 8.0);
-    }
-    else {
+    } else {
       var_0 = 1;
       var_1 = 0;
       var_2 = getkeybinding("+speed_throw");
@@ -234,8 +233,7 @@ base_array_hints() {
 
       if(var_0) {
         level.player thread maps\_utility::display_hint_timeout("HINT_ZOOM_SPEED_THROW", 8.0);
-      }
-      else {
+      } else {
         level.player thread maps\_utility::display_hint_timeout("HINT_ZOOM_TOGGLEADS_THROW", 8.0);
       }
     }

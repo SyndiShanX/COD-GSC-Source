@@ -57,8 +57,7 @@ dtp_effects() {
     if(getactivelocalclients() == 1 && isDefined(localplayer) && localplayer == self) {
       if(isDefined(level.iswinter) && level.iswinter) {
         animateui(localclientnum, "fullscreen_snow", "dirt", "in", 0);
-      }
-      else {
+      } else {
         animateui(localclientnum, "fullscreen_dirt", "dirt", "in", 0);
       }
     }

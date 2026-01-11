@@ -158,5 +158,4 @@ trig_enter_alarm(trigplayer) {
   playSound(0, "amb_scanner_alarm", (-460, -809, -438));
 }
 
-trig_leave_alarm(trigplayer) {
-}
+trig_leave_alarm(trigplayer) {}

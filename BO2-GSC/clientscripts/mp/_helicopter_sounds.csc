@@ -44,8 +44,7 @@ vehicle_is_firing_function(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(newval == 0) {
     self.isfiring = 0;
-  }
-  else {
+  } else {
     self.isfiring = 1;
   }
 }
@@ -90,8 +89,7 @@ command_parser() {
       if(!isDefined(tokens[0]) || !isDefined(level.helisoundvalues[tokens[0]])) {
         if(isDefined(tokens[0])) {
           println("helisounds Did not recognize helicopter type:" + tokens[0]);
-        }
-        else {
+        } else {
           println("helisounds Did not recognize helicopter type");
         }
 
@@ -100,8 +98,7 @@ command_parser() {
       } else if(!isDefined(tokens[1])) {
         if(isDefined(tokens[1])) {
           println("helisounds Did not recognize helicopter part:" + tokens[0] + " for heli: " + tokens[1]);
-        }
-        else {
+        } else {
           println("helisounds Did not recognize helicopter part for heli: " + tokens[0]);
         }
 
@@ -211,8 +208,7 @@ init_heli_sounds_heli_guard() {
 sound_linkto(parent, tag) {
   if(isDefined(tag)) {
     self linkto(parent, tag);
-  }
-  else {
+  } else {
     self linkto(parent, "tag_body");
   }
 }
@@ -655,8 +651,7 @@ aircraft_dustkick(localclientnum) {
     if(!isDefined(self.treadfx[trace["surfacetype"]])) {
       if(isDefined(self.vehicletype)) {
         println("SCRIPT PRINT: Unknown surface type " + trace["surfacetype"] + " for vehicle type " + self.vehicletype);
-      }
-      else {
+      } else {
         println("SCRIPT PRINT: Unknown surface type " + trace["surfacetype"] + " for vehicle of undefined vehicletype");
       }
 
@@ -674,8 +669,7 @@ play_targeting_sound(play, sound, handle) {
 
   if(play) {
     return sound_ent playLoopSound(sound);
-  }
-  else if(isDefined(handle)) {
+  } else if(isDefined(handle)) {
     sound_ent stoploopsound(0.1);
     return undefined;
   }
@@ -698,8 +692,7 @@ play_leaving_battlefield_alarm(play) {
 
   if(play) {
     self.leavingbattlefieldsound = sound_ent playLoopSound("veh_helicopter_alarm");
-  }
-  else if(isDefined(self.leavingbattlefieldsound) && self.leavingbattlefieldsound) {
+  } else if(isDefined(self.leavingbattlefieldsound) && self.leavingbattlefieldsound) {
     sound_ent stoploopsound(0.1);
   }
 }

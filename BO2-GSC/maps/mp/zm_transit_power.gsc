@@ -25,8 +25,7 @@ initializepower() {
   maps\mp\_visionset_mgr::vsmgr_register_info("visionset", "zm_power_high_low", 1, level.vsmgr_prio_visionset_zm_transit_power_high_low, 7, 1, ::vsmgr_lerp_power_up_down, 0);
 }
 
-precache_models() {
-}
+precache_models() {}
 
 elecswitchbuildable() {
   lever = getent("powerswitch_p6_zm_buildable_pswitch_lever", "targetname");
@@ -132,8 +131,7 @@ power_event_vision_set() {
 
       if(startgoal > 0.6) {
         endgoal = randomfloatrange(0.0, 0.5);
-      }
-      else {
+      } else {
         endgoal = 1;
       }
 
@@ -145,8 +143,7 @@ power_event_vision_set() {
 
         if(startgoal > 0.6) {
           endgoal = 0.0;
-        }
-        else {
+        } else {
           endgoal = 1.0;
         }
 
@@ -158,8 +155,7 @@ power_event_vision_set() {
 
       if(startgoal > 0.6) {
         endgoal = randomfloatrange(0.0, 0.5);
-      }
-      else {
+      } else {
         endgoal = randomfloatrange(0.5, 1.0);
       }
 
@@ -402,8 +398,7 @@ corerotate(time) {
 coremove(time, down) {
   if(isDefined(down) && down) {
     self movez(-160, time);
-  }
-  else {
+  } else {
     self movez(160, time);
   }
 }

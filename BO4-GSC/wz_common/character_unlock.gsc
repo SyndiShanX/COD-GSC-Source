@@ -9,11 +9,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_inventory;
 #include scripts\mp_common\item_world_fixup;
-
 #namespace character_unlock;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock", &__init__, undefined, #"character_unlock_fixup");
+  system::register(#"character_unlock", &__init__, undefined, # "character_unlock_fixup");
 }
 
 __init__() {
@@ -29,22 +28,22 @@ function_b3681acb() {
     return true;
   }
 
-    return level.var_b3681acb && isDefined(level.onlinegame) && level.onlinegame && isDefined(level.rankedmatch) && level.rankedmatch;
+  return level.var_b3681acb && isDefined(level.onlinegame) && level.onlinegame && isDefined(level.rankedmatch) && level.rankedmatch;
 }
 
 function_d89ef6af(unlock_name) {
   switch (unlock_name) {
-    case #"hash_178221dd8299137b":
+    case # "hash_178221dd8299137b":
       return true;
-    case #"hash_8c7045e78561cf4":
+    case # "hash_8c7045e78561cf4":
       return true;
-    case #"hash_3532d912b12917c9":
+    case # "hash_3532d912b12917c9":
       return true;
-    case #"hash_517bb26004a9c12b":
+    case # "hash_517bb26004a9c12b":
       return true;
-    case #"hash_263de5e9fa6d16ea":
+    case # "hash_263de5e9fa6d16ea":
       return true;
-    case #"hash_74709eb5a08139fb":
+    case # "hash_74709eb5a08139fb":
       return true;
   }
 
@@ -69,7 +68,7 @@ function_d7e6fa92(unlock_name) {
     return false;
   }
 
-  if(isDefined(stats::get_stat(#"characters", var_2b469a7d, #"unlocked")) && stats::get_stat(#"characters", var_2b469a7d, #"unlocked")) {
+  if(isDefined(stats::get_stat(#"characters", var_2b469a7d, # "unlocked")) && stats::get_stat(#"characters", var_2b469a7d, # "unlocked")) {
     return true;
   }
 
@@ -194,10 +193,10 @@ function_c8beca5e(unlock_name, var_1d208aea, state) {
   assert(isinarray(var_9ba1646c.var_3845495, var_1d208aea), "<dev string:x61>" + function_9e72a96(var_1d208aea) + "<dev string:x73>" + function_9e72a96(unlock_name));
   assert(isinarray(array(0, 1, 2), state), "<dev string:x90>" + function_9e72a96(var_1d208aea) + "<dev string:xc4>" + function_9e72a96(unlock_name));
 
-    if(!self function_c70bcc7a(unlock_name)) {
-      assertmsg("<dev string:xd3>" + unlock_name + "<dev string:x103>");
-      return;
-    }
+  if(!self function_c70bcc7a(unlock_name)) {
+    assertmsg("<dev string:xd3>" + unlock_name + "<dev string:x103>");
+    return;
+  }
 
   current_state = self.var_c53589da[unlock_name].var_e7e238a4[var_1d208aea];
 
@@ -208,7 +207,7 @@ function_c8beca5e(unlock_name, var_1d208aea, state) {
   self.var_c53589da[unlock_name].var_e7e238a4[var_1d208aea] = state;
   self function_20b0ca2e(unlock_name);
 
-  if(var_1d208aea != #"hash_3f07579f66b464e8") {
+  if(var_1d208aea != # "hash_3f07579f66b464e8") {
     if(!isalive(self) || isDefined(level.gameended) && level.gameended) {
       self function_fb689837();
     }
@@ -281,7 +280,7 @@ function_fb689837() {
     var_b3895a2 = 1;
 
     foreach(var_1d208aea, var_b7ed23ab in var_c5c8fd39.var_e7e238a4) {
-      if(var_1d208aea != #"hash_3f07579f66b464e8" && var_b7ed23ab != 1) {
+      if(var_1d208aea != # "hash_3f07579f66b464e8" && var_b7ed23ab != 1) {
         var_b3895a2 = 0;
         break;
       }
@@ -291,7 +290,7 @@ function_fb689837() {
       continue;
     }
 
-    self function_c8beca5e(unlock_name, #"hash_3f07579f66b464e8", 1);
+    self function_c8beca5e(unlock_name, # "hash_3f07579f66b464e8", 1);
     var_9ba1646c = level.var_7d8da246[unlock_name];
 
     if(isDefined(var_9ba1646c)) {
@@ -302,7 +301,7 @@ function_fb689837() {
       if(function_d89ef6af(unlock_name)) {
         self stats::set_stat(#"unlockedtags", var_2b469a7d, 1);
       } else {
-        self stats::set_stat(#"characters", var_2b469a7d, #"unlocked", 1);
+        self stats::set_stat(#"characters", var_2b469a7d, # "unlocked", 1);
         self stats::function_d40764f3(#"character_quests_completed", 1);
       }
 

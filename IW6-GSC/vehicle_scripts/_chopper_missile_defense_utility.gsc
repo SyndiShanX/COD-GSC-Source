@@ -88,8 +88,7 @@ do_evade(var_0) {
 
   if(self.classname == "script_vehicle_apache_iw6") {
     var_1 = "apache";
-  }
-  else if(self.classname == "script_vehicle_hind_battle_oilrocks") {
+  } else if(self.classname == "script_vehicle_hind_battle_oilrocks") {
     var_1 = "battlehind";
   }
 
@@ -269,8 +268,7 @@ dsq_2d_ents_lt(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_0) && isDefined(var_1) && isDefined(var_2)) {
     if(isDefined(var_3)) {
       return common_scripts\utility::ter_op(dsq_2d_ents(var_0, var_0) < squared(var_2) && abs(var_1.origin[2] - var_0.origin[2]) < var_3, 1, 0);
-    }
-    else {
+    } else {
       return common_scripts\utility::ter_op(dsq_2d_ents(var_0, var_1) < squared(var_2), 1, 0);
     }
   }
@@ -330,7 +328,7 @@ override_array_delete(var_0, var_1, var_2) {
       }
 
       foreach(var_6 in var_1) {
-      var_4 notify(var_6);
+        var_4 notify(var_6);
       }
 
       if(var_2 > 0) {
@@ -365,8 +363,7 @@ shootflares(var_0) {
 
   if(isDefined(self.flarerig_tagangles)) {
     var_2 = flat_angle_yaw(var_1 gettagangles(self.flarerig_tagangles));
-  }
-  else if(isplayer(var_1)) {
+  } else if(isplayer(var_1)) {
     var_2 = (var_1 getplayerangles()[0], var_2[1], var_2[2]);
   }
 
@@ -377,8 +374,7 @@ shootflares(var_0) {
 
     if(maps\_utility::hastag(var_1.model, self.flarerig_tagorigin)) {
       var_3 = var_1 gettagorigin(self.flarerig_tagorigin);
-    }
-    else if(maps\_utility::hastag(var_1.model, "tag_origin")) {
+    } else if(maps\_utility::hastag(var_1.model, "tag_origin")) {
       var_3 = var_1 gettagorigin("tag_origin");
     }
   }

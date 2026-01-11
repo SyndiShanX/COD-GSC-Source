@@ -306,8 +306,7 @@ wait_for_team_death() {
 
     if(cia_alive == 0) {
       winner = "B";
-    }
-    else if(cdc_alive == 0) {
+    } else if(cdc_alive == 0) {
       winner = "A";
     }
 

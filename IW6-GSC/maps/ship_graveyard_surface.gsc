@@ -84,8 +84,7 @@ main() {
 
   if(!level.console) {
     var_5 sethintstring(&"SHIP_GRAVEYARD_HINT_DIVE");
-  }
-  else {
+  } else {
     var_5 sethintstring(&"SHIP_GRAVEYARD_HINT_DIVE_CONSOLE");
   }
 
@@ -127,7 +126,7 @@ main() {
   level.player allowjump(1);
 
   foreach(var_8 in var_4) {
-  var_8 delete();
+    var_8 delete();
   }
 
   level.heli delete();
@@ -257,7 +256,7 @@ spotlight_think() {
   self waittill("death");
 
   foreach(var_8 in var_6) {
-  var_8 delete();
+    var_8 delete();
   }
 }
 
@@ -515,14 +514,11 @@ fx_screen_raindrops() {
 
         if(var_1[0] < -40) {
           playFXOnTag(level._effect["abv_raindrops_screen_20"], level.screenrain, "tag_origin");
-        }
-        else if(var_1[0] < -25) {
+        } else if(var_1[0] < -25) {
           playFXOnTag(level._effect["abv_raindrops_screen_10"], level.screenrain, "tag_origin");
-        }
-        else if(var_1[0] < 25) {
+        } else if(var_1[0] < 25) {
           playFXOnTag(level._effect["abv_raindrops_screen_5"], level.screenrain, "tag_origin");
-        }
-        else if(var_1[0] < 40) {
+        } else if(var_1[0] < 40) {
           playFXOnTag(level._effect["abv_raindrops_screen_3"], level.screenrain, "tag_origin");
         }
       }

@@ -21,16 +21,12 @@ codecallback_playerconnect() {
   }
 
   self endon("disconnect");
-  [
-    [level.callbackplayerconnect]
-  ]();
+  [[level.callbackplayerconnect]]();
 }
 
 codecallback_playerdisconnect(param_00) {
   self notify("disconnect");
-  [
-    [level.callbackplayerdisconnect]
-  ](param_00);
+  [[level.callbackplayerdisconnect]](param_00);
 }
 
 codecallback_playerdamage(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
@@ -39,9 +35,7 @@ codecallback_playerdamage(param_00, param_01, param_02, param_03, param_04, para
     param_05 = [[level.weaponmapfunc]](param_05, param_00);
   }
 
-  [
-    [level.callbackplayerdamage]
-  ](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
+  [[level.callbackplayerdamage]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
 }
 
 func_00B4(param_00, param_01, param_02, param_03) {
@@ -83,9 +77,7 @@ codecallback_playerimpaled(param_00, param_01, param_02, param_03, param_04, par
     param_01 = [[level.weaponmapfunc]](param_01);
   }
 
-  [
-    [level.callbackplayerimpaled]
-  ](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07);
+  [[level.callbackplayerimpaled]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07);
 }
 
 codecallback_playerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
@@ -94,9 +86,7 @@ codecallback_playerkilled(param_00, param_01, param_02, param_03, param_04, para
     param_05 = [[level.weaponmapfunc]](param_05, param_00);
   }
 
-  [
-    [level.callbackplayerkilled]
-  ](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
+  [[level.callbackplayerkilled]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09);
 }
 
 codecallback_vehicledamage(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
@@ -125,22 +115,16 @@ codecallback_playerlaststand(param_00, param_01, param_02, param_03, param_04, p
     param_04 = [[level.weaponmapfunc]](param_04, param_00);
   }
 
-  [
-    [level.callbackplayerlaststand]
-  ](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
+  [[level.callbackplayerlaststand]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08);
 }
 
 codecallback_playermigrated() {
   self endon("disconnect");
-  [
-    [level.callbackplayermigrated]
-  ]();
+  [[level.callbackplayermigrated]]();
 }
 
 codecallback_hostmigration() {
-  [
-    [level.callbackhostmigration]
-  ]();
+  [[level.callbackhostmigration]]();
 }
 
 setupdamageflags() {

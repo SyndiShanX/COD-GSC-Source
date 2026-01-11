@@ -34,8 +34,7 @@ init_flags() {
   flag_init("spiderbot_end");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 spiderbot_teleport(str_location) {
   s_tp_spot = getstruct(str_location, "targetname");
@@ -180,8 +179,7 @@ gulliver() {
 
   if(flag("it_mgr_disabled")) {
     level.ai_gulliver gulliver_eye_scan();
-  }
-  else {
+  } else {
     spiderbot_lost(0, &"KARMA_TAZE_FAIL_HINT");
   }
 

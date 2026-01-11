@@ -94,8 +94,7 @@ bot_hack_think() {
 
   if(!is_true(level.drones_spawned)) {
     self bot_hack_goal_pregame(tanks);
-  }
-  else {
+  } else {
     foreach(tank in tanks) {
       if(isDefined(tank.owner) && tank.owner == self) {
         continue;

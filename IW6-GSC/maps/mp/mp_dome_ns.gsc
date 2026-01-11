@@ -545,8 +545,7 @@ crane_damage_manager(hitEnt) {
   if(isDefined(level.triggerer)) {
     if(isDefined(hitEnt.team) && hitEnt.team == level.triggerer.team) {
       hitEnt DoDamage(1000, hitEnt.origin, self, self, "MOD_CRUSH");
-    }
-    else {
+    } else {
       hitEnt DoDamage(1000, hitEnt.origin, level.triggerer, self, "MOD_CRUSH");
     }
 

@@ -519,8 +519,7 @@ bot_loadout_choose_from_statstable(loadoutValue, loadoutValueArray, loadoutValue
   result = "specialty_null";
   if(loadoutValueName == "loadoutPrimary") {
     result = "iw6_honeybadger";
-  }
-  else if(loadoutValueName == "loadoutSecondary") {
+  } else if(loadoutValueName == "loadoutSecondary") {
     result = "iw6_p226";
   }
 
@@ -891,8 +890,7 @@ bot_loadout_valid_choice(loadoutValueVerbatim, loadoutValueArray, loadoutValueNa
     case "loadoutPerk15":
       if(loadoutValueArray["loadoutStreakType"] != "streaktype_specialist") {
         valid = false;
-      }
-      else {
+      } else {
         valid = bot_validate_perk(choice, loadoutValueName, loadoutValueArray, -1, -1);
       }
       break;
@@ -906,8 +904,7 @@ bot_loadout_valid_choice(loadoutValueVerbatim, loadoutValueArray, loadoutValueNa
     case "loadoutPerk23":
       if(loadoutValueArray["loadoutStreakType"] != "streaktype_specialist") {
         valid = false;
-      }
-      else {
+      } else {
         valid = bot_validate_perk(choice, loadoutValueName, loadoutValueArray, 16, 23, SCR_CONST_base_perk_slots);
       }
       break;
@@ -1088,8 +1085,7 @@ bot_loadout_class_callback() {
       if(isDefined(self.bot_fallback_personality)) {
         if(self.bot_fallback_personality == "weapon") {
           self bot_pick_personality_from_weapon(loadoutValueArray["loadoutPrimary"]);
-        }
-        else {
+        } else {
           self maps\mp\bots\_bots_util::bot_set_personality(self.bot_fallback_personality);
         }
 
@@ -1139,8 +1135,7 @@ bot_loadout_class_callback() {
       loadoutValueArray["loadoutPrimaryAttachment3"] = otherAttachmentLoadout["loadoutPrimaryAttachment2"];
       if(array_contains(self.pers["loadoutPerks"], "specialty_twoprimaries")) {
         loadoutValueArray["loadoutSecondaryAttachment2"] = otherAttachmentLoadout["loadoutPrimaryAttachment2"];
-      }
-      else {
+      } else {
         loadoutValueArray["loadoutSecondaryAttachment2"] = otherAttachmentLoadout["loadoutSecondaryAttachment2"];
       }
       loadoutValueArray = self bot_loadout_choose_values(loadoutValueArray);
@@ -1236,14 +1231,11 @@ bot_setup_loadout_callback() {
 bot_squad_lookup_private(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex) {
   if(isDefined(fieldBIndex)) {
     return owner GetPrivatePlayerData("privateMatchSquadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex);
-  }
-  else if(isDefined(fieldB)) {
+  } else if(isDefined(fieldB)) {
     return owner GetPrivatePlayerData("privateMatchSquadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB);
-  }
-  else if(isDefined(fieldAIndex)) {
+  } else if(isDefined(fieldAIndex)) {
     return owner GetPrivatePlayerData("privateMatchSquadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex);
-  }
-  else {
+  } else {
     return owner GetPrivatePlayerData("privateMatchSquadMembers", squad_slot, "loadouts", loadout_slot, fieldA);
   }
 }
@@ -1251,14 +1243,11 @@ bot_squad_lookup_private(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, f
 bot_squad_lookup_ranked(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex) {
   if(isDefined(fieldBIndex)) {
     return owner GetRankedPlayerData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex);
-  }
-  else if(isDefined(fieldB)) {
+  } else if(isDefined(fieldB)) {
     return owner GetRankedPlayerData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB);
-  }
-  else if(isDefined(fieldAIndex)) {
+  } else if(isDefined(fieldAIndex)) {
     return owner GetRankedPlayerData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex);
-  }
-  else {
+  } else {
     return owner GetRankedPlayerData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA);
   }
 }
@@ -1266,14 +1255,11 @@ bot_squad_lookup_ranked(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fi
 bot_squad_lookup_enemy(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex) {
   if(isDefined(fieldBIndex)) {
     return GetEnemySquadData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB, fieldBIndex);
-  }
-  else if(isDefined(fieldB)) {
+  } else if(isDefined(fieldB)) {
     return GetEnemySquadData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex, fieldB);
-  }
-  else if(isDefined(fieldAIndex)) {
+  } else if(isDefined(fieldAIndex)) {
     return GetEnemySquadData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA, fieldAIndex);
-  }
-  else {
+  } else {
     return GetEnemySquadData("squadMembers", squad_slot, "loadouts", loadout_slot, fieldA);
   }
 }
@@ -1283,8 +1269,7 @@ bot_squad_lookup(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, f
 
   if((GetDvar("squad_match") == "1") && (self.team == "axis")) {
     bot_squad_lookup_func = ::bot_squad_lookup_enemy;
-  }
-  else if(!matchMakingGame()) {
+  } else if(!matchMakingGame()) {
     bot_squad_lookup_func = ::bot_squad_lookup_private;
   }
 
@@ -1294,11 +1279,9 @@ bot_squad_lookup(owner, squad_slot, loadout_slot, fieldA, fieldAIndex, fieldB, f
 bot_squadmember_lookup(owner, squad_slot, fieldA) {
   if((GetDvar("squad_match") == "1") && (self.team == "axis")) {
     return GetEnemySquadData("squadMembers", squad_slot, fieldA);
-  }
-  else if(!matchMakingGame()) {
+  } else if(!matchMakingGame()) {
     return owner GetPrivatePlayerData("privateMatchSquadMembers", squad_slot, fieldA);
-  }
-  else {
+  } else {
     return owner GetRankedPlayerData("squadMembers", squad_slot, fieldA);
   }
 }
@@ -1385,8 +1368,7 @@ bot_loadout_copy_from_client(loadoutValueArray, owner, squad_slot, loadout_slot)
 
   if((GetDvar("squad_match") == "1") && (self.team == "axis")) {
     self.squad_bot_dog_type = GetEnemySquadDogType();
-  }
-  else {
+  } else {
     self.squad_bot_dog_type = owner GetCommonPlayerDataReservedInt("mp_dog_type");
   }
 

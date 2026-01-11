@@ -91,8 +91,7 @@ track_camera_mode(localclientnum) {
       if(isspectating(localclientnum, 1)) {
         if(isDefined(player.afterlife) && player.afterlife) {
           self.camera_mode = "spectating_3rd_afterlife";
-        }
-        else {
+        } else {
           self.camera_mode = "normal";
         }
       } else if(isDefined(player.afterlife) && player.afterlife)
@@ -163,8 +162,7 @@ toggle_player_afterlife_fx(localclientnum, oldval, newval, bnewent, binitialsnap
   if(newval == 1) {
     if(self islocalplayer() && self getlocalclientnumber() == localclientnum) {
       self thread player_afterlife_first_fx(localclientnum);
-    }
-    else {
+    } else {
       self thread player_afterlife_third_fx(localclientnum);
     }
   } else
@@ -257,8 +255,7 @@ toggle_player_refill_fx(localclientnum, oldval, newval, bnewent, binitialsnap, f
   }
   if(newval == 1) {
     self thread player_afterlife_first_fx(localclientnum);
-  }
-  else {
+  } else {
     self notify("stop_player_fx");
   }
 }

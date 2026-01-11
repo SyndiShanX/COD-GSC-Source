@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\hunted_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\hunted_fog::main();
   }
 }

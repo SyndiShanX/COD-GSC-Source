@@ -34,14 +34,11 @@ main() {
 
   if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("camera_thirdPerson")) {
+  } else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_diehard")) {
+  } else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 
@@ -150,8 +147,7 @@ getSpawnPoint() {
       team = level.flags[i] getFlagTeam();
       if(team == myTeam) {
         flagsOwned++;
-      }
-      else if(team == enemyTeam) {
+      } else if(team == enemyTeam) {
         enemyFlagsOwned++;
       }
     }
@@ -179,8 +175,7 @@ getSpawnPoint() {
   if(!isDefined(spawnpoint)) {
     if(self.pers["team"] == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
     }
   }
@@ -343,8 +338,7 @@ onBeginUse(player) {
 
   if(ownerTeam == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
 
@@ -729,8 +723,7 @@ flagSetup() {
     for(i = 0; i < flags.size; i++) {
       if(isDefined(flags[i].descriptor.script_linkto)) {
         adjdescs = strtok(flags[i].descriptor.script_linkto, " ");
-      }
-      else {
+      } else {
         adjdescs = [];
       }
       for(j = 0; j < adjdescs.size; j++) {
@@ -809,8 +802,7 @@ updateCPM() {
 getCapXPScale() {
   if(self.CPM < 4) {
     return 1;
-  }
-  else {
+  } else {
     return 0.25;
   }
 }

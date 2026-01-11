@@ -79,8 +79,7 @@ func_D0D0() {
   for(;;) {
     if(scripts\sp\utility::func_65DB("player_has_red_flashing_overlay")) {
       self playlocalsound("breathing_heartbeat");
-    }
-    else {
+    } else {
       break;
     }
 
@@ -307,15 +306,13 @@ func_25C0(var_00, var_01, var_02) {
 
     if(var_01 == "normal") {
       level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_short_boot_up_lr");
-    }
-    else {
+    } else {
       level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_boot_up_fast_lr");
     }
 
     if(var_02 == "clear_all") {
       level.player scripts\engine\utility::delaycall(0.45, ::clearclienttriggeraudiozone, 0.2);
-    }
-    else {
+    } else {
       level.player scripts\engine\utility::delaycall(0.45, ::_meth_82C0, var_02, 0.2);
     }
   }
@@ -342,15 +339,13 @@ func_25C2(var_00, var_01, var_02) {
 
   if(var_01 == "normal") {
     level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_short_boot_up_lr");
-  }
-  else {
+  } else {
     level.player scripts\engine\utility::delaycall(0.1, ::playsound, "plr_helmet_boot_up_fast_lr");
   }
 
   if(var_02 == "clear_all") {
     level.player scripts\engine\utility::delaycall(0.45, ::clearclienttriggeraudiozone, 0.2);
-  }
-  else {
+  } else {
     level.player scripts\engine\utility::delaycall(0.45, ::_meth_82C0, var_02, 0.2);
   }
 }

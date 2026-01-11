@@ -246,9 +246,9 @@ system_init() {
 
   thread stealth_flag_debug_print("_stealth_spotted");
 
-    //under stealth we have a logic struct and a behavior struct...the behavior struct is created and
-    //handled in the _stealth_behavior system OR in the designers own script
-    level._stealth = spawnStruct();
+  //under stealth we have a logic struct and a behavior struct...the behavior struct is created and
+  //handled in the _stealth_behavior system OR in the designers own script
+  level._stealth = spawnStruct();
   level._stealth.logic = spawnStruct();
   level._stealth.group = spawnStruct();
   level._stealth.group.flags = [];

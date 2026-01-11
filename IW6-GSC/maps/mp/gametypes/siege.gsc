@@ -736,8 +736,7 @@ isBeingCaptured(flag) {
 setWinner(team, reason) {
   if(team != "tie") {
     level.finalKillCam_winner = team;
-  }
-  else {
+  } else {
     level.finalKillCam_winner = "none";
   }
 
@@ -1013,18 +1012,15 @@ giveLastOnTeamWarning() {
 onTimeLimit() {
   if(isDefined(level.siegeGameInactive)) {
     level thread maps\mp\gametypes\_gamelogic::forceEnd();
-  }
-  else {
+  } else {
     alliesFlags = getFlagCount("allies");
     axisFlags = getFlagCount("axis");
 
     if(alliesFlags > axisFlags) {
       setWinner("allies", "time_limit_reached");
-    }
-    else if(axisFlags > alliesFlags) {
+    } else if(axisFlags > alliesFlags) {
       setWinner("axis", "time_limit_reached");
-    }
-    else {
+    } else {
       setWinner("tie", "time_limit_reached");
     }
   }
@@ -1142,8 +1138,7 @@ showCapturedBaseEffectToPlayer(team, player) {
   isMLG = player IsMLGSpectator();
   if(isMLG) {
     viewerTeam = player GetMLGSpectatorTeam();
-  }
-  else if(viewerTeam == "spectator") {
+  } else if(viewerTeam == "spectator") {
     viewerTeam = "allies";
   }
 
@@ -1309,8 +1304,7 @@ giveFlagCaptureXP(touchList) {
 getCapXPScale() {
   if(self.CPM < 4) {
     return 1;
-  }
-  else {
+  } else {
     return 0.25;
   }
 }

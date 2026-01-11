@@ -144,8 +144,7 @@ func_13AB0() {
     foreach(var_01 in level.players) {
       if(isai(var_01)) {
         continue;
-      }
-      else {
+      } else {
         if(var_01 scripts\mp\utility\game::isjuggernaut() && !(isDefined(var_1.isjuggernautlevelcustom) && var_1.isjuggernautlevelcustom)) {
           var_01 setclientomnvar("ui_juggernaut", 1);
           continue;

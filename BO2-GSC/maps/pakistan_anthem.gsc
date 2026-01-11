@@ -77,7 +77,7 @@ init_courtyard_ai() {
   }
 
   foreach(e_spawner in getEntArray("btr_guys", "script_noteworthy")) {
-  e_spawner add_spawn_function(::btr_scene_spawn_func);
+    e_spawner add_spawn_function(::btr_scene_spawn_func);
   }
 
   run_scene_first_frame("courtyard_btr_entrance");
@@ -110,8 +110,7 @@ courtyard_ai_behavior() {
 }
 
 stealth_init_spawn_func() {
-  if(isDefined(self.script_noteworthy)) {
-  }
+  if(isDefined(self.script_noteworthy)) {}
 }
 
 courtyard_logic() {
@@ -332,23 +331,17 @@ argus_enable() {
   foreach(ai_enemy in a_enemies) {
     if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_1") {
       addargus(ai_enemy, "soldier1");
-    }
-    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_2") {
+    } else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_2") {
       addargus(ai_enemy, "soldier2");
-    }
-    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_3") {
+    } else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_3") {
       addargus(ai_enemy, "soldier3");
-    }
-    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_4") {
+    } else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_4") {
       addargus(ai_enemy, "soldier4");
-    }
-    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_5") {
+    } else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_5") {
       addargus(ai_enemy, "soldier5");
-    }
-    else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_6") {
+    } else if(isDefined(ai_enemy.script_noteworthy) && ai_enemy.script_noteworthy == "photo_6") {
       addargus(ai_enemy, "soldier6");
-    }
-    else {
+    } else {
       addargus(ai_enemy, "soldier6");
     }
 
@@ -365,7 +358,7 @@ argus_disable() {
 
 setup_doors() {
   foreach(e_door in getEntArray("animated_door", "script_noteworthy")) {
-  getent(e_door.target, "targetname") linkto(e_door, "door_hinge_jnt");
+    getent(e_door.target, "targetname") linkto(e_door, "door_hinge_jnt");
   }
 
   run_scene_first_frame("rooftop_entrance_open");
@@ -380,7 +373,7 @@ setup_doors() {
 
 setup_lights() {
   foreach(m_spotlight in getEntArray("modern_spotlights", "targetname")) {
-  playFXOnTag(getfx("courtyard_spotlight"), m_spotlight, "tag_light");
+    playFXOnTag(getfx("courtyard_spotlight"), m_spotlight, "tag_light");
   }
 }
 
@@ -1101,8 +1094,7 @@ id_melee_guards_alerted() {
 
   if(get_ai_group_count("group_rooftop_melee")) {
     flag_set("alert_drones");
-  }
-  else {
+  } else {
     level.player setlowready(1);
     level.player set_ignoreme(1);
 
@@ -1601,8 +1593,7 @@ spotlight_detection() {
 surveillance_prone_hint() {
   if(!level.console && !self gamepadusedlast()) {
     screen_message_create(&"PAKISTAN_SHARED_HINT_PRONE_KEYBOARD");
-  }
-  else {
+  } else {
     screen_message_create(&"PAKISTAN_SHARED_HINT_PRONE");
   }
 
@@ -1736,7 +1727,7 @@ rooftop_meeting_scene_setup_think() {
   trigger_wait("tower_melee_prompt_trigger");
 
   foreach(ai_soldier in getEntArray("anthem_helipad_soldiers_ai", "targetname")) {
-  ai_soldier set_ignoreall(1);
+    ai_soldier set_ignoreall(1);
   }
 }
 

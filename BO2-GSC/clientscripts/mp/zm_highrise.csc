@@ -100,11 +100,9 @@ start_zombie_stuff() {
   clientscripts\mp\zombies\_zm_equip_springpad::init_animtree();
 }
 
-init_clientflag_variables() {
-}
+init_clientflag_variables() {}
 
-register_clientflag_callbacks() {
-}
+register_clientflag_callbacks() {}
 
 include_weapons() {
   include_weapon("knife_zm", 0);

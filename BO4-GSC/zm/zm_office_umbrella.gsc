@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_sq;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_office_umbrella;
 
 autoexec __init__system__() {
@@ -31,14 +30,14 @@ __main__() {
 }
 
 init_clientfield() {
-  clientfield::register("toplayer", "" + #"hash_f2d0b920043dbbd", 1, 1, "counter");
-  clientfield::register("world", "" + #"narrative_room", 1, 1, "int");
+  clientfield::register("toplayer", "" + # "hash_f2d0b920043dbbd", 1, 1, "counter");
+  clientfield::register("world", "" + # "narrative_room", 1, 1, "int");
 }
 
 init_quests() {
-  zm_sq::register(#"jump_scare", #"step_1", #"hash_3203b932029a4e0b", &jump_scare, &jump_scare_cleanup);
-  zm_sq::register(#"narrative_room", #"step_1", #"hash_64d6af5ddc324d26", &function_6f55d670, &function_13c87ace);
-  zm_sq::register(#"narrative_room", #"step_2", #"hash_3f567f217222e5b2", &narrative_room, &narrative_room_cleanup);
+  zm_sq::register(#"jump_scare", # "step_1", # "hash_3203b932029a4e0b", &jump_scare, &jump_scare_cleanup);
+  zm_sq::register(#"narrative_room", # "step_1", # "hash_64d6af5ddc324d26", &function_6f55d670, &function_13c87ace);
+  zm_sq::register(#"narrative_room", # "step_2", # "hash_3f567f217222e5b2", &narrative_room, &narrative_room_cleanup);
 }
 
 init_objects() {
@@ -62,7 +61,7 @@ jump_scare(var_a276c861) {
 
 track_player_eyes() {
   self notify(#"track_player_eyes");
-  self endon(#"disconnect", #"track_player_eyes");
+  self endon(#"disconnect", # "track_player_eyes");
   b_saw_the_wth = 0;
   var_616e76c5 = struct::get("sq_gl_scare", "targetname");
 
@@ -76,7 +75,7 @@ track_player_eyes() {
 
     if(n_time >= 25 && self adsbuttonpressed() && self zm_zonemgr::entity_in_zone("cage") && is_weapon_sniper(self getcurrentweapon()) && self zm_utility::is_player_looking_at(var_616e76c5.origin, 0.9975, 0, self)) {
       self zm_utility::do_player_general_vox("general", "scare_react", undefined, 100);
-      self clientfield::increment_to_player("" + #"hash_f2d0b920043dbbd", 1);
+      self clientfield::increment_to_player("" + # "hash_f2d0b920043dbbd", 1);
       j_time = 0;
 
       while(self adsbuttonpressed() && j_time < 5) {
@@ -118,7 +117,7 @@ narrative_room(var_a276c861) {
   level.var_ff3d8977 delete();
   level.ls_door rotateyaw(90, 1.6);
   level.ls_door connectpaths();
-  level clientfield::set("" + #"narrative_room", 1);
+  level clientfield::set("" + # "narrative_room", 1);
 }
 
 narrative_room_cleanup(var_a276c861, var_19e802fa) {}

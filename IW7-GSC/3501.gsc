@@ -98,8 +98,7 @@ decrementminijackalsincoming(var_00) {
 
   if(isplayer(var_00)) {
     var_01 = "ent_" + var_00 getentitynumber();
-  }
-  else {
+  } else {
     var_01 = var_00;
   }
 
@@ -598,8 +597,7 @@ func_B95E(var_00) {
 
     if(var_08 > 1.0) {
       var_08 = 1.0;
-    }
-    else if(var_08 < 0.0) {
+    } else if(var_08 < 0.0) {
       var_08 = 0.0;
     }
 
@@ -688,8 +686,7 @@ func_E066(var_00, var_01, var_02) {
 
   if(isDefined(var_02)) {
     scripts\engine\utility::waittill_any_in_array_or_timeout_no_endon_death(var_03, var_02);
-  }
-  else {
+  } else {
     scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_03);
   }
 

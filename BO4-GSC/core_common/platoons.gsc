@@ -5,7 +5,6 @@
 
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
-
 #namespace platoons;
 
 autoexec __init__system__() {
@@ -62,7 +61,7 @@ function_596bfb16() {
     if(game.everexisted[team]) {
       platoon = getteamplatoon(team);
 
-      if(platoon != #"none" && platoon != #"invalid" && level.platoons[platoon].var_9dd75dad == 0) {
+      if(platoon != # "none" && platoon != # "invalid" && level.platoons[platoon].var_9dd75dad == 0) {
         level.platoons[platoon].var_9dd75dad = gettime();
       }
     }

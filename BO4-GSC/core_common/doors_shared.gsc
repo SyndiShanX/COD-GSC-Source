@@ -14,7 +14,6 @@
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
-
 #namespace doors;
 
 class cdoor {
@@ -199,15 +198,15 @@ class cdoor {
     str_slide_dir = isDefined(var_3c6838bc) ? var_3c6838bc : var_f770af7e;
 
     switch (str_slide_dir) {
-      case #"x":
+      case # "x":
         v_offset = (n_slide_amount, 0, 0);
         var_3c6838bc = "X";
         break;
-      case #"y":
+      case # "y":
         v_offset = (0, n_slide_amount, 0);
         var_3c6838bc = "Y";
         break;
-      case #"z":
+      case # "z":
         v_offset = (0, 0, n_slide_amount);
         var_3c6838bc = "Z";
         break;
@@ -332,7 +331,7 @@ class cdoor {
   }
 
   function function_2190a0ee(b_reusable, var_23456fbb) {
-    m_e_door endon(#"hash_190d72393c0a8869", #"delete", #"gameobject_deleted");
+    m_e_door endon(#"hash_190d72393c0a8869", # "delete", # "gameobject_deleted");
 
     while(true) {
       if(var_23456fbb) {
@@ -614,13 +613,13 @@ class cdoor {
       }
 
       switch (var_3c6838bc) {
-        case #"x":
+        case # "x":
           v_offset = (var_42cf6fbd, 0, 0);
           break;
-        case #"y":
+        case # "y":
           v_offset = (0, var_42cf6fbd, 0);
           break;
-        case #"z":
+        case # "z":
           v_offset = (0, 0, var_42cf6fbd);
           break;
         default:
@@ -988,9 +987,7 @@ setup_doors_with_panel() {
     foreach(e_door in a_e_doors) {
       if(isDefined(e_door) && isDefined(e_door.c_door)) {
         door = e_door.c_door;
-        [
-          [door]
-        ] - > remove_door_trigger();
+        [[door]] - > remove_door_trigger();
 
         if(!var_c1157335) {
           if(isDefined(door.m_s_bundle.door_closes) && door.m_s_bundle.door_closes) {
@@ -1312,7 +1309,7 @@ door_open_update(c_door) {
     e_who = waitresult.activator;
     c_door.m_e_trigger_player = e_who;
 
-    if(c_door.var_a2f96f78.script_team !== #"any" && !c_door.m_e_trigger_player util::is_on_side(c_door.var_a2f96f78.script_team)) {
+    if(c_door.var_a2f96f78.script_team !== # "any" && !c_door.m_e_trigger_player util::is_on_side(c_door.var_a2f96f78.script_team)) {
       continue;
     }
 
@@ -1434,7 +1431,7 @@ door_update_lock_scripted(c_door) {
 
 function_dc98f943(c_door) {
   e_door = c_door.m_e_door;
-  e_door endon(#"door_cleared", #"delete");
+  e_door endon(#"door_cleared", # "delete");
   assert(isDefined(e_door), "<dev string:xeb>");
   e_door setCanDamage(0);
   waitresult = c_door waittill(#"set_destructible");
@@ -1644,9 +1641,7 @@ unlock(str_value, str_key = "targetname", b_do_open = 1) {
       ] - > unlock();
 
       if(b_do_open) {
-        [
-          [e_door.c_door]
-        ] - > open();
+        [[e_door.c_door]] - > open();
       }
     }
   }
@@ -1673,9 +1668,7 @@ lock(str_value, str_key = "targetname", b_do_close = 1) {
   foreach(e_door in a_e_doors) {
     if(isDefined(e_door.c_door)) {
       if(b_do_close) {
-        [
-          [e_door.c_door]
-        ] - > close();
+        [[e_door.c_door]] - > close();
       }
 
       [

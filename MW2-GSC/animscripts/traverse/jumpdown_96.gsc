@@ -10,8 +10,7 @@
 main() {
   if(self.type == "dog") {
     dog_jump_down(7, 0.8);
-  }
-  else {
+  } else {
     low_wall_human();
   }
 }

@@ -95,8 +95,7 @@ func_D66E() {
 
   if(var_3.func_9F46) {
     func_AB14(var_03);
-  }
-  else {
+  } else {
     func_E826(var_03);
   }
 
@@ -164,17 +163,13 @@ func_B31A(var_00) {
 func_32B6(var_00) {
   if(var_00 == "delay") {
     return 0.2;
-  }
-  else if(var_00 == "delay_range") {
+  } else if(var_00 == "delay_range") {
     return 0.5;
-  }
-  else if(var_00 == "burst") {
+  } else if(var_00 == "burst") {
     return 0.5;
-  }
-  else if(var_00 == "burst_fire_rate") {
+  } else if(var_00 == "burst_fire_rate") {
     return 0.1;
-  }
-  else {
+  } else {
     return 1.5;
   }
 }
@@ -185,36 +180,31 @@ func_32B7() {
 
   if(isDefined(self.script_delay_min)) {
     var_00 = self.script_delay_min;
-  }
-  else {
+  } else {
     var_00 = func_32B6("delay");
   }
 
   if(isDefined(self.script_delay_max)) {
     var_01 = self.script_delay_max - var_00;
-  }
-  else {
+  } else {
     var_01 = func_32B6("delay_range");
   }
 
   if(isDefined(self.func_ED26)) {
     var_02 = self.func_ED26;
-  }
-  else {
+  } else {
     var_02 = func_32B6("burst");
   }
 
   if(isDefined(self.func_ED25)) {
     var_03 = self.func_ED25 - var_02;
-  }
-  else {
+  } else {
     var_03 = func_32B6("burst_range");
   }
 
   if(isDefined(self.func_ED24)) {
     var_04 = self.func_ED24;
-  }
-  else {
+  } else {
     var_04 = func_32B6("burst_fire_rate");
   }
 
@@ -319,8 +309,7 @@ func_DC9D(var_00) {
   for(;;) {
     if(isplayer(var_00)) {
       var_0.origin = self.func_B319 getorigin();
-    }
-    else {
+    } else {
       var_0.origin = self.func_B319.origin;
     }
 
@@ -350,29 +339,25 @@ func_32B5(var_00, var_01) {
 
   if(isDefined(var_0.script_delay_min)) {
     var_02 = var_0.script_delay_min;
-  }
-  else {
+  } else {
     var_02 = func_32B6("delay");
   }
 
   if(isDefined(var_0.script_delay_max)) {
     var_03 = var_0.script_delay_max - var_02;
-  }
-  else {
+  } else {
     var_03 = func_32B6("delay_range");
   }
 
   if(isDefined(var_0.func_ED26)) {
     var_04 = var_0.func_ED26;
-  }
-  else {
+  } else {
     var_04 = func_32B6("burst");
   }
 
   if(isDefined(var_0.func_ED25)) {
     var_05 = var_0.func_ED25 - var_04;
-  }
-  else {
+  } else {
     var_05 = func_32B6("burst_range");
   }
 
@@ -447,8 +432,7 @@ func_140E() {
 
     if(var_2.size) {
       var_03 = scripts\sp\utility::func_78AB(var_0.origin, undefined, var_02);
-    }
-    else {
+    } else {
       var_03 = scripts\sp\utility::func_78AA(var_0.origin, undefined);
     }
 
@@ -568,8 +552,7 @@ func_D279() {
 func_10B5A() {
   if(level.player getstance() == "prone") {
     return (0, 0, 5);
-  }
-  else if(level.player getstance() == "crouch") {
+  } else if(level.player getstance() == "crouch") {
     return (0, 0, 25);
   }
 
@@ -775,8 +758,7 @@ func_BC9D(var_00, var_01, var_02) {
 
     if(isDefined(var_02)) {
       var_00 settargetentity(var_02);
-    }
-    else {
+    } else {
       var_00 cleartargetentity();
     }
   }
@@ -896,8 +878,7 @@ func_B6A9(var_00, var_01, var_02) {
 
   if(!isDefined(level.func_5CC3)) {
     var_04 = 1;
-  }
-  else {
+  } else {
     var_04 = 0;
   }
 
@@ -905,11 +886,9 @@ func_B6A9(var_00, var_01, var_02) {
     if(var_04) {
       if(isDefined(self.func_5CC6)) {
         self give_player_session_tokens(self.func_5041);
-      }
-      else if(var_00) {
+      } else if(var_00) {
         self give_player_session_tokens("auto_nonai");
-      }
-      else {
+      } else {
         self give_player_session_tokens("auto_ai");
       }
 
@@ -935,8 +914,7 @@ func_B6A9(var_00, var_01, var_02) {
 
     if(var_01 == "allies") {
       var_06 = "axis";
-    }
-    else {
+    } else {
       var_06 = "allies";
     }
 
@@ -967,8 +945,7 @@ func_B6A9(var_00, var_01, var_02) {
 
       if(var_00) {
         self give_player_session_tokens("manual");
-      }
-      else {
+      } else {
         self give_player_session_tokens("manual_ai");
       }
 
@@ -1352,8 +1329,7 @@ func_6C73(var_00) {
 
   if(var_2.func_9F46) {
     func_AB14(var_02);
-  }
-  else {
+  } else {
     func_CB35(var_02);
     func_E826(var_02);
   }
@@ -1501,8 +1477,7 @@ func_12A4E() {
 
   if(var_5.func_9F46) {
     func_AB14(var_05);
-  }
-  else {
+  } else {
     func_E826(var_05);
   }
 

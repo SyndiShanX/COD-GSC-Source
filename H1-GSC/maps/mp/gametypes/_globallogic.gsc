@@ -15,8 +15,7 @@ init() {
 
   if(getdvarint("virtualLobbyActive", 0)) {
     level.gametype = "vlobby";
-  }
-  else {
+  } else {
     level.gametype = tolower(getdvar("g_gametype"));
   }
 
@@ -51,8 +50,7 @@ init() {
 
   if(level.splitscreen) {
     precachestring(&"MP_ENDED_GAME");
-  }
-  else {
+  } else {
     precachestring(&"MP_HOST_ENDED_GAME");
   }
 

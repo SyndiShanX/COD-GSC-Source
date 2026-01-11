@@ -105,11 +105,11 @@ so_killspree_init() {
   // Remove unwanted weapons
   sentries = getEntArray("misc_turret", "classname");
   foreach(sentry in sentries) {
-  sentry Delete();
+    sentry Delete();
   }
   stingers = getEntArray("weapon_stinger", "classname");
   foreach(stinger in stingers) {
-  stinger Delete();
+    stinger Delete();
   }
 
   // Initialize Scoring
@@ -122,7 +122,7 @@ so_killspree_init() {
   level.points_base_flash = scale_value(10);
   level.points_combo_base = scale_value(0.25);
   foreach(player in level.players) {
-  player.points_combo_unused = 0;
+    player.points_combo_unused = 0;
   }
 
   level.points_max = level.points_counter;
@@ -160,11 +160,11 @@ so_killspree_init() {
   // Remove ladders entirely
   ladder_ents = getEntArray("inv_ladders", "script_noteworthy");
   foreach(ent in ladder_ents) {
-  ent Delete();
+    ent Delete();
   }
   ladder_ents = getEntArray("inv_ladders_pathblocker", "script_noteworthy");
   foreach(ent in ladder_ents) {
-  ent disconnectpaths();
+    ent disconnectpaths();
   }
 
   // Remove the Predator Control Unit
@@ -259,7 +259,7 @@ enable_kill_counter_hud() {
   level.pulse_requests_p1 = [];
   level.pulse_requests_p2 = [];
   foreach(player in level.players) {
-  player thread hud_splash_destroy();
+    player thread hud_splash_destroy();
   }
 
   array_thread(level.players, ::hud_create_kill_counter);

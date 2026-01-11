@@ -114,8 +114,7 @@ check_createfx_limit() {
   foreach(ent in level.createFXent) {
     if(is_createfx_type(ent, "fx")) {
       fx_count++;
-    }
-    else if(is_createfx_type(ent, "sound")) {
+    } else if(is_createfx_type(ent, "sound")) {
       sound_count++;
     }
   }
@@ -243,8 +242,7 @@ create_loopsound() {
   if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
     if(isDefined(self.looper)) {
       end_on = "death";
-    }
-    else {
+    } else {
       end_on = "stop_loop";
     }
   } else {
@@ -309,8 +307,7 @@ loopfxthread() {
 
     if(isDefined(self.fxStop)) {
       level waittill("stop fx" + self.fxStop);
-    }
-    else {
+    } else {
       return;
     }
 
@@ -320,8 +317,7 @@ loopfxthread() {
 
     if(isDefined(self.fxStart)) {
       level waittill("start fx" + self.fxStart);
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -489,11 +485,10 @@ setup_fx() {
   }
 
   if(isDefined(self.model)) {
-    if(self.model == "toilet") {
+    if(self.model == "toilet") {}
+    self thread burnville_paratrooper_hack();
+    return;
   }
-      self thread burnville_paratrooper_hack();
-      return;
-    }
 
   org = undefined;
   if(isDefined(self.target)) {
@@ -633,7 +628,7 @@ reactive_fx_thread() {
     ents = sort_reactive_ents(point, explosion_radius);
 
     foreach(i, ent in ents) {
-    ent thread play_reactive_fx(i);
+      ent thread play_reactive_fx(i);
     }
   }
 }

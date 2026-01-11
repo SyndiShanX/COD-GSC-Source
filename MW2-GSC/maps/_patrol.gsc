@@ -121,8 +121,7 @@ patrol(start_target) {
     //default - but nodes do - and that radius is 0 by default.
     if(isDefined(currentgoal.radius) && currentgoal.radius > 0) {
       self.goalradius = currentgoal.radius;
-    }
-    else {
+    } else {
       self.goalradius = 32;
     }
 

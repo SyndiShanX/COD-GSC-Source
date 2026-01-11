@@ -192,8 +192,7 @@ mason_movement_translation(m_player_rig) {
     if(level.woods_carry_disable_movement == 0) {
       if(level.woods_carry_is_crouched == 0) {
         n_speed = level.mason_carry_crouch_speed;
-      }
-      else {
+      } else {
         n_speed = n_movement_crouch_speed;
       }
 
@@ -308,8 +307,7 @@ mason_movement_translation(m_player_rig) {
         if(level.woods_carry_is_moving) {
           if(level.woods_carry_is_crouched == 0) {
             str_anim_name = "mason_carry_idle";
-          }
-          else {
+          } else {
             str_anim_name = "mason_carry_crouch_idle";
           }
 

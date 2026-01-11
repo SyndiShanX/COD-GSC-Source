@@ -55,8 +55,7 @@ vsmgr_activate(type, name, player, opt_param_1, opt_param_2) {
 
   if(isDefined(state.lerp_thread)) {
     state thread lerp_thread_wrapper(state.lerp_thread, opt_param_1, opt_param_2);
-  }
-  else {
+  } else {
     players = getplayers();
 
     for(player_index = 0; player_index < players.size; player_index++) {
@@ -397,8 +396,7 @@ activate_per_player(type, name, player, opt_param_1, opt_param_2) {
 
   if(isDefined(state.lerp_thread)) {
     state thread lerp_thread_per_player_wrapper(state.lerp_thread, player, opt_param_1, opt_param_2);
-  }
-  else {
+  } else {
     state vsmgr_set_state_active(player, 1);
   }
 }

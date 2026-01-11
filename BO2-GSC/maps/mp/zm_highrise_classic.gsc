@@ -237,8 +237,7 @@ squashed_death_init(kill_if_falling) {
         if(!(isDefined(who.has_been_damaged_by_player) && who.has_been_damaged_by_player)) {
           if(isDefined(who.is_leaper) && who.is_leaper) {
             who thread maps\mp\zombies\_zm_ai_leaper::leaper_cleanup();
-          }
-          else {
+          } else {
             level.zombie_total++;
           }
         }
@@ -865,8 +864,7 @@ escape_pod_state_run() {
 
     if(shouldwait) {
       wait(getanimlength(self.state_anim) - 0.05);
-    }
-    else {
+    } else {
       wait 0.05;
     }
   }

@@ -544,8 +544,7 @@ initMoveStartStopTransitions() {
         // get exit dist only to code_move
         if(animHasNotetrack(anim.coverExit[trans][i], "code_move")) {
           codeMoveTime = getNotetrackTimes(anim.coverExit[trans][i], "code_move")[0];
-        }
-        else {
+        } else {
           codeMoveTime = 1;
         }
 
@@ -656,7 +655,7 @@ initMoveStartStopTransitions() {
 
   setDvarIfUninitialized("scr_findsplittimes", "0");
 
-    splitArrivals = [];
+  splitArrivals = [];
   splitArrivals["left"] = 1;
   splitArrivals["left_crouch"] = 1;
   splitArrivals["left_crouch_cqb"] = 1;
@@ -688,7 +687,7 @@ initMoveStartStopTransitions() {
 
   //thread checkApproachAngles( transTypes );
 
-    anim.arrivalEndStance["left"] = "stand";
+  anim.arrivalEndStance["left"] = "stand";
   anim.arrivalEndStance["left_cqb"] = "stand";
   anim.arrivalEndStance["right"] = "stand";
   anim.arrivalEndStance["right_cqb"] = "stand";
@@ -830,8 +829,7 @@ checkApproachAngles(transTypes) {
       idealAdd = 0;
       if(trans == "left" || trans == "left_crouch") {
         idealAdd = 90;
-      }
-      else if(trans == "right" || trans == "right_crouch") {
+      } else if(trans == "right" || trans == "right_crouch") {
         idealAdd = -90;
       }
 
@@ -852,8 +850,7 @@ checkApproachAngles(transTypes) {
       idealAdd = 0;
       if(trans == "left" || trans == "left_crouch") {
         idealAdd = 90;
-      }
-      else if(trans == "right" || trans == "right_crouch") {
+      } else if(trans == "right" || trans == "right_crouch") {
         idealAdd = -90;
       }
 
@@ -868,19 +865,19 @@ checkApproachAngles(transTypes) {
   }
 }
 
-  getExitSplitTime(approachType, dir) {
-    return anim.coverExitSplit[approachType][dir];
+getExitSplitTime(approachType, dir) {
+  return anim.coverExitSplit[approachType][dir];
 
-    /*exitAnim = anim.coverExit[ approachType ][ dir ];
-    exitAlignTimes = getNotetrackTimes( exitAnim, "exit_align" );
-	
-    assert( exitAlignTimes.size == 1 );
-    if( exitAlignTimes.size == 0 ) {
-    	return .5;
-    }
-	
-    return exitAlignTimes[0];*/
+  /*exitAnim = anim.coverExit[ approachType ][ dir ];
+  exitAlignTimes = getNotetrackTimes( exitAnim, "exit_align" );
+  	
+  assert( exitAlignTimes.size == 1 );
+  if( exitAlignTimes.size == 0 ) {
+  	return .5;
   }
+  	
+  return exitAlignTimes[0];*/
+}
 
 getTransSplitTime(approachType, dir) {
   return anim.coverTransSplit[approachType][dir];

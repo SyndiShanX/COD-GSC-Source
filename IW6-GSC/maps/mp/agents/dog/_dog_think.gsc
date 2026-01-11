@@ -235,8 +235,7 @@ UpdateMoveState() {
     if(isDefined(self.lastBadPathTime) && (GetTime() - self.lastBadPathTime < 3000)) {
       if(Distance2DSquared(attackPoint, self.lastBadPathGoal) < 16) {
         bLastBadMeleeTarget = true;
-      }
-      else if(isDefined(self.lastBadPathMoveState) && self.lastBadPathMoveState == "pursuit" && Distance2DSquared(self.lastBadPathUltimateGoal, self.enemy.origin) < 16) {
+      } else if(isDefined(self.lastBadPathMoveState) && self.lastBadPathMoveState == "pursuit" && Distance2DSquared(self.lastBadPathUltimateGoal, self.enemy.origin) < 16) {
         bLastBadMeleeTarget = true;
       }
     }
@@ -346,8 +345,7 @@ WaitForBadPath() {
     self.lastBadPathMoveState = self.moveState;
     if(self.moveState == "follow" && isDefined(self.owner)) {
       self.lastBadPathUltimateGoal = self.owner.origin;
-    }
-    else if(self.moveState == "pursuit" && isDefined(self.enemy)) {
+    } else if(self.moveState == "pursuit" && isDefined(self.enemy)) {
       self.lastBadPathUltimateGoal = self.enemy.origin;
     }
   }
@@ -373,8 +371,7 @@ GetFollowMoveMode(currentMoveMode) {
     if(currentMoveMode == "run" || currentMoveMode == "sprint") {
       if(distSq < cRunToFastWalkDistSq) {
         return "fastwalk";
-      }
-      else if(currentMoveMode == "sprint") {
+      } else if(currentMoveMode == "sprint") {
         return "run";
       }
     } else if(currentMoveMode == "fastwalk") {
@@ -509,8 +506,7 @@ findPointNearOwner() {
     ownerToLinkDist = Length(ownerToLink);
     if(ownerToLinkDist >= self.preferredOffsetFromOwner) {
       score += distanceWeight;
-    }
-    else if(ownerToLinkDist < self.minOffsetFromOwner) {
+    } else if(ownerToLinkDist < self.minOffsetFromOwner) {
       scale = 1 - (self.minOffsetFromOwner - ownerToLinkDist) / self.minOffsetFromOwner;
       score += distanceWeight * scale * scale;
     } else
@@ -725,8 +721,7 @@ playPanting(state) {
     self.lastPantPlayedTime = GetTime();
     if(self.moveMode == "run" || self.moveMode == "sprint") {
       self PlaySoundOnMovingEnt(ter_op(self.bIsWolf, "anml_wolf_pants_mp_fast", "anml_dog_pants_mp_fast"));
-    }
-    else {
+    } else {
       self PlaySoundOnMovingEnt(ter_op(self.bIsWolf, "anml_wolf_pants_mp_med", "anml_dog_pants_mp_med"));
     }
 
@@ -965,8 +960,7 @@ DoDebugMode() {
 
   if(isDefined(self.owner) && IsPlayer(self.owner)) {
     player = self.owner;
-  }
-  else {
+  } else {
     player = level.players[0];
   }
 

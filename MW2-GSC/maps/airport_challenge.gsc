@@ -63,8 +63,7 @@ team_init_ch() {
 switch_teams() {
   if(self.team == "axis") {
     self.team = "allies";
-  }
-  else {
+  } else {
     self.team = "axis";
   }
 }

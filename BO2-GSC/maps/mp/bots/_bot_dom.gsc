@@ -45,8 +45,7 @@ bot_dom_think() {
   }
   if(!bot_has_flag_goal(flag) && !self bot_goal_is_enemy_flag()) {
     self bot_move_to_flag(flag);
-  }
-  else {
+  } else {
     if(!dom_is_game_start()) {
       self bot_flag_grenade(flag);
     }
@@ -60,8 +59,7 @@ bot_dom_think() {
 bot_move_to_flag(flag) {
   if(level.script == "mp_frostbite") {
     nodes = getnodesinradius(flag.origin, flag.radius, 0, 32);
-  }
-  else {
+  } else {
     nodes = getnodesinradius(flag.origin, flag.radius, 0);
   }
 
@@ -157,8 +155,7 @@ bot_capture_flag(flag) {
   if(flag getflagteam() != self.team) {
     if(self getstance() == "prone") {
       self addgoal(self.origin, 24, 4, "dom_flag");
-    }
-    else {
+    } else {
       self addgoal(self.origin, 24, 3, "dom_flag");
     }
 
@@ -353,16 +350,14 @@ dom_get_best_flag(team) {
   if(distancesquared(self.origin, flag1.origin) < distancesquared(self.origin, flag2.origin)) {
     if(!offchance) {
       return flag1;
-    }
-    else {
+    } else {
       return flag2;
     }
   }
 
   if(!offchance) {
     return flag2;
-  }
-  else {
+  } else {
     return flag1;
   }
 }

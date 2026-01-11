@@ -1423,9 +1423,7 @@ func_107F3(param_00) {
       break;
   }
 
-  [
-    [level.var_115BE[self.team]]
-  ]();
+  [[level.var_115BE[self.team]]]();
   if(isDefined(level.var_12BA5[self.unittype])) {
     self thread[[level.var_12BA5[self.unittype]]]();
   }

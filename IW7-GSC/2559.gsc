@@ -9,9 +9,7 @@ func_006E(param_00, param_01, param_02, param_03) {
   var_05 = undefined;
   var_06 = level.var_119E[param_00];
   var_07 = var_06.var_1581[param_01];
-  var_04 = [
-    [var_07]
-  ](param_02);
+  var_04 = [[var_07]](param_02);
   if(!isDefined(var_04)) {
     var_04 = 3;
   }

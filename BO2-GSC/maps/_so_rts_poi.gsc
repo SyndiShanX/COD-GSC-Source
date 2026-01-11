@@ -163,7 +163,7 @@ poicaptured(entity, capteam) {
     if(isDefined(poi.fakevehicle)) {
       if(isarray(poi.fakevehicle)) {
         foreach(fake in poi.fakevehicle) {
-        fake delete();
+          fake delete();
         }
       } else
         poi.fakevehicle delete();
@@ -198,7 +198,7 @@ del_poi(poi) {
   if(isDefined(poi.fakevehicle)) {
     if(isarray(poi.fakevehicle)) {
       foreach(fake in poi.fakevehicle) {
-      fake delete();
+        fake delete();
       }
     } else
       poi.fakevehicle delete();
@@ -304,11 +304,9 @@ add_poi(ref, entity, team, ui, ignore, useenthp, ui_note) {
 
       if(isDefined(ui_note)) {
         luinotifyevent(ui_note, 1, poi.entity getentitynumber());
-      }
-      else if(poi.entity.team == "axis") {
+      } else if(poi.entity.team == "axis") {
         luinotifyevent(&"rts_secure_poi", 1, poi.entity getentitynumber());
-      }
-      else if(poi.entity.team == "allies") {
+      } else if(poi.entity.team == "allies") {
         luinotifyevent(&"rts_defend_poi", 1, poi.entity getentitynumber());
       }
     }
@@ -382,11 +380,9 @@ claimpoi(poi, team) {
 
   if(team == "axis") {
     poi.dominate_weight = poi.capture_time * -1;
-  }
-  else if(team == "allies") {
+  } else if(team == "allies") {
     poi.dominate_weight = poi.capture_time;
-  }
-  else {
+  } else {
     poi.dominate_weight = 0;
   }
 
@@ -426,8 +422,7 @@ poi_setobjectivenumber(ref, num, compassicon) {
 
     if(isDefined(poi.trigger)) {
       objective_size(poi.objectivenum, poi.trigger getentitynumber());
-    }
-    else {
+    } else {
       objective_size(poi.objectivenum, poi.entity getentitynumber());
     }
 
@@ -450,8 +445,7 @@ poi_addobjective(poi) {
 
     if(isDefined(poi.trigger)) {
       objective_size(poi.objectivenum, poi.trigger getentitynumber());
-    }
-    else {
+    } else {
       objective_size(poi.objectivenum, poi.entity getentitynumber());
     }
 
@@ -504,8 +498,7 @@ poi_deathwatch(poi) {
 
   if(poi.team == "allies") {
     capteam = "axis";
-  }
-  else {
+  } else {
     capteam = "allies";
   }
 
@@ -526,8 +519,7 @@ poi_deathwatch(poi) {
 
     if(health < 0) {
       health = 0;
-    }
-    else {
+    } else {
       health = int(health / max_health * 255);
     }
 
@@ -561,8 +553,7 @@ poi_dominationwatch(poi) {
     foreach(ai in aitouchers) {
       if(ai.team == "allies") {
         poi.dominate_weight = poi.dominate_weight + 1;
-      }
-      else {
+      } else {
         poi.dominate_weight = poi.dominate_weight - 1;
       }
 
@@ -595,8 +586,7 @@ poi_dominationwatch(poi) {
 ai_can_plantintruder(poi, ai) {
   if(poi.team == "allies") {
     capteam = "axis";
-  }
-  else {
+  } else {
     capteam = "allies";
   }
 
@@ -655,15 +645,13 @@ poi_capturewatch(poi) {
 
   if(poi.team == "allies") {
     capteam = "axis";
-  }
-  else {
+  } else {
     capteam = "allies";
   }
 
   if(isDefined(poi.alttrig)) {
     poi.trigger = getent(poi.alttrig, "targetname");
-  }
-  else {
+  } else {
     poi.trigger = spawn("trigger_radius", poi.entity.origin, 0, isDefined(poi.entity.radius) ? poi.entity.radius : level.rts.poiradius, 72);
   }
 
@@ -673,8 +661,7 @@ poi_capturewatch(poi) {
 
   if(isDefined(poi.alttrig)) {
     poi.intruder_trigger = getent(poi.alttrig, "targetname");
-  }
-  else {
+  } else {
     poi.intruder_trigger = spawn("trigger_radius", poi.entity.origin, 0, isDefined(poi.entity.radius) ? poi.entity.radius : level.rts.poiradius / 2, 128);
   }
 
@@ -691,8 +678,7 @@ poi_capturewatch(poi) {
     if(networkintruders.size > 0) {
       if(capteam == "allies") {
         poi.dominate_weight = poi.dominate_weight + 1;
-      }
-      else {
+      } else {
         poi.dominate_weight = poi.dominate_weight - 1;
       }
 
@@ -769,8 +755,7 @@ poi_capturewatch(poi) {
 
       if(!is_true(poi.reverse_timer)) {
         val = maps\_so_rts_support::make_gpr_opcode(2) + ((time_required_to_dominate2x << 8) + int(progress * time_required_to_dominate2x));
-      }
-      else {
+      } else {
         progress = 1.0 - progress;
         val = maps\_so_rts_support::make_gpr_opcode(2) + ((time_required_to_dominate2x << 8) + int(progress * time_required_to_dominate2x));
       }
@@ -778,7 +763,7 @@ poi_capturewatch(poi) {
       poi.entity thread maps\_so_rts_support::set_gpr(val);
 
       foreach(unit in networkintruders) {
-      unit thread maps\_so_rts_support::set_gpr(val);
+        unit thread maps\_so_rts_support::set_gpr(val);
       }
     }
 
@@ -796,7 +781,7 @@ poi_capturewatch(poi) {
       luinotifyevent(&"rts_captured_poi", 1, poi.entity getentitynumber());
 
       foreach(unit in networkintruders) {
-      unit dodamage(10000, unit.origin, unit);
+        unit dodamage(10000, unit.origin, unit);
       }
 
       maps\_so_rts_event::trigger_event(poi.intruder_prefix + "_success_" + capteam);
@@ -819,7 +804,7 @@ poi_capturewatch(poi) {
       luinotifyevent(&"rts_captured_poi", 1, poi.entity getentitynumber());
 
       foreach(unit in networkintruders) {
-      unit dodamage(10000, unit.origin, unit);
+        unit dodamage(10000, unit.origin, unit);
       }
 
       level thread poicaptured(poi.entity, capteam);
@@ -897,12 +882,10 @@ poithink(poi) {
   else if(poi.capture_time > 0 && poi.canbe_retaken == 0) {
     if(is_true(poi.need_device)) {
       level thread poi_capturewatch(poi);
-    }
-    else {
+    } else {
       level thread poi_watch(poi);
     }
-  } else {
-  }
+  } else {}
 }
 
 getclosestpoi(myorigin, myteam, threshsq) {
@@ -967,8 +950,7 @@ watchnetworkintruder(poi) {
 
   if(poi.team == "allies") {
     capteam = "axis";
-  }
-  else {
+  } else {
     capteam = "allies";
   }
 

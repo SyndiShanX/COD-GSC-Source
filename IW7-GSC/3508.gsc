@@ -84,8 +84,7 @@ onbeginnewmode(var_00, var_01, var_02, var_03) {
   for(;;) {
     if(isDefined(var_03) && var_03 == 1 && !self isonladder() && self isonground() && !self ismantling()) {
       var_04 = "placePlaceable";
-    }
-    else {
+    } else {
       var_04 = scripts\engine\utility::waittill_any_return("placePlaceable", "cancelPlaceable", "force_cancel_placement");
     }
 
@@ -157,8 +156,7 @@ onplaced(var_00) {
   if(isDefined(var_1.func_8C79)) {
     if(level.teambased) {
       scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, var_1.func_8C79));
-    }
-    else {
+    } else {
       scripts\mp\entityheadicons::setplayerheadicon(var_02, (0, 0, var_1.func_8C79));
     }
   }
@@ -242,8 +240,7 @@ updateplacement(var_00, var_01) {
 
     if(isDefined(var_6["entity"])) {
       self.moving_platform = var_6["entity"];
-    }
-    else {
+    } else {
       self.moving_platform = undefined;
     }
 
@@ -275,8 +272,7 @@ deactivate(var_00) {
 hideheadicons() {
   if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
   }
 }
@@ -347,8 +343,7 @@ oncarrierdeath(var_00, var_01) {
 
   if(self.canbeplaced) {
     thread onplaced(var_00);
-  }
-  else {
+  } else {
     oncancel(var_00);
   }
 }
@@ -369,8 +364,7 @@ ongameended(var_00) {
 cleanup(var_00) {
   if(isDefined(self.isplaced)) {
     self notify("death");
-  }
-  else {
+  } else {
     oncancel(var_00);
   }
 }

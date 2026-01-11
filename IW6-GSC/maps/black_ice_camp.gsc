@@ -282,11 +282,11 @@ bc_end() {
   level._bravo[1].launcher = level.bravo2_ascend_launcher;
 
   foreach(var_4, var_3 in level._allies) {
-  var_3 thread maps\black_ice_ascend::runin_to_ascend(var_1, "flag_ascend_ready_alpha_" + maps\_utility::string(var_4));
+    var_3 thread maps\black_ice_ascend::runin_to_ascend(var_1, "flag_ascend_ready_alpha_" + maps\_utility::string(var_4));
   }
 
   foreach(var_4, var_6 in level._bravo) {
-  var_6 thread maps\black_ice_ascend::runin_to_ascend(var_1, "flag_ascend_ready_bravo_" + maps\_utility::string(var_4));
+    var_6 thread maps\black_ice_ascend::runin_to_ascend(var_1, "flag_ascend_ready_bravo_" + maps\_utility::string(var_4));
   }
 
   common_scripts\utility::flag_wait_all("flag_ascend_ready_alpha_0", "flag_ascend_ready_alpha_1");
@@ -457,8 +457,7 @@ opfor_run() {
 
     if(self.script_parameters == "camp_pain_short_1") {
       var_1 = 1;
-    }
-    else if(self.script_parameters == "camp_pain_tumble") {
+    } else if(self.script_parameters == "camp_pain_tumble") {
       self.ragdoll_immediate = 1;
     }
 
@@ -472,8 +471,7 @@ opfor_run() {
 
     if(self.script_parameters == "camp_pain_dead") {
       self kill();
-    }
-    else if(self.script_parameters == "camp_pain_tumble") {
+    } else if(self.script_parameters == "camp_pain_tumble") {
       self.ragdoll_immediate = undefined;
     }
   }
@@ -714,14 +712,14 @@ spotlight_motion(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
       if(var_12) {
         foreach(var_14 in var_11) {
-        var_4 = common_scripts\utility::array_remove(var_4, var_14);
+          var_4 = common_scripts\utility::array_remove(var_4, var_14);
         }
       } else {
         var_19 = 3;
 
         if(var_4.size > var_19) {
           foreach(var_14 in var_4) {
-          var_14.dist2d = distance2d(var_10.origin, var_14.origin);
+            var_14.dist2d = distance2d(var_10.origin, var_14.origin);
           }
 
           var_4 = common_scripts\utility::array_sort_by_handler(var_4, ::target_dist_compare);
@@ -739,7 +737,7 @@ spotlight_motion(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     var_4[var_4.size] = var_10;
 
     foreach(var_14 in var_11) {
-    var_4[var_4.size] = var_14;
+      var_4[var_4.size] = var_14;
     }
 
     wait(level.timestep);
@@ -802,7 +800,7 @@ camp_primary_light_switch() {
   }
 
   foreach(var_2 in var_0) {
-  var_2 setlightintensity(0);
+    var_2 setlightintensity(0);
   }
 
   var_4 = getEntArray("light_camp_tent1_spot", "targetname");

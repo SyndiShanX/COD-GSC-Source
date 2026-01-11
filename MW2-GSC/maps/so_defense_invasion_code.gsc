@@ -1557,7 +1557,7 @@ hud_display_wave(title_text, timer) {
   wait timer - (list.size * 1);
 
   foreach(hudelem in hudelems) {
-  hudelem Destroy();
+    hudelem Destroy();
   }
 }
 
@@ -1577,7 +1577,7 @@ hud_display_enemies_active(enemy_title, enemy_total, enemy_death) {
   level.hud_display_enemies++;
 
   foreach(player in level.players) {
-  player thread hud_display_enemies_active_player(enemy_title, enemy_total, enemy_death);
+    player thread hud_display_enemies_active_player(enemy_title, enemy_total, enemy_death);
   }
 }
 

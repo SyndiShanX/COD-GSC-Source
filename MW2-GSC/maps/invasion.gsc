@@ -1165,7 +1165,7 @@ handler_crash() {
 
   bank_nates_attackers = getEntArray("bank_nates_attackers", "targetname");
   foreach(spawner in bank_nates_attackers) {
-  guy = spawner spawn_ai();
+    guy = spawner spawn_ai();
   }
 
   flag_wait("crash_objective");
@@ -1347,7 +1347,7 @@ handler_crash_to_roof() {
 
   enemies = getaiarray("axis");
   foreach(guy in enemies) {
-  guy thread rush_restaurant_enemies_setup();
+    guy thread rush_restaurant_enemies_setup();
   }
 
   level.truck_group_enemies_count_lives = 0;
@@ -1487,7 +1487,7 @@ handler_roof_to_diner() {
 
   friendlies = getaiarray("allies");
   foreach(friend in friendlies) {
-  friend cleargoalvolume();
+    friend cleargoalvolume();
   }
 
   thread friendlies_try_to_get_off_roof();
@@ -1560,7 +1560,7 @@ handler_diner_to_burgertown() {
   redshirts_desired = 3;
   level.redshirts = redshirts_respawn(redshirts_desired);
   foreach(redshirt in level.redshirts) {
-  redshirt thread smart_barney("player_in_burgertown", BT_org, BT_goal_volume);
+    redshirt thread smart_barney("player_in_burgertown", BT_org, BT_goal_volume);
   }
 
   flag_set("move_president_to_prep");
@@ -1619,7 +1619,7 @@ handler_vip_escort() {
   redshirts_desired = 3;
   level.redshirts = redshirts_respawn(redshirts_desired);
   foreach(redshirt in level.redshirts) {
-  redshirt thread smart_barney_on_raptor(end_goal, end_volume);
+    redshirt thread smart_barney_on_raptor(end_goal, end_volume);
   }
 
   //level.player waittill_entity_in_range( level.wells, 400 );
@@ -1944,12 +1944,10 @@ stinger_hint() {
     if(weap == "stinger") {
       if(level.player playerads() == 1.0) {
         return;
-      }
-      else {
+      } else {
         if(is_command_bound("+toggleads_throw")) {
           display_hint_timeout("hint_toggle_ads_with_stinger", 5);
-        }
-        else {
+        } else {
           display_hint_timeout("hint_ads_with_stinger", 5);
         }
       }
@@ -1962,8 +1960,7 @@ should_break_ads_with_stinger() {
   if(weap == "stinger") {
     if(level.player playerads() == 1.0) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   } else {
@@ -2037,7 +2034,7 @@ friendlies_enter_humvees(humvees) {
   while(humvees_left) {
     new_guys = spawn_humvee_boarders();
     foreach(guy in new_guys) {
-    thread guy_runtovehicle_load(guy, humvees[humvees_left - 1]);
+      thread guy_runtovehicle_load(guy, humvees[humvees_left - 1]);
     }
     humvees_left--;
     wait 3;
@@ -2231,7 +2228,7 @@ spawn_nates_defenders() {
   }
   nates_defenders = getEntArray("nates_defenders", "script_noteworthy");
   foreach(guy in nates_defenders) {
-  guy spawn_ai();
+    guy spawn_ai();
   }
 }
 
@@ -2239,7 +2236,7 @@ spawn_nates_attackers_in_alley() {
   flag_wait("spawn_nates_attackers_in_alley");
   alley_nates_attackers = getEntArray("alley_nates_attackers", "script_noteworthy");
   foreach(guy in alley_nates_attackers) {
-  guy spawn_ai();
+    guy spawn_ai();
   }
 }
 
@@ -2406,9 +2403,9 @@ dialog_get_stinger() {
     needs_stinger = true;
     weapons = level.player GetWeaponsListAll();
     foreach(weap in weapons) {
-    if(weap == "stinger")
+      if(weap == "stinger")
     }
-      needs_stinger = false;
+    needs_stinger = false;
 
     if(!needs_stinger) {
       wait 3;
@@ -2778,8 +2775,7 @@ smart_roaming_barney() {
   self.useChokePoints = false;
   if(!isDefined(self.big_goal)) {
     self.goalradius = 500;
-  }
-  else {
+  } else {
     self.goalradius = 1000;
   }
   self.fixednode = false;
@@ -2979,9 +2975,9 @@ spawn_enemy_group() {
   if(!isDefined(level.uavTargetPos)) {
     if(level.num_of_enemy_forces_spawned < 3) {
       foreach(group in level.enemy_groups) {
-      if(group.target == selection)
+        if(group.target == selection)
       }
-        level.uavTargetPos = group.origin;
+      level.uavTargetPos = group.origin;
     }
   }
 }
@@ -3202,7 +3198,7 @@ remove_tvs() {
   // delete destructible TVs where the explosion takes place
   destructible_tvs = getEntArray("exploder_tv_333", "script_noteworthy");
   foreach(tvi, tv in destructible_tvs) {
-  tv Delete();
+    tv Delete();
   }
 }
 
@@ -3239,8 +3235,7 @@ setup_count_predator_infantry_kills() {
 
   if(!isDefined(level.enemies_killed)) {
     level.enemies_killed = 1;
-  }
-  else {
+  } else {
     level.enemies_killed++;
   }
 }
@@ -3963,8 +3958,7 @@ spawn_rpg_redshirts() {
 
     if(isalive(guy)) {
       guy waittill("death");
-    }
-    else {
+    } else {
       wait 1;
     }
   }
@@ -4006,8 +4000,7 @@ spawn_redshirts(desired_num) {
   }
   if(flag("president_in_BT_meat_locker")) {
     group = "redshirt_spawn_group_BT";
-  }
-  else {
+  } else {
     group = "redshirt_spawn_group";
   }
 
@@ -4063,7 +4056,7 @@ taco_goes_to_BT() {
   level.redshirts = redshirts_respawn(redshirts_desired);
 
   foreach(redshirt in level.redshirts) {
-  redshirt thread smart_barney("player_in_burgertown", BT_org, BT_goal_volume);
+    redshirt thread smart_barney("player_in_burgertown", BT_org, BT_goal_volume);
   }
 }
 
@@ -4079,7 +4072,7 @@ taco_goes_to_diner() {
   level.taco thread smart_barney("player_in_diner", diner_org, diner_goal_volume);
   level.redshirts = spawn_redshirts(3);
   foreach(redshirt in level.redshirts) {
-  redshirt thread smart_barney("player_in_diner", diner_org, diner_goal_volume);
+    redshirt thread smart_barney("player_in_diner", diner_org, diner_goal_volume);
   }
 }
 
@@ -4471,8 +4464,7 @@ sentry_is_on_roof() {
   roof_volume = getent("roof_volume", "targetname");
   if(level.obj_sentry isTouching(roof_volume)) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -4680,8 +4672,7 @@ should_break_get_smoke() {
   clipCount = level.player GetWeaponAmmoStock("smoke_grenade_american");
   if(clipCount < 1) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -4689,8 +4680,7 @@ should_break_get_smoke() {
 should_break_throw_smoke() {
   if(flag("threw_smoke")) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -4821,8 +4811,7 @@ flag_if_close_to_btr(tracker, smoke_position) {
 
   if(distance(tracker.origin, smoke_position) < 400) {
     thread dialog_goto_alley();
-  }
-  else {
+  } else {
     level notify("btr_smoke_too_far");
   }
 }
@@ -4847,8 +4836,7 @@ hint_if_smoke_too_far() {
 should_break_smoke_too_far() {
   if(flag("btr_smoke_starting")) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -4903,8 +4891,7 @@ truck_group_enemies_setup_retreat() {
 
   if(isDefined(self.target)) {
     self setgoalpos(getent(self.target, "targetname").origin);
-  }
-  else {
+  } else {
     self setgoalpos(getent("truck_guy_retreat_goal", "targetname").origin);
   }
 
@@ -5053,8 +5040,7 @@ aim_predator_drone_at_btrs() {
 
     if(bmps.size > 1) {
       level.uavTargetEnt = (get_closest_to_player_view(bmps));
-    }
-    else {
+    } else {
       level.uavTargetEnt = bmps[0];
     }
   }
@@ -5461,7 +5447,7 @@ move_hunters_to_new_goal(closest_goal) {
   //the script has received the "death" notify but after the AI has died.
 
   foreach(enemy in level.hunter_enemies) {
-  enemy setgoalpos(closest_goal.origin);
+    enemy setgoalpos(closest_goal.origin);
   }
 }
 
@@ -6294,7 +6280,7 @@ setup_house_destroyer() {
   	t = randomint( targets.size );
   	self setturrettargetent( targets[ t ].pos );
   	self waittill( "turret_on_target" );
-	
+  	
   	house_destroyer_fire( targets[ t ].pos.origin );
   		
   	wait( .7 );
@@ -6310,7 +6296,7 @@ house_destroyer_shoot_agro_player() {
     if(within_fov(self.origin, self.angles, level.player.origin, level.cosine["60"])) {
       if(SightTracePassed((self.origin + (0, 0, 64)), level.player getEye(), false, self))
     }
-        break;
+    break;
     wait 1;
   }
 
@@ -6627,7 +6613,7 @@ setObjectiveLocation_nearest_enemy(objName) {
     } else {
       enemy_positions = [];
       foreach(guy in enemies) {
-      enemy_positions[enemy_positions.size] = guy.origin;
+        enemy_positions[enemy_positions.size] = guy.origin;
       }
       level.obj_pos = AveragePoint(enemy_positions);
       objective_position(objective.id, level.obj_pos + (0, 0, 70));
@@ -6648,8 +6634,7 @@ setObjectiveWaypoint(objName, text) {
   objective = level.objectives[objName];
   if(isDefined(text)) {
     Objective_SetPointerTextOverride(objective.id, text);
-  }
-  else {
+  } else {
     Objective_SetPointerTextOverride(objective.id);
   }
 }
@@ -6678,8 +6663,7 @@ setObjectiveRemaining(objName, objString, objRemaining) {
 
   if(!objRemaining) {
     objective_string(objective.id, objString);
-  }
-  else {
+  } else {
     objective_string(objective.id, objString, objRemaining);
   }
 }
@@ -6773,11 +6757,9 @@ UAVRigAiming() {
   for(;;) {
     if(isDefined(level.uavTargetEnt)) {
       targetPos = level.uavTargetEnt.origin;
-    }
-    else if(isDefined(level.uavTargetPos)) {
+    } else if(isDefined(level.uavTargetPos)) {
       targetPos = level.uavTargetPos;
-    }
-    else {
+    } else {
       targetpos = (-553.753, -2970, 2369.84); // you could put this in invasion.map if you'd like.
     }
 
@@ -7116,9 +7098,9 @@ setup_stingers() {
     needs_stinger = true;
     weapons = level.player GetWeaponsListAll();
     foreach(weap in weapons) {
-    if(weap == "stinger")
+      if(weap == "stinger")
     }
-      needs_stinger = false;
+    needs_stinger = false;
 
     if(!needs_stinger) {
       continue;
@@ -7140,9 +7122,9 @@ objective_destroy_helicopter(second_heli) {
   needs_stinger = true;
   weapons = level.player GetWeaponsListAll();
   foreach(weap in weapons) {
-  if(weap == "stinger")
+    if(weap == "stinger")
   }
-    needs_stinger = false;
+  needs_stinger = false;
 
   if(needs_stinger) {
     stinger_loc = level.nates_stinger["origin"];

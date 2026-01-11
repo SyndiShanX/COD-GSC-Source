@@ -40,8 +40,7 @@ scriptstruct_debug_render() {
 
     if(isDefined(selected_struct)) {
       level thread render_struct(selected_struct);
-    }
-    else {
+    } else {
       level notify("stop_struct_render");
     }
   }
@@ -64,8 +63,7 @@ node_debug_render() {
 
     if(isDefined(node)) {
       spawn_johnny_node_chaser(node);
-    }
-    else if(isDefined(level.johnny_node_chaser)) {
+    } else if(isDefined(level.johnny_node_chaser)) {
       level.johnny_node_chaser thread delete_timer();
     }
   }
@@ -182,8 +180,7 @@ stay_animated_at_node(node) {
 
       if(node_has_animations(node)) {
         self anim_generic_loop(self, node.type, "stop_loop");
-      }
-      else {
+      } else {
         prev_org = (0, 0, 0);
       }
     }

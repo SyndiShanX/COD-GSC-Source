@@ -227,8 +227,7 @@ setup_interaction_matrix() {
   }
 }
 
-brutus_prespawn() {
-}
+brutus_prespawn() {}
 
 brutus_spawn_prologue(spawn_pos) {
   playsoundatposition("zmb_ai_brutus_prespawn", spawn_pos.origin);
@@ -241,22 +240,19 @@ brutus_spawn(starting_health, has_helmet, helmet_hits, explosive_dmg_taken, zone
 
   if(!isDefined(has_helmet)) {
     self.has_helmet = 1;
-  }
-  else {
+  } else {
     self.has_helmet = has_helmet;
   }
 
   if(!isDefined(helmet_hits)) {
     self.helmet_hits = 0;
-  }
-  else {
+  } else {
     self.helmet_hits = helmet_hits;
   }
 
   if(!isDefined(explosive_dmg_taken)) {
     self.explosive_dmg_taken = 0;
-  }
-  else {
+  } else {
     self.explosive_dmg_taken = explosive_dmg_taken;
   }
 
@@ -417,8 +413,7 @@ brutus_spawn_zone_locked(zone_name) {
 brutus_spawn_in_zone(zone_name, zone_locked) {
   if(isDefined(zone_locked) && zone_locked) {
     return brutus_spawn_zone_locked(zone_name);
-  }
-  else {
+  } else {
     ai = spawn_zombie(level.brutus_spawners[0]);
     ai thread brutus_spawn(undefined, undefined, undefined, undefined, zone_name);
 
@@ -488,8 +483,7 @@ get_brutus_spawn_pos_val(brutus_pos) {
 
   if(a_players_in_zone.size == 0) {
     return 0;
-  }
-  else {
+  } else {
     n_score_addition = 1;
 
     for(i = 0; i < a_players_in_zone.size; i++) {
@@ -564,8 +558,7 @@ get_best_brutus_spawn_pos(zone_name) {
 
   if(isDefined(pos_idx)) {
     return level.zombie_brutus_locations[pos_idx];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -576,8 +569,7 @@ play_ambient_brutus_vocals() {
 
   while(true) {
     if(isDefined(self)) {
-      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {
-      } else
+      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {} else
         self playSound("zmb_vocals_brutus_ambience");
     }
 
@@ -731,8 +723,7 @@ brutus_round_tracker() {
 
     if(level.round_number < 9 && (isDefined(level.is_forever_solo_game) && level.is_forever_solo_game)) {
       continue;
-    }
-    else if(level.next_brutus_round <= level.round_number) {
+    } else if(level.next_brutus_round <= level.round_number) {
       if(maps\mp\zm_alcatraz_utility::is_team_on_golden_gate_bridge()) {
         level.next_brutus_round = level.round_number + 1;
         continue;
@@ -769,8 +760,7 @@ wait_on_box_alarm() {
 
       if(level.brutus_in_grief) {
         level notify("spawn_brutus", 1);
-      }
-      else if(rand <= level.brutus_alarm_chance) {
+      } else if(rand <= level.brutus_alarm_chance) {
         if(flag("moving_chest_now")) {
           continue;
         }
@@ -861,8 +851,7 @@ watch_devgui_brutus() {
 respawn_brutus(starting_health, has_helmet, helmet_hits, explosive_dmg_taken, zone_name, b_no_current_valid_targets) {
   if(isDefined(b_no_current_valid_targets) && b_no_current_valid_targets) {
     zone_name = brutus_watch_for_new_valid_targets();
-  }
-  else {
+  } else {
     wait 5;
   }
 
@@ -1087,17 +1076,14 @@ brutus_find_flesh() {
 
     if(level.brutus_in_grief) {
       brutus_start_basic_find_flesh();
-    }
-    else if(!isDefined(player)) {
+    } else if(!isDefined(player)) {
       self.priority_item = self get_priority_item_for_brutus(brutus_zone, 1);
-    }
-    else {
+    } else {
       player_zone = player get_player_zone();
 
       if(isDefined(player_zone)) {
         self.priority_item = self get_priority_item_for_brutus(player_zone);
-      }
-      else {
+      } else {
         self.priority_item = self get_priority_item_for_brutus(brutus_zone, 1);
       }
     }
@@ -1137,8 +1123,7 @@ trap_damage_callback(trap) {
 
     if(trap.targetname == "fan_trap") {
       trap notify("trap_finished_" + trap.script_string);
-    }
-    else if(trap.targetname == "acid_trap") {
+    } else if(trap.targetname == "acid_trap") {
       trap notify("acid_trap_fx_done");
     }
 
@@ -1168,9 +1153,7 @@ get_priority_item_for_brutus(zone_name, do_secondary_zone_checks) {
     int_objects = self[[int_struct.get_func]](zone_name);
 
     for(j = 0; j < int_objects.size; j++) {
-      if(int_objects[j][
-          [int_struct.validity_func]
-        ]()) {
+      if(int_objects[j][[int_struct.validity_func]]()) {
         score = self[[int_struct.value_func]](int_objects[j]);
         assert(score >= 0);
 
@@ -1252,11 +1235,9 @@ is_magic_box_valid() {
 get_perk_machine_trigger() {
   if(self.targetname == "vendingelectric_cherry") {
     perk_machine = getent("vending_electriccherry", "target");
-  }
-  else if(self.targetname == "vending_deadshot_model") {
+  } else if(self.targetname == "vending_deadshot_model") {
     perk_machine = getent("vending_deadshot", "target");
-  }
-  else {
+  } else {
     perk_machine = getent(self.targetname, "target");
   }
 
@@ -1341,8 +1322,7 @@ get_traps(zone_name) {
 is_trap_valid() {
   if(isDefined(self.trigger.zombie_dmg_trig) && (isDefined(self.trigger.zombie_dmg_trig.active) && self.trigger.zombie_dmg_trig.active)) {
     return true;
-  }
-  else if(isDefined(self.trigger.active) && self.trigger.active) {
+  } else if(isDefined(self.trigger.active) && self.trigger.active) {
     return true;
   }
 
@@ -1401,8 +1381,7 @@ brutus_get_closest_valid_player() {
   while(!valid_player_found) {
     if(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths) {
       player = get_closest_player_using_paths(self.origin, players);
-    }
-    else {
+    } else {
       player = getclosest(self.origin, players);
     }
 
@@ -1473,8 +1452,7 @@ brutus_goal_watcher() {
 
     if(isDefined(interaction.end_notetrack)) {
       self waittillmatch(interaction.notify_name, interaction.end_notetrack);
-    }
-    else {
+    } else {
       self waittillmatch(interaction.notify_name, "end");
     }
 
@@ -1668,8 +1646,7 @@ perk_machine_lock() {
 
   if(perk_machine.target == "vending_jugg" || perk_machine.target == "vending_deadshot") {
     lock_fx = level._effect["brutus_lockdown_sm"];
-  }
-  else {
+  } else {
     lock_fx = level._effect["brutus_lockdown"];
   }
 
@@ -1731,11 +1708,9 @@ trap_smash() {
   }
   if(trap.targetname == "fan_trap_use_trigger") {
     trap.zombie_dmg_trig notify("trap_finished_" + trap.script_string);
-  }
-  else if(trap.targetname == "acid_trap_trigger") {
+  } else if(trap.targetname == "acid_trap_trigger") {
     trap.zombie_dmg_trig notify("acid_trap_fx_done");
-  }
-  else if(trap.targetname == "tower_trap_activate_trigger") {
+  } else if(trap.targetname == "tower_trap_activate_trigger") {
     trap notify("tower_trap_off");
   }
 
@@ -1788,8 +1763,7 @@ blocker_smash() {
 
   if(!isDefined(blocker.script_string)) {
     smash_fx_alias = "brutus_smash_default";
-  }
-  else {
+  } else {
     smash_fx_alias = "brutus_smash_" + blocker.script_string;
   }
 
@@ -1797,8 +1771,7 @@ blocker_smash() {
 
   if(isDefined(level._effect[smash_fx_alias])) {
     playFX(level._effect[smash_fx_alias], blocker.origin, forward);
-  }
-  else {
+  } else {
     playFX(level._effect["brutus_smash_default"], blocker.origin, forward);
   }
 
@@ -1830,8 +1803,7 @@ teargas_player(player) {
     while(true) {
       if(!player istouching(self)) {
         clear_timer = clear_timer + 0.1;
-      }
-      else {
+      } else {
         clear_timer = 0;
       }
 
@@ -1841,11 +1813,9 @@ teargas_player(player) {
       } else if(teargas_timer % 5 == 0) {
         if(distancesquared(player.origin, self.origin) > level.brutus_teargas_radius * 2 / 3 * (level.brutus_teargas_radius * 2 / 3)) {
           player shellshock("mp_radiation_low", 1.5);
-        }
-        else if(distancesquared(player.origin, self.origin) > level.brutus_teargas_radius * 1 / 3 * (level.brutus_teargas_radius * 1 / 3)) {
+        } else if(distancesquared(player.origin, self.origin) > level.brutus_teargas_radius * 1 / 3 * (level.brutus_teargas_radius * 1 / 3)) {
           player shellshock("mp_radiation_med", 1.5);
-        }
-        else {
+        } else {
           player shellshock("mp_radiation_high", 1.5);
         }
       }
@@ -1875,8 +1845,7 @@ precache_default_brutus_barrier_fx() {
 scale_helmet_damage(attacker, damage, headshot_mod, damage_mod, vdir) {
   if(!self.has_helmet) {
     return damage * headshot_mod;
-  }
-  else {
+  } else {
     self.helmet_hits++;
 
     if(self.helmet_hits >= level.brutus_helmet_shots) {
@@ -1884,8 +1853,7 @@ scale_helmet_damage(attacker, damage, headshot_mod, damage_mod, vdir) {
 
       if(level.brutus_in_grief) {
         player_points = level.brutus_points_for_helmet;
-      }
-      else {
+      } else {
         multiplier = maps\mp\zombies\_zm_score::get_points_multiplier(self);
         player_points = multiplier * round_up_score(level.brutus_points_for_helmet, 5);
       }
@@ -1943,11 +1911,9 @@ brutus_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon,
 
       if(isDefined(inflictor.n_cookedtime) && inflictor.n_cookedtime >= 2000) {
         self.helmet_hits = level.brutus_helmet_shots;
-      }
-      else if(isDefined(inflictor.n_grenade_charge_power) && inflictor.n_grenade_charge_power >= 2) {
+      } else if(isDefined(inflictor.n_grenade_charge_power) && inflictor.n_grenade_charge_power >= 2) {
         self.helmet_hits = level.brutus_helmet_shots;
-      }
-      else {
+      } else {
         self.helmet_hits++;
       }
 
@@ -1956,8 +1922,7 @@ brutus_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon,
 
         if(level.brutus_in_grief) {
           player_points = level.brutus_points_for_helmet;
-        }
-        else {
+        } else {
           multiplier = maps\mp\zombies\_zm_score::get_points_multiplier(self);
           player_points = multiplier * round_up_score(level.brutus_points_for_helmet, 5);
         }
@@ -1992,8 +1957,7 @@ brutus_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon,
 
     if(!self.has_helmet) {
       scaler = n_brutus_headshot_modifier;
-    }
-    else {
+    } else {
       scaler = level.brutus_damage_percent;
     }
 
@@ -2002,8 +1966,7 @@ brutus_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon,
 
       if(level.brutus_in_grief) {
         player_points = level.brutus_points_for_helmet;
-      }
-      else {
+      } else {
         multiplier = maps\mp\zombies\_zm_score::get_points_multiplier(self);
         player_points = multiplier * round_up_score(level.brutus_points_for_helmet, 5);
       }
@@ -2020,8 +1983,7 @@ brutus_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon,
   }
 }
 
-brutus_instakill_override() {
-}
+brutus_instakill_override() {}
 
 brutus_nuke_override() {
   self endon("death");
@@ -2108,7 +2070,7 @@ custom_brutus_on_fire_timeout(a_script_origins) {
   }
 
   foreach(script_origin in a_script_origins) {
-  script_origin delete();
+    script_origin delete();
   }
 }
 
@@ -2458,8 +2420,7 @@ check_craftable_table_valid(player) {
 check_plane_valid(player) {
   if(isDefined(self.fly_trigger_target)) {
     plane_struct = self.fly_trigger_target;
-  }
-  else {
+  } else {
     plane_struct = self;
   }
 
@@ -2500,8 +2461,7 @@ sndbrutusvox(alias, num) {
 
     if(playbacktime >= 0) {
       playbacktime = playbacktime * 0.001;
-    }
-    else {
+    } else {
       playbacktime = 1;
     }
 
@@ -2544,21 +2504,17 @@ get_fuel_trigger() {
 transfer_plane_trigger(from, to) {
   if(from == "fly") {
     from_trigger = get_fly_trigger();
-  }
-  else if(from == "build") {
+  } else if(from == "build") {
     from_trigger = get_build_trigger();
-  }
-  else {
+  } else {
     from_trigger = get_fuel_trigger();
   }
 
   if(to == "fly") {
     to_trigger = get_fly_trigger();
-  }
-  else if(to == "build") {
+  } else if(to == "build") {
     to_trigger = get_build_trigger();
-  }
-  else {
+  } else {
     to_trigger = get_fuel_trigger();
   }
 

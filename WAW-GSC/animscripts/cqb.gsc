@@ -28,8 +28,7 @@ MoveCQB() {
   variation = getRandomIntFromSeed(self.a.runLoopCount, 2);
   if(variation == 0) {
     cqbWalkAnim = % run_CQB_F_search_v1;
-  }
-  else {
+  } else {
     cqbWalkAnim = % run_CQB_F_search_v2;
   }
   if(self.movemode == "walk") {
@@ -149,8 +148,7 @@ findCQBPointsOfInterest() {
         }
         if(best < 0) {
           ai[i].cqb_point_of_interest = undefined;
-        }
-        else {
+        } else {
           ai[i].cqb_point_of_interest = level.cqbPointsOfInterest[best];
         }
         wait .05;

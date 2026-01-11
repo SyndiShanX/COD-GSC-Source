@@ -179,8 +179,7 @@ dispatchNotify(slot) {
 
   if(isDefined(nextNotifyData.name)) {
     actionNotify(nextNotifyData);
-  }
-  else {
+  } else {
     showNotifyMessage(nextNotifyData);
   }
 }
@@ -219,11 +218,9 @@ shownotifymessage(notifyData) {
 
   if(isDefined(notifyData.duration)) {
     duration = notifyData.duration;
-  }
-  else if(level.gameended) {
+  } else if(level.gameended) {
     duration = 2.0;
-  }
-  else {
+  } else {
     duration = 4.0;
   }
 
@@ -244,15 +241,13 @@ shownotifymessage(notifyData) {
 
     if(isDefined(notifyData.titlelabel)) {
       self.notifytitle.label = notifyData.titlelabel;
-    }
-    else {
+    } else {
       self.notifytitle.label = &"";
     }
 
     if(isDefined(notifyData.titlelabel) && !isDefined(notifyData.titleisstring)) {
       self.notifytitle setvalue(notifyData.titletext);
-    }
-    else {
+    } else {
       self.notifytitle settext(notifyData.titletext);
     }
 
@@ -274,15 +269,13 @@ shownotifymessage(notifyData) {
     self.notifytext.fonScale = 1.35;
     if(isDefined(notifyData.textlabel)) {
       self.notifytext.label = notifyData.textlabel;
-    }
-    else {
+    } else {
       self.notifytext.label = &"";
     }
 
     if(isDefined(notifyData.textlabel) && !isDefined(notifyData.textisstring)) {
       self.notifytext setvalue(notifyData.notifytext);
-    }
-    else {
+    } else {
       self.notifytext settext(notifyData.notifytext);
     }
 
@@ -301,8 +294,7 @@ shownotifymessage(notifyData) {
 
     if(isDefined(notifyData.text2label)) {
       self.notifytext2.label = notifyData.text2label;
-    }
-    else {
+    } else {
       self.notifytext2.label = &"";
     }
 
@@ -323,8 +315,7 @@ shownotifymessage(notifyData) {
 
     if(level.splitscreen || self issplitscreenplayer()) {
       self.notifyicon setshader(notifyData.iconname, 30, 30);
-    }
-    else {
+    } else {
       self.notifyicon setshader(notifyData.iconname, 60, 60);
     }
 
@@ -737,15 +728,13 @@ actionNotifyMessage(actionData) {
         self setClientOmnvar("ui_splash_killstreak_idx", splashIdx);
         if(isDefined(actionData.playerCardPlayer) && actionData.playerCardPlayer != self) {
           self setClientOmnvar("ui_splash_killstreak_clientnum", actionData.playerCardPlayer getEntityNumber());
-        }
-        else {
+        } else {
           self setClientOmnvar("ui_splash_killstreak_clientnum", -1);
         }
 
         if(isDefined(actionData.optionalNumber)) {
           self setClientOmnvar("ui_splash_killstreak_optional_number", actionData.optionalNumber);
-        }
-        else {
+        } else {
           self setClientOmnvar("ui_splash_killstreak_optional_number", 0);
         }
         break;
@@ -809,8 +798,7 @@ actionNotifyMessage(actionData) {
     if(isDefined(actionData.leaderSound)) {
       if(isDefined(actionData.leaderSoundGroup)) {
         self maps\mp\_utility::leaderDialogOnPlayer(actionData.leaderSound, actionData.leaderSoundGroup, true);
-      }
-      else {
+      } else {
         self maps\mp\_utility::leaderDialogOnPlayer(actionData.leaderSound);
       }
     }
@@ -1002,8 +990,7 @@ teamoutcomenotify(var_0, var_1, var_2, var_3) {
   } else if(var_0 == "tie") {
     if(var_1) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["round_draw"]);
-    }
-    else {
+    } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["draw"]);
     }
 
@@ -1013,8 +1000,7 @@ teamoutcomenotify(var_0, var_1, var_2, var_3) {
   else if(isDefined(self.pers["team"]) && var_0 == var_4) {
     if(var_1) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["round_win"]);
-    }
-    else {
+    } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["victory"]);
     }
   } else if(var_1)
@@ -1065,19 +1051,16 @@ outcomenotify(var_0, var_1) {
   if(isDefined(var_3) && self.score == var_3.score && self.deaths == var_3.deaths) {
     if(self != var_3) {
       var_6 = 1;
-    }
-    else if(isDefined(var_4) && var_4.score == var_3.score && var_4.deaths == var_3.deaths) {
+    } else if(isDefined(var_4) && var_4.score == var_3.score && var_4.deaths == var_3.deaths) {
       var_6 = 1;
     }
   }
 
   if(var_6) {
     self setclientomnvar("ui_round_end_title", game["round_end"]["tie"]);
-  }
-  else if(isDefined(var_3) && self == var_3) {
+  } else if(isDefined(var_3) && self == var_3) {
     self setclientomnvar("ui_round_end_title", game["round_end"]["victory"]);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_round_end_title", game["round_end"]["defeat"]);
   }
 
@@ -1091,8 +1074,7 @@ outcomenotify(var_0, var_1) {
   self waittill("update_outcome");
 }
 
-canshowsplash(var_0) {
-}
+canshowsplash(var_0) {}
 
 lerpscreenblurup(var_0, var_1) {
   self setblurforplayer(var_0, var_1);

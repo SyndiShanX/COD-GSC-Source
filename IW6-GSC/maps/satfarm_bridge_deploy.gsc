@@ -16,8 +16,7 @@ bridge_deploy_main() {
 
   if(level.start_point == "bridge_deploy") {
     var_0 = common_scripts\utility::getstruct("bridge_deploy_player_in", "targetname");
-  }
-  else {
+  } else {
     level.player unlink();
     var_0 = level.player;
   }
@@ -211,8 +210,7 @@ tower_to_bridge_deploy() {
 
   if(getdvar("debug_sat_view_pip", "1") == "1") {
     thread maps\satfarm_satellite_view::satellite_view_pip_disable();
-  }
-  else if(getdvar("debug_sat_view_pip", "1") == "2") {
+  } else if(getdvar("debug_sat_view_pip", "1") == "2") {
     level.player playerlinktoabsolute(var_4, "tag_origin");
   }
 
@@ -274,8 +272,7 @@ tower_to_bridge_deploy() {
 
       if(getdvar("debug_sat_view_pip", "1") != "2") {
         maps\satfarm_satellite_view::satellite_view_blink_corners(1, 0.1);
-      }
-      else {
+      } else {
         wait 0.2;
       }
 
@@ -460,8 +457,7 @@ mark_mantis_turrets(var_0) {
 
   if(getdvar("debug_sat_view_pip", "1") == "1") {
     thread maps\satfarm_satellite_view::satellite_view_corner_pip(var_7, "tag_origin", 220, -145, 100, 100);
-  }
-  else if(getdvar("debug_sat_view_pip", "1") == "2") {
+  } else if(getdvar("debug_sat_view_pip", "1") == "2") {
     level.player playerlinktoabsolute(var_7, "tag_origin");
   }
 
@@ -488,8 +484,7 @@ mark_mantis_turrets(var_0) {
 
   if(getdvar("debug_sat_view_pip", "1") == "1") {
     thread maps\satfarm_satellite_view::satellite_view_pip_disable();
-  }
-  else {
+  } else {
     level.player playerlinktoabsolute(var_0, "tag_origin");
   }
 

@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace player_insertion_choice;
 
 class cplayer_insertion_choice: cluielem {

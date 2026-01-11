@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace remote_missile_target_lockon;
 
 class cremote_missile_target_lockon: cluielem {

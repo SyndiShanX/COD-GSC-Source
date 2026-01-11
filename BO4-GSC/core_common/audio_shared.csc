@@ -11,7 +11,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
-
 #namespace audio;
 
 autoexec __init__system__() {
@@ -81,8 +80,8 @@ snddoublejump_watcher() {
   while(true) {
     self waittill(#"doublejump_start");
     trace = tracepoint(self.origin, self.origin - (0, 0, 100000));
-    trace_surface_type = trace[#"surfacetype"];
-    trace_origin = trace[#"position"];
+    trace_surface_type = trace[# "surfacetype"];
+    trace_origin = trace[# "position"];
 
     if(!isDefined(trace) || !isDefined(trace_origin)) {
       continue;
@@ -92,7 +91,7 @@ snddoublejump_watcher() {
       trace_surface_type = "default";
     }
 
-    playSound(0, #"veh_jetpack_surface_" + trace_surface_type, trace_origin);
+    playSound(0, # "veh_jetpack_surface_" + trace_surface_type, trace_origin);
   }
 }
 
@@ -151,11 +150,11 @@ function_22a92b8b() {
   mapname = util::get_map_name();
 
   switch (mapname) {
-    case #"hash_15642edd0e4376f1":
-    case #"hash_5562580f1b903614":
-    case #"hash_65a6e39408662d48":
-    case #"hash_68bac554964f4148":
-    case #"hash_7bdf016123a0147b":
+    case # "hash_15642edd0e4376f1":
+    case # "hash_5562580f1b903614":
+    case # "hash_65a6e39408662d48":
+    case # "hash_68bac554964f4148":
+    case # "hash_7bdf016123a0147b":
       ignore = 0;
       break;
   }
@@ -163,7 +162,7 @@ function_22a92b8b() {
   gametype = hash(util::get_game_type());
 
   switch (gametype) {
-    case #"download":
+    case # "download":
       ignore = 1;
       break;
   }
@@ -176,8 +175,8 @@ function_c9705ad4() {
   gametype = hash(util::get_game_type());
 
   switch (gametype) {
-    case #"coop":
-    case #"pvp":
+    case # "coop":
+    case # "pvp":
       ignore = 0;
       break;
   }
@@ -844,7 +843,7 @@ snd_underwater(localclientnum) {
   }
 
   while(true) {
-    underwaternotify = self waittill(#"underwater_begin", #"underwater_end", #"swimming_begin", #"swimming_end", #"death", #"sndenduwwatcher");
+    underwaternotify = self waittill(#"underwater_begin", # "underwater_end", # "swimming_begin", # "swimming_end", # "death", # "sndenduwwatcher");
 
     if(underwaternotify._notify == "death") {
       self underwaterend();
@@ -937,7 +936,7 @@ sndcriticalhealth(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(newval) {
-    playSound(localclientnum, #"chr_health_lowhealth_enter", (0, 0, 0));
+    playSound(localclientnum, # "chr_health_lowhealth_enter", (0, 0, 0));
     playloopat("chr_health_lowhealth_loop", self.var_2f6077ac);
     return;
   }
@@ -966,7 +965,7 @@ sndlaststand(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   }
 
   if(newval) {
-    playSound(localclientnum, #"chr_health_laststand_enter", (0, 0, 0));
+    playSound(localclientnum, # "chr_health_laststand_enter", (0, 0, 0));
     playloopat("chr_health_laststand_loop", self.sndlaststand);
     return;
   }
@@ -996,7 +995,7 @@ dorattle(origin, min, max) {
 
 sndrattle_server(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
-    if(isDefined(self.model) && self.model == #"wpn_t7_bouncing_betty_world") {
+    if(isDefined(self.model) && self.model == # "wpn_t7_bouncing_betty_world") {
       betty = getweapon(#"bouncingbetty");
       level thread dorattle(self.origin, betty.soundrattlerangemin, betty.soundrattlerangemax);
       return;
@@ -1016,7 +1015,7 @@ sndrattle_grenade_client() {
 weapon_butt_sounds(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     self.meleed = 1;
-    level.mysnd = playSound(localclientnum, #"chr_melee_tinitus", (0, 0, 0));
+    level.mysnd = playSound(localclientnum, # "chr_melee_tinitus", (0, 0, 0));
     return;
   }
 
@@ -1119,11 +1118,11 @@ sndcchacking(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   if(newval) {
     switch (newval) {
       case 1:
-        playSound(0, #"gdt_cybercore_hack_start_plr", (0, 0, 0));
+        playSound(0, # "gdt_cybercore_hack_start_plr", (0, 0, 0));
         self.hsnd = self playLoopSound(#"gdt_cybercore_hack_lp_plr", 0.5);
         break;
       case 2:
-        playSound(0, #"gdt_cybercore_prime_upg_plr", (0, 0, 0));
+        playSound(0, # "gdt_cybercore_prime_upg_plr", (0, 0, 0));
         self.hsnd = self playLoopSound(#"gdt_cybercore_prime_loop_plr", 0.5);
         break;
     }
@@ -1136,12 +1135,12 @@ sndcchacking(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   }
 
   if(oldval == 1) {
-    playSound(0, #"gdt_cybercore_hack_success_plr", (0, 0, 0));
+    playSound(0, # "gdt_cybercore_hack_success_plr", (0, 0, 0));
     return;
   }
 
   if(oldval == 2) {
-    playSound(0, #"gdt_cybercore_activate_fail_plr", (0, 0, 0));
+    playSound(0, # "gdt_cybercore_activate_fail_plr", (0, 0, 0));
   }
 }
 
@@ -1220,7 +1219,7 @@ sndsprintbreath(localclientnum) {
         if(self isplayersprinting()) {
           self thread sndbreathstart(var_63112f76);
           self thread function_ee6d1a7f(var_dfb6f570);
-          waitresult = self waittill(#"hash_4e899fa9b2775b4d", #"death");
+          waitresult = self waittill(#"hash_4e899fa9b2775b4d", # "death");
 
           if(waitresult._notify == "death") {
             return;
@@ -1278,10 +1277,10 @@ function_bd07593a() {
   while(true) {
     if(self util::is_on_side(#"allies")) {
       if(self isplayersprinting()) {
-        self playSound(0, #"hash_2dc9c76844261d06");
+        self playSound(0, # "hash_2dc9c76844261d06");
         wait 1;
       } else {
-        self playSound(0, #"hash_70b507d0e243536d");
+        self playSound(0, # "hash_70b507d0e243536d");
         wait 2.5;
       }
     }
@@ -1311,5 +1310,5 @@ function_350920b9() {
     self.var_5730fa36 = undefined;
   }
 
-  self playSound(0, #"hash_26a4334032c725cb");
+  self playSound(0, # "hash_26a4334032c725cb");
 }

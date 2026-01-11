@@ -14,8 +14,7 @@ init() {
 
   if(level.splitscreen) {
     level.objPointSize = 15;
-  }
-  else {
+  } else {
     level.objPointSize = 8;
   }
 
@@ -42,8 +41,7 @@ createTeamObjpoint(name, origin, team, shader, alpha, scale) {
 
   if(team != "all") {
     objPoint = newTeamHudElem(team);
-  }
-  else {
+  } else {
     objPoint = newHudElem();
   }
 
@@ -60,8 +58,7 @@ createTeamObjpoint(name, origin, team, shader, alpha, scale) {
 
   if(isDefined(alpha)) {
     objPoint.alpha = alpha;
-  }
-  else {
+  } else {
     objPoint.alpha = level.objpoint_alpha_default;
   }
   objPoint.baseAlpha = objPoint.alpha;
@@ -121,8 +118,7 @@ setOriginByName(name, origin) {
 getObjPointByName(name) {
   if(isDefined(level.objPoints[name])) {
     return level.objPoints[name];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -130,8 +126,7 @@ getObjPointByName(name) {
 getObjPointByIndex(index) {
   if(isDefined(level.objPointNames[index])) {
     return level.objPoints[level.objPointNames[index]];
-  }
-  else {
+  } else {
     return undefined;
   }
 }

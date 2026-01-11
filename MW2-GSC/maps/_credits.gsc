@@ -669,8 +669,7 @@ initIWCredits_add() {
   addTitleIW(&"CREDIT_ADDITIONAL_SOUND_DES1");
   if(getdvar("ui_char_museum_mode") != "credits_black") {
     addTitleIW(&"CREDIT_ADDITIONAL_SOUND_DES3");
-  }
-  else {
+  } else {
     addTitleIW(&"CREDIT_ADDITIONAL_SOUND_DES2");
   }
   addSpaceSmall();
@@ -1107,8 +1106,7 @@ playCredits() {
 
       if(isDefined(level.linelist[i].delay)) {
         delay = level.linelist[i].delay;
-      }
-      else {
+      } else {
         delay = ((0.037 * height));
       }
       //delay = ( ( 0.0296 * height ) );
@@ -1145,8 +1143,7 @@ playCredits() {
 
       if(!level.console) {
         temp.font = "default";
-      }
-      else {
+      } else {
         temp.font = "small";
       }
 
@@ -1173,8 +1170,7 @@ playCredits() {
 
       if(!level.console) {
         temp.font = "default";
-      }
-      else {
+      } else {
         temp.font = "small";
       }
 
@@ -1202,8 +1198,7 @@ playCredits() {
 
       if(!level.console) {
         temp1.font = "default";
-      }
-      else {
+      } else {
         temp1.font = "small";
       }
 
@@ -1221,8 +1216,7 @@ playCredits() {
 
       if(!level.console) {
         temp2.font = "default";
-      }
-      else {
+      } else {
         temp2.font = "small";
       }
 
@@ -1254,8 +1248,7 @@ playCredits() {
 
       if(!level.console) {
         temp.font = "default";
-      }
-      else {
+      } else {
         temp.font = "small";
       }
 
@@ -1282,8 +1275,7 @@ playCredits() {
 
       if(!level.console) {
         temp.font = "default";
-      }
-      else {
+      } else {
         temp.font = "small";
       }
 
@@ -1310,8 +1302,7 @@ playCredits() {
 
       if(!level.console) {
         temp.font = "default";
-      }
-      else {
+      } else {
         temp.font = "small";
       }
 
@@ -1338,8 +1329,7 @@ playCredits() {
 
       if(!level.console) {
         temp.font = "default";
-      }
-      else {
+      } else {
         temp.font = "small";
       }
 
@@ -1367,8 +1357,7 @@ playCredits() {
 
       if(!level.console) {
         temp1.font = "default";
-      }
-      else {
+      } else {
         temp1.font = "small";
       }
 
@@ -1386,8 +1375,7 @@ playCredits() {
 
       if(!level.console) {
         temp2.font = "default";
-      }
-      else {
+      } else {
         temp2.font = "small";
       }
 
@@ -1421,8 +1409,7 @@ playCredits() {
 
       if(!level.console) {
         temp1.font = "default";
-      }
-      else {
+      } else {
         temp1.font = "small";
       }
 
@@ -1440,8 +1427,7 @@ playCredits() {
 
       if(!level.console) {
         temp2.font = "default";
-      }
-      else {
+      } else {
         temp2.font = "small";
       }
 
@@ -1459,8 +1445,7 @@ playCredits() {
 
       if(!level.console) {
         temp3.font = "default";
-      }
-      else {
+      } else {
         temp3.font = "small";
       }
 
@@ -1497,8 +1482,7 @@ playCredits() {
 
       if(!level.console) {
         temp.font = "default";
-      }
-      else {
+      } else {
         temp.font = "small";
       }
 
@@ -1526,8 +1510,7 @@ playCredits() {
 
       if(!level.console) {
         temp1.font = "default";
-      }
-      else {
+      } else {
         temp1.font = "small";
       }
 
@@ -1545,8 +1528,7 @@ playCredits() {
 
       if(!level.console) {
         temp2.font = "default";
-      }
-      else {
+      } else {
         temp2.font = "small";
       }
 
@@ -1636,8 +1618,7 @@ addSubLeftNameNameName(name1, name2, name3) {
 addImageIW(image, width, height, delay) {
   if(getdvar("ui_char_museum_mode") != "credits_black") {
     addLeftImage(image, width, height, delay);
-  }
-  else {
+  } else {
     addCenterImage(image, width, height, delay);
   }
 }
@@ -1645,8 +1626,7 @@ addImageIW(image, width, height, delay) {
 addTitleIW(title) {
   if(getdvar("ui_char_museum_mode") != "credits_black") {
     addLeftTitle(title);
-  }
-  else {
+  } else {
     addCenterHeading(title);
   }
 }
@@ -1654,8 +1634,7 @@ addTitleIW(title) {
 addSubTitleIW(title) {
   if(getdvar("ui_char_museum_mode") != "credits_black") {
     addSubLeftTitle(title);
-  }
-  else {
+  } else {
     addCenterHeading(title);
   }
 }
@@ -1681,8 +1660,7 @@ addSubTitleNameIW(title, name) {
 addcastIW(name, title, combo) {
   if(getdvar("ui_char_museum_mode") != "credits_black") {
     addCastName(name, title);
-  }
-  else {
+  } else {
     addCenterHeading(name);
   }
 }
@@ -1690,8 +1668,7 @@ addcastIW(name, title, combo) {
 addNameIW(name) {
   if(getdvar("ui_char_museum_mode") != "credits_black") {
     addLeftName(name);
-  }
-  else {
+  } else {
     addCenterName(name);
   }
 }
@@ -1699,8 +1676,7 @@ addNameIW(name) {
 addSubNameIW(name) {
   if(getdvar("ui_char_museum_mode") != "credits_black") {
     addSubLeftName(name);
-  }
-  else {
+  } else {
     addCenterName(name);
   }
 }
@@ -1708,8 +1684,7 @@ addSubNameIW(name) {
 addSpaceTitle() {
   if(getdvar("ui_char_museum_mode") != "credits_black") {
     addSpace();
-  }
-  else {
+  } else {
     addSpaceSmall();
   }
 }

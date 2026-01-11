@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace zm_towers_crowd_meter;
 
 class czm_towers_crowd_meter: cluielem {

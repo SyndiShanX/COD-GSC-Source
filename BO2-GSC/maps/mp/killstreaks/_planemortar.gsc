@@ -133,8 +133,7 @@ singleradarsweep() {
 
   if(level.teambased) {
     has_satellite = level.activesatellites[self.team] > 0;
-  }
-  else {
+  } else {
     has_satellite = level.activesatellites[self.entnum] > 0;
   }
 
@@ -178,8 +177,7 @@ doplanemortar(positions, team, killstreak_id) {
 
     if(odd == 0) {
       yaw = (yaw + 35) % 360;
-    }
-    else {
+    } else {
       yaw = (yaw + 290) % 360;
     }
 

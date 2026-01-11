@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
-
 #namespace namespace_a476311c;
 
 autoexec __init__system__() {

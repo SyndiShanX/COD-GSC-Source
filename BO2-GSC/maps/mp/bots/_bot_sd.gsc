@@ -23,8 +23,7 @@ bot_sd_think() {
 
   if(isDefined(zone)) {
     self bot_sd_defender(zone, 1);
-  }
-  else if(self.team == game["attackers"]) {
+  } else if(self.team == game["attackers"]) {
     if(level.multibomb) {
       self.isbombcarrier = 1;
     }
@@ -86,8 +85,7 @@ bot_sd_attacker() {
         if(isDefined(goal)) {
           if(frac > 0.85) {
             self addgoal(goal, 24, 4, "sd_plant");
-          }
-          else {
+          } else {
             self addgoal(goal, 24, 3, "sd_plant");
           }
         }
@@ -99,8 +97,7 @@ bot_sd_attacker() {
     if(!isDefined(self.protectcarrier)) {
       if(randomint(100) > 70) {
         self.protectcarrier = 1;
-      }
-      else {
+      } else {
         self.protectcarrier = 0;
       }
     }

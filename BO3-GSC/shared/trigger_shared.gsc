@@ -472,17 +472,13 @@ function _hint_print(string, breakfunc) {
       hint fadeovertime(0.75);
       hint.alpha = 0.4;
       _hint_print_wait(0.75, breakfunc);
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
       hint fadeovertime(0.75);
       hint.alpha = 0.95;
       _hint_print_wait(0.75);
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
     }

@@ -472,13 +472,13 @@ trains_move(var_0, var_1, var_2) {
 
   if(var_2) {
     foreach(var_10 in var_1.trains) {
-    var_10 delete();
+      var_10 delete();
     }
 
     var_1 delete();
   } else {
     foreach(var_10 in var_1.trains) {
-    var_10 hide();
+      var_10 hide();
     }
 
     var_1.origin = var_1.init_origin;
@@ -491,19 +491,19 @@ flarestack_swap(var_0) {
 
   if(isDefined(var_0) && var_0) {
     foreach(var_4 in var_1) {
-    var_4 hide();
+      var_4 hide();
     }
 
     foreach(var_4 in var_2) {
-    var_4 show();
+      var_4 show();
     }
   } else {
     foreach(var_4 in var_2) {
-    var_4 hide();
+      var_4 hide();
     }
 
     foreach(var_4 in var_1) {
-    var_4 show();
+      var_4 show();
     }
   }
 }

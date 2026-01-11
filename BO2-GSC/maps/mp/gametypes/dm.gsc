@@ -84,8 +84,7 @@ onspawnplayer(predictedspawn) {
 
   if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "dm");
   }
 }

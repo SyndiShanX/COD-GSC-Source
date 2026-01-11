@@ -71,8 +71,7 @@ flarevision(player, flareeffectarea, position) {
 
   if(!isDefined(flareeffectarea)) {
     wait(flare_get_dvar("flareBurnOutFadeWait", level.flareburnoutfadewait));
-  }
-  else if(distancesquared(position, player.origin) < level.flarevisioneffectradius * level.flarevisioneffectradius) {
+  } else if(distancesquared(position, player.origin) < level.flarevisioneffectradius * level.flarevisioneffectradius) {
     wait(flare_get_dvar("flareLookAwayFadeWait", level.flarelookawayfadewait));
   }
 
@@ -87,8 +86,7 @@ flare_get_dvar_int(dvar, def) {
 flare_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }

@@ -103,8 +103,7 @@ moveloop() {
 
     if(self.disablearrivals) {
       self.stopanimdistsq = 0;
-    }
-    else {
+    } else {
       self.stopanimdistsq = level.dogstoppingdistsq;
     }
 
@@ -143,8 +142,7 @@ stopmove() {
 shouldrun() {
   if(getdvarint(#"_id_DFB12081") != 0) {
     return true;
-  }
-  else if(getdvarint(#"_id_D5D7999B") != 0) {
+  } else if(getdvarint(#"_id_D5D7999B") != 0) {
     return false;
   }
 

@@ -114,19 +114,19 @@ cleanup_frogger_guys() {
   a_ai_frogger = get_ai_array("frogger_perk_extra_guys", "targetname");
 
   foreach(ai_frogger in a_ai_frogger) {
-  ai_frogger die();
+    ai_frogger die();
   }
 
   a_ai_frogger = get_ai_array("frogger_third_wave_guys", "targetname");
 
   foreach(ai_frogger in a_ai_frogger) {
-  ai_frogger die();
+    ai_frogger die();
   }
 
   a_ai_frogger = get_ai_array("frogger_second_wave_guys", "targetname");
 
   foreach(ai_frogger in a_ai_frogger) {
-  ai_frogger die();
+    ai_frogger die();
   }
 }
 
@@ -141,7 +141,7 @@ cleanup_market() {
   array_delete(a_e_market_ents);
 
   foreach(s_struct in a_s_structs) {
-  s_struct structdelete();
+    s_struct structdelete();
   }
 
   flag_wait("approach_bus_dam");
@@ -233,7 +233,7 @@ _balcony_collapse_internal() {
   a_n_nodes = getnodearray("balcony_collapse_nodes", "script_noteworthy");
 
   foreach(n_node in a_n_nodes) {
-  setenablenode(n_node, 0);
+    setenablenode(n_node, 0);
   }
 
   bm_clip = get_ent("balcony_collapse_clip", "targetname");
@@ -366,8 +366,7 @@ move_breakoff_group_to_roof() {
 
   if(maps\_fire_direction::is_fire_direction_active()) {
     level.player maps\_fire_direction::_fire_direction_enable(1);
-  }
-  else {
+  } else {
     maps\pakistan_market::enable_claw_fire_direction_feature(0);
   }
 
@@ -451,7 +450,7 @@ bus_street_decrease_enemy_accuracy() {
   e_ignore = get_ent("player_bus_safe_zone_volume", "targetname", 1);
 
   foreach(enemy in a_enemies) {
-  enemy thread _run_from_bus(m_bus, s_escape, e_ignore);
+    enemy thread _run_from_bus(m_bus, s_escape, e_ignore);
   }
 
   level delay_notify("stop_running_from_bus", 5);
@@ -520,8 +519,7 @@ _wave_hits_ai() {
 
       if(b_toggle) {
         str_deathanim = "bus_wave_death_1";
-      }
-      else {
+      } else {
         str_deathanim = "bus_wave_death_2";
       }
 
@@ -557,7 +555,7 @@ precache_dyn_ent_debris() {
   level.floating_dyn_ents[level.floating_dyn_ents.size] = "p_jun_foliage_pacific_branch_set2";
 
   foreach(str_model in level.floating_dyn_ents) {
-  precachemodel(str_model);
+    precachemodel(str_model);
   }
 }
 
@@ -647,7 +645,7 @@ street_cleanup() {
   a_ai_enemies = getaiarray("axis");
 
   foreach(ai_enemy in a_ai_enemies) {
-  ai_enemy die();
+    ai_enemy die();
   }
 
   cleanupspawneddynents();
@@ -670,7 +668,7 @@ street_cleanup() {
   a_s_market_exit = getstructarray("market_exit_struct", "script_noteworthy");
 
   foreach(s_exit in a_s_market_exit) {
-  s_exit structdelete();
+    s_exit structdelete();
   }
 }
 
@@ -765,8 +763,7 @@ bus_dam() {
 
   if(!flag("player_at_bus_gate")) {
     bus_event_failure();
-  }
-  else {
+  } else {
     level.player playSound("evt_bus_gate_extra");
 
     if(bus_dam_strength_test()) {
@@ -878,8 +875,7 @@ bus_dam_button_mash() {
     if(b_button_pressed_this_frame) {
       if(n_state_last == 1 || n_state_last == 2) {
         n_state = 2;
-      }
-      else {
+      } else {
         n_state = 1;
         n_push_count++;
         debug_print_line("push count = " + n_push_count + " of " + 10);
@@ -1104,8 +1100,7 @@ find_debris_model(node) {
   while(isDefined(node) && !isDefined(node.model)) {
     if(isDefined(node.target)) {
       node = getvehiclenode(node.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -1217,20 +1212,15 @@ debris_collision(vh_ent) {
 frogger_debris_audio() {
   if(self.model == "p_glo_crate02" || self.model == "ch_crate48x64" || self.model == "furniture_cabinet_console_b") {
     self playSound("fly_bump_wood");
-  }
-  else if(self.model == "veh_iw_civ_car_hatch") {
+  } else if(self.model == "veh_iw_civ_car_hatch") {
     self playSound("fly_bump_veh");
-  }
-  else if(self.model == "furniture_couch_leather2_dust" || self.model == "dub_lounge_sofa_02") {
+  } else if(self.model == "furniture_couch_leather2_dust" || self.model == "dub_lounge_sofa_02") {
     self playSound("fly_bump_couch");
-  }
-  else if(self.model == "p6_chair_damaged_panama" || self.model == "berlin_furniture_chair1_dusty") {
+  } else if(self.model == "p6_chair_damaged_panama" || self.model == "berlin_furniture_chair1_dusty") {
     self playSound("fly_bump_chair");
-  }
-  else if(self.model == "me_refrigerator_d" || self.model == "machinery_washer_blue") {
+  } else if(self.model == "me_refrigerator_d" || self.model == "machinery_washer_blue") {
     self playSound("fly_bump_fridge");
-  }
-  else {
+  } else {
     self playSound("fly_bump_plr");
   }
 }

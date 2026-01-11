@@ -16,7 +16,7 @@ main() {
   maps\_anim::addnotetrack_customfunction("generic", "ps_rappel_clipout_npc", maps\_utility::disable_achievement_harder_they_fall_guy);
 
   foreach(var_1 in level.players) {
-  var_1 setthreatbiasgroup("allies");
+    var_1 setthreatbiasgroup("allies");
   }
 
   level._nextcoverprint = 0;
@@ -155,8 +155,7 @@ ai_deathflag() {
 
   if(isDefined(self.script_deathflag_longdeath)) {
     waittilldeathorpaindeath();
-  }
-  else {
+  } else {
     self waittill("death");
   }
 
@@ -304,8 +303,7 @@ trigger_spawner(var_0) {
     if(var_5.code_classname == "script_vehicle") {
       if(isDefined(var_5.script_moveoverride) && var_5.script_moveoverride == 1 || !isDefined(var_5.target)) {
         thread maps\_vehicle::vehicle_spawn(var_5);
-      }
-      else {
+      } else {
         var_5 thread maps\_vehicle::spawn_vehicle_and_gopath();
       }
 
@@ -377,8 +375,7 @@ get_spawner_from_pool(var_0, var_1) {
 
   if(isDefined(var_0.angles)) {
     var_3.angles = var_0.angles;
-  }
-  else if(isDefined(var_0.target)) {
+  } else if(isDefined(var_0.target)) {
     var_4 = getnode(var_0.target, "targetname");
 
     if(isDefined(var_4)) {
@@ -436,8 +433,7 @@ trigger_spawner_spawns_guys() {
 
   if(isDefined(self.script_forcespawn)) {
     var_0 = self stalingradspawn(var_1);
-  }
-  else {
+  } else {
     var_0 = self dospawn(var_1);
   }
 
@@ -492,7 +488,7 @@ trigger_spawner_reinforcement(var_0) {
   var_3 = getEntArray(var_1, "targetname");
 
   foreach(var_5 in var_3) {
-  var_5 thread trigger_reinforcement_spawn_guys();
+    var_5 thread trigger_reinforcement_spawn_guys();
   }
 }
 
@@ -760,8 +756,7 @@ spawn_grenade(var_0, var_1) {
   if(isDefined(level.player) && isDefined(level.player.variable_grenade)) {
     if(common_scripts\utility::cointoss()) {
       var_4 = "weapon_frag_grenade_var";
-    }
-    else {
+    } else {
       var_4 = "weapon_flash_grenade_var";
     }
   }
@@ -1138,8 +1133,7 @@ multikill_monitor() {
 
   if(!isDefined(var_0.multikill_count)) {
     var_0.multikill_count = 1;
-  }
-  else {
+  } else {
     var_0.multikill_count++;
   }
 
@@ -1186,8 +1180,7 @@ check_explosion_man_achievement(var_0, var_1, var_2) {
   if(var_3) {
     if(!isDefined(level.h1_achievement_explosionman)) {
       level.h1_achievement_explosionman = 1;
-    }
-    else {
+    } else {
       level.h1_achievement_explosionman++;
 
       if(level.h1_achievement_explosionman == 20) {
@@ -1260,24 +1253,16 @@ deathfunctions() {
 
     switch (var_6["params"]) {
       case 0:
-        [
-          [var_6["func"]]
-        ](var_0);
+        [[var_6["func"]]](var_0);
         break;
       case 1:
-        [
-          [var_6["func"]]
-        ](var_0, var_6["param1"]);
+        [[var_6["func"]]](var_0, var_6["param1"]);
         break;
       case 2:
-        [
-          [var_6["func"]]
-        ](var_0, var_6["param1"], var_6["param2"]);
+        [[var_6["func"]]](var_0, var_6["param1"], var_6["param2"]);
         break;
       case 3:
-        [
-          [var_6["func"]]
-        ](var_0, var_6["param1"], var_6["param2"], var_6["param3"]);
+        [[var_6["func"]]](var_0, var_6["param1"], var_6["param2"], var_6["param3"]);
         break;
     }
   }
@@ -1298,7 +1283,7 @@ ai_damage_think() {
     }
 
     foreach(var_9 in self.damage_functions) {
-    thread[[var_9]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+      thread[[var_9]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
     }
 
     if(!isalive(self) || self.delayeddeath) {
@@ -1381,8 +1366,7 @@ spawner_force_laser_on() {
 
   if(isDefined(self.weapon)) {
     var_0 = self.weapon;
-  }
-  else {
+  } else {
     return;
   }
 
@@ -1495,8 +1479,7 @@ spawn_think_script_inits() {
 
   if(isDefined(self.script_faceenemydist)) {
     self.maxfaceenemydist = self.script_faceenemydist;
-  }
-  else {
+  } else {
     self.maxfaceenemydist = getdefaultmaxfaceenemydistance();
   }
 
@@ -1510,8 +1493,7 @@ spawn_think_script_inits() {
 
   if(isDefined(self.script_fixednode)) {
     self.fixednode = self.script_fixednode == 1;
-  }
-  else {
+  } else {
     self.fixednode = self.team == "allies";
   }
 
@@ -1527,11 +1509,9 @@ spawn_think_script_inits() {
 
   if(isDefined(self.script_threatbiasgroup)) {
     self setthreatbiasgroup(self.script_threatbiasgroup);
-  }
-  else if(self.team == "neutral") {
+  } else if(self.team == "neutral") {
     self setthreatbiasgroup("civilian");
-  }
-  else {
+  } else {
     self setthreatbiasgroup(self.team);
   }
 
@@ -1696,8 +1676,7 @@ init_reset_ai() {
 
   if(isDefined(self.script_grenades)) {
     self.grenadeammo = self.script_grenades;
-  }
-  else {
+  } else {
     self.grenadeammo = 3;
   }
 
@@ -1713,8 +1692,7 @@ init_reset_ai() {
 scrub_guy() {
   if(self.team == "neutral") {
     self setthreatbiasgroup("civilian");
-  }
-  else {
+  } else {
     self setthreatbiasgroup(self.team);
   }
 
@@ -1822,8 +1800,7 @@ set_goal_volume() {
 
   if(isDefined(self.target)) {
     self setgoalvolume(var_0);
-  }
-  else {
+  } else {
     self setgoalvolumeauto(var_0);
   }
 }
@@ -1913,15 +1890,13 @@ go_to_node_using_funcs(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(node_has_radius(var_0)) {
       self.goalradius = var_0.radius;
-    }
-    else {
+    } else {
       self.goalradius = level.default_goalradius;
     }
 
     if(isDefined(var_0.height)) {
       self.goalheight = var_0.height;
-    }
-    else {
+    } else {
       self.goalheight = level.default_goalheight;
     }
 
@@ -1943,7 +1918,9 @@ go_to_node_using_funcs(var_0, var_1, var_2, var_3, var_4, var_5) {
     var_0 notify("trigger", self);
 
     if(isDefined(var_3)) {
-      [[var_3]](var_0);
+      [
+        [var_3]
+      ](var_0);
     }
 
     if(isDefined(var_0.script_flag_set)) {
@@ -1991,7 +1968,9 @@ go_to_node_using_funcs(var_0, var_1, var_2, var_3, var_4, var_5) {
     }
 
     if(isDefined(var_5)) {
-      [[var_5]](var_0);
+      [
+        [var_5]
+      ](var_0);
     }
 
     if(!isDefined(var_0.target)) {
@@ -2029,8 +2008,7 @@ go_to_node_wait_for_player(var_0, var_1, var_2) {
 
     if(var_7.size == 1) {
       var_6 = vectornormalize(var_7[0].origin - var_0.origin);
-    }
-    else if(isDefined(var_0.angles)) {
+    } else if(isDefined(var_0.angles)) {
       var_6 = anglesToForward(var_0.angles);
     }
   } else if(isDefined(var_0.angles))
@@ -2039,7 +2017,7 @@ go_to_node_wait_for_player(var_0, var_1, var_2) {
   var_8 = [];
 
   foreach(var_4 in level.players) {
-  var_8[var_8.size] = vectornormalize(var_4.origin - self.origin);
+    var_8[var_8.size] = vectornormalize(var_4.origin - self.origin);
   }
 
   foreach(var_12 in var_8) {
@@ -2137,9 +2115,7 @@ crawl_target_and_init_flags(var_0, var_1) {
       }
 
       if(isDefined(var_0.target)) {
-        var_5 = [
-          [var_1]
-        ](var_0.target);
+        var_5 = [[var_1]](var_0.target);
         var_3 = common_scripts\utility::add_to_array(var_3, var_5);
       }
     }
@@ -2172,8 +2148,7 @@ get_node_funcs_based_on_target(var_0, var_1) {
 
   if(isDefined(var_0)) {
     var_4["destination"][0] = var_0;
-  }
-  else {
+  } else {
     var_0 = getEntArray(self.target, "targetname");
 
     if(var_0.size > 0) {
@@ -2204,8 +2179,7 @@ get_node_funcs_based_on_target(var_0, var_1) {
 set_goal_height_from_settings() {
   if(isDefined(self.script_goalheight)) {
     self.goalheight = self.script_goalheight;
-  }
-  else {
+  } else {
     self.goalheight = level.default_goalheight;
   }
 }
@@ -2226,8 +2200,7 @@ set_goal_from_settings(var_0) {
   if(!isDefined(self getgoalvolume())) {
     if(self.type == "civilian") {
       self.goalradius = 128;
-    }
-    else {
+    } else {
       self.goalradius = level.default_goalradius;
     }
   }
@@ -2281,8 +2254,7 @@ use_a_turret(var_0) {
 
     if(isDefined(var_0.script_autotarget)) {
       var_0 thread autotarget(var_2);
-    }
-    else if(isDefined(var_0.script_manualtarget)) {
+    } else if(isDefined(var_0.script_manualtarget)) {
       var_0 setmode("manual_ai");
       var_0 thread manualtarget(var_2);
     } else if(var_2.size > 0) {
@@ -2308,8 +2280,7 @@ fallback_spawner_think(var_0, var_1) {
     self waittill("spawned", var_3);
 
     if(var_2) {
-      if(getdvar("fallback", "0") == "1") {
-      }
+      if(getdvar("fallback", "0") == "1") {}
 
       level notify("fallback_firstspawn" + var_0);
       var_2 = 0;
@@ -2336,8 +2307,7 @@ fallback_ai_think_death(var_0, var_1) {
 fallback_ai_think(var_0, var_1, var_2) {
   if(!isDefined(self.fallback) || !isDefined(self.fallback[var_0])) {
     self.fallback[var_0] = 1;
-  }
-  else {
+  } else {
     return;
   }
 
@@ -2481,8 +2451,7 @@ fallback_wait(var_0, var_1) {
   if(getdvar("fallback", "0") == "1") {}
 
   for(var_2 = 0; var_2 < level.spawner_fallbackers[var_0]; var_2++) {
-    if(getdvar("fallback", "0") == "1") {
-    }
+    if(getdvar("fallback", "0") == "1") {}
 
     level waittill("fallback_firstspawn" + var_0);
   }
@@ -2501,8 +2470,7 @@ fallback_wait(var_0, var_1) {
   var_4 = level.current_fallbackers[var_0];
 
   for(var_5 = 0; level.current_fallbackers[var_0] > var_4 * 0.5; var_5++) {
-    if(getdvar("fallback", "0") == "1") {
-    }
+    if(getdvar("fallback", "0") == "1") {}
 
     level waittill("fallbacker_died" + var_0);
   }
@@ -2525,8 +2493,7 @@ arrive(var_0) {
 
   if(node_has_radius(var_0)) {
     self.goalradius = var_0.radius;
-  }
-  else {
+  } else {
     self.goalradius = level.default_goalradius;
   }
 }
@@ -2537,8 +2504,7 @@ fallback_coverprint() {
   self endon("fallback_clear_death");
 
   for(;;) {
-    if(isDefined(self.coverpoint)) {
-    }
+    if(isDefined(self.coverpoint)) {}
 
     wait 0.05;
   }
@@ -2549,8 +2515,7 @@ fallback_print() {
   self endon("fallback_clear_death");
 
   for(;;) {
-    if(isDefined(self.coverpoint)) {
-    }
+    if(isDefined(self.coverpoint)) {}
 
     wait 0.05;
   }
@@ -2563,11 +2528,9 @@ fallback() {
 
   if(isDefined(self.script_seekgoal)) {
     thread arrive(var_0);
-  }
-  else if(node_has_radius(var_0)) {
+  } else if(node_has_radius(var_0)) {
     self.goalradius = var_0.radius;
-  }
-  else {
+  } else {
     self.goalradius = level.default_goalradius;
   }
 
@@ -2631,8 +2594,7 @@ friendly_wave(var_0) {
 
     if(var_0.targetname == "friendly_wave") {
       level.friendly_wave_trigger = var_0;
-    }
-    else {
+    } else {
       level.friendly_wave_trigger = undefined;
     }
 
@@ -2702,8 +2664,7 @@ friendly_wave_masterthread() {
 
         if(isDefined(var_3[var_4].script_forcespawn)) {
           var_7 = var_3[var_4] stalingradspawn(var_6);
-        }
-        else {
+        } else {
           var_7 = var_3[var_4] dospawn(var_6);
         }
 
@@ -2726,16 +2687,14 @@ friendly_wave_masterthread() {
 
         if(isDefined(level.friendlywave_thread)) {
           level thread[[level.friendlywave_thread]](var_7);
-        }
-        else {
+        } else {
           var_7 setgoalentity(level.player);
         }
 
         if(var_5) {
           if(level.friendly_wave_trigger.script_delay == 0) {
             waittillframeend;
-          }
-          else {
+          } else {
             wait(level.friendly_wave_trigger.script_delay);
           }
 
@@ -2884,8 +2843,7 @@ friendly_mg42_think(var_0, var_1) {
   for(;;) {
     if(distance(self.origin, var_1.origin) < 32) {
       self useturret(var_0);
-    }
-    else {
+    } else {
       break;
     }
 
@@ -3014,8 +2972,7 @@ spawnwaypointfriendlies() {
 
   if(isDefined(self.script_forcespawn)) {
     var_0 = self stalingradspawn();
-  }
-  else {
+  } else {
     var_0 = self dospawn();
   }
 
@@ -3089,15 +3046,13 @@ flood_and_secure(var_0) {
 
     if(self istouching(level.player)) {
       var_2 = 1;
-    }
-    else {
+    } else {
       if(!isalive(var_4)) {
         continue;
       }
       if(isplayer(var_4)) {
         var_2 = 1;
-      }
-      else if(!isDefined(var_4.issquad) || !var_4.issquad) {
+      } else if(!isDefined(var_4.issquad) || !var_4.issquad) {
         continue;
       }
     }
@@ -3219,8 +3174,7 @@ flood_and_secure_spawner_think(var_0, var_1, var_2) {
 
   if(isDefined(self.script_delay)) {
     var_4 = self.script_delay;
-  }
-  else {
+  } else {
     var_4 = 0;
   }
 
@@ -3247,8 +3201,7 @@ flood_and_secure_spawner_think(var_0, var_1, var_2) {
 
     if(isDefined(self.script_forcespawn)) {
       var_7 = self stalingradspawn(var_6);
-    }
-    else {
+    } else {
       var_7 = self dospawn(var_6);
     }
 
@@ -3284,8 +3237,7 @@ flood_and_secure_spawner_think(var_0, var_1, var_2) {
 
       if(var_4 > 2) {
         var_4 = randomint(4) + 2;
-      }
-      else {
+      } else {
         var_4 = 0.5 + randomfloat(0.5);
       }
     }
@@ -3365,8 +3317,7 @@ playerwasnearby(var_0, var_1) {
 
   if(isDefined(var_1) && isDefined(var_1.origin)) {
     var_2 = var_1.origin;
-  }
-  else {
+  } else {
     var_2 = self.origin;
   }
 
@@ -3408,8 +3359,7 @@ flood_and_secure_spawn_goal() {
 
   if(isDefined(var_0)) {
     self setgoalnode(var_0);
-  }
-  else {
+  } else {
     var_0 = getent(self.target, "targetname");
 
     if(isDefined(var_0)) {
@@ -3424,8 +3374,7 @@ flood_and_secure_spawn_goal() {
 
   if(isDefined(var_0.radius) && var_0.radius >= 0) {
     self.goalradius = var_0.radius;
-  }
-  else {
+  } else {
     self.goalradius = 256;
   }
 
@@ -3436,8 +3385,7 @@ flood_and_secure_spawn_goal() {
 
     if(isDefined(var_1)) {
       var_0 = var_1;
-    }
-    else {
+    } else {
       break;
     }
 
@@ -3445,8 +3393,7 @@ flood_and_secure_spawn_goal() {
 
     if(node_has_radius(var_0)) {
       self.goalradius = var_0.radius;
-    }
-    else {
+    } else {
       self.goalradius = 256;
     }
 
@@ -3852,8 +3799,7 @@ aigroup_soldierthink(var_0) {
 
   if(isDefined(self.script_deathflag_longdeath)) {
     waittilldeathorpaindeath();
-  }
-  else {
+  } else {
     self waittill("death");
   }
 
@@ -3986,8 +3932,7 @@ find_unclaimed_node(var_0) {
   for(var_1 = 0; var_1 < var_0.size; var_1++) {
     if(var_0[var_1].claimed) {
       continue;
-    }
-    else {
+    } else {
       return var_0[var_1];
     }
   }
@@ -4074,8 +4019,7 @@ flood_spawner_think(var_0) {
 
     if(isDefined(self.script_forcespawn)) {
       var_4 = var_3 stalingradspawn(var_2);
-    }
-    else {
+    } else {
       var_4 = var_3 dospawn(var_2);
     }
 
@@ -4107,8 +4051,7 @@ flood_spawner_think(var_0) {
 
     if(!player_saw_kill(var_4, var_5)) {
       self.count++;
-    }
-    else if(isDefined(level.ac130_flood_respawn)) {
+    } else if(isDefined(level.ac130_flood_respawn)) {
       if(isDefined(level.ac130gunner) && var_5 == level.ac130gunner) {
         if(randomint(2) == 0) {
           self.count++;
@@ -4259,8 +4202,7 @@ pyramid_spawn(var_0) {
       }
       if(isDefined(var_5.target)) {
         self.target = var_5.target;
-      }
-      else {
+      } else {
         self.target = undefined;
       }
 
@@ -4506,8 +4448,7 @@ achieve_three_of_kind(var_0, var_1) {
   }
   if(!isDefined(level.achieve_three_of_kind)) {
     level.achieve_three_of_kind = 1;
-  }
-  else {
+  } else {
     level.achieve_three_of_kind++;
   }
 
@@ -4538,8 +4479,7 @@ achieve_four_of_kind(var_0, var_1) {
 
   if(!isDefined(level.achieve_four_of_kind)) {
     level.achieve_four_of_kind = 1;
-  }
-  else {
+  } else {
     level.achieve_four_of_kind++;
   }
 

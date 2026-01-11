@@ -188,8 +188,7 @@ selectEntranceLocation() {
       for(i = 0; i < 3; i++) {
         if(i == locIndex) {
           Objective_Icon(self.locationObjectives[i], "compass_objpoint_mortar_target");
-        }
-        else {
+        } else {
           Objective_state(self.locationObjectives[i], "invisible");
         }
       }
@@ -264,15 +263,13 @@ createMobileMortar(owner, locIndex) {
     for(i = 1; i < level.spawnpoints.size; i++) {
       if(level.spawnpoints[i].origin[0] < mobileMortar.lowX) {
         mobileMortar.lowX = level.spawnpoints[i].origin[0];
-      }
-      else if(level.spawnpoints[i].origin[0] > mobileMortar.highX) {
+      } else if(level.spawnpoints[i].origin[0] > mobileMortar.highX) {
         mobileMortar.highX = level.spawnpoints[i].origin[0];
       }
 
       if(level.spawnpoints[i].origin[1] < mobileMortar.lowY) {
         mobileMortar.lowY = level.spawnpoints[i].origin[1];
-      }
-      else if(level.spawnpoints[i].origin[1] > mobileMortar.highY) {
+      } else if(level.spawnpoints[i].origin[1] > mobileMortar.highY) {
         mobileMortar.highY = level.spawnpoints[i].origin[1];
       }
     }
@@ -318,8 +315,7 @@ moveToPosition(position) {
 
   if(position == "entrance") {
     pos = self.origin + anglesToForward(self.angles) * 1000;
-  }
-  else {
+  } else {
     self notify("leaving");
     pos = self.origin + anglesToForward(self.angles) * -1000;
   }
@@ -330,8 +326,7 @@ moveToPosition(position) {
 
   if(position == "entrance") {
     self thread mortarAttack();
-  }
-  else {
+  } else {
     stopFXOnTag(level.tankDust1, self.fxEnt, "tag_origin");
     stopFXOnTag(level.tankDust2, self.fxEnt, "tag_origin");
 
@@ -506,8 +501,7 @@ fireMortar(mobileMortar, startPos, targetPos) {
 
   if(isDefined(owner)) {
     projectile2 = magicBullet("javelin_mp", startPos + (0, 0, 200), targetPos, owner);
-  }
-  else {
+  } else {
     projectile2 = magicBullet("javelin_mp", startPos + (0, 0, 200), targetPos);
   }
   projectile2.objIdFriendly = curObjID1;

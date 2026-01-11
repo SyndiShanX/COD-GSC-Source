@@ -252,15 +252,13 @@ onSpawnPlayer() {
   if(level.useStartSpawns) {
     if(spawnteam == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
     }
   } else {
     if(spawnteam == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_axis);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_allies);
     }
   }
@@ -374,8 +372,7 @@ onPickup(player) {
   team = player.pers["team"];
   if(team == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
   player playLocalSound("mp_suitcase_pickup");
@@ -418,8 +415,7 @@ onDrop(player) {
     playSoundOnPlayers(game["bomb_dropped_sound"], self maps\mp\gametypes\_gameobjects::getOwnerTeam());
     if(isDefined(player)) {
       player logString("bomb dropped");
-    }
-    else {
+    } else {
       logString("bomb dropped");
     }
     maps\mp\gametypes\_globallogic_audio::leaderDialog("bomb_lost", self maps\mp\gametypes\_gameobjects::getOwnerTeam());
@@ -437,8 +433,7 @@ abandonmentThink(delay) {
   }
   if(self maps\mp\gametypes\_gameobjects::getOwnerTeam() == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
   playSoundOnPlayers(game["bomb_dropped_sound"], otherTeam);
@@ -630,11 +625,9 @@ onEndGame(winningTeam) {
 onRoundEndGame(roundWinner) {
   if(game["roundswon"]["allies"] == game["roundswon"]["axis"]) {
     winner = "tie";
-  }
-  else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
+  } else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
     winner = "axis";
-  }
-  else {
+  } else {
     winner = "allies";
   }
   return winner;

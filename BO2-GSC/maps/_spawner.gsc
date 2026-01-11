@@ -118,8 +118,7 @@ ai_deathflag() {
 
   if(isDefined(self.script_deathflag_longdeath)) {
     self waittilldeathorpaindeath();
-  }
-  else {
+  } else {
     self waittill("death");
   }
 
@@ -203,8 +202,7 @@ trigger_spawner_monitor() {
 ok_to_trigger_spawn(forcechoke) {
   if(isDefined(forcechoke)) {
     choked = forcechoke;
-  }
-  else {
+  } else {
     choked = 0;
   }
 
@@ -544,8 +542,7 @@ spawn_think_action(spawner) {
 
     if(isDefined(self.script_fixednode)) {
       self.fixednode = self.script_fixednode == 1;
-    }
-    else {
+    } else {
       self.fixednode = self.team == "allies";
     }
 
@@ -553,18 +550,15 @@ spawn_think_action(spawner) {
 
     if(isDefined(self.script_moveoverride) && self.script_moveoverride == 1) {
       override = 1;
-    }
-    else {
+    } else {
       override = 0;
     }
 
     if(isDefined(self.script_threatbiasgroup)) {
       self setthreatbiasgroup(self.script_threatbiasgroup);
-    }
-    else if(self.team == "allies") {
+    } else if(self.team == "allies") {
       self setthreatbiasgroup("allies");
-    }
-    else {
+    } else {
       self setthreatbiasgroup("axis");
     }
 
@@ -606,8 +600,7 @@ spawn_think_action(spawner) {
 
     if(isDefined(self.script_sightrange)) {
       self.maxsightdistsqrd = self.script_sightrange;
-    }
-    else if(self.weaponclass == "gas") {
+    } else if(self.weaponclass == "gas") {
       self.maxsightdistsqrd = 1048576;
     }
 
@@ -716,8 +709,7 @@ spawn_think_action(spawner) {
 
     if(isDefined(self.target)) {
       self thread go_to_node();
-    }
-    else {
+    } else {
       self thread set_goalradius_based_on_settings();
 
       if(isDefined(self.script_spawner_targets)) {
@@ -777,8 +769,7 @@ set_goal_volume() {
 
   if(isDefined(self.target)) {
     self setgoalvolume(volume);
-  }
-  else if(isDefined(self.script_spawner_targets)) {
+  } else if(isDefined(self.script_spawner_targets)) {
     self waittill("spawner_target_set");
     self setgoalvolume(volume);
   } else
@@ -893,8 +884,7 @@ go_to_spawner_target(target_names) {
   if(isDefined(goal)) {
     if(isDefined(self.script_radius)) {
       self.goalradius = self.script_radius;
-    }
-    else {
+    } else {
       self.goalradius = 400;
     }
 
@@ -970,8 +960,7 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     if(isDefined(node.script_requires_player)) {
       if(node.script_requires_player > 1) {
         player_wait_dist = node.script_requires_player;
-      }
-      else {
+      } else {
         player_wait_dist = 256;
       }
 
@@ -982,8 +971,7 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
 
     if(isDefined(node.height)) {
       self.goalheight = node.height;
-    }
-    else {
+    } else {
       self.goalheight = level.default_goalheight;
     }
 
@@ -1040,8 +1028,7 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     if(isDefined(node.script_sprint)) {
       if(node.script_sprint) {
         self.sprint = 1;
-      }
-      else {
+      } else {
         self.sprint = 0;
       }
     }
@@ -1112,8 +1099,7 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
 
     if(temp.size == 1) {
       vec = vectornormalize(temp[0].origin - node.origin);
-    }
-    else if(isDefined(node.angles)) {
+    } else if(isDefined(node.angles)) {
       vec = anglesToForward(node.angles);
     }
   } else if(isDefined(node.angles))
@@ -1206,9 +1192,7 @@ crawl_target_and_init_flags(ent, get_func) {
       }
 
       if(isDefined(ent.target)) {
-        new_targets = [
-          [get_func]
-        ](ent.target);
+        new_targets = [[get_func]](ent.target);
         targets = add_to_array(targets, new_targets);
       }
     }
@@ -1239,8 +1223,7 @@ get_node_funcs_based_on_target(node, goal_type) {
 
   if(isDefined(node)) {
     array["node"][0] = node;
-  }
-  else {
+  } else {
     node = getEntArray(self.target, "targetname");
 
     if(node.size > 0) {
@@ -1274,11 +1257,9 @@ set_goalradius_based_on_settings(node) {
 
   if(isDefined(self.script_radius)) {
     self.goalradius = self.script_radius;
-  }
-  else if(isDefined(node) && node_has_radius(node)) {
+  } else if(isDefined(node) && node_has_radius(node)) {
     self.goalradius = node.radius;
-  }
-  else {
+  } else {
     self.goalradius = level.default_goalradius;
   }
 
@@ -1326,8 +1307,7 @@ fallback_ai_think_death(ai, num) {
 fallback_ai_think(num, node_array, spawner, ignorewhilefallingback) {
   if(!isDefined(self.fallback) || !isDefined(self.fallback[num])) {
     self.fallback[num] = 1;
-  }
-  else {
+  } else {
     return;
   }
 
@@ -1712,8 +1692,7 @@ aigroup_soldier_think(tracker) {
 
   if(isDefined(self.script_deathflag_longdeath)) {
     self waittilldeathorpaindeath();
-  }
-  else {
+  } else {
     self waittill("death");
   }
 
@@ -1800,14 +1779,11 @@ flood_spawner_think(trigger) {
 
       if(players.size == 1) {
         wait(randomfloatrange(5, 9));
-      }
-      else if(players.size == 2) {
+      } else if(players.size == 2) {
         wait(randomfloatrange(3, 6));
-      }
-      else if(players.size == 3) {
+      } else if(players.size == 3) {
         wait(randomfloatrange(1, 4));
-      }
-      else if(players.size == 4) {
+      } else if(players.size == 4) {
         wait(randomfloatrange(0.5, 1.5));
       }
     }
@@ -1875,8 +1851,7 @@ show_bad_path() {
     }
     if(gettime() - last_bad_path_time > 5000) {
       bad_path_count = 0;
-    }
-    else {
+    } else {
       bad_path_count++;
     }
 

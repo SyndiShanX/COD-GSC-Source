@@ -365,8 +365,7 @@ briggs_wound() {
     kill_all_pending_dialog(level.briggs);
   }
 
-  if(!level.briggs.knocked_out && !damagelocationisany("head", "helmet")) {
-  }
+  if(!level.briggs.knocked_out && !damagelocationisany("head", "helmet")) {}
 
   level.player setlowready(1);
 
@@ -620,8 +619,7 @@ notetrack_super_kill_duel_achievement(ai_defalco) {
   level.player giveachievement_wrapper("SP_STORY_FARID_DUEL");
 }
 
-init_doors() {
-}
+init_doors() {}
 
 lock_light_run() {
   level waittill("door_light_switch");
@@ -756,8 +754,7 @@ notetrack_super_kill_dead_a_farid_cough_blood(ai_farid) {
   }
 }
 
-notetrack_super_kill_dead_a_karma_react(ai_karma) {
-}
+notetrack_super_kill_dead_a_karma_react(ai_karma) {}
 
 notetrack_super_kill_dead_b_farid_react(ai_farid) {
   if(is_mature()) {

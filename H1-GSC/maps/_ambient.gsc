@@ -83,8 +83,7 @@ ambientvolume() {
 ambientdelay(var_0, var_1, var_2) {
   if(!isDefined(level.ambienteventent)) {
     level.ambienteventent[var_0] = spawnStruct();
-  }
-  else if(!isDefined(level.ambienteventent[var_0])) {
+  } else if(!isDefined(level.ambienteventent[var_0])) {
     level.ambienteventent[var_0] = spawnStruct();
   }
 
@@ -95,8 +94,7 @@ ambientdelay(var_0, var_1, var_2) {
 ambientevent(var_0, var_1, var_2) {
   if(!isDefined(level.ambienteventent[var_0].event_alias)) {
     var_3 = 0;
-  }
-  else {
+  } else {
     var_3 = level.ambienteventent[var_0].event_alias.size;
   }
 
@@ -281,8 +279,7 @@ ambient_trigger() {
 
     if(var_11 > var_10) {
       var_11 = 1;
-    }
-    else {
+    } else {
       var_11 = 0;
     }
 

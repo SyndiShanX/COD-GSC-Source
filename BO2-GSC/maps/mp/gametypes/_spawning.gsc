@@ -19,15 +19,14 @@ init() {
   level.recently_deceased = [];
 
   foreach(team in level.teams) {
-  level.recently_deceased[team] = spawn_array_struct();
+    level.recently_deceased[team] = spawn_array_struct();
   }
 
   level thread onplayerconnect();
 
   if(getdvar(#"_id_AD6C19FE") == "") {
     level.spawn_visibility_check_max = 20;
-  }
-  else {
+  } else {
     level.spawn_visibility_check_max = getdvarint(#"_id_AD6C19FE");
   }
 
@@ -41,8 +40,7 @@ init() {
   setdvar("scr_debug_render_spawn_text", "1");
 }
 
-default_gamemodespawndvars(reset_dvars) {
-}
+default_gamemodespawndvars(reset_dvars) {}
 
 init_spawn_system() {
   level.spawnsystem = spawnStruct();
@@ -156,15 +154,13 @@ monitorgpsjammer() {
 
     if(isusingremote() || is_true(self.isplanting) || is_true(self.isdefusing)) {
       gpsjammerprotection = 1;
-    }
-    else {
+    } else {
       if(timesincedistancecheck > 1) {
         timesincedistancecheck = 0;
 
         if(distancesquared(previousorigin, self.origin) < mindistancesq) {
           faileddistancecheck = 1;
-        }
-        else {
+        } else {
           faileddistancecheck = 0;
         }
 
@@ -257,8 +253,7 @@ get_score_curve_index(curve) {
   }
 }
 
-get_influencer_type_index(curve) {
-}
+get_influencer_type_index(curve) {}
 
 create_player_influencers() {
   assert(!isDefined(self.influencer_enemy_sphere));
@@ -385,8 +380,7 @@ player_influencers_set_team() {
 create_body_influencers() {
   if(level.teambased) {
     team_mask = getteammask(self.pers["team"]);
-  }
-  else {
+  } else {
     team_mask = level.spawnsystem.ispawn_teammask_free;
   }
 
@@ -398,8 +392,7 @@ create_grenade_influencers(parent_team, weaponname, grenade) {
 
   if(!level.teambased) {
     weapon_team_mask = level.spawnsystem.ispawn_teammask_free;
-  }
-  else {
+  } else {
     weapon_team_mask = getotherteamsmask(parent_team);
 
     if(level.friendlyfire) {
@@ -421,8 +414,7 @@ create_grenade_influencers(parent_team, weaponname, grenade) {
   if(isDefined(grenade.origin)) {
     if(weaponname == "claymore_mp" || weaponname == "bouncingbetty_mp") {
       addsphereinfluencer(level.spawnsystem.einfluencer_type_normal, grenade.origin, level.spawnsystem.claymore_influencer_radius, level.spawnsystem.claymore_influencer_score, weapon_team_mask, "claymore,r,s", get_score_curve_index(level.spawnsystem.claymore_influencer_score_curve), timeout, grenade);
-    }
-    else {
+    } else {
       addsphereinfluencer(level.spawnsystem.einfluencer_type_normal, grenade.origin, level.spawnsystem.grenade_influencer_radius, level.spawnsystem.grenade_influencer_score, weapon_team_mask, "grenade,r,s", get_score_curve_index(level.spawnsystem.grenade_influencer_score_curve), timeout, grenade);
     }
   }
@@ -443,8 +435,7 @@ create_napalm_fire_influencers(point, direction, parent_team, duration) {
 create_auto_turret_influencer(point, parent_team, angles) {
   if(!level.teambased) {
     weapon_team_mask = level.spawnsystem.ispawn_teammask_free;
-  }
-  else {
+  } else {
     weapon_team_mask = getotherteamsmask(parent_team);
   }
 
@@ -456,8 +447,7 @@ create_auto_turret_influencer(point, parent_team, angles) {
 create_auto_turret_influencer_close(point, parent_team, angles) {
   if(!level.teambased) {
     weapon_team_mask = level.spawnsystem.ispawn_teammask_free;
-  }
-  else {
+  } else {
     weapon_team_mask = getotherteamsmask(parent_team);
   }
 
@@ -469,8 +459,7 @@ create_auto_turret_influencer_close(point, parent_team, angles) {
 create_dog_influencers() {
   if(!level.teambased) {
     dog_enemy_team_mask = level.spawnsystem.ispawn_teammask_free;
-  }
-  else {
+  } else {
     dog_enemy_team_mask = getotherteamsmask(self.aiteam);
   }
 
@@ -480,8 +469,7 @@ create_dog_influencers() {
 create_helicopter_influencers(parent_team) {
   if(!level.teambased) {
     team_mask = level.spawnsystem.ispawn_teammask_free;
-  }
-  else {
+  } else {
     team_mask = getotherteamsmask(parent_team);
   }
 
@@ -499,8 +487,7 @@ remove_helicopter_influencers() {
 create_tvmissile_influencers(parent_team) {
   if(!level.teambased || is_hardcore()) {
     team_mask = level.spawnsystem.ispawn_teammask_free;
-  }
-  else {
+  } else {
     team_mask = getotherteamsmask(parent_team);
   }
 
@@ -520,8 +507,7 @@ create_artillery_influencers(point, radius) {
 
   if(radius < 0) {
     thisradius = level.spawnsystem.artillery_influencer_radius;
-  }
-  else {
+  } else {
     thisradius = radius;
   }
 
@@ -542,8 +528,7 @@ create_vehicle_influencers() {
 create_rcbomb_influencers(team) {
   if(!level.teambased) {
     other_team_mask = level.spawnsystem.ispawn_teammask_free;
-  }
-  else {
+  } else {
     other_team_mask = getotherteamsmask(team);
   }
 
@@ -553,8 +538,7 @@ create_rcbomb_influencers(team) {
 create_qrdrone_influencers(team) {
   if(!level.teambased) {
     other_team_mask = level.spawnsystem.ispawn_teammask_free;
-  }
-  else {
+  } else {
     other_team_mask = getotherteamsmask(team);
   }
 
@@ -565,8 +549,7 @@ create_qrdrone_influencers(team) {
 create_aitank_influencers(team) {
   if(!level.teambased) {
     other_team_mask = level.spawnsystem.ispawn_teammask_free;
-  }
-  else {
+  } else {
     other_team_mask = getotherteamsmask(team);
   }
 
@@ -576,8 +559,7 @@ create_aitank_influencers(team) {
 create_pegasus_influencer(origin, team) {
   if(!level.teambased) {
     other_team_mask = level.spawnsystem.ispawn_teammask_free;
-  }
-  else {
+  } else {
     other_team_mask = getotherteamsmask(team);
   }
 
@@ -606,8 +588,7 @@ create_map_placed_influencer(influencer_entity, optional_score_override) {
         if(isDefined(influencer_entity.radius)) {
           if(isDefined(optional_score_override)) {
             score = optional_score_override;
-          }
-          else {
+          } else {
             score = influencer_entity.script_score;
           }
 
@@ -622,8 +603,7 @@ create_map_placed_influencer(influencer_entity, optional_score_override) {
         if(isDefined(influencer_entity.radius) && isDefined(influencer_entity.height)) {
           if(isDefined(optional_score_override)) {
             score = optional_score_override;
-          }
-          else {
+          } else {
             score = influencer_entity.script_score;
           }
 
@@ -651,8 +631,7 @@ create_map_placed_influencer(influencer_entity, optional_score_override) {
 create_enemy_spawned_influencers(origin, team) {
   if(!level.teambased) {
     other_team_mask = level.spawnsystem.ispawn_teammask_free;
-  }
-  else {
+  } else {
     other_team_mask = getotherteamsmask(team);
   }
 
@@ -661,18 +640,18 @@ create_enemy_spawned_influencers(origin, team) {
 
 updateallspawnpoints() {
   foreach(team in level.teams) {
-  gatherspawnentities(team);
+    gatherspawnentities(team);
   }
 
   clearspawnpoints();
 
   if(level.teambased) {
     foreach(team in level.teams) {
-    addspawnpoints(team, level.unified_spawn_points[team].a);
+      addspawnpoints(team, level.unified_spawn_points[team].a);
     }
   } else {
     foreach(team in level.teams) {
-    addspawnpoints("free", level.unified_spawn_points[team].a);
+      addspawnpoints("free", level.unified_spawn_points[team].a);
     }
   }
 
@@ -799,8 +778,7 @@ get_player_spawning_dvars(reset_dvars) {
   setspawnpointrandomvariation(ss.randomness_range);
 }
 
-level_use_unified_spawning(use) {
-}
+level_use_unified_spawning(use) {}
 
 onspawnplayer_unified(predictedspawn) {
   if(!isDefined(predictedspawn)) {
@@ -838,8 +816,7 @@ onspawnplayer_unified(predictedspawn) {
       if(isDefined(spawn_point)) {
         if(predictedspawn) {
           self predictspawnpoint(spawn_point.origin, spawn_point.angles);
-        }
-        else {
+        } else {
           create_enemy_spawned_influencers(spawn_point.origin, self.pers["team"]);
           self spawn(spawn_point.origin, spawn_point.angles);
         }
@@ -892,8 +869,7 @@ getspawnpoint(player_entity, predictedspawn) {
 get_debug_spawnpoint(player) {
   if(level.teambased) {
     team = player.pers["team"];
-  }
-  else {
+  } else {
     team = "free";
   }
 
@@ -904,7 +880,7 @@ get_debug_spawnpoint(player) {
     spawn_counts = 0;
 
     foreach(team in level.teams) {
-    spawn_counts = spawn_counts + level.unified_spawn_points[team].a.size;
+      spawn_counts = spawn_counts + level.unified_spawn_points[team].a.size;
     }
 
     if(level.test_spawn_point_index >= spawn_counts) {
@@ -934,8 +910,7 @@ get_debug_spawnpoint(player) {
 get_best_spawnpoint(point_team, influencer_team, player, predictedspawn) {
   if(level.teambased) {
     vis_team_mask = getotherteamsmask(player.pers["team"]);
-  }
-  else {
+  } else {
     vis_team_mask = level.spawnsystem.ispawn_teammask_free;
   }
 
@@ -953,8 +928,7 @@ get_best_spawnpoint(point_team, influencer_team, player, predictedspawn) {
 gatherspawnentities(player_team) {
   if(!isDefined(level.unified_spawn_points)) {
     level.unified_spawn_points = [];
-  }
-  else if(isDefined(level.unified_spawn_points[player_team])) {
+  } else if(isDefined(level.unified_spawn_points[player_team])) {
     return level.unified_spawn_points[player_team];
   }
 
@@ -1056,7 +1030,7 @@ spawn_point_class_name_being_used(name) {
 
 codecallback_updatespawnpoints() {
   foreach(team in level.teams) {
-  maps\mp\gametypes\_spawnlogic::rebuildspawnpoints(team);
+    maps\mp\gametypes\_spawnlogic::rebuildspawnpoints(team);
   }
 
   level.unified_spawn_points = undefined;
@@ -1088,8 +1062,7 @@ getteamstartspawnname(team, spawnpointnamebase) {
   if(level.multiteam) {
     if(team == "axis") {
       spawn_point_team_name = "team1";
-    }
-    else if(team == "allies") {
+    } else if(team == "allies") {
       spawn_point_team_name = "team2";
     }
 

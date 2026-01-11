@@ -46,8 +46,7 @@ main(var_00, var_01, var_02) {
 
   if(issubstr(var_02, "_damaged")) {
     precachemodel("veh_mil_air_un_retribution_repair");
-  }
-  else if(issubstr(var_02, "_repaired")) {
+  } else if(issubstr(var_02, "_repaired")) {
     precachemodel("veh_mil_air_un_retribution_repair");
   }
 
@@ -65,8 +64,7 @@ main(var_00, var_01, var_02) {
 init_location() {
   if(issubstr(self.classname, "_damaged")) {
     self.func_B210 = "veh_mil_air_un_retribution_repair";
-  }
-  else if(issubstr(self.classname, "_repaired")) {
+  } else if(issubstr(self.classname, "_repaired")) {
     self.func_B210 = "veh_mil_air_un_retribution_repair";
   }
 

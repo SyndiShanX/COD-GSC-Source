@@ -238,8 +238,7 @@ remove_spawn_type(alienType) {
   spawnTypeConfig = strtok(alienType, " ");
   if(isDefined(spawnTypeConfig) && spawnTypeConfig.size == 2) {
     return spawnTypeConfig[1];
-  }
-  else {
+  } else {
     return alienType;
   }
 }
@@ -287,9 +286,7 @@ type_specific_init() {
     default:
 
       if(isDefined(level.dlc_alien_init_override_func)) {
-        [
-          [level.dlc_alien_init_override_func]
-        ]();
+        [[level.dlc_alien_init_override_func]]();
       }
       break;
   }
@@ -355,8 +352,7 @@ doIntroVignetteAnim(vignetteAnimInfo) {
 
   if(result.need_support) {
     doSpawnVignetteWithFlexibleHeight(animState, animIndex, animLabel, animEntry, result.start_notetrack, result.end_notetrack, ::vignetteNotetrackHandler);
-  }
-  else {
+  } else {
     maps\mp\agents\_scriptedAgents::PlayAnimNUntilNotetrack(animState, animIndex, animLabel, endNotetrack, ::vignetteNotetrackHandler);
   }
 

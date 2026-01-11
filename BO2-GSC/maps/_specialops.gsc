@@ -37,8 +37,7 @@ for_each(array, functor, unary_predicate, predicate_argument) {
 type_so() {
   if(isDefined(self) && isDefined(self.classname) && isDefined(self.script_specialops) && self.script_specialops == 1) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -184,14 +183,11 @@ delete_by_type(type_predicate) {
 noteworthy_check(value) {
   if(isDefined(self) && isDefined(self.classname) && self.classname == "script_origin") {
     return false;
-  }
-  else if(isDefined(self) && isDefined(self.script_noteworthy) && self.script_noteworthy != value) {
+  } else if(isDefined(self) && isDefined(self.script_noteworthy) && self.script_noteworthy != value) {
     return true;
-  }
-  else if(isDefined(self) && isDefined(self.script_gameobjectname)) {
+  } else if(isDefined(self) && isDefined(self.script_gameobjectname)) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

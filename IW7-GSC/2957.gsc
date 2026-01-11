@@ -57,8 +57,7 @@ stringemissilefired() {
         if(isDefined(var_2.unittype) && !scripts\engine\utility::is_true(var_2.space)) {
           if(var_2.unittype == "soldier" || var_2.unittype == "c6") {
             var_00 missile_settargetent(self.func_10F9D.func_10FAA, (0, 0, 38));
-          }
-          else if(var_2.unittype == "c8") {
+          } else if(var_2.unittype == "c8") {
             var_00 missile_settargetent(self.func_10F9D.func_10FAA, (0, 0, 60));
           }
         }
@@ -89,7 +88,7 @@ func_10FAC() {
     func_41BB();
 
     foreach(var_01 in self.func_10F9D.func_AF2F) {
-    func_41E3(var_01);
+      func_41E3(var_01);
     }
 
     self.func_10F9D.func_AF2F = undefined;
@@ -104,7 +103,7 @@ func_10F9E() {
     setomnvar("ui_lockon_ads", 0);
 
     foreach(var_01 in self.func_10F9D.func_AF2F) {
-    func_41E3(var_01);
+      func_41E3(var_01);
     }
   }
 }
@@ -272,7 +271,7 @@ func_7E04() {
   }
 
   foreach(var_04 in var_09) {
-  func_1833(var_04);
+    func_1833(var_04);
   }
 
   foreach(var_15 in var_06) {
@@ -294,8 +293,7 @@ func_7E4B() {
 
       if(isDefined(var_3["right_leg"]) && !isDefined(var_3["left_leg"])) {
         var_03 = scripts\sp\utility::func_22B2(var_03, "right_leg");
-      }
-      else if(isDefined(var_3["left_leg"]) && !isDefined(var_3["right_leg"])) {
+      } else if(isDefined(var_3["left_leg"]) && !isDefined(var_3["right_leg"])) {
         var_03 = scripts\sp\utility::func_22B2(var_03, "left_leg");
       }
 
@@ -376,8 +374,7 @@ func_7E9A(var_00) {
   if(!isDefined(var_0.func_3508)) {
     if(isDefined(var_0.unittype) && tolower(var_0.unittype) == "c8") {
       var_02 = 60;
-    }
-    else {
+    } else {
       var_02 = 38;
     }
 

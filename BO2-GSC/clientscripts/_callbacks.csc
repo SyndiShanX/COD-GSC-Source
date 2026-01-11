@@ -33,8 +33,7 @@ statechange(clientnum, system, newstate) {
 
   if(isDefined(level._systemstates[system].callback)) {
     [[level._systemstates[system].callback]](clientnum, newstate);
-  }
-  else {
+  } else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
 
   }
@@ -327,8 +326,7 @@ airsupport(localclientnum, x, y, z, type, yaw, team, teamfaction, owner, exittyp
 
   if(type == "n") {
     clientscripts\_napalm::startnapalm(localclientnum, pos, yaw, teamfaction, team, owner, exittype);
-  }
-  else {
+  } else {
     println("");
     println("Unhandled airsupport type, only A (airstrike) and N (napalm) supported");
     println(type);
@@ -446,9 +444,7 @@ client_flag_callback(localclientnum, flag, set, newent) {
 
   if(isDefined(level._client_flag_callbacks) && isDefined(level._client_flag_callbacks[self.type]) && isDefined(level._client_flag_callbacks[self.type][flag])) {
     self thread[[level._client_flag_callbacks[self.type][flag]]](localclientnum, set, newent);
-  }
-  else {
-  }
+  } else {}
 }
 
 client_flagasval_callback(localclientnum, val) {

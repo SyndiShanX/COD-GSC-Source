@@ -32,8 +32,7 @@ init_loadout() {
 }
 
 init_melee_weapon() {
-  if(level.script == "frontend") {
-  } else if(level.script == "angola" || level.script == "angola_2")
+  if(level.script == "frontend") {} else if(level.script == "angola" || level.script == "angola_2")
     add_weapon("machete_sp");
   else {
     add_weapon("knife_sp");
@@ -59,8 +58,7 @@ init_loadout_weapons() {
     set_laststand_pistol("m1911_sp");
     set_switch_weapon("m16_sp");
     return;
-  } else if(getsubstr(level.script, 0, 6) == "sp_t6_") {
-  } else if(level.script == "frontend") {
+  } else if(getsubstr(level.script, 0, 6) == "sp_t6_") {} else if(level.script == "frontend") {
     set_laststand_pistol("none");
     return;
   } else if(level.script == "outro") {
@@ -100,8 +98,7 @@ init_loadout_weapons() {
 
   if(primary != "weapon_null_sp") {
     set_switch_weapon(primary);
-  }
-  else if(secondary != "weapon_null_sp") {
+  } else if(secondary != "weapon_null_sp") {
     set_switch_weapon(secondary);
   }
 
@@ -364,8 +361,7 @@ give_loadout(wait_for_switch_weapon) {
   if(!gave_grenade) {
     if(isDefined(level.player_grenade)) {
       grenade = level.player_grenade;
-    }
-    else {
+    } else {
       grenade = "frag_grenade_sp";
     }
 
@@ -443,8 +439,7 @@ give_loadout(wait_for_switch_weapon) {
 give_model() {
   entity_num = self getentitynumber();
 
-  if(level.campaign == "none") {
-  }
+  if(level.campaign == "none") {}
 
   if(isDefined(level.player_viewmodel)) {
     self setviewmodel(level.player_viewmodel);

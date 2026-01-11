@@ -82,7 +82,7 @@ init_color_grouping(nodes) {
 
   // 		level.colorNodes_debug_ai = [];
 
-    level.color_node_type_function = [];
+  level.color_node_type_function = [];
   add_cover_node("BAD NODE");
   add_cover_node("Cover Stand");
   add_cover_node("Cover Crouch");
@@ -193,7 +193,7 @@ ai_picks_destination(currentColorCode) {
   	}
   	colorTeam = self.script_color_axis;
   }
-	
+  	
   if( ( issubstr( self.classname, "ally" ) ) || ( self.type == "civilian" ) )
   {
   	assertEx( !isDefined( self.script_color_axis ), "Ally at origin " + self.origin + " has script_color_axis!" );
@@ -202,7 +202,7 @@ ai_picks_destination(currentColorCode) {
   	}
   	colorTeam = self.script_color_allies;
   }
-	
+  	
   colorCodes = strtok( colorTeam, " " );
   for( i = 0;i < colorCodes.size;i++ )
   {
@@ -452,8 +452,7 @@ trigger_issues_orders(color_team, team) {
 activate_color_trigger(team) {
   if(team == "allies") {
     self thread get_colorcodes_and_activate_trigger(self.script_color_allies, team);
-  }
-  else {
+  } else {
     self thread get_colorcodes_and_activate_trigger(self.script_color_axis, team);
   }
 }
@@ -555,8 +554,7 @@ process_cover_node_with_last_in_mind_allies(node, lastColorNumberCode) {
   // nodes that were in the last color order go at the end
   if(issubstr(node.script_color_allies, lastColorNumberCode)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
-  }
-  else {
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = node;
   }
 }
@@ -565,8 +563,7 @@ process_cover_node_with_last_in_mind_axis(node, lastColorNumberCode) {
   // nodes that were in the last color order go at the end
   if(issubstr(node.script_color_axis, lastColorNumberCode)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
-  }
-  else {
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = node;
   }
 }
@@ -697,7 +694,7 @@ issue_color_order_to_ai(colorCode, color, team, ai) {
     println("^3Warning, ColorNumber system tried to make " + ai.size + " AI go to " + nodes.size + " nodes.");
   }
 
-    counter = 0;
+  counter = 0;
   ai_count = ai.size;
   for(i = 0; i < nodes.size; i++) {
     node = nodes[i];
@@ -873,8 +870,7 @@ set_goal_and_volume(node) {
 
   if(self is_using_forcegoal_radius(node)) {
     self thread forcegoal_radius(node);
-  }
-  else if(node.radius > 0) {
+  } else if(node.radius > 0) {
     self.goalradius = node.radius;
   }
 
@@ -890,8 +886,7 @@ set_goal_and_volume(node) {
   } else {
     if(isDefined(level.fixednodesaferadius_default)) {
       self.fixedNodeSafeRadius = level.fixednodesaferadius_default;
-    }
-    else {
+    } else {
       self.fixedNodeSafeRadius = 64;
     }
   }
@@ -912,9 +907,7 @@ is_using_forcegoal_radius(node) {
 
   if(self.fixednode) {
     return false;
-  }
-
-  else {
+  } else {
     return true;
   }
 }
@@ -1236,9 +1229,9 @@ nodeThink()
 left_color_node() {
   self.color_node_debug_val = undefined;
 
-    if(!isDefined(self.color_node)) {
-      return;
-    }
+  if(!isDefined(self.color_node)) {
+    return;
+  }
   // 	assertEx( self.color_node.color_user == self, "Color Node user wasnt self!" );
 
   if(isDefined(self.color_node.color_user) && self.color_node.color_user == self) {

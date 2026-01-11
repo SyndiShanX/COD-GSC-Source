@@ -298,8 +298,7 @@ get_primary_death_anim_state() {
     case "move": {
       if(self.trajectoryActive) {
         return "jump";
-      }
-      else {
+      } else {
         return "run";
       }
     }
@@ -312,16 +311,14 @@ get_primary_death_anim_state() {
       }
       if(self.melee_in_move_back || self.melee_in_posture) {
         return "idle";
-      }
-      else {
+      } else {
         return "run";
       }
     }
     case "traverse": {
       if(self.trajectoryActive) {
         return "jump";
-      }
-      else {
+      } else {
         return "traverse";
       }
     }

@@ -533,5 +533,4 @@ sndchangetoapachemusicstate(dude) {
   setmusicstate("PANAMA_APACHE");
 }
 
-betrayal_fade_out(guy) {
-}
+betrayal_fade_out(guy) {}

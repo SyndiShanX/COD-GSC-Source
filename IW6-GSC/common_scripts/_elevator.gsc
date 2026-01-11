@@ -76,7 +76,7 @@ elevator_think() {
 
 elevator_call() {
   foreach(callbutton in level.elevator_callbuttons) {
-  callbutton thread monitor_callbutton();
+    callbutton thread monitor_callbutton();
   }
 }
 
@@ -119,8 +119,7 @@ elevator_fsm(state) {
       while(1) {
         if(self.moveto_floor == self get_curFloor()) {
           param = inside_trig discrete_waittill("trigger");
-        }
-        else {
+        } else {
           param = "elevator_called";
         }
 
@@ -392,8 +391,7 @@ elevator_move(floor_num) {
 
     if(!issubstr(part.classname, "trigger_")) {
       part moveTo(moveto_pos, moveTime, moveTime * level.elevator_accel, moveTime * level.elevator_decel);
-    }
-    else {
+    } else {
       part.origin = moveto_pos;
     }
   }
@@ -629,7 +627,7 @@ build_elevators() {
     elevator_bound_end delete();
   }
   foreach(elevator_doorset in elevator_doorsets) {
-  elevator_doorset delete();
+    elevator_doorset delete();
   }
 
   build_call_buttons();
@@ -642,7 +640,7 @@ build_elevators() {
     pLights = elevator get_housing_primarylight();
     if(isDefined(pLights) && pLights.size) {
       foreach(pLight in pLights) {
-      pLight setlightintensity(0.75);
+        pLight setlightintensity(0.75);
       }
     }
   }
@@ -688,8 +686,7 @@ setup_hints() {
     use_trig SetCursorHint("HINT_NOICON");
     if(num_of_floors > 2) {
       use_trig setHintString(&"ELEVATOR_FLOOR_SELECT_HINT");
-    }
-    else {
+    } else {
       use_trig setHintString(&"ELEVATOR_USE_HINT");
     }
   }
@@ -713,8 +710,7 @@ discrete_waittill(msg) {
 
   if(level.elevator_motion_detection) {
     self.motion_trigger waittill(msg, param);
-  }
-  else {
+  } else {
     self waittill(msg, param);
   }
 
@@ -799,12 +795,12 @@ get_housing_children() {
 
   script_models = self get_housing_models();
   foreach(eModel in script_models) {
-  children[children.size] = eModel;
+    children[children.size] = eModel;
   }
 
   primarylights = get_housing_primarylight();
   foreach(pLight in primarylights) {
-  children[children.size] = pLight;
+    children[children.size] = pLight;
   }
 
   return children;
@@ -956,8 +952,7 @@ elevator_get_dvar_int(dvar, def) {
 elevator_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }

@@ -11,7 +11,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\visionset_mgr_shared;
-
 #namespace ai_tank;
 
 init_shared(bundlename) {
@@ -26,10 +25,10 @@ init_shared(bundlename) {
     bundle = struct::get_script_bundle("killstreak", bundlename);
     level.var_400ded61.aitankkillstreakbundle = bundle;
     level.var_400ded61._ai_tank_fx = [];
-    level.var_400ded61._ai_tank_fx[#"light_green"] = "killstreaks/fx_agr_vlight_eye_grn";
-    level.var_400ded61._ai_tank_fx[#"light_red"] = "killstreaks/fx_agr_vlight_eye_red";
-    level.var_400ded61._ai_tank_fx[#"immobile"] = "killstreaks/fx8_drone_tank_stun";
-    level.var_400ded61._ai_tank_fx[#"stun"] = "killstreaks/fx_agr_emp_stun";
+    level.var_400ded61._ai_tank_fx[# "light_green"] = "killstreaks/fx_agr_vlight_eye_grn";
+    level.var_400ded61._ai_tank_fx[# "light_red"] = "killstreaks/fx_agr_vlight_eye_red";
+    level.var_400ded61._ai_tank_fx[# "immobile"] = "killstreaks/fx8_drone_tank_stun";
+    level.var_400ded61._ai_tank_fx[# "stun"] = "killstreaks/fx_agr_emp_stun";
     clientfield::register("vehicle", "ai_tank_death", 1, 1, "int", &death, 0, 0);
     clientfield::register("vehicle", "ai_tank_immobile", 1, 1, "int", &tank_immobile, 0, 0);
     clientfield::register("vehicle", "ai_tank_change_control", 1, 1, "int", &tank_change_control, 0, 0);
@@ -136,7 +135,7 @@ tank_change_control(localclientnum, oldval, newval, bnewent, binitialsnap, field
     self function_d309e55a("tag_turret_base_pivot", 1);
     self function_d309e55a("tag_turret_constraint_base", 1);
     self function_d309e55a("tag_turret_constrained_barrel", 1);
-    playSound(localclientnum, #"hash_a919be8bee9e599", self.origin);
+    playSound(localclientnum, # "hash_a919be8bee9e599", self.origin);
     return;
   }
 
@@ -144,7 +143,7 @@ tank_change_control(localclientnum, oldval, newval, bnewent, binitialsnap, field
   self function_d309e55a("tag_turret_base_pivot", 0);
   self function_d309e55a("tag_turret_constraint_base", 0);
   self function_d309e55a("tag_turret_constrained_barrel", 0);
-  playSound(localclientnum, #"hash_a919be8bee9e599", self.origin);
+  playSound(localclientnum, # "hash_a919be8bee9e599", self.origin);
 }
 
 death(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -159,8 +158,8 @@ death(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastime
 }
 
 function_407a7b51(localclientnum) {
-  self.immobile_fx = util::playFXOnTag(localclientnum, level.var_400ded61._ai_tank_fx[#"immobile"], self, "tag_body");
-  playSound(localclientnum, #"veh_talon_shutdown", self.origin);
+  self.immobile_fx = util::playFXOnTag(localclientnum, level.var_400ded61._ai_tank_fx[# "immobile"], self, "tag_body");
+  playSound(localclientnum, # "veh_talon_shutdown", self.origin);
 }
 
 function_7713b297(localclientnum) {

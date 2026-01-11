@@ -21,8 +21,7 @@ main() {
 
   if(isDefined(self.drivingvehicle)) {
     main_driver();
-  }
-  else {
+  } else {
     main_passenger();
   }
 }
@@ -376,11 +375,9 @@ snowmobileShootBehavior() {
 
   if(distSq < 1000 * 1000) {
     self.shootstyle = "full";
-  }
-  else if(distSq < 2000 * 2000) {
+  } else if(distSq < 2000 * 2000) {
     self.shootstyle = "burst";
-  }
-  else {
+  } else {
     self.shootstyle = "single";
   }
 
@@ -403,15 +400,13 @@ snowmobileShootBehavior() {
         sideness /= 3;
         if(sideness > 128) {
           sideness = 128;
-        }
-        else if(sideness < -128) {
+        } else if(sideness < -128) {
           sideness = -128;
         }
         // flip it so guys farther to the side shoot in front of you
         if(sideness > 0) {
           sideness = 128 - sideness;
-        }
-        else {
+        } else {
           sideness = -128 - sideness;
         }
 
@@ -519,7 +514,7 @@ snowmobile_trackshootentorpos_driver() {
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "snowmobile_trackshootentorpos_driver";
 
-    aimblendtime = .05;
+  aimblendtime = .05;
 
   maxyawdeltachange = 8; // max change in yaw in 1 frame
   prevyawdelta = 0;
@@ -589,7 +584,7 @@ snowmobile_trackshootentorpos_passenger() {
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "snowmobile_trackshootentorpos_passenger";
 
-    aimblendtime = .05;
+  aimblendtime = .05;
 
   maxyawdeltachange_default = 5; // max change in yaw in 1 frame
   maxyawdeltachange_fast = 20;

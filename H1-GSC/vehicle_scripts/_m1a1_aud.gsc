@@ -101,26 +101,20 @@ snd_m1a1_constructor() {
   soundscripts\_audio_vehicle_manager::avm_end_state_group();
   soundscripts\_audio_vehicle_manager::avm_end_state_data();
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_idle_vel2vol", [[0.0, 1.0],
-    [8.0, 0.0]
-  ]);
+    [8.0, 0.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_idle_vel2pch", [[0.0, 1.0],
-    [2.5, 1.25]
-  ]);
+    [2.5, 1.25]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_engine_vel2vol", [[0.0, 0.0],
     [5.0, 0.7],
-    [8.0, 1.0]
-  ]);
+    [8.0, 1.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_engine_vel2pch", [[0.0, 0.8],
     [8.0, 1.0],
-    [10.0, 1.1]
-  ]);
+    [10.0, 1.1]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_treads_vel2vol", [[0.0, 0.0],
     [5.0, 0.7],
-    [8.0, 1.0]
-  ]);
+    [8.0, 1.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("m1a1_treads_vel2pch", [[0.0, 0.8],
-    [8.0, 1.2]
-  ]);
+    [8.0, 1.2]]);
   soundscripts\_audio_vehicle_manager::avm_end_preset_def();
 }
 

@@ -415,8 +415,7 @@ initmovestartstoptransitions() {
       if(isDefined(anim.archetypes["soldier"]["cover_exit"][var_5]) && isDefined(anim.archetypes["soldier"]["cover_exit"][var_5][var_3])) {
         if(animhasnotetrack(anim.archetypes["soldier"]["cover_exit"][var_5][var_3], "code_move")) {
           var_6 = getnotetracktimes(anim.archetypes["soldier"]["cover_exit"][var_5][var_3], "code_move")[0];
-        }
-        else {
+        } else {
           var_6 = 1;
         }
 

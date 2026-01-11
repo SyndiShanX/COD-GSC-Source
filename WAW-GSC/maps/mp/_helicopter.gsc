@@ -148,8 +148,7 @@ heli_get_dvar_int(dvar, def) {
 heli_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }
@@ -213,15 +212,12 @@ heli_missile_regen() {
     debug_print3d("Missile Ammo: " + self.missile_ammo, (0.5, 0.5, 1), self, (0, 0, -100), 0);
     if(self.missile_ammo >= level.heli_missile_max) {
       self waittill("missile fired");
-    }
-    else {
+    } else {
       if(self.currentstate == "heavy smoke") {
         wait(level.heli_missile_regen_time / 4);
-      }
-      else if(self.currentstate == "light smoke") {
+      } else if(self.currentstate == "light smoke") {
         wait(level.heli_missile_regen_time / 2);
-      }
-      else {
+      } else {
         wait(level.heli_missile_regen_time);
       }
     }
@@ -400,8 +396,7 @@ heli_damage_monitor() {
     }
     if(level.teamBased) {
       isValidAttacker = (isDefined(attacker.pers["team"]) && attacker.pers["team"] != self.team);
-    }
-    else {
+    } else {
       isValidAttacker = true;
     }
     if(!isValidAttacker) {
@@ -412,8 +407,7 @@ heli_damage_monitor() {
     if(type == "MOD_RIFLE_BULLET" || type == "MOD_PISTOL_BULLET") {
       if(self.damageTaken >= self.health_bulletdamageble) {
         self.damageTaken += damage;
-      }
-      else {
+      } else {
         self.damageTaken += damage * level.heli_armor_bulletdamage;
       }
     } else
@@ -435,15 +429,13 @@ heli_health() {
     if(self.health_bulletdamageble > self.health_low) {
       if(self.damageTaken >= self.health_bulletdamageble) {
         self.currentstate = "heavy smoke";
-      }
-      else if(self.damageTaken >= self.health_low) {
+      } else if(self.damageTaken >= self.health_low) {
         self.currentstate = "light smoke";
       }
     } else {
       if(self.damageTaken >= self.health_low) {
         self.currentstate = "heavy smoke";
-      }
-      else if(self.damageTaken >= self.health_bulletdamageble) {
+      } else if(self.damageTaken >= self.health_bulletdamageble) {
         self.currentstate = "light smoke";
       }
     }
@@ -474,8 +466,7 @@ heli_health() {
     }
     if(self.damageTaken <= level.heli_armor) {
       debug_print3d_simple("Armor: " + (level.heli_armor - self.damageTaken), self, (0, 0, 100), 20);
-    }
-    else {
+    } else {
       debug_print3d_simple("Health: " + (self.maxhealth - self.damageTaken), self, (0, 0, 100), 20);
     }
     wait 1;
@@ -580,8 +571,7 @@ heli_fly(currentnode) {
     }
     if(!isDefined(nextnode.target)) {
       stop = 1;
-    }
-    else {
+    } else {
       stop = 0;
     }
     debug_line(currentnode.origin, nextnode.origin, (1, 0.5, 0.5), 200);
@@ -638,8 +628,7 @@ fire_missile(sMissileType, iShots, eTarget) {
     case "ffar":
       if(self.team == "allies") {
         weaponName = "cobra_FFAR_mp";
-      }
-      else {
+      } else {
         weaponName = "hind_FFAR_mp";
       }
       tags[0] = "tag_store_r_2";
@@ -695,8 +684,7 @@ attack_secondary() {
       while(isDefined(self.missileTarget) && isalive(self.missileTarget)) {
         if(self missile_target_sight_check(self.missileTarget)) {
           self thread missile_support(self.missileTarget, level.heli_missile_rof, true, undefined);
-        }
-        else {
+        } else {
           break;
         }
         antithreat += 100;
@@ -871,14 +859,12 @@ debug_print_target() {
   if(isDefined(level.heli_debug) && level.heli_debug == 1.0) {
     if(isDefined(self.primaryTarget) && isDefined(self.primaryTarget.threatlevel)) {
       primary_msg = "Primary: " + self.primaryTarget.name + " : " + self.primaryTarget.threatlevel;
-    }
-    else {
+    } else {
       primary_msg = "Primary: ";
     }
     if(isDefined(self.secondaryTarget) && isDefined(self.secondaryTarget.threatlevel)) {
       secondary_msg = "Secondary: " + self.secondaryTarget.name + " : " + self.secondaryTarget.threatlevel;
-    }
-    else {
+    } else {
       secondary_msg = "Secondary: ";
     }
     frames = int(self.targeting_delay * 20) + 1;
@@ -897,8 +883,7 @@ debug_print3d_simple(message, ent, offset, frames) {
   if(isDefined(level.heli_debug) && level.heli_debug == 1.0) {
     if(isDefined(frames)) {
       thread draw_text(message, (0.8, 0.8, 0.8), ent, offset, frames);
-    }
-    else {
+    } else {
       thread draw_text(message, (0.8, 0.8, 0.8), ent, offset, 0);
     }
   }

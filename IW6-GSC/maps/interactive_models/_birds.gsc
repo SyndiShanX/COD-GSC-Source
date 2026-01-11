@@ -6,8 +6,7 @@
 birds() {
   if(common_scripts\utility::issp()) {
     level waittill("load_finished");
-  }
-  else {
+  } else {
     level waittill("interactive_start");
   }
 
@@ -17,7 +16,7 @@ birds() {
     var_0 = getEntArray("interactive_birds", "targetname");
 
     foreach(var_2 in var_0) {
-    var_2 thread birds_setup();
+      var_2 thread birds_setup();
     }
   }
 }
@@ -70,8 +69,7 @@ birds_createents() {
 
     if(isDefined(var_0.bird_health)) {
       self.birds[var_1].health = var_0.bird_health;
-    }
-    else {
+    } else {
       self.birds[var_1].health = 20;
     }
 
@@ -106,7 +104,7 @@ birds_setupconnectedperches(var_0, var_1) {
 
   if(isDefined(var_0.incoming)) {
     foreach(var_4 in var_0.incoming) {
-    var_4.endperch = var_2;
+      var_4.endperch = var_2;
     }
   }
 
@@ -174,8 +172,7 @@ birds_setupconnectedperches(var_0, var_1) {
 
             if(isDefined(var_20)) {
               var_20 = birds_setupconnectedperches(var_20);
-            }
-            else {
+            } else {
               var_20 = level._interactive["bird_perches"][var_2.targetname];
             }
           }
@@ -265,8 +262,7 @@ birds_fly(var_0) {
 
     if(isDefined(var_1.rigmodel_pausestart[var_2.takeoffanim])) {
       var_13 = var_1.rigmodel_pausestart[var_2.takeoffanim];
-    }
-    else {
+    } else {
       var_13 = 0;
     }
 
@@ -289,8 +285,7 @@ birds_fly(var_0) {
 
     if(isDefined(var_11) && isDefined(var_1.rigmodel_pauseend[var_2.landanim])) {
       var_15 = var_1.rigmodel_pauseend[var_2.landanim];
-    }
-    else {
+    } else {
       var_15 = 0;
     }
 
@@ -320,8 +315,7 @@ birds_fly(var_0) {
 
     if(isDefined(var_11)) {
       var_27 = getanimlength(var_7) + getanimlength(var_11) - (var_13 + var_14 + var_15);
-    }
-    else {
+    } else {
       var_27 = getanimlength(var_7) - (var_13 + var_14 + var_15);
     }
 
@@ -536,8 +530,7 @@ bird_flyfromperch(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     if(common_scripts\utility::issp()) {
       self waittillmatch("takeoff_anim", "end");
-    }
-    else {
+    } else {
       wait(getanimlength(var_9));
     }
   }
@@ -607,12 +600,12 @@ birds_finishbirdtypesetup(var_0, var_1) {
   precachemodel(var_0.rig_model);
 
   foreach(var_3 in var_0.bird_model) {
-  precachemodel(var_3);
+    precachemodel(var_3);
   }
 
   if(!common_scripts\utility::issp()) {
     foreach(var_6 in var_0.sounds) {
-    precachesound(var_6);
+      precachesound(var_6);
     }
 
     for(var_8 = 1; var_8 <= 12; var_8++) {
@@ -625,7 +618,7 @@ birds_finishbirdtypesetup(var_0, var_1) {
 
         if(isarray(var_11)) {
           foreach(var_13 in var_11) {
-          call[[level.func["precacheMpAnim"]]](var_13);
+            call[[level.func["precacheMpAnim"]]](var_13);
           }
         } else
           call[[level.func["precacheMpAnim"]]](var_11);
@@ -638,7 +631,7 @@ birds_finishbirdtypesetup(var_0, var_1) {
 
         if(isarray(var_11)) {
           foreach(var_13 in var_11) {
-          call[[level.func["precacheMpAnim"]]](var_13);
+            call[[level.func["precacheMpAnim"]]](var_13);
           }
         } else
           call[[level.func["precacheMpAnim"]]](var_11);
@@ -726,7 +719,7 @@ birds_perchdangertrigger(var_0, var_1, var_2) {
   thread birds_percheventtrigger(var_0, var_1, var_2);
 
   foreach(var_4 in self.triggers) {
-  thread birds_perchtouchtrigger(var_4, var_1, var_2);
+    thread birds_perchtouchtrigger(var_4, var_1, var_2);
   }
 }
 

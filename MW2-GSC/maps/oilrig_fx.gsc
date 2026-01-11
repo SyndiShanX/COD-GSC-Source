@@ -93,8 +93,7 @@ precacheFX() {
   // "hunted light" required zfeather == 1 and r_zfeather is undefined on console.So, test for != "0".
   if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
     level._effect["spotlight"] = loadfx("misc/hunted_spotlight_model");
-  }
-  else {
+  } else {
     level._effect["spotlight"] = loadfx("misc/spotlight_large");
   }
 

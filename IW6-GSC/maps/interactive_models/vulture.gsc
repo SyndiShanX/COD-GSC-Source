@@ -48,13 +48,13 @@ vultures() {
     var_0 = getEntArray("interactive_vulture", "targetname");
 
     foreach(var_2 in var_0) {
-    var_2 thread vulture_waitforstart();
+      var_2 thread vulture_waitforstart();
     }
 
     var_0 = getEntArray("interactive_vulture_circling", "targetname");
 
     foreach(var_2 in var_0) {
-    var_2 thread vulture_waitforstart();
+      var_2 thread vulture_waitforstart();
     }
   }
 }
@@ -140,8 +140,7 @@ vulture_circle(var_0) {
 
   if(isDefined(var_0) && var_0) {
     var_2 = self.origin;
-  }
-  else {
+  } else {
     var_3 = anglestoright(self.angles);
     var_2 = self.origin - var_3 * var_1.circle_radius;
   }
@@ -303,8 +302,7 @@ vulture_loadfromstruct() {
 
   if(var_0.targetname == "interactive_vulture") {
     var_0 thread vulture();
-  }
-  else if(var_0.targetname == "interactive_vulture_circling") {
+  } else if(var_0.targetname == "interactive_vulture_circling") {
     var_0 thread vulture_circle(1);
   }
 }

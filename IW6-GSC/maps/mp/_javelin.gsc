@@ -78,8 +78,7 @@ LockMissesReset() {
 LockMissesIncr() {
   if(!isDefined(self.javelinLockMisses)) {
     self.javelinLockMisses = 1;
-  }
-  else {
+  } else {
     self.javelinLockMisses++;
   }
 }
@@ -225,7 +224,7 @@ JavelinUsageLoop() {
       }
       if(debugDraw && isDefined(self.javelinPoints)) {
         foreach(javPoint in self.javelinPoints) {
-        DrawStar(javPoint, (0.8, 1.0, 0.8));
+          DrawStar(javPoint, (0.8, 1.0, 0.8));
         }
         DrawStar(self.javelinPoints[self.javelinPoints.size - 1], (1, 1, 0.2));
         DrawStar(AveragePoint(self.javelinPoints), (0.2, 0.2, 1));
@@ -296,8 +295,7 @@ JavelinUsageLoop() {
 
       if(self TargetPointTooClose(self.javelinTargetPoint)) {
         self WeaponLockTargetTooClose(true);
-      }
-      else {
+      } else {
         self WeaponLockTargetTooClose(false);
       }
 
@@ -325,8 +323,7 @@ JavelinUsageLoop() {
 
       if(self TargetPointTooClose(self.javelinTargetPoint)) {
         self WeaponLockTargetTooClose(true);
-      }
-      else {
+      } else {
         self WeaponLockTargetTooClose(false);
       }
 
@@ -341,8 +338,7 @@ DebugSightLine(start, end, passed) {
   }
   if(passed) {
     color = (0.3, 1.0, 0.3);
-  }
-  else {
+  } else {
     color = (1.0, 0.2, 0.2);
   }
 
@@ -413,8 +409,7 @@ javelinLockVehicle(lockLength) {
 
     if(isPlayer(self.javelinTarget)) {
       self WeaponLockFinalize(self.javelinTarget, (0, 0, 64), false);
-    }
-    else {
+    } else {
       self WeaponLockFinalize(self.javelinTarget, (0, 0, 0), false);
     }
 

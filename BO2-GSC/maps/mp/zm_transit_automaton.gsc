@@ -147,7 +147,7 @@ automatondamagecallback() {
       playFXOnTag(level._effect["switch_sparks"], self.dmgfxorigin, "tag_origin");
 
       foreach(trigger in triggers) {
-      trigger setinvisibletoall();
+        trigger setinvisibletoall();
       }
 
       level.the_bus.force_lock_doors = 1;
@@ -181,7 +181,7 @@ automatondamagecallback() {
       wait 28;
 
       foreach(trigger in triggers) {
-      trigger setvisibletoall();
+        trigger setvisibletoall();
       }
 
       level.the_bus.force_lock_doors = 0;
@@ -295,14 +295,11 @@ bus_driver_idle() {
 
     if(isDefined(level.bus_zombie_danger) && level.bus_zombie_danger) {
       driveranim = random(danger_anims);
-    }
-    else if(is_true(level.bus_driver_focused)) {
+    } else if(is_true(level.bus_driver_focused)) {
       driveranim = random(focused_anims);
-    }
-    else if(randomint(100) > 90) {
+    } else if(randomint(100) > 90) {
       driveranim = random(twitch_anims);
-    }
-    else {
+    } else {
       driveranim = random(idle_anims);
     }
 

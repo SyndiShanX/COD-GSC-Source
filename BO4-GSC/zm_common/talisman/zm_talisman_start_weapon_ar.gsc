@@ -13,7 +13,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_talisman;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_talisman_start_weapon_ar;
 
 autoexec __init__system__() {
@@ -29,5 +28,5 @@ __init__() {
 }
 
 activate_talisman() {
-  self.talisman_weapon_start = #"ar_modular_t8";
+  self.talisman_weapon_start = # "ar_modular_t8";
 }

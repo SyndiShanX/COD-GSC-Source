@@ -214,8 +214,7 @@ camo_mighty_mason() {
 
     if(toggle) {
       player visionsetnaked("taser_mine_shock", 0);
-    }
-    else {
+    } else {
       player visionsetnaked(saved_vision, 0);
     }
 
@@ -345,8 +344,7 @@ camo_battle_stealth_assist() {
 
       if(cointoss()) {
         level.harper thread say_dialog("harp_other_one_s_mine_0", 0.5);
-      }
-      else {
+      } else {
         level.salazar thread say_dialog("sala_i_ll_take_the_other_0", 0.5);
       }
     } else
@@ -362,8 +360,7 @@ camo_stealth_positive_listener() {
 
     if(cointoss()) {
       level.harper thread say_dialog("harp_good_kill_0", 0.5);
-    }
-    else {
+    } else {
       level.salazar thread say_dialog("sala_well_done_section_0", 0.5);
     }
 
@@ -488,8 +485,7 @@ camo_battle_lift() {
 
   if(flag("ruins_stealth_over")) {
     level.salazar thread say_dialog("sala_enemies_in_the_eleva_0", 4);
-  }
-  else {
+  } else {
     level.salazar thread say_dialog("sala_elevator_descending_0", 4);
   }
 
@@ -539,7 +535,7 @@ helipad_clean_up() {
   a_t_color = getEntArray("helipad_color_trigger", "script_noteworthy");
 
   foreach(color in a_t_color) {
-  color delete();
+    color delete();
   }
 
   flag_set("helipad_fx_tarp");
@@ -802,8 +798,7 @@ heli_turret_think() {
 
   if(isDefined(self.disabled) && self.disabled) {
     screen_fade_out(0, "compass_static", 1);
-  }
-  else {
+  } else {
     screen_fade_out(0, undefined, 1);
   }
 
@@ -1013,7 +1008,7 @@ heli_killed_death_watch() {
   a_nearby_enemies = get_ai_group_ai("helipad_near");
 
   foreach(enemy in a_nearby_enemies) {
-  enemy die();
+    enemy die();
   }
 
   wait 1;
@@ -1055,8 +1050,7 @@ heli_killed_damage_watch() {
     if(attacker == level.player) {
       if(weaponname == "titus_explosive_dart_sp") {
         n_damage_needed = 0;
-      }
-      else {
+      } else {
         n_damage_needed = n_damage_needed - damage;
       }
     }
@@ -1156,8 +1150,7 @@ outer_ruins_turret_think() {
   if(!flag("player_past_turrets")) {
     if(level.n_outer_ruins_turrets == 2) {
       level.harper thread queue_dialog("harp_hell_yeah_1");
-    }
-    else if(level.n_outer_ruins_turrets == 1) {
+    } else if(level.n_outer_ruins_turrets == 1) {
       level.harper thread queue_dialog("harp_you_fried_his_ass_s_0");
     }
   }
@@ -1250,7 +1243,7 @@ inner_ruins_kill_spawners() {
   a_t_color = getEntArray("inner_ruins_color_trigger", "script_noteworthy");
 
   foreach(color in a_t_color) {
-  color delete();
+    color delete();
   }
 }
 

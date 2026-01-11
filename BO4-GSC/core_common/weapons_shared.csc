@@ -7,7 +7,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
-
 #namespace weapons_shared;
 
 autoexec __init__system__() {
@@ -39,7 +38,7 @@ function_ca6a6ea8(local_client_num) {
 }
 
 function_1c61050d(local_client_num, objective_id) {
-  self waittill(#"death", #"disconnect", #"team_changed");
+  self waittill(#"death", # "disconnect", # "team_changed");
 
   if(isDefined(objective_id)) {
     objective_delete(local_client_num, objective_id);
@@ -92,9 +91,9 @@ function_903d2d4c(local_client_num) {
 
 function_ec73770b(local_client_num) {
   player = self;
-  player endon(#"death", #"disconnect");
+  player endon(#"death", # "disconnect");
   wait randomfloatrange(0.1, 0.5);
-  var_935615f7 = #"mountable_point";
+  var_935615f7 = # "mountable_point";
   obj_id = undefined;
   var_8e35a928 = 0;
   var_4798772a = 0;
@@ -170,33 +169,33 @@ function_ec73770b(local_client_num) {
     trace_end = trace_start + forward_vector;
     trace_result = bulletTrace(trace_start, trace_end, 0, player);
 
-    if(trace_result[#"fraction"] < 1 && trace_result[#"normal"][2] < 0.7) {
-      hit_distance = trace_result[#"fraction"] * trace_distance;
+    if(trace_result[# "fraction"] < 1 && trace_result[# "normal"][2] < 0.7) {
+      hit_distance = trace_result[# "fraction"] * trace_distance;
       player_radius = 15;
       var_91900283 = 100;
       var_3083dd99 = trace_start + vectorscale(forward, hit_distance - player_radius);
       var_1ddb7a9a = var_3083dd99 + (0, 0, var_91900283 * -1);
       ground_trace = bulletTrace(var_3083dd99, var_1ddb7a9a, 0, player);
 
-      if(ground_trace[#"fraction"] < 1) {
-        var_a9f17307 = var_3083dd99 + vectorscale((0, 0, -1), ground_trace[#"fraction"] * var_91900283);
-        var_8e35a928 = function_6bee89e8(local_client_num, current_weapon, var_a9f17307, trace_result[#"normal"] * -1);
-        var_1b1c8c9f = trace_result[#"position"][2];
+      if(ground_trace[# "fraction"] < 1) {
+        var_a9f17307 = var_3083dd99 + vectorscale((0, 0, -1), ground_trace[# "fraction"] * var_91900283);
+        var_8e35a928 = function_6bee89e8(local_client_num, current_weapon, var_a9f17307, trace_result[# "normal"] * -1);
+        var_1b1c8c9f = trace_result[# "position"][2];
         min_height = 30;
         max_height = 50;
         var_3ee12918 = max_height - min_height;
         var_d914c241 = vectorscale(forward, 3);
-        var_dd4ed37 = trace_result[#"position"] + var_d914c241;
+        var_dd4ed37 = trace_result[# "position"] + var_d914c241;
         var_8c2f90f2 = (var_dd4ed37[0], var_dd4ed37[1], var_a9f17307[2] + min_height);
         var_dd4ed37 = (var_dd4ed37[0], var_dd4ed37[1], var_a9f17307[2] + max_height);
         var_8e88861f = bulletTrace(var_dd4ed37, var_8c2f90f2, 0, player);
 
-        if(var_8e88861f[#"fraction"] < 1) {
-          var_f7fa6d81 = var_dd4ed37 + vectorscale((0, 0, -1), var_8e88861f[#"fraction"] * var_3ee12918);
+        if(var_8e88861f[# "fraction"] < 1) {
+          var_f7fa6d81 = var_dd4ed37 + vectorscale((0, 0, -1), var_8e88861f[# "fraction"] * var_3ee12918);
           var_1b1c8c9f = var_f7fa6d81[2];
         }
 
-        mountable_point = (trace_result[#"position"][0], trace_result[#"position"][1], var_1b1c8c9f);
+        mountable_point = (trace_result[# "position"][0], trace_result[# "position"][1], var_1b1c8c9f);
 
         if(var_8e35a928) {
           if(hit_distance < current_weapon.var_cddb5cd0 + player_radius) {

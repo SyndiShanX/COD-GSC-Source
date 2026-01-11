@@ -58,8 +58,7 @@ statadd(var_0, var_1, var_2) {
 statgetchild(var_0, var_1) {
   if(var_0 == "round") {
     return self getplayerdata(common_scripts\utility::getstatsgroup_common(), var_0, var_1);
-  }
-  else {
+  } else {
     return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), var_0, var_1);
   }
 }
@@ -73,8 +72,7 @@ statsetchild(var_0, var_1, var_2) {
   }
   if(var_0 == "round") {
     self setplayerdata(common_scripts\utility::getstatsgroup_common(), var_0, var_1, var_2);
-  }
-  else {
+  } else {
     if(!maps\mp\_utility::rankingenabled()) {
       return;
     }
@@ -201,7 +199,7 @@ writebufferedstats() {
 
   if(var_0) {
     foreach(var_3, var_2 in self.bufferedstats) {
-    self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), var_3, var_2);
+      self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), var_3, var_2);
     }
   }
 
@@ -503,7 +501,7 @@ uploadglobalstatcounters() {
   var_5 = 0;
 
   foreach(var_7 in level.players) {
-  var_5 += var_7.timeplayed["total"];
+    var_5 += var_7.timeplayed["total"];
   }
 
   incrementcounter("global_minutes", int(var_5 / 60));

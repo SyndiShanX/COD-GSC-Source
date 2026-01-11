@@ -34,8 +34,7 @@ tryUseHighValueTarget(lifeId, streakName) {
 reached_max_xp_multiplier() {
   if(level.teamBased) {
     return (level.hvts_active[self.team] >= CONST_MAX_ACTIVE_HVT_PER_GAME);
-  }
-  else if(isDefined(self.hvts_active)) {
+  } else if(isDefined(self.hvts_active)) {
     return (self.hvts_active >= CONST_MAX_ACTIVE_HVT_PER_PLAYER);
   }
 
@@ -52,8 +51,8 @@ useHighValueTarget(player, lifeId) {
   }
 
   if(reached_max_xp_multiplier() {
-    ||
-  }
+      ||
+    }
     (isDefined(player.hvts_active) && player.hvts_active >= CONST_MAX_ACTIVE_HVT_PER_PLAYER)
   ) {
     self iPrintLnBold(&"KILLSTREAKS_HVT_MAX");
@@ -80,15 +79,13 @@ setHighValueTarget() {
 
   if(level.teamBased) {
     leaderDialog("hvt_gone", team);
-  }
-  else {
+  } else {
     self leaderDialogOnPlayer("hvt_gone");
   }
 
   if(level.teamBased) {
     level decreaseXPBoost(team);
-  }
-  else {
+  } else {
     self decreaseXPBoost();
   }
 }
@@ -102,8 +99,7 @@ increaseXPBoost() {
   } else {
     if(!isDefined(self.hvts_active)) {
       self.hvts_active = 1;
-    }
-    else {
+    } else {
       self.hvts_active++;
     }
 
@@ -143,8 +139,7 @@ watchHVTOwner(team) {
 
   if(level.teamBased) {
     level decreaseXPBoost(team);
-  }
-  else if(isDefined(self) && result != "disconnect") {
+  } else if(isDefined(self) && result != "disconnect") {
     self decreaseXPBoost();
   }
 }

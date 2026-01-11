@@ -21,7 +21,7 @@ init() {
   var_1 = getEntArray("delete_on_load", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 delete();
+    var_3 delete();
   }
 
   init_destroyed_count();
@@ -33,8 +33,7 @@ warn_about_old_destructible() {
   var_0 = getEntArray("destructible", "targetname");
 
   if(var_0.size != 0) {
-    foreach(var_2 in var_0) {
-    }
+    foreach(var_2 in var_0) {}
   }
 }
 
@@ -97,7 +96,7 @@ find_destructibles() {
   var_9 = getEntArray("destructible_toy", "targetname");
 
   foreach(var_11 in var_9) {
-  var_11 setup_destructibles();
+    var_11 setup_destructibles();
   }
 }
 
@@ -367,7 +366,7 @@ add_keypairs_to_destructible(var_0) {
   var_3 = level.destructible_type[var_1].parts[var_2].size - 1;
 
   foreach(var_6, var_5 in var_0) {
-  level.destructible_type[var_1].parts[var_2][var_3].v[var_6] = var_5;
+    level.destructible_type[var_1].parts[var_2][var_3].v[var_6] = var_5;
   }
 }
 
@@ -456,8 +455,7 @@ destructible_explode(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 
   if(common_scripts\utility::isSP()) {
     level.destructible_type[var_12].parts[var_13][var_14].v["explode_range"] = var_2;
-  }
-  else {
+  } else {
     level.destructible_type[var_12].parts[var_13][var_14].v["explode_range"] = var_3;
   }
 
@@ -557,7 +555,7 @@ add_destructible_fx() {
               continue;
             }
             foreach(var_7, var_6 in var_4) {
-            level.destructible_type[self.destructibleInfo].parts[var_0][var_1].v["fx"][var_3][var_7] = loadfx(var_6);
+              level.destructible_type[self.destructibleInfo].parts[var_0][var_1].v["fx"][var_3][var_7] = loadfx(var_6);
             }
           }
         }
@@ -570,7 +568,7 @@ add_destructible_fx() {
           continue;
         }
         foreach(var_7, var_10 in var_8) {
-        level.destructible_type[self.destructibleInfo].parts[var_0][var_1].v["loopfx"][var_7] = loadfx(var_10);
+          level.destructible_type[self.destructibleInfo].parts[var_0][var_1].v["loopfx"][var_7] = loadfx(var_10);
         }
       }
     }
@@ -618,8 +616,7 @@ destructible_think() {
     }
     if(common_scripts\utility::isSP()) {
       var_0 *= 0.5;
-    }
-    else {
+    } else {
       var_0 *= 1.0;
     }
 
@@ -641,8 +638,7 @@ destructible_think() {
     if(is_shotgun_damage(var_5, var_7)) {
       if(common_scripts\utility::isSP()) {
         var_0 *= 8.0;
-      }
-      else {
+      } else {
         var_0 *= 4.0;
       }
     }
@@ -654,8 +650,7 @@ destructible_think() {
     if(isDefined(var_2) && var_2 == "") {
       if(isDefined(var_8) && var_8 != "" && var_8 != "tag_body" && var_8 != "body_animate_jnt") {
         var_2 = var_8;
-      }
-      else {
+      } else {
         var_2 = undefined;
       }
 
@@ -669,11 +664,9 @@ destructible_think() {
     if(var_7 == "splash") {
       if(isDefined(level.destructible_type[self.destructibleInfo].parts[0][0].v["splash_damage_scaler"])) {
         var_0 *= level.destructible_type[self.destructibleInfo].parts[0][0].v["splash_damage_scaler"];
-      }
-      else if(common_scripts\utility::isSP()) {
+      } else if(common_scripts\utility::isSP()) {
         var_0 *= 9.0;
-      }
-      else {
+      } else {
         var_0 *= 13.0;
       }
 
@@ -698,8 +691,7 @@ is_shotgun_damage(var_0, var_1) {
 
   if(isplayer(var_0)) {
     var_2 = var_0 getcurrentweapon();
-  }
-  else if(isDefined(level.enable_ai_shotgun_destructible_damage) && level.enable_ai_shotgun_destructible_damage) {
+  } else if(isDefined(level.enable_ai_shotgun_destructible_damage) && level.enable_ai_shotgun_destructible_damage) {
     if(isDefined(var_0.weapon)) {
       var_2 = var_0.weapon;
     }
@@ -835,8 +827,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7)
         if(isDefined(var_5)) {
           if(isplayer(var_5)) {
             self.player_damage = self.player_damage + var_0;
-          }
-          else if(var_5 != self) {
+          } else if(var_5 != self) {
             self.non_player_damage = self.non_player_damage + var_0;
           }
         }
@@ -860,8 +851,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7)
 
       if(!isDefined(self.waiting_for_queue)) {
         self.waiting_for_queue = 1;
-      }
-      else {
+      } else {
         self.waiting_for_queue++;
       }
 
@@ -1062,8 +1052,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7)
 
           if(isDefined(var_59)) {
             var_62 = self gettagangles(var_59);
-          }
-          else if(isDefined(var_2)) {
+          } else if(isDefined(var_2)) {
             var_62 = self gettagangles(var_2);
           }
 
@@ -1071,8 +1060,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7)
 
           if(isDefined(var_59)) {
             var_58 = self gettagorigin(var_59);
-          }
-          else if(isDefined(var_2)) {
+          } else if(isDefined(var_2)) {
             var_58 = self gettagorigin(var_2);
           }
 
@@ -1110,8 +1098,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7)
 
           if(isDefined(var_58)) {
             thread physics_launch(var_70, 0, var_58, var_61);
-          }
-          else {
+          } else {
             thread physics_launch(var_70, 0, var_3, var_61);
           }
 
@@ -1120,8 +1107,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7)
 
         if(isDefined(var_58)) {
           thread physics_launch(var_10, var_25, var_58, var_61);
-        }
-        else {
+        } else {
           thread physics_launch(var_10, var_25, var_3, var_61);
         }
 
@@ -1155,11 +1141,11 @@ damage_not(var_0) {
   var_3 = "";
 
   foreach(var_6, var_5 in var_1) {
-  var_2 = common_scripts\utility::array_remove(var_2, var_5);
+    var_2 = common_scripts\utility::array_remove(var_2, var_5);
   }
 
   foreach(var_8 in var_2) {
-  var_3 += (var_8 + " ");
+    var_3 += (var_8 + " ");
   }
 
   return var_3;
@@ -1275,8 +1261,7 @@ getLowestPartDistance(var_0) {
 isValidSoundCause(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4)) {
     var_5 = var_1[var_0][var_4][var_2];
-  }
-  else {
+  } else {
     var_5 = var_1[var_0][var_2];
   }
 
@@ -1346,8 +1331,7 @@ isAttackerValid(var_0, var_1, var_2) {
         [level.isAIfunc]
       ](var_2))
       return 1;
-  } else {
-  }
+  } else {}
 
   return 0;
 }
@@ -1482,8 +1466,7 @@ health_drain(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
       if(var_6 == "both") {
         call[[level.badplace_cylinder_func]](var_7, 0, self.origin, var_5, 128, "allies", "bad_guys");
-      }
-      else {
+      } else {
         call[[level.badplace_cylinder_func]](var_7, 0, self.origin, var_5, 128, var_6);
       }
 
@@ -1588,8 +1571,7 @@ explode(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
 
   if(isDefined(var_14)) {
     var_15 = self gettagorigin(var_14);
-  }
-  else {
+  } else {
     var_15 = self.origin;
   }
 
@@ -1666,8 +1648,7 @@ explode(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
   if(common_scripts\utility::isSP()) {
     if(level.gameskill == 0 && !player_touching_post_clip()) {
       self radiusdamage(var_23, var_3, var_5, var_4, self, "MOD_RIFLE_BULLET");
-    }
-    else {
+    } else {
       self radiusdamage(var_23, var_3, var_5, var_4, self);
     }
 
@@ -1684,8 +1665,7 @@ explode(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
 
     if(!isDefined(self.damageOwner)) {
       self radiusdamage(var_23, var_3, var_5, var_4, self, "MOD_EXPLOSIVE", var_25);
-    }
-    else {
+    } else {
       self radiusdamage(var_23, var_3, var_5, var_4, self.damageOwner, "MOD_EXPLOSIVE", var_25);
 
       if(var_24) {
@@ -1826,8 +1806,7 @@ get_dummy() {
 
   if(self.modeldummyon) {
     var_0 = self.modeldummy;
-  }
-  else {
+  } else {
     var_0 = self;
   }
 
@@ -1840,8 +1819,7 @@ play_loop_sound_on_destructible(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_3.origin = var_2 gettagorigin(var_1);
-  }
-  else {
+  } else {
     var_3.origin = var_2.origin;
   }
 
@@ -1876,8 +1854,7 @@ notifyDamageAfterFrame(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(common_scripts\utility::isSP()) {
     var_0 /= 0.5;
-  }
-  else {
+  } else {
     var_0 /= 1.0;
   }
 
@@ -2134,15 +2111,13 @@ collision_brush_post_explosion(var_0) {
       if(isDefined(var_1)) {
         self thread[[level.func_destructible_crush_player]](var_1);
       }
-    } else {
-    }
+    } else {}
   }
 
   var_0 solid();
 }
 
-debug_player_in_post_clip(var_0) {
-}
+debug_player_in_post_clip(var_0) {}
 
 destructible_get_my_breakable_light(var_0) {
   var_1 = getEntArray("light_destructible", "targetname");
@@ -2230,8 +2205,7 @@ debug_circle_drawlines(var_0, var_1, var_2, var_3) {
 
     if(var_4 + 1 >= var_0.size) {
       var_6 = var_0[0];
-    }
-    else {
+    } else {
       var_6 = var_0[var_4 + 1];
     }
 
@@ -2286,7 +2260,7 @@ destructible_spotlight_think(var_0, var_1, var_2, var_3) {
   var_1 common_scripts\utility::self_func("startignoringspotLight");
 
   foreach(var_6, var_5 in var_0["dvars"]) {
-  common_scripts\utility::noself_func("setsaveddvar", var_6, var_5);
+    common_scripts\utility::noself_func("setsaveddvar", var_6, var_5);
   }
 
   if(!isDefined(level.destructible_spotlight)) {
@@ -2377,8 +2351,7 @@ destructible_fx_think(var_0, var_1, var_2, var_3, var_4) {
 
       if(var_0["fx_useTagAngles"][var_4][var_6]) {
         playFXOnTag(var_7, var_1, var_8);
-      }
-      else {
+      } else {
         var_9 = var_1 gettagorigin(var_8);
         var_10 = var_9 + (0, 0, 100) - var_9;
         playFX(var_7, var_9, var_10);
@@ -2438,8 +2411,7 @@ destructible_animation_think(var_0, var_1, var_2, var_3) {
 
   if(var_10 == var_11) {
     var_12 = var_10;
-  }
-  else {
+  } else {
     var_12 = randomfloatrange(var_10, var_11);
   }
 
@@ -2506,8 +2478,7 @@ init_destroyed_count() {
 
   if(common_scripts\utility::isSP()) {
     level.init_destroyed_count = 20;
-  }
-  else {
+  } else {
     level.init_destroyed_count = 2;
   }
 }
@@ -2578,7 +2549,7 @@ sort_destructible_frame_queue(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-  var_1[var_1.size] = var_3;
+    var_1[var_1.size] = var_3;
   }
 
   for(var_5 = 1; var_5 < var_1.size; var_5++) {
@@ -2597,8 +2568,7 @@ sort_destructible_frame_queue(var_0) {
 get_better_destructible(var_0, var_1) {
   if(var_0.totalDamage > var_1.totalDamage) {
     return var_0;
-  }
-  else {
+  } else {
     return var_1;
   }
 }
@@ -2615,7 +2585,7 @@ get_part_FX_cost_for_action_state(var_0, var_1) {
   if(isDefined(var_3["fx"])) {
     foreach(var_5 in var_3["fx_cost"]) {
       foreach(var_7 in var_5) {
-      var_2 += var_7;
+        var_2 += var_7;
       }
     }
   }

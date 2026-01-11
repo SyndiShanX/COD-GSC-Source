@@ -146,13 +146,13 @@ house_clean_up_and_reset() {
   a_ai = getaiarray();
 
   foreach(ai in a_ai) {
-  ai delete();
+    ai delete();
   }
 
   a_house_triggers = getEntArray("house_trigger", "script_noteworthy");
 
   foreach(t_house in a_house_triggers) {
-  t_house delete();
+    t_house delete();
   }
 
   flag_wait("house_event_end");
@@ -211,24 +211,19 @@ ambient_neighborhood_vehicles() {
   while(true) {
     if(randomint(3) == 0) {
       vh_ambient = "pan_hatchback";
-    }
-    else if(randomint(3) == 1) {
+    } else if(randomint(3) == 1) {
       vh_ambient = "pan_van";
-    }
-    else {
+    } else {
       vh_ambient = "pan_truck";
     }
 
     if(randomint(4) == 0) {
       nd_start = getvehiclenode("start_sideroad_1", "targetname");
-    }
-    else if(randomint(4) == 1) {
+    } else if(randomint(4) == 1) {
       nd_start = getvehiclenode("start_sideroad_2", "targetname");
-    }
-    else if(randomint(4) == 2) {
+    } else if(randomint(4) == 2) {
       nd_start = getvehiclenode("start_sideroad_3", "targetname");
-    }
-    else {
+    } else {
       nd_start = getvehiclenode("start_sideroad_4", "targetname");
     }
 

@@ -51,8 +51,7 @@ moveLoop() {
   while(1) {
     if(self.disableArrivals) {
       self.stopAnimDistSq = 0;
-    }
-    else {
+    } else {
       self.stopAnimDistSq = anim.dogStoppingDistSq;
     }
     if(self.a.movement == "run") {
@@ -106,8 +105,7 @@ randomSoundDuringRunLoop() {
     }
     if(isDefined(self.script_growl)) {
       self play_sound_on_tag("anml_dog_growl", "tag_eye");
-    }
-    else {
+    } else {
       self play_sound_on_tag("anml_dog_bark", "tag_eye");
     }
 
@@ -131,8 +129,7 @@ getRunAnimWeights() {
     weights["right"] = (1 - self.leanAmount) * 20;
     if(weights["right"] > 1) {
       weights["right"] = 1;
-    }
-    else if(weights["right"] < 0) {
+    } else if(weights["right"] < 0) {
       weights["right"] = 0;
     }
     weights["center"] = 1 - weights["right"];

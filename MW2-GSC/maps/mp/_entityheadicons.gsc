@@ -105,8 +105,7 @@ setHeadIcon(showTo, icon, offset, width, height) {
   headIcon setShader(icon, width, height);
   if(isPlayer(showTo)) {
     headIcon setWaypoint(true, true, false);
-  }
-  else {
+  } else {
     headIcon setWaypoint(true, true, false);
   }
 
@@ -135,10 +134,10 @@ destroyIconsOnDeath() {
     // TODO: remove and fix properly after ship
     if(!isDefined(headIcon)) //needed for FFA host migration (when host has active head icons) {
       continue;
-    }
-
-    headIcon destroy();
   }
+
+  headIcon destroy();
+}
 }
 
 keepPositioned(owner, offset) {
@@ -176,8 +175,7 @@ setTeamHeadIcon(team, offset) // "allies", "axis", "all", "none"
 
   if(isDefined(offset)) {
     self.entityHeadIconOffset = offset;
-  }
-  else {
+  } else {
     self.entityHeadIconOffset = (0, 0, 0);
   }
 
@@ -229,8 +227,7 @@ setPlayerHeadIcon(player, offset) // "allies", "axis", "all", "none"
 
   if(isDefined(offset)) {
     self.entityHeadIconOffset = offset;
-  }
-  else {
+  } else {
     self.entityHeadIconOffset = (0, 0, 0);
   }
 

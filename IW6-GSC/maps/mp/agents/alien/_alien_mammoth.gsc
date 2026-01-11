@@ -190,14 +190,11 @@ mammoth_approach(var_0, var_1) {
 
       if(should_do_new_phase()) {
         return "mammoth_angered";
-      }
-      else if(should_burrow(var_0)) {
+      } else if(should_burrow(var_0)) {
         return "burrow";
-      }
-      else if(maps\mp\agents\alien\_alien_elite::can_do_charge_attack(var_0)) {
+      } else if(maps\mp\agents\alien\_alien_elite::can_do_charge_attack(var_0)) {
         return "charge";
-      }
-      else if(maps\mp\agents\alien\_alien_elite::run_to_slam(var_0)) {
+      } else if(maps\mp\agents\alien\_alien_elite::run_to_slam(var_0)) {
         return "slam";
       }
     }
@@ -240,8 +237,7 @@ should_burrow(var_0) {
 
   if(distancesquared(self.origin, var_0.origin) > 262144.0) {
     var_4 = 1;
-  }
-  else if(attack_timer_expired() || burrow_timer_expired()) {
+  } else if(attack_timer_expired() || burrow_timer_expired()) {
     var_4 = 1;
   }
 

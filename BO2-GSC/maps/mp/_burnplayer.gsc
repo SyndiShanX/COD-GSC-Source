@@ -58,8 +58,7 @@ hitwithincendiary(attacker, inflictor, mod) {
 
   if(isai(self)) {
     playFXOnTag(level._effect["character_fire_death_torso"], self, "J_Spine1");
-  }
-  else {
+  } else {
     playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
   }
 
@@ -369,8 +368,7 @@ donapalmgrounddamage(attacker, inflictor, mod) {
   if(isDefined(level.groundburntime)) {
     if(getdvar(#"_id_6EC13261") == "") {
       waittime = level.groundburntime;
-    }
-    else {
+    } else {
       waittime = getdvarfloat(#"_id_6EC13261");
     }
   } else
@@ -382,8 +380,7 @@ donapalmgrounddamage(attacker, inflictor, mod) {
   if(isDefined(level.napalmgrounddamage)) {
     if(getdvar(#"_id_3FFA6673") == "") {
       napalmgrounddamage = level.napalmgrounddamage;
-    }
-    else {
+    } else {
       napalmgrounddamage = getdvarfloat(#"_id_3FFA6673");
     }
 

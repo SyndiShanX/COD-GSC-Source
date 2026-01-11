@@ -192,8 +192,7 @@ drone_move_custom(var_0) {
 
           if(!var_5) {
             thread maps\_drone::drone_move_z(var_4);
-          }
-          else {
+          } else {
             self notify("drone_move_z");
           }
 
@@ -263,8 +262,7 @@ cur_node_check_delete() {
 
   if(var_0 == "die") {
     self kill();
-  }
-  else if(var_0 == "delete") {
+  } else if(var_0 == "delete") {
     self delete();
   }
 }
@@ -419,8 +417,7 @@ drone_fight_smart(var_0) {
 
   if(self.team == "axis") {
     var_1 = ["ak12", "cz805", "cbjms"];
-  }
-  else {
+  } else {
     var_1 = ["r5rgp", "fad", "m27"];
   }
 
@@ -441,8 +438,7 @@ drone_fight_smart(var_0) {
 
     if(var_3 == "coverprone") {
       drone_play_anim(level.drone_anims[var_4][var_3]["fire_exposed"]);
-    }
-    else {
+    } else {
       drone_play_anim(level.drone_anims[var_4][var_3]["fire"]);
     }
 
@@ -481,8 +477,7 @@ drone_infinite_runners(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(!isarray(self)) {
     var_6 = maps\_utility::make_array(self);
-  }
-  else {
+  } else {
     var_6 = self;
   }
 
@@ -534,15 +529,13 @@ drone_infinite_runners(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(isDefined(var_3)) {
       var_18.weaponsound = var_3[randomint(var_3.size)];
-    }
-    else {
+    } else {
       var_18.nodroneweaponsound = 1;
     }
 
     if(var_19 == "run_n_gun") {
       var_18 thread drone_fire_randomly_loop();
-    }
-    else if(var_19 == "sprint") {
+    } else if(var_19 == "sprint") {
       var_18 maps\_utility::set_moveplaybackrate(1.4);
     }
 
@@ -609,8 +602,7 @@ beach_path_drones(var_0) {
 
       if(isDefined(var_1.drone_lookahead_value)) {
         var_8.drone_lookahead_value = var_1.drone_lookahead_value;
-      }
-      else {
+      } else {
         var_8.drone_lookahead_value = 56;
       }
 
@@ -660,8 +652,7 @@ drone_fire_fake_javelin_loop(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(self.javelin_smarttargeting)) {
     if(isDefined(var_1) && var_1 == 1) {
       self.javelin_smarttargeting = 1;
-    }
-    else {
+    } else {
       self.javelin_smarttargeting = 0;
     }
   }
@@ -688,8 +679,7 @@ drone_fire_fake_javelin_loop(var_0, var_1, var_2, var_3, var_4) {
 
     if(level.javelintargets.size > 0) {
       var_8 = level.javelintargets[randomint(level.javelintargets.size)];
-    }
-    else {
+    } else {
       if(self.javtargets.size == 0) {
         return;
       }
@@ -752,8 +742,7 @@ default_mg_drone() {
 struct_check_delete(var_0) {
   if(var_0 maps\homecoming_util::parameters_check("delete")) {
     maps\homecoming_util::delete_safe();
-  }
-  else if(var_0 maps\homecoming_util::parameters_check("die")) {
+  } else if(var_0 maps\homecoming_util::parameters_check("die")) {
     maps\homecoming_util::kill_safe();
   }
 }

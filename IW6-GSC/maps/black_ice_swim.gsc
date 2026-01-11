@@ -16,7 +16,7 @@ start() {
   level._allies_swim = maps\black_ice_util::spawn_allies_swim();
 
   foreach(var_1 in level._allies) {
-  var_1 hide();
+    var_1 hide();
   }
 }
 
@@ -955,13 +955,13 @@ infil_lights_and_vision() {
   var_0 = getEntArray("light_infil_script_top", "targetname");
 
   foreach(var_2 in var_0) {
-  thread light_brighten(var_2, 0.7);
+    thread light_brighten(var_2, 0.7);
   }
 
   var_4 = getEntArray("light_infil_script_top2", "targetname");
 
   foreach(var_2 in var_4) {
-  thread light_brighten(var_2, 0.4);
+    thread light_brighten(var_2, 0.4);
   }
 
   level waittill("notify_icehole_godrays");
@@ -1252,8 +1252,7 @@ check_analog_movement() {
 
   if(var_0[0] == 0 && var_0[1] == 0) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }

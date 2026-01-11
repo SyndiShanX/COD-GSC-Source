@@ -472,9 +472,7 @@ func_DBB6(param_00, param_01, param_02, param_03, param_04) {
           param_00 takeweapon(param_02);
         }
 
-        [
-          [param_03]
-        ](param_01, param_00);
+        [[param_03]](param_01, param_00);
         param_01.active_player = undefined;
         param_00 scripts\engine\utility::allow_weapon_switch(1);
         if(!param_00 scripts\engine\utility::isusabilityallowed()) {

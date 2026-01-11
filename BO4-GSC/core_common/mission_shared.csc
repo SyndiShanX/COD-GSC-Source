@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-
 #namespace mission_utils;
 
 autoexec __init__system__() {
@@ -24,8 +23,8 @@ mission_active_changed(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   for(i = 0; i < 8; i++) {
     changedflags = level.mission_active_flags ^ newval;
 
-    if((changedflags& 1 << i) != 0) {
-      if((level.mission_active_flags& 1 << i) != 0) {
+    if((changedflags & 1 << i) != 0) {
+      if((level.mission_active_flags & 1 << i) != 0) {
         stopmission(i);
       }
     }
@@ -34,8 +33,8 @@ mission_active_changed(localclientnum, oldval, newval, bnewent, binitialsnap, fi
   for(i = 0; i < 8; i++) {
     changedflags = level.mission_active_flags ^ newval;
 
-    if((changedflags& 1 << i) != 0) {
-      if((level.mission_active_flags& 1 << i) == 0) {
+    if((changedflags & 1 << i) != 0) {
+      if((level.mission_active_flags & 1 << i) == 0) {
         startmission(i);
       }
     }

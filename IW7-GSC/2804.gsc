@@ -75,8 +75,7 @@ init() {
     if(isDefined(var_5.func_B473)) {
       if(var_5.func_B473 > 0) {
         var_5.func_1616 = var_5.func_5F36 / var_5.func_B473 * 1000.0;
-      }
-      else {
+      } else {
         var_5.func_1616 = var_5.func_5F36;
       }
     }
@@ -97,15 +96,13 @@ init() {
 
     if(isDefined(var_5._meth_8487)) {
       var_5._meth_8487 = var_5._meth_8487 * 1000.0;
-    }
-    else {
+    } else {
       var_5._meth_8487 = 0.0;
     }
 
     if(isDefined(var_5.func_12B28)) {
       var_5.func_12B28 = var_5.func_12B28 * 1000.0;
-    }
-    else {
+    } else {
       var_5.func_12B28 = 0.0;
     }
 
@@ -182,8 +179,7 @@ func_DD68(var_00, var_01, var_02) {
   if(scripts\mp\utility\game::istrue(var_02)) {
     if(issubstr(var_03, ".")) {
       var_03 = float(var_03);
-    }
-    else {
+    } else {
       var_03 = int(var_03);
     }
   }
@@ -324,8 +320,7 @@ func_12F32() {
 
     if(var_0.isinuse) {
       var_01 = hudoutlinedisable();
-    }
-    else {
+    } else {
       var_02 = var_0.func_461E - var_0.func_461F;
       var_03 = getsupermaxcooldownmsec();
       var_01 = clamp(1.0 - var_02 / var_03, 0.0, 1.0);
@@ -522,8 +517,7 @@ func_1613(var_00, var_01) {
 
   if(var_00 && isDefined(var_2.staticdata.func_1617)) {
     func_DE3B(var_2.staticdata.func_1617 * var_01);
-  }
-  else if(isDefined(var_2.staticdata.func_1616)) {
+  } else if(isDefined(var_2.staticdata.func_1616)) {
     func_DE3B(var_2.staticdata.func_1616 * var_01);
   }
 
@@ -630,8 +624,7 @@ superusefinished(var_00, var_01, var_02) {
   if(isDefined(self.matchdatalifeindex)) {
     if(isDefined(var_01)) {
       scripts\mp\matchdata::logsuperexpiredevent(self.matchdatalifeindex, self.origin, 1);
-    }
-    else {
+    } else {
       scripts\mp\matchdata::logsuperexpiredevent(self.matchdatalifeindex, self.origin, 0);
     }
   }
@@ -645,8 +638,7 @@ refundsuper() {
   if(isDefined(var_00)) {
     if(var_0.isinuse) {
       superusefinished(1);
-    }
-    else {
+    } else {
       func_DE3A(getsupermaxcooldownmsec());
     }
   }
@@ -749,14 +741,11 @@ func_110C4() {
   }
   if(issupercharging()) {
     self.pers["superCooldownTime"] = getcurrentsuper().func_461F;
-  }
-  else if(issuperready()) {
+  } else if(issuperready()) {
     self.pers["superCooldownTime"] = getcurrentsuper().func_461E;
-  }
-  else if(issuperinuse()) {
+  } else if(issuperinuse()) {
     self.pers["superCooldownTime"] = ::scripts\engine\utility::ter_op(shouldreacttonewenemy(), getcurrentsuper().func_461E, 0);
-  }
-  else {
+  } else {
     self.pers["superCooldownTime"] = 0;
   }
 }
@@ -1123,8 +1112,7 @@ func_13B6B() {
 
   if(scripts\mp\utility\game::isanymlgmatch()) {
     level.func_1125A = 0;
-  }
-  else {
+  } else {
     level.func_1125A = getdvarfloat("scr_superDelay", 0);
   }
 

@@ -355,14 +355,11 @@ hiding_door_get_enemy_direction(viewerAngles, viewerOrigin, targetOrigin) {
 
   if(angle >= 90 && angle <= 270) {
     direction = "behind";
-  }
-  else if(angle >= 300 || angle <= 45) {
+  } else if(angle >= 300 || angle <= 45) {
     direction = "front";
-  }
-  else if(angle < 90) {
+  } else if(angle < 90) {
     direction = "right";
-  }
-  else if(angle > 270) {
+  } else if(angle > 270) {
     direction = "left";
   }
 

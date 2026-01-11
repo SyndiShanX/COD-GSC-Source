@@ -33,9 +33,7 @@ noself_func(param_00, param_01, param_02, param_03, param_04) {
     return;
   }
 
-  [
-    [level.func[param_00]]
-  ](param_01, param_02, param_03, param_04);
+  [[level.func[param_00]]](param_01, param_02, param_03, param_04);
 }
 
 self_func(param_00, param_01, param_02, param_03, param_04) {
@@ -917,9 +915,7 @@ update_trigger_based_on_flags() {
     }
   }
 
-  [
-    [level.trigger_func[var_00 && var_05]]
-  ]();
+  [[level.trigger_func[var_00 && var_05]]]();
 }
 
 create_flags_and_return_tokens(param_00) {
@@ -2604,9 +2600,7 @@ error(param_00) {
 }
 
 exploder(param_00, param_01, param_02) {
-  [
-    [level._fx.exploderfunction]
-  ](param_00, param_01, param_02);
+  [[level._fx.exploderfunction]](param_00, param_01, param_02);
 }
 
 ter_op(param_00, param_01, param_02) {
@@ -3728,9 +3722,7 @@ noself_delaycall_proc(param_00, param_01, param_02, param_03, param_04, param_05
     return;
   }
 
-  [
-    [param_00]
-  ]();
+  [[param_00]]();
 }
 
 get_target_array(param_00) {

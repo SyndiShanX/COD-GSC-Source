@@ -2120,8 +2120,7 @@ spotlight_preferred_targets() {
     aAI = remove_dead_from_array(aAI);
     if((isDefined(level.playerAttacker)) && (is_in_array(aAI, level.playerAttacker))) {
       self.spotlightPreferredTarget = level.playerAttacker;
-    }
-    else {
+    } else {
       if(aAI.size > 0) {
         self.spotlightPreferredTarget = getClosest(level.player.origin, aAI);
       }
@@ -2129,8 +2128,7 @@ spotlight_preferred_targets() {
 
     if(isDefined(self.spotlightPreferredTarget)) {
       wait(randomfloatrange(3, 5));
-    }
-    else {
+    } else {
       wait(.5);
     }
     enemies1 = volume_commerce_lobby_lower get_ai_touching_volume("axis"); //want to get these guys again in case more spawned in
@@ -2185,7 +2183,7 @@ humvee_default_targets_think(targets, turret) {
 
   //cleanup
   foreach(target in targets) {
-  target delete();
+    target delete();
   }
 }
 
@@ -3486,14 +3484,12 @@ friendly_shoot_stingers_and_jav_think(stingerJavNode) {
 player_is_not_in_the_way(playerBadPlace) {
   if(distance(playerBadPlace, level.player.origin) > 64) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
 
-friendly_shoot_stingers_stop() {
-}
+friendly_shoot_stingers_stop() {}
 
 friendly_shoot_stingers_get_target(aDummyTargets) {
   if(!isDefined(self.scriptedTargets)) {
@@ -3877,11 +3873,9 @@ roundDecimalPlaces(value, places, style) {
 
   if(style == "up") {
     roundedValue = ceil(newValue);
-  }
-  else if(style == "down") {
+  } else if(style == "down") {
     roundedValue = floor(newValue);
-  }
-  else {
+  } else {
     roundedValue = newvalue + 0.5;
   }
 
@@ -4210,8 +4204,7 @@ javelin_equipped() {
   weapon = level.player getCurrentWeapon();
   if(IsSubStr(weapon, "javelin")) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -4596,8 +4589,7 @@ heli_pathnodes_think(heli) {
     self waittill("trigger");
     if(!isDefined(eTarget)) {
       heli clearLookAtEnt();
-    }
-    else {
+    } else {
       heli SetLookAtEnt(eTarget);
     }
     if(isDefined(bGunTarget)) {
@@ -4729,7 +4721,7 @@ AAA_sequence_get_to_roof() {
   friendlies = getaiarray("allies");
   array_thread(friendlies, ::cqb_walk, "off");
   foreach(guy in friendlies) {
-  guy.neverEnableCQB = true;
+    guy.neverEnableCQB = true;
   }
 
   //wait( 2 );
@@ -5827,8 +5819,7 @@ try_to_teleport_friendlies_to_roof(eNode) {
     playerEye = level.player getEye();
     if(within_fov(playerEye, level.player.angles, self.origin + (0, 0, 32), level.cosine["90"])) {
       continue;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -6399,8 +6390,7 @@ AAA_sequence_heli_ride2() {
   //reset hunted spotlight to dynamic version
   if(GetDvarInt("sm_enable") && GetDvar("r_zfeather") != "0") {
     level._effect["_attack_heli_spotlight"] = LoadFX("misc/hunted_spotlight_model_dim");
-  }
-  else {
+  } else {
     level._effect["_attack_heli_spotlight"] = LoadFX("misc/spotlight_large");
   }
 }
@@ -6809,15 +6799,13 @@ obj_heli_ride() {
 MUSIC
 ****************************************************************************/
 
-AA_music_init() {
-}
+AA_music_init() {}
 
 /****************************************************************************
 UTILITY FUNCTIONS
 ****************************************************************************/
 
-AA_utility() {
-}
+AA_utility() {}
 
 AI_think(guy) {
   if(guy.team == "axis") {
@@ -6829,8 +6817,7 @@ AI_think(guy) {
   }
 }
 
-AI_allies_think() {
-}
+AI_allies_think() {}
 
 AI_axis_think() {
   /*-----------------------
@@ -7440,8 +7427,7 @@ AI_drone_corpse_delete() {
   }
 }
 
-AI_drone_warrior_think() {
-}
+AI_drone_warrior_think() {}
 
 AI_drone_warrior_fodder_think() {
   self endon("death");
@@ -7650,22 +7636,22 @@ lights() {
 
   flares = getEntArray("flickerlight1", "targetname");
   foreach(flare in flares) {
-  flare thread flareFlicker();
+    flare thread flareFlicker();
   }
 
   fluorescents = getEntArray("fluorescentFlicker", "targetname");
   foreach(fluorescent in fluorescents) {
-  fluorescent thread fluorescentFlicker();
+    fluorescent thread fluorescentFlicker();
   }
 
   fluorescents = getEntArray("fluorescentFlickerBig", "targetname");
   foreach(fluorescent in fluorescents) {
-  fluorescent thread fluorescentFlickerBig();
+    fluorescent thread fluorescentFlickerBig();
   }
 
   strobes = getEntArray("strobe1", "targetname");
   foreach(strobe in strobes) {
-  strobe thread emergencyStrobe();
+    strobe thread emergencyStrobe();
   }
 }
 
@@ -7997,8 +7983,7 @@ vehicle_btr80_think() {
   }
   if(!level.onHeli) {
     return;
-  }
-  else {
+  } else {
     self thread vehicle_turret_think();
   }
 }
@@ -8040,8 +8025,7 @@ vehicle_damage_think() {
       self.hitsRemaining--;
       if(self.hitsRemaining <= 0) {
         break;
-      }
-      else {
+      } else {
         continue;
       }
     }
@@ -8088,8 +8072,7 @@ vehicle_turret_think() {
     -------------------------*/
     if(distancesquared(level.player.origin, self.origin) > level.CannonRangeSquared) {
       eTarget = undefined;
-    }
-    else {
+    } else {
       eTarget = level.player;
     }
 
@@ -8459,8 +8442,7 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     sAnimGo = sAnim + "_go"; //This will be the next animation to play after the loop (if defined)
     if(anim_exists(sAnimGo)) {
       sAnim = sAnimGo;
-    }
-    else {
+    } else {
       sAnimGo = undefined;
     }
   }
@@ -8477,8 +8459,7 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
   if(isDefined(self.script_flag)) {
     if(isDefined(sFailSafeFlag)) {
       flag_wait_either(self.script_flag, sFailSafeFlag);
-    }
-    else {
+    } else {
       flag_wait(self.script_flag);
     }
 
@@ -8552,8 +8533,7 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
 
     if(anim_exists(sAnim + "_react2")) {
       sAnimReact2 = sAnim + "_react2";
-    }
-    else {
+    } else {
       sAnimReact2 = sAnimReact;
     }
     while(isDefined(self)) {
@@ -8563,8 +8543,7 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
       waittillframeend;
       if(RandomInt(100) > 50) {
         self.eAnimEnt anim_generic(self, sAnimReact);
-      }
-      else {
+      } else {
         self.eAnimEnt anim_generic(self, sAnimReact2);
       }
       self.eAnimEnt thread anim_generic_loop(self, sAnim, "stop_idle");
@@ -8814,8 +8793,7 @@ anim_exists(sAnim, animname) {
   }
   if(isDefined(level.scr_anim[animname][sAnim])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -8824,8 +8802,7 @@ dialouge_random_friendly(sLine) {
   guy = get_closest_ai_exclude(level.player.origin, "allies", level.excludedAi);
   if(isDefined(guy)) {
     guy play_sound_in_space(level.scr_sound[sLine]);
-  }
-  else {
+  } else {
     iprintln("unable to play random friendly dialogue " + sLine + " because couldn't find an AI");
   }
 }
@@ -8836,8 +8813,7 @@ triggersEnable(triggerName, noteworthyOrTargetname, bool) {
   assertEx(isDefined(aTriggers), triggerName + " does not exist");
   if(bool == true) {
     array_thread(aTriggers, ::trigger_on);
-  }
-  else {
+  } else {
     array_thread(aTriggers, ::trigger_off);
   }
 }
@@ -8940,8 +8916,7 @@ hint_temp(string, timeOut) {
 
   if(isDefined(timeOut)) {
     wait(timeOut);
-  }
-  else {
+  } else {
     return;
   }
 
@@ -9088,14 +9063,12 @@ AI_cleanup(sTeam, dist, bImmediate) {
   aAI_to_delete = undefined;
   if(sTeam == "all") {
     aAI_to_delete = getaiarray();
-  }
-  else {
+  } else {
     aAI_to_delete = getaiarray(sTeam);
   }
   if(isDefined(bImmediate)) {
     array_thread(aAI_to_delete, ::AI_delete);
-  }
-  else {
+  } else {
     if(!isDefined(dist)) {
       dist = 1024;
     }
@@ -9118,8 +9091,7 @@ AI_drone_cleanup(sTeam, dist, bImmediate) {
 
   if(isDefined(bImmediate)) {
     array_thread(aDrones, ::AI_delete);
-  }
-  else {
+  } else {
     if(!isDefined(dist)) {
       dist = 1024;
     }
@@ -9227,8 +9199,7 @@ AI_cleanup_non_squad(sTeam, dist) {
   }
   if(sTeam == "all") {
     aAI = getaiarray();
-  }
-  else {
+  } else {
     aAI = getaiarray(sTeam);
   }
   if((sTeam == "allies") || (sTeam == "all")) {
@@ -9277,11 +9248,9 @@ player_killing_crow_targets_at_a_good_pace() {
   timeElapsed = currentTime - level.lasttimePlayerKilledEnemy;
   if(currentTime == level.lasttimePlayerKilledEnemy) {
     return true;
-  }
-  else if(timeElapsed > 10000) {
+  } else if(timeElapsed > 10000) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -9333,8 +9302,7 @@ AI_invisible_patrol_fodder_think() {
   self thread maps\_patrol::patrol();
 }
 
-AI_at4_friendly_think() {
-}
+AI_at4_friendly_think() {}
 
 spawn_trigger_dummy(sDummyTargetname) {
   //triggers a spawner trig through convoluted means
@@ -9469,8 +9437,7 @@ rpg_targets_think() {
     eTrigger waittill("trigger");
     if(level.firemagicRPGs == false) {
       wait(1);
-    }
-    else if(within_fov(level.player getEye(), level.player getPlayerAngles(), self.origin, level.cosine["60"])) {
+    } else if(within_fov(level.player getEye(), level.player getPlayerAngles(), self.origin, level.cosine["60"])) {
       MagicBullet("rpg", eRPGsource.origin, self.origin);
       level.firemagicRPGs = false;
       wait(4);
@@ -9668,8 +9635,7 @@ cheap_destructibles_think() {
 
   if(isDefined(destroyedModel)) {
     self setModel(destroyedModel);
-  }
-  else {
+  } else {
     self delete();
   }
 
@@ -9769,7 +9735,7 @@ should_break_m203_hint(nothing) {
 drones_trenches() {
   drone_warriors_trenches = getEntArray("drone_warriors_trenches", "targetname");
   foreach(drone in drone_warriors_trenches) {
-  thread dronespawn(drone);
+    thread dronespawn(drone);
   }
 }
 
@@ -10007,8 +9973,7 @@ flag_set_when_volume_cleared_of_bad_guys(volume, sFlagToSet) {
     }
     if(ai.size) {
       continue;
-    }
-    else {
+    } else {
       break;
     }
   }

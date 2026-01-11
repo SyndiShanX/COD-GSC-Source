@@ -13,8 +13,7 @@ h2_friendlyFireCheck(ent, attacker) {
 
   if(level.teamBased) {
     return (ent.owner.team == attacker.team);
-  }
-  else {
+  } else {
     return (ent.owner == attacker);
   }
 }
@@ -28,8 +27,7 @@ init() {
 
   if(level.teamBased) {
     level thread EMP_TeamTracker();
-  }
-  else {
+  } else {
     level thread EMP_PlayerTracker();
   }
 
@@ -71,8 +69,7 @@ h2_EMP_Use(lifeId, delay) {
 
   if(level.teamBased) {
     self thread EMP_JamTeam(otherTeam, 60.0, delay);
-  }
-  else {
+  } else {
     self thread EMP_JamPlayers(self, 60.0, delay);
   }
 
@@ -264,8 +261,7 @@ EMP_PlayerTracker() {
 
       if(isDefined(level.empPlayer) && level.empPlayer != player) {
         player _setEMPJammed(true);
-      }
-      else {
+      } else {
         player _setEMPJammed(false);
       }
     }
@@ -300,7 +296,7 @@ destroyActiveVehicles(attacker) {
 
     if(level.teamBased) {
       foreach(uav in level.uavModels[level.otherTeam[attacker.team]]) {
-      radiusDamage(uav.origin, 384, 5000, 5000, attacker);
+        radiusDamage(uav.origin, 384, 5000, 5000, attacker);
       }
     } else {
       foreach(uav in level.uavModels) {
@@ -315,32 +311,32 @@ destroyActiveVehicles(attacker) {
     }
   } else {
     foreach(heli in level.helis) {
-    radiusDamage(heli.origin, 384, 5000, 5000);
+      radiusDamage(heli.origin, 384, 5000, 5000);
     }
 
     foreach(littleBird in level.littleBird) {
-    radiusDamage(littleBird.origin, 384, 5000, 5000);
+      radiusDamage(littleBird.origin, 384, 5000, 5000);
     }
 
     foreach(turret in level.turrets) {
-    radiusDamage(turret.origin, 16, 5000, 5000);
+      radiusDamage(turret.origin, 16, 5000, 5000);
     }
 
     foreach(rocket in level.rockets) {
-    rocket notify("death");
+      rocket notify("death");
     }
 
     if(level.teamBased) {
       foreach(uav in level.uavModels["allies"]) {
-      radiusDamage(uav.origin, 384, 5000, 5000);
+        radiusDamage(uav.origin, 384, 5000, 5000);
       }
 
       foreach(uav in level.uavModels["axis"]) {
-      radiusDamage(uav.origin, 384, 5000, 5000);
+        radiusDamage(uav.origin, 384, 5000, 5000);
       }
     } else {
       foreach(uav in level.uavModels) {
-      radiusDamage(uav.origin, 384, 5000, 5000);
+        radiusDamage(uav.origin, 384, 5000, 5000);
       }
     }
 

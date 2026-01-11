@@ -199,16 +199,14 @@ spotlight_heli_searching_state() {
 
     if(var_5 == 2) {
       var_4 = 1;
-    }
-    else {
+    } else {
       var_3 = 1;
     }
   } else if(var_1)
     var_3 = 1;
   else if(var_2) {
     var_4 = 1;
-  }
-  else {
+  } else {
     spotlight_heli_default_targeting();
   }
 
@@ -267,8 +265,7 @@ spotlight_heli_targeting_state() {
 
     if(self.focus_ally == 0) {
       self.reacquire_ally_time = gettime() + 10000;
-    }
-    else {
+    } else {
       self.reacquire_ally_time = gettime() + 2500;
     }
 

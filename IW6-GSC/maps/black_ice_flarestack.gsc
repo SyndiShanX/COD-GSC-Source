@@ -319,38 +319,38 @@ light_alarm_lights() {
   for(;;) {
     if(common_scripts\utility::flag("flag_flamestack_alarm_light")) {
       foreach(var_5 in var_0) {
-      var_5 show();
+        var_5 show();
       }
 
       foreach(var_5 in var_1) {
-      var_5 hide();
+        var_5 hide();
       }
 
       foreach(var_14 in var_2) {
-      playFXOnTag(level._effect["flarestack_siren_red"], var_14, "tag_origin");
+        playFXOnTag(level._effect["flarestack_siren_red"], var_14, "tag_origin");
       }
 
       foreach(var_5 in var_8) {
-      var_5 setlightintensity(2.0);
+        var_5 setlightintensity(2.0);
       }
     }
 
     wait 1;
 
     foreach(var_5 in var_0) {
-    var_5 hide();
+      var_5 hide();
     }
 
     foreach(var_5 in var_1) {
-    var_5 show();
+      var_5 show();
     }
 
     foreach(var_14 in var_2) {
-    stopFXOnTag(level._effect["flarestack_siren_red"], var_14, "tag_origin");
+      stopFXOnTag(level._effect["flarestack_siren_red"], var_14, "tag_origin");
     }
 
     foreach(var_5 in var_8) {
-    var_5 setlightintensity(0.01);
+      var_5 setlightintensity(0.01);
     }
 
     wait 0.5;
@@ -510,7 +510,7 @@ fx_flarestack_motion() {
   var_2 = var_1 common_scripts\utility::spawn_tag_origin();
 
   foreach(var_4 in var_0) {
-  var_4 linkto(var_2);
+    var_4 linkto(var_2);
   }
 
   wait 0.5;

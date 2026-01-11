@@ -14,8 +14,7 @@ weapon_box_callback(localclientnum, set, newent) {
   }
   if(set) {
     self thread weapon_floats_up();
-  }
-  else {
+  } else {
     self notify("end_float");
     cleanup_weapon_models();
   }
@@ -77,14 +76,11 @@ weapon_floats_up() {
   for(i = 0; i < number_cycles; i++) {
     if(i < 20) {
       serverwait(0, 0.05, 0.01);
-    }
-    else if(i < 30) {
+    } else if(i < 30) {
       serverwait(0, 0.1, 0.01);
-    }
-    else if(i < 35) {
+    } else if(i < 35) {
       serverwait(0, 0.2, 0.01);
-    }
-    else if(i < 38) {
+    } else if(i < 38) {
       serverwait(0, 0.3, 0.01);
     }
 
@@ -244,8 +240,7 @@ wallbuy_player_connect(localclientnum) {
 
     if(wallbuy.targetname == "buildable_wallbuy") {
       fx = level._effect["dynamic_wallbuy_fx"];
-    }
-    else if(isDefined(level._effect[wallbuy.zombie_weapon_upgrade + "_fx"])) {
+    } else if(isDefined(level._effect[wallbuy.zombie_weapon_upgrade + "_fx"])) {
       fx = level._effect[wallbuy.zombie_weapon_upgrade + "_fx"];
     }
 
@@ -315,9 +310,9 @@ wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     case 2:
       if(isDefined(level.wallbuy_callback_hack_override)) {
         struct.models[localclientnum][
-      }
+          }
           [level.wallbuy_callback_hack_override]
-        ]();
+      ]();
 
       break;
   }

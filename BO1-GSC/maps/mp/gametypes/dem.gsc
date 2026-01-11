@@ -134,14 +134,12 @@ getBetterTeam() {
   }
   if(kills["allies"] > kills["axis"]) {
     return "allies";
-  }
-  else if(kills["axis"] > kills["allies"]) {
+  } else if(kills["axis"] > kills["allies"]) {
     return "axis";
   }
   if(deaths["allies"] < deaths["axis"]) {
     return "allies";
-  }
-  else if(deaths["axis"] < deaths["allies"]) {
+  } else if(deaths["axis"] < deaths["allies"]) {
     return "axis";
   }
   if(randomint(2) == 0) {
@@ -262,8 +260,7 @@ onSpawnPlayer() {
   }
   if(self.pers["team"] == game["attackers"]) {
     spawnPointName = "mp_dem_spawn_attacker_start";
-  }
-  else {
+  } else {
     spawnPointName = "mp_dem_spawn_defender_start";
   }
   if(self.pers["team"] == game["attackers"]) {
@@ -351,8 +348,7 @@ onDeadEvent(team) {
   if(team == "all") {
     if(level.bombPlanted) {
       dem_endGameWithKillcam(game["attackers"], game["strings"][game["defenders"] + "_eliminated"]);
-    }
-    else {
+    } else {
       dem_endGameWithKillcam(game["defenders"], game["strings"][game["attackers"] + "_eliminated"]);
     }
   } else if(team == game["attackers"]) {
@@ -416,8 +412,7 @@ giveLastAttackerWarning() {
   while(1) {
     if(self.health != self.maxhealth) {
       fullHealthTime = 0;
-    }
-    else {
+    } else {
       fullHealthTime += interval;
     }
     wait interval;
@@ -629,8 +624,7 @@ onDrop(player) {
     }
     if(isDefined(player)) {
       player logString("bomb dropped");
-    }
-    else {
+    } else {
       logString("bomb dropped");
     }
   }
@@ -822,8 +816,7 @@ registerGrenadeLauncherDudDvar(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.grenadeLauncherDudTimeDvar = dvarString;
@@ -838,8 +831,7 @@ registerThrownGrenadeDudDvar(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.thrownGrenadeDudTimeDvar = dvarString;

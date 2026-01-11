@@ -47,8 +47,7 @@ init_first_spider_score_component() {
 init_first_spider_score(var_0) {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     var_0.max_score_spider = 4500;
-  }
-  else {
+  } else {
     var_0.max_score_spider = 3500;
   }
 
@@ -73,15 +72,14 @@ calculate_and_show_first_spider_score() {
   maps\mp\alien\_gamescore::calculate_and_show_encounter_scores(level.players, var_0);
 
   foreach(var_2 in level.players) {
-  var_2 thread maps\mp\alien\_hive::wait_to_give_rewards();
+    var_2 thread maps\mp\alien\_hive::wait_to_give_rewards();
   }
 }
 
 get_first_spider_score_component_name_list() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     return ["first_spider", "spider_personal", "spider_challenge"];
-  }
-  else {
+  } else {
     return ["first_spider", "spider_team", "spider_personal", "spider_challenge"];
   }
 }
@@ -93,8 +91,7 @@ init_final_spider_score_component() {
 init_final_spider_score(var_0) {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     var_0.max_score_spider = 4500;
-  }
-  else {
+  } else {
     var_0.max_score_spider = 3500;
   }
 
@@ -110,8 +107,7 @@ calculate_final_spider_score() {
 get_final_spider_score_component_name_list() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     return ["first_spider", "spider_personal"];
-  }
-  else {
+  } else {
     return ["first_spider", "spider_team", "spider_personal"];
   }
 }
@@ -123,8 +119,7 @@ init_spider_challenge_score_component() {
 init_spider_challenge_score(var_0) {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     var_0.max_score = 1500;
-  }
-  else {
+  } else {
     var_0.max_score = 1000;
   }
 

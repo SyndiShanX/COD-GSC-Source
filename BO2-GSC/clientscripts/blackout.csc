@@ -61,11 +61,9 @@ lerp_cam_fov(time_s, old_fov, new_fov) {
 min_max(val, min, max) {
   if(val < min) {
     return min;
-  }
-  else if(val > max) {
+  } else if(val > max) {
     return max;
-  }
-  else {
+  } else {
     return val;
   }
 }
@@ -165,8 +163,7 @@ toggle_holo_table(localclientnum, set, newent) {
 
   if(set) {
     self setshaderconstant(localclientnum, 0, unused, unused, unused, 1);
-  }
-  else {
+  } else {
     self setshaderconstant(localclientnum, 0, unused, unused, unused, 0);
   }
 }
@@ -185,8 +182,7 @@ set_flag_messiah_mode(localclientnum, set, newent) {
   level.messiah_mode_on = set;
 }
 
-play_swaying_lights() {
-}
+play_swaying_lights() {}
 
 karma_shot_blood(localclientnum, set, newent) {
   n_frames = int(3 / 0.016);

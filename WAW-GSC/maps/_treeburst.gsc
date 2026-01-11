@@ -16,8 +16,7 @@ treeburst() {
   self waittill("treeburst");
   if(isDefined(self.script_falldirection)) {
     yaw = self.script_falldirection;
-  }
-  else {
+  } else {
     yaw = randomint(360);
   }
   break_angles = (self.angles[0], yaw, self.angles[2]);

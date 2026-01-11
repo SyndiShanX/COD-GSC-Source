@@ -211,7 +211,7 @@ turn_effects_on(var_0, var_1) {
     common_scripts\utility::flag_wait(var_0);
 
     foreach(var_12 in var_3) {
-    var_12 delete();
+      var_12 delete();
     }
 
     common_scripts\utility::flag_clear(var_0);

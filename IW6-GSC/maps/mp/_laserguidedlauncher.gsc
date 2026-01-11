@@ -490,8 +490,7 @@ LGM_getTargetOffset(target) {
 
   if(target.model != "vehicle_av8b_harrier_jet_mp") {
     targetPoint = target GetTagOrigin("tag_missile_target");
-  }
-  else {
+  } else {
     targetPoint = target GetTagOrigin("tag_body");
   }
 

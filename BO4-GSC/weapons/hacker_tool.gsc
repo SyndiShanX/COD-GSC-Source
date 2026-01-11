@@ -12,7 +12,6 @@
 #include scripts\killstreaks\killstreaks_util;
 #include scripts\weapons\heatseekingmissile;
 #include scripts\weapons\weaponobjects;
-
 #namespace hacker_tool;
 
 init_shared() {
@@ -82,7 +81,7 @@ clearhackertarget(weapon, successfulhack, spawned) {
 }
 
 watchhackertoolfired() {
-  self endon(#"disconnect", #"death", #"killhackermonitor");
+  self endon(#"disconnect", # "death", # "killhackermonitor");
 
   while(true) {
     waitresult = self waittill(#"hacker_tool_fired");
@@ -157,7 +156,7 @@ watchhackertoolfired() {
         self stats::function_dad108fa(#"hack_enemy_target", 1);
       }
 
-      self stats::function_e24eec31(weapon, #"used", 1);
+      self stats::function_e24eec31(weapon, # "used", 1);
     }
 
     clearhackertarget(weapon, 1, 0);
@@ -170,7 +169,7 @@ watchhackertoolfired() {
       self setweaponammoclip(weapon, clip_ammo);
     }
 
-      self killstreaks::switch_to_last_non_killstreak_weapon();
+    self killstreaks::switch_to_last_non_killstreak_weapon();
   }
 }
 
@@ -195,7 +194,7 @@ event_handler[grenade_pullback] function_f4068d35(eventstruct) {
 }
 
 watchhackertoolinterrupt(weapon) {
-  self endon(#"disconnect", #"hacker_tool_fired", #"death", #"weapon_change", #"grenade_fire");
+  self endon(#"disconnect", # "hacker_tool_fired", # "death", # "weapon_change", # "grenade_fire");
 
   while(true) {
     waitresult = level waittill(#"use_interrupt");
@@ -209,15 +208,15 @@ watchhackertoolinterrupt(weapon) {
 }
 
 watchhackertoolend(weapon) {
-  self endon(#"disconnect", #"hacker_tool_fired");
-  self waittill(#"weapon_change", #"death", #"hacker_tool_fired", #"disconnect");
+  self endon(#"disconnect", # "hacker_tool_fired");
+  self waittill(#"weapon_change", # "death", # "hacker_tool_fired", # "disconnect");
   clearhackertarget(weapon, 0, 0);
   self clientfield::set_to_player("hacker_tool", 0);
   self stophackertoolsoundloop();
 }
 
 watchforgrenadefire(weapon) {
-  self endon(#"disconnect", #"hacker_tool_fired", #"weapon_change", #"death");
+  self endon(#"disconnect", # "hacker_tool_fired", # "weapon_change", # "death");
 
   while(true) {
     waitresult = self waittill(#"grenade_fire");
@@ -257,7 +256,7 @@ stophackertoolsoundloop() {
 }
 
 hackertooltargetloop(weapon) {
-  self endon(#"disconnect", #"death", #"weapon_change", #"grenade_fire");
+  self endon(#"disconnect", # "death", # "weapon_change", # "grenade_fire");
   self clientfield::set_to_player("hacker_tool", 1);
   self playhackertoolsoundloop();
 
@@ -366,7 +365,7 @@ hackertooltargetloop(weapon) {
     if(self isempjammed()) {
       self heatseekingmissile::destroylockoncanceledmessage();
 
-        continue;
+      continue;
     }
 
     besttarget = self getbesthackertooltarget(weapon);
@@ -376,7 +375,7 @@ hackertooltargetloop(weapon) {
 
       self heatseekingmissile::destroylockoncanceledmessage();
 
-        continue;
+      continue;
     }
 
     if(!self heatseekingmissile::locksighttest(besttarget)) {
@@ -384,7 +383,7 @@ hackertooltargetloop(weapon) {
 
       self heatseekingmissile::destroylockoncanceledmessage();
 
-        continue;
+      continue;
     }
 
     if(self heatseekingmissile::locksighttest(besttarget) && isDefined(besttarget.lockondelay) && besttarget.lockondelay) {
@@ -392,21 +391,20 @@ hackertooltargetloop(weapon) {
 
       self heatseekingmissile::displaylockoncanceledmessage();
 
-        continue;
+      continue;
     }
 
     self heatseekingmissile::destroylockoncanceledmessage();
 
-      if(isentitypreviouslyhacked(besttarget)) {
-        if(!isDefined(self.hacker_sound_ent) || isDefined(self.hacker_alreadyhacked) && self.hacker_alreadyhacked == 0) {
-          self.hacker_sound_ent = 1;
-          self.hacker_alreadyhacked = 1;
-          self playLoopSound(#"evt_hacker_unhackable_loop");
-        }
-
-        continue;
+    if(isentitypreviouslyhacked(besttarget)) {
+      if(!isDefined(self.hacker_sound_ent) || isDefined(self.hacker_alreadyhacked) && self.hacker_alreadyhacked == 0) {
+        self.hacker_sound_ent = 1;
+        self.hacker_alreadyhacked = 1;
+        self playLoopSound(#"evt_hacker_unhackable_loop");
       }
-    else {
+
+      continue;
+    } else {
       self stophackertoolsoundloop();
     }
 
@@ -426,9 +424,9 @@ hackertooltargetloop(weapon) {
 }
 
 watchtargetentityupdate(besttarget) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   self notify(#"watchtargetentityupdate");
-  self endon(#"watchtargetentityupdate", #"clearhackertarget");
+  self endon(#"watchtargetentityupdate", # "clearhackertarget");
   besttarget endon(#"death");
   waitresult = besttarget waittill(#"hackertool_update_ent");
   heatseekingmissile::initlockfield(waitresult.entity);
@@ -455,27 +453,27 @@ getbesthackertooltarget(weapon) {
       continue;
     }
 
-      if(level.teambased || level.use_team_based_logic_for_locking_on === 1) {
-        if(isentityhackablecarepackage(target_ent)) {
+    if(level.teambased || level.use_team_based_logic_for_locking_on === 1) {
+      if(isentityhackablecarepackage(target_ent)) {
+        if(self cantargetentity(target_ent, weapon)) {
+          targetsvalid[targetsvalid.size] = target_ent;
+        }
+      } else if(isDefined(target_ent.team)) {
+        if(target_ent.team != self.team) {
           if(self cantargetentity(target_ent, weapon)) {
             targetsvalid[targetsvalid.size] = target_ent;
           }
-        } else if(isDefined(target_ent.team)) {
-          if(target_ent.team != self.team) {
-            if(self cantargetentity(target_ent, weapon)) {
-              targetsvalid[targetsvalid.size] = target_ent;
-            }
-          }
-        } else if(isDefined(target_ent.owner.team)) {
-          if(target_ent.owner.team != self.team) {
-            if(self cantargetentity(target_ent, weapon)) {
-              targetsvalid[targetsvalid.size] = target_ent;
-            }
+        }
+      } else if(isDefined(target_ent.owner.team)) {
+        if(target_ent.owner.team != self.team) {
+          if(self cantargetentity(target_ent, weapon)) {
+            targetsvalid[targetsvalid.size] = target_ent;
           }
         }
-
-        continue;
       }
+
+      continue;
+    }
 
     if(self iswithinhackertoolreticle(target_ent, weapon)) {
       if(isentityhackablecarepackage(target_ent)) {
@@ -543,7 +541,7 @@ hackingtimescale(target) {
 
     assert(hacktime > 0);
 
-      hackratio = gethacktime(target) / hacktime;
+    hackratio = gethacktime(target) / hacktime;
 
     if(!isDefined(hackratio)) {
       hackratio = 1;
@@ -574,7 +572,7 @@ isentityhackableweaponobject(entity) {
           assert(isDefined(watcher.hackertoolradius));
           assert(isDefined(watcher.hackertooltimems));
 
-            return true;
+          return true;
         }
       }
     }
@@ -587,29 +585,29 @@ getweaponobjecthackerradius(entity) {
   assert(isDefined(entity.classname));
   assert(isDefined(entity.weapon));
 
-    watcher = weaponobjects::getweaponobjectwatcherbyweapon(entity.weapon);
+  watcher = weaponobjects::getweaponobjectwatcherbyweapon(entity.weapon);
 
   assert(watcher.hackable);
   assert(isDefined(watcher.hackertoolradius));
 
-    return watcher.hackertoolradius;
+  return watcher.hackertoolradius;
 }
 
 getweaponobjecthacktimems(entity) {
   assert(isDefined(entity.classname));
   assert(isDefined(entity.weapon));
 
-    watcher = weaponobjects::getweaponobjectwatcherbyweapon(entity.weapon);
+  watcher = weaponobjects::getweaponobjectwatcherbyweapon(entity.weapon);
 
   assert(watcher.hackable);
   assert(isDefined(watcher.hackertooltimems));
 
-    return watcher.hackertooltimems;
+  return watcher.hackertooltimems;
 }
 
 isentityhackablecarepackage(entity) {
   if(isDefined(entity.model)) {
-    return (entity.model == #"wpn_t7_care_package_world");
+    return (entity.model == # "wpn_t7_care_package_world");
   }
 
   return 0;

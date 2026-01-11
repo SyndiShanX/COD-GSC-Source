@@ -174,7 +174,7 @@ blast_doors_close() {
   a_blast_door_nodes = getnodearray("blast_door_nodes", "targetname");
 
   foreach(node in a_blast_door_nodes) {
-  node node_disconnect_from_path();
+    node node_disconnect_from_path();
   }
 
   end_scene("cower_3_loop");
@@ -482,7 +482,7 @@ asd_wall_crash() {
   defend_crash_hide = getEntArray("defend_crash_hide", "targetname");
 
   foreach(piece in defend_crash_hide) {
-  piece hide();
+    piece hide();
   }
 
   m_defend_crash_hide = getent("defend_crash_hide", "targetname");
@@ -598,14 +598,14 @@ asd_intro_destruction() {
   defend_pillar_hide = getEntArray("defend_pillar_hide", "targetname");
 
   foreach(piece in defend_pillar_hide) {
-  piece hide();
+    piece hide();
   }
 
   level notify("fxanim_defend_room_02_start");
   defend_pillar_show = getEntArray("defend_pillar_show", "targetname");
 
   foreach(piece in defend_pillar_show) {
-  piece show();
+    piece show();
   }
 }
 

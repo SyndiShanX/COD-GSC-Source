@@ -151,9 +151,7 @@ class cpickupitem: cbaseinteractable {
   function respawn_loop(v_pos, v_angles) {
     while(true) {
       if(isDefined(m_custom_spawn_func)) {
-        [
-          [m_custom_spawn_func]
-        ](v_pos, v_angles);
+        [[m_custom_spawn_func]](v_pos, v_angles);
       } else {
         m_str_holding_hintstring = ("Press ^3[{+usereload}]^7 to drop ") + m_str_itemname;
         pickupitem_spawn(v_pos, v_angles);
@@ -303,9 +301,7 @@ class cbaseinteractable {
     }
     if(isDefined(a_drop_funcs)) {
       foreach(drop_func in a_drop_funcs) {
-        [
-          [drop_func]
-        ](e_triggerer);
+        [[drop_func]](e_triggerer);
       }
     }
     m_e_player_currently_holding = undefined;
@@ -438,9 +434,7 @@ class cbaseinteractable {
       if(!m_iscarryable) {}
       if(isDefined(e_triggerer.disable_object_pickup) && e_triggerer.disable_object_pickup) {}
       if(!e_triggerer util::use_button_held()) {}
-      if(isDefined(m_allow_carry_custom_conditions_func) && ![
-          [m_allow_carry_custom_conditions_func]
-        ]()) {}
+      if(isDefined(m_allow_carry_custom_conditions_func) && ![[m_allow_carry_custom_conditions_func]]()) {}
       if(!isDefined(m_e_body_trigger)) {}
       if(!e_triggerer istouching(m_e_body_trigger)) {}
       if(isDefined(e_triggerer.is_carrying_pickupitem) && e_triggerer.is_carrying_pickupitem) {}
@@ -471,12 +465,8 @@ class cbaseinteractable {
     while(true) {
       m_e_body_trigger waittill("trigger", player);
       if(isDefined(player.is_carrying_pickupitem) && player.is_carrying_pickupitem && player.o_pickupitem.m_str_itemname == "Toolbox") {
-        [
-          [player.o_pickupitem]
-        ] - > remove(player);
-        [
-          [m_repair_complete_func]
-        ](player);
+        [[player.o_pickupitem]] - > remove(player);
+        [[m_repair_complete_func]](player);
       }
       wait(0.05);
     }

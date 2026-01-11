@@ -18,7 +18,6 @@
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\gametypes\spawning;
 #include scripts\wz_common\infection;
-
 #namespace spawn;
 
 function_f468d9a5(spawnpoint) {
@@ -66,12 +65,12 @@ function_e93291ff() {
     }
   }
 
-    foreach(dest in destinations) {
-      if(dest.target === "hijacked") {
-        arrayremovevalue(destinations, dest);
-        break;
-      }
+  foreach(dest in destinations) {
+    if(dest.target === "hijacked") {
+      arrayremovevalue(destinations, dest);
+      break;
     }
+  }
 
   var_137456fd = getdvarint(#"wz_dest_id", -1);
 
@@ -223,7 +222,7 @@ on_spawn_player(predictedspawn) {
     self clientfield::set("StreamerSetSpawnHintIndex", self.var_25fe2d03);
   }
 
-  if(self.pers[#"spawns"] == 1) {
+  if(self.pers[# "spawns"] == 1) {
     if(isDefined(self.var_7070a94c) && self.var_7070a94c && !player_insertion::function_e5d4df1c()) {
       self thread function_c263fd97();
     } else {
@@ -241,9 +240,9 @@ function_ea62f5af() {
   var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
 
   if(isDefined(var_f8e6b703)) {
-    self match_record::set_stat(#"lives", var_f8e6b703, #"hash_4f557c87c0538129", var_a56604c5);
-    self match_record::set_stat(#"lives", var_f8e6b703, #"hash_4b4bd85ab964d386", var_c9b1d229);
-    self match_record::set_stat(#"lives", var_f8e6b703, #"hash_63862160f8335af2", var_42b02106);
+    self match_record::set_stat(#"lives", var_f8e6b703, # "hash_4f557c87c0538129", var_a56604c5);
+    self match_record::set_stat(#"lives", var_f8e6b703, # "hash_4b4bd85ab964d386", var_c9b1d229);
+    self match_record::set_stat(#"lives", var_f8e6b703, # "hash_63862160f8335af2", var_42b02106);
   }
 }
 
@@ -362,7 +361,7 @@ private function_178abfd(struct) {
 }
 
 function_1390f875(num_lives) {
-  var_c6328f73 = self.pers[#"lives"] - 1;
+  var_c6328f73 = self.pers[# "lives"] - 1;
 
   if(var_c6328f73 < 0) {
     var_c6328f73 = 0;

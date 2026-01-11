@@ -83,8 +83,7 @@ self is the vehicle that took damage.
 CodeCallback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName) {
   if(isDefined(self.damageCallback)) {
     self[[self.damageCallback]](inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
-  }
-  else {
+  } else {
     self Vehicle_FinishDamage(inflictor, attacker, damage, dFlags, meansOfDeath, weapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
   }
 }

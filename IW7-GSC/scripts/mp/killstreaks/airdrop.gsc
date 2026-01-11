@@ -226,9 +226,7 @@ getcratetypefordroptype(param_00) {
     case "dronedrop":
     default:
       if(isDefined(level.getrandomcratetypeforgamemode)) {
-        return [
-          [level.getrandomcratetypeforgamemode]
-        ](param_00);
+        return [[level.getrandomcratetypeforgamemode]](param_00);
       }
       return getrandomcratetype(param_00);
   }

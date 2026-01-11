@@ -33,8 +33,7 @@ setup_player_for_animated_sequence(var_0, var_1, var_2, var_3, var_4, var_5, var
 
   if(isDefined(var_6)) {
     var_8 = maps\_utility::spawn_anim_model(var_6);
-  }
-  else {
+  } else {
     var_8 = common_scripts\utility::spawn_tag_origin();
   }
 

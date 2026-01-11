@@ -8,7 +8,6 @@
 #include scripts\zm_common\callbacks;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_use_magicbox;
 
 autoexec __init__system__() {

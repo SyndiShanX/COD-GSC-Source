@@ -224,9 +224,7 @@ func_5038() {
 }
 
 func_4631() {
-  [
-    [level.onprecachegametype]
-  ]();
+  [[level.onprecachegametype]]();
   func_E256();
   func_E255();
   scripts\cp\perks\perkmachines::func_98B1();
@@ -301,9 +299,7 @@ _meth_8489() {
 }
 
 func_10D9F() {
-  [
-    [level.onstartgametype]
-  ]();
+  [[level.onstartgametype]]();
 }
 
 func_100BC() {
@@ -546,9 +542,7 @@ func_108F3(param_00) {
     func_10828(param_00);
   }
 
-  [
-    [level.onspawnplayer]
-  ]();
+  [[level.onspawnplayer]]();
   if(!scripts\engine\utility::flag("introscreen_over")) {
     scripts\cp\utility::freezecontrolswrapper(1);
   }

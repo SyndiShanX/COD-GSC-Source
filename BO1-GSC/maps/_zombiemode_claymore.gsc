@@ -202,8 +202,7 @@ claymore_detonation() {
       wait 0.4;
       if(isDefined(self.owner)) {
         self detonate(self.owner);
-      }
-      else {
+      } else {
         self detonate(undefined);
       }
       return;
@@ -244,8 +243,7 @@ satchel_damage() {
   }
   if(level.satchelexplodethisframe) {
     wait .1 + randomfloat(.4);
-  }
-  else {
+  } else {
     wait .05;
   }
   if(!isDefined(self)) {
@@ -307,8 +305,7 @@ show_claymore_hint(string) {
   self endon("disconnect");
   if(string == "claymore_purchased") {
     text = &"ZOMBIE_CLAYMORE_HOWTO";
-  }
-  else {
+  } else {
     text = &"ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
   }
   self setup_client_hintelem();

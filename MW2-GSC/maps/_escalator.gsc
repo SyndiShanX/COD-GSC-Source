@@ -54,8 +54,7 @@ escalator_move(first_step) {
 
     if(next_step != first_step) {
       step moveto(next_step.true_origin, movespeed);
-    }
-    else {
+    } else {
       step.origin = first_origin;
     }
 

@@ -7,7 +7,6 @@
 #include maps\_utility;
 #include maps\_anim;
 #include animscripts\shared;
-
 #using_animtree("generic_human");
 
 main() {
@@ -226,8 +225,7 @@ checkCombatState() {
 
     if(wasInCombat && !isInCombat) {
       startNonCombat();
-    }
-    else if(!wasInCombat && isInCombat) {
+    } else if(!wasInCombat && isInCombat) {
       startCombat();
     }
 

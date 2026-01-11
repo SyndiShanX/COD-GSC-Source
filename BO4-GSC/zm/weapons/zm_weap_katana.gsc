@@ -21,7 +21,6 @@
 #include scripts\zm_common\zm_audio;
 #include scripts\zm_common\zm_hero_weapon;
 #include scripts\zm_common\zm_loadout;
-
 #namespace zm_weap_katana;
 
 autoexec __init__system__() {
@@ -29,12 +28,12 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("toplayer", "" + #"hero_katana_vigor_postfx", 1, 1, "counter");
-  clientfield::register("allplayers", "" + #"katana_rush_postfx", 1, 1, "int");
-  clientfield::register("allplayers", "" + #"katana_rush_sfx", 1, 1, "int");
-  level.hero_weapon[#"katana"][0] = getweapon(#"hero_katana_t8_lv1");
-  level.hero_weapon[#"katana"][1] = getweapon(#"hero_katana_t8_lv2");
-  level.hero_weapon[#"katana"][2] = getweapon(#"hero_katana_t8_lv3");
+  clientfield::register("toplayer", "" + # "hero_katana_vigor_postfx", 1, 1, "counter");
+  clientfield::register("allplayers", "" + # "katana_rush_postfx", 1, 1, "int");
+  clientfield::register("allplayers", "" + # "katana_rush_sfx", 1, 1, "int");
+  level.hero_weapon[# "katana"][0] = getweapon(#"hero_katana_t8_lv1");
+  level.hero_weapon[# "katana"][1] = getweapon(#"hero_katana_t8_lv2");
+  level.hero_weapon[# "katana"][2] = getweapon(#"hero_katana_t8_lv3");
   zm_loadout::register_hero_weapon_for_level(#"hero_katana_t8_lv1");
   zm_loadout::register_hero_weapon_for_level(#"hero_katana_t8_lv2");
   zm_loadout::register_hero_weapon_for_level(#"hero_katana_t8_lv3");
@@ -52,15 +51,15 @@ __init__() {
 }
 
 function_c740060f(weapon, var_e7c11b0c = 1) {
-  if(weapon == level.hero_weapon[#"katana"][2]) {
+  if(weapon == level.hero_weapon[# "katana"][2]) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[#"katana"][1] && var_e7c11b0c < 3) {
+  if(weapon == level.hero_weapon[# "katana"][1] && var_e7c11b0c < 3) {
     return true;
   }
 
-  if(weapon == level.hero_weapon[#"katana"][0] && var_e7c11b0c < 2) {
+  if(weapon == level.hero_weapon[# "katana"][0] && var_e7c11b0c < 2) {
     return true;
   }
 
@@ -76,35 +75,35 @@ private function_9a0f234b() {
     wpn_cur = waitresult.weapon;
     wpn_prev = waitresult.last_weapon;
 
-    if(isinarray(level.hero_weapon[#"katana"], wpn_cur)) {
-      self clientfield::increment_to_player("" + #"hero_katana_vigor_postfx");
+    if(isinarray(level.hero_weapon[# "katana"], wpn_cur)) {
+      self clientfield::increment_to_player("" + # "hero_katana_vigor_postfx");
       self function_c43691a9(1);
       self thread function_8d02f57b(wpn_cur);
-    } else if(isinarray(level.hero_weapon[#"katana"], wpn_prev)) {
+    } else if(isinarray(level.hero_weapon[# "katana"], wpn_prev)) {
       self function_c43691a9(0);
       self notify(#"hero_katana_expired");
       self.var_5605c31e = undefined;
     }
 
-    if(wpn_cur == level.hero_weapon[#"katana"][0]) {
-      zm_hero_weapon::show_hint(wpn_cur, #"hash_648a5b1eedae58b9");
+    if(wpn_cur == level.hero_weapon[# "katana"][0]) {
+      zm_hero_weapon::show_hint(wpn_cur, # "hash_648a5b1eedae58b9");
       self thread function_9fdcf13f();
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[#"katana"][1]) {
-      zm_hero_weapon::show_hint(wpn_cur, #"hash_52cddac894472d22");
+    if(wpn_cur == level.hero_weapon[# "katana"][1]) {
+      zm_hero_weapon::show_hint(wpn_cur, # "hash_52cddac894472d22");
       self thread function_119af40d(wpn_cur);
       self thread function_478a4910(wpn_cur);
       self thread function_9fdcf13f();
       continue;
     }
 
-    if(wpn_cur == level.hero_weapon[#"katana"][2]) {
+    if(wpn_cur == level.hero_weapon[# "katana"][2]) {
       if(!self gamepadusedlast()) {
-        self zm_hero_weapon::show_hint(wpn_cur, #"hash_4bf673fe684c7bcd");
+        self zm_hero_weapon::show_hint(wpn_cur, # "hash_4bf673fe684c7bcd");
       } else {
-        self zm_hero_weapon::show_hint(wpn_cur, #"hash_33116738f78d04b3");
+        self zm_hero_weapon::show_hint(wpn_cur, # "hash_33116738f78d04b3");
       }
 
       self thread function_119af40d(wpn_cur);
@@ -119,7 +118,7 @@ private function_9fdcf13f() {
   self endon(#"disconnect");
   wait 1;
   callback::on_ai_damage(&function_af221ee1);
-  self waittill(#"death", #"hero_katana_expired");
+  self waittill(#"death", # "hero_katana_expired");
   callback::remove_on_ai_damage(&function_af221ee1);
 }
 
@@ -131,7 +130,7 @@ private function_756560e3() {
     var_cad4df8e = waitresult.weapon;
 
     if(function_c740060f(var_cad4df8e, 2)) {
-      self clientfield::increment_to_player("" + #"hero_katana_vigor_postfx");
+      self clientfield::increment_to_player("" + # "hero_katana_vigor_postfx");
     }
   }
 }
@@ -141,15 +140,15 @@ function_4e81317c(einflictor, eattacker, idamage, flags, meansofdeath, weapon, v
     return idamage;
   }
 
-  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"popcorn" || self.zm_ai_category == #"enhanced") {
+  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "popcorn" || self.zm_ai_category == # "enhanced") {
     return (self.health + 100);
-  } else if(self.zm_ai_category == #"heavy" || self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
+  } else if(self.zm_ai_category == # "heavy" || self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
     switch (self.zm_ai_category) {
-      case #"heavy":
+      case # "heavy":
         return (0.2 * self.maxhealth);
-      case #"miniboss":
+      case # "miniboss":
         return (0.1 * self.maxhealth);
-      case #"boss":
+      case # "boss":
         return (0.05 * self.maxhealth);
     }
   }
@@ -164,7 +163,7 @@ function_af221ee1(s_params) {
 
   if(isplayer(s_params.eattacker)) {
     if(function_c740060f(s_params.weapon, 1)) {
-      if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"enhanced") {
+      if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "enhanced") {
         if(isDefined(level.no_gib_in_wolf_area) && isDefined(self[[level.no_gib_in_wolf_area]]()) && self[[level.no_gib_in_wolf_area]]()) {
           var_bec5660f = 1;
         }
@@ -173,7 +172,7 @@ function_af221ee1(s_params) {
           var_bec5660f = 1;
         }
 
-        if(isDefined(s_params.shitloc) && self.archetype === #"zombie") {
+        if(isDefined(s_params.shitloc) && self.archetype === # "zombie") {
           if(!(isDefined(var_bec5660f) && var_bec5660f)) {
             if(s_params.shitloc === "head" || s_params.shitloc === "helmet") {
               self thread function_1475944a();
@@ -202,7 +201,7 @@ function_af221ee1(s_params) {
         return;
       }
 
-      if(self.zm_ai_category == #"miniboss") {
+      if(self.zm_ai_category == # "miniboss") {
         if(s_params.shitloc === "head" || s_params.shitloc === "helmet" && isDefined(self.hashelmet) && self.hashelmet) {
           if(isDefined(self.helmethits && isDefined(self.var_905e4ce2))) {
             self.helmethits = self.var_905e4ce2;
@@ -221,18 +220,18 @@ function_af221ee1(s_params) {
 
 private function_1475944a() {
   level.var_9ea358cc++;
-  self waittill(#"death", #"hero_katana_expired");
+  self waittill(#"death", # "hero_katana_expired");
   level.var_9ea358cc--;
 }
 
 function_8d02f57b(w_katana) {
-  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired");
+  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired");
 
   while(true) {
-    if(w_katana.name == #"hero_katana_t8_lv3") {
+    if(w_katana.name == # "hero_katana_t8_lv3") {
       s_result = self waittill(#"weapon_melee_power");
     } else {
-      s_result = self waittill(#"weapon_melee_power", #"weapon_melee");
+      s_result = self waittill(#"weapon_melee_power", # "weapon_melee");
     }
 
     if(s_result.weapon == w_katana) {
@@ -242,7 +241,7 @@ function_8d02f57b(w_katana) {
 }
 
 function_119af40d(w_katana) {
-  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired");
+  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee_juke");
@@ -266,7 +265,7 @@ function_119af40d(w_katana) {
 }
 
 function_7903608c(w_katana) {
-  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired", #"hash_50c324a04c7e0b09");
+  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired", # "hash_50c324a04c7e0b09");
   str_hitloc = "head";
 
   while(true) {
@@ -296,7 +295,7 @@ private function_bbe55589(e_player, w_katana, str_hitloc) {
   self endon(#"death");
   n_base_damage = 50;
 
-  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"popcorn" || self.zm_ai_category == #"enhanced") {
+  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "popcorn" || self.zm_ai_category == # "enhanced") {
     self.var_48a548c1 = 1;
     [[level.var_3594d33a]] - > waitinqueue(self);
     self dodamage(self.health + 100, e_player.origin, e_player, e_player, str_hitloc, "MOD_MELEE", 0, w_katana);
@@ -305,13 +304,13 @@ private function_bbe55589(e_player, w_katana, str_hitloc) {
   }
 
   switch (self.zm_ai_category) {
-    case #"heavy":
+    case # "heavy":
       n_base_damage = 0.2 * self.maxhealth;
       break;
-    case #"miniboss":
+    case # "miniboss":
       n_base_damage = 0.1 * self.maxhealth;
       break;
-    case #"boss":
+    case # "boss":
       n_base_damage = 0.05 * self.maxhealth;
       break;
   }
@@ -325,7 +324,7 @@ private function_bbe55589(e_player, w_katana, str_hitloc) {
 }
 
 function_fcc26273(w_katana) {
-  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired");
+  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee");
@@ -347,22 +346,22 @@ function_bed1fd9f() {
 
   self val::set(#"hash_6b725a8367e0178a", "ignoreme");
   self.var_4e6b62c3 = 1;
-  self clientfield::set("" + #"katana_rush_sfx", 1);
-  self clientfield::set("" + #"katana_rush_postfx", 1);
-  waitresult = self waittill(#"hero_katana_expired", #"hero_katana_rush_toggle");
+  self clientfield::set("" + # "katana_rush_sfx", 1);
+  self clientfield::set("" + # "katana_rush_postfx", 1);
+  waitresult = self waittill(#"hero_katana_expired", # "hero_katana_rush_toggle");
 
-  if(waitresult._notify == #"hero_katana_expired") {
+  if(waitresult._notify == # "hero_katana_expired") {
     self playSound(#"hash_58397a948dd38b37");
   }
 
-  self clientfield::set("" + #"katana_rush_sfx", 0);
-  self clientfield::set("" + #"katana_rush_postfx", 0);
+  self clientfield::set("" + # "katana_rush_sfx", 0);
+  self clientfield::set("" + # "katana_rush_postfx", 0);
   self val::reset(#"hash_6b725a8367e0178a", "ignoreme");
   self.var_4e6b62c3 = undefined;
 }
 
 function_269ad6a5(w_katana) {
-  self endon(#"disconnect", #"bled_out", #"death");
+  self endon(#"disconnect", # "bled_out", # "death");
 
   if(isDefined(self.var_5605c31e)) {
     return;
@@ -397,13 +396,13 @@ function_c43691a9(var_2e56d8e5) {
 }
 
 function_478a4910(w_katana) {
-  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired");
+  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee_juke");
 
     if(s_result.weapon == w_katana) {
-      if(1 === zm_audio::create_and_play_dialog(#"hero_level_2", #"katana")) {
+      if(1 === zm_audio::create_and_play_dialog(#"hero_level_2", # "katana")) {
         break;
       }
     }
@@ -411,13 +410,13 @@ function_478a4910(w_katana) {
 }
 
 function_68ff89f7(w_katana) {
-  self endon(#"disconnect", #"bled_out", #"death", #"hero_katana_expired");
+  self endon(#"disconnect", # "bled_out", # "death", # "hero_katana_expired");
 
   while(true) {
     s_result = self waittill(#"weapon_melee");
 
     if(s_result.weapon == w_katana) {
-      if(1 === zm_audio::create_and_play_dialog(#"hero_level_3", #"katana")) {
+      if(1 === zm_audio::create_and_play_dialog(#"hero_level_3", # "katana")) {
         break;
       }
     }

@@ -242,8 +242,7 @@ getaibyspecies(species, team) {
 
   if(isDefined(team)) {
     ailist = arraycombine(getaiarray(team), getvehiclearray(team), 0, 0);
-  }
-  else {
+  } else {
     ailist = arraycombine(getaiarray(), getvehiclearray(), 0, 0);
   }
 
@@ -325,8 +324,7 @@ prevent_long_death() {
 
       if(isDefined(attacker)) {
         self kill(self.origin, attacker);
-      }
-      else {
+      } else {
         self kill(self.origin);
       }
 
@@ -423,8 +421,7 @@ ai_deathwatch(einflictor, eattacker, idamage, meansofdeath) {
   if(self.team == "allies") {
     if(flag("rts_mode")) {
       idamage = int(idamage * level.rts.game_rules.ally_dmg_reducerrts);
-    }
-    else if(flag("fps_mode")) {
+    } else if(flag("fps_mode")) {
       idamage = int(idamage * level.rts.game_rules.ally_dmg_reducerfps);
     }
   }
@@ -441,8 +438,7 @@ ai_deathwatch(einflictor, eattacker, idamage, meansofdeath) {
 
   if(!isDefined(self.hits)) {
     self.hits = 1;
-  }
-  else {
+  } else {
     self.hits++;
   }
 
@@ -451,8 +447,7 @@ ai_deathwatch(einflictor, eattacker, idamage, meansofdeath) {
 
     if(self.armor > 0) {
       idamage = 0;
-    }
-    else {
+    } else {
       idamage = self.armor * -1;
       self.armor = undefined;
     }
@@ -470,8 +465,7 @@ ai_deathwatch(einflictor, eattacker, idamage, meansofdeath) {
       if(self.team == "allies") {
         if(flag("fps_mode")) {
           maps\_so_rts_event::trigger_event("diedfps_" + self.pkg_ref.ref);
-        }
-        else {
+        } else {
           maps\_so_rts_event::trigger_event("died_" + self.pkg_ref.ref);
         }
       }
@@ -487,8 +481,7 @@ set_vehicle_damage_override() {
 
   if(is_true(level.friendlyfiredisabled)) {
     self.friendlyfire_shield = 0;
-  }
-  else {
+  } else {
     self.friendlyfire_shield = 1;
   }
 
@@ -706,8 +699,7 @@ ai_initialize(ref, team, origin, squadid, angles, pkg_ref, health) {
 
   if(isDefined(health) && health > 0) {
     self.health = health;
-  }
-  else {
+  } else {
     self.health = ref.health;
   }
 
@@ -717,8 +709,7 @@ ai_initialize(ref, team, origin, squadid, angles, pkg_ref, health) {
 
   if(team == "allies") {
     adjustedhealth = int(self.health * level.rts.game_rules.ally_health_scale);
-  }
-  else {
+  } else {
     adjustedhealth = int(self.health * level.rts.game_rules.axis_health_scale);
   }
 
@@ -742,8 +733,7 @@ ai_initialize(ref, team, origin, squadid, angles, pkg_ref, health) {
 
       if(isDefined(angles)) {
         self forceteleport(origin, angles);
-      }
-      else {
+      } else {
         self forceteleport(origin);
       }
     } else if(ref.species == "vehicle") {
@@ -775,11 +765,9 @@ ai_initialize(ref, team, origin, squadid, angles, pkg_ref, health) {
 
     if(issubstr(self.vehicletype, "metalstorm")) {
       self thread maps\_metal_storm::metalstorm_set_team(team);
-    }
-    else if(issubstr(self.vehicletype, "quadrotor")) {
+    } else if(issubstr(self.vehicletype, "quadrotor")) {
       self thread maps\_quadrotor::quadrotor_set_team(team);
-    }
-    else {
+    } else {
       self.vteam = team;
     }
 
@@ -802,8 +790,7 @@ ai_initialize(ref, team, origin, squadid, angles, pkg_ref, health) {
     if(!is_true(self.manual_lui_add)) {
       if(ref.species == "human") {
         luinotifyevent(&"rts_add_friendly_human", 5, self getentitynumber(), squadid, 35, 0, pkg_ref.idx);
-      }
-      else {
+      } else {
         luinotifyevent(&"rts_add_friendly_ai", 4, self getentitynumber(), squadid, 0, pkg_ref.idx);
       }
     }
@@ -837,8 +824,7 @@ spawn_ai_package_standard(pkg_ref, team, callback, searchpoint, findinitnode, ma
   if(!isDefined(searchpoint)) {
     if(team == "axis") {
       searchpoint = level.rts.enemy_center.origin;
-    }
-    else if(team == "allies") {
+    } else if(team == "allies") {
       searchpoint = level.rts.allied_center.origin;
     }
   }
@@ -848,8 +834,7 @@ spawn_ai_package_standard(pkg_ref, team, callback, searchpoint, findinitnode, ma
   if(team == "allies" && isDefined(pkg_ref.hot_key_takeover)) {
     if(pkg_ref.qty["allies"] > 0) {
       luinotifyevent(&"rts_add_squad", 4, squadid, pkg_ref.idx, 0, pkg_ref.qty["allies"]);
-    }
-    else {
+    } else {
       luinotifyevent(&"rts_add_squad", 3, squadid, pkg_ref.idx, 0);
     }
   }
@@ -869,8 +854,7 @@ spawn_ai_package_standard(pkg_ref, team, callback, searchpoint, findinitnode, ma
 
     if(ai_ref.species == "human" || ai_ref.species == "robot_actor") {
       ai = simple_spawn_single(ai_ref.ref, undefined, undefined, undefined, undefined, undefined, undefined, 1);
-    }
-    else if(ai_ref.species == "vehicle") {
+    } else if(ai_ref.species == "vehicle") {
       origin = isDefined(nodes[i]) ? nodes[i].origin : searchpoint;
       ai = maps\_so_rts_support::placevehicle(ai_ref.ref, origin + vectorscale((0, 0, 1), 36.0), team);
     } else if(ai_ref.species == "dog")
@@ -930,8 +914,7 @@ spawn_ai_package_standard(pkg_ref, team, callback, searchpoint, findinitnode, ma
 get_package_drop_target(team) {
   if(team == "axis") {
     droptarget = level.rts.enemy_center.origin;
-  }
-  else {
+  } else {
     droptarget = level.rts.allied_center.origin;
   }
 
@@ -1026,14 +1009,11 @@ chopper_unload_cargo(pkg_ref, team, squadid) {
 
   if(issubstr(pkg_ref.ref, "quadrotor")) {
     self chopper_unload_cargo_quad(pkg_ref, team, squadid);
-  }
-  else if(issubstr(pkg_ref.ref, "metalstorm")) {
+  } else if(issubstr(pkg_ref.ref, "metalstorm")) {
     self chopper_unload_cargo_metalstorm(pkg_ref, team, squadid);
-  }
-  else if(issubstr(pkg_ref.ref, "bigdog")) {
+  } else if(issubstr(pkg_ref.ref, "bigdog")) {
     self chopper_unload_cargo_claw(pkg_ref, team, squadid);
-  }
-  else {
+  } else {
     assert(0, "unhandled pkg");
   }
 
@@ -1241,8 +1221,7 @@ spawnreplacement(spawner) {
 
     if(goingtonode) {
       guy ai_initialize(self.ally.ai_ref, self.team, goal.origin, self.ally.squadid, self.angles, self.ally.pkg_ref);
-    }
-    else {
+    } else {
       guy ai_initialize(self.ally.ai_ref, self.team, self.origin, self.ally.squadid, self.angles, self.ally.pkg_ref);
     }
 
@@ -1347,8 +1326,7 @@ restorereplacement() {
 
     if(goingtonode) {
       self.ally.swapai ai_initialize(self.ally.ai_ref, self.team, goal.origin, self.ally.squadid, self.angles, self.ally.pkg_ref);
-    }
-    else {
+    } else {
       self.ally.swapai ai_initialize(self.ally.ai_ref, self.team, self.origin, self.ally.squadid, self.angles, self.ally.pkg_ref);
     }
 
@@ -1497,8 +1475,7 @@ vehicledeathwatcher(vehicle) {
 
     if(level.rts.squads[self.ally.squadid].members.size == 0) {
       nextsquad = maps\_so_rts_squad::getnextvalidsquad(self.ally.squadid);
-    }
-    else {
+    } else {
       nextsquad = self.ally.squadid;
     }
 
@@ -1535,8 +1512,7 @@ getbestinitialorientangles(entity) {
 
   if(isDefined(entity.enemy)) {
     enemyent = entity.enemy;
-  }
-  else {
+  } else {
     closeenemy = getclosestai(self.origin, "axis", 562500);
 
     if(isDefined(closeenemy)) {
@@ -1698,8 +1674,7 @@ takeoverselected(entity) {
   if(isDefined(entity.classname) && entity.classname == "script_vehicle" || is_mechanical(entity)) {
     if(is_mechanical(entity)) {
       entity.takedamage = 1;
-    }
-    else {
+    } else {
       entity veh_magic_bullet_shield(0);
     }
 
@@ -1728,8 +1703,7 @@ bigdog_initialize() {
   if(isai(self)) {
     if(self.team == "allies") {
       self setModel("veh_t6_drone_claw_mk2");
-    }
-    else {
+    } else {
       self setModel("veh_t6_drone_claw_mk2_alt");
       self.turret setModel("veh_t6_drone_claw_mk2_turret_alt");
     }
@@ -1742,7 +1716,7 @@ removebaseasthreat() {
   allenemies = getaiarray("axis");
 
   foreach(enemy in allenemies) {
-  enemy clearentitytarget();
+    enemy clearentitytarget();
   }
 
   allvehicles = getvehiclearray("axis");

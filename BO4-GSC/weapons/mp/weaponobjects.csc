@@ -10,7 +10,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\weaponobjects;
-
 #namespace weaponobjects;
 
 autoexec __init__system__() {
@@ -18,7 +17,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  init_shared(sessionmodeiscampaigngame() ? #"rob_sonar_set_friendlyequip_cp" : #"rob_sonar_set_friendlyequip_mp", #"rob_sonar_set_enemyequip");
+  init_shared(sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", # "rob_sonar_set_enemyequip");
   level setupscriptmovercompassicons();
   level setupmissilecompassicons();
 }
@@ -28,12 +27,12 @@ setupscriptmovercompassicons() {
     level.scriptmovercompassicons = [];
   }
 
-  level.scriptmovercompassicons[#"wpn_t7_turret_emp_core"] = "compass_empcore_white";
-  level.scriptmovercompassicons[#"t6_wpn_turret_ads_world"] = "compass_guardian_white";
-  level.scriptmovercompassicons[#"veh_t7_drone_uav_enemy_vista"] = "compass_uav";
-  level.scriptmovercompassicons[#"veh_t7_mil_vtol_fighter_mp"] = "compass_lightningstrike";
-  level.scriptmovercompassicons[#"veh_t7_drone_rolling_thunder"] = "compass_lodestar";
-  level.scriptmovercompassicons[#"veh_t7_drone_srv_blimp"] = "t7_hud_minimap_hatr";
+  level.scriptmovercompassicons[# "wpn_t7_turret_emp_core"] = "compass_empcore_white";
+  level.scriptmovercompassicons[# "t6_wpn_turret_ads_world"] = "compass_guardian_white";
+  level.scriptmovercompassicons[# "veh_t7_drone_uav_enemy_vista"] = "compass_uav";
+  level.scriptmovercompassicons[# "veh_t7_mil_vtol_fighter_mp"] = "compass_lightningstrike";
+  level.scriptmovercompassicons[# "veh_t7_drone_rolling_thunder"] = "compass_lodestar";
+  level.scriptmovercompassicons[# "veh_t7_drone_srv_blimp"] = "t7_hud_minimap_hatr";
 }
 
 setupmissilecompassicons() {

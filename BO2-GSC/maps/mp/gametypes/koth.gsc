@@ -80,8 +80,7 @@ main() {
 
   if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen()) {
     setscoreboardcolumns("score", "kills", "captures", "defends", "deaths");
-  }
-  else {
+  } else {
     setscoreboardcolumns("score", "kills", "deaths", "captures", "defends");
   }
 
@@ -90,7 +89,7 @@ main() {
   trigs = getEntArray("radiotrigger", "targetname");
 
   foreach(trig in trigs) {
-  trig delete();
+    trig delete();
   }
 }
 
@@ -107,7 +106,7 @@ updateobjectivehintmessages(defenderteam, defendmessage, attackmessage) {
 
 updateobjectivehintmessage(message) {
   foreach(team in level.teams) {
-  game["strings"]["objective_hint_" + team] = message;
+    game["strings"]["objective_hint_" + team] = message;
   }
 }
 
@@ -137,8 +136,7 @@ getrespawndelay() {
 
     if(level.delayplayer) {
       return min(level.spawndelay, timeremaining);
-    }
-    else {
+    } else {
       return ceil(timeremaining);
     }
   }
@@ -178,8 +176,7 @@ onstartgametype() {
 
   if(level.zonespawntime) {
     updateobjectivehintmessage(level.objectivehintpreparezone);
-  }
-  else {
+  } else {
     updateobjectivehintmessage(level.objectivehintcapturezone);
   }
 
@@ -200,7 +197,7 @@ onstartgametype() {
   level.spawn_start = [];
 
   foreach(team in level.teams) {
-  level.spawn_start[team] = maps\mp\gametypes\_spawnlogic::getspawnpointarray(maps\mp\gametypes\_spawning::gettdmstartspawnname(team));
+    level.spawn_start[team] = maps\mp\gametypes\_spawnlogic::getspawnpointarray(maps\mp\gametypes\_spawning::gettdmstartspawnname(team));
   }
 
   level.mapcenter = maps\mp\gametypes\_spawnlogic::findboxcenter(level.spawnmins, level.spawnmaxs);
@@ -228,8 +225,7 @@ updategametypedvars() {
 spawn_first_zone(delay) {
   if(level.randomzonespawn == 1) {
     level.zone = getnextzonefromqueue();
-  }
-  else {
+  } else {
     level.zone = getfirstzone();
   }
 
@@ -246,8 +242,7 @@ spawn_next_zone() {
 
   if(level.randomzonespawn != 0) {
     level.zone = getnextzonefromqueue();
-  }
-  else {
+  } else {
     level.zone = getnextzone();
   }
 
@@ -263,7 +258,7 @@ getnumtouching() {
   numtouching = 0;
 
   foreach(team in level.teams) {
-  numtouching = numtouching + self.numtouching[team];
+    numtouching = numtouching + self.numtouching[team];
   }
 
   return numtouching;
@@ -305,7 +300,7 @@ kothcaptureloop() {
     ownerteam = level.zone.gameobject maps\mp\gametypes\_gameobjects::getownerteam();
 
     foreach(team in level.teams) {
-    updateobjectivehintmessages(ownerteam, level.objectivehintdefendhq, level.objectivehintcapturezone);
+      updateobjectivehintmessages(ownerteam, level.objectivehintdefendhq, level.objectivehintcapturezone);
     }
 
     level.zone.gameobject maps\mp\gametypes\_gameobjects::allowuse("none");
@@ -323,8 +318,7 @@ kothcaptureloop() {
 
     if(isDefined(destroy_team)) {
       level.zone.gameobject maps\mp\gametypes\_gameobjects::setownerteam(destroy_team);
-    }
-    else {
+    } else {
       level.zone.gameobject maps\mp\gametypes\_gameobjects::setownerteam("none");
     }
   }
@@ -396,7 +390,7 @@ kothmainloop() {
     }
 
     foreach(team in level.teams) {
-    timerdisplay[team].alpha = 0;
+      timerdisplay[team].alpha = 0;
     }
 
     waittillframeend;
@@ -410,7 +404,7 @@ kothmainloop() {
       thread movezoneaftertime(level.zoneautomovetime);
 
       foreach(team in level.teams) {
-      timerdisplay[team] settimer(level.zoneautomovetime);
+        timerdisplay[team] settimer(level.zoneautomovetime);
       }
 
       foreach(team in level.teams) {
@@ -445,7 +439,7 @@ kothmainloop() {
     level notify("zone_reset");
 
     foreach(team in level.teams) {
-    timerdisplay[team].alpha = 0;
+      timerdisplay[team].alpha = 0;
     }
 
     spawn_next_zone();
@@ -481,8 +475,7 @@ onbeginuse(player) {
 
   if(ownerteam == "neutral") {
     player thread maps\mp\gametypes\_battlechatter_mp::gametypespecificbattlechatter("hq_protect", player.pers["team"]);
-  }
-  else {
+  } else {
     player thread maps\mp\gametypes\_battlechatter_mp::gametypespecificbattlechatter("hq_attack", player.pers["team"]);
   }
 }
@@ -540,8 +533,7 @@ onzonecapture(player) {
 
     if(oldteam == team) {
       maps\mp\gametypes\_globallogic_audio::leaderdialog("koth_lost", team, "gamemode_objective");
-    }
-    else if(oldteam == "neutral") {
+    } else if(oldteam == "neutral") {
       maps\mp\gametypes\_globallogic_audio::leaderdialog("koth_captured", team, "gamemode_objective");
     }
 
@@ -728,11 +720,9 @@ onspawnplayer(predictedspawn) {
 
         if(self.pers["team"] == zoneowningteam) {
           spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_nearteam(level.spawn_all, level.zone.gameobject.nearspawns);
-        }
-        else if(level.spawndelay >= level.zoneautomovetime && gettime() > level.zonerevealtime + 10000) {
+        } else if(level.spawndelay >= level.zoneautomovetime && gettime() > level.zonerevealtime + 10000) {
           spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_nearteam(level.spawn_all);
-        }
-        else {
+        } else {
           spawnpoint = maps\mp\gametypes\_spawnlogic::getspawnpoint_nearteam(level.spawn_all, level.zone.gameobject.outerspawns);
         }
       }
@@ -748,8 +738,7 @@ onspawnplayer(predictedspawn) {
 
   if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "koth");
   }
 }
@@ -943,8 +932,7 @@ setupnearbyspawns() {
 
     if(i <= thirdsize * 2) {
       second[second.size] = spawns[i];
-    }
-    else {
+    } else {
       third[third.size] = spawns[i];
     }
 
@@ -1069,8 +1057,7 @@ pickzonetospawn() {
   }
 
   if(getcountofteamswithplayers(num) <= 1) {
-    for(zone = level.zones[randomint(level.zones.size)]; isDefined(level.prevzone) && zone == level.prevzone; zone = level.zones[randomint(level.zones.size)]) {
-    }
+    for(zone = level.zones[randomint(level.zones.size)]; isDefined(level.prevzone) && zone == level.prevzone; zone = level.zones[randomint(level.zones.size)]) {}
 
     level.prevzone2 = level.prevzone;
     level.prevzone = zone;
@@ -1099,8 +1086,7 @@ pickzonetospawn() {
     if(isDefined(level.prevzone2) && zone == level.prevzone2) {
       if(level.zones.size > 2) {
         continue;
-      }
-      else {
+      } else {
         cost = cost + 262144;
       }
     }

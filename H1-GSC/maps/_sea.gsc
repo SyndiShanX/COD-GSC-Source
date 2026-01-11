@@ -66,8 +66,7 @@ sea_objectbob_precalc(var_0, var_1) {
 
   if(isDefined(self.setscale)) {
     self.scale = self.setscale;
-  }
-  else {
+  } else {
     self.scale = randomfloatrange(2, 3);
   }
 
@@ -89,8 +88,7 @@ sea_objectbob_precalc(var_0, var_1) {
     if(var_2 < abs(var_4)) {
       if(var_4 < 1) {
         var_3 = var_2 * -1;
-      }
-      else {
+      } else {
         var_3 = var_2;
       }
     } else
@@ -172,8 +170,7 @@ sea_objectbob(var_0) {
 
     if(!isDefined(var_3[1])) {
       var_11 = var_3[0].angles;
-    }
-    else {
+    } else {
       var_11 = vectortoangles(var_5 - var_4);
     }
 

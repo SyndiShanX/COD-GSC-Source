@@ -235,8 +235,7 @@ aim_idle_get_random() {
 
   if(var_0 || var_1) {
     return % cnd_rappel_idle;
-  }
-  else {
+  } else {
     var_2 = randomintrange(0, 3);
 
     switch (var_2) {
@@ -441,14 +440,11 @@ ally_rappel_get_aim_pitch() {
 get_weight_change(var_0, var_1) {
   if(var_0 == 2) {
     return var_1 / 8.7 * 0.1;
-  }
-  else if(var_0 == 8) {
+  } else if(var_0 == 8) {
     return var_1 / 2.2 * 0.1;
-  }
-  else if(var_0 == 4) {
+  } else if(var_0 == 4) {
     return var_1 / 8.8 * 0.1;
-  }
-  else if(var_0 == 6) {
+  } else if(var_0 == 6) {
     return var_1 / 9.1 * 0.1;
   }
 }
@@ -481,15 +477,13 @@ ally_aim_closer_to(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_13 && var_14 && var_15) {
     if(var_5 > 0) {
       _ally_aim_closer_set_anim_weight(var_2, 6, var_1, var_10, var_8);
-    }
-    else if(var_5 < 0) {
+    } else if(var_5 < 0) {
       _ally_aim_closer_set_anim_weight(var_1, 4, var_2, var_10, var_8);
     }
   } else if(var_16 && var_17) {
     if(var_4 > 0) {
       _ally_aim_closer_set_anim_weight(var_3, 2, var_0, var_12, var_8);
-    }
-    else if(var_4 < 0) {
+    } else if(var_4 < 0) {
       _ally_aim_closer_set_anim_weight(var_0, 8, var_3, var_12, var_8);
     }
   }
@@ -568,8 +562,7 @@ _ally_transition_to_weight(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_5 > 0) {
     var_5 = min(var_5, var_9);
-  }
-  else {
+  } else {
     var_5 = max(var_5, var_9);
   }
 
@@ -618,36 +611,27 @@ _ally_get_yaw_left_aim_weight(var_0) {
 rappel_aim_get_parent_node(var_0) {
   if(var_0 == 2) {
     return % rappel_aim_8;
-  }
-  else if(var_0 == 4) {
+  } else if(var_0 == 4) {
     return % rappel_aim_4;
-  }
-  else if(var_0 == 6) {
+  } else if(var_0 == 6) {
     return % rappel_aim_6;
-  }
-  else if(var_0 == 8) {
+  } else if(var_0 == 8) {
     return % rappel_aim_2;
-  }
-  else {}
+  } else {}
 }
 
 ally_rappel_get_aim_anim(var_0) {
   if(var_0 == 2) {
     return % cnd_rappel_stealth_aim_8_baker_add;
-  }
-  else if(var_0 == 4) {
+  } else if(var_0 == 4) {
     return % cnd_rappel_stealth_aim_4_baker_add;
-  }
-  else if(var_0 == 5) {
+  } else if(var_0 == 5) {
     return % cnd_rappel_stealth_aim_5_baker_add;
-  }
-  else if(var_0 == 6) {
+  } else if(var_0 == 6) {
     return % cnd_rappel_stealth_aim_6_baker_add;
-  }
-  else if(var_0 == 8) {
+  } else if(var_0 == 8) {
     return % cnd_rappel_stealth_aim_2_baker_add;
-  }
-  else {}
+  } else {}
 }
 
 ally_shooting_loop() {
@@ -703,8 +687,7 @@ ally_shoot_at_enemy() {
   }
   if(self.shootstyle == "full") {
     ally_fire_until_out_of_ammo(var_0, 1, animscripts\shared::decidenumshotsforfull());
-  }
-  else if(self.shootstyle == "burst" || self.shootstyle == "semi") {
+  } else if(self.shootstyle == "burst" || self.shootstyle == "semi") {
     var_1 = 4;
     ally_fire_until_out_of_ammo(var_0, 1, var_1);
   } else if(self.shootstyle == "single")
@@ -722,17 +705,13 @@ ally_fire_until_out_of_ammo(var_0, var_1, var_2) {
 
   if(isDefined(self.shootrateoverride)) {
     var_4 = self.shootrateoverride;
-  }
-  else if(self.shootstyle == "full") {
+  } else if(self.shootstyle == "full") {
     var_4 = animscripts\weaponlist::autoshootanimrate() * randomfloatrange(0.5, 1.0);
-  }
-  else if(self.shootstyle == "burst") {
+  } else if(self.shootstyle == "burst") {
     var_4 = animscripts\weaponlist::burstshootanimrate();
-  }
-  else if(animscripts\utility::usingsidearm()) {
+  } else if(animscripts\utility::usingsidearm()) {
     var_4 = 3.0;
-  }
-  else if(animscripts\utility::usingshotgun()) {
+  } else if(animscripts\utility::usingshotgun()) {
     var_4 = animscripts\combat_utility::shotgunfirerate();
   }
 
@@ -797,8 +776,7 @@ shoot_at_shoot_ent_or_pos() {
 
     if(!isDefined(self.perfectaccuracy) || self.perfectaccuracy) {
       var_3 = bulletspread(var_0, var_1, var_2);
-    }
-    else {
+    } else {
       var_3 = var_1;
     }
 
@@ -926,11 +904,9 @@ ally_rappel_start_movement_horizontal_internal(var_0, var_1, var_2) {
     if(var_8 < self.close_distance_sq || var_6 == "away") {
       if(!common_scripts\utility::flag(var_4) && var_9 && _ally_is_current_volume(self.in_volume)) {
         thread animate_til_volume("away", var_4, self.center_volume, self.out_volume, var_2, var_0);
-      }
-      else if(!common_scripts\utility::flag(var_4) && var_9 && _ally_is_current_volume(self.center_volume)) {
+      } else if(!common_scripts\utility::flag(var_4) && var_9 && _ally_is_current_volume(self.center_volume)) {
         thread animate_til_volume("away", var_4, self.out_volume, undefined, var_2, var_0);
-      }
-      else if(!common_scripts\utility::flag(var_4) && var_9 && _ally_is_current_volume(self.out_volume)) {} else if(self.movement_back) {
+      } else if(!common_scripts\utility::flag(var_4) && var_9 && _ally_is_current_volume(self.out_volume)) {} else if(self.movement_back) {
         thread animate_opposite_direction(var_4, var_2, var_0, common_scripts\utility::flag(var_4));
       }
     } else if(var_8 > self.far_distance_sq || var_6 == "back") {
@@ -988,8 +964,7 @@ ally_rappel_start_movement_horizontal_internal(var_0, var_1, var_2) {
 
       if(var_6 == "away" || var_6 == "none") {
         var_6 = "back";
-      }
-      else {
+      } else {
         var_6 = "away";
       }
     }
@@ -1003,8 +978,7 @@ ally_rappel_distance2dsquared_to_player() {
 
   if(isDefined(level.rpl_plyr_anim_origin)) {
     var_1 = level.rpl_plyr_anim_origin.origin;
-  }
-  else {
+  } else {
     var_1 = level.player.origin;
   }
 
@@ -1214,14 +1188,11 @@ animate_opposite_direction(var_0, var_1, var_2, var_3) {
 
   if(isDefined(self.in_volume) && self.last_volume == self.in_volume) {
     thread animate_til_volume("away", var_0, self.center_volume, self.out_volume, var_1, var_2, !var_3);
-  }
-  else if(isDefined(self.center_volume) && self.last_volume == self.center_volume) {
+  } else if(isDefined(self.center_volume) && self.last_volume == self.center_volume) {
     thread animate_til_volume("away", var_0, self.out_volume, undefined, var_1, var_2, !var_3);
-  }
-  else if(isDefined(self.out_volume) && self.last_volume == self.out_volume) {
+  } else if(isDefined(self.out_volume) && self.last_volume == self.out_volume) {
     thread animate_til_volume("away", var_0, self.out_volume, undefined, var_1, var_2, !var_3);
-  }
-  else {}
+  } else {}
 }
 
 animate_after_movement(var_0, var_1) {

@@ -7,8 +7,7 @@
 #include clientscripts\createfx\panama_fx;
 #include clientscripts\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_prop_beer_open"] = loadfx("maps/panama/fx_prop_beer_open");

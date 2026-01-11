@@ -92,8 +92,7 @@ func_371B(var_00) {
 
   if(isplayer(var_00)) {
     var_01 = var_00 func_7DEB();
-  }
-  else {
+  } else {
     var_01 = anglesToForward(self.angles);
   }
 
@@ -158,8 +157,7 @@ func_7E02(var_00, var_01) {
 
   if(isDefined(self.var_1198.func_10A4D) && isDefined(self.var_1198.func_10A4A)) {
     var_02 = self _meth_8486(var_00, var_01, self.var_1198.func_10A4D[self.var_1198.func_10A4A]);
-  }
-  else {
+  } else {
     var_02 = self _meth_8486(var_00, var_01);
   }
 
@@ -183,8 +181,7 @@ func_3713(var_00) {
 
     if(_isaircraft(var_00) && isDefined(var_0.spaceship_vel)) {
       var_05 = var_0.origin + var_0.spaceship_vel * var_04;
-    }
-    else {
+    } else {
       var_05 = var_0.origin;
     }
 
@@ -346,8 +343,7 @@ func_E7B7(var_00) {
 
   if(var_05 > 0) {
     var_06 = scripts\sp\math::func_6A8E(1.9, 0.7, var_05);
-  }
-  else {
+  } else {
     var_05 = var_05 * -1;
 
     if(var_02 < 9000) {
@@ -447,8 +443,7 @@ func_10E66(var_00, var_01) {
 func_E7B8(var_00, var_01) {
   if(isDefined(var_01)) {
     var_02 = var_01;
-  }
-  else {
+  } else {
     var_02 = 1;
   }
 
@@ -641,8 +636,7 @@ func_724A(var_00) {
     if(!self.var_1198.func_2CCD) {
       if(isDefined(self.var_3135.func_DB05)) {
         func_0C21::func_20DE(1.25);
-      }
-      else {
+      } else {
         func_0C21::func_20DE(1.0);
       }
     }
@@ -678,8 +672,7 @@ func_D3B2(var_00) {
 
   if(isDefined(var_01)) {
     var_02 = var_1[0];
-  }
-  else {
+  } else {
     return anim.failure;
   }
 
@@ -703,8 +696,7 @@ func_D3B5(var_00) {
 
   if(isDefined(var_01)) {
     var_02 = var_1[0];
-  }
-  else {
+  } else {
     return anim.failure;
   }
 
@@ -791,8 +783,7 @@ func_7221(var_00) {
 
     if(isDefined(self.var_1198.func_7235.func_98F9)) {
       self _meth_848D(self.var_1198.func_7235.target, self.var_1198.func_7235.offset, 1.0, self.var_1198.func_7235.func_98F9, self.var_1198.func_7235.func_98FE, self.var_1198.func_7235.func_C760, self.var_1198.func_7235.func_C765);
-    }
-    else {
+    } else {
       self _meth_848D(self.var_1198.func_7235.target, self.var_1198.func_7235.offset, 1.0);
     }
 
@@ -882,8 +873,7 @@ func_7232(var_00) {
 
     if(var_09 > 0 && var_08 * 1.5 > var_06) {
       self _meth_8459("always");
-    }
-    else {
+    } else {
       self _meth_8459("never");
     }
 
@@ -1061,8 +1051,7 @@ func_9E77(var_00) {
 func_9DE3(var_00) {
   if(self.var_3135.func_673F) {
     return anim.success;
-  }
-  else {
+  } else {
     return anim.failure;
   }
 }
@@ -1070,8 +1059,7 @@ func_9DE3(var_00) {
 func_9F39() {
   if(self.var_3135.func_EF78) {
     return anim.success;
-  }
-  else {
+  } else {
     return anim.failure;
   }
 }
@@ -1251,8 +1239,7 @@ func_FFD8(var_00) {
 func_41E4(var_00) {
   if(isDefined(self.var_1198.func_10A4B)) {
     self.var_1198.func_10A4A = self.var_1198.func_10A4B;
-  }
-  else {
+  } else {
     self.var_1198.func_10A4A = undefined;
   }
 

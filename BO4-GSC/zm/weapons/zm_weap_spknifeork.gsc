@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_melee_weapon;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_weap_spknifeork;
 
 autoexec __init__system__() {
@@ -17,7 +16,7 @@ autoexec __init__system__() {
 }
 
 private __init__() {
-  zm_melee_weapon::init(#"spknifeork", #"spknifeork_flourish", 1000, "spknifeork", undefined, "spknifeork", undefined);
+  zm_melee_weapon::init(#"spknifeork", # "spknifeork_flourish", 1000, "spknifeork", undefined, "spknifeork", undefined);
   zm::function_84d343d(#"spknifeork", &function_958c4578);
 }
 

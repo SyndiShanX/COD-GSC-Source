@@ -122,7 +122,7 @@ clean_up(var_0) {
   }
 
   foreach(var_2 in var_0) {
-  var_2 thorough_delete();
+    var_2 thorough_delete();
   }
 }
 
@@ -554,8 +554,7 @@ play_anim_off_me(var_0, var_1) {
 
   if(isarray(level.scr_anim[self.animname][var_1])) {
     var_0 maps\_anim::anim_loop_solo(self, var_1);
-  }
-  else {
+  } else {
     var_0 thread maps\_anim::anim_single_solo(self, var_1);
   }
 
@@ -686,7 +685,7 @@ setup_house() {
   common_scripts\utility::flag_wait("3rd_floor_start");
 
   foreach(var_7 in var_0) {
-  var_7.dontdonotetracks = 1;
+    var_7.dontdonotetracks = 1;
   }
 }
 
@@ -764,7 +763,7 @@ ending_scene() {
   maps\_utility::music_play("mus_deer_elias");
 
   foreach(var_8 in level.second_floor_actors) {
-  var_8.second_floor_anim_ent thread maps\_anim::anim_single_solo(var_8, "2nd_floor");
+    var_8.second_floor_anim_ent thread maps\_anim::anim_single_solo(var_8, "2nd_floor");
   }
 
   level.brian thread brian_does_idle_after_scene("2nd_floor");
@@ -785,7 +784,7 @@ ending_scene() {
   common_scripts\utility::flag_set("3rd_floor_start");
 
   foreach(var_8 in level.third_floor_actors) {
-  var_8.third_floor_anim_ent thread maps\_anim::anim_single_solo(var_8, "3rd_floor_start");
+    var_8.third_floor_anim_ent thread maps\_anim::anim_single_solo(var_8, "3rd_floor_start");
   }
 
   level.hesh.third_floor_anim_ent waittill("3rd_floor_start");
@@ -799,7 +798,7 @@ ending_scene() {
   maps\_utility::delaythread(0.5, maps\_utility::music_crossfade, "mus_deer_balcony", 2.0);
 
   foreach(var_8 in level.third_floor_actors) {
-  var_8.third_floor_anim_ent thread maps\_anim::anim_single_solo(var_8, "3rd_floor_end");
+    var_8.third_floor_anim_ent thread maps\_anim::anim_single_solo(var_8, "3rd_floor_end");
   }
 
   var_19 = getanimlength( % dh_ending_hesh_end_b);

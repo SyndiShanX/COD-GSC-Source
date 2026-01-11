@@ -271,15 +271,13 @@ plane_position_updater(miliseconds, soundalias_1, soundalias_2) {
 
   if(!isDefined(soundalias_1)) {
     self.soundalias_1 = "veh_mig_flyby";
-  }
-  else {
+  } else {
     self.soundalias_1 = soundalias_1;
   }
 
   if(!isDefined(soundalias_2)) {
     self.soundalias_2 = "veh_mig_flyby_lfe";
-  }
-  else {
+  } else {
     self.soundalias_2 = soundalias_2;
   }
 
@@ -334,8 +332,7 @@ closest_point_on_line_to_point(point, linestart, lineend) {
 
   if(t < 0.0) {
     return linestart;
-  }
-  else if(t > 1.0) {
+  } else if(t > 1.0) {
     return lineend;
   }
 

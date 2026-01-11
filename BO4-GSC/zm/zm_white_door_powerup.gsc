@@ -12,7 +12,6 @@
 #include scripts\zm_common\zm_net;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_white_door_powerup;
 
 init() {
@@ -35,7 +34,7 @@ door_powerup_drop(powerup_name, var_e3a28454, powerup_team, powerup_location) {
   level notify(#"powerup_dropped", powerup);
 
   if(isDefined(powerup)) {
-    powerup.grabbed_level_notify = #"magic_door_power_up_grabbed";
+    powerup.grabbed_level_notify = # "magic_door_power_up_grabbed";
     powerup function_94cd396e(powerup_name, powerup_team, var_e3a28454);
     powerup thread zm_powerups::powerup_wobble();
     powerup thread zm_powerups::powerup_grab(powerup_team);
@@ -52,7 +51,7 @@ perks_behind_door() {
     return;
   }
 
-  level endon(#"magic_door_power_up_grabbed", #"population_count_step_complete");
+  level endon(#"magic_door_power_up_grabbed", # "population_count_step_complete");
   level thread powerup_grabbed_watcher();
   level flag::wait_till("initial_blackscreen_passed");
   level.var_2cc90a51 = [];

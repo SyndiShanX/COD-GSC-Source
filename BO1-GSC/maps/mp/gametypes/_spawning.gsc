@@ -449,8 +449,7 @@ create_artillery_influencers(point, radius) {
   weapon_team_mask = 0;
   if(radius < 0) {
     thisradius = level.spawnsystem.artillery_influencer_radius;
-  }
-  else {
+  } else {
     thisradius = radius;
   }
   return AddCylinderInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
@@ -488,8 +487,7 @@ create_vehicle_influencers() {
 create_rcbomb_influencers(team) {
   if(!level.teambased) {
     other_team_mask = level.spawnsystem.iSPAWN_TEAMMASK_FREE;
-  }
-  else {
+  } else {
     other_team_mask = get_team_mask(getotherteam(team));
   }
   return AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_NORMAL,
@@ -574,8 +572,7 @@ create_map_placed_influencer(influencer_entity, optional_score_override) {
 create_enemy_spawned_influencers(origin, team) {
   if(!level.teambased) {
     other_team_mask = level.spawnsystem.iSPAWN_TEAMMASK_FREE;
-  }
-  else {
+  } else {
     other_team_mask = get_team_mask(getotherteam(team));
   }
   return AddSphereInfluencer(level.spawnsystem.eINFLUENCER_TYPE_ENEMY_SPAWNED,

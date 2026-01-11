@@ -350,7 +350,7 @@ reveal_details() {
   /*
   bridge_collapse_detail_slide_origin = GetEnt( "bridge_collapse_detail_slide_origin", "targetname" ).origin;
   bridge_collapse_detail_slide = getEntArray( "bridge_collapse_detail_slide", "targetname" );
-	
+  	
   foreach( part in bridge_collapse_detail_slide )
   {
   	part.finalOrigin = part.origin;

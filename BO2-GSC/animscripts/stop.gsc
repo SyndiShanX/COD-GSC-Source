@@ -34,11 +34,9 @@ main() {
   if(!transitionedtoidle) {
     if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none") {
       transitionedtoidle = 1;
-    }
-    else if(self.weapon == "none") {
+    } else if(self.weapon == "none") {
       transitionedtoidle = 1;
-    }
-    else if(angleclamp180(self gettagangles("tag_weapon")[0]) > 20) {
+    } else if(angleclamp180(self gettagangles("tag_weapon")[0]) > 20) {
       transitionedtoidle = 1;
     }
   }
@@ -104,11 +102,9 @@ getdesiredidlepose() {
 
   if(mynodetype == "Cover Stand" || mynodetype == "Conceal Stand") {
     desiredpose = animscripts\utility::choosepose("stand");
-  }
-  else if(mynodetype == "Cover Crouch" || mynodetype == "Conceal Crouch") {
+  } else if(mynodetype == "Cover Crouch" || mynodetype == "Conceal Crouch") {
     desiredpose = animscripts\utility::choosepose("crouch");
-  }
-  else if(mynodetype == "Cover Prone" || mynodetype == "Conceal Prone") {
+  } else if(mynodetype == "Cover Prone" || mynodetype == "Conceal Prone") {
     desiredpose = animscripts\utility::choosepose("prone");
   }
 
@@ -126,8 +122,7 @@ transitiontoidle() {
 
   if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && self.a.pose == "stand") {
     special = "_cqb";
-  }
-  else if(self is_heavy_machine_gun() && self.a.pose == "stand") {
+  } else if(self is_heavy_machine_gun() && self.a.pose == "stand") {
     special = "_hmg";
   }
 
@@ -165,8 +160,7 @@ playidle(pose, idleset) {
 
   if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && self.a.pose == "stand") {
     special = "_cqb";
-  }
-  else if(self is_heavy_machine_gun()) {
+  } else if(self is_heavy_machine_gun()) {
     special = "_hmg";
   }
 

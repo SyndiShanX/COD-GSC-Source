@@ -34,14 +34,11 @@ scene_pre_briefing() {
 
   if(india_safe && iran_safe) {
     scene_name = "sf_b_both_safe";
-  }
-  else if(india_safe && !iran_safe) {
+  } else if(india_safe && !iran_safe) {
     scene_name = "sf_b_india_safe";
-  }
-  else if(!india_safe && iran_safe) {
+  } else if(!india_safe && iran_safe) {
     scene_name = "sf_b_iran_safe";
-  }
-  else {
+  } else {
     scene_name = "sf_b_neither_safe";
   }
 

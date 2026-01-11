@@ -21,8 +21,7 @@ init() {
 init_stage() {
   if(flag("sq_is_max_tower_built")) {
     level thread stage_vo_max();
-  }
-  else {
+  } else {
     level thread stage_vo_ric();
   }
 
@@ -90,8 +89,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 sq_bp_spawn_trigger() {
   level endon("sq_ip_puzzle_complete");
@@ -147,7 +145,7 @@ sq_bp_start_puzzle_lights() {
   a_tags = [];
 
   foreach(m_button in a_button_structs) {
-  a_tags[a_tags.size] = m_button.script_string;
+    a_tags[a_tags.size] = m_button.script_string;
   }
 
   a_tags = array_randomize(a_tags);

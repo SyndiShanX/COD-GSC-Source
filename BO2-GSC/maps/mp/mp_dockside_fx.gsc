@@ -7,8 +7,7 @@
 #include maps\mp\createfx\mp_dockside_fx;
 #include maps\mp\createart\mp_dockside_art;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["crane_spark"] = loadfx("maps/mp_maps/fx_mp_container_lrg_spark_runner");

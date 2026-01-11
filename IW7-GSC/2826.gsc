@@ -116,7 +116,7 @@ func_5843() {
   func_583A("results", "current");
 
   foreach(var_01 in level.players) {
-  var_01 thread func_584E();
+    var_01 thread func_584E();
   }
 }
 
@@ -135,8 +135,7 @@ func_583F(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if(var_06 <= 0.0) {
     func_5849("script", "current", var_00, var_01, var_02, var_03, var_04, var_05, 1.0);
-  }
-  else if(level.func_5832["script"]["current"]["weight"] <= 0.0) {
+  } else if(level.func_5832["script"]["current"]["weight"] <= 0.0) {
     func_5849("script", "current", var_00, var_01, var_02, var_03, var_04, var_05, 0.0);
   }
 }
@@ -168,15 +167,13 @@ func_5836(var_00, var_01, var_02, var_03) {
 
     if(var_04 > var_02) {
       var_04 = var_02;
-    }
-    else if(var_04 < 1) {
+    } else if(var_04 < 1) {
       var_04 = 1;
     }
 
     if(var_00 - var_04 <= var_01) {
       return var_01;
-    }
-    else {
+    } else {
       return var_00 - var_04;
     }
   } else if(var_00 < var_01) {
@@ -184,15 +181,13 @@ func_5836(var_00, var_01, var_02, var_03) {
 
     if(var_04 > var_02) {
       var_04 = var_02;
-    }
-    else if(var_04 < 1) {
+    } else if(var_04 < 1) {
       var_04 = 1;
     }
 
     if(var_00 + var_04 >= var_01) {
       return var_01;
-    }
-    else {
+    } else {
       return var_00 + var_04;
     }
   }
@@ -206,8 +201,7 @@ func_5835() {
   if(var_00 < 1.0) {
     if(self adsbuttonpressed() && self playerads() > 0.0) {
       var_00 = min(1, var_00 + 0.7);
-    }
-    else {
+    } else {
       var_00 = 0;
     }
 
@@ -223,8 +217,7 @@ func_5835() {
 
   if(isDefined(level.func_5837)) {
     var_01 = level.func_5837;
-  }
-  else {
+  } else {
     var_01 = 0.1;
   }
 
@@ -320,8 +313,7 @@ func_5845() {
 
   if(isDefined(self.func_5847)) {
     var_12 = _combineangles(self.func_5847.angles, var_11);
-  }
-  else {
+  } else {
     var_12 = var_11;
   }
 
@@ -435,8 +427,7 @@ func_A43D(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_06 > 2500) {
       var_06 = 2500;
-    }
-    else if(var_06 < 1000) {
+    } else if(var_06 < 1000) {
       var_06 = 1000;
     }
   }
@@ -512,7 +503,7 @@ func_11715() {
   _setsaveddvar("r_tessellationCutoffFalloff", level.func_11714.func_4CA7);
 
   foreach(var_02 in level.players) {
-  var_02 thread func_11717();
+    var_02 thread func_11717();
   }
 }
 

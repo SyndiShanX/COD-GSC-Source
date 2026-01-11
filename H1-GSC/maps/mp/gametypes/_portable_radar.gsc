@@ -65,8 +65,7 @@ portableradarsetup(var_0) {
 
   if(level.teambased) {
     maps\mp\_entityheadicons::setteamheadicon(self.team, (0, 0, 20));
-  }
-  else {
+  } else {
     maps\mp\_entityheadicons::setplayerheadicon(var_0, (0, 0, 20));
   }
 
@@ -107,8 +106,7 @@ portableradardamagelistener(var_0) {
     }
     if(isDefined(var_10)) {
       var_11 = maps\mp\_utility::strip_suffix(var_10, "_lefthand");
-    }
-    else {
+    } else {
       var_11 = undefined;
     }
 

@@ -133,8 +133,7 @@ missile_check_ammo() {
 
   if(!self.has_straight_missiles) {
     hud_highlight_no_missiles();
-  }
-  else {
+  } else {
     hud_highlight_straight_missile();
   }
 
@@ -260,8 +259,7 @@ hud_start() {
   foreach(var_2 in var_0["missile"]) {
     if(var_2.islockedontarget) {
       var_2 setshader("apache_ammo_lock", 16, 16);
-    }
-    else {
+    } else {
       var_2 setshader("apache_ammo", 16, 16);
     }
 
@@ -319,8 +317,7 @@ lockontargets() {
 
         if(var_0 maps\_utility::ent_flag("FLAG_apache_pilot_ADS")) {
           var_12 = vehicle_scripts\_apache_player_pilot::fov_get_ads();
-        }
-        else {
+        } else {
           var_12 = vehicle_scripts\_apache_player_pilot::fov_get_default();
         }
 
@@ -374,8 +371,7 @@ lockontargets() {
 
     if(self.targets.size) {
       hud_highlight_homing_missile();
-    }
-    else {
+    } else {
       hud_highlight_straight_missile();
     }
 
@@ -442,8 +438,7 @@ targetsfilter(var_0, var_1) {
 
   if(var_0 maps\_utility::ent_flag("FLAG_apache_pilot_ADS")) {
     var_3 = vehicle_scripts\_apache_player_pilot::fov_get_ads();
-  }
-  else {
+  } else {
     var_3 = vehicle_scripts\_apache_player_pilot::fov_get_default();
   }
 
@@ -513,8 +508,7 @@ isturret(var_0) {
 onteam(var_0) {
   if(maps\_vehicle::isvehicle()) {
     return isDefined(self.script_team) && self.script_team == var_0;
-  }
-  else {
+  } else {
     return isDefined(self.team) && self.team == var_0;
   }
 
@@ -542,8 +536,7 @@ hud_flashalpha(var_0, var_1, var_2) {
 target_islockedon(var_0) {
   if(isDefined(self._target)) {
     return isDefined(self._target.weapon["lockOn_missile"].islockedon[var_0 getentitynumber()]);
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -684,8 +677,7 @@ hud_marklocked_firstavailablemissileicon(var_0) {
 
   if(var_1) {
     hud_highlight_homing_missile();
-  }
-  else {
+  } else {
     hud_highlight_straight_missile();
   }
 
@@ -1080,7 +1072,7 @@ targetssortbydot(var_0, var_1, var_2) {
   var_5 = [];
 
   foreach(var_7 in var_0) {
-  var_5[var_5.size] = vectordot(var_3, vectornormalize(var_7.origin - var_1));
+    var_5[var_5.size] = vectordot(var_3, vectornormalize(var_7.origin - var_1));
   }
 
   return doublereversebubblesort(var_5, var_0);

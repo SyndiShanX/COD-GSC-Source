@@ -35,8 +35,7 @@ func_128E7(var_00, var_01) {
 
   if(isDefined(self.underwater) && self.underwater) {
     return 0;
-  }
-  else if(func_68C1(self.team)) {
+  } else if(func_68C1(self.team)) {
     self iprintlnbold(&"KILLSTREAKS_AIR_SPACE_TOO_CROWDED");
     return 0;
   } else if(scripts\mp\utility\game::currentactivevehiclecount() >= scripts\mp\utility\game::maxvehiclesallowed() || level.fauxvehiclecount + var_03 >= scripts\mp\utility\game::maxvehiclesallowed()) {
@@ -66,8 +65,7 @@ func_68C1(var_00) {
   if(level.gametype == "dm") {
     if(isDefined(level.heli_pilot[var_00]) || isDefined(level.heli_pilot[level.otherteam[var_00]])) {
       return 1;
-    }
-    else {
+    } else {
       return 0;
     }
   } else if(isDefined(level.heli_pilot[var_00]))

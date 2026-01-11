@@ -7,7 +7,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace zm_magicbox;
 
 autoexec __init__system__() {
@@ -15,14 +14,14 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"hash_2bba72fdcc5508b5"] = #"hash_3b22162a96d9389";
-  level._effect[#"chest_light_closed"] = #"zombie/fx_weapon_box_closed_glow_zmb";
-  level._effect[#"hash_19f4dd97cbb87594"] = #"hash_5f376e9395e16666";
-  level._effect[#"hash_246062f68a34e289"] = #"hash_55cc904817de4a07";
-  level._effect[#"hash_73c11d9bf55cbb6"] = #"hash_31c4723879504cb7";
-  level._effect[#"hash_5239f7431d4c72ca"] = #"hash_3f4154d786124350";
-  level._effect[#"hash_b6e7f724af1ad5b"] = #"hash_7ed77a22f165e308";
-  level._effect[#"fire_runner"] = #"hash_409439bf8b3dd862";
+  level._effect[# "hash_2bba72fdcc5508b5"] = # "hash_3b22162a96d9389";
+  level._effect[# "chest_light_closed"] = # "zombie/fx_weapon_box_closed_glow_zmb";
+  level._effect[# "hash_19f4dd97cbb87594"] = # "hash_5f376e9395e16666";
+  level._effect[# "hash_246062f68a34e289"] = # "hash_55cc904817de4a07";
+  level._effect[# "hash_73c11d9bf55cbb6"] = # "hash_31c4723879504cb7";
+  level._effect[# "hash_5239f7431d4c72ca"] = # "hash_3f4154d786124350";
+  level._effect[# "hash_b6e7f724af1ad5b"] = # "hash_7ed77a22f165e308";
+  level._effect[# "fire_runner"] = # "hash_409439bf8b3dd862";
   clientfield::register("zbarrier", "magicbox_open_fx", 1, 1, "int", &function_8f69e904, 0, 0);
   clientfield::register("zbarrier", "magicbox_closed_fx", 1, 1, "int", &function_9253a233, 0, 0);
   clientfield::register("zbarrier", "magicbox_leave_fx", 1, 1, "counter", &function_68f67f85, 0, 0);
@@ -33,7 +32,7 @@ __init__() {
   clientfield::register("scriptmover", "force_stream", 1, 1, "int", &force_stream_changed, 0, 0);
   clientfield::register("zbarrier", "t8_magicbox_crack_glow_fx", 1, 1, "int", &t8_magicbox_crack_glow_fx, 0, 0);
   clientfield::register("zbarrier", "t8_magicbox_ambient_fx", 1, 1, "int", &t8_magicbox_ambient_fx, 0, 0);
-  clientfield::register("zbarrier", "" + #"hash_2fcdae6b889933c7", 1, 1, "int", &function_b5807489, 0, 0);
+  clientfield::register("zbarrier", "" + # "hash_2fcdae6b889933c7", 1, 1, "int", &function_b5807489, 0, 0);
 }
 
 force_stream_magicbox(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -122,7 +121,7 @@ function_b4b9937(localclientnum, newval, str_state) {
         v_tag_angles += level.var_4016a739;
       }
 
-      var_5b1d3ef = util::spawn_model(localclientnum, #"tag_origin", v_tag_origin, v_tag_angles);
+      var_5b1d3ef = util::spawn_model(localclientnum, # "tag_origin", v_tag_origin, v_tag_angles);
       self.var_7e616d59[localclientnum] = var_5b1d3ef;
       waitframe(1);
     }
@@ -134,7 +133,7 @@ function_b4b9937(localclientnum, newval, str_state) {
         v_tag_angles += level.var_4016a739;
       }
 
-      fx_obj = util::spawn_model(localclientnum, #"tag_origin", self.origin, v_tag_angles);
+      fx_obj = util::spawn_model(localclientnum, # "tag_origin", self.origin, v_tag_angles);
       self.var_93e0dfa9[localclientnum] = fx_obj;
       waitframe(1);
     }
@@ -149,13 +148,13 @@ function_b4b9937(localclientnum, newval, str_state) {
 
       if(newval) {
         switch (str_state) {
-          case #"opened":
-            str_fx = level._effect[#"hash_2bba72fdcc5508b5"];
+          case # "opened":
+            str_fx = level._effect[# "hash_2bba72fdcc5508b5"];
             var_4c5fde13 = self.var_7e616d59[localclientnum];
             str_tag = "tag_origin";
             break;
-          case #"closed":
-            str_fx = level._effect[#"chest_light_closed"];
+          case # "closed":
+            str_fx = level._effect[# "chest_light_closed"];
             var_4c5fde13 = self.var_93e0dfa9[localclientnum];
             str_tag = "tag_origin";
             break;
@@ -172,7 +171,7 @@ function_b4b9937(localclientnum, newval, str_state) {
     }
 
     if(isDefined(self) && str_state == "leave") {
-      util::playFXOnTag(localclientnum, level._effect[#"hash_19f4dd97cbb87594"], self.var_ed9e4472, "tag_fx");
+      util::playFXOnTag(localclientnum, level._effect[# "hash_19f4dd97cbb87594"], self.var_ed9e4472, "tag_fx");
     }
   }
 }
@@ -207,7 +206,7 @@ t8_magicbox_crack_glow_fx(localclientnum, oldval, newval, bnewent, binitialsnap,
 
     if(newval) {
       mdl_piece = self zbarriergetpiece(1);
-      self.var_c142c34f[localclientnum] = util::playFXOnTag(localclientnum, level._effect[#"hash_246062f68a34e289"], mdl_piece, "tag_fx");
+      self.var_c142c34f[localclientnum] = util::playFXOnTag(localclientnum, level._effect[# "hash_246062f68a34e289"], mdl_piece, "tag_fx");
       self function_e8a16acc(localclientnum);
     }
   }
@@ -236,7 +235,7 @@ function_b5807489(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     if(newval) {
       mdl_piece = self zbarriergetpiece(1);
       mdl_piece.tag_origin = mdl_piece gettagorigin("tag_origin");
-      self.var_788272f2 = util::playFXOnTag(localclientnum, level._effect[#"fire_runner"], mdl_piece, "tag_origin");
+      self.var_788272f2 = util::playFXOnTag(localclientnum, level._effect[# "fire_runner"], mdl_piece, "tag_origin");
       return;
     }
 
@@ -268,19 +267,19 @@ t8_magicbox_ambient_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fi
       }
 
       mdl_piece = self zbarriergetpiece(1);
-      self.var_4d1d25b5[localclientnum][self.var_4d1d25b5[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_73c11d9bf55cbb6"], mdl_piece, "top_skull_head_jnt");
-      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_b6e7f724af1ad5b"], mdl_piece, "tag_fx");
-      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_05");
-      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_06");
-      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_07");
-      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_08");
+      self.var_4d1d25b5[localclientnum][self.var_4d1d25b5[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_73c11d9bf55cbb6"], mdl_piece, "top_skull_head_jnt");
+      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_b6e7f724af1ad5b"], mdl_piece, "tag_fx");
+      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_05");
+      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_06");
+      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_07");
+      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_08");
       mdl_piece = self zbarriergetpiece(2);
-      self.var_4d1d25b5[localclientnum][self.var_4d1d25b5[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_73c11d9bf55cbb6"], mdl_piece, "top_skull_head_jnt");
-      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_b6e7f724af1ad5b"], mdl_piece, "tag_fx");
-      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_05");
-      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_06");
-      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_07");
-      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[#"hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_08");
+      self.var_4d1d25b5[localclientnum][self.var_4d1d25b5[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_73c11d9bf55cbb6"], mdl_piece, "top_skull_head_jnt");
+      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_b6e7f724af1ad5b"], mdl_piece, "tag_fx");
+      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_05");
+      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_06");
+      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_07");
+      self.var_cf76db4a[localclientnum][self.var_cf76db4a[localclientnum].size] = util::playFXOnTag(localclientnum, level._effect[# "hash_5239f7431d4c72ca"], mdl_piece, "tag_fx_mouth_08");
       self function_4a16fb9(localclientnum);
     }
   }

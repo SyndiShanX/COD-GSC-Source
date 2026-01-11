@@ -843,22 +843,18 @@ playDeathAnimScarabs() {
 
   if(deathAnim == % mp_scarab_death_stand_1) {
     deathAnimModel ScriptModelPlayAnim("scarab_fullbody_bone_fx_stand_anim");
-  }
-  else if(deathAnim == % mp_scarab_death_crouch_1) {
+  } else if(deathAnim == % mp_scarab_death_crouch_1) {
     deathAnimModel ScriptModelPlayAnim("scarab_fullbody_bone_fx_crouch_anim");
-  }
-  else {
+  } else {
     deathAnimModel ScriptModelPlayAnim("scarab_fullbody_bone_fx_prone_anim");
   }
 
   for(index = 0; index < CONST_MAX_SCARAB_DEATH_BONES; index++) {
     if(index < 2) {
       continue;
-    }
-    else if(index < 10) {
+    } else if(index < 10) {
       playFXOnTag(level.dig_fx["scarab"]["deathAnim"], deathAnimModel, "Point00" + index);
-    }
-    else {
+    } else {
       playFXOnTag(level.dig_fx["scarab"]["deathAnim"], deathAnimModel, "Point0" + index);
     }
 
@@ -876,11 +872,9 @@ stopFXOnPlayerspawn(model) {
   for(index = 0; index < CONST_MAX_SCARAB_DEATH_BONES; index++) {
     if(index < 2) {
       continue;
-    }
-    else if(index < 10) {
+    } else if(index < 10) {
       stopFXOnTag(level.dig_fx["scarab"]["deathAnim"], model, "Point00" + index);
-    }
-    else {
+    } else {
       stopFXOnTag(level.dig_fx["scarab"]["deathAnim"], model, "Point0" + index);
     }
 
@@ -1287,8 +1281,7 @@ digCrateThink(dropType) {
 
   if(isDefined(game["strings"][self.crateType + "_hint"])) {
     crateHint = game["strings"][self.crateType + "_hint"];
-  }
-  else {
+  } else {
     crateHint = &"PLATFORM_GET_KILLSTREAK";
   }
 
@@ -1330,8 +1323,7 @@ crateOtherCaptureThink(useText) {
     } else {
       if(isDefined(level.overrideCrateUseTime)) {
         useTime = level.overrideCrateUseTime;
-      }
-      else {
+      } else {
         useTime = undefined;
       }
 
@@ -1702,8 +1694,7 @@ doPeriodicDamage(screenEffect, damage, interval, damageType, notifyObject, notif
 
         if(self.team == "axis") {
           self playSound(type + "_scarab_death_russian" + rand);
-        }
-        else {
+        } else {
           self playSound(type + "_scarab_death_american" + rand);
         }
 
@@ -1858,8 +1849,7 @@ killAllTouchingTrigger(entArray, type, damage, meansOfDeath, attacker, inflictor
 
           if(IsAgent(ent) && isDefined(ent.team) && ent.team == attacker.team) {
             ent DoDamage(damage, ent.origin, undefined, inflictor, meansOfDeath);
-          }
-          else {
+          } else {
             ent DoDamage(damage, ent.origin, attacker, inflictor, meansOfDeath);
           }
           break;
@@ -1976,8 +1966,7 @@ delayTrigger(time, state) {
 
   if(state == "on") {
     self trigger_on();
-  }
-  else {
+  } else {
     self trigger_off();
   }
 }

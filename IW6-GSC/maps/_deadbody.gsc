@@ -21,8 +21,7 @@ main() {
 
   if(var_0 > 0) {
     level.max_number_of_dead_bodies = var_0;
-  }
-  else {
+  } else {
     level.max_number_of_dead_bodies = 0;
   }
 
@@ -49,8 +48,7 @@ spawn_dead_body(var_0) {
 
   if(isDefined(self.script_index)) {
     var_1 = self.script_index;
-  }
-  else {
+  } else {
     level.dead_body_count++;
 
     if(level.dead_body_count > 3) {

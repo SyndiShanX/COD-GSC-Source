@@ -162,9 +162,7 @@ arcade_game_player_gets_too_far_away(param_00, param_01, param_02, param_03, par
           param_00 takeweapon(param_02);
         }
 
-        [
-          [param_03]
-        ](param_01, param_00);
+        [[param_03]](param_01, param_00);
         param_01.active_player = undefined;
         scripts\cp\cp_interaction::add_to_current_interaction_list(param_01);
         param_00 scripts\engine\utility::allow_weapon_switch(1);

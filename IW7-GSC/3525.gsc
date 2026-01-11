@@ -54,8 +54,7 @@ func_13AFC() {
 
         if(var_00 <= 0) {
           level.func_D410[self.team] = 0;
-        }
-        else {
+        } else {
           level.func_D410[self.team] = level.func_D410[self.team] - 30;
         }
 

@@ -539,9 +539,7 @@ special_dog_spawn(spawners, num_to_spawn) {
       }
     } else {
       if(isDefined(level.dog_spawn_func)) {
-        spawn_loc = [
-          [level.dog_spawn_func]
-        ](level.enemy_dog_spawns, favorite_enemy);
+        spawn_loc = [[level.dog_spawn_func]](level.enemy_dog_spawns, favorite_enemy);
         ai = spawn_zombie(level.enemy_dog_spawns[0]);
         if(isDefined(ai)) {
           ai.favoriteenemy = favorite_enemy;

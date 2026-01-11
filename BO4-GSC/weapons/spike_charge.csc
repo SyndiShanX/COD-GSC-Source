@@ -8,7 +8,6 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace sticky_grenade;
 
 autoexec __init__system__() {
@@ -16,7 +15,7 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"spike_light"] = #"weapon/fx_light_spike_launcher";
+  level._effect[# "spike_light"] = # "weapon/fx_light_spike_launcher";
   callback::add_weapon_type(#"spike_launcher", &spawned);
   callback::add_weapon_type(#"spike_launcher_cpzm", &spawned);
   callback::add_weapon_type(#"spike_charge", &spawned_spike_charge);
@@ -46,7 +45,7 @@ fx_think(localclientnum) {
 }
 
 start_light_fx(localclientnum) {
-  self.fx = util::playFXOnTag(localclientnum, level._effect[#"spike_light"], self, "tag_fx");
+  self.fx = util::playFXOnTag(localclientnum, level._effect[# "spike_light"], self, "tag_fx");
 }
 
 stop_light_fx(localclientnum) {

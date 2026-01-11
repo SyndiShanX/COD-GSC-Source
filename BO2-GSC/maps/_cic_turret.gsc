@@ -52,8 +52,7 @@ cic_turret_think() {
   if(isDefined(self.script_startstate)) {
     if(self.script_startstate == "off") {
       self cic_turret_off(self.angles);
-    }
-    else {
+    } else {
       self.state_machine set_state(self.script_startstate);
     }
   } else
@@ -181,8 +180,7 @@ cic_turret_fireupdate() {
       if(isDefined(self.enemy) && isalive(self.enemy) && self vehcansee(self.enemy)) {
         if(isplayer(self.enemy)) {
           wait(randomfloatrange(0.5, 1.3));
-        }
-        else {
+        } else {
           wait(randomfloatrange(0.5, 1.3) * 2);
         }
       }
@@ -206,8 +204,7 @@ cic_turret_fireupdate() {
 
           if(self.turret_state == 0) {
             self setturrettargetvec(left_look_at_pt);
-          }
-          else {
+          } else {
             self setturrettargetvec(right_look_at_pt);
           }
 
@@ -241,8 +238,7 @@ cic_turret_get_damage_effect(health_pct) {
   if(issubstr(self.vehicletype, "turret_sentry")) {
     if(health_pct < 0.6) {
       return level._effect["sentry_turret_damage02"];
-    }
-    else {
+    } else {
       return level._effect["sentry_turret_damage01"];
     }
   } else if(health_pct < 0.6)
@@ -392,11 +388,9 @@ cic_turret_fire_for_time(totalfiretime) {
   while(time < totalfiretime) {
     if(isDefined(self.enemy) && isDefined(self.enemy.attackeraccuracy) && self.enemy.attackeraccuracy == 0) {
       self fireweapon(undefined, undefined, 1);
-    }
-    else if(firechance > 1) {
+    } else if(firechance > 1) {
       self fireweapon(undefined, undefined, firecount % firechance);
-    }
-    else {
+    } else {
       self fireweapon();
     }
 
@@ -445,8 +439,7 @@ cic_turret_emped() {
 
     if(issubstr(self.vehicletype, "turret_sentry")) {
       playFXOnTag(level._effect["sentry_turret_stun"], self.stun_fx, "tag_origin");
-    }
-    else {
+    } else {
       playFXOnTag(level._effect["cic_turret_stun"], self.stun_fx, "tag_origin");
     }
   }

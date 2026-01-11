@@ -454,7 +454,7 @@ bridge_event_handle_glass(bridge_device) {
   blast_origin = bridge_device.device_model.origin;
   level waittill("bridge_fully_exploded");
   foreach(window in windows) {
-  DestroyGlass(window, GetGlassOrigin(window) - blast_origin);
+    DestroyGlass(window, GetGlassOrigin(window) - blast_origin);
   }
 }
 
@@ -500,8 +500,7 @@ redriver_update_hitsway_churchbell(attacker) {
   swing_dir = vectordot(vec, vec2) * 2.0;
   if(swing_dir > 0.0) {
     swing_dir = Max(0.3, swing_dir);
-  }
-  else {
+  } else {
     swing_dir = Min(-0.3, swing_dir);
   }
 
@@ -534,8 +533,7 @@ bridge_event_update_churchbell(blast_origin) {
   swing_dir = vectordot(vec, vec2) * 2.0;
   if(swing_dir > 0.0) {
     swing_dir = Max(0.7, swing_dir);
-  }
-  else {
+  } else {
     swing_dir = Min(-0.7, swing_dir);
   }
 
@@ -586,11 +584,9 @@ bell_sound_alias(bell_info) {
     level.small_bells++;
     if(level.small_bells == 1) {
       sound_alias = "rr_church_bell_smallest";
-    }
-    else if(level.small_bells == 2) {
+    } else if(level.small_bells == 2) {
       sound_alias = "rr_church_bell_smaller";
-    }
-    else {
+    } else {
       sound_alias = "rr_church_bell_small";
     }
   }

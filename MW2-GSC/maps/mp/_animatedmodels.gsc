@@ -17,7 +17,7 @@ main() {
   foreach(model_key in model_keys) {
     anim_keys = GetArrayKeys(level.anim_prop_models[model_key]);
     foreach(anim_key in anim_keys) {
-    PrecacheMpAnim(level.anim_prop_models[model_key][anim_key]);
+      PrecacheMpAnim(level.anim_prop_models[model_key][anim_key]);
     }
     //PrecacheMpAnim( level.anim_prop_models[ "foliage_tree_palm_bushy_1" ][ "strong" ] );
   }

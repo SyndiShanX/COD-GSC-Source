@@ -18,7 +18,7 @@ initialize() {
   var_1 = maps\_utility::getstructarray_delete("proximity_spawned_ai", "targetname");
 
   foreach(var_3 in var_1) {
-  var_0.locations[var_0.locations.size] = var_3;
+    var_0.locations[var_0.locations.size] = var_3;
   }
 
   level.proximity_spawn_ai = var_0;
@@ -47,8 +47,7 @@ monitor_spawners() {
 
         if(distancesquared(var_2.origin, level.player.origin) < self.distance_to_spawn && common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), var_2.origin, 0.342)) {
           thread spawn_ai_for_location(var_2);
-        }
-        else if(isDefined(var_2.living_ai) && var_2.living_ai.size) {
+        } else if(isDefined(var_2.living_ai) && var_2.living_ai.size) {
           maps\_utility::array_notify(var_2.living_ai, "player_out_of_range");
         }
       }
@@ -104,7 +103,7 @@ spawn_ai_for_location(var_0) {
   var_1 = spawn_ai_for_location_from_pool(var_0);
 
   foreach(var_3 in var_1) {
-  thread ai_track(var_3, var_0);
+    thread ai_track(var_3, var_0);
   }
 }
 
@@ -206,7 +205,7 @@ test_all() {
   level.player playerlinkto(level.proxytestent, "tag_origin");
 
   foreach(var_1 in level.proximity_spawn_ai.locations) {
-  level.proximity_spawn_ai test_location(var_1);
+    level.proximity_spawn_ai test_location(var_1);
   }
 
   iprintlnbold("success!!");
@@ -224,7 +223,7 @@ test_location(var_0) {
   var_0.ai_test_count = var_3.size;
 
   foreach(var_5 in var_3) {
-  thread test_individual_spawner(var_0, var_5);
+    thread test_individual_spawner(var_0, var_5);
   }
 
   var_7 = gettime() + 20000;

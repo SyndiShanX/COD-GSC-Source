@@ -517,13 +517,12 @@ unload_and_attack_if_stealth_broken_and_close() {
   while(1) {
     flag_wait("_stealth_spotted");
     foreach(player in level.players) {
-    thread waittill_player_in_range(player);
+      thread waittill_player_in_range(player);
     }
     self waittill("player_in_range");
     if(!flag("_stealth_spotted")) {
       continue;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -589,7 +588,7 @@ dialog_truck_coming() {
 waittill_player_in_truck_range() {
   self.close_player = undefined;
   foreach(player in level.players) {
-  player thread watch_for_truck(self);
+    player thread watch_for_truck(self);
   }
 
   level waittill("player_in_truck_range");
@@ -709,9 +708,9 @@ explosives_planted_monitor() {
   while(1) {
     all_planted = true;
     foreach(plant_target in level.plant_targets) {
-    if(plant_target.planted == false)
+      if(plant_target.planted == false)
     }
-      all_planted = false;
+    all_planted = false;
 
     if(all_planted) {
       break;

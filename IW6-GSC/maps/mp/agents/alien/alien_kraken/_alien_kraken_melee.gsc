@@ -49,7 +49,7 @@ charge() {
   common_scripts\utility::flag_clear("fx_kraken_water");
 
   foreach(var_1 in self.tentacles) {
-  var_1 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::retract();
+    var_1 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::retract();
   }
 
   var_3 = getsideanimstate("charge_");
@@ -150,7 +150,7 @@ heat() {
   maps\mp\agents\alien\alien_kraken\_alien_kraken::waitforidletentacles();
 
   foreach(var_6 in self.tentacles) {
-  var_6 notify(var_4);
+    var_6 notify(var_4);
   }
 
   self notify(var_4);
@@ -290,7 +290,7 @@ death() {
   thread kraken_death_music();
 
   foreach(var_1 in self.tentacles) {
-  var_1 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::death();
+    var_1 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::death();
   }
 
   playanim("death", 0, ::handledeathnotetracks);
@@ -390,7 +390,7 @@ playintroanim() {
 
 playemergeanim() {
   foreach(var_1 in self.tentacles) {
-  thread extendtentacle(var_1, 1);
+    thread extendtentacle(var_1, 1);
   }
 
   var_3 = "emerge_" + level.alien_types["kraken"].attributes[self.stage]["ship_side"];
@@ -532,7 +532,7 @@ submerge() {
   var_0 = getsideanimstate("emp_attack_");
 
   foreach(var_2 in self.tentacles) {
-  var_2 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::emp();
+    var_2 thread maps\mp\agents\alien\alien_kraken\_alien_kraken_tentacle::emp();
   }
 
   level notify("dlc_vo_notify", "kraken_vo", "warn_emp");
@@ -650,8 +650,7 @@ performempdamage_on_smash(var_0) {
 
       if(!isarray(var_4)) {
         var_1 = common_scripts\utility::add_to_array(var_1, var_4);
-      }
-      else {
+      } else {
         var_1 = common_scripts\utility::array_combine(var_1, var_4);
       }
     }
@@ -661,8 +660,7 @@ performempdamage_on_smash(var_0) {
 
       if(!isarray(var_4)) {
         var_1 = common_scripts\utility::add_to_array(var_1, var_4);
-      }
-      else {
+      } else {
         var_1 = common_scripts\utility::array_combine(var_1, var_4);
       }
     }
@@ -707,7 +705,7 @@ doempdisables(var_0) {
 
 empprocessdeployablesarray(var_0, var_1) {
   foreach(var_3 in var_0) {
-  empattempttodestroydeployable(var_3, var_1);
+    empattempttodestroydeployable(var_3, var_1);
   }
 }
 
@@ -748,8 +746,7 @@ handleempnotetracks(var_0, var_1, var_2, var_3) {
     case "kra_scream_int":
       if(level.alien_types["kraken"].attributes[self.stage]["ship_side"] == "port") {
         common_scripts\utility::exploder(3);
-      }
-      else {
+      } else {
         common_scripts\utility::exploder(4);
       }
 

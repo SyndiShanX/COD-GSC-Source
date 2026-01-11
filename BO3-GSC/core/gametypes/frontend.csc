@@ -334,9 +334,7 @@ class cmegachewfactory {
             }
           }
         }
-        [
-          [m_a_o_megachewcarousels[i]]
-        ] - > detach_all_models_from_carousel();
+        [[m_a_o_megachewcarousels[i]]] - > detach_all_models_from_carousel();
         continue;
       }
       if(vat_is_powered(i)) {
@@ -347,9 +345,7 @@ class cmegachewfactory {
           self thread play_gumball_light_exploder(i + 1, "round");
           thread[[m_a_o_megachewcarousels[i]]] - > play_carousel_effect(localclientnum, level._effect["ui/fx_megachew_ball_double"], "tag_ball_0", 1);
         }
-        [
-          [m_a_o_megachewcarousels[i]]
-        ] - > detach_all_models_from_carousel();
+        [[m_a_o_megachewcarousels[i]]] - > detach_all_models_from_carousel();
       }
     }
   }
@@ -2123,9 +2119,7 @@ function wait_for_mega_chew_notifies(localclientnum, menu_data) {
     level waittill("mega_chew_update", event, index, controllerindex);
     switch (event) {
       case "focus_changed": {
-        [
-          [level.o_megachewfactory]
-        ] - > change_button_selected(localclientnum, index);
+        [[level.o_megachewfactory]] - > change_button_selected(localclientnum, index);
         break;
       }
       case "selected": {
@@ -2139,9 +2133,7 @@ function wait_for_mega_chew_notifies(localclientnum, menu_data) {
         }
         disablemegachewfactoryinput(controllerindex);
         thread enablemegachewfactoryinput(controllerindex);
-        [
-          [level.o_megachewfactory]
-        ] - > activate(localclientnum, index);
+        [[level.o_megachewfactory]] - > activate(localclientnum, index);
         break;
       }
     }

@@ -73,41 +73,41 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
   self.aligny = "<dev string:x47>";
 
   switch (point) {
-    case #"center":
+    case # "center":
       break;
-    case #"top":
+    case # "top":
       self.aligny = "<dev string:x50>";
       break;
-    case #"bottom":
+    case # "bottom":
       self.aligny = "<dev string:x56>";
       break;
-    case #"left":
+    case # "left":
       self.alignx = "<dev string:x5f>";
       break;
-    case #"right":
+    case # "right":
       self.alignx = "<dev string:x66>";
       break;
-    case #"topright":
-    case #"top_right":
+    case # "topright":
+    case # "top_right":
       self.aligny = "<dev string:x50>";
       self.alignx = "<dev string:x66>";
       break;
-    case #"topleft":
-    case #"top_left":
+    case # "topleft":
+    case # "top_left":
       self.aligny = "<dev string:x50>";
       self.alignx = "<dev string:x5f>";
       break;
-    case #"topcenter":
+    case # "topcenter":
       self.aligny = "<dev string:x50>";
       self.alignx = "<dev string:x3e>";
       break;
-    case #"bottom_right":
-    case #"bottom right":
+    case # "bottom_right":
+    case # "bottom right":
       self.aligny = "<dev string:x56>";
       self.alignx = "<dev string:x66>";
       break;
-    case #"bottom left":
-    case #"bottom_left":
+    case # "bottom left":
+    case # "bottom_left":
       self.aligny = "<dev string:x56>";
       self.alignx = "<dev string:x5f>";
       break;
@@ -125,41 +125,41 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
   relativey = "<dev string:x47>";
 
   switch (relativepoint) {
-    case #"center":
+    case # "center":
       break;
-    case #"top":
+    case # "top":
       relativey = "<dev string:x50>";
       break;
-    case #"bottom":
+    case # "bottom":
       relativey = "<dev string:x56>";
       break;
-    case #"left":
+    case # "left":
       relativex = "<dev string:x5f>";
       break;
-    case #"right":
+    case # "right":
       relativex = "<dev string:x66>";
       break;
-    case #"topright":
-    case #"top_right":
+    case # "topright":
+    case # "top_right":
       relativey = "<dev string:x50>";
       relativex = "<dev string:x66>";
       break;
-    case #"topleft":
-    case #"top_left":
+    case # "topleft":
+    case # "top_left":
       relativey = "<dev string:x50>";
       relativex = "<dev string:x5f>";
       break;
-    case #"topcenter":
+    case # "topcenter":
       relativey = "<dev string:x50>";
       relativex = "<dev string:x3e>";
       break;
-    case #"bottom_right":
-    case #"bottom right":
+    case # "bottom_right":
+    case # "bottom right":
       relativey = "<dev string:x56>";
       relativex = "<dev string:x66>";
       break;
-    case #"bottom left":
-    case #"bottom_left":
+    case # "bottom left":
+    case # "bottom_left":
       relativey = "<dev string:x56>";
       relativex = "<dev string:x5f>";
       break;
@@ -225,7 +225,7 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
   self.y += self.yoffset;
 
   switch (self.elemtype) {
-    case #"bar":
+    case # "bar":
       setpointbar(point, relativepoint, xoffset, yoffset);
       self.barframe setparent(self getparent());
       self.barframe setpoint(point, relativepoint, xoffset, yoffset);

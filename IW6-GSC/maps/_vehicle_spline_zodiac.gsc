@@ -97,7 +97,7 @@ draw_path(var_0) {
     droppedlinez(var_4.z, var_9, var_11, (0, 0.5, 1), 1, 1, 50000);
 
     foreach(var_13 in var_4.col_volumes) {
-    var_4 draw_col_vol(var_4.z, var_13);
+      var_4 draw_col_vol(var_4.z, var_13);
     }
 
     foreach(var_16 in var_4.col_lines) {
@@ -191,7 +191,7 @@ create_path() {
   }
 
   foreach(var_8 in var_1) {
-  var_8.midpoint = (var_8.origins["left"] + var_8.origins["right"]) * 0.5;
+    var_8.midpoint = (var_8.origins["left"] + var_8.origins["right"]) * 0.5;
   }
 
   foreach(var_8 in var_1) {
@@ -242,7 +242,7 @@ add_collision_to_path(var_0) {
 
   foreach(var_10 in var_0) {
     foreach(var_3 in var_1) {
-    add_collision_to_path_ent(var_10, var_3);
+      add_collision_to_path_ent(var_10, var_3);
     }
   }
 
@@ -252,7 +252,7 @@ add_collision_to_path(var_0) {
     var_17 = common_scripts\utility::get_array_of_closest(var_16.origin, var_0, undefined, 2);
 
     foreach(var_10 in var_17) {
-    var_10.col_radiuses[var_10.col_radiuses.size] = var_16;
+      var_10.col_radiuses[var_10.col_radiuses.size] = var_16;
     }
   }
 }
@@ -471,7 +471,7 @@ spawner_random_team() {
   }
 
   foreach(var_2 in self.riders) {
-  var_2.team = var_0;
+    var_2.team = var_0;
   }
 }
 
@@ -484,8 +484,7 @@ get_spawn_position(var_0, var_1) {
 
   if(isDefined(level.player.nooffset)) {
     var_6 = 0;
-  }
-  else if(isDefined(level.player.offset)) {
+  } else if(isDefined(level.player.offset)) {
     var_7 = 500;
 
     if(common_scripts\utility::cointoss()) {
@@ -555,7 +554,7 @@ spawn_enemy_bike() {
   var_8 = var_6 maps\_vehicle_code::get_vehicle_ai_spawners();
 
   foreach(var_10 in var_8) {
-  var_10.origin = var_6.origin;
+    var_10.origin = var_6.origin;
   }
 
   var_12 = maps\_vehicle::vehicle_spawn(var_6);
@@ -751,8 +750,7 @@ get_obstacle_dodge_amount(var_0, var_1, var_2) {
 
     if(var_2 > var_5["mid_offset"]) {
       var_3["dodge"] = var_5["right_offset"];
-    }
-    else {
+    } else {
       var_3["dodge"] = var_5["left_offset"];
     }
 
@@ -858,8 +856,7 @@ modulate_speed_based_on_progress() {
 
       if(var_8 > var_9) {
         var_8 = var_9;
-      }
-      else if(var_8 < self.min_speed) {
+      } else if(var_8 < self.min_speed) {
         var_8 = self.min_speed;
       }
 
@@ -881,15 +878,13 @@ price_match_player_speed(var_0, var_1) {
 
   if(var_5 > 4000) {
     self vehicle_setspeed(0, 90, 20);
-  }
-  else {
+  } else {
     var_6 = maps\_utility::get_dot(self.origin, self.angles, level.player.origin);
     var_7 = 1;
 
     if(var_5 > 0) {
       var_7 = 1;
-    }
-    else {
+    } else {
       if(var_5 > -500) {
         var_7 = 1.25;
       }
@@ -923,8 +918,7 @@ match_player_speed(var_0, var_1) {
 
   if(var_5 > 4000) {
     self vehicle_setspeed(0, 90, 20);
-  }
-  else {
+  } else {
     if(var_5 < level.spline_min_progress && gettime() > self.left_spline_path_time + 4000) {
       wipeout("low progress!");
     }
@@ -935,11 +929,9 @@ match_player_speed(var_0, var_1) {
 
     if(var_5 > 150) {
       var_6 = 0.6;
-    }
-    else if(var_5 > 100) {
+    } else if(var_5 > 100) {
       var_6 = 1.0;
-    }
-    else if(var_5 < -100) {
+    } else if(var_5 < -100) {
       if(!maps\_utility::ent_flag("dialog_six")) {
         maps\_utility::ent_flag_set("dialog_six");
         maps\_utility::delaythread(12, maps\_utility::ent_flag_clear, "dialog_six");
@@ -1050,8 +1042,7 @@ set_bike_position(var_0) {
 
   if(var_1.direction == "forward") {
     var_3 = var_3 + level.pos_lookahead_dist;
-  }
-  else {
+  } else {
     var_3 = var_3 - level.pos_lookahead_dist;
 
     if(var_11 < 500) {
@@ -1066,11 +1057,9 @@ set_bike_position(var_0) {
 
   if(var_11 > var_15) {
     var_16 = var_12;
-  }
-  else if(var_11 < var_14) {
+  } else if(var_11 < var_14) {
     var_16 = var_13;
-  }
-  else {
+  } else {
     var_17 = var_15 - var_14;
     var_18 = var_13 - var_12;
     var_16 = var_11 - var_14;
@@ -1105,8 +1094,7 @@ set_bike_position(var_0) {
 
   if(isDefined(var_9["dodge"])) {
     var_4 = var_9["dodge"];
-  }
-  else if(isDefined(var_1.preferred_offset)) {
+  } else if(isDefined(var_1.preferred_offset)) {
     var_4 = var_1.preferred_offset;
   }
 
@@ -1116,8 +1104,7 @@ set_bike_position(var_0) {
 
   if(var_4 > var_24) {
     var_4 = var_24;
-  }
-  else if(var_4 < -1 * var_24) {
+  } else if(var_4 < -1 * var_24) {
     var_4 = -1 * var_24;
   }
 
@@ -1127,11 +1114,9 @@ set_bike_position(var_0) {
 
     if(var_26 < 0.97) {
       var_16 = 50;
-    }
-    else if(var_26 < 0.96) {
+    } else if(var_26 < 0.96) {
       var_16 = 25;
-    }
-    else if(var_26 < 0.95) {
+    } else if(var_26 < 0.95) {
       var_16 = 15;
     }
 
@@ -1139,8 +1124,7 @@ set_bike_position(var_0) {
 
     if(!isDefined(level.player.vehicle)) {
       var_1 vehicle_setspeed(65, 1, 1);
-    }
-    else {
+    } else {
       var_1.veh_topspeed = level.player.vehicle.veh_topspeed * 1.3;
       var_1 match_player_speed(45, 30);
     }
@@ -1274,15 +1258,13 @@ bike_randomly_changes_lanes() {
     if(self.targ.col_volumes.size == 0 && self.dodge_dir == 0) {
       if(common_scripts\utility::cointoss()) {
         self.goal_dir++;
-      }
-      else {
+      } else {
         self.goal_dir--;
       }
 
       if(self.goal_dir > 1) {
         self.goal_dir = self.goal_dir - 3;
-      }
-      else if(self.goal_dir < -1) {
+      } else if(self.goal_dir < -1) {
         self.goal_dir = self.goal_dir + 3;
       }
     }
@@ -1317,8 +1299,7 @@ bike_turns() {
     if(should_stabilize()) {
       if(self.tilt > 0) {
         self.tilt_vel = self.tilt_vel - var_1;
-      }
-      else if(self.tilt < 0) {
+      } else if(self.tilt < 0) {
         self.tilt_vel = self.tilt_vel + var_1;
       }
     } else if(self.goal_dir == 1)
@@ -1329,8 +1310,7 @@ bike_turns() {
 
     if(self.tilt_vel > var_0) {
       self.tilt_vel = var_0;
-    }
-    else if(self.tilt_vel < -1 * var_0) {
+    } else if(self.tilt_vel < -1 * var_0) {
       self.tilt_vel = -1 * var_0;
     }
 
@@ -1351,8 +1331,7 @@ bike_turns() {
 stabalize(var_0, var_1) {
   if(self.tilt > 0) {
     self.tilt = self.tilt - var_1;
-  }
-  else {
+  } else {
     self.tilt = self.tilt + var_1;
   }
 

@@ -89,8 +89,7 @@ apply_state_change(type, revert_state) {
     if(revert_state.operation == "edit") {
       if(revert_state.ent_array.size == 0) {
         println("^1Error: A change to no entity was somehow saved to the undo stack.");
-      }
-      else {
+      } else {
         undo_edit(revert_state.ent_array);
       }
     } else if(revert_state.operation == "add")
@@ -104,8 +103,7 @@ apply_state_change(type, revert_state) {
     if(revert_state.operation == "edit") {
       if(revert_state.ent_array.size == 0) {
         println("^1Error: A change to no entity was somehow saved to the redo stack.");
-      }
-      else {
+      } else {
         undo_edit(revert_state.ent_array);
       }
     } else if(revert_state.operation == "add")
@@ -336,8 +334,7 @@ redo() {
 
     if(revert_state.operation == "edit") {
       move_redo_state_to_limbo();
-    }
-    else {
+    } else {
       move_redo_state_to_undo();
     }
   }
@@ -418,8 +415,7 @@ array_drop(array) {
 debug_print_ent_array(array, name) {
   if(isDefined(name)) {
     println("Printing out " + name);
-  }
-  else {
+  } else {
     println("Printing out some array");
   }
 

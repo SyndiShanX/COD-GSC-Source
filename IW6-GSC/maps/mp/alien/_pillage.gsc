@@ -490,8 +490,7 @@ pillage_spot_think() {
 
             if(attach_found == "alienmuzzlebrake") {
               self.pillage_trigger setModel(level.pillageInfo.alienattachment_model);
-            }
-            else {
+            } else {
               self.pillage_trigger setModel(level.pillageInfo.attachment_model);
             }
 
@@ -1425,17 +1424,13 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
     if(swap == false) {
       if(attachment1 == "none") {
         attachment1 = new_attachment;
-      }
-      else if(attachment2 == "none" && new_attachment != attachment1) {
+      } else if(attachment2 == "none" && new_attachment != attachment1) {
         attachment2 = new_attachment;
-      }
-      else if(attachment3 == "none" && new_attachment != attachment1 && new_attachment != attachment2) {
+      } else if(attachment3 == "none" && new_attachment != attachment1 && new_attachment != attachment2) {
         attachment3 = new_attachment;
-      }
-      else if(attachment4 == "none" && new_attachment != attachment1 && new_attachment != attachment2 && new_attachment != attachment3) {
+      } else if(attachment4 == "none" && new_attachment != attachment1 && new_attachment != attachment2 && new_attachment != attachment3) {
         attachment4 = new_attachment;
-      }
-      else {
+      } else {
         self setLowerMessage("cant_attach", &"ALIEN_COLLECTIBLES_CANT_USE", 3);
         return false;
       }
@@ -1484,8 +1479,7 @@ add_attachment_to_weapon(new_attachment, pillage_spot) {
 
   if(swap == false) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2168,8 +2162,7 @@ get_crafting_ingredient() {
   } else {
     if(self.craftingItems.size < 3) {
       return (random(self.swappable_crafting_ingredient_list));
-    }
-    else {
+    } else {
       foreach(player in level.players) {
         if(!isDefined(player.current_crafting_recipe)) {
           continue;
@@ -2189,11 +2182,10 @@ get_crafting_ingredient() {
 
   if(ingredient_list.size > 0) {
     return random(ingredient_list);
+  } else {
+    if(isDefined(level.random_crafting_list))
   }
-  else {
-  if(isDefined(level.random_crafting_list))
-  }
-    return random(level.random_crafting_list);
+  return random(level.random_crafting_list);
   else {
     return random(["venomx", "nucleicbattery", "bluebiolum", "biolum", "orangebiolum", "amethystbiolum", "fuse", "tnt", "pipe", "resin", "biolum", "cellbattery"]);
   }
@@ -2207,8 +2199,7 @@ get_crafting_model(crafting_ingredient) {
 
   if(isDefined(craftingModel)) {
     return craftingModel;
-  }
-  else {
+  } else {
     return level.crafting_model;
   }
 }
@@ -2318,8 +2309,7 @@ get_crafting_item_table_index() {
 should_find_crafting_items() {
   if(isDefined(self.craftingItems) && isDefined(level.max_crafting_items) && self.craftingItems.size >= level.max_crafting_items) {
     return false;
-  }
-  else if(!isDefined(self.current_crafting_recipe)) {
+  } else if(!isDefined(self.current_crafting_recipe)) {
     return false;
   }
 

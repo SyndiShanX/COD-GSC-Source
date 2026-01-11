@@ -57,7 +57,7 @@ watch_for_trigger_condition() {
   players = getplayers();
 
   foreach(player in players) {
-  maps\mp\_visionset_mgr::vsmgr_activate("visionset", "zm_audio_log", player);
+    maps\mp\_visionset_mgr::vsmgr_activate("visionset", "zm_audio_log", player);
   }
 }
 

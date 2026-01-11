@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_maptable;
-
 #namespace zm_weap_bowie;
 
 autoexec __init__system__() {

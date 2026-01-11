@@ -196,7 +196,7 @@ impact_breach_init() {
   foreach(breach in breaches) {
     pathnodes = GetNodeArray(breach.target, "targetname");
     foreach(p in pathnodes) {
-    p DisconnectNode();
+      p DisconnectNode();
     }
   }
 
@@ -237,7 +237,7 @@ impact_breach_update() {
 
   pathnodes = GetNodeArray(self.target, "targetname");
   foreach(p in pathnodes) {
-  p ConnectNode();
+    p ConnectNode();
   }
 }
 

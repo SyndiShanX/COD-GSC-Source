@@ -26,8 +26,7 @@ main(model, type) {
   build_compassicon("automobile", false);
 }
 
-init_local() {
-}
+init_local() {}
 
 //MO EDIT: Nate told me to put this in here ( from _uaz.gsc )
 set_vehicle_anims(positions) {

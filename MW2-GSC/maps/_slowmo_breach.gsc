@@ -742,7 +742,7 @@ create_slowmo_breaches_from_entities() {
 
   dump_missing_anims();
 
-    level.scr_stub = undefined;
+  level.scr_stub = undefined;
 
   foreach(post in left_door_posts) {
     index = post.script_slowmo_breach;
@@ -1056,8 +1056,7 @@ breach_spawner_setup(breaches, type) {
 
   if(breaches.size) {
     return breaches;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -1127,15 +1126,13 @@ slowmo_breach_think(breach_array, breach_index) {
     random_key = random(keys);
     if(isDefined(breach_enemy_spawners[random_key])) {
       breach_enemy_spawners = breach_enemy_spawners[random_key];
-    }
-    else {
+    } else {
       breach_enemy_spawners = [];
     }
 
     if(isDefined(breach_hostage_spawners[random_key])) {
       breach_hostage_spawners = breach_hostage_spawners[random_key];
-    }
-    else {
+    } else {
       breach_hostage_spawners = [];
     }
   }
@@ -1227,7 +1224,7 @@ slowmo_breach_think(breach_array, breach_index) {
   left_door_post wait_for_breach_or_deletion(breach_array);
 
   foreach(model in left_door_post.scene_models) {
-  model Delete();
+    model Delete();
   }
 
   if(isDefined(trigger)) {
@@ -1294,38 +1291,37 @@ breach_participants_ready_to_proceed(player, breach_friendlies, door_volume) {
     		but until then simply requiring everyone to be in the same breach volume in co-op.
     		if( !isDefined( breach_near_player( get_other_player( player ) ) ) ) {
     			return false; */
-    		}
-
-    other_player = get_other_player(player);
-    if(isDefined(other_player.coop_downed) && (other_player.coop_downed)) {
-      return false;
-    }
-    if(coop_player_touching_valid_door_volume(door_volume, other_player)) {
-      return true;
-    }
-    else {
-      return false;
-    }
   }
 
-  // Do we need to care about AI friendlies at all?
-  if(breach_friendlies.size == 0) {
+  other_player = get_other_player(player);
+  if(isDefined(other_player.coop_downed) && (other_player.coop_downed)) {
+    return false;
+  }
+  if(coop_player_touching_valid_door_volume(door_volume, other_player)) {
     return true;
+  } else {
+    return false;
   }
-  if(!room_has_multiple_doors(door_volume)) {
-    return true;
-  }
+}
 
-  // Check if friendlies are ready to breach...
-  if(!breach_friendlies_ready_at_other_door(door_volume, true)) {
-    if(GetDvar("breach_requires_friendlies_in_position") == "1") {
-      if(!breachfriendlies_can_teleport(breach_friendlies, door_volume)) {
-        return false;
-      }
-    }
-  }
-
+// Do we need to care about AI friendlies at all?
+if(breach_friendlies.size == 0) {
   return true;
+}
+if(!room_has_multiple_doors(door_volume)) {
+  return true;
+}
+
+// Check if friendlies are ready to breach...
+if(!breach_friendlies_ready_at_other_door(door_volume, true)) {
+  if(GetDvar("breach_requires_friendlies_in_position") == "1") {
+    if(!breachfriendlies_can_teleport(breach_friendlies, door_volume)) {
+      return false;
+    }
+  }
+}
+
+return true;
 }
 
 wait_for_breach_or_deletion(ent) {
@@ -2149,8 +2145,7 @@ friendlies_shoot_while_breaching(stackPosition) {
   //friendlies fire scripted bullets when weapons are lined up with breach enemies
   if(stackPosition == 1) {
     wait(1);
-  }
-  else {
+  } else {
     wait(2);
   }
 
@@ -2234,8 +2229,7 @@ slowmo_player_cleanup() {
 
   if(isDefined(level.playerSpeed)) {
     self SetMoveSpeedScale(level.playerSpeed);
-  }
-  else {
+  } else {
     self SetMoveSpeedScale(1);
   }
 }
@@ -2671,8 +2665,7 @@ breach_hostage_spawner_think() {
 
   if(anim_exists(self.animation + "_idle")) {
     thread anim_generic_loop(self, self.animation + "_idle", "stop_idle");
-  }
-  else {
+  } else {
     loop = "hostage_knees_loop";
     self thread anim_generic_loop(self, loop, "stop_idle");
   }
@@ -2770,8 +2763,7 @@ breach_set_deadquote(deadquote, so_deadquote) {
 
   if(is_specialop()) {
     maps\_specialops::so_force_deadquote(so_deadquote);
-  }
-  else {
+  } else {
     setDvar("ui_deadquote", deadquote);
   }
 }
@@ -2785,8 +2777,7 @@ coop_breached_from_same_door_in_a_muliti_door_room(room_volume) {
   }
   if(isDefined(room_volume.has_passive_breacher)) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2875,7 +2866,7 @@ add_breach_func(func) {
     AssertEx(func != existing_func, "Breach func was added twice");
   }
 
-    level._slowmo_breach_funcs[level._slowmo_breach_funcs.size] = func;
+  level._slowmo_breach_funcs[level._slowmo_breach_funcs.size] = func;
 }
 
 breach_functions(breach_rig) {
@@ -3113,8 +3104,7 @@ _slomo_breach_chair_guy_normal() {
   iRand = RandomIntRange(1, 3);
   if(cointoss()) {
     self set_generic_deathanim(self.animation + "_death");
-  }
-  else {
+  } else {
     self set_generic_deathanim(self.animation + "_death2");
   }
 }
@@ -3210,7 +3200,7 @@ delete_breach(group_num) {
   array_call(solids, ::ConnectPaths);
   array_thread(solids, ::self_delete);
   foreach(trigger in level.breach_groups[group_num].lookat_triggers) {
-  trigger Delete();
+    trigger Delete();
   }
 }
 
@@ -3372,8 +3362,7 @@ get_manhandled() {
   -------------------------*/
   if(anim_exists(sAnimManhandledPrepareIdle)) {
     self.reference thread anim_generic_loop(self, sAnimManhandledPrepareIdle, "stop_idle");
-  }
-  else {
+  } else {
     sAnimManhandledPrepareIdle = undefined;
   }
 
@@ -3565,8 +3554,7 @@ assert_if_anim_not_defined(sAnim) {
 anim_exists(sAnim) {
   if(isDefined(level.scr_anim["generic"][sAnim])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

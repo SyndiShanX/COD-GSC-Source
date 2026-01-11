@@ -149,11 +149,9 @@ attachplayertobus(player, positionindex) {
 
   if(positionisbl(positionindex)) {
     player playerlinktodelta(level.cling_triggers[positionindex].position, "tag_origin", 1, 180, turn_angle, pitch_up, 120, 1);
-  }
-  else if(positionisbr(positionindex)) {
+  } else if(positionisbr(positionindex)) {
     player playerlinktodelta(level.cling_triggers[positionindex].position, "tag_origin", 1, turn_angle, 180, pitch_up, 120, 1);
-  }
-  else {
+  } else {
     level.cling_triggers[positionindex].player = undefined;
     return;
   }
@@ -240,8 +238,7 @@ enableplayerweapons(positionindex) {
 
     if(self.lastactiveweapon != "none" && self.lastactiveweapon != "mortar_round" && self.lastactiveweapon != "mine_bouncing_betty" && self.lastactiveweapon != "claymore_zm") {
       self switchtoweapon(self.lastactiveweapon);
-    }
-    else {
+    } else {
       primaryweapons = self getweaponslistprimaries();
 
       if(isDefined(primaryweapons) && primaryweapons.size > 0) {

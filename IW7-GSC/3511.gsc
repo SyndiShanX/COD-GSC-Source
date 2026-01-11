@@ -45,8 +45,7 @@ func_51B7(var_00, var_01) {
 func_DEF2(var_00, var_01, var_02) {
   if(isDefined(var_02) && var_02) {
     self.func_522E[var_01] = var_00;
-  }
-  else {
+  } else {
     self.func_522E[var_01] = undefined;
     var_02 = undefined;
   }
@@ -134,8 +133,7 @@ func_108EA(var_00, var_01) {
 
   if(level.teambased) {
     var_03 scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, var_2.func_8C79));
-  }
-  else {
+  } else {
     var_03 scripts\mp\entityheadicons::setplayerheadicon(self, (0, 0, var_2.func_8C79));
   }
 
@@ -165,8 +163,7 @@ func_13AE2(var_00, var_01) {
 
   if(scripts\mp\utility\game::bot_is_fireteam_mode()) {
     var_00 waittill("killstreak_disowned");
-  }
-  else {
+  } else {
     var_00 scripts\engine\utility::waittill_either("killstreak_disowned", "death");
   }
 
@@ -239,7 +236,7 @@ func_7737() {
 
     if(level.generators.size > 0 || self.ingame_cinematic_loop.size > 0) {
       foreach(var_02 in level.func_D671) {
-      func_3DE7(var_2.func_773C);
+        func_3DE7(var_2.func_773C);
       }
     }
   }
@@ -271,8 +268,7 @@ func_3DE7(var_00) {
 
     if(var_09 && !var_10) {
       self[[var_2.func_C510]]();
-    }
-    else if(!var_09 && var_10) {
+    } else if(!var_09 && var_10) {
       self[[var_2.func_C51E]]();
     }
 

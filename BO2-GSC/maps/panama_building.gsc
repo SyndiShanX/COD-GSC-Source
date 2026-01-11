@@ -142,7 +142,7 @@ clinic_light_shake() {
   a_structs = getstructarray("clinic_move_light", "targetname");
 
   foreach(s_pos in a_structs) {
-  physicsexplosioncylinder(s_pos.origin, 200, 190, 0.5);
+    physicsexplosioncylinder(s_pos.origin, 200, 190, 0.5);
   }
 }
 
@@ -345,7 +345,7 @@ building_stairwell_flashlights() {
   a_flashlights = get_model_or_models_from_scene("hallway_flashlights_enter");
 
   foreach(m_flashlight in a_flashlights) {
-  playFXOnTag(level._effect["flashlight"], m_flashlight, "tag_origin");
+    playFXOnTag(level._effect["flashlight"], m_flashlight, "tag_origin");
   }
 
   scene_wait("hallway_flashlights_enter");
@@ -354,7 +354,7 @@ building_stairwell_flashlights() {
   a_flashlights = get_model_or_models_from_scene("hallway_flashlights_loop");
 
   foreach(m_flashlight in a_flashlights) {
-  playFXOnTag(level._effect["flashlight"], m_flashlight, "origin_animate_jnt");
+    playFXOnTag(level._effect["flashlight"], m_flashlight, "origin_animate_jnt");
   }
 
   flag_wait("clinic_stairwell_top");

@@ -50,28 +50,24 @@ angle_dif(oldangle, newangle) {
   newdif = undefined;
   if(newangle > 180) {
     newdif = 360 - newangle;
-  }
-  else {
+  } else {
     newdif = newangle;
   }
   if(oldangle > 180) {
     olddif = 360 - oldangle;
-  }
-  else {
+  } else {
     olddif = oldangle;
   }
   outerdif = newdif + olddif;
   innerdif = 0;
   if(newangle > oldangle) {
     innerdif = newangle - oldangle;
-  }
-  else {
+  } else {
     innerdif = oldangle - newangle;
   }
   if(innerdif < outerdif) {
     return innerdif;
-  }
-  else {
+  } else {
     return outerdif;
   }
 }

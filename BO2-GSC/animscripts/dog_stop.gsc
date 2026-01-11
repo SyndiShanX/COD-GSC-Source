@@ -43,8 +43,7 @@ isfacingenemy(tolerancecosangle) {
 randomattackidle() {
   if(isfacingenemy(-0.5)) {
     self orientmode("face current");
-  }
-  else {
+  } else {
     self orientmode("face enemy");
   }
 
@@ -72,11 +71,9 @@ randomattackidle() {
 
   if(rand < idlechance) {
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle, 1, 0.2, self.animplaybackrate);
-  }
-  else if(rand < barkchance) {
+  } else if(rand < barkchance) {
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_bark, 1, 0.2, self.animplaybackrate);
-  }
-  else {
+  } else {
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_growl, 1, 0.2, self.animplaybackrate);
   }
 }

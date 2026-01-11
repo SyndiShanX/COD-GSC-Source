@@ -96,8 +96,7 @@ soundrandom_thread(localclientnum, randsound) {
     randsound.script_wait_max = 3;
   }
 
-  if(getdvarint(#"_id_0AEB127D") > 0) {
-  }
+  if(getdvarint(#"_id_0AEB127D") > 0) {}
 
   if(!isDefined(randsound.script_scripted) && isDefined(randsound.script_sound)) {
     createsoundrandom(randsound.origin, randsound.script_sound, randsound.script_wait_min, randsound.script_wait_max);
@@ -107,8 +106,7 @@ soundrandom_thread(localclientnum, randsound) {
   while(true) {
     wait(randomfloatrange(randsound.script_wait_min, randsound.script_wait_max));
 
-    if(!isDefined(randsound.script_sound)) {
-    } else
+    if(!isDefined(randsound.script_sound)) {} else
       playSound(localclientnum, randsound.script_sound, randsound.origin);
 
     if(getdvarint(#"_id_0AEB127D") > 0) {
@@ -135,8 +133,7 @@ startsoundrandoms(localclientnum) {
     for(i = 0; i < randoms.size; i++) {
       thread soundrandom_thread(localclientnum, randoms[i]);
     }
-  } else {
-  }
+  } else {}
 }
 
 soundloopthink() {
@@ -170,15 +167,13 @@ soundloopthink() {
 
       if(started) {
         soundstoploopemitter(self.script_sound, self.origin);
-      }
-      else {
+      } else {
         soundloopemitter(self.script_sound, self.origin);
       }
 
       started = !started;
     }
-  } else {
-  }
+  } else {}
 }
 
 soundlinethink() {
@@ -212,15 +207,13 @@ soundlinethink() {
 
       if(started) {
         soundstoplineemitter(self.script_sound, self.origin, target.origin);
-      }
-      else {
+      } else {
         soundlineemitter(self.script_sound, self.origin, target.origin);
       }
 
       started = !started;
     }
-  } else {
-  }
+  } else {}
 }
 
 startsoundloops() {
@@ -415,8 +408,7 @@ trig_enter_bump(ent) {
   }
 }
 
-trig_leave_bump(ent) {
-}
+trig_leave_bump(ent) {}
 
 bump_trigger_listener() {
   if(isDefined(self.script_label)) {
@@ -460,8 +452,7 @@ get_vol_from_speed(player) {
 absolute_value(fowd) {
   if(fowd < 0) {
     return fowd * -1;
-  }
-  else {
+  } else {
     return fowd;
   }
 }
@@ -473,11 +464,9 @@ closest_point_on_line_to_point(point, linestart, lineend) {
 
   if(t < 0.0) {
     self.origin = linestart;
-  }
-  else if(t > 1.0) {
+  } else if(t > 1.0) {
     self.origin = lineend;
-  }
-  else {
+  } else {
     start_x = linestart[0] + t * (lineend[0] - linestart[0]);
     start_y = linestart[1] + t * (lineend[1] - linestart[1]);
     start_z = linestart[2] + t * (lineend[2] - linestart[2]);
@@ -682,11 +671,9 @@ move_sound_along_line() {
 
     if(closest_dist > 1048576) {
       wait 2;
-    }
-    else if(closest_dist > 262144) {
+    } else if(closest_dist > 262144) {
       wait 0.2;
-    }
-    else {
+    } else {
       wait 0.05;
     }
   }

@@ -77,8 +77,7 @@ heli_firelink(var_0) {
     default:
       if(self.classname == "script_vehicle_littlebird_armed" || self.classname == "script_vehicle_littlebird_md500") {
         vehicle_scripts\_attack_heli::heli_fire_missiles(var_1, 2, 0.25);
-      }
-      else {
+      } else {
         fire_missile("hind_zippy", 5, var_1, 0.3);
       }
 
@@ -133,8 +132,7 @@ flares_think(var_0) {
   while(var_0.health > 0) {
     if(isDefined(var_0.playercontrolled)) {
       var_0.pilot waittill("flare_button");
-    }
-    else {
+    } else {
       var_0 waittill("incomming_missile", var_1);
 
       if(!isDefined(var_1)) {
@@ -348,8 +346,7 @@ getenemytarget(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
       if(isai(var_10[var_11])) {
         var_18 = 48;
-      }
-      else {
+      } else {
         var_18 = 150;
       }
 
@@ -392,8 +389,7 @@ shootenemytarget_bullets(var_0) {
 
   if(isDefined(var_0.script_targetoffset_z)) {
     var_1 = var_1 + (0, 0, var_0.script_targetoffset_z);
-  }
-  else if(issentient(var_0)) {
+  } else if(issentient(var_0)) {
     var_1 = (0, 0, 32);
   }
 
@@ -609,8 +605,7 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(self.nextmissiletag)) {
     var_9 = self.nextmissiletag;
-  }
-  else {
+  } else {
     var_9 = -1;
   }
 
@@ -647,8 +642,7 @@ fire_missile(var_0, var_1, var_2, var_3, var_4) {
           case "apache_zippy":
             if(!isDefined(var_4)) {
               var_11 thread missilelosetarget(0.6);
-            }
-            else {
+            } else {
               var_11 thread missilelosetarget(var_4);
             }
 

@@ -36,8 +36,7 @@ init_flags() {
   flag_init("the_end");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_endings_scenario1() {
   level.is_defalco_alive = 1;
@@ -211,14 +210,11 @@ player_in_hanger() {
 
   if(level.is_defalco_alive && level.is_harper_alive) {
     run_scene_first_frame("scene_0_v1");
-  }
-  else if(level.is_defalco_alive && !level.is_harper_alive) {
+  } else if(level.is_defalco_alive && !level.is_harper_alive) {
     run_scene_first_frame("scene_0_v2");
-  }
-  else if(!level.is_defalco_alive && level.is_harper_alive) {
+  } else if(!level.is_defalco_alive && level.is_harper_alive) {
     run_scene_first_frame("scene_0_v3");
-  }
-  else if(!level.is_defalco_alive && !level.is_harper_alive) {
+  } else if(!level.is_defalco_alive && !level.is_harper_alive) {
     run_scene_first_frame("scene_0_v4");
   }
 
@@ -356,8 +352,7 @@ success_watcher_damage(scene_name, entity) {
 
   if(entity.animname == "ending_camo") {
     flag_wait("player_shot_guy1");
-  }
-  else if(entity.animname == "defalco") {
+  } else if(entity.animname == "defalco") {
     flag_wait("player_shot_guy2");
   }
 
@@ -651,8 +646,7 @@ capture_menendez() {
   level thread run_scene_and_delete("capture_menendez3_2");
   level thread run_scene_and_delete("capture_menendez3_3");
 
-  if(level.is_sco_supporting) {
-  }
+  if(level.is_sco_supporting) {}
 }
 
 end04_fade_out_black(player) {
@@ -876,7 +870,7 @@ give_scene_models_guns(str_scene_name) {
   a_m_guys = get_model_or_models_from_scene(str_scene_name);
 
   foreach(m_guy in a_m_guys) {
-  m_guy attach("t6_wpn_lmg_mk48_world", "tag_weapon_right");
+    m_guy attach("t6_wpn_lmg_mk48_world", "tag_weapon_right");
   }
 }
 
@@ -1102,7 +1096,7 @@ explosions_go_off(player) {
   ending_floor = getEntArray("ending_floor", "targetname");
 
   foreach(m_floor in ending_floor) {
-  m_floor delete();
+    m_floor delete();
   }
 
   setmusicstate("HAITI_END_EXPLOSION");
@@ -1176,5 +1170,4 @@ notetrack_defalco_shoot(m_defalco) {
   level.ai_defalco shoot();
 }
 
-notetrack_pmc_shoot(m_defalco) {
-}
+notetrack_pmc_shoot(m_defalco) {}

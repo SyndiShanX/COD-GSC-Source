@@ -160,7 +160,7 @@ init() {
   level.cratecategorytypeweights = [];
 
   foreach(categorykey, category in level.cratetypes) {
-  finalizecratecategory(categorykey);
+    finalizecratecategory(categorykey);
   }
 
   level thread supply_drop_dev_gui();
@@ -295,8 +295,7 @@ getrandomcratetype(category, gambler_crate_name) {
     if(find_another) {
       if(cratetype < cratenamekeys.size - 1) {
         cratetype++;
-      }
-      else if(cratetype > 0) {
+      } else if(cratetype > 0) {
         cratetype--;
       }
 
@@ -723,8 +722,7 @@ supplydropgrenadetimeout(team, killstreak_id, weapname) {
 
   if(weapname == "ai_tank_drop_mp") {
     maps\mp\killstreaks\_killstreakrules::killstreakstop("ai_tank_drop_mp", team, killstreak_id);
-  }
-  else if(weapname == "inventory_ai_tank_drop_mp") {
+  } else if(weapname == "inventory_ai_tank_drop_mp") {
     maps\mp\killstreaks\_killstreakrules::killstreakstop("inventory_ai_tank_drop_mp", team, killstreak_id);
   }
 
@@ -757,8 +755,7 @@ supplydropgrenadepullwatcher(killstreak_id) {
 
   if(!isDefined(self.usingkillstreakfrominventory) || self.usingkillstreakfrominventory == 0) {
     self changekillstreakquantity(weapon, -1);
-  }
-  else {
+  } else {
     maps\mp\killstreaks\_killstreaks::removeusedkillstreak(killstreak, killstreak_id);
   }
 }
@@ -807,8 +804,7 @@ geticonforcrate() {
     case "killstreak":
       if(self.cratetype.name == "inventory_ai_tank_drop_mp") {
         icon = "hud_ks_ai_tank";
-      }
-      else {
+      } else {
         killstreak = maps\mp\killstreaks\_killstreaks::getkillstreakmenuname(self.cratetype.name);
         icon = level.killstreakicons[killstreak];
       }
@@ -881,8 +877,7 @@ crateactivate(hacker) {
 
       if(isDefined(self.hacker)) {
         objective_icon(crateobjid, "compass_supply_drop_black");
-      }
-      else {
+      } else {
         objective_icon(crateobjid, "compass_supply_drop_red");
       }
 
@@ -1238,8 +1233,7 @@ dropcrate(origin, angle, category, owner, team, killcament, killstreak_id, packa
 
   if(isDefined(crate.cratetype.landfunctionoverride)) {
     [[crate.cratetype.landfunctionoverride]](crate, category, owner, team);
-  }
-  else {
+  } else {
     crate crateactivate();
     crate thread crateusethink();
     crate thread crateusethinkowner();
@@ -1373,8 +1367,7 @@ cratekill() {
 
     if(vel < stationarythreshold) {
       numframesstationary++;
-    }
-    else {
+    } else {
       numframesstationary = 0;
     }
 
@@ -1873,8 +1866,7 @@ getheliend(drop_origin, drop_direction) {
 
   if(randomintrange(0, 2) == 0) {
     turn = randomintrange(60, 121);
-  }
-  else {
+  } else {
     turn = -1 * randomintrange(60, 121);
   }
 
@@ -1904,8 +1896,7 @@ supplydrophelistartpath(goal, goal_offset) {
     if(isDefined(goalpath.path) && startnoflyzones.size == 0) {
       if(goalpath.path.size > 1) {
         direction = goalpath.path[goalpath.path.size - 1] - goalpath.path[goalpath.path.size - 2];
-      }
-      else {
+      } else {
         direction = goalpath.path[goalpath.path.size - 1] - goalpath.start;
       }
 
@@ -1965,11 +1956,9 @@ inccratekillstreakusagestat(weaponname) {
   }
   if(weaponname == "turret_drop_mp") {
     self maps\mp\killstreaks\_killstreaks::playkillstreakstartdialog("turret_drop_mp", self.pers["team"]);
-  }
-  else if(weaponname == "tow_turret_drop_mp") {
+  } else if(weaponname == "tow_turret_drop_mp") {
     self maps\mp\killstreaks\_killstreaks::playkillstreakstartdialog("tow_turret_drop_mp", self.pers["team"]);
-  }
-  else if(weaponname == "supplydrop_mp" || weaponname == "inventory_supplydrop_mp") {
+  } else if(weaponname == "supplydrop_mp" || weaponname == "inventory_supplydrop_mp") {
     self maps\mp\killstreaks\_killstreaks::playkillstreakstartdialog("supply_drop_mp", self.pers["team"]);
     level thread maps\mp\_popups::displaykillstreakteammessagetoall("supply_drop_mp", self);
     self maps\mp\_challenges::calledincarepackage();
@@ -2103,8 +2092,7 @@ helidropcrate(category, owner, offset, killcament, killstreak_id, package_conten
   if(isDefined(self)) {
     if(category == "inventory_supplydrop_mp" || category == "supplydrop_mp") {
       self setclientfield("supplydrop_care_package_state", 0);
-    }
-    else if(category == "inventory_ai_tank_drop_mp" || category == "ai_tank_drop_mp") {
+    } else if(category == "inventory_ai_tank_drop_mp" || category == "ai_tank_drop_mp") {
       self setclientfield("supplydrop_ai_tank_state", 0);
     }
   }

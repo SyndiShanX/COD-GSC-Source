@@ -79,8 +79,7 @@ steering_loop(viewarms) {
 
     if(delta_change > max_delta_t) {
       delta_change = max_delta_t;
-    }
-    else if(delta_change < max_delta_t * -1) {
+    } else if(delta_change < max_delta_t * -1) {
       delta_change = max_delta_t * -1;
     }
 
@@ -88,8 +87,7 @@ steering_loop(viewarms) {
 
     if(time > 1) {
       time = 1;
-    }
-    else if(time < 0) {
+    } else if(time < 0) {
       time = 0;
     }
 

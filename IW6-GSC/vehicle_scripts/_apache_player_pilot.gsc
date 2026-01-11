@@ -511,8 +511,7 @@ button_pressed_from_string(var_0) {
 
   if(isDefined(var_5)) {
     var_6 = self call[[var_4]](var_5);
-  }
-  else {
+  } else {
     var_6 = self call[[var_4]]();
   }
 

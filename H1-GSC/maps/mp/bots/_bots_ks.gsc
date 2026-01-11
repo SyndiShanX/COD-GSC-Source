@@ -78,8 +78,7 @@ bot_think_killstreak() {
 
             self.bot_killstreak_wait[var_0] = gettime() + 5000;
           }
-        } else {
-        }
+        } else {}
       }
     }
   }
@@ -249,7 +248,7 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
   var_24 = 0;
 
   foreach(var_19 in var_23) {
-  var_24 = var_24 + var_19.weight;
+    var_24 = var_24 + var_19.weight;
   }
 
   if(var_24 > 0) {
@@ -265,7 +264,7 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
     var_30 = getzoneorigin(var_28.zonenum);
 
     foreach(var_16 in var_14) {
-    var_30 = var_30 + var_16.origin;
+      var_30 = var_30 + var_16.origin;
     }
 
     var_30 = var_30 / (var_14.size + 1);
@@ -279,8 +278,7 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
 
     if(isDefined(var_33)) {
       var_35 = var_33.origin;
-    }
-    else {
+    } else {
       var_35 = var_30;
     }
   } else

@@ -7,8 +7,7 @@
 #include clientscripts\mp\createfx\zm_nuked_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("misc/fx_zombie_eye_single");
@@ -185,8 +184,7 @@ fxanim_props_think(localclientnum) {
   if(isDefined(level.scr_anim["fxanim_props"][self.fxanim_scene_1])) {
     if(issubstr(self.fxanim_scene_1, "wire")) {
       self thread fxanim_wire_think(localclientnum);
-    }
-    else {
+    } else {
       self setflaggedanim("nuketown_fxanim", level.scr_anim["fxanim_props"][self.fxanim_scene_1], 1.0, 0.0, 1.0);
     }
   }

@@ -336,8 +336,7 @@ get_world_item_spawn_pos(dropToGround) {
 
   if(dropToGround) {
     return (drop_to_ground(self.origin, DROP_TO_GROUND_UP_DIST, DROP_TO_GROUND_DOWN_DIST) + VERTICAL_OFFSET);
-  }
-  else {
+  } else {
     return self.origin;
   }
 }
@@ -757,11 +756,9 @@ give_weapon(item, is_locker_weapon) {
 
     if(is_chaos_mode()) {
       maps\mp\alien\_chaos::update_weapon_pickup(self, weapon_ref);
-    }
-    else if(!is_true(is_locker_weapon) && isDefined(cur_primary_weapon)) {
+    } else if(!is_true(is_locker_weapon) && isDefined(cur_primary_weapon)) {
       weapon_ref = self return_weapon_with_like_attachments(weapon_ref, current_attachments);
-    }
-    else if(is_true(is_locker_weapon)) {
+    } else if(is_true(is_locker_weapon)) {
       weapon_ref = self ark_attachment_transfer_to_locker_weapon(weapon_ref, current_attachments, should_take_weapon);
     }
 
@@ -997,8 +994,7 @@ cangive_weapon(item) {
   if(!self is_holding_deployable()) {
     if(self has_pistols_only_relic_and_no_deployables()) {
       has_enough = player_has_enough_currency(level.pistol_ammo_cost);
-    }
-    else {
+    } else {
       has_enough = player_has_enough_currency(item.data["cost"]);
     }
 
@@ -1209,18 +1205,15 @@ explodeOnDamage(should_explode_on_hive_explode) {
 
   if(isDefined(attacker) && isPlayer(attacker)) {
     self.owner = attacker;
-  }
-  else if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
+  } else if(isDefined(attacker.owner) && isPlayer(attacker.owner)) {
     self.owner = attacker.owner;
   }
 
   if(isDefined(level.recent_propane_explosions) && level.recent_propane_explosions > 4) {
     playFX(level._effect["Propane_explosion_cheapest"], drop_to_ground(self.origin, DROP_TO_GROUND_UP_DIST, DROP_TO_GROUND_PROPANE_TANK_DOWN_DIST));
-  }
-  else if(isDefined(level.recent_propane_explosions) && level.recent_propane_explosions > 2) {
+  } else if(isDefined(level.recent_propane_explosions) && level.recent_propane_explosions > 2) {
     playFX(level._effect["Propane_explosion_cheap"], drop_to_ground(self.origin, DROP_TO_GROUND_UP_DIST, DROP_TO_GROUND_PROPANE_TANK_DOWN_DIST));
-  }
-  else {
+  } else {
     playFX(level._effect["Propane_explosion"], drop_to_ground(self.origin, DROP_TO_GROUND_UP_DIST, DROP_TO_GROUND_PROPANE_TANK_DOWN_DIST));
   }
 
@@ -1232,8 +1225,7 @@ explodeOnDamage(should_explode_on_hive_explode) {
 
   if(hive_exploded_propane) {
     RadiusDamage(damage_origin, damage_radius, max_damage, min_damage, attacker, "MOD_EXPLOSIVE", "alienpropanetank_mp");
-  }
-  else {
+  } else {
     RadiusDamage(damage_origin, damage_radius, max_damage, min_damage, self.owner, "MOD_EXPLOSIVE", "alienpropanetank_mp");
   }
 
@@ -1404,8 +1396,7 @@ fire_cloud_burn_alien(interval_damage, attacker, duration, fire_damage_trigger) 
 
     if(isDefined(fire_damage_trigger)) {
       self DoDamage(interval_damage, self.origin, attacker, fire_damage_trigger);
-    }
-    else {
+    } else {
       self DoDamage(interval_damage, self.origin, attacker);
     }
 
@@ -1534,8 +1525,7 @@ player_should_see_ammo_message(item, check_distance, ignore_carrying_check) {
 
   if(is_true(ignore_carrying_check)) {
     return true;
-  }
-  else if(is_true(self.isCarrying)) {
+  } else if(is_true(self.isCarrying)) {
     return false;
   }
 

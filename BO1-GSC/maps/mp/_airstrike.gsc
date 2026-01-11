@@ -304,8 +304,7 @@ doAirstrike(origin, owner, team, yaw, height) {
   exitType = 0;
   if(level.teambased) {
     teamType = owner.team;
-  }
-  else {
+  } else {
     teamType = "free";
   }
   callAirStrike(owner, targetpos, yaw, planeFlyHeight, startPoint, endPoint);
@@ -319,8 +318,7 @@ targetisclose(other, target, closeDist) {
   infront = targetisinfront(other, target);
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
   a = flat_origin(other.origin);
@@ -329,8 +327,7 @@ targetisclose(other, target, closeDist) {
   dist = distance(a, point);
   if(dist < closeDist) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -340,8 +337,7 @@ targetisinfront(other, target) {
   dot = vectordot(forwardvec, normalvec);
   if(dot > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -357,8 +353,7 @@ targetGetDist(other, target) {
   infront = targetisinfront(other, target);
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
   a = flat_origin(other.origin);

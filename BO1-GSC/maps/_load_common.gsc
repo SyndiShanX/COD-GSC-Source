@@ -511,14 +511,12 @@ special_death_indicator_hudelement(shader, iWidth, iHeight, fDelay, x, y) {
   overlay = NewClientHudElem(self);
   if(isDefined(x)) {
     overlay.x = x;
-  }
-  else {
+  } else {
     overlay.x = 0;
   }
   if(isDefined(y)) {
     overlay.y = y;
-  }
-  else {
+  } else {
     overlay.y = 40;
   }
   overlay SetShader(shader, iWidth, iHeight);

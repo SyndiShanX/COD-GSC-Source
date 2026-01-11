@@ -68,8 +68,7 @@ main() {
 
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.base_player_count_multiplier = 1;
-  }
-  else {
+  } else {
     level.base_player_count_multiplier = 0.49;
   }
 
@@ -209,7 +208,7 @@ spider_hide_all_debris() {
   var_0 = getscriptablearray("snow_debris", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 setscriptablepartstate(0, 1);
+    var_2 setscriptablepartstate(0, 1);
   }
 }
 
@@ -225,7 +224,7 @@ spider_play_snow_debris_anim() {
   var_1 = getscriptablearray("snow_debris", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 setscriptablepartstate(0, 0);
+    var_3 setscriptablepartstate(0, 0);
   }
 
   var_0 delete();
@@ -365,8 +364,7 @@ spider_start_cycle(var_0) {
 
   if(var_2 > 0.0) {
     var_4 = common_scripts\utility::waittill_notify_or_timeout_return(var_3, var_2);
-  }
-  else {
+  } else {
     var_4 = "no_delay";
   }
 
@@ -435,7 +433,7 @@ first_spider_fight() {
   var_3 = getEntArray("fence_blocker_01_clip", "targetname");
 
   foreach(var_5 in var_3) {
-  var_5 delete();
+    var_5 delete();
   }
 
   wait 6;
@@ -454,7 +452,7 @@ first_spider_fight() {
   }
 
   foreach(var_8 in level.players) {
-  var_8 maps\mp\alien\_persistence::try_award_bonus_pool_token();
+    var_8 maps\mp\alien\_persistence::try_award_bonus_pool_token();
   }
 }
 
@@ -546,7 +544,7 @@ skip_first_spider_fight() {
   var_0 = getEntArray("fence_blocker_01", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   level.cycle_count++;
@@ -567,7 +565,7 @@ second_spider_fight() {
   var_0 = getEntArray("blocker_02", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   level notify("factory_blocker_gone");
@@ -624,13 +622,13 @@ third_spider_fight() {
 
 set_players_escaped() {
   foreach(var_1 in level.players) {
-  var_1 maps\mp\alien\_persistence::set_player_escaped();
+    var_1 maps\mp\alien\_persistence::set_player_escaped();
   }
 }
 
 give_players_completion_tokens() {
   foreach(var_1 in level.players) {
-  var_1 maps\mp\alien\_persistence::award_completion_tokens();
+    var_1 maps\mp\alien\_persistence::award_completion_tokens();
   }
 }
 
@@ -683,14 +681,11 @@ get_lb_final_spider_rank(var_0) {
 
   if(var_0 <= var_1) {
     return 0;
-  }
-  else if(var_0 <= var_2) {
+  } else if(var_0 <= var_2) {
     return 1;
-  }
-  else if(var_0 <= var_3) {
+  } else if(var_0 <= var_3) {
     return 2;
-  }
-  else {
+  } else {
     return 3;
   }
 }
@@ -719,11 +714,9 @@ spawn_second_spider_in_third_fight(var_0) {
 spawn_spider(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2 = var_1;
-  }
-  else if(isDefined(level.players)) {
+  } else if(isDefined(level.players)) {
     var_2 = vectortoangles(level.players[0].origin - var_0);
-  }
-  else {
+  } else {
     var_2 = (0, 0, 0);
   }
 
@@ -734,7 +727,7 @@ skip_second_spider_fight() {
   var_0 = getEntArray("blocker_02", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   maps\mp\mp_alien_armory_fx::fx_snow("heavy_snow_no_fog");
@@ -990,8 +983,7 @@ monitor_fail_condition() {
 
   if(level.easter_egg_conduit_hits < 4) {
     level notify("easter_egg_conduit_failed");
-  }
-  else {
+  } else {
     level thread activate_easter_egg_conduit();
     level notify("easter_egg_conduit_complete");
   }
@@ -1398,8 +1390,7 @@ teleport_black_screen() {
 set_spawn_table() {
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     set_chaos_spawn_table();
-  }
-  else {
+  } else {
     if(maps\mp\alien\_utility::is_hardcore_mode()) {
       set_hardcore_extinction_spawn_table();
       return;
@@ -1440,8 +1431,7 @@ set_chaos_spawn_table() {
 set_regular_extinction_spawn_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table = "mp/alien/cycle_spawn_armory_sp.csv";
-  }
-  else {
+  } else {
     level.alien_cycle_table = "mp/alien/cycle_spawn_armory.csv";
   }
 }
@@ -1610,8 +1600,7 @@ open_intro_fence() {
 set_hardcore_extinction_spawn_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_armory_hardcore_sp.csv";
-  }
-  else {
+  } else {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_armory_hardcore.csv";
   }
 }

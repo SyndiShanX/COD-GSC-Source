@@ -16,7 +16,7 @@ radiation() {
     precacheshellshock("mp_radiation_high");
 
     foreach(trigger in radiationFields) {
-    trigger thread common_scripts\_dynamic_world::triggerTouchThink(::playerEnterArea, ::playerLeaveArea);
+      trigger thread common_scripts\_dynamic_world::triggerTouchThink(::playerEnterArea, ::playerLeaveArea);
     }
 
     thread onPlayerConnect();
@@ -153,8 +153,7 @@ blackout() {
 
       if(fraction < 0) {
         fraction = 0;
-      }
-      else if(fraction > 1) {
+      } else if(fraction > 1) {
         fraction = 1;
       }
 

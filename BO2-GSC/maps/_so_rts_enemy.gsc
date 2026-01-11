@@ -85,7 +85,7 @@ enemy_player() {
       enemydeployed = 0;
 
       foreach(deployedunit in units) {
-      enemydeployed = enemydeployed + deployedunit.members.size;
+        enemydeployed = enemydeployed + deployedunit.members.size;
       }
 
       onplayer = 0;
@@ -247,7 +247,7 @@ enemy_unit_delayzones() {
   delayzones = getEntArray("rts_unit_delay", "targetname");
 
   foreach(zone in delayzones) {
-  zone thread delay_trigger_think();
+    zone thread delay_trigger_think();
   }
 }
 
@@ -369,8 +369,7 @@ create_units_from_squad(squadid, centerselforigin) {
 
   if(squad.pkg_ref.squad_type == "infantry") {
     maxsize = 2;
-  }
-  else {
+  } else {
     maxsize = 1;
   }
 
@@ -488,8 +487,7 @@ chase_downsquads(unit, targetid) {
 
     if(level.rts.nag_targets.size > 0) {
       target = maps\_so_rts_squad::getsquad(level.rts.nag_targets[randomint(level.rts.nag_targets.size)]);
-    }
-    else {
+    } else {
       targets = maps\_so_rts_squad::getsquadsbytype(undefined, "allies", 1);
 
       if(targets.size > 0) {
@@ -521,8 +519,7 @@ chase_downsquads(unit, targetid) {
 
       if(isDefined(level.rts.player.ally) && target.id == level.rts.player.ally.squadid) {
         unit.target = level.rts.player;
-      }
-      else {
+      } else {
         unit.target = target.members[randomint(target.members.size)];
       }
 
@@ -578,8 +575,7 @@ redeploy_on_poi_lost(unit) {
   while(!is_true(unit.destroyed)) {
     if(isDefined(unit.poi) && isinarray(level.rts.poi, unit.poi)) {
       wait 2;
-    }
-    else {
+    } else {
       chosenpoi = get_best_poi_target(unit);
       level thread new_unit_init(unit, chosenpoi);
       return;
@@ -633,8 +629,7 @@ gotopoint(goal) {
 
       if(goingtonode) {
         self setgoalnode(goal);
-      }
-      else {
+      } else {
         self setgoalpos(goal);
       }
 
@@ -735,8 +730,7 @@ new_unit_init(unit, poi) {
   if(isDefined(poi) && isDefined(poi.entity)) {
     if(poi.nodes.size > 0) {
       unit.center = poi.nodes[0].origin;
-    }
-    else {
+    } else {
       unit.center = poi.entity.origin;
     }
 
@@ -858,8 +852,7 @@ order_new_squad(squadid) {
 
   if(!isDefined(chosenpoi)) {
     nagchance = 100;
-  }
-  else if(chosenpoi.score.totalscore > 1.5) {
+  } else if(chosenpoi.score.totalscore > 1.5) {
     nagchance = nagchance + 30;
   }
 
@@ -888,7 +881,7 @@ get_best_poi_target(unit) {
   enemydeployed = 0;
 
   foreach(deployedunit in activeunits) {
-  enemydeployed = enemydeployed + deployedunit.members.size;
+    enemydeployed = enemydeployed + deployedunit.members.size;
   }
 
   foreach(poi in level.rts.poi) {
@@ -913,8 +906,7 @@ get_best_poi_target(unit) {
 
       if(disttopoi > 0) {
         poi.score.disttosquad = 1 - min(1, disttopoi / 7000);
-      }
-      else {
+      } else {
         poi.score.disttosquad = 1;
       }
     }
@@ -943,8 +935,7 @@ get_best_poi_target(unit) {
 
       if(disttopoi > 0) {
         poi.score.disttoplayerbase = 1 - min(1, disttopoi / 7000);
-      }
-      else {
+      } else {
         poi.score.disttoplayerbase = 1;
       }
     } else
@@ -1016,8 +1007,7 @@ get_best_poi_target(unit) {
 
       if(isDefined(unit)) {
         println("\\nUnit: " + unit.unitid + " POI: " + poi.ref);
-      }
-      else {
+      } else {
         println("\\nPOI: " + poi.ref);
       }
 
@@ -1044,8 +1034,7 @@ get_best_poi_target(unit) {
 
     if(chosenpoi.score.totalscore > 0) {
       return chosenpoi;
-    }
-    else {
+    } else {
       return undefined;
     }
   }
@@ -1062,7 +1051,7 @@ get_num_ai() {
   activeunits = unitsprune();
 
   foreach(unit in activeunits) {
-  numai = numai + unit.members.size;
+    numai = numai + unit.members.size;
   }
 
   return numai;

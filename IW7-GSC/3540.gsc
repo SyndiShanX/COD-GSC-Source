@@ -46,7 +46,7 @@ giveweaponpassives(var_00) {
 
   if(isDefined(var_01)) {
     foreach(var_03 in var_01) {
-    giveplayerpassive(var_03);
+      giveplayerpassive(var_03);
     }
   }
 
@@ -61,7 +61,7 @@ giveplayerpassive(var_00) {
 clearpassives() {
   if(isDefined(self.weaponpassives)) {
     foreach(var_01 in self.weaponpassives) {
-    scripts\mp\utility\game::removeperk(var_01);
+      scripts\mp\utility\game::removeperk(var_01);
     }
   }
 
@@ -1096,8 +1096,7 @@ func_89CC(var_00, var_01, var_02) {
 
   if(!isDefined(var_0.pers["passive_nuke_key"])) {
     var_0.pers["passive_nuke_key"] = 1;
-  }
-  else {
+  } else {
     var_0.pers["passive_nuke_key"]++;
   }
 
@@ -1111,11 +1110,9 @@ func_89CC(var_00, var_01, var_02) {
     var_00 thread scripts\mp\hud_message::showsplash("nuke_kill_single");
   else if(var_0.pers["passive_nuke_key"] == 2) {
     var_00 thread func_C1C8();
-  }
-  else if(var_0.pers["passive_nuke_key"] >= 20) {
+  } else if(var_0.pers["passive_nuke_key"] >= 20) {
     var_00 thread func_C1C8();
-  }
-  else if(var_0.pers["passive_nuke_key"] >= 5) {
+  } else if(var_0.pers["passive_nuke_key"] >= 5) {
     if(var_0.pers["passive_nuke_key"] % 5 == 0) {
       var_00 thread func_C1C8();
     }
@@ -1232,7 +1229,7 @@ func_F82B() {
   }
 
   foreach(var_08 in var_00) {
-  scripts\mp\utility\game::func_1824(var_8.func_67E5, var_8.func_2C80, var_8.weapon);
+    scripts\mp\utility\game::func_1824(var_8.func_67E5, var_8.func_2C80, var_8.weapon);
   }
 
   thread func_4113(var_00);
@@ -1255,7 +1252,7 @@ func_4113(var_00) {
   self waittill("score_bonus_objectives_removed");
 
   foreach(var_02 in var_00) {
-  scripts\mp\utility\game::func_E165(var_2.func_67E5, var_2.func_2C80, var_2.weapon);
+    scripts\mp\utility\game::func_E165(var_2.func_67E5, var_2.func_2C80, var_2.weapon);
   }
 }
 
@@ -1639,8 +1636,7 @@ setproneblindeye() {
     if(self getstance() == "prone") {
       if(!isDefined(var_00)) {
         var_00 = gettime() + 250.0;
-      }
-      else if(gettime() >= var_00) {
+      } else if(gettime() >= var_00) {
         if(!scripts\mp\utility\game::istrue(getpassivevalue("passive_prone_blindeye"))) {
           setpassivevalue("passive_prone_blindeye", 1);
           checkpassivemessage("passive_prone_blindeye", "_start");
@@ -1691,8 +1687,7 @@ setstationaryengineer() {
     if(var_01 == "crouch" || var_01 == "prone" || lengthsquared(self getvelocity()) == 0) {
       if(!isDefined(var_00)) {
         var_00 = gettime() + 750.0;
-      }
-      else if(gettime() > var_00) {
+      } else if(gettime() > var_00) {
         if(!scripts\mp\utility\game::istrue(getpassivevalue("passive_stationary_engineer"))) {
           setpassivevalue("passive_stationary_engineer", 1);
           checkpassivemessage("passive_stationary_engineer", "_start");
@@ -1872,8 +1867,7 @@ func_89DB(var_00, var_01) {
 
   if(!isDefined(var_0.pers["passive_refresh_key"])) {
     var_0.pers["passive_refresh_key"] = 1;
-  }
-  else {
+  } else {
     var_0.pers["passive_refresh_key"]++;
   }
 
@@ -1912,8 +1906,7 @@ func_89B3(var_00, var_01) {
   }
   if(!isDefined(var_0.func_903C)) {
     var_0.func_903C = [];
-  }
-  else if(func_903B(var_00, var_02)) {
+  } else if(func_903B(var_00, var_02)) {
     return;
   }
   var_0.func_903C[var_0.func_903C.size] = var_02;
@@ -1944,11 +1937,9 @@ func_89B3(var_00, var_01) {
 
     if(var_04 >= 3) {
       var_10 = 200;
-    }
-    else if(var_04 >= 2) {
+    } else if(var_04 >= 2) {
       var_10 = 100;
-    }
-    else {
+    } else {
       var_10 = 75;
     }
 
@@ -2025,8 +2016,7 @@ handlegoreeffect(var_00) {
 
   if(var_0.loadoutarchetype == "archetype_scout") {
     playFX(level._effect["passive_gore_robot"], var_01, (1, 0, 0));
-  }
-  else {
+  } else {
     playFX(level._effect["passive_gore"], var_01, (1, 0, 0));
   }
 
@@ -2094,7 +2084,7 @@ func_11753(var_00) {
 
   if(isDefined(var_01) && var_1.size > 0) {
     foreach(var_03 in var_01) {
-    testpassivemessage("passive_random_perks", "_" + var_03);
+      testpassivemessage("passive_random_perks", "_" + var_03);
     }
   }
 }
@@ -2105,7 +2095,7 @@ func_DCC3() {
 
   if(isDefined(self.func_DCC2)) {
     foreach(var_01 in self.func_DCC2) {
-    scripts\mp\utility\game::removeperk(var_01);
+      scripts\mp\utility\game::removeperk(var_01);
     }
   }
 
@@ -2317,8 +2307,7 @@ handledoublekillsuperpassive(var_00, var_01) {
 
   if(!scripts\mp\utility\game::istrue(var_0.passivedoublekillpending)) {
     var_0.passivedoublekillpending = 1;
-  }
-  else {
+  } else {
     var_0.passivedoublekillpending = undefined;
     var_00 scripts\mp\supers::stopshellshock(200);
     var_00 checkpassivemessage("passive_double_kill_super");
@@ -2451,8 +2440,7 @@ updatemodeswitchweaponkills(var_00, var_01, var_02) {
 
     if(var_00 scripts\mp\utility\game::_hasperk("passive_mode_switch_score_epic")) {
       var_10 = "mode_switch_kill_epic";
-    }
-    else {
+    } else {
       var_10 = "mode_switch_kill";
     }
 
@@ -2535,8 +2523,7 @@ meleeconeexplodeworldfx(var_00, var_01, var_02) {
 
   if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_02)) {
     var_04 setscriptablepartstate("effects", "activePhase");
-  }
-  else {
+  } else {
     var_04 setscriptablepartstate("effects", "active");
   }
 
@@ -2581,8 +2568,7 @@ handleleaderkillscorepassive(var_00, var_01, var_02) {
 
   if(!level.teambased) {
     var_03 = scripts\engine\utility::array_remove(level.players, var_00);
-  }
-  else {
+  } else {
     var_03 = scripts\mp\utility\game::getteamarray(scripts\mp\utility\game::getotherteam(var_0.team));
   }
 

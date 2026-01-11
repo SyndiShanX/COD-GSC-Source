@@ -40,8 +40,7 @@ move_to_goal(var_0, var_1, var_2) {
 
   if(!isarray(self)) {
     var_5[0] = self;
-  }
-  else {
+  } else {
     var_5 = self;
   }
 
@@ -343,11 +342,9 @@ func_waittill_msg(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     var_0 thread[[var_2]](var_3);
-  }
-  else if(isDefined(var_4)) {
+  } else if(isDefined(var_4)) {
     var_4 thread[[var_2]](var_3);
-  }
-  else {
+  } else {
     var_0 thread[[var_2]]();
   }
 }
@@ -371,8 +368,7 @@ delete_on_flag(var_0) {
 
   if(isai(self) || isalive(self)) {
     delete_safe();
-  }
-  else {
+  } else {
     self delete();
   }
 }
@@ -484,8 +480,7 @@ playloopingfx(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(var_7)) {
       playFX(common_scripts\utility::getfx(var_0), var_6 + (0, 0, 0), var_7);
-    }
-    else {
+    } else {
       playFX(common_scripts\utility::getfx(var_0), var_6 + (0, 0, 0));
     }
 
@@ -500,8 +495,7 @@ postion_dot_check(var_0, var_1) {
 
   if(var_4 > 0) {
     return "behind";
-  }
-  else {
+  } else {
     return "infront";
   }
 }
@@ -1101,8 +1095,7 @@ move_on_path(var_0, var_1) {
 
       if(isDefined(var_4.radius)) {
         var_5 = var_4.radius;
-      }
-      else {
+      } else {
         var_5 = 56;
       }
 
@@ -1134,8 +1127,7 @@ delete_safe() {
 
   if(isDefined(self.furfx)) {
     thread maps\_utility_dogs::kill_dog_fur_effect_and_delete();
-  }
-  else {
+  } else {
     self delete();
   }
 }
@@ -1317,7 +1309,7 @@ waittill_spawners_empty(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     foreach(var_4 in var_0) {
-    var_1 = var_1 + var_4.count;
+      var_1 = var_1 + var_4.count;
     }
   }
 
@@ -1565,8 +1557,7 @@ vehicle_play_sound(var_0) {
 
   if(var_0 parameters_check("inSpace")) {
     thread common_scripts\utility::play_sound_in_space(var_1);
-  }
-  else {
+  } else {
     thread maps\_utility::play_sound_on_entity(var_1);
   }
 }
@@ -1913,15 +1904,13 @@ heli_path_notifications(var_0) {
 
         if(var_8 parameters_check("lookat")) {
           var_11 = 1;
-        }
-        else if(var_8 parameters_check("cheap")) {
+        } else if(var_8 parameters_check("cheap")) {
           var_2 = 1;
         }
 
         if(self.classname == "script_vehicle_hind_battle_oilrocks") {
           thread heli_fire_turret_oilrocks(var_8, var_11, var_2);
-        }
-        else {
+        } else {
           thread heli_fire_turret(var_8, var_11, var_2);
         }
 
@@ -1959,11 +1948,9 @@ heli_path_notifications(var_0) {
 
       if(var_8 parameters_check("left")) {
         var_5 = 0;
-      }
-      else if(var_8 parameters_check("right")) {
+      } else if(var_8 parameters_check("right")) {
         var_5 = 1;
-      }
-      else {
+      } else {
         var_5++;
 
         if(var_5 >= var_4.size) {
@@ -2080,8 +2067,7 @@ heli_fire_turret(var_0, var_1, var_2, var_3) {
       }
       if(isDefined(var_2) || isDefined(self.helifirecheap) && self.helifirecheap == 1) {
         heli_fireminigun_cheap();
-      }
-      else {
+      } else {
         self fireweapon("tag_barrel");
       }
 
@@ -2145,8 +2131,7 @@ heli_fire_turret_oilrocks(var_0, var_1, var_2) {
     for(var_8 = 0; var_8 < var_7; var_8++) {
       if(isDefined(var_2) || isDefined(self.helifirecheap) && self.helifirecheap == 1) {
         heli_fireminigun_cheap();
-      }
-      else {
+      } else {
         var_3 shootturret();
       }
 
@@ -2298,8 +2283,7 @@ heli_missile_defense_init(var_0) {
 
     if(isDefined(var_1.islaserguidedmissile)) {
       var_2 = 1000;
-    }
-    else {
+    } else {
       var_2 = 600;
       javelin_check_decent(var_1);
     }
@@ -2449,8 +2433,7 @@ get_helicopter_crash_location(var_0) {
 
   if(var_1.size == 1) {
     return var_1[0];
-  }
-  else {
+  } else {
     return var_1;
   }
 }
@@ -2873,8 +2856,7 @@ hovercraft_init() {
 
   if(parameters_check("nonLooper")) {
     maps\_utility::ent_flag_wait("hovercraft_unload_complete");
-  }
-  else {
+  } else {
     maps\_utility::ent_flag_set("hovercraft_unload_complete");
   }
 
@@ -3030,8 +3012,7 @@ hovercraft_drone_setup() {
 
   if(isDefined(self.fronttank)) {
     self.fronttank maps\_utility::ent_flag_wait("hovercraft_unload_complete");
-  }
-  else if(isDefined(self.fakedrones)) {
+  } else if(isDefined(self.fakedrones)) {
     maps\_utility::array_delete(self.fakedrones);
     self.fakedrones = undefined;
   }
@@ -3040,8 +3021,7 @@ hovercraft_drone_setup() {
 
   if(isDefined(self.infinitedrones)) {
     var_9 = 1;
-  }
-  else if(isDefined(self.script_drone_repeat_count)) {
+  } else if(isDefined(self.script_drone_repeat_count)) {
     var_9 = self.script_drone_repeat_count;
   }
 
@@ -3336,12 +3316,10 @@ hovercraft_drone_default(var_0) {
 
   if(var_2 == "sprint") {
     maps\_utility::set_moveplaybackrate(1.3);
-  }
-  else if(var_2 == "run_n_gun") {
+  } else if(var_2 == "run_n_gun") {
     if(common_scripts\utility::cointoss()) {
       var_2 = "run";
-    }
-    else {
+    } else {
       thread func_waittill_msg(self, "hovercraft_runout", maps\homecoming_drones::drone_fire_randomly_loop);
     }
   }
@@ -3360,7 +3338,7 @@ hovercraft_tanks_setup(var_0) {
   var_1 = [];
 
   foreach(var_4, var_3 in var_0) {
-  var_1[var_4] = maps\_vehicle::vehicle_spawn(var_3);
+    var_1[var_4] = maps\_vehicle::vehicle_spawn(var_3);
   }
 
   self.tanks = var_1;
@@ -3422,7 +3400,7 @@ hovercraft_tanks_unload(var_0) {
   }
 
   foreach(var_2 in self.tanks) {
-  var_2 maps\_utility::add_wait(maps\_utility::ent_flag_wait, "hovercraft_unload_complete");
+    var_2 maps\_utility::add_wait(maps\_utility::ent_flag_wait, "hovercraft_unload_complete");
   }
 
   maps\_utility::do_wait();
@@ -3582,8 +3560,7 @@ fire_artillery_shell(var_0, var_1, var_2) {
 
       if(distance2d(level.player.origin, var_1.origin) < 200) {
         level.player shellshock("homecoming_artillery_close", 5);
-      }
-      else {
+      } else {
         level.player shellshock("homecoming_artillery_far", 5);
       }
 
@@ -3820,7 +3797,7 @@ init_ambient_distant_battlechatter() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-  var_1[var_1.size] = var_3;
+    var_1[var_1.size] = var_3;
   }
 
   level.distant_battlechatter["us"] = var_1;
@@ -3828,7 +3805,7 @@ init_ambient_distant_battlechatter() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-  var_1[var_1.size] = var_3;
+    var_1[var_1.size] = var_3;
   }
 
   level.distant_battlechatter["sp"] = var_1;
@@ -4051,7 +4028,7 @@ debug_ai_drone_amounts_logic(var_0, var_1, var_2, var_3, var_4) {
     var_9 = [level.drones["allies"], level.drones["axis"], level.drones["team3"], level.drones["neutral"]];
 
     foreach(var_11 in var_9) {
-    var_8 = common_scripts\utility::array_combine(var_8, var_11.array);
+      var_8 = common_scripts\utility::array_combine(var_8, var_11.array);
     }
 
     var_0 settext("Vehicles : " + var_6.size);
@@ -4062,8 +4039,7 @@ debug_ai_drone_amounts_logic(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_8.size > 50) {
       var_1.color = (1, 0, 0);
-    }
-    else {
+    } else {
       var_1.color = var_5;
     }
 

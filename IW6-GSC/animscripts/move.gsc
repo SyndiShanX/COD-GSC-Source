@@ -181,8 +181,7 @@ movemainloop(var_0) {
 archetypechanged() {
   if(isDefined(self.animarchetype) && self.animarchetype != self.prevmovearchetype) {
     return 1;
-  }
-  else if(!isDefined(self.animarchetype) && self.prevmovearchetype != "none") {
+  } else if(!isDefined(self.animarchetype) && self.prevmovearchetype != "none") {
     return 1;
   }
 
@@ -193,8 +192,7 @@ updatemovemode(var_0) {
   if(var_0 != self.prevmovemode || archetypechanged()) {
     if(isDefined(self.custommoveanimset) && isDefined(self.custommoveanimset[var_0])) {
       self.a.moveanimset = self.custommoveanimset[var_0];
-    }
-    else {
+    } else {
       self.a.moveanimset = animscripts\utility::lookupanimarray(var_0);
 
       if((self.combatmode == "ambush" || self.combatmode == "ambush_nodes_only") && (isDefined(self.pathgoalpos) && distancesquared(self.origin, self.pathgoalpos) > squared(100))) {
@@ -233,8 +231,7 @@ movemainloopinternal(var_0) {
 
     if(isDefined(self.movemainloopprocessoverridefunc)) {
       self[[self.movemainloopprocessoverridefunc]](self.movemode);
-    }
-    else {
+    } else {
       movemainloopprocess(self.movemode);
     }
 
@@ -253,17 +250,13 @@ movemainloopprocess(var_0) {
 
   if(isDefined(self.moveloopoverridefunc)) {
     self[[self.moveloopoverridefunc]]();
-  }
-  else if(animscripts\utility::shouldcqb()) {
+  } else if(animscripts\utility::shouldcqb()) {
     animscripts\cqb::movecqb();
-  }
-  else if(self.swimmer) {
+  } else if(self.swimmer) {
     animscripts\swim::moveswim();
-  }
-  else if(var_0 == "run") {
+  } else if(var_0 == "run") {
     animscripts\run::moverun();
-  }
-  else {
+  } else {
     animscripts\walk::movewalk();
   }
 
@@ -301,7 +294,7 @@ shootwhilemoving() {
   var_0 = animscripts\utility::lookupanimarray("shoot_while_moving");
 
   foreach(var_3, var_2 in var_0) {
-  self.a.array[var_3] = var_2;
+    self.a.array[var_3] = var_2;
   }
 
   if(isDefined(self.combatstandanims) && isDefined(self.combatstandanims["fire"])) {
@@ -415,22 +408,18 @@ pathchange_getturnanim(var_0, var_1) {
 
   if(self.swimmer) {
     var_4 = animscripts\swim::getswimanim("turn");
-  }
-  else if(self.movemode == "walk") {
+  } else if(self.movemode == "walk") {
     var_4 = animscripts\utility::lookupanimarray("cqb_turn");
-  }
-  else if(animscripts\utility::shouldcqb()) {
+  } else if(animscripts\utility::shouldcqb()) {
     var_4 = animscripts\utility::lookupanimarray("cqb_run_turn");
-  }
-  else {
+  } else {
     var_4 = animscripts\utility::lookupanimarray("run_turn");
   }
 
   if(var_0 < 0) {
     if(var_0 > -45) {
       var_5 = 3;
-    }
-    else {
+    } else {
       var_5 = int(ceil((var_0 + 180 - 10) / 45));
     }
   } else if(var_0 < 45)
@@ -521,8 +510,7 @@ pathchange_doturnanim() {
   }
   if(self.swimmer) {
     self animmode("nogravity", 0);
-  }
-  else {
+  } else {
     self animmode("zonly_physics", 0);
   }
 
@@ -545,8 +533,7 @@ pathchange_doturnanim() {
 
   if(animscripts\utility::isspaceai()) {
     self orientmode("face angle 3d", self.angles);
-  }
-  else {
+  } else {
     self orientmode("face angle", self.angles[1]);
   }
 
@@ -730,14 +717,11 @@ get_shuffle_to_corner_start_anim(var_0, var_1) {
 
   if(var_2 == "Cover Left") {
     return animscripts\utility::lookupanim("shuffle", "shuffle_start_from_cover_left");
-  }
-  else if(var_2 == "Cover Right") {
+  } else if(var_2 == "Cover Right") {
     return animscripts\utility::lookupanim("shuffle", "shuffle_start_from_cover_right");
-  }
-  else if(var_0) {
+  } else if(var_0) {
     return animscripts\utility::lookupanim("shuffle", "shuffle_start_left");
-  }
-  else {
+  } else {
     return animscripts\utility::lookupanim("shuffle", "shuffle_start_right");
   }
 }
@@ -774,8 +758,7 @@ setup_shuffle_anim_array(var_0, var_1, var_2) {
 
     if(var_4 == "Cover Stand") {
       var_3["shuffle_end"] = animscripts\utility::lookupanim("shuffle", "shuffle_end_to_left_stand");
-    }
-    else {
+    } else {
       var_3["shuffle_end"] = animscripts\utility::lookupanim("shuffle", "shuffle_end_to_left_crouch");
     }
   } else {
@@ -784,8 +767,7 @@ setup_shuffle_anim_array(var_0, var_1, var_2) {
 
     if(var_4 == "Cover Stand") {
       var_3["shuffle_end"] = animscripts\utility::lookupanim("shuffle", "shuffle_end_to_right_stand");
-    }
-    else {
+    } else {
       var_3["shuffle_end"] = animscripts\utility::lookupanim("shuffle", "shuffle_end_to_right_crouch");
     }
   }
@@ -841,8 +823,7 @@ movecovertocover() {
   }
   if(movecovertocover_checkstartpose(var_1, var_2)) {
     var_6 = 0.1;
-  }
-  else {
+  } else {
     var_6 = 0.4;
   }
 
@@ -855,8 +836,7 @@ movecovertocover() {
 
   if(animhasnotetrack(var_7, "finish")) {
     var_10 = getnotetracktimes(var_7, "finish")[0];
-  }
-  else {
+  } else {
     var_10 = 1;
   }
 
@@ -912,8 +892,7 @@ movecovertocover() {
   if(var_15) {
     if(movecovertocover_checkendpose(var_2)) {
       var_6 = 0.2;
-    }
-    else {
+    } else {
       var_6 = 0.4;
     }
 
@@ -944,8 +923,7 @@ movedoorsidetoside(var_0, var_1, var_2) {
 
   if(var_1.type == "Cover Right" && var_2.type == "Cover Left" && !var_0) {
     var_3 = % corner_standr_door_r2l;
-  }
-  else if(var_1.type == "Cover Left" && var_2.type == "Cover Right" && var_0) {
+  } else if(var_1.type == "Cover Left" && var_2.type == "Cover Right" && var_0) {
     var_3 = % corner_standl_door_l2r;
   }
 
@@ -1012,8 +990,7 @@ movestand_moveoverride(var_0, var_1) {
   if(isarray(var_0)) {
     if(isDefined(self.run_override_weights)) {
       var_2 = common_scripts\utility::choose_from_weighted_array(var_0, var_1);
-    }
-    else {
+    } else {
       var_2 = var_0[randomint(var_0.size)];
     }
   } else

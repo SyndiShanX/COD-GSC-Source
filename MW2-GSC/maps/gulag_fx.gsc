@@ -173,10 +173,10 @@ main() {
 
   /*
   // a way to move a bunch of fx!
-	
+  	
   // the old location minus the new location
   vec = ( 115877, 30087.7, -1328 ) - ( 94224, 24518.2, -1328 );
-	
+  	
   foreach ( fx in level.createFxEnt )
   {
   	if( fx.v[ "origin" ][ 0 ] > 50063 )

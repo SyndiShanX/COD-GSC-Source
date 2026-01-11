@@ -21,8 +21,7 @@ main() {
 
   if(var_0 > 2 && randomint(100) > 60) {
     self setflaggedanimrestart("flashed_anim", getdogflashedanim("flash_long"), 1, 0.2, self.animplaybackrate * 0.75);
-  }
-  else {
+  } else {
     self setflaggedanimrestart("flashed_anim", getdogflashedanim("flash_short"), 1, 0.2, self.animplaybackrate);
   }
 
@@ -30,8 +29,7 @@ main() {
 
   if(var_0 < var_1) {
     animscripts\notetracks::donotetracksfortime(var_0, "flashed_anim");
-  }
-  else {
+  } else {
     animscripts\shared::donotetracks("flashed_anim");
   }
 

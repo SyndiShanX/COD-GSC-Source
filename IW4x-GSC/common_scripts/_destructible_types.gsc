@@ -562,8 +562,7 @@ toy_transformer_ratnest01(destructibleType) {
   destructible_state(undefined, "utility_transformer_ratnest01_dest", undefined, undefined, "no_melee");
 }
 
-toy_transformer_ratnest02(destructibleType)
-{
+toy_transformer_ratnest02(destructibleType) {
   destructible_create(destructibleType, "tag_origin", 75, undefined, 32, "no_melee");
   destructible_splash_damage_scaler(15);
   destructible_loopfx("tag_fx", "smoke/car_damage_whitesmoke", 0.4);

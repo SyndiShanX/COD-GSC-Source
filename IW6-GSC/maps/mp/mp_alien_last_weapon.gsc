@@ -157,8 +157,7 @@ cortex_gun_charge_watcher() {
       if(var_4 > 1400) {
         if(!var_0) {
           var_0 = 1;
-        }
-        else if(var_4 > 1400) {
+        } else if(var_4 > 1400) {
           fire_large_cortex_blast();
           wait 0.5;
           thread allow_ads_reset();
@@ -172,8 +171,7 @@ cortex_gun_charge_watcher() {
 
         if(self meleebuttonpressed()) {
           thread allow_ads_reset();
-        }
-        else {
+        } else {
           thread allow_ads_reset(0.25);
         }
       }
@@ -448,8 +446,7 @@ grenade_explosion_monitor(var_0, var_1) {
 
   if(is_venom_grenade(var_1)) {
     level thread cloudmonitor(self, var_2, var_1);
-  }
-  else if(var_1 == "iw6_aliendlc43_mp") {
+  } else if(var_1 == "iw6_aliendlc43_mp") {
     wait 0.6;
     physicsexplosionsphere(var_2 + (0, 0, -5), 800, 250, 10);
   }
@@ -625,8 +622,7 @@ cloud_melt_alien(var_0, var_1, var_2, var_3, var_4, var_5) {
   while(var_6 < var_2) {
     if(isDefined(var_3)) {
       self dodamage(var_0, self.origin, var_1, var_1, "MOD_UNKNOWN");
-    }
-    else {
+    } else {
       self dodamage(var_0, self.origin, var_1);
     }
 

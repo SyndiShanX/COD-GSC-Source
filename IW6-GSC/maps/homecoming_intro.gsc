@@ -274,7 +274,7 @@ intro_rangers_scene() {
   var_11 = [level.hesh, level.intro_dog_guy, level.dog];
 
   foreach(var_8 in var_11) {
-  var_8 thread intro_dog_pass_off(var_10);
+    var_8 thread intro_dog_pass_off(var_10);
   }
 
   common_scripts\utility::flag_wait("FLAG_intro_passoff_start");
@@ -751,8 +751,7 @@ generic_looper(var_0) {
 
   if(maps\homecoming_util::parameters_check("first_frame")) {
     thread maps\_anim::anim_generic_first_frame(var_1, self.animation);
-  }
-  else {
+  } else {
     thread maps\_anim::anim_generic_loop(var_1, self.animation);
   }
 
@@ -894,8 +893,7 @@ intro_fake_mortars() {
   for(;;) {
     if(level.player istouching(var_1)) {
       wait(randomfloatrange(3, 5));
-    }
-    else {
+    } else {
       wait(randomfloatrange(5, 8));
     }
 
@@ -1004,7 +1002,7 @@ intro_bunker_turrets() {
     wait(randomfloatrange(2.5, 4.5));
 
     foreach(var_3 in var_0) {
-    var_3 linkto(var_7);
+      var_3 linkto(var_7);
     }
 
     var_12 = undefined;

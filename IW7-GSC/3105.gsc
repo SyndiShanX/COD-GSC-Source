@@ -42,8 +42,7 @@ func_61CA() {
 
       if(!isDefined(level.func_1554)) {
         level.func_1554 = 0;
-      }
-      else {
+      } else {
         level.func_1554++;
       }
 
@@ -85,8 +84,7 @@ func_61CA() {
   if(!isDefined(anim.func_3D4B)) {
     if(scripts\engine\utility::player_is_in_jackal()) {
       anim.player = level.func_D127;
-    }
-    else {
+    } else {
       anim.player = getEntArray("player", "classname")[0];
     }
 
@@ -153,8 +151,7 @@ func_54F8() {
 
   if(self.script_team == "allies") {
     level.func_A056.func_1914 = scripts\engine\utility::array_remove(level.func_A056.func_1914, self);
-  }
-  else {
+  } else {
     level.func_A056.func_191E = scripts\engine\utility::array_remove(level.func_A056.func_191E, self);
   }
 }
@@ -327,8 +324,7 @@ _meth_814A(var_00) {
   if(!isDefined(var_00)) {
     if(self.var_1198.func_E1AC != "none") {
       var_00 = self.var_1198.func_E1AC;
-    }
-    else {
+    } else {
       var_00 = "fly";
     }
   }
@@ -363,7 +359,7 @@ func_B2E0() {
     var_00 = func_0BCE::func_7DB5();
 
     foreach(var_02 in var_00) {
-    var_2.func_C1DB = 0;
+      var_2.func_C1DB = 0;
     }
 
     foreach(var_02 in var_00) {

@@ -594,8 +594,7 @@ isOfficer() {
 bcGetClaimedNode() {
   if(isPlayer(self)) {
     node = self.node;
-  }
-  else {
+  } else {
     node = self GetClaimedNode();
   }
 }
@@ -604,8 +603,7 @@ getName() {
   name = undefined;
   if(self.team == "axis") {
     name = self.ainame;
-  }
-  else if(self.team == "allies") {
+  } else if(self.team == "allies") {
     name = self.name;
   }
   if(!isDefined(name) && isDefined(self.script_friendname)) {
@@ -695,35 +693,26 @@ getDirectionCompass(vOrigin, vPoint) {
   angle -= northYaw;
   if(angle < 0) {
     angle += 360;
-  }
-  else if(angle > 360) {
+  } else if(angle > 360) {
     angle -= 360;
   }
   if(angle < 22.5 || angle > 337.5) {
     direction = "north";
-  }
-  else if(angle < 67.5) {
+  } else if(angle < 67.5) {
     direction = "northwest";
-  }
-  else if(angle < 112.5) {
+  } else if(angle < 112.5) {
     direction = "west";
-  }
-  else if(angle < 157.5) {
+  } else if(angle < 157.5) {
     direction = "southwest";
-  }
-  else if(angle < 202.5) {
+  } else if(angle < 202.5) {
     direction = "south";
-  }
-  else if(angle < 247.5) {
+  } else if(angle < 247.5) {
     direction = "southeast";
-  }
-  else if(angle < 292.5) {
+  } else if(angle < 292.5) {
     direction = "east";
-  }
-  else if(angle < 337.5) {
+  } else if(angle < 337.5) {
     direction = "northeast";
-  }
-  else {
+  } else {
     direction = "impossible";
   }
   return (direction);
@@ -740,15 +729,12 @@ getDirectionReferenceSide(vOrigin, vPoint, vReference) {
   }
   if(angle > 2 && angle < 45) {
     side = "right";
-  }
-  else if(angle < -2 && angle > -45) {
+  } else if(angle < -2 && angle > -45) {
     side = "left";
-  }
-  else {
+  } else {
     if(distance(vOrigin, vPoint) < distance(vOrigin, vReference)) {
       side = "front";
-    }
-    else {
+    } else {
       side = "rear";
     }
   }
@@ -763,14 +749,11 @@ getDirectionFacingFlank(vOrigin, vPoint, vFacing) {
   angle = int(angle) % 360;
   if(angle > 315 || angle < 45) {
     direction = "front";
-  }
-  else if(angle < 135) {
+  } else if(angle < 135) {
     direction = "right";
-  }
-  else if(angle < 225) {
+  } else if(angle < 225) {
     direction = "rear";
-  }
-  else {
+  } else {
     direction = "left";
   }
   return (direction);
@@ -871,8 +854,7 @@ bcGetName() {
   name = undefined;
   if(self.team == "axis") {
     name = self.ainame;
-  }
-  else if(self.team == "allies") {
+  } else if(self.team == "allies") {
     name = self.name;
   }
   if(!isDefined(name) && isDefined(self.script_friendname)) {
@@ -954,8 +936,7 @@ bcCanSay(eventAction, eventType, priority, modifier) {
   timeout = 3000;
   if(self.team == "axis") {
     timeout = 1800;
-  }
-  else if(self.team == "allies") {
+  } else if(self.team == "allies") {
     timeout = 1000;
   }
   if(isDefined(level.ImportantPeopleTalkingTime) && (gettime() - level.ImportantPeopleTalkingTime) < timeout) {
@@ -1072,9 +1053,7 @@ filter(potentialThreats, isThreat) {
   for(i = 0; i < potentialThreats.size; i++) {
     players = GetPlayers();
     for(p = 0; p < players.size; p++) {
-      if(potentialThreats[i][
-          [isThreat]
-        ](players[p])) {
+      if(potentialThreats[i][[isThreat]](players[p])) {
         threats[threats.size] = potentialThreats[i];
         break;
       }
@@ -1298,8 +1277,7 @@ isSurpressed(player) {
   if(isDefined(self.suppressed) && self.suppressed) {
     if(!isDefined(self.bcSurpressedTime)) {
       valid = true;
-    }
-    else {
+    } else {
       valid = gettime() - self.bcSurpressedTime > 3000;
     }
   }
@@ -1342,7 +1320,7 @@ canSeeAny(team) {
   for(i = 0; i < team.size; i++) {
     if(isDefined(team[i]) && team[i] cansee(self))
   }
-      return true;
+  return true;
   return false;
 }
 
@@ -1535,8 +1513,7 @@ bccycle(team, otherteam) {
   them = getaiarray(otherteam);
   if(us.size + 4 < them.size && randomfloat(1) < .3) {
     tryThreat(us, them, 2000, 1, ::isInfantry, "threat", "infantry", "multiple", false);
-  }
-  else {
+  } else {
     tryThreat(us, them, 2000, 1, ::isInfantry, "threat", "infantry", "generic", true);
   }
   return false;

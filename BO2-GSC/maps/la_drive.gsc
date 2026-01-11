@@ -77,8 +77,7 @@ fail_gate_watcher() {
 
   if(!flag("player_driving")) {
     level thread kill_player_driver();
-  }
-  else {
+  } else {
     level thread monitor_backtrack_fail(getent("backtrack_fail_1", "targetname"));
   }
 
@@ -86,8 +85,7 @@ fail_gate_watcher() {
 
   if(!flag("drive_under_first_overpass")) {
     level thread kill_player_driver();
-  }
-  else {
+  } else {
     level thread monitor_backtrack_fail(getent("backtrack_fail_2", "targetname"));
   }
 
@@ -95,8 +93,7 @@ fail_gate_watcher() {
 
   if(!flag("freeway_drive_1")) {
     level thread kill_player_driver();
-  }
-  else {
+  } else {
     level thread monitor_backtrack_fail(getent("backtrack_fail_3", "targetname"));
   }
 
@@ -104,8 +101,7 @@ fail_gate_watcher() {
 
   if(!flag("first_curve")) {
     level thread kill_player_driver();
-  }
-  else {
+  } else {
     level thread monitor_backtrack_fail(getent("backtrack_fail_4", "targetname"));
   }
 
@@ -113,8 +109,7 @@ fail_gate_watcher() {
 
   if(!flag("freeway_collapse")) {
     level thread kill_player_driver();
-  }
-  else {
+  } else {
     level thread monitor_backtrack_fail(getent("backtrack_fail_5", "targetname"));
   }
 
@@ -122,8 +117,7 @@ fail_gate_watcher() {
 
   if(!flag("drive_under_big_overpass")) {
     level thread kill_player_driver();
-  }
-  else {
+  } else {
     level thread monitor_backtrack_fail(getent("backtrack_fail_6", "targetname"));
   }
 
@@ -131,8 +125,7 @@ fail_gate_watcher() {
 
   if(!flag("f38_trigger")) {
     level thread kill_player_driver();
-  }
-  else {
+  } else {
     level thread monitor_backtrack_fail(getent("backtrack_fail_7", "targetname"));
   }
 
@@ -140,8 +133,7 @@ fail_gate_watcher() {
 
   if(!flag("la_1_vista_swap")) {
     level thread kill_player_driver();
-  }
-  else {
+  } else {
     level thread monitor_backtrack_fail(getent("backtrack_fail_8", "targetname"));
   }
 
@@ -149,8 +141,7 @@ fail_gate_watcher() {
 
   if(!flag("skyline")) {
     level thread kill_player_driver();
-  }
-  else {
+  } else {
     level thread monitor_backtrack_fail(getent("backtrack_fail_9", "targetname"));
   }
 }
@@ -193,8 +184,7 @@ dodge_player() {
 
   if(cointoss()) {
     self anim_generic(self, "dodge1");
-  }
-  else {
+  } else {
     self anim_generic(self, "dodge2");
   }
 }
@@ -389,8 +379,7 @@ collision_sounds() {
     if(isDefined(e_hit_ent)) {
       if(n_intensity > 20) {
         level.veh_player_cougar playSound("evt_auto_impact_heavy");
-      }
-      else {
+      } else {
         level.veh_player_cougar playSound("evt_auto_impact_light");
       }
     } else

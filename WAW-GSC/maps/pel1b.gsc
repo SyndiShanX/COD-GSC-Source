@@ -207,8 +207,7 @@ event1_player_ride_think() {
   for(i = 0; i < tags.size; i++) {
     if(issubstr(tags[i].script_noteworthy, "flametank")) {
       tags[i] linkto(level.flametank);
-    }
-    else if(issubstr(tags[i].script_noteworthy, "tank2")) {
+    } else if(issubstr(tags[i].script_noteworthy, "tank2")) {
       tags[i] linkto(level.tank3);
     }
   }
@@ -223,8 +222,7 @@ event1_player_ride_think() {
       players[i].lvt_linkspot_ref = spawn("script_origin", org);
       if(passenger_pos == 8) {
         players[i].lvt_linkspot_ref linkto(level.flametank, link_tag, (0, 0, 0), (0, 80, 0));
-      }
-      else {
+      } else {
         players[i].lvt_linkspot_ref linkto(level.flametank, link_tag, (0, 0, 0), (0, 280, 0));
       }
       players[i] DisableWeapons();
@@ -247,8 +245,7 @@ event1_player_ride_think() {
       players[i].lvt_linkspot_ref = spawn("script_origin", org);
       if(passenger_pos == 8) {
         players[i].lvt_linkspot_ref linkto(level.tank3, link_tag, (0, 0, 0), (0, 80, 0));
-      }
-      else {
+      } else {
         players[i].lvt_linkspot_ref linkto(level.tank3, link_tag, (0, 0, 0), (0, 280, 0));
       }
       players[i] DisableWeapons();
@@ -293,8 +290,7 @@ event1_player_tank_dismount(player, fall_tag) {
   hud.font = "default";
   if(level.console) {
     hud SetText(&"PEL1B_PLAYER_DISMOUNT");
-  }
-  else {
+  } else {
     hud SetText(&"SCRIPT_PLATFORM_PEL1B_PLAYER_DISMOUNT");
   }
   player thread event1_tank_explosion_effect();
@@ -613,8 +609,7 @@ event1_hutexplosion_remains() {
     size = randomintrange(0, 1);
     if(size == 0) {
       playFX(level._effect["fire_foliage_small"], fire_points[i].origin);
-    }
-    else {
+    } else {
       playFX(level._effect["fire_foliage_xsmall"], fire_points[i].origin);
     }
   }

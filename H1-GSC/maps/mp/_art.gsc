@@ -140,8 +140,7 @@ hud_init() {
 
     if(var_7 == var_3) {
       var_1[var_7].alpha = 1;
-    }
-    else {
+    } else {
       var_1[var_7].alpha = var_6;
     }
 
@@ -366,8 +365,7 @@ artfxprintlnfog() {
 
     if(isusinghdr()) {
       common_scripts\utility::fileprint_launcher("\tlevel._art_fog_setup = maps\\createart\\" + level.script + "_fog_hdr::main;");
-    }
-    else {
+    } else {
       common_scripts\utility::fileprint_launcher("\tlevel._art_fog_setup = maps\\createart\\" + level.script + "_fog::main;");
     }
 

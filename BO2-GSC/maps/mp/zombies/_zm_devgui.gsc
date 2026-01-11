@@ -88,8 +88,7 @@ devgui_add_weapon(weapon_name, upgrade_name, hint, cost, weaponvo, weaponvoresp,
 
   if(is_melee_weapon(weapon_name)) {
     devgui_add_weapon_and_attachments(weapon_name, "", weapon_name, "Melee:8");
-  }
-  else {
+  } else {
     devgui_add_weapon_and_attachments(weapon_name, "", weapon_name, "");
   }
 }
@@ -187,11 +186,9 @@ zombie_ability_devgui_think() {
     if(!isDefined(level.zombie_devgui_give_ability) || level.zombie_devgui_give_ability != cmd) {
       if(cmd == "_disable") {
         flag_set("sq_minigame_active");
-      }
-      else if(cmd == "_enable") {
+      } else if(cmd == "_enable") {
         flag_clear("sq_minigame_active");
-      }
-      else {
+      } else {
         level.zombie_devgui_give_ability = cmd;
         array_thread(get_players(), ::zombie_devgui_ability_give, level.zombie_devgui_give_ability);
       }
@@ -231,7 +228,7 @@ devgui_zombie_healthbar() {
 
       if(isDefined(zombies)) {
         foreach(zombie in zombies) {
-        zombie zombie_healthbar(lp.origin, 360000);
+          zombie zombie_healthbar(lp.origin, 360000);
         }
       }
     }
@@ -689,8 +686,7 @@ zombie_devgui_think() {
 
         break;
       case "chest":
-        if(isDefined(level.zombie_weapons[getdvar(#"_id_45ED7744")])) {
-        }
+        if(isDefined(level.zombie_weapons[getdvar(#"_id_45ED7744")])) {}
 
         break;
       case "quantum_bomb_random_result":
@@ -918,8 +914,7 @@ zombie_devgui_think() {
             [
               [level.custom_devgui]
             ](cmd);
-        } else {
-        }
+        } else {}
 
         break;
     }
@@ -944,8 +939,7 @@ devgui_all_spawn() {
 devgui_toggle_show_spawn_locations() {
   if(!isDefined(level.toggle_show_spawn_locations)) {
     level.toggle_show_spawn_locations = 1;
-  }
-  else {
+  } else {
     level.toggle_show_spawn_locations = !level.toggle_show_spawn_locations;
   }
 }
@@ -1116,8 +1110,7 @@ zombie_devgui_take_money() {
 
   if(self.score > 100) {
     self maps\mp\zombies\_zm_score::minus_to_player_score(int(self.score / 2));
-  }
-  else {
+  } else {
     self maps\mp\zombies\_zm_score::minus_to_player_score(self.score);
   }
 }
@@ -1127,8 +1120,7 @@ zombie_devgui_turn_player(index) {
 
   if(!isDefined(index) || index >= players.size) {
     player = players[0];
-  }
-  else {
+  } else {
     player = players[index];
   }
 
@@ -1152,8 +1144,7 @@ zombie_devgui_debug_pers(index) {
 
   if(!isDefined(index) || index >= players.size) {
     player = players[0];
-  }
-  else {
+  } else {
     player = players[index];
   }
 
@@ -1508,8 +1499,7 @@ zombie_devgui_invulnerable(playerindex, onoff) {
   } else if(players.size > playerindex) {
     if(onoff) {
       players[playerindex] enableinvulnerability();
-    }
-    else {
+    } else {
       players[playerindex] disableinvulnerability();
     }
   }
@@ -1651,8 +1641,7 @@ zombie_devgui_give_powerup(powerup_name, now, origin) {
 
   if(isDefined(origin)) {
     level thread maps\mp\zombies\_zm_powerups::powerup_drop(origin);
-  }
-  else if(!isDefined(now) || now) {
+  } else if(!isDefined(now) || now) {
     level thread maps\mp\zombies\_zm_powerups::powerup_drop(trace["position"]);
   }
 }
@@ -1707,9 +1696,7 @@ zombie_devgui_dog_round(num_dogs) {
   }
   if(!flag("dog_round")) {
     setdvar("force_dogs", num_dogs);
-  }
-  else {
-  }
+  } else {}
 
   zombie_devgui_goto_round(level.round_number + 1);
 }
@@ -1726,8 +1713,7 @@ zombie_devgui_dump_zombie_vars() {
   }
   if(level.zombie_vars.size > 0) {
     println("#### Zombie Variables ####");
-  }
-  else {
+  } else {
     return;
   }
 
@@ -1847,8 +1833,7 @@ zombie_devgui_take_weapons(give_fallback) {
 get_upgrade(weaponname) {
   if(isDefined(level.zombie_weapons[weaponname]) && isDefined(level.zombie_weapons[weaponname].upgrade_name)) {
     return maps\mp\zombies\_zm_weapons::get_upgrade_weapon(weaponname, 0);
-  }
-  else {
+  } else {
     return maps\mp\zombies\_zm_weapons::get_upgrade_weapon(weaponname, 1);
   }
 }
@@ -1873,8 +1858,7 @@ zombie_devgui_chest_never_move() {
 zombie_devgui_disable_kill_thread_toggle() {
   if(!is_true(level.disable_kill_thread)) {
     level.disable_kill_thread = 1;
-  }
-  else {
+  } else {
     level.disable_kill_thread = 0;
   }
 }
@@ -1882,8 +1866,7 @@ zombie_devgui_disable_kill_thread_toggle() {
 zombie_devgui_check_kill_thread_every_frame_toggle() {
   if(!is_true(level.check_kill_thread_every_frame)) {
     level.check_kill_thread_every_frame = 1;
-  }
-  else {
+  } else {
     level.check_kill_thread_every_frame = 0;
   }
 }
@@ -1891,8 +1874,7 @@ zombie_devgui_check_kill_thread_every_frame_toggle() {
 zombie_devgui_kill_thread_test_mode_toggle() {
   if(!is_true(level.kill_thread_test_mode)) {
     level.kill_thread_test_mode = 1;
-  }
-  else {
+  } else {
     level.kill_thread_test_mode = 0;
   }
 }

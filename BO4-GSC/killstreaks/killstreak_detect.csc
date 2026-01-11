@@ -10,7 +10,6 @@
 #include scripts\core_common\shoutcaster;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreak_bundles;
-
 #namespace killstreak_detect;
 
 init_shared() {
@@ -37,7 +36,7 @@ init_shared() {
 
     function_8ac48939(level.killstreakcorebundle);
     level.emp_killstreaks = [];
-    renderoverridebundle::function_f72f089c(#"hash_7d4b6b0d84ddafa3", #"friendly", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendlyequip_cp" : #"rob_sonar_set_friendlyequip_mp", &function_95f96f3e);
+    renderoverridebundle::function_f72f089c(#"hash_7d4b6b0d84ddafa3", # "friendly", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", &function_95f96f3e);
   }
 }
 
@@ -113,7 +112,7 @@ function_903bbed3(local_client_num, bundle) {
     return false;
   }
 
-  if(function_5778f82(local_client_num, #"specialty_showenemyvehicles") && !isplayer(self) && function_7181329a(self)) {
+  if(function_5778f82(local_client_num, # "specialty_showenemyvehicles") && !isplayer(self) && function_7181329a(self)) {
     return true;
   }
 
@@ -138,19 +137,19 @@ function_d859c344(local_client_num, newval) {
     show_friendly = bundle.("ksROBShowFriendly");
 
     if(isDefined(show_friendly) && show_friendly) {
-      self renderoverridebundle::function_c8d97b8e(local_client_num, #"friendly", bundle.kstype + "friendly");
+      self renderoverridebundle::function_c8d97b8e(local_client_num, # "friendly", bundle.kstype + "friendly");
     }
 
     show_enemy = bundle.("ksROBShowEnemy");
 
     if(isDefined(show_enemy) && show_enemy) {
-      self renderoverridebundle::function_c8d97b8e(local_client_num, #"enemy", bundle.kstype + "enemy");
+      self renderoverridebundle::function_c8d97b8e(local_client_num, # "enemy", bundle.kstype + "enemy");
     }
 
     return;
   }
 
-  self renderoverridebundle::function_c8d97b8e(local_client_num, #"friendly", #"hash_7d4b6b0d84ddafa3");
+  self renderoverridebundle::function_c8d97b8e(local_client_num, # "friendly", # "hash_7d4b6b0d84ddafa3");
 }
 
 vehicle_transition(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -162,7 +161,7 @@ vehicle_transition(local_client_num, oldval, newval, bnewent, binitialsnap, fiel
 }
 
 should_set_compass_icon(local_client_num) {
-  return self function_83973173() || function_5778f82(local_client_num, #"specialty_showenemyvehicles");
+  return self function_83973173() || function_5778f82(local_client_num, # "specialty_showenemyvehicles");
 }
 
 enemyscriptmovervehicle_changed(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

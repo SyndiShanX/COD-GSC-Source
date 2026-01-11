@@ -96,11 +96,11 @@ jet_init() {
   }
 
   foreach(var_5 in self.engine_fxs) {
-  var_5.origin = var_5.origin + var_0;
+    var_5.origin = var_5.origin + var_0;
   }
 
   foreach(var_8 in self.flash_fxs) {
-  var_8.origin = var_8.origin + var_0;
+    var_8.origin = var_8.origin + var_0;
   }
 
   var_10 = self.origin;
@@ -126,8 +126,7 @@ jet_timer() {
 
   if(getdvar("jet_flyby_timer") != "") {
     level.civilianjetflyby_timer = 5 + getdvarint("jet_flyby_timer");
-  }
-  else {
+  } else {
     level.civilianjetflyby_timer = (0.25 + randomfloatrange(0.3, 0.7)) * 60 * var_1;
   }
 
@@ -150,8 +149,7 @@ gettimeinterval() {
 
   if(isDefined(game["status"]) && game["status"] == "overtime") {
     return 1.0;
-  }
-  else {
+  } else {
     return getwatcheddvar("timelimit");
   }
 }
@@ -168,7 +166,7 @@ getwatcheddvar(var_0) {
 
 jet_flyby() {
   foreach(var_1 in self.jet_parts) {
-  var_1 show();
+    var_1 show();
   }
 
   var_3 = [];
@@ -193,7 +191,7 @@ jet_flyby() {
   wait 0.05;
 
   foreach(var_7 in var_3) {
-  playFXOnTag(self.jet_engine_fx, var_7, "tag_origin");
+    playFXOnTag(self.jet_engine_fx, var_7, "tag_origin");
   }
 
   foreach(var_11 in var_4) {
@@ -211,25 +209,25 @@ jet_flyby() {
   }
 
   foreach(var_1 in self.jet_parts) {
-  var_1 moveto(var_1.origin + self.jet_fly_vec, self.jet_flight_time);
+    var_1 moveto(var_1.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   foreach(var_7 in var_3) {
-  var_7 moveto(var_7.origin + self.jet_fly_vec, self.jet_flight_time);
+    var_7 moveto(var_7.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   foreach(var_11 in var_4) {
-  var_11 moveto(var_11.origin + self.jet_fly_vec, self.jet_flight_time);
+    var_11 moveto(var_11.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   wait(self.jet_flight_time + 1);
 
   foreach(var_7 in var_3) {
-  var_7 delete();
+    var_7 delete();
   }
 
   foreach(var_11 in var_4) {
-  var_11 delete();
+    var_11 delete();
   }
 
   self notify("flyby_done");
@@ -272,8 +270,7 @@ playsound_float(var_0, var_1, var_2) {
 
   if(isDefined(var_2) && var_2) {
     var_3 playsoundasmaster(var_0);
-  }
-  else {
+  } else {
     var_3 playSound(var_0);
   }
 
@@ -310,8 +307,7 @@ targetisinfront(var_0, var_1) {
 
   if(var_4 > 0) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -321,8 +317,7 @@ targetisclose(var_0, var_1) {
 
   if(var_2) {
     var_3 = 1;
-  }
-  else {
+  } else {
     var_3 = -1;
   }
 
@@ -333,8 +328,7 @@ targetisclose(var_0, var_1) {
 
   if(var_7 < 3000) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -419,8 +413,7 @@ vending_machine_damage_monitor(var_0) {
 
       if(!isDefined(self.vm_fx_loc)) {
         var_8 = self.vm_normal.origin + (37, -31, 52);
-      }
-      else {
+      } else {
         var_8 = self.vm_fx_loc;
       }
 
@@ -518,8 +511,7 @@ metal_detector() {
 
   if(!common_scripts\utility::issp()) {
     self.alarm_interval = 7;
-  }
-  else {
+  } else {
     self.alarm_interval = 2;
   }
 
@@ -567,8 +559,7 @@ annoyance_tracker() {
 
   if(self.tolerance) {
     self.tolerance--;
-  }
-  else {
+  } else {
     self.alarm_annoyance = 1;
   }
 
@@ -760,7 +751,7 @@ motion_light() {
 
             if(isDefined(var_2.lightrigs)) {
               foreach(var_11 in var_2.lightrigs) {
-              var_11 setModel("com_two_light_fixture_on");
+                var_11 setModel("com_two_light_fixture_on");
               }
             }
           }
@@ -784,7 +775,7 @@ motion_light_timeout(var_0, var_1) {
 
     if(isDefined(var_3.lightrigs)) {
       foreach(var_5 in var_3.lightrigs) {
-      var_5 setModel("com_two_light_fixture_off");
+        var_5 setModel("com_two_light_fixture_off");
       }
     }
   }
@@ -844,7 +835,7 @@ outdoor_motion_dlight_timeout(var_0, var_1, var_2) {
   wait(var_2);
 
   foreach(var_4 in var_1) {
-  var_4.lightent delete();
+    var_4.lightent delete();
   }
 
   var_0 playSound("switch_auto_lights_off");
@@ -908,8 +899,7 @@ trigger_door() {
 dooropen(var_0, var_1) {
   if(var_1) {
     self rotateto((0, self.baseyaw + 90, 1), var_0, 0.1, 0.75);
-  }
-  else {
+  } else {
     self rotateto((0, self.baseyaw - 90, 1), var_0, 0.1, 0.75);
   }
 
@@ -939,7 +929,7 @@ use_toggle() {
   self.lightson = 1;
 
   foreach(var_2 in var_0) {
-  var_2 setlightintensity(1.5 * self.lightson);
+    var_2 setlightintensity(1.5 * self.lightson);
   }
 
   for(;;) {
@@ -948,7 +938,7 @@ use_toggle() {
 
     if(self.lightson) {
       foreach(var_2 in var_0) {
-      var_2 setlightintensity(1.5);
+        var_2 setlightintensity(1.5);
       }
 
       self playSound("switch_auto_lights_on");
@@ -956,7 +946,7 @@ use_toggle() {
     }
 
     foreach(var_2 in var_0) {
-    var_2 setlightintensity(0);
+      var_2 setlightintensity(0);
     }
 
     self playSound("switch_auto_lights_off");
@@ -1147,21 +1137,18 @@ fan_blade_rotate(var_0) {
   if(var_0 == "slow") {
     if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lockedspeed") {
       var_1 = 180;
-    }
-    else {
+    } else {
       var_1 = randomfloatrange(100 * var_3, 360 * var_3);
     }
   } else if(var_0 == "fast")
     var_1 = randomfloatrange(720 * var_3, 1000 * var_3);
   else if(var_0 == "veryslow") {
     var_1 = randomfloatrange(1 * var_3, 2 * var_3);
-  }
-  else {}
+  } else {}
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lockedspeed") {
     wait 0;
-  }
-  else {
+  } else {
     wait(randomfloatrange(0, 1));
   }
 
@@ -1179,14 +1166,11 @@ fan_blade_rotate(var_0) {
 
     if(var_6 > 0.9) {
       self rotatevelocity((var_1, 0, 0), var_2);
-    }
-    else if(var_7 > 0.9) {
+    } else if(var_7 > 0.9) {
       self rotatevelocity((var_1, 0, 0), var_2);
-    }
-    else if(var_8 > 0.9) {
+    } else if(var_8 > 0.9) {
       self rotatevelocity((0, var_1, 0), var_2);
-    }
-    else {
+    } else {
       self rotatevelocity((0, var_1, 0), var_2);
     }
 
@@ -1223,8 +1207,7 @@ playertouchtriggerthink(var_0, var_1, var_2) {
 
   if(!common_scripts\utility::issp()) {
     var_3 = self.guid;
-  }
-  else {
+  } else {
     var_3 = "player" + gettime();
   }
 
@@ -1452,8 +1435,7 @@ sliding_door() {
 
     if(var_7 > 0) {
       open_all_doors(var_0);
-    }
-    else {
+    } else {
       var_11 = 1;
       thread close_all_doors(var_0, var_11);
     }

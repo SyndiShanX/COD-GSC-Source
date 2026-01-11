@@ -33,7 +33,7 @@ init() {
   common_scripts\utility::array_thread(var_0, ::remote_turret_terminal_think);
 
   foreach(var_2 in level.players) {
-  var_2 maps\_utility::ent_flag_init("on_remote_turret");
+    var_2 maps\_utility::ent_flag_init("on_remote_turret");
   }
 
   common_scripts\utility::flag_init("_remoteturret_manual_getoff");
@@ -236,8 +236,7 @@ remote_turret_next(var_0) {
 turret_activate(var_0, var_1) {
   if(isDefined(level._remoteturret_loc_table) && isDefined(var_0.script_startname) && isDefined(level._remoteturret_loc_table[var_0.script_startname])) {
     text_titlesettext(level._remoteturret_loc_table[var_0.script_startname]);
-  }
-  else {
+  } else {
     text_titlesettext("CAMERA: " + (var_1.lastturretindex + 1));
   }
 
@@ -334,8 +333,7 @@ huditemshide() {
 huditemsshow() {
   if(level.players.size > 0) {
     setdvar("ui_remotemissile_playernum", 0);
-  }
-  else {
+  } else {
     setsaveddvar("compass", "1");
     setsaveddvar("ammoCounterHide", "0");
     setsaveddvar("actionSlotsHide", "0");
@@ -495,7 +493,7 @@ create_hud_lower_right(var_0) {
   var_3 = create_hud_section(var_1, 510, 360, "right", var_0);
 
   foreach(var_6, var_5 in var_3) {
-  var_2[var_6] = var_5;
+    var_2[var_6] = var_5;
   }
 
   return var_2;
@@ -636,7 +634,7 @@ uav_disable_view(var_0) {
     foreach(var_2 in self.uav_huds) {
       if(isarray(var_2)) {
         foreach(var_4 in var_2) {
-        uav_destroy_hud(var_4, var_0);
+          uav_destroy_hud(var_4, var_0);
         }
 
         var_2 = undefined;

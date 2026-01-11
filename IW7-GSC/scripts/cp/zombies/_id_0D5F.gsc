@@ -25,9 +25,7 @@ func_EC19(param_00, param_01, param_02, param_03) {
 }
 
 critical_factor(param_00, param_01) {
-  var_02 = [
-    [param_00]
-  ](param_01);
+  var_02 = [[param_00]](param_01);
   var_02 = clamp(var_02, 0, 100);
   return var_02;
 }

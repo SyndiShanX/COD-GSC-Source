@@ -29,8 +29,7 @@ crouchmovementsetspeed() {
 
   if(self.stancecrouchmovement == "crouch") {
     var_0 = self.crouch_speed_scalar;
-  }
-  else if(maps\mp\_utility::_hasperk("specialty_lightweight")) {
+  } else if(maps\mp\_utility::_hasperk("specialty_lightweight")) {
     var_0 = maps\mp\_utility::lightweightscalar();
   }
 
@@ -195,8 +194,7 @@ setmarksman(var_0) {
 
   if(!isDefined(var_0)) {
     var_0 = 10;
-  }
-  else {
+  } else {
     var_0 = int(var_0) * 2;
   }
 
@@ -216,8 +214,7 @@ setstunresistance(var_0) {
 
   if(!isDefined(var_0)) {
     self.stunscaler = 0.5;
-  }
-  else {
+  } else {
     self.stunscaler = int(var_0) / 10;
   }
 }
@@ -691,8 +688,7 @@ unsetjuiced(var_0) {
     if(maps\mp\_utility::isjuggernaut()) {
       if(isDefined(self.juggmovespeedscaler)) {
         self.movespeedscaler = self.juggmovespeedscaler;
-      }
-      else {
+      } else {
         self.movespeedscaler = 0.7;
       }
     } else {
@@ -766,8 +762,7 @@ setlightarmor(var_0) {
 
   if(isDefined(var_0)) {
     self.maxlightarmorhp = var_0;
-  }
-  else {
+  } else {
     self.maxlightarmorhp = 150;
   }
 

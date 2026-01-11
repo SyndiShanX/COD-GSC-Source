@@ -134,8 +134,7 @@ init() {
     level.heli_pilot_mesh = GetEnt("heli_pilot_mesh", "targetname");
     if(!isDefined(level.heli_pilot_mesh)) {
       PrintLn("heli_pilot_mesh doesn't exist in this level: " + level.script);
-    }
-    else {
+    } else {
       level.heli_pilot_mesh.origin += getHeliPilotMeshOffset();
     }
   }
@@ -624,8 +623,7 @@ watchAirdropUse() {
     if(GetTime() >= self.odin_airdropUseTime) {
       if(level.teamBased) {
         leaderDialog(weaponStruct.voAirdrop, self.team);
-      }
-      else {
+      } else {
         owner leaderDialogOnPlayer(weaponStruct.voAirdrop);
       }
 
@@ -670,8 +668,7 @@ watchSmokeUse() {
     if(GetTime() >= self.odin_smokeUseTime) {
       if(level.teamBased) {
         leaderDialog(weaponStruct.voSmoke, self.team);
-      }
-      else {
+      } else {
         owner leaderDialogOnPlayer(weaponStruct.voSmoke);
       }
 
@@ -1044,8 +1041,7 @@ doMarkingFlash(pos) {
     }
     if(dist <= radius_min_sq) {
       percent_distance = 1.0;
-    }
-    else {
+    } else {
       percent_distance = 1.0 - (dist - radius_min_sq) / (radius_max_sq - radius_min_sq);
     }
 
@@ -1063,8 +1059,7 @@ doMarkingFlash(pos) {
     if(!enemyNotAffectedByOdinOutline(player)) {
       if(level.teamBased) {
         id = outlineEnableForTeam(player, "orange", self.team, false, "killstreak");
-      }
-      else {
+      } else {
         id = outlineEnableForPlayer(player, "orange", self.owner, false, "killstreak");
       }
       self thread removeOutline(id, player, 3.0);
@@ -1075,15 +1070,13 @@ doMarkingFlash(pos) {
   if(num_marked == 1) {
     if(level.teamBased) {
       leaderDialog(weaponStruct.voMarkedSingle, self.team);
-    }
-    else {
+    } else {
       attacker leaderDialogOnPlayer(weaponStruct.voMarkedSingle);
     }
   } else if(num_marked > 1) {
     if(level.teamBased) {
       leaderDialog(weaponStruct.voMarkedMulti, self.team);
-    }
-    else {
+    } else {
       attacker leaderDialogOnPlayer(weaponStruct.voMarkedMulti);
     }
   }
@@ -1101,8 +1094,7 @@ doMarkingFlash(pos) {
 applyOutline(player) {
   if(level.teamBased && player.team == self.team) {
     return;
-  }
-  else if(!level.teamBased && player == self.owner) {
+  } else if(!level.teamBased && player == self.owner) {
     return;
   }
   if(enemyNotAffectedByOdinOutline(player)) {
@@ -1125,8 +1117,7 @@ removeOutline(id, ent, time_out) {
   wait_array = ["leave", "death"];
   if(isDefined(time_out)) {
     self waittill_any_in_array_or_timeout_no_endon_death(wait_array, time_out);
-  }
-  else {
+  } else {
     self waittill_any_in_array_return_no_endon_death(wait_array);
   }
 
@@ -1171,8 +1162,7 @@ odin_dialog_killed_player(victim) {
 
     if(self.enemiesKilledInTimeWindow > 1) {
       self.owner leaderDialogOnPlayer(config.voKillMulti);
-    }
-    else {
+    } else {
       self.owner leaderDialogOnPlayer(config.voKillSingle);
     }
 

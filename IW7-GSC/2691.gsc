@@ -103,7 +103,7 @@ func_18A9() {
   var_00 = 0;
 
   foreach(var_02 in self.func_115D) {
-  var_00 = var_00 + var_02;
+    var_00 = var_00 + var_02;
   }
 
   return var_00 / (func_7D9C() * 1.0);
@@ -115,8 +115,7 @@ func_181E() {
 
   if(var_01 > 0) {
     var_02 = var_00 / (var_01 / 60) + 34;
-  }
-  else {
+  } else {
     var_02 = func_7D9D();
   }
 
@@ -185,8 +184,7 @@ func_18AE(var_00) {
   if(var_00 func_1898()) {
     if(var_00 func_1893()) {
       thread scripts\mp\hud_message::showsplash("adrenaline_mood_killer", 0);
-    }
-    else {
+    } else {
       thread scripts\mp\hud_message::showsplash("adrenaline_iced", 0);
     }
   }

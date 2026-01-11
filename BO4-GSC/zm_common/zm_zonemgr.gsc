@@ -16,7 +16,6 @@
 #include scripts\zm_common\zm_audio;
 #include scripts\zm_common\zm_customgame;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_zonemgr;
 
 autoexec __init__system__() {
@@ -227,9 +226,7 @@ any_player_in_zone(zone_name) {
   if(zm_utility::function_21f4ac36()) {
     foreach(player in getplayers()) {
       if(isDefined(level.var_e5a996e8)) {
-        node = [
-          [level.var_e5a996e8]
-        ](player, zone);
+        node = [[level.var_e5a996e8]](player, zone);
       } else {
         node = function_52c1730(player.origin, zone.nodes, 500);
       }
@@ -397,7 +394,7 @@ zone_init(zone_name, zone_tag) {
 
   assert(!var_a44786e4);
 
-    level.zone_nodes = arraycombine(level.zone_nodes, zone.nodes, 0, 0);
+  level.zone_nodes = arraycombine(level.zone_nodes, zone.nodes, 0, 0);
   var_34065104 = array("inner_zigzag_radius", "outer_zigzag_radius", "zigzag_distance_min", "zigzag_distance_max", "zigzag_activation_distance", "zigzag_enabled");
 
   foreach(node in zone.nodes) {
@@ -424,8 +421,8 @@ zone_init(zone_name, zone_tag) {
   zone.total_spawn_count = 0;
   zone.round_spawn_count = 0;
 
-    zone.a_loc_types = [];
-  zone.a_loc_types[#"zombie_location"] = [];
+  zone.a_loc_types = [];
+  zone.a_loc_types[# "zombie_location"] = [];
   zone.zbarriers = [];
   zone.magic_boxes = [];
 
@@ -453,19 +450,19 @@ zone_init(zone_name, zone_tag) {
 
       foreach(token in tokens) {
         switch (token) {
-          case #"custom_spawner_entry":
-          case #"spawn_location":
-          case #"riser_location":
-          case #"faller_location":
+          case # "custom_spawner_entry":
+          case # "spawn_location":
+          case # "riser_location":
+          case # "faller_location":
             spot.spawned_timestamp = gettime();
 
-            if(!isDefined(zone.a_loc_types[#"zombie_location"])) {
-              zone.a_loc_types[#"zombie_location"] = [];
-            } else if(!isarray(zone.a_loc_types[#"zombie_location"])) {
-              zone.a_loc_types[#"zombie_location"] = array(zone.a_loc_types[#"zombie_location"]);
+            if(!isDefined(zone.a_loc_types[# "zombie_location"])) {
+              zone.a_loc_types[# "zombie_location"] = [];
+            } else if(!isarray(zone.a_loc_types[# "zombie_location"])) {
+              zone.a_loc_types[# "zombie_location"] = array(zone.a_loc_types[# "zombie_location"]);
             }
 
-            zone.a_loc_types[#"zombie_location"][zone.a_loc_types[#"zombie_location"].size] = spot;
+            zone.a_loc_types[# "zombie_location"][zone.a_loc_types[# "zombie_location"].size] = spot;
             break;
           default:
             if(!isDefined(zone.a_loc_types[token])) {
@@ -491,7 +488,7 @@ zone_init(zone_name, zone_tag) {
             nodes = getnodearray(barricades[k].target, "targetname");
 
             for(j = 0; j < nodes.size; j++) {
-              if(isDefined(nodes[j].type) && nodes[j].type == #"begin") {
+              if(isDefined(nodes[j].type) && nodes[j].type == # "begin") {
                 spot.target = nodes[j].targetname;
               }
             }
@@ -538,7 +535,7 @@ reinit_zone_spawners() {
   for(i = 0; i < level.zones.size; i++) {
     zone = level.zones[zkeys[i]];
     zone.a_loc_types = [];
-    zone.a_loc_types[#"zombie_location"] = [];
+    zone.a_loc_types[# "zombie_location"] = [];
 
     if(zm_utility::function_21f4ac36() && zone.nodes.size > 0) {
       zone_target = zone.nodes[0].target;
@@ -562,18 +559,18 @@ reinit_zone_spawners() {
 
         foreach(token in tokens) {
           switch (token) {
-            case #"custom_spawner_entry":
-            case #"spawn_location":
-            case #"riser_location":
-            case #"spawner_location":
-            case #"faller_location":
-              if(!isDefined(zone.a_loc_types[#"zombie_location"])) {
-                zone.a_loc_types[#"zombie_location"] = [];
-              } else if(!isarray(zone.a_loc_types[#"zombie_location"])) {
-                zone.a_loc_types[#"zombie_location"] = array(zone.a_loc_types[#"zombie_location"]);
+            case # "custom_spawner_entry":
+            case # "spawn_location":
+            case # "riser_location":
+            case # "spawner_location":
+            case # "faller_location":
+              if(!isDefined(zone.a_loc_types[# "zombie_location"])) {
+                zone.a_loc_types[# "zombie_location"] = [];
+              } else if(!isarray(zone.a_loc_types[# "zombie_location"])) {
+                zone.a_loc_types[# "zombie_location"] = array(zone.a_loc_types[# "zombie_location"]);
               }
 
-              zone.a_loc_types[#"zombie_location"][zone.a_loc_types[#"zombie_location"].size] = spot;
+              zone.a_loc_types[# "zombie_location"][zone.a_loc_types[# "zombie_location"].size] = spot;
               break;
             default:
               if(!isDefined(zone.a_loc_types[token])) {
@@ -829,7 +826,7 @@ zone_flag_wait(flag_name) {
       check_flag = level.zone_flags[keys[i]];
 
       for(k = 0; k < check_flag.size; k++) {
-        if(check_flag[k] != #"power_on") {
+        if(check_flag[k] != # "power_on") {
           if(!level flag::get(check_flag[k])) {
             level flag::set(check_flag[k]);
             zone_flag_wait_throttle();
@@ -903,140 +900,136 @@ manage_zones(initial_zone) {
 
   level thread function_8a9003ae();
 
-    while(getdvarint(#"noclip", 0) == 0 || getdvarint(#"notarget", 0) != 0) {
-      wait_zone_flags_updating();
+  while(getdvarint(#"noclip", 0) == 0 || getdvarint(#"notarget", 0) != 0) {
+    wait_zone_flags_updating();
 
-      for(z = 0; z < zkeys.size; z++) {
-        level.newzones[zkeys[z]].is_active = 0;
-        level.newzones[zkeys[z]].is_occupied = 0;
-      }
-
-      a_zone_is_active = 0;
-      a_zone_is_spawning_allowed = 0;
-      level.zone_scanning_active = 1;
-
-      for(z = 0; z < zkeys.size; z++) {
-        zone = level.zones[zkeys[z]];
-        newzone = level.newzones[zkeys[z]];
-
-        if(!zone.is_enabled) {
-          continue;
-        }
-
-        if(isDefined(level.var_cc984236)) {
-          newzone.is_occupied = [
-            [level.var_cc984236]
-          ](zkeys[z]);
-        } else {
-          newzone.is_occupied = any_player_in_zone(zkeys[z]);
-        }
-
-        if(newzone.is_occupied) {
-          newzone.is_active = 1;
-          a_zone_is_active = 1;
-
-          if(zone.is_spawning_allowed) {
-            a_zone_is_spawning_allowed = 1;
-          }
-
-          if(!isDefined(oldzone) || oldzone != newzone) {
-            level notify(#"newzoneactive", {
-              #zone: zkeys[z]
-            });
-            oldzone = newzone;
-          }
-
-          azkeys = getarraykeys(zone.adjacent_zones);
-
-          for(az = 0; az < zone.adjacent_zones.size; az++) {
-            if(zone.adjacent_zones[azkeys[az]].is_connected && level.zones[azkeys[az]].is_enabled) {
-              level.newzones[azkeys[az]].is_active = 1;
-
-              if(level.zones[azkeys[az]].is_spawning_allowed) {
-                a_zone_is_spawning_allowed = 1;
-              }
-            }
-          }
-        }
-
-        zone_choke++;
-
-        if(zone_choke >= 2) {
-          zone_choke = 0;
-          waitframe(1);
-          wait_zone_flags_updating();
-        }
-      }
-
-      level.zone_scanning_active = 0;
-
-      for(z = 0; z < zkeys.size; z++) {
-        level.zones[zkeys[z]].is_active = level.newzones[zkeys[z]].is_active;
-        level.zones[zkeys[z]].is_occupied = level.newzones[zkeys[z]].is_occupied;
-      }
-
-      if(!a_zone_is_active || !a_zone_is_spawning_allowed) {
-        var_8cd03217 = 0;
-
-        foreach(e_player in level.players) {
-          if(e_player.sessionstate != "spectator") {
-            var_bdf9e3c2 = e_player zm_utility::get_current_zone();
-
-            if(!isDefined(var_bdf9e3c2)) {
-              continue;
-            }
-
-            s_zone = level.zones[var_bdf9e3c2];
-            s_zone.is_active = 1;
-            s_zone.is_occupied = 1;
-            s_zone.is_spawning_allowed = 1;
-
-            foreach(str_zone_name, var_c714ccfe in s_zone.adjacent_zones) {
-              if(var_c714ccfe.is_connected && level.zones[str_zone_name].is_enabled) {
-                level.zones[str_zone_name].is_active = 1;
-                level.zones[str_zone_name].is_spawning_allowed = 1;
-              }
-            }
-
-            var_8cd03217 = 1;
-            break;
-          }
-        }
-
-        if(!var_8cd03217) {
-          if(isarray(initial_zone)) {
-            level.zones[initial_zone[0]].is_active = 1;
-            level.zones[initial_zone[0]].is_occupied = 1;
-            level.zones[initial_zone[0]].is_spawning_allowed = 1;
-          } else {
-            level.zones[initial_zone].is_active = 1;
-            level.zones[initial_zone].is_occupied = 1;
-            level.zones[initial_zone].is_spawning_allowed = 1;
-          }
-        }
-
-        level.player_zone_found = 0;
-      } else {
-        level.player_zone_found = 1;
-      }
-
-      waitframe(1);
-      [
-        [level.create_spawner_list_func]
-      ](zkeys);
-
-      debug_show_spawn_locations();
-
-        level.active_zone_names = get_active_zone_names();
-      wait 1;
+    for(z = 0; z < zkeys.size; z++) {
+      level.newzones[zkeys[z]].is_active = 0;
+      level.newzones[zkeys[z]].is_occupied = 0;
     }
+
+    a_zone_is_active = 0;
+    a_zone_is_spawning_allowed = 0;
+    level.zone_scanning_active = 1;
+
+    for(z = 0; z < zkeys.size; z++) {
+      zone = level.zones[zkeys[z]];
+      newzone = level.newzones[zkeys[z]];
+
+      if(!zone.is_enabled) {
+        continue;
+      }
+
+      if(isDefined(level.var_cc984236)) {
+        newzone.is_occupied = [[level.var_cc984236]](zkeys[z]);
+      } else {
+        newzone.is_occupied = any_player_in_zone(zkeys[z]);
+      }
+
+      if(newzone.is_occupied) {
+        newzone.is_active = 1;
+        a_zone_is_active = 1;
+
+        if(zone.is_spawning_allowed) {
+          a_zone_is_spawning_allowed = 1;
+        }
+
+        if(!isDefined(oldzone) || oldzone != newzone) {
+          level notify(#"newzoneactive", {
+            #zone: zkeys[z]
+          });
+          oldzone = newzone;
+        }
+
+        azkeys = getarraykeys(zone.adjacent_zones);
+
+        for(az = 0; az < zone.adjacent_zones.size; az++) {
+          if(zone.adjacent_zones[azkeys[az]].is_connected && level.zones[azkeys[az]].is_enabled) {
+            level.newzones[azkeys[az]].is_active = 1;
+
+            if(level.zones[azkeys[az]].is_spawning_allowed) {
+              a_zone_is_spawning_allowed = 1;
+            }
+          }
+        }
+      }
+
+      zone_choke++;
+
+      if(zone_choke >= 2) {
+        zone_choke = 0;
+        waitframe(1);
+        wait_zone_flags_updating();
+      }
+    }
+
+    level.zone_scanning_active = 0;
+
+    for(z = 0; z < zkeys.size; z++) {
+      level.zones[zkeys[z]].is_active = level.newzones[zkeys[z]].is_active;
+      level.zones[zkeys[z]].is_occupied = level.newzones[zkeys[z]].is_occupied;
+    }
+
+    if(!a_zone_is_active || !a_zone_is_spawning_allowed) {
+      var_8cd03217 = 0;
+
+      foreach(e_player in level.players) {
+        if(e_player.sessionstate != "spectator") {
+          var_bdf9e3c2 = e_player zm_utility::get_current_zone();
+
+          if(!isDefined(var_bdf9e3c2)) {
+            continue;
+          }
+
+          s_zone = level.zones[var_bdf9e3c2];
+          s_zone.is_active = 1;
+          s_zone.is_occupied = 1;
+          s_zone.is_spawning_allowed = 1;
+
+          foreach(str_zone_name, var_c714ccfe in s_zone.adjacent_zones) {
+            if(var_c714ccfe.is_connected && level.zones[str_zone_name].is_enabled) {
+              level.zones[str_zone_name].is_active = 1;
+              level.zones[str_zone_name].is_spawning_allowed = 1;
+            }
+          }
+
+          var_8cd03217 = 1;
+          break;
+        }
+      }
+
+      if(!var_8cd03217) {
+        if(isarray(initial_zone)) {
+          level.zones[initial_zone[0]].is_active = 1;
+          level.zones[initial_zone[0]].is_occupied = 1;
+          level.zones[initial_zone[0]].is_spawning_allowed = 1;
+        } else {
+          level.zones[initial_zone].is_active = 1;
+          level.zones[initial_zone].is_occupied = 1;
+          level.zones[initial_zone].is_spawning_allowed = 1;
+        }
+      }
+
+      level.player_zone_found = 0;
+    } else {
+      level.player_zone_found = 1;
+    }
+
+    waitframe(1);
+    [[level.create_spawner_list_func]](zkeys);
+
+    debug_show_spawn_locations();
+
+    level.active_zone_names = get_active_zone_names();
+    wait 1;
+  }
 }
 
 debug_show_spawn_locations() {
   if(isDefined(level.toggle_show_spawn_locations) && level.toggle_show_spawn_locations) {
     host_player = util::gethostplayer();
 
-    foreach(location in level.zm_loc_types[#"zombie_location"]) {
+    foreach(location in level.zm_loc_types[# "zombie_location"]) {
       distance = distance(location.origin, host_player.origin);
       color = (0, 1, 1);
 
@@ -1049,65 +1042,65 @@ debug_show_spawn_locations() {
   }
 }
 
-  function create_spawner_list(zkeys) {
-    foreach(str_index, a_locs in level.zm_loc_types) {
-      level.zm_loc_types[str_index] = [];
-    }
+function create_spawner_list(zkeys) {
+  foreach(str_index, a_locs in level.zm_loc_types) {
+    level.zm_loc_types[str_index] = [];
+  }
 
-    for(z = 0; z < zkeys.size; z++) {
-      zone = level.zones[zkeys[z]];
+  for(z = 0; z < zkeys.size; z++) {
+    zone = level.zones[zkeys[z]];
 
-      if(zone.is_enabled && zone.is_active && zone.is_spawning_allowed) {
-        foreach(a_locs in zone.a_loc_types) {
-          foreach(loc in a_locs) {
-            if(isDefined(loc.is_enabled) && loc.is_enabled == 0) {
-              continue;
-            }
+    if(zone.is_enabled && zone.is_active && zone.is_spawning_allowed) {
+      foreach(a_locs in zone.a_loc_types) {
+        foreach(loc in a_locs) {
+          if(isDefined(loc.is_enabled) && loc.is_enabled == 0) {
+            continue;
+          }
 
-            if(!isDefined(loc.tokens)) {
-              loc.tokens = strtok(loc.script_noteworthy, " ");
-            }
+          if(!isDefined(loc.tokens)) {
+            loc.tokens = strtok(loc.script_noteworthy, " ");
+          }
 
-            foreach(token in loc.tokens) {
-              switch (token) {
-                case #"custom_spawner_entry":
-                case #"spawn_location":
-                case #"riser_location":
-                case #"faller_location":
-                  if(!isDefined(level.zm_loc_types[#"zombie_location"])) {
-                    level.zm_loc_types[#"zombie_location"] = [];
-                  } else if(!isarray(level.zm_loc_types[#"zombie_location"])) {
-                    level.zm_loc_types[#"zombie_location"] = array(level.zm_loc_types[#"zombie_location"]);
-                  }
+          foreach(token in loc.tokens) {
+            switch (token) {
+              case # "custom_spawner_entry":
+              case # "spawn_location":
+              case # "riser_location":
+              case # "faller_location":
+                if(!isDefined(level.zm_loc_types[# "zombie_location"])) {
+                  level.zm_loc_types[# "zombie_location"] = [];
+                } else if(!isarray(level.zm_loc_types[# "zombie_location"])) {
+                  level.zm_loc_types[# "zombie_location"] = array(level.zm_loc_types[# "zombie_location"]);
+                }
 
-                  if(!isinarray(level.zm_loc_types[#"zombie_location"], loc)) {
-                    level.zm_loc_types[#"zombie_location"][level.zm_loc_types[#"zombie_location"].size] = loc;
-                  }
+                if(!isinarray(level.zm_loc_types[# "zombie_location"], loc)) {
+                  level.zm_loc_types[# "zombie_location"][level.zm_loc_types[# "zombie_location"].size] = loc;
+                }
 
-                  break;
-                default:
-                  if(!isDefined(level.zm_loc_types[token])) {
-                    level.zm_loc_types[token] = [];
-                  }
+                break;
+              default:
+                if(!isDefined(level.zm_loc_types[token])) {
+                  level.zm_loc_types[token] = [];
+                }
 
-                  if(!isDefined(level.zm_loc_types[token])) {
-                    level.zm_loc_types[token] = [];
-                  } else if(!isarray(level.zm_loc_types[token])) {
-                    level.zm_loc_types[token] = array(level.zm_loc_types[token]);
-                  }
+                if(!isDefined(level.zm_loc_types[token])) {
+                  level.zm_loc_types[token] = [];
+                } else if(!isarray(level.zm_loc_types[token])) {
+                  level.zm_loc_types[token] = array(level.zm_loc_types[token]);
+                }
 
-                  if(!isinarray(level.zm_loc_types[token], loc)) {
-                    level.zm_loc_types[token][level.zm_loc_types[token].size] = loc;
-                  }
+                if(!isinarray(level.zm_loc_types[token], loc)) {
+                  level.zm_loc_types[token][level.zm_loc_types[token].size] = loc;
+                }
 
-                  break;
-              }
+                break;
             }
           }
         }
       }
     }
   }
+}
 
 get_active_zone_names() {
   ret_list = [];
@@ -1211,11 +1204,11 @@ _debug_zones() {
           var_28686bb1 += "| ";
         }
 
-        var_28686bb1 += zone.a_loc_types[#"zombie_location"].size + "<dev string:x2fc>" + zone.total_spawn_count + "<dev string:x2fc>" + zone.round_spawn_count;
+        var_28686bb1 += zone.a_loc_types[# "zombie_location"].size + "<dev string:x2fc>" + zone.total_spawn_count + "<dev string:x2fc>" + zone.round_spawn_count;
         v_pos = 100 + 18 * n;
         debug2dtext((400, v_pos, 0), var_28686bb1, (1, 1, 0), undefined, (0, 0, 0), 0.75, 0.85, 2);
 
-          n++;
+        n++;
       }
     }
 
@@ -1232,83 +1225,83 @@ private function_74a20786() {
   adddebugcommand("<dev string:x451>");
 }
 
-  function private function_8a9003ae() {
-    while(true) {
-      waitframe(1);
-      enabled = getdvarint(#"hash_4d21e2fbe27b37e6", 0);
+function private function_8a9003ae() {
+  while(true) {
+    waitframe(1);
+    enabled = getdvarint(#"hash_4d21e2fbe27b37e6", 0);
 
-      if(!enabled || !isDefined(level.zones)) {
+    if(!enabled || !isDefined(level.zones)) {
+      continue;
+    }
+
+    players = getplayers();
+
+    if(!isDefined(players) || players.size == 0) {
+      continue;
+    }
+
+    player = players[0];
+
+    if(!isDefined(player.zone_name) || !isDefined(level.zones[player.zone_name]) || !isDefined(level.zones[player.zone_name].a_loc_types)) {
+      continue;
+    }
+
+    var_5380428d = getarraykeys(level.zones[player.zone_name].a_loc_types);
+    var_d580b0ec = getdvarint(#"hash_4f0caa9b1c47489c", 0);
+    var_2451ad27 = math::clamp(getdvarint(#"hash_4f0caa9b1c47489c", 0), 0, var_5380428d.size - 1);
+
+    var_4b0b7fff = function_9e72a96(var_5380428d[var_2451ad27]);
+
+    foreach(zone in level.zones) {
+      if(!isDefined(zone.a_loc_types) || !isDefined(zone.a_loc_types[var_4b0b7fff]) || zone.a_loc_types[var_4b0b7fff].size == 0) {
         continue;
       }
 
-      players = getplayers();
+      var_89bea209 = getdvarint(#"hash_5731d10a0ca1d5c", 0);
 
-      if(!isDefined(players) || players.size == 0) {
+      if(!var_89bea209 && !zone.is_active) {
         continue;
       }
 
-      player = players[0];
+      sphere_color = (1, 0, 0);
+      line_color = (1, 0, 0);
+      zone_text = zone.name + "\n" + var_4b0b7fff;
 
-      if(!isDefined(player.zone_name) || !isDefined(level.zones[player.zone_name]) || !isDefined(level.zones[player.zone_name].a_loc_types)) {
-        continue;
-      }
+      if(isDefined(player.zone_name)) {
+        var_a4808c85 = getarraykeys(zone.adjacent_zones);
 
-      var_5380428d = getarraykeys(level.zones[player.zone_name].a_loc_types);
-      var_d580b0ec = getdvarint(#"hash_4f0caa9b1c47489c", 0);
-      var_2451ad27 = math::clamp(getdvarint(#"hash_4f0caa9b1c47489c", 0), 0, var_5380428d.size - 1);
-
-      var_4b0b7fff = function_9e72a96(var_5380428d[var_2451ad27]);
-
-        foreach(zone in level.zones) {
-          if(!isDefined(zone.a_loc_types) || !isDefined(zone.a_loc_types[var_4b0b7fff]) || zone.a_loc_types[var_4b0b7fff].size == 0) {
-            continue;
-          }
-
-          var_89bea209 = getdvarint(#"hash_5731d10a0ca1d5c", 0);
-
-          if(!var_89bea209 && !zone.is_active) {
-            continue;
-          }
-
-          sphere_color = (1, 0, 0);
-          line_color = (1, 0, 0);
-          zone_text = zone.name + "\n" + var_4b0b7fff;
-
-          if(isDefined(player.zone_name)) {
-            var_a4808c85 = getarraykeys(zone.adjacent_zones);
-
-            if(player.zone_name == zone.name) {
-              sphere_color = (0, 1, 0);
-              line_color = (1, 1, 1);
-            } else if(isinarray(var_a4808c85, hash(player.zone_name))) {
-              sphere_color = (1, 1, 0);
-              line_color = (1, 1, 1);
-            }
-          }
-
-          if(zone.is_enabled) {
-            var_db6c400c = (0, 0, 0);
-
-            for(index = 0; index < zone.a_loc_types[var_4b0b7fff].size; index++) {
-              var_db6c400c += zone.a_loc_types[var_4b0b7fff][index].origin;
-            }
-
-            var_db6c400c /= zone.a_loc_types[var_4b0b7fff].size;
-
-            print3d(var_db6c400c, zone_text, (1, 1, 1), 1, 1);
-
-              for(index = 0; index < zone.a_loc_types[var_4b0b7fff].size; index++) {
-                node = zone.a_loc_types[var_4b0b7fff][index];
-                node_location = node.origin;
-
-                line(var_db6c400c, node_location, line_color, 1, 0, 1);
-                sphere(node_location, 6, sphere_color, 1, 0, 10, 1);
-
-              }
-          }
+        if(player.zone_name == zone.name) {
+          sphere_color = (0, 1, 0);
+          line_color = (1, 1, 1);
+        } else if(isinarray(var_a4808c85, hash(player.zone_name))) {
+          sphere_color = (1, 1, 0);
+          line_color = (1, 1, 1);
         }
+      }
+
+      if(zone.is_enabled) {
+        var_db6c400c = (0, 0, 0);
+
+        for(index = 0; index < zone.a_loc_types[var_4b0b7fff].size; index++) {
+          var_db6c400c += zone.a_loc_types[var_4b0b7fff][index].origin;
+        }
+
+        var_db6c400c /= zone.a_loc_types[var_4b0b7fff].size;
+
+        print3d(var_db6c400c, zone_text, (1, 1, 1), 1, 1);
+
+        for(index = 0; index < zone.a_loc_types[var_4b0b7fff].size; index++) {
+          node = zone.a_loc_types[var_4b0b7fff][index];
+          node_location = node.origin;
+
+          line(var_db6c400c, node_location, line_color, 1, 0, 1);
+          sphere(node_location, 6, sphere_color, 1, 0, 10, 1);
+
+        }
+      }
     }
   }
+}
 
 function_54fc7938(player_ent, var_5d02daa5) {
   assert(isplayer(player_ent));

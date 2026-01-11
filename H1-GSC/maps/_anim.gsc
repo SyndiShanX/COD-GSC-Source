@@ -49,8 +49,7 @@ init() {
 
   if(maps\_utility::is_gen4()) {
     common_scripts\utility::create_lock("trace_part_for_efx", 12);
-  }
-  else {
+  } else {
     common_scripts\utility::create_lock("trace_part_for_efx");
   }
 
@@ -514,7 +513,7 @@ anim_custom_animmode_loop(var_0, var_1, var_2, var_3) {
   var_6 = var_4["angles"];
 
   foreach(var_8 in var_0) {
-  thread anim_custom_animmode_on_guy(var_8, var_1, var_2, var_5, var_6, var_8.animname, 1);
+    thread anim_custom_animmode_on_guy(var_8, var_1, var_2, var_5, var_6, var_8.animname, 1);
   }
 
   var_0[0] wait_until_anim_finishes(var_2);
@@ -599,15 +598,13 @@ assert_existance_of_anim(var_0, var_1) {
     if(var_2) {
       var_4 = getarraykeys(level.scr_anim[var_1]);
 
-      foreach(var_6 in var_4) {
-      }
+      foreach(var_6 in var_4) {}
     }
 
     if(var_3) {
       var_4 = getarraykeys(level.scr_sound[var_1]);
 
-      foreach(var_6 in var_4) {
-      }
+      foreach(var_6 in var_4) {}
     }
 
     return;
@@ -624,8 +621,7 @@ anim_first_frame_on_guy(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_5 = var_4;
-  }
-  else {
+  } else {
     var_5 = var_0.animname;
   }
 
@@ -656,8 +652,7 @@ anim_custom_animmode_on_guy(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
 
   if(isDefined(var_5)) {
     var_9 = var_5;
-  }
-  else {
+  } else {
     var_9 = var_0.animname;
   }
 
@@ -730,8 +725,7 @@ anim_loop_packet(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_10 = var_3;
-  }
-  else {
+  } else {
     var_10 = var_8.animname;
   }
 
@@ -742,8 +736,7 @@ anim_loop_packet(var_0, var_1, var_2, var_3) {
   var_12 = 0;
 
   for(;;) {
-    for(var_11 = anim_weight(var_10, var_1); var_11 == var_12 && var_11 != 0; var_11 = anim_weight(var_10, var_1)) {
-    }
+    for(var_11 = anim_weight(var_10, var_1); var_11 == var_12 && var_11 != 0; var_11 = anim_weight(var_10, var_1)) {}
 
     var_12 = var_11;
     var_13 = undefined;
@@ -784,8 +777,7 @@ anim_loop_packet(var_0, var_1, var_2, var_3) {
 
       if(isDefined(var_3)) {
         var_31 = var_3;
-      }
-      else {
+      } else {
         var_31 = var_6.animname;
       }
 
@@ -810,8 +802,7 @@ anim_loop_packet(var_0, var_1, var_2, var_3) {
       if(var_27) {
         if(isDefined(level.scr_goaltime[var_31]) && isDefined(level.scr_goaltime[var_31][var_1])) {
           var_32 = level.scr_goaltime[var_31][var_1];
-        }
-        else {
+        } else {
           var_32 = 0.2;
         }
 
@@ -836,8 +827,7 @@ anim_loop_packet(var_0, var_1, var_2, var_3) {
         if(isai(var_6)) {
           if(var_27) {
             var_6 animscripts\face::sayspecificdialogue(var_29, var_30, 1.0);
-          }
-          else {
+          } else {
             var_6 animscripts\face::sayspecificdialogue(var_29, var_30, 1.0, var_9);
           }
         } else
@@ -875,7 +865,7 @@ anim_single_failsafeonguy(var_0, var_1) {}
 
 anim_single_failsafe(var_0, var_1) {
   foreach(var_3 in var_0) {
-  var_3 thread anim_single_failsafeonguy(self, var_1);
+    var_3 thread anim_single_failsafeonguy(self, var_1);
   }
 }
 
@@ -949,8 +939,7 @@ anim_single_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(isDefined(var_4)) {
       var_26 = var_4;
-    }
-    else {
+    } else {
       var_26 = var_8.animname;
     }
 
@@ -976,8 +965,7 @@ anim_single_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(var_22) {
       if(isDefined(level.scr_goaltime[var_26]) && isDefined(level.scr_goaltime[var_26][var_1])) {
         var_27 = level.scr_goaltime[var_26][var_1];
-      }
-      else {
+      } else {
         var_27 = 0.2;
       }
 
@@ -1027,8 +1015,7 @@ anim_single_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       } else if(isai(var_8)) {
         if(var_22) {
           var_8 animscripts\face::sayspecificdialogue(var_25, var_24, 1.0);
-        }
-        else {
+        } else {
           if(!isDefined(var_8.disablefacialfilleranims) || !var_8.disablefacialfilleranims) {
             var_8 thread anim_facialfiller("single dialogue");
           }
@@ -1038,8 +1025,7 @@ anim_single_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       } else {
         var_8 thread maps\_utility::play_sound_on_entity(var_24, "single dialogue");
 
-        if(var_8 hasanimtree()) {
-        }
+        if(var_8 hasanimtree()) {}
       }
 
       var_15 = var_31;
@@ -1072,8 +1058,7 @@ anim_single_internal(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
       if(isDefined(var_4)) {
         var_26 = var_4;
-      }
-      else {
+      } else {
         var_26 = var_8.animname;
       }
 
@@ -1236,8 +1221,7 @@ notetrack_wait(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_2)) {
     var_6 = var_2;
-  }
-  else {
+  } else {
     var_6 = self;
   }
 
@@ -1245,8 +1229,7 @@ notetrack_wait(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_4)) {
     var_7 = var_4;
-  }
-  else {
+  } else {
     var_7 = var_0.animname;
   }
 
@@ -1308,7 +1291,7 @@ notetrack_wait(var_0, var_1, var_2, var_3, var_4, var_5) {
         }
 
         foreach(var_15 in level.scr_notetrack[var_7][var_18][var_20]) {
-        anim_handle_notetrack(var_15, var_0, var_8, var_6);
+          anim_handle_notetrack(var_15, var_0, var_8, var_6);
         }
       }
     }
@@ -1320,8 +1303,7 @@ notetrack_wait(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       if(isDefined(var_0.anim_playsound_func)) {
         var_0 thread[[var_0.anim_playsound_func]](var_30, "j_head", 1);
-      }
-      else {
+      } else {
         var_0 thread maps\_utility::play_sound_on_tag(var_30, undefined, 1);
       }
 
@@ -1333,8 +1315,7 @@ notetrack_wait(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       if(isDefined(var_0.anim_playsound_func)) {
         var_0 thread[[var_0.anim_playsound_func]](var_30, "j_head", 1);
-      }
-      else {
+      } else {
         var_0 thread maps\_utility::play_sound_on_tag(var_30, "j_head", 1);
       }
 
@@ -1415,8 +1396,7 @@ anim_handle_notetrack(var_0, var_1, var_2, var_3) {
   if(isDefined(var_0["function"])) {
     if(!isDefined(var_0["function_args"])) {
       self thread[[var_0["function"]]](var_1);
-    }
-    else {
+    } else {
       self thread[[var_0["function"]]](var_1, var_0["function_args"]);
     }
   }
@@ -1451,8 +1431,7 @@ anim_handle_notetrack(var_0, var_1, var_2, var_3) {
   if(isDefined(var_0["attach model"])) {
     if(isDefined(var_0["selftag"])) {
       var_1 attach(var_0["attach model"], var_0["selftag"]);
-    }
-    else {
+    } else {
       var_3 attach(var_0["attach model"], var_0["tag"]);
     }
 
@@ -1464,8 +1443,7 @@ anim_handle_notetrack(var_0, var_1, var_2, var_3) {
 
     if(isDefined(var_0["selftag"])) {
       var_1 detach(var_0["detach model"], var_0["selftag"]);
-    }
-    else {
+    } else {
       var_3 detach(var_0["detach model"], var_0["tag"]);
     }
   }
@@ -1500,8 +1478,7 @@ anim_handle_notetrack(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_0["create model"])) {
     anim_addmodel(var_1, var_0);
-  }
-  else if(isDefined(var_0["delete model"])) {
+  } else if(isDefined(var_0["delete model"])) {
     anim_removemodel(var_1, var_0);
   }
 
@@ -1607,8 +1584,7 @@ trace_part_for_efx(var_0, var_1, var_2, var_3) {
 
   if(var_3 == 0) {
     self hidepart(var_0);
-  }
-  else {
+  } else {
     thread hidepartatdepth(var_7.last_pos[2] - var_3, var_0);
   }
 }
@@ -1643,8 +1619,7 @@ test_trace_tag(var_0) {
         var_0.hit_water = var_2["surfacetype"] == "water";
         var_0.hit_surface = 1;
         return;
-      } else {
-      }
+      } else {}
     }
   } else
     var_0.stationary = 1;
@@ -1891,8 +1866,7 @@ modify_moveplaybackrate_together(var_0) {
 
       if(var_11 > var_1) {
         var_11 = var_1;
-      }
-      else if(var_11 < var_1 * -1) {
+      } else if(var_11 < var_1 * -1) {
         var_11 = var_1 * -1;
       }
 
@@ -1912,7 +1886,7 @@ modify_moveplaybackrate_together(var_0) {
 anim_reach_failsafe(var_0, var_1) {
   if(isarray(var_0)) {
     foreach(var_3 in var_0) {
-    thread anim_reach_failsafe(var_3, var_1);
+      thread anim_reach_failsafe(var_3, var_1);
     }
 
     return;
@@ -1962,16 +1936,14 @@ anim_reach_with_funcs(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     if(isDefined(var_3)) {
       var_17 = var_3;
-    }
-    else {
+    } else {
       var_17 = var_16.animname;
     }
 
     if(isDefined(level.scr_anim[var_17][var_1])) {
       if(isarray(level.scr_anim[var_17][var_1])) {
         var_18 = getstartorigin(var_10, var_11, level.scr_anim[var_17][var_1][0]);
-      }
-      else {
+      } else {
         var_18 = getstartorigin(var_10, var_11, level.scr_anim[var_17][var_1]);
       }
     } else
@@ -2034,9 +2006,7 @@ monitor_reach_thread_death(var_0, var_1, var_2, var_3, var_4) {
       var_6.reach_aborted = 1;
       var_6 notify("goal", var_4);
 
-      if(isDefined(var_6.name)) {
-      } else {
-      }
+      if(isDefined(var_6.name)) {} else {}
 
       continue;
     }
@@ -2102,8 +2072,7 @@ anim_generic_teleport(var_0, var_1, var_2) {
 
   if(isai(var_0)) {
     var_0 teleport(var_6);
-  }
-  else {
+  } else {
     var_0.origin = var_6;
     var_0.angles = var_7;
   }
@@ -2341,8 +2310,7 @@ anim_reach_and_approach_node_solo(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(level.scr_anim[var_9][var_1])) {
     if(isarray(level.scr_anim[var_9][var_1])) {
       var_10 = level.scr_anim[var_9][var_1][0];
-    }
-    else {
+    } else {
       var_10 = level.scr_anim[var_9][var_1];
     }
 
@@ -2354,15 +2322,13 @@ anim_reach_and_approach_node_solo(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     var_11.type = var_3;
-  }
-  else {
+  } else {
     var_11.type = self.type;
   }
 
   if(isDefined(var_4)) {
     var_11.arrivalstance = var_4;
-  }
-  else {
+  } else {
     var_11.arrivalstance = self gethighestnodestance();
   }
 
@@ -2388,8 +2354,7 @@ anim_reach_and_arrive_facing_anim_solo(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(level.scr_anim[var_4][var_1])) {
     if(isarray(level.scr_anim[var_4][var_1])) {
       var_8 = level.scr_anim[var_4][var_1][0];
-    }
-    else {
+    } else {
       var_8 = level.scr_anim[var_4][var_1];
     }
 
@@ -2434,8 +2399,7 @@ get_to_transition_point(var_0, var_1, var_2, var_1, var_3, var_4) {
   }
   if(var_3 == "exposed") {
     var_5 = anim.archetypes["soldier"]["longestExposedApproachDist"];
-  }
-  else {
+  } else {
     var_5 = anim.archetypes["soldier"]["CoverTransLongestDist"][var_3];
   }
 
@@ -2523,11 +2487,9 @@ anim_teleport_solo(var_0, var_1, var_2) {
 add_animation(var_0, var_1) {
   if(!isDefined(level.completedanims)) {
     level.completedanims[var_0][0] = var_1;
-  }
-  else if(!isDefined(level.completedanims[var_0])) {
+  } else if(!isDefined(level.completedanims[var_0])) {
     level.completedanims[var_0][0] = var_1;
-  }
-  else {
+  } else {
     for(var_2 = 0; var_2 < level.completedanims[var_0].size; var_2++) {
       if(level.completedanims[var_0][var_2] == var_1) {
         return;
@@ -2563,8 +2525,7 @@ anim_generic_queue(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     maps\_utility::function_stack_timeout(var_4, ::anim_single_solo, var_0, var_1, var_2, var_3, "generic");
-  }
-  else {
+  } else {
     maps\_utility::function_stack(::anim_single_solo, var_0, var_1, var_2, var_3, "generic");
   }
 
@@ -2575,13 +2536,13 @@ anim_generic_queue(var_0, var_1, var_2, var_3, var_4) {
 
 anim_dontpushplayer(var_0) {
   foreach(var_2 in var_0) {
-  var_2 pushplayer(0);
+    var_2 pushplayer(0);
   }
 }
 
 anim_pushplayer(var_0) {
   foreach(var_2 in var_0) {
-  var_2 pushplayer(1);
+    var_2 pushplayer(1);
   }
 }
 
@@ -2608,8 +2569,7 @@ removenotetrack(var_0, var_1, var_2, var_3, var_4) {
   }
   if(var_5.size == 1) {
     var_5 = [];
-  }
-  else {
+  } else {
     var_5 = maps\_utility::array_remove_index(var_5, var_6);
   }
 
@@ -2960,17 +2920,14 @@ anim_facialfiller(var_0, var_1) {
 
   if(self hasblendshapes()) {
     var_3 = % generic_talker_blend;
-  }
-  else {
+  } else {
     var_4 = self gettagindex("jnt_lips_L");
 
     if(var_4 != -1) {
       var_3 = % generic_talker_bs;
-    }
-    else if(self isbadguy()) {
+    } else if(self isbadguy()) {
       var_3 = % generic_talker_axis;
-    }
-    else {
+    } else {
       var_3 = % generic_talker_allies;
     }
   }
@@ -3034,7 +2991,7 @@ anim_reach_idle(var_0, var_1, var_2) {
   var_3.count = var_0.size;
 
   foreach(var_5 in var_0) {
-  thread reachidle(var_5, var_1, var_2, var_3);
+    thread reachidle(var_5, var_1, var_2, var_3);
   }
 
   while(var_3.count) {
@@ -3061,8 +3018,7 @@ delayeddialogue(var_0, var_1, var_2, var_3) {
 
   if(var_1) {
     animscripts\face::sayspecificdialogue(undefined, var_2, 1.0);
-  }
-  else {
+  } else {
     animscripts\face::sayspecificdialogue(undefined, var_2, 1.0, "single dialogue");
   }
 }
@@ -3092,18 +3048,15 @@ set_start_pos(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     var_5 = var_3;
-  }
-  else {
+  } else {
     var_5 = self.animname;
   }
 
   if(isDefined(var_4) && var_4) {
     var_6 = level.scr_anim[var_5][var_0][0];
-  }
-  else if(isarray(level.scr_anim[var_5][var_0])) {
+  } else if(isarray(level.scr_anim[var_5][var_0])) {
     var_6 = common_scripts\utility::random(level.scr_anim[var_5][var_0]);
-  }
-  else {
+  } else {
     var_6 = level.scr_anim[var_5][var_0];
   }
 
@@ -3177,8 +3130,7 @@ anim_set_rate_internal(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_3 = var_2;
-  }
-  else {
+  } else {
     var_3 = self.animname;
   }
 
@@ -3224,8 +3176,7 @@ set_custom_move_start_transition(var_0, var_1) {
 create_anim_scene(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_3)) {
     var_3 = "generic";
-  }
-  else {
+  } else {
     level.scr_animtree[var_3] = var_0;
   }
 

@@ -111,8 +111,7 @@ dog_round_spawning() {
 
   if(level.dog_round_count < 3) {
     max = players.size * 6;
-  }
-  else {
+  } else {
     max = players.size * 8;
   }
 
@@ -166,14 +165,11 @@ waiting_for_next_dog_spawn(count, max) {
 
   if(level.dog_round_count == 1) {
     default_wait = 3;
-  }
-  else if(level.dog_round_count == 2) {
+  } else if(level.dog_round_count == 2) {
     default_wait = 2.5;
-  }
-  else if(level.dog_round_count == 3) {
+  } else if(level.dog_round_count == 3) {
     default_wait = 2;
-  }
-  else {
+  } else {
     default_wait = 1.5;
   }
 
@@ -233,8 +229,7 @@ dog_spawn_sumpf_logic(dog_array, favorite_enemy) {
     if(distancesquared(dog_array[i].origin, favorite_enemy.origin) > 160000 && distancesquared(dog_array[i].origin, favorite_enemy.origin) < 640000) {
       if(distancesquared((0, 0, dog_array[i].origin[2]), (0, 0, favorite_enemy.origin[2])) > 10000) {
         continue;
-      }
-      else {
+      } else {
         level.old_dog_spawn = dog_array[i];
         return dog_array[i];
       }
@@ -292,14 +287,11 @@ dog_health_increase() {
 
   if(level.dog_round_count == 1) {
     level.dog_health = 400;
-  }
-  else if(level.dog_round_count == 2) {
+  } else if(level.dog_round_count == 2) {
     level.dog_health = 900;
-  }
-  else if(level.dog_round_count == 3) {
+  } else if(level.dog_round_count == 3) {
     level.dog_health = 1300;
-  }
-  else if(level.dog_round_count == 4) {
+  } else if(level.dog_round_count == 4) {
     level.dog_health = 1600;
   }
 
@@ -356,8 +348,7 @@ dog_round_start() {
 
   if(isDefined(level.dog_melee_range)) {
     setdvar("ai_meleeRange", level.dog_melee_range);
-  }
-  else {
+  } else {
     setdvar("ai_meleeRange", 100);
   }
 }

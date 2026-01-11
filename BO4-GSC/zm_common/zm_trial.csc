@@ -10,7 +10,6 @@
 #include scripts\zm_common\callbacks;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial;
 
 autoexec __init__system__() {
@@ -127,7 +126,7 @@ private function_4dbf2663() {
         for(i = 0; i < 8; i++) {
           param = tablelookupcolumnforrow(table, row, 6 + i);
 
-          if(isDefined(param) && param != #"") {
+          if(isDefined(param) && param != # "") {
             var_10a28798[var_10a28798.size] = param;
           }
         }

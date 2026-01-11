@@ -12,7 +12,6 @@
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\voice\voice_events;
-
 #namespace callback;
 
 callback(event, params) {
@@ -767,7 +766,7 @@ finishcustomtraversallistener() {
   self endon(#"death");
   self waittillmatch({
     #notetrack: "end"
-  }, #"custom_traversal_anim_finished");
+  }, # "custom_traversal_anim_finished");
   self finishtraversal();
   self unlink();
   self.usegoalanimweight = 0;

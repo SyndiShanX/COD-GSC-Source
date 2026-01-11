@@ -28,13 +28,12 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_custom;
 
 autoexec function_d776b402() {
   level thread function_3ca8ca85();
 
-    level thread function_74b79f63();
+  level thread function_74b79f63();
   level thread function_6129676c();
   level thread function_401f18e6();
   callback::on_spawned(&function_34c2aeb5);
@@ -49,15 +48,15 @@ autoexec function_d776b402() {
 
   level thread function_172decfc();
 
-    if(util::get_game_type() == "zclassic") {
-      if(!sessionmodeisonlinegame() || function_bea73b01() == 1 || function_3f3752ab()) {
-        level.var_aa2d5655 = 1;
-        level.var_5164a0ca = 1;
-        level.var_3426461d = &function_185687d7;
-        level.var_73d1e054 = 1;
-        level.var_211e3a53 = "zcustom";
-      }
+  if(util::get_game_type() == "zclassic") {
+    if(!sessionmodeisonlinegame() || function_bea73b01() == 1 || function_3f3752ab()) {
+      level.var_aa2d5655 = 1;
+      level.var_5164a0ca = 1;
+      level.var_3426461d = &function_185687d7;
+      level.var_73d1e054 = 1;
+      level.var_211e3a53 = "zcustom";
     }
+  }
 }
 
 function_901b751c(var_c9db62d5) {
@@ -140,205 +139,205 @@ function_ff4557dc(s_talisman) {
   }
 
   switch (s_talisman.name) {
-    case #"talisman_box_guarantee_box_only":
+    case # "talisman_box_guarantee_box_only":
       if(!function_901b751c(#"zmtalismanboxguaranteeboxonly") || function_901b751c(#"zmmysteryboxstate") == 0) {
         return false;
       }
 
       break;
-    case #"talisman_box_guarantee_lmg":
+    case # "talisman_box_guarantee_lmg":
       if(!function_901b751c(#"zmtalismanboxguaranteelmg") || !function_901b751c(#"zmweaponslmg") || function_901b751c(#"zmmysteryboxstate") == 0) {
         return false;
       }
 
       break;
-    case #"talisman_coagulant":
+    case # "talisman_coagulant":
       if(!function_901b751c(#"zmtalismancoagulant")) {
         return false;
       }
 
       break;
-    case #"talisman_extra_claymore":
+    case # "talisman_extra_claymore":
       if(!function_901b751c(#"zmtalismanextraclaymore")) {
         return false;
       }
 
       break;
-    case #"talisman_extra_frag":
+    case # "talisman_extra_frag":
       if(!function_901b751c(#"zmtalismanextrafrag")) {
         return false;
       }
 
       break;
-    case #"talisman_extra_miniturret":
+    case # "talisman_extra_miniturret":
       if(!function_901b751c(#"zmtalismanextraminiturret")) {
         return false;
       }
 
       break;
-    case #"talisman_extra_molotov":
+    case # "talisman_extra_molotov":
       if(!function_901b751c(#"zmtalismanextramolotov")) {
         return false;
       }
 
       break;
-    case #"talisman_extra_semtex":
+    case # "talisman_extra_semtex":
       if(!function_901b751c(#"zmtalismanextrasemtex")) {
         return false;
       }
 
       break;
-    case #"talisman_impatient":
+    case # "talisman_impatient":
       if(!function_901b751c(#"zmtalismanimpatient")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_mod_single":
+    case # "talisman_perk_mod_single":
       if(!function_901b751c(#"zmtalismanperkmodsingle")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_permanent_1":
+    case # "talisman_perk_permanent_1":
       if(!function_901b751c(#"zmtalismanperkpermanent1") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_permanent_2":
+    case # "talisman_perk_permanent_2":
       if(!function_901b751c(#"zmtalismanperkpermanent2") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_permanent_3":
+    case # "talisman_perk_permanent_3":
       if(!function_901b751c(#"zmtalismanperkpermanent3") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_permanent_4":
+    case # "talisman_perk_permanent_4":
       if(!function_901b751c(#"zmtalismanperkpermanent4") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_reducecost_1":
+    case # "talisman_perk_reducecost_1":
       if(!function_901b751c(#"zmtalismanperkreducecost1") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_reducecost_2":
+    case # "talisman_perk_reducecost_2":
       if(!function_901b751c(#"zmtalismanperkreducecost2") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_reducecost_3":
+    case # "talisman_perk_reducecost_3":
       if(!function_901b751c(#"zmtalismanperkreducecost3") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_reducecost_4":
+    case # "talisman_perk_reducecost_4":
       if(!function_901b751c(#"zmtalismanperkreducecost4") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_start_1":
+    case # "talisman_perk_start_1":
       if(!function_901b751c(#"zmtalismanperkstart1") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_start_2":
+    case # "talisman_perk_start_2":
       if(!function_901b751c(#"zmtalismanperkstart2") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_start_3":
+    case # "talisman_perk_start_3":
       if(!function_901b751c(#"zmtalismanperkstart3") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_perk_start_4":
+    case # "talisman_perk_start_4":
       if(!function_901b751c(#"zmtalismanperkstart4") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"talisman_shield_durability_legendary":
+    case # "talisman_shield_durability_legendary":
       if(!function_901b751c(#"zmtalismanshielddurabilitylegendary") || !function_901b751c(#"zmshieldisenabled")) {
         return false;
       }
 
       break;
-    case #"talisman_shield_durability_rare":
+    case # "talisman_shield_durability_rare":
       if(!function_901b751c(#"zmtalismanshielddurabilityrare") || !function_901b751c(#"zmshieldisenabled")) {
         return false;
       }
 
       break;
-    case #"talisman_shield_price":
+    case # "talisman_shield_price":
       if(!function_901b751c(#"zmtalismanshieldprice") || !function_901b751c(#"zmshieldisenabled")) {
         return false;
       }
 
       break;
-    case #"talisman_special_startlv2":
+    case # "talisman_special_startlv2":
       if(!function_901b751c(#"zmtalismanspecialstartlvl2")) {
         return false;
       }
 
       break;
-    case #"talisman_special_startlv3":
+    case # "talisman_special_startlv3":
       if(!function_901b751c(#"zmtalismanspecialstartlvl3")) {
         return false;
       }
 
       break;
-    case #"talisman_special_xp_rate":
+    case # "talisman_special_xp_rate":
       if(!function_901b751c(#"zmtalismanspecialxprate")) {
         return false;
       }
 
       break;
-    case #"talisman_start_weapon_ar":
+    case # "talisman_start_weapon_ar":
       if(!function_901b751c(#"zmtalismanstartweaponar")) {
         return false;
       }
 
       break;
-    case #"talisman_start_weapon_lmg":
+    case # "talisman_start_weapon_lmg":
       if(!function_901b751c(#"zmtalismanstartweaponlmg")) {
         return false;
       }
 
       break;
-    case #"talisman_start_weapon_smg":
+    case # "talisman_start_weapon_smg":
       if(!function_901b751c(#"zmtalismanstartweaponsmg")) {
         return false;
       }
 
       break;
-    case #"talisman_weapon_reducepapcost":
+    case # "talisman_weapon_reducepapcost":
       if(!function_901b751c(#"zmtalismanreducepapcost")) {
         return false;
       }
 
       break;
-    case #"talisman_permanent_heroweap_armor":
+    case # "talisman_permanent_heroweap_armor":
       if(!function_901b751c(#"zmtalismanpermanentheroweaparmor")) {
         return false;
       }
 
       break;
-    case #"talisman_extra_self_revive":
+    case # "talisman_extra_self_revive":
       if(!function_901b751c(#"zmtalismanextraselfrevive")) {
         return false;
       }
@@ -405,349 +404,349 @@ function_3ac936c6(str_elixir) {
   }
 
   switch (str_elixir) {
-    case #"zm_bgb_always_done_swiftly":
+    case # "zm_bgb_always_done_swiftly":
       if(!function_901b751c(#"zmelixiralwaysdoneswiftly")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_anywhere_but_here":
+    case # "zm_bgb_anywhere_but_here":
       if(!function_901b751c(#"zmelixiranywherebuthere")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_arsenal_accelerator":
+    case # "zm_bgb_arsenal_accelerator":
       if(!function_901b751c(#"zmelixirarsenalaccelerator") || !function_901b751c(#"zmspecweaponisenabled")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_danger_closest":
+    case # "zm_bgb_danger_closest":
       if(!function_901b751c(#"zmelixirdangerclosest")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_in_plain_sight":
+    case # "zm_bgb_in_plain_sight":
       if(!function_901b751c(#"zmelixirinplainsight")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_newtonian_negation":
+    case # "zm_bgb_newtonian_negation":
       if(!function_901b751c(#"zmelixirnewtoniannegation")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_now_you_see_me":
+    case # "zm_bgb_now_you_see_me":
       if(!function_901b751c(#"zmelixirnowyouseeme")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_stock_option":
+    case # "zm_bgb_stock_option":
       if(!function_901b751c(#"zmelixirstockoption")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_board_games":
+    case # "zm_bgb_board_games":
       if(!function_901b751c(#"zmelixirboardgames") || !function_901b751c(#"zmbarricadestate")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_burned_out":
+    case # "zm_bgb_burned_out":
       if(!function_901b751c(#"zmelixirburnedout")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_crawl_space":
+    case # "zm_bgb_crawl_space":
       if(!function_901b751c(#"zmelixircrawlspace") || function_901b751c(#"zmcrawlerstate") == 0) {
         return false;
       }
 
       break;
-    case #"zm_bgb_pop_shocks":
+    case # "zm_bgb_pop_shocks":
       if(!function_901b751c(#"zmelixirpopshocks")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_temporal_gift":
+    case # "zm_bgb_temporal_gift":
       if(!function_901b751c(#"zmelixirtemporalgift") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_point_drops":
+    case # "zm_bgb_point_drops":
       if(!function_901b751c(#"zmelixirpointdrops") || !function_901b751c(#"zmpowerupchaospoints") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_alchemical_antithesis":
+    case # "zm_bgb_alchemical_antithesis":
       if(!function_901b751c(#"zmelixiralchemicalantithesis") || function_901b751c(#"zmpointsfixed")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_sword_flay":
+    case # "zm_bgb_sword_flay":
       if(!function_901b751c(#"zmelixirswordflay") || !function_901b751c(#"zmweaponsmelee")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_dead_of_nuclear_winter":
+    case # "zm_bgb_dead_of_nuclear_winter":
       if(!function_901b751c(#"zmelixirdeadofnuclearwinter") || !function_901b751c(#"zmpowerupnuke") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_licensed_contractor":
+    case # "zm_bgb_licensed_contractor":
       if(!function_901b751c(#"zmelixirlicensedcontractor") || !function_901b751c(#"zmpowerupcarpenter") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_undead_man_walking":
+    case # "zm_bgb_undead_man_walking":
       if(!function_901b751c(#"zmelixirundeadmanwalking")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_whos_keeping_score":
+    case # "zm_bgb_whos_keeping_score":
       if(!function_901b751c(#"zmelixirwhoskeepingscore") || !function_901b751c(#"zmpowerupdouble") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_aftertaste":
+    case # "zm_bgb_aftertaste":
       if(!function_901b751c(#"zmelixiraftertaste")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_extra_credit":
+    case # "zm_bgb_extra_credit":
       if(!function_901b751c(#"zmelixirextracredit") || !function_901b751c(#"zmpowerupchaospoints") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_kill_joy":
+    case # "zm_bgb_kill_joy":
       if(!function_901b751c(#"zmelixirkilljoy") || !function_901b751c(#"zmpowerupinstakill") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_soda_fountain":
+    case # "zm_bgb_soda_fountain":
       if(!function_901b751c(#"zmelixirsodafountain") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_ctrl_z":
+    case # "zm_bgb_ctrl_z":
       if(!function_901b751c(#"zmelixirctrlz")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_free_fire":
+    case # "zm_bgb_free_fire":
       if(!function_901b751c(#"zmelixirfreefire")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_cache_back":
+    case # "zm_bgb_cache_back":
       if(!function_901b751c(#"zmelixircacheback") || !function_901b751c(#"zmpowerupmaxammo") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_immolation_liquidation":
+    case # "zm_bgb_immolation_liquidation":
       if(!function_901b751c(#"zmelixirimmolationliquidation") || !function_901b751c(#"zmpowerupfiresale") || !function_901b751c(#"zmpowerupsactive") || function_901b751c(#"zmmysteryboxstate") == 0) {
         return false;
       }
 
       break;
-    case #"zm_bgb_phoenix_up":
+    case # "zm_bgb_phoenix_up":
       if(!function_901b751c(#"zmelixirphoenixup") || !function_901b751c(#"zmlaststandduration")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_power_keg":
+    case # "zm_bgb_power_keg":
       if(!function_901b751c(#"zmelixirpowerkeg") || !function_901b751c(#"zmspecweaponisenabled") || !function_901b751c(#"zmpowerupspecialweapon") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_blood_debt":
+    case # "zm_bgb_blood_debt":
       if(!function_901b751c(#"zmelixirblooddebt")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_near_death_experience":
+    case # "zm_bgb_near_death_experience":
       if(!function_901b751c(#"zmelixirneardeathexperience")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_perkaholic":
+    case # "zm_bgb_perkaholic":
       if(!function_901b751c(#"zmelixirperkaholic") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_wall_power":
+    case # "zm_bgb_wall_power":
       if(!function_901b751c(#"zmelixirwallpower") || function_901b751c(#"zmpapenabled") == 0) {
         return false;
       }
 
       break;
-    case #"zm_bgb_anti_entrapment":
+    case # "zm_bgb_anti_entrapment":
       if(!function_901b751c(#"zmelixirantientrapment")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_equip_mint":
+    case # "zm_bgb_equip_mint":
       if(!function_901b751c(#"zmelixirequipmint")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_head_scan":
+    case # "zm_bgb_head_scan":
       if(!function_901b751c(#"zmelixirheadscan")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_join_the_party":
+    case # "zm_bgb_join_the_party":
       if(!function_901b751c(#"zmelixirjointheparty")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_nowhere_but_there":
+    case # "zm_bgb_nowhere_but_there":
       if(!function_901b751c(#"zmelixirnowherebutthere")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_phantom_reload":
+    case # "zm_bgb_phantom_reload":
       if(!function_901b751c(#"zmelixirphantomreload")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_shields_up":
+    case # "zm_bgb_shields_up":
       if(!function_901b751c(#"zmelixirshieldsup") || !function_901b751c("zmShieldIsEnabled")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_wall_to_wall_clearance":
+    case # "zm_bgb_wall_to_wall_clearance":
       if(!function_901b751c(#"zmelixirwalltowall")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_conflagration_liquidation":
+    case # "zm_bgb_conflagration_liquidation":
       if(!function_901b751c(#"zmelixirconflagrationliquidation") || function_901b751c(#"zmpapenabled") == 0) {
         return false;
       }
 
       break;
-    case #"zm_bgb_perk_up":
+    case # "zm_bgb_perk_up":
       if(!function_901b751c(#"zmelixirperkup") || !function_901b751c(#"zmperksactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_refresh_mint":
+    case # "zm_bgb_refresh_mint":
       if(!function_901b751c(#"zmelixirrefreshmint") || !function_901b751c(#"zmequipmentisenabled") && !function_901b751c(#"zmspecweaponisenabled")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_dividend_yield":
+    case # "zm_bgb_dividend_yield":
       if(!function_901b751c(#"zmelixirdividendyield")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_suit_up":
+    case # "zm_bgb_suit_up":
       if(!function_901b751c(#"zmelixirsuitup")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_talkin_bout_regeneration":
+    case # "zm_bgb_talkin_bout_regeneration":
       if(!function_901b751c(#"zmelixirtalkinboutregeneration")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_bullet_boost":
+    case # "zm_bgb_bullet_boost":
       if(!function_901b751c(#"zmelixirbulletboost")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_quacknarok":
+    case # "zm_bgb_quacknarok":
       if(!function_901b751c(#"zmelixirquacknarok")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_near_death_experience":
+    case # "zm_bgb_near_death_experience":
       if(!function_901b751c(#"zmelixirneardeathexperience")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_shopping_free":
+    case # "zm_bgb_shopping_free":
       if(!function_901b751c(#"zmelixirshoppingfree")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_phoenix_up":
+    case # "zm_bgb_phoenix_up":
       if(!function_901b751c(#"zmelixirphoenixup")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_perkaholic":
+    case # "zm_bgb_perkaholic":
       if(!function_901b751c(#"zmelixirperkaholic")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_reign_drops":
+    case # "zm_bgb_reign_drops":
       if(!function_901b751c(#"zmelixirreigndrops") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_head_drama":
+    case # "zm_bgb_head_drama":
       if(!function_901b751c(#"zmelixirheaddrama")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_power_vacuum":
+    case # "zm_bgb_power_vacuum":
       if(!function_901b751c(#"zmelixirpowervacuum") || !function_901b751c(#"zmpowerupsactive")) {
         return false;
       }
 
       break;
-    case #"zm_bgb_secret_shopper":
+    case # "zm_bgb_secret_shopper":
       if(!function_901b751c(#"zmelixirsecretshopper") || !function_901b751c(#"zmwallbuysenabled")) {
         return false;
       }
@@ -809,121 +808,121 @@ function_d9f0defb(str_perk) {
   }
 
   switch (str_perk) {
-    case #"specialty_armorvest":
+    case # "specialty_armorvest":
       if(!function_901b751c(#"zmperksjuggernaut")) {
         return false;
       }
 
       break;
-    case #"specialty_fastreload":
+    case # "specialty_fastreload":
       if(!function_901b751c(#"zmperksspeed")) {
         return false;
       }
 
       break;
-    case #"specialty_quickrevive":
+    case # "specialty_quickrevive":
       if(!function_901b751c(#"zmperksquickrevive")) {
         return false;
       }
 
       break;
-    case #"specialty_widowswine":
+    case # "specialty_widowswine":
       if(!function_901b751c(#"zmperkswidowswail")) {
         return false;
       }
 
       break;
-    case #"specialty_staminup":
+    case # "specialty_staminup":
       if(!function_901b751c(#"zmperksstaminup")) {
         return false;
       }
 
       break;
-    case #"specialty_additionalprimaryweapon":
+    case # "specialty_additionalprimaryweapon":
       if(!function_901b751c(#"zmperksmulekick")) {
         return false;
       }
 
       break;
-    case #"specialty_electriccherry":
+    case # "specialty_electriccherry":
       if(!function_901b751c(#"zmperkselectricburst")) {
         return false;
       }
 
       break;
-    case #"specialty_deadshot":
+    case # "specialty_deadshot":
       if(!function_901b751c(#"zmperksdeadshot")) {
         return false;
       }
 
       break;
-    case #"specialty_cooldown":
+    case # "specialty_cooldown":
       if(!function_901b751c(#"zmperkscooldown")) {
         return false;
       }
 
       break;
-    case #"specialty_berserker":
+    case # "specialty_berserker":
       if(!function_901b751c(#"zmperksdyingwish")) {
         return false;
       }
 
       break;
-    case #"specialty_phdflopper":
+    case # "specialty_phdflopper":
       if(!function_901b751c(#"zmperksphdslider")) {
         return false;
       }
 
       break;
-    case #"specialty_camper":
+    case # "specialty_camper":
       if(!function_901b751c(#"zmperksstonecold")) {
         return false;
       }
 
       break;
-    case #"specialty_extraammo":
+    case # "specialty_extraammo":
       if(!function_901b751c(#"zmperksbandolier")) {
         return false;
       }
 
       break;
-    case #"specialty_awareness":
+    case # "specialty_awareness":
       if(!function_901b751c(#"zmperksdeathperception")) {
         return false;
       }
 
       break;
-    case #"specialty_shield":
+    case # "specialty_shield":
       if(!function_901b751c(#"zmperksvictorious")) {
         return false;
       }
 
       break;
-    case #"specialty_mystery":
+    case # "specialty_mystery":
       if(!function_901b751c(#"zmperkssecretsauce")) {
         return false;
       }
 
       break;
-    case #"specialty_etherealrazor":
+    case # "specialty_etherealrazor":
       if(!function_901b751c(#"zmperksetherealrazor")) {
         return false;
       }
 
       break;
-    case #"specialty_zombshell":
+    case # "specialty_zombshell":
       if(!function_901b751c(#"zmperkszombshell")) {
         return false;
       }
 
       break;
-    case #"specialty_wolf_protector":
+    case # "specialty_wolf_protector":
       if(!function_901b751c(#"zmperkswolfprotector")) {
         return false;
       }
 
       break;
-    case #"specialty_death_dash":
+    case # "specialty_death_dash":
       if(!function_901b751c(#"zmperksdeathdash")) {
         return false;
       }
@@ -980,19 +979,19 @@ function_928e94b9(a_str_archetypes) {
   foreach(str_archetype in a_str_archetypes) {
     str_archetype = hash(str_archetype);
 
-    if(isinarray(array(#"blight_father", #"brutus", #"gegenees"), str_archetype) && function_901b751c(#"zmminibossstate") == 0) {
+    if(isinarray(array(#"blight_father", # "brutus", # "gegenees"), str_archetype) && function_901b751c(#"zmminibossstate") == 0) {
       return true;
     }
 
-    if(isinarray(array(#"stoker", #"gladiator", #"gladiator_marauder", #"gladiator_destroyer", #"werewolf"), str_archetype) && function_901b751c(#"zmheavystate") == 0) {
+    if(isinarray(array(#"stoker", # "gladiator", # "gladiator_marauder", # "gladiator_destroyer", # "werewolf"), str_archetype) && function_901b751c(#"zmheavystate") == 0) {
       return true;
     }
 
-    if(isinarray(array(#"bat", #"dog", #"zombie_dog"), str_archetype) && function_901b751c(#"zmpopcornstate") == 0) {
+    if(isinarray(array(#"bat", # "dog", # "zombie_dog"), str_archetype) && function_901b751c(#"zmpopcornstate") == 0) {
       return true;
     }
 
-    if(isinarray(array(#"nosferatu", #"skeleton", #"nova_crawler", #"tiger", #"catalyst", #"catalyst_corrosive", #"catalyst_electric", #"catalyst_plasma", #"catalyst_water"), str_archetype) && function_901b751c(#"zmenhancedstate") == 0) {
+    if(isinarray(array(#"nosferatu", # "skeleton", # "nova_crawler", # "tiger", # "catalyst", # "catalyst_corrosive", # "catalyst_electric", # "catalyst_plasma", # "catalyst_water"), str_archetype) && function_901b751c(#"zmenhancedstate") == 0) {
       return true;
     }
   }
@@ -1023,7 +1022,7 @@ function_318d417b(e_player) {
 
   if(!e_player zm_score::can_player_purchase(n_cost)) {
     self playSound(#"evt_perk_deny");
-    e_player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
+    e_player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
     waitframe(1);
     return;
   }
@@ -1420,7 +1419,7 @@ private function_34c2aeb5() {
 
 private drain_health(var_c454f44e) {
   self notify(#"hash_13fcb28a561bd5fe");
-  self endon(#"disconnect", #"hash_13fcb28a561bd5fe");
+  self endon(#"disconnect", # "hash_13fcb28a561bd5fe");
   level endon(#"game_ended");
   self val::set(#"custom_games", "health_regen", 0);
 
@@ -1532,8 +1531,8 @@ private function_8abf3abd() {
 }
 
 private function_99c0cc77() {
-  if(!function_901b751c(#"zmequipmentisenabled") && isDefined(self.slot_weapons[#"lethal_grenade"])) {
-    self takeweapon(self.slot_weapons[#"lethal_grenade"]);
+  if(!function_901b751c(#"zmequipmentisenabled") && isDefined(self.slot_weapons[# "lethal_grenade"])) {
+    self takeweapon(self.slot_weapons[# "lethal_grenade"]);
   }
 
   if(!function_901b751c(#"zmweaponspistol") && self hasweapon(getweapon(#"pistol_topbreak_t8"))) {}
@@ -1554,7 +1553,7 @@ private function_dc856fd8() {
   self endon(#"death");
 
   while(true) {
-    self waittill(#"crafting_fail", #"crafting_success", #"bgb_update");
+    self waittill(#"crafting_fail", # "crafting_success", # "bgb_update");
     self allowmelee(0);
   }
 }
@@ -1977,667 +1976,667 @@ private function_401f18e6() {
 
 private function_a8e9a6c7() {
   return array({
-    #name: #"startround",
+    #name: # "startround",
     #default_val: 1
   }, {
-    #name: #"headshotsonly",
+    #name: # "headshotsonly",
     #default_val: 0
   }, {
-    #name: #"zmroundcap",
+    #name: # "zmroundcap",
     #default_val: 0
   }, {
-    #name: #"zmtimecap",
+    #name: # "zmtimecap",
     #default_val: 0
   }, {
-    #name: #"zmshowtimer",
+    #name: # "zmshowtimer",
     #default_val: 0
   }, {
-    #name: #"zmkillcap",
+    #name: # "zmkillcap",
     #default_val: 0
   }, {
-    #name: #"zmdoorstate",
+    #name: # "zmdoorstate",
     #default_val: 1
   }, {
-    #name: #"zmspecialroundsenabled",
+    #name: # "zmspecialroundsenabled",
     #default_val: 1
   }, {
-    #name: #"zmendonquest",
+    #name: # "zmendonquest",
     #default_val: 0
   }, {
-    #name: #"zmmysteryboxstate",
+    #name: # "zmmysteryboxstate",
     #default_val: 2
   }, {
-    #name: #"hash_5d65c0983698a539",
+    #name: # "hash_5d65c0983698a539",
     #default_val: 0
   }, {
-    #name: #"zmmysteryboxlimitmove",
+    #name: # "zmmysteryboxlimitmove",
     #default_val: 0
   }, {
-    #name: #"hash_23fe21eb92ffbc2c",
+    #name: # "hash_23fe21eb92ffbc2c",
     #default_val: 0
   }, {
-    #name: #"zmmysteryboxlimit",
+    #name: # "zmmysteryboxlimit",
     #default_val: 0
   }, {
-    #name: #"hash_751384283abde22c",
+    #name: # "hash_751384283abde22c",
     #default_val: 0
   }, {
-    #name: #"zmmysteryboxlimitround",
+    #name: # "zmmysteryboxlimitround",
     #default_val: 0
   }, {
-    #name: #"zmpowerstate",
+    #name: # "zmpowerstate",
     #default_val: 1
   }, {
-    #name: #"zmpowerdoorstate",
+    #name: # "zmpowerdoorstate",
     #default_val: 1
   }, {
-    #name: #"zmperksactive",
+    #name: # "zmperksactive",
     #default_val: 1
   }, {
-    #name: #"zmperksjuggernaut",
+    #name: # "zmperksjuggernaut",
     #default_val: 1
   }, {
-    #name: #"zmperksspeed",
+    #name: # "zmperksspeed",
     #default_val: 1
   }, {
-    #name: #"zmperksquickrevive",
+    #name: # "zmperksquickrevive",
     #default_val: 1
   }, {
-    #name: #"zmperkswidowswail",
+    #name: # "zmperkswidowswail",
     #default_val: 1
   }, {
-    #name: #"zmperksstaminup",
+    #name: # "zmperksstaminup",
     #default_val: 1
   }, {
-    #name: #"zmperksmulekick",
+    #name: # "zmperksmulekick",
     #default_val: 1
   }, {
-    #name: #"zmperkselectricburst",
+    #name: # "zmperkselectricburst",
     #default_val: 1
   }, {
-    #name: #"zmperksdeadshot",
+    #name: # "zmperksdeadshot",
     #default_val: 1
   }, {
-    #name: #"zmperkscooldown",
+    #name: # "zmperkscooldown",
     #default_val: 1
   }, {
-    #name: #"zmperksdyingwish",
+    #name: # "zmperksdyingwish",
     #default_val: 1
   }, {
-    #name: #"zmpapenabled",
+    #name: # "zmpapenabled",
     #default_val: 1
   }, {
-    #name: #"zmsuperpapenabled",
+    #name: # "zmsuperpapenabled",
     #default_val: 1
   }, {
-    #name: #"zmpowerupsactive",
+    #name: # "zmpowerupsactive",
     #default_val: 1
   }, {
-    #name: #"zmpowerupnuke",
+    #name: # "zmpowerupnuke",
     #default_val: 1
   }, {
-    #name: #"zmpowerupdouble",
+    #name: # "zmpowerupdouble",
     #default_val: 1
   }, {
-    #name: #"zmpowerupinstakill",
+    #name: # "zmpowerupinstakill",
     #default_val: 1
   }, {
-    #name: #"zmpowerupchaospoints",
+    #name: # "zmpowerupchaospoints",
     #default_val: 1
   }, {
-    #name: #"zmpowerupfiresale",
+    #name: # "zmpowerupfiresale",
     #default_val: 1
   }, {
-    #name: #"zmpowerupspecialweapon",
+    #name: # "zmpowerupspecialweapon",
     #default_val: 1
   }, {
-    #name: #"zmpowerupfreeperk",
+    #name: # "zmpowerupfreeperk",
     #default_val: 1
   }, {
-    #name: #"zmpowerupmaxammo",
+    #name: # "zmpowerupmaxammo",
     #default_val: 1
   }, {
-    #name: #"zmpowerupcarpenter",
+    #name: # "zmpowerupcarpenter",
     #default_val: 1
   }, {
-    #name: #"zmpowerupsislimitedround",
+    #name: # "zmpowerupsislimitedround",
     #default_val: 0
   }, {
-    #name: #"zmpowerupslimitround",
+    #name: # "zmpowerupslimitround",
     #default_val: 1
   }, {
-    #name: #"zmpowerupsharing",
+    #name: # "zmpowerupsharing",
     #default_val: 1
   }, {
-    #name: #"zmwallbuysenabled",
+    #name: # "zmwallbuysenabled",
     #default_val: 1
   }, {
-    #name: #"zmrandomwallbuys",
+    #name: # "zmrandomwallbuys",
     #default_val: 0
   }, {
-    #name: #"zmelixirsenabled",
+    #name: # "zmelixirsenabled",
     #default_val: 1
   }, {
-    #name: #"zmelixirscooldown",
+    #name: # "zmelixirscooldown",
     #default_val: 1
   }, {
-    #name: #"zmelixirsindividual",
+    #name: # "zmelixirsindividual",
     #default_val: 1
   }, {
-    #name: #"zmelixirsdurables",
+    #name: # "zmelixirsdurables",
     #default_val: 1
   }, {
-    #name: #"zmelixirscommon",
+    #name: # "zmelixirscommon",
     #default_val: 1
   }, {
-    #name: #"zmelixirsrare",
+    #name: # "zmelixirsrare",
     #default_val: 1
   }, {
-    #name: #"zmelixirslegendary",
+    #name: # "zmelixirslegendary",
     #default_val: 1
   }, {
-    #name: #"zmelixirsepic",
+    #name: # "zmelixirsepic",
     #default_val: 1
   }, {
-    #name: #"zmtalismansenabled",
+    #name: # "zmtalismansenabled",
     #default_val: 1
   }, {
-    #name: #"zmtalismansindividual",
+    #name: # "zmtalismansindividual",
     #default_val: 1
   }, {
-    #name: #"zmtalismanscommon",
+    #name: # "zmtalismanscommon",
     #default_val: 1
   }, {
-    #name: #"zmtalismansrare",
+    #name: # "zmtalismansrare",
     #default_val: 1
   }, {
-    #name: #"zmtalismanslegendary",
+    #name: # "zmtalismanslegendary",
     #default_val: 1
   }, {
-    #name: #"zmtalismansepic",
+    #name: # "zmtalismansepic",
     #default_val: 1
   }, {
-    #name: #"zmweaponspistol",
+    #name: # "zmweaponspistol",
     #default_val: 1
   }, {
-    #name: #"zmweaponsshotgun",
+    #name: # "zmweaponsshotgun",
     #default_val: 1
   }, {
-    #name: #"zmweaponssmg",
+    #name: # "zmweaponssmg",
     #default_val: 1
   }, {
-    #name: #"zmweaponsar",
+    #name: # "zmweaponsar",
     #default_val: 1
   }, {
-    #name: #"zmweaponstr",
+    #name: # "zmweaponstr",
     #default_val: 1
   }, {
-    #name: #"zmweaponslmg",
+    #name: # "zmweaponslmg",
     #default_val: 1
   }, {
-    #name: #"zmweaponssniper",
+    #name: # "zmweaponssniper",
     #default_val: 1
   }, {
-    #name: #"zmweaponsknife",
+    #name: # "zmweaponsknife",
     #default_val: 1
   }, {
-    #name: #"zmweaponsmelee",
+    #name: # "zmweaponsmelee",
     #default_val: 1
   }, {
-    #name: #"zmspecweaponisenabled",
+    #name: # "zmspecweaponisenabled",
     #default_val: 1
   }, {
-    #name: #"zmspecweaponchargerate",
+    #name: # "zmspecweaponchargerate",
     #default_val: 1
   }, {
-    #name: #"zmwonderweaponisenabled",
+    #name: # "zmwonderweaponisenabled",
     #default_val: 1
   }, {
-    #name: #"zmequipmentisenabled",
+    #name: # "zmequipmentisenabled",
     #default_val: 1
   }, {
-    #name: #"zmequipmentchargerate",
+    #name: # "zmequipmentchargerate",
     #default_val: 1
   }, {
-    #name: #"zmshieldisenabled",
+    #name: # "zmshieldisenabled",
     #default_val: 1
   }, {
-    #name: #"zmshielddurability",
+    #name: # "zmshielddurability",
     #default_val: 1
   }, {
-    #name: #"zmheadshotsonly",
+    #name: # "zmheadshotsonly",
     #default_val: 0
   }, {
-    #name: #"zmrunnerstate",
+    #name: # "zmrunnerstate",
     #default_val: 0
   }, {
-    #name: #"zmwalkerstate",
+    #name: # "zmwalkerstate",
     #default_val: 0
   }, {
-    #name: #"zmcrawlerstate",
+    #name: # "zmcrawlerstate",
     #default_val: 1
   }, {
-    #name: #"zmzombiespread",
+    #name: # "zmzombiespread",
     #default_val: 1
   }, {
-    #name: #"zmzombieminspeed",
+    #name: # "zmzombieminspeed",
     #default_val: 0
   }, {
-    #name: #"zmzombiemaxspeed",
+    #name: # "zmzombiemaxspeed",
     #default_val: 3
   }, {
-    #name: #"zmzombiedamagemult",
+    #name: # "zmzombiedamagemult",
     #default_val: 1
   }, {
-    #name: #"zmzombiehealthmult",
+    #name: # "zmzombiehealthmult",
     #default_val: 1
   }, {
-    #name: #"zmcrawlerdamagemult",
+    #name: # "zmcrawlerdamagemult",
     #default_val: 1
   }, {
-    #name: #"zmcrawlerhealthmult",
+    #name: # "zmcrawlerhealthmult",
     #default_val: 1
   }, {
-    #name: #"zmcrawleraggro",
+    #name: # "zmcrawleraggro",
     #default_val: 1
   }, {
-    #name: #"zmheavystate",
+    #name: # "zmheavystate",
     #default_val: 1
   }, {
-    #name: #"zmheavydamagemult",
+    #name: # "zmheavydamagemult",
     #default_val: 1
   }, {
-    #name: #"zmheavyhealthmult",
+    #name: # "zmheavyhealthmult",
     #default_val: 1
   }, {
-    #name: #"zmheavyaggro",
+    #name: # "zmheavyaggro",
     #default_val: 1
   }, {
-    #name: #"zmminibossstate",
+    #name: # "zmminibossstate",
     #default_val: 1
   }, {
-    #name: #"zmminibossdamagemult",
+    #name: # "zmminibossdamagemult",
     #default_val: 1
   }, {
-    #name: #"zmminibosshealthmult",
+    #name: # "zmminibosshealthmult",
     #default_val: 1
   }, {
-    #name: #"zmminibossaggro",
+    #name: # "zmminibossaggro",
     #default_val: 1
   }, {
-    #name: #"zmhealthstartingbars",
+    #name: # "zmhealthstartingbars",
     #default_val: 3
   }, {
-    #name: #"zmhealthregendelay",
+    #name: # "zmhealthregendelay",
     #default_val: 1
   }, {
-    #name: #"zmhealthregenrate",
+    #name: # "zmhealthregenrate",
     #default_val: 2
   }, {
-    #name: #"zmhealthonkill",
+    #name: # "zmhealthonkill",
     #default_val: 0
   }, {
-    #name: #"zmhealthdrain",
+    #name: # "zmhealthdrain",
     #default_val: 0
   }, {
-    #name: #"zmpointsfixed",
+    #name: # "zmpointsfixed",
     #default_val: 0
   }, {
-    #name: #"zmpointsstarting",
+    #name: # "zmpointsstarting",
     #default_val: 5
   }, {
-    #name: #"hash_5566698b97a6282e",
+    #name: # "hash_5566698b97a6282e",
     #default_val: 0
   }, {
-    #name: #"zmpointslosstype",
+    #name: # "zmpointslosstype",
     #default_val: 0
   }, {
-    #name: #"zmpointslosspercent",
+    #name: # "zmpointslosspercent",
     #default_val: 1
   }, {
-    #name: #"zmpointslossvalue",
+    #name: # "zmpointslossvalue",
     #default_val: 100
   }, {
-    #name: #"zmlaststandduration",
+    #name: # "zmlaststandduration",
     #default_val: 2
   }, {
-    #name: #"hash_12f776f6bc579bb4",
+    #name: # "hash_12f776f6bc579bb4",
     #default_val: 0
   }, {
-    #name: #"zmlimiteddownsamount",
+    #name: # "zmlimiteddownsamount",
     #default_val: 0
   }, {
-    #name: #"zmbarricadestate",
+    #name: # "zmbarricadestate",
     #default_val: 1
   }, {
-    #name: #"hash_3c5363541b97ca3e",
+    #name: # "hash_3c5363541b97ca3e",
     #default_val: 1
   }, {
-    #name: #"zmpowerupfrequency",
+    #name: # "zmpowerupfrequency",
     #default_val: 1
   }, {
-    #name: #"zmtalismanboxguaranteeboxonly",
+    #name: # "zmtalismanboxguaranteeboxonly",
     #default_val: 1
   }, {
-    #name: #"zmtalismanboxguaranteelmg",
+    #name: # "zmtalismanboxguaranteelmg",
     #default_val: 1
   }, {
-    #name: #"hash_61695e52556ff2d1",
+    #name: # "hash_61695e52556ff2d1",
     #default_val: 1
   }, {
-    #name: #"zmtalismancoagulant",
+    #name: # "zmtalismancoagulant",
     #default_val: 1
   }, {
-    #name: #"zmtalismanextraclaymore",
+    #name: # "zmtalismanextraclaymore",
     #default_val: 1
   }, {
-    #name: #"zmtalismanextrafrag",
+    #name: # "zmtalismanextrafrag",
     #default_val: 1
   }, {
-    #name: #"zmtalismanextraminiturret",
+    #name: # "zmtalismanextraminiturret",
     #default_val: 1
   }, {
-    #name: #"zmtalismanextramolotov",
+    #name: # "zmtalismanextramolotov",
     #default_val: 1
   }, {
-    #name: #"zmtalismanextrasemtex",
+    #name: # "zmtalismanextrasemtex",
     #default_val: 1
   }, {
-    #name: #"zmtalismanimpatient",
+    #name: # "zmtalismanimpatient",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkmodsingle",
+    #name: # "zmtalismanperkmodsingle",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkpermanent1",
+    #name: # "zmtalismanperkpermanent1",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkpermanent2",
+    #name: # "zmtalismanperkpermanent2",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkpermanent3",
+    #name: # "zmtalismanperkpermanent3",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkpermanent4",
+    #name: # "zmtalismanperkpermanent4",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkreducecost1",
+    #name: # "zmtalismanperkreducecost1",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkreducecost2",
+    #name: # "zmtalismanperkreducecost2",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkreducecost3",
+    #name: # "zmtalismanperkreducecost3",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkreducecost4",
+    #name: # "zmtalismanperkreducecost4",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkstart1",
+    #name: # "zmtalismanperkstart1",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkstart2",
+    #name: # "zmtalismanperkstart2",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkstart3",
+    #name: # "zmtalismanperkstart3",
     #default_val: 1
   }, {
-    #name: #"zmtalismanperkstart4",
+    #name: # "zmtalismanperkstart4",
     #default_val: 1
   }, {
-    #name: #"zmtalismanshielddurabilitylegendary",
+    #name: # "zmtalismanshielddurabilitylegendary",
     #default_val: 1
   }, {
-    #name: #"zmtalismanshielddurabilityrare",
+    #name: # "zmtalismanshielddurabilityrare",
     #default_val: 1
   }, {
-    #name: #"zmtalismanshieldprice",
+    #name: # "zmtalismanshieldprice",
     #default_val: 1
   }, {
-    #name: #"zmtalismanspecialstartlvl2",
+    #name: # "zmtalismanspecialstartlvl2",
     #default_val: 1
   }, {
-    #name: #"zmtalismanspecialstartlvl3",
+    #name: # "zmtalismanspecialstartlvl3",
     #default_val: 1
   }, {
-    #name: #"zmtalismanspecialxprate",
+    #name: # "zmtalismanspecialxprate",
     #default_val: 1
   }, {
-    #name: #"zmtalismanstartweaponar",
+    #name: # "zmtalismanstartweaponar",
     #default_val: 1
   }, {
-    #name: #"zmtalismanstartweaponlmg",
+    #name: # "zmtalismanstartweaponlmg",
     #default_val: 1
   }, {
-    #name: #"zmtalismanstartweaponsmg",
+    #name: # "zmtalismanstartweaponsmg",
     #default_val: 1
   }, {
-    #name: #"zmtalismanreducepapcost",
+    #name: # "zmtalismanreducepapcost",
     #default_val: 1
   }, {
-    #name: #"zmtalismansultra",
+    #name: # "zmtalismansultra",
     #default_val: 1
   }, {
-    #name: #"zmelixiralwaysdoneswiftly",
+    #name: # "zmelixiralwaysdoneswiftly",
     #default_val: 1
   }, {
-    #name: #"zmelixiranywherebuthere",
+    #name: # "zmelixiranywherebuthere",
     #default_val: 1
   }, {
-    #name: #"zmelixirarsenalaccelerator",
+    #name: # "zmelixirarsenalaccelerator",
     #default_val: 1
   }, {
-    #name: #"zmelixirdangerclosest",
+    #name: # "zmelixirdangerclosest",
     #default_val: 1
   }, {
-    #name: #"zmelixirinplainsight",
+    #name: # "zmelixirinplainsight",
     #default_val: 1
   }, {
-    #name: #"zmelixirnewtoniannegation",
+    #name: # "zmelixirnewtoniannegation",
     #default_val: 1
   }, {
-    #name: #"zmelixirnowyouseeme",
+    #name: # "zmelixirnowyouseeme",
     #default_val: 1
   }, {
-    #name: #"zmelixirstockoption",
+    #name: # "zmelixirstockoption",
     #default_val: 1
   }, {
-    #name: #"zmelixirboardgames",
+    #name: # "zmelixirboardgames",
     #default_val: 1
   }, {
-    #name: #"zmelixirburnedout",
+    #name: # "zmelixirburnedout",
     #default_val: 1
   }, {
-    #name: #"zmelixircrawlspace",
+    #name: # "zmelixircrawlspace",
     #default_val: 1
   }, {
-    #name: #"zmelixirpopshocks",
+    #name: # "zmelixirpopshocks",
     #default_val: 1
   }, {
-    #name: #"zmelixirtemporalgift",
+    #name: # "zmelixirtemporalgift",
     #default_val: 1
   }, {
-    #name: #"zmelixirpointdrops",
+    #name: # "zmelixirpointdrops",
     #default_val: 1
   }, {
-    #name: #"zmelixiralchemicalantithesis",
+    #name: # "zmelixiralchemicalantithesis",
     #default_val: 1
   }, {
-    #name: #"zmelixirswordflay",
+    #name: # "zmelixirswordflay",
     #default_val: 1
   }, {
-    #name: #"zmelixirdeadofnuclearwinter",
+    #name: # "zmelixirdeadofnuclearwinter",
     #default_val: 1
   }, {
-    #name: #"zmelixirlicensedcontractor",
+    #name: # "zmelixirlicensedcontractor",
     #default_val: 1
   }, {
-    #name: #"zmelixirundeadmanwalking",
+    #name: # "zmelixirundeadmanwalking",
     #default_val: 1
   }, {
-    #name: #"zmelixirwhoskeepingscore",
+    #name: # "zmelixirwhoskeepingscore",
     #default_val: 1
   }, {
-    #name: #"zmelixiraftertaste",
+    #name: # "zmelixiraftertaste",
     #default_val: 1
   }, {
-    #name: #"zmelixirextracredit",
+    #name: # "zmelixirextracredit",
     #default_val: 1
   }, {
-    #name: #"zmelixirkilljoy",
+    #name: # "zmelixirkilljoy",
     #default_val: 1
   }, {
-    #name: #"zmelixirsodafountain",
+    #name: # "zmelixirsodafountain",
     #default_val: 1
   }, {
-    #name: #"zmelixirctrlz",
+    #name: # "zmelixirctrlz",
     #default_val: 1
   }, {
-    #name: #"zmelixirfreefire",
+    #name: # "zmelixirfreefire",
     #default_val: 1
   }, {
-    #name: #"zmelixircacheback",
+    #name: # "zmelixircacheback",
     #default_val: 1
   }, {
-    #name: #"zmelixirimmolationliquidation",
+    #name: # "zmelixirimmolationliquidation",
     #default_val: 1
   }, {
-    #name: #"zmelixirphoenixup",
+    #name: # "zmelixirphoenixup",
     #default_val: 1
   }, {
-    #name: #"zmelixirpowerkeg",
+    #name: # "zmelixirpowerkeg",
     #default_val: 1
   }, {
-    #name: #"zmelixirblooddebt",
+    #name: # "zmelixirblooddebt",
     #default_val: 1
   }, {
-    #name: #"zmelixirneardeathexperience",
+    #name: # "zmelixirneardeathexperience",
     #default_val: 1
   }, {
-    #name: #"zmelixirperkaholic",
+    #name: # "zmelixirperkaholic",
     #default_val: 1
   }, {
-    #name: #"zmelixirwallpower",
+    #name: # "zmelixirwallpower",
     #default_val: 1
   }, {
-    #name: #"hash_429b520a87274afb",
+    #name: # "hash_429b520a87274afb",
     #default_val: 0
   }, {
-    #name: #"zmtrapsenabled",
+    #name: # "zmtrapsenabled",
     #default_val: 1
   }, {
-    #name: #"zmstartingweaponenabled",
+    #name: # "zmstartingweaponenabled",
     #default_val: 1
   }, {
-    #name: #"zmheavyspawnfreq",
+    #name: # "zmheavyspawnfreq",
     #default_val: 1
   }, {
-    #name: #"zmminibossspawnfreq",
+    #name: # "zmminibossspawnfreq",
     #default_val: 1
   }, {
-    #name: #"zmselfreviveamount",
+    #name: # "zmselfreviveamount",
     #default_val: 0
   }, {
-    #name: #"zmpopcornstate",
+    #name: # "zmpopcornstate",
     #default_val: 1
   }, {
-    #name: #"zmpopcorndamagemult",
+    #name: # "zmpopcorndamagemult",
     #default_val: 1
   }, {
-    #name: #"zmpopcornhealthmult",
+    #name: # "zmpopcornhealthmult",
     #default_val: 1
   }, {
-    #name: #"zmpopcornspawnfreq",
+    #name: # "zmpopcornspawnfreq",
     #default_val: 1
   }, {
-    #name: #"zmretainweapons",
+    #name: # "zmretainweapons",
     #default_val: 1
   }, {
-    #name: #"zmperkdecay",
+    #name: # "zmperkdecay",
     #default_val: 1
   }, {
-    #name: #"zmcraftingkeyline",
+    #name: # "zmcraftingkeyline",
     #default_val: 0
   }, {
-    #name: #"zmpointlossondown",
+    #name: # "zmpointlossondown",
     #default_val: 0
   }, {
-    #name: #"zmpointlossondeath",
+    #name: # "zmpointlossondeath",
     #default_val: 0
   }, {
-    #name: #"zmpointlossonteammatedeath",
+    #name: # "zmpointlossonteammatedeath",
     #default_val: 0
   }, {
-    #name: #"zmelixirantientrapment",
+    #name: # "zmelixirantientrapment",
     #default_val: 1
   }, {
-    #name: #"zmelixirequipmint",
+    #name: # "zmelixirequipmint",
     #default_val: 1
   }, {
-    #name: #"zmelixirheadscan",
+    #name: # "zmelixirheadscan",
     #default_val: 1
   }, {
-    #name: #"zmelixirjointheparty",
+    #name: # "zmelixirjointheparty",
     #default_val: 1
   }, {
-    #name: #"zmelixirnowherebutthere",
+    #name: # "zmelixirnowherebutthere",
     #default_val: 1
   }, {
-    #name: #"zmelixirphantomreload",
+    #name: # "zmelixirphantomreload",
     #default_val: 1
   }, {
-    #name: #"zmelixirshieldsup",
+    #name: # "zmelixirshieldsup",
     #default_val: 1
   }, {
-    #name: #"zmelixirwalltowall",
+    #name: # "zmelixirwalltowall",
     #default_val: 1
   }, {
-    #name: #"zmperksbandolier",
+    #name: # "zmperksbandolier",
     #default_val: 1
   }, {
-    #name: #"zmperksdeathperception",
+    #name: # "zmperksdeathperception",
     #default_val: 1
   }, {
-    #name: #"zmperksphdslider",
+    #name: # "zmperksphdslider",
     #default_val: 1
   }, {
-    #name: #"zmperkssecretsauce",
+    #name: # "zmperkssecretsauce",
     #default_val: 1
   }, {
-    #name: #"zmperksstonecold",
+    #name: # "zmperksstonecold",
     #default_val: 1
   }, {
-    #name: #"zmperkswolfprotector",
+    #name: # "zmperkswolfprotector",
     #default_val: 1
   }, {
-    #name: #"zmperksdeathdash",
+    #name: # "zmperksdeathdash",
     #default_val: 1
   }, {
-    #name: #"zmperksvictorious",
+    #name: # "zmperksvictorious",
     #default_val: 1
   }, {
-    #name: #"zmfriendlyfiretype",
+    #name: # "zmfriendlyfiretype",
     #default_val: 0
   }, {
-    #name: #"zmelixirconflagrationliquidation",
+    #name: # "zmelixirconflagrationliquidation",
     #default_val: 1
   }, {
-    #name: #"zmelixirperkup",
+    #name: # "zmelixirperkup",
     #default_val: 1
   }, {
-    #name: #"zmelixirrefreshmint",
+    #name: # "zmelixirrefreshmint",
     #default_val: 1
   }, {
-    #name: #"zmenhancedstate",
+    #name: # "zmenhancedstate",
     #default_val: 1
   }, {
-    #name: #"zmenhanceddamagemult",
+    #name: # "zmenhanceddamagemult",
     #default_val: 1
   }, {
-    #name: #"zmenhancedhealthmult",
+    #name: # "zmenhancedhealthmult",
     #default_val: 1
   }, {
-    #name: #"zmenhancedspawnfreq",
+    #name: # "zmenhancedspawnfreq",
     #default_val: 1
   });
 }

@@ -170,8 +170,7 @@ display_ai_supplements() {
       players = get_players();
       if(isDefined(players)) {
         settings_index = players.size - 1;
-      }
-      else {
+      } else {
         settings_index = 0;
       }
       for(i = 0; i < 8; i++) {

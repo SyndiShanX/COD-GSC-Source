@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\postfx_shared;
 #include scripts\mp_common\gametypes\ct_core;
-
 #namespace ct_torque;
 
 event_handler[gametype_init] main(eventstruct) {

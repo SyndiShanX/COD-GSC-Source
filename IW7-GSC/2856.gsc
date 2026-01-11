@@ -77,8 +77,7 @@ func_1355(var_00) {
 
     if(isDefined(level.func_BF96)) {
       _changelevel("", 0, level.func_BF96);
-    }
-    else {
+    } else {
       _changelevel("", 0);
     }
   } else {
@@ -411,8 +410,7 @@ func_1356(var_00, var_01, var_02) {
 
         if(isDefined(level.func_B8D2.func_ABFA[var_04].func_D846)) {
           var_07 = level.func_B8D2.func_ABFA[var_04].func_D846;
-        }
-        else {
+        } else {
           var_07 = level.func_B8D2.func_ABFA[var_04].func_D845;
         }
       }
@@ -439,8 +437,7 @@ func_1356(var_00, var_01, var_02) {
 
     if(var_10 == "phspace" && getdvarint("e3", 0) == 1) {
       _preloadzones([var_10, "phspace_shared_tr", "phspace_ground_tr", "phspace_ground_lite_tr"]);
-    }
-    else {
+    } else {
       switch (var_00) {
         case "full":
           if(isDefined(var_07)) {
@@ -478,8 +475,7 @@ func_1356(var_00, var_01, var_02) {
 func_1463(var_00, var_01) {
   if(!scripts\engine\utility::flag_exist("weapons_preloaded")) {
     scripts\engine\utility::flag_init("weapons_preloaded");
-  }
-  else {
+  } else {
     return;
   }
 
@@ -511,8 +507,7 @@ func_1463(var_00, var_01) {
       if(var_8.size > 0) {
         if(var_8[0] == "sa" || var_8[0] == "ja") {
           var_04 = func_12A9(level.func_FDFA);
-        }
-        else {
+        } else {
           var_04 = var_03 + 1;
         }
       } else
@@ -525,15 +520,13 @@ func_1463(var_00, var_01) {
 
   if(scripts\engine\utility::string_starts_with(var_00, "shipcrib")) {
     var_09 = 1;
-  }
-  else {
+  } else {
     var_09 = 0;
   }
 
   if(scripts\engine\utility::string_starts_with(var_00, "ja_")) {
     var_10 = 1;
-  }
-  else {
+  } else {
     var_10 = 0;
   }
 
@@ -570,7 +563,7 @@ func_1463(var_00, var_01) {
   var_11 = scripts\engine\utility::array_remove_array(var_11, var_22);
 
   foreach(var_25 in var_11) {
-  level.player _meth_84C7("weaponsLoaded", var_25, 0);
+    level.player _meth_84C7("weaponsLoaded", var_25, 0);
   }
 
   var_29 = [];
@@ -994,8 +987,7 @@ func_F77F(var_00) {
 
   if(scripts\sp\utility::func_93AB()) {
     var_02 = 6;
-  }
-  else if(scripts\sp\utility::func_93A6()) {
+  } else if(scripts\sp\utility::func_93A6()) {
     var_02 = 5;
   }
 
@@ -1049,8 +1041,7 @@ func_7F6F(var_00) {
 func_7FBB(var_00) {
   if(var_00 < 9) {
     return "mis_0" + (var_00 + 1);
-  }
-  else {
+  } else {
     return "mis_" + (var_00 + 1);
   }
 }
@@ -1160,8 +1151,7 @@ func_7EB2(var_00) {
 func_8BBF(var_00) {
   if(isDefined(level.func_B8D2.func_ABFA[var_00].func_1563)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -1183,8 +1173,7 @@ func_12B0(var_00) {
 
   if(!isDefined(var_01)) {
     return 0;
-  }
-  else {
+  } else {
     return level.func_B8D2.func_ABFA[var_01].func_F88F;
   }
 }
@@ -1194,8 +1183,7 @@ func_12AF(var_00) {
 
   if(!isDefined(var_01)) {
     return 0;
-  }
-  else {
+  } else {
     return level.func_B8D2.func_ABFA[var_01].func_41F7;
   }
 }
@@ -1205,8 +1193,7 @@ func_12B1(var_00) {
 
   if(!isDefined(var_01)) {
     return "";
-  }
-  else {
+  } else {
     return level.func_B8D2.func_ABFA[var_01].func_2AD3;
   }
 }
@@ -1221,8 +1208,7 @@ func_1455(var_00) {
 
   if(!isDefined(var_02)) {
     var_02 = 0;
-  }
-  else {
+  } else {
     var_02 = var_02 * 0.02;
   }
 
@@ -1234,8 +1220,7 @@ func_1455(var_00) {
 
   if(isDefined(var_02) && var_02 <= 0) {
     scripts\engine\utility::waitframe();
-  }
-  else if(!isDefined(var_01) || var_01 <= 0) {
+  } else if(!isDefined(var_01) || var_01 <= 0) {
     scripts\engine\utility::waitframe();
   }
 }

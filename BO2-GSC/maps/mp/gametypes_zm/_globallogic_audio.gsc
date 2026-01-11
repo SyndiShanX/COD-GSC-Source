@@ -150,8 +150,7 @@ init() {
 registerdialoggroup(group, skipifcurrentlyplayinggroup) {
   if(!isDefined(level.dialoggroups)) {
     level.dialoggroups = [];
-  }
-  else if(isDefined(level.dialoggroup[group])) {
+  } else if(isDefined(level.dialoggroup[group])) {
     error("registerDialogGroup:Dialog group " + group + " already registered.");
     return;
   }
@@ -265,7 +264,7 @@ announceroundwinner(winner, delay) {
     leaderdialogforotherteams("round_failure", winner);
   } else {
     foreach(team in level.teams) {
-    thread playsoundonplayers("mus_round_draw" + "_" + level.teampostfix[team]);
+      thread playsoundonplayers("mus_round_draw" + "_" + level.teampostfix[team]);
     }
 
     leaderdialog("round_draw");
@@ -316,7 +315,7 @@ leaderdialog(dialog, team, group, excludelist, squaddialog) {
     dialogs = [];
 
     foreach(team in level.teams) {
-    dialogs[team] = dialog;
+      dialogs[team] = dialog;
     }
 
     leaderdialogallteams(dialogs, group, excludelist);
@@ -383,7 +382,7 @@ leaderdialogallteams(dialogs, group, excludelist) {
 
 flushdialog() {
   foreach(player in level.players) {
-  player flushdialogonplayer();
+    player flushdialogonplayer();
   }
 }
 
@@ -396,7 +395,7 @@ flushdialogonplayer() {
 
 flushgroupdialog(group) {
   foreach(player in level.players) {
-  player flushgroupdialogonplayer(group);
+    player flushgroupdialogonplayer(group);
   }
 }
 
@@ -483,8 +482,7 @@ leaderdialogonplayer(dialog, group) {
 
   if(!self.leaderdialogactive) {
     self thread playleaderdialogonplayer(dialog);
-  }
-  else {
+  } else {
     self.leaderdialogqueue[self.leaderdialogqueue.size] = dialog;
   }
 }
@@ -498,8 +496,7 @@ waitforsound(sound, extratime) {
 
   if(time < 0) {
     wait(3.0 + extratime);
-  }
-  else {
+  } else {
     wait(time * 0.001 + extratime);
   }
 }
@@ -522,8 +519,7 @@ playleaderdialogonplayer(dialog) {
 
   if(level.wagermatch || !isDefined(game["voice"])) {
     faction = "vox_wm_";
-  }
-  else {
+  } else {
     faction = game["voice"][team];
   }
 
@@ -599,7 +595,7 @@ musiccontroller() {
       level waittill("match_ending_very_soon");
 
       foreach(team in level.teams) {
-      leaderdialog("timesup", team, undefined, undefined, "squad_30sec");
+        leaderdialog("timesup", team, undefined, undefined, "squad_30sec");
       }
     }
   } else {

@@ -154,8 +154,7 @@ dropaiweapon() {
 
     if(current_weapon == self.primaryweapon) {
       self setprimaryweapon("none");
-    }
-    else if(current_weapon == self.secondaryweapon) {
+    } else if(current_weapon == self.secondaryweapon) {
       self setsecondaryweapon("none");
     }
   }
@@ -294,11 +293,9 @@ has_script_drop_weapon() {
 player_weapon_drop(weapon_name) {
   if(issubstr(tolower(weapon_name), "usrpg")) {
     return "usrpg_player_sp";
-  }
-  else if(issubstr(tolower(weapon_name), "rpg")) {
+  } else if(issubstr(tolower(weapon_name), "rpg")) {
     return "rpg_player_sp";
-  }
-  else if(issubstr(tolower(weapon_name), "panzerschreck")) {
+  } else if(issubstr(tolower(weapon_name), "panzerschreck")) {
     return "panzerschreck_player_sp";
   }
 
@@ -332,16 +329,14 @@ shownotetrack(note) {
 
   if(note == "end" || note == "finish") {
     color = (0.25, 0.4, 0.5);
-  }
-  else if(note == "undefined") {
+  } else if(note == "undefined") {
     color = (1, 0.5, 0.5);
   }
 
   for(i = 0; i < duration; i++) {
     if(duration - i <= anim.shownotetrackduration) {
       amnt = 1.0 * (i - (duration - anim.shownotetrackduration)) / anim.shownotetrackduration;
-    }
-    else {
+    } else {
       amnt = 0.0;
     }
 
@@ -381,8 +376,7 @@ handledogsoundnotetracks(note) {
 
   if(isalive(self)) {
     self thread play_sound_on_tag_endon_death(alias, "tag_eye");
-  }
-  else {
+  } else {
     self thread play_sound_in_space(alias, self gettagorigin("tag_eye"));
   }
 
@@ -485,14 +479,12 @@ registernotetracks() {
       }
       if(isDefined(anim.fire_notetrack_functions[self.a.script])) {
         thread[[anim.fire_notetrack_functions[self.a.script]]]();
-      }
-      else {
+      } else {
         thread[[animscripts\shared::shootnotetrack]]();
       }
     }
 
-    notetrackstopanim(note, flagname) {
-    }
+    notetrackstopanim(note, flagname) {}
 
     notetrackstartragdoll(note, flagname) {
       if(isDefined(self.noragdoll)) {
@@ -625,8 +617,7 @@ registernotetracks() {
 
       if(self.lastweapon == primaryweapon) {
         self setcurrentweapon(self.secondaryweapon);
-      }
-      else if(self.lastweapon == secondaryweapon) {
+      } else if(self.lastweapon == secondaryweapon) {
         self setcurrentweapon(self.primaryweapon);
       }
 
@@ -686,8 +677,7 @@ registernotetracks() {
       if(needtoreload(0.5)) {
         if(clipsize > 1) {
           self.bulletsinclip = int(clipsize * 0.5);
-        }
-        else {
+        } else {
           self.bulletsinclip = clipsize;
         }
       } else if(self.bulletsinclip > clipsize)
@@ -697,8 +687,7 @@ registernotetracks() {
       self.lastweapon = self.weapon;
     }
 
-    notetrackdropclip(note, flagname) {
-    }
+    notetrackdropclip(note, flagname) {}
 
     notetrackrefillclip(note, flagname) {
       if(self.weaponclass == "rocketlauncher") {
@@ -708,14 +697,12 @@ registernotetracks() {
       self animscripts\weaponlist::refillclip();
     }
 
-    notetrackloadshell(note, flagname) {
-    }
+    notetrackloadshell(note, flagname) {}
 
     notetrackgravity(note, flagname) {
       if(issubstr(note, "on")) {
         self animmode("gravity");
-      }
-      else if(issubstr(note, "off")) {
+      } else if(issubstr(note, "off")) {
         self animmode("nogravity");
       }
     }
@@ -723,27 +710,23 @@ registernotetracks() {
     notetrackbodyfall(note, flagname) {
       if(isDefined(self.groundtype)) {
         groundtype = self.groundtype;
-      }
-      else {
+      } else {
         groundtype = "dirt";
       }
 
       if(issubstr(note, "large")) {
         self playSound("fly_bodyfall_large_" + groundtype);
-      }
-      else if(issubstr(note, "small")) {
+      } else if(issubstr(note, "small")) {
         self playSound("fly_bodyfall_small_" + groundtype);
       }
     }
 
-    notetrackfootstep(note, flagname) {
-    }
+    notetrackfootstep(note, flagname) {}
 
     notetrackfootscrape(note, flagname) {
       if(isDefined(self.groundtype)) {
         groundtype = self.groundtype;
-      }
-      else {
+      } else {
         groundtype = "dirt";
       }
 
@@ -753,15 +736,13 @@ registernotetracks() {
     notetrackland(note, flagname) {
       if(isDefined(self.groundtype)) {
         groundtype = self.groundtype;
-      }
-      else {
+      } else {
         groundtype = "dirt";
       }
 
       if(isplayer(self)) {
         self playSound("fly_land_plr_" + groundtype);
-      }
-      else {
+      } else {
         self playSound("fly_land_npc_" + groundtype);
       }
     }
@@ -788,9 +769,9 @@ registernotetracks() {
 
       if(isDefined(notetrackfunc)) {
         return [
-      }
+          }
           [notetrackfunc]
-        ](note, flagname);
+      ](note, flagname);
 
       switch (note) {
         case "end":
@@ -835,14 +816,14 @@ registernotetracks() {
           if(isDefined(customfunction)) {
             if(!isDefined(var1)) {
               return [
-            }
+                }
                 [customfunction]
-              ](note);
+            ](note);
             else {
               return [
-            }
+                }
                 [customfunction]
-              ](note, var1);
+            ](note, var1);
           }
 
           break;
@@ -875,9 +856,7 @@ registernotetracks() {
           note = "undefined";
         }
 
-        intercepted = [
-          [interceptfunction]
-        ](note);
+        intercepted = [[interceptfunction]](note);
 
         if(isDefined(intercepted) && intercepted) {
           continue;
@@ -901,9 +880,7 @@ registernotetracks() {
         }
 
         val = self handlenotetrack(note, flagname);
-        [
-          [postfunction]
-        ](note);
+        [[postfunction]](note);
 
         if(isDefined(val)) {
           return val;
@@ -932,9 +909,7 @@ registernotetracks() {
 
       for(;;) {
         time = gettime();
-        returnednote = [
-          [notetracksfunc]
-        ](flagname, customfunction, debugidentifier);
+        returnednote = [[notetracksfunc]](flagname, customfunction, debugidentifier);
         timetaken = gettime() - time;
 
         if(timetaken < 0.05) {
@@ -1027,8 +1002,7 @@ registernotetracks() {
 
       if(hitenemy) {
         self shootenemywrapper();
-      }
-      else {
+      } else {
         dir = dir + ((randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1);
         pos = weaporig + vectorscale(dir, 1000);
         self shootposwrapper(pos);
@@ -1243,15 +1217,13 @@ registernotetracks() {
 
         if(prevyawdelta > rightaimlimit) {
           prevyawdelta = rightaimlimit;
-        }
-        else if(prevyawdelta < leftaimlimit) {
+        } else if(prevyawdelta < leftaimlimit) {
           prevyawdelta = leftaimlimit;
         }
 
         if(prevpitchdelta > upaimlimit) {
           prevpitchdelta = upaimlimit;
-        }
-        else if(prevpitchdelta < downaimlimit) {
+        } else if(prevpitchdelta < downaimlimit) {
           prevpitchdelta = downaimlimit;
         }
 
@@ -1354,15 +1326,13 @@ registernotetracks() {
 
           if(yawdelta > rightaimlimit) {
             yawdelta = rightaimlimit;
-          }
-          else if(yawdelta < leftaimlimit) {
+          } else if(yawdelta < leftaimlimit) {
             yawdelta = leftaimlimit;
           }
 
           if(pitchdelta > upaimlimit) {
             pitchdelta = upaimlimit;
-          }
-          else if(pitchdelta < downaimlimit) {
+          } else if(pitchdelta < downaimlimit) {
             pitchdelta = downaimlimit;
           }
         }
@@ -1496,11 +1466,9 @@ registernotetracks() {
 
       if(animscripts\weaponlist::usingsemiautoweapon()) {
         numshots = anim.semifirenumshots[randomint(anim.semifirenumshots.size)];
-      }
-      else if(self.fastburst) {
+      } else if(self.fastburst) {
         numshots = anim.fastburstfirenumshots[randomint(anim.fastburstfirenumshots.size)];
-      }
-      else {
+      } else {
         numshots = anim.burstfirenumshots[randomint(anim.burstfirenumshots.size)];
       }
 
@@ -1525,11 +1493,9 @@ registernotetracks() {
 
         if(choice < 3) {
           numshots = randomintrange(2, 6);
-        }
-        else if(choice < 8) {
+        } else if(choice < 8) {
           numshots = randomintrange(6, 12);
-        }
-        else {
+        } else {
           numshots = randomintrange(12, 20);
         }
       }
@@ -1677,8 +1643,7 @@ registernotetracks() {
       if(isDefined(self.weapon)) {
         if(self.weapon == self.primaryweapon && aihasweapon(self.secondaryweapon) && self.secondaryweaponclass != "pistol") {
           return self.secondaryweapon;
-        }
-        else if(self.weapon == self.secondaryweapon && aihasweapon(self.primaryweapon) && self.secondaryweaponclass != "pistol") {
+        } else if(self.weapon == self.secondaryweapon && aihasweapon(self.primaryweapon) && self.secondaryweaponclass != "pistol") {
           return self.primaryweapon;
         }
       }
@@ -1830,8 +1795,7 @@ registernotetracks() {
 
             if(primaryweapon_accuracy > secondaryweapon_accuracy) {
               shoulduseweapon = self.primaryweapon;
-            }
-            else {
+            } else {
               shoulduseweapon = self.secondaryweapon;
             }
           } else
@@ -1886,8 +1850,7 @@ registernotetracks() {
 
         if(getdvarint(#"_id_D2DF7981") == 1) {
           animname = "weapon_switch_quadrants_cover";
-        }
-        else if(getdvarint(#"_id_D2DF7981") == 2) {
+        } else if(getdvarint(#"_id_D2DF7981") == 2) {
           animname = "weapon_putaway_cover";
         }
       } else if(getdvarint(#"_id_D2DF7981") == 1)
@@ -2011,8 +1974,7 @@ registernotetracks() {
     updatelaserstatus(toggle, skipaimcheck) {
       if(isDefined(toggle) && toggle) {
         self.a.laseron = 1;
-      }
-      else {
+      } else {
         self.a.laseron = 0;
       }
 
@@ -2020,8 +1982,7 @@ registernotetracks() {
 
       if(self.a.laseron && canuselaser() && isaimingatenemy) {
         self laseron();
-      }
-      else {
+      } else {
         self laseroff();
       }
     }

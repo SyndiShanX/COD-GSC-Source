@@ -172,9 +172,7 @@ function wasp_round_spawning() {
         continue;
       }
       if(isDefined(level.zm_mixed_wasp_raps_spawning)) {
-        [
-          [level.zm_mixed_wasp_raps_spawning]
-        ]();
+        [[level.zm_mixed_wasp_raps_spawning]]();
       } else {
         spawn_wasp(1);
       }
@@ -200,9 +198,7 @@ function spawn_wasp(var_6237035c, var_eecf48f9) {
         spawn_enemy = getplayers()[0];
       }
       if(isDefined(level.wasp_spawn_func)) {
-        spawn_point = [
-          [level.wasp_spawn_func]
-        ](spawn_enemy);
+        spawn_point = [[level.wasp_spawn_func]](spawn_enemy);
       } else {
         spawn_point = wasp_spawn_logic(spawn_enemy);
       }
@@ -534,9 +530,7 @@ function wasp_round_tracker() {
       level.round_spawn_func = &wasp_round_spawning;
       level.round_wait_func = &wasp_round_wait_func;
       if(isDefined(level.zm_custom_get_next_wasp_round)) {
-        level.next_wasp_round = [
-          [level.zm_custom_get_next_wasp_round]
-        ]();
+        level.next_wasp_round = [[level.zm_custom_get_next_wasp_round]]();
       } else {
         level.next_wasp_round = (5 + (level.wasp_round_count * 10)) + (randomintrange(-1, 1));
       }

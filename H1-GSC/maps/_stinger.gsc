@@ -8,7 +8,7 @@ init() {
   precacherumble("stinger_lock_rumble");
 
   foreach(var_1 in level.players) {
-  var_1 clearirtarget();
+    var_1 clearirtarget();
   }
 
   foreach(var_1 in level.players) {
@@ -194,8 +194,7 @@ setnoclearance() {
 
   if(getdvar("missileDebugDraw") == "1") {
     var_6 = 1;
-  }
-  else {
+  } else {
     var_6 = 0;
   }
 
@@ -213,11 +212,9 @@ setnoclearance() {
     if(var_15["fraction"] < 1) {
       var_12 = 1;
 
-      if(var_6) {
-      } else
+      if(var_6) {} else
         break;
-    } else if(var_6) {
-    }
+    } else if(var_6) {}
   }
 
   self weaponlocknoclearance(var_12);

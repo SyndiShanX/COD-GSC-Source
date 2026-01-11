@@ -8,8 +8,7 @@
 #include clientscripts\mp\createfx\mp_concert_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_lf_mp_concert_sun"] = loadfx("lens_flares/fx_lf_mp_concert_sun");

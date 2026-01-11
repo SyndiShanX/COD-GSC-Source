@@ -251,11 +251,9 @@ atvshootbehavior() {
 
   if(var_0 < 1000000) {
     self.shootstyle = "full";
-  }
-  else if(var_0 < 4000000) {
+  } else if(var_0 < 4000000) {
     self.shootstyle = "burst";
-  }
-  else {
+  } else {
     self.shootstyle = "single";
   }
 
@@ -278,15 +276,13 @@ atvshootbehavior() {
 
         if(var_9 > 128) {
           var_9 = 128;
-        }
-        else if(var_9 < -128) {
+        } else if(var_9 < -128) {
           var_9 = -128;
         }
 
         if(var_9 > 0) {
           var_9 = 128 - var_9;
-        }
-        else {
+        } else {
           var_9 = -128 - var_9;
         }
 
@@ -413,8 +409,7 @@ atv_trackshootentorpos_driver() {
 
     if(var_4) {
       var_4 = 0;
-    }
-    else {
+    } else {
       var_10 = var_3 - var_2;
 
       if(abs(var_10) > var_1) {

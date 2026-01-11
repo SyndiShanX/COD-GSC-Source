@@ -1800,40 +1800,35 @@ weapon_type_check(weapon) {
     case 0:
       if(weapon == "m16_zm") {
         return "favorite";
-      }
-      else if(weapon == "rottweil72_upgraded_zm") {
+      } else if(weapon == "rottweil72_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
     case 1:
       if(weapon == "fnfal_zm") {
         return "favorite";
-      }
-      else if(weapon == "hk21_upgraded_zm") {
+      } else if(weapon == "hk21_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
     case 2:
       if(weapon == "china_lake_zm") {
         return "favorite";
-      }
-      else if(weapon == "thundergun_upgraded_zm") {
+      } else if(weapon == "thundergun_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
     case 3:
       if(weapon == "mp40_zm") {
         return "favorite";
-      }
-      else if(weapon == "crossbow_explosive_upgraded_zm") {
+      } else if(weapon == "crossbow_explosive_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
   }
   if(IsSubStr(weapon, "upgraded")) {
     return "upgrade";
-  }
-  else {
+  } else {
     return level.zombie_weapons[weapon].vox;
   }
 }

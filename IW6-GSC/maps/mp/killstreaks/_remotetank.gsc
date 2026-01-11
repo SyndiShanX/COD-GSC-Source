@@ -333,8 +333,7 @@ updateTankPlacement(tank) {
         if(self.team != "spectator") {
           if(!is_aliens()) {
             self ForceUseHintOn(level.tankSettings[tank.tankType].stringCannotPlace);
-          }
-          else {
+          } else {
             if(!self.inLastStand) {
               self ForceUseHintOn(level.tankSettings[tank.tankType].stringCannotPlace);
             }
@@ -354,8 +353,7 @@ tank_onCarrierDeath(carrier) {
 
   if(!is_aliens()) {
     carrier waittill("death");
-  }
-  else {
+  } else {
     carrier waittill_any("death", "last_stand");
     carrier notify("cancel_tank");
   }
@@ -631,8 +629,7 @@ tank_setInactive() {
 
   if(level.teamBased) {
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
   }
 

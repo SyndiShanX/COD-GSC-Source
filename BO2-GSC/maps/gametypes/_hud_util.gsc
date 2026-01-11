@@ -19,8 +19,7 @@ setparent(element) {
 
   if(isDefined(self.point)) {
     self setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  }
-  else {
+  } else {
     self setpoint("TOPLEFT");
   }
 }
@@ -97,8 +96,7 @@ createfontstring(font, fontscale) {
 createserverfontstring(font, fontscale, team) {
   if(isDefined(team)) {
     fontelem = newteamhudelem(team);
-  }
-  else {
+  } else {
     fontelem = newhudelem();
   }
 
@@ -120,8 +118,7 @@ createserverfontstring(font, fontscale, team) {
 createservertimer(font, fontscale, team) {
   if(isDefined(team)) {
     timerelem = newteamhudelem(team);
-  }
-  else {
+  } else {
     timerelem = newhudelem();
   }
 
@@ -180,8 +177,7 @@ createicon(shader, width, height) {
 createservericon(shader, width, height, team) {
   if(isDefined(team)) {
     iconelem = newteamhudelem(team);
-  }
-  else {
+  } else {
     iconelem = newhudelem();
   }
 
@@ -206,8 +202,7 @@ createservericon(shader, width, height, team) {
 createserverbar(color, width, height, flashfrac, team, selected) {
   if(isDefined(team)) {
     barelem = newteamhudelem(team);
-  }
-  else {
+  } else {
     barelem = newhudelem();
   }
 
@@ -226,8 +221,7 @@ createserverbar(color, width, height, flashfrac, team, selected) {
 
   if(isDefined(team)) {
     barelemframe = newteamhudelem(team);
-  }
-  else {
+  } else {
     barelemframe = newhudelem();
   }
 
@@ -247,8 +241,7 @@ createserverbar(color, width, height, flashfrac, team, selected) {
 
   if(isDefined(selected)) {
     barelemframe setshader("progress_bar_fg_sel", width, height);
-  }
-  else {
+  } else {
     barelemframe setshader("progress_bar_fg", width, height);
   }
 
@@ -256,8 +249,7 @@ createserverbar(color, width, height, flashfrac, team, selected) {
 
   if(isDefined(team)) {
     barelembg = newteamhudelem(team);
-  }
-  else {
+  } else {
     barelembg = newhudelem();
   }
 
@@ -332,8 +324,7 @@ createbar(color, width, height, flashfrac) {
 
   if(!level.splitscreen) {
     barelembg setshader("progress_bar_bg", width + 4, height + 4);
-  }
-  else {
+  } else {
     barelembg setshader("progress_bar_bg", width + 0, height + 0);
   }
 
@@ -364,8 +355,7 @@ createprimaryprogressbar() {
 
   if(level.splitscreen) {
     bar setpoint("TOP", undefined, level.primaryprogressbarx, level.primaryprogressbary);
-  }
-  else {
+  } else {
     bar setpoint("CENTER", undefined, level.primaryprogressbarx, level.primaryprogressbary);
   }
 
@@ -377,8 +367,7 @@ createprimaryprogressbartext() {
 
   if(level.splitscreen) {
     text setpoint("TOP", undefined, level.primaryprogressbartextx, level.primaryprogressbartexty);
-  }
-  else {
+  } else {
     text setpoint("CENTER", undefined, level.primaryprogressbartextx, level.primaryprogressbartexty);
   }
 
@@ -394,8 +383,7 @@ createsecondaryprogressbar() {
 
   if(level.splitscreen) {
     bar setpoint("TOP", undefined, secondaryprogressbarx, secondaryprogressbary);
-  }
-  else {
+  } else {
     bar setpoint("CENTER", undefined, secondaryprogressbarx, secondaryprogressbary);
   }
 
@@ -409,8 +397,7 @@ createsecondaryprogressbartext() {
 
   if(level.splitscreen) {
     text setpoint("TOP", undefined, secondaryprogressbartextx, secondaryprogressbartexty);
-  }
-  else {
+  } else {
     text setpoint("CENTER", undefined, secondaryprogressbartextx, secondaryprogressbartexty);
   }
 
@@ -561,15 +548,13 @@ updatechildren() {
 createloadouticon(verindex, horindex, xpos, ypos) {
   if(level.splitscreen) {
     ypos = ypos - (80 + 32 * (3 - verindex));
-  }
-  else {
+  } else {
     ypos = ypos - (90 + 32 * (3 - verindex));
   }
 
   if(level.splitscreen) {
     xpos = xpos - (5 + 32 * horindex);
-  }
-  else {
+  } else {
     xpos = xpos - (10 + 32 * horindex);
   }
 
@@ -586,15 +571,13 @@ createloadouticon(verindex, horindex, xpos, ypos) {
 setloadouticoncoords(verindex, horindex, xpos, ypos) {
   if(level.splitscreen) {
     ypos = ypos - (80 + 32 * (3 - verindex));
-  }
-  else {
+  } else {
     ypos = ypos - (90 + 32 * (3 - verindex));
   }
 
   if(level.splitscreen) {
     xpos = xpos - (5 + 32 * horindex);
-  }
-  else {
+  } else {
     xpos = xpos - (10 + 32 * horindex);
   }
 
@@ -676,8 +659,7 @@ showperk(index, perk, ypos) {
 
   if(perk == "perk_null" || perk == "weapon_null") {
     alpha = 0;
-  }
-  else {
+  } else {
     assert(isDefined(level.perkicons[perk]), perk);
     assert(isDefined(level.perknames[perk]), perk);
     alpha = 1;
@@ -737,8 +719,7 @@ showkillstreak(index, killstreak, xpos, ypos) {
 
   if(killstreak == "killstreak_null" || killstreak == "weapon_null") {
     alpha = 0;
-  }
-  else {
+  } else {
     assert(isDefined(level.killstreakicons[killstreak]), killstreak);
     alpha = 1;
   }

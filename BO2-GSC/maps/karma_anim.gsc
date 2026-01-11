@@ -237,8 +237,7 @@ set_blend_in_out_times(time) {
   self anim_set_blend_out_time(time);
 }
 
-arrival_precache_anims() {
-}
+arrival_precache_anims() {}
 
 #using_animtree("vehicles");
 #using_animtree("player");
@@ -573,8 +572,7 @@ checkin_anims() {
   precache_assets(1);
 }
 
-dropdown_precache_anims() {
-}
+dropdown_precache_anims() {}
 
 #using_animtree("generic_human");
 
@@ -682,8 +680,7 @@ spiderbot_anims() {
   precache_assets(1);
 }
 
-construction_precache_anims() {
-}
+construction_precache_anims() {}
 
 #using_animtree("player");
 #using_animtree("generic_human");
@@ -779,8 +776,7 @@ construction_anims() {
   precache_assets(1);
 }
 
-club_precache_anims() {
-}
+club_precache_anims() {}
 
 #using_animtree("generic_human");
 #using_animtree("animated_props");

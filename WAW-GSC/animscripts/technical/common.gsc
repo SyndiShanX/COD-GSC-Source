@@ -9,26 +9,22 @@ main(shoot, recover, aim, turret) {
   self.a.special = "technical";
   if(isDefined(turret.script_delay_min)) {
     turret_delay = turret.script_delay_min;
-  }
-  else {
+  } else {
     turret_delay = maps\_mgturret::burst_fire_settings("delay");
   }
   if(isDefined(turret.script_delay_max)) {
     turret_delay_range = turret.script_delay_max - turret_delay;
-  }
-  else {
+  } else {
     turret_delay_range = maps\_mgturret::burst_fire_settings("delay_range");
   }
   if(isDefined(turret.script_burst_min)) {
     turret_burst = turret.script_burst_min;
-  }
-  else {
+  } else {
     turret_burst = maps\_mgturret::burst_fire_settings("burst");
   }
   if(isDefined(turret.script_burst_max)) {
     turret_burst_range = turret.script_burst_max - turret_burst;
-  }
-  else {
+  } else {
     turret_burst_range = maps\_mgturret::burst_fire_settings("burst_range");
   }
   pauseUntilTime = getTime();
@@ -49,9 +45,7 @@ main(shoot, recover, aim, turret) {
       pauseUntilTime = getTime() + int(duration * 1000);
       if(isDefined(recover)) {
         turretState = "recover";
-        [
-          [recover]
-        ](turret);
+        [[recover]](turret);
       }
     } else {
       if(turretState != "aim") {

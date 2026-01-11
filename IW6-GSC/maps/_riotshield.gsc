@@ -121,8 +121,7 @@ group_sort_by_closest_match(var_0) {
   }
   if(isDefined(var_0)) {
     self.forward = var_0;
-  }
-  else {
+  } else {
     var_0 = self.forward;
   }
 
@@ -166,7 +165,7 @@ group_check_deaths() {
 
       if(self.ai_array.size <= self.fleethreshold) {
         foreach(var_1 in self.ai_array) {
-        var_1 riotshield_flee();
+          var_1 riotshield_flee();
         }
 
         self notify("break_group");
@@ -188,8 +187,7 @@ group_move(var_0, var_1) {
 
   if(isDefined(var_1)) {
     self.forward = var_1;
-  }
-  else {
+  } else {
     var_1 = self.forward;
   }
 

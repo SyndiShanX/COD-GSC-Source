@@ -473,7 +473,7 @@ destroy_parking_lot_vehicles_before_parking_lot_on_veteran() {
     structs = getstructarray("destroy_vehicles_struct", "targetname");
 
     foreach(struct in structs) {
-    radiusdamage(struct.origin, 1000, 9001, 9001);
+      radiusdamage(struct.origin, 1000, 9001, 9001);
     }
   }
 }
@@ -791,8 +791,7 @@ _ir_strobe_logic() {
   } else if(isDefined(tracedata["entity"]) && tracedata["entity"].classname == "script_vehicle") {
     if(tracedata["entity"].vehicletype == "apc_m113") {
       wait 6;
-    }
-    else {
+    } else {
       v_end_pos = self.origin;
       ac130_shoot(v_end_pos, 1);
     }
@@ -817,8 +816,7 @@ air_ambience(str_veh_targetname, str_paths, flag_ender, n_min_wait, n_max_wait) 
   nd_last_path = a_paths[0];
 
   while(!flag(flag_ender)) {
-    for(nd_path = a_paths[randomint(a_paths.size)]; nd_path == nd_last_path; nd_path = a_paths[randomint(a_paths.size)]) {
-    }
+    for(nd_path = a_paths[randomint(a_paths.size)]; nd_path == nd_last_path; nd_path = a_paths[randomint(a_paths.size)]) {}
 
     nd_last_path = nd_path;
     v_jet = spawn_vehicle_from_targetname(str_veh_targetname);
@@ -972,8 +970,7 @@ old_man_woods(str_movie_name, notify_special) {
 
   if(isDefined(notify_special)) {
     level clientnotify(notify_special);
-  }
-  else {
+  } else {
     level clientnotify("omw_off");
   }
 }

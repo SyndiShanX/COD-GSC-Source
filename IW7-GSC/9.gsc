@@ -94,8 +94,7 @@ spawn_agent_player(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_0
 
   if(isDefined(var_03) && var_03) {
     scripts\mp\bots\bots_personality::bot_assign_personality_functions();
-  }
-  else {
+  } else {
     scripts\mp\bots\bots_util::bot_set_personality("default");
   }
 
@@ -132,8 +131,7 @@ spawn_agent_player(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_0
 
   if(self.agent_type == "player") {
     thread scripts\mp\bots\bots::bot_think_level_acrtions();
-  }
-  else if(self.agent_type == "odin_juggernaut") {
+  } else if(self.agent_type == "odin_juggernaut") {
     thread scripts\mp\bots\bots::bot_think_level_acrtions(128);
   }
 
@@ -261,11 +259,9 @@ on_agent_generic_damaged(var_00, var_01, var_02, var_03, var_04, var_05, var_06,
   if(isDefined(var_01) && var_01 != self && var_02 > 0 && (!isDefined(var_08) || var_08 != "shield")) {
     if(var_03 &level.idflags_stun) {
       var_14 = "stun";
-    }
-    else if(!scripts\mp\damage::func_100C1(var_05)) {
+    } else if(!scripts\mp\damage::func_100C1(var_05)) {
       var_14 = "none";
-    }
-    else {
+    } else {
       var_14 = "standard";
     }
 
@@ -307,8 +303,7 @@ on_agent_player_killed(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
 
     if(scripts\mp\utility\game::getgametypenumlives() != 1 && (isDefined(self.respawn_on_death) && self.respawn_on_death)) {
       self thread[[scripts\mp\agents\agent_utility::agentfunc("spawn")]]();
-    }
-    else {
+    } else {
       scripts\mp\agents\agent_utility::deactivateagent();
     }
   }
@@ -346,11 +341,9 @@ on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, 
 initplayerclass() {
   if(isDefined(self.class_override)) {
     self.class = self.class_override;
-  }
-  else if(scripts\mp\bots\bots_loadout::bot_setup_loadout_callback()) {
+  } else if(scripts\mp\bots\bots_loadout::bot_setup_loadout_callback()) {
     self.class = "callback";
-  }
-  else {
+  } else {
     self.class = "class1";
   }
 }

@@ -8,8 +8,7 @@
 #include clientscripts\mp\_music;
 
 bus_spawned(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  if(newval) {
-  }
+  if(newval) {}
 }
 
 #using_animtree("zombie_bus_props");
@@ -24,8 +23,7 @@ init_animtree() {
   scriptmodelsuseanimtree(#animtree);
 }
 
-bus_interior_lights(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-}
+bus_interior_lights(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {}
 
 bus_flashing_lights(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(!isDefined(self.flashinglights)) {

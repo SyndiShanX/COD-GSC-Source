@@ -78,7 +78,7 @@ transit_navcomputer_remove_card_on_success() {
     players = get_players();
 
     foreach(player in players) {
-    player maps\mp\zombies\_zm_stats::set_global_stat(level.navcard_needed, 0);
+      player maps\mp\zombies\_zm_stats::set_global_stat(level.navcard_needed, 0);
     }
 
     level thread sq_refresh_player_navcard_hud();
@@ -152,8 +152,7 @@ exploit_reroute(zombie_trigger, player_trigger_origin, player_trigger_radius, zo
 
       if(isDefined(player) && player player_in_exploit_area(player_trigger_origin, player_trigger_radius)) {
         self.reroute_origin = zombie_goto_point;
-      }
-      else {
+      } else {
         break;
       }
     } else

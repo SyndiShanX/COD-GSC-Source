@@ -426,9 +426,7 @@ play_vo(param_00, param_01) {
 
     if(var_06 == self) {
       if(isDefined(level.get_alias_2d_func)) {
-        var_07 = [
-          [level.get_alias_2d_func]
-        ](var_06, var_02, var_04);
+        var_07 = [[level.get_alias_2d_func]](var_06, var_02, var_04);
       } else {
         var_07 = get_alias_2d_version(var_09, var_04, var_05);
       }
@@ -607,9 +605,7 @@ func_FF79(param_00, param_01, param_02, param_03, param_04, param_05, param_06) 
 
   if(scripts\cp\zombies\zombie_afterlife_arcade::is_in_afterlife_arcade(self)) {
     if(isDefined(level.var_18E8)) {
-      if(![
-          [level.var_18E8]
-        ](param_00)) {
+      if(![[level.var_18E8]](param_00)) {
         return 0;
       }
     }

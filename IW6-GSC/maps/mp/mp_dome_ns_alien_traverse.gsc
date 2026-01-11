@@ -39,8 +39,7 @@ main() {
   codeMoveNotetracks = GetNotetrackTimes(traverseAnim, "code_move");
   if(codeMoveNotetracks.size > 0) {
     moveDelta = GetMoveDelta(traverseAnim, 0, codeMoveNotetracks[0]);
-  }
-  else {
+  } else {
     moveDelta = GetMoveDelta(traverseAnim, 0, 1);
   }
 

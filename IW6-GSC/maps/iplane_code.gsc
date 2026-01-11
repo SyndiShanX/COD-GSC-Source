@@ -90,13 +90,13 @@ pause_smoke_fx() {
     common_scripts\utility::flag_wait("pause_plane_fx");
 
     foreach(var_2 in var_0) {
-    var_2 common_scripts\utility::pauseeffect();
+      var_2 common_scripts\utility::pauseeffect();
     }
 
     common_scripts\utility::flag_waitopen("pause_plane_fx");
 
     foreach(var_2 in var_0) {
-    var_2 maps\_utility::restarteffect();
+      var_2 maps\_utility::restarteffect();
     }
   }
 }
@@ -109,7 +109,7 @@ physics_of_objects_in_plane() {
   var_0 = getEntArray("zerog_physics", "targetname");
 
   foreach(var_2 in var_0) {
-  physicsexplosionsphere(var_2.origin, 64, 32, 0.01);
+    physicsexplosionsphere(var_2.origin, 64, 32, 0.01);
   }
 
   setphysicsgravitydir((0, 0, -0.02));
@@ -147,7 +147,7 @@ physics_of_objects_in_plane() {
     }
 
     foreach(var_2 in var_0) {
-    physicsexplosionsphere(var_2.origin, 150, 75, 0.01);
+      physicsexplosionsphere(var_2.origin, 150, 75, 0.01);
     }
 
     wait(var_5);

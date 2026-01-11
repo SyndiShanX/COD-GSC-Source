@@ -662,7 +662,7 @@ DoCustomAnim(turret, anime, centerTurretFirst) {
 
   /*
   // these endons are dupes
-	
+  	
   self endon( "death" );
   turret endon( "death" );
   self endon( "dismount" );

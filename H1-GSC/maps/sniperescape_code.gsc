@@ -208,8 +208,7 @@ enemy_override() {
 
   if(isDefined(level.engagement_dist_func[self.classname])) {
     [[level.engagement_dist_func[self.classname]]]();
-  }
-  else {
+  } else {
     return;
   }
 
@@ -418,8 +417,7 @@ enemy_accuracy_assignment() {
       var_7[var_6][var_2].threatbias = 0;
     }
 
-    if(isDefined(var_10)) {
-    }
+    if(isDefined(var_10)) {}
   }
 }
 
@@ -495,8 +493,7 @@ create_price_dialogue_master() {
 price_line(var_0) {
   if(isDefined(level.scr_sound["price"][var_0])) {
     level.price_dialogue_master maps\_utility::function_stack(::play_sound_on_price, level.scr_sound["price"][var_0]);
-  }
-  else {
+  } else {
     level.price_dialogue_master maps\_utility::function_stack(::play_sound_on_player, var_0);
   }
 }
@@ -509,8 +506,7 @@ play_sound_on_price(var_0) {
   }
   if(isalive(level.price)) {
     self linkto(level.price, "tag_eye", (0, 0, 0), (0, 0, 0));
-  }
-  else {
+  } else {
     self linkto(level.player, "", (0, 0, 60), (0, 0, 0));
   }
 
@@ -1012,8 +1008,7 @@ price_flees_grenades() {
 
     if(level.price should_turn_right(var_1.origin)) {
       thread price_turns_right();
-    }
-    else {
+    } else {
       thread price_turns_left();
     }
 
@@ -1174,8 +1169,7 @@ price_targets_guy(var_0) {
 price_turns_towards_guy(var_0) {
   if(level.price should_turn_right(var_0.origin)) {
     price_turns_right();
-  }
-  else {
+  } else {
     price_turns_left();
   }
 }
@@ -1217,9 +1211,7 @@ insert_in_array(var_0, var_1, var_2) {
 
   for(var_5 = 0; var_5 < var_0.size; var_5++) {
     if(!var_4) {
-      if([
-          [var_2]
-        ](var_0[var_5], var_1)) {
+      if([[var_2]](var_0[var_5], var_1)) {
         var_3[var_3.size] = var_1;
         var_4 = 1;
       }
@@ -1325,8 +1317,7 @@ price_moves_to_sniping_position() {
     if(var_6 > -0.7) {
       if(level.price should_turn_right(var_1)) {
         price_turns_left();
-      }
-      else {
+      } else {
         price_turns_right();
       }
 
@@ -1358,8 +1349,7 @@ price_moves_to_sniping_position() {
     if(var_6 < 0.7) {
       if(level.price should_turn_right(var_8.origin)) {
         price_turns_right();
-      }
-      else {
+      } else {
         price_turns_left();
       }
 
@@ -1454,8 +1444,7 @@ idle_until_price_has_target() {
 
           if(level.price should_turn_right(level.player.origin)) {
             price_turns_right();
-          }
-          else {
+          } else {
             price_turns_left();
           }
 
@@ -1527,8 +1516,7 @@ price_fends_off_attacker(var_0) {
     if(var_3 < 0.8) {
       if(level.price should_turn_right(var_0.origin)) {
         thread price_turns_right();
-      }
-      else {
+      } else {
         thread price_turns_left();
       }
 
@@ -1553,8 +1541,7 @@ price_fends_off_attacker(var_0) {
 
       if(level.price canshoot(level.price.targetorg.origin, var_6)) {
         level.price maps\_anim::anim_single_solo(level.price, "wounded_fire");
-      }
-      else {
+      } else {
         level.price maps\_anim::anim_custom_animmode_solo(level.price, "gravity", "wounded_crawl");
         insure_crawler_is_above_ground();
       }
@@ -1832,8 +1819,7 @@ price_aims_at_his_enemy() {
 
     if(level.price.on_target) {
       level.price notify("on_target");
-    }
-    else {
+    } else {
       var_6 = common_scripts\utility::sign(var_6) * 3;
     }
 
@@ -1992,8 +1978,7 @@ player_picks_up_price() {
 
   if(getdvarint("use_old_crash_pickup") == 1) {
     level.wounded_model = "player_carry";
-  }
-  else {
+  } else {
     level.wounded_model = "wounded_carry";
   }
 
@@ -2015,8 +2000,7 @@ player_picks_up_price() {
 
     if(getdvarint("use_old_crash_pickup") == 1) {
       var_2 maps\_utility::lerp_player_view_to_tag("tag_player", var_4, 1.0, 0, 0, 0, 0);
-    }
-    else {
+    } else {
       var_2 maps\_utility::lerp_player_view_to_tag_oldstyle(level.player, "tag_player", var_4, 1.0, 0, 0, 0, 0);
     }
 
@@ -2027,8 +2011,7 @@ player_picks_up_price() {
     var_1 notify("stop_loop");
     var_2 show();
 
-    if(getdvarint("use_old_crash_pickup") != 1) {
-    }
+    if(getdvarint("use_old_crash_pickup") != 1) {}
 
     var_1 maps\_anim::anim_single(var_5, var_0);
     thread price_talks_as_he_is_picked_up();
@@ -2085,8 +2068,7 @@ player_picks_up_price() {
 
   if(getdvarint("use_old_crash_pickup") == 1) {
     level.player playerlinkto(var_2, "tag_player", 1.0, 0, 0, 0, 0);
-  }
-  else {
+  } else {
     level.player playerlinktodelta(var_2, "tag_player", 1.0, 0, 0, 0, 0);
   }
 
@@ -2186,8 +2168,7 @@ player_puts_down_price() {
 
   if(getdvarint("use_old_crash_pickup") == 1) {
     level.player playerlinkto(var_1, "tag_player", 0.5, 1.0, 0, 0, 0, 0);
-  }
-  else {
+  } else {
     level.player playerlinktodelta(var_1, "tag_player", 1.0, 0, 0, 0, 0, 0);
   }
 
@@ -2209,8 +2190,7 @@ player_puts_down_price() {
 
   if(common_scripts\utility::flag("to_the_pool") && sufficient_time_remaining()) {
     common_scripts\utility::flag_set("can_save");
-  }
-  else {
+  } else {
     common_scripts\utility::flag_clear("can_save");
   }
 
@@ -2550,8 +2530,7 @@ max_price_health() {
 
   if(common_scripts\utility::flag("to_the_pool")) {
     level.price.health = 50000;
-  }
-  else {
+  } else {
     level.price.health = var_0[level.gameskill] * 4;
   }
 
@@ -2901,8 +2880,7 @@ tracks_ent(var_0) {
   for(;;) {
     if(level.player istouching(var_1) || sighttracepassed(self gettagorigin("tag_barrel"), level.player getEye(), 0, undefined)) {
       self setturrettargetent(level.player, (0, 0, 24));
-    }
-    else {
+    } else {
       self setturrettargetent(var_0);
     }
 
@@ -3399,8 +3377,7 @@ spawn_classname(var_0, var_1, var_2, var_3) {
 
     if(var_3 && randomint(100) > 30) {
       var_6.script_flashbangs = 3;
-    }
-    else {
+    } else {
       var_6.script_flashbangs = undefined;
     }
 
@@ -3736,8 +3713,7 @@ fairground_attack_logic() {
 
   if(level.gameskill >= 2) {
     self.fairground_flanker = !var_0;
-  }
-  else {
+  } else {
     self.fairground_flanker = 0;
 
     if(!var_0) {
@@ -3758,8 +3734,7 @@ fairground_attack_logic() {
   for(;;) {
     if(isDefined(level.fair_zone)) {
       fairground_zone_attack_behavior();
-    }
-    else {
+    } else {
       fairground_generic_attack_behavior();
     }
 
@@ -3788,8 +3763,7 @@ fairground_zone_attack_behavior() {
 
   if(isDefined(level.engagement_dist_func[self.classname])) {
     [[level.engagement_dist_func[self.classname]]]();
-  }
-  else {
+  } else {
     engagement_gun();
   }
 
@@ -4090,8 +4064,7 @@ price_warns_player() {
 
       if(var_0 == "watch_out_1") {
         var_0 = "watch_out_2";
-      }
-      else {
+      } else {
         var_0 = "watch_out_1";
       }
 
@@ -4222,8 +4195,7 @@ get_fair_spawners() {
 
   if(level.player istouching(var_0)) {
     return getEntArray("fair_spawner_alt", "targetname");
-  }
-  else {
+  } else {
     return getEntArray("fair_spawner", "targetname");
   }
 }
@@ -4335,14 +4307,11 @@ spawn_dog_support() {
 
   if(level.gameskill == 0) {
     spawn_classname(var_0, "dog", 2);
-  }
-  else if(level.gameskill == 1) {
+  } else if(level.gameskill == 1) {
     spawn_classname(var_0, "dog", 2);
-  }
-  else if(level.gameskill == 2) {
+  } else if(level.gameskill == 2) {
     spawn_classname(var_0, "dog", 3);
-  }
-  else if(level.gameskill == 3) {
+  } else if(level.gameskill == 3) {
     spawn_classname(var_0, "dog", 3);
   }
 }
@@ -4504,8 +4473,7 @@ fairground_post_detection() {
 
     wait_until_enough_ai_headroom(var_1[var_5["event"]]);
 
-    if(getaispeciesarray("axis", "all").size <= 8) {
-    }
+    if(getaispeciesarray("axis", "all").size <= 8) {}
 
     thread[[var_0[var_5["event"]]]]();
     var_4++;
@@ -4814,8 +4782,7 @@ set_c4_throw_binding() {
   if(var_2["count"]) {
     if(level.xenon || var_0) {
       maps\_utility::add_hint_string("c4_throw", &"SCRIPT_HINT_THROW_C4_SPEED_TRIGGER", maps\sniperescape_exchange::should_break_c4_throw);
-    }
-    else {
+    } else {
       maps\_utility::add_hint_string("c4_throw", &"SCRIPT_HINT_THROW_C4_SPEED", maps\sniperescape_exchange::should_break_c4_throw);
     }
 
@@ -4993,8 +4960,7 @@ force_player_to_use_legit_sniper_escape_weapon() {
 
   if(var_2 == 2) {
     return;
-  }
-  else if(var_2 == 1) {
+  } else if(var_2 == 1) {
     if(player_has_legit_sniper_rifle(var_1)) {
       level.player giveweapon("ak47");
       level.player switchtoweapon("ak47");

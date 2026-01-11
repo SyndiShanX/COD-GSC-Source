@@ -55,8 +55,7 @@ main() {
 
   if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen()) {
     setscoreboardcolumns("score", "kills", "captures", "defends", "deaths");
-  }
-  else {
+  } else {
     setscoreboardcolumns("score", "kills", "deaths", "captures", "defends");
   }
 
@@ -69,8 +68,7 @@ main() {
   maps\mp\gametypes\_globallogic_audio::registerdialoggroup("gamemode_changing_c", 0);
 }
 
-onprecachegametype() {
-}
+onprecachegametype() {}
 
 onstartgametype() {
   setobjectivetext("allies", &"OBJECTIVES_DOM");
@@ -116,7 +114,7 @@ onstartgametype() {
   level.spawn_start = [];
 
   foreach(team in level.teams) {
-  level.spawn_start[team] = maps\mp\gametypes\_spawnlogic::getspawnpointarray("mp_dom_spawn_" + team + "_start");
+    level.spawn_start[team] = maps\mp\gametypes\_spawnlogic::getspawnpointarray("mp_dom_spawn_" + team + "_start");
   }
 
   flagspawns = maps\mp\gametypes\_spawnlogic::getspawnpointarray("mp_dom_spawn_flag_a");
@@ -196,8 +194,7 @@ onspawnplayer(predictedspawn) {
 
   if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "dom");
   }
 }
@@ -283,8 +280,7 @@ domflags() {
 
     if(isDefined(trigger.target)) {
       visuals[0] = getent(trigger.target, "targetname");
-    }
-    else {
+    } else {
       visuals[0] = spawn("script_model", trigger.origin);
       visuals[0].angles = trigger.angles;
     }
@@ -395,8 +391,7 @@ onbeginuse(player) {
 
   if(ownerteam == "allies") {
     otherteam = "axis";
-  }
-  else {
+  } else {
     otherteam = "allies";
   }
 
@@ -537,8 +532,7 @@ onuse(player) {
 
       if(randomint(2)) {
         statusdialog("lost" + self.label, oldteam, "gamemode_objective" + self.label, "gamemode_changing" + self.label);
-      }
-      else {
+      } else {
         statusdialog("enemy" + self.label, oldteam, "gamemode_objective" + self.label, "gamemode_changing" + self.label);
       }
 
@@ -598,8 +592,7 @@ give_capture_credit(touchlist, string, lastownerteam, isbflag) {
       if(lastownerteam == "neutral") {
         if(isbflag) {
           maps\mp\_scoreevents::processscoreevent("dom_point_neutral_b_secured", player_from_touchlist);
-        }
-        else {
+        } else {
           maps\mp\_scoreevents::processscoreevent("dom_point_neutral_secured", player_from_touchlist);
         }
       } else
@@ -690,8 +683,7 @@ onscoreclosemusic() {
 
   if(alliedscore > axisscore) {
     currentscore = alliedscore;
-  }
-  else {
+  } else {
     currentscore = axisscore;
   }
 
@@ -755,8 +747,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
 
         if(level.flags[index] getflagteam() == attacker.pers["team"] || level.flags[index] getflagteam() == "neutral") {
           defendedflag = 1;
-        }
-        else {
+        } else {
           offendedflag = 1;
         }
       }
@@ -768,8 +759,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
 
         if(level.flags[index] getflagteam() == attacker.pers["team"] || level.flags[index] getflagteam() == "neutral") {
           defendedflag = 1;
-        }
-        else {
+        } else {
           offendedflag = 1;
         }
       }
@@ -1047,8 +1037,7 @@ flagsetup() {
     for(i = 0; i < flags.size; i++) {
       if(isDefined(flags[i].descriptor.script_linkto)) {
         adjdescs = strtok(flags[i].descriptor.script_linkto, " ");
-      }
-      else {
+      } else {
         adjdescs = [];
       }
 
@@ -1226,11 +1215,9 @@ dominated_challenge_check() {
 
     if(flag_team == "allies") {
       allied_flags++;
-    }
-    else if(flag_team == "axis") {
+    } else if(flag_team == "axis") {
       axis_flags++;
-    }
-    else {
+    } else {
       return false;
     }
 
@@ -1252,8 +1239,7 @@ dominated_check() {
 
     if(flag_team == "allies") {
       allied_flags++;
-    }
-    else if(flag_team == "axis") {
+    } else if(flag_team == "axis") {
       axis_flags++;
     }
 
@@ -1315,8 +1301,7 @@ onupdateuserate() {
 
   if(numother > 0 && numowners > 0) {
     self.contested = 1;
-  }
-  else {
+  } else {
     if(previousstate == 1) {
       self notify("contest_over");
     }

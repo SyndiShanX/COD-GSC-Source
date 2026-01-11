@@ -23,8 +23,7 @@ __init__() {
   callback::on_finalize_initialization(&init);
 }
 
-__main__() {
-}
+__main__() {}
 
 init() {
   level.a_s_trap_buttons = struct::get_array("s_trap_button", "targetname");

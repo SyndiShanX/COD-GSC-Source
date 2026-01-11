@@ -21,8 +21,7 @@ preLoad() {
 attack_heli_fx() {
   if(GetDvarInt("sm_enable") && GetDvar("r_zfeather") != "0") {
     level._effect["_attack_heli_spotlight"] = LoadFX("misc/hunted_spotlight_model");
-  }
-  else {
+  } else {
     level._effect["_attack_heli_spotlight"] = LoadFX("misc/spotlight_large");
   }
 }
@@ -132,8 +131,7 @@ begin_attack_heli_behavior(eHeli, heli_points) {
     strength = undefined;
     if(level.gameskill == 0) {
       strength = 2800;
-    }
-    else {
+    } else {
       strength = 2200;
     }
 
@@ -201,7 +199,7 @@ begin_attack_heli_behavior(eHeli, heli_points) {
 
 detect_player_death() {
   foreach(player in level.players) {
-  player add_wait(::waittill_msg, "death");
+    player add_wait(::waittill_msg, "death");
   }
   do_wait_any();
 
@@ -299,8 +297,7 @@ kill_heli_logic(heli, heli_points) {
   baseSpeed = undefined;
   if(!isDefined(heli.script_airspeed)) {
     baseSpeed = 40;
-  }
-  else {
+  } else {
     baseSpeed = heli.script_airspeed;
   }
 
@@ -370,8 +367,7 @@ kill_heli_logic(heli, heli_points) {
   heli thread heli_shoot_think();
   if(heli.circling) {
     heli thread heli_circling_think(heli_points, baseSpeed);
-  }
-  else {
+  } else {
     heli thread heli_goal_think(baseSpeed);
   }
 }
@@ -466,11 +462,9 @@ heli_goal_think(baseSpeed) {
 
     if((isDefined(self.eTarget)) && (isDefined(self.eTarget.classname)) && (self.eTarget.classname == "script_origin")) {
       eLookAtEnt = player;
-    }
-    else if(isDefined(self.eTarget)) {
+    } else if(isDefined(self.eTarget)) {
       eLookAtEnt = self.eTarget;
-    }
-    else {
+    } else {
       eLookAtEnt = self.targetdefault;
     }
 
@@ -544,8 +538,7 @@ heli_goal_think(baseSpeed) {
 
       if(RandomInt(100) > 50) {
         goal = linked[iRand];
-      }
-      else {
+      } else {
         goal = player_location;
       }
     }
@@ -735,8 +728,7 @@ heli_has_player_target() {
   }
   if(IsPlayer(self.eTarget)) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -750,8 +742,7 @@ heli_has_target() {
   }
   if(self.eTarget == self.targetdefault) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -931,8 +922,7 @@ heli_missiles_think() {
 player_is_good_missile_target(player) {
   if(self.moving) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -1187,8 +1177,7 @@ minigun_spindown(eTarget) {
   self endon("firing_miniguns");
   if(IsPlayer(eTarget)) {
     wait(RandomFloatRange(3, 4)); // if player is the target, wait a few seconds before giving up
-  }
-  else {
+  } else {
     wait(RandomFloatRange(1, 2));
   }
   self thread minigun_spindown_sound();
@@ -1245,8 +1234,7 @@ can_see_player(player) {
   //BulletTracePassed( <start>, <end>, <hit characters>, <ignore entity> );
   if(SightTracePassed(tag_flash_loc, player getEye(), false, undefined)) {
     return true;
-  }
-  else {
+  } else {
     PrintLn("_attack_heli.gsc---trace failed");
     return false;
   }
@@ -1284,8 +1272,7 @@ get_linked_points(heli, goal, points, player, playerOrigin) {
 heli_damage_monitor() {
   if(!getDvarInt("scr_damagefeedback", 0)) {
     damage_feedback = false;
-  }
-  else {
+  } else {
     damage_feedback = true;
   }
 
@@ -1343,12 +1330,12 @@ is_hidden_from_heli(heli) {
   if(isDefined(heli.seen_attacker)) {
     if(heli.seen_attacker == self)
   }
-      return false;
+  return false;
   if(isDefined(level.attack_heli_safe_volumes)) {
     foreach(volume in level.attack_heli_safe_volumes) {
-    if(self IsTouching(volume))
+      if(self IsTouching(volume))
     }
-      return true;
+    return true;
   }
   return false;
 }
@@ -1783,8 +1770,7 @@ heli_fire_missiles(eTarget, iShots, delay, customMissiles) {
   self endon("heli_players_dead");
   if(isDefined(self.defaultWeapon)) {
     defaultWeapon = self.defaultWeapon;
-  }
-  else {
+  } else {
     defaultWeapon = "turret_attackheli";
   }
   weaponName = "missile_attackheli";

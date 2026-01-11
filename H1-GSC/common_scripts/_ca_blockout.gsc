@@ -21,13 +21,13 @@ delete_enemy() {
   var_0 = getspawnerteamarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   var_4 = getaiarray("axis");
 
   foreach(var_6 in var_4) {
-  var_6 delete();
+    var_6 delete();
   }
 }
 
@@ -73,7 +73,7 @@ delete_flood_spawner_trigger() {
   var_0 = getEntArray("flood_spawner", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -81,7 +81,7 @@ delete_camper_spawner_trigger() {
   var_0 = getEntArray("camper_spawner", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -89,7 +89,7 @@ delete_fog_trigger() {
   var_0 = getEntArray("trigger_fog", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -97,7 +97,7 @@ delete_script_vehicle() {
   var_0 = getEntArray("script_vehicle", "code_classname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -105,7 +105,7 @@ delete_truckjunk() {
   var_0 = getEntArray("truckjunk", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -113,7 +113,7 @@ delete_animated_model() {
   var_0 = getEntArray("animated_model", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -121,7 +121,7 @@ delete_interactive_tv() {
   var_0 = getEntArray("interactive_tv", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -129,7 +129,7 @@ delete_explodable_barrel() {
   var_0 = getEntArray("explodable_barrel", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 

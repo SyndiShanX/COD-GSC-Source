@@ -39,19 +39,16 @@ shouldstartambushround() {
     return false;
   }
 
-  if(level.numbusstopssincelastambushround < 2) {
-  }
+  if(level.numbusstopssincelastambushround < 2) {}
 
   randint = randomintrange(0, 100);
   percentchance = level.numbusstopssincelastambushround * level.ambushpercentageperstop;
 
-  if(randint < percentchance) {
-  }
+  if(randint < percentchance) {}
 
   percentchance = level.numroundssincelastambushround * level.ambushpercentageperround;
 
-  if(randint < percentchance) {
-  }
+  if(randint < percentchance) {}
 
   if(maps\mp\zm_transit_bus::busgasempty()) {
     return true;
@@ -98,8 +95,7 @@ ambushroundspawning() {
 limitedambushspawn() {
   if(level.numambushrounds < 3) {
     dogcount = level.dog_targets.size * 6;
-  }
-  else {
+  } else {
     dogcount = level.dog_targets.size * 8;
   }
 
@@ -126,8 +122,7 @@ ambushroundthink() {
   ambushendround();
 }
 
-ambushwaitfunction() {
-}
+ambushwaitfunction() {}
 
 ambushpointfailsafe() {
   level.the_bus endon("ambush_point");

@@ -340,8 +340,7 @@ market_anims() {
   precache_assets(1);
 }
 
-terrorist_hunt_anims() {
-}
+terrorist_hunt_anims() {}
 
 metal_storms_anims() {
   add_scene("courtyard_balcony_deaths", "metalstorms_align");
@@ -556,8 +555,7 @@ moral_rail_player_body_anim() {
   precache_assets(1);
 }
 
-hijacked_anims() {
-}
+hijacked_anims() {}
 
 #using_animtree("player");
 #using_animtree("generic_human");

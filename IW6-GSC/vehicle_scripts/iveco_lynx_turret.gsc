@@ -35,8 +35,7 @@ build_lynx_death(var_0) {
 
   if(isDefined(level.factory) && level.factory == 1) {
     level._effect["lynxexplode"] = loadfx("vfx/moments/factory/factory_chase_jeep_explosion");
-  }
-  else {
+  } else {
     level._effect["lynxexplode"] = loadfx("fx/explosions/vehicle_explosion_gaz");
   }
 
@@ -46,8 +45,7 @@ build_lynx_death(var_0) {
 
   if(isDefined(level.factory) && level.factory == 1) {
     maps\_vehicle::build_deathfx("vfx/moments/factory/factory_chase_jeep_explosion", "tag_origin");
-  }
-  else {
+  } else {
     maps\_vehicle::build_deathfx("fx/explosions/vehicle_explosion_gaz", "tag_origin");
   }
 

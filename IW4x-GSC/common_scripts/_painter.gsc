@@ -23,7 +23,7 @@ main(painter_spmp) {
   groups = get_painter_groups(painter_setup_array);
 
   foreach(group in groups) {
-  setup_painter_group(group);
+    setup_painter_group(group);
   }
 
   thread painter_init();
@@ -254,8 +254,7 @@ hud_init() {
     hudelems[i].sort = 20;
     if(i == div) {
       hudelems[i].alpha = 1;
-    }
-    else {
+    } else {
       hudelems[i].alpha = alpha;
     }
 
@@ -352,11 +351,10 @@ setcurrentgroup(group) {
   index = 0;
   div = int(level.spam_group_hudelems.size / 2);
   for(i = 0; i < keys.size; i++) {
-    if(keys[i] == group) {
+    if(keys[i] == group) {}
+    index = i;
+    break;
   }
-      index = i;
-      break;
-    }
 
   level.spam_group_hudelems[div] _settext(keys[index]);
 
@@ -392,11 +390,10 @@ setgroup_up() {
   index = undefined;
   keys = getarraykeys(level.spam_model_group);
   for(i = 0; i < keys.size; i++) {
-    if(keys[i] == level.spam_model_current_group) {
+    if(keys[i] == level.spam_model_current_group) {}
+    index = i + 1;
+    break;
   }
-      index = i + 1;
-      break;
-    }
   if(index == keys.size) {
     return;
   }
@@ -410,11 +407,10 @@ setgroup_down() {
   index = undefined;
   keys = getarraykeys(level.spam_model_group);
   for(i = 0; i < keys.size; i++) {
-    if(keys[i] == level.spam_model_current_group) {
+    if(keys[i] == level.spam_model_current_group) {}
+    index = i - 1;
+    break;
   }
-      index = i - 1;
-      break;
-    }
   if(index < 0) {
     return;
   }
@@ -474,35 +470,25 @@ playerInit() {
     }
     if(level.painter_player buttonpressed("DPAD_UP")) {
       customrotation_mode(trace, "DPAD_UP");
-    }
-    else if(level.painter_player buttonpressed("DPAD_DOWN")) {
+    } else if(level.painter_player buttonpressed("DPAD_DOWN")) {
       customrotation_mode_off();
-    }
-    else if(level.painter_player buttonpressed("DPAD_RIGHT")) {
+    } else if(level.painter_player buttonpressed("DPAD_RIGHT")) {
       customheight_mode(trace, "DPAD_RIGHT");
-    }
-    else if(level.painter_player buttonpressed("DPAD_LEFT")) {
+    } else if(level.painter_player buttonpressed("DPAD_LEFT")) {
       customheight_mode_off();
-    }
-    else if(level.painter_player buttonpressed("BUTTON_X")) {
+    } else if(level.painter_player buttonpressed("BUTTON_X")) {
       setgroup_down();
-    }
-    else if(level.painter_player buttonpressed("BUTTON_Y")) {
+    } else if(level.painter_player buttonpressed("BUTTON_Y")) {
       setgroup_up();
-    }
-    else if(level.painter_player buttonpressed("BUTTON_LSTICK")) {
+    } else if(level.painter_player buttonpressed("BUTTON_LSTICK")) {
       spam_model_circlescale(trace, -1);
-    }
-    else if(level.painter_player buttonpressed("BUTTON_RSTICK")) {
+    } else if(level.painter_player buttonpressed("BUTTON_RSTICK")) {
       spam_model_circlescale(trace, 1);
-    }
-    else if(level.painter_player buttonpressed("BUTTON_A")) {
+    } else if(level.painter_player buttonpressed("BUTTON_A")) {
       spam_model_densityscale(trace, -1);
-    }
-    else if(level.painter_player buttonpressed("BUTTON_B")) {
+    } else if(level.painter_player buttonpressed("BUTTON_B")) {
       spam_model_densityscale(trace, 1);
-    }
-    else {
+    } else {
       if(level.painter_player buttonpressed("BUTTON_LSHLDR")) {
         spam_model_erase(trace);
       }
@@ -542,11 +528,9 @@ customheight_mode(trace, button) {
     height = level.spam_models_customheight;
     if(level.painter_player buttonpressed("BUTTON_A")) {
       dir = -1;
-    }
-    else if(level.painter_player buttonpressed("BUTTON_B")) {
+    } else if(level.painter_player buttonpressed("BUTTON_B")) {
       dir = 1;
-    }
-    else {
+    } else {
       dir = 0;
     }
     height += dir * inc;
@@ -599,8 +583,7 @@ customrotation_mode(trace, button) {
     dir = 0;
     if(level.painter_player buttonpressed("BUTTON_A")) {
       dir = -1;
-    }
-    else if(level.painter_player buttonpressed("BUTTON_B")) {
+    } else if(level.painter_player buttonpressed("BUTTON_B")) {
       dir = 1;
     }
     otherangle += dir * otherangleinc;
@@ -658,8 +641,7 @@ spam_model_circlescale(trace, dir) {
 
   if(level.spam_model_circlescale_accumtime < .5) {
     inc = 2;
-  }
-  else {
+  } else {
     inc = level.spam_model_circlescale_accumtime / .3;
   }
 
@@ -810,11 +792,11 @@ spam_models_atcircle(trace, bRandomrotation, bForcedSpam) {
     if(!bForcedSpam) {
       if(is_too_dense(traceorg))
     }
-        return models;
+    return models;
     if(!bForcedSpam) {
       if(level.spamed_models.size + models.size > level.painter_max)
     }
-        return models;
+    return models;
 
     getmodel = getrandom_spammodel();
     models[0] = spam_modelattrace(trace, getmodel);
@@ -825,34 +807,33 @@ spam_models_atcircle(trace, bRandomrotation, bForcedSpam) {
 
   countourtrace = [];
   for(x = startpoint; x < incs; x++) {
-    for(y = startpoint; y < incs; y++) {
-  }
-      if(!bForcedSpam) {
-        if(level.spamed_models.size + models.size > level.painter_max)
-      }
-          return models;;
-      modelpos = startpos;
-      modelpos += (xvect * x * incdistance);
-      modelpos += (yvect * y * incdistance);
-      if(distance(modelpos, traceorg) > radius) {
-        continue;
-      }
-
-      countourtrace = contour_point(modelpos, angles, level.spam_model_radius);
-
-      if(countourtrace["fraction"] == 1) {
-        continue;
-      }
-      if(is_too_dense(countourtrace["position"])) {
-        continue;
-      }
-      getmodel = getrandom_spammodel();
-
-      model = spam_modelattrace(countourtrace, getmodel);
-      model orient_model();
-      models[models.size] = model;
-
+    for(y = startpoint; y < incs; y++) {}
+    if(!bForcedSpam) {
+      if(level.spamed_models.size + models.size > level.painter_max)
     }
+    return models;;
+    modelpos = startpos;
+    modelpos += (xvect * x * incdistance);
+    modelpos += (yvect * y * incdistance);
+    if(distance(modelpos, traceorg) > radius) {
+      continue;
+    }
+
+    countourtrace = contour_point(modelpos, angles, level.spam_model_radius);
+
+    if(countourtrace["fraction"] == 1) {
+      continue;
+    }
+    if(is_too_dense(countourtrace["position"])) {
+      continue;
+    }
+    getmodel = getrandom_spammodel();
+
+    model = spam_modelattrace(countourtrace, getmodel);
+    model orient_model();
+    models[models.size] = model;
+
+  }
   return models;
 }
 
@@ -860,7 +841,7 @@ is_too_dense(testorg) {
   for(i = level.spamed_models.size - 1; i >= 0; i--) {
     if(distance(level.spamed_models[i].orgorg, testorg) < (level.spam_density_scale - 1))
   }
-      return true;
+  return true;
   return false;
 }
 
@@ -933,8 +914,7 @@ spam_model_erase(trace) {
   for(i = 0; i < level.spamed_models.size; i++) {
     if(distance(level.spamed_models[i].orgorg, traceorg) > level.spam_model_radius) {
       keepmodels[keepmodels.size] = level.spamed_models[i];
-    }
-    else {
+    } else {
       deletemodels[deletemodels.size] = level.spamed_models[i];
     }
   }

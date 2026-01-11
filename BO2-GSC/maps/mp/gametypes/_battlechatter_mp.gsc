@@ -345,8 +345,7 @@ onplayerkillstreak(player) {
   player endon("disconnect");
 }
 
-onkillstreakused(killstreak, team) {
-}
+onkillstreakused(killstreak, team) {}
 
 onplayernearexplodable(object, type) {
   self endon("disconnect");
@@ -804,8 +803,7 @@ mpsaylocalsound(player, partone, parttwo, checkspeakers, is2d) {
 
     if(isDefined(is2d)) {
       player thread dosound(soundalias, is2d);
-    }
-    else {
+    } else {
       player thread dosound(soundalias);
     }
   }
@@ -834,8 +832,7 @@ dosound(soundalias, is2d) {
 
   if(isDefined(is2d)) {
     self playlocalsound(soundalias);
-  }
-  else if(level.allowbattlechatter && level.teambased) {
+  } else if(level.allowbattlechatter && level.teambased) {
     self playsoundontag(soundalias, "J_Head");
   }
 

@@ -72,8 +72,7 @@ update_drill_outline() {
 
     if(outline_color == CONST_OUTLINE_COLOR_GREEN || outline_color == CONST_OUTLINE_COLOR_RED) {
       enable_outline_for_player(level.drill, player, outline_color, false, "high");
-    }
-    else {
+    } else {
       disable_outline_for_player(level.drill, player);
     }
   }
@@ -87,8 +86,7 @@ player_outline() {
     }
     if(should_put_player_outline_on(player)) {
       enable_outline_for_player(player, self, get_color_index_player(player), false, "high");
-    }
-    else {
+    } else {
       disable_outline_for_player(player, self);
     }
   }
@@ -117,8 +115,7 @@ set_alien_outline() {
       }
       if(isDefined(alien.pet)) {
         continue;
-      }
-      else {
+      } else {
         if(!isDefined(alien.no_outline_on_alien)) {
           if(isDefined(alien.feral_occludes)) {
             enable_outline_for_player(alien, self, 4, true, "high");
@@ -165,8 +162,7 @@ drill_preplant_outline_monitor() {
     }
     if(should_put_drill_outline_on(item)) {
       enable_outline_for_player(item, self, 3, false, "high");
-    }
-    else {
+    } else {
       disable_outline_for_player(item, self);
     }
 
@@ -187,11 +183,9 @@ item_outline() {
 
     if(outline_color == CONST_OUTLINE_COLOR_GREEN) {
       enable_outline_for_player(item, self, get_color_index_item(item), true, "low");
-    }
-    else if(outline_color == CONST_OUTLINE_COLOR_RED) {
+    } else if(outline_color == CONST_OUTLINE_COLOR_RED) {
       enable_outline_for_player(item, self, 4, true, "low");
-    }
-    else {
+    } else {
       disable_outline_for_player(item, self);
     }
 
@@ -212,11 +206,9 @@ item_outline_pillage() {
 
     if(outline_color == CONST_OUTLINE_COLOR_GREEN) {
       enable_outline_for_player(item, self, 3, false, "low");
-    }
-    else if(outline_color == CONST_OUTLINE_COLOR_RED) {
+    } else if(outline_color == CONST_OUTLINE_COLOR_RED) {
       enable_outline_for_player(item, self, CONST_OUTLINE_COLOR_RED, false, "low");
-    }
-    else {
+    } else {
       disable_outline_for_player(item, self);
     }
 
@@ -244,11 +236,9 @@ item_outline_weapon_monitor() {
 
     if(outline_color == CONST_OUTLINE_COLOR_GREEN) {
       enable_outline_for_player(item, self, get_color_index_item(item, weapon_flag), true, "low");
-    }
-    else if(outline_color == CONST_OUTLINE_COLOR_RED) {
+    } else if(outline_color == CONST_OUTLINE_COLOR_RED) {
       enable_outline_for_player(item, self, 4, true, "low");
-    }
-    else {
+    } else {
       disable_outline_for_player(item, self);
     }
 
@@ -273,8 +263,7 @@ item_outline_drill_monitor() {
     if(ratio < 0.75) {
       if(should_put_drill_outline_on(drill)) {
         enable_outline_for_player(drill, self, get_drill_widget_color(drill), false, "high");
-      }
-      else {
+      } else {
         disable_outline_for_player(drill, self);
       }
     } else
@@ -296,14 +285,11 @@ get_drill_widget_color(drill) {
 
   if(ratio <= 0.30) {
     return PLAYER_COLOR_INDEX_BAD_HEALTH;
-  }
-  else if(ratio <= 0.75) {
+  } else if(ratio <= 0.75) {
     return PLAYER_COLOR_INDEX_OKAY_HEALTH;
-  }
-  else if(ratio <= 1) {
+  } else if(ratio <= 1) {
     return PLAYER_COLOR_INDEX_GOOD_HEALTH;
-  }
-  else {
+  } else {
     return PLAYER_COLOR_INDEX_BOOSTED_HEALTH;
   }
 }
@@ -311,15 +297,13 @@ get_drill_widget_color(drill) {
 get_color_index_item(item, weapon_flag) {
   if(self has_pistols_only_relic_and_no_deployables() && is_true(weapon_flag)) {
     cost = level.pistol_ammo_cost;
-  }
-  else {
+  } else {
     cost = item.cost;
   }
 
   if(maps\mp\alien\_persistence::player_has_enough_currency(cost) || is_true(item.enabled)) {
     return ITEM_COLOR_INDEX_ENOUGH_MONEY;
-  }
-  else {
+  } else {
     return ITEM_COLOR_INDEX_NOT_ENOUGH_MONEY;
   }
 }
@@ -329,14 +313,11 @@ get_color_index_player(player) {
 
   if(health_ratio <= 0.33 || player.inlaststand) {
     return PLAYER_COLOR_INDEX_BAD_HEALTH;
-  }
-  else if(health_ratio <= 0.66) {
+  } else if(health_ratio <= 0.66) {
     return PLAYER_COLOR_INDEX_OKAY_HEALTH;
-  }
-  else if(health_ratio <= 1.0) {
+  } else if(health_ratio <= 1.0) {
     return PLAYER_COLOR_INDEX_GOOD_HEALTH;
-  }
-  else {
+  } else {
     return PLAYER_COLOR_INDEX_BOOSTED_HEALTH;
   }
 }
@@ -354,11 +335,9 @@ get_item_outline_color(item) {
   if(self has_special_weapon()) {
     if(isDefined(item.targetname) && (item.targetname == "fire_trap_barrel" || item.targetname == "puddle_generator" || item.targetname == "fence_generator")) {
       return CONST_OUTLINE_COLOR_GREEN;
-    }
-    else if(isDefined(item.classname) && item.classname == "misc_turret") {
+    } else if(isDefined(item.classname) && item.classname == "misc_turret") {
       return CONST_OUTLINE_COLOR_GREEN;
-    }
-    else {
+    } else {
       return CONST_OUTLINE_COLOR_RED;
     }
   } else if(self is_holding_deployable()) {
@@ -414,8 +393,7 @@ get_weapon_outline_color(item) {
   if(self has_special_weapon() && !is_true(item.is_recipe_table)) {
     if(isDefined(level.drill) && item == level.drill) {
       return CONST_OUTLINE_COLOR_GREEN;
-    }
-    else {
+    } else {
       return CONST_OUTLINE_COLOR_RED;
     }
   }

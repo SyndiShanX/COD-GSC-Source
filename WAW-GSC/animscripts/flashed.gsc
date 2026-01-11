@@ -53,8 +53,7 @@ main() {
   self.allowdeath = true;
   if(isDefined(self.flashedanim)) {
     self setanimknoball(self.flashedanim, % body);
-  }
-  else {
+  } else {
     self thread flashBangAnim();
   }
   for(;;) {

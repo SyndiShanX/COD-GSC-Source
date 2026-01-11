@@ -23,8 +23,7 @@ moveloop() {
   for(;;) {
     if(self.disablearrivals) {
       self.stopanimdistsq = 0;
-    }
-    else {
+    } else {
       self.stopanimdistsq = anim.dogstoppingdistsq;
     }
 

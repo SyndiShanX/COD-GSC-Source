@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_ae2d0839;
 
 autoexec __init__system__() {
@@ -106,7 +105,7 @@ private on_weapon_fired(params) {
     self notify(#"hash_593afdd4317784a0");
   }
 
-  self endon(#"disconnect", #"hash_593afdd4317784a0");
+  self endon(#"disconnect", # "hash_593afdd4317784a0");
   level endon(#"hash_7646638df88a3656");
 
   if(!isDefined(self.var_9979ffd6)) {
@@ -149,7 +148,7 @@ private function_33f0ddd3(s_event) {
 
 event_handler[missile_fire] function_f8ea644(eventstruct) {
   if(is_active() && isDefined(eventstruct.projectile)) {
-    s_waitresult = eventstruct.projectile waittilltimeout(2, #"death", #"explode", #"projectile_impact_explode", #"stationary", #"grenade_stuck");
+    s_waitresult = eventstruct.projectile waittilltimeout(2, # "death", # "explode", # "projectile_impact_explode", # "stationary", # "grenade_stuck");
     self function_b33ed7bd();
   }
 }

@@ -117,8 +117,7 @@ main() {
 
   if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
     level._effect["spotlight"] = loadfx("fx\misc\hunted_spotlight_model_night_no_noise");
-  }
-  else {
+  } else {
     level._effect["spotlight"] = loadfx("fx\misc\spotlight_large_night");
   }
 

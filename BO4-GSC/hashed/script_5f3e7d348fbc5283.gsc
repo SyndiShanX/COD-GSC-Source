@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_world;
-
 #namespace namespace_6fec3d63;
 
 autoexec __init__system__() {

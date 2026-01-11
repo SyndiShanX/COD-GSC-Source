@@ -20,8 +20,7 @@ init_flags() {
   flag_init("kill_rocket_hall_vo");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_terrorist_hunt() {
   load_gump("yemen_gump_speech");
@@ -31,8 +30,7 @@ skipto_terrorist_hunt() {
 
   if(dead_stat == 0) {
     level.is_defalco_alive = 1;
-  }
-  else {
+  } else {
     level.is_defalco_alive = 0;
   }
 }
@@ -198,8 +196,7 @@ rocket_hall_american_destruction() {
   }
 }
 
-rocket_hall_rpgs() {
-}
+rocket_hall_rpgs() {}
 
 rocket_hall_rpg_fire(str_start_struct) {
   s_rpg_start = getstruct(str_start_struct, "targetname");
@@ -236,8 +233,7 @@ rocket_hall_terrorist_spawnfunc() {
 
   if(str_notify == "rocket_hall_bypassed") {
     self bloody_death(undefined, 4);
-  }
-  else {
+  } else {
     self.team = "axis";
     self enableaimassist();
   }

@@ -17,9 +17,7 @@ setposemovement(param_00, param_01) {
     param_01 = self.a.movement;
   }
 
-  [
-    [level.setposemovementfnarray[param_00][param_01]]
-  ]();
+  [[level.setposemovementfnarray[param_00][param_01]]]();
 }
 
 func_98BF() {

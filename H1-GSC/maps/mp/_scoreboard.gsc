@@ -6,14 +6,14 @@
 
 processlobbyscoreboards() {
   foreach(var_1 in level.placement["all"]) {
-  var_1 setplayerscoreboardinfo();
+    var_1 setplayerscoreboardinfo();
   }
 
   if(level.multiteambased) {
     buildscoreboardtype("multiteam");
 
     foreach(var_1 in level.players) {
-    var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "scoreboardType", "multiteam");
+      var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "scoreboardType", "multiteam");
     }
 
     setclientmatchdata("alliesScore", -1);
@@ -26,11 +26,9 @@ processlobbyscoreboards() {
 
     if(var_5 == var_6) {
       var_7 = "tied";
-    }
-    else if(var_5 > var_6) {
+    } else if(var_5 > var_6) {
       var_7 = "allies";
-    }
-    else {
+    } else {
       var_7 = "axis";
     }
 
@@ -60,14 +58,14 @@ processlobbyscoreboards() {
       buildscoreboardtype(var_7);
 
       foreach(var_1 in level.players) {
-      var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "scoreboardType", var_7);
+        var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "scoreboardType", var_7);
       }
     }
   } else {
     buildscoreboardtype("neutral");
 
     foreach(var_1 in level.players) {
-    var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "scoreboardType", "neutral");
+      var_1 setplayerdata(common_scripts\utility::getstatsgroup_common(), "round", "scoreboardType", "neutral");
     }
 
     setclientmatchdata("alliesScore", -1);
@@ -81,8 +79,7 @@ processlobbyscoreboards() {
 
     if(!var_1 maps\mp\_utility::rankingenabled()) {
       var_16 = var_1.pers["summary"]["xp"];
-    }
-    else {
+    } else {
       var_16 = var_1 gettotalmpxp() - var_1.pers["summary"]["matchStartXp"];
     }
 
@@ -150,8 +147,7 @@ setplayerscoreboardinfo() {
 
     if(level.gametype == "ctf" || level.gametype == "sr" || level.gametype == "gun") {
       var_2 = self.assists;
-    }
-    else {
+    } else {
       var_2 = self.pers["assists"];
     }
 

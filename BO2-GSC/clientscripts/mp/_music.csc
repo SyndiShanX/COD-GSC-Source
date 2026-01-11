@@ -241,8 +241,7 @@ transitionout(previous, next) {
       if(waittilldone) {
         wait(fadeout);
       }
-    } else {
-    }
+    } else {}
   } else if(waittilldone) {
     while(soundplaying(id)) {
       wait 0.1;
@@ -362,8 +361,7 @@ _musicalias(alias, fadein, fadeout, loop) {
 
   if(loop) {
     level.musicstates[name].loopalias = alias;
-  }
-  else {
+  } else {
     level.musicstates[name].oneshotalias = alias;
   }
 

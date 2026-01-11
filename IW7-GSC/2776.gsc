@@ -10,8 +10,7 @@ init() {
 
   if(level.splitscreen) {
     level.objpointsize = 15;
-  }
-  else {
+  } else {
     level.objpointsize = 8;
   }
 
@@ -36,8 +35,7 @@ func_4A23(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(var_02 != "all") {
     var_06 = newteamhudelem(var_02);
-  }
-  else {
+  } else {
     var_06 = newhudelem();
   }
 
@@ -53,8 +51,7 @@ func_4A23(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_04)) {
     var_6.alpha = var_04;
-  }
-  else {
+  } else {
     var_6.alpha = level.objpoint_alpha_default;
   }
 
@@ -105,8 +102,7 @@ setoriginbyname(var_00, var_01) {
 getobjpointbyname(var_00) {
   if(isDefined(level.objpoints[var_00])) {
     return level.objpoints[var_00];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -114,8 +110,7 @@ getobjpointbyname(var_00) {
 getobjpointbyindex(var_00) {
   if(isDefined(level.objpointnames[var_00])) {
     return level.objpoints[level.objpointnames[var_00]];
-  }
-  else {
+  } else {
     return undefined;
   }
 }

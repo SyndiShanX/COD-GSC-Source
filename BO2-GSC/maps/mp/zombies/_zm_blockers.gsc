@@ -125,8 +125,7 @@ door_classify(parent_trig) {
   } else if(!isDefined(self.script_string)) {
     if(isDefined(self.script_angles)) {
       self.script_string = "rotate";
-    }
-    else if(isDefined(self.script_vector)) {
+    } else if(isDefined(self.script_vector)) {
       self.script_string = "move";
     }
   } else {
@@ -197,8 +196,7 @@ door_buy() {
 
     if(self._door_open == 1) {
       self.purchaser = undefined;
-    }
-    else if(who.score >= cost) {
+    } else if(who.score >= cost) {
       who maps\mp\zombies\_zm_score::minus_to_player_score(cost, 1);
       maps\mp\_demo::bookmark("zm_player_door", gettime(), who);
       who maps\mp\zombies\_zm_stats::increment_client_stat("doors_purchased");
@@ -209,8 +207,7 @@ door_buy() {
 
       if(isDefined(level.custom_generic_deny_vo_func)) {
         who thread[[level.custom_generic_deny_vo_func]](1);
-      }
-      else {
+      } else {
         who maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "door_deny");
       }
 
@@ -307,8 +304,7 @@ door_activate(time, open, quick, use_blocker_clip_for_pathing) {
   if(isDefined(self.script_sound)) {
     if(open) {
       playsoundatposition(self.script_sound, self.origin);
-    }
-    else {
+    } else {
       playsoundatposition(self.script_sound + "_close", self.origin);
     }
   } else
@@ -346,8 +342,7 @@ door_activate(time, open, quick, use_blocker_clip_for_pathing) {
 
         if(time >= 0.5) {
           self moveto(self.origin + vector, time, time * 0.25, time * 0.25);
-        }
-        else {
+        } else {
           self moveto(self.origin + vector, time);
         }
 
@@ -645,8 +640,7 @@ self_and_flag_wait(msg) {
 
   if(isDefined(self.power_door_ignore_flag_wait) && self.power_door_ignore_flag_wait) {
     level waittill("forever");
-  }
-  else {
+  } else {
     flag_wait(msg);
   }
 }
@@ -747,7 +741,7 @@ door_opened(cost, quick_close) {
   self.door_is_moving = 0;
 
   foreach(trig in all_trigs) {
-  trig.door_is_moving = 0;
+    trig.door_is_moving = 0;
   }
 
   if(isDefined(quick_close) && quick_close) {
@@ -860,8 +854,7 @@ debris_think() {
   while(true) {
     self waittill("trigger", who, force);
 
-    if(getdvarint(#"zombie_unlock_all") > 0 || isDefined(force) && force) {
-    } else {
+    if(getdvarint(#"zombie_unlock_all") > 0 || isDefined(force) && force) {} else {
       if(!who usebuttonpressed()) {
         continue;
       }
@@ -873,8 +866,7 @@ debris_think() {
     if(is_player_valid(who)) {
       players = get_players();
 
-      if(getdvarint(#"zombie_unlock_all") > 0) {
-      } else if(who.score >= self.zombie_cost) {
+      if(getdvarint(#"zombie_unlock_all") > 0) {} else if(who.score >= self.zombie_cost) {
         who maps\mp\zombies\_zm_score::minus_to_player_score(self.zombie_cost);
         maps\mp\_demo::bookmark("zm_player_door", gettime(), who);
         who maps\mp\zombies\_zm_stats::increment_client_stat("doors_purchased");
@@ -989,11 +981,9 @@ debris_move(struct) {
   self delete();
 }
 
-blocker_disconnect_paths(start_node, end_node, two_way) {
-}
+blocker_disconnect_paths(start_node, end_node, two_way) {}
 
-blocker_connect_paths(start_node, end_node, two_way) {
-}
+blocker_connect_paths(start_node, end_node, two_way) {}
 
 blocker_init() {
   if(!isDefined(self.target)) {
@@ -1013,8 +1003,7 @@ blocker_init() {
 
       if(isDefined(level.zbarrier_script_string_sets_collision) && level.zbarrier_script_string_sets_collision) {
         m_collision = isDefined(self.zbarrier.script_string) ? self.zbarrier.script_string : "p6_anim_zm_barricade_board_collision";
-      }
-      else {
+      } else {
         m_collision = "p6_anim_zm_barricade_board_collision";
       }
 
@@ -1063,8 +1052,7 @@ blocker_init() {
     }
 
     if(isDefined(targets[j].targetname)) {
-      if(targets[j].targetname == "auto2") {
-      }
+      if(targets[j].targetname == "auto2") {}
     }
 
     targets[j] update_states("repaired");
@@ -1314,8 +1302,7 @@ blocker_trigger_think() {
 
     if(isDefined(self.trigger_location)) {
       trigger_location = self.trigger_location;
-    }
-    else {
+    } else {
       trigger_location = self;
     }
 
@@ -1415,8 +1402,7 @@ blocker_trigger_think() {
             if(isDefined(chunk.script_noteworthy)) {
               if(chunk.script_noteworthy == "5") {
                 chunk hide();
-              }
-              else if(chunk.script_noteworthy == "3") {
+              } else if(chunk.script_noteworthy == "3") {
                 chunk hide();
               }
             }
@@ -1530,8 +1516,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
 
       if(trace["fraction"] == 1) {
         dest = dest + vectorscale((0, 0, -1), 200.0);
-      }
-      else {
+      } else {
         dest = trace["position"];
       }
 
@@ -1540,8 +1525,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
 
       if(randomint(100) > 40) {
         ent rotatepitch(180, time * 0.5);
-      }
-      else {
+      } else {
         ent rotatepitch(90, time, time * 0.5);
       }
 
@@ -1565,8 +1549,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
 
       if(trace["fraction"] == 1) {
         dest = dest + vectorscale((0, 0, -1), 200.0);
-      }
-      else {
+      } else {
         dest = trace["position"];
       }
 
@@ -1575,8 +1558,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
 
       if(randomint(100) > 40) {
         ent rotatepitch(180, time * 0.5);
-      }
-      else {
+      } else {
         ent rotatepitch(90, time, time * 0.5);
       }
 
@@ -1606,8 +1588,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
 
     if(trace["fraction"] == 1) {
       dest = dest + vectorscale((0, 0, -1), 200.0);
-    }
-    else {
+    } else {
       dest = trace["position"];
     }
 
@@ -1622,8 +1603,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
 
     if(randomint(100) > 40) {
       ent rotatepitch(180, time * 0.5);
-    }
-    else {
+    } else {
       ent rotatepitch(90, time, time * 0.5);
     }
 
@@ -1652,8 +1632,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
 
       if(trace["fraction"] == 1) {
         dest = dest + vectorscale((0, 0, -1), 200.0);
-      }
-      else {
+      } else {
         dest = trace["position"];
       }
 
@@ -1662,8 +1641,7 @@ remove_chunk(chunk, node, destroy_immediately, zomb) {
 
       if(randomint(100) > 40) {
         ent rotatepitch(180, time * 0.5);
-      }
-      else {
+      } else {
         ent rotatepitch(90, time, time * 0.5);
       }
 
@@ -1775,8 +1753,7 @@ replace_chunk(barrier, chunk, perk, upgrade, via_powerup) {
   if(has_perk) {
     if("speciality_fastreload" == perk) {
       scalar = 0.31;
-    }
-    else if("speciality_fastreload_upgrade" == perk) {
+    } else if("speciality_fastreload_upgrade" == perk) {
       scalar = 0.2112;
     }
   }
@@ -1809,8 +1786,7 @@ zombie_boardtear_audio_plus_fx_offset_repair_horizontal(chunk) {
   if(isDefined(chunk.material) && chunk.material == "rock") {
     if(isDefined(level.use_clientside_rock_tearin_fx) && level.use_clientside_rock_tearin_fx) {
       chunk clearclientflag(level._zombie_scriptmover_flag_rock_fx);
-    }
-    else {
+    } else {
       earthquake(randomfloatrange(0.3, 0.4), randomfloatrange(0.2, 0.4), chunk.origin, 150);
       playFX(level._effect["wood_chunk_destory"], chunk.origin + vectorscale((0, 0, 1), 30.0));
       wait(randomfloatrange(0.3, 0.6));
@@ -1832,8 +1808,7 @@ zombie_boardtear_audio_plus_fx_offset_repair_verticle(chunk) {
   if(isDefined(chunk.material) && chunk.material == "rock") {
     if(isDefined(level.use_clientside_rock_tearin_fx) && level.use_clientside_rock_tearin_fx) {
       chunk clearclientflag(level._zombie_scriptmover_flag_rock_fx);
-    }
-    else {
+    } else {
       earthquake(randomfloatrange(0.3, 0.4), randomfloatrange(0.2, 0.4), chunk.origin, 150);
       playFX(level._effect["wood_chunk_destory"], chunk.origin + vectorscale((1, 0, 0), 30.0));
       wait(randomfloatrange(0.3, 0.6));

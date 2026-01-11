@@ -21,7 +21,6 @@
 #include scripts\mp_common\gametypes\match;
 #include scripts\mp_common\util;
 #include scripts\weapons\weapon_utils;
-
 #namespace scoreevents;
 
 autoexec __init__system__() {
@@ -81,11 +80,11 @@ private on_weapon_change(params) {
     return;
   }
 
-  if(var_86ecd1f2.var_76ce72e8 === 1 || var_86ecd1f2.issignatureweapon === 1 || var_86ecd1f2.name == #"none") {
+  if(var_86ecd1f2.var_76ce72e8 === 1 || var_86ecd1f2.issignatureweapon === 1 || var_86ecd1f2.name == # "none") {
     return;
   }
 
-  if(var_b577d267.var_76ce72e8 === 1 || var_b577d267.issignatureweapon === 1 || var_b577d267.name == #"none") {
+  if(var_b577d267.var_76ce72e8 === 1 || var_b577d267.issignatureweapon === 1 || var_b577d267.name == # "none") {
     return;
   }
 
@@ -223,8 +222,8 @@ scoreeventplayerkill(data, time) {
   victim.anglesondeath = victim getplayerangles();
 
   if(meansofdeath == "MOD_GRENADE" || meansofdeath == "MOD_GRENADE_SPLASH" || meansofdeath == "MOD_EXPLOSIVE" || meansofdeath == "MOD_EXPLOSIVE_SPLASH" || meansofdeath == "MOD_PROJECTILE" || meansofdeath == "MOD_PROJECTILE_SPLASH") {
-    if(weapon == level.weaponnone && isDefined(data.victim.explosiveinfo[#"weapon"])) {
-      weapon = data.victim.explosiveinfo[#"weapon"];
+    if(weapon == level.weaponnone && isDefined(data.victim.explosiveinfo[# "weapon"])) {
+      weapon = data.victim.explosiveinfo[# "weapon"];
     }
 
     exlosivedamage = 1;
@@ -235,8 +234,8 @@ scoreeventplayerkill(data, time) {
       if(isDefined(victim.lastkilltime) && victim.lastkilltime > time - 3000) {
         if(isDefined(victim.lastkilledplayer) && victim.lastkilledplayer util::isenemyplayer(attacker) == 0 && attacker != victim.lastkilledplayer) {
           processscoreevent(#"kill_enemy_who_killed_teammate", attacker, victim, weapon);
-          attacker activecamo::function_896ac347(weapon, #"avenger", 1);
-          attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+          attacker activecamo::function_896ac347(weapon, # "avenger", 1);
+          attacker activecamo::function_896ac347(weapon, # "hash_39ab7cda18fd5c74", 1);
           victim recordkillmodifier("avenger");
         }
       }
@@ -273,7 +272,7 @@ scoreeventplayerkill(data, time) {
       }
     }
 
-    if(isgrenade == 0 || weapon.name == #"hero_gravityspikes") {
+    if(isgrenade == 0 || weapon.name == # "hero_gravityspikes") {
       if(attackersliding == 1) {
         processscoreevent(#"kill_enemy_while_sliding", attacker, victim, weapon);
       }
@@ -437,8 +436,8 @@ scoreeventplayerkill(data, time) {
 
     if(challenges::ishighestscoringplayer(victim)) {
       processscoreevent(#"kill_enemy_who_has_high_score", attacker, victim, weapon);
-      attacker activecamo::function_896ac347(weapon, #"kingslayer", 1);
-      attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+      attacker activecamo::function_896ac347(weapon, # "kingslayer", 1);
+      attacker activecamo::function_896ac347(weapon, # "hash_39ab7cda18fd5c74", 1);
       attacker contracts::increment_contract(#"hash_a75db3f2b544591");
     }
 
@@ -470,7 +469,7 @@ scoreeventplayerkill(data, time) {
           }
 
           processscoreevent(#"vision_pulse_shutdown", attacker, victim, weapon);
-          attacker activecamo::function_896ac347(weapon, #"showstopper", 1);
+          attacker activecamo::function_896ac347(weapon, # "showstopper", 1);
           attacker contracts::player_contract_event(#"killed_hero_ability_enemy");
           break;
         }
@@ -579,19 +578,19 @@ scoreeventplayerkill(data, time) {
       });
 
       switch (victimheroability.name) {
-        case #"gadget_armor":
+        case # "gadget_armor":
           processscoreevent(#"kill_enemy_who_has_powerarmor", attacker, victim, weapon);
           attacker contracts::player_contract_event(#"killed_hero_ability_enemy");
           break;
-        case #"gadget_resurrect":
+        case # "gadget_resurrect":
           processscoreevent(#"kill_enemy_that_used_resurrect", attacker, victim, weapon);
           attacker contracts::player_contract_event(#"killed_hero_ability_enemy");
           break;
-        case #"gadget_camo":
+        case # "gadget_camo":
           processscoreevent(#"kill_enemy_that_is_using_optic_camo", attacker, victim, weapon);
           attacker contracts::player_contract_event(#"killed_hero_ability_enemy");
           break;
-        case #"gadget_clone":
+        case # "gadget_clone":
           processscoreevent(#"end_enemy_psychosis", attacker, victim, weapon);
           attacker contracts::player_contract_event(#"killed_hero_ability_enemy");
           break;
@@ -630,28 +629,28 @@ scoreeventplayerkill(data, time) {
       abilitytocheck = undefined;
 
       switch (attackerheroability.name) {
-        case #"gadget_armor":
+        case # "gadget_armor":
           processscoreevent(#"power_armor_kill", attacker, victim, getweapon(#"gadget_armor"));
           attacker hero_ability_kill_event(attackerheroability, get_equipped_hero_ability(victimheroabilityname));
           attacker specialistmedalachievement();
           attacker thread specialiststatabilityusage(4, 0);
           abilitytocheck = attackerheroability.name;
           break;
-        case #"gadget_resurrect":
+        case # "gadget_resurrect":
           processscoreevent(#"resurrect_kill", attacker, victim, getweapon(#"gadget_resurrect"));
           attacker hero_ability_kill_event(attackerheroability, get_equipped_hero_ability(victimheroabilityname));
           attacker specialistmedalachievement();
           attacker thread specialiststatabilityusage(4, 0);
           abilitytocheck = attackerheroability.name;
           break;
-        case #"gadget_camo":
+        case # "gadget_camo":
           processscoreevent(#"optic_camo_kill", attacker, victim, getweapon(#"gadget_camo"));
           attacker hero_ability_kill_event(attackerheroability, get_equipped_hero_ability(victimheroabilityname));
           attacker specialistmedalachievement();
           attacker thread specialiststatabilityusage(4, 0);
           abilitytocheck = attackerheroability.name;
           break;
-        case #"gadget_clone":
+        case # "gadget_clone":
           processscoreevent(#"kill_enemy_while_using_psychosis", attacker, victim, getweapon(#"gadget_clone"));
           attacker hero_ability_kill_event(attackerheroability, get_equipped_hero_ability(victimheroabilityname));
           attacker specialistmedalachievement();
@@ -683,9 +682,9 @@ scoreeventplayerkill(data, time) {
       }
     }
 
-    if(weapon.statname == #"frag_grenade") {
+    if(weapon.statname == # "frag_grenade") {
       attacker stats::function_dad108fa(#"kills_frag_grenade", 1);
-    } else if(weapon.statname == #"eq_molotov") {
+    } else if(weapon.statname == # "eq_molotov") {
       attacker stats::function_dad108fa(#"kills_molotov", 1);
     }
 
@@ -702,9 +701,9 @@ scoreeventplayerkill(data, time) {
         if(attacker.lastkilledby == victim) {
           level.globalpaybacks++;
           processscoreevent(#"revenge_kill", attacker, victim, weapon);
-          attacker stats::function_e24eec31(weapon, #"revenge_kill", 1);
-          attacker activecamo::function_896ac347(weapon, #"revenge", 1);
-          attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+          attacker stats::function_e24eec31(weapon, # "revenge_kill", 1);
+          attacker activecamo::function_896ac347(weapon, # "revenge", 1);
+          attacker activecamo::function_896ac347(weapon, # "hash_39ab7cda18fd5c74", 1);
           victim recordkillmodifier("revenge");
           attacker.lastkilledby = undefined;
         }
@@ -713,8 +712,8 @@ scoreeventplayerkill(data, time) {
       if(victim killstreaks::is_an_a_killstreak()) {
         level.globalbuzzkills++;
         processscoreevent(#"stop_enemy_killstreak", attacker, victim, weapon);
-        attacker activecamo::function_896ac347(weapon, #"buzzkill", 1);
-        attacker activecamo::function_896ac347(weapon, #"hash_39ab7cda18fd5c74", 1);
+        attacker activecamo::function_896ac347(weapon, # "buzzkill", 1);
+        attacker activecamo::function_896ac347(weapon, # "hash_39ab7cda18fd5c74", 1);
         victim recordkillmodifier("buzzkill");
       }
 
@@ -746,8 +745,8 @@ scoreeventplayerkill(data, time) {
 
         processscoreevent(#"longshot_kill", attacker, victim, weapon);
         attacker contracts::increment_contract(#"contract_mp_longshot");
-        attacker.pers[#"longshots"]++;
-        attacker.longshots = attacker.pers[#"longshots"];
+        attacker.pers[# "longshots"]++;
+        attacker.longshots = attacker.pers[# "longshots"];
         victim recordkillmodifier("longshot");
 
         if(isDefined(attacker.var_ea1458aa)) {
@@ -764,15 +763,15 @@ scoreeventplayerkill(data, time) {
       }
 
       killdistance = distance(victim.origin, attackerorigin);
-      attacker.pers[#"kill_distances"] += killdistance;
-      attacker.pers[#"num_kill_distance_entries"]++;
+      attacker.pers[# "kill_distances"] += killdistance;
+      attacker.pers[# "num_kill_distance_entries"]++;
     }
 
     if(isalive(attacker)) {
       if(attacker.health < attacker.maxhealth * 0.35) {
         attacker.lastkillwheninjured = time;
         processscoreevent(#"kill_enemy_when_injured", attacker, victim, weapon);
-        attacker stats::function_e24eec31(weapon, #"kill_enemy_when_injured", 1);
+        attacker stats::function_e24eec31(weapon, # "kill_enemy_when_injured", 1);
 
         if(attacker util::has_toughness_perk_purchased_and_equipped()) {
           attacker stats::function_dad108fa(#"perk_bulletflinch_kills", 1);
@@ -815,8 +814,8 @@ scoreeventplayerkill(data, time) {
     }
 
     if(weapon_utils::ismeleemod(meansofdeath) && !weapon.isriotshield) {
-      attacker.pers[#"stabs"]++;
-      attacker.stabs = attacker.pers[#"stabs"];
+      attacker.pers[# "stabs"]++;
+      attacker.stabs = attacker.pers[# "stabs"];
       vangles = victim.anglesondeath[1];
       pangles = attacker.anglesonkill[1];
       anglediff = angleclamp180(vangles - pangles);
@@ -831,9 +830,9 @@ scoreeventplayerkill(data, time) {
           weaponpickedup = 1;
         }
 
-        attacker stats::function_eec52333(weapon, #"backstabber_kill", 1, attacker.class_num, weaponpickedup);
-        attacker.pers[#"backstabs"]++;
-        attacker.backstabs = attacker.pers[#"backstabs"];
+        attacker stats::function_eec52333(weapon, # "backstabber_kill", 1, attacker.class_num, weaponpickedup);
+        attacker.pers[# "backstabs"]++;
+        attacker.backstabs = attacker.pers[# "backstabs"];
       } else if(!(isDefined(weapon.var_cfc07f04) && weapon.var_cfc07f04) && (anglediff < -30 || anglediff > 70 || isDefined(victim.laststand) && victim.laststand)) {
         if(meansofdeath == "MOD_MELEE_WEAPON_BUTT" && weapon.name != "ball") {
           processscoreevent(#"kill_enemy_with_gunbutt", attacker, victim, weapon);
@@ -844,7 +843,7 @@ scoreeventplayerkill(data, time) {
     } else if(isDefined(victim.firsttimedamaged) && victim.firsttimedamaged == time && (weapon.statindex == level.weapon_hero_annihilator.statindex || weapon.inventorytype != "ability")) {
       if(attackershotvictim) {
         attacker thread updateoneshotmultikills(victim, weapon, victim.firsttimedamaged, meansofdeath);
-        attacker stats::function_e24eec31(weapon, #"kill_enemy_one_bullet", 1);
+        attacker stats::function_e24eec31(weapon, # "kill_enemy_one_bullet", 1);
       }
     }
 
@@ -866,12 +865,12 @@ scoreeventplayerkill(data, time) {
 
       if(pickedupweapon.previousowner == victim) {
         processscoreevent(#"kill_enemy_with_their_weapon", attacker, victim, weapon);
-        attacker stats::function_e24eec31(weapon, #"kill_enemy_with_their_weapon", 1);
+        attacker stats::function_e24eec31(weapon, # "kill_enemy_with_their_weapon", 1);
 
         if(isDefined(pickedupweapon.sweapon) && isDefined(pickedupweapon.smeansofdeath) && weapon_utils::ismeleemod(pickedupweapon.smeansofdeath)) {
           foreach(meleeweapon in level.meleeweapons) {
             if(weapon != meleeweapon && pickedupweapon.sweapon.rootweapon == meleeweapon) {
-              attacker stats::function_e24eec31(meleeweapon, #"kill_enemy_with_their_weapon", 1);
+              attacker stats::function_e24eec31(meleeweapon, # "kill_enemy_with_their_weapon", 1);
               break;
             }
           }
@@ -902,23 +901,23 @@ scoreeventplayerkill(data, time) {
   if(isDefined(data.var_c274d62f) && data.var_c274d62f) {}
 
   switch (weapon.rootweapon.name) {
-    case #"hatchet":
-      attacker.pers[#"tomahawks"]++;
-      attacker.tomahawks = attacker.pers[#"tomahawks"];
+    case # "hatchet":
+      attacker.pers[# "tomahawks"]++;
+      attacker.tomahawks = attacker.pers[# "tomahawks"];
       processscoreevent(#"hatchet_kill", attacker, victim, weapon);
       attacker contracts::increment_contract(#"hash_172456fa969d6c82");
 
-      if(isDefined(data.victim.explosiveinfo[#"projectile_bounced"]) && data.victim.explosiveinfo[#"projectile_bounced"] == 1) {
+      if(isDefined(data.victim.explosiveinfo[# "projectile_bounced"]) && data.victim.explosiveinfo[# "projectile_bounced"] == 1) {
         level.globalbankshots++;
         processscoreevent(#"bounce_hatchet_kill", attacker, victim, weapon);
         attacker contracts::increment_contract(#"contract_mp_bankshot");
       }
 
       break;
-    case #"supplydrop":
-    case #"inventory_supplydrop":
-    case #"supplydrop_marker":
-    case #"inventory_supplydrop_marker":
+    case # "supplydrop":
+    case # "inventory_supplydrop":
+    case # "supplydrop_marker":
+    case # "inventory_supplydrop_marker":
       if(meansofdeath == "MOD_HIT_BY_OBJECT" || meansofdeath == "MOD_CRUSH") {
         processscoreevent(#"kill_enemy_with_care_package_crush", attacker, victim, weapon);
       } else {
@@ -951,38 +950,38 @@ heavyweaponkill(attacker, victim, weapon) {
   }
 
   switch (weapon.name) {
-    case #"hero_minigun":
+    case # "hero_minigun":
       event = "minigun_kill";
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       event = "flamethrower_kill";
       break;
-    case #"hero_lightninggun":
-    case #"hero_lightninggun_arc":
+    case # "hero_lightninggun":
+    case # "hero_lightninggun_arc":
       event = "tempest_kill";
       break;
-    case #"hero_firefly_swarm":
-    case #"hero_chemicalgelgun":
+    case # "hero_firefly_swarm":
+    case # "hero_chemicalgelgun":
       event = "gelgun_kill";
       break;
-    case #"hero_bowlauncher2":
-    case #"hero_bowlauncher3":
-    case #"hero_bowlauncher4":
-    case #"sig_bow_quickshot3":
-    case #"sig_bow_quickshot2":
-    case #"sig_bow_quickshot4":
-    case #"sig_bow_quickshot":
-    case #"hero_bowlauncher":
+    case # "hero_bowlauncher2":
+    case # "hero_bowlauncher3":
+    case # "hero_bowlauncher4":
+    case # "sig_bow_quickshot3":
+    case # "sig_bow_quickshot2":
+    case # "sig_bow_quickshot4":
+    case # "sig_bow_quickshot":
+    case # "hero_bowlauncher":
       event = "bowlauncher_kill";
       break;
-    case #"sig_minigun_alt":
-    case #"sig_minigun":
-    case #"sig_minigun_turret_28":
-    case #"hash_5a34aef4b8c72a24":
-    case #"sig_minigun_turret_32":
-    case #"hash_5a3832f4b8ca4047":
-    case #"hash_5a492ef4b8d8acae":
-    case #"hash_5a4932f4b8d8b37a":
+    case # "sig_minigun_alt":
+    case # "sig_minigun":
+    case # "sig_minigun_turret_28":
+    case # "hash_5a34aef4b8c72a24":
+    case # "sig_minigun_turret_32":
+    case # "hash_5a3832f4b8ca4047":
+    case # "hash_5a492ef4b8d8acae":
+    case # "hash_5a4932f4b8d8b37a":
       if(attacker function_a867284b() && attacker playerads() == 1) {
         event = "mounted_kill";
       } else {
@@ -1011,23 +1010,23 @@ killedheavyweaponenemy(attacker, victim, weapon, victim_weapon, victim_gadget_po
   }
 
   switch (victim_weapon.name) {
-    case #"hero_minigun":
+    case # "hero_minigun":
       event = "killed_minigun_enemy";
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       event = "killed_flamethrower_enemy";
       break;
-    case #"hero_lightninggun":
-    case #"hero_lightninggun_arc":
+    case # "hero_lightninggun":
+    case # "hero_lightninggun_arc":
       event = "tempest_shutdown";
       break;
-    case #"hero_chemicalgelgun":
+    case # "hero_chemicalgelgun":
       event = "killed_gelgun_enemy";
       break;
-    case #"hero_bowlauncher2":
-    case #"hero_bowlauncher3":
-    case #"hero_bowlauncher4":
-    case #"hero_bowlauncher":
+    case # "hero_bowlauncher2":
+    case # "hero_bowlauncher3":
+    case # "hero_bowlauncher4":
+    case # "hero_bowlauncher":
       event = "killed_bowlauncher_enemy";
       break;
     default:
@@ -1047,15 +1046,15 @@ specificweaponkill(attacker, victim, weapon, killstreak, inflictor) {
   }
 
   switch (switchweapon) {
-    case #"eq_arm_blade":
+    case # "eq_arm_blade":
       event = "blade_kill";
       break;
-    case #"autoturret":
-    case #"inventory_autoturret":
+    case # "autoturret":
+    case # "inventory_autoturret":
       event = "sentry_gun_kill";
       break;
-    case #"tank_robot":
-    case #"tank_robot_launcher_turret":
+    case # "tank_robot":
+    case # "tank_robot_launcher_turret":
       event = "tank_robot_kill";
 
       if(isDefined(attacker.var_5f28922a) && attacker.var_5f28922a) {
@@ -1063,33 +1062,33 @@ specificweaponkill(attacker, victim, weapon, killstreak, inflictor) {
       }
 
       break;
-    case #"microwave_turret":
-    case #"microwaveturret":
-    case #"inventory_microwaveturret":
-    case #"inventory_microwave_turret":
+    case # "microwave_turret":
+    case # "microwaveturret":
+    case # "inventory_microwaveturret":
+    case # "inventory_microwave_turret":
       event = "microwave_turret_kill";
       break;
-    case #"combat_robot":
-    case #"inventory_combat_robot":
+    case # "combat_robot":
+    case # "inventory_combat_robot":
       event = "combat_robot_kill";
       break;
-    case #"claymore":
+    case # "claymore":
       event = "claymore_kill";
       break;
-    case #"inventory_rcbomb":
-    case #"rcbomb":
+    case # "inventory_rcbomb":
+    case # "rcbomb":
       event = "hover_rcxd_kill";
       break;
-    case #"incendiary_fire":
+    case # "incendiary_fire":
       event = "thermite_kill";
       break;
-    case #"eq_frag_gun":
+    case # "eq_frag_gun":
       event = "frag_kill";
       break;
-    case #"overwatch_helicopter":
+    case # "overwatch_helicopter":
       event = "overwatch_helicopter_kill";
       break;
-    case #"swat_team":
+    case # "swat_team":
       event = "swat_team_kill";
       break;
     default:
@@ -1111,25 +1110,25 @@ function_8fe4629e(killcount, weapon) {
   doublekill = int(killcount / 2);
 
   if(doublekill > 0) {
-    self activecamo::function_896ac347(weapon, #"doublekill", doublekill);
+    self activecamo::function_896ac347(weapon, # "doublekill", doublekill);
   }
 
   triplekill = int(killcount / 3);
 
   if(triplekill > 0) {
-    self activecamo::function_896ac347(weapon, #"triplekill", triplekill);
+    self activecamo::function_896ac347(weapon, # "triplekill", triplekill);
   }
 
   furykill = int(killcount / 4);
 
   if(furykill > 0) {
-    self activecamo::function_896ac347(weapon, #"furykill", furykill);
+    self activecamo::function_896ac347(weapon, # "furykill", furykill);
   }
 
   pentakill = int(killcount / 5);
 
   if(pentakill > 0) {
-    self activecamo::function_896ac347(weapon, #"pentakill", pentakill);
+    self activecamo::function_896ac347(weapon, # "pentakill", pentakill);
   }
 }
 
@@ -1182,12 +1181,12 @@ multikill(killcount, weapon) {
     self contracts::increment_contract(#"contract_wl_multikill_2_or_better");
   }
 
-  if(!isDefined(self.pers[#"highestmultikill"])) {
-    self.pers[#"highestmultikill"] = 0;
+  if(!isDefined(self.pers[# "highestmultikill"])) {
+    self.pers[# "highestmultikill"] = 0;
   }
 
-  if(self.pers[#"highestmultikill"] < killcount) {
-    self.pers[#"highestmultikill"] = killcount;
+  if(self.pers[# "highestmultikill"] < killcount) {
+    self.pers[# "highestmultikill"] = killcount;
   }
 
   self recordmultikill(killcount);
@@ -1196,9 +1195,9 @@ multikill(killcount, weapon) {
 multiheroabilitykill(killcount, weapon) {
   if(killcount > 1) {
     self stats::function_dad108fa(#"multikill_2_with_heroability", int(killcount / 2));
-    self stats::function_e24eec31(weapon, #"heroability_doublekill", int(killcount / 2));
+    self stats::function_e24eec31(weapon, # "heroability_doublekill", int(killcount / 2));
     self stats::function_dad108fa(#"multikill_3_with_heroability", int(killcount / 3));
-    self stats::function_e24eec31(weapon, #"heroability_triplekill", int(killcount / 3));
+    self stats::function_e24eec31(weapon, # "heroability_triplekill", int(killcount / 3));
   }
 }
 
@@ -1288,18 +1287,18 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
     }
   }
 
-  if(weapon.name == #"satchel_charge") {
+  if(weapon.name == # "satchel_charge") {
     self.recentc4killcount++;
   }
 
   if(isDefined(level.killstreakweapons) && isDefined(level.killstreakweapons[weapon])) {
     switch (level.killstreakweapons[weapon]) {
-      case #"remote_missile":
-      case #"inventory_remote_missile":
+      case # "remote_missile":
+      case # "inventory_remote_missile":
         self.recentremotemissilecount++;
         break;
-      case #"inventory_rcbomb":
-      case #"rcbomb":
+      case # "inventory_rcbomb":
+      case # "rcbomb":
         self.recentrcbombcount++;
         break;
     }
@@ -1314,37 +1313,37 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
     }
 
     switch (weapon.name) {
-      case #"hero_annihilator":
+      case # "hero_annihilator":
         self.recentanihilatorcount++;
         break;
-      case #"hero_minigun":
+      case # "hero_minigun":
         self.recentminiguncount++;
         break;
-      case #"hero_bowlauncher2":
-      case #"hero_bowlauncher3":
-      case #"hero_bowlauncher4":
-      case #"hero_bowlauncher":
+      case # "hero_bowlauncher2":
+      case # "hero_bowlauncher3":
+      case # "hero_bowlauncher4":
+      case # "hero_bowlauncher":
         self.recentbowlaunchercount++;
         break;
-      case #"hero_flamethrower":
+      case # "hero_flamethrower":
         self.recentflamethrowercount++;
         break;
-      case #"hero_lightninggun":
-      case #"hero_lightninggun_arc":
+      case # "hero_lightninggun":
+      case # "hero_lightninggun_arc":
         self.recentlightningguncount++;
         break;
-      case #"hero_pineapple_grenade":
-      case #"hero_pineapplegun":
+      case # "hero_pineapple_grenade":
+      case # "hero_pineapplegun":
         self.recentpineappleguncount++;
         break;
-      case #"hero_firefly_swarm":
-      case #"hero_chemicalgun":
+      case # "hero_firefly_swarm":
+      case # "hero_chemicalgun":
         self.recentgelguncount++;
         break;
     }
   }
 
-  if(self.var_a7f5c61e && weapon.name == #"eq_gravityslam") {
+  if(self.var_a7f5c61e && weapon.name == # "eq_gravityslam") {
     self.var_cc5ece37++;
   }
 
@@ -1361,27 +1360,27 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
 
   if(isDefined(killstreak)) {
     switch (killstreak) {
-      case #"remote_missile":
+      case # "remote_missile":
         self.recentremotemissilekillcount++;
         break;
-      case #"rcbomb":
+      case # "rcbomb":
         self.recentrcbombkillcount++;
         break;
-      case #"recon_car":
-      case #"inventory_recon_car":
+      case # "recon_car":
+      case # "inventory_recon_car":
         self.var_70845d87++;
         break;
-      case #"m32":
-      case #"inventory_m32":
+      case # "m32":
+      case # "inventory_m32":
         self.recentmglkillcount++;
         break;
     }
   }
 
   if(self.recentkillcountsameweapon == 2) {
-    self stats::function_e24eec31(weapon, #"multikill_2", 1);
+    self stats::function_e24eec31(weapon, # "multikill_2", 1);
   } else if(self.recentkillcountsameweapon == 3) {
-    self stats::function_e24eec31(weapon, #"multikill_3", 1);
+    self stats::function_e24eec31(weapon, # "multikill_3", 1);
   }
 
   self function_179829ab(4);
@@ -1493,13 +1492,13 @@ updatemultikills(weapon, weaponclass, killstreak, victim) {
   }
 
   if(self.recentlethalcount >= 2) {
-    if(!isDefined(self.pers[#"challenge_kills_double_kill_lethal"])) {
-      self.pers[#"challenge_kills_double_kill_lethal"] = 0;
+    if(!isDefined(self.pers[# "challenge_kills_double_kill_lethal"])) {
+      self.pers[# "challenge_kills_double_kill_lethal"] = 0;
     }
 
-    self.pers[#"challenge_kills_double_kill_lethal"]++;
+    self.pers[# "challenge_kills_double_kill_lethal"]++;
 
-    if(self.pers[#"challenge_kills_double_kill_lethal"] >= 3) {
+    if(self.pers[# "challenge_kills_double_kill_lethal"] >= 3) {
       self stats::function_dad108fa(#"kills_double_kill_3_lethal", 1);
     }
   }
@@ -1567,7 +1566,7 @@ function_179829ab(timeout) {
 }
 
 updateoneshotmultikills(victim, weapon, firsttimedamaged, meansofdeath) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   self notify("updateoneshotmultikills" + firsttimedamaged);
   self endon("updateoneshotmultikills" + firsttimedamaged);
 
@@ -1630,28 +1629,28 @@ get_distance_for_weapon(weapon, weaponclass) {
   }
 
   switch (weaponclass) {
-    case #"weapon_smg":
+    case # "weapon_smg":
       distance = 1960000;
       break;
-    case #"weapon_assault":
+    case # "weapon_assault":
       distance = 2560000;
       break;
-    case #"weapon_tactical":
+    case # "weapon_tactical":
       distance = 2560000;
       break;
-    case #"weapon_lmg":
+    case # "weapon_lmg":
       distance = 2560000;
       break;
-    case #"weapon_sniper":
+    case # "weapon_sniper":
       distance = 4000000;
       break;
-    case #"weapon_pistol":
+    case # "weapon_pistol":
       distance = 1000000;
       break;
-    case #"weapon_cqb":
+    case # "weapon_cqb":
       distance = 302500;
       break;
-    case #"weapon_special":
+    case # "weapon_special":
       if(weapon.isballisticknife) {
         distance = 2250000;
       } else {
@@ -1663,7 +1662,7 @@ get_distance_for_weapon(weapon, weaponclass) {
       }
 
       break;
-    case #"weapon_grenade":
+    case # "weapon_grenade":
       if(weapon.rootweapon.name == "hatchet") {
         distance = 2250000;
       }
@@ -1684,17 +1683,17 @@ ongameend(data) {
   if(isDefined(winner)) {
     if(level.teambased) {
       if(!match::get_flag("tie") && player.team == winner) {
-        player.pers[#"hash_6344af0b142ed0b6"] = 1;
+        player.pers[# "hash_6344af0b142ed0b6"] = 1;
         processscoreevent(#"won_match", player, undefined, undefined);
         return;
       }
     } else {
-      placement = level.placement[#"all"];
+      placement = level.placement[# "all"];
       topthreeplayers = min(3, placement.size);
 
       for(index = 0; index < topthreeplayers; index++) {
-        if(level.placement[#"all"][index] == player) {
-          player.pers[#"hash_6344af0b142ed0b6"] = 1;
+        if(level.placement[# "all"][index] == player) {
+          player.pers[# "hash_6344af0b142ed0b6"] = 1;
           processscoreevent(#"won_match", player, undefined, undefined);
           return;
         }
@@ -1707,13 +1706,13 @@ ongameend(data) {
 
 specialistmedalachievement() {
   if(level.rankedmatch) {
-    if(!isDefined(self.pers[#"specialistmedalachievement"])) {
-      self.pers[#"specialistmedalachievement"] = 0;
+    if(!isDefined(self.pers[# "specialistmedalachievement"])) {
+      self.pers[# "specialistmedalachievement"] = 0;
     }
 
-    self.pers[#"specialistmedalachievement"]++;
+    self.pers[# "specialistmedalachievement"]++;
 
-    if(self.pers[#"specialistmedalachievement"] == 5) {
+    if(self.pers[# "specialistmedalachievement"] == 5) {
       self giveachievement("MP_SPECIALIST_MEDALS");
     }
 
@@ -1733,21 +1732,21 @@ specialiststatabilityusage(usagesinglegame, multitrackperlife) {
 
   self challenges::processspecialistchallenge("kills_ability");
 
-  if(!isDefined(self.pers[#"specialistusagepergame"])) {
-    self.pers[#"specialistusagepergame"] = 0;
+  if(!isDefined(self.pers[# "specialistusagepergame"])) {
+    self.pers[# "specialistusagepergame"] = 0;
   }
 
-  self.pers[#"specialistusagepergame"]++;
+  self.pers[# "specialistusagepergame"]++;
 
-  if(self.pers[#"specialistusagepergame"] >= usagesinglegame) {
+  if(self.pers[# "specialistusagepergame"] >= usagesinglegame) {
     self challenges::processspecialistchallenge("kill_one_game_ability");
-    self.pers[#"specialistusagepergame"] = 0;
+    self.pers[# "specialistusagepergame"] = 0;
   }
 
   if(multitrackperlife) {
-    self.pers[#"specialiststatabilityusage"]++;
+    self.pers[# "specialiststatabilityusage"]++;
 
-    if(self.pers[#"specialiststatabilityusage"] >= 2) {
+    if(self.pers[# "specialiststatabilityusage"] >= 2) {
       self challenges::processspecialistchallenge("multikill_ability");
     }
 

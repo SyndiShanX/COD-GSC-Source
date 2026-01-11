@@ -411,9 +411,7 @@ onplayerconnect() {
       var_00 thread scripts\cp\zombies\zombie_analytics::func_97A4(var_00);
       var_00 thread streamweaponsonzonechange(var_00);
       if(isDefined(level.custom_onplayerconnect_func)) {
-        [
-          [level.custom_onplayerconnect_func]
-        ](var_00);
+        [[level.custom_onplayerconnect_func]](var_00);
       }
 
       if(!scripts\cp\utility::map_check(0) && !scripts\cp\utility::map_check(1)) {
@@ -1249,9 +1247,7 @@ zombie_laststand_currency_penalth_amount(param_00) {
 
 zombie_callbackplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
   scripts\cp\zombies\zombie_analytics::func_AF84(self, param_08);
-  [
-    [level.callbackplayerlaststand]
-  ](param_00, param_01, param_02, param_04, param_05, param_07, param_08, param_09);
+  [[level.callbackplayerlaststand]](param_00, param_01, param_02, param_04, param_05, param_07, param_08, param_09);
 }
 
 func_1BA3() {}

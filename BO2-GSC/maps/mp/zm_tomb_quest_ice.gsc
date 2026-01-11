@@ -74,7 +74,7 @@ ice_puzzle_1_cleanup() {
   a_ceiling_tile_brushes = getEntArray("ice_ceiling_tile", "script_noteworthy");
 
   foreach(tile in a_ceiling_tile_brushes) {
-  tile thread ceiling_tile_flip(0);
+    tile thread ceiling_tile_flip(0);
   }
 
   a_ice_ternary_digit_brushes = getEntArray("ice_chamber_digit", "targetname");
@@ -86,7 +86,7 @@ ice_tiles_randomize() {
   a_original_positions = [];
 
   foreach(e_tile in a_original_tiles) {
-  a_original_positions[a_original_positions.size] = e_tile.origin;
+    a_original_positions[a_original_positions.size] = e_tile.origin;
   }
 
   a_unused_tiles = getEntArray("ice_ceiling_tile", "script_noteworthy");
@@ -107,7 +107,7 @@ reset_tiles() {
   a_ceiling_tile_brushes = getEntArray("ice_ceiling_tile", "script_noteworthy");
 
   foreach(tile in a_ceiling_tile_brushes) {
-  tile thread ceiling_tile_flip(1);
+    tile thread ceiling_tile_flip(1);
   }
 }
 
@@ -179,8 +179,7 @@ ceiling_tile_flip(b_flip_to_tile_side) {
 
   if(!self.showing_tile_side) {
     arrayremovevalue(level.unsolved_tiles, self, 0);
-  }
-  else {
+  } else {
     level.unsolved_tiles[level.unsolved_tiles.size] = self;
   }
 
@@ -224,8 +223,7 @@ ceiling_tile_process_damage() {
   }
 }
 
-ice_puzzle_2_init() {
-}
+ice_puzzle_2_init() {}
 
 ice_puzzle_2_run() {
   a_stone_positions = getstructarray("puzzle_stone_water", "targetname");
@@ -285,7 +283,7 @@ ice_stone_run() {
     level.weather_rain = 0;
 
     foreach(player in getplayers()) {
-    player set_weather_to_player();
+      player set_weather_to_player();
     }
 
     wait 5.0;
@@ -293,7 +291,7 @@ ice_stone_run() {
     level.weather_rain = 0;
 
     foreach(player in getplayers()) {
-    player set_weather_to_player();
+      player set_weather_to_player();
     }
   }
 }

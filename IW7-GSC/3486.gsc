@@ -8,11 +8,9 @@ func_2A6A(var_00, var_01, var_02) {
 
   if(isDefined(var_03)) {
     var_04 = var_3.origin[2];
-  }
-  else if(isDefined(level.airstrikeheightscale)) {
+  } else if(isDefined(level.airstrikeheightscale)) {
     var_04 = 850 * level.airstrikeheightscale;
-  }
-  else {
+  } else {
     var_04 = 850;
   }
 
@@ -458,8 +456,7 @@ isreadytofire(var_00) {
 
   if(var_03 >= var_04) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -470,8 +467,7 @@ func_1570(var_00) {
 
   if(var_0.size == 1) {
     self.besttarget = var_0[0];
-  }
-  else {
+  } else {
     self.besttarget = getbesttarget(var_00);
   }
 
@@ -505,8 +501,7 @@ func_13DCF(var_00) {
 
   if(var_1["position"] == var_00) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -738,8 +733,7 @@ firemissile(var_00) {
 
   if(isDefined(var_0.func_1155F)) {
     var_02 = self fireweapon("tag_flash", var_0.func_1155F, (0, 0, -250));
-  }
-  else {
+  } else {
     var_02 = self fireweapon("tag_flash", var_00, (0, 0, -250));
   }
 
@@ -992,8 +986,7 @@ func_67E4() {
 
   if(scripts\engine\utility::cointoss()) {
     var_02 = (0, var_01 + 90, 0);
-  }
-  else {
+  } else {
     var_02 = (0, var_01 - 90, 0);
   }
 

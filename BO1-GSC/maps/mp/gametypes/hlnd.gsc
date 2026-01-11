@@ -60,8 +60,7 @@ onPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWeapon, 
     if(isDefined(eAttacker) && IsPlayer(eAttacker)) {
       if(!isDefined(eAttacker.pers["sticks"])) {
         eAttacker.pers["sticks"] = 1;
-      }
-      else {
+      } else {
         eAttacker.pers["sticks"]++;
       }
       eAttacker.sticks = eAttacker.pers["sticks"];

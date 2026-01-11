@@ -4,12 +4,11 @@
 **********************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace ct_recon_enemy_reinforcement;
 
 class class_27e8fec4: cluielem {
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"ct_recon_enemy_reinforcement");
+    cluielem::open(localclientnum, # "ct_recon_enemy_reinforcement");
   }
 
   function function_fa582112(localclientnum) {

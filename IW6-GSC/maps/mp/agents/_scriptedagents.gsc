@@ -60,7 +60,9 @@ WaitUntilNotetrack(animLabel, notetrack, animState, animIndex, customFunction) {
     }
 
     if(isDefined(customFunction)) {
-      [[customFunction]](note, animState, animIndex, animTime);
+      [
+        [customFunction]
+      ](note, animState, animIndex, animTime);
     }
   }
 }
@@ -92,8 +94,7 @@ GetAnimScaleFactors(delta, animDelta, bAnimInWorldSpace) {
     animDeltaDir = VectorNormalize(animDelta2D);
     if(VectorDot(animDeltaDir, delta) < 0) {
       scaleXY = 0;
-    }
-    else if(animXY > 0) {
+    } else if(animXY > 0) {
       scaleXY = distXY / animXY;
     }
   } else if(animXY > 0)
@@ -121,8 +122,7 @@ GetAngleIndex(angle, threshold) {
 
   if(angle < 0) {
     return int(ceil((180 + angle - threshold) / 45));
-  }
-  else {
+  } else {
     return int(floor((180 + angle + threshold) / 45));
   }
 }

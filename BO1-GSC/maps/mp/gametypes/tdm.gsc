@@ -107,11 +107,9 @@ onEndGame(winningTeam) {
 onRoundEndGame(roundWinner) {
   if(game["roundswon"]["allies"] == game["roundswon"]["axis"]) {
     winner = "tie";
-  }
-  else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
+  } else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
     winner = "axis";
-  }
-  else {
+  } else {
     winner = "allies";
   }
   return winner;

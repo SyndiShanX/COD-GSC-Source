@@ -114,8 +114,7 @@ line_sound_player() {
 
   if(isDefined(self.script_looping)) {
     self playLoopSound(self.script_sound);
-  }
-  else {
+  } else {
     self playSound(self.script_sound);
   }
 }
@@ -139,11 +138,9 @@ move_sound_along_line() {
 
     if(closest_dist > 1048576) {
       wait 2;
-    }
-    else if(closest_dist > 262144) {
+    } else if(closest_dist > 262144) {
       wait 0.2;
-    }
-    else {
+    } else {
       wait 0.05;
     }
   }
@@ -156,11 +153,9 @@ closest_point_on_line_to_point(point, linestart, lineend) {
 
   if(t < 0.0) {
     self.origin = linestart;
-  }
-  else if(t > 1.0) {
+  } else if(t > 1.0) {
     self.origin = lineend;
-  }
-  else {
+  } else {
     start_x = linestart[0] + t * (lineend[0] - linestart[0]);
     start_y = linestart[1] + t * (lineend[1] - linestart[1]);
     start_z = linestart[2] + t * (lineend[2] - linestart[2]);

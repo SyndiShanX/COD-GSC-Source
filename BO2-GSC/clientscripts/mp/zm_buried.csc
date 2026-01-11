@@ -126,37 +126,32 @@ player_flashlight_flicker_update(life_left_frac) {
 
   if(life_left_frac < 1.0) {
     used_frac = 1.0 - life_left_frac;
-  }
-  else {
+  } else {
     used_frac = 0.0;
   }
 
   if(used_frac > 0) {
     if(used_frac > 0.0 && used_frac < wait_frac0) {
       wait_full = (wait_frac0 - used_frac) * level.oil_lamp_life_time;
-    }
-    else if(used_frac >= wait_frac0) {
+    } else if(used_frac >= wait_frac0) {
       wait_full = 0.0;
     }
 
     if(used_frac > wait_frac0 && used_frac < wait_frac1) {
       wait_flicker1 = (wait_frac1 - used_frac) * level.oil_lamp_life_time;
-    }
-    else if(used_frac >= wait_frac1) {
+    } else if(used_frac >= wait_frac1) {
       wait_flicker1 = 0.0;
     }
 
     if(used_frac > wait_frac1 && used_frac < wait_frac2) {
       wait_flicker2 = (wait_frac2 - used_frac) * level.oil_lamp_life_time;
-    }
-    else if(used_frac >= wait_frac2) {
+    } else if(used_frac >= wait_frac2) {
       wait_flicker2 = 0.0;
     }
 
     if(used_frac > wait_frac2 && used_frac < wait_frac3) {
       wait_flicker3 = (wait_frac3 - used_frac) * level.oil_lamp_life_time;
-    }
-    else if(used_frac >= wait_frac3) {
+    } else if(used_frac >= wait_frac3) {
       wait_flicker3 = 0.0;
     }
   }
@@ -235,8 +230,7 @@ start_3rd_person_flashlight(localclientnum, power_frac) {
 
   if(power_frac < 1.0) {
     used_frac = 1.0 - power_frac;
-  }
-  else {
+  } else {
     used_frac = 0.0;
   }
 
@@ -251,15 +245,13 @@ start_3rd_person_flashlight(localclientnum, power_frac) {
   if(used_frac < 1.0) {
     if(used_frac < level.flashlight_fx_flicker1_starts) {
       wait_flicker0 = (level.flashlight_fx_flicker1_starts - used_frac) * level.oil_lamp_life_time;
-    }
-    else {
+    } else {
       wait_flicker0 = 0;
     }
 
     if(used_frac >= level.flashlight_fx_flicker1_starts && used_frac < level.flashlight_fx_flicker2_starts) {
       wait_flicker1 = (level.flashlight_fx_flicker2_starts - used_frac) * level.oil_lamp_life_time;
-    }
-    else if(used_frac >= level.flashlight_fx_flicker2_starts) {
+    } else if(used_frac >= level.flashlight_fx_flicker2_starts) {
       wait_flicker1 = 0;
     }
 
@@ -307,8 +299,7 @@ grab_generator_light_array() {
 
       if(isDefined(light.script_light2_intensity)) {
         light.original_rhs_intensity = light.script_light2_intensity;
-      }
-      else {
+      } else {
         light.original_rhs_intensity = light.lights[0] getlightintensity();
       }
 
@@ -498,11 +489,9 @@ start_zombie_stuff() {
   }
 }
 
-init_clientflag_variables() {
-}
+init_clientflag_variables() {}
 
-register_clientflag_callbacks() {
-}
+register_clientflag_callbacks() {}
 
 init_level_specific_wall_buy_fx() {
   if(getdvar(#"createfx") != "") {
@@ -602,8 +591,7 @@ include_powerups() {
   include_powerup("random_weapon");
 }
 
-include_equipment_for_level() {
-}
+include_equipment_for_level() {}
 
 setup_personality_character_exerts() {
   level.exert_sounds[1]["playerbreathinsound"][0] = "vox_plr_0_exert_inhale_0";

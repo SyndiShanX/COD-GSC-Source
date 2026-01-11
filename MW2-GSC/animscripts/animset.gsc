@@ -682,8 +682,7 @@ heat_reload_anim() {
       coverReloadAnim = undefined;
       if(self.node.type == "Cover Left") {
         coverReloadAnim = % heat_cover_reload_R;
-      }
-      else if(self.node.type == "Cover Right") {
+      } else if(self.node.type == "Cover Right") {
         coverReloadAnim = % heat_cover_reload_L;
       }
 

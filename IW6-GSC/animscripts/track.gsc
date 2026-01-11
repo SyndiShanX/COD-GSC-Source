@@ -39,8 +39,7 @@ trackloop(var_0, var_1, var_2, var_3, var_4) {
     if(var_16 == "cover_multi") {
       if(self.cover.state == "right") {
         var_16 = "cover_right";
-      }
-      else if(self.cover.state == "left") {
+      } else if(self.cover.state == "left") {
         var_16 = "cover_left";
       }
     }
@@ -173,8 +172,7 @@ trackloop_anglesfornoshootpos(var_0, var_1) {
 
   if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 16) {
     var_5 = angleclamp180(self.angles[1] - self.node.angles[1]);
-  }
-  else {
+  } else {
     var_6 = self getanglestolikelyenemypath();
 
     if(isDefined(var_6)) {
@@ -193,8 +191,7 @@ trackloop_getdesiredangles(var_0, var_1) {
 
   if(self.stairsstate == "up") {
     var_3 = -40;
-  }
-  else if(self.stairsstate == "down") {
+  } else if(self.stairsstate == "down") {
     var_3 = 40;
     var_4 = 12;
   }
@@ -204,8 +201,7 @@ trackloop_getdesiredangles(var_0, var_1) {
 
   if(isDefined(self.stepoutyaw)) {
     var_6 = self.stepoutyaw - var_2[1];
-  }
-  else {
+  } else {
     var_7 = angleclamp180(self.desiredangle - self.angles[1]) * 0.5;
     var_6 = var_7 + self.angles[1] - var_2[1];
   }
@@ -229,8 +225,7 @@ trackloop_clampangles(var_0, var_1, var_2) {
   } else {
     if(self.gunblockedbywall) {
       var_1 = clamp(var_1, -10, 10);
-    }
-    else {
+    } else {
       var_1 = clamp(var_1, self.leftaimlimit, self.rightaimlimit);
     }
 

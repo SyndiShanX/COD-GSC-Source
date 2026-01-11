@@ -44,8 +44,7 @@ isFacingEnemy(toleranceCosAngle) {
 randomAttackIdle() {
   if(isFacingEnemy(-0.5)) {
     self set_orient_mode("face current");
-  }
-  else {
+  } else {
     self set_orient_mode("face enemy");
   }
   if(should_growl()) {

@@ -30,8 +30,7 @@ player_scuba() {
   //if coop splitscreen, only play scuba sound for player1 to avoid sound overlap
   if(!isSplitscreen()) {
     self thread player_scuba_breathe_sound();
-  }
-  else {
+  } else {
     if(self == level.player) {
       self thread player_scuba_breathe_sound();
     }

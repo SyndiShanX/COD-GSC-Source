@@ -140,8 +140,7 @@ player_lava_damage(trig) {
     } else {
       if(self hasperk("specialty_armorvest")) {
         self dodamage(15, self.origin);
-      }
-      else {
+      } else {
         self dodamage(1, self.origin);
       }
 
@@ -305,8 +304,7 @@ zombie_exploding_death(zombie_dmg, trap) {
 
   if(isDefined(self.isdog) && self.isdog) {
     self hide();
-  }
-  else {
+  } else {
     self delay_thread(1, ::self_delete);
   }
 }

@@ -22,8 +22,7 @@ cac_get_dvar_int(dvar, def) {
 cac_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }
@@ -211,7 +210,7 @@ take_perk_by_slot(slot) {
 
 take_all_perks() {
   foreach(perk in self.perk_refs) {
-  self unsetperk(perk.ref);
+    self unsetperk(perk.ref);
   }
 
   for(i = 0; i < level.player_perk_slots; i++) {
@@ -219,11 +218,9 @@ take_all_perks() {
   }
 }
 
-show_perks() {
-}
+show_perks() {}
 
-hide_perks() {
-}
+hide_perks() {}
 
 update_on_give_perk() {
   self endon("death");
@@ -268,8 +265,6 @@ perk_hud() {
     self waittill("perk_update", ref);
     slot = self find_slot_by_ref(ref);
 
-    if(isDefined(slot)) {
-    } else {
-    }
+    if(isDefined(slot)) {} else {}
   }
 }

@@ -134,8 +134,7 @@ onspawnplayerunified() {
 
   if(livesleft == 2) {
     self maps\mp\gametypes\_wager::wagerannouncer("wm_2_lives");
-  }
-  else if(livesleft == 1) {
+  } else if(livesleft == 1) {
     self maps\mp\gametypes\_wager::wagerannouncer("wm_final_life");
   }
 }
@@ -146,8 +145,7 @@ onspawnplayer(predictedspawn) {
 
   if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "oic");
   }
 }

@@ -32,7 +32,7 @@ jet_phalanx_tracking() {
   var_0 = ["enemy_phalanx_target1", "enemy_phalanx_target2", "enemy_phalanx_target3", "enemy_phalanx_target4", "enemy_phalanx_target5", "enemy_phalanx_target6"];
 
   foreach(var_2 in var_0) {
-  maps\_utility::array_spawn_function_targetname(var_2, ::jet_phalanx_spawn_function, "tracking_start", "tracking_end");
+    maps\_utility::array_spawn_function_targetname(var_2, ::jet_phalanx_spawn_function, "tracking_start", "tracking_end");
   }
 
   var_4 = ["crr_phalanx_01", "crr_phalanx_01", "crr_phalanx_03", "crr_phalanx_04"];

@@ -462,9 +462,7 @@ function run_visibility_function_for_all_triggers() {
     players = getplayers();
     for(i = 0; i < players.size; i++) {
       if(isDefined(self.playertrigger[players[i] getentitynumber()])) {
-        self.playertrigger[players[i] getentitynumber()][
-          [self.prompt_and_visibility_func]
-        ](players[i]);
+        self.playertrigger[players[i] getentitynumber()][[self.prompt_and_visibility_func]](players[i]);
       }
     }
   } else if(isDefined(self.trigger)) {

@@ -48,8 +48,7 @@ add_menu_child(parent_menu, child_menu, child_title, child_number_override, func
 
   if(!isDefined(child_number_override)) {
     size = level.menu_sys[parent_menu].children_menu.size;
-  }
-  else {
+  } else {
     size = child_number_override;
   }
 
@@ -123,8 +122,7 @@ set_menu_hudelem(text, type, y_offset) {
 
   if(isDefined(type) && type == "title") {
     scale = 2;
-  }
-  else {
+  } else {
     scale = 1.3;
     y = y + 30;
   }
@@ -152,8 +150,7 @@ set_hudelem(text, x, y, scale, alpha, sort, debug_hudelem) {
 
   if(isDefined(level.player) && !isDefined(debug_hudelem)) {
     hud = newclienthudelem(level.player);
-  }
-  else {
+  } else {
     hud = newdebughudelem();
     hud.debug_hudelem = 1;
   }
@@ -211,8 +208,7 @@ menu_input() {
 
     if(key > level.menu_sys[menu_name].options.size) {
       continue;
-    }
-    else if(isDefined(level.menu_sys[menu_name].parent_menu) && key == level.menu_sys[menu_name].options.size) {
+    } else if(isDefined(level.menu_sys[menu_name].parent_menu) && key == level.menu_sys[menu_name].options.size) {
       level notify("disable " + menu_name);
       level enable_menu(level.menu_sys[menu_name].parent_menu);
     } else if(isDefined(level.menu_sys[menu_name].function) && isDefined(level.menu_sys[menu_name].function[key])) {
@@ -220,8 +216,7 @@ menu_input() {
 
       if(isDefined(level.menu_sys[menu_name].func_key) && isDefined(level.menu_sys[menu_name].func_key[key]) && level.menu_sys[menu_name].func_key[key] == keystring) {
         error_msg = level[[level.menu_sys[menu_name].function[key]]]();
-      }
-      else {
+      } else {
         error_msg = level[[level.menu_sys[menu_name].function[key]]]();
       }
 
@@ -273,29 +268,21 @@ force_menu_back(waittill_msg) {
 
   if(key == 1) {
     key = "1";
-  }
-  else if(key == 2) {
+  } else if(key == 2) {
     key = "2";
-  }
-  else if(key == 3) {
+  } else if(key == 3) {
     key = "3";
-  }
-  else if(key == 4) {
+  } else if(key == 4) {
     key = "4";
-  }
-  else if(key == 5) {
+  } else if(key == 5) {
     key = "5";
-  }
-  else if(key == 6) {
+  } else if(key == 6) {
     key = "6";
-  }
-  else if(key == 7) {
+  } else if(key == 7) {
     key = "7";
-  }
-  else if(key == 8) {
+  } else if(key == 8) {
     key = "8";
-  }
-  else if(key == 9) {
+  } else if(key == 9) {
     key = "9";
   }
 
@@ -312,17 +299,13 @@ list_menu(list, x, y, scale, func, sort, start_num) {
   for(i = 0; i < 5; i++) {
     if(i == 0) {
       alpha = 0.3;
-    }
-    else if(i == 1) {
+    } else if(i == 1) {
       alpha = 0.6;
-    }
-    else if(i == 2) {
+    } else if(i == 2) {
       alpha = 1;
-    }
-    else if(i == 3) {
+    } else if(i == 3) {
       alpha = 0.6;
-    }
-    else {
+    } else {
       alpha = 0.3;
     }
 
@@ -395,8 +378,7 @@ new_move_list_menu(hud_array, list, num) {
   for(i = 0; i < hud_array.size; i++) {
     if(isDefined(list[i + (num - 2)])) {
       text = list[i + (num - 2)];
-    }
-    else {
+    } else {
       text = "";
     }
 
@@ -433,8 +415,7 @@ move_list_menu(hud_array, dir, space, num, min_alpha, num_of_fades) {
 
     if(side_movement) {
       hud_array[i].x = hud_array[i].x + movement;
-    }
-    else {
+    } else {
       hud_array[i].y = hud_array[i].y + movement;
     }
 
@@ -616,8 +597,7 @@ popup_box(x, y, width, height, time, color, alpha) {
 
   if(isDefined(level.player)) {
     hud = newclienthudelem(level.player);
-  }
-  else {
+  } else {
     hud = newdebughudelem();
     hud.debug_hudelem = 1;
   }
@@ -633,8 +613,7 @@ popup_box(x, y, width, height, time, color, alpha) {
 
   if(isDefined(level.player)) {
     hud.background = newclienthudelem(level.player);
-  }
-  else {
+  } else {
     hud.background = newdebughudelem();
     hud.debug_hudelem = 1;
   }
@@ -830,20 +809,15 @@ dialog_text_box_cursor() {
 get_letter_space(letter) {
   if(letter == "m" || letter == "w" || letter == "_") {
     space = 10;
-  }
-  else if(letter == "e" || letter == "h" || letter == "u" || letter == "v" || letter == "x" || letter == "o") {
+  } else if(letter == "e" || letter == "h" || letter == "u" || letter == "v" || letter == "x" || letter == "o") {
     space = 7;
-  }
-  else if(letter == "f" || letter == "r" || letter == "t") {
+  } else if(letter == "f" || letter == "r" || letter == "t") {
     space = 5;
-  }
-  else if(letter == "i" || letter == "l") {
+  } else if(letter == "i" || letter == "l") {
     space = 4;
-  }
-  else if(letter == "j") {
+  } else if(letter == "j") {
     space = 3;
-  }
-  else {
+  } else {
     space = 6;
   }
 

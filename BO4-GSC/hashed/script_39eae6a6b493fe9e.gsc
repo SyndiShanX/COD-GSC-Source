@@ -104,18 +104,18 @@ private function_a29384f8() {
   }
 }
 
-  function private function_32692a60() {
-    var_90491adb = int(getdvarfloat(#"scr_vialsawardedscale", 1));
-    for(count = 0; count < var_90491adb; count++) {
-      self incrementbgbtokensgained();
-    }
-    self.var_f191a1fc += var_90491adb;
-    self.var_bc978de9 += level.var_c50e9bdb;
-    self.BGB_TOKEN_LAST_GIVEN_TIME = self zm_stats::get_global_stat("TIME_PLAYED_TOTAL");
-    self zm_stats::set_global_stat("BGB_TOKEN_LAST_GIVEN_TIME", self.BGB_TOKEN_LAST_GIVEN_TIME);
-    uploadstats(self);
-    self reportlootreward("3", var_90491adb);
+function private function_32692a60() {
+  var_90491adb = int(getdvarfloat(#"scr_vialsawardedscale", 1));
+  for(count = 0; count < var_90491adb; count++) {
+    self incrementbgbtokensgained();
   }
+  self.var_f191a1fc += var_90491adb;
+  self.var_bc978de9 += level.var_c50e9bdb;
+  self.BGB_TOKEN_LAST_GIVEN_TIME = self zm_stats::get_global_stat("TIME_PLAYED_TOTAL");
+  self zm_stats::set_global_stat("BGB_TOKEN_LAST_GIVEN_TIME", self.BGB_TOKEN_LAST_GIVEN_TIME);
+  uploadstats(self);
+  self reportlootreward("3", var_90491adb);
+}
 
 private function_2d75b98d(var_ce9d31c4) {
   if(randomfloat(1) < var_ce9d31c4) {

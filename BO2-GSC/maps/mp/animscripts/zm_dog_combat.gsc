@@ -189,8 +189,7 @@ handlemeleebiteattacknotetracks(note, player) {
 
       if(!isDefined(level.dogmeleebiteattacktime)) {
         level.dogmeleebiteattacktimestart = gettime();
-      }
-      else {
+      } else {
         melee_time = level.dogmeleebiteattacktime;
       }
 
@@ -237,8 +236,7 @@ handlemeleefinishattacknotetracks(note, player) {
 
       if(!isDefined(level.dogmeleefinishattacktime)) {
         level.dogmeleefinishattacktimestart = gettime();
-      }
-      else {
+      } else {
         melee_time = level.dogmeleefinishattacktime;
       }
 
@@ -255,8 +253,7 @@ orienttoplayerdeadreckoning(player, time_till_bite) {
 
   if(enemy_motion_time_delta == 0) {
     enemy_predicted_position = player.origin;
-  }
-  else {
+  } else {
     enemy_velocity = enemy_motion_direction / enemy_motion_time_delta;
     enemy_predicted_position = player.origin + enemy_velocity * time_till_bite;
   }

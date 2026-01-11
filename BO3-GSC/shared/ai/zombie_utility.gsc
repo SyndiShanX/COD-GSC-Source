@@ -1029,9 +1029,7 @@ function spawn_zombie(spawner, target_name, spawn_point, round_number) {
       guy = spawner spawner::spawn(1);
     } else {
       if(isactorspawner(spawner) && isDefined(level.overridezombiespawn)) {
-        guy = [
-          [level.overridezombiespawn]
-        ]();
+        guy = [[level.overridezombiespawn]]();
       } else {
         guy = spawner spawnfromspawner(0, 1);
       }

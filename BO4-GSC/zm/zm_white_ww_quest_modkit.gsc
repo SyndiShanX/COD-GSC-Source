@@ -15,7 +15,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_white_ww_quest_modkit;
 
 init() {
@@ -84,7 +83,7 @@ modkit_crafted(e_player) {
 
 function_1665b086() {
   function_456e91dd();
-  level.var_4fe2f84d[#"ztable_white_ww_modkit"][0] zm_crafting::function_a187b293(getplayers()[0]);
+  level.var_4fe2f84d[# "ztable_white_ww_modkit"][0] zm_crafting::function_a187b293(getplayers()[0]);
   zm_crafting::function_ca244624(#"ztable_white_ww_modkit");
 }
 
@@ -116,12 +115,12 @@ modkit_hint(e_player) {
   } else {
     str_weapon_name = level.var_57f4595b[e_player.var_f7694097].displayname;
 
-    if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === #"zhield_riot_dw") {
+    if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === # "zhield_riot_dw") {
       self sethintstring("");
     } else if(isDefined(var_2c09b688)) {
-      self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", #"hash_71016e43b6fe0570"), str_weapon_name, var_2c09b688.displayname);
+      self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", # "hash_71016e43b6fe0570"), str_weapon_name, var_2c09b688.displayname);
     } else {
-      self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", #"hash_6831cfd35264e1"), str_weapon_name);
+      self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", # "hash_6831cfd35264e1"), str_weapon_name);
     }
   }
 
@@ -135,7 +134,7 @@ modkit_think() {
     s_notify = self waittill(#"trigger_activated");
     e_player = s_notify.e_who;
 
-    if(isDefined(e_player.var_f7694097) && e_player.var_382b64f2 === 1 && e_player.currentweapon.isheroweapon === 0 && e_player.currentweapon.name !== #"zhield_riot_dw") {
+    if(isDefined(e_player.var_f7694097) && e_player.var_382b64f2 === 1 && e_player.currentweapon.isheroweapon === 0 && e_player.currentweapon.name !== # "zhield_riot_dw") {
       self thread function_584d6092(e_player);
     }
   }
@@ -176,28 +175,28 @@ function_584d6092(e_user) {
 
 function_9dc2db01(var_4bef01e6, str_color) {
   self scene::play("init");
-  e_model = self.scene_ents[#"fluid"];
+  e_model = self.scene_ents[# "fluid"];
 
   switch (str_color) {
-    case #"green":
+    case # "green":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_green");
       break;
-    case #"red":
+    case # "red":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_red");
       break;
-    case #"yellow":
+    case # "yellow":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_yellow");
       break;
-    case #"orange":
+    case # "orange":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_orange");
       break;
-    case #"purple":
+    case # "purple":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_purple");
       break;
-    case #"blue":
+    case # "blue":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_blue");
       break;
-    case #"magenta_pink":
+    case # "magenta_pink":
       e_model setModel("p8_zm_whi_chemistry_kit_cannister_fluid_01_magenta_pink");
       break;
   }

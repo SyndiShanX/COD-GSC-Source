@@ -119,8 +119,7 @@ zombie_blood_powerup(m_powerup, e_player) {
 
   if(!isDefined(e_player.early_exit)) {
     e_player.ignoreme = 0;
-  }
-  else {
+  } else {
     e_player.early_exit = undefined;
   }
 
@@ -140,7 +139,7 @@ zombie_blood_powerup(m_powerup, e_player) {
   level.a_zombie_blood_entities = __new;
 
   foreach(e_zombie_blood in level.a_zombie_blood_entities) {
-  e_zombie_blood setinvisibletoplayer(e_player);
+    e_zombie_blood setinvisibletoplayer(e_player);
   }
 
   if(isDefined(e_player.hero_model)) {

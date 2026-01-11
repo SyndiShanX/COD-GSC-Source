@@ -196,8 +196,7 @@ setheadicon_factionimage(var_00, var_01, var_02) {
 
   if(level.teambased) {
     setteamheadicon(var_0.team, var_01);
-  }
-  else {
+  } else {
     setplayerheadicon(var_00, var_01);
   }
 }
@@ -216,8 +215,7 @@ setteamheadicon(var_00, var_01) {
 
   if(isDefined(var_01)) {
     self.entityheadiconoffset = var_01;
-  }
-  else {
+  } else {
     self.entityheadiconoffset = (0, 0, 0);
   }
 
@@ -269,8 +267,7 @@ setplayerheadicon(var_00, var_01) {
 
   if(isDefined(var_01)) {
     self.entityheadiconoffset = var_01;
-  }
-  else {
+  } else {
     self.entityheadiconoffset = (0, 0, 0);
   }
 

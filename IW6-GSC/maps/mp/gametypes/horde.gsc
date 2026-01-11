@@ -1143,7 +1143,7 @@ activatePlayerHUD(player) {
   baseWeaponNames = GetArrayKeys(player.weaponState);
 
   foreach(baseWeaponName in baseWeaponNames) {
-  player.weaponState[baseWeaponName]["barSize"] = getWeaponBarSize(1, baseWeaponName);
+    player.weaponState[baseWeaponName]["barSize"] = getWeaponBarSize(1, baseWeaponName);
   }
 
   player SetClientOmnvar("ui_horde_weapon_progress", 0);
@@ -1651,11 +1651,9 @@ givePointsForDamage(victim, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitL
   if(isKillshot) {
     if(isMelee) {
       eventName = "kill_melee";
-    }
-    else if(isHeadshot) {
+    } else if(isHeadshot) {
       eventName = "kill_head";
-    }
-    else {
+    } else {
       eventName = "kill_normal";
     }
 
@@ -1663,8 +1661,7 @@ givePointsForDamage(victim, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitL
   } else {
     if(isHeadshot) {
       eventName = "damage_head";
-    }
-    else {
+    } else {
       eventName = "damage_body";
     }
   }

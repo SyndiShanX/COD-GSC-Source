@@ -192,8 +192,7 @@ _meth_806A() {
 
   if(isDefined(var_00)) {
     return var_0.origin[2];
-  }
-  else {
+  } else {
     var_01 = 950;
 
     if(isDefined(level.airstrikeheightscale)) {

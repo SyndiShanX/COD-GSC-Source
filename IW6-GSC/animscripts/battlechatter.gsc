@@ -275,7 +275,7 @@ bcs_setup_chatter_toggle_array() {
     level.battlechatter = [];
 
     foreach(var_1 in anim.teams) {
-    maps\_utility::set_battlechatter_variable(var_1, 1);
+      maps\_utility::set_battlechatter_variable(var_1, 1);
     }
   }
 }
@@ -287,7 +287,7 @@ bcs_setup_flavorburst_toggle_array() {
     level.flavorbursts = [];
 
     foreach(var_1 in anim.teams) {
-    level.flavorbursts[var_1] = 1;
+      level.flavorbursts[var_1] = 1;
     }
   }
 }
@@ -613,8 +613,7 @@ playthreatevent() {
     case "infantry":
       if(isplayer(var_0) || !isDefined(var_0 getturret())) {
         var_1 = threatinfantry(var_0);
-      }
-      else {}
+      } else {}
 
       break;
     case "dog":
@@ -680,8 +679,7 @@ threatinfantry(var_0, var_1) {
       if(var_4) {
         if(randomint(100) < anim.eventchance["response"]["callout_negative"]) {
           var_3.responder animscripts\battlechatter_ai::addresponseevent("callout", "neg", self, 0.9);
-        }
-        else {
+        } else {
           var_3.responder animscripts\battlechatter_ai::addresponseevent("exposed", "acquired", self, 0.9);
         }
       }
@@ -740,8 +738,7 @@ threatinfantry(var_0, var_1) {
 
       if(self.team == "allies") {
         var_9 = level.player;
-      }
-      else if(isDefined(var_3.responder) && randomint(100) < anim.eventchance["response"]["callout"]) {
+      } else if(isDefined(var_3.responder) && randomint(100) < anim.eventchance["response"]["callout"]) {
         var_9 = var_3.responder;
       }
 
@@ -754,8 +751,7 @@ threatinfantry(var_0, var_1) {
 
       if(self.team == "allies") {
         var_9 = level.player;
-      }
-      else if(isDefined(var_3.responder) && randomint(100) < anim.eventchance["response"]["callout"]) {
+      } else if(isDefined(var_3.responder) && randomint(100) < anim.eventchance["response"]["callout"]) {
         var_9 = var_3.responder;
       }
 
@@ -769,8 +765,7 @@ threatinfantry(var_0, var_1) {
 
       if(self.team == "allies") {
         var_9 = level.player;
-      }
-      else if(isDefined(var_3.responder) && randomint(100) < anim.eventchance["response"]["callout"]) {
+      } else if(isDefined(var_3.responder) && randomint(100) < anim.eventchance["response"]["callout"]) {
         var_9 = var_3.responder;
       }
 
@@ -784,8 +779,7 @@ threatinfantry(var_0, var_1) {
 
       if(self.team == "allies") {
         var_9 = level.player;
-      }
-      else if(isDefined(var_3.responder) && randomint(100) < anim.eventchance["response"]["callout"]) {
+      } else if(isDefined(var_3.responder) && randomint(100) < anim.eventchance["response"]["callout"]) {
         var_9 = var_3.responder;
       }
 
@@ -799,8 +793,7 @@ threatinfantry(var_0, var_1) {
 
       if(self.team == "allies") {
         var_9 = level.player;
-      }
-      else if(isDefined(var_3.responder) && randomint(100) < anim.eventchance["response"]["callout"]) {
+      } else if(isDefined(var_3.responder) && randomint(100) < anim.eventchance["response"]["callout"]) {
         var_9 = var_3.responder;
       }
 
@@ -883,14 +876,11 @@ threatinfantry(var_0, var_1) {
 
       if(iscallouttypereport(var_14)) {
         var_3.responder animscripts\battlechatter_ai::addresponseevent("callout", "echo", self, 0.9, var_14);
-      }
-      else if(iscallouttypeqa(var_14, self)) {
+      } else if(iscallouttypeqa(var_14, self)) {
         var_3.responder animscripts\battlechatter_ai::addresponseevent("callout", "QA", self, 0.9, var_14, var_3.location);
-      }
-      else if(randomint(100) < anim.eventchance["response"]["callout_negative"]) {
+      } else if(randomint(100) < anim.eventchance["response"]["callout_negative"]) {
         var_3.responder animscripts\battlechatter_ai::addresponseevent("callout", "neg", self, 0.9);
-      }
-      else {
+      } else {
         var_3.responder animscripts\battlechatter_ai::addresponseevent("exposed", "acquired", self, 0.9);
       }
 
@@ -1026,12 +1016,10 @@ getthreatinfantrycallouttype(var_0) {
   if(isDefined(var_1)) {
     if(canconcat(var_1)) {
       addpossiblethreatcallout("concat_location");
-    }
-    else if(isDefined(var_1 getcannedresponse(self))) {
+    } else if(isDefined(var_1 getcannedresponse(self))) {
       if(isDefined(var_3)) {
         addpossiblethreatcallout("ai_location");
-      }
-      else {
+      } else {
         if(cansayplayername()) {
           addpossiblethreatcallout("player_location");
         }
@@ -1329,8 +1317,7 @@ reactiontaunt(var_0, var_1) {
 
   if(isDefined(var_1) && var_1 == "hostileburst") {
     var_2 addhostileburstalias();
-  }
-  else {
+  } else {
     var_2 addtauntalias("taunt", "generic");
   }
 
@@ -1420,11 +1407,9 @@ responsethreatcallout(var_0, var_1) {
 
   if(var_1 == "echo") {
     var_3 = var_2 addthreatcalloutecho(self.curevent.reportalias, var_0);
-  }
-  else if(var_1 == "QA") {
+  } else if(var_1 == "QA") {
     var_3 = var_2 addthreatcalloutqa_nextline(var_0, self.curevent.reportalias, self.curevent.location);
-  }
-  else {
+  } else {
     var_3 = var_2 addthreatcalloutresponsealias(var_1);
   }
 
@@ -1614,7 +1599,7 @@ playphrase(var_0, var_1) {
     var_2 = [];
 
     foreach(var_4 in var_0.soundaliases) {
-    var_2[var_2.size] = var_4;
+      var_2[var_2.size] = var_4;
     }
 
     if(battlechatter_canprint()) {
@@ -1636,8 +1621,7 @@ playphrase(var_0, var_1) {
     if(!self.battlechatter) {
       if(!is_friendlyfire_event(self.curevent)) {
         continue;
-      }
-      else if(!can_say_friendlyfire(0)) {
+      } else if(!can_say_friendlyfire(0)) {
         continue;
       }
     }
@@ -1668,8 +1652,7 @@ playphrase(var_0, var_1) {
 
       if(getdvarint("bcs_forceEnglish", 0)) {
         var_9 playSound(var_0.soundaliases[var_7], var_0.soundaliases[var_7], 1);
-      }
-      else {
+      } else {
         var_9 playSound(var_0.soundaliases[var_7], var_0.soundaliases[var_7], 1);
       }
 
@@ -2008,8 +1991,7 @@ isnodecoverorconceal() {
 squadhasofficer(var_0) {
   if(var_0.officercount > 0) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -2031,8 +2013,7 @@ isofficer() {
 bcgetclaimednode() {
   if(isplayer(self)) {
     return self.node;
-  }
-  else {
+  } else {
     return animscripts\utility::getclaimednode();
   }
 }
@@ -2040,8 +2021,7 @@ bcgetclaimednode() {
 enemy_team_name() {
   if(self isbadguy()) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -2049,11 +2029,9 @@ enemy_team_name() {
 getname() {
   if(enemy_team_name()) {
     var_0 = self.ainame;
-  }
-  else if(self.team == "allies") {
+  } else if(self.team == "allies") {
     var_0 = self.name;
-  }
-  else {
+  } else {
     var_0 = undefined;
   }
 
@@ -2282,14 +2260,11 @@ getdirectionfacingflank(var_0, var_1, var_2) {
 
   if(var_5 > 315 || var_5 < 45) {
     var_6 = "front";
-  }
-  else if(var_5 < 135) {
+  } else if(var_5 < 135) {
     var_6 = "right";
-  }
-  else if(var_5 < 225) {
+  } else if(var_5 < 225) {
     var_6 = "rear";
-  }
-  else {
+  } else {
     var_6 = "left";
   }
 
@@ -2342,36 +2317,27 @@ getdirectioncompass(var_0, var_1) {
 
   if(var_3 < 0) {
     var_3 = var_3 + 360;
-  }
-  else if(var_3 > 360) {
+  } else if(var_3 > 360) {
     var_3 = var_3 - 360;
   }
 
   if(var_3 < 22.5 || var_3 > 337.5) {
     var_5 = "north";
-  }
-  else if(var_3 < 67.5) {
+  } else if(var_3 < 67.5) {
     var_5 = "northwest";
-  }
-  else if(var_3 < 112.5) {
+  } else if(var_3 < 112.5) {
     var_5 = "west";
-  }
-  else if(var_3 < 157.5) {
+  } else if(var_3 < 157.5) {
     var_5 = "southwest";
-  }
-  else if(var_3 < 202.5) {
+  } else if(var_3 < 202.5) {
     var_5 = "south";
-  }
-  else if(var_3 < 247.5) {
+  } else if(var_3 < 247.5) {
     var_5 = "southeast";
-  }
-  else if(var_3 < 292.5) {
+  } else if(var_3 < 292.5) {
     var_5 = "east";
-  }
-  else if(var_3 < 337.5) {
+  } else if(var_3 < 337.5) {
     var_5 = "northeast";
-  }
-  else {
+  } else {
     var_5 = "impossible";
   }
 
@@ -2389,14 +2355,11 @@ getdistanceyardsnormalized(var_0, var_1) {
 
   if(var_2 < 15.0) {
     return "10";
-  }
-  else if(var_2 < 25.0) {
+  } else if(var_2 < 25.0) {
     return "20";
-  }
-  else if(var_2 < 35.0) {
+  } else if(var_2 < 35.0) {
     return "30";
-  }
-  else {
+  } else {
     return "40";
   }
 }
@@ -2406,11 +2369,9 @@ getfrontarcclockdirection(var_0) {
 
   if(var_0 == "10" || var_0 == "11") {
     var_1 = "10";
-  }
-  else if(var_0 == "12") {
+  } else if(var_0 == "12") {
     var_1 = var_0;
-  }
-  else if(var_0 == "1" || var_0 == "2") {
+  } else if(var_0 == "1" || var_0 == "2") {
     var_1 = "2";
   }
 
@@ -2428,38 +2389,27 @@ getdirectionfacingclock(var_0, var_1, var_2) {
 
   if(var_7 > 345 || var_7 < 15) {
     var_8 = "12";
-  }
-  else if(var_7 < 45) {
+  } else if(var_7 < 45) {
     var_8 = "1";
-  }
-  else if(var_7 < 75) {
+  } else if(var_7 < 75) {
     var_8 = "2";
-  }
-  else if(var_7 < 105) {
+  } else if(var_7 < 105) {
     var_8 = "3";
-  }
-  else if(var_7 < 135) {
+  } else if(var_7 < 135) {
     var_8 = "4";
-  }
-  else if(var_7 < 165) {
+  } else if(var_7 < 165) {
     var_8 = "5";
-  }
-  else if(var_7 < 195) {
+  } else if(var_7 < 195) {
     var_8 = "6";
-  }
-  else if(var_7 < 225) {
+  } else if(var_7 < 225) {
     var_8 = "7";
-  }
-  else if(var_7 < 255) {
+  } else if(var_7 < 255) {
     var_8 = "8";
-  }
-  else if(var_7 < 285) {
+  } else if(var_7 < 285) {
     var_8 = "9";
-  }
-  else if(var_7 < 315) {
+  } else if(var_7 < 315) {
     var_8 = "10";
-  }
-  else {
+  } else {
     var_8 = "11";
   }
 
@@ -2473,17 +2423,13 @@ getdegreeselevation(var_0, var_1) {
 
   if(var_4 < 15 || var_4 > 55) {
     return var_4;
-  }
-  else if(var_4 < 25) {
+  } else if(var_4 < 25) {
     return 20;
-  }
-  else if(var_4 < 35) {
+  } else if(var_4 < 35) {
     return 30;
-  }
-  else if(var_4 < 45) {
+  } else if(var_4 < 45) {
     return 40;
-  }
-  else if(var_4 < 55) {
+  } else if(var_4 < 55) {
     return 50;
   }
 }
@@ -2507,8 +2453,7 @@ addconcattargetalias(var_0) {
 
   if(var_0 animscripts\utility::usingrocketlauncher()) {
     var_1 = "_rpg";
-  }
-  else if(var_0 bcissniper()) {
+  } else if(var_0 bcissniper()) {
     var_1 = "_sniper";
   }
 
@@ -2650,11 +2595,9 @@ player_name_called_recently() {
 isusingsamevoice(var_0) {
   if(isstring(self.npcid) && isstring(var_0.npcid) && self.npcid == var_0.npcid) {
     return 1;
-  }
-  else if(!isstring(self.npcid) && !isstring(var_0.npcid) && self.npcid == var_0.npcid) {
+  } else if(!isstring(self.npcid) && !isstring(var_0.npcid) && self.npcid == var_0.npcid) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -2734,8 +2677,7 @@ addthreatcalloutqa_nextline(var_0, var_1, var_2) {
   if(!soundexists(var_10)) {
     if(randomint(100) < anim.eventchance["response"]["callout_negative"]) {
       var_0 animscripts\battlechatter_ai::addresponseevent("callout", "neg", self.owner, 0.9);
-    }
-    else {
+    } else {
       var_0 animscripts\battlechatter_ai::addresponseevent("exposed", "acquired", self.owner, 0.9);
     }
 
@@ -2800,8 +2742,7 @@ addthreatcalloutlocationalias(var_0, var_1) {
 
     if(isDefined(var_5)) {
       var_4 = var_5;
-    }
-    else {
+    } else {
       var_4 = common_scripts\utility::random(var_3);
     }
   }
@@ -2810,11 +2751,9 @@ addthreatcalloutlocationalias(var_0, var_1) {
 
   if(isDefined(var_1) && var_1) {
     var_6 = self.owner getloccalloutalias("concat_loc_" + var_4);
-  }
-  else if(!isDefined(var_0.qafinished) && iscallouttypeqa(var_4, self.owner)) {
+  } else if(!isDefined(var_0.qafinished) && iscallouttypeqa(var_4, self.owner)) {
     var_6 = self.owner getqacalloutalias(var_4, 0);
-  }
-  else {
+  } else {
     var_6 = self.owner getloccalloutalias("co_loc_" + var_4);
   }
 
@@ -2906,8 +2845,7 @@ createchatevent(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_3.priority = var_2;
-  }
-  else {
+  } else {
     var_3.priority = anim.eventpriority[var_0][var_1];
   }
 
@@ -3194,7 +3132,7 @@ bcdrawobjects() {
     var_2 = "";
 
     foreach(var_4 in var_1) {
-    var_2 = var_2 + var_4;
+      var_2 = var_2 + var_4;
     }
 
     thread drawbcobject("Location: " + var_2, anim.bcs_locations[var_0] getorigin(), (0, 0, 8), (1, 1, 1));
@@ -3251,8 +3189,7 @@ voice_is_british_based() {
 
   if(self.voice == "british") {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

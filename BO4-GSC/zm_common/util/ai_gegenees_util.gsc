@@ -21,11 +21,10 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
-
 #namespace zombie_gegenees_util;
 
 autoexec __init__system__() {
-  system::register(#"zombie_gegenees_util", &__init__, &__main__, #"zm_ai_gegenees");
+  system::register(#"zombie_gegenees_util", &__init__, &__main__, # "zm_ai_gegenees");
 }
 
 __init__() {
@@ -137,7 +136,7 @@ function_7640eac2() {
 }
 
 function_9a9b5f49(spot) {
-  self endoncallback(&zm_spawner::function_fe3cb19a, #"death");
+  self endoncallback(&zm_spawner::function_fe3cb19a, # "death");
   self zm_spawner::function_fe3cb19a();
   self.mdl_anchor = util::spawn_model("tag_origin", self.origin, self.angles);
   self ghost();
@@ -148,7 +147,7 @@ function_9a9b5f49(spot) {
 
   self.mdl_anchor moveto(spot.origin, 0.05);
   self.mdl_anchor rotateto(spot.angles, 0.05);
-  self.mdl_anchor waittill(#"movedone", #"death");
+  self.mdl_anchor waittill(#"movedone", # "death");
   wait 0.05;
   self show();
 
@@ -171,7 +170,7 @@ function_9a9b5f49(spot) {
 }
 
 private function_7e791d5d(einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime) {
-  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == #"gegenees" && eattacker.team != self.team) {
+  if(isDefined(eattacker) && isai(eattacker) && eattacker.archetype == # "gegenees" && eattacker.team != self.team) {
     if(eattacker ai::has_behavior_attribute("damage_multiplier")) {
       damage_multiplier = eattacker ai::get_behavior_attribute("damage_multiplier");
 
@@ -252,8 +251,8 @@ spawn_single(b_force_spawn = 0, var_eb3a8721, var_bc66d64b) {
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.var_9e923fdb)) {
     s_spawn_loc = [[level.var_9e923fdb]]();
-  } else if(level.zm_loc_types[#"gegenees_location"].size > 0) {
-    s_spawn_loc = array::random(level.zm_loc_types[#"gegenees_location"]);
+  } else if(level.zm_loc_types[# "gegenees_location"].size > 0) {
+    s_spawn_loc = array::random(level.zm_loc_types[# "gegenees_location"]);
   }
 
   if(!isDefined(s_spawn_loc)) {
@@ -261,7 +260,7 @@ spawn_single(b_force_spawn = 0, var_eb3a8721, var_bc66d64b) {
       iprintlnbold("<dev string:x86>");
     }
 
-      return undefined;
+    return undefined;
   }
 
   ai = function_2ce6dcd4(level.var_b3d6ef3b[0], s_spawn_loc, var_bc66d64b);
@@ -362,19 +361,19 @@ function_c1a0ea97(n_round_number) {
       return;
   }
 
-    while(true) {
-      level waittill(#"hash_5d3012139f083ccb");
+  while(true) {
+    level waittill(#"hash_5d3012139f083ccb");
 
-      if(zm_round_spawning::function_d0db51fc(#"gegenees")) {
-        level.var_a5355505++;
+    if(zm_round_spawning::function_d0db51fc(#"gegenees")) {
+      level.var_a5355505++;
 
-        if(level.var_a5355505 == 3) {
-          level.var_a5355505 = undefined;
-          level.var_99695b55 = undefined;
-          return;
-        }
-
-        level.var_99695b55 = level.round_number + randomintrangeinclusive(2, 4);
+      if(level.var_a5355505 == 3) {
+        level.var_a5355505 = undefined;
+        level.var_99695b55 = undefined;
+        return;
       }
+
+      level.var_99695b55 = level.round_number + randomintrangeinclusive(2, 4);
     }
+  }
 }

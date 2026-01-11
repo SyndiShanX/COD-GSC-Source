@@ -409,9 +409,7 @@ compareSizesFx(org, array, dist, compareFunc) {
     keys = getArrayKeys(array);
     for(i = 0; i < keys.size; i++) {
       newdist = distance(array[keys[i]].v["origin"], org);
-      if([
-          [compareFunc]
-        ](newDist, dist)) {
+      if([[compareFunc]](newDist, dist)) {
         continue;
       }
       dist = newdist;
@@ -444,9 +442,7 @@ compareSizes(org, array, dist, compareFunc) {
     keys = GetArrayKeys(array);
     for(i = 0; i < keys.size; i++) {
       newdist = distance(array[keys[i]].origin, org);
-      if([
-          [compareFunc]
-        ](newDist, dist)) {
+      if([[compareFunc]](newDist, dist)) {
         continue;
       }
       dist = newdist;

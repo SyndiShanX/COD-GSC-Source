@@ -94,7 +94,7 @@ addspawnpointsinternal(team, spawnpointname) {
 
 clearspawnpoints() {
   foreach(team in level.teams) {
-  level.teamspawnpoints[team] = [];
+    level.teamspawnpoints[team] = [];
   }
 
   level.spawnpoints = [];
@@ -244,8 +244,7 @@ getspawnpoint_final(spawnpoints, useweights) {
   if(!isDefined(bestspawnpoint)) {
     if(useweights) {
       bestspawnpoint = spawnpoints[randomint(spawnpoints.size)];
-    }
-    else {
+    } else {
       bestspawnpoint = spawnpoints[0];
     }
   }
@@ -381,15 +380,13 @@ storespawndata(spawnpoints, useweights, bestspawnpoint) {
 
     if(spawnpoints[i] == bestspawnpoint) {
       str = str + "1,";
-    }
-    else {
+    } else {
       str = str + "0,";
     }
 
     if(!useweights) {
       str = str + "0,";
-    }
-    else {
+    } else {
       str = str + (spawnpoints[i].weight + ",");
     }
 
@@ -470,8 +467,7 @@ storespawndata(spawnpoints, useweights, bestspawnpoint) {
   closefile(file);
   thisspawnid = level.spawngameid + "." + level.spawnid;
 
-  if(isDefined(self.thisspawnid)) {
-  }
+  if(isDefined(self.thisspawnid)) {}
 
   self.thisspawnid = thisspawnid;
 }
@@ -769,7 +765,7 @@ getallalliedandenemyplayers(obj) {
       }
 
       foreach(player in level.aliveplayers[team]) {
-      obj.enemies[obj.enemies.size] = player;
+        obj.enemies[obj.enemies.size] = player;
       }
     }
   } else {
@@ -1062,15 +1058,13 @@ spawngraph() {
 
   if(corners[1].origin[0] > max[0]) {
     max = (corners[1].origin[0], max[1], max[2]);
-  }
-  else {
+  } else {
     min = (corners[1].origin[0], min[1], min[2]);
   }
 
   if(corners[1].origin[1] > max[1]) {
     max = (max[0], corners[1].origin[1], max[2]);
-  }
-  else {
+  } else {
     min = (min[0], corners[1].origin[1], min[2]);
   }
 
@@ -1212,8 +1206,7 @@ loopbotspawns() {
         for(index = 0; index < numkills; index++) {
           killer = bots[randomint(bots.size)];
 
-          for(victim = bots[randomint(bots.size)]; isDefined(lastvictim) && victim == lastvictim; victim = bots[randomint(bots.size)]) {
-          }
+          for(victim = bots[randomint(bots.size)]; isDefined(lastvictim) && victim == lastvictim; victim = bots[randomint(bots.size)]) {}
 
           victim thread[[level.callbackplayerdamage]](killer, killer, 1000, 0, "MOD_RIFLE_BULLET", "none", (0, 0, 0), (0, 0, 0), "none", 0, 0);
           lastvictim = victim;
@@ -1223,8 +1216,7 @@ loopbotspawns() {
 
     if(getdvar(#"scr_killbottimer") != "") {
       wait(getdvarfloat(#"scr_killbottimer"));
-    }
-    else {
+    } else {
       wait 0.05;
     }
   }
@@ -1246,8 +1238,7 @@ allowspawndatareading() {
 
       if(isDefined(relval) && relval != "") {
         setdvar("scr_spawnidcycle", "");
-      }
-      else {
+      } else {
         wait 0.5;
         continue;
       }
@@ -1259,8 +1250,7 @@ allowspawndatareading() {
 
     if(!isDefined(level.curspawndata)) {
       println("No spawn data to draw.");
-    }
-    else {
+    } else {
       println("Drawing spawn ID " + level.curspawndata.id);
     }
 
@@ -1281,8 +1271,7 @@ showdeathsdebug() {
     for(i = 0; i < level.spawnlogic_deaths.size; i++) {
       if(isDefined(level.spawnlogic_deaths[i].los)) {
         line(level.spawnlogic_deaths[i].org, level.spawnlogic_deaths[i].killorg, (1, 0, 0));
-      }
-      else {
+      } else {
         line(level.spawnlogic_deaths[i].org, level.spawnlogic_deaths[i].killorg, (1, 1, 1));
       }
 
@@ -1428,8 +1417,7 @@ debugnearbyplayers(players, origin) {
 
 }
 
-deathoccured(dier, killer) {
-}
+deathoccured(dier, killer) {}
 
 checkforsimilardeaths(deathinfo) {
   for(i = 0; i < level.spawnlogic_deaths.size; i++) {
@@ -1636,8 +1624,7 @@ spawnpointupdate(spawnpoint) {
     if(losexists) {
       if(level.teambased) {
         sights[player.team]++;
-      }
-      else {
+      } else {
         spawnpoint.enemysights++;
       }
 

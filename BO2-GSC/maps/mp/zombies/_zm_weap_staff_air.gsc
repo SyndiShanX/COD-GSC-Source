@@ -92,8 +92,7 @@ staff_air_find_source(v_detonate, str_weapon) {
         }
         if(distance2dsquared(v_detonate, a_zombies[i].origin) <= 10000) {
           self thread staff_air_zombie_source(a_zombies[0], str_weapon);
-        }
-        else {
+        } else {
           self thread staff_air_position_source(v_detonate, str_weapon);
         }
 
@@ -368,8 +367,7 @@ staff_air_fling_zombie(player) {
   }
   if(isDefined(self.is_source) || cointoss()) {
     self thread zombie_launch(player, "staff_air_upgraded_zm");
-  }
-  else {
+  } else {
     self do_damage_network_safe(player, self.health, "staff_air_upgraded_zm", "MOD_IMPACT");
     level thread staff_air_gib(self);
   }
@@ -380,8 +378,7 @@ zombie_launch(e_attacker, str_weapon) {
 
   if(isDefined(level.ragdoll_limit_check) && ![[level.ragdoll_limit_check]]()) {
     level thread staff_air_gib(self);
-  }
-  else {
+  } else {
     self startragdoll();
     self setclientfield("air_staff_launch", 1);
   }
@@ -520,8 +517,7 @@ whirlwind_attract_anim(v_attract_point, b_move_fast) {
 
     if(b_move_fast) {
       self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind_fast");
-    }
-    else {
+    } else {
       self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind");
     }
   } else {
@@ -530,8 +526,7 @@ whirlwind_attract_anim(v_attract_point, b_move_fast) {
 
     if(b_move_fast) {
       self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind_crawl");
-    }
-    else {
+    } else {
       self animscripted(self.origin, v_source_to_target, "zm_move_whirlwind_fast_crawl");
     }
   }

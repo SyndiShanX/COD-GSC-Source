@@ -69,7 +69,9 @@ init() {
     }
 
     if(isDefined(level.onaddvehiclehusks)) {
-      [[level.onaddvehiclehusks]]();
+      [
+        [level.onaddvehiclehusks]
+      ]();
     }
 
     keys = getarraykeys(level.veh_husk_models);
@@ -90,7 +92,7 @@ init() {
   killbrushes = getEntArray("water_killbrush", "targetname");
 
   foreach(brush in killbrushes) {
-  brush thread water_killbrush_think();
+    brush thread water_killbrush_think();
   }
 }
 
@@ -102,8 +104,7 @@ water_killbrush_think() {
       if(isDefined(entity.targetname)) {
         if(entity.targetname == "rcbomb") {
           entity maps\mp\killstreaks\_rcbomb::rcbomb_force_explode();
-        }
-        else if(entity.targetname == "talon" && !is_true(entity.dead)) {
+        } else if(entity.targetname == "talon" && !is_true(entity.dead)) {
           entity notify("death");
         }
       }
@@ -222,8 +223,7 @@ update_damage_effects(vehicle, attacker) {
 
       if(previous_damage_state_index < 0) {
         start_damage_state_index = 0;
-      }
-      else {
+      } else {
         start_damage_state_index = previous_damage_state_index + 1;
       }
 
@@ -285,8 +285,7 @@ init_vehicle_entities() {
   return 0;
 }
 
-precache_vehicles() {
-}
+precache_vehicles() {}
 
 register_vehicle() {
   if(!isDefined(level.vehicles_list)) {
@@ -299,8 +298,7 @@ register_vehicle() {
 manage_vehicles() {
   if(!isDefined(level.vehicles_list)) {
     return true;
-  }
-  else {
+  } else {
     max_vehicles = getmaxvehicles();
     newarray = [];
 
@@ -345,8 +343,7 @@ init_vehicle() {
 
   if(isDefined(level.vehiclehealths) && isDefined(level.vehiclehealths[self.vehicletype])) {
     self.maxhealth = level.vehiclehealths[self.vehicletype];
-  }
-  else {
+  } else {
     self.maxhealth = getdvarint(#"scr_veh_health_tank");
 
     println("No health specified for vehicle type " + self.vehicletype + "! Using default...");
@@ -580,8 +577,7 @@ wait_until_severely_damaged() {
 
     if(isDefined(level.k_severe_damage_health_percentage)) {
       self cleanup_debug_print("Damage Test: Still healthy - (" + health_percentage + " >= " + level.k_severe_damage_health_percentage + ") and working treads");
-    }
-    else {
+    } else {
       self cleanup_debug_print("Damage Test: Still healthy and working treads");
     }
 
@@ -601,8 +597,7 @@ get_random_cleanup_wait_time(state) {
 
   if(maxtime > mintime) {
     return randomfloatrange(mintime, maxtime);
-  }
-  else {
+  } else {
     return maxtime;
   }
 }
@@ -622,8 +617,7 @@ do_alive_cleanup_wait(test_name) {
 
     if(self is_vehicle()) {
       damagefraction = (self.initial_state.health - self.health) / self.initial_state.health;
-    }
-    else {
+    } else {
       damagefraction = 1.0;
     }
 
@@ -631,11 +625,9 @@ do_alive_cleanup_wait(test_name) {
 
     if(damagefraction <= curve_begin) {
       damagefactor = factor_max;
-    }
-    else if(damagefraction >= curve_end) {
+    } else if(damagefraction >= curve_end) {
       damagefactor = factor_min;
-    }
-    else {
+    } else {
       dydx = (factor_min - factor_max) / (curve_end - curve_begin);
       damagefactor = factor_max + (damagefraction - curve_begin) * dydx;
     }
@@ -716,8 +708,7 @@ wait_for_vehicle_to_stop_outside_min_radius() {
 
     if(speedmph > cutoffmph) {
       cleanup_debug_print("(" + (maxwaittime - totalsecondswaited) + "s) Speed: " + speedmph + ">" + cutoffmph);
-    }
-    else {
+    } else {
       break;
     }
 
@@ -742,8 +733,7 @@ vehicle_abandoned_by_occupants_t() {
 }
 
 play_start_stop_sound(sound_alias, modulation) {
-  if(isDefined(self.start_stop_sfxid)) {
-  }
+  if(isDefined(self.start_stop_sfxid)) {}
 
   self.start_stop_sfxid = self playSound(sound_alias);
 }
@@ -912,7 +902,9 @@ vehicle_overturn_eject_occupants() {
     self waittill("veh_ejectoccupants");
 
     if(isDefined(level.onejectoccupants)) {
-      [[level.onejectoccupants]]();
+      [
+        [level.onejectoccupants]
+      ]();
     }
 
     wait 0.25;
@@ -1029,8 +1021,7 @@ respawn_vehicle(respawn_parameters) {
   } else {
     if(isDefined(respawn_parameters.destructibledef)) {
       vehicle = spawnvehicle(respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles, respawn_parameters.destructibledef);
-    }
-    else {
+    } else {
       vehicle = spawnvehicle(respawn_parameters.modelname, respawn_parameters.targetname, respawn_parameters.vehicletype, respawn_parameters.origin, respawn_parameters.angles);
     }
 
@@ -1252,8 +1243,7 @@ _init_husk(vehicle_name, respawn_parameters) {
 
   if(self is_vehicle()) {
     self launchvehicle(initialvelocity, forcepoint);
-  }
-  else {
+  } else {
     self physicslaunch(forcepoint, initialvelocity);
   }
 
@@ -1287,8 +1277,7 @@ husk_do_cleanup() {
 
   if(self is_vehicle()) {
     return self remove_vehicle_from_world();
-  }
-  else {
+  } else {
     self _delete_entity();
     return 1;
   }
@@ -1340,15 +1329,13 @@ vehicledeathwaiter() {
 
     if(vehicle_died) {
       self.diedonvehicle = 1;
-    }
-    else {
+    } else {
       self.diedonturret = 1;
     }
   }
 }
 
-turretdeathwaiter() {
-}
+turretdeathwaiter() {}
 
 vehicle_kill_disconnect_paths_forever() {
   self notify("kill_disconnect_paths_forever");

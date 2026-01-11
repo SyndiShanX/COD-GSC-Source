@@ -22,7 +22,7 @@ init() {
   level thread onplayerconnect();
 
   foreach(team in level.teams) {
-  initteamchallenges(team);
+    initteamchallenges(team);
   }
 }
 
@@ -474,8 +474,7 @@ challengekills(data, time) {
 
   if(data.attackerstance == "crouch") {
     player addplayerstat("kill_enemy_while_crouched", 1);
-  }
-  else if(data.attackerstance == "prone") {
+  } else if(data.attackerstance == "prone") {
     player addplayerstat("kill_enemy_while_prone", 1);
   }
 
@@ -829,8 +828,7 @@ genericbulletkill(data, victim, weapon) {
 
   if(player.pers["lastBulletKillTime"] == time) {
     player.pers["bulletStreak"]++;
-  }
-  else {
+  } else {
     player.pers["bulletStreak"] = 1;
   }
 
@@ -856,8 +854,7 @@ ishighestscoringplayer(player) {
 
   if(level.teambased) {
     team = player.pers["team"];
-  }
-  else {
+  } else {
     team = "all";
   }
 
@@ -1077,8 +1074,7 @@ capturedobjective(capturetime) {
       if(distsq < 57600) {
         self addplayerstat("capture_objective_in_smoke", 1);
         self addweaponstat("willy_pete_mp", "CombatRecordStat", 1);
-      } else {
-      }
+      } else {}
     }
   }
 }
@@ -1443,8 +1439,7 @@ bothbombsdetonatewithintime() {
   self addgametypestat("both_bombs_detonate_10_seconds", 1);
 }
 
-fullclipnomisses(weaponclass, weapon) {
-}
+fullclipnomisses(weaponclass, weapon) {}
 
 destroyedturret(weaponname) {
   self destroyscorestreak(weaponname);
@@ -1491,8 +1486,7 @@ destroyedaircraft(attacker, weapon) {
   if(isDefined(weapon)) {
     if(weapon == "emp_mp" || weapon == "killstreak_emp_mp") {
       attacker addplayerstat("destroy_aircraft_with_emp", 1);
-    }
-    else if(weapon == "missile_drone_projectile_mp" || weapon == "missile_drone_mp") {
+    } else if(weapon == "missile_drone_projectile_mp" || weapon == "missile_drone_mp") {
       attacker addplayerstat("destroy_aircraft_with_missile_drone", 1);
     }
   }
@@ -1600,8 +1594,7 @@ playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, shitloc, att
 
   if(waslockingon != 0) {
     data.waslockingon = 1;
-  }
-  else {
+  } else {
     data.waslockingon = 0;
   }
 
@@ -1689,20 +1682,15 @@ eventreceived(eventname) {
     case "tdm":
       if(eventname == "killstreak_10") {
         self addgametypestat("killstreak_10", 1);
-      }
-      else if(eventname == "killstreak_15") {
+      } else if(eventname == "killstreak_15") {
         self addgametypestat("killstreak_15", 1);
-      }
-      else if(eventname == "killstreak_20") {
+      } else if(eventname == "killstreak_20") {
         self addgametypestat("killstreak_20", 1);
-      }
-      else if(eventname == "multikill_3") {
+      } else if(eventname == "multikill_3") {
         self addgametypestat("multikill_3", 1);
-      }
-      else if(eventname == "kill_enemy_who_killed_teammate") {
+      } else if(eventname == "kill_enemy_who_killed_teammate") {
         self addgametypestat("kill_enemy_who_killed_teammate", 1);
-      }
-      else if(eventname == "kill_enemy_injuring_teammate") {
+      } else if(eventname == "kill_enemy_injuring_teammate") {
         self addgametypestat("kill_enemy_injuring_teammate", 1);
       }
 
@@ -1710,14 +1698,11 @@ eventreceived(eventname) {
     case "dm":
       if(eventname == "killstreak_10") {
         self addgametypestat("killstreak_10", 1);
-      }
-      else if(eventname == "killstreak_15") {
+      } else if(eventname == "killstreak_15") {
         self addgametypestat("killstreak_15", 1);
-      }
-      else if(eventname == "killstreak_20") {
+      } else if(eventname == "killstreak_20") {
         self addgametypestat("killstreak_20", 1);
-      }
-      else if(eventname == "killstreak_30") {
+      } else if(eventname == "killstreak_30") {
         self addgametypestat("killstreak_30", 1);
       }
 
@@ -1725,14 +1710,11 @@ eventreceived(eventname) {
     case "sd":
       if(eventname == "defused_bomb_last_man_alive") {
         self addgametypestat("defused_bomb_last_man_alive", 1);
-      }
-      else if(eventname == "elimination_and_last_player_alive") {
+      } else if(eventname == "elimination_and_last_player_alive") {
         self addgametypestat("elimination_and_last_player_alive", 1);
-      }
-      else if(eventname == "killed_bomb_planter") {
+      } else if(eventname == "killed_bomb_planter") {
         self addgametypestat("killed_bomb_planter", 1);
-      }
-      else if(eventname == "killed_bomb_defuser") {
+      } else if(eventname == "killed_bomb_defuser") {
         self addgametypestat("killed_bomb_defuser", 1);
       }
 
@@ -1740,8 +1722,7 @@ eventreceived(eventname) {
     case "ctf":
       if(eventname == "kill_flag_carrier") {
         self addgametypestat("kill_flag_carrier", 1);
-      }
-      else if(eventname == "defend_flag_carrier") {
+      } else if(eventname == "defend_flag_carrier") {
         self addgametypestat("defend_flag_carrier", 1);
       }
 
@@ -1749,8 +1730,7 @@ eventreceived(eventname) {
     case "dem":
       if(eventname == "killed_bomb_planter") {
         self addgametypestat("killed_bomb_planter", 1);
-      }
-      else if(eventname == "killed_bomb_defuser") {
+      } else if(eventname == "killed_bomb_defuser") {
         self addgametypestat("killed_bomb_defuser", 1);
       }
 

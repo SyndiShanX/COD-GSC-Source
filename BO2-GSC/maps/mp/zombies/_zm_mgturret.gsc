@@ -103,14 +103,11 @@ turret_suppression_fire(targets) {
 burst_fire_settings(setting) {
   if(setting == "delay") {
     return 0.2;
-  }
-  else if(setting == "delay_range") {
+  } else if(setting == "delay_range") {
     return 0.5;
-  }
-  else if(setting == "burst") {
+  } else if(setting == "burst") {
     return 0.5;
-  }
-  else if(setting == "burst_range") {
+  } else if(setting == "burst_range") {
     return 4;
   }
 }
@@ -122,29 +119,25 @@ burst_fire(turret, manual_target) {
 
   if(isDefined(turret.script_delay_min)) {
     turret_delay = turret.script_delay_min;
-  }
-  else {
+  } else {
     turret_delay = burst_fire_settings("delay");
   }
 
   if(isDefined(turret.script_delay_max)) {
     turret_delay_range = turret.script_delay_max - turret_delay;
-  }
-  else {
+  } else {
     turret_delay_range = burst_fire_settings("delay_range");
   }
 
   if(isDefined(turret.script_burst_min)) {
     turret_burst = turret.script_burst_min;
-  }
-  else {
+  } else {
     turret_burst = burst_fire_settings("burst");
   }
 
   if(isDefined(turret.script_burst_max)) {
     turret_burst_range = turret.script_burst_max - turret_burst;
-  }
-  else {
+  } else {
     turret_burst_range = burst_fire_settings("burst_range");
   }
 
@@ -175,29 +168,25 @@ burst_fire_unmanned() {
   }
   if(isDefined(self.script_delay_min)) {
     turret_delay = self.script_delay_min;
-  }
-  else {
+  } else {
     turret_delay = burst_fire_settings("delay");
   }
 
   if(isDefined(self.script_delay_max)) {
     turret_delay_range = self.script_delay_max - turret_delay;
-  }
-  else {
+  } else {
     turret_delay_range = burst_fire_settings("delay_range");
   }
 
   if(isDefined(self.script_burst_min)) {
     turret_burst = self.script_burst_min;
-  }
-  else {
+  } else {
     turret_burst = burst_fire_settings("burst");
   }
 
   if(isDefined(self.script_burst_max)) {
     turret_burst_range = self.script_burst_max - turret_burst;
-  }
-  else {
+  } else {
     turret_burst_range = burst_fire_settings("burst_range");
   }
 
@@ -287,8 +276,7 @@ random_spread(ent) {
   while(true) {
     if(isplayer(ent)) {
       ent.origin = self.manual_target getorigin();
-    }
-    else {
+    } else {
       ent.origin = self.manual_target.origin;
     }
 

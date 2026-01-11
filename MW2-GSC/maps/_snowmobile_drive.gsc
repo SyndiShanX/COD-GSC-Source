@@ -41,16 +41,14 @@ snowmobile_preLoad(playerHandModel, playerSnowmobileModel) {
   // set player hand model
   if(!isDefined(playerHandModel)) {
     level.snowmobile_playerHandModel = "viewhands_player_arctic_wind";
-  }
-  else {
+  } else {
     level.snowmobile_playerHandModel = playerHandModel;
   }
 
   // set player snowmobile model
   if(!isDefined(playerSnowmobileModel)) {
     level.snowmobile_playerSnowmobileModel = "vehicle_snowmobile_player";
-  }
-  else {
+  } else {
     level.snowmobile_playerSnowmobileModel = playerSnowmobileModel;
   }
 
@@ -230,15 +228,14 @@ should_stop_snowmobile_reverse_hint_player2() {
 should_stop_snowmobile_reverse_hint() {
   if(!isDefined(self.vehicle)) {
     retVal = true;
+  } else {
+    if(!isDefined(self.vehicle.hint_brake_count))
   }
+  retVal = true;
   else {
-  if(!isDefined(self.vehicle.hint_brake_count))
+    if(self ent_flag_exist("finish_line") && self ent_flag("finish_line"))
   }
-    retVal = true;
-  else {
-  if(self ent_flag_exist("finish_line") && self ent_flag("finish_line"))
-  }
-    retVal = true;
+  retVal = true;
   else {
     retVal = self.vehicle.hint_brake_count < 3;
   }
@@ -344,8 +341,7 @@ drive_crash_detection(vehicle) {
 waittill_vehicle_crashes() {
   if(!is_specialop()) {
     level endon("player_crashes"); // from triggers in the map
-  }
-  else {
+  } else {
     thread waittill_vehicle_falling_so();
   }
 
@@ -685,8 +681,7 @@ drive_shooting_update_anims(vehicle) {
 
       if(vehicle.snowmobileAmmoCount == 1) {
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("glock_last_fire"), 1.0, 0.0, 1.0);
-      }
-      else {
+      } else {
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("glock_fire"), 1.0, 0.0, 1.0);
       }
 
@@ -814,8 +809,7 @@ drive_tachometer_anims(vehicle) {
 
     if(weight < 0.0) {
       weight = 0.0;
-    }
-    else if(weight > 1.0) {
+    } else if(weight > 1.0) {
       weight = 1.0;
     }
 

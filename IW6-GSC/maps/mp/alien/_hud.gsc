@@ -56,8 +56,7 @@ get_damage_direction(direction) {
 
   if(right_dot_product > 0) {
     return "right";
-  }
-  else {
+  } else {
     return "left";
   }
 }
@@ -65,14 +64,11 @@ get_damage_direction(direction) {
 play_basic_pain_overlay(damage_direction) {
   if(damage_direction == "left") {
     PlayFXOnTagForClients(level._effect["vfx_blood_hit_left"], self, "tag_eye", self);
-  }
-  else if(damage_direction == "center") {
+  } else if(damage_direction == "center") {
     PlayFXOnTagForClients(level._effect["vfx_melee_blood_spray"], self, "tag_eye", self);
-  }
-  else if(damage_direction == "right") {
+  } else if(damage_direction == "right") {
     PlayFXOnTagForClients(level._effect["vfx_blood_hit_right"], self, "tag_eye", self);
-  }
-  else {
+  } else {
     AssertMsg("Unknown damage_direction: " + damage_direction);
   }
 }
@@ -80,14 +76,11 @@ play_basic_pain_overlay(damage_direction) {
 play_spitter_pain_overlay(damage_direction) {
   if(damage_direction == "left") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_left"], self, "tag_eye", self);
-  }
-  else if(damage_direction == "center") {
+  } else if(damage_direction == "center") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_center"], self, "tag_eye", self);
-  }
-  else if(damage_direction == "right") {
+  } else if(damage_direction == "right") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_right"], self, "tag_eye", self);
-  }
-  else {
+  } else {
     AssertMsg("Unknown damage_direction: " + damage_direction);
   }
 }
@@ -99,11 +92,9 @@ play_slash_pain_overlay(damage_direction) {
 
   if(damage_direction == "left") {
     PlayFXOnTagForClients(level._effect["vfx_blood_hit_left"], self, "tag_eye", self);
-  }
-  else if(damage_direction == "right") {
+  } else if(damage_direction == "right") {
     PlayFXOnTagForClients(level._effect["vfx_blood_hit_right"], self, "tag_eye", self);
-  }
-  else {
+  } else {
     AssertMsg("Unknown damage_direction: " + damage_direction);
   }
 }
@@ -111,14 +102,11 @@ play_slash_pain_overlay(damage_direction) {
 play_goo_pain_overlay(damage_direction) {
   if(damage_direction == "left") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_left"], self, "tag_eye", self);
-  }
-  else if(damage_direction == "center") {
+  } else if(damage_direction == "center") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_center"], self, "tag_eye", self);
-  }
-  else if(damage_direction == "right") {
+  } else if(damage_direction == "right") {
     PlayFXOnTagForClients(level._effect["vfx_alien_spitter_hit_right"], self, "tag_eye", self);
-  }
-  else {
+  } else {
     AssertMsg("Unknown damage_direction: " + damage_direction);
   }
 }
@@ -126,8 +114,7 @@ play_goo_pain_overlay(damage_direction) {
 random_pick_R_or_L() {
   if(cointoss()) {
     return "right";
-  }
-  else {
+  } else {
     return "left";
   }
 }
@@ -252,8 +239,7 @@ create_hud_laststand_count(xpos, ypos, scale) {
 
   if(getDvarInt("debug_alien_laststand_hud", 0) == 1) {
     hud_score.alpha = 1;
-  }
-  else {
+  } else {
     hud_score.alpha = 0;
   }
 
@@ -268,8 +254,7 @@ update_hud_laststand_count() {
 createSpendHintHUD(resource, rank, message) {
   if(!isDefined(message)) {
     self setLowerMessage("spend_hint", &"ALIEN_COLLECTIBLES_PULL_TO_SPEND");
-  }
-  else {
+  } else {
     self setLowerMessage("spend_hint", message);
   }
   self thread hideSpendHintIcon();
@@ -308,8 +293,7 @@ intro_black_screen() {
 introscreen_corner_line(string, index_key) {
   if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  }
-  else {
+  } else {
     level.intro_offset++;
   }
 
@@ -384,8 +368,7 @@ alienOutcomeNotify(winner, end_reason_text_index) {
 
   if(isDefined(self.pers["team"]) && winner == team) {
     outcome_title_index = get_end_game_string_index("win");
-  }
-  else {
+  } else {
     outcome_title_index = get_end_game_string_index("fail");
   }
 
@@ -397,8 +380,7 @@ alienOutcomeNotify(winner, end_reason_text_index) {
 register_end_game_string_index() {
   if(isDefined(level.end_game_string_override)) {
     [[level.end_game_string_override]]();
-  }
-  else {
+  } else {
     register_default_end_game_string_index();
   }
 }
@@ -527,7 +509,7 @@ unfreeze_combo_meter() {
 
 set_event_count(event_id, event_count) {
   foreach(player in level.players) {
-  player SetClientOmnvar("ui_alien_eog_score_row_" + event_id, event_count);
+    player SetClientOmnvar("ui_alien_eog_score_row_" + event_id, event_count);
   }
 }
 

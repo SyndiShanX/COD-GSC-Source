@@ -30,8 +30,7 @@ on_spawn(watcher, player) {
     if(isDefined(prey)) {
       if(isPlayer(prey) && player.team == prey.team) {
         isFriendly = true;
-      }
-      else if(isAI(prey) && player.team == prey.team) {
+      } else if(isAI(prey) && player.team == prey.team) {
         isFriendly = true;
       }
       if(!isFriendly) {

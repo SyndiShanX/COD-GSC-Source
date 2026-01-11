@@ -283,8 +283,7 @@ jetgun_firing() {
 
     if(self get_jetgun_engine_direction() < 0) {
       playFX(level._effect["jetgun_smoke_cloud"], view_pos - self getplayerviewheight(), anglesToForward(view_angles), anglestoup(view_angles));
-    }
-    else {
+    } else {
       playFX(level._effect["jetgun_smoke_cloud"], view_pos - self getplayerviewheight(), anglesToForward(view_angles) * -1, anglestoup(view_angles));
     }
 
@@ -380,8 +379,7 @@ jetgun_get_enemies_in_range(invert) {
   view_pos = self getweaponmuzzlepoint();
   zombies = get_array_of_closest(view_pos, get_round_enemy_array(), undefined, 3, level.zombie_vars["jetgun_drag_range"]);
 
-  if(!isDefined(zombies)) {
-  }
+  if(!isDefined(zombies)) {}
 
   knockdown_range_squared = level.zombie_vars["jetgun_knockdown_range"] * level.zombie_vars["jetgun_knockdown_range"];
   drag_range_squared = level.zombie_vars["jetgun_drag_range"] * level.zombie_vars["jetgun_drag_range"];
@@ -570,8 +568,7 @@ jetgun_fling_zombie(player, index) {
     if(isDefined(self.has_legs) && self.has_legs) {
       if(isDefined(self.jetgun_drag_state) && self.jetgun_drag_state == "jetgun_sprint") {
         deathanim = "zm_jetgun_sprint_death";
-      }
-      else {
+      } else {
         deathanim = "zm_jetgun_death";
       }
     } else
@@ -599,8 +596,7 @@ jetgun_knockdown_zombie(player, gib) {
 
   if(isDefined(self.jetgun_knockdown_func)) {
     self[[self.jetgun_knockdown_func]](player, gib);
-  }
-  else {
+  } else {
     self dodamage(level.zombie_vars["jetgun_knockdown_damage"], player.origin, player);
   }
 
@@ -724,14 +720,11 @@ zombie_drag_think() {
 
     if(self.zombie_move_speed == "sprint" || self._distance_to_jetgun_owner < level.jetgun_pulled_in_range) {
       self jetgun_drag_set("jetgun_sprint", "jetgun_walk_fast_crawl");
-    }
-    else if(self._distance_to_jetgun_owner < level.jetgun_pulling_in_range) {
+    } else if(self._distance_to_jetgun_owner < level.jetgun_pulling_in_range) {
       self jetgun_drag_set("jetgun_walk_fast", "jetgun_walk_fast");
-    }
-    else if(self._distance_to_jetgun_owner < level.jetgun_inner_range) {
+    } else if(self._distance_to_jetgun_owner < level.jetgun_inner_range) {
       self jetgun_drag_set("jetgun_walk", "jetgun_walk_slow_crawl");
-    }
-    else if(self._distance_to_jetgun_owner < level.jetgun_outer_edge) {
+    } else if(self._distance_to_jetgun_owner < level.jetgun_outer_edge) {
       self jetgun_drag_set("jetgun_walk_slow", "jetgun_walk_slow_crawl");
     }
 

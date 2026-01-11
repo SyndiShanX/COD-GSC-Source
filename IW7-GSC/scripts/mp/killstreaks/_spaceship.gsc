@@ -1159,9 +1159,7 @@ func_105E5(param_00, param_01, param_02, param_03) {
     if(!isDefined(param_00.var_A41D[var_05])) {
       param_00.var_A41D[var_05] = gettime();
       if(isDefined(param_01)) {
-        [
-          [param_01]
-        ](var_04, param_00);
+        [[param_01]](var_04, param_00);
       }
     }
   }
@@ -1187,9 +1185,7 @@ func_105E4(param_00, param_01, param_02) {
       }
 
       if(isDefined(param_01)) {
-        [
-          [param_01]
-        ](var_05, param_00, var_04);
+        [[param_01]](var_05, param_00, var_04);
       }
     }
 

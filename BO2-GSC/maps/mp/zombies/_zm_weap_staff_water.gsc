@@ -303,8 +303,7 @@ ice_affect_mechz(e_player, is_upgraded) {
 
   if(is_upgraded) {
     self do_damage_network_safe(e_player, 3300, "staff_water_upgraded_zm", "MOD_RIFLE_BULLET");
-  }
-  else {
+  } else {
     self do_damage_network_safe(e_player, 2050, "staff_water_zm", "MOD_RIFLE_BULLET");
   }
 
@@ -330,11 +329,9 @@ ice_affect_zombie(str_weapon, e_player, always_kill, n_mod) {
 
   if(str_weapon == "staff_water_zm") {
     n_damage = 2050;
-  }
-  else if(str_weapon == "staff_water_upgraded_zm" || str_weapon == "staff_water_upgraded2_zm" || str_weapon == "staff_water_upgraded3_zm") {
+  } else if(str_weapon == "staff_water_upgraded_zm" || str_weapon == "staff_water_upgraded2_zm" || str_weapon == "staff_water_upgraded3_zm") {
     n_damage = 3300;
-  }
-  else if(str_weapon == "one_inch_punch_ice_zm") {
+  } else if(str_weapon == "one_inch_punch_ice_zm") {
     n_damage = 11275;
   }
 
@@ -348,8 +345,7 @@ ice_affect_zombie(str_weapon, e_player, always_kill, n_mod) {
 
   if(instakill_on || always_kill) {
     wait(randomfloatrange(0.5, 0.7));
-  }
-  else {
+  } else {
     wait(randomfloatrange(1.8, 2.3));
   }
 
@@ -440,8 +436,7 @@ _icicle_locate_target(str_weapon) {
         if(b_trace_pass && isDefined(target) && isalive(target)) {
           if(is_true(target.is_mechz)) {
             target thread ice_affect_mechz(self, is_upgraded);
-          }
-          else {
+          } else {
             target thread ice_affect_zombie(str_weapon, self);
           }
 

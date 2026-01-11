@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace wz_wingsuit_hud;
 
 class cwz_wingsuit_hud: cluielem {

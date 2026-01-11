@@ -46,12 +46,12 @@ do_explosion() {
       level thread do_explosion_sound(self.origin);
       if(isDefined(level.vehicle_death_earthquake[self.destructibledef])) {
         earthquake(
-      }
-          level.vehicle_death_earthquake[self.destructibledef].scale,
+        }
+        level.vehicle_death_earthquake[self.destructibledef].scale,
           level.vehicle_death_earthquake[self.destructibledef].duration,
           self.origin,
           level.vehicle_death_earthquake[self.destructibledef].radius
-        );
+      );
       PlayRumbleOnPosition("explosion_generic", self.origin);
       self kill_damage(self.destructibledef, attacker);
       self.exploded = true;

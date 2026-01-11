@@ -118,8 +118,7 @@ _fire(lifeid, player, team, origin, angles, targetpos) {
 
   if(isDefined(origin)) {
     startpos = origin;
-  }
-  else {
+  } else {
     origin = player.origin;
   }
 
@@ -229,11 +228,9 @@ handledamage() {
   }
 }
 
-missileeyes(player, rocket) {
-}
+missileeyes(player, rocket) {}
 
-delayedfofoverlay() {
-}
+delayedfofoverlay() {}
 
 staticeffect(duration) {
   self endon("disconnect");
@@ -254,8 +251,7 @@ staticeffect(duration) {
   staticbg destroy();
 }
 
-player_cleanuponteamchange(rocket) {
-}
+player_cleanuponteamchange(rocket) {}
 
 rocket_cleanupondeath() {
   entitynumber = self getentitynumber();
@@ -264,8 +260,7 @@ rocket_cleanupondeath() {
   level.rockets[entitynumber] = undefined;
 }
 
-player_cleanupongameended(rocket) {
-}
+player_cleanupongameended(rocket) {}
 
 missile_sound_play(player) {
   snd_first_person = spawn("script_origin", self.origin);

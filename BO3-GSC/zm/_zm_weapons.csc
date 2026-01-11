@@ -251,9 +251,7 @@ function wallbuy_callback(localclientnum, oldval, newval, bnewent, binitialsnap,
     }
     case 2: {
       if(isDefined(level.wallbuy_callback_hack_override)) {
-        struct.models[localclientnum][
-          [level.wallbuy_callback_hack_override]
-        ]();
+        struct.models[localclientnum][[level.wallbuy_callback_hack_override]]();
       }
       break;
     }

@@ -50,8 +50,7 @@ cqb_gettranstime() {
 
   if(var_0 == "none" && !animscripts\stairs_utility::isonstairs()) {
     return 0.3;
-  }
-  else {
+  } else {
     return 0.1;
   }
 }
@@ -59,8 +58,7 @@ cqb_gettranstime() {
 cqb_animate(var_0, var_1, var_2) {
   if(isDefined(self.timeofmaincqbupdate)) {
     var_3 = self.timeofmaincqbupdate;
-  }
-  else {
+  } else {
     var_3 = 0;
   }
 
@@ -150,8 +148,7 @@ cqbtracking() {
 
   if(var_0) {
     animscripts\run::endfaceenemyaimtracking();
-  }
-  else {
+  } else {
     thread animscripts\run::faceenemyaimtracking();
   }
 }
@@ -221,8 +218,7 @@ findcqbpointsofinterest() {
 
         if(var_9 < 0) {
           var_3.cqb_point_of_interest = undefined;
-        }
-        else {
+        } else {
           var_3.cqb_point_of_interest = level.cqbpointsofinterest[var_9];
         }
 

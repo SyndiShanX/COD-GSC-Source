@@ -258,8 +258,7 @@ func_10129() {
 
   if(isDefined(var_00)) {
     playFXOnTag(level._effect["odin_targeting"], self.targeting_marker, "tag_origin");
-  }
-  else {
+  } else {
     playFXOnTag(level._effect["odin_targeting_bad"], self.targeting_marker, "tag_origin");
   }
 }
@@ -362,11 +361,9 @@ func_10DD8() {
 
   if(self.team == "allies") {
     var_00 = "axis";
-  }
-  else if(self.team == "axis") {
+  } else if(self.team == "axis") {
     var_00 = "allies";
-  }
-  else {}
+  } else {}
 
   var_01 = anglesToForward(self.angles);
   var_02 = anglestoup(self.angles);
@@ -406,8 +403,7 @@ func_10DD4(var_00, var_01, var_02) {
 
   if(var_03 == "success") {
     level thread func_1285(var_00, var_01, self, var_02);
-  }
-  else {
+  } else {
     self notify("end_kill_streak");
     func_C6C4();
     scripts\engine\utility::allow_usability(1);

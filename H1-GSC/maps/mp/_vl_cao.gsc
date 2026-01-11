@@ -30,11 +30,9 @@ playercaoprocesslui(var_0, var_1) {
   }
   if(var_0 == "cao") {
     handlecaomodechange(var_1);
-  }
-  else if(var_0 == "lootscreen_weapon_highlighted") {
+  } else if(var_0 == "lootscreen_weapon_highlighted") {
     handlecaomodechange(-1);
-  }
-  else if(var_0 == "costume_preview") {
+  } else if(var_0 == "costume_preview") {
     if(iscollectionsmenuactive()) {
       handlecollectionsmodechange(0, -1);
     }
@@ -135,8 +133,7 @@ handlebackfromcollections(var_0) {
 playerteleportavatartocao(var_0) {
   if(level.collections == 1) {
     maps\mp\_vl_avatar::playerteleportavatarcao(var_0, level.cao_loc_collection);
-  }
-  else {
+  } else {
     maps\mp\_vl_avatar::playerteleportavatarcao(var_0, level.cao_loc);
   }
 }
@@ -144,8 +141,7 @@ playerteleportavatartocao(var_0) {
 playerteleportavatartocaohead(var_0) {
   if(level.collections == 1) {
     maps\mp\_vl_avatar::playerteleportavatarcao(var_0, level.cao_head_collection);
-  }
-  else {
+  } else {
     maps\mp\_vl_avatar::playerteleportavatarcao(var_0, level.cao_head);
   }
 }
@@ -251,8 +247,7 @@ handlecollectionsmodechange(var_0, var_1) {
   } else if(level.collections != 0 && var_0 == 0) {
     if(maps\mp\_utility::is_true(level.cao)) {
       thread maps\mp\_vl_base::handlerotateplayeravatar();
-    }
-    else if(!maps\mp\_utility::is_true(level.cac_weap)) {
+    } else if(!maps\mp\_utility::is_true(level.cac_weap)) {
       self notify("handleRotateAvatar");
     }
 
@@ -379,8 +374,7 @@ handlearmorymodechange(var_0) {
 
   if(var_0 != 2) {
     maps\mp\_vl_cac::playerhidecacavatars();
-  }
-  else if(var_0 != 1) {
+  } else if(var_0 != 1) {
     maps\mp\_vl_avatar::hide_avatars();
   }
 
@@ -501,8 +495,7 @@ playersupplycrateprocesslui(var_0, var_1) {
   }
   if(var_0 == "costume_apply") {
     handledepotcostumeapply(var_1);
-  }
-  else if(var_0 == "camo_apply") {
+  } else if(var_0 == "camo_apply") {
     handledepotcamoapply(var_1);
   }
 }

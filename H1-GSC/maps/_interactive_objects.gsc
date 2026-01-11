@@ -317,7 +317,7 @@ destroy_platestack() {
       playFX(level.breakables_fx["platestack_shatter"], self.origin);
 
       foreach(var_7 in var_0) {
-      var_7 delete();
+        var_7 delete();
       }
 
       self delete();
@@ -378,11 +378,9 @@ glass_logic() {
 
   if(isDefined(self.script_health)) {
     var_3 = self.script_health;
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     var_3 = 99;
-  }
-  else {
+  } else {
     var_3 = 250;
   }
 
@@ -397,11 +395,9 @@ glass_logic() {
 
     if(!isDefined(var_9)) {
       var_6 = 100000;
-    }
-    else if(var_9 == "MOD_GRENADE_SPLASH") {
+    } else if(var_9 == "MOD_GRENADE_SPLASH") {
       var_6 = var_6 * 1.75;
-    }
-    else if(var_9 == "MOD_IMPACT") {
+    } else if(var_9 == "MOD_IMPACT") {
       var_6 = 100000;
     }
 
@@ -427,11 +423,9 @@ glass_logic() {
 
       if(!isDefined(var_9)) {
         var_6 = 100000;
-      }
-      else if(var_9 == "MOD_GRENADE_SPLASH") {
+      } else if(var_9 == "MOD_GRENADE_SPLASH") {
         var_6 = var_6 * 1.75;
-      }
-      else if(var_9 == "MOD_IMPACT") {
+      } else if(var_9 == "MOD_IMPACT") {
         break;
       }
 
@@ -726,8 +720,7 @@ explodable_barrel_explode() {
 
   if(randomint(2) == 0) {
     self setModel("com_barrel_piece");
-  }
-  else {
+  } else {
     self setModel("com_barrel_piece2");
   }
 
@@ -756,8 +749,7 @@ shuddering_entity_think() {
 
     if(var_0) {
       self vibrate(var_3, 20, 0.6, 0.75);
-    }
-    else {
+    } else {
       self vibrate(var_3, 0.4, 0.4, 0.4);
     }
 
@@ -774,8 +766,7 @@ tincan_think() {
 
   if(issentient(var_1)) {
     var_2 = var_1 getEye() - (0, 0, randomint(50) + 50);
-  }
-  else {
+  } else {
     var_2 = var_1.origin;
   }
 
@@ -805,8 +796,7 @@ helmet_logic() {
 
   if(issentient(var_1)) {
     var_2 = var_1 getEye();
-  }
-  else {
+  } else {
     var_2 = var_1.origin;
   }
 
@@ -834,8 +824,7 @@ allowbreak(var_0) {
 
   if(level.breakingents.size == 0) {
     return 0;
-  }
-  else {
+  } else {
     for(var_1 = 0; var_1 < level.breakingents.size; var_1++) {
       if(var_0 == level.breakingents[var_1]) {
         return 1;
@@ -1045,8 +1034,7 @@ breakable_logic(var_0) {
     case "orange vase":
       if(isDefined(level.breakables_sfx["vase"])) {
         var_3 = level.breakables_sfx["vase"];
-      }
-      else {
+      } else {
         var_3 = "bullet_large_vase";
       }
 
@@ -1057,8 +1045,7 @@ breakable_logic(var_0) {
 
       if(isDefined(level.breakables_sfx["box"][var_6])) {
         var_3 = level.breakables_sfx["box"][var_6];
-      }
-      else {
+      } else {
         var_3 = "bullet_large_crate";
       }
 
@@ -1068,8 +1055,7 @@ breakable_logic(var_0) {
     case "bottle":
       if(isDefined(level.breakables_sfx["bottle"])) {
         var_3 = level.breakables_sfx["bottle"];
-      }
-      else {
+      } else {
         var_3 = "bullet_small_bottle";
       }
 
@@ -1078,8 +1064,7 @@ breakable_logic(var_0) {
     case "plate":
       if(isDefined(level.breakables_sfx["plate"])) {
         var_3 = level.breakables_sfx["plate"];
-      }
-      else {
+      } else {
         var_3 = "bullet_small_plate";
       }
 
@@ -1118,8 +1103,7 @@ breakable_logic(var_0) {
 
   if(!isDefined(self.dontremove)) {
     self delete();
-  }
-  else {
+  } else {
     self.dontremove = 0;
   }
 
@@ -1411,8 +1395,7 @@ pieces_move(var_0) {
 
     if(randomint(100) > 50) {
       var_1 rotateroll((800 + randomfloat(4000)) * -1, 5, 0, 0);
-    }
-    else {
+    } else {
       var_1 rotateroll(800 + randomfloat(4000), 5, 0, 0);
     }
   } else {
@@ -1421,8 +1404,7 @@ pieces_move(var_0) {
 
     if(randomint(100) > 50) {
       var_1 rotateroll((800 + randomfloat(1000)) * -1, 5, 0, 0);
-    }
-    else {
+    } else {
       var_1 rotateroll(800 + randomfloat(1000), 5, 0, 0);
     }
   }
@@ -1590,16 +1572,14 @@ fan_blade_rotate(var_0) {
   if(var_0 == "slow") {
     if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lockedspeed") {
       var_1 = 180;
-    }
-    else {
+    } else {
       var_1 = randomfloatrange(100 * var_3, 360 * var_3);
     }
   } else if(var_0 == "fast")
     var_1 = randomfloatrange(720 * var_3, 1000 * var_3);
   else if(var_0 == "veryslow") {
     var_1 = randomfloatrange(1 * var_3, 2 * var_3);
-  }
-  else {}
+  } else {}
 
   if(!isDefined(self.script_noteworthy) || self.script_noteworthy == "lockedspeed") {
     wait(randomfloatrange(0, 1));
@@ -1620,14 +1600,11 @@ fan_blade_rotate(var_0) {
 
     if(var_6 > 0.9) {
       self rotatevelocity((var_1, 0, 0), var_2);
-    }
-    else if(var_7 > 0.9) {
+    } else if(var_7 > 0.9) {
       self rotatevelocity((var_1, 0, 0), var_2);
-    }
-    else if(var_8 > 0.9) {
+    } else if(var_8 > 0.9) {
       self rotatevelocity((0, var_1, 0), var_2);
-    }
-    else {
+    } else {
       self rotatevelocity((0, var_1, 0), var_2);
     }
 

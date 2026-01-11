@@ -201,8 +201,7 @@ wait_for_craftable(craftable_name) {
 check_solo_status() {
   if(getnumexpectedplayers() == 1 && (!sessionmodeisonlinegame() || !sessionmodeisprivate())) {
     level.is_forever_solo_game = 1;
-  }
-  else {
+  } else {
     level.is_forever_solo_game = 0;
   }
 }
@@ -250,8 +249,7 @@ player_slow_movement_speed_monitor() {
     if(self.n_move_scale != n_new_move_scale) {
       if(self.n_move_scale > n_new_move_scale + n_move_scale_delta) {
         self.n_move_scale = self.n_move_scale - n_move_scale_delta;
-      }
-      else {
+      } else {
         self.n_move_scale = n_new_move_scale;
       }
 
@@ -375,8 +373,7 @@ dug_zombie_think() {
 
   if(isDefined(level.max_barrier_search_dist_override)) {
     max_dist = level.max_barrier_search_dist_override;
-  }
-  else {
+  } else {
     max_dist = 500;
   }
 
@@ -529,11 +526,9 @@ dug_zombie_rise(spot, func_rise_fx) {
 
   if(self.zombie_move_speed == "walk") {
     substate = randomint(2);
-  }
-  else if(self.zombie_move_speed == "run") {
+  } else if(self.zombie_move_speed == "run") {
     substate = 2;
-  }
-  else if(self.zombie_move_speed == "sprint") {
+  } else if(self.zombie_move_speed == "sprint") {
     substate = 3;
   }
 
@@ -552,14 +547,11 @@ dug_zombie_rise(spot, func_rise_fx) {
 is_weapon_upgraded_staff(weapon) {
   if(weapon == "staff_water_upgraded_zm") {
     return true;
-  }
-  else if(weapon == "staff_lightning_upgraded_zm") {
+  } else if(weapon == "staff_lightning_upgraded_zm") {
     return true;
-  }
-  else if(weapon == "staff_fire_upgraded_zm") {
+  } else if(weapon == "staff_fire_upgraded_zm") {
     return true;
-  }
-  else if(weapon == "staff_air_upgraded_zm") {
+  } else if(weapon == "staff_air_upgraded_zm") {
     return true;
   }
 
@@ -607,8 +599,7 @@ watch_staff_usage() {
 
     if(!has_revive_staff || !weapon_is_upgraded_staff && "none" != weapon && "none" != weaponaltweaponname(weapon)) {
       self setactionslot(3, "altmode");
-    }
-    else {
+    } else {
       self setactionslot(3, "weapon", "staff_revive_zm");
     }
 
@@ -696,8 +687,7 @@ puzzle_debug_position(string_to_show, color, origin, str_dvar, n_show_time) {
   while(true) {
     if(isDefined(origin)) {
       where_to_draw = origin;
-    }
-    else {
+    } else {
       where_to_draw = self.origin;
     }
 
@@ -884,8 +874,7 @@ init_weather_manager() {
 
   if(cointoss()) {
     level.force_weather[3] = "snow";
-  }
-  else {
+  } else {
     level.force_weather[4] = "snow";
   }
 
@@ -911,11 +900,9 @@ randomize_weather() {
 
     if(n_round_weather < 40 || rounds_since_snow > 3) {
       weather_name = "snow";
-    }
-    else if(n_round_weather < 80 || rounds_since_rain > 4) {
+    } else if(n_round_weather < 80 || rounds_since_rain > 4) {
       weather_name = "rain";
-    }
-    else {
+    } else {
       weather_name = "none";
     }
   }
@@ -979,7 +966,7 @@ play_puzzle_stinger_on_all_players() {
   players = getplayers();
 
   foreach(player in players) {
-  player playSound("zmb_squest_step2_finished");
+    player playSound("zmb_squest_step2_finished");
   }
 }
 
@@ -1002,8 +989,7 @@ puzzle_orb_follow_path(s_start) {
 
     if(isDefined(s_next_pos.target)) {
       s_next_pos = getstruct(s_next_pos.target, "targetname");
-    }
-    else {
+    } else {
       s_next_pos = undefined;
     }
   }
@@ -1018,8 +1004,7 @@ puzzle_orb_follow_return_path(s_start, n_element) {
 
     if(isDefined(s_next.target)) {
       s_next = getstruct(s_next.target, "targetname");
-    }
-    else {
+    } else {
       s_next = undefined;
     }
   }
@@ -1095,7 +1080,7 @@ puzzle_orb_chamber_to_crypt(str_start_point, e_gem_pos) {
   assert(a_puzzle_flags.size == 2);
 
   foreach(str_flag in a_puzzle_flags) {
-  assert(level flag_exists(str_flag));
+    assert(level flag_exists(str_flag));
   }
 
   flag_wait(a_puzzle_flags[0]);
@@ -1117,8 +1102,7 @@ puzzle_orb_chamber_to_crypt(str_start_point, e_gem_pos) {
 
     if(s_start puzzle_orb_ready_to_leave(str_zone, min_lookat_dot, n_near_dist_sq)) {
       time_looking_at_orb = time_looking_at_orb + 0.1;
-    }
-    else {
+    } else {
       time_looking_at_orb = 0.0;
     }
   }
@@ -1263,7 +1247,7 @@ rumble_players_in_chamber(n_rumble_enum, n_rumble_time) {
   wait(n_rumble_time);
 
   foreach(e_player in a_rumbled_players) {
-  e_player setclientfieldtoplayer("player_rumble_and_shake", 0);
+    e_player setclientfieldtoplayer("player_rumble_and_shake", 0);
   }
 }
 
@@ -1282,7 +1266,7 @@ rumble_nearby_players(v_center, n_range, n_rumble_enum) {
   wait_network_frame();
 
   foreach(e_player in a_rumbled_players) {
-  e_player setclientfieldtoplayer("player_rumble_and_shake", 0);
+    e_player setclientfieldtoplayer("player_rumble_and_shake", 0);
   }
 }
 
@@ -1374,8 +1358,7 @@ door_price_reduction_for_solo() {
 
     if(self.targetname == "zombie_door") {
       self set_hint_string(self, "default_buy_door", self.zombie_cost);
-    }
-    else {
+    } else {
       self set_hint_string(self, "default_buy_debris", self.zombie_cost);
     }
   }
@@ -1398,8 +1381,7 @@ zone_capture_powerup() {
           if(uts_box.str_location == "start_bunker") {
             if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
               level thread maps\mp\zombies\_zm_challenges::open_box(undefined, uts_box, maps\mp\zm_tomb_challenges::reward_powerup_double_points, -1);
-            }
-            else {
+            } else {
               level thread maps\mp\zombies\_zm_challenges::open_box(undefined, uts_box, maps\mp\zm_tomb_challenges::reward_powerup_zombie_blood, -1);
             }
 
@@ -1442,8 +1424,7 @@ _damage_zombie_network_safe_internal(e_attacker, str_weapon, n_damage_amt) {
 do_damage_network_safe(e_attacker, n_amount, str_weapon, str_mod) {
   if(isDefined(self.is_mechz) && self.is_mechz) {
     self dodamage(n_amount, self.origin, e_attacker, e_attacker, "none", str_mod, 0, str_weapon);
-  }
-  else if(n_amount < self.health) {
+  } else if(n_amount < self.health) {
     self.kill_damagetype = str_mod;
     maps\mp\zombies\_zm_net::network_safe_init("dodamage", 6);
     self maps\mp\zombies\_zm_net::network_choke_action("dodamage", ::_damage_zombie_network_safe_internal, e_attacker, str_weapon, n_amount);
@@ -1600,8 +1581,7 @@ update_staff_accessories(n_element_index) {
 get_round_enemy_array_wrapper() {
   if(isDefined(level.custom_get_round_enemy_array_func)) {
     a_enemies = [[level.custom_get_round_enemy_array_func]]();
-  }
-  else {
+  } else {
     a_enemies = get_round_enemy_array();
   }
 

@@ -18,15 +18,13 @@ hanging_light_off() {
 
   if(isDefined(self.script_angles)) {
     var_3 = (self.script_angles[2], self.script_angles[0], self.script_angles[1]);
-  }
-  else {
+  } else {
     var_3 = (90, 90, 90);
   }
 
   if(isDefined(self.script_duration)) {
     var_4 = self.script_duration / 6 * randomfloatrange(0.9, 1.1);
-  }
-  else {
+  } else {
     var_4 = 0.4 * randomfloatrange(0.9, 1.1);
   }
 

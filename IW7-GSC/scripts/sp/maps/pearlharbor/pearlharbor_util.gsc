@@ -35,8 +35,7 @@ func_BC53(var_00) {
 
   if(isDefined(var_02)) {
     level.player setplayerangles(vectortoangles(var_2.origin - var_1.origin));
-  }
-  else {
+  } else {
     level.player setplayerangles(var_1.angles);
   }
 
@@ -197,11 +196,9 @@ func_48BF(var_00) {
 
     if(var_02 == "admiral") {
       level.allies["admiral"].name = "Raines";
-    }
-    else if(var_02 == "salter") {
+    } else if(var_02 == "salter") {
       level.allies["salter"].name = "Salter";
-    }
-    else if(var_02 == "eth3n") {
+    } else if(var_02 == "eth3n") {
       level.allies["eth3n"].name = "Ethan";
     }
 
@@ -516,8 +513,7 @@ func_D20D() {
     while(level.player istouching(self)) {
       if(length(level.player getvelocity()) < 1) {
         wait 0.1;
-      }
-      else {
+      } else {
         wait 0.05;
       }
 
@@ -594,7 +590,7 @@ func_39BC(var_00, var_01) {
           var_09 = func_0B0F::func_39D3(var_08);
 
           foreach(var_11 in var_09) {
-          thread func_0B0F::func_3987(var_11, [1, 3], [0.25, 0.5], undefined, undefined, var_00, var_01);
+            thread func_0B0F::func_3987(var_11, [1, 3], [0.25, 0.5], undefined, undefined, var_00, var_01);
           }
 
           break;
@@ -749,7 +745,7 @@ func_1CC2(var_00, var_01) {
   if(!getdvarint("ally_advance_debug")) {
     if(isDefined(level.func_1CC2)) {
       foreach(var_03 in level.func_1CC2) {
-      var_03 destroy();
+        var_03 destroy();
       }
 
       level.func_1CC2 = undefined;
@@ -762,7 +758,7 @@ func_1CC2(var_00, var_01) {
   var_05 = 5;
 
   foreach(var_07 in var_00) {
-  thread scripts\sp\utility::draw_circle(var_7.origin, var_05, (1, 0, 0), 1, 0, var_05);
+    thread scripts\sp\utility::draw_circle(var_7.origin, var_05, (1, 0, 0), 1, 0, var_05);
   }
 
   if(!isDefined(level.func_1CC2)) {
@@ -865,8 +861,7 @@ func_117BD(var_00, var_01) {
 
   if(var_01 == "") {
     var_00 setthreatbiasgroup();
-  }
-  else {
+  } else {
     var_00 setthreatbiasgroup(var_01);
   }
 }
@@ -1017,8 +1012,7 @@ func_19C5(var_00) {
 
     if(isDefined(var_1.animation)) {
       energy_getmax(var_01);
-    }
-    else {
+    } else {
       self.goalradius = 64;
 
       if(isDefined(var_1.radius)) {
@@ -1031,8 +1025,7 @@ func_19C5(var_00) {
 
       if(isnode(var_01)) {
         self give_more_perk(var_01);
-      }
-      else {
+      } else {
         self give_mp_super_weapon(var_1.origin);
       }
 
@@ -1069,8 +1062,7 @@ func_19C5(var_00) {
     if(isDefined(var_1.script_sound)) {
       if(var_01 func_C8ED("sound_on_ent", " ")) {
         thread scripts\sp\utility::play_sound_on_entity(var_1.script_sound);
-      }
-      else {
+      } else {
         _playworldsound(var_1.script_sound, var_1.origin);
       }
     }
@@ -1112,8 +1104,7 @@ func_19C5(var_00) {
     if(isDefined(var_1.func_ED22)) {
       if(var_1.func_ED22) {
         scripts\sp\utility::func_B14F();
-      }
-      else {
+      } else {
         scripts\sp\utility::func_1101B();
       }
     }
@@ -1178,8 +1169,7 @@ _meth_8426(var_00) {
 
   if(!isDefined(var_0.script_physics)) {
     var_01 thread scripts\sp\anim::func_1ECB(self, var_0.animation);
-  }
-  else {
+  } else {
     var_01 thread scripts\sp\anim::func_1EC7(self, var_0.animation);
   }
 
@@ -1284,8 +1274,7 @@ func_19C3(var_00) {
 
   if(isDefined(var_00) && isDefined(var_0.func_EED9)) {
     var_01 = var_0.func_EED9;
-  }
-  else {
+  } else {
     var_01 = scripts\engine\utility::random(["j_head", "j_shoulder_le", "j_shoulder_ri", "tag_weapon_chest"]);
   }
 
@@ -1463,8 +1452,7 @@ func_7BFB(var_00) {
     }
     if(isDefined(var_3.disabled)) {
       continue;
-    }
-    else if(isDefined(var_3.func_DD7B)) {
+    } else if(isDefined(var_3.func_DD7B)) {
       var_1[var_1.size] = var_03;
     }
   }
@@ -1601,8 +1589,7 @@ func_6B06(var_00) {
   if(isDefined(var_03)) {
     if(!isalive(var_03)) {
       var_03 startragdoll();
-    }
-    else {
+    } else {
       var_03 delete();
 
       if(isDefined(self.script_linkto)) {
@@ -1617,7 +1604,7 @@ func_F293(var_00, var_01) {
   var_03 = getent(var_01, "targetname");
 
   foreach(var_05 in var_02) {
-  var_05 _meth_82F1(var_03);
+    var_05 _meth_82F1(var_03);
   }
 }
 
@@ -1626,7 +1613,7 @@ func_F2D4(var_00) {
   var_02 = getent(var_00, "targetname");
 
   foreach(var_04 in var_01) {
-  var_04 _meth_82F1(var_02);
+    var_04 _meth_82F1(var_02);
   }
 }
 
@@ -1647,8 +1634,7 @@ func_EA00(var_00, var_01) {
 
   if(isDefined(var_00)) {
     var_03 = scripts\sp\utility::func_77DA(var_00);
-  }
-  else {
+  } else {
     var_03 = _getaiarray("axis");
   }
 
@@ -1875,8 +1861,7 @@ func_39DB(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   for(;;) {
     if(isarray(var_03)) {
       var_07 = randomintrange(var_3[0], var_3[1]);
-    }
-    else {
+    } else {
       var_07 = var_03;
     }
 
@@ -1934,7 +1919,7 @@ func_11679() {
   var_00 = getEntArray("temp_civs", "targetname");
 
   foreach(var_02 in var_00) {
-  var_02 thread func_3FAF();
+    var_02 thread func_3FAF();
   }
 }
 
@@ -2448,7 +2433,7 @@ func_CCBE() {
     var_09 = [];
 
     foreach(var_11 in scripts\engine\utility::getstructarray(level.func_37CF.targetname, "target")) {
-    var_9[var_9.size] = func_7A8D(var_11, level.func_37CF);
+      var_9[var_9.size] = func_7A8D(var_11, level.func_37CF);
     }
 
     if(isDefined(level.func_37CF.target)) {
@@ -2461,7 +2446,7 @@ func_CCBE() {
           var_16 = scripts\engine\utility::getstructarray(var_15.target, "targetname");
 
           foreach(var_18 in var_16) {
-          var_9[var_9.size] = func_7A8D(var_15, var_18);
+            var_9[var_9.size] = func_7A8D(var_15, var_18);
           }
         }
       }

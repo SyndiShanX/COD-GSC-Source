@@ -7,8 +7,7 @@
 #include maps\_createfx;
 #include common_scripts\utility;
 
-oneshotfx(fxid, fxpos, waittime, fxpos2) {
-}
+oneshotfx(fxid, fxpos, waittime, fxpos2) {}
 
 oneshotfxthread() {
   wait 0.05;
@@ -52,8 +51,7 @@ create_loopsound() {
     if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
       if(isDefined(self.looper)) {
         self.looper thread maps\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"], "death");
-      }
-      else {
+      } else {
         thread maps\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"], "stop_loop");
       }
     } else if(isDefined(self.looper))
@@ -84,8 +82,7 @@ loopfxthread() {
 
     if(isDefined(self.fxstop)) {
       level waittill("stop fx" + self.fxstop);
-    }
-    else {
+    } else {
       return;
     }
 
@@ -95,8 +92,7 @@ loopfxthread() {
 
     if(isDefined(self.fxstart)) {
       level waittill("start fx" + self.fxstart);
-    }
-    else {
+    } else {
       return;
     }
   }

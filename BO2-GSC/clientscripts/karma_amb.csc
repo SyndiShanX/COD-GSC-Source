@@ -364,8 +364,7 @@ play_engine_audio() {
   while(true) {
     if(self getspeed() >= 5) {
       loop_ent_1 playLoopSound("veh_spiderbot_legs_loop_front", 0.05);
-    }
-    else {
+    } else {
       loop_ent_1 stoploopsound(0.1);
     }
 
@@ -695,8 +694,7 @@ sndplayshadows() {
 sndspdbotvox(set) {
   if(set == 1) {
     snd_set_snapshot("spl_karma_spiderbot_novox");
-  }
-  else {
+  } else {
     snd_set_snapshot("default");
   }
 }

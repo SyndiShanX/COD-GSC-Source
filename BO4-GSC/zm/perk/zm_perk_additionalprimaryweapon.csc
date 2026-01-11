@@ -9,7 +9,6 @@
 #include scripts\core_common\visionset_mgr_shared;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_perk_additionalprimaryweapon;
 
 autoexec __init__system__() {
@@ -25,12 +24,12 @@ enable_additional_primary_weapon_perk_for_level() {
   zm_perks::register_perk_clientfields(#"specialty_additionalprimaryweapon", &additional_primary_weapon_client_field_func, &additional_primary_weapon_code_callback_func);
   zm_perks::register_perk_effects(#"specialty_additionalprimaryweapon", "additionalprimaryweapon_light");
   zm_perks::register_perk_init_thread(#"specialty_additionalprimaryweapon", &init_additional_primary_weapon);
-  zm_perks::function_b60f4a9f(#"specialty_additionalprimaryweapon", #"p8_zm_vapor_altar_icon_01_mulekick", "zombie/fx8_perk_altar_symbol_ambient_mule_kick", #"zmperksmulekick");
+  zm_perks::function_b60f4a9f(#"specialty_additionalprimaryweapon", # "p8_zm_vapor_altar_icon_01_mulekick", "zombie/fx8_perk_altar_symbol_ambient_mule_kick", # "zmperksmulekick");
 }
 
 init_additional_primary_weapon() {
   if(isDefined(level.enable_magic) && level.enable_magic) {
-    level._effect[#"additionalprimaryweapon_light"] = "zombie/fx_perk_mule_kick_zmb";
+    level._effect[# "additionalprimaryweapon_light"] = "zombie/fx_perk_mule_kick_zmb";
   }
 }
 

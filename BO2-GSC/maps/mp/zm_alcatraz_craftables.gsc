@@ -259,8 +259,7 @@ onpickup_key(player) {
 
   if(level.is_master_key_west) {
     level clientnotify("fxanim_west_pulley_up_start");
-  }
-  else {
+  } else {
     level clientnotify("fxanim_east_pulley_up_start");
   }
 
@@ -445,8 +444,7 @@ play_plane_piece_call_and_response_vo(player, vo_alias_call) {
         if(isDefined(closest_other_player) && n_dist < n_response_range) {
           if(level.n_plane_pieces_found < 5) {
             vo_alias_response = "sidequest_parts" + level.n_plane_pieces_found + "_prog";
-          }
-          else {
+          } else {
             vo_alias_response = "sidequest_all_parts";
           }
 
@@ -744,8 +742,7 @@ droponmover(player) {
 
     if(isDefined(level.e_gondola.is_moving) && level.e_gondola.is_moving && isDefined(level.e_gondola.destination)) {
       str_location = level.e_gondola.destination;
-    }
-    else {
+    } else {
       str_location = level.e_gondola.location;
     }
 
@@ -798,7 +795,7 @@ in_game_checklist_plane_piece_picked_up(str_partname) {
   a_m_checklist = getEntArray("plane_checklist", "targetname");
 
   foreach(m_checklist in a_m_checklist) {
-  m_checklist showpart("j_check_" + str_partname);
+    m_checklist showpart("j_check_" + str_partname);
   }
 }
 
@@ -806,7 +803,7 @@ in_game_checklist_plane_piece_dropped(str_partname) {
   a_m_checklist = getEntArray("plane_checklist", "targetname");
 
   foreach(m_checklist in a_m_checklist) {
-  m_checklist hidepart("j_check_" + str_partname);
+    m_checklist hidepart("j_check_" + str_partname);
   }
 }
 
@@ -814,7 +811,7 @@ in_game_checklist_plane_piece_crafted(str_partname) {
   a_m_checklist = getEntArray("plane_checklist", "targetname");
 
   foreach(m_checklist in a_m_checklist) {
-  m_checklist showpart("j_strike_" + str_partname);
+    m_checklist showpart("j_strike_" + str_partname);
   }
 }
 
@@ -865,22 +862,19 @@ alcatraz_setup_unitrigger_craftable_internal(trig, equipname, weaponname, trigge
 
   if(isDefined(trig.script_length)) {
     unitrigger_stub.script_length = trig.script_length;
-  }
-  else {
+  } else {
     unitrigger_stub.script_length = 32;
   }
 
   if(isDefined(trig.script_width)) {
     unitrigger_stub.script_width = trig.script_width;
-  }
-  else {
+  } else {
     unitrigger_stub.script_width = 100;
   }
 
   if(isDefined(trig.script_height)) {
     unitrigger_stub.script_height = trig.script_height;
-  }
-  else {
+  } else {
     unitrigger_stub.script_height = 64;
   }
 

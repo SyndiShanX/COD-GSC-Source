@@ -6,7 +6,6 @@
 #include scripts\core_common\audio_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\struct;
-
 #namespace zm_white_sound;
 
 main() {
@@ -23,18 +22,18 @@ startzmbspawnersoundloops() {
       println("<dev string:x38>" + loopers.size + "<dev string:x72>");
     }
 
-      for(i = 0; i < loopers.size; i++) {
-        if(isDefined(loopers[i].script_sound)) {
-          continue;
-        }
-
-        loopers[i] thread soundloopthink();
-        delay += 1;
-
-        if(delay % 20 == 0) {
-          waitframe(1);
-        }
+    for(i = 0; i < loopers.size; i++) {
+      if(isDefined(loopers[i].script_sound)) {
+        continue;
       }
+
+      loopers[i] thread soundloopthink();
+      delay += 1;
+
+      if(delay % 20 == 0) {
+        waitframe(1);
+      }
+    }
 
     return;
   }

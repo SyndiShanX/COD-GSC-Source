@@ -10,7 +10,6 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\util_shared;
-
 #namespace frontend;
 
 callback_void() {}

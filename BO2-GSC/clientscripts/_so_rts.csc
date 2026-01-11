@@ -63,8 +63,7 @@ gpr_updated(localclientnum, set, newent) {
 
       if(val > 0) {
         self target_unit_highlight(localclientnum, 1, val);
-      }
-      else {
+      } else {
         self target_unit_highlight(localclientnum, 0, 0);
       }
 
@@ -74,8 +73,7 @@ gpr_updated(localclientnum, set, newent) {
 
       if(val == 0) {
         self.sonarteam = "axis";
-      }
-      else if(val == 1) {
+      } else if(val == 1) {
         self.sonarteam = "allies";
       }
 
@@ -147,8 +145,7 @@ set_sonarpulse(localclientnum) {
 
     if(cur == 0) {
       inc = increment;
-    }
-    else {
+    } else {
       inc = increment * -1;
     }
 
@@ -175,7 +172,7 @@ set_squadishighlighted(squadid, forced) {
   }
 
   foreach(ent in level.entities) {
-  ent notify("orange_julius");
+    ent notify("orange_julius");
   }
 
   if(squadid != -1) {
@@ -222,8 +219,7 @@ update_hudoutline(forced, onlyenemy) {
 
     if(self.sonarteam == "axis") {
       self sethudoutlinecolor(1);
-    }
-    else if(self.sonarteam == "allies" && onlyenemy == 0) {
+    } else if(self.sonarteam == "allies" && onlyenemy == 0) {
       self sethudoutlinecolor(2);
     }
   } else {
@@ -288,8 +284,7 @@ target_unit_highlight(localclientnum, onoff, progvalue) {
 
   if(isDefined(self.max_health) && isDefined(self.health)) {
     health = (self.max_health << 16) + self.health;
-  }
-  else {
+  } else {
     health = -1;
   }
 
@@ -382,12 +377,10 @@ satellite_transition(localclientnum, duration) {
 
     if(elapsedtime < halftime) {
       val = elapsedtime / halftime;
-    }
-    else {
+    } else {
       if(elapsedtime < halftime + statictime) {
         val = 1;
-      }
-      else {
+      } else {
         val = 1 - (elapsedtime - halftime - statictime) / halftime;
       }
 
@@ -561,15 +554,13 @@ commandservosounds() {
 
     if(pan > 0) {
       pan_volume = 1;
-    }
-    else {
+    } else {
       pan_volume = 0;
     }
 
     if(move > 0) {
       move_volume = 1;
-    }
-    else {
+    } else {
       move_volume = 0;
     }
 

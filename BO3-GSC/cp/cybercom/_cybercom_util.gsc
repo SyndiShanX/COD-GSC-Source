@@ -368,9 +368,7 @@ function function_d4f9f451(slot, weapon) {
       }
       if(isDefined(self.cybercom.var_73d069a7)) {
         function_c5b2f654(self);
-        [
-          [self.cybercom.var_73d069a7]
-        ](slot, weapon);
+        [[self.cybercom.var_73d069a7]](slot, weapon);
         return;
       }
     }

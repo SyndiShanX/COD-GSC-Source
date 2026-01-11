@@ -256,11 +256,9 @@ main() {
   while(1) {
     if(debugTestDome) {
       self alien_test_loop();
-    }
-    else if(debugTestEnvPrototype) {
+    } else if(debugTestEnvPrototype) {
       self alien_test_jump();
-    }
-    else {
+    } else {
       self alien_main_loop();
     }
   }
@@ -421,13 +419,9 @@ alien_main_loop() {
       self.downed_enemy_location = undefined;
     } else if(IsAlive(enemy)) {
       if(self.badpath) {
-        [
-          [level.alien_funcs[get_alien_type()]["badpath"]]
-        ](enemy);
+        [[level.alien_funcs[get_alien_type()]["badpath"]]](enemy);
       } else {
-        [
-          [level.alien_funcs[get_alien_type()]["combat"]]
-        ](enemy);
+        [[level.alien_funcs[get_alien_type()]["combat"]]](enemy);
       }
     } else {
       if(isDefined(self.pet) && self.pet) {
@@ -534,8 +528,7 @@ default_alien_combat(enemy) {
 alien_attack_enemy(enemy) {
   if(use_synched_attack(enemy)) {
     self alien_synch_attack_enemy(enemy);
-  }
-  else {
+  } else {
     self alien_attack_sequence(enemy);
   }
 }
@@ -694,11 +687,10 @@ alien_attack(enemy, attack_type) {
     default:
       if(isDefined(level.alien_attack_override_func)) {
         if([
+          }
+          [level.alien_attack_override_func]](enemy, attack_type)) {
+        break;
       }
-            [level.alien_attack_override_func]
-          ](enemy, attack_type)) {
-          break;
-        }
 
       /# iprintln( "Invalid alien attack_type: " + attack_type );
       wait 1;
@@ -735,8 +727,7 @@ handle_badpath(enemy) {
   }
   if(self.badpathcount == 1) {
     moveSuccess = attempt_badpath_move_to_node(enemy, 0, ALIEN_MIN_MELEE_DISTANCE, MAX_BADPATH_SWIPE_HEIGHT_DIFFERENCE);
-  }
-  else {
+  } else {
     moveSuccess = false;
   }
 
@@ -1301,8 +1292,7 @@ cover_retreat(enemy, direction) {
 get_cover_node(enemy, filters) {
   if(GetDvarInt("alien_cover_node_retreat") == 1) {
     nodes = GetNodesInRadius(enemy.origin, 800, 400, 256, "cover stand");
-  }
-  else {
+  } else {
     nodes = GetNodesInRadius(enemy.origin, 800, 400, 256);
   }
 
@@ -1522,15 +1512,13 @@ get_retreat_node_rated(enemy, filters, nodes) {
 
   if(isDefined(filters["recently_used_time_limit"])) {
     recently_used_time_limit = filters["recently_used_time_limit"];
-  }
-  else {
+  } else {
     recently_used_time_limit = RECENT_TIME_LIMIT;
   }
 
   if(isDefined(filters["test_offset"])) {
     test_offset = filters["test_offset"];
-  }
-  else {
+  } else {
     test_offset = (0.0, 0.0, 0.0);
   }
 
@@ -1750,8 +1738,7 @@ backToRunOnDamage(whizby) {
 
   if(isDefined(whizby) && whizby) {
     self waittill_any("damage", "start_attack", "bulletwhizby");
-  }
-  else {
+  } else {
     self waittill_any("damage", "start_attack");
   }
 
@@ -2127,8 +2114,7 @@ run_near_enemy(max_distance, enemy, approach_node) {
 get_offset_location_from_enemy(enemy, minOffsetDistance, maxOffsetDistance, minOffsetYaw, maxOffsetYaw) {
   if(GetDvarInt("alien_retreat_towards_spawn") == 1) {
     targetLocation = self.spawnOrigin;
-  }
-  else {
+  } else {
     targetLocation = self.origin;
   }
 

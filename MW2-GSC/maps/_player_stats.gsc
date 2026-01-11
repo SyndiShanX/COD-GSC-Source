@@ -241,8 +241,7 @@ get_weapon_with_most_kills(excluders) {
 
     if(!isDefined(highest)) {
       highest = weapon;
-    }
-    else if(weapon.kills > highest.kills) {
+    } else if(weapon.kills > highest.kills) {
       highest = weapon;
     }
   }

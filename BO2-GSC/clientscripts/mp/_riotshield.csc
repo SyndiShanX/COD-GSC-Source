@@ -58,8 +58,7 @@ watch_riotshield_damage() {
 
     if(damage_type == "MOD_MELEE") {
       self setanim( % o_riot_stand_melee_front, 1.0, 0.0, 1.0);
-    }
-    else {
+    } else {
       self setanim( % o_riot_stand_shot, 1.0, 0.0, 1.0);
     }
   }

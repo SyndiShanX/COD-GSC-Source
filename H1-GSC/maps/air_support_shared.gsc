@@ -123,11 +123,9 @@ air_support_update_arrow_coords(var_0, var_1) {
 
     if(var_15 > var_18) {
       var_20 = air_support_find_best_floor(var_14);
-    }
-    else if(var_15 < 0.0 - var_18) {
+    } else if(var_15 < 0.0 - var_18) {
       var_20 = air_support_find_best_ceiling(var_14);
-    }
-    else {
+    } else {
       var_19 = 1;
       var_20 = air_support_average_normals(var_14);
     }
@@ -234,8 +232,7 @@ air_support_draw_arrow(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_4 > 0) {
     var_0 rotateto(var_8, var_4);
-  }
-  else {
+  } else {
     var_0.angles = var_8;
   }
 }

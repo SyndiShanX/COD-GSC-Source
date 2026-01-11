@@ -404,7 +404,7 @@ dz_osprey_fed_destroyer() {
   level.player waittill("using_depth_charge");
 
   foreach(var_1 in level.fed_destroyer_fx_guns) {
-  var_1 thread fed_destroyer_gun();
+    var_1 thread fed_destroyer_gun();
   }
 }
 

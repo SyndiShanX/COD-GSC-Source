@@ -113,8 +113,7 @@ updatesharpfocus() {
   if(level.tactical) {
     if(weaponclass(var_00) == "sniper") {
       var_01 = 0.85;
-    }
-    else {
+    } else {
       var_01 = 0.5;
     }
   } else if(weaponclass(var_00) == "sniper")
@@ -216,8 +215,7 @@ setmarksman(var_00) {
 
   if(!isDefined(var_00)) {
     var_00 = 10;
-  }
-  else {
+  } else {
     var_00 = int(var_00) * 2;
   }
 
@@ -317,8 +315,7 @@ setstunresistance(var_00) {
 
   if(var_00 == 10) {
     self.stunscalar = 0;
-  }
-  else {
+  } else {
     self.stunscalar = var_00 / 10;
   }
 }
@@ -569,11 +566,9 @@ setcombatspeedscalar() {
   }
   if(self.weaponspeed <= 0.8) {
     self.combatspeedscalar = 1.4;
-  }
-  else if(self.weaponspeed <= 0.9) {
+  } else if(self.weaponspeed <= 0.9) {
     self.combatspeedscalar = 1.3;
-  }
-  else {
+  } else {
     self.combatspeedscalar = 1.2;
   }
 
@@ -836,8 +831,7 @@ func_12F47() {
 func_9FE9() {
   if(canspawn(self.origin) && self isonground() && !scripts\mp\utility\game::func_11A44()) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -900,8 +894,7 @@ _meth_83EC(var_00) {
 
   if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 20));
-  }
-  else {
+  } else {
     scripts\mp\entityheadicons::setplayerheadicon(var_00, (0, 0, 20));
   }
 
@@ -930,7 +923,7 @@ _meth_83ED(var_00, var_01, var_02) {
 
   for(;;) {
     foreach(var_05 in var_03) {
-    var_05 hide();
+      var_05 hide();
     }
 
     foreach(var_08 in level.players) {
@@ -949,7 +942,7 @@ _meth_83ED(var_00, var_01, var_02) {
     level waittill("joined_team");
 
     foreach(var_09, var_05 in var_03) {
-    stopFXOnTag(level.func_108D2[var_09], var_05, "tag_fx");
+      stopFXOnTag(level.func_108D2[var_09], var_05, "tag_fx");
     }
 
     scripts\engine\utility::waitframe();
@@ -1172,8 +1165,7 @@ func_F738() {
 
     if(var_3.size == 0) {
       var_02 = 1;
-    }
-    else {
+    } else {
       foreach(var_05 in var_01) {
         if(!scripts\engine\utility::array_contains(var_03, var_05)) {
           var_02 = 1;
@@ -1234,7 +1226,7 @@ func_F738() {
     var_01 = scripts\engine\utility::alphabetize(var_01);
 
     foreach(var_05 in var_01) {
-    var_22 = var_22 + ("_" + var_05);
+      var_22 = var_22 + ("_" + var_05);
     }
 
     if(var_22 != var_21) {
@@ -1263,8 +1255,7 @@ func_F720() {}
 func_765A() {
   if(!isai(self)) {
     return self getrankedplayerdata(level.loadoutsgroup, "squadMembers", "loadouts", self.class_num, "abilitiesPicked", scripts\mp\utility\game::func_7D91(6, 0));
-  }
-  else {
+  } else {
     var_00 = [];
 
     if(isDefined(self.pers["loadoutPerks"])) {
@@ -1289,8 +1280,7 @@ givefriendlyperks(var_00) {
 
   if(!scripts\mp\utility\game::gameflag("prematch_done")) {
     scripts\mp\utility\game::gameflagwait("prematch_done");
-  }
-  else if(scripts\mp\utility\game::gameflag("prematch_done") && self.streaktype != "specialist") {
+  } else if(scripts\mp\utility\game::gameflag("prematch_done") && self.streaktype != "specialist") {
     self waittill("giveLoadout");
   }
 
@@ -1539,8 +1529,7 @@ boomtrackplayerdeath(var_00, var_01) {
 
   if(var_02 == "timeout" && isDefined(self.markedbyboomperk[var_01])) {
     self.markedbyboomperk[var_01] = undefined;
-  }
-  else {
+  } else {
     self waittill("spawned_player");
     self.markedbyboomperk = undefined;
   }
@@ -1584,8 +1573,7 @@ unsetcustomjuiced(var_00) {
     if(scripts\mp\utility\game::isjuggernaut()) {
       if(isDefined(self.func_A4AA)) {
         self.movespeedscaler = self.func_A4AA;
-      }
-      else {
+      } else {
         self.movespeedscaler = 0.7;
       }
     } else {
@@ -1826,7 +1814,7 @@ watchlifepackkills() {
     var_06 thread watchlifepackowner();
 
     foreach(var_09 in level.players) {
-    var_06 setlifepackvisualforplayer(var_09);
+      var_06 setlifepackvisualforplayer(var_09);
     }
   }
 }
@@ -2083,8 +2071,7 @@ settoughenupmodel(var_00, var_01, var_02, var_03) {
 
   if(var_03 == "friendly") {
     var_04 setModel(level.bulletstormshield["section"].friendlymodel);
-  }
-  else {
+  } else {
     var_04 setModel(level.bulletstormshield["section"].enemymodel);
   }
 
@@ -2525,8 +2512,7 @@ setdodge() {
 
   if(scripts\mp\utility\game::isanymlgmatch()) {
     self _meth_8454(6);
-  }
-  else {
+  } else {
     self _meth_8454(3);
   }
 
@@ -2627,8 +2613,7 @@ func_10225() {
 
     if(var_02 > 4) {
       var_02 = 255;
-    }
-    else {
+    } else {
       var_02 = 0;
     }
 
@@ -2695,17 +2680,13 @@ getsixthsensedirection(var_00) {
 
   if(var_05 >= 0.92388) {
     return 2;
-  }
-  else if(var_05 >= 0.382683) {
+  } else if(var_05 >= 0.382683) {
     return scripts\engine\utility::ter_op(scripts\mp\utility\game::isleft2d(self.origin, var_02, var_0.origin), 4, 1);
-  }
-  else if(var_05 >= -0.382683) {
+  } else if(var_05 >= -0.382683) {
     return scripts\engine\utility::ter_op(scripts\mp\utility\game::isleft2d(self.origin, var_02, var_0.origin), 128, 64);
-  }
-  else if(var_05 >= -0.92388) {
+  } else if(var_05 >= -0.92388) {
     return scripts\engine\utility::ter_op(scripts\mp\utility\game::isleft2d(self.origin, var_02, var_0.origin), 32, 8);
-  }
-  else {
+  } else {
     return 16;
   }
 }
@@ -2717,8 +2698,7 @@ markassixthsensesource(var_00) {
 
   if(!isDefined(self.sixthsensesource)) {
     self.sixthsensesource = [];
-  }
-  else if(isDefined(self.sixthsensesource[var_01])) {
+  } else if(isDefined(self.sixthsensesource[var_01])) {
     self notify("markAsSixthSenseSource");
     self endon("markAsSixthSenseSource");
   }
@@ -2880,8 +2860,7 @@ unsetjuiced(var_00) {
     if(scripts\mp\utility\game::isjuggernaut()) {
       if(isDefined(self.func_A4AA)) {
         self.movespeedscaler = self.func_A4AA;
-      }
-      else {
+      } else {
         self.movespeedscaler = 0.7;
       }
     } else {
@@ -3587,7 +3566,7 @@ engineer_clearoutlinedents(var_00) {
   var_00 notify("engineer_clearOutlinedEnts");
 
   foreach(var_03, var_02 in var_0.outlinedids) {
-  scripts\mp\utility\game::outlinedisable(var_02, var_0.func_C78E[var_03]);
+    scripts\mp\utility\game::outlinedisable(var_02, var_0.func_C78E[var_03]);
   }
 }
 
@@ -3743,7 +3722,7 @@ setspawnview() {
 
 unsetspawnview() {
   foreach(var_01 in level.players) {
-  var_01 notify("end_spawnview");
+    var_01 notify("end_spawnview");
   }
 }
 
@@ -3758,14 +3737,11 @@ setftlslide() {
 
   if(scripts\mp\utility\game::isanymlgmatch() && level.tactical) {
     self setsuit("assassin_mlgslide_mp_tactical");
-  }
-  else if(scripts\mp\utility\game::isanymlgmatch()) {
+  } else if(scripts\mp\utility\game::isanymlgmatch()) {
     self setsuit("assassin_mlgslide_mp");
-  }
-  else if(level.tactical) {
+  } else if(level.tactical) {
     self setsuit("assassin_slide_mp_tactical");
-  }
-  else {
+  } else {
     self setsuit("assassin_slide_mp");
   }
 }
@@ -3795,7 +3771,7 @@ setsupportkillstreaks() {
 
   if(!isDefined(self.pers["killstreaks"][1])) {
     foreach(var_01 in self.pers["killstreaks"]) {
-    var_1.earned = 0;
+      var_1.earned = 0;
     }
   }
 }
@@ -3819,8 +3795,7 @@ func_F657() {
 
   if(level.armormod == 0) {
     self setclientomnvar("ui_uplink_carrier_armor_max", 100);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_uplink_carrier_armor_max", level.carrierarmor);
   }
 
@@ -4201,15 +4176,13 @@ updategpsjammer() {
 
       if(scripts\mp\utility\game::isusingremote() || scripts\engine\utility::is_true(self.isplanting) || scripts\engine\utility::is_true(self.isdefusing) || self ismantling()) {
         var_07 = 1;
-      }
-      else {
+      } else {
         if(var_05 > 1) {
           var_05 = 0;
 
           if(distancesquared(var_06, self.origin) < level.func_B75E) {
             var_02 = 1;
-          }
-          else {
+          } else {
             var_02 = 0;
           }
 
@@ -4579,8 +4552,7 @@ groundpoundshock_onimpact(var_00) {
 
   if(level.teambased) {
     var_03 = scripts\mp\utility\game::getteamarray(scripts\mp\utility\game::getotherteam(self.team));
-  }
-  else {
+  } else {
     var_03 = level.characters;
   }
 

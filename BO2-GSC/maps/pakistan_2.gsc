@@ -86,8 +86,7 @@ on_saved_restored_surveillance() {
 
         if(flag("xcam_off")) {
           luinotifyevent(&"hud_pak_rec_visibility", 2, 0, 0);
-        }
-        else {
+        } else {
           luinotifyevent(&"hud_pak_rec_visibility", 1, 1);
         }
       }

@@ -704,9 +704,7 @@ func_AFDA(param_00) {
       }
 
       if(!isDefined(param_00.var_AFBB) || param_00.var_AFBB != var_01) {
-        [
-          [level.matchrecording_logevent]
-        ](param_00.logid, "allies", "SPAWN_ENTITY", param_00.origin[0], param_00.origin[1], gettime(), var_01);
+        [[level.matchrecording_logevent]](param_00.logid, "allies", "SPAWN_ENTITY", param_00.origin[0], param_00.origin[1], gettime(), var_01);
         param_00.var_AFBB = var_01;
         return;
       }

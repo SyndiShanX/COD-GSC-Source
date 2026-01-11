@@ -53,8 +53,7 @@ f35_wakeup() {
 
   if(!flag("harper_dead")) {
     level thread harper_wakes_up();
-  }
-  else {
+  } else {
     flag_set("start_anderson_f35_exit");
     wait 5.5;
     level notify("harper_woke_up");
@@ -275,7 +274,7 @@ late_cops_driveup() {
   squad_cars = spawn_vehicles_from_targetname("late_lapd");
 
   foreach(car in squad_cars) {
-  car.overridevehicledamage = ::cops_damage_override;
+    car.overridevehicledamage = ::cops_damage_override;
   }
 
   playsoundatposition("amb_distant_police_oneshot", (6744, -33418, 316));
@@ -595,8 +594,7 @@ fake_physics_vehicle_launch() {
     if(b_should_move && b_is_enough_damage) {
       if(b_is_explosive_type) {
         self vehicle_explosion_launch(v_hit_point);
-      }
-      else if(b_is_bullet_type) {
+      } else if(b_is_bullet_type) {
         n_scale = randomintrange(n_scale_bullet_min, n_scale_bullet_max);
         v_launch_direction = vectornormalize(v_hit_point - self.origin) * n_scale * -1;
         self physicslaunch(v_hit_point, v_launch_direction);
@@ -681,8 +679,7 @@ damage_trigger_monitor(str_trigger_name, n_damage_before_trigger, str_notify_on_
   assert(t_damage.classname == "trigger_damage", "damage_trigger_monitor() requires classname trigger_damage. " + str_trigger_name + " is currently a " + t_damage.classname);
   e_target = get_ent(str_trigger_name + "_target", "targetname");
 
-  if(isDefined(e_target)) {
-  }
+  if(isDefined(e_target)) {}
 
   if(isDefined(a_valid_attackers)) {
     b_check_attackers = 1;
@@ -690,8 +687,7 @@ damage_trigger_monitor(str_trigger_name, n_damage_before_trigger, str_notify_on_
 
     if(isarray(a_valid_attackers)) {
       a_attackers = a_valid_attackers;
-    }
-    else {
+    } else {
       a_attackers[a_attackers.size] = a_valid_attackers;
     }
   }
@@ -762,8 +758,7 @@ ground_vehicle_fires_at_player(n_custom_index) {
   self endon("gunner_dead");
   self add_ground_vehicle_damage_callback();
 
-  if(self.vehicletype == "civ_pickup_red_wturret_la2") {
-  }
+  if(self.vehicletype == "civ_pickup_red_wturret_la2") {}
 
   n_index = 1;
   v_offset = (0, 0, 0);
@@ -791,11 +786,9 @@ ground_vehicle_damage_callback(einflictor, eattacker, idamage, idflags, type, sw
   if(isDefined(sweapon)) {
     if(sweapon == "f35_missile_turret_player") {
       idamage = 9999;
-    }
-    else if(sweapon == "f35_side_minigun_player") {
+    } else if(sweapon == "f35_side_minigun_player") {
       idamage = 1000;
-    }
-    else if(sweapon == "cougar_gun_turret") {
+    } else if(sweapon == "cougar_gun_turret") {
       idamage = 1;
     }
   }
@@ -1199,8 +1192,7 @@ molotov_throw(str_targetname, v_start, v_end) {
 
   if(!isDefined(v_start) && isDefined(s_start)) {
     v_start = s_start.origin;
-  }
-  else if(!isDefined(v_start) && !isDefined(s_start)) {
+  } else if(!isDefined(v_start) && !isDefined(s_start)) {
     v_start = self.origin;
   }
 
@@ -1493,8 +1485,7 @@ crane_building_spawner() {
     }
   }
 
-  if(!flag("convoy_at_dogfight")) {
-  }
+  if(!flag("convoy_at_dogfight")) {}
 
   t_crane_building delete();
 }
@@ -1893,8 +1884,7 @@ spawn_trenchrun_plane(str_spawner_name, str_start_point, n_speed, v_offset, n_up
 
   if(isDefined(v_offset) && !isDefined(n_update_time)) {
     vh_plane pathfixedoffset(v_offset);
-  }
-  else if(isDefined(v_offset) && isDefined(n_update_time)) {
+  } else if(isDefined(v_offset) && isDefined(n_update_time)) {
     vh_plane pathvariableoffset(v_offset, n_update_time);
   }
 
@@ -1911,8 +1901,7 @@ spawn_trenchrun_plane(str_spawner_name, str_start_point, n_speed, v_offset, n_up
   vh_plane.takedamage = 1;
   vh_plane dodamage(vh_plane.health + 1000, vh_plane.origin, vh_convoy_leader, vh_convoy_leader, "explosive");
 
-  if(vh_convoy_leader == level.convoy.vh_potus) {
-  }
+  if(vh_convoy_leader == level.convoy.vh_potus) {}
 
   vh_convoy_leader do_vehicle_damage(vh_convoy_leader.armor, vh_plane);
 }
@@ -2027,17 +2016,13 @@ trenchrun_add_objective_to_plane() {
 
   if(n_wave == 1) {
     n_objective = level.obj_trenchrun_1;
-  }
-  else if(n_wave == 2) {
+  } else if(n_wave == 2) {
     n_objective = level.obj_trenchrun_2;
-  }
-  else if(n_wave == 3) {
+  } else if(n_wave == 3) {
     n_objective = level.obj_trenchrun_3;
-  }
-  else if(n_wave == 4) {
+  } else if(n_wave == 4) {
     n_objective = level.obj_trenchrun_4;
-  }
-  else {
+  } else {
     assertmsg("trenchrun wave " + n_wave + " not supported");
 
   }
@@ -2211,11 +2196,9 @@ test() {
   }
 }
 
-f35_eject_intro_test() {
-}
+f35_eject_intro_test() {}
 
-f35_eject_enemies_fly_away() {
-}
+f35_eject_enemies_fly_away() {}
 
 f35_eject_highlight_drone() {
   level.player notify("missileTurret_off");
@@ -2307,8 +2290,7 @@ f35_eject_sequence_setup() {
 
   if(flag("harper_dead")) {
     exploder(710);
-  }
-  else {
+  } else {
     exploder(700);
   }
 }
@@ -2481,8 +2463,7 @@ f35_outro() {
   if(is_alive(level.convoy.vh_g20_1)) {
     if(!flag("harper_dead")) {
       level thread maps\_scene::run_scene("outro_g20_1");
-    }
-    else {
+    } else {
       level thread maps\_scene::run_scene("outro_g20_1_noharper");
     }
   }
@@ -2490,16 +2471,14 @@ f35_outro() {
   if(is_alive(level.convoy.vh_g20_2)) {
     if(!flag("harper_dead")) {
       level thread maps\_scene::run_scene("outro_g20_2");
-    }
-    else {
+    } else {
       level thread maps\_scene::run_scene("outro_g20_2_noharper");
     }
   }
 
   if(!flag("harper_dead")) {
     level thread maps\_scene::run_scene("outro_hero");
-  }
-  else {
+  } else {
     level thread maps\_scene::run_scene("outro_hero_noharper");
   }
 
@@ -2584,8 +2563,7 @@ vtol_check_on_path() {
 
     if(!is_safe) {
       level thread vtol_off_path();
-    }
-    else {
+    } else {
       level notify("vtol_on_path");
       flag_clear("vtol_off_path");
     }

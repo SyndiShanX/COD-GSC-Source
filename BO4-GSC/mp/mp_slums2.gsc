@@ -8,7 +8,6 @@
 #include scripts\mp\mp_slums2_scripted;
 #include scripts\mp\mp_slums2_sound;
 #include scripts\mp_common\load;
-
 #namespace mp_slums2;
 
 event_handler[level_init] main(eventstruct) {

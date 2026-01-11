@@ -86,9 +86,7 @@ function private _handledestructcallbacks(localclientnum, entity, piecenumber) {
   if(isDefined(entity._destructcallbacks) && isDefined(entity._destructcallbacks[piecenumber])) {
     foreach(callback in entity._destructcallbacks[piecenumber]) {
       if(isfunctionptr(callback)) {
-        [
-          [callback]
-        ](localclientnum, entity, piecenumber);
+        [[callback]](localclientnum, entity, piecenumber);
       }
     }
   }

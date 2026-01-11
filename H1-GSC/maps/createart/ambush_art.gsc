@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\ambush_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\ambush_fog::main();
   }
 }

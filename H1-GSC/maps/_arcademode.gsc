@@ -66,8 +66,7 @@ main() {
 
   if(getdvar("arcademode_full") == "1") {
     precacheleaderboards("LB_AM_FULLCHALLENGE");
-  }
-  else {
+  } else {
     precacheleaderboards("LB_AM_" + level.script);
   }
 
@@ -518,8 +517,7 @@ arcademode_add_kill_streak_time(var_0) {
 
   if(level.arcademode_kill_streak_ends < gettime()) {
     level.arcademode_kill_streak_ends = gettime() + var_0 * 1000;
-  }
-  else {
+  } else {
     level.arcademode_kill_streak_ends = level.arcademode_kill_streak_ends + var_0 * 1000;
   }
 
@@ -735,8 +733,7 @@ arcademode_update_score() {
 
   if(getdvarint("arcademode_full")) {
     var_1 = getdvarint("arcademode_combined_score");
-  }
-  else {
+  } else {
     var_1 = getdvarint("arcademode_score");
   }
 
@@ -756,8 +753,7 @@ arcademode_update_score() {
 updatescoreelemsonce() {
   if(getdvarint("arcademode_full")) {
     hud_update_score("arcadeMode_combined_score");
-  }
-  else {
+  } else {
     hud_update_score("arcademode_score");
   }
 }
@@ -1152,8 +1148,7 @@ arcademode_add_point_towards_extra_life() {
 
   if(var_0 >= level.arcademode_maxlives) {
     var_0 = level.arcademode_maxlives;
-  }
-  else {
+  } else {
     setdvar("arcademode_lives", var_0);
     setdvar("arcademode_lives_changed", 1);
   }
@@ -1172,8 +1167,7 @@ arcademode_set_origin_in_radius() {
 
       if(var_2) {
         var_1 = 45;
-      }
-      else {
+      } else {
         var_1 = 135;
       }
     } else if(level.player.pointpulseindex == 2) {
@@ -1181,8 +1175,7 @@ arcademode_set_origin_in_radius() {
 
       if(var_2) {
         var_1 = 45;
-      }
-      else {
+      } else {
         var_1 = 135;
       }
     } else if(level.player.pointpulseindex <= 4) {
@@ -1300,8 +1293,7 @@ arcademode_add_points_for_mod(var_0) {
 arcademode_add_points_for_individual_kill(var_0, var_1, var_2) {
   if(var_0["type"] != "melee") {
     var_3 = level.arcademode_killbase + level.arcademode_locationkillbonus[var_0["damage_location"]] + level.arcademode_weaponbonus[var_0["type"]];
-  }
-  else {
+  } else {
     var_3 = level.arcademode_killbase + level.arcademode_weaponbonus[var_0["type"]];
   }
 
@@ -1459,8 +1451,7 @@ rescale_ending_huds(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(level.arcademode_success) {
     var_4 setshader("h1_arcademode_scanelines_border", int(344 * var_6), 65);
-  }
-  else {
+  } else {
     var_4 setshader("h1_arcademode_scanelines_border", int(216 * var_6), 65);
   }
 
@@ -1746,8 +1737,7 @@ arcademode_ends() {
 
         if(var_19 - var_49 >= 10) {
           var_48 = 10;
-        }
-        else {
+        } else {
           var_48 = var_49;
         }
 
@@ -1801,11 +1791,9 @@ arcademode_ends() {
   if(var_51 > 1) {
     if(var_51 == 1.5) {
       var_52 = &"SCRIPT_DIFFICULTY_BONUS_ONEANDAHALF";
-    }
-    else if(var_51 == 3) {
+    } else if(var_51 == 3) {
       var_52 = &"SCRIPT_DIFFICULTY_BONUS_THREE";
-    }
-    else {
+    } else {
       var_52 = &"SCRIPT_DIFFICULTY_BONUS_FOUR";
     }
 
@@ -1938,8 +1926,7 @@ arcademode_ends() {
 
   if(getdvar("arcademode_full") == "1") {
     logstring("ArcadeMode Score: " + var_30 + ", mission: " + level.script + ", gameskill: " + level.gameskill + ", total: " + var_22);
-  }
-  else {
+  } else {
     logstring("ArcadeMode Score: " + var_30 + ", mission: " + level.script + ", gameskill: " + level.gameskill);
   }
 

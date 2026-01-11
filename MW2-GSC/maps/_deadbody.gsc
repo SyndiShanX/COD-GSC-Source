@@ -26,8 +26,7 @@ main() {
 
   if(maxSim > 0) {
     level.max_number_of_dead_bodies = maxSim;
-  }
-  else {
+  } else {
     level.max_number_of_dead_bodies = 0;
   }
 

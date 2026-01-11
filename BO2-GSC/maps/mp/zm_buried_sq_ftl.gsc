@@ -22,8 +22,7 @@ init_stage() {
 
   if(flag("sq_is_max_tower_built")) {
     level thread stage_vo_max();
-  }
-  else {
+  } else {
     level thread stage_vo_ric();
   }
 
@@ -36,8 +35,7 @@ stage_logic() {
 
   if(flag("sq_is_max_tower_built")) {
     max_fill_lantern_watcher();
-  }
-  else {
+  } else {
     ric_fill_lantern_watcher();
   }
 
@@ -45,8 +43,7 @@ stage_logic() {
 
   if(flag("sq_is_max_tower_built")) {
     thread stage_vo_filled_max();
-  }
-  else {
+  } else {
     thread stage_vo_filled_ric();
   }
 
@@ -56,8 +53,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 stage_vo_max() {
   sq_ftl_maxis_vo_on_holder("vox_maxi_sidequest_pl_0");

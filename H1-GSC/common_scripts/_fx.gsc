@@ -188,8 +188,7 @@ create_loopsound() {
   if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
     if(isDefined(self.looper)) {
       var_1 = "death";
-    }
-    else {
+    } else {
       var_1 = "stop_loop";
     }
   } else if(level._fx.server_culled_sounds && isDefined(self.v["server_culled"]))
@@ -279,8 +278,7 @@ loopfxthread() {
 
     if(isDefined(self.fxstop)) {
       level waittill("stop fx" + self.fxstop);
-    }
-    else {
+    } else {
       return;
     }
 
@@ -567,8 +565,7 @@ create_triggerfx() {
 
   if(!level.createfx_enabled) {
     self.looper willneverchange();
-  }
-  else {
+  } else {
     setfxkillondelete(self.looper, 1);
   }
 
@@ -646,7 +643,7 @@ reactive_fx_thread() {
     var_4 = sort_reactive_ents(var_2, var_0);
 
     foreach(var_7, var_6 in var_4) {
-    var_6 thread play_reactive_fx(var_7);
+      var_6 thread play_reactive_fx(var_7);
     }
   }
 }

@@ -303,9 +303,7 @@ func_91A5(param_00) {
   level endon("hudoutline_new_channel_settings");
   wait(0.05);
   var_01 = func_9192();
-  var_02 = [
-    [level.var_91AA[param_00].var_F88E]
-  ]();
+  var_02 = [[level.var_91AA[param_00].var_F88E]]();
   foreach(var_05, var_04 in var_01) {
     if(isDefined(var_02[var_05])) {
       setsaveddvar(var_05, var_02[var_05]);

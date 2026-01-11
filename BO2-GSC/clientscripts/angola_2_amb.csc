@@ -262,8 +262,7 @@ reset_alouette_context_ext() {
   }
 }
 
-chasers() {
-}
+chasers() {}
 
 sinking_barge() {
   level waittill("barge_sink");

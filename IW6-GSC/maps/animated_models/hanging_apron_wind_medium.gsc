@@ -13,8 +13,7 @@ main() {
   model = "clothes_line_tank_iw6";
   if(isSP()) {
     level.anim_prop_models[model]["wind_medium"] = % hanging_clothes_apron_wind_medium;
-  }
-  else {
+  } else {
     level.anim_prop_models[model]["wind_medium"] = "hanging_clothes_apron_wind_medium";
   }
 }

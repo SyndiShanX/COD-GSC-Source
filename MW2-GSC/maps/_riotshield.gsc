@@ -253,8 +253,7 @@ group_sort_by_closest_match(dir) {
 
   if(isDefined(dir)) {
     self.forward = dir;
-  }
-  else {
+  } else {
     dir = self.forward;
   }
 
@@ -268,8 +267,7 @@ group_sort_by_closest_match(dir) {
   for(i = 0; i < self.ai_array.size; i++) {
     if(isDefined(self.ai_array[i])) {
       dist_array[i] = vectordot(pos - self.ai_array[i].origin, right);
-    }
-    else {
+    } else {
       dist_array[i] = 0;
     }
   }
@@ -301,7 +299,7 @@ group_check_deaths() {
 
       if(self.ai_array.size <= self.fleeThreshold) {
         foreach(ai in self.ai_array) {
-        ai riotshield_flee();
+          ai riotshield_flee();
         }
 
         self notify("break_group");
@@ -339,8 +337,7 @@ group_move(group_center, dir) {
 
   if(isDefined(dir)) {
     self.forward = dir;
-  }
-  else {
+  } else {
     dir = self.forward;
   }
 
@@ -443,9 +440,9 @@ check_group_facing_forward() {
 */
 group_sprint_on() {
   foreach(ai in self.ai_array) {
-  if(isalive(ai))
+    if(isalive(ai))
   }
-    ai riotshield_sprint_on();
+  ai riotshield_sprint_on();
 }
 
 /*
@@ -462,9 +459,9 @@ group_sprint_on() {
 */
 group_fastwalk_on() {
   foreach(ai in self.ai_array) {
-  if(isalive(ai))
+    if(isalive(ai))
   }
-    ai riotshield_fastwalk_on();
+  ai riotshield_fastwalk_on();
 }
 
 /*
@@ -481,9 +478,9 @@ group_fastwalk_on() {
 */
 group_sprint_off() {
   foreach(ai in self.ai_array) {
-  if(isalive(ai))
+    if(isalive(ai))
   }
-    ai riotshield_sprint_off();
+  ai riotshield_sprint_off();
 }
 
 /*
@@ -500,9 +497,9 @@ group_sprint_off() {
 */
 group_fastwalk_off() {
   foreach(ai in self.ai_array) {
-  if(isalive(ai))
+    if(isalive(ai))
   }
-    ai riotshield_fastwalk_off();
+  ai riotshield_fastwalk_off();
 }
 
 /*

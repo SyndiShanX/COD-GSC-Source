@@ -96,8 +96,7 @@ barrel_logic(direction_vec, P, type, damageOwner) {
 
   if(!isDefined(level._barrels._barrel_methods[type])) {
     P = self barrel_calc_nofx(P, type);
-  }
-  else {
+  } else {
     P = self[[level._barrels._barrel_methods[type]]](P, type);
   }
 
@@ -118,8 +117,7 @@ barrel_logic(direction_vec, P, type, damageOwner) {
   E = undefined;
   if(IsAI(damageOwner)) {
     E = damageOwner getEye();
-  }
-  else {
+  } else {
     E = damageOwner.origin;
   }
 

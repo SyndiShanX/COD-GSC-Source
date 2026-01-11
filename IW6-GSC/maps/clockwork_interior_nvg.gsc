@@ -70,7 +70,7 @@ setup_interior() {
   level.allies[2].script_startingposition = 3;
 
   foreach(var_1 in level.allies) {
-  level.jeep thread maps\_vehicle_aianim::guy_enter(var_1);
+    level.jeep thread maps\_vehicle_aianim::guy_enter(var_1);
   }
 
   if(level.woof) {
@@ -200,7 +200,7 @@ begin_interior() {
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("chaos_decals_delete", "targetname"));
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   thread handle_blackout();
@@ -404,7 +404,7 @@ handle_nvg_guards() {
   maps\clockwork_code::safe_activate_trigger_with_targetname("nvg_go_go_go");
 
   foreach(var_27 in level.allies) {
-  var_27 maps\_utility::enable_ai_color();
+    var_27 maps\_utility::enable_ai_color();
   }
 
   var_29 = common_scripts\utility::add_to_array(var_17, var_18);
@@ -427,7 +427,7 @@ handle_nvg_guards() {
   maps\clockwork_code::attack_targets(level.allies, var_25, 0.75, 1, 1);
 
   foreach(var_27 in level.allies) {
-  var_27.ignoreall = 0;
+    var_27.ignoreall = 0;
   }
 
   common_scripts\utility::flag_wait("security_complete");
@@ -460,7 +460,7 @@ handle_lights_out_approach() {
   level.allies[2].animname = "cipher";
 
   foreach(var_2 in level.allies) {
-  var_2 maps\_utility::disable_ai_color();
+    var_2 maps\_utility::disable_ai_color();
   }
 
   level.allies[0] thread reach_and_play_anim("merrick_start_lights_out", var_0, 0.5);
@@ -550,7 +550,7 @@ bin_failsafe(var_0, var_1) {
 
 cool_walk_at_end_of_anim(var_0) {
   foreach(var_2 in var_0) {
-  var_2 thread waittillend_of_anim_set_walk();
+    var_2 thread waittillend_of_anim_set_walk();
   }
 }
 
@@ -604,8 +604,7 @@ nvg_blackout_anims(var_0) {
     if(isDefined(self.animation)) {
       if(isDefined(self.script_noteworthy) && self.script_noteworthy == "blackout_blind_fire_pistol") {
         thread maps\_anim::anim_loop_solo(self, self.animation);
-      }
-      else {
+      } else {
         thread maps\_anim::anim_generic(self, self.animation);
       }
     }
@@ -807,7 +806,7 @@ hacking_eyes_and_ears() {
   common_scripts\utility::array_thread(var_2, maps\clockwork_code::die_quietly);
 
   foreach(var_4 in level.allies) {
-  var_4 maps\_utility::disable_cqbwalk();
+    var_4 maps\_utility::disable_cqbwalk();
   }
 
   thread maps\_utility::autosave_by_name("eyes_and_ears");
@@ -1017,7 +1016,7 @@ failcase_blackout_early() {
   common_scripts\utility::flag_wait("nvg_enemies_provoked");
 
   foreach(var_1 in level.allies) {
-  var_1.old_disablearrivals = 0;
+    var_1.old_disablearrivals = 0;
   }
 
   level notify("blackout_early");
@@ -1161,7 +1160,7 @@ control_nvg_lightmodels() {
   control_nvg_staticscreens_on();
 
   foreach(var_2 in var_0) {
-  var_2 setModel(var_2.on_version);
+    var_2 setModel(var_2.on_version);
   }
 }
 
@@ -1172,11 +1171,11 @@ control_nvg_staticscreens_off() {
   var_3 = getent("nvg_mapscreen_light_accents", "targetname");
 
   foreach(var_5 in var_0) {
-  var_5 hide();
+    var_5 hide();
   }
 
   foreach(var_5 in var_1) {
-  var_5 hide();
+    var_5 hide();
   }
 
   var_2 hide();
@@ -1190,11 +1189,11 @@ control_nvg_staticscreens_on() {
   var_3 = getent("nvg_mapscreen_light_accents", "targetname");
 
   foreach(var_5 in var_0) {
-  var_5 show();
+    var_5 show();
   }
 
   foreach(var_5 in var_1) {
-  var_5 show();
+    var_5 show();
   }
 
   var_2 show();

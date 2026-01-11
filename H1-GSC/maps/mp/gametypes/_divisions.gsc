@@ -76,7 +76,7 @@ onrankedmatchstart() {
   level endon("exitLevel_called");
 
   foreach(var_1 in level.players) {
-  var_1 thread onplayerconnect();
+    var_1 thread onplayerconnect();
   }
 
   for(;;) {
@@ -117,11 +117,9 @@ onmatchend() {
 
       if(var_2.pers["division"]["wonByForfeit"] || var_2.team == var_0) {
         var_2 ondivisionwin(var_3);
-      }
-      else if(var_0 == "tie") {
+      } else if(var_0 == "tie") {
         var_2 ondivisiontie(var_3);
-      }
-      else {
+      } else {
         var_2 ondivisionloss(var_3);
       }
 
@@ -183,11 +181,9 @@ ondivisionloss(var_0) {
 
   if(isDefined(self.pers["division"]["maxDP"]) && self.pers["division"]["maxDP"] == var_0) {
     return;
-  }
-  else if(self.pers["division"]["minDP"] == var_0) {
+  } else if(self.pers["division"]["minDP"] == var_0) {
     return;
-  }
-  else {
+  } else {
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "division", int(max(float(self.pers["division"]["minDP"]), float(var_0 + var_1))));
   }
 }
@@ -265,9 +261,7 @@ initloss() {
 
     if(self.pers["division"]["losses"] >= 2) {
       self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "division", self.pers["division"]["minDP"] + getdivisionresetoffset());
-    }
-    else {
-    }
+    } else {}
 
     updatedivisionchallengestatus(0);
   } else if(self.pers["division"]["minDP"] == var_0) {
@@ -277,8 +271,7 @@ initloss() {
       if(var_2 >= 3) {
         getdivisionpointrange(var_0 - 1);
         self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "division", self.pers["division"]["minDP"] + getdivisionresetoffset());
-      } else {
-      }
+      } else {}
 
       self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "divisionRelegationCounter", var_2);
     }
@@ -339,8 +332,7 @@ getdivisionchallengestatus() {
     if(var_0 >> var_4 & 1) {
       if(var_1 >> var_4 & 1) {
         var_2++;
-      }
-      else {
+      } else {
         var_3++;
       }
 
@@ -392,15 +384,13 @@ savematchprediction(var_0) {
 
   if(var_2 == "win") {
     var_1 = var_1 | 1;
-  }
-  else if(var_2 == "loss") {
+  } else if(var_2 == "loss") {
     var_1 = var_1 | 2;
   }
 
   if(var_0 == "win") {
     var_1 = var_1 | 16;
-  }
-  else if(var_0 == "loss") {
+  } else if(var_0 == "loss") {
     var_1 = var_1 | 32;
   }
 
@@ -453,14 +443,11 @@ calculatematchprediction() {
 
   if(!isDefined(self.team)) {
     return;
-  }
-  else if(self.team == "axis") {
+  } else if(self.team == "axis") {
     var_1 = level.teammmr["allies"];
-  }
-  else if(self.team == "allies") {
+  } else if(self.team == "allies") {
     var_1 = level.teammmr["axis"];
-  }
-  else {
+  } else {
     return;
   }
 

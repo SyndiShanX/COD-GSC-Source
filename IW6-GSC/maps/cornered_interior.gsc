@@ -404,8 +404,7 @@ courtyard_intro_elevator_guy_fail() {
 
     if(!isnodeoccupied(var_0[0])) {
       self setgoalnode(var_0[0]);
-    }
-    else {
+    } else {
       self setgoalnode(var_0[1]);
     }
   } else {
@@ -415,8 +414,7 @@ courtyard_intro_elevator_guy_fail() {
 
     if(!isnodeoccupied(var_0[0])) {
       self setgoalnode(var_0[0]);
-    }
-    else {
+    } else {
       self setgoalnode(var_0[1]);
     }
   }
@@ -493,8 +491,7 @@ courtyard_rorke() {
 
   if(!common_scripts\utility::flag("cy_office_stealth_broken")) {
     self waittillmatch("single anim", "end");
-  }
-  else {
+  } else {
     self stopanimscripted();
   }
 
@@ -806,8 +803,7 @@ courtyard_office_glass() {
 
     if(isDefined(var_1) && common_scripts\utility::flag("_stealth_spotted")) {
       var_1 stopanimscripted();
-    }
-    else {
+    } else {
       wait 15.45;
       level notify("glass_on_table");
 
@@ -834,11 +830,11 @@ courtyard_office_a_doors() {
   var_3 = getEntArray("office_a_door_left_hinges", "targetname");
 
   foreach(var_5 in var_2) {
-  var_5 linkto(var_0);
+    var_5 linkto(var_0);
   }
 
   foreach(var_5 in var_3) {
-  var_5 linkto(var_1);
+    var_5 linkto(var_1);
   }
 
   var_9 = common_scripts\utility::getstruct("courtyard_office_entry_animnode", "targetname");
@@ -1159,8 +1155,7 @@ bar_rorke_strobe_attack() {
 
   if(common_scripts\utility::flag("rorke_shot_tv") && common_scripts\utility::flag("player_started_bar_combat")) {
     maps\_utility::smart_dialogue("cornered_mrk_thatwasntasmart");
-  }
-  else {
+  } else {
     maps\_utility::smart_dialogue("cornered_mrk_clear");
   }
 
@@ -1168,8 +1163,7 @@ bar_rorke_strobe_attack() {
 
   if(common_scripts\utility::flag("strobe_on")) {
     maps\_utility::smart_dialogue("cornered_mrk_strobesoffthisway");
-  }
-  else {
+  } else {
     level.player setweaponhudiconoverride("actionslot1", "");
   }
 
@@ -1456,8 +1450,7 @@ bar_enemy_setup() {
   if(isDefined(self.script_parameters)) {
     if(self.script_parameters == "e09" || self.script_parameters == "e10") {
       bar_enemy_reach();
-    }
-    else {
+    } else {
       level.bar_animnode thread maps\_anim::anim_loop_solo(self, "cornered_bar_" + self.script_parameters + "_idle", "stop_loop");
     }
   }
@@ -1551,8 +1544,7 @@ bar_react_variable_wait() {
   }
   if(common_scripts\utility::flag("_stealth_spotted") || common_scripts\utility::flag("bar_guy_killed")) {
     wait(randomfloatrange(1.8, 2.5));
-  }
-  else {
+  } else {
     wait 6;
   }
 }
@@ -1606,14 +1598,11 @@ bar_enemy_strobe_react() {
 
     if(var_3 >= 0.7) {
       thread maps\_anim::anim_custom_animmode_loop_solo(self, "gravity", "cornered_bar_react_front");
-    }
-    else if(var_3 <= -0.7) {
+    } else if(var_3 <= -0.7) {
       thread maps\_anim::anim_custom_animmode_loop_solo(self, "gravity", "cornered_bar_react_rear");
-    }
-    else if(var_5 >= 0.0) {
+    } else if(var_5 >= 0.0) {
       thread maps\_anim::anim_custom_animmode_loop_solo(self, "gravity", "cornered_bar_react_left");
-    }
-    else {
+    } else {
       thread maps\_anim::anim_custom_animmode_loop_solo(self, "gravity", "cornered_bar_react_right");
     }
 
@@ -1655,8 +1644,7 @@ bar_enemy_wave2_3_react() {
 
   if(common_scripts\utility::flag("bar_light_shot")) {
     thread bar_enemy_strobe_react();
-  }
-  else {
+  } else {
     self.ignoreall = 0;
     maps\_stealth_utility::disable_stealth_for_ai();
     self.dontevershoot = undefined;
@@ -2041,7 +2029,7 @@ junction_airlock_door_open(var_0, var_1, var_2) {
   var_4 = getEntArray(var_1, "targetname");
 
   foreach(var_6 in var_4) {
-  var_6 linkto(var_3);
+    var_6 linkto(var_3);
   }
 
   var_8 = common_scripts\utility::getstruct("junction_entry_animnode", "targetname");
@@ -2236,8 +2224,7 @@ junction_elevator_control_panel() {
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
     var_0 sethintstring(&"CORNERED_DISABLE_ELEVATORS_CONSOLE");
-  }
-  else {
+  } else {
     var_0 sethintstring(&"CORNERED_DISABLE_ELEVATORS");
   }
 
@@ -2311,19 +2298,19 @@ junction_elevator_control_panel() {
   common_scripts\utility::flag_wait("c_rappel_player_on_rope");
 
   foreach(var_13 in var_2.green_lights) {
-  var_13 delete();
+    var_13 delete();
   }
 
   foreach(var_13 in var_2.red_lights) {
-  var_13 delete();
+    var_13 delete();
   }
 
   foreach(var_13 in var_3.green_lights) {
-  var_13 delete();
+    var_13 delete();
   }
 
   foreach(var_13 in var_3.red_lights) {
-  var_13 delete();
+    var_13 delete();
   }
 
   var_2 delete();
@@ -2491,8 +2478,7 @@ control_panel_setup_lights() {
 
     if(var_1 < 10) {
       var_5 setModel("cnd_controlpanel_elevator_red_0" + var_1);
-    }
-    else {
+    } else {
       var_5 setModel("cnd_controlpanel_elevator_red_" + var_1);
     }
 

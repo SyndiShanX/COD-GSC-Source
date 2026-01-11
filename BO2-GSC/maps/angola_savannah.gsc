@@ -302,7 +302,7 @@ savannah_start() {
   level thread savimbi_shoot();
 
   foreach(ai_enemy in ai_mpla_array) {
-  ai_enemy stop_magic_bullet_shield();
+    ai_enemy stop_magic_bullet_shield();
   }
 
   level thread savannah_brim_fights();
@@ -477,7 +477,7 @@ savimbi_riders_rally_prep() {
   savimbi_riders = get_model_or_models_from_scene("savimbi_buffel_shooters_idle");
 
   foreach(rider in savimbi_riders) {
-  rider attach("t6_wpn_ar_fal_prop_world", "tag_weapon_right");
+    rider attach("t6_wpn_ar_fal_prop_world", "tag_weapon_right");
   }
 }
 
@@ -691,25 +691,25 @@ savannah_hill() {
   sp_wave_one_shooters = getEntArray("wave_one_shooter", "targetname");
 
   foreach(shooter in sp_wave_one_shooters) {
-  shooter add_spawn_function(::init_hill_shooter);
+    shooter add_spawn_function(::init_hill_shooter);
   }
 
   sp_hill_shooters = getEntArray("hill_shooter", "targetname");
 
   foreach(shooter in sp_hill_shooters) {
-  shooter add_spawn_function(::init_hill_shooter, 0.9);
+    shooter add_spawn_function(::init_hill_shooter, 0.9);
   }
 
   sp_brim_shooters = getEntArray("brim_shooter", "targetname");
 
   foreach(shooter in sp_brim_shooters) {
-  shooter add_spawn_function(::init_hill_shooter);
+    shooter add_spawn_function(::init_hill_shooter);
   }
 
   sp_hill_machete = getEntArray("hill_machete", "targetname");
 
   foreach(machete_guy in sp_hill_machete) {
-  machete_guy add_spawn_function(::init_hill_shooter);
+    machete_guy add_spawn_function(::init_hill_shooter);
   }
 
   trigger_use("sm_hill_shooters");
@@ -769,8 +769,7 @@ savannah_hill_deform_terrain(n_topper, b_move) {
 
   if(isDefined(b_move) && b_move) {
     m_terrain.origin = m_terrain.origin + vectorscale((0, 0, -1), 50.0);
-  }
-  else {
+  } else {
     m_terrain maps\_mortar::explosion_boom("mortar_savannah");
     m_terrain delete();
   }
@@ -1191,8 +1190,7 @@ heli_strafe_check_fail() {
     case 1:
       if(1) {
         level thread kill_off_tanks("wave_one_tank", "targetname");
-      }
-      else {
+      } else {
         missionfailedwrapper(&"ANGOLA_STRAFE_FAIL");
       }
 
@@ -1417,8 +1415,7 @@ heli_strafe_run(veh_hudson_heli, nd_start, nd_end) {
   self thread heli_lingering_invincibility();
 }
 
-reset_ai_limit() {
-}
+reset_ai_limit() {}
 
 hover_at_end() {
   self waittill("reached_end_node");
@@ -1672,8 +1669,7 @@ tank_fire_target(e_target, b_scene, n_wait) {
 
   if(isDefined(n_wait) && n_wait) {
     wait(n_wait);
-  }
-  else {
+  } else {
     wait 1.5;
   }
 
@@ -1694,8 +1690,7 @@ tank_fire_position(v_target, n_wait) {
 
   if(isDefined(n_wait) && n_wait) {
     wait(n_wait);
-  }
-  else {
+  } else {
     wait 1.5;
   }
 
@@ -1960,7 +1955,7 @@ savannah_buffel_tip() {
   playFX(getfx("mortar_savannah"), self.origin);
 
   foreach(rider in self.riders) {
-  rider delete();
+    rider delete();
   }
 
   self.fire_turret = 0;
@@ -1997,8 +1992,7 @@ buffel_gunner_think(b_reach, a_fire_nodes) {
   } else if(!isDefined(a_fire_nodes)) {
     if(self.targetname == "convoy_destroy_1" || self.targetname == "convoy_destroy_2") {
       return;
-    }
-    else {
+    } else {
       level endon("stop_convoy_fire");
     }
   }
@@ -2013,8 +2007,7 @@ buffel_gunner_think(b_reach, a_fire_nodes) {
 
   if(isDefined(a_fire_nodes)) {
     a_target_pos = a_fire_nodes;
-  }
-  else {
+  } else {
     switch (self.targetname) {
       case "convoy_destroy_1":
         a_target_pos = getstructarray("right_side", "script_noteworthy");
@@ -2094,8 +2087,7 @@ init_hill_shooter(n_accuracy) {
 
   if(issubstr(self.targetname, "machete")) {
     self setthreatbiasgroup("machete_guy");
-  }
-  else {
+  } else {
     self set_goalradius(50);
     self setthreatbiasgroup("axis_shooters");
     self.script_accuracy = n_accuracy;
@@ -2106,13 +2098,13 @@ cleanup_riverbed_scenes() {
   a_soldiers = getEntArray("intro_mpla_shooter", "script_noteworthy");
 
   foreach(soldier in a_soldiers) {
-  soldier bloody_death();
+    soldier bloody_death();
   }
 
   a_soldiers = getEntArray("intro_soldier", "script_noteworthy");
 
   foreach(soldier in a_soldiers) {
-  soldier bloody_death();
+    soldier bloody_death();
   }
 
   delete_scene("level_intro_chopper", 1);
@@ -2314,8 +2306,7 @@ fire_magic_rpg(v_fire_pos, v_target_pos, b_wait_fire, b_fire_check) {
 
   if(isDefined(v_target_pos)) {
     magicbullet("rpg_sp_angola", v_fire_pos, v_target_pos);
-  }
-  else {
+  } else {
     magicbullet("rpg_sp_angola", v_fire_pos, level.player.origin);
   }
 }
@@ -2324,8 +2315,7 @@ fire_magic_rpd(v_fire_pos, v_target_pos) {
   for(x = 0; x < 20; x++) {
     if(isDefined(v_target_pos)) {
       magicbullet("rpd_sp", v_fire_pos, v_target_pos);
-    }
-    else {
+    } else {
       magicbullet("rpd_sp", v_fire_pos, level.player.origin);
     }
 
@@ -2347,7 +2337,7 @@ cleanup_hill() {
   s_mortars = getstructarray("mortar_savannah_start", "targetname");
 
   foreach(mortar in s_mortars) {
-  mortar structdelete();
+    mortar structdelete();
   }
 
   delete_struct_array("mortar_savannah_start_left", "targetname");
@@ -2466,7 +2456,7 @@ cleanup_riverbed_fail_triggers() {
   all_watch_triggers = arraycombine(fail_triggers, warn_triggers, 0, 0);
 
   foreach(trig in all_watch_triggers) {
-  trig delete();
+    trig delete();
   }
 }
 
@@ -2530,8 +2520,7 @@ mortar_guy_damage(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death
 
   if(isDefined(e_attacker) && e_attacker == level.player) {
     return n_damage;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -2912,25 +2901,25 @@ hide_savannah_rocks() {
   mortar_rocks_clips = getEntArray("mortar_rocks_clip", "targetname");
 
   foreach(clip in mortar_rocks_clips) {
-  clip delete();
+    clip delete();
   }
 
   technical_rocks_clips = getEntArray("technical_rocks_clip", "targetname");
 
   foreach(clip in technical_rocks_clips) {
-  clip delete();
+    clip delete();
   }
 
   mortar_rocks = getEntArray("mortar_rocks", "targetname");
 
   foreach(rock in mortar_rocks) {
-  rock delete();
+    rock delete();
   }
 
   technical_rocks = getEntArray("technical_rocks", "targetname");
 
   foreach(rock in technical_rocks) {
-  rock delete();
+    rock delete();
   }
 }
 

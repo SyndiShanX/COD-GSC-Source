@@ -33,8 +33,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
   if(sweapon == "none" && isDefined(einflictor)) {
     if(isDefined(einflictor.targetname) && einflictor.targetname == "explodable_barrel") {
       sweapon = "explodable_barrel_mp";
-    }
-    else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
+    } else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
       sweapon = "destructible_car_mp";
     }
   }
@@ -43,8 +42,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
     if(self isvehicleimmunetodamage(idflags, smeansofdeath, sweapon)) {
       return;
     }
-    if(smeansofdeath == "MOD_PISTOL_BULLET" || smeansofdeath == "MOD_RIFLE_BULLET") {
-    } else if(smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_GRENADE") {
+    if(smeansofdeath == "MOD_PISTOL_BULLET" || smeansofdeath == "MOD_RIFLE_BULLET") {} else if(smeansofdeath == "MOD_PROJECTILE" || smeansofdeath == "MOD_GRENADE") {
       idamage = idamage * getvehicleprojectilescalar(sweapon);
       idamage = int(idamage);
 
@@ -114,8 +112,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
 
       friendly = 1;
     } else {
-      if(!level.teambased && isDefined(self.targetname) && self.targetname == "rcbomb") {
-      } else if(isDefined(self.owner) && isDefined(eattacker) && self.owner == eattacker) {
+      if(!level.teambased && isDefined(self.targetname) && self.targetname == "rcbomb") {} else if(isDefined(self.owner) && isDefined(eattacker) && self.owner == eattacker) {
         return;
       }
       if(idamage < 1) {
@@ -128,8 +125,7 @@ callback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeath, s
 
       if(issubstr(smeansofdeath, "MOD_GRENADE") && isDefined(einflictor.iscooked)) {
         self.wascooked = gettime();
-      }
-      else {
+      } else {
         self.wascooked = undefined;
       }
 
@@ -279,35 +275,25 @@ vehiclecrush() {
 getvehicleprojectilescalar(sweapon) {
   if(sweapon == "satchel_charge_mp") {
     scale = 1;
-  }
-  else if(sweapon == "sticky_grenade_mp") {
+  } else if(sweapon == "sticky_grenade_mp") {
     scale = 1;
-  }
-  else if(sweapon == "claymore_mp") {
+  } else if(sweapon == "claymore_mp") {
     scale = 1;
-  }
-  else if(sweapon == "remote_missile_missile_mp") {
+  } else if(sweapon == "remote_missile_missile_mp") {
     scale = 10.0;
-  }
-  else if(sweapon == "remote_mortar_missile_mp") {
+  } else if(sweapon == "remote_mortar_missile_mp") {
     scale = 10.0;
-  }
-  else if(sweapon == "smaw_mp") {
+  } else if(sweapon == "smaw_mp") {
     scale = 0.2;
-  }
-  else if(sweapon == "fhj18_mp") {
+  } else if(sweapon == "fhj18_mp") {
     scale = 0.2;
-  }
-  else if(issubstr(sweapon, "gl_")) {
+  } else if(issubstr(sweapon, "gl_")) {
     scale = 1;
-  }
-  else if(issubstr(sweapon, "turret_mp")) {
+  } else if(issubstr(sweapon, "turret_mp")) {
     scale = 1;
-  }
-  else if(issubstr(sweapon, "grenade")) {
+  } else if(issubstr(sweapon, "grenade")) {
     scale = 1;
-  }
-  else {
+  } else {
     scale = 1;
   }
 
@@ -317,32 +303,23 @@ getvehicleprojectilescalar(sweapon) {
 getvehicleprojectilesplashscalar(sweapon) {
   if(sweapon == "satchel_charge_mp") {
     scale = 1;
-  }
-  else if(sweapon == "sticky_grenade_mp") {
+  } else if(sweapon == "sticky_grenade_mp") {
     scale = 1;
-  }
-  else if(sweapon == "claymore_mp") {
+  } else if(sweapon == "claymore_mp") {
     scale = 1;
-  }
-  else if(sweapon == "remote_missile_missile_mp") {
+  } else if(sweapon == "remote_missile_missile_mp") {
     scale = 10.0;
-  }
-  else if(sweapon == "remote_mortar_missile_mp") {
+  } else if(sweapon == "remote_mortar_missile_mp") {
     scale = 4.0;
-  }
-  else if(sweapon == "chopper_minigun_mp") {
+  } else if(sweapon == "chopper_minigun_mp") {
     scale = 0.5;
-  }
-  else if(issubstr(sweapon, "gl_")) {
+  } else if(issubstr(sweapon, "gl_")) {
     scale = 0.5;
-  }
-  else if(issubstr(sweapon, "turrent_mp")) {
+  } else if(issubstr(sweapon, "turrent_mp")) {
     scale = 0.1;
-  }
-  else if(issubstr(sweapon, "grenade")) {
+  } else if(issubstr(sweapon, "grenade")) {
     scale = 1;
-  }
-  else {
+  } else {
     scale = 1;
   }
 
@@ -362,14 +339,11 @@ getvehicleunderneathsplashscalar(sweapon) {
 getvehiclebulletdamage(sweapon) {
   if(issubstr(sweapon, "ptrs41_")) {
     idamage = 25;
-  }
-  else if(issubstr(sweapon, "gunner")) {
+  } else if(issubstr(sweapon, "gunner")) {
     idamage = 5;
-  }
-  else if(issubstr(sweapon, "mg42_bipod") || issubstr(sweapon, "30cal_bipod")) {
+  } else if(issubstr(sweapon, "mg42_bipod") || issubstr(sweapon, "30cal_bipod")) {
     idamage = 5;
-  }
-  else {
+  } else {
     idamage = 1;
   }
 

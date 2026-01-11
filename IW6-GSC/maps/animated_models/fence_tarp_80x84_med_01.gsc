@@ -14,8 +14,7 @@ main() {
 
   if(common_scripts\utility::issp()) {
     level.anim_prop_models[var_0]["wind"] = % fence_tarp_80x84_med_01;
-  }
-  else {
+  } else {
     level.anim_prop_models[var_0]["wind"] = "fence_tarp_80x84_med_01";
   }
 }

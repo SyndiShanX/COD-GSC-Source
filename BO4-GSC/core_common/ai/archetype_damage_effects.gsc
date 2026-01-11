@@ -6,7 +6,6 @@
 #include scripts\core_common\ai\archetype_damage_utility;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
-
 #namespace archetype_damage_effects;
 
 autoexec main() {

@@ -28,20 +28,15 @@ bot_get_nodes_in_cone(var_0, var_1, var_2, var_3) {
 bot_goal_can_override(var_0, var_1) {
   if(var_0 == "none") {
     return var_1 == "none";
-  }
-  else if(var_0 == "hunt") {
+  } else if(var_0 == "hunt") {
     return var_1 == "hunt" || var_1 == "none";
-  }
-  else if(var_0 == "guard") {
+  } else if(var_0 == "guard") {
     return var_1 == "guard" || var_1 == "hunt" || var_1 == "none";
-  }
-  else if(var_0 == "objective") {
+  } else if(var_0 == "objective") {
     return var_1 == "objective" || var_1 == "guard" || var_1 == "hunt" || var_1 == "none";
-  }
-  else if(var_0 == "critical") {
+  } else if(var_0 == "critical") {
     return var_1 == "critical" || var_1 == "objective" || var_1 == "guard" || var_1 == "hunt" || var_1 == "none";
-  }
-  else if(var_0 == "tactical") {
+  } else if(var_0 == "tactical") {
     return 1;
   }
 }
@@ -121,14 +116,11 @@ bot_choose_difficulty_for_default() {
 get_difficulty_for_difficulty_type(var_0) {
   if(var_0 == "easy") {
     return "recruit";
-  }
-  else if(var_0 == "normal") {
+  } else if(var_0 == "normal") {
     return "regular";
-  }
-  else if(var_0 == "hard") {
+  } else if(var_0 == "hard") {
     return common_scripts\utility::random(["hardened", "veteran"]);
-  }
-  else {}
+  } else {}
 }
 
 bot_is_capturing() {
@@ -200,11 +192,9 @@ entrance_visible_from(var_0, var_1, var_2) {
 
   if(var_2 == "stand") {
     return 1;
-  }
-  else if(var_2 == "crouch") {
+  } else if(var_2 == "crouch") {
     var_5 = var_4;
-  }
-  else if(var_2 == "prone") {
+  } else if(var_2 == "prone") {
     var_5 = var_3;
   }
 
@@ -318,8 +308,7 @@ bot_waittill_out_of_combat_or_time(var_0) {
 
     if(!isDefined(self.enemy)) {
       return;
-    }
-    else if(!bot_in_combat()) {
+    } else if(!bot_in_combat()) {
       return;
     }
     wait 0.05;
@@ -356,8 +345,7 @@ bot_waittill_goal_or_fail(var_0, var_1, var_2) {
 
   if(isDefined(var_0)) {
     var_4 = common_scripts\utility::waittill_any_in_array_or_timeout(var_3, var_0);
-  }
-  else {
+  } else {
     var_4 = common_scripts\utility::waittill_any_in_array_return(var_3);
   }
 
@@ -429,15 +417,13 @@ bot_get_entrances_for_stance_and_index(var_0, var_1, var_2) {
 
   if(isDefined(self.defense_override_entrances)) {
     var_11 = self.defense_override_entrances;
-  }
-  else {
+  } else {
     var_11 = level.entrance_points[var_1];
   }
 
   if(!isDefined(var_0) || var_0 == "stand") {
     return var_11;
-  }
-  else if(var_0 == "crouch") {
+  } else if(var_0 == "crouch") {
     var_12 = [];
 
     foreach(var_14 in var_11) {
@@ -638,8 +624,7 @@ bot_find_random_midpoint(var_0, var_1) {
 defend_valid_center() {
   if(isDefined(self.bot_defending_override_origin_node)) {
     return self.bot_defending_override_origin_node.origin;
-  }
-  else if(isDefined(self.bot_defending_center)) {
+  } else if(isDefined(self.bot_defending_center)) {
     return self.bot_defending_center;
   }
 
@@ -758,8 +743,7 @@ bot_get_total_gun_ammo() {
 
   if(isDefined(self.weaponlist) && self.weaponlist.size > 0) {
     var_1 = self.weaponlist;
-  }
-  else {
+  } else {
     var_1 = self getweaponslistprimaries();
   }
 
@@ -776,8 +760,7 @@ bot_out_of_ammo() {
 
   if(isDefined(self.weaponlist) && self.weaponlist.size > 0) {
     var_0 = self.weaponlist;
-  }
-  else {
+  } else {
     var_0 = self getweaponslistprimaries();
   }
 
@@ -799,7 +782,7 @@ bot_get_grenade_ammo() {
   var_1 = self getweaponslistoffhands();
 
   foreach(var_3 in var_1) {
-  var_0 = var_0 + self getweaponammostock(var_3);
+    var_0 = var_0 + self getweaponammostock(var_3);
   }
 
   return var_0;
@@ -901,7 +884,7 @@ bot_watch_nodes(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   self.watch_nodes = common_scripts\utility::array_randomize(self.watch_nodes);
 
   foreach(var_13 in self.watch_nodes) {
-  var_13.watch_node_chance[self.entity_number] = 1.0;
+    var_13.watch_node_chance[self.entity_number] = 1.0;
   }
 
   var_20 = gettime();
@@ -1026,7 +1009,7 @@ watch_nodes_stop() {
 
   if(isDefined(self.watch_nodes)) {
     foreach(var_1 in self.watch_nodes) {
-    var_1.watch_node_chance[self.entity_number] = undefined;
+      var_1.watch_node_chance[self.entity_number] = undefined;
     }
   }
 
@@ -1128,11 +1111,9 @@ bot_add_to_bot_level_targets(var_0) {
 
   if(var_0.bot_interaction_type == "use") {
     bot_add_to_bot_use_targets(var_0);
-  }
-  else if(var_0.bot_interaction_type == "damage") {
+  } else if(var_0.bot_interaction_type == "damage") {
     bot_add_to_bot_damage_targets(var_0);
-  }
-  else {}
+  } else {}
 }
 
 bot_remove_from_bot_level_targets(var_0) {
@@ -1266,17 +1247,13 @@ bot_queued_process_level_thread() {
 
         if(isDefined(var_0.parm4)) {
           var_1 = var_0.owner[[var_0.func]](var_0.parm1, var_0.parm2, var_0.parm3, var_0.parm4);
-        }
-        else if(isDefined(var_0.parm3)) {
+        } else if(isDefined(var_0.parm3)) {
           var_1 = var_0.owner[[var_0.func]](var_0.parm1, var_0.parm2, var_0.parm3);
-        }
-        else if(isDefined(var_0.parm2)) {
+        } else if(isDefined(var_0.parm2)) {
           var_1 = var_0.owner[[var_0.func]](var_0.parm1, var_0.parm2);
-        }
-        else if(isDefined(var_0.parm1)) {
+        } else if(isDefined(var_0.parm1)) {
           var_1 = var_0.owner[[var_0.func]](var_0.parm1);
-        }
-        else {
+        } else {
           var_1 = var_0.owner[[var_0.func]]();
         }
 
@@ -1337,8 +1314,7 @@ bot_get_low_on_ammo(var_0) {
 
   if(isDefined(self.weaponlist) && self.weaponlist.size > 0) {
     var_1 = self.weaponlist;
-  }
-  else {
+  } else {
     var_1 = self getweaponslistprimaries();
   }
 

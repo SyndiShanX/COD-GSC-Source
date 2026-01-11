@@ -23,7 +23,6 @@
 #include scripts\mp_common\player\player_damage;
 #include scripts\wz_common\wz_ai_utils;
 #include scripts\wz_common\wz_ai_zombie;
-
 #namespace wz_ai_zombie_dog;
 
 autoexec __init__system__() {
@@ -42,9 +41,9 @@ private function_cef412a7(einflictor, eattacker, idamage, idflags, smeansofdeath
     idamage = self.health + 1;
   }
 
-    if(isplayer(eattacker) && eattacker infection::is_infected()) {
-      return 0;
-    }
+  if(isplayer(eattacker) && eattacker infection::is_infected()) {
+    return 0;
+  }
 
   if(isDefined(eattacker) && !util::function_fbce7263(self.team, eattacker.team)) {
     return 0;
@@ -105,7 +104,7 @@ function_b9d56970() {
 
 function_8e13b81e() {
   self.var_2cee3556 = [];
-  self.var_2cee3556[#"hellhound_base_itemlist_all"] = 1;
+  self.var_2cee3556[# "hellhound_base_itemlist_all"] = 1;
 }
 
 private function_8f5f431c(entity) {}
@@ -204,9 +203,9 @@ bb_getshouldrunstatus() {
     return "<dev string:x38>";
   }
 
-    if(isDefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy || ai::hasaiattribute(self, "sprint") && ai::getaiattribute(self, "sprint") || getdvarint(#"survival_prototype", 0) && isDefined(self.current_state) && self.current_state.name === #"chase") {
-      return "run";
-    }
+  if(isDefined(self.hasseenfavoriteenemy) && self.hasseenfavoriteenemy || ai::hasaiattribute(self, "sprint") && ai::getaiattribute(self, "sprint") || getdvarint(#"survival_prototype", 0) && isDefined(self.current_state) && self.current_state.name === # "chase") {
+    return "run";
+  }
 
   return "walk";
 }

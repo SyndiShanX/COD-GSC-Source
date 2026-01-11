@@ -9,7 +9,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace zm_fasttravel;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ __init__() {
 
 init_clientfields() {
   clientfield::register("world", "fasttravel_exploder", 1, 1, "int", &fasttravel_exploder, 0, 0);
-  clientfield::register("scriptmover", "" + #"wormhole_fx", 1, 2, "int", &wormhole_fx, 0, 0);
+  clientfield::register("scriptmover", "" + # "wormhole_fx", 1, 2, "int", &wormhole_fx, 0, 0);
   clientfield::register("toplayer", "player_stargate_fx", 1, 1, "int", &player_stargate_fx, 0, 1);
   clientfield::register("toplayer", "player_chaos_light_rail_fx", 1, 1, "int", &player_chaos_light_rail_fx, 0, 1);
   clientfield::register("toplayer", "fasttravel_teleport_sfx", 1, 1, "int", &fasttravel_teleport_sfx, 0, 0);
@@ -33,13 +32,13 @@ init_clientfields() {
 }
 
 init_fx() {
-  level._effect[#"fasttravel_start"] = #"hash_2f54a4439f3a1dbf";
-  level._effect[#"fasttravel_end"] = #"hash_4ab05aa1282b9bb7";
-  level._effect[#"fasttravel_rail_1p"] = #"hash_259bb7806d596ed3";
-  level._effect[#"fasttravel_break_1p"] = #"hash_37257517a8fd29e";
-  level._effect[#"fasttravel_rail_3p"] = #"hash_809f6b4b699e4df";
-  level._effect[#"fasttravel_break_3p"] = #"hash_13715b19c0c0e890";
-  level._effect[#"fasttravel_rail_travel"] = #"hash_3659a06ed75f940a";
+  level._effect[# "fasttravel_start"] = # "hash_2f54a4439f3a1dbf";
+  level._effect[# "fasttravel_end"] = # "hash_4ab05aa1282b9bb7";
+  level._effect[# "fasttravel_rail_1p"] = # "hash_259bb7806d596ed3";
+  level._effect[# "fasttravel_break_1p"] = # "hash_37257517a8fd29e";
+  level._effect[# "fasttravel_rail_3p"] = # "hash_809f6b4b699e4df";
+  level._effect[# "fasttravel_break_3p"] = # "hash_13715b19c0c0e890";
+  level._effect[# "fasttravel_rail_travel"] = # "hash_3659a06ed75f940a";
 }
 
 fasttravel_exploder(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -128,7 +127,7 @@ fasttravel_teleport_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
   if(newval) {
     if(!isDefined(self.fasttravel_teleport_sfx)) {
-      self playSound(localclientnum, #"hash_695df080bafaf6b7");
+      self playSound(localclientnum, # "hash_695df080bafaf6b7");
       self.fasttravel_teleport_sfx = self playLoopSound(#"hash_337255a64f96457b");
     }
 
@@ -136,7 +135,7 @@ fasttravel_teleport_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, f
   }
 
   if(isDefined(self.fasttravel_teleport_sfx)) {
-    self playSound(localclientnum, #"hash_32def2a5219ba9ee");
+    self playSound(localclientnum, # "hash_32def2a5219ba9ee");
     self stoploopsound(self.fasttravel_teleport_sfx);
     self.fasttravel_teleport_sfx = undefined;
   }
@@ -144,7 +143,7 @@ fasttravel_teleport_sfx(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
 fasttravel_start_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   level endon(#"end_game");
-  self endon(#"bled_out", #"disconnect");
+  self endon(#"bled_out", # "disconnect");
 
   if(self != function_5c10bd79(localclientnum)) {
     if(newval == 1) {
@@ -158,7 +157,7 @@ fasttravel_start_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
       v_angles = vectortoangles(var_4d611aa2.origin - self.origin);
       mdl_fx = util::spawn_model(localclientnum, "tag_origin", self.origin, v_angles);
       waitframe(1);
-      util::playFXOnTag(localclientnum, level._effect[#"fasttravel_start"], mdl_fx, "tag_origin");
+      util::playFXOnTag(localclientnum, level._effect[# "fasttravel_start"], mdl_fx, "tag_origin");
       wait 1.5;
       mdl_fx delete();
     }
@@ -173,7 +172,7 @@ fasttravel_end_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 play_fasttravel_end_fx(localclientnum, var_b8763ebc = "fasttravel_end") {
   level endon(#"end_game");
-  self endon(#"bled_out", #"disconnect");
+  self endon(#"bled_out", # "disconnect");
 
   if(self != function_5c10bd79(localclientnum)) {
     v_angles = combineangles(self.angles, (-90, 0, 0));
@@ -188,7 +187,7 @@ play_fasttravel_end_fx(localclientnum, var_b8763ebc = "fasttravel_end") {
 fasttravel_rail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval == 1) {
     if(!isDefined(self.sfx_fasttravel)) {
-      self playSound(localclientnum, #"hash_7204b092c976136b");
+      self playSound(localclientnum, # "hash_7204b092c976136b");
       self.sfx_fasttravel = self playLoopSound(#"hash_33b6a998603c309d");
     }
 
@@ -211,7 +210,7 @@ fasttravel_rail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
   if(newval == 2) {
     if(!isDefined(self.sfx_fasttravel)) {
-      self playSound(localclientnum, #"hash_7f171ce50ab41fb8");
+      self playSound(localclientnum, # "hash_7f171ce50ab41fb8");
       self.sfx_fasttravel = self playLoopSound(#"hash_59921813746566c8");
     }
 
@@ -236,7 +235,7 @@ fasttravel_rail_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
   if(newval == 0) {
     if(isDefined(self.sfx_fasttravel)) {
-      self playSound(localclientnum, #"hash_588047eba8deb34e");
+      self playSound(localclientnum, # "hash_588047eba8deb34e");
       self stoploopsound(self.sfx_fasttravel);
       self.sfx_fasttravel = undefined;
     }

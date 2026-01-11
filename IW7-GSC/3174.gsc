@@ -353,9 +353,7 @@ func_D4F0(param_00, param_01, param_02) {
 }
 
 func_3E9D(param_00, param_01, param_02) {
-  return [
-    [self.var_7193]
-  ](param_01, "pain");
+  return [[self.var_7193]](param_01, "pain");
 }
 
 func_3EEE(param_00, param_01, param_02) {

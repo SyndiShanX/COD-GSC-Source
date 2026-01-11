@@ -219,7 +219,7 @@ main() {
 
   destroyable_trees = getEntArray("trigger_tree_explosion", "targetname");
   foreach(trigger in destroyable_trees) {
-  trigger thread setup_destroyable_tree();
+    trigger thread setup_destroyable_tree();
   }
 
   //tree_destruction_chain = getstruct( "tree_destruction_chain", "targetname" );
@@ -398,7 +398,7 @@ start_defend_sub() {
 
   friendlies = getaiarray("allies");
   foreach(g in friendlies) {
-  g thread turn_off_stealth_settings();
+    g thread turn_off_stealth_settings();
   }
 
   thread spawn_second_uav();
@@ -796,8 +796,7 @@ first_uav_sequence() {
     foreach(mf in enemies) {
       if(distance(mf.origin, level.player.origin) > 2300) {
         mf delete();
-      }
-      else {
+      } else {
         mf thread setup_stealth_enemy_cleanup();
       }
     }
@@ -918,7 +917,7 @@ handle_ridge() {
 
   first_villagers = getEntArray("first_villagers", "targetname");
   foreach(guy in first_villagers) {
-  guy spawn_ai();
+    guy spawn_ai();
   }
 
   //must kill stealth before base
@@ -966,7 +965,7 @@ handle_ridge() {
 
   village_defenders = getEntArray("village_defenders", "targetname");
   foreach(guy in village_defenders) {
-  guy spawn_ai();
+    guy spawn_ai();
   }
 
   //add_wait( ::flag_wait, "second_uav_in_position" );
@@ -1015,7 +1014,7 @@ handle_base() {
   retreat_pos = getstruct("village_enemies_retreat_pos", "targetname").origin;
   enemies = getaiarray("axis");
   foreach(mf in enemies) {
-  mf thread village_enemies_setup_retreat(retreat_pos);
+    mf thread village_enemies_setup_retreat(retreat_pos);
   }
 
   //spawn stuff thats unaware:
@@ -1053,7 +1052,7 @@ handle_base() {
 
   friendlies = getaiarray("allies");
   foreach(g in friendlies) {
-  g thread turn_off_stealth_settings();
+    g thread turn_off_stealth_settings();
   }
 
   if(isalive(level.base_btr2)) {
@@ -1141,7 +1140,7 @@ handle_defend_sub() {
   flee_pos = getstruct("sub_obj_enemies_flee", "targetname").origin;
   enemies = getaiarray("axis");
   foreach(guy in enemies) {
-  guy thread enemies_flee(flee_pos);
+    guy thread enemies_flee(flee_pos);
   }
 
   stinger_source = getent("defend_sub_stinger_source", "targetname");
@@ -1158,7 +1157,7 @@ handle_defend_sub() {
 
   defend_sub_final_guys = getEntArray("defend_sub_final_guys", "targetname");
   foreach(guy in defend_sub_final_guys) {
-  guy spawn_ai();
+    guy spawn_ai();
   }
 
   wait 5;
@@ -1189,7 +1188,7 @@ handle_defend_sub() {
 
   ai = getaiarray();
   foreach(guy in ai) {
-  guy.dontevershoot = true;
+    guy.dontevershoot = true;
   }
 
   //Price, are you there? The silo doors are opening on the sub, I repeat, the silo doors are opening on the sub!	
@@ -1687,7 +1686,7 @@ spawn_ghosts_team() {
 
   other_guys = getEntArray("village_redshirt", "script_noteworthy");
   foreach(guy in other_guys) {
-  guy spawn_ai();
+    guy spawn_ai();
   }
 }
 
@@ -1885,8 +1884,7 @@ open_sub_missile_door_action(open_time, shake_time) {
   door = self;
   if(door.script_noteworthy == "left") {
     door rotateroll(-60, open_time, .2);
-  }
-  else {
+  } else {
     door rotateroll(60, open_time, .2);
   }
 
@@ -1906,7 +1904,7 @@ dialog_looking_for_us() {
   flag_wait("first_patrol_cqb");
   first_patrol_cqb = getEntArray("first_patrol_cqb", "targetname");
   foreach(guy in first_patrol_cqb) {
-  guy spawn_ai();
+    guy spawn_ai();
   }
 
   wait 6;
@@ -2190,24 +2188,23 @@ base_alarm_sound() {
   base_pa = getent("base_pa", "targetname");
   base_alarm_sound = getent("base_alarm_sound", "targetname");
   while(!flag("price_splits_off")) {
-    while(1) {
-  }
-      base_alarm_sound playLoopSound("emt_alarm_base_alert");
-      base_alarm_sound.playing = true;
-      wait 8;
-      base_alarm_sound StopLoopSound();
-      base_alarm_sound.playing = undefined;
+    while(1) {}
+    base_alarm_sound playLoopSound("emt_alarm_base_alert");
+    base_alarm_sound.playing = true;
+    wait 8;
+    base_alarm_sound StopLoopSound();
+    base_alarm_sound.playing = undefined;
 
-      wait 1;
+    wait 1;
 
-      base_pa playSound(dialog[current]);
-      current++;
-      if(current >= dialog.size) {
-        current = 0;
-      }
-
-      wait 12;
+    base_pa playSound(dialog[current]);
+    current++;
+    if(current >= dialog.size) {
+      current = 0;
     }
+
+    wait 12;
+  }
   if(isDefined(base_alarm_sound.playing)) {
     base_alarm_sound StopLoopSound();
   }
@@ -2236,8 +2233,7 @@ dialog_destroyed_vehicle(dialog) {
 
   if(!isDefined(level.vehicles_killed)) {
     level.vehicles_killed = 1;
-  }
-  else {
+  } else {
     level.vehicles_killed++;
   }
 
@@ -2255,8 +2251,7 @@ setup_count_predator_infantry_kills() {
 
   if(!isDefined(level.enemies_killed)) {
     level.enemies_killed = 1;
-  }
-  else {
+  } else {
     level.enemies_killed++;
   }
 }
@@ -2793,8 +2788,7 @@ flag_when_all_bridge_guys_dead() {
 should_break_dont_leave() {
   if(flag("player_returning_to_map")) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2937,9 +2931,9 @@ spawn_second_uav() {
   weapList = level.player GetWeaponsListAll();
   has_remote = false;
   foreach(weap in weapList) {
-  if(weap == "remote_missile_detonator")
+    if(weap == "remote_missile_detonator")
   }
-    has_remote = true;
+  has_remote = true;
 
   if(!has_remote) {
     level.player giveWeapon("remote_missile_detonator");
@@ -3459,15 +3453,15 @@ setup_destroyable_tree() {
   /*
   shake_time = .2;
   destroyed_top rotatepitch( 3, shake_time, shake_time, 0);
-	
+  	
   wait shake_time;
-	
+  	
   destroyed_top rotatepitch( -2, shake_time, shake_time, 0);
-	
+  	
   wait shake_time;
-	
+  	
   destroyed_top rotatepitch( 1, shake_time, shake_time, 0);
-	
+  	
   wait shake_time;
   */
 }
@@ -3691,8 +3685,7 @@ monitor_stealth_kills() {
   if((level.price == killer) && (!isDefined(self.no_price_kill_callout))) {
     if(self.type == "dog") {
       level notify("dialog_price_kill_dog");
-    }
-    else {
+    } else {
       level notify("dialog_price_kill");
     }
   }
@@ -4837,7 +4830,7 @@ cargo_choppers2() {
   foreach(spawner in cargo_heli_spawners) {
     Cargo_item_spawners = getEntArray(spawner.script_noteworthy, "targetname");
     foreach(ent in cargo_item_spawners) {
-    ent Hide();
+      ent Hide();
     }
     spawner.cargo_item_spawners = cargo_item_spawners;
   }
@@ -4872,7 +4865,7 @@ cargo_choppers() {
   foreach(spawner in cargo_heli_spawners) {
     Cargo_item_spawners = getEntArray(spawner.script_noteworthy, "targetname");
     foreach(ent in cargo_item_spawners) {
-    ent Hide();
+      ent Hide();
     }
     spawner.cargo_item_spawners = cargo_item_spawners;
   }
@@ -4920,7 +4913,7 @@ spawn_cargo_chopper(cargo_heli_spawner) {
   cargo_heli waittill("death");
 
   foreach(ent in new_cargo) {
-  ent Delete();
+    ent Delete();
   }
 }
 
@@ -5337,8 +5330,7 @@ stealth_bridge_area() {
       //self thread flashlight_when_alerted();
       if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "truck_guys")) {
         self set_threatbias_group("truck_guys");
-      }
-      else {
+      } else {
         self set_threatbias_group("bridge_stealth_guys");
       }
 
@@ -6126,7 +6118,7 @@ base_truck_guys_think() {
   awareness_array["doFlashBanged"] = ::truck_guys_no_enemy_reaction_behavior;
 
   foreach(key, value in awareness_array) {
-  self maps\_stealth_event_enemy::stealth_event_mod(key, value);
+    self maps\_stealth_event_enemy::stealth_event_mod(key, value);
   }
 
   self ent_flag_set("_stealth_behavior_reaction_anim");
@@ -6232,8 +6224,7 @@ truck_guys_reaction_behavior(type) {
   spotted_flag = self group_get_flagname("_stealth_spotted");
   if(flag(spotted_flag)) {
     self flag_waitopen(spotted_flag);
-  }
-  else {
+  } else {
     self waittill("normal");
   }
 }
@@ -6270,8 +6261,7 @@ truck_guys_no_enemy_reaction_behavior(type) {
   spotted_flag = self group_get_flagname("_stealth_spotted");
   if(flag(spotted_flag)) {
     self flag_waitopen(spotted_flag);
-  }
-  else {
+  } else {
     self waittill("normal");
   }
 }
@@ -6293,8 +6283,7 @@ setObjectiveWaypoint(objName, text) {
   objective = level.objectives[objName];
   if(isDefined(text)) {
     Objective_SetPointerTextOverride(objective.id, text);
-  }
-  else {
+  } else {
     Objective_SetPointerTextOverride(objective.id);
   }
 }
@@ -6374,8 +6363,7 @@ setObjectiveRemaining(objName, objString, objRemaining) {
 
   if(!objRemaining) {
     objective_string(objective.id, objString);
-  }
-  else {
+  } else {
     objective_string(objective.id, objString, objRemaining);
   }
 }
@@ -6527,8 +6515,7 @@ base_autosave_logic() {
     println("time left " + time_left);
     if(time_left < 90) {
       save = false;
-    }
-    else {
+    } else {
       save = true;
     }
   }
@@ -6545,8 +6532,7 @@ base_autosave_logic() {
     println("time left " + time_left);
     if(time_left < 80) {
       save = false;
-    }
-    else {
+    } else {
       save = true;
     }
   }
@@ -6563,8 +6549,7 @@ base_autosave_logic() {
     println("time left " + time_left);
     if(time_left < 40) {
       save = false;
-    }
-    else {
+    } else {
       save = true;
     }
   }

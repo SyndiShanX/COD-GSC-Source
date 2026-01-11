@@ -12,8 +12,7 @@ init() {
 
   if(level.onlinegame || level.systemlink) {
     precachestring(&"GAME_HOST_ENDED_GAME");
-  }
-  else {
+  } else {
     precachestring(&"GAME_ENDED_GAME");
   }
 
@@ -37,8 +36,7 @@ forceend() {
 
   if(level.onlinegame || level.systemlink) {
     endstring = &"GAME_HOST_ENDED_GAME";
-  }
-  else {
+  } else {
     endstring = "";
   }
 

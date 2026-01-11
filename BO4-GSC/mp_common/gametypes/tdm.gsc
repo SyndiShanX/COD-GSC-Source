@@ -22,7 +22,6 @@
 #include scripts\mp_common\gametypes\spawning;
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
-
 #namespace tdm;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -200,7 +199,7 @@ function_e596b745(var_c1e98979) {
 }
 
 function_f9df98d3(type, value) {
-  if(type === #"ekia") {
+  if(type === # "ekia") {
     return (value + level.var_49a15413);
   }
 

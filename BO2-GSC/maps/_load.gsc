@@ -107,8 +107,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
 
   if(!isDefined(bscriptgened)) {
     bscriptgened = 0;
-  }
-  else {
+  } else {
     bscriptgened = 1;
   }
 
@@ -191,8 +190,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
 
   if(!isDefined(level.flag)) {
     level.flag = [];
-  }
-  else {
+  } else {
     flags = getarraykeys(level.flag);
     level array_ent_thread(flags, ::check_flag_for_stat_tracking);
   }
@@ -356,8 +354,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
   if(getdvar(#"g_gametype") != "vs") {
     if(isDefined(level.skill_override)) {
       maps\_gameskill::setskill(undefined, level.skill_override);
-    }
-    else {
+    } else {
       maps\_gameskill::setskill();
     }
   }
@@ -732,7 +729,7 @@ delete_bounce_light_brushes() {
   a_m_lights = getEntArray("bounce_light_brush", "targetname");
 
   foreach(m_light in a_m_lights) {
-  m_light delete();
+    m_light delete();
   }
 }
 

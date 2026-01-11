@@ -210,8 +210,7 @@ func_7DC9(var_00, var_01, var_02) {
 
     if(vectordot(var_10, var_00) < 0) {
       var_07 = 0;
-    }
-    else if(var_05 > 0) {
+    } else if(var_05 > 0) {
       var_07 = var_03 / var_05;
     }
   } else if(var_05 > 0)
@@ -330,11 +329,9 @@ func_7DBD(var_00) {
 func_F2B1(var_00, var_01, var_02) {
   if(isDefined(var_02)) {
     self setanimstate(var_00, var_01, var_02);
-  }
-  else if(isDefined(var_01)) {
+  } else if(isDefined(var_01)) {
     self setanimstate(var_00, var_01);
-  }
-  else {
+  } else {
     self setanimstate(var_00);
   }
 }
@@ -374,8 +371,7 @@ func_CED3(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(isDefined(var_00)) {
     if(isDefined(var_01)) {
       var_06 = getanimlength(self getanimentry(var_00, var_01));
-    }
-    else {
+    } else {
       var_06 = getanimlength(self getanimentry(var_00, 0));
     }
 
@@ -394,8 +390,7 @@ func_C0E0(var_00, var_01, var_02) {
 
   if(isDefined(var_02)) {
     self notify(var_00, var_02);
-  }
-  else {
+  } else {
     self notify(var_00, "end");
   }
 }
@@ -454,14 +449,12 @@ func_5AC2(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if(var_25 < 1) {
     var_26 = 1;
-  }
-  else {
+  } else {
     var_27 = var_22 - var_25;
 
     if(var_09 <= var_27) {
       var_26 = (var_27 - var_09) / var_25;
-    }
-    else {
+    } else {
       var_26 = (var_09 - var_27) / var_25;
     }
   }

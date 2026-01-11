@@ -46,11 +46,9 @@ useAlien(spawn_point, number_of_aliens) {
 
     if(i == 0) {
       PathNodeArray = getstructarray("seeker_path_01", "script_noteworthy");
-    }
-    else if(i == 1) {
+    } else if(i == 1) {
       PathNodeArray = getstructarray("seeker_path_02", "script_noteworthy");
-    }
-    else {
+    } else {
       PathNodeArray = getstructarray("seeker_path_03", "script_noteworthy");
     }
 

@@ -73,8 +73,7 @@ onstartgametype() {
 
     if(level.splitscreen) {
       setobjectivescoretext(team, &"OBJECTIVES_TDM");
-    }
-    else {
+    } else {
       setobjectivescoretext(team, &"OBJECTIVES_TDM_SCORE");
     }
 
@@ -87,7 +86,7 @@ onstartgametype() {
   level.spawn_start = [];
 
   foreach(team in level.teams) {
-  level.spawn_start[team] = maps\mp\gametypes\_spawnlogic::getspawnpointarray(maps\mp\gametypes\_spawning::gettdmstartspawnname(team));
+    level.spawn_start[team] = maps\mp\gametypes\_spawnlogic::getspawnpointarray(maps\mp\gametypes\_spawning::gettdmstartspawnname(team));
   }
 
   level.mapcenter = maps\mp\gametypes\_spawnlogic::findboxcenter(level.spawnmins, level.spawnmaxs);
@@ -185,8 +184,7 @@ onspawnplayer(predictedspawn, question) {
 
   if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "tdm");
   }
 

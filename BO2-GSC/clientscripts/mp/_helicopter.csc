@@ -42,8 +42,7 @@ heli_gunner_vtol_state(localclientnum) {
 
     if(speed > 0) {
       anim_time = anim_time - speed / 1200 * 0.5;
-    }
-    else {
+    } else {
       anim_time = anim_time + speed * -1 / 1200 * 0.5;
     }
 
@@ -74,8 +73,7 @@ supplydrop_care_package_state(localclientnum, oldval, newval, bnewent, binitials
 
   if(newval == 1) {
     self setanim( % o_drone_supply_care_idle, 1.0, 0.0, 1.0);
-  }
-  else {
+  } else {
     self setanim( % o_drone_supply_care_drop, 1.0, 0.0, 0.3);
   }
 }
@@ -87,8 +85,7 @@ supplydrop_ai_tank_state(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
   if(newval == 1) {
     self setanim( % o_drone_supply_agr_idle, 1.0, 0.0, 1.0);
-  }
-  else {
+  } else {
     self setanim( % o_drone_supply_agr_drop, 1.0, 0.0, 0.3);
   }
 }
@@ -198,8 +195,7 @@ startfx(localclientnum) {
     if(isDefined(light_fx)) {
       if(self friendnotfoe(localclientnum)) {
         self.lightfxid = playFXOnTag(localclientnum, level._effect[light_fx]["friendly"], self, "tag_origin");
-      }
-      else {
+      } else {
         self.lightfxid = playFXOnTag(localclientnum, level._effect[light_fx]["enemy"], self, "tag_origin");
       }
     }

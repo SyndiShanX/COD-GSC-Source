@@ -53,8 +53,7 @@ main() {
 
   if(getgametypesetting("allowMapScripting")) {
     currentdistanceforcar = 0;
-  }
-  else {
+  } else {
     currentdistanceforcar = distancebetweencars * 0.8;
   }
 
@@ -74,12 +73,10 @@ main() {
 
     if(cablecar.nextnodeindex >= level.cablecartrack.size - 1) {
       grip.angles = vectortoangles(level.cablecartrack[cablecar.nextnodeindex - 1].origin - level.cablecartrack[cablecar.nextnodeindex].origin);
-    }
-    else {
+    } else {
       if(is_true(level.cablecartrack[cablecar.nextnodeindex].pause)) {
         carnode = level.cablecartrack[cablecar.nextnodeindex + 2];
-      }
-      else {
+      } else {
         carnode = level.cablecartrack[cablecar.nextnodeindex];
       }
 
@@ -222,8 +219,7 @@ createcablecarpath(cablecar) {
         cablecarnodestruct.rotate = 1;
       else if(currentnode.script_noteworthy == "forceorigin") {
         cablecarnodestruct.forceorigin = 1;
-      }
-      else {
+      } else {
         if(isDefined(level.gondolasounds[currentnode.script_noteworthy])) {
           cablecarnodestruct.playsound = level.gondolasounds[currentnode.script_noteworthy];
         }
@@ -330,8 +326,7 @@ cablecarrun(cablecar) {
 
         if(cablecar.angles[1] > 360) {
           cablecar.angles = cablecar.angles - vectorscale((0, 1, 0), 180.0);
-        }
-        else {
+        } else {
           cablecar.angles = cablecar.angles + vectorscale((0, 1, 0), 180.0);
         }
       }
@@ -470,7 +465,7 @@ cablecar_ai_watch() {
         node = self.nodes[i];
 
         foreach(team in level.teams) {
-        node setdangerous(team, 0);
+          node setdangerous(team, 0);
         }
       }
     }
@@ -483,7 +478,7 @@ cablecar_ai_watch() {
       node = nodes[i];
 
       foreach(team in level.teams) {
-      node setdangerous(team, 1);
+        node setdangerous(team, 1);
       }
     }
 

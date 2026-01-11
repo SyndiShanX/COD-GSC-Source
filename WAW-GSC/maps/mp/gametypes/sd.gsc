@@ -128,14 +128,12 @@ getBetterTeam() {
   }
   if(kills["allies"] > kills["axis"]) {
     return "allies";
-  }
-  else if(kills["axis"] > kills["allies"]) {
+  } else if(kills["axis"] > kills["allies"]) {
     return "axis";
   }
   if(deaths["allies"] < deaths["axis"]) {
     return "allies";
-  }
-  else if(deaths["axis"] < deaths["allies"]) {
+  } else if(deaths["axis"] < deaths["allies"]) {
     return "axis";
   }
   if(randomint(2) == 0) {
@@ -224,8 +222,7 @@ onSpawnPlayer() {
   self.isBombCarrier = false;
   if(self.pers["team"] == game["attackers"]) {
     spawnPointName = "mp_sd_spawn_attacker";
-  }
-  else {
+  } else {
     spawnPointName = "mp_sd_spawn_defender";
   }
   if(level.multiBomb && !isDefined(self.carryIcon) && self.pers["team"] == game["attackers"] && !level.bombPlanted) {
@@ -283,8 +280,7 @@ onDeadEvent(team) {
   if(team == "all") {
     if(level.bombPlanted) {
       sd_endGame(game["attackers"], game["strings"][game["defenders"] + "_eliminated"]);
-    }
-    else {
+    } else {
       sd_endGame(game["defenders"], game["strings"][game["attackers"] + "_eliminated"]);
     }
   } else if(team == game["attackers"]) {
@@ -307,8 +303,7 @@ onOneLeftEvent(team) {
 onTimeLimit() {
   if(level.teamBased) {
     sd_endGame(game["defenders"], game["strings"]["time_limit_reached"]);
-  }
-  else {
+  } else {
     sd_endGame(undefined, game["strings"]["time_limit_reached"]);
   }
 }
@@ -344,8 +339,7 @@ giveLastAttackerWarning() {
   while(1) {
     if(self.health != self.maxhealth) {
       fullHealthTime = 0;
-    }
-    else {
+    } else {
       fullHealthTime += interval;
     }
     wait interval;
@@ -538,8 +532,7 @@ onDrop(player) {
     }
     if(isDefined(player)) {
       player logString("bomb dropped");
-    }
-    else {
+    } else {
       logString("bomb dropped");
     }
   }
@@ -624,8 +617,7 @@ bombPlanted(destroyedObj, player) {
   level.sdBombModel hide();
   if(isDefined(player)) {
     destroyedObj.visuals[0] radiusDamage(explosionOrigin, 512, 200, 20, player, "MOD_EXPLOSIVE", "briefcase_bomb_mp");
-  }
-  else {
+  } else {
     destroyedObj.visuals[0] radiusDamage(explosionOrigin, 512, 200, 20, undefined, "MOD_EXPLOSIVE", "briefcase_bomb_mp");
   }
   if(isDefined(player)) {
@@ -678,8 +670,7 @@ registerGrenadeLauncherDudDvar(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.grenadeLauncherDudTimeDvar = dvarString;
@@ -691,11 +682,9 @@ registerGrenadeLauncherDudDvar(dvarString, defaultValue, minValue, maxValue) {
 onRoundEndGame(winningTeam) {
   if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
     winner = "tie";
-  }
-  else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
+  } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
     winner = "axis";
-  }
-  else {
+  } else {
     winner = "allies";
   }
   maps\mp\gametypes\_globallogic::updateWinLossStats(winner);

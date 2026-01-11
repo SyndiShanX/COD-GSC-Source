@@ -298,8 +298,7 @@ main() {
 
   if(level.splitscreen && getdvarint(#"splitscreen_playerCount") > 2) {
     level.optimise_for_splitscreen = 1;
-  }
-  else {
+  } else {
     level.optimise_for_splitscreen = 0;
   }
 
@@ -476,8 +475,7 @@ zombie_buried_devgui(cmd) {
     case "ghost_toggle_force_killable":
       if(!isDefined(level.ghost_force_killable)) {
         level.ghost_force_killable = 1;
-      }
-      else {
+      } else {
         level.ghost_force_killable = !level.ghost_force_killable;
       }
 
@@ -485,8 +483,7 @@ zombie_buried_devgui(cmd) {
     case "ghost_toggle_debug":
       if(!isDefined(level.ghost_debug)) {
         level.ghost_debug = 1;
-      }
-      else {
+      } else {
         level.ghost_debug = !level.ghost_debug;
       }
 
@@ -524,8 +521,7 @@ zombie_buried_devgui(cmd) {
     case "sloth_toggle_doors":
       if(!isDefined(level.sloth_debug_doors)) {
         level.sloth_debug_doors = 1;
-      }
-      else {
+      } else {
         level.sloth_debug_doors = !level.sloth_debug_doors;
       }
 
@@ -533,8 +529,7 @@ zombie_buried_devgui(cmd) {
     case "sloth_toggle_buildables":
       if(!isDefined(level.sloth_debug_buildables)) {
         level.sloth_debug_buildables = 1;
-      }
-      else {
+      } else {
         level.sloth_debug_buildables = !level.sloth_debug_buildables;
       }
 
@@ -1271,8 +1266,7 @@ setup_rex_starts() {
   add_gameloc("street", ::dummy, "street", ::dummy);
 }
 
-dummy() {
-}
+dummy() {}
 
 buried_zone_init() {
   flag_init("always_on");
@@ -1341,7 +1335,7 @@ init_fountain_zone() {
   zone_volumes = getEntArray("zone_start_lower", "targetname");
 
   foreach(zone in zone_volumes) {
-  zone.script_noteworthy = "player_volume";
+    zone.script_noteworthy = "player_volume";
   }
 }
 
@@ -1600,8 +1594,7 @@ buried_audio_get_mod_type_override(impact, mod, weapon, zombie, instakill, dist,
     if(!isinarray(a_str_mod, "monkey")) {
       if(!instakill) {
         a_str_mod[a_str_mod.size] = "explosive";
-      }
-      else {
+      } else {
         a_str_mod[a_str_mod.size] = "weapon_instakill";
       }
     }
@@ -1612,8 +1605,7 @@ buried_audio_get_mod_type_override(impact, mod, weapon, zombie, instakill, dist,
       if(dist > far_dist) {
         if(!instakill) {
           a_str_mod[a_str_mod.size] = "raygun";
-        }
-        else {
+        } else {
           a_str_mod[a_str_mod.size] = "weapon_instakill";
         }
       }
@@ -1625,8 +1617,7 @@ buried_audio_get_mod_type_override(impact, mod, weapon, zombie, instakill, dist,
       if(dist > far_dist) {
         if(!instakill) {
           a_str_mod[a_str_mod.size] = "raymk2";
-        }
-        else {
+        } else {
           a_str_mod[a_str_mod.size] = "weapon_instakill";
         }
       }
@@ -1636,8 +1627,7 @@ buried_audio_get_mod_type_override(impact, mod, weapon, zombie, instakill, dist,
   if(instakill) {
     if(mod == "MOD_MELEE") {
       a_str_mod[a_str_mod.size] = "melee_instakill";
-    }
-    else {
+    } else {
       a_str_mod[a_str_mod.size] = "weapon_instakill";
     }
   }
@@ -1652,11 +1642,9 @@ buried_audio_get_mod_type_override(impact, mod, weapon, zombie, instakill, dist,
 
   if(a_str_mod.size == 0) {
     str_mod_final = "default";
-  }
-  else if(a_str_mod.size == 1) {
+  } else if(a_str_mod.size == 1) {
     str_mod_final = a_str_mod[0];
-  }
-  else {
+  } else {
     for(i = 0; i < a_str_mod.size; i++) {
       if(cointoss()) {
         str_mod_final = a_str_mod[i];
@@ -1755,8 +1743,7 @@ buried_custom_zombie_oh_shit_vox() {
 
     if(players.size <= 1) {
       n_cooldown_time = 20;
-    }
-    else {
+    } else {
       n_cooldown_time = 15;
     }
 
@@ -1832,8 +1819,7 @@ buried_player_track_ammo_count() {
         foreach(weapon in a_weapons) {
           if(weapon == weap) {
             continue;
-          }
-          else if(self getammocount(weapon) > 0) {
+          } else if(self getammocount(weapon) > 0) {
             self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "ammo_switch");
             self.ammo_switch_vo_played = 1;
             break;
@@ -2165,8 +2151,7 @@ tear_into_facing(start_org, start_ang) {
   self orientmode("face angle", start_ang[1]);
 }
 
-tear_into_wait() {
-}
+tear_into_wait() {}
 
 melee_miss_func() {
   if(isDefined(self.enemy)) {
@@ -2185,8 +2170,7 @@ melee_miss_func() {
   }
 }
 
-equipment_planted(weapon, equipname, groundfrom) {
-}
+equipment_planted(weapon, equipname, groundfrom) {}
 
 equipment_safe_to_drop(weapon) {
   if(isDefined(weapon.model) && issubstr(weapon.model, "chopper")) {
@@ -2224,8 +2208,7 @@ ignore_equipment(zombie) {
   if(isDefined(self.equipname) && self.equipname == "equip_headchopper_zm") {
     if(isDefined(self.headchopper_kills) && self.headchopper_kills < 10) {
       return true;
-    }
-    else if(isDefined(zombie.headchopper_last_damage_time)) {
+    } else if(isDefined(zombie.headchopper_last_damage_time)) {
       currenttime = gettime();
 
       if(currenttime - zombie.headchopper_last_damage_time <= 2500) {

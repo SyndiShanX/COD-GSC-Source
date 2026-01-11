@@ -32,8 +32,7 @@ doturn(overrideanim, overrideblendoutanim, faceangleoffset, keependyaw) {
 
   if(turnangle < 0) {
     anglestr = "right " + turnangle;
-  }
-  else {
+  } else {
     anglestr = "left " + turnangle;
   }
 
@@ -182,8 +181,7 @@ getturnangle() {
 
   if(self.team == "allies") {
     turnpreditiontype = anim.turn_prediction_type_allies;
-  }
-  else {
+  } else {
     turnpreditiontype = anim.turn_prediction_type_axis;
   }
 
@@ -211,8 +209,7 @@ getturnangle() {
 
           if(abs(nextnodeangle) <= max(anim.turn_min_angle, abs(prevnodeangle))) {
             doexpensivelookahead = 0;
-          }
-          else if(isDefined(prevnodeangle) && sign(nextnodeangle) != sign(prevnodeangle)) {
+          } else if(isDefined(prevnodeangle) && sign(nextnodeangle) != sign(prevnodeangle)) {
             doexpensivelookahead = 0;
           }
         } else
@@ -235,8 +232,7 @@ getturnangle() {
 
       if(i == 0) {
         anglestr = anglestr + (" node: " + int(nextnodeangle));
-      }
-      else {
+      } else {
         anglestr = anglestr + (" predicted: " + int(nextnodeangle));
       }
 
@@ -270,8 +266,7 @@ getturnangle() {
   if(anim.debugturns) {
     if(abs(turnangle) > anim.turn_min_angle) {
       recordenttext(anglestr, self, level.color_debug["green"], "Animscript");
-    }
-    else {
+    } else {
       recordenttext(anglestr, self, level.color_debug["red"], "Animscript");
     }
   }
@@ -344,8 +339,7 @@ shouldturn() {
   if(speedsq < minspeed) {
     if(self.a.prevscript == "traverse" && self.a.movement == "run" && self.a.scriptstarttime == gettime()) {
       self.a.turnignoremotionangle = 1;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -369,8 +363,7 @@ getturnanim(turnangle) {
     if(abs(turnangle) > 135) {
       if(turnangle > 0) {
         turnanimlookupkey = "turn_b_r_180";
-      }
-      else {
+      } else {
         turnanimlookupkey = "turn_b_l_180";
       }
     }
@@ -384,11 +377,9 @@ getturnanim(turnangle) {
     turnanimlookupkey = "turn_f_l_180";
   else if(turnangle >= 65) {
     turnanimlookupkey = "turn_f_l_90";
-  }
-  else if(turnangle >= 35) {
+  } else if(turnangle >= 35) {
     turnanimlookupkey = "turn_f_l_45";
-  }
-  else if(turnangle <= -115 && turnangle >= -155) {
+  } else if(turnangle <= -115 && turnangle >= -155) {
     turnanimlookupkey = "turn_f_r_135";
 
     if(!animarrayanyexist(turnanimlookupkey + turnanimlookupspecial, "turn")) {
@@ -398,8 +389,7 @@ getturnanim(turnangle) {
     turnanimlookupkey = "turn_f_r_180";
   else if(turnangle <= -65) {
     turnanimlookupkey = "turn_f_r_90";
-  }
-  else if(turnangle < -35) {
+  } else if(turnangle < -35) {
     turnanimlookupkey = "turn_f_r_45";
   }
 

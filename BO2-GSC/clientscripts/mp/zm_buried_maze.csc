@@ -50,8 +50,7 @@ maze_effects(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 
   if(newval) {
     self thread maze_effects_thread(localclientnum, fieldname);
-  }
-  else {
+  } else {
     self notify("kill_maze_effects_thread");
   }
 }

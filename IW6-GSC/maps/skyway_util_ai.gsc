@@ -8,8 +8,7 @@ ally_advance_watcher(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isarray(self)) {
     var_6 = self;
-  }
-  else {
+  } else {
     var_6[0] = self;
   }
 
@@ -43,8 +42,7 @@ ally_advance_watcher(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(;;) {
     if(isDefined(var_7.script_parameters)) {
       var_7._delay = float(var_7.script_parameters);
-    }
-    else {
+    } else {
       var_7._delay = 0;
     }
 
@@ -125,8 +123,7 @@ ally_advance_watcher(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_3)) {
     if(isDefined(var_4)) {
       self[[var_3]](var_4);
-    }
-    else {
+    } else {
       self[[var_3]]();
     }
   }
@@ -147,7 +144,7 @@ ally_advance(var_0, var_1) {
 
   if(var_0._linked_triggers.size > 0) {
     foreach(var_3 in var_0._linked_triggers) {
-    var_3 notify("trigger");
+      var_3 notify("trigger");
     }
   }
 
@@ -176,8 +173,7 @@ waittill_time_out() {
 
   if(self._delay == 0) {
     self waittill("trigger");
-  }
-  else {
+  } else {
     wait(maps\skyway_util::kt_time(self._delay));
   }
 }
@@ -243,8 +239,7 @@ waittill_allies_at_goal(var_0) {
 
   if(isarray(var_0)) {
     var_3 = var_0;
-  }
-  else {
+  } else {
     var_3[0] = var_0;
   }
 
@@ -263,7 +258,7 @@ waittill_allies_at_goal(var_0) {
   var_2 notify("die");
 
   foreach(var_5 in var_3) {
-  var_5.goalradius = var_5._old_goalradius;
+    var_5.goalradius = var_5._old_goalradius;
   }
 
   common_scripts\utility::flag_clear("flag_allies_moving");
@@ -331,8 +326,7 @@ opfor_killer_tracker() {
 
   if(isDefined(var_0) && isplayer(var_0)) {
     level.killer_tracker = 0;
-  }
-  else {
+  } else {
     level.killer_tracker = level.killer_tracker + 1;
   }
 
@@ -371,8 +365,7 @@ ignore_everything() {
 set_ignore_setting(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     self._ignore_settings_old[var_1] = var_0;
-  }
-  else {
+  } else {
     self._ignore_settings_old[var_1] = "none";
   }
 
@@ -413,8 +406,7 @@ restore_ignore_setting(var_0, var_1) {
   if(isDefined(self._ignore_settings_old)) {
     if(isstring(self._ignore_settings_old[var_0]) && self._ignore_settings_old[var_0] == "none") {
       return var_1;
-    }
-    else {
+    } else {
       return self._ignore_settings_old[var_0];
     }
   }

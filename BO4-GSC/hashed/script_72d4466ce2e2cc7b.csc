@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\util_shared;
-
 #namespace namespace_1e38a8f6;
 
 init() {
@@ -244,7 +243,7 @@ function_a78bbf22(localclientnum) {
 
 function_c6bcf243(var_35a126c, var_b742c891, localclientnum) {
   self endon(#"death");
-  level endon(#"game_ended", #"keybind_change");
+  level endon(#"game_ended", # "keybind_change");
   function_b4c6383f(var_35a126c, 3, 63487, 855309, 275, 0);
 
   for(i = 0; i < 160; i++) {
@@ -369,7 +368,7 @@ function_1d13e2db(localclientnum) {
 
 function_af712255(localclientnum) {
   self endon(#"death");
-  level endon(#"game_ended", #"keybind_change");
+  level endon(#"game_ended", # "keybind_change");
   controllermodel = getuimodelforcontroller(localclientnum);
   parentmodel = createuimodel(controllermodel, "killstreaks");
   var_f15e30b1 = createuimodel(parentmodel, "momentumPercentage");
@@ -401,7 +400,7 @@ function_af712255(localclientnum) {
 
 function_88dc3170(localclientnum) {
   self endon(#"death");
-  level endon(#"game_ended", #"keybind_change");
+  level endon(#"game_ended", # "keybind_change");
   parentmodel = createuimodel(getuimodelforcontroller(localclientnum), "zmhud.bgb_carousel");
   var_3e4e5ffe = createuimodel(parentmodel, "0");
   var_af86a313 = createuimodel(parentmodel, "1");
@@ -437,7 +436,7 @@ function_88dc3170(localclientnum) {
 }
 
 function_9d6500b(localclientnum) {
-  self endon(#"death", #"freefallend");
+  self endon(#"death", # "freefallend");
   level endon(#"keybind_change");
 
   if(isDefined(level.var_51e99b46) && level.var_51e99b46 == 2) {

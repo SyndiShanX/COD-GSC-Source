@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
-
 #namespace ability_util;
 
 init_aoe_fx_info(aoe_name) {
@@ -136,9 +135,9 @@ private aoe_fx(local_client_num, clientfield_name, aoe_fx_info) {
   pitch_vals[6] = -90;
   trace = bulletTrace(center, center + (0, 0, -1) * aoe_fx_info.explosion_radius, 0, self);
 
-  if(trace[#"fraction"] < 1) {
-    pitch_vals[1] = 90 - atan(150 / trace[#"fraction"] * aoe_fx_info.explosion_radius);
-    pitch_vals[2] = 90 - atan(300 / trace[#"fraction"] * aoe_fx_info.explosion_radius);
+  if(trace[# "fraction"] < 1) {
+    pitch_vals[1] = 90 - atan(150 / trace[# "fraction"] * aoe_fx_info.explosion_radius);
+    pitch_vals[2] = 90 - atan(300 / trace[# "fraction"] * aoe_fx_info.explosion_radius);
   } else {
     pitch_vals[1] = 60;
     pitch_vals[2] = 30;
@@ -146,9 +145,9 @@ private aoe_fx(local_client_num, clientfield_name, aoe_fx_info) {
 
   trace = bulletTrace(center, center + (0, 0, 1) * aoe_fx_info.explosion_radius, 0, self);
 
-  if(trace[#"fraction"] < 1) {
-    pitch_vals[5] = -90 + atan(150 / trace[#"fraction"] * aoe_fx_info.explosion_radius);
-    pitch_vals[4] = -90 + atan(300 / trace[#"fraction"] * aoe_fx_info.explosion_radius);
+  if(trace[# "fraction"] < 1) {
+    pitch_vals[5] = -90 + atan(150 / trace[# "fraction"] * aoe_fx_info.explosion_radius);
+    pitch_vals[4] = -90 + atan(300 / trace[# "fraction"] * aoe_fx_info.explosion_radius);
   } else {
     pitch_vals[5] = -60;
     pitch_vals[4] = -30;
@@ -194,15 +193,15 @@ private do_aoe_fx(local_client_num, center, yaw_count, pitch, clientfield_name, 
     angles = (0, randomint(360), 0);
     forward = anglesToForward(angles);
 
-    if(trace[#"fraction"] < 1) {
-      fx_position = center + tracedir * aoe_fx_info.explosion_radius * trace[#"fraction"];
+    if(trace[# "fraction"] < 1) {
+      fx_position = center + tracedir * aoe_fx_info.explosion_radius * trace[# "fraction"];
 
       if(debug_aoe_traces) {
         sphere(fx_position, sphere_size, (1, 0, 1), 1, 1, 8, 300);
-        sphere(trace[#"position"], sphere_size, (1, 1, 0), 1, 1, 8, 300);
+        sphere(trace[# "position"], sphere_size, (1, 1, 0), 1, 1, 8, 300);
       }
 
-      normal = trace[#"normal"];
+      normal = trace[# "normal"];
 
       if(lengthsquared(normal) == 0) {
         normal = -1 * tracedir;
@@ -245,5 +244,5 @@ private do_aoe_fx(local_client_num, center, yaw_count, pitch, clientfield_name, 
 aoe_trace_entity(entity, origin, trace_z_offset) {
   entitypoint = entity.origin + (0, 0, trace_z_offset);
   res = bulletTrace(origin, entitypoint, 0, self);
-  return res[#"fraction"] == 1;
+  return res[# "fraction"] == 1;
 }

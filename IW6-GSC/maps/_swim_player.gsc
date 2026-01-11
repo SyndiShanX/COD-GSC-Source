@@ -50,7 +50,7 @@ moving_water() {
   var_0 = getEntArray("moving_water_flags", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  thread moving_water_flag(var_2);
+    thread moving_water_flag(var_2);
   }
 }
 
@@ -158,8 +158,7 @@ dynamic_dof(var_0) {
 
     if(isDefined(self.dof_ref_ent)) {
       var_11 = combineangles(self.dof_ref_ent.angles, var_10);
-    }
-    else {
+    } else {
       var_11 = var_10;
     }
 

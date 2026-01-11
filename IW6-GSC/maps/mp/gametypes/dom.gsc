@@ -53,14 +53,11 @@ main() {
 
   if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("camera_thirdPerson")) {
+  } else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_diehard")) {
+  } else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 
@@ -855,8 +852,7 @@ updateCPM() {
 getCapXPScale() {
   if(self.CPM < 4) {
     return 1;
-  }
-  else {
+  } else {
     return 0.25;
   }
 }
@@ -914,8 +910,7 @@ showCapturedBaseEffectToPlayer(team, player) {
   isMLG = player isMLGSpectator();
   if(isMLG) {
     viewerTeam = player GetMLGSpectatorTeam();
-  }
-  else if(viewerTeam == "spectator") {
+  } else if(viewerTeam == "spectator") {
     viewerTeam = "allies";
   }
 

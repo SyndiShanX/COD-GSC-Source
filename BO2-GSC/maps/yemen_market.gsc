@@ -139,8 +139,7 @@ waittill_speech_anim_done() {
   if(!is_after_skipto("speech")) {
     if(level.is_defalco_alive) {
       scene_wait("speech_walk_no_defalco_player");
-    }
-    else {
+    } else {
       scene_wait("speech_walk_no_defalco_player");
     }
   }
@@ -259,8 +258,7 @@ circle_courtyard() {
 
   if(cointoss()) {
     nd_start = getvehiclenode("quad_circle_path_1", "targetname");
-  }
-  else {
+  } else {
     nd_start = getvehiclenode("quad_circle_path_2", "targetname");
   }
 
@@ -307,28 +305,28 @@ speech_courtyard_ai() {
   ai_courtyard = getEntArray("court_terrorists_ai", "targetname");
 
   foreach(ai in ai_courtyard) {
-  ai.overrideactordamage = undefined;
+    ai.overrideactordamage = undefined;
   }
 
   a_ai = get_ai_array("courtyard_high_left", "script_noteworthy");
   nd_exit = getnode("high_left_exit_node", "targetname");
 
   foreach(ai in a_ai) {
-  ai thread run_to_goal_and_delete(nd_exit);
+    ai thread run_to_goal_and_delete(nd_exit);
   }
 
   a_ai = get_ai_array("courtyard_high_right", "script_noteworthy");
   nd_exit = getnode("high_right_exit_node", "targetname");
 
   foreach(ai in a_ai) {
-  ai thread run_to_goal_and_delete(nd_exit);
+    ai thread run_to_goal_and_delete(nd_exit);
   }
 
   a_ai = get_ai_array("courtyard_center", "script_noteworthy");
   nd_exit = getnode("center_exit_node", "targetname");
 
   foreach(ai in a_ai) {
-  ai thread run_to_goal_and_delete(nd_exit);
+    ai thread run_to_goal_and_delete(nd_exit);
   }
 
   a_quads = get_vehicle_array("court_drone", "script_noteworthy");
@@ -366,7 +364,7 @@ autoexec market_gump_cleanup() {
   a_fans = getEntArray("market_fan", "script_noteworthy");
 
   foreach(fan in a_fans) {
-  fan delete();
+    fan delete();
   }
 }
 
@@ -376,8 +374,7 @@ market_rolling_door() {
   run_scene_and_delete("rolling_door");
 }
 
-market_friendly_handler() {
-}
+market_friendly_handler() {}
 
 market_heroes_shot() {
   level endon("stage_quads_exit");
@@ -403,7 +400,7 @@ market_battle_flow() {
   a_terrorist_spawners = getEntArray("market_friendly_terrorist", "targetname");
 
   foreach(sp_terrorist in a_terrorist_spawners) {
-  sp_terrorist maps\yemen_metal_storms::streets_spawn_full_count(1);
+    sp_terrorist maps\yemen_metal_storms::streets_spawn_full_count(1);
   }
 
   flag_wait("player_leaves_stage");
@@ -481,7 +478,7 @@ yemen_aigroup_fallback(str_aigroup, str_new_goalvolume, n_fallback_num, str_fall
   vol_goal = getent(str_new_goalvolume, "targetname");
 
   foreach(ai_guy in a_ai) {
-  ai_guy thread yemen_fallback_move(vol_goal);
+    ai_guy thread yemen_fallback_move(vol_goal);
   }
 
   if(isDefined(str_notify_on_fallback)) {
@@ -501,8 +498,7 @@ yemen_fallback_move(vol_goal) {
 
   if(randomint(2)) {
     wait(randomfloatrange(1.0, 3.0));
-  }
-  else {
+  } else {
     wait(randomfloatrange(0.0, 1.0));
   }
 
@@ -555,8 +551,7 @@ drone_crash_into_car() {
   }
 }
 
-setup_scenes() {
-}
+setup_scenes() {}
 
 melee_01_terrorist(ai) {
   self endon("death");
@@ -651,8 +646,7 @@ die_behind_player(s_market_exit) {
 
   if(isDefined(self)) {
     arrayremovevalue(level.market_ai, self);
-  }
-  else {
+  } else {
     __new = [];
 
     foreach(__key, __value in level.market_ai) {
@@ -692,8 +686,7 @@ kill_behind_player() {
         if(isalive(ai) && ai.takedamage && !isDefined(ai.overrideactordamage)) {
           if(ai sightconetrace(v_eye, level.player) < 0.1) {
             ai delete();
-          }
-          else {
+          } else {
             ai thread bloody_death();
           }
 
@@ -777,8 +770,7 @@ market_vtol_crash_damage() {
 vtol_shooter_damage_callback(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
   if(isDefined(eattacker) && isplayer(eattacker)) {
     return idamage;
-  }
-  else {
+  } else {
     return 0;
   }
 }

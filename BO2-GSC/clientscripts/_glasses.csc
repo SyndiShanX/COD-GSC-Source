@@ -130,8 +130,7 @@ setup_player_control(localclientnum) {
 karma_vitals_cam(localclientnum, set, newent) {
   if(set) {
     start_karma_vitals_cam(localclientnum);
-  }
-  else {
+  } else {
     stop_karma_vitals_cam(localclientnum);
   }
 }

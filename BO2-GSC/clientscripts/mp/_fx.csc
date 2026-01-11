@@ -7,8 +7,7 @@
 #include clientscripts\mp\_rewindobjects;
 #include clientscripts\mp\_lights;
 
-disableallparticlefxinlevel() {
-}
+disableallparticlefxinlevel() {}
 
 fx_validate(fxid, origin) {
   if(level.createfx_enabled) {
@@ -148,8 +147,7 @@ loopfxthread(clientnum) {
 
     if(isDefined(self.fxstop)) {
       level waittill("stop fx" + self.fxstop);
-    }
-    else {
+    } else {
       return;
     }
 
@@ -159,8 +157,7 @@ loopfxthread(clientnum) {
 
     if(isDefined(self.fxstart)) {
       level waittill("start fx" + self.fxstart);
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -260,8 +257,7 @@ create_loopsound(clientnum) {
   if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
     if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
       thread clientscripts\mp\_utility::loop_fx_sound(clientnum, self.v["soundalias"], self.v["origin"], "stop_loop");
-    }
-    else {
+    } else {
       thread clientscripts\mp\_utility::loop_fx_sound(clientnum, self.v["soundalias"], self.v["origin"]);
     }
   }
@@ -321,8 +317,7 @@ fx_init(clientnum) {
 reportnumeffects() {
   if(isDefined(level.createfxent)) {
     println("*** ClientScripts : Added " + level.createfxent.size + " effects.");
-  }
-  else {
+  } else {
     println("*** ClientScripts : Added no effects.");
   }
 }
@@ -349,8 +344,7 @@ blinky_light(localclientnum, tagname, friendlyfx, enemyfx) {
     if(isDefined(self)) {
       if(friendnotfoe(localclientnum)) {
         self.blinkylightfx = playFXOnTag(localclientnum, friendlyfx, self, self.lighttagname);
-      }
-      else {
+      } else {
         self.blinkylightfx = playFXOnTag(localclientnum, enemyfx, self, self.lighttagname);
       }
     }

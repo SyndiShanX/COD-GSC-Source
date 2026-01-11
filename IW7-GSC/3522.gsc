@@ -58,8 +58,7 @@ func_12907() {
 
   if(self.team == "allies") {
     var_00 = level.func_114E5["allies"] func_1082D(self, "vehicle_bradley");
-  }
-  else {
+  } else {
     var_00 = level.func_114E5["axis"] func_1082D(self, "vehicle_bmp");
   }
 
@@ -144,8 +143,7 @@ func_F6C4(var_00) {
   if(self.veh_pathdir != var_00) {
     if(var_00 == "forward") {
       func_11096();
-    }
-    else {
+    } else {
       func_11097();
     }
   }
@@ -278,8 +276,7 @@ func_3E02() {
 
     if(self.func_C225 > 1) {
       thread func_F6B0();
-    }
-    else {
+    } else {
       thread setstate();
     }
 
@@ -311,8 +308,7 @@ func_114E9(var_00, var_01) {
 
     if(isDefined(var_02)) {
       self.endnode = var_02;
-    }
-    else {
+    } else {
       self.endnode = undefined;
     }
 
@@ -361,8 +357,7 @@ func_114D9() {
       var_04 = 1;
     else if(self.health < var_01 / 2 && var_03 == 0) {
       var_03 = 1;
-    }
-    else if(self.health < var_01 / 1.5 && var_02 == 0) {
+    } else if(self.health < var_01 / 1.5 && var_02 == 0) {
       var_02 = 1;
     }
 
@@ -404,8 +399,7 @@ func_89D4(var_00) {
   }
   if(var_01 == "front" && var_02 < 768) {
     thread func_F6ED();
-  }
-  else if(var_01 == "rear_side" || var_01 == "rear" && var_02 >= 768) {
+  } else if(var_01 == "rear_side" || var_01 == "rear" && var_02 >= 768) {
     playFX(level.func_114D8, self.origin);
     thread func_F6ED();
   } else if(var_01 == "rear" && var_02 < 768) {
@@ -437,8 +431,7 @@ relative_ads_anims(var_00) {
   if(var_03 > 0) {
     if(var_03 > 0.9) {
       return "front";
-    }
-    else {
+    } else {
       return "front_side";
     }
   } else if(var_03 < -0.9)
@@ -492,26 +485,19 @@ func_3E2E() {
 modifydamage(var_00, var_01, var_02) {
   if(var_00 == "MOD_RIFLE_BULLET") {
     return var_01;
-  }
-  else if(var_00 == "MOD_PISTOL_BULLET") {
+  } else if(var_00 == "MOD_PISTOL_BULLET") {
     return var_01;
-  }
-  else if(var_00 == "MOD_IMPACT") {
+  } else if(var_00 == "MOD_IMPACT") {
     return var_01;
-  }
-  else if(var_00 == "MOD_MELEE") {
+  } else if(var_00 == "MOD_MELEE") {
     return 0;
-  }
-  else if(var_00 == "MOD_EXPLOSIVE_BULLET") {
+  } else if(var_00 == "MOD_EXPLOSIVE_BULLET") {
     return var_01;
-  }
-  else if(var_00 == "MOD_GRENADE") {
+  } else if(var_00 == "MOD_GRENADE") {
     return var_01 * 5;
-  }
-  else if(var_00 == "MOD_GRENADE_SPLASH") {
+  } else if(var_00 == "MOD_GRENADE_SPLASH") {
     return var_01 * 5;
-  }
-  else {
+  } else {
     return var_01 * 10;
   }
 }
@@ -675,8 +661,7 @@ func_1572(var_00) {
 
   if(var_0.size == 1) {
     self.besttarget = var_0[0];
-  }
-  else {
+  } else {
     self.besttarget = getbesttarget(var_00);
   }
 
@@ -960,8 +945,7 @@ func_1571(var_00) {
 
   if(var_0.size == 1) {
     self.func_2A97 = var_0[0];
-  }
-  else {
+  } else {
     self.func_2A97 = func_7DFD(var_00);
   }
 
@@ -1383,8 +1367,7 @@ func_897F(var_00) {
 
     if(var_1.veh_pathdir == "forward") {
       var_06 = func_7FE8();
-    }
-    else {
+    } else {
       var_06 = _meth_809A();
     }
 
@@ -1418,8 +1401,7 @@ func_C059() {
 
     if(!isDefined(self.target) || self.targetname == "branchnode") {
       var_02 = "TRANS";
-    }
-    else {
+    } else {
       var_02 = "NODE";
     }
 
@@ -1483,8 +1465,7 @@ _meth_80EF() {
 func_7FE8() {
   if(isDefined(self.target)) {
     return getvehiclenode(self.target, "targetname");
-  }
-  else {
+  } else {
     return self.func_BF2E;
   }
 }
@@ -1547,8 +1528,7 @@ func_98A6(var_00) {
         while(!isDefined(var_8._meth_848D)) {
           if(isDefined(var_8.target)) {
             var_13 = getvehiclenode(var_8.target, "targetname");
-          }
-          else {
+          } else {
             var_13 = var_8.func_BF2E;
           }
 
@@ -1697,8 +1677,7 @@ drawpath(var_00) {
 
     if(var_2.func_AD17[var_3._meth_848D] == "reverse") {
       level thread func_5B7C(var_2.node.origin, var_3.node.origin, (1, 0, 0));
-    }
-    else {
+    } else {
       level thread func_5B7C(var_2.node.origin, var_3.node.origin, (0, 1, 0));
     }
 
@@ -1720,8 +1699,7 @@ drawpath(var_00) {
 
       if(isDefined(var_4.target)) {
         var_04 = getvehiclenode(var_4.target, "targetname");
-      }
-      else {
+      } else {
         var_04 = var_4.func_BF2E;
       }
 

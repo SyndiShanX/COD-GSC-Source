@@ -39,7 +39,7 @@ start() {
   var_2 = ["train_rt0", "train_rt1", "train_rt2"];
 
   foreach(var_4 in var_2) {
-  common_scripts\utility::array_call(level._train.cars[var_4].trigs, ::setmovingplatformtrigger);
+    common_scripts\utility::array_call(level._train.cars[var_4].trigs, ::setmovingplatformtrigger);
   }
 }
 
@@ -47,7 +47,7 @@ main() {
   var_0 = ["train_rt3"];
 
   foreach(var_2 in var_0) {
-  common_scripts\utility::array_call(level._train.cars[var_2].trigs, ::setmovingplatformtrigger);
+    common_scripts\utility::array_call(level._train.cars[var_2].trigs, ::setmovingplatformtrigger);
   }
 
   thread hesh_killer_tracker_enabler();
@@ -124,8 +124,7 @@ rt_run() {
 
   if(!common_scripts\utility::flag("flag_rt3_ally_at_end")) {
     level._ally thread maps\_utility::follow_path(getnode("rt3_node_run_center", "targetname"));
-  }
-  else {
+  } else {
     level._ally thread maps\_utility::follow_path(getnode("rt3_node_run_sides", "targetname"));
   }
 
@@ -169,8 +168,7 @@ rt_run_cleanup_proc() {
 rt_combat_fic() {
   if(!common_scripts\utility::flag("flag_helo_end")) {
     level._ally maps\_utility::smart_dialogue("skyway_hsh_whereareyougoing");
-  }
-  else {
+  } else {
     wait 3;
     level._ally maps\_utility::smart_dialogue("skyway_hsh_theyreropingupthe");
   }

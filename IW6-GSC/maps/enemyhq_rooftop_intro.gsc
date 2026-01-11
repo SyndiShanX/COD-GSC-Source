@@ -486,7 +486,7 @@ monitor_player_bishop() {
 
         if(var_22 >= 3) {
           foreach(var_27 in var_23) {
-          var_27.found = 1;
+            var_27.found = 1;
           }
 
           thread maps\_utility::smart_radio_dialogue(var_8[var_12]);
@@ -593,7 +593,7 @@ glimpsethefuture(var_0, var_1) {
   level.future_start_percent = var_2;
 
   foreach(var_4 in var_0) {
-  var_4 setanimtime(maps\_utility::getanim_from_animname("bishop_glimpse", var_4.animname), level.future_start_percent);
+    var_4 setanimtime(maps\_utility::getanim_from_animname("bishop_glimpse", var_4.animname), level.future_start_percent);
   }
 }
 
@@ -742,8 +742,7 @@ pickup_mk32(var_0) {
 
   if(level.start_point != "introshoot") {
     wait 2.6;
-  }
-  else {
+  } else {
     wait 3.1;
   }
 
@@ -805,8 +804,7 @@ convoy() {
   while(var_3 < var_4) {
     if(var_3 % 3) {
       var_5 = var_1[0];
-    }
-    else {
+    } else {
       var_5 = var_1[1];
     }
 
@@ -823,8 +821,7 @@ convoy() {
 
     if(var_3 % 3) {
       wait(randomfloatrange(3, 4));
-    }
-    else {
+    } else {
       wait(randomfloatrange(2.5, 3));
     }
 
@@ -877,7 +874,7 @@ watch_convoy_trig() {
     }
 
     foreach(var_3 in var_1.cargo) {
-    var_3 delete();
+      var_3 delete();
     }
 
     var_1 delete();
@@ -989,8 +986,7 @@ ally_shoot_convoy() {
       if(level.player_hit_convoy == 0 && common_scripts\utility::mod(var_2, 4) == 0) {
         if(var_2 < 5) {
           level.allies[0] thread maps\enemyhq_code::char_dialog_add_and_go("enemyhq_mrk_tagthetrucks");
-        }
-        else {
+        } else {
           level.allies[0] thread maps\enemyhq_code::char_dialog_add_and_go("enemyhq_mrk_logantagem");
         }
       }
@@ -1062,8 +1058,7 @@ handle_m32_launcher() {
 
       if(level.mk32_intro_fire) {
         var_0 thread track_dud();
-      }
-      else {
+      } else {
         var_0 thread track_live();
       }
     }
@@ -1241,15 +1236,13 @@ track_live() {
 
         if(isDefined(var_19) && var_19 != "") {
           var_22 = var_19;
-        }
-        else if(isDefined(var_18) && var_18 != "") {
+        } else if(isDefined(var_18) && var_18 != "") {
           var_22 = var_18;
         }
 
         if(var_22 != "") {
           var_6 linkto(var_10, var_22);
-        }
-        else {
+        } else {
           var_9 = 0;
         }
       } else
@@ -1319,8 +1312,7 @@ track_dud() {
     if(isDefined(var_9) && (var_9 == level.player_truck || isai(var_9) && var_9.team == "allies")) {
       if(var_9 == level.player_truck) {
         setdvar("ui_deadquote", &"ENEMY_HQ_YOUR_ACTIONS_COMPROMISED");
-      }
-      else {
+      } else {
         setdvar("ui_deadquote", &"ENEMY_HQ_FRIENDLY_FIRE_WILL_NOT");
       }
 
@@ -1483,7 +1475,7 @@ cargo_choppers() {
     var_5 = getEntArray(var_4.script_noteworthy, "targetname");
 
     foreach(var_7 in var_5) {
-    var_7 hide();
+      var_7 hide();
     }
 
     var_4.cargo_item_spawners = var_5;
@@ -1526,7 +1518,7 @@ spawn_cargo_carrier(var_0) {
   var_1 waittill("death");
 
   foreach(var_6 in var_3) {
-  var_6 delete();
+    var_6 delete();
   }
 }
 
@@ -1593,11 +1585,9 @@ ship_vista() {
 
     if(var_4.origin[1] > -30000) {
       var_5 = 0;
-    }
-    else if(var_4.origin[1] > -36000) {
+    } else if(var_4.origin[1] > -36000) {
       var_5 = 1;
-    }
-    else if(var_4.origin[1] > -42000) {
+    } else if(var_4.origin[1] > -42000) {
       var_4.my_extra = 1.5;
       var_5 = 2;
     } else
@@ -1702,8 +1692,7 @@ handle_intro_sniper_outline() {
 
         if(var_4.team == "axis") {
           var_4 maps\_utility::set_hudoutline("enemy", 1);
-        }
-        else {
+        } else {
           var_4 maps\_utility::set_hudoutline("friendly", 1);
         }
 
@@ -1877,8 +1866,7 @@ watch_anim_end(var_0) {
 
     if(var_0 == "gundown") {
       var_1 = pick_drone_gundown_anim();
-    }
-    else {
+    } else {
       var_1 = pick_drone_patrol_anim();
     }
 
@@ -1890,8 +1878,7 @@ watch_anim_end(var_0) {
 
       if(!var_4) {
         thread maps\_drone::drone_move_z(var_3);
-      }
-      else {
+      } else {
         self notify("drone_move_z");
       }
 

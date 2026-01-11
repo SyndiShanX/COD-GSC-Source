@@ -34,8 +34,7 @@ MeleeCombat() {
   realMelee = true;
   if(animscripts\utility::okToMelee(self.enemy)) {
     animscripts\utility::IAmMeleeing(self.enemy);
-  }
-  else {
+  } else {
     realMelee = false;
   }
   self thread EyesAtEnemy();
@@ -116,8 +115,7 @@ MeleeCombat() {
 resetGiveUpTime() {
   if(distanceSquared(self.origin, self.enemy.origin) > anim.chargeRangeSq) {
     self.giveUpOnMeleeTime = gettime() + randomintrange(2700, 3300);
-  }
-  else {
+  } else {
     self.giveUpOnMeleeTime = gettime() + randomintrange(1700, 2300);
   }
 }
@@ -149,8 +147,7 @@ meleeDebugPrintThread() {
 getEnemyPose() {
   if(isplayer(self.enemy)) {
     return self.enemy getStance();
-  }
-  else {
+  } else {
     return self.enemy.a.pose;
   }
 }

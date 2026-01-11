@@ -127,7 +127,7 @@ cache_ambient_event(var_0) {
     return;
   }
   foreach(var_5, var_4 in var_2) {
-  var_2[var_5]["weight"] = string_to_float(var_4["weight"]);
+    var_2[var_5]["weight"] = string_to_float(var_4["weight"]);
   }
 
   var_6 = [];
@@ -328,8 +328,7 @@ blend_zones(var_0, var_1, var_2, var_3) {
     if(isDefined(var_2["mix1"])) {
       if(var_2["mix1"] == "") {
         maps\_audio::clear_mix(2);
-      }
-      else {
+      } else {
         maps\_audio::set_mix(var_2["mix1"]);
       }
     }
@@ -337,8 +336,7 @@ blend_zones(var_0, var_1, var_2, var_3) {
     if(isDefined(var_2["occlusion1"])) {
       if(var_2["occlusion1"] == "") {
         maps\_audio::deactivate_occlusion();
-      }
-      else {
+      } else {
         maps\_audio::set_occlusion(var_2["occlusion1"]);
       }
     }
@@ -351,8 +349,7 @@ blend_zones(var_0, var_1, var_2, var_3) {
     if(isDefined(var_2["mix2"])) {
       if(var_2["mix2"] == "") {
         maps\_audio::clear_mix(2);
-      }
-      else {
+      } else {
         maps\_audio::set_mix(var_2["mix2"]);
       }
     }
@@ -360,8 +357,7 @@ blend_zones(var_0, var_1, var_2, var_3) {
     if(isDefined(var_2["occlusion2"])) {
       if(var_2["occlusion2"] == "") {
         maps\_audio::deactivate_occlusion();
-      }
-      else {
+      } else {
         maps\_audio::set_occlusion(var_2["occlusion2"]);
       }
     }
@@ -476,7 +472,7 @@ cache_whizby(var_0) {
     return;
   }
   foreach(var_5, var_4 in var_2) {
-  var_2[var_5] = string_to_float(var_2[var_5]);
+    var_2[var_5] = string_to_float(var_2[var_5]);
   }
 
   level._audio.whizby.cached[var_0] = var_2;
@@ -493,7 +489,7 @@ cache_timescale(var_0) {
     return;
   }
   foreach(var_5, var_4 in var_2) {
-  var_2[var_5]["scale"] = string_to_float(var_4["scale"]);
+    var_2[var_5]["scale"] = string_to_float(var_4["scale"]);
   }
 
   level._audio.timescale.cached[var_0] = var_2;

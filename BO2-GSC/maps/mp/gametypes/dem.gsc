@@ -68,8 +68,7 @@ main() {
 
   if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen()) {
     setscoreboardcolumns("score", "kills", "plants", "defuses", "deaths");
-  }
-  else {
+  } else {
     setscoreboardcolumns("score", "kills", "deaths", "plants", "defuses");
   }
 }
@@ -169,15 +168,13 @@ getbetterteam() {
 
   if(kills["allies"] > kills["axis"]) {
     return "allies";
-  }
-  else if(kills["axis"] > kills["allies"]) {
+  } else if(kills["axis"] > kills["allies"]) {
     return "axis";
   }
 
   if(deaths["allies"] < deaths["axis"]) {
     return "allies";
-  }
-  else if(deaths["axis"] < deaths["allies"]) {
+  } else if(deaths["axis"] < deaths["allies"]) {
     return "axis";
   }
 
@@ -328,15 +325,13 @@ onspawnplayer(predictedspawn) {
   if(!isDefined(game["overtime_round"])) {
     if(self.pers["team"] == game["attackers"]) {
       spawnpointname = "mp_dem_spawn_attacker_start";
-    }
-    else {
+    } else {
       spawnpointname = "mp_dem_spawn_defender_start";
     }
   } else if(isDefined(game["overtime_round"])) {
     if(self.pers["team"] == game["attackers"]) {
       spawnpointname = "mp_dem_spawn_attackerOT_start";
-    }
-    else {
+    } else {
       spawnpointname = "mp_dem_spawn_defenderOT_start";
     }
   }
@@ -347,8 +342,7 @@ onspawnplayer(predictedspawn) {
 
   if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "dem");
   }
 }
@@ -465,8 +459,7 @@ ondeadevent(team) {
   if(team == "all") {
     if(level.bombplanted) {
       dem_endgame(game["attackers"], game["strings"][game["defenders"] + "_eliminated"]);
-    }
-    else {
+    } else {
       dem_endgame(game["defenders"], game["strings"][game["attackers"] + "_eliminated"]);
     }
   } else if(team == game["attackers"]) {
@@ -488,8 +481,7 @@ ononeleftevent(team) {
 ontimelimit() {
   if(isDefined(game["overtime_round"])) {
     dem_endgame("tie", game["strings"]["time_limit_reached"]);
-  }
-  else if(level.teambased) {
+  } else if(level.teambased) {
     bombzonesleft = 0;
 
     for(index = 0; index < level.bombzones.size; index++) {
@@ -500,8 +492,7 @@ ontimelimit() {
 
     if(bombzonesleft == 0) {
       dem_endgame(game["attackers"], game["strings"]["target_destroyed"]);
-    }
-    else {
+    } else {
       dem_endgame(game["defenders"], game["strings"]["time_limit_reached"]);
     }
   } else
@@ -544,8 +535,7 @@ givelastattackerwarning() {
   while(true) {
     if(self.health != self.maxhealth) {
       fullhealthtime = 0;
-    }
-    else {
+    } else {
       fullhealthtime = fullhealthtime + interval;
     }
 
@@ -637,7 +627,7 @@ bombs() {
         visuals[0] delete();
 
         foreach(clip in clipbrushes) {
-        clip delete();
+          clip delete();
         }
 
         continue;
@@ -652,7 +642,7 @@ bombs() {
       visuals[0] delete();
 
       foreach(clip in clipbrushes) {
-      clip delete();
+        clip delete();
       }
 
       continue;
@@ -846,8 +836,7 @@ ondrop(player) {
   if(!level.bombplanted) {
     if(isDefined(player)) {
       player logstring("bomb dropped");
-    }
-    else {
+    } else {
       logstring("bomb dropped");
     }
   }
@@ -870,8 +859,7 @@ onpickup(player) {
   maps\mp\_utility::playsoundonplayers(game["bomb_recovered_sound"], game["attackers"]);
 }
 
-onreset() {
-}
+onreset() {}
 
 bombreset(label, reason) {
   if(label == "_a") {

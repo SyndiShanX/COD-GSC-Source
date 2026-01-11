@@ -139,8 +139,7 @@ snd_play_auto_fx(fxid, alias, offsetx, offsety, offsetz, onground, area) {
 
 snd_play_auto_fturbine_area_emmiters() {
   for(i = 0; i < level.createfxent.size; i++) {
-    if(level.createfxent[i].soundentarea > 1) {
-    }
+    if(level.createfxent[i].soundentarea > 1) {}
   }
 }
 

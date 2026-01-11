@@ -90,8 +90,7 @@ anims() {
 
   if(getdvarint("use_old_scoutsniper_intro") == 1) {
     level.scr_anim["price"]["scoutsniper_opening_price"] = % scout_sniper_price_prone_opening;
-  }
-  else {
+  } else {
     level.scr_anim["price"]["scoutsniper_opening_price"] = % h1_scout_sniper_macmillan_intro;
     maps\_anim::addnotetrack_dialogue("price", "dialog", "scoutsniper_opening_price", "scoutsniper_mcm_radiation");
     maps\_anim::addnotetrack_dialogue("price", "dialog", "scoutsniper_opening_price", "scoutsniper_mcm_followme");

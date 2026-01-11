@@ -97,8 +97,7 @@ depth_charge_remove_control(var_0) {
 
   if(var_0) {
     self setweaponhudiconoverride("actionslot1", "crr_dpad_osprey_inactive");
-  }
-  else {
+  } else {
     self setweaponhudiconoverride("actionslot1", "none");
   }
 
@@ -866,8 +865,7 @@ depth_charge_drop_hint() {
 
   if(!isDefined(level.first_time_depth_charge_drop_hint)) {
     level.first_time_depth_charge_drop_hint = 1;
-  }
-  else {
+  } else {
     level.first_time_depth_charge_drop_hint = 0;
   }
 
@@ -909,8 +907,7 @@ depth_charge_minigun_hint() {
 
   if(!isDefined(level.first_time_depth_charge_minigun_hint)) {
     level.first_time_depth_charge_minigun_hint = 1;
-  }
-  else {
+  } else {
     level.first_time_depth_charge_minigun_hint = 0;
   }
 
@@ -928,11 +925,9 @@ depth_charge_minigun_hint() {
 
   if(var_2) {
     var_0 settext(&"CARRIER_DEPTH_CHARGE_MG_HINT");
-  }
-  else if(var_3) {
+  } else if(var_3) {
     var_0 settext(&"CARRIER_DEPTH_CHARGE_MG_NOMAD_HINT");
-  }
-  else {
+  } else {
     var_0 settext(&"CARRIER_DEPTH_CHARGE_MG_PC_HINT");
   }
 
@@ -1087,8 +1082,7 @@ depth_charge_handle_zoom() {
 
     if(level.depth_charge_current_fov < level.depth_charge_min_fov) {
       level.depth_charge_current_fov = level.depth_charge_min_fov;
-    }
-    else if(level.depth_charge_current_fov > level.depth_charge_max_fov) {
+    } else if(level.depth_charge_current_fov > level.depth_charge_max_fov) {
       level.depth_charge_current_fov = level.depth_charge_max_fov;
     }
 
@@ -1133,7 +1127,7 @@ depth_charge_mark_friendlies() {
   }
 
   foreach(var_4 in level.drones["allies"].array) {
-  var_4 thread maps\carrier_code::setup_target_on_vehicle();
+    var_4 thread maps\carrier_code::setup_target_on_vehicle();
   }
 }
 

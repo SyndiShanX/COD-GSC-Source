@@ -550,8 +550,7 @@ watchGrenadeUsage() {
     self.gotPullbackNotify = true;
     if(weaponName == "satchel_charge_mp") {
       self beginSatchelTracking();
-    }
-    else {
+    } else {
       self beginGrenadeTracking();
     }
   }
@@ -875,8 +874,7 @@ bettyDamage() {
   }
   if(level.bettyexplodethisframe) {
     wait .1 + randomfloat(.4);
-  }
-  else {
+  } else {
     wait .05;
   }
   if(!isDefined(self)) {
@@ -932,8 +930,7 @@ satchelDamage() {
   }
   if(level.satchelexplodethisframe) {
     wait .1 + randomfloat(.4);
-  }
-  else {
+  } else {
     wait .05;
   }
   if(!isDefined(self)) {
@@ -1221,14 +1218,11 @@ isGrenade(weaponname) {
 getWeaponClass_array(current) {
   if(isPrimaryWeapon(current)) {
     return level.primary_weapon_array;
-  }
-  else if(isSideArm(current)) {
+  } else if(isSideArm(current)) {
     return level.side_arm_array;
-  }
-  else if(isGrenade(current)) {
+  } else if(isGrenade(current)) {
     return level.grenade_array;
-  }
-  else {
+  } else {
     return level.inventory_array;
   }
 }
@@ -1251,14 +1245,11 @@ updateStowedWeapon() {
     for(idx = 0; idx < weaponsList.size; idx++) {
       if(isPrimaryWeapon(weaponsList[idx])) {
         self.weapon_array_primary[self.weapon_array_primary.size] = weaponsList[idx];
-      }
-      else if(isSideArm(weaponsList[idx])) {
+      } else if(isSideArm(weaponsList[idx])) {
         self.weapon_array_sidearm[self.weapon_array_sidearm.size] = weaponsList[idx];
-      }
-      else if(isGrenade(weaponsList[idx])) {
+      } else if(isGrenade(weaponsList[idx])) {
         self.weapon_array_grenade[self.weapon_array_grenade.size] = weaponsList[idx];
-      }
-      else if(isInventory(weaponsList[idx])) {
+      } else if(isInventory(weaponsList[idx])) {
         self.weapon_array_inventory[self.weapon_array_inventory.size] = weaponsList[idx];
       }
     }
@@ -1327,8 +1318,7 @@ stow_on_back() {
       assertex(isDefined(self.curclass), "Player missing current class");
       if(isDefined(self.custom_class) && isDefined(self.custom_class[self.class_num]["camo_num"]) && isSubStr(index_weapon, self.pers["primaryWeapon"]) && isSubStr(self.curclass, "CUSTOM")) {
         self.tag_stowed_back = getWeaponModel(index_weapon, self.custom_class[self.class_num]["camo_num"]);
-      }
-      else {
+      } else {
         self.tag_stowed_back = getWeaponModel(index_weapon, 0);
       }
     }

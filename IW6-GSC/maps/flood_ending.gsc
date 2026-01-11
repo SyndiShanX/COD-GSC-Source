@@ -505,8 +505,7 @@ ending_player_let_go_interaction(var_0) {
 
   if(isDefined(level.console) && level.console) {
     ending_create_qte_prompt(&"FLOOD_ENDING_QTE_4B_PROMPT_TEXT");
-  }
-  else {
+  } else {
     ending_create_qte_prompt(&"FLOOD_ENDING_QTE_4_PROMPT_TEXT");
   }
 
@@ -629,7 +628,7 @@ ending_destroy_qte_prompt() {
   level notify("stop_blink");
 
   foreach(var_1 in level.ending_qte_prompt) {
-  var_1 destroy();
+    var_1 destroy();
   }
 
   level.ending_qte_prompt = undefined;
@@ -706,7 +705,7 @@ ending_player_weapon_logic() {
   var_0 = self getweaponslistall();
 
   foreach(var_2 in var_0) {
-  self takeweapon(var_2);
+    self takeweapon(var_2);
   }
 
   self giveweapon("p226_flood_ending");
@@ -831,7 +830,7 @@ ending_transition() {
 
     if(3 > var_1.size && !var_0) {
       foreach(var_3 in var_1) {
-      var_3.attackeraccuracy = 25;
+        var_3.attackeraccuracy = 25;
       }
 
       maps\_utility::activate_trigger_with_targetname("ending_heli_path");

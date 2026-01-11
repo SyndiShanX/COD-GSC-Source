@@ -4,7 +4,6 @@
 ********************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace zm_arcade_keys;
 
 class czm_arcade_keys: cluielem {
@@ -13,7 +12,7 @@ class czm_arcade_keys: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"zm_arcade_keys");
+    cluielem::open(localclientnum, # "zm_arcade_keys");
   }
 
   function function_fa582112(localclientnum) {

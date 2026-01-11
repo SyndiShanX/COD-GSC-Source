@@ -156,8 +156,7 @@ flares_handleIncomingSAM(functionOverride) {
     }
     if(isDefined(functionOverride)) {
       level thread[[functionOverride]](player, player.team, lockTarget, missileGroup);
-    }
-    else {
+    } else {
       level thread flares_watchSAMProximity(player, player.team, lockTarget, missileGroup);
     }
   }
@@ -213,8 +212,7 @@ flares_handleIncomingStinger(functionOverride) {
     }
     if(isDefined(functionOverride)) {
       missile thread[[functionOverride]](player, player.team, lockTarget);
-    }
-    else {
+    } else {
       missile thread flares_watchStingerProximity(player, player.team, lockTarget);
     }
   }
@@ -304,8 +302,7 @@ ks_manualFlares_handleIncoming(omnvar_name) {
       dir_index = 1;
       if(vec_dot > 0) {
         dir_index = 2;
-      }
-      else if(vec_dot < 0) {
+      } else if(vec_dot < 0) {
         dir_index = 3;
       }
       self.owner SetClientOmnvar(omnvar_name, dir_index);

@@ -18,7 +18,7 @@ main() {
     return;
   }
 
-    self orientMode("face default");
+  self orientMode("face default");
   self endon("killanimscript");
 
   animscripts\utility::initialize("grenade_return_throw");
@@ -66,8 +66,7 @@ main() {
     //else
     if(val == "throw1") {
       throwAnim = % grenade_return_running_throw_forward;
-    }
-    else if(val == "throw2") {
+    } else if(val == "throw2") {
       throwAnim = % grenade_return_standing_throw_forward_1;
     }
     //else if( val == "throw3")
@@ -77,7 +76,7 @@ main() {
     }
   }
 
-    assert(isDefined(throwAnim));
+  assert(isDefined(throwAnim));
   self setFlaggedAnimKnoballRestart("throwanim", throwAnim, % body, 1, .3);
 
   hasPickup = (animHasNotetrack(throwAnim, "grenade_left") || animHasNotetrack(throwAnim, "grenade_right"));

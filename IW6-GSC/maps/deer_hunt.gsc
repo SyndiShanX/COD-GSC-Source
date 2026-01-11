@@ -71,8 +71,7 @@ main() {
 
   if(maps\_utility::is_gen4()) {
     setsaveddvar("r_HudOutlineWidth", 3);
-  }
-  else {
+  } else {
     setsaveddvar("r_HudOutlineWidth", 2);
   }
 
@@ -393,11 +392,11 @@ flag_trigs() {
   var_1[var_1.size] = "player_dropped_down";
 
   foreach(var_3 in var_0) {
-  init_flag_and_set_on_targetname_trigger(var_3);
+    init_flag_and_set_on_targetname_trigger(var_3);
   }
 
   foreach(var_3 in var_1) {
-  thread maps\deer_hunt_util::set_flag_on_targetname_trigger_by_player(var_3);
+    thread maps\deer_hunt_util::set_flag_on_targetname_trigger_by_player(var_3);
   }
 }
 
@@ -539,7 +538,7 @@ encounter1_start() {
   }
 
   foreach(var_3, var_6 in var_4) {
-  level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
+    level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
   }
 
   maps\_utility::activate_trigger_with_targetname("dropdown_arrive");
@@ -573,7 +572,7 @@ encounter2_start() {
   }
 
   foreach(var_3, var_6 in var_4) {
-  level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
+    level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
   }
 
   maps\_utility::activate_trigger_with_targetname("encounter1_approach");
@@ -600,7 +599,7 @@ lariver_start() {
   var_4 = common_scripts\utility::getstructarray("team2_lariver", "targetname");
 
   foreach(var_3, var_6 in var_4) {
-  level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
+    level.team2[var_3] forceteleport(var_6.origin, var_6.angles);
   }
 
   thread maps\deer_hunt_intro::lariver_global_setup();
@@ -616,7 +615,7 @@ spawn_lariver_defend_balcony_guys() {
   level.balcony_friendlies = maps\_utility::array_spawn_targetname("rpg_guys", 1);
 
   foreach(var_1 in level.balcony_friendlies) {
-  var_1.spawner = common_scripts\utility::random(getEntArray("rpg_guys", "targetname"));
+    var_1.spawner = common_scripts\utility::random(getEntArray("rpg_guys", "targetname"));
   }
 }
 
@@ -646,7 +645,7 @@ lariver_defend_start() {
   var_5 = common_scripts\utility::getstructarray("la_river_defend_team2", "targetname");
 
   foreach(var_3, var_7 in var_5) {
-  level.team2[var_3] forceteleport(var_7.origin, var_7.angles);
+    level.team2[var_3] forceteleport(var_7.origin, var_7.angles);
   }
 
   level.lariver_early_ai = level.balcony_friendlies;

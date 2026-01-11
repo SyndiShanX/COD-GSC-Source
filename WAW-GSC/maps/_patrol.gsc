@@ -80,8 +80,7 @@ patrol(start_target) {
     [[set_goal_func[goal_type]]](currentgoal);
     if(isDefined(currentgoal.radius) && currentgoal.radius > 0) {
       self.goalradius = currentgoal.radius;
-    }
-    else {
+    } else {
       self.goalradius = 32;
     }
     self waittill("goal");

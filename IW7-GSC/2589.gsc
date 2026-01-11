@@ -49,9 +49,7 @@ func_C878() {
   for(;;) {
     self waittill("pain");
     if(isDefined(self.var_71D0)) {
-      if(![
-          [self.var_71D0]
-        ]()) {
+      if(![[self.var_71D0]]()) {
         continue;
       }
     } else if(!func_1004C()) {

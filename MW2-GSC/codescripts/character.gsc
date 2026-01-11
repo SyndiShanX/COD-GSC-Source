@@ -88,8 +88,7 @@ load(info) {
 precache(info) {
   if(isDefined(info["name"])) {
     println("Precache: Guy has name ", info["name"]);
-  }
-  else {
+  } else {
     println("Precache: Guy had no name!");
   }
 

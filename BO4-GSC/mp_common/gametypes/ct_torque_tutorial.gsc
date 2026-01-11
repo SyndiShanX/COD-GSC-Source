@@ -32,7 +32,6 @@
 #include scripts\mp_common\player\player_loadout;
 #include scripts\weapons\deployable;
 #include scripts\weapons\sensor_dart;
-
 #namespace ct_torque_tutorial;
 
 init() {
@@ -165,7 +164,7 @@ function_c9ff0dce() {
   if(isDefined(level.var_72d7275b) && level.var_72d7275b) {
     self.ignoreall = 0;
 
-    if(self.team === #"axis") {
+    if(self.team === # "axis") {
       self.var_71a70093 = 150;
 
       if(isDefined(level.var_8ca3c62)) {
@@ -198,7 +197,7 @@ function_c9ff0dce() {
       if(isDefined(level.var_1569cc4d) && level.var_1569cc4d) {
         self thread ct_utils::function_8963dae3();
       }
-    } else if(self.team === #"allies") {
+    } else if(self.team === # "allies") {
       self.var_71a70093 = 150;
 
       if(isDefined(level.var_8ca3c62)) {
@@ -221,12 +220,12 @@ function_72ba0df6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     self.overrideplayerdamage = undefined;
 
     if(level.var_8ca3c62 == 7) {
-      if(self.team === #"axis" && attacker == ct_utils::get_player()) {
+      if(self.team === # "axis" && attacker == ct_utils::get_player()) {
         self thread function_5d65fa2b();
       }
     }
 
-    if(self.team == #"axis" && isDefined(self.b_sniper) && self.b_sniper) {
+    if(self.team == # "axis" && isDefined(self.b_sniper) && self.b_sniper) {
       level.var_e8126cf6--;
       self.b_sniper = 0;
     }
@@ -291,7 +290,7 @@ function_2823bfa7() {
   self setnormalhealth(1);
   self thread ct_utils::player_collisionbox(undefined, self.origin);
   self ct_vo::function_3ca1b77d(1);
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self ct_utils::function_6ad0c151();
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_start_1"));
   self thread ct_utils::function_61c3d59c(#"hash_15262616ac3924f0");
@@ -314,14 +313,14 @@ function_2823bfa7() {
 
 function_c37caebd() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, #"death", #"hash_34a524e09eb9209f");
+  self endoncallback(&function_344aee09, # "death", # "hash_34a524e09eb9209f");
   level.var_5b4739ff = 0;
 
   while(isDefined(level.var_29324553) && level.var_29324553 || !(isDefined(level.var_86b67c3f) && level.var_86b67c3f)) {
     waitframe(1);
   }
 
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self ct_utils::function_6ad0c151();
   self ct_vo::function_3ca1b77d(1);
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_razor_wire_2"));
@@ -336,10 +335,10 @@ function_c37caebd() {
   level notify(#"hash_60e26e14a51c5211");
   self ct_utils::function_1bb93418();
   wait 1;
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self thread function_222141a5();
   self setlowready(1);
-  ct_bots::activate_bots(1, #"axis", "bot_stuckguy", 1);
+  ct_bots::activate_bots(1, # "axis", "bot_stuckguy", 1);
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_enemy_stuck_0"));
   level waittill(#"enemy_stuck_in_razorwire");
   self ct_vo::function_3ca1b77d(1);
@@ -384,7 +383,7 @@ function_3068d031() {
 
 function_23f8245b() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, #"death", #"hash_34a524e09eb9209f");
+  self endoncallback(&function_344aee09, # "death", # "hash_34a524e09eb9209f");
   level.release_spawn = 0;
 
   while(isDefined(level.var_29324553) && level.var_29324553 || !(isDefined(level.var_86b67c3f) && level.var_86b67c3f)) {
@@ -410,7 +409,7 @@ function_23f8245b() {
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_torq_two_razor_wire_nag", 30, 15);
   self function_44776cd(1, "s_torque_tut_2_razorwire_deploy_r");
   self setlowready(1);
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self ct_utils::function_1bb93418();
   level notify(#"hash_60e26e14a51c5211");
   waitframe(1);
@@ -427,7 +426,7 @@ function_23f8245b() {
   do {
     level.var_c1ee2be7 = 0;
     level.var_69cfcf85 = 0;
-    ct_bots::activate_bots(1, #"axis", "bot_stuckguy", 1);
+    ct_bots::activate_bots(1, # "axis", "bot_stuckguy", 1);
     level waittill(#"enemy_stuck_in_razorwire");
     self thread ct_utils::function_61c3d59c(undefined, undefined, "dynobj_KillWireTrappedEnemies");
     level.var_a731abd6 = 3;
@@ -438,9 +437,9 @@ function_23f8245b() {
     self ct_vo::function_3ca1b77d(1);
     level notify(#"hash_4c2e751dd9e2bb57");
     self thread ct_vo::function_625a37f9("vox_tvoi_tutor_torq_enemy_2_down", "enemy_stuck_in_razorwire");
-    ct_bots::activate_bots(1, #"axis", "bot_stuckguy", 1);
+    ct_bots::activate_bots(1, # "axis", "bot_stuckguy", 1);
     wait 0.5;
-    ct_bots::activate_bots(1, #"axis", "bot_stuckguy", 1);
+    ct_bots::activate_bots(1, # "axis", "bot_stuckguy", 1);
     self ct_utils::function_d00e0eeb();
     level notify(#"hash_4c2e751dd9e2bb57");
   }
@@ -468,7 +467,7 @@ function_8d55c46b() {
 
 function_5fd87ab3(s_loc) {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_529bea71, #"death");
+  self endoncallback(&function_529bea71, # "death");
   s_dest = struct::get(s_loc.target, "targetname");
   self ct_bots::function_35e77034(getweapon(#"smg_standard_t8"));
   self thread ct_utils::function_5b59f3b7(s_dest.origin, s_dest.angles, 32, 1, 1, 0);
@@ -513,7 +512,7 @@ function_6f544e0b() {
 
 function_b2770e99() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, #"death", #"hash_34a524e09eb9209f");
+  self endoncallback(&function_344aee09, # "death", # "hash_34a524e09eb9209f");
   level.var_89961b65 = 0;
 
   while(isDefined(level.var_29324553) && level.var_29324553 || !(isDefined(level.var_86b67c3f) && level.var_86b67c3f)) {
@@ -534,7 +533,7 @@ function_b2770e99() {
   self function_44776cd(1, s_loc);
   level notify(#"hash_60e26e14a51c5211");
   self ct_utils::function_1bb93418();
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self ct_vo::function_3ca1b77d(1);
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_razor_wire_comp_0"));
   self thread function_6ad22c31();
@@ -543,7 +542,7 @@ function_b2770e99() {
 
   do {
     self setlowready(1);
-    ct_bots::activate_bots(1, #"axis", "bot_dummyfish", 1);
+    ct_bots::activate_bots(1, # "axis", "bot_dummyfish", 1);
     level waittill(#"enemy_stuck_in_razorwire");
     self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_enemy_smoked_0"));
     self setlowready(0);
@@ -559,7 +558,7 @@ function_7b076571() {
   level endon(#"combattraining_logic_finished");
   level.var_8ca3c62 = 4;
   self setnormalhealth(1);
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self ct_vo::function_3ca1b77d(1);
 
   do {
@@ -576,7 +575,7 @@ function_7b076571() {
 
 function_4aa64c88() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, #"death");
+  self endoncallback(&function_344aee09, # "death");
   level.var_5610eee8 = 0;
   level notify(#"colbounds_tut_4_on");
 
@@ -585,7 +584,7 @@ function_4aa64c88() {
   }
 
   self ct_utils::function_6ad0c151();
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_torq_slide_2_nag", 30, 15);
   self thread ct_utils::function_61c3d59c(#"hash_15262616ac3924f0", array("vox_tvoi_tutor_torq_smrt_cvr_0", "vox_tvoi_tutor_torq_smrt_cvr_1"));
   self ct_utils::tutorial_goto("s_torque_tut_4_goto");
@@ -595,20 +594,20 @@ function_4aa64c88() {
   self ct_vo::function_3ca1b77d(1);
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_smrt_cvr_2"));
   level.var_e72728b8 = array(#"eq_concertina_wire");
-  var_89975e11 = self gamepadusedlast() ? #"hash_75eaa8ffc71cdd9d" : #"hash_69973debc6e768f3";
+  var_89975e11 = self gamepadusedlast() ? # "hash_75eaa8ffc71cdd9d" : # "hash_69973debc6e768f3";
   self thread ct_utils::function_61c3d59c(var_89975e11);
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_torq_smrt_cvr_nag", 30, 20);
   s_loc = struct::get("s_torque_tut_4_barricade_deploy", "targetname");
   self function_44776cd(2, s_loc);
   level notify(#"hash_60e26e14a51c5211");
   self ct_utils::function_1bb93418();
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self ct_vo::function_3ca1b77d(1);
   self thread ct_utils::function_61c3d59c(#"hash_4a1a6d0229d29555");
   level.a_s_targets = struct::get_array("s_torque_tut_4_enemy_spawn", "targetname");
   level.a_s_targets = array::sort_by_script_int(level.a_s_targets, 1);
   level.var_c1ee2be7 = 0;
-  ct_bots::activate_bots(1, #"axis", "bot_friedguy", 1);
+  ct_bots::activate_bots(1, # "axis", "bot_friedguy", 1);
   wait 1;
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_rad_field_0"));
   a_e_enemies = self ct_bots::function_dde6edbd();
@@ -628,7 +627,7 @@ function_4aa64c88() {
   self ct_vo::function_3ca1b77d(1);
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_rad_field_1"));
   self thread function_222141a5();
-  ct_bots::activate_bots(2, #"axis");
+  ct_bots::activate_bots(2, # "axis");
   self thread ct_utils::function_61c3d59c(#"hash_4263e7f721a63f27");
   self ct_utils::function_d00e0eeb();
   self ct_vo::function_3ca1b77d(1);
@@ -648,7 +647,7 @@ function_bab30cda() {
 
 function_f29fcec6(s_loc) {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_e243f675, #"death");
+  self endoncallback(&function_e243f675, # "death");
   self ct_bots::function_35e77034(getweapon(#"ar_accurate_t8"));
   s_dest = struct::get(s_loc.target, "targetname");
 
@@ -684,7 +683,7 @@ function_43d3770a() {
   level.var_8ca3c62 = 5;
   self setnormalhealth(1);
   self ct_vo::function_3ca1b77d(1);
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   level notify(#"colbounds_tut_windows_block_on");
 
   do {
@@ -697,7 +696,7 @@ function_43d3770a() {
 
 function_d27e566() {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_344aee09, #"death");
+  self endoncallback(&function_344aee09, # "death");
   level.var_431fcb17 = 0;
   level notify(#"colbounds_tut_4_5_doorway_off");
   level notify(#"colbounds_tut_5_on");
@@ -706,7 +705,7 @@ function_d27e566() {
     waitframe(1);
   }
 
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self thread function_222141a5();
   self setlowready(1);
   self thread ct_utils::function_61c3d59c(#"hash_15262616ac3924f0", array("vox_tvoi_tutor_torq_rad_field_3"));
@@ -717,7 +716,7 @@ function_d27e566() {
   waitframe(1);
   level.var_7cab580 = ct_utils::get_roleindex(#"prt_mp_engineer");
   level.select_character = ct_utils::get_roleindex(#"prt_mp_engineer");
-  ct_bots::activate_bots(1, #"axis");
+  ct_bots::activate_bots(1, # "axis");
   self thread function_fd0b81b();
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_enemy_razor_wire_0", "vox_tvoi_tutor_torq_enemy_razor_wire_1"));
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_enemy_razor_wire_rpg"));
@@ -745,7 +744,7 @@ function_fd0b81b() {
 
   waitframe(1);
   level.var_7afae51f clientfield::set("enemyobj_keyline_render", 1);
-  level.var_7afae51f.waypoint = ct_utils::create_waypoint(#"hash_3489718f227fba3", level.var_7afae51f.origin, level.var_7afae51f.angles, #"axis", #"axis", undefined);
+  level.var_7afae51f.waypoint = ct_utils::create_waypoint(#"hash_3489718f227fba3", level.var_7afae51f.origin, level.var_7afae51f.angles, # "axis", # "axis", undefined);
   level.var_7afae51f waittill(#"death");
 
   if(isDefined(level.var_7afae51f)) {
@@ -771,8 +770,8 @@ function_dbc41f2b() {
   }
 
   e_player = ct_utils::get_player();
-  level.var_7afae51f endoncallback(&function_eeee0be0, #"death");
-  e_player endoncallback(&function_eeee0be0, #"death");
+  level.var_7afae51f endoncallback(&function_eeee0be0, # "death");
+  e_player endoncallback(&function_eeee0be0, # "death");
 
   while(true) {
     e_player waittill(#"weapon_fired");
@@ -841,7 +840,7 @@ function_c0bc3c1c() {
 }
 
 function_159532aa() {
-  self endoncallback(&function_9c64562d, #"hash_505598c7196ba834");
+  self endoncallback(&function_9c64562d, # "hash_505598c7196ba834");
   s_escape = struct::get("s_torque_tut_5_razorwire_owner_hide", "targetname");
   self setorigin(s_escape.origin);
 
@@ -866,7 +865,7 @@ function_5d93aa8a() {
   level notify(#"colbounds_tut_6_on");
   level notify(#"colbounds_tut_windows_block_on");
   self ct_utils::function_6ad0c151();
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_enemy_razor_success"));
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_torq_slide_2_nag");
   self thread ct_utils::function_61c3d59c(#"hash_15262616ac3924f0");
@@ -891,8 +890,8 @@ function_5d93aa8a() {
 }
 
 function_b17df12a() {
-  level endoncallback(&function_3d1b545f, #"tut_6_barricade_dead", #"tut_6_razorwire_dead");
-  self endoncallback(&function_344aee09, #"death");
+  level endoncallback(&function_3d1b545f, # "tut_6_barricade_dead", # "tut_6_razorwire_dead");
+  self endoncallback(&function_344aee09, # "death");
   level.var_8197175 = 0;
   level thread ct_utils::function_95f28639("colbounds_tut_6_north");
   level thread ct_utils::function_95f28639("colbounds_tut_6_south");
@@ -901,13 +900,13 @@ function_b17df12a() {
     waitframe(1);
   }
 
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self ct_utils::function_6ad0c151();
   level notify(#"colbounds_tut_6_on");
   self setlowready(1);
   self ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_combo_cover_1"));
   self setlowready(0);
-  var_78747412 = self gamepadusedlast() ? #"hash_75eaa8ffc71cdd9d" : #"hash_69973debc6e768f3";
+  var_78747412 = self gamepadusedlast() ? # "hash_75eaa8ffc71cdd9d" : # "hash_69973debc6e768f3";
   self thread ct_utils::function_61c3d59c(var_78747412);
   self function_b512a9bf(2);
   level thread ct_utils::function_a3f8ddfa("colbounds_tut_6_south");
@@ -916,18 +915,18 @@ function_b17df12a() {
   wait 0.5;
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_place_smrt_cvr"));
   self thread ct_utils::function_61c3d59c(#"hash_3967aa9d33b8058b");
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self function_b512a9bf(0);
   level thread ct_utils::function_a3f8ddfa("colbounds_tut_6_north");
   s_loc = struct::get("s_torque_tut_6_razorwire_deploy", "targetname");
   self function_44776cd(1, s_loc);
   self thread ct_utils::function_1bb93418();
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self setlowready(1);
   self ct_vo::function_3ca1b77d(1);
   self thread ct_utils::function_1bb93418();
   self thread function_222141a5();
-  level.var_e72728b8 = array(#"ability_smart_cover", #"eq_concertina_wire");
+  level.var_e72728b8 = array(#"ability_smart_cover", # "eq_concertina_wire");
   self setlowready(0);
   var_a4b595d7 = self function_6e4b6ccc(2);
   var_f2f6bc54 = self function_6e4b6ccc(1);
@@ -956,8 +955,8 @@ function_3d1b545f(_hash) {
 }
 
 function_d4463404() {
-  level endoncallback(&function_713b1c8, #"countdown_timer_done", #"hash_582be86269c7fecc", #"tut_6_barricade_dead", #"tut_6_razorwire_dead");
-  self endoncallback(&function_713b1c8, #"death");
+  level endoncallback(&function_713b1c8, # "countdown_timer_done", # "hash_582be86269c7fecc", # "tut_6_barricade_dead", # "tut_6_razorwire_dead");
+  self endoncallback(&function_713b1c8, # "death");
   level thread function_e96cc63f(1, "s_torque_tut_6_enemy_razorwire_balc", 1, 2, 1, 0, "bot_razorwire_balc");
   level thread function_e96cc63f(2, "s_torque_tut_6_enemy_razorwire", 1, 1, 1, 1, "bot_razorwire");
   wait 15;
@@ -998,13 +997,13 @@ function_ceb8d558() {
 }
 
 function_fb37c68(s_loc) {
-  self endoncallback(&function_fd651c5e, #"death");
+  self endoncallback(&function_fd651c5e, # "death");
   e_player = ct_utils::get_player();
 
   if(randomint(10) > 5) {
-    str_wpn = #"smg_standard_t8";
+    str_wpn = # "smg_standard_t8";
   } else {
-    str_wpn = #"ar_accurate_t8";
+    str_wpn = # "ar_accurate_t8";
   }
 
   wpn = getweapon(str_wpn);
@@ -1058,7 +1057,7 @@ function_e2a695f2() {
 }
 
 function_fac42259() {
-  self endoncallback(&function_344aee09, #"death");
+  self endoncallback(&function_344aee09, # "death");
   level.var_e3b5a41e = 0;
   level notify(#"colbounds_tut_4_5_doorway_off");
 
@@ -1132,15 +1131,15 @@ function_f22f1511(var_f3aa6dfe) {
   var_c3a1cb60[1] = "vox_tvoi_tutor_torq_final_1_wire_destroy";
 
   do {
-    s_notify = self waittill(#"damage", #"death");
+    s_notify = self waittill(#"damage", # "death");
 
-    if(isDefined(s_notify.attacker) && s_notify.attacker.team === #"axis") {
+    if(isDefined(s_notify.attacker) && s_notify.attacker.team === # "axis") {
       level notify(var_304623ae[var_f3aa6dfe]);
     }
   }
   while(isalive(self));
 
-  if(isDefined(s_notify.attacker) && s_notify.attacker.team === #"axis") {
+  if(isDefined(s_notify.attacker) && s_notify.attacker.team === # "axis") {
     ct_vo::function_831e0584(array(var_c3a1cb60[var_f3aa6dfe]));
   }
 }
@@ -1152,7 +1151,7 @@ function_1e7b4cf9() {
   level.var_21844d8c = 0;
 
   foreach(s_ally in level.var_29e32c32) {
-    ct_bots::activate_bots(1, #"allies");
+    ct_bots::activate_bots(1, # "allies");
     wait 0.5;
   }
 }
@@ -1182,9 +1181,9 @@ function_65f22190() {
 }
 
 function_4740cfb1(s_loc) {
-  self endoncallback(&function_20547133, #"death");
+  self endoncallback(&function_20547133, # "death");
   self clientfield::set("player_keyline_render", 1);
-  a_str_wpns = array(#"smg_standard_t8", #"ar_accurate_t8");
+  a_str_wpns = array(#"smg_standard_t8", # "ar_accurate_t8");
   str_wpn = array::random(a_str_wpns);
   self ct_utils::give_weapon(str_wpn);
   self.bot.var_b2b8f0b6 = 100;
@@ -1252,15 +1251,15 @@ function_1633d58c() {
   while(true) {
     s_notify = self waittill(#"damage");
 
-    if(isDefined(s_notify.attacker) && s_notify.attacker.team == #"axis") {
+    if(isDefined(s_notify.attacker) && s_notify.attacker.team == # "axis") {
       self dodamage(s_notify.amount * 0.5, s_notify.position, s_notify.attacker, s_notify.inflictor, s_notify.part_name, s_notify.mod, s_notify.flags, s_notify.weapon);
     }
   }
 }
 
 fin1_enemies_spawn() {
-  level endoncallback(&function_fd2b7387, #"combattraining_logic_finished");
-  self endoncallback(&function_fd2b7387, #"death");
+  level endoncallback(&function_fd2b7387, # "combattraining_logic_finished");
+  self endoncallback(&function_fd2b7387, # "death");
   ct_utils::function_9aca2fa0("ct_action2");
   level flag::clear("fin1_enemies_spawn_done");
   level.var_e8126cf6 = 0;
@@ -1317,15 +1316,15 @@ function_d8b20bcd(s_loc) {
   self flag::clear("fixate_on_player");
 
   if(level.var_e8126cf6 < 2) {
-    a_str_wpns = array(#"smg_standard_t8", #"ar_accurate_t8", #"shotgun_pump_t8", #"sniper_powerbolt_t8");
+    a_str_wpns = array(#"smg_standard_t8", # "ar_accurate_t8", # "shotgun_pump_t8", # "sniper_powerbolt_t8");
   } else {
-    a_str_wpns = array(#"smg_standard_t8", #"ar_accurate_t8", #"shotgun_pump_t8", #"lmg_standard_t8");
+    a_str_wpns = array(#"smg_standard_t8", # "ar_accurate_t8", # "shotgun_pump_t8", # "lmg_standard_t8");
   }
 
   str_wpn = array::random(a_str_wpns);
   self ct_utils::give_weapon(str_wpn);
 
-  if(str_wpn == #"sniper_powerbolt_t8") {
+  if(str_wpn == # "sniper_powerbolt_t8") {
     self.b_sniper = 1;
     level.var_e8126cf6++;
   }
@@ -1345,9 +1344,9 @@ function_d8b20bcd(s_loc) {
       }
 
       switch (self.e_target.var_d1da3a83) {
-        case #"bot":
-        case #"cover_wire":
-        case #"cover_barricade":
+        case # "bot":
+        case # "cover_wire":
+        case # "cover_barricade":
           self.bot.var_b2b8f0b6 = 200;
           self.bot.var_e8c941d6 = 400;
           break;
@@ -1357,7 +1356,7 @@ function_d8b20bcd(s_loc) {
           break;
       }
 
-      if(str_wpn != #"sniper_powerbolt_t8" && !isbot(self.e_target)) {
+      if(str_wpn != # "sniper_powerbolt_t8" && !isbot(self.e_target)) {
         if(self.e_target.var_d1da3a83 == "cover_barricade" && !(isDefined(self.e_target.b_badplace) && self.e_target.b_badplace)) {
           s_loc = undefined;
           b_water_plant_intro_go_dust_ = arraycopy(self.e_target.b_water_plant_intro_go_dust_);
@@ -1395,7 +1394,7 @@ function_d8b20bcd(s_loc) {
           continue;
         }
       } else {
-        if(str_wpn == #"sniper_powerbolt_t8") {
+        if(str_wpn == # "sniper_powerbolt_t8") {
           self.bot.var_b2b8f0b6 = 50;
           self.bot.var_e8c941d6 = 100;
           s_loc = arraygetclosest(self.e_target.origin, var_65769d68, 200);
@@ -1490,7 +1489,7 @@ function_e32e98c9(s_loc) {
 
     var_c481f7e6 = randomfloatrange(0, 100);
 
-    if(isDefined(s_loc.script_noteworthy) && s_loc.script_noteworthy == #"crouch" || var_c481f7e6 < 50) {
+    if(isDefined(s_loc.script_noteworthy) && s_loc.script_noteworthy == # "crouch" || var_c481f7e6 < 50) {
       self bot_stance::crouch();
     }
 
@@ -1530,7 +1529,7 @@ function_32d78b44() {
     a_ai_bots = ct_bots::function_fbe3dcbb();
 
     foreach(ai_bot in a_ai_bots) {
-      if(isalive(ai_bot) && ai_bot.team == #"allies" && isDefined(ai_bot.allowdeath) && ai_bot.allowdeath) {
+      if(isalive(ai_bot) && ai_bot.team == # "allies" && isDefined(ai_bot.allowdeath) && ai_bot.allowdeath) {
         ai_bot.var_d1da3a83 = "bot";
         var_538664a6[var_538664a6.size] = ai_bot;
       }
@@ -1574,7 +1573,7 @@ function_fee5ce70() {
 }
 
 function_b452b299() {
-  self endoncallback(&function_344aee09, #"death");
+  self endoncallback(&function_344aee09, # "death");
   level.var_3ba25888 = 0;
   level notify(#"colbounds_tut_4_5_doorway_off");
 
@@ -1636,7 +1635,7 @@ function_d04c80b2() {
 }
 
 function_bfebe12d() {
-  self endoncallback(&function_e178ad70, #"death");
+  self endoncallback(&function_e178ad70, # "death");
   level.var_51ff7a58 = 0;
   wait 1;
 
@@ -1656,7 +1655,7 @@ function_bfebe12d() {
   level flag::set("fin2_killstreak_earned");
   self ct_utils::function_1bb93418();
   wait 1;
-  var_ec746d30 = self gamepadusedlast() ? #"hash_68966a9a9f01485a" : #"hash_5aa86538a8f0dfa";
+  var_ec746d30 = self gamepadusedlast() ? # "hash_68966a9a9f01485a" : # "hash_5aa86538a8f0dfa";
   self thread ct_utils::function_61c3d59c(var_ec746d30, undefined, undefined);
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_final_2_strike_ready"));
   self thread ct_vo::function_261ed63c("vox_tvoi_tutor_torq_final_2_strike_ready_nag");
@@ -1672,7 +1671,7 @@ function_bfebe12d() {
   self thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_final_2_strike_arrive"));
   level flag::set("fin2_killstreak_used");
   wait 8;
-  var_bb3b2607 = self gamepadusedlast() ? #"hash_4beba6ce2b7174c7" : #"hash_7dc6bf042b71ba71";
+  var_bb3b2607 = self gamepadusedlast() ? # "hash_4beba6ce2b7174c7" : # "hash_7dc6bf042b71ba71";
   self thread ct_utils::function_61c3d59c(var_bb3b2607, undefined, undefined);
   function_e178ad70(#"hash_1e9ac26db38673e4");
 }
@@ -1686,12 +1685,12 @@ function_78986232(params) {
   weapon = params.weapon;
 
   if(isplayer(eattacker) && !(isDefined(level.var_51ff7a58) && level.var_51ff7a58)) {
-    cost = killstreaks::get_killstreak_momentum_cost(eattacker, #"swat_team");
+    cost = killstreaks::get_killstreak_momentum_cost(eattacker, # "swat_team");
     var_23efb519 = 10;
     var_595e41ee = 150;
-    event = #"ekia";
-    eventindex = level.scoreinfo[event][#"row"];
-    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, #"hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
+    event = # "ekia";
+    eventindex = level.scoreinfo[event][# "row"];
+    eattacker globallogic_score::giveplayermomentumnotification(var_595e41ee, # "hash_480234a872bd64ac", undefined, 0, weapon, 0, eventindex, event, undefined);
     level.var_d1f07c87++;
 
     if(!eattacker ct_utils::function_a7540094()) {
@@ -1702,8 +1701,8 @@ function_78986232(params) {
   }
 }
 
-function_b2e3d55a(str_notify, var_6202642d = #"axis", var_64179396 = 1) {
-  level endon(#"combattraining_logic_finished", #"hash_4daf98b666a39c1d");
+function_b2e3d55a(str_notify, var_6202642d = # "axis", var_64179396 = 1) {
+  level endon(#"combattraining_logic_finished", # "hash_4daf98b666a39c1d");
   e_player = ct_utils::get_player();
   e_player endon(#"death");
   s_notify = self waittill(#"death");
@@ -1714,7 +1713,7 @@ function_b2e3d55a(str_notify, var_6202642d = #"axis", var_64179396 = 1) {
   }
 }
 
-vo_on_damage(str_vo, var_f4b1cabb = 1, n_rest = 10, var_515667fb = #"axis", str_mod, str_weapon) {
+vo_on_damage(str_vo, var_f4b1cabb = 1, n_rest = 10, var_515667fb = # "axis", str_mod, str_weapon) {
   level endon(#"combattraining_logic_finished");
   self endon(#"death");
   e_player = ct_utils::get_player();
@@ -1737,7 +1736,7 @@ vo_on_damage(str_vo, var_f4b1cabb = 1, n_rest = 10, var_515667fb = #"axis", str_
 }
 
 function_fde0ed2f(a_n_counts, spawnpts, n_rest = 0.25, b_randomize = 0, var_e9cd12e3 = 0) {
-  self endoncallback(&function_8749da79, #"death", #"hash_5ead4664baf07eab");
+  self endoncallback(&function_8749da79, # "death", # "hash_5ead4664baf07eab");
   level.var_2c6e8cfe = 0;
 
   if(isarray(spawnpts)) {
@@ -1758,10 +1757,10 @@ function_fde0ed2f(a_n_counts, spawnpts, n_rest = 0.25, b_randomize = 0, var_e9cd
 
   foreach(n_count in a_n_counts) {
     if(var_e9cd12e3 == 0) {
-      ct_bots::activate_bots(n_count, #"axis", "bot_enemy_wave");
+      ct_bots::activate_bots(n_count, # "axis", "bot_enemy_wave");
     } else {
       for(i = 0; i <= n_count; i++) {
-        ct_bots::activate_bots(1, #"axis", "bot_enemy_wave");
+        ct_bots::activate_bots(1, # "axis", "bot_enemy_wave");
         wait var_e9cd12e3;
       }
     }
@@ -1776,13 +1775,13 @@ function_fde0ed2f(a_n_counts, spawnpts, n_rest = 0.25, b_randomize = 0, var_e9cd
 function_8749da79(_hash) {
   level notify(#"hash_6ebe7e4ea0726f0b");
 
-  if(_hash == #"done") {
+  if(_hash == # "done") {
     level notify(#"hash_7284521e58220f16");
   }
 }
 
 function_e96cc63f(n_count = 3, spawnpts, var_810b40e6 = 1, var_4837ee77 = 1, var_32df2a60 = 1, b_randomize = 0, str_targetname = "fillspawn_enemies") {
-  level endon(#"combattraining_logic_finished", #"hash_3ce5abc259d8b041");
+  level endon(#"combattraining_logic_finished", # "hash_3ce5abc259d8b041");
   e_player = getplayers()[0];
   e_player endon(#"death");
 
@@ -1826,12 +1825,12 @@ function_e96cc63f(n_count = 3, spawnpts, var_810b40e6 = 1, var_4837ee77 = 1, var
         n_to_spawn = var_810b40e6;
       }
 
-      ct_bots::activate_bots(n_to_spawn, #"axis", str_targetname);
+      ct_bots::activate_bots(n_to_spawn, # "axis", str_targetname);
       var_d24d310 += n_to_spawn;
 
       var_1411e20e = e_player ct_bots::function_dde6edbd();
 
-        wait var_4837ee77;
+      wait var_4837ee77;
       a_enemies = function_3dd59a93(str_targetname);
     }
 
@@ -1882,7 +1881,7 @@ function_344aee09(_hash) {
       level.var_7afae51f concertina_wire::function_4ee7d46a(1);
     }
 
-    if(_hash == #"death") {
+    if(_hash == # "death") {
       n_wait = 1;
 
       if(level.var_8ca3c62 === 4) {
@@ -1908,22 +1907,22 @@ function_344aee09(_hash) {
     } else {
       n_wait = 2;
 
-      if(_hash == #"tut_6_barricade_dead") {
+      if(_hash == # "tut_6_barricade_dead") {
         e_player ct_vo::function_c72e58c1(#"failed");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_smrt_cvr_destroy"));
-        var_16b5c6bb = e_player gamepadusedlast() ? #"hash_4194c81053f07918" : #"hash_7b43013359063e4";
+        var_16b5c6bb = e_player gamepadusedlast() ? # "hash_4194c81053f07918" : # "hash_7b43013359063e4";
         ct_utils::function_a61ebb46(var_16b5c6bb);
         str_respawn = "s_torque_tut_6_respawn";
-      } else if(_hash == #"tut_6_razorwire_dead") {
+      } else if(_hash == # "tut_6_razorwire_dead") {
         e_player ct_vo::function_c72e58c1(#"failed");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_razor_wire_destroy"));
-        var_edd14440 = e_player gamepadusedlast() ? #"hash_16e6d107836c380a" : #"hash_618673f250fa320a";
+        var_edd14440 = e_player gamepadusedlast() ? # "hash_16e6d107836c380a" : # "hash_618673f250fa320a";
         ct_utils::function_a61ebb46(var_edd14440);
         str_respawn = "s_torque_tut_6_respawn";
-      } else if(_hash == #"hash_34a524e09eb9209f") {
+      } else if(_hash == # "hash_34a524e09eb9209f") {
         e_player ct_vo::function_c72e58c1(#"failed");
         e_player thread ct_vo::function_831e0584(array("vox_tvoi_tutor_torq_enemy_stuck_nag"));
-        var_a139eb64 = e_player gamepadusedlast() ? #"hash_4762a2aaf0787460" : #"hash_1736a34805e7e1cc";
+        var_a139eb64 = e_player gamepadusedlast() ? # "hash_4762a2aaf0787460" : # "hash_1736a34805e7e1cc";
         ct_utils::function_a61ebb46(var_a139eb64);
         a_str_respawn = [];
         a_str_respawn[1] = "s_torque_tut_1_respawn";
@@ -1979,7 +1978,7 @@ _enemy_setup(var_1640cf17, b_ignoreall = 1, var_bab91f2 = 32, var_cde63359 = 0) 
 
   assert(isDefined(s_loc), "<dev string:x38>");
   self ct_utils::function_61d750d4(s_loc.origin, s_loc.angles);
-  a_str_wpn = array(#"smg_standard_t8", #"ar_accurate_t8");
+  a_str_wpn = array(#"smg_standard_t8", # "ar_accurate_t8");
   self ct_bots::function_35e77034(getweapon(array::random(a_str_wpn)));
   self.bot.var_b2b8f0b6 = 450;
   self.bot.var_e8c941d6 = 900;
@@ -1991,7 +1990,7 @@ _enemy_setup(var_1640cf17, b_ignoreall = 1, var_bab91f2 = 32, var_cde63359 = 0) 
 
   debugstar(s_dest.origin, 9999, (0, 0, 1));
 
-    self thread ct_utils::function_5b59f3b7(s_dest.origin, s_dest.angles, var_bab91f2);
+  self thread ct_utils::function_5b59f3b7(s_dest.origin, s_dest.angles, var_bab91f2);
   self val::set("torque_tut_ignoreall", "ignoreall", 1);
   level.a_ai_targets[level.a_ai_targets.size] = self;
 
@@ -2012,7 +2011,7 @@ function_a20738a(var_fd986e47 = 0) {
   level endon(#"combattraining_logic_finished");
   self notify(#"hash_61dc8f3ee9a14061");
   waitframe(1);
-  self endon(#"death", #"hash_61dc8f3ee9a14061");
+  self endon(#"death", # "hash_61dc8f3ee9a14061");
   e_player = ct_utils::get_player();
   self.var_41f5536a = 0;
   e_razorwire = self function_d5935c84();
@@ -2130,7 +2129,7 @@ function_e1e35c8b(var_f3aa6dfe, a_s_loc, n_range = 32) {
 
 function_44776cd(var_f3aa6dfe, s_loc, n_range = 24) {
   level endon(#"combattraining_logic_finished");
-  self endoncallback(&function_fb9249d1, #"death", #"hash_390f0b2fe23f5ee8");
+  self endoncallback(&function_fb9249d1, # "death", # "hash_390f0b2fe23f5ee8");
   self endon(#"disconnect");
 
   while(isDefined(self.var_8209baa4) && self.var_8209baa4) {
@@ -2154,11 +2153,11 @@ function_44776cd(var_f3aa6dfe, s_loc, n_range = 24) {
   var_45006933[2] = "barricade_placed_near_spot";
   var_45006933[1] = "razorwire_placed_near_spot";
   var_4633cf09 = [];
-  var_4633cf09[2] = #"wpn_t8_eqp_smartcover_cover_blue_fac_10";
-  var_4633cf09[1] = #"p8_fxanim_test_concertina_wire_mod";
+  var_4633cf09[2] = # "wpn_t8_eqp_smartcover_cover_blue_fac_10";
+  var_4633cf09[1] = # "p8_fxanim_test_concertina_wire_mod";
   var_88b303ee = [];
-  var_88b303ee[2] = #"hash_390cef32b1105c1d";
-  var_88b303ee[1] = #"hash_5885b4abb984f9df";
+  var_88b303ee[2] = # "hash_390cef32b1105c1d";
+  var_88b303ee[1] = # "hash_5885b4abb984f9df";
 
   if(isstring(s_loc)) {
     s_loc = struct::get(s_loc, "targetname");
@@ -2266,7 +2265,7 @@ function_400149db() {
   }
 }
 
-function_6ad22c31(var_9a9deac6, var_227aa02e, str_objective = #"hash_5fadc5cf57233ef4") {
+function_6ad22c31(var_9a9deac6, var_227aa02e, str_objective = # "hash_5fadc5cf57233ef4") {
   level endon(#"combattraining_logic_finished");
   self ct_utils::function_1bb93418();
   level waittill(#"enemy_stuck_in_razorwire");
@@ -2283,7 +2282,7 @@ on_concertinawire_placed(newcover) {
     self[[level.var_bb9429c2]](newcover);
   }
 
-  if(self.team === #"axis") {
+  if(self.team === # "axis") {
     level.var_7afae51f = newcover.concertinawire;
     level.var_7afae51f thread function_1df46b8d();
     self notify(#"hash_794fe961bd7a1e08");
@@ -2354,7 +2353,7 @@ function_84fcafbc() {
   debugstar(var_dbfef697, 10000, (0, 1, 0));
   debugstar(var_10ed11b0, 10000, (1, 0, 0));
 
-    a_s_flounder = struct::get_array("razorwire_flounder", "script_noteworthy");
+  a_s_flounder = struct::get_array("razorwire_flounder", "script_noteworthy");
   var_7d172a46 = arraygetclosest(var_10ed11b0, a_s_flounder);
   var_7d172a46.origin = var_10ed11b0;
   var_f9acf4b = struct::get(var_7d172a46.target, "targetname");
@@ -2492,8 +2491,8 @@ function_6e4b6ccc(var_f3aa6dfe) {
 
 function_b512a9bf(n_slot) {
   a_str_gadgets = [];
-  a_str_gadgets[2] = #"ability_smart_cover";
-  a_str_gadgets[0] = #"eq_concertina_wire";
+  a_str_gadgets[2] = # "ability_smart_cover";
+  a_str_gadgets[0] = # "eq_concertina_wire";
   str_gadget = a_str_gadgets[n_slot];
 
   if(isDefined(level.var_e72728b8)) {
@@ -2506,7 +2505,7 @@ function_b512a9bf(n_slot) {
 function_907568bb(str_volume = "trig_torque_tut_finale_area") {
   level notify(#"hash_1496d0fbb526a24a");
   waitframe(1);
-  level endoncallback(&function_a9832377, #"combattraining_logic_finished", #"hash_1496d0fbb526a24a");
+  level endoncallback(&function_a9832377, # "combattraining_logic_finished", # "hash_1496d0fbb526a24a");
   e_player = getplayers()[0];
   e_volume = getent(str_volume, "targetname");
   n_total = 0;

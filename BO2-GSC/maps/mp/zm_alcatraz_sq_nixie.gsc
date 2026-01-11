@@ -175,8 +175,7 @@ nixie_tube_notifier() {
 nixie_tube_add_code(a, b, c) {
   if(isDefined(b)) {
     non_array_value = a * 100 + b * 10 + c;
-  }
-  else {
+  } else {
     non_array_value = a;
   }
 
@@ -187,8 +186,7 @@ nixie_tube_add_code(a, b, c) {
 nixie_tube_remove_code(a, b, c) {
   if(isDefined(b)) {
     non_array_value = a * 100 + b * 10 + c;
-  }
-  else {
+  } else {
     non_array_value = a;
   }
 
@@ -202,8 +200,7 @@ sndnixietubecountdown(num) {
   for(i = num; i > 0; i--) {
     if(i <= 10) {
       ent playSound("zmb_quest_nixie_count_final");
-    }
-    else {
+    } else {
       ent playSound("zmb_quest_nixie_count");
     }
 

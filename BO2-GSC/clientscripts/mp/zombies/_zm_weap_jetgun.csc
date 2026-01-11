@@ -144,8 +144,7 @@ jetgun_notetrack_think() {
   }
 }
 
-jetgun_death_effects(localclientnum, weaponname, userdata) {
-}
+jetgun_death_effects(localclientnum, weaponname, userdata) {}
 
 thread_zombie_vox() {
   ent = spawn(0, self.origin, "script_origin");

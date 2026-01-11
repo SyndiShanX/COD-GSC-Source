@@ -7,11 +7,9 @@
 #include clientscripts\mp\createfx\mp_express_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
-precache_createfx_fx() {
-}
+precache_createfx_fx() {}
 
 main() {
   clientscripts\mp\createfx\mp_express_fx::main();

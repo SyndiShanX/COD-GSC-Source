@@ -27,7 +27,6 @@
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
-
 #namespace bgb;
 
 autoexec __init__system__() {
@@ -64,11 +63,11 @@ private __main__() {
 
   level thread setup_devgui();
 
-    level._effect[#"samantha_steal"] = #"zombie/fx_monkey_lightning_zmb";
+  level._effect[# "samantha_steal"] = # "zombie/fx_monkey_lightning_zmb";
 }
 
 private on_player_spawned() {
-  self.bgb = #"none";
+  self.bgb = # "none";
 
   if(!(isDefined(level.bgb_in_use) && level.bgb_in_use)) {
     return;
@@ -103,7 +102,7 @@ private bgb_player_init() {
   for(i = 0; i < 4; i++) {
     str_bgb = self.bgb_pack[i];
 
-    if(str_bgb == #"weapon_null") {
+    if(str_bgb == # "weapon_null") {
       continue;
     }
 
@@ -112,7 +111,7 @@ private bgb_player_init() {
       continue;
     }
 
-    if(str_bgb != #"weapon_null" && self getbgbremaining(str_bgb) > 0) {
+    if(str_bgb != # "weapon_null" && self getbgbremaining(str_bgb) > 0) {
       self thread zm_custom::function_deae84ba();
     }
   }
@@ -123,10 +122,10 @@ private bgb_player_init() {
     self.bgb_pack = self.var_d03d9cf3;
   }
 
-    self.bgb_stats = [];
+  self.bgb_stats = [];
 
   foreach(bgb in self.bgb_pack) {
-    if(bgb == #"weapon_null") {
+    if(bgb == # "weapon_null") {
       continue;
     }
 
@@ -156,13 +155,13 @@ private bgb_player_init() {
   }
 
   if(zm_custom::function_901b751c(#"zmelixirsdurables")) {
-    var_66dd5e25 = array(#"zm_bgb_nowhere_but_there", #"zm_bgb_now_you_see_me");
+    var_66dd5e25 = array(#"zm_bgb_nowhere_but_there", # "zm_bgb_now_you_see_me");
     n_rank = self rank::getrank() + 1;
 
     foreach(bgb in level.bgb) {
       str_name = bgb.name;
 
-      if(bgb.rarity === 0 && str_name != #"zm_bgb_point_drops" && !array::contains(self.bgb_pack, str_name)) {
+      if(bgb.rarity === 0 && str_name != # "zm_bgb_point_drops" && !array::contains(self.bgb_pack, str_name)) {
         var_544e77f8 = level.bgb[str_name].var_a1750d43;
 
         if((!isDefined(var_544e77f8) || isDefined(var_544e77f8) && n_rank >= var_544e77f8 || function_bea73b01() == 1) && zm_custom::function_3ac936c6(str_name)) {
@@ -228,7 +227,7 @@ private bgb_player_monitor() {
   self endon(#"disconnect");
 
   while(true) {
-    waitresult = level waittill(#"between_round_over", #"restart_round");
+    waitresult = level waittill(#"between_round_over", # "restart_round");
     str_return = waitresult._notify;
 
     if(isDefined(level.var_b77403b9)) {
@@ -326,7 +325,7 @@ private bgb_set_debug_text(name, activations_remaining) {
   if(isDefined(activations_remaining)) {}
 
   self notify(#"bgb_set_debug_text_thread");
-  self endon(#"bgb_set_debug_text_thread", #"disconnect");
+  self endon(#"bgb_set_debug_text_thread", # "disconnect");
   self.bgb_debug_text fadeovertime(0.05);
   self.bgb_debug_text.alpha = 1;
   prefix = "<dev string:x12a>";
@@ -357,13 +356,13 @@ bgb_print_stats(bgb) {
   printtoprightln(function_9e72a96(bgb) + "<dev string:x19c>" + n_available, (1, 1, 1));
 }
 
-  function private has_consumable_bgb(bgb) {
-    if(!isDefined(self.bgb_stats[bgb]) || !(isDefined(level.bgb[bgb].consumable) && level.bgb[bgb].consumable)) {
-      return 0;
-    }
-
-    return 1;
+function private has_consumable_bgb(bgb) {
+  if(!isDefined(self.bgb_stats[bgb]) || !(isDefined(level.bgb[bgb].consumable) && level.bgb[bgb].consumable)) {
+    return 0;
   }
+
+  return 1;
+}
 
 sub_consumable_bgb(bgb) {
   if(!has_consumable_bgb(bgb)) {
@@ -409,7 +408,7 @@ private function_b331a28c(bgb) {
   }
 
   self val::set(#"bgb_activation", "takedamage", 0);
-  s_result = self waittilltimeout(2, #"bgb_bubble_blow_complete");
+  s_result = self waittilltimeout(2, # "bgb_bubble_blow_complete");
 
   if(isDefined(self)) {
     self val::reset(#"bgb_activation", "takedamage");
@@ -422,7 +421,7 @@ private function_1f3eb76f(bgb) {
   }
 
   self.var_e75517b1 = 1;
-  self waittilltimeout(2, #"bgb_bubble_blow_complete");
+  self waittilltimeout(2, # "bgb_bubble_blow_complete");
 
   if(isDefined(self)) {
     self.var_e75517b1 = 0;
@@ -466,10 +465,10 @@ bgb_gumball_anim(bgb) {
     waitframe(1);
   }
 
-  evt = self waittilltimeout(3, #"hash_593f920e9efd2ecd", #"bgb_gumball_anim_give");
+  evt = self waittilltimeout(3, # "hash_593f920e9efd2ecd", # "bgb_gumball_anim_give");
 
   if(isDefined(evt) && evt.bgb === bgb) {
-    if(evt._notify == #"bgb_gumball_anim_give") {
+    if(evt._notify == # "bgb_gumball_anim_give") {
       return true;
     }
   }
@@ -482,7 +481,7 @@ function_a6c704c(bgb) {
   level endon(#"end_game");
   self thread function_b331a28c(bgb);
   self thread function_1f3eb76f(bgb);
-  util::delay(#"offhand_fire", "death", &zm_audio::create_and_play_dialog, #"elixir", #"drink");
+  util::delay(#"offhand_fire", "death", &zm_audio::create_and_play_dialog, # "elixir", # "drink");
 
   if(isDefined(level.bgb[bgb].var_4a9b0cdc) && level.bgb[bgb].var_4a9b0cdc || self function_e98aa964(1)) {
     self notify(#"hash_27b238d082f65849", bgb);
@@ -544,7 +543,7 @@ function_3b2a02d8(bgb) {
     #bgb: bgb
   });
   self thread give(bgb);
-  zm_audio::create_and_play_dialog(#"elixir", #"drink");
+  zm_audio::create_and_play_dialog(#"elixir", # "drink");
   self zm_stats::increment_client_stat("bgbs_chewed");
   self zm_stats::increment_player_stat("bgbs_chewed");
   self zm_stats::increment_challenge_stat(#"gum_gobbler_consume");
@@ -555,7 +554,7 @@ function_3b2a02d8(bgb) {
     self zm_stats::increment_challenge_stat(#"hash_41d41d501c70fb30");
   }
 
-  self stats::inc_stat(#"bgb_stats", bgb, #"used", #"statvalue", 1);
+  self stats::inc_stat(#"bgb_stats", bgb, # "used", # "statvalue", 1);
   health = 0;
 
   if(isDefined(self.health)) {
@@ -591,12 +590,12 @@ private bgb_clear_monitors_and_clientfields() {
 
 private bgb_limit_monitor() {
   self notify(#"bgb_limit_monitor");
-  self endon(#"bgb_limit_monitor", #"death", #"bgb_update");
+  self endon(#"bgb_limit_monitor", # "death", # "bgb_update");
   self clientfield::set_player_uimodel("zmhud.bgb_display", 1);
   self playsoundtoplayer(#"hash_56cc165edb993de8", self);
 
   switch (level.bgb[self.bgb].limit_type) {
-    case #"activated":
+    case # "activated":
       for(i = level.bgb[self.bgb].limit; i > 0; i--) {
         if(i != level.bgb[self.bgb].limit) {
           self playsoundtoplayer(#"hash_7bb31f4a25cf34a", self);
@@ -614,7 +613,7 @@ private bgb_limit_monitor() {
 
         self thread bgb_set_debug_text(self.bgb, i);
 
-          self waittill(#"bgb_activation");
+        self waittill(#"bgb_activation");
 
         while(isDefined(self get_active()) && self get_active()) {
           waitframe(1);
@@ -636,19 +635,19 @@ private bgb_limit_monitor() {
       }
 
       break;
-    case #"time":
+    case # "time":
 
       self thread bgb_set_debug_text(self.bgb);
 
-        self thread run_timer(level.bgb[self.bgb].limit);
+      self thread run_timer(level.bgb[self.bgb].limit);
       self waittill(#"hash_347d2afccb8337ab");
       self playsoundtoplayer(#"hash_b8e60131176554b", self);
       break;
-    case #"rounds":
+    case # "rounds":
 
       self thread bgb_set_debug_text(self.bgb);
 
-        count = level.bgb[self.bgb].limit + 1;
+      count = level.bgb[self.bgb].limit + 1;
 
       for(i = 0; i < count; i++) {
         if(i != 0) {
@@ -661,11 +660,11 @@ private bgb_limit_monitor() {
 
       self playsoundtoplayer(#"hash_b8e60131176554b", self);
       break;
-    case #"event":
+    case # "event":
 
       self thread bgb_set_debug_text(self.bgb);
 
-        self bgb_set_timer_clientfield(1);
+      self bgb_set_timer_clientfield(1);
       self[[level.bgb[self.bgb].limit]]();
       self playsoundtoplayer(#"hash_b8e60131176554b", self);
       break;
@@ -678,7 +677,7 @@ private bgb_limit_monitor() {
 }
 
 private bgb_bled_out_monitor() {
-  self endon(#"disconnect", #"bgb_update");
+  self endon(#"disconnect", # "bgb_update");
   self notify(#"bgb_bled_out_monitor");
   self endon(#"bgb_bled_out_monitor");
   self waittill(#"bled_out");
@@ -723,7 +722,7 @@ function_e98aa964(var_3e37f503 = 0, str_check = self.bgb) {
 }
 
 private function_1fdcef80(bgb) {
-  self endon(#"disconnect", #"bled_out", #"bgb_update");
+  self endon(#"disconnect", # "bled_out", # "bgb_update");
 
   if(isDefined(level.bgb[bgb].var_5a047886) && level.bgb[bgb].var_5a047886) {
     function_9c8e12d1(6);
@@ -822,7 +821,7 @@ private calc_remaining_duration_lerp(start_time, end_time) {
 }
 
 private function_af43111c(var_f205d85d, percent, var_5f12e334 = 0) {
-  self endon(#"disconnect", #"hash_6ae783a3051b411b");
+  self endon(#"disconnect", # "hash_6ae783a3051b411b");
 
   if(var_5f12e334) {
     self.var_4b0fb2fb = 1;
@@ -900,7 +899,7 @@ clear_timer() {
 
 register(name, limit_type, limit, enable_func, disable_func, validation_func, activation_func) {
   assert(isDefined(name), "<dev string:x1f4>");
-  assert(#"none" != name, "<dev string:x21c>" + #"none" + "<dev string:x240>");
+  assert(#"none" != name, "<dev string:x21c>" + # "none" + "<dev string:x240>");
   assert(!isDefined(level.bgb[name]), "<dev string:x279>" + name + "<dev string:x292>");
   assert(isDefined(limit_type), "<dev string:x279>" + name + "<dev string:x2b2>");
   assert(isDefined(limit), "<dev string:x279>" + name + "<dev string:x2d2>");
@@ -908,15 +907,15 @@ register(name, limit_type, limit, enable_func, disable_func, validation_func, ac
   assert(!isDefined(disable_func) || isfunctionptr(disable_func), "<dev string:x279>" + name + "<dev string:x326>");
 
   switch (limit_type) {
-    case #"activated":
+    case # "activated":
       assert(!isDefined(validation_func) || isfunctionptr(validation_func), "<dev string:x279>" + name + "<dev string:x360>" + limit_type + "<dev string:x3ae>");
       assert(isDefined(activation_func), "<dev string:x279>" + name + "<dev string:x3b2>" + limit_type + "<dev string:x3ae>");
       assert(isfunctionptr(activation_func), "<dev string:x279>" + name + "<dev string:x3e8>" + limit_type + "<dev string:x3ae>");
-    case #"time":
-    case #"rounds":
+    case # "time":
+    case # "rounds":
       assert(isint(limit), "<dev string:x279>" + name + "<dev string:x429>" + limit + "<dev string:x436>" + limit_type + "<dev string:x3ae>");
       break;
-    case #"event":
+    case # "event":
       assert(isfunctionptr(limit), "<dev string:x279>" + name + "<dev string:x45a>" + limit_type + "<dev string:x3ae>");
       break;
     default:
@@ -1037,17 +1036,17 @@ take() {
 
   self thread bgb_set_debug_text(#"none");
 
-    if(isDefined(level.bgb[self.bgb].disable_func)) {
-      self thread[[level.bgb[self.bgb].disable_func]]();
-    }
+  if(isDefined(level.bgb[self.bgb].disable_func)) {
+    self thread[[level.bgb[self.bgb].disable_func]]();
+  }
 
   self bgb_clear_monitors_and_clientfields();
   self notify(#"bgb_update", {
-    #var_3aee8e4: #"none",
+    #var_3aee8e4: # "none",
     #var_826ddd38: self.bgb
   });
   self notify("bgb_update_take_" + self.bgb);
-  self.bgb = #"none";
+  self.bgb = # "none";
 }
 
 get_enabled() {
@@ -1055,7 +1054,7 @@ get_enabled() {
     return self.bgb;
   }
 
-  return #"none";
+  return # "none";
 }
 
 is_enabled(name) {
@@ -1070,7 +1069,7 @@ is_enabled(name) {
 
 any_enabled() {
   assert(isDefined(self.bgb));
-  return self.bgb !== #"none";
+  return self.bgb !== # "none";
 }
 
 is_team_enabled(bgb_name) {
@@ -1142,7 +1141,7 @@ actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
   if(isplayer(attacker)) {
     name = attacker get_enabled();
 
-    if(name !== #"none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_damage_override_func)) {
+    if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_damage_override_func)) {
       damage = [
         [level.bgb[name].actor_damage_override_func]
       ](inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype);
@@ -1160,7 +1159,7 @@ vehicle_damage_override(einflictor, eattacker, idamage, idflags, smeansofdeath, 
   if(isplayer(eattacker)) {
     name = eattacker get_enabled();
 
-    if(name !== #"none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].vehicle_damage_override_func)) {
+    if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].vehicle_damage_override_func)) {
       idamage = [
         [level.bgb[name].vehicle_damage_override_func]
       ](einflictor, eattacker, idamage, idflags, smeansofdeath, weapon, vpoint, vdir, shitloc, vdamageorigin, psoffsettime, damagefromunderneath, modelindex, partname, vsurfacenormal);
@@ -1178,7 +1177,7 @@ actor_death_override(attacker) {
   if(isplayer(attacker)) {
     name = attacker get_enabled();
 
-    if(name !== #"none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_death_override_func)) {
+    if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].actor_death_override_func)) {
       damage = [
         [level.bgb[name].actor_death_override_func]
       ](attacker);
@@ -1214,7 +1213,7 @@ lost_perk_override(perk) {
   foreach(player in level.activeplayers) {
     name = player get_enabled();
 
-    if(name !== #"none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].lost_perk_override_func)) {
+    if(name !== # "none" && isDefined(level.bgb[name]) && isDefined(level.bgb[name].lost_perk_override_func)) {
       b_result = [
         [level.bgb[name].lost_perk_override_func]
       ](perk, self, player);
@@ -1250,7 +1249,7 @@ add_to_player_score_override(n_points, str_awarded_by) {
     }
   }
 
-  if(str_enabled !== #"none" && isDefined(level.bgb[str_enabled]) && isDefined(level.bgb[str_enabled].add_to_player_score_override_func)) {
+  if(str_enabled !== # "none" && isDefined(level.bgb[str_enabled]) && isDefined(level.bgb[str_enabled].add_to_player_score_override_func)) {
     n_points = [[level.bgb[str_enabled].add_to_player_score_override_func]](n_points, str_awarded_by, 1);
   }
 
@@ -1274,7 +1273,7 @@ function_3fa57f3f() {
 }
 
 function_f51e3503(n_max_distance, var_5250f4f6, var_8bc18989) {
-  self endon(#"disconnect", #"bled_out", #"bgb_update");
+  self endon(#"disconnect", # "bled_out", # "bgb_update");
   self.var_9c42f3fe = [];
 
   while(true) {
@@ -1354,7 +1353,7 @@ function_bd839f2c(e_reviver, var_84280a99) {
 }
 
 bgb_revive_watcher() {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
   self.var_bdeb0f02 = 1;
   waitresult = self waittill(#"player_revived");
   e_reviver = waitresult.reviver;

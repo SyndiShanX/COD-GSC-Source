@@ -198,7 +198,7 @@ main() {
   var_20 = getEntArray("streets_start_spawners", "targetname");
 
   foreach(var_22 in var_20) {
-  var_22 maps\_utility::add_spawn_function(::set_model_function, "body_usmc_desert_assault_zack");
+    var_22 maps\_utility::add_spawn_function(::set_model_function, "body_usmc_desert_assault_zack");
   }
 
   thread get_tv_breacher();
@@ -1325,8 +1325,7 @@ ambient_asad_handler(var_0) {
       case "off":
         if(self.model != self.offmodel) {
           var_0 scalevolume(0, 0.1);
-        }
-        else {
+        } else {
           var_0 scalevolume(1, 0.1);
         }
 
@@ -1342,7 +1341,7 @@ ambient_asad_handler(var_0) {
 
 stop_all_asad_vo_on_tv() {
   foreach(var_1 in level.recordings) {
-  var_1 notify("off");
+    var_1 notify("off");
   }
 }
 
@@ -1911,8 +1910,7 @@ helis_move2() {
 
   if(isDefined(self.target)) {
     var_0 = getent(self.target, "targetname");
-  }
-  else {}
+  } else {}
 
   var_1 = 0;
   var_2 = [];
@@ -2124,8 +2122,7 @@ bright_tv() {
   if(isDefined(var_2.script_parameters)) {
     if(var_2.script_parameters == "brighter_tv") {
       var_1 = "bright";
-    }
-    else if(var_2.script_parameters == "darker_tv") {
+    } else if(var_2.script_parameters == "darker_tv") {
       var_1 = "darker";
     }
   }
@@ -2171,8 +2168,7 @@ officelight_intensity() {
 
   if(level.office_tvs.size == 5) {
     var_1 = 1000;
-  }
-  else if(level.office_tvs.size <= 3) {
+  } else if(level.office_tvs.size <= 3) {
     var_1 = 300;
   }
 

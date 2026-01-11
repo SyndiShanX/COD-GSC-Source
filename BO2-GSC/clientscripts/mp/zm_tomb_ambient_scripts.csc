@@ -31,8 +31,7 @@ dogfights_start(localclientnumber) {
   for(i = 0; i < 3; i++) {
     if(i % 2 == 0) {
       str_identifier = "dogfight_planes_1";
-    }
-    else {
+    } else {
       str_identifier = "dogfight_planes_2";
     }
 

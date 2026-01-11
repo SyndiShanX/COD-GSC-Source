@@ -49,8 +49,7 @@ func_65F5(var_00) {
 
   if(var_2.size == 0) {
     return undefined;
-  }
-  else {
+  } else {
     var_06 = sortbydistance(var_02, var_0.origin);
     return var_6[0];
   }
@@ -140,8 +139,7 @@ shootturret(var_00, var_01, var_02) {
 
   if(isDefined(var_03)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -181,8 +179,7 @@ setcarryingims(var_00, var_01, var_02, var_03) {
 
       if(var_04 != "force_cancel_placement") {
         thread watch_dpad();
-      }
-      else if(var_01) {
+      } else if(var_01) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
       }
 
@@ -316,8 +313,7 @@ func_B545(var_00, var_01, var_02) {
 
   if(!isDefined(var_01)) {
     var_04 = "zmb_medusa_energy_collector_01_empty";
-  }
-  else {
+  } else {
     if(var_01 > 3) {
       var_04 = "zmb_medusa_energy_collector_01_1";
     }
@@ -403,8 +399,7 @@ func_B541(var_00, var_01) {
 
   if(!self.fully_charged) {
     self setscriptablepartstate("base", "charge_level_1");
-  }
-  else {
+  } else {
     self setscriptablepartstate("base", "charge_level_2");
   }
 }
@@ -438,8 +433,7 @@ func_B547() {
 
       if(self.func_3CC3 != 10) {
         self setscriptablepartstate("base", "charge_level_1");
-      }
-      else {
+      } else {
         self sethintstring(level.func_B549["crafted_medusa"].func_74BF);
         self.fully_charged = 1;
         self setscriptablepartstate("base", "charge_level_2");

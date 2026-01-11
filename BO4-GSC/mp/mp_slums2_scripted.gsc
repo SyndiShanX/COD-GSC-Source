@@ -8,7 +8,6 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace mp_slums2_scripted;
 
 autoexec __init__system__() {
@@ -22,7 +21,7 @@ __init__() {
 __main__() {
   init_devgui();
 
-    function_2cdcf5c3();
+  function_2cdcf5c3();
 }
 
 on_game_playing() {
@@ -53,8 +52,8 @@ function_2cdcf5c3() {
 }
 
 function_33022f5b(a_ents) {
-  if(isDefined(a_ents[#"prop 1"])) {
-    physicsexplosionsphere(a_ents[#"prop 1"].origin, 512, 1, 1);
+  if(isDefined(a_ents[# "prop 1"])) {
+    physicsexplosionsphere(a_ents[# "prop 1"].origin, 512, 1, 1);
   }
 }
 

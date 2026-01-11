@@ -1743,8 +1743,7 @@ shield_trigger_think(player) {
 shield_flag_on(onOff) {
   if(onOff) {
     self.shield_is_on = 1;
-  }
-  else {
+  } else {
     self.shield_is_on = undefined;
   }
 }
@@ -2150,8 +2149,7 @@ spawn_armory() {
   }
   if(numplayers > 1) {
     numChickens = 1;
-  }
-  else {
+  } else {
     numChickens = 4;
   }
   while(numChickens) {

@@ -7,7 +7,6 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\water_surface;
-
 #namespace waterfall;
 
 waterfalloverlay(localclientnum) {
@@ -86,7 +85,7 @@ trig_enter_waterfall(localplayer) {
   trigger = self;
   localclientnum = localplayer.localclientnum;
   localplayer thread postfx::playpostfxbundle(#"pstfx_waterfall");
-  playSound(0, #"amb_waterfall_hit", (0, 0, 0));
+  playSound(0, # "amb_waterfall_hit", (0, 0, 0));
 
   while(trigger istouching(localplayer)) {
     localplayer playrumbleonentity(localclientnum, "waterfall_rumble");

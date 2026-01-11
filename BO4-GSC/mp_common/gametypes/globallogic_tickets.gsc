@@ -5,7 +5,6 @@
 
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\math_shared;
-
 #namespace tickets;
 
 autoexec __init__() {
@@ -23,22 +22,22 @@ reset_match_start(total_stages) {
 }
 
 reset_stages(total_stages) {
-  game.stat[#"stagetickets"] = [];
+  game.stat[# "stagetickets"] = [];
 
   foreach(team, _ in level.teams) {
-    game.stat[#"stagetickets"][team] = [];
+    game.stat[# "stagetickets"][team] = [];
 
     for(stage = 0; stage < total_stages; stage++) {
-      game.stat[#"stagetickets"][team][stage] = 0;
+      game.stat[# "stagetickets"][team][stage] = 0;
     }
   }
 }
 
 reset_tickets() {
-  game.stat[#"tickets"] = [];
+  game.stat[# "tickets"] = [];
 
   foreach(team, _ in level.teams) {
-    game.stat[#"tickets"][team] = 0;
+    game.stat[# "tickets"][team] = 0;
   }
 }
 
@@ -60,7 +59,7 @@ get_zone_start_tickets(zone_index) {
 
 watch_time_penalties(team) {
   level notify(#"tickets_watch_time_penalties");
-  level endon(#"tickets_watch_time_penalties", #"mission_ended", #"game_ended");
+  level endon(#"tickets_watch_time_penalties", # "mission_ended", # "game_ended");
 
   while(true) {
     penalty_interval = isDefined(getgametypesetting(#"ticketslostontimeinterval")) ? getgametypesetting(#"ticketslostontimeinterval") : 0;
@@ -108,30 +107,30 @@ on_player_killed() {
 }
 
 set_tickets(team, tickets) {
-  original_total = game.stat[#"tickets"][team];
-  game.stat[#"tickets"][team] = tickets;
+  original_total = game.stat[# "tickets"][team];
+  game.stat[# "tickets"][team] = tickets;
   notify_tickets_updated(team, original_total);
 }
 
 earn_tickets(team, tickets) {
-  original_total = game.stat[#"tickets"][team];
-  game.stat[#"tickets"][team] += tickets;
+  original_total = game.stat[# "tickets"][team];
+  game.stat[# "tickets"][team] += tickets;
   clamp_tickets(team);
   notify_tickets_updated(team, original_total);
 }
 
 lose_tickets(team, tickets) {
-  original_total = game.stat[#"tickets"][team];
-  game.stat[#"tickets"][team] -= tickets;
+  original_total = game.stat[# "tickets"][team];
+  game.stat[# "tickets"][team] -= tickets;
   clamp_tickets(team);
   notify_tickets_updated(team, original_total);
 }
 
 notify_tickets_updated(team, original_total) {
-  if(original_total != game.stat[#"tickets"][team]) {
+  if(original_total != game.stat[# "tickets"][team]) {
     level notify(#"tickets_updated", {
       #team: team,
-      #total_tickets: game.stat[#"tickets"][team]
+      #total_tickets: game.stat[# "tickets"][team]
     });
     low_ticket_threshold = 30;
     very_low_ticket_threshold = 10;
@@ -141,18 +140,18 @@ notify_tickets_updated(team, original_total) {
       very_low_ticket_threshold = -1;
     }
 
-      low_tickets_enabled = level.low_tickets_enabled === 1;
-    level.low_ticket_count = game.stat[#"tickets"][team] <= low_ticket_threshold && !level.inprematchperiod && low_tickets_enabled;
-    level.very_low_ticket_count = game.stat[#"tickets"][team] <= very_low_ticket_threshold && !level.inprematchperiod && low_tickets_enabled;
+    low_tickets_enabled = level.low_tickets_enabled === 1;
+    level.low_ticket_count = game.stat[# "tickets"][team] <= low_ticket_threshold && !level.inprematchperiod && low_tickets_enabled;
+    level.very_low_ticket_count = game.stat[# "tickets"][team] <= very_low_ticket_threshold && !level.inprematchperiod && low_tickets_enabled;
   }
 }
 
 private clamp_tickets(team) {
-  game.stat[#"tickets"][team] = math::clamp(game.stat[#"tickets"][team], 0, 2147483647);
+  game.stat[# "tickets"][team] = math::clamp(game.stat[# "tickets"][team], 0, 2147483647);
 }
 
 commit_tickets(team, stage) {
-  game.stat[#"stagetickets"][team][stage] = game.stat[#"tickets"][team];
+  game.stat[# "stagetickets"][team][stage] = game.stat[# "tickets"][team];
   notify_stage_tickets_updated(team, stage);
 }
 
@@ -173,7 +172,7 @@ get_tickets(team) {
     return 0;
   }
 
-  return game.stat[#"tickets"][team];
+  return game.stat[# "tickets"][team];
 }
 
 get_stage_tickets(team, stage) {
@@ -181,14 +180,14 @@ get_stage_tickets(team, stage) {
     return 0;
   }
 
-  return game.stat[#"stagetickets"][team][stage];
+  return game.stat[# "stagetickets"][team][stage];
 }
 
 notify_stage_tickets_updated(team, stage) {
   level notify(#"tickets_stage_updated", {
     #team: team,
     #zone_number: stage,
-    #total_tickets: game.stat[#"stagetickets"][team][stage]
+    #total_tickets: game.stat[# "stagetickets"][team][stage]
   });
 }
 

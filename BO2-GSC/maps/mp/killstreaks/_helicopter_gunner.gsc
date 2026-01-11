@@ -430,11 +430,9 @@ getoriginoffsets(goalnode) {
 
     if(startorigin[2] < endorigin[2]) {
       startorigin = startorigin + vectorscale((0, 0, 1), 128.0);
-    }
-    else if(startorigin[2] > endorigin[2]) {
+    } else if(startorigin[2] > endorigin[2]) {
       endorigin = endorigin + vectorscale((0, 0, 1), 128.0);
-    }
-    else {
+    } else {
       startorigin = startorigin + vectorscale((0, 0, 1), 128.0);
       endorigin = endorigin + vectorscale((0, 0, 1), 128.0);
     }
@@ -483,8 +481,7 @@ starthelicopter(type, player_driven, hardpointtype, startnode) {
   if(!isalive(self)) {
     if(isDefined(self.heli)) {
       self deleteplayerheli();
-    }
-    else {
+    } else {
       self maps\mp\killstreaks\_killstreakrules::killstreakstop(hardpointtype, team, killstreak_id);
     }
 
@@ -573,8 +570,7 @@ deleteplayerheli() {
 destroyplayerhelicopter() {
   if(isDefined(self.owner) && isDefined(self.owner.heli)) {
     self.owner deleteplayerheli();
-  }
-  else {
+  } else {
     self maps\mp\killstreaks\_helicopter::destroyhelicopter();
   }
 }
@@ -1110,8 +1106,7 @@ heli_player_damage_monitor(player) {
       }
       if(level.teambased) {
         isvalidattacker = isDefined(attacker.team) && attacker.team != self.team;
-      }
-      else {
+      } else {
         isvalidattacker = 1;
       }
 
@@ -1232,8 +1227,7 @@ hud_minigun_think() {
 
       if(swap_counter == 5) {
         swap_counter = 1;
-      }
-      else {
+      } else {
         swap_counter++;
       }
     }
@@ -1392,8 +1386,7 @@ updateammobarscale(barfrac, rateofchange) {
 
   if(isDefined(rateofchange) && barwidth <= self.width) {
     self.bar scaleovertime(rateofchange, barwidth, self.height);
-  }
-  else {
+  } else {
     self.bar setshader(self.bar.shader, barwidth, self.height);
   }
 }

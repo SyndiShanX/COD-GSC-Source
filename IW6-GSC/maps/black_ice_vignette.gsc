@@ -39,15 +39,14 @@ vignette_setup(var_0, var_1) {
 vignette_isDefined(var_0, var_1) {
   if(isDefined(var_0)) {
     return var_0;
-  }
-  else {
+  } else {
     return var_1;
   }
 }
 
 vignette_single(var_0, var_1, var_2, var_3, var_4) {
   foreach(var_6 in var_0) {
-  thread vignette_single_solo(var_6, var_1, var_2, var_3, var_4);
+    thread vignette_single_solo(var_6, var_1, var_2, var_3, var_4);
   }
 
   while(self._vignette_active > 0) {
@@ -62,8 +61,7 @@ vignette_single_solo(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(!isDefined(self._vignette_active)) {
     self._vignette_active = 1;
-  }
-  else {
+  } else {
     self._vignette_active++;
   }
 
@@ -83,8 +81,7 @@ vignette_single_solo(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_0.v.prop)) {
     var_6 = [var_0, var_0.v.prop];
-  }
-  else {
+  } else {
     var_6 = [var_0];
   }
 
@@ -136,8 +133,7 @@ vignette_interrupt(var_0, var_1) {
 vignette_stop_interrupt_scripts(var_0) {
   if(!isDefined(var_0)) {
     var_0 = ["damage", "player_close", "other"];
-  }
-  else if(isstring(var_0)) {
+  } else if(isstring(var_0)) {
     var_0 = [var_0];
   }
 
@@ -169,8 +165,7 @@ vignette_stop_interrupt_scripts(var_0) {
 vignette_kill(var_0, var_1) {
   if(isDefined(var_0)) {
     thread vignette_end("kill: " + var_0, 1, var_1);
-  }
-  else {
+  } else {
     thread vignette_end("kill", 1, var_1);
   }
 }
@@ -184,8 +179,7 @@ vignette_interrupt_solo(var_0, var_1) {
     if(isDefined(self.v.idle_break_anim)) {
       if(isDefined(self.v.prop)) {
         var_3 = [self, self.v.prop];
-      }
-      else {
+      } else {
         var_3 = [self];
       }
 
@@ -204,8 +198,7 @@ vignette_interrupt_solo(var_0, var_1) {
 
     if(isDefined(var_1)) {
       vignette_kill(var_2, var_1);
-    }
-    else {
+    } else {
       thread vignette_end(var_2);
     }
   }
@@ -223,8 +216,7 @@ vignette_end(var_0, var_1, var_2) {
 
     if(self.v.silent_script_death) {
       self.a.nodeath = 1;
-    }
-    else {
+    } else {
       if((isDefined(var_1) && var_1 || self.v.death_on_end) && isDefined(self.v.death_anim)) {
         if(self.v.current_state == "idle" || self.v.death_anim_anytime) {
           self notify("msg_vignette_death_anim_start");
@@ -232,15 +224,13 @@ vignette_end(var_0, var_1, var_2) {
 
           if(isDefined(self.v.prop)) {
             var_3 = [self, self.v.prop];
-          }
-          else {
+          } else {
             var_3 = [self];
           }
 
           if(self.v.death_on_self) {
             maps\_anim::anim_single(var_3, self.v.death_anim);
-          }
-          else {
+          } else {
             self.v.anim_node maps\_anim::anim_single(var_3, self.v.death_anim);
           }
 
@@ -271,8 +261,7 @@ vignette_end(var_0, var_1, var_2) {
 
     if(isDefined(var_0)) {
       vignette_state(var_0);
-    }
-    else {
+    } else {
       vignette_state("none");
     }
 
@@ -397,15 +386,13 @@ vignette_interrupt_watcher_player_close() {
 vignette_state(var_0, var_1) {
   if(isDefined(var_0)) {
     self.v.current_state = var_0;
-  }
-  else {
+  } else {
     self.v.current_state = "none";
   }
 
   if(isDefined(var_1)) {
     self.v.current_anim = var_1;
-  }
-  else {
+  } else {
     self.v.current_anim = "none";
   }
 
@@ -451,8 +438,7 @@ vignette_ignore_everything() {
 vignette_set_ignore_setting(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     self._ignore_settings_old[var_1] = var_0;
-  }
-  else {
+  } else {
     self._ignore_settings_old[var_1] = "none";
   }
 
@@ -490,8 +476,7 @@ vignette_restore_ignore_setting(var_0, var_1) {
   if(isDefined(self._ignore_settings_old)) {
     if(isstring(self._ignore_settings_old[var_0]) && self._ignore_settings_old[var_0] == "none") {
       return var_1;
-    }
-    else {
+    } else {
       return self._ignore_settings_old[var_0];
     }
   }

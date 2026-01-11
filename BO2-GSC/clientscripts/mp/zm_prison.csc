@@ -40,8 +40,7 @@ main() {
 
   if(is_gametype_active("zclassic")) {
     clientscripts\mp\zombies\_zm_perk_electric_cherry::enable_electric_cherry_perk_for_level();
-  }
-  else if(is_gametype_active("zgrief")) {
+  } else if(is_gametype_active("zgrief")) {
     level.zombiemode_using_additionalprimaryweapon_perk = 1;
     level.zombiemode_using_divetonuke_perk = 1;
     clientscripts\mp\zombies\_zm_perk_divetonuke::enable_divetonuke_perk_for_level();
@@ -558,8 +557,7 @@ toggle_perk_machine_power(localclientnum, oldval, newval, bnewent, binitialsnap,
 
   if(newval == 2) {
     self thread flicker_in_and_out(localclientnum);
-  }
-  else if(newval == 1) {
+  } else if(newval == 1) {
     self notify("stop_flicker");
     self setshaderconstant(localclientnum, 0, 0, 1, 0, 0);
   }
@@ -661,8 +659,7 @@ scripted_player_lightning_strike() {
 warden_fence_down(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 0) {
     level notify("warden_fence_up");
-  }
-  else if(newval == 1) {
+  } else if(newval == 1) {
     level notify("warden_fence_down");
   }
 }
@@ -674,8 +671,7 @@ master_key_is_lowered(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 fxanim_pulley_down_start(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     level notify("fxanim_west_pulley_down_start");
-  }
-  else if(newval == 2) {
+  } else if(newval == 2) {
     level notify("fxanim_east_pulley_down_start");
   }
 }

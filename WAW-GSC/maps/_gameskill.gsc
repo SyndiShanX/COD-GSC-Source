@@ -595,11 +595,9 @@ printHealthDebug() {
       width = 0;
       if(i == 0) {
         width = player.health / player.maxhealth * 300;
-      }
-      else if(i == 1) {
+      } else if(i == 1) {
         width = (level.playerInvulTimeEnd - gettime()) / 1000 * 40;
-      }
-      else if(i == 2) {
+      } else if(i == 2) {
         width = (level.player_deathInvulnerableTimeout - gettime()) / 1000 * 40;
       }
       width = int(max(width, 1));
@@ -976,15 +974,13 @@ grenadeAwareness() {
     if(level.gameSkill >= 2) {
       if(randomint(100) < 33) {
         self.grenadeawareness = 0.2;
-      }
-      else {
+      } else {
         self.grenadeawareness = 0.5;
       }
     } else {
       if(randomint(100) < 33) {
         self.grenadeawareness = 0;
-      }
-      else {
+      } else {
         self.grenadeawareness = 0.2;
       }
     }
@@ -1065,8 +1061,7 @@ compassHealthOverlay() {
     self player_flag_wait("player_has_red_flashing_overlay");
     if(getdvar("compass") == "0") {
       wait .5;
-    }
-    else {
+    } else {
       self compassFlashingOverlay(overlay);
     }
   }
@@ -1102,8 +1097,7 @@ compassFlashingOverlay(overlay) {
 add_hudelm_position_internal(alignY) {
   if(level.console) {
     self.fontScale = 2;
-  }
-  else {
+  } else {
     self.fontScale = 1.6;
   }
   self.x = 0;
@@ -1123,8 +1117,7 @@ add_hudelm_position_internal(alignY) {
   self.background.vertAlign = "middle";
   if(level.console) {
     self.background setshader("popmenu_bg", 650, 52);
-  }
-  else {
+  } else {
     self.background setshader("popmenu_bg", 650, 42);
   }
   self.background.alpha = .5;

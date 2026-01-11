@@ -31,8 +31,7 @@ bot_gun_pick_personality_from_weapon(var_0, var_1) {
 
         if(common_scripts\utility::array_contains(var_3, var_1)) {
           var_4 = var_1;
-        }
-        else {
+        } else {
           var_4 = common_scripts\utility::random(var_3);
         }
 

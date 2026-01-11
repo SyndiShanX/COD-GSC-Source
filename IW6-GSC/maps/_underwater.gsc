@@ -38,8 +38,7 @@ friendly_bubbles_cleanup() {
 player_scuba() {
   if(!issplitscreen()) {
     thread player_scuba_breathe_sound();
-  }
-  else if(self == level.player) {
+  } else if(self == level.player) {
     thread player_scuba_breathe_sound();
   }
 
@@ -58,8 +57,7 @@ player_scuba_breathe_sound() {
 
     if(self issprinting()) {
       self playlocalsound("scuba_breathe_player_sprint", "scuba_breathe_sound_done");
-    }
-    else {
+    } else {
       self playlocalsound("scuba_breathe_player", "scuba_breathe_sound_done");
     }
 

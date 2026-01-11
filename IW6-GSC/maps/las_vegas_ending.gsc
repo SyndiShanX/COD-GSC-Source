@@ -44,7 +44,7 @@ drop_structs() {
   var_0 = common_scripts\utility::array_combine(common_scripts\utility::getstructarray("ending3_start_spot", "targetname"), var_0);
 
   foreach(var_2 in var_0) {
-  var_2.origin = common_scripts\utility::drop_to_ground(var_2.origin, 10, -100);
+    var_2.origin = common_scripts\utility::drop_to_ground(var_2.origin, 10, -100);
   }
 }
 
@@ -264,7 +264,7 @@ teleport_friends(var_0) {
   maps\las_vegas_code::set_start_locations(var_0);
 
   foreach(var_2 in level.heroes) {
-  var_2 setgoalpos(var_2.origin);
+    var_2 setgoalpos(var_2.origin);
   }
 }
 

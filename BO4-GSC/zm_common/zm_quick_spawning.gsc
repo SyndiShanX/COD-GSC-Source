@@ -9,7 +9,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_quick_spawning;
 
 autoexec __init__system__() {
@@ -31,7 +30,7 @@ private function_6a51df96(notifyhash) {
 }
 
 private function_920e8738() {
-  self endoncallback(&function_6a51df96, #"death", #"disconnect");
+  self endoncallback(&function_6a51df96, # "death", # "disconnect");
 
   while(true) {
     if(!isDefined(self.var_552afb80)) {
@@ -145,9 +144,9 @@ function_367e3573(force = 0) {
     };
   }
 
-    if(!isDefined(player_info)) {
-      return;
-    }
+  if(!isDefined(player_info)) {
+    return;
+  }
 
   var_1158d63 = function_f1ec5df(player_info.player, player_info.velocity, 1);
 
@@ -319,9 +318,9 @@ function_765cb1de(var_f4d3512f, player) {
 
   self thread function_cd00ea8(spot);
 
-    self notify(#"risen", {
-      #find_flesh_struct_string: "find_flesh"
-    });
+  self notify(#"risen", {
+    #find_flesh_struct_string: "find_flesh"
+  });
 }
 
 function_3b2d308f(player, zone) {

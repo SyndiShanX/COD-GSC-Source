@@ -16,7 +16,6 @@
 #include scripts\zm_common\gametypes\globallogic_player;
 #include scripts\zm_common\gametypes\globallogic_scriptmover;
 #include scripts\zm_common\gametypes\hostmigration;
-
 #namespace callback;
 
 autoexec __init__system__() {

@@ -9,8 +9,7 @@ main(var_0, var_1, var_2) {
 
   if(var_2 == "script_vehicle_a10_warthog_cheap" || var_2 == "script_vehicle_a10_warthog_cheaper") {
     maps\_vehicle::build_deathmodel("vehicle_a10_warthog");
-  }
-  else {
+  } else {
     maps\_vehicle::build_deathmodel("vehicle_a10_warthog_iw6");
   }
 
@@ -156,8 +155,7 @@ playerisclose(var_0) {
 
   if(var_1) {
     var_2 = 1;
-  }
-  else {
+  } else {
     var_2 = -1;
   }
 
@@ -168,8 +166,7 @@ playerisclose(var_0) {
 
   if(var_6 < 3000) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -181,8 +178,7 @@ playerisinfront(var_0) {
 
   if(var_3 > 0) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

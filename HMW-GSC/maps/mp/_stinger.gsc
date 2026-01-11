@@ -115,8 +115,7 @@ locksighttest(var_0) {
   return 0;
 }
 
-stingerdebugdraw(var_0) {
-}
+stingerdebugdraw(var_0) {}
 
 softsighttest() {
   var_0 = 500;
@@ -166,7 +165,7 @@ GetTargetList() {
 
     if(level.UAVModels[level.otherTeam[self.team]].size) {
       foreach(UAV in level.UAVModels[level.otherTeam[self.team]]) {
-      targets[targets.size] = UAV;
+        targets[targets.size] = UAV;
       }
     }
 

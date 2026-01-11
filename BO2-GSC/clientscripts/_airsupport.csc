@@ -69,11 +69,9 @@ closest_point_on_line_to_point(point, linestart, lineend) {
 
   if(t < 0.0) {
     return linestart;
-  }
-  else if(t > 1.0) {
+  } else if(t > 1.0) {
     return lineend;
-  }
-  else {
+  } else {
     start_x = linestart[0] + t * (lineend[0] - linestart[0]);
     start_y = linestart[1] + t * (lineend[1] - linestart[1]);
     start_z = linestart[2] + t * (lineend[2] - linestart[2]);

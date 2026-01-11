@@ -517,23 +517,17 @@ set_animarray_add_turn_aims_crouch() {
 set_animarray_standing() {
   if(animscripts\utility::usingsidearm()) {
     self.a.array = animscripts\utility::lookupanimarray("pistol_stand");
-  }
-  else if(isDefined(self.combatstandanims)) {
+  } else if(isDefined(self.combatstandanims)) {
     self.a.array = self.combatstandanims;
-  }
-  else if(isDefined(self.heat)) {
+  } else if(isDefined(self.heat)) {
     self.a.array = animscripts\utility::lookupanimarray("heat_stand");
-  }
-  else if(animscripts\utility::usingrocketlauncher()) {
+  } else if(animscripts\utility::usingrocketlauncher()) {
     self.a.array = animscripts\utility::lookupanimarray("rpg_stand");
-  }
-  else if(isDefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun()) {
+  } else if(isDefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun()) {
     self.a.array = animscripts\utility::lookupanimarray("shotgun_stand");
-  }
-  else if(animscripts\utility::iscqbwalking()) {
+  } else if(animscripts\utility::iscqbwalking()) {
     self.a.array = animscripts\utility::lookupanimarray("cqb_stand");
-  }
-  else {
+  } else {
     self.a.array = animscripts\utility::lookupanimarray("default_stand");
   }
 }
@@ -545,14 +539,11 @@ set_animarray_crouching() {
 
   if(isDefined(self.combatcrouchanims)) {
     self.a.array = self.combatcrouchanims;
-  }
-  else if(animscripts\utility::usingrocketlauncher()) {
+  } else if(animscripts\utility::usingrocketlauncher()) {
     self.a.array = animscripts\utility::lookupanimarray("rpg_crouch");
-  }
-  else if(isDefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun()) {
+  } else if(isDefined(self.weapon) && animscripts\utility::weapon_pump_action_shotgun()) {
     self.a.array = animscripts\utility::lookupanimarray("shotgun_crouch");
-  }
-  else {
+  } else {
     self.a.array = animscripts\utility::lookupanimarray("default_crouch");
   }
 }
@@ -675,8 +666,7 @@ heat_reload_anim() {
 
       if(self.node.type == "Cover Left") {
         var_0 = animscripts\utility::lookupanim("heat_reload", "reload_cover_left");
-      }
-      else if(self.node.type == "Cover Right") {
+      } else if(self.node.type == "Cover Right") {
         var_0 = animscripts\utility::lookupanim("heat_reload", "reload_cover_right");
       }
 

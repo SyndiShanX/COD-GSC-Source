@@ -130,8 +130,7 @@ init_riotshield_AI() {
   // fall over after getting hit this many times on the shield all within 0.3 seconds of each other
   if(level.gameSkill < 1) {
     self.shieldBulletBlockLimit = randomintrange(4, 8);
-  }
-  else {
+  } else {
     self.shieldBulletBlockLimit = randomintrange(8, 12);
   }
 
@@ -160,8 +159,7 @@ init_riotshield_AI() {
 
   if(level.gameSkill < 1) {
     self.bullet_resistance = 30;
-  }
-  else {
+  } else {
     self.bullet_resistance = 40;
   }
 
@@ -315,8 +313,7 @@ riotshield_startMoveTransition() {
   if(self.a.pose == "crouch") {
     if(isDefined(self.sprint) || isDefined(self.fastwalk)) {
       transAnim = % riotshield_crouch2stand;
-    }
-    else {
+    } else {
       transAnim = % riotshield_crouch2walk;
     }
 
@@ -367,8 +364,7 @@ riotshield_bullet_hit_shield() {
     time = gettime();
     if(time - self.shieldBulletBlockTime > 500) {
       self.shieldBulletBlockCount = 0;
-    }
-    else {
+    } else {
       self.shieldBulletBlockCount++;
     }
 
@@ -379,8 +375,7 @@ riotshield_bullet_hit_shield() {
 
     if(cointoss()) {
       reactAnim = % riotshield_reactA;
-    }
-    else {
+    } else {
       reactAnim = % riotshield_reactB;
     }
 
@@ -509,16 +504,14 @@ riotshield_death() {
 
   if(self.prevScript == "pain" || self.prevScript == "flashed") {
     doShieldDeath = randomInt(2) == 0;
-  }
-  else {
+  } else {
     doShieldDeath = true;
   }
 
   if(doShieldDeath) {
     if(cointoss()) {
       deathAnim = % riotshield_crouch_death;
-    }
-    else {
+    } else {
       deathAnim = % riotshield_crouch_death_fallback;
     }
 
@@ -684,8 +677,7 @@ riotshield_flee_and_drop_shield() {
 
   if(!isDefined(self.dropShieldInPlace) && isDefined(self.enemy) && vectordot(self.lookaheadDir, anglesToForward(self.angles)) < 0) {
     fleeAnim = % riotshield_crouch2walk_2flee;
-  }
-  else {
+  } else {
     fleeAnim = % riotshield_crouch2stand_shield_drop;
   }
 

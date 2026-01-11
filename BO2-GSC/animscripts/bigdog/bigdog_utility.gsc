@@ -21,8 +21,7 @@ initanimtree(animscript) {
 initialize(animscript) {
   if(isDefined(self.a.script) && !self animscripts\debug::debugshouldclearstate()) {
     self animscripts\debug::debugpopstate(self.a.script);
-  }
-  else {
+  } else {
     self animscripts\debug::debugclearstate();
   }
 
@@ -41,8 +40,7 @@ fire_grenade_at_target(target) {
 
   if(isDefined(scriptedenemy)) {
     self setentitytarget(target);
-  }
-  else {
+  } else {
     self clearentitytarget();
   }
 }
@@ -50,8 +48,7 @@ fire_grenade_at_target(target) {
 setactivegrenadetimer(throwingat) {
   if(isplayer(throwingat)) {
     self.activegrenadetimer = "player_frag_grenade_sp";
-  }
-  else {
+  } else {
     self.activegrenadetimer = "AI_frag_grenade_sp";
   }
 
@@ -65,35 +62,25 @@ animsuffix() {
 
   if(isDefined(self.missinglegs["FR"]) && isDefined(self.missinglegs["FL"]) && isDefined(self.missinglegs["RL"]) && isDefined(self.missinglegs["RR"])) {
     animsuffix = "_all_legs";
-  }
-  else if(isDefined(self.missinglegs["FR"]) && isDefined(self.missinglegs["FL"])) {
+  } else if(isDefined(self.missinglegs["FR"]) && isDefined(self.missinglegs["FL"])) {
     animsuffix = "_frontlegs";
-  }
-  else if(isDefined(self.missinglegs["FR"]) && isDefined(self.missinglegs["RL"])) {
+  } else if(isDefined(self.missinglegs["FR"]) && isDefined(self.missinglegs["RL"])) {
     animsuffix = "_fr_rl";
-  }
-  else if(isDefined(self.missinglegs["FL"]) && isDefined(self.missinglegs["RR"])) {
+  } else if(isDefined(self.missinglegs["FL"]) && isDefined(self.missinglegs["RR"])) {
     animsuffix = "_fl_rr";
-  }
-  else if(isDefined(self.missinglegs["RR"]) && isDefined(self.missinglegs["RL"])) {
+  } else if(isDefined(self.missinglegs["RR"]) && isDefined(self.missinglegs["RL"])) {
     animsuffix = "_rearlegs";
-  }
-  else if(isDefined(self.missinglegs["FL"]) && isDefined(self.missinglegs["RL"])) {
+  } else if(isDefined(self.missinglegs["FL"]) && isDefined(self.missinglegs["RL"])) {
     animsuffix = "_leftlegs";
-  }
-  else if(isDefined(self.missinglegs["FR"]) && isDefined(self.missinglegs["RR"])) {
+  } else if(isDefined(self.missinglegs["FR"]) && isDefined(self.missinglegs["RR"])) {
     animsuffix = "_rightlegs";
-  }
-  else if(isDefined(self.missinglegs["FR"])) {
+  } else if(isDefined(self.missinglegs["FR"])) {
     animsuffix = "_frontright";
-  }
-  else if(isDefined(self.missinglegs["FL"])) {
+  } else if(isDefined(self.missinglegs["FL"])) {
     animsuffix = "_frontleft";
-  }
-  else if(isDefined(self.missinglegs["RR"])) {
+  } else if(isDefined(self.missinglegs["RR"])) {
     animsuffix = "_rearright";
-  }
-  else if(isDefined(self.missinglegs["RL"])) {
+  } else if(isDefined(self.missinglegs["RL"])) {
     animsuffix = "_rearleft";
   }
 

@@ -459,9 +459,7 @@ function doonelefteventupdates() {
   if(level.teambased) {
     foreach(team in level.teams) {
       if(isonlyoneleftaliveonteam(team)) {
-        [
-          [level.ononeleftevent]
-        ](team);
+        [[level.ononeleftevent]](team);
         return true;
       }
     }

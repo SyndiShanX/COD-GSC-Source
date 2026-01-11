@@ -215,8 +215,7 @@ entity_common_spawn_setup(player_favourate_enemy, str_cleanup_category, ignore_s
 
     if(isDefined(level.jungle_escape_accuracy)) {
       self.script_accuracy = level.jungle_escape_accuracy;
-    }
-    else {
+    } else {
       self.script_accuracy = 1.0;
     }
   }
@@ -383,8 +382,7 @@ ai_set_enemy_fight_distance(e_enemy, path_distance, skip_launchers) {
       }
       if(isDefined(e_enemy)) {
         e_ent setgoalentity(e_enemy);
-      }
-      else {
+      } else {
         e_ent setgoalentity(e_ent);
       }
 
@@ -471,8 +469,7 @@ ai_run_along_node_array(str_ai_targetname, a_str_nodes, ignore_all, teleport_to_
 
   if(isDefined(s_spawner.script_delay)) {
     delay = s_spawner.script_delay;
-  }
-  else {
+  } else {
     delay = 0;
   }
 
@@ -635,8 +632,7 @@ spawn_in_stealth_failure_guards(str_fail_enemy_spawners) {
 
       if(isDefined(a_spawners[i].target)) {
         nd_node = getnode(a_spawners[i].target, "targetname");
-      }
-      else {
+      } else {
         nd_node = undefined;
       }
 
@@ -978,8 +974,7 @@ angola_mortor_move(target_position, speed, height) {
 
     if(last_frac < slow_start) {
       current_speed = speed;
-    }
-    else if(last_frac >= slow_start && last_frac <= slow_mid) {
+    } else if(last_frac >= slow_start && last_frac <= slow_mid) {
       mag = slow_mid - slow_start;
       diff_frac = 1.0 - (slow_mid - last_frac) / mag;
       current_speed = speed - slow_amount * diff_frac;
@@ -1102,8 +1097,7 @@ global_actor_killed_callback(e_inflictor, e_attacker, n_damage, str_means_of_dea
   if(e_attacker == level.player) {
     if(str_weapon == "machete_sp") {
       level.player notify(level.machete_notify);
-    }
-    else if(str_weapon == "mortar_shell_dpad_sp") {
+    } else if(str_weapon == "mortar_shell_dpad_sp") {
       level.mortar_kills++;
 
       if(level.mortar_kills == 1) {
@@ -1118,8 +1112,7 @@ mortar_kill_timer() {
 
   if(level.mortar_kills > 4) {
     flag_set("mortar_challenge_complete");
-  }
-  else {
+  } else {
     level.mortar_kills = 0;
   }
 }
@@ -1150,8 +1143,7 @@ swap_to_primary_weapon(str_use_primary_if_none_exists) {
 
   if(isDefined(primary_weapons) && primary_weapons.size > 0) {
     self switchtoweapon(primary_weapons[0]);
-  }
-  else if(isDefined(str_use_primary_if_none_exists)) {
+  } else if(isDefined(str_use_primary_if_none_exists)) {
     self giveweapon(str_use_primary_if_none_exists);
     self switchtoweapon(str_use_primary_if_none_exists);
   }
@@ -1234,7 +1226,7 @@ fxanim_grass() {
   a_fxanim_grass = arraycombine(a_fxanim_grass, a_fxanim_grass_end, 0, 0);
 
   foreach(m_grass in a_fxanim_grass) {
-  a_grass_structs[a_grass_structs.size] = fxanim_grass_delete_until_needed(m_grass);
+    a_grass_structs[a_grass_structs.size] = fxanim_grass_delete_until_needed(m_grass);
   }
 
   flag_wait("fxanim_grass_spawn");
@@ -1296,7 +1288,7 @@ manage_fxanim_grass_animating(msg, a_grass) {
     flag_wait(msg);
 
     foreach(grass in a_grass) {
-    grass thread fxanim_grass_logic();
+      grass thread fxanim_grass_logic();
     }
 
     flag_waitopen(msg);
@@ -1371,24 +1363,24 @@ fxanim_beach_grass_logic() {
   a_beach_grass_fxanim = getEntArray("fxanim_beach_grass", "targetname");
 
   foreach(e_grass in a_beach_grass_fxanim) {
-  e_grass hide();
+    e_grass hide();
   }
 
   a_beach_grass_static = getEntArray("beach_grass_static", "targetname");
 
   foreach(e_grass in a_beach_grass_static) {
-  e_grass setscale(randomfloatrange(0.27, 0.5));
+    e_grass setscale(randomfloatrange(0.27, 0.5));
   }
 
   flag_wait("hind_attack_end_scene_started");
   wait 1;
 
   foreach(e_grass in a_beach_grass_static) {
-  e_grass hide();
+    e_grass hide();
   }
 
   foreach(e_grass in a_beach_grass_fxanim) {
-  e_grass show();
+    e_grass show();
   }
 
   setsaveddvar("wind_global_vector", "440 96 0");
@@ -1545,13 +1537,13 @@ jungle_stealth_log_skipto_clean_up() {
   a_spawners = getEntArray("enemy_fail_beach", "targetname");
 
   foreach(sp_enemy in a_spawners) {
-  sp_enemy delete();
+    sp_enemy delete();
   }
 
   a_spawners = getEntArray("enemy_fail_before_log", "targetname");
 
   foreach(sp_enemy in a_spawners) {
-  sp_enemy delete();
+    sp_enemy delete();
   }
 }
 
@@ -1571,7 +1563,7 @@ jungle_stealth_log_ent_clean_up() {
   a_ledge_clips = getEntArray("ledge_clip", "targetname");
 
   foreach(m_ledge_clip in a_ledge_clips) {
-  m_ledge_clip delete();
+    m_ledge_clip delete();
   }
 
   e_to_be_deleted = getent("trig_log_started", "targetname");
@@ -1642,7 +1634,7 @@ play_battle_convo_until_flag(str_team, a_str_aliases, min_delay, max_delay, str_
       }
 
       foreach(speaker in a_speakers) {
-      arrayremovevalue(a_guys, speaker, 0);
+        arrayremovevalue(a_guys, speaker, 0);
       }
 
       if(a_guys.size == 0) {
@@ -1664,7 +1656,7 @@ play_specific_vo_on_notify(lines, str_notify, exclusion_timer, endon_str) {
   if(isDefined(endon_str)) {
     if(isarray(endon_str)) {
       foreach(str in endon_str) {
-      level endon(str);
+        level endon(str);
       }
     } else
       level endon(endon_str);
@@ -1696,7 +1688,7 @@ play_battle_convo_from_array_until_flag(a_guys, a_str_aliases, min_delay, max_de
 
     for(i = 0; i < a_str_aliases.size; i++) {
       foreach(speaker in a_speakers) {
-      arrayremovevalue(a_guys, speaker, 0);
+        arrayremovevalue(a_guys, speaker, 0);
       }
 
       if(a_guys.size == 0) {

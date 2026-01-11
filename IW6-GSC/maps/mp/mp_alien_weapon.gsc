@@ -75,8 +75,7 @@ special_gun_detonate_hint_watcher() {
     if(weapname == WEAPON_NAME) {
       if(!isDefined(self.projectile_time_out_num)) {
         self.projectile_time_out_num = 1;
-      }
-      else {
+      } else {
         if(self.projectile_time_out_num > projectile_time_out_max) {
           projectile_time_out_max = 3;
           self.projectile_time_out_num = 0;
@@ -313,8 +312,7 @@ manage_alien_weapon_inventory() {
   while(1) {
     if(self GetCurrentWeapon() == WEAPON_NAME) {
       self DisableWeaponPickup();
-    }
-    else {
+    } else {
       self EnableWeaponPickup();
     }
     wait .1;

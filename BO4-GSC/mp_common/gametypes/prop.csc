@@ -9,7 +9,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\duplicaterender_mgr;
 #include scripts\core_common\util_shared;
-
 #namespace prop;
 
 event_handler[gametype_init] main(eventstruct) {

@@ -30,7 +30,6 @@
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_red_oracle_boons;
 
 autoexec __init__system__() {
@@ -39,8 +38,8 @@ autoexec __init__system__() {
 
 __init__() {
   n_bits = getminbitcountfornum(4);
-  clientfield::register("item", "" + #"hash_7e5c581ade235dfc", 16000, n_bits, "int");
-  clientfield::register("toplayer", "" + #"hash_403e80cafccc207c", 16000, 1, "int");
+  clientfield::register("item", "" + # "hash_7e5c581ade235dfc", 16000, n_bits, "int");
+  clientfield::register("toplayer", "" + # "hash_403e80cafccc207c", 16000, 1, "int");
   callback::on_connecting(&on_player_connect);
 }
 
@@ -391,7 +390,7 @@ private function_4e1abe8f() {
 private function_fa31ee20(e_item) {
   self thread function_c3778d8a(2, undefined);
   var_21c1ba1 = self getentitynumber();
-  e_item clientfield::set("" + #"hash_7e5c581ade235dfc", var_21c1ba1 + 1);
+  e_item clientfield::set("" + # "hash_7e5c581ade235dfc", var_21c1ba1 + 1);
 }
 
 private function_d71a9fa1() {
@@ -503,7 +502,7 @@ private function_1ba093e() {
 
     if(isDefined(pap_machine.pack_player) && pap_machine.pack_player == self) {
       self thread function_91a9c226(pap_machine);
-      self waittill(#"pap_timeout", #"pap_taken");
+      self waittill(#"pap_timeout", # "pap_taken");
     }
 
     waitframe(1);
@@ -511,13 +510,13 @@ private function_1ba093e() {
 }
 
 private function_91a9c226(pap_machine) {
-  self endon(#"death", #"pap_timeout", #"pap_taken");
+  self endon(#"death", # "pap_timeout", # "pap_taken");
   self waittill(#"entering_last_stand");
   self thread function_de053460(pap_machine);
 }
 
 private function_de053460(pap_machine) {
-  self endon(#"death", #"pap_taken");
+  self endon(#"death", # "pap_taken");
   waitframe(2);
   var_2ff5c7ee = pap_machine.unitrigger_stub;
   var_b64e889a = pap_machine.var_b64e889a;
@@ -594,7 +593,7 @@ private function_3fe13b7b() {
       continue;
     }
 
-    s_result = self waittill(#"player_revived", #"bled_out");
+    s_result = self waittill(#"player_revived", # "bled_out");
     wait 1;
     a_current_perks = arraycopy(self.var_466b927f);
     var_2c7d72cf = array::randomize(var_2c7d72cf);
@@ -643,34 +642,34 @@ private function_c3778d8a(n_boon, n_delay = undefined) {
 
   switch (n_boon) {
     case 0:
-      var_8b7ccae4 = #"hash_6a1a8af71c401279";
+      var_8b7ccae4 = # "hash_6a1a8af71c401279";
       break;
     case 1:
-      var_8b7ccae4 = #"hash_6a1a88f71c400f13";
+      var_8b7ccae4 = # "hash_6a1a88f71c400f13";
       break;
     case 2:
-      var_8b7ccae4 = #"hash_6a1a8bf71c40142c";
+      var_8b7ccae4 = # "hash_6a1a8bf71c40142c";
       break;
     case 3:
-      var_8b7ccae4 = #"hash_6a1a87f71c400d60";
+      var_8b7ccae4 = # "hash_6a1a87f71c400d60";
       break;
     case 4:
-      var_8b7ccae4 = #"hash_6a1a90f71c401cab";
+      var_8b7ccae4 = # "hash_6a1a90f71c401cab";
       break;
     case 5:
-      var_8b7ccae4 = #"hash_6a1a8ef71c401945";
+      var_8b7ccae4 = # "hash_6a1a8ef71c401945";
       break;
     case 6:
-      var_8b7ccae4 = #"hash_6a1a8ff71c401af8";
+      var_8b7ccae4 = # "hash_6a1a8ff71c401af8";
       break;
     default:
-      var_8b7ccae4 = #"hash_11dfeee664d456ef";
+      var_8b7ccae4 = # "hash_11dfeee664d456ef";
       break;
   }
 
-  self clientfield::set_to_player("" + #"hash_403e80cafccc207c", 1);
+  self clientfield::set_to_player("" + # "hash_403e80cafccc207c", 1);
   b_say = self zm_vo::vo_say(var_8b7ccae4, 0, 1, 9999, 1, 1, 1);
-  self clientfield::set_to_player("" + #"hash_403e80cafccc207c", 0);
+  self clientfield::set_to_player("" + # "hash_403e80cafccc207c", 0);
 
   if(b_say && self zm_audio::can_speak() && !(isDefined(self.var_e0ffa699) && self.var_e0ffa699)) {
     self.var_e0ffa699 = 1;

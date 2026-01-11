@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace influencers;
 
 autoexec __init__system__() {
@@ -51,7 +50,7 @@ on_joined_team(params) {
 on_grenade_fired(params) {
   grenade = params.projectile;
   weapon = params.weapon;
-  level thread create_grenade_influencers(self.pers[#"team"], weapon, grenade);
+  level thread create_grenade_influencers(self.pers[# "team"], weapon, grenade);
 }
 
 get_friendly_team_mask(team) {
@@ -93,8 +92,8 @@ private add_influencer_tracker(influencer, name) {
 }
 
 create_influencer_generic(str_name, origin_or_entity, str_team, is_for_enemy = 0) {
-  if(str_team === #"any") {
-    team_mask = level.spawnsystem.ispawn_teammask[#"all"];
+  if(str_team === # "any") {
+    team_mask = level.spawnsystem.ispawn_teammask[# "all"];
   } else if(is_for_enemy) {
     team_mask = self get_enemy_team_mask(str_team);
   } else {
@@ -149,7 +148,7 @@ create_entity_enemy_influencer(name, team) {
 }
 
 create_player_influencers() {
-  if(!isDefined(self.pers[#"team"]) || self.pers[#"team"] == #"spectator") {
+  if(!isDefined(self.pers[# "team"]) || self.pers[# "team"] == # "spectator") {
     return;
   }
 
@@ -160,8 +159,8 @@ create_player_influencers() {
   if(!level.teambased) {
     team_mask = level.spawnsystem.ispawn_teammask_free;
     enemy_teams_mask = level.spawnsystem.ispawn_teammask_free;
-  } else if(isDefined(self.pers[#"team"])) {
-    team = self.pers[#"team"];
+  } else if(isDefined(self.pers[# "team"])) {
+    team = self.pers[# "team"];
     team_mask = util::getteammask(team);
     enemy_teams_mask = util::getotherteamsmask(team);
   } else {
@@ -183,8 +182,8 @@ create_player_influencers() {
 }
 
 create_player_spawn_influencers(spawn_origin) {
-  level create_enemy_influencer("enemy_spawn", spawn_origin, self.pers[#"team"]);
-  level create_friendly_influencer("friendly_spawn", spawn_origin, self.pers[#"team"]);
+  level create_enemy_influencer("enemy_spawn", spawn_origin, self.pers[# "team"]);
+  level create_friendly_influencer("friendly_spawn", spawn_origin, self.pers[# "team"]);
 }
 
 private remove_influencer_tracking(to_be_removed) {
@@ -285,6 +284,6 @@ create_turret_influencer(name) {
     return;
   }
 
-  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[#"radius"] * 0.7);
+  projected_point = turret.origin + vectorscale(anglesToForward(turret.angles), preset[# "radius"] * 0.7);
   return create_enemy_influencer(name, turret.origin, turret.team);
 }

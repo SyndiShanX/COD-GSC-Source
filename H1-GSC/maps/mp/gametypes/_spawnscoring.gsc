@@ -437,11 +437,9 @@ getspawnpoint_freeforall(var_0) {
 
   if(var_1["primary"].size) {
     var_5 = scorespawns_freeforall(var_1["primary"]);
-  }
-  else if(var_1["secondary"].size) {
+  } else if(var_1["secondary"].size) {
     var_5 = scorespawns_freeforall(var_1["secondary"]);
-  }
-  else {
+  } else {
     var_5 = scorespawns_freeforall(var_1["bad"], 1);
   }
 
@@ -748,7 +746,7 @@ getspawnpoint_safeguard(var_0) {
   }
 
   foreach(var_3 in var_0) {
-  var_3.criticalresult = undefined;
+    var_3.criticalresult = undefined;
   }
 
   return var_5;

@@ -71,8 +71,7 @@ handle_civilian_sounds() {
 
     if(self.civiliansex == "male") {
       self playSound("chr_civ_scream_male");
-    }
-    else {
+    } else {
       self playSound("chr_civ_scream_female");
     }
 

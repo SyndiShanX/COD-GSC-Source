@@ -25,8 +25,7 @@ init() {
 
     if(isDefined(door.script_noteworthy) && door.script_noteworthy == "flip") {
       door.origin_closed = door.origin + right;
-    }
-    else {
+    } else {
       door.origin_closed = door.origin - right;
     }
 
@@ -60,8 +59,7 @@ door_think(index) {
 
     if(self door_should_open()) {
       self door_open();
-    }
-    else {
+    } else {
       self door_close();
     }
 

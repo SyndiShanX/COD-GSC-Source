@@ -151,8 +151,7 @@ init_cortex_score_component() {
 init_cortex_score(var_0) {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     var_0.max_cortex_damage_limit = 1200;
-  }
-  else {
+  } else {
     var_0.max_cortex_damage_limit = 750;
   }
 

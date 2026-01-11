@@ -27,8 +27,7 @@ init() {
   level.heli_pilot_mesh = GetEnt("heli_pilot_mesh", "targetname");
   if(!isDefined(level.heli_pilot_mesh)) {
     PrintLn("heli_pilot_mesh doesn't exist in this level: " + level.script);
-  }
-  else {
+  } else {
     level.heli_pilot_mesh.origin += getHeliPilotMeshOffset();
   }
 
@@ -85,15 +84,13 @@ exceededMaxHeliPilots(team) {
   if(level.gameType == "dm") {
     if(isDefined(level.heli_pilot[team]) || isDefined(level.heli_pilot[level.otherTeam[team]])) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   } else {
     if(isDefined(level.heli_pilot[team])) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }

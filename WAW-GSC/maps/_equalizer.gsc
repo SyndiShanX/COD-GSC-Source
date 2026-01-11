@@ -58,8 +58,7 @@ loadPresets() {
     getFilter(name) {
       if(isDefined(name) && isDefined(level.eq_defs) && isDefined(level.eq_defs[name])) {
         return level.eq_defs[name];
-      }
-      else {
+      } else {
         return undefined;
       }
     }

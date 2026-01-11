@@ -142,9 +142,7 @@ function menuautoassign(comingfrommenu) {
       }
     } else {
       if(isDefined(level.var_485556b)) {
-        assignment = [
-          [level.var_485556b]
-        ](self, comingfrommenu);
+        assignment = [[level.var_485556b]](self, comingfrommenu);
       } else {
         teamname = getassignedteamname(self);
         if(isDefined(teamname) && teamname != "free" && !comingfrommenu) {

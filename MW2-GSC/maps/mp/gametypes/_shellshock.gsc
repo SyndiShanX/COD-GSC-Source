@@ -35,14 +35,11 @@ shellshockOnDamage(cause, damage) {
 
     if(damage >= 90) {
       time = 4;
-    }
-    else if(damage >= 50) {
+    } else if(damage >= 50) {
       time = 3;
-    }
-    else if(damage >= 25) {
+    } else if(damage >= 25) {
       time = 2;
-    }
-    else if(damage > 10) {
+    } else if(damage > 10) {
       time = 2;
     }
 
@@ -101,14 +98,13 @@ dirtEffect(position) {
   if(abs(fDot) < 0.866) {
     if(rDot > 0) {
       effectMenus[effectMenus.size] = "dirt_effect_right";
-    }
-    else {
+    } else {
       effectMenus[effectMenus.size] = "dirt_effect_left";
     }
   }
 
   foreach(menu in effectMenus) {
-  self openMenu(menu);
+    self openMenu(menu);
   }
 
   if(isAlive(self)) {
@@ -116,7 +112,7 @@ dirtEffect(position) {
   }
 
   foreach(menu in effectMenus) {
-  self closeMenu(menu);
+    self closeMenu(menu);
   }
 }
 

@@ -88,8 +88,7 @@ pipe_logic(var_00, var_01, var_02, var_03) {
 
   if(!isDefined(level._pipes._pipe_methods[var_02])) {
     var_01 = pipe_calc_nofx(var_01, var_02);
-  }
-  else {
+  } else {
     var_01 = self[[level._pipes._pipe_methods[var_02]]](var_01, var_02);
   }
 
@@ -111,8 +110,7 @@ pipe_logic(var_00, var_01, var_02, var_03) {
 
   if(isai(var_03)) {
     var_07 = var_03 getEye();
-  }
-  else {
+  } else {
     var_07 = var_3.origin;
   }
 
@@ -200,8 +198,7 @@ pipe_damage(var_00, var_01, var_02, var_03) {
   for(;;) {
     if(!isDefined(self.damageowner)) {
       self radiusdamage(var_04, 36, var_05, var_05 * 0.75, undefined, "MOD_TRIGGER_HURT");
-    }
-    else {
+    } else {
       self radiusdamage(var_04, 36, var_05, var_05 * 0.75, var_02, "MOD_TRIGGER_HURT");
     }
 

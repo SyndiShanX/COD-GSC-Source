@@ -73,8 +73,7 @@ vehicle_zpu_get_target() {
 
   if(vehicle_zpu_can_target(var_0, 3)) {
     var_1 = var_0;
-  }
-  else {
+  } else {
     var_2 = maps\oilrocks_apache_code::get_apaches_ally_and_player();
     var_2 = sortbydistance(var_2, self.origin);
     var_1 = undefined;
@@ -115,8 +114,7 @@ vehicle_zpu_can_target(var_0, var_1) {
 vehicle_zpu_register_target(var_0) {
   if(!isDefined(var_0.zpus_targeting)) {
     var_0.zpus_targeting = 1;
-  }
-  else {
+  } else {
     var_0.zpus_targeting++;
   }
 

@@ -263,7 +263,7 @@ roadkill_foley_shepherd_intro() {
   if( !is_default_start() ) {
   	return;
   }
-	
+  	
   struct notify( "stop_loop" );
   */
 
@@ -380,16 +380,16 @@ player_humvee() {
   }
 
   /*
-	level.player PlayerLinkTo( self, "tag_player", 0 );
-	turret = self.mgturret[ 0 ];
-	turret MakeUsable();
-	turret SetMode( "manual" );
-	turret UseBy( level.player );
-	turret MakeUnusable();
-	
-//	thread player_viewhands_minigun( level.suburbans[ 2 ].mgturret[ 0 ] );
-	level.player DisableTurretDismount();
-	*/
+  	level.player PlayerLinkTo( self, "tag_player", 0 );
+  	turret = self.mgturret[ 0 ];
+  	turret MakeUsable();
+  	turret SetMode( "manual" );
+  	turret UseBy( level.player );
+  	turret MakeUnusable();
+  	
+  //	thread player_viewhands_minigun( level.suburbans[ 2 ].mgturret[ 0 ] );
+  	level.player DisableTurretDismount();
+  	*/
 }
 
 player_turret_humvee() {
@@ -732,7 +732,7 @@ enemy_bridge_vehicle_spawner() {
 wait_until_player_ads_on_truck() {
   flag_assert("bridge_baddies_retreat");
 
-    level endon("bridge_baddies_retreat");
+  level endon("bridge_baddies_retreat");
 
   for(;;) {
     dot = get_dot(level.player getEye(), level.player GetPlayerAngles(), self.origin);
@@ -888,7 +888,7 @@ fluorescentFlicker() {
 lights() {
   lights = getEntArray("flickerlight1", "targetname");
   foreach(light in lights) {
-  light thread fluorescentFlicker();
+    light thread fluorescentFlicker();
   }
 }
 
@@ -1613,10 +1613,10 @@ player_ride_vehicle() {
    Use model => ( vehicle_hummer_seat_rb_obj ) as glowing seat.
    I didn't set any glowing attributes for it yet, you'll have to set that
   up.
-	
+  	
   To hide regular seat:
    Use ( tag_seat_rb_hide ).
-	
+  	
   To attach glowing seat to regular:
    Attach ( tag_seat_rb , from vehicle_hummer_seat_rb_obj) to (
   tag_seat_rb_attach )
@@ -1688,15 +1688,15 @@ player_ride_vehicle() {
   SetSavedDvar("cg_fov", 65);
 
   /*
-	turret = self.mgturret[ 0 ];
-	turret MakeUsable();
-	turret SetMode( "manual" );
-	turret UseBy( level.player );
-	turret MakeUnusable();
-	
-//	thread player_viewhands_minigun( level.suburbans[ 2 ].mgturret[ 0 ] );
-	level.player DisableTurretDismount();
-	*/
+  	turret = self.mgturret[ 0 ];
+  	turret MakeUsable();
+  	turret SetMode( "manual" );
+  	turret UseBy( level.player );
+  	turret MakeUnusable();
+  	
+  //	thread player_viewhands_minigun( level.suburbans[ 2 ].mgturret[ 0 ] );
+  	level.player DisableTurretDismount();
+  	*/
 }
 
 chair_waits_for_close() {
@@ -1890,7 +1890,7 @@ allied_riverbank_spawner() {
   	index -= 3;
   	wait( 2.0 );
   }
-	
+  	
   wait( index * 0.15 );
   */
   /*
@@ -1905,7 +1905,7 @@ run_to_convoy() {
   level.runnings_to_convoy_count++;
   /*
   AssertEx( isDefined( self.script_index ), "Guy with export " + self.export + " had no script_index" );
-	
+  	
   wait_table = [];
   wait_table[ 0 ] = 0.05; // 2 guys to the front right
   wait_table[ 1 ] = 0.25; // 2 guys to the front right
@@ -1917,7 +1917,7 @@ run_to_convoy() {
   wait_table[ 7 ] = 0.4; // 2 doing binoc scene
   wait_table[ 8 ] = 1.5; // guy in the hut
   wait_table[ 9 ] = 0.5; // guy on the truck
-	
+  	
   timer = 0;
   for( i = 0; i <= self.script_index; i++ )
   {
@@ -1965,7 +1965,7 @@ trigger_guy_gets_in_vehicle() {
     used[node.script_index] = true;
   }
 
-    level.guy_gets_in_vehicle_targets = array_index_by_script_index(level.guy_gets_in_vehicle_targets);
+  level.guy_gets_in_vehicle_targets = array_index_by_script_index(level.guy_gets_in_vehicle_targets);
   self.index = 0;
 
   trigger_handles_guys_running_up_stairs_to_get_in_vehicles();
@@ -2385,7 +2385,7 @@ detour_vehicle_driver_animates() {
     turret thread entline(ent);
   }
 
-    count = 0;
+  count = 0;
   /*
   times = [];
   times[ 0 ] = 0.5;
@@ -2547,7 +2547,7 @@ player_personal_convoy() {
   		self.veh_brake = 0.5;
   		break;
   	}
-	
+  	
   	wait( 0.05 );
   }	
   */
@@ -2565,7 +2565,7 @@ vehicles_maintain_distance_until_traffic(near_car) {
     	self ResumeSpeed( 5 );
     	flag_clear( "lead_vehicle_speeds_up" );
     }
-	
+    	
     */
     if(Distance(near_car.origin, self.origin) < 300) {
       self Vehicle_SetSpeed(near_car.veh_speed, 5, 5);
@@ -2876,8 +2876,7 @@ roadkill_ride_kill_drones() {
   foreach(drone in angry_drones) {
     if(IsAlive(drone)) {
       drone Kill();
-    }
-    else {
+    } else {
       drone Delete();
     }
   }
@@ -3721,32 +3720,32 @@ airstrike_completion_dialogue_and_exploder() {
   */
 
   /*
-	// Hey isn't this danger close for the task force?	
-	delayThread( time, ::magic_dialogue_queue, "roadkill_ar3_dangerclose", "ar3" );
-	level.scr_sound[ "generic" ][ "roadkill_ar3_dangerclose" ] = "roadkill_ar3_dangerclose";
-	
-	// Since when does Shepherd care about danger close?	
-	level.scr_sound[ "generic" ][ "roadkill_cpd_sincewhen" ] = "roadkill_cpd_sincewhen";
+  	// Hey isn't this danger close for the task force?	
+  	delayThread( time, ::magic_dialogue_queue, "roadkill_ar3_dangerclose", "ar3" );
+  	level.scr_sound[ "generic" ][ "roadkill_ar3_dangerclose" ] = "roadkill_ar3_dangerclose";
+  	
+  	// Since when does Shepherd care about danger close?	
+  	level.scr_sound[ "generic" ][ "roadkill_cpd_sincewhen" ] = "roadkill_cpd_sincewhen";
 
-	
-	
+  	
+  	
 
-	// Cleared hot!	
-//	delayThread( time + 2, ::dunn_line, "roadkill_cpd_clearedhot" );
-	
-	// Devil 1-1 off safe. Bombs away bombs away.	
-	delayThread( time + 5.5, ::radio_line, "roadkill_fp1_offsafe" );
+  	// Cleared hot!	
+  //	delayThread( time + 2, ::dunn_line, "roadkill_cpd_clearedhot" );
+  	
+  	// Devil 1-1 off safe. Bombs away bombs away.	
+  	delayThread( time + 5.5, ::radio_line, "roadkill_fp1_offsafe" );
 
-	time += 2;
-	
-	// What's the hold up?	
-	delayThread( time, ::magic_dialogue_queue, "roadkill_ar3_holup", "ar3" );
-	time += 1.5;
-	
-	// Shepherd called in a major fire mission!	
-	delayThread( time, ::magic_dialogue_queue, "roadkill_cpd_majorfiremission", "cpd" );
-	time += 2.5;
-	*/
+  	time += 2;
+  	
+  	// What's the hold up?	
+  	delayThread( time, ::magic_dialogue_queue, "roadkill_ar3_holup", "ar3" );
+  	time += 1.5;
+  	
+  	// Shepherd called in a major fire mission!	
+  	delayThread( time, ::magic_dialogue_queue, "roadkill_cpd_majorfiremission", "cpd" );
+  	time += 2.5;
+  	*/
   delayThread(time, ::spawn_vehicle_from_targetname_and_drive, "bomber_spawner");
   time += 0.7;
 
@@ -3782,21 +3781,21 @@ airstrike_completion_dialogue_and_exploder() {
   delayThread(8.85, ::play_sound_in_space, "roadkill_cpd_looklook", charpos("cpd"));
 
   /*
-	// Huah!! Get some!	
-	delayThread( 0.9, ::magic_dialogue_queue, "roadkill_cpd_getsome", "cpd" );
+  	// Huah!! Get some!	
+  	delayThread( 0.9, ::magic_dialogue_queue, "roadkill_cpd_getsome", "cpd" );
 
-	// Huah! Hell yea!	
-	delayThread( 0.95, ::magic_dialogue_queue, "roadkill_ar1_huahyeah", "ar1" );
-	
-	// Yeah! 	
-	delayThread( 1.0, ::magic_dialogue_queue, "roadkill_ar1_yeah", "ar3" );
-	
-	// Woo! Yeah!	
-//	delayThread( 1.25, ::magic_dialogue_queue, "roadkill_ar2_wooyeah", "ar2" );
-	
-	// Whoa!	
-	delayThread( 1.8, ::magic_dialogue_queue, "roadkill_ar1_whoa", "dunn" );
-	*/
+  	// Huah! Hell yea!	
+  	delayThread( 0.95, ::magic_dialogue_queue, "roadkill_ar1_huahyeah", "ar1" );
+  	
+  	// Yeah! 	
+  	delayThread( 1.0, ::magic_dialogue_queue, "roadkill_ar1_yeah", "ar3" );
+  	
+  	// Woo! Yeah!	
+  //	delayThread( 1.25, ::magic_dialogue_queue, "roadkill_ar2_wooyeah", "ar2" );
+  	
+  	// Whoa!	
+  	delayThread( 1.8, ::magic_dialogue_queue, "roadkill_ar1_whoa", "dunn" );
+  	*/
 
   time = 1.3;
   // BOOM!	
@@ -3899,10 +3898,10 @@ airstrike_completion_dialogue_and_exploder() {
   /*
   // The networks are gonna pay big for this one!	
   magic_dialogue_queue( "roadkill_cpd_paybig", "network_chatter_spawner1" );
-	
+  	
   // Keep dreamin video boy!	
   magic_dialogue_queue( "roadkill_ar2_keepdreamin", "network_chatter_spawner2" );
-	
+  	
   // No man, seriously, that was extreme!	
   magic_dialogue_queue( "roadkill_cpd_extreme", "network_chatter_spawner1" );
   */
@@ -3933,7 +3932,7 @@ convoy_moves_out_dialogue() {
   /*
   // Hu-ahh!! What was that, a 1000 pounder?	
   guys[ "chat_ar3" ] generic_dialogue_queue( "roadkill_ar3_whatwasthat" );
-	
+  	
   time = 0.05;
   // I dunno but damn that was kick ass, huah?	
   guys[ "chat_ar4" ] delayThread( time, ::generic_dialogue_queue, "roadkill_ar4_idunno" );
@@ -5181,7 +5180,7 @@ wave_right_trigger() {
   if( IsAlive( other ) ) {
   	other set_force_color( "b" );
   }
-	
+  	
   // turn the green guy to a purple guy
   ai = GetAIArray( "allies" );
   foreach ( guy in ai )
@@ -5821,7 +5820,7 @@ vehicle_physics_explosion() {
   power *= 0.35;
   level.crazy_ride_convoy["detour"] VehPhys_Launch(vec, 1.0);
   /*
-	
+  	
   delayThread( 0.25, ::reverse_force );
   for( ;; )
   {	
@@ -5831,7 +5830,7 @@ vehicle_physics_explosion() {
   	vec = forward * power;
   	
   	power *= 0.35;
-	
+  	
   //	PhysicsExplosionSphere( rpg_physics.origin, rpg_physics.radius, rpg_physics.radius, 30 );
   	PhysicsJolt( rpg_physics.origin, rpg_physics.radius, rpg_physics.radius, vec );
   	Line( rpg_physics.origin, targ.origin, (1,0,0), 1, 0, 50 );
@@ -5994,18 +5993,18 @@ corner_hider_spawner() {
 
   node = GetNode( self.script_linkto, "script_linkname" );
   struct = getstruct( self.target, "targetname" );
-	
+  	
   self.ignoreme = true;
   self.ignoreall = true;
   self endon( "death" );
-	
+  	
   self.animname = "flee_alley";
   self.favoriteenemy = level.player;
   self.goalradius = 8;
   self SetGoalNode( node );
   self SetLookAtEntity( level.player );
   self disable_long_death();
-	
+  	
 
   //wait( 2.34 );
   flag_wait( "ambush_guy_attacks" );

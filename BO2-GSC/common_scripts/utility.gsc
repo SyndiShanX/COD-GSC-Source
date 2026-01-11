@@ -14,8 +14,7 @@ init_session_mode_flags() {
   level.language = getdvar(#"language");
 }
 
-empty(a, b, c, d, e) {
-}
+empty(a, b, c, d, e) {}
 
 add_to_array(array, item, allow_dupes) {
   if(!isDefined(item)) {
@@ -28,8 +27,7 @@ add_to_array(array, item, allow_dupes) {
 
   if(!isDefined(array)) {
     array[0] = item;
-  }
-  else if(allow_dupes || !isinarray(array, item)) {
+  } else if(allow_dupes || !isinarray(array, item)) {
     array[array.size] = item;
   }
 
@@ -40,7 +38,7 @@ array_copy(array) {
   a_copy = [];
 
   foreach(elem in array) {
-  a_copy[a_copy.size] = elem;
+    a_copy[a_copy.size] = elem;
   }
 
   return a_copy;
@@ -152,8 +150,7 @@ array_waitlogic2(ent, msg, timeout) {
 
   if(isDefined(timeout)) {
     wait(timeout);
-  }
-  else {
+  } else {
     ent waittill(msg);
   }
 }
@@ -252,8 +249,7 @@ random(array) {
 get_players(str_team) {
   if(isDefined(str_team)) {
     return getplayers(str_team);
-  }
-  else {
+  } else {
     return getplayers();
   }
 }
@@ -643,8 +639,7 @@ flag(flagname) {
 flag_delete(flagname) {
   if(isDefined(level.flag[flagname])) {
     level.flag[flagname] = undefined;
-  }
-  else {
+  } else {
     println("flag_delete() called on flag that does not exist: " + flagname);
 
   }
@@ -669,8 +664,7 @@ flag_init(flagname, val, b_is_trigger) {
 
   if(isDefined(val) && val) {
     level.flag[flagname] = 1;
-  }
-  else {
+  } else {
     level.flag[flagname] = 0;
   }
 
@@ -705,8 +699,7 @@ flag_set_for_time(n_time, str_flag) {
 flag_toggle(flagname) {
   if(flag(flagname)) {
     flag_clear(flagname);
-  }
-  else {
+  } else {
     flag_set(flagname);
   }
 }
@@ -830,23 +823,17 @@ single_func(entity, func, arg1, arg2, arg3, arg4, arg5, arg6) {
 
   if(isDefined(arg6)) {
     return entity[[func]](arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-  else if(isDefined(arg5)) {
+  } else if(isDefined(arg5)) {
     return entity[[func]](arg1, arg2, arg3, arg4, arg5);
-  }
-  else if(isDefined(arg4)) {
+  } else if(isDefined(arg4)) {
     return entity[[func]](arg1, arg2, arg3, arg4);
-  }
-  else if(isDefined(arg3)) {
+  } else if(isDefined(arg3)) {
     return entity[[func]](arg1, arg2, arg3);
-  }
-  else if(isDefined(arg2)) {
+  } else if(isDefined(arg2)) {
     return entity[[func]](arg1, arg2);
-  }
-  else if(isDefined(arg1)) {
+  } else if(isDefined(arg1)) {
     return entity[[func]](arg1);
-  }
-  else {
+  } else {
     return entity[[func]]();
   }
 }
@@ -874,31 +861,31 @@ array_thread(entities, func, arg1, arg2, arg3, arg4, arg5, arg6) {
   if(isarray(entities)) {
     if(isDefined(arg6)) {
       foreach(ent in entities) {
-      ent thread[[func]](arg1, arg2, arg3, arg4, arg5, arg6);
+        ent thread[[func]](arg1, arg2, arg3, arg4, arg5, arg6);
       }
     } else if(isDefined(arg5)) {
       foreach(ent in entities) {
-      ent thread[[func]](arg1, arg2, arg3, arg4, arg5);
+        ent thread[[func]](arg1, arg2, arg3, arg4, arg5);
       }
     } else if(isDefined(arg4)) {
       foreach(ent in entities) {
-      ent thread[[func]](arg1, arg2, arg3, arg4);
+        ent thread[[func]](arg1, arg2, arg3, arg4);
       }
     } else if(isDefined(arg3)) {
       foreach(ent in entities) {
-      ent thread[[func]](arg1, arg2, arg3);
+        ent thread[[func]](arg1, arg2, arg3);
       }
     } else if(isDefined(arg2)) {
       foreach(ent in entities) {
-      ent thread[[func]](arg1, arg2);
+        ent thread[[func]](arg1, arg2);
       }
     } else if(isDefined(arg1)) {
       foreach(ent in entities) {
-      ent thread[[func]](arg1);
+        ent thread[[func]](arg1);
       }
     } else {
       foreach(ent in entities) {
-      ent thread[[func]]();
+        ent thread[[func]]();
       }
     }
   } else
@@ -926,23 +913,17 @@ single_thread(entity, func, arg1, arg2, arg3, arg4, arg5, arg6) {
 
   if(isDefined(arg6)) {
     entity thread[[func]](arg1, arg2, arg3, arg4, arg5, arg6);
-  }
-  else if(isDefined(arg5)) {
+  } else if(isDefined(arg5)) {
     entity thread[[func]](arg1, arg2, arg3, arg4, arg5);
-  }
-  else if(isDefined(arg4)) {
+  } else if(isDefined(arg4)) {
     entity thread[[func]](arg1, arg2, arg3, arg4);
-  }
-  else if(isDefined(arg3)) {
+  } else if(isDefined(arg3)) {
     entity thread[[func]](arg1, arg2, arg3);
-  }
-  else if(isDefined(arg2)) {
+  } else if(isDefined(arg2)) {
     entity thread[[func]](arg1, arg2);
-  }
-  else if(isDefined(arg1)) {
+  } else if(isDefined(arg1)) {
     entity thread[[func]](arg1);
-  }
-  else {
+  } else {
     entity thread[[func]]();
   }
 }
@@ -1404,8 +1385,7 @@ has_spawnflag(spawnflags) {
 clamp(val, val_min, val_max) {
   if(val < val_min) {
     val = val_min;
-  }
-  else if(val > val_max) {
+  } else if(val > val_max) {
     val = val_max;
   }
 
@@ -1421,8 +1401,7 @@ lag(desired, curr, k, dt) {
 
   if(k * dt >= 1.0 || k <= 0.0) {
     r = desired;
-  }
-  else {
+  } else {
     err = desired - curr;
     r = curr + k * err * dt;
   }

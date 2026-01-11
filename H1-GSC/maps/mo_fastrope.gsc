@@ -440,8 +440,7 @@ fastrope_player_viewshift() {
 
   if(!var_0) {
     fastrope_player_viewshift_lock();
-  }
-  else {
+  } else {
     fastrope_player_viewshift_nolock();
   }
 }
@@ -451,8 +450,7 @@ fastrope_player_unload() {
 
   if(!var_0) {
     fastrope_player_unload_lock();
-  }
-  else {
+  } else {
     fastrope_player_unload_nolock();
   }
 }
@@ -987,8 +985,7 @@ fastrope_heli_setup(var_0) {
       }
     }
 
-    if(!isDefined(var_1.stopnode)) {
-    }
+    if(!isDefined(var_1.stopnode)) {}
   }
 
   level.fastrope_globals.helicopters[var_1.targetname] = var_1;

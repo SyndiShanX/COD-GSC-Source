@@ -81,8 +81,7 @@ onplayerconnect() {
 
     if(var_01) {
       var_0.gender = "female";
-    }
-    else {
+    } else {
       var_0.gender = "male";
     }
 
@@ -103,23 +102,17 @@ onplayerspawned() {
 
     if(scripts\mp\utility\game::func_9D48("archetype_heavy")) {
       var_00 = "HV_";
-    }
-    else if(scripts\mp\utility\game::func_9D48("archetype_scout")) {
+    } else if(scripts\mp\utility\game::func_9D48("archetype_scout")) {
       var_00 = "SN_";
-    }
-    else if(scripts\mp\utility\game::func_9D48("archetype_assassin")) {
+    } else if(scripts\mp\utility\game::func_9D48("archetype_assassin")) {
       var_00 = "FT_";
-    }
-    else if(scripts\mp\utility\game::func_9D48("archetype_engineer")) {
+    } else if(scripts\mp\utility\game::func_9D48("archetype_engineer")) {
       var_00 = "N6_";
-    }
-    else if(scripts\mp\utility\game::func_9D48("archetype_sniper")) {
+    } else if(scripts\mp\utility\game::func_9D48("archetype_sniper")) {
       var_00 = "GH_";
-    }
-    else if(scripts\mp\utility\game::func_9D48("archetype_assault")) {
+    } else if(scripts\mp\utility\game::func_9D48("archetype_assault")) {
       var_00 = "AS_";
-    }
-    else {
+    } else {
       var_00 = "AS_";
     }
 
@@ -477,8 +470,7 @@ func_117E1() {
         if(isDefined(var_05) && cansay("callout_location") && friendly_nearby(4840000)) {
           if(scripts\mp\utility\game::_hasperk("specialty_quieter") || !friendly_nearby(262144)) {
             level thread saylocalsound(self, var_5.locationaliases[0], 0);
-          }
-          else {
+          } else {
             level thread saylocalsound(self, var_5.locationaliases[0], 1);
           }
 
@@ -516,8 +508,7 @@ saylocalsound(var_00, var_01, var_02, var_03) {
 
     if(isDefined(level.bcsounds[var_01])) {
       var_05 = var_04 + level.bcsounds[var_01];
-    }
-    else {
+    } else {
       location_add_last_callout_time(var_01);
       var_05 = var_04 + "co_loc_" + var_01;
       var_00 thread dothreatcalloutresponse(var_05, var_01);
@@ -546,8 +537,7 @@ dosound(var_00, var_01, var_02) {
 
   if(isagent(self) || isDefined(var_01) && var_01) {
     self playsoundtoteam(var_00, var_03);
-  }
-  else {
+  } else {
     self playsoundtoteam(var_00, var_03, self);
   }
 
@@ -604,8 +594,7 @@ dothreatcalloutresponse(var_00, var_01) {
 
         if(soundexists(var_09) && scripts\engine\utility::cointoss()) {
           var_10 = var_09;
-        }
-        else {
+        } else {
           var_10 = var_08 + level.bcsounds["callout_response_generic"];
         }
 
@@ -1079,8 +1068,7 @@ trysetqueuedselfvo(var_00, var_01) {
   }
   if(self.queuedvo == "none" || level.selfvoinfo[level.selfvomap[self.queuedvo]]["priority"] < level.selfvoinfo[level.selfvomap[var_00]]["priority"] || level.selfvoinfo[level.selfvomap[self.queuedvo]]["priority"] == level.selfvoinfo[level.selfvomap[var_00]]["priority"] && scripts\engine\utility::cointoss()) {
     self.queuedvo = var_00;
-  }
-  else {
+  } else {
     return;
   }
 

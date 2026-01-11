@@ -183,8 +183,7 @@ odin_lgt_flicker(var_0, var_1, var_2, var_3) {
 
     if(var_2 != var_3) {
       var_5 = var_5 + randomfloatrange(var_2, var_3);
-    }
-    else {
+    } else {
       var_5 = var_5 + var_2;
     }
 
@@ -202,8 +201,7 @@ odin_lgt_flicker(var_0, var_1, var_2, var_3) {
 
       if(var_8 > 0.2) {
         var_8 = randomfloatrange(0, 0.3);
-      }
-      else {
+      } else {
         var_8 = var_6;
       }
 
@@ -243,8 +241,7 @@ place_sun_with_moving_source(var_0, var_1, var_2, var_3) {
   for(;;) {
     if(isDefined(var_1)) {
       var_7 = var_0 gettagorigin("tag_flash");
-    }
-    else {
+    } else {
       var_7 = var_0.origin;
     }
 
@@ -252,8 +249,7 @@ place_sun_with_moving_source(var_0, var_1, var_2, var_3) {
 
     if(level.player.origin[0] < var_7[0]) {
       var_5 = atan((level.player.origin[1] - var_7[1]) / (level.player.origin[0] - var_7[0]));
-    }
-    else {
+    } else {
       var_5 = 180 + atan((level.player.origin[1] - var_7[1]) / (level.player.origin[0] - var_7[0]));
     }
 
@@ -278,7 +274,7 @@ lgt_init() {
   var_0 = getEntArray("lgt_odin_pulsing", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 thread odin_lgt_pulsing(1);
+    var_2 thread odin_lgt_pulsing(1);
   }
 
   thread lgt_intro_sequence();
@@ -390,7 +386,7 @@ lgt_odin_firing() {
   var_0 = getEntArray("lgt_odin_destruction", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 thread odin_lgt_pulsing(1);
+    var_2 thread odin_lgt_pulsing(1);
   }
 
   thread rotatelights("lgt_odin_spin_ref", "lgt_odin_spinning", "pitch");
@@ -425,7 +421,7 @@ rotatelights(var_0, var_1, var_2) {
   var_4 thread rotateme(-360, var_2, 1.0);
 
   foreach(var_6 in var_3) {
-  var_6 thread maps\_utility::manual_linkto(var_4, var_6.origin - var_4.origin);
+    var_6 thread maps\_utility::manual_linkto(var_4, var_6.origin - var_4.origin);
   }
 }
 
@@ -588,8 +584,7 @@ fx_escape_fire_rods() {
 
     if(var_7 == "tag_fx_impact_1") {
       var_12 = vectortoangles(var_10) + (0, 0, -40);
-    }
-    else {
+    } else {
       var_12 = vectortoangles(var_10) + (0, 0, randomfloatrange(-4, 4));
     }
 
@@ -752,8 +747,7 @@ god_rays_from_rog(var_0, var_1, var_2) {
 
       if(level.player.origin[0] < var_7[0]) {
         var_4 = atan((level.player.origin[1] - var_7[1]) / (level.player.origin[0] - var_7[0]));
-      }
-      else {
+      } else {
         var_4 = 180 + atan((level.player.origin[1] - var_7[1]) / (level.player.origin[0] - var_7[0]));
       }
 
@@ -796,15 +790,13 @@ fire_sat_rcs_thrusters(var_0, var_1, var_2) {
 
   if(var_0[1] < var_1[1]) {
     var_3 = 5;
-  }
-  else {
+  } else {
     var_6 = 5;
   }
 
   if(var_0[0] < var_1[0]) {
     var_5 = 3;
-  }
-  else {
+  } else {
     var_4 = 3;
   }
 
@@ -815,29 +807,25 @@ fire_sat_rcs_thrusters(var_0, var_1, var_2) {
   for(var_7 = 0; var_7 < var_2 * 2; var_7++) {
     if(var_3 > randomfloatrange(1, 6)) {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_01_lat_fx, "tag_origin");
-    }
-    else {
+    } else {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_04_lat_fx, "tag_origin");
     }
 
     if(var_6 > randomfloatrange(1, 6)) {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_04_lat_fx, "tag_origin");
-    }
-    else {
+    } else {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_01_lat_fx, "tag_origin");
     }
 
     if(var_5 > randomfloatrange(1, 5)) {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_03_lat_fx, "tag_origin");
-    }
-    else {
+    } else {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_02_lat_fx, "tag_origin");
     }
 
     if(var_4 > randomfloatrange(1, 5)) {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_02_lat_fx, "tag_origin");
-    }
-    else {
+    } else {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_03_lat_fx, "tag_origin");
     }
 
@@ -858,29 +846,25 @@ fire_sat_rcs_thrusters(var_0, var_1, var_2) {
   for(var_7 = 0; var_7 < var_2 * 2; var_7++) {
     if(var_6 > randomfloatrange(1, 6)) {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_01_lat_fx, "tag_origin");
-    }
-    else {
+    } else {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_04_lat_fx, "tag_origin");
     }
 
     if(var_3 > randomfloatrange(1, 6)) {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_04_lat_fx, "tag_origin");
-    }
-    else {
+    } else {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_01_lat_fx, "tag_origin");
     }
 
     if(var_4 > randomfloatrange(1, 5)) {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_03_lat_fx, "tag_origin");
-    }
-    else {
+    } else {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_02_lat_fx, "tag_origin");
     }
 
     if(var_5 > randomfloatrange(1, 5)) {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_02_lat_fx, "tag_origin");
-    }
-    else {
+    } else {
       playFXOnTag(level._effect["odin_sat_thrusters_runner"], level.thruster_03_lat_fx, "tag_origin");
     }
 
@@ -1010,8 +994,7 @@ fx_rog_trail(var_0, var_1) {
 
   if(!isDefined(self)) {
     return;
-  }
-  else {
+  } else {
     killfxontag(level._effect["odin_rog_trail_flare"], self, "tag_origin");
   }
 }
@@ -1184,7 +1167,7 @@ fx_burnup_sat() {
   }
 
   foreach(var_2 in var_5) {
-  var_2 delete();
+    var_2 delete();
   }
 
   common_scripts\utility::flag_set("clear_for_sat_clean");
@@ -1359,7 +1342,7 @@ fx_sat_rcs_damage(var_0) {
 
 fx_sat_rcs_damage_kill() {
   foreach(var_1 in level.fx_sat_rcs_damage) {
-  var_1 delete();
+    var_1 delete();
   }
 
   level.fx_sat_rcs_damage = [];
@@ -1464,25 +1447,25 @@ fx_setup_sat_lights() {
 
 fx_sat_doors_open(var_0) {
   foreach(var_2 in var_0) {
-  playFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
+    playFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
   }
 
   wait 18;
 
   foreach(var_2 in var_0) {
-  stopFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
+    stopFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
   }
 }
 
 fx_sat_doors_close(var_0) {
   foreach(var_2 in var_0) {
-  playFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
+    playFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
   }
 
   wait 20;
 
   foreach(var_2 in var_0) {
-  stopFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
+    stopFXOnTag(level._effect["odin_sat_red_light_blinker_runner"], var_2, "tag_fx_base_light");
   }
 }
 

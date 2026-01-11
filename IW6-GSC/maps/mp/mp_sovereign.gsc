@@ -176,7 +176,7 @@ walkway_collapse() {
     noself_delayCall(4.46, ::playSoundAtPos, (277, -283, 256), "scn_catwalk_steam_burst2");
     animated_walkway_tank ScriptModelPlayAnimDeltaMotion("mp_sovereign_walkway_collapse_top");
     foreach(fx_set in walkway_tank_fx) {
-    thread walkway_play_fx(fx_set[2], animated_walkway_tank, fx_set[1], fx_set[0]);
+      thread walkway_play_fx(fx_set[2], animated_walkway_tank, fx_set[1], fx_set[0]);
     }
 
     level delayThread(swap_time, ::exploder, 3);

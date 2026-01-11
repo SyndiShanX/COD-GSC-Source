@@ -11,8 +11,7 @@ playanimnatrateuntilnotetrack_safe(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_0)) {
     if(isDefined(var_1)) {
       var_6 = getanimlength(self getanimentry(var_0, var_1));
-    }
-    else {
+    } else {
       var_6 = getanimlength(self getanimentry(var_0, 0));
     }
 
@@ -72,7 +71,9 @@ waituntilnotetrack(var_0, var_1, var_2, var_3, var_4) {
     }
 
     if(isDefined(var_4)) {
-      [[var_4]](var_8, var_2, var_3, var_6);
+      [
+        [var_4]
+      ](var_8, var_2, var_3, var_6);
     }
   }
 }
@@ -85,8 +86,7 @@ notetrack_timeout(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     self notify(var_0, var_2);
-  }
-  else {
+  } else {
     self notify(var_0, "end");
   }
 }
@@ -108,11 +108,9 @@ loop_anim_state_randomize(var_0, var_1, var_2) {
 set_anim_state(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     self setanimstate(var_0, var_1, var_2);
-  }
-  else if(isDefined(var_1)) {
+  } else if(isDefined(var_1)) {
     self setanimstate(var_0, var_1);
-  }
-  else {
+  } else {
     self setanimstate(var_0);
   }
 }
@@ -127,8 +125,7 @@ getangleindexvariable(var_0, var_1) {
 
   if(var_0 < 0) {
     return int(ceil((180 + var_0 - var_3) / var_2));
-  }
-  else {
+  } else {
     return int(floor((180 + var_0 + var_3) / var_2));
   }
 }
@@ -147,8 +144,7 @@ getanimscalefactors(var_0, var_1, var_2) {
 
     if(vectordot(var_10, var_0) < 0) {
       var_7 = 0;
-    }
-    else if(var_5 > 0) {
+    } else if(var_5 > 0) {
       var_7 = var_3 / var_5;
     }
   } else if(var_5 > 0)

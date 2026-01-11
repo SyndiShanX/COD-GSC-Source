@@ -50,8 +50,7 @@ skipto_intro() {
 
   if(dead_stat == 0) {
     level.is_defalco_alive = 1;
-  }
-  else {
+  } else {
     level.is_defalco_alive = 0;
   }
 }
@@ -171,8 +170,7 @@ run_player_intro() {
 }
 
 menendez_intro_hallway() {
-  if(level.is_defalco_alive == 1) {
-  } else
+  if(level.is_defalco_alive == 1) {} else
     level thread menendez_greeters_animate("speech_greeter_intro_1");
 
   level thread menendez_greeters_animate("speech_greeter_intro_2");
@@ -230,7 +228,7 @@ menendez_intro_cleanup() {
   a_fans = getEntArray("hallway_fan", "script_noteworthy");
 
   foreach(fan in a_fans) {
-  fan delete();
+    fan delete();
   }
 }
 
@@ -246,8 +244,7 @@ menendez_speech_opendoors(guy) {
 menendez_exit_opendoors(guy) {
   if(level.is_defalco_alive == 1) {
     run_scene_and_delete("menendez_exit_doors_defalco");
-  }
-  else {
+  } else {
     run_scene_and_delete("menendez_exit_doors");
   }
 }
@@ -301,8 +298,7 @@ menendez_speech_player() {
 
   if(level.is_defalco_alive) {
     level thread run_scene_and_delete("speech_walk_no_defalco_player");
-  }
-  else {
+  } else {
     level thread run_scene_and_delete("speech_walk_no_defalco_player");
   }
 
@@ -408,8 +404,7 @@ speech_vtols_arrive() {
 
   if(level.is_defalco_alive) {
     scene_wait("speech_walk_no_defalco");
-  }
-  else {
+  } else {
     scene_wait("speech_walk_no_defalco");
   }
 

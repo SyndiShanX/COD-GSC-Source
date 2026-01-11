@@ -22,7 +22,7 @@ init() {
   game["menu_changeclass_barebones"] = "changeclass_barebones";
 
   foreach(team in level.teams) {
-  game["menu_changeclass_" + team] = "changeclass";
+    game["menu_changeclass_" + team] = "changeclass";
   }
 
   game["menu_controls"] = "ingame_controls";

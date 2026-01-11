@@ -276,8 +276,7 @@ birds_fly(start_perch) {
     }
     if(isDefined(info.rigmodel_pauseStart[birdpath.takeoffAnim])) {
       pauseStart = info.rigmodel_pauseStart[birdpath.takeoffAnim];
-    }
-    else pauseStart = 0;
+    } else pauseStart = 0;
     takeoffStartTime = 0;
     if(!self.landed) {
       if(isSP()) {
@@ -303,8 +302,7 @@ birds_fly(start_perch) {
     }
     if(isDefined(landAnim) && isDefined(info.rigmodel_pauseEnd[birdpath.landAnim])) {
       pauseEnd = info.rigmodel_pauseEnd[birdpath.landAnim];
-    }
-    else pauseEnd = 0;
+    } else pauseEnd = 0;
 
     accnFrame = info.accn / (20 * 20);
     pathLength = birdpath.Segments[birdpath.Segments.size - 1].endAt;
@@ -331,8 +329,7 @@ birds_fly(start_perch) {
     loopAnimTime = GetAnimLength(flyAnim);
     if(isDefined(landAnim)) {
       otherAnimTime = GetAnimLength(takeoffAnim) + GetAnimLength(landAnim) - (pauseStart + takeoffStartTime + pauseEnd);
-    }
-    else {
+    } else {
       otherAnimTime = GetAnimLength(takeoffAnim) - (pauseStart + takeoffStartTime + pauseEnd);
     }
     numLoops = Int(((pathTime - otherAnimTime) / loopAnimTime) + 0.5);
@@ -361,8 +358,7 @@ birds_fly(start_perch) {
         if(self.birdexists[i]) {
           if(isSP()) {
             waitTime = undefined;
-          }
-          else {
+          } else {
             waitTime = RandomFloat(0.5);
           }
           self.birds[i] thread bird_fly(self, ("tag_bird" + i), info.bird_model["fly"], info.bird_model["idle"],
@@ -758,7 +754,7 @@ birds_perchDangerTrigger(radius, notifyStr, ender) {
   self thread birds_perchTouchTrigger(self.trigger, notifyStr, ender);
   self thread birds_perchEventTrigger(radius, notifyStr, ender);
   foreach(trigger in self.triggers) {
-  self thread birds_perchTouchTrigger(trigger, notifyStr, ender);
+    self thread birds_perchTouchTrigger(trigger, notifyStr, ender);
   }
 }
 

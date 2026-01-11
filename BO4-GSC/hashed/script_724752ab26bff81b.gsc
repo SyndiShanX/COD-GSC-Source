@@ -25,7 +25,6 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_weapons;
-
 #namespace namespace_a01a2431;
 
 preload() {
@@ -75,7 +74,7 @@ init() {
     level.var_2fc3a917[level.var_2fc3a917.size] = s_temp;
   }
 
-  zm_sq::register(#"ww_quest_weapon", #"step_1", #"hash_2af54f403e86105d", &function_da84e99e, &function_6d5a79fe);
+  zm_sq::register(#"ww_quest_weapon", # "step_1", # "hash_2af54f403e86105d", &function_da84e99e, &function_6d5a79fe);
   level thread function_661dc825();
 
   if(!zm_utility::is_standard()) {
@@ -90,7 +89,7 @@ function_dd535733() {
   level.var_d9d721fd = struct::get("ww_printer_compartment", "targetname");
   level.var_d9d721fd scene::play("init");
   level.var_d9d721fd flagsys::wait_till(#"scene_ents_ready");
-  level.var_d9d721fd.entity = level.var_d9d721fd.scene_ents[#"prop 1"];
+  level.var_d9d721fd.entity = level.var_d9d721fd.scene_ents[# "prop 1"];
 
   for(i = 0; i < 4; i++) {
     level.var_d9d721fd.entity hidepart("tag_gun_full_" + i);
@@ -264,9 +263,9 @@ soul_captured(var_f0e6c7a2, ent) {
     var_f0e6c7a2.var_7944be4a = n_souls_required;
   }
 
-    if(var_f0e6c7a2.var_7944be4a >= n_souls_required) {
-      var_f0e6c7a2 function_a66f0de2();
-    }
+  if(var_f0e6c7a2.var_7944be4a >= n_souls_required) {
+    var_f0e6c7a2 function_a66f0de2();
+  }
 }
 
 function_a66f0de2() {
@@ -351,48 +350,48 @@ function_c3076788(e_player) {
 
   switch (e_player.var_bec34462.n_id) {
     case 0:
-      str_hint = #"hash_3f0cb3a3a888e340";
-      var_306b9dd6 = #"hash_351a359dee18e66c";
+      str_hint = # "hash_3f0cb3a3a888e340";
+      var_306b9dd6 = # "hash_351a359dee18e66c";
       break;
     case 1:
-      str_hint = #"hash_45e0e71f5c4ad089";
-      var_306b9dd6 = #"hash_2c1852a26bee7917";
+      str_hint = # "hash_45e0e71f5c4ad089";
+      var_306b9dd6 = # "hash_2c1852a26bee7917";
       break;
     case 2:
-      str_hint = #"hash_314a7588b45256eb";
-      var_306b9dd6 = #"hash_6831cfd35264e1";
+      str_hint = # "hash_314a7588b45256eb";
+      var_306b9dd6 = # "hash_6831cfd35264e1";
       var_339390e4 = w_give.displayname;
       break;
     case 3:
-      str_hint = #"hash_53f9aac41c4fa384";
-      var_306b9dd6 = #"hash_3a6067fdb28789e8";
+      str_hint = # "hash_53f9aac41c4fa384";
+      var_306b9dd6 = # "hash_3a6067fdb28789e8";
       var_339390e4 = w_take.displayname;
       break;
     case 4:
-      str_hint = #"hash_7aea9fef103ab16";
-      var_306b9dd6 = #"hash_3e916dea9d22f1b2";
+      str_hint = # "hash_7aea9fef103ab16";
+      var_306b9dd6 = # "hash_3e916dea9d22f1b2";
       var_339390e4 = w_take.displayname;
       var_45d63569 = w_give.displayname;
       break;
     case 5:
-      str_hint = #"hash_1d175f6387d44262";
-      var_306b9dd6 = #"hash_6686ce3bf4639b76";
+      str_hint = # "hash_1d175f6387d44262";
+      var_306b9dd6 = # "hash_6686ce3bf4639b76";
       var_339390e4 = w_give.displayname;
       break;
     case 6:
-      str_hint = #"hash_68ae5772aec47222";
-      var_306b9dd6 = #"hash_58bd37425bd02736";
+      str_hint = # "hash_68ae5772aec47222";
+      var_306b9dd6 = # "hash_58bd37425bd02736";
       var_339390e4 = w_take.displayname;
       break;
     case 7:
-      str_hint = #"hash_172253c9314825fc";
-      var_306b9dd6 = #"hash_71016e43b6fe0570";
+      str_hint = # "hash_172253c9314825fc";
+      var_306b9dd6 = # "hash_71016e43b6fe0570";
       var_339390e4 = w_give.displayname;
       var_45d63569 = w_take.displayname;
       break;
     case 8:
-      str_hint = #"hash_28c1446ca1a2440c";
-      var_306b9dd6 = #"hash_2df82d83303d3d40";
+      str_hint = # "hash_28c1446ca1a2440c";
+      var_306b9dd6 = # "hash_2df82d83303d3d40";
       var_339390e4 = w_give.displayname;
       var_45d63569 = w_take.displayname;
       break;
@@ -400,7 +399,7 @@ function_c3076788(e_player) {
       return false;
   }
 
-  if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === #"zhield_riot_dw") {
+  if(e_player.currentweapon.isheroweapon === 1 || e_player.currentweapon.name === # "zhield_riot_dw") {
     self sethintstring("");
   } else if(isDefined(var_45d63569)) {
     self sethintstring(zm_utility::function_d6046228(str_hint, var_306b9dd6), var_339390e4, var_45d63569);
@@ -420,7 +419,7 @@ function_7d123028() {
     s_notify = self waittill(#"trigger_activated");
     e_player = s_notify.e_who;
 
-    if(isplayer(e_player) && e_player.currentweapon.isheroweapon === 0 && e_player.currentweapon.name !== #"zhield_riot_dw") {
+    if(isplayer(e_player) && e_player.currentweapon.isheroweapon === 0 && e_player.currentweapon.name !== # "zhield_riot_dw") {
       function_75e61716(e_player);
     }
   }
@@ -718,7 +717,7 @@ private on_disconnect() {
 
     iprintln("<dev string:xc2>");
 
-      return;
+    return;
   }
 
   w_ray_gun = self zm_white_util::function_c7274071();
@@ -747,7 +746,7 @@ private function_33f0ddd3(s_event) {
     w_ray_gun = s_event.weapon;
 
     if(level flag::get("round_reset") || level flag::get(#"trial_failed")) {
-      b_rescue = !isinarray(self.var_c27f1e90, #"specialty_additionalprimaryweapon") && self.var_2a62e678 === w_ray_gun;
+      b_rescue = !isinarray(self.var_c27f1e90, # "specialty_additionalprimaryweapon") && self.var_2a62e678 === w_ray_gun;
     } else {
       e_pap = getent("zm_pack_a_punch", "targetname");
       var_e75ac4c0 = e_pap.unitrigger_stub.current_weapon === w_ray_gun;

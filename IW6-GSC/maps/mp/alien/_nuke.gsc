@@ -137,8 +137,7 @@ nukeVision() {
       if(isDefined(spectated_player)) {
         if((isDefined(spectated_player.nuke_escaped) && spectated_player.nuke_escaped)) {
           player set_vision_for_nuke_escaped(transition_time);
-        }
-        else {
+        } else {
           player set_vision_for_nuke_failed(transition_time);
         }
       } else {
@@ -147,8 +146,7 @@ nukeVision() {
     } else {
       if((isDefined(player.nuke_escaped) && player.nuke_escaped)) {
         player set_vision_for_nuke_escaped(transition_time);
-      }
-      else {
+      } else {
         player set_vision_for_nuke_failed(transition_time);
       }
     }

@@ -148,8 +148,7 @@ func_F8F7(var_00, var_01, var_02) {
 
   if(isDefined(var_00) && var_00 == "allies") {
     self.func_10241.func_6D32 = "capitalship_megacannon_fire";
-  }
-  else {
+  } else {
     self.func_10241.func_6D32 = "capitalship_megacannon_fire";
   }
 

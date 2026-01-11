@@ -219,8 +219,7 @@ take_old_weapon_and_give_reward(current_weapon, reward_weapon, weapon_limit_over
 
   if(weapon_limit_override == 1) {
     self takeweapon(current_weapon);
-  }
-  else {
+  } else {
     primaries = self getweaponslistprimaries();
 
     if(isDefined(primaries) && primaries.size >= 2) {

@@ -498,8 +498,7 @@ sotfCrateThink(dropType) {
 
   if(isDefined(game["strings"][self.crateType + "_hint"])) {
     crateHint = game["strings"][self.crateType + "_hint"];
-  }
-  else {
+  } else {
     crateHint = &"PLATFORM_GET_KILLSTREAK";
   }
 

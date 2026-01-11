@@ -257,15 +257,13 @@ onSpawnPlayer() {
   if(level.useStartSpawns) {
     if(spawnteam == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
     }
   } else {
     if(spawnteam == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_axis);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_allies);
     }
   }
@@ -385,8 +383,7 @@ onPickup(player) {
   team = player.pers["team"];
   if(team == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
   player playLocalSound("mp_suitcase_pickup");
@@ -397,8 +394,7 @@ onPickup(player) {
     squadID = getplayersquadid(player);
     if(isDefined(squadID)) {
       maps\mp\gametypes\_globallogic::leaderDialog("bomb_taken", team, "bomb", excludeList, "squad_bomb", squadID);
-    }
-    else {
+    } else {
       maps\mp\gametypes\_globallogic::leaderDialog("bomb_taken", team);
     }
     if(!level.splitscreen) {
@@ -433,8 +429,7 @@ onDrop(player) {
     playSoundOnPlayers(game["bomb_dropped_sound"], self maps\mp\gametypes\_gameobjects::getOwnerTeam());
     if(isDefined(player)) {
       player logString("bomb dropped");
-    }
-    else {
+    } else {
       logString("bomb dropped");
     }
     player notify("event_ended");
@@ -450,8 +445,7 @@ abandonmentThink(delay) {
   }
   if(self maps\mp\gametypes\_gameobjects::getOwnerTeam() == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
   playSoundOnPlayers(game["bomb_dropped_sound"], otherTeam);
@@ -484,8 +478,7 @@ onUse(player) {
     squadID = getplayersquadid(player);
     if(isDefined(squadID)) {
       maps\mp\gametypes\_globallogic::leaderDialog("bomb_planted", team, undefined, undefined, "squad_plant", squadID);
-    }
-    else {
+    } else {
       maps\mp\gametypes\_globallogic::leaderDialog("bomb_planted", team);
     }
     maps\mp\gametypes\_globallogic::leaderDialog("bomb_planted", otherTeam);
@@ -550,8 +543,7 @@ bombPlanted(destroyedObj, team) {
   level.bombExploded = true;
   if(isDefined(level.bombowner)) {
     destroyedObj.visuals[0] radiusDamage(explosionOrigin, 512, 200, 20, level.bombowner, "MOD_EXPLOSIVE", "briefcase_bomb_mp");
-  }
-  else {
+  } else {
     destroyedObj.visuals[0] radiusDamage(explosionOrigin, 512, 200, 20, undefined, "MOD_EXPLOSIVE", "briefcase_bomb_mp");
   }
   rot = randomfloat(360);

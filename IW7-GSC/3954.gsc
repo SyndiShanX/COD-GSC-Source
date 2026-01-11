@@ -168,11 +168,9 @@ func_79E5() {
 
   if(isDefined(level.generic_zombie_model_override_list)) {
     var_01 = scripts\engine\utility::random(level.generic_zombie_model_override_list);
-  }
-  else if(isDefined(level.generic_zombie_model_list)) {
+  } else if(isDefined(level.generic_zombie_model_list)) {
     var_01 = scripts\engine\utility::random(level.generic_zombie_model_list);
-  }
-  else {
+  } else {
     var_01 = var_00;
   }
 
@@ -356,8 +354,7 @@ onzombiedamagefinished(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
 
   if(self.health > 0) {
     var_16 = clamp(var_02 / self.health, 0, 1);
-  }
-  else {
+  } else {
     var_16 = 1;
   }
 
@@ -400,8 +397,7 @@ onzombiedamagefinished(var_00, var_01, var_02, var_03, var_04, var_05, var_06, v
   if(isalive(self)) {
     if(var_14 && !ispendingdeath()) {
       self suicide();
-    }
-    else {
+    } else {
       func_12ECD();
     }
   }
@@ -579,8 +575,7 @@ func_7FD6(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if(var_07) {
     var_08 = 31;
-  }
-  else {
+  } else {
     var_08 = func_AED2(var_00);
   }
 
@@ -910,8 +905,7 @@ func_BDFB(var_00, var_01, var_02, var_03, var_04) {
       if(var_08) {
         if(var_02 < 1) {
           func_0C72::func_F6C8(var_00, var_06);
-        }
-        else {
+        } else {
           var_05 = 1;
         }
       }
@@ -980,8 +974,7 @@ func_6A58() {
     self setscriptablepartstate("eyes", "turned_eyes");
   else if(scripts\engine\utility::is_true(self.is_cop)) {
     self setscriptablepartstate("eyes", "cop_eyes");
-  }
-  else {
+  } else {
     self setscriptablepartstate("eyes", "yellow_eyes");
   }
 }
@@ -1020,8 +1013,7 @@ func_CCDB(var_00) {
 
   if(self.health > 0) {
     self playsoundonmovingent(var_00);
-  }
-  else {
+  } else {
     self playSound(var_00);
   }
 }
@@ -1093,8 +1085,7 @@ func_13F55() {
 
   if(isDefined(level.func_13BDD)) {
     var_00 = level.func_13BDD;
-  }
-  else {
+  } else {
     var_00 = 7;
   }
 
@@ -1140,27 +1131,27 @@ func_13F55() {
 
       if(isDefined(level.func_BCE5[self.agent_type])) {
         self.moveratescale = [
-      }
+          }
           [level.func_BCE5[self.agent_type]]
-        ]();
+      ]();
       else {
         self.moveratescale = 1;
       }
 
       if(isDefined(level.func_C082[self.agent_type])) {
         self.func_C081 = [
-      }
+          }
           [level.func_C082[self.agent_type]]
-        ]();
+      ]();
       else {
         self.func_C081 = 1;
       }
 
       if(isDefined(level.func_126E9[self.agent_type])) {
         self.traverseratescale = [
-      }
+          }
           [level.func_126E9[self.agent_type]]
-        ]();
+      ]();
       else {
         self.traverseratescale = 1;
       }
@@ -1184,9 +1175,8 @@ func_13F55() {
       } else if(isDefined(self.speedup)) {
         if(isDefined(level.func_BCE5[self.agent_type])) {
           self.moveratescale = [
-        }
-            [level.func_BCE5[self.agent_type]]
-          ]();
+            }
+            [level.func_BCE5[self.agent_type]]]();
         else {
           self.moveratescale = 1;
         }
@@ -1238,14 +1228,11 @@ calulatezombiemovemode(var_00) {
 
   if(var_02 <= 32) {
     return "slow_walk";
-  }
-  else if(var_02 <= 55) {
+  } else if(var_02 <= 55) {
     return "walk";
-  }
-  else if(var_02 <= 78) {
+  } else if(var_02 <= 78) {
     return "run";
-  }
-  else {
+  } else {
     return "sprint";
   }
 }
@@ -1273,8 +1260,7 @@ func_3729(var_00, var_01, var_02) {
 
   if(var_00 < 2) {
     var_05 = float(var_04) / 1;
-  }
-  else {
+  } else {
     var_05 = float(var_04) / float(var_00 - 1);
   }
 
@@ -1315,15 +1301,13 @@ onzombiekilled(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, v
   if(scripts\asm\zombie\zombie::func_9F87()) {
     if(isDefined(self.agent_type) && self.agent_type == "skater") {
       self playSound("zmb_skater_explode");
-    }
-    else {
+    } else {
       self playSound("zmb_clown_explode");
     }
 
     if(isDefined(var_01) && isplayer(var_01)) {
       scripts\common\fx::playfxnophase(level._effect["suicide_zmb_death"], self.origin + (0, 0, 50), anglesToForward(self.angles), anglestoup(self.angles));
-    }
-    else {
+    } else {
       scripts\common\fx::playfxnophase(level._effect["suicide_zmb_explode"], self.origin + (0, 0, 50), anglesToForward(self.angles), anglestoup(self.angles));
       radiusdamage(self.origin + (0, 0, 40), 250, 50, 10, self, "MOD_EXPLOSIVE", "zombie_suicide_bomb");
       earthquake(0.4, 0.5, self.origin, 200);
@@ -1411,11 +1395,9 @@ func_10840(var_00) {
   if(isDefined(var_00)) {
     if(isDefined(var_0["emz"])) {
       var_03 = scripts\engine\utility::getfx("gib_full_body_emz");
-    }
-    else if(isDefined(var_0["exploder"])) {
+    } else if(isDefined(var_0["exploder"])) {
       var_03 = scripts\engine\utility::getfx("gib_full_body_exp");
-    }
-    else if(isDefined(var_0["fast"])) {
+    } else if(isDefined(var_0["fast"])) {
       var_03 = scripts\engine\utility::getfx("gib_full_body_ovr");
     }
   }
@@ -1428,8 +1410,7 @@ func_10840(var_00) {
 
   if(isDefined(self.body)) {
     playFXOnTag(var_03, self.body, var_04);
-  }
-  else {
+  } else {
     scripts\common\fx::playfxnophase(var_03, self.origin + (0, 0, 25));
   }
 
@@ -1489,11 +1470,9 @@ func_C4BD(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if(isDefined(self.is_burning) || isDefined(var_01) && isDefined(var_04) && var_04 == "incendiary_ammo_mp") {
     self.body setscriptablepartstate("burning", "active", 1);
-  }
-  else if(isDefined(self.func_10A57)) {
+  } else if(isDefined(self.func_10A57)) {
     self.body setscriptablepartstate("spoon", "active", 1);
-  }
-  else if(isDefined(self.electrocuted)) {
+  } else if(isDefined(self.electrocuted)) {
     self.body setscriptablepartstate("electrocuted", "active");
   }
 
@@ -1503,11 +1482,9 @@ func_C4BD(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if(scripts\engine\utility::is_true(var_12)) {
     scripts\mp\mp_agent::do_immediate_ragdoll(self.body);
-  }
-  else if(scripts\engine\utility::is_true(var_13)) {
+  } else if(scripts\engine\utility::is_true(var_13)) {
     thread velocityragdoll(self.body, var_06, var_05, var_04, var_00, var_03);
-  }
-  else if(!scripts\engine\utility::is_true(self.death_anim_no_ragdoll)) {
+  } else if(!scripts\engine\utility::is_true(self.death_anim_no_ragdoll)) {
     thread scripts\mp\mp_agent::delaystartragdoll(self.body, var_06, var_05, var_04, var_00, var_03);
   }
 
@@ -1532,8 +1509,7 @@ velocityragdoll(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(isDefined(var_00)) {
     if(isDefined(var_0.ragdollhitloc) && isDefined(var_0.ragdollimpactvector)) {
       var_00 giverankxp_regularmp(var_0.ragdollhitloc, var_0.ragdollimpactvector);
-    }
-    else {
+    } else {
       var_00 startragdoll();
     }
   }
@@ -1557,11 +1533,9 @@ func_1083F(var_00, var_01) {
   if(isDefined(var_01)) {
     if(isDefined(var_1["emz"])) {
       var_02 = var_02 + "_emz";
-    }
-    else if(isDefined(var_1["exploder"])) {
+    } else if(isDefined(var_1["exploder"])) {
       var_02 = var_02 + "_exp";
-    }
-    else if(isDefined(var_1["fast"])) {
+    } else if(isDefined(var_1["fast"])) {
       var_02 = var_02 + "_ovr";
     }
   }
@@ -1620,8 +1594,7 @@ func_BA27() {
   for(;;) {
     if(length(self getvelocity()) == 0 && self.aistate == "move") {
       var_00 = var_00 + 0.05;
-    }
-    else {
+    } else {
       var_00 = 0;
     }
 

@@ -596,9 +596,7 @@ function dodeadeventupdates() {
     if(!isDefined(level.ondeadevent)) {
       lastteamalive = getlastteamalive();
       if(isDefined(lastteamalive)) {
-        [
-          [level.onlastteamaliveevent]
-        ](lastteamalive);
+        [[level.onlastteamaliveevent]](lastteamalive);
         return true;
       }
     } else {
@@ -626,9 +624,7 @@ function doonelefteventupdates() {
   if(level.teambased) {
     foreach(team in level.teams) {
       if(isonlyoneleftaliveonteam(team)) {
-        [
-          [level.ononeleftevent]
-        ](team);
+        [[level.ononeleftevent]](team);
         return true;
       }
     }

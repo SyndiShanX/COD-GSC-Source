@@ -218,11 +218,9 @@ dof_vtol_liftoff(m_player_body) {
   level.player depth_of_field_tween(n_near_start, n_near_end, n_far_start, n_far_end, n_near_blur, n_far_blur, n_time);
 }
 
-dof_vtol_flight(m_player_body) {
-}
+dof_vtol_flight(m_player_body) {}
 
-dof_sunset(m_player_body) {
-}
+dof_sunset(m_player_body) {}
 
 dof_harper(m_player_body) {
   n_near_start = 0;

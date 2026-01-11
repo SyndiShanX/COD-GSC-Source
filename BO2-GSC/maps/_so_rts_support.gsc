@@ -37,8 +37,7 @@ find_ground_pos(v_current, v_trace_end, checkent) {
 
     if(a_trace["fraction"] == 1) {
       return (0, 0, 0);
-    }
-    else {
+    } else {
       return a_trace["position"];
     }
   } else
@@ -307,8 +306,7 @@ playerlinkobj_defaultpos() {
     if(skypos != testpos) {
       if(isDefined(level.rts.level_default_fps_pos)) {
         level.rts.lastfpspoint = level.rts.level_default_fps_pos;
-      }
-      else {
+      } else {
         level.rts.lastfpspoint = level.rts.player_startpos;
       }
 
@@ -323,8 +321,7 @@ playerlinkobj_defaultpos() {
 
       if(desiredpos == testpos) {
         level.rts.playerlinkobj.origin = desiredpos;
-      }
-      else {
+      } else {
         level.rts.playerlinkobj.origin = skypos;
       }
     } else {
@@ -338,8 +335,7 @@ playerlinkobj_defaultpos() {
 
       if(desiredpos == testpos) {
         level.rts.playerlinkobj.origin = desiredpos;
-      }
-      else {
+      } else {
         level.rts.playerlinkobj.origin = skypos;
       }
     }
@@ -379,15 +375,13 @@ playerlinkobj_moveobj(x, y) {
 
   if(isDefined(level.rts.game_rules.tact_clamp) && level.rts.game_rules.tact_clamp) {
     level.rts.playerlinkobj.origin = movepoint(level.rts.playerlinkobj.origin, forward + right);
-  }
-  else {
+  } else {
     level.rts.playerlinkobj.origin = level.rts.playerlinkobj.origin + (forward + right);
     clampenttomapboundary(level.rts.playerlinkobj);
   }
 }
 
-rotate_point_around_point(v_point_to_rotate, v_point_to_rotate_around, delta_angles) {
-}
+rotate_point_around_point(v_point_to_rotate, v_point_to_rotate_around, delta_angles) {}
 
 ally_missile_watcher(ally) {
   if(!isDefined(ally)) {
@@ -433,9 +427,9 @@ missile_out_of_bounds_watcher() {
     if(isDefined(rocket) && isDefined(level.rts.bounds)) {
       if(isDefined(level.rts.missile_oob_check)) {
         inbounds = [
-      }
+          }
           [level.rts.missile_oob_check]
-        ](rocket.origin);
+      ](rocket.origin);
       else {
         x = rocket.origin[0];
         y = rocket.origin[1];
@@ -443,15 +437,13 @@ missile_out_of_bounds_watcher() {
 
         if(x <= level.rts.bounds.ulx) {
           inbounds = 0;
-        }
-        else if(x >= level.rts.bounds.lrx) {
+        } else if(x >= level.rts.bounds.lrx) {
           inbounds = 0;
         }
 
         if(y <= level.rts.bounds.uly) {
           inbounds = 0;
-        }
-        else if(y >= level.rts.bounds.lry) {
+        } else if(y >= level.rts.bounds.lry) {
           inbounds = 0;
         }
 
@@ -464,8 +456,7 @@ missile_out_of_bounds_watcher() {
     if(!inbounds) {
       maps\_so_rts_event::trigger_event("air_strike_aborted");
 
-      if(isDefined(rocket.owner)) {
-      }
+      if(isDefined(rocket.owner)) {}
 
       rocket delete();
       return;
@@ -509,11 +500,9 @@ fire_missile() {
 
   if(isDefined(level.rts.remotemissile_target)) {
     level.remotemissile_override_target = level.rts.remotemissile_target.origin;
-  }
-  else if(isDefined(level.rts.enemy_center)) {
+  } else if(isDefined(level.rts.enemy_center)) {
     level.remotemissile_override_target = level.rts.enemy_center.origin;
-  }
-  else {
+  } else {
     level.remotemissile_override_target = level.rts.player.origin;
   }
 
@@ -932,12 +921,12 @@ getbuttonpress() {
     if(isDefined(action)) {
       if(isDefined(action.gateflag)) {
         if(flag(action.gateflag)) {
-          [[action.callback]](action.param);
+          [
+            [action.callback]
+          ](action.param);
         }
       } else
-        [
-          [action.callback]
-        ](action.param);
+        [[action.callback]](action.param);
     }
   }
 
@@ -1087,11 +1076,9 @@ callbackonnotify(note, cb, param1, param2) {
 
   if(isDefined(param1) && isDefined(param2)) {
     self[[cb]](param1, param2);
-  }
-  else if(isDefined(param1)) {
+  } else if(isDefined(param1)) {
     self[[cb]](param1);
-  }
-  else {
+  } else {
     self[[cb]]();
   }
 }
@@ -1121,20 +1108,15 @@ notifymeinnsec(note, seconds, p1, p2, p3, p4, p5) {
 
   if(isDefined(p1) && isDefined(p2) && isDefined(p3) && isDefined(p4) && isDefined(p5)) {
     self notify(note, p1, p2, p3, p4, p5);
-  }
-  else if(isDefined(p1) && isDefined(p2) && isDefined(p3) && isDefined(p4)) {
+  } else if(isDefined(p1) && isDefined(p2) && isDefined(p3) && isDefined(p4)) {
     self notify(note, p1, p2, p3, p4);
-  }
-  else if(isDefined(p1) && isDefined(p2) && isDefined(p3)) {
+  } else if(isDefined(p1) && isDefined(p2) && isDefined(p3)) {
     self notify(note, p1, p2, p3);
-  }
-  else if(isDefined(p1) && isDefined(p2)) {
+  } else if(isDefined(p1) && isDefined(p2)) {
     self notify(note, p1, p2);
-  }
-  else if(isDefined(p1)) {
+  } else if(isDefined(p1)) {
     self notify(note, p1);
-  }
-  else {
+  } else {
     self notify(note);
   }
 }
@@ -1142,8 +1124,7 @@ notifymeinnsec(note, seconds, p1, p2, p3, p4, p5) {
 getnearai(fromorigin, distsq, team) {
   if(!isDefined(team)) {
     ai = getaiarray();
-  }
-  else {
+  } else {
     ai = getaiarray(team);
   }
 
@@ -1161,8 +1142,7 @@ getnearai(fromorigin, distsq, team) {
 getfarai(fromorigin, distsq, team) {
   if(!isDefined(team)) {
     ai = getaiarray();
-  }
-  else {
+  } else {
     ai = getaiarray(team);
   }
 
@@ -1215,8 +1195,7 @@ chopper_closest_open_path_start(target_origin, start_name, struct_string_field, 
 
     if(avail_paths.size) {
       return avail_paths[randomint(avail_paths.size)];
-    }
-    else {
+    } else {
       return undefined;
     }
   } else {
@@ -1546,8 +1525,7 @@ time_countdown(timemin, owner, killnotify, luinote, expirednote, headertext, ale
 
   if(alertatoneandtwominutes) {
     luinotifyevent(istring(luinote), 3, msec, istring(headertext), 1);
-  }
-  else {
+  } else {
     luinotifyevent(istring(luinote), 2, msec, istring(headertext));
   }
 
@@ -1564,8 +1542,7 @@ time_countdown_delete(luinote) {
   luinotifyevent(istring(luinote), 1, 0);
 }
 
-missioncompletemsg(success) {
-}
+missioncompletemsg(success) {}
 
 missionfailuremenu() {
   luinotifyevent(&"rts_hide_result");
@@ -1674,8 +1651,7 @@ process_pending_gpr_sets() {
 
       if(self.gpr_state == 1) {
         self setclientflag(5);
-      }
-      else {
+      } else {
         self clearclientflag(5);
       }
     }
@@ -1745,11 +1721,9 @@ sortarraybyclosest(origin, array, maxdistsq, no3d, noai) {
 
   if(isDefined(noai) && noai) {
     return maps\_utility_code::mergesort(array, ::closestcomparefunc, origin);
-  }
-  else if(isDefined(no3d) && no3d) {
+  } else if(isDefined(no3d) && no3d) {
     return maps\_utility_code::mergesort(array, ::closestcomparefunc2d, origin);
-  }
-  else {
+  } else {
     return arraysort(array, origin, 1);
   }
 }
@@ -1782,11 +1756,9 @@ sortarraybyfurthest(origin, array, mindistsq, no3d, noai) {
 
   if(isDefined(noai) && noai) {
     return maps\_utility_code::mergesort(array, ::furthestcomparefunc, origin);
-  }
-  else if(isDefined(no3d) && no3d) {
+  } else if(isDefined(no3d) && no3d) {
     return maps\_utility_code::mergesort(array, ::furthestcomparefunc2d, origin);
-  }
-  else {
+  } else {
     return arraysort(array, origin, 0);
   }
 }
@@ -1950,8 +1922,7 @@ setupnetworkintruder(poi) {
   fakevehicle.vteam = self.team;
   fakevehicle.origin = self.origin + vectorscale((0, 0, 1), 8.0);
 
-  if(self.team == "allies") {
-  } else
+  if(self.team == "allies") {} else
     fakevehicle.threatbias = 6000;
 
   fakevehicle linkto(self);
@@ -2030,8 +2001,7 @@ blinky_light(fx, tagname) {
 
     if(isDefined(self gettagorigin(tagname))) {
       playFXOnTag(fx, self, tagname);
-    }
-    else {
+    } else {
       playFXOnTag(fx, self, "tag_origin");
     }
 
@@ -2196,8 +2166,7 @@ test_heli_dropoff(type, team, pkg_ref) {
 
   if(type == "quads" || type == "asd" || type == "claw") {
     availtransport.cb = maps\_so_rts_ai::spawn_ai_package_cargo;
-  }
-  else {
+  } else {
     availtransport.cb = maps\_so_rts_ai::spawn_ai_package_helo;
   }
 
@@ -2237,8 +2206,7 @@ formatfloat(number, decimals) {
 get_player_angles() {
   if(isDefined(level.wiiu) && level.wiiu) {
     return level.rts.player getgunangles();
-  }
-  else {
+  } else {
     return level.rts.player getplayerangles();
   }
 }
@@ -2284,8 +2252,7 @@ calcent2dscreen() {
 
     if(!isDefined(self.next2dcalc)) {
       self.next2dcalc = time + randomint(10) + 150;
-    }
-    else {
+    } else {
       self.next2dcalc = time + 150;
     }
   }
@@ -2496,8 +2463,7 @@ pick_delayed_selection_sound(type, guy) {
 get_selection_alias_from_targetname(guy, p2, p3) {
   if(!isDefined(guy) || !isDefined(guy.ai_ref.select_alias)) {
     alias = "evt_rts_selection_friendly_generic";
-  }
-  else {
+  } else {
     alias = guy.ai_ref.select_alias;
   }
 
@@ -2822,8 +2788,7 @@ killzonewatch() {
 
   if(isarray(self.teams)) {
     teams = self.teams;
-  }
-  else {
+  } else {
     teams[0] = self.teams;
   }
 
@@ -3134,8 +3099,7 @@ turret_deathwatch(einflictor, eattacker, idamage, n_dflags, str_means_of_death, 
 
   if(isDefined(self.classvehicledamage)) {
     return [[self.classvehicledamage]](einflictor, eattacker, idamage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name);
-  }
-  else {
+  } else {
     return idamage;
   }
 }
@@ -3167,8 +3131,7 @@ level_create_turrets(usable, hitpoints) {
 
     if(!isDefined(origin)) {
       turret.fakevehicle linkto(turret, "tag_origin", vectorscale((0, 0, 1), 40.0), (0, 0, 0));
-    }
-    else {
+    } else {
       turret.fakevehicle linkto(turret, "tag_player");
     }
 
@@ -3209,8 +3172,7 @@ level_create_turrets(usable, hitpoints) {
 
     if(!isDefined(origin)) {
       turret.fakevehicle linkto(turret, "tag_origin", vectorscale((0, 0, 1), 40.0), (0, 0, 0));
-    }
-    else {
+    } else {
       turret.fakevehicle linkto(turret, "tag_player");
     }
 
@@ -3405,8 +3367,7 @@ get_player_rts_mode() {
   if(isDefined(self.ally)) {
     if(self.ally.ai_ref.species == "vehicle" || self.ally.ai_ref.species == "robot_actor") {
       return self.ally.ai_ref.ref;
-    }
-    else {
+    } else {
       return self.ally.ai_ref.species;
     }
   } else

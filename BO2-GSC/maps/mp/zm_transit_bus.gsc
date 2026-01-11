@@ -207,8 +207,7 @@ follow_path(node) {
     if(isDefined(nextpoint.script_string)) {
       if(issubstr(nextpoint.script_string, "map_")) {
         level thread do_player_bus_location_vox(nextpoint.script_string);
-      }
-      else {
+      } else {
         level thread do_automoton_vox(nextpoint.script_string);
       }
     }
@@ -253,7 +252,7 @@ busschedule() {
   level.busschedule busscheduleadd("bridge", 1, 10, 23, 10);
 
   foreach(index, stop in level.busschedule.destinations) {
-  adddebugcommand("devgui_cmd \"Zombies:1/Bus:14/Teleport Bus:4/" + stop.name + ":" + index + "\" \"zombie_devgui teleport_bus " + stop.name + "\\n");
+    adddebugcommand("devgui_cmd \"Zombies:1/Bus:14/Teleport Bus:4/" + stop.name + ":" + index + "\" \"zombie_devgui teleport_bus " + stop.name + "\\n");
   }
 }
 
@@ -269,8 +268,7 @@ busschedulethink() {
     if(!isDefined(destinationindex) || !isDefined(noteworthynode)) {
       if(isDefined(noteworthy)) {
         println("^2Bus Debug: Not A Valid Destination (" + noteworthy + ")");
-      }
-      else {
+      } else {
         println("^2Bus Debug: Not A Valid Destination");
       }
 
@@ -424,11 +422,9 @@ busschedulethink() {
 
         if(noteworthy == "diner") {
           self bussetdineropenings(0);
-        }
-        else if(noteworthy == "power") {
+        } else if(noteworthy == "power") {
           self bussetpoweropenings(0);
-        }
-        else if(noteworthy == "town") {
+        } else if(noteworthy == "town") {
           self bussettownopenings(0);
         }
       } else
@@ -648,8 +644,7 @@ debug_zombieonbus(zombie) {
 
     if(isDefined(zombie.isonbus) && zombie.isonbus) {
       line(zombie_origin_proj, zombie_origin, (0, 1, 0), 1, 0, 2);
-    }
-    else {
+    } else {
       line(zombie_origin_proj, zombie_origin, (1, 0, 0), 1, 0, 2);
     }
   }
@@ -701,8 +696,7 @@ busupdatenearzombies() {
         if(isDefined(zombie.ground_ent)) {
           if(isDefined(zombie.ground_ent.isonbus) && zombie.ground_ent.isonbus) {
             zombie.isonbus = 1;
-          }
-          else {
+          } else {
             groundname = zombie.ground_ent.targetname;
 
             if(isDefined(groundname)) {
@@ -748,17 +742,13 @@ busupdatenearzombies() {
 
         if(isDefined(zombie.isonbus) && zombie.isonbus) {
           self.zombiesinside++;
-        }
-        else if(isDefined(zombie.onbuswindow) && zombie.onbuswindow) {
+        } else if(isDefined(zombie.onbuswindow) && zombie.onbuswindow) {
           self.zombiesatwindow++;
-        }
-        else if(isDefined(zombie.isonbusroof) && zombie.isonbusroof) {
+        } else if(isDefined(zombie.isonbusroof) && zombie.isonbusroof) {
           self.zombiesonroof++;
-        }
-        else if(isDefined(zombie.climbing_into_bus) && zombie.climbing_into_bus) {
+        } else if(isDefined(zombie.climbing_into_bus) && zombie.climbing_into_bus) {
           self.zombies_climbing++;
-        }
-        else if(distancesquared(zombie.origin, self.origin) < 122500) {
+        } else if(distancesquared(zombie.origin, self.origin) < 122500) {
           if(zombie.zombie_move_speed == "chase_bus") {
             self.zombies_chasing_bus++;
           }
@@ -768,15 +758,13 @@ busupdatenearzombies() {
 
         if(self.zombies_near_bus && !self.zombiesinside && !self.zombiesatwindow && !self.zombies_climbing &!self.zombiesonroof) {
           level.bus_driver_focused = 1;
-        }
-        else {
+        } else {
           level.bus_driver_focused = 0;
         }
 
         if(self.zombiesinside || self.zombiesatwindow || self.zombies_climbing || self.zombiesonroof || self.zombies_near_bus) {
           level.bus_zombie_danger = 1;
-        }
-        else {
+        } else {
           level.bus_zombie_danger = 0;
         }
 
@@ -1259,8 +1247,7 @@ busupdateplayers() {
       if(isDefined(ground_ent)) {
         if(isDefined(ground_ent.is_zombie) && ground_ent.is_zombie) {
           player thread zombie_surf(ground_ent);
-        }
-        else {
+        } else {
           if(playerisinbus && !(isDefined(player.isonbus) && player.isonbus)) {
             bbprint("zombie_events", "category %s type %s round %d playername %s", "BUS", "player_enter", level.round_number, player.name);
             player thread bus_audio_interior_loop(self);
@@ -1274,9 +1261,7 @@ busupdateplayers() {
 
             if(isdivingtoprone) {
               player thread playerdelayturnoffdivetoprone();
-            }
-            else {
-            }
+            } else {}
 
             if(randomint(100) > 80 && level.automaton.greeting_timer == 0) {
               thread automatonspeak("convo", "player_enter");
@@ -1442,9 +1427,7 @@ _playerpoison() {
       return;
     }
 
-    if(randomfloat(100.0) < 60.0) {
-    } else {
-    }
+    if(randomfloat(100.0) < 60.0) {} else {}
 
     self dodamage(damage, self.origin);
     damage = damage + 1;
@@ -1696,13 +1679,11 @@ busidledoor() {
 
         if(self.door_state) {
           self setanim(level.bus_door_open_idle_state);
-        }
-        else {
+        } else {
           self setanim(level.bus_door_close_idle_state);
         }
       }
-    } else if(notifystring == "stopping") {
-    }
+    } else if(notifystring == "stopping") {}
   }
 }
 
@@ -1905,8 +1886,7 @@ busplowmoveplayerthink() {
 
       if(rightdistance < leftdistance) {
         bus_dir = vectorscale(anglesToForward(self.angles + (-60, -60, 30)), 512);
-      }
-      else {
+      } else {
         bus_dir = vectorscale(anglesToForward(self.angles + (60, 60, 30)), 512);
       }
 
@@ -1922,8 +1902,7 @@ buspushzombie(zombie, trigger) {
 
   if(!isDefined(opening) || isDefined(opening.zombie) && opening.zombie != zombie || isDefined(zombie.is_inert) && zombie.is_inert) {
     busplowkillzombie(zombie);
-  }
-  else {
+  } else {
     zombie thread zombieattachtobus(level.the_bus, opening, 0);
   }
 }
@@ -2281,8 +2260,7 @@ busgasadd(percent) {
 
   if(newgaslevel < 0) {
     newgaslevel = 0;
-  }
-  else if(newgaslevel > 100) {
+  } else if(newgaslevel > 100) {
     newgaslevel = 100;
   }
 
@@ -2359,8 +2337,7 @@ zomonbusvox(old, new) {
   }
   if((new == 1 || new == 4 || new == 8) && randomint(100) < 20) {
     level thread automatonspeak("inform", "zombie_on_board");
-  }
-  else if(new >= 1) {
+  } else if(new >= 1) {
     level thread do_player_bus_zombie_vox("bus_zom_ent", 25);
   }
 }
@@ -2371,8 +2348,7 @@ zomatwindowvox(old, new) {
   }
   if((new == 1 || new == 3 || new == 5) && randomint(100) < 35) {
     level thread automatonspeak("inform", "zombie_at_window");
-  }
-  else if(new >= 1) {
+  } else if(new >= 1) {
     level thread do_player_bus_zombie_vox("bus_zom_atk", 25);
   }
 }
@@ -2383,8 +2359,7 @@ zomonroofvox(old, new) {
   }
   if((new == 1 || new == 4 || new == 8) && randomint(100) < 35) {
     level thread automatonspeak("inform", "zombie_on_roof");
-  }
-  else if(new >= 1) {
+  } else if(new >= 1) {
     level thread do_player_bus_zombie_vox("bus_zom_roof", 25);
   }
 }
@@ -2455,8 +2430,7 @@ busgetclosestopening() {
 
   if(isDefined(closestopeningtozombie)) {
     closestorigin = closestorigintozombie;
-  }
-  else {
+  } else {
     closestorigin = closestorigintoplayer;
   }
 
@@ -2525,7 +2499,7 @@ enemy_location_override() {
             bus.chase_pos[2] = bus.chase_pos[0] + vectorscale(bus_right, -64);
 
             foreach(pos in bus.chase_pos) {
-            pos = groundpos_ignore_water_new(pos + vectorscale((0, 0, 1), 60.0));
+              pos = groundpos_ignore_water_new(pos + vectorscale((0, 0, 1), 60.0));
             }
           }
 
@@ -2562,8 +2536,7 @@ enemy_location_override() {
 
         if(front_dist < back_dist) {
           location = level.the_bus.front_door_inside.origin;
-        }
-        else {
+        } else {
           location = level.the_bus.back_door_inside1.origin;
         }
 
@@ -2643,15 +2616,13 @@ attachpoweruptobus(powerup) {
 
   if(poszdelta < level.the_bus.floor + heightoffloorpowerup) {
     adjustup = 1;
-  }
-  else if(poszdelta > level.the_bus.height - 20.0) {
+  } else if(poszdelta > level.the_bus.height - 20.0) {
     adjustdown = 1;
   }
 
   if(adjustup) {
     powerup.origin = (powerup.origin[0], powerup.origin[1], floorofbus + heightoffloorpowerup);
-  }
-  else if(adjustdown) {
+  } else if(adjustdown) {
     powerup.origin = (powerup.origin[0], powerup.origin[1], floorofbus + heightofroofpowerup);
   }
 
@@ -2728,9 +2699,7 @@ bus_bridge_speedcontrol() {
         self notify("reached_emp_stop_point");
       else if(nextpoint.script_noteworthy == "start_lava") {
         playFXOnTag(level._effect["bus_lava_driving"], self, "tag_origin");
-      }
-      else if(nextpoint.script_noteworthy == "stop_lava") {
-      } else if(nextpoint.script_noteworthy == "bus_scrape")
+      } else if(nextpoint.script_noteworthy == "stop_lava") {} else if(nextpoint.script_noteworthy == "bus_scrape")
         self playSound("zmb_bus_car_scrape");
       else if(nextpoint.script_noteworthy == "arriving") {
         self thread begin_arrival_slowdown();
@@ -2919,8 +2888,7 @@ delete_lava_audio_ents(ent1, ent2) {
 start_stopping_bus(stop_fast) {
   if(isDefined(stop_fast) && stop_fast) {
     self setspeed(4, 15);
-  }
-  else {
+  } else {
     self setspeed(4, 5);
   }
 }

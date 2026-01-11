@@ -82,14 +82,11 @@ getstumblepainanim() {
 
   if(self.damageyaw > 135 || self.damageyaw <= -135) {
     painanim = animarray("stun_recover_b" + animsuffix);
-  }
-  else if(self.damageyaw > 45 && self.damageyaw < 135) {
+  } else if(self.damageyaw > 45 && self.damageyaw < 135) {
     painanim = animarray("stun_recover_r" + animsuffix);
-  }
-  else if(self.damageyaw > -135 && self.damageyaw < -45) {
+  } else if(self.damageyaw > -135 && self.damageyaw < -45) {
     painanim = animarray("stun_recover_l" + animsuffix);
-  }
-  else {
+  } else {
     painanim = animarray("stun_recover_f" + animsuffix);
   }
 
@@ -116,14 +113,11 @@ getlegpainanim() {
 
   if(self.damageleg == "FL") {
     painanim = animarray("leg_pain_fl");
-  }
-  else if(self.damageleg == "FR") {
+  } else if(self.damageleg == "FR") {
     painanim = animarray("leg_pain_fr");
-  }
-  else if(self.damageleg == "RL") {
+  } else if(self.damageleg == "RL") {
     painanim = animarray("leg_pain_rl");
-  }
-  else {
+  } else {
     painanim = animarray("leg_pain_rr");
   }
 
@@ -153,14 +147,11 @@ getflinchanim() {
 
   if(self.damageyaw > 135 || self.damageyaw <= -135) {
     painanim = animarray("hunker_down_flinch_b" + animsuffix, "pain");
-  }
-  else if(self.damageyaw > 45 && self.damageyaw < 135) {
+  } else if(self.damageyaw > 45 && self.damageyaw < 135) {
     painanim = animarray("hunker_down_flinch_r" + animsuffix, "pain");
-  }
-  else if(self.damageyaw > -135 && self.damageyaw < -45) {
+  } else if(self.damageyaw > -135 && self.damageyaw < -45) {
     painanim = animarray("hunker_down_flinch_l" + animsuffix, "pain");
-  }
-  else {
+  } else {
     painanim = animarray("hunker_down_flinch_f" + animsuffix, "pain");
   }
 
@@ -187,8 +178,7 @@ gethunkerdownpainanim() {
 
   if(animarrayanyexist("stun_fall" + animsuffix, "pain")) {
     painanim = animarraypickrandom("stun_fall" + animsuffix, "pain");
-  }
-  else {
+  } else {
     painanim = animarraypickrandom("stun_fall", "pain");
   }
 
@@ -199,12 +189,10 @@ bigdog_charged_or_sniper_weapon_pain() {
   if(self.canmove) {
     if(wasdamagedbyfullychargedsnipershot()) {
       return bigdog_explosive_body_pain(1);
-    }
-    else if(wasdamagedbychargedsnipershot() || wasdamagedbysnipershot()) {
+    } else if(wasdamagedbychargedsnipershot() || wasdamagedbysnipershot()) {
       if(isDefined(self.damageleg) && self.damageleg != "") {
         return bigdog_leg_pain();
-      }
-      else {
+      } else {
         painanim = getchargedorsniperweaponbodypainanim();
         assert(isDefined(painanim));
 
@@ -226,14 +214,11 @@ getchargedorsniperweaponbodypainanim() {
 
   if(self.damageyaw > 135 || self.damageyaw <= -135) {
     painanim = animarray("body_pain_f");
-  }
-  else if(self.damageyaw > 45 && self.damageyaw < 135) {
+  } else if(self.damageyaw > 45 && self.damageyaw < 135) {
     painanim = animarray("body_pain_r");
-  }
-  else if(self.damageyaw > -135 && self.damageyaw < -45) {
+  } else if(self.damageyaw > -135 && self.damageyaw < -45) {
     painanim = animarray("body_pain_l");
-  }
-  else {
+  } else {
     painanim = animarray("body_pain_b");
   }
 

@@ -18,8 +18,7 @@ enemy_animation_attack(var_0) {
 
   if(var_1 < 512) {
     var_2 = "_stealth_behavior_spotted_short";
-  }
-  else {
+  } else {
     var_2 = "_stealth_behavior_spotted_long";
   }
 
@@ -28,8 +27,7 @@ enemy_animation_attack(var_0) {
 
   if(var_1 < 200) {
     wait 0.5;
-  }
-  else {
+  } else {
     common_scripts\utility::waittill_notify_or_timeout(var_2, randomfloatrange(1.5, 3));
   }
 
@@ -44,8 +42,7 @@ enemy_animation_generic(var_0) {
 
   if(isDefined(self.enemy)) {
     var_1 = self.enemy;
-  }
-  else if(isDefined(self.favoriteenemy)) {
+  } else if(isDefined(self.favoriteenemy)) {
     var_1 = self.favoriteenemy;
   }
 
@@ -80,8 +77,7 @@ dog_animation_generic(var_0) {
   if(maps\_utility::ent_flag("_stealth_behavior_asleep")) {
     if(randomint(100) < 50) {
       var_1 = "_stealth_dog_wakeup_fast";
-    }
-    else {
+    } else {
       var_1 = "_stealth_dog_wakeup_slow";
     }
   } else
@@ -96,8 +92,7 @@ dog_animation_wakeup_fast(var_0) {
 
   if(maps\_utility::ent_flag("_stealth_behavior_asleep")) {
     var_1 = "_stealth_dog_wakeup_fast";
-  }
-  else {
+  } else {
     var_1 = "_stealth_dog_growl";
   }
 
@@ -110,8 +105,7 @@ dog_animation_wakeup_slow(var_0) {
 
   if(maps\_utility::ent_flag("_stealth_behavior_asleep")) {
     var_1 = "_stealth_dog_wakeup_slow";
-  }
-  else {
+  } else {
     var_1 = "_stealth_dog_growl";
   }
 
@@ -151,8 +145,7 @@ enemy_animation_foundcorpse(var_0) {
 
   if(self.a.movement == "stop") {
     var_1 = "_stealth_find_stand";
-  }
-  else {
+  } else {
     var_1 = "_stealth_find_jog";
   }
 

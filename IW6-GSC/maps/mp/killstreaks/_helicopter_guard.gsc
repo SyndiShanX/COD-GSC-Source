@@ -70,8 +70,7 @@ createLBGuard(heliGuardType) {
   closestStartNode = lbSupport_getClosestStartNode(self.origin);
   if(isDefined(closestStartNode.angles)) {
     startAng = closestStartNode.angles;
-  }
-  else {
+  } else {
     startAng = (0, 0, 0);
   }
 
@@ -671,8 +670,7 @@ lbSupport_attackTargets() {
 
     if(self IsFiringTurret() && !self.vehicle.empGrenaded) {
       self thread lbSupport_burstFireStart();
-    }
-    else {
+    } else {
       self thread lbSupport_burstFireStop();
     }
   }

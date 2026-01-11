@@ -281,14 +281,12 @@ storeSpawnData(spawnpoints, useweights, bestspawnpoint) {
     str = vectostr(spawnpoints[i].origin) + ",";
     if(spawnpoints[i] == bestspawnpoint) {
       str = str + "1,";
-    }
-    else {
+    } else {
       str = str + "0,";
     }
     if(!useweights) {
       str += "0,";
-    }
-    else {
+    } else {
       str += spawnpoints[i].weight + ",";
     }
     if(!isDefined(spawnpoints[i].spawnData)) {
@@ -845,14 +843,12 @@ spawnGraph() {
   max = corners[0].origin;
   if(corners[1].origin[0] > max[0]) {
     max = (corners[1].origin[0], max[1], max[2]);
-  }
-  else {
+  } else {
     min = (corners[1].origin[0], min[1], min[2]);
   }
   if(corners[1].origin[1] > max[1]) {
     max = (max[0], corners[1].origin[1], max[2]);
-  }
-  else {
+  } else {
     min = (min[0], corners[1].origin[1], min[2]);
   }
   i = 0;
@@ -997,8 +993,7 @@ loopbotspawns() {
     }
     if(getdvar("scr_killbottimer") != "") {
       wait getdvarfloat("scr_killbottimer");
-    }
-    else {
+    } else {
       wait .05;
     }
   }
@@ -1043,8 +1038,7 @@ showDeathsDebug() {
     for(i = 0; i < level.spawnlogic_deaths.size; i++) {
       if(isDefined(level.spawnlogic_deaths[i].los)) {
         line(level.spawnlogic_deaths[i].org, level.spawnlogic_deaths[i].killOrg, (1, 0, 0));
-      }
-      else {
+      } else {
         line(level.spawnlogic_deaths[i].org, level.spawnlogic_deaths[i].killOrg, (1, 1, 1));
       }
       killer = level.spawnlogic_deaths[i].killer;
@@ -1314,8 +1308,7 @@ spawnPointUpdate(spawnpoint) {
     if(losExists) {
       if(level.teamBased) {
         spawnpoint.sights[player.pers["team"]]++;
-      }
-      else {
+      } else {
         spawnpoint.sights++;
       }
       if(debug) {

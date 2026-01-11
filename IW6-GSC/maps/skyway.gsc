@@ -106,8 +106,7 @@ main() {
 
   if(maps\skyway_util::start_point_is_after("end_swim")) {
     maps\skyway_util::spawn_boss("actor_boss_injured");
-  }
-  else {
+  } else {
     maps\skyway_util::spawn_boss();
   }
 
@@ -358,8 +357,7 @@ objectives() {
 
       if(!common_scripts\utility::flag("flag_helo_fail")) {
         maps\_utility::objective_complete(maps\_utility::obj("obj_take_out_helos"));
-      }
-      else {
+      } else {
         objective_state(maps\_utility::obj("obj_take_out_helos"), "failed");
       }
     case "locomotive":
@@ -429,7 +427,7 @@ track_show_hide() {
   var_0["end"] = getEntArray("model_hide_end", "targetname");
 
   foreach(var_2 in var_0) {
-  common_scripts\utility::array_call(var_2, ::hide);
+    common_scripts\utility::array_call(var_2, ::hide);
   }
 
   thread fake_teleport_notify();
@@ -539,6 +537,6 @@ enable_mb_scripted_ents() {
   var_0 = getEntArray("has_mblur", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 motionblurhqenable();
+    var_2 motionblurhqenable();
   }
 }

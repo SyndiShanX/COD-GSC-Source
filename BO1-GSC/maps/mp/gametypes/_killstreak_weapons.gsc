@@ -129,32 +129,23 @@ checkIfSwitchableWeapon(currentWeapon, newWeapon, killstreakWeapon, currentKills
   }
   if(self HasWeapon(killstreakWeapon) && !self GetAmmoCount(killstreakWeapon)) {
     switchableWeapon = true;
-  }
-  else if(self.firedKillstreakWeapon && newWeapon == killstreakWeapon && isHeldKillstreakWeapon(currentWeapon)) {
+  } else if(self.firedKillstreakWeapon && newWeapon == killstreakWeapon && isHeldKillstreakWeapon(currentWeapon)) {
     switchableWeapon = true;
-  }
-  else if(IsWeaponEquipment(newWeapon)) {
+  } else if(IsWeaponEquipment(newWeapon)) {
     switchableWeapon = true;
-  }
-  else if(isDefined(level.grenade_array[newWeapon])) {
+  } else if(isDefined(level.grenade_array[newWeapon])) {
     switchableWeapon = false;
-  }
-  else if(isHeldKillstreakWeapon(newWeapon) && isHeldKillstreakWeapon(currentWeapon) && currentKillstreakId != killstreakId) {
+  } else if(isHeldKillstreakWeapon(newWeapon) && isHeldKillstreakWeapon(currentWeapon) && currentKillstreakId != killstreakId) {
     switchableWeapon = true;
-  }
-  else if(maps\mp\gametypes\_hardpoints::isKillstreakWeapon(newWeapon)) {
+  } else if(maps\mp\gametypes\_hardpoints::isKillstreakWeapon(newWeapon)) {
     switchableWeapon = false;
-  }
-  else if(isGameplayWeapon(newWeapon)) {
+  } else if(isGameplayWeapon(newWeapon)) {
     switchableWeapon = false;
-  }
-  else if(self.firedKillstreakWeapon) {
+  } else if(self.firedKillstreakWeapon) {
     switchableWeapon = true;
-  }
-  else if(self.lastNonKillstreakWeapon == killstreakWeapon) {
+  } else if(self.lastNonKillstreakWeapon == killstreakWeapon) {
     switchableWeapon = false;
-  }
-  else if(isDefined(topKillstreak) && topKillstreak == killstreakWeapon && currentKillstreakId == killstreakId) {
+  } else if(isDefined(topKillstreak) && topKillstreak == killstreakWeapon && currentKillstreakId == killstreakId) {
     switchableWeapon = false;
   }
   return switchableWeapon;

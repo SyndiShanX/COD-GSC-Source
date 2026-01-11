@@ -80,8 +80,7 @@ sloth_is_pain() {
 
     if(anim_state == "zm_pain" || anim_state == "zm_pain_no_restart") {
       return true;
-    }
-    else {
+    } else {
       self.reset_asd = undefined;
       self animmode("normal");
       self.is_pain = 0;
@@ -102,8 +101,7 @@ sloth_is_traversing() {
 
     if(anim_state == "zm_traverse" || anim_state == "zm_traverse_no_restart" || anim_state == "zm_traverse_barrier" || anim_state == "zm_traverse_barrier_no_restart" || anim_state == "zm_sling_equipment" || anim_state == "zm_unsling_equipment" || anim_state == "zm_sling_magicbox" || anim_state == "zm_unsling_magicbox" || anim_state == "zm_sloth_crawlerhold_sling" || anim_state == "zm_sloth_crawlerhold_unsling" || anim_state == "zm_sloth_crawlerhold_sling_hunched" || anim_state == "zm_sloth_crawlerhold_unsling_hunched") {
       return true;
-    }
-    else {
+    } else {
       self.is_traversing = 0;
 
       sloth_print("traverse was interrupted");
@@ -117,8 +115,7 @@ sloth_is_traversing() {
 sloth_face_object(facee, type, data, dot_limit) {
   if(type == "angle") {
     self orientmode("face angle", data);
-  }
-  else if(type == "point") {
+  } else if(type == "point") {
     self orientmode("face point", data);
   }
 

@@ -5,7 +5,6 @@
 
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\dev;
-
 #namespace dev_class;
 
 dev_cac_init() {
@@ -32,22 +31,22 @@ dev_cac_init() {
       case 0:
         reset = 0;
         break;
-      case #"dpad_body":
+      case # "dpad_body":
         host thread dev_cac_dpad_think("<dev string:x3b>", &dev_cac_cycle_body, "<dev string:x38>");
         break;
-      case #"dpad_head":
+      case # "dpad_head":
         host thread dev_cac_dpad_think("<dev string:x42>", &dev_cac_cycle_head, "<dev string:x38>");
         break;
-      case #"dpad_character":
+      case # "dpad_character":
         host thread dev_cac_dpad_think("<dev string:x49>", &dev_cac_cycle_character, "<dev string:x38>");
         break;
-      case #"next_player":
+      case # "next_player":
         dev_cac_cycle_player(1);
         break;
-      case #"prev_player":
+      case # "prev_player":
         dev_cac_cycle_player(0);
         break;
-      case #"cac_overlay":
+      case # "cac_overlay":
         level notify(#"dev_cac_overlay_think");
 
         if(!dev_cac_overlay) {
@@ -56,59 +55,59 @@ dev_cac_init() {
 
         dev_cac_overlay = !dev_cac_overlay;
         break;
-      case #"best_bullet_armor":
+      case # "best_bullet_armor":
         dev_cac_set_model_range(&sort_greatest, "<dev string:x55>");
         break;
-      case #"worst_bullet_armor":
+      case # "worst_bullet_armor":
         dev_cac_set_model_range(&sort_least, "<dev string:x55>");
         break;
-      case #"best_explosive_armor":
+      case # "best_explosive_armor":
         dev_cac_set_model_range(&sort_greatest, "<dev string:x64>");
         break;
-      case #"worst_explosive_armor":
+      case # "worst_explosive_armor":
         dev_cac_set_model_range(&sort_least, "<dev string:x64>");
         break;
-      case #"best_mobility":
+      case # "best_mobility":
         dev_cac_set_model_range(&sort_greatest, "<dev string:x76>");
         break;
-      case #"worst_mobility":
+      case # "worst_mobility":
         dev_cac_set_model_range(&sort_least, "<dev string:x76>");
         break;
-      case #"camera":
+      case # "camera":
         dev_cac_camera_on = !dev_cac_camera_on;
         dev_cac_camera(dev_cac_camera_on);
         break;
-      case #"dpad_camo":
+      case # "dpad_camo":
         host thread dev_cac_dpad_think("<dev string:x81>", &dev_cac_cycle_render_options, "<dev string:x81>");
         break;
-      case #"dpad_meleecamo":
+      case # "dpad_meleecamo":
         host thread dev_cac_dpad_think("<dev string:x88>", &dev_cac_cycle_render_options, "<dev string:x88>");
         break;
-      case #"dpad_lens":
+      case # "dpad_lens":
         host thread dev_cac_dpad_think("<dev string:x94>", &dev_cac_cycle_render_options, "<dev string:x94>");
         break;
-      case #"dpad_reticle":
+      case # "dpad_reticle":
         host thread dev_cac_dpad_think("<dev string:x9b>", &dev_cac_cycle_render_options, "<dev string:x9b>");
         break;
-      case #"hash_70b765122950a76":
+      case # "hash_70b765122950a76":
         host thread dev_cac_dpad_think("<dev string:xa5>", &dev_cac_cycle_render_options, "<dev string:xa5>");
         break;
-      case #"dpad_reticle_color":
+      case # "dpad_reticle_color":
         host thread dev_cac_dpad_think("<dev string:xb7>", &dev_cac_cycle_render_options, "<dev string:xc7>");
         break;
-      case #"dpad_emblem":
+      case # "dpad_emblem":
         host thread dev_cac_dpad_think("<dev string:xd7>", &dev_cac_cycle_render_options, "<dev string:xd7>");
         break;
-      case #"dpad_tag":
+      case # "dpad_tag":
         host thread dev_cac_dpad_think("<dev string:xe0>", &dev_cac_cycle_render_options, "<dev string:xe0>");
         break;
-      case #"dpad_facepaint_pattern":
+      case # "dpad_facepaint_pattern":
         host thread dev_cac_dpad_think("<dev string:xe6>", &dev_cac_cycle_render_options, "<dev string:xfa>");
         break;
-      case #"dpad_facepaint_color":
+      case # "dpad_facepaint_color":
         host thread dev_cac_dpad_think("<dev string:x10e>", &dev_cac_cycle_render_options, "<dev string:x120>");
         break;
-      case #"dpad_reset":
+      case # "dpad_reset":
         host notify(#"dev_cac_dpad_think");
         break;
     }
@@ -147,7 +146,7 @@ dev_cac_camera(on) {
 
 dev_cac_dpad_think(part_name, cycle_function, tag) {
   self notify(#"dev_cac_dpad_think");
-  self endon(#"dev_cac_dpad_think", #"disconnect");
+  self endon(#"dev_cac_dpad_think", # "disconnect");
   iprintln("<dev string:x132>" + part_name + "<dev string:x13e>");
   iprintln("<dev string:x155>" + part_name + "<dev string:x15d>");
   dpad_left = 0;
@@ -231,7 +230,7 @@ dev_cac_cycle_body(forward, tag) {
   }
 
   player = level.dev_cac_player;
-  keys = getarraykeys(level.cac_functions[#"set_body_model"]);
+  keys = getarraykeys(level.cac_functions[# "set_body_model"]);
 
   if(forward) {
     player.cac_body_type = next_in_list(player.cac_body_type, keys);
@@ -248,7 +247,7 @@ dev_cac_cycle_head(forward, tag) {
   }
 
   player = level.dev_cac_player;
-  keys = getarraykeys(level.cac_functions[#"set_head_model"]);
+  keys = getarraykeys(level.cac_functions[# "set_head_model"]);
 
   if(forward) {
     player.cac_head_type = next_in_list(player.cac_head_type, keys);
@@ -266,7 +265,7 @@ dev_cac_cycle_character(forward, tag) {
   }
 
   player = level.dev_cac_player;
-  keys = getarraykeys(level.cac_functions[#"set_body_model"]);
+  keys = getarraykeys(level.cac_functions[# "set_body_model"]);
 
   if(forward) {
     player.cac_body_type = next_in_list(player.cac_body_type, keys);
@@ -420,19 +419,19 @@ dev_cac_gdt_update_think() {
     key = keyvalue[0];
 
     switch (key) {
-      case #"armorbullet":
+      case # "armorbullet":
         key = "<dev string:x55>";
         break;
-      case #"armorexplosive":
+      case # "armorexplosive":
         key = "<dev string:x64>";
         break;
-      case #"movespeed":
+      case # "movespeed":
         key = "<dev string:x76>";
         break;
-      case #"sprinttimetotal":
+      case # "sprinttimetotal":
         key = "<dev string:x2be>";
         break;
-      case #"sprinttimecooldown":
+      case # "sprinttimecooldown":
         key = "<dev string:x2d2>";
         break;
       default:

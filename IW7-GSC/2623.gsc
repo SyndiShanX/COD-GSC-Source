@@ -10,8 +10,7 @@ ray_trace(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(var_8.size) {
     var_08 = var_8[0];
-  }
-  else {
+  } else {
     var_08 = internal_pack_default_trace(var_01);
   }
 
@@ -29,8 +28,7 @@ ray_trace_detail(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(var_8.size) {
     var_08 = var_8[0];
-  }
-  else {
+  } else {
     var_08 = internal_pack_default_trace(var_01);
   }
 
@@ -47,7 +45,7 @@ ray_trace_get_all_results(var_00, var_01, var_02, var_03, var_04) {
 
   if(isDefined(var_04) && var_04) {
     foreach(var_08 in var_06) {
-    var_08 = convert_surface_flag(var_08);
+      var_08 = convert_surface_flag(var_08);
     }
   }
 
@@ -70,8 +68,7 @@ sphere_trace(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(var_7.size) {
     var_07 = var_7[0];
-  }
-  else {
+  } else {
     var_07 = internal_pack_default_trace(var_01);
   }
 
@@ -88,7 +85,7 @@ sphere_trace_get_all_results(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_05) && var_05) {
     foreach(var_09 in var_07) {
-    var_09 = convert_surface_flag(var_09);
+      var_09 = convert_surface_flag(var_09);
     }
   }
 
@@ -106,8 +103,7 @@ sphere_get_closest_point(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(var_7.size) {
     var_07 = var_7[0];
-  }
-  else {
+  } else {
     var_07 = internal_pack_default_trace(var_00);
   }
 
@@ -129,8 +125,7 @@ capsule_trace(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 
   if(var_10.size) {
     var_10 = var_10[0];
-  }
-  else {
+  } else {
     var_10 = internal_pack_default_trace(var_01);
   }
 
@@ -152,7 +147,7 @@ capsule_trace_get_all_results(var_00, var_01, var_02, var_03, var_04, var_05, va
 
   if(isDefined(var_07) && var_07) {
     foreach(var_12 in var_10) {
-    var_12 = convert_surface_flag(var_12);
+      var_12 = convert_surface_flag(var_12);
     }
   }
 
@@ -180,8 +175,7 @@ capsule_get_closest_point(var_00, var_01, var_02, var_03, var_04, var_05, var_06
 
   if(var_10.size) {
     var_10 = var_10[0];
-  }
-  else {
+  } else {
     var_10 = internal_pack_default_trace(var_00);
   }
 
@@ -210,8 +204,7 @@ player_trace(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if(var_8.size) {
     var_08 = var_8[0];
-  }
-  else {
+  } else {
     var_08 = internal_pack_default_trace(var_01);
   }
 
@@ -240,7 +233,7 @@ player_trace_get_all_results(var_00, var_01, var_02, var_03, var_04, var_05, var
 
   if(isDefined(var_05) && var_05) {
     foreach(var_10 in var_08) {
-    var_10 = convert_surface_flag(var_10);
+      var_10 = convert_surface_flag(var_10);
     }
   }
 
@@ -282,8 +275,7 @@ player_get_closest_point(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isarray(var_03)) {
     var_03 = scripts\engine\utility::array_add(var_03, self);
-  }
-  else {
+  } else {
     var_03 = self;
   }
 
@@ -292,8 +284,7 @@ player_get_closest_point(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(var_7.size) {
     var_07 = var_7[0];
-  }
-  else {
+  } else {
     var_07 = internal_pack_default_trace(var_00);
   }
 
@@ -322,8 +313,7 @@ ai_trace(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if(var_8.size) {
     var_08 = var_8[0];
-  }
-  else {
+  } else {
     var_08 = internal_pack_default_trace(var_01);
   }
 
@@ -352,7 +342,7 @@ ai_trace_get_all_results(var_00, var_01, var_02, var_03, var_04, var_05, var_06)
 
   if(isDefined(var_05) && var_05) {
     foreach(var_10 in var_08) {
-    var_10 = convert_surface_flag(var_10);
+      var_10 = convert_surface_flag(var_10);
     }
   }
 
@@ -393,8 +383,7 @@ ai_get_closest_point(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(var_7.size) {
     var_07 = var_7[0];
-  }
-  else {
+  } else {
     var_07 = internal_pack_default_trace(var_00);
   }
 

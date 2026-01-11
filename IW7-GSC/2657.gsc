@@ -44,11 +44,9 @@ can_play_dialogue_system() {
 vo_is_playing() {
   if(level.announcer_vo_playing || scripts\engine\utility::is_true(level.elvira_playing)) {
     return 1;
-  }
-  else if(level.player_vo_playing) {
+  } else if(level.player_vo_playing) {
     return 1;
-  }
-  else {
+  } else {
     foreach(var_01 in level.players) {
       if(scripts\engine\utility::is_true(var_1.vo_system_playing_vo)) {
         return 1;
@@ -98,8 +96,7 @@ func_9D12(var_00) {
   if(isDefined(level.vo_alias_data[var_00].func_18E3)) {
     if(int(level.vo_alias_data[var_00].func_18E3) == 1) {
       return 1;
-    }
-    else {
+    } else {
       return 0;
     }
   }
@@ -177,20 +174,15 @@ func_6A20(var_00) {
 
   if(var_0.vo_prefix == "p1_") {
     var_00 playlocalsound("p1_breathing_better");
-  }
-  else if(var_0.vo_prefix == "p2_") {
+  } else if(var_0.vo_prefix == "p2_") {
     var_00 playlocalsound("p2_breathing_better");
-  }
-  else if(var_0.vo_prefix == "p3_") {
+  } else if(var_0.vo_prefix == "p3_") {
     var_00 playlocalsound("p3_breathing_better");
-  }
-  else if(var_0.vo_prefix == "p4_") {
+  } else if(var_0.vo_prefix == "p4_") {
     var_00 playlocalsound("p4_breathing_better");
-  }
-  else if(var_0.vo_prefix == "p5_") {
+  } else if(var_0.vo_prefix == "p5_") {
     var_00 playlocalsound("p5_breathing_better");
-  }
-  else {
+  } else {
     var_00 playlocalsound("p3_breathing_better");
   }
 }

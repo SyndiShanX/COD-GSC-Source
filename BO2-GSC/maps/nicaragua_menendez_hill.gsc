@@ -380,8 +380,7 @@ door_ai_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_o
 door_death() {
   if(self.targetname == "mh_front_door_pdf_ai") {
     add_scene_properties("door_death", "anim_mh_door_death_front");
-  }
-  else {
+  } else {
     add_scene_properties("door_death", "anim_mh_door_death_back");
   }
 

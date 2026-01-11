@@ -64,14 +64,12 @@ sq_ll_show_code() {
 
   if(flag("sq_is_max_tower_built")) {
     level thread sq_ll_show_code_vo_max();
-  }
-  else {
+  } else {
     level thread sq_ll_show_code_vo_ric();
   }
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 sq_ll_show_code_vo_max() {
   a_signs = getEntArray("sq_tunnel_sign", "targetname");

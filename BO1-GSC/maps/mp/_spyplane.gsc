@@ -29,8 +29,7 @@ init() {
   minimapOrigins = getEntArray("minimap_corner", "targetname");
   if(miniMapOrigins.size) {
     uavOrigin = maps\mp\gametypes\_spawnlogic::findBoxCenter(miniMapOrigins[0].origin, miniMapOrigins[1].origin);
-  }
-  else {
+  } else {
     uavOrigin = (0, 0, 0);
   }
   if(level.teamBased) {
@@ -140,8 +139,7 @@ callsatellite(type, displayMessage) {
 addActiveCounterUAV() {
   if(level.teamBased) {
     level.activeCounterUAVs[self.team]++;
-  }
-  else {
+  } else {
     assert(isDefined(self.owner.entnum));
     if(!isDefined(self.owner.entnum)) {
       self.owner.entnum = self.owner getEntityNumber();
@@ -153,8 +151,7 @@ addActiveCounterUAV() {
 addActiveUAV() {
   if(level.teamBased) {
     level.activeUAVs[self.team]++;
-  }
-  else {
+  } else {
     assert(isDefined(self.owner.entnum));
     if(!isDefined(self.owner.entnum)) {
       self.owner.entnum = self.owner getEntityNumber();
@@ -166,8 +163,7 @@ addActiveUAV() {
 addActiveSatellite() {
   if(level.teamBased) {
     level.activeSatellites[self.team]++;
-  }
-  else {
+  } else {
     assert(isDefined(self.owner.entnum));
     if(!isDefined(self.owner.entnum)) {
       self.owner.entnum = self.owner getEntityNumber();
@@ -510,8 +506,7 @@ missileProximityDetonate(targetEnt, player) {
   for(;;) {
     if(!isDefined(targetEnt)) {
       center = lastCenter;
-    }
-    else {
+    } else {
       center = targetEnt.origin;
     }
     lastCenter = center;
@@ -582,8 +577,7 @@ updatePlayersUAVStatus() {
     }
     if(activeUAVs > 1) {
       spyplaneUpdateSpeed = 2;
-    }
-    else {
+    } else {
       spyplaneUpdateSpeed = 1;
     }
     player setClientUIVisibilityFlag("radar_client", 1);

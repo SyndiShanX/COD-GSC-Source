@@ -163,11 +163,9 @@ player_can_see_me(player) {
 
   if(forwarddotbanzai >= 1) {
     anglefromcenter = 0;
-  }
-  else if(forwarddotbanzai <= -1) {
+  } else if(forwarddotbanzai <= -1) {
     anglefromcenter = 180;
-  }
-  else {
+  } else {
     anglefromcenter = acos(forwarddotbanzai);
   }
 
@@ -308,8 +306,7 @@ can_zombie_see_any_player() {
     if(isDefined(a_players[i].b_already_on_tank) && a_players[i].b_already_on_tank) {
       if(isDefined(self.b_on_tank) && self.b_on_tank) {
         return true;
-      }
-      else {
+      } else {
         player_origin = level.vh_tank gettagorigin("window_left_rear_jmp_jnt");
       }
     } else {
@@ -349,7 +346,7 @@ get_dog_locations_in_zones(a_zones) {
   a_dog_locations = [];
 
   foreach(zone in a_zones) {
-  a_dog_locations = arraycombine(a_dog_locations, level.zones[zone].dog_locations, 0, 0);
+    a_dog_locations = arraycombine(a_dog_locations, level.zones[zone].dog_locations, 0, 0);
   }
 
   return a_dog_locations;

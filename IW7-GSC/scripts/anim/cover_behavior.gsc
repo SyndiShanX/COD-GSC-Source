@@ -50,9 +50,7 @@ main(param_00) {
     }
 
     if(isDefined(param_00.var_BD1C)) {
-      if([
-          [param_00.var_BD1C]
-        ]()) {
+      if([[param_00.var_BD1C]]()) {
         continue;
       }
     }
@@ -453,9 +451,7 @@ func_92CC(param_00, param_01) {
   self.var_6F28 = 0;
   if(isDefined(param_00.var_6F27)) {
     if(!self.a.var_9302 && gettime() - self.suppressionstart < 600) {
-      if([
-          [param_00.var_6F27]
-        ]()) {
+      if([[param_00.var_6F27]]()) {
         return 1;
       }
     } else {
@@ -513,9 +509,7 @@ func_6F29(param_00) {
 
   self.var_6F28 = 1;
   thread func_6335();
-  var_03 = [
-    [param_00.var_6F27]
-  ]();
+  var_03 = [[param_00.var_6F27]]();
   if(!var_03) {
     self notify("dont_end_idle");
   }

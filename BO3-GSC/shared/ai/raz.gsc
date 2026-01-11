@@ -228,9 +228,7 @@ function private raztargetservice(entity) {
   entity.favoriteenemy = player;
   if(!isDefined(player) || player isnotarget()) {
     if(isDefined(self.ignore_player)) {
-      if(isDefined(level._should_skip_ignore_player_logic) && [
-          [level._should_skip_ignore_player_logic]
-        ]()) {
+      if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
         return;
       }
       self.ignore_player = [];

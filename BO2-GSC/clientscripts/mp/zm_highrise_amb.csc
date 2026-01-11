@@ -143,8 +143,7 @@ snd_play_loopers() {
 whoswhoaudio(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     activatewwaudio();
-  }
-  else {
+  } else {
     deactivatewwaudio();
   }
 }

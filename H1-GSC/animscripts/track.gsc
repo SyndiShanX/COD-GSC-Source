@@ -46,8 +46,7 @@ trackloop(var_0, var_1, var_2, var_3, var_4) {
     if(var_22 == "cover_multi") {
       if(self.cover.state == "right") {
         var_22 = "cover_right";
-      }
-      else if(self.cover.state == "left") {
+      } else if(self.cover.state == "left") {
         var_22 = "cover_left";
       }
     }
@@ -73,8 +72,7 @@ trackloop(var_0, var_1, var_2, var_3, var_4) {
     if(isDefined(self.shootent)) {
       if(common_scripts\utility::flag("_cloaked_stealth_enabled")) {
         var_24 = animscripts\combat_utility::get_last_known_shoot_pos(self.shootent);
-      }
-      else {
+      } else {
         var_24 = self.shootent getshootatpos();
       }
     } else if(isDefined(var_24) && isDefined(self.forceaimtorwardsenemy) && isDefined(self.enemy))
@@ -171,8 +169,7 @@ trackloop_cqbshootpos(var_0) {
   if(isDefined(self.cqb_target)) {
     if(common_scripts\utility::flag("_cloaked_stealth_enabled")) {
       var_1 = animscripts\combat_utility::get_last_known_shoot_pos(self.cqb_target);
-    }
-    else {
+    } else {
       var_1 = self.cqb_target getshootatpos();
     }
 
@@ -210,8 +207,7 @@ trackloop_anglesfornoshootpos(var_0, var_1) {
 
   if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 16) {
     var_5 = angleclamp180(self.angles[1] - self.node.angles[1]);
-  }
-  else {
+  } else {
     var_6 = self getanglestolikelyenemypath();
 
     if(isDefined(var_6)) {
@@ -244,8 +240,7 @@ trackloop_getdesiredangles(var_0, var_1) {
 
   if(isDefined(self.stepoutyaw)) {
     var_6 = self.stepoutyaw - var_2[1];
-  }
-  else {
+  } else {
     var_7 = angleclamp180(self.desiredangle - self.angles[1]) * 0.5;
     var_6 = var_7 + self.angles[1] - var_2[1];
   }
@@ -269,8 +264,7 @@ trackloop_clampangles(var_0, var_1, var_2) {
   } else {
     if(self.gunblockedbywall) {
       var_1 = clamp(var_1, -10, 10);
-    }
-    else {
+    } else {
       var_1 = clamp(var_1, self.leftaimlimit, self.rightaimlimit);
     }
 

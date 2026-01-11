@@ -218,29 +218,21 @@ class ctrap {
   function trap_update_state() {
     switch (m_n_state) {
       case 1: {
-        [
-          [self]
-        ] - > trap_available();
+        [[self]] - > trap_available();
         break;
       }
       case 2: {
-        [
-          [self]
-        ] - > trap_active();
+        [[self]] - > trap_active();
         self notify("trap_start");
         break;
       }
       case 3: {
-        [
-          [self]
-        ] - > trap_cooldown();
+        [[self]] - > trap_cooldown();
         self notify("trap_done");
         break;
       }
       case 0: {
-        [
-          [self]
-        ] - > trap_unavailable();
+        [[self]] - > trap_unavailable();
         self notify("trap_done");
         break;
       }
@@ -280,27 +272,19 @@ class ctrap {
   function switch_update_state(t_use) {
     switch (m_n_state) {
       case 1: {
-        [
-          [self]
-        ] - > switch_available(t_use);
+        [[self]] - > switch_available(t_use);
         break;
       }
       case 2: {
-        [
-          [self]
-        ] - > switch_active(t_use);
+        [[self]] - > switch_active(t_use);
         break;
       }
       case 3: {
-        [
-          [self]
-        ] - > switch_cooldown(t_use);
+        [[self]] - > switch_cooldown(t_use);
         break;
       }
       case 0: {
-        [
-          [self]
-        ] - > switch_unavailable(t_use);
+        [[self]] - > switch_unavailable(t_use);
         break;
       }
     }

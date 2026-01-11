@@ -36,8 +36,7 @@ main(model, type) {
 
   if(issubstr(model, "_snow")) {
     build_turret("btr80_turret2", "tag_turret2", "vehicle_btr80_machine_gun_snow");
-  }
-  else {
+  } else {
     build_turret("btr80_turret2", "tag_turret2", "vehicle_btr80_machine_gun");
   }
 

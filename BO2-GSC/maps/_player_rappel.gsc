@@ -475,8 +475,7 @@ _descent_control_active() {
 
   if(b_is_2h_rappel) {
     b_control_active = self _is_pressing_rappel_button();
-  }
-  else {
+  } else {
     b_control_active = self _is_pressing_rappel_button();
   }
 
@@ -552,11 +551,9 @@ _rappel_player_link(e_to_link, b_no_viewlook) {
 
   if(b_use_absolute) {
     self playerlinktoabsolute(e_to_link, self._rappel.viewcone.link_tag);
-  }
-  else if(!b_use_absolute && b_no_viewlook) {
+  } else if(!b_use_absolute && b_no_viewlook) {
     self playerlinktodelta(e_to_link, self._rappel.viewcone.link_tag, 80, 0, 0, 0, 0, 1);
-  }
-  else {
+  } else {
     self playerlinktodelta(e_to_link, self._rappel.viewcone.link_tag, self._rappel.viewcone.percentage, self._rappel.viewcone.right_arc, self._rappel.viewcone.left_arc, self._rappel.viewcone.top_arc, self._rappel.viewcone.bottom_arc, self._rappel.viewcone.use_tag_angles);
   }
 }
@@ -702,8 +699,7 @@ decend_sound() {
 
   if(self._rappel.status.is_descending == 1) {
     level.player playLoopSound("evt_rappel_slide");
-  }
-  else {
+  } else {
     level.player stoploopsound(0.25);
   }
 }
@@ -778,8 +774,7 @@ _rappel_jump(n_charge_time) {
   while(self _is_freefalling()) {
     if(n_counter < n_anim_time_push) {
       n_counter = n_counter + 0.05;
-    }
-    else {
+    } else {
       self.body setanimknoball(str_idle_loop_anim, % root, 1, n_anim_time_push, 1);
       break;
     }
@@ -905,8 +900,7 @@ _rappel_do_falling_death() {
   while(!self._rappel.status.on_ground) {
     if(n_counter < n_anim_length) {
       n_counter = n_counter + 0.05;
-    }
-    else {
+    } else {
       self.body setanimknoball(str_fall_death_loop, % root, 1, 0.2, 1);
     }
 
@@ -932,8 +926,7 @@ _is_2h_rappel() {
 _is_pressing_brake_button() {
   if(self _is_2h_rappel()) {
     b_is_pressing_brake = self[[self._rappel.controls.rappel_brake_button]]();
-  }
-  else {
+  } else {
     b_is_pressing_brake = !self[[self._rappel.controls.rappel_button]]();
   }
 

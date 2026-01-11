@@ -298,8 +298,7 @@ dialog_player_kill() {
     }
     if(!isDefined(level.player_kill_time)) {
       level.player_kill_time = gettime();
-    }
-    else if(gettime() < level.player_kill_time + 15000) {
+    } else if(gettime() < level.player_kill_time + 15000) {
       return;
     }
     level.player_kill_time = gettime();
@@ -460,7 +459,7 @@ btr_stop_when_not_normal() {
 
 btr_mg_off() {
   foreach(var_1 in self.mgturret) {
-  var_1 notify("stop_burst_fire_unmanned");
+    var_1 notify("stop_burst_fire_unmanned");
   }
 }
 
@@ -493,8 +492,7 @@ dog_footstep_logic() {
 
       if(level.dog.sprint) {
         var_1 = level._stealth.logic.detect_range["hidden"]["crouch"];
-      }
-      else {
+      } else {
         var_1 = 64;
         var_1 = var_0 * var_0 * var_1;
       }

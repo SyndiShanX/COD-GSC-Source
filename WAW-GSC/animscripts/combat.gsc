@@ -576,11 +576,9 @@ exposedCombatMainLoop() {
     if(!justWaited) {
       if(self.a.pose == "stand") {
         self set_animarray_standing();
-      }
-      else if(self.a.pose == "crouch") {
+      } else if(self.a.pose == "crouch") {
         self set_animarray_crouching();
-      }
-      else {
+      } else {
         self set_animarray_prone();
       }
     }
@@ -620,8 +618,7 @@ exposedCombatMainLoop() {
       }
       if(self.a.pose == "stand") {
         animscripts\shared::throwDownWeapon( % RPG_stand_throw);
-      }
-      else {
+      } else {
         animscripts\shared::throwDownWeapon( % RPG_crouch_throw);
       }
       continue;
@@ -868,8 +865,7 @@ watchShootEntVelocity() {
     } else {
       if(isDefined(self.shootEnt)) {
         prevpos = self.shootEnt.origin;
-      }
-      else {
+      } else {
         prevpos = self.origin;
       }
       prevshootent = self.shootEnt;
@@ -936,11 +932,9 @@ turn(direction, amount) {
       rate = 1 + urgency * 1;
       if(rate > 2) {
         transTime = .05;
-      }
-      else if(rate > 1.3) {
+      } else if(rate > 1.3) {
         transTime = .1;
-      }
-      else {
+      } else {
         transTime = .15;
       }
     }
@@ -948,14 +942,11 @@ turn(direction, amount) {
   angle = 0;
   if(amount > 157.5) {
     angle = 180;
-  }
-  else if(amount > 112.5) {
+  } else if(amount > 112.5) {
     angle = 135;
-  }
-  else if(amount > 67.5) {
+  } else if(amount > 67.5) {
     angle = 90;
-  }
-  else {
+  } else {
     angle = 45;
   }
   if(self is_zombie()) {
@@ -967,11 +958,9 @@ turn(direction, amount) {
     turnanim = animarray(animname);
     if(isDefined(self.node) && self.node.type == "Guard" && distanceSquared(self.origin, self.node.origin) < 16 * 16) {
       self animmode("angle deltas");
-    }
-    else if(isDeltaAllowed(turnanim)) {
+    } else if(isDeltaAllowed(turnanim)) {
       self animMode("zonly_physics");
-    }
-    else {
+    } else {
       self animmode("angle deltas");
     }
     self setAnimKnobAll( % exposed_aiming, % body, 1, transTime);
@@ -1124,8 +1113,7 @@ tryThrowGrenade(throwAt, minDist) {
         self setanim( % exposed_aiming, 1, .1);
         if(threw) {
           setAnimAimWeight(1, .5);
-        }
-        else {
+        } else {
           setAnimAimWeight(1, 0);
         }
       }
@@ -1147,8 +1135,7 @@ transitionTo(newPose) {
   transAnim = animArray(self.a.pose + "_2_" + newPose);
   if(newPose == "stand") {
     rate = 2;
-  }
-  else {
+  } else {
     rate = 1;
   }
   if(self is_zombie()) {
@@ -1171,8 +1158,7 @@ transitionTo(newPose) {
   self.a.pose = newPose;
   if(newPose == "stand") {
     self set_animarray_standing();
-  }
-  else if(newPose == "crouch") {
+  } else if(newPose == "crouch") {
     self set_animarray_crouching();
   }
   self setAnimKnobAllRestart(animarray("straight_level"), % body, 1, .25);
@@ -1412,8 +1398,7 @@ handlePutaway(notetrack) {
 rpgDeath() {
   if(randomFloat(1) > 0.5) {
     self SetFlaggedAnimKnobAll("deathanim", % RPG_stand_death, % root, 1, .05, 1);
-  }
-  else {
+  } else {
     self SetFlaggedAnimKnobAll("deathanim", % RPG_stand_death_stagger, % root, 1, .05, 1);
   }
   self animscripts\shared::DoNoteTracks("deathanim");

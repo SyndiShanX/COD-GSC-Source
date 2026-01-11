@@ -40,8 +40,7 @@ advancedTraverse(traverseAnim, normalHeight) {
     self traverseMode("gravity");
     if(!animHasNotetrack(traverseAnim, "blend")) {
       wait(gravityToBlendTime);
-    }
-    else {
+    } else {
       self waittillmatch("traverse", "blend");
     }
   }
@@ -76,8 +75,7 @@ teleportThreadEx(verticalOffset, delay, frames) {
   amount = verticalOffset / frames;
   if(amount > 10.0) {
     amount = 10.0;
-  }
-  else if(amount < -10.0) {
+  } else if(amount < -10.0) {
     amount = -10.0;
   }
   offset = (0, 0, amount);
@@ -147,11 +145,9 @@ DoTraverse(traverseData) {
 handleTraverseNotetracks(note) {
   if(note == "traverse_death") {
     return handleTraverseDeathNotetrack();
-  }
-  else if(note == "traverse_align") {
+  } else if(note == "traverse_align") {
     return handleTraverseAlignment();
-  }
-  else if(note == "traverse_drop") {
+  } else if(note == "traverse_drop") {
     return handleTraverseDrop();
   }
 }

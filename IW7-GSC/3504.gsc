@@ -230,8 +230,7 @@ func_10DD1() {
   for(var_00 = level.func_C1CD; var_00 > 0; var_0--) {
     if(var_00 == 1) {
       level.func_C1A7 playSound("mp_killstreak_nuclearstrike_alarm_last");
-    }
-    else {
+    } else {
       level.func_C1A7 playSound("mp_killstreak_nuclearstrike_alarm");
     }
 
@@ -417,8 +416,7 @@ func_C1B8(var_00) {
 
     if(scripts\mp\utility\game::istrue(var_01)) {
       func_52C5();
-    }
-    else {
+    } else {
       func_52C5(scripts\mp\utility\game::getotherteam(var_0.team));
     }
 
@@ -471,7 +469,7 @@ func_C1BC(var_00) {
   scripts\mp\shellshock::_earthquake(0.4, 0.1, level.mapcenter, 100000);
 
   foreach(var_02 in level.players) {
-  var_02 playrumbleonentity("damage_heavy");
+    var_02 playrumbleonentity("damage_heavy");
   }
 }
 
@@ -532,8 +530,7 @@ func_12EDA() {
 func_F7BC(var_00) {
   if(isDefined(level.func_C1BA)) {
     level thread[[level.func_C1BA]]();
-  }
-  else if(level.mapname != "mp_dome_dusk") {
+  } else if(level.mapname != "mp_dome_dusk") {
     visionsetalternate(-3, var_00);
   }
 }
@@ -546,11 +543,9 @@ func_52C5(var_00) {
 
   if(isDefined(var_02) && isDefined(var_03)) {
     var_04 = scripts\engine\utility::array_combine_unique(var_02, var_03);
-  }
-  else if(isDefined(var_02)) {
+  } else if(isDefined(var_02)) {
     var_04 = var_02;
-  }
-  else if(isDefined(var_03)) {
+  } else if(isDefined(var_03)) {
     var_04 = var_03;
   }
 

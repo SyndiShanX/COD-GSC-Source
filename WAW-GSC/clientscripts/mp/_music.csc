@@ -153,14 +153,13 @@ transitionIn(previous, next) {
   if(oneshotalias != "") {
     level.musicStates[next].id = playSound(0, oneshotalias, (0, 0, 0));
     if(loopalias != "") {
-      while(SoundPlaying(level.musicStates[next].id)) {
-    }
-        if(level.nextMusicState != next) {
-          thread fadeOutAndStopSound(level.musicStates[next].id, level.musicStates[next].fadeout);
-          return;
-        }
-        wait(.1);
+      while(SoundPlaying(level.musicStates[next].id)) {}
+      if(level.nextMusicState != next) {
+        thread fadeOutAndStopSound(level.musicStates[next].id, level.musicStates[next].fadeout);
+        return;
       }
+      wait(.1);
+    }
   }
   if(oldloopalias == loopalias && oldid != -1 && oneshotalias == "") {
     level.musicStates[next].id = level.musicStates[previous].id;
@@ -222,8 +221,7 @@ _musicAlias(alias, fadein, fadeout, loop) {
   name = level.musicDeclareName;
   if(loop) {
     level.musicStates[name].loopalias = alias;
-  }
-  else {
+  } else {
     level.musicStates[name].oneshotalias = alias;
   }
   level.musicStates[name].fadein = fadein;

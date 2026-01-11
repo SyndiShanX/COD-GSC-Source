@@ -62,8 +62,7 @@ mortarspawner(delayent) {
 
   if(isDefined(delayent.script_delay)) {
     delay_base = delayent.script_delay;
-  }
-  else if(isDefined(delayent.script_delay_min)) {
+  } else if(isDefined(delayent.script_delay_min)) {
     delay_base = delayent.script_delay_min;
     delay_range = delayent.script_delay_max - delayent.script_delay_min;
   }
@@ -104,8 +103,7 @@ mortarteamspawn(spawners, node, mortar_targets) {
 
     if(!isDefined(spawners[index].script_forcespawn)) {
       spawn = spawners[index] dospawn();
-    }
-    else {
+    } else {
       spawn = spawners[index] stalingradspawn();
     }
 
@@ -164,8 +162,7 @@ mortarteamspawn(spawners, node, mortar_targets) {
     if(isalive(self.loadguy)) {
       if(isalive(self.aimguy) && self.aimguy.ready) {
         dualmortaruntildeath(node);
-      }
-      else {
+      } else {
         singlemortaronerep(node);
       }
 
@@ -435,13 +432,11 @@ fire(guy) {
 
   if(isDefined(level._effect["mortar_flash_special"])) {
     playFXOnTag(level._effect["mortar_flash_special"], mortar, "TAG_fx");
-  }
-  else if(isDefined(level._effect["mortar_flash"])) {
+  } else if(isDefined(level._effect["mortar_flash"])) {
     playFXOnTag(level._effect["mortar_flash"], mortar, "TAG_fx");
   }
 
-  if(isDefined(level.scr_sound["mortar_flash"])) {
-  }
+  if(isDefined(level.scr_sound["mortar_flash"])) {}
 
   target = random(mortar_targets);
 
@@ -455,8 +450,7 @@ fire(guy) {
 
   if(isDefined(level.timetoimpact)) {
     wait(level.timetoimpact);
-  }
-  else {
+  } else {
     incoming_ent = spawn("script_origin", target.origin);
     wait(distance(self.origin, target.origin) * 0.0008);
     incoming_ent playSound(level.mortarteam_incoming_sound, "sound_done");
@@ -467,8 +461,7 @@ fire(guy) {
   if(!isDefined(level.explosionhide)) {
     if(isDefined(level.mortarteam_exp_sound)) {
       thread play_sound_in_space(level.mortarteam_exp_sound, target.origin);
-    }
-    else {
+    } else {
       thread play_sound_in_space("exp_mortar", target.origin);
     }
 

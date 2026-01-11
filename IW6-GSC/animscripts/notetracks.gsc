@@ -50,8 +50,7 @@ handledogfootstepnotetracks(var_0) {
 
       if(var_3) {
         self playSound("dogstep_plr_" + var_2 + "_" + var_1);
-      }
-      else {
+      } else {
         self playSound("dogstep_" + var_2 + "_" + var_1);
       }
 
@@ -63,8 +62,7 @@ handledogfootstepnotetracks(var_0) {
           if(var_3) {
             if(!isDefined(self.drivenmovemode) || self.drivenmovemode == "walk") {
               var_6 = "_plr";
-            }
-            else {
+            } else {
               var_6 = "_run_plr";
             }
           } else if(var_2 == "walk")
@@ -104,8 +102,7 @@ handledogsoundnotetracks(var_0) {
 
   if(isalive(self)) {
     thread maps\_utility::play_sound_on_tag_endon_death(var_2, "tag_eye");
-  }
-  else {
+  } else {
     thread common_scripts\utility::play_sound_in_space(var_2, self getEye());
   }
 
@@ -216,7 +213,7 @@ registernotetracks() {
     var_0 = getarraykeys(level._notetrackfx);
 
     foreach(var_2 in var_0) {
-    anim.notetracks[var_2] = ::customnotetrackfx;
+      anim.notetracks[var_2] = ::customnotetrackfx;
     }
   }
 }
@@ -224,8 +221,7 @@ registernotetracks() {
 notetrackfire(var_0, var_1) {
   if(isDefined(anim.fire_notetrack_functions[self.script])) {
     thread[[anim.fire_notetrack_functions[self.script]]]();
-  }
-  else {
+  } else {
     thread[[::shootnotetrack]]();
   }
 }
@@ -233,8 +229,7 @@ notetrackfire(var_0, var_1) {
 notetracklaser(var_0, var_1) {
   if(issubstr(var_0, "on")) {
     self.a.laseron = 1;
-  }
-  else {
+  } else {
     self.a.laseron = 0;
   }
 
@@ -320,8 +315,7 @@ notetrackposeprone(var_0, var_1) {
 
   if(isDefined(self.a.goingtoproneaim)) {
     self.a.proneaiming = 1;
-  }
-  else {
+  } else {
     self.a.proneaiming = undefined;
   }
 }
@@ -405,8 +399,7 @@ notetrackpistolrechamber(var_0, var_1) {
 notetrackgravity(var_0, var_1) {
   if(issubstr(var_0, "on")) {
     self animmode("gravity");
-  }
-  else if(issubstr(var_0, "off")) {
+  } else if(issubstr(var_0, "off")) {
     self animmode("nogravity");
   }
 }
@@ -586,8 +579,7 @@ notetrackspacejet_proc(var_0, var_1) {
 customnotetrackfx(var_0, var_1) {
   if(isDefined(self.groundtype)) {
     var_2 = self.groundtype;
-  }
-  else {
+  } else {
     var_2 = "dirt";
   }
 
@@ -595,8 +587,7 @@ customnotetrackfx(var_0, var_1) {
 
   if(isDefined(level._notetrackfx[var_0][var_2])) {
     var_3 = level._notetrackfx[var_0][var_2];
-  }
-  else if(isDefined(level._notetrackfx[var_0]["all"])) {
+  } else if(isDefined(level._notetrackfx[var_0]["all"])) {
     var_3 = level._notetrackfx[var_0]["all"];
   }
 
@@ -617,8 +608,7 @@ customnotetrackfx(var_0, var_1) {
 notetrackfootscrape(var_0, var_1) {
   if(isDefined(self.groundtype)) {
     var_2 = self.groundtype;
-  }
-  else {
+  } else {
     var_2 = "dirt";
   }
 
@@ -628,8 +618,7 @@ notetrackfootscrape(var_0, var_1) {
 notetrackland(var_0, var_1) {
   if(isDefined(self.groundtype)) {
     var_2 = self.groundtype;
-  }
-  else {
+  } else {
     var_2 = "dirt";
   }
 
@@ -654,11 +643,9 @@ notetrackcodemove(var_0, var_1) {
 notetrackfaceenemy(var_0, var_1) {
   if(self.script != "reactions") {
     self orientmode("face enemy");
-  }
-  else if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.reactiontargetpos) < 4096) {
+  } else if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.reactiontargetpos) < 4096) {
     self orientmode("face enemy");
-  }
-  else {
+  } else {
     self orientmode("face point", self.reactiontargetpos);
   }
 }
@@ -672,8 +659,7 @@ notetrackbodyfall(var_0, var_1) {
 
   if(isDefined(self.groundtype)) {
     var_3 = self.groundtype;
-  }
-  else {
+  } else {
     var_3 = "dirt";
   }
 
@@ -694,8 +680,7 @@ notetrackrocketlauncherammoattach() {
 
   if(issubstr(tolower(self.weapon), "panzerfaust")) {
     self.rocketlauncherammo setModel("weapon_panzerfaust3_missle");
-  }
-  else {
+  } else {
     self.rocketlauncherammo setModel("projectile_rpg7");
   }
 
@@ -813,9 +798,9 @@ handlenotetrack(var_0, var_1, var_2) {
     default:
       if(isDefined(var_2)) {
         return [
-      }
+          }
           [var_2]
-        ](var_0);
+      ](var_0);
 
       break;
   }
@@ -932,8 +917,7 @@ donotetracksfortimeendnotify(var_0) {
 playfootstep(var_0, var_1) {
   if(!isai(self)) {
     self playSound("step_run_dirt");
-  }
-  else {
+  } else {
     var_2 = undefined;
 
     if(!isDefined(self.groundtype)) {
@@ -958,9 +942,7 @@ playfootstep(var_0, var_1) {
     self playSound("step_" + var_4 + "_" + var_2);
 
     if(var_1) {
-      if(![
-          [anim.optionalstepeffectfunction]
-        ](var_3, var_2)) {
+      if(![[anim.optionalstepeffectfunction]](var_3, var_2)) {
         playfootstepeffectsmall(var_3, var_2);
         return;
       }
@@ -1071,8 +1053,7 @@ notetrackfirespray(var_0, var_1) {
 
   if(var_6) {
     animscripts\utility::shootenemywrapper();
-  }
-  else {
+  } else {
     var_4 = var_4 + ((randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1, (randomfloat(2) - 1) * 0.1);
     var_8 = var_3 + var_4 * 1000;
     self[[anim.shootposwrapper_func]](var_8);

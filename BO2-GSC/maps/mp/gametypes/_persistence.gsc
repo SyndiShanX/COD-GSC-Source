@@ -70,7 +70,7 @@ initializestattracking() {
   level.globalbombsdestroyedbyteam = [];
 
   foreach(team in level.teams) {
-  level.globalbombsdestroyedbyteam[team] = 0;
+    level.globalbombsdestroyedbyteam[team] = 0;
   }
 }
 
@@ -96,7 +96,7 @@ uploadglobalstatcounters() {
   totalsabdestroyedbyteam = [];
 
   foreach(team in level.teams) {
-  totalsabdestroyedbyteam[team] = 0;
+    totalsabdestroyedbyteam[team] = 0;
   }
 
   switch (level.gametype) {
@@ -115,7 +115,7 @@ uploadglobalstatcounters() {
       break;
     case "sab":
       foreach(team in level.teams) {
-      totalsabdestroyedbyteam[team] = level.globalbombsdestroyedbyteam[team];
+        totalsabdestroyedbyteam[team] = level.globalbombsdestroyedbyteam[team];
       }
 
       break;
@@ -237,8 +237,7 @@ getgametypename() {
   if(!isDefined(level.fullgametypename)) {
     if(isDefined(level.hardcoremode) && level.hardcoremode && ispartygamemode() == 0) {
       prefix = "HC";
-    }
-    else {
+    } else {
       prefix = "";
     }
 
@@ -289,8 +288,7 @@ adjustrecentstats() {
 getrecentstat(isglobal, index, statname) {
   if(level.wagermatch) {
     return self getdstat("RecentEarnings", index, statname);
-  }
-  else if(isglobal) {
+  } else if(isglobal) {
     modename = maps\mp\gametypes\_globallogic::getcurrentgamemode();
     return self getdstat("gameHistory", modename, "matchHistory", index, statname);
   } else
@@ -312,8 +310,7 @@ setrecentstat(isglobal, index, statname, value) {
   }
   if(level.wagermatch) {
     self setdstat("RecentEarnings", index, statname, value);
-  }
-  else if(isglobal) {
+  } else if(isglobal) {
     modename = maps\mp\gametypes\_globallogic::getcurrentgamemode();
     self setdstat("gameHistory", modename, "matchHistory", "" + index, statname, value);
     return;
@@ -374,8 +371,7 @@ setafteractionreportstat(statname, value, index) {
   if(level.rankedmatch || level.wagermatch || level.leaguematch) {
     if(isDefined(index)) {
       self setdstat("AfterActionReportStats", statname, index, value);
-    }
-    else {
+    } else {
       self setdstat("AfterActionReportStats", statname, value);
     }
   }
@@ -391,14 +387,11 @@ codecallback_gunchallengecomplete(rewardxp, attachmentindex, itemindex, rankid) 
   self luinotifyeventtospectators(&"gun_level_complete", 4, rankid, itemindex, attachmentindex, rewardxp);
 }
 
-checkcontractexpirations() {
-}
+checkcontractexpirations() {}
 
-incrementcontracttimes(timeinc) {
-}
+incrementcontracttimes(timeinc) {}
 
-addcontracttoqueue(index, passed) {
-}
+addcontracttoqueue(index, passed) {}
 
 uploadstatssoon() {
   self notify("upload_stats_soon");
@@ -408,11 +401,8 @@ uploadstatssoon() {
   uploadstats(self);
 }
 
-codecallback_onaddplayerstat(dataname, value) {
-}
+codecallback_onaddplayerstat(dataname, value) {}
 
-codecallback_onaddweaponstat(weapname, dataname, value) {
-}
+codecallback_onaddweaponstat(weapname, dataname, value) {}
 
-processcontractsonaddstat(stattype, dataname, value, weapname) {
-}
+processcontractsonaddstat(stattype, dataname, value, weapname) {}

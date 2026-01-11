@@ -162,8 +162,7 @@ level_player_init() {
 setfirstmusicstate() {
   if(!flag("lockout_screen_skipped") && !flag("lockout_screen_skipped_freeroam") && !flag("lockout_screen_passed")) {
     setmusicstate("FRONT_END_START");
-  }
-  else {
+  } else {
     setmusicstate("FRONT_END_MAIN");
   }
 }

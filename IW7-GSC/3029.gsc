@@ -217,11 +217,9 @@ func_D135(var_00, var_01) {
 
   if(var_00 > 0.5) {
     level.player playrumbleonentity("grenade_rumbe");
-  }
-  else if(var_00 > 0.25) {
+  } else if(var_00 > 0.25) {
     level.player playrumbleonentity("damage_heavy");
-  }
-  else {
+  } else {
     level.player playrumbleonentity("damage_light");
   }
 }
@@ -243,8 +241,7 @@ func_D07A(var_00, var_01, var_02, var_03) {
 
   if(var_04 > 0.83) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -335,15 +332,13 @@ func_D184(var_00) {
 #using_animtree("jackal");
 
 func_7929() {
-  var_00 = [
-    [ % jackal_pilot_strike_death, % jackal_vehicle_strike_death, 1],
+  var_00 = [[ % jackal_pilot_strike_death, % jackal_vehicle_strike_death, 1],
     [ % heist_mons_attack_plr_flight_failtoeject, % heist_mons_attack_jackal_flight_failtoeject, 3.5],
     [ % jackal_pilot_assault_death, % jackal_vehicle_assault_death, 1],
     [ % jackal_pilot_assault_death01, % jackal_vehicle_assault_death01, 3.5],
     [ % jackal_pilot_assault_death02, % jackal_vehicle_assault_death02, 3],
     [ % jackal_pilot_assault_death03, % jackal_vehicle_assault_death03, 1],
-    [ % jackal_pilot_assault_death04, % jackal_vehicle_assault_death04, 1]
-  ];
+    [ % jackal_pilot_assault_death04, % jackal_vehicle_assault_death04, 1]];
   return scripts\engine\utility::random(var_00);
 }
 
@@ -379,8 +374,7 @@ func_D13F(var_00) {
 
   if(var_00 < 10) {
     var_01 = "0";
-  }
-  else {
+  } else {
     var_01 = "";
   }
 
@@ -396,11 +390,9 @@ func_D13A() {
 
   if(var_00) {
     var_02 = "_lrg";
-  }
-  else if(var_01) {
+  } else if(var_01) {
     var_02 = "_med";
-  }
-  else {
+  } else {
     var_02 = "";
   }
 
@@ -408,8 +400,7 @@ func_D13A() {
 
   if(var_03 < 10) {
     var_04 = "0";
-  }
-  else {
+  } else {
     var_04 = "";
   }
 
@@ -531,8 +522,7 @@ func_D13E() {
 
   if(isDefined(self.func_5763) && self.func_5763) {
     var_00 = level.func_A48E.func_D3BF / 1000;
-  }
-  else {
+  } else {
     var_00 = level.func_A48E.func_D3C0 / 1000;
   }
 
@@ -646,8 +636,7 @@ func_11AB3() {
 
     if(isDefined(self.func_728F)) {
       var_06 = self.func_728F;
-    }
-    else {
+    } else {
       var_06 = min(var_07, var_06);
     }
 
@@ -707,8 +696,7 @@ func_11AB3() {
 func_A2B3(var_00) {
   if(!var_00) {
     level.func_D127.func_728F = undefined;
-  }
-  else {
+  } else {
     var_00 = clamp(var_00, 0, 1);
     level.func_D127.func_728F = 1 - var_00;
   }
@@ -782,8 +770,7 @@ func_D12F(var_00, var_01, var_02) {
 
   if(var_03 > 0.6) {
     level.player playrumbleonentity("damage_heavy");
-  }
-  else if(var_03 > 0.3) {
+  } else if(var_03 > 0.3) {
     level.player playrumbleonentity("damage_light");
   }
 
@@ -822,8 +809,7 @@ func_D14E(var_00, var_01, var_02) {
 
   if(var_03 > 0.6) {
     level.player playrumbleonentity("damage_heavy");
-  }
-  else if(var_03 > 0.3) {
+  } else if(var_03 > 0.3) {
     level.player playrumbleonentity("damage_light");
   }
 
@@ -833,8 +819,7 @@ func_D14E(var_00, var_01, var_02) {
 
   if(scripts\sp\utility::func_93A6()) {
     thread func_4D00(var_03, var_01, var_02, 2);
-  }
-  else {
+  } else {
     func_4CFF(var_03, var_01, var_02, 2);
   }
 }
@@ -903,8 +888,7 @@ func_B81C(var_00) {
 
   if(var_02 > 0.6) {
     level.player playrumbleonentity("damage_heavy");
-  }
-  else if(var_02 > 0.3) {
+  } else if(var_02 > 0.3) {
     level.player playrumbleonentity("damage_light");
   }
 

@@ -611,14 +611,11 @@ default_specialammo_onUseDeployable(boxent, track_usage, pillage, ammo_type) {
     perk = undefined;
     if(special_ammotype != "incendiary") {
       self.has_incendiary_ammo = undefined;
-    }
-    else if(special_ammotype != "stun") {
+    } else if(special_ammotype != "stun") {
       perk = "specialty_bulletdamage";
-    }
-    else if(special_ammotype != "piercing") {
+    } else if(special_ammotype != "piercing") {
       perk = "specialty_armorpiercing";
-    }
-    else if(special_ammotype != "explosive") {
+    } else if(special_ammotype != "explosive") {
       perk = "specialty_explosivebullets";
     }
 
@@ -711,17 +708,13 @@ choose_item_inside_randombox(boxent) {
   foreach(item, data in level.randombox_items) {
     if(rank == 0) {
       item_weight = data.level_0_weight;
-    }
-    else if(rank == 1) {
+    } else if(rank == 1) {
       item_weight = data.level_1_weight;
-    }
-    else if(rank == 2) {
+    } else if(rank == 2) {
       item_weight = data.level_2_weight;
-    }
-    else if(rank == 3) {
+    } else if(rank == 3) {
       item_weight = data.level_3_weight;
-    }
-    else if(rank == 4) {
+    } else if(rank == 4) {
       item_weight = data.level_4_weight;
     }
 
@@ -1104,8 +1097,7 @@ custom_juicebox_logic(juicetime, rank, isEasterEgg) {
 
   if(rank == 2 || rank == 3 || rank == 4) {
     self.drillSpeedModifier = 0.75;
-  }
-  else {
+  } else {
     self.drillSpeedModifier = 1.0;
   }
 
@@ -1150,8 +1142,7 @@ custom_unset_juicebox(death) {
     Assert(isDefined(self.juggMoveSpeedScaler));
     if(isDefined(self.juggMoveSpeedScaler)) {
       self.moveSpeedScaler = self.juggMoveSpeedScaler;
-    }
-    else {
+    } else {
       self.moveSpeedScaler = 0.7;
     }
   }
@@ -1260,8 +1251,7 @@ addFullClipToAllWeapons(ammo_scalar) {
         base_weapon = getRawBaseWeaponName(weapon);
         if(self player_has_specialized_ammo(base_weapon)) {
           continue;
-        }
-        else {
+        } else {
           clip_size = WeaponClipSize(weapon);
           if(isDefined(ammo_scalar)) {
             clip_size = int(self GetWeaponAmmoClip(weapon) + (clip_size * ammo_scalar));

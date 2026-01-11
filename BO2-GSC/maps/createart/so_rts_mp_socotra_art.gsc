@@ -19,8 +19,6 @@ intro_igc() {
   level.player depth_of_field_off(0.05);
 }
 
-success_igc() {
-}
+success_igc() {}
 
-fail_igc() {
-}
+fail_igc() {}

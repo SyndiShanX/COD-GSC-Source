@@ -39,8 +39,7 @@ func_41B2() {
   if(isDefined(self.gestureweapon) && self.gestureweapon != "none") {
     if(scripts\engine\utility::is_player_gamepad_enabled()) {
       scripts\mp\utility\game::_setactionslot(3, "");
-    }
-    else {
+    } else {
       scripts\mp\utility\game::_setactionslot(7, "");
     }
 
@@ -61,8 +60,7 @@ givegesture(var_00) {
 
         if(!isDefined(var_01) || var_01 != "mp_synaptic_ethan_body" || haschangedarchetype()) {
           var_02 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "ges_plyr_gesture050_synaptic", "ges_plyr_gesture052_synaptic");
-        }
-        else {
+        } else {
           var_02 = scripts\engine\utility::ter_op(scripts\engine\utility::cointoss(), "ges_plyr_gesture050", "ges_plyr_gesture052");
         }
       } else
@@ -105,8 +103,7 @@ givegesture(var_00) {
 
   if(scripts\engine\utility::is_player_gamepad_enabled()) {
     scripts\mp\utility\game::_setactionslot(3, "taunt");
-  }
-  else {
+  } else {
     scripts\mp\utility\game::_setactionslot(7, "taunt");
   }
 
@@ -313,8 +310,7 @@ getbodymodel() {
 
   if(level.rankedmatch) {
     var_00 = self getrankedplayerdata("rankedloadouts", "squadMembers", "body");
-  }
-  else {
+  } else {
     var_00 = self getrankedplayerdata("privateloadouts", "squadMembers", "body");
   }
 

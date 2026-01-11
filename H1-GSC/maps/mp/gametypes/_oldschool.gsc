@@ -127,8 +127,7 @@ converttoh1weaponclassname(var_0, var_1) {
         }
       }
 
-      if(var_4 == "none") {
-      }
+      if(var_4 == "none") {}
     }
   }
 
@@ -136,8 +135,7 @@ converttoh1weaponclassname(var_0, var_1) {
 
   if(weaponinventorytype(var_3) == "item") {
     return "weapon_" + var_3;
-  }
-  else {
+  } else {
     return "weapon_" + var_3 + "_a#" + var_4 + "_f#base";
   }
 }
@@ -374,8 +372,7 @@ setpickupstartammo(var_0) {
 
     if(var_4 >= var_3) {
       var_4 = var_3;
-    }
-    else {
+    } else {
       var_5 = var_3 - var_4;
     }
 

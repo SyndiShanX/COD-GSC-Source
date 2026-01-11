@@ -12,11 +12,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreak_bundles;
-
 #namespace swat_team;
 
 autoexec __init__system__() {
-  system::register(#"overwatch_helicopter", &__init__, undefined, #"killstreaks");
+  system::register(#"overwatch_helicopter", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {
@@ -31,7 +30,7 @@ function_555b0649(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 spawned(local_client_num, bundle) {
-  if(self.subarchetype === #"human_sniper") {
+  if(self.subarchetype === # "human_sniper") {
     self killstreak_bundles::spawned(local_client_num, bundle);
   }
 }

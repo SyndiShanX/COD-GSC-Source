@@ -138,8 +138,7 @@ woods_freakout_remove_set_low_ready() {
   while(!flag("menendez_scene_complete")) {
     if(self istouching(e_trigger)) {
       self setlowready(1);
-    }
-    else {
+    } else {
       self setlowready(0);
     }
 

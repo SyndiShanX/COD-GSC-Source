@@ -7,8 +7,7 @@
 #include clientscripts\createfx\haiti_fx;
 #include clientscripts\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_haiti_smk_closet_exp"] = loadfx("smoke/fx_haiti_smk_closet_exp");

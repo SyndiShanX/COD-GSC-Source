@@ -53,16 +53,14 @@ getStandWalkAnim() {
     rand = randomint(10);
     if((rand < 2) && (isDefined(self.walk_combatanim2))) {
       return self.walk_combatanim2;
-    }
-    else {
+    } else {
       return self.walk_combatanim;
     }
   } else if((isDefined(self.walk_noncombatanim)) && (!self animscripts\utility::IsInCombat())) {
     rand = randomint(10);
     if((rand < 2) && (isDefined(self.walk_noncombatanim2))) {
       return self.walk_noncombatanim2;
-    }
-    else {
+    } else {
       return self.walk_noncombatanim;
     }
   } else {

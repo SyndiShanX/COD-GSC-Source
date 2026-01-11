@@ -83,8 +83,7 @@ givesentry(var_00) {
 
   if(isDefined(var_01)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -124,8 +123,7 @@ setcarryingsentry(var_00, var_01) {
 
       if(var_02 != "force_cancel_placement") {
         thread watch_dpad();
-      }
-      else if(var_01) {
+      } else if(var_01) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
       }
 
@@ -339,8 +337,7 @@ updatesentryplacement(var_00, var_01) {
 
         if(!var_01) {
           self forceusehinton(&"COOP_CRAFTABLES_PLACE");
-        }
-        else {
+        } else {
           self forceusehinton(&"COOP_CRAFTABLES_PLACE_CANCELABLE");
         }
       } else {
@@ -513,8 +510,7 @@ sentry_heatmonitor() {
   for(;;) {
     if(self.heatlevel != var_01) {
       wait(var_00);
-    }
-    else {
+    } else {
       self.heatlevel = max(0, self.heatlevel - 0.05);
     }
 
@@ -580,8 +576,7 @@ turret_coolmonitor() {
     if(self.heatlevel > 0) {
       if(self.cooldownwaittime <= 0) {
         self.heatlevel = max(0, self.heatlevel - 0.05);
-      }
-      else {
+      } else {
         self.cooldownwaittime = max(0, self.cooldownwaittime - 0.05);
       }
     }

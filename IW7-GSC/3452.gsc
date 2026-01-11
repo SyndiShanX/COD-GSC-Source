@@ -83,8 +83,7 @@ bot_think_supers() {
     }
     if(isDefined(level.func_2D1D[self.loadoutsuper])) {
       self[[level.func_2D1D[self.loadoutsuper]]]();
-    }
-    else {}
+    } else {}
 
     self botsetflag("super_ready", 0);
     self waittill("super_finished");

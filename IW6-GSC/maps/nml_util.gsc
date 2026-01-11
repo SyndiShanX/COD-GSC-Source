@@ -266,8 +266,7 @@ ledge_trigger_logic() {
 
     if(level.player maps\_utility::player_looking_at(var_0.origin, 0, 1)) {
       common_scripts\utility::flag_set("player_on_ledge");
-    }
-    else {
+    } else {
       common_scripts\utility::flag_clear("player_on_ledge");
     }
 
@@ -588,8 +587,7 @@ stealth_range_trigger() {
 default_stealth_settings() {
   if(isDefined(level.default_stealth_override)) {
     [[level.default_stealth_override]]();
-  }
-  else {
+  } else {
     maps\_stealth_visibility_system::system_default_detect_ranges();
   }
 }
@@ -601,11 +599,9 @@ vehicle_rumble_even_if_not_moving() {
 
   if(isDefined(self.vehicle_rumble_unique)) {
     var_1 = self.vehicle_rumble_unique;
-  }
-  else if(isDefined(level.vehicle_rumble_override) && isDefined(level.vehicle_rumble_override[var_0])) {
+  } else if(isDefined(level.vehicle_rumble_override) && isDefined(level.vehicle_rumble_override[var_0])) {
     var_1 = level.vehicle_rumble_override;
-  }
-  else if(isDefined(level.vehicle_rumble[var_0])) {
+  } else if(isDefined(level.vehicle_rumble[var_0])) {
     var_1 = level.vehicle_rumble[var_0];
   }
 
@@ -626,36 +622,31 @@ vehicle_rumble_even_if_not_moving() {
 
   if(isDefined(var_1.scale)) {
     self.rumble_scale = var_1.scale;
-  }
-  else {
+  } else {
     self.rumble_scale = 0.15;
   }
 
   if(isDefined(var_1.duration)) {
     self.rumble_duration = var_1.duration;
-  }
-  else {
+  } else {
     self.rumble_duration = 4.5;
   }
 
   if(isDefined(var_1.radius)) {
     self.rumble_radius = var_1.radius;
-  }
-  else {
+  } else {
     self.rumble_radius = 600;
   }
 
   if(isDefined(var_1.basetime)) {
     self.rumble_basetime = var_1.basetime;
-  }
-  else {
+  } else {
     self.rumble_basetime = 1;
   }
 
   if(isDefined(var_1.randomaditionaltime)) {
     self.rumble_randomaditionaltime = var_1.randomaditionaltime;
-  }
-  else {
+  } else {
     self.rumble_randomaditionaltime = 1;
   }
 
@@ -682,7 +673,7 @@ vehicle_rumble_even_if_not_moving() {
 
 btr_attack_player_on_flag(var_0) {
   foreach(var_2 in self.mgturret) {
-  var_2 notify("stop_burst_fire_unmanned");
+    var_2 notify("stop_burst_fire_unmanned");
   }
 
   maps\_vehicle::mgoff();
@@ -697,7 +688,7 @@ btr_attack_player_on_flag(var_0) {
     self.favoriteenemy = level.player;
 
     foreach(var_2 in self.mgturret) {
-    var_2 thread maps\_mgturret::burst_fire_unmanned();
+      var_2 thread maps\_mgturret::burst_fire_unmanned();
     }
 
     thread maps\_vehicle::mgon();
@@ -705,7 +696,7 @@ btr_attack_player_on_flag(var_0) {
     common_scripts\utility::flag_waitopen(var_0);
 
     foreach(var_2 in self.mgturret) {
-    var_2 notify("stop_burst_fire_unmanned");
+      var_2 notify("stop_burst_fire_unmanned");
     }
 
     self notify("stop_shooting");
@@ -784,8 +775,7 @@ dyn_dogspeed_enable(var_0) {
     if(!var_1 || var_2 < var_0) {
       if(self.type == "dog") {
         self.moveplaybackrate = self.old_moveplaybackrate * 1.4;
-      }
-      else {
+      } else {
         self.moveplaybackrate = self.old_moveplaybackrate * 1.15;
       }
 
@@ -890,8 +880,7 @@ waittill_player_lookat_on_dog(var_0, var_1, var_2, var_3, var_4) {
   for(;;) {
     if(var_7) {
       var_8 = self getEye();
-    }
-    else {
+    } else {
       var_8 = self.origin;
     }
 
@@ -947,11 +936,9 @@ mission_fail_on_dog_death(var_0) {
 
     if(isDefined(var_1) && var_1 == level.player) {
       force_deathquote(&"NML_HINT_CAIRO_DEATH_PLR");
-    }
-    else if(isDefined(var_0)) {
+    } else if(isDefined(var_0)) {
       force_deathquote(var_0);
-    }
-    else {
+    } else {
       force_deathquote("");
     }
   }
@@ -1027,8 +1014,7 @@ hazmat_gets_scared() {
 
   if(hazmat_find_gun() == 0) {
     hazmat_run_away();
-  }
-  else {
+  } else {
     thread hazmat_scared_fire();
   }
 }
@@ -1285,7 +1271,7 @@ delete_hazmat_guns() {
   }
 
   foreach(var_1 in level.pickup_guns) {
-  var_1 delete();
+    var_1 delete();
   }
 
   level.pickup_guns = [];
@@ -1326,7 +1312,7 @@ hudoutline_wait_death() {
   var_0 = getcorpsearray();
 
   foreach(var_2 in var_0) {
-  var_2 hudoutlinedisable();
+    var_2 hudoutlinedisable();
   }
 }
 

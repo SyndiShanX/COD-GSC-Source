@@ -21,8 +21,7 @@ main() {
 
   if(var_1) {
     level.anim_prop_models[var_2]["rotate"] = % roofvent_rotate;
-  }
-  else {
+  } else {
     level.anim_prop_models[var_2]["rotate"] = "roofvent_rotate";
   }
 }

@@ -1202,8 +1202,7 @@ vehicle_80s_sedan1_lowres(var_0, var_1) {
 
   if(var_1 == "green") {
     var_2 = "dest";
-  }
-  else {
+  } else {
     var_2 = "_destroyed";
   }
 

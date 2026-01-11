@@ -61,5 +61,4 @@ setanims() {
   return positions;
 }
 
-set_attached_models() {
-}
+set_attached_models() {}

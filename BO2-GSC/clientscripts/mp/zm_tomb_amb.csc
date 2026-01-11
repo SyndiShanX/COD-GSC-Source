@@ -89,11 +89,9 @@ sndupdateambienttrigger(name, is_default, reverb, context, inorout) {
 
     if(is_true(level.sndweather.israin)) {
       weather = "_rain";
-    }
-    else if(is_true(level.sndweather.issnow)) {
+    } else if(is_true(level.sndweather.issnow)) {
       weather = "_snow";
-    }
-    else {
+    } else {
       weather = "_default";
     }
 
@@ -202,8 +200,7 @@ init_audio_clientfields() {
 audio_snapshot_clientfield_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     playloopat(fieldname, (0, 0, 0));
-  }
-  else {
+  } else {
     stoploopat(fieldname, (0, 0, 0));
   }
 }
@@ -211,14 +208,11 @@ audio_snapshot_clientfield_callback(localclientnum, oldval, newval, bnewent, bin
 sndchambermusic(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 3) {
     level.sndchambermusoverride = "null";
-  }
-  else if(newval == 2) {
+  } else if(newval == 2) {
     level.sndchambermusoverride = "mus_underscore_chamber_fight_2";
-  }
-  else if(newval == 1) {
+  } else if(newval == 1) {
     level.sndchambermusoverride = "mus_underscore_chamber_fight_1";
-  }
-  else {
+  } else {
     level.sndchambermusoverride = undefined;
   }
 }
@@ -248,8 +242,7 @@ sndmudslow(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwa
   if(!isspectating(localclientnum, 0)) {
     if(newval == 1) {
       self thread sndactivatemudloop();
-    }
-    else {
+    } else {
       self thread snddeactivatemudloop();
     }
   }
@@ -336,8 +329,7 @@ command_parser() {
       if(!isDefined(tokens[0]) || !isDefined(level.helisoundvalues[tokens[0]])) {
         if(isDefined(tokens[0])) {
           println("helisounds Did not recognize helicopter type:" + tokens[0]);
-        }
-        else {
+        } else {
           println("helisounds Did not recognize helicopter type");
         }
 
@@ -346,8 +338,7 @@ command_parser() {
       } else if(!isDefined(tokens[1])) {
         if(isDefined(tokens[1])) {
           println("helisounds Did not recognize helicopter part:" + tokens[0] + " for heli: " + tokens[1]);
-        }
-        else {
+        } else {
           println("helisounds Did not recognize helicopter part for heli: " + tokens[0]);
         }
 
@@ -417,8 +408,7 @@ init_heli_sounds_player_drone() {
 sound_linkto(parent, tag) {
   if(isDefined(tag)) {
     self linkto(parent, tag);
-  }
-  else {
+  } else {
     self linkto(parent, "tag_body");
   }
 }
@@ -847,11 +837,9 @@ sndchargeshot(localclientnum, weaponname, chargeshotlevel) {
 
     if(weaponname == "staff_water_upgraded_zm") {
       alias = "wpn_waterstaff_charge_";
-    }
-    else if(weaponname == "staff_lightning_upgraded_zm") {
+    } else if(weaponname == "staff_lightning_upgraded_zm") {
       alias = "wpn_lightningstaff_charge_";
-    }
-    else if(weaponname == "staff_air_upgraded_zm") {
+    } else if(weaponname == "staff_air_upgraded_zm") {
       alias = "wpn_airstaff_charge_";
     }
 
@@ -874,7 +862,7 @@ sndtombbgsetup() {
   trigs = getEntArray(0, "sndBG", "targetname");
 
   foreach(trig in trigs) {
-  trig thread sndtombbgtriggers(0);
+    trig thread sndtombbgtriggers(0);
   }
 
   player = getlocalplayers()[0];
@@ -908,8 +896,7 @@ sndtombbgtriggers(localclientnum) {
     if(isDefined(who) && who islocalplayer()) {
       if(isDefined(level.sndchambermusoverride) && self.script_sound == "mus_underscore_chamber") {
         who.sndbgalias = level.sndchambermusoverride;
-      }
-      else {
+      } else {
         who.sndbgalias = self.script_sound;
       }
 

@@ -195,8 +195,7 @@ makeminspec() {
     if(!isDefined(var_0[var_1].script_minspec_level)) {
       if(isDefined(var_0[var_1].baseaccuracy)) {
         var_0[var_1].baseaccuracy = var_0[var_1].baseaccuracy * 1.3;
-      }
-      else {
+      } else {
         var_0[var_1].baseaccuracy = 1.2;
       }
 
@@ -238,7 +237,7 @@ bog_dialog() {
 
   if(isDefined(level.alleyfriends)) {
     foreach(var_4 in level.alleyfriends) {
-    common_scripts\utility::array_add(var_0, var_4);
+      common_scripts\utility::array_add(var_0, var_4);
     }
   }
 
@@ -406,8 +405,7 @@ spawn_starting_friendlies(var_0) {
   for(var_2 = 0; var_2 < var_1.size; var_2++) {
     var_3 = var_1[var_2] stalingradspawn();
 
-    if(maps\_utility::spawn_failed(var_3)) {
-    }
+    if(maps\_utility::spawn_failed(var_3)) {}
 
     var_3.goalradius = 32;
 
@@ -643,8 +641,7 @@ playradiosound(var_0) {
 
     var_1 = playaliasoverradio(level.radioforcedtransmissionqueue[0]);
 
-    if(!level.radio_in_use && !var_1) {
-    }
+    if(!level.radio_in_use && !var_1) {}
   }
 
   level.radioforcedtransmissionqueue = maps\_utility::array_remove_index(level.radioforcedtransmissionqueue, 0);
@@ -761,8 +758,7 @@ shoot_exploder(var_0) {
 
   if(getdvarint("use_old_exploderdelay")) {
     wait 0.2;
-  }
-  else {
+  } else {
     shoot_exploder_wait(var_0);
   }
 
@@ -772,8 +768,7 @@ shoot_exploder(var_0) {
   if(isDefined(var_0.explodedfunction)) {
     if(isDefined(var_0.parm1)) {
       level thread[[var_0.explodedfunction]](var_0.parm1);
-    }
-    else {
+    } else {
       level thread[[var_0.explodedfunction]]();
     }
   }
@@ -1325,8 +1320,7 @@ lastsequence() {
 
   if(getdvarint("use_old_t72battle")) {
     thread t72_in_final_position_preh1();
-  }
-  else {
+  } else {
     thread t72_in_final_position();
   }
 
@@ -1353,8 +1347,7 @@ lastsequence() {
 
   if(getdvarint("use_old_celebration") == 1) {
     thread finalgenericdialog();
-  }
-  else {
+  } else {
     thread finalgenericdialog_h1();
   }
 
@@ -1513,8 +1506,7 @@ abrams_aimat_t72() {
 
   if(getdvarint("use_old_t72battle")) {
     level.abrams common_scripts\utility::waittill_notify_or_timeout("turret_rotate_stopped", 3.0);
-  }
-  else {
+  } else {
     wait 0.25;
   }
 
@@ -1712,8 +1704,7 @@ price_react_and_loop() {
 
   if(getdvarint("use_old_celebration") == 1) {
     maps\_anim::anim_single_solo(self, "react");
-  }
-  else {
+  } else {
     maps\_anim::anim_single_solo(self, "new_react");
   }
 
@@ -1725,8 +1716,7 @@ advancealleyfriendliestoend(var_0, var_1, var_2) {
 
   if(var_0 != level.price) {
     var_3 = var_0;
-  }
-  else if(var_1 != level.price) {
+  } else if(var_1 != level.price) {
     var_3 = var_1;
   }
 
@@ -1734,11 +1724,9 @@ advancealleyfriendliestoend(var_0, var_1, var_2) {
 
   if(var_0 != level.price && var_0 != var_3) {
     var_4 = var_0;
-  }
-  else if(var_1 != level.price && var_1 != var_3) {
+  } else if(var_1 != level.price && var_1 != var_3) {
     var_4 = var_1;
-  }
-  else if(isDefined(var_2) && var_2 != level.price && var_2 != var_3) {
+  } else if(isDefined(var_2) && var_2 != level.price && var_2 != var_3) {
     var_4 = var_2;
   }
 
@@ -1773,8 +1761,7 @@ advancealleyfriendliestoend(var_0, var_1, var_2) {
 
   if(isDefined(var_4)) {
     vasquez_wait_on_other_marine(var_4);
-  }
-  else {
+  } else {
     wait 4.0;
   }
 
@@ -2282,8 +2269,7 @@ get_traverse_node_start(var_0) {
 
   if(var_0[0].type == "Begin") {
     var_1 = var_0[0];
-  }
-  else {
+  } else {
     var_1 = var_0[1];
   }
 
@@ -2346,8 +2332,7 @@ enemy_retreat_think(var_0) {
   if(isDefined(self.script_noteworthy) && issubstr(self.script_noteworthy, "introchopper")) {
     if(issubstr(self.script_noteworthy, "introchopper1")) {
       maps\_utility::set_force_color("p");
-    }
-    else {
+    } else {
       maps\_utility::set_force_color("c");
     }
 
@@ -2379,8 +2364,7 @@ ignored_by_tank_cannon(var_0) {
 
   if(var_0) {
     self.ignored_by_tank_cannon = 1;
-  }
-  else {
+  } else {
     self.ignored_by_tank_cannon = undefined;
   }
 }
@@ -2394,7 +2378,7 @@ rotate_fans() {
   var_0 = getEntArray("rotate", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread rotate_fan();
+    var_2 thread rotate_fan();
   }
 }
 

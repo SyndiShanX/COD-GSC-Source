@@ -214,15 +214,13 @@ registerTweakable(category, name, dvar, value) {
   if(isString(value)) {
     if(getDvar(dvar) == "") {
       setDvar(dvar, value);
-    }
-    else {
+    } else {
       value = getDvar(dvar);
     }
   } else {
     if(getDvar(dvar) == "") {
       setDvar(dvar, value);
-    }
-    else {
+    } else {
       value = getDvarInt(dvar);
     }
   }

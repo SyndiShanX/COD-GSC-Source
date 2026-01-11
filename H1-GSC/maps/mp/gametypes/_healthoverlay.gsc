@@ -57,17 +57,13 @@ playerhealthregen() {
 
     if(!isDefined(self.healthregenlevel)) {
       self.regenspeed = 1;
-    }
-    else if(self.healthregenlevel == 0.33) {
+    } else if(self.healthregenlevel == 0.33) {
       self.regenspeed = 0.75;
-    }
-    else if(self.healthregenlevel == 0.66) {
+    } else if(self.healthregenlevel == 0.66) {
       self.regenspeed = 0.5;
-    }
-    else if(self.healthregenlevel == 0.99) {
+    } else if(self.healthregenlevel == 0.99) {
       self.regenspeed = 0.3;
-    }
-    else {
+    } else {
       self.regenspeed = 1;
     }
 
@@ -116,8 +112,7 @@ breathingmanager(var_0, var_1, var_2, var_3) {
   if(!level.gameended && isDefined(self.atbrinkofdeath) && self.atbrinkofdeath == 1) {
     if(self hasfemalecustomizationmodel()) {
       self playlocalsound("deaths_door_exit_female");
-    }
-    else {
+    } else {
       self playlocalsound("deaths_door_exit");
     }
 
@@ -128,8 +123,7 @@ breathingmanager(var_0, var_1, var_2, var_3) {
 playdamagesound(var_0) {
   if(isDefined(level.customplaydamagesound)) {
     self thread[[level.customplaydamagesound]](var_0);
-  }
-  else {
+  } else {
     if(isDefined(self.damage_sound_time) && self.damage_sound_time + 5000 > var_0) {
       return;
     }
@@ -139,8 +133,7 @@ playdamagesound(var_0) {
     if(self.team == "axis") {
       if(self hasfemalecustomizationmodel()) {
         self playSound("generic_pain_enemy_fm_" + var_1);
-      }
-      else {
+      } else {
         self playSound("generic_pain_enemy_" + var_1);
       }
     } else {
@@ -173,15 +166,13 @@ healthregeneration(var_0, var_1) {
 
   if(self.ignoreregendelay == 0) {
     wait(level.playerhealth_regularregendelay / 1000 * self.regenspeed);
-  }
-  else {
+  } else {
     self.ignoreregendelay = 0;
   }
 
   if(var_1 < 0.55) {
     var_2 = 1;
-  }
-  else {
+  } else {
     var_2 = 0;
   }
 
@@ -198,8 +189,7 @@ healthregeneration(var_0, var_1) {
 
       if(self.health < self.maxhealth) {
         self.health = self.health + 5;
-      }
-      else {
+      } else {
         break;
       }
     } else if(self.regenspeed == 0.5) {
@@ -207,8 +197,7 @@ healthregeneration(var_0, var_1) {
 
       if(self.health < self.maxhealth) {
         self.health = self.health + 2;
-      }
-      else {
+      } else {
         break;
       }
     } else if(self.regenspeed == 0.3) {
@@ -216,8 +205,7 @@ healthregeneration(var_0, var_1) {
 
       if(self.health < self.maxhealth) {
         self.health = self.health + 40;
-      }
-      else {
+      } else {
         break;
       }
     } else if(!isDefined(self.regenspeed) || self.regenspeed == 1) {
@@ -293,8 +281,7 @@ playerpainbreathingsound() {
     }
     if(self hasfemalecustomizationmodel()) {
       self playlocalsound("deaths_door_mp_female");
-    }
-    else {
+    } else {
       self playlocalsound("deaths_door_mp_male");
     }
 

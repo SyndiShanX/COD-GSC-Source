@@ -9,8 +9,7 @@ init() {
   level.splitscreen = isSplitScreen();
   if(level.splitScreen) {
     precacheString(&"GAME_ENDED_GAME");
-  }
-  else {
+  } else {
     precacheString(&"GAME_HOST_ENDED_GAME");
   }
   if(!isDefined(game["state"])) {
@@ -31,8 +30,7 @@ forceEnd() {
   level.hostForcedEnd = true;
   if(level.splitscreen) {
     endString = "";
-  }
-  else {
+  } else {
     endString = &"GAME_HOST_ENDED_GAME";
   }
   makeDvarServerInfo("ui_text_endreason", endString);

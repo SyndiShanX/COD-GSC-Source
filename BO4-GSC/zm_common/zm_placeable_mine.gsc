@@ -18,7 +18,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_placeable_mine;
 
 autoexec __init__system__() {
@@ -232,10 +231,10 @@ private pickup_placeable_mine_trigger_listener(trigger, player) {
 }
 
 private pickup_placeable_mine_trigger_listener_enable(trigger, player) {
-  self endon(#"delete", #"death");
+  self endon(#"delete", # "death");
 
   while(true) {
-    player waittill("zmb_enable_" + self.weapon.name + "_prompt", #"spawned_player");
+    player waittill("zmb_enable_" + self.weapon.name + "_prompt", # "spawned_player");
 
     if(!isDefined(trigger)) {
       return;
@@ -247,7 +246,7 @@ private pickup_placeable_mine_trigger_listener_enable(trigger, player) {
 }
 
 private pickup_placeable_mine_trigger_listener_disable(trigger, player) {
-  self endon(#"delete", #"death");
+  self endon(#"delete", # "death");
 
   while(true) {
     player waittill("zmb_disable_" + self.weapon.name + "_prompt");
@@ -285,7 +284,7 @@ private placeable_mine_damage() {
       continue;
     }
 
-    if(isDefined(waitresult.attacker.pers) && isDefined(waitresult.attacker.pers[#"team"]) && waitresult.attacker.pers[#"team"] != level.zombie_team) {
+    if(isDefined(waitresult.attacker.pers) && isDefined(waitresult.attacker.pers[# "team"]) && waitresult.attacker.pers[# "team"] != level.zombie_team) {
       continue;
     }
 

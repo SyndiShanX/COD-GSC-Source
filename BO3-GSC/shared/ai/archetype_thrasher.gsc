@@ -238,9 +238,7 @@ function private thrashertargetservice(entity) {
   entity.favoriteenemy = player;
   if(!isDefined(player) || player isnotarget()) {
     if(isDefined(entity.ignore_player)) {
-      if(isDefined(level._should_skip_ignore_player_logic) && [
-          [level._should_skip_ignore_player_logic]
-        ]()) {
+      if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
         return;
       }
       entity.ignore_player = [];

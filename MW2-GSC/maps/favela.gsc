@@ -65,7 +65,7 @@ main() {
   level.physics_drop_models[7] = "trash_can3";
   level.physics_drop_models[8] = "trash_can4";
   foreach(model in level.physics_drop_models) {
-  precacheModel(model);
+    precacheModel(model);
   }
 
   precacheString(&"FAVELA_OBJ_CATCH_RUNNER");

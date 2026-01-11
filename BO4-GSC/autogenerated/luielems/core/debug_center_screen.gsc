@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace debug_center_screen;
 
 class cdebug_center_screen: cluielem {

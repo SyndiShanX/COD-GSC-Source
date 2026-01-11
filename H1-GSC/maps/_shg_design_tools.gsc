@@ -31,8 +31,7 @@ identify_and_play_anim(var_0, var_1) {
   if(isanimloop(var_0)) {
     if(isalive(self) && self._id_5680 == "generic") {
       var_1 maps\_anim::anim_generic_loop(self, var_0, "stop_loop");
-    }
-    else if(isalive(self)) {
+    } else if(isalive(self)) {
       var_1 maps\_anim::anim_loop_solo(self, var_0, "stop_loop");
     }
   } else if(isalive(self) && isDefined(self.animname) && self.animname != "generic")
@@ -47,8 +46,7 @@ identify_and_play_anim(var_0, var_1) {
 isanimloop(var_0) {
   if(isanimloop_animname(var_0, "generic")) {
     return 1;
-  }
-  else if(isDefined(self.animname) && isanimloop_animname(var_0, self.animname)) {
+  } else if(isDefined(self.animname) && isanimloop_animname(var_0, self.animname)) {
     return 1;
   }
 
@@ -266,8 +264,7 @@ create_pulsing_text(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(var_3)) {
     var_7 = get_pulsing_hud(-60, undefined, var_3, 1, var_4, var_5);
-  }
-  else {
+  } else {
     var_7 = get_pulsing_hud(-60, undefined, undefined, 1, var_4, var_5);
   }
 
@@ -285,11 +282,9 @@ get_pulsing_hud(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(!level.console) {
     var_6 = -250;
-  }
-  else if(!isDefined(var_0)) {
+  } else if(!isDefined(var_0)) {
     var_6 = -225;
-  }
-  else {
+  } else {
     var_6 = var_0;
   }
 
@@ -299,15 +294,13 @@ get_pulsing_hud(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(!isDefined(var_1)) {
     var_7 = 100;
-  }
-  else {
+  } else {
     var_7 = var_1;
   }
 
   if(isDefined(var_2)) {
     var_8 = newclienthudelem(var_2);
-  }
-  else {
+  } else {
     var_8 = newhudelem();
   }
 
@@ -466,8 +459,7 @@ getlerpfraction(var_0, var_1, var_2, var_3) {
 
   if(var_5 > 0) {
     return var_5;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -544,8 +536,7 @@ actual_spawn(var_0) {
 spawn_enemy_group(var_0, var_1, var_2) {
   if(isarray(var_1)) {
     var_3 = var_1;
-  }
-  else {
+  } else {
     var_3[0] = var_1;
   }
 

@@ -38,8 +38,7 @@ mergeSort(current_list) {
   right = mergeSort(right);
   if(left[left.size - 1].script_int > right[right.size - 1].script_int) {
     result = merge(left, right);
-  }
-  else {
+  } else {
     result = append(left, right);
   }
   return result;
@@ -102,8 +101,7 @@ monitorCurtain(curtorg) {
       clip NotSolid();
       if(isDefined(clip.target)) {
         clip = getEnt(clip.target, "targetname");
-      }
-      else {
+      } else {
         clip = undefined;
       }
     }

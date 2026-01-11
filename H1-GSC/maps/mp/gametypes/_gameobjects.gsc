@@ -9,8 +9,7 @@ main(var_0) {
 
   if(maps\mp\_utility::isaugmentedgamemode()) {
     var_0[var_0.size] = "boost_add";
-  }
-  else {
+  } else {
     var_0[var_0.size] = "boost_remove";
   }
 
@@ -48,7 +47,7 @@ main(var_0) {
 
   if(isDefined(var_7)) {
     foreach(var_9 in var_7) {
-    var_9 delete();
+      var_9 delete();
     }
   }
 }
@@ -122,8 +121,7 @@ createcarryobject(var_0, var_1, var_2, var_3) {
 
   if(issubstr(var_1.classname, "use")) {
     var_4.triggertype = "use";
-  }
-  else {
+  } else {
     var_4.triggertype = "proximity";
   }
 
@@ -180,8 +178,7 @@ createcarryobject(var_0, var_1, var_2, var_3) {
 
   if(var_4.triggertype == "use") {
     var_4 thread carryobjectusethink();
-  }
-  else {
+  } else {
     var_4.curprogress = 0;
     var_4.usetime = 0;
     var_4.userate = 0;
@@ -232,7 +229,7 @@ deletecarryobject() {
   var_0.offset3d = undefined;
 
   foreach(var_2 in var_0.visuals) {
-  var_2 delete();
+    var_2 delete();
   }
 
   var_0.visuals = undefined;
@@ -524,8 +521,7 @@ giveobject(var_0) {
 
     if(isDefined(var_0.manualdropthink)) {
       self thread[[var_0.manualdropthink]]();
-    }
-    else {
+    } else {
       thread manualdropthink();
     }
   }
@@ -879,8 +875,7 @@ createuseobject(var_0, var_1, var_2, var_3, var_4) {
 
   if(issubstr(var_1.classname, "use")) {
     var_5.triggertype = "use";
-  }
-  else {
+  } else {
     var_5.triggertype = "proximity";
   }
 
@@ -1003,7 +998,7 @@ move_use_object(var_0, var_1) {
   if(isDefined(self.goal)) {
     if(isDefined(self.goal.score_fx)) {
       foreach(var_6 in self.goal.score_fx) {
-      var_6.origin = var_0;
+        var_6.origin = var_0;
       }
     }
 
@@ -1014,7 +1009,7 @@ move_use_object(var_0, var_1) {
 
   if(isDefined(self.objpoints)) {
     foreach(var_9 in self.objpoints) {
-    var_9 maps\mp\gametypes\_objpoints::updateorigin(var_0 + var_1);
+      var_9 maps\mp\gametypes\_objpoints::updateorigin(var_0 + var_1);
     }
   }
 
@@ -1169,8 +1164,7 @@ getearliestclaimplayer() {
 
   if(maps\mp\_utility::isreallyalive(self.claimplayer)) {
     var_1 = self.claimplayer;
-  }
-  else {
+  } else {
     var_1 = undefined;
   }
 
@@ -1377,8 +1371,7 @@ proxtriggerlos(var_0, var_1) {
   var_3 = undefined;
 
   if(isDefined(var_1) && var_1.size) {
-    if(var_1.size > 1) {
-    }
+    if(var_1.size > 1) {}
 
     var_3 = var_1[0];
   }
@@ -1411,8 +1404,7 @@ setclaimteam(var_0) {
   } else {
     if(self.claimteam == "none" && gettime() - self.lastclaimtime > 1000) {
       self.curprogress = 0;
-    }
-    else if(var_0 != "none" && var_0 != self.lastclaimteam) {
+    } else if(var_0 != "none" && var_0 != self.lastclaimteam) {
       self.curprogress = 0;
     }
 
@@ -1539,8 +1531,7 @@ updateproxbar(var_0, var_1) {
 
     if(isDefined(var_0.teamusetexts[var_3])) {
       self.proxbartext settext(var_0.teamusetexts[var_3]);
-    }
-    else {
+    } else {
       self.proxbartext settext(var_0.usetext);
     }
   }
@@ -1551,8 +1542,7 @@ updateproxbar(var_0, var_1) {
 
     if(isDefined(var_0.teamusetexts[var_3])) {
       self.proxbartext settext(var_0.teamusetexts[var_3]);
-    }
-    else {
+    } else {
       self.proxbartext settext(var_0.usetext);
     }
   }
@@ -1634,15 +1624,12 @@ updateuiprogress(var_0, var_1) {
 
     if(!var_1) {
       self setclientomnvar("ui_capture_icon", 0);
-    }
-    else if(!var_4) {
+    } else if(!var_4) {
       if(var_2 == "dom") {
         self setclientomnvar("ui_capture_icon", 1);
-      }
-      else if(var_0.ownerteam == "neutral" || maps\mp\_utility::is_true(level.captureinsteadofdestroy)) {
+      } else if(var_0.ownerteam == "neutral" || maps\mp\_utility::is_true(level.captureinsteadofdestroy)) {
         self setclientomnvar("ui_capture_icon", 2);
-      }
-      else {
+      } else {
         self setclientomnvar("ui_capture_icon", 3);
       }
     } else
@@ -1652,11 +1639,9 @@ updateuiprogress(var_0, var_1) {
   if((var_2 == "sd" || var_2 == "sr" || var_2 == "sab" || var_2 == "dd") && isDefined(var_3) && (var_3 == "bombZone" || var_3 == "defuseObject")) {
     if(!var_1) {
       self setclientomnvar("ui_capture_icon", 0);
-    }
-    else if(var_0 isfriendlyteam(self.pers["team"])) {
+    } else if(var_0 isfriendlyteam(self.pers["team"])) {
       self setclientomnvar("ui_capture_icon", 6);
-    }
-    else {
+    } else {
       self setclientomnvar("ui_capture_icon", 5);
     }
   }
@@ -1665,8 +1650,7 @@ updateuiprogress(var_0, var_1) {
 updateuserate() {
   if(isDefined(self.onupdateuserate)) {
     self[[self.onupdateuserate]]();
-  }
-  else {
+  } else {
     updateuserate_internal();
   }
 }
@@ -1715,8 +1699,7 @@ updateuserate_internal() {
 
   if(isDefined(self.isarena) && self.isarena && var_2 != 0) {
     self.userate = 1 * var_2;
-  }
-  else if(isDefined(self.isarena) && self.isarena) {
+  } else if(isDefined(self.isarena) && self.isarena) {
     self.userate = 1;
   }
 
@@ -1739,8 +1722,7 @@ useholdthink(var_0) {
 
   if(isplayer(var_0)) {
     var_0 playerlinkto(self.trigger);
-  }
-  else {
+  } else {
     var_0 linkto(self.trigger);
   }
 
@@ -1796,8 +1778,7 @@ useholdthink(var_0) {
     if(isDefined(var_1)) {
       if(var_2 != "none") {
         var_0 maps\mp\_utility::switch_to_last_weapon(var_2);
-      }
-      else {
+      } else {
         var_0 takeweapon(var_1);
       }
     } else
@@ -1900,8 +1881,7 @@ useholdthinkloop(var_0, var_1) {
 
         if(var_1 != "none") {
           var_0 maps\mp\_utility::switch_to_last_weapon(var_1);
-        }
-        else {
+        } else {
           var_0 takeweapon(var_2);
         }
       } else
@@ -1991,8 +1971,7 @@ updatetrigger() {
   }
   if(self.interactteam == "none") {
     self.trigger.origin = self.trigger.origin - (0, 0, 50000);
-  }
-  else if(self.interactteam == "any") {
+  } else if(self.interactteam == "any") {
     self.trigger.origin = self.curorigin;
     self.trigger setteamfortrigger("none");
   } else if(self.interactteam == "friendly") {
@@ -2000,11 +1979,9 @@ updatetrigger() {
 
     if(self.ownerteam == "allies") {
       self.trigger setteamfortrigger("allies");
-    }
-    else if(self.ownerteam == "axis") {
+    } else if(self.ownerteam == "axis") {
       self.trigger setteamfortrigger("axis");
-    }
-    else {
+    } else {
       self.trigger.origin = self.trigger.origin - (0, 0, 50000);
     }
   } else if(self.interactteam == "enemy") {
@@ -2012,11 +1989,9 @@ updatetrigger() {
 
     if(self.ownerteam == "allies") {
       self.trigger setteamfortrigger("axis");
-    }
-    else if(self.ownerteam == "axis") {
+    } else if(self.ownerteam == "axis") {
       self.trigger setteamfortrigger("allies");
-    }
-    else {
+    } else {
       self.trigger setteamfortrigger("none");
     }
   }
@@ -2065,19 +2040,16 @@ updateworldicon(var_0, var_1) {
 
       if(isDefined(self.compassicons[var_0])) {
         var_5 setwaypoint(1, 1);
-      }
-      else {
+      } else {
         var_5 setwaypoint(1, 0);
       }
 
       if(self.type == "carryObject") {
         if(isDefined(self.carrier) && !shouldpingobject(var_0)) {
           var_5 settargetent(self.carrier);
-        }
-        else if(!isDefined(self.carrier) && isDefined(self.objectiveonvisuals) && self.objectiveonvisuals) {
+        } else if(!isDefined(self.carrier) && isDefined(self.objectiveonvisuals) && self.objectiveonvisuals) {
           var_5 settargetent(self.visuals[0]);
-        }
-        else {
+        } else {
           var_5 cleartargetent();
         }
       }
@@ -2173,8 +2145,7 @@ updatecompassicon(var_0, var_1) {
 shouldpingobject(var_0) {
   if(var_0 == "friendly" && self.objidpingfriendly) {
     return 1;
-  }
-  else if(var_0 == "enemy" && self.objidpingenemy) {
+  } else if(var_0 == "enemy" && self.objidpingenemy) {
     return 1;
   }
 
@@ -2383,8 +2354,7 @@ enableobject() {
 getrelativeteam(var_0) {
   if(var_0 == self.ownerteam) {
     return "friendly";
-  }
-  else {
+  } else {
     return "enemy";
   }
 }
@@ -2416,15 +2386,13 @@ caninteractwith(var_0, var_1) {
     case "friendly":
       if(var_0 == self.ownerteam) {
         return 1;
-      }
-      else {
+      } else {
         return 0;
       }
     case "enemy":
       if(var_0 != self.ownerteam) {
         return 1;
-      }
-      else {
+      } else {
         return 0;
       }
     default:
@@ -2487,11 +2455,9 @@ getenemyteam(var_0) {
 
   if(var_0 == "neutral") {
     return "none";
-  }
-  else if(var_0 == "allies") {
+  } else if(var_0 == "allies") {
     return "axis";
-  }
-  else {
+  } else {
     return "allies";
   }
 }
@@ -2506,8 +2472,7 @@ getnextobjid() {
   }
 
   if(var_0 > 35) {
-    if(isDefined(level.ishorde) && level.ishorde) {
-    }
+    if(isDefined(level.ishorde) && level.ishorde) {}
 
     var_0 = 35;
   }

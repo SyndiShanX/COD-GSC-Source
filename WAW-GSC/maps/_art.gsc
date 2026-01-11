@@ -180,8 +180,7 @@ tweakart() {
     dump = dumpsettings();
     if(!getdvarint("scr_fog_disable")) {
       setVolFog(level.fognearplane, level.fogexphalfplane, level.fogexphalfheight, level.fogbaseheight, level.fogred, level.foggreen, level.fogblue, 0);
-    }
-    else {
+    } else {
       setExpFog(100000000000, 100000000001, 0, 0, 0, 0);
     }
     players[0] setDefaultDepthOfField();
@@ -249,19 +248,61 @@ dumpsettings() {
             artfxprintln(file, ""); artfxprintln(file, "\tlevel.dofDefault[\"nearStart\"] = " + getdvarint("scr_dof_nearStart") + ";"); artfxprintln(file, "\tlevel.dofDefault[\"nearEnd\"] = " + getdvarint("scr_dof_nearEnd") + ";"); artfxprintln(file, "\tlevel.dofDefault[\"farStart\"] = " + getdvarint("scr_dof_farStart") + ";"); artfxprintln(file, "\tlevel.dofDefault[\"farEnd\"] = " + getdvarint("scr_dof_farEnd") + ";"); artfxprintln(file, "\tlevel.dofDefault[\"nearBlur\"] = " + getdvarfloat("scr_dof_nearBlur") + ";"); artfxprintln(file, "\tlevel.dofDefault[\"farBlur\"] = " + getdvarfloat("scr_dof_farBlur") + ";"); artfxprintln(file, ""); artfxprintln(file, "\tplayers = maps\\_utility::get_players();"); artfxprintln(file, "\tfor( i = 0; i < players.size; i++ )"); artfxprintln(file, "\t{"); artfxprintln(file, "\t\tplayers[i] maps\\_art::setdefaultdepthoffield();"); artfxprintln(file, "\t}"); artfxprintln(file, "");
             if(getdvar("r_glowUseTweaks") == "0") {
               getvar = "visionstore";
-            }
-            else {
+            } else {
               getvar = "r";
             }
             if(getdvar("visionstore_glowTweakEnable") == "") {
-              getvar = "r"; artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakEnable\"" + ", " + "\"" + getdvar(getvar + "_glowTweakEnable") + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakRadius0\"" + ", " + "\"" + getdvar(getvar + "_glowTweakRadius0") + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakRadius1\"" + ", " + "\"" + getdvar(getvar + "_glowTweakRadius1") + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakBloomCutoff\"" + ", " + "\"" + getdvar(getvar + "_glowTweakBloomCutoff") + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakBloomDesaturation\"" + ", " + "\"" + getdvar(getvar + "_glowTweakBloomDesaturation") + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakBloomIntensity0\"" + ", " + "\"" + getdvar(getvar + "_glowTweakBloomIntensity0") + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakBloomIntensity1\"" + ", " + "\"" + getdvar(getvar + "_glowTweakBloomIntensity1") + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakSkyBleedIntensity0\"" + ", " + "\"" + getdvar(getvar + "_glowTweakSkyBleedIntensity0") + "\"" + ");"); artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakSkyBleedIntensity1\"" + ", " + "\"" + getdvar(getvar + "_glowTweakSkyBleedIntensity1") + "\"" + ");"); artfxprintln(file, ""); artfxprintln(file, "\t
-            }
-              artfxprintln(file, ""); artfxprintln(file, "\tsetdvar( \"scr_fog_disable\"" + ", " + "\"" + getdvarint("scr_fog_disable") + "\"" + " );"); artfxprintln(file, "");
+              getvar = "r";
+              artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakEnable\"" + ", " + "\"" + getdvar(getvar + "_glowTweakEnable") + "\"" + ");");
+              artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakRadius0\"" + ", " + "\"" + getdvar(getvar + "_glowTweakRadius0") + "\"" + ");");
+              artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakRadius1\"" + ", " + "\"" + getdvar(getvar + "_glowTweakRadius1") + "\"" + ");");
+              artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakBloomCutoff\"" + ", " + "\"" + getdvar(getvar + "_glowTweakBloomCutoff") + "\"" + ");");
+              artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakBloomDesaturation\"" + ", " + "\"" + getdvar(getvar + "_glowTweakBloomDesaturation") + "\"" + ");");
+              artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakBloomIntensity0\"" + ", " + "\"" + getdvar(getvar + "_glowTweakBloomIntensity0") + "\"" + ");");
+              artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakBloomIntensity1\"" + ", " + "\"" + getdvar(getvar + "_glowTweakBloomIntensity1") + "\"" + ");");
+              artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakSkyBleedIntensity0\"" + ", " + "\"" + getdvar(getvar + "_glowTweakSkyBleedIntensity0") + "\"" + ");");
+              artfxprintln(file, "\tsetdvar(\"visionstore_glowTweakSkyBleedIntensity1\"" + ", " + "\"" + getdvar(getvar + "_glowTweakSkyBleedIntensity1") + "\"" + ");");
+              artfxprintln(file, "");
+              artfxprintln(file, "\t
+              }
+              artfxprintln(file, "");
+              artfxprintln(file, "\tsetdvar( \"scr_fog_disable\"" + ", " + "\"" + getdvarint("scr_fog_disable") + "\"" + " );");
+              artfxprintln(file, "");
               if(!getdvarint("scr_fog_disable")) {
-                artfxprintln(file, "\tsetVolFog(" + level.fognearplane + ", " + level.fogexphalfplane + ", " + level.fogexphalfheight + ", " + level.fogbaseheight + ", " + level.fogred + ", " + level.foggreen + ", " + level.fogblue + ", 0);"); artfxprintln(file, "\tmaps\\_utility::set_vision_set( \"" + level.script + "\", 0 );"); artfxprintln(file, ""); artfxprintln(file, "}"); saved = closefile(file); assertex((saved == 1), "File not saved (see above message?): " + filename);
+                artfxprintln(file, "\tsetVolFog(" + level.fognearplane + ", " + level.fogexphalfplane + ", " + level.fogexphalfheight + ", " + level.fogbaseheight + ", " + level.fogred + ", " + level.foggreen + ", " + level.fogblue + ", 0);");
+                artfxprintln(file, "\tmaps\\_utility::set_vision_set( \"" + level.script + "\", 0 );");
+                artfxprintln(file, "");
+                artfxprintln(file, "}");
+                saved = closefile(file);
+                assertex((saved == 1), "File not saved (see above message?): " + filename);
               }
               if(!saved) {
-                dump = false; visionFilename = "vision/" + getdvar("scr_art_visionfile") + ".vision"; file = openfile(visionFilename, "write"); assertex((file != -1), "File not writeable (may need checked out of P4): " + filename); artfxprintln(file, "r_glow\"" + getdvar("r_glowTweakEnable") + "\""); artfxprintln(file, "r_glowRadius0 \"" + getdvar("r_glowTweakRadius0") + "\""); artfxprintln(file, "r_glowRadius1 \"" + getdvar("r_glowTweakRadius1") + "\""); artfxprintln(file, "r_glowBloomCutoff \"" + getdvar("r_glowTweakBloomCutoff") + "\""); artfxprintln(file, "r_glowBloomDesaturation \"" + getdvar("r_glowTweakBloomDesaturation") + "\""); artfxprintln(file, "r_glowBloomIntensity0 \"" + getdvar("r_glowTweakBloomIntensity0") + "\""); artfxprintln(file, "r_glowBloomIntensity1 \"" + getdvar("r_glowTweakBloomIntensity1") + "\""); artfxprintln(file, "r_glowSkyBleedIntensity0\"" + getdvar("r_glowTweakSkyBleedIntensity0") + "\""); artfxprintln(file, "r_glowSkyBleedIntensity1\"" + getdvar("r_glowTweakSkyBleedIntensity1") + "\""); artfxprintln(file, " "); artfxprintln(file, "r_filmEnable\"" + getdvar("r_filmTweakEnable") + "\""); artfxprintln(file, "r_filmContrast\"" + getdvar("r_filmTweakContrast") + "\""); artfxprintln(file, "r_filmBrightness\"" + getdvar("r_filmTweakBrightness") + "\""); artfxprintln(file, "r_filmDesaturation\"" + getdvar("r_filmTweakDesaturation") + "\""); artfxprintln(file, "r_filmInvert\"" + getdvar("r_filmTweakInvert") + "\""); artfxprintln(file, "r_filmLightTint \"" + getdvar("r_filmTweakLightTint") + "\""); artfxprintln(file, "r_filmDarkTint\"" + getdvar("r_filmTweakDarkTint") + "\""); saved = closefile(file); assertex((saved == 1), "File not saved (see above message?): " + visionFilename); setVolFog(level.fognearplane, level.fogexphalfplane, level.fogexphalfheight, level.fogbaseheight, level.fogred, level.foggreen, level.fogblue, 0); players = get_players(); players[0] setDefaultDepthOfField();
+                dump = false;
+                visionFilename = "vision/" + getdvar("scr_art_visionfile") + ".vision";
+                file = openfile(visionFilename, "write");
+                assertex((file != -1), "File not writeable (may need checked out of P4): " + filename);
+                artfxprintln(file, "r_glow\"" + getdvar("r_glowTweakEnable") + "\"");
+                artfxprintln(file, "r_glowRadius0 \"" + getdvar("r_glowTweakRadius0") + "\"");
+                artfxprintln(file, "r_glowRadius1 \"" + getdvar("r_glowTweakRadius1") + "\"");
+                artfxprintln(file, "r_glowBloomCutoff \"" + getdvar("r_glowTweakBloomCutoff") + "\"");
+                artfxprintln(file, "r_glowBloomDesaturation \"" + getdvar("r_glowTweakBloomDesaturation") + "\"");
+                artfxprintln(file, "r_glowBloomIntensity0 \"" + getdvar("r_glowTweakBloomIntensity0") + "\"");
+                artfxprintln(file, "r_glowBloomIntensity1 \"" + getdvar("r_glowTweakBloomIntensity1") + "\"");
+                artfxprintln(file, "r_glowSkyBleedIntensity0\"" + getdvar("r_glowTweakSkyBleedIntensity0") + "\"");
+                artfxprintln(file, "r_glowSkyBleedIntensity1\"" + getdvar("r_glowTweakSkyBleedIntensity1") + "\"");
+                artfxprintln(file, " ");
+                artfxprintln(file, "r_filmEnable\"" + getdvar("r_filmTweakEnable") + "\"");
+                artfxprintln(file, "r_filmContrast\"" + getdvar("r_filmTweakContrast") + "\"");
+                artfxprintln(file, "r_filmBrightness\"" + getdvar("r_filmTweakBrightness") + "\"");
+                artfxprintln(file, "r_filmDesaturation\"" + getdvar("r_filmTweakDesaturation") + "\"");
+                artfxprintln(file, "r_filmInvert\"" + getdvar("r_filmTweakInvert") + "\"");
+                artfxprintln(file, "r_filmLightTint \"" + getdvar("r_filmTweakLightTint") + "\"");
+                artfxprintln(file, "r_filmDarkTint\"" + getdvar("r_filmTweakDarkTint") + "\"");
+                saved = closefile(file);
+                assertex((saved == 1), "File not saved (see above message?): " + visionFilename);
+                setVolFog(level.fognearplane, level.fogexphalfplane, level.fogexphalfheight, level.fogbaseheight, level.fogred, level.foggreen, level.fogblue, 0);
+                players = get_players();
+                players[0] setDefaultDepthOfField();
               }
               if(dump) {
                 println("ART DUMPED SUCCESSFULLY");
@@ -272,8 +313,7 @@ dumpsettings() {
               fogfraction = getdvarfloat("scr_fog_fraction");
               if(fogfraction != level.fogfraction) {
                 level.fogfraction = fogfraction;
-              }
-              else {
+              } else {
                 return;
               }
               color = [];
@@ -296,7 +336,7 @@ dumpsettings() {
               if(larger > 1) {
                 for(i = 0; i < fc.size; i++)
               }
-                  fc[i] = fc[i] / larger;
+              fc[i] = fc[i] / larger;
               setdvar("scr_fog_red", fc[0]);
               setdvar("scr_fog_green", fc[1]);
               setdvar("scr_fog_blue", fc[2]);
@@ -318,8 +358,7 @@ dumpsettings() {
                 }
                 if(direction == "up") {
                   next_target = sunlight + scale(30) + jitter;
-                }
-                else {
+                } else {
                   next_target = sunlight - scale(30) + jitter;
                 }
                 if(next_target >= level.sunlight_bright) {
@@ -332,8 +371,7 @@ dumpsettings() {
                 }
                 if(next_target > sunlight) {
                   brighten(next_target, (3 + randomint(3)), .05);
-                }
-                else {
+                } else {
                   darken(next_target, (3 + randomint(3)), .05);
                 }
               }
@@ -516,14 +554,12 @@ dumpsettings() {
                 } else {
                   if(nearEnd < 50) {
                     nearEnd = 50;
-                  }
-                  else if(nearEnd > 512) {
+                  } else if(nearEnd > 512) {
                     nearEnd = 512;
                   }
                   if(farStart > 2500) {
                     farStart = 2500;
-                  }
-                  else if(farStart < 1000) {
+                  } else if(farStart < 1000) {
                     farStart = 1000;
                   }
                 }
@@ -572,28 +608,24 @@ dumpsettings() {
                 changeVal = (level.dof[valueName] - targetValue) * 0.5;
                 if(changeVal > maxChange) {
                   changeVal = maxChange;
-                }
-                else if(changeVal < 1) {
+                } else if(changeVal < 1) {
                   changeVal = 1;
                 }
                 if(level.dof[valueName] - changeVal < targetValue) {
                   level.dof[valueName] = targetValue;
-                }
-                else {
+                } else {
                   level.dof[valueName] -= changeVal;
                 }
               } else if(level.dof[valueName] < targetValue) {
                 changeVal = (targetValue - level.dof[valueName]) * 0.5;
                 if(changeVal > maxChange) {
                   changeVal = maxChange;
-                }
-                else if(changeVal < 1) {
+                } else if(changeVal < 1) {
                   changeVal = 1;
                 }
                 if(level.dof[valueName] + changeVal > targetValue) {
                   level.dof[valueName] = targetValue;
-                }
-                else {
+                } else {
                   level.dof[valueName] += changeVal;
                 }
               }

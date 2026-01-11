@@ -41,15 +41,13 @@ cover_wall_think(coverType) {
     if(issubstr(self.weapon, "_bipod")) {
       if(coverType == "crouch") {
         weaponInfo = self.weapon + "_crouch";
-      }
-      else {
+      } else {
         weaponInfo = self.weapon + "_stand";
       }
     } else {
       if(coverType == "crouch") {
         weaponInfo = self.weapon + "_bipod_crouch";
-      }
-      else {
+      } else {
         weaponInfo = self.weapon + "_bipod_stand";
       }
     }
@@ -135,8 +133,7 @@ cover_wall_think(coverType) {
   }
   if(self.coverType == "stand") {
     self.a.special = "cover_stand";
-  }
-  else {
+  } else {
     self.a.special = "cover_crouch";
   }
   behaviorCallbacks = spawnStruct();
@@ -194,8 +191,7 @@ leaveCoverAndShoot(theWeaponType, mode, suppressSpot) {
     if(weaponAnims() == "rocketlauncher" && (distSqToShootPos < squared(512) || self.a.rockets < 1)) {
       if(self.coverType == "stand") {
         animscripts\shared::throwDownWeapon( % RPG_stand_throw);
-      }
-      else {
+      } else {
         animscripts\shared::throwDownWeapon( % RPG_crouch_throw);
       }
     }
@@ -252,8 +248,7 @@ idle() {
     useTwitch = (randomint(2) == 0 && animArrayAnyExist("hide_idle_twitch"));
     if(useTwitch) {
       idleanim = animArrayPickRandom("hide_idle_twitch");
-    }
-    else {
+    } else {
       idleanim = animarray("hide_idle");
     }
     playIdleAnimation(idleAnim, useTwitch);
@@ -280,8 +275,7 @@ flinch() {
 playIdleAnimation(idleAnim, needsRestart) {
   if(needsRestart) {
     self setFlaggedAnimKnobAllRestart("idle", idleAnim, % body, 1, .1, 1);
-  }
-  else {
+  } else {
     self setFlaggedAnimKnobAll("idle", idleAnim, % body, 1, .1, 1);
   }
   self.a.coverMode = "hide";
@@ -299,8 +293,7 @@ look(lookTime) {
   lookanim = undefined;
   if(self isSuppressedWrapper()) {
     lookanim = animArray("look_to_hide_fast");
-  }
-  else {
+  } else {
     lookanim = animArray("look_to_hide");
   }
   self setflaggedanimknoballrestart("looking_end", lookanim, % body, 1, .1);
@@ -356,8 +349,7 @@ pop_up() {
   }
   if(self.coverType == "crouch") {
     self setup_cover_crouch(newCoverMode);
-  }
-  else {
+  } else {
     self setup_cover_stand();
   }
   self.a.special = "none";
@@ -436,8 +428,7 @@ go_to_hide() {
   self.a.coverMode = "hide";
   if(self.coverType == "stand") {
     self.a.special = "cover_stand";
-  }
-  else {
+  } else {
     self.a.special = "cover_crouch";
   }
   self.changingCoverPos = false;
@@ -451,8 +442,7 @@ tryThrowingGrenade(throwAt, safe) {
   theanim = undefined;
   if(isDefined(safe) && safe) {
     theanim = animArrayPickRandom("grenade_safe");
-  }
-  else {
+  } else {
     theanim = animArrayPickRandom("grenade_exposed");
   }
   self animMode("zonly_physics");
@@ -580,8 +570,7 @@ setup_crouching_anim_array(exposedAnimSet) {
   if(self usingShotgun()) {
     if(exposedAnimSet == "lean" || exposedAnimSet == "stand") {
       anim_array["single"] = array( % shotgun_stand_fire_1A);
-    }
-    else {
+    } else {
       anim_array["single"] = array( % shotgun_crouch_fire);
     }
   }
@@ -667,8 +656,7 @@ setup_standing_anim_array() {
   anim_array["grenade_exposed"] = array( % coverstand_grenadeA, % coverstand_grenadeB);
   if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
     anim_array["exposed_idle"] = array( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
-  }
-  else {
+  } else {
     anim_array["exposed_idle"] = array( % exposed2_idle_alert_v1, % exposed2_idle_alert_v2, % exposed2_idle_alert_v3);
   }
   anim_array["hide_to_look"] = % coverstand_look_moveup;

@@ -47,8 +47,7 @@ movePlayerToStartPoint(sTargetname) {
 
   if(isDefined(lookat)) {
     level.player setPlayerAngles(vectorToAngles(lookat.origin - start.origin));
-  }
-  else {
+  } else {
     level.player setPlayerAngles(start.angles);
   }
 }
@@ -276,8 +275,7 @@ getWindowParts() {
   foreach(part in windowParts) {
     if(part.script_noteworthy == "left") {
       leftWindow = part;
-    }
-    else if(part.script_noteworthy == "right") {
+    } else if(part.script_noteworthy == "right") {
       rightWindow = part;
     }
   }

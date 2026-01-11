@@ -165,7 +165,7 @@ window_blaster(glassarray) {
 
   level waittill("exploding_" + script_exploder);
   foreach(glass in glass_inradius) {
-  glass notify("damage", 150, undefined, undefined, undefined, "bullet");
+    glass notify("damage", 150, undefined, undefined, undefined, "bullet");
   }
   //	foreach( glass in nearest_three_windows )
   //		glass notify ( "damage" );
@@ -186,10 +186,10 @@ super_nates_exploder() {
   deleteGlass = GetGlassArray("nates_glass_delete");
 
   foreach(glass in destroyGlass) {
-  DestroyGlass(glass);
+    DestroyGlass(glass);
   }
   foreach(glass in deleteGlass) {
-  DeleteGlass(glass);
+    DeleteGlass(glass);
   }
 
   for(i = 0; i < 6; i++) {
@@ -198,7 +198,7 @@ super_nates_exploder() {
 
   nates_lights = getEntArray("nates_lights", "targetname");
   foreach(light in nates_lights) {
-  light SetLightIntensity(0);
+    light SetLightIntensity(0);
   }
 
   flag_set("super_exploder_exploded");
@@ -427,7 +427,7 @@ debug_brushmodels() {
   while(1) {
     bmodels = getEntArray("script_brushmodel", "code_classname");
     foreach(model in bmodels) {
-    line(level.player.origin, model getcentroid());
+      line(level.player.origin, model getcentroid());
     }
     wait .05;
   }

@@ -119,8 +119,7 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
 
   if(level.laststandgetupallowed) {
     self thread laststand_getup();
-  }
-  else {
+  } else {
     self thread laststand_bleedout(getdvarfloat(#"player_lastStandBleedoutTime"));
   }
 
@@ -196,8 +195,7 @@ laststand_enable_player_weapons() {
 
   if(self.lastactiveweapon != "none" && self.lastactiveweapon != "mortar_round" && self.lastactiveweapon != "mine_bouncing_betty" && self.lastactiveweapon != "claymore_zm" && self.lastactiveweapon != "spikemore_zm") {
     self switchtoweapon(self.lastactiveweapon);
-  }
-  else {
+  } else {
     primaryweapons = self getweaponslistprimaries();
 
     if(isDefined(primaryweapons) && primaryweapons.size > 0) {
@@ -262,8 +260,7 @@ laststand_bleedout(delay) {
 
   if(isDefined(level.is_specops_level) && level.is_specops_level) {
     self thread[[level.spawnspectator]]();
-  }
-  else {
+  } else {
     self.ignoreme = 0;
     self mission_failed_during_laststand(self);
   }
@@ -336,8 +333,7 @@ revive_give_back_weapons(gun) {
   }
   if(gun != "none" && gun != "mine_bouncing_betty" && gun != "claymore_zm" && gun != "spikemore_zm" && gun != "equip_gasmask_zm" && gun != "lower_equip_gasmask_zm" && self hasweapon(gun)) {
     self switchtoweapon(gun);
-  }
-  else {
+  } else {
     primaryweapons = self getweaponslistprimaries();
 
     if(isDefined(primaryweapons) && primaryweapons.size > 0) {
@@ -471,8 +467,7 @@ revive_do_revive(playerbeingrevived, revivergun) {
     self.revivetexthud destroy();
   }
 
-  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {
-  } else if(!revived)
+  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived)
     playerbeingrevived stoprevive(self);
 
   playerbeingrevived.revivetrigger sethintstring(&"GAME_BUTTON_TO_REVIVE_PLAYER");
@@ -534,8 +529,7 @@ revive_success(reviver) {
   reviver.revives++;
   reviver.stats["revives"] = reviver.revives;
 
-  if(isDefined(level.missioncallbacks)) {
-  }
+  if(isDefined(level.missioncallbacks)) {}
 
   setclientsysstate("lsm", "0", self);
   self.revivetrigger delete();

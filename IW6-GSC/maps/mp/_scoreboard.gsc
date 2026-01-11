@@ -8,14 +8,14 @@
 
 processLobbyScoreboards() {
   foreach(player in level.placement["all"]) {
-  player setPlayerScoreboardInfo();
+    player setPlayerScoreboardInfo();
   }
 
   if(level.multiTeamBased) {
     buildScoreboardType("multiteam");
 
     foreach(player in level.players) {
-    player setCommonPlayerData("round", "scoreboardType", "multiteam");
+      player setCommonPlayerData("round", "scoreboardType", "multiteam");
     }
 
     setClientMatchData("alliesScore", -1);
@@ -44,11 +44,9 @@ processLobbyScoreboards() {
 
     if(alliesScore == axisScore) {
       winner = "tied";
-    }
-    else if(alliesScore > axisScore) {
+    } else if(alliesScore > axisScore) {
       winner = "allies";
-    }
-    else {
+    } else {
       winner = "axis";
     }
 
@@ -63,8 +61,7 @@ processLobbyScoreboards() {
         }
         if(player_pers_team == "spectator") {
           player setCommonPlayerData("round", "scoreboardType", "allies");
-        }
-        else {
+        } else {
           player setCommonPlayerData("round", "scoreboardType", player_pers_team);
         }
       }
@@ -72,14 +69,14 @@ processLobbyScoreboards() {
       buildScoreboardType(winner);
 
       foreach(player in level.players) {
-      player setCommonPlayerData("round", "scoreboardType", winner);
+        player setCommonPlayerData("round", "scoreboardType", winner);
       }
     }
   } else {
     buildScoreboardType("neutral");
 
     foreach(player in level.players) {
-    player setCommonPlayerData("round", "scoreboardType", "neutral");
+      player setCommonPlayerData("round", "scoreboardType", "neutral");
     }
 
     setClientMatchData("alliesScore", -1);

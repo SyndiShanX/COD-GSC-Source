@@ -87,7 +87,7 @@ unload_bunker_gump() {
   a_e_coke = getEntArray("destructible_cocaine_bundles", "script_noteworthy");
 
   foreach(coke_bundle in a_e_coke) {
-  coke_bundle delete();
+    coke_bundle delete();
   }
 
   wait 1.0;
@@ -299,8 +299,7 @@ bunker_exit_vo() {
 backbreaker_vo() {
   if(is_mature()) {
     level.player queue_dialog("maso_damn_woods_0", 0.5);
-  }
-  else {
+  } else {
     level.player queue_dialog("maso_temper_woods_0", 0.5);
   }
 }
@@ -308,8 +307,7 @@ backbreaker_vo() {
 final_push_vo() {
   if(is_mature()) {
     level.woods queue_dialog("wood_hustle_mason_up_t_0");
-  }
-  else {
+  } else {
     level.woods queue_dialog("wood_hustle_mason_i_m_0");
   }
 

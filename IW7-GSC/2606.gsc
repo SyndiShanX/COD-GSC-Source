@@ -67,8 +67,7 @@ save() {
 
   if(isDefined(self.name)) {
     var_0["name"] = self.name;
-  }
-  else {}
+  } else {}
 
   var_01 = self getattachsize();
 
@@ -89,8 +88,7 @@ load(var_00) {
 
   if(isDefined(var_0["name"])) {
     self.name = var_0["name"];
-  }
-  else {}
+  } else {}
 
   var_01 = var_0["attach"];
   var_02 = var_1.size;
@@ -131,8 +129,7 @@ get_random_character(var_00, var_01, var_02) {
 
   if(isDefined(self.script_char_index)) {
     var_03 = self.script_char_index;
-  }
-  else if(isDefined(var_01)) {
+  } else if(isDefined(var_01)) {
     var_03 = get_randomly_weighted_character(var_01);
   }
 

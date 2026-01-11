@@ -29,7 +29,7 @@ debug_powered_items() {
     if(getdvarint(#"_id_EB512CB7")) {
       if(isDefined(level.local_power)) {
         foreach(localpower in level.local_power) {
-        circle(localpower.origin, localpower.radius, (1, 0, 0), 0, 1, 1);
+          circle(localpower.origin, localpower.radius, (1, 0, 0), 0, 1, 1);
         }
       }
     }
@@ -312,13 +312,13 @@ get_local_power_cost(localpower) {
 
   if(isDefined(localpower) && isDefined(localpower.enabled_list)) {
     foreach(powered in localpower.enabled_list) {
-    cost = cost + powered get_powered_item_cost();
+      cost = cost + powered get_powered_item_cost();
     }
   }
 
   if(isDefined(localpower) && isDefined(localpower.added_list)) {
     foreach(powered in localpower.added_list) {
-    cost = cost + powered get_powered_item_cost();
+      cost = cost + powered get_powered_item_cost();
     }
   }
 
@@ -362,11 +362,9 @@ global_power(on_off) {
   }
 }
 
-never_power_on(origin, radius) {
-}
+never_power_on(origin, radius) {}
 
-never_power_off(origin, radius) {
-}
+never_power_off(origin, radius) {}
 
 cost_negligible() {
   if(isDefined(self.one_time_cost)) {
@@ -517,8 +515,7 @@ perk_range(delta, origin, radius) {
 
     if(isDefined(self.target.trigger_off) && self.target.trigger_off) {
       perkorigin = self.target.realorigin;
-    }
-    else if(isDefined(self.target.disabled) && self.target.disabled) {
+    } else if(isDefined(self.target.disabled) && self.target.disabled) {
       perkorigin = perkorigin + vectorscale((0, 0, 1), 10000.0);
     }
 
@@ -565,8 +562,7 @@ pap_range(delta, origin, radius) {
 
     if(isDefined(self.target.trigger_off) && self.target.trigger_off) {
       paporigin = self.target.realorigin;
-    }
-    else if(isDefined(self.target.disabled) && self.target.disabled) {
+    } else if(isDefined(self.target.disabled) && self.target.disabled) {
       paporigin = paporigin + vectorscale((0, 0, 1), 10000.0);
     }
 

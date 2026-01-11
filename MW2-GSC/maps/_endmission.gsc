@@ -132,12 +132,12 @@ _nextmission(endgame) {
     return;
   }
 
-    //are we watching credits?
-    if(level.script == "ending" && level.level_mode != "credits_1") {
-      setsaveddvar("ui_nextMission", "0");
-      missionSuccess("trainer");
-      return;
-    }
+  //are we watching credits?
+  if(level.script == "ending" && level.level_mode != "credits_1") {
+    setsaveddvar("ui_nextMission", "0");
+    missionSuccess("trainer");
+    return;
+  }
 
   if(!isDefined(endgame)) {
     endgame = false;
@@ -184,7 +184,7 @@ _nextmission(endgame) {
 
     PrintLn(">> SP PERCENT UPDATE - _nextmission()");
 
-      completion_percentage = updateSpPercent();
+    completion_percentage = updateSpPercent();
 
     /#	
     if(getdvarint("ui_debug_setlevel") != 0) {
@@ -207,7 +207,7 @@ _nextmission(endgame) {
     PrintLn(">> SP LEVELS COMPLETED: 		[" + (level.player GetLocalPlayerProfileData("highestMission")) + "]");
     PrintLn(">> SP MAX LEVELS: 			[" + level.missionSettings.levels.size + "]");
 
-      UpdateGamerProfile();
+    UpdateGamerProfile();
 
     if(level.missionSettings hasAchievement(levelIndex)) {
       maps\_utility::giveachievement_wrapper(level.missionSettings getAchievement(levelIndex));
@@ -263,8 +263,7 @@ _nextmission(endgame) {
 
   if(level.missionSettings skipssuccess(levelIndex)) {
     changelevel(level.missionSettings getLevelName(nextLevelIndex), level.missionSettings getKeepWeapons(levelIndex));
-  }
-  else {
+  } else {
     missionSuccess(level.missionSettings getLevelName(nextLevelIndex), level.missionSettings getKeepWeapons(levelIndex));
   }
 
@@ -286,7 +285,7 @@ updateSpPercent() {
 getTotalpercentCompleteSP() {
   /*
   SP STATS:
-	
+  	
   Game Progression	60%	-50
   Hardened Progress	60% 	-25
   Veteran Progress	60%	-10
@@ -301,22 +300,22 @@ getTotalpercentCompleteSP() {
 
   PrintLn(">> SP STAT REGULAR: " + stat_progression + "%" + "(" + stat_progression_ratio * 100 + "%)");
 
-    stat_hardened = getStat_hardened();
+  stat_hardened = getStat_hardened();
   stat_hardened_ratio = 0.25 / 1;
 
   PrintLn(">> SP STAT HARDENED: " + stat_hardened + "%" + "(" + stat_hardened_ratio * 100 + "%)");
 
-    stat_veteran = getStat_veteran();
+  stat_veteran = getStat_veteran();
   stat_veteran_ratio = 0.1 / 1;
 
   PrintLn(">> SP STAT VETERAN: " + stat_veteran + "%" + "(" + stat_veteran_ratio * 100 + "%)");
 
-    stat_intel = getStat_intel();
+  stat_intel = getStat_intel();
   stat_intel_ratio = 0.15 / 1;
 
   PrintLn(">> SP STAT INTEL: " + stat_intel + "%" + "(" + stat_intel_ratio * 100 + "%)");
 
-    assertex((stat_progression_ratio + stat_hardened_ratio + stat_veteran_ratio + stat_intel_ratio) <= 1.0, "Total sum of SP progress breakdown contributes to more than 100%!");
+  assertex((stat_progression_ratio + stat_hardened_ratio + stat_veteran_ratio + stat_intel_ratio) <= 1.0, "Total sum of SP progress breakdown contributes to more than 100%!");
 
   total_progress = 0.0;
   total_progress += stat_progression_ratio * stat_progression;
@@ -328,7 +327,7 @@ getTotalpercentCompleteSP() {
 
   PrintLn(">> SP STAT TOTAL: " + total_progress + "%");
 
-    return total_progress;
+  return total_progress;
 }
 
 // recruit and regular difficulty
@@ -445,8 +444,7 @@ setSoLevelCompleted(levelIndex) {
     for(index = 0; index < specOpsString.size; index++) {
       if(index != levelOffset) {
         newString += specOpsString[index];
-      }
-      else {
+      } else {
         newString += gameskill + 1;
       }
     }
@@ -525,8 +523,7 @@ setLevelCompleted(levelIndex) {
     } else {
       if(level.gameskill + 1 > int(missionString[levelIndex])) {
         newString += level.gameskill + 1;
-      }
-      else {
+      } else {
         newString += missionString[index];
       }
     }
@@ -578,8 +575,7 @@ getLevelSkill(levelIndex) {
 getMissionDvarString(missionIndex) {
   if(missionIndex < 9) {
     return ("mis_0" + (missionIndex + 1));
-  }
-  else {
+  } else {
     return ("mis_" + (missionIndex + 1));
   }
 }
@@ -672,8 +668,7 @@ getLevelVeteranAward(levelIndex) {
 hasLevelVeteranAward(levelIndex) {
   if(isDefined(self.levels[levelIndex].veteran_achievement)) {
     return (true);
-  }
-  else {
+  } else {
     return (false);
   }
 }
@@ -681,8 +676,7 @@ hasLevelVeteranAward(levelIndex) {
 hasAchievement(levelIndex) {
   if(isDefined(self.levels[levelIndex].achievement)) {
     return (true);
-  }
-  else {
+  } else {
     return (false);
   }
 }
@@ -701,7 +695,7 @@ check_other_hasLevelVeteranAchievement(levelIndex) {
     if(self.levels[i].veteran_achievement == self.levels[levelIndex].veteran_achievement) {
       if(getLevelCompleted(i) < 4)
     }
-        return false;
+    return false;
   }
   return true;
 }
@@ -720,8 +714,7 @@ getHardenedAward() {
 hasMissionHardenedAward() {
   if(isDefined(self.HardenedAward)) {
     return (true);
-  }
-  else {
+  } else {
     return (false);
   }
 }
@@ -742,8 +735,7 @@ force_all_complete() {
   for(index = 0; index < missionString.size; index++) {
     if(index < 20) {
       newString += 2;
-    }
-    else {
+    } else {
       newstring += 0;
     }
   }
@@ -775,10 +767,10 @@ ui_debug_clearall() {
   }
 }
 
-  clearall() {
-    level.player SetLocalPlayerProfileData("missionHighestDifficulty", emptyMissionDifficultyStr);
-    level.player SetLocalPlayerProfileData("highestMission", 1);
-  }
+clearall() {
+  level.player SetLocalPlayerProfileData("missionHighestDifficulty", emptyMissionDifficultyStr);
+  level.player SetLocalPlayerProfileData("highestMission", 1);
+}
 
 credits_end() {
   changelevel("airplane", false);
@@ -839,8 +831,7 @@ coop_eog_summary() {
 
   if(isDefined(level.custom_eog_summary) && level.custom_eog_summary) {
     setdvar("ui_eog_custom", 1);
-  }
-  else {
+  } else {
     setdvar("ui_eog_custom", 0);
   }
 

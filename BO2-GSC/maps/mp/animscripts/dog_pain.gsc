@@ -21,8 +21,7 @@ main() {
 
   if(speed > level.dogrunpainspeed) {
     pain_anim = "pain_run_" + pain_anim;
-  }
-  else {
+  } else {
     pain_anim = "pain_" + pain_anim;
   }
 

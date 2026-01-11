@@ -108,8 +108,7 @@ markerActivate(lifeId, boxType, usedCallback) {
 
     if(isDefined(grandParent)) {
       data.linkParent = grandParent;
-    }
-    else {
+    } else {
       data.linkParent = undefined;
     }
   }
@@ -135,11 +134,9 @@ markerActivate(lifeId, boxType, usedCallback) {
 DeployableExclusion(parentModel) {
   if(parentModel == "weapon_alien_laser_drill") {
     return true;
-  }
-  else if(IsSubStr(parentModel, "crafting")) {
+  } else if(IsSubStr(parentModel, "crafting")) {
     return true;
-  }
-  else if(IsSubStr(parentModel, "scorpion_body")) {
+  } else if(IsSubStr(parentModel, "scorpion_body")) {
     return true;
   }
 
@@ -550,9 +547,7 @@ boxCaptureThink(player) {
   while(isDefined(self)) {
     self waittill("trigger", tiggerer);
     if(is_aliens()) {
-      if([
-          [level.boxCaptureThink_alien_func]
-        ](tiggerer))
+      if([[level.boxCaptureThink_alien_func]](tiggerer))
         continue;
     }
     if(is_chaos_mode()) {
@@ -662,8 +657,7 @@ box_ModelTeamUpdater(showForTeam) {
 useHoldThink(player, useTime) {
   if(IsPlayer(player)) {
     player playerLinkTo(self);
-  }
-  else {
+  } else {
     player LinkTo(self);
   }
   player playerLinkedOffsetEnable();
@@ -741,8 +735,7 @@ useHoldThinkLoop(player) {
 
     if(isDefined(player.objectiveScaler)) {
       player.boxParams.useRate = 1 * player.objectiveScaler;
-    }
-    else {
+    } else {
       player.boxParams.useRate = 1;
     }
 

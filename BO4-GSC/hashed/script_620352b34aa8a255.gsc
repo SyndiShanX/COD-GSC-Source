@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_c401fb8b;
 
 autoexec __init__system__() {
@@ -51,7 +50,7 @@ private on_end(round_reset) {
 
 private function_ad32d69(var_b2c60867, timeout, var_ca735ce8, var_a4a28ac7) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"host_migration_begin");
+  level endon(#"hash_7646638df88a3656", # "host_migration_begin");
 
   if(isDefined(var_a4a28ac7) && var_a4a28ac7) {
     wait 12;
@@ -89,7 +88,7 @@ private function_ad32d69(var_b2c60867, timeout, var_ca735ce8, var_a4a28ac7) {
 
 private damage_monitor(var_a4a28ac7) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"host_migration_begin");
+  level endon(#"hash_7646638df88a3656", # "host_migration_begin");
 
   if(isDefined(var_a4a28ac7) && var_a4a28ac7) {
     wait 12;

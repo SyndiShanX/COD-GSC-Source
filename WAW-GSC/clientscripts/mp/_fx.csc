@@ -84,8 +84,7 @@ loopfxthread(clientNum) {
     }
     if(isDefined(self.fxStop)) {
       level waittill("stop fx" + self.fxStop);
-    }
-    else {
+    } else {
       return;
     }
     if(isDefined(self.looper)) {
@@ -93,8 +92,7 @@ loopfxthread(clientNum) {
     }
     if(isDefined(self.fxStart)) {
       level waittill("start fx" + self.fxStart);
-    }
-    else {
+    } else {
       return;
     }
   }

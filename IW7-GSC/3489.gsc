@@ -57,8 +57,7 @@ func_49E1(var_00) {
 
   if(isDefined(var_1.angles)) {
     var_02 = var_1.angles;
-  }
-  else {
+  } else {
     var_02 = (0, 0, 0);
   }
 
@@ -585,7 +584,7 @@ func_AADA() {
   level.air_start_nodes = scripts\engine\utility::getstructarray("chopper_boss_path_start", "targetname");
 
   foreach(var_01 in level.air_start_nodes) {
-  var_1.neighbors = var_01 func_AAD3();
+    var_1.neighbors = var_01 func_AAD3();
   }
 }
 
@@ -593,7 +592,7 @@ func_AAD9() {
   level.func_1A67 = scripts\engine\utility::getstructarray("chopper_boss_path", "targetname");
 
   foreach(var_01 in level.func_1A67) {
-  var_1.neighbors = var_01 func_AAD3();
+    var_1.neighbors = var_01 func_AAD3();
   }
 }
 

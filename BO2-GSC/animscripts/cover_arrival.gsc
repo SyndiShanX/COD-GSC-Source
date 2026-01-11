@@ -574,8 +574,7 @@ determineexposedapproachtype(node) {
 
   if(stance == "crouch") {
     type = "exposed_crouch";
-  }
-  else {
+  } else {
     type = "exposed";
   }
 
@@ -633,15 +632,13 @@ dolastminuteexposedapproach() {
 
   if(faceenemyatendofapproach(self.node)) {
     desiredfacingyaw = vectortoangles(self.enemy.origin - self.pathgoalpos)[1];
-  }
-  else {
+  } else {
     facenodeangle = isDefined(self.node) && goalmatchesnode;
     facenodeangle = facenodeangle && self.node.type != "Path" && (self.node.type != "ambush" || !recentlysawenemy());
 
     if(facenodeangle) {
       desiredfacingyaw = getnodeforwardyaw(self.node);
-    }
-    else {
+    } else {
       likelyenemydir = self getanglestolikelyenemypath();
 
       if(isDefined(likelyenemydir)) {
@@ -904,8 +901,7 @@ startmovetransition() {
 
   if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < 225) {
     exitnode = self.node;
-  }
-  else if(isDefined(self.prevnode)) {
+  } else if(isDefined(self.prevnode)) {
     exitnode = self.prevnode;
   }
 
@@ -1110,8 +1106,7 @@ docoverexitanimation(exittype, approachnumber) {
     if(absolute_code_move_time > current_anim_time + 0.05) {
       if(absolute_code_move_time + 0.15 > getanimlength(leaveanim)) {
         wait(getanimlength(leaveanim) - absolute_code_move_time);
-      }
-      else {
+      } else {
         self waittillmatch("coverexit", "code_move");
       }
     }
@@ -1186,11 +1181,9 @@ getnewstance() {
 getnodestanceyawoffset(approachtype) {
   if(approachtype == "left" || approachtype == "left_crouch") {
     return 90.0;
-  }
-  else if(approachtype == "right" || approachtype == "right_crouch") {
+  } else if(approachtype == "right" || approachtype == "right_crouch") {
     return -90.0;
-  }
-  else if(approachtype == "pillar" || approachtype == "pillar_crouch") {
+  } else if(approachtype == "pillar" || approachtype == "pillar_crouch") {
     return 180.0;
   }
 
@@ -1229,8 +1222,7 @@ determinenodeapproachtype(node) {
 
     if(node.type == "Cover Crouch") {
       node.approachtype = "crouch_saw";
-    }
-    else if(node.type == "Cover Prone") {
+    } else if(node.type == "Cover Prone") {
       node.approachtype = "prone_saw";
     }
 
@@ -1241,8 +1233,7 @@ determinenodeapproachtype(node) {
   if(self is_heavy_machine_gun()) {
     if(node.type == "Path") {
       self.disablearrivals = 1;
-    }
-    else {
+    } else {
       self.disablearrivals = 0;
     }
   }
@@ -1255,8 +1246,7 @@ determinenodeapproachtype(node) {
   if(nodetype == "Cover Pillar" && usingpistol()) {
     if(node has_spawnflag(1024)) {
       nodetype = "Cover Right";
-    }
-    else {
+    } else {
       nodetype = "Cover Left";
     }
   }
@@ -1273,8 +1263,7 @@ determinenodeexittype(node) {
 
     if(node.type == "Cover Crouch") {
       node.approachtype = "crouch_saw";
-    }
-    else if(node.type == "Cover Prone") {
+    } else if(node.type == "Cover Prone") {
       node.approachtype = "prone_saw";
     }
 
@@ -1290,16 +1279,14 @@ determinenodeexittype(node) {
   if(nodetype == "Cover Pillar" && usingpistol()) {
     if(node has_spawnflag(1024)) {
       nodetype = "Cover Right";
-    }
-    else {
+    } else {
       nodetype = "Cover Left";
     }
   }
 
   if(self.a.pose == "stand") {
     node.approachtype = anim.approach_types[nodetype][0];
-  }
-  else {
+  } else {
     node.approachtype = anim.approach_types[nodetype][1];
   }
 }
@@ -1423,8 +1410,7 @@ startmovetransitiondebug(exittype, exityaw) {
 
   if(angle < 0) {
     debug_arrival(" (Angle of " + (0 - angle) + " right from node forward.)");
-  }
-  else {
+  } else {
     debug_arrival(" (Angle of " + angle + " left from node forward.)");
   }
 }
@@ -1436,8 +1422,7 @@ setupapproachnodedebug(approachtype, approach_dir, approachnodeyaw) {
 
   if(angle < 0) {
     debug_arrival(" (Angle of " + (0 - angle) + " right from node forward.)");
-  }
-  else {
+  } else {
     debug_arrival(" (Angle of " + angle + " left from node forward.)");
   }
 
@@ -1445,8 +1430,7 @@ setupapproachnodedebug(approachtype, approach_dir, approachnodeyaw) {
     if(isDefined(self.node)) {
       if(isDefined(self.node.approachtype)) {
         debug_arrival("Aborting cover approach: node approach type was " + self.node.approachtype);
-      }
-      else {
+      } else {
         debug_arrival("Aborting cover approach: node approach type was undefined");
       }
     } else
@@ -1800,8 +1784,7 @@ coverarrivaldebugtool() {
 
     if(tooltype == 1) {
       fakeai.cqb = 1;
-    }
-    else if(tooltype == 2) {
+    } else if(tooltype == 2) {
       fakeai.weapon = "m1911_sp";
     }
 
@@ -1810,8 +1793,7 @@ coverarrivaldebugtool() {
 
     if(numai < 5) {
       numai = 5;
-    }
-    else if(numai > 15) {
+    } else if(numai > 15) {
       numai = 15;
     }
 
@@ -1847,14 +1829,11 @@ coverarrivaldebugtool() {
       if(isDefined(node.lastcheckedtime) && gettime() - node.lastcheckedtime < 50 * frameinterval) {
         if(node.lastratio == 0) {
           numbad++;
-        }
-        else if(node.lastratio < 0.5) {
+        } else if(node.lastratio < 0.5) {
           numpoor++;
-        }
-        else if(node.lastratio < 1.0) {
+        } else if(node.lastratio < 1.0) {
           numok++;
-        }
-        else {
+        } else {
           numgood++;
         }
 
@@ -1922,8 +1901,7 @@ coverarrivaldebugtool() {
 
           if(tool == 1) {
             enterpos = node.origin - forward + right;
-          }
-          else {
+          } else {
             enterpos = node.origin + forward - right;
           }
 

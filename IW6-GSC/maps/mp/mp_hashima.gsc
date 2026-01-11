@@ -264,8 +264,7 @@ move_fake_missile(missile_target, missile_launch_height, missile_drop_height, ca
 
   if(!isDefined(calling_player)) {
     projectile = MagicBullet("hashima_missiles_mp", start_pos, end_pos);
-  }
-  else {
+  } else {
     projectile = MagicBullet("hashima_missiles_mp", start_pos, end_pos, calling_player);
   }
 

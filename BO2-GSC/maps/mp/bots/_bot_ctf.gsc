@@ -70,8 +70,7 @@ bot_should_patrol_flag() {
   if(ctf_has_flag(flag_enemy)) {
     if(!flag_mine ishome()) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -117,8 +116,7 @@ bot_ctf_capture() {
 
   if(ctf_has_flag(flag_enemy)) {
     self addgoal(home_mine, 16, 4, "ctf_flag");
-  }
-  else if(isDefined(flag_enemy.carrier)) {
+  } else if(isDefined(flag_enemy.carrier)) {
     if(self atgoal("ctf_flag")) {
       self cancelgoal("ctf_flag");
     }
@@ -132,8 +130,7 @@ bot_ctf_capture() {
 
     if(nodes.size) {
       self addgoal(random(nodes), 16, 3, "ctf_flag");
-    }
-    else {
+    } else {
       self addgoal(flag_enemy.carrier.origin, 16, 3, "ctf_flag");
     }
   } else if(self maps\mp\bots\_bot::bot_friend_goal_in_radius("ctf_flag", flag_enemy.curorigin, 16) <= 1)
@@ -172,8 +169,7 @@ bot_ctf_add_goal(origin, goal_priority, goal_name) {
 
   if(findpath(self.origin, origin, undefined, 0, 1)) {
     goal = origin;
-  }
-  else {
+  } else {
     node = bot_ctf_random_visible_node(origin);
 
     if(isDefined(node)) {
@@ -237,8 +233,7 @@ bot_patrol_flag() {
 
     if(node.type == "Path") {
       self setstance("crouch");
-    }
-    else {
+    } else {
       self setstance("stand");
     }
 

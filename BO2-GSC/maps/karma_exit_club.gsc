@@ -20,8 +20,7 @@ init_flags() {
   flag_init("exit_club_cleanup");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_club_exit() {
   level.ai_harper = init_hero_startstruct("harper", "e7_harper_start");
@@ -273,8 +272,7 @@ single_civ_approach_window_anim() {
   delete_scene("scene_e7_single_approach_window_part2_loop");
 }
 
-spawn_funcs() {
-}
+spawn_funcs() {}
 
 titanic_event_animations() {
   str_scene1_name = "scene_e7_titanic_moment_docka_loop";
@@ -355,7 +353,7 @@ intruder_perk() {
   a_weapons = getEntArray("intruder_weapons", "targetname");
 
   foreach(weapon in a_weapons) {
-  weapon makeunusable();
+    weapon makeunusable();
   }
 
   if(level.player hasperk("specialty_intruder")) {
@@ -368,7 +366,7 @@ intruder_perk() {
     intruder_blocker_clip delete();
 
     foreach(weapon in a_weapons) {
-    weapon makeusable();
+      weapon makeusable();
     }
 
     set_objective(level.obj_intruder, s_intruder, "remove");

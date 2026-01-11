@@ -40,26 +40,19 @@ get_anim_string(animation) {
   anim_str = "unknown";
   if(animation == % zombie_dog_turn_90_left) {
     anim_str = "zombie_dog_turn_90_left";
-  }
-  else if(animation == % zombie_dog_run_turn_90_left) {
+  } else if(animation == % zombie_dog_run_turn_90_left) {
     anim_str = "zombie_dog_run_turn_90_left";
-  }
-  else if(animation == % zombie_dog_turn_90_right) {
+  } else if(animation == % zombie_dog_turn_90_right) {
     anim_str = "zombie_dog_turn_90_right";
-  }
-  else if(animation == % zombie_dog_run_turn_90_right) {
+  } else if(animation == % zombie_dog_run_turn_90_right) {
     anim_str = "zombie_dog_run_turn_90_right";
-  }
-  else if(animation == % zombie_dog_turn_180_left) {
+  } else if(animation == % zombie_dog_turn_180_left) {
     anim_str = "zombie_dog_turn_180_left";
-  }
-  else if(animation == % zombie_dog_run_turn_180_left) {
+  } else if(animation == % zombie_dog_run_turn_180_left) {
     anim_str = "zombie_dog_run_turn_180_left";
-  }
-  else if(animation == % zombie_dog_turn_180_right) {
+  } else if(animation == % zombie_dog_turn_180_right) {
     anim_str = "zombie_dog_turn_180_right";
-  }
-  else if(animation == % zombie_dog_run_turn_180_right) {
+  } else if(animation == % zombie_dog_run_turn_180_right) {
     anim_str = "zombie_dog_run_turn_180_right";
   }
   return anim_str;

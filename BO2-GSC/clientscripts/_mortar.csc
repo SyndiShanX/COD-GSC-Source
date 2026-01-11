@@ -150,8 +150,7 @@ explosion_incoming(mortar_name, pos, soundnum) {
     level._explosion_last_incoming = -1;
   }
 
-  for(soundnum = randomint(4) + 1; soundnum == level._explosion_last_incoming; soundnum = randomint(4) + 1) {
-  }
+  for(soundnum = randomint(4) + 1; soundnum == level._explosion_last_incoming; soundnum = randomint(4) + 1) {}
 
   level._explosion_last_incoming = soundnum;
 
@@ -239,8 +238,7 @@ explosion_sound(mortar_name, pos) {
     level._explosion_last_sound = 0;
   }
 
-  for(soundnum = randomint(3) + 1; soundnum == level._explosion_last_sound; soundnum = randomint(3) + 1) {
-  }
+  for(soundnum = randomint(3) + 1; soundnum == level._explosion_last_sound; soundnum = randomint(3) + 1) {}
 
   level._explosion_last_sound = soundnum;
 
@@ -446,8 +444,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
         if(do_mortar) {
           if(isDefined(level._explosion_delay) && isDefined(level._explosion_delay[mortar_name])) {
             wait(level._explosion_delay[mortar_name]);
-          }
-          else {
+          } else {
             wait(randomfloatrange(level._explosion_min_delay[mortar_name], level._explosion_max_delay[mortar_name]));
           }
 
@@ -461,8 +458,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
       if(barrage_amount > 1) {
         if(isDefined(level._explosion_barrage_delay) && isDefined(level._explosion_barrage_delay[mortar_name])) {
           wait(level._explosion_barrage_delay[mortar_name]);
-        }
-        else {
+        } else {
           wait(randomfloatrange(level._explosion_barrage_min_delay[mortar_name], level._explosion_barrage_max_delay[mortar_name]));
         }
       }

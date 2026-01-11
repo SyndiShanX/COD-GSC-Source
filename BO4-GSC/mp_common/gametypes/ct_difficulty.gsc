@@ -15,7 +15,6 @@
 #include scripts\mp_common\gametypes\ct_utils;
 #include scripts\mp_common\gametypes\globallogic;
 #include scripts\mp_common\util;
-
 #namespace ct_difficulty;
 
 function_be562a72() {

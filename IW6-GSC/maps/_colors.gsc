@@ -118,7 +118,7 @@ init_color_grouping(var_0) {
   level._color_friendly_spawners = [];
 
   foreach(var_17 in var_15) {
-  level._color_friendly_spawners[var_17.classname] = var_17;
+    level._color_friendly_spawners[var_17.classname] = var_17;
   }
 }
 
@@ -188,13 +188,13 @@ array_remove_dupes(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-  var_1[var_3] = 1;
+    var_1[var_3] = 1;
   }
 
   var_5 = [];
 
   foreach(var_8, var_7 in var_1) {
-  var_5[var_5.size] = var_8;
+    var_5[var_5.size] = var_8;
   }
 
   return var_5;
@@ -297,8 +297,7 @@ trigger_delete_target_chain() {
 activate_color_trigger(var_0) {
   if(var_0 == "allies") {
     thread get_colorcodes_and_activate_trigger(self.script_color_allies, var_0);
-  }
-  else {
+  } else {
     thread get_colorcodes_and_activate_trigger(self.script_color_axis, var_0);
   }
 }
@@ -374,8 +373,7 @@ same_color_code_as_last_time(var_0, var_1) {
 process_cover_node_with_last_in_mind_allies(var_0, var_1) {
   if(issubstr(var_0.script_color_allies, var_1)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = var_0;
-  }
-  else {
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = var_0;
   }
 }
@@ -383,8 +381,7 @@ process_cover_node_with_last_in_mind_allies(var_0, var_1) {
 process_cover_node_with_last_in_mind_axis(var_0, var_1) {
   if(issubstr(var_0.script_color_axis, var_1)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = var_0;
-  }
-  else {
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = var_0;
   }
 }
@@ -433,7 +430,7 @@ prioritize_colorcoded_nodes(var_0, var_1, var_2) {
   }
 
   foreach(var_7 in var_8) {
-  var_3[var_3.size] = var_7;
+    var_3[var_3.size] = var_7;
   }
 
   level.arrays_of_colorcoded_nodes[var_0][var_1] = var_3;
@@ -631,15 +628,13 @@ set_goal_and_volume(var_0) {
 
   if(isDefined(self.colornode_setgoal_func)) {
     self thread[[self.colornode_setgoal_func]](var_0);
-  }
-  else {
+  } else {
     self setgoalnode(var_0);
   }
 
   if(is_using_forcegoal_radius(var_0)) {
     thread forcegoal_radius(var_0);
-  }
-  else if(isDefined(var_0.radius) && var_0.radius > 0) {
+  } else if(isDefined(var_0.radius) && var_0.radius > 0) {
     self.goalradius = var_0.radius;
   }
 
@@ -647,18 +642,15 @@ set_goal_and_volume(var_0) {
 
   if(isDefined(var_1)) {
     self setfixednodesafevolume(var_1);
-  }
-  else {
+  } else {
     self clearfixednodesafevolume();
   }
 
   if(isDefined(var_0.fixednodesaferadius)) {
     self.fixednodesaferadius = var_0.fixednodesaferadius;
-  }
-  else if(isDefined(level.fixednodesaferadius_default)) {
+  } else if(isDefined(level.fixednodesaferadius_default)) {
     self.fixednodesaferadius = level.fixednodesaferadius_default;
-  }
-  else {
+  } else {
     self.fixednodesaferadius = 64;
   }
 }
@@ -678,8 +670,7 @@ is_using_forcegoal_radius(var_0) {
 
   if(self.fixednode) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -1269,8 +1260,7 @@ lock_spawner_for_awhile() {
 
   if(isDefined(level.friendly_respawn_lock_func)) {
     [[level.friendly_respawn_lock_func]]();
-  }
-  else {
+  } else {
     wait 2;
   }
 

@@ -333,8 +333,7 @@ x_hint_blinks() {
 
     if(!level.console && !level.player usinggamepad()) {
       var_5.fontscale = 2;
-    }
-    else {
+    } else {
       var_5.fontscale = 2 * var_6;
     }
 
@@ -345,8 +344,7 @@ x_hint_blinks() {
 
     if(!level.console && !level.player usinggamepad()) {
       var_5.fontscale = 0.25;
-    }
-    else {
+    } else {
       var_5.fontscale = 0.25 * var_6;
     }
 
@@ -359,7 +357,7 @@ x_hint_blinks() {
       }
 
       foreach(var_3 in level.x_hint) {
-      var_3.alpha = 0;
+        var_3.alpha = 0;
       }
 
       var_0 = 0.3;
@@ -904,8 +902,7 @@ crash_model_go(var_0) {
 
         if(isDefined(var_1.fxorg) && var_1.fxorg != var_1) {
           var_1.sliding_fx_org = var_1.fxorg;
-        }
-        else {
+        } else {
           var_1.sliding_fx_org = common_scripts\utility::spawn_tag_origin();
           var_1.sliding_fx_org.origin = var_1.origin;
           var_1.sliding_fx_org.angles = var_1.angles;
@@ -962,7 +959,7 @@ crash_model_go(var_0) {
   common_scripts\utility::array_thread(var_0, maps\_utility::send_notify, "stop_damage");
 
   foreach(var_18 in var_7) {
-  var_18 delete();
+    var_18 delete();
   }
 
   if(var_1.model == "vehicle_mi24p_hind_plaza_body_destroy_animated") {
@@ -1036,8 +1033,7 @@ crash_model_damage(var_0) {
 
   if(isDefined(self.damage)) {
     var_1 = self.damage;
-  }
-  else {
+  } else {
     var_1 = 60;
   }
 
@@ -1081,8 +1077,7 @@ generate_cheap_falling_object(var_0, var_1) {
 
   if(!isDefined(var_0)) {
     var_4.speed = randomfloatrange(200, 260);
-  }
-  else {
+  } else {
     var_4.speed = var_0;
   }
 
@@ -1095,8 +1090,7 @@ generate_cheap_falling_object(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_4.script_exploder = var_1;
-  }
-  else {
+  } else {
     var_4.script_fxid = "boat_fall_impact_small";
   }
 

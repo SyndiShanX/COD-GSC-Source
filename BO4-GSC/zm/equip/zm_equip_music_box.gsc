@@ -14,7 +14,6 @@
 #include scripts\zm\zm_hms_util;
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_utility;
-
 #namespace music_box;
 
 autoexec __init__system__() {
@@ -23,9 +22,9 @@ autoexec __init__system__() {
 
 __init__() {
   level.w_music_box = getweapon(#"music_box");
-  clientfield::register("scriptmover", "" + #"music_box_light_fx", 24000, 1, "int");
-  clientfield::register("scriptmover", "" + #"music_box_teleport", 1, 1, "int");
-  clientfield::register("actor", "" + #"hash_4881cb6bc59fdc49", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + # "music_box_light_fx", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + # "music_box_teleport", 1, 1, "int");
+  clientfield::register("actor", "" + # "hash_4881cb6bc59fdc49", 24000, 1, "int");
   callback::on_grenade_fired(&on_grenade_fired);
   zm_loadout::register_lethal_grenade_for_level(#"music_box");
 
@@ -47,7 +46,7 @@ on_grenade_fired(s_params) {
     e_grenade ghost();
     e_grenade.var_1a61db89 = util::spawn_model(e_grenade.model, e_grenade.origin, (0, self.angles[1] - 75, 0));
     e_grenade.var_1a61db89 linkto(e_grenade);
-    e_grenade.var_1a61db89 clientfield::set("" + #"music_box_light_fx", 1);
+    e_grenade.var_1a61db89 clientfield::set("" + # "music_box_light_fx", 1);
     e_grenade.weapon = s_params.weapon;
     s_waitresult = s_params.projectile waittill(#"stationary");
 
@@ -73,10 +72,8 @@ function_9d9bff80(var_2fe3186e, attacker) {
 
   foreach(e_zombie in a_zombies) {
     if(isalive(e_zombie) && e_zombie.marked_for_death !== 1 && e_zombie.var_46d39f48 !== 1 && e_zombie.no_gib !== 1) {
-      if(e_zombie.zm_ai_category === #"popcorn") {
-        [
-          [level.var_14160fb0]
-        ] - > waitinqueue(e_zombie);
+      if(e_zombie.zm_ai_category === # "popcorn") {
+        [[level.var_14160fb0]] - > waitinqueue(e_zombie);
         e_zombie dodamage(e_zombie.maxhealth, e_zombie.origin, attacker, self, 0, "MOD_GRENADE", 0, self.weapon);
         continue;
       }
@@ -89,7 +86,7 @@ function_9d9bff80(var_2fe3186e, attacker) {
       e_zombie thread util::delete_on_death(e_zombie.e_floater);
       e_floater moveto(e_floater.origin + (0, 0, randomfloatrange(16, 64)), 0.5);
 
-      if(e_zombie.archetype === #"zombie") {
+      if(e_zombie.archetype === # "zombie") {
         e_floater thread function_3710157f(e_zombie);
       }
     }
@@ -98,7 +95,7 @@ function_9d9bff80(var_2fe3186e, attacker) {
   e_sam thread scene::play(#"p8_zm_ora_music_box_bundle", "one_shot", e_sam);
   wait 0.5;
   self.var_1a61db89 hide();
-  self.var_1a61db89 clientfield::set("" + #"music_box_light_fx", 0);
+  self.var_1a61db89 clientfield::set("" + # "music_box_light_fx", 0);
   wait 1;
 
   foreach(e_zombie in a_zombies) {
@@ -135,7 +132,7 @@ function_9d9bff80(var_2fe3186e, attacker) {
       var_23ef51ef = vectornormalize(e_zombie getcentroid() - var_b7fc8c3e) * randomfloatrange(150, 250);
       e_zombie launchragdoll(var_23ef51ef + (0, 0, 32));
       e_zombie dodamage(e_zombie.maxhealth, e_zombie.origin, attacker, self, 0, "MOD_GRENADE", 0, self.weapon);
-      e_zombie clientfield::set("" + #"hash_4881cb6bc59fdc49", 1);
+      e_zombie clientfield::set("" + # "hash_4881cb6bc59fdc49", 1);
     }
   }
 
@@ -224,7 +221,7 @@ in_bounds(e_owner) {
 
     if(var_3fb36683) {
       self.origin = v_valid_point;
-      self.var_1a61db89 clientfield::set("" + #"hash_60a7e5b79e8064a5", 1);
+      self.var_1a61db89 clientfield::set("" + # "hash_60a7e5b79e8064a5", 1);
       return true;
     }
   }
@@ -241,7 +238,7 @@ function_9a83be2b() {
     }
   }
 
-  playFXOnTag(level._effect[#"grenade_samantha_steal"], self.var_1a61db89, "tag_origin");
+  playFXOnTag(level._effect[# "grenade_samantha_steal"], self.var_1a61db89, "tag_origin");
   self.var_1a61db89 unlink();
   self.var_1a61db89 movez(60, 1, 0.25, 0.25);
   self.var_1a61db89 vibrate((0, 0, 0), 1.5, 2.5, 1);

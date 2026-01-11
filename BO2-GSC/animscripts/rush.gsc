@@ -89,12 +89,10 @@ shouldsidestep() {
 
     if(self.a.rusherhadsidestepevent) {
       return "roll";
-    }
-    else if(isplayer(self.enemy) && self.enemy islookingat(self)) {
+    } else if(isplayer(self.enemy) && self.enemy islookingat(self)) {
       if(randomfloat(1) < 0.2) {
         return "step";
-      }
-      else {
+      } else {
         return "roll";
       }
     } else if(runlooptime > 0.9 && randomfloat(1) < 0.75)
@@ -159,8 +157,7 @@ dosidestep() {
 
   if(self.rusherdesiredstepdir == "left") {
     self.a.rushersteppeddir--;
-  }
-  else {
+  } else {
     self.a.rushersteppeddir++;
   }
 
@@ -218,8 +215,7 @@ playsidestepanim(stepanim, rushersidesteptype) {
 
     if(yawdelta > 2) {
       yawdelta = 2;
-    }
-    else if(yawdelta < 2 * -1) {
+    } else if(yawdelta < 2 * -1) {
       yawdelta = 2 * -1;
     }
 
@@ -292,8 +288,7 @@ allowevasivemovement() {
 
   if(self.animtype != "spetsnaz") {
     return false;
-  }
-  else if(self.iswounded) {
+  } else if(self.iswounded) {
     return false;
   }
 
@@ -341,17 +336,13 @@ getdesiredsidestepdir(rushersidesteptype) {
 
   if(self.a.rushersteppeddir < 0) {
     self.rusherdesiredstepdir = "right";
-  }
-  else if(self.a.rushersteppeddir > 0) {
+  } else if(self.a.rushersteppeddir > 0) {
     self.rusherdesiredstepdir = "left";
-  }
-  else if(randomroll < rightchance) {
+  } else if(randomroll < rightchance) {
     self.rusherdesiredstepdir = "right";
-  }
-  else if(randomroll < rightchance * 2) {
+  } else if(randomroll < rightchance * 2) {
     self.rusherdesiredstepdir = "left";
-  }
-  else {
+  } else {
     self.rusherdesiredstepdir = "forward";
   }
 

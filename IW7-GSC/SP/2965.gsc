@@ -115,9 +115,7 @@ func_31B7(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
 
 func_31A2(param_00) {
   var_01 = level.var_13570;
-  level.vehicle.var_116CE.var_A7C5[var_01] = [
-    [param_00]
-  ]();
+  level.vehicle.var_116CE.var_A7C5[var_01] = [[param_00]]();
 }
 
 func_31C8(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
@@ -339,9 +337,7 @@ func_3198(param_00) {
 
 build_ace(param_00, param_01) {
   var_02 = level.var_13570;
-  level.vehicle.var_116CE.var_1A03[var_02] = [
-    [param_00]
-  ]();
+  level.vehicle.var_116CE.var_1A03[var_02] = [[param_00]]();
   if(isDefined(param_01)) {
     level.vehicle.var_116CE.var_1A03[var_02] = [[param_01]](level.vehicle.var_116CE.var_1A03[var_02]);
   }
@@ -352,15 +348,11 @@ func_3196(param_00) {
 }
 
 build_atmo_types(param_00) {
-  level.vehicle.var_116CE.var_247D[level.var_13570] = [
-    [param_00]
-  ]();
+  level.vehicle.var_116CE.var_247D[level.var_13570] = [[param_00]]();
 }
 
 func_31CC(param_00) {
-  level.vehicle.var_116CE.var_12BCF[level.var_13570] = [
-    [param_00]
-  ]();
+  level.vehicle.var_116CE.var_12BCF[level.var_13570] = [[param_00]]();
 }
 
 func_31A3(param_00, param_01, param_02) {

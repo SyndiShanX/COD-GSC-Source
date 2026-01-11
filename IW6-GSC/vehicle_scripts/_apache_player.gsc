@@ -197,8 +197,7 @@ shootposwrapper(var_0, var_1) {
 shootblankorrpg(var_0, var_1) {
   if(weaponclass(self.weapon) == "rocketlauncher") {
     self shoot(1, var_0, var_1);
-  }
-  else {
+  } else {
     self shootblank(1, var_0, var_1);
   }
 }
@@ -734,8 +733,7 @@ monitorhealth() {
         case "STATE_FULL":
           if(apache_health_get() == 0) {
             var_4 = "STATE_INVULN";
-          }
-          else {
+          } else {
             var_4 = "STATE_PAIN";
           }
 
@@ -930,8 +928,7 @@ monitorhealth_ondeath() {
 
   if(isDefined(level.lastplayerapachedamage) && gettime() - level.lastplayerapachedamage < 4000) {
     maps\_player_death::grenade_death_hint(&"OILROCKS_KILLED_BY_MISSILE", &"OILROCKS_HINT_APACHE_FLARES");
-  }
-  else {
+  } else {
     setdvar("ui_deadquote", "");
   }
 
@@ -954,8 +951,7 @@ monitorhealth_ondeath_apache_crash() {
 
   if(var_3["fraction"] > 0.98) {
     self.perferred_crash_location.origin = self.origin - (0, 0, var_2);
-  }
-  else {
+  } else {
     self.perferred_crash_location.origin = self.origin + (0, 0, var_2);
   }
 
@@ -982,7 +978,7 @@ monitorhealth_damagestates_cleanup() {
   var_1 = self.heli;
 
   foreach(var_3 in var_1.damage_states) {
-  var_3 damage_state_clear(0);
+    var_3 damage_state_clear(0);
   }
 
   var_0 damage_state_tag_ent_clear_all();
@@ -1305,7 +1301,7 @@ damage_state_tag_ent_get(var_0) {
 damage_state_tag_ent_clear_all() {
   if(isDefined(self.damage_state_tag_ents)) {
     foreach(var_1 in self.damage_state_tag_ents) {
-    var_1 delete();
+      var_1 delete();
     }
 
     self.damage_state_tag_ents = undefined;

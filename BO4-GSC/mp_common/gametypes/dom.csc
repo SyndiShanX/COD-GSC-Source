@@ -7,7 +7,6 @@
 #include scripts\core_common\shoutcaster;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\ct_tutorial_skirmish;
-
 #namespace dom;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -25,10 +24,10 @@ event_handler[gametype_init] main(eventstruct) {
 on_localclient_connect(localclientnum) {
   self.domflags = [];
 
-  while(!isDefined(level.domflags[#"a"])) {
-    self.domflags[#"a"] = serverobjective_getobjective(localclientnum, "dom_a");
-    self.domflags[#"b"] = serverobjective_getobjective(localclientnum, "dom_b");
-    self.domflags[#"c"] = serverobjective_getobjective(localclientnum, "dom_c");
+  while(!isDefined(level.domflags[# "a"])) {
+    self.domflags[# "a"] = serverobjective_getobjective(localclientnum, "dom_a");
+    self.domflags[# "b"] = serverobjective_getobjective(localclientnum, "dom_b");
+    self.domflags[# "c"] = serverobjective_getobjective(localclientnum, "dom_c");
     waitframe(1);
   }
 
@@ -54,8 +53,8 @@ monitor_flag_fx(localclientnum, flag_objective, flag_name) {
     flag.angles = flag_entity.angles;
   }
 
-  fx_name = get_base_fx(flag, #"neutral");
-  play_base_fx(localclientnum, flag, fx_name, #"neutral");
+  fx_name = get_base_fx(flag, # "neutral");
+  play_base_fx(localclientnum, flag, fx_name, # "neutral");
   flag.last_progress = 0;
 
   while(true) {
@@ -70,13 +69,13 @@ monitor_flag_fx(localclientnum, flag_objective, flag_name) {
     if(progress != flag.last_progress) {
       var_76587cfe = team;
 
-      if(var_76587cfe == #"neutral") {
+      if(var_76587cfe == # "neutral") {
         var_4e8c1813 = serverobjective_getobjectivegamemodeflags(localclientnum, flag_objective);
 
         if(var_4e8c1813 == 2) {
-          var_76587cfe = shoutcaster::is_shoutcaster(localclientnum) ? #"axis" : #"allies";
+          var_76587cfe = shoutcaster::is_shoutcaster(localclientnum) ? # "axis" : # "allies";
         } else if(var_4e8c1813 == 1) {
-          var_76587cfe = shoutcaster::is_shoutcaster(localclientnum) ? #"allies" : #"axis";
+          var_76587cfe = shoutcaster::is_shoutcaster(localclientnum) ? # "allies" : # "axis";
         }
       } else if(shoutcaster::is_shoutcaster(localclientnum)) {
         var_76587cfe = util::get_other_team(var_76587cfe);
@@ -104,16 +103,16 @@ play_base_fx(localclientnum, flag, fx_name, team) {
 update_base_fx(localclientnum, flag, team) {
   fx_name = get_base_fx(flag, team);
 
-  if(shoutcaster::is_shoutcaster(localclientnum) && team != #"neutral") {
-    fx_name += team == #"allies" ? "_shoutcaster_allies" : "_shoutcaster_axis";
+  if(shoutcaster::is_shoutcaster(localclientnum) && team != # "neutral") {
+    fx_name += team == # "allies" ? "_shoutcaster_allies" : "_shoutcaster_axis";
   }
 
-  if(team == #"neutral") {
+  if(team == # "neutral") {
     play_base_fx(localclientnum, flag, fx_name, team);
     return;
   }
 
-  if(flag.last_team == #"neutral" || shoutcaster::is_shoutcaster(localclientnum)) {
+  if(flag.last_team == # "neutral" || shoutcaster::is_shoutcaster(localclientnum)) {
     play_base_fx(localclientnum, flag, fx_name, team);
     return;
   }
@@ -145,8 +144,8 @@ update_cap_fx(localclientnum, flag, team, progress) {
 
   fx_name = get_cap_fx(flag, team);
 
-  if(shoutcaster::is_shoutcaster(localclientnum) && team != #"neutral") {
-    fx_name += team == #"allies" ? "_shoutcaster_allies" : "_shoutcaster_axis";
+  if(shoutcaster::is_shoutcaster(localclientnum) && team != # "neutral") {
+    fx_name += team == # "allies" ? "_shoutcaster_allies" : "_shoutcaster_axis";
   }
 
   play_cap_fx(localclientnum, flag, fx_name, team);
@@ -162,7 +161,7 @@ get_base_fx(flag, team) {
     }
   }
 
-  if(team == #"neutral") {
+  if(team == # "neutral") {
     return "ui/fx_dom_marker_neutral";
   }
 
@@ -178,7 +177,7 @@ get_cap_fx(flag, team) {
     }
   }
 
-  if(team == #"neutral") {
+  if(team == # "neutral") {
     return "ui/fx_dom_cap_indicator_neutral";
   }
 

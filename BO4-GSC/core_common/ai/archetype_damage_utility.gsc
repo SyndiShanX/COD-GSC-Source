@@ -5,7 +5,6 @@
 
 #include scripts\core_common\ai\systems\behavior_state_machine;
 #include scripts\core_common\ai\systems\behavior_tree_utility;
-
 #namespace aiutility;
 
 autoexec registerbehaviorscriptfunctions() {
@@ -134,7 +133,7 @@ burnedkilled(entity) {
 }
 
 rapskilled(entity) {
-  if(isDefined(self.attacker) && isDefined(self.attacker.archetype) && self.attacker.archetype == #"raps") {
+  if(isDefined(self.attacker) && isDefined(self.attacker.archetype) && self.attacker.archetype == # "raps") {
     return true;
   }
 
@@ -154,7 +153,7 @@ function_e2010f4c(entity, var_515373f2) {
 private tookflashbangdamage(entity) {
   if(isDefined(entity.damageweapon) && isDefined(entity.damagemod)) {
     weapon = entity.damageweapon;
-    return (entity.damagemod == "MOD_GRENADE_SPLASH" && isDefined(weapon.rootweapon) && (weapon.rootweapon.name == #"flash_grenade" || weapon.rootweapon.name == #"concussion_grenade" || weapon.rootweapon.name == #"proximity_grenade") || isDefined(self.var_40543c03) && self.var_40543c03 == "foam");
+    return (entity.damagemod == "MOD_GRENADE_SPLASH" && isDefined(weapon.rootweapon) && (weapon.rootweapon.name == # "flash_grenade" || weapon.rootweapon.name == # "concussion_grenade" || weapon.rootweapon.name == # "proximity_grenade") || isDefined(self.var_40543c03) && self.var_40543c03 == "foam");
   }
 
   return false;

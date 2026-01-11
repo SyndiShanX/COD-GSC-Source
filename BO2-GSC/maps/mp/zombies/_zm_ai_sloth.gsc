@@ -46,8 +46,7 @@ precache() {
   level._effect["fx_buried_sloth_powerup_cycle"] = loadfx("maps/zombie_buried/fx_buried_sloth_powerup_cycle");
 }
 
-precache_fx() {
-}
+precache_fx() {}
 
 init() {
   register_sloth_client_fields();
@@ -639,8 +638,7 @@ watch_barricade() {
 
       if(should_delete) {
         self delete();
-      }
-      else {
+      } else {
         self hide_sloth_barrier();
       }
 
@@ -700,7 +698,7 @@ init_crash_triggers() {
   level.crash_triggers = getEntArray("crash_trigger", "targetname");
 
   foreach(trigger in level.crash_triggers) {
-  trigger thread watch_crash_trigger();
+    trigger thread watch_crash_trigger();
   }
 }
 
@@ -723,8 +721,7 @@ bell_ring() {
   while(true) {
     level waittill("bell_rung");
 
-    if(isDefined(level.sloth)) {
-    }
+    if(isDefined(level.sloth)) {}
   }
 }
 
@@ -1209,8 +1206,7 @@ update_player_idle() {
 
     if(is_holding(self.follow_player, "booze")) {
       gimme_anim = "zm_gimme_booze";
-    }
-    else if(is_holding(self.follow_player, "candy")) {
+    } else if(is_holding(self.follow_player, "candy")) {
       gimme_anim = "zm_gimme_candy";
     }
 
@@ -1379,11 +1375,9 @@ update_follow() {
 
       if(is_true(player.is_in_ghost_zone) || !sloth_on_same_side(player)) {
         self sloth_set_state("mansion");
-      }
-      else if(player_dist < 8100) {
+      } else if(player_dist < 8100) {
         self sloth_set_state("player_idle");
-      }
-      else {
+      } else {
         self action_player_follow(player);
       }
     } else
@@ -1452,8 +1446,7 @@ update_mansion() {
 
       if(is_true(self.to_maze) && !self sloth_behind_mansion()) {
         self action_navigate_mansion(level.maze_depart, level.maze_arrive);
-      }
-      else if(is_true(self.from_maze) && self sloth_behind_mansion()) {
+      } else if(is_true(self.from_maze) && self sloth_behind_mansion()) {
         self action_navigate_mansion(level.courtyard_depart, level.courtyard_arrive);
       }
     } else
@@ -1573,8 +1566,7 @@ update_berserk() {
 
     if(is_true(hit_ent.is_zombie)) {
       return;
-    }
-    else if(isplayer(hit_ent)) {
+    } else if(isplayer(hit_ent)) {
       if(!is_true(self.slowing)) {
         hit_ent dodamage(hit_ent.health, hit_ent.origin);
 
@@ -1670,8 +1662,7 @@ update_gunshop_run() {
   }
 }
 
-update_gunshop_candy() {
-}
+update_gunshop_candy() {}
 
 update_table_eat() {
   if(is_true(self.needs_action)) {
@@ -1727,8 +1718,7 @@ sloth_set_state(state, param2) {
 
     if(isDefined(param2)) {
       result = self[[self.start_funcs[state]]](param2);
-    }
-    else {
+    } else {
       result = self[[self.start_funcs[state]]]();
     }
 
@@ -1845,8 +1835,7 @@ start_player_idle(lock) {
 
   if(is_holding(self.follow_player, "booze")) {
     gimme_anim = "zm_gimme_booze";
-  }
-  else if(is_holding(self.follow_player, "candy")) {
+  } else if(is_holding(self.follow_player, "candy")) {
     gimme_anim = "zm_gimme_candy";
   }
 
@@ -2407,8 +2396,7 @@ action_player_idle(gimme_anim) {
 
   if(isDefined(gimme_anim)) {
     self setanimstatefromasd(gimme_anim);
-  }
-  else {
+  } else {
     self setanimstatefromasd("zm_player_idle");
   }
 }
@@ -2897,8 +2885,7 @@ protect_action() {
 
   if(!isDefined(level.sloth_protect)) {
     level.sloth_protect = 1;
-  }
-  else {
+  } else {
     level.sloth_protect++;
   }
 
@@ -3323,8 +3310,7 @@ is_facing(facee, dot_limit) {
 
   if(isplayer(self)) {
     orientation = self getplayerangles();
-  }
-  else {
+  } else {
     orientation = self.angles;
   }
 
@@ -3354,8 +3340,7 @@ sloth_gift_prompt(player) {
 
   if(active) {
     dotlimit = 0.7;
-  }
-  else {
+  } else {
     dotlimit = 0.75;
   }
 
@@ -3371,8 +3356,7 @@ sloth_gift_prompt(player) {
     if(isDefined(piece)) {
       if(piece.buildablename == "candy") {
         level.zombie_buildables["sloth"].hint = &"ZM_BURIED_CANDY_GV";
-      }
-      else {
+      } else {
         level.zombie_buildables["sloth"].hint = &"ZM_BURIED_BOOZE_GV";
       }
     }
@@ -3400,8 +3384,7 @@ onendusecandybooze(team, player, result) {
   }
 }
 
-oncantusecandybooze(player) {
-}
+oncantusecandybooze(player) {}
 
 onuseplantobjectcandybooze(player) {
   if(!isDefined(player player_get_buildable_piece(1))) {
@@ -3464,8 +3447,7 @@ sloth_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapo
 
   if(!is_true(self.damage_accumulating)) {
     self thread sloth_accumulate_damage(idamage);
-  }
-  else {
+  } else {
     self.damage_taken = self.damage_taken + idamage;
     self.num_hits++;
   }
@@ -3554,8 +3536,7 @@ sloth_time_bomb_setup() {
   maps\mp\zombies\_zm_weap_time_bomb::time_bomb_add_custom_func_global_restore(::time_bomb_global_data_restore_sloth);
 }
 
-time_bomb_global_data_save_sloth() {
-}
+time_bomb_global_data_save_sloth() {}
 
 time_bomb_global_data_restore_sloth() {
   players = getplayers();
@@ -3670,11 +3651,7 @@ sloth_debug_input() {
 
     player = get_players()[0];
 
-    if(player actionslotonebuttonpressed()) {
-    } else if(player actionslottwobuttonpressed()) {
-    } else if(player actionslotthreebuttonpressed()) {
-    } else if(player actionslotfourbuttonpressed()) {
-    }
+    if(player actionslotonebuttonpressed()) {} else if(player actionslottwobuttonpressed()) {} else if(player actionslotthreebuttonpressed()) {} else if(player actionslotfourbuttonpressed()) {}
 
     wait 0.1;
   }

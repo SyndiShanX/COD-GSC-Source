@@ -19,8 +19,7 @@ main() {
 
   if(self isdogbeingdriven()) {
     continuedrivenmovement();
-  }
-  else {
+  } else {
     startmove();
     continuemovement();
   }
@@ -82,8 +81,7 @@ startmove() {
 
   if(isDefined(var_0)) {
     var_1 = var_0.origin;
-  }
-  else {
+  } else {
     var_1 = self.pathgoalpos;
   }
 
@@ -223,8 +221,7 @@ waitfordrivenchange() {
 
       if(var_1) {
         continuedrivenmovement();
-      }
-      else {
+      } else {
         continuemovement();
       }
 
@@ -250,8 +247,7 @@ waitforrunwalkslopechange() {
 
       if(isDefined(self.script_nostairs)) {
         setmoveanim(self.movemode, "none", 1);
-      }
-      else {
+      } else {
         setmoveanim(self.movemode, self.stairsstate, 1);
       }
 
@@ -337,8 +333,7 @@ dosharpturn(var_0, var_1) {
 
     if(var_5 < 4) {
       var_7 = var_6[2];
-    }
-    else {
+    } else {
       var_7 = var_6[6];
     }
   } else
@@ -445,14 +440,11 @@ waitforstop() {
 
   if(var_7 == "attackidle") {
     var_8 = "attack";
-  }
-  else if(var_7 == "sneakidle" && var_3 == 4) {
+  } else if(var_7 == "sneakidle" && var_3 == 4) {
     var_8 = "sneak";
-  }
-  else if(var_7 == "alertidle" || var_7 == "sneakidle") {
+  } else if(var_7 == "alertidle" || var_7 == "sneakidle") {
     var_8 = "alert";
-  }
-  else {
+  } else {
     var_8 = "casual";
   }
 
@@ -504,16 +496,14 @@ waitforstop() {
 
   if(isDefined(var_1) && var_1.type != "Path") {
     var_16 = var_1.angles;
-  }
-  else {
+  } else {
     var_17 = var_0 - self.origin;
     var_16 = vectortoangles(var_17);
   }
 
   if(var_3 == 0 || var_3 == 1 || var_3 == 7 || var_3 == 8) {
     var_18 = (0, var_13.angles[1] - var_11, 0);
-  }
-  else {
+  } else {
     var_18 = (0, var_16[1] - var_11, 0);
   }
 
@@ -546,8 +536,7 @@ waitforbark() {
   for(;;) {
     if(isDefined(self.script_nobark) && self.script_nobark) {
       var_1 = var_0;
-    }
-    else if(isDefined(self.enemy)) {
+    } else if(isDefined(self.enemy)) {
       self playSound("anml_dog_bark");
       var_1 = 2 + randomint(1);
     } else
@@ -580,11 +569,9 @@ waitforfollowspeed() {
 
           if(var_7 > var_3) {
             self.moveratemultiplier = lerp(var_1, 1, lerpfraction(var_3, var_0, var_7));
-          }
-          else if(var_7 > var_2) {
+          } else if(var_7 > var_2) {
             self.moveratemultiplier = var_1;
-          }
-          else {
+          } else {
             self.moveratemultiplier = lerp(var_1, 1, lerpfraction(var_2, -1 * var_0, var_7));
           }
         }
@@ -601,8 +588,7 @@ waitforfollowspeed() {
         if(var_12 > 0) {
           if(isplayer(var_9)) {
             var_13 = lengthsquared(var_9 getentityvelocity());
-          }
-          else {
+          } else {
             var_13 = lengthsquared(var_9.velocity);
           }
 
@@ -617,8 +603,7 @@ waitforfollowspeed() {
 
       if(var_4 < var_8) {
         self.moveratemultiplier = min(var_4 + 0.05, var_8);
-      }
-      else if(var_4 > var_8) {
+      } else if(var_4 > var_8) {
         self.moveratemultiplier = max(var_4 - 0.05, var_8);
       }
     }
@@ -663,8 +648,7 @@ getstopdata() {
 
     if(lengthsquared(self.velocity) > 1) {
       var_0.angles = self.angles;
-    }
-    else {
+    } else {
       var_0.angles = vectortoangles(self.lookaheaddir);
     }
   }
@@ -675,8 +659,7 @@ getstopdata() {
 playmoveanim(var_0, var_1, var_2, var_3) {
   if(var_1) {
     self setflaggedanimknoballrestart("dog_move", var_0, % dog_move, 1, var_2, var_3);
-  }
-  else {
+  } else {
     self setflaggedanimknoball("dog_move", var_0, % dog_move, 1, var_2, var_3);
   }
 }
@@ -684,8 +667,7 @@ playmoveanim(var_0, var_1, var_2, var_3) {
 playmoveanimknob(var_0, var_1, var_2, var_3) {
   if(var_1) {
     self setflaggedanimknoballrestart("dog_move", var_0, % dog_move, 1, var_2, var_3);
-  }
-  else {
+  } else {
     self setflaggedanimknoball("dog_move", var_0, % dog_move, 1, var_2, var_3);
   }
 }
@@ -701,11 +683,9 @@ setmoveanim(var_0, var_1, var_2) {
 
     if(isDefined(self.walk_overrideanim)) {
       var_6 = self.walk_overrideanim;
-    }
-    else if(shouldsniff()) {
+    } else if(shouldsniff()) {
       var_6 = getdogmoveanim("sniff");
-    }
-    else {
+    } else {
       var_6 = getdogmoveanim("walk");
     }
 
@@ -777,8 +757,7 @@ playmovesound(var_0) {
 
   if(!var_1 && !var_2) {
     return;
-  }
-  else if(var_1 && var_2 && self.moveoverridesound == var_0) {
+  } else if(var_1 && var_2 && self.moveoverridesound == var_0) {
     return;
   }
   stopmovesound();
@@ -858,8 +837,7 @@ setdrivenanim(var_0, var_1, var_2) {
 
   if(var_0 == "walk") {
     playmoveanimknob(getdogmoveanim("sneak"), var_1, var_3, var_2);
-  }
-  else if(var_0 == "run") {
+  } else if(var_0 == "run") {
     playmoveanimknob(getdogmoveanim("run"), var_1, var_3, var_2);
   }
 }
@@ -916,8 +894,7 @@ getangleindex(var_0, var_1) {
 
   if(var_0 < 0) {
     return int(ceil((180 + var_0 - var_1) / 45));
-  }
-  else {
+  } else {
     return int(floor((180 + var_0 + var_1) / 45));
   }
 }

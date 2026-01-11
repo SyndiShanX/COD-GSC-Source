@@ -34,8 +34,7 @@ Callback_ActorDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWe
   if(maps\mp\gametypes\_tweakables::getTweakableValue("game", "onlyheadshots")) {
     if(sMeansOfDeath == "MOD_PISTOL_BULLET" || sMeansOfDeath == "MOD_RIFLE_BULLET") {
       return;
-    }
-    else if(sMeansOfDeath == "MOD_HEAD_SHOT") {
+    } else if(sMeansOfDeath == "MOD_HEAD_SHOT") {
       iDamage = 150;
     }
   }
@@ -50,8 +49,7 @@ Callback_ActorDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWe
   if(sWeapon == "none" && isDefined(eInflictor)) {
     if(isDefined(eInflictor.targetname) && eInflictor.targetname == "explodable_barrel") {
       sWeapon = "explodable_barrel_mp";
-    }
-    else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_")) {
+    } else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_")) {
       sWeapon = "destructible_car_mp";
     }
   }
@@ -95,8 +93,7 @@ Callback_ActorDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWe
       }
       if(issubstr(sMeansOfDeath, "MOD_GRENADE") && isDefined(eInflictor.isCooked)) {
         self.wasCooked = getTime();
-      }
-      else {
+      } else {
         self.wasCooked = undefined;
       }
       self.lastDamageWasFromEnemy = (isDefined(eAttacker) && (eAttacker != self));

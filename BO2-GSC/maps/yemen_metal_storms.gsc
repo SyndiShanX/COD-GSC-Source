@@ -112,7 +112,7 @@ metal_storms_cleanup() {
   a_fans = getEntArray("morals_fan", "script_noteworthy");
 
   foreach(fan in a_fans) {
-  fan delete();
+    fan delete();
   }
 }
 
@@ -454,8 +454,7 @@ intruder_turret_move_qrdrones() {
 
     if(a_qrs.size > 3) {
       wait 1;
-    }
-    else {
+    } else {
       vh_qrotor = spawn_vehicle_from_targetname("yemen_quadrotor_spawner");
       vh_qrotor.origin = s_spots[randomint(s_spots.size)].origin;
       vh_qrotor.goalpos = s_goal.origin;

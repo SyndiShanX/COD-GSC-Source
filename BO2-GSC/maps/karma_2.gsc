@@ -213,8 +213,7 @@ load_gumps_karma() {
 
   if(is_after_skipto("mall")) {
     load_gump("karma_2_gump_sundeck");
-  }
-  else {
+  } else {
     load_gump("karma_2_gump_mall");
   }
 

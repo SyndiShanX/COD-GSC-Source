@@ -38,8 +38,7 @@ main() {
 
   if(isDefined(var_6)) {
     var_4 = var_6;
-  }
-  else {}
+  } else {}
 
   if(!isDefined(self.noteleport)) {
     self teleport(var_4, var_5);
@@ -70,8 +69,7 @@ main() {
   if(!var_0) {
     if(animhasnotetrack(var_3, "finish")) {
       var_11 = "finish";
-    }
-    else if(animhasnotetrack(var_3, "stop anim")) {
+    } else if(animhasnotetrack(var_3, "stop anim")) {
       var_11 = "stop anim";
     }
   }

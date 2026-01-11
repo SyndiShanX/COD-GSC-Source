@@ -17,8 +17,7 @@ setparent(var_0) {
 
   if(isDefined(self.point)) {
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  }
-  else {
+  } else {
     setpoint("TOPLEFT");
   }
 }
@@ -145,8 +144,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_6 == "left" || var_5.alignx == "right") {
       var_9 = -1;
-    }
-    else {
+    } else {
       var_9 = 1;
     }
   } else {
@@ -154,8 +152,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_6 == "left") {
       var_9 = -1;
-    }
-    else {
+    } else {
       var_9 = 1;
     }
   }
@@ -170,8 +167,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_7 == "top" || var_5.aligny == "bottom") {
       var_11 = -1;
-    }
-    else {
+    } else {
       var_11 = 1;
     }
   } else {
@@ -179,8 +175,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_7 == "top") {
       var_11 = -1;
-    }
-    else {
+    } else {
       var_11 = 1;
     }
   }
@@ -207,11 +202,9 @@ setpointbar(var_0, var_1, var_2, var_3) {
 
   if(self.alignx == "left") {
     self.bar.x = self.bar.offset_x + self.x + self.xpadding;
-  }
-  else if(self.alignx == "right") {
+  } else if(self.alignx == "right") {
     self.bar.x = self.bar.offset_x + self.x - (self.width - self.xpadding);
-  }
-  else {
+  } else {
     self.bar.x = self.bar.offset_x + self.x - int((self.width - self.xpadding * 2) / 2);
   }
 
@@ -729,8 +722,7 @@ get_stats_display_hud(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_2)) {
     var_8 = newclienthudelem(var_2);
-  }
-  else {
+  } else {
     var_8 = newhudelem();
   }
 
@@ -791,8 +783,7 @@ add_countdown_flourish(var_0, var_1, var_2, var_3) {
 
   if(var_2 > 30) {
     var_14 = var_5;
-  }
-  else {
+  } else {
     var_14 = var_12;
   }
 
@@ -874,8 +865,7 @@ get_countdown_hud(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_2)) {
     var_7 = newclienthudelem(var_2);
-  }
-  else {
+  } else {
     var_7 = newhudelem();
   }
 
@@ -986,11 +976,9 @@ get_download_state_hud(var_0, var_1, var_2, var_3) {
 
   if(!level.console) {
     var_4 = -250;
-  }
-  else if(!isDefined(var_0)) {
+  } else if(!isDefined(var_0)) {
     var_4 = -170;
-  }
-  else {
+  } else {
     var_4 = var_0;
   }
 
@@ -1000,15 +988,13 @@ get_download_state_hud(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_1)) {
     var_5 = 100;
-  }
-  else {
+  } else {
     var_5 = var_1;
   }
 
   if(isDefined(var_2)) {
     var_6 = newclienthudelem(var_2);
-  }
-  else {
+  } else {
     var_6 = newhudelem();
   }
 
@@ -1032,8 +1018,7 @@ get_download_state_hud(var_0, var_1, var_2, var_3) {
 create_client_overlay(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = newclienthudelem(var_2);
-  }
-  else {
+  } else {
     var_3 = newhudelem();
   }
 
@@ -1145,8 +1130,7 @@ start_overlay(var_0) {
 get_overlay(var_0) {
   if(isplayer(self)) {
     var_1 = self;
-  }
-  else {
+  } else {
     var_1 = level.player;
   }
 
@@ -1172,8 +1156,7 @@ display_custom_nameplate(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_3 = var_1;
-  }
-  else if(isDefined(self.name)) {
+  } else if(isDefined(self.name)) {
     var_3 = self.name;
   }
 
@@ -1181,8 +1164,7 @@ display_custom_nameplate(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_4 = var_2;
-  }
-  else if(isDefined(self.team)) {
+  } else if(isDefined(self.team)) {
     var_4 = self.team;
   }
 

@@ -121,8 +121,7 @@ main() {
 
   if(isDefined(self.a.paintime)) {
     self.a.lastpaintime = self.a.paintime;
-  }
-  else {
+  } else {
     self.a.lastpaintime = 0;
   }
 
@@ -130,8 +129,7 @@ main() {
 
   if(self.stairsstate != "none") {
     self.a.painonstairs = 1;
-  }
-  else {
+  } else {
     self.a.painonstairs = undefined;
   }
 
@@ -150,8 +148,7 @@ main() {
 
   if(self.damagelocation == "helmet") {
     animscripts\death::helmetpop();
-  }
-  else if(wasdamagedbyexplosive() && randomint(2) == 0) {
+  } else if(wasdamagedbyexplosive() && randomint(2) == 0) {
     animscripts\death::helmetpop();
   }
 
@@ -231,15 +228,13 @@ getdamageshieldpainanim() {
 
   if(self.damageshieldcounter > 0) {
     self.damageshieldcounter--;
-  }
-  else {
+  } else {
     self.damageshieldpain = 1;
     self.allowpain = 0;
 
     if(self.ignoreme) {
       self.predamageshieldignoreme = 1;
-    }
-    else {
+    } else {
       self.ignoreme = 1;
     }
 
@@ -267,8 +262,7 @@ getpainanim() {
   if(isDefined(self.a.onback)) {
     if(self.a.pose == "crouch") {
       return animscripts\utility::lookupanim("pain", "back");
-    }
-    else {
+    } else {
       animscripts\notetracks::stoponback();
     }
   }
@@ -310,11 +304,9 @@ getrunningforwardpainanim() {
 
   if(var_2) {
     var_0 = animscripts\utility::lookupanim("pain", "run_long");
-  }
-  else if(var_1) {
+  } else if(var_1) {
     var_0 = animscripts\utility::lookupanim("pain", "run_medium");
-  }
-  else if(self maymovetopoint(self localtoworldcoords((120, 0, 0)))) {
+  } else if(self maymovetopoint(self localtoworldcoords((120, 0, 0)))) {
     var_0 = animscripts\utility::lookupanim("pain", "run_short");
   }
 
@@ -331,29 +323,21 @@ getstandpistolpainanim() {
 
   if(animscripts\utility::damagelocationisany("torso_upper")) {
     var_0 = animscripts\utility::lookupanim("pain", "pistol_torso_upper");
-  }
-  else if(animscripts\utility::damagelocationisany("torso_lower")) {
+  } else if(animscripts\utility::damagelocationisany("torso_lower")) {
     var_0 = animscripts\utility::lookupanim("pain", "pistol_torso_lower");
-  }
-  else if(animscripts\utility::damagelocationisany("neck")) {
+  } else if(animscripts\utility::damagelocationisany("neck")) {
     var_0 = animscripts\utility::lookupanim("pain", "pistol_neck");
-  }
-  else if(animscripts\utility::damagelocationisany("head")) {
+  } else if(animscripts\utility::damagelocationisany("head")) {
     var_0 = animscripts\utility::lookupanim("pain", "pistol_head");
-  }
-  else if(animscripts\utility::damagelocationisany("left_leg_upper", "right_leg_upper")) {
+  } else if(animscripts\utility::damagelocationisany("left_leg_upper", "right_leg_upper")) {
     var_0 = animscripts\utility::lookupanim("pain", "pistol_leg");
-  }
-  else if(animscripts\utility::damagelocationisany("left_arm_upper")) {
+  } else if(animscripts\utility::damagelocationisany("left_arm_upper")) {
     var_0 = animscripts\utility::lookupanim("pain", "pistol_left_arm_upper");
-  }
-  else if(animscripts\utility::damagelocationisany("left_arm_lower")) {
+  } else if(animscripts\utility::damagelocationisany("left_arm_lower")) {
     var_0 = animscripts\utility::lookupanim("pain", "pistol_left_arm_lower");
-  }
-  else if(animscripts\utility::damagelocationisany("right_arm_upper")) {
+  } else if(animscripts\utility::damagelocationisany("right_arm_upper")) {
     var_0 = animscripts\utility::lookupanim("pain", "pistol_right_arm_upper");
-  }
-  else if(animscripts\utility::damagelocationisany("right_arm_lower")) {
+  } else if(animscripts\utility::damagelocationisany("right_arm_lower")) {
     var_0 = animscripts\utility::lookupanim("pain", "pistol_right_arm_lower");
   }
 
@@ -402,8 +386,7 @@ getstandpainanim() {
   if(var_0.size < 2) {
     if(!self.a.disablelongdeath) {
       var_0 = common_scripts\utility::array_combine(var_0, animscripts\utility::lookupanim("pain", "default_long"));
-    }
-    else {
+    } else {
       var_0 = common_scripts\utility::array_combine(var_0, animscripts\utility::lookupanim("pain", "default_short"));
     }
   }
@@ -417,8 +400,7 @@ getstandpainanim() {
 
     if(var_2 < var_0.size) {
       return var_0[var_2];
-    }
-    else {
+    } else {
       return var_1[var_2 - var_0.size];
     }
   }
@@ -561,11 +543,9 @@ specialpain(var_0) {
     case "saw":
       if(self.a.pose == "stand") {
         var_3 = animscripts\utility::lookupanim("pain", "saw_stand");
-      }
-      else if(self.a.pose == "crouch") {
+      } else if(self.a.pose == "crouch") {
         var_3 = animscripts\utility::lookupanim("pain", "saw_crouch");
-      }
-      else {
+      } else {
         var_3 = animscripts\utility::lookupanim("pain", "saw_prone");
       }
 
@@ -711,8 +691,7 @@ setcrawlingpaintransanim(var_0) {
 
     if(isDefined(var_2)) {
       var_1 = [var_2[0]];
-    }
-    else {
+    } else {
       var_1 = animscripts\utility::lookupanim("crawl_death", "stand_transition");
     }
   } else if(self.a.pose == "crouch")
@@ -849,18 +828,15 @@ shouldattemptstumblingpain(var_0) {
 
   if(var_0) {
     var_3 = 200;
-  }
-  else {
+  } else {
     var_4 = "gut";
     var_3 = 128;
 
     if(45 < self.damageyaw && self.damageyaw < 135) {
       var_5 = "l";
-    }
-    else if(-135 < self.damageyaw && self.damageyaw < -45) {
+    } else if(-135 < self.damageyaw && self.damageyaw < -45) {
       var_5 = "r";
-    }
-    else if(-45 < self.damageyaw && self.damageyaw < 45) {
+    } else if(-45 < self.damageyaw && self.damageyaw < 45) {
       return;
     }
   }
@@ -1183,8 +1159,7 @@ preventpainforashorttime(var_0) {
 decidenumcrawls() {
   if(isDefined(self.a.force_num_crawls)) {
     self.a.numcrawls = self.a.force_num_crawls;
-  }
-  else {
+  } else {
     self.a.numcrawls = randomintrange(1, 5);
   }
 }
@@ -1309,8 +1284,7 @@ killself() {
 killwrapper() {
   if(isDefined(self.last_dmg_player)) {
     self kill(self.origin, self.last_dmg_player);
-  }
-  else {
+  } else {
     self kill();
   }
 }
@@ -1376,8 +1350,7 @@ watchenemyvelocity() {
     } else {
       if(isDefined(self.enemy)) {
         var_1 = self.enemy.origin;
-      }
-      else {
+      } else {
         var_1 = self.origin;
       }
 
@@ -1410,14 +1383,11 @@ additive_pain(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(animscripts\utility::damagelocationisany("right_arm_lower", "right_arm_upper", "right_hand")) {
     var_7 = animscripts\utility::lookupanim("additive_pain", "right_arm");
-  }
-  else if(animscripts\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
+  } else if(animscripts\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
     var_7 = animscripts\utility::lookupanim("additive_pain", "left_leg");
-  }
-  else if(animscripts\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
+  } else if(animscripts\utility::damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
     var_7 = animscripts\utility::lookupanim("additive_pain", "right_leg");
-  }
-  else {
+  } else {
     var_8 = animscripts\utility::lookupanim("additive_pain", "default");
     var_7 = var_8[randomint(var_8.size)];
   }

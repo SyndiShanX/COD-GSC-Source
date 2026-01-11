@@ -79,8 +79,7 @@ main() {
 
   if(self.damageLocation == "helmet" || self.damageLocation == "head") {
     self helmetPop();
-  }
-  else if(explosiveDamage && randomint(3) == 0) {
+  } else if(explosiveDamage && randomint(3) == 0) {
     self helmetPop();
   }
 
@@ -119,7 +118,7 @@ main() {
     println("^2Playing pain: ", deathAnim, " ; pose is ", self.a.pose);
   }
 
-    playDeathAnim(deathAnim);
+  playDeathAnim(deathAnim);
 }
 
 doImmediateRagdollDeath() {
@@ -157,50 +156,50 @@ doImmediateRagdollDeath() {
 playDeathAnim(deathAnim) {
   if(!animHasNoteTrack(deathAnim, "dropgun") && !animHasNoteTrack(deathAnim, "fire_spray")) // && !animHasNotetrack( deathAnim, "gun keep" ) {
     self animscripts\shared::DropAllAIWeapons();
+}
+
+//if( isDefined( self.faceDamageDir ) )
+//	self orientmode( "face angle", self.damageYaw );
+
+self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
+
+if(isDefined(self.skipDeathAnim)) {
+  ASSERTEX(self.skipDeathAnim, "self.skipDeathAnim must be either true or undefined.");
+
+  if(!isDefined(self.noragdoll)) {
+    self startRagDoll();
   }
 
-  //if( isDefined( self.faceDamageDir ) )
-  //	self orientmode( "face angle", self.damageYaw );
+  wait(0.05);
+  // failsafe in case ragdoll fails: he'll still be playing a deathanim,
+  //but at least he'll fall to the ground
+  self AnimMode("gravity");
+} else if(!animHasNotetrack(deathanim, "start_ragdoll")) {
+  self thread waitForRagdoll(getanimlength(deathanim) * 0.35);
+}
 
-  self setFlaggedAnimKnobAllRestart("deathanim", deathAnim, % body, 1, .1);
+// do we really need this anymore?
 
-  if(isDefined(self.skipDeathAnim)) {
-    ASSERTEX(self.skipDeathAnim, "self.skipDeathAnim must be either true or undefined.");
-
-    if(!isDefined(self.noragdoll)) {
-      self startRagDoll();
-    }
-
-    wait(0.05);
-    // failsafe in case ragdoll fails: he'll still be playing a deathanim,
-    //but at least he'll fall to the ground
-    self AnimMode("gravity");
-  } else if(!animHasNotetrack(deathanim, "start_ragdoll")) {
-    self thread waitForRagdoll(getanimlength(deathanim) * 0.35);
+if(getdebugdvar("debug_grenadehand") == "on") {
+  if(animhasnotetrack(deathAnim, "bodyfall large")) {
+    return;
+  }
+  if(animhasnotetrack(deathAnim, "bodyfall small")) {
+    return;
   }
 
-  // do we really need this anymore?
+  println("Death animation ", deathAnim, " does not have a bodyfall notetrack");
+  iprintlnbold("Death animation needs fixing (check console and report bug in the animation to Boon)");
+}
 
-  if(getdebugdvar("debug_grenadehand") == "on") {
-    if(animhasnotetrack(deathAnim, "bodyfall large")) {
-      return;
-    }
-    if(animhasnotetrack(deathAnim, "bodyfall small")) {
-      return;
-    }
+// SRS 11/20/08: blood pools don't always line up with ragdoll corpses, so skip them if
+//we did ragdoll without a death anim (which usually sends the body farther away from the death spot)
+if(!isDefined(self.skipDeathAnim)) {
+  self thread playDeathFX();
+}
 
-    println("Death animation ", deathAnim, " does not have a bodyfall notetrack");
-    iprintlnbold("Death animation needs fixing (check console and report bug in the animation to Boon)");
-  }
-
-    // SRS 11/20/08: blood pools don't always line up with ragdoll corpses, so skip them if
-    //we did ragdoll without a death anim (which usually sends the body farther away from the death spot)
-    if(!isDefined(self.skipDeathAnim)) {
-      self thread playDeathFX();
-    }
-
-  self animscripts\shared::DoNoteTracks("deathanim");
-  self animscripts\shared::DropAllAIWeapons();
+self animscripts\shared::DoNoteTracks("deathanim");
+self animscripts\shared::DropAllAIWeapons();
 }
 
 waitForRagdoll(time) {
@@ -317,11 +316,9 @@ specialDeath() {
     case "saw":
       if(self.a.pose == "stand") {
         DoDeathFromArray(array( % saw_gunner_death));
-      }
-      else if(self.a.pose == "crouch") {
+      } else if(self.a.pose == "crouch") {
         DoDeathFromArray(array( % saw_gunner_lowwall_death));
-      }
-      else {
+      } else {
         DoDeathFromArray(array( % saw_gunner_prone_death));
       }
       return true;
@@ -539,8 +536,7 @@ getDeathAnim() {
   if(isDefined(self.a.onback)) {
     if(self.a.pose == "crouch") {
       return getBackDeathAnim();
-    }
-    else {
+    } else {
       animscripts\shared::stopOnBack();
     }
   }
@@ -739,8 +735,7 @@ getStandDeathAnim() {
     index = randomint(deathArray.size + extendedDeathArray.size);
     if(index < deathArray.size) {
       return deathArray[index];
-    }
-    else {
+    } else {
       return extendedDeathArray[index - deathArray.size];
     }
   }
@@ -773,8 +768,7 @@ getCrouchDeathAnim() {
 getProneDeathAnim() {
   if(isDefined(self.a.proneAiming)) {
     return % prone_death_quickdeath;
-  }
-  else {
+  } else {
     return % dying_crawl_death_v1;
   }
 }

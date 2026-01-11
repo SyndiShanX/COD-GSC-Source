@@ -194,5 +194,4 @@ spawnflare(localclientnum, origin, angles) {
   return flare;
 }
 
-debug_draw_bomb_path(projectile) {
-}
+debug_draw_bomb_path(projectile) {}

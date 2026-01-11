@@ -38,8 +38,7 @@ main() {
 
   if(level.short_training) {
     maps\_utility::default_start(::inside_start);
-  }
-  else {
+  } else {
     maps\_utility::default_start(::look_training);
   }
 
@@ -336,25 +335,25 @@ main() {
   var_2 = getEntArray("launcher_ammoitem", "targetname");
 
   foreach(var_4 in var_0) {
-  var_4 thread maps\killhouse_code::ammorespawnthink(undefined, "flash_grenade", "got_flashes");
+    var_4 thread maps\killhouse_code::ammorespawnthink(undefined, "flash_grenade", "got_flashes");
   }
 
   var_6 = getEntArray("pickup_mp5", "targetname");
 
   foreach(var_8 in var_6) {
-  var_8 thread maps\killhouse_code::ammorespawnthink(undefined, "mp5");
+    var_8 thread maps\killhouse_code::ammorespawnthink(undefined, "mp5");
   }
 
   var_6 = getEntArray("pickup_rifle", "targetname");
 
   foreach(var_8 in var_6) {
-  var_8 thread maps\killhouse_code::ammorespawnthink(undefined, "g36c");
+    var_8 thread maps\killhouse_code::ammorespawnthink(undefined, "g36c");
   }
 
   var_6 = getEntArray("pickup_pistol", "targetname");
 
   foreach(var_8 in var_6) {
-  var_8 thread maps\killhouse_code::ammorespawnthink(undefined, "usp");
+    var_8 thread maps\killhouse_code::ammorespawnthink(undefined, "usp");
   }
 
   common_scripts\utility::array_thread(getEntArray("pickup_sidearm", "targetname"), maps\killhouse_code::ammorespawnthink, "spawn_sidearms", "usp");
@@ -367,7 +366,7 @@ main() {
   level.plywoodextensioncoll = getEntArray("PlywoodExtensionColl", "targetname");
 
   foreach(var_15 in level.plywoodextensioncoll) {
-  var_15 notsolid();
+    var_15 notsolid();
   }
 
   level.bodysense_coll = getent("rifle_range_bodySense_coll", "targetname");
@@ -400,7 +399,7 @@ main() {
   var_21 = maps\_vehicle::create_vehicle_from_spawngroup_and_gopath(8);
 
   foreach(var_23 in var_21) {
-  var_23 maps\_vehicle::vehicle_lights_on("running");
+    var_23 maps\_vehicle::vehicle_lights_on("running");
   }
 
   common_scripts\utility::array_thread(getEntArray("level_scripted_unloadnode", "script_noteworthy"), maps\killhouse_code::level_scripted_unloadnode);
@@ -509,19 +508,19 @@ shootingrange_1stlanelightoff() {
   var_3 = getEntArray("Light_Activation_04", "targetname");
 
   foreach(var_5 in var_0) {
-  var_5 setlightintensity(0);
+    var_5 setlightintensity(0);
   }
 
   foreach(var_5 in var_1) {
-  var_5 setlightintensity(0);
+    var_5 setlightintensity(0);
   }
 
   foreach(var_5 in var_2) {
-  var_5 setlightintensity(0);
+    var_5 setlightintensity(0);
   }
 
   foreach(var_5 in var_3) {
-  var_5 setlightintensity(0);
+    var_5 setlightintensity(0);
   }
 }
 
@@ -1099,8 +1098,7 @@ new_look_training_handler() {
   if(!level.player maps\_utility::isads()) {
     if(level.xenon) {
       thread maps\killhouse_code::keyhint("ads_360");
-    }
-    else {
+    } else {
       thread maps\killhouse_code::keyhint("ads");
     }
 
@@ -1115,8 +1113,7 @@ new_look_training_handler() {
 
   if(level.xenon) {
     thread maps\killhouse_code::keyhint("attack");
-  }
-  else {
+  } else {
     thread maps\killhouse_code::keyhint("pc_attack");
   }
 
@@ -1190,8 +1187,7 @@ rifle_hip_shooting() {
 
   if(level.xenon) {
     maps\killhouse_code::keyhint("hip_attack");
-  }
-  else {
+  } else {
     maps\killhouse_code::keyhint("pc_hip_attack");
   }
 
@@ -1223,7 +1219,7 @@ rifle_penetration_shooting() {
   maps\killhouse_code::raiseplywoodwalls();
 
   foreach(var_1 in level.plywoodextensioncoll) {
-  var_1 solid();
+    var_1 solid();
   }
 
   wait 1;
@@ -1252,7 +1248,7 @@ rifle_penetration_shooting() {
   maps\killhouse_code::lowerplywoodwalls();
 
   foreach(var_1 in level.plywoodextensioncoll) {
-  var_1 notsolid();
+    var_1 notsolid();
   }
 
   maps\killhouse_code::lowertargetdummies("rifle", undefined, undefined);
@@ -1284,8 +1280,7 @@ rifle_timed_shooting() {
   if(maps\killhouse_code::auto_aim()) {
     if(level.xenon) {
       var_0 = maps\killhouse_code::getactionbind("ads_switch");
-    }
-    else {
+    } else {
       var_0 = maps\killhouse_code::getactionbind("ads_switch_shoulder");
     }
 
@@ -1312,8 +1307,7 @@ rifle_timed_shooting() {
     if(maps\killhouse_code::auto_aim() && var_3 != 0) {
       if(level.xenon) {
         var_0 = maps\killhouse_code::getactionbind("ads_switch");
-      }
-      else {
+      } else {
         var_0 = maps\killhouse_code::getactionbind("ads_switch_shoulder");
       }
 
@@ -1337,8 +1331,7 @@ rifle_timed_shooting() {
 
     if(var_3 == 1) {
       level.waters maps\killhouse_code::execdialog("tryagain");
-    }
-    else {
+    } else {
       level.waters maps\killhouse_code::execdialog(var_2[randomint(var_2.size)]);
     }
 
@@ -1492,8 +1485,7 @@ melee_training() {
 
   if(var_0) {
     thread maps\killhouse_code::gaz_animation("killhouse_gaz_talk_side_alt", 0, "killhouse_gaz_idleC", 1);
-  }
-  else {
+  } else {
     thread maps\killhouse_code::gaz_animation("killhouse_gaz_talk_side", 0, "killhouse_gaz_idleC", 1);
   }
 
@@ -1515,7 +1507,7 @@ melee_training() {
     var_1 = getEntArray("m203_ammo_obj", "script_noteworthy");
 
     foreach(var_3 in var_1) {
-    var_3 hide();
+      var_3 hide();
     }
 
     maps\killhouse_code::registerobjective("obj_demolitions", &"KILLHOUSE_DEMOLITIONS_TRAINING", getent("obj_frag_ammo", "targetname"));
@@ -1874,7 +1866,7 @@ explosive_flags_setup() {
   level.explosive_flags = getEntArray("explosive_flag", "targetname");
 
   foreach(var_3 in level.explosive_flags) {
-  var_3 thread explosive_flag_think();
+    var_3 thread explosive_flag_think();
   }
 }
 
@@ -1891,8 +1883,7 @@ optional_training_objective_manager(var_0, var_1, var_2, var_3) {
       if(common_scripts\utility::flag("in_explosives_area")) {
         if(level.currentkeyhintactionname == "plant_explosives") {
           thread maps\killhouse_code::keyhint(level.currentkeyhintactionname, 9999, 1);
-        }
-        else if(level.currentkeyhintactionname != "") {
+        } else if(level.currentkeyhintactionname != "") {
           thread maps\killhouse_code::keyhint(level.currentkeyhintactionname);
         }
       }
@@ -2002,9 +1993,7 @@ frag_training() {
       break;
     }
 
-    if(var_6 != var_4) {
-    } else {
-    }
+    if(var_6 != var_4) {} else {}
 
     var_4 = var_6;
     wait 0.05;
@@ -2075,7 +2064,7 @@ launcherammocheck() {
   var_2 = getEntArray("m203_ammo_obj", "script_noteworthy");
 
   foreach(var_4 in var_2) {
-  var_4 show();
+    var_4 show();
   }
 
   for(;;) {
@@ -2089,7 +2078,7 @@ launcherammocheck() {
         }
 
         foreach(var_4 in var_2) {
-        var_4 hide();
+          var_4 hide();
         }
 
         var_0 = 0;
@@ -2234,9 +2223,7 @@ launchertraining() {
       break;
     }
 
-    if(var_8 != var_6) {
-    } else {
-    }
+    if(var_8 != var_6) {} else {}
 
     var_6 = var_8;
     wait 0.05;
@@ -2248,7 +2235,7 @@ launchertraining() {
   var_10 = getEntArray("m203_ammo_obj", "script_noteworthy");
 
   foreach(var_12 in var_10) {
-  var_12 hide();
+    var_12 hide();
   }
 
   common_scripts\utility::flag_clear("aa_launcher");
@@ -2493,8 +2480,7 @@ obstacle_training() {
 
   if(level.xenon) {
     maps\killhouse_code::keyhint("sprint", 5.0);
-  }
-  else {
+  } else {
     maps\killhouse_code::keyhint("sprint_pc", 5.0);
   }
 
@@ -2547,8 +2533,7 @@ ai_obstacle_course_target_think() {
     while(common_scripts\utility::flag("people_crawling")) {
       if(distance(var_0.origin, var_1.origin) <= 0.1) {
         var_0 moveto(var_0.init_pos, randomfloatrange(1, 2));
-      }
-      else if(distance(var_0.origin, var_0.init_pos) <= 0.1) {
+      } else if(distance(var_0.origin, var_0.init_pos) <= 0.1) {
         var_0 moveto(var_1.origin, randomfloatrange(1, 2));
       }
 
@@ -2640,7 +2625,7 @@ report_to_price() {
   thread maps\_utility::do_in_order(common_scripts\utility::flag_wait, "at_ladder", maps\killhouse_code::killhouse_hint, &"KILLHOUSE_HINT_LADDER");
 
   foreach(var_7 in var_0) {
-  var_7 movex(137.5, 10, 0.3, 0);
+    var_7 movex(137.5, 10, 0.3, 0);
   }
 
   thread cargoship_training();
@@ -2664,7 +2649,7 @@ reveal_anims(var_0, var_1) {
   common_scripts\utility::flag_wait("reveal_done");
 
   foreach(var_5 in var_0) {
-  level.mocaporiginhangar3 thread maps\_anim::anim_loop_solo(var_5, "reveal_idle", undefined, "end_idle");
+    level.mocaporiginhangar3 thread maps\_anim::anim_loop_solo(var_5, "reveal_idle", undefined, "end_idle");
   }
 
   common_scripts\utility::flag_wait("price_reveal_done");
@@ -2849,8 +2834,7 @@ cargoship_training() {
 
     if(level.xenon) {
       thread maps\killhouse_code::keyhint("sprint");
-    }
-    else {
+    } else {
       thread maps\killhouse_code::keyhint("sprint_pc");
     }
 
@@ -2899,7 +2883,7 @@ cargoship_training() {
     var_25 = getEntArray("cargoship_target", "script_noteworthy");
 
     foreach(var_27 in var_25) {
-    var_27 notify("want_newMelon");
+      var_27 notify("want_newMelon");
     }
 
     common_scripts\utility::flag_wait("at_top_of_ladder");
@@ -3089,7 +3073,7 @@ convoy_gate_pass(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = [];
 
   foreach(var_8 in var_0) {
-  var_6[var_6.size] = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(var_8);
+    var_6[var_6.size] = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(var_8);
   }
 
   common_scripts\utility::array_thread(var_6, ::monitor_vehicle_damage);
@@ -3143,7 +3127,7 @@ gate_setup(var_0, var_1, var_2) {
   var_3.mover.destination = getent(var_2, "targetname").origin;
 
   foreach(var_5 in var_3.gate_parts) {
-  var_5 linkto(var_3.mover);
+    var_5 linkto(var_3.mover);
   }
 
   var_3.mover.originalpos = var_3.mover.origin;
@@ -3270,8 +3254,7 @@ print_target() {
   for(;;) {
     wait 0.05;
 
-    if(isDefined(self.target_dummy)) {
-    }
+    if(isDefined(self.target_dummy)) {}
   }
 }
 
@@ -3413,8 +3396,7 @@ tower_guard_think() {
   for(;;) {
     if(var_2) {
       self setgoalnode(var_1[randomintrange(0, var_1.size)]);
-    }
-    else {
+    } else {
       self setgoalnode(var_0[randomintrange(0, var_0.size)]);
     }
 
@@ -3452,8 +3434,7 @@ ai_ambient_think(var_0, var_1) {
 
     if(anim_exists(var_3)) {
       var_0 = var_3;
-    }
-    else {
+    } else {
       var_3 = undefined;
     }
   } else
@@ -3462,8 +3443,7 @@ ai_ambient_think(var_0, var_1) {
   if(isDefined(self.script_flag)) {
     if(isDefined(var_1)) {
       common_scripts\utility::flag_wait_either(self.script_flag, var_1);
-    }
-    else {
+    } else {
       common_scripts\utility::flag_wait(self.script_flag);
     }
   }
@@ -3510,8 +3490,7 @@ ai_ambient_think(var_0, var_1) {
 
     if(anim_exists(var_0 + "_react2")) {
       var_7 = var_0 + "_react2";
-    }
-    else {
+    } else {
       var_7 = var_6;
     }
 
@@ -3523,8 +3502,7 @@ ai_ambient_think(var_0, var_1) {
 
       if(randomint(100) > 50) {
         maps\_anim::anim_generic(self, var_6);
-      }
-      else {
+      } else {
         maps\_anim::anim_generic(self, var_7);
       }
 
@@ -3691,8 +3669,7 @@ ai_ambient_noprop_think() {
 
   if(!var_2) {
     thread ai_ambient_facial();
-  }
-  else {
+  } else {
     thread ai_specific_facial_anim("generic", var_0 + "_facial");
   }
 
@@ -3730,8 +3707,7 @@ anim_exists(var_0, var_1) {
 
   if(isDefined(level.scr_anim[var_1][var_0])) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -3823,8 +3799,7 @@ patrol_simple(var_0, var_1) {
   for(;;) {
     if(isDefined(var_3.radius) && var_3.radius > 0) {
       self.goalradius = var_3.radius;
-    }
-    else {
+    } else {
       self.goalradius = 32;
     }
 
@@ -3954,11 +3929,9 @@ joggers_formation() {
 
           if(var_18 <= 0.98) {
             var_7.moveplaybackrate = 0.85;
-          }
-          else if(var_18 >= 1.02) {
+          } else if(var_18 >= 1.02) {
             var_7.moveplaybackrate = 1.15;
-          }
-          else {
+          } else {
             var_7.moveplaybackrate = 1;
           }
 
@@ -3968,11 +3941,9 @@ joggers_formation() {
 
           if(var_18 <= 0.98) {
             var_7.moveplaybackrate = 0.85;
-          }
-          else if(var_18 >= 1.02) {
+          } else if(var_18 >= 1.02) {
             var_7.moveplaybackrate = 1.15;
-          }
-          else {
+          } else {
             var_7.moveplaybackrate = 1;
           }
 
@@ -3982,8 +3953,7 @@ joggers_formation() {
 
           if(var_18 <= 0.99) {
             var_7.moveplaybackrate = 0.85;
-          }
-          else if(var_18 >= 1.01) {
+          } else if(var_18 >= 1.01) {
             var_7.moveplaybackrate = 1.18;
           }
 
@@ -3993,11 +3963,9 @@ joggers_formation() {
 
           if(var_18 <= 0.98) {
             var_7.moveplaybackrate = 0.85;
-          }
-          else if(var_18 >= 1.02) {
+          } else if(var_18 >= 1.02) {
             var_7.moveplaybackrate = 1.15;
-          }
-          else {
+          } else {
             var_7.moveplaybackrate = 1;
           }
 

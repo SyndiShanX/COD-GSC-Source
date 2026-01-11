@@ -63,14 +63,11 @@ main() {
 
   if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("camera_thirdPerson")) {
+  } else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_diehard")) {
+  } else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 
@@ -214,8 +211,7 @@ onSpawnPlayer() {
 
   if(level.multiBomb && self.pers["team"] == game["attackers"]) {
     self SetClientOmnvar("ui_carrying_bomb", true);
-  }
-  else {
+  } else {
     self SetClientOmnvar("ui_carrying_bomb", false);
   }
 
@@ -342,8 +338,7 @@ onDeadEvent(team) {
   if(team == "all") {
     if(level.bombPlanted) {
       sd_endGame(game["attackers"], game["end_reason"][game["defenders"] + "_eliminated"]);
-    }
-    else {
+    } else {
       sd_endGame(game["defenders"], game["end_reason"][game["attackers"] + "_eliminated"]);
     }
   } else if(team == game["attackers"]) {
@@ -447,7 +442,7 @@ removeBombZoneC(bombZones) {
     cZone.relatedBrushModel delete();
     visuals = getEntArray(cZone.target, "targetname");
     foreach(visual in visuals) {
-    visual delete();
+      visual delete();
     }
     cZone delete();
   }
@@ -815,8 +810,7 @@ onUseDefuseObject(player) {
 
   if(isDefined(level.bombOwner) && (level.bombOwner.bombPlantedTime + 3000 + (level.defuseTime * 1000)) > getTime() && isReallyAlive(level.bombOwner)) {
     player thread maps\mp\gametypes\_hud_message::SplashNotify("ninja_defuse", (maps\mp\gametypes\_rank::getScoreInfoValue("defuse")));
-  }
-  else {
+  } else {
     player thread maps\mp\gametypes\_hud_message::SplashNotify("defuse", maps\mp\gametypes\_rank::getScoreInfoValue("defuse"));
   }
 
@@ -946,8 +940,7 @@ bombPlanted(destroyedObj, player) {
   rot = randomfloat(360);
   if(isDefined(destroyedObj.trigger.effect)) {
     effect = destroyedObj.trigger.effect;
-  }
-  else {
+  } else {
     effect = "bomb_explosion";
   }
 
@@ -994,8 +987,7 @@ initObjectiveCam(objective) {
       camPath[camPath.size] = nextNode;
       if(isDefined(nextNode.target)) {
         nextNode = getEnt(nextNode.target, "targetname");
-      }
-      else {
+      } else {
         break;
       }
     }

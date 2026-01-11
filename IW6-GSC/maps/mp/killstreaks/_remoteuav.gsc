@@ -71,15 +71,13 @@ exceededMaxRemoteUAVs(team) {
   if(level.gameType == "dm") {
     if(isDefined(level.remote_uav[team]) || isDefined(level.remote_uav[level.otherTeam[team]])) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   } else {
     if(isDefined(level.remote_uav[team])) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -622,8 +620,7 @@ remoteUAV_Track(remoteUAV) {
     trace = bulletTrace(pos, endpos, true, remoteUAV);
     if(isDefined(trace["position"])) {
       targetPos = trace["position"];
-    }
-    else {
+    } else {
       targetPos = endpos;
       trace["endpos"] = endpos;
     }
@@ -651,11 +648,9 @@ remoteUAV_Track(remoteUAV) {
     lockedTarget = undefined;
     if(isDefined(lockedPlayer)) {
       lockedTarget = lockedPlayer;
-    }
-    else if(isDefined(lockedTurret)) {
+    } else if(isDefined(lockedTurret)) {
       lockedTarget = lockedTurret;
-    }
-    else if(isDefined(lockedUAV)) {
+    } else if(isDefined(lockedUAV)) {
       lockedTarget = lockedUAV;
     }
 
@@ -844,12 +839,10 @@ remoteUAV_markPlayer(targetPlayer) {
 
   if(isPlayer(targetPlayer)) {
     targetPlayer setPerk("specialty_radarblip", true, false);
-  }
-  else {
+  } else {
     if(isDefined(targetPlayer.uavType)) {
       shaderName = "compassping_enemy_uav";
-    }
-    else {
+    } else {
       shaderName = "compassping_sentry_enemy";
     }
     if(level.teamBased) {
@@ -890,8 +883,7 @@ remoteUAV_processTaggedAssist(victim) {
     self.taggedAssist = true;
     if(isDefined(victim)) {
       self thread maps\mp\gametypes\_gamescore::processAssist(victim);
-    }
-    else {
+    } else {
       maps\mp\gametypes\_gamescore::givePlayerScore("assist", self, undefined, true);
       self thread maps\mp\gametypes\_rank::giveRankXP("assist");
     }
@@ -909,11 +901,9 @@ remoteUAV_unmarkRemovedPlayer(remoteUAV) {
   if(isDefined(remoteUAV)) {
     if(isPlayer(self)) {
       id = self.guid;
-    }
-    else if(isDefined(self.birthtime)) {
+    } else if(isDefined(self.birthtime)) {
       id = self.birthtime;
-    }
-    else {
+    } else {
       id = self.birth_time;
     }
 
@@ -929,8 +919,7 @@ remoteUAV_unmarkRemovedPlayer(remoteUAV) {
 
   if(isPlayer(self)) {
     self unsetPerk("specialty_radarblip", true);
-  }
-  else {
+  } else {
     if(isDefined(self.remoteUAVMarkedObjID01)) {
       _objective_delete(self.remoteUAVMarkedObjID01);
     }
@@ -1046,8 +1035,7 @@ remoteUAV_rangeCountdown() {
 
   if(isDefined(self.heliInProximity)) {
     countdown = UAV_REMOTE_HELI_RANGE_COUNTDOWN;
-  }
-  else {
+  } else {
     countdown = UAV_REMOTE_PAST_RANGE_COUNTDOWN;
   }
 
@@ -1145,8 +1133,7 @@ remoteUAV_light_fx() {
 remoteUAV_dialog(dialogGroup) {
   if(dialogGroup == "tag") {
     waitTime = 1000;
-  }
-  else {
+  } else {
     waitTime = 5000;
   }
 
@@ -1237,8 +1224,7 @@ watchStingerProximity(missileTarget) {
         playFX(level.RemoteUAV_fx["missile_explode"], self.origin);
         if(isDefined(self.owner)) {
           RadiusDamage(self.origin, 400, 1000, 1000, self.owner, "MOD_EXPLOSIVE", "stinger_mp");
-        }
-        else {
+        } else {
           RadiusDamage(self.origin, 400, 1000, 1000, undefined, "MOD_EXPLOSIVE", "stinger_mp");
         }
         self hide();
@@ -1277,9 +1263,9 @@ watchSAMProximity(missileTarget, missileGroup) {
           if(distToTarget < 4000) {
             newTarget = missileTarget deployFlares();
             foreach(missileToRedirect in missileGroup) {
-            if(isDefined(missileToRedirect))
+              if(isDefined(missileToRedirect))
             }
-              missileToRedirect Missile_SetTargetEnt(newTarget);
+            missileToRedirect Missile_SetTargetEnt(newTarget);
             return;
           }
         } else {
@@ -1289,8 +1275,7 @@ watchSAMProximity(missileTarget, missileGroup) {
             playFX(level.RemoteUAV_fx["missile_explode"], missile.origin);
             if(isDefined(missile.owner)) {
               RadiusDamage(missile.origin, 400, 1000, 1000, missile.owner, "MOD_EXPLOSIVE", "stinger_mp");
-            }
-            else {
+            } else {
               RadiusDamage(missile.origin, 400, 1000, 1000, undefined, "MOD_EXPLOSIVE", "stinger_mp");
             }
             missile hide();
@@ -1389,8 +1374,7 @@ remoteUAV_watchHeliProximity() {
 
     if(!self.inHeliProximity && inHeliProximity) {
       self.inHeliProximity = true;
-    }
-    else if(self.inHeliProximity && !inHeliProximity) {
+    } else if(self.inHeliProximity && !inHeliProximity) {
       self.inHeliProximity = false;
       self.heliInProximity = undefined;
     }

@@ -71,11 +71,9 @@ main() {
   self.a.allow_shooting = 0;
 }
 
-donothing() {
-}
+donothing() {}
 
-empty(one, two, three, whatever) {
-}
+empty(one, two, three, whatever) {}
 
 clearenemy() {
   self notify("stop waiting for enemy to die");

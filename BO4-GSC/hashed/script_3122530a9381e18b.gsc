@@ -21,12 +21,11 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
-
 #namespace namespace_ca03bbb4;
 
 preload() {
   namespace_bd74bbd2::register(#"sc_mk2v", 20000, "sc_mk2v", &function_a66f0de2, &function_17f3e9e2);
-  clientfield::register("scriptmover", "" + #"hash_7b37fadc13d402a3", 20000, 1, "int");
+  clientfield::register("scriptmover", "" + # "hash_7b37fadc13d402a3", 20000, 1, "int");
 }
 
 init() {
@@ -43,13 +42,13 @@ function_1c530e2d() {
   zm_white_special_rounds::function_6acd363d(1);
 }
 
-  function private function_18a1849f(e_player) {
-    if(!isDefined(level.var_9eccff99.e_player)) {
-      return false;
-    }
-
-    return e_player === level.var_9eccff99.e_player;
+function private function_18a1849f(e_player) {
+  if(!isDefined(level.var_9eccff99.e_player)) {
+    return false;
   }
+
+  return e_player === level.var_9eccff99.e_player;
+}
 
 private function_f6048ee(e_player) {
   if(isDefined(e_player)) {
@@ -140,7 +139,7 @@ private function_9d66ea6f(e_item, e_player) {
     println(e_player.name + "<dev string:x38>");
   }
 
-    level.var_9eccff99.e_player = e_player;
+  level.var_9eccff99.e_player = e_player;
   namespace_a01a2431::function_605e5c25(e_player);
   e_player.var_9c20e2c9 = 1;
   e_player playSound("evt_canister_pickup");
@@ -220,7 +219,7 @@ private function_6d765bb3() {
       println(level.var_9eccff99.e_player.name + "<dev string:xb9>");
     }
 
-      start_step_3();
+    start_step_3();
     level notify(#"hash_141539da9edb11ab");
     return;
   }
@@ -251,7 +250,7 @@ private start_step_3() {
 }
 
 private function_195e54c() {
-  self endon(#"death", #"stop_think");
+  self endon(#"death", # "stop_think");
 
   while(true) {
     s_notify = self waittill(#"trigger_activated");
@@ -273,7 +272,7 @@ private function_a66f0de2() {
   s_unitrigger = level.var_9eccff99.var_fead3ae9 zm_item_pickup::create_item_pickup(&function_e90f6026, &function_f6048ee, &function_5b4f9f76);
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger);
   level.var_9eccff99.var_fead3ae9 setModel("p8_zm_whi_fuse_pickup_fluid_yellow");
-  level.var_9eccff99.var_fead3ae9 clientfield::set("" + #"hash_7b37fadc13d402a3", 1);
+  level.var_9eccff99.var_fead3ae9 clientfield::set("" + # "hash_7b37fadc13d402a3", 1);
   level notify(#"hash_b8dfde4a4e85cd2");
 }
 
@@ -283,7 +282,7 @@ private function_e90f6026(e_item, e_player) {
     println(e_player.name + "<dev string:xd6>");
   }
 
-    zm_ui_inventory::function_7df6bb60("zm_white_ww_mk2v_ammo", 2, e_player);
+  zm_ui_inventory::function_7df6bb60("zm_white_ww_mk2v_ammo", 2, e_player);
   e_player.var_f7694097 = 0;
   e_player thread function_9d800221();
   e_player playSound("evt_rgun_frame_pickup");
@@ -388,7 +387,7 @@ private complete_quest() {
     println(level.var_9eccff99.e_player.name + "<dev string:xf3>");
   }
 
-    level.var_9eccff99.e_player = undefined;
+  level.var_9eccff99.e_player = undefined;
   level.var_9eccff99.n_step = 5;
 }
 

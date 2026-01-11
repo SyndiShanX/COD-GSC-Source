@@ -218,8 +218,7 @@ main() {
 
   if(getdvarint("use_old_keyboard_typing") == 1) {
     level thread upload_codes();
-  }
-  else {
+  } else {
     level thread upload_codes_h1();
   }
 
@@ -1756,8 +1755,7 @@ delete_controlroom_friendlies() {
 elevator() {
   if(level.start_point != "elevator") {
     maps\_utility::waittill_aigroupcleared("elevator");
-  }
-  else {
+  } else {
     wait 1;
   }
 

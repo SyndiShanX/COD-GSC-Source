@@ -16,8 +16,7 @@ sendaimonitorkeys() {
 
     if(!isDefined(dvarval)) {
       println("DVAR NOT DEFINED");
-    }
-    else if(int(dvarval) == 1) {
+    } else if(int(dvarval) == 1) {
       sendentinfokeys();
       sendanimscriptkeys();
       sendcodestatekeys();
@@ -61,8 +60,7 @@ getstancestring() {
 getval(variable) {
   if(isDefined(variable)) {
     return variable;
-  }
-  else {
+  } else {
     return "undefined";
   }
 }
@@ -73,8 +71,7 @@ sendentinfovals() {
   }
   if(isDefined(self.enemy)) {
     enemynum = self.enemy getentitynumber();
-  }
-  else {
+  } else {
     enemynum = undefined;
   }
 
@@ -152,8 +149,7 @@ updatedebuginfo() {
 updatedebuginfointernal() {
   if(isDefined(anim.debugent) && anim.debugent == self) {
     doinfo = 1;
-  }
-  else {
+  } else {
     doinfo = getdvarint(#"_id_40CDA2CF") > 0;
 
     if(doinfo) {

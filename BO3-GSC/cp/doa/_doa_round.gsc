@@ -365,9 +365,7 @@ function function_21a582ff(current_wave, endnote) {
           wait(0.05);
         }
         spawnpoint = spawn_locations[randomint(spawn_locations.size)];
-        ai = [
-          [var_9f7a6d48.spawnfunc]
-        ](var_9f7a6d48.spawner, spawnpoint, var_9f7a6d48);
+        ai = [[var_9f7a6d48.spawnfunc]](var_9f7a6d48.spawner, spawnpoint, var_9f7a6d48);
         level.doa.var_4481ad9 = gettime() + level.doa.var_5bd7f25a;
         break;
       }

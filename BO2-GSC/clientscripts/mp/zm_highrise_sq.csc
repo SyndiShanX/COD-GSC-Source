@@ -108,7 +108,7 @@ dragon_fireball_init() {
   a_dragons = array("dragon_a", "dragon_b");
 
   foreach(str_dragon in a_dragons) {
-  level thread dragon_fireball(str_dragon);
+    level thread dragon_fireball(str_dragon);
   }
 }
 

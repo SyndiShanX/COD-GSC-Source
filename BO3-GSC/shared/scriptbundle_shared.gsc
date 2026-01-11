@@ -35,9 +35,7 @@ class cscriptbundleobjectbase {
       str_msg = ((("[ " + ([
         [_o_bundle]
       ] - > get_name())) + " ] ") + (isDefined(_s.name) ? "" + _s.name : (isDefined("no name") ? "" + "no name" : "")) + ": ") + str_msg;
-      if([
-          [_o_bundle]
-        ] - > is_testing()) {
+      if([[_o_bundle]] - > is_testing()) {
         scriptbundle::error_on_screen(str_msg);
       } else {
         assertmsg(str_msg);

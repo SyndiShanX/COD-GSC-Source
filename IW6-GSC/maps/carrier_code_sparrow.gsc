@@ -550,8 +550,7 @@ sam_update_compass() {
       if(maps\carrier_code::modulus(var_13, var_1) == 0) {
         if(var_13 >= 360) {
           var_13 = var_13 - 360;
-        }
-        else if(var_13 < 0) {
+        } else if(var_13 < 0) {
           var_13 = var_13 + 360;
         }
 
@@ -559,26 +558,19 @@ sam_update_compass() {
 
         if(var_13 == 0) {
           var_15 = &"ENEMY_HQ_NORTH";
-        }
-        else if(var_13 == 45) {
+        } else if(var_13 == 45) {
           var_15 = &"ENEMY_HQ_NORTHEAST";
-        }
-        else if(var_13 == 90) {
+        } else if(var_13 == 90) {
           var_15 = &"ENEMY_HQ_EAST";
-        }
-        else if(var_13 == 135) {
+        } else if(var_13 == 135) {
           var_15 = &"ENEMY_HQ_SOUTHEAST";
-        }
-        else if(var_13 == 180) {
+        } else if(var_13 == 180) {
           var_15 = &"ENEMY_HQ_SOUTH";
-        }
-        else if(var_13 == 225) {
+        } else if(var_13 == 225) {
           var_15 = &"ENEMY_HQ_SOUTHWEST";
-        }
-        else if(var_13 == 270) {
+        } else if(var_13 == 270) {
           var_15 = &"ENEMY_HQ_WEST";
-        }
-        else if(var_13 == 315) {
+        } else if(var_13 == 315) {
           var_15 = &"ENEMY_HQ_NORTHWEST";
         }
 
@@ -621,8 +613,7 @@ sam_monitor_damage() {
 
       if(var_0 == 1) {
         common_scripts\utility::exploder(5515);
-      }
-      else if(var_0 == 2) {
+      } else if(var_0 == 2) {
         common_scripts\utility::exploder(5525);
       }
     }
@@ -783,8 +774,7 @@ sam_start_missile_lockon() {
         if(isDefined(var_0)) {
           if(var_0.classname == "script_vehicle_y_8_gunship") {
             var_1 = 0.75;
-          }
-          else {
+          } else {
             var_1 = 0.25;
           }
 
@@ -868,8 +858,7 @@ sam_start_missile_lockon() {
 
           if(var_3) {
             target_showtoplayer(var_0, self);
-          }
-          else {
+          } else {
             target_hidefromplayer(var_0, self);
           }
         }
@@ -1110,14 +1099,11 @@ sam_missile_lockon(var_0) {
 
     if(isDefined(var_0.vehicletype) && var_0 maps\_vehicle::ishelicopter()) {
       var_1 = (0, 0, -80);
-    }
-    else if(isDefined(var_0.vehicletype) && var_0 maps\_vehicle::isairplane()) {
+    } else if(isDefined(var_0.vehicletype) && var_0 maps\_vehicle::isairplane()) {
       var_1 = (0, 0, 64);
-    }
-    else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_y_8_gunship") {
+    } else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_y_8_gunship") {
       var_1 = anglesToForward(var_0.angles) * 256 + (0, 0, 64);
-    }
-    else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_zodiac_iw6") {
+    } else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_zodiac_iw6") {
       var_1 = (0, 0, 20);
     }
 
@@ -1171,8 +1157,7 @@ kill_target(var_0) {
 
   if(isDefined(var_0.vehicletype) && var_0 maps\_vehicle::ishelicopter()) {
     var_0 kill();
-  }
-  else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_zodiac_iw6") {
+  } else if(isDefined(var_0.vehicletype) && var_0.classname == "script_vehicle_zodiac_iw6") {
     var_0 notify("sparrow_hit_zodiac");
   }
 }

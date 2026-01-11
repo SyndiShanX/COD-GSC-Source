@@ -30,8 +30,7 @@ func_1970() {
 func_FF26() {
   if(randomint(100) < 100 * level.func_D127.func_68AB.func_5BE3) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

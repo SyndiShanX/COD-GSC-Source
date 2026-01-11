@@ -60,8 +60,7 @@ custom_kill_trigger() {
         continue;
       }
 
-      if(player.origin[2] < -350.0)
-      {
+      if(player.origin[2] < -350.0) {
         player suicide();
       }
     }

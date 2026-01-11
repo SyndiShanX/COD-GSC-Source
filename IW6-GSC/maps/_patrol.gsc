@@ -108,8 +108,7 @@ patrol(var_0) {
 
     if(isDefined(var_7.radius) && var_7.radius > 0) {
       self.goalradius = var_7.radius;
-    }
-    else {
+    } else {
       self.goalradius = 32;
     }
 
@@ -204,8 +203,7 @@ patrol(var_0) {
           if(var_13 == "pause") {
             if(isDefined(self.patrol_scriptedanim) && isDefined(self.patrol_scriptedanim[var_13])) {
               var_18 = self.patrol_scriptedanim[var_13][randomint(self.patrol_scriptedanim[var_13].size)];
-            }
-            else {
+            } else {
               var_18 = var_18 + randomintrange(1, 6);
             }
           }
@@ -254,11 +252,9 @@ patrol_do_stop_transition_anim(var_0, var_1, var_2) {
 
   if(isDefined(self.patrol_stop) && isDefined(self.patrol_stop[var_0])) {
     var_3 maps\_anim::anim_generic_custom_animmode(self, "gravity", self.patrol_stop[var_0], undefined, var_1, var_4);
-  }
-  else if(isDefined(self.script_animation) && isDefined(level.scr_anim["generic"]["patrol_stop_" + self.script_animation])) {
+  } else if(isDefined(self.script_animation) && isDefined(level.scr_anim["generic"]["patrol_stop_" + self.script_animation])) {
     maps\_anim::anim_generic_custom_animmode(self, "gravity", "patrol_stop_" + self.script_animation, undefined, var_1);
-  }
-  else {
+  } else {
     var_3 maps\_anim::anim_generic_custom_animmode(self, "gravity", "patrol_stop", undefined, var_1, var_4);
   }
 }
@@ -266,11 +262,9 @@ patrol_do_stop_transition_anim(var_0, var_1, var_2) {
 patrol_do_start_transition_anim(var_0, var_1) {
   if(isDefined(self.patrol_start) && isDefined(self.patrol_start[var_0])) {
     maps\_anim::anim_generic_custom_animmode(self, "gravity", self.patrol_start[var_0], undefined, var_1);
-  }
-  else if(isDefined(self.script_animation) && isDefined(level.scr_anim["generic"]["patrol_start_" + self.script_animation])) {
+  } else if(isDefined(self.script_animation) && isDefined(level.scr_anim["generic"]["patrol_start_" + self.script_animation])) {
     maps\_anim::anim_generic_custom_animmode(self, "gravity", "patrol_start_" + self.script_animation, undefined, var_1);
-  }
-  else {
+  } else {
     maps\_anim::anim_generic_custom_animmode(self, "gravity", "patrol_start", undefined, var_1);
   }
 }

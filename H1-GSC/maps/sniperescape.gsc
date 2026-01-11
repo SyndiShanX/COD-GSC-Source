@@ -299,8 +299,7 @@ main() {
 
   if(getdvar("use_old_obj_grass") == "1") {
     common_scripts\utility::run_thread_on_targetname("grass_obj", maps\sniperescape_wounding::grass_obj);
-  }
-  else {
+  } else {
     thread maps\sniperescape_wounding::ferris_wheel_placement_objective();
   }
 
@@ -349,8 +348,7 @@ monitor_macmellon() {
   for(;;) {
     if(level.melonhead_mode_enabled) {
       self.name = "Cpt. MacMellon";
-    }
-    else {
+    } else {
       self.name = "Cpt. MacMillan";
     }
 
@@ -370,8 +368,7 @@ music() {
 
     if(!common_scripts\utility::flag("fairbattle_detected") && common_scripts\utility::flag("heat_enemies_back_off")) {
       wait 56;
-    }
-    else {
+    } else {
       wait 24;
     }
 
@@ -645,8 +642,7 @@ trigger_monitor_player_lean() {
   for(;;) {
     if(level.player isleaning()) {
       common_scripts\utility::trigger_off();
-    }
-    else {
+    } else {
       common_scripts\utility::trigger_on();
     }
 
@@ -734,8 +730,7 @@ rappel_out_of_hotel() {
 
   if(getdvarint("use_old_macmillan_rappel") == 1) {
     var_0 thread maps\_anim::anim_reach_solo(level.price, "rappel_start");
-  }
-  else {
+  } else {
     h1_handle_mac_run_past_chair();
   }
 
@@ -758,8 +753,7 @@ rappel_out_of_hotel() {
 
   if(!isDefined(level.rappel_buffer)) {
     wait(var_2);
-  }
-  else {
+  } else {
     maps\_utility::wait_for_buffer_time_to_pass(level.rappel_buffer, var_2);
   }
 
@@ -1262,8 +1256,7 @@ pool() {
 
   if(getdvar("player_sees_pool_dogs") == "") {
     setdvar("player_sees_pool_dogs", "1");
-  }
-  else {
+  } else {
     common_scripts\utility::flag_set("pool_dogs_flee");
   }
 
@@ -1420,8 +1413,7 @@ fairgrounds_after_prep() {
     if(var_1) {
       if(var_1 < 9) {
         thread maps\sniperescape_code::price_line("take_my_claymores");
-      }
-      else {
+      } else {
         thread maps\sniperescape_code::price_line("use_claymores");
       }
 

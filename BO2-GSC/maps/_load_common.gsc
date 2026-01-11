@@ -18,7 +18,7 @@ autoexec run_gump_functions() {
 
     if(isDefined(level._gump_functions) && isDefined(level._gump_functions[str_gump])) {
       foreach(func_gump in level._gump_functions[str_gump]) {
-      level thread[[func_gump]]();
+        level thread[[func_gump]]();
       }
     }
   }
@@ -141,8 +141,7 @@ exploder_load(trigger) {
   if(isDefined(trigger.script_chance) && randomfloat(1) > trigger.script_chance) {
     if(isDefined(trigger.script_delay)) {
       wait(trigger.script_delay);
-    }
-    else {
+    } else {
       wait 4;
     }
 
@@ -297,8 +296,7 @@ setupexploders() {
 
     if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
-    }
-    else {
+    } else {
       ent.v["fxid"] = exploder.script_fxid;
     }
 
@@ -327,8 +325,7 @@ setupexploders() {
 
     if(isDefined(exploder.targetname) && isDefined(acceptabletargetnames[exploder.targetname])) {
       ent.v["exploder_type"] = exploder.targetname;
-    }
-    else {
+    } else {
       ent.v["exploder_type"] = "normal";
     }
 
@@ -677,15 +674,13 @@ special_death_indicator_hudelement(shader, iwidth, iheight, fdelay, x, y) {
 
   if(isDefined(x)) {
     overlay.x = x;
-  }
-  else {
+  } else {
     overlay.x = 0;
   }
 
   if(isDefined(y)) {
     overlay.y = y;
-  }
-  else {
+  } else {
     overlay.y = 40;
   }
 
@@ -759,15 +754,13 @@ waterthink() {
 
           if(abs(d) > level.depth_allow_crouch) {
             players[i] allowcrouch(0);
-          }
-          else {
+          } else {
             players[i] allowcrouch(1);
           }
 
           if(abs(d) > level.depth_allow_prone) {
             players[i] allowprone(0);
-          }
-          else {
+          } else {
             players[i] allowprone(1);
           }
 
@@ -1026,8 +1019,7 @@ friendly_respawn_trigger(trigger) {
 
     if(isDefined(trigger.script_forcecolor)) {
       level.respawn_spawners_specific[trigger.script_forcecolor] = spawner;
-    }
-    else {
+    } else {
       level.respawn_spawner = spawner;
     }
 
@@ -1167,8 +1159,7 @@ script_gen_dump() {
 
   if(level.bscriptgened) {
     file = openfile(filename, "write");
-  }
-  else {
+  } else {
     file = 0;
   }
 
@@ -1239,15 +1230,13 @@ script_gen_dump() {
 
   if(level.bscriptgened) {
     saved = closefile(file);
-  }
-  else {
+  } else {
     saved = 1;
   }
 
   if(level.bcsvgened) {
     csvfile = openfile(csvfilename, "write");
-  }
-  else {
+  } else {
     csvfile = 0;
   }
 
@@ -1260,8 +1249,7 @@ script_gen_dump() {
 
   if(level.bcsvgened) {
     csvfilesaved = closefile(csvfile);
-  }
-  else {
+  } else {
     csvfilesaved = 1;
   }
 
@@ -1285,26 +1273,19 @@ script_gen_csvdumpprintln(file, signature) {
 
   if(issubstr(signature, "ignore")) {
     prefix = "ignore";
-  }
-  else if(issubstr(signature, "col_map_sp")) {
+  } else if(issubstr(signature, "col_map_sp")) {
     prefix = "col_map_sp";
-  }
-  else if(issubstr(signature, "gfx_map")) {
+  } else if(issubstr(signature, "gfx_map")) {
     prefix = "gfx_map";
-  }
-  else if(issubstr(signature, "rawfile")) {
+  } else if(issubstr(signature, "rawfile")) {
     prefix = "rawfile";
-  }
-  else if(issubstr(signature, "sound")) {
+  } else if(issubstr(signature, "sound")) {
     prefix = "sound";
-  }
-  else if(issubstr(signature, "xmodel")) {
+  } else if(issubstr(signature, "xmodel")) {
     prefix = "xmodel";
-  }
-  else if(issubstr(signature, "xanim")) {
+  } else if(issubstr(signature, "xanim")) {
     prefix = "xanim";
-  }
-  else if(issubstr(signature, "item")) {
+  } else if(issubstr(signature, "item")) {
     prefix = "item";
     writtenprefix = "weapon";
     path = "sp/";
@@ -1347,15 +1328,13 @@ script_gen_csvdumpprintln(file, signature) {
   }
   if(!isDefined(writtenprefix)) {
     string = prefix + ", " + getsubstr(signature, prefix.size + 1, signature.size);
-  }
-  else {
+  } else {
     string = writtenprefix + ", " + path + getsubstr(signature, prefix.size + 1, signature.size) + extension;
   }
 
   if(file == -1 || !level.bcsvgened) {
     println(string);
-  }
-  else {
+  } else {
     fprintln(file, string);
   }
 }
@@ -1363,8 +1342,7 @@ script_gen_csvdumpprintln(file, signature) {
 script_gen_dumpprintln(file, string) {
   if(file == -1 || !level.bscriptgened) {
     println(string);
-  }
-  else {
+  } else {
     fprintln(file, string);
   }
 }
@@ -1835,8 +1813,7 @@ explodable_volume() {
 
   if(isDefined(exploder) && isDefined(exploder.script_exploder)) {
     level waittill("exploder" + exploder.script_exploder);
-  }
-  else {
+  } else {
     exploder waittill("exploding");
   }
 
@@ -1901,8 +1878,7 @@ trigger_once(trig) {
 
   if(is_look_trigger(trig)) {
     trig waittill("trigger_look");
-  }
-  else {
+  } else {
     trig waittill("trigger");
   }
 

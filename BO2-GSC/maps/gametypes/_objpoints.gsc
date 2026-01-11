@@ -12,8 +12,7 @@ init() {
 
   if(level.splitscreen) {
     level.objpointsize = 15;
-  }
-  else {
+  } else {
     level.objpointsize = 8;
   }
 
@@ -39,8 +38,7 @@ createteamobjpoint(name, origin, team, shader, alpha, scale, isdistanceshown) {
 
   if(team != "all") {
     objpoint = newteamhudelem(team);
-  }
-  else {
+  } else {
     objpoint = newhudelem();
   }
 
@@ -62,8 +60,7 @@ createteamobjpoint(name, origin, team, shader, alpha, scale, isdistanceshown) {
 
   if(isDefined(alpha)) {
     objpoint.alpha = alpha;
-  }
-  else {
+  } else {
     objpoint.alpha = level.objpoint_alpha_default;
   }
 
@@ -118,8 +115,7 @@ setoriginbyname(name, origin) {
 getobjpointbyname(name) {
   if(isDefined(level.objpoints[name])) {
     return level.objpoints[name];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -127,8 +123,7 @@ getobjpointbyname(name) {
 getobjpointbyindex(index) {
   if(isDefined(level.objpointnames[index])) {
     return level.objpoints[level.objpointnames[index]];
-  }
-  else {
+  } else {
     return undefined;
   }
 }

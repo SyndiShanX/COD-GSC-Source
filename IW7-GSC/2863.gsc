@@ -27,7 +27,5 @@ func_3D74(param_00) {
     return;
   }
 
-  [
-    [level.func["sp_stat_tracking_func"]]
-  ](param_00);
+  [[level.func["sp_stat_tracking_func"]]](param_00);
 }

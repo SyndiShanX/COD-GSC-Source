@@ -40,20 +40,15 @@ killcamtime(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(var_5 || var_1 == "artillery_mp") {
       var_8 = (gettime() - var_0) / 1000 - var_2 - 0.1;
-    }
-    else if(var_6) {
+    } else if(var_6) {
       var_8 = 4.0;
-    }
-    else if(issubstr(var_1, "remotemissile_")) {
+    } else if(issubstr(var_1, "remotemissile_")) {
       var_8 = 5;
-    }
-    else if(!var_3) {
+    } else if(!var_3) {
       var_8 = 5.0;
-    }
-    else if(var_7 == "h1_fraggrenade_mp" || var_7 == "h1_fraggrenadeshort_mp") {
+    } else if(var_7 == "h1_fraggrenade_mp" || var_7 == "h1_fraggrenadeshort_mp") {
       var_8 = 4.25;
-    }
-    else {
+    } else {
       var_8 = 2.5;
     }
   } else
@@ -120,8 +115,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
 
   if(getdvar("scr_killcam_posttime") == "") {
     var_21 = 2;
-  }
-  else {
+  } else {
     var_21 = getdvarfloat("scr_killcam_posttime");
 
     if(var_21 < 0.05) {
@@ -137,8 +131,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
     }
     if(var_12 - var_20 >= 1) {
       var_21 = var_12 - var_20;
-    }
-    else {
+    } else {
       var_21 = 1;
       var_20 = var_12 - 1;
     }
@@ -153,15 +146,13 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
   }
   if(isplayer(var_14)) {
     self setclientomnvar("ui_killcam_victim_id", var_14 getentitynumber());
-  }
-  else {
+  } else {
     self setclientomnvar("ui_killcam_victim_id", -1);
   }
 
   if(isplayer(var_13)) {
     self setclientomnvar("ui_killcam_killedby_id", var_13 getentitynumber());
-  }
-  else if(isagent(var_13)) {
+  } else if(isagent(var_13)) {
     self setclientomnvar("ui_killcam_killedby_id", -1);
   }
 
@@ -179,8 +170,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
     if(isDefined(var_25)) {
       if(maps\mp\_utility::ismeleemod(var_15) && !maps\mp\gametypes\_weapons::isriotshield(var_4)) {
         var_25 = "iw5_combatknife";
-      }
-      else {
+      } else {
         var_25 = maps\mp\_utility::strip_suffix(var_25, "_lefthand");
         var_25 = maps\mp\_utility::strip_suffix(var_25, "_mp");
       }
@@ -206,18 +196,15 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
 
   if(isplayer(var_14) && var_14.pers["nemesis_guid"] == var_13.guid && var_14.pers["nemesis_tracking"][var_13.guid] >= 2) {
     self setclientomnvar("ui_killcam_killedby_nemesis", 1);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_killcam_killedby_nemesis", 0);
   }
 
   if(!var_11 && !level.gameended) {
     self setclientomnvar("ui_killcam_text", "skip");
-  }
-  else if(!level.gameended) {
+  } else if(!level.gameended) {
     self setclientomnvar("ui_killcam_text", "respawn");
-  }
-  else {
+  } else {
     self setclientomnvar("ui_killcam_text", "none");
   }
 
@@ -271,12 +258,12 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
 
   if(level.multiteambased) {
     foreach(var_30 in level.teamnamelist) {
-    self allowspectateteam(var_30, 1);
+      self allowspectateteam(var_30, 1);
     }
   }
 
   foreach(var_30 in level.teamnamelist) {
-  self allowspectateteam(var_30, 1);
+    self allowspectateteam(var_30, 1);
   }
 
   thread endedkillcamcleanup();
@@ -311,8 +298,7 @@ killcam(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, va
 
   if(!level.showingfinalkillcam) {
     thread waitskipkillcambutton(var_10);
-  }
-  else {
+  } else {
     self notify("showing_final_killcam");
   }
 

@@ -314,8 +314,7 @@ friendlies_into_choppers() {
     }
     if(var_1 == 0) {
       var_1 = 1;
-    }
-    else if(var_1 == 1) {
+    } else if(var_1 == 1) {
       var_1 = 0;
     }
 
@@ -381,8 +380,7 @@ friendly_fire_vehicle_thread() {
 
     if(common_scripts\utility::flag("friendlies_loading_vehicles")) {
       setdvar("ui_deadquote", "@AC130_FRIENDLY_FIRE");
-    }
-    else {
+    } else {
       setdvar("ui_deadquote", "@AC130_CIVILIAN_FIRE_VEHICLE");
     }
 
@@ -713,8 +711,7 @@ get_exploder_anim_name() {
 
   if(var_1.size > 1 && isDefined(var_1[1])) {
     var_0 = var_1[1];
-  }
-  else {
+  } else {
     var_0 = self.model + "_anim";
   }
 
@@ -737,7 +734,7 @@ exploderanimhide_setup() {
   level.ac130_exploder_finalstates = ["h1_ac130_1story_final", "h1_ac130_1story_house_d_final", "h1_ac130_2story_house_d_final", "h1_ac130_2story_d_final", "h1_ac130_barn_sm_final", "h1_ac130_crane_final", "h1_ac130_l2story_final", "h1_ac130_shed_sm_final", "h1_ac130_watertower_final"];
 
   foreach(var_1 in level.ac130_exploder_finalstates) {
-  precachemodel(var_1);
+    precachemodel(var_1);
   }
 
   foreach(var_4 in getarraykeys(level.exploders)) {
@@ -769,9 +766,8 @@ exploderanimhide_think(var_0) {
       var_6 show();
 
       foreach(var_8 in var_0) {
-      var_8 delete();
+        var_8 delete();
       }
-    } else {
-    }
+    } else {}
   }
 }

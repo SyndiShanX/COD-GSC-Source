@@ -16,8 +16,7 @@ hack_perks() {
 
     if(isDefined(vending_triggers[i].machine)) {
       machine[0] = vending_triggers[i].machine;
-    }
-    else {
+    } else {
       machine = getEntArray(vending_triggers[i].target, "targetname");
     }
 

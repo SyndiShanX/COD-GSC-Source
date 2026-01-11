@@ -27,16 +27,14 @@ main() {
 
   if(isDefined(self.a.painTime)) {
     self.a.lastPainTime = self.a.painTime;
-  }
-  else {
+  } else {
     self.a.lastPainTime = 0;
   }
 
   self.a.painTime = gettime();
   if(self.stairsState != "none") {
     self.a.painOnStairs = true;
-  }
-  else {
+  } else {
     self.a.painOnStairs = undefined;
   }
 
@@ -70,8 +68,7 @@ main() {
 
   if(self.damageLocation == "helmet") {
     self animscripts\death::helmetPop();
-  }
-  else if(self wasDamagedByExplosive() && randomint(2) == 0) {
+  } else if(self wasDamagedByExplosive() && randomint(2) == 0) {
     self animscripts\death::helmetPop();
   }
 
@@ -88,9 +85,9 @@ main() {
     }
   }
 
-    if(crawlingPain()) {
-      return;
-    }
+  if(crawlingPain()) {
+    return;
+  }
 
   if(specialPain(self.a.special)) {
     return;
@@ -106,7 +103,7 @@ main() {
     println("^2Playing pain: ", painAnim, " ; pose is ", self.a.pose);
   }
 
-    playPainAnim(painAnim);
+  playPainAnim(painAnim);
 }
 
 initPainFx() {
@@ -180,8 +177,7 @@ getDamageShieldPainAnim() {
 
   if(self.ignoreme) {
     self.preDamageShieldIgnoreMe = true;
-  }
-  else {
+  } else {
     self.ignoreme = true;
   }
 
@@ -210,8 +206,7 @@ getPainAnim() {
   if(isDefined(self.a.onback)) {
     if(self.a.pose == "crouch") {
       return % back_pain;
-    }
-    else {
+    } else {
       animscripts\shared::stopOnBack();
     }
   }
@@ -376,8 +371,7 @@ getStandPainAnim() {
     index = randomint(painArray.size + extendedPainArray.size);
     if(index < painArray.size) {
       return painArray[index];
-    }
-    else {
+    } else {
       return extendedPainArray[index - painArray.size];
     }
   }
@@ -430,8 +424,7 @@ getCrouchPainAnim() {
 getPronePainAnim() {
   if(randomint(2) == 0) {
     return % prone_reaction_A;
-  }
-  else {
+  } else {
     return % prone_reaction_B;
   }
 }
@@ -592,11 +585,9 @@ specialPain(anim_special) {
     case "saw":
       if(self.a.pose == "stand") {
         painAnim = % saw_gunner_pain;
-      }
-      else if(self.a.pose == "crouch") {
+      } else if(self.a.pose == "crouch") {
         painAnim = % saw_gunner_lowwall_pain_02;
-      }
-      else {
+      } else {
         painAnim = % saw_gunner_prone_pain;
       }
 
@@ -659,7 +650,7 @@ mg42pain(pose) {
     return;
   }
 
-    self setflaggedanimknob("painanim", level.mg_animmg["pain_" + pose], 1, .1, 1);
+  self setflaggedanimknob("painanim", level.mg_animmg["pain_" + pose], 1, .1, 1);
   self animscripts\shared::DoNoteTracks("painanim");
 }
 
@@ -696,13 +687,13 @@ crawlingPain() {
     self.forceLongDeath = 1;
   }
 
-    if(isDefined(self.forceLongDeath)) {
-      self.health = 10;
-      self thread crawlingPistol();
+  if(isDefined(self.forceLongDeath)) {
+    self.health = 10;
+    self thread crawlingPistol();
 
-      self waittill("killanimscript");
-      return true;
-    }
+    self waittill("killanimscript");
+    return true;
+  }
 
   transAnims["prone"] = array( % dying_crawl_2_back);
   transAnims["stand"] = array( % dying_stand_2_back_v1, % dying_stand_2_back_v2);
@@ -1211,14 +1202,13 @@ printLongDeathDebugText(loc, text) {
   }
 }
 
-  decideNumCrawls() {
-    if(isDefined(self.a.force_num_crawls)) {
-      self.a.numCrawls = self.a.force_num_crawls;
-    }
-    else {
-      self.a.numCrawls = randomIntRange(1, 5);
-    }
+decideNumCrawls() {
+  if(isDefined(self.a.force_num_crawls)) {
+    self.a.numCrawls = self.a.force_num_crawls;
+  } else {
+    self.a.numCrawls = randomIntRange(1, 5);
   }
+}
 
 shouldKeepCrawling() {
   // TODO: player distance checks, etc...
@@ -1242,9 +1232,9 @@ TryCornerRightGrenadeDeath() {
     return true;
   }
 
-    if(anim.numDeathsUntilCornerGrenadeDeath > 0) {
-      return false;
-    }
+  if(anim.numDeathsUntilCornerGrenadeDeath > 0) {
+    return false;
+  }
   if(gettime() < anim.nextCornerGrenadeDeathTime) {
     return false;
   }
@@ -1454,8 +1444,7 @@ watchEnemyVelocity() {
     } else {
       if(isDefined(self.enemy)) {
         prevpos = self.enemy.origin;
-      }
-      else {
+      } else {
         prevpos = self.origin;
       }
       prevenemy = self.enemy;
@@ -1492,14 +1481,11 @@ additive_pain(damage, attacker, direction_vec, point, type, modelName, tagName) 
   }
   if(self damageLocationIsAny("right_arm_lower", "right_arm_upper", "right_hand")) {
     painAnim = % pain_add_standing_right_arm;
-  }
-  else if(self damageLocationIsAny("left_leg_upper", "left_leg_lower", "left_foot")) {
+  } else if(self damageLocationIsAny("left_leg_upper", "left_leg_lower", "left_foot")) {
     painAnim = % pain_add_standing_left_leg;
-  }
-  else if(self damageLocationIsAny("right_leg_upper", "right_leg_lower", "right_foot")) {
+  } else if(self damageLocationIsAny("right_leg_upper", "right_leg_lower", "right_foot")) {
     painAnim = % pain_add_standing_right_leg;
-  }
-  else {
+  } else {
     painAnim = painAnimArray[randomint(painAnimArray.size)];
   }
 

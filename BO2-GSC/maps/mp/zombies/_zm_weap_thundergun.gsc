@@ -235,8 +235,7 @@ thundergun_fling_zombie(player, fling_vec, index) {
 
     if(!index) {
       points = maps\mp\zombies\_zm_score::get_zombie_death_player_points();
-    }
-    else if(1 == index) {
+    } else if(1 == index) {
       points = 30;
     }
 
@@ -257,8 +256,7 @@ zombie_knockdown(player, gib) {
 
   if(isDefined(level.override_thundergun_damage_func)) {
     self[[level.override_thundergun_damage_func]](player, gib);
-  }
-  else {
+  } else {
     self.thundergun_handle_pain_notetracks = ::handle_thundergun_pain_notetracks;
     self dodamage(damage, player.origin, player);
   }
@@ -274,8 +272,7 @@ thundergun_knockdown_zombie(player, gib) {
   }
   if(isDefined(self.thundergun_knockdown_func)) {
     self[[self.thundergun_knockdown_func]](player, gib);
-  }
-  else {
+  } else {
     self dodamage(level.zombie_vars["thundergun_knockdown_damage"], player.origin, player);
   }
 
@@ -329,8 +326,7 @@ setup_thundergun_vox(player, fling, gib, knockdown) {
     return;
   }
   if(!fling && (gib || knockdown)) {
-    if(25 > randomintrange(1, 100)) {
-    }
+    if(25 > randomintrange(1, 100)) {}
   }
 
   if(fling) {

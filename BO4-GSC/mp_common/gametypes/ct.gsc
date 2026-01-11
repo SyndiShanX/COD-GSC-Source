@@ -14,7 +14,6 @@
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
-
 #namespace ct;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -42,16 +41,16 @@ function_7c4ef26b(predictedspawn) {
   setdvar(#"custom_killstreak_mode", 2);
 
   if(isDefined(level.killstreakindices)) {
-    if(isDefined(level.killstreakindices[#"uav"])) {
-      setdvar(#"custom_killstreak1", level.killstreakindices[#"uav"]);
+    if(isDefined(level.killstreakindices[# "uav"])) {
+      setdvar(#"custom_killstreak1", level.killstreakindices[# "uav"]);
     }
 
-    if(isDefined(level.killstreakindices[#"satellite"])) {
-      setdvar(#"custom_killstreak2", level.killstreakindices[#"satellite"]);
+    if(isDefined(level.killstreakindices[# "satellite"])) {
+      setdvar(#"custom_killstreak2", level.killstreakindices[# "satellite"]);
     }
 
-    if(isDefined(level.killstreakindices[#"remote_missile"])) {
-      setdvar(#"custom_killstreak3", level.killstreakindices[#"remote_missile"]);
+    if(isDefined(level.killstreakindices[# "remote_missile"])) {
+      setdvar(#"custom_killstreak3", level.killstreakindices[# "remote_missile"]);
     }
   }
 
@@ -149,7 +148,7 @@ j_fore_le_01() {
     }
 
     if(!e_player isinmovemode("ufo", "noclip")) {
-      level thread ct_bots::activate_bots(level.var_105dad71, #"axis");
+      level thread ct_bots::activate_bots(level.var_105dad71, # "axis");
       level thread spawn_robot(e_player);
     }
 

@@ -351,8 +351,7 @@ drone_intro_blockade() {
     if(e_attacker == level.player) {
       if(damagetype == "MOD_PROJECTILE_SPLASH") {
         n_damage = n_damage / 2;
-      }
-      else if(damagetype == "MOD_PROJECTILE") {
+      } else if(damagetype == "MOD_PROJECTILE") {
         n_damage = 2600;
       }
 

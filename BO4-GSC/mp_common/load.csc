@@ -11,7 +11,6 @@
 #include scripts\core_common\vehicles\driving_fx;
 #include scripts\mp_common\callbacks;
 #include scripts\mp_common\gametypes\gametype;
-
 #namespace load;
 
 levelnotifyhandler(clientnum, state, oldstate) {

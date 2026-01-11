@@ -72,8 +72,7 @@ init(map_name) {
 
   if(map_name == "impact") {
     buildAllFlightPathsImpact();
-  }
-  else {
+  } else {
     buildAllFlightPathsDefault();
   }
 
@@ -394,11 +393,9 @@ debug_print_movement(movement) {
   outString = "";
   if(movement[0] > 0) {
     outString += "forward";
-  }
-  else if(movement[0] == 0) {
+  } else if(movement[0] == 0) {
     outString += "-";
-  }
-  else if(movement[0] < 0) {
+  } else if(movement[0] < 0) {
     outString += "backward";
   }
 
@@ -406,11 +403,9 @@ debug_print_movement(movement) {
 
   if(movement[1] > 0) {
     outString += "right";
-  }
-  else if(movement[1] == 0) {
+  } else if(movement[1] == 0) {
     outString += "-";
-  }
-  else if(movement[1] < 0) {
+  } else if(movement[1] < 0) {
     outString += "left";
   }
 
@@ -490,8 +485,7 @@ endFlyby(streakName) {
 
   if(!(isDefined(self.forceClean))) {
     wait(5);
-  }
-  else {
+  } else {
     self StopSounds();
   }
 
@@ -895,9 +889,7 @@ monitorWeaponFire(streakName, plane) {
 
   if(isBot(self)) {
     self thread bot_fire_controller(plane, config);
-  }
-
-  else {
+  } else {
     self thread monitor_attack_button(plane);
 
     while(plane.ammoCount > 0) {
@@ -930,8 +922,7 @@ monitor_attack_button(plane) {
   while(isDefined(plane)) {
     if(self AttackButtonPressed()) {
       self.is_attacking = 1;
-    }
-    else {
+    } else {
       self.is_attacking = 0;
     }
     wait 0.1;
@@ -962,7 +953,7 @@ updateCannonShake(streakName) {
   if(isDefined(self)) {
     if(isDefined(self.turret))
   }
-      self.turret TurretFireDisable();
+  self.turret TurretFireDisable();
 }
 
 ALTITUDE_WARNING_LIMIT = 10;

@@ -31,8 +31,7 @@ init_stage() {
 
   if(flag("sq_is_max_tower_built")) {
     level thread stage_vo_max();
-  }
-  else {
+  } else {
     level thread stage_vo_ric();
   }
 
@@ -50,8 +49,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 stage_vo_max() {
   level waittill("lantern_crashing");

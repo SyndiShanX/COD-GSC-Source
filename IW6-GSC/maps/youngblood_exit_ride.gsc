@@ -12,8 +12,7 @@ exit_ride_setup() {
 
   if(!var_1) {
     var_3 = getvehiclenode("start_truck_part3", "script_noteworthy");
-  }
-  else {
+  } else {
     var_3 = getvehiclenode("start_truck_part3_2", "script_noteworthy");
   }
 

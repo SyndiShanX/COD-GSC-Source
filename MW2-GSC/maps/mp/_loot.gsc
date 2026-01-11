@@ -46,7 +46,7 @@ init() {
 
   thread updateLootDvars();
 
-    thread onPlayerConnect();
+  thread onPlayerConnect();
 }
 
 onPlayerConnect() {
@@ -194,20 +194,20 @@ updateLootDvars() {
     setDvar("scr_forceloot", "0");
   }
 
-    for(;;) {
-      if(getDvar("scr_forceloot") != "" && getDvar("scr_forceloot") != "0") {
-        setDvar("scr_loot_baseChance", 1);
-      }
-
-        level.lootMins["epic"] = getDvarFloat("scr_loot_epicMin");
-      level.lootMins["rare"] = getDvarFloat("scr_loot_rareMin");
-      //level.lootMins["common"] = getDvarFloat( "scr_loot_commonMin" );
-
-      level.lootBaseChance = getDvarFloat("scr_loot_baseChance");
-      level.lootIdealTime = getDvarFloat("scr_loot_idealTime");
-
-      wait(1.0);
+  for(;;) {
+    if(getDvar("scr_forceloot") != "" && getDvar("scr_forceloot") != "0") {
+      setDvar("scr_loot_baseChance", 1);
     }
+
+    level.lootMins["epic"] = getDvarFloat("scr_loot_epicMin");
+    level.lootMins["rare"] = getDvarFloat("scr_loot_rareMin");
+    //level.lootMins["common"] = getDvarFloat( "scr_loot_commonMin" );
+
+    level.lootBaseChance = getDvarFloat("scr_loot_baseChance");
+    level.lootIdealTime = getDvarFloat("scr_loot_idealTime");
+
+    wait(1.0);
+  }
 }
 
 unlockedCaC() {
@@ -226,9 +226,9 @@ gotLoot() {
       returnfalse = false;
     }
 
-      if(returnfalse) {
-        return false;
-      }
+    if(returnfalse) {
+      return false;
+    }
   }
 
   baseChance = level.lootBaseChance;
@@ -246,11 +246,9 @@ gotLoot() {
 getLootTier(lootRoll) {
   if(lootRoll >= level.lootMins["epic"]) {
     return "epic";
-  }
-  else if(lootRoll >= level.lootMins["rare"]) {
+  } else if(lootRoll >= level.lootMins["rare"]) {
     return "rare";
-  }
-  else {
+  } else {
     return "common";
   }
 }
@@ -339,7 +337,7 @@ showLootNotify(lootTier) {
 playMoneyFx(victim, attacker, sMeansOfDeath) {
   /*
   victim endon ( "disconnect" );
-	
+  	
   origin = victim getTagOrigin( "j_spine4" );
   victim.fxModel.origin = origin;
   wait ( 0.05 );
@@ -368,9 +366,9 @@ dropLoot(lootTier, lootName, dropEnt) {
     assert(droppedLootName != lootName);
   }
 
-    if(lootName[0] != "$") {
-      self.droppedLootNames[self.droppedLootNames.size] = lootName;
-    }
+  if(lootName[0] != "$") {
+    self.droppedLootNames[self.droppedLootNames.size] = lootName;
+  }
 
   fxEnt = spawn("script_model", dropOrigin);
   //fxEnt.angles = (-90,0,0);
@@ -394,7 +392,7 @@ dropLoot(lootTier, lootName, dropEnt) {
     lootTrigger thread lootDebugPrint(lootTier, lootName);
   }
 
-    lootTrigger endon("death");
+  lootTrigger endon("death");
 
   wait(0.05);
 

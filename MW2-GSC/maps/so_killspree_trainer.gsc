@@ -578,7 +578,7 @@ so_course_loop_think() {
     playerPrimaryWeapons = player GetWeaponsListPrimaries();
     if(playerPrimaryWeapons.size > 0) {
       foreach(weapon in playerPrimaryWeapons) {
-      player givemaxammo(weapon);
+        player givemaxammo(weapon);
       }
     }
   }

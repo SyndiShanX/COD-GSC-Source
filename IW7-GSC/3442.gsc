@@ -123,15 +123,13 @@ commander_monitor_tactics() {
       if(var_00 == "bot_select") {
         if(var_01 > 0) {
           commander_handle_notify_quick("bot_next");
-        }
-        else if(var_01 < 0) {
+        } else if(var_01 < 0) {
           commander_handle_notify_quick("bot_prev");
         }
       } else if(var_00 == "tactics_menu") {
         if(var_01 > 0) {
           commander_handle_notify_quick("tactics_menu");
-        }
-        else if(var_01 <= 0) {
+        } else if(var_01 <= 0) {
           commander_handle_notify_quick("tactics_close");
         }
       }
@@ -370,28 +368,23 @@ hud_monitorplayerownership() {
         if(isDefined(var_7.owner)) {
           if(scripts\engine\utility::array_contains(var_02, var_07)) {
             self.ownershipstring[var_01].color = (1, 0, 0);
-          }
-          else {
+          } else {
             var_02 = scripts\engine\utility::array_add(var_02, var_07);
           }
 
           if(var_07 != var_7.owner && scripts\engine\utility::array_contains(var_02, var_7.owner)) {
             self.ownershipstring[var_01].color = (1, 0, 0);
-          }
-          else {
+          } else {
             var_02 = scripts\engine\utility::array_add(var_02, var_7.owner);
           }
 
           if(var_07 == self) {
             self.ownershipstring[var_01].color = (1, 0, 0);
-          }
-          else if(var_7.owner == var_07) {
+          } else if(var_7.owner == var_07) {
             self.ownershipstring[var_01].color = (1, 0, 0);
-          }
-          else if(var_7.owner == self) {
+          } else if(var_7.owner == self) {
             self.ownershipstring[var_01].color = (0, 1, 0);
-          }
-          else {
+          } else {
             self.ownershipstring[var_01].color = (1, 1, 1);
           }
         } else if(isDefined(var_7.bot_fireteam_follower))
@@ -423,8 +416,7 @@ commander_wait_connect() {
         if(!isDefined(var_1.team)) {
           if(level.teamcount["axis"] < level.teamcount["allies"]) {
             var_02 = "axis";
-          }
-          else if(level.teamcount["allies"] < level.teamcount["axis"]) {
+          } else if(level.teamcount["allies"] < level.teamcount["axis"]) {
             var_02 = "allies";
           }
         }
@@ -571,8 +563,7 @@ commander_spectate_next_bot(var_00) {
 
     if(var_06 < 0) {
       var_06 = level.players.size - 1;
-    }
-    else if(var_06 >= level.players.size) {
+    } else if(var_06 >= level.players.size) {
       var_06 = 0;
     }
 
@@ -629,8 +620,7 @@ get_spectated_player() {
 
   if(isDefined(self.forcespectatorent)) {
     var_00 = self.forcespectatorent;
-  }
-  else {
+  } else {
     var_00 = self getspectatingplayer();
   }
 

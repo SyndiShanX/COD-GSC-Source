@@ -148,8 +148,7 @@ smash(var_0) {
 getsmashanimlength() {
   if(level.kraken.phase == "heat") {
     var_0 = "heat_smash";
-  }
-  else {
+  } else {
     var_0 = "smash";
   }
 
@@ -249,12 +248,10 @@ alienkrakententacledamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
 
   if(isDefined(level.kraken)) {
     level.kraken maps\mp\agents\alien\alien_kraken\_alien_kraken::alienkrakendamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-  }
-  else {
+  } else {
     if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
       var_1.owner thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("hitaliensoft");
-    }
-    else {
+    } else {
       var_1 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback("hitaliensoft");
     }
 

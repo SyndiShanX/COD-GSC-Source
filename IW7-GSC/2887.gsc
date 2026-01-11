@@ -115,8 +115,7 @@ func_ACA2() {
 
   if(isDefined(self.func_10D0C) && self.func_10D0C) {
     func_ACA4();
-  }
-  else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
+  } else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
     func_ACA3();
   }
 
@@ -206,8 +205,7 @@ func_B27A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if(isDefined(self.func_EF17) && !isDefined(self.func_EF16) || !isDefined(self.func_EF17) && isDefined(self.func_EF16)) {
     self.func_8E57 = max(func_95A8([self.func_EF17, self.func_EF16]) / self.func_1098E, 0.05);
-  }
-  else {
+  } else {
     self.func_13585 = max(func_95A8([self.func_EF17, var_00, 0.05]) / self.func_1098E, 0.05);
     self.func_13584 = max(func_95A8([self.func_EF16, var_01, 0.1]) / self.func_1098E, 0.1);
 
@@ -220,8 +218,7 @@ func_B27A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if(isDefined(self.func_EF19) && !isDefined(self.func_EF18) || !isDefined(self.func_EF19) && isDefined(self.func_EF18)) {
     self.func_ADA3 = max(func_95A8([self.func_EF19, self.func_EF18]) / self.func_1098E, 0.05);
-  }
-  else {
+  } else {
     self.func_13587 = max(func_95A8([self.func_EF19, var_02, 0.05]) / self.func_1098E, 0.05);
     self.func_13586 = max(func_95A8([self.func_EF18, var_03, 0.75]) / self.func_1098E, 0.1);
 
@@ -236,8 +233,7 @@ func_B27A(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 func_10C9A() {
   if(self.func_12AE2 || self.func_12AE1) {
     thread func_AC89();
-  }
-  else {
+  } else {
     thread func_AC88();
   }
 }
@@ -249,8 +245,7 @@ func_AC88() {
 
   if(isDefined(self.func_10D0C) && self.func_10D0C) {
     func_ACA4();
-  }
-  else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
+  } else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
     func_ACA3(undefined, self.func_12ACF);
   }
 
@@ -280,8 +275,7 @@ func_AC88() {
 
       if(isDefined(self.func_10D0C) && self.func_10D0C) {
         func_ACA4();
-      }
-      else {
+      } else {
         func_ACA3(undefined, self.func_12ACF);
       }
 
@@ -318,8 +312,7 @@ func_AC89() {
 
   if(isDefined(self.func_10D0C) && self.func_10D0C) {
     func_ACA4();
-  }
-  else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
+  } else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
     func_ACA3(undefined, self.func_12ACF);
   }
 
@@ -353,8 +346,7 @@ func_AC89() {
 
       if(self.func_10E46) {
         wait(self.func_C4B5);
-      }
-      else {
+      } else {
         wait(randomfloat(self.func_C4B5));
       }
 
@@ -368,8 +360,7 @@ func_AC89() {
     }
     if(!self.func_12AE3) {
       level scripts\engine\utility::waittill_any("bemani_573", self.func_12712, self.func_C14C);
-    }
-    else {
+    } else {
       func_AC8A(1);
     }
 
@@ -378,8 +369,7 @@ func_AC89() {
 
       if(self.func_10E46) {
         wait(self.func_C4B5);
-      }
-      else {
+      } else {
         wait(randomfloat(self.func_C4B5));
       }
 
@@ -429,8 +419,7 @@ func_AC8A(var_00, var_01) {
 
     if(isDefined(self.func_8E57)) {
       wait(self.func_8E57);
-    }
-    else {
+    } else {
       wait(randomfloatrange(self.func_13585, self.func_13584));
     }
 
@@ -467,8 +456,7 @@ func_B27B(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 
   if(isDefined(self.func_EF17) && !isDefined(self.func_EF16) || !isDefined(self.func_EF17) && isDefined(self.func_EF16)) {
     self.func_8E57 = max(func_95A8([self.func_EF17, self.func_EF16]) / self.func_1098E, 0.05);
-  }
-  else {
+  } else {
     self.func_13585 = max(func_95A8([self.func_EF17, var_00, 0.05]) / self.func_1098E, 0.05);
     self.func_13584 = max(func_95A8([self.func_EF16, var_01, 0.5]) / self.func_1098E, 0.1);
 
@@ -503,8 +491,7 @@ func_B27B(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 func_10C9B() {
   if(self.func_12AE2 || self.func_12AE1) {
     thread func_AC9D();
-  }
-  else {
+  } else {
     thread func_AC9C();
   }
 }
@@ -516,8 +503,7 @@ func_AC9C() {
 
   if(isDefined(self.func_10D0C) && self.func_10D0C) {
     func_ACA4();
-  }
-  else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
+  } else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
     func_ACA3(undefined, self.func_12ACF);
   }
 
@@ -527,8 +513,7 @@ func_AC9C() {
 
       if(isDefined(self.func_10D0C) && self.func_10D0C) {
         func_ACA4();
-      }
-      else {
+      } else {
         func_ACA3(undefined, self.func_12ACF);
       }
 
@@ -553,8 +538,7 @@ func_AC9D() {
 
   if(isDefined(self.func_10D0C) && self.func_10D0C) {
     func_ACA4();
-  }
-  else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
+  } else if(isDefined(self.func_C14B) || isDefined(self.func_12711)) {
     func_ACA3(undefined, self.func_12ACF);
   }
 
@@ -588,8 +572,7 @@ func_AC9D() {
 
       if(self.func_10E46) {
         wait(self.func_C4B5);
-      }
-      else {
+      } else {
         wait(randomfloat(self.func_C4B5));
       }
 
@@ -603,8 +586,7 @@ func_AC9D() {
     }
     if(!self.func_12AE3) {
       level scripts\engine\utility::waittill_any("bemani_573", self.func_12712, self.func_C14C);
-    }
-    else {
+    } else {
       func_AC9E(1);
     }
 
@@ -613,8 +595,7 @@ func_AC9D() {
 
       if(self.func_10E46) {
         wait(self.func_C4B5);
-      }
-      else {
+      } else {
         wait(randomfloat(self.func_C4B5));
       }
 
@@ -664,8 +645,7 @@ func_AC9E(var_00) {
 
     if(isDefined(self.func_8E57)) {
       wait(self.func_8E57);
-    }
-    else {
+    } else {
       wait(randomfloatrange(self.func_13585, self.func_13584));
     }
 
@@ -699,8 +679,7 @@ func_ACA4(var_00) {
 
   if(isDefined(var_00) && var_00 && self.func_99E6 > 0) {
     func_F466(randomfloatrange(self.func_99E6 * 0.25, self.func_99E6), self.func_438F);
-  }
-  else {
+  } else {
     func_F466(self.func_99E6, self.func_438F);
   }
 
@@ -709,7 +688,7 @@ func_ACA4(var_00) {
   }
 
   foreach(var_02 in self.func_EF3C) {
-  var_02 setscriptablepartstate("onoff", "on");
+    var_02 setscriptablepartstate("onoff", "on");
   }
 
   scripts\engine\utility::array_call(self.func_12BB6, ::hide);
@@ -728,11 +707,9 @@ func_ACA3(var_00, var_01) {
 
   if(isDefined(var_01) && var_01) {
     func_F466(0, (0, 0, 0));
-  }
-  else if(isDefined(var_00) && var_00 && self.func_99E7 > 0) {
+  } else if(isDefined(var_00) && var_00 && self.func_99E7 > 0) {
     func_F466(randomfloatrange(self.func_99E7 * 0.25, self.func_99E7), self.func_4390);
-  }
-  else {
+  } else {
     func_F466(self.func_99E7, self.func_4390);
   }
 
@@ -741,7 +718,7 @@ func_ACA3(var_00, var_01) {
   }
 
   foreach(var_03 in self.func_EF3C) {
-  var_03 setscriptablepartstate("onoff", "off");
+    var_03 setscriptablepartstate("onoff", "off");
   }
 
   foreach(var_06 in self.func_AD83) {
@@ -803,7 +780,7 @@ func_1298C(var_00, var_01, var_02) {
   func_F466(var_03, var_04);
 
   foreach(var_06 in self.func_EF3C) {
-  var_06 setscriptablepartstate("onoff", "on");
+    var_06 setscriptablepartstate("onoff", "on");
   }
 
   scripts\engine\utility::array_call(self.func_12BB6, ::hide);
@@ -846,7 +823,7 @@ func_12968(var_00, var_01, var_02) {
   func_F466(var_03, var_04);
 
   foreach(var_06 in self.func_EF3C) {
-  var_06 setscriptablepartstate("onoff", "off");
+    var_06 setscriptablepartstate("onoff", "off");
   }
 
   foreach(var_09 in self.func_AD83) {
@@ -1128,8 +1105,7 @@ func_6F19(var_00, var_01) {
 
       if(var_04 > 0.2) {
         var_04 = randomfloatrange(0, 0.3);
-      }
-      else {
+      } else {
         var_04 = var_02;
       }
 

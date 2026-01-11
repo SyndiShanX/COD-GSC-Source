@@ -92,8 +92,7 @@ draw_guy(guy_origin, guy_angles, show_time) {
 follow_path(start_struct) {
   if(isDefined(start_struct.angles)) {
     current_angles = start_struct.angles;
-  }
-  else {
+  } else {
     current_angles = self.angles;
   }
   current_point = start_struct.origin;
@@ -144,8 +143,7 @@ follow_path(start_struct) {
 draw_path(start_struct, line_color, knot_color) {
   if(isDefined(start_struct.angles)) {
     current_angles = start_struct.angles;
-  }
-  else {
+  } else {
     current_angles = self.angles;
   }
   current_point = start_struct.origin;

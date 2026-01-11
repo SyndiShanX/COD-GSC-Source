@@ -171,13 +171,13 @@ test_quick_breach() {
   var_4 makeunusable();
 
   foreach(var_8 in var_5) {
-  var_8 delete();
+    var_8 delete();
   }
 
   var_10 = getEntArray("quick_breach_door_target_ai", "targetname");
 
   foreach(var_8 in var_10) {
-  var_8 delete();
+    var_8 delete();
   }
 
   level notify("activate_breach");
@@ -203,7 +203,7 @@ test_quick_breach() {
   var_17 = getnodearray("inside_node", "targetname");
 
   foreach(var_19 in var_17) {
-  var_19 connectnode();
+    var_19 connectnode();
   }
 
   wait 6;
@@ -256,8 +256,7 @@ move_controlroom_to_new_location() {
 player_is_close_to_breach_location(var_0) {
   if(level.console || level.player usinggamepad()) {
     maps\loki_util::waittill_trigger_activate_looking_at(self, "set_charge_hint", var_0, 0.8, undefined, 1, undefined);
-  }
-  else {
+  } else {
     maps\loki_util::waittill_trigger_activate_looking_at(self, "set_charge_hint_pc", var_0, 0.8, undefined, 1, undefined);
   }
 }
@@ -370,8 +369,7 @@ set_flags_on_input() {
 
     if(abs(var_0[1]) - abs(var_0[0]) > 0) {
       var_1 = 1;
-    }
-    else {
+    } else {
       var_1 = 0;
     }
 
@@ -395,22 +393,19 @@ set_flags_on_input() {
 
     if(level.player jumpbuttonpressed()) {
       common_scripts\utility::flag_set("jump_pressed");
-    }
-    else {
+    } else {
       common_scripts\utility::flag_clear("jump_pressed");
     }
 
     if(level.player attackbuttonpressed()) {
       common_scripts\utility::flag_set("attack_pressed");
-    }
-    else {
+    } else {
       common_scripts\utility::flag_clear("attack_pressed");
     }
 
     if(level.player usebuttonpressed()) {
       common_scripts\utility::flag_set("use_pressed");
-    }
-    else {
+    } else {
       common_scripts\utility::flag_clear("use_pressed");
     }
 
@@ -508,7 +503,7 @@ anim_enemies_before_breach(var_0, var_1) {
   wait 3.0;
 
   foreach(var_4 in var_1) {
-  var_4 delete();
+    var_4 delete();
   }
 }
 
@@ -710,8 +705,7 @@ anim_player_target_enemy(var_0, var_1, var_2) {
     if(level.breach_enemy_array.size < 2) {
       if(var_0 == "enemy_4") {
         level.allies[1] shoot_at_chair_guy(6, self.origin);
-      }
-      else {
+      } else {
         level.allies[0] shoot_at_chair_guy(6, self.origin);
       }
     }
@@ -823,8 +817,7 @@ breach_ai_space_headshot_death(var_0) {
 
       if(gettimescale() < 0.5) {
         self playSound("space_npc_helmet_shatter_slomo");
-      }
-      else {
+      } else {
         self playSound("space_npc_helmet_shatter");
       }
     }
@@ -1025,7 +1018,7 @@ anim_player_and_allies(var_0, var_1) {
   var_14 = getEntArray("control_room_boundary_collision", "targetname");
 
   foreach(var_16 in var_14) {
-  var_16 solid();
+    var_16 solid();
   }
 
   var_14 = getEntArray("control_room_cap", "targetname");
@@ -1039,7 +1032,7 @@ anim_player_and_allies(var_0, var_1) {
   var_28 = getnodearray("post_breach_pathnode", "targetname");
 
   foreach(var_30 in var_28) {
-  var_30 connectnode();
+    var_30 connectnode();
   }
 
   level.player playersetgroundreferenceent(undefined);
@@ -1122,7 +1115,7 @@ remove_weapon_clip_on_notify(var_0) {
   level waittill(var_0);
 
   foreach(var_3 in var_1) {
-  var_3 delete();
+    var_3 delete();
   }
 }
 
@@ -1240,8 +1233,7 @@ play_nag_after_delay(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     thread maps\loki_util::play_nag(var_1, var_2, 5, 8, 1, 8, undefined, undefined, 1);
-  }
-  else {
+  } else {
     thread maps\loki_util::play_nag(var_1, var_2, 5, 8, 1, 8, undefined, undefined);
   }
 }

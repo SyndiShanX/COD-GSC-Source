@@ -97,8 +97,7 @@ getscoreeventtableid() {
 isregisteredevent(type) {
   if(isDefined(level.scoreinfo[type])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -132,8 +131,7 @@ processscoreevent(event, player, victim, weapon) {
 
     if(!isDefined(weapon) || maps\mp\killstreaks\_killstreaks::iskillstreakweapon(weapon) == 0) {
       allowplayerscore = 1;
-    }
-    else {
+    } else {
       allowplayerscore = maps\mp\gametypes\_rank::killstreakweaponsallowedscore(event);
     }
 
@@ -247,8 +245,7 @@ scoreeventplayerkill(data, time) {
     case "supplydrop_mp":
       if(meansofdeath == "MOD_HIT_BY_OBJECT" || meansofdeath == "MOD_CRUSH") {
         processscoreevent("kill_enemy_with_care_package_crush", attacker, victim, weapon);
-      }
-      else {
+      } else {
         processscoreevent("kill_enemy_with_hacked_care_package", attacker, victim, weapon);
       }
 
@@ -258,8 +255,7 @@ scoreeventplayerkill(data, time) {
   if(isDefined(data.victimweapon)) {
     if(data.victimweapon == "minigun_mp") {
       processscoreevent("killed_death_machine_enemy", attacker, victim, weapon);
-    }
-    else if(data.victimweapon == "m32_mp") {
+    } else if(data.victimweapon == "m32_mp") {
       processscoreevent("killed_multiple_grenade_launcher_enemy", attacker, victim, weapon);
     }
   }
@@ -298,8 +294,7 @@ scoreeventplayerkill(data, time) {
   if(is_weapon_valid(meansofdeath, weapon, weaponclass)) {
     if(isDefined(victim.vattackerorigin)) {
       attackerorigin = victim.vattackerorigin;
-    }
-    else {
+    } else {
       attackerorigin = attacker.origin;
     }
 
@@ -394,8 +389,7 @@ scoreeventplayerkill(data, time) {
 
   if(wasdefusing) {
     processscoreevent("killed_bomb_defuser", attacker, victim, weapon);
-  }
-  else if(wasplanting) {
+  } else if(wasplanting) {
     processscoreevent("killed_bomb_planter", attacker, victim, weapon);
   }
 
@@ -429,8 +423,7 @@ specificweaponkill(attacker, victim, weapon, killstreak) {
     case "explosive_bolt_mp":
       if(isDefined(victim.explosiveinfo["stuckToPlayer"]) && victim.explosiveinfo["stuckToPlayer"] == victim) {
         event = "crossbow_kill";
-      }
-      else {
+      } else {
         return;
       }
 
@@ -501,8 +494,7 @@ multikill(killcount, weapon) {
 
   if(killcount > 8) {
     processscoreevent("multikill_more_than_8", self, undefined, weapon);
-  }
-  else {
+  } else {
     processscoreevent("multikill_" + killcount, self, undefined, weapon);
   }
 
@@ -522,14 +514,11 @@ is_weapon_valid(meansofdeath, weapon, weaponclass) {
 
   if(get_distance_for_weapon(weapon, weaponclass) == 0) {
     valid_weapon = 0;
-  }
-  else if(meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_RIFLE_BULLET") {
+  } else if(meansofdeath == "MOD_PISTOL_BULLET" || meansofdeath == "MOD_RIFLE_BULLET") {
     valid_weapon = 1;
-  }
-  else if(meansofdeath == "MOD_HEAD_SHOT") {
+  } else if(meansofdeath == "MOD_HEAD_SHOT") {
     valid_weapon = 1;
-  }
-  else if(weapon == "hatchet_mp" && meansofdeath == "MOD_IMPACT") {
+  } else if(weapon == "hatchet_mp" && meansofdeath == "MOD_IMPACT") {
     valid_weapon = 1;
   }
 
@@ -606,8 +595,7 @@ updatemultikills(weapon, weaponclass, killstreak) {
 
   if(self.recentkillcountsameweapon == 2) {
     self addweaponstat(weapon, "multikill_2", 1);
-  }
-  else if(self.recentkillcountsameweapon == 3) {
+  } else if(self.recentkillcountsameweapon == 3) {
     self addweaponstat(weapon, "multikill_3", 1);
   }
 
@@ -663,8 +651,7 @@ updateoneshotmultikills(victim, weapon, firsttimedamaged) {
 
   if(self.oneshotmultikills > 1) {
     processscoreevent("kill_enemies_one_bullet", self, victim, weapon);
-  }
-  else {
+  } else {
     processscoreevent("kill_enemy_one_bullet", self, victim, weapon);
   }
 
@@ -696,11 +683,9 @@ get_distance_for_weapon(weapon, weaponclass) {
     case "weapon_special":
       if(weapon == "knife_ballistic_mp") {
         distance = 2250000;
-      }
-      else if(weapon == "crossbow_mp") {
+      } else if(weapon == "crossbow_mp") {
         distance = 2250000;
-      }
-      else if(weapon == "metalstorm_mp") {
+      } else if(weapon == "metalstorm_mp") {
         distance = 3062500;
       }
 

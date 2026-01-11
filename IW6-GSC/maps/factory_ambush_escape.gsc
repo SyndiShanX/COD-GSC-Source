@@ -36,7 +36,7 @@ main() {
   }
 
   foreach(var_1 in level.squad) {
-  var_1 pushplayer(1);
+    var_1 pushplayer(1);
   }
 
   maps\factory_util::safe_trigger_by_targetname("ambush_escape_allies_stop_midway");
@@ -57,14 +57,14 @@ loading_dock_vehicles() {
   var_0 = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("ambush_escape_vehicle");
 
   foreach(var_2 in var_0) {
-  var_2 thread loading_dock_vehicle_setup();
+    var_2 thread loading_dock_vehicle_setup();
   }
 
   common_scripts\utility::flag_wait("ambush_escape_clear");
   var_4 = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("ambush_escape_vehicle_second_wave");
 
   foreach(var_2 in var_4) {
-  var_2 thread loading_dock_vehicle_setup();
+    var_2 thread loading_dock_vehicle_setup();
   }
 }
 
@@ -76,7 +76,7 @@ loading_dock_vehicle_setup() {
   maps\_vehicle::vehicle_lights_off("headlights");
 
   foreach(var_1 in self.riders) {
-  var_1 thread loading_dock_enemies();
+    var_1 thread loading_dock_enemies();
   }
 
   level waittill("rooftop_complete");

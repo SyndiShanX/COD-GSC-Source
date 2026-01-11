@@ -22,7 +22,6 @@
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\player\player_utils;
-
 #namespace ct_firebreak;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -65,7 +64,7 @@ function_7c4ef26b(predictedspawn) {
     return;
   }
 
-  if(self.team == #"allies") {
+  if(self.team == # "allies") {
     self thread function_d6c7161f();
   }
 
@@ -118,7 +117,7 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
     return;
   }
 
-  if(self.team == #"allies") {
+  if(self.team == # "allies") {
     if(!isDefined(level.var_20361ed4)) {
       level.var_20361ed4 = -1;
     }
@@ -133,15 +132,15 @@ function_9d65db70(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, sh
   }
 
   if(isDefined(weapon)) {
-    if(weapon.name == #"hero_flamethrower") {
+    if(weapon.name == # "hero_flamethrower") {
       level.var_6bac32f8++;
     }
 
-    if(weapon.name == #"gadget_radiation_field") {
+    if(weapon.name == # "gadget_radiation_field") {
       e_player = getplayers()[0];
       trace = bulletTrace(e_player.origin + (0, 0, 40), self.origin + (0, 0, 40), 0, self);
 
-      if(trace[#"fraction"] < 1) {
+      if(trace[# "fraction"] < 1) {
         e_player thread ct_utils::function_d471f8fa(15, undefined, 1);
         level thread function_db3dc2c2();
       }
@@ -207,18 +206,18 @@ function_ba542258(mode) {
 
 function_9270ab93(var_db89c655, var_27875ecd) {
   var_e7cc5e43 = [];
-  var_e7cc5e43[#"mp_frenetic"][1] = 240000;
-  var_e7cc5e43[#"mp_frenetic"][2] = 180000;
-  var_e7cc5e43[#"mp_frenetic"][3] = 120000;
-  var_e7cc5e43[#"mp_offshore"][1] = 240000;
-  var_e7cc5e43[#"mp_offshore"][2] = 180000;
-  var_e7cc5e43[#"mp_offshore"][3] = 120000;
-  var_e7cc5e43[#"mp_seaside"][1] = 240000;
-  var_e7cc5e43[#"mp_seaside"][2] = 180000;
-  var_e7cc5e43[#"mp_seaside"][3] = 120000;
-  var_e7cc5e43[#"mp_silo"][1] = 240000;
-  var_e7cc5e43[#"mp_silo"][2] = 180000;
-  var_e7cc5e43[#"mp_silo"][3] = 120000;
+  var_e7cc5e43[# "mp_frenetic"][1] = 240000;
+  var_e7cc5e43[# "mp_frenetic"][2] = 180000;
+  var_e7cc5e43[# "mp_frenetic"][3] = 120000;
+  var_e7cc5e43[# "mp_offshore"][1] = 240000;
+  var_e7cc5e43[# "mp_offshore"][2] = 180000;
+  var_e7cc5e43[# "mp_offshore"][3] = 120000;
+  var_e7cc5e43[# "mp_seaside"][1] = 240000;
+  var_e7cc5e43[# "mp_seaside"][2] = 180000;
+  var_e7cc5e43[# "mp_seaside"][3] = 120000;
+  var_e7cc5e43[# "mp_silo"][1] = 240000;
+  var_e7cc5e43[# "mp_silo"][2] = 180000;
+  var_e7cc5e43[# "mp_silo"][3] = 120000;
   str_map = hash(getrootmapname());
   ct_utils::function_7a21ac57(var_db89c655, var_27875ecd, var_e7cc5e43[str_map][1], var_e7cc5e43[str_map][2], var_e7cc5e43[str_map][3]);
 }
@@ -275,7 +274,7 @@ j_fore_le_01() {
   level flag::set("gamemode_started");
   level thread function_d2ae88f1();
   level thread ct_utils::function_289b4b9f(#"hash_29f6daee1e40b3af", undefined, 50, "stop_nag", &function_ce452e0);
-  level thread ct_bots::activate_bots(12, #"axis");
+  level thread ct_bots::activate_bots(12, # "axis");
   level thread function_95f8a9b5();
   n_bomb_timer = int(gettime() + 1000 + int(480 * 1000));
   setmatchflag("bomb_timer_a", 1);
@@ -311,7 +310,7 @@ j_fore_le_01() {
 }
 
 function_ca63e908() {
-  waypointname = #"hash_2ec158c9943b9697";
+  waypointname = # "hash_2ec158c9943b9697";
   var_90cfcf43 = spawn("script_model", self.origin);
   var_90cfcf43.objectiveid = gameobjects::get_next_obj_id();
   var_90cfcf43.curorigin = self.origin;
@@ -385,7 +384,7 @@ function_d6c7161f() {
     if(isDefined(var_326df4eb)) {
       var_583c5a3b = 1.75 + 0.6 * level.var_f3bb2d59;
       n_start_time = gettime() / 1000;
-      self waittilltimeout(var_583c5a3b, #"hash_4aaf6d6479e7cf20");
+      self waittilltimeout(var_583c5a3b, # "hash_4aaf6d6479e7cf20");
       dt = gettime() / 1000 - n_start_time;
 
       if(dt >= 1.75) {
@@ -420,7 +419,7 @@ function_d6c7161f() {
 }
 
 function_66a805d4(e_player) {
-  e_player endon(#"death", #"hash_4aaf6d6479e7cf20");
+  e_player endon(#"death", # "hash_4aaf6d6479e7cf20");
 
   while(true) {
     n_wait = randomfloatrange(0.1, 0.4);

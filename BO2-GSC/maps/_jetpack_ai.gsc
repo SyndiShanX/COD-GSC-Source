@@ -68,8 +68,7 @@ create_jetpack_ai(s_align, strname_or_ai, b_drone, func_spawn) {
 
     if(a_sp_jetpack.size > 1) {
       sp_jetpack = random(a_sp_jetpack);
-    }
-    else {
+    } else {
       sp_jetpack = a_sp_jetpack[0];
     }
   }
@@ -78,8 +77,7 @@ create_jetpack_ai(s_align, strname_or_ai, b_drone, func_spawn) {
 
   if(b_drone) {
     ai_jetpack = create_fake_jetpack_ai(sp_jetpack);
-  }
-  else {
+  } else {
     if(need_to_spawn_ai) {
       ai_jetpack = simple_spawn_single(sp_jetpack);
 
@@ -224,8 +222,7 @@ _jetpack_ai_kill(ai_jetpack) {
   } else {
     if(ai_jetpack ent_flag("high_altitude")) {
       ai_jetpack delete();
-    }
-    else {
+    } else {
       ai_jetpack ragdoll_death();
     }
 

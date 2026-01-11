@@ -177,8 +177,7 @@ play_ambient_leaper_vocals() {
 
   while(true) {
     if(isDefined(self)) {
-      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {
-      } else
+      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {} else
         self playSound("zmb_vocals_leaper_ambience");
     }
 
@@ -360,15 +359,13 @@ leaper_check_wall() {
 
     if(self leaper_can_use_anim(level.leaper_anim.left_mid, level.leaper_anim.left_end, "left")) {
       wall_anim[wall_anim.size] = "zm_wall_left";
-    }
-    else if(self leaper_can_use_anim(level.leaper_anim.left_large_mid, level.leaper_anim.left_large_end, "left_large")) {
+    } else if(self leaper_can_use_anim(level.leaper_anim.left_large_mid, level.leaper_anim.left_large_end, "left_large")) {
       wall_anim[wall_anim.size] = "zm_wall_left_large";
     }
 
     if(self leaper_can_use_anim(level.leaper_anim.right_mid, level.leaper_anim.right_end, "right")) {
       wall_anim[wall_anim.size] = "zm_wall_right";
-    }
-    else if(self leaper_can_use_anim(level.leaper_anim.right_large_mid, level.leaper_anim.right_large_end, "right_large")) {
+    } else if(self leaper_can_use_anim(level.leaper_anim.right_large_mid, level.leaper_anim.right_large_end, "right_large")) {
       wall_anim[wall_anim.size] = "zm_wall_right_large";
     }
 
@@ -543,8 +540,7 @@ leaper_round_spawning() {
 
   if(level.leaper_round_count < 3) {
     max = players.size * level.leapers_per_player;
-  }
-  else {
+  } else {
     max = players.size * level.leapers_per_player;
   }
 
@@ -656,14 +652,11 @@ leaper_health_increase() {
 
   if(level.leaper_round_count == 1) {
     level.leaper_health = 400;
-  }
-  else if(level.leaper_round_count == 2) {
+  } else if(level.leaper_round_count == 2) {
     level.leaper_health = 900;
-  }
-  else if(level.leaper_round_count == 3) {
+  } else if(level.leaper_round_count == 3) {
     level.leaper_health = 1300;
-  }
-  else if(level.leaper_round_count == 4) {
+  } else if(level.leaper_round_count == 4) {
     level.leaper_health = 1600;
   }
 
@@ -748,12 +741,12 @@ leaper_spawn_logic(leaper_array, favorite_enemy) {
   a_leaper_spawn_points = [];
 
   foreach(zone in a_zones_occupied) {
-  a_leaper_spawn_points = arraycombine(a_leaper_spawn_points, level.zones[zone].leaper_locations, 0, 0);
+    a_leaper_spawn_points = arraycombine(a_leaper_spawn_points, level.zones[zone].leaper_locations, 0, 0);
   }
 
   if(a_leaper_spawn_points.size == 0) {
     foreach(zone in a_zones_active) {
-    a_leaper_spawn_points = arraycombine(a_leaper_spawn_points, level.zones[zone].leaper_locations, 0, 0);
+      a_leaper_spawn_points = arraycombine(a_leaper_spawn_points, level.zones[zone].leaper_locations, 0, 0);
     }
   }
 
@@ -762,14 +755,14 @@ leaper_spawn_logic(leaper_array, favorite_enemy) {
     a_keys_error = getarraykeys(a_zones_occupied);
 
     foreach(key in a_zones_occupied) {
-    str_zone_list_occupied = str_zone_list_occupied + "" + key;
+      str_zone_list_occupied = str_zone_list_occupied + "" + key;
     }
 
     str_zone_list_active = "";
     a_keys_error = getarraykeys(a_zones_active);
 
     foreach(key in a_zones_active) {
-    str_zone_list_active = str_zone_list_active + "" + key;
+      str_zone_list_active = str_zone_list_active + "" + key;
     }
 
     assertmsg("No leaper spawn locations were found in any of the occupied or active zones. Occupied zones: " + str_zone_list_occupied + ". Active zones: " + str_zone_list_active);
@@ -867,14 +860,11 @@ waiting_for_next_leaper_spawn(count, max) {
 
   if(level.leaper_round_count == 1) {
     default_wait = 3;
-  }
-  else if(level.leaper_round_count == 2) {
+  } else if(level.leaper_round_count == 2) {
     default_wait = 2.5;
-  }
-  else if(level.leaper_round_count == 3) {
+  } else if(level.leaper_round_count == 3) {
     default_wait = 2;
-  }
-  else {
+  } else {
     default_wait = 1.5;
   }
 
@@ -954,8 +944,7 @@ leaper_playable_area_failsafe() {
 
     if(b_outside_playable_space_this_frame && !b_outside_playable_last_check) {
       self.leaper_outside_playable_space_time = n_current_time;
-    }
-    else if(!b_outside_playable_space_this_frame) {
+    } else if(!b_outside_playable_space_this_frame) {
       self.leaper_outside_playable_space = -1;
     }
 
@@ -1085,8 +1074,7 @@ leaper_emerge() {
 
   if(self.spawn_point.script_parameters == "emerge_bottom") {
     self animscripted(self.spawn_point.origin, self.spawn_point.angles, "zm_spawn_elevator_from_floor");
-  }
-  else {
+  } else {
     self animscripted(self.spawn_point.origin, self.spawn_point.angles, "zm_spawn_elevator_from_ceiling");
   }
 

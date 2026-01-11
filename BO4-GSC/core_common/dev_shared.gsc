@@ -5,7 +5,6 @@
 
 #include scripts\core_common\gestures;
 #include scripts\core_common\util_shared;
-
 #namespace dev;
 
 debug_sphere(origin, radius, color, alpha, time) {
@@ -544,7 +543,7 @@ get_lookat_origin(player) {
   dir = vectorscale(forward, 8000);
   eye = player getEye();
   trace = bulletTrace(eye, eye + dir, 0, undefined);
-  return trace[#"position"];
+  return trace[# "position"];
 }
 
 draw_pathnode(node, color) {
@@ -585,7 +584,7 @@ node_get(player) {
       return undefined;
     }
 
-    if(node.type == #"path") {
+    if(node.type == # "path") {
       draw_pathnode(node, (1, 0, 1));
       continue;
     }

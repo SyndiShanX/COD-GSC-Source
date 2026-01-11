@@ -76,8 +76,7 @@ save() {
 
   if(isDefined(self.name)) {
     var_0["name"] = self.name;
-  }
-  else {}
+  } else {}
 
   var_1 = self getattachsize();
 
@@ -98,8 +97,7 @@ load(var_0) {
 
   if(isDefined(var_0["name"])) {
     self.name = var_0["name"];
-  }
-  else {}
+  } else {}
 
   var_1 = var_0["attach"];
   var_2 = var_1.size;
@@ -124,8 +122,7 @@ precache(var_0) {
 get_random_character(var_0) {
   if(isDefined(self.classname)) {
     var_1 = strtok(self.classname, "_");
-  }
-  else {
+  } else {
     var_1 = [];
   }
 

@@ -113,8 +113,7 @@ useKillstreakHelicopterPlayer(hardpointType) {
   self.exitblackscreenTime = 0.1;
   if(hardpointType == "helicopter_player_firstperson_mp") {
     result = self usePlayerHelicopter("player_firstperson", hardpointType);
-  }
-  else {
+  } else {
     result = self usePlayerHelicopter("player", hardpointType);
   }
   if(result == true) {
@@ -193,8 +192,7 @@ deletePlayerHeli() {
 destroyPlayerHelicopter() {
   if(isDefined(self.owner) && isDefined(self.owner.heli)) {
     self.owner deletePlayerHeli();
-  }
-  else {
+  } else {
     self maps\mp\_helicopter::destroyHelicopter();
   }
 }
@@ -404,8 +402,7 @@ initHelicopter(isDriver, hardpointtype) {
     self.heli.current_weapon = "mini_gun";
     if(hardpointtype == "helicopter_player_firstperson_mp") {
       self.heli SetVehWeapon("hind_minigun_pilot_firstperson_mp");
-    }
-    else {
+    } else {
       self.heli SetVehWeapon("hind_minigun_pilot_2_mp");
     }
     self.heli.numberRockets = 2;
@@ -542,8 +539,7 @@ heli_player_damage_monitor(player) {
       }
       if(level.teamBased) {
         isValidAttacker = (isDefined(attacker.team) && attacker.team != self.team);
-      }
-      else {
+      } else {
         isValidAttacker = true;
       }
       if(!isValidAttacker) {
@@ -588,8 +584,7 @@ hind_setup_rocket_attack(hardpointtype, player) {
       } else if(self.numberMiniGun > 0) {
         if(hardpointtype == "helicopter_player_firstperson_mp") {
           self.heli SetVehWeapon("hind_minigun_pilot_firstperson_mp");
-        }
-        else {
+        } else {
           self.heli SetVehWeapon("hind_minigun_pilot_2_mp");
         }
         self.current_weapon = "mini_gun";

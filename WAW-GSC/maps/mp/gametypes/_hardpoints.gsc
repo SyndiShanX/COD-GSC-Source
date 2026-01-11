@@ -65,8 +65,7 @@ init() {
   game["dialog"]["dogs_mp"] = "dogsupport";
   if(getdvar("scr_dog_hardpoint_interval") != "") {
     level.dogsInterval = getdvarfloat("scr_dog_hardpoint_interval");
-  }
-  else {
+  } else {
     setdvar("scr_dog_hardpoint_interval", 180);
     level.dogsInterval = 180;
   }
@@ -816,8 +815,7 @@ targetisclose(other, target) {
   infront = targetisinfront(other, target);
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
   a = flat_origin(other.origin);
@@ -826,8 +824,7 @@ targetisclose(other, target) {
   dist = distance(a, point);
   if(dist < 3000) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -838,8 +835,7 @@ targetisinfront(other, target) {
   dot = vectordot(forwardvec, normalvec);
   if(dot > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -899,8 +895,7 @@ playSoundinSpace(alias, origin, master) {
   org.origin = origin;
   if(isDefined(master) && master) {
     org playsoundasmaster(alias);
-  }
-  else {
+  } else {
     org playSound(alias);
   }
   wait(10.0);
@@ -915,14 +910,11 @@ giveHardpointItemForStreak() {
   if(!getDvarInt("scr_game_forceradar")) {
     if(streak == 3) {
       self giveHardpoint("radar_mp", streak);
-    }
-    else if(streak == 5) {
+    } else if(streak == 5) {
       self giveHardpoint("artillery_mp", streak);
-    }
-    else if(streak == 7) {
+    } else if(streak == 7) {
       self giveHardpoint("dogs_mp", streak);
-    }
-    else if(streak >= 10) {
+    } else if(streak >= 10) {
       if((streak % 5) == 0) {
         self streakNotify(streak);
       }
@@ -1070,8 +1062,7 @@ getNextHardpointItem(hardpointType) {
     }
     if(index != 0) {
       return hardpoints[index - 1];
-    }
-    else {
+    } else {
       return hardpoints[index];
     }
   }
@@ -1188,8 +1179,7 @@ RadarAcquiredPrintAndSound(team, otherteam, callingPlayer, numseconds) {
       if(isDefined(playerteam)) {
         if(playerteam == team) {
           player iprintln(&"MP_WAR_RADAR_ACQUIRED", callingPlayer, numseconds);
-        }
-        else if(playerteam == otherteam) {
+        } else if(playerteam == otherteam) {
           player iprintln(&"MP_WAR_RADAR_ACQUIRED_ENEMY", numseconds);
         }
       }
@@ -1211,8 +1201,7 @@ RadarAcquiredPrintAndSound(team, otherteam, callingPlayer, numseconds) {
       if(isDefined(playerteam)) {
         if(playerteam == team) {
           player iprintln(&"MP_WAR_RADAR_ACQUIRED", callingPlayer, numseconds);
-        }
-        else if(playerteam == otherteam) {
+        } else if(playerteam == otherteam) {
           player iprintln(&"MP_WAR_RADAR_ACQUIRED_ENEMY", numseconds);
         }
       }

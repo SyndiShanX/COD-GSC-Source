@@ -27,8 +27,7 @@ trackriotshield() {
   if(self.hasriotshield) {
     if(self.hasriotshieldequipped) {
       self attachshieldmodel(level.carriedshieldmodel, "tag_weapon_left");
-    }
-    else {
+    } else {
       self attachshieldmodel(level.stowedshieldmodel, "tag_stowed_back");
     }
   }
@@ -203,8 +202,7 @@ watchdeployedriotshielddamage() {
 
     if(type == "MOD_MELEE") {
       self setanimknobrestart( % o_riot_stand_melee_front, 1.0, 0.0, 1.0);
-    }
-    else {
+    } else {
       self setanimknobrestart( % o_riot_stand_shot, 1.0, 0.0, 1.0);
     }
 
@@ -215,14 +213,11 @@ watchdeployedriotshielddamage() {
 
     if(type == "MOD_MELEE") {
       damage = damage * getdvarfloat(#"riotshield_melee_damage_scale");
-    }
-    else if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
+    } else if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
       damage = damage * getdvarfloat(#"riotshield_bullet_damage_scale");
-    }
-    else if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
+    } else if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
       damage = damage * getdvarfloat(#"riotshield_explosive_damage_scale");
-    }
-    else if(type == "MOD_IMPACT") {
+    } else if(type == "MOD_IMPACT") {
       damage = damage * getdvarfloat(#"riotshield_projectile_damage_scale");
     }
 

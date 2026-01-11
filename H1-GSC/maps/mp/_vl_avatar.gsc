@@ -174,22 +174,19 @@ spawn_an_avatar(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, v
 
   if(var_8) {
     var_13.isdepotagent = 1;
-  }
-  else {
+  } else {
     level.vlavatars[var_6] = var_13;
 
     if(var_7) {
       var_0 playerteleportavatartoweaponroom(var_13, level.camparams.camera);
-    }
-    else {
+    } else {
       var_13 agentplaycacanim();
     }
   }
 
   if(var_7) {
     show_avatar(var_13, !var_8);
-  }
-  else {
+  } else {
     hide_avatar(var_13);
   }
 
@@ -348,13 +345,13 @@ hide_avatar_weapons(var_0) {
 
 hide_avatars() {
   foreach(var_1 in level.vlavatars) {
-  hide_avatar(var_1);
+    hide_avatar(var_1);
   }
 }
 
 show_avatars() {
   foreach(var_1 in level.vlavatars) {
-  show_avatar(var_1);
+    show_avatar(var_1);
   }
 }
 
@@ -479,8 +476,7 @@ vl_give_weapons(var_0) {
   }
   if(var_0.primaryweapon != "" && var_0.primaryweapon != "none" && var_0.primaryweapon != "specialty_null") {
     var_0 avatarattachprimaryweapons();
-  }
-  else {
+  } else {
     hide_avatar_weapons(var_0);
   }
 }

@@ -46,8 +46,7 @@ init_animtree() {
   scriptmodelsuseanimtree(#animtree);
 }
 
-fire_puzzle_1_init() {
-}
+fire_puzzle_1_init() {}
 
 fire_puzzle_1_run() {
   level.sacrifice_volumes = getEntArray("fire_sacrifice_volume", "targetname");
@@ -221,8 +220,7 @@ fire_sacrifice_death_clone(e_sacrifice_volume) {
 
   if(self.has_legs) {
     clone setanim( % ch_dazed_a_death, 1.0, 0.0, 1.0);
-  }
-  else {
+  } else {
     clone setanim( % ai_zombie_crawl_death_v1, 1.0, 0.0, 1.0);
   }
 

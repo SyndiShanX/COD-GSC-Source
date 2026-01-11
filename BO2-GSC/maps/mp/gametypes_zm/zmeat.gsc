@@ -153,8 +153,7 @@ meat_on_player_connect() {
     if(get_game_var("side_selection") == 1) {
       if(self.team == "allies") {
         self._meat_team = one;
-      }
-      else {
+      } else {
         self._meat_team = two;
       }
     } else if(self.team == "allies")
@@ -240,8 +239,7 @@ monitor_meat_on_side() {
       } else if(isDefined(last_team)) {
         if(!isDefined(level.meat_lost_time)) {
           level.meat_lost_time = gettime();
-        }
-        else if(gettime() - level.meat_lost_time > level.meat_lost_time_limit) {
+        } else if(gettime() - level.meat_lost_time > level.meat_lost_time_limit) {
           add_meat_event("level_lost_meat");
           level thread item_meat_reset(level._meat_start_point, 1);
           level.meat_lost_time = undefined;
@@ -254,8 +252,7 @@ monitor_meat_on_side() {
       if(!isDefined(player_with_meat)) {
         if(!isDefined(level.meat_lost_time)) {
           level.meat_lost_time = gettime();
-        }
-        else if(gettime() - level.meat_lost_time > level.meat_lost_time_limit) {
+        } else if(gettime() - level.meat_lost_time > level.meat_lost_time_limit) {
           add_meat_event("level_lost_meat");
           level thread item_meat_reset(level._meat_start_point, 1);
           level.meat_lost_time = undefined;
@@ -291,8 +288,7 @@ item_meat_watch_for_throw() {
     if(isDefined(who._spawning_meat) && who._spawning_meat) {
       continue;
     }
-    if(randomintrange(1, 101) <= 10) {
-    }
+    if(randomintrange(1, 101) <= 10) {}
 
     who._has_meat = 0;
 
@@ -329,8 +325,7 @@ hold_meat_monitor() {
   }
 }
 
-meat_zombie_post_spawn_init() {
-}
+meat_zombie_post_spawn_init() {}
 
 create_item_meat_watcher() {
   wait 0.05;
@@ -359,8 +354,7 @@ wait_for_player_downed() {
       self thread watch_save_player();
       players = get_players_on_meat_team(self._meat_team);
 
-      if(players.size >= 2) {
-      }
+      if(players.size >= 2) {}
     }
   }
 }
@@ -374,8 +368,7 @@ item_meat_watch_stationary() {
 
   if(!(isDefined(self._fake_meat) && self._fake_meat)) {
     add_meat_event("meat_stationary", self);
-  }
-  else {
+  } else {
     add_meat_event("fake_meat_stationary", self);
   }
 
@@ -407,8 +400,7 @@ item_meat_watch_bounce() {
 
   if(!(isDefined(self._fake_meat) && self._fake_meat)) {
     add_meat_event("meat_bounce", self, pos, normal, ent);
-  }
-  else {
+  } else {
     add_meat_event("fake_meat_bounce", self, pos, normal, ent);
   }
 
@@ -472,14 +464,12 @@ player_wait_take_meat(meat_name) {
 
   if(isDefined(self.pre_meat_weapon) && self hasweapon(self.pre_meat_weapon)) {
     self switchtoweapon(self.pre_meat_weapon);
-  }
-  else {
+  } else {
     primaryweapons = self getweaponslistprimaries();
 
     if(isDefined(primaryweapons) && primaryweapons.size > 0) {
       self switchtoweapon(primaryweapons[0]);
-    }
-    else {
+    } else {
       assert(0, "Player has no weapon");
       self maps\mp\zombies\_zm_weapons::give_fallback_weapon();
     }
@@ -566,8 +556,7 @@ item_meat_on_spawn_retrieve_trigger(watcher, player, weaponname) {
     if(player hasweapon(weaponname)) {
       if(!(isDefined(self._fake_meat) && self._fake_meat)) {
         player thread player_wait_take_meat(weaponname);
-      }
-      else {
+      } else {
         player takeweapon(weaponname);
         player decrement_is_drinking();
       }
@@ -610,8 +599,7 @@ item_meat_on_spawn_retrieve_trigger(watcher, player, weaponname) {
 
   if(isDefined(level.dont_allow_meat_interaction) && level.dont_allow_meat_interaction) {
     self.item_meat_pick_up_trigger setinvisibletoall();
-  }
-  else {
+  } else {
     self thread item_meat_watch_trigger(self.meat_id, self.item_meat_pick_up_trigger, ::item_meat_on_pickup, level.meat_pickupsoundplayer, level.meat_pickupsound);
     self thread kick_meat_monitor();
     self thread last_stand_meat_nudge();
@@ -1189,12 +1177,10 @@ spawn_meat_zombies() {
 
     if(ai.size > max_ai_num) {
       wait 0.1;
-    }
-    else {
+    } else {
       if(num % 2 == 0) {
         spawn_points = level._meat_team_1_zombie_spawn_points;
-      }
-      else {
+      } else {
         spawn_points = level._meat_team_2_zombie_spawn_points;
       }
 
@@ -1211,8 +1197,7 @@ spawn_meat_zombies() {
 
           if(num % 2 == 0) {
             players = get_players_on_meat_team(1);
-          }
-          else {
+          } else {
             players = get_players_on_meat_team(2);
           }
 
@@ -1232,8 +1217,7 @@ spawn_meat_zombies() {
 
         if(dist <= 128) {
           spawn_point = point;
-        }
-        else {
+        } else {
           dist = dist / 4;
           distcheck = dist * dist;
         }
@@ -1351,8 +1335,7 @@ meat_player_initial_spawn() {
     if(get_game_var("side_selection") == 1) {
       if(players[i].team == "allies") {
         players[i]._meat_team = one;
-      }
-      else {
+      } else {
         players[i]._meat_team = two;
       }
     } else if(players[i].team == "allies")
@@ -1363,17 +1346,15 @@ meat_player_initial_spawn() {
 
     if(isDefined(level.custom_player_fake_death_cleanup)) {
       players[i][
-    }
-        [level.custom_player_fake_death_cleanup]
-      ]();
+        }
+        [level.custom_player_fake_death_cleanup]]();
 
     players[i] setstance("stand");
 
     if(isDefined(players[i]._meat_team)) {
       if(players[i]._meat_team == one) {
         players[i]._meat_team = one;
-      }
-      else {
+      } else {
         players[i]._meat_team = two;
       }
     } else if(players[i].team == "axis")
@@ -1448,8 +1429,7 @@ item_quick_trigger(meat_id, trigger) {
 
   if(isDefined(trigger.radius)) {
     radius = trigger.radius + 15.0;
-  }
-  else {
+  } else {
     radius = 51.0;
   }
 
@@ -1534,14 +1514,11 @@ item_meat_watch_trigger(meat_id, trigger, callback, playersoundonuse, npcsoundon
 
     if(isDefined(self._fake_meat) && self._fake_meat) {
       add_meat_event("player_fake_take", player, self);
-    }
-    else if(volley) {
+    } else if(volley) {
       add_meat_event("player_volley", player, self);
-    }
-    else if(self.meat_is_moving) {
+    } else if(self.meat_is_moving) {
       add_meat_event("player_catch", player, self);
-    }
-    else {
+    } else {
       add_meat_event("player_take", player, self);
     }
 
@@ -1565,8 +1542,7 @@ item_meat_watch_trigger(meat_id, trigger, callback, playersoundonuse, npcsoundon
     if(self.meat_is_moving) {
       if(volley) {
         self item_meat_volley(player);
-      }
-      else {
+      } else {
         self item_meat_caught(player, self.meat_is_flying);
       }
     }
@@ -1583,8 +1559,7 @@ item_meat_watch_trigger(meat_id, trigger, callback, playersoundonuse, npcsoundon
 
     if(volley) {
       player thread spike_the_meat(self);
-    }
-    else {
+    } else {
       self thread[[callback]](player);
 
       if(!isDefined(player._meat_hint_shown)) {
@@ -1760,8 +1735,7 @@ waitforrevive(team) {
 
   if(team == "A") {
     level.team_a_downed--;
-  }
-  else {
+  } else {
     level.team_b_downed--;
   }
 }
@@ -1866,8 +1840,7 @@ create_meat_team_hud(meat_team, destroy_only) {
 
   if(isDefined(self._meat_team) && self._meat_team == meat_team) {
     elem.label = &"ZOMBIE_TEAM_HAS_MEAT";
-  }
-  else {
+  } else {
     elem.label = &"ZOMBIE_OTHER_TEAM_HAS_MEAT";
   }
 

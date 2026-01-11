@@ -43,7 +43,7 @@ turn_off_all_lab_trigs() {
   a_lab_trigs = getEntArray("lab_trigs", "script_noteworthy");
 
   foreach(trig in a_lab_trigs) {
-  trig trigger_off();
+    trig trigger_off();
   }
 
   a_lab_trigs = [];
@@ -78,7 +78,7 @@ turn_off_all_lab_trigs() {
   a_lab_trigs[28] = getent("trig_lab_1_2_guys_cleared", "targetname");
 
   foreach(trig in a_lab_trigs) {
-  trig trigger_off();
+    trig trigger_off();
   }
 }
 
@@ -169,7 +169,7 @@ escape_lab() {
   a_escape_trigs = getEntArray("escape_trigs", "script_noteworthy");
 
   foreach(trig in a_escape_trigs) {
-  trig trigger_on();
+    trig trigger_on();
   }
 
   simple_spawn("isaacs_killers");
@@ -228,19 +228,19 @@ escape_lab() {
   a_destroyed_lobby_asd = getEntArray("destroyed_lobby_asd", "targetname");
 
   foreach(asd in a_destroyed_lobby_asd) {
-  playFXOnTag(level._effect["agr_death_smolder"], asd, "tag_origin");
+    playFXOnTag(level._effect["agr_death_smolder"], asd, "tag_origin");
   }
 
   a_top_stairs_guys = get_ai_group_ai("top_stairs_guys");
 
   foreach(ai in a_top_stairs_guys) {
-  ai die();
+    ai die();
   }
 
   a_top_stairs_guys_2 = get_ai_group_ai("top_stairs_guys_2");
 
   foreach(ai in a_top_stairs_guys_2) {
-  ai die();
+    ai die();
   }
 
   flag_wait("player_at_briggs");
@@ -264,7 +264,7 @@ escape_lab() {
   a_ai_axis = getaiarray("axis");
 
   foreach(ai in a_ai_axis) {
-  ai delete();
+    ai delete();
   }
 
   flag_set("celerium_obj_done");
@@ -314,8 +314,7 @@ crawl_back_victim() {
   }
 }
 
-gun_shots_to_victim(guy) {
-}
+gun_shots_to_victim(guy) {}
 
 clean_room_ending() {
   level thread run_scene("clean_room_cower_loop_1");
@@ -572,7 +571,7 @@ celerium_lighting() {
   a_data_streams = getEntArray("data_streams", "script_noteworthy");
 
   foreach(data in a_data_streams) {
-  data hide();
+    data hide();
   }
 
   c_data_00 = getent("c_data_00", "targetname");
@@ -750,8 +749,7 @@ isaac_celerium() {
   run_scene("isaac_celerium_end");
 }
 
-attach_device_to_player(guy) {
-}
+attach_device_to_player(guy) {}
 
 celerium_glass() {
   flag_wait("player_at_celerium");

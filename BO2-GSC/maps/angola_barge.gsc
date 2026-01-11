@@ -110,11 +110,11 @@ barge_defend_attack_boats_think() {
   level.challenge_escort_boat_destroy = 1;
 
   foreach(vh_boat in level.boat_convoy) {
-  vh_boat thread convoy_boat_speed_think();
+    vh_boat thread convoy_boat_speed_think();
   }
 
   foreach(vh_boat in level.boat_convoy_small) {
-  vh_boat thread convoy_boat_speed_think();
+    vh_boat thread convoy_boat_speed_think();
   }
 
   boat_wave_1();
@@ -451,8 +451,7 @@ boat_replace_when_boarding(str_spawner_name) {
 
     if(str_spawner_name == "smallboat_02") {
       level.boat_convoy_small[level.boat_convoy_small.size] = vh_boat;
-    }
-    else {
+    } else {
       level.boat_convoy[level.boat_convoy.size] = vh_boat;
     }
   }
@@ -467,11 +466,9 @@ boat_board_fallback(str_board_location) {
 
   if(issubstr(self.model, "medium")) {
     self boat_drive_away_forward();
-  }
-  else if(isalive(self.driver)) {
+  } else if(isalive(self.driver)) {
     self boat_drive_away_forward();
-  }
-  else {
+  } else {
     while(distancesquared(level.main_barge.origin, self.origin) < 6250000) {
       self setspeed(1, 20, 20);
       self cancelaimove();
@@ -542,8 +539,7 @@ small_boat_attack_barge(str_attack_side, is_replaced, is_called_out) {
 
     if(n_dist < 1056784) {
       vh_boat setspeed(20, 20, 20);
-    }
-    else if(n_dist < 20250000) {
+    } else if(n_dist < 20250000) {
       vh_boat setspeed(50, 20, 20);
     }
 
@@ -583,8 +579,7 @@ boat_board_hudson_vo(str_board_location) {
 
   if(issubstr(str_board_location, "front")) {
     a_vo[a_vo.size] = "huds_enemies_on_board_u_0";
-  }
-  else {
+  } else {
     a_vo[a_vo.size] = "huds_enemies_on_the_lower_0";
   }
 
@@ -699,7 +694,7 @@ watch_boat_boarding_done(a_guys) {
   self waittill("boarding_done");
 
   foreach(ai_guy in a_guys) {
-  ai_guy notify("boat_rider_anim_done");
+    ai_guy notify("boat_rider_anim_done");
   }
 }
 
@@ -863,7 +858,7 @@ container_cleanup() {
     }
 
     foreach(ent in a_ents) {
-    ent setmovingplatformenabled(0);
+      ent setmovingplatformenabled(0);
     }
   }
 }
@@ -1021,7 +1016,7 @@ container_clear_lighting_ents() {
   a_ents = array("hudson_ai", "woods_ai");
 
   foreach(str_guy in a_ents) {
-  clear_lighting_pair(str_guy);
+    clear_lighting_pair(str_guy);
   }
 
   delete_scene_all("open_woods_container_p1_lighting", 1);
@@ -1385,15 +1380,13 @@ hind_strafe_states_logic() {
       case "side_strafe":
         if(randomint(2)) {
           next_node = self.node_index - 1;
-        }
-        else {
+        } else {
           next_node = self.node_index + 1;
         }
 
         if(next_node > 5) {
           next_node = 0;
-        }
-        else if(next_node < 0) {
+        } else if(next_node < 0) {
           next_node = 5;
         }
 
@@ -1771,8 +1764,7 @@ is_missile_looking_at(origin, dot, do_trace, ignore_ent) {
   if(new_dot >= dot) {
     if(do_trace) {
       return bullettracepassed(origin, eye, 0, ignore_ent);
-    }
-    else {
+    } else {
       return 1;
     }
   }

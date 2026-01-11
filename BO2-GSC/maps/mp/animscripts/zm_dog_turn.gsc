@@ -16,8 +16,7 @@ main() {
 
   if(need_to_turn_around(deltayaw)) {
     turn_180(deltayaw);
-  }
-  else {
+  } else {
     turn_90(deltayaw);
   }
 

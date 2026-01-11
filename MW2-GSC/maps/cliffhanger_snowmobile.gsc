@@ -847,15 +847,15 @@ start_snowmobile(e3) {
     npc_snowmobile_spawner.angles = price_snowspawn.angles;
   }
 
-    npc_snowmobile = npc_snowmobile_spawner spawn_vehicle();
+  npc_snowmobile = npc_snowmobile_spawner spawn_vehicle();
 
   if(level.start_point == "snowspawn") {
     npc_snowmobile attachpath(price_snowspawn);
     npc_snowmobile thread vehicle_paths(price_snowspawn);
   }
 
-    //	npc_snowmobile = getent( "npc_snowmobile", "targetname" );
-    npc_snowmobile.player_offset = 250;
+  //	npc_snowmobile = getent( "npc_snowmobile", "targetname" );
+  npc_snowmobile.player_offset = 250;
   //	npc_snowmobile thread maps\_vehicle_aianim::guy_enter( level.gaz, npc_snowmobile );
   npc_snowmobile thread maps\_vehicle_aianim::guy_enter(level.price);
   npc_snowmobile become_price_snowmobile();
@@ -889,7 +889,7 @@ start_snowmobile(e3) {
     level.player_snowmobile = playermobile_spawner spawn_vehicle();
   }
 
-    level.player_snowmobile thread maps\_snowmobile_drive::drive_vehicle();
+  level.player_snowmobile thread maps\_snowmobile_drive::drive_vehicle();
   level.player player_mount_vehicle(level.player_snowmobile);
 
   waittillframeend; // for the mount vehicle to finish.
@@ -1054,7 +1054,7 @@ ride_dialogue() {
     return;
   }
 
-    wait(2.5);
+  wait(2.5);
   // Kilo Six-One, the primary exfil point is compromised! We’re en route to Bravo using enemy transport! Meet us there! Over!
   thread radio_dialogue("cliff_pri_enroute");
 

@@ -11,8 +11,7 @@ precache() {
 
   if(level.multiteam) {
     game["set_player_model"]["team6"]["rifle"] = ::set_player_model;
-  }
-  else {
+  } else {
     game["set_player_model"]["axis"]["rifle"] = ::set_player_model;
   }
 }

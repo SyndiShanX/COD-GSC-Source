@@ -50,8 +50,7 @@ setmeleeattackdist() {
     if(isDefined(self.enemy)) {
       if(isplayer(self.enemy)) {
         self.meleeattackdist = 64;
-      }
-      else {
+      } else {
         self.meleeattackdist = 102;
       }
     }

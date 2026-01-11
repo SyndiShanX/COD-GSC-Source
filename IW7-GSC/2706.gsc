@@ -50,8 +50,7 @@ getweaponchoice(var_00) {
 
   if(var_1.size > 1) {
     return int(var_1[1]);
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -134,8 +133,7 @@ cac_getgesture() {
 
     if(level.rankedmatch) {
       var_00 = self getrankedplayerdata("rankedloadouts", "squadMembers", "archetypePreferences", var_01, "gesture");
-    }
-    else {
+    } else {
       var_00 = self getrankedplayerdata("privateloadouts", "squadMembers", "archetypePreferences", var_01, "gesture");
     }
   } else if(level.rankedmatch)
@@ -187,8 +185,7 @@ table_getarchetype(var_00, var_01) {
 table_getweapon(var_00, var_01, var_02) {
   if(var_02 == 0) {
     return tablelookup(var_00, 0, "loadoutPrimary", var_01 + 1);
-  }
-  else {
+  } else {
     return tablelookup(var_00, 0, "loadoutSecondary", var_01 + 1);
   }
 }
@@ -198,15 +195,13 @@ table_getweaponattachment(var_00, var_01, var_02, var_03) {
 
   if(var_02 == 0) {
     var_04 = tablelookup(var_00, 0, "loadoutPrimaryAttachment" + (var_03 + 1), var_01 + 1);
-  }
-  else {
+  } else {
     var_04 = tablelookup(var_00, 0, "loadoutSecondaryAttachment" + (var_03 + 1), var_01 + 1);
   }
 
   if(var_04 == "" || var_04 == "none") {
     return "none";
-  }
-  else {
+  } else {
     return var_04;
   }
 }
@@ -214,8 +209,7 @@ table_getweaponattachment(var_00, var_01, var_02, var_03) {
 table_getweaponcamo(var_00, var_01, var_02) {
   if(var_02 == 0) {
     return tablelookup(var_00, 0, "loadoutPrimaryCamo", var_01 + 1);
-  }
-  else {
+  } else {
     return tablelookup(var_00, 0, "loadoutSecondaryCamo", var_01 + 1);
   }
 }
@@ -223,8 +217,7 @@ table_getweaponcamo(var_00, var_01, var_02) {
 table_getweaponreticle(var_00, var_01, var_02) {
   if(var_02 == 0) {
     return tablelookup(var_00, 0, "loadoutPrimaryReticle", var_01 + 1);
-  }
-  else {
+  } else {
     return tablelookup(var_00, 0, "loadoutSecondaryReticle", var_01 + 1);
   }
 }
@@ -309,11 +302,9 @@ loadout_getclassteam(var_00) {
 
   if(issubstr(var_00, "axis")) {
     var_01 = "axis";
-  }
-  else if(issubstr(var_00, "allies")) {
+  } else if(issubstr(var_00, "allies")) {
     var_01 = "allies";
-  }
-  else {
+  } else {
     var_01 = "none";
   }
 
@@ -419,8 +410,7 @@ loadout_updateclassteam(var_00, var_01, var_02) {
 
   if(var_0.loadoutprimary == "none") {
     var_0.loadoutprimary = "iw7_fists";
-  }
-  else {
+  } else {
     for(var_04 = 0; var_04 < 6; var_4++) {
       var_0.loadoutprimaryattachments[var_04] = ::scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "class", "weaponSetups", 0, "attachment", var_04);
     }
@@ -457,8 +447,7 @@ loadout_updateclassteam(var_00, var_01, var_02) {
 
   if(scripts\mp\utility\game::getmatchrulesdatawithteamandindex("defaultClasses", var_02, var_03, "juggernaut")) {
     func_AE23();
-  }
-  else if(scripts\mp\utility\game::isjuggernaut()) {
+  } else if(scripts\mp\utility\game::isjuggernaut()) {
     loadout_removejugg_MAYBE();
   }
 }
@@ -607,8 +596,7 @@ loadout_updateclassgamemode(var_00, var_01) {
   if(isDefined(var_3["loadoutGesture"]) && var_3["loadoutGesture"] == "playerData") {
     if(isbot(self)) {
       var_0.loadoutgesture = "none";
-    }
-    else {
+    } else {
       var_0.loadoutgesture = cac_getgesture();
     }
   } else if(isDefined(var_3["loadoutGesture"]))
@@ -635,8 +623,7 @@ loadout_updateclassgamemode(var_00, var_01) {
 
   if(var_3["loadoutJuggernaut"]) {
     func_AE23();
-  }
-  else if(scripts\mp\utility\game::isjuggernaut()) {
+  } else if(scripts\mp\utility\game::isjuggernaut()) {
     loadout_removejugg_MAYBE();
   }
 }
@@ -829,8 +816,7 @@ loadout_updateabilities(var_00, var_01) {
   }
   if(!scripts\mp\utility\game::perksenabled()) {
     return;
-  }
-  else if(isai(self)) {
+  } else if(isai(self)) {
     if(isDefined(self.pers["loadoutPerks"])) {
       var_0.loadoutperks = self.pers["loadoutPerks"];
     }
@@ -901,20 +887,15 @@ loadout_updateclass(var_00, var_01) {
 
   if(var_02 != "none") {
     loadout_updateclassteam(var_00, var_01);
-  }
-  else if(issubstr(var_01, "custom")) {
+  } else if(issubstr(var_01, "custom")) {
     loadout_updateclasscustom(var_00, var_01);
-  }
-  else if(var_01 == "gamemode") {
+  } else if(var_01 == "gamemode") {
     loadout_updateclassgamemode(var_00, var_01);
-  }
-  else if(var_01 == "rc8Agent") {
+  } else if(var_01 == "rc8Agent") {
     func_AE50(var_00);
-  }
-  else if(var_01 == "callback") {
+  } else if(var_01 == "callback") {
     loadout_updateclasscallback(var_00);
-  }
-  else {
+  } else {
     loadout_updateclassdefault(var_00, var_01);
   }
 
@@ -932,8 +913,7 @@ loadout_updateclassfistweapons(var_00) {
 
   if(var_0.loadoutsecondary == "none" && var_0.loadoutprimary != "iw7_fists") {
     var_0.loadoutsecondary = "iw7_fists";
-  }
-  else if(var_0.loadoutprimary == "iw7_fists" && var_0.loadoutsecondary == "iw7_fists") {
+  } else if(var_0.loadoutprimary == "iw7_fists" && var_0.loadoutsecondary == "iw7_fists") {
     var_0.loadoutsecondary = "none";
   }
 }
@@ -1097,8 +1077,7 @@ loadout_updateplayerarchetype(var_00) {
 
     if(var_08 == "c6servo") {
       self _meth_8460("clothtype", "c6servo");
-    }
-    else {
+    } else {
       self _meth_8460("clothtype", "");
     }
 
@@ -1122,8 +1101,7 @@ loadout_updateclassfinalweapons(var_00) {
 
   if(var_0.loadoutsecondary == "none") {
     var_0.loadoutsecondaryfullname = "none";
-  }
-  else {
+  } else {
     var_0.loadoutsecondaryfullname = buildweaponname(var_0.loadoutsecondary, var_0.loadoutsecondaryattachments, var_0.loadoutsecondarycamo, var_0.loadoutsecondaryreticle, var_0.func_AEA5, self getentitynumber(), self.clientid, var_0.func_AE9F, var_0.loadoutsecondarycosmeticattachment);
   }
 }
@@ -1230,8 +1208,7 @@ loadout_updateplayersuper(var_00) {
   if(isbot(self) && level.allowsupers) {
     if(isDefined(self.loadoutsuper)) {
       var_01 = self.loadoutsuper;
-    }
-    else {
+    } else {
       var_01 = scripts\mp\bots\bots_supers::func_2EE9();
     }
 
@@ -1239,11 +1216,9 @@ loadout_updateplayersuper(var_00) {
 
     if(isDefined(self.loadoutrigtrait)) {
       var_02 = self.loadoutrigtrait;
-    }
-    else if(isDefined(var_0.loadoutrigtrait) && self.class == "gamemode") {
+    } else if(isDefined(var_0.loadoutrigtrait) && self.class == "gamemode") {
       var_02 = var_0.loadoutrigtrait;
-    }
-    else {
+    } else {
       var_02 = scripts\mp\bots\bots_supers::botpicktrait();
     }
 
@@ -1718,8 +1693,7 @@ func_11B04() {
   if(self.hasriotshield) {
     if(self.hasriotshieldequipped) {
       scripts\mp\utility\game::riotshield_attach(1, scripts\mp\utility\game::riotshield_getmodel());
-    }
-    else {
+    } else {
       scripts\mp\utility\game::riotshield_attach(0, scripts\mp\utility\game::riotshield_getmodel());
     }
   }
@@ -1739,8 +1713,7 @@ func_11B04() {
       if(!isDefined(self.riotshieldmodel)) {
         if(isDefined(self.riotshieldmodelstowed)) {
           scripts\mp\utility\game::riotshield_move(0);
-        }
-        else {
+        } else {
           scripts\mp\utility\game::riotshield_attach(1, scripts\mp\utility\game::riotshield_getmodel());
         }
       }
@@ -1748,8 +1721,7 @@ func_11B04() {
       if(!isDefined(self.riotshieldmodelstowed)) {
         if(isDefined(self.riotshieldmodel)) {
           scripts\mp\utility\game::riotshield_move(1);
-        }
-        else {
+        } else {
           scripts\mp\utility\game::riotshield_attach(0, scripts\mp\utility\game::riotshield_getmodel());
         }
       }
@@ -1776,11 +1748,9 @@ updateattachmentsformlg(var_00) {
 
     if(var_03 == "ripperrscope_camo") {
       var_03 = "ripperrscope_na_camo";
-    }
-    else if(var_03 == "m8scope_camo") {
+    } else if(var_03 == "m8scope_camo") {
       var_03 = "m8scope_na_camo";
-    }
-    else if(var_03 == "arripper" || var_03 == "arm8" || var_03 == "akimbofmg" || var_03 == "glarclassic" || var_03 == "glmp28" || var_03 == "shotgunlongshot" || var_03 == "glsmoke" || var_03 == "glsmoke_slow" || var_03 == "gltacburst" || var_03 == "gltacburst_big") {
+    } else if(var_03 == "arripper" || var_03 == "arm8" || var_03 == "akimbofmg" || var_03 == "glarclassic" || var_03 == "glmp28" || var_03 == "shotgunlongshot" || var_03 == "glsmoke" || var_03 == "glsmoke_slow" || var_03 == "gltacburst" || var_03 == "gltacburst_big") {
       continue;
     }
     var_1[var_1.size] = var_03;
@@ -1852,7 +1822,7 @@ buildweaponname(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, 
       var_01 = scripts\engine\utility::array_combine_unique(var_01, var_11);
 
       foreach(var_13 in var_11) {
-      scripts\mp\perks\weaponpassives::checkpassivemessage("passive_random_attachments", "_" + scripts\mp\utility\game::attachmentmap_tounique(var_13, var_10));
+        scripts\mp\perks\weaponpassives::checkpassivemessage("passive_random_attachments", "_" + scripts\mp\utility\game::attachmentmap_tounique(var_13, var_10));
       }
     }
   }
@@ -1910,7 +1880,7 @@ buildweaponname(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, 
   }
 
   foreach(var_23 in var_01) {
-  var_10 = var_10 + ("+" + var_23);
+    var_10 = var_10 + ("+" + var_23);
   }
 
   if(issubstr(var_10, "iw7")) {
@@ -1925,8 +1895,7 @@ buildweaponname(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, 
       if(var_25 && !issubstr(var_10, "iw7_longshot")) {
         if(ishalloweenholidayweapon(var_10, var_04)) {
           var_10 = var_10 + ("+scope" + gethalloweenscopenumber(var_10, var_04));
-        }
-        else {
+        } else {
           var_10 = var_10 + "+scope1";
         }
       } else
@@ -1980,7 +1949,7 @@ func_11754(var_00, var_01) {
   var_02 = getavailableattachments(var_00, [], 0);
 
   foreach(var_04 in var_02) {
-  scripts\mp\perks\weaponpassives::testpassivemessage("passive_random_attachments", "_" + scripts\mp\utility\game::attachmentmap_tounique(var_04, var_00));
+    scripts\mp\perks\weaponpassives::testpassivemessage("passive_random_attachments", "_" + scripts\mp\utility\game::attachmentmap_tounique(var_04, var_00));
   }
 }
 
@@ -2149,8 +2118,7 @@ filterattachments(var_00) {
 buildweaponassetname(var_00, var_01) {
   if(!isDefined(var_01) || var_01 < 0) {
     return scripts\mp\utility\game::func_13C75(var_00);
-  }
-  else {
+  } else {
     var_02 = scripts\mp\loot::getweaponassetfromrootweapon(var_00, var_01);
     return var_02;
   }
@@ -2195,8 +2163,7 @@ buildweaponnamecamo(var_00, var_01, var_02) {
 
   if(!isDefined(var_01)) {
     var_03 = 0;
-  }
-  else {
+  } else {
     var_03 = int(tablelookup("mp\camoTable.csv", 1, var_01, scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
   }
 
@@ -2220,8 +2187,7 @@ buildweaponnamecamo(var_00, var_01, var_02) {
 
     if(isDefined(var_05)) {
       var_03 = int(tablelookup("mp\camoTable.csv", 1, var_05, scripts\engine\utility::getcamotablecolumnindex("weapon_index")));
-    }
-    else {
+    } else {
       return var_00;
     }
   }
@@ -2508,8 +2474,7 @@ changearchetype(var_00, var_01, var_02) {
 
     if(shouldallowinstantclassswap()) {
       giveloadoutswap();
-    }
-    else if(isalive(self)) {
+    } else if(isalive(self)) {
       self iprintlnbold(game["strings"]["change_rig"]);
     }
   }

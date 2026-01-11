@@ -472,10 +472,10 @@ start_favela_escape_test() {
   trigger_off( "sbmodel_market_evac_playerblock", "targetname" );
   level.player teleport_to_origin( ( -3128, -2888, 1064 ), ( 0, 90, 0 ) );
   chopper = spawn_chopper( 6, false );
-	
+  	
   path2start = GetStruct( "struct_market_evac_chopper_path2", "targetname" );
   path2nextnode = GetStruct( path2start.target, "targetname" );
-	
+  	
   chopper thread market_evac_chopper_bugout_path( path2start );
   */
 
@@ -1505,7 +1505,7 @@ solorun_balcony_save_aicheck() {
     		proximity_threat = true;
     	}
     }
-		
+    		
     if( !proximity_threat )
     {
     	// enemy isn't close enough to be a threat

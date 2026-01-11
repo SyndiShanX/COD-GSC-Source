@@ -54,8 +54,7 @@ displaypopupswaiter() {
 
       if(isDefined(nextnotifydata.duration)) {
         duration = nextnotifydata.duration;
-      }
-      else {
+      } else {
         duration = level.startmessagedefaultduration;
       }
 
@@ -89,8 +88,7 @@ displaypopupswaiter() {
 
       if(isDefined(nextnotifydata.duration)) {
         duration = nextnotifydata.duration;
-      }
-      else {
+      } else {
         duration = level.regulargamemessages.waittime;
       }
     }

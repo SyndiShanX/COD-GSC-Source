@@ -193,8 +193,7 @@ anim_first_frame_on_guy(guy, anime, org, angles, animname_override) {
   guy.first_frame_time = gettime();
   if(isDefined(animname_override)) {
     animname = animname_override;
-  }
-  else {
+  } else {
     animname = guy.animname;
   }
   guy set_start_pos(anime, org, angles, animname);
@@ -212,8 +211,7 @@ anim_custom_animmode_on_guy(guy, custom_animmode, anime, org, angles, animname_o
   animname = undefined;
   if(isDefined(animname_override)) {
     animname = animname_override;
-  }
-  else {
+  } else {
     animname = guy.animname;
   }
   guy assert_existance_of_anim(anime, animname);
@@ -272,8 +270,7 @@ anim_loop_packet(guyPackets, anime, ender, animname_override) {
   base_animname = undefined;
   if(isDefined(animname_override)) {
     base_animname = animname_override;
-  }
-  else {
+  } else {
     base_animname = baseGuy.animname;
   }
   idleanim = 0;
@@ -308,8 +305,7 @@ anim_loop_packet(guyPackets, anime, ender, animname_override) {
       animname = undefined;
       if(isDefined(animname_override)) {
         animname = animname_override;
-      }
-      else {
+      } else {
         animname = guy.animname;
       }
       if((isDefined(level.scr_face[animname])) &&
@@ -375,11 +371,10 @@ anim_loop_packet(guyPackets, anime, ender, animname_override) {
     }
     if(scriptedAnimationIndex != -1) {
       guyPackets[scriptedAnimationIndex]["guy"] waittillmatch(anim_string, "end");
+    } else {
+      if(scriptedSoundIndex != -1)
     }
-    else {
-    if(scriptedSoundIndex != -1)
-    }
-      guyPackets[scriptedSoundIndex]["guy"] waittill(anim_string);
+    guyPackets[scriptedSoundIndex]["guy"] waittill(anim_string);
   }
 }
 
@@ -441,8 +436,7 @@ anim_single(guys, anime, tag, node, tag_entity, animname_override) {
     animname = undefined;
     if(isDefined(animname_override)) {
       animname = animname_override;
-    }
-    else {
+    } else {
       animname = guy.animname;
     }
     guy assert_existance_of_anim(anime, animname);
@@ -671,15 +665,13 @@ notetrack_wait(guy, msg, tag_entity, anime, animname_override) {
   guy endon("death");
   if(isDefined(tag_entity)) {
     tag_owner = tag_entity;
-  }
-  else {
+  } else {
     tag_owner = self;
   }
   animname = undefined;
   if(isDefined(animname_override)) {
     animname = animname_override;
-  }
-  else {
+  } else {
     animname = guy.animname;
   }
   dialogue_array = [];
@@ -734,8 +726,7 @@ notetrack_wait(guy, msg, tag_entity, anime, animname_override) {
           if(isDefined(scr_notetrack["attach model"])) {
             if(isDefined(scr_notetrack["selftag"])) {
               guy attach(scr_notetrack["attach model"], scr_notetrack["selftag"]);
-            }
-            else {
+            } else {
               tag_owner attach(scr_notetrack["attach model"], scr_notetrack["tag"]);
             }
             continue;
@@ -744,8 +735,7 @@ notetrack_wait(guy, msg, tag_entity, anime, animname_override) {
             waittillframeend;
             if(isDefined(scr_notetrack["selftag"])) {
               guy detach(scr_notetrack["detach model"], scr_notetrack["selftag"]);
-            }
-            else {
+            } else {
               tag_owner detach(scr_notetrack["detach model"], scr_notetrack["tag"]);
             }
           }
@@ -761,11 +751,10 @@ notetrack_wait(guy, msg, tag_entity, anime, animname_override) {
           }
           if(isDefined(scr_notetrack["create model"])) {
             anim_addModel(guy, scr_notetrack);
+          } else {
+            if(isDefined(scr_notetrack["delete model"]))
           }
-          else {
-          if(isDefined(scr_notetrack["delete model"]))
-          }
-            anim_removeModel(guy, scr_notetrack);
+          anim_removeModel(guy, scr_notetrack);
           if((isDefined(scr_notetrack["selftag"])) &&
             (isDefined(scr_notetrack["effect"]))) {
             playFXOnTag(
@@ -779,11 +768,10 @@ notetrack_wait(guy, msg, tag_entity, anime, animname_override) {
             tag = random(level.scr_special_notetrack[animname]);
             if(isDefined(tag["tag"])) {
               playFXOnTag(level._effect[tag["effect"]], tag_owner, tag["tag"]);
+            } else {
+              if(isDefined(tag["selftag"]))
             }
-            else {
-            if(isDefined(tag["selftag"]))
-            }
-              playFXOnTag(level._effect[tag["effect"]], self, tag["tag"]);
+            playFXOnTag(level._effect[tag["effect"]], self, tag["tag"]);
           }
         }
       }
@@ -984,8 +972,7 @@ anim_reach_with_funcs(guys, anime, tag, node, tag_entity, animname_override, sta
     guy = guys[i];
     if(isDefined(animname_override)) {
       animname = animname_override;
-    }
-    else {
+    } else {
       animname = guy.animname;
     }
     if(isDefined(level.scr_anim[animname][anime])) {
@@ -1023,8 +1010,7 @@ anim_teleport(guy, anime, tag, node, tag_entity) {
     startorg = getstartOrigin(org, angles, level.scr_anim[guy[i].animname][anime]);
     if(isSentient(guy[i])) {
       guy[i] teleport(startorg);
-    }
-    else {
+    } else {
       guy[i].origin = startorg;
     }
   }
@@ -1260,12 +1246,10 @@ anim_single_debug(guy, anime, tag, node, tag_entity) {
 add_animation(animname, anime) {
   if(!isDefined(level.completedAnims)) {
     level.completedAnims[animname][0] = anime;
-  }
-  else {
+  } else {
     if(!isDefined(level.completedAnims[animname])) {
       level.completedAnims[animname][0] = anime;
-    }
-    else {
+    } else {
       for(i = 0; i < level.completedAnims[animname].size; i++) {
         if(level.completedAnims[animname][i] == anime) {
           return;
@@ -1673,11 +1657,10 @@ chatAtTarget(msg, lookTarget) {
     moveRange = abs(destYaw - self.a.lookAngle) * 1;
     if(destYaw > self.a.lookangle + moveRange) {
       self.a.lookangle += moveRange;
+    } else {
+      if(destYaw < self.a.lookangle - moveRange)
     }
-    else {
-    if(destYaw < self.a.lookangle - moveRange)
-    }
-      self.a.lookangle -= moveRange;
+    self.a.lookangle -= moveRange;
     else {
       self.a.lookangle = destYaw;
     }
@@ -1751,8 +1734,7 @@ delayedDialogue(anime, doAnimation, dialogue, animationName) {
   self waittillmatch("face_done_" + anime, "dialog");
   if(doAnimation) {
     self SaySpecificDialogue(undefined, dialogue, 1.0);
-  }
-  else {
+  } else {
     self SaySpecificDialogue(undefined, dialogue, 1.0, "single dialogue");
   }
 }
@@ -1863,8 +1845,7 @@ set_start_pos(anime, org, angles, animname_override) {
   animname = undefined;
   if(isDefined(animname_override)) {
     animname = animname_override;
-  }
-  else {
+  } else {
     animname = self.animname;
   }
   if(isSentient(self)) {
@@ -1920,8 +1901,7 @@ anim_set_rate_internal(anime, rate, animname_override) {
   animname = undefined;
   if(isDefined(animname_override)) {
     animname = animname_override;
-  }
-  else {
+  } else {
     animname = self.animname;
   }
   self setflaggedanim("single anim", getanim_from_animname(anime, animname), 1, 0, rate);

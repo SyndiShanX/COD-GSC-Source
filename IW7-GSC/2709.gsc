@@ -19,7 +19,7 @@ createcodcastermatchdataforplayer(var_00) {
   var_01 = [];
 
   foreach(var_03 in level.codcastermatchdata.playerfields) {
-  var_1[var_3[0]] = var_3[1];
+    var_1[var_3[0]] = var_3[1];
   }
 
   return var_01;
@@ -46,19 +46,17 @@ checkcodcasterplayerdataexists(var_00) {
 init() {
   setcodcasterclientmatchdata("map", level.script);
   var_00 = spawnStruct();
-  var_0.playerfields = [
-    ["damageDone", 0],
+  var_0.playerfields = [["damageDone", 0],
     ["longestKillstreak", 0],
     ["shutdowns", 0],
-    ["gametypePoints", 0]
-  ];
+    ["gametypePoints", 0]];
   var_0.players = [];
   level.codcastermatchdata = var_00;
 }
 
 setddlfieldsforplayer(var_00) {
   foreach(var_02 in level.codcastermatchdata.playerfields) {
-  setcodcasterclientmatchdata("players", var_0.codcastermatchdataid, var_2[0], level.codcastermatchdata.players[var_0.clientid][var_2[0]]);
+    setcodcasterclientmatchdata("players", var_0.codcastermatchdataid, var_2[0], level.codcastermatchdata.players[var_0.clientid][var_2[0]]);
   }
 
   setcodcasterclientmatchdata("players", var_0.codcastermatchdataid, "username", var_0.name);

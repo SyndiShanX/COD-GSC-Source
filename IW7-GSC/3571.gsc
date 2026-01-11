@@ -140,8 +140,7 @@ func_BFBC(var_00) {
 
   if(var_0.func_6C1A) {
     thread func_BFC6(var_00, var_03, 1);
-  }
-  else {
+  } else {
     thread func_BFC6(var_00, var_03, 0);
   }
 
@@ -219,8 +218,7 @@ func_BFC4(var_00, var_01) {
 
   if(var_0.func_6C1A) {
     thread func_BFC6(var_00, undefined, 1);
-  }
-  else {
+  } else {
     thread func_BFC6(var_00, undefined, 0);
   }
 

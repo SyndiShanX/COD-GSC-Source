@@ -72,8 +72,7 @@ setinteractwithethereal(var_00, var_01, var_02, var_03) {
 
   if(level.teambased) {
     var_09 = scripts\cp\utility::getteamarray(scripts\cp\utility::getotherteam(self.team));
-  }
-  else {
+  } else {
     var_09 = level.characters;
   }
 
@@ -154,8 +153,7 @@ setinteractwithethereal(var_00, var_01, var_02, var_03) {
 
     if(var_24 == 0) {
       var_33 setscriptablepartstate("explosion", "active");
-    }
-    else {
+    } else {
       var_33 setscriptablepartstate("explosion", "neutral");
     }
 
@@ -202,8 +200,7 @@ istrialversion(var_00) {
 
   if(isDefined(var_00)) {
     self.owner scripts\engine\utility::waittill_any_timeout_no_endon_death(var_00, "disconnect");
-  }
-  else {
+  } else {
     self.owner waittill("disconnect");
   }
 
@@ -220,8 +217,7 @@ func_B24D(var_00, var_01, var_02) {
 
   if(isDefined(var_01)) {
     wait(var_01);
-  }
-  else {
+  } else {
     var_00 waittill("death");
   }
 
@@ -408,8 +404,7 @@ func_E0DC(var_00) {
 
     if(var_2.size > 0) {
       var_1.func_32A4 = var_02;
-    }
-    else {
+    } else {
       func_6312();
     }
   }
@@ -439,11 +434,9 @@ func_7E11() {
 
   if(var_00 > 1.0) {
     var_01 = 25;
-  }
-  else if(var_00 > 0.5) {
+  } else if(var_00 > 0.5) {
     var_01 = 25;
-  }
-  else {
+  } else {
     var_01 = 25;
   }
 

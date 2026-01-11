@@ -116,8 +116,7 @@ onPlayerConnect() {
 
   if(!isDefined(player)) {
     return;
-  }
-  else {
+  } else {
     level.observer = player;
   }
 
@@ -220,8 +219,7 @@ updateSelectedButton() {
     foreach(button in level.radial_button_group[level.radial_button_current_group]) {
       if(isInRange(button.start_angle, button.end_angle)) {
         level.active_button = button;
-      }
-      else {
+      } else {
         button.font_color = (0.5, 0.5, 1);
       }
     }
@@ -327,7 +325,7 @@ button_switch(button1, button2) {
 
 draw_radial_buttons(button_group) {
   foreach(button in level.radial_button_group[button_group]) {
-  button thread draw_radial_button(button_group);
+    button thread draw_radial_button(button_group);
   }
 }
 
@@ -375,13 +373,12 @@ Zoom_To_Radial_Menu(button_group, reverse) {
   }
 
   foreach(button in level.radial_button_group[level.radial_button_previous_group]) {
-  button notify("remove_button");
+    button notify("remove_button");
   }
 
   if(isDefined(reverse) && reverse) {
     level.observer go_path_by_targetname_reverse(level.radial_button_group_info[level.radial_button_previous_group]["view_start"], button_group);
-  }
-  else {
+  } else {
     level.observer go_path_by_targetname(level.radial_button_group_info[button_group]["view_start"]);
   }
 
@@ -432,8 +429,7 @@ isInRange(start_angle, end_angle) {
 
   if(start_angle > end_angle) {
     in_range = (inside_big_angle || inside_small_angle);
-  }
-  else {
+  } else {
     in_range = (level.rs_angle > start_angle && level.rs_angle < end_angle);
   }
 
@@ -443,8 +439,7 @@ isInRange(start_angle, end_angle) {
 action_back() {
   if(isDefined(level.radial_button_current_group) && level.radial_button_current_group != "main") {
     zoom_to_radial_menu("main", true);
-  }
-  else {
+  } else {
     return;
   }
 }

@@ -34,8 +34,7 @@ main(var_0, var_1, var_2) {
 
   if(var_2 == "script_vehicle_osprey_heli") {
     maps\_vehicle::build_is_helicopter();
-  }
-  else {
+  } else {
     maps\_vehicle::build_is_airplane();
   }
 }

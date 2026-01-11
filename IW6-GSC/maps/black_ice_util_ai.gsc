@@ -8,8 +8,7 @@ ally_advance_watcher(var_0, var_1, var_2, var_3) {
 
   if(isarray(self)) {
     var_4 = self;
-  }
-  else {
+  } else {
     var_4[0] = self;
   }
 
@@ -43,8 +42,7 @@ ally_advance_watcher(var_0, var_1, var_2, var_3) {
   for(;;) {
     if(isDefined(var_5.script_parameters)) {
       var_5._delay = float(var_5.script_parameters);
-    }
-    else {
+    } else {
       var_5._delay = 0;
     }
 
@@ -138,7 +136,7 @@ ally_advance(var_0, var_1) {
 
   if(var_0._linked_triggers.size > 0) {
     foreach(var_3 in var_0._linked_triggers) {
-    var_3 notify("trigger");
+      var_3 notify("trigger");
     }
   }
 
@@ -167,8 +165,7 @@ waittill_time_out() {
 
   if(self._delay == 0) {
     self waittill("trigger");
-  }
-  else {
+  } else {
     wait(self._delay);
   }
 }
@@ -234,8 +231,7 @@ waittill_allies_at_goal(var_0) {
 
   if(isarray(var_0)) {
     var_3 = var_0;
-  }
-  else {
+  } else {
     var_3[0] = var_0;
   }
 
@@ -254,7 +250,7 @@ waittill_allies_at_goal(var_0) {
   var_2 notify("die");
 
   foreach(var_5 in var_3) {
-  var_5.goalradius = var_5._old_goalradius;
+    var_5.goalradius = var_5._old_goalradius;
   }
 
   common_scripts\utility::flag_clear("flag_allies_moving");
@@ -301,17 +297,14 @@ add_to_group(var_0, var_1) {
 
     if(isDefined(var_1) && !isstring(var_1) && !var_1) {
       return;
-    }
-    else if(isstring(var_1)) {
+    } else if(isstring(var_1)) {
       thread go_to_goal_vol(var_1);
-    }
-    else {
+    } else {
       var_2 = self getgoalvolume();
 
       if(isDefined(var_2)) {
         thread go_to_goal_vol(var_2);
-      }
-      else if(!isDefined(self.target) && isDefined(level._retreat_current_volumes) && isDefined(level._retreat_current_volumes[var_0]) && level._retreat_current_volumes[var_0].size > 0) {
+      } else if(!isDefined(self.target) && isDefined(level._retreat_current_volumes) && isDefined(level._retreat_current_volumes[var_0]) && level._retreat_current_volumes[var_0].size > 0) {
         thread go_to_goal_vol();
       }
     }
@@ -359,14 +352,12 @@ trigger_wait_retreat(var_0, var_1) {
 
   if(isarray(var_0)) {
     var_2 = var_0;
-  }
-  else if(isstring(var_0)) {
+  } else if(isstring(var_0)) {
     var_2[0] = var_0;
-  }
-  else {}
+  } else {}
 
   foreach(var_4 in var_2) {
-  enemy_retreat(var_0, undefined, var_1);
+    enemy_retreat(var_0, undefined, var_1);
   }
 
   self delete();
@@ -434,8 +425,7 @@ go_to_goal_vol(var_0, var_1) {
 
     if(isDefined(self._current_index) && isDefined(level._retreat_current_volumes) && isDefined(level._retreat_current_volumes[self._current_index]) && !current_vol_acceptable()) {
       add_to_standby();
-    }
-    else {
+    } else {
       self._retreat_standby = undefined;
     }
 
@@ -452,11 +442,9 @@ choose_goal_vol(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = choose_goal_vol_chain(var_0);
-  }
-  else if(isDefined(level._retreat_final)) {
+  } else if(isDefined(level._retreat_final)) {
     var_1 = choose_goal_vol_chain(level._retreat_final);
-  }
-  else if(isDefined(self._current_goal_volume)) {
+  } else if(isDefined(self._current_goal_volume)) {
     if(current_vol_acceptable()) {
       return;
     }
@@ -504,8 +492,7 @@ choose_goal_vol(var_0) {
 
   if(isDefined(self._retreat_standby) && self._retreat_standby) {
     add_to_standby();
-  }
-  else {}
+  } else {}
 }
 
 current_vol_acceptable() {
@@ -616,7 +603,7 @@ standby_watcher(var_0) {
 
     if(isDefined(level._retreat_current_volumes[var_0])) {
       foreach(var_3 in var_1) {
-      var_3 thread go_to_goal_vol(level._retreat_current_volumes[var_0]);
+        var_3 thread go_to_goal_vol(level._retreat_current_volumes[var_0]);
       }
 
       continue;
@@ -636,8 +623,7 @@ setup_retreat_vols() {
     if(isDefined(var_5.script_noteworthy)) {
       if(isDefined(var_5.script_parameters)) {
         var_5._max_ai = int(var_5.script_parameters);
-      }
-      else {
+      } else {
         if(!isDefined(var_5.nodes)) {
           var_5.nodes = [];
         }
@@ -672,7 +658,7 @@ setup_retreat_vols() {
         var_9 = getEntArray(var_5.target, "targetname");
 
         foreach(var_11 in var_9) {
-        var_5._target_vols = common_scripts\utility::array_add(var_5._target_vols, var_11);
+          var_5._target_vols = common_scripts\utility::array_add(var_5._target_vols, var_11);
         }
       }
 
@@ -702,8 +688,7 @@ build_vol_list(var_0) {
 
     if(isDefined(var_2)) {
       var_1 = common_scripts\utility::array_add(var_1, var_2);
-    }
-    else {
+    } else {
       break;
     }
 

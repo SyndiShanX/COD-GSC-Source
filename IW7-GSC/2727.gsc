@@ -47,8 +47,7 @@ init() {
 
     if(var_03 == "win" || var_03 == "loss" || var_03 == "tie") {
       var_04 = float(var_04);
-    }
-    else {
+    } else {
       var_04 = int(var_04);
     }
 
@@ -125,8 +124,7 @@ func_A652(var_00, var_01, var_02, var_03) {
   if(var_03 == "MOD_PISTOL_BULLET" || var_03 == "MOD_RIFLE_BULLET" || var_03 == "MOD_HEAD_SHOT") {
     if(!isDefined(self.func_3247)) {
       self.func_3247 = 1;
-    }
-    else {
+    } else {
       self.func_3247++;
 
       if(self.func_3247 >= 2) {
@@ -200,8 +198,7 @@ func_A651(var_00, var_01, var_02, var_03, var_04, var_05) {
     if(var_10 == "weapon_sniper" && var_03 != "MOD_MELEE" && gettime() == var_1.attackerdata[self.guid].firsttimedamaged && !(issubstr(var_02, "iw7_longshot_mp") && scripts\mp\weapons::isaltmodeweapon(var_02))) {
       if(!isDefined(self.pers["oneShotKills"])) {
         self.pers["oneShotKills"] = 1;
-      }
-      else {
+      } else {
         self.pers["oneShotKills"]++;
       }
 
@@ -288,8 +285,7 @@ func_A651(var_00, var_01, var_02, var_03, var_04, var_05) {
 
     if(isDefined(var_1.attackerposition)) {
       var_17 = var_1.attackerposition;
-    }
-    else {
+    } else {
       var_17 = self.origin;
     }
 
@@ -302,8 +298,7 @@ func_A651(var_00, var_01, var_02, var_03, var_04, var_05) {
     if(var_18) {
       if(func_9F03(self, var_02, var_03, var_17, var_01)) {
         thread func_D63F(var_00, var_02, var_03, var_01);
-      }
-      else if(func_9E84(self, var_02, var_03, var_17, var_01)) {
+      } else if(func_9E84(self, var_02, var_03, var_17, var_01)) {
         thread func_AFEA(var_00, var_02, var_03, var_01);
       }
     }
@@ -323,8 +318,7 @@ func_A651(var_00, var_01, var_02, var_03, var_04, var_05) {
 
       if(scripts\mp\utility\game::func_9EE8()) {
         self.modifiers["ads"] = 1;
-      }
-      else if(scripts\engine\utility::isbulletdamage(var_03)) {
+      } else if(scripts\engine\utility::isbulletdamage(var_03)) {
         self.modifiers["hipfire"] = 1;
       }
 
@@ -350,8 +344,7 @@ func_A651(var_00, var_01, var_02, var_03, var_04, var_05) {
       if(isDefined(var_05) && isDefined(var_5.adsfire)) {
         if(var_5.adsfire) {
           self.modifiers["ads"] = 1;
-        }
-        else {
+        } else {
           self.modifiers["hipfire"] = 1;
         }
       }
@@ -365,11 +358,9 @@ func_A651(var_00, var_01, var_02, var_03, var_04, var_05) {
       if(var_18) {
         if(self iswallrunning()) {
           thread givekillreward("wallkill", var_00, var_02, var_03, var_01, "wallrun_kill");
-        }
-        else if(isdeathfromabove(self, var_02, var_03, var_17, var_01)) {
+        } else if(isdeathfromabove(self, var_02, var_03, var_17, var_01)) {
           thread givekillreward("jumpkill", var_00, var_02, var_03, var_01, "air_kill");
-        }
-        else if(events_issliding()) {
+        } else if(events_issliding()) {
           thread givekillreward("slidekill", var_00, var_02, var_03, var_01, "slide_kill");
           self.modifiers["sliding"] = 1;
         }
@@ -388,8 +379,7 @@ func_A651(var_00, var_01, var_02, var_03, var_04, var_05) {
 
       if(var_01 iswallrunning()) {
         thread givekillreward("killonwall", var_00, var_02, var_03, var_01, "kill_wallrunner");
-      }
-      else if(isskeetshooter(self, var_02, var_03, var_17, var_01)) {
+      } else if(isskeetshooter(self, var_02, var_03, var_17, var_01)) {
         thread givekillreward("killinair", var_00, var_02, var_03, var_01, "kill_jumper");
       }
     }
@@ -796,8 +786,7 @@ func_A655(var_00, var_01, var_02, var_03) {
 
   if(isDefined(var_05) && var_05 > 0 && var_05 % 2 == 0) {
     superkill(var_04, var_03);
-  }
-  else {
+  } else {
     var_06 = scripts\mp\supers::getcurrentsuper();
     var_6.numkills++;
   }
@@ -941,8 +930,7 @@ givekillreward(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_05)) {
     thread scripts\mp\awards::givemidmatchaward(var_05);
-  }
-  else {
+  } else {
     thread scripts\mp\utility\game::giveunifiedpoints(var_00, var_02);
   }
 }
@@ -1134,8 +1122,7 @@ func_12EFE(var_00, var_01, var_02) {
 
   if(!isDefined(self.func_DDC3[var_02])) {
     self.func_DDC3[var_02] = 1;
-  }
-  else {
+  } else {
     self.func_DDC3[var_02]++;
   }
 

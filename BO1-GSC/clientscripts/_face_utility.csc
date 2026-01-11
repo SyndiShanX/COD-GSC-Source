@@ -246,14 +246,12 @@ showState(state) {
         }
         if(isDefined(self.face_disable) && self.face_disable) {
           disableChar = "-";
-        }
-        else {
+        } else {
           disableChar = "+";
         }
         if(isDefined(self.face_death) && self.face_death) {
           deathChar = "D";
-        }
-        else {
+        } else {
           deathChar = "A";
         }
         Print3d(self.origin + (0, 0, 72), disableChar + deathChar + "[" + entNum + "]" + self.face_state, (1, 1, 1), 1, 0.25);

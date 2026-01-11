@@ -112,6 +112,5 @@ actor_ac130_damage_override(einflictor, eattacker, idamage, idflags, smeansofdea
 }
 
 onplayerkilled_strobe(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-  if(sweapon == "ac130_vulcan_minigun") {
-  }
+  if(sweapon == "ac130_vulcan_minigun") {}
 }

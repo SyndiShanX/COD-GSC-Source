@@ -195,8 +195,7 @@ playvoforreloading(var_0) {
 
   if(!isDefined(var_0.next_reload_vo_time)) {
     var_0.next_reload_vo_time = var_2 + randomintrange(var_1, var_1 + 2000);
-  }
-  else if(var_2 < var_0.next_reload_vo_time) {
+  } else if(var_2 < var_0.next_reload_vo_time) {
     return;
   }
   var_3 = var_0.vo_prefix + "inform_reloading_generic";
@@ -300,8 +299,7 @@ playvoforcraftingpiece(var_0) {
 
   if(!isDefined(var_0.next_crafting_vo_time)) {
     var_0.next_crafting_vo_time = var_3 + randomintrange(var_2, var_2 + 2000);
-  }
-  else if(var_3 < var_0.next_crafting_vo_time) {
+  } else if(var_3 < var_0.next_crafting_vo_time) {
     return;
   }
   var_0 play_vo_on_player(var_1, undefined, undefined, undefined, undefined, 1);
@@ -315,8 +313,7 @@ playvoforweaponcraftingpiece(var_0) {
 
   if(!isDefined(var_0.next_crafting_vo_time)) {
     var_0.next_crafting_vo_time = var_3 + randomintrange(var_2, var_2 + 2000);
-  }
-  else if(var_3 < var_0.next_crafting_vo_time) {
+  } else if(var_3 < var_0.next_crafting_vo_time) {
     return;
   }
   var_0 play_vo_on_player(var_1, undefined, undefined, undefined, undefined, 1);
@@ -454,8 +451,7 @@ playvoformammoth(var_0, var_1) {
 
   if(!isDefined(level.next_mammoth_vo_time)) {
     level.next_mammoth_vo_time = var_3 + randomintrange(var_2, var_2 + 2000);
-  }
-  else if(var_3 < level.next_mammoth_vo_time) {
+  } else if(var_3 < level.next_mammoth_vo_time) {
     return;
   }
   if(var_0 == "warn_dig" && randomint(2) == 0) {
@@ -508,8 +504,7 @@ playvoforbomberspawn(var_0) {
 
   if(!isDefined(level.next_bomber_spawn_vo_time)) {
     level.next_bomber_spawn_vo_time = var_2 + randomintrange(var_1, var_1 + 2000);
-  }
-  else if(var_2 < level.next_bomber_spawn_vo_time) {
+  } else if(var_2 < level.next_bomber_spawn_vo_time) {
     return;
   }
   var_3 = maps\mp\alien\_utility::get_array_of_valid_players(1, var_0.origin);
@@ -533,8 +528,7 @@ playvoforbomberattack(var_0) {
 
   if(!isDefined(level.next_bomber_vo_time)) {
     level.next_bomber_vo_time = var_2 + randomintrange(var_1, var_1 + 2000);
-  }
-  else if(var_2 < level.next_bomber_vo_time) {
+  } else if(var_2 < level.next_bomber_vo_time) {
     return;
   }
   if(randomint(100) > 50) {
@@ -613,16 +607,14 @@ player_dlc_pain_vo(var_0) {
   }
   if(!isDefined(var_0.next_pain_vo_time)) {
     var_0.next_pain_vo_time = var_2 + randomintrange(var_1, var_1 + 2000);
-  }
-  else if(var_2 < var_0.next_pain_vo_time) {
+  } else if(var_2 < var_0.next_pain_vo_time) {
     return;
   }
   var_3 = var_0.vo_prefix + "pain";
 
   if(soundexists(var_0.vo_prefix + "plr_" + "pain")) {
     var_0 playlocalsound(var_0.vo_prefix + "plr_" + "pain");
-  }
-  else {
+  } else {
     var_0 playlocalsound(var_3);
   }
 
@@ -669,7 +661,7 @@ remove_drill_vo_once_complete() {
 
 remove_drill_vo_on_player(var_0) {
   foreach(var_3, var_2 in level.alien_vo_priority_level) {
-  maps\mp\alien\_music_and_dialog::remove_vo_data(var_0, var_2);
+    maps\mp\alien\_music_and_dialog::remove_vo_data(var_0, var_2);
   }
 }
 
@@ -768,8 +760,7 @@ playdirectionvo(var_0) {
 
   if(!isDefined(level.next_direction_vo_time)) {
     level.next_direction_vo_time = var_4 + randomintrange(var_3, var_3 + 2000);
-  }
-  else if(var_4 < level.next_direction_vo_time) {
+  } else if(var_4 < level.next_direction_vo_time) {
     return;
   }
   if(!isDefined(level.last_direction_vo) || level.last_direction_vo != var_0) {
@@ -813,7 +804,7 @@ check_for_direction_vo() {
   var_0 = getEntArray("vo_direction_trigger", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread notify_when_triggered(var_2.script_noteworthy);
+    var_2 thread notify_when_triggered(var_2.script_noteworthy);
   }
 }
 
@@ -860,8 +851,7 @@ playspidervo(var_0) {
 
   if(!isDefined(level.next_spider_vo_time)) {
     level.next_spider_vo_time = var_4 + randomintrange(var_3, var_3 + 2000);
-  }
-  else if(var_4 < level.next_spider_vo_time) {
+  } else if(var_4 < level.next_spider_vo_time) {
     return;
   }
   if(!isDefined(level.last_spider_vo) || level.last_spider_vo != var_0) {

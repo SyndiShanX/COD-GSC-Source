@@ -201,7 +201,7 @@ updateBufferedStats() {
   }
 
   foreach(player in level.players) {
-  player writeBufferedStats();
+    player writeBufferedStats();
   }
 }
 
@@ -212,7 +212,7 @@ writeBufferedStats() {
 
   foreach(statName, statVal in self.bufferedChildStats) {
     foreach(childStatName, childStatVal in statVal) {
-    self setPlayerData(statName, childStatName, childStatVal);
+      self setPlayerData(statName, childStatName, childStatVal);
     }
   }
 }

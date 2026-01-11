@@ -37,8 +37,7 @@ updateDamageFeedback(typeHit) {
 
   if(getDvarInt("camera_thirdPerson")) {
     yOffset = self GetThirdPersonCrosshairOffset() * 240;
-  }
-  else {
+  } else {
     yOffset = getdvarfloat("cg_crosshairVerticalOffset") * 240;
   }
 
@@ -72,8 +71,7 @@ updateDamageFeedback(typeHit) {
   self.hud_damagefeedback.alpha = startAlpha;
   if(feedBackDurationOverride != 0) {
     self.hud_damagefeedback fadeOverTime(feedbackDurationOverride);
-  }
-  else {
+  } else {
     self.hud_damagefeedback fadeOverTime(1);
   }
 

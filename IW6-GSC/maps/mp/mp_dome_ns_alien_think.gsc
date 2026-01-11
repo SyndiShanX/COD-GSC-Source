@@ -271,8 +271,7 @@ UpdateMoveState() {
     if(isDefined(self.lastBadPathTime) && (GetTime() - self.lastBadPathTime < 3000)) {
       if(Distance2DSquared(attackPoint, self.lastBadPathGoal) < 16) {
         bLastBadMeleeTarget = true;
-      }
-      else if(isDefined(self.lastBadPathMoveState) && self.lastBadPathMoveState == "pursuit" && Distance2DSquared(self.lastBadPathUltimateGoal, self.enemy.origin) < 16) {
+      } else if(isDefined(self.lastBadPathMoveState) && self.lastBadPathMoveState == "pursuit" && Distance2DSquared(self.lastBadPathUltimateGoal, self.enemy.origin) < 16) {
         bLastBadMeleeTarget = true;
       }
     }
@@ -382,8 +381,7 @@ WaitForBadPath() {
     self.lastBadPathMoveState = self.moveState;
     if(self.moveState == "follow" && isDefined(self.owner)) {
       self.lastBadPathUltimateGoal = self.owner.origin;
-    }
-    else if(self.moveState == "pursuit" && isDefined(self.enemy)) {
+    } else if(self.moveState == "pursuit" && isDefined(self.enemy)) {
       self.lastBadPathUltimateGoal = self.enemy.origin;
     }
   }
@@ -409,8 +407,7 @@ GetFollowMoveMode(currentMoveMode) {
     if(currentMoveMode == "run" || currentMoveMode == "sprint") {
       if(distSq < cRunToFastWalkDistSq) {
         return "fastwalk";
-      }
-      else if(currentMoveMode == "sprint") {
+      } else if(currentMoveMode == "sprint") {
         return "run";
       }
     } else if(currentMoveMode == "fastwalk") {
@@ -645,8 +642,7 @@ playPanting(state) {
     self.lastPantPlayedTime = GetTime();
     if(self.moveMode == "run" || self.moveMode == "sprint") {
       self PlaySoundOnMovingEnt("alien_minion_idle");
-    }
-    else {
+    } else {
       self PlaySoundOnMovingEnt("alien_minion_idle");
     }
 
@@ -907,8 +903,7 @@ DoDebugMode() {
 
   if(isDefined(self.owner) && IsPlayer(self.owner)) {
     player = self.owner;
-  }
-  else {
+  } else {
     player = level.players[0];
   }
 

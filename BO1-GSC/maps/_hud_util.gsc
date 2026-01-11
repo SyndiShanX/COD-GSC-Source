@@ -18,8 +18,7 @@ setParent(element) {
   self.parent addChild(self);
   if(isDefined(self.point)) {
     self setPoint(self.point, self.relativePoint, self.xOffset, self.yOffset);
-  }
-  else {
+  } else {
     self setPoint("TOPLEFT");
   }
 }
@@ -106,16 +105,14 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     offsetX = int(element.width / 2);
     if(relativeX == "left" || element.alignX == "right") {
       xFactor = -1;
-    }
-    else {
+    } else {
       xFactor = 1;
     }
   } else {
     offsetX = element.width;
     if(relativeX == "left") {
       xFactor = -1;
-    }
-    else {
+    } else {
       xFactor = 1;
     }
   }
@@ -127,16 +124,14 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     offsetY = int(element.height / 2);
     if(relativeY == "top" || element.alignY == "bottom") {
       yFactor = -1;
-    }
-    else {
+    } else {
       yFactor = 1;
     }
   } else {
     offsetY = element.height;
     if(relativeY == "top") {
       yFactor = -1;
-    }
-    else {
+    } else {
       yFactor = 1;
     }
   }
@@ -159,17 +154,14 @@ setPointBar(point, relativePoint, xOffset, yOffset) {
   self.bar.y = self.y;
   if(self.alignX == "left") {
     self.bar.x = self.x;
-  }
-  else if(self.alignX == "right") {
+  } else if(self.alignX == "right") {
     self.bar.x = self.x - self.width;
-  }
-  else {
+  } else {
     self.bar.x = self.x - int(self.width / 2);
   }
   if(self.alignY == "top") {
     self.bar.y = self.y;
-  }
-  else if(self.alignY == "bottom") {
+  } else if(self.alignY == "bottom") {
     self.bar.y = self.y;
   }
   self updateBar(self.bar.frac);
@@ -324,8 +316,7 @@ createBar(color, width, height, flashFrac) {
   barElemBG setParent(level.uiParent);
   if(!level.splitScreen) {
     barElemBG setShader("black", width + 4, height + 4);
-  }
-  else {
+  } else {
     barElemBG setShader("black", width + 0, height + 0);
   }
   barElemBG.hidden = false;
@@ -336,8 +327,7 @@ createPrimaryProgressBar() {
   bar = createBar((1, 1, 1), level.primaryProgressBarWidth, level.primaryProgressBarHeight);
   if(level.splitScreen) {
     bar setPoint("TOP", undefined, level.primaryProgressBarX, level.primaryProgressBarY);
-  }
-  else {
+  } else {
     bar setPoint("CENTER", undefined, level.primaryProgressBarX, level.primaryProgressBarY);
   }
   return bar;
@@ -347,8 +337,7 @@ createPrimaryProgressBarText() {
   text = createFontString("objective", level.primaryProgressBarFontSize, self);
   if(level.splitScreen) {
     text setPoint("TOP", undefined, level.primaryProgressBarTextX, level.primaryProgressBarTextY);
-  }
-  else {
+  } else {
     text setPoint("CENTER", undefined, level.primaryProgressBarTextX, level.primaryProgressBarTextY);
   }
   text.sort = -1;
@@ -447,8 +436,7 @@ get_countdown_hud(x) {
   xPos = undefined;
   if(!isDefined(x)) {
     xPos = -225;
-  }
-  else {
+  } else {
     xPos = x;
   }
   hudelem = newHudElem();

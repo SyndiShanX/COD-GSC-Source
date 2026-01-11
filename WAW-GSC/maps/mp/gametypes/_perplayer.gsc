@@ -85,7 +85,7 @@ onPlayerDisconnect(handler) {
   for(i = 0; i < handler.players.size; i++) {
     if(handler.players[i] != self)
   }
-      newplayers[newplayers.size] = handler.players[i];
+  newplayers[newplayers.size] = handler.players[i];
   handler.players = newplayers;
   self thread unHandlePlayer(handler, true, true);
 }

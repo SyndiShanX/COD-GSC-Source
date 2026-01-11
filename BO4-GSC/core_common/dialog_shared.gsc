@@ -12,7 +12,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace dialog_shared;
 
 autoexec __init__system__() {
@@ -37,30 +36,30 @@ __init__() {
   level.playgadgetoff = &play_gadget_off;
   level.var_da2d586a = &function_78c16252;
   level.bcsounds = [];
-  level.bcsounds[#"incoming_alert"] = [];
-  level.bcsounds[#"incoming_alert"][#"frag_grenade"] = "incomingFrag";
-  level.bcsounds[#"incoming_alert"][#"incendiary_grenade"] = "incomingIncendiary";
-  level.bcsounds[#"incoming_alert"][#"sticky_grenade"] = "incomingSemtex";
-  level.bcsounds[#"incoming_alert"][#"launcher_standard"] = "threatRpg";
-  level.bcsounds[#"incoming_delay"] = [];
-  level.bcsounds[#"incoming_delay"][#"frag_grenade"] = "fragGrenadeDelay";
-  level.bcsounds[#"incoming_delay"][#"incendiary_grenade"] = "incendiaryGrenadeDelay";
-  level.bcsounds[#"incoming_alert"][#"sticky_grenade"] = "semtexDelay";
-  level.bcsounds[#"incoming_delay"][#"launcher_standard"] = "missileDelay";
-  level.bcsounds[#"kill_dialog"] = [];
-  level.bcsounds[#"kill_dialog"][#"battery"] = "killBattery";
-  level.bcsounds[#"kill_dialog"][#"buffassault"] = "killBuffAssault";
-  level.bcsounds[#"kill_dialog"][#"engineer"] = "killEngineer";
-  level.bcsounds[#"kill_dialog"][#"firebreak"] = "killFirebreak";
-  level.bcsounds[#"kill_dialog"][#"nomad"] = "killNomad";
-  level.bcsounds[#"kill_dialog"][#"prophet"] = "killProphet";
-  level.bcsounds[#"kill_dialog"][#"recon"] = "killRecon";
-  level.bcsounds[#"kill_dialog"][#"ruin"] = "killRuin";
-  level.bcsounds[#"kill_dialog"][#"seraph"] = "killSeraph";
-  level.bcsounds[#"kill_dialog"][#"swatpolice"] = "killSwatPolice";
-  level.bcsounds[#"kill_dialog"][#"outrider"] = "killOutrider";
-  level.bcsounds[#"kill_dialog"][#"reaper"] = "killReaper";
-  level.bcsounds[#"kill_dialog"][#"spectre"] = "killSpectre";
+  level.bcsounds[# "incoming_alert"] = [];
+  level.bcsounds[# "incoming_alert"][# "frag_grenade"] = "incomingFrag";
+  level.bcsounds[# "incoming_alert"][# "incendiary_grenade"] = "incomingIncendiary";
+  level.bcsounds[# "incoming_alert"][# "sticky_grenade"] = "incomingSemtex";
+  level.bcsounds[# "incoming_alert"][# "launcher_standard"] = "threatRpg";
+  level.bcsounds[# "incoming_delay"] = [];
+  level.bcsounds[# "incoming_delay"][# "frag_grenade"] = "fragGrenadeDelay";
+  level.bcsounds[# "incoming_delay"][# "incendiary_grenade"] = "incendiaryGrenadeDelay";
+  level.bcsounds[# "incoming_alert"][# "sticky_grenade"] = "semtexDelay";
+  level.bcsounds[# "incoming_delay"][# "launcher_standard"] = "missileDelay";
+  level.bcsounds[# "kill_dialog"] = [];
+  level.bcsounds[# "kill_dialog"][# "battery"] = "killBattery";
+  level.bcsounds[# "kill_dialog"][# "buffassault"] = "killBuffAssault";
+  level.bcsounds[# "kill_dialog"][# "engineer"] = "killEngineer";
+  level.bcsounds[# "kill_dialog"][# "firebreak"] = "killFirebreak";
+  level.bcsounds[# "kill_dialog"][# "nomad"] = "killNomad";
+  level.bcsounds[# "kill_dialog"][# "prophet"] = "killProphet";
+  level.bcsounds[# "kill_dialog"][# "recon"] = "killRecon";
+  level.bcsounds[# "kill_dialog"][# "ruin"] = "killRuin";
+  level.bcsounds[# "kill_dialog"][# "seraph"] = "killSeraph";
+  level.bcsounds[# "kill_dialog"][# "swatpolice"] = "killSwatPolice";
+  level.bcsounds[# "kill_dialog"][# "outrider"] = "killOutrider";
+  level.bcsounds[# "kill_dialog"][# "reaper"] = "killReaper";
+  level.bcsounds[# "kill_dialog"][# "spectre"] = "killSpectre";
 
   if(level.teambased && !isDefined(game.boostplayerspicked)) {
     game.boostplayerspicked = [];
@@ -70,7 +69,7 @@ __init__() {
     }
   }
 
-  level.allowbattlechatter[#"bc"] = getgametypesetting(#"allowbattlechatter");
+  level.allowbattlechatter[# "bc"] = getgametypesetting(#"allowbattlechatter");
   clientfield::register("world", "boost_number", 1, 2, "int");
   clientfield::register("allplayers", "play_boost", 1, 2, "int");
   level thread pick_boost_number();
@@ -101,8 +100,8 @@ __init__() {
     level.var_f53efe5c = undefined;
   }
 
-  level.allowspecialistdialog = mpdialog_value("enableHeroDialog", 0) && isDefined(level.allowbattlechatter[#"bc"]) && level.allowbattlechatter[#"bc"];
-  level.playstartconversation = mpdialog_value("enableConversation", 0) && isDefined(level.allowbattlechatter[#"bc"]) && level.allowbattlechatter[#"bc"];
+  level.allowspecialistdialog = mpdialog_value("enableHeroDialog", 0) && isDefined(level.allowbattlechatter[# "bc"]) && level.allowbattlechatter[# "bc"];
+  level.playstartconversation = mpdialog_value("enableConversation", 0) && isDefined(level.allowbattlechatter[# "bc"]) && level.allowbattlechatter[# "bc"];
 }
 
 flush_dialog() {
@@ -148,7 +147,7 @@ on_joined_team(params) {
   self endon(#"disconnect");
 
   if(level.teambased) {
-    if(self.team == #"allies") {
+    if(self.team == # "allies") {
       self set_blops_dialog();
     } else {
       self set_cdp_dialog();
@@ -163,13 +162,13 @@ on_joined_team(params) {
 }
 
 set_blops_dialog() {
-  self.pers[#"mptaacom"] = "blops_taacom";
-  self.pers[#"mpcommander"] = "blops_commander";
+  self.pers[# "mptaacom"] = "blops_taacom";
+  self.pers[# "mpcommander"] = "blops_commander";
 }
 
 set_cdp_dialog() {
-  self.pers[#"mptaacom"] = "cdp_taacom";
-  self.pers[#"mpcommander"] = "cdp_commander";
+  self.pers[# "mptaacom"] = "cdp_taacom";
+  self.pers[# "mpcommander"] = "cdp_commander";
 }
 
 on_player_spawned() {
@@ -184,7 +183,7 @@ on_player_spawned() {
   self.playinggadgetreadydialog = 0;
   self.playedgadgetsuccess = 1;
 
-  if(!level.allowbattlechatter[#"bc"]) {
+  if(!level.allowbattlechatter[# "bc"]) {
     return;
   }
 
@@ -351,7 +350,7 @@ enemy_threat() {
       endpoint = eyepoint + dir;
       traceresult = bulletTrace(eyepoint, endpoint, 1, self);
 
-      if(isDefined(traceresult[#"entity"]) && traceresult[#"entity"].classname == "player" && util::function_fbce7263(traceresult[#"entity"].team, self.team)) {
+      if(isDefined(traceresult[# "entity"]) && traceresult[# "entity"].classname == "player" && util::function_fbce7263(traceresult[# "entity"].team, self.team)) {
         if(dialog_chance("enemyContactChance")) {
           self thread play_dialog("threatInfantry", 1);
           level notify(#"level_enemy_spotted", self.team);
@@ -469,7 +468,7 @@ say_kill_battle_chatter(attacker, weapon, victim, inflictor) {
       killdialog = attacker get_random_key("killSniper");
     } else if(dialog_chance("enemyHeroKillChance")) {
       victimdialogname = victim getmpdialogname();
-      killdialog = attacker get_random_key(level.bcsounds[#"kill_dialog"][victimdialogname]);
+      killdialog = attacker get_random_key(level.bcsounds[# "kill_dialog"][victimdialogname]);
     } else {
       killdialog = attacker get_random_key("killGeneric");
     }
@@ -497,10 +496,10 @@ event_handler[missile_fire] function_28a568b9(eventstruct) {
     return;
   }
 
-  dialogkey = level.bcsounds[#"incoming_alert"][grenade.weapon.rootweapon.name];
+  dialogkey = level.bcsounds[# "incoming_alert"][grenade.weapon.rootweapon.name];
 
   if(isDefined(dialogkey)) {
-    waittime = mpdialog_value(level.bcsounds[#"incoming_delay"][grenade.weapon.rootweapon.name], float(function_60d95f53()) / 1000);
+    waittime = mpdialog_value(level.bcsounds[# "incoming_delay"][grenade.weapon.rootweapon.name], float(function_60d95f53()) / 1000);
     level thread incoming_projectile_alert(self, grenade, dialogkey, waittime);
   }
 }
@@ -516,10 +515,10 @@ event_handler[grenade_fire] function_54ca82b9(eventstruct) {
     return;
   }
 
-  dialogkey = level.bcsounds[#"incoming_alert"][missile.item.rootweapon.name];
+  dialogkey = level.bcsounds[# "incoming_alert"][missile.item.rootweapon.name];
 
   if(isDefined(dialogkey)) {
-    waittime = mpdialog_value(level.bcsounds[#"incoming_delay"][missile.item.rootweapon.name], float(function_60d95f53()) / 1000);
+    waittime = mpdialog_value(level.bcsounds[# "incoming_delay"][missile.item.rootweapon.name], float(function_60d95f53()) / 1000);
     level thread incoming_projectile_alert(self, missile, dialogkey, waittime);
   }
 }
@@ -543,7 +542,7 @@ incoming_projectile_alert(thrower, projectile, dialogkey, waittime) {
       return;
     }
 
-    if(!isDefined(thrower) || thrower.team == #"spectator") {
+    if(!isDefined(thrower) || thrower.team == # "spectator") {
       return;
     }
 
@@ -697,25 +696,25 @@ get_death_vox(weapon, meansofdeath) {
 
   if(isDefined(meansofdeath)) {
     switch (meansofdeath) {
-      case #"mod_burned":
+      case # "mod_burned":
         return "exertDeathBurned";
-      case #"mod_drown":
+      case # "mod_drown":
         return "exertDeathDrowned";
-      case #"mod_dot":
+      case # "mod_dot":
         return "exertDeathDrowned";
-      case #"mod_dot_self":
+      case # "mod_dot_self":
         return "exertDeathDrowned";
     }
   }
 
   if(isDefined(weapon) && meansofdeath !== "MOD_MELEE_WEAPON_BUTT") {
     switch (weapon.rootweapon.name) {
-      case #"knife_loadout":
-      case #"hatchet":
+      case # "knife_loadout":
+      case # "hatchet":
         return "exertDeathStabbed";
-      case #"hero_firefly_swarm":
+      case # "hero_firefly_swarm":
         return "exertDeathBurned";
-      case #"hero_lightninggun_arc":
+      case # "hero_lightninggun_arc":
         return "exertDeathElectrocuted";
     }
   }
@@ -792,7 +791,7 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     dialogflags = 0;
   }
 
-  if(!level.allowspecialistdialog && (dialogflags& 16) == 0) {
+  if(!level.allowspecialistdialog && (dialogflags & 16) == 0) {
     return;
   }
 
@@ -806,12 +805,12 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     return;
   }
 
-  if(self isplayerunderwater() && !(dialogflags& 8)) {
+  if(self isplayerunderwater() && !(dialogflags & 8)) {
     return;
   }
 
   if(self.playingdialog) {
-    if(!(dialogflags& 4)) {
+    if(!(dialogflags & 4)) {
       return;
     }
 
@@ -819,11 +818,11 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     waitframe(1);
   }
 
-  if(dialogflags& 32) {
+  if(dialogflags & 32) {
     self.playinggadgetreadydialog = 1;
   }
 
-  if(dialogflags& 64) {
+  if(dialogflags & 64) {
     if(!isDefined(self.stolendialogindex)) {
       self.stolendialogindex = 0;
     }
@@ -833,9 +832,9 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
     self.stolendialogindex %= 4;
   }
 
-  if(dialogflags& 2) {
+  if(dialogflags & 2) {
     self playsoundontag(dialogalias, "J_Head");
-  } else if(dialogflags& 1) {
+  } else if(dialogflags & 1) {
     if(isDefined(enemy)) {
       self playsoundontag(dialogalias, "J_Head", self.team, enemy);
     } else {
@@ -850,7 +849,7 @@ play_dialog(dialogkey, dialogflags, dialogbuffer, enemy) {
 }
 
 wait_dialog_buffer(dialogbuffer) {
-  self endon(#"death", #"played_dialog", #"stop_dialog");
+  self endon(#"death", # "played_dialog", # "stop_dialog");
   level endon(#"game_ended");
   self.playingdialog = 1;
 
@@ -936,51 +935,51 @@ play_gadget_ready(weapon, userflip = 0) {
   dialogkey = undefined;
 
   switch (weapon.name) {
-    case #"hero_gravityspikes":
+    case # "hero_gravityspikes":
       dialogkey = "gravspikesWeaponReady";
       break;
-    case #"gadget_speed_burst":
+    case # "gadget_speed_burst":
       dialogkey = "overdriveAbilityReady";
       break;
-    case #"gadget_vision_pulse":
+    case # "gadget_vision_pulse":
       dialogkey = "visionpulseAbilityReady";
       break;
-    case #"hero_lightninggun":
-    case #"hero_lightninggun_arc":
+    case # "hero_lightninggun":
+    case # "hero_lightninggun_arc":
       dialogkey = "tempestWeaponReady";
       break;
-    case #"hero_pineapplegun":
-    case #"hero_pineapplegun_companion":
+    case # "hero_pineapplegun":
+    case # "hero_pineapplegun_companion":
       dialogkey = "warmachineWeaponREady";
       break;
-    case #"gadget_armor":
+    case # "gadget_armor":
       dialogkey = "kineticArmorAbilityReady";
       break;
-    case #"hero_annihilator":
+    case # "hero_annihilator":
       dialogkey = "annihilatorWeaponReady";
       break;
-    case #"gadget_combat_efficiency":
+    case # "gadget_combat_efficiency":
       dialogkey = "combatfocusAbilityReady";
       break;
-    case #"hero_chemicalgelgun":
+    case # "hero_chemicalgelgun":
       dialogkey = "hiveWeaponReady";
       break;
-    case #"gadget_resurrect":
+    case # "gadget_resurrect":
       dialogkey = "rejackAbilityReady";
       break;
-    case #"hero_minigun":
+    case # "hero_minigun":
       dialogkey = "scytheWeaponReady";
       break;
-    case #"gadget_clone":
+    case # "gadget_clone":
       dialogkey = "psychosisAbilityReady";
       break;
-    case #"gadget_camo":
+    case # "gadget_camo":
       dialogkey = "activeCamoAbilityReady";
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       dialogkey = "purifierWeaponReady";
       break;
-    case #"gadget_heat_wave":
+    case # "gadget_heat_wave":
       dialogkey = "heatwaveAbilityReady";
       break;
     default:
@@ -1058,53 +1057,53 @@ play_gadget_activate(weapon) {
   dialogkey = undefined;
 
   switch (weapon.name) {
-    case #"hero_gravityspikes":
+    case # "hero_gravityspikes":
       dialogkey = "gravspikesWeaponUse";
       dialogflags = 22;
       dialogbuffer = 0.05;
       break;
-    case #"gadget_speed_burst":
+    case # "gadget_speed_burst":
       dialogkey = "overdriveAbilityUse";
       break;
-    case #"gadget_vision_pulse":
+    case # "gadget_vision_pulse":
       dialogkey = "visionpulseAbilityUse";
       break;
-    case #"hero_lightninggun":
-    case #"hero_lightninggun_arc":
+    case # "hero_lightninggun":
+    case # "hero_lightninggun_arc":
       dialogkey = "tempestWeaponUse";
       break;
-    case #"hero_pineapplegun":
-    case #"hero_pineapplegun_companion":
+    case # "hero_pineapplegun":
+    case # "hero_pineapplegun_companion":
       dialogkey = "warmachineWeaponUse";
       break;
-    case #"gadget_armor":
+    case # "gadget_armor":
       dialogkey = "kineticArmorAbilityUse";
       break;
-    case #"hero_annihilator":
+    case # "hero_annihilator":
       dialogkey = "annihilatorWeaponUse";
       break;
-    case #"gadget_combat_efficiency":
+    case # "gadget_combat_efficiency":
       dialogkey = "combatfocusAbilityUse";
       break;
-    case #"hero_chemicalgelgun":
+    case # "hero_chemicalgelgun":
       dialogkey = "hiveWeaponUse";
       break;
-    case #"gadget_resurrect":
+    case # "gadget_resurrect":
       dialogkey = "rejackAbilityUse";
       break;
-    case #"hero_minigun":
+    case # "hero_minigun":
       dialogkey = "scytheWeaponUse";
       break;
-    case #"gadget_clone":
+    case # "gadget_clone":
       dialogkey = "psychosisAbilityUse";
       break;
-    case #"gadget_camo":
+    case # "gadget_camo":
       dialogkey = "activeCamoAbilityUse";
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       dialogkey = "purifierWeaponUse";
       break;
-    case #"gadget_heat_wave":
+    case # "gadget_heat_wave":
       dialogkey = "heatwaveAbilityUse";
       break;
     default:
@@ -1122,51 +1121,51 @@ play_gadget_success(weapon, waitkey, victim) {
   dialogkey = undefined;
 
   switch (weapon.name) {
-    case #"hero_gravityspikes":
+    case # "hero_gravityspikes":
       dialogkey = "gravspikesWeaponSuccess";
       break;
-    case #"gadget_speed_burst":
+    case # "gadget_speed_burst":
       dialogkey = "overdriveAbilitySuccess";
       break;
-    case #"gadget_vision_pulse":
+    case # "gadget_vision_pulse":
       dialogkey = "visionpulseAbilitySuccess";
       break;
-    case #"hero_lightninggun":
-    case #"hero_lightninggun_arc":
+    case # "hero_lightninggun":
+    case # "hero_lightninggun_arc":
       dialogkey = "tempestWeaponSuccess";
       break;
-    case #"hero_pineapplegun":
-    case #"hero_pineapplegun_companion":
+    case # "hero_pineapplegun":
+    case # "hero_pineapplegun_companion":
       dialogkey = "warmachineWeaponSuccess";
       break;
-    case #"gadget_armor":
+    case # "gadget_armor":
       dialogkey = "kineticArmorAbilitySuccess";
       break;
-    case #"hero_annihilator":
+    case # "hero_annihilator":
       dialogkey = "annihilatorWeaponSuccess";
       break;
-    case #"gadget_combat_efficiency":
+    case # "gadget_combat_efficiency":
       dialogkey = "combatfocusAbilitySuccess";
       break;
-    case #"hero_chemicalgelgun":
+    case # "hero_chemicalgelgun":
       dialogkey = "hiveWeaponSuccess";
       break;
-    case #"gadget_resurrect":
+    case # "gadget_resurrect":
       dialogkey = "rejackAbilitySuccess";
       break;
-    case #"hero_minigun":
+    case # "hero_minigun":
       dialogkey = "scytheWeaponSuccess";
       break;
-    case #"gadget_clone":
+    case # "gadget_clone":
       dialogkey = "psychosisAbilitySuccess";
       break;
-    case #"gadget_camo":
+    case # "gadget_camo":
       dialogkey = "activeCamoAbilitySuccess";
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       dialogkey = "purifierWeaponSuccess";
       break;
-    case #"gadget_heat_wave":
+    case # "gadget_heat_wave":
       dialogkey = "heatwaveAbilitySuccess";
       break;
     default:
@@ -1190,11 +1189,11 @@ play_gadget_off(weapon) {
   dialogkey = undefined;
 
   switch (weapon.name) {
-    case #"gadget_speed_burst":
+    case # "gadget_speed_burst":
       dialogkey = "overdriveAbilityOff";
       break;
-    case #"hero_pineapplegun":
-    case #"hero_pineapplegun_companion":
+    case # "hero_pineapplegun":
+    case # "hero_pineapplegun_companion":
       dialogkey = "warmachineWeaponOff";
       break;
     default:
@@ -1348,7 +1347,7 @@ game_end_vox(winner, tie) {
 
     if(tie) {
       dialogkey = "boostDraw";
-    } else if(level.teambased && isDefined(level.teams[winner]) && player.pers[#"team"] == winner || !level.teambased && player == winner) {
+    } else if(level.teambased && isDefined(level.teams[winner]) && player.pers[# "team"] == winner || !level.teambased && player == winner) {
       dialogkey = "boostWin";
     } else {
       dialogkey = "boostLoss";
@@ -1379,42 +1378,42 @@ devgui_think() {
     spacing = getdvarfloat(#"testdialog_spacing", 0.25);
 
     switch (getdvarstring(#"devgui_mpdialog", "<dev string:xbc>")) {
-      case #"hash_7912e80189f9c6":
+      case # "hash_7912e80189f9c6":
         player thread test_player_dialog(0);
         player thread test_taacom_dialog(spacing);
         player thread test_commander_dialog(2 * spacing);
         break;
-      case #"hash_69c6be086f76a9d4":
+      case # "hash_69c6be086f76a9d4":
         player thread test_player_dialog(0);
         player thread test_commander_dialog(spacing);
         break;
-      case #"hash_3af5f0a904b3f8fa":
+      case # "hash_3af5f0a904b3f8fa":
         player thread test_other_dialog(0);
         player thread test_commander_dialog(spacing);
         break;
-      case #"hash_32945da5f7ac491":
+      case # "hash_32945da5f7ac491":
         player thread test_taacom_dialog(0);
         player thread test_commander_dialog(spacing);
         break;
-      case #"hash_597b27a5c8857d19":
+      case # "hash_597b27a5c8857d19":
         player thread test_player_dialog(0);
         player thread test_taacom_dialog(spacing);
         break;
-      case #"hash_74f798193af006b3":
+      case # "hash_74f798193af006b3":
         player thread test_other_dialog(0);
         player thread test_taacom_dialog(spacing);
         break;
-      case #"hash_5bd6a2c5d0ff3cb2":
+      case # "hash_5bd6a2c5d0ff3cb2":
         player thread test_other_dialog(0);
         player thread test_player_dialog(spacing);
         break;
-      case #"hash_4a5a66c89be92eb":
+      case # "hash_4a5a66c89be92eb":
         player thread play_conv_self_other();
         break;
-      case #"hash_18683ef7652f40ed":
+      case # "hash_18683ef7652f40ed":
         player thread play_conv_other_self();
         break;
-      case #"hash_2b559b1a5e81715f":
+      case # "hash_2b559b1a5e81715f":
         player thread play_conv_other_other();
         break;
     }
@@ -1468,23 +1467,23 @@ play_test_dialog(dialogkey) {
 
 response_key() {
   switch (self getmpdialogname()) {
-    case #"assassin":
+    case # "assassin":
       return "<dev string:x124>";
-    case #"grenadier":
+    case # "grenadier":
       return "<dev string:x12e>";
-    case #"outrider":
+    case # "outrider":
       return "<dev string:x13a>";
-    case #"prophet":
+    case # "prophet":
       return "<dev string:x145>";
-    case #"pyro":
+    case # "pyro":
       return "<dev string:x154>";
-    case #"reaper":
+    case # "reaper":
       return "<dev string:x160>";
-    case #"ruin":
+    case # "ruin":
       return "<dev string:x169>";
-    case #"seraph":
+    case # "seraph":
       return "<dev string:x175>";
-    case #"trapper":
+    case # "trapper":
       return "<dev string:x180>";
   }
 

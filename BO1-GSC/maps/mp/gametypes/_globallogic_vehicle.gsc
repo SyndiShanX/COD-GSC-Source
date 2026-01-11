@@ -29,8 +29,7 @@ Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
   if(sWeapon == "none" && isDefined(eInflictor)) {
     if(isDefined(eInflictor.targetname) && eInflictor.targetname == "explodable_barrel") {
       sWeapon = "explodable_barrel_mp";
-    }
-    else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_")) {
+    } else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_")) {
       sWeapon = "destructible_car_mp";
     }
   }
@@ -108,8 +107,7 @@ Callback_VehicleDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
       }
       if(issubstr(sMeansOfDeath, "MOD_GRENADE") && isDefined(eInflictor.isCooked)) {
         self.wasCooked = getTime();
-      }
-      else {
+      } else {
         self.wasCooked = undefined;
       }
       attacker_seat = undefined;

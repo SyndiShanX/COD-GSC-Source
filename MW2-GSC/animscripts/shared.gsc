@@ -138,8 +138,7 @@ updateAttachedWeaponModels() {
 
     if(weapon == "riotshield") {
       self attach(weapon_model, getTagForPos(position));
-    }
-    else {
+    } else {
       self attach(weapon_model, getTagForPos(position), NO_COLLISION);
     }
 
@@ -169,8 +168,7 @@ updateLaserStatus() {
 
   if(canUseLaser()) {
     self laserOn();
-  }
-  else {
+  } else {
     self laserOff();
   }
 }
@@ -326,16 +324,14 @@ showNoteTrack(note) {
   color = (.5, .75, 1);
   if(note == "end" || note == "finish") {
     color = (.25, .4, .5);
-  }
-  else if(note == "undefined") {
+  } else if(note == "undefined") {
     color = (1, .5, .5);
   }
 
   for(i = 0; i < duration; i++) {
     if(duration - i <= anim.showNotetrackDuration) {
       amnt = 1.0 * (i - (duration - anim.showNotetrackDuration)) / anim.showNotetrackDuration;
-    }
-    else {
+    } else {
       amnt = 0.0;
     }
     time = 1.0 * i / 20;
@@ -357,31 +353,30 @@ reduceShowNotetrackOffset() {
   self.a.shownotetrackoffset = undefined;
 }
 
-  HandleDogSoundNoteTracks(note) {
-    if(note == "sound_dogstep_run_default") {
-      self playSound("dogstep_run_default");
-      return true;
-    }
-
-    prefix = getsubstr(note, 0, 5);
-
-    if(prefix != "sound") {
-      return false;
-    }
-
-    alias = "anml" + getsubstr(note, 5);
-
-    //	if( growling() && !issubstr( alias, "growl" ) )
-    //		return false;
-
-    if(isalive(self)) {
-      self thread play_sound_on_tag_endon_death(alias, "tag_eye");
-    }
-    else {
-      self thread play_sound_in_space(alias, self getEye());
-    }
+HandleDogSoundNoteTracks(note) {
+  if(note == "sound_dogstep_run_default") {
+    self playSound("dogstep_run_default");
     return true;
   }
+
+  prefix = getsubstr(note, 0, 5);
+
+  if(prefix != "sound") {
+    return false;
+  }
+
+  alias = "anml" + getsubstr(note, 5);
+
+  //	if( growling() && !issubstr( alias, "growl" ) )
+  //		return false;
+
+  if(isalive(self)) {
+    self thread play_sound_on_tag_endon_death(alias, "tag_eye");
+  } else {
+    self thread play_sound_in_space(alias, self getEye());
+  }
+  return true;
+}
 
 growling() {
   return isDefined(self.script_growl);
@@ -450,19 +445,18 @@ registerNoteTracks() {
   anim.notetracks["detach clip left"] = animscripts\shared::insure_dropping_clip;
   anim.notetracks["detach clip right"] = animscripts\shared::insure_dropping_clip;
 
-    if(isDefined(level._notetrackFX)) {
-      keys = getArrayKeys(level._notetrackFX);
-      foreach(key in keys) {
+  if(isDefined(level._notetrackFX)) {
+    keys = getArrayKeys(level._notetrackFX);
+    foreach(key in keys) {
       anim.notetracks[key] = ::customNotetrackFX;
-      }
     }
+  }
 }
 
 noteTrackFire(note, flagName) {
   if(isDefined(anim.fire_notetrack_functions[self.script])) {
     thread[[anim.fire_notetrack_functions[self.script]]]();
-  }
-  else {
+  } else {
     thread[[animscripts\shared::shootNotetrack]]();
   }
 }
@@ -470,8 +464,7 @@ noteTrackFire(note, flagName) {
 noteTrackLaser(note, flagName) {
   if(isSubStr(note, "on")) {
     self.a.laserOn = true;
-  }
-  else {
+  } else {
     self.a.laserOn = false;
   }
   self animscripts\shared::updateLaserStatus();
@@ -567,8 +560,7 @@ noteTrackPoseProne(note, flagName) {
 
   if(isDefined(self.a.goingToProneAim)) {
     self.a.proneAiming = true;
-  }
-  else {
+  } else {
     self.a.proneAiming = undefined;
   }
 }
@@ -663,8 +655,7 @@ noteTrackPistolRechamber(note, flagName) {
 noteTrackGravity(note, flagName) {
   if(isSubStr(note, "on")) {
     self animMode("gravity");
-  }
-  else if(isSubStr(note, "off")) {
+  } else if(isSubStr(note, "off")) {
     self animMode("nogravity");
   }
 }
@@ -672,8 +663,7 @@ noteTrackGravity(note, flagName) {
 noteTrackFootStep(note, flagName) {
   if(isSubStr(note, "left")) {
     playFootStep("J_Ball_LE");
-  }
-  else {
+  } else {
     playFootStep("J_BALL_RI");
   }
 
@@ -683,8 +673,7 @@ noteTrackFootStep(note, flagName) {
 noteTrackFootStepSmall(note, flagName) {
   if(isSubStr(note, "left")) {
     playFootStepSmall("J_Ball_LE");
-  }
-  else {
+  } else {
     playFootStepSmall("J_BALL_RI");
   }
 
@@ -696,16 +685,14 @@ customNotetrackFX(note, flagName) {
 
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
-  }
-  else {
+  } else {
     groundType = "dirt";
   }
 
   fxStruct = undefined;
   if(isDefined(level._notetrackFX[note][groundType])) {
     fxStruct = level._notetrackFX[note][groundType];
-  }
-  else if(isDefined(level._notetrackFX[note]["all"])) {
+  } else if(isDefined(level._notetrackFX[note]["all"])) {
     fxStruct = level._notetrackFX[note]["all"];
   }
 
@@ -728,8 +715,7 @@ customNotetrackFX(note, flagName) {
 noteTrackFootScrape(note, flagName) {
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
-  }
-  else {
+  } else {
     groundType = "dirt";
   }
 
@@ -739,8 +725,7 @@ noteTrackFootScrape(note, flagName) {
 noteTrackLand(note, flagName) {
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
-  }
-  else {
+  } else {
     groundType = "dirt";
   }
 
@@ -757,8 +742,7 @@ noteTrackFaceEnemy(note, flagName) {
   } else {
     if(isDefined(self.enemy) && distanceSquared(self.enemy.origin, self.reactionTargetPos) < 64 * 64) {
       self orientmode("face enemy");
-    }
-    else {
+    } else {
       self orientmode("face point", self.reactionTargetPos);
     }
   }
@@ -767,10 +751,10 @@ noteTrackFaceEnemy(note, flagName) {
 HandleNoteTrack(note, flagName, customFunction) {
   self thread showNoteTrack(note);
 
-    if(isAI(self) && self.type == "dog") {
-      if(HandleDogSoundNoteTracks(note))
-    }
-        return;
+  if(isAI(self) && self.type == "dog") {
+    if(HandleDogSoundNoteTracks(note))
+  }
+  return;
 
   notetrackFunc = anim.notetracks[note];
   if(isDefined(notetrackFunc)) {
@@ -843,9 +827,9 @@ HandleNoteTrack(note, flagName, customFunction) {
     default:
       if(isDefined(customFunction)) {
         return [
-      }
+          }
           [customFunction]
-        ](note);
+      ](note);
       break;
   }
 }
@@ -1254,7 +1238,7 @@ trackShootEntOrPos() {
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "trackShootEntOrPos";
 
-    trackLoop( % aim_2, % aim_4, % aim_6, % aim_8);
+  trackLoop( % aim_2, % aim_4, % aim_6, % aim_8);
 }
 
 // max change in angle in 1 frame
@@ -1321,8 +1305,7 @@ trackLoop(aim2, aim4, aim6, aim8) {
 
     if(!isDefined(shootPos)) {
       angleDeltas = trackLoop_anglesForNoShootPos(shootFromPos, pitchAdd, yawAdd);
-    }
-    else {
+    } else {
       angleDeltas = trackLoop_getDesiredAngles((shootPos - shootFromPos), pitchAdd, yawAdd);
     }
 
@@ -1446,8 +1429,7 @@ trackLoop_clampAngles(pitchDelta, yawDelta, doMaxAngleCheck) {
   } else {
     if(self.gunBlockedByWall) {
       yawDelta = clamp(yawDelta, -10, 10);
-    }
-    else {
+    } else {
       yawDelta = clamp(yawDelta, self.leftAimLimit, self.rightAimLimit);
     }
 
@@ -1541,8 +1523,7 @@ ramboAimInternal(baseYaw) {
       if(abs(newyaw - yaw) > 10) {
         if(newyaw > yaw) {
           newyaw = yaw + 10;
-        }
-        else {
+        } else {
           newyaw = yaw - 10;
         }
       }
@@ -1579,14 +1560,11 @@ decideNumShotsForBurst() {
 
   if(fixedBurstCount) {
     numShots = fixedBurstCount;
-  }
-  else if(animscripts\weaponList::usingSemiAutoWeapon()) {
+  } else if(animscripts\weaponList::usingSemiAutoWeapon()) {
     numShots = anim.semiFireNumShots[randomint(anim.semiFireNumShots.size)];
-  }
-  else if(self.fastBurst) {
+  } else if(self.fastBurst) {
     numShots = anim.fastBurstFireNumShots[randomint(anim.fastBurstFireNumShots.size)];
-  }
-  else {
+  } else {
     numShots = anim.burstFireNumShots[randomint(anim.burstFireNumShots.size)];
   }
 
@@ -1609,11 +1587,9 @@ decideNumShotsForFull() {
     choice = randomfloat(10);
     if(choice < 3) {
       numShots = randomIntRange(2, 6);
-    }
-    else if(choice < 8) {
+    } else if(choice < 8) {
       numShots = randomIntRange(6, 12);
-    }
-    else {
+    } else {
       numShots = randomIntRange(12, 20);
     }
   }
@@ -1633,9 +1609,9 @@ handleDropClip(flagName) {
   // make sure that we don't do clip anims without drop clip first
   self.last_drop_clip_time = gettime();
 
-    //prof_begin( "handleDropClip" );
+  //prof_begin( "handleDropClip" );
 
-    clipModel = undefined;
+  clipModel = undefined;
   if(self.weaponInfo[self.weapon].useClip) {
     clipModel = getWeaponClipModel(self.weapon);
   }
@@ -1644,22 +1620,21 @@ handleDropClip(flagName) {
     self thread assertDropClipCleanedUp(4, clipModel);
   }
 
-    if(self.weaponInfo[self.weapon].hasClip) {
-      if(usingSidearm()) {
-        self playSound("weap_reload_pistol_clipout_npc");
-      }
-      else {
-        self playSound("weap_reload_smg_clipout_npc");
-      }
-
-      if(isDefined(clipModel)) {
-        self hidepart("tag_clip");
-        self thread dropClipModel(clipModel, "tag_clip");
-        self.weaponInfo[self.weapon].hasClip = false;
-
-        self thread resetClipOnAbort(clipModel);
-      }
+  if(self.weaponInfo[self.weapon].hasClip) {
+    if(usingSidearm()) {
+      self playSound("weap_reload_pistol_clipout_npc");
+    } else {
+      self playSound("weap_reload_smg_clipout_npc");
     }
+
+    if(isDefined(clipModel)) {
+      self hidepart("tag_clip");
+      self thread dropClipModel(clipModel, "tag_clip");
+      self.weaponInfo[self.weapon].hasClip = false;
+
+      self thread resetClipOnAbort(clipModel);
+    }
+  }
 
   //prof_end( "handleDropClip" );
 
@@ -1696,8 +1671,7 @@ handleDropClip(flagName) {
 
         if(usingSidearm()) {
           self playSound("weap_reload_pistol_clipin_npc");
-        }
-        else {
+        } else {
           self playSound("weap_reload_smg_clipin_npc");
         }
 
@@ -1758,36 +1732,36 @@ assertDropClipCleanedUp(waitTime, clipModel) {
   assertmsg("AI " + self getEntityNumber() + " started a reload and didn't reset clip models after " + waitTime + " seconds");
 }
 
-  moveToOriginOverTime(origin, time) {
-    self endon("killanimscript");
+moveToOriginOverTime(origin, time) {
+  self endon("killanimscript");
 
-    distSq = distanceSquared(self.origin, origin);
+  distSq = distanceSquared(self.origin, origin);
 
-    if(distSq < 1) {
-      self safeTeleport(origin);
-      return;
-    }
-
-    if(distSq > 16 * 16 && !self mayMoveToPoint(origin)) {
-      /# println( "^1Warning: AI starting behavior for node at " + origin + " but could not move to that point." );
-      return;
-    }
-
-    self.keepClaimedNodeIfValid = true;
-
-    offset = self.origin - origin;
-
-    frames = int(time * 20);
-    offsetreduction = vector_multiply(offset, 1.0 / frames);
-
-    for(i = 0; i < frames; i++) {
-      offset -= offsetreduction;
-      self safeTeleport(origin + offset);
-      wait .05;
-    }
-
-    self.keepClaimedNodeIfValid = false;
+  if(distSq < 1) {
+    self safeTeleport(origin);
+    return;
   }
+
+  if(distSq > 16 * 16 && !self mayMoveToPoint(origin)) {
+    /# println( "^1Warning: AI starting behavior for node at " + origin + " but could not move to that point." );
+    return;
+  }
+
+  self.keepClaimedNodeIfValid = true;
+
+  offset = self.origin - origin;
+
+  frames = int(time * 20);
+  offsetreduction = vector_multiply(offset, 1.0 / frames);
+
+  for(i = 0; i < frames; i++) {
+    offset -= offsetreduction;
+    self safeTeleport(origin + offset);
+    wait .05;
+  }
+
+  self.keepClaimedNodeIfValid = false;
+}
 
 returnTrue() {
   return true;
@@ -1801,16 +1775,14 @@ playLookAnimation(lookAnim, lookTime, canStopCallback) {
   for(i = 0; i < lookTime * 10; i++) {
     // Break out if you saw somebody lately
     if(isalive(self.enemy)) {
-      if(self canSeeEnemy() && [
-          [canStopCallback]
-        ]())
+      if(self canSeeEnemy() && [[canStopCallback]]())
         return;
     }
     if(self isSuppressedWrapper() && [
         [canStopCallback]
-      ]())
+      ]()) {
       return;
-
+    }
     self setAnimKnobAll(lookAnim, % body, 1, .1);
     wait(0.1);
   }

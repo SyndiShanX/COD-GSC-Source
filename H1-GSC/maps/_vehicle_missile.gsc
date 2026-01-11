@@ -43,14 +43,11 @@ turret_think() {
 
   if(level.cobrapilot_difficulty == "easy") {
     var_0 = 0.5;
-  }
-  else if(level.cobrapilot_difficulty == "medium") {
+  } else if(level.cobrapilot_difficulty == "medium") {
     var_0 = 1.7;
-  }
-  else if(level.cobrapilot_difficulty == "hard") {
+  } else if(level.cobrapilot_difficulty == "hard") {
     var_0 = 1.0;
-  }
-  else if(level.cobrapilot_difficulty == "insane") {
+  } else if(level.cobrapilot_difficulty == "insane") {
     var_0 = 1.5;
   }
 

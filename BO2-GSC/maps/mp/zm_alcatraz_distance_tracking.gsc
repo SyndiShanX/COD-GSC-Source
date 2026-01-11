@@ -132,11 +132,9 @@ player_can_see_me(player) {
 
   if(forwarddotbanzai >= 1) {
     anglefromcenter = 0;
-  }
-  else if(forwarddotbanzai <= -1) {
+  } else if(forwarddotbanzai <= -1) {
     anglefromcenter = 180;
-  }
-  else {
+  } else {
     anglefromcenter = acos(forwarddotbanzai);
   }
 

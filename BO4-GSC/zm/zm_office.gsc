@@ -61,7 +61,6 @@
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_office;
 
 autoexec opt_in() {
@@ -82,12 +81,12 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("clientuimodel", "player_lives", 1, 2, "int");
   clientfield::register("world", "flicker_function_controller", 1, 1, "int");
   clientfield::register("world", "flicker_function_controller_persistant", 1, 1, "int");
-  level._effect[#"headshot"] = "zombie/fx_bul_flesh_head_fatal_zmb";
-  level._effect[#"headshot_nochunks"] = "zombie/fx_bul_flesh_head_nochunks_zmb";
-  level._effect[#"bloodspurt"] = "zombie/fx_bul_flesh_neck_spurt_zmb";
-  level._effect[#"animscript_gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"animscript_gibtrail_fx"] = "blood/fx_blood_gib_limb_trail";
-  level._effect[#"switch_sparks"] = "electric/fx8_sparks_burst_dir_sm_orange_os";
+  level._effect[# "headshot"] = "zombie/fx_bul_flesh_head_fatal_zmb";
+  level._effect[# "headshot_nochunks"] = "zombie/fx_bul_flesh_head_nochunks_zmb";
+  level._effect[# "bloodspurt"] = "zombie/fx_bul_flesh_neck_spurt_zmb";
+  level._effect[# "animscript_gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
+  level._effect[# "animscript_gibtrail_fx"] = "blood/fx_blood_gib_limb_trail";
+  level._effect[# "switch_sparks"] = "electric/fx8_sparks_burst_dir_sm_orange_os";
   level.var_c1013f84 = 1;
   level._no_vending_machine_auto_collision = 1;
   level.default_start_location = "start_room";
@@ -95,7 +94,7 @@ event_handler[level_init] main(eventstruct) {
   level.disableclassselection = 0;
   level.var_22fda912 = &function_9f50079d;
   level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
-  level.var_d0ab70a2 = #"hash_2ed6ad41883dc026";
+  level.var_d0ab70a2 = # "hash_2ed6ad41883dc026";
   level._allow_melee_weapon_switching = 1;
   level.zombiemode_reusing_pack_a_punch = 1;
   level.var_161cb00c = 1;
@@ -167,7 +166,7 @@ event_handler[level_init] main(eventstruct) {
   level thread registergondola_moving_watcher();
   level thread function_8aea12();
   level thread function_785cadc4();
-  zm_sq::register(#"main_quest", #"step1", #"main_quest_step1", &main_quest_step1_setup, &main_quest_step1_cleanup, 1);
+  zm_sq::register(#"main_quest", # "step1", # "main_quest_step1", &main_quest_step1_setup, &main_quest_step1_cleanup, 1);
   zm_sq::start(#"main_quest");
   zm_custom::function_a00576dd(undefined, undefined, &function_c8ce0a17, &function_e5086229);
 
@@ -242,8 +241,8 @@ function_e5086229(var_404e4288, var_8dd554ee) {
 registergondola_moving_watcher() {
   level clientfield::set("flicker_function_controller", 1);
   level clientfield::set("flicker_function_controller_persistant", 1);
-  level._effect[#"zombie_light_board"] = #"hash_e1d8f427f2f23c6";
-  level.var_6579276 = level._effect[#"zombie_light_board"];
+  level._effect[# "zombie_light_board"] = # "hash_e1d8f427f2f23c6";
+  level.var_6579276 = level._effect[# "zombie_light_board"];
   var_4ef1324a = getEntArray("yellow_conf_screen_part", "script_noteworthy");
   var_4d8e3426 = getent("fx_light_origin", "script_noteworthy");
   var_4d8e3426.fx_ent = util::spawn_model("tag_origin", var_4d8e3426.origin);
@@ -298,14 +297,14 @@ function_31085f45() {
 }
 
 function_785cadc4() {
-  level.var_678333a6 = #"hash_11347f5077a17dcb";
-  level._effect[#"chest_light"] = #"hash_1e8cb303d3103833";
-  level._effect[#"chest_light_closed"] = #"hash_602f075818a2fb2e";
-  level._effect[#"hash_2ff87d61167ea531"] = #"hash_1eb426cfbfef7486";
-  level._effect[#"hash_4048cb4967032c4a"] = #"hash_7e272f1a9f143051";
-  level._effect[#"lght_marker"] = #"hash_7dec2fde8393c0f4";
-  level._effect[#"lght_marker_flare"] = #"hash_11347f5077a17dcb";
-  level._effect[#"poltergeist_magicbox"] = #"hash_11347f5077a17dcb";
+  level.var_678333a6 = # "hash_11347f5077a17dcb";
+  level._effect[# "chest_light"] = # "hash_1e8cb303d3103833";
+  level._effect[# "chest_light_closed"] = # "hash_602f075818a2fb2e";
+  level._effect[# "hash_2ff87d61167ea531"] = # "hash_1eb426cfbfef7486";
+  level._effect[# "hash_4048cb4967032c4a"] = # "hash_7e272f1a9f143051";
+  level._effect[# "lght_marker"] = # "hash_7dec2fde8393c0f4";
+  level._effect[# "lght_marker_flare"] = # "hash_11347f5077a17dcb";
+  level._effect[# "poltergeist_magicbox"] = # "hash_11347f5077a17dcb";
 }
 
 function_9f50079d() {
@@ -356,30 +355,30 @@ custom_add_vox() {
 }
 
 setup_personality_character_exerts() {
-  level.exert_sounds[5][#"hitmed"] = "vox_plr_5_exert_pain";
-  level.exert_sounds[6][#"hitmed"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[7][#"hitmed"] = "vox_plr_7_exert_pain";
-  level.exert_sounds[8][#"hitmed"] = "vox_plr_8_exert_pain";
-  level.exert_sounds[5][#"hitlrg"] = "vox_plr_5_exert_pain";
-  level.exert_sounds[6][#"hitlrg"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[7][#"hitlrg"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[8][#"hitlrg"] = "vox_plr_7_exert_pain";
-  level.exert_sounds[5][#"drowning"] = "vox_plr_5_exert_underwater_air_low";
-  level.exert_sounds[6][#"drowning"] = "vox_plr_6_exert_underwater_air_low";
-  level.exert_sounds[7][#"drowning"] = "vox_plr_7_exert_underwater_air_low";
-  level.exert_sounds[8][#"drowning"] = "vox_plr_8_exert_underwater_air_low";
-  level.exert_sounds[5][#"cough"] = "vox_plr_5_exert_gas_cough";
-  level.exert_sounds[6][#"cough"] = "vox_plr_6_exert_gas_cough";
-  level.exert_sounds[7][#"cough"] = "vox_plr_7_exert_gas_cough";
-  level.exert_sounds[8][#"cough"] = "vox_plr_8_exert_gas_cough";
-  level.exert_sounds[5][#"underwater_emerge"] = "vox_plr_5_exert_underwater_emerge_breath";
-  level.exert_sounds[6][#"underwater_emerge"] = "vox_plr_6_exert_underwater_emerge_breath";
-  level.exert_sounds[7][#"underwater_emerge"] = "vox_plr_7_exert_underwater_emerge_breath";
-  level.exert_sounds[8][#"underwater_emerge"] = "vox_plr_8_exert_underwater_emerge_breath";
-  level.exert_sounds[5][#"underwater_gasp"] = "vox_plr_5_exert_underwater_emerge_gasp";
-  level.exert_sounds[6][#"underwater_gasp"] = "vox_plr_6_exert_underwater_emerge_gasp";
-  level.exert_sounds[7][#"underwater_gasp"] = "vox_plr_7_exert_underwater_emerge_gasp";
-  level.exert_sounds[8][#"underwater_gasp"] = "vox_plr_8_exert_underwater_emerge_gasp";
+  level.exert_sounds[5][# "hitmed"] = "vox_plr_5_exert_pain";
+  level.exert_sounds[6][# "hitmed"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[7][# "hitmed"] = "vox_plr_7_exert_pain";
+  level.exert_sounds[8][# "hitmed"] = "vox_plr_8_exert_pain";
+  level.exert_sounds[5][# "hitlrg"] = "vox_plr_5_exert_pain";
+  level.exert_sounds[6][# "hitlrg"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[7][# "hitlrg"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[8][# "hitlrg"] = "vox_plr_7_exert_pain";
+  level.exert_sounds[5][# "drowning"] = "vox_plr_5_exert_underwater_air_low";
+  level.exert_sounds[6][# "drowning"] = "vox_plr_6_exert_underwater_air_low";
+  level.exert_sounds[7][# "drowning"] = "vox_plr_7_exert_underwater_air_low";
+  level.exert_sounds[8][# "drowning"] = "vox_plr_8_exert_underwater_air_low";
+  level.exert_sounds[5][# "cough"] = "vox_plr_5_exert_gas_cough";
+  level.exert_sounds[6][# "cough"] = "vox_plr_6_exert_gas_cough";
+  level.exert_sounds[7][# "cough"] = "vox_plr_7_exert_gas_cough";
+  level.exert_sounds[8][# "cough"] = "vox_plr_8_exert_gas_cough";
+  level.exert_sounds[5][# "underwater_emerge"] = "vox_plr_5_exert_underwater_emerge_breath";
+  level.exert_sounds[6][# "underwater_emerge"] = "vox_plr_6_exert_underwater_emerge_breath";
+  level.exert_sounds[7][# "underwater_emerge"] = "vox_plr_7_exert_underwater_emerge_breath";
+  level.exert_sounds[8][# "underwater_emerge"] = "vox_plr_8_exert_underwater_emerge_breath";
+  level.exert_sounds[5][# "underwater_gasp"] = "vox_plr_5_exert_underwater_emerge_gasp";
+  level.exert_sounds[6][# "underwater_gasp"] = "vox_plr_6_exert_underwater_emerge_gasp";
+  level.exert_sounds[7][# "underwater_gasp"] = "vox_plr_7_exert_underwater_emerge_gasp";
+  level.exert_sounds[8][# "underwater_gasp"] = "vox_plr_8_exert_underwater_emerge_gasp";
 }
 
 metal_detectors() {
@@ -585,16 +584,16 @@ private office_devgui() {
     str_command = getdvarstring(#"zm_office_devgui_cmd", "<dev string:x1a9>");
 
     switch (str_command) {
-      case #"go_defcon5":
+      case # "go_defcon5":
         level thread zm_office_defcon::function_d2f6cecb();
         break;
-      case #"hash_721e1a59dcdbed92":
+      case # "hash_721e1a59dcdbed92":
         namespace_a5657ff1::function_5642f347();
         break;
-      case #"hash_3b41cd4492082280":
+      case # "hash_3b41cd4492082280":
         namespace_a5657ff1::function_f33d3ab5();
         break;
-      case #"enable_ww_crate":
+      case # "enable_ww_crate":
         level.s_ww_quest_reward zm_office_ww_quest::function_68f68bb4();
         break;
     }

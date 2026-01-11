@@ -122,8 +122,7 @@ vision_set_change(str_vision_set) {
 
   if(isDefined(n_near_start) && isDefined(n_time)) {
     self thread depth_of_field_tween(n_near_start, n_near_end, n_far_start, n_far_end, n_near_blur, n_far_blur, n_time);
-  }
-  else {
+  } else {
     self depth_of_field_off(0.05);
   }
 }
@@ -208,8 +207,7 @@ defalco_encounter_dof06() {
   level.player thread depth_of_field_tween(n_near_start, n_near_end, n_far_start, n_far_end, n_near_blur, n_far_blur, n_time);
 }
 
-vtol_dof_1(ent) {
-}
+vtol_dof_1(ent) {}
 
 vtol_dof_2(ent) {
   visionsetnaked("sp_karma_vtol_interior", 0.5);

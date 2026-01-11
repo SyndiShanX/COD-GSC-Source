@@ -11,7 +11,7 @@ main(var_0, var_1, var_2, var_3) {
   }
 
   foreach(var_5 in getEntArray("script_vehicle_hind_battle_oilrocks", "classname")) {
-  var_5 setModel("vehicle_battle_hind_no_mg");
+    var_5 setModel("vehicle_battle_hind_no_mg");
   }
 
   maps\_vehicle::build_template("hind_battle", var_0, var_1, var_2);
@@ -35,8 +35,7 @@ main(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_3)) {
     maps\_vehicle::build_turret("hind_turret_oilrocks", "TAG_TURRET_ATTACH", "vehicle_battle_hind_mg", undefined, "auto_nonai", 0.0, 20, -14, var_7);
-  }
-  else {
+  } else {
     maps\_vehicle::build_turret(var_3, "TAG_TURRET_ATTACH", "vehicle_battle_hind_mg", undefined, "auto_nonai", 0.0, 20, -14, var_7);
   }
 
@@ -79,8 +78,7 @@ similar_deaths(var_0, var_1) {
 
   if(var_2) {
     maps\_anim::note_track_trace_to_efx("start", "battle_hind_explode_fuel", "tag_ctrl_body", "vfx/gameplay/explosions/vehicle/heli/vfx_exp_heli_pr_hind", "vfx/gameplay/vehicles/heli_global/vfx_heli_s_splash");
-  }
-  else {
+  } else {
     maps\_anim::note_track_trace_to_efx("start", undefined, "tag_ctrl_body", "vfx/gameplay/vehicles/hind/hind_body_2s", "vfx/gameplay/vehicles/heli_global/vfx_heli_s_splash");
   }
 

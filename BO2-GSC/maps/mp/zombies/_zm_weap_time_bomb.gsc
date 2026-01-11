@@ -68,8 +68,7 @@ time_bomb_add_custom_func_global_restore(func_restore) {
 get_time_bomb_saved_round_type() {
   if(!isDefined(level.time_bomb_save_data) || !isDefined(level.time_bomb_save_data.round_type)) {
     str_type = "none";
-  }
-  else {
+  } else {
     str_type = level.time_bomb_save_data.round_type;
   }
 
@@ -286,8 +285,7 @@ _time_bomb_saves_data(b_show_icon, save_struct) {
 
   if(isDefined(save_struct)) {
     save_struct.save_ready = 1;
-  }
-  else {
+  } else {
     level.time_bomb_save_data.save_ready = 1;
   }
 
@@ -299,8 +297,7 @@ _time_bomb_saves_data(b_show_icon, save_struct) {
 time_bomb_saves_global_data(save_struct) {
   if(!isDefined(save_struct)) {
     s_temp = level.time_bomb_save_data;
-  }
-  else {
+  } else {
     s_temp = save_struct;
   }
 
@@ -332,7 +329,7 @@ _time_bomb_saves_door_states(s_temp) {
   s_temp.door_states = [];
 
   foreach(door in a_doors) {
-  door thread store_door_state(s_temp);
+    door thread store_door_state(s_temp);
   }
 }
 
@@ -377,7 +374,7 @@ _time_bomb_restores_door_states(s_temp) {
   a_doors = getEntArray("zombie_door", "targetname");
 
   foreach(door in a_doors) {
-  door thread restore_door_state(s_temp);
+    door thread restore_door_state(s_temp);
   }
 }
 
@@ -485,8 +482,7 @@ _time_bomb_save_internal(save_struct) {
 
   if(isDefined(save_struct)) {
     s_temp.n_time_id = save_struct.n_time_id;
-  }
-  else {
+  } else {
     s_temp.n_time_id = level.time_bomb_save_data.n_time_id;
   }
 
@@ -546,8 +542,7 @@ _time_bomb_save_internal(save_struct) {
 
   if(isDefined(save_struct)) {
     save_struct.player_saves[self getentitynumber()] = s_temp;
-  }
-  else {
+  } else {
     self.time_bomb_save_data = s_temp;
   }
 }
@@ -578,8 +573,7 @@ _save_time_bomb_weapon_after_switch(save_struct) {
 
     if(isDefined(save_struct)) {
       save_struct.player_saves[self getentitynumber()].weapons.primary = str_weapon;
-    }
-    else {
+    } else {
       self.time_bomb_save_data.weapons.primary = str_weapon;
     }
   }
@@ -710,8 +704,7 @@ time_bomb_restores_global_data(save_struct, n_time_start) {
 
   if(isDefined(save_struct)) {
     s_temp = save_struct;
-  }
-  else {
+  } else {
     s_temp = level.time_bomb_save_data;
   }
 
@@ -753,7 +746,7 @@ time_bomb_restores_global_data(save_struct, n_time_start) {
 _pack_a_punch_sequence_ends() {
   if(flag("pack_machine_in_use")) {
     foreach(player in get_players()) {
-    player notify("pap_player_disconnected");
+      player notify("pap_player_disconnected");
     }
 
     foreach(trigger in level.pap_triggers) {
@@ -767,7 +760,7 @@ _pack_a_punch_sequence_ends() {
     waittillframeend;
 
     foreach(trigger in level.pap_triggers) {
-    trigger notify("pap_timeout");
+      trigger notify("pap_timeout");
     }
   }
 }
@@ -842,7 +835,7 @@ time_bomb_restores_player_data(n_time_start, save_struct) {
   a_players = get_players();
 
   foreach(player in a_players) {
-  player _time_bomb_restores_player_data_internal(save_struct);
+    player _time_bomb_restores_player_data_internal(save_struct);
   }
 
   remove_white_screen_flash();
@@ -887,8 +880,7 @@ _time_bomb_restores_player_data_internal(save_struct) {
 
     if(!isDefined(save_struct)) {
       s_temp = self.time_bomb_save_data;
-    }
-    else {
+    } else {
       s_temp = save_struct.player_saves[self getentitynumber()];
     }
 
@@ -900,16 +892,14 @@ _time_bomb_restores_player_data_internal(save_struct) {
 
     if(n_difference_in_score > 0) {
       self maps\mp\zombies\_zm_score::add_to_player_score(n_difference_in_score);
-    }
-    else {
+    } else {
       self maps\mp\zombies\_zm_score::minus_to_player_score(abs(n_difference_in_score));
     }
 
     if(is_weapon_locker_available_in_game()) {
       if(isDefined(s_temp.weapon_locker_data)) {
         self maps\mp\zombies\_zm_weapon_locker::wl_set_stored_weapondata(s_temp.weapon_locker_data);
-      }
-      else {
+      } else {
         self maps\mp\zombies\_zm_weapon_locker::wl_clear_stored_weapondata();
       }
     }
@@ -937,8 +927,7 @@ _time_bomb_restores_player_data_internal(save_struct) {
 _restore_player_perks_and_weapons(s_temp) {
   if(isDefined(s_temp.is_spectator) && s_temp.is_spectator) {
     self restore_player_to_initial_loadout(s_temp);
-  }
-  else if(isDefined(s_temp.is_last_stand) && s_temp.is_last_stand) {
+  } else if(isDefined(s_temp.is_last_stand) && s_temp.is_last_stand) {
     self.stored_weapon_info = s_temp.stored_weapon_info;
     assert(isDefined(level.zombie_last_stand_ammo_return), "time bomb attempting to give player back weapons taken by last stand, but level.zombie_last_stand_ammo_return is undefined!");
     self[[level.zombie_last_stand_ammo_return]]();
@@ -946,7 +935,7 @@ _restore_player_perks_and_weapons(s_temp) {
     a_current_perks = self get_player_perk_list();
 
     foreach(perk in a_current_perks) {
-    self notify(perk + "_stop");
+      self notify(perk + "_stop");
     }
 
     wait_network_frame();
@@ -990,18 +979,15 @@ _restore_player_perks_and_weapons(s_temp) {
       if(!is_temporary_zombie_weapon(str_weapon_temp) && str_weapon_temp != "time_bomb_zm") {
         if(isDefined(level.zombie_weapons[str_weapon_temp]) && isDefined(level.zombie_weapons[str_weapon_temp].vox)) {
           self maps\mp\zombies\_zm_weapons::weapon_give(str_weapon_temp, issubstr(str_weapon_temp, "upgrade"));
-        }
-        else {
+        } else {
           self giveweapon(str_weapon_temp, 0, self maps\mp\zombies\_zm_weapons::get_pack_a_punch_weapon_options(str_weapon_temp));
         }
 
         if(n_type == 1) {
           self setweaponammofuel(str_weapon_temp, n_ammo_clip);
-        }
-        else if(n_type == 2) {
+        } else if(n_type == 2) {
           self setweaponoverheating(0, n_ammo_clip, str_weapon_temp);
-        }
-        else if(isDefined(n_ammo_clip)) {
+        } else if(isDefined(n_ammo_clip)) {
           self setweaponammoclip(str_weapon_temp, n_ammo_clip);
         }
 
@@ -1078,7 +1064,7 @@ restore_player_to_initial_loadout(s_temp) {
   a_current_perks = self get_player_perk_list();
 
   foreach(perk in a_current_perks) {
-  self notify(perk + "_stop");
+    self notify(perk + "_stop");
   }
 
   if(isDefined(s_temp) && s_temp.points_current < 1500 && self.score < 1500 && level.round_number > 6 || self.score < 1500 && level.round_number > 6) {
@@ -1101,8 +1087,7 @@ can_time_bomb_restore_data_on_player(save_struct) {
 
   if(isDefined(save_struct)) {
     b_can_restore_data_on_player = isDefined(save_struct.player_saves) && isDefined(save_struct.player_saves[self getentitynumber()]);
-  }
-  else {
+  } else {
     b_global_save_exists = isDefined(level.time_bomb_save_data.n_time_id);
     b_player_save_exists = isDefined(self.time_bomb_save_data) && isDefined(self.time_bomb_save_data.n_time_id);
 
@@ -1209,8 +1194,7 @@ _kill_time_bomb_enemy() {
 time_bomb_get_enemy_array() {
   if(isDefined(level._time_bomb.custom_funcs_get_enemies)) {
     a_enemies = [[level._time_bomb.custom_funcs_get_enemies]]();
-  }
-  else {
+  } else {
     a_enemies = get_round_enemy_array();
   }
 
@@ -1363,8 +1347,7 @@ _restore_zombie_data(s_info) {
 
   self.completed_emerging_into_playable_area = s_info.completed_emerging_into_playable_area;
 
-  if(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) {
-  }
+  if(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) {}
 
   if(isDefined(s_info.has_legs)) {
     self.has_legs = s_info.has_legs;
@@ -1413,11 +1396,9 @@ time_bomb_round_wait() {
 
   if(isDefined(level._time_bomb.restoring_initialized_round) && level._time_bomb.restoring_initialized_round && isDefined(level.time_bomb_save_data) && isDefined(level.time_bomb_save_data.round_initialized) && !level.time_bomb_save_data.round_initialized) {
     level.round_number--;
-  }
-  else if(isDefined(level._time_bomb.changing_round) && !level._time_bomb.changing_round && !level.time_bomb_save_data.round_initialized && level._time_bomb.round_initialized) {
+  } else if(isDefined(level._time_bomb.changing_round) && !level._time_bomb.changing_round && !level.time_bomb_save_data.round_initialized && level._time_bomb.round_initialized) {
     level.round_number--;
-  }
-  else if(isDefined(level._time_bomb.changing_round) && level._time_bomb.changing_round && !level._time_bomb.round_initialized) {
+  } else if(isDefined(level._time_bomb.changing_round) && level._time_bomb.changing_round && !level._time_bomb.round_initialized) {
     level.round_number--;
   }
 
@@ -1456,19 +1437,16 @@ _zombies_go_back_into_ai_when_time_bomb_is_done() {
     if(isDefined(str_restore_state)) {
       if(str_restore_state == "find_flesh") {
         str_notify_message = self _handle_find_flesh(s_temp);
-      }
-      else if(str_restore_state == "zombie_goto_entrance") {
+      } else if(str_restore_state == "zombie_goto_entrance") {
         str_notify_message = self _send_zombie_to_barricade();
-      }
-      else if(str_restore_state == "zombie_think" || str_restore_state == "idle") {
+      } else if(str_restore_state == "zombie_think" || str_restore_state == "idle") {
         if(isDefined(self.in_the_ground) && self.in_the_ground) {
           self waittill("risen");
           str_notify_message = self _handle_find_flesh(s_temp);
         } else if(isDefined(self.completed_emerging_into_playable_area)) {
           if(self.completed_emerging_into_playable_area) {
             str_notify_message = self _handle_find_flesh(s_temp);
-          }
-          else {
+          } else {
             str_notify_message = self _send_zombie_to_barricade();
           }
         }
@@ -1498,8 +1476,7 @@ _handle_find_flesh(s_temp) {
 _send_zombie_to_barricade() {
   if(isDefined(self.time_bomb_restored_data.entrance_nodes) && self.time_bomb_restored_data.entrance_nodes.size > 0) {
     a_entrance_nodes = self.time_bomb_restored_data.entrance_nodes;
-  }
-  else {
+  } else {
     a_entrance_nodes = level.exterior_goals;
   }
 
@@ -1529,8 +1506,7 @@ time_bomb_custom_round_change() {
 
   if(is_time_bomb_round_change()) {
     level.time_bomb_restored_into_current_round = 1;
-  }
-  else {
+  } else {
     level thread maps\mp\zombies\_zm_audio::change_zombie_music("round_start");
     round_one_up();
   }
@@ -1833,9 +1809,8 @@ set_actor_traverse_callbacks() {
 
     if(isDefined(level.time_bomb_custom_actor_speedup_func)) {
       actors[i][
-    }
-        [level.time_bomb_custom_actor_speedup_func]
-      ]();
+        }
+        [level.time_bomb_custom_actor_speedup_func]]();
   }
 }
 

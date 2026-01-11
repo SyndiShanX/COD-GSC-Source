@@ -468,8 +468,7 @@ unset_perk_pistol_p226_0() {
 set_perk_pistol_p226_1() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienp226_mp_alienmuzzlebrakepi");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienp226_mp_barrelrange02");
   }
 }
@@ -481,8 +480,7 @@ unset_perk_pistol_p226_1() {
 set_perk_pistol_p226_2() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienp226_mp_alienmuzzlebrakepi_xmags");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienp226_mp_barrelrange02_xmags");
   }
 }
@@ -494,8 +492,7 @@ unset_perk_pistol_p226_2() {
 set_perk_pistol_p226_3() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienp226_mp_alienmuzzlebrakepi_xmags");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienp226_mp_barrelrange02_xmags");
   }
 
@@ -510,8 +507,7 @@ unset_perk_pistol_p226_3() {
 set_perk_pistol_p226_4() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw5_alienp226_mp_akimbo_alienmuzzlebrakepi_xmags");
-  }
-  else {
+  } else {
     self give_new_pistol("iw5_alienp226_mp_akimbo_barrelrange02_xmags");
   }
 
@@ -530,14 +526,11 @@ unset_perk_pistol_magnum_0() {
 set_perk_pistol_magnum_1() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && !self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmagnum_mp_acogpistol_barrelrange02_scope5");
-  }
-  else if(!self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
+  } else if(!self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmagnum_mp_alienmuzzlebrakepi");
-  }
-  else if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
+  } else if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmagnum_mp_acogpistol_alienmuzzlebrakepi_scope5");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienmagnum_mp_barrelrange02");
   }
 }
@@ -549,14 +542,11 @@ unset_perk_pistol_magnum_1() {
 set_perk_pistol_magnum_2() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && !self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmagnum_mp_acogpistol_barrelrange02_xmags_scope5");
-  }
-  else if(!self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
+  } else if(!self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmagnum_mp_alienmuzzlebrakepi_xmags");
-  }
-  else if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
+  } else if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmagnum_mp_acogpistol_alienmuzzlebrakepi_xmags_scope5");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienmagnum_mp_barrelrange02_xmags");
   }
 }
@@ -568,14 +558,11 @@ unset_perk_pistol_magnum_2() {
 set_perk_pistol_magnum_3() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && !self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmagnum_mp_acogpistol_barrelrange02_xmags_scope5");
-  }
-  else if(!self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
+  } else if(!self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmagnum_mp_alienmuzzlebrakepi_xmags");
-  }
-  else if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
+  } else if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmagnum_mp_acogpistol_alienmuzzlebrakepi_xmags_scope5");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienmagnum_mp_barrelrange02_xmags");
   }
 
@@ -590,14 +577,11 @@ unset_perk_pistol_magnum_3() {
 set_perk_pistol_magnum_4() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && !self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw5_alienmagnum_mp_acogpistol_akimbo_barrelrange02_xmags_scope5");
-  }
-  else if(!self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
+  } else if(!self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw5_alienmagnum_mp_akimbo_alienmuzzlebrakepi_xmags");
-  }
-  else if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
+  } else if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade") && self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw5_alienmagnum_mp_acogpistol_akimbo_alienmuzzlebrakepi_xmags_scope5");
-  }
-  else {
+  } else {
     self give_new_pistol("iw5_alienmagnum_mp_akimbo_barrelrange02_xmags");
   }
   self.perk_data["pistol"].pistol_overkill = true;
@@ -615,8 +599,7 @@ unset_perk_pistol_m9a1_0() {
 set_perk_pistol_m9a1_1() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienm9a1_mp_alienmuzzlebrakep3");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienm9a1_mp_barrelrange02");
   }
 }
@@ -628,8 +611,7 @@ unset_perk_pistol_m9a1_1() {
 set_perk_pistol_m9a1_2() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienm9a1_mp_alienmuzzlebrakep3_xmags");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienm9a1_mp_barrelrange02_xmags");
   }
 }
@@ -641,8 +623,7 @@ unset_perk_pistol_m9a1_2() {
 set_perk_pistol_m9a1_3() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienm9a1_mp_alienmuzzlebrakep3_xmags");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienm9a1_mp_barrelrange02_xmags");
   }
 
@@ -657,8 +638,7 @@ unset_perk_pistol_m9a1_3() {
 set_perk_pistol_m9a1_4() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw5_alienm9a1_mp_akimbo_alienmuzzlebrakep3_xmags");
-  }
-  else {
+  } else {
     self give_new_pistol("iw5_alienm9a1_mp_akimbo_barrelrange02_xmags");
   }
 
@@ -683,8 +663,7 @@ unset_perk_pistol_mp443_0() {
 set_perk_pistol_mp443_1() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmp443_mp_alienmuzzlebrakepa");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienmp443_mp_barrelrange02");
   }
 }
@@ -696,8 +675,7 @@ unset_perk_pistol_mp443_1() {
 set_perk_pistol_mp443_2() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmp443_mp_alienmuzzlebrakepa_xmags");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienmp443_mp_barrelrange02_xmags");
   }
 }
@@ -709,8 +687,7 @@ unset_perk_pistol_mp443_2() {
 set_perk_pistol_mp443_3() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw6_alienmp443_mp_alienmuzzlebrakepa_xmags");
-  }
-  else {
+  } else {
     self give_new_pistol("iw6_alienmp443_mp_barrelrange02_xmags");
   }
   self.perk_data["pistol"].pistol_overkill = true;
@@ -724,8 +701,7 @@ unset_perk_pistol_mp443_3() {
 set_perk_pistol_mp443_4() {
   if(self maps\mp\alien\_persistence::is_upgrade_enabled("ark_pistol_upgrade")) {
     self give_new_pistol("iw5_alienmp443_mp_akimbo_alienmuzzlebrakepa_xmags");
-  }
-  else {
+  } else {
     self give_new_pistol("iw5_alienmp443_mp_akimbo_barrelrange02_xmags");
   }
   self.perk_data["pistol"].pistol_overkill = true;

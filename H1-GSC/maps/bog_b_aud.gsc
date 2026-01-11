@@ -63,8 +63,7 @@ create_level_envelop_arrays() {
     [0.238, 0.736],
     [0.408, 0.844],
     [0.756, 0.953],
-    [1.0, 1.0]
-  ];
+    [1.0, 1.0]];
 }
 
 precache_presets() {}
@@ -92,8 +91,7 @@ zone_handler(var_0, var_1) {
 
   if(getsubstr(var_0, 0, 6) == "enter_") {
     var_2 = var_1;
-  }
-  else if(getsubstr(var_0, 0, 5) == "exit_") {
+  } else if(getsubstr(var_0, 0, 5) == "exit_") {
     var_3 = var_1;
   }
 }
@@ -203,8 +201,7 @@ handle_single_mi17_sequence_mix() {
 
   if(!common_scripts\utility::flag("first_mi17_gone")) {
     common_scripts\utility::flag_set("first_mi17_gone");
-  }
-  else {
+  } else {
     soundscripts\_audio_mix_manager::mm_clear_submix("mix_mi17_reinforcement");
   }
 }

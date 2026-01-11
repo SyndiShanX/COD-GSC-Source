@@ -121,8 +121,7 @@ onPlayerSpawned() {
 
     if(self.streakType == "specialist") {
       self updateSpecialistKillstreaks();
-    }
-    else {
+    } else {
       self giveOwnedKillstreakItem();
     }
   }
@@ -134,8 +133,7 @@ initPlayerKillstreaks() {
   }
   if(self.streakType == "specialist") {
     self setCommonPlayerData("killstreaksState", "isSpecialist", true);
-  }
-  else {
+  } else {
     self setCommonPlayerData("killstreaksState", "isSpecialist", false);
   }
 
@@ -202,8 +200,7 @@ initPlayerKillstreaks() {
           if(token != "ks") {
             if(!isDefined(perkName)) {
               perkName = token;
-            }
-            else {
+            } else {
               perkName += ("_" + token);
             }
           }
@@ -365,8 +362,7 @@ updateStreakSlots() {
   } else {
     if(self.streakType == "specialist" && self_pers_killstreaks[KILLSTREAK_GIMME_SLOT].available) {
       self setCommonPlayerData("killstreaksState", "selectedIndex", 0);
-    }
-    else {
+    } else {
       self setCommonPlayerData("killstreaksState", "selectedIndex", -1);
     }
   }
@@ -804,11 +800,9 @@ killstreakUseWaiter() {
       if(isKillstreakWeapon(newWeapon)) {
         if(self isJuggernaut() && isJuggernautWeapon(newWeapon)) {
           switch_to_weapon = newWeapon;
-        }
-        else if(newWeapon == "iw6_gm6helisnipe_mp_gm6scope") {
+        } else if(newWeapon == "iw6_gm6helisnipe_mp_gm6scope") {
           switch_to_weapon = newWeapon;
-        }
-        else {
+        } else {
           self TakeWeapon(newWeapon);
         }
       }
@@ -1181,8 +1175,7 @@ giveKillstreak(streakName, isEarned, awardXp, owner, slotNumber, streakID) {
 
   if(!self_pers_killstreak_index.earned) {
     self_pers_killstreak_index.lifeId = -1;
-  }
-  else {
+  } else {
     self_pers_killstreak_index.lifeId = self.pers["deaths"];
   }
 
@@ -1306,14 +1299,11 @@ getStreakCost(streakName) {
       if(isDefined(self.pers["gamemodeLoadout"])) {
         if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak1"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak1"] == streakName) {
           cost = 2;
-        }
-        else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak2"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak2"] == streakName) {
+        } else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak2"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak2"] == streakName) {
           cost = 4;
-        }
-        else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak3"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak3"] == streakName) {
+        } else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak3"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak3"] == streakName) {
           cost = 6;
-        }
-        else {
+        } else {
           AssertMsg("getStreakCost: killstreak doesn't exist in player's loadout");
         }
       } else if(IsSubStr(self.curClass, "custom")) {
@@ -1469,8 +1459,7 @@ initRideKillstreak(streak) {
 initRideKillstreak_internal(streak) {
   if(isDefined(streak) && isLaptopTimeoutKillstreak(streak)) {
     laptopWait = "timeout";
-  }
-  else {
+  } else {
     laptopWait = self waittill_any_timeout(1.0, "disconnect", "death", "weapon_switch_started");
   }
 
@@ -1515,8 +1504,7 @@ initRideKillstreak_internal(streak) {
   if(blackOutWait != "disconnect") {
     if(!isDefined(streak) || !IsSubStr(streak, "odin")) {
       self thread clearRideIntro(1.0);
-    }
-    else {
+    } else {
       self notify("intro_cleared");
     }
 
@@ -1539,8 +1527,7 @@ initRideKillstreak_internal(streak) {
 
   if(blackOutWait == "disconnect") {
     return ("disconnect");
-  }
-  else {
+  } else {
     return ("success");
   }
 }
@@ -1861,8 +1848,7 @@ setAdrenaline(value) {
 
   if(isDefined(self.adrenaline)) {
     self.previousAdrenaline = self.adrenaline;
-  }
-  else {
+  } else {
     self.previousAdrenaline = 0;
   }
 
@@ -2088,8 +2074,7 @@ copy_killstreak_status(from, noTransfer) {
       if(isDefined(ent.owner) && ent.owner == from) {
         if(ent.classname == "misc_turret") {
           ent maps\mp\killstreaks\_autosentry::sentry_setOwner(self);
-        }
-        else {
+        } else {
           ent.owner = self;
         }
       }
@@ -2114,8 +2099,7 @@ copy_killstreak_status(from, noTransfer) {
             if(token != "ks") {
               if(!isDefined(perkName)) {
                 perkName = token;
-              }
-              else {
+              } else {
                 perkName += ("_" + token);
               }
             }

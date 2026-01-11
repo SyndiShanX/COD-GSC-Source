@@ -85,8 +85,7 @@ findTargets() {
 
     if(targetCount % 2) {
       self thread fireAtTarget(lb, self.team, true);
-    }
-    else {
+    } else {
       self thread fireAtTarget(lb, self.team, false);
     }
 
@@ -137,8 +136,7 @@ finishAAStrike(lifeId) {
     wait(6);
     if(i == 1 || i == 3) {
       self thread doFlyBy(true);
-    }
-    else {
+    } else {
       self thread doFlyBy(false);
     }
   }
@@ -178,15 +176,13 @@ fireAtTarget(curTarget, team, showIcon) {
 
   if(showIcon) {
     plane = spawnplane(self, "script_model", startpos, "compass_objpoint_airstrike_friendly", "compass_objpoint_airstrike_friendly");
-  }
-  else {
+  } else {
     plane = spawnplane(self, "script_model", startpos);
   }
 
   if(self.team == "allies") {
     plane setModel("vehicle_av8b_harrier_jet_mp");
-  }
-  else {
+  } else {
     plane setModel("vehicle_av8b_harrier_jet_opfor_mp");
   }
 
@@ -234,8 +230,7 @@ doFlyBy(showIcon) {
 
   if(showIcon) {
     plane = spawnplane(self, "script_model", startpos, "hud_minimap_harrier_green", "hud_minimap_harrier_red");
-  }
-  else {
+  } else {
     plane = spawnplane(self, "script_model", startpos);
   }
 

@@ -31,7 +31,7 @@ main() {
   var_5 = ["j_tail1", "j_spineupper", "j_tail2", "j_fin_le", "j_fin_ri", "j_head", "j_jaw"];
 
   foreach(var_7 in var_5) {
-  playFXOnTag(level._effect["water_bubbles_wide_sm_lp"], var_0, var_7);
+    playFXOnTag(level._effect["water_bubbles_wide_sm_lp"], var_0, var_7);
   }
 
   var_9 = 1;
@@ -76,7 +76,7 @@ find_available_collision_model() {
       self.shark_collision_model = level.shark_collsions[var_0];
 
       foreach(var_2 in level.players) {
-      var_2 thread track_collision_with_player(level.shark_collsions[var_0]);
+        var_2 thread track_collision_with_player(level.shark_collsions[var_0]);
       }
 
       break;

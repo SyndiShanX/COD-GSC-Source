@@ -214,11 +214,11 @@ main_entrance_shutters() {
   m_center_door = getent("sec_gate_mid", "targetname");
 
   foreach(m_door in a_m_outermost_doors) {
-  m_door movez(400, 0.05);
+    m_door movez(400, 0.05);
   }
 
   foreach(m_door in a_m_middle_doors) {
-  m_door movez(400, 0.05);
+    m_door movez(400, 0.05);
   }
 
   m_center_door movez(253, 0.05);
@@ -226,13 +226,13 @@ main_entrance_shutters() {
   flag_wait("main_entrance_start");
 
   foreach(m_door in a_m_outermost_doors) {
-  m_door movez(-1 * 400, 10.0);
+    m_door movez(-1 * 400, 10.0);
   }
 
   wait 2.0;
 
   foreach(m_door in a_m_middle_doors) {
-  m_door movez(-1 * 400, 10.0);
+    m_door movez(-1 * 400, 10.0);
   }
 
   wait 2.0;
@@ -262,7 +262,7 @@ start_ground_events() {
   a_vh_tigrs = spawn_vehicles_from_targetname("gaz_tigr_front_door");
 
   foreach(vh_tigr in a_vh_tigrs) {
-  vh_tigr add_cleanup_ent("cleanup_front_door");
+    vh_tigr add_cleanup_ent("cleanup_front_door");
   }
 
   level thread squad_replenish_init();
@@ -626,8 +626,7 @@ spawn_jetwing_group(a_s_landing_group, n_spawn_limit, str_end_flag) {
     if(randomint(100) < 80) {
       if(level.is_sco_supporting && randomint(100) < 25) {
         level thread maps\_jetpack_ai::create_jetpack_ai(s_loc, "sco_assault", 1, ::random_death);
-      }
-      else {
+      } else {
         level thread maps\_jetpack_ai::create_jetpack_ai(s_loc, "seal_drone", 1, ::random_death);
       }
 

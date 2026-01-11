@@ -9,7 +9,6 @@
 #include scripts\core_common\dialog_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
-
 #namespace battlechatter;
 
 autoexec __init__system__() {
@@ -19,8 +18,8 @@ autoexec __init__system__() {
 __init__() {
   level.var_2829c23d = &function_50e36ba7;
   level.var_44e74ef4 = &function_f1d27638;
-  level.allowbattlechatter[#"bc"] = isDefined(getgametypesetting(#"allowbattlechatter")) && getgametypesetting(#"allowbattlechatter");
-  level.allowspecialistdialog = dialog_shared::mpdialog_value("enableHeroDialog", 0) && isDefined(level.allowbattlechatter[#"bc"]) && level.allowbattlechatter[#"bc"];
+  level.allowbattlechatter[# "bc"] = isDefined(getgametypesetting(#"allowbattlechatter")) && getgametypesetting(#"allowbattlechatter");
+  level.allowspecialistdialog = dialog_shared::mpdialog_value("enableHeroDialog", 0) && isDefined(level.allowbattlechatter[# "bc"]) && level.allowbattlechatter[# "bc"];
   level thread function_4bc12499();
 }
 
@@ -103,7 +102,7 @@ get_death_vox(meansofdeath, roleindex) {
     return;
   }
 
-  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[#"changed_specialist"]) ? self.pers[#"changed_specialist"] : 0)) {
+  if(isDefined(meansofdeath) && meansofdeath == "MOD_META" && (isDefined(self.pers[# "changed_specialist"]) ? self.pers[# "changed_specialist"] : 0)) {
     bundlename = self.var_89c4a60f;
   }
 
@@ -115,31 +114,31 @@ get_death_vox(meansofdeath, roleindex) {
 
   if(isDefined(meansofdeath)) {
     switch (meansofdeath) {
-      case #"mod_unknown":
+      case # "mod_unknown":
         return playerbundle.exertdeath;
-      case #"mod_burned":
+      case # "mod_burned":
         if(function_fc261b83()) {
           return "";
         } else {
           return playerbundle.exertdeathburned;
         }
-      case #"mod_melee_weapon_butt":
+      case # "mod_melee_weapon_butt":
         return playerbundle.exertdeathstabbed;
-      case #"mod_head_shot":
+      case # "mod_head_shot":
         return playerbundle.var_207908de;
-      case #"mod_falling":
+      case # "mod_falling":
         return playerbundle.var_1dfcabbd;
-      case #"mod_drown":
+      case # "mod_drown":
         return playerbundle.exertdeathdrowned;
-      case #"mod_explosive":
+      case # "mod_explosive":
         return playerbundle.var_44d86dec;
-      case #"mod_dot_self":
+      case # "mod_dot_self":
         return playerbundle.var_48305ed9;
-      case #"mod_dot":
+      case # "mod_dot":
         return playerbundle.var_f8b4bcc1;
-      case #"mod_melee_assassinate":
+      case # "mod_melee_assassinate":
         return playerbundle.exertdeathstabbed;
-      case #"mod_electrocuted":
+      case # "mod_electrocuted":
         return playerbundle.exertdeathelectrocuted;
     }
   }
@@ -271,103 +270,103 @@ function_20edb636(weapon, playerbundle) {
   returnstruct = spawnStruct();
 
   switch (weapon.name) {
-    case #"hero_annihilator":
+    case # "hero_annihilator":
       returnstruct.var_17a094cf = playerbundle.annihilatorweaponsuccess;
       break;
-    case #"sig_buckler_dw":
-    case #"sig_buckler_turret":
+    case # "sig_buckler_dw":
+    case # "sig_buckler_turret":
       returnstruct.var_17a094cf = playerbundle.var_b8e59ed0;
       returnstruct.startdelay = mpdialog_value("battleshieldSuccessDialogBuffer", 0);
       break;
-    case #"claymore":
+    case # "claymore":
       returnstruct.var_17a094cf = playerbundle.var_b4d5ca8f;
       break;
-    case #"dog_ai_defaultmelee":
+    case # "dog_ai_defaultmelee":
       returnstruct.var_17a094cf = playerbundle.var_67888352;
       returnstruct.startdelay = playerbundle.var_aaf0d901;
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       returnstruct.var_17a094cf = playerbundle.purifierweaponsuccess;
       returnstruct.startdelay = playerbundle.var_f88f40a;
       break;
-    case #"eq_gravityslam":
+    case # "eq_gravityslam":
       returnstruct.var_17a094cf = playerbundle.var_d1c8dc4;
       break;
-    case #"gun_mini_turret":
+    case # "gun_mini_turret":
       returnstruct.var_17a094cf = playerbundle.var_3755ba19;
       break;
-    case #"sig_bow_quickshot":
+    case # "sig_bow_quickshot":
       returnstruct.var_17a094cf = playerbundle.sparrowweaponsuccess;
       break;
-    case #"hash_5a4932f4b8d8b37a":
+    case # "hash_5a4932f4b8d8b37a":
       returnstruct.var_17a094cf = playerbundle.var_dc2e66f;
       break;
-    case #"shock_rifle":
+    case # "shock_rifle":
       returnstruct.var_17a094cf = playerbundle.tempestweaponsuccess;
       break;
-    case #"eq_tripwire":
+    case # "eq_tripwire":
       returnstruct.var_17a094cf = playerbundle.var_eb8b9d7a;
       break;
-    case #"hero_pineapplegun":
+    case # "hero_pineapplegun":
       returnstruct.var_17a094cf = playerbundle.warmachineweaponsuccess;
       returnstruct.startdelay = mpdialog_value("pineappleGunSuccessDialogBuffer", 0);
       break;
-    case #"gadget_health_boost":
-    case #"gadget_cleanse":
+    case # "gadget_health_boost":
+    case # "gadget_cleanse":
       returnstruct.var_17a094cf = playerbundle.var_febcf0b;
       break;
-    case #"eq_concertina_wire":
+    case # "eq_concertina_wire":
       returnstruct.var_17a094cf = playerbundle.var_d5983ddb;
       break;
-    case #"eq_swat_grenade":
-    case #"hash_3f62a872201cd1ce":
-    case #"hash_5825488ac68418af":
+    case # "eq_swat_grenade":
+    case # "hash_3f62a872201cd1ce":
+    case # "hash_5825488ac68418af":
       returnstruct.var_17a094cf = playerbundle.var_bd81e586;
       returnstruct.startdelay = mpdialog_value("nineBangSuccessDialogBuffer", 0);
       break;
-    case #"eq_grapple":
+    case # "eq_grapple":
       returnstruct.var_17a094cf = playerbundle.var_390929f1;
       break;
-    case #"molotov_fire":
-    case #"eq_molotov":
+    case # "molotov_fire":
+    case # "eq_molotov":
       returnstruct.var_17a094cf = playerbundle.var_e64f9f9a;
       returnstruct.startdelay = mpdialog_value("playerDialogBuffer", 0);
       break;
-    case #"gadget_radiation_field":
+    case # "gadget_radiation_field":
       returnstruct.var_17a094cf = playerbundle.var_ad1379f5;
       returnstruct.startdelay = mpdialog_value("radiationFieldPodSuccessDialogBuffer", 0);
       break;
-    case #"eq_sensor":
+    case # "eq_sensor":
       returnstruct.var_17a094cf = playerbundle.var_ef10cbc3;
       break;
-    case #"gadget_supplypod":
+    case # "gadget_supplypod":
       returnstruct.var_17a094cf = playerbundle.var_383d5df3;
       returnstruct.startdelay = mpdialog_value("supplyPodSuccessDialogBuffer", 0);
       break;
-    case #"gadget_vision_pulse":
+    case # "gadget_vision_pulse":
       returnstruct.var_17a094cf = playerbundle.visionpulseabilitysuccess;
       break;
-    case #"eq_localheal":
+    case # "eq_localheal":
       returnstruct.var_17a094cf = playerbundle.var_74dd2839;
       break;
-    case #"gadget_icepick":
+    case # "gadget_icepick":
       returnstruct.var_17a094cf = playerbundle.var_e870e40c;
       break;
-    case #"eq_hawk":
+    case # "eq_hawk":
       returnstruct.var_17a094cf = playerbundle.var_bcaf7574;
       returnstruct.startdelay = 1;
       break;
-    case #"sig_blade":
+    case # "sig_blade":
       returnstruct.var_17a094cf = playerbundle.var_eb02a29a;
       break;
-    case #"eq_smoke":
+    case # "eq_smoke":
       returnstruct.var_17a094cf = playerbundle.var_c6ad4957;
       break;
-    case #"sig_lmg_alt":
-    case #"sig_lmg":
+    case # "sig_lmg_alt":
+    case # "sig_lmg":
       returnstruct.var_17a094cf = playerbundle.scytheweaponsuccess;
       break;
-    case #"eq_shroud":
+    case # "eq_shroud":
       returnstruct.var_17a094cf = playerbundle.var_be9a9d3f;
       break;
     default:
@@ -383,74 +382,74 @@ function_20edb636(weapon, playerbundle) {
 
 function_6bb302ba(weapon, playerbundle) {
   switch (weapon.name) {
-    case #"hero_annihilator":
+    case # "hero_annihilator":
       var_cf38843b = playerbundle.var_fc5812eb;
       break;
-    case #"sig_buckler_dw":
-    case #"sig_buckler_turret":
+    case # "sig_buckler_dw":
+    case # "sig_buckler_turret":
       var_cf38843b = playerbundle.var_4fa3c4aa;
       break;
-    case #"dog_ai_defaultmelee":
+    case # "dog_ai_defaultmelee":
       var_cf38843b = playerbundle.var_4ea15dd3;
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       var_cf38843b = playerbundle.var_772dbd73;
       break;
-    case #"eq_gravityslam":
+    case # "eq_gravityslam":
       var_cf38843b = playerbundle.var_3e1a4fb8;
       break;
-    case #"gun_mini_turret":
+    case # "gun_mini_turret":
       var_cf38843b = playerbundle.var_dbd1897a;
       break;
-    case #"sig_bow_quickshot4":
+    case # "sig_bow_quickshot4":
       var_cf38843b = playerbundle.var_3841aa5a;
       break;
-    case #"hash_5a4932f4b8d8b37a":
+    case # "hash_5a4932f4b8d8b37a":
       var_cf38843b = playerbundle.var_c518a57;
       break;
-    case #"shock_rifle":
-    case #"hero_lightninggun":
+    case # "shock_rifle":
+    case # "hero_lightninggun":
       var_cf38843b = playerbundle.var_c7859303;
       break;
-    case #"eq_tripwire":
+    case # "eq_tripwire":
       var_cf38843b = playerbundle.var_23b68936;
       break;
-    case #"hero_pineapplegun":
+    case # "hero_pineapplegun":
       var_cf38843b = playerbundle.var_bbf7c71f;
       break;
-    case #"gadget_health_boost":
-    case #"gadget_cleanse":
+    case # "gadget_health_boost":
+    case # "gadget_cleanse":
       var_cf38843b = playerbundle.var_26d4d8b3;
       break;
-    case #"eq_concertina_wire":
+    case # "eq_concertina_wire":
       var_cf38843b = playerbundle.var_54475e1e;
       break;
-    case #"gadget_radiation_field":
+    case # "gadget_radiation_field":
       var_cf38843b = playerbundle.var_f613c4d1;
       break;
-    case #"eq_sensor":
+    case # "eq_sensor":
       var_cf38843b = playerbundle.var_f3b38bf6;
       break;
-    case #"gadget_supplypod":
+    case # "gadget_supplypod":
       var_cf38843b = playerbundle.var_54c097dc;
       break;
-    case #"gadget_vision_pulse":
+    case # "gadget_vision_pulse":
       var_cf38843b = playerbundle.var_cf906c68;
       break;
-    case #"eq_localheal":
+    case # "eq_localheal":
       var_cf38843b = playerbundle.var_d32aca42;
       break;
-    case #"molotov_fire":
-    case #"eq_molotov":
+    case # "molotov_fire":
+    case # "eq_molotov":
       var_cf38843b = playerbundle.var_140be686;
       break;
-    case #"gadget_icepick":
+    case # "gadget_icepick":
       var_cf38843b = playerbundle.var_c62c0c00;
       break;
-    case #"sig_blade":
+    case # "sig_blade":
       var_cf38843b = playerbundle.var_c5a434fd;
       break;
-    case #"eq_smoke":
+    case # "eq_smoke":
       var_cf38843b = playerbundle.var_568ad856;
       break;
     default:
@@ -462,10 +461,10 @@ function_6bb302ba(weapon, playerbundle) {
 
 function_506f762f(weapon) {
   switch (weapon.name) {
-    case #"gadget_supplypod":
-    case #"eq_localheal":
-    case #"gadget_health_boost":
-    case #"gadget_cleanse":
+    case # "gadget_supplypod":
+    case # "eq_localheal":
+    case # "gadget_health_boost":
+    case # "gadget_cleanse":
       return true;
   }
 
@@ -530,95 +529,95 @@ function_c8663dbc(weapon, player) {
   }
 
   switch (weapon.name) {
-    case #"eq_emp_grenade":
+    case # "eq_emp_grenade":
       taacomdialog = "jammerWeaponHacked";
       break;
-    case #"eq_tripwire":
+    case # "eq_tripwire":
       taacomdialog = "meshMineWeaponHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"eq_seeker_mine":
+    case # "eq_seeker_mine":
       taacomdialog = "seekerMineWeaponHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"eq_sensor":
+    case # "eq_sensor":
       taacomdialog = "sensorDartHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"ability_smart_cover":
-    case #"gadget_smart_cover":
+    case # "ability_smart_cover":
+    case # "gadget_smart_cover":
       taacomdialog = "smartCoverHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"gadget_spawnbeacon":
+    case # "gadget_spawnbeacon":
       taacomdialog = "spawnBeaconHacked";
       break;
-    case #"gadget_supplypod":
+    case # "gadget_supplypod":
       taacomdialog = "supplyPodHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"trophy_system":
+    case # "trophy_system":
       taacomdialog = "trophyWeaponHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"ac130":
-    case #"inventory_ac130":
+    case # "ac130":
+    case # "inventory_ac130":
       taacomdialog = "ac130Hacked";
       break;
-    case #"ai_tank_marker":
-    case #"tank_robot":
-    case #"inventory_tank_robot":
+    case # "ai_tank_marker":
+    case # "tank_robot":
+    case # "inventory_tank_robot":
       taacomdialog = "aiTankHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"helicopter_comlink":
-    case #"inventory_helicopter_comlink":
-    case #"cobra_20mm_comlink":
+    case # "helicopter_comlink":
+    case # "inventory_helicopter_comlink":
+    case # "cobra_20mm_comlink":
       taacomdialog = "attackChopperHacked";
       break;
-    case #"counteruav":
+    case # "counteruav":
       taacomdialog = "cuavHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"dart":
-    case #"inventory_dart":
+    case # "dart":
+    case # "inventory_dart":
       taacomdialog = "dartHacked";
       break;
-    case #"inventory_drone_squadron":
-    case #"drone_squadron":
+    case # "inventory_drone_squadron":
+    case # "drone_squadron":
       taacomdialog = "droneSquadHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"recon_car":
-    case #"inventory_recon_car":
+    case # "recon_car":
+    case # "inventory_recon_car":
       taacomdialog = "reconCarHacked";
       break;
-    case #"inventory_remote_missile":
-    case #"remote_missile":
+    case # "inventory_remote_missile":
+    case # "remote_missile":
       taacomdialog = "hellstormHacked";
       break;
-    case #"inventory_planemortar":
-    case #"planemortar":
+    case # "inventory_planemortar":
+    case # "planemortar":
       taacomdialog = "lightningStrikeHacked";
       break;
-    case #"overwatch_helicopter":
-    case #"inventory_overwatch_helicopter":
+    case # "overwatch_helicopter":
+    case # "inventory_overwatch_helicopter":
       taacomdialog = "overwatchHelicopterHacked";
       break;
-    case #"straferun":
-    case #"inventory_straferun":
+    case # "straferun":
+    case # "inventory_straferun":
       taacomdialog = "strafeRunHacked";
       break;
-    case #"supplydrop":
+    case # "supplydrop":
       taacomdialog = "supplyDropHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"uav":
+    case # "uav":
       taacomdialog = "uavHacked";
       var_b3fe42a9 = 1;
       break;
-    case #"ultimate_turret":
-    case #"inventory_ultimate_turret":
+    case # "ultimate_turret":
+    case # "inventory_ultimate_turret":
       taacomdialog = "sentryHacked";
       var_b3fe42a9 = 1;
       break;
@@ -697,7 +696,7 @@ function_ee8935da(player) {
 
   commander = "blops_commander";
 
-  if(player.team === #"axis") {
+  if(player.team === # "axis") {
     commander = "cdp_commander";
   }
 

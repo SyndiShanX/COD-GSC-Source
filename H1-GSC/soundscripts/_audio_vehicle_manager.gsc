@@ -139,8 +139,7 @@ avm_begin_loop_data(var_0, var_1, var_2) {
 avm_begin_loop_def(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isarray(var_0)) {
     var_6 = var_0;
-  }
-  else {
+  } else {
     var_6 = [var_0];
   }
 
@@ -167,8 +166,7 @@ avmx_preset_determine_param_map_owner(var_0) {
   if(isDefined(self.loop_data) && isDefined(self.loop_data.loop_under_construction)) {
     var_1 = self.loop_data.loop_under_construction;
 
-    if(isDefined(self.behavior_data)) {
-    }
+    if(isDefined(self.behavior_data)) {}
   } else if(isDefined(self.oneshot_data) && isDefined(self.oneshot_data.oneshot_under_construction))
     var_1 = self.oneshot_data.oneshot_under_construction;
   else if(isDefined(self.behavior_data) && isDefined(self.behavior_data.behavior_under_construction)) {
@@ -379,19 +377,16 @@ avm_add_loops(var_0) {
   if(isstring(var_0)) {
     if(tolower(var_0) == "all") {
       var_1.loops[0] = "all";
-    }
-    else if(tolower(var_0) == "none") {
+    } else if(tolower(var_0) == "none") {
       var_1.loops[0] = "none";
-    }
-    else {
+    } else {
       var_1.loops[var_0] = var_0;
     }
   } else {
     var_1.loops[0] = undefined;
 
     foreach(var_3 in var_0) {
-      if(var_3 != "all" && var_3 != "none") {
-      }
+      if(var_3 != "all" && var_3 != "none") {}
 
       var_1.loops[var_3] = var_3;
     }
@@ -487,7 +482,7 @@ avm_add_envelope(var_0, var_1) {
       }
     } else {
       foreach(var_7 in var_1) {
-      var_5.env_array[var_5.env_array.size] = (var_7[0], var_7[1], 0);
+        var_5.env_array[var_5.env_array.size] = (var_7[0], var_7[1], 0);
       }
     }
   } else
@@ -505,7 +500,7 @@ avm_end_preset_def() {
     var_4 = var_2;
 
     foreach(var_7, var_6 in var_4.param_maps) {
-    self.consolidated_inputs[var_7] = avmx_get_callback(var_7);
+      self.consolidated_inputs[var_7] = avmx_get_callback(var_7);
     }
   }
 
@@ -514,7 +509,7 @@ avm_end_preset_def() {
     var_11 = var_2;
 
     foreach(var_7, var_6 in var_11.param_maps) {
-    self.consolidated_inputs[var_7] = avmx_get_callback(var_7);
+      self.consolidated_inputs[var_7] = avmx_get_callback(var_7);
     }
   }
 
@@ -523,7 +518,7 @@ avm_end_preset_def() {
     var_15 = var_2;
 
     foreach(var_7, var_6 in var_15.param_maps) {
-    self.consolidated_inputs[var_7] = avmx_get_callback(var_7);
+      self.consolidated_inputs[var_7] = avmx_get_callback(var_7);
     }
   }
 
@@ -567,15 +562,13 @@ avmx_set_instance_master_volume(var_0, var_1) {
     if(var_9 < 0) {
       if(var_2.master_volume > var_0) {
         var_2.master_volume = max(0, var_2.master_volume + var_9);
-      }
-      else {
+      } else {
         break;
       }
     } else if(var_9 > 0) {
       if(var_2.master_volume < var_0) {
         var_2.master_volume = min(1.0, var_2.master_volume + var_9);
-      }
-      else {
+      } else {
         break;
       }
     }
@@ -853,11 +846,11 @@ vm2x_init_param_io_struct(var_0) {
   var_1 = self;
 
   foreach(var_4, var_3 in var_0.smoothed_input) {
-  var_0.smoothed_input[var_4] = 0;
+    var_0.smoothed_input[var_4] = 0;
   }
 
   foreach(var_4, var_3 in var_0.physical_output) {
-  var_0.physical_output[var_4] = 1.0;
+    var_0.physical_output[var_4] = 1.0;
   }
 }
 
@@ -905,11 +898,9 @@ avmx_update_loops() {
 
     if(var_8 < 400) {
       var_9 = 1.0;
-    }
-    else if(var_8 > 1500) {
+    } else if(var_8 > 1500) {
       var_9 = 10.0;
-    }
-    else {
+    } else {
       var_9 = 1.0 + 9.0 * ((var_8 - 400) / 1100);
     }
 
@@ -928,8 +919,7 @@ avmx_set_loop_play_state(var_0, var_1) {
       } else if(var_1 == 0 && var_0.play_mode != 0) {
         var_2 avmx_stop_loop(var_0);
         var_0.play_mode = 0;
-      } else {
-      }
+      } else {}
 
       break;
     case "soundevent":
@@ -955,7 +945,7 @@ avmx_map_io(var_0, var_1) {
   var_7 = [];
 
   foreach(var_10, var_9 in var_3.consolidated_inputs) {
-  var_7[var_10] = var_2[[var_9]]();
+    var_7[var_10] = var_2[[var_9]]();
   }
 
   foreach(var_12 in var_4.param_maps) {
@@ -965,8 +955,7 @@ avmx_map_io(var_0, var_1) {
 
     if(var_14 > var_15) {
       var_16 = var_12.smooth_up;
-    }
-    else {
+    } else {
       var_16 = var_12.smooth_down;
     }
 
@@ -994,7 +983,7 @@ avmx_update_loop_ducking_scalar() {
   self.loop_duck_scalar = 1.0;
 
   foreach(var_1 in self.oneshot_duck_vals) {
-  self.loop_duck_scalar = self.loop_duck_scalar * var_1;
+    self.loop_duck_scalar = self.loop_duck_scalar * var_1;
   }
 }
 
@@ -1016,7 +1005,7 @@ avmx_update_instance_loop_assets(var_0) {
     }
 
     foreach(var_5 in var_0.snd_ents) {
-    var_5 avmx_update_sound_ent_output_param(var_7, var_3);
+      var_5 avmx_update_sound_ent_output_param(var_7, var_3);
     }
   }
 }
@@ -1051,15 +1040,13 @@ avmx_set_loop_volume(var_0, var_1, var_2, var_3) {
     if(var_2 < 0) {
       if(var_0.volume > var_1) {
         var_0.volume = max(0, var_0.volume + var_2);
-      }
-      else {
+      } else {
         break;
       }
     } else if(var_2 > 0) {
       if(var_0.volume < var_1) {
         var_0.volume = min(1.0, var_0.volume + var_2);
-      }
-      else {
+      } else {
         break;
       }
     }
@@ -1158,11 +1145,9 @@ avmx_state_enter_action_function(var_0, var_1, var_2) {
 
     if(var_24 < 400) {
       var_25 = 1.0;
-    }
-    else if(var_24 > 1500) {
+    } else if(var_24 > 1500) {
       var_25 = 10.0;
-    }
-    else {
+    } else {
       var_25 = 1.0 + 9.0 * ((var_24 - 400) / 1100);
     }
 
@@ -1186,7 +1171,7 @@ avmx_state_enter_action_init_data(var_0, var_1) {
   if(isDefined(var_3.loops[0])) {
     if(var_3.loops[0] == "all") {
       foreach(var_5 in var_2.loop_list) {
-      var_5.volume = 1.0;
+        var_5.volume = 1.0;
       }
     }
   } else {
@@ -1211,7 +1196,7 @@ avmx_state_exit_action_function(var_0, var_1) {
       var_9 = var_6.ps_item.fadeout_time;
 
       foreach(var_12, var_11 in var_8) {
-      var_11 thread avmx_stop_snd_ent(var_9);
+        var_11 thread avmx_stop_snd_ent(var_9);
       }
     }
   }
@@ -1275,7 +1260,7 @@ avmx_state_enter_action_play_oneshots(var_0, var_1) {
         var_14 = var_2 avmx_start_oneshot_alias(var_9, var_13);
 
         foreach(var_17, var_16 in var_9.curr_io.physical_output) {
-        var_14 avmx_update_sound_ent_output_param(var_17, var_16);
+          var_14 avmx_update_sound_ent_output_param(var_17, var_16);
         }
 
         if(var_12) {
@@ -1306,7 +1291,7 @@ avmx_continuously_update_snd_ent(var_0, var_1) {
 
     if(isDefined(var_1)) {
       foreach(var_7, var_6 in var_0.curr_io.physical_output) {
-      var_1 avmx_update_sound_ent_output_param(var_7, var_6);
+        var_1 avmx_update_sound_ent_output_param(var_7, var_6);
       }
     }
 
@@ -1324,14 +1309,13 @@ avmx_state_enter_action_play_loops(var_0, var_1) {
   if(isDefined(var_6[0])) {
     if(var_6[0] == "all") {
       foreach(var_9, var_8 in var_2.loop_list) {
-      avmx_set_loop_play_state(var_8, 1);
+        avmx_set_loop_play_state(var_8, 1);
       }
     } else if(var_6[0] == "none") {
       foreach(var_9, var_8 in var_2.loop_list) {
-      avmx_set_loop_play_state(var_8, 0);
+        avmx_set_loop_play_state(var_8, 0);
       }
-    } else {
-    }
+    } else {}
   } else if(var_6.size > 0) {
     var_11 = [];
     var_12 = [];
@@ -1346,11 +1330,11 @@ avmx_state_enter_action_play_loops(var_0, var_1) {
     }
 
     foreach(var_9, var_8 in var_11) {
-    avmx_set_loop_play_state(var_8, 1);
+      avmx_set_loop_play_state(var_8, 1);
     }
 
     foreach(var_9, var_8 in var_12) {
-    avmx_set_loop_play_state(var_8, 0);
+      avmx_set_loop_play_state(var_8, 0);
     }
   }
 }
@@ -1658,8 +1642,7 @@ input_player_pdrone_look() {
 
   if(var_1 > var_2) {
     return var_1;
-  }
-  else {
+  } else {
     return var_2;
   }
 }
@@ -1897,8 +1880,7 @@ avmx_get_oneshot_update_mode(var_0) {
 
   if(isstring(var_0)) {
     var_3 = var_1.oneshot_list[var_0].ps_item;
-  }
-  else {
+  } else {
     var_3 = var_0.ps_item;
   }
 
@@ -1921,8 +1903,7 @@ avmx_map_input(var_0, var_1) {
 
   if(isDefined(var_3.env_function)) {
     var_4 = [[var_3.env_function]](var_0);
-  }
-  else {
+  } else {
     var_4 = piecewiselinearlookup(var_0, var_3.env_array);
   }
 
@@ -1957,7 +1938,7 @@ avmx_stop_loop(var_0) {
   var_0.snd_ents = [];
 
   foreach(var_4 in var_2) {
-  var_4 thread avmx_stop_snd_ent(var_0.ps_item.fadeout_time);
+    var_4 thread avmx_stop_snd_ent(var_0.ps_item.fadeout_time);
   }
 }
 
@@ -1985,11 +1966,11 @@ vm2x_fadeout_vehicle(var_0) {
   var_1 = self;
 
   foreach(var_3 in var_1.loop_list) {
-  var_3 avmx_fade_stop_and_delete_sound_obj(var_0);
+    var_3 avmx_fade_stop_and_delete_sound_obj(var_0);
   }
 
   foreach(var_6 in var_1.oneshot_list) {
-  var_6 avmx_fade_stop_and_delete_sound_obj(var_0);
+    var_6 avmx_fade_stop_and_delete_sound_obj(var_0);
   }
 }
 
@@ -2031,7 +2012,7 @@ vm2x_delete_vehicle_sound_ents() {
 
   foreach(var_5 in var_0.oneshot_list) {
     foreach(var_7 in var_5.snd_ents) {
-    var_7 thread avmx_stop_snd_ent(0.05);
+      var_7 thread avmx_stop_snd_ent(0.05);
     }
 
     var_5.snd_ents = [];

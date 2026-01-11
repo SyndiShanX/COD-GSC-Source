@@ -57,8 +57,7 @@ findstaircorner(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(var_8 < 0) {
     var_7 = var_7 + var_4;
-  }
-  else {
+  } else {
     var_7 = var_7 + var_2;
     var_7 = var_7 + (0, 0, var_8);
   }
@@ -87,8 +86,7 @@ getcurrentanimdisplacement(var_0, var_1, var_2) {
 
     if(var_6 < var_3) {
       var_8 = getmovedelta(var_0, var_4, var_7);
-    }
-    else {
+    } else {
       var_9 = var_6 - var_3;
       var_10 = var_9 / var_3;
       var_8 = getmovedelta(var_0, var_4, 1);
@@ -122,8 +120,7 @@ distancebetweentwolines(var_0, var_1, var_2, var_3) {
 
     if(var_6 > var_7) {
       var_12 = var_8 / var_6;
-    }
-    else {
+    } else {
       var_12 = var_9 / var_7;
     }
   } else {
@@ -306,8 +303,7 @@ preparedetectedstairstransition() {
 
   if(isDefined(self.stairs_old_moveplaybackrate)) {
     self notify("stair_transition_to_transition");
-  }
-  else {
+  } else {
     self.stairs_old_moveplaybackrate = self.stairstransition["stairs_old_moveplaybackrate"];
   }
 
@@ -345,8 +341,7 @@ getanimstarttime(var_0, var_1, var_2) {
 
     if(var_13 < var_8) {
       var_10 = var_9;
-    }
-    else {
+    } else {
       var_11 = var_9;
     }
 
@@ -386,8 +381,7 @@ checktransition_up_in(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_1 - self.lookaheaddist > 15) {
     var_4 = var_4 - var_3 * 15;
-  }
-  else {
+  } else {
     var_13 = (var_1 + self.lookaheaddist) * 0.5;
     var_4 = var_4 - var_3 * var_13;
   }
@@ -569,15 +563,13 @@ getexpectedstairstransition(var_0, var_1, var_2, var_3) {
 
     if(var_12["fraction"] < 1) {
       var_4 = checktransition_up_in(var_12, var_9, var_10, var_6, var_11, var_5);
-    }
-    else {
+    } else {
       var_4 = checktransition_down_in(var_9, var_11, var_6, var_5);
     }
   } else if(var_8) {
     if(self.stairsstate == "up") {
       var_4 = checktransition_up_out(var_6);
-    }
-    else if(self.stairsstate == "down") {
+    } else if(self.stairsstate == "down") {
       var_4 = checktransition_down_out(var_6);
     }
   }
@@ -605,8 +597,7 @@ getanimationcontext(var_0) {
 
   if(var_0 == var_1["animArray"][2]) {
     return "turn_L90";
-  }
-  else if(var_0 == var_1["animArray"][6]) {
+  } else if(var_0 == var_1["animArray"][6]) {
     return "turn_R90";
   }
 

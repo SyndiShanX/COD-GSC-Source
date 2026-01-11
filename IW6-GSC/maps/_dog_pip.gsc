@@ -206,7 +206,7 @@ pip_open() {
   var_0 = 0.1;
 
   foreach(var_3, var_2 in level.pip.borders) {
-  var_2 thread pip_open_l_corner(var_3, var_0);
+    var_2 thread pip_open_l_corner(var_3, var_0);
   }
 
   wait(var_0 + 0.05);
@@ -320,7 +320,7 @@ dog_pip_close() {
   var_0 = 0.1;
 
   foreach(var_3, var_2 in level.pip.borders) {
-  var_2 thread pip_close_l_corner(var_3, var_0);
+    var_2 thread pip_close_l_corner(var_3, var_0);
   }
 
   level.pip.static_overlay scaleovertime(var_0, level.pip.closed_width, level.pip.closed_height);

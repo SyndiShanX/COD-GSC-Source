@@ -10,8 +10,7 @@
 #include maps\la_plaza;
 #include maps\createfx\la_1b_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["flesh_hit"] = loadfx("impacts/fx_flesh_hit");

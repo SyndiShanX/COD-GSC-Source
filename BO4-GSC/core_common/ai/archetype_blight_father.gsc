@@ -8,7 +8,6 @@
 #include scripts\core_common\ai\systems\blackboard;
 #include scripts\core_common\ai\zombie_utility;
 #include scripts\core_common\spawner_shared;
-
 #namespace archetypeblightfather;
 
 autoexec main() {

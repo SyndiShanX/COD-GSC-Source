@@ -264,8 +264,7 @@ hud_init() {
     hudelems[i].sort = 20;
     if(i == div) {
       hudelems[i].alpha = 1;
-    }
-    else {
+    } else {
       hudelems[i].alpha = alpha;
     }
 
@@ -383,11 +382,10 @@ setcurrentgroup(group) {
   index = 0;
   div = int(level.group_hudelems.size / 2);
   for(i = 0; i < keys.size; i++) {
-    if(keys[i] == group) {
+    if(keys[i] == group) {}
+    index = i;
+    break;
   }
-      index = i;
-      break;
-    }
 
   for(i = 0; i < level.group_hudelems.size; i++) {
     level.group_hudelems[i] clearalltextafterhudelem();
@@ -422,11 +420,10 @@ setgroup_up() {
   index = undefined;
   keys = getarraykeys(level.place_node_group);
   for(i = 0; i < keys.size; i++) {
-    if(keys[i] == level.place_node_current_group) {
+    if(keys[i] == level.place_node_current_group) {}
+    index = i + 1;
+    break;
   }
-      index = i + 1;
-      break;
-    }
   if(index == keys.size) {
     index = 0;
   }
@@ -437,11 +434,10 @@ setgroup_down() {
   index = undefined;
   keys = getarraykeys(level.place_node_group);
   for(i = 0; i < keys.size; i++) {
-    if(keys[i] == level.place_node_current_group) {
+    if(keys[i] == level.place_node_current_group) {}
+    index = i - 1;
+    break;
   }
-      index = i - 1;
-      break;
-    }
   if(index < 0) {
     index = keys.size - 1;
   }
@@ -486,8 +482,7 @@ playerInit() {
 button_modifier() {
   while(1) {
     foreach(button, blah in level.button_modifier_func) {
-    if(self buttonpressed(button)) {
-    }
+      if(self buttonpressed(button)) {}
       [
         [level.button_modifier_func[button]]
       ]();
@@ -509,14 +504,12 @@ button_monitor() {
   while(1) {
     foreach(button, lalala in level.button_func) {
       if(self buttonpressed(button)) {
-        [
-          [level.button_func[button]]
-        ]();
+        [[level.button_func[button]]]();
 
         if(!level.button_func_isflow[button]) {
           while(self buttonpressed(button))
         }
-            wait .05;
+        wait .05;
         break;
       }
     }
@@ -792,8 +785,7 @@ is_player_looking_at_a_wall() {
   flat_normal_angle = flat_angle(normal_angle);
   if(VectorDot(anglesToForward(flat_normal_angle), anglesToForward(normal_angle)) == 1) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -838,8 +830,7 @@ snap_number_to_nearest_grid(number, grid) {
   remainder = snap - snapped;
   if(remainder < -.5) {
     snapped--;
-  }
-  else if(remainder > .5) {
+  } else if(remainder > .5) {
     snapped++;
   }
   return snapped * grid;
@@ -901,8 +892,7 @@ node_is_invalid(origin) {
 
 node_is_touching(origin) {
   foreach(node in level.placed_nodes) {
-  if(distance(origin, node.origin) < 32) {
-  }
+    if(distance(origin, node.origin) < 32) {}
     level.coliding_node = node;
     return true;
   }
@@ -942,8 +932,7 @@ grid_down() {
 grid_toggle() {
   if(level.node_grid == 256) {
     level.node_grid = 0;
-  }
-  else {
+  } else {
     level.node_grid = 256;
   }
   hud_update_gridsize();
@@ -1203,8 +1192,7 @@ draw_lines_to_connectible_nodes(org) {
   foreach(node in level.near_nodes) {
     if(!isDefined(Node.classname)) {
       line(org, node.origin + (0, 0, 16), (0, .7, .7), true);
-    }
-    else {
+    } else {
       Line(org, node.origin, (0, 1, 0), true);
     }
   }
@@ -1249,16 +1237,16 @@ manage_nearnodes() {
 
         //clear out the old near nodes that are no longer valid (.05 time wait may invalidate) since there generally so few this is a quick check)
         foreach(obj in level.near_nodes) {
-        if(distancesquared((level.preview_node.origin[0], level.preview_node.origin[1], 0), (obj.origin[0], obj.origin[1], 0)) <= 65536)
+          if(distancesquared((level.preview_node.origin[0], level.preview_node.origin[1], 0), (obj.origin[0], obj.origin[1], 0)) <= 65536)
         }
-          near_nodes[near_nodes.size] = obj;
+        near_nodes[near_nodes.size] = obj;
 
         newArray = [];
 
         foreach(obj2 in array) {
-        if(distancesquared((level.preview_node.origin[0], level.preview_node.origin[1], 0), (obj2.origin[0], obj2.origin[1], 0)) <= 65536)
+          if(distancesquared((level.preview_node.origin[0], level.preview_node.origin[1], 0), (obj2.origin[0], obj2.origin[1], 0)) <= 65536)
         }
-          newArray[newArray.size] = obj2;
+        newArray[newArray.size] = obj2;
 
         // there are usually few to merge. not worried about this array_merge call.
         level.near_nodes = array_merge(newArray, near_nodes);

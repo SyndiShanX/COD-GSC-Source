@@ -72,8 +72,7 @@ init_minigun_ring() {
 
   if(isDefined(level._minigun_ring_clip)) {
     level._minigun_ring_clip linkto(level._minigun_ring);
-  }
-  else {
+  } else {
     iprintlnbold("BUG: no level._minigun_ring_clip");
   }
 
@@ -112,8 +111,7 @@ init_ammo_ring() {
 
   if(isDefined(level._ammo_ring_clip)) {
     level._ammo_ring_clip linkto(level._ammo_ring);
-  }
-  else {
+  } else {
     iprintlnbold("BUG: no level._ammo_ring_clip");
   }
 

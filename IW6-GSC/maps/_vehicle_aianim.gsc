@@ -108,8 +108,7 @@ guy_enter(var_0, var_1) {
 
   if(isDefined(var_6.rider_func)) {
     var_0[[var_6.rider_func]]();
-  }
-  else {
+  } else {
     if(isDefined(self.parachute_unload)) {
       var_0.parachute_unload = 1;
     }
@@ -222,8 +221,7 @@ guy_deathimate_me(var_0, var_1) {
 
   if(isai(var_0)) {
     var_0 animscripts\shared::dropallaiweapons();
-  }
-  else {
+  } else {
     detach_models_with_substr(var_0, "weapon_");
   }
 
@@ -317,8 +315,7 @@ handle_detached_guys_check() {
 vehicle_hasavailablespots() {
   if(level.vehicle_aianims[self.classname].size - self.runningtovehicle.size) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -344,8 +341,7 @@ vehicle_loaded_if_full(var_0) {
   } else if(!var_0.runningtovehicle.size && var_0.riders.size) {
     if(var_0.usedpositions[0]) {
       var_0 maps\_utility::ent_flag_set("loaded");
-    }
-    else {
+    } else {
       var_0 thread vehicle_reload();
     }
   }
@@ -410,8 +406,7 @@ guy_runtovehicle(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_0.script_startingposition)) {
     var_7 = var_1 vehicle_getinstart(var_0.script_startingposition);
-  }
-  else if(!var_1.usedpositions[0]) {
+  } else if(!var_1.usedpositions[0]) {
     var_7 = var_1 vehicle_getinstart(0);
 
     if(var_2) {
@@ -481,8 +476,7 @@ guy_runtovehicle(var_0, var_1, var_2, var_3) {
 
     if(isDefined(var_13.vehicle_getinsoundtag)) {
       var_8 = var_1 gettagorigin(var_13.vehicle_getinsoundtag);
-    }
-    else {
+    } else {
       var_8 = var_1.origin;
     }
 
@@ -555,8 +549,7 @@ guy_becomes_real_ai(var_0, var_1) {
 
   if(var_0.drone_delete_on_unload == 1) {
     var_0 delete();
-  }
-  else {
+  } else {
     var_0 = maps\_utility::makerealai(var_0);
     var_2 = self.classname;
     var_3 = level.vehicle_aianims[var_2].size;
@@ -578,8 +571,7 @@ link_to_sittag(var_0, var_1, var_2, var_3) {
 
   if(var_3 && !isDefined(var_0.script_drone)) {
     var_0 linktoblendtotag(self, var_1, 0);
-  }
-  else {
+  } else {
     var_0 linkto(self, var_1, var_2, (0, 0, 0));
   }
 }
@@ -682,8 +674,7 @@ driver_idle_speed(var_0, var_1) {
   for(;;) {
     if(self vehicle_getspeed() == 0) {
       var_0.vehicle_idle = var_2.idle_animstop;
-    }
-    else {
+    } else {
       var_0.vehicle_idle = var_2.idle_anim;
     }
 
@@ -739,8 +730,7 @@ guy_turret_fire(var_0, var_1) {
   if(isDefined(var_2.turret_fire)) {
     if(isDefined(var_2.turret_fire_tag)) {
       animontag(var_0, var_2.turret_fire_tag, var_2.turret_fire);
-    }
-    else {
+    } else {
       animontag(var_0, var_2.sittag, var_2.turret_fire);
     }
   }
@@ -946,7 +936,7 @@ get_unload_group() {
   }
 
   foreach(var_4 in var_1) {
-  var_0[var_4] = var_4;
+    var_0[var_4] = var_4;
   }
 
   return var_0;
@@ -1132,8 +1122,7 @@ getout_rigspawn(var_0, var_1, var_2) {
 
   if(isDefined(self.attach_model_override) && isDefined(self.attach_model_override[var_4.fastroperig])) {
     var_5 = 1;
-  }
-  else {
+  } else {
     var_5 = 0;
   }
 
@@ -1163,8 +1152,7 @@ check_sound_tag_dupe(var_0) {
 
   if(!isDefined(self.sound_tag_dupe[var_0])) {
     self.sound_tag_dupe[var_0] = 1;
-  }
-  else {
+  } else {
     var_1 = 1;
   }
 
@@ -1269,8 +1257,7 @@ guy_unload(var_0, var_1) {
 
   if(!var_8 && var_0.standing) {
     guy_stand_down(var_0, var_1);
-  }
-  else if(!var_8 && !var_0.vehicle_idling && isDefined(var_0.vehicle_idle)) {
+  } else if(!var_8 && !var_0.vehicle_idling && isDefined(var_0.vehicle_idle)) {
     var_0 waittill("idle");
   }
 
@@ -1292,8 +1279,7 @@ guy_unload(var_0, var_1) {
 
   if(isDefined(var_2.bnoanimunload)) {
     var_9 = 1;
-  }
-  else if(!isDefined(var_2.getout) || !isDefined(self.script_unloadmgguy) && (isDefined(var_2.bisgunner) && var_2.bisgunner) || isDefined(self.script_keepdriver) && var_1 == 0) {
+  } else if(!isDefined(var_2.getout) || !isDefined(self.script_unloadmgguy) && (isDefined(var_2.bisgunner) && var_2.bisgunner) || isDefined(self.script_keepdriver) && var_1 == 0) {
     thread guy_idle(var_0, var_1);
     return;
   }
@@ -1312,21 +1298,17 @@ guy_unload(var_0, var_1) {
 
   if(isDefined(var_2.exittag)) {
     var_10 = var_2.exittag;
-  }
-  else {
+  } else {
     var_10 = var_2.sittag;
   }
 
   if(var_8 && var_0.standing) {
     var_11 = var_2.getout_combat;
-  }
-  else if(isDefined(var_0.get_out_override)) {
+  } else if(isDefined(var_0.get_out_override)) {
     var_11 = var_0.get_out_override;
-  }
-  else if(isDefined(var_0.playerpiggyback) && isDefined(var_2.player_getout)) {
+  } else if(isDefined(var_0.playerpiggyback) && isDefined(var_2.player_getout)) {
     var_11 = var_2.player_getout;
-  }
-  else {
+  } else {
     var_11 = var_2.getout;
   }
 
@@ -1443,8 +1425,7 @@ guy_unload(var_0, var_1) {
 
       if(isDefined(var_2.parachute_function)) {
         var_15 parachute_unload(var_0, var_17, self.unload_model_unload_anim, var_11, var_2.parachute_function);
-      }
-      else {
+      } else {
         var_15 parachute_unload(var_0, var_17, self.unload_model_unload_anim, var_11);
       }
 
@@ -1534,8 +1515,7 @@ parachute_unload(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_1 thread parachute_notetrack_logic("parachute_unload", "show_parachute", var_4);
-  }
-  else {
+  } else {
     var_1 thread parachute_notetrack_logic("parachute_unload", "show_parachute");
   }
 
@@ -1650,8 +1630,7 @@ animontag(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(self.modeldummy)) {
     var_6 = self.modeldummy;
-  }
-  else {
+  } else {
     var_6 = self;
   }
 
@@ -2024,8 +2003,7 @@ guy_blowup(var_0) {
 
   if(isai(var_0)) {
     var_0 animscripts\shared::dropallaiweapons();
-  }
-  else {
+  } else {
     detach_models_with_substr(var_0, "weapon_");
   }
 
@@ -2147,8 +2125,7 @@ get_availablepositions(var_0) {
 getanimatemodel() {
   if(isDefined(self.modeldummy)) {
     return self.modeldummy;
-  }
-  else {
+  } else {
     return self;
   }
 }

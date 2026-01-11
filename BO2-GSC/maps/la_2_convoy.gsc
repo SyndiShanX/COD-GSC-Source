@@ -165,8 +165,7 @@ harper_fires_from_van() {
   ai_harper thread _harper_fires_at_targets();
 }
 
-_harper_fires_at_targets() {
-}
+_harper_fires_at_targets() {}
 
 _init_cougar_turret(str_type) {
   self endon("death");
@@ -247,8 +246,7 @@ convoy_vehicle_think(node_or_string) {
 
   if(isstring(node_or_string)) {
     nd_path = convoy_get_path_node(node_or_string);
-  }
-  else {
+  } else {
     nd_path = node_or_string;
   }
 
@@ -365,8 +363,7 @@ convoy_vehicle_think_van(node_or_string) {
 
   if(isstring(node_or_string)) {
     nd_path = convoy_get_path_node(node_or_string);
-  }
-  else {
+  } else {
     nd_path = node_or_string;
   }
 
@@ -503,8 +500,7 @@ g20_2_death() {
 }
 
 potus_death() {
-  if(flag("trenchruns_start") && !flag("eject_sequence_started")) {
-  }
+  if(flag("trenchruns_start") && !flag("eject_sequence_started")) {}
 
   wait 1;
 
@@ -526,8 +522,7 @@ convoy_regroup_check() {
 
     if(n_vehicles == n_vehicles_stopped) {
       flag_set("convoy_in_position");
-    }
-    else {
+    } else {
       flag_clear("convoy_in_position");
     }
 
@@ -586,11 +581,9 @@ convoy_set_leader() {
 
   if(flag("G20_1_saved") && !flag("G20_1_dead")) {
     level.convoy.leader = level.convoy.vh_g20_1;
-  }
-  else if(flag("G20_2_saved") && !flag("G20_2_dead")) {
+  } else if(flag("G20_2_saved") && !flag("G20_2_dead")) {
     level.convoy.leader = level.convoy.vh_g20_2;
-  }
-  else {
+  } else {
     level.convoy.leader = level.convoy.vh_potus;
   }
 }
@@ -651,8 +644,7 @@ convoy_distance_check(n_distance, n_distance_warning_percentage) {
 
     if(n_delta > n_distance_warning) {
       flag_clear("player_in_range_of_convoy");
-    }
-    else {
+    } else {
       flag_set("player_in_range_of_convoy");
     }
 
@@ -686,12 +678,10 @@ convoy_vehicle_damage(einflictor, eattacker, idamage, idflags, type, sweapon, vp
 
     if(!isDefined(self.player_damage)) {
       self.player_damage = 0;
-    }
-    else {
+    } else {
       if(issubstr(sweapon, "missile_turret")) {
         self.player_damage = self.player_damage + 200;
-      }
-      else {
+      } else {
         self.player_damage = self.player_damage + 10;
       }
 
@@ -706,15 +696,13 @@ convoy_vehicle_damage(einflictor, eattacker, idamage, idflags, type, sweapon, vp
 
     if(str_team == "allies") {
       return 0;
-    }
-    else if(str_team == "axis") {
+    } else if(str_team == "axis") {
       should_flash = 1;
     }
   } else if(isDefined(eattacker.classname) && eattacker.classname == "script_vehicle") {
     if(issubstr(eattacker.vehicletype, "cougar") || eattacker == level.convoy.vh_van) {
       should_flash = 0;
-    }
-    else {
+    } else {
       should_flash = 1;
     }
 

@@ -356,8 +356,7 @@ landed_to_basement_handler() {
 
   if(0) {
     thread maps\icbm_code::min_spec_kill_fx();
-  }
-  else {
+  } else {
     level thread maps\icbm_fx::playereffect();
   }
 
@@ -373,8 +372,7 @@ landed_to_basement_handler() {
 
   if(getdvarint("use_old_intro") == 1) {
     maps\icbm_dialog::dialog_intro();
-  }
-  else {
+  } else {
     maps\icbm_dialog::dialog_intro_h1();
   }
 
@@ -598,8 +596,7 @@ rescue_sequence() {
 
   if(getdvarint("use_old_griggs_rescue") == 1) {
     maps\_utility::trigger_wait("player_is_behind_griggs", "targetname");
-  }
-  else {
+  } else {
     level.player thread disable_weapon_when_near_griggs();
   }
 
@@ -895,7 +892,7 @@ play_power_alarm() {
   common_scripts\utility::flag_wait("lights_on");
 
   foreach(var_2 in var_0) {
-  var_2 thread common_scripts\utility::play_loopsound_in_space("h1_emt_alarm_power_on", var_2.origin);
+    var_2 thread common_scripts\utility::play_loopsound_in_space("h1_emt_alarm_power_on", var_2.origin);
   }
 }
 
@@ -1140,8 +1137,7 @@ meet_second_squad_handler() {
 
   if(getdvarint("use_old_endrun") == 1) {
     var_0 thread maps\icbm_code::anim_reach_and_approach_solo_set_flag(level.price, "icbm_end_price", "price_reached_end_anim");
-  }
-  else {
+  } else {
     var_0 thread maps\icbm_code::anim_reach_solo_set_flag(level.price, "icbm_end_price_idle", "price_reached_end_anim");
     thread final_anim_price_idle(var_0);
   }
@@ -1161,8 +1157,7 @@ meet_second_squad_handler() {
 
   if(getdvarint("use_old_endrun") == 1) {
     var_0 thread maps\icbm_code::anim_reach_and_approach_solo_set_flag(level.gm5, "icbm_end_sniper", "gm5_reached_end_anim");
-  }
-  else {
+  } else {
     var_0 thread maps\icbm_code::anim_reach_solo_set_flag(level.gm5, "icbm_end_sniper", "gm5_reached_end_anim");
   }
 
@@ -1184,8 +1179,7 @@ meet_second_squad_handler() {
 final_anim_then_run_off(var_0) {
   if(getdvarint("use_old_endrun") == 1) {
     var_0 thread maps\_anim::anim_custom_animmode_solo(level.gm5, "gravity", "icbm_end_sniper");
-  }
-  else {
+  } else {
     wait 0.8;
     var_0 thread maps\_anim::anim_single_solo(level.gm5, "icbm_end_sniper");
   }
@@ -1196,8 +1190,7 @@ final_anim_then_run_off(var_0) {
 
   if(getdvarint("use_old_endrun") == 1) {
     var_0 maps\_anim::anim_custom_animmode_solo(level.price, "gravity", "icbm_end_price");
-  }
-  else {
+  } else {
     var_0 maps\_anim::anim_single_solo(level.price, "icbm_end_price");
   }
 
@@ -1257,8 +1250,7 @@ missile_launch() {
 
   if(getdvarint("use_old_endrun") == 1) {
     level.price maps\_anim::anim_single_queue(level.price, "onemissile");
-  }
-  else {
+  } else {
     level.price waittillmatch("single anim", "dialog");
     wait 3;
   }

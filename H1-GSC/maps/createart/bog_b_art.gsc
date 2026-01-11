@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\bog_b_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\bog_b_fog::main();
   }
 }

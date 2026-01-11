@@ -81,8 +81,7 @@ a10_mechanic_off(var_0) {
 
   if(isDefined(var_0) && var_0) {
     level.player setweaponhudiconoverride("actionslot1", "none");
-  }
-  else {
+  } else {
     level.player setweaponhudiconoverride("actionslot1", "dpad_killstreak_a10_support_inactive");
   }
 
@@ -118,8 +117,7 @@ a10_strafe_mechanic(var_0, var_1, var_2, var_3) {
 
     if(level.a10_uses == 0) {
       maps\_utility::display_hint("hint_a10");
-    }
-    else {
+    } else {
       thread a10_delayed_hint();
     }
 
@@ -275,21 +273,20 @@ a10_warthog_strafe(var_0, var_1, var_2, var_3) {
 
   if(maps\_utility::is_gen4()) {
     level.player lerpfov(70, 0.05);
-  }
-  else {
+  } else {
     level.player lerpfov(55, 0.05);
   }
 
   var_13 = getaiarray("allies");
 
   foreach(var_15 in var_13) {
-  var_15.no_friendly_fire_penalty = 1;
+    var_15.no_friendly_fire_penalty = 1;
   }
 
   var_17 = level.drones["allies"].array;
 
   foreach(var_19 in var_17) {
-  var_19.no_friendly_fire_penalty = 1;
+    var_19.no_friendly_fire_penalty = 1;
   }
 
   common_scripts\utility::flag_clear("player_strafe_done");
@@ -333,7 +330,7 @@ a10_warthog_strafe(var_0, var_1, var_2, var_3) {
   level.player common_scripts\utility::delaycall(0.35, ::freezecontrols, 0);
 
   foreach(var_27 in var_22) {
-  thread maps\_vehicle::gopath(var_27);
+    thread maps\_vehicle::gopath(var_27);
   }
 
   level.player stopshellshock();
@@ -356,13 +353,13 @@ a10_warthog_strafe(var_0, var_1, var_2, var_3) {
   var_13 = getaiarray("allies");
 
   foreach(var_15 in var_13) {
-  var_15.no_friendly_fire_penalty = undefined;
+    var_15.no_friendly_fire_penalty = undefined;
   }
 
   var_17 = level.drones["allies"].array;
 
   foreach(var_19 in var_17) {
-  var_19.no_friendly_fire_penalty = undefined;
+    var_19.no_friendly_fire_penalty = undefined;
   }
 
   var_21 a10_strafe_cleanup(var_12, var_22, var_4, var_3);
@@ -453,8 +450,7 @@ a10_strafe_cleanup(var_0, var_1, var_2, var_3) {
 
   if(isDefined(level.lasta10cinematic)) {
     cinematicingameloop("a10tabletinterrupted");
-  }
-  else {
+  } else {
     cinematicingameloop("a10tabletout");
   }
 
@@ -788,15 +784,13 @@ a10_player_aftermission_report() {
   if(var_1 > 0 && var_0 > 0) {
     if(common_scripts\utility::cointoss()) {
       var_2 = "homcom_dcon_enemyarmorconfirmed";
-    }
-    else {
+    } else {
       var_2 = "homcom_dcon_confirmedarmorandinfantry";
     }
   } else if(var_1 > 0) {
     if(common_scripts\utility::cointoss()) {
       var_2 = "homcom_dcon_confirmedtankkillsgood";
-    }
-    else {
+    } else {
       var_2 = "homcom_dcon_enemyarmorconfirmed";
     }
   } else if(var_0 > 0 && var_0 < 10)
@@ -1064,8 +1058,7 @@ a10_hud_set_id() {
 
     if(common_scripts\utility::cointoss()) {
       var_3 = randomint(10);
-    }
-    else {
+    } else {
       var_3 = common_scripts\utility::random(["A", "Y", "R", "Q", "V", "O", "Z", "J", "W", "", "B", "S"]);
     }
 
@@ -1145,8 +1138,7 @@ a10_hud_set_altitude(var_0) {
   for(;;) {
     if(level.player.origin[2] > var_1) {
       var_0++;
-    }
-    else if(level.player.origin[2] < var_1) {
+    } else if(level.player.origin[2] < var_1) {
       var_0 = var_0 - 1;
     }
 
@@ -1167,15 +1159,13 @@ a10_hud_set_speed() {
 
     if(common_scripts\utility::cointoss()) {
       var_0++;
-    }
-    else {
+    } else {
       var_0--;
     }
 
     if(var_0 == var_1) {
       var_0++;
-    }
-    else if(var_0 == var_2) {
+    } else if(var_0 == var_2) {
       var_0--;
     }
 
@@ -1193,15 +1183,15 @@ a10_player_hud_cleanup() {
   var_0["reticle2"] destroy();
 
   foreach(var_2 in var_0["sidebars"]) {
-  var_2 destroy();
+    var_2 destroy();
   }
 
   foreach(var_2 in var_0["warning"]) {
-  var_2 destroy();
+    var_2 destroy();
   }
 
   foreach(var_2 in var_0["text"]) {
-  var_2 destroy();
+    var_2 destroy();
   }
 
   level.enemydeathicons = 0;
@@ -1310,8 +1300,7 @@ a10_kill_notification(var_0) {
   if(var_0 maps\_vehicle::isvehicle()) {
     if(issubstr(var_0.classname, "t90ms")) {
       level.a10_player_kills["tanks"]++;
-    }
-    else {
+    } else {
       level.a10_player_kills["armor"]++;
     }
 

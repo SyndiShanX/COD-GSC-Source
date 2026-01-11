@@ -250,8 +250,7 @@ run_dog_command(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_4 = var_2;
-  }
-  else {
+  } else {
     var_4 = enemy_near_position(var_0["position"]);
   }
 
@@ -303,11 +302,9 @@ run_dog_command(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     dog_command_cancel(var_1);
-  }
-  else if(isDefined(var_5)) {
+  } else if(isDefined(var_5)) {
     dog_command_flush(var_5, var_0);
-  }
-  else if(isDefined(var_4)) {
+  } else if(isDefined(var_4)) {
     self.script_nostairs = 1;
     maps\_utility::set_hudoutline("friendly", 0);
     self.moveplaybackrate = 1;
@@ -432,8 +429,7 @@ dog_command_attack(var_0) {
 
   if(isDefined(var_0.dog_attack_alt_func)) {
     self[[var_0.dog_attack_alt_func]](var_0);
-  }
-  else {
+  } else {
     self.old_ai_target = var_0;
     var_0.old_ignoreme = var_0.ignoreme;
     var_0.ignoreme = 0;
@@ -443,8 +439,7 @@ dog_command_attack(var_0) {
 
     if(common_scripts\utility::flag_exist("_stealth_spotted") && !common_scripts\utility::flag("_stealth_spotted")) {
       thread maps\_utility::play_sound_on_entity("anml_dog_growl");
-    }
-    else {
+    } else {
       thread maps\_utility::play_sound_on_entity("anml_dog_bark_attack_start_npc");
     }
 
@@ -569,8 +564,7 @@ dog_command_goto(var_0) {
 
   if(isDefined(self.pathgoalpos)) {
     self waittill("goal");
-  }
-  else if(distance2d(self.origin, var_1) > self.goalradius) {
+  } else if(distance2d(self.origin, var_1) > self.goalradius) {
     var_2 = getnodesinradius(var_1, 96, 0, 96);
     var_2 = sortbydistance(var_2, level.player get_eye());
 
@@ -655,8 +649,7 @@ chopper_air_support_activate() {
 
       if(var_4[var_9].offsetdir == "vertical") {
         var_11 = anglestoup(var_6);
-      }
-      else if(var_4[var_9].offsetdir == "horizontal") {
+      } else if(var_4[var_9].offsetdir == "horizontal") {
         var_11 = anglestoright(var_6);
       }
 
@@ -736,11 +729,9 @@ findaveragepointvec(var_0, var_1, var_2, var_3) {
 findaveragepoint(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     return (var_0 + var_1 + var_2 + var_3) / 4;
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     return (var_0 + var_1 + var_2) / 3;
-  }
-  else {
+  } else {
     return (var_0 + var_1) / 2;
   }
 }
@@ -751,8 +742,7 @@ drawchopperattackarrow(var_0, var_1, var_2) {
 
   if(var_2 > 0) {
     level.chopperattackarrow rotateto(vectortoangles(var_1), 0.2);
-  }
-  else {
+  } else {
     level.chopperattackarrow.angles = vectortoangles(var_1);
   }
 }
@@ -817,7 +807,7 @@ hudoutline_wait_death() {
   var_0 = getcorpsearray();
 
   foreach(var_2 in var_0) {
-  var_2 hudoutlinedisable();
+    var_2 hudoutlinedisable();
   }
 }
 

@@ -60,8 +60,7 @@ codecallback_bullethitentity(var_0, var_1, var_2, var_3, var_4, var_5) {
 codecallback_vehicledamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(self.damagecallback)) {
     self[[self.damagecallback]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
-  }
-  else {
+  } else {
     self vehicle_finishdamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   }
 }
@@ -69,8 +68,7 @@ codecallback_vehicledamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_
 codecallback_entitydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11) {
   if(isDefined(self.damagecallback)) {
     self[[self.damagecallback]](var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
-  }
-  else {
+  } else {
     self finishentitydamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11);
   }
 }

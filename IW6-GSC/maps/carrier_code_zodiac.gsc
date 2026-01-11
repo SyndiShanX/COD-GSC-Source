@@ -181,8 +181,7 @@ zodiac_safe_remove() {
 
   if(!maps\_utility::either_player_looking_at(self.origin, var_0, 1)) {
     self delete();
-  }
-  else {
+  } else {
     wait(randomfloatrange(0, 1));
     thread zodiac_death();
   }
@@ -203,8 +202,7 @@ setup_fake_riders() {
 convert_to_fake_riders() {
   if(isDefined(self.script_parameters)) {
     self.script_parameters = self.script_parameters + " no_riders";
-  }
-  else {
+  } else {
     self.script_parameters = " no_riders";
   }
 
@@ -471,8 +469,7 @@ give_weaponsound() {
 
   if(var_0 == 1) {
     self.weaponsound = "drone_ak12_fire_npc";
-  }
-  else if(var_0 == 2) {
+  } else if(var_0 == 2) {
     self.weaponsound = "drone_cz805_fire_npc";
   }
 
@@ -500,8 +497,7 @@ rider_attack(var_0, var_1) {
 
     if(issubstr(var_0.weapon, "panzerfaust")) {
       var_0 thread zodiac_drone_fire_rpg();
-    }
-    else {
+    } else {
       var_0 thread zodiac_drone_fire();
     }
 
@@ -581,8 +577,7 @@ drone_shoot() {
   if(var_0) {
     if(!isDefined(self.weapon) || isDefined(self.use_ak12)) {
       magicbullet("ak12", var_3, var_4);
-    }
-    else {
+    } else {
       magicbullet(self.weapon, var_3, var_4);
     }
 
@@ -967,8 +962,7 @@ launch_ragdolls_zodiac(var_0) {
 
     if(var_12 >= var_2.size - 1) {
       var_12 = 0;
-    }
-    else {
+    } else {
       var_12++;
     }
 
@@ -988,8 +982,7 @@ zodiac_treadfx() {
   for(;;) {
     if(maps\_vehicle::isvehicle()) {
       var_2 = self vehicle_getspeed();
-    }
-    else {
+    } else {
       var_2 = self.speed;
     }
 
@@ -1335,8 +1328,7 @@ rappel_exit(var_0, var_1, var_2, var_3) {
   }
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "enemy_defend_zodiac_vista") {
     self kill();
-  }
-  else if(isDefined(self)) {
+  } else if(isDefined(self)) {
     var_5 = self;
 
     if(maps\carrier_code::eval(self.script_drone)) {
@@ -1618,8 +1610,7 @@ link_to_moving_target(var_0) {
   while(var_2 > 4 || self.origin[2] < var_0.origin[2]) {
     if(var_2 > var_1) {
       var_4 = self.origin + vectornormalize(var_0.origin - self.origin) * var_1;
-    }
-    else {
+    } else {
       var_4 = var_0.origin;
     }
 
@@ -1648,8 +1639,7 @@ splash_on_hit_water() {
 splash_on_hit_water_ragdoll(var_0) {
   if(isDefined(var_0)) {
     wait(var_0);
-  }
-  else {
+  } else {
     self waittillmatch("single anim", "start_ragdoll");
     self unlink();
   }
@@ -1692,11 +1682,9 @@ rappel_death_vo() {
 
   if(var_0 < 33) {
     thread maps\_utility::play_sound_on_entity("generic_death_falling");
-  }
-  else if(var_0 < 66) {
+  } else if(var_0 < 66) {
     thread maps\_utility::play_sound_on_entity("generic_death_falling_scream");
-  }
-  else {}
+  } else {}
 }
 
 cleanup_zodiac_bodies() {

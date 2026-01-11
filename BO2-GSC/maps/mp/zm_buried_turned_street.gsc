@@ -60,5 +60,4 @@ getspawnpoints() {
   level._turned_powerup_spawnpoints = getstructarray("street_turned_powerups", "targetname");
 }
 
-onendgame() {
-}
+onendgame() {}

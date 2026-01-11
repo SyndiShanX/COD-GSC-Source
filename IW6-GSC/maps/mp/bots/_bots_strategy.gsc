@@ -141,8 +141,7 @@ bot_set_ambush_trap(trap_item, ambush_entrances, ambush_node, ambush_yaw, trap_n
         if(!isDefined(self.enemy) || (false == (self BotCanSeeEntity(self.enemy)))) {
           if(isDefined(yaw)) {
             self BotThrowGrenade(chosen_entrance.origin, trap_item["item_action"]);
-          }
-          else {
+          } else {
             self BotThrowGrenade(self.origin + (anglesToForward(self.angles) * 50), trap_item["item_action"]);
           }
           self.ambush_trap_ent = undefined;
@@ -596,8 +595,7 @@ setup_investigate_location(node, optional_location) {
   new_location = spawnStruct();
   if(isDefined(optional_location)) {
     new_location.origin = optional_location;
-  }
-  else {
+  } else {
     new_location.origin = node.origin;
   }
   AssertEx(isDefined(node), "Bot Investigation Location " + new_location.origin + " has no node");
@@ -849,8 +847,7 @@ defense_cautious_approach() {
           nearest_node_bot = self GetNearestNode();
           if(isDefined(nearest_node_bot)) {
             self.cur_defend_node = nearest_node_bot;
-          }
-          else {
+          } else {
             self.cur_defend_point_override = self.origin;
           }
         }
@@ -875,8 +872,7 @@ defense_cautious_approach() {
 
         if(self.bot_defending_type == "capture_zone") {
           self.cur_defend_point_override = self bot_pick_random_point_from_set(self defend_valid_center(), self.bot_defending_nodes, ::bot_can_use_point_in_defend);
-        }
-        else {
+        } else {
           self.cur_defend_point_override = self bot_pick_random_point_in_radius(self defend_valid_center(), self.bot_defending_radius, ::bot_can_use_point_in_defend, 0.15, 0.9);
         }
 

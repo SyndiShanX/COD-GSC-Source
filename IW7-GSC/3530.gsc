@@ -71,8 +71,7 @@ func_130F5(var_00, var_01) {
 exceededmaxvanguards(var_00) {
   if(level.teambased) {
     return isDefined(level.remote_uav[var_00]);
-  }
-  else {
+  } else {
     return isDefined(level.remote_uav[var_00]) || isDefined(level.remote_uav[level.otherteam[var_00]]);
   }
 }
@@ -212,8 +211,7 @@ func_10E0A(var_00, var_01, var_02) {
 func_1316F(var_00) {
   if(!isDefined(var_0.lasttouchedplatform.destroydroneoncollision) || var_0.lasttouchedplatform.destroydroneoncollision || !isDefined(self.func_108D4) || gettime() > self.func_108D4) {
     thread handledeathdamage(undefined, undefined, undefined, undefined);
-  }
-  else {
+  } else {
     wait 1.0;
     thread scripts\mp\movers::handle_moving_platform_touch(var_00);
   }
@@ -593,11 +591,9 @@ func_1317D() {
 
         if(isDefined(self.heliinproximity)) {
           var_01 = distance(self.origin, self.heliinproximity.origin);
-        }
-        else if(isDefined(level.func_5618)) {
+        } else if(isDefined(level.func_5618)) {
           var_01 = 467.5;
-        }
-        else {
+        } else {
           var_01 = distance(self.origin, var_00);
         }
 
@@ -651,8 +647,7 @@ vanguard_in_range() {
 
     if(level.func_9C46) {
       return self.origin[2] < level.func_13180;
-    }
-    else {
+    } else {
       return 1;
     }
   } else if(distance2dsquared(self.origin, level.mapcenter) < level.func_13183 && self.origin[2] < level.func_13180)
@@ -667,8 +662,7 @@ func_13173() {
 
   if(isDefined(self.heliinproximity)) {
     var_00 = 3;
-  }
-  else {
+  } else {
     var_00 = 6;
   }
 
@@ -799,8 +793,7 @@ func_1317E() {
 
     if(!self.inheliproximity && var_00) {
       self.inheliproximity = 1;
-    }
-    else if(self.inheliproximity && !var_00) {
+    } else if(self.inheliproximity && !var_00) {
       self.inheliproximity = 0;
       self.heliinproximity = undefined;
     }

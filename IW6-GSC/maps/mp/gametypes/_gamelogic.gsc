@@ -38,8 +38,7 @@ onForfeit(team) {
 
   if(!level.teambased && level.players.size > 1) {
     wait(10);
-  }
-  else {
+  } else {
     wait(1.05);
   }
 
@@ -75,8 +74,7 @@ onForfeit(team) {
 
   if(isPlayer(winner)) {
     logString("forfeit, win: " + winner getXuid() + "(" + winner.name + ")");
-  }
-  else {
+  } else {
     logString("forfeit, win: " + winner + ", allies: " + game["teamScores"]["allies"] + ", opfor: " + game["teamScores"]["axis"]);
   }
   thread endGame(winner, endReason);
@@ -136,8 +134,7 @@ default_onDeadEvent(team) {
     level.finalKillCam_winner = "none";
     if(level.teamBased) {
       thread endGame("tie", game["end_reason"]["tie"]);
-    }
-    else {
+    } else {
       thread endGame(undefined, game["end_reason"]["tie"]);
     }
   }
@@ -170,8 +167,7 @@ default_onTimeLimit() {
   if(level.teamBased) {
     if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
       winner = "tie";
-    }
-    else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
+    } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
       level.finalKillCam_winner = "axis";
       winner = "axis";
     } else {
@@ -185,8 +181,7 @@ default_onTimeLimit() {
 
     if(isDefined(winner)) {
       logString("time limit, win: " + winner.name);
-    }
-    else {
+    } else {
       logString("time limit, tie");
     }
   }
@@ -225,8 +220,7 @@ forceEnd(reason) {
     winner = maps\mp\gametypes\_gamescore::getHighestScoringPlayer();
     if(isDefined(winner)) {
       logString("host ended game, win: " + winner.name);
-    }
-    else {
+    } else {
       logString("host ended game, tie");
     }
   }
@@ -236,8 +230,7 @@ forceEnd(reason) {
 
   if(level.splitscreen) {
     endString = game["end_reason"]["ended_game"];
-  }
-  else {
+  } else {
     endString = game["end_reason"]["host_ended_game"];
   }
 
@@ -264,8 +257,7 @@ onScoreLimit() {
   } else if(level.teamBased) {
     if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
       winner = "tie";
-    }
-    else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
+    } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
       winner = "axis";
       level.finalKillCam_winner = "axis";
     } else {
@@ -277,8 +269,7 @@ onScoreLimit() {
     winner = maps\mp\gametypes\_gamescore::getHighestScoringPlayer();
     if(isDefined(winner)) {
       logString("scorelimit, win: " + winner.name);
-    }
-    else {
+    } else {
       logString("scorelimit, tie");
     }
   }
@@ -384,9 +375,7 @@ updateGameEvents() {
       return_val = undefined;
       if(one_ally_left && !isDefined(level.oneLeftTime["allies"])) {
         level.oneLeftTime["allies"] = getTime();
-        ally_return_val = [
-          [level.onOneLeftEvent]
-        ]("allies");
+        ally_return_val = [[level.onOneLeftEvent]]("allies");
         if(isDefined(ally_return_val)) {
           if(!isDefined(return_val)) {
             return_val = ally_return_val;
@@ -397,9 +386,7 @@ updateGameEvents() {
 
       if(one_axis_left && !isDefined(level.oneLeftTime["axis"])) {
         level.oneLeftTime["axis"] = getTime();
-        axis_return_val = [
-          [level.onOneLeftEvent]
-        ]("axis");
+        axis_return_val = [[level.onOneLeftEvent]]("axis");
         if(isDefined(axis_return_val)) {
           if(!isDefined(return_val)) {
             return_val = axis_return_val;
@@ -458,8 +445,7 @@ waitForPlayers(maxTime) {
 
   if(maxTime > 5) {
     minTime = gettime() + getDvarInt("min_wait_for_players") * 1000;
-  }
-  else {
+  } else {
     minTime = 0;
   }
 
@@ -702,14 +688,11 @@ updatePlayerCombatStatus() {
   foreach(player in level.players) {
     if(player.sessionstate == "spectator" && !player.spectatekillcam) {
       continue;
-    }
-    else if(isDefined(player.hasDoneAnyCombat) && player.hasDoneAnyCombat) {
+    } else if(isDefined(player.hasDoneAnyCombat) && player.hasDoneAnyCombat) {
       continue;
-    }
-    else if(player.team == "axis") {
+    } else if(player.team == "axis") {
       continue;
-    }
-    else {
+    } else {
       player setHasDoneCombat(player, true);
     }
   }
@@ -890,8 +873,7 @@ checkTimeLimit(prevTimePassed) {
   if(getTimeLimit() <= 0) {
     if(isDefined(level.startTime)) {
       setGameEndTime(level.startTime);
-    }
-    else {
+    } else {
       setGameEndTime(0);
     }
     return;
@@ -1286,8 +1268,7 @@ Callback_StartGameType() {
 
   if(matchMakingGame()) {
     SetDvar("isMatchMakingGame", 1);
-  }
-  else {
+  } else {
     SetDvar("isMatchMakingGame", 0);
   }
 
@@ -1365,8 +1346,7 @@ Callback_StartGameType() {
       if(!level.splitscreen) {
         if(isMLGMatch() || IsDedicatedServer()) {
           level.prematchPeriod = maps\mp\gametypes\_tweakables::getTweakableValue("game", "graceperiod_comp");
-        }
-        else {
+        } else {
           level.prematchPeriod = maps\mp\gametypes\_tweakables::getTweakableValue("game", "graceperiod");
         }
 
@@ -1375,8 +1355,7 @@ Callback_StartGameType() {
     } else {
       if(isMLGMatch() || IsDedicatedServer()) {
         level.prematchPeriod = maps\mp\gametypes\_tweakables::getTweakableValue("game", "playerwaittime_comp");
-      }
-      else {
+      } else {
         level.prematchPeriod = maps\mp\gametypes\_tweakables::getTweakableValue("game", "playerwaittime");
       }
 
@@ -1497,8 +1476,7 @@ Callback_StartGameType() {
 
   if(matchMakingGame()) {
     level.maxAllowedTeamKills = 2;
-  }
-  else {
+  } else {
     level.maxAllowedTeamKills = -1;
   }
 
@@ -1568,8 +1546,7 @@ Callback_StartGameType() {
 
   if(getGametypeNumLives()) {
     setdvar("g_deadChat", 0);
-  }
-  else {
+  } else {
     setdvar("g_deadChat", 1);
   }
 
@@ -1827,8 +1804,7 @@ startGame() {
 
   if(isDefined(level.customprematchperiod)) {
     [[level.customprematchPeriod]]();
-  }
-  else {
+  } else {
     prematchPeriod();
   }
 
@@ -1896,15 +1872,13 @@ getBetterTeam() {
 
   if(kills["allies"] > kills["axis"]) {
     return "allies";
-  }
-  else if(kills["axis"] > kills["allies"]) {
+  } else if(kills["axis"] > kills["allies"]) {
     return "axis";
   }
 
   if(deaths["allies"] < deaths["axis"]) {
     return "allies";
-  }
-  else if(deaths["axis"] < deaths["allies"]) {
+  } else if(deaths["axis"] < deaths["allies"]) {
     return "axis";
   }
 
@@ -1947,8 +1921,7 @@ displayRoundEnd(winner, endReasonText) {
     }
     if(level.teamBased) {
       player thread maps\mp\gametypes\_hud_message::teamOutcomeNotify(winner, true, endReasonText);
-    }
-    else {
+    } else {
       player thread maps\mp\gametypes\_hud_message::outcomeNotify(winner, endReasonText);
     }
   }
@@ -1959,8 +1932,7 @@ displayRoundEnd(winner, endReasonText) {
 
   if(wasLastRound()) {
     roundEndWait(level.roundEndDelay, false);
-  }
-  else {
+  } else {
     roundEndWait(level.roundEndDelay, true);
   }
 }
@@ -1972,8 +1944,7 @@ displayGameEnd(winner, endReasonText) {
     }
     if(level.teamBased) {
       player thread maps\mp\gametypes\_hud_message::teamOutcomeNotify(winner, false, endReasonText);
-    }
-    else {
+    } else {
       player thread maps\mp\gametypes\_hud_message::outcomeNotify(winner, endReasonText);
     }
   }
@@ -1989,15 +1960,13 @@ displayRoundSwitch() {
     if(getWatchedDvar("roundlimit")) {
       if((game["roundsPlayed"] * 2) == getWatchedDvar("roundlimit")) {
         switchType = "halftime";
-      }
-      else {
+      } else {
         switchType = "intermission";
       }
     } else if(getWatchedDvar("winlimit")) {
       if(game["roundsPlayed"] == (getWatchedDvar("winlimit") - 1)) {
         switchType = "halftime";
-      }
-      else {
+      } else {
         switchType = "intermission";
       }
     } else {
@@ -2060,8 +2029,7 @@ endGameOvertime(winner, endReasonText) {
     }
     if(level.teamBased) {
       player thread maps\mp\gametypes\_hud_message::teamOutcomeNotify(winner, false, endReasonText);
-    }
-    else {
+    } else {
       player thread maps\mp\gametypes\_hud_message::outcomeNotify(winner, endReasonText);
     }
   }
@@ -2072,7 +2040,7 @@ endGameOvertime(winner, endReasonText) {
     level.finalKillCam_timeGameEnded[level.finalKillCam_winner] = getSecondsPassed();
 
     foreach(player in level.players) {
-    player notify("reset_outcome");
+      player notify("reset_outcome");
     }
 
     level notify("game_cleanup");
@@ -2085,8 +2053,7 @@ endGameOvertime(winner, endReasonText) {
       }
       if(level.teamBased) {
         player thread maps\mp\gametypes\_hud_message::teamOutcomeNotify(winner, false, endReasonText);
-      }
-      else {
+      } else {
         player thread maps\mp\gametypes\_hud_message::outcomeNotify(winner, endReasonText);
       }
     }
@@ -2108,7 +2075,7 @@ endGameHalfTime() {
   freezeAllPlayers();
 
   foreach(player in level.players) {
-  player.pers["stats"] = player.stats;
+    player.pers["stats"] = player.stats;
   }
 
   level notify("round_switch", "halftime");
@@ -2126,7 +2093,7 @@ endGameHalfTime() {
     level.finalKillCam_timeGameEnded[level.finalKillCam_winner] = getSecondsPassed();
 
     foreach(player in level.players) {
-    player notify("reset_outcome");
+      player notify("reset_outcome");
     }
 
     level notify("game_cleanup");
@@ -2151,8 +2118,7 @@ endGameHalfTime() {
 endGame(winner, endReasonText, nukeDetonated) {
   if(is_Aliens()) {
     [[level.endGame_Alien]](winner, endReasonText);
-  }
-  else {
+  } else {
     endGame_RegularMP(winner, endReasonText, nukeDetonated);
   }
 }
@@ -2246,7 +2212,7 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
 
     if(isDefined(level.finalKillCam_winner)) {
       foreach(player in level.players) {
-      player notify("reset_outcome");
+        player notify("reset_outcome");
       }
 
       level notify("game_cleanup");
@@ -2261,7 +2227,7 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
       }
 
       foreach(player in level.players) {
-      player.pers["stats"] = player.stats;
+        player.pers["stats"] = player.stats;
       }
 
       level notify("restarting");
@@ -2299,7 +2265,7 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
 
   if(isDefined(level.finalKillCam_winner) && wasOnlyRound()) {
     foreach(player in level.players) {
-    player notify("reset_outcome");
+      player notify("reset_outcome");
     }
 
     level notify("game_cleanup");
@@ -2328,8 +2294,7 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
   if(level.teamBased) {
     if(winner == "axis" || winner == "allies") {
       setMatchData("victor", winner);
-    }
-    else {
+    } else {
       setMatchData("victor", "none");
     }
 
@@ -2358,14 +2323,13 @@ endGame_RegularMP(winner, endReasonText, nukeDetonated) {
   sendMatchData();
 
   foreach(player in level.players) {
-  player.pers["stats"] = player.stats;
+    player.pers["stats"] = player.stats;
   }
 
   if(!nukeDetonated && !level.postGameNotifies) {
     if(!wasOnlyRound()) {
       wait 6.0;
-    }
-    else {
+    } else {
       wait(min(10.0, 4.0 + level.postGameNotifies));
     }
   } else {
@@ -2430,8 +2394,7 @@ getScorePerMinute(team) {
 
   if(isPlayer(self)) {
     scorePerMinute = self.score / minutesPassed;
-  }
-  else {
+  } else {
     scorePerMinute = getTeamScore(team) / minutesPassed;
   }
 
@@ -2445,8 +2408,7 @@ getScoreRemaining(team) {
 
   if(isPlayer(self)) {
     scoreRemaining = scoreLimit - self.score;
-  }
-  else {
+  } else {
     scoreRemaining = scoreLimit - getTeamScore(team);
   }
 

@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_white_mannequin_american;
 
 autoexec __init__system__() {
@@ -126,7 +125,7 @@ function_7532e17c(ai_mannequin) {
   }
 
   self.a_n_objective_ids[self.a_n_objective_ids.size] = obj_id;
-  objective_add(obj_id, "active", ai_mannequin, #"hash_423a75e2700a53ab");
+  objective_add(obj_id, "active", ai_mannequin, # "hash_423a75e2700a53ab");
   function_da7940a3(obj_id, 1);
 
   while(isDefined(ai_mannequin)) {

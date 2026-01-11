@@ -48,7 +48,7 @@ friendly_init() {
 
 friendly_custom_color_behavior(array) {
   foreach(key, func in array) {
-  self ai_create_behavior_function("color", key, func);
+    self ai_create_behavior_function("color", key, func);
   }
 
   function = self._stealth.behavior.ai_functions["color"]["hidden"];

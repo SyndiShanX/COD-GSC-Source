@@ -320,7 +320,7 @@ heli_crash_box_hit_2(var_0) {
   wait 3;
 
   foreach(var_10 in var_2) {
-  var_10 delete();
+    var_10 delete();
   }
 }
 

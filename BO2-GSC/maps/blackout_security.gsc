@@ -80,7 +80,7 @@ toggle_friendly_push(b_can_push) {
   a_guys = getaiarray("allies");
 
   foreach(guy in a_guys) {
-  guy pushplayer(b_can_push);
+    guy pushplayer(b_can_push);
   }
 }
 
@@ -148,7 +148,7 @@ multipath_trigger_cleanup(str_trigger_name, str_key) {
   triggers = getEntArray(str_trigger_name, str_key);
 
   foreach(trigger in triggers) {
-  trigger trigger_off();
+    trigger trigger_off();
   }
 }
 
@@ -614,12 +614,11 @@ briggs_pip_playbackrate() {
   n_playback_rate = n_time_left_on_briggs_anim / n_time_left_until_fade;
 
   foreach(actor in a_actors) {
-  actor setanim(level.scr_anim[actor.animname]["briggs_pip"], 1, 0, n_playback_rate);
+    actor setanim(level.scr_anim[actor.animname]["briggs_pip"], 1, 0, n_playback_rate);
   }
 }
 
-init_doors() {
-}
+init_doors() {}
 
 init_flags() {
   flag_init("start_sensitive_room");

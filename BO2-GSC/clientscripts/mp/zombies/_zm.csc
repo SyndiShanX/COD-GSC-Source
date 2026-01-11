@@ -187,7 +187,9 @@ precache_zombie_gametype() {
 
   if(isDefined(level.gamemode_map_precache)) {
     if(isDefined(level.gamemode_map_precache[gamemode])) {
-      [[level.gamemode_map_precache[gamemode]]]();
+      [
+        [level.gamemode_map_precache[gamemode]]
+      ]();
     }
   }
 
@@ -566,8 +568,7 @@ zpoff_listener() {
 zombie_power_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     level notify("ZPO");
-  }
-  else if(oldval == 1) {
+  } else if(oldval == 1) {
     level notify("ZPOff");
   }
 }
@@ -578,8 +579,7 @@ player_deadshot_perk_handler(localclientnum, oldval, newval, bnewent, binitialsn
   }
   if(newval) {
     self usealternateaimparams();
-  }
-  else {
+  } else {
     self clearalternateaimparams();
   }
 }
@@ -632,8 +632,7 @@ player_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap
 
     if(is_true(self.special_eyes)) {
       self._eyeglow_fx_override = level._effect["player_eye_glow_blue"];
-    }
-    else {
+    } else {
       self._eyeglow_fx_override = level._effect["player_eye_glow_orng"];
     }
   }
@@ -646,8 +645,7 @@ player_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap
 
   if(!isdemoplaying()) {
     zombie_eyes_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump);
-  }
-  else {
+  } else {
     zombie_eyes_demo_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump);
   }
 }
@@ -664,15 +662,13 @@ player_eye_color_clientfield_cb(localclientnum, oldval, newval, bnewent, binitia
 
     if(is_true(self.special_eyes)) {
       self._eyeglow_fx_override = level._effect["player_eye_glow_blue"];
-    }
-    else {
+    } else {
       self._eyeglow_fx_override = level._effect["player_eye_glow_orng"];
     }
 
     if(!isdemoplaying()) {
       zombie_eyes_clientfield_cb(localclientnum, 0, is_true(self.zombie_face), bnewent, binitialsnap, fieldname, bwasdemojump);
-    }
-    else {
+    } else {
       zombie_eyes_demo_clientfield_cb(localclientnum, 0, is_true(self.zombie_face), bnewent, binitialsnap, fieldname, bwasdemojump);
     }
   }
@@ -979,8 +975,7 @@ do_gib(model, tag) {
 
   if(isDefined(self)) {
     self do_gib_fx(tag);
-  }
-  else {
+  } else {
     playSound(0, "zmb_death_gibs", end_pos);
   }
 }
@@ -1070,13 +1065,10 @@ on_gib_event(localclientnum, type, locations) {
       case 1:
         if(isDefined(self._gib_def.gibspawn1) && isDefined(self._gib_def.gibspawntag1)) {
           self thread do_gib(self._gib_def.gibspawn1, self._gib_def.gibspawntag1);
-        }
-        else {
-          if(!isDefined(self._gib_def.gibspawn1)) {
-          }
+        } else {
+          if(!isDefined(self._gib_def.gibspawn1)) {}
 
-          if(!isDefined(self._gib_def.gibspawntag1)) {
-          }
+          if(!isDefined(self._gib_def.gibspawntag1)) {}
         }
 
         mark_piece_gibbed(level._zombie_gib_piece_index_right_arm);
@@ -1084,13 +1076,10 @@ on_gib_event(localclientnum, type, locations) {
       case 2:
         if(isDefined(self._gib_def.gibspawn2) && isDefined(self._gib_def.gibspawntag2)) {
           self thread do_gib(self._gib_def.gibspawn2, self._gib_def.gibspawntag2);
-        }
-        else {
-          if(!isDefined(self._gib_def.gibspawn2)) {
-          }
+        } else {
+          if(!isDefined(self._gib_def.gibspawn2)) {}
 
-          if(!isDefined(self._gib_def.gibspawntag2)) {
-          }
+          if(!isDefined(self._gib_def.gibspawntag2)) {}
         }
 
         mark_piece_gibbed(level._zombie_gib_piece_index_left_arm);
@@ -1181,8 +1170,7 @@ zombie_vision_set_apply(str_visionset, int_priority, flt_transition_time, int_cl
 
   if(isDefined(vision_to_set)) {
     visionsetnaked(int_clientnum, vision_to_set, flt_transition_time);
-  }
-  else {
+  } else {
     visionsetnaked(int_clientnum, "undefined", flt_transition_time);
   }
 }
@@ -1228,8 +1216,7 @@ zombie_vision_set_remove(str_visionset, flt_transition_time, int_clientnum) {
 
   if(isDefined(vision_to_set)) {
     visionsetnaked(int_clientnum, vision_to_set, flt_transition_time);
-  }
-  else {
+  } else {
     visionsetnaked(int_clientnum, "undefined", flt_transition_time);
   }
 }
@@ -1378,14 +1365,11 @@ rise_dust_fx(clientnum, type, billow_fx, burst_fx) {
 
   if(type == "water") {
     effect = level._effect["rise_dust_water"];
-  }
-  else if(type == "snow") {
+  } else if(type == "snow") {
     effect = level._effect["rise_dust_snow"];
-  }
-  else if(type == "foliage") {
+  } else if(type == "foliage") {
     effect = level._effect["rise_dust_foliage"];
-  }
-  else if(type == "none") {
+  } else if(type == "none") {
     return;
   }
   for(t = 0; t < dust_time; t = t + dust_interval) {

@@ -12,8 +12,7 @@ SetPoseMovement(desiredPose, desiredMovement) {
   if(desiredPose == "") {
     if((self.a.pose == "prone") && ((desiredMovement == "walk") || (desiredMovement == "run"))) {
       desiredPose = "crouch";
-    }
-    else {
+    } else {
       desiredPose = self.a.pose;
     }
   }
@@ -401,8 +400,7 @@ PlayBlendTransition(transAnim, crossblendTime, endPose, endMovement, endAiming) 
   self.a.movement = endMovement;
   if(endAiming) {
     self.a.alertness = "aiming";
-  }
-  else {
+  } else {
     self.a.alertness = "casual";
   }
   waittime = (endTime - gettime()) / 1000;
@@ -759,8 +757,7 @@ PlayTransitionAnimation2(transAnim, endPose, endMovement, endAiming, finalAnim) 
   self.a.movement = endMovement;
   if(endAiming) {
     self.a.alertness = "aiming";
-  }
-  else {
+  } else {
     self.a.alertness = "casual";
   }
   if(isDefined(finalAnim)) {
@@ -815,8 +812,7 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, endAiming, finalAni
   self.a.movement = endMovement;
   if(endAiming) {
     self.a.alertness = "aiming";
-  }
-  else {
+  } else {
     self.a.alertness = "casual";
   }
   if(isDefined(finalAnim)) {

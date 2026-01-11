@@ -20,8 +20,7 @@ main() {
   model = "hanging_long_sleeve";
   if(SP) {
     level.anim_prop_models[model]["wind_medium"] = % hanging_clothes_long_sleeve_wind_medium;
-  }
-  else {
+  } else {
     level.anim_prop_models[model]["wind_medium"] = "hanging_clothes_long_sleeve_wind_medium";
   }
 }

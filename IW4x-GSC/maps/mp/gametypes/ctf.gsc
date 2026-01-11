@@ -37,14 +37,11 @@ main() {
 
   if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("camera_thirdPerson")) {
+  } else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_diehard")) {
+  } else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 
@@ -168,8 +165,7 @@ onStartGameType() {
 getSpawnPoint() {
   if(self.team == "axis") {
     spawnTeam = game["attackers"];
-  }
-  else {
+  } else {
     spawnTeam = game["defenders"];
   }
 
@@ -257,8 +253,7 @@ ctf() {
 
   if(level.splitScreen) {
     hudElemAlpha = 0;
-  }
-  else {
+  } else {
     hudElemAlpha = 0.85;
   }
 
@@ -437,8 +432,7 @@ onBeginUse(player) {
 
   if(team == self maps\mp\gametypes\_gameobjects::getOwnerTeam()) {
     self.trigger.radius = 1024;
-  }
-  else {
+  } else {
     self.trigger.radius = self.oldRadius;
   }
 }
@@ -454,8 +448,7 @@ onPickup(player) {
 
   if(team == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
 
@@ -617,8 +610,7 @@ onUse(player) {
   team = player.pers["team"];
   if(team == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
 
@@ -643,8 +635,7 @@ onUse(player) {
   level.teamFlags[otherTeam] returnFlag();
 }
 
-onCantUse(player) {
-}
+onCantUse(player) {}
 
 onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, psOffsetTime, deathAnimDuration, killId) {
   if(isDefined(attacker) && isPlayer(attacker) && attacker.pers["team"] != self.pers["team"]) {

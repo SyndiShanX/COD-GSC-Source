@@ -143,8 +143,7 @@ should_skip_challenge(challenge) {
 
   if(num_pistol_prestige_players >= level.players.size - 1) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -167,7 +166,7 @@ deactivate_current_challenge() {
     if(!is_casual_mode()) {
       if(level.num_challenge_completed == 10) {
         foreach(player in level.players) {
-        player maps\mp\alien\_persistence::give_player_tokens(2, true);
+          player maps\mp\alien\_persistence::give_player_tokens(2, true);
         }
       }
     }
@@ -360,8 +359,7 @@ handle_challenge_hotjoin() {
 get_num_challenge_completed() {
   if(!isDefined(level.num_challenge_completed)) {
     return 0;
-  }
-  else {
+  } else {
     return level.num_challenge_completed;
   }
 }

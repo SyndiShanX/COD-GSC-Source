@@ -310,8 +310,7 @@ string_to_float(string) {
   }
   if(whole >= 0) {
     return (whole + decimal);
-  }
-  else {
+  } else {
     return (whole - decimal);
   }
 }
@@ -418,8 +417,7 @@ fade_in(hold_black_time) {
   level.introblack.alpha = 1;
   if(isDefined(hold_black_time)) {
     wait hold_black_time;
-  }
-  else {
+  } else {
     wait .2;
   }
   level.introblack FadeOverTime(1.5);

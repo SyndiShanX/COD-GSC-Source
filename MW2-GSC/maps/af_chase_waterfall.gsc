@@ -68,8 +68,7 @@ rumbly_rocks_bumps() {
     }
     if(cointoss()) {
       level.player PlayRumbleOnEntity("damage_heavy");
-    }
-    else {
+    } else {
       level.player PlayRumbleOnEntity("damage_light");
     }
 
@@ -141,11 +140,11 @@ rapids_scene() {
   targ = getstruct( struct.target, "targetname" );
   angles = vectortoangles( targ.origin - struct.origin );
   forward = anglesToForward( angles );
-	
+  	
   player_angles = boat.angles;
   player_angles = set_y( (0,0,0), boat.angles[1] );
   player_forward = anglesToForward( player_angles );
-	
+  	
   if( vectordot( player_forward, forward ) < 0.3 )
   {
   	// going backwards or some bs
@@ -605,7 +604,7 @@ player_dismount() {
 
 delete_end_seaknight() {
   foreach(rider in self.riders) {
-  rider stop_magic_bullet_shield();
+    rider stop_magic_bullet_shield();
   }
   self Delete();
 }
@@ -859,8 +858,7 @@ match_position_of_animated_boat(animated_boat) {
     } else if(dot < 0) {
       if(Distance(origin, origin2) < 86) {
         speed_to_go = speed_of_animatedboat;
-      }
-      else {
+      } else {
         speed_to_go = speed_of_animatedboat + catchup_speed;
       }
     }

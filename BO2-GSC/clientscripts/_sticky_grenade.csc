@@ -23,8 +23,7 @@ spawned(localclientnum, play_sound) {
   if(enemy) {
     if(play_sound) {
       self thread loop_local_sound(localclientnum, "wpn_semtex_alert", 0.3, level._effect["grenade_enemy_light"]);
-    }
-    else {
+    } else {
       playFXOnTag(localclientnum, level._effect["grenade_enemy_light"], self, self.fxtagname);
     }
   } else if(play_sound)

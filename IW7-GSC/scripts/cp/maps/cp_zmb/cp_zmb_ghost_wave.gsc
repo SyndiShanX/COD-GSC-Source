@@ -702,9 +702,7 @@ moving_target_intro_sequence(param_00, param_01) {
 
 get_moving_target_pattern(param_00, param_01) {
   var_02 = level.moving_target_wave_info[param_00];
-  var_03 = [
-    [var_02.move_pattern_func]
-  ](param_01);
+  var_03 = [[var_02.move_pattern_func]](param_01);
   return var_03;
 }
 

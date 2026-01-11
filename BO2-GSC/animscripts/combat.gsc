@@ -189,8 +189,7 @@ exposedcombatmainloop() {
       continue;
     }
     if(aimedatshootentorpos()) {
-      if(exposedcombatrambo()) {
-      } else {
+      if(exposedcombatrambo()) {} else {
         self animscripts\debug::debugpushstate("exposedCombatShootUntilNeedToTurn");
 
         self exposedcombatshootuntilneedtoturn();
@@ -305,11 +304,9 @@ exposedcombatcantseeenemybehavior() {
 
     if(isDefined(likelyenemydir)) {
       relyaw = angleclamp180(self.angles[1] - likelyenemydir[1]);
-    }
-    else if(isDefined(self.node)) {
+    } else if(isDefined(self.node)) {
       relyaw = angleclamp180(self.angles[1] - self.node.angles[1]);
-    }
-    else if(isDefined(self.enemy)) {
+    } else if(isDefined(self.enemy)) {
       likelyenemydir = vectortoangles(self lastknownpos(self.enemy) - self.origin);
       relyaw = angleclamp180(self.angles[1] - likelyenemydir[1]);
     }
@@ -350,8 +347,7 @@ exposedcantseeenemywait() {
 
   if(isDefined(self.a.shortcantseeenemywait) && self.a.shortcantseeenemywait) {
     wait 0.05;
-  }
-  else {
+  } else {
     wait(0.4 + randomfloat(0.4));
   }
 
@@ -489,8 +485,7 @@ tryexposedthrowgrenade(throwat, mindist, forcethrow) {
 
         if(threw) {
           setanimaimweight(1, 0.5);
-        }
-        else {
+        } else {
           setanimaimweight(1, 0);
         }
       } else {
@@ -504,8 +499,7 @@ tryexposedthrowgrenade(throwat, mindist, forcethrow) {
   } else {
     if(distancesquared(self.origin, throwspot) < mindist * mindist) {
       self animscripts\debug::debugpopstate("tryThrowGrenade", "too close (<" + mindist + ")");
-    }
-    else {
+    } else {
       self animscripts\debug::debugpopstate("tryThrowGrenade", "not standing");
     }
 
@@ -576,8 +570,7 @@ exposedcombatcheckstance(distsqtoshootpos) {
 
   if(shouldforcebehavior("force_stand")) {
     desiredstance = "stand";
-  }
-  else if(shouldforcebehavior("force_crouch")) {
+  } else if(shouldforcebehavior("force_crouch")) {
     desiredstance = "crouch";
   }
 
@@ -797,8 +790,7 @@ keeptryingtomelee() {
     if(isDefined(self.enemy)) {
       if(isplayer(self.enemy)) {
         checkdistsq = 40000;
-      }
-      else {
+      } else {
         checkdistsq = 10000;
       }
 
@@ -872,8 +864,7 @@ switchtolastweapon(cleanup) {
 
   if(isDefined(cleanup)) {
     self donotetrackspostcallbackwithendon("weapon swap", ::handleputawaycleanup, "end_weapon_swap");
-  }
-  else {
+  } else {
     self donotetrackspostcallbackwithendon("weapon swap", ::handleputaway, "end_weapon_swap");
   }
 
@@ -896,12 +887,10 @@ handleputawaycleanup(notetrack) {
 handleputaway(notetrack) {
   if(notetrack == "pistol_putaway") {
     self clearanim(animarray("straight_level", "combat"), 0);
-  }
-  else if(notetrack == "start_aim") {
+  } else if(notetrack == "start_aim") {
     if(self needtoturn()) {
       self notify("end_weapon_swap");
-    }
-    else {
+    } else {
       self thread idlethread();
       self setanimlimited(animarray("straight_level", "combat"), 1, 0);
       setupaim(0);
@@ -935,8 +924,7 @@ transitionto(newpose) {
 
   if(newpose == "stand") {
     rate = 2;
-  }
-  else {
+  } else {
     rate = 1;
   }
 
@@ -981,8 +969,7 @@ watchshootentvelocity() {
     } else {
       if(isDefined(self.shootent)) {
         prevpos = self.shootent.origin;
-      }
-      else {
+      } else {
         prevpos = self.origin;
       }
 
@@ -1036,8 +1023,7 @@ exposedreload(threshold) {
 
     if(self.a.pose == "crouch") {
       crouchreload = 1;
-    }
-    else {
+    } else {
       if(self.a.pose == "stand" && self isstanceallowed("crouch") && !(self.weapon == self.sidearm) && cointoss()) {
         crouchreload = 1;
       }
@@ -1049,8 +1035,7 @@ exposedreload(threshold) {
 
     if(crouchreload && animarrayanyexist("reload_crouchhide")) {
       reloadanim = animarraypickrandom("reload_crouchhide");
-    }
-    else {
+    } else {
       reloadanim = animarraypickrandom("reload");
     }
 
@@ -1214,8 +1199,7 @@ handlepickup(notetrack) {
   } else if(notetrack == "start_aim") {
     if(self needtoturn()) {
       self notify("end_weapon_swap");
-    }
-    else {
+    } else {
       self thread idlethread();
       self setanimlimited(animarray("straight_level"), 1, 0);
       setupaim(0);
@@ -1304,11 +1288,9 @@ doturn(direction, amount) {
 
     if(rate > 2) {
       transtime = 0.05;
-    }
-    else if(rate > 1.3) {
+    } else if(rate > 1.3) {
       transtime = 0.1;
-    }
-    else {
+    } else {
       transtime = 0.15;
     }
   }
@@ -1317,14 +1299,11 @@ doturn(direction, amount) {
 
   if(amount > 157.5) {
     angle = 180;
-  }
-  else if(amount > 112.5) {
+  } else if(amount > 112.5) {
     angle = 135;
-  }
-  else if(amount > 67.5) {
+  } else if(amount > 67.5) {
     angle = 90;
-  }
-  else {
+  } else {
     angle = 45;
     keepaimingon45degturn = self.animtype == "default";
   }
@@ -1336,14 +1315,11 @@ doturn(direction, amount) {
 
   if(self.turntomatchnode) {
     self animmode("angle deltas", 0);
-  }
-  else if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256 && (self.goalradius < 16 || !isDefined(self.enemy))) {
+  } else if(isDefined(self.node) && isDefined(anim.iscombatscriptnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256 && (self.goalradius < 16 || !isDefined(self.enemy))) {
     self animmode("angle deltas");
-  }
-  else if(isdeltaallowed(turnanim)) {
+  } else if(isdeltaallowed(turnanim)) {
     self animmode("zonly_physics");
-  }
-  else {
+  } else {
     self animmode("angle deltas");
   }
 
@@ -1400,8 +1376,7 @@ turnstartaiming(turnanim, rate, shouldusestartstopaimnotetrack) {
 
   if(shouldusestartstopaimnotetrack) {
     self waittillmatch("turn", "start_aim");
-  }
-  else {
+  } else {
     animlength = getanimlength(turnanim) / rate;
     wait(animlength * 0.8);
   }
@@ -1419,8 +1394,7 @@ turningaimingoff(turnanim, transtime, rate, shouldusestartstopaimnotetrack) {
 
   if(shouldusestartstopaimnotetrack) {
     self waittillmatch("turn", "stop_aim");
-  }
-  else {
+  } else {
     animlength = getanimlength(turnanim) / rate;
     wait(animlength * 0.2);
   }

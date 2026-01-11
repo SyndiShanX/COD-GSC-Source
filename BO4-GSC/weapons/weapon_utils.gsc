@@ -23,11 +23,11 @@ ismeleemod(mod) {
 
 isexplosivedamage(meansofdeath) {
   switch (meansofdeath) {
-    case #"mod_explosive":
-    case #"mod_grenade":
-    case #"mod_projectile":
-    case #"mod_grenade_splash":
-    case #"mod_projectile_splash":
+    case # "mod_explosive":
+    case # "mod_grenade":
+    case # "mod_projectile":
+    case # "mod_grenade_splash":
+    case # "mod_projectile_splash":
       return true;
   }
 
@@ -35,15 +35,15 @@ isexplosivedamage(meansofdeath) {
 }
 
 ispunch(weapon) {
-  return weapon.type == "melee" && weapon.statname == #"bare_hands";
+  return weapon.type == "melee" && weapon.statname == # "bare_hands";
 }
 
 isknife(weapon) {
-  return weapon.type == "melee" && weapon.rootweapon.name == #"knife_loadout";
+  return weapon.type == "melee" && weapon.rootweapon.name == # "knife_loadout";
 }
 
 isnonbarehandsmelee(weapon) {
-  return weapon.type == "melee" && weapon.rootweapon.name != #"bare_hands";
+  return weapon.type == "melee" && weapon.rootweapon.name != # "bare_hands";
 }
 
 isbulletdamage(meansofdeath) {

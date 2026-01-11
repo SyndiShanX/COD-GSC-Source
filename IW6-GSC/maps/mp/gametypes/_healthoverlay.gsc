@@ -72,8 +72,7 @@ playerHealthRegen() {
 
     if(self _hasPerk("specialty_regenfaster")) {
       self.regenSpeed *= level.regenFasterMod;
-    }
-    else if(self _hasPerk("specialty_bloodrush")) {
+    } else if(self _hasPerk("specialty_bloodrush")) {
       self.regenSpeed *= self.bloodrushRegenSpeedMod;
     }
 
@@ -156,8 +155,7 @@ healthRegeneration(hurtTime, healthRatio) {
       if(self.health < self.maxHealth) {
         if(self _hasPerk("specialty_regenfaster")) {
           self.health += level.regenFasterHealthMod;
-        }
-        else if(self _hasPerk("specialty_bloodrush")) {
+        } else if(self _hasPerk("specialty_bloodrush")) {
           self.health += self.bloodrushRegenHealthMod;
         }
       } else
@@ -220,8 +218,7 @@ playerPainBreathingSound(healthcap) {
     }
     if(self hasFemaleCustomizationModel()) {
       self playLocalSound("Fem_breathing_hurt");
-    }
-    else {
+    } else {
       self playLocalSound("breathing_hurt");
     }
 

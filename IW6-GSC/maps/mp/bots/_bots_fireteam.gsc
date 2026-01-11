@@ -382,8 +382,7 @@ fireteam_tdm_find_hunt_zone(whichTeam) {
         curZone = undefined;
         if(isDefined(level.fireteam_hunt_target_zone[whichTeam])) {
           curZone = level.fireteam_hunt_target_zone[whichTeam];
-        }
-        else {
+        } else {
           first_search = true;
           changeZones = true;
           curZone = leaderZone;

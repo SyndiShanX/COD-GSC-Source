@@ -165,8 +165,7 @@ func_906C() {
   while(isDefined(self) && isDefined(level.player)) {
     if(level.player usebuttonpressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player)) {
       level.player.func_906B++;
-    }
-    else {
+    } else {
       setdvar("ui_securing", "");
       self stoploopsound("intelligence_pickup_loop");
       self notify("stopped_pressing");
@@ -206,8 +205,7 @@ func_9961(var_00, var_01) {
 
     if(var_04 < var_03 / 2) {
       var_00 give_zap_perk(&"SCRIPT_INTELLIGENCE_UPLOADING");
-    }
-    else {
+    } else {
       var_00 give_zap_perk("");
     }
 
@@ -261,8 +259,7 @@ func_9952(var_00) {
 
     if(var_00 == var_05 && var_05 _meth_8153(self.func_C1D5)) {
       var_6.label = &"SCRIPT_RORKEFILE_PREV_FOUND";
-    }
-    else {
+    } else {
       var_6.label = &"SCRIPT_INTELLIGENCE_OF_EIGHTEEN";
       var_05 setplayerangles();
       var_07 = var_05 _meth_8139("cheatPoints");

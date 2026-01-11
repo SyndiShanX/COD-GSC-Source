@@ -9,7 +9,7 @@ main() {
   self endon(#"death");
   self notify(#"killanimscript");
   self notify(#"clearsuppressionattack");
-  self.codescripted[#"root"] = "body";
+  self.codescripted[# "root"] = "body";
   self endon(#"end_sequence");
   self.a.script = "scripted";
   self waittill(#"killanimscript");

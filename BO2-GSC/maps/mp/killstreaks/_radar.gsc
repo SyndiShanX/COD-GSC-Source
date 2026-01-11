@@ -22,7 +22,7 @@ init() {
   level.radartimers = [];
 
   foreach(team in level.teams) {
-  level.radartimers[team] = gettime();
+    level.radartimers[team] = gettime();
   }
 
   level.spyplaneviewtime = 25;
@@ -193,8 +193,7 @@ setteamspyplanewrapper(team, value) {
 
   if(team == "allies") {
     setmatchflag("radar_allies", value);
-  }
-  else if(team == "axis") {
+  } else if(team == "axis") {
     setmatchflag("radar_axis", value);
   }
 
@@ -214,8 +213,7 @@ setteamsatellitewrapper(team, value) {
 
   if(team == "allies") {
     setmatchflag("radar_allies", value);
-  }
-  else if(team == "axis") {
+  } else if(team == "axis") {
     setmatchflag("radar_axis", value);
   }
 

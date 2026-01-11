@@ -4,12 +4,11 @@
 **********************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace mp_prop_controls;
 
 class cmp_prop_controls: cluielem {
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"mp_prop_controls");
+    cluielem::open(localclientnum, # "mp_prop_controls");
   }
 
   function function_fa582112(localclientnum) {

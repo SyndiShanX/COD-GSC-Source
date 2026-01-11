@@ -197,8 +197,7 @@ onMenuResponse() {
           self[[level.spectator]]();
           break;
       }
-    }
-    else if(menu == game["menu_changeclass"] ||
+    } else if(menu == game["menu_changeclass"] ||
       (isDefined(game["menu_changeclass_defaults_splitscreen"]) && menu == game["menu_changeclass_defaults_splitscreen"]) ||
       (isDefined(game["menu_changeclass_custom_splitscreen"]) && menu == game["menu_changeclass_custom_splitscreen"])) {
       self closepopupMenu();
@@ -209,11 +208,9 @@ onMenuResponse() {
     } else if(!level.console) {
       if(menu == game["menu_quickcommands"]) {
         maps\mp\gametypes\_quickmessages::quickcommands(response);
-      }
-      else if(menu == game["menu_quickstatements"]) {
+      } else if(menu == game["menu_quickstatements"]) {
         maps\mp\gametypes\_quickmessages::quickstatements(response);
-      }
-      else if(menu == game["menu_quickresponses"]) {
+      } else if(menu == game["menu_quickresponses"]) {
         maps\mp\gametypes\_quickmessages::quickresponses(response);
       }
     }
@@ -236,11 +233,9 @@ getTeamAssignment() {
     if(playerCounts["allies"] == playerCounts["axis"]) {
       if(getTeamScore("allies") == getTeamScore("axis")) {
         assignment = teams[randomInt(2)];
-      }
-      else if(getTeamScore("allies") < getTeamScore("axis")) {
+      } else if(getTeamScore("allies") < getTeamScore("axis")) {
         assignment = "allies";
-      }
-      else {
+      } else {
         assignment = "axis";
       }
     } else if(playerCounts["allies"] < playerCounts["axis"]) {
@@ -290,8 +285,7 @@ beginClassChoice(forceNewChoice) {
 
   if(allowClassChoice()) {
     self openpopupMenu(game["menu_changeclass_" + team]);
-  }
-  else {
+  } else {
     self thread bypassClassChoice();
   }
 
@@ -308,8 +302,7 @@ bypassClassChoice() {
 beginTeamChoice() {
   if(getDvarInt("scr_player_forceautoassign") != 0) {
     self notify("menuresponse", game["menu_team"], "autoassign");
-  }
-  else {
+  } else {
     self openpopupMenu(game["menu_team"]);
   }
 }
@@ -436,8 +429,7 @@ menuClass(response) {
     if(game["state"] == "postgame") {
       return;
     }
-    if(level.inGracePeriod && !self.hasDoneCombat)
-    {
+    if(level.inGracePeriod && !self.hasDoneCombat) {
       self maps\mp\gametypes\_class::setClass(self.pers["class"]);
       self.tag_stowed_back = undefined;
       self.tag_stowed_hip = undefined;
@@ -476,8 +468,7 @@ addToTeam(team, firstConnect) {
     } else {
       if(team == "spectator") {
         self.sessionteam = "spectator";
-      }
-      else {
+      } else {
         self.sessionteam = "none";
       }
     }

@@ -18,8 +18,7 @@ setup_player() {
 
     if(isDefined(var_1.angles)) {
       level.player setplayerangles(var_1.angles);
-    }
-    else {
+    } else {
       iprintlnbold("Your script_struct " + level.start_point + "_start has no angles! Set some.");
     }
   } else {}
@@ -58,8 +57,7 @@ spawn_ally(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_2 = level.start_point + "_" + var_0;
-  }
-  else {
+  } else {
     var_2 = var_1 + "_" + var_0;
   }
 
@@ -85,8 +83,7 @@ spawn_ally(var_0, var_1) {
 
   if(level.start_point == "bar" || level.start_point == "junction" || level.start_point == "rappel" || level.start_point == "garden" || level.start_point == "hvt_capture" || level.start_point == "stairwell" || level.start_point == "atrium") {
     var_4 maps\_utility::forceuseweapon("kriss+eotechsmg_sp+silencer_sp", "primary");
-  }
-  else {
+  } else {
     var_4 maps\_utility::forceuseweapon("imbel+acog_sp+silencer_sp", "primary");
   }
 
@@ -196,7 +193,7 @@ handle_intro_fx() {
   var_0 = getEntArray("intro_fans", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread rotatefan();
+    var_2 thread rotatefan();
   }
 }
 
@@ -258,8 +255,7 @@ watch_tv_for_damage(var_0, var_1, var_2, var_3) {
 check_ai_array_for_death(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     maps\_utility::waittill_dead_or_dying(var_0, var_2);
-  }
-  else {
+  } else {
     maps\_utility::waittill_dead_or_dying(var_0);
   }
 
@@ -478,8 +474,7 @@ generic_prop_raven_anim(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, 
 
   if(isDefined(var_8)) {
     wait(var_8);
-  }
-  else {
+  } else {
     var_11 waittillmatch("single anim", "end");
   }
 
@@ -604,15 +599,13 @@ debris_spawner(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(;;) {
     if(isDefined(var_4)) {
       var_6 = randomintrange(-104, 104);
-    }
-    else {
+    } else {
       var_6 = 0;
     }
 
     if(isDefined(var_5)) {
       var_7 = randomintrange(-104, 104);
-    }
-    else {
+    } else {
       var_7 = 0;
     }
 
@@ -730,8 +723,7 @@ littlebird_spotlight_think(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_0 > 0) {
     maps\_utility::delaythread(var_0, ::littlebird_spotlight_on);
-  }
-  else {
+  } else {
     littlebird_spotlight_on();
   }
 
@@ -849,8 +841,7 @@ watch_player_pitch_in_volume(var_0, var_1, var_2, var_3, var_4) {
           if(var_7 < 50 && var_7 > -30) {
             if(var_6 == var_3) {
               common_scripts\utility::flag_set(var_2);
-            }
-            else {
+            } else {
               var_6++;
             }
           } else if(var_6 > 0)
@@ -865,8 +856,7 @@ watch_player_pitch_in_volume(var_0, var_1, var_2, var_3, var_4) {
           if(var_7 > -45 && var_7 < -15) {
             if(var_6 == var_3) {
               common_scripts\utility::flag_set(var_2);
-            }
-            else {
+            } else {
               var_6++;
             }
           } else if(var_6 > 0)
@@ -914,14 +904,11 @@ alert_all(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     common_scripts\utility::flag_wait_any("enemies_aware", var_0, var_1, var_2);
-  }
-  else if(isDefined(var_1)) {
+  } else if(isDefined(var_1)) {
     common_scripts\utility::flag_wait_any("enemies_aware", var_0, var_1);
-  }
-  else if(isDefined(var_0)) {
+  } else if(isDefined(var_0)) {
     common_scripts\utility::flag_wait_any("enemies_aware", var_0);
-  }
-  else {
+  } else {
     common_scripts\utility::flag_wait("enemies_aware");
   }
 
@@ -941,10 +928,9 @@ watch_for_death_and_alert_all_in_volume(var_0, var_1) {
   if(isDefined(var_2) && var_2.size != 0) {
     if(isDefined(var_1)) {
       common_scripts\utility::flag_set(var_1);
-    }
-    else {
+    } else {
       foreach(var_4 in var_2) {
-      var_4 notify("enemy_aware");
+        var_4 notify("enemy_aware");
       }
     }
   }
@@ -984,8 +970,7 @@ coordinated_kills(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     ally_stealth_kill(var_0, var_1, var_4);
-  }
-  else {
+  } else {
     ally_stealth_kill(var_0, var_1);
   }
 }
@@ -1178,8 +1163,7 @@ custom_fade_out(var_0, var_1, var_2) {
 
   if(!isDefined(var_2)) {
     var_3.alpha = 1;
-  }
-  else {
+  } else {
     var_3.alpha = var_2;
   }
 
@@ -1388,8 +1372,7 @@ within_player_rappel_fov_2d(var_0, var_1, var_2) {
 
   if(isDefined(level.plyr_rpl_groundref)) {
     var_4 = combineangles(level.plyr_rpl_groundref.angles, var_3);
-  }
-  else {
+  } else {
     var_4 = var_3;
   }
 
@@ -1436,8 +1419,7 @@ player_get_favorite_enemy(var_0) {
 rappel_get_angle_facing_wall(var_0) {
   if(var_0 == "combat") {
     return -33.7;
-  }
-  else {
+  } else {
     return 90.0;
   }
 }
@@ -1699,14 +1681,11 @@ ally_get_vertical_stop_anim_distance(var_0) {
 
   if(var_0 == "down") {
     return 26.776;
-  }
-  else if(var_1) {
+  } else if(var_1) {
     return 24.982;
-  }
-  else if(var_2) {
+  } else if(var_2) {
     return 40.89;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -1714,8 +1693,7 @@ ally_get_vertical_stop_anim_distance(var_0) {
 ally_get_horizontal_stop_distance(var_0) {
   if(var_0 == "left") {
     return 119.4;
-  }
-  else {
+  } else {
     return 118.1;
   }
 }
@@ -1723,8 +1701,7 @@ ally_get_horizontal_stop_distance(var_0) {
 ally_get_horizontal_start_distance(var_0) {
   if(var_0 == "left") {
     return 45.9;
-  }
-  else {
+  } else {
     return 26.56;
   }
 }
@@ -1733,13 +1710,13 @@ cleanup_outside_ents_on_entry() {
   var_0 = getEntArray("cnd_wood_furniture_delete", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   var_4 = getEntArray("cnd_garden_chair_02_delete", "script_noteworthy");
 
   foreach(var_2 in var_4) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -1798,7 +1775,7 @@ demo_setup_allies(var_0) {
   wait(var_0);
 
   foreach(var_2 in level.allies) {
-  var_2 stopanimscripted();
+    var_2 stopanimscripted();
   }
 
   if(isDefined(level.rorke_inverted_kill_knife)) {
@@ -2000,8 +1977,7 @@ dof_process_ads_rooftop() {
 
   if(isDefined(self.dof_ref_ent)) {
     var_12 = combineangles(self.dof_ref_ent.angles, var_11);
-  }
-  else {
+  } else {
     var_12 = var_11;
   }
 
@@ -2010,8 +1986,7 @@ dof_process_ads_rooftop() {
 
   if(var_14["fraction"] == 1) {
     var_1 = 86000;
-  }
-  else {
+  } else {
     var_1 = distance(var_10, var_14["position"]);
   }
 

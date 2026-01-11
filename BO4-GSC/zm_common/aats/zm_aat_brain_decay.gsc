@@ -13,11 +13,10 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\trials\zm_trial_headshots_only;
 #include scripts\zm_common\zm_stats;
-
 #namespace zm_aat_brain_decay;
 
 autoexec __init__system__() {
-  system::register("zm_aat_brain_decay", &__init__, undefined, #"aat");
+  system::register("zm_aat_brain_decay", &__init__, undefined, # "aat");
 }
 
 __init__() {
@@ -35,7 +34,7 @@ __init__() {
 result(death, attacker, mod, weapon) {
   self thread clientfield::set("zm_aat_brain_decay", 1);
   self thread zombie_death_time_limit(attacker, weapon);
-  self.team = #"allies";
+  self.team = # "allies";
   self.aat_turned = 1;
   self.n_aat_turned_zombie_kills = 0;
   self.var_16d0eb06 = 20000;
@@ -44,7 +43,7 @@ result(death, attacker, mod, weapon) {
   self.allowpain = 0;
   self.b_ignore_cleanup = 1;
 
-  if(self.archetype === #"zombie") {
+  if(self.archetype === # "zombie") {
     self zombie_utility::set_zombie_run_cycle("super_sprint");
 
     if(math::cointoss()) {
@@ -85,7 +84,7 @@ function_8e97a3a4(attacker, weapon) {
       continue;
     }
 
-    if(isDefined(level.aat[#"zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) && level.aat[#"zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) {
+    if(isDefined(level.aat[# "zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) && level.aat[# "zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) {
       continue;
     }
 
@@ -128,7 +127,7 @@ private function_fef86dd4(var_c5ad44f1, n_damage, e_attacker, weapon) {
 }
 
 function_682e5375() {
-  if(isDefined(level.aat[#"zm_aat_brain_decay"].immune_result_direct[self.archetype]) && level.aat[#"zm_aat_brain_decay"].immune_result_direct[self.archetype]) {
+  if(isDefined(level.aat[# "zm_aat_brain_decay"].immune_result_direct[self.archetype]) && level.aat[# "zm_aat_brain_decay"].immune_result_direct[self.archetype]) {
     return false;
   }
 
@@ -161,8 +160,8 @@ function_682e5375() {
 
 zombie_death_time_limit(e_attacker, weapon) {
   self endon(#"death");
-  level endoncallback(&function_a22e41ec, #"end_game", #"restart_round");
-  self waittilltimeout(8, #"hash_1bbb03bd582e937f");
+  level endoncallback(&function_a22e41ec, # "end_game", # "restart_round");
+  self waittilltimeout(8, # "hash_1bbb03bd582e937f");
   var_8651a024 = self getcentroid();
   self clientfield::set("zm_aat_brain_decay", 0);
   self clientfield::increment("zm_aat_brain_decay_exp", 1);
@@ -180,7 +179,7 @@ function_a22e41ec(_hash) {
 
   self notify("dad16f153c7d14b");
   self endon("dad16f153c7d14b");
-  ai_zombies = getaiteamarray(#"axis", #"allies");
+  ai_zombies = getaiteamarray(#"axis", # "allies");
 
   foreach(ai in ai_zombies) {
     if(isalive(ai) && isDefined(ai.aat_turned) && ai.aat_turned) {
@@ -210,7 +209,7 @@ zombie_death_explosion(var_58928a4b, e_attacker, weapon) {
       continue;
     }
 
-    if(isDefined(level.aat[#"zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) && level.aat[#"zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) {
+    if(isDefined(level.aat[# "zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) && level.aat[# "zm_aat_brain_decay"].immune_result_indirect[a_ai_zombies[i].archetype]) {
       continue;
     }
 

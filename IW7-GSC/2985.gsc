@@ -8,8 +8,7 @@ func_39B3(var_00, var_01, var_02) {
 
   if(issubstr(var_02, "mons") && level.script != "marscrash") {
     scripts\sp\vehicle_build::func_31B8("mig_rumble", 0.2, 0.15, 1000000, 0.05, 0.05);
-  }
-  else {
+  } else {
     scripts\sp\vehicle_build::func_31B8("mig_rumble", 0.2, 0.15, 20300, 0.05, 0.05);
   }
 
@@ -21,11 +20,9 @@ func_39B3(var_00, var_01, var_02) {
 
   if(issubstr(var_02, "cheap")) {
     func_3995(var_01, var_02);
-  }
-  else if(issubstr(var_02, "periph")) {
+  } else if(issubstr(var_02, "periph")) {
     func_3995(var_01, var_02);
-  }
-  else {
+  } else {
     func_3994(var_01);
   }
 }
@@ -48,8 +45,7 @@ func_396E(var_00) {
 
   if(issubstr(self.classname, "periph")) {
     thread func_246C(self.model);
-  }
-  else if(issubstr(self.classname, "cheap")) {
+  } else if(issubstr(self.classname, "cheap")) {
     thread func_246C(self.model);
     thread scripts\engine\utility::delaythread(0.1, func_0BB8::func_397F, 1, 0);
   } else {
@@ -79,8 +75,7 @@ func_3972() {
   if(isDefined(self.func_12FF3)) {
     if(isDefined(self.func_10250)) {
       var_00 = 1;
-    }
-    else {
+    } else {
       var_00 = 0;
     }
 
@@ -167,8 +162,7 @@ func_246C(var_00) {
   if(issubstr(var_00, "_rig") && !issubstr(var_00, "_sa_")) {
     if(isDefined(self.func_B210)) {
       self attach(self.func_B210, "TAG_ORIGIN");
-    }
-    else if(issubstr(self.classname, "_cheap")) {
+    } else if(issubstr(self.classname, "_cheap")) {
       var_00 = getsubstr(var_00, 0, var_0.size - 4);
       var_00 = var_00 + "_periph";
       self attach(var_00, "TAG_ORIGIN");
@@ -347,7 +341,7 @@ func_39C7(var_00) {
     return;
   }
   foreach(var_05 in var_03) {
-  precachemodel(var_5.script_parameters);
+    precachemodel(var_5.script_parameters);
   }
 }
 
@@ -424,8 +418,7 @@ func_48AF(var_00) {
   for(var_01 = 1; var_01 <= self.func_C1FB; var_1++) {
     if(var_01 < 10) {
       var_02 = "0";
-    }
-    else {
+    } else {
       var_02 = "";
     }
 
@@ -488,7 +481,7 @@ func_39AD() {}
 
 func_39AB() {
   foreach(var_01 in self.func_CB53) {
-  var_01 delete();
+    var_01 delete();
   }
 
   self delete();
@@ -501,8 +494,7 @@ func_3974(var_00, var_01) {
   if(!isDefined(level.func_1024A)) {
     if(scripts\engine\utility::is_true(level.func_12FB6) == 1) {
       playFX(level.func_3979[self.type].func_7571, self.origin, anglesToForward(self.angles), anglestoup(self.angles));
-    }
-    else {
+    } else {
       playFX(level.func_3979[self.type].func_7570, self.origin, anglesToForward(self.angles), anglestoup(self.angles));
     }
   }
@@ -523,7 +515,9 @@ func_3974(var_00, var_01) {
     scripts\engine\utility::delaycall(var_10, ::playsound, "capital_ship_explo_jackal_debris");
 
     if(isDefined(level.func_A056) && isDefined(var_01) && var_01) {
-      [[level.func_A056.func_3A02]](var_00, var_06, var_07, var_08, var_02, var_03);
+      [
+        [level.func_A056.func_3A02]
+      ](var_00, var_06, var_07, var_08, var_02, var_03);
     }
   }
 }
@@ -727,8 +721,7 @@ func_3977() {
     for(var_08 = 1; var_08 <= var_0.func_C1FB; var_8++) {
       if(var_08 < 10) {
         var_09 = "0";
-      }
-      else {
+      } else {
         var_09 = "";
       }
 
@@ -917,8 +910,7 @@ func_F2F7() {
 
   if(isDefined(self.func_C825)) {
     var_00 = self.func_C825;
-  }
-  else {
+  } else {
     var_00 = "turret_ja";
   }
 
@@ -1028,8 +1020,7 @@ func_3987(var_00) {
 
   if(var_04 < 0) {
     var_06 = self.func_8B50["cap_hardpoint_missile_barrage"];
-  }
-  else {
+  } else {
     var_06 = self.func_8B51["cap_hardpoint_missile_barrage"];
   }
 
@@ -1039,8 +1030,7 @@ func_3987(var_00) {
   if(var_6.size == 0) {
     if(var_04 < 0) {
       var_06 = self.func_8B51["cap_hardpoint_missile_barrage"];
-    }
-    else {
+    } else {
       var_06 = self.func_8B50["cap_hardpoint_missile_barrage"];
     }
 
@@ -1055,8 +1045,7 @@ func_3987(var_00) {
   if(isDefined(self.func_B89A) && isDefined(self.func_B899)) {
     if(self.func_B89A == self.func_B899) {
       var_07 = self.func_B89A * 1000;
-    }
-    else {
+    } else {
       var_07 = randomfloatrange(self.func_B89A, self.func_B899) * 1000;
     }
 
@@ -1212,15 +1201,13 @@ func_FF47() {
 
     if(self.func_56EA <= self.func_B89E && var_00 <= self.func_B89F) {
       scripts\sp\utility::func_65E1("missiles_player_close_force");
-    }
-    else {
+    } else {
       scripts\sp\utility::func_65DD("missiles_player_close_force");
     }
 
     if(self.func_56EA <= self.func_B89B) {
       scripts\sp\utility::func_65E1("missiles_player_close");
-    }
-    else {
+    } else {
       scripts\sp\utility::func_65DD("missiles_player_close");
     }
 
@@ -1276,15 +1263,13 @@ func_FF6D() {
   for(;;) {
     if(self.func_56EA >= self.func_B8A3) {
       scripts\sp\utility::func_65E1("missiles_player_far_force");
-    }
-    else {
+    } else {
       scripts\sp\utility::func_65DD("missiles_player_far_force");
     }
 
     if(self.func_56EA >= self.func_B8A0) {
       scripts\sp\utility::func_65DD("missiles_player_close");
-    }
-    else {
+    } else {
       scripts\sp\utility::func_65E1("missiles_player_close");
     }
 
@@ -1317,8 +1302,7 @@ func_12A1E() {
 
     if(scripts\sp\utility::func_7B9D() <= 0.1) {
       var_00 = 0;
-    }
-    else if(scripts\sp\utility::func_7B9D() >= 0.6) {
+    } else if(scripts\sp\utility::func_7B9D() >= 0.6) {
       var_00 = 1;
     }
 
@@ -1343,7 +1327,7 @@ func_EA01() {
 func_EA02(var_00) {
   if(isDefined(var_00)) {
     foreach(var_02 in var_00) {
-    var_02 func_EA01();
+      var_02 func_EA01();
     }
   }
 }

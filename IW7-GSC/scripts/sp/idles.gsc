@@ -240,9 +240,7 @@ func_DC84(param_00) {
 
       var_0E = undefined;
       if(isDefined(var_07.var_1ED4)) {
-        var_0E = [
-          [var_07.var_1ED4]
-        ]();
+        var_0E = [[var_07.var_1ED4]]();
       }
 
       var_0F = getanimlength(var_03);
@@ -451,9 +449,7 @@ func_DC83(param_00) {
       var_06.angles = var_09;
       var_0A = undefined;
       if(isDefined(var_06.var_1ED4)) {
-        var_0A = [
-          [var_06.var_1ED4]
-        ]();
+        var_0A = [[var_06.var_1ED4]]();
       }
 
       var_10 = getanimlength(var_07);
@@ -472,9 +468,7 @@ func_DC83(param_00) {
       var_06.angles = var_09;
       var_0A = undefined;
       if(isDefined(var_06.var_1ED4)) {
-        var_0A = [
-          [var_06.var_1ED4]
-        ]();
+        var_0A = [[var_06.var_1ED4]]();
       }
 
       var_06 animscripted("single anim", self.origin, self.angles, var_14, undefined, var_0A, 0.2);

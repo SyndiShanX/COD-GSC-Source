@@ -78,8 +78,7 @@ apache_ally_path_attack_internal(var_0, var_1, var_2, var_3) {
 
   if(isai(var_4)) {
     heli_attack_mg(var_4, 6);
-  }
-  else {
+  } else {
     vehicle_attack_missile(var_4, var_1);
   }
 }
@@ -219,8 +218,7 @@ vehicle_attack_missile(var_0, var_1, var_2) {
 
     if(!var_9) {
       var_16 = self fireweapon(var_15, var_12);
-    }
-    else {
+    } else {
       var_17 = self gettagorigin(var_15);
       var_18 = vectornormalize(var_0.origin - var_17);
       var_16 = magicbullet(var_5, var_17 + var_18 * 60, var_17 + var_18 * 120);
@@ -284,8 +282,7 @@ do_random_pilot_chatter(var_0) {
 attack_missile_set_up_and_notify(var_0, var_1, var_2, var_3) {
   if(var_2) {
     var_0.type_missile = "guided";
-  }
-  else {
+  } else {
     var_0.type_missile = "straight";
   }
 
@@ -295,8 +292,7 @@ attack_missile_set_up_and_notify(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1.heli) && isDefined(var_1.heli.owner) && isplayer(var_1.heli.owner)) {
     var_1.heli.owner notify("LISTEN_missile_fire", var_0);
-  }
-  else {
+  } else {
     var_1 notify("LISTEN_missile_fire", var_0);
   }
 }
@@ -511,8 +507,7 @@ spawn_infantry_in_blackhawk() {
 asign_blackhawk_riders() {
   if(!isDefined(level.infantry_guys)) {
     level.infantry_guys = [];
-  }
-  else {
+  } else {
     level.infantry_guys = maps\oilrocks_code::array_remove_undefined_dead_or_dying(level.infantry_guys);
   }
 
@@ -614,7 +609,7 @@ add_as_apaches_target(var_0) {
   var_1 = get_apache_players();
 
   foreach(var_3 in var_1) {
-  thread maps\oilrocks_code::addasapachehudtarget(var_3, var_0);
+    thread maps\oilrocks_code::addasapachehudtarget(var_3, var_0);
   }
 }
 
@@ -628,7 +623,7 @@ update_targets(var_0) {
 
   foreach(var_3 in var_1) {
     foreach(var_5 in level.apache_target_manager) {
-    var_5 maps\oilrocks_code::addasapachehudtarget(var_3, var_0);
+      var_5 maps\oilrocks_code::addasapachehudtarget(var_3, var_0);
     }
   }
 }
@@ -813,11 +808,9 @@ vehicle_ai_turret_think() {
       if(var_2) {
         if(isDefined(self.vehicle_ai_turret_think_next_missile_time) && gettime() < self.vehicle_ai_turret_think_next_missile_time) {
           var_9 = 0;
-        }
-        else if(isDefined(var_8.veh_missiles_targeting) && var_8.veh_missiles_targeting > 0) {
+        } else if(isDefined(var_8.veh_missiles_targeting) && var_8.veh_missiles_targeting > 0) {
           var_9 = 0;
-        }
-        else if(!is_apache_player(var_8) && randomfloat(1.0) <= level.apache_difficulty.gunboat_chance_fire_missile_at_ai) {
+        } else if(!is_apache_player(var_8) && randomfloat(1.0) <= level.apache_difficulty.gunboat_chance_fire_missile_at_ai) {
           var_9 = 0;
         }
       }
@@ -908,8 +901,7 @@ vehicle_ai_turret_get_target() {
 
     if(!isDefined(var_13)) {
       var_13 = var_15;
-    }
-    else if(var_15 > var_13) {
+    } else if(var_15 > var_13) {
       break;
     }
 
@@ -931,11 +923,9 @@ vehicle_ai_turret_get_target_type() {
 
   if(maps\_vehicle::isvehicle()) {
     var_0 = "vehicle";
-  }
-  else if(isai(self)) {
+  } else if(isai(self)) {
     var_0 = "ai";
-  }
-  else {}
+  } else {}
 
   return var_0;
 }
@@ -1021,8 +1011,7 @@ vehicle_ai_turret_shoot_target(var_0, var_1, var_2) {
 
   if(var_4) {
     var_5 = 70;
-  }
-  else {
+  } else {
     var_5 = randomintrange(25, 35);
   }
 
@@ -1087,14 +1076,11 @@ vehicle_ai_turret_get_fx_shoot_flash() {
 
   if(issubstr(self.classname, "_gaz_")) {
     var_0 = "FX_oilrocks_turret_flash_gaz";
-  }
-  else if(issubstr(self.classname, "_gunboat")) {
+  } else if(issubstr(self.classname, "_gunboat")) {
     var_0 = "FX_oilrocks_turret_flash_gunboat";
-  }
-  else if(issubstr(self.classname, "_zpu4")) {
+  } else if(issubstr(self.classname, "_zpu4")) {
     var_0 = "FX_oilrocks_turret_flash_zpu";
-  }
-  else {}
+  } else {}
 
   return var_0;
 }
@@ -1169,8 +1155,7 @@ manage_active_hind_forced_targets() {
 
       if(var_1.size == 1) {
         var_1[0] dot_to_apache_player_facing_2d();
-      }
-      else {
+      } else {
         var_1 = common_scripts\utility::array_sort_by_handler(var_1, ::dot_to_apache_player_facing_2d_inverse);
       }
 
@@ -1284,11 +1269,9 @@ heli_ai_shoot_target(var_0) {
 
   if(isai(var_0) && !heli_decides_to_shoot_missile_at_ai(var_0)) {
     var_1 = 0;
-  }
-  else if(isDefined(self.heli_ai_shoot_missile_time_next) && gettime() < self.heli_ai_shoot_missile_time_next) {
+  } else if(isDefined(self.heli_ai_shoot_missile_time_next) && gettime() < self.heli_ai_shoot_missile_time_next) {
     var_1 = 0;
-  }
-  else if(common_scripts\utility::distance_2d_squared(self.origin, var_0.origin) <= level.apache_difficulty.heli_vs_heli_mg_range_2d_squared) {
+  } else if(common_scripts\utility::distance_2d_squared(self.origin, var_0.origin) <= level.apache_difficulty.heli_vs_heli_mg_range_2d_squared) {
     var_1 = 0;
   }
 
@@ -1317,8 +1300,7 @@ heli_ai_pre_move_func() {
 
   if(isDefined(maps\_chopperboss_utility::chopper_boss_forced_target_get())) {
     self setlookatent(maps\_chopperboss_utility::chopper_boss_forced_target_get());
-  }
-  else if(isalive(self.heli_target)) {
+  } else if(isalive(self.heli_target)) {
     self setlookatent(self.heli_target);
     self.last_heli_lookat_origin = self.heli_target.origin;
   } else
@@ -1448,8 +1430,7 @@ ai_clean_up(var_0, var_1) {
 
   if(var_0) {
     self delete();
-  }
-  else {
+  } else {
     self kill(self.origin);
   }
 }
@@ -1541,11 +1522,9 @@ earthquake_valid_entity(var_0, var_1) {
 
   if(isDefined(var_0.destructible_type)) {
     var_4 = issubstr(var_0.destructible_type, "tank") || issubstr(var_0.destructible_type, "vehicle_");
-  }
-  else if(isDefined(var_0.classname)) {
+  } else if(isDefined(var_0.classname)) {
     var_4 = issubstr(var_0.classname, "script_vehicle_");
-  }
-  else if(isvalidmissile(var_0)) {
+  } else if(isvalidmissile(var_0)) {
     var_4 = 1;
   }
 
@@ -1579,8 +1558,7 @@ earthquake_on_death() {
       if(gettime() > level.engagementcomplimentdialognext) {
         if(issubstr(var_2, "apache_")) {
           get_apache_ally(1) do_random_pilot_chatter("missile_confirm");
-        }
-        else {
+        } else {
           get_apache_ally(1) do_random_pilot_chatter("other_player_kill_confirm");
         }
 
@@ -1896,7 +1874,7 @@ send_apaches_to_hangout_thread(var_0) {
   var_1 = get_apache_allies();
 
   foreach(var_3 in var_1) {
-  var_3 maps\oilrocks_code::chopper_boss_goto_hangout();
+    var_3 maps\oilrocks_code::chopper_boss_goto_hangout();
   }
 }
 

@@ -218,8 +218,7 @@ boneyard_killstreak_ui_watcher(rocket, loop_time) {
 
       if(my_state > 0) {
         flag_set("boneyard_killstreak_can_kill");
-      }
-      else {
+      } else {
         flag_clear("boneyard_killstreak_can_kill");
       }
     }
@@ -268,7 +267,7 @@ ks_vertical_fire() {
     thread damage_targets(level.ks_vertical, attacker, level.deployable_box["deployable_ammo"], 150);
 
     foreach(org in level.ks_vertical.destructibles) {
-    RadiusDamage(org, 1, 45, 45, attacker);
+      RadiusDamage(org, 1, 45, 45, attacker);
     }
   }
 
@@ -318,21 +317,18 @@ damage_characters(rocket, attacker, damage) {
       if(IsPlayer(victim)) {
         if(isDefined(rocket.player) && victim == rocket.player)
       }
-          victim maps\mp\gametypes\_damage::finishPlayerDamageWrapper(rocket.inflictor, attacker, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0, 0);
-        else {
-          victim DoDamage(damage, rocket.inflictor.origin, attacker, rocket.inflictor, "MOD_EXPLOSIVE");
-        }
-      else if(isDefined(victim.owner) && victim.owner == rocket.player) {
-        victim maps\mp\agents\_agents::on_agent_player_damaged(undefined, undefined, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
-      }
+      victim maps\mp\gametypes\_damage::finishPlayerDamageWrapper(rocket.inflictor, attacker, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0, 0);
       else {
+        victim DoDamage(damage, rocket.inflictor.origin, attacker, rocket.inflictor, "MOD_EXPLOSIVE");
+      } else if(isDefined(victim.owner) && victim.owner == rocket.player) {
+        victim maps\mp\agents\_agents::on_agent_player_damaged(undefined, undefined, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
+      } else {
         victim maps\mp\agents\_agents::on_agent_player_damaged(rocket.inflictor, attacker, damage, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
       }
     } else if(isDefined(victim) && isReallyAlive(victim)) {
       if(IsPlayer(victim)) {
         victim maps\mp\gametypes\_damage::Callback_PlayerDamage(undefined, undefined, 1, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
-      }
-      else {
+      } else {
         victim maps\mp\agents\_agents::on_agent_player_damaged(undefined, undefined, 1, 0, "MOD_EXPLOSIVE", "none", victim.origin, (0, 0, 1), "none", 0);
       }
     }
@@ -350,13 +346,9 @@ can_kill_character(rocket, victim) {
   if(level.teambased) {
     if(isDefined(rocket.player) && victim == rocket.player) {
       return true;
-    }
-
-    else if(isDefined(rocket.player) && isDefined(victim.owner) && victim.owner == rocket.player) {
+    } else if(isDefined(rocket.player) && isDefined(victim.owner) && victim.owner == rocket.player) {
       return true;
-    }
-
-    else if(isDefined(rocket.team) && victim.team == rocket.team) {
+    } else if(isDefined(rocket.team) && victim.team == rocket.team) {
       return false;
     }
   }
@@ -382,9 +374,7 @@ damage_targets(rocket, attacker, array_targets, damage) {
     }
     if(isDefined(target.owner) && target.owner == attacker) {
       target notify("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
-    }
-
-    else if(level.teamBased && isDefined(rocket.team) && isDefined(target.team) && target.team == rocket.team) {
+    } else if(level.teamBased && isDefined(rocket.team) && isDefined(target.team) && target.team == rocket.team) {
       continue;
     }
     target notify("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
@@ -415,8 +405,7 @@ ks_vertical_warning_lights() {
       foreach(player in level.players) {
         if(player.pers["team"] == level.ks_vertical.team) {
           ActivateClientExploder(19, player);
-        }
-        else {
+        } else {
           ActivateClientExploder(18, player);
         }
       }

@@ -109,8 +109,7 @@ rts_move_squadstocursor(squadid, tracepoint) {
   if(!isDefined(squadid)) {
     if(isDefined(level.rts.player.ally)) {
       squadid = level.rts.player.ally.squadid;
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -147,8 +146,7 @@ getnextvalidsquad(cursquad, direction) {
 
   if(!isDefined(cursquad)) {
     cursquad = 0;
-  }
-  else {
+  } else {
     if(cursquad < 0) {
       cursquad = level.rts.squads.size - 1;
     }
@@ -183,8 +181,7 @@ getnextvalidsquad(cursquad, direction) {
       if(direction == 1) {
         if(i + 1 < validsquads.size) {
           return validsquads[i + 1].id;
-        }
-        else {
+        } else {
           return validsquads[0].id;
         }
       }
@@ -217,8 +214,7 @@ squadselectnextaiandtakeover(nextsquad, norestore, targetent) {
   if(!isDefined(nextsquad)) {
     if(isDefined(level.rts.player.ally)) {
       cursquad = level.rts.player.ally.squadid;
-    }
-    else {
+    } else {
       cursquad = undefined;
     }
 
@@ -254,8 +250,7 @@ squadselectnextaiandtakeover(nextsquad, norestore, targetent) {
 
       if(isDefined(targetent.classname) && targetent.classname == "script_vehicle") {
         targetent veh_magic_bullet_shield(1);
-      }
-      else {
+      } else {
         targetent.takedamage = 0;
       }
 
@@ -289,8 +284,7 @@ squadselectnextaiandtakeover(nextsquad, norestore, targetent) {
 
       if(!(isDefined(targetent.classname) && targetent.classname == "script_vehicle")) {
         level.rts.player disableinvulnerability();
-      }
-      else {
+      } else {
         targetent veh_magic_bullet_shield(0);
       }
 
@@ -453,8 +447,7 @@ movesquadmarker(squadid, hide, point) {
 
   if(isDefined(hide) && hide) {
     luinotifyevent(&"rts_move_squad_marker", 1, squadid);
-  }
-  else {
+  } else {
     luinotifyevent(&"rts_move_squad_marker", 4, squadid, int(point[0]), int(point[1]), int(point[2]));
   }
 }
@@ -654,8 +647,7 @@ gotopoint(goal) {
 
       if(goingtonode) {
         self setgoalnode(goal);
-      }
-      else {
+      } else {
         self setgoalpos(goal);
       }
 
@@ -692,7 +684,7 @@ moveout() {
 squadmove(squadid) {
   if(hassquadmakeupchanged(squadid)) {
     foreach(guy in level.rts.squads[squadid].members) {
-    guy thread moveout();
+      guy thread moveout();
     }
   }
 }
@@ -748,8 +740,7 @@ ordersquaddefend(point, squadid, hidemarker) {
 
   if(flag("fps_mode")) {
     maps\_so_rts_event::trigger_event("squad_move_fps");
-  }
-  else {
+  } else {
     maps\_so_rts_event::trigger_event("squad_move_cmd");
   }
 
@@ -808,8 +799,7 @@ patrolpoint(point) {
 patrol() {
   if(!(isDefined(self.classname) && self.classname == "script_vehicle")) {
     self thread patrolpoint(level.rts.squads[self.squadid].centerpoint);
-  }
-  else {
+  } else {
     self thread maps\_vehicle::defend(level.rts.squads[self.squadid].centerpoint, 512);
   }
 }
@@ -869,8 +859,7 @@ attackorderwatcher(target) {
 
   if(!(isDefined(self.classname) && self.classname == "script_vehicle")) {
     self clearentitytarget();
-  }
-  else if(issentient(self)) {
+  } else if(issentient(self)) {
     self vehclearentitytarget();
   }
 }
@@ -885,8 +874,7 @@ targetwatcher(target) {
 
   if(!(isDefined(self.classname) && self.classname == "script_vehicle")) {
     self clearentitytarget();
-  }
-  else if(issentient(self)) {
+  } else if(issentient(self)) {
     self vehclearentitytarget();
   }
 }
@@ -942,8 +930,7 @@ squadattacktarget(squadid) {
 
     if(isDefined(level.rts.squads[squadid].foltarget)) {
       level thread ordersquadfollowai(squadid, level.rts.squads[squadid].foltarget, 0);
-    }
-    else if(isDefined(level.rts.squads[squadid].lastknowntargetloc)) {
+    } else if(isDefined(level.rts.squads[squadid].lastknowntargetloc)) {
       level thread ordersquaddefend(level.rts.squads[squadid].lastknowntargetloc, squadid);
     }
   }
@@ -981,8 +968,7 @@ ordersquadattack(squadid, ent, allsquads, height) {
 
   if(flag("fps_mode")) {
     maps\_so_rts_event::trigger_event("squad_attack_fps");
-  }
-  else {
+  } else {
     maps\_so_rts_event::trigger_event("squad_attack_cmd");
   }
 
@@ -1000,8 +986,7 @@ ordersquadattack(squadid, ent, allsquads, height) {
       if(isDefined(ent.pkg_ref)) {
         if(flag("fps_mode")) {
           maps\_so_rts_event::trigger_event("targetfps_" + ent.pkg_ref.ref);
-        }
-        else {
+        } else {
           maps\_so_rts_event::trigger_event("target_" + ent.pkg_ref.ref);
         }
       }
@@ -1057,8 +1042,7 @@ movewithai(target) {
     if(isDefined(self.rts_unloaded) && self.rts_unloaded && isDefined(target)) {
       if(isDefined(self.classname) && self.classname == "script_vehicle") {
         self thread vehgoalentity(target);
-      }
-      else {
+      } else {
         self thread aigoalentity(target);
       }
 
@@ -1111,8 +1095,7 @@ ordersquadfollowai(squadid, ent, allsquads, showmarker, height) {
 
   if(flag("fps_mode")) {
     maps\_so_rts_event::trigger_event("squad_move_fps");
-  }
-  else {
+  } else {
     maps\_so_rts_event::trigger_event("squad_move_cmd");
   }
 
@@ -1138,8 +1121,7 @@ ordersquadfollowai(squadid, ent, allsquads, showmarker, height) {
       if(isDefined(ent.pkg_ref)) {
         if(flag("fps_mode")) {
           maps\_so_rts_event::trigger_event("followfps_" + ent.pkg_ref.ref);
-        }
-        else {
+        } else {
           maps\_so_rts_event::trigger_event("follow_" + ent.pkg_ref.ref);
         }
       }
@@ -1208,11 +1190,9 @@ aigoalentity(entity) {
 
     if(isDefined(self.node) && distancesquared(entity.origin, self.node.origin) < self.goalradius * self.goalradius) {
       findnewnode = 0;
-    }
-    else if(isDefined(self.fixednode) && self.fixednode) {
+    } else if(isDefined(self.fixednode) && self.fixednode) {
       findnewnode = 0;
-    }
-    else if(self getpathlength() > 0) {
+    } else if(self getpathlength() > 0) {
       findnewnode = 0;
     }
 
@@ -1240,8 +1220,7 @@ movewithplayer() {
       if(flag("rts_mode")) {
         if(self.ai_ref.species == "vehicle") {
           self maps\_vehicle::defend(level.rts.lastfpspoint);
-        }
-        else if(isDefined(level.rts.lastfpspoint)) {
+        } else if(isDefined(level.rts.lastfpspoint)) {
           self squaddebug("moveWithPlayer", level.rts.lastfpspoint);
 
           self setgoalpos(level.rts.lastfpspoint);
@@ -1249,8 +1228,7 @@ movewithplayer() {
       } else if(isDefined(level.rts.player.ally)) {
         if(isDefined(self.classname) && self.classname == "script_vehicle") {
           self thread vehgoalentity(level.rts.player);
-        }
-        else {
+        } else {
           self thread aigoalentity(level.rts.player);
         }
 
@@ -1285,8 +1263,7 @@ executeordermovewithplayer(squadid) {
   level.rts.squads[squadid].nextstate = 0;
 }
 
-squaddonothing(squadid) {
-}
+squaddonothing(squadid) {}
 
 ordersquadmanaged(squadid) {
   if(isDefined(squadid)) {

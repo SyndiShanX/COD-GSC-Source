@@ -140,8 +140,7 @@ onSpawnPlayer() {
       team = level.flags[i] getFlagTeam();
       if(team == myTeam) {
         flagsOwned++;
-      }
-      else if(team == enemyTeam) {
+      } else if(team == enemyTeam) {
         enemyFlagsOwned++;
       }
     }
@@ -165,8 +164,7 @@ onSpawnPlayer() {
   if(!isDefined(spawnpoint)) {
     if(self.pers["team"] == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
     }
   }
@@ -187,14 +185,12 @@ domFlags() {
   game["flagmodels"]["neutral"] = "prop_flag_neutral";
   if(game["allies"] == "marines") {
     game["flagmodels"]["allies"] = "prop_flag_american";
-  }
-  else {
+  } else {
     game["flagmodels"]["allies"] = "prop_flag_russian";
   }
   if(game["axis"] == "german") {
     game["flagmodels"]["axis"] = "prop_flag_german";
-  }
-  else {
+  } else {
     game["flagmodels"]["axis"] = "prop_flag_japanese";
   }
   precacheModel(game["flagmodels"]["neutral"]);
@@ -330,8 +326,7 @@ onBeginUse(player) {
   }
   if(ownerTeam == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
   self.objPoints["allies"] thread maps\mp\gametypes\_objpoints::startFlashing();
@@ -407,8 +402,7 @@ onUse(player) {
     squadID = getplayersquadid(player);
     if(isDefined(squadID)) {
       maps\mp\gametypes\_globallogic::leaderDialog("secured" + self.label, team, undefined, undefined, "squad_take", squadID);
-    }
-    else {
+    } else {
       statusDialog("secured" + self.label, team);
     }
     statusDialog("enemy_has" + self.label, otherTeam);
@@ -422,8 +416,7 @@ onUse(player) {
       squadID = getplayersquadid(player);
       if(isDefined(squadID)) {
         maps\mp\gametypes\_globallogic::leaderDialog("secured" + self.label, team, undefined, undefined, "squad_take", squadID);
-      }
-      else {
+      } else {
         statusDialog("secured" + self.label, team);
       }
       statusDialog("lost" + self.label, oldTeam);
@@ -462,14 +455,18 @@ updateDomScores() {
   while(!level.gameEnded) {
     numFlags = getTeamFlagCount("allies");
     if(numFlags) {
-      [[level._setTeamScore]]("allies", [
-    }
+      [
+        [level._setTeamScore]
+      ]("allies", [
+        }
         [level._getTeamScore]
       ]("allies") + numFlags);
     numFlags = getTeamFlagCount("axis");
     if(numFlags) {
-      [[level._setTeamScore]]("axis", [
-    }
+      [
+        [level._setTeamScore]
+      ]("axis", [
+        }
         [level._getTeamScore]
       ]("axis") + numFlags);
     level.endGameOnScoreLimit = true;
@@ -623,8 +620,7 @@ flagSetup() {
     for(i = 0; i < flags.size; i++) {
       if(isDefined(flags[i].descriptor.script_linkto)) {
         adjdescs = strtok(flags[i].descriptor.script_linkto, " ");
-      }
-      else {
+      } else {
         adjdescs = [];
       }
       for(j = 0; j < adjdescs.size; j++) {

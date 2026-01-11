@@ -28,11 +28,9 @@ main(var_0, var_1, var_2) {
 
   if(issubstr(var_0, "_snow")) {
     maps\_vehicle::build_turret("btr80_turret2", "tag_turret2", "vehicle_btr80_machine_gun_snow");
-  }
-  else if(issubstr(var_2, "_ac130")) {
+  } else if(issubstr(var_2, "_ac130")) {
     maps\_vehicle::build_turret("btr80_ac130_turret", "tag_turret2", "vehicle_btr80_machine_gun");
-  }
-  else {
+  } else {
     maps\_vehicle::build_turret("btr80_turret2", "tag_turret2", "vehicle_btr80_machine_gun");
   }
 

@@ -408,14 +408,13 @@ drone_control_alley_qrotor_start() {
   level.player maps\_fire_direction::init_fire_direction();
 }
 
-drone_control_gauntlet_go() {
-}
+drone_control_gauntlet_go() {}
 
 setup_allied_quadrotors() {
   a_vh_quads = getEntArray("allied_quadrotor", "targetname");
 
   foreach(vh_quad in a_vh_quads) {
-  vh_quad setthreatbiasgroup("quadrotors");
+    vh_quad setthreatbiasgroup("quadrotors");
   }
 }
 
@@ -574,8 +573,7 @@ vo_hint_standing_by_for_targets() {
     wait(randomintrange(10, 16));
 
     if(level.player hasweapon("quadrotor_glove_sp")) {
-      if(flag("fire_direction_shader_on")) {
-      }
+      if(flag("fire_direction_shader_on")) {}
     }
   }
 }
@@ -623,8 +621,7 @@ vo_outskirts() {
   level.player say_dialog("sect_push_all_available_a_0", 0.2);
 }
 
-drone_nag() {
-}
+drone_nag() {}
 
 drone_kill_challenge(str_notify) {
   level waittill("drone_control_started");

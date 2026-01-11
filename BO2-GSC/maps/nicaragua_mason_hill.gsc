@@ -99,7 +99,7 @@ mason_hill_chicken_setup() {
   a_e_chickens = getEntArray("mason_hill_chicken", "script_noteworthy");
 
   foreach(chicken in a_e_chickens) {
-  chicken thread chicken_anim_loop();
+    chicken thread chicken_anim_loop();
   }
 }
 
@@ -115,7 +115,7 @@ mason_hill_setup() {
   a_sp_shotgunners = getEntArray("masonhill_cartel_shotgunners", "script_noteworthy");
 
   foreach(spawner in a_sp_shotgunners) {
-  spawner add_spawn_function(::make_ai_aggressive);
+    spawner add_spawn_function(::make_ai_aggressive);
   }
 
   e_trigger = getent("mason_river_trigger", "targetname");
@@ -281,7 +281,7 @@ kill_mason_intro_pdf() {
   a_ai_pdf = get_ai_group_ai("mason_intro_pdf");
 
   foreach(guy in a_ai_pdf) {
-  guy thread timebomb(5.0, 10.0);
+    guy thread timebomb(5.0, 10.0);
   }
 
   e_target = getent("mason_intro_pdf_snipers_target", "targetname");
@@ -488,7 +488,7 @@ mason_hill_spawn_molotov_toss_guy() {
   a_t_hurtriggers = getEntArray("mason_hill_firebuilding1_hurttrigger", "targetname");
 
   foreach(trig in a_t_hurtriggers) {
-  trig trigger_off();
+    trig trigger_off();
   }
 
   ai_molotov_guy = simple_spawn_single("mason_hill_pdf_molotov_guy");
@@ -516,7 +516,7 @@ mason_hill_initial_molotov_toss(a_t_hurtriggers) {
   level thread mason_hill_initial_building_fire();
 
   foreach(trig in a_t_hurtriggers) {
-  trig trigger_on();
+    trig trigger_on();
   }
 
   self set_ignoreall(0);
@@ -561,14 +561,11 @@ mason_hill_initial_building_fire() {
 
       if(n_firerunners == 0) {
         guy thread mason_hill_wave1_fire_window();
-      }
-      else if(n_firerunners == 1) {
+      } else if(n_firerunners == 1) {
         guy thread mason_hill_wave1_enemy_on_fire("masonhill_firerunner2");
-      }
-      else if(n_firerunners == 2) {
+      } else if(n_firerunners == 2) {
         guy thread mason_hill_wave1_enemy_on_fire("masonhill_firerunner3");
-      }
-      else {
+      } else {
         wait(randomfloatrange(1.5, 3));
         guy thread mason_hill_wave1_enemy_on_fire("masonhill_firerunner1");
       }
@@ -608,7 +605,7 @@ turn_nodes_off_inside_burning_house(a_enemies) {
   a_nd_building = getnodearray("mason_hill_initial_burning_building_nodes", "script_noteworthy");
 
   foreach(node in a_nd_building) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 }
 
@@ -684,8 +681,7 @@ shoot_at_civilian_group(a_civilians, nd_goal) {
   while(a_civilians.size > 0) {
     if(a_civilians.size == 1) {
       ai_target = a_civilians[0];
-    }
-    else {
+    } else {
       a_ai_sorted = arraysort(a_civilians, self.origin);
       ai_target = a_ai_sorted[0];
     }
@@ -737,8 +733,7 @@ mason_hill_kill_civs_with_magicbullets(a_civilians) {
   while(a_civilians.size > 0) {
     if(a_civilians.size == 1) {
       ai_target = a_civilians[0];
-    }
-    else {
+    } else {
       a_ai_sorted = arraysort(a_civilians, self.origin);
       ai_target = a_ai_sorted[0];
     }
@@ -750,8 +745,7 @@ mason_hill_kill_civs_with_magicbullets(a_civilians) {
 
       if(cointoss() > 50) {
         v_start = self.origin + (36, 0, 64);
-      }
-      else {
+      } else {
         v_start = self.origin + (-36, 0, 64);
       }
 
@@ -844,7 +838,7 @@ red_barrel_porch() {
   a_destructibles = getEntArray("mason_hill_porch_fxanim", "script_noteworthy");
 
   foreach(barrel in a_destructibles) {
-  barrel thread barrel_destroy_think();
+    barrel thread barrel_destroy_think();
   }
 
   flag_wait("red_barrel_porch_triggered");
@@ -854,7 +848,7 @@ red_barrel_porch() {
   a_nd_pathnodes = getnodearray("mason_hill_porch_house_nodes", "script_noteworthy");
 
   foreach(node in a_nd_pathnodes) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 
   s_target = getstruct("porch_struct", "targetname");
@@ -917,7 +911,7 @@ mason_hill_wave2_start() {
   a_ai_cartel = get_ai_array("masonhill_wave1_uproad_guys", "script_noteworthy");
 
   foreach(guy in a_ai_cartel) {
-  guy thread wave1_uproad_cartel_retreat(e_goalvolume);
+    guy thread wave1_uproad_cartel_retreat(e_goalvolume);
   }
 
   lower_house_gunner();
@@ -1039,7 +1033,7 @@ kill_upper_house_enemies() {
   a_ai_enemies = get_within_range(s_struct.origin, a_ai_enemies, 512);
 
   foreach(guy in a_ai_enemies) {
-  guy thread timebomb(0.1, 5.0);
+    guy thread timebomb(0.1, 5.0);
   }
 }
 
@@ -1052,7 +1046,7 @@ wave2_rock_guys() {
 
   if(a_ai_enemies.size > 0) {
     foreach(guy in a_ai_enemies) {
-    guy.deathfunction = ::wave2_rockguy_dies;
+      guy.deathfunction = ::wave2_rockguy_dies;
     }
   }
 
@@ -1086,7 +1080,7 @@ mason_hill_pdf_reinforcements() {
   a_ai_pdf = array_removedead(a_ai_pdf);
 
   foreach(guy in a_ai_pdf) {
-  guy thread timebomb(3.0, 7.5);
+    guy thread timebomb(3.0, 7.5);
   }
 }
 
@@ -1096,7 +1090,7 @@ mason_hill_wave2_early_enemies_dieoff() {
   a_ai_cartel = get_ai_group_ai("mason_hill_wave2_lower_house");
 
   foreach(guy in a_ai_cartel) {
-  guy thread timebomb(1.0, 5.0);
+    guy thread timebomb(1.0, 5.0);
   }
 }
 
@@ -1218,7 +1212,7 @@ mason_hill_second_building_fire() {
   a_ai_cartel = get_ai_group_ai("mason_hill_wave2_molotov_house_cartel");
 
   foreach(guy in a_ai_cartel) {
-  guy mason_hill_wave2_enemy_on_fire();
+    guy mason_hill_wave2_enemy_on_fire();
   }
 
   s_explosion = get_struct("mason_hill_second_molotov_building_explosion", "targetname");
@@ -1287,8 +1281,7 @@ mason_hill_cleanup() {
       if(isalive(guy)) {
         if(isDefined(guy.script_aigroup) && issubstr(guy.script_aigroup, "mason_truck")) {
           continue;
-        }
-        else {
+        } else {
           guy thread timebomb(0.1, 3.0);
         }
       }
@@ -1323,7 +1316,7 @@ mason_hill_cleanup() {
   a_e_chickens = getEntArray("mason_hill_chicken", "script_noteworthy");
 
   foreach(chicken in a_e_chickens) {
-  chicken chicken_cleanup();
+    chicken chicken_cleanup();
   }
 }
 
@@ -1342,8 +1335,7 @@ fake_grenade_toss(str_targetname, v_start, v_end) {
 
   if(!isDefined(v_start) && isDefined(s_start)) {
     v_start = s_start.origin;
-  }
-  else if(!isDefined(v_start) && !isDefined(s_start)) {
+  } else if(!isDefined(v_start) && !isDefined(s_start)) {
     v_start = self.origin;
   }
 

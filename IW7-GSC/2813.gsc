@@ -91,8 +91,7 @@ func_13D17(var_00) {
   if(!isDefined(self.func_1468[var_13])) {
     if(isDefined(level._effect[var_13])) {
       self.func_1468[var_13] = spawnfxforclient(level._effect[var_13], self getEye(), self);
-    }
-    else {}
+    } else {}
   }
 
   triggerfx(self.func_1468[var_13]);
@@ -105,15 +104,13 @@ func_13D15(var_00, var_01) {
 
   if(var_00 == 0) {
     var_02 = var_02 + "_bottom";
-  }
-  else if(var_00 == 1) {
+  } else if(var_00 == 1) {
     var_02 = var_02 + "_top";
   }
 
   if(var_01 == 0) {
     var_02 = var_02 + "_right";
-  }
-  else if(var_01 == 1) {
+  } else if(var_01 == 1) {
     var_02 = var_02 + "_left";
   }
 

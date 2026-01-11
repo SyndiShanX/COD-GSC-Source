@@ -32,8 +32,7 @@ init_clientfaceanim() {
 doFace(localClientNum) {
   if(self IsPlayer()) {
     doFace_player(localClientNum);
-  }
-  else if(isDefined(level._faceCBFunc_generichuman)) {
+  } else if(isDefined(level._faceCBFunc_generichuman)) {
     self[[level._faceCBFunc_generichuman]](localClientNum);
   }
 }

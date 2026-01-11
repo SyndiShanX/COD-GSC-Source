@@ -109,8 +109,7 @@ setup_alien_type(att_idx, type) {
     if(!isString(index)) {
       if(!IsSubStr(value, ".")) {
         value = int(value);
-      }
-      else {
+      } else {
         value = float(value);
       }
     }

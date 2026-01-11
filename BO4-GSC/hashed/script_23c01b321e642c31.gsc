@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_d6ef1c07;
 
 autoexec __init__system__() {

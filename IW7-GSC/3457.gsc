@@ -60,7 +60,7 @@ findtargets() {
 
   if(isDefined(level.activeuavs[var_09])) {
     foreach(var_11 in level.uavmodels[var_09]) {
-    var_2[var_2.size] = var_11;
+      var_2[var_2.size] = var_11;
     }
   }
 
@@ -71,8 +71,7 @@ findtargets() {
 
     if(var_13 % 2) {
       thread fireattarget(var_04, self.team, 1);
-    }
-    else {
+    } else {
       thread fireattarget(var_04, self.team, 0);
     }
 
@@ -96,8 +95,7 @@ earlyabortwatcher() {
 
   if(scripts\mp\utility\game::bot_is_fireteam_mode()) {
     self waittill("killstreak_disowned");
-  }
-  else {
+  } else {
     scripts\engine\utility::waittill_either("killstreak_disowned", "game_ended");
   }
 
@@ -155,15 +153,13 @@ fireattarget(var_00, var_01, var_02) {
 
   if(var_02) {
     var_14 = spawnplane(self, "script_model", var_10, "compass_objpoint_airstrike_friendly", "compass_objpoint_airstrike_friendly");
-  }
-  else {
+  } else {
     var_14 = spawnplane(self, "script_model", var_10);
   }
 
   if(self.team == "allies") {
     var_14 setModel("vehicle_av8b_harrier_jet_mp");
-  }
-  else {
+  } else {
     var_14 setModel("vehicle_av8b_harrier_jet_opfor_mp");
   }
 
@@ -200,8 +196,7 @@ doflyby(var_00) {
 
   if(var_00) {
     var_12 = spawnplane(self, "script_model", var_08, "hud_minimap_harrier_green", "hud_minimap_harrier_red");
-  }
-  else {
+  } else {
     var_12 = spawnplane(self, "script_model", var_08);
   }
 

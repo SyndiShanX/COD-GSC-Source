@@ -126,8 +126,7 @@ init_nuked_perks() {
   }
 }
 
-draw_debug_location() {
-}
+draw_debug_location() {}
 
 wait_for_round_range(start_round, end_round) {
   round_to_spawn = randomintrange(start_round, end_round);
@@ -226,8 +225,7 @@ bring_perk(machine, trigger) {
     machine thread maps\mp\zombies\_zm_perks::perk_fx("jugger_light");
   else if(is_doubletap) {
     machine thread maps\mp\zombies\_zm_perks::perk_fx("doubletap_light");
-  }
-  else if(is_sleight) {
+  } else if(is_sleight) {
     machine thread maps\mp\zombies\_zm_perks::perk_fx("sleight_light");
   }
 }

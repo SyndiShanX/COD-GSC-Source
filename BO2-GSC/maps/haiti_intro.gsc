@@ -30,8 +30,7 @@ init_flags() {
   flag_init("jetwing_done");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_intro_harper_dead() {
   level.is_harper_alive = 0;
@@ -122,8 +121,7 @@ intro_main() {
 
   if(isDefined(level.is_harper_alive) && level.is_harper_alive == 0) {
     run_scene_first_frame("intro_player_harperdead");
-  }
-  else {
+  } else {
     run_scene_first_frame("intro_player");
   }
 
@@ -157,8 +155,7 @@ landing_main() {
 intro() {
   if(isDefined(level.is_harper_alive) && level.is_harper_alive == 0) {
     level thread run_scene("intro_player_harperdead");
-  }
-  else {
+  } else {
     level thread run_scene("intro_player");
   }
 
@@ -437,8 +434,7 @@ add_fake_jetwing_hud() {
 spawn_avoid_vtols() {
   if(!isDefined(level.vtols)) {
     level.vtols = [];
-  }
-  else {
+  } else {
     array_delete(level.vtols);
   }
 
@@ -559,8 +555,7 @@ avoid_vtol_death() {
 
     if(ang_vel[2] < 45 * -1) {
       ang_vel = (ang_vel[0], ang_vel[1], 45 * -1);
-    }
-    else if(ang_vel[2] > 45) {
+    } else if(ang_vel[2] > 45) {
       ang_vel = (ang_vel[0], ang_vel[1], 45);
     }
 
@@ -597,8 +592,7 @@ vtol_death_piece(origin, offset, model, fwd, right, up) {
 
     if(ang_vel[2] < 90 * -1) {
       ang_vel = (ang_vel[0], ang_vel[1], 90 * -1);
-    }
-    else if(ang_vel[2] > 90) {
+    } else if(ang_vel[2] > 90) {
       ang_vel = (ang_vel[0], ang_vel[1], 90);
     }
 
@@ -875,8 +869,7 @@ halo_jump_speed_match() {
 
     if(dot < 0) {
       self setspeed(400, 1000, 1000);
-    }
-    else {
+    } else {
       break;
     }
 
@@ -1440,7 +1433,7 @@ assemble_vtol_explode2() {
   pieces = getEntArray("vtol_explode2_piece", "targetname");
 
   foreach(piece in pieces) {
-  piece linkto(parent, piece.fxanim_tag, (0, 0, 0), (0, 0, 0));
+    piece linkto(parent, piece.fxanim_tag, (0, 0, 0), (0, 0, 0));
   }
 }
 
@@ -1510,8 +1503,7 @@ intro_save_restore() {
   }
 }
 
-intro_vo() {
-}
+intro_vo() {}
 
 avoid_vtols_vo() {
   wait 2;

@@ -40,8 +40,7 @@ getstructarray(name, type) {
 
   if(!isDefined(array)) {
     return [];
-  }
-  else {
+  } else {
     return array;
   }
 }
@@ -73,20 +72,15 @@ array_func(entities, func, arg1, arg2, arg3, arg4, arg5) {
 single_func(entity, func, arg1, arg2, arg3, arg4, arg5) {
   if(isDefined(arg5)) {
     entity[[func]](arg1, arg2, arg3, arg4, arg5);
-  }
-  else if(isDefined(arg4)) {
+  } else if(isDefined(arg4)) {
     entity[[func]](arg1, arg2, arg3, arg4);
-  }
-  else if(isDefined(arg3)) {
+  } else if(isDefined(arg3)) {
     entity[[func]](arg1, arg2, arg3);
-  }
-  else if(isDefined(arg2)) {
+  } else if(isDefined(arg2)) {
     entity[[func]](arg1, arg2);
-  }
-  else if(isDefined(arg1)) {
+  } else if(isDefined(arg1)) {
     entity[[func]](arg1);
-  }
-  else {
+  } else {
     entity[[func]]();
   }
 }
@@ -110,20 +104,15 @@ array_thread(entities, func, arg1, arg2, arg3, arg4, arg5) {
 single_thread(entity, func, arg1, arg2, arg3, arg4, arg5) {
   if(isDefined(arg5)) {
     entity thread[[func]](arg1, arg2, arg3, arg4, arg5);
-  }
-  else if(isDefined(arg4)) {
+  } else if(isDefined(arg4)) {
     entity thread[[func]](arg1, arg2, arg3, arg4);
-  }
-  else if(isDefined(arg3)) {
+  } else if(isDefined(arg3)) {
     entity thread[[func]](arg1, arg2, arg3);
-  }
-  else if(isDefined(arg2)) {
+  } else if(isDefined(arg2)) {
     entity thread[[func]](arg1, arg2);
-  }
-  else if(isDefined(arg1)) {
+  } else if(isDefined(arg1)) {
     entity thread[[func]](arg1);
-  }
-  else {
+  } else {
     entity thread[[func]]();
   }
 }
@@ -139,8 +128,7 @@ add_to_array(array, ent, allow_dupes) {
 
   if(!isDefined(array)) {
     array[0] = ent;
-  }
-  else if(allow_dupes || !isinarray(array, ent)) {
+  } else if(allow_dupes || !isinarray(array, ent)) {
     array[array.size] = ent;
   }
 
@@ -222,8 +210,7 @@ array_waitlogic2(ent, msg, timeout) {
 
   if(isDefined(timeout)) {
     wait(timeout);
-  }
-  else {
+  } else {
     ent waittill(msg);
   }
 }
@@ -561,8 +548,7 @@ init_exploders() {
 
     if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
-    }
-    else {
+    } else {
       ent.v["fxid"] = exploder.script_fxid;
     }
 
@@ -574,8 +560,7 @@ init_exploders() {
 
     if(isDefined(exploder.script_sound)) {
       ent.v["soundalias"] = exploder.script_sound;
-    }
-    else if(ent.v["fxid"] != "No FX") {
+    } else if(ent.v["fxid"] != "No FX") {
       if(isDefined(level.scr_sound) && isDefined(level.scr_sound[ent.v["fxid"]])) {
         ent.v["soundalias"] = level.scr_sound[ent.v["fxid"]];
       }
@@ -850,8 +835,7 @@ spawn_player_arms() {
 
   if(isDefined(level.player_viewmodel)) {
     arms setModel(level.player_viewmodel);
-  }
-  else {
+  } else {
     arms setModel("c_usa_cia_masonjr_viewhands");
   }
 
@@ -878,8 +862,7 @@ get_eye() {
 clamp(val, val_min, val_max) {
   if(val < val_min) {
     val = val_min;
-  }
-  else if(val > val_max) {
+  } else if(val > val_max) {
     val = val_max;
   }
 
@@ -1100,8 +1083,7 @@ set_lighting_ent(localclientnum, set, newent) {
 use_lighting_ent(localclientnum, set, newent) {
   if(set) {
     self setlightingentity(level.light_entity);
-  }
-  else {
+  } else {
     self setlightingentity(self);
   }
 }

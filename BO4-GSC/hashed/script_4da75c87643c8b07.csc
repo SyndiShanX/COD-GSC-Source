@@ -7,7 +7,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
-
 #namespace namespace_3d0f1be7;
 
 autoexec __init__system__() {
@@ -38,6 +37,6 @@ function_feb37b9f(color) {
       s_light.var_cb9d8af = undefined;
     }
 
-    s_light.var_cb9d8af = playFX(0, #"hash_787d9cfa8f97976a" + color, light_pos);
+    s_light.var_cb9d8af = playFX(0, # "hash_787d9cfa8f97976a" + color, light_pos);
   }
 }

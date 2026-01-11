@@ -35,8 +35,7 @@ init_flags() {
   flag_init("close_ending_transition");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_foyer() {
   maps\haiti::fxanim_construct_front_door();
@@ -64,7 +63,7 @@ skipto_transmission() {
   a_m_big_screen = getEntArray("big_screen", "targetname");
 
   foreach(m_big_screen in a_m_big_screen) {
-  m_big_screen hide();
+    m_big_screen hide();
   }
 
   level thread door_think("m_room_door", "theater_doors_open", "stop_transmission_3_done", vectorscale((0, 1, 0), 65.0));
@@ -175,7 +174,7 @@ theater_main() {
   a_m_big_screen = getEntArray("big_screen", "targetname");
 
   foreach(m_big_screen in a_m_big_screen) {
-  m_big_screen hide();
+    m_big_screen hide();
   }
 
   level thread door_think("m_room_door", "theater_doors_open", "stop_transmission_3_done", vectorscale((0, 1, 0), 65.0));
@@ -254,8 +253,7 @@ its_a_trap_main() {
 find_menendez_main() {
   if(level.is_harper_alive) {
     set_objective(level.obj_find_menendez, level.ai_harper, "follow");
-  }
-  else {
+  } else {
     set_objective(level.obj_find_menendez);
   }
 
@@ -329,7 +327,7 @@ foyer_support() {
   a_s_support = getstructarray("s_foyer_upper", "targetname");
 
   foreach(s_support in a_s_support) {
-  s_support thread ambient_support_respawner(a_sp_support, "throw_flashbangs", "foyer_upper_defenders", nd_exit);
+    s_support thread ambient_support_respawner(a_sp_support, "throw_flashbangs", "foyer_upper_defenders", nd_exit);
   }
 }
 
@@ -357,8 +355,7 @@ ambient_support_think(s_start, nd_dest, str_target_group, nd_exit) {
 
   if(isDefined(nd_dest)) {
     self setgoalnode(nd_dest);
-  }
-  else {
+  } else {
     self setgoalpos(self.origin);
   }
 
@@ -580,20 +577,20 @@ control_room_closet() {
   a_m_destroyed = getEntArray("control_room_destroyed", "targetname");
 
   foreach(m_destroyed in a_m_destroyed) {
-  m_destroyed hide();
+    m_destroyed hide();
   }
 
   flag_wait("bomb_exploded");
   level clientnotify("sndAlarms");
 
   foreach(m_destroyed in a_m_destroyed) {
-  m_destroyed show();
+    m_destroyed show();
   }
 
   a_m_clean = getEntArray("control_room_clean", "targetname");
 
   foreach(m_clean in a_m_clean) {
-  m_clean delete();
+    m_clean delete();
   }
 }
 
@@ -709,7 +706,7 @@ menendez_movie(m_actor) {
   a_m_big_screen = getEntArray("big_screen", "targetname");
 
   foreach(m_big_screen in a_m_big_screen) {
-  m_big_screen show();
+    m_big_screen show();
   }
 
   play_movie_on_surface_async("haiti_int_1", 0, 0, undefined, undefined, 0.3, 1);
@@ -876,8 +873,7 @@ follow_player() {
 
     if(n_dist_sq > 262144) {
       self change_movemode("cqb_sprint");
-    }
-    else {
+    } else {
       self change_movemode("cqb");
     }
 
@@ -1108,8 +1104,7 @@ theater_dialog() {
 
   if(level.is_harper_alive) {
     harper_dialog("harp_more_quads_take_th_0");
-  }
-  else {
+  } else {
     level.player say_dialog("sect_enemy_quads_incoming_0");
   }
 

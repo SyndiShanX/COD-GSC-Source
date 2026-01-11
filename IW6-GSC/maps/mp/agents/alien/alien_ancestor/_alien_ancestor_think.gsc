@@ -65,8 +65,7 @@ main_loop() {
 
       if(self.badpath) {
         badpath(var_0);
-      }
-      else {
+      } else {
         update_loop();
       }
     }
@@ -89,8 +88,7 @@ update_loop() {
 
   if(isDefined(var_0)) {
     ancestor_attack(var_0, self.enemy);
-  }
-  else if(!self.following_path) {
+  } else if(!self.following_path) {
     thread follow_path();
   }
 }
@@ -114,18 +112,15 @@ should_i_attack(var_0) {
 
   if(should_shield(var_0)) {
     return "shield";
-  }
-  else if(should_grab(var_0)) {
+  } else if(should_grab(var_0)) {
     return "grab";
-  }
-  else if(should_blast(var_0)) {
+  } else if(should_blast(var_0)) {
     return "blast";
   }
 
   if(should_spawn(var_0)) {
     return "spawn";
-  }
-  else if(should_direct(var_0)) {
+  } else if(should_direct(var_0)) {
     return "direct";
   }
 
@@ -139,8 +134,7 @@ follow_path() {
   if(distancesquared(self.origin, self.pathnode.origin) < 1024.0) {
     if(isDefined(self.pathnode.target)) {
       self.pathnode = getnode(self.pathnode.target, "targetname");
-    }
-    else {
+    } else {
       self.pathnode = undefined;
     }
   }
@@ -200,8 +194,7 @@ should_blast(var_0) {
 
   if(var_0.classname == "script_model" && !bullettracepassed(self gettagorigin("TAG_EYE"), var_0.origin, 0, self.shield)) {
     return 0;
-  }
-  else if(!bullettracepassed(self gettagorigin("TAG_EYE"), var_0 gettagorigin("TAG_EYE"), 0, self.shield)) {
+  } else if(!bullettracepassed(self gettagorigin("TAG_EYE"), var_0 gettagorigin("TAG_EYE"), 0, self.shield)) {
     return 0;
   }
 

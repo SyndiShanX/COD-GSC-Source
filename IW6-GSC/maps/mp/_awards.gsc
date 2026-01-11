@@ -30,8 +30,7 @@ onPlayerConnect() {
       foreach(ref, award in level.awards) {
         if(isDefined(level.awards[ref].defaultvalue)) {
           player initPlayerStat(ref, level.awards[ref].defaultvalue);
-        }
-        else {
+        } else {
           player initPlayerStat(ref);
         }
       }
@@ -327,8 +326,7 @@ incPlayerRecord(ref) {
 
   if(hasDisplayValue(ref)) {
     value = self getPlayerStat(ref);
-  }
-  else {
+  } else {
     value = true;
   }
 
@@ -400,16 +398,17 @@ assignAwards() {
     var2 = level.awards[ref].var2;
 
     if(isDefined(var1) && isDefined(var2)) {
-      [[process]](ref, var1, var2);
-    }
-    else if(isDefined(var1)) {
-      [[process]](ref, var1);
-    }
-    else {
       [
-    }
         [process]
-      ](ref);
+      ](ref, var1, var2);
+    } else if(isDefined(var1)) {
+      [
+        [process]
+      ](ref, var1);
+    } else {
+      [
+      }
+      [process]](ref);
   }
 
   foreach(ref, award in level.awards) {
@@ -475,8 +474,7 @@ assignAward(ref) {
 getAwardType(ref) {
   if(isDefined(level.awards[ref].type)) {
     return level.awards[ref].type;
-  }
-  else {
+  } else {
     return "none";
   }
 }
@@ -500,8 +498,7 @@ isAwardFlag(ref) {
 isAwardExclusive(ref) {
   if(isDefined(level.awards[ref].exclusive)) {
     return level.awards[ref].exclusive;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -614,8 +611,7 @@ statValueChanged(ref) {
 
   if(playervalue == defaultvalue) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -667,8 +663,7 @@ setRatio(ref, award1_ref, award2_ref) {
 
     if(playerValue2 == 0) {
       player setPlayerStat(ref, playerValue1);
-    }
-    else {
+    } else {
       ratio = playerValue1 / playerValue2;
       player setPlayerStat(ref, ratio);
     }
@@ -937,8 +932,7 @@ monitorStanceTime() {
   for(;;) {
     if(self GetStance() == "crouch") {
       self incPlayerStat("crouchtime", 500);
-    }
-    else if(self GetStance() == "prone") {
+    } else if(self GetStance() == "prone") {
       self incPlayerStat("pronetime", 500);
     }
 

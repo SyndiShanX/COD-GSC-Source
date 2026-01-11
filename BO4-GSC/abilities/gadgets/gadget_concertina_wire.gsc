@@ -22,7 +22,6 @@
 #include scripts\weapons\deployable;
 #include scripts\weapons\weapon_utils;
 #include scripts\weapons\weaponobjects;
-
 #namespace concertina_wire;
 
 init_shared(var_4b51853b) {
@@ -237,7 +236,7 @@ function_5ea6e77d(point, upangles) {
   mins = (-10, -10, -10);
   maxs = (10, 10, 10);
   var_e07c7e8 = physicstrace(var_71fcd06b, var_2fa728ff, mins, maxs, self, 1);
-  return var_e07c7e8[#"fraction"] < 1;
+  return var_e07c7e8[# "fraction"] < 1;
 }
 
 private function_2562ba62(var_637dcf3d, startlocation, var_a4e8554b) {
@@ -454,13 +453,13 @@ function_57955e51(watcher) {
 
 function_d82c03d4(player) {
   self endon(#"death");
-  player waittill(#"joined_team", #"disconnect");
+  player waittill(#"joined_team", # "disconnect");
   player function_42b34d5a();
 }
 
 function_dd007be2() {
   level endon(#"game_ended");
-  self.owner endon(#"disconnect", #"joined_team", #"changed_specialist");
+  self.owner endon(#"disconnect", # "joined_team", # "changed_specialist");
   self endon(#"hash_c72d58e3d4735b");
   waitresult = self waittill(#"death");
 
@@ -593,7 +592,7 @@ onkilled(var_c946c04c) {
 }
 
 getmodel(var_796be15d) {
-  return self.team == #"allies" ? level.var_87226c31.bundle.var_397ed90c : level.var_87226c31.bundle.var_b256e3da;
+  return self.team == # "allies" ? level.var_87226c31.bundle.var_397ed90c : level.var_87226c31.bundle.var_b256e3da;
 }
 
 function_dac69ad1(player, concertinawire) {
@@ -689,12 +688,12 @@ function_f067d867(concertinawire) {
         player dodamage(1, player.origin, concertinawire.owner, concertinawire, undefined, "MOD_IMPACT", 0, level.var_87226c31.concertinawireweapon);
       }
 
-      if(isDefined(player.archetype) && player.archetype == #"robot" && util::function_fbce7263(player.team, concertinawire.owner.team)) {
+      if(isDefined(player.archetype) && player.archetype == # "robot" && util::function_fbce7263(player.team, concertinawire.owner.team)) {
         player.var_85c3882d = 1;
         continue;
       }
 
-      if(isDefined(player.archetype) && player.archetype == #"wasp" && util::function_fbce7263(player.team, concertinawire.owner.team)) {
+      if(isDefined(player.archetype) && player.archetype == # "wasp" && util::function_fbce7263(player.team, concertinawire.owner.team)) {
         continue;
       }
 

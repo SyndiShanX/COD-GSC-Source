@@ -166,8 +166,7 @@ begin_rappel_stealth() {
 
   if(maps\cornered_code::is_e3()) {
     thread maps\_utility::autosave_by_name_silent("rappel_stealth");
-  }
-  else {
+  } else {
     thread maps\_utility::autosave_tactical();
   }
 }
@@ -238,7 +237,7 @@ handle_rappel_stealth() {
   var_2 = getEntArray("stop_at_third_combat_floor_trigger", "targetname");
 
   foreach(var_4 in var_2) {
-  var_4 delete();
+    var_4 delete();
   }
 
   common_scripts\utility::flag_wait("allies_reached_target_floor");
@@ -257,7 +256,7 @@ watch_vertical_limit(var_0, var_1, var_2) {
   var_4 = getEntArray(var_2, "targetname");
 
   foreach(var_6 in var_4) {
-  var_6 delete();
+    var_6 delete();
   }
 }
 
@@ -438,8 +437,7 @@ first_floor_patroller_2_setup() {
 
   if(isDefined(self.struct)) {
     self.struct notify("stop_loop");
-  }
-  else {
+  } else {
     self notify("stop_loop");
   }
 
@@ -799,8 +797,7 @@ second_floor_fridge_guy_path() {
 
   if(common_scripts\utility::flag("second_floor_poker_guys_dead")) {
     common_scripts\utility::flag_set("second_floor_fridge_guy_will_be_alerted");
-  }
-  else {
+  } else {
     var_0 = getent(self.volume.targetname + "_player", "targetname");
 
     if(level.player istouching(var_0)) {
@@ -824,7 +821,7 @@ fridge_light_off(var_0) {
   var_1 = getEntArray("rappel_stealth_fridge_light", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 setlightintensity(0.1);
+    var_3 setlightintensity(0.1);
   }
 }
 
@@ -983,8 +980,7 @@ second_floor_kitchenette_guy() {
 
   if(common_scripts\utility::flag("second_floor_fridge_guy_dead")) {
     thread kitchenette_guy_spooked();
-  }
-  else {
+  } else {
     thread kitchenette_guy_continue();
   }
 }
@@ -1022,8 +1018,7 @@ second_floor_elevator_guy_setup() {
 
   if(self.script_noteworthy == "second_floor_elevator_guy_1") {
     thread elevator_anims("cornered_stealth_elevator_enemy1");
-  }
-  else {
+  } else {
     thread elevator_anims("cornered_stealth_elevator_enemy2");
   }
 }
@@ -1221,8 +1216,7 @@ allies_rappel_stealth_vo() {
 
     if(maps\cornered_code::is_e3()) {
       thread maps\_utility::autosave_now_silent();
-    }
-    else {
+    } else {
       thread maps\_utility::autosave_now();
     }
 
@@ -1435,7 +1429,7 @@ second_floor_combat_intro_vo() {
   var_0 = getEntArray("second_floor_combat_vo_trigger", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   common_scripts\utility::flag_set("start_elevator_anims");
@@ -1464,8 +1458,7 @@ second_floor_combat_left_enemies_down() {
   if(common_scripts\utility::flag("second_floor_fridge_guy_dead")) {
     if(common_scripts\utility::flag("second_floor_fridge_guy_killed_too_soon")) {
       common_scripts\utility::flag_wait("second_floor_kitchenette_guy_dead");
-    }
-    else {
+    } else {
       common_scripts\utility::flag_wait("second_floor_kitchenette_guy_dead");
     }
   } else if(common_scripts\utility::flag("second_floor_kitchenette_guy_dead"))
@@ -1736,8 +1729,7 @@ ally_rappel_moving_change_direction(var_0) {
 
   if(maps\cornered_code_rappel_allies::ally_is_aiming()) {
     maps\cornered_code_rappel_allies::ally_rappel_stop_aiming();
-  }
-  else if(maps\cornered_code_rappel_allies::ally_is_calm_idling()) {
+  } else if(maps\cornered_code_rappel_allies::ally_is_calm_idling()) {
     maps\cornered_code_rappel_allies::ally_stop_calm_idle();
   }
 
@@ -1876,8 +1868,7 @@ ally_rappel_stealth_movement_vertical(var_0, var_1, var_2) {
     else if(var_11 < var_4) {
       if(!var_14) {
         thread ally_rappel_moving_change_direction("away");
-      }
-      else if(var_12) {
+      } else if(var_12) {
         thread ally_rappel_moving_change_direction("down");
       }
     } else if(var_11 < var_5) {

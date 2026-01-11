@@ -575,8 +575,7 @@ turnTowardsVector(targetVector) {
     self.stateLocked = true;
     if(self.oriented) {
       self ScrAgentSetAnimMode("anim angle delta");
-    }
-    else {
+    } else {
       self ScrAgentSetAnimMode("anim deltas");
     }
     animState = getTurnInPlaceAnimState();
@@ -678,8 +677,7 @@ getDamageDegree(iDamage, is_stun) {
 
   if(iDamage < damageThreshold && !is_stun) {
     return "light";
-  }
-  else {
+  } else {
     return "heavy";
   }
 }
@@ -714,8 +712,7 @@ getDeathAnimIndex(state, damageDirection, hitLoc) {
 getPainDeathAnimIndex_Internal(state, damageDirection, hitLoc, animArray) {
   if(isDefined(hitLoc)) {
     availableIndexList = animArray[state][damageDirection][hitLoc];
-  }
-  else {
+  } else {
     availableIndexList = animArray[state][damageDirection];
   }
 

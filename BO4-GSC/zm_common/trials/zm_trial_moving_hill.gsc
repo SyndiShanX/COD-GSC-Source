@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_trial_moving_hill;
 
 autoexec __init__system__() {
@@ -72,7 +71,7 @@ private function_452ec7b3() {
       level.var_c8b84806[str_zone] = 1;
     }
 
-    self.var_df62490a = zm_utility::function_d7db256e(s_hill.targetname, #"hash_28d5f57c2309090", 0);
+    self.var_df62490a = zm_utility::function_d7db256e(s_hill.targetname, # "hash_28d5f57c2309090", 0);
     self.var_f7f308cd = s_hill.targetname;
     self thread function_492f4c79();
 
@@ -187,7 +186,7 @@ private function_452ec7b3() {
 }
 
 private function_492f4c79() {
-  level endon(#"hash_7646638df88a3656", #"hill_moving");
+  level endon(#"hash_7646638df88a3656", # "hill_moving");
   zm_utility::function_75fd65f9(self.var_f7f308cd, 1);
 }
 
@@ -216,7 +215,7 @@ private function_2191cc5d() {
 
 private zone_watcher(challenge, var_2d5ebf67, var_530e040f, timeout) {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"hill_moving", #"host_migration_begin");
+  level endon(#"hash_7646638df88a3656", # "hill_moving", # "host_migration_begin");
   self.var_356935bb = {
     #start_time: level.time,
     #timeout: timeout,
@@ -256,7 +255,7 @@ private zone_watcher(challenge, var_2d5ebf67, var_530e040f, timeout) {
 
 private damage_watcher() {
   self endon(#"disconnect");
-  level endon(#"hash_7646638df88a3656", #"hill_moving", #"host_migration_begin");
+  level endon(#"hash_7646638df88a3656", # "hill_moving", # "host_migration_begin");
 
   while(true) {
     if(isgodmode(self) || self isinmovemode("<dev string:x38>", "<dev string:x41>")) {
@@ -264,19 +263,19 @@ private damage_watcher() {
       continue;
     }
 
-      if(!self function_2191cc5d() && !level.var_f995ece6 zm_trial_timer::is_open(self) && self.sessionstate != "spectator" && !self laststand::player_is_in_laststand() && !(isDefined(self.var_eb319d10) && self.var_eb319d10) && !(isDefined(level.intermission) && level.intermission)) {
-        var_16e6b8ea = self zm_utility::function_7618c8ef(0.0667);
+    if(!self function_2191cc5d() && !level.var_f995ece6 zm_trial_timer::is_open(self) && self.sessionstate != "spectator" && !self laststand::player_is_in_laststand() && !(isDefined(self.var_eb319d10) && self.var_eb319d10) && !(isDefined(level.intermission) && level.intermission)) {
+      var_16e6b8ea = self zm_utility::function_7618c8ef(0.0667);
 
-        if(self.health <= var_16e6b8ea) {
-          if(zm_utility::is_magic_bullet_shield_enabled(self)) {
-            self util::stop_magic_bullet_shield();
-          }
-
-          self dodamage(self.health + 1000, self.origin);
-        } else {
-          self dodamage(var_16e6b8ea, self.origin);
+      if(self.health <= var_16e6b8ea) {
+        if(zm_utility::is_magic_bullet_shield_enabled(self)) {
+          self util::stop_magic_bullet_shield();
         }
+
+        self dodamage(self.health + 1000, self.origin);
+      } else {
+        self dodamage(var_16e6b8ea, self.origin);
       }
+    }
 
     wait 1;
   }

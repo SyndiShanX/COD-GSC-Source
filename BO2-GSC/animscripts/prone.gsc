@@ -48,8 +48,7 @@ proneturningthread(threadtospawn, killmestring) {
   for(;;) {
     if(self.a.pose != "prone") {
       self orientmode("face default");
-    }
-    else {
+    } else {
       self orientmode("face enemy");
       attackyaw = self.angles[1];
 
@@ -71,8 +70,7 @@ proneturningthread(threadtospawn, killmestring) {
 
           if(amount < 0.01) {
             amount = 0.01;
-          }
-          else if(amount > 0.99) {
+          } else if(amount > 0.99) {
             amount = 0.99;
           }
 
@@ -97,8 +95,7 @@ proneturningthread(threadtospawn, killmestring) {
 
           if(amount < 0.01) {
             amount = 0.01;
-          }
-          else if(amount > 0.99) {
+          } else if(amount > 0.99) {
             amount = 0.99;
           }
 

@@ -259,8 +259,7 @@ dialogue_reminder(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(var_5) && var_7 == var_5) {
       continue;
-    }
-    else {
+    } else {
       var_5 = var_7;
       wait(var_6);
 
@@ -563,36 +562,31 @@ get_differentiated_jerk() {
 show_player_hud(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_0)) {
     setsaveddvar("g_friendlyNameDist", var_0);
-  }
-  else {
+  } else {
     setsaveddvar("g_friendlyNameDist", 15000);
   }
 
   if(isDefined(var_1)) {
     setsaveddvar("compass", var_1);
-  }
-  else {
+  } else {
     setsaveddvar("compass", "1");
   }
 
   if(isDefined(var_2)) {
     setsaveddvar("ammoCounterHide", var_2);
-  }
-  else {
+  } else {
     setsaveddvar("ammoCounterHide", "0");
   }
 
   if(isDefined(var_3)) {
     setsaveddvar("actionSlotsHide", var_3);
-  }
-  else {
+  } else {
     setsaveddvar("actionSlotsHide", "0");
   }
 
   if(isDefined(var_4)) {
     setsaveddvar("hud_showStance", var_4);
-  }
-  else {
+  } else {
     setsaveddvar("hud_showStance", "1");
   }
 }
@@ -600,36 +594,31 @@ show_player_hud(var_0, var_1, var_2, var_3, var_4) {
 hide_player_hud(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_0)) {
     setsaveddvar("g_friendlyNameDist", var_0);
-  }
-  else {
+  } else {
     setsaveddvar("g_friendlyNameDist", 0);
   }
 
   if(isDefined(var_1)) {
     setsaveddvar("compass", var_1);
-  }
-  else {
+  } else {
     setsaveddvar("compass", "0");
   }
 
   if(isDefined(var_2)) {
     setsaveddvar("ammoCounterHide", var_2);
-  }
-  else {
+  } else {
     setsaveddvar("ammoCounterHide", "1");
   }
 
   if(isDefined(var_3)) {
     setsaveddvar("actionSlotsHide", var_3);
-  }
-  else {
+  } else {
     setsaveddvar("actionSlotsHide", "1");
   }
 
   if(isDefined(var_4)) {
     setsaveddvar("hud_showStance", var_4);
-  }
-  else {
+  } else {
     setsaveddvar("hud_showStance", "0");
   }
 }
@@ -789,8 +778,7 @@ hint_button_position(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_1)) {
     if(isDefined(var_5)) {
       var_1 = var_5.origin;
-    }
-    else {
+    } else {
       var_1 = self.origin;
     }
   }
@@ -810,8 +798,7 @@ hint_button_create(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(self)) {
     if(isDefined(var_1)) {
       var_7 settargetent(self, var_1);
-    }
-    else {
+    } else {
       var_7 settargetent(self);
     }
   }
@@ -854,19 +841,16 @@ scale_3d_hint_button(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(;;) {
     if(isDefined(var_1)) {
       var_6 = distance(var_0 gettagorigin(var_1), var_2 getEye());
-    }
-    else {
+    } else {
       var_6 = distance(var_0, var_2 getEye());
     }
 
     if(var_4 != 0 && var_6 > var_4) {
       self.alpha = 0;
-    }
-    else if(var_3 != 0 && var_6 > var_3) {
+    } else if(var_3 != 0 && var_6 > var_3) {
       if(var_4 - var_3 > 0) {
         self.alpha = (1 - (var_6 - var_3) / (var_4 - var_3)) * 0.3;
-      }
-      else {
+      } else {
         self.alpha = 0.3;
       }
     } else if(isDefined(var_5) && isDefined(var_5.classname) && issubstr(var_5.classname, "trigger")) {
@@ -874,8 +858,7 @@ scale_3d_hint_button(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       if(isDefined(var_7) && var_7 == var_5) {
         self.alpha = 1;
-      }
-      else {
+      } else {
         self.alpha = 0.3;
       }
     } else
@@ -925,11 +908,9 @@ hint_button_string_lookup(var_0) {
     case "lt":
       if(level.pc) {
         return "^3[{+ads}]^7";
-      }
-      else if(level.player usinggamepad()) {
+      } else if(level.player usinggamepad()) {
         return "^3[{+speed_throw}]^7";
-      }
-      else {
+      } else {
         return "^3[{+toggleads_throw}]^7";
       }
     case "flash":

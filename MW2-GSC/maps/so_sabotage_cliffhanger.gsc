@@ -48,7 +48,7 @@ main() {
   voltron_array = getEntArray("script_vehicle_snowmobile_coop_alt", "classname");
   voltron_array = array_combine(voltron_array, getEntArray("script_vehicle_snowmobile_coop", "classname"));
   foreach(sm in voltron_array) {
-  sm delete();
+    sm delete();
   }
 
   truck_patrol = getent("truck_patrol", "targetname");

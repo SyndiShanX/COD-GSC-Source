@@ -471,9 +471,8 @@ overlay_update_cb(localclientnum, type) {
       if(state.force_update || state.prev_slot != state.curr_slot || state.prev_lerp != state.curr_lerp) {
         if(isDefined(level.vsmgr_filter_custom_enable[curr_info.material_name])) {
           level.localplayers[localclientnum][
-        }
-            [level.vsmgr_filter_custom_enable[curr_info.material_name]]
-          ](curr_info);
+            }
+            [level.vsmgr_filter_custom_enable[curr_info.material_name]]](curr_info);
         else {
           level.localplayers[localclientnum] set_filter_pass_material(curr_info.filter_index, curr_info.pass_index, level.filter_matid[curr_info.material_name]);
           level.localplayers[localclientnum] set_filter_pass_enabled(curr_info.filter_index, curr_info.pass_index, 1);

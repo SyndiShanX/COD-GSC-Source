@@ -268,8 +268,7 @@ prevent_player_damage_if_the_player_is_sprinting() {
   while(true) {
     if(level.player sprintbuttonpressed()) {
       level.player.overrideplayerdamage = ::player_damage_override_for_apache;
-    }
-    else {
+    } else {
       level.player.overrideplayerdamage = undefined;
     }
 
@@ -473,8 +472,7 @@ checkpoint_event() {
 
   if(flag("player_not_looking")) {
     level thread run_scene("checkpoint_ally_walkout_noreach");
-  }
-  else {
+  } else {
     level thread run_scene("checkpoint_ally_walkout", 1);
   }
 
@@ -623,8 +621,7 @@ heli_go_struct_path(s_start) {
   while(self.is_pathing) {
     if(isDefined(s_current.target)) {
       self setvehgoalpos(s_current.origin, 0, 0);
-    }
-    else {
+    } else {
       self setvehgoalpos(s_current.origin, 1, 0);
     }
 
@@ -667,8 +664,7 @@ set_pitch(n_start_pitch, n_end_pitch, n_time) {
 
     if(n_pitch_range > 0) {
       n_current_pitch = min(n_current_pitch + n_pitch_step, n_end_pitch);
-    }
-    else if(n_pitch_range < 0) {
+    } else if(n_pitch_range < 0) {
       n_current_pitch = max(n_current_pitch - n_pitch_step, n_end_pitch);
     }
 

@@ -89,8 +89,7 @@ isattachment(var_0) {
 
   if(isDefined(var_1) && var_1 != "") {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -109,20 +108,15 @@ delaythread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(!isDefined(var_2)) {
     thread[[var_0]]();
-  }
-  else if(!isDefined(var_3)) {
+  } else if(!isDefined(var_3)) {
     thread[[var_0]](var_2);
-  }
-  else if(!isDefined(var_4)) {
+  } else if(!isDefined(var_4)) {
     thread[[var_0]](var_2, var_3);
-  }
-  else if(!isDefined(var_5)) {
+  } else if(!isDefined(var_5)) {
     thread[[var_0]](var_2, var_3, var_4);
-  }
-  else if(!isDefined(var_6)) {
+  } else if(!isDefined(var_6)) {
     thread[[var_0]](var_2, var_3, var_4, var_5);
-  }
-  else {
+  } else {
     thread[[var_0]](var_2, var_3, var_4, var_5, var_6);
   }
 }
@@ -273,7 +267,7 @@ playloopsoundtoplayers(var_0, var_1, var_2) {
     var_3 hide();
 
     foreach(var_5 in var_2) {
-    var_3 showtoplayer(var_5);
+      var_3 showtoplayer(var_5);
     }
   }
 
@@ -419,8 +413,7 @@ updatelowermessage() {
 
     if(var_0.time > 0 && var_0.showtimer) {
       self.lowertimer settimer(max(var_0.time - (gettime() - var_0.addtime) / 1000, 0.1));
-    }
-    else {
+    } else {
       if(var_0.time > 0 && !var_0.showtimer) {
         self.lowertimer settext("");
         self.lowermessage fadeovertime(min(var_0.time, 60));
@@ -635,11 +628,9 @@ dvarintvalue(var_0, var_1, var_2, var_3) {
 
   if(var_4 > var_3) {
     var_4 = var_3;
-  }
-  else if(var_4 < var_2) {
+  } else if(var_4 < var_2) {
     var_4 = var_2;
-  }
-  else {
+  } else {
     return var_4;
   }
 
@@ -659,11 +650,9 @@ dvarfloatvalue(var_0, var_1, var_2, var_3) {
 
   if(var_4 > var_3) {
     var_4 = var_3;
-  }
-  else if(var_4 < var_2) {
+  } else if(var_4 < var_2) {
     var_4 = var_2;
-  }
-  else {
+  } else {
     return var_4;
   }
 
@@ -674,8 +663,7 @@ dvarfloatvalue(var_0, var_1, var_2, var_3) {
 play_sound_on_tag(var_0, var_1) {
   if(isDefined(var_1)) {
     playsoundatpos(self gettagorigin(var_1), var_0);
-  }
-  else {
+  } else {
     playsoundatpos(self.origin, var_0);
   }
 }
@@ -685,11 +673,9 @@ getotherteam(var_0) {
 
   if(var_0 == "allies") {
     return "axis";
-  }
-  else if(var_0 == "axis") {
+  } else if(var_0 == "axis") {
     return "allies";
-  }
-  else {
+  } else {
     return "none";
   }
 }
@@ -844,7 +830,7 @@ waitfortimeornotify(var_0, var_1) {
 waitfortimeornotifies(var_0, var_1) {
   if(isDefined(var_1)) {
     foreach(var_3 in var_1) {
-    self endon(var_3);
+      self endon(var_3);
     }
   }
 
@@ -872,8 +858,7 @@ leaderdialog(var_0, var_1, var_2, var_3, var_4) {
   }
   if(!isDefined(var_1)) {
     leaderdialogbothteams(var_0, "allies", var_0, "axis", var_2, var_3, var_4);
-  }
-  else {
+  } else {
     if(isDefined(var_3)) {
       for(var_5 = 0; var_5 < level.players.size; var_5++) {
         var_6 = level.players[var_5];
@@ -960,7 +945,7 @@ leaderdialogonplayers(var_0, var_1, var_2, var_3) {
     return;
   }
   foreach(var_5 in var_1) {
-  var_5 leaderdialogonplayer(var_0, var_2, undefined, var_3);
+    var_5 leaderdialogonplayer(var_0, var_2, undefined, var_3);
   }
 }
 
@@ -1017,8 +1002,7 @@ leaderdialogonplayer(var_0, var_1, var_2, var_3) {
 
   if(self.leaderdialogactive == "") {
     thread leaderdialogonplayer_internal(var_0, var_4, var_3);
-  }
-  else {
+  } else {
     self.leaderdialogqueue[self.leaderdialogqueue.size] = var_0;
     self.leaderdialoglocqueue[self.leaderdialoglocqueue.size] = var_3;
   }
@@ -1086,8 +1070,7 @@ leaderdialogonplayer_internal(var_0, var_1, var_2) {
   if(isDefined(level.ishorde) && level.ishorde) {
     if(issubstr(var_0, "coop_gdn")) {
       var_4 = var_0;
-    }
-    else {
+    } else {
       var_4 = "AT_anr0_" + game["dialog"][var_0];
     }
   } else
@@ -1107,9 +1090,7 @@ leaderdialogonplayer_internal(var_0, var_1, var_2) {
     self playlocalannouncersound(var_4);
     leaderdialog_trylockout(game["dialog"][var_0], self);
   } else if(level.classicgamemode) {
-    if(soundexists(var_5)) {
-    } else {
-    }
+    if(soundexists(var_5)) {} else {}
   } else {}
 
   wait 2.0;
@@ -1141,8 +1122,7 @@ getnextrelevantdialog() {
       if(self.team == "allies") {
         if(issubstr(level.axiscapturing, self.leaderdialogqueue[var_0])) {
           return self.leaderdialogqueue[var_0];
-        }
-        else {
+        } else {
           common_scripts\utility::array_remove(self.leaderdialogqueue, self.leaderdialogqueue[var_0]);
         }
       } else if(issubstr(level.alliescapturing, self.leaderdialogqueue[var_0]))
@@ -1191,7 +1171,7 @@ flushdialogonplayer() {
 
 flushgroupdialog(var_0) {
   foreach(var_2 in level.players) {
-  var_2 flushgroupdialogonplayer(var_0);
+    var_2 flushgroupdialogonplayer(var_0);
   }
 }
 
@@ -1231,8 +1211,7 @@ flushgroupdialogonplayer(var_0) {
 updatemainmenu() {
   if(self.pers["team"] == "spectator") {
     self setclientdvar("g_scriptMainMenu", game["menu_team"]);
-  }
-  else {
+  } else {
     self setclientdvar("g_scriptMainMenu", game["menu_class_" + self.pers["team"]]);
   }
 }
@@ -1240,8 +1219,7 @@ updatemainmenu() {
 updateobjectivetext() {
   if(self.pers["team"] == "spectator") {
     self setclientdvar("cg_objectiveText", "");
-  }
-  else {
+  } else {
     if(getwatcheddvar("scorelimit") > 0 && !isobjectivebased()) {
       if(level.splitscreen) {
         self setclientdvar("cg_objectiveText", getobjectivescoretext(self.pers["team"]));
@@ -1288,8 +1266,7 @@ gettimepassed() {
 
   if(level.timerstopped) {
     return level.timerpausetime - level.starttime - level.discardtime;
-  }
-  else {
+  } else {
     return gettime() - level.starttime - level.discardtime;
   }
 }
@@ -1390,11 +1367,9 @@ isvalidclass(var_0) {
 getvalueinrange(var_0, var_1, var_2) {
   if(var_0 > var_2) {
     return var_2;
-  }
-  else if(var_0 < var_1) {
+  } else if(var_0 < var_1) {
     return var_1;
-  }
-  else {
+  } else {
     return var_0;
   }
 }
@@ -1425,8 +1400,7 @@ registerroundswitchdvar(var_0, var_1, var_2, var_3) {
 
   if(level.roundswitch < var_2) {
     level.roundswitch = var_2;
-  }
-  else if(level.roundswitch > var_3) {
+  } else if(level.roundswitch > var_3) {
     level.roundswitch = var_3;
   }
 }
@@ -1509,11 +1483,9 @@ get_damageable_player_pos(var_0) {
 getstancecenter() {
   if(self getstance() == "crouch") {
     var_0 = self.origin + (0, 0, 24);
-  }
-  else if(self getstance() == "prone") {
+  } else if(self getstance() == "prone") {
     var_0 = self.origin + (0, 0, 10);
-  }
-  else {
+  } else {
     var_0 = self.origin + (0, 0, 32);
   }
 
@@ -1561,8 +1533,7 @@ _takeweaponsexcept(var_0) {
   foreach(var_3 in var_1) {
     if(var_3 == var_0) {
       continue;
-    }
-    else {
+    } else {
       self takeweapon(var_3);
     }
   }
@@ -1615,7 +1586,7 @@ restoredata() {
   }
 
   foreach(var_6, var_5 in var_0.actionslots) {
-  _setactionslot(var_6, var_5.type, var_5.item);
+    _setactionslot(var_6, var_5.type, var_5.item);
   }
 
   if(self getcurrentweapon() == "none") {
@@ -1700,11 +1671,9 @@ updatewatcheddvars() {
     foreach(var_2 in var_0) {
       if(level.watchdvars[var_2].type == "string") {
         var_3 = getproperty(var_2, level.watchdvars[var_2].value);
-      }
-      else if(level.watchdvars[var_2].type == "float") {
+      } else if(level.watchdvars[var_2].type == "float") {
         var_3 = getfloatproperty(var_2, level.watchdvars[var_2].value);
-      }
-      else {
+      } else {
         var_3 = getintproperty(var_2, level.watchdvars[var_2].value);
       }
 
@@ -1859,8 +1828,7 @@ getscorelimit() {
   if(isroundbased()) {
     if(getwatcheddvar("roundlimit")) {
       return getwatcheddvar("roundlimit");
-    }
-    else {
+    } else {
       return getwatcheddvar("winlimit");
     }
   } else
@@ -1925,7 +1893,7 @@ getaverageorigin(var_0) {
   }
 
   foreach(var_3 in var_0) {
-  var_1 = var_1 + var_3.origin;
+    var_1 = var_1 + var_3.origin;
   }
 
   var_5 = int(var_1[0] / var_0.size);
@@ -2090,8 +2058,7 @@ _giveweapon(var_0, var_1, var_2) {
   if(issubstr(var_0, "akimbo") || isDefined(var_2) && var_2 == 1) {
     if(isagent(self)) {
       self giveweapon(var_0, var_1, 1, -1, 0);
-    }
-    else {
+    } else {
       self giveweapon(var_0, var_1, 1, -1, 0, self, var_3);
     }
   } else if(isagent(self))
@@ -2126,8 +2093,7 @@ _setperk(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     self setperk(var_0, !isDefined(level.scriptperks[var_3]), var_1, var_2);
-  }
-  else {
+  } else {
     self setperk(var_0, !isDefined(level.scriptperks[var_3]), var_1);
   }
 }
@@ -2243,14 +2209,10 @@ quicksortmid(var_0, var_1, var_2, var_3) {
     var_6 = var_0[var_1];
 
     while(var_5 > var_4) {
-      while([
-          [var_3]
-        ](var_0[var_4], var_6) && var_4 <= var_2 && var_5 > var_4)
+      while([[var_3]](var_0[var_4], var_6) && var_4 <= var_2 && var_5 > var_4)
         var_4++;
 
-      while(![
-          [var_3]
-        ](var_0[var_5], var_6) && var_5 >= var_1 && var_5 >= var_4)
+      while(![[var_3]](var_0[var_5], var_6) && var_5 >= var_1 && var_5 >= var_4)
         var_5--;
 
       if(var_5 > var_4) {
@@ -2281,8 +2243,7 @@ swap(var_0, var_1, var_2) {
 _suicide() {
   if(isusingremote() && !isDefined(self.fauxdead)) {
     thread maps\mp\gametypes\_damage::playerkilled_internal(self, self, self, 10000, "MOD_SUICIDE", "h1_fraggrenade_mp", (0, 0, 0), "none", 0, 1116, 1, 0);
-  }
-  else if(!isusingremote() && !isDefined(self.fauxdead)) {
+  } else if(!isusingremote() && !isDefined(self.fauxdead)) {
     self suicide();
   }
 }
@@ -2345,15 +2306,13 @@ _timeout_pause_on_death_and_prematch(var_0, var_1) {
 playdeathsound() {
   if(isDefined(level.customplaydeathsound)) {
     self thread[[level.customplaydeathsound]]();
-  }
-  else {
+  } else {
     var_0 = randomintrange(1, 8);
 
     if(self.team == "axis") {
       if(self hasfemalecustomizationmodel()) {
         self playSound("generic_death_enemy_fm_" + var_0);
-      }
-      else {
+      } else {
         self playSound("generic_death_enemy_" + var_0);
       }
     } else {
@@ -2577,14 +2536,11 @@ getweaponclass(var_0) {
 
   if(isenvironmentweapon(var_0)) {
     var_2 = "weapon_mg";
-  }
-  else if(iskillstreakweapon(var_0)) {
+  } else if(iskillstreakweapon(var_0)) {
     var_2 = "killstreak";
-  }
-  else if(var_0 == "none") {
+  } else if(var_0 == "none") {
     var_2 = "other";
-  }
-  else if(var_2 == "") {
+  } else if(var_2 == "") {
     var_2 = "other";
   }
 
@@ -2667,14 +2623,11 @@ getbaseweaponname(var_0) {
 
   if(var_1[0] == "iw5" || var_1[0] == "iw6" || var_1[0] == "s1" || var_1[0] == "h1") {
     var_2 = var_1[0] + "_" + var_1[1];
-  }
-  else if(var_1[0] == "alt") {
+  } else if(var_1[0] == "alt") {
     var_2 = var_1[1] + "_" + var_1[2];
-  }
-  else if(var_1.size > 1 && (var_1[1] == "grenade" || var_1[1] == "marker")) {
+  } else if(var_1.size > 1 && (var_1[1] == "grenade" || var_1[1] == "marker")) {
     var_2 = var_1[0] + "_" + var_1[1];
-  }
-  else {
+  } else {
     var_2 = var_1[0];
   }
 
@@ -2713,11 +2666,9 @@ rounddecimalplaces(var_0, var_1, var_2) {
 
   if(var_2 == "up") {
     var_6 = ceil(var_5);
-  }
-  else if(var_2 == "down") {
+  } else if(var_2 == "down") {
     var_6 = floor(var_5);
-  }
-  else {
+  } else {
     var_6 = var_5 + 0.5;
   }
 
@@ -2770,7 +2721,7 @@ setselfunusuable() {
   self makeunusable();
 
   foreach(var_1 in level.players) {
-  self disableplayeruse(var_1);
+    self disableplayeruse(var_1);
   }
 }
 
@@ -3113,8 +3064,7 @@ waittillrecoveredhealth(var_0, var_1) {
   for(;;) {
     if(self.health != self.maxhealth) {
       var_2 = 0;
-    }
-    else {
+    } else {
       var_2 = var_2 + var_1;
     }
 
@@ -3157,7 +3107,7 @@ getweaponattachmentsbasenames(var_0) {
   var_1 = getweaponattachments(var_0);
 
   foreach(var_4, var_3 in var_1) {
-  var_1[var_4] = attachmentmap_tobase(var_3);
+    var_1[var_4] = attachmentmap_tobase(var_3);
   }
 
   return var_1;
@@ -3269,8 +3219,7 @@ touchingbadtrigger() {
 setthirdpersondof(var_0) {
   if(var_0) {
     self setdepthoffield(0, 110, 512, 4096, 6, 1.8);
-  }
-  else {
+  } else {
     self setdepthoffield(0, 0, 512, 512, 4, 0);
   }
 }
@@ -3300,8 +3249,7 @@ findisfacing(var_0, var_1, var_2) {
 
   if(var_6 >= var_3) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -3329,8 +3277,7 @@ setrecoilscale(var_0, var_1) {
 
   if(!isDefined(self.recoilscale)) {
     self.recoilscale = var_0;
-  }
-  else {
+  } else {
     self.recoilscale = self.recoilscale + var_0;
   }
 
@@ -3404,8 +3351,7 @@ enableallstreaks() {
 validateusestreak(var_0, var_1) {
   if(isDefined(var_0)) {
     var_2 = var_0;
-  }
-  else {
+  } else {
     var_3 = self.pers["killstreaks"];
     var_2 = var_3[self.killstreakindexweapon].streakname;
   }
@@ -3452,8 +3398,7 @@ validateusestreak(var_0, var_1) {
     if(!(isDefined(var_1) && var_1)) {
       if(isDefined(level.emptimeremaining) && level.emptimeremaining > 0) {
         self iprintlnbold(&"MP_UNAVAILABLE_FOR_N_WHEN_EMP", level.emptimeremaining);
-      }
-      else if(isDefined(self.empendtime) && int((self.empendtime - gettime()) / 1000) > 0) {
+      } else if(isDefined(self.empendtime) && int((self.empendtime - gettime()) / 1000) > 0) {
         self iprintlnbold(&"MP_UNAVAILABLE_FOR_N", int((self.empendtime - gettime()) / 1000));
       }
     }
@@ -3546,8 +3491,7 @@ getkillstreakindex(var_0) {
 
   if(var_4 == "") {
     var_5 = -1;
-  }
-  else {
+  } else {
     var_5 = int(var_4);
   }
 
@@ -3729,11 +3673,9 @@ showgenericmenuonmatchstart() {
 
   if(matchmakinggame() && self.sessionteam != "none") {
     var_0 = 0;
-  }
-  else if(!matchmakinggame() && !forceautoassign() && allowteamchoice()) {
+  } else if(!matchmakinggame() && !forceautoassign() && allowteamchoice()) {
     var_0 = 1;
-  }
-  else {
+  } else {
     var_0 = 0;
   }
 
@@ -3878,8 +3820,7 @@ recipeclassapplyjuggernaut(var_0) {
   if(!isDefined(level.ishorde)) {
     if(level.ingraceperiod && !self.hasdonecombat) {
       self waittill("applyLoadout");
-    }
-    else {
+    } else {
       self waittill("spawned_player");
     }
   } else
@@ -3943,8 +3884,7 @@ cac_getcustomclassloc() {
 
   if(getdvarint("xblive_privatematch") || issystemlink()) {
     return "privateMatchCustomClasses";
-  }
-  else {
+  } else {
     return "customClasses";
   }
 }
@@ -3978,8 +3918,7 @@ killteaminlaststand(var_0) {
 switch_to_last_weapon(var_0) {
   if(!isai(self)) {
     self switchtoweapon(var_0);
-  }
-  else {
+  } else {
     self switchtoweapon("none");
   }
 }
@@ -4082,26 +4021,19 @@ isheadshot(var_0, var_1, var_2, var_3) {
 attackerishittingteam(var_0, var_1) {
   if(!level.teambased) {
     return 0;
-  }
-  else if(!isDefined(var_1) || !isDefined(var_0)) {
+  } else if(!isDefined(var_1) || !isDefined(var_0)) {
     return 0;
-  }
-  else if(!isDefined(var_0.team) || !isDefined(var_1.team)) {
+  } else if(!isDefined(var_0.team) || !isDefined(var_1.team)) {
     return 0;
-  }
-  else if(var_0 == var_1) {
+  } else if(var_0 == var_1) {
     return 0;
-  }
-  else if(var_0.pers["team"] == var_1.team && isDefined(var_1.teamchangedthisframe)) {
+  } else if(var_0.pers["team"] == var_1.team && isDefined(var_1.teamchangedthisframe)) {
     return 0;
-  }
-  else if(isDefined(var_1.scrambled) && var_1.scrambled) {
+  } else if(isDefined(var_1.scrambled) && var_1.scrambled) {
     return 0;
-  }
-  else if(var_0.team == var_1.team) {
+  } else if(var_0.team == var_1.team) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -4171,35 +4103,29 @@ set_rank_options_for_bot() {
 set_console_status() {
   if(!isDefined(level.console)) {
     level.console = getdvar("consoleGame") == "true";
-  }
-  else {}
+  } else {}
 
   if(!isDefined(level.xenon)) {
     level.xenon = getdvar("xenonGame") == "true";
-  }
-  else {}
+  } else {}
 
   if(!isDefined(level.ps3)) {
     level.ps3 = getdvar("ps3Game") == "true";
-  }
-  else {}
+  } else {}
 
   if(!isDefined(level.xb3)) {
     level.xb3 = getdvar("xb3Game") == "true";
-  }
-  else {}
+  } else {}
 
   if(!isDefined(level.ps4)) {
     level.ps4 = getdvar("ps4Game") == "true";
-  }
-  else {}
+  } else {}
 }
 
 is_gen4() {
   if(level.xb3 || level.ps4 || !level.console) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -4211,8 +4137,7 @@ setdvar_cg_ng(var_0, var_1, var_2) {
 
   if(is_gen4()) {
     setdvar(var_0, var_2);
-  }
-  else {
+  } else {
     setdvar(var_0, var_1);
   }
 }
@@ -4302,8 +4227,7 @@ getuniqueid() {
   if(var_0 == "0000000000000000") {
     if(isDefined(level.guidgen)) {
       level.guidgen++;
-    }
-    else {
+    } else {
       level.guidgen = 1;
     }
 
@@ -4368,11 +4292,9 @@ set_visionset_for_watching_players(var_0, var_1, var_2, var_3, var_4, var_5, var
 
     if(isDefined(var_3) && var_3) {
       var_9 visionsetmissilecamforplayer(var_0, var_1);
-    }
-    else if(isDefined(var_6) && var_6) {
+    } else if(isDefined(var_6) && var_6) {
       var_9 visionsetpostapplyforplayer(var_0, var_1);
-    }
-    else {
+    } else {
       var_9 visionsetnakedforplayer(var_0, var_1);
     }
 
@@ -4404,8 +4326,7 @@ reset_visionset_on_team_change(var_0, var_1, var_2) {
     if(self.team != var_4 || !common_scripts\utility::array_contains(var_0 get_players_watching(), self)) {
       if(isDefined(var_2) && var_2) {
         self visionsetpostapplyforplayer("", 0.0);
-      }
-      else {
+      } else {
         self visionsetnakedforplayer("", 0.0);
       }
 
@@ -4423,8 +4344,7 @@ reset_visionset_on_disconnect(var_0, var_1) {
 
   if(isDefined(var_1) && var_1) {
     self visionsetpostapplyforplayer("", 0.0);
-  }
-  else {
+  } else {
     self visionsetnakedforplayer("", 0.0);
   }
 }
@@ -4454,8 +4374,7 @@ _setnameplatematerial(var_0, var_1) {
 _restorepreviousnameplatematerial() {
   if(isDefined(self.prevnameplatematerial)) {
     self setnameplatematerial(self.prevnameplatematerial[0], self.prevnameplatematerial[1]);
-  }
-  else {
+  } else {
     self setnameplatematerial("", "");
   }
 
@@ -4488,8 +4407,7 @@ playanim(var_0, var_1) {
 
   if(var_1 == 0) {
     self scriptmodelplayanim(self.script_animation);
-  }
-  else {
+  } else {
     self scriptmodelplayanimdeltamotion(self.script_animation);
   }
 }
@@ -4537,8 +4455,7 @@ _playerallow(var_0, var_1, var_2, var_3, var_4) {
     if(!self.playerdisableabilitytypes[var_0].size) {
       if(var_4) {
         self call[[var_3]](1);
-      }
-      else {
+      } else {
         self[[var_3]](1);
       }
     }
@@ -4549,8 +4466,7 @@ _playerallow(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_4) {
       self call[[var_3]](0);
-    }
-    else {
+    } else {
       self[[var_3]](0);
     }
   }
@@ -4681,8 +4597,7 @@ setdof(var_0) {
 isenemy(var_0) {
   if(level.teambased) {
     return isplayeronenemyteam(var_0);
-  }
-  else {
+  } else {
     return isplayerffaenemy(var_0);
   }
 }
@@ -4694,8 +4609,7 @@ isplayeronenemyteam(var_0) {
 isplayerffaenemy(var_0) {
   if(isDefined(var_0.owner)) {
     return var_0.owner != self;
-  }
-  else {
+  } else {
     return var_0 != self;
   }
 }
@@ -4773,8 +4687,7 @@ get_spawn_weapon_name(var_0) {
 
   if(isDefined(var_0.primaryname) && var_0.primaryname != "none") {
     var_1 = var_0.primaryname;
-  }
-  else if(isDefined(var_0.secondaryname) && var_0.secondaryname != "none") {
+  } else if(isDefined(var_0.secondaryname) && var_0.secondaryname != "none") {
     var_1 = var_0.secondaryname;
   }
 
@@ -5020,7 +4933,7 @@ demolitionsitemove(var_0, var_1, var_2) {
     var_8.origin = var_1;
 
     foreach(var_23 in var_12) {
-    var_23.origin = var_23.origin + var_6;
+      var_23.origin = var_23.origin + var_6;
     }
 
     var_13.origin = var_13.origin + var_6;
@@ -5032,7 +4945,7 @@ demolitionsitemove(var_0, var_1, var_2) {
     var_8.angles = var_2;
 
     foreach(var_23 in var_12) {
-    var_23.angles = var_23.angles + var_7;
+      var_23.angles = var_23.angles + var_7;
     }
 
     var_13.angles = var_13.angles + var_7;
@@ -5245,9 +5158,7 @@ streamcarrierweaponstoplayers(var_0, var_1, var_2) {
       if(!common_scripts\utility::array_contains(var_5, var_20.team)) {
         continue;
       }
-      if(![
-          [var_2]
-        ](var_0, var_20)) {
+      if(![[var_2]](var_0, var_20)) {
         continue;
       }
       var_21 = var_0.curorigin;

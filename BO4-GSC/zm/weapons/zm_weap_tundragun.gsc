@@ -7,7 +7,6 @@
 #include scripts\zm\zm_orange_water;
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_powerups;
-
 #namespace zm_weap_tundragun;
 
 autoexec __init__system__() {
@@ -25,7 +24,7 @@ __main__() {
 }
 
 actor_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(self.zm_ai_category === #"basic" || self.zm_ai_category === #"popcorn") {
+  if(self.zm_ai_category === # "basic" || self.zm_ai_category === # "popcorn") {
     self.water_damage = 1;
     return (self.health + 666);
   }

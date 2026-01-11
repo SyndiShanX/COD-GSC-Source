@@ -17,8 +17,7 @@ main() {
   horizontalDistance = length(horizontalDelta);
   if(self animscripts\utility::weaponAnims() == "none" || self animscripts\utility::weaponAnims() == "pistol") {
     climbAnim = % climbstairs_down;
-  }
-  else {
+  } else {
     climbAnim = % climbstairs_down_armed;
   }
   startnode = self getnegotiationstartnode();

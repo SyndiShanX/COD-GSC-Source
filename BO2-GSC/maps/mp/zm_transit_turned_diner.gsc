@@ -16,8 +16,7 @@ main() {
 
   if(getdvar(#"ui_gametype") == "zcleansed") {
     maps\mp\zombies\_zm_game_module::set_current_game_module(level.game_module_cleansed_index);
-  }
-  else {
+  } else {
     maps\mp\zombies\_zm_game_module::set_current_game_module(level.game_module_turned_index);
   }
 
@@ -56,5 +55,4 @@ getspawnpoints() {
   level._turned_powerup_spawnpoints[3].origin = (-4864, -7864, -62.35);
 }
 
-onendgame() {
-}
+onendgame() {}

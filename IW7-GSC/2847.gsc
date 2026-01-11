@@ -372,8 +372,7 @@ func_1AB5(var_00) {
 
   if(var_00) {
     func_1AB6("unlocked");
-  }
-  else {
+  } else {
     func_1AB6("locked");
   }
 }
@@ -381,7 +380,7 @@ func_1AB5(var_00) {
 func_1AB2(var_00) {
   if(isDefined(var_0.func_ACD5)) {
     foreach(var_02 in var_0.func_ACD5) {
-    var_02 delete();
+      var_02 delete();
     }
   }
 
@@ -420,8 +419,7 @@ func_1AA9(var_00, var_01, var_02, var_03, var_04) {
 
   if(!isDefined(var_04) || var_04) {
     setglobalsoundcontext("atmosphere", "", 2);
-  }
-  else {
+  } else {
     var_15 = "airlock_depressurize_lr";
     setglobalsoundcontext("atmosphere", "space", 2);
   }
@@ -449,14 +447,14 @@ func_1AA9(var_00, var_01, var_02, var_03, var_04) {
   foreach(var_20 in var_18) {
     if(var_20 == var_17) {
       foreach(var_22 in var_5.func_ECCE[var_20]) {
-      var_22 setscriptablepartstate("root", 12);
+        var_22 setscriptablepartstate("root", 12);
       }
 
       continue;
     }
 
     foreach(var_22 in var_5.func_ECCE[var_20]) {
-    var_22 setscriptablepartstate("root", 0);
+      var_22 setscriptablepartstate("root", 0);
     }
   }
 
@@ -547,7 +545,7 @@ func_1AAA(var_00) {
 
   foreach(var_04 in var_02) {
     foreach(var_06 in var_1.func_ECCE[var_04]) {
-    var_06 setscriptablepartstate("root", 13);
+      var_06 setscriptablepartstate("root", 13);
     }
   }
 }
@@ -559,7 +557,7 @@ func_1AD6(var_00) {
   while(self.func_4CD5) {
     foreach(var_04 in var_01) {
       foreach(var_06 in self.func_ECCE[var_04][var_00]) {
-      var_06 show();
+        var_06 show();
       }
     }
 
@@ -567,7 +565,7 @@ func_1AD6(var_00) {
 
     foreach(var_04 in var_01) {
       foreach(var_06 in self.func_ECCE[var_04][var_00]) {
-      var_06 hide();
+        var_06 hide();
       }
     }
 
@@ -593,14 +591,13 @@ func_1AD7(var_00, var_01) {
   while(var_05 != var_04) {
     foreach(var_08 in var_06) {
       foreach(var_10 in self.func_ECCE[var_08]) {
-      var_10 setscriptablepartstate("root", var_05);
+        var_10 setscriptablepartstate("root", var_05);
       }
     }
 
     if(isDefined(var_01) && !var_01) {
       var_05 = var_05 - 1;
-    }
-    else {
+    } else {
       var_5++;
     }
 
@@ -635,14 +632,14 @@ func_1AD8(var_00, var_01, var_02, var_03) {
   foreach(var_08 in var_06) {
     if(var_08 == var_05) {
       foreach(var_10 in var_4.func_ECCE[var_08]) {
-      var_10 setscriptablepartstate("root", 12);
+        var_10 setscriptablepartstate("root", 12);
       }
 
       continue;
     }
 
     foreach(var_10 in var_4.func_ECCE[var_08]) {
-    var_10 setscriptablepartstate("root", 0);
+      var_10 setscriptablepartstate("root", 0);
     }
   }
 
@@ -698,17 +695,13 @@ func_1AB6(var_00) {
 func_1AB4(var_00) {
   if(var_00 == "unlocked") {
     return "vfx_airlock_light_green";
-  }
-  else if(var_00 == "locked") {
+  } else if(var_00 == "locked") {
     return "vfx_airlock_light_red";
-  }
-  else if(var_00 == "cycling") {
+  } else if(var_00 == "cycling") {
     return "vfx_airlock_light_orange";
-  }
-  else if(var_00 == "error") {
+  } else if(var_00 == "error") {
     return undefined;
-  }
-  else if(var_00 == "off") {
+  } else if(var_00 == "off") {
     return undefined;
   }
 }
@@ -803,7 +796,7 @@ func_A854(var_00, var_01) {
   wait(getanimlength(var_00 scripts\sp\utility::func_7DC1("large_door_open")));
 
   foreach(var_04 in var_02) {
-  var_4.func_1FBB = var_4.func_A93B;
+    var_4.func_1FBB = var_4.func_A93B;
   }
 
   scripts\sp\utility::func_65E1("door_sequence_complete");
@@ -923,7 +916,7 @@ buddy_down_two_enemy_dead_thread(var_00) {
     scripts\engine\utility::array_thread(var_00, ::func_59F3, self);
 
     foreach(var_05 in var_00) {
-    var_05 givescorefortrophyblocks();
+      var_05 givescorefortrophyblocks();
     }
 
     scripts\sp\anim::func_1EC1(var_00, func_5997("pull"));
@@ -958,7 +951,7 @@ buddy_down_two_enemy_dead_thread(var_00) {
     var_12 = var_12 / var_10;
 
     foreach(var_05 in var_00) {
-    var_05 _meth_82B1(var_05 scripts\sp\utility::func_7DC1(func_5997("pull")), var_10 * -1);
+      var_05 _meth_82B1(var_05 scripts\sp\utility::func_7DC1(func_5997("pull")), var_10 * -1);
     }
 
     wait(var_12);
@@ -1104,7 +1097,7 @@ buddy_down_gunner_damage_thread(var_00) {
   scripts\engine\utility::array_thread(var_00, ::func_59F3, self);
 
   foreach(var_02 in var_00) {
-  thread buddy_down_gunner_flashed_thread(var_02);
+    thread buddy_down_gunner_flashed_thread(var_02);
   }
 }
 
@@ -1114,8 +1107,7 @@ buddy_down_gunner_death(var_00, var_01) {
 
   if(var_00 scripts\sp\utility::func_65DB("skip_reach_on_use")) {
     func_E9FF(var_00);
-  }
-  else if(!var_00 scripts\sp\utility::func_65DB("no_anim_reach")) {
+  } else if(!var_00 scripts\sp\utility::func_65DB("no_anim_reach")) {
     var_00 scripts\sp\anim::func_1F17(self, var_00 func_5997("intro"));
   }
 
@@ -1214,8 +1206,7 @@ func_21E5() {
 
   if(isDefined(self.func_4386)) {
     self.collision linkto(self, self.func_4386);
-  }
-  else {
+  } else {
     self.collision linkto(self, "j_handle");
   }
 
@@ -1273,8 +1264,7 @@ func_13684(var_00) {
 func_FA17(var_00) {
   if(isDefined(level.func_E982) && level.func_E982 == 1) {
     var_01 = scripts\sp\utility::func_10639("player_rig_disguise");
-  }
-  else {
+  } else {
     var_01 = scripts\sp\utility::func_10639("player_arms");
     var_02 = level.player _meth_84C6("currentViewModel");
 
@@ -1334,15 +1324,9 @@ func_3232() {
 
 func_5982(var_00, var_01, var_02) {
   var_03 = self.func_5A18 + "_";
-  var_04 = [
-    [var_00]
-  ]();
-  var_05 = [
-    [var_01]
-  ]();
-  var_06 = [
-    [var_02]
-  ]();
+  var_04 = [[var_00]]();
+  var_05 = [[var_01]]();
+  var_06 = [[var_02]]();
   var_07 = [var_04, var_05, var_06];
 
   foreach(var_19, var_09 in var_07) {
@@ -1355,8 +1339,7 @@ func_5982(var_00, var_01, var_02) {
 
         if(var_15 == "idle") {
           level.func_EC85[var_18][var_16][0] = var_11[var_15];
-        }
-        else {
+        } else {
           level.func_EC85[var_18][var_16] = var_11[var_15];
         }
 
@@ -1446,8 +1429,7 @@ func_1162A(var_00) {
 
   if(isDefined(self.func_D83A)) {
     var_01 = self.func_D83A;
-  }
-  else {
+  } else {
     var_01 = 200;
   }
 
@@ -1456,8 +1438,7 @@ func_1162A(var_00) {
 
     if(isDefined(self.func_D83B)) {
       var_02 = self.func_D83B;
-    }
-    else {
+    } else {
       var_03 = anglesToForward(self.angles);
       var_03 = var_03 * -1;
       var_02 = self.origin + var_03 * var_01;
@@ -1505,8 +1486,7 @@ func_59DE(var_00, var_01, var_02) {
     }
     if(isDefined(var_02)) {
       thread scripts\sp\anim::func_1EEA(var_05, var_01, "stop_loop_" + var_5.func_1FBB);
-    }
-    else {
+    } else {
       thread func_5981(var_05, var_01);
     }
 
@@ -1515,7 +1495,7 @@ func_59DE(var_00, var_01, var_02) {
 
   if(!isDefined(var_02) && var_3.size > 0) {
     foreach(var_05 in var_03) {
-    var_05 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, var_01);
+      var_05 scripts\sp\utility::func_178D(scripts\sp\utility::func_137AA, var_01);
     }
 
     scripts\sp\utility::func_57D5();

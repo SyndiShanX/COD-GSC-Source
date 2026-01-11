@@ -154,8 +154,7 @@ minigun_console_hint() {
     }
     if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
       level.player thread maps\_utility::display_hint("minigun_spin_left_trigger");
-    }
-    else {
+    } else {
       level.player thread maps\_utility::display_hint("minigun_spin_keyboard");
     }
 
@@ -168,8 +167,7 @@ minigun_used() {
 
   if(level.console) {
     var_0 = 6;
-  }
-  else {
+  } else {
     var_0 = 10;
   }
 
@@ -584,8 +582,7 @@ overheat_hud_update() {
 
   if(level.turret_heat_status > 1) {
     level.overheat_status.alpha = 1;
-  }
-  else {
+  } else {
     level.overheat_status.alpha = 0;
     level.overheat_status fadeovertime(0.25);
   }
@@ -876,8 +873,7 @@ seaknight_griggs_speech() {
 
   if(!common_scripts\utility::flag("lz_reached")) {
     common_scripts\utility::flag_wait("lz_reached");
-  }
-  else {
+  } else {
     wait 5.5;
   }
 

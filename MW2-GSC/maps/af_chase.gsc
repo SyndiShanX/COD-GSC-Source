@@ -154,19 +154,19 @@ main() {
 
   SetDevDvarIfUninitialized("scr_zodiac_test", 0);
 
-    //	SetExpFog( 1000, 8000, 0.60, 0.50, 0.40, 0.8, 0 );
+  //	SetExpFog( 1000, 8000, 0.60, 0.50, 0.40, 0.8, 0 );
 
-    /* - Some temp stuff for messing with level fog and vision sets.
-    	maps\_utility::set_vision_set( "af_chase_outdoors_2", 0 );
-    	Start Fog - 1000, 8000, 0.60, 0.50, 0.40, 0.8, 0
-    	Caves fog - 1000, 8000, 0.60, 0.50, 0.40, 0.45, 0
-    	resevoir fog 1 -8000, 45000, 0.60, 0.50, 0.40, 0.3, 0
-    	reveoir 2 - 2000, 20000, 0.60, 0.50, 0.40, 0.2, 0
-    	rapids - 1000, 11000, 0.60, 0.50, 0.40, 0.55, 0
-    	gorge - 1500, 15000, 0.60, 0.50, 0.40, 0.45, 0
-    	waterfall - 10000, 50000, 0.60, 0.50, 0.40, 0.75, 0*/
+  /* - Some temp stuff for messing with level fog and vision sets.
+  	maps\_utility::set_vision_set( "af_chase_outdoors_2", 0 );
+  	Start Fog - 1000, 8000, 0.60, 0.50, 0.40, 0.8, 0
+  	Caves fog - 1000, 8000, 0.60, 0.50, 0.40, 0.45, 0
+  	resevoir fog 1 -8000, 45000, 0.60, 0.50, 0.40, 0.3, 0
+  	reveoir 2 - 2000, 20000, 0.60, 0.50, 0.40, 0.2, 0
+  	rapids - 1000, 11000, 0.60, 0.50, 0.40, 0.55, 0
+  	gorge - 1500, 15000, 0.60, 0.50, 0.40, 0.45, 0
+  	waterfall - 10000, 50000, 0.60, 0.50, 0.40, 0.75, 0*/
 
-    script_vehicle_zodiac_players = getEntArray("script_vehicle_zodiac_player", "classname");
+  script_vehicle_zodiac_players = getEntArray("script_vehicle_zodiac_player", "classname");
   array_thread(script_vehicle_zodiac_players, ::add_spawn_function, maps\_zodiac_drive::drive_vehicle);
   array_thread(script_vehicle_zodiac_players, ::add_spawn_function, ::setup_boat_for_drive);
   array_thread(script_vehicle_zodiac_players, ::add_spawn_function, ::zodiac_physics);

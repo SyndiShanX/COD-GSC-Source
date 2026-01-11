@@ -158,8 +158,7 @@ slipgun_debug_circle(origin, radius, seconds, onslope, parent, start) {
 
         if(isDefined(onslope) && onslope) {
           circle(morigin, radius, (1, 0, 0), 0, 1, frames);
-        }
-        else {
+        } else {
           circle(morigin, radius, (1, 1, 1), 0, 1, frames);
         }
 
@@ -448,8 +447,7 @@ add_slippery_spot(origin, duration, startpos) {
 
   if(trace["fraction"] == 1) {
     slipgun_debug_line(origin + hit_from, origin + hit_from + (0, 0, trace_height * -1), grey, duration);
-  }
-  else {
+  } else {
     slipgun_debug_line(origin + hit_from, trace["position"], green, duration);
     slipgun_debug_line(trace["position"], origin + hit_from + (0, 0, trace_height * -1), dkgreen, duration);
   }

@@ -38,7 +38,6 @@
 #include scripts\zm_common\trials\zm_trial_use_magicbox;
 #include scripts\zm_common\zm_round_spawning;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_zodt8_trials;
 
 private autoexec function_88c28903() {
@@ -50,16 +49,16 @@ private function_6bf7d04f(var_c766fbe6) {
     return var_c766fbe6;
   }
 
-  if(!isDefined(var_c766fbe6[#"blight_father"])) {
-    var_c766fbe6[#"blight_father"] = 0;
+  if(!isDefined(var_c766fbe6[# "blight_father"])) {
+    var_c766fbe6[# "blight_father"] = 0;
   }
 
-  if(!isDefined(var_c766fbe6[#"stoker"])) {
-    var_c766fbe6[#"stoker"] = 0;
+  if(!isDefined(var_c766fbe6[# "stoker"])) {
+    var_c766fbe6[# "stoker"] = 0;
   }
 
-  if(!isDefined(var_c766fbe6[#"catalyst"])) {
-    var_c766fbe6[#"catalyst"] = 0;
+  if(!isDefined(var_c766fbe6[# "catalyst"])) {
+    var_c766fbe6[# "catalyst"] = 0;
   }
 
   assert(isDefined(level.var_6d87ac05));
@@ -68,23 +67,23 @@ private function_6bf7d04f(var_c766fbe6) {
   player_count = a_human_players.size;
 
   if(level.round_number == 24) {
-    assert(level.var_d77a6967.name == #"unhealthy");
+    assert(level.var_d77a6967.name == # "unhealthy");
 
     if(player_count == 1) {
-      var_c766fbe6[#"blight_father"] = 2;
+      var_c766fbe6[# "blight_father"] = 2;
     } else {
-      var_c766fbe6[#"blight_father"] = 4;
+      var_c766fbe6[# "blight_father"] = 4;
     }
   } else if(level.round_number == 28) {
-    assert(level.var_d77a6967.name == #"hash_7aff6c8730240d5");
-    var_c766fbe6[#"blight_father"] = max(var_c766fbe6[#"blight_father"], 1);
-    var_c766fbe6[#"stoker"] = max(var_c766fbe6[#"stoker"], 1);
-    var_c766fbe6[#"catalyst"] = max(var_c766fbe6[#"catalyst"], 1);
-    var_c766fbe6[#"blight_father"] = int(ceil(var_c766fbe6[#"blight_father"] * 1.3));
-    var_c766fbe6[#"stoker"] = int(ceil(var_c766fbe6[#"stoker"] * 1.3));
-    var_c766fbe6[#"catalyst"] = int(ceil(var_c766fbe6[#"catalyst"] * 1.3));
+    assert(level.var_d77a6967.name == # "hash_7aff6c8730240d5");
+    var_c766fbe6[# "blight_father"] = max(var_c766fbe6[# "blight_father"], 1);
+    var_c766fbe6[# "stoker"] = max(var_c766fbe6[# "stoker"], 1);
+    var_c766fbe6[# "catalyst"] = max(var_c766fbe6[# "catalyst"], 1);
+    var_c766fbe6[# "blight_father"] = int(ceil(var_c766fbe6[# "blight_father"] * 1.3));
+    var_c766fbe6[# "stoker"] = int(ceil(var_c766fbe6[# "stoker"] * 1.3));
+    var_c766fbe6[# "catalyst"] = int(ceil(var_c766fbe6[# "catalyst"] * 1.3));
   } else if(level.round_number == 30) {
-    assert(level.var_d77a6967.name == #"hash_37f11d9a44a08099", "<dev string:x38>");
+    assert(level.var_d77a6967.name == # "hash_37f11d9a44a08099", "<dev string:x38>");
 
     if(getgametypesetting("zmTrialsVariant")) {
       level.var_43fb4347 = "walk";
@@ -106,18 +105,18 @@ private function_6bf7d04f(var_c766fbe6) {
       }
 
       if(player_count == 1) {
-        var_c766fbe6[#"blight_father"] = 1;
+        var_c766fbe6[# "blight_father"] = 1;
       } else {
-        var_c766fbe6[#"blight_father"] = 2;
+        var_c766fbe6[# "blight_father"] = 2;
       }
     } else if(player_count == 1) {
-      var_c766fbe6[#"blight_father"] = 3;
-      var_c766fbe6[#"stoker"] += 2;
-      var_c766fbe6[#"catalyst"] += 8;
+      var_c766fbe6[# "blight_father"] = 3;
+      var_c766fbe6[# "stoker"] += 2;
+      var_c766fbe6[# "catalyst"] += 8;
     } else {
-      var_c766fbe6[#"blight_father"] = 8;
-      var_c766fbe6[#"stoker"] += 4;
-      var_c766fbe6[#"catalyst"] += 16;
+      var_c766fbe6[# "blight_father"] = 8;
+      var_c766fbe6[# "stoker"] += 4;
+      var_c766fbe6[# "catalyst"] += 16;
     }
   }
 

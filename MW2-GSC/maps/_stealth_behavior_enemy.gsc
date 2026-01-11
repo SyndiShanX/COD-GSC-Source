@@ -160,7 +160,7 @@ enemy_dog_init() {
 
 enemy_custom_state_behavior(array) {
   foreach(key, value in array) {
-  self ai_create_behavior_function("state", key, value);
+    self ai_create_behavior_function("state", key, value);
   }
 
   function = self._stealth.behavior.ai_functions["state"]["hidden"];

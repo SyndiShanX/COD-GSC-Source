@@ -79,8 +79,7 @@ func_70B7(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -95,8 +94,7 @@ func_70B7(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -111,8 +109,7 @@ func_70B7(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -127,8 +124,7 @@ func_70B7(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -143,8 +139,7 @@ func_70B7(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -159,8 +154,7 @@ func_70B7(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -175,8 +169,7 @@ func_70B7(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -297,8 +290,7 @@ func_70CE(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          }
-          else {
+          } else {
             var_5.func_4B1B = 0;
           }
 
@@ -345,8 +337,7 @@ func_7083(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -361,8 +352,7 @@ func_7083(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -377,8 +367,7 @@ func_7083(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -396,8 +385,7 @@ func_7083(var_00, var_01, var_02, var_03) {
 
           if(var_03 == anim.running) {
             var_1.func_E87F[var_06] = -1;
-          }
-          else {
+          } else {
             func_0A0D::func_7231(var_06);
           }
 
@@ -499,8 +487,7 @@ func_7084(var_00, var_01, var_02, var_03) {
 
           if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          }
-          else {
+          } else {
             func_0A0D::func_7234(var_04);
           }
 
@@ -564,8 +551,7 @@ func_7085(var_00, var_01, var_02, var_03) {
 
           if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          }
-          else {
+          } else {
             func_0A0D::func_7231(var_04);
           }
 
@@ -617,8 +603,7 @@ func_70D1(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          }
-          else {
+          } else {
             var_5.func_4B1B = 0;
           }
 
@@ -673,8 +658,7 @@ func_7092(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -801,8 +785,7 @@ func_7094(var_00, var_01, var_02, var_03) {
 
           if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          }
-          else {
+          } else {
             func_0A0D::func_11704(var_04);
           }
 
@@ -873,8 +856,7 @@ func_7093(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          }
-          else {
+          } else {
             var_5.func_4B1B = 0;
           }
 
@@ -907,8 +889,7 @@ func_7095(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -923,8 +904,7 @@ func_7095(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -1052,8 +1032,7 @@ func_70D0(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          }
-          else {
+          } else {
             var_5.func_4B1B = 0;
           }
 
@@ -1100,8 +1079,7 @@ func_708A(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -1116,8 +1094,7 @@ func_708A(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -1229,8 +1206,7 @@ func_7087(var_00, var_01, var_02, var_03) {
 
           if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          }
-          else {
+          } else {
             func_0A0D::func_724B(var_04);
           }
 
@@ -1286,8 +1262,7 @@ func_708B(var_00, var_01, var_02, var_03) {
 
           if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          }
-          else {
+          } else {
             func_0A0D::func_11704(var_04);
           }
 
@@ -1339,8 +1314,7 @@ func_70CD(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          }
-          else {
+          } else {
             var_5.func_4B1B = 0;
           }
 
@@ -1405,8 +1379,7 @@ func_70CC(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          }
-          else {
+          } else {
             var_5.func_4B1B = 0;
           }
 
@@ -1457,8 +1430,7 @@ func_7062(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -1473,8 +1445,7 @@ func_7062(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -1489,8 +1460,7 @@ func_7062(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -1554,8 +1524,7 @@ func_704D(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          }
-          else {
+          } else {
             var_5.func_4B1B = 0;
           }
 
@@ -1602,8 +1571,7 @@ func_716F(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_05)) {
             var_4.func_4B1B = var_05;
-          }
-          else {
+          } else {
             var_4.func_4B1B = 0;
           }
 
@@ -1792,8 +1760,7 @@ func_704F(var_00, var_01, var_02, var_03) {
 
           if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          }
-          else {
+          } else {
             func_0A0D::func_11704(var_04);
           }
 
@@ -1867,8 +1834,7 @@ func_70A6(var_00, var_01, var_02, var_03) {
 
           if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          }
-          else {
+          } else {
             func_0A0D::func_11704(var_04);
           }
 
@@ -1920,8 +1886,7 @@ func_70B5(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          }
-          else {
+          } else {
             var_5.func_4B1B = 0;
           }
 
@@ -1977,8 +1942,7 @@ func_70D3(var_00, var_01, var_02, var_03) {
 
           if(isDefined(var_06)) {
             var_5.func_4B1B = var_06;
-          }
-          else {
+          } else {
             var_5.func_4B1B = 0;
           }
 

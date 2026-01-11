@@ -154,7 +154,7 @@ tree_delete() {
   var_0 = getEntArray("intro_trees", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -168,8 +168,7 @@ hill_fx() {
 
   if(level.ps3) {
     common_scripts\utility::exploder("crash_site_fire_nonwind_ps3");
-  }
-  else {
+  } else {
     common_scripts\utility::exploder("crash_site_fire_nonwind");
   }
 }
@@ -239,7 +238,7 @@ destroy_hint(var_0) {
   wait(var_0);
 
   foreach(var_2 in level.cut_hint) {
-  var_2 destroy();
+    var_2 destroy();
   }
 }
 
@@ -259,8 +258,7 @@ draw_cut_hint() {
 
   if(!level.console && !level.player usinggamepad()) {
     var_3.fontscale = 2;
-  }
-  else {
+  } else {
     var_3.fontscale = 2 * var_2;
   }
 
@@ -651,8 +649,7 @@ player_hurt_sounds() {
 player_playing_hurt_sounds() {
   if(level.player.health < 50) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -671,7 +668,7 @@ adjust_angles_to_player(var_0) {
 
 assign_archetypes() {
   foreach(var_1 in level.alpha) {
-  var_1.animarchetype = "jungle_soldier";
+    var_1.animarchetype = "jungle_soldier";
   }
 }
 
@@ -776,8 +773,7 @@ jungle_enemy_logic(var_0, var_1) {
 
   if(!common_scripts\utility::flag("second_distant_sat_launch")) {
     maps\_utility::set_moveplaybackrate(0.7);
-  }
-  else {
+  } else {
     maps\_utility::set_moveplaybackrate(1);
   }
 
@@ -803,8 +799,7 @@ jungle_enemy_logic(var_0, var_1) {
   if(isDefined(var_0)) {
     if(var_0 == "zero") {
       self.grenadeammo = 0;
-    }
-    else {
+    } else {
       self.grenadeammo = var_0;
     }
   }
@@ -936,7 +931,7 @@ meeting_guys_vo(var_0) {
   var_4 = [var_1, var_2, var_3];
 
   foreach(var_6 in var_0) {
-  var_6 endon("stop_meeting_vo");
+    var_6 endon("stop_meeting_vo");
   }
 
   for(;;) {
@@ -946,8 +941,7 @@ meeting_guys_vo(var_0) {
 
         if(!maps\jungle_ghosts_util::isdefined_and_alive(var_6)) {
           return;
-        }
-        else {
+        } else {
           var_6 maps\_utility::play_sound_on_tag(var_11, undefined, 1);
         }
       }
@@ -990,11 +984,9 @@ stealth_anim_interupt_detection(var_0) {
 get_my_meeting_group() {
   if(maps\_utility::is_in_array(level.left_meeting_guys, self)) {
     return level.left_meeting_guys;
-  }
-  else if(maps\_utility::is_in_array(level.right_meeting_guys, self)) {
+  } else if(maps\_utility::is_in_array(level.right_meeting_guys, self)) {
     return level.right_meeting_guys;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -1167,8 +1159,7 @@ handle_enemies_behind_player() {
   if(isDefined(level.jungle_enemies)) {
     if(common_scripts\utility::flag("hill_pos_4")) {
       common_scripts\utility::array_thread(level.jungle_enemies, maps\jungle_ghosts_util::delete_if_player_cant_see_me);
-    }
-    else {
+    } else {
       level.jungle_enemies = maps\_utility::array_removedead_or_dying(level.jungle_enemies);
 
       if(level.jungle_enemies.size > 2) {
@@ -1291,7 +1282,7 @@ battlechatter_setup() {
   var_0 = getaiarray();
 
   foreach(var_2 in var_0) {
-  var_2 thread maps\_utility::set_battlechatter(0);
+    var_2 thread maps\_utility::set_battlechatter(0);
   }
 }
 
@@ -1316,8 +1307,7 @@ bravo_friendly_logic() {
 
   if(self.script_friendname == "Merrick") {
     level.merrick = self;
-  }
-  else {
+  } else {
     level.hesh = self;
   }
 }
@@ -1326,7 +1316,7 @@ delete_bloomdome() {
   var_0 = getEntArray("bloomdome", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -1644,14 +1634,11 @@ motion_tracker_setup() {
 
       if(var_4 < 160000) {
         var_0 = 0.5;
-      }
-      else if(var_4 < 360000) {
+      } else if(var_4 < 360000) {
         var_0 = 1;
-      }
-      else if(var_4 < 640000) {
+      } else if(var_4 < 640000) {
         var_0 = 1.5;
-      }
-      else {
+      } else {
         var_0 = var_1;
       }
 

@@ -79,8 +79,7 @@ section_hint_string_init() {
 hint_bumpers_intro() {
   if(common_scripts\utility::flag("pause_bumper_hints")) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -88,8 +87,7 @@ hint_bumpers_intro() {
 hint_bumpers_intro2() {
   if(common_scripts\utility::flag("pause_bumper_hints")) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -97,8 +95,7 @@ hint_bumpers_intro2() {
 hint_stray_warn() {
   if(common_scripts\utility::flag("intro_player_in_bounds") || !common_scripts\utility::flag("intro_player_death_area")) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -226,8 +223,7 @@ player_near_station_checker() {
 
     if(common_scripts\utility::flag("player_approaching_infiltration") || level.player istouching(var_0)) {
       return;
-    }
-    else {
+    } else {
       common_scripts\utility::flag_set("astronaut_needs_helps");
       level.player thread maps\_utility::display_hint("intro_stray_warn");
       common_scripts\utility::flag_set("astronaut_needs_help");
@@ -246,8 +242,7 @@ player_too_far_death() {
 
     if(common_scripts\utility::flag("player_approaching_infiltration")) {
       return;
-    }
-    else {
+    } else {
       common_scripts\utility::flag_set("mission_failed");
       level notify("new_quote_string");
       setdvar("ui_deadquote", "@ODIN_FAIL_STRAY_INTRO");
@@ -637,8 +632,7 @@ shuttle_thrust(var_0, var_1) {
 dof_rack() {
   if(maps\_utility::is_gen4()) {
     maps\_art::dof_enable_script(20, 112, 6, 1999, 200000, 0, 0);
-  }
-  else {
+  } else {
     maps\_art::dof_enable_script(12, 92, 4, 1999, 200000, 0, 0);
   }
 
@@ -706,8 +700,7 @@ second_bumper_hint() {
       thread maps\_utility::display_hint("intro_bumper_hint2");
     else if(maps\_utility::is_command_bound("+crouch") || !maps\_utility::is_command_bound("+stance")) {
       thread maps\_utility::display_hint("intro_bumper_hint2_CROUCH");
-    }
-    else {
+    } else {
       thread maps\_utility::display_hint("intro_bumper_hint2_PC");
     }
 
@@ -741,8 +734,7 @@ ally_nagging(var_0) {
 
   if(common_scripts\utility::flag("nags_should_overlap") && common_scripts\utility::flag("ally_should_nag")) {
     maps\_utility::smart_radio_dialogue_overlap(var_1[var_2]);
-  }
-  else if(common_scripts\utility::flag("ally_should_nag")) {
+  } else if(common_scripts\utility::flag("ally_should_nag")) {
     maps\_utility::smart_radio_dialogue(var_1[var_2]);
   }
 
@@ -827,24 +819,24 @@ manage_exterior_hatch_lights() {
   var_3 = getent("intro_exterior_hatch_light", "targetname");
 
   foreach(var_5 in var_0) {
-  var_5 hide();
+    var_5 hide();
   }
 
   common_scripts\utility::flag_wait("exterior_hatch_opening");
 
   foreach(var_5 in var_2) {
-  var_5 delete();
+    var_5 delete();
   }
 
   foreach(var_5 in var_0) {
-  var_5 show();
+    var_5 show();
   }
 
   var_3 setlightintensity(1.1);
   common_scripts\utility::flag_wait("player_approaching_infiltration");
 
   foreach(var_5 in var_0) {
-  var_5 delete();
+    var_5 delete();
   }
 }
 
@@ -862,8 +854,7 @@ station_entrance_to_infiltration() {
 mosley_airlock_ln_1(var_0) {
   if(common_scripts\utility::flag("nags_should_overlap")) {
     maps\_utility::smart_radio_dialogue_overlap("odin_ast1_pressurizingairlock");
-  }
-  else {
+  } else {
     maps\_utility::smart_radio_dialogue("odin_ast1_pressurizingairlock");
   }
 }
@@ -871,8 +862,7 @@ mosley_airlock_ln_1(var_0) {
 mosley_airlock_ln_2(var_0) {
   if(common_scripts\utility::flag("nags_should_overlap")) {
     maps\_utility::smart_radio_dialogue_overlap("odin_ast1_reallylookingforwardto");
-  }
-  else {
+  } else {
     maps\_utility::smart_radio_dialogue("odin_ast1_reallylookingforwardto");
   }
 
@@ -1103,8 +1093,7 @@ tweak_player_wall_push() {
 
         if(level.view_ref_ent.angles[2] > 0) {
           var_1 = randomfloatrange(-25, -5);
-        }
-        else {
+        } else {
           var_1 = randomfloatrange(5, 25);
         }
       } else {
@@ -1112,8 +1101,7 @@ tweak_player_wall_push() {
 
         if(level.view_ref_ent.angles[0] > 0) {
           var_0 = randomfloatrange(-25, -5);
-        }
-        else {
+        } else {
           var_0 = randomfloatrange(5, 25);
         }
       }
@@ -1157,8 +1145,7 @@ introscreen_generic_fade_in(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_3)) {
     maps\_hud_util::start_overlay(var_0);
-  }
-  else {
+  } else {
     maps\_hud_util::fade_out(var_3, var_0);
   }
 
@@ -1194,8 +1181,7 @@ centerlinethread(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  }
-  else {
+  } else {
     level.intro_offset++;
   }
 
@@ -1259,6 +1245,6 @@ intro_cleanup(var_0) {
   var_8 = getEntArray("intro_earth", "targetname");
 
   foreach(var_10 in var_8) {
-  var_10 delete();
+    var_10 delete();
   }
 }

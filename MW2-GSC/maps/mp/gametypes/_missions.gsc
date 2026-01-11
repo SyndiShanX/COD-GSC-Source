@@ -71,7 +71,7 @@ mayProcessChallenges() {
     return true;
   }
 
-    return (level.rankedMatch);
+  return (level.rankedMatch);
 }
 
 onPlayerConnect() {
@@ -109,8 +109,7 @@ onPlayerConnect() {
 
     if(cardTitle == "cardtitle_infected") {
       player.infected = true;
-    }
-    else if(cardTitle == "cardtitle_plague") {
+    } else if(cardTitle == "cardtitle_plague") {
       player.plague = true;
     }
   }
@@ -217,7 +216,7 @@ monitorCombatHighSurvival() {
 initMissionData() {
   keys = getArrayKeys(level.killstreakFuncs);
   foreach(key in keys) {
-  self.pers[key] = 0;
+    self.pers[key] = 0;
   }
 
   self.pers["lastBulletKillTime"] = 0;
@@ -235,8 +234,7 @@ registerMissionCallback(callback, func) {
 getChallengeStatus(name) {
   if(isDefined(self.challengeData[name])) {
     return self.challengeData[name];
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -549,8 +547,7 @@ killedBestEnemyPlayer(wasBest) {
 
   if(self.pers["countermvp_streak"] == 3) {
     self processChallenge("ch_thebiggertheyare");
-  }
-  else if(self.pers["countermvp_streak"] == 5) {
+  } else if(self.pers["countermvp_streak"] == 5) {
     self processChallenge("ch_thehardertheyfall");
   }
 
@@ -567,8 +564,7 @@ isHighestScoringPlayer(player) {
   players = level.players;
   if(level.teamBased) {
     team = player.pers["team"];
-  }
-  else {
+  } else {
     team = "all";
   }
 
@@ -713,16 +709,14 @@ ch_kills(data, time) {
       if(isDefined(victimteam) && victimteam != player.pers["team"]) {
         if(isHighestScoringPlayer(data.victim) && level.players.size >= 6) {
           player killedBestEnemyPlayer(true);
-        }
-        else {
+        } else {
           player killedBestEnemyPlayer(false);
         }
       }
     } else {
       if(isHighestScoringPlayer(data.victim) && level.players.size >= 4) {
         player killedBestEnemyPlayer(true);
-      }
-      else {
+      } else {
         player killedBestEnemyPlayer(false);
       }
     }
@@ -1047,14 +1041,11 @@ ch_kills(data, time) {
   } else if(isSubStr(data.sMeansOfDeath, "MOD_IMPACT")) {
     if(isStrStart(data.sWeapon, "frag_")) {
       player processChallenge("ch_thinkfast");
-    }
-    else if(isStrStart(data.sWeapon, "concussion_")) {
+    } else if(isStrStart(data.sWeapon, "concussion_")) {
       player processChallenge("ch_thinkfastconcussion");
-    }
-    else if(isStrStart(data.sWeapon, "flash_")) {
+    } else if(isStrStart(data.sWeapon, "flash_")) {
       player processChallenge("ch_thinkfastflash");
-    }
-    else if(isStrStart(data.sWeapon, "gl_")) {
+    } else if(isStrStart(data.sWeapon, "gl_")) {
       player processChallenge("ch_ouch");
     }
 
@@ -1250,8 +1241,7 @@ ch_bulletDamageCommon(data, player, time, weaponClass) {
 
   if(player.pers["lastBulletKillTime"] == time) {
     player.pers["bulletStreak"]++;
-  }
-  else {
+  } else {
     player.pers["bulletStreak"] = 1;
   }
 
@@ -1956,7 +1946,7 @@ processChallenge(baseName, progressInc, forceSetProgress) {
     println("CHALLENGE PROGRESS - " + baseName + ": " + progressInc);
   }
 
-    missionStatus = getChallengeStatus(baseName);
+  missionStatus = getChallengeStatus(baseName);
 
   if(missionStatus == 0) {
     return;
@@ -2167,19 +2157,19 @@ completeAllChallenges(percentage) {
   println("Done unlocking challenges");
 }
 
-  monitorProcessChallenge() {
-    self endon("disconnect");
-    level endon("game_end");
+monitorProcessChallenge() {
+  self endon("disconnect");
+  level endon("game_end");
 
-    for(;;) {
-      if(!mayProcessChallenges()) {
-        return;
-      }
-
-      self waittill("process", challengeName);
-      self processChallenge(challengeName);
+  for(;;) {
+    if(!mayProcessChallenges()) {
+      return;
     }
+
+    self waittill("process", challengeName);
+    self processChallenge(challengeName);
   }
+}
 
 monitorKillstreakProgress() {
   self endon("disconnect");
@@ -2195,8 +2185,7 @@ monitorKillstreakProgress() {
 
     if(streakCount == 10 && self.killstreaks.size == 0) {
       self processChallenge("ch_theloner");
-    }
-    else if(streakCount == 9) {
+    } else if(streakCount == 9) {
       if(isDefined(self.killstreaks[7]) && isDefined(self.killstreaks[8]) && isDefined(self.killstreaks[9])) {
         self processChallenge("ch_6fears7");
       }

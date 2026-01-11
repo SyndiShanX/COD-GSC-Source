@@ -20,8 +20,7 @@ create_state_machine(name, owner, change_notify) {
 
   if(isDefined(owner)) {
     state_machine.owner = owner;
-  }
-  else {
+  } else {
     state_machine.owner = level;
   }
 
@@ -245,17 +244,13 @@ connection_enemy_dist(check_dist, compare_type) {
 
   if(compare_type == 0) {
     return dist < check_dist;
-  }
-  else if(compare_type == 1) {
+  } else if(compare_type == 1) {
     return dist > check_dist;
-  }
-  else if(compare_type == 2) {
+  } else if(compare_type == 2) {
     return dist == check_dist;
-  }
-  else if(compare_type == 3) {
+  } else if(compare_type == 3) {
     return dist <= check_dist;
-  }
-  else if(compare_type == 4) {
+  } else if(compare_type == 4) {
     return dist >= check_dist;
   }
 
@@ -271,8 +266,7 @@ connection_enemy_visible(trace_height_offset, compare_type) {
     if(compare_type == 6) {
       if(self vehcansee(self.enemy) && distance2d(self.origin, self.enemy.origin) < self.maxsightdistance) {
         return 1;
-      }
-      else {
+      } else {
         return 0;
       }
     } else if(!self vehcansee(self.enemy) || distance2d(self.origin, self.enemy.origin) > self.maxsightdistance)
@@ -301,17 +295,13 @@ connection_enemy_angle(check_angle, compare_type) {
 
   if(compare_type == 0) {
     return angle < check_angle;
-  }
-  else if(compare_type == 1) {
+  } else if(compare_type == 1) {
     return angle > check_angle;
-  }
-  else if(compare_type == 2) {
+  } else if(compare_type == 2) {
     return angle == check_angle;
-  }
-  else if(compare_type == 3) {
+  } else if(compare_type == 3) {
     return angle <= check_angle;
-  }
-  else if(compare_type == 4) {
+  } else if(compare_type == 4) {
     return angle >= check_angle;
   }
 
@@ -336,17 +326,13 @@ connection_enemy_health_pct(check_pct, compare_type) {
 
   if(compare_type == 0) {
     return health_pct < check_pct;
-  }
-  else if(compare_type == 1) {
+  } else if(compare_type == 1) {
     return health_pct > check_pct;
-  }
-  else if(compare_type == 2) {
+  } else if(compare_type == 2) {
     return health_pct == check_pct;
-  }
-  else if(compare_type == 3) {
+  } else if(compare_type == 3) {
     return health_pct <= check_pct;
-  }
-  else if(compare_type == 4) {
+  } else if(compare_type == 4) {
     return health_pct >= check_pct;
   }
 
@@ -358,17 +344,13 @@ connection_health_pct(check_pct, compare_type) {
 
   if(compare_type == 0) {
     return health_pct < check_pct;
-  }
-  else if(compare_type == 1) {
+  } else if(compare_type == 1) {
     return health_pct > check_pct;
-  }
-  else if(compare_type == 2) {
+  } else if(compare_type == 2) {
     return health_pct == check_pct;
-  }
-  else if(compare_type == 3) {
+  } else if(compare_type == 3) {
     return health_pct <= check_pct;
-  }
-  else if(compare_type == 4) {
+  } else if(compare_type == 4) {
     return health_pct >= check_pct;
   }
 

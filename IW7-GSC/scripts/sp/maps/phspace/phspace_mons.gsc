@@ -262,7 +262,7 @@ func_1F90() {
   }
 
   foreach(var_06 in var_01) {
-  var_06 func_BAA0();
+    var_06 func_BAA0();
   }
 
   scripts\engine\utility::flag_set("mons_intro_setup_complete");
@@ -286,11 +286,11 @@ func_1F8F() {
   level.func_3670 func_F5D4(var_00);
 
   foreach(var_02 in level.func_12704) {
-  var_02 _meth_82B1(level.func_EC85["generic_mover"][var_2.func_1FAF], 1 * level.func_1F5B);
+    var_02 _meth_82B1(level.func_EC85["generic_mover"][var_2.func_1FAF], 1 * level.func_1F5B);
   }
 
   foreach(var_05 in level.func_12703) {
-  var_05 _meth_82B1(var_5.func_AEBB, 1 * level.func_1F5B);
+    var_05 _meth_82B1(var_5.func_AEBB, 1 * level.func_1F5B);
   }
 
   thread func_1F92();
@@ -300,7 +300,7 @@ func_1F98(var_00) {
   var_01 = getnotetracktimes(level.func_EC85["generic_mover"][level.func_D16B.func_1FAF], var_00);
 
   foreach(var_03 in level.func_12704) {
-  var_03 _meth_82B0(level.func_EC85["generic_mover"][var_3.func_1FAF], var_1[0]);
+    var_03 _meth_82B0(level.func_EC85["generic_mover"][var_3.func_1FAF], var_1[0]);
   }
 }
 
@@ -337,8 +337,7 @@ func_1F92() {
 
   if(var_00) {
     var_01 = 0.05;
-  }
-  else {
+  } else {
     var_01 = 40;
   }
 
@@ -365,8 +364,7 @@ func_1F92() {
 
   if(var_00) {
     var_01 = 0.05;
-  }
-  else {
+  } else {
     var_01 = 25;
   }
 
@@ -530,8 +528,7 @@ func_BAB9(var_00, var_01, var_02) {
 
   if(isDefined(var_02) && var_02) {
     var_06 = undefined;
-  }
-  else {
+  } else {
     var_06 = var_00;
   }
 
@@ -706,8 +703,7 @@ func_1F91() {
 
     if(!scripts\engine\utility::flag("player_jackal_drone_dock")) {
       var_01 = 1;
-    }
-    else {
+    } else {
       var_01 = 0;
     }
 
@@ -865,8 +861,7 @@ func_126FD() {
     if(level.func_D127.func_4C15.func_9DF4) {
       if(level.func_D127.func_4C15.class == "secondary") {
         var_02 = 0.75;
-      }
-      else {
+      } else {
         var_02 = 0.05;
       }
     } else
@@ -874,8 +869,7 @@ func_126FD() {
 
     if(var_02 > 0) {
       level.func_12706 = level.func_12706 + var_00;
-    }
-    else {
+    } else {
       level.func_12706 = level.func_12706 - var_01;
     }
 
@@ -895,8 +889,7 @@ func_137E2(var_00) {
 
   if(var_05 >= 0) {
     wait(var_05);
-  }
-  else {
+  } else {
     var_01 = 1;
   }
 
@@ -917,8 +910,7 @@ func_137E3(var_00, var_01) {
 
     if(isDefined(var_01)) {
       var_01 thread scripts\sp\utility::func_10346("phspace_" + var_00);
-    }
-    else {
+    } else {
       thread scripts\sp\utility::func_10352("phspace_" + var_00);
     }
   }
@@ -935,8 +927,7 @@ func_137FF(var_00) {
 
   if(var_05 >= 0) {
     wait(var_05);
-  }
-  else {
+  } else {
     var_01 = 1;
   }
 
@@ -1210,8 +1201,7 @@ func_BA83(var_00) {
 
   if(isDefined(var_00)) {
     self.func_5289 = var_00;
-  }
-  else {
+  } else {
     var_02 = var_02 * (1 - var_06);
     self.func_5289 = self.angles + var_02;
   }
@@ -1259,8 +1249,7 @@ func_50BF(var_00) {
   if(isDefined(self) && isalive(self)) {
     if(func_0B76::func_7A60(self.origin) < 0.7 && !scripts\engine\utility::cointoss()) {
       self delete();
-    }
-    else {
+    } else {
       self _meth_81D0();
     }
   }
@@ -1684,7 +1673,7 @@ func_4496(var_00) {
   var_01 = "";
 
   foreach(var_03 in var_00) {
-  var_01 = var_01 + "," + var_03;
+    var_01 = var_01 + "," + var_03;
   }
 
   return var_01;
@@ -1712,7 +1701,7 @@ func_C418() {
 
   foreach(var_01 in self.turrets) {
     foreach(var_03 in var_01) {
-    var_3.health = 10;
+      var_3.health = 10;
     }
   }
 }
@@ -1787,7 +1776,7 @@ func_BAF5() {
       continue;
     }
     foreach(var_06 in var_04) {
-    var_06 thread func_BAF6();
+      var_06 thread func_BAF6();
     }
   }
 }
@@ -1872,29 +1861,21 @@ func_FA70() {
       if(isDefined(var_13)) {
         if(scripts\engine\utility::array_contains(self.func_8B46["left_1"], var_13.func_AD42)) {
           self.func_8B45["left_1"][self.func_8B45["left_1"].size] = var_13;
-        }
-        else if(scripts\engine\utility::array_contains(self.func_8B46["right_1"], var_13.func_AD42)) {
+        } else if(scripts\engine\utility::array_contains(self.func_8B46["right_1"], var_13.func_AD42)) {
           self.func_8B45["right_1"][self.func_8B45["right_1"].size] = var_13;
-        }
-        else if(scripts\engine\utility::array_contains(self.func_8B46["left_2"], var_13.func_AD42)) {
+        } else if(scripts\engine\utility::array_contains(self.func_8B46["left_2"], var_13.func_AD42)) {
           self.func_8B45["left_2"][self.func_8B45["left_2"].size] = var_13;
-        }
-        else if(scripts\engine\utility::array_contains(self.func_8B46["right_2"], var_13.func_AD42)) {
+        } else if(scripts\engine\utility::array_contains(self.func_8B46["right_2"], var_13.func_AD42)) {
           self.func_8B45["right_2"][self.func_8B45["right_2"].size] = var_13;
-        }
-        else if(scripts\engine\utility::array_contains(self.func_8B46["left_3"], var_13.func_AD42)) {
+        } else if(scripts\engine\utility::array_contains(self.func_8B46["left_3"], var_13.func_AD42)) {
           var_13 delete();
-        }
-        else if(scripts\engine\utility::array_contains(self.func_8B46["right_3"], var_13.func_AD42)) {
+        } else if(scripts\engine\utility::array_contains(self.func_8B46["right_3"], var_13.func_AD42)) {
           var_13 delete();
-        }
-        else if(scripts\engine\utility::array_contains(self.func_8B46["left_4"], var_13.func_AD42)) {
+        } else if(scripts\engine\utility::array_contains(self.func_8B46["left_4"], var_13.func_AD42)) {
           self.func_8B45["left_4"][self.func_8B45["left_4"].size] = var_13;
-        }
-        else if(scripts\engine\utility::array_contains(self.func_8B46["right_4"], var_13.func_AD42)) {
+        } else if(scripts\engine\utility::array_contains(self.func_8B46["right_4"], var_13.func_AD42)) {
           self.func_8B45["right_4"][self.func_8B45["right_4"].size] = var_13;
-        }
-        else if(scripts\engine\utility::array_contains(self.func_8B46["center"], var_13.func_AD42)) {
+        } else if(scripts\engine\utility::array_contains(self.func_8B46["center"], var_13.func_AD42)) {
           self.func_8B45["center"][self.func_8B45["center"].size] = var_13;
         }
 

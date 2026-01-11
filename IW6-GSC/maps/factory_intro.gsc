@@ -284,8 +284,7 @@ slide_orient_player() {
 
     if(var_0[1] > -60) {
       self setplayerangles((var_0[0], var_0[1] - 5, var_0[2]));
-    }
-    else if(var_0[1] < -120) {
+    } else if(var_0[1] < -120) {
       self setplayerangles((var_0[0], var_0[1] + 5, var_0[2]));
     }
 
@@ -553,8 +552,7 @@ start_enemy_enemy_logic(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     thread introkill_ally_enemy_killcheck();
-  }
-  else {
+  } else {
     thread introkill_player_enemy_killcheck();
   }
 
@@ -563,8 +561,7 @@ start_enemy_enemy_logic(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_4)) {
     maps\_utility::delaythread(6.1, maps\_anim::anim_set_rate_single, self, var_2, 1.2);
-  }
-  else {
+  } else {
     maps\_utility::delaythread(8.1, maps\_anim::anim_set_rate_single, self, var_2, 1.6);
   }
 
@@ -761,7 +758,7 @@ loop_train(var_0, var_1, var_2) {
   var_5 = var_4[0];
 
   foreach(var_7 in var_4) {
-  thread set_up_train_car(var_7, var_5, var_1, var_2, var_3);
+    thread set_up_train_car(var_7, var_5, var_1, var_2, var_3);
   }
 
   foreach(var_7 in var_4) {
@@ -890,19 +887,19 @@ factory_reveal_activity() {
   var_0 = getEntArray("intro_reveal_pmcs", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 maps\_utility::add_spawn_function(::intro_reveal_pmc_think);
+    var_2 maps\_utility::add_spawn_function(::intro_reveal_pmc_think);
   }
 
   var_4 = getEntArray("reveal_vehicles", "targetname");
 
   foreach(var_2 in var_4) {
-  var_2 maps\_utility::add_spawn_function(::reveal_vehicles_think_veh);
+    var_2 maps\_utility::add_spawn_function(::reveal_vehicles_think_veh);
   }
 
   var_7 = getEntArray("intro_reveal_vehicle_pmcs", "targetname");
 
   foreach(var_2 in var_7) {
-  var_2 maps\_utility::add_spawn_function(::reveal_vehicles_think_pmc);
+    var_2 maps\_utility::add_spawn_function(::reveal_vehicles_think_pmc);
   }
 }
 
@@ -997,7 +994,7 @@ intro_train_start() {
 
 intro_train() {
   foreach(var_1 in level.squad) {
-  var_1.ignoreall = 1;
+    var_1.ignoreall = 1;
   }
 
   level.cosine["70"] = cos(70);
@@ -1040,7 +1037,7 @@ intro_train_pass() {
   level.squad["ALLY_ALPHA"] thread maps\_utility::smart_dialogue("factory_mrk_letsmove");
 
   foreach(var_2 in level.squad) {
-  var_2 maps\_utility::disable_cqbwalk();
+    var_2 maps\_utility::disable_cqbwalk();
   }
 
   level.player.ignoreme = 0;
@@ -1274,7 +1271,7 @@ intro_ally_moveout() {
   common_scripts\utility::flag_wait("trainyard_enemy_dead");
 
   foreach(var_1 in level.squad) {
-  var_1 maps\_utility::enable_ai_color();
+    var_1 maps\_utility::enable_ai_color();
   }
 }
 
@@ -1303,7 +1300,7 @@ intro_kill_vignette() {
   common_scripts\utility::flag_wait("player_exited_train");
 
   foreach(var_1 in level.squad) {
-  var_1 maps\_utility::disable_cqbwalk();
+    var_1 maps\_utility::disable_cqbwalk();
   }
 
   level.squad["ALLY_BRAVO"] stopanimscripted();
@@ -1316,7 +1313,7 @@ intro_kill_vignette() {
   level.squad["ALLY_ALPHA"].disableplayeradsloscheck = 0;
 
   foreach(var_4 in level.squad) {
-  var_4 maps\_utility::enable_ai_color();
+    var_4 maps\_utility::enable_ai_color();
   }
 
   maps\factory_util::safe_trigger_by_targetname("intro_allies_first_moveout");
@@ -1519,13 +1516,13 @@ factory_ingress() {
   level.goodfriendlydistancefromplayersquared = 62500;
 
   foreach(var_1 in level.squad) {
-  var_1.ignoreall = 1;
+    var_1.ignoreall = 1;
   }
 
   var_3 = maps\_utility::get_living_ai_array("intro_pmcs", "targetname");
 
   foreach(var_5 in var_3) {
-  var_5.ignoreall = 1;
+    var_5.ignoreall = 1;
   }
 
   common_scripts\utility::flag_set("factory_entrance_setup");
@@ -1589,7 +1586,7 @@ factory_entrance_enc() {
   }
 
   foreach(var_4 in var_6) {
-  var_4 stopsounds();
+    var_4 stopsounds();
   }
 
   eliminate_all_targets(var_6);
@@ -1667,8 +1664,7 @@ eliminate_my_target() {
 
     if(self.favoriteenemy.script_noteworthy != "entrance_enemy_02") {
       self.favoriteenemy kill();
-    }
-    else {
+    } else {
       self.favoriteenemy dodamage(1, (0, 0, 0));
     }
 
@@ -1851,8 +1847,7 @@ safe_magic_bullet(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     magicbullet(var_2, var_0, var_1);
-  }
-  else {
+  } else {
     magicbullet(self.weapon, var_0, var_1);
   }
 }

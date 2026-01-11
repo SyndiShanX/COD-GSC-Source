@@ -10,7 +10,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_aat_brain_decay;
 
 autoexec __init__system__() {
@@ -22,7 +21,7 @@ __init__() {
     return;
   }
 
-  aat::register("zm_aat_brain_decay", #"hash_3c1c6f0860be6c5", "t7_icon_zm_aat_turned");
+  aat::register("zm_aat_brain_decay", # "hash_3c1c6f0860be6c5", "t7_icon_zm_aat_turned");
   clientfield::register("actor", "zm_aat_brain_decay", 1, 1, "int", &function_791e18ed, 0, 0);
   clientfield::register("vehicle", "zm_aat_brain_decay", 1, 1, "int", &function_791e18ed, 0, 0);
   clientfield::register("actor", "zm_aat_brain_decay_exp", 1, 1, "counter", &zm_aat_brain_decay_explosion, 0, 0);
@@ -31,7 +30,7 @@ __init__() {
 }
 
 function_791e18ed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self renderoverridebundle::function_c8d97b8e(localclientnum, #"zm_friendly", #"hash_5afb2d74423459bf");
+  self renderoverridebundle::function_c8d97b8e(localclientnum, # "zm_friendly", # "hash_5afb2d74423459bf");
 
   if(newval) {
     self setdrawname(#"hash_3a9d51a39880facd", 1);
@@ -50,7 +49,7 @@ function_791e18ed(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self.var_8dfe2b97 = util::playFXOnTag(localclientnum, "zm_weapons/fx8_aat_brain_decay_torso", self, str_fx_tag);
 
     if(!isDefined(self.var_67857d4d)) {
-      self playSound(localclientnum, #"hash_637c5e1579bb239a");
+      self playSound(localclientnum, # "hash_637c5e1579bb239a");
       self.var_67857d4d = self playLoopSound(#"hash_6064261162c8a2e");
     }
 
@@ -96,5 +95,5 @@ function_b9c917cc(localclientnum, str_bundle) {
 
 zm_aat_brain_decay_explosion(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   util::playFXOnTag(localclientnum, "zm_weapons/fx8_aat_brain_decay_head", self, "j_head");
-  self playSound(0, #"hash_422ccb7ddff9b3f4");
+  self playSound(0, # "hash_422ccb7ddff9b3f4");
 }

@@ -84,8 +84,7 @@ traverse_blend_link(var_0, var_1, var_2) {
 
     if(var_6 < 0.5) {
       self linkto(var_0, var_4, rotatevectorinverted(var_17 - var_15, var_7), var_14 - var_7);
-    }
-    else {
+    } else {
       self linkto(var_1, var_5, rotatevectorinverted(var_17 - var_16, var_8), var_14 - var_8);
     }
 

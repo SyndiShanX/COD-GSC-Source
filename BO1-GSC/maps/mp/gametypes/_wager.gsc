@@ -203,8 +203,7 @@ calculateTeamPayouts() {
   winner = "axis";
   if(getGameScore("allies") == getGameScore("axis")) {
     winner = "tie";
-  }
-  else if(getGameScore("allies") > getGameScore("axis")) {
+  } else if(getGameScore("allies") > getGameScore("axis")) {
     winner = "allies";
   }
   if(winner == "tie") {
@@ -245,8 +244,7 @@ finalizeWagerGame() {
     player = players[index];
     if(isDefined(player.pers["wager_sideBetWinnings"])) {
       payOutWagerWinnings(player, player.wagerWinnings + player.pers["wager_sideBetWinnings"]);
-    }
-    else {
+    } else {
       payOutWagerWinnings(player, player.wagerWinnings);
     }
     if(player.wagerWinnings > 0) {
@@ -450,15 +448,13 @@ setRadarVisibility() {
   if(isDefined(level.inTheMoneyOnRadar) && level.inTheMoneyOnRadar) {
     if(prevScorePlace <= 3 && isDefined(self.score) && (self.score > 0)) {
       self unsetPerk("specialty_gpsjammer");
-    }
-    else {
+    } else {
       self setPerk("specialty_gpsjammer");
     }
   } else if(isDefined(level.firstPlaceOnRadar) && level.firstPlaceOnRadar) {
     if(prevScorePlace == 1 && isDefined(self.score) && (self.score > 0)) {
       self unsetPerk("specialty_gpsjammer");
-    }
-    else {
+    } else {
       self setPerk("specialty_gpsjammer");
     }
   }
@@ -727,8 +723,7 @@ getHighestWagerWeaponUsage(statName) {
     weaponStats = self.wagerWeaponUsage[wagerWeaponsUsed[i]];
     if(!isDefined(weaponStats[statName]) || !GetBaseWeaponItemIndex(wagerWeaponsUsed[i])) {
       continue;
-    }
-    else if(!isDefined(bestWeapon) || (weaponStats[statName] > highestValue)) {
+    } else if(!isDefined(bestWeapon) || (weaponStats[statName] > highestValue)) {
       bestWeapon = wagerWeaponsUsed[i];
       highestValue = weaponStats[statName];
     }
@@ -740,8 +735,7 @@ setWagerAfterActionReportStats() {
   topKills = 0;
   if(isDefined(topWeapon)) {
     topKills = self.wagerWeaponusage[topWeapon]["kills"];
-  }
-  else {
+  } else {
     topWeapon = self getHighestWagerWeaponUsage("timeUsed");
   }
   if(!isDefined(topWeapon)) {
@@ -751,8 +745,7 @@ setWagerAfterActionReportStats() {
   self maps\mp\gametypes\_persistence::setAfterActionReportStat("topWeaponKills", topKills);
   if(isDefined(level.onWagerAwards)) {
     self[[level.onWagerAwards]]();
-  }
-  else {
+  } else {
     for(i = 0; i < 3; i++) {
       self maps\mp\gametypes\_persistence::setAfterActionReportStat("wagerAwards", 0, i);
     }

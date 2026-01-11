@@ -13,7 +13,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\visionset_mgr_shared;
-
 #namespace healthoverlay;
 
 autoexec __init__system__() {
@@ -538,7 +537,7 @@ private function_b506b922() {
     var_1556c25 = getlevelframenumber();
 
     foreach(player in getplayers()) {
-      if((player getentitynumber() + var_1556c25& 1) != 0) {
+      if((player getentitynumber() + var_1556c25 & 1) != 0) {
         continue;
       }
 

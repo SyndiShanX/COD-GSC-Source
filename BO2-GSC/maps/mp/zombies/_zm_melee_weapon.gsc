@@ -74,7 +74,9 @@ init(weapon_name, flourish_weapon_name, ballistic_weapon_name, ballistic_upgrade
 
   if(!isDefined(level.zombie_weapons[weapon_name])) {
     if(isDefined(level.devgui_add_weapon)) {
-      [[level.devgui_add_weapon]](weapon_name, "", weapon_name, cost);
+      [
+        [level.devgui_add_weapon]
+      ](weapon_name, "", weapon_name, cost);
     }
   }
 
@@ -412,8 +414,7 @@ melee_weapon_think(weapon_name, cost, flourish_fn, vo_dialog_id, flourish_weapon
 
           if(isDefined(model)) {
             model thread melee_weapon_show(player);
-          }
-          else if(isDefined(self.clientfieldname)) {
+          } else if(isDefined(self.clientfieldname)) {
             level setclientfield(self.clientfieldname, 1);
           }
 
@@ -449,8 +450,7 @@ melee_weapon_show(player) {
 
   if(yaw_diff > 0) {
     yaw = weapon_yaw - 90;
-  }
-  else {
+  } else {
     yaw = weapon_yaw + 90;
   }
 

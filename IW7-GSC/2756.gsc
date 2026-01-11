@@ -396,8 +396,7 @@ func_99E3(var_00) {
 
       if(!isDefined(self.func_138D5)) {
         self.func_138D5 = var_02;
-      }
-      else {
+      } else {
         self.func_138D5 = self.func_138D5 + var_02;
       }
 
@@ -946,8 +945,7 @@ func_99BA(var_00, var_01, var_02, var_03, var_04) {
 
           if(level.teambased) {
             var_05 = scripts\mp\utility\game::getteamarray(scripts\mp\utility\game::getotherteam(self.team)).size;
-          }
-          else {
+          } else {
             var_05 = level.players.size - 1;
           }
 
@@ -1118,8 +1116,7 @@ func_99BA(var_00, var_01, var_02, var_03, var_04) {
 
           if(level.teambased) {
             var_05 = scripts\mp\utility\game::getteamarray(scripts\mp\utility\game::getotherteam(self.team)).size;
-          }
-          else {
+          } else {
             var_05 = level.players.size - 1;
           }
 

@@ -246,9 +246,7 @@ function reset_vending_hint_string() {
   if(isDefined(level._custom_perks)) {
     if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].cost) && isDefined(level._custom_perks[perk].hint_string)) {
       if(isfunctionptr(level._custom_perks[perk].cost)) {
-        n_cost = [
-          [level._custom_perks[perk].cost]
-        ]();
+        n_cost = [[level._custom_perks[perk].cost]]();
       } else {
         n_cost = level._custom_perks[perk].cost;
       }
@@ -1013,9 +1011,7 @@ function perk_machine_spawn_init() {
         bump_trigger.script_string = "speedcola_perk";
       }
       if(isDefined(level._custom_perks[perk]) && isDefined(level._custom_perks[perk].perk_machine_set_kvps)) {
-        [
-          [level._custom_perks[perk].perk_machine_set_kvps]
-        ](t_use, perk_machine, bump_trigger, collision);
+        [[level._custom_perks[perk].perk_machine_set_kvps]](t_use, perk_machine, bump_trigger, collision);
       }
     }
   }

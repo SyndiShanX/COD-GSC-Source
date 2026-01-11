@@ -67,8 +67,7 @@ sea_objectbob_precalc(org, type) {
   self.waittime = randomfloatrange(.5, 1);
   if(isDefined(self.setscale)) {
     self.scale = self.setscale;
-  }
-  else {
+  } else {
     self.scale = randomfloatrange(2, 3);
   }
 
@@ -92,8 +91,7 @@ sea_objectbob_precalc(org, type) {
     if(swaymax < abs(swaycalc)) {
       if(swaycalc < 1) {
         swaynum = swaymax * -1;
-      }
-      else {
+      } else {
         swaynum = swaymax;
       }
     } else
@@ -175,8 +173,7 @@ sea_objectbob(org) {
 
     if(!isDefined(nodes[1])) {
       ang = nodes[0].angles;
-    }
-    else {
+    } else {
       ang = vectortoangles(B - A);
     }
 
@@ -447,8 +444,7 @@ sea_waves_setup() {
   for(i = 0; i < nodes.size; i++) {
     if(vectordot(nodes[i].forward, right) > 0) {
       waves["right"][waves["right"].size] = nodes[i];
-    }
-    else {
+    } else {
       waves["left"][waves["left"].size] = nodes[i];
     }
   }

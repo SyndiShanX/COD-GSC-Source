@@ -76,8 +76,7 @@ script_gen_dump() {
 
   if(level.bscriptgened) {
     file = openfile(filename, "write");
-  }
-  else {
+  } else {
     file = 0;
   }
 
@@ -148,15 +147,13 @@ script_gen_dump() {
 
   if(level.bscriptgened) {
     saved = closefile(file);
-  }
-  else {
+  } else {
     saved = 1;
   }
 
   if(level.bcsvgened) {
     csvfile = openfile(csvfilename, "write");
-  }
-  else {
+  } else {
     csvfile = 0;
   }
 
@@ -169,8 +166,7 @@ script_gen_dump() {
 
   if(level.bcsvgened) {
     csvfilesaved = closefile(csvfile);
-  }
-  else {
+  } else {
     csvfilesaved = 1;
   }
 
@@ -195,26 +191,19 @@ script_gen_csvdumpprintln(file, signature) {
 
   if(issubstr(signature, "ignore")) {
     prefix = "ignore";
-  }
-  else if(issubstr(signature, "col_map_sp")) {
+  } else if(issubstr(signature, "col_map_sp")) {
     prefix = "col_map_sp";
-  }
-  else if(issubstr(signature, "gfx_map")) {
+  } else if(issubstr(signature, "gfx_map")) {
     prefix = "gfx_map";
-  }
-  else if(issubstr(signature, "rawfile")) {
+  } else if(issubstr(signature, "rawfile")) {
     prefix = "rawfile";
-  }
-  else if(issubstr(signature, "sound")) {
+  } else if(issubstr(signature, "sound")) {
     prefix = "sound";
-  }
-  else if(issubstr(signature, "xmodel")) {
+  } else if(issubstr(signature, "xmodel")) {
     prefix = "xmodel";
-  }
-  else if(issubstr(signature, "xanim")) {
+  } else if(issubstr(signature, "xanim")) {
     prefix = "xanim";
-  }
-  else if(issubstr(signature, "item")) {
+  } else if(issubstr(signature, "item")) {
     prefix = "item";
     writtenprefix = "weapon";
     path = "sp/";
@@ -257,15 +246,13 @@ script_gen_csvdumpprintln(file, signature) {
   }
   if(!isDefined(writtenprefix)) {
     string = prefix + ", " + getsubstr(signature, prefix.size + 1, signature.size);
-  }
-  else {
+  } else {
     string = writtenprefix + ", " + path + getsubstr(signature, prefix.size + 1, signature.size) + extension;
   }
 
   if(file == -1 || !level.bcsvgened) {
     println(string);
-  }
-  else {
+  } else {
     fprintln(file, string);
   }
 }
@@ -273,8 +260,7 @@ script_gen_csvdumpprintln(file, signature) {
 script_gen_dumpprintln(file, string) {
   if(file == -1 || !level.bscriptgened) {
     println(string);
-  }
-  else {
+  } else {
     fprintln(file, string);
   }
 }

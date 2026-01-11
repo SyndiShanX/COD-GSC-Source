@@ -6,7 +6,6 @@
 #include scripts\core_common\compass;
 #include scripts\core_common\doors_shared;
 #include scripts\mp_common\load;
-
 #namespace mp_maldives;
 
 event_handler[level_init] main(eventstruct) {
@@ -18,9 +17,9 @@ event_handler[level_init] main(eventstruct) {
 }
 
 function_261b0d99() {
-  self.pers[#"mpcommander"] = #"blops_commander_maldives";
+  self.pers[# "mpcommander"] = # "blops_commander_maldives";
 }
 
 function_eda70d10() {
-  self.pers[#"mpcommander"] = #"cdp_commander_maldives";
+  self.pers[# "mpcommander"] = # "cdp_commander_maldives";
 }

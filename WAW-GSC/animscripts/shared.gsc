@@ -205,8 +205,7 @@ LookAtPosition(lookTargetPos, lookDuration, lookSpeed, eyesOnly, interruptOthers
     self.a.lookEndTime = GetTime() + (lookDuration * 1000);
     if(lookSpeed == "casual") {
       self.a.lookTargetSpeed = 800;
-    }
-    else {
+    } else {
       self.a.lookTargetSpeed = 1600;
     }
     if(isDefined(eyesOnly) && (eyesOnly == "eyes only")) {
@@ -247,15 +246,13 @@ showNoteTrack(note) {
   color = (.5, .75, 1);
   if(note == "end" || note == "finish") {
     color = (.25, .4, .5);
-  }
-  else if(note == "undefined") {
+  } else if(note == "undefined") {
     color = (1, .5, .5);
   }
   for(i = 0; i < duration; i++) {
     if(duration - i <= anim.showNotetrackDuration) {
       amnt = 1.0 * (i - (duration - anim.showNotetrackDuration)) / anim.showNotetrackDuration;
-    }
-    else {
+    } else {
       amnt = 0.0;
     }
     time = 1.0 * i / 20;
@@ -294,8 +291,7 @@ HandleDogSoundNoteTracks(note) {
   alias = "anml" + getsubstr(note, 5);
   if(isalive(self)) {
     self thread play_sound_on_tag_endon_death(alias, "tag_eye");
-  }
-  else {
+  } else {
     self thread play_sound_in_space(alias, self gettagorigin("tag_eye"));
   }
   return true;
@@ -358,8 +354,7 @@ noteTrackFire(note, flagName) {
   }
   if(isDefined(anim.fire_notetrack_functions[self.a.script])) {
     thread[[anim.fire_notetrack_functions[self.a.script]]]();
-  }
-  else {
+  } else {
     thread[[animscripts\shared::shootNotetrack]]();
   }
 }
@@ -481,8 +476,7 @@ noteTrackGunDrop(note, flagName) {
   self animscripts\shared::DropAIWeapon();
   if(self.weapon == self.primaryweapon) {
     self.weapon = self.secondaryweapon;
-  }
-  else if(self.weapon == self.secondaryweapon) {
+  } else if(self.weapon == self.secondaryweapon) {
     self.weapon = self.primaryweapon;
   }
   self.lastWeapon = self.weapon;
@@ -532,8 +526,7 @@ noteTrackPistolRechamber(note, flagName) {
 noteTrackGravity(note, flagName) {
   if(isSubStr(note, "on")) {
     self animMode("gravity");
-  }
-  else if(isSubStr(note, "off")) {
+  } else if(isSubStr(note, "off")) {
     self animMode("nogravity");
   }
 }
@@ -541,14 +534,12 @@ noteTrackGravity(note, flagName) {
 noteTrackBodyFall(note, flagName) {
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
-  }
-  else {
+  } else {
     groundType = "dirt";
   }
   if(isSubStr(note, "large")) {
     self playSound("bodyfall_" + groundType + "_large");
-  }
-  else if(isSubStr(note, "small")) {
+  } else if(isSubStr(note, "small")) {
     self playSound("bodyfall_" + groundType + "_small");
   }
 }
@@ -556,8 +547,7 @@ noteTrackBodyFall(note, flagName) {
 noteTrackFootStep(note, flagName) {
   if(isSubStr(note, "left")) {
     playFootStep("J_Ball_LE");
-  }
-  else {
+  } else {
     playFootStep("J_BALL_RI");
   }
   if(!level.clientScripts) {
@@ -568,8 +558,7 @@ noteTrackFootStep(note, flagName) {
 noteTrackFootScrape(note, flagName) {
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
-  }
-  else {
+  } else {
     groundType = "dirt";
   }
   self playSound("step_scrape_" + groundType);
@@ -578,8 +567,7 @@ noteTrackFootScrape(note, flagName) {
 noteTrackLand(note, flagName) {
   if(isDefined(self.groundType)) {
     groundType = self.groundType;
-  }
-  else {
+  } else {
     groundType = "dirt";
   }
   self playSound("land_" + groundType);
@@ -588,10 +576,9 @@ noteTrackLand(note, flagName) {
 HandleNoteTrack(note, flagName, customFunction, var1) {
   self thread showNoteTrack(note);
   if(isAI(self) && self.type == "dog") {
-    if(HandleDogSoundNoteTracks(note)) {
+    if(HandleDogSoundNoteTracks(note)) {}
+    return;
   }
-      return;
-    }
   notetrackFunc = anim.notetracks[note];
   if(isDefined(notetrackFunc)) {
     return [[notetrackFunc]](note, flagName);
@@ -999,14 +986,12 @@ trackLoop(aim2, aim4, aim6, aim8) {
     } else {
       if(yawDelta > self.rightAimLimit) {
         yawDelta = self.rightAimLimit;
-      }
-      else if(yawDelta < self.leftAimLimit) {
+      } else if(yawDelta < self.leftAimLimit) {
         yawDelta = self.leftAimLimit;
       }
       if(pitchDelta > self.upAimLimit) {
         pitchDelta = self.upAimLimit;
-      }
-      else if(pitchDelta < self.downAimLimit) {
+      } else if(pitchDelta < self.downAimLimit) {
         pitchDelta = self.downAimLimit;
       }
     }
@@ -1081,11 +1066,9 @@ decideNumShotsForBurst() {
   numShots = 0;
   if(animscripts\weaponList::usingSemiAutoWeapon()) {
     numShots = anim.semiFireNumShots[randomint(anim.semiFireNumShots.size)];
-  }
-  else if(self.fastBurst) {
+  } else if(self.fastBurst) {
     numShots = anim.fastBurstFireNumShots[randomint(anim.fastBurstFireNumShots.size)];
-  }
-  else {
+  } else {
     numShots = anim.burstFireNumShots[randomint(anim.burstFireNumShots.size)];
   }
   if(numShots <= self.bulletsInClip) {
@@ -1104,11 +1087,9 @@ decideNumShotsForFull() {
     choice = randomfloat(10);
     if(choice < 3) {
       numShots = randomIntRange(2, 6);
-    }
-    else if(choice < 8) {
+    } else if(choice < 8) {
       numShots = randomIntRange(6, 12);
-    }
-    else {
+    } else {
       numShots = randomIntRange(12, 20);
     }
   }
@@ -1130,8 +1111,7 @@ handleDropClip(flagName) {
   if(self.weaponInfo[self.weapon].hasClip) {
     if(weaponAnims() == "pistol") {
       self playSound("weap_reload_pistol_clipout_npc");
-    }
-    else {
+    } else {
       self playSound("weap_reload_smg_clipout_npc");
     }
     if(isDefined(clipModel)) {
@@ -1164,8 +1144,7 @@ handleDropClip(flagName) {
         }
         if(weaponAnims() == "pistol") {
           self playSound("weap_reload_pistol_clipin_npc");
-        }
-        else {
+        } else {
           self playSound("weap_reload_smg_clipin_npc");
         }
         return;
@@ -1221,9 +1200,7 @@ playLookAnimation(lookAnim, lookTime, canStopCallback) {
   }
   for(i = 0; i < lookTime * 10; i++) {
     if(isalive(self.enemy)) {
-      if(self canSeeEnemy() && [
-          [canStopCallback]
-        ]())
+      if(self canSeeEnemy() && [[canStopCallback]]())
         return;
     }
     if(self isSuppressedWrapper() && [

@@ -8,8 +8,7 @@
 #include clientscripts\mp\createfx\mp_uplink_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_mp_uplink_rain_med_fast_os"] = loadfx("weather/fx_mp_uplink_rain_med_fast_os");

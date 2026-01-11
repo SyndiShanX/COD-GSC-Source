@@ -11,8 +11,7 @@ cull_distance_logic() {
     case "default":
       if(game_is_ng()) {
         setculldist(5000);
-      }
-      else {
+      } else {
         setculldist(5000);
       }
 
@@ -20,8 +19,7 @@ cull_distance_logic() {
 
       if(game_is_ng()) {
         setculldist(5000);
-      }
-      else {
+      } else {
         setculldist(4500);
       }
 
@@ -29,8 +27,7 @@ cull_distance_logic() {
 
       if(game_is_ng()) {
         setculldist(6000);
-      }
-      else {
+      } else {
         setculldist(4500);
       }
 
@@ -38,8 +35,7 @@ cull_distance_logic() {
     case "jungle_hill":
       if(game_is_ng()) {
         setculldist(19000);
-      }
-      else {
+      } else {
         setculldist(15000);
       }
 
@@ -134,8 +130,7 @@ player_jump_watcher() {
 
   if(!common_scripts\utility::flag_exist(var_0)) {
     common_scripts\utility::flag_init(var_0);
-  }
-  else {
+  } else {
     common_scripts\utility::flag_clear(var_0);
   }
 
@@ -236,8 +231,7 @@ stream_trig_logic() {
   for(;;) {
     if(level.player istouching(self)) {
       level.player allowprone(0);
-    }
-    else {
+    } else {
       level.player allowprone(1);
     }
 
@@ -424,8 +418,7 @@ stealth_ai_idle(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_3)) {
     thread maps\_anim::anim_generic_custom_animmode_loop(var_0, "gravity", var_1, var_2);
-  }
-  else {
+  } else {
     thread maps\_anim::anim_generic_loop(var_0, var_1, var_2);
   }
 
@@ -469,8 +462,7 @@ move_player_to_start(var_0) {
 
   if(isDefined(var_2)) {
     level.player setplayerangles(vectortoangles(var_2.origin - var_1.origin));
-  }
-  else {
+  } else {
     level.player setplayerangles(var_1.angles);
   }
 
@@ -501,8 +493,7 @@ fade_out_in(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1)) {
     level waittill(var_1);
-  }
-  else {
+  } else {
     wait(var_2);
   }
 
@@ -525,8 +516,7 @@ play_hand_signal_for_player() {
   }
   if(isDefined(level.doing_hand_signal) && level.doing_hand_signal) {
     return;
-  }
-  else {
+  } else {
     level.doing_hand_signal = 1;
   }
 
@@ -550,11 +540,9 @@ do_hand_signal() {
 
     if(tolower(var_0) == "cover right") {
       var_1 = "signal_enemy_coverR";
-    }
-    else if(tolower(var_0) == "cover left") {
+    } else if(tolower(var_0) == "cover left") {
       var_1 = "signal_moveout_coverL";
-    }
-    else {
+    } else {
       var_1 = "signal_go";
     }
   } else
@@ -683,8 +671,7 @@ battle_chatter_controller_friendlies() {
 
     if(!common_scripts\utility::flag("ambush_open_fire")) {
       common_scripts\utility::flag_wait_any("_stealth_spotted", "ambush_open_fire");
-    }
-    else {
+    } else {
       common_scripts\utility::flag_wait("_stealth_spotted");
     }
 
@@ -1106,8 +1093,7 @@ music_stealth_tension_loop() {
 
     if(common_scripts\utility::flag("second_distant_sat_launch") && !common_scripts\utility::flag("to_grassy_field")) {
       var_0 = "mus_jungle_stealth";
-    }
-    else if(common_scripts\utility::flag("second_distant_sat_launch") && common_scripts\utility::flag("to_grassy_field")) {
+    } else if(common_scripts\utility::flag("second_distant_sat_launch") && common_scripts\utility::flag("to_grassy_field")) {
       var_0 = "mus_jungle_reveal";
     }
 
@@ -1177,8 +1163,7 @@ music_escape_hot() {
 music_end_jump_stinger() {
   if(!common_scripts\utility::flag("choppers_saw_player")) {
     maps\_utility::music_stop(4);
-  }
-  else {
+  } else {
     if(level.start_point != "escape_river" && level.start_point != "underwater") {
       maps\_utility::music_crossfade("mus_jungle_end_stinger", 0.5);
       return;
@@ -1209,8 +1194,7 @@ music_play_jg(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_2) || !var_2 || var_4) {
     wait(randomfloatrange(var_5 + var_6, var_5 + var_7));
-  }
-  else {
+  } else {
     while(common_scripts\utility::flag("_stealth_spotted") || var_0 == "mus_jungle_chopper_crash_battle" && !common_scripts\utility::flag("stream_clear")) {
       wait 1;
     }

@@ -36,8 +36,7 @@ play_idle() {
 selectidleanimstate() {
   if(isheatedphaseactive()) {
     var_0 = "heat_";
-  }
-  else {
+  } else {
     var_0 = "idle_";
   }
 

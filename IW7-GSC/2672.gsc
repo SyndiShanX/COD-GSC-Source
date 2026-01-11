@@ -122,8 +122,7 @@ is_weapon_unlocked(var_00, var_01) {
 
   if(var_02 >= var_04) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -208,8 +207,7 @@ get_zombie_killed_weapon_xp_multiplier_type(var_00, var_01, var_02, var_03) {
 get_player_weapon_xp_scalar(var_00) {
   if(isDefined(var_0.weaponxpscale)) {
     return var_0.weaponxpscale;
-  }
-  else {
+  } else {
     return 1;
   }
 }

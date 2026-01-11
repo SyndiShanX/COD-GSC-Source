@@ -170,8 +170,7 @@ getSpawnPoint() {
 
     if(cointoss()) {
       self maps\mp\gametypes\_menus::addToTeam("axis", true);
-    }
-    else {
+    } else {
       self maps\mp\gametypes\_menus::addToTeam("allies", true);
     }
   }
@@ -299,15 +298,12 @@ onTimeLimit() {
 
   if(!isDefined(winners) || !winners.size) {
     thread maps\mp\gametypes\_gamelogic::endGame("tie", game["end_reason"]["time_limit_reached"]);
-  }
-  else if(winners.size == 1) {
+  } else if(winners.size == 1) {
     thread maps\mp\gametypes\_gamelogic::endGame(winners[0], game["end_reason"]["time_limit_reached"]);
-  }
-  else {
+  } else {
     if(winners[winners.size - 1].gunGameGunIndex > winners[winners.size - 2].gunGameGunIndex) {
       thread maps\mp\gametypes\_gamelogic::endGame(winners[winners.size - 1], game["end_reason"]["time_limit_reached"]);
-    }
-    else {
+    } else {
       thread maps\mp\gametypes\_gamelogic::endGame("tie", game["end_reason"]["time_limit_reached"]);
     }
   }

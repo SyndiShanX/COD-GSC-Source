@@ -177,11 +177,9 @@ forceEnd(hostsucks) {
   if(level.teamBased) {
     if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
       winner = "tie";
-    }
-    else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
+    } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
       winner = "axis";
-    }
-    else {
+    } else {
       winner = "allies";
     }
     logString("host ended game, win: " + winner + ", allies: " + game["teamScores"]["allies"] + ", axis: " + game["teamScores"]["axis"]);
@@ -189,8 +187,7 @@ forceEnd(hostsucks) {
     winner = maps\mp\gametypes\_globallogic_score::getHighestScoringPlayer();
     if(isDefined(winner)) {
       logString("host ended game, win: " + winner.name);
-    }
-    else {
+    } else {
       logString("host ended game, tie");
     }
   }
@@ -201,8 +198,7 @@ forceEnd(hostsucks) {
   } else {
     if(level.splitscreen) {
       endString = &"MP_ENDED_GAME";
-    }
-    else {
+    } else {
       endString = &"MP_HOST_ENDED_GAME";
     }
   }
@@ -219,11 +215,9 @@ killserverPc() {
   if(level.teamBased) {
     if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
       winner = "tie";
-    }
-    else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
+    } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
       winner = "axis";
-    }
-    else {
+    } else {
       winner = "allies";
     }
     logString("host ended game, win: " + winner + ", allies: " + game["teamScores"]["allies"] + ", axis: " + game["teamScores"]["axis"]);
@@ -231,8 +225,7 @@ killserverPc() {
     winner = maps\mp\gametypes\_globallogic_score::getHighestScoringPlayer();
     if(isDefined(winner)) {
       logString("host ended game, win: " + winner.name);
-    }
-    else {
+    } else {
       logString("host ended game, tie");
     }
   }
@@ -363,8 +356,7 @@ matchStartTimer() {
 matchStartTimerSkip() {
   if(!isPregame()) {
     visionSetNaked(GetDvar(#"mapname"), 0);
-  }
-  else {
+  } else {
     visionSetNaked("mpIntro", 0);
   }
 }
@@ -414,8 +406,7 @@ sendAfterActionReport() {
     }
     if((level.rankedMatch || level.wagerMatch)) {
       player maps\mp\gametypes\_persistence::setAfterActionReportStat("privateMatch", 0);
-    }
-    else {
+    } else {
       player maps\mp\gametypes\_persistence::setAfterActionReportStat("privateMatch", 1);
     }
     player setNemesisXuid(player.pers["nemesis_xuid"]);
@@ -487,8 +478,7 @@ displayRoundEnd(winner, endReasonText) {
       if(level.wagerMatch) {
         if(level.teamBased) {
           player thread[[level.onTeamWagerOutcomeNotify]](winner, true, endReasonText);
-        }
-        else {
+        } else {
           player thread[[level.onWagerOutcomeNotify]](winner, endReasonText);
         }
       } else {
@@ -517,15 +507,13 @@ displayRoundSwitch(winner, endReasonText) {
     if(level.roundLimit) {
       if((game["roundsplayed"] * 2) == level.roundLimit) {
         switchType = "halftime";
-      }
-      else {
+      } else {
         switchType = "intermission";
       }
     } else if(level.scoreLimit) {
       if(game["roundsplayed"] == (level.scoreLimit - 1)) {
         switchType = "halftime";
-      }
-      else {
+      } else {
         switchType = "intermission";
       }
     } else {
@@ -547,8 +535,7 @@ displayRoundSwitch(winner, endReasonText) {
     player maps\mp\gametypes\_globallogic_audio::set_music_on_player("ROUND_SWITCH");
     if(level.wagerMatch) {
       player thread[[level.onTeamWagerOutcomeNotify]](switchType, true, level.halftimeSubCaption);
-    }
-    else {
+    } else {
       player thread[[level.onTeamOutcomeNotify]](switchType, true, level.halftimeSubCaption);
     }
     player setClientUIVisibilityFlag("hud_visible", 0);
@@ -570,8 +557,7 @@ displayGameEnd(winner, endReasonText) {
     if(level.wagerMatch) {
       if(level.teamBased) {
         player thread[[level.onTeamWagerOutcomeNotify]](winner, false, endReasonText);
-      }
-      else {
+      } else {
         player thread[[level.onWagerOutcomeNotify]](winner, endReasonText);
       }
     } else {
@@ -581,8 +567,7 @@ displayGameEnd(winner, endReasonText) {
         player thread[[level.onOutcomeNotify]](winner, false, endReasonText);
         if(isDefined(winner) && player == winner) {
           player maps\mp\gametypes\_globallogic_audio::set_music_on_player("VICTORY");
-        }
-        else if(!level.splitScreen) {
+        } else if(!level.splitScreen) {
           player maps\mp\gametypes\_globallogic_audio::set_music_on_player("LOSE");
         }
       }
@@ -621,15 +606,13 @@ displayGameEnd(winner, endReasonText) {
 getEndReasonText() {
   if(hitRoundLimit() || hitRoundWinLimit()) {
     return game["strings"]["round_limit_reached"];
-  }
-  else if(hitScoreLimit()) {
+  } else if(hitScoreLimit()) {
     return game["strings"]["score_limit_reached"];
   }
   if(level.forcedEnd) {
     if(level.hostForcedEnd) {
       return &"MP_HOST_ENDED_GAME";
-    }
-    else {
+    } else {
       return &"MP_ENDED_GAME";
     }
   }
@@ -753,8 +736,7 @@ endGame(winner, endReasonText) {
     if((level.rankedMatch || level.wagerMatch) && !player IsSplitscreen()) {
       if(isDefined(player.setPromotion)) {
         player setClientDvar("ui_lobbypopup", "promotion");
-      }
-      else {
+      } else {
         player setClientDvar("ui_lobbypopup", "summary");
       }
     }
@@ -771,9 +753,8 @@ endGame(winner, endReasonText) {
   if(!isOneRound()) {
     if(isDefined(level.onRoundEndGame)) {
       winner = [
-    }
-        [level.onRoundEndGame]
-      ](winner);
+        }
+        [level.onRoundEndGame]](winner);
     endReasonText = getEndReasonText();
   }
   setTopPlayerStats();
@@ -1491,8 +1472,7 @@ Callback_StartGameType() {
   }
   if(level.numLives || level.waveDelay["allies"] || level.waveDelay["axis"]) {
     level.gracePeriod = 15;
-  }
-  else {
+  } else {
     level.gracePeriod = 5;
   }
   level.inGracePeriod = true;
@@ -1537,8 +1517,7 @@ registerFriendlyFireDelay(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.friendlyFireDelayTime = getDvarInt(dvarString);

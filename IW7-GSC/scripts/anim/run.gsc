@@ -5,9 +5,7 @@
 ********************************/
 
 func_BCEB() {
-  var_00 = [
-    [self.var_3EF3]
-  ]("stand");
+  var_00 = [[self.var_3EF3]]("stand");
   switch (var_00) {
     case "stand":
       if(scripts\anim\setposemovement::func_10B76()) {

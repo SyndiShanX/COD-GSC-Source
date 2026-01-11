@@ -14,8 +14,7 @@
 getwinningteamfromloser(losing_team) {
   if(level.multiteam) {
     return "tie";
-  }
-  else if(losing_team == "axis") {
+  } else if(losing_team == "axis") {
     return "allies";
   }
 
@@ -52,8 +51,7 @@ default_onforfeit(team) {
 
   if(isplayer(winner)) {
     logstring("forfeit, win: " + winner getxuid() + "(" + winner.name + ")");
-  }
-  else {
+  } else {
     maps\mp\gametypes_zm\_globallogic_utils::logteamwinstring("forfeit", winner);
   }
 
@@ -76,15 +74,13 @@ default_ondeadevent(team) {
 
     if(level.teambased) {
       thread maps\mp\gametypes_zm\_globallogic::endgame("tie", game["strings"]["tie"]);
-    }
-    else {
+    } else {
       thread maps\mp\gametypes_zm\_globallogic::endgame(undefined, game["strings"]["tie"]);
     }
   }
 }
 
-default_onalivecountchange(team) {
-}
+default_onalivecountchange(team) {}
 
 default_onroundendgame(winner) {
   return winner;
@@ -96,8 +92,7 @@ default_ononeleftevent(team) {
 
     if(isDefined(winner)) {
       logstring("last one alive, win: " + winner.name);
-    }
-    else {
+    } else {
       logstring("last one alive, win: unknown");
     }
 
@@ -128,8 +123,7 @@ default_ontimelimit() {
 
     if(isDefined(winner)) {
       logstring("time limit, win: " + winner.name);
-    }
-    else {
+    } else {
       logstring("time limit, tie");
     }
   }
@@ -154,8 +148,7 @@ default_onscorelimit() {
 
     if(isDefined(winner)) {
       logstring("scorelimit, win: " + winner.name);
-    }
-    else {
+    } else {
       logstring("scorelimit, tie");
     }
   }
@@ -186,8 +179,7 @@ default_onspawnintermission() {
 
   if(isDefined(spawnpoint)) {
     self spawn(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     maps\mp\_utility::error("NO " + spawnpointname + " SPAWNPOINTS IN MAP");
 
   }

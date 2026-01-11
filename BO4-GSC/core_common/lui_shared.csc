@@ -13,7 +13,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace lui;
 
 class cluielem {
@@ -313,9 +312,7 @@ setup_menu(localclientnum, menu_data, previous_menu) {
 
     if(isDefined(new_menu.var_1f199068)) {
       if(isDefined(menu_data.charactermode) && isDefined(new_menu.custom_character)) {
-        [
-          [new_menu.custom_character]
-        ] - > set_character_mode(menu_data.charactermode);
+        [[new_menu.custom_character]] - > set_character_mode(menu_data.charactermode);
       }
 
       foreach(fn in new_menu.var_1f199068) {
@@ -529,10 +526,10 @@ private _screen_fade(n_time, n_target_alpha, n_start_alpha, v_color, b_force_clo
 
   if(isstring(v_color)) {
     switch (v_color) {
-      case #"black":
+      case # "black":
         v_color = (0, 0, 0);
         break;
-      case #"white":
+      case # "white":
         v_color = (1, 1, 1);
         break;
       default:

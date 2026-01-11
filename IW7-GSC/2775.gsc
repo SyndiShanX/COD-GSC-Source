@@ -32,8 +32,7 @@ init() {
     } else if(level.gametype == "tdef") {
       if(var_00 < 50) {
         var_04 = "JV_";
-      }
-      else {
+      } else {
         var_04 = "U1_";
       }
 
@@ -419,11 +418,9 @@ dointro() {
   if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
     if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies") {
       scripts\mp\utility\game::leaderdialogonplayer("allies_gametype");
-    }
-    else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
+    } else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
       scripts\mp\utility\game::leaderdialogonplayer("axis_gametype");
-    }
-    else if(!self issplitscreenplayer() || self isreloading()) {
+    } else if(!self issplitscreenplayer() || self isreloading()) {
       scripts\mp\utility\game::leaderdialogonplayer("gametype");
     }
   }
@@ -467,11 +464,9 @@ func_C54B(var_00) {
 
   if(level.gametype == "siege") {
     var_00 scripts\mp\utility\game::leaderdialogonplayer("lastalive_zones");
-  }
-  else if(level.gametype == "sr" && !level.nofriendlytags) {
+  } else if(level.gametype == "sr" && !level.nofriendlytags) {
     var_00 scripts\mp\utility\game::leaderdialogonplayer("lastalive_revive");
-  }
-  else {
+  } else {
     var_00 scripts\mp\utility\game::leaderdialogonplayer("last_alive");
   }
 }
@@ -548,7 +543,7 @@ ongameended() {
         scripts\mp\utility\game::playsoundonplayers(game["music"]["nuke_music"]);
 
         foreach(var_02 in level.players) {
-        var_02 setplayermusicstate("");
+          var_02 setplayermusicstate("");
         }
       }
     } else if(var_00 == "allies") {
@@ -693,7 +688,7 @@ func_BDEF() {
             scripts\mp\utility\game::playsoundonplayers(game["music"]["losing_time"]);
 
             foreach(var_02 in level.players) {
-            var_02 setplayermusicstate("");
+              var_02 setplayermusicstate("");
             }
           }
 
@@ -707,7 +702,7 @@ func_BDEF() {
               scripts\mp\utility\game::playsoundonplayers(game["music"]["losing_axis"], "axis");
 
               foreach(var_02 in level.players) {
-              var_02 setplayermusicstate("");
+                var_02 setplayermusicstate("");
               }
             }
 
@@ -719,7 +714,7 @@ func_BDEF() {
               scripts\mp\utility\game::playsoundonplayers(game["music"]["losing_allies"], "allies");
 
               foreach(var_02 in level.players) {
-              var_02 setplayermusicstate("");
+                var_02 setplayermusicstate("");
               }
             }
 
@@ -760,7 +755,7 @@ func_BDEF() {
       scripts\mp\utility\game::playsoundonplayers(game["music"]["losing_allies"]);
 
       foreach(var_02 in level.players) {
-      var_02 setplayermusicstate("");
+        var_02 setplayermusicstate("");
       }
     }
 
@@ -781,7 +776,7 @@ timelimitmusic(var_00) {
   }
 
   foreach(var_02 in level.players) {
-  var_02 setplayermusicstate("");
+    var_02 setplayermusicstate("");
   }
 }
 
@@ -827,7 +822,7 @@ stopsuspensemusic() {
 
   if(isDefined(level.cursuspsensetrack) && level.cursuspsensetrack.size == 2) {
     foreach(var_01 in level.players) {
-    var_01 setplayermusicstate("");
+      var_01 setplayermusicstate("");
     }
   }
 }

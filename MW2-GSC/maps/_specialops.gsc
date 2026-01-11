@@ -396,7 +396,7 @@ enable_challenge_timer(start_flag, passed_flag, message) {
   level.so_challenge_time_beep = level.challenge_time_beep_start + 1;
 
   foreach(player in level.players) {
-  player thread challenge_timer_player_setup(start_flag, passed_flag, message);
+    player thread challenge_timer_player_setup(start_flag, passed_flag, message);
   }
 }
 
@@ -918,8 +918,7 @@ so_create_hud_item(yLine, xOffset, message, player, always_draw) {
   hudelem = undefined;
   if(isDefined(player)) {
     hudelem = newClientHudElem(player);
-  }
-  else {
+  } else {
     hudelem = newHudElem();
   }
   hudelem.alignX = "right";
@@ -983,8 +982,7 @@ so_hud_pulse_create(new_value) {
 
   if(isDefined(self.pulse_loop) && self.pulse_loop) {
     so_hud_pulse_loop();
-  }
-  else {
+  } else {
     so_hud_pulse_single(self.pulse_scale_big, self.pulse_scale_normal, self.pulse_time);
   }
 }
@@ -1539,8 +1537,7 @@ is_best_time(time_start, time_current, time_frac) {
   if(!isDefined(time_start)) {
     if(isDefined(level.challenge_start_time)) {
       time_start = level.challenge_start_time;
-    }
-    else {
+    } else {
       time_start = 300; // Frame time that script actually starts on.
     }
   }
@@ -1586,8 +1583,7 @@ is_poor_time(time_start, time_current, time_frac) {
   if(!isDefined(time_start)) {
     if(isDefined(level.challenge_start_time)) {
       time_start = level.challenge_start_time;
-    }
-    else {
+    } else {
       time_start = 300; // Frame time that script actually starts on.
     }
   }
@@ -1629,8 +1625,7 @@ so_dialog_mission_success() {
 
   if(do_sarcasm) {
     so_dialog_play("so_tf_1_success_jerk", 0.5, true);
-  }
-  else {
+  } else {
     so_dialog_play("so_tf_1_success_generic", 0.5, true);
   }
 }
@@ -1661,8 +1656,7 @@ so_dialog_mission_failed(sound_alias) {
 so_dialog_mission_failed_generic() {
   if((level.gameskill <= 2) || cointoss()) {
     so_dialog_mission_failed("so_tf_1_fail_generic");
-  }
-  else {
+  } else {
     so_dialog_mission_failed("so_tf_1_fail_generic_jerk");
   }
 }

@@ -101,48 +101,39 @@ snd_cobra_constructor() {
   soundscripts\_audio_vehicle_manager::avm_end_state_data();
   soundscripts\_audio_vehicle_manager::avm_add_envelope("cobra_dist_vel2vol", [[0, 1.0],
     [10, 1.0],
-    [150.0, 1.0]
-  ]);
+    [150.0, 1.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("cobra_dist_vel2pch", [[0, 0.8],
     [10, 1.0],
-    [20, 1.1]
-  ]);
+    [20, 1.1]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("cobra_close_vel2vol", [[0, 1.0],
     [20, 1.0],
-    [150.0, 1.0]
-  ]);
+    [150.0, 1.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("cobra_engine_rev_duck", [[0.0, 1.0],
     [0.25, 1.0],
     [0.3, 0.7],
     [0.7, 1.0],
-    [1.0, 1.0]
-  ]);
+    [1.0, 1.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("cobra_engine_rev_vel2vol", [[0.0, 0.0],
     [1.0, 0.3],
     [3.0, 0.7],
     [8.0, 0.8],
-    [150.0, 1.0]
-  ]);
+    [150.0, 1.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("cobra_flyby_duck_envelope", [[0.0, 1.0],
     [0.15, 1.0],
     [0.3, 0.5],
     [0.5, 0.55],
-    [0.6, 1.0]
-  ]);
+    [0.6, 1.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("cobra_flyby_vel2vol", [[0.0, 0.0],
     [16.08, 0.0],
     [20.1, 0.5],
     [40.2, 0.8],
-    [150.0, 1.0]
-  ]);
+    [150.0, 1.0]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("cobra_flyby_vel2pch", [[0.0, 0.8],
     [20.1, 1.0],
-    [150.0, 1.1]
-  ]);
+    [150.0, 1.1]]);
   soundscripts\_audio_vehicle_manager::avm_add_envelope("cobra_doppler2pch", [[0.0, 0.8],
     [1.0, 1.0],
-    [2.0, 1.8]
-  ]);
+    [2.0, 1.8]]);
   soundscripts\_audio_vehicle_manager::avm_end_preset_def();
 }
 

@@ -158,8 +158,7 @@ stay_animated_at_node(node) {
       self notify("stop_loop");
       if(node_has_animations(node)) {
         self anim_generic_loop(self, node.type, "stop_loop");
-      }
-      else {
+      } else {
         prev_org = (0, 0, 0);
       }
     }

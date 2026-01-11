@@ -68,7 +68,7 @@ uplinkonplayerconnect(localclientnum) {
 
   if(isDefined(windvanearray) && windvanearray.size > 0) {
     foreach(windvane in windvanearray) {
-    windvane thread windvanedirection(localclientnum);
+      windvane thread windvanedirection(localclientnum);
     }
   }
 
@@ -286,8 +286,7 @@ glasssmashdetected(localclientnum, origin, intact_window_exploders, shattered_wi
 
     if(issouthernexploder(shattered_window_exploder)) {
       currentthreshold = 7225;
-    }
-    else {
+    } else {
       currentthreshold = 2500;
     }
 
@@ -316,5 +315,4 @@ issouthernexploder(exploder) {
   return exploder.v["exploder"] >= 6003 && exploder.v["exploder"] <= 6006;
 }
 
-emptyfunction(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-}
+emptyfunction(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {}

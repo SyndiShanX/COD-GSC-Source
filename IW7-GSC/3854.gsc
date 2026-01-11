@@ -58,8 +58,7 @@ func_F900(var_00, var_01, var_02) {
 
   if(isDefined(var_01)) {
     var_3.func_EEF9 = var_01;
-  }
-  else {
+  } else {
     switch (var_3.model) {
       case "veh_mil_air_ca_carrier_sa_rig":
       case "veh_mil_air_ca_carrier_sa":
@@ -139,16 +138,14 @@ func_88BD(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if(isDefined(var_05) && var_05) {
     if(isDefined(var_10) && isDefined(var_10.script_parameters)) {
       var_10.script_parameters = var_10.script_parameters + "doNotCountTurrets 1";
-    }
-    else {
+    } else {
       var_10.script_parameters = "doNotCountTurrets 1";
     }
   }
 
   if(isDefined(var_06)) {
     var_10.func_EEF9 = var_06;
-  }
-  else {
+  } else {
     switch (var_10.model) {
       case "veh_mil_air_ca_cruiser":
         var_10.func_EEF9 = "";
@@ -165,8 +162,7 @@ func_88BD(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if(scripts\engine\utility::is_true(var_07)) {
     var_11 = scripts\sp\vehicle::func_1080C(var_02);
-  }
-  else {
+  } else {
     var_11 = func_0BB8::func_398E(var_02, "idle", "heavy", "high");
   }
 
@@ -211,16 +207,14 @@ func_88BE(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if(isDefined(var_05) && var_05) {
     if(isDefined(var_11) && isDefined(var_11.script_parameters)) {
       var_11.script_parameters = var_11.script_parameters + "doNotCountTurrets 1";
-    }
-    else {
+    } else {
       var_11.script_parameters = "doNotCountTurrets 1";
     }
   }
 
   if(isDefined(var_06)) {
     var_11.func_EEF9 = var_06;
-  }
-  else {
+  } else {
     switch (var_11.model) {
       case "veh_mil_air_ca_cruiser":
         var_11.func_EEF9 = "";
@@ -237,8 +231,7 @@ func_88BE(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if(scripts\engine\utility::is_true(var_07)) {
     var_12 = scripts\sp\vehicle::func_1080C(var_02);
-  }
-  else {
+  } else {
     var_12 = func_0BB8::func_398E(var_02, "idle", "heavy", "high");
   }
 
@@ -447,8 +440,7 @@ func_B2D9(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
     if(isDefined(level.func_B74A)) {
       func_13796(self.func_FE2D, level.func_B74A);
-    }
-    else {
+    } else {
       func_13796(self.func_FE2D, self.func_FE2D.size);
     }
 
@@ -505,8 +497,7 @@ func_8927(var_00, var_01, var_02) {
   if(isDefined(var_02)) {
     if(level.func_C072 >= var_02) {
       var_00 func_0BDC::func_19B1(0);
-    }
-    else {
+    } else {
       level.func_C072++;
 
       if(isDefined(level.func_C07D) && level.func_C07D) {
@@ -540,8 +531,7 @@ func_A13D() {
 
       if(var_00 == 1) {
         scripts\sp\utility::func_54C6();
-      }
-      else {
+      } else {
         var_01 = randomintrange(1, var_00);
 
         if(var_01 == 1) {
@@ -608,8 +598,7 @@ func_A365(var_00, var_01) {
 
     if(scripts\engine\utility::cointoss()) {
       var_03 = var_0[0] scripts\engine\utility::spawn_tag_origin();
-    }
-    else {
+    } else {
       var_03 = var_0[1] scripts\engine\utility::spawn_tag_origin();
     }
   }
@@ -789,11 +778,9 @@ func_F43B(var_00, var_01) {
 
   if(scripts\sp\utility::hastag(self.model, "j_mainroot")) {
     var_03 = "j_mainroot";
-  }
-  else if(scripts\sp\utility::hastag(self.model, "j_mainroot_ship")) {
+  } else if(scripts\sp\utility::hastag(self.model, "j_mainroot_ship")) {
     var_03 = "j_mainroot_ship";
-  }
-  else {
+  } else {
     var_03 = "tag_origin";
   }
 
@@ -817,8 +804,7 @@ func_A294(var_00) {
     if(isDefined(self.func_AF28)) {
       if(self.func_AF28.func_AF21 || self.func_AF28.locked) {
         _target_setshader(var_00, "ac130_hud_target_flash");
-      }
-      else {
+      } else {
         _target_setshader(var_00, "veh_jackal_target");
       }
     } else

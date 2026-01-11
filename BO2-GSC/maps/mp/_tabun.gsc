@@ -75,8 +75,7 @@ watchtabungrenadedetonation(owner) {
 
   if(weapons_get_dvar_int("scr_enable_new_tabun", 1)) {
     generatelocations(position, owner);
-  }
-  else {
+  } else {
     singlelocation(position, owner);
   }
 }
@@ -223,8 +222,7 @@ weapons_get_dvar_int(dvar, def) {
 weapons_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }
@@ -366,8 +364,7 @@ spawnalllocs(owner, startpos) {
 
   if(singleeffect == 1) {
     singlelocation(startpos, owner);
-  }
-  else {
+  } else {
     spawntimedfx(level.fx_tabun_3, startpos);
 
     for(count = 0; count < 8; count++) {
@@ -414,14 +411,11 @@ setuptabunfx(owner, locations, count) {
 
   if(locations["distSqrd"][count] > effect0dist && locations["distSqrd"][previous] > effect1dist && locations["distSqrd"][next] > effect1dist) {
     fxtoplay = 0;
-  }
-  else if(locations["distSqrd"][count] > effect1dist && locations["distSqrd"][previous] > effect2dist && locations["distSqrd"][next] > effect2dist) {
+  } else if(locations["distSqrd"][count] > effect1dist && locations["distSqrd"][previous] > effect2dist && locations["distSqrd"][next] > effect2dist) {
     fxtoplay = 1;
-  }
-  else if(locations["distSqrd"][count] > effect2dist && locations["distSqrd"][previous] > effect3dist && locations["distSqrd"][next] > effect3dist) {
+  } else if(locations["distSqrd"][count] > effect2dist && locations["distSqrd"][previous] > effect3dist && locations["distSqrd"][next] > effect3dist) {
     fxtoplay = 2;
-  }
-  else if(locations["distSqrd"][count] > effect3dist && locations["distSqrd"][previous] > effect4dist && locations["distSqrd"][next] > effect4dist) {
+  } else if(locations["distSqrd"][count] > effect3dist && locations["distSqrd"][previous] > effect4dist && locations["distSqrd"][next] > effect4dist) {
     fxtoplay = 3;
   }
 
@@ -460,8 +454,7 @@ getcenter(locations) {
 
     if(curx > maxx) {
       maxx = curx;
-    }
-    else if(curx < minx) {
+    } else if(curx < minx) {
       minx = curx;
     }
 

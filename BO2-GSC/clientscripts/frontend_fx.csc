@@ -7,11 +7,9 @@
 #include clientscripts\createfx\frontend_fx;
 #include clientscripts\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_missing_effect"] = loadfx("misc/fx_missing_fx");

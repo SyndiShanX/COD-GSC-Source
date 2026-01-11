@@ -74,8 +74,7 @@ bot_cache_entrances_to_other_radios(var_0) {
 
     if(isDefined(var_3) && common_scripts\utility::array_contains(var_1, var_3)) {
       var_2 = var_3;
-    }
-    else {
+    } else {
       var_2 = common_scripts\utility::random(var_1);
     }
 

@@ -63,7 +63,7 @@ begin_drive_in() {
   thread gold_door_on_player_truck();
 
   foreach(var_1 in level.allies) {
-  var_1.alertlevel = "noncombat";
+    var_1.alertlevel = "noncombat";
   }
 
   thread maps\_utility::autosave_now();
@@ -159,7 +159,7 @@ gold_door_on_player_truck() {
 
 setup_allies_vehicle_approach() {
   foreach(var_1 in level.allies) {
-  var_1 maps\_utility::enable_ai_color();
+    var_1 maps\_utility::enable_ai_color();
   }
 
   if(level.start_point != "drive_in") {
@@ -583,7 +583,7 @@ truck_exploder_start_driving() {
   var_0 = maps\_utility::get_ai_group_ai("field_chaos1_guys");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -621,7 +621,7 @@ sticky_grenade_02() {
   var_0 = getent("convoy_veh_02_blow_spot", "targetname");
 
   foreach(var_2 in level.truck_bash_guys) {
-  var_2 kill();
+    var_2 kill();
   }
 
   var_4 = getent("truck_bash_jeep", "targetname");
@@ -768,7 +768,7 @@ sticky_grenade_05() {
   var_2 = maps\enemyhq_code::array_spawn_targetname_allow_fail("field_guys6_ignore");
 
   foreach(var_4 in var_2) {
-  var_4.ignoreall = 1;
+    var_4.ignoreall = 1;
   }
 }
 

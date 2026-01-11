@@ -48,7 +48,9 @@ bot_killstreak_setup() {
     bot_register_killstreak_func("airdrop_assault", ::bot_killstreak_drop_outside);
 
     if(isDefined(level.mapCustomBotKillstreakFunc)) {
-      [[level.mapCustomBotKillstreakFunc]]();
+      [
+        [level.mapCustomBotKillstreakFunc]
+      ]();
     }
 
     if(!is_aliens()) {
@@ -224,8 +226,7 @@ bot_think_killstreak() {
             if(isSpecialistKillstreak(killstreak_info.streakName)) {
               if(!killstreak_info.earned) {
                 tableName = "specialist";
-              }
-              else {
+              } else {
                 continue;
               }
             }
@@ -426,8 +427,7 @@ bot_killstreak_drop(killstreak_info, killstreaks_array, canUseFunc, optional_par
       outside_nodes_sorted = get_array_of_closest(self.origin, outside_nodes, undefined, undefined, undefined, 150);
       if(outside_nodes_sorted.size > 0) {
         node_target = random(outside_nodes_sorted);
-      }
-      else {
+      } else {
         node_target = random(outside_nodes);
       }
     }
@@ -509,8 +509,7 @@ bot_killstreak_choose_loc_enemies(killstreak_info, killstreaks_array, canUseFunc
   for(z = 0; z < zone_count; z++) {
     if(iterate_backwards) {
       zone = zone_count - 1 - z;
-    }
-    else {
+    } else {
       zone = z;
     }
 
@@ -527,11 +526,9 @@ bot_killstreak_choose_loc_enemies(killstreak_info, killstreaks_array, canUseFunc
 
   if(best_zone >= 0) {
     zoneCenter = GetZoneOrigin(best_zone);
-  }
-  else if(possible_fallback_zones.size > 0) {
+  } else if(possible_fallback_zones.size > 0) {
     zoneCenter = GetZoneOrigin(random(possible_fallback_zones));
-  }
-  else {
+  } else {
     zoneCenter = GetZoneOrigin(RandomInt(level.zoneCount));
   }
 

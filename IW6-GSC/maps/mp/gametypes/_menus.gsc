@@ -186,9 +186,10 @@ watchForLeaveGame() {
       continue;
     }
     if(is_aliens()) {
-      [[level.forceEndGame_Alien]]();
-    }
-    else {
+      [
+        [level.forceEndGame_Alien]
+      ]();
+    } else {
       level thread maps\mp\gametypes\_gamelogic::forceEnd(val);
     }
   }
@@ -239,14 +240,11 @@ watchForTeamChange() {
 
     if(teamSelected == 0) {
       teamSelected = "axis";
-    }
-    else if(teamSelected == 1) {
+    } else if(teamSelected == 1) {
       teamSelected = "allies";
-    }
-    else if(teamSelected == 2) {
+    } else if(teamSelected == 2) {
       teamSelected = "random";
-    }
-    else {
+    } else {
       teamSelected = "spectator";
     }
 
@@ -299,8 +297,7 @@ autoAssign() {
     } else {
       if(GetTeamScore("allies") > GetTeamScore("axis")) {
         self thread setTeam("axis");
-      }
-      else {
+      } else {
         self thread setTeam("allies");
       }
     }
@@ -316,8 +313,7 @@ autoAssign() {
   } else if(level.teamcount["allies"] == level.teamcount["axis"]) {
     if(GetTeamScore("allies") > GetTeamScore("axis") && self.team != "axis") {
       self thread setTeam("axis");
-    }
-    else if(self.team != "allies") {
+    } else if(self.team != "allies") {
       self thread setTeam("allies");
     }
   }
@@ -630,8 +626,7 @@ addToTeam(team, firstConnect, changeTeamsWithoutRespawning) {
     } else {
       if(team == "spectator") {
         self.sessionteam = "spectator";
-      }
-      else {
+      } else {
         self.sessionteam = "none";
       }
     }

@@ -1156,8 +1156,7 @@ initActivisionCredits() {
   addSpace();
   if(level.console && !level.xenon) {
     addCenterHeading(&"CREDIT_THIS_PRODUCT_USES_FMOD");
-  }
-  else {
+  } else {
     addCenterHeading(&"CREDIT_USES_MILES_SOUND_SYSTEM");
   }
   addSpace();
@@ -1367,8 +1366,7 @@ playCredits() {
       temp.y = -120;
       if(isDefined(level.linelist[i].delay)) {
         delay = level.linelist[i].delay;
-      }
-      else {
+      } else {
         delay = ((0.037 * height));
       }
     } else if(type == "leftimage") {

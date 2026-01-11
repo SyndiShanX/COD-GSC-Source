@@ -384,27 +384,24 @@ debug_message_clear(message, origin, duration, extraEndon) {
 chain_off(chain) {
   trigs = getEntArray("trigger_friendlychain", "classname");
   for(i = 0; i < trigs.size; i++) {
-    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {
-  }
-      if(isDefined(trigs[i].oldorigin)) {
-        trigs[i].origin = trigs[i].oldorigin;
-      }
-      else {
-        trigs[i].oldorigin = trigs[i].origin;
-      }
-      trigs[i].origin = trigs[i].origin + (0, 0, -5000);
+    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {}
+    if(isDefined(trigs[i].oldorigin)) {
+      trigs[i].origin = trigs[i].oldorigin;
+    } else {
+      trigs[i].oldorigin = trigs[i].origin;
     }
+    trigs[i].origin = trigs[i].origin + (0, 0, -5000);
+  }
 }
 
 chain_on(chain) {
   trigs = getEntArray("trigger_friendlychain", "classname");
   for(i = 0; i < trigs.size; i++) {
-    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {
-  }
-      if(isDefined(trigs[i].oldorigin)) {
-        trigs[i].origin = trigs[i].oldorigin;
-      }
+    if((isDefined(trigs[i].script_chain)) && (trigs[i].script_chain == chain)) {}
+    if(isDefined(trigs[i].oldorigin)) {
+      trigs[i].origin = trigs[i].oldorigin;
     }
+  }
 }
 
 precache(model) {
@@ -420,8 +417,7 @@ add_to_array(array, ent) {
   }
   if(!isDefined(array)) {
     array[0] = ent;
-  }
-  else {
+  } else {
     array[array.size] = ent;
   }
   return array;
@@ -456,9 +452,7 @@ compareSizesFx(org, array, dist, compareFunc) {
     keys = getArrayKeys(array);
     for(i = 0; i < keys.size; i++) {
       newdist = distance(array[keys[i]].v["origin"], org);
-      if([
-          [compareFunc]
-        ](newDist, dist))
+      if([[compareFunc]](newDist, dist))
         continue;
       dist = newdist;
       struct = array[keys[i]];
@@ -489,9 +483,7 @@ compareSizes(org, array, dist, compareFunc) {
     keys = GetArrayKeys(array);
     for(i = 0; i < keys.size; i++) {
       newdist = distance(array[keys[i]].origin, org);
-      if([
-          [compareFunc]
-        ](newDist, dist))
+      if([[compareFunc]](newDist, dist))
         continue;
       dist = newdist;
       ent = array[keys[i]];
@@ -643,53 +635,49 @@ get_closest_exclude(org, ents, excluders) {
     for(i = 0; i < ents.size; i++) {
       for(p = 0; p < excluders.size; p++)
     }
-        if(ents[i] == excluders[p]) {
-          exclude[i] = true;
-        }
+    if(ents[i] == excluders[p]) {
+      exclude[i] = true;
+    }
     found_unexcluded = false;
     for(i = 0; i < ents.size; i++) {
-      if((!exclude[i]) && (isDefined(ents[i]))) {
+      if((!exclude[i]) && (isDefined(ents[i]))) {}
+      found_unexcluded = true;
+      range = distance(org, ents[i].origin);
+      ent = i;
+      i = ents.size + 1;
     }
-        found_unexcluded = true;
-        range = distance(org, ents[i].origin);
-        ent = i;
-        i = ents.size + 1;
-      }
     if(!found_unexcluded) {
       return (undefined);
     }
   } else {
     for(i = 0; i < ents.size; i++) {
-      if(isDefined(ents[i])) {
+      if(isDefined(ents[i])) {}
+      range = distance(org, ents[0].origin);
+      ent = i;
+      i = ents.size + 1;
     }
-        range = distance(org, ents[0].origin);
-        ent = i;
-        i = ents.size + 1;
-      }
   }
   ent = undefined;
   for(i = 0; i < ents.size; i++) {
-    if(isDefined(ents[i])) {
-  }
-      exclude = false;
-      if(isDefined(excluders)) {
-        for(p = 0; p < excluders.size; p++) {
-          if(ents[i] == excluders[p])
-        }
-            exclude = true;
+    if(isDefined(ents[i])) {}
+    exclude = false;
+    if(isDefined(excluders)) {
+      for(p = 0; p < excluders.size; p++) {
+        if(ents[i] == excluders[p])
       }
-      if(!exclude) {
-        newrange = distance(org, ents[i].origin);
-        if(newrange <= range) {
-          range = newrange;
-          ent = i;
-        }
+      exclude = true;
+    }
+    if(!exclude) {
+      newrange = distance(org, ents[i].origin);
+      if(newrange <= range) {
+        range = newrange;
+        ent = i;
       }
     }
+  }
   if(isDefined(ent)) {
     return ents[ent];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -697,8 +685,7 @@ get_closest_exclude(org, ents, excluders) {
 get_closest_ai(org, team) {
   if(isDefined(team)) {
     ents = GetAiArray(team);
-  }
-  else {
+  } else {
     ents = GetAiArray();
   }
   if(ents.size == 0) {
@@ -770,8 +757,7 @@ get_array_of_closest(org, array, excluders, max, maxdist) {
 get_closest_ai_exclude(org, team, excluders) {
   if(isDefined(team)) {
     ents = GetAiArray(team);
-  }
-  else {
+  } else {
     ents = GetAiArray();
   }
   if(ents.size == 0) {
@@ -823,8 +809,7 @@ magic_bullet_shield(health, time, oldhealth, maxhealth_modifier, no_death_detect
   }
   if(!isDefined(no_death_detection)) {
     thread magic_bullet_death_detection();
-  }
-  else {
+  } else {
     assertex(no_death_detection, "no_death_detection must be undefined or true");
   }
   self.magic_bullet_shield = true;
@@ -943,14 +928,12 @@ array_reverse(array) {
 exploder_damage() {
   if(isDefined(self.v["delay"])) {
     delay = self.v["delay"];
-  }
-  else {
+  } else {
     delay = 0;
   }
   if(isDefined(self.v["damage_radius"])) {
     radius = self.v["damage_radius"];
-  }
-  else {
+  } else {
     radius = 128;
   }
   damage = self.v["damage"];
@@ -1065,11 +1048,10 @@ activate_individual_exploder() {
     }
     if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
       self thread cannon_effect();
+    } else {
+      if(isDefined(self.v["soundalias"]))
     }
-    else {
-    if(isDefined(self.v["soundalias"]))
-    }
-      self thread sound_effect();
+    self thread sound_effect();
     if(isDefined(self.v["earthquake"])) {
       self thread exploder_earthquake();
     }
@@ -1085,11 +1067,10 @@ activate_individual_exploder() {
   }
   if(self.v["exploder_type"] == "exploder") {
     self thread brush_show();
+  } else {
+    if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible"))
   }
-  else {
-  if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible"))
-  }
-    self thread brush_throw();
+  self thread brush_throw();
   else {
     self thread brush_delete();
   }
@@ -1119,8 +1100,7 @@ brush_Delete() {
   num = self.v["exploder"];
   if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
-  }
-  else {
+  } else {
     wait(.05);
   }
   if(!isDefined(self.model)) {
@@ -1160,8 +1140,7 @@ brush_Show() {
   if(self.model.spawnflags & 1) {
     if(!isDefined(self.model.disconnect_paths)) {
       self.model ConnectPaths();
-    }
-    else {
+    } else {
       self.model DisconnectPaths();
     }
   }
@@ -1370,8 +1349,7 @@ play_sound_on_tag(alias, tag, ends_on_death) {
   thread delete_on_death_wait_sound(org, "sounddone");
   if(isDefined(tag)) {
     org LinkTo(self, tag, (0, 0, 0), (0, 0, 0));
-  }
-  else {
+  } else {
     org.origin = self.origin;
     org.angles = self.angles;
     org LinkTo(self);
@@ -1409,8 +1387,7 @@ play_loop_sound_on_tag(alias, tag, bStopSoundOnDeath) {
   }
   if(isDefined(tag)) {
     org LinkTo(self, tag, (0, 0, 0), (0, 0, 0));
-  }
-  else {
+  } else {
     org.origin = self.origin;
     org.angles = self.angles;
     org LinkTo(self);
@@ -1452,8 +1429,7 @@ play_sound_in_space(alias, origin, master) {
   org.origin = origin;
   if(isDefined(master) && master) {
     org PlaySoundAsMaster(alias, "sounddone");
-  }
-  else {
+  } else {
     org playSound(alias, "sounddone");
   }
   org waittill("sounddone");
@@ -1909,15 +1885,13 @@ array_merge(array1, array2) {
   for(i = 0; i < array2.size; i++) {
     foundmatch = false;
     for(j = 0; j < array1.size; j++) {
-      if(array2[i] == array1[j]) {
+      if(array2[i] == array1[j]) {}
+      foundmatch = true;
+      break;
     }
-        foundmatch = true;
-        break;
-      }
     if(foundmatch) {
       continue;
-    }
-    else {
+    } else {
       newarray[newarray.size] = array2[i];
     }
   }
@@ -2161,8 +2135,7 @@ set_battlechatter(state) {
   if(state) {
     if(isDefined(self.script_bcdialog) && !self.script_bcdialog) {
       self.battlechatter = false;
-    }
-    else {
+    } else {
       self.battlechatter = true;
     }
   } else {
@@ -2394,7 +2367,7 @@ array_remove_nokeys(ents, remover) {
   for(i = 0; i < ents.size; i++) {
     if(ents[i] != remover)
   }
-      newents[newents.size] = ents[i];
+  newents[newents.size] = ents[i];
   return newents;
 }
 
@@ -2505,8 +2478,7 @@ custom_battlechatter(string) {
   if(tokens[0] == "move") {
     if(tokens.size > 1) {
       modifier = tokens[1];
-    }
-    else {
+    } else {
       modifier = "generic";
     }
     self animscripts\battlechatter_ai::addGenericAliasEx("order", "move", modifier);
@@ -2514,16 +2486,14 @@ custom_battlechatter(string) {
     self animscripts\battlechatter_ai::addGenericAliasEx("threat", "infantry", tokens[1]);
     if(tokens.size > 2 && tokens[2] != "inbound") {
       self animscripts\battlechatter_ai::addGenericAliasEx("direction", "relative", tokens[2]);
-    }
-    else if(tokens.size > 2) {
+    } else if(tokens.size > 2) {
       self animscripts\battlechatter_ai::addGenericAliasEx("direction", "inbound", tokens[3]);
     }
   } else if(tokens[0] == "vehicle") {
     self animscripts\battlechatter_ai::addGenericAliasEx("threat", "vehicle", tokens[1]);
     if(tokens.size > 2 && tokens[2] != "inbound") {
       self animscripts\battlechatter_ai::addGenericAliasEx("direction", "relative", tokens[2]);
-    }
-    else if(tokens.size > 2) {
+    } else if(tokens.size > 2) {
       self animscripts\battlechatter_ai::addGenericAliasEx("direction", "inbound", tokens[3]);
     }
   }
@@ -2539,8 +2509,7 @@ force_custom_battlechatter(string, targetAI) {
   if(isDefined(targetAI) && (isDefined(targetAI.bcName) || isDefined(targetAI.bcRank))) {
     if(isDefined(targetAI.bcName)) {
       nameAlias = self buildBCAlias("name", targetAI.bcName);
-    }
-    else {
+    } else {
       nameAlias = self buildBCAlias("rank", targetAI.bcRank);
     }
     if(SoundExists(nameAlias)) {
@@ -2550,8 +2519,7 @@ force_custom_battlechatter(string, targetAI) {
   if(tokens[0] == "move") {
     if(tokens.size > 1) {
       modifier = tokens[1];
-    }
-    else {
+    } else {
       modifier = "generic";
     }
     soundAliases[soundAliases.size] = self buildBCAlias("order", "move", modifier);
@@ -2559,31 +2527,27 @@ force_custom_battlechatter(string, targetAI) {
     soundAliases[soundAliases.size] = self buildBCAlias("threat", "infantry", tokens[1]);
     if(tokens.size > 2 && tokens[2] != "inbound") {
       soundAliases[soundAliases.size] = self buildBCAlias("direction", "relative", tokens[2]);
-    }
-    else if(tokens.size > 2) {
+    } else if(tokens.size > 2) {
       soundAliases[soundAliases.size] = self buildBCAlias("direction", "inbound", tokens[3]);
     }
   } else if(tokens[0] == "vehicle") {
     soundAliases[soundAliases.size] = self buildBCAlias("threat", "vehicle", tokens[1]);
     if(tokens.size > 2 && tokens[2] != "inbound") {
       soundAliases[soundAliases.size] = self buildBCAlias("direction", "relative", tokens[2]);
-    }
-    else if(tokens.size > 2) {
+    } else if(tokens.size > 2) {
       soundAliases[soundAliases.size] = self buildBCAlias("direction", "inbound", tokens[3]);
     }
   } else if(tokens[0] == "order") {
     if(tokens.size > 1) {
       modifier = tokens[1];
-    }
-    else {
+    } else {
       modifier = "generic";
     }
     soundAliases[soundAliases.size] = self buildBCAlias("order", "action", modifier);
   } else if(tokens[0] == "cover") {
     if(tokens.size > 1) {
       modifier = tokens[1];
-    }
-    else {
+    } else {
       modifier = "generic";
     }
     soundAliases[soundAliases.size] = self buildBCAlias("order", "cover", modifier);
@@ -2597,8 +2561,7 @@ force_custom_battlechatter(string, targetAI) {
 buildBCAlias(action, type, modifier) {
   if(isDefined(modifier)) {
     return (self.countryID + "_" + self.npcID + "_" + action + "_" + type + "_" + modifier);
-  }
-  else {
+  } else {
     return (self.countryID + "_" + self.npcID + "_" + action + "_" + type);
   }
 }
@@ -2618,8 +2581,7 @@ get_stop_watch(time, othertime) {
   watch.vertAlign = "middle";
   if(isDefined(othertime)) {
     timer = othertime;
-  }
-  else {
+  } else {
     timer = level.explosiveplanttime;
   }
   watch setClock(timer, time, "hudStopwatch", 64, 64);
@@ -2842,8 +2804,7 @@ check_force_color(_color) {
   color = level.colorCheckList[tolower(_color)];
   if(isDefined(self.script_forcecolor) && color == self.script_forcecolor) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2896,31 +2857,30 @@ issue_color_orders(color_team, team) {
     color = undefined;
     if(issubstr(colorCodes[i], "r")) {
       color = "r";
+    } else {
+      if(issubstr(colorCodes[i], "b"))
     }
+    color = "b";
     else {
-    if(issubstr(colorCodes[i], "b"))
+      if(issubstr(colorCodes[i], "y"))
     }
-      color = "b";
+    color = "y";
     else {
-    if(issubstr(colorCodes[i], "y"))
+      if(issubstr(colorCodes[i], "c"))
     }
-      color = "y";
+    color = "c";
     else {
-    if(issubstr(colorCodes[i], "c"))
+      if(issubstr(colorCodes[i], "g"))
     }
-      color = "c";
+    color = "g";
     else {
-    if(issubstr(colorCodes[i], "g"))
+      if(issubstr(colorCodes[i], "p"))
     }
-      color = "g";
+    color = "p";
     else {
-    if(issubstr(colorCodes[i], "p"))
+      if(issubstr(colorCodes[i], "o"))
     }
-      color = "p";
-    else {
-    if(issubstr(colorCodes[i], "o"))
-    }
-      color = "o";
+    color = "o";
     else {
       assertEx(0, "Trigger at origin " + self getorigin() + " had strange color index " + colorCodes[i]);
     }
@@ -2973,14 +2933,12 @@ flashMonitor() {
     minamountdist = 0.2;
     if(percent_distance > 1 - minamountdist) {
       percent_distance = 1.0;
-    }
-    else {
+    } else {
       percent_distance = percent_distance / (1 - minamountdist);
     }
     if(team == "axis") {
       seconds = percent_distance * percent_angle * 6.0;
-    }
-    else {
+    } else {
       seconds = percent_distance * percent_angle * 3.0;
     }
     if(seconds < 0.25) {
@@ -2997,8 +2955,7 @@ flashMonitor() {
     thread unflash_flag(seconds);
     if(seconds > 2) {
       thread flashRumbleLoop(0.75);
-    }
-    else {
+    } else {
       thread flashRumbleLoop(0.25);
     }
     if(team != "allies") {
@@ -3015,8 +2972,7 @@ flashNearbyAllies(baseDuration, team) {
       duration = baseDuration + randomfloatrange(-1000, 1500);
       if(duration > 4.5) {
         duration = 4.5;
-      }
-      else if(duration < 0.25) {
+      } else if(duration < 0.25) {
         continue;
       }
       newendtime = gettime() + duration * 1000;
@@ -3302,8 +3258,7 @@ hint_Delete() {
 hint_position_internal(bgAlpha) {
   if(level.console) {
     self.elm.fontScale = 2;
-  }
-  else {
+  } else {
     self.elm.fontScale = 1.6;
   }
   self.elm.x = 0;
@@ -3326,8 +3281,7 @@ hint_position_internal(bgAlpha) {
   self.bg.sort = -1;
   if(level.console) {
     self.bg SetShader("popmenu_bg", 650, 52);
-  }
-  else {
+  } else {
     self.bg SetShader("popmenu_bg", 650, 42);
   }
   if(!isDefined(bgAlpha)) {
@@ -3838,14 +3792,12 @@ waittill_notify_or_timeout(msg, timer) {
 do_in_order(func1, param1, func2, param2) {
   if(isDefined(param1)) {
     [[func1]](param1);
-  }
-  else {
+  } else {
     [[func1]]();
   }
   if(isDefined(param2)) {
     [[func2]](param2);
-  }
-  else {
+  } else {
     [[func2]]();
   }
 }
@@ -4072,8 +4024,7 @@ set_run_anim(anime, alwaysRunForward) {
   assertEx(isDefined(level.scr_anim[self.animname][anime]), "Tried to set run anim but the anim was not defined in the maps _anim file");
   if(isDefined(alwaysRunForward)) {
     self.alwaysRunForward = alwaysRunForward;
-  }
-  else {
+  } else {
     self.alwaysRunForward = true;
   }
   self.a.combatrunanim = level.scr_anim[self.animname][anime];
@@ -4089,8 +4040,7 @@ set_generic_run_anim(anime, alwaysRunForward) {
   if(isDefined(alwaysRunForward)) {
     if(alwaysRunForward) {
       self.alwaysRunForward = alwaysRunForward;
-    }
-    else {
+    } else {
       self.alwaysRunForward = undefined;
     }
   } else
@@ -4625,14 +4575,12 @@ set_console_status() {
   }
   if(!isDefined(level.Console)) {
     level.Console = getdvar("consoleGame") == "true";
-  }
-  else {
+  } else {
     assertex(level.Console == (getdvar("consoleGame") == "true"), "Level.console got set incorrectly.");
   }
   if(!isDefined(level.Consolexenon)) {
     level.xenon = getdvar("xenonGame") == "true";
-  }
-  else {
+  } else {
     assertex(level.xenon == (getdvar("xenonGame") == "true"), "Level.xenon got set incorrectly.");
   }
   if(getdebugdvar("replay_debug") == "1") {
@@ -4660,8 +4608,7 @@ hunted_style_door_open(soundalias) {
   wait(1.75);
   if(isDefined(soundalias)) {
     self playSound(soundalias);
-  }
-  else {
+  } else {
     self playSound("door_wood_slow_open");
   }
   self rotateto(self.angles + (0, 70, 0), 2, .5, 0);
@@ -4674,8 +4621,7 @@ palm_style_door_open(soundalias) {
   wait(1.35);
   if(isDefined(soundalias)) {
     self playSound(soundalias);
-  }
-  else {
+  } else {
     self playSound("door_wood_slow_open");
   }
   self rotateto(self.angles + (0, 70, 0), 2, .5, 0);
@@ -4832,8 +4778,7 @@ waittill_player_lookat(dot, timer, dot_only) {
   for(;;) {
     if(ai_guy) {
       org = self getEye();
-    }
-    else {
+    } else {
       org = self.origin;
     }
     if(player_looking_at(org, dot, dot_only)) {
@@ -5840,8 +5785,7 @@ warp_player_start(fade_time) {
     hudString = &"GAME_COOP_WARP_PLAYER_HINT";
     if(GetDvarInt("splitscreen") && !GetDvarInt("hidef")) {
       fontScale = 2.5;
-    }
-    else {
+    } else {
       fontScale = 1.75;
     }
     self.warp_text = newClientHudElem(self);

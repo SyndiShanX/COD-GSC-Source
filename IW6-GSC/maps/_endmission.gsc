@@ -50,8 +50,7 @@ _nextmission() {
 
     if(isDefined(level.nextmission_exit_time)) {
       changelevel("", 0, level.nextmission_exit_time);
-    }
-    else {
+    } else {
       changelevel("", 0);
     }
   } else {
@@ -272,8 +271,7 @@ getlevelskill(var_0) {
 getmissiondvarstring(var_0) {
   if(var_0 < 9) {
     return "mis_0" + (var_0 + 1);
-  }
-  else {
+  } else {
     return "mis_" + (var_0 + 1);
   }
 }
@@ -355,8 +353,7 @@ getfadetime(var_0) {
 haslevelveteranaward(var_0) {
   if(isDefined(self.levels[var_0].veteran_achievement)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -364,8 +361,7 @@ haslevelveteranaward(var_0) {
 hasachievement(var_0) {
   if(isDefined(self.levels[var_0].achievement)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -403,8 +399,7 @@ gethardenedaward() {
 hasmissionhardenedaward() {
   if(isDefined(self.hardenedaward)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

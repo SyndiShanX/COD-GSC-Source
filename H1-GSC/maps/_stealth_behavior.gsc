@@ -196,9 +196,7 @@ system_init_state_functions(var_0) {
   if(isDefined(var_0)) {
     if(isDefined(var_0["hidden"]) && isDefined(var_0["alert"]) && isDefined(var_0["spotted"])) {
       var_1 = 1;
-    }
-    else {
-    }
+    } else {}
   }
 
   if(!var_1) {
@@ -431,8 +429,7 @@ enemy_state_spotted() {
 
   if(self._stealth.logic.dog) {
     self.favoriteenemy = level.player;
-  }
-  else if(randomint(100) > 25) {
+  } else if(randomint(100) > 25) {
     self.favoriteenemy = level.player;
   }
 
@@ -501,8 +498,7 @@ enemy_animation_custom(var_0) {
   if(var_0 != "doFlashBanged") {
     if(isDefined(var_3) || isDefined(self.has_delta)) {
       var_1 maps\_anim::anim_generic(self, var_2, var_3);
-    }
-    else {
+    } else {
       var_1 maps\_anim::anim_generic_custom_animmode(self, "gravity", var_2);
     }
   }
@@ -563,8 +559,7 @@ enemy_animation_attack(var_0) {
 
   if(distance(var_1.origin, self.origin) < 256) {
     var_2 = "_stealth_behavior_spotted_short";
-  }
-  else {
+  } else {
     var_2 = "_stealth_behavior_spotted_long";
   }
 
@@ -582,8 +577,7 @@ enemy_animation_generic(var_0) {
 
   if(isDefined(self.enemy)) {
     var_1 = self.enemy;
-  }
-  else if(isDefined(self.favoriteenemy)) {
+  } else if(isDefined(self.favoriteenemy)) {
     var_1 = self.favoriteenemy;
   }
 
@@ -621,8 +615,7 @@ dog_animation_generic(var_0) {
 
   if(randomint(100) < 50) {
     var_1 = "_stealth_dog_wakeup_fast";
-  }
-  else {
+  } else {
     var_1 = "_stealth_dog_wakeup_slow";
   }
 
@@ -744,8 +737,7 @@ enemy_awareness_reaction_safety(var_0, var_1) {
 
     if(var_0 == var_2) {
       continue;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -974,8 +966,7 @@ enemy_announce_huh() {
   }
   if(isininteriorvozone()) {
     var_0 = "scoutsniper_ru" + self._stealth.behavior.sndnum + "_huh_house_int";
-  }
-  else {
+  } else {
     var_0 = "scoutsniper_ru" + self._stealth.behavior.sndnum + "_huh";
   }
 
@@ -988,8 +979,7 @@ enemy_announce_hmph() {
   }
   if(isininteriorvozone()) {
     var_0 = "scoutsniper_ru" + self._stealth.behavior.sndnum + "_hmph_house_int";
-  }
-  else {
+  } else {
     var_0 = "scoutsniper_ru" + self._stealth.behavior.sndnum + "_hmph";
   }
 
@@ -1142,8 +1132,7 @@ enemy_found_corpse_loop() {
     while(common_scripts\utility::flag("_stealth_found_corpse")) {
       if(maps\_utility::ent_flag("_stealth_found_corpse")) {
         thread enemy_announce_corpse();
-      }
-      else {
+      } else {
         self notify("heard_corpse", (0, 0, 0));
       }
 
@@ -1330,8 +1319,7 @@ friendly_spotted_getup_from_prone(var_0, var_1) {
 
   if(isDefined(var_1) && var_1) {
     var_2 = "prone_2_stand";
-  }
-  else {
+  } else {
     var_2 = "prone_2_run_roll";
   }
 
@@ -1359,14 +1347,11 @@ friendly_stance_handler() {
 
       if(var_0[self._stealth.logic.stance]) {
         thread friendly_stance_handler_change_stance_down();
-      }
-      else if(maps\_utility::ent_flag("_stealth_stay_still")) {
+      } else if(maps\_utility::ent_flag("_stealth_stay_still")) {
         thread friendly_stance_handler_resume_path();
-      }
-      else if(!var_0[self._stealth.behavior.stance_up]) {
+      } else if(!var_0[self._stealth.behavior.stance_up]) {
         thread friendly_stance_handler_change_stance_up();
-      }
-      else if(maps\_utility::ent_flag("_stealth_stance_change")) {
+      } else if(maps\_utility::ent_flag("_stealth_stance_change")) {
         self notify("_stealth_stance_dont_change");
       }
 
@@ -1498,11 +1483,9 @@ friendly_stance_handler_return_ai_sight(var_0, var_1) {
 
   if(var_4 > 0.3) {
     return self._stealth.behavior.stance_handler[var_5]["looking_towards"][var_1];
-  }
-  else if(var_4 < -0.7) {
+  } else if(var_4 < -0.7) {
     return self._stealth.behavior.stance_handler[var_5]["looking_away"][var_1];
-  }
-  else {
+  } else {
     return self._stealth.behavior.stance_handler[var_5]["neutral"][var_1];
   }
 }

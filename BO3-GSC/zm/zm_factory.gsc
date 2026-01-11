@@ -971,9 +971,7 @@ function powerup_special_drop_override() {
     case "free_perk":
     case "nothing": {
       if(isDefined(level._zombiemode_special_drop_setup)) {
-        is_powerup = [
-          [level._zombiemode_special_drop_setup]
-        ](powerup);
+        is_powerup = [[level._zombiemode_special_drop_setup]](powerup);
       } else {
         playFX(level._effect["lightning_dog_spawn"], self.origin);
         playsoundatposition("zmb_hellhound_prespawn", self.origin);

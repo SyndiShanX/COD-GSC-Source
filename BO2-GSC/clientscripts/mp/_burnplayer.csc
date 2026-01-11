@@ -5,8 +5,7 @@
 
 #include clientscripts\mp\_utility;
 
-initflamefx() {
-}
+initflamefx() {}
 
 corpseflamefx(localclientnum) {
   self waittill_dobj(localclientnum);

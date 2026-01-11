@@ -29,8 +29,7 @@ register_sloth_client_fields() {
 sloth_berserk_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     level.sloth_berserk_origin = self.origin;
-  }
-  else {
+  } else {
     level.sloth_beserk_origin = undefined;
   }
 }
@@ -71,8 +70,7 @@ sloth_vomit_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 sloth_buildable_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self thread loop_buildable_fx(localclientnum);
-  }
-  else {
+  } else {
     self notify("stop_buildable");
   }
 }

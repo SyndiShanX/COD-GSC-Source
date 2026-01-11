@@ -39,8 +39,7 @@ main() {
 
   if(bTestCanMove) {
     bCanMoveToAttackPos = self CanMovePointToPoint(self.origin, attackPos);
-  }
-  else {
+  } else {
     bCanMoveToAttackPos = true;
   }
 
@@ -116,8 +115,7 @@ ShouldDoExtendedKill(victim) {
 
   if(animEntry == 1) {
     cClearanceRequired = 128;
-  }
-  else {
+  } else {
     cClearanceRequired = 96;
   }
   landPos = victim.origin - cClearanceRequired * snappedVictimToMe;
@@ -148,8 +146,7 @@ DoExtendedKill(animEntry) {
 
   if(animEntry == 1) {
     self PlaySoundOnMovingEnt(ter_op(self.bIsWolf, "mp_wolf_attack_quick_back_npc", "mp_dog_attack_quick_back_npc"));
-  }
-  else {
+  } else {
     self PlaySoundOnMovingEnt(ter_op(self.bIsWolf, "mp_wolf_attack_short_npc", "mp_dog_attack_short_npc"));
   }
 
@@ -209,8 +206,7 @@ DoStandardKill(attackPos, bCanMoveToAttackPos) {
   meleeNotetracks = GetNotetrackTimes(attackAnim, "dog_melee");
   if(meleeNotetracks.size > 0) {
     lerpTime = meleeNotetracks[0] * animLength;
-  }
-  else {
+  } else {
     lerpTime = animLength;
   }
 
@@ -238,8 +234,7 @@ DoStandardKill(attackPos, bCanMoveToAttackPos) {
 
   if(bLerp) {
     self ScrAgentSetAnimScale(0, 1);
-  }
-  else {
+  } else {
     self ScrAgentSetAnimScale(1, 1);
   }
 
@@ -290,8 +285,7 @@ GetUpdatedAttackPos(enemy, bCanMove) {
       attackPos = enemy.origin - meToTarget * self.attackOffset;
       if(self CanMovePointToPoint(self.origin, attackPos)) {
         return attackPos;
-      }
-      else {
+      } else {
         return undefined;
       }
     }

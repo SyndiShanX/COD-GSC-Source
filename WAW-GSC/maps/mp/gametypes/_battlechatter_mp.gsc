@@ -10,14 +10,12 @@
 init() {
   if(game["allies"] == "russian") {
     level.teamPrefix["allies"] = "RU";
-  }
-  else {
+  } else {
     level.teamPrefix["allies"] = "US";
   }
   if(game["axis"] == "japanese") {
     level.teamPrefix["axis"] = "JA";
-  }
-  else {
+  } else {
     level.teamPrefix["axis"] = "GE";
   }
   level.isTeamSpeaking["allies"] = false;
@@ -100,8 +98,7 @@ onJoinedTeam() {
     self waittill("joined_team");
     if(self.pers["team"] == "axis") {
       self.pers["bcVoiceNumber"] = randomIntRange(0, 2);
-    }
-    else {
+    } else {
       self.pers["bcVoiceNumber"] = randomIntRange(0, 3);
     }
   }

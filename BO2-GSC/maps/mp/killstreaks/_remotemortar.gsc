@@ -45,8 +45,7 @@ init() {
 
   if(minimaporigins.size) {
     uavorigin = maps\mp\gametypes\_spawnlogic::findboxcenter(minimaporigins[0].origin, minimaporigins[1].origin);
-  }
-  else {
+  } else {
     uavorigin = (0, 0, 0);
   }
 
@@ -467,8 +466,7 @@ remote_killstreak_end(explode, disconnected) {
 
   if(explode) {
     self remote_explode();
-  }
-  else {
+  } else {
     self remote_leave();
   }
 }
@@ -641,8 +639,7 @@ remote_damage_think() {
         attacker maps\mp\_challenges::addflyswatterstat(weapon, self);
         attacker addweaponstat(weapon, "destroyed_controlled_killstreak", 1);
         attacker destroyedplayercontrolledaircraft();
-      } else {
-      }
+      } else {}
 
       level thread maps\mp\_popups::displayteammessagetoall(&"KILLSTREAK_DESTROYED_REMOTE_MORTAR", attacker);
       self thread remote_killstreak_end(1);
@@ -670,8 +667,7 @@ remote_leave() {
     if(isDefined(nfz)) {
       if(tries % 2 == 1 && tries != 1) {
         yaw = yaw * -1;
-      }
-      else if(tries != 1) {
+      } else if(tries != 1) {
         yaw = yaw + 10;
         yaw = yaw * -1;
       }

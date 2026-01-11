@@ -156,8 +156,7 @@ setupExploders() {
 
     if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
-    }
-    else {
+    } else {
       ent.v["fxid"] = exploder.script_fxid;
     }
     ent.v["exploder"] = exploder.script_exploder;
@@ -201,8 +200,7 @@ setupExploders() {
 
     if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname])) {
       ent.v["exploder_type"] = exploder.targetname;
-    }
-    else {
+    } else {
       ent.v["exploder_type"] = "normal";
     }
 
@@ -463,15 +461,13 @@ delete_exploder_proc(num) {
 exploder_damage() {
   if(isDefined(self.v["delay"])) {
     delay = self.v["delay"];
-  }
-  else {
+  } else {
     delay = 0;
   }
 
   if(isDefined(self.v["damage_radius"])) {
     radius = self.v["damage_radius"];
-  }
-  else {
+  } else {
     radius = 128;
   }
 
@@ -482,8 +478,7 @@ exploder_damage() {
 
   if(isDefined(level.custom_radius_damage_for_exploders)) {
     [[level.custom_radius_damage_for_exploders]](origin, radius, damage);
-  }
-  else {
+  } else {
     RadiusDamage(origin, radius, damage, damage);
   }
 }
@@ -495,11 +490,10 @@ activate_individual_exploder_proc() {
 
   if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
     self thread cannon_effect();
+  } else {
+    if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil")
   }
-  else {
-  if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil")
-  }
-    self thread sound_effect();
+  self thread sound_effect();
 
   if(isDefined(self.v["loopsound"]) && self.v["loopsound"] != "nil") {
     self thread effect_loopsound();
@@ -519,11 +513,10 @@ activate_individual_exploder_proc() {
 
   if(self.v["exploder_type"] == "exploder") {
     self thread brush_show();
+  } else {
+    if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible"))
   }
-  else {
-  if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible"))
-  }
-    self thread brush_throw();
+  self thread brush_throw();
   else {
     self thread brush_delete();
   }
@@ -533,8 +526,7 @@ brush_delete() {
   num = self.v["exploder"];
   if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
-  }
-  else {
+  } else {
     wait(0.05);
   }
 
@@ -546,7 +538,7 @@ brush_delete() {
   if(isDefined(self.model.classname)) {
     if(isSP() && (self.model.spawnflags & 1))
   }
-      self.model call[[level.connectPathsFunction]]();
+  self.model call[[level.connectPathsFunction]]();
 
   if(level.createFX_enabled) {
     if(isDefined(self.exploded)) {
@@ -668,8 +660,7 @@ brush_show() {
   if(isSP() && !isDefined(self.model.script_modelname) && (self.model.spawnflags & 1)) {
     if(!isDefined(self.model.disconnect_paths)) {
       self.model call[[level.connectPathsFunction]]();
-    }
-    else {
+    } else {
       self.model call[[level.disconnectPathsFunction]]();
     }
   }
@@ -877,8 +868,7 @@ shouldRunServerSideEffects() {
 
   if(level.createFX_enabled) {
     return true;
-  }
-  else {
+  } else {
     return GetDvar("clientSideEffects") != "1";
   }
 }

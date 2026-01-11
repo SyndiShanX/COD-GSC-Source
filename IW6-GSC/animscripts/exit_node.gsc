@@ -95,8 +95,7 @@ determinenodeexittype(var_0) {
 
     if(var_0.type == "Cover Crouch") {
       return "crouch_saw";
-    }
-    else if(var_0.type == "Cover Prone") {
+    } else if(var_0.type == "Cover Prone") {
       return "prone_saw";
     }
   }
@@ -189,8 +188,7 @@ checktransitionconditions(var_0, var_1) {
 determinenonnodeexittype(var_0) {
   if(self.a.pose == "stand") {
     var_0 = "exposed";
-  }
-  else {
+  } else {
     var_0 = "exposed_crouch";
   }
 
@@ -200,8 +198,7 @@ determinenonnodeexittype(var_0) {
 
   if(animscripts\utility::shouldcqb()) {
     var_0 = var_0 + "_cqb";
-  }
-  else if(isDefined(self.heat)) {
+  } else if(isDefined(self.heat)) {
     var_0 = "heat";
   }
 
@@ -313,8 +310,7 @@ donodeexitanimation(var_0, var_1) {
 
   if(self.swimmer) {
     self animmode("nogravity", 0);
-  }
-  else {
+  } else {
     self animmode("zonly_physics", 0);
   }
 
@@ -340,8 +336,7 @@ finishcoverexitnotetracks(var_0) {
 determineheatcoverexittype(var_0, var_1) {
   if(var_0.type == "Cover Right") {
     var_1 = "heat_right";
-  }
-  else if(var_0.type == "Cover Left") {
+  } else if(var_0.type == "Cover Left") {
     var_1 = "heat_left";
   }
 
@@ -353,8 +348,7 @@ getexitnode() {
 
   if(!isDefined(self.heat)) {
     var_1 = 400;
-  }
-  else {
+  } else {
     var_1 = 4096;
   }
 
@@ -364,8 +358,7 @@ getexitnode() {
 
   if(isDefined(self.node) && distancesquared(self.origin, self.node.origin) < var_1) {
     var_0 = self.node;
-  }
-  else if(isDefined(self.prevnode) && distancesquared(self.origin, self.prevnode.origin) < var_1) {
+  } else if(isDefined(self.prevnode) && distancesquared(self.origin, self.prevnode.origin) < var_1) {
     var_0 = self.prevnode;
   }
 

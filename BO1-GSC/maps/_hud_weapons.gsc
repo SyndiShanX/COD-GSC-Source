@@ -198,8 +198,7 @@ setHudWeaponType(type) {
         self.hud_bullets[index].alpha = 1;
         if(index % 2) {
           self.hud_bullets[index] setIconShader("hud_bullets_support_back");
-        }
-        else {
+        } else {
           self.hud_bullets[index] setIconShader("hud_bullets_support_front");
         }
         xOffset -= 14;
@@ -256,11 +255,9 @@ updateHudWeaponAmmo(weapon, ammoCount) {
       for(index = 4; index >= 0; index--) {
         if(diff > bulletOffset) {
           self.hud_bullets[index].alpha = 0;
-        }
-        else if((bulletOffset - diff) <= 20) {
+        } else if((bulletOffset - diff) <= 20) {
           self.hud_bullets[index].alpha = level.bulletAlphas[diff - (bulletOffset - 20)];
-        }
-        else {
+        } else {
           self.hud_bullets[index].alpha = 1;
         }
         bulletOffset += 20;

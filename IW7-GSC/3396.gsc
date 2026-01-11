@@ -42,8 +42,7 @@ enter_afterlife_arcade(var_00) {
   if(isDefined(var_00)) {
     if(check_self_revive_attempts(var_00)) {
       var_00 scripts\cp\utility::setlowermessage("welcome_to_afterlife", &"CP_ZOMBIE_AFTERLIFE_ARCADE_WELCOME", 6.0);
-    }
-    else {
+    } else {
       var_00 scripts\cp\utility::setlowermessage("welcome_to_afterlife_no_self_revives", &"CP_ZOMBIE_AFTERLIFE_ARCADE_NO_REVIVES", 6.0);
     }
 
@@ -99,8 +98,7 @@ enter_afterlife_arcade(var_00) {
 
   if(isDefined(level.aa_ww_char_vo)) {
     var_00 thread[[level.aa_ww_char_vo]](var_00);
-  }
-  else {
+  } else {
     var_00 thread scripts\cp\cp_vo::try_to_play_vo("ww_afterlife_arrive", "zmb_afterlife_vo", "high", 20, 0, 0, 1);
   }
 
@@ -154,8 +152,7 @@ choose_correct_vo_for_player(var_00) {
 
   if(var_0.times_self_revived >= var_0.max_self_revive_machine_use) {
     var_01 = "ww_afterlife_p4_notoken";
-  }
-  else {
+  } else {
     var_02 = ["ww_afterlife_p1_generic", "ww_afterlife_p5_alt_1", "ww_afterlife_arrive"];
     var_01 = scripts\engine\utility::random(var_02);
   }
@@ -216,8 +213,7 @@ choose_vo_based_on_type(var_00, var_01) {
 
       if(var_02 == "ww_afterlife_arrive") {
         return var_02;
-      }
-      else {
+      } else {
         var_04 = strtok(var_02, "_");
         var_01 = var_4[3];
         continue;
@@ -305,8 +301,7 @@ clear_up_all_vo_in_afterlife(var_00) {
 exit_afterlife_arcade(var_00) {
   if(var_0.logevent == "wave_complete") {
     var_0.reason = "Wave Complete";
-  }
-  else {
+  } else {
     var_0.reason = "Self Revive";
   }
 
@@ -353,8 +348,7 @@ play_exit_afterlife_arcade_vo(var_00) {
 
   if(var_0.num_of_times_exit_afterlife_arcade == 1) {
     var_00 thread scripts\cp\cp_vo::try_to_play_vo("arcade_token_revive_first", "zmb_comment_vo", "low", 3, 0, 0, 1);
-  }
-  else {
+  } else {
     var_00 thread scripts\cp\cp_vo::try_to_play_vo("arcade_token_revive", "zmb_comment_vo", "low", 3, 0, 0, 1);
   }
 }
@@ -509,8 +503,7 @@ set_spawn_defaults() {
 
   if(isDefined(level.player_suit)) {
     self setsuit(level.player_suit);
-  }
-  else {
+  } else {
     self setsuit("zom_suit");
   }
 
@@ -534,8 +527,7 @@ update_player_revives_every_ten_waves(var_00) {
 
     if(var_00 scripts\cp\utility::isplayingsolo() || level.only_one_player) {
       continue;
-    }
-    else {
+    } else {
       var_02 = int(level.wave_num / 10) + 1 - var_0.times_self_revived;
     }
 
@@ -637,8 +629,7 @@ get_self_revive_door_hint(var_00, var_01) {
   if(check_self_revive_attempts(var_01)) {
     if(has_self_revive_token(var_01) || scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
       return &"CP_ZOMBIE_AFTERLIFE_ARCADE_SELFREVIVE_DOOR";
-    }
-    else {
+    } else {
       return &"CP_ZOMBIE_AFTERLIFE_ARCADE_NEED_SELFREVIVE_TOKEN";
     }
   } else
@@ -715,8 +706,7 @@ set_has_self_revive_token(var_00, var_01) {
 
   if(var_01 == 1) {
     var_00 setclientomnvar("zombie_afterlife_has_self_revive_token", 1);
-  }
-  else {
+  } else {
     var_00 setclientomnvar("zombie_afterlife_has_self_revive_token", 0);
   }
 }
@@ -728,17 +718,13 @@ has_self_revive_token(var_00) {
 check_self_revive_attempts(var_00) {
   if(scripts\cp\utility::isplayingsolo() || level.only_one_player) {
     return 1;
-  }
-  else if(scripts\engine\utility::is_true(var_0.have_gns_perk)) {
+  } else if(scripts\engine\utility::is_true(var_0.have_gns_perk)) {
     return 1;
-  }
-  else if(var_0.times_self_revived >= var_0.max_self_revive_machine_use) {
+  } else if(var_0.times_self_revived >= var_0.max_self_revive_machine_use) {
     return 0;
-  }
-  else if(int(level.wave_num / 10) + 1 - var_0.times_self_revived >= 1) {
+  } else if(int(level.wave_num / 10) + 1 - var_0.times_self_revived >= 1) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -843,8 +829,7 @@ increase_afterlife_count(var_00) {
 get_soul_power_goal(var_00) {
   if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
     return 0;
-  }
-  else {
+  } else {
     return 200;
   }
 }

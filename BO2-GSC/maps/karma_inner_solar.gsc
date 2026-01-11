@@ -74,7 +74,7 @@ skipto_inner_solar() {
 
   if(!is_mature()) {
     foreach(e_dancer in getEntArray("dancers", "script_noteworthy")) {
-    e_dancer delete();
+      e_dancer delete();
     }
 
     level thread init_solar_systems();
@@ -96,7 +96,7 @@ skipto_inner_solar() {
   level thread populate_club();
 
   foreach(ent in getEntArray("velvet_rope", "script_noteworthy")) {
-  ent setscale(0.9);
+    ent setscale(0.9);
   }
 }
 
@@ -110,7 +110,7 @@ skipto_solar_fight() {
 
   if(!is_mature()) {
     foreach(e_dancer in getEntArray("dancers", "script_noteworthy")) {
-    e_dancer delete();
+      e_dancer delete();
     }
 
     level thread init_solar_systems();
@@ -133,7 +133,7 @@ skipto_solar_fight() {
   array_delete(a_m_groups);
 
   foreach(ent in getEntArray("velvet_rope", "targetname")) {
-  ent delete();
+    ent delete();
   }
 
   getent("sick_girls_clip", "targetname") delete();
@@ -195,7 +195,7 @@ club_intro() {
   bm_clip delete();
 
   foreach(ent in getEntArray("velvet_rope", "targetname")) {
-  ent delete();
+    ent delete();
   }
 
   clear_background_civilians();
@@ -243,7 +243,7 @@ club_fight() {
   wait 0.05;
 
   foreach(ai_pmc in get_ais_from_scene("bar_fight_pmcs")) {
-  ai_pmc set_blend_in_out_times(0.2);
+    ai_pmc set_blend_in_out_times(0.2);
   }
 
   delete_exploder(628);
@@ -297,7 +297,7 @@ dj_jump_spawn() {
 
 bar_fight_spawn_cover_guys() {
   foreach(s_pos in getstructarray("club_fight_cover_start", "targetname")) {
-  s_pos thread bar_fight_cover_spawn();
+    s_pos thread bar_fight_cover_spawn();
   }
 }
 
@@ -312,8 +312,7 @@ bar_fight_cover_spawn() {
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "delete") {
     ai_guy.script_string = "delete";
-  }
-  else {
+  } else {
     ai_guy.script_string = "no_delete";
   }
 
@@ -371,7 +370,7 @@ bar_fight_spawn_wave(str_pos, n_delay, do_cleanup) {
   }
 
   foreach(s_pos in a_mid_positions) {
-  s_pos thread bar_fight_spawn_mid();
+    s_pos thread bar_fight_spawn_mid();
   }
 
   if(isDefined(n_delay)) {
@@ -470,7 +469,7 @@ change_club_lights(n_time_floor, n_time_exposure) {
   a_e_lights = getEntArray("speechlight", "targetname");
 
   foreach(e_light in a_e_lights) {
-  e_light setforcenocull();
+    e_light setforcenocull();
   }
 
   if(!flag("run_to_bar")) {
@@ -489,8 +488,7 @@ club_fx() {
   foreach(s_candle in a_s_candles) {
     if(isDefined(s_candle.angles)) {
       v_forward = anglesToForward(s_candle.angles);
-    }
-    else {
+    } else {
       v_forward = (1, 0, 0);
     }
 
@@ -502,8 +500,7 @@ club_fx() {
   foreach(s_ashtray in a_s_ashtrays) {
     if(isDefined(s_ashtray.angles)) {
       v_forward = anglesToForward(s_ashtray.angles);
-    }
-    else {
+    } else {
       v_forward = (1, 0, 0);
     }
 
@@ -661,25 +658,25 @@ populate_club() {
   a_models = get_model_or_models_from_scene("club_encounter_hostages_loop");
 
   foreach(model in a_models) {
-  model setforcenocull();
+    model setforcenocull();
   }
 
   a_models = get_model_or_models_from_scene("club_encounter_dancers1_loop");
 
   foreach(model in a_models) {
-  model setforcenocull();
+    model setforcenocull();
   }
 
   a_models = get_model_or_models_from_scene("club_encounter_dancers2_loop");
 
   foreach(model in a_models) {
-  model setforcenocull();
+    model setforcenocull();
   }
 
   a_models = get_model_or_models_from_scene("club_encounter_dancers3_loop");
 
   foreach(model in a_models) {
-  model setforcenocull();
+    model setforcenocull();
   }
 
   flag_wait("club_door_closed");
@@ -936,8 +933,7 @@ ready_explosions(b_run_immediate) {
 
     if(isDefined(s_squib.target)) {
       s_squib = getstruct(s_squib.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -1285,8 +1281,7 @@ player_bar_fight() {
 player_enable_invulnerability() {
   if(!isDefined(level.player.fired)) {
     level.player dodamage(1000, level.player.origin, level.player);
-  }
-  else {
+  } else {
     level.player.fired = undefined;
     level.player enableinvulnerability();
   }
@@ -1348,7 +1343,7 @@ final_grenade() {
 player_infinite_ammo() {
   while(!flag("bar_fight_movement3_done")) {
     foreach(str_weapon in self getweaponslist()) {
-    self setweaponammoclip(str_weapon, weaponclipsize(str_weapon));
+      self setweaponammoclip(str_weapon, weaponclipsize(str_weapon));
     }
 
     wait 0.05;
@@ -1357,7 +1352,7 @@ player_infinite_ammo() {
 
 player_reload(ent) {
   foreach(str_weapon in level.player getweaponslist()) {
-  level.player setweaponammoclip(str_weapon, 0);
+    level.player setweaponammoclip(str_weapon, 0);
   }
 }
 
@@ -1401,7 +1396,7 @@ player_whizbys_start(n_delay, n_time) {
   }
 
   foreach(s_start in getstructarray("player_whizbys1", "targetname")) {
-  s_start thread player_whizby_think(n_time);
+    s_start thread player_whizby_think(n_time);
   }
 }
 
@@ -1430,7 +1425,7 @@ player_dynents_start(str_structs, n_delay, n_time) {
   }
 
   foreach(s_start in getstructarray(str_structs, "targetname")) {
-  s_start thread player_dynents_think(n_time);
+    s_start thread player_dynents_think(n_time);
   }
 }
 
@@ -1457,7 +1452,7 @@ player_physpulses_start(str_struct, n_delay) {
   }
 
   foreach(s_struct in getstructarray(str_struct, "targetname")) {
-  s_struct thread player_physents_think();
+    s_struct thread player_physents_think();
   }
 }
 

@@ -17,8 +17,7 @@ main(var_0, var_1, var_2) {
 
   if(issubstr(var_2, "_minigunonly")) {
     maps\_vehicle::build_turret("minigun_m1a1", "tag_turret_mg_r", "weapon_m1a1_minigun", undefined, "sentry", undefined, 0, 0);
-  }
-  else {
+  } else {
     if(issubstr(var_2, "_turret")) {
       maps\_vehicle::build_turret("m1a1_coaxial_mg", "tag_barrel", "vehicle_m1a1_abrams_PKT_Coaxial_MG", undefined, undefined, undefined, 0, 0, (6, -13.5, 8));
       maps\_vehicle::build_turret("minigun_m1a1_fast", "tag_turret_mg_r", "weapon_mk47_turret", undefined, "sentry", undefined, 0, 0);
@@ -33,8 +32,7 @@ main(var_0, var_1, var_2) {
 
   if(!issubstr(var_2, "_viewmodel")) {
     maps\_vehicle::build_treadfx(var_2, "default", "fx/treadfx/tread_sand_satfarm");
-  }
-  else {
+  } else {
     maps\_vehicle::build_treadfx();
   }
 
@@ -47,7 +45,7 @@ init_local() {
   waittillframeend;
 
   foreach(var_1 in self.riders) {
-  var_1 thread maps\_utility::magic_bullet_shield(1);
+    var_1 thread maps\_utility::magic_bullet_shield(1);
   }
 }
 

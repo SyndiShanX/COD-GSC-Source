@@ -9,7 +9,6 @@
 #include scripts\core_common\renderoverridebundle;
 #include scripts\mp_common\gametypes\ct_core;
 #include scripts\mp_common\gametypes\ct_firebreak_tutorial;
-
 #namespace ct_firebreak;
 
 event_handler[gametype_init] main(eventstruct) {

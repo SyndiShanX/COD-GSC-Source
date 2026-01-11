@@ -19,7 +19,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
-
 #namespace bot;
 
 autoexec __init__system__() {
@@ -56,14 +55,14 @@ add_bot(team, name = undefined, clanabbrev = undefined) {
   bot.goalradius = 512;
 
   if(isDefined(level.disableclassselection) && level.disableclassselection) {
-    bot.pers[#"class"] = level.defaultclass;
+    bot.pers[# "class"] = level.defaultclass;
     bot.curclass = level.defaultclass;
   }
 
   if(level.teambased && isDefined(team) && isDefined(level.teams[team])) {
     bot.botteam = team;
-  } else if(isDefined(team) && team == #"spectator") {
-    bot.botteam = #"spectator";
+  } else if(isDefined(team) && team == # "spectator") {
+    bot.botteam = # "spectator";
   } else {
     bot.botteam = "autoassign";
   }
@@ -422,7 +421,7 @@ update_loop() {
     return;
   }
 
-  self endon(#"death", #"bled_out");
+  self endon(#"death", # "bled_out");
   level endon(#"game_ended");
 
   if(isDefined(level.var_fa5cacde) && level.var_fa5cacde) {
@@ -613,7 +612,7 @@ update_swim() {
   }
 
   bottomtrace = groundtrace(self.origin, self.origin + (0, 0, -1000), 0, self, 1);
-  swimheight = self.origin[2] - bottomtrace[#"position"][2];
+  swimheight = self.origin[2] - bottomtrace[# "position"][2];
 
   if(swimheight < 25) {
     self bottapbutton(67);
@@ -637,7 +636,7 @@ init_bot() {
   self.bot.var_18fa994c = 0;
   self.bot.var_857c5ea8 = 0;
   blackboard::createblackboardforentity(self);
-  self function_eaf7ef38(#"hash_1b029888c4965031", #"hash_41b1340b7efb3261");
+  self function_eaf7ef38(#"hash_1b029888c4965031", # "hash_41b1340b7efb3261");
 }
 
 initialized() {
@@ -791,9 +790,9 @@ in_combat() {
   }
 
   switch (self.combatstate) {
-    case #"combat_state_aware_of_enemies":
-    case #"combat_state_in_combat":
-    case #"combat_state_has_visible_enemy":
+    case # "combat_state_aware_of_enemies":
+    case # "combat_state_in_combat":
+    case # "combat_state_has_visible_enemy":
       return true;
   }
 
@@ -1053,62 +1052,62 @@ devgui_bot_loop() {
     host = util::gethostplayerforbots();
 
     switch (args[0]) {
-      case #"add":
+      case # "add":
         level devgui_add_bots(host, args[1], int(args[2]));
         break;
-      case #"spawn_enemy":
-        level devgui_add_bots(host, #"enemy", 1);
+      case # "spawn_enemy":
+        level devgui_add_bots(host, # "enemy", 1);
         break;
-      case #"remove":
+      case # "remove":
         level devgui_remove_bots(host, args[1]);
         break;
-      case #"kill":
+      case # "kill":
         level devgui_kill_bots(host, args[1]);
         break;
-      case #"invulnerable":
+      case # "invulnerable":
         level devgui_invulnerable(host, args[1], args[2]);
         break;
-      case #"ignoreall":
+      case # "ignoreall":
         level devgui_ignoreall(host, args[1], int(args[2]));
         break;
-      case #"primaryoffhand":
+      case # "primaryoffhand":
         level devgui_attribute(host, "<dev string:x1bc>", args[1], int(args[2]));
         break;
-      case #"secondaryoffhand":
+      case # "secondaryoffhand":
         level devgui_attribute(host, "<dev string:x1d2>", args[1], int(args[2]));
         break;
-      case #"specialoffhand":
+      case # "specialoffhand":
         level devgui_attribute(host, "<dev string:x1ea>", args[1], int(args[2]));
         break;
-      case #"scorestreak":
+      case # "scorestreak":
         level devgui_attribute(host, "<dev string:x200>", args[1], int(args[2]));
         break;
-      case #"usegadget":
+      case # "usegadget":
         level devgui_use_gadget(host, args[1], int(args[2]));
         break;
-      case #"usekillstreak":
+      case # "usekillstreak":
         level function_8042b78a(host, args[1]);
         break;
-      case #"tpose":
+      case # "tpose":
         level devgui_tpose(host, args[1]);
         break;
     }
 
     if(isDefined(host)) {
       switch (args[0]) {
-        case #"add_fixed_spawn":
+        case # "add_fixed_spawn":
           host devgui_add_fixed_spawn_bots(args[1], args[2], args[3]);
           break;
-        case #"set_target":
+        case # "set_target":
           host devgui_set_target(args[1], args[2]);
           break;
-        case #"goal":
+        case # "goal":
           host devgui_goal(args[1], args[2]);
           break;
-        case #"companion":
+        case # "companion":
           host function_5524bfd5(args[1]);
           break;
-        case #"give_player_weapon":
+        case # "give_player_weapon":
           host function_263ca697();
           break;
       }
@@ -1198,13 +1197,13 @@ function_2d5436be(origin, spiral) {
   var_17e94d83 = rotatepointaroundaxis((spiral.radius, 0, 0), (0, 0, 1), spiral.angle + spiral.var_2b9d3922);
   spawn_point = var_17e94d83 + origin;
   trace = bulletTrace(spawn_point + (0, 0, 100), spawn_point, 0, self);
-  return trace[#"position"];
+  return trace[# "position"];
 }
 
 devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
   team = devgui_relative_team(self, botarg);
   trace = self eye_trace();
-  spawndir = self.origin - trace[#"position"];
+  spawndir = self.origin - trace[# "position"];
   spawnangles = vectortoangles(spawndir);
 
   if(!isDefined(countarg)) {
@@ -1214,7 +1213,7 @@ devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
   count = max(int(countarg), 1);
   bots = [];
   offset = (0, 0, 5);
-  origin = trace[#"position"] + offset;
+  origin = trace[# "position"] + offset;
 
   if(!isDefined(bots)) {
     bots = [];
@@ -1232,7 +1231,7 @@ devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
   spiral.radius = getdvarint(#"hash_64cb6c7e56b66cab", 0);
 
   for(i = 0; i < count - 1; i++) {
-    origin = function_2d5436be(trace[#"position"] + offset, spiral);
+    origin = function_2d5436be(trace[# "position"] + offset, spiral);
 
     if(!isDefined(bots)) {
       bots = [];
@@ -1243,11 +1242,11 @@ devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
     bots[bots.size] = self add_fixed_spawn_bot(team, origin, spiral.angle + spiral.var_2b9d3922, var_b27e53da);
   }
 
-  if(isvehicle(trace[#"entity"])) {
+  if(isvehicle(trace[# "entity"])) {
     foreach(bot in bots) {
       if(isDefined(bot)) {
-        vehicle = trace[#"entity"];
-        pos = trace[#"position"];
+        vehicle = trace[# "entity"];
+        pos = trace[# "position"];
         seatindex = undefined;
         seatdist = undefined;
 
@@ -1274,20 +1273,20 @@ devgui_add_fixed_spawn_bots(botarg, var_b27e53da, countarg) {
 
 devgui_relative_team(host, botarg) {
   if(isDefined(host)) {
-    team = host.team != #"spectator" ? host.team : #"allies";
+    team = host.team != # "spectator" ? host.team : # "allies";
 
     if(botarg == "enemy") {
-      team = team == #"allies" ? #"axis" : #"allies";
+      team = team == # "allies" ? # "axis" : # "allies";
     }
 
     return team;
   }
 
   if(botarg == "friendly") {
-    return #"allies";
+    return # "allies";
   }
 
-  return #"axis";
+  return # "axis";
 }
 
 devgui_remove_bots(host, botarg) {
@@ -1373,13 +1372,13 @@ devgui_set_target(botarg, cmdarg) {
   target = undefined;
 
   switch (cmdarg) {
-    case #"crosshair":
+    case # "crosshair":
       target = self function_7090aa98();
       break;
-    case #"me":
+    case # "me":
       target = self;
       break;
-    case #"clear":
+    case # "clear":
       break;
     default:
       return;
@@ -1402,16 +1401,16 @@ devgui_set_target(botarg, cmdarg) {
 
 devgui_goal(botarg, cmdarg) {
   switch (cmdarg) {
-    case #"set":
+    case # "set":
       self function_bbc3f17e(botarg, 0);
       return;
-    case #"me":
+    case # "me":
       self devgui_goal_me(botarg);
       return;
-    case #"force":
+    case # "force":
       self function_bbc3f17e(botarg, 1);
       return;
-    case #"clear":
+    case # "clear":
       self devgui_goal_clear(botarg);
       return;
   }
@@ -1420,7 +1419,7 @@ devgui_goal(botarg, cmdarg) {
 function_bbc3f17e(botarg, force = 0) {
   trace = self eye_trace(1);
   bots = devgui_get_bots(self, botarg);
-  pos = trace[#"position"];
+  pos = trace[# "position"];
   node = self get_nearest_node(pos);
 
   if(isDefined(node)) {
@@ -1510,7 +1509,7 @@ function_7090aa98() {
 
   if(!isDefined(targetentity)) {
     trace = self eye_trace(1);
-    targetentity = trace[#"entity"];
+    targetentity = trace[# "entity"];
   }
 
   if(isDefined(targetentity) && !isalive(targetentity)) {
@@ -1772,7 +1771,7 @@ function_301f229d(team) {
 }
 
 populate_bots() {
-  level endon(#"game_ended", #"hash_d3e36871aa6829f");
+  level endon(#"game_ended", # "hash_d3e36871aa6829f");
   botfill = getdvarint(#"botfill", 0);
 
   if(botfill > 0) {
@@ -1801,7 +1800,7 @@ populate_bots() {
 }
 
 monitor_bot_team_population(maxallies, maxaxis) {
-  level endon(#"game_ended", #"hash_d3e36871aa6829f");
+  level endon(#"game_ended", # "hash_d3e36871aa6829f");
 
   if(!maxallies && !maxaxis) {
     return;
@@ -1839,7 +1838,7 @@ fill_balanced_teams(maxallies, maxaxis) {
 }
 
 monitor_bot_population(maxfree) {
-  level endon(#"game_ended", #"hash_d3e36871aa6829f");
+  level endon(#"game_ended", # "hash_d3e36871aa6829f");
 
   if(!maxfree) {
     return;

@@ -334,14 +334,12 @@ bot_oldschool_handle_pickup_goals() {
 
     if(isDefined(var_0)) {
       var_10 = var_0;
-    }
-    else {
+    } else {
       var_10 = "normal";
 
       if(var_2 == "critical") {
         var_10 = "critical";
-      }
-      else if(maps\mp\bots\_bots_util::bot_is_defending() || var_2 == "objective") {
+      } else if(maps\mp\bots\_bots_util::bot_is_defending() || var_2 == "objective") {
         var_10 = "objective";
       }
     }
@@ -368,8 +366,7 @@ bot_oldschool_handle_pickup_goals() {
           var_11["action"] = "pickup_perk";
           break;
         }
-      } else {
-      }
+      } else {}
     }
 
     if(var_1.size > 0) {
@@ -405,9 +402,7 @@ bot_oldschool_handle_pickup_goals() {
         var_16.action_thread = ::bot_oldschool_pickup_perk;
       else if(var_11["action"] == "pickup_ammo") {
         var_16.action_thread = ::bot_oldschool_pickup_ammo;
-      }
-      else {
-      }
+      } else {}
 
       maps\mp\bots\_bots_strategy::bot_new_tactical_goal("oldschool_pickup", var_11["pickup_struct"].ground_pos, 20, var_16);
       var_0 = var_10;
@@ -552,8 +547,7 @@ bot_oldschool_should_pursue_pickup(var_0, var_1) {
 
   if(var_1 == "critical") {
     var_7 = level.bot_oldschool_pickup_close_crit_radius_self_sq;
-  }
-  else if(var_1 == "objective") {
+  } else if(var_1 == "objective") {
     var_7 = level.bot_oldschool_pickup_close_obj_radius_self_sq;
   }
 
@@ -682,8 +676,7 @@ bot_oldschool_pickup_get_desired_weapon_pickup_action(var_0) {
   } else if(var_2 == "rocketlauncher") {
     if(!self hasweapon(var_0)) {
       var_1["action"] = "pickup_weapon";
-    }
-    else if(bot_oldschool_is_valid_ammo_pickup(var_0)) {
+    } else if(bot_oldschool_is_valid_ammo_pickup(var_0)) {
       var_1["action"] = "pickup_ammo";
     }
 

@@ -34,8 +34,7 @@ func_1768(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_04)) {
     self.lightbarstructs[self.lightbarstructs.size - 1].time = var_04 * 1000;
-  }
-  else {
+  } else {
     self.lightbarstructs[self.lightbarstructs.size - 1].time = undefined;
   }
 
@@ -227,8 +226,7 @@ endinstructiononnotification(var_00, var_01) {
 
   if(isarray(var_00)) {
     var_02 = scripts\engine\utility::waittill_any_in_array_return(var_00);
-  }
-  else {
+  } else {
     self waittill(var_00);
   }
 

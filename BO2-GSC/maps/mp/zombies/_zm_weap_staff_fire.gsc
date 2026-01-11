@@ -254,8 +254,7 @@ flame_damage_fx(damageweapon, e_attacker, pct_damage) {
 
     if(cointoss()) {
       self thread zombie_gib_all();
-    }
-    else {
+    } else {
       self thread zombie_gib_guts();
     }
 

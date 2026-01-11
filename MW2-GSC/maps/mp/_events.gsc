@@ -125,11 +125,11 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
         println("Attacker GUID:" + self.guid);
 
         foreach(key, value in victim.attackers) {
-        println("Victim Attacker list GUID: " + key);
+          println("Victim Attacker list GUID: " + key);
         }
       }
 
-        assertEx(isDefined(victim.attackers[self.guid]), "See console log for details");
+      assertEx(isDefined(victim.attackers[self.guid]), "See console log for details");
 
       weaponClass = getWeaponClass(weapon);
 
@@ -158,8 +158,7 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
     if(meansOfDeath == "MOD_HEAD_SHOT") {
       if(isDefined(victim.lastStand)) {
         execution(killId);
-      }
-      else {
+      } else {
         headShot(killId);
       }
     }
@@ -191,8 +190,7 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
 
     if(isDefined(victim.attackerPosition)) {
       attackerPosition = victim.attackerPosition;
-    }
-    else {
+    } else {
       attackerPosition = self.origin;
     }
 

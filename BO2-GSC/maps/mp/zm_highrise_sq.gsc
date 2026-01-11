@@ -100,7 +100,7 @@ sq_easy_cleanup() {
   sq_buildables = getEntArray("buildable_sq_common", "targetname");
 
   foreach(item in sq_buildables) {
-  item delete();
+    item delete();
   }
 
   a_balls = getEntArray("sq_dragon_lion_ball", "targetname");
@@ -172,8 +172,7 @@ init_sidequest() {
   if(level.richcompleted) {
     if(level.maxcompleted) {
       flag_set("sq_players_out_of_sync");
-    }
-    else {
+    } else {
       tower_in_sync_lightning();
     }
 
@@ -189,11 +188,9 @@ init_sidequest() {
   }
 }
 
-init_sidequest_1() {
-}
+init_sidequest_1() {}
 
-init_sidequest_2() {
-}
+init_sidequest_2() {}
 
 generic_stage_start() {
   level thread cheat_complete_stage();
@@ -250,8 +247,7 @@ sidequest_logic() {
 
   if(flag("sq_ric_tower_complete")) {
     update_sidequest_stats("sq_highrise_rich_complete");
-  }
-  else if(flag("sq_max_tower_complete")) {
+  } else if(flag("sq_max_tower_complete")) {
     update_sidequest_stats("sq_highrise_maxis_complete");
   }
 }
@@ -306,7 +302,7 @@ tower_punch_watcher() {
   a_leg_trigs = [];
 
   foreach(str_wind in level.a_wind_order) {
-  a_leg_trigs[a_leg_trigs.size] = "sq_tower_" + str_wind;
+    a_leg_trigs[a_leg_trigs.size] = "sq_tower_" + str_wind;
   }
 
   level.n_cur_leg = 0;
@@ -386,8 +382,7 @@ tower_punch_watch_leg(a_leg_trigs) {
 
         if(flag("sq_ric_tower_complete")) {
           exploder(1002);
-        }
-        else {
+        } else {
           exploder(902);
         }
       }
@@ -481,8 +476,7 @@ complete_sidequest() {
   level thread sidequest_done();
 }
 
-sidequest_done() {
-}
+sidequest_done() {}
 
 get_variant_from_entity_num(player_number) {
   if(!isDefined(player_number)) {
@@ -624,8 +618,7 @@ update_sidequest_stats(stat_name) {
 
   if(stat_name == "sq_highrise_maxis_complete") {
     maxis_complete = 1;
-  }
-  else if(stat_name == "sq_highrise_rich_complete") {
+  } else if(stat_name == "sq_highrise_rich_complete") {
     rich_complete = 1;
   }
 
@@ -634,8 +627,7 @@ update_sidequest_stats(stat_name) {
   foreach(player in players) {
     if(stat_name == "sq_highrise_started") {
       player.highrise_sq_started = 1;
-    }
-    else if(stat_name == "navcard_applied_zm_highrise") {
+    } else if(stat_name == "navcard_applied_zm_highrise") {
       player maps\mp\zombies\_zm_stats::set_global_stat(level.navcard_needed, 0);
       thread sq_refresh_player_navcard_hud();
     } else if(!is_true(player.highrise_sq_started)) {
@@ -751,7 +743,7 @@ sq_refresh_player_navcard_hud() {
   players = get_players();
 
   foreach(player in players) {
-  player thread sq_refresh_player_navcard_hud_internal();
+    player thread sq_refresh_player_navcard_hud_internal();
   }
 }
 
@@ -760,8 +752,7 @@ vo_maxis_do_quest() {
 
   if(1) {
     maxissay("vox_maxi_sidequest_max_com_0");
-  }
-  else {
+  } else {
     maxissay("vox_maxi_sidequest_max_com_1");
     maxissay("vox_maxi_sidequest_max_com_2");
   }
@@ -786,8 +777,7 @@ vo_richtofen_nav_card() {
 
   if(1) {
     level thread vo_maxis_first_tower();
-  }
-  else if(0) {
+  } else if(0) {
     level thread vo_richtofen_first_tower();
   }
 }
@@ -849,8 +839,7 @@ vo_weapon_watcher() {
 
         if(isDefined(level.rich_sq_player) && is_player_valid(level.rich_sq_player) && player == level.rich_sq_player) {
           level thread vo_richtofen_find_sniper();
-        }
-        else {
+        } else {
           level thread vo_maxis_find_sniper();
         }
 
@@ -942,7 +931,7 @@ maxissay(line) {
   players = getplayers();
 
   foreach(player in players) {
-  player setclientfieldtoplayer("clientfield_sq_vo", level.sq_clientfield_vo[line]);
+    player setclientfieldtoplayer("clientfield_sq_vo", level.sq_clientfield_vo[line]);
   }
 
   wait 10;

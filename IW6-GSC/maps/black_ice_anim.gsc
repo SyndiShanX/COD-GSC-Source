@@ -1410,8 +1410,7 @@ cw_common_breach_player(var_0) {
 
   if(issubstr(var_3, "mts255")) {
     wait 0.2;
-  }
-  else if(issubstr(var_3, "panzerfaust")) {
+  } else if(issubstr(var_3, "panzerfaust")) {
     wait 0.6;
   }
 

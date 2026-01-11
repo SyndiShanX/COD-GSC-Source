@@ -8,7 +8,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_weapons;
-
 #namespace namespace_983e5028;
 
 autoexec __init__system__() {
@@ -51,7 +50,7 @@ private function_a5a431f6() {
   level endon(#"hash_7646638df88a3656");
 
   while(true) {
-    s_waitresult = self waittill(#"ammo_reduction", #"lightning_ball_created");
+    s_waitresult = self waittill(#"ammo_reduction", # "lightning_ball_created");
     self zm_score::player_reduce_points("take_specified", level.var_d34d02af);
   }
 }

@@ -414,25 +414,21 @@ load_gumps_pakistan() {
   if(level.script == "pakistan") {
     if(is_after_skipto("bus_dam")) {
       load_gump("pakistan_gump_alley");
-    }
-    else {
+    } else {
       load_gump("pakistan_gump_street");
     }
   } else if(level.script == "pakistan_2") {
     if(is_after_skipto("roof_meeting")) {
       load_gump("pakistan_2_gump_escape");
-    }
-    else {
+    } else {
       load_gump("pakistan_2_gump_anthem");
     }
   } else if(level.script == "pakistan_3") {
     if(is_after_skipto("warehouse")) {
       load_gump("pakistan_3_gump_escape_end");
-    }
-    else if(is_after_skipto("escape_battle")) {
+    } else if(is_after_skipto("escape_battle")) {
       load_gump("pakistan_3_gump_escape");
-    }
-    else {
+    } else {
       load_gump("pakistan_3_gump_escape_intro");
     }
   }
@@ -464,8 +460,7 @@ hud_signal_indicator_blink() {
 
       if(str_interp_direction == "up") {
         self.alpha = min(self.alpha + n_alpha_step_size, 1.0);
-      }
-      else {
+      } else {
         self.alpha = max(self.alpha - n_alpha_step_size, 0.0);
       }
 
@@ -498,8 +493,7 @@ id_think(ai_target, n_view_angle_max, n_view_angle_min, wait_for_flag) {
 
   if(!wait_for_flag) {
     flag_set("id_ready");
-  }
-  else {
+  } else {
     flag_clear("id_ready");
   }
 
@@ -592,8 +586,7 @@ surveillance_think(ai_target) {
   init_interference_triggers();
   level.player thread check_in_interference();
 
-  if(isDefined(level.menendez)) {
-  }
+  if(isDefined(level.menendez)) {}
 
   if(!isDefined(ai_target)) {
     level notify("stop_surveillance");
@@ -642,8 +635,7 @@ surveillance_think(ai_target) {
 stop_surveillance() {
   level notify("stop_surveillance");
 
-  if(isDefined(level.menendez)) {
-  }
+  if(isDefined(level.menendez)) {}
 
   surveillance_state_change_cleanup(level.str_hud_current_state);
   level.player notify("anthem_surveillance_complete");
@@ -669,8 +661,7 @@ is_menendez_los(n_player_view_angle, n_los_angle_constraint) {
 
   if(n_player_view_angle > n_los_angle_constraint && v_trace_pos == level.menendez getEye()) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -931,8 +922,7 @@ watch_water_vision() {
 
     if(self istouching(t_firewater)) {
       level thread maps\createart\pakistan_2_art::underground_fire_fx_vision();
-    }
-    else {
+    } else {
       level thread maps\createart\pakistan_2_art::vision_underwater_swimming();
     }
 
@@ -948,8 +938,7 @@ watch_water_vision() {
       level thread maps\createart\pakistan_2_art::vision_millibar_room();
     else if(self istouching(getent("interrogation_vision_trigger", "targetname"))) {
       level thread maps\createart\pakistan_2_art::vision_torture_room();
-    }
-    else {
+    } else {
       level thread maps\createart\pakistan_2_art::turn_back_to_default();
     }
   }
@@ -1027,8 +1016,7 @@ follow_path(nd_path) {
     if(isDefined(nd_path.target)) {
       if(isai(self)) {
         nd_path = getnode(nd_path.target, "targetname");
-      }
-      else if(isDefined(self.classname) && self.classname == "script_vehicle") {
+      } else if(isDefined(self.classname) && self.classname == "script_vehicle") {
         nd_path = getvehiclenode(nd_path.target, "targetname");
       }
 
@@ -1063,8 +1051,7 @@ follow_path(nd_path) {
 
     if(isDefined(nd_path.radius) && nd_path.radius != 0) {
       self.goalradius = nd_path.radius;
-    }
-    else {
+    } else {
       self.goalradius = goal_radius;
     }
 
@@ -1090,8 +1077,7 @@ follow_path(nd_path) {
 
       if(isDefined(nd_path.radius) && nd_path.radius != 0) {
         self setneargoalnotifydist(nd_path.radius);
-      }
-      else {
+      } else {
         self setneargoalnotifydist(50);
       }
 
@@ -1281,8 +1267,7 @@ spawn_script_model_at_struct(s_start_spot) {
 
   if(cointoss()) {
     m_script_model setModel("c_pak_civ_male_corpse1_fb");
-  }
-  else {
+  } else {
     m_script_model setModel("c_pak_civ_male_corpse2_fb");
   }
 
@@ -1302,7 +1287,7 @@ sink_ragdoll_corpses(str_name) {
   a_m_corpses = getEntArray(str_name, "targetname");
 
   foreach(m_corpse in a_m_corpses) {
-  m_corpse scalebuoyancy(0.9);
+    m_corpse scalebuoyancy(0.9);
   }
 }
 
@@ -1312,7 +1297,7 @@ kill_ragdoll_corpse_control() {
   a_t_trigs = getEntArray("corpse_spawn_trig", "targetname");
 
   foreach(s_spot in a_s_spots) {
-  s_spot structdelete();
+    s_spot structdelete();
   }
 
   array_delete(a_t_trigs);
@@ -1466,7 +1451,7 @@ reconstruct_fxanims_from_list(a_str_names) {
     s_m_each_fxanim_with_name = getstructarray(str_name, "targetname");
 
     foreach(s_fxanim in s_m_each_fxanim_with_name) {
-    fxanim_reconstruct(s_fxanim.targetname);
+      fxanim_reconstruct(s_fxanim.targetname);
     }
   }
 }
@@ -1577,8 +1562,7 @@ is_claw_walking() {
 
   if(v_velocity[0] > 0 || v_velocity[1] > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -1713,7 +1697,7 @@ delete_structs(str_value, str_key) {
   s_a_structs = getstructarray(str_value, str_key);
 
   foreach(s_struct in s_a_structs) {
-  s_struct structdelete();
+    s_struct structdelete();
   }
 }
 
@@ -1722,8 +1706,7 @@ say_vo_fake_ent(str_vo, n_delay) {
 
   if(a_ai_guys.size) {
     e_fake_vo = spawn("script_origin", a_ai_guys[randomint(a_ai_guys.size)].origin + vectorscale((0, 0, 1), 50.0));
-  }
-  else {
+  } else {
     e_fake_vo = spawn("script_origin", level.player.origin + (0, 200, 50));
   }
 

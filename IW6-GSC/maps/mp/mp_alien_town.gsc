@@ -328,7 +328,7 @@ amb_quakes() {
   level.quake_trigs = getEntArray("quake_trig", "targetname");
 
   foreach(quake_trig in level.quake_trigs) {
-  quake_trig thread run_quake_scene();
+    quake_trig thread run_quake_scene();
   }
 }
 
@@ -372,7 +372,7 @@ run_quake_scene() {
         player PlayRumbleOnEntity("heavy_3s");
 
         foreach(movable in self.movables) {
-        self thread quake_rotate(movable);
+          self thread quake_rotate(movable);
         }
 
         count--;
@@ -590,8 +590,7 @@ delete_intro_heli_clip() {
 set_hardcore_extinction_spawn_table() {
   if(isPlayingSolo()) {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_town_hardcore_sp.csv";
-  }
-  else {
+  } else {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_town_hardcore.csv";
   }
 }

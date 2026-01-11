@@ -1244,18 +1244,14 @@ func_2A51(param_00, param_01, param_02, param_03, param_04) {
   self endon("death");
   self endon("new_anim_reach");
   thread func_DD08(param_00);
-  param_01 = [
-    [param_03]
-  ](param_01, param_02);
+  param_01 = [[param_03]](param_01, param_02);
   scripts\sp\utility::func_F3DC(param_01);
   self.var_DD0B = param_01;
   self.objective_playermask_showto = 0;
   self.spawncovernode = squared(64);
   self waittill("goal");
   self notify("anim_reach_complete");
-  [
-    [param_04]
-  ]();
+  [[param_04]]();
   self notify("new_anim_reach");
 }
 

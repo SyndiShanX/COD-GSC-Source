@@ -39,8 +39,7 @@ gettarget() {
 
   if(isalive(self.enemy) && distancesquared(self.enemy.origin, self.origin) < 2560000) {
     var_0 = self.enemy;
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     var_0 = self.owner;
   }
 
@@ -126,8 +125,7 @@ init_idle_move() {
 perform_move(var_0) {
   if(var_0) {
     var_1 = 0;
-  }
-  else {
+  } else {
     var_1 = get_move_target_position_index();
   }
 

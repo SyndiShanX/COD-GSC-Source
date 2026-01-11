@@ -155,8 +155,7 @@ checkstancestatus() {
 
   if(var_00 == "prone") {
     cacheplayeraction(1);
-  }
-  else if(var_00 == "crouch") {
+  } else if(var_00 == "crouch") {
     cacheplayeraction(2);
   }
 }
@@ -203,8 +202,7 @@ buildkilldeathactionvalue() {
 
   if(var_01 == "prone") {
     var_00 = var_00 | 1;
-  }
-  else if(var_01 == "crouch") {
+  } else if(var_01 == "crouch") {
     var_00 = var_00 | 2;
   }
 
@@ -302,8 +300,7 @@ logevent_playerdeath(var_00, var_01, var_02) {
     if(isDefined(var_0.team)) {
       if(var_0.team == "axis") {
         var_11 = "a";
-      }
-      else {
+      } else {
         var_11 = "l";
       }
     }
@@ -334,8 +331,7 @@ logevent_playerdeath(var_00, var_01, var_02) {
 
   if(self.team == "axis") {
     var_15 = "a";
-  }
-  else {
+  } else {
     var_15 = "l";
   }
 
@@ -381,7 +377,7 @@ logevent_spawnpointupdate() {
     return;
   }
   foreach(var_01 in level.spawnpoints) {
-  bbprint("gamemp_spawn_point", "x %f y %f z %f allies_score %i axis_score %i allies_max_score %i axis_max_score %i state %s", var_1.origin[0], var_1.origin[1], var_1.origin[2], scripts\engine\utility::ter_op(isDefined(var_1.func_A9E9["allies"]), var_1.func_A9E9["allies"], 0), scripts\engine\utility::ter_op(isDefined(var_1.func_A9E9["axis"]), var_1.func_A9E9["axis"], 0), scripts\engine\utility::ter_op(isDefined(var_1.func_11A3A), var_1.func_11A3A, 0), scripts\engine\utility::ter_op(isDefined(var_1.func_11A3A), var_1.func_11A3A, 0), buildspawnpointstatestring(var_01));
+    bbprint("gamemp_spawn_point", "x %f y %f z %f allies_score %i axis_score %i allies_max_score %i axis_max_score %i state %s", var_1.origin[0], var_1.origin[1], var_1.origin[2], scripts\engine\utility::ter_op(isDefined(var_1.func_A9E9["allies"]), var_1.func_A9E9["allies"], 0), scripts\engine\utility::ter_op(isDefined(var_1.func_A9E9["axis"]), var_1.func_A9E9["axis"], 0), scripts\engine\utility::ter_op(isDefined(var_1.func_11A3A), var_1.func_11A3A, 0), scripts\engine\utility::ter_op(isDefined(var_1.func_11A3A), var_1.func_11A3A, 0), buildspawnpointstatestring(var_01));
   }
 }
 
@@ -473,11 +469,9 @@ logmatchtags() {
 
   if(scripts\mp\utility\game::matchmakinggame()) {
     logevent_tag("OnlineMatch");
-  }
-  else if(getdvarint("xblive_privatematch")) {
+  } else if(getdvarint("xblive_privatematch")) {
     logevent_tag("PrivateMatch");
-  }
-  else if(!getdvarint("onlinegame")) {
+  } else if(!getdvarint("onlinegame")) {
     logevent_tag("OfflineMatch");
   }
 }
@@ -729,8 +723,7 @@ analyticssend_spawnplayerdetails(var_00, var_01, var_02) {
 
       if(var_4.team == "axis") {
         var_12 = 1;
-      }
-      else if(var_4.team == "allies") {
+      } else if(var_4.team == "allies") {
         var_12 = 2;
       }
 
@@ -770,8 +763,7 @@ analyticssend_spawnfactors(var_00, var_01, var_02, var_03) {
 
     if(var_5.lastspawnteam == "axis") {
       var_15 = 1;
-    }
-    else if(var_5.lastspawnteam == "allies") {
+    } else if(var_5.lastspawnteam == "allies") {
       var_15 = 2;
     }
 
@@ -805,44 +797,31 @@ analytics_getmaxspawneventsforcurrentmode() {
   if(isDefined(level.gametype)) {
     if(level.gametype == "war") {
       var_00 = 120;
-    }
-    else if(level.gametype == "dom") {
+    } else if(level.gametype == "dom") {
       var_00 = 120;
-    }
-    else if(level.gametype == "conf") {
+    } else if(level.gametype == "conf") {
       var_00 = 120;
-    }
-    else if(level.gametype == "front") {
+    } else if(level.gametype == "front") {
       var_00 = 40;
-    }
-    else if(level.gametype == "sd") {
+    } else if(level.gametype == "sd") {
       var_00 = 50;
-    }
-    else if(level.gametype == "dm") {
+    } else if(level.gametype == "dm") {
       var_00 = 50;
-    }
-    else if(level.gametype == "koth") {
+    } else if(level.gametype == "koth") {
       var_00 = 125;
-    }
-    else if(level.gametype == "ctf") {
+    } else if(level.gametype == "ctf") {
       var_00 = 50;
-    }
-    else if(level.gametype == "tdef") {
+    } else if(level.gametype == "tdef") {
       var_00 = 75;
-    }
-    else if(level.gametype == "siege") {
+    } else if(level.gametype == "siege") {
       var_00 = 25;
-    }
-    else if(level.gametype == "gun") {
+    } else if(level.gametype == "gun") {
       var_00 = 50;
-    }
-    else if(level.gametype == "sr") {
+    } else if(level.gametype == "sr") {
       var_00 = 25;
-    }
-    else if(level.gametype == "grind") {
+    } else if(level.gametype == "grind") {
       var_00 = 75;
-    }
-    else if(level.gametype == "ball") {
+    } else if(level.gametype == "ball") {
       var_00 = 50;
     }
   }

@@ -1710,9 +1710,7 @@ func_FFC0(param_00, param_01, param_02, param_03) {
     var_04 = self.attack_spot.script_label;
   }
 
-  self.closest_player_near_interaction_point = [
-    [level.var_7089]
-  ](self);
+  self.closest_player_near_interaction_point = [[level.var_7089]](self);
   if(!isDefined(self.closest_player_near_interaction_point)) {
     return 0;
   }

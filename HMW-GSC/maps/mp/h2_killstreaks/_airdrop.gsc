@@ -113,8 +113,7 @@ h2_setHeadIcon(showTo, icon, offset, width, height) {
   headIcon setShader(icon, width, height);
   if(isPlayer(showTo)) {
     headIcon setWaypoint(true, true, false);
-  }
-  else {
+  } else {
     headIcon setWaypoint(true, true, false);
   }
 
@@ -186,7 +185,7 @@ init() {
     }
   } else {
     foreach(crate in level.oldAirDropCrates) {
-    crate delete();
+      crate delete();
     }
 
     if(level.airDropCrates.size) {
@@ -198,7 +197,7 @@ init() {
 
   if(level.airDropCrates.size) {
     foreach(crate in level.AirDropCrates) {
-    crate delete();
+      crate delete();
     }
   }
 
@@ -419,8 +418,7 @@ beginAirdropViaMarker(lifeId, kID, dropType) {
 
   if(isAirdropMarker(currentWeapon)) {
     airdropMarkerWeapon = currentWeapon;
-  }
-  else {
+  } else {
     airdropMarkerWeapon = undefined;
   }
 
@@ -540,8 +538,7 @@ airDropMarkerActivate(dropType) {
 
   if(dropType != "airdrop_mega_marker_mp") {
     level doFlyBy(owner, position, randomFloat(360), dropType);
-  }
-  else {
+  } else {
     level doC130FlyBy(owner, position, randomFloat(360), dropType);
   }
 }
@@ -605,8 +602,7 @@ createAirDropCrate(owner, dropType, crateType, startPos) {
 
   if(isDefined(owner)) {
     dropCrate.owner = owner;
-  }
-  else {
+  } else {
     dropCrate.owner = undefined;
   }
 
@@ -688,8 +684,7 @@ setSelfAndEnemyUsable(owner) {
   foreach(player in level.players) {
     if(player != owner && player.team == self.team) {
       self disablePlayerUse(player);
-    }
-    else {
+    } else {
       self enablePlayerUse(player);
     }
   }
@@ -710,8 +705,7 @@ dropTheCrate(dropPoint, dropType, lbHeight, dropImmediately, crateOverride, star
 
   if(!isDefined(crateOverride)) {
     crateType = getCrateTypeForDropType(dropType);
-  }
-  else {
+  } else {
     crateType = crateOverride;
   }
 
@@ -719,8 +713,7 @@ dropTheCrate(dropPoint, dropType, lbHeight, dropImmediately, crateOverride, star
 
   if(dropType == "airdrop_mega_marker_mp" /*|| dropType == "nuke_drop"*/ ) {
     dropCrate LinkTo(self, "tag_ground", (64, 32, -128), (0, 0, 0));
-  }
-  else {
+  } else {
     dropCrate LinkTo(self, "tag_ground", (32, 0, 5), (0, 0, 0));
   }
 
@@ -815,15 +808,14 @@ getFlyHeightOffset(dropSite) {
   {
     println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
 
-      if(isDefined(level.airstrikeHeightScale)) {
-        if(level.airstrikeHeightScale > 2) {
-          lbFlyHeight = 1500;
-          return (lbFlyHeight * (level.airStrikeHeightScale));
-        }
-
-        return (lbFlyHeight * level.airStrikeHeightScale + 256 + dropSite[2]);
+    if(isDefined(level.airstrikeHeightScale)) {
+      if(level.airstrikeHeightScale > 2) {
+        lbFlyHeight = 1500;
+        return (lbFlyHeight * (level.airStrikeHeightScale));
       }
-    else {
+
+      return (lbFlyHeight * level.airStrikeHeightScale + 256 + dropSite[2]);
+    } else {
       return (lbFlyHeight + dropsite[2]);
     }
   } else {
@@ -932,8 +924,7 @@ doC130FlyBy(owner, dropSite, dropYaw, dropType) {
     // handle missing our target
     if(dist < minDist) {
       minDist = dist;
-    }
-    else if(dist > minDist) {
+    } else if(dist > minDist) {
       break;
     }
 
@@ -1013,8 +1004,7 @@ dropNuke(dropSite, owner, dropType) {
     // handle missing our target
     if(dist < minDist) {
       minDist = dist;
-    }
-    else if(dist > minDist) {
+    } else if(dist > minDist) {
       break;
     }
 
@@ -1442,8 +1432,7 @@ ammoCrateThink(dropType) {
       if(!level.teamBased || player.team != self.team) {
         if(dropType == "airdrop_marker_mp") {
           player thread hijackNotify(self, "airdrop");
-        }
-        else {
+        } else {
           player thread hijackNotify(self, "emergency_airdrop");
         }
       }
@@ -1494,8 +1483,7 @@ useHoldThink(player, useTime) {
 
   if(isDefined(useTime)) {
     self.useTime = useTime;
-  }
-  else {
+  } else {
     self.useTime = 3000;
   }
 
@@ -1557,8 +1545,7 @@ useHoldThinkLoop(player) {
 
     if(isDefined(self.objectiveScaler)) {
       self.useRate = 1 * self.objectiveScaler;
-    }
-    else {
+    } else {
       self.useRate = 1;
     }
 

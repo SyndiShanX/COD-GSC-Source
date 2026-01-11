@@ -98,8 +98,7 @@ strength_test_update(player, button_prompt_text) {
     if(player usebuttonpressed()) {
       if(button_state == 1 || button_state == 3) {
         button_state = 2;
-      }
-      else if(button_state == 2) {
+      } else if(button_state == 2) {
         button_state = 0;
       }
     } else if(button_state == 0 || button_state == 2)
@@ -140,8 +139,7 @@ strength_test_fail_timer() {
   while(true) {
     if(isgodmode(self)) {
       fail_time = 10;
-    }
-    else {
+    } else {
       if(blur) {
         self setblur(x - fail_time, 0.05);
       }
@@ -245,8 +243,7 @@ strength_test_screen_out(shader, time) {
 
   if(time == 0) {
     level.st_fade_screen.alpha = 1;
-  }
-  else {
+  } else {
     level.st_fade_screen.alpha = 0;
     level.st_fade_screen fadeovertime(time);
     level.st_fade_screen.alpha = 1;

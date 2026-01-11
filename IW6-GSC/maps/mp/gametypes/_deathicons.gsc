@@ -57,8 +57,7 @@ addDeathIcon(entity, dyingplayer, team, timeout) {
   newdeathicon.showinkillcam = false;
   if(level.splitscreen) {
     newdeathicon setShader("headicon_dead", 14, 14);
-  }
-  else {
+  } else {
     newdeathicon setShader("headicon_dead", 7, 7);
   }
   newdeathicon setwaypoint(false);

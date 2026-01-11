@@ -24,7 +24,7 @@ main() {
   maps\_utility::autosave_by_name("rooftop");
 
   foreach(var_1 in level.squad) {
-  var_1.no_pistol_switch = 1;
+    var_1.no_pistol_switch = 1;
   }
 
   thread rooftop_win();
@@ -91,7 +91,7 @@ rooftop_enemy_wave_1() {
   var_0 = getEntArray("rooftop_enemy_spawner_wave_1", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 maps\_utility::spawn_ai(1);
+    var_2 maps\_utility::spawn_ai(1);
   }
 }
 
@@ -121,7 +121,7 @@ rooftop_parking_lot_enemies() {
   level waittill("here_comes_the_truck");
 
   foreach(var_2 in var_0) {
-  var_2 notify("stop current floodspawner");
+    var_2 notify("stop current floodspawner");
   }
 }
 
@@ -129,14 +129,14 @@ rooftop_enemies_wait_to_attack() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2.dontevershoot = 1;
+    var_2.dontevershoot = 1;
   }
 
   level waittill("rooftop_door_kicked");
   wait 1;
 
   foreach(var_2 in var_0) {
-  var_2.dontevershoot = undefined;
+    var_2.dontevershoot = undefined;
   }
 }
 
@@ -197,7 +197,7 @@ rooftop_staircase_threatbias() {
   level.player.threatbias = -2000;
 
   foreach(var_1 in level.squad) {
-  var_1 setthreatbiasgroup("squad");
+    var_1 setthreatbiasgroup("squad");
   }
 
   setthreatbias("axis", "squad", 1500);
@@ -253,7 +253,7 @@ allies_jump_off_roof() {
   level.squad["ALLY_BRAVO"] ally_vignette_traversal("ally_bravo_jump_node", "factory_rooftop_jumpoff_ally02");
 
   foreach(var_1 in level.squad) {
-  var_1 thread ally_color_node_hack();
+    var_1 thread ally_color_node_hack();
   }
 
   maps\factory_util::safe_trigger_by_targetname("r_ally_move_600");
@@ -330,7 +330,7 @@ rooftop_door_breach() {
   wait 1;
 
   foreach(var_1 in level.squad) {
-  var_1 maps\_utility::enable_surprise();
+    var_1 maps\_utility::enable_surprise();
   }
 
   maps\_utility::battlechatter_on();
@@ -422,7 +422,7 @@ rooftop_enemy_dialog() {
   var_0 = maps\_utility::get_living_ai_array("rooftop_enemy", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2.animname = "enemy";
+    var_2.animname = "enemy";
   }
 
   var_2 = common_scripts\utility::random(var_0);
@@ -610,7 +610,7 @@ spotlight_hitbox() {
   var_4[var_4.size] = level.player;
 
   foreach(var_6 in var_4) {
-  var_6.attackeraccuracy = 0.6;
+    var_6.attackeraccuracy = 0.6;
   }
 
   thread maps\factory_audio::rooftop_heli_speaker_destroy();

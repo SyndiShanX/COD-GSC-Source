@@ -67,11 +67,9 @@ main() {
 
   if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("camera_thirdPerson")) {
+  } else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_diehard")) {
+  } else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
   }
 
@@ -429,8 +427,7 @@ onBeginUse(player) {
 
   if(ownerTeam == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
 

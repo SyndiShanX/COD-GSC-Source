@@ -82,8 +82,7 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
         default:
           if(!is_hardcore_mode()) {
             iDamage = int(min(10, iDamage * 0.05));
-          }
-          else {
+          } else {
             iDamage = int(min(level.ricochetDamageMax, iDamage * 0.10));
           }
           break;
@@ -109,8 +108,7 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
           if(isDefined(eAttacker) && IsPlayer(eAttacker) && isDefined(sHitLoc) && sHitLoc != "shield") {
             if(isDefined(eInflictor)) {
               eAttacker DoDamage(iDamage, (eAttacker.origin - (0, 0, 50)), eAttacker, eInflictor, sMeansOfDeath);
-            }
-            else {
+            } else {
               eAttacker DoDamage(iDamage, eAttacker.origin, eAttacker);
             }
           }
@@ -171,8 +169,7 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
       self.bodyArmorHP -= (iDamage + damageAdd);
       if(self maps\mp\alien\_perk_utility::has_perk("perk_rigger", [0, 1, 2, 3, 4]) && is_trap(eInflictor)) {
         iDamage = 0;
-      }
-      else {
+      } else {
         iDamage = 1;
       }
       damageAdd = 0;
@@ -230,8 +227,7 @@ Callback_AlienPlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeat
       if(isDefined(eAttacker) && IsAgent(eAttacker)) {
         if(!isDefined(eAttacker.damage_done)) {
           eAttacker.damage_done = 0;
-        }
-        else {
+        } else {
           eAttacker.damage_done += iDamage;
         }
       }
@@ -267,8 +263,7 @@ shouldUseInvulnerability(iDamage, isUsingRemoteAndWillBeLowHealth) {
   }
   if(isUsingRemoteAndWillBeLowHealth) {
     return true;
-  }
-  else {
+  } else {
     return (self.haveInvulnerabilityAvailable && iDamage > self.health && iDamage < (self.health + DAMAGE_BUFFER_LIMIT));
   }
 }
@@ -392,8 +387,7 @@ onAlienAgentDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
   if(isDefined(sWeapon) && sWeapon != "alien_ims_projectile_mp" && isPlayer(eAttacker) && eAttacker _hasPerk("specialty_armorpiercing") && isDefined(sHitloc) && sHitLoc == "armor") {
     if(eAttacker maps\mp\alien\_persistence::is_upgrade_enabled("armor_piercing_upgrade")) {
       iDamage = Int(iDamage * ALIEN_AP_DAMAGE_SCALAR * ARMOR_PIERCING_UPGRADE_SCALAR);
-    }
-    else {
+    } else {
       iDamage = Int(iDamage * ALIEN_AP_DAMAGE_SCALAR);
     }
   }
@@ -431,28 +425,22 @@ onAlienAgentDamaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sWea
     } else if(isDefined(eInflictor) && eInflictor != eAttacker) {
       if(means_of_explosive_damage(sMeansOfDeath)) {
         typeHit = "standard";
-      }
-      else {
+      } else {
         typeHit = "none";
       }
     } else if(isDefined(eInflictor) && isDefined(eInflictor.damageFeedback) && eInflictor.damageFeedback == false)
       typeHit = "none";
     else if(!maps\mp\gametypes\_damage::shouldWeaponFeedback(sWeapon)) {
       typeHit = "none";
-    }
-    else if(iDFlags &level.iDFLAGS_STUN) {
+    } else if(iDFlags &level.iDFLAGS_STUN) {
       typeHit = "stun";
-    }
-    else if(!eAttacker _hasperk("specialty_armorpiercing") && sHitLoc == "armor") {
+    } else if(!eAttacker _hasperk("specialty_armorpiercing") && sHitLoc == "armor") {
       typeHit = "hitalienarmor";
-    }
-    else if(sHitloc == "soft") {
+    } else if(sHitloc == "soft") {
       typeHit = "hitaliensoft";
-    }
-    else if(sMeansOfDeath == "MOD_MELEE" && sWeapon == "meleestun_mp") {
+    } else if(sMeansOfDeath == "MOD_MELEE" && sWeapon == "meleestun_mp") {
       typeHit = "meleestun";
-    }
-    else {
+    } else {
       typeHit = "standard";
     }
 
@@ -488,8 +476,7 @@ set_alien_damage_by_weapon_type(sMeansOfDeath, sWeapon, iDamage, eAttacker, iDFl
     if(sWeapon == "alienthrowingknife_mp" && sMeansOfDeath == "MOD_IMPACT") {
       if(maps\mp\alien\_utility::can_hypno(eAttacker, false, iDFlags, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc, timeOffset, eInflictor)) {
         iDamage = 20000;
-      }
-      else if(self.alien_type != "elite") {
+      } else if(self.alien_type != "elite") {
         iDamage = 500;
       }
     }
@@ -1052,8 +1039,7 @@ stun_zap_aliens(current_origin, enemy, iDamage, sMeansofDeath) {
 
   if(isDefined(sMeansofDeath) && sMeansofDeath != "MOD_MELEE") {
     max_bolts = max_bolts + stun_ammo_level;
-  }
-  else {
+  } else {
     max_bolts = 4;
     iDamage = iDamage / 4;
   }
@@ -1085,8 +1071,7 @@ stun_bolt_death(player, iDamage, sMeansofDeath) {
 
   if(isDefined(self.alien_type) && self.alien_type == "seeder_spore") {
     move_spot = self GetTagOrigin("J_Spore_46");
-  }
-  else if(isDefined(self) && isalive(self) && has_tag(self.model, "J_SpineUpper")) {
+  } else if(isDefined(self) && isalive(self) && has_tag(self.model, "J_SpineUpper")) {
     move_spot = self GetTagOrigin("J_SpineUpper");
   }
 

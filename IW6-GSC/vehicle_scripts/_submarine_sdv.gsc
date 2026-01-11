@@ -6,8 +6,7 @@
 main(var_0, var_1, var_2, var_3) {
   if(var_0 == "vehicle_submarine_sdv" || var_0 == "vehicle_mini_sub_iw6") {
     maps\_vehicle::build_template("submarine_sdv", var_0, var_1, var_2);
-  }
-  else {
+  } else {
     maps\_vehicle::build_template("blackshadow_730", var_0, var_1, var_2);
   }
 
@@ -58,8 +57,7 @@ handle_move() {
 
     if(self.model == "vehicle_mini_sub_iw6") {
       thread mini_sub_prop_wash();
-    }
-    else {
+    } else {
       playFXOnTag(common_scripts\utility::getfx("sdv_prop_wash_1"), self, "TAG_PROPELLER");
     }
 
@@ -67,8 +65,7 @@ handle_move() {
 
     if(self.model == "vehicle_mini_sub_iw6") {
       thread mini_sub_prop_wash_stop();
-    }
-    else {
+    } else {
       stopFXOnTag(common_scripts\utility::getfx("sdv_prop_wash_1"), self, "TAG_PROPELLER");
     }
 

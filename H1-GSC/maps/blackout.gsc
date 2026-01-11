@@ -206,8 +206,7 @@ main() {
 
   if(getdvarint("use_old_burning_house") == 1) {
     common_scripts\utility::run_thread_on_targetname("burning_door_trigger", maps\blackout_code::open_door_trigger, "burning");
-  }
-  else {
+  } else {
     common_scripts\utility::flag_init("burning_door_open");
   }
 
@@ -341,7 +340,7 @@ walking_the_stream() {
   common_scripts\utility::array_thread(var_3, maps\blackout_code::reach_and_idle_relative_to_target, "bored_idle_reach", "bored_idle", "bored_alert");
 
   foreach(var_5 in var_3) {
-  var_5.flashbangstopsscriptedanim = 1;
+    var_5.flashbangstopsscriptedanim = 1;
   }
 
   var_3 = getEntArray("hut_hanger", "script_noteworthy");
@@ -418,8 +417,7 @@ walking_the_stream() {
 
   if(common_scripts\utility::flag("high_alert")) {
     maps\_utility::activate_trigger_with_targetname("hide_from_shack");
-  }
-  else {
+  } else {
     maps\_utility::activate_trigger_with_targetname("sneak_up_on_shack");
   }
 
@@ -723,7 +721,7 @@ enemy_heli_riders() {
   var_0 = self.last_spawned_vehicle;
 
   foreach(var_2 in var_0.riders) {
-  var_2 thread rider_damaged();
+    var_2 thread rider_damaged();
   }
 }
 
@@ -996,8 +994,7 @@ blackout_house() {
 
   if(getdvarint("use_old_power_cut") == 1) {
     thread maps\blackout_code::gaz_goes_to_cut_the_power();
-  }
-  else {
+  } else {
     thread maps\blackout_code::gaz_goes_to_cut_the_power_h1();
   }
 
@@ -1013,8 +1010,7 @@ blackout_house() {
 
   if(getdvarint("use_old_power_cut") == 1) {
     common_scripts\utility::flag_wait("player_at_blackout_door");
-  }
-  else {
+  } else {
     while(!common_scripts\utility::flag("player_at_blackout_door") && distancesquared(level.gaz.origin, level.player.origin) > 62500) {
       wait 0.1;
     }
@@ -1134,8 +1130,7 @@ blackout_rescue() {
 
   if(getdvarint("use_old_evac") != 1) {
     var_5 = maps\_utility::spawn_anim_model("evac_rig");
-  }
-  else {
+  } else {
     var_5 = maps\_utility::spawn_anim_model("player_rig");
   }
 

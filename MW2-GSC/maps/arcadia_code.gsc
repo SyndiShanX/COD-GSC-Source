@@ -384,8 +384,7 @@ get_laser_designation_context(viewpoint, entity) {
     if(isDefined(entity.vehicletype) || isDefined(entity.destuctableinfo)) {
       if(isDefined(entity.vehicletype) && entity.vehicletype == "mi17") {
         return "chopper";
-      }
-      else {
+      } else {
         return "vehicle";
       }
     }
@@ -480,8 +479,8 @@ laser_designate_target() {
     thread draw_line_for_time(viewpoint, viewpoint + (0, 0, 100), 1, 0, 0, 20);
   }
 
-    // Check if we are supposed to be targeting for artillery now
-    artilleryTarget = undefined;
+  // Check if we are supposed to be targeting for artillery now
+  artilleryTarget = undefined;
   if(flag("golf_course_mansion")) {
     artilleryTarget = laser_origin_within_golf_vehicles(viewpoint);
   }
@@ -702,7 +701,7 @@ golf_course_vehicle_kill_on_artillery() {
 golf_course_fake_choppers() {
   spawners = getEntArray("fake_golf_course_chopper", "targetname");
   foreach(spawner in spawners) {
-  spawner hide();
+    spawner hide();
   }
 
   flag_wait("golf_course_vehicles");
@@ -746,8 +745,7 @@ golf_course_zpu() {
   foreach(target in targets) {
     if(issubstr(target.classname, "actor")) {
       spawner = target;
-    }
-    else if(issubstr(target.classname, "trigger")) {
+    } else if(issubstr(target.classname, "trigger")) {
       trigger = target;
     }
   }
@@ -1136,7 +1134,7 @@ civilian_car_luggage() {
   civilian_car_luggage[5] = getent("civilian_car_luggage_6", "targetname");
 
   foreach(piece in civilian_car_luggage) {
-  piece LinkTo(civilian_car_dummy);
+    piece LinkTo(civilian_car_dummy);
   }
 
   civilian_car_dummy.origin = self.origin;
@@ -1291,8 +1289,7 @@ ai_avoid_stryker() {
     //self.cqbwalking
     if(withinDist && withinFOV) {
       self cqb_walk("on");
-    }
-    else {
+    } else {
       self cqb_walk("off");
     }
   }

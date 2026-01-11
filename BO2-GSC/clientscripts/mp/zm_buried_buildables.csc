@@ -45,7 +45,7 @@ init_buildables(buildablesenabledlist) {
   }
 
   foreach(buildable in buildablesenabledlist) {
-  add_zombie_buildable(buildable);
+    add_zombie_buildable(buildable);
   }
 
   level thread set_clientfield_buildables_code_callbacks();
@@ -53,7 +53,7 @@ init_buildables(buildablesenabledlist) {
 
 include_buildables(buildablesenabledlist) {
   foreach(buildable in buildablesenabledlist) {
-  include_buildable(buildable);
+    include_buildable(buildable);
   }
 }
 
@@ -71,8 +71,7 @@ buildable_setup_glint_offset() {
   if(isDefined(self.model)) {
     if(issubstr(self.model, "booze")) {
       offset = vectorscale((0, 0, 1), 14.5);
-    }
-    else if(issubstr(self.model, "candy")) {
+    } else if(issubstr(self.model, "candy")) {
       offset = vectorscale((0, 0, 1), 11.0);
     }
   }

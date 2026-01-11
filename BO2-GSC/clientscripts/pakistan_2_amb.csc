@@ -177,8 +177,7 @@ snd_play_gaz_idle() {
   stoploopat("evt_truck_idle", (-17935, 35400, 487), "evt_truck_shutoff");
 }
 
-snd_start_autofx_audio() {
-}
+snd_start_autofx_audio() {}
 
 underwater_explo() {
   snd_add_exploder_alias(700, "evt_anim_ugrnd_grenades_exp");

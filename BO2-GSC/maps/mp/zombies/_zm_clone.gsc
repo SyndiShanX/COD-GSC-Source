@@ -20,11 +20,9 @@ spawn_player_clone(player, origin, forceweapon, forcemodel) {
 
   if(isDefined(forceweapon)) {
     weapon = forceweapon;
-  }
-  else if(primaryweapons.size) {
+  } else if(primaryweapons.size) {
     weapon = primaryweapons[0];
-  }
-  else {
+  } else {
     weapon = player getcurrentweapon();
   }
 
@@ -42,8 +40,7 @@ spawn_player_clone(player, origin, forceweapon, forcemodel) {
 
   if(isDefined(forcemodel)) {
     clone setModel(forcemodel);
-  }
-  else {
+  } else {
     clone setModel(self.model);
 
     if(isDefined(player.headmodel)) {
@@ -85,8 +82,7 @@ clone_give_weapon(weapon) {
 clone_animate(animtype) {
   if(self.isactor) {
     self thread clone_actor_animate(animtype);
-  }
-  else {
+  } else {
     self thread clone_mover_animate(animtype);
   }
 }

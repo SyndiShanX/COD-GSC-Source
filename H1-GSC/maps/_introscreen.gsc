@@ -597,8 +597,7 @@ _cornerlinethread(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  }
-  else {
+  } else {
     level.intro_offset++;
   }
 

@@ -39,7 +39,7 @@ handle_player_on_sniper_rifle() {
   var_0 = getEntArray("zakhaev_light", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 setlightshadowstate("force_on");
+    var_2 setlightshadowstate("force_on");
   }
 
   level.player maps\_utility::set_light_set_player("sniperescape_scope");
@@ -50,7 +50,7 @@ handle_player_on_sniper_rifle() {
   var_0 = getEntArray("zakhaev_light", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 setlightshadowstate("normal");
+    var_2 setlightshadowstate("normal");
   }
 
   level.player maps\_utility::set_light_set_player("sniperescape");

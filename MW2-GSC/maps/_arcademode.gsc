@@ -387,8 +387,7 @@ arcademode_checkpoint_print() {
 arcadeMode_redraw_life(index, earned_lives) {
   if(index >= earned_lives) {
     self setshader("arcademode_life", 64, 64);
-  }
-  else {
+  } else {
     self setshader("stance_stand", 64, 64);
   }
 
@@ -841,8 +840,7 @@ arcademode_update_score() {
 
   if(getdvarint("arcademode_full")) {
     score = getdvarint("arcademode_combined_score");
-  }
-  else {
+  } else {
     score = getdvarint("arcademode_score");
   }
 
@@ -862,8 +860,7 @@ arcademode_update_score() {
 UpdateScoreElemsOnce() {
   if(getdvarint("arcademode_full")) {
     hud_update_score("arcadeMode_combined_score");
-  }
-  else {
+  } else {
     hud_update_score("arcademode_score");
   }
   //hud_update_score( hud_combined_score, "arcademode_combined_score" );
@@ -1216,16 +1213,14 @@ arcademode_set_origin_in_radius() {
       level.player.thirdPointPulseSide = 1 - side;
       if(side) {
         theta = 45;
-      }
-      else {
+      } else {
         theta = 135;
       }
     } else if(level.player.pointPulseIndex == 2) {
       side = level.player.thirdPointPulseSide;
       if(side) {
         theta = 45;
-      }
-      else {
+      } else {
         theta = 135;
       }
     } else if(level.player.pointPulseIndex <= 4) {
@@ -1351,8 +1346,7 @@ arcadeMode_add_points_for_individual_kill(mod_array, mod, kills) {
   // no location bonus for melee
   if(mod_array["type"] != "melee") {
     base_points = level.arcadeMode_killBase + level.arcadeMode_locationKillBonus[mod_array["damage_location"]] + level.arcadeMode_weaponBonus[mod_array["type"]];
-  }
-  else {
+  } else {
     base_points = level.arcadeMode_killBase + level.arcadeMode_weaponBonus[mod_array["type"]];
   }
 
@@ -1689,7 +1683,7 @@ arcadeMode_ends() {
       assert(combined_score == finish_combined_score);
     }
 
-      wait(1);
+    wait(1);
 
     for(;;) {
       mult = 1;
@@ -1868,63 +1862,63 @@ arcadeMode_ends() {
   if(gotNewHighScore) {
     if(!level.arcadeMode_success) // otherwise, UpdateGamerProfile() will be called from _endmission::_nextmission() {
       UpdateGamerProfile();
-    }
-
-    wait(1);
-
-    hud_newhighscore = new_ending_hud("center", fade_in_time, 0, scoreBoostYPos);
-    // NEW HIGH SCORE!
-    hud_newhighscore settext(&"SCRIPT_NEW_HIGH_SCORE");
-    hud_newhighscore.alpha = 1;
-    hud_newhighscore fadeovertime(0.05);
-    hud_newhighscore SetPulseFX(30, 3000, 1000);
-    wait(3.5);
-  }
-
-  wait(2);
-
-  hud_end_reason SetPulseFX(0, 0, 1000);
-  wait(0.5);
-
-  hud_mission_score SetPulseFX(0, 0, 1000);
-  for(i = 0; i < level.arcademode_hud_digits; i++) {
-    hud_score = level.arcademode_hud_scores[i];
-    hud_score SetPulseFX(0, 0, 1000);
-  }
-
-  if(getdvar("arcademode_full") == "1") {
-    hud_total_score SetPulseFX(0, 0, 1000);
-    for(i = 0; i < level.arcademode_hud_digits; i++) {
-      hud_score = level.arcademode_hud_total_scores[i];
-      hud_score SetPulseFX(0, 0, 1000);
-    }
-  }
-
-  if(level.arcadeMode_success) {
-    wait(0.5);
-    level.arcademode_hud_timer_seconds_ones SetPulseFX(0, 0, 1000);
-    level.arcademode_hud_timer_seconds_tens SetPulseFX(0, 0, 1000);
-    level.arcademode_hud_timer_minutes_ones SetPulseFX(0, 0, 1000);
-    level.arcademode_hud_timer_minutes_tens SetPulseFX(0, 0, 1000);
-    hud_timer_colon SetPulseFX(0, 0, 1000);
-    hud_time_remaining SetPulseFX(0, 0, 1000);
   }
 
   wait(1);
-  if(getdvar("arcademode_full") == "1") {
-    logString("ArcadeMode Score: " + score + ", mission: " + level.script + ", gameskill: " + level.gameskill + ", total: " + combined_score);
-  } else {
-    logString("ArcadeMode Score: " + score + ", mission: " + level.script + ", gameskill: " + level.gameskill);
+
+  hud_newhighscore = new_ending_hud("center", fade_in_time, 0, scoreBoostYPos);
+  // NEW HIGH SCORE!
+  hud_newhighscore settext(&"SCRIPT_NEW_HIGH_SCORE");
+  hud_newhighscore.alpha = 1;
+  hud_newhighscore fadeovertime(0.05);
+  hud_newhighscore SetPulseFX(30, 3000, 1000);
+  wait(3.5);
+}
+
+wait(2);
+
+hud_end_reason SetPulseFX(0, 0, 1000);
+wait(0.5);
+
+hud_mission_score SetPulseFX(0, 0, 1000);
+for(i = 0; i < level.arcademode_hud_digits; i++) {
+  hud_score = level.arcademode_hud_scores[i];
+  hud_score SetPulseFX(0, 0, 1000);
+}
+
+if(getdvar("arcademode_full") == "1") {
+  hud_total_score SetPulseFX(0, 0, 1000);
+  for(i = 0; i < level.arcademode_hud_digits; i++) {
+    hud_score = level.arcademode_hud_total_scores[i];
+    hud_score SetPulseFX(0, 0, 1000);
   }
+}
 
-  setdvar("arcademode_combined_score", combined_score);
-  if(!level.arcadeMode_success) {
-    setdvar("ui_arcade_lost", 1);
-    end_mission();
-  } else
-    setdvar("ui_arcade_lost", 0);
+if(level.arcadeMode_success) {
+  wait(0.5);
+  level.arcademode_hud_timer_seconds_ones SetPulseFX(0, 0, 1000);
+  level.arcademode_hud_timer_seconds_tens SetPulseFX(0, 0, 1000);
+  level.arcademode_hud_timer_minutes_ones SetPulseFX(0, 0, 1000);
+  level.arcademode_hud_timer_minutes_tens SetPulseFX(0, 0, 1000);
+  hud_timer_colon SetPulseFX(0, 0, 1000);
+  hud_time_remaining SetPulseFX(0, 0, 1000);
+}
 
-  flag_set("arcademode_ending_complete");
+wait(1);
+if(getdvar("arcademode_full") == "1") {
+  logString("ArcadeMode Score: " + score + ", mission: " + level.script + ", gameskill: " + level.gameskill + ", total: " + combined_score);
+} else {
+  logString("ArcadeMode Score: " + score + ", mission: " + level.script + ", gameskill: " + level.gameskill);
+}
+
+setdvar("arcademode_combined_score", combined_score);
+if(!level.arcadeMode_success) {
+  setdvar("ui_arcade_lost", 1);
+  end_mission();
+} else
+  setdvar("ui_arcade_lost", 0);
+
+flag_set("arcademode_ending_complete");
 }
 
 arcademode_end_boost(score, combined_score, boost, string, sound, ypos, fade_in_time) {

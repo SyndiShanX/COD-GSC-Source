@@ -104,7 +104,9 @@ handleWorldDeath(attacker, lifeId, sMeansOfDeath, sHitLoc) {
 
   if(level.teamBased && attacker.team != self.team) {
     if(isDefined(level.onNormalDeath) && isPlayer(attacker) && attacker.team != "spectator") {
-      [[level.onNormalDeath]](self, attacker, lifeId);
+      [
+        [level.onNormalDeath]
+      ](self, attacker, lifeId);
     }
   }
 }
@@ -190,8 +192,7 @@ handleNormalDeath(lifeId, attacker, eInflictor, sWeapon, sMeansOfDeath) {
 
     if(isDefined(attacker.lastStand)) {
       value = maps\mp\gametypes\_rank::getScoreInfoValue("kill") * 2;
-    }
-    else {
+    } else {
       value = undefined;
     }
 
@@ -199,8 +200,7 @@ handleNormalDeath(lifeId, attacker, eInflictor, sWeapon, sMeansOfDeath) {
   } else {
     if(isDefined(attacker.lastStand)) {
       value = maps\mp\gametypes\_rank::getScoreInfoValue("kill") * 2;
-    }
-    else {
+    } else {
       value = undefined;
     }
   }
@@ -254,8 +254,7 @@ handleNormalDeath(lifeId, attacker, eInflictor, sWeapon, sMeansOfDeath) {
         case "pavelow_minigun_mp":
           if(isDefined(eInflictor) && isDefined(eInflictor.lifeId)) {
             killstreakLifeId = eInflictor.lifeId;
-          }
-          else {
+          } else {
             killstreakLifeId = attacker.lifeId;
           }
 
@@ -411,17 +410,13 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
   if(!isDefined(victim.idFlags)) {
     if(sMeansOfDeath == "MOD_SUICIDE") {
       victim.idFlags = 0;
-    }
-    else if(sMeansOfDeath == "MOD_GRENADE" && isSubstr(sWeapon, "frag_grenade") && iDamage == 100000) {
+    } else if(sMeansOfDeath == "MOD_GRENADE" && isSubstr(sWeapon, "frag_grenade") && iDamage == 100000) {
       victim.idFlags = 0;
-    }
-    else if(sWeapon == "nuke_mp") {
+    } else if(sWeapon == "nuke_mp") {
       victim.idFlags = 0;
-    }
-    else if(level.friendlyfire >= 2) {
+    } else if(level.friendlyfire >= 2) {
       victim.idFlags = 0;
-    }
-    else {
+    } else {
       assertEx(0, "Victims ID flags not set, but means of death was gr or nuke: " + sMeansOfDeath);
     }
   }
@@ -455,11 +450,9 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
 
   if(!isPlayer(eInflictor) && isDefined(eInflictor.primaryWeapon)) {
     sPrimaryWeapon = eInflictor.primaryWeapon;
-  }
-  else if(isDefined(attacker) && isPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none") {
+  } else if(isDefined(attacker) && isPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none") {
     sPrimaryWeapon = attacker getCurrentPrimaryWeapon();
-  }
-  else {
+  } else {
     sPrimaryWeapon = undefined;
   }
 
@@ -508,8 +501,7 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
 
       if(victim.attackerData[player.guid].damage > 1 && !isDefined(bestPlayer)) {
         bestPlayer = player;
-      }
-      else if(isDefined(bestPlayer) && victim.attackerData[player.guid].damage > victim.attackerData[bestPlayer.guid].damage) {
+      } else if(isDefined(bestPlayer) && victim.attackerData[player.guid].damage > victim.attackerData[bestPlayer.guid].damage) {
         bestPlayer = player;
       }
     }
@@ -535,8 +527,7 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
   // override MOD
   if(isHeadShot(sWeapon, sHitLoc, sMeansOfDeath, attacker)) {
     sMeansOfDeath = "MOD_HEAD_SHOT";
-  }
-  else if(sMeansOfDeath != "MOD_MELEE" && !isDefined(victim.nuked)) {
+  } else if(sMeansOfDeath != "MOD_MELEE" && !isDefined(victim.nuked)) {
     victim playDeathSound();
   }
 
@@ -682,8 +673,7 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
 
   if(isPlayer(attacker)) {
     attackerNum = attacker getEntityNumber();
-  }
-  else {
+  } else {
     attackerNum = -1;
   }
   killcamentity = victim getKillcamEntity(attacker, eInflictor, sWeapon);
@@ -702,9 +692,9 @@ PlayerKilled_internal(eInflictor, attacker, victim, iDamage, sMeansOfDeath, sWea
     doKillcam = true;
   }
 
-    if(isDefined(attacker.finalKill)) {
-      maps\mp\_awards::addAwardWinner("finalkill", attacker.clientid);
-    }
+  if(isDefined(attacker.finalKill)) {
+    maps\mp\_awards::addAwardWinner("finalkill", attacker.clientid);
+  }
 
   //prof_end( " PlayerKilled_5" );
   //prof_begin( " PlayerKilled_6" );
@@ -1086,8 +1076,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
       // fix turret + shield challenge exploits
       if(sWeapon == "turret_minigun_mp") {
         shieldDamage = 25;
-      }
-      else {
+      } else {
         shieldDamage = maps\mp\perks\_perks::cac_modified_damage(victim, eAttacker, iDamage, sMeansOfDeath, sWeapon, vPoint, vDir, sHitLoc);
       }
 
@@ -1101,8 +1090,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
       if(victim.shieldBulletHits >= level.riotShieldXPBullets) {
         if(self.recentShieldXP > 4) {
           xpVal = int(50 / self.recentShieldXP);
-        }
-        else {
+        } else {
           xpVal = 50;
         }
 
@@ -1202,8 +1190,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
   if(maps\mp\gametypes\_tweakables::getTweakableValue("game", "onlyheadshots")) {
     if(sMeansOfDeath == "MOD_PISTOL_BULLET" || sMeansOfDeath == "MOD_RIFLE_BULLET" || sMeansOfDeath == "MOD_EXPLOSIVE_BULLET") {
       return;
-    }
-    else if(sMeansOfDeath == "MOD_HEAD_SHOT") {
+    } else if(sMeansOfDeath == "MOD_HEAD_SHOT") {
       iDamage = 150;
     }
   }
@@ -1366,8 +1353,7 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
 
       if(issubstr(sMeansOfDeath, "MOD_GRENADE") && isDefined(eInflictor.isCooked)) {
         victim.wasCooked = getTime();
-      }
-      else {
+      } else {
         victim.wasCooked = undefined;
       }
 
@@ -1391,22 +1377,18 @@ Callback_PlayerDamage_internal(eInflictor, eAttacker, victim, iDamage, iDFlags, 
 
     if(attackerIsNPC && isDefined(eAttacker.gunner)) {
       damager = eAttacker.gunner;
-    }
-    else {
+    } else {
       damager = eAttacker;
     }
 
     if(isDefined(damager) && damager != victim && iDamage > 0) {
       if(iDFlags &level.iDFLAGS_STUN) {
         typeHit = "stun";
-      }
-      else if(victim hasPerk("specialty_armorvest", true) || (isExplosiveDamage(sMeansOfDeath) && victim _hasPerk("_specialty_blastshield"))) {
+      } else if(victim hasPerk("specialty_armorvest", true) || (isExplosiveDamage(sMeansOfDeath) && victim _hasPerk("_specialty_blastshield"))) {
         typeHit = "hitBodyArmor";
-      }
-      else if(victim _hasPerk("specialty_combathigh")) {
+      } else if(victim _hasPerk("specialty_combathigh")) {
         typeHit = "hitEndGame";
-      }
-      else {
+      } else {
         typeHit = "standard";
       }
 
@@ -1498,11 +1480,9 @@ addAttacker(victim, eAttacker, eInflictor, sWeapon, iDamage, vPoint, vDir, sHitL
 
   if(isDefined(eInflictor) && !isPlayer(eInflictor) && isDefined(eInflictor.primaryWeapon)) {
     victim.attackerData[eAttacker.guid].sPrimaryWeapon = eInflictor.primaryWeapon;
-  }
-  else if(isDefined(eAttacker) && isPlayer(eAttacker) && eAttacker getCurrentPrimaryWeapon() != "none") {
+  } else if(isDefined(eAttacker) && isPlayer(eAttacker) && eAttacker getCurrentPrimaryWeapon() != "none") {
     victim.attackerData[eAttacker.guid].sPrimaryWeapon = eAttacker getCurrentPrimaryWeapon();
-  }
-  else {
+  } else {
     victim.attackerData[eAttacker.guid].sPrimaryWeapon = undefined;
   }
 }
@@ -1560,16 +1540,14 @@ Callback_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, 
   lastStandParams.attackerPosition = attacker.origin;
   if(attacker == self) {
     lastStandParams.sMeansOfDeath = "MOD_SUICIDE";
-  }
-  else {
+  } else {
     lastStandParams.sMeansOfDeath = sMeansOfDeath;
   }
 
   lastStandParams.sWeapon = sWeapon;
   if(isDefined(attacker) && isPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none") {
     lastStandParams.sPrimaryWeapon = attacker getCurrentPrimaryWeapon();
-  }
-  else {
+  } else {
     lastStandParams.sPrimaryWeapon = undefined;
   }
   lastStandParams.vDir = vDir;
@@ -1593,12 +1571,12 @@ Callback_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, 
     mayDoLastStand = true;
   }
 
-    if(!mayDoLastStand) {
-      self.lastStandParams = lastStandParams;
-      self.useLastStandParams = true;
-      self _suicide();
-      return;
-    }
+  if(!mayDoLastStand) {
+    self.lastStandParams = lastStandParams;
+    self.useLastStandParams = true;
+    self _suicide();
+    return;
+  }
 
   self.inLastStand = true;
 
@@ -1630,7 +1608,7 @@ Callback_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, 
 
     weaponList = self GetWeaponsListExclusives();
     foreach(weapon in weaponList) {
-    self takeWeapon(weapon);
+      self takeWeapon(weapon);
     }
 
     self _disableUsability();
@@ -2106,8 +2084,7 @@ updateUsableByTeam(team) {
   foreach(player in level.players) {
     if(team == player.team && player != self.owner) {
       self enablePlayerUse(player);
-    }
-    else {
+    } else {
       self disablePlayerUse(player);
     }
   }
@@ -2168,8 +2145,7 @@ reviveTriggerThink(team) {
 
       if(self.owner _hasPerk("specialty_lightweight")) {
         self.owner.moveSpeedScaler = 1.07;
-      }
-      else {
+      } else {
         self.owner.moveSpeedScaler = 1;
       }
 
@@ -2376,11 +2352,9 @@ _obituary(victim, attacker, sWeapon, sMeansOfDeath) {
     playerTeam = player.team;
     if(playerTeam == "spectator") {
       player iPrintLn(&"MP_OBITUARY_NEUTRAL", attacker.name, victim.name);
-    }
-    else if(playerTeam == victimTeam) {
+    } else if(playerTeam == victimTeam) {
       player iPrintLn(&"MP_OBITUARY_ENEMY", attacker.name, victim.name);
-    }
-    else {
+    } else {
       player iPrintLn(&"MP_OBITUARY_FRIENDLY", attacker.name, victim.name);
     }
   }

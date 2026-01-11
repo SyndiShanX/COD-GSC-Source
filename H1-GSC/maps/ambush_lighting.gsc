@@ -60,8 +60,7 @@ handle_ambush_tower_blackout_lighting() {
 
   if(getdvarint("use_old_tower_fall_cinematic_fx") == 1) {
     thread handle_tower_fall_cinematic_fx_preh1();
-  }
-  else {
+  } else {
     thread handle_tower_fall_cinematic_fx();
   }
 
@@ -138,12 +137,12 @@ setup_daytime_lights() {
   var_2 = getEntArray("bright_fixtures", "targetname");
 
   foreach(var_4 in var_2) {
-  var_4 delete();
+    var_4 delete();
   }
 
   var_6 = getEntArray("bright_lights", "targetname");
 
   foreach(var_8 in var_6) {
-  var_8 setlightintensity(1);
+    var_8 setlightintensity(1);
   }
 }

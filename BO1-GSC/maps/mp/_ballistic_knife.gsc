@@ -28,8 +28,7 @@ onspawn(watcher, player) {
     if(isDefined(prey)) {
       if(level.teamBased && isPlayer(prey) && player.team == prey.team) {
         isFriendly = true;
-      }
-      else if(level.teamBased && isAI(prey) && player.team == prey.aiTeam) {
+      } else if(level.teamBased && isAI(prey) && player.team == prey.aiTeam) {
         isFriendly = true;
       }
       if(!isFriendly) {
@@ -50,8 +49,7 @@ onspawn(watcher, player) {
     retrievable_model thread dropKnivesToGround();
     if(isFriendly) {
       player notify("ballistic_knife_stationary", retrievable_model, normal);
-    }
-    else {
+    } else {
       player notify("ballistic_knife_stationary", retrievable_model, normal, prey);
     }
     retrievable_model thread wait_to_show_glowing_model(prey);
@@ -115,15 +113,13 @@ onSpawnRetrieveTrigger(watcher, player) {
   }
   if(!level.teamBased) {
     pickup_trigger SetTeamForTrigger("none");
-  }
-  else {
+  } else {
     pickup_trigger SetTeamForTrigger(player.team);
   }
   pickup_trigger EnableLinkTo();
   if(isDefined(prey)) {
     pickup_trigger LinkTo(prey);
-  }
-  else {
+  } else {
     pickup_trigger LinkTo(retrievable_model);
   }
   retrievable_model thread watch_use_trigger(pickup_trigger, retrievable_model, ::pick_up, watcher.pickUpSoundPlayer, watcher.pickUpSound);

@@ -276,8 +276,7 @@ second_wave_investigate_beartrap(e_trap) {
   level notify("player_position_located");
 }
 
-animate_the_bear_trap() {
-}
+animate_the_bear_trap() {}
 
 beartrap_mortar_plant_think() {
   level.player endon("death");
@@ -308,11 +307,9 @@ beartrap_mortar_plant_think() {
 
       if(total_mortars == 0) {
         level.player takeweapon("mortar_shell_dpad_sp");
-      }
-      else if(level.player getweaponammostock("mortar_shell_dpad_sp") > 0) {
+      } else if(level.player getweaponammostock("mortar_shell_dpad_sp") > 0) {
         level.player setweaponammostock("mortar_shell_dpad_sp", level.player getweaponammostock("mortar_shell_dpad_sp") - 1);
-      }
-      else if(level.player getweaponammoclip("mortar_shell_dpad_sp") > 0) {
+      } else if(level.player getweaponammoclip("mortar_shell_dpad_sp") > 0) {
         level.player setweaponammoclip("mortar_shell_dpad_sp", level.player getweaponammoclip("mortar_shell_dpad_sp") - 1);
       }
 
@@ -441,7 +438,7 @@ play_plant_mortar_anim(beartrap) {
   level.player playerlinktoabsolute(player_rig, "tag_player");
 
   foreach(guy in guys) {
-  guy show();
+    guy show();
   }
 
   beartrap anim_single_aligned(guys, "mortar_plant");
@@ -468,8 +465,7 @@ beartrap_refill_think() {
 
     if(b_beartraps) {
       self givemaxammo("beartrap_sp");
-    }
-    else {
+    } else {
       self giveweapon("beartrap_sp");
     }
   }
@@ -491,8 +487,7 @@ mortar_refill_think() {
 
     if(b_mortars) {
       self givemaxammo("mortar_shell_dpad_sp");
-    }
-    else {
+    } else {
       self giveweapon("mortar_shell_dpad_sp");
     }
   }
@@ -511,8 +506,7 @@ moderate_number_of_beartraps() {
     if(isDefined(trap)) {
       if(level.active_beartraps.size < 10) {
         level.active_beartraps[level.active_beartraps.size] = trap;
-      }
-      else {
+      } else {
         level.active_beartraps = add_beartrap_into_full_array(trap);
       }
     }

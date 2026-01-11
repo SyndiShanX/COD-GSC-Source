@@ -55,7 +55,7 @@ main() {
   level.race_times["hard"] = 90;
   level.race_times["veteran"] = 70;
   foreach(player in level.players) {
-  player thread star_challenge(level.race_times["veteran"], level.race_times["hard"], level.race_times["normal"]);
+    player thread star_challenge(level.race_times["veteran"], level.race_times["hard"], level.race_times["normal"]);
   }
 
   thread enable_challenge_timer("race_started", "finish_line");
@@ -157,8 +157,7 @@ race_finished(was_success) {
     waittillframeend;
     if(is_coop()) {
       flag_set("so_snowrace_complete");
-    }
-    else {
+    } else {
       missionfailedwrapper();
     }
   }
@@ -175,8 +174,7 @@ print_winners() {
 
     if(player == level.raceWinner) {
       player.winnertext thread so_hud_pulse_success(&"SO_SNOWRACE1_CLIFFHANGER_YOUWIN");
-    }
-    else {
+    } else {
       player.winnertext thread so_hud_pulse_failure(&"SO_SNOWRACE1_CLIFFHANGER_YOULOSE");
     }
 
@@ -302,9 +300,9 @@ spawn_enemy_bike_snowrace() {
 
   debug_enemy_vehicles();
 
-    if(level.enemy_snowmobiles.size >= level.enemy_snowmobiles_max) {
-      return;
-    }
+  if(level.enemy_snowmobiles.size >= level.enemy_snowmobiles_max) {
+    return;
+  }
 
   player_targ = get_player_targ();
   player_progress = get_player_progress();
@@ -384,11 +382,9 @@ star_challenge(three_star_time, two_star_time, one_star_time) {
   elapsedTime = gettime() - start_time;
   if(elapsedTime <= three_star_time) {
     self.forcedGameSkill = 3;
-  }
-  else if(elapsedTime <= two_star_time) {
+  } else if(elapsedTime <= two_star_time) {
     self.forcedGameSkill = 2;
-  }
-  else {
+  } else {
     self.forcedGameSkill = 1;
   }
 }

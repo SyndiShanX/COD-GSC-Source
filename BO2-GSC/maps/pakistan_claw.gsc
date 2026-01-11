@@ -128,7 +128,7 @@ setup_garage_doors() {
   a_jiffy_window_after = getEntArray("jiffy_window_after", "targetname");
 
   foreach(destroyed_piece in a_jiffy_window_after) {
-  destroyed_piece hide();
+    destroyed_piece hide();
   }
 
   m_right_path_train_car = getent("right_path_train_car", "targetname");
@@ -307,7 +307,7 @@ intro_courtyard_defend() {
   level thread vo_claw_enemy();
 
   foreach(veh in a_intro_courtyard_convoy) {
-  veh veh_magic_bullet_shield(0);
+    veh veh_magic_bullet_shield(0);
   }
 
   flag_wait("claw_garage_defend_harper_start_done");
@@ -415,7 +415,7 @@ courtyard_heli_waves() {
   a_rooftop_rpg_squad = simple_spawn("rooftop_rpg_squad");
 
   foreach(guy in a_rooftop_rpg_squad) {
-  guy thread shoot_at_target_untill_dead(ai_rooftop_claw, undefined, 3);
+    guy thread shoot_at_target_untill_dead(ai_rooftop_claw, undefined, 3);
   }
 
   level.harper thread queue_dialog("harp_watch_out_got_rpgs_0", 1);
@@ -636,13 +636,13 @@ watch_window_damage() {
   a_jiffy_window_before = getEntArray("jiffy_window_before", "targetname");
 
   foreach(prestine_piece in a_jiffy_window_before) {
-  prestine_piece hide();
+    prestine_piece hide();
   }
 
   a_jiffy_window_after = getEntArray("jiffy_window_after", "targetname");
 
   foreach(destroyed_piece in a_jiffy_window_after) {
-  destroyed_piece show();
+    destroyed_piece show();
   }
 }
 
@@ -704,7 +704,7 @@ monitor_train_depot_guys() {
   a_str_ai_group = get_ai_group_ai("archway_guys");
 
   foreach(guy_alive in a_str_ai_group) {
-  guy_alive thread ai_fallback_reengage("archway_fallback");
+    guy_alive thread ai_fallback_reengage("archway_fallback");
   }
 
   trigger_use("archway_axis_color_trig");
@@ -803,7 +803,7 @@ claw_enemies_intro() {
   a_intro_claw_guys = get_ai_group_ai("intro_claw_guys");
 
   foreach(guy in a_intro_claw_guys) {
-  guy thread ai_fallback_reengage("archway_fallback");
+    guy thread ai_fallback_reengage("archway_fallback");
   }
 
   autosave_by_name("player_in_claw");
@@ -904,31 +904,31 @@ cleanup_intro_defend() {
   a_heli_1_drop_guys = get_ai_group_ai("heli_1_drop_guys");
 
   foreach(guy in a_heli_1_drop_guys) {
-  guy delete();
+    guy delete();
   }
 
   a_garage_door_guys = get_ai_group_ai("garage_door_guys");
 
   foreach(guy in a_garage_door_guys) {
-  guy delete();
+    guy delete();
   }
 
   a_gaz_tigr_guys = get_ai_group_ai("gaz_tigr_guys");
 
   foreach(guy in a_gaz_tigr_guys) {
-  guy delete();
+    guy delete();
   }
 
   a_street_courtyard_squad = get_ai_group_ai("street_courtyard_squad");
 
   foreach(guy in a_street_courtyard_squad) {
-  guy delete();
+    guy delete();
   }
 
   a_garage_nodes = getnodearray("garage_nodes", "targetname");
 
   foreach(node in a_garage_nodes) {
-  node maps\_dynamic_nodes::node_disconnect_from_path();
+    node maps\_dynamic_nodes::node_disconnect_from_path();
   }
 }
 
@@ -1022,8 +1022,7 @@ player_claw_idle_death_timeout() {
 
     if(!flag("street_claw_dead")) {
       kill_ai_street_claw();
-    }
-    else if(!flag("rooftop_claw_dead")) {
+    } else if(!flag("rooftop_claw_dead")) {
       kill_ai_roof_claw();
 
       if(!flag("start_courtyard_event")) {
@@ -1121,8 +1120,7 @@ spawn_vehicle_claw(v_origin, v_angles) {
 spawn_vehicle_ground_claw() {
   if(level.b_flamethrower_unlocked) {
     level.claw[0] = spawn_vehicle_from_targetname("starting_claw_with_flamethrower");
-  }
-  else {
+  } else {
     level.claw[0] = spawn_vehicle_from_targetname("starting_claw_no_flamethrower");
   }
 
@@ -1272,8 +1270,7 @@ claw_fire_grenade(delay_time) {
 
   if(level.wiiu) {
     v_end_pos = v_start_pos + anglesToForward(level.player getgunangles()) * n_grenade_max_range;
-  }
-  else {
+  } else {
     v_end_pos = v_start_pos + anglesToForward(self gettagangles("tag_barrel")) * n_grenade_max_range;
   }
 
@@ -1562,7 +1559,7 @@ claw_ending() {
   a_heli_3_drop_guys = get_ai_group_ai("heli_3_drop_guys");
 
   foreach(guy in a_heli_3_drop_guys) {
-  guy die();
+    guy die();
   }
 
   flag_set("stop_claw_switch_think");
@@ -1584,8 +1581,7 @@ claw_ending() {
 ending_switch_to_player() {
   if(isDefined(level.claw[0]) && level.claw[0].b_player_controlled && !flag("street_claw_dead")) {
     level.claw[0] remove_player_from_claw();
-  }
-  else if(isDefined(level.claw[1]) && level.claw[1].b_player_controlled && !flag("rooftop_claw_dead")) {
+  } else if(isDefined(level.claw[1]) && level.claw[1].b_player_controlled && !flag("rooftop_claw_dead")) {
     level.claw[1] remove_player_from_claw();
   }
 }
@@ -1636,8 +1632,7 @@ courtyard_drone_cleanup() {
 level_notify_claws_survival_status() {
   if(!flag("rooftop_claw_dead") && !flag("street_claw_dead")) {
     level notify("claws_survived");
-  }
-  else {
+  } else {
     level notify("claws_destroyed");
   }
 }
@@ -1659,7 +1654,7 @@ garage_cleanup_ai() {
   a_ai_isi = getaiarray("axis");
 
   foreach(ai_isi in a_ai_isi) {
-  ai_isi die();
+    ai_isi die();
   }
 }
 
@@ -1669,7 +1664,7 @@ courtyard_cleanup_timeout() {
   a_ai_enemies = getaiarray("axis");
 
   foreach(ai_enemy in a_ai_enemies) {
-  ai_enemy die();
+    ai_enemy die();
   }
 }
 
@@ -2010,8 +2005,7 @@ get_targets(str_target, str_key, str_ai_team) {
 
   if(isDefined(str_ai_team)) {
     a_e_targets = getaiarray(str_ai_team);
-  }
-  else {
+  } else {
     a_e_targets = get_vehicle_array(str_target, str_key);
 
     if(!isDefined(a_e_targets)) {

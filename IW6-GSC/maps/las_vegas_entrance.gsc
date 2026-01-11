@@ -64,7 +64,7 @@ change_chopper_spawner(var_0, var_1) {
   var_5 = getEntArray(var_2.target, "targetname");
 
   foreach(var_7 in var_5) {
-  var_7.targetname = var_3.targetname;
+    var_7.targetname = var_3.targetname;
   }
 
   var_2.target = var_3.targetname;
@@ -86,7 +86,7 @@ entrance() {
   init_courtyard();
 
   foreach(var_1 in level.heroes) {
-  var_1 show();
+    var_1 show();
   }
 
   setsaveddvar("ai_friendlyFireBlockDuration", "2000");
@@ -879,8 +879,7 @@ f18_sidewinder(var_0) {
   for(;;) {
     if(isDefined(var_0)) {
       var_7 = var_0.origin;
-    }
-    else {
+    } else {
       var_7 = (-20000, randomfloatrange(-38000, -36000), randomfloatrange(3000, 6000));
     }
 
@@ -911,8 +910,7 @@ postspawn_exfil_chopper() {
 
   if(self.script_index == 1) {
     self.preferred_death_anim = "aas_72x_explode_C";
-  }
-  else {
+  } else {
     self.preferred_death_anim = "aas_72x_explode_B";
   }
 
@@ -927,8 +925,7 @@ postspawn_exfil_f18() {
 
   if(isDefined(self.script_index)) {
     var_0 playSound("veh_f18_long_flyby2");
-  }
-  else {
+  } else {
     var_0 playSound("veh_f18_long_flyby");
   }
 }
@@ -1060,14 +1057,11 @@ postspawn_entrance_chopper_unloader() {
 
     if(var_2 == 2) {
       var_1.delay = 0 + var_3;
-    }
-    else if(var_2 == 3) {
+    } else if(var_2 == 3) {
       var_1.delay = 1 + var_3;
-    }
-    else if(var_2 == 4) {
+    } else if(var_2 == 4) {
       var_1.delay = 3 + var_3;
-    }
-    else if(var_2 == 5) {
+    } else if(var_2 == 5) {
       var_1.delay = 4 + var_3;
     }
 

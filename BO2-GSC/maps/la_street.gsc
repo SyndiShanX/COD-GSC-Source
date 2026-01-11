@@ -76,13 +76,13 @@ street_opitimizations() {
   a_cell_structs = getstructarray("plaza_cell", "targetname");
 
   foreach(struct in a_cell_structs) {
-  setcellinvisibleatpos(struct.origin);
+    setcellinvisibleatpos(struct.origin);
   }
 
   flag_wait("player_moved_down_the_street");
 
   foreach(struct in a_cell_structs) {
-  setcellvisibleatpos(struct.origin);
+    setcellvisibleatpos(struct.origin);
   }
 }
 
@@ -851,7 +851,7 @@ semi_ammo_cache_think() {
   a_semi_caches = getEntArray("semi_ammo_cache", "script_noteworthy");
 
   foreach(m_cache in a_semi_caches) {
-  m_cache hide();
+    m_cache hide();
   }
 
   flag_wait("fl_clear_the_street");
@@ -1000,8 +1000,7 @@ drone_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_mea
     if(e_inflictor.vehicletype == "heli_quadrotor") {
       if(isDefined(e_inflictor.team) && e_inflictor.team == "allies") {
         n_damage = 0;
-      }
-      else {
+      } else {
         n_damage = n_damage * 2;
       }
     }
@@ -1134,8 +1133,7 @@ street_claw_vo_player() {
 
     if(!flag("harper_dead")) {
       level.harper queue_dialog("pmc0_they_re_in_the_killz_0");
-    }
-    else {
+    } else {
       level.cop_1 queue_dialog("pmc0_they_re_in_the_killz_0");
     }
 
@@ -1196,11 +1194,9 @@ street_shellshock_and_visionset() {
   visionsetnaked(current_vision_set, 10);
 }
 
-intruder_gatecrash(m_player) {
-}
+intruder_gatecrash(m_player) {}
 
-intruder_zap(m_player) {
-}
+intruder_zap(m_player) {}
 
 intruder_zap_start(m_cutter) {
   m_cutter play_fx("laser_cutter_sparking", undefined, undefined, "stop_fx", 1, "tag_fx");
@@ -1280,8 +1276,7 @@ follow_player(follow_close) {
 
     if(follow_close) {
       wait 0.5;
-    }
-    else {
+    } else {
       wait 3;
     }
   }

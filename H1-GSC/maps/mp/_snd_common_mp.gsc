@@ -41,8 +41,7 @@ snd_mp_player_join() {
 
   if(!isDefined(level._snd.dynamic_event_happened) || !level._snd.dynamic_event_happened) {
     self clientaddsoundsubmix("mp_pre_event_mix");
-  }
-  else {
+  } else {
     self clientclearsoundsubmix("mp_pre_event_mix");
     self clientaddsoundsubmix("mp_post_event_mix");
   }
@@ -68,11 +67,9 @@ snd_music_message(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     childthread snd_message("snd_music_handler", var_0, var_1, var_2);
-  }
-  else if(isDefined(var_1)) {
+  } else if(isDefined(var_1)) {
     childthread snd_message("snd_music_handler", var_0, var_1);
-  }
-  else {
+  } else {
     childthread snd_message("snd_music_handler", var_0);
   }
 }
@@ -81,14 +78,11 @@ snd_message(var_0, var_1, var_2, var_3) {
   if(isDefined(level._snd.messages[var_0])) {
     if(isDefined(var_3)) {
       thread[[level._snd.messages[var_0]]](var_1, var_2, var_3);
-    }
-    else if(isDefined(var_2)) {
+    } else if(isDefined(var_2)) {
       thread[[level._snd.messages[var_0]]](var_1, var_2);
-    }
-    else if(isDefined(var_1)) {
+    } else if(isDefined(var_1)) {
       thread[[level._snd.messages[var_0]]](var_1);
-    }
-    else {
+    } else {
       thread[[level._snd.messages[var_0]]]();
     }
   }

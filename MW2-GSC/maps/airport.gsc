@@ -300,12 +300,12 @@ intro_main() {
 
   nodes = GetNodeArray("lobby_moveup_nodes", "targetname");
   foreach(node in nodes) {
-  level.team[node.script_noteworthy] thread lobby_moveout_to_stairs(node);
+    level.team[node.script_noteworthy] thread lobby_moveout_to_stairs(node);
   }
 
   nodes = GetNodeArray("prestairs_nodes", "targetname");
   foreach(node in nodes) {
-  level.team[node.script_noteworthy] thread lobby_prestairs_nodes_behavior(node);
+    level.team[node.script_noteworthy] thread lobby_prestairs_nodes_behavior(node);
   }
 }
 
@@ -355,7 +355,7 @@ intro_dead_bodies() {
   array = intro_setup_dead_bodies();
 
   foreach(model in array) {
-  model Hide();
+    model Hide();
   }
 
   flag_wait("lobby_open_fire");
@@ -369,7 +369,7 @@ intro_dead_bodies() {
 
   flag_wait("player_set_speed_stairs");
   foreach(model in array) {
-  model Show();
+    model Show();
   }
 }
 
@@ -379,7 +379,7 @@ intro_setup_dead_bodies() {
 
   array = [];
   foreach(key, model in models) {
-  array["upperdeck_dead_body" + key] = model;
+    array["upperdeck_dead_body" + key] = model;
   }
 
   array["stairs_dead_body"] = GetEnt("stairs_dead_body", "targetname");
@@ -414,7 +414,7 @@ intro_civilians() {
   drones = getEntArray("intro_lobby_crowd_2", "targetname");
 
   foreach(drone in drones) {
-  delayThread(1, ::dronespawn, drone);
+    delayThread(1, ::dronespawn, drone);
   }
 
   array_thread(getEntArray("lobby_people", "targetname"), ::add_spawn_function, ::lobby_ai_logic);
@@ -456,7 +456,7 @@ elevator_scene() {
   node = getstruct("intro_elevator_anim_node", "targetname");
   team = [];
   foreach(member in level.team) {
-  member thread elevator_scene_guy(node);
+    member thread elevator_scene_guy(node);
   }
 
   origin = GetEnt("snd_origin_intro_crowd", "targetname");
@@ -478,13 +478,13 @@ lobby_scene() {
 
   nodes = GetNodeArray("intro_initial_firing_positions", "targetname");
   foreach(node in nodes) {
-  level.team[node.script_noteworthy] thread lobby_moveout(node);
+    level.team[node.script_noteworthy] thread lobby_moveout(node);
   }
 
   flag_wait("lobby_open_fire");
 
   foreach(actor in level.team) {
-  actor.ignoreall = false;
+    actor.ignoreall = false;
   }
 
   origin = GetEnt("snd_origin_intro_crowd", "targetname");
@@ -596,7 +596,7 @@ stairs_main() {
 
   nodes = GetNodeArray("upperdeck_start_nodes", "targetname");
   foreach(node in nodes) {
-  level.team[node.script_noteworthy] thread stairs_team_at_top(node);
+    level.team[node.script_noteworthy] thread stairs_team_at_top(node);
   }
 
   flag_wait("stairs_upperdeck_civs_dead");
@@ -604,7 +604,7 @@ stairs_main() {
 
   nodes = getstructarray("upperdeck_team_path", "targetname");
   foreach(node in nodes) {
-  level.team[node.script_noteworthy] thread upperdeck_team_moveup(node);
+    level.team[node.script_noteworthy] thread upperdeck_team_moveup(node);
   }
 
   flag_wait("upperdeck_save");
@@ -637,7 +637,7 @@ massacre_main() {
 
   nodes = getstructarray("massacre_nodes", "targetname");
   foreach(node in nodes) {
-  level.team[node.script_noteworthy] thread massacre_killers(node);
+    level.team[node.script_noteworthy] thread massacre_killers(node);
   }
 
   trigger = GetEnt("massacre_rentacop_rush_guy", "target");
@@ -802,7 +802,7 @@ gate_main() {
 
   nodes = GetNodeArray("gate_moveup_nodes", "targetname");
   foreach(node in nodes) {
-  level.team[node.script_noteworthy] thread gate_moveout(node);
+    level.team[node.script_noteworthy] thread gate_moveout(node);
   }
 
   array_thread(getEntArray("gate_canned_deaths", "targetname"), ::upperdeck_canned_deaths_setup, "gate_canned_deaths");
@@ -866,7 +866,7 @@ basement_main() {
   array_thread(getEntArray("basement_flicker_light", "targetname"), ::basement_flicker_light);
 
   foreach(member in level.team) {
-  member thread basement_pre_moveout();
+    member thread basement_pre_moveout();
   }
 
   flag_wait("basement_near_entrance");
@@ -1002,7 +1002,7 @@ tarmac_main() {
   nodes = getstructarray("tarmac_moveout_nodes", "targetname");
   nodes = array_merge(nodes, GetNodeArray("tarmac_moveout_nodes", "targetname"));
   foreach(node in nodes) {
-  level.team[node.script_noteworthy] thread tarmac_moveout(node);
+    level.team[node.script_noteworthy] thread tarmac_moveout(node);
   }
 
   thread tarmac_hide_elevator();
@@ -1500,7 +1500,7 @@ escape_main() {
   level.makarov waittill("reached_path_end");
 
   foreach(member in level.survivors) {
-  member PushPlayer(true);
+    member PushPlayer(true);
   }
 
   node = undefined;
@@ -1544,8 +1544,7 @@ escape_main() {
 
   if(is_default_start()) {
     nextmission();
-  }
-  else {
+  } else {
     IPrintLnBold("DEVELOPER: END OF SCRIPTED LEVEL");
   }
 }
@@ -1568,8 +1567,7 @@ escape_palm_style_door_open(soundalias) {
 
   if(isDefined(soundalias)) {
     self playSound(soundalias);
-  }
-  else {
+  } else {
     self playSound("door_wood_slow_open");
   }
 
@@ -1644,7 +1642,7 @@ escape_end_sequence() {
 
   //Van Terrorist	Good, you made it! Get in.	
   foreach(member in team) {
-  member LinkTo(van, "tag_body");
+    member LinkTo(van, "tag_body");
   }
   team[team.size] = level.vanmate;
 
@@ -1673,8 +1671,7 @@ escape_end_sequence() {
 
   if(flag("player_ready_for_proper_ending")) {
     escape_animate_player_death();
-  }
-  else {
+  } else {
     escape_animate_player_death2();
   }
 
@@ -1686,8 +1683,7 @@ escape_end_sequence() {
 
   if(!flag("escape_player_realdeath")) {
     level.makarov SetLookAtEntity(level.player);
-  }
-  else {
+  } else {
     level.makarov SetLookAtEntity();
   }
 
@@ -1861,16 +1857,16 @@ escalator_sounds() {
   snds[snds.size] = spawn("script_origin", (4987.36, 1885.09, 64.9956));
 
   foreach(snd in snds) {
-  snd thread play_loop_sound_on_entity("emt_airport_escalator");
+    snd thread play_loop_sound_on_entity("emt_airport_escalator");
   }
 
   flag_waitopen("_escalator_on");
 
   foreach(snd in snds) {
-  snd stop_loop_sound_on_entity("emt_airport_escalator");
+    snd stop_loop_sound_on_entity("emt_airport_escalator");
   }
   foreach(snd in snds) {
-  snd thread play_sound_on_entity("emt_airport_escalator_stop");
+    snd thread play_sound_on_entity("emt_airport_escalator_stop");
   }
 }
 
@@ -1991,7 +1987,7 @@ start_basement() {
   }
 
   foreach(node in array) {
-  level.team[node.script_noteworthy] thread follow_path(node);
+    level.team[node.script_noteworthy] thread follow_path(node);
   }
 }
 
@@ -2141,12 +2137,12 @@ start_common_airport() {
 
   array = getEntArray("massacre_dummy", "targetname");
   foreach(obj in array) {
-  obj Hide();
+    obj Hide();
   }
 
   array = getEntArray("gate_canned_deaths", "targetname");
   foreach(obj in array) {
-  obj Hide();
+    obj Hide();
   }
 
   array = getEntArray("upperdeck_canned_deaths", "targetname");
@@ -2165,7 +2161,7 @@ start_common_airport() {
   trigs = getEntArray("kill_player", "targetname");
 
   foreach(trig in trigs) {
-  thread set_flag_on_trigger(trig, "trigger_kill_player");
+    thread set_flag_on_trigger(trig, "trigger_kill_player");
   }
 
   thread kill_player();
@@ -2201,13 +2197,12 @@ objective() {
   level.strings["mantle"] = &"SCRIPT_MANTLE";
 
   foreach(string in level.strings) {
-  PreCacheString(string);
+    PreCacheString(string);
   }
 
   if(is_default_start()) {
     wait 24 + 5.5;
-  }
-  else {
+  } else {
     wait .05;
   }
 
@@ -2249,22 +2244,22 @@ airport_music() {
 
       println(" *** MUSIC: airport_alternate *** ");
 
-        case "gate":
-        case "basement":
-        case "tarmac":
-        flag_wait("airport_anticipation");
+    case "gate":
+    case "basement":
+    case "tarmac":
+      flag_wait("airport_anticipation");
       thread music_stop(1);
       thread music_sfx_to_music("airport_anticipation", 308, undefined, 306);
 
       println(" *** MUSIC: airport_anticipation *** ");
 
-        case "escape":
-        flag_wait("airport_escape");
+    case "escape":
+      flag_wait("airport_escape");
       music_loop("airport_escape", 150);
 
       println(" *** MUSIC: airport_escape *** ");
 
-        flag_wait("escape_hold_your_fire");
+      flag_wait("escape_hold_your_fire");
       thread music_stop(2);
 
       snd = spawn("script_origin", level.player.origin);
@@ -2273,7 +2268,7 @@ airport_music() {
 
       println(" *** MUSIC: airport_doublecross *** ");
 
-        break;
+      break;
 
     default:
       AssertMsg("Unhandled start point " + level.start_point);

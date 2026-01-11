@@ -54,8 +54,7 @@ register_nonlinear_outpost(var_0, var_1) {
     if(isDefined(var_5.script_parameters)) {
       if(var_5.script_parameters == "outpost_transition") {
         level setup_transition_encounter(var_5);
-      }
-      else if(var_5.script_parameters == "outpost_conduit") {
+      } else if(var_5.script_parameters == "outpost_conduit") {
         level setup_conduit_encounter(var_5);
       }
     }
@@ -125,14 +124,14 @@ run_non_linear_encounters() {
       return;
     }
     foreach(var_2 in var_0.outpost_encounters) {
-    level thread outpost_encounter_enable(var_2);
+      level thread outpost_encounter_enable(var_2);
     }
 
     if(level.allow_backtrack_encounters) {
       foreach(var_5 in level.outposts) {
         if(var_5.name != level.current_area_name && var_5.opened) {
           foreach(var_2 in var_5.outpost_encounters) {
-          level thread outpost_encounter_enable(var_2);
+            level thread outpost_encounter_enable(var_2);
           }
         }
       }
@@ -201,8 +200,7 @@ encounter_outline_icon_hinttext(var_0) {
 
   if(var_0.type == "transition") {
     var_0.use_trigger sethintstring(&"MP_ALIEN_LAST_TRANSITION_OPEN_HINT");
-  }
-  else {
+  } else {
     var_0.use_trigger sethintstring(&"MP_ALIEN_LAST_CONDUIT_START_HINT");
   }
 
@@ -243,8 +241,7 @@ encounter_complete() {
 
   if(var_0.type == "transition") {
     thread transition_encounter_complete();
-  }
-  else {
+  } else {
     thread conduit_encounter_complete();
   }
 
@@ -304,11 +301,9 @@ run_conduit_encounter(var_0, var_1) {
 
   if(level.num_conduit_completed < 2) {
     level.cycle_count = var_0.cycle_count;
-  }
-  else if(level.num_conduit_completed < 4) {
+  } else if(level.num_conduit_completed < 4) {
     level.cycle_count = var_0.med_cycle;
-  }
-  else {
+  } else {
     level.cycle_count = var_0.hard_cycle;
   }
 
@@ -491,11 +486,9 @@ update_conduit_struct_any_order(var_0) {
 
   if(var_0.name == "conduit_gas_station_2" && level.gas_station_conduits_completed == 0) {
     swap_conduit_cycles_and_encounter("gas_station", "conduit_gas_station_1", "conduit_gas_station_2");
-  }
-  else if(var_0.name == "conduit_parking_2" && level.parking_conduits_completed == 0) {
+  } else if(var_0.name == "conduit_parking_2" && level.parking_conduits_completed == 0) {
     swap_conduit_cycles_and_encounter("parking", "conduit_parking_1", "conduit_parking_2");
-  }
-  else if(var_0.name == "conduit_rooftop_2" && level.rooftop_conduits_completed == 0) {
+  } else if(var_0.name == "conduit_rooftop_2" && level.rooftop_conduits_completed == 0) {
     swap_conduit_cycles_and_encounter("rooftop", "conduit_rooftop_1", "conduit_rooftop_2");
   }
 
@@ -524,7 +517,7 @@ increment_conduit_progress() {
   level.num_hive_destroyed++;
 
   foreach(var_1 in level.players) {
-  var_1 maps\mp\alien\_persistence::eog_player_update_stat("hivesdestroyed", 1);
+    var_1 maps\mp\alien\_persistence::eog_player_update_stat("hivesdestroyed", 1);
   }
 }
 
@@ -667,7 +660,7 @@ setup_transition_encounter(var_0) {
 
   if(isDefined(var_0.gate_pivot)) {
     foreach(var_6 in var_0.gate_models) {
-    var_6 linkto(var_0.gate_pivot);
+      var_6 linkto(var_0.gate_pivot);
     }
   }
 
@@ -885,8 +878,7 @@ opener_slide(var_0, var_1, var_2) {
 
   if(maps\mp\alien\_utility::is_true(var_2)) {
     var_0.gate_pivot movex(var_3, 1.0, 0.1, 0.1);
-  }
-  else {
+  } else {
     var_0.gate_pivot movez(var_3, 1.0, 0.1, 0.1);
   }
 
@@ -1043,8 +1035,7 @@ set_debug_startpointlocations() {
 init_drilling_parameters(var_0) {
   if(var_0.type == "transition") {
     var_1 = level.cycle_count;
-  }
-  else {
+  } else {
     var_1 = var_0.cycle_count;
   }
 
@@ -1061,14 +1052,13 @@ init_drilling_parameters(var_0) {
 
 give_players_rewards(var_0, var_1, var_2) {
   foreach(var_4 in level.players) {
-  var_4 thread maps\mp\alien\_hive::wait_to_give_rewards();
+    var_4 thread maps\mp\alien\_hive::wait_to_give_rewards();
   }
 
   if(!maps\mp\alien\_utility::is_hardcore_mode()) {
     if(isDefined(var_0) && isDefined(var_0.skill_point)) {
       give_players_skill_points(var_0.skill_point);
-    }
-    else {
+    } else {
       give_players_skill_points(var_1);
     }
   } else if(isDefined(var_0) && isDefined(var_0.hardcore_skill_point))
@@ -1079,7 +1069,7 @@ give_players_rewards(var_0, var_1, var_2) {
 
   if(isDefined(var_0) && maps\mp\alien\_utility::is_true(var_0.blocker)) {
     foreach(var_4 in level.players) {
-    var_4 maps\mp\alien\_persistence::try_award_bonus_pool_token();
+      var_4 maps\mp\alien\_persistence::try_award_bonus_pool_token();
     }
   }
 
@@ -1093,8 +1083,7 @@ give_players_rewards(var_0, var_1, var_2) {
 get_transition_score_component_name_list() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     return ["street_personal", "street_challenge"];
-  }
-  else {
+  } else {
     return ["street_team", "street_personal", "street_challenge"];
   }
 }
@@ -1102,8 +1091,7 @@ get_transition_score_component_name_list() {
 get_conduit_score_component_name_list() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     return ["generator", "generator_personal", "generator_challenge"];
-  }
-  else {
+  } else {
     return ["generator", "generator_team", "generator_personal", "generator_challenge"];
   }
 }
@@ -1196,8 +1184,7 @@ last_hotjoin_skill_points() {
 
   if(maps\mp\alien\_utility::is_hardcore_mode()) {
     var_1 = 0;
-  }
-  else {
+  } else {
     var_1 = max(0, level.skill_points_earned_from_progression - var_0);
   }
 

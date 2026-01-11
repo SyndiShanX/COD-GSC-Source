@@ -149,17 +149,13 @@ drown_heartbeat(var_0) {
 
   if(var_0 > 0.77) {
     level.hrtbeat = 5;
-  }
-  else if(var_0 > 0.6) {
+  } else if(var_0 > 0.6) {
     level.hrtbeat = 4;
-  }
-  else if(var_0 > 0.4) {
+  } else if(var_0 > 0.4) {
     level.hrtbeat = 3;
-  }
-  else if(var_0 > 0.24) {
+  } else if(var_0 > 0.24) {
     level.hrtbeat = 2;
-  }
-  else {
+  } else {
     level.hrtbeat = 1;
   }
 
@@ -296,8 +292,7 @@ enemy_setup() {
 
   if(!isDefined(level.end_enemies)) {
     level.end_enemies = [];
-  }
-  else {
+  } else {
     foreach(var_2 in level.end_enemies) {
       if(isalive(var_2)) {
         var_2 delete();
@@ -347,6 +342,6 @@ retarget_engines() {
   var_1 = getEntArray("loco_engines", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-  var_3 retargetscriptmodellighting(var_0);
+    var_3 retargetscriptmodellighting(var_0);
   }
 }

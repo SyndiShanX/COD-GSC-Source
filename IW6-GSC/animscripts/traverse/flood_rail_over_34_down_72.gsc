@@ -6,8 +6,7 @@
 main() {
   if(self.type == "dog") {
     return;
-  }
-  else {
+  } else {
     low_wall_human();
   }
 }

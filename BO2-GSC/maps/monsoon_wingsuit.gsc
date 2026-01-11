@@ -84,16 +84,14 @@ wingsuit_breadcrumb_objective() {
 
     if(isDefined(s_crumb_pos.target)) {
       s_crumb_pos = getstruct(s_crumb_pos.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
   }
 
   if(flag("chute_window_passed")) {
     set_objective(level.obj_wingsuit_land, undefined, "remove");
-  }
-  else {
+  } else {
     set_objective(level.obj_wingsuit_land, undefined, "done");
   }
 }
@@ -292,7 +290,7 @@ land_wingsuit(str_node) {
   a_m_grass = getEntArray("parachute_grass", "targetname");
 
   foreach(m_grass in a_m_grass) {
-  m_grass delete();
+    m_grass delete();
   }
 
   m_chute = getent("fxanim_parachute", "targetname");
@@ -315,8 +313,7 @@ player_wingsuit_tutorial() {
 
   if(stick_layout == 2 || stick_layout == 3 || force_legacy_message) {
     screen_message_create(&"MONSOON_TUTORIAL_WINGSUIT_LEGACY");
-  }
-  else {
+  } else {
     screen_message_create(&"MONSOON_TUTORIAL_WINGSUIT");
   }
 
@@ -684,11 +681,9 @@ ai_wingsuit_think(v_offset, n_speed, n_acceleration, v_variable_offset, n_variab
 
     if(y > 10) {
       self.next_flight_state = "turnleft_idle";
-    }
-    else if(y < -10) {
+    } else if(y < -10) {
       self.next_flight_state = "turnright_idle";
-    }
-    else {
+    } else {
       self.next_flight_state = "fwd_idle";
     }
 
@@ -698,8 +693,7 @@ ai_wingsuit_think(v_offset, n_speed, n_acceleration, v_variable_offset, n_variab
 
     if(d != 0 && abs(d) < 0.9) {
       n_yaw = vectoangles(v_desired_vel);
-    }
-    else {
+    } else {
       n_yaw = v_angles[1];
     }
 

@@ -208,8 +208,7 @@ settweakablevalue(var_00, var_01, var_02) {
 registertweakable(var_00, var_01, var_02, var_03) {
   if(isstring(var_03)) {
     var_03 = getdvar(var_02, var_03);
-  }
-  else {
+  } else {
     var_03 = getdvarint(var_02, var_03);
   }
 
@@ -304,8 +303,7 @@ init() {
   if(level.console) {
     if(level.func_13E0E || level.func_DADC) {
       registertweakable("game", "graceperiod", "scr_game_graceperiod", 20);
-    }
-    else {
+    } else {
       registertweakable("game", "graceperiod", "scr_game_graceperiod", 15);
     }
 

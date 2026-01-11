@@ -68,8 +68,7 @@ apache_tutorial_fly_allies() {
 
     if(issubstr(var_2.targetname, "apache")) {
       var_3 = common_scripts\utility::getstruct("apache_ally_fly_in_path_0" + var_2 maps\oilrocks_apache_code::get_apache_ally_id(), "targetname");
-    }
-    else {
+    } else {
       var_3 = common_scripts\utility::getstruct("blackhaw_fly_in_path", "targetname");
     }
 
@@ -115,8 +114,7 @@ apache_tutorial_fly_allies_govern_speed(var_0) {
 
     if(var_8 >= var_2) {
       var_13 = 0;
-    }
-    else {
+    } else {
       var_14 = clamp(var_8, var_4, var_3);
       var_15 = 1 - (var_14 - var_4) / var_5;
       var_13 = 40 + 80 * var_15;

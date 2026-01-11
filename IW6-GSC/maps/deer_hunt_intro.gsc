@@ -385,7 +385,7 @@ sniff_system_init() {
   var_6 = getEntArray("sniff_zone", "script_noteworthy");
 
   foreach(var_8 in var_6) {
-  var_8 sniff_assign_structs_to_volume(var_5);
+    var_8 sniff_assign_structs_to_volume(var_5);
   }
 
   level.current_sniff_zone = undefined;
@@ -407,8 +407,7 @@ sniff_trig_logic() {
 
     if(!isDefined(level.current_sniff_zone)) {
       level.current_sniff_zone = var_0;
-    }
-    else if(level.current_sniff_zone == var_0) {
+    } else if(level.current_sniff_zone == var_0) {
       wait 2;
       continue;
     }
@@ -418,8 +417,7 @@ sniff_trig_logic() {
 
     if(maps\deer_hunt_util::has_script_noteworthy("walk")) {
       level.dog maps\_utility_dogs::enable_dog_walk(1);
-    }
-    else {
+    } else {
       level.dog maps\_utility_dogs::disable_dog_walk();
     }
 
@@ -576,8 +574,7 @@ dog_stays_in_front_of_player() {
 
       if(maps\deer_hunt_util::array_is_greater_than(var_7, 0)) {
         thread dog_sniff_spots(var_7);
-      }
-      else {
+      } else {
         iprintln("No sniff spots");
         self setgoalpos(var_5);
       }
@@ -586,8 +583,7 @@ dog_stays_in_front_of_player() {
 
       if(level.console) {
         var_9 = maps\deer_hunt_util::waittill_player_moves_or_timeout_controller(var_8);
-      }
-      else {
+      } else {
         var_9 = maps\deer_hunt_util::waittill_player_moves_or_timeout_kb(var_8);
       }
 
@@ -669,7 +665,7 @@ intro_enemies() {
       var_0 = getEntArray("center_guard_nodes", "targetname");
 
       foreach(var_2 in var_0) {
-      var_2 disconnectnode();
+        var_2 disconnectnode();
       }
 
       thread gasstation_execution_timing();
@@ -694,7 +690,7 @@ intro_enemies() {
       common_scripts\utility::flag_wait("gasstation_clear");
 
       foreach(var_2 in var_0) {
-      var_2 connectnode();
+        var_2 connectnode();
       }
   }
 }
@@ -779,7 +775,7 @@ lariver_ambient_magicbullets() {
   }
 
   foreach(var_13 in level.team2) {
-  var_13 maps\_utility::forceuseweapon(common_scripts\utility::random(var_3), "primary");
+    var_13 maps\_utility::forceuseweapon(common_scripts\utility::random(var_3), "primary");
   }
 
   level.hesh maps\_utility::forceuseweapon(common_scripts\utility::random(var_3), "primary");
@@ -1138,8 +1134,7 @@ gasstation_civs_logic() {
 
   if(common_scripts\utility::cointoss()) {
     var_1 = "knees_idle";
-  }
-  else {
+  } else {
     var_1 = "knees_idle2";
   }
 
@@ -1306,7 +1301,7 @@ hesh_logic() {
       level.player setthreatbiasgroup("player");
 
       foreach(var_12 in level.team2) {
-      var_12 setthreatbiasgroup("team2");
+        var_12 setthreatbiasgroup("team2");
       }
 
       var_7 delete();
@@ -1487,11 +1482,9 @@ dog_kills_roof_guy() {
 get_my_meeting_group() {
   if(maps\_utility::is_in_array(level.left_meeting_guys, self)) {
     return level.left_meeting_guys;
-  }
-  else if(maps\_utility::is_in_array(level.right_meeting_guys, self)) {
+  } else if(maps\_utility::is_in_array(level.right_meeting_guys, self)) {
     return level.right_meeting_guys;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -1516,8 +1509,7 @@ move_player_to_start(var_0) {
 
   if(isDefined(var_2)) {
     level.player setplayerangles(vectortoangles(var_2.origin - var_1.origin));
-  }
-  else {
+  } else {
     level.player setplayerangles(var_1.angles);
   }
 
@@ -1552,11 +1544,11 @@ deer_init() {
   var_5 = [];
 
   foreach(var_8, var_7 in var_0) {
-  var_3[var_8] = maps\_drone_deer::deer_dronespawn(var_7);
+    var_3[var_8] = maps\_drone_deer::deer_dronespawn(var_7);
   }
 
   foreach(var_8, var_7 in var_2) {
-  var_5[var_8] = maps\_drone_deer::deer_dronespawn(var_7);
+    var_5[var_8] = maps\_drone_deer::deer_dronespawn(var_7);
   }
 
   thread theatre_doors(var_3);
@@ -1654,8 +1646,7 @@ smash_open(var_0) {
   foreach(var_2 in var_0) {
     if(var_2.targetname == "theatre_doors_b_1" || var_2.targetname == "theatre_doors_a_1") {
       var_3 = 96;
-    }
-    else {
+    } else {
       var_3 = -96;
     }
 
@@ -1785,7 +1776,7 @@ lariver_spawn_wall_battle_guys_early() {
   level.lariver_early_ai = common_scripts\utility::array_combine(level.lariver_early_ai, var_0);
 
   foreach(var_2 in level.lariver_early_ai) {
-  var_2.spawner = common_scripts\utility::random(getEntArray("rpg_guys", "targetname"));
+    var_2.spawner = common_scripts\utility::random(getEntArray("rpg_guys", "targetname"));
   }
 
   var_4 = maps\_utility::array_spawn_targetname("lariver_backline_guys", 1);
@@ -1829,7 +1820,7 @@ lariver_defend_spawn_choppers() {
   var_0 = ["lariver_defend_chopper_left"];
 
   foreach(var_2 in var_0) {
-  getent(var_2, "targetname") maps\_utility::add_spawn_function(::chopper_spawn_func);
+    getent(var_2, "targetname") maps\_utility::add_spawn_function(::chopper_spawn_func);
   }
 
   common_scripts\utility::flag_wait("defend_chopp1_dead");
@@ -2007,8 +1998,7 @@ chopper_side_dodge() {
 
     if(isDefined(self.attack_pos)) {
       self setvehgoalpos(self.attack_pos, 1);
-    }
-    else {
+    } else {
       thread chopper_resume_path();
     }
 
@@ -2360,7 +2350,7 @@ lariver_defend_globals(var_0) {
   level notify("stop_custom_color_system");
 
   foreach(var_4 in var_2) {
-  var_4 common_scripts\utility::trigger_off();
+    var_4 common_scripts\utility::trigger_off();
   }
 
   level thread chopper_achievement_check();
@@ -2425,7 +2415,7 @@ lariver_setup_launchers() {
   common_scripts\utility::flag_wait("player_picked_up_launcher");
 
   foreach(var_5 in var_3) {
-  var_5 delete();
+    var_5 delete();
   }
 }
 
@@ -2593,7 +2583,7 @@ make_me_a_target() {
   target_set(self);
 
   foreach(var_1 in level.players) {
-  target_hidefromplayer(self, var_1);
+    target_hidefromplayer(self, var_1);
   }
 }
 
@@ -2725,8 +2715,7 @@ lariver_ignore_player_if_in_defend_area() {
   for(;;) {
     if(level.player istouching(var_0)) {
       level.player setthreatbiasgroup("missile_player");
-    }
-    else {
+    } else {
       level.player setthreatbiasgroup("allies");
     }
 
@@ -2800,8 +2789,7 @@ check_weapon(var_0) {
 
   if(level.defend_weapons.size == 0) {
     return var_0;
-  }
-  else {
+  } else {
     foreach(var_3 in level.defend_weapons) {
       var_4 = strtok(var_3, "+");
 
@@ -2931,7 +2919,7 @@ chopper_crash_fx_cleanup() {
 
   foreach(var_2 in var_0) {
     foreach(var_4 in var_2) {
-    stop_crash_fx_in_array(var_4);
+      stop_crash_fx_in_array(var_4);
     }
   }
 }
@@ -2947,8 +2935,7 @@ stop_crash_fx_in_array(var_0) {
   }
   if(isDefined(var_0["effect"])) {
     var_1 = common_scripts\utility::getfx(var_0["effect"]);
-  }
-  else if(isDefined(var_0["trace_part_for_efx"])) {
+  } else if(isDefined(var_0["trace_part_for_efx"])) {
     var_1 = common_scripts\utility::getfx(var_0["trace_part_for_efx"]);
   }
 
@@ -3084,8 +3071,7 @@ lariver_matv_open_doors() {
 
     if(var_4 == 1) {
       var_3 = (120, 0, 0);
-    }
-    else {
+    } else {
       var_3 = (-120, 0, 0);
     }
 
@@ -3341,7 +3327,7 @@ lariver_enemies() {
   var_0 = getEntArray("lariver_flood_filler", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2.count = 10;
+    var_2.count = 10;
   }
 
   maps\_utility::flood_spawn(var_0);
@@ -3639,8 +3625,7 @@ lariver_slide_anim(var_0, var_1) {
 
   if(common_scripts\utility::cointoss()) {
     var_2 = "la_river_slide_1";
-  }
-  else {
+  } else {
     var_2 = "la_river_slide_2";
   }
 

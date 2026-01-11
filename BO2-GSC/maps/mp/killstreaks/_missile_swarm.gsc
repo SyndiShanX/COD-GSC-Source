@@ -125,8 +125,7 @@ swarm_killstreak_end(owner, detonate, killstreak_id) {
 
   if(isDefined(detonate) && detonate) {
     level setclientfield("missile_swarm", 2);
-  }
-  else {
+  } else {
     level setclientfield("missile_swarm", 0);
   }
 
@@ -322,8 +321,7 @@ projectile_goal_move() {
 
       if(isDefined(enemy)) {
         self.goal.origin = enemy.origin + (0, 0, self.origin[2]);
-      }
-      else {
+      } else {
         pitch = randomintrange(-45, 45);
         yaw = randomintrange(0, 360);
         angles = (0, yaw, 0);
@@ -486,11 +484,9 @@ projectile_find_target(acceptskyexposure) {
 
   if(isDefined(ks) && !isDefined(player)) {
     return ks;
-  }
-  else if(!isDefined(ks) && isDefined(player)) {
+  } else if(!isDefined(ks) && isDefined(player)) {
     return player;
-  }
-  else if(isDefined(ks) && isDefined(player)) {
+  } else if(isDefined(ks) && isDefined(player)) {
     if(cointoss()) {
       return ks;
     }

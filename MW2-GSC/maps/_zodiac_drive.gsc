@@ -35,8 +35,7 @@ zodiac_preLoad(playerHandModel) {
   // set player hand model
   if(!isDefined(playerHandModel)) {
     level.zodiac_playerHandModel = "viewhands_player_udt";
-  }
-  else {
+  } else {
     level.zodiac_playerHandModel = playerHandModel;
   }
 
@@ -236,8 +235,7 @@ drive_target_enemy(vehicle) {
 
     if(checking == "price") {
       checking = "player";
-    }
-    else {
+    } else {
       checking = "price";
     }
   }
@@ -509,8 +507,7 @@ drive_magic_bullet(vehicle) {
 
   if(flag("player_in_sight_of_boarding")) {
     MagicBullet(level.zodiac_gun, start, start + (0, 0, 255), self);
-  }
-  else {
+  } else {
     MagicBullet(level.zodiac_gun, start, end.origin, self);
   }
 
@@ -618,8 +615,7 @@ drive_shooting_update_anims(vehicle) {
 
       if(vehicle.zodiacAmmoCount == 1) {
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("uzi_last_fire"), 1.0, 0.0, 1.0);
-      }
-      else {
+      } else {
         vehicle SetAnimKnobLimitedRestart(vehicle getanim("uzi_fire"), 1.0, 0.0, 1.0);
       }
 

@@ -64,8 +64,7 @@ main() {
 
   if(!sessionmodeissystemlink() && !sessionmodeisonlinegame() && issplitscreen()) {
     setscoreboardcolumns("score", "kills", "plants", "defuses", "deaths");
-  }
-  else {
+  } else {
     setscoreboardcolumns("score", "kills", "deaths", "plants", "defuses");
   }
 }
@@ -162,15 +161,13 @@ getbetterteam() {
 
   if(kills["allies"] > kills["axis"]) {
     return "allies";
-  }
-  else if(kills["axis"] > kills["allies"]) {
+  } else if(kills["axis"] > kills["allies"]) {
     return "axis";
   }
 
   if(deaths["allies"] < deaths["axis"]) {
     return "allies";
-  }
-  else if(deaths["axis"] < deaths["allies"]) {
+  } else if(deaths["axis"] < deaths["allies"]) {
     return "axis";
   }
 
@@ -253,8 +250,7 @@ onspawnplayer(predictedspawn) {
 
   if(self.pers["team"] == game["attackers"]) {
     spawnpointname = "mp_sd_spawn_attacker";
-  }
-  else {
+  } else {
     spawnpointname = "mp_sd_spawn_defender";
   }
 
@@ -264,8 +260,7 @@ onspawnplayer(predictedspawn) {
 
   if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "sd");
   }
 }
@@ -363,8 +358,7 @@ ondeadevent(team) {
   if(team == "all") {
     if(level.bombplanted) {
       sd_endgamewithkillcam(game["attackers"], game["strings"][game["defenders"] + "_eliminated"]);
-    }
-    else {
+    } else {
       sd_endgamewithkillcam(game["defenders"], game["strings"][game["attackers"] + "_eliminated"]);
     }
   } else if(team == game["attackers"]) {
@@ -386,8 +380,7 @@ ononeleftevent(team) {
 ontimelimit() {
   if(level.teambased) {
     sd_endgame(game["defenders"], game["strings"]["time_limit_reached"]);
-  }
-  else {
+  } else {
     sd_endgame(undefined, game["strings"]["time_limit_reached"]);
   }
 }
@@ -438,8 +431,7 @@ givelastattackerwarning(team) {
   while(true) {
     if(self.health != self.maxhealth) {
       fullhealthtime = 0;
-    }
-    else {
+    } else {
       fullhealthtime = fullhealthtime + interval;
     }
 
@@ -663,8 +655,7 @@ onusedefuseobject(player) {
 
   if(isDefined(player.lastmansd) && player.lastmansd == 1) {
     maps\mp\_scoreevents::processscoreevent("defused_bomb_last_man_alive", player);
-  }
-  else {
+  } else {
     maps\mp\_scoreevents::processscoreevent("defused_bomb", player);
   }
 
@@ -677,8 +668,7 @@ ondrop(player) {
 
     if(isDefined(player)) {
       player logstring("bomb dropped");
-    }
-    else {
+    } else {
       logstring("bomb dropped");
     }
   }
@@ -712,8 +702,7 @@ onpickup(player) {
   }
 }
 
-onreset() {
-}
+onreset() {}
 
 bombplantedmusicdelay() {
   level endon("bomb_defused");
@@ -743,8 +732,7 @@ bombplanted(destroyedobj, player) {
 
   if(label == "_a") {
     setbombtimer("A", int(gettime() + level.bombtimer * 1000));
-  }
-  else {
+  } else {
     setbombtimer("B", int(gettime() + level.bombtimer * 1000));
   }
 

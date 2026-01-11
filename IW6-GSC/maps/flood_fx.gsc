@@ -383,8 +383,7 @@ flood_amb_fx() {
 fx_set_alpha_threshold() {
   if(maps\_utility::is_gen4()) {
     setsaveddvar("fx_alphathreshold", 2);
-  }
-  else {
+  } else {
     setsaveddvar("fx_alphathreshold", 9);
   }
 }
@@ -1758,8 +1757,7 @@ fx_warehouse_floating_debris() {
   for(var_4 = 1; var_4 <= 10; var_4++) {
     if(var_4 < 10) {
       var_5 = "tag_fx_debri_2_00" + var_4;
-    }
-    else {
+    } else {
       var_5 = "tag_fx_debri_2_0" + var_4;
     }
 
@@ -1793,8 +1791,7 @@ fx_warehouse_floating_debris() {
 
     if(var_4 != 3) {
       level.wh_debris_02_vfx[level.wh_debris_02_vfx.size] = playfxontagspecial(common_scripts\utility::getfx("flood_warehouse_floating_debri_02"), var_1, var_13);
-    }
-    else {
+    } else {
       level.wh_debris_03_vfx[level.wh_debris_03_vfx.size] = playfxontagspecial(common_scripts\utility::getfx("flood_warehouse_floating_debri_03"), var_1, var_13);
     }
 
@@ -1853,7 +1850,7 @@ trigger_debris_bridge_water() {
   var_0 show();
 
   foreach(var_3 in var_1) {
-  var_3 hide();
+    var_3 hide();
   }
 }
 
@@ -1878,7 +1875,7 @@ fx_swept_water_hide() {
   var_0 = getEntArray("swept_water_swim", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 }
 
@@ -1926,7 +1923,7 @@ fx_retarget_rooftop_water_lighting() {
   var_4 = getent("rooftop2_water", "script_noteworthy");
 
   foreach(var_6 in var_3) {
-  var_6 retargetscriptmodellighting(var_0);
+    var_6 retargetscriptmodellighting(var_0);
   }
 
   var_1 retargetscriptmodellighting(var_0);
@@ -2166,7 +2163,7 @@ gamestart_light_fix() {
   var_2 retargetscriptmodellighting(var_5);
 
   foreach(var_7 in var_3) {
-  var_7 retargetscriptmodellighting(var_4);
+    var_7 retargetscriptmodellighting(var_4);
   }
 
   if(isDefined(var_0)) {
@@ -2210,7 +2207,7 @@ garage_malllight_off() {
   var_0 = getEntArray("garage_mall_light", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 setlightradius(13);
+    var_2 setlightradius(13);
   }
 }
 
@@ -2232,7 +2229,7 @@ warelights_off() {
   var_0 = getEntArray("mall_light", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 setlightradius(13);
+    var_2 setlightradius(13);
   }
 }
 
@@ -2306,7 +2303,7 @@ mall_light_cleanup() {
   setsaveddvar("sm_sunshadowscale", 1);
 
   foreach(var_5 in var_0) {
-  var_5 delete();
+    var_5 delete();
   }
 
   foreach(var_5 in var_1) {
@@ -2338,11 +2335,11 @@ light_flicker(var_0) {
 
   if(maps\_utility::is_gen4()) {
     foreach(var_3 in var_1) {
-    var_3 thread flicker();
+      var_3 thread flicker();
     }
   } else {
     foreach(var_3 in var_1) {
-    var_3 thread flicker_cg();
+      var_3 thread flicker_cg();
     }
   }
 }
@@ -2408,8 +2405,7 @@ change_light(var_0) {
     if(isDefined(self.script_noteworthy) && self.script_noteworthy == "lgt_on") {
       if(var_0 > 0) {
         self show();
-      }
-      else {
+      } else {
         self hide();
       }
     } else if(var_0 > 0)
@@ -2830,8 +2826,7 @@ allie1_tussbubbs(var_0) {
   for(var_1 = 0; var_1 < 100; var_1++) {
     if(common_scripts\utility::flag("cw_player_underwater")) {
       playFXOnTag(common_scripts\utility::getfx("tussle_bubbles_emit"), var_0, "J_Knee_RI");
-    }
-    else if(common_scripts\utility::flag("cw_player_abovewater")) {
+    } else if(common_scripts\utility::flag("cw_player_abovewater")) {
       killfxontag(common_scripts\utility::getfx("tussle_bubbles_emit"), var_0, "J_Knee_RI");
     }
 
@@ -2845,8 +2840,7 @@ opfor3_tussbubbs(var_0) {
   for(var_1 = 0; var_1 < 100; var_1++) {
     if(common_scripts\utility::flag("cw_player_underwater")) {
       playFXOnTag(common_scripts\utility::getfx("tussle_bubbles_emit"), var_0, "J_Knee_LE");
-    }
-    else if(common_scripts\utility::flag("cw_player_abovewater")) {
+    } else if(common_scripts\utility::flag("cw_player_abovewater")) {
       killfxontag(common_scripts\utility::getfx("tussle_bubbles_emit"), var_0, "J_Knee_LE");
     }
 

@@ -9,8 +9,7 @@
 main() {
   if(self.zombie_move_speed == "sprint") {
     dosimpletraverse("jump_down_fast_40");
-  }
-  else {
+  } else {
     dosimpletraverse("jump_down_40");
   }
 }

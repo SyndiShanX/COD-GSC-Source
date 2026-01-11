@@ -174,8 +174,7 @@ movestandcombatnormal() {
 
     if(shouldsprintforvariation() || shouldsprint) {
       fullsprint();
-    }
-    else {
+    } else {
       stopfullsprint();
       combatrun();
     }
@@ -209,8 +208,7 @@ fullsprint() {
   if(!isDefined(self.a.fullsprintanim)) {
     if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol")) {
       self.a.fullsprintanim = animarraypickrandom("cqb_sprint_f");
-    }
-    else {
+    } else {
       self.a.fullsprintanim = animarraypickrandom("sprint");
     }
   }
@@ -275,11 +273,9 @@ tacticalwalk() {
 
   if(relativedir == "f") {
     aimingon("tactical_f", 45);
-  }
-  else if(relativedir == "b") {
+  } else if(relativedir == "b") {
     aimingon("tactical_b", 45);
-  }
-  else {
+  } else {
     aimingon("tactical_l", 45);
   }
 
@@ -288,8 +284,7 @@ tacticalwalk() {
 
   if(abs(motionangle) < 10) {
     blendtime = 0.4;
-  }
-  else {
+  } else {
     blendtime = 0.2;
   }
 
@@ -320,15 +315,13 @@ tacticalwalkforwardtobackwardtransition() {
 
       if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol")) {
         animpostfix = "_cqb";
-      }
-      else {
+      } else {
         animpostfix = "";
       }
 
       if(anglediff > 0) {
         transitionanim = animarray("run_f_to_bR" + animpostfix, "move");
-      }
-      else {
+      } else {
         transitionanim = animarray("run_f_to_bL" + animpostfix, "move");
       }
 
@@ -434,8 +427,7 @@ runngunforwardtobackwardtransition() {
 
     if(anglediff > 0) {
       transitionanim = animarray("run_f_to_bR", "move");
-    }
-    else {
+    } else {
       transitionanim = animarray("run_f_to_bL", "move");
     }
 
@@ -578,8 +570,7 @@ runloopisnearbeginning() {
 
   if(animfraction > 3) {
     animfraction = animfraction - 2.0;
-  }
-  else if(animfraction > 2) {
+  } else if(animfraction > 2) {
     animfraction = animfraction - 1.0;
   }
 
@@ -605,8 +596,7 @@ reloadstandruninternal() {
   if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol")) {
     if(self.movemode == "walk" || self.walk) {
       reloadanim = animarraypickrandom("cqb_reload_walk");
-    }
-    else {
+    } else {
       reloadanim = animarraypickrandom("cqb_reload_run");
     }
   } else
@@ -629,8 +619,7 @@ aimingon(aimanimname, aimlimit) {
   if(aihasonlypistolorsmg()) {
     if(issubstr(aimanimname, "tactical")) {
       ispistoltacticalwalkaim = 1;
-    }
-    else {
+    } else {
       self clearanim( % tactical_walk_pistol_aim2, 0);
       self clearanim( % tactical_walk_pistol_aim4, 0);
       self clearanim( % tactical_walk_pistol_aim6, 0);
@@ -640,8 +629,7 @@ aimingon(aimanimname, aimlimit) {
 
   if(ispistoltacticalwalkaim) {
     self animscripts\shared::setaiminganims( % tactical_walk_pistol_aim2, % tactical_walk_pistol_aim4, % tactical_walk_pistol_aim6, % tactical_walk_pistol_aim8);
-  }
-  else {
+  } else {
     self animscripts\shared::setaiminganims( % run_aim_2, % run_aim_4, % run_aim_6, % run_aim_8);
   }
 
@@ -907,8 +895,7 @@ getrunbackwardsdistancesquared() {
   if(shouldtacticalwalk()) {
     if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") || self aihasonlypistol()) {
       return anim.moveglobals.runbackwards_cqb_distsq;
-    }
-    else {
+    } else {
       return anim.moveglobals.runbackwards_distsq;
     }
   }
@@ -962,11 +949,9 @@ getrunanim() {
   if(isDefined(self.cqb) && self.cqb && !(self animscripts\utility::weaponanims() == "pistol") && self.a.pose == "stand") {
     if(self.movemode == "walk" || self.walk) {
       run_anim = animarraypickrandom("cqb_walk_f", "move", 1);
-    }
-    else if(self.sprint) {
+    } else if(self.sprint) {
       run_anim = animarraypickrandom("cqb_sprint_f", "move", 1);
-    }
-    else {
+    } else {
       run_anim = animarraypickrandom("cqb_run_f", "move", 1);
     }
   } else if(isDefined(self.a.combatrunanim))
@@ -974,8 +959,7 @@ getrunanim() {
   else if(self.sprint && self.a.pose == "stand") {
     if(isDefined(self.a.fullsprintanim)) {
       run_anim = self.a.fullsprintanim;
-    }
-    else {
+    } else {
       run_anim = animarraypickrandom("sprint", "move");
       self.a.fullsprintanim = run_anim;
     }
@@ -1006,8 +990,7 @@ rundebuginfo() {
 
       if(self.facemotion) {
         recordenttext("FaceMotion", self, level.color_debug["yellow"], "Animscript");
-      }
-      else {
+      } else {
         recordenttext("FaceEnemy", self, level.color_debug["yellow"], "Animscript");
       }
 

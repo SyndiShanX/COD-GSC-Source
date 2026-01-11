@@ -125,7 +125,7 @@ remove_static_line(var_0) {
 
 remove_all_static_lines() {
   foreach(var_1 in level.uav_static_lines) {
-  var_1 destroy();
+    var_1 destroy();
   }
 }
 

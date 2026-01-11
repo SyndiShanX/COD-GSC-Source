@@ -16,8 +16,7 @@
 #include maps\_dds;
 #include maps\_damagefeedback;
 
-player_init() {
-}
+player_init() {}
 
 enemieswithinstandingrange() {
   enemydistancesq = self mygetenemysqdist();
@@ -60,23 +59,17 @@ getremainingburstdelaytime() {
 getburstdelaytime() {
   if(self.weapon == self.sidearm) {
     return randomfloatrange(0.15, 0.55);
-  }
-  else if(self usingshotgun()) {
+  } else if(self usingshotgun()) {
     return randomfloatrange(1.0, 1.7);
-  }
-  else if(self issniper()) {
+  } else if(self issniper()) {
     return getsniperburstdelaytime();
-  }
-  else if(self.fastburst) {
+  } else if(self.fastburst) {
     return randomfloatrange(0.1, 0.35);
-  }
-  else if(self usinggrenadelauncher()) {
+  } else if(self usinggrenadelauncher()) {
     return randomfloatrange(1.5, 2.0);
-  }
-  else if(is_rusher() && self.rushertype == "pistol") {
+  } else if(is_rusher() && self.rushertype == "pistol") {
     return randomfloatrange(0.1, 0.3);
-  }
-  else {
+  } else {
     return randomfloatrange(0.4, 0.9);
   }
 }
@@ -151,8 +144,7 @@ shootuntilshootbehaviorchange() {
 
   if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > 160000) {
     burstcount = randomintrange(1, 5);
-  }
-  else {
+  } else {
     burstcount = 10;
   }
 
@@ -165,8 +157,7 @@ shootuntilshootbehaviorchange() {
 
     if(self.shootstyle == "full") {
       self fireuntiloutofammo(animarray(animprefix + "fire"), 1, animscripts\shared::decidenumshotsforfull());
-    }
-    else if(self.shootstyle == "burst" || self.shootstyle == "single" || self.shootstyle == "semi") {
+    } else if(self.shootstyle == "burst" || self.shootstyle == "single" || self.shootstyle == "semi") {
       numshots = 1;
 
       if(self.shootstyle == "burst" || self.shootstyle == "semi") {
@@ -175,8 +166,7 @@ shootuntilshootbehaviorchange() {
 
       if(numshots == 1) {
         self fireuntiloutofammo(animarraypickrandom(animprefix + "single"), 1, numshots);
-      }
-      else {
+      } else {
         self fireuntiloutofammo(animarray(animprefix + self.shootstyle + numshots), 1, numshots);
       }
     } else {
@@ -241,11 +231,9 @@ fireuntiloutofammo(fireanim, stoponanimationend, maxshots) {
 
   if(weaponisgasweapon(self.weapon)) {
     rate = 1.0;
-  }
-  else if(self usingshotgun()) {
+  } else if(self usingshotgun()) {
     rate = 1.0;
-  }
-  else if(self usingrocketlauncher()) {
+  } else if(self usingrocketlauncher()) {
     rate = 1.0;
   }
 
@@ -547,8 +535,7 @@ throwgrenadeatenemyasap_combat_utility(enemy) {
 setactivegrenadetimer(throwingat) {
   if(isplayer(throwingat)) {
     self.activegrenadetimer = "player_" + self.grenadeweapon;
-  }
-  else {
+  } else {
     self.activegrenadetimer = "AI_" + self.grenadeweapon;
   }
 
@@ -609,8 +596,7 @@ getdesiredgrenadetimervalue() {
 
   if(self usingplayergrenadetimer()) {
     nextgrenadetimetouse = gettime() + anim.playergrenadebasetime + randomint(anim.playergrenaderangetime);
-  }
-  else {
+  } else {
     nextgrenadetimetouse = gettime() + 40000 + randomint(60000);
   }
 
@@ -781,8 +767,7 @@ grenadedebug(state, duration, showmissreason) {
 
     if(isDefined(showmissreason) && isDefined(self.grenademissreason)) {
       print3d(self getshootatpos() + (0, 0, 0), "Failed: " + self.grenademissreason);
-    }
-    else if(isDefined(self.activegrenadetimer)) {
+    } else if(isDefined(self.activegrenadetimer)) {
       print3d(self getshootatpos() + (0, 0, 0), "Timer: " + self.activegrenadetimer);
     }
 
@@ -1074,8 +1059,7 @@ dogrenadethrow(throw_anim, nextgrenadetimetouse, secondgrenadeofdouble) {
 
   if(self usingplayergrenadetimer()) {
     self thread watchgrenadetowardsplayer(nextgrenadetimetouse);
-  }
-  else {
+  } else {
     level notify("threw_grenade_at_enemy");
     self notify("threw_grenade_at_enemy");
     anim.throwgrenadeatenemyasap = undefined;
@@ -1098,8 +1082,7 @@ dogrenadethrow(throw_anim, nextgrenadetimetouse, secondgrenadeofdouble) {
 
   if(attachside != "none") {
     self detach(model, attachside);
-  }
-  else {
+  } else {
     print("No grenade hand set: ");
     println(throw_anim);
     println("animation in console does not specify grenade hand");
@@ -1319,8 +1302,7 @@ usecovernodeifpossible(node) {
 
   if(self usecovernode(node)) {
     return true;
-  }
-  else {
+  } else {
     self thread debugfailedcoverusage(node);
 
   }
@@ -1370,8 +1352,7 @@ tryrunningtoenemy(ignoresuppression) {
 
   if(self isingoal(self.enemy.origin)) {
     self findreacquiredirectpath(ignoresuppression);
-  }
-  else {
+  } else {
     self findreacquireproximatepath(ignoresuppression);
   }
 
@@ -1513,8 +1494,7 @@ trytoattackflashedenemy() {
 startflashbanged() {
   if(isDefined(self.flashduration)) {
     duration = self.flashduration * 1000;
-  }
-  else {
+  } else {
     duration = self getflashbangedstrength() * 1000;
   }
 
@@ -1559,15 +1539,13 @@ monitorflashorstun() {
 
       if(issubstr(weapon, "emp")) {
         self notify("doEmpBehavior", attacker, 5);
-      }
-      else if(issubstr(weapon, "proximity")) {
+      } else if(issubstr(weapon, "proximity")) {
         self thread proximitygrenadeaireactionfx(5);
       }
     } else {
       if(amount_distance > 1 - 0.2) {
         amount_distance = 1.0;
-      }
-      else {
+      } else {
         amount_distance = amount_distance / (1 - 0.2);
       }
 

@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\flagsys_shared;
-
 #namespace item_world_fixup;
 
 autoexec __init__() {
@@ -36,7 +35,7 @@ private function_59c1a869(&replacementarray, var_d1c21f6f, var_b06dd57e) {
 
   function_d50342ad(var_b06dd57e);
 
-    replacementarray[var_d1c21f6f] = var_b06dd57e;
+  replacementarray[var_d1c21f6f] = var_b06dd57e;
 }
 
 private function_41015db1(&replacementarray, itemname, replacementitemname) {
@@ -55,20 +54,20 @@ private function_41015db1(&replacementarray, itemname, replacementitemname) {
     return;
   }
 
-  if(replacementitemname == #"") {
+  if(replacementitemname == # "") {
     replacementitemname = "";
   }
 
   function_cd5f2152(replacementitemname);
 
-    replacementarray[itemname] = replacementitemname;
+  replacementarray[itemname] = replacementitemname;
 }
 
 private function_bbc0b67f(prematch = 0) {
   if(prematch) {
-    flag = #"hash_11c9cde7b522c5a9";
+    flag = # "hash_11c9cde7b522c5a9";
   } else {
-    flag = #"hash_67b445a4b1d59922";
+    flag = # "hash_67b445a4b1d59922";
   }
 
   if(level flagsys::get(flag)) {
@@ -91,9 +90,9 @@ private function_d50342ad(var_d1c21f6f) {
   }
 }
 
-  function function_6991057(var_d1c21f6f, var_b06dd57e) {
-    function_59c1a869(level.var_ee110db8, var_d1c21f6f, var_b06dd57e);
-  }
+function function_6991057(var_d1c21f6f, var_b06dd57e) {
+  function_59c1a869(level.var_ee110db8, var_d1c21f6f, var_b06dd57e);
+}
 
 function_19089c75(var_d1c21f6f, var_b06dd57e) {
   function_59c1a869(level.var_db0e7b82, var_d1c21f6f, var_b06dd57e);

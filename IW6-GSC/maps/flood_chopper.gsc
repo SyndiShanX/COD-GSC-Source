@@ -110,8 +110,7 @@ end_mantle_angle() {
 
   if(vectordot(var_1, var_2) > 0.75) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

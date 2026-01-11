@@ -8,7 +8,6 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
-
 #namespace aiinteractables;
 
 autoexec __init__system__() {
@@ -44,7 +43,7 @@ private function_2f0f1b62() {
 }
 
 function_64d25a18(entity) {
-  if(entity.archetype !== #"human") {
+  if(entity.archetype !== # "human") {
     return false;
   }
 

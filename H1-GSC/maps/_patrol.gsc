@@ -83,8 +83,7 @@ patrol(var_0, var_1, var_2) {
 
     if(isDefined(var_10.radius) && var_10.radius > 0) {
       self.goalradius = var_10.radius;
-    }
-    else {
+    } else {
       self.goalradius = 32;
     }
 

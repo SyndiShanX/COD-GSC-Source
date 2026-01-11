@@ -382,14 +382,11 @@ dialogue_smoke_hints() {
 
     if(var_0 == 1) {
       level maps\_utility::radio_dialogue_queue("launchfacility_a_recon_enemiestonorth");
-    }
-    else if(var_0 == 2) {
+    } else if(var_0 == 2) {
       level.price maps\jake_tools::dialogue_execute("launchfacility_a_price_smoke_nag_01");
-    }
-    else if(var_0 == 3) {
+    } else if(var_0 == 3) {
       level.grigsby maps\jake_tools::dialogue_execute("launchfacility_a_grigsby_smoke_nag_01");
-    }
-    else {
+    } else {
       break;
     }
 
@@ -1417,8 +1414,7 @@ saw_sound_and_fx(var_0, var_1, var_2) {
 
   if(var_0 == "1") {
     thread maps\_utility::play_sound_on_entity(level.scr_sound["launch_chopsaw1"]);
-  }
-  else {
+  } else {
     thread maps\_utility::play_sound_on_entity(level.scr_sound["launch_chopsaw2"]);
   }
 
@@ -1539,8 +1535,7 @@ friendly_vent_think(var_0, var_1, var_2, var_3) {
       case "01":
         if(level.team01_sawguysinposition == 0) {
           var_4 = 0;
-        }
-        else {
+        } else {
           var_4 = 1;
         }
 
@@ -1554,8 +1549,7 @@ friendly_vent_think(var_0, var_1, var_2, var_3) {
       case "02":
         if(level.team02_sawguysinposition == 0) {
           var_4 = 0;
-        }
-        else {
+        } else {
           var_4 = 1;
         }
 
@@ -1569,8 +1563,7 @@ friendly_vent_think(var_0, var_1, var_2, var_3) {
       case "03":
         if(level.team03_sawguysinposition == 0) {
           var_4 = 0;
-        }
-        else {
+        } else {
           var_4 = 1;
         }
 
@@ -1650,8 +1643,7 @@ friendly_vent_think(var_0, var_1, var_2, var_3) {
 
   if(self == level.price || self == level.grigsby) {
     self waittill("rappel_down_vent");
-  }
-  else {
+  } else {
     wait(randomfloatrange(1, 3));
   }
 
@@ -1713,8 +1705,7 @@ friendly_vent_think_preh1(var_0, var_1, var_2) {
 
     if(var_1 == "01") {
       get_to_node_no_matter_what(var_8, 30);
-    }
-    else {
+    } else {
       self setgoalnode(var_8);
       self waittill("goal");
     }
@@ -1723,8 +1714,7 @@ friendly_vent_think_preh1(var_0, var_1, var_2) {
       case "01":
         if(level.team01_sawguysinposition == 0) {
           var_3 = 0;
-        }
-        else {
+        } else {
           var_3 = 1;
         }
 
@@ -1738,8 +1728,7 @@ friendly_vent_think_preh1(var_0, var_1, var_2) {
       case "02":
         if(level.team02_sawguysinposition == 0) {
           var_3 = 0;
-        }
-        else {
+        } else {
           var_3 = 1;
         }
 
@@ -1753,8 +1742,7 @@ friendly_vent_think_preh1(var_0, var_1, var_2) {
       case "03":
         if(level.team03_sawguysinposition == 0) {
           var_3 = 0;
-        }
-        else {
+        } else {
           var_3 = 1;
         }
 
@@ -1828,8 +1816,7 @@ friendly_vent_think_preh1(var_0, var_1, var_2) {
 
   if(self == level.price || self == level.grigsby) {
     self waittill("rappel_down_vent");
-  }
-  else {
+  } else {
     wait(randomfloatrange(1, 3));
   }
 
@@ -1927,8 +1914,7 @@ trigger_monitor_player_lean() {
   for(;;) {
     if(level.player isleaning()) {
       common_scripts\utility::trigger_off();
-    }
-    else {
+    } else {
       common_scripts\utility::trigger_on();
     }
 
@@ -2301,8 +2287,7 @@ bmp_nags(var_0, var_1, var_2) {
 
     if(level.launchfacility_a_price_bmp_nag_number == 7 || level.launchfacility_a_price_bmp_nag_number == 8) {
       level.grigsby maps\jake_tools::dialogue_execute(var_3);
-    }
-    else {
+    } else {
       level.price maps\jake_tools::dialogue_execute(var_3);
     }
 
@@ -2908,8 +2893,7 @@ vehicle_turret_think() {
 
     if(!isDefined(var_0)) {
       var_0 = vehicle_get_target_player_only();
-    }
-    else if(isDefined(var_0) && !isplayer(var_0)) {
+    } else if(isDefined(var_0) && !isplayer(var_0)) {
       var_0 = vehicle_get_target_player_only();
     }
 
@@ -3185,8 +3169,7 @@ vehicle_patrol_think() {
 
     if(level.player istouching(level.balconyflag)) {
       var_12 = self.balconypositionorg.origin;
-    }
-    else {
+    } else {
       var_12 = level.player.origin;
     }
 
@@ -3194,11 +3177,9 @@ vehicle_patrol_think() {
 
     if(var_8 == var_3) {
       var_6 = undefined;
-    }
-    else if(isDefined(var_4) && var_8 == var_4.end) {
+    } else if(isDefined(var_4) && var_8 == var_4.end) {
       var_6 = var_4;
-    }
-    else if(isDefined(var_5) && var_8 == var_5.end) {
+    } else if(isDefined(var_5) && var_8 == var_5.end) {
       var_6 = var_5;
     }
 
@@ -3681,6 +3662,6 @@ vent_flashlights() {
   }
 
   foreach(var_2 in var_0) {
-  playFX(level._effect["vent_flashlight"], var_2.origin);
+    playFX(level._effect["vent_flashlight"], var_2.origin);
   }
 }

@@ -14,8 +14,7 @@ main() {
 
   if(level.console) {
     level.hint_text_size = 1.6;
-  }
-  else {
+  } else {
     level.hint_text_size = 1.2;
   }
 
@@ -331,8 +330,7 @@ start_default() {
   thread AA_range_start_init();
 }
 
-start_debug() {
-}
+start_debug() {}
 
 start_timed_ads() {
   firing_range_anims_foley_trainee_and_translator_start_points();
@@ -627,8 +625,7 @@ firing_range_hip_and_ads() {
 
   if(level.Xenon) {
     thread keyHint("hip_attack", undefined, true);
-  }
-  else {
+  } else {
     thread keyHint("pc_hip_attack", undefined, true); // PC and PS3 are both press
   }
 
@@ -660,8 +657,7 @@ firing_range_hip_and_ads() {
   setDvar("ui_invert_string", "@TRAINER_AXIS_OPTION_MENU1_ALL");
   if(level.console) {
     level.player openpopupMenu("invert_axis");
-  }
-  else {
+  } else {
     level.player openpopupMenu("invert_axis_pc");
   }
 
@@ -695,8 +691,7 @@ firing_range_hip_and_ads() {
     -------------------------*/
     if(level.Xenon) {
       thread keyHint("hip_attack");
-    }
-    else {
+    } else {
       thread keyHint("pc_hip_attack"); // PC and PS3 are both press
     }
 
@@ -738,8 +733,7 @@ firing_range_hip_and_ads() {
       setDvar("ui_invert_string", "@TRAINER_AXIS_OPTION_MENU2_ALL");
       if(level.console) {
         level.player openpopupMenu("invert_axis");
-      }
-      else {
+      } else {
         level.player openpopupMenu("invert_axis_pc");
       }
 
@@ -939,8 +933,7 @@ cycle_targets_till_hit(targets, numberOfTagretsToHit, mustADS, mustCrouch, mustS
           } else {
             if(level.Xenon) {
               thread keyHint("ads_360");
-            }
-            else {
+            } else {
               thread keyHint("ads"); // PC and PS3 are both press
             }
             level notify("player_needs_to_ADS");
@@ -1084,8 +1077,7 @@ firing_range_timed_ads() {
     if(auto_aim() && numRepeats != 0) {
       if(level.xenon) {
         actionBind = getActionBind("ads_switch");
-      }
-      else {
+      } else {
         actionBind = getActionBind("ads_switch_shoulder");
       }
       double_line = true;
@@ -1206,8 +1198,7 @@ timedTargets() {
 
       if(level.Xenon) {
         thread keyHint("ads_360");
-      }
-      else {
+      } else {
         thread keyHint("ads"); // PC and PS3 are both press
       }
       level notify("player_needs_to_ADS");
@@ -1695,7 +1686,7 @@ show_me_when_player_not_looking_or_timeout(hiddenFrags, timeout) {
   }
   array_call(hiddenFrags, ::show);
   foreach(frag in hiddenFrags) {
-  frag.hidden = undefined;
+    frag.hidden = undefined;
   }
 }
 
@@ -2102,7 +2093,7 @@ course_loop_think() {
     playerPrimaryWeapons = level.player GetWeaponsListPrimaries();
     if(playerPrimaryWeapons.size > 0) {
       foreach(weapon in playerPrimaryWeapons) {
-      level.player givemaxammo(weapon);
+        level.player givemaxammo(weapon);
       }
     }
 
@@ -2111,8 +2102,7 @@ course_loop_think() {
 
     if(getdvarint("killhouse_too_slow") >= 1) {
       thread startTimer(level.timelimitMax);
-    }
-    else {
+    } else {
       thread startTimer(level.timelimitMin);
     }
 
@@ -2476,8 +2466,7 @@ player_alt_weapon_has_ammo() {
     altWeaponAmmo = level.player GetWeaponAmmoClip(weapon);
     if(altWeaponAmmo > 5) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -3160,11 +3149,9 @@ target_think(targetType) {
   }
   if(self.orgEnt.script_noteworthy == "reverse") {
     self.orgEnt rotatePitch(90, 0.25);
-  }
-  else if(self.orgEnt.script_noteworthy == "sideways") {
+  } else if(self.orgEnt.script_noteworthy == "sideways") {
     self.orgEnt rotateYaw(-180, 0.5);
-  }
-  else {
+  } else {
     self.orgEnt rotatePitch(-90, 0.25);
   }
 
@@ -3236,11 +3223,9 @@ target_think(targetType) {
     }
     if(self.orgEnt.script_noteworthy == "reverse") {
       self.orgEnt rotatePitch(-90, 0.25);
-    }
-    else if(self.orgEnt.script_noteworthy == "sideways") {
+    } else if(self.orgEnt.script_noteworthy == "sideways") {
       self.orgEnt rotateYaw(180, 0.5);
-    }
-    else {
+    } else {
       self.orgEnt rotatePitch(90, 0.25);
     }
 
@@ -3381,11 +3366,9 @@ target_think(targetType) {
     //wait( 0.05 );
     if(self.orgEnt.script_noteworthy == "reverse") {
       self.orgEnt rotatePitch(90, 0.25);
-    }
-    else if(self.orgEnt.script_noteworthy == "sideways") {
+    } else if(self.orgEnt.script_noteworthy == "sideways") {
       self.orgEnt rotateYaw(-180, 0.5);
-    }
-    else {
+    } else {
       self.orgEnt rotatePitch(-90, 0.25);
     }
     self setCanDamage(false);
@@ -3532,11 +3515,9 @@ roundDecimalPlaces(value, places, style) {
 
   if(style == "up") {
     roundedValue = ceil(newValue);
-  }
-  else if(style == "down") {
+  } else if(style == "down") {
     roundedValue = floor(newValue);
-  }
-  else {
+  } else {
     roundedValue = newvalue + 0.5;
   }
 
@@ -3606,8 +3587,7 @@ roundDecimalPlaces(value, places, style) {
 set_ammo() {
   if((self.classname == "weapon_fraggrenade") || (self.classname == "weapon_flash_grenade")) {
     self ItemWeaponSetAmmo(1, 0);
-  }
-  else {
+  } else {
     self ItemWeaponSetAmmo(999, 999);
   }
 }
@@ -3664,8 +3644,7 @@ init_precache() {
 
   if(level.console) {
     precacheMenu("invert_axis");
-  }
-  else {
+  } else {
     precacheMenu("invert_axis_pc");
   }
 
@@ -3979,8 +3958,7 @@ hint_temp(string, timeOut) {
 
   if(isDefined(timeOut)) {
     wait(timeOut);
-  }
-  else {
+  } else {
     return;
   }
 
@@ -4047,8 +4025,7 @@ setObjectiveRemaining(objName, objString, objRemaining) {
 
   if(!objRemaining) {
     objective_string(objective.id, objString);
-  }
-  else {
+  } else {
     objective_string(objective.id, objString, objRemaining);
   }
 }
@@ -4059,8 +4036,7 @@ keyHint(actionName, timeOut, doubleline, alwaysDisplay) {
 
   if(isDefined(doubleline)) {
     add_hint_background(doubleline);
-  }
-  else {
+  } else {
     add_hint_background();
   }
   level.hintElem = createFontString("objective", level.hint_text_size);
@@ -4071,8 +4047,7 @@ keyHint(actionName, timeOut, doubleline, alwaysDisplay) {
   actionBind = getActionBind(actionName);
   if((actionName == "melee") && (level.xenon) && (actionBind.key == "BUTTON_RSTICK")) {
     level.hintElem setText(&"TRAINER_HINT_MELEE_CLICK");
-  }
-  else {
+  } else {
     level.hintElem setText(actionBind.hint);
   }
   //level.hintElem endon ( "death" );
@@ -4138,8 +4113,7 @@ objective_hints(completion_flag) {
   if(level.Console) {
     if(level.Xenon) {
       keyHint("objectives", 6.0);
-    }
-    else {
+    } else {
       killhouse_hint(&"TRAINER_HINT_CHECK_OBJECTIVES_SCORES_PS3", 6);
     }
   } else {
@@ -4169,8 +4143,7 @@ objective_hints(completion_flag) {
 add_hint_background(double_line) {
   if(isDefined(double_line)) {
     level.hintbackground = createIcon("popmenu_bg", 650, 50);
-  }
-  else {
+  } else {
     level.hintbackground = createIcon("popmenu_bg", 650, 30);
   }
   level.hintbackground.hidewheninmenu = true;
@@ -4361,8 +4334,7 @@ killhouse_hint(text, timeOut, double_line) {
 
   if(isDefined(timeOut)) {
     wait(timeOut);
-  }
-  else {
+  } else {
     return;
   }
 
@@ -4714,10 +4686,10 @@ make_door_from_prefab(sTargetname) {
   }
 
   foreach(model in door_models) {
-  model linkto(door_org);
+    model linkto(door_org);
   }
   foreach(brush in door_brushes) {
-  brush linkto(door_org);
+    brush linkto(door_org);
   }
 
   door = door_org;
@@ -4759,14 +4731,11 @@ vehicle_think() {
   }
 }
 
-vehicle_humvee_think() {
-}
+vehicle_humvee_think() {}
 
-vehicle_m1a1_think() {
-}
+vehicle_m1a1_think() {}
 
-vehicle_cobra_think() {
-}
+vehicle_cobra_think() {}
 
 AI_drone_think() {
   self endon("death");
@@ -4818,8 +4787,7 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
     sAnimGo = sAnim + "_go"; //This will be the next animation to play after the loop (if defined)
     if(anim_exists(sAnimGo)) {
       sAnim = sAnimGo;
-    }
-    else {
+    } else {
       sAnimGo = undefined;
     }
   }
@@ -4836,8 +4804,7 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
   if(isDefined(self.script_flag)) {
     if(isDefined(sFailSafeFlag)) {
       flag_wait_either(self.script_flag, sFailSafeFlag);
-    }
-    else {
+    } else {
       flag_wait(self.script_flag);
     }
 
@@ -4901,8 +4868,7 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
 
     if(anim_exists(sAnim + "_react2")) {
       sAnimReact2 = sAnim + "_react2";
-    }
-    else {
+    } else {
       sAnimReact2 = sAnimReact;
     }
     while(isDefined(self)) {
@@ -4912,8 +4878,7 @@ ai_ambient_think(sAnim, sFailSafeFlag) {
       waittillframeend;
       if(RandomInt(100) > 50) {
         anim_generic(self, sAnimReact);
-      }
-      else {
+      } else {
         anim_generic(self, sAnimReact2);
       }
       thread anim_generic_loop(self, sAnim, "stop_idle");
@@ -5117,8 +5082,7 @@ anim_exists(sAnim, animname) {
   }
   if(isDefined(level.scr_anim[animname][sAnim])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -5182,8 +5146,7 @@ AI_think(guy) {
   }
 }
 
-AI_allies_think() {
-}
+AI_allies_think() {}
 
 AI_axis_think() {
   self forceUseWeapon("m4_grunt", "primary");
@@ -5193,8 +5156,7 @@ AI_axis_think() {
 player_has_primary_weapon() {
   if(level.player HasWeapon(level.gunPrimary)) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -5721,8 +5683,7 @@ mission_failed_out_of_time() {
   level notify("mission failed");
   if(!flag("player_course_end")) {
     setDvar("ui_deadquote", &"TRAINER_SHIP_TOO_SLOW");
-  }
-  else {
+  } else {
     setDvar("ui_deadquote", &"TRAINER_SHIP_DIDNT_SPRINT");
   }
 
@@ -5733,25 +5694,21 @@ get_pit_hud(x, y, player) {
   xPos = undefined;
   if(!level.Console) {
     xPos = -250; //override x-position if this is PC or the timer will get cut off
-  }
-  else if(!isDefined(x)) {
+  } else if(!isDefined(x)) {
     xPos = -225;
-  }
-  else {
+  } else {
     xPos = x;
   }
 
   if(!isDefined(y)) {
     yPos = 100;
-  }
-  else {
+  } else {
     yPos = y;
   }
 
   if(isDefined(player)) {
     hudelem = newClientHudElem(player);
-  }
-  else {
+  } else {
     hudelem = newHudElem();
   }
 

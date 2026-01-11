@@ -155,8 +155,7 @@ exploder_load(var_00) {
   if(isDefined(var_0.script_chance) && randomfloat(1) > var_0.script_chance) {
     if(isDefined(var_0.script_delay)) {
       wait(var_0.script_delay);
-    }
-    else {
+    } else {
       wait 4;
     }
 
@@ -270,8 +269,7 @@ setupexploders() {
 
     if(!isDefined(var_6.script_fxid)) {
       var_7.v["fxid"] = "No FX";
-    }
-    else {
+    } else {
       var_7.v["fxid"] = var_6.script_fxid;
     }
 
@@ -293,8 +291,7 @@ setupexploders() {
 
     if(isDefined(var_6.targetname) && isDefined(var_5[var_6.targetname])) {
       var_7.v["exploder_type"] = var_6.targetname;
-    }
-    else {
+    } else {
       var_7.v["exploder_type"] = "normal";
     }
 

@@ -68,7 +68,7 @@ bot_balance_personality() {
   foreach(personality_type, personality_array in level.bot_personality) {
     persCountsByType[personality_type] = 0;
     foreach(personality in personality_array) {
-    persCounts[personality] = 0;
+      persCounts[personality] = 0;
     }
   }
 
@@ -117,8 +117,7 @@ bot_balance_personality() {
 
   if(most_common_personality_uses - least_common_personality_uses >= 2) {
     personality_needed = least_common_personality;
-  }
-  else {
+  } else {
     personality_needed = Random(level.bot_personality[type_needed]);
   }
 
@@ -355,7 +354,7 @@ bot_monitor_watch_entrances_camp() {
 
   while(isDefined(self.watch_nodes)) {
     foreach(node in self.watch_nodes) {
-    node.watch_node_chance[self.entity_number] = 1.0;
+      node.watch_node_chance[self.entity_number] = 1.0;
     }
 
     prioritize_watch_nodes_toward_enemies(0.5);
@@ -577,8 +576,7 @@ find_camp_node_worker() {
       randomRoll = RandomInt(100);
       if(randomRoll < 66 && randomRoll >= 33) {
         faceAngles = (faceAngles[0], faceAngles[1] + 45, 0);
-      }
-      else if(randomRoll < 33) {
+      } else if(randomRoll < 33) {
         faceAngles = (faceAngles[0], faceAngles[1] - 45, 0);
       }
 
@@ -587,8 +585,7 @@ find_camp_node_worker() {
 
         if(use_lenient_flag) {
           nodes_to_select_from = self BotNodePickMultiple(nodes_to_select_from, selectCount, selectCount, "node_camp", anglesToForward(faceAngles), "lenient");
-        }
-        else {
+        } else {
           nodes_to_select_from = self BotNodePickMultiple(nodes_to_select_from, selectCount, selectCount, "node_camp", anglesToForward(faceAngles));
         }
 
@@ -732,8 +729,7 @@ bot_random_path_default() {
 bot_setup_callback_class() {
   if(self bot_setup_loadout_callback()) {
     return "callback";
-  }
-  else {
+  } else {
     return "class0";
   }
 }

@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\scene_shared;
-
 #namespace timecard_control;
 
 function_9b62d333(n_hour, n_minute) {

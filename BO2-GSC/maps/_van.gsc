@@ -10,8 +10,7 @@ main() {
   build_unload_groups(::unload_groups);
 }
 
-precache_submodels() {
-}
+precache_submodels() {}
 
 #using_animtree("vehicles");
 #using_animtree("generic_human");

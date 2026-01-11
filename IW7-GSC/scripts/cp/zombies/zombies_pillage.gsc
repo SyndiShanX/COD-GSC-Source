@@ -682,9 +682,7 @@ func_7B82(param_00, param_01) {
 
     case "quest":
       if(isDefined(level.quest_create_pillage_interaction)) {
-        [
-          [level.quest_create_pillage_interaction]
-        ](param_00, param_01);
+        [[level.quest_create_pillage_interaction]](param_00, param_01);
       }
       break;
 

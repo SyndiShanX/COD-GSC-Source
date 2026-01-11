@@ -52,8 +52,7 @@ main() {
 
   if(isDefined(level.should_use_cia) && level.should_use_cia) {
     level.characterindex = 0;
-  }
-  else {
+  } else {
     level.characterindex = 1;
   }
 
@@ -306,11 +305,9 @@ custom_end_screen() {
 
     if(isDefined(level.host_ended_game) && level.host_ended_game) {
       players[i].survived_hud settext(&"MP_HOST_ENDED_GAME");
-    }
-    else if(players[i] == winner) {
+    } else if(players[i] == winner) {
       players[i].survived_hud settext(winner_text);
-    }
-    else {
+    } else {
       players[i].survived_hud settext(loser_text);
     }
 
@@ -457,11 +454,9 @@ listen_to_the_doctor_endgame() {
 
   if(r == 0) {
     level maps\mp\zombies\_zm_audio_announcer::leaderdialog("dr_countdown0", undefined, undefined, 1, 4);
-  }
-  else if(r == 1) {
+  } else if(r == 1) {
     level maps\mp\zombies\_zm_audio_announcer::leaderdialog("dr_countdown1", undefined, undefined, 1, 4);
-  }
-  else {
+  } else {
     level maps\mp\zombies\_zm_audio_announcer::leaderdialog("dr_countdown2", undefined, undefined, 1, 4);
   }
 
@@ -534,7 +529,7 @@ zcleansed_logic() {
   doors = getEntArray("zombie_door", "targetname");
 
   foreach(door in doors) {
-  door setinvisibletoall();
+    door setinvisibletoall();
   }
 
   level thread maps\mp\zombies\_zm_blockers::open_all_zbarriers();
@@ -613,8 +608,7 @@ cleansedontimelimit() {
   level notify("normal_game_end");
 }
 
-cleansedonendgame(winningteam) {
-}
+cleansedonendgame(winningteam) {}
 
 create_match_start_message(text, duration) {
   level endon("end_game");
@@ -706,14 +700,13 @@ onplayerdisconnect() {
 
   if(get_players().size <= 1) {
     end_game_early();
-  }
-  else if(!(isDefined(level.ingraceperiod) && level.ingraceperiod)) {
+  } else if(!(isDefined(level.ingraceperiod) && level.ingraceperiod)) {
     thread checkzombiehumanratio();
     wait 2;
     players = get_players();
 
     foreach(player in players) {
-    player.nuked = undefined;
+      player.nuked = undefined;
     }
   }
 }
@@ -726,19 +719,16 @@ zombie_ramp_up() {
 
   if(isDefined(level.cleansed_zombie_round)) {
     self.maxhealth = maps\mp\zombies\_zm::ai_zombie_health(level.cleansed_zombie_round);
-  }
-  else {
+  } else {
     self.maxhealth = maps\mp\zombies\_zm::ai_zombie_health(2);
   }
 
   self.health = self.maxhealth;
 }
 
-precache_trophy() {
-}
+precache_trophy() {}
 
-create_trophy() {
-}
+create_trophy() {}
 
 give_trophy() {
   if(!self.has_trophy) {
@@ -859,8 +849,7 @@ disappear_in_flash(washuman) {
 
   if(washuman) {
     playFX(level._effect["human_disappears"], self.origin);
-  }
-  else {
+  } else {
     playFX(level._effect["zombie_disappears"], self.origin);
   }
 
@@ -896,8 +885,7 @@ onzombifyplayer() {
   level.in_zombify_call = 1;
   self freezecontrolswrapper(1);
 
-  if(isDefined(self.last_player_attacker) && isplayer(self.last_player_attacker) && (isDefined(self.last_player_attacker.is_zombie) && self.last_player_attacker.is_zombie)) {
-  }
+  if(isDefined(self.last_player_attacker) && isplayer(self.last_player_attacker) && (isDefined(self.last_player_attacker.is_zombie) && self.last_player_attacker.is_zombie)) {}
 
   if(isDefined(self.is_zombie) && self.is_zombie) {
     self check_for_drops(0);
@@ -916,8 +904,7 @@ onzombifyplayer() {
 
   self setclientfield("player_has_eyes", 0);
 
-  if(isDefined(self.is_zombie) && self.is_zombie) {
-  }
+  if(isDefined(self.is_zombie) && self.is_zombie) {}
 
   self notify("zombified");
   self disappear_in_flash(0);
@@ -995,14 +982,13 @@ playerfakedeath(vdir) {
   }
 }
 
-onspawnzombie() {
-}
+onspawnzombie() {}
 
 makefindfleshstructs() {
   structs = getstructarray("spawn_location", "script_noteworthy");
 
   foreach(struct in structs) {
-  struct.script_string = "find_flesh";
+    struct.script_string = "find_flesh";
   }
 }
 
@@ -1142,15 +1128,13 @@ shotgunloadout() {
 
   if(self hasweapon(self get_player_lethal_grenade())) {
     self getweaponammoclip(self get_player_lethal_grenade());
-  }
-  else {
+  } else {
     self giveweapon(self get_player_lethal_grenade());
   }
 
   self setweaponammoclip(self get_player_lethal_grenade(), 2);
 
-  if(!(isDefined(self.random_human) && self.random_human)) {
-  }
+  if(!(isDefined(self.random_human) && self.random_human)) {}
 }
 
 gunprogressionthink() {
@@ -1172,8 +1156,7 @@ gunprogressionthink() {
 
   self setweaponammoclip(self get_player_lethal_grenade(), 2);
 
-  if(!(isDefined(self.random_human) && self.random_human)) {
-  }
+  if(!(isDefined(self.random_human) && self.random_human)) {}
 
   self disableweaponcycling();
 
@@ -1319,8 +1302,7 @@ get_player_rank() {
   players = get_players();
 
   foreach(player in players) {
-    for(index = 0; index < level.player_score_sort.size && player.score < level.player_score_sort[index].score; index++) {
-    }
+    for(index = 0; index < level.player_score_sort.size && player.score < level.player_score_sort[index].score; index++) {}
 
     arrayinsert(level.player_score_sort, player, index);
   }
@@ -1341,8 +1323,7 @@ player_add_score(bonus) {
 
   if(isDefined(self.is_zombie) && self.is_zombie) {
     mult = level.zombie_vars[level.zombie_team]["zombie_point_scalar"];
-  }
-  else {
+  } else {
     mult = level.zombie_vars["allies"]["zombie_point_scalar"];
   }
 
@@ -1451,8 +1432,7 @@ player_score_update() {
     if(!(isDefined(level.ingraceperiod) && level.ingraceperiod)) {
       if(!cleansed_alive_check(self)) {
         waittime = 0.05;
-      }
-      else if(isDefined(self.is_zombie) && self.is_zombie) {
+      } else if(isDefined(self.is_zombie) && self.is_zombie) {
         waittime = level.zombie_penalty_period;
         self player_sub_score(level.zombie_penalty_points);
       } else {
@@ -1659,8 +1639,7 @@ pick_a_powerup(washuman) {
     }
     if(washuman) {
       r = r - powerup.hfrequency;
-    }
-    else {
+    } else {
       r = r - powerup.zfrequency;
     }
 
@@ -1763,8 +1742,7 @@ player_nuke(player) {
   if(isDefined(self)) {
     if(isDefined(player)) {
       self dodamage(self.health + 666, player.origin, player, player, "none", "MOD_EXPLOSIVE", 0, "nuke_zm");
-    }
-    else {
+    } else {
       self.nuked = undefined;
       self dodamage(self.health + 666, self.origin, self, self, "none", "MOD_EXPLOSIVE", 0, "nuke_zm");
     }

@@ -28,11 +28,10 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zombie_dog_util;
 
 autoexec __init__system__() {
-  system::register(#"zombie_dog_util", &__init__, undefined, #"aat");
+  system::register(#"zombie_dog_util", &__init__, undefined, # "aat");
 }
 
 __init__() {
@@ -45,10 +44,10 @@ __init__() {
   level.dog_spawners = [];
   level flag::init("dog_clips");
   zombie_utility::set_zombie_var(#"dog_fire_trail_percent", 50);
-  level thread aat::register_immunity("zm_aat_brain_decay", #"zombie_dog", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", #"zombie_dog", 0, 0, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", #"blight_father", 0, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"zombie_dog", 0, 1, 1);
+  level thread aat::register_immunity("zm_aat_brain_decay", # "zombie_dog", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", # "zombie_dog", 0, 0, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", # "blight_father", 0, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "zombie_dog", 0, 1, 1);
   dog_spawner_init();
   level thread dog_clip_monitor();
   zm_round_spawning::register_archetype(#"zombie_dog", &function_b168b424, &dog_round_spawn, &function_62db7b1c, 25);
@@ -180,7 +179,7 @@ dog_spawn_fx(ai, ent) {
 }
 
 dog_spawn_factory_logic(favorite_enemy) {
-  dog_locs = array::randomize(level.zm_loc_types[#"dog_location"]);
+  dog_locs = array::randomize(level.zm_loc_types[# "dog_location"]);
 
   for(i = 0; i < dog_locs.size; i++) {
     if(isDefined(level.old_dog_spawn) && level.old_dog_spawn == dog_locs[i]) {
@@ -330,17 +329,17 @@ function_de0a6ae4() {
   }
 }
 
-  function dog_round_start() {
-    level flag::set("dog_round");
-    level flag::set("dog_clips");
-    level thread zm_audio::sndmusicsystem_playstate("dog_start");
-    level thread clientfield::set("dog_round_fog_bank", 1);
-    dog_health_increase();
-    players = getplayers();
-    array::thread_all(players, &play_dog_round);
-    wait 5;
-    level thread function_c5ab118d();
-  }
+function dog_round_start() {
+  level flag::set("dog_round");
+  level flag::set("dog_clips");
+  level thread zm_audio::sndmusicsystem_playstate("dog_start");
+  level thread clientfield::set("dog_round_fog_bank", 1);
+  dog_health_increase();
+  players = getplayers();
+  array::thread_all(players, &play_dog_round);
+  wait 5;
+  level thread function_c5ab118d();
+}
 
 function_c5ab118d() {
   zm_audio::sndannouncerplayvox(#"dogstart");
@@ -364,7 +363,7 @@ dog_round_stop(var_d25bbdd5) {
 
   getplayers()[0] iprintln("<dev string:x5c>" + level.next_dog_round);
 
-    level thread clientfield::set("dog_round_fog_bank", 0);
+  level thread clientfield::set("dog_round_fog_bank", 0);
 }
 
 function_5f1ef789(var_d25bbdd5) {
@@ -381,7 +380,7 @@ play_dog_round() {
   wait 4.5;
   players = getplayers();
   num = randomintrange(0, players.size);
-  players[num] zm_audio::create_and_play_dialog(#"general", #"dog_spawn");
+  players[num] zm_audio::create_and_play_dialog(#"general", # "dog_spawn");
 }
 
 dog_init() {
@@ -421,7 +420,7 @@ dog_init() {
   self.freezegun_damage = 0;
   self.zombie_move_speed = "sprint";
 
-  if(self.subarchetype != #"zombie_wolf") {
+  if(self.subarchetype != # "zombie_wolf") {
     self.a.nodeath = 1;
   }
 
@@ -440,9 +439,9 @@ dog_init() {
 
   self zm_spawner::zombie_history("<dev string:x6f>" + self.origin);
 
-    if(isDefined(level.var_9c55db3)) {
-      self[[level.var_9c55db3]]();
-    }
+  if(isDefined(level.var_9c55db3)) {
+    self[[level.var_9c55db3]]();
+  }
 }
 
 dog_death() {
@@ -467,7 +466,7 @@ dog_death() {
     }
 
     if(randomintrange(0, 100) >= 80) {
-      self.attacker zm_audio::create_and_play_dialog(#"kill", #"hellhound");
+      self.attacker zm_audio::create_and_play_dialog(#"kill", # "hellhound");
     }
 
     self.attacker zm_stats::increment_client_stat("zdogs_killed");
@@ -486,11 +485,11 @@ dog_death() {
 
   self stoploopsound();
 
-  if(self.subarchetype != #"zombie_wolf" && !(isDefined(self.a.nodeath) && self.a.nodeath)) {
+  if(self.subarchetype != # "zombie_wolf" && !(isDefined(self.a.nodeath) && self.a.nodeath)) {
     trace = groundtrace(self.origin + (0, 0, 10), self.origin - (0, 0, 30), 0, self);
 
-    if(trace[#"fraction"] < 1) {
-      pitch = acos(vectordot(trace[#"normal"], (0, 0, 1)));
+    if(trace[# "fraction"] < 1) {
+      pitch = acos(vectordot(trace[# "normal"], (0, 0, 1)));
 
       if(pitch > 10) {
         self.a.nodeath = 1;
@@ -498,7 +497,7 @@ dog_death() {
     }
   }
 
-  if(self.subarchetype != #"zombie_wolf" && isDefined(self.a.nodeath)) {
+  if(self.subarchetype != # "zombie_wolf" && isDefined(self.a.nodeath)) {
     if(self.b_cleaned_up !== 1) {
       level thread dog_explode_fx(self, self.origin);
       self ghost();
@@ -531,7 +530,7 @@ dog_explode_fx(dog, origin) {
 zombie_setup_attack_properties_dog() {
   self zm_spawner::zombie_history("<dev string:x95>");
 
-    self thread dog_behind_audio();
+  self thread dog_behind_audio();
   self val::reset(#"dog_spawn", "ignoreall");
   self val::reset(#"dog_spawn", "ignoreme");
   self.meleeattackdist = 64;
@@ -554,7 +553,7 @@ stop_dog_sound_on_death() {
 dog_behind_audio() {
   self thread stop_dog_sound_on_death();
   self endon(#"death");
-  self waittill(#"dog_running", #"dog_combat");
+  self waittill(#"dog_running", # "dog_combat");
   bhtnactionstartevent(self, "close");
   self notify(#"bhtn_action_notify", {
     #action: "close"
@@ -650,7 +649,7 @@ dog_run_think() {
 }
 
 dog_stalk_audio() {
-  self endon(#"death", #"dog_running", #"dog_combat");
+  self endon(#"death", # "dog_running", # "dog_combat");
 
   while(true) {
     bhtnactionstartevent(self, "ambient");
@@ -709,7 +708,7 @@ function_62db7b1c(b_force_spawn = 0, var_eb3a8721) {
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.dog_spawn_func)) {
     s_spawn_loc = [[level.dog_spawn_func]]();
-  } else if(level.zm_loc_types[#"dog_location"].size > 0) {
+  } else if(level.zm_loc_types[# "dog_location"].size > 0) {
     str_target_zone = e_target zm_zonemgr::get_player_zone();
 
     if(!isDefined(str_target_zone)) {
@@ -815,8 +814,8 @@ function_62db7b1c(b_force_spawn = 0, var_eb3a8721) {
       }
     }
 
-    if(var_e99dec8e.size < 1 && level.zm_loc_types[#"dog_location"].size > 0) {
-      var_e99dec8e = arraycopy(level.zm_loc_types[#"dog_location"]);
+    if(var_e99dec8e.size < 1 && level.zm_loc_types[# "dog_location"].size > 0) {
+      var_e99dec8e = arraycopy(level.zm_loc_types[# "dog_location"]);
     }
 
     s_spawn_loc = array::random(var_e99dec8e);

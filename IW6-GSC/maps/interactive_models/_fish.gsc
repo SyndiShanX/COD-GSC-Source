@@ -22,8 +22,7 @@ fish() {
 single_fish_start() {
   if(isDefined(self.target)) {
     var_0 = getEntArray(self.target, "targetname");
-  }
-  else {
+  } else {
     var_0 = [];
   }
 
@@ -78,8 +77,7 @@ single_fish_idle(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_7 > var_3 * 2) {
       var_8 = maps\interactive_models\_interactive_utility::single_anim(var_5.anims, "flee_continue", "idle anim", 1, self.script_moveplaybackrate);
-    }
-    else {
+    } else {
       var_8 = maps\interactive_models\_interactive_utility::single_anim(var_5.anims, "idle", "idle anim", 1, self.script_moveplaybackrate);
     }
 
@@ -114,8 +112,7 @@ single_fish_idle(var_0, var_1, var_2, var_3, var_4) {
       if(var_17 + var_10 * var_13 < var_3) {
         if(var_7 < var_3) {
           var_18 = randomfloatrange(-20, 20);
-        }
-        else {
+        } else {
           var_18 = randomfloatrange(-60, 60);
         }
 
@@ -141,17 +138,13 @@ single_fish_idle(var_0, var_1, var_2, var_3, var_4) {
 
         if(var_16[2] < -1 * var_21) {
           var_19 = randomfloatrange(15, 30) - 0.5 * self.angles[0];
-        }
-        else if(var_16[2] > var_21) {
+        } else if(var_16[2] > var_21) {
           var_19 = randomfloatrange(-30, -15) - 0.5 * self.angles[0];
-        }
-        else if(var_16[2] < -0.5 * var_21) {
+        } else if(var_16[2] < -0.5 * var_21) {
           var_19 = randomfloatrange(0, 30) - 0.5 * self.angles[0];
-        }
-        else if(var_16[2] > 0.5 * var_21) {
+        } else if(var_16[2] > 0.5 * var_21) {
           var_19 = randomfloatrange(-30, 0) - 0.5 * self.angles[0];
-        }
-        else {
+        } else {
           var_19 = randomfloatrange(-20, 20) - 0.5 * self.angles[0];
         }
 
@@ -188,8 +181,7 @@ single_fish_flee(var_0, var_1) {
   if(isDefined(self.interruptedent)) {
     if(issentient(self.interruptedent)) {
       var_6 = self.interruptedent getEye();
-    }
-    else {
+    } else {
       var_6 = self.interruptedent.origin;
     }
 
@@ -209,14 +201,12 @@ single_fish_flee(var_0, var_1) {
 
   if(vectordot(var_8, var_9) > 0.7) {
     var_10 = "flee_straight";
-  }
-  else {
+  } else {
     var_11 = anglestoright(self.angles);
 
     if(vectordot(var_8, var_11) > 0) {
       var_10 = "flee_right";
-    }
-    else {
+    } else {
       var_10 = "flee_left";
     }
   }
@@ -246,8 +236,7 @@ single_fish_flee(var_0, var_1) {
 single_fish_getnextorigin() {
   if(isDefined(self.following)) {
     return self.following single_fish_getnextorigin();
-  }
-  else {
+  } else {
     return self.nextorigin;
   }
 }

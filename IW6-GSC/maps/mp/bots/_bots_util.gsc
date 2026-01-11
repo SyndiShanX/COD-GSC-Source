@@ -128,8 +128,7 @@ bot_choose_difficulty_for_default() {
 
       if(!isDefined(inUseCount[otherTeam][usedDifficulty])) {
         inUseCount[otherTeam][usedDifficulty] = 1;
-      }
-      else {
+      } else {
         inUseCount[otherTeam][usedDifficulty]++;
       }
     }
@@ -267,11 +266,9 @@ entrance_visible_from(entrance_origin, from_origin, stance) {
   offset = undefined;
   if(stance == "stand") {
     return true;
-  }
-  else if(stance == "crouch") {
+  } else if(stance == "crouch") {
     offset = crouch_offset;
-  }
-  else if(stance == "prone") {
+  } else if(stance == "prone") {
     offset = prone_offset;
   }
 
@@ -489,8 +486,7 @@ bot_waittill_goal_or_fail(optional_time, optional_param_1, optional_param_2) {
 
   if(isDefined(optional_time)) {
     result = self waittill_any_in_array_or_timeout(wait_array, optional_time);
-  }
-  else {
+  } else {
     result = self waittill_any_in_array_return(wait_array);
   }
 
@@ -546,8 +542,7 @@ bot_get_entrances_for_stance_and_index(stance, index) {
   entrances = [];
   if(isDefined(self.defense_override_entrances)) {
     entrances = self.defense_override_entrances;
-  }
-  else {
+  } else {
     entrances = level.entrance_points[index];
   }
 
@@ -748,8 +743,7 @@ bot_find_random_midpoint(nodes, point_test_func) {
 defend_valid_center() {
   if(isDefined(self.bot_defending_override_origin_node)) {
     return self.bot_defending_override_origin_node.origin;
-  }
-  else if(isDefined(self.bot_defending_center)) {
+  } else if(isDefined(self.bot_defending_center)) {
     return self.bot_defending_center;
   }
 
@@ -919,8 +913,7 @@ bot_draw_circle(center, radius, color, depthTest, segments) {
     start = circlepoints[i];
     if(i + 1 >= circlepoints.size) {
       end = circlepoints[0];
-    }
-    else {
+    } else {
       end = circlepoints[i + 1];
     }
 
@@ -935,8 +928,7 @@ bot_get_total_gun_ammo() {
   weapon_list = undefined;
   if(isDefined(self.weaponlist) && self.weaponlist.size > 0) {
     weapon_list = self.weaponlist;
-  }
-  else {
+  } else {
     weapon_list = self GetWeaponsListPrimaries();
   }
 
@@ -962,8 +954,7 @@ bot_out_of_ammo() {
   weapon_list = undefined;
   if(isDefined(self.weaponlist) && self.weaponlist.size > 0) {
     weapon_list = self.weaponlist;
-  }
-  else {
+  } else {
     weapon_list = self GetWeaponsListPrimaries();
   }
 
@@ -1109,7 +1100,7 @@ bot_watch_nodes(nodes, yaw, yaw_fov, end_time, end1, end2, end3, end4) {
   self.watch_nodes = array_randomize(self.watch_nodes);
 
   foreach(node in self.watch_nodes) {
-  node.watch_node_chance[self.entity_number] = 1.0;
+    node.watch_node_chance[self.entity_number] = 1.0;
   }
 
   startTime = GetTime();
@@ -1312,11 +1303,9 @@ bot_add_to_bot_level_targets(target_to_add) {
 
   if(target_to_add.bot_interaction_type == "use") {
     bot_add_to_bot_use_targets(target_to_add);
-  }
-  else if(target_to_add.bot_interaction_type == "damage") {
+  } else if(target_to_add.bot_interaction_type == "damage") {
     bot_add_to_bot_damage_targets(target_to_add);
-  }
-  else {
+  } else {
     AssertMsg("bot_add_to_bot_level_targets needs a trigger with bot_interaction_type set");
   }
 }
@@ -1467,17 +1456,13 @@ bot_queued_process_level_thread() {
         result = undefined;
         if(isDefined(process.parm4)) {
           result = process.owner[[process.func]](process.parm1, process.parm2, process.parm3, process.parm4);
-        }
-        else if(isDefined(process.parm3)) {
+        } else if(isDefined(process.parm3)) {
           result = process.owner[[process.func]](process.parm1, process.parm2, process.parm3);
-        }
-        else if(isDefined(process.parm2)) {
+        } else if(isDefined(process.parm2)) {
           result = process.owner[[process.func]](process.parm1, process.parm2);
-        }
-        else if(isDefined(process.parm1)) {
+        } else if(isDefined(process.parm1)) {
           result = process.owner[[process.func]](process.parm1);
-        }
-        else {
+        } else {
           result = process.owner[[process.func]]();
         }
         process.owner notify(process.name_complete, result);
@@ -1536,8 +1521,7 @@ bot_get_low_on_ammo(minFrac) {
   weapon_list = undefined;
   if(isDefined(self.weaponlist) && self.weaponlist.size > 0) {
     weapon_list = self.weaponlist;
-  }
-  else {
+  } else {
     weapon_list = self GetWeaponsListPrimaries();
   }
 

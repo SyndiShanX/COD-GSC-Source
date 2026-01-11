@@ -26,8 +26,7 @@ positionweaponavatar_stub(var_0, var_1) {
 
   if(var_6) {
     var_7 = (0, 0, -1 * var_8[2]);
-  }
-  else if(var_1 == "Equipment") {
+  } else if(var_1 == "Equipment") {
     var_7 = (0, 0, var_7[2]);
   }
 
@@ -36,11 +35,9 @@ positionweaponavatar_stub(var_0, var_1) {
 
   if(var_6) {
     var_3.angles = (185.0, 126.0, 0.0);
-  }
-  else if(maps\mp\_vl_cac::isweaponavataraweapon(var_0)) {
+  } else if(maps\mp\_vl_cac::isweaponavataraweapon(var_0)) {
     var_3.angles = (0.0, 350.0, 0);
-  }
-  else {
+  } else {
     var_3.angles = (0.0, 300.0, 15.0);
   }
 

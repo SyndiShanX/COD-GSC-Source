@@ -222,8 +222,7 @@ introscreen_create_line(string, type, scale, font) {
   if(!isDefined(scale)) {
     if(level.splitscreen && !level.hidef) {
       fontScale = 2.75;
-    }
-    else {
+    } else {
       fontScale = 1.75;
     }
   } else

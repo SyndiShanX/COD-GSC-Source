@@ -6,7 +6,6 @@
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_devgui;
-
 #namespace zm_ai_mannequin;
 
 autoexec __init__system__() {
@@ -22,7 +21,7 @@ __init__() {
 __main__() {}
 
 private function_c381536b() {
-  if(isDefined(self.subarchetype) && self.subarchetype == #"mannequin") {
+  if(isDefined(self.subarchetype) && self.subarchetype == # "mannequin") {
     self.var_80d367d8 = 1;
   }
 }

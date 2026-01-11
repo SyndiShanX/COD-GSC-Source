@@ -8,8 +8,7 @@ init() {
 
   if(scripts\mp\utility\game::isanymlgmatch()) {
     level.killstreakspawnshielddelayms = 0;
-  }
-  else {
+  } else {
     level.killstreakspawnshielddelayms = 4000;
   }
 
@@ -73,7 +72,7 @@ onplayerconnect() {
 func_FAD6(var_00) {
   if(isDefined(level.func_C7B3)) {
     foreach(var_02 in level.func_C7B3) {
-    var_00 thread func_139B5(var_02);
+      var_00 thread func_139B5(var_02);
     }
   }
 }
@@ -201,7 +200,7 @@ func_AEAE() {
 
 func_EC46(var_00, var_01) {
   foreach(var_04, var_03 in level.spawnglobals.func_10882[level.spawnglobals.func_1677]) {
-  scripts\mp\spawnfactor::calculatefactorscore(var_00, var_04, var_03, var_01);
+    scripts\mp\spawnfactor::calculatefactorscore(var_00, var_04, var_03, var_01);
   }
 }
 
@@ -367,7 +366,7 @@ getspawnpointarray(var_00) {
     level.func_108F8[var_00] = getspawnarray(var_00);
 
     foreach(var_02 in level.func_108F8[var_00]) {
-    var_2.classname = var_00;
+      var_2.classname = var_00;
     }
   }
 
@@ -530,8 +529,7 @@ func_108FE() {
 
     if(var_0.size > 0) {
       cachespawnpathnodesincode(var_00);
-    }
-    else {
+    } else {
       scripts\engine\utility::error("Spawn System Failure. There are no pathnodes near any spawnpoints.");
     }
   }
@@ -581,7 +579,7 @@ func_12F1F() {
   level.func_1091D = getactiveplayerlist();
 
   foreach(var_01 in level.func_1091D) {
-  var_1.spawnviewpathnodes = undefined;
+    var_1.spawnviewpathnodes = undefined;
   }
 
   foreach(var_04 in level.turrets) {
@@ -688,9 +686,8 @@ func_AFDA(var_00) {
   if(isDefined(level.matchrecording_logevent)) {
     if(isDefined(level.matchrecording_generateid) && !isDefined(var_0.logid)) {
       var_0.logid = [
-    }
-        [level.matchrecording_generateid]
-      ]();
+        }
+        [level.matchrecording_generateid]]();
 
     if(isDefined(var_0.logid)) {
       var_01 = 3;
@@ -701,20 +698,16 @@ func_AFDA(var_00) {
 
         if(var_02 && var_03) {
           var_01 = 0;
-        }
-        else if(var_02) {
+        } else if(var_02) {
           var_01 = 1;
-        }
-        else if(var_03) {
+        } else if(var_03) {
           var_01 = 2;
         }
       } else
         var_01 = scripts\engine\utility::ter_op(var_0.func_74BC["all"] == 0, 0, 3);
 
       if(!isDefined(var_0.func_AFBB) || var_0.func_AFBB != var_01) {
-        [
-          [level.matchrecording_logevent]
-        ](var_0.logid, "allies", "SPAWN_ENTITY", var_0.origin[0], var_0.origin[1], gettime(), var_01);
+        [[level.matchrecording_logevent]](var_0.logid, "allies", "SPAWN_ENTITY", var_0.origin[0], var_0.origin[1], gettime(), var_01);
         var_0.func_AFBB = var_01;
       }
     }
@@ -759,7 +752,7 @@ initspawnpointvalues(var_00) {
 clearspawnpointsightdata(var_00) {
   if(level.teambased) {
     foreach(var_02 in level.teamnamelist) {
-    func_41E6(var_00, var_02);
+      func_41E6(var_00, var_02);
     }
   } else
     func_41E6(var_00, "all");
@@ -770,7 +763,7 @@ func_FADD(var_00) {}
 clearspawnpointdistancedata(var_00) {
   if(level.teambased) {
     foreach(var_02 in level.teamnamelist) {
-    func_41E5(var_00, var_02);
+      func_41E5(var_00, var_02);
     }
   } else
     func_41E5(var_00, "all");
@@ -1003,8 +996,7 @@ func_67D3(var_00, var_01) {
 
       if(isplayer(var_09)) {
         var_11 = var_09 getEye();
-      }
-      else {
+      } else {
         var_11 = var_9.origin + (0, 0, 50);
       }
 
@@ -1128,8 +1120,7 @@ func_D91D() {
       if(var_01 ishost()) {
         if(shoulduseprecomputedlos()) {
           var_01 iprintlnbold("Attempting to use NEW Spawn System...");
-        }
-        else {
+        } else {
           var_01 iprintlnbold("Using OLD Spawn System...");
         }
 
@@ -1140,13 +1131,13 @@ func_D91D() {
 
   if(isDefined(level.matchrecording_logeventmsg)) {
     if(shoulduseprecomputedlos()) {
-      [[level.matchrecording_logeventmsg]]("LOG_GENERIC_MESSAGE", gettime(), "Attempting to use TTLOS Spawning Data...");
-    }
-    else {
       [
-    }
         [level.matchrecording_logeventmsg]
-      ]("LOG_GENERIC_MESSAGE", gettime(), "Using Corner-Trace Spawning System...");
+      ]("LOG_GENERIC_MESSAGE", gettime(), "Attempting to use TTLOS Spawning Data...");
+    } else {
+      [
+      }
+      [level.matchrecording_logeventmsg]]("LOG_GENERIC_MESSAGE", gettime(), "Using Corner-Trace Spawning System...");
   }
 }
 

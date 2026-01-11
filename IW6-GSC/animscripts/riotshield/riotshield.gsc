@@ -110,8 +110,7 @@ init_riotshield_ai() {
 
   if(level.gameskill < 1) {
     self.shieldbulletblocklimit = randomintrange(4, 8);
-  }
-  else {
+  } else {
     self.shieldbulletblocklimit = randomintrange(8, 12);
   }
 
@@ -134,8 +133,7 @@ init_riotshield_ai() {
 
   if(level.gameskill < 1) {
     self.bullet_resistance = 30;
-  }
-  else {
+  } else {
     self.bullet_resistance = 40;
   }
 
@@ -261,8 +259,7 @@ riotshield_startmovetransition() {
   if(self.a.pose == "crouch") {
     if(isDefined(self.sprint) || isDefined(self.fastwalk)) {
       var_0 = % riotshield_crouch2stand;
-    }
-    else {
+    } else {
       var_0 = % riotshield_crouch2walk;
     }
 
@@ -320,8 +317,7 @@ riotshield_bullet_hit_shield() {
 
     if(var_0 - self.shieldbulletblocktime > 500) {
       self.shieldbulletblockcount = 0;
-    }
-    else {
+    } else {
       self.shieldbulletblockcount++;
     }
 
@@ -333,8 +329,7 @@ riotshield_bullet_hit_shield() {
 
     if(common_scripts\utility::cointoss()) {
       var_1 = % riotshield_reacta;
-    }
-    else {
+    } else {
       var_1 = % riotshield_reactb;
     }
 
@@ -467,16 +462,14 @@ riotshield_death() {
 
   if(self.prevscript == "pain" || self.prevscript == "flashed") {
     var_2 = randomint(2) == 0;
-  }
-  else {
+  } else {
     var_2 = 1;
   }
 
   if(var_2) {
     if(common_scripts\utility::cointoss()) {
       var_1 = % riotshield_crouch_death;
-    }
-    else {
+    } else {
       var_1 = % riotshield_crouch_death_fallback;
     }
 
@@ -610,8 +603,7 @@ riotshield_flee_and_drop_shield() {
 
   if(!isDefined(self.dropshieldinplace) && isDefined(self.enemy) && vectordot(self.lookaheaddir, anglesToForward(self.angles)) < 0) {
     var_0 = % riotshield_crouch2walk_2flee;
-  }
-  else {
+  } else {
     var_0 = % riotshield_crouch2stand_shield_drop;
   }
 

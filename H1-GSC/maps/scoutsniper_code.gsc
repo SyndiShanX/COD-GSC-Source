@@ -109,8 +109,7 @@ dynamic_run_speed(var_0, var_1) {
 
     if(isDefined(self.last_set_goalent)) {
       var_6 = dynamic_run_ahead_test(self.last_set_goalent, var_1);
-    }
-    else if(isDefined(self.last_set_goalnode)) {
+    } else if(isDefined(self.last_set_goalnode)) {
       var_6 = dynamic_run_ahead_test(self.last_set_goalnode, var_1);
     }
 
@@ -142,8 +141,7 @@ dynamic_run_speed(var_0, var_1) {
 dynamic_run_ahead_test(var_0, var_1) {
   if(!isDefined(var_0.classname)) {
     var_2 = ::follow_path_get_node;
-  }
-  else {
+  } else {
     var_2 = ::follow_path_get_ent;
   }
 
@@ -361,8 +359,7 @@ wait_for_player(var_0, var_1, var_2) {
 
     if(var_5.size == 1) {
       var_3 = vectornormalize(var_5[0].origin - var_0.origin);
-    }
-    else {
+    } else {
       var_3 = anglesToForward(var_0.angles);
     }
   } else
@@ -548,8 +545,7 @@ fly_to(var_0) {
 
   if(isDefined(var_0.radius)) {
     self setneargoalnotifydist(var_0.radius);
-  }
-  else {
+  } else {
     self setneargoalnotifydist(512);
   }
 
@@ -568,8 +564,7 @@ fly_to(var_0) {
   if(isDefined(var_0.angles)) {
     if(var_1) {
       self setgoalyaw(var_0.angles[1]);
-    }
-    else {
+    } else {
       self settargetyaw(var_0.angles[1]);
     }
   } else
@@ -606,8 +601,7 @@ fly_path_set_speed(var_0, var_1) {
 
     if(isDefined(var_1)) {
       self vehicle_setspeedimmediate(var_0, var_2, var_3);
-    }
-    else {
+    } else {
       self vehicle_setspeed(var_0, var_2, var_3);
     }
   }
@@ -649,8 +643,7 @@ scripted_spawn2(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     var_4 = var_3 stalingradspawn(1);
-  }
-  else {
+  } else {
     var_4 = var_3 dospawn(1);
   }
 
@@ -790,8 +783,7 @@ music_loop_fade(var_0) {
 
   if(common_scripts\utility::flag("end_kill_music")) {
     musicstop(12);
-  }
-  else {
+  } else {
     musicstop(6);
   }
 }
@@ -842,8 +834,7 @@ scoutsniper_music_play(var_0, var_1) {
 
   if(isDefined(var_1)) {
     maps\_utility::music_crossfade(var_0, var_1);
-  }
-  else {
+  } else {
     maps\_utility::music_crossfade(var_0, 1.0);
   }
 }
@@ -1126,8 +1117,7 @@ church_lookout_stealth_behavior_saw_corpse() {
 
   if(!maps\_utility::ent_flag("_stealth_found_corpse")) {
     maps\_utility::ent_flag_set("_stealth_found_corpse");
-  }
-  else {
+  } else {
     self notify("_stealth_found_corpse");
   }
 
@@ -1456,8 +1446,7 @@ clean_previous_ai(var_0, var_1, var_2) {
 
   if(!isDefined(var_1)) {
     var_3 = getaispeciesarray("axis", "all");
-  }
-  else {
+  } else {
     var_3 = maps\_utility::get_living_aispecies_array(var_1, var_2);
   }
 
@@ -1484,8 +1473,7 @@ fake_radiation() {
     while(level.player istouching(self)) {
       if(level.player.radiation.ratepercent < 5) {
         level.player.radiation.ratepercent = 5;
-      }
-      else {
+      } else {
         level.player.radiation.ratepercent = 0;
       }
 
@@ -1621,8 +1609,7 @@ field_enemy_walk_behind_bmp() {
 
   if(!isDefined(self.patrol_walk_anim)) {
     maps\_utility::set_generic_run_anim("patrol_walk", 1);
-  }
-  else {
+  } else {
     maps\_utility::set_generic_run_anim(self.patrol_walk_anim, 1);
   }
 
@@ -1673,8 +1660,7 @@ field_enemy_avoid_bmp_on_collision(var_0) {
 
   if(isDefined(self.last_patrol_goal)) {
     self setgoalentity(self.last_patrol_goal);
-  }
-  else {
+  } else {
     self setgoalpos(var_1);
   }
 }
@@ -1866,15 +1852,13 @@ cargo_slipby_part1(var_0) {
 
     if(common_scripts\utility::flag("cargo_patrol_dead")) {
       level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_letsgo2");
-    }
-    else if(common_scripts\utility::flag("cargo_patrol_danger")) {
+    } else if(common_scripts\utility::flag("cargo_patrol_danger")) {
       level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_patrolthisway");
       cargo_patrol_waitdead_or_flag_open("cargo_patrol_danger");
 
       if(!common_scripts\utility::flag("cargo_patrol_dead")) {
         level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_waithere2");
-      }
-      else {
+      } else {
         level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_letsgo2");
       }
     } else
@@ -1994,8 +1978,7 @@ dash_ai() {
 
   if(isDefined(var_0.target)) {
     thread maps\_patrol::patrol();
-  }
-  else {
+  } else {
     thread dash_idler();
   }
 }
@@ -2136,8 +2119,7 @@ dash_handle_doors_blowopen() {
 
   if(!common_scripts\utility::flag("dash_door_R_open")) {
     var_4 thread dash_door_super_fast(-0.85);
-  }
-  else {
+  } else {
     var_4 thread dash_door_super_fast(0.35);
   }
 
@@ -2171,8 +2153,7 @@ dash_crawl_patrol() {
 
   if(self.script_startingposition == 9) {
     var_2 = "bm21_unload2";
-  }
-  else {
+  } else {
     var_2 = "bm21_unload1";
   }
 
@@ -2243,8 +2224,7 @@ dash_sniper_death() {
 
     if(common_scripts\utility::flag("dash_last")) {
       level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_beautiful");
-    }
-    else {
+    } else {
       common_scripts\utility::flag_set("dash_work_as_team");
       level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_ateam");
     }
@@ -2476,8 +2456,7 @@ price_death() {
 
   if(isplayer(var_0)) {
     var_1 = &"SCOUTSNIPER_FRIENDLY_FIRE_WILL_NOT";
-  }
-  else {
+  } else {
     var_1 = &"SCOUTSNIPER_YOUR_ACTIONS_GOT_CPT";
   }
 
@@ -2499,8 +2478,7 @@ deleteontruegoal() {
 
   if(var_0.size) {
     var_1 = ::follow_path_get_node;
-  }
-  else {
+  } else {
     var_0 = getEntArray(self.target, "targetname");
     var_1 = ::follow_path_get_ent;
   }
@@ -2514,8 +2492,7 @@ deleteontruegoal() {
 
   if(!isDefined(self.script_parameters)) {
     self delete();
-  }
-  else {
+  } else {
     maps\_stealth_logic::stealth_ai_idle_and_react(self, var_2 + "idle", var_2 + "react");
   }
 }
@@ -2642,8 +2619,7 @@ default_corpse_dialogue() {
 
       if(var_0.size < 2) {
         level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_nooneleft");
-      }
-      else {
+      } else {
         level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_goloud");
       }
     }
@@ -2835,8 +2811,7 @@ default_spotted_dialogue() {
 
     if(common_scripts\utility::flag("dogs_dog_dead")) {
       maps\_utility::radio_dialogue("scoutsniper_mcm_dogsingrass");
-    }
-    else {
+    } else {
       maps\_utility::radio_dialogue("scoutsniper_mcm_spotted");
     }
 
@@ -3248,8 +3223,7 @@ intro_close_in_on_target() {
 
     if(self maymovetopoint(var_1)) {
       self setgoalpos(var_1);
-    }
-    else {
+    } else {
       var_2 = maps\_stealth_behavior::enemy_get_closest_pathnodes(400, var_1);
 
       if(var_2.size) {

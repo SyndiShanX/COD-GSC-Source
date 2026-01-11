@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_random_teleport;
 
 autoexec __init__system__() {
@@ -50,7 +49,7 @@ is_active() {
 
 private function_6a04c6e6() {
   self endon(#"disconnect");
-  level endon(#"hash_34f9cf7500b33c6b", #"end_game");
+  level endon(#"hash_34f9cf7500b33c6b", # "end_game");
 
   while(true) {
     wait randomfloatrange(level.var_935c100a, level.var_33146b2e);

@@ -28,7 +28,7 @@ setup_church_lighting() {
   var_1 = getEntArray("village_defend_church_models", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-  var_3 overridelightingorigin(var_0.origin);
+    var_3 overridelightingorigin(var_0.origin);
   }
 }
 

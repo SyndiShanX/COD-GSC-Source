@@ -22,7 +22,7 @@ init() {
   game["menu_changeclass_barebones"] = "changeclass_barebones";
 
   foreach(team in level.teams) {
-  game["menu_changeclass_" + team] = "changeclass";
+    game["menu_changeclass_" + team] = "changeclass";
   }
 
   game["menu_controls"] = "ingame_controls";
@@ -113,8 +113,7 @@ onmenuresponse() {
     if(response == "endround") {
       if(!level.gameended) {
         level thread maps\mp\gametypes_zm\_globallogic::forceend();
-      }
-      else {
+      } else {
         self closemenu();
         self closeingamemenu();
         self iprintln(&"MP_HOST_ENDGAME_RESPONSE");

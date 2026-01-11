@@ -12,8 +12,7 @@
 init() {
   if(isDefined(level.bowie_cost)) {
     cost = level.bowie_cost;
-  }
-  else {
+  } else {
     cost = 3000;
   }
 

@@ -38,8 +38,7 @@ MoveCQB() {
 
   if(self.stairsState == "none") {
     transTime = 0.3;
-  }
-  else {
+  } else {
     transTime = 0.1; // need to transition to stairs quickly
   }
 
@@ -141,37 +140,36 @@ findCQBPointsOfInterest() {
               dot = vectorDot(vectorNormalize(point - shootAtPos), forward);
               if(dot < 0.643 || dot > 0.966) // 0.643 = cos( 50 ), 0.966 = cos( 15 ) {
                 continue;
-              }
-            } else {
-              if(dist < 50 * 50) {
-                continue;
-              }
             }
-
-            if(!sightTracePassed(lookAheadPoint, point, false, undefined)) {
+          } else {
+            if(dist < 50 * 50) {
               continue;
             }
-
-            bestdist = dist;
-            best = j;
           }
-        }
 
-        if(best < 0) {
-          guy.cqb_point_of_interest = undefined;
-        }
-        else {
-          guy.cqb_point_of_interest = level.cqbPointsOfInterest[best];
-        }
+          if(!sightTracePassed(lookAheadPoint, point, false, undefined)) {
+            continue;
+          }
 
-        wait .05;
-        waited = true;
+          bestdist = dist;
+          best = j;
+        }
       }
-    }
-    if(!waited) {
-      wait .25;
+
+      if(best < 0) {
+        guy.cqb_point_of_interest = undefined;
+      } else {
+        guy.cqb_point_of_interest = level.cqbPointsOfInterest[best];
+      }
+
+      wait .05;
+      waited = true;
     }
   }
+  if(!waited) {
+    wait .25;
+  }
+}
 }
 
 CQBDebug() {

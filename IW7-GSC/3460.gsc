@@ -98,9 +98,7 @@ cleanupgamemodes(var_00, var_01, var_02) {
 func_6CC8(var_00, var_01, var_02, var_03, var_04) {
   if(isDefined(var_03)) {
     foreach(var_06 in var_03) {
-      if([
-          [var_02]
-        ](var_00, var_01, var_06))
+      if([[var_02]](var_00, var_01, var_06))
         var_4.targets[var_4.targets.size] = var_06;
     }
   }
@@ -115,8 +113,7 @@ func_6CAA(var_00, var_01) {
 
   if(level.teambased) {
     var_03 = scripts\mp\utility\game::func_9FE7;
-  }
-  else {
+  } else {
     var_03 = scripts\mp\utility\game::func_9FD8;
   }
 

@@ -138,8 +138,7 @@ frontend_rts_level_respond() {
 
   if(success) {
     response_line = random(positive_lines);
-  }
-  else {
+  } else {
     response_line = random(negative_lines);
   }
 
@@ -167,7 +166,7 @@ hide_holo_table_props() {
   props = getEntArray("holo_table_prop", "script_noteworthy");
 
   foreach(prop in props) {
-  prop hide();
+    prop hide();
   }
 }
 
@@ -248,8 +247,7 @@ data_glove_input_button() {
 
   if(!level.console && !level.player gamepadusedlast()) {
     pressed = level.player buttonpressed("MOUSE1") || level.player buttonpressed("ESCAPE") || level.player buttonpressed("ENTER");
-  }
-  else {
+  } else {
     pressed = level.player buttonpressed("BUTTON_A") || level.player buttonpressed("BUTTON_B") || level.player buttonpressed("BUTTON_X") || level.player buttonpressed("BUTTON_Y");
   }
 
@@ -307,8 +305,7 @@ frontend_should_use_vtol(cur_level) {
 
   if(cur_level > last_level_num) {
     return false;
-  }
-  else {
+  } else {
     blackout_level_num = int(tablelookup("sp/levelLookup.csv", 1, "blackout", 0));
     return cur_level > blackout_level_num;
   }
@@ -324,8 +321,7 @@ stop_credits_button() {
 
   if(!level.console && !level.player gamepadusedlast()) {
     pressed = level.player buttonpressed("MOUSE1");
-  }
-  else {
+  } else {
     pressed = level.player buttonpressed(getenterbutton());
   }
 
@@ -352,8 +348,7 @@ run_glasses_input() {
           if(stop_credits_button()) {
             level notify("credits_skip");
 
-            if(stop_credits_button()) {
-            }
+            if(stop_credits_button()) {}
           }
 
           break;
@@ -461,8 +456,7 @@ toggle_viewarm(do_show, skipanim) {
   if(do_show) {
     if(use_vtol) {
       visionsetnaked("sp_front_end_menu_vtol", 1.0);
-    }
-    else {
+    } else {
       visionsetnaked("sp_front_end_menu", 1.0);
     }
 
@@ -641,8 +635,7 @@ listen_for_launchlevel_messages() {
 
       if(str_action_arg == "so_tut_mp_drone") {
         level_for_briefing = getdvar(#"_id_D614D075");
-      }
-      else {
+      } else {
         level_for_briefing = str_action_arg;
       }
 
@@ -714,15 +707,13 @@ cm_input_watcher() {
 
         if(lvl[lvl_index] == i) {
           lvl_index++;
-        }
-        else {
+        } else {
           lvl_index = 0;
         }
 
         if(unit[unit_index] == i) {
           unit_index++;
-        }
-        else {
+        } else {
           unit_index = 0;
         }
 
@@ -1158,8 +1149,7 @@ build_globe() {
 toggle_hologram_fx(fx_on) {
   if(fx_on) {
     holo_table_exploder_switch(113);
-  }
-  else {
+  } else {
     holo_table_exploder_switch(undefined);
   }
 }
@@ -1198,8 +1188,7 @@ show_holotable_fuzz(do_show) {
 
   if(do_show) {
     fuzz setclientflag(15);
-  }
-  else {
+  } else {
     fuzz clearclientflag(15);
   }
 
@@ -1228,8 +1217,7 @@ show_globe(do_show, toggle_countries, ambient_spin) {
 
   if(!ambient_spin) {
     globe notify("stop_spinning");
-  }
-  else {
+  } else {
     globe notify("kill_globe_marker_fx");
     globe thread rotate_indefinitely(120);
   }
@@ -1312,8 +1300,7 @@ frontend_get_hub_number(current_level) {
 
   if(!isDefined(hub_number)) {
     hub_number = 0;
-  }
-  else if(hub_number <= 0) {
+  } else if(hub_number <= 0) {
     hub_number = 0;
   }
 
@@ -1384,8 +1371,7 @@ frontend_watch_resume() {
 flag_is_set_and_defined(flag_name) {
   if(!isDefined(flag_name)) {
     return 0;
-  }
-  else {
+  } else {
     return flag(flag_name);
   }
 }
@@ -1393,8 +1379,7 @@ flag_is_set_and_defined(flag_name) {
 frontend_platform_skip_button_check() {
   if(!level.console && !level.player gamepadusedlast()) {
     return level.player buttonpressed("MOUSE1") || level.player buttonpressed("ENTER") || level.player buttonpressed("ESCAPE");
-  }
-  else {
+  } else {
     return level.player buttonpressed(getenterbutton());
   }
 }
@@ -1495,8 +1480,7 @@ setup_war_map(cur_level) {
 
     if(campaign_state == 0) {
       color_id = 4;
-    }
-    else if(map_done != 0) {
+    } else if(map_done != 0) {
       color_id = 3;
       num_claimed++;
     } else if(num_tokens == 0)
@@ -1518,14 +1502,11 @@ setup_war_map(cur_level) {
 
   if(campaign_state == 0) {
     set_world_map_tint(4, 4);
-  }
-  else if(num_tokens == 0 || num_fallen >= 3) {
+  } else if(num_tokens == 0 || num_fallen >= 3) {
     set_world_map_tint(4, 2);
-  }
-  else if(num_claimed >= 3) {
+  } else if(num_claimed >= 3) {
     set_world_map_tint(4, 3);
-  }
-  else {
+  } else {
     set_world_map_tint(4, 0);
   }
 
@@ -1759,8 +1740,7 @@ frontend_watch_devgui() {
 
           if(cur_val) {
             iprintlnbold("Stat now FALSE");
-          }
-          else {
+          } else {
             iprintlnbold("Stat now TRUE");
           }
         }

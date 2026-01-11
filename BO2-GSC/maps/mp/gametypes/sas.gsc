@@ -97,8 +97,7 @@ onplayerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, 
     if(isDefined(eattacker) && isplayer(eattacker)) {
       if(!isDefined(eattacker.pers["sticks"])) {
         eattacker.pers["sticks"] = 1;
-      }
-      else {
+      } else {
         eattacker.pers["sticks"]++;
       }
 
@@ -115,8 +114,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
 
     if(smeansofdeath == "MOD_MELEE") {
       attacker maps\mp\gametypes\_globallogic_score::givepointstowin(level.pointspermeleekill);
-    }
-    else if(baseweaponname == "crossbow_mp") {
+    } else if(baseweaponname == "crossbow_mp") {
       attacker.killswithprimary++;
 
       if(attacker.killswithbothawarded == 0 && attacker.killswithsecondary > 0) {
@@ -128,8 +126,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     } else if(baseweaponname == "hatchet_mp") {
       if(maps\mp\gametypes\_globallogic::istopscoringplayer(self)) {
         maps\mp\_scoreevents::processscoreevent("kill_leader_with_axe_sas", attacker, self, sweapon);
-      }
-      else {
+      } else {
         maps\mp\_scoreevents::processscoreevent("kill_with_axe_sas", attacker, self, sweapon);
       }
 
@@ -153,8 +150,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
 
       if(level.setbacks == 0) {
         self maps\mp\gametypes\_globallogic_score::setpointstowin(0);
-      }
-      else {
+      } else {
         self maps\mp\gametypes\_globallogic_score::givepointstowin(level.setbacks * -1);
       }
 
@@ -168,8 +164,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
 
     if(level.setbacks == 0) {
       self maps\mp\gametypes\_globallogic_score::setpointstowin(0);
-    }
-    else {
+    } else {
       self maps\mp\gametypes\_globallogic_score::givepointstowin(level.setbacks * -1);
     }
 
@@ -234,8 +229,7 @@ onspawnplayer(predictedspawn) {
 
   if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "sas");
   }
 }

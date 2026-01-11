@@ -10,8 +10,7 @@ initweapon(var_0) {
 
   if(getweaponclipmodel(var_0) != "") {
     self.weaponinfo[var_0].useclip = 1;
-  }
-  else {
+  } else {
     self.weaponinfo[var_0].useclip = 0;
   }
 }
@@ -153,15 +152,13 @@ main() {
 
   if(self.team == "allies") {
     self.suppressionthreshold = 0.5;
-  }
-  else {
+  } else {
     self.suppressionthreshold = 0.0;
   }
 
   if(self.team == "allies") {
     self.randomgrenaderange = 0;
-  }
-  else {
+  } else {
     self.randomgrenaderange = 256;
   }
 

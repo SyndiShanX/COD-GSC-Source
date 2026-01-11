@@ -284,8 +284,7 @@ enemy_run_from_forest_to_beach(delay, str_category, alive_time) {
 forest_enemy_damage_override_func(einflictor, e_attacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
   if(!isDefined(smeansofdeath) || smeansofdeath == "MOD_UNKNOWN") {
     return 0;
-  }
-  else if(!isDefined(self.alreadylaunched)) {
+  } else if(!isDefined(self.alreadylaunched)) {
     self.alreadylaunched = 1;
     self startragdoll(1);
     v_launch = vectorscale((0, 0, 1), 100.0);
@@ -306,7 +305,7 @@ play_outro_vo() {
   guys = getaiarray("axis");
 
   foreach(guy in guys) {
-  guy delete();
+    guy delete();
   }
 
   wait 1;

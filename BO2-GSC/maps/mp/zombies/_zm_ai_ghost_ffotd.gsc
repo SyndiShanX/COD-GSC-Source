@@ -149,8 +149,7 @@ ghost_bad_path_failsafe() {
 
         if(nodes.size > 0) {
           node = nodes[randomint(nodes.size)];
-        }
-        else {
+        } else {
           node = getnearestnode(player.origin);
         }
 
@@ -192,7 +191,7 @@ non_ghost_round_failsafe() {
 disable_traversal_clip_around_mansion() {
   if(isDefined(level.ghost_zone_door_clips) && level.ghost_zone_door_clips.size > 0) {
     foreach(door_clip in level.ghost_zone_door_clips) {
-    door_clip notsolid();
+      door_clip notsolid();
     }
   }
 }
@@ -248,8 +247,7 @@ ghost_teleport_to_playable_area() {
             if(!is_true(self.is_teleported_in_bad_zone)) {
               if(can_use_mansion_back_flying_out_node(bad_spawn_zone_name)) {
                 ghost forceteleport(level.ghost_back_flying_out_path_starts[0].origin, (0, 0, 0));
-              }
-              else {
+              } else {
                 ghost forceteleport(level.ghost_front_flying_out_path_starts[0].origin, (0, 0, 0));
               }
 

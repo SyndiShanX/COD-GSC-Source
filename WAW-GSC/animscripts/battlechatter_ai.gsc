@@ -45,23 +45,17 @@ addToSystem(squadName) {
     friendname = tolower(self.script_friendname);
     if(issubstr(friendname, "sullivan")) {
       self.npcID = "sul";
-    }
-    else if(issubstr(friendname, "roebuck")) {
+    } else if(issubstr(friendname, "roebuck")) {
       self.npcID = "roe";
-    }
-    else if(issubstr(friendname, "polonsky")) {
+    } else if(issubstr(friendname, "polonsky")) {
       self.npcID = "pol";
-    }
-    else if(issubstr(friendname, "reznov")) {
+    } else if(issubstr(friendname, "reznov")) {
       self.npcID = "rez";
-    }
-    else if(issubstr(friendname, "chernov")) {
+    } else if(issubstr(friendname, "chernov")) {
       self.npcID = "che";
-    }
-    else if(issubstr(friendname, "commissar")) {
+    } else if(issubstr(friendname, "commissar")) {
       self.npcID = "com";
-    }
-    else {
+    } else {
       self setNPCID();
     }
   } else {
@@ -180,8 +174,7 @@ init_aiBattleChatter() {
   self.bcs_minPriority = 0.0;
   if(isDefined(self.script_battlechatter) && !self.script_battlechatter) {
     self.battleChatter = false;
-  }
-  else {
+  } else {
     self.battleChatter = level.battlechatter[self.team];
   }
   self.chatInitialized = true;
@@ -260,8 +253,7 @@ evaluateMoveEvent(leavingCover) {
     if(self.squad.squadStates["move"].isActive) {
       if(self isHero()) {
         self addOrder("move", "follow");
-      }
-      else {
+      } else {
         self addOrder("action", "coverme");
       }
     } else {
@@ -314,8 +306,7 @@ addSituationalOrder() {
   }
   if(self.squad.squadStates["combat"].isActive) {
     self addSituationalCombatOrder();
-  }
-  else {
+  } else {
     self addSituationalIdleOrder();
   }
 }
@@ -346,8 +337,7 @@ addSituationalCombatOrder() {
   } else {
     if(self.team == "allies") {
       soldiers = getAIArray("axis");
-    }
-    else {
+    } else {
       soldiers = getAIArray("allies");
     }
     closestSoldier = undefined;

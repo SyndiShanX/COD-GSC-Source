@@ -9,8 +9,7 @@ func_C0E1(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_02)) {
     var_06 = var_02;
-  }
-  else {
+  } else {
     var_06 = self;
   }
 
@@ -18,8 +17,7 @@ func_C0E1(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_04)) {
     var_07 = var_04;
-  }
-  else {
+  } else {
     var_07 = var_0.func_1FBB;
   }
 
@@ -95,7 +93,7 @@ func_C0CC(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   foreach(var_12, var_08 in var_04) {
     if(isDefined(level.func_EC8D[var_03][var_12][var_02])) {
       foreach(var_10 in level.func_EC8D[var_03][var_12][var_02]) {
-      func_1ED8(var_10, var_00, var_06, var_05);
+        func_1ED8(var_10, var_00, var_06, var_05);
       }
     }
   }
@@ -114,14 +112,12 @@ func_C0DB(var_00) {
 
     if(isDefined(self.func_1EFF)) {
       self thread[[self.func_1EFF]](var_02, "j_head", 1);
-    }
-    else {
+    } else {
       var_03 = strtok(var_02, ",");
 
       if(var_3.size < 2) {
         thread scripts\sp\utility::play_sound_on_tag(var_02, undefined, 1);
-      }
-      else {
+      } else {
         thread scripts\sp\utility::play_sound_on_tag(var_3[0], var_3[1], 1);
       }
     }
@@ -134,11 +130,9 @@ func_C0DB(var_00) {
 
     if(isDefined(self.func_1EFF)) {
       self thread[[self.func_1EFF]](var_02, "j_head", 1);
-    }
-    else if(!issentient(self)) {
+    } else if(!issentient(self)) {
       thread scripts\sp\utility::play_sound_on_tag(var_02, "j_head", 1, var_02);
-    }
-    else {
+    } else {
       self getyawtoenemy(var_02, "sounddone", 1);
     }
 
@@ -230,8 +224,7 @@ func_C0DB(var_00) {
 
     if(isDefined(self.func_1EFF)) {
       self thread[[self.func_1EFF]](var_02, "j_head", 1);
-    }
-    else {
+    } else {
       thread scripts\sp\pip_util::func_CBA5(var_02);
     }
 
@@ -415,8 +408,7 @@ func_1ED8(var_00, var_01, var_02, var_03) {
   if(isDefined(var_0["attach model"])) {
     if(isDefined(var_0["selftag"])) {
       var_01 attach(var_0["attach model"], var_0["selftag"]);
-    }
-    else {
+    } else {
       var_03 attach(var_0["attach model"], var_0["tag"]);
     }
 
@@ -426,8 +418,7 @@ func_1ED8(var_00, var_01, var_02, var_03) {
   if(isDefined(var_0["detach model"])) {
     if(isDefined(var_0["selftag"])) {
       var_01 detach(var_0["detach model"], var_0["selftag"]);
-    }
-    else {
+    } else {
       var_03 detach(var_0["detach model"], var_0["tag"]);
     }
   }
@@ -466,8 +457,7 @@ func_1ED8(var_00, var_01, var_02, var_03) {
 
   if(isDefined(var_0["create model"])) {
     func_1E93(var_01, var_00);
-  }
-  else if(isDefined(var_0["delete model"])) {
+  } else if(isDefined(var_0["delete model"])) {
     func_1F1E(var_01, var_00);
   }
 
@@ -632,8 +622,7 @@ func_11A80(var_00, var_01, var_02, var_03) {
 
   if(var_03 == 0) {
     self hidepart(var_00);
-  }
-  else {
+  } else {
     thread func_8ED1(var_7.func_A8F6[2] - var_03, var_00);
   }
 }
@@ -804,8 +793,7 @@ func_6A85(var_00, var_01, var_02) {
 
         if(!issentient(self)) {
           thread scripts\sp\utility::play_sound_on_tag(var_07, "j_head", 1, var_07);
-        }
-        else {
+        } else {
           self getyawtoenemy(var_07, "face_sounddone", 1);
         }
 

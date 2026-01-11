@@ -9,7 +9,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace globallogic_actor;
 
 autoexec __init__system__() {
@@ -17,5 +16,5 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  level._effect[#"rcbombexplosion"] = #"killstreaks/fx_rcxd_exp";
+  level._effect[# "rcbombexplosion"] = # "killstreaks/fx_rcxd_exp";
 }

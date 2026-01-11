@@ -11,8 +11,7 @@ main(var_0, var_1, var_2, var_3, var_4, var_5) {
 internalmain(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(!isDefined(var_0)) {
     var_0 = 12;
-  }
-  else if(var_0 < 7) {
+  } else if(var_0 < 7) {
     var_0 = 7;
   }
 
@@ -30,8 +29,7 @@ internalmain(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(!isDefined(var_5)) {
     var_6 = "default";
-  }
-  else {
+  } else {
     var_6 = var_5;
   }
 

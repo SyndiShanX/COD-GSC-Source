@@ -31,8 +31,7 @@ SayGenericDialogue(typeString) {
 
   if((self.voice == "multilingual") || (self.voice == "italian") || (self.voice == "german") || (self.voice == "spanish")) {
     voiceString = "russian";
-  }
-  else {
+  } else {
     voiceString = self.voice;
   }
 

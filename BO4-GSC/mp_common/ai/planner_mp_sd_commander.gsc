@@ -11,7 +11,6 @@
 #include scripts\core_common\ai\systems\planner;
 #include scripts\mp_common\ai\planner_mp_commander_utility;
 #include scripts\mp_common\ai\planner_mp_sd_squad;
-
 #namespace plannermpsdcommander;
 
 private createcommanderplanner(team) {
@@ -28,6 +27,6 @@ createcommander(team) {
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreBotPresence");
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreForceGoal");
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreTeam");
-  plannercommanderutility::addsquadevaluator(commander, "commanderScoreAge", [#"maxage": 6000]);
+  plannercommanderutility::addsquadevaluator(commander, "commanderScoreAge", [# "maxage": 6000]);
   return commander;
 }

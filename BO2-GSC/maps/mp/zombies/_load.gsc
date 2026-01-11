@@ -38,8 +38,7 @@ main(bscriptgened, bcsvgened, bsgenabled) {
 
   if(!isDefined(bscriptgened)) {
     bscriptgened = 0;
-  }
-  else {
+  } else {
     bscriptgened = 1;
   }
 
@@ -255,8 +254,7 @@ exploder_load(trigger) {
   if(isDefined(trigger.script_chance) && randomfloat(1) > trigger.script_chance) {
     if(isDefined(trigger.script_delay)) {
       wait(trigger.script_delay);
-    }
-    else {
+    } else {
       wait 4;
     }
 
@@ -370,8 +368,7 @@ setupexploders() {
 
     if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
-    }
-    else {
+    } else {
       ent.v["fxid"] = exploder.script_fxid;
     }
 
@@ -394,8 +391,7 @@ setupexploders() {
 
     if(isDefined(exploder.targetname) && isDefined(acceptabletargetnames[exploder.targetname])) {
       ent.v["exploder_type"] = exploder.targetname;
-    }
-    else {
+    } else {
       ent.v["exploder_type"] = "normal";
     }
 

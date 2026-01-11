@@ -79,8 +79,7 @@ section_hint_string_init() {
 odin_struggle_fail_hint() {
   if(common_scripts\utility::flag("saved_ally") || common_scripts\utility::flag("switched_sticks")) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -230,13 +229,13 @@ odin_invasion_scene() {
   var_10 notify("stop_infil_extra_idle");
 
   foreach(var_14 in var_12) {
-  thread victim_anim_and_death(var_10, var_14);
+    thread victim_anim_and_death(var_10, var_14);
   }
 
   var_10 maps\_anim::anim_single(var_11, "odin_infiltrate");
 
   foreach(var_4 in var_0) {
-  var_4 delete();
+    var_4 delete();
   }
 
   common_scripts\utility::flag_wait("player_second_z_turn");
@@ -397,8 +396,7 @@ ally_invasion_scene_approach() {
 
   if(common_scripts\utility::flag("invasion_ok_to_anim_player")) {
     var_0 maps\_anim::anim_single_solo(self, "odin_infiltrate_kyra");
-  }
-  else {
+  } else {
     var_0 maps\_anim::anim_single_solo(self, "odin_infiltrate_kyra_no_push");
   }
 
@@ -631,8 +629,7 @@ struggle_logic(var_0, var_1, var_2) {
 
       if(var_21[1] >= 0.15 || var_21[1] <= -0.15) {
         var_19 = var_21;
-      }
-      else {
+      } else {
         var_21 = var_19;
       }
     }
@@ -658,8 +655,7 @@ struggle_logic(var_0, var_1, var_2) {
     if(level.struggle_anim_time > 0.4 && level.struggle_anim_time < 0.55 && var_14 == 1) {
       if(maps\_utility::getdifficulty() == "easy" || maps\_utility::getdifficulty() == "medium") {
         var_8 = 1 - var_16;
-      }
-      else {
+      } else {
         var_8 = 3 - var_16;
       }
 
@@ -670,8 +666,7 @@ struggle_logic(var_0, var_1, var_2) {
     if(level.struggle_anim_time > 0.4 && level.struggle_anim_time < 0.55 && var_15 == 1) {
       if(maps\_utility::getdifficulty() == "easy" || maps\_utility::getdifficulty() == "medium") {
         var_8 = 1 - var_16;
-      }
-      else {
+      } else {
         var_8 = 3 - var_16;
       }
 
@@ -681,8 +676,7 @@ struggle_logic(var_0, var_1, var_2) {
     if(level.struggle_anim_time > 0.4 && level.struggle_anim_time < 0.55) {
       if(level.struggle_anim_time > 0.47) {
         level.struggle_anim_time = level.struggle_anim_time + (0.3 - var_16 * 0.1);
-      }
-      else {
+      } else {
         level.struggle_anim_time = level.struggle_anim_time - (0.3 - var_16 * 0.1);
       }
 
@@ -867,8 +861,7 @@ space_shotgun_firing(var_0, var_1) {
 
     if(level.player attackbuttonpressed(1)) {
       var_10 = 0;
-    }
-    else {
+    } else {
       var_10 = 1;
     }
 
@@ -906,7 +899,7 @@ player_failed_struggle(var_0, var_1) {
   var_3["player_rig"] = var_1;
 
   foreach(var_5 in var_3) {
-  var_5 maps\_utility::anim_stopanimscripted();
+    var_5 maps\_utility::anim_stopanimscripted();
   }
 
   wait 0.01;
@@ -926,8 +919,7 @@ give_player_struggle_hint() {
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
     if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacy") {
       level.player thread maps\_utility::display_hint("ally_struggle_fail_alt");
-    }
-    else {
+    } else {
       level.player thread maps\_utility::display_hint("ally_struggle_fail");
     }
   } else
@@ -949,8 +941,7 @@ check_for_layout_change_mid_hint(var_0) {
       if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
         if(var_1 == "thumbstick_southpaw" || var_1 == "thumbstick_legacy") {
           level.player thread maps\_utility::display_hint("ally_struggle_fail_alt");
-        }
-        else {
+        } else {
           level.player thread maps\_utility::display_hint("ally_struggle_fail");
         }
       } else
@@ -1060,8 +1051,7 @@ push_enemy_down(var_0) {
   if(var_8 >= 0) {
     if(var_0.origin[2] <= level.player.origin[2] + 10) {
       var_3 rotatepitch(180, 7, 7, 0);
-    }
-    else {
+    } else {
       var_3 rotatepitch(-180, 4, 4, 0);
     }
   }
@@ -1207,7 +1197,7 @@ z_trans(var_0, var_1, var_2) {
   level.ally maps\_utility::enable_ai_color();
 
   foreach(var_14 in var_8) {
-  var_14 delete();
+    var_14 delete();
   }
 
   common_scripts\utility::flag_set("ally_clear");

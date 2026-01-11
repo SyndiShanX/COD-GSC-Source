@@ -25,8 +25,7 @@ shellshockOnDamage(cause, damage) {
     if(damage > 10) {
       if(isDefined(self.shellShockReduction) && self.shellShockReduction) {
         self shellshock("frag_grenade_mp", self.shellShockReduction);
-      }
-      else {
+      } else {
         self shellshock("frag_grenade_mp", 0.5);
       }
     }

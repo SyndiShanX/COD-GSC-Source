@@ -153,7 +153,7 @@ updatePlayerTimes() {
 
   for(;;) {
     foreach(player in level.players) {
-    player updatePlayedTime();
+      player updatePlayedTime();
     }
 
     wait(1.0);
@@ -262,16 +262,14 @@ getTeamBalance() {
   for(i = 0; i < players.size; i++) {
     if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       level.team["allies"]++;
-    }
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
+    } else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       level.team["axis"]++;
     }
   }
 
   if((level.team["allies"] > (level.team["axis"] + level.teamBalance)) || (level.team["axis"] > (level.team["allies"] + level.teamBalance))) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -291,8 +289,7 @@ balanceTeams() {
 
     if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       AlliedPlayers[AlliedPlayers.size] = players[i];
-    }
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
+    } else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       AxisPlayers[AxisPlayers.size] = players[i];
     }
   }
@@ -309,8 +306,7 @@ balanceTeams() {
 
         if(!isDefined(MostRecent)) {
           MostRecent = AlliedPlayers[j];
-        }
-        else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
+        } else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
           MostRecent = AlliedPlayers[j];
         }
       }
@@ -325,8 +321,7 @@ balanceTeams() {
 
         if(!isDefined(MostRecent)) {
           MostRecent = AxisPlayers[j];
-        }
-        else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
+        } else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
           MostRecent = AxisPlayers[j];
         }
       }
@@ -342,8 +337,7 @@ balanceTeams() {
     for(i = 0; i < players.size; i++) {
       if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
         AlliedPlayers[AlliedPlayers.size] = players[i];
-      }
-      else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
+      } else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
         AxisPlayers[AxisPlayers.size] = players[i];
       }
     }
@@ -577,22 +571,20 @@ playerModelForWeapon(weapon, secondary) {
       weaponClass = tablelookup("mp/statstable.csv", 4, secondary, 2);
       if(weaponClass == "weapon_shotgun") {
         [[game[team + "_model"]["SHOTGUN"]]]();
-      }
-      else {
+      } else {
         [
-      }
-          [game[team + "_model"]["ASSAULT"]]
-        ]();
+        }
+        [game[team + "_model"]["ASSAULT"]]
+      ]();
       break;
     case "weapon_sniper":
       if(level.environment != "" && self isItemUnlocked("ghillie_" + level.environment)) {
         [[game[team + "_model"]["GHILLIE"]]]();
-      }
-      else {
+      } else {
         [
-      }
-          [game[team + "_model"]["SNIPER"]]
-        ]();
+        }
+        [game[team + "_model"]["SNIPER"]]
+      ]();
       break;
     case "weapon_lmg":
       [
@@ -624,8 +616,7 @@ CountPlayers() {
 
     if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       allies++;
-    }
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
+    } else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       axis++;
     }
   }
@@ -676,27 +667,27 @@ playerConnectedTest() {
   }
 }
 
-  updateFreePlayerTimes() {
-    if(!level.rankedmatch) {
-      return;
-    }
-
-    thread playerConnectedTest();
-
-      nextToUpdate = 0;
-    for(;;) {
-      nextToUpdate++;
-      if(nextToUpdate >= level.players.size) {
-        nextToUpdate = 0;
-      }
-
-      if(isDefined(level.players[nextToUpdate])) {
-        level.players[nextToUpdate] updateFreePlayedTime();
-      }
-
-      wait(1.0);
-    }
+updateFreePlayerTimes() {
+  if(!level.rankedmatch) {
+    return;
   }
+
+  thread playerConnectedTest();
+
+  nextToUpdate = 0;
+  for(;;) {
+    nextToUpdate++;
+    if(nextToUpdate >= level.players.size) {
+      nextToUpdate = 0;
+    }
+
+    if(isDefined(level.players[nextToUpdate])) {
+      level.players[nextToUpdate] updateFreePlayedTime();
+    }
+
+    wait(1.0);
+  }
+}
 
 updateFreePlayedTime() {
   if(!self rankingEnabled()) {
@@ -741,8 +732,7 @@ getJoinTeamPermissions(team) {
 
   if(teamCount < level.teamLimit) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

@@ -110,14 +110,11 @@ hasabunduntcurrency() {
 playerdepotprocesslui(var_0, var_1) {
   if(var_0 == "depot") {
     thread playerenterdepot(var_1);
-  }
-  else if(var_0 == "leave_depot") {
+  } else if(var_0 == "leave_depot") {
     thread playerleavedepot(var_1);
-  }
-  else if(var_0 == "depot_return") {
+  } else if(var_0 == "depot_return") {
     thread playerreturntodepot(var_1);
-  }
-  else if(var_0 == "depot_state") {
+  } else if(var_0 == "depot_state") {
     if(var_1 == "broke") {
       level.depotbrokeattempts = level.depotbrokeattempts + 1;
     }
@@ -161,22 +158,19 @@ getstickerfx(var_0) {
     if(var_2 == "aw") {
       if(var_3 == "basic") {
         return "loot_sticker_wolf";
-      }
-      else {
+      } else {
         return "loot_sticker_wolf_rare";
       }
     } else if(var_2 == "ls") {
       if(var_3 == "basic") {
         return "loot_sticker_lion";
-      }
-      else {
+      } else {
         return "loot_sticker_lion_rare";
       }
     } else if(var_2 == "ch") {
       if(var_3 == "basic") {
         return "loot_sticker_copperhead";
-      }
-      else {
+      } else {
         return "loot_sticker_copperhead_rare";
       }
     } else if(var_2 == "ex" && var_3 == "promo") {
@@ -185,8 +179,7 @@ getstickerfx(var_0) {
 
         if(var_4 == "6" || var_4 == "8") {
           return "loot_sticker_wolf_rare";
-        }
-        else if(var_4 == "9" || var_4 == "10" || var_4 == "11" || var_4 == "12") {
+        } else if(var_4 == "9" || var_4 == "10" || var_4 == "11" || var_4 == "12") {
           return "loot_sticker_copperhead_rare";
         }
       }
@@ -212,8 +205,7 @@ getcratemodel(var_0) {
 
     if(var_2 == "aw") {
       return "h1_supply_drop_crate_a_anim";
-    }
-    else if(var_2 == "ls") {
+    } else if(var_2 == "ls") {
       if(var_3 == "promo") {
         return "h1_supply_drop_crate_shamrock";
       }
@@ -231,8 +223,7 @@ getcratemodel(var_0) {
 
         if(var_4 == "6" || var_4 == "8") {
           return "h1_supply_drop_crate_a_anim";
-        }
-        else if(var_4 == "9" || var_4 == "10" || var_4 == "11" || var_4 == "12") {
+        } else if(var_4 == "9" || var_4 == "10" || var_4 == "11" || var_4 == "12") {
           return "h1_supply_drop_crate_copperhead";
         }
       }
@@ -321,11 +312,11 @@ playerenterdepot(var_0) {
     }
 
     foreach(var_8 in level.depotagent.props) {
-    var_8 show();
+      var_8 show();
     }
 
     foreach(var_11 in level.depothiddensceneprops[level.depotscene]) {
-    var_11 hide();
+      var_11 hide();
     }
 
     depotscenelightson(level.depotscene);
@@ -364,7 +355,7 @@ playerleavedepot(var_0) {
   foreach(var_2 in level.depotspecialanimprops) {
     if(isarray(var_2)) {
       foreach(var_4 in var_2) {
-      var_4 scriptmodelclearanim();
+        var_4 scriptmodelclearanim();
       }
 
       continue;
@@ -387,8 +378,7 @@ playerreturntodepot(var_0) {
   if(getdvar("vlDepotState") == "pause") {
     if(level.camparams.camera.depotpos == "crate") {
       setdepotstate("purchaseidle");
-    }
-    else {
+    } else {
       setdepotstate("idle");
     }
   }
@@ -430,7 +420,7 @@ depotinithiddensceneprops() {
   level.depothiddensceneprops = [];
 
   foreach(var_1 in level.depotscenes) {
-  level.depothiddensceneprops[var_1] = [];
+    level.depothiddensceneprops[var_1] = [];
   }
 
   level.depothiddensceneprops["knife"][level.depothiddensceneprops["knife"].size] = level.depotagent.props["ashtray"];
@@ -553,8 +543,7 @@ spawnandinitdepotents() {
 
   if(level.inventory_contentpromo == 1) {
     var_2 = "head_graves_lackey_irish";
-  }
-  else if(level.inventory_contentpromo == 2) {
+  } else if(level.inventory_contentpromo == 2) {
     var_3 = "body_graves_lackey_summertime";
   }
 
@@ -892,8 +881,7 @@ depotgreetingended() {
   if(canswitchstates()) {
     if(hasnewproduct()) {
       setdepotstate("newproduct");
-    }
-    else {
+    } else {
       setdepotstate("idle");
     }
   }
@@ -915,9 +903,7 @@ depotidleended() {
     var_1[var_1.size] = "fidget";
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
-      if([
-          [level.depotstates[var_1[var_2]].canswitchtostatefunc]
-        ]("idle")) {
+      if([[level.depotstates[var_1[var_2]].canswitchtostatefunc]]("idle")) {
         level.depotstates[var_1[var_2]].nochecknecessary = 1;
         setdepotstate(var_1[var_2]);
         level.depotstates["idle"].laststatetime = gettime();
@@ -1037,7 +1023,7 @@ depotanimstatemachine() {
 depotshowlackeyprops() {
   if(!maps\mp\_utility::is_true(level.showinglackeyprops)) {
     foreach(var_1 in level.depotlackey.props) {
-    var_1 show();
+      var_1 show();
     }
 
     level.showinglackeyprops = 1;
@@ -1098,8 +1084,7 @@ depotplayscene(var_0, var_1, var_2) {
 
         if(isarray(level.depotspecialanimprops[level.depotscene])) {
           var_5 = level.depotspecialanimprops[level.depotscene];
-        }
-        else {
+        } else {
           var_5[0] = level.depotspecialanimprops[level.depotscene];
         }
 
@@ -1133,15 +1118,14 @@ agentplaydepotsound(var_0, var_1, var_2) {
   if(isDefined(var_0.sounds) && isDefined(var_0.sounds[level.depotscene]) && isDefined(var_0.sounds[level.depotscene][var_1])) {
     if(!isarray(var_0.sounds[level.depotscene][var_1])) {
       var_0 playsoundonmovingent(var_0.sounds[level.depotscene][var_1]);
-    }
-    else if(isDefined(var_0.sounds[level.depotscene][var_1][var_2])) {
+    } else if(isDefined(var_0.sounds[level.depotscene][var_1][var_2])) {
       var_0 playsoundonmovingent(var_0.sounds[level.depotscene][var_1][var_2]);
     }
   }
 
   if(isDefined(var_0.propsounds) && isDefined(var_0.propsounds[level.depotscene]) && isDefined(var_0.propsounds[level.depotscene][var_1])) {
     foreach(var_5, var_4 in var_0.propsounds[level.depotscene][var_1]) {
-    var_0.props[var_5] playsoundonmovingent(var_4);
+      var_0.props[var_5] playsoundonmovingent(var_4);
     }
   }
 }
@@ -1257,7 +1241,7 @@ depotopenlootcrate() {
       level.depotlootprop scriptmodelplayanim("h1_vlobby_armory_loot_flyout", "card_anim");
 
       foreach(var_4 in level.depotlootcards) {
-      var_4 show();
+        var_4 show();
       }
 
       level.depotcrate scriptmodelclearanim();
@@ -1377,15 +1361,14 @@ depotscenelightson(var_0) {
   var_2 = getEntArray(var_1, "targetname");
 
   foreach(var_4 in var_2) {
-  var_4 setlightintensity(var_4.baseintensity);
+    var_4 setlightintensity(var_4.baseintensity);
   }
 }
 
 getcurrencybalance(var_0, var_1) {
   if(var_1 != 2) {
     return _func_305(var_0, var_1);
-  }
-  else {
+  } else {
     return _func_305(var_0, var_1) * 0.0037037;
   }
 }

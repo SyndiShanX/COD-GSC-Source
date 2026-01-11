@@ -83,8 +83,7 @@ scripted_spawn2(var_0, var_1, var_2, var_3) {
     if(var_3.classname == "actor_enemy_arab_AR_ak47") {
       if(var_3.targetname == "carexit_rightguard") {
         var_4 setcurbstompcharacter();
-      }
-      else {
+      } else {
         var_4 randomizeguardcharacter();
       }
     }
@@ -93,8 +92,7 @@ scripted_spawn2(var_0, var_1, var_2, var_3) {
   } else {
     if(isDefined(var_2)) {
       var_5 = var_3 stalingradspawn();
-    }
-    else {
+    } else {
       var_5 = var_3 dospawn();
     }
 
@@ -172,8 +170,7 @@ pulsefadevision(var_0, var_1) {
 
       if(var_9 < 0) {
         var_9 = 0;
-      }
-      else if(var_9 > 1) {
+      } else if(var_9 > 1) {
         var_9 = 1;
       }
 

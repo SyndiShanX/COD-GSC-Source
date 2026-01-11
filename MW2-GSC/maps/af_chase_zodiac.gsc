@@ -19,7 +19,7 @@ clear_all_ai_grenades() {
   add_global_spawn_function("axis", ::no_grenades);
   ai = getaiarray("axis");
   foreach(guy in ai) {
-  guy no_grenades();
+    guy no_grenades();
   }
 }
 

@@ -361,7 +361,7 @@ start_surface_notifies() {
   while(1 < 100) {
     wait(0.05);
     foreach(guy in aArray) {
-    guy notify("finished_swim_animation");
+      guy notify("finished_swim_animation");
     }
     i++;
   }
@@ -639,7 +639,7 @@ underwater_sequence() {
   eSub_01.DoorDDS delete();
   eSub_01.DoorDDS.eDoorSeal delete();
   foreach(part in eSub_01.aDDSparts) {
-  part delete();
+    part delete();
   }
   eSub_01 delete();
 
@@ -1091,8 +1091,7 @@ water_monitor() {
     playerEye = level.player getEye();
     if(playerEye[2] < water_level) {
       level notify("player_is_below_water");
-    }
-    else {
+    } else {
       level notify("player_is_above_water");
     }
   }
@@ -1214,8 +1213,7 @@ grate_enemy_think() {
   wait(0.05);
   if(self.animname == "hostile_stealthkill_player") {
     self thread play_sound_on_entity("grate_enemy_grabbed_grunt_01");
-  }
-  else {
+  } else {
     self thread play_sound_on_entity("grate_enemy_grabbed_grunt_02");
   }
 
@@ -1352,8 +1350,7 @@ player_looking_at_grate_guard_logic() {
       bInFOV = within_fov(level.player getEye(), level.player getPlayerAngles(), org.origin, level.cosine["25"]);
       if(bInFOV) {
         flag_set("player_looking_at_grate_guard");
-      }
-      else {
+      } else {
         flag_clear("player_looking_at_grate_guard");
       }
     } else
@@ -2515,7 +2512,7 @@ hostage_manhandle_sequence() {
   }
 
   foreach(hostage in aHostagesForSequence) {
-  hostage hide();
+    hostage hide();
   }
 
   /*-----------------------
@@ -2535,7 +2532,7 @@ hostage_manhandle_sequence() {
   runReference anim_first_frame(aRunActors, "prisoner_manhandle_run");
 
   foreach(hostage in aHostagesForSequence) {
-  hostage show();
+    hostage show();
   }
 
   /*-----------------------
@@ -3459,8 +3456,7 @@ track_if_player_is_shooting_at_intimidating_heli(eHeli) {
 
     if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
-    }
-    else {
+    } else {
       flag_set("player_shoots_or_aims_rocket_at_intimidating_heli");
       break;
     }
@@ -3843,8 +3839,7 @@ c4_barrel_explode() {
   earthquake(1, 1, level.player.origin, 100);
   if(is_specialop()) {
     maps\_specialops::so_force_deadquote("@OILRIG_MISSIONFAIL_EXPLOSIVES");
-  }
-  else {
+  } else {
     setDvar("ui_deadquote", &"OILRIG_MISSIONFAIL_EXPLOSIVES");
   }
   level notify("mission failed");
@@ -4165,8 +4160,7 @@ sub_through_ice() {
   foreach(part in aSubmarineParts) {
     if((isDefined(part.script_parameters)) && (part.script_parameters == "sub")) {
       eSub = part;
-    }
-    else {
+    } else {
       eProp = part;
     }
   }
@@ -4546,8 +4540,7 @@ obj_escape() {
 MUSIC
 ****************************************************************************/
 
-AA_music_init() {
-}
+AA_music_init() {}
 
 music_underwater() {
   flag_wait("player_approaching_oilrig_legs");
@@ -4655,8 +4648,7 @@ music_escape() {
 UTILITY FUNCTIONS
 ****************************************************************************/
 
-AA_utility() {
-}
+AA_utility() {}
 
 AI_army_think() {
   self set_battlechatter(false);
@@ -4833,7 +4825,7 @@ heli_patrol_think() {
 
 vehicle_heli_setup(aTargetnames) {
   foreach(sTargetname in aTargetnames) {
-  thread vehicle_heli_think(sTargetname);
+    thread vehicle_heli_think(sTargetname);
   }
 }
 
@@ -4987,8 +4979,7 @@ dialogue_random_pmc(org) {
   iRand = randomint(21);
   if(iRand < 10) {
     sLine = "oilrig_merc_chatter_0" + iRand;
-  }
-  else {
+  } else {
     sLine = "oilrig_merc_chatter_" + iRand;
   }
   thread play_sound_in_space(level.scr_sound[sLine], org);
@@ -5221,8 +5212,7 @@ open_gate(bImmediately, bDontWaitForFlags) {
 
   if(isDefined(bImmediately)) {
     eGate moveto((eGate.origin - (0, -170, 0)), 1);
-  }
-  else {
+  } else {
     if(!isDefined(bDontWaitForFlags)) {
       flag_wait_either("ambush_enemies_approaching", "ambush_enemies_alerted_prematurely");
     }
@@ -5631,8 +5621,7 @@ submarine_spawn(sSubNumber, eNode) {
   foreach(part in aSubmarineParts) {
     if((isDefined(part.script_parameters)) && (part.script_parameters == "sub")) {
       eSub.body = part;
-    }
-    else {
+    } else {
       eSub.prop = part;
     }
   }
@@ -5681,8 +5670,7 @@ submarine_spawn(sSubNumber, eNode) {
   eSub.animname = "submarine_" + sSubNumber;
   if(eSub.animname == "submarine_01") {
     eSub.body linkto(eSub, "TAG_ORIGIN", (-10, 0, -324), (0, 0, 0));
-  }
-  else {
+  } else {
     eSub.body linkto(eSub, "TAG_ORIGIN", (-10, 0, -348), (0, 0, 0));
   }
 
@@ -5846,8 +5834,7 @@ friendlies_shoot_heli_with_rockets(eHeli) {
         playerEye = level.player getEye();
         if(within_fov(playerEye, level.player getPlayerAngles(), guy.origin, level.cosine["45"])) {
           continue;
-        }
-        else //friendly out of view...does he have a shot?
+        } else //friendly out of view...does he have a shot?
         {
           eHeliTarget = spawn("script_origin", eHeli.origin + (0, 0, -200));
           eHeli thread delete_on_death(eHeliTarget);
@@ -6273,8 +6260,7 @@ all_ai_dead_in_volumes(aVolumes) {
   }
   if(aAI.size) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }

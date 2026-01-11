@@ -293,8 +293,7 @@ friendly_init() {
 
     if(level.console) {
       self._stealth.logic.getvelocity_func = ::friendly_getvelocity;
-    }
-    else {
+    } else {
       self._stealth.logic.getvelocity_func = ::player_getvelocity_pc;
       self._stealth.logic.player_pc_velocity = 0;
     }
@@ -348,8 +347,7 @@ player_getvelocity_pc() {
 
   if(!var_0) {
     self._stealth.logic.player_pc_velocity = 0;
-  }
-  else if(var_0 > self._stealth.logic.player_pc_velocity) {
+  } else if(var_0 > self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity = self._stealth.logic.player_pc_velocity + var_2[var_1];
 
     if(self._stealth.logic.player_pc_velocity > var_0) {
@@ -380,8 +378,7 @@ friendly_movespeed_calc_loop() {
 
     if(maps\_utility::ent_flag("_stealth_in_shadow")) {
       var_3 = 0;
-    }
-    else {
+    } else {
       var_4 = self[[var_1]]();
       var_5 = length(var_2 - self[[var_0]]());
 
@@ -477,8 +474,7 @@ friendly_compute_stances_player() {
 
     if(self._stealth.logic.stance_change > 0.05) {
       self._stealth.logic.stance_change = self._stealth.logic.stance_change - 0.05;
-    }
-    else {
+    } else {
       self._stealth.logic.stance_change = 0;
       self._stealth.logic.stance = var_0;
       self._stealth.logic.oldstance = var_0;
@@ -846,8 +842,7 @@ enemy_corpse_logic() {
       if(var_0) {
         if(!maps\_utility::ent_flag("_stealth_found_corpse")) {
           maps\_utility::ent_flag_set("_stealth_found_corpse");
-        }
-        else {
+        } else {
           self notify("_stealth_found_corpse");
         }
 
@@ -859,8 +854,7 @@ enemy_corpse_logic() {
 
         if(!maps\_utility::ent_flag("_stealth_saw_corpse")) {
           maps\_utility::ent_flag_set("_stealth_saw_corpse");
-        }
-        else {
+        } else {
           self notify("_stealth_saw_corpse");
         }
 
@@ -940,8 +934,7 @@ enemy_corpse_found(var_0) {
 
   if(!common_scripts\utility::flag("_stealth_found_corpse")) {
     common_scripts\utility::flag_set("_stealth_found_corpse");
-  }
-  else {
+  } else {
     level notify("_stealth_found_corpse");
   }
 
@@ -969,8 +962,7 @@ enemy_corpse_alert_level() {
 
   if(isDefined(self.enemy)) {
     var_0 = self.enemy;
-  }
-  else {
+  } else {
     var_0 = level.player;
   }
 

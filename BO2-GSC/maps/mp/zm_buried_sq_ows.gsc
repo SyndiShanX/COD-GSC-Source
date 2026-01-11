@@ -19,8 +19,7 @@ init() {
 init_stage() {
   if(flag("sq_is_max_tower_built")) {
     level thread stage_vo_max();
-  }
-  else {
+  } else {
     level thread stage_vo_ric();
   }
 
@@ -52,8 +51,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 ows_fountain_wait() {
   level endon("sq_ows_start");

@@ -74,8 +74,7 @@ give_boombox(var_00, var_01) {
 
   if(isDefined(var_02)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -115,8 +114,7 @@ setcarryingboombox(var_00, var_01, var_02) {
 
       if(var_03 != "force_cancel_placement") {
         thread watch_dpad();
-      }
-      else if(var_01) {
+      } else if(var_01) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
       }
 
@@ -433,15 +431,13 @@ create_attract_positions(var_00, var_01, var_02, var_03) {
     }
     if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_04) {
       continue;
-    }
-    else {
+    } else {
       if(abs(var_10[2] - self.origin[2]) < 60) {
         if(level.script != "cp_disco") {
           if(ispointinvolume(var_10, level.dance_floor_volume)) {
             if(isDefined(level.discotrap_active)) {
               continue;
-            }
-            else if(!self.discotrap_disabled) {
+            } else if(!self.discotrap_disabled) {
               self.discotrap_disabled = 1;
               var_11 = scripts\engine\utility::getstructarray("interaction_discoballtrap", "script_noteworthy");
               level thread scripts\cp\cp_interaction::interaction_cooldown(var_11[0], 30);
@@ -470,8 +466,7 @@ create_attract_positions(var_00, var_01, var_02, var_03) {
     }
     if(isDefined(var_10) && distancesquared(var_10, self.origin) > var_04) {
       continue;
-    }
-    else {
+    } else {
       if(abs(var_10[2] - self.origin[2]) < 60) {
         var_12 = spawnStruct();
         var_12.origin = var_10;

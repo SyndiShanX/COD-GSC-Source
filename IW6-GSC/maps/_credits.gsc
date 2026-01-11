@@ -256,8 +256,7 @@ playcredits() {
 
       if(!level.console) {
         var_6.font = "default";
-      }
-      else {
+      } else {
         var_6.font = "small";
       }
 
@@ -281,8 +280,7 @@ playcredits() {
 
       if(!level.console) {
         var_6.font = "default";
-      }
-      else {
+      } else {
         var_6.font = "small";
       }
 
@@ -307,8 +305,7 @@ playcredits() {
 
       if(!level.console) {
         var_8.font = "default";
-      }
-      else {
+      } else {
         var_8.font = "small";
       }
 
@@ -325,8 +322,7 @@ playcredits() {
 
       if(!level.console) {
         var_9.font = "default";
-      }
-      else {
+      } else {
         var_9.font = "small";
       }
 
@@ -354,8 +350,7 @@ playcredits() {
 
       if(!level.console) {
         var_6.font = "default";
-      }
-      else {
+      } else {
         var_6.font = "small";
       }
 
@@ -379,8 +374,7 @@ playcredits() {
 
       if(!level.console) {
         var_6.font = "default";
-      }
-      else {
+      } else {
         var_6.font = "small";
       }
 
@@ -403,8 +397,7 @@ playcredits() {
 
       if(!level.console) {
         var_6.font = "default";
-      }
-      else {
+      } else {
         var_6.font = "small";
       }
 
@@ -427,8 +420,7 @@ playcredits() {
 
       if(!level.console) {
         var_6.font = "objective";
-      }
-      else {
+      } else {
         var_6.font = "objective";
       }
 
@@ -453,8 +445,7 @@ playcredits() {
 
       if(!level.console) {
         var_6.font = "big";
-      }
-      else {
+      } else {
         var_6.font = "big";
       }
 
@@ -480,8 +471,7 @@ playcredits() {
 
       if(!level.console) {
         var_8.font = "small";
-      }
-      else {
+      } else {
         var_8.font = "small";
       }
 
@@ -498,8 +488,7 @@ playcredits() {
 
       if(!level.console) {
         var_9.font = "small";
-      }
-      else {
+      } else {
         var_9.font = "small";
       }
 
@@ -529,8 +518,7 @@ playcredits() {
 
       if(!level.console) {
         var_8.font = "small";
-      }
-      else {
+      } else {
         var_8.font = "small";
       }
 
@@ -547,8 +535,7 @@ playcredits() {
 
       if(!level.console) {
         var_9.font = "small";
-      }
-      else {
+      } else {
         var_9.font = "small";
       }
 
@@ -565,8 +552,7 @@ playcredits() {
 
       if(!level.console) {
         var_14.font = "small";
-      }
-      else {
+      } else {
         var_14.font = "small";
       }
 
@@ -598,8 +584,7 @@ playcredits() {
 
       if(!level.console) {
         var_6.font = "default";
-      }
-      else {
+      } else {
         var_6.font = "small";
       }
 
@@ -623,8 +608,7 @@ playcredits() {
 
       if(!level.console) {
         var_8.font = "default";
-      }
-      else {
+      } else {
         var_8.font = "small";
       }
 
@@ -641,8 +625,7 @@ playcredits() {
 
       if(!level.console) {
         var_9.font = "default";
-      }
-      else {
+      } else {
         var_9.font = "small";
       }
 

@@ -445,22 +445,18 @@ load_gumps() {
 
   if(is_after_skipto("g20_group1")) {
     load_gump("la_1_gump_1d");
-  }
-  else if(is_after_skipto("cougar_fall")) {
+  } else if(is_after_skipto("cougar_fall")) {
     load_gump("la_1_gump_1c");
-  }
-  else if(is_after_skipto("intro")) {
+  } else if(is_after_skipto("intro")) {
     load_gump("la_1_gump_1b");
-  }
-  else {
+  } else {
     load_gump("la_1_gump_1a");
   }
 
   screen_fade_in(0);
 }
 
-level_settings() {
-}
+level_settings() {}
 
 setup_challenges() {
   if(level.script == "la_1") {
@@ -680,8 +676,7 @@ stick_player(b_look, n_clamp_right, n_clamp_left, n_clamp_top, n_clamp_bottom) {
 
   if(b_look) {
     self playerlinktodelta(self.m_link, "tag_origin", 1, n_clamp_right, n_clamp_left, n_clamp_top, n_clamp_bottom, 1);
-  }
-  else {
+  } else {
     self playerlinktoabsolute(self.m_link, "tag_origin");
   }
 }
@@ -985,18 +980,15 @@ vehicle_explosion_launch(v_hit_point, n_force) {
 
     if(abs(n_dist_in_front) < n_max_x * 0.25) {
       str_impact_orient = "mid_";
-    }
-    else if(n_dist_in_front < 0) {
+    } else if(n_dist_in_front < 0) {
       str_impact_orient = "rear_";
-    }
-    else {
+    } else {
       str_impact_orient = "front_";
     }
 
     if(n_dist_to_v_right < 0) {
       str_impact_orient = str_impact_orient + "left";
-    }
-    else {
+    } else {
       str_impact_orient = str_impact_orient + "v_right";
     }
 
@@ -1045,8 +1037,7 @@ vehicle_explosion_launch(v_hit_point, n_force) {
 
   if(self.classname == "script_vehicle") {
     self launchvehicle(v_world_force, v_impact_point);
-  }
-  else if(self.classname == "script_model") {
+  } else if(self.classname == "script_model") {
     self physicslaunch(v_impact_point, v_world_force);
   }
 
@@ -1088,8 +1079,7 @@ _av_out_of_world() {
 
       if(isDefined(self.deleted) && self.deleted) {
         self delete();
-      }
-      else {
+      } else {
         self.delete_on_death = 1;
         self notify("death");
 
@@ -1160,11 +1150,9 @@ get_forward(b_flat, str_tag) {
 
   if(isplayer(self)) {
     v_angles = level.player getplayerangles();
-  }
-  else if(isDefined(str_tag)) {
+  } else if(isDefined(str_tag)) {
     v_angles = self gettagangles(str_tag);
-  }
-  else {
+  } else {
     v_angles = self.angles;
   }
 
@@ -1763,8 +1751,7 @@ straffing_drone(n_height_above_player, e_target, str_delete_flag) {
 
       if(isDefined(e_target)) {
         self thread shoot_turret_at_target(e_target, 3, (randomintrange(-200, 200), randomintrange(-200, 200), randomintrange(-200, 200)), 0);
-      }
-      else {
+      } else {
         self enable_turret(0);
       }
 
@@ -1952,8 +1939,7 @@ ambient_allies_weapons_think(n_missile_pct) {
 
     if(!isDefined(target)) {
       wait 0.05;
-    }
-    else {
+    } else {
       wait(randomfloatrange(4, 6));
     }
   }
@@ -1978,8 +1964,7 @@ open_suv_doors() {
 data_glove_on(m_player_body, datapad_model) {
   if(level.script == "la_1b") {
     datapad_model = "c_usa_cia_frnd_viewbody_vson";
-  }
-  else {
+  } else {
     datapad_model = "c_usa_cia_masonjr_viewbody_vson";
   }
 
@@ -2046,8 +2031,7 @@ vo_callouts(ai_noteworthy, str_calling_team, a_vo_callouts, str_flag_ender, str_
     if(isDefined(str_line)) {
       if(!isDefined(ai_noteworthy) && !isDefined("player") || isDefined(ai_noteworthy) && isDefined("player") && ai_noteworthy == "player") {
         level.player queue_dialog(str_line);
-      }
-      else {
+      } else {
         level queue_dialog(str_line, 0, undefined, undefined, 1, 0, str_calling_team, s_func);
       }
 
@@ -2102,8 +2086,7 @@ hide_player_ropes() {
 
   if(flag("harper_dead")) {
     e_body = get_model_or_models_from_scene("intro_player_noharper", "player_body");
-  }
-  else {
+  } else {
     e_body = get_model_or_models_from_scene("intro_player", "player_body");
   }
 

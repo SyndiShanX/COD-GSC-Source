@@ -26,7 +26,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\gametypes\ct_ai_zombie;
-
 #namespace ct_ai_blight_father;
 
 autoexec __init__system__() {
@@ -71,7 +70,7 @@ __init__() {
     }
   }
 
-  level.var_c2981ce9 = [#"tag_mouth_weakspot":&function_fa7c080, #"tag_elbow_weakspot_le":&function_9bbe631c, #"tag_elbow_weakspot_ri":&function_5a1a4ad, #"tag_eggsack_weakspot_le":&function_40034805, #"tag_eggsack_weakspot_ri":&function_33b2c99e];
+  level.var_c2981ce9 = [# "tag_mouth_weakspot": &function_fa7c080, # "tag_elbow_weakspot_le": &function_9bbe631c, # "tag_elbow_weakspot_ri": &function_5a1a4ad, # "tag_eggsack_weakspot_le": &function_40034805, # "tag_eggsack_weakspot_ri": &function_33b2c99e];
 }
 
 private on_player_spawned() {
@@ -80,7 +79,7 @@ private on_player_spawned() {
 
 private function_7c52f40() {
   self endon(#"death");
-  self.var_ef46cd4 = #"zombie_e1_itemlist";
+  self.var_ef46cd4 = # "zombie_e1_itemlist";
   self.clamptonavmesh = 0;
   self.ignorepathenemyfightdist = 1;
   self.var_bb185cc5 = 0;
@@ -142,7 +141,7 @@ private function_7c52f40() {
 private function_95a6fbef() {
   self.maxhealth = 900;
   self.health = self.maxhealth;
-  namespace_81245006::initweakpoints(self, #"c_t8_wz_blightfather_weakpoint_def");
+  namespace_81245006::initweakpoints(self, # "c_t8_wz_blightfather_weakpoint_def");
   self show();
   self showallparts();
 }
@@ -153,7 +152,7 @@ private function_36b05ed0(entity) {
 }
 
 private killed_callback(e_attacker) {
-  if(self.archetype != #"blight_father") {
+  if(self.archetype != # "blight_father") {
     return;
   }
 
@@ -302,7 +301,7 @@ function_b78adc65(entity) {
 
 private function_529b7fb9() {
   self endon(#"death");
-  level waittilltimeout(300, #"clear_all_corpses");
+  level waittilltimeout(300, # "clear_all_corpses");
 
   if(isDefined(self)) {
     self delete();
@@ -398,7 +397,7 @@ private blightfatherdeathstart(entity) {
       return;
     }
 
-    gib_model animscripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, #"hash_3e937fff0e0a4362", "normal");
+    gib_model animscripted(#"hash_56a346d1e0dd61cd", gib_model.origin, gib_model.angles, # "hash_3e937fff0e0a4362", "normal");
     gib_model thread function_529b7fb9();
     entity.gib_model = gib_model;
   }
@@ -579,7 +578,7 @@ function_422fdfd4(entity, attacker, weapon, var_5457dc44, hitloc, point, var_ebc
   }
 
   registerzombie_bgb_used_reinforce = isDefined(var_84ed9a13) && namespace_81245006::function_f29756fe(var_84ed9a13) == 1;
-  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== #"armor";
+  var_30362eca = registerzombie_bgb_used_reinforce && var_84ed9a13.type !== # "armor";
   var_c6cc6205 = var_b85996d4;
   var_fff93f95 = var_159ce525;
   var_cee56a92 = var_ddd319d6;
@@ -637,7 +636,7 @@ private function_afce1cf(inflictor, attacker, damage, flags, meansofdamage, weap
 
 private function_f9d9f198(entity) {
   var_bee929e7 = entity astsearch("grapple_attack_vomit@blight_father");
-  animname = animationstatenetworkutility::searchanimationmap(entity, var_bee929e7[#"animation"]);
+  animname = animationstatenetworkutility::searchanimationmap(entity, var_bee929e7[# "animation"]);
   tag_pos = getanimtagorigin(animname, 0, "tag_tongue");
   var_2db07c66 = rotatepoint(tag_pos, entity gettagangles("tag_origin"));
   var_2db07c66 += entity.origin;
@@ -768,9 +767,9 @@ private function_8fe8a946(entity) {
 
   recordline(self.origin + (0, 0, height), self.origin + var_725b8fb5 + (0, 0, height + entity ai::function_9139c839().var_73212b51), (0, 1, 0));
 
-    if(!var_edabd3cd) {
-      return false;
-    }
+  if(!var_edabd3cd) {
+    return false;
+  }
 
   var_9c2b856b = distancesquared(entity.origin, entity.favoriteenemy.origin);
 
@@ -900,7 +899,7 @@ private function_581a06c7(forward_dir, var_ced3ec54, var_27e1ee12, max_angle) {
 }
 
 private function_5f3390fd(var_61622673, var_4fee43d4) {
-  self endon(#"death", #"detonated");
+  self endon(#"death", # "detonated");
   var_892397fd = self;
 
   while(isDefined(var_892397fd)) {
@@ -928,7 +927,7 @@ private function_5f3390fd(var_61622673, var_4fee43d4) {
 }
 
 private function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
-  self endon(#"detonated", #"death");
+  self endon(#"detonated", # "death");
 
   if(!isDefined(self.var_3b8e09f5)) {
     self.var_3b8e09f5 = cos(var_10ed5867 * var_eb325a79);
@@ -983,8 +982,8 @@ private function_1974d26f(var_3fa92868, var_10ed5867, var_eb325a79) {
   move_to_point = self.origin + move_vector;
   trace = bulletTrace(self.origin, move_to_point, 0, self);
 
-  if(trace[#"surfacetype"] !== "none") {
-    detonate_point = trace[#"position"];
+  if(trace[# "surfacetype"] !== "none") {
+    detonate_point = trace[# "position"];
     dist_sq = distancesquared(detonate_point, self.origin);
     move_dist_sq = move_distance * move_distance;
     ratio = dist_sq / move_dist_sq;

@@ -28,7 +28,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_weap_hand_ouranos;
 
 autoexec __init__system__() {
@@ -38,10 +37,10 @@ autoexec __init__system__() {
 __init__() {
   clientfield::register("scriptmover", "ouranos_shoot", 16000, 1, "counter");
   clientfield::register("scriptmover", "ouranos_impact", 16000, 1, "counter");
-  clientfield::register("allplayers", "" + #"ouranos_beam_fire", 16000, 1, "int");
-  clientfield::register("allplayers", "" + #"hash_4fb73e88d45af0ef", 16000, 1, "int");
-  clientfield::register("actor", "" + #"ouranos_proj_knock", 16000, getminbitcountfornum(3), "int");
-  clientfield::register("actor", "" + #"ouranos_zombie_impact", 16000, 1, "counter");
+  clientfield::register("allplayers", "" + # "ouranos_beam_fire", 16000, 1, "int");
+  clientfield::register("allplayers", "" + # "hash_4fb73e88d45af0ef", 16000, 1, "int");
+  clientfield::register("actor", "" + # "ouranos_proj_knock", 16000, getminbitcountfornum(3), "int");
+  clientfield::register("actor", "" + # "ouranos_zombie_impact", 16000, 1, "counter");
   serverfield::register("ouranos_feather_hit", 16000, getminbitcountfornum(3), "int", &ouranos_feather_hit);
   level.w_hand_ouranos = getweapon(#"ww_hand_o");
   level.w_hand_ouranos_charged = getweapon(#"ww_hand_o_charged");
@@ -86,8 +85,8 @@ function_3f8da82c() {
       continue;
     }
 
-    self clientfield::set("" + #"hash_4fb73e88d45af0ef", 0);
-    self clientfield::set("" + #"ouranos_beam_fire", 0);
+    self clientfield::set("" + # "hash_4fb73e88d45af0ef", 0);
+    self clientfield::set("" + # "ouranos_beam_fire", 0);
   }
 }
 
@@ -110,7 +109,7 @@ function_7e141cb5(weapon) {
   a_e_targets = function_56a040a5(b_up);
 
   if(isDefined(a_e_targets)) {
-    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === #"boss") {
+    if(isDefined(a_e_targets[0]) && a_e_targets[0].zm_ai_category === # "boss") {
       n_proj = 3;
     } else if(!a_e_targets.size || a_e_targets.size === 1 && !isactor(a_e_targets[0])) {
       n_proj = 1;
@@ -145,7 +144,7 @@ function_7e141cb5(weapon) {
 }
 
 function_54922a21() {
-  self endon(#"death", #"weapon_change");
+  self endon(#"death", # "weapon_change");
 
   while(true) {
     while((self.chargeshotlevel != 2 || !self attackbuttonpressed()) && (self.currentweapon === level.w_hand_ouranos || self.currentweapon === level.w_hand_ouranos_upgraded)) {
@@ -153,7 +152,7 @@ function_54922a21() {
     }
 
     self thread player_charged_shot(self.currentweapon);
-    self waittill(#"weapon_fired", #"stop_beaming");
+    self waittill(#"weapon_fired", # "stop_beaming");
 
     while(self.chargeshotlevel >= 2) {
       waitframe(1);
@@ -351,7 +350,7 @@ function_1fc2378f(e_projectile, ai_zombie, n_damage) {
 
       wait n_time - 0.05;
 
-      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
+      if(isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
         if(isDefined(ai_zombie gettagorigin("j_tail_1"))) {
           n_hit_dist_sq = 2500;
         } else {
@@ -418,7 +417,7 @@ function_1fc2378f(e_projectile, ai_zombie, n_damage) {
     e_projectile waittill(#"movedone");
   }
 
-  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === #"boss") {
+  if(isalive(ai_zombie) || isDefined(ai_zombie) && ai_zombie.zm_ai_category === # "boss") {
     if(isDefined(level.var_3804f7bd)) {
       self thread[[level.var_3804f7bd]](ai_zombie, level.w_hand_ouranos_uncharged, n_damage);
     } else {
@@ -431,7 +430,7 @@ function_1fc2378f(e_projectile, ai_zombie, n_damage) {
 }
 
 function_30239376(e_target) {
-  if(isDefined(e_target) && e_target.zm_ai_category === #"boss") {
+  if(isDefined(e_target) && e_target.zm_ai_category === # "boss") {
     if(isDefined(e_target gettagorigin("j_tail_1"))) {
       v_org = e_target gettagorigin("j_tail_1");
     } else if(isDefined(e_target gettagorigin("j_spine4"))) {
@@ -472,15 +471,15 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, v_to_target, b_
     [[level.var_3aa60558]] - > waitinqueue(e_target);
 
     switch (e_target.zm_ai_category) {
-      case #"popcorn":
-      case #"basic":
-      case #"enhanced":
+      case # "popcorn":
+      case # "basic":
+      case # "enhanced":
         if(isDefined(b_charged) || isDefined(level.var_14f649ad) && level.var_14f649ad) {
           n_damage = e_target.health + 999;
         }
 
         break;
-      case #"heavy":
+      case # "heavy":
         if(isDefined(b_charged)) {
           self thread function_7a1456c5(e_target);
         } else {
@@ -488,13 +487,13 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, v_to_target, b_
         }
 
         break;
-      case #"miniboss":
+      case # "miniboss":
         if(isDefined(b_charged)) {
           n_damage = int(n_damage * 0.2);
           self thread function_7a1456c5(e_target);
         } else {
           n_damage = int(n_damage * 0.3);
-          e_target clientfield::increment("" + #"ouranos_zombie_impact");
+          e_target clientfield::increment("" + # "ouranos_zombie_impact");
         }
 
         if(randomint(10) == 0) {
@@ -502,7 +501,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, v_to_target, b_
         }
 
         break;
-      case #"boss":
+      case # "boss":
         if(!isactor(e_target)) {
           e_target clientfield::increment("ouranos_impact");
         }
@@ -518,7 +517,7 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, v_to_target, b_
 
     e_target.no_gib = 1;
 
-    if(e_target.archetype === #"skeleton") {
+    if(e_target.archetype === # "skeleton") {
       e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, weapon);
     } else {
       e_target dodamage(n_damage, self.origin, self, undefined, "none", "MOD_UNKNOWN", 0, weapon);
@@ -535,11 +534,11 @@ function_dced5aef(e_target, weapon = level.weaponnone, n_damage, v_to_target, b_
       }
 
       if(isDefined(e_target.var_acca05a0) && e_target.var_acca05a0) {
-        e_target clientfield::set("" + #"ouranos_proj_knock", 3);
+        e_target clientfield::set("" + # "ouranos_proj_knock", 3);
       } else if(isDefined(b_charged)) {
-        e_target clientfield::set("" + #"ouranos_proj_knock", 2);
+        e_target clientfield::set("" + # "ouranos_proj_knock", 2);
       } else {
-        e_target clientfield::set("" + #"ouranos_proj_knock", 1);
+        e_target clientfield::set("" + # "ouranos_proj_knock", 1);
       }
 
       e_target zm_utility::function_ffc279(v_fling, self, undefined, weapon);
@@ -580,22 +579,22 @@ function_180bae11() {
     var_ec8dc708 = bulletTrace(var_2ed6f142, v_end, 0, self);
     level notify(#"ww_ouranos_hit", {
       #player: self,
-      #e_entity: var_ec8dc708[#"entity"]
+      #e_entity: var_ec8dc708[# "entity"]
     });
   }
 
-  return a_trace[#"position"];
+  return a_trace[# "position"];
 }
 
 player_charged_shot(weapon) {
-  self endon(#"death", #"weapon_change");
+  self endon(#"death", # "weapon_change");
   self thread function_c7732ae7(weapon);
   self thread function_1e39fbc5(weapon);
   self thread function_a2065170();
   self thread function_cf3b7cef();
   self notify(#"start_beaming");
-  self clientfield::set("" + #"hash_4fb73e88d45af0ef", 1);
-  self clientfield::set("" + #"ouranos_beam_fire", 1);
+  self clientfield::set("" + # "hash_4fb73e88d45af0ef", 1);
+  self clientfield::set("" + # "ouranos_beam_fire", 1);
 
   while(zm_utility::is_player_valid(self) && self attackbuttonpressed() && self getweaponammostock(weapon) && self getcurrentweapon() === weapon && !self meleebuttonpressed()) {
     waitframe(5);
@@ -603,8 +602,8 @@ player_charged_shot(weapon) {
     waitframe(2);
   }
 
-  self clientfield::set("" + #"hash_4fb73e88d45af0ef", 0);
-  self clientfield::set("" + #"ouranos_beam_fire", 0);
+  self clientfield::set("" + # "hash_4fb73e88d45af0ef", 0);
+  self clientfield::set("" + # "ouranos_beam_fire", 0);
   a_e_targets = zm_hero_weapon::function_7c3681f7();
 
   foreach(e_target in a_e_targets) {
@@ -619,13 +618,13 @@ player_charged_shot(weapon) {
 
 function_cf3b7cef() {
   self endon(#"death");
-  self waittill(#"weapon_change", #"stop_beaming", #"weapon_fired");
+  self waittill(#"weapon_change", # "stop_beaming", # "weapon_fired");
   wait 0.1;
   self.var_e34577ca = undefined;
 }
 
 function_a2065170() {
-  self endon(#"death", #"weapon_change", #"stop_beaming", #"weapon_fired");
+  self endon(#"death", # "weapon_change", # "stop_beaming", # "weapon_fired");
 
   while(true) {
     if(self meleebuttonpressed()) {
@@ -637,7 +636,7 @@ function_a2065170() {
 }
 
 function_1e39fbc5(weapon) {
-  self endon(#"death", #"stop_beaming", #"weapon_change");
+  self endon(#"death", # "stop_beaming", # "weapon_change");
   wait 0.3;
 
   while(zm_utility::is_player_valid(self) && self attackbuttonpressed()) {
@@ -673,7 +672,7 @@ function_1e39fbc5(weapon) {
 
 function_6e71e724() {
   self notify(#"beaming");
-  self endon(#"death", #"beaming", #"stop_beaming", #"weapon_change");
+  self endon(#"death", # "beaming", # "stop_beaming", # "weapon_change");
 
   while(zm_utility::is_player_valid(self) && self attackbuttonpressed()) {
     waitframe(1);
@@ -683,7 +682,7 @@ function_6e71e724() {
 }
 
 function_c7732ae7(w_curr) {
-  self endon(#"death", #"stop_beaming", #"weapon_change");
+  self endon(#"death", # "stop_beaming", # "weapon_change");
 
   if(self.currentweapon == level.w_hand_ouranos_upgraded) {
     n_range = 3000;
@@ -715,7 +714,7 @@ function_c7732ae7(w_curr) {
 
 function_3719a295(e_target) {
   self notify(#"beaming");
-  self endon(#"death", #"beaming");
+  self endon(#"death", # "beaming");
   e_target endon(#"death");
 
   if(isDefined(e_target.var_827f6f4a) && e_target.var_827f6f4a || isDefined(e_target.var_339655cf) && e_target.var_339655cf) {
@@ -761,7 +760,7 @@ function_24f525c1(e_target) {
   e_target.var_8ac7cc49 = 1;
 
   if(isactor(e_target)) {
-    e_target clientfield::increment("" + #"ouranos_zombie_impact");
+    e_target clientfield::increment("" + # "ouranos_zombie_impact");
   } else {
     e_target clientfield::increment("ouranos_impact");
   }
@@ -788,13 +787,13 @@ function_7a1456c5(e_target) {
 }
 
 function_d54becbd() {
-  self endon(#"death", #"stop_slow");
+  self endon(#"death", # "stop_slow");
 
   while(true) {
     wait randomfloatrange(1, 2.5);
     n_rand = randomint(3);
 
-    if(n_rand == 2 && self.archetype !== #"catalyst") {
+    if(n_rand == 2 && self.archetype !== # "catalyst") {
       self zombie_utility::function_df5afb5e(1);
       continue;
     }

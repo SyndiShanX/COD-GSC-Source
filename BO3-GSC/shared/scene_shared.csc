@@ -182,20 +182,14 @@ class csceneobject: cscriptbundleobjectbase {
       if(isDefined(_s.name)) {
         _str_name = (_s.name + "_gen") + level.scene_object_id;
       } else {
-        _str_name = (([
-          [scene()]
-        ] - > get_name()) + "_noname") + level.scene_object_id;
+        _str_name = (([[scene()]] - > get_name()) + "_noname") + level.scene_object_id;
       }
       level.scene_object_id++;
     } else {
       if(isDefined(_s.name)) {
         _str_name = _s.name;
       } else {
-        _str_name = (([
-          [scene()]
-        ] - > get_name()) + "_noname") + ([
-          [scene()]
-        ] - > get_object_id());
+        _str_name = (([[scene()]] - > get_name()) + "_noname") + ([[scene()]] - > get_object_id());
       }
     }
   }
@@ -397,9 +391,7 @@ class cscene: cscriptbundlebase {
   function get_valid_objects() {
     a_obj = [];
     foreach(obj in _a_objects) {
-      if(obj._is_valid && !([
-          [obj]
-        ] - > in_a_different_scene())) {
+      if(obj._is_valid && !([[obj]] - > in_a_different_scene())) {
         if(!isDefined(a_obj)) {
           a_obj = [];
         } else if(!isarray(a_obj)) {
@@ -523,9 +515,7 @@ class cscene: cscriptbundlebase {
   function has_init_state() {
     b_has_init_state = 0;
     foreach(o_scene_object in _a_objects) {
-      if([
-          [o_scene_object]
-        ] - > has_init_state()) {
+      if([[o_scene_object]] - > has_init_state()) {
         b_has_init_state = 1;
         break;
       }
@@ -541,9 +531,7 @@ class cscene: cscriptbundlebase {
     thread _call_state_funcs("stop");
     scene_stopped = 1;
     foreach(o_obj in _a_objects) {
-      if(isDefined(o_obj) && !([
-          [o_obj]
-        ] - > in_a_different_scene())) {
+      if(isDefined(o_obj) && !([[o_obj]] - > in_a_different_scene())) {
         thread[[o_obj]] - > finish(b_clear);
       }
     }
@@ -701,9 +689,7 @@ class cscene: cscriptbundlebase {
         }
       }
       foreach(s_obj in a_objs) {
-        cscriptbundlebase::add_object([
-          [new csceneobject()]
-        ] - > first_init(s_obj, self, array::pop(a_ents), _e_root.localclientnum));
+        cscriptbundlebase::add_object([[new csceneobject()]] - > first_init(s_obj, self, array::pop(a_ents), _e_root.localclientnum));
       }
       self thread initialize();
     }
@@ -1083,9 +1069,7 @@ function __main__() {
     s_scenedef = struct::get_script_bundle("scene", s_instance.scriptbundlename);
     assert(isDefined(s_scenedef), ((("" + s_instance.origin) + "") + s_instance.scriptbundlename) + "");
     if(s_scenedef.vmtype == "client") {
-      if(isDefined(level.var_283122e6) && [
-          [level.var_283122e6]
-        ](s_instance.scriptbundlename)) {
+      if(isDefined(level.var_283122e6) && [[level.var_283122e6]](s_instance.scriptbundlename)) {
         continue;
       }
       if(isDefined(s_instance.spawnflags) && (s_instance.spawnflags & 2) == 2) {
@@ -1477,9 +1461,7 @@ function get_active_scenes(str_scenedef) {
 function get_active_scene(str_scenedef) {
   if(isDefined(str_scenedef) && isDefined(self.scenes)) {
     foreach(o_scene in self.scenes) {
-      if(([
-          [o_scene]
-        ] - > get_name()) == str_scenedef) {
+      if(([[o_scene]] - > get_name()) == str_scenedef) {
         return o_scene;
       }
     }

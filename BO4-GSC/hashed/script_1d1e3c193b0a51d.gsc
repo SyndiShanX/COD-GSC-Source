@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_c1466447;
 
 autoexec __init__system__() {
@@ -56,7 +55,7 @@ private function_1633056a(var_16e6b8ea = 10) {
 
 private function_c81cdba2() {
   switch (level.var_a96e21f8) {
-    case #"ads":
+    case # "ads":
       var_389b3ef1 = self playerads();
 
       if(self adsbuttonpressed() && var_389b3ef1 > 0) {
@@ -64,31 +63,31 @@ private function_c81cdba2() {
       }
 
       return false;
-    case #"jump":
+    case # "jump":
       if(self zm_utility::is_jumping()) {
         return true;
       }
 
       return false;
-    case #"slide":
+    case # "slide":
       if(self issliding()) {
         return true;
       }
 
       return false;
-    case #"crouch":
+    case # "crouch":
       if(self getstance() === "crouch") {
         return true;
       }
 
       return false;
-    case #"sprint":
+    case # "sprint":
       if(self issprinting()) {
         return true;
       }
 
       return false;
-    case #"movement":
+    case # "movement":
     default:
       v_velocity = self getvelocity();
 

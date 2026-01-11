@@ -21,8 +21,7 @@ print_org(fxcommand, fxid, fxpos, waittime) {
 
 }
 
-oneshotfx(fxid, fxpos, waittime, fxpos2) {
-}
+oneshotfx(fxid, fxpos, waittime, fxpos2) {}
 
 oneshotfxthread() {
   wait 0.05;
@@ -111,8 +110,7 @@ create_loopsound() {
   if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
     if(isDefined(self.looper)) {
       self.looper thread maps\mp\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"], "death");
-    }
-    else {
+    } else {
       thread maps\mp\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"], "stop_loop");
     }
   }
@@ -138,8 +136,7 @@ loopfxthread() {
 
     if(isDefined(self.fxstop)) {
       level waittill("stop fx" + self.fxstop);
-    }
-    else {
+    } else {
       return;
     }
 
@@ -149,8 +146,7 @@ loopfxthread() {
 
     if(isDefined(self.fxstart)) {
       level waittill("start fx" + self.fxstart);
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -355,8 +351,7 @@ script_print_fx() {
 
   if(isDefined(self.target)) {
     org = getent(self.target, "targetname").origin;
-  }
-  else {
+  } else {
     org = "undefined";
   }
 
@@ -379,8 +374,7 @@ script_playFX(id, pos, pos2) {
   }
   if(isDefined(pos2)) {
     playFX(id, pos, pos2);
-  }
-  else {
+  } else {
     playFX(id, pos);
   }
 }

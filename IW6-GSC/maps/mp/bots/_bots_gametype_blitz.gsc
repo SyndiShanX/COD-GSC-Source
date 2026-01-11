@@ -100,8 +100,7 @@ initialize_blitz_role() {
 
       if(kicked_out_bot) {
         self blitz_set_role("attacker");
-      }
-      else {
+      } else {
         self blitz_set_role("defender");
       }
     } else {
@@ -120,8 +119,7 @@ initialize_blitz_role() {
 
       if(kicked_out_bot) {
         self blitz_set_role("defender");
-      }
-      else {
+      } else {
         self blitz_set_role("attacker");
       }
     } else {

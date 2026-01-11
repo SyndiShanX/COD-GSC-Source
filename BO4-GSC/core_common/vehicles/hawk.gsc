@@ -12,7 +12,6 @@
 #include scripts\core_common\vehicle_ai_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\killstreaks\killstreaks_shared;
-
 #namespace hawk;
 
 autoexec __init__system__() {
@@ -72,8 +71,8 @@ event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
 private function_a2270a7e(vehicle) {
   self notify("5137fb3aeff763b1");
   self endon("5137fb3aeff763b1");
-  self endon(#"death", #"disconnect");
-  vehicle endon(#"death", #"exit_vehicle");
+  self endon(#"death", # "disconnect");
+  vehicle endon(#"death", # "exit_vehicle");
 
   if(sessionmodeiswarzonegame()) {
     str_mode = "wz";
@@ -99,7 +98,7 @@ private function_a2270a7e(vehicle) {
 }
 
 private on_vehicle_killed(params) {
-  self endon(#"death", #"free_vehicle");
+  self endon(#"death", # "free_vehicle");
 
   if(!isDefined(self.scriptvehicletype) || self.scriptvehicletype != "hawk") {
     return;
@@ -184,7 +183,7 @@ hawk_destroy(var_bb2c398b = 0) {
       forward = anglesToForward(hawk.angles);
       moveamount = vectorscale(forward, 350 * -1);
       trace = physicstrace(hawk.origin, hawk.origin + moveamount, (-4, -4, -4), (4, 4, 4), undefined, 1);
-      cam = spawn("script_model", trace[#"position"]);
+      cam = spawn("script_model", trace[# "position"]);
       cam setModel(#"tag_origin");
       cam linkto(hawk);
       hawk setspeedimmediate(0);

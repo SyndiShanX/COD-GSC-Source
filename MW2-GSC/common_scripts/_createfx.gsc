@@ -79,8 +79,7 @@ createfx_common() {
 
   if(level.mp_createfx) {
     hack_start("painter_mp");
-  }
-  else {
+  } else {
     hack_start("painter");
   }
 
@@ -113,8 +112,7 @@ createFxLogic() {
 
   if(GetDvar("createfx_map") == "") {
     SetDevDvar("createfx_map", level.script);
-  }
-  else if(GetDvar("createfx_map") == level.script) {
+  } else if(GetDvar("createfx_map") == level.script) {
     [[level.func_position_player]]();
   }
 
@@ -483,9 +481,8 @@ createFxLogic() {
 
     if(!level.mp_createfx) {
       lastPlayerOrigin = [
-    }
-        [level.func_position_player_get]
-      ](lastPlayerOrigin);
+        }
+        [level.func_position_player_get]](lastPlayerOrigin);
 
     lastHighlightedEnt = highlightedEnt;
 
@@ -498,8 +495,7 @@ createFxLogic() {
 
     if(level.selected_fx_ents.size) {
       lastSelectEntity = level.selected_fx_ents[level.selected_fx_ents.size - 1];
-    }
-    else {
+    } else {
       lastSelectEntity = undefined;
     }
   }
@@ -606,11 +602,10 @@ rotate_over_time(org, rotater) {
   for(p = 0; p < timer * 20; p++) {
     if(level.selectedRotate_pitch != 0) {
       org AddPitch(level.selectedRotate_pitch);
+    } else {
+      if(level.selectedRotate_yaw != 0)
     }
-    else {
-    if(level.selectedRotate_yaw != 0)
-    }
-      org AddYaw(level.selectedRotate_yaw);
+    org AddYaw(level.selectedRotate_yaw);
     else {
       org AddRoll(level.selectedRotate_roll);
     }
@@ -1019,8 +1014,7 @@ button_is_clicked(name, name2) {
 toggle_entity_selection(index, ent) {
   if(isDefined(level.selected_fx[index])) {
     deselect_entity(index, ent);
-  }
-  else {
+  } else {
     select_entity(index, ent);
   }
 }
@@ -1539,11 +1533,10 @@ process_fx_rotater() {
     rotater.angles = ent.v["angles"];
     if(level.selectedRotate_pitch != 0) {
       rotater AddPitch(level.selectedRotate_pitch);
+    } else {
+      if(level.selectedRotate_yaw != 0)
     }
-    else {
-    if(level.selectedRotate_yaw != 0)
-    }
-      rotater AddYaw(level.selectedRotate_yaw);
+    rotater AddYaw(level.selectedRotate_yaw);
     else {
       rotater AddRoll(level.selectedRotate_roll);
     }

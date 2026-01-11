@@ -148,8 +148,7 @@ initBotLevelVariables() {
 initBotMapExtents() {
   if(isDefined(level.teleportGetActiveNodesFunc)) {
     all_nodes = [[level.teleportGetActiveNodesFunc]]();
-  }
-  else {
+  } else {
     all_nodes = GetAllNodes();
   }
 
@@ -336,15 +335,14 @@ bot_debug_draw_defense() {
 
     if(isDefined(struct.defense_nodes)) {
       foreach(node in struct.defense_nodes) {
-      bot_draw_cylinder(node.origin, 10, 10, 0.05, undefined, struct.cylinder_color, true, 4);
+        bot_draw_cylinder(node.origin, 10, 10, 0.05, undefined, struct.cylinder_color, true, 4);
       }
     }
 
     if(isDefined(struct.defense_trigger)) {
       if(struct.defense_trigger.classname != "trigger_radius") {
         BotDebugDrawTrigger(true, level.defense_debug_structs[i].defense_trigger, struct.cylinder_color, true);
-      }
-      else {
+      } else {
         bot_draw_cylinder(struct.defense_center, struct.defense_trigger.radius, struct.defense_trigger.height, 0.05, undefined, struct.cylinder_color, true);
       }
     }
@@ -360,8 +358,7 @@ bot_debug_draw_defense() {
       line_color = undefined;
       if(bot.team == "allies") {
         line_color = (0, 0, 1);
-      }
-      else if(bot.team == "axis") {
+      } else if(bot.team == "axis") {
         line_color = (1, 0, 0);
       }
 
@@ -489,9 +486,7 @@ bot_set_loadout_class() {
       }
 
       if(isDefined(self.override_class_function)) {
-        self.bot_class = [
-          [self.override_class_function]
-        ]();
+        self.bot_class = [[self.override_class_function]]();
       } else {
         self.bot_class = bot_setup_callback_class();
       }
@@ -539,8 +534,7 @@ monitor_pause_spawning() {
   while(1) {
     if(level.players_waiting_to_join.size > 0) {
       level.pausing_bot_connect_monitor = true;
-    }
-    else {
+    } else {
       level.pausing_bot_connect_monitor = false;
     }
 
@@ -666,8 +660,7 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
     if(ally_team_size + enemy_team_size < bot_get_client_limit()) {
       if(ally_team_size < max_ally_bots_absolute) {
         ally_team_size++;
-      }
-      else if(enemy_team_size < max_enemy_bots_absolute) {
+      } else if(enemy_team_size < max_enemy_bots_absolute) {
         enemy_team_size++;
       }
     }
@@ -690,8 +683,7 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
       } else if(ally_team_has_room_for_another_spectator && enemy_team_has_room_for_another_spectator) {
         if((cur_num_spectators % 2) == 1) {
           cur_num_ally_spectators++;
-        }
-        else {
+        } else {
           cur_num_enemy_spectators++;
         }
       }
@@ -742,8 +734,7 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
     while((slotCount < bot_get_client_limit()) && (slotCount < slotLimit)) {
       if(fillTeam && (ally_bot_slots < max_ally_bots_absolute) && bot_can_join_team(team_ally)) {
         ally_bot_slots++;
-      }
-      else if(!fillTeam && (enemy_bot_slots < max_enemy_bots_absolute) && bot_can_join_team(team_enemy)) {
+      } else if(!fillTeam && (enemy_bot_slots < max_enemy_bots_absolute) && bot_can_join_team(team_enemy)) {
         enemy_bot_slots++;
       }
       slotCount = (ally_bot_slots + enemy_bot_slots + numHumans);
@@ -793,8 +784,7 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
 
       if(ally_bots_wanted > 0) {
         move_bots_from_team_to_team(difference, team_enemy, team_ally, difficultyAlly);
-      }
-      else if(enemy_bots_wanted > 0) {
+      } else if(enemy_bots_wanted > 0) {
         move_bots_from_team_to_team(difference, team_ally, team_enemy, difficultyEnemy);
       }
 
@@ -818,11 +808,9 @@ bot_connect_monitor(num_ally_bots, num_enemy_bots) {
 
       if(enemy_bots_wanted > 0 && ally_bots_wanted > 0) {
         level waittill_multiple("spawned_enemies", "spawned_allies");
-      }
-      else if(enemy_bots_wanted > 0) {
+      } else if(enemy_bots_wanted > 0) {
         level waittill("spawned_enemies");
-      }
-      else if(ally_bots_wanted > 0) {
+      } else if(ally_bots_wanted > 0) {
         level waittill("spawned_allies");
       }
     }
@@ -1026,14 +1014,11 @@ drop_bots(count, team) {
 bot_lui_convert_team_to_int(team_name) {
   if(team_name == "axis") {
     return 0;
-  }
-  else if(team_name == "allies") {
+  } else if(team_name == "allies") {
     return 1;
-  }
-  else if(team_name == "autoassign" || team_name == "random") {
+  } else if(team_name == "autoassign" || team_name == "random") {
     return 2;
-  }
-  else {
+  } else {
     return 3;
   }
 }
@@ -1578,8 +1563,7 @@ bot_damage_callback(eAttacker, iDamage, sMeansOfDeath, sWeapon, eInflictor, sHit
     if(level.teamBased) {
       if(isDefined(eInflictor.team) && eInflictor.team == self.team) {
         return;
-      }
-      else if(isDefined(eAttacker) && isDefined(eAttacker.team) && eAttacker.team == self.team) {
+      } else if(isDefined(eAttacker) && isDefined(eAttacker.team) && eAttacker.team == self.team) {
         return;
       }
     }
@@ -1861,8 +1845,7 @@ bot_think_level_actions(override_radius) {
       max_dist = 256;
       if(isDefined(override_radius)) {
         max_dist = override_radius;
-      }
-      else if(self BotGetScriptGoalType() == "hunt" && self BotPursuingScriptGoal()) {
+      } else if(self BotGetScriptGoalType() == "hunt" && self BotPursuingScriptGoal()) {
         max_dist = 512;
       }
 
@@ -1911,8 +1894,7 @@ bot_think_level_actions(override_radius) {
     if(target_picked.bot_interaction_type == "damage") {
       if(should_melee_target) {
         extra_params.should_abort = ::level_trigger_should_abort_melee;
-      }
-      else {
+      } else {
         extra_params.should_abort = ::level_trigger_should_abort_ranged;
       }
     }
@@ -2305,8 +2287,7 @@ crate_get_nearest_valid_nodes(crate) {
     if(!node_within_use_radius_of_crate(node, crate)) {
       if(i == 0) {
         continue;
-      }
-      else {
+      } else {
         break;
       }
     }
@@ -2326,8 +2307,7 @@ crate_get_nearest_valid_nodes(crate) {
         nodes_to_return[nodes_to_return.size] = node;
         if(nodes_to_return.size == nodes_wanted) {
           return nodes_to_return;
-        }
-        else {
+        } else {
           continue;
         }
       }
@@ -2348,8 +2328,7 @@ crate_get_nearest_valid_nodes(crate) {
           nodes_to_return[nodes_to_return.size] = node;
           if(nodes_to_return.size == nodes_wanted) {
             return nodes_to_return;
-          }
-          else {
+          } else {
             continue;
           }
         }
@@ -2383,8 +2362,7 @@ crate_get_bot_target_check_distance(crate, use_radius) {
   testRadiusSq *= testRadiusSq;
   if(DistanceSquared(crate.origin, crateStandPos) <= testRadiusSq) {
     return crateStandPos;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -2990,8 +2968,7 @@ bot_know_enemies_on_start() {
 bot_make_entity_sentient(team, expendable) {
   if(isDefined(expendable)) {
     return self MakeEntitySentient(team, expendable);
-  }
-  else {
+  } else {
     return self MakeEntitySentient(team);
   }
 }
@@ -3015,8 +2992,7 @@ monitor_smoke_grenades() {
 
     if(smoke_grenade_weaponName == "smoke_grenade_mp" || smoke_grenade_weaponName == "smoke_grenadejugg_mp" || smoke_grenade_weaponName == "odin_projectile_smoke_mp") {
       smoke_grenade thread handle_smoke(9.0);
-    }
-    else if(smoke_grenade_weaponName == "odin_projectile_large_rod_mp") {
+    } else if(smoke_grenade_weaponName == "odin_projectile_large_rod_mp") {
       smoke_grenade thread handle_smoke(2.5);
     }
   }

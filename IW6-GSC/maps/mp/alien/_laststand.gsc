@@ -35,8 +35,7 @@ Callback_PlayerLastStandAlien(eInflictor, attacker, iDamage, sMeansOfDeath, sWea
 
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     maps\mp\alien\_chaos_laststand::chaos_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, bleedOutSpawnEntity);
-  }
-  else {
+  } else {
     regularExtinction_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, bleedOutSpawnEntity);
   }
 }
@@ -50,8 +49,7 @@ regularExtinction_PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, 
 
   if(self.inLastStand) {
     forceBleedOut(bleedOutSpawnEntity);
-  }
-  else {
+  } else {
     dropIntoLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHitLoc, bleedOutSpawnEntity, gameShouldEnd);
   }
 }
@@ -252,8 +250,7 @@ waitInLastStand(bleedOutSpawnEntity, gameShouldEnd) {
 
   if(isPlayingSolo()) {
     return (wait_for_self_revive(bleedOutSpawnEntity, gameShouldEnd));
-  }
-  else {
+  } else {
     return (wait_to_be_revived(self, self.origin, undefined, undefined, true, CONST_NORMAL_REVIVE_TIME, (0.33, 0.75, 0.24), CONST_BLEED_OUT_TIME, false, gameShouldEnd));
   }
 }
@@ -317,8 +314,7 @@ wait_for_self_revive(bleedOutSpawnEntity, gameShouldEnd) {
 
   if(is_killed_by_kill_trigger(bleedOutSpawnEntity)) {
     self setOrigin(bleedOutSpawnEntity.origin);
-  }
-  else {
+  } else {
     wait CONST_SELF_REVIVE_WAIT;
   }
 
@@ -360,11 +356,9 @@ wait_to_be_revived(downedPlayer, spawnLoc, entityModel, entityModelAnim, linkToO
 
     if(isDefined(timeLimit)) {
       result = reviveEnt waittill_any_ents_or_timeout_return(timeLimit, reviveEnt, "revive_success", downedPlayer, "force_bleed_out", downedPlayer, "revive_success");
-    }
-    else if(!isDefined(timelimit) && is_true(isChaosMode)) {
+    } else if(!isDefined(timelimit) && is_true(isChaosMode)) {
       result = reviveEnt waittill_any_ents_return(reviveEnt, "revive_success", downedPlayer, "force_bleed_out", downedPlayer, "revive_success");
-    }
-    else {
+    } else {
       result = reviveEnt waittill_any_return("revive_success");
     }
 
@@ -469,8 +463,7 @@ mayDoLastStandAlien(player, gameShouldEnd, bleedOutSpawnEntity) {
 
   if(isPlayingSolo()) {
     return solo_mayDoLastStand(gameShouldEnd, bleedOutSpawnEntity);
-  }
-  else {
+  } else {
     return coop_mayDoLastStand(bleedOutSpawnEntity);
   }
 }
@@ -550,8 +543,7 @@ cleanUpReviveEnt(owner) {
 player_init_laststand() {
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     maps\mp\alien\_chaos_laststand::chaos_player_init_laststand();
-  }
-  else {
+  } else {
     regularExtinction_player_init_laststand();
   }
 }
@@ -604,8 +596,7 @@ gameShouldEnd(player_just_down) {
 
   if(isPlayingSolo()) {
     return solo_gameShouldEnd(player_just_down);
-  }
-  else {
+  } else {
     return coop_gameShouldEnd(player_just_down);
   }
 }
@@ -823,8 +814,7 @@ blackBox_lastStand(attacker, iDamage) {
 
     if(isplayer(attacker)) {
       attacker_agent_type = "player";
-    }
-    else {
+    } else {
       attacker_agent_type = "nonagent";
     }
   }

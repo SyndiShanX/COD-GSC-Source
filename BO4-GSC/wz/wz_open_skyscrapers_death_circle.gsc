@@ -14,7 +14,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\load;
-
 #namespace wz_open_skyscrapers_death_circle;
 
 function_6f6f5189() {
@@ -41,9 +40,9 @@ function_6f6f5189() {
       function_9d313516(var_6b4cdf43);
     }
 
-      if((isDefined(getgametypesetting(#"hash_453cdf8a6bd610d7")) ? getgametypesetting(#"hash_453cdf8a6bd610d7") : 0) && isDefined(level.var_a6a3e12a)) {
-        function_320393b9();
-      }
+    if((isDefined(getgametypesetting(#"hash_453cdf8a6bd610d7")) ? getgametypesetting(#"hash_453cdf8a6bd610d7") : 0) && isDefined(level.var_a6a3e12a)) {
+      function_320393b9();
+    }
 
     finalcircle.var_3b9f4abf = level.var_5c8bbb85;
     finalcircle.mapwidth = level.var_6d8a1d51;
@@ -54,15 +53,15 @@ function_6f6f5189() {
     level thread namespace_3d2704b3::start(array(5, 4, 4, 4), 20, array(60, 45, 20));
 
     if(isDefined(getgametypesetting(#"hash_6eb44149a8ac6dd1")) ? getgametypesetting(#"hash_6eb44149a8ac6dd1") : 0) {
-      level thread namespace_3d2704b3::start_vehicle(array(#"veh_suv_player_police_wz", #"veh_quad_player_wz_police", #"veh_muscle_car_convertible_player_wz_blk"), array(0, 4, 4, 4), 10, array(40, 30, 15));
+      level thread namespace_3d2704b3::start_vehicle(array(#"veh_suv_player_police_wz", # "veh_quad_player_wz_police", # "veh_muscle_car_convertible_player_wz_blk"), array(0, 4, 4, 4), 10, array(40, 30, 15));
     }
   } else if(util::get_game_type() == "warzone_heavy_metal_heroes") {
     level thread namespace_3d2704b3::start(array(4, 4, 3, 3, 0), 20, array(60, 45, 20));
 
     if(isDefined(getgametypesetting(#"hash_6eb44149a8ac6dd1")) ? getgametypesetting(#"hash_6eb44149a8ac6dd1") : 0) {
-      level thread namespace_3d2704b3::start_vehicle(array(#"vehicle_t8_mil_tank_wz_black", #"vehicle_t8_mil_tank_wz_green", #"vehicle_t8_mil_tank_wz_grey", #"vehicle_t8_mil_tank_wz_tan"), array(2, 2, 2, 2, 2), 10, array(40, 30, 15));
+      level thread namespace_3d2704b3::start_vehicle(array(#"vehicle_t8_mil_tank_wz_black", # "vehicle_t8_mil_tank_wz_green", # "vehicle_t8_mil_tank_wz_grey", # "vehicle_t8_mil_tank_wz_tan"), array(2, 2, 2, 2, 2), 10, array(40, 30, 15));
     }
-  } else if(util::get_game_type() == #"warzone_bigteam_quad" || util::get_game_type() == #"warzone_bigteam_dbno_quad") {
+  } else if(util::get_game_type() == # "warzone_bigteam_quad" || util::get_game_type() == # "warzone_bigteam_dbno_quad") {
     level thread namespace_3d2704b3::start(array(2, 2, 2, 2), 20, array(45, 20, 20));
   } else {
     level thread namespace_3d2704b3::start(4, 20, array(60, 45, 20));
@@ -78,7 +77,7 @@ function_731497bb() {
   i = 0;
 
   if(isDefined(getgametypesetting(#"hash_2e8be75aaeb34d13")) ? getgametypesetting(#"hash_2e8be75aaeb34d13") : 0) {
-    level.var_6f535d7f[i] = #"open_areas";
+    level.var_6f535d7f[i] = # "open_areas";
     i += 1;
   }
 
@@ -189,27 +188,27 @@ function_c213f1b5(var_31c68e48) {
   }
 
   switch (var_e4204b3) {
-    case #"open_areas":
+    case # "open_areas":
       function_fdabbb8a();
       break;
-    case #"boxing_gym_final_circle":
-    case #"turbine_final_circle":
-    case #"construction_final_circle":
-    case #"array_final_circle":
-    case #"fracking_final_circle":
-    case #"asylum_final_circle":
-    case #"estates_final_circle":
-    case #"firing_range_final_circle":
-    case #"lighthouse_final_circle":
-    case #"hydro_final_circle":
-    case #"ghost_town_final_circle":
-    case #"diner_final_circle":
-    case #"factory_final_circle":
-    case #"nuketown_island_final_circle":
-    case #"clearing_final_circle":
-    case #"docks_final_circle":
-    case #"hijacked_final_circle":
-    case #"graveyard_final_circle":
+    case # "boxing_gym_final_circle":
+    case # "turbine_final_circle":
+    case # "construction_final_circle":
+    case # "array_final_circle":
+    case # "fracking_final_circle":
+    case # "asylum_final_circle":
+    case # "estates_final_circle":
+    case # "firing_range_final_circle":
+    case # "lighthouse_final_circle":
+    case # "hydro_final_circle":
+    case # "ghost_town_final_circle":
+    case # "diner_final_circle":
+    case # "factory_final_circle":
+    case # "nuketown_island_final_circle":
+    case # "clearing_final_circle":
+    case # "docks_final_circle":
+    case # "hijacked_final_circle":
+    case # "graveyard_final_circle":
       function_69e60a10(var_e4204b3);
       break;
     default:

@@ -17,7 +17,6 @@
 #include scripts\core_common\laststand_shared;
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\util_shared;
-
 #namespace archetype_civilian;
 
 autoexec main() {
@@ -78,18 +77,18 @@ private function_686ab596() {
 
     foreach(ai in ais) {
       switch (debug_civ_mode) {
-        case #"riot":
-          ai::setaiattribute(ai, #"_civ_mode", "riot");
+        case # "riot":
+          ai::setaiattribute(ai, # "_civ_mode", "riot");
           ai setteam(#"team3");
           break;
-        case #"panic":
-          ai::setaiattribute(ai, #"_civ_mode", "panic");
+        case # "panic":
+          ai::setaiattribute(ai, # "_civ_mode", "panic");
           break;
-        case #"calm":
-          ai::setaiattribute(ai, #"_civ_mode", "calm");
+        case # "calm":
+          ai::setaiattribute(ai, # "_civ_mode", "calm");
           break;
-        case #"run":
-          ai::setaiattribute(ai, #"_civ_mode", "run");
+        case # "run":
+          ai::setaiattribute(ai, # "_civ_mode", "run");
           break;
         default:
           break;
@@ -382,7 +381,7 @@ private civilianispanicked(entity) {
 }
 
 private function_e27d2a1b() {
-  return ai::getaiattribute(self, #"_civ_mode");
+  return ai::getaiattribute(self, # "_civ_mode");
 }
 
 private civilianarrivalallowed(entity) {
@@ -520,7 +519,7 @@ private civiliancleanuptothrowgrenade(behaviortreeentity) {
       if(isDefined(grenade)) {
         grenade.owner = behaviortreeentity;
         grenade.team = behaviortreeentity.team;
-        grenade setcontents(grenade setcontents(0)&~(32768 | 67108864 | 8388608 | 33554432));
+        grenade setcontents(grenade setcontents(0) &~(32768 | 67108864 | 8388608 | 33554432));
       }
     }
   }

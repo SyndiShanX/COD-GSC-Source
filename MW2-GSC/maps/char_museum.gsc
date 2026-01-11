@@ -254,12 +254,11 @@ afcaves_ai_think() {
     case "afchase_ending_shepherd_gun_monologue":
       if(isai(self)) {
         ai_wait_current_anim();
-      }
-      else {
+      } else {
         ai_wait_current_anim(.40);
       }
       foreach(ent in level.anim_ai["af_caves"]) {
-      ent ent_flag_clear("do_anim");
+        ent ent_flag_clear("do_anim");
       }
       flag_set("af_caves_done");
       break;
@@ -299,7 +298,7 @@ dcburning_main() {
   flag_wait("dc_burning_go");
   wait 2;
   foreach(ent in level.anim_ai["dc_burning"]) {
-  ent ent_flag_set("do_anim");
+    ent ent_flag_set("do_anim");
   }
 
   array_thread(getEntArray("civ_dc_burning_1", "script_noteworthy"), ::delaythread, 11, ::spawn_ai, true);
@@ -429,7 +428,7 @@ dcburning_dunn(animation) {
 
 dcburning_dunn_stop() {
   foreach(ent in level.anim_ai["dc_burning"]) {
-  ent ent_flag_clear("do_anim");
+    ent ent_flag_clear("do_anim");
   }
   flag_set("dc_burning_done");
 }
@@ -487,7 +486,7 @@ airport_main() {
   wait 1.5;
 
   foreach(ent in level.anim_ai["airport"]) {
-  ent ent_flag_set("do_anim");
+    ent ent_flag_set("do_anim");
   }
 
   array_thread(getEntArray("civ_airport_1", "script_noteworthy"), ::delaythread, 6.5, ::spawn_ai, true);
@@ -552,7 +551,7 @@ airport_ai_think() {
     case "airport_elevator_sequence_guy2":
       self ai_wait_current_anim(.42);
       foreach(ent in level.anim_ai["airport"]) {
-      ent ent_flag_clear("do_anim");
+        ent ent_flag_clear("do_anim");
       }
       flag_set("airport_done");
       break;
@@ -591,7 +590,7 @@ cliffhanger_main() {
   flag_wait("cliffhanger_go");
   wait 2;
   foreach(ent in level.anim_ai["cliffhanger"]) {
-  ent ent_flag_set("do_anim");
+    ent ent_flag_set("do_anim");
   }
 
   flag_wait("cliffhanger_done");
@@ -660,7 +659,7 @@ cliffhanger_ai_think() {
     case "killhouse_sas_price":
       self ai_wait_current_anim(.5);
       foreach(ent in level.anim_ai["cliffhanger"]) {
-      ent ent_flag_clear("do_anim");
+        ent ent_flag_clear("do_anim");
       }
       flag_set("cliffhanger_done");
       break;
@@ -696,7 +695,7 @@ favela_main() {
   wait 3;
 
   foreach(ent in level.anim_ai["favela"]) {
-  ent ent_flag_set("do_anim");
+    ent ent_flag_set("do_anim");
   }
 
   array_thread(getEntArray("civ_favela_3", "script_noteworthy"), ::delaythread, 6, ::spawn_ai, true);
@@ -763,7 +762,7 @@ favela_ai_think() {
       self linkto(link);
       self ai_wait_current_anim(.20);
       foreach(ent in level.anim_ai["favela"]) {
-      ent ent_flag_clear("do_anim");
+        ent ent_flag_clear("do_anim");
       }
       flag_set("favela_done");
       break;
@@ -905,7 +904,7 @@ oilrig_main() {
   wait 2;
 
   foreach(ent in level.anim_ai["oilrig"]) {
-  ent ent_flag_set("do_anim");
+    ent ent_flag_set("do_anim");
   }
 
   array_thread(getEntArray("civ_oilrig_1", "script_noteworthy"), ::delaythread, 12, ::spawn_ai, true);
@@ -951,14 +950,14 @@ oilrig_ai_think() {
     case "roadkill_opening_foley":
       self ai_wait_current_anim(.73);
       foreach(ent in level.anim_ai["oilrig"]) {
-      ent ent_flag_clear("do_anim");
+        ent ent_flag_clear("do_anim");
       }
       flag_set("oilrig_done");
       break;
     case "roadkill_opening_shepherd":
       self ai_wait_current_anim(.83);
       foreach(ent in level.anim_ai["oilrig"]) {
-      ent ent_flag_clear("do_anim");
+        ent ent_flag_clear("do_anim");
       }
       flag_set("oilrig_done");
       break;
@@ -990,7 +989,7 @@ estate_main() {
   wait 2;
 
   foreach(ent in level.anim_ai["estate"]) {
-  ent ent_flag_set("do_anim");
+    ent ent_flag_set("do_anim");
   }
 
   array_thread(getEntArray("civ_estate_1", "script_noteworthy"), ::delaythread, 6, ::spawn_ai, true);
@@ -1062,7 +1061,7 @@ estate_ai_think() {
     case "bh_6_drop":
       self ai_wait_current_anim(.936);
       foreach(ent in level.anim_ai["estate"]) {
-      ent ent_flag_clear("do_anim");
+        ent ent_flag_clear("do_anim");
       }
       flag_set("estate_done");
       break;
@@ -1078,8 +1077,7 @@ estate_struct_setup() {
   node = spawnStruct();
   if(level.level_mode == "free") {
     node.origin = helo GetTagOrigin("TAG_DETACH") + (0, 0, -10);
-  }
-  else {
+  } else {
     node.origin = helo GetTagOrigin("TAG_DETACH");
   }
 
@@ -1143,7 +1141,7 @@ hostage_main() {
   flag_wait("hostage_go");
 
   foreach(ent in level.anim_ai["hostage"]) {
-  ent ent_flag_set("do_anim");
+    ent ent_flag_set("do_anim");
   }
 
   array_thread(getEntArray("civ_hostage_1", "script_noteworthy"), ::delaythread, 5, ::spawn_ai, true);
@@ -1197,7 +1195,7 @@ hostage_ai_think() {
       self thread hostage_pose(node.animation);
       self ai_wait_current_anim(.74);
       foreach(ent in level.anim_ai["hostage"]) {
-      ent ent_flag_clear("do_anim");
+        ent ent_flag_clear("do_anim");
       }
       flag_set("hostage_done");
       break;
@@ -1273,7 +1271,7 @@ trainer_main() {
   wait 2.5;
 
   foreach(ent in level.anim_ai["trainer"]) {
-  ent ent_flag_set("do_anim");
+    ent ent_flag_set("do_anim");
   }
 
   flag_wait("trainer_done");
@@ -1341,7 +1339,7 @@ trainer_ai_think() {
     case "training_intro_foley_end":
       self ai_wait_current_anim(.50);
       foreach(ent in level.anim_ai["trainer"]) {
-      ent ent_flag_clear("do_anim");
+        ent ent_flag_clear("do_anim");
       }
       flag_set("trainer_done");
       break;
@@ -1369,7 +1367,7 @@ arcadia_main() {
   wait 2;
 
   foreach(ent in level.anim_ai["arcadia"]) {
-  ent ent_flag_set("do_anim");
+    ent ent_flag_set("do_anim");
   }
 
   array_thread(getEntArray("civ_arcadia_1", "script_noteworthy"), ::delaythread, 2.5, ::spawn_ai, true);
@@ -1451,7 +1449,7 @@ arcadia_ai_think() {
       self thread arcadia_pose(node.animation);
       self ai_wait_current_anim(.97);
       foreach(ent in level.anim_ai["arcadia"]) {
-      ent ent_flag_clear("do_anim");
+        ent ent_flag_clear("do_anim");
       }
       flag_set("arcadia_done");
       break;
@@ -1855,8 +1853,7 @@ end_credits() {
 
   if(level.level_mode == "credits_1") {
     flag_set("af_chase_nextmission");
-  }
-  else {
+  } else {
     nextmission();
   }
 }

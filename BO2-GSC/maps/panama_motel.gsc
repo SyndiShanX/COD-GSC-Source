@@ -86,8 +86,7 @@ gun_raise(m_player_body) {
 
   if(level.player hasweapon("minigun_sp") || level.player hasweapon("minigun80s_sp")) {
     level.player disableweapons();
-  }
-  else {
+  } else {
     level.player enableweapons();
     level.player showviewmodel();
     level.player disableweaponfire();
@@ -143,8 +142,7 @@ motel_vo_nicaragua(ai_mason) {
 next_mission(m_player_body) {
   if(is_false(level.screen_faded)) {
     screen_fade_out(0.5);
-  }
-  else {
+  } else {
     wait 0.5;
   }
 
@@ -178,11 +176,9 @@ motel_tv_swap(guy) {
   m_motel_tv_broken show();
 }
 
-test_print(guy) {
-}
+test_print(guy) {}
 
-head_shot_bathroom_guy(guy) {
-}
+head_shot_bathroom_guy(guy) {}
 
 player_breach_button_press() {
   screen_message_create(&"PANAMA_MOTEL_BREACH");

@@ -8,7 +8,6 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace burnplayer;
 
 autoexec __init__system__() {
@@ -63,7 +62,7 @@ set_corpse_burning(localclientnum) {
 function_8227cec3(localclientnum) {
   if(self function_21c0fa55()) {
     self postfx::stoppostfxbundle("pstfx_burn_loop");
-    self playSound(0, #"hash_41520794c2fd8aa");
+    self playSound(0, # "hash_41520794c2fd8aa");
   }
 }
 
@@ -88,7 +87,7 @@ burn_on_postfx() {
   self endon(#"death");
   self notify(#"burn_on_postfx");
   self endon(#"burn_on_postfx");
-  self playSound(0, #"hash_791f349cb716e078");
+  self playSound(0, # "hash_791f349cb716e078");
   self thread postfx::playpostfxbundle(#"pstfx_burn_loop");
 }
 
@@ -123,7 +122,7 @@ private _burntagson(localclientnum, tags, use_tagfxset) {
     }
   }
 
-  playSound(0, #"chr_ignite", self.origin);
+  playSound(0, # "chr_ignite", self.origin);
   burnsound = self playLoopSound(#"chr_burn_loop_overlay", 0.5);
   self thread _burntagswatchend(localclientnum, activefx, burnsound);
   self thread _burntagswatchclear(localclientnum, activefx, burnsound);
@@ -135,7 +134,7 @@ private _burnbody(localclientnum, use_tagfxset = 0) {
 }
 
 private _burntagswatchend(localclientnum, fxarray, burnsound) {
-  self waittill(#"burn_off", #"death");
+  self waittill(#"burn_off", # "death");
 
   if(isDefined(self) && isDefined(burnsound)) {
     self stoploopsound(burnsound, 1);

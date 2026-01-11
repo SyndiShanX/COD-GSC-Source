@@ -500,8 +500,7 @@ cspline_getPointAtDistance(csPath, distance, speedIsImportant) {
   } else if(distance >= csPath.Segments[csPath.Segments.size - 1].endAt) {
     if(csPath.Segments.size > 1) {
       segLength = csPath.Segments[csPath.Segments.size - 1].endAt - csPath.Segments[csPath.Segments.size - 2].endAt;
-    }
-    else {
+    } else {
       segLength = csPath.Segments[csPath.Segments.size - 1].endAt;
     }
     posVel = csplineSeg_getPoint(csPath.Segments[csPath.Segments.size - 1], 1, segLength, csPath.Segments[csPath.Segments.size - 1].speedEnd);
@@ -535,8 +534,7 @@ cspline_getPointAtTime(csPath, time) {
   } else if(time >= csPath.Segments[csPath.Segments.size - 1].endTime) {
     if(csPath.Segments.size > 1) {
       segLength = csPath.Segments[csPath.Segments.size - 1].endAt - csPath.Segments[csPath.Segments.size - 2].endAt;
-    }
-    else {
+    } else {
       segLength = csPath.Segments[csPath.Segments.size - 1].endAt;
     }
     posVel = csplineSeg_getPoint(csPath.Segments[csPath.Segments.size - 1], 1, segLength, csPath.Segments[csPath.Segments.size - 1].speedEnd);
@@ -677,8 +675,7 @@ cspline_test(csPath, timeSecs) {
         prevPos = posVel["pos"];
         if(isDefined(csPath.Segments[0].speedEnd)) {
           posVel = cspline_getPointAtTime(csPath, time);
-        }
-        else {
+        } else {
           posVel = cspline_getPointAtDistance(csPath, time);
         }
         thread draw_arrow_time(prevPos, posVel["pos"], (0, 1, 0), 1);

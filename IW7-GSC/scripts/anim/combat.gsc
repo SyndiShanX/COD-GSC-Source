@@ -25,9 +25,7 @@ main() {
     wait(0.05);
   }
 
-  [
-    [self.exception["exposed"]]
-  ]();
+  [[self.exception["exposed"]]]();
   scripts\anim\utility::func_9832("combat");
   self.a.var_22F5 = undefined;
   if(isDefined(self.target_getindexoftarget) && self.target_getindexoftarget.type == "Ambush" && self getweaponassetfromrootweapon(self.target_getindexoftarget)) {

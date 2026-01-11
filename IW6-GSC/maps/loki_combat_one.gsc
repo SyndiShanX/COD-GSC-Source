@@ -138,11 +138,9 @@ start_fuel_leak_fx_main(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1) || var_0 == "fuel_explosion_spark_point2") {
     thread maps\loki_audio::sfx_gas_line_fire_lp(self, 0);
-  }
-  else if(level.bullet_caused_fuel_leaks.size < 2 && var_0 == "fuel_explosion_spark_point0") {
+  } else if(level.bullet_caused_fuel_leaks.size < 2 && var_0 == "fuel_explosion_spark_point0") {
     thread maps\loki_audio::sfx_gas_line_fire_lp(self, 0);
-  }
-  else {
+  } else {
     thread maps\loki_audio::sfx_gas_line_fire_lp(self, 1);
   }
 
@@ -181,8 +179,7 @@ start_fuel_explosion_fx(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_2)) {
     playFX(common_scripts\utility::getfx(var_1), var_5.origin);
-  }
-  else {
+  } else {
     playFX(common_scripts\utility::getfx(var_1), var_5.origin, var_2);
   }
 }
@@ -244,8 +241,7 @@ move_explosion_buildup_rumble() {
 
     if(var_1 > 666) {
       var_0.origin = var_0.origin + (0, 0, -7);
-    }
-    else if(distance(var_0.origin, level.player.origin) < 200) {} else {
+    } else if(distance(var_0.origin, level.player.origin) < 200) {} else {
       maps\loki_util::jkuprint("fast move");
       var_0.origin = var_0.origin + (0, 0, -17);
     }
@@ -362,7 +358,7 @@ explosion_anim(var_0, var_1) {
   var_2 = getEntArray("explosion_hide", "targetname");
 
   foreach(var_4 in var_2) {
-  var_4 hide();
+    var_4 hide();
   }
 
   var_0 maps\_anim::anim_single_solo(var_1, "explosion_part1");
@@ -585,7 +581,7 @@ trigger_wave2() {
   var_5 = maps\loki_util::spawn_space_ais_from_targetname("combat_one_wave2_new");
 
   foreach(var_7 in var_5) {
-  var_7 thread combat_one_enemy();
+    var_7 thread combat_one_enemy();
   }
 }
 
@@ -598,7 +594,7 @@ trigger_wave3() {
   var_1 = get_all_wave_guys();
 
   foreach(var_3 in var_1) {
-  level thread maps\loki_util::reassign_goal_volume(var_3, "combat_one_wave3");
+    level thread maps\loki_util::reassign_goal_volume(var_3, "combat_one_wave3");
   }
 
   level thread maps\loki_util::loki_autosave_now();
@@ -800,7 +796,7 @@ unlink_final_exposed_nodes() {
   var_0 = getnodearray("combat_one_final_exposed_node", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 disconnectnode();
+    var_2 disconnectnode();
   }
 }
 
@@ -808,7 +804,7 @@ link_final_exposed_nodes() {
   var_0 = getnodearray("combat_one_final_exposed_node", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 connectnode();
+    var_2 connectnode();
   }
 }
 
@@ -830,8 +826,7 @@ force_traversal(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_2)) {
     var_6 = undefined;
-  }
-  else {
+  } else {
     var_6 = getnode(var_2, "targetname");
   }
 
@@ -955,8 +950,7 @@ random_explosions(var_0, var_1, var_2) {
 
     if(isDefined(var_2)) {
       playFX(common_scripts\utility::getfx("fuel_explosion_zerog"), var_0);
-    }
-    else {
+    } else {
       playFX(common_scripts\utility::getfx("explosion_small"), var_0);
     }
 
@@ -1154,8 +1148,7 @@ nonedgemaintains(var_0) {
 tile_attached_to_edge(var_0) {
   if(common_scripts\utility::array_contains(var_0.testedarray, self)) {
     return;
-  }
-  else {
+  } else {
     var_0.testedarray[var_0.testedarray.size] = self;
   }
 
@@ -1185,7 +1178,7 @@ tile_death(var_0) {
   self movegravity((0, 0, -3), 1);
 
   foreach(var_3 in self.touchingtiles) {
-  var_3 maps\_utility::delaythread(randomfloatrange(0.05, 0.1), ::tile_spider, var_0);
+    var_3 maps\_utility::delaythread(randomfloatrange(0.05, 0.1), ::tile_spider, var_0);
   }
 
   thread decrementlevelbreaks();

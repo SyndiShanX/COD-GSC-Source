@@ -27,8 +27,7 @@ color_trig_moves_enemies() {
       if(!maps\_utility::ent_flag("player_activated")) {
         if(isDefined(self.targetname)) {
           var_1 = "player in color trig " + self.targetname;
-        }
-        else {
+        } else {
           var_1 = "Player in color trig with no targetname at: " + self.origin;
         }
 
@@ -81,8 +80,7 @@ set_new_enemy_volume(var_0) {
 temp_trigger_off() {
   if(isDefined(self.targetname)) {
     var_0 = "Turning off trig " + self.targetname;
-  }
-  else {
+  } else {
     var_0 = "Turning off trig with no target name at: " + self.origin;
   }
 
@@ -92,8 +90,7 @@ temp_trigger_off() {
 
   if(isDefined(self.targetname)) {
     var_0 = "Restoring trig " + self.targetname;
-  }
-  else {
+  } else {
     var_0 = "Restoring trig with no target name at: " + self.origin;
   }
 

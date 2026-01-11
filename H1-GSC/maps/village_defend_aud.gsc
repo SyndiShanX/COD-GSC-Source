@@ -74,8 +74,7 @@ zone_handler(var_0, var_1) {
 
   if(getsubstr(var_0, 0, 6) == "enter_") {
     var_2 = var_1;
-  }
-  else if(getsubstr(var_0, 0, 5) == "exit_") {
+  } else if(getsubstr(var_0, 0, 5) == "exit_") {
     var_3 = var_1;
   }
 }

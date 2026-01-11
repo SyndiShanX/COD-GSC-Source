@@ -150,11 +150,9 @@ player_can_see_me(player) {
 
   if(forwarddotbanzai >= 1) {
     anglefromcenter = 0;
-  }
-  else if(forwarddotbanzai <= -1) {
+  } else if(forwarddotbanzai <= -1) {
     anglefromcenter = 180;
-  }
-  else {
+  } else {
     anglefromcenter = acos(forwarddotbanzai);
   }
 
@@ -357,7 +355,7 @@ get_dog_locations_in_zones(a_zones) {
   a_dog_locations = [];
 
   foreach(zone in a_zones) {
-  a_dog_locations = arraycombine(a_dog_locations, level.zones[zone].dog_locations, 0, 0);
+    a_dog_locations = arraycombine(a_dog_locations, level.zones[zone].dog_locations, 0, 0);
   }
 
   return a_dog_locations;

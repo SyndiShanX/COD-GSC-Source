@@ -293,8 +293,7 @@ gameplay_hijack() {
   if(getdvar("ac130_gameplay_enabled") == "1") {
     if(var_0[1].size > 0) {
       common_scripts\utility::waittill_multiple_ents(level.getaway_vehicle_1, "hijack_done", level.getaway_vehicle_2, "hijack_done");
-    }
-    else {
+    } else {
       common_scripts\utility::waittill_multiple_ents(level.getaway_vehicle_1, "hijack_done");
     }
   }

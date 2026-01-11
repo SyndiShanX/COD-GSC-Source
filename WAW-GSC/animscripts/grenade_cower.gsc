@@ -27,8 +27,7 @@ main() {
     }
     if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
       self setFlaggedAnimKnobAllRestart("cowerstart", % exposed_squat_down_grenade_F, % body, 1, 0.2);
-    }
-    else {
+    } else {
       self setFlaggedAnimKnobAllRestart("cowerstart", % exposed2_squat_down_grenade_F, % body, 1, 0.2);
     }
     self animscripts\shared::DoNoteTracks("cowerstart");
@@ -37,8 +36,7 @@ main() {
   self.a.movement = "stop";
   if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
     self setFlaggedAnimKnobAllRestart("cower", % exposed_squat_idle_grenade_F, % body, 1, 0.2);
-  }
-  else {
+  } else {
     self setFlaggedAnimKnobAllRestart("cower", % exposed2_squat_idle_grenade_F, % body, 1, 0.2);
   }
   self animscripts\shared::DoNoteTracks("cower");

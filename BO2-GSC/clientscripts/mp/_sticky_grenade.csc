@@ -42,8 +42,7 @@ start_light_fx(localclientnum) {
 
   if(friend) {
     self.fx = playFXOnTag(localclientnum, level._effect["grenade_friendly_light"], self, "tag_fx");
-  }
-  else {
+  } else {
     self.fx = playFXOnTag(localclientnum, level._effect["grenade_enemy_light"], self, "tag_fx");
   }
 }
@@ -61,8 +60,7 @@ fullscreen_fx(localclientnum) {
   if(isDefined(player)) {
     if(player getinkillcam(localclientnum)) {
       return;
-    }
-    else if(player isplayerviewlinkedtoentity(localclientnum)) {
+    } else if(player isplayerviewlinkedtoentity(localclientnum)) {
       return;
     }
   }

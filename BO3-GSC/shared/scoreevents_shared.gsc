@@ -36,9 +36,7 @@ function processscoreevent(event, player, victim, weapon) {
     }
     if(allowplayerscore) {
       if(isDefined(level.scoreongiveplayerscore)) {
-        scoregiven = [
-          [level.scoreongiveplayerscore]
-        ](event, player, victim, undefined, weapon);
+        scoregiven = [[level.scoreongiveplayerscore]](event, player, victim, undefined, weapon);
         isscoreevent = scoregiven > 0;
         if(isscoreevent) {
           hero_restricted = is_hero_score_event_restricted(event);

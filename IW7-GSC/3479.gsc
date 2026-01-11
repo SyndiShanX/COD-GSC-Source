@@ -8,7 +8,7 @@ init() {
   level.dronemissilespawnarray = getEntArray("remoteMissileSpawn", "targetname");
 
   foreach(var_01 in level.dronemissilespawnarray) {
-  var_1.func_1155F = getent(var_1.target, "targetname");
+    var_1.func_1155F = getent(var_1.target, "targetname");
   }
 
   var_03 = ["passive_predator", "passive_no_missiles", "passive_implosion", "passive_rapid_missiles"];

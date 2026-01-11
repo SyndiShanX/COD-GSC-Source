@@ -24,8 +24,7 @@ main() {
   //Too lazy to set up Head Quarters!
   if(getDvar("g_gametype") != "koth") {
     level thread deleteChaModels();
-  }
-  else {
+  } else {
     level thread deleteBarrels();
   }
 }

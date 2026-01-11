@@ -100,8 +100,7 @@ _fire(var_00, var_01) {
 
   if(var_2.size > 0) {
     var_06 = var_01 func_7E01(var_02);
-  }
-  else {
+  } else {
     var_06 = undefined;
   }
 

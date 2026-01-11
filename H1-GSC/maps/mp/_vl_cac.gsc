@@ -17,18 +17,15 @@ init_cac() {
 playercacprocesslui(var_0, var_1) {
   if(var_0 == "reset_loadout") {
     resetloadout(var_1);
-  }
-  else {
+  } else {
     if(maps\mp\_utility::is_true(level.in_depot)) {
       return;
     }
     if(var_0 == "cac") {
       handlecacmodechange(var_1);
-    }
-    else if(var_0 == "classpreview" || issubstr(var_0, "preset_classpreview")) {
+    } else if(var_0 == "classpreview" || issubstr(var_0, "preset_classpreview")) {
       handleclassselect(var_0, var_1);
-    }
-    else if(var_0 == "weapon_highlighted" && var_1 != "none") {
+    } else if(var_0 == "weapon_highlighted" && var_1 != "none") {
       if(maps\mp\_vl_cao::iscollectionsmenuactive()) {
         maps\mp\_vl_cao::turncollectionsmodeoff();
       }
@@ -437,8 +434,7 @@ getweaponavatarforwarddistance(var_0, var_1) {
 
   if(isavatarameleeweapon(var_0)) {
     var_5 = 3.54 * var_4 + 11.492;
-  }
-  else {
+  } else {
     var_5 = 1.8325 * var_3 + 28.587;
   }
 
@@ -499,8 +495,7 @@ getweaponbounds(var_0, var_1) {
 
   if(isDefined(level.weaponmodelboundscache[var_0.weapon_name])) {
     return level.weaponmodelboundscache[var_0.weapon_name];
-  }
-  else if(!var_1) {
+  } else if(!var_1) {
     var_2 = getweaponmodelbounds(var_0);
 
     if(!isDefined(var_2)) {
@@ -518,8 +513,7 @@ getweaponbounds(var_0, var_1) {
 getavatarbounds(var_0, var_1) {
   if(isweaponavataraweapon(var_0)) {
     var_2 = getweaponbounds(var_0, var_1);
-  }
-  else {
+  } else {
     var_2 = getperkbounds(var_0);
   }
 
@@ -552,8 +546,7 @@ positionweaponavatar(var_0, var_1) {
 
   if(var_6) {
     var_7 = (0, 0, -1 * var_8[2]);
-  }
-  else if(var_1 == "Equipment") {
+  } else if(var_1 == "Equipment") {
     var_7 = (0, 0, var_7[2]);
   }
 
@@ -561,11 +554,9 @@ positionweaponavatar(var_0, var_1) {
 
   if(var_6) {
     var_3.angles = (185, 126, 0);
-  }
-  else if(isweaponavataraweapon(var_0)) {
+  } else if(isweaponavataraweapon(var_0)) {
     var_3.angles = (5, 0, 0);
-  }
-  else {
+  } else {
     var_3.angles = (0, 300, 15);
   }
 
@@ -618,8 +609,7 @@ showloadingweaponavatar(var_0, var_1) {
 
   if(!isDefined(var_2)) {
     var_2 = spawnloadingweaponavatar(var_0);
-  }
-  else {
+  } else {
     var_2 show();
 
     if(var_2.weapon_name == var_0) {
@@ -858,11 +848,9 @@ getvlclass(var_0, var_1) {
 
   if(var_0 == "preset_classpreview_allies") {
     var_2 = "allies_recipe" + var_1;
-  }
-  else if(var_0 == "preset_classpreview_axis") {
+  } else if(var_0 == "preset_classpreview_axis") {
     var_2 = "axis_recipe" + var_1;
-  }
-  else if(var_0 == "classpreview") {
+  } else if(var_0 == "classpreview") {
     var_2 = "lobby" + var_1;
   }
 
@@ -880,14 +868,11 @@ getvlclass(var_0, var_1) {
 isclassvalid(var_0, var_1) {
   if(issubstr(var_0, "lobby")) {
     return 1;
-  }
-  else if(issubstr(var_0, "axis")) {
+  } else if(issubstr(var_0, "axis")) {
     var_2 = "axis";
-  }
-  else if(issubstr(var_0, "allies")) {
+  } else if(issubstr(var_0, "allies")) {
     var_2 = "allies";
-  }
-  else {
+  } else {
     return 0;
   }
 

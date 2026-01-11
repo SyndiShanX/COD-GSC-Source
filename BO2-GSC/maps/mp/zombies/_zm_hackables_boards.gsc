@@ -64,8 +64,7 @@ board_hack(hacker) {
 
   if(self.num_hacks < 3) {
     hacker maps\mp\zombies\_zm_score::add_to_player_score(100);
-  }
-  else {
+  } else {
     cost = int(min(300, hacker.score));
 
     if(cost) {

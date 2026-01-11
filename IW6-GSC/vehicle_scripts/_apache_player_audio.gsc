@@ -81,8 +81,7 @@ adjust_overall_apache_pitches() {
 
   if(abs(self.audio_speed) < self.highspeed_end_crossfade) {
     self.overall_pitch = self.overall_pitch_roll_modifier * (abs(self.audio_speed) / self.highspeed_end_crossfade * (self.overall_pitch_max - self.overall_pitch_min) + self.overall_pitch_min);
-  }
-  else {
+  } else {
     self.overall_pitch = self.overall_pitch_max * self.overall_pitch_roll_modifier;
   }
 }
@@ -90,11 +89,9 @@ adjust_overall_apache_pitches() {
 adjust_helo_sound_low() {
   if(abs(self.audio_speed) <= self.lowspeed_start_crossfade) {
     self.low_speed_mult = self.roll_other_mult * 1.0;
-  }
-  else if(abs(self.audio_speed) < self.lowspeed_end_crossfade) {
+  } else if(abs(self.audio_speed) < self.lowspeed_end_crossfade) {
     self.low_speed_mult = self.roll_other_mult * (1.0 - (abs(self.audio_speed) - self.lowspeed_start_crossfade) / (self.lowspeed_end_crossfade - self.lowspeed_start_crossfade));
-  }
-  else {
+  } else {
     self.low_speed_mult = 0.005;
   }
 
@@ -105,11 +102,9 @@ adjust_helo_sound_low() {
 adjust_helo_sound_high() {
   if(abs(self.audio_speed) >= self.highspeed_end_crossfade) {
     self.high_speed_mult = self.roll_other_mult * 1.0;
-  }
-  else if(abs(self.audio_speed) > self.highspeed_start_crossfade) {
+  } else if(abs(self.audio_speed) > self.highspeed_start_crossfade) {
     self.high_speed_mult = self.roll_other_mult * (1.0 - (self.highspeed_end_crossfade - abs(self.audio_speed)) / (self.highspeed_end_crossfade - self.highspeed_start_crossfade));
-  }
-  else {
+  } else {
     self.high_speed_mult = 0.005;
   }
 

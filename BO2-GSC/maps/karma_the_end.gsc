@@ -26,8 +26,7 @@ init_flags() {
   flag_init("karma_killed");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_confrontation() {
   skipto_teleport("skipto_the_end");
@@ -229,8 +228,7 @@ defalco_escape_defalco() {
 
   if(a_good_nodes.size > 0) {
     force_goal(a_good_nodes[0]);
-  }
-  else {
+  } else {
     set_goal_pos(self.origin);
   }
 
@@ -314,14 +312,11 @@ set_react_anim_time() {
 
     if(n_step == 1) {
       self setanimtime(self.anim_defalco_react, 0);
-    }
-    else if(n_step == 2) {
+    } else if(n_step == 2) {
       self setanimtime(self.anim_defalco_react, 0.2);
-    }
-    else if(n_step == 3) {
+    } else if(n_step == 3) {
       self setanimtime(self.anim_defalco_react, 0.5);
-    }
-    else if(n_step == 4) {
+    } else if(n_step == 4) {
       self setflaggedanimknoball("defalco_react", self.anim_defalco_react, % root, 1, 0.3, 0.2);
       self setanimtime(self.anim_defalco_react, 0.7);
     } else if(n_step == 5) {
@@ -347,7 +342,7 @@ kill_all_enemies() {
   kill_spawnernum(80);
 
   foreach(ai in getaiarray("axis")) {
-  ai thread bloody_death(undefined, randomfloat(2));
+    ai thread bloody_death(undefined, randomfloat(2));
   }
 
   level.player.ignoreme = 1;
@@ -441,15 +436,13 @@ lerp_position(v_goal_pos, v_goal_angles, n_lerp_time) {
 
     if(isDefined(v_goal_pos)) {
       v_new_pos = lerpvector(v_start_pos, v_goal_pos, n_time / n_lerp_time);
-    }
-    else {
+    } else {
       v_new_pos = self.origin;
     }
 
     if(isDefined(v_goal_angles)) {
       v_new_ang = (anglelerp(v_start_ang[0], v_goal_angles[0], n_time / n_lerp_time), anglelerp(v_start_ang[1], v_goal_angles[1], n_time / n_lerp_time), anglelerp(v_start_ang[2], v_goal_angles[2], n_time / n_lerp_time));
-    }
-    else {
+    } else {
       v_new_ang = self.angles;
     }
 
@@ -594,8 +587,7 @@ set_objective_on_vtol() {
 defalco_escape_vehicle_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoint, vdir, shitloc, psoffsettime, damagefromunderneath, modelindex, partname) {
   if(issubstr(tolower(type), "bullet")) {
     idamage = 0;
-  }
-  else if(type == "MOD_EXPLOSIVE" || type == "MOD_PROJECTILE" || type == "MOD_GRENADE") {
+  } else if(type == "MOD_EXPLOSIVE" || type == "MOD_PROJECTILE" || type == "MOD_GRENADE") {
     idamage = 99999;
   }
 
@@ -614,7 +606,7 @@ setup_cagelight_fx(str_light_targetname) {
   a_cagelights = get_ent_array(str_light_targetname, "targetname");
 
   foreach(m_light in a_cagelights) {
-  m_light thread delay_cagelight_fx();
+    m_light thread delay_cagelight_fx();
   }
 }
 

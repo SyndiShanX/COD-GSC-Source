@@ -136,8 +136,7 @@ _zombie_blood_achievement_think() {
 
     if(issubstr(str_action, "revive")) {
       self.zombie_blood_revives++;
-    }
-    else if(str_action == "completed_zone_capture") {
+    } else if(str_action == "completed_zone_capture") {
       self.zombie_blood_generators_started++;
     }
 
@@ -175,14 +174,11 @@ watch_equipped_weapons_for_upgraded_staffs() {
     }
     if(str_weapon == "staff_water_upgraded_zm") {
       self notify("upgraded_water_staff_equipped");
-    }
-    else if(str_weapon == "staff_lightning_upgraded_zm") {
+    } else if(str_weapon == "staff_lightning_upgraded_zm") {
       self notify("upgraded_lightning_staff_equipped");
-    }
-    else if(str_weapon == "staff_fire_upgraded_zm") {
+    } else if(str_weapon == "staff_fire_upgraded_zm") {
       self notify("upgraded_fire_staff_equipped");
-    }
-    else if(str_weapon == "staff_air_upgraded_zm") {
+    } else if(str_weapon == "staff_air_upgraded_zm") {
       self notify("upgraded_air_staff_equipped");
     }
   }

@@ -552,8 +552,7 @@ stingerProximityDetonate(missileTarget, player) {
   while(true) {
     if(!isDefined(missileTarget)) {
       center = lastCenter;
-    }
-    else {
+    } else {
       center = missileTarget GetPointInBounds(0, 0, 0);
     }
 
@@ -636,8 +635,7 @@ samProximityDetonate(missileTarget, player, missileGroup) {
   for(i = 0; i < missileGroup.size; i++) {
     if(isDefined(missileGroup[i])) {
       minDist[i] = Distance(missileGroup[i].origin, missileTarget GetPointInBounds(0, 0, 0));
-    }
-    else {
+    } else {
       minDist[i] = undefined;
     }
   }

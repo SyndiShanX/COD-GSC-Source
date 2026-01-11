@@ -32,16 +32,14 @@ onspawn(watcher, player) {
     if(isDefined(prey)) {
       if(level.teambased && isplayer(prey) && player.team == prey.team) {
         isfriendly = 1;
-      }
-      else if(level.teambased && isai(prey) && player.team == prey.aiteam) {
+      } else if(level.teambased && isai(prey) && player.team == prey.aiteam) {
         isfriendly = 1;
       }
 
       if(!isfriendly) {
         if(isalive(prey)) {
           retrievable_model droptoground(retrievable_model.origin, 80);
-        }
-        else {
+        } else {
           retrievable_model linkto(prey, bone);
         }
       } else if(isfriendly) {
@@ -60,8 +58,7 @@ onspawn(watcher, player) {
 
     if(isfriendly) {
       player notify("ballistic_knife_stationary", retrievable_model, normal);
-    }
-    else {
+    } else {
       player notify("ballistic_knife_stationary", retrievable_model, normal, prey);
     }
 
@@ -128,8 +125,7 @@ onspawnretrievetrigger(watcher, player) {
 
   if(isDefined(prey)) {
     pickup_trigger linkto(prey);
-  }
-  else {
+  } else {
     pickup_trigger linkto(retrievable_model);
   }
 
@@ -197,8 +193,7 @@ pick_up(player) {
 
     if(!clip_ammo) {
       player setweaponammoclip("knife_ballistic_mp", 1);
-    }
-    else {
+    } else {
       new_ammo_stock = player getweaponammostock("knife_ballistic_mp") + 1;
       player setweaponammostock("knife_ballistic_mp", new_ammo_stock);
     }

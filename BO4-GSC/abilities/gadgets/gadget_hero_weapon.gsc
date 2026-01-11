@@ -6,7 +6,6 @@
 #include scripts\abilities\ability_player;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
-
 #namespace hero_weapon;
 
 autoexec __init__system__() {
@@ -30,19 +29,19 @@ gadget_hero_weapon_is_flickering(slot) {
 }
 
 gadget_hero_weapon_on_give(slot, weapon) {
-  if(!isDefined(self.pers[#"held_hero_weapon_ammo_count"])) {
-    self.pers[#"held_hero_weapon_ammo_count"] = [];
+  if(!isDefined(self.pers[# "held_hero_weapon_ammo_count"])) {
+    self.pers[# "held_hero_weapon_ammo_count"] = [];
   }
 
-  if(weapon.gadget_power_consume_on_ammo_use || weapon.var_bec5136b || !isDefined(self.pers[#"held_hero_weapon_ammo_count"][weapon])) {
-    self.pers[#"held_hero_weapon_ammo_count"][weapon] = 0;
+  if(weapon.gadget_power_consume_on_ammo_use || weapon.var_bec5136b || !isDefined(self.pers[# "held_hero_weapon_ammo_count"][weapon])) {
+    self.pers[# "held_hero_weapon_ammo_count"][weapon] = 0;
   }
 
-  self setweaponammoclip(weapon, self.pers[#"held_hero_weapon_ammo_count"][weapon]);
+  self setweaponammoclip(weapon, self.pers[# "held_hero_weapon_ammo_count"][weapon]);
   n_ammo = self getammocount(weapon);
 
   if(n_ammo > 0) {
-    stock = self.pers[#"held_hero_weapon_ammo_count"][weapon] - n_ammo;
+    stock = self.pers[# "held_hero_weapon_ammo_count"][weapon] - n_ammo;
 
     if(stock > 0 && !weapon.iscliponly) {
       self setweaponammostock(weapon, stock);
@@ -125,7 +124,7 @@ hero_wait_for_death(slot, weapon) {
 
 hero_save_ammo(slot, weapon) {
   if(isDefined(weapon)) {
-    self.pers[#"held_hero_weapon_ammo_count"][weapon] = self getammocount(weapon);
+    self.pers[# "held_hero_weapon_ammo_count"][weapon] = self getammocount(weapon);
   }
 }
 

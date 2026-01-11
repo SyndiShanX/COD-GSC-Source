@@ -187,8 +187,7 @@ get_points_multiplier(player) {
   if(isDefined(level.current_game_module) && level.current_game_module == 2) {
     if(isDefined(level._race_team_double_points) && level._race_team_double_points == player._race_team) {
       return multiplier;
-    }
-    else {
+    } else {
       return 1;
     }
   }
@@ -201,14 +200,11 @@ get_zombie_death_player_points() {
 
   if(players.size == 1) {
     points = level.zombie_vars["zombie_score_kill_1player"];
-  }
-  else if(players.size == 2) {
+  } else if(players.size == 2) {
     points = level.zombie_vars["zombie_score_kill_2player"];
-  }
-  else if(players.size == 3) {
+  } else if(players.size == 3) {
     points = level.zombie_vars["zombie_score_kill_3player"];
-  }
-  else {
+  } else {
     points = level.zombie_vars["zombie_score_kill_4player"];
   }
 
@@ -220,14 +216,11 @@ get_zombie_death_team_points() {
 
   if(players.size == 1) {
     points = level.zombie_vars["zombie_score_kill_1p_team"];
-  }
-  else if(players.size == 2) {
+  } else if(players.size == 2) {
     points = level.zombie_vars["zombie_score_kill_2p_team"];
-  }
-  else if(players.size == 3) {
+  } else if(players.size == 3) {
     points = level.zombie_vars["zombie_score_kill_3p_team"];
-  }
-  else {
+  } else {
     points = level.zombie_vars["zombie_score_kill_4p_team"];
   }
 
@@ -340,11 +333,9 @@ minus_to_player_score(points, ignore_double_points_upgrade) {
   level notify("spent_points", self, points);
 }
 
-add_to_team_score(points) {
-}
+add_to_team_score(points) {}
 
-minus_to_team_score(points) {
-}
+minus_to_team_score(points) {}
 
 player_died_penalty() {
   players = get_players(self.team);

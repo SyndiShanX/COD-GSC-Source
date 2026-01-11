@@ -1072,8 +1072,7 @@ crouch_hint() {
   level.hintelem init_results_hudelem(320, 160, "center", "bottom", 1.5, 1.0);
   if(level.console) {
     level.hintelem setText(&"SNIPER_HINT_CROUCH");
-  }
-  else {
+  } else {
     level.hintelem setText(&"SCRIPT_PLATFORM_SNIPER_HINT_CROUCH");
   }
   while(get_players()[0] getstance() != "crouch") {

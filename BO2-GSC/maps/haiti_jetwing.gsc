@@ -116,8 +116,7 @@ jetwing_rumble() {
 
     if(vr < 0.1) {
       wait 0.3;
-    }
-    else if(vr > 0.01 && vr < 0.8 || abs(self getsteering()) > 0.5) {
+    } else if(vr > 0.01 && vr < 0.8 || abs(self getsteering()) > 0.5) {
       earthquake(0.15, 0.1, self.origin, 200);
       level.player playrumbleonentity("pullout_small");
       wait 0.2;
@@ -417,8 +416,7 @@ ai_landing_jetwing_think2() {
 
     if(d != 0 && abs(d) < 0.9) {
       n_yaw = vectoangles(v_desired_vel);
-    }
-    else {
+    } else {
       n_yaw = v_angles[1];
     }
 
@@ -453,7 +451,7 @@ jetwings_spread(delay) {
   jetwings = arraycombine(jetwings, jetwing_ai_usa, 0, 0);
 
   foreach(jetwing in jetwings) {
-  jetwing pathvariableoffset(vectorscale((1, 1, 1), 500.0), randomfloatrange(1.5, 2.5));
+    jetwing pathvariableoffset(vectorscale((1, 1, 1), 500.0), randomfloatrange(1.5, 2.5));
   }
 }
 
@@ -466,6 +464,6 @@ jetwings_regroup(delay) {
   jetwings = arraycombine(jetwings, jetwing_ai_usa, 0, 0);
 
   foreach(jetwing in jetwings) {
-  jetwing pathvariableoffset((75, 75, 50), randomfloatrange(1, 2));
+    jetwing pathvariableoffset((75, 75, 50), randomfloatrange(1, 2));
   }
 }

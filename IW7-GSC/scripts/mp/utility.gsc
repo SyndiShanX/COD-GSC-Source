@@ -2133,15 +2133,11 @@ func_DBA1(param_00, param_01, param_02, param_03) {
   if(param_02 - param_01 >= 1) {
     var_06 = param_00[param_01];
     while(var_05 > var_04) {
-      while([
-          [param_03]
-        ](param_00[var_04], var_06) && var_04 <= param_02 && var_05 > var_04) {
+      while([[param_03]](param_00[var_04], var_06) && var_04 <= param_02 && var_05 > var_04) {
         var_04++;
       }
 
-      while(![
-          [param_03]
-        ](param_00[var_05], var_06) && var_05 >= param_01 && var_05 >= var_04) {
+      while(![[param_03]](param_00[var_05], var_06) && var_05 >= param_01 && var_05 >= var_04) {
         var_05--;
       }
 
@@ -6362,9 +6358,7 @@ getdamagemodifiertotal(param_00, param_01, param_02, param_03, param_04, param_0
     foreach(var_0B, var_09 in self.additivedamagemodifiers) {
       var_0A = 0;
       if(isDefined(self.var_17DE) && isDefined(self.var_17DE[var_0B])) {
-        var_0A = [
-          [self.var_17DE[var_0B]]
-        ](param_00, param_01, param_02, param_03, param_04, param_05, param_06);
+        var_0A = [[self.var_17DE[var_0B]]](param_00, param_01, param_02, param_03, param_04, param_05, param_06);
       }
 
       if(!var_0A) {
@@ -6378,9 +6372,7 @@ getdamagemodifiertotal(param_00, param_01, param_02, param_03, param_04, param_0
     foreach(var_0B, var_09 in self.multiplicativedamagemodifiers) {
       var_0A = 0;
       if(isDefined(self.var_BDC7) && isDefined(self.var_BDC7[var_0B])) {
-        var_0A = [
-          [self.var_BDC7[var_0B]]
-        ](param_00, param_01, param_02, param_03, param_04, param_05, param_06);
+        var_0A = [[self.var_BDC7[var_0B]]](param_00, param_01, param_02, param_03, param_04, param_05, param_06);
       }
 
       if(!var_0A) {

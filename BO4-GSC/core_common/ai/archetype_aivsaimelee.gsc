@@ -9,7 +9,6 @@
 #include scripts\core_common\array_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
-
 #namespace archetype_aivsaimelee;
 
 autoexec main() {
@@ -138,7 +137,7 @@ private hasaivsaienemy(behaviortreeentity) {
   }
 
   if(isDefined(enemy.archetype)) {
-    if(enemy.archetype != #"human" && enemy.archetype != #"human_riotshield" && enemy.archetype != #"robot") {
+    if(enemy.archetype != # "human" && enemy.archetype != # "human_riotshield" && enemy.archetype != # "robot") {
       record3dtext("<dev string:xfa>", behaviortreeentity.origin, (1, 0.5, 0), "<dev string:x63>", behaviortreeentity, 0.4);
 
       return false;
@@ -372,7 +371,7 @@ private chooseaivsaimeleeanimations(behaviortreeentity) {
 }
 
 private choosearchetypevariant(entity) {
-  if(entity.archetype == #"robot") {
+  if(entity.archetype == # "robot") {
     robot_state = entity ai::get_behavior_attribute("rogue_control");
 
     if(isinarray(array("forced_level_1", "level_1", "level_0"), robot_state)) {
@@ -464,7 +463,7 @@ playscriptedmeleeanimations() {
   opponent thread processinterrupteddeath();
   self waittillmatch({
     #notetrack: "end"
-  }, #"aivsaimeleewinner");
+  }, # "aivsaimeleewinner");
   self.fixedlinkyawonly = 0;
   aiutility::cleanupchargemeleeattack(self);
 
@@ -573,7 +572,7 @@ private debug_chosenmeleeanimations(behaviortreeentity) {
 }
 
 handledeath(animationname, attacker) {
-  self endon(#"death", #"interrupteddeath");
+  self endon(#"death", # "interrupteddeath");
   self.skipdeath = 1;
   self.diedinscriptedanim = 1;
   totaltime = getanimlength(animationname);

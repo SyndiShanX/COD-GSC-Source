@@ -135,7 +135,7 @@ main() {
   self.hitcount = [];
 
   foreach(key in partkeys) {
-  self.hitcount[key] = 0;
+    self.hitcount[key] = 0;
   }
 
   self.hitcount["total"] = 0;
@@ -164,7 +164,7 @@ main() {
   bonekeys = getarraykeys(anim.bigdog_globals.legdamagedmap);
 
   foreach(key in bonekeys) {
-  self hidepart(anim.bigdog_globals.legdamagedmap[key]);
+    self hidepart(anim.bigdog_globals.legdamagedmap[key]);
   }
 
   bigdog_lights_on();
@@ -281,8 +281,7 @@ update_turret_target() {
       if(isDefined(self.enemy) || shouldshootatscriptedtarget) {
         if(shouldshootatscriptedtarget) {
           self.turret set_turret_target(self.scripted_target);
-        }
-        else if(bigdog_isemped()) {
+        } else if(bigdog_isemped()) {
           if(!isDefined(self.fakeenemy)) {
             self.fakeenemy = spawn("script_origin", self.enemy.origin);
             self thread delete_on_death(self.fakeenemy);
@@ -353,8 +352,7 @@ canbigdogturretshoottarget(currenttarget) {
   if(isDefined(currenttarget)) {
     if(isDefined(self.shoot_only_on_sight) && self.shoot_only_on_sight) {
       canshoottarget = bullettracepassed(self.turret gettagorigin("tag_flash"), currenttarget.origin + vectorscale((0, 0, 1), 20.0), 1, self, currenttarget);
-    }
-    else {
+    } else {
       canshoottarget = bullettracepassed(self.turret gettagorigin("tag_flash"), currenttarget getshootatpos(self), 1, self, currenttarget);
     }
 
@@ -471,8 +469,7 @@ stopturretfortime(time) {
 bigdog_lights_on() {
   if(self.team == "allies") {
     self.a.lightsfxent = bigdog_add_fx("tag_neck", anim._effect["bigdog_lights_green"], undefined, 1);
-  }
-  else {
+  } else {
     self.a.lightsfxent = bigdog_add_fx("tag_neck", anim._effect["bigdog_lights_red"], undefined, 1);
   }
 }
@@ -490,8 +487,7 @@ bigdog_add_fx(bonename, effect, sound, useangles, playonself) {
 
   if(isDefined(playonself) && playonself) {
     playFXOnTag(effect, self, bonename);
-  }
-  else {
+  } else {
     fxorigin = self gettagorigin(bonename);
     tempent = spawn("script_model", fxorigin);
 
@@ -608,14 +604,11 @@ bigdog_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon,
 
     if(damageyaw > 135 || damageyaw <= -135) {
       legshit = array("FL", "FR");
-    }
-    else if(damageyaw > 45 && damageyaw < 135) {
+    } else if(damageyaw > 45 && damageyaw < 135) {
       legshit = array("FR", "RR");
-    }
-    else if(damageyaw > -135 && damageyaw < -45) {
+    } else if(damageyaw > -135 && damageyaw < -45) {
       legshit = array("FL", "RL");
-    }
-    else {
+    } else {
       legshit = array("RL", "RR");
     }
 
@@ -839,8 +832,7 @@ bigdog_launcher_fire() {
 
   if(firedgrenade) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -887,14 +879,11 @@ firelauncher() {
 bigdog_damage_leg(attacker, damage, meansofdeath, weapon, vpoint, vdir, leg, bonename, weaponischarged) {
   if(attackedbyhumanai(attacker)) {
     self.parthealth[leg] = self.parthealth[leg] - damage * 1.5;
-  }
-  else if(attackedbyotherbigdog(attacker)) {
+  } else if(attackedbyotherbigdog(attacker)) {
     moddamage = int(damage * 2);
-  }
-  else if(isDefined(weaponischarged) && weaponischarged) {
+  } else if(isDefined(weaponischarged) && weaponischarged) {
     self.parthealth[leg] = self.parthealth[leg] - damage * 1;
-  }
-  else {
+  } else {
     self.parthealth[leg] = self.parthealth[leg] - damage * 0.6;
   }
 
@@ -929,11 +918,9 @@ bigdog_damage_leg(attacker, damage, meansofdeath, weapon, vpoint, vdir, leg, bon
     playFXOnTag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_r_r_knee_upper");
   else if(self.damageleg == "FR") {
     playFXOnTag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_f_r_knee_upper");
-  }
-  else if(self.damageleg == "RL") {
+  } else if(self.damageleg == "RL") {
     playFXOnTag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_r_l_knee_upper");
-  }
-  else if(self.damageleg == "RR") {
+  } else if(self.damageleg == "RR") {
     playFXOnTag(anim._effect["bigdog_leg_knee_hit_spark"], self, "jnt_r_r_knee_upper");
   }
 
@@ -993,21 +980,17 @@ bigdog_damage_body(attacker, damage, meansofdeath, weapon, vpoint, ignoredamages
 
   if(isDefined(ignoredamagescale) && ignoredamagescale) {
     moddamage = damage;
-  }
-  else if(attackedbyhumanai(attacker)) {
+  } else if(attackedbyhumanai(attacker)) {
     moddamage = int(damage * 1.5);
-  }
-  else if(attackedbyotherbigdog(attacker)) {
+  } else if(attackedbyotherbigdog(attacker)) {
     moddamage = int(damage * 2);
-  }
-  else {
+  } else {
     wasdamagedbyplayergrenade = isDefined(weapon) && weaponclass(weapon) == "grenade";
     wasdamagedbygodrod = isDefined(weapon) && weapon == "god_rod_sp";
 
     if(wasdamagedbyplayergrenade || wasdamagedbygodrod) {
       moddamage = int(damage * 3.0);
-    }
-    else {
+    } else {
       moddamage = int(damage * 0.4);
     }
   }
@@ -1036,11 +1019,9 @@ getbodydamagedirection(point) {
 
   if(yaw >= 135 || yaw <= -135) {
     direction = "back";
-  }
-  else if(yaw > 45 && yaw < 135) {
+  } else if(yaw > 45 && yaw < 135) {
     direction = "right";
-  }
-  else if(yaw < -45 && yaw > -135) {
+  } else if(yaw < -45 && yaw > -135) {
     direction = "left";
   }
 }
@@ -1154,9 +1135,7 @@ play_spawn_alarm() {
   self playSound("veh_claw_alert");
   wait 4;
 
-  if(level.is_player_inside_arena == 0) {
-  } else {
-  }
+  if(level.is_player_inside_arena == 0) {} else {}
 }
 
 play_speech_warning() {

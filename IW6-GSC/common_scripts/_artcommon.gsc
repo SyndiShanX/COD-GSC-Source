@@ -200,8 +200,7 @@ print_fog_ents(forMP) {
     }
     if(forMP) {
       fileprint_launcher("\tent = maps\\mp\\_art::create_vision_set_fog( \"" + ent.name + "\" );");
-    }
-    else {
+    } else {
       fileprint_launcher("\tent = maps\\_utility::create_vision_set_fog( \"" + ent.name + "\" );");
     }
 

@@ -106,8 +106,7 @@ getspawnpoint() {
 
   if(level.usestartspawns && level.ingraceperiod) {
     var_1 = maps\mp\gametypes\_spawnlogic::getbeststartspawn("mp_tdm_spawn_" + var_0 + "_start");
-  }
-  else {
+  } else {
     var_2 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(var_0);
     var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_awayfromenemies(var_2, var_0);
   }

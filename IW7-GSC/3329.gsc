@@ -95,8 +95,7 @@ drop_meteor_in_area(var_00, var_01) {
 
   if(isDefined(var_01) && isplayer(var_01)) {
     magicbullet("iw7_armageddonmeteor_mp", var_2.start, var_2.end, var_01);
-  }
-  else {
+  } else {
     magicbullet("iw7_armageddonmeteor_mp", var_2.start, var_2.end, level.players[0]);
   }
 }
@@ -104,8 +103,7 @@ drop_meteor_in_area(var_00, var_01) {
 get_drop_pos(var_00) {
   if(area_has_enemies(var_00)) {
     return get_enemy_pos(var_00);
-  }
-  else {
+  } else {
     return get_random_drop_pos(var_00);
   }
 }

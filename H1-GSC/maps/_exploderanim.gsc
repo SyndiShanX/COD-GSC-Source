@@ -27,8 +27,7 @@ anim_play() {
 
   if(var_1.size > 1 && isDefined(var_1[1])) {
     var_0 = var_1[1];
-  }
-  else {
+  } else {
     var_0 = self.model + "_anim";
   }
 

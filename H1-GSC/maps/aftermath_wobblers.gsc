@@ -14,9 +14,7 @@ setup_linked_ent() {
 
     if(isDefined(var_0)) {
       self linkto(var_0);
-    }
-    else {
-    }
+    } else {}
   }
 }
 
@@ -58,8 +56,7 @@ wobbler_setup() {
 pick_new_target_angle(var_0) {
   if(var_0 > self.start_angle) {
     return randomfloatrange(self.min_angles, self.start_angle);
-  }
-  else {
+  } else {
     return randomfloatrange(self.start_angle, self.max_angles);
   }
 }

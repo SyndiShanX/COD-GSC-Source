@@ -194,15 +194,13 @@ cnd_shaft_flickering() {
 
       if(!isDefined(self.lit_models)) {
         self.lit_models[0] = var_1;
-      }
-      else {
+      } else {
         self.lit_models[self.lit_models.size] = var_1;
       }
 
       if(!isDefined(self.unlit_models)) {
         self.unlit_models[0] = getent(var_1.target, "targetname");
-      }
-      else {
+      } else {
         self.unlit_models[self.unlit_models.size] = getent(var_1.target, "targetname");
       }
 
@@ -281,7 +279,7 @@ cnd_generic_flicker_pause() {
 
       if(isDefined(self.unlit_models)) {
         foreach(var_5 in self.unlit_models) {
-        var_5 show();
+          var_5 show();
         }
       }
     }
@@ -316,7 +314,7 @@ cnd_generic_flicker_pause() {
 
       if(isDefined(self.unlit_models)) {
         foreach(var_5 in self.unlit_models) {
-        var_5 hide();
+          var_5 hide();
         }
       }
     }
@@ -355,7 +353,7 @@ cnd_generic_flicker() {
 
         if(isDefined(self.unlit_models)) {
           foreach(var_10 in self.unlit_models) {
-          var_10 show();
+            var_10 show();
           }
         }
       } else {
@@ -374,7 +372,7 @@ cnd_generic_flicker() {
 
           if(isDefined(self.unlit_models)) {
             foreach(var_10 in self.unlit_models) {
-            var_10 hide();
+              var_10 hide();
             }
           }
         }
@@ -411,7 +409,7 @@ cnd_generic_flicker() {
 
       if(isDefined(self.unlit_models)) {
         foreach(var_10 in self.unlit_models) {
-        var_10 hide();
+          var_10 hide();
         }
       }
     }
@@ -424,13 +422,13 @@ setup_fixtures() {
   var_0 = getEntArray("hvt_office_light_fixture_off", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   var_0 = getEntArray("stairwell_light_fixture_off", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 }
 
@@ -469,30 +467,30 @@ fixture_blink_lights(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 
   for(var_10 = 0; var_10 < var_5; var_10++) {
     foreach(var_12 in var_0) {
-    var_12 setlightintensity(0);
+      var_12 setlightintensity(0);
     }
 
     foreach(var_15 in var_1) {
-    var_15 hide();
+      var_15 hide();
     }
 
     foreach(var_15 in var_2) {
-    var_15 show();
+      var_15 show();
     }
 
     wait(randomfloatrange(var_6, var_7));
     var_19 = randomfloatrange(var_3, var_4);
 
     foreach(var_12 in var_0) {
-    var_12 setlightintensity(var_19);
+      var_12 setlightintensity(var_19);
     }
 
     foreach(var_15 in var_1) {
-    var_15 show();
+      var_15 show();
     }
 
     foreach(var_15 in var_2) {
-    var_15 hide();
+      var_15 hide();
     }
 
     wait(randomfloatrange(var_8, var_9));
@@ -505,15 +503,15 @@ cleanup_fixtures(var_0, var_1, var_2, var_3, var_4) {
   level waittill(var_4);
 
   foreach(var_6 in var_0) {
-  var_6 setlightintensity(var_3);
+    var_6 setlightintensity(var_3);
   }
 
   foreach(var_9 in var_1) {
-  var_9 show();
+    var_9 show();
   }
 
   foreach(var_9 in var_2) {
-  var_9 hide();
+    var_9 hide();
   }
 }
 
@@ -588,8 +586,7 @@ firework_light(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(self.script_parameters)) {
     var_6 = 10.0;
-  }
-  else {
+  } else {
     var_6 = int(self.script_parameters);
   }
 
@@ -688,8 +685,7 @@ fireworks_init(var_0) {
   if(var_0 == "intro") {
     if(maps\_utility::is_gen4()) {
       var_11 = (0.819608, 0.976471, 1);
-    }
-    else {
+    } else {
       var_11 = (0.823529, 0.980392, 1);
     }
 
@@ -1178,8 +1174,7 @@ _firework_large(var_0, var_1, var_2) {
 
     if(maps\_utility::is_gen4()) {
       sun_lerp_value(var_0, var_1 * var_7, var_3);
-    }
-    else {
+    } else {
       sun_lerp_value(var_0, var_1, var_3);
     }
 
@@ -1191,8 +1186,7 @@ _firework_large(var_0, var_1, var_2) {
 
     if(maps\_utility::is_gen4()) {
       sun_lerp_value(var_1 * var_7, var_6, var_5);
-    }
-    else {
+    } else {
       sun_lerp_value(var_1, var_6, var_5);
     }
   }
@@ -1201,8 +1195,7 @@ _firework_large(var_0, var_1, var_2) {
 do_specular_sun_lerp(var_0) {
   if(var_0) {
     thread _turn_on_spec_sun_lerp();
-  }
-  else {
+  } else {
     thread _turn_off_spec_sun_lerp();
   }
 }
@@ -1232,22 +1225,19 @@ _get_location_sunlight(var_0) {
     case "junction":
       if(maps\_utility::is_gen4()) {
         return (0.348633, 0.292578, 0.213281);
-      }
-      else {
+      } else {
         return (0.348633, 0.292578, 0.213281);
       }
     case "garden":
       if(maps\_utility::is_gen4()) {
         return (0.996094, 0.980469, 0.863281);
-      }
-      else {
+      } else {
         return (0.996094, 0.980469, 0.863281);
       }
     case "intro":
       if(maps\_utility::is_gen4()) {
         return (0.819608, 0.976471, 1);
-      }
-      else {
+      } else {
         return (0.823529, 0.980392, 1);
       }
     case "courtyard_stairs":
@@ -1255,8 +1245,7 @@ _get_location_sunlight(var_0) {
     case "courtyard":
       if(maps\_utility::is_gen4()) {
         return (0.597656, 0.588281, 0.517969);
-      }
-      else {
+      } else {
         return (0.597656, 0.588281, 0.517969);
       }
     default:
@@ -1269,11 +1258,9 @@ get_fog_ent(var_0) {
 
   if(isDefined(var_0)) {
     var_1 = var_0;
-  }
-  else if(isDefined(level.player.vision_set_transition_ent)) {
+  } else if(isDefined(level.player.vision_set_transition_ent)) {
     var_1 = level.player.vision_set_transition_ent.vision_set;
-  }
-  else {
+  } else {
     var_1 = level.vision_set_transition_ent.vision_set;
   }
 

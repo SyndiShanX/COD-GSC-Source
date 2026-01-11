@@ -177,8 +177,7 @@ func_12E6B(var_00, var_01, var_02) {
 
   if(self.team == var_00) {
     var_03 = var_01;
-  }
-  else {
+  } else {
     var_03 = var_02;
   }
 
@@ -262,8 +261,7 @@ func_139BA(var_00) {
   for(;;) {
     if(self.func_AC75 >= 1) {
       var_00 setclientomnvar("ui_bulletstorm_update", int(self.func_AC75));
-    }
-    else {
+    } else {
       break;
     }
 
@@ -379,8 +377,7 @@ getcustomizationhead(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(var_07 <= var_02) {
     if(var_07 <= 50) {
       var_6.func_38BF = 1;
-    }
-    else {
+    } else {
       var_08 = [];
       var_8[var_8.size] = "physicscontents_solid";
       var_8[var_8.size] = "physicscontents_glass";
@@ -397,8 +394,7 @@ getcustomizationhead(var_00, var_01, var_02, var_03, var_04, var_05) {
     if(var_6.func_38BF) {
       if(var_00 == 1) {
         var_6.func_4D70 = var_05 - var_05 / (var_02 / var_07);
-      }
-      else {
+      } else {
         var_12 = 1 - var_07 / var_02;
 
         if(var_12 < 0) {

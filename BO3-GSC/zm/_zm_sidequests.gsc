@@ -780,9 +780,7 @@ function fake_use(notify_string, qualifier_func) {
     for(i = 0; i < players.size; i++) {
       qualifier_passed = 1;
       if(isDefined(qualifier_func)) {
-        qualifier_passed = players[i][
-          [qualifier_func]
-        ]();
+        qualifier_passed = players[i][[qualifier_func]]();
       }
       if(qualifier_passed && distancesquared(self.origin, players[i].origin) < 4096) {
         if(players[i] is_facing(self)) {

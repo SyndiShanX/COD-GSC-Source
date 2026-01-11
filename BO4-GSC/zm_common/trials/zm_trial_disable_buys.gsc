@@ -15,7 +15,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_disable_buys;
 
 autoexec __init__system__() {
@@ -206,12 +205,12 @@ private function_fcf197fa(targetname, show) {
           foreach(var_1d6a70e8 in var_c819ac8) {
             if(isDefined(var_1d6a70e8.objectid) && !var_1d6a70e8 zm_utility::function_1a4d2910()) {
               switch (var_1d6a70e8.objectid) {
-                case #"symbol_back_debris":
-                case #"symbol_front_power":
-                case #"symbol_back":
-                case #"symbol_front":
-                case #"symbol_front_debris":
-                case #"symbol_back_power":
+                case # "symbol_back_debris":
+                case # "symbol_front_power":
+                case # "symbol_back":
+                case # "symbol_front":
+                case # "symbol_front_debris":
+                case # "symbol_back_power":
                   if(show) {
                     var_1d6a70e8 show();
                   } else {
@@ -295,7 +294,7 @@ private function_c348adcc() {
 
 private hide_traps() {
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = #"hash_55d25caf8f7bbb2f";
+  str_text = # "hash_55d25caf8f7bbb2f";
 
   foreach(t_trap in a_t_traps) {
     t_trap zm_traps::trap_set_string(str_text);
@@ -306,7 +305,7 @@ private hide_traps() {
 
 private show_traps() {
   a_t_traps = getEntArray("zombie_trap", "targetname");
-  str_text = zm_utility::function_d6046228(#"hash_23c1c09e94181fdb", #"hash_6e8ef1b690e98e51");
+  str_text = zm_utility::function_d6046228(#"hash_23c1c09e94181fdb", # "hash_6e8ef1b690e98e51");
 
   foreach(t_trap in a_t_traps) {
     t_trap zm_traps::trap_set_string(str_text, t_trap.zombie_cost);

@@ -215,14 +215,13 @@ main() {
   flag_wait("start_zombie_round_logic");
 }
 
-title_update_main_start() {
-}
+title_update_main_start() {}
 
 title_update_main_end() {
   a_nodes = getanynodearray((969, 6708, 239), 200);
 
   foreach(node in a_nodes) {
-  node.no_teleport = 1;
+    node.no_teleport = 1;
   }
 
   level.equipment_tu_dead_zone_pos = [];
@@ -904,8 +903,7 @@ setup_rex_starts() {
   add_gameloc("cellblock", ::dummy, "cellblock", ::dummy);
 }
 
-dummy() {
-}
+dummy() {}
 
 working_zone_init() {
   flag_init("always_on");
@@ -923,8 +921,7 @@ working_zone_init() {
 
   if(is_classic()) {
     add_adjacent_zone("zone_library", "zone_start", "always_on");
-  }
-  else {
+  } else {
     add_adjacent_zone("zone_library", "zone_cellblock_west", "activate_cellblock_west");
     add_adjacent_zone("zone_library", "zone_start", "activate_cellblock_west");
     add_adjacent_zone("zone_cellblock_east", "zone_start", "activate_cellblock_east");

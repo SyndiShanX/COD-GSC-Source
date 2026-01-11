@@ -217,8 +217,7 @@ spawntacticalinsertion() {
 
   if(isDefined(self.tacticalinsertioncount)) {
     self.tacticalinsertioncount++;
-  }
-  else {
+  } else {
     self.tacticalinsertioncount = 1;
   }
 
@@ -289,8 +288,7 @@ cancel_button_think() {
 canceltackinsertionbutton() {
   if(level.console) {
     return self changeseatbuttonpressed();
-  }
-  else {
+  } else {
     return self jumpbuttonpressed();
   }
 }

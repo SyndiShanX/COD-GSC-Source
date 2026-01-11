@@ -3406,8 +3406,7 @@ event6_get_to_boat() {
   }
   if(self == level.sullivan) {
     self thread event6_get_to_boat_sullivan(boat);
-  }
-  else {
+  } else {
     anim_single_solo(self, "boat_getin", undefined, boat);
   }
   if(self == level.roebuck) {

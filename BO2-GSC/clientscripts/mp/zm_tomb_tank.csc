@@ -92,8 +92,7 @@ play_exhaust_fx(localclientnum, is_overheat) {
 
   if(is_overheat) {
     self thread sndplayoverheat(self.origin);
-  }
-  else {
+  } else {
     self thread sndplayexhaust();
   }
 

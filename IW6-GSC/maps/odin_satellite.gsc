@@ -64,8 +64,7 @@ section_hint_string_init() {
 odin_rcs_prompt() {
   if(level.player usebuttonpressed()) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -115,7 +114,7 @@ fade_out_show_title() {
   var_6 = getcorpsearray();
 
   foreach(var_8 in var_6) {
-  var_8 delete();
+    var_8 delete();
   }
 
   level.player thread maps\_utility::play_sound_on_entity("logo_whoosh_lr");
@@ -724,11 +723,11 @@ odin_finale(var_0, var_1) {
   var_10 = getEntArray("spacejump_sat", "targetname");
 
   foreach(var_12 in var_9) {
-  var_12 linkto(level.animated_sat_part["odin_sat_section_04_base"]);
+    var_12 linkto(level.animated_sat_part["odin_sat_section_04_base"]);
   }
 
   foreach(var_15 in var_10) {
-  var_15 linkto(level.animated_sat_part["odin_sat_section_04_base"]);
+    var_15 linkto(level.animated_sat_part["odin_sat_section_04_base"]);
   }
 
   thread handle_finale_shakes_and_rumbles(var_1);
@@ -789,12 +788,12 @@ solar_panel_handling() {
   var_0 = getEntArray("dummy_starter_solar", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   foreach(var_5 in level.frames) {
     foreach(var_2 in var_5.panel_array) {
-    var_2 show();
+      var_2 show();
     }
   }
 
@@ -926,8 +925,7 @@ finale_nags() {
 
       if(var_2 == var_5) {
         var_5 = randomintrange(0, 3);
-      }
-      else {
+      } else {
         var_2 = var_5;
         iprintlnbold("Kyra: " + var_4[var_5]);
         var_0 = gettime();
@@ -952,8 +950,7 @@ finale_nags() {
 
       if(var_2 == var_5) {
         var_5 = randomintrange(0, 3);
-      }
-      else {
+      } else {
         var_2 = var_5;
         iprintlnbold("Kyra: " + var_4[var_5]);
         var_0 = gettime();
@@ -1070,7 +1067,7 @@ finale_fx_handling(var_0) {
   }
 
   foreach(var_4 in var_1) {
-  var_4 delete();
+    var_4 delete();
   }
 
   var_7 = 3;
@@ -1095,7 +1092,7 @@ finale_fx_handling(var_0) {
 
   foreach(var_4 in var_2) {
     foreach(var_14 in var_8) {
-    stopFXOnTag(common_scripts\utility::getfx(var_14), var_4, "tag_origin");
+      stopFXOnTag(common_scripts\utility::getfx(var_14), var_4, "tag_origin");
     }
   }
 }

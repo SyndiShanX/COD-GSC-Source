@@ -27,8 +27,7 @@ main(var_0, var_1, var_2) {
 
   if(issubstr(var_2, "kva") || issubstr(var_2, "atlas") || issubstr(var_2, "sentinel")) {
     maps\_vehicle::build_drive( % mil_helicopter_littlebird_ai_rotors, undefined, 0, 3.0);
-  }
-  else {
+  } else {
     maps\_vehicle::build_drive( % mi28_rotors, undefined, 0, 3.0);
   }
 
@@ -76,7 +75,7 @@ init_local() {
     maps\_vehicle::mgoff();
 
     foreach(var_1 in self.mgturret) {
-    var_1 hide();
+      var_1 hide();
     }
   }
 
@@ -274,8 +273,7 @@ littlebird_emp_death(var_0, var_1) {
 
   if(isDefined(level.get_littlebird_crash_location_override)) {
     var_4 = [[level.get_littlebird_crash_location_override]]();
-  }
-  else {
+  } else {
     var_5 = (self.origin[0] + var_2[0] * 5, self.origin[1] + var_2[1] * 5, self.origin[2] - 2000);
     var_4 = bulletTrace(self.origin, var_5, 0, self)["position"];
   }

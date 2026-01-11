@@ -114,11 +114,9 @@ custom_end_screen() {
 
     if(isDefined(level.host_ended_game) && level.host_ended_game) {
       players[i].survived_hud settext(&"MP_HOST_ENDED_GAME");
-    }
-    else if(isDefined(level.gamemodulewinningteam) && players[i]._encounters_team == level.gamemodulewinningteam) {
+    } else if(isDefined(level.gamemodulewinningteam) && players[i]._encounters_team == level.gamemodulewinningteam) {
       players[i].survived_hud settext(winner_text, level.round_number);
-    }
-    else {
+    } else {
       players[i].survived_hud settext(loser_text, level.round_number);
     }
 
@@ -227,7 +225,7 @@ zgrief_main() {
   players = get_players();
 
   foreach(player in players) {
-  player.is_hotjoin = 0;
+    player.is_hotjoin = 0;
   }
 
   wait 1;
@@ -483,8 +481,7 @@ show_grief_hud_msg(msg, msg_parm, offset, cleanup_end_game) {
 
   if(isDefined(msg_parm)) {
     zgrief_hudmsg settext(msg, msg_parm);
-  }
-  else {
+  } else {
     zgrief_hudmsg settext(msg);
   }
 
@@ -527,7 +524,7 @@ grief_reset_message() {
   }
 
   foreach(player in players) {
-  player thread show_grief_hud_msg(msg);
+    player thread show_grief_hud_msg(msg);
   }
 
   level thread maps\mp\zombies\_zm_audio_announcer::leaderdialog("grief_restarted");
@@ -666,7 +663,7 @@ grief_store_player_scores() {
   players = get_players();
 
   foreach(player in players) {
-  player._pre_round_score = player.score;
+    player._pre_round_score = player.score;
   }
 }
 
@@ -734,8 +731,7 @@ update_players_on_bleedout_or_disconnect(excluded_player) {
   }
   if(players_remaining < 1) {
     level thread maps\mp\zombies\_zm_audio_announcer::leaderdialog("4_player_down", other_team);
-  }
-  else {
+  } else {
     level thread maps\mp\zombies\_zm_audio_announcer::leaderdialog(players_remaining + "_player_left", other_team);
   }
 }

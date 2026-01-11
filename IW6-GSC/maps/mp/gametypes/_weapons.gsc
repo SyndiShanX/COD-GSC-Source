@@ -15,8 +15,7 @@ kNineBangCookInterval = 875;
 attachmentGroup(attachmentName) {
   if(is_aliens()) {
     return tableLookup("mp/alien/alien_attachmentTable.csv", 4, attachmentName, 2);
-  }
-  else {
+  } else {
     return tableLookup("mp/attachmentTable.csv", 4, attachmentName, 2);
   }
 }
@@ -125,17 +124,17 @@ init() {
 
         if(getDvar("scr_dump_weapon_assets") != "" && attachmentCombos.size) {
           println("
-        }
+          }
 
-            foreach(combo in attachmentCombos) {
-              if(getDvar("scr_dump_weapon_assets") != "") {
-                println("weapon,mp/" + weapon_name + "_" + combo + "_mp");
-              }
-
-              level.weaponList[level.weaponList.size] = weapon_name + "_" + combo + "_mp";
+          foreach(combo in attachmentCombos) {
+            if(getDvar("scr_dump_weapon_assets") != "") {
+              println("weapon,mp/" + weapon_name + "_" + combo + "_mp");
             }
 
+            level.weaponList[level.weaponList.size] = weapon_name + "_" + combo + "_mp";
           }
+
+        }
 
         foreach(weaponName in level.weaponList) {
           precacheItem(weaponName);
@@ -763,8 +762,7 @@ init() {
 
           if(weaponTokens[0] == "iw5" || weaponTokens[0] == "iw6") {
             self.lastDroppableWeapon = weaponName;
-          }
-          else if(weaponName != "none" && mayDropWeapon(weaponName + "_mp")) {
+          } else if(weaponName != "none" && mayDropWeapon(weaponName + "_mp")) {
             self.lastDroppableWeapon = weaponName + "_mp";
           }
 
@@ -1177,7 +1175,9 @@ init() {
         dropBag thread handleScavengerBagPickup(self);
 
         if(isDefined(level.bot_funcs["bots_add_scavenger_bag"])) {
-          [[level.bot_funcs["bots_add_scavenger_bag"]]](dropBag);
+          [
+            [level.bot_funcs["bots_add_scavenger_bag"]]
+          ](dropBag);
         }
       }
 
@@ -1616,8 +1616,7 @@ init() {
             }
             if(DistanceSquared(player.origin, position) < smokeRadius * smokeRadius) {
               player.inPlayerSmokeScreen = owner;
-            }
-            else {
+            } else {
               player.inPlayerSmokeScreen = undefined;
             }
           }
@@ -1923,8 +1922,7 @@ init() {
             }
             if(dist <= config.radius_min_sq) {
               percent_distance = 1.0;
-            }
-            else {
+            } else {
               percent_distance = 1.0 - (dist - config.radius_min_sq) / (config.radius_max_sq - config.radius_min_sq);
             }
 
@@ -2203,8 +2201,7 @@ init() {
         wait .05;
         if(level.teamBased) {
           self maps\mp\_entityheadicons::setTeamHeadIcon(team, (0, 0, offset));
-        }
-        else if(isDefined(self.owner)) {
+        } else if(isDefined(self.owner)) {
           self maps\mp\_entityheadicons::setPlayerHeadIcon(self.owner, (0, 0, offset));
         }
       }
@@ -2618,8 +2615,7 @@ init() {
 
         if(level.c4explodethisframe) {
           wait .1 + randomfloat(.4);
-        }
-        else {
+        } else {
           wait .05;
         }
 
@@ -2734,8 +2730,7 @@ init() {
           }
           if(level.teamBased && player.team != detectTeam) {
             continue;
-          }
-          else if(!level.teamBased && player == self.owner.owner) {
+          } else if(!level.teamBased && player == self.owner.owner) {
             continue;
           }
           if(isDefined(player.bombSquadIds[self.detectId])) {
@@ -3153,8 +3148,7 @@ init() {
           thread debugprint(from, ".dmg");
           if(isDefined(ent)) {
             thread debugprint(to, "." + ent.classname);
-          }
-          else {
+          } else {
             thread debugprint(to, ".undefined");
           }
           if(trace["fraction"] == 1) {
@@ -3220,8 +3214,7 @@ init() {
           start = circlepoints[i];
           if(i + 1 >= circlepoints.size) {
             end = circlepoints[0];
-          }
-          else {
+          } else {
             end = circlepoints[i + 1];
           }
 
@@ -3245,8 +3238,7 @@ init() {
 
             if(!isDefined(eInflictor)) {
               return;
-            }
-            else if(meansOfDeath == "MOD_IMPACT") {
+            } else if(meansOfDeath == "MOD_IMPACT") {
               return;
             }
             giveFeedback = true;
@@ -4294,8 +4286,7 @@ init() {
         self.taggedAssist = true;
         if(isDefined(victim)) {
           self thread maps\mp\gametypes\_gamescore::processAssist(victim);
-        }
-        else {
+        } else {
           maps\mp\gametypes\_gamescore::givePlayerScore("assist", self, undefined, true);
           self thread maps\mp\gametypes\_rank::giveRankXP("assist");
         }
@@ -4324,8 +4315,7 @@ init() {
 
         if(recieverCenter[2] < damageBottom) {
           pass = false;
-        }
-        else {
+        } else {
           pass = true;
         }
 
@@ -4336,8 +4326,7 @@ init() {
         distSq = distanceSquared(damageCenter, recieverCenter);
         if(distSq > radiusSq) {
           pass = false;
-        }
-        else {
+        } else {
           pass = true;
         }
 
@@ -4347,11 +4336,9 @@ init() {
       mineDamageHeightPassed(mine, victim) {
         if(isPlayer(victim) && isAlive(victim) && victim.sessionstate == "playing") {
           victimPos = victim getStanceCenter();
-        }
-        else if(victim.classname == "misc_turret") {
+        } else if(victim.classname == "misc_turret") {
           victimPos = victim.origin + (0, 0, 32);
-        }
-        else {
+        } else {
           victimPos = victim.origin;
         }
 
@@ -4397,9 +4384,7 @@ init() {
         plantAngles = vectortoangles(normal);
         plantAngles += (90, 0, 0);
 
-        mine = [
-          [spawnFunc]
-        ](pos, owner, weaponName, plantAngles);
+        mine = [[spawnFunc]](pos, owner, weaponName, plantAngles);
 
         mine makeExplosiveUsable();
         mine thread mineDamageMonitor();

@@ -133,7 +133,7 @@ beach_ship_ambient_artillery() {
       var_4 = strtok(var_2.script_parameters, " ");
 
       foreach(var_6 in var_4) {
-      var_3 = common_scripts\utility::array_add(var_3, int(var_6));
+        var_3 = common_scripts\utility::array_add(var_3, int(var_6));
       }
 
       var_8 = var_3[randomint(var_3.size)];
@@ -203,7 +203,7 @@ beach_ship_phalanx_system_complex() {
   var_0 = common_scripts\utility::getstructarray("ship_phalanx_system", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2.used = 0;
+    var_2.used = 0;
   }
 
   var_4 = getent("anti_battleship_missiles", "targetname");
@@ -249,8 +249,7 @@ phalanx_missile_think(var_0) {
 
     if(var_4.used) {
       var_3 = common_scripts\utility::array_remove(var_3, var_4);
-    }
-    else {
+    } else {
       break;
     }
 

@@ -10,7 +10,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\teams\platoons;
 #include scripts\mp_common\teams\teams;
-
 #namespace teams;
 
 autoexec __init__system__() {
@@ -48,16 +47,16 @@ function_ee150fcc(team, team_players) {
 
   var_f8896168 = getdvarint(#"hash_4cbf229ab691d987", 0);
 
-    foreach(player in team_players) {
-      party = player getparty();
-      assert(party.var_a15e4438 <= level.maxteamplayers);
-      var_ab9e77bf[party.party_id] = party.fill ? party.var_a15e4438 : level.maxteamplayers;
+  foreach(player in team_players) {
+    party = player getparty();
+    assert(party.var_a15e4438 <= level.maxteamplayers);
+    var_ab9e77bf[party.party_id] = party.fill ? party.var_a15e4438 : level.maxteamplayers;
 
-      if(var_f8896168) {
-        var_ab9e77bf[party.party_id] = party.var_a15e4438;
-      }
-
+    if(var_f8896168) {
+      var_ab9e77bf[party.party_id] = party.var_a15e4438;
     }
+
+  }
 
   var_6195506c = 0;
 
@@ -89,7 +88,7 @@ function_efe5a681(team) {
     if(platoons::function_382a49e0()) {
       platoon = getteamplatoon(team);
 
-      if(platoon != #"invalid" && platoon != #"none") {
+      if(platoon != # "invalid" && platoon != # "none") {
         player_counts = platoons::count_players();
 
         if(player_counts[platoon] >= level.platoon.max_players) {
@@ -116,7 +115,7 @@ function_efe5a681(team) {
     return false;
   }
 
-    return true;
+  return true;
 }
 
 function_ccb3bc7a() {
@@ -126,20 +125,20 @@ function_ccb3bc7a() {
 
       function_d28f6fa0(team);
 
-        return team;
+      return team;
     }
   }
 
-  return #"spectator";
+  return # "spectator";
 }
 
 function_b919f6aa(status) {
   foreach(team in level.teams) {
-    if(status == #"game") {
-      if(isDefined(level.var_75dffa9f[team]) && level.var_75dffa9f[team] != #"game") {
+    if(status == # "game") {
+      if(isDefined(level.var_75dffa9f[team]) && level.var_75dffa9f[team] != # "game") {
         continue;
       }
-    } else if(isDefined(level.var_75dffa9f[team]) && level.var_75dffa9f[team] == #"game") {
+    } else if(isDefined(level.var_75dffa9f[team]) && level.var_75dffa9f[team] == # "game") {
       continue;
     }
 
@@ -148,18 +147,18 @@ function_b919f6aa(status) {
 
       function_d28f6fa0(team);
 
-        return team;
+      return team;
     }
   }
 
-  return #"spectator";
+  return # "spectator";
 }
 
 function_5c389625() {
   status = self function_3d288f14();
   assignment = self function_b919f6aa(status);
 
-  if(!isDefined(assignment) || assignment == #"spectator") {
+  if(!isDefined(assignment) || assignment == # "spectator") {
     assignment = function_959bac94();
   }
 
@@ -187,7 +186,7 @@ function_5d02dd86(party) {
 
       function_d28f6fa0(member.team);
 
-        return member.team;
+      return member.team;
     }
   }
 
@@ -228,9 +227,9 @@ private function_75daeb56(party) {
     return false;
   }
 
-    if(isDefined(party) && party.fill == 0) {
-      return true;
-    }
+  if(isDefined(party) && party.fill == 0) {
+    return true;
+  }
 
   return false;
 }
@@ -302,7 +301,7 @@ function_d22a4fbb(comingfrommenu, var_4c542e39) {
   if(teamname !== "free" && !comingfrommenu) {
     assignment = teamname;
   } else if(function_a3e209ba(teamname, comingfrommenu)) {
-    assignment = #"spectator";
+    assignment = # "spectator";
   } else if(isDefined(level.forcedplayerteam) && !isbot(self)) {
     assignment = level.forcedplayerteam;
   } else {
@@ -344,7 +343,7 @@ teamwithlowestscore() {
 }
 
 pickteamfromscores(teams) {
-  assignment = #"allies";
+  assignment = # "allies";
 
   if(teamscoresequal()) {
     assignment = teams[randomint(teams.size)];
@@ -371,7 +370,7 @@ get_splitscreen_team() {
 
     team = level.players[index].sessionteam;
 
-    if(team != #"spectator") {
+    if(team != # "spectator") {
       return team;
     }
   }
@@ -459,7 +458,7 @@ function_7d93567f() {
   distribution = [];
 
   foreach(player in level.players) {
-    team = player.pers[#"team"];
+    team = player.pers[# "team"];
 
     if(!isDefined(level.teams[team])) {
       continue;
@@ -467,7 +466,7 @@ function_7d93567f() {
 
     platoon = getteamplatoon(team);
 
-    if(platoon == #"invalid") {
+    if(platoon == # "invalid") {
       continue;
     }
 
@@ -540,7 +539,7 @@ function_b25f48bf(for_team, var_a9ab69de, var_d9438b7, var_ed0a1ecc) {
     }
 
     foreach(team in var_75aa1f3c) {
-      if(team == #"none") {
+      if(team == # "none") {
         continue;
       }
 
@@ -579,44 +578,44 @@ function_a9822793() {
     println("<dev string:x38>" + "<dev string:xbf>");
   }
 
-    foreach(platoon, platoon_teams in var_ed0a1ecc) {
-      println("<dev string:xdc>" + platoon);
+  foreach(platoon, platoon_teams in var_ed0a1ecc) {
+    println("<dev string:xdc>" + platoon);
 
-      foreach(var_a787dfe7, var_75aa1f3c in platoon_teams) {
-        foreach(index, team in var_75aa1f3c) {
-          if(team == #"none") {
-            continue;
+    foreach(var_a787dfe7, var_75aa1f3c in platoon_teams) {
+      foreach(index, team in var_75aa1f3c) {
+        if(team == # "none") {
+          continue;
+        }
+
+        current_count = level.maxteamplayers - var_a787dfe7;
+
+        while(current_count < level.maxteamplayers) {
+          var_6f782d8f = function_b25f48bf(team, var_a787dfe7, distribution[platoon], var_ed0a1ecc[platoon]);
+
+          if(!isDefined(var_6f782d8f)) {
+            break;
           }
 
-          current_count = level.maxteamplayers - var_a787dfe7;
+          assert(getplayers(team).size + getplayers(var_6f782d8f).size <= level.maxteamplayers);
+          println("<dev string:xe7>" + var_ed0a1ecc[platoon].size);
 
-          while(current_count < level.maxteamplayers) {
-            var_6f782d8f = function_b25f48bf(team, var_a787dfe7, distribution[platoon], var_ed0a1ecc[platoon]);
+          foreach(var_aacd04cb in var_ed0a1ecc[platoon]) {
+            println("<dev string:xfa>" + var_aacd04cb.size);
 
-            if(!isDefined(var_6f782d8f)) {
-              break;
-            }
-
-            assert(getplayers(team).size + getplayers(var_6f782d8f).size <= level.maxteamplayers);
-            println("<dev string:xe7>" + var_ed0a1ecc[platoon].size);
-
-            foreach(var_aacd04cb in var_ed0a1ecc[platoon]) {
-              println("<dev string:xfa>" + var_aacd04cb.size);
-
-              foreach(remove_index, var_adeea4a7 in var_aacd04cb) {
-                if(var_adeea4a7 == var_6f782d8f) {
-                  var_aacd04cb[remove_index] = #"none";
-                }
+            foreach(remove_index, var_adeea4a7 in var_aacd04cb) {
+              if(var_adeea4a7 == var_6f782d8f) {
+                var_aacd04cb[remove_index] = # "none";
               }
             }
-
-            current_count += function_78db0e06(var_6f782d8f, team);
           }
 
-          var_75aa1f3c[index] = #"none";
+          current_count += function_78db0e06(var_6f782d8f, team);
         }
+
+        var_75aa1f3c[index] = # "none";
       }
     }
+  }
 
   if(level.var_ba13fb7a) {
     println("<dev string:x38>" + "<dev string:x111>");
@@ -649,7 +648,7 @@ private function_6c66cc64(team) {
   voip = "<dev string:x12e>";
 
   if(isDefined(level.var_75dffa9f[team])) {
-    voip += level.var_75dffa9f[team] == #"game" ? "<dev string:x136>" : "<dev string:x13d>";
+    voip += level.var_75dffa9f[team] == # "game" ? "<dev string:x136>" : "<dev string:x13d>";
   } else {
     voip += "<dev string:x146>";
   }
@@ -657,9 +656,9 @@ private function_6c66cc64(team) {
   platoon = getteamplatoon(team);
   platoon_name = "<dev string:x152>";
 
-  if(platoon == #"invalid") {
+  if(platoon == # "invalid") {
     platoon_name += "<dev string:x15d>";
-  } else if(platoon == #"none") {
+  } else if(platoon == # "none") {
     platoon_name += "<dev string:x167>";
   } else if(isDefined(level.platoons[platoon])) {
     platoon_name += level.platoons[platoon].name;
@@ -694,14 +693,14 @@ function_58b6d2c9() {
 
     if(!level.custommatch) {
       foreach(player in players) {
-        if(player.team == #"spectator") {
+        if(player.team == # "spectator") {
           continue;
         }
 
         party = player getparty();
 
         foreach(party_member in party.party_members) {
-          if(party_member.team == #"spectator") {
+          if(party_member.team == # "spectator") {
             continue;
           }
 

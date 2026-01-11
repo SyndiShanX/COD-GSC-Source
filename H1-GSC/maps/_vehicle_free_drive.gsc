@@ -136,7 +136,7 @@ spawn_vehicle_and_attach_to_free_path(var_0, var_1, var_2, var_3) {
     var_5 = common_scripts\utility::get_array_of_closest(self.origin, var_5);
 
     foreach(var_11, var_10 in var_5) {
-    var_10 thread maps\_utility::add_spawn_function(::guy_spawns_and_gets_in_vehicle, self, var_11);
+      var_10 thread maps\_utility::add_spawn_function(::guy_spawns_and_gets_in_vehicle, self, var_11);
     }
 
     var_12 = maps\_utility::spawn_vehicle();
@@ -268,7 +268,7 @@ create_path(var_0) {
   }
 
   foreach(var_8 in var_2) {
-  var_8.dist_to_next_node = distance(var_8.midpoint, var_8.next_node.midpoint);
+    var_8.dist_to_next_node = distance(var_8.midpoint, var_8.next_node.midpoint);
   }
 
   return var_2;
@@ -646,8 +646,7 @@ vehicle_drives_free_path(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_0.starting_speed = var_1;
-  }
-  else {
+  } else {
     var_0.starting_speed = var_0 vehicle_getspeed();
   }
 
@@ -759,17 +758,13 @@ set_vehicle_goal_position() {
 
   if(var_16 > 0.9659) {
     var_17 = 1.0;
-  }
-  else if(var_16 > 0.866) {
+  } else if(var_16 > 0.866) {
     var_17 = 0.85;
-  }
-  else if(var_16 > 0.7071) {
+  } else if(var_16 > 0.7071) {
     var_17 = 0.65;
-  }
-  else if(var_16 > 0.5) {
+  } else if(var_16 > 0.5) {
     var_17 = 0.4;
-  }
-  else {
+  } else {
     var_17 = 0.1;
   }
 
@@ -784,11 +779,11 @@ set_vehicle_goal_position() {
 get_obstacle_dodge_amount(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3) && var_3 == 1) {
     foreach(var_5 in var_0.col_volumes) {
-    var_5.has_veh_collision = 0;
+      var_5.has_veh_collision = 0;
     }
 
     foreach(var_5 in var_0.col_moving_volumes) {
-    var_5.has_veh_collision = 0;
+      var_5.has_veh_collision = 0;
     }
   }
 
@@ -1012,8 +1007,7 @@ match_player_speed(var_0) {
 
   if(self vehicle_isphysveh()) {
     self vehphys_setspeed(var_7);
-  }
-  else {
+  } else {
     self vehicle_setspeed(var_7);
   }
 }
@@ -1023,11 +1017,9 @@ get_multiplier(var_0) {
 
   if(var_0 < level.freedrive_playermatch_catchup_ramp_start_dist) {
     var_1 = level.freedrive_playermatch_catchup_multiplier;
-  }
-  else if(var_0 > level.freedrive_playermatch_slowdown_ramp_end_dist) {
+  } else if(var_0 > level.freedrive_playermatch_slowdown_ramp_end_dist) {
     var_1 = level.freedrive_playermatch_slowdown_multiplier;
-  }
-  else if(var_0 < level.freedrive_playermatch_catchup_ramp_end_dist) {
+  } else if(var_0 < level.freedrive_playermatch_catchup_ramp_end_dist) {
     var_2 = level.freedrive_playermatch_catchup_ramp_end_dist - level.freedrive_playermatch_catchup_ramp_start_dist;
     var_3 = (level.freedrive_playermatch_catchup_ramp_end_dist - var_0) / var_2;
     var_4 = level.freedrive_playermatch_catchup_multiplier - level.freedrive_playermatch_matched_multiplier;
@@ -1084,8 +1076,7 @@ get_segment_max_progress_at_offset(var_0, var_1) {
 
   if(var_1 > 0) {
     var_3 = get_progression_between_points(var_0.next_node.origins["right"], var_0.midpoint, var_0.next_node.midpoint);
-  }
-  else {
+  } else {
     var_3 = get_progression_between_points(var_0.next_node.origins["left"], var_0.midpoint, var_0.next_node.midpoint);
   }
 
@@ -1214,18 +1205,16 @@ debug_draw_path() {
     for(var_3 = 0; var_3 < var_2.size; var_3++) {
       var_4 = var_2[var_3];
 
-      if(isDefined(var_4.next_node.origins["left_warning"])) {
-      }
+      if(isDefined(var_4.next_node.origins["left_warning"])) {}
 
-      if(isDefined(var_4.next_node.origins["right_warning"])) {
-      }
+      if(isDefined(var_4.next_node.origins["right_warning"])) {}
 
       foreach(var_6 in var_4.col_volumes) {
-      var_4 draw_col_vol(var_6.colvol, (0.5, 0, 1));
+        var_4 draw_col_vol(var_6.colvol, (0.5, 0, 1));
       }
 
       foreach(var_6 in var_4.col_moving_volumes) {
-      var_4 draw_col_vol(var_6.colvol, (1, 0, 0.5));
+        var_4 draw_col_vol(var_6.colvol, (1, 0, 0.5));
       }
 
       foreach(var_11 in var_4.col_lines) {

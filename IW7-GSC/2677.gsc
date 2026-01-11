@@ -78,8 +78,7 @@ _meth_8329(var_00, var_01, var_02) {
 
   if(isDefined(var_03)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -119,8 +118,7 @@ func_F687(var_00, var_01, var_02) {
 
       if(var_03 != "force_cancel_placement") {
         thread watch_dpad();
-      }
-      else if(var_01) {
+      } else if(var_01) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
       }
 
@@ -177,8 +175,7 @@ func_4A08(var_00, var_01) {
 
   if(!isDefined(var_01)) {
     var_2.func_130D2 = 1;
-  }
-  else {
+  } else {
     var_2.func_130D2 = var_01;
   }
 
@@ -331,8 +328,7 @@ func_E4BA() {
 
         if(scripts\engine\utility::is_true(var_4.is_suicide_bomber) || scripts\engine\utility::is_true(var_4.is_dancing) || scripts\engine\utility::flag_exist("defense_sequence_active") && scripts\engine\utility::flag("defense_sequence_active")) {
           var_04 getrandomarmkillstreak(var_4.health + 50, self.origin);
-        }
-        else {
+        } else {
           var_04 turn_zombie(self.owner);
         }
 

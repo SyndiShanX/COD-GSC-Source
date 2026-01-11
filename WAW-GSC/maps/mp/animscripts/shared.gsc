@@ -27,10 +27,9 @@ HandleNoteTrack(note, flagName, customFunction, var1) {
     println("dog notetrack: " + flagName + " " + note + " " + GetTime());
   }
   if(isAI(self) && self.type == "dog") {
-    if(HandleDogSoundNoteTracks(note)) {
+    if(HandleDogSoundNoteTracks(note)) {}
+    return;
   }
-      return;
-    }
   switch (note) {
     case "end":
     case "finish":
@@ -157,14 +156,12 @@ trackLoop() {
     } else {
       if(yawDelta > self.rightAimLimit) {
         yawDelta = self.rightAimLimit;
-      }
-      else if(yawDelta < self.leftAimLimit) {
+      } else if(yawDelta < self.leftAimLimit) {
         yawDelta = self.leftAimLimit;
       }
       if(pitchDelta > self.upAimLimit) {
         pitchDelta = self.upAimLimit;
-      }
-      else if(pitchDelta < self.downAimLimit) {
+      } else if(pitchDelta < self.downAimLimit) {
         pitchDelta = self.downAimLimit;
       }
     }

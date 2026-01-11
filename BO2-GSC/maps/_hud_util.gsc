@@ -20,8 +20,7 @@ setparent(element) {
 
   if(isDefined(self.point)) {
     self setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  }
-  else {
+  } else {
     self setpoint("TOPLEFT");
   }
 }
@@ -129,8 +128,7 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
 
     if(relativex == "left" || element.alignx == "right") {
       xfactor = -1;
-    }
-    else {
+    } else {
       xfactor = 1;
     }
   } else {
@@ -138,8 +136,7 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
 
     if(relativex == "left") {
       xfactor = -1;
-    }
-    else {
+    } else {
       xfactor = 1;
     }
   }
@@ -154,8 +151,7 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
 
     if(relativey == "top" || element.aligny == "bottom") {
       yfactor = -1;
-    }
-    else {
+    } else {
       yfactor = 1;
     }
   } else {
@@ -163,8 +159,7 @@ setpoint(point, relativepoint, xoffset, yoffset, movetime) {
 
     if(relativey == "top") {
       yfactor = -1;
-    }
-    else {
+    } else {
       yfactor = 1;
     }
   }
@@ -191,18 +186,15 @@ setpointbar(point, relativepoint) {
 
   if(self.alignx == "left") {
     self.bar.x = self.x;
-  }
-  else if(self.alignx == "right") {
+  } else if(self.alignx == "right") {
     self.bar.x = self.x - self.width;
-  }
-  else {
+  } else {
     self.bar.x = self.x - int(self.width / 2);
   }
 
   if(self.aligny == "top") {
     self.bar.y = self.y;
-  }
-  else if(self.aligny == "bottom") {
+  } else if(self.aligny == "bottom") {
     self.bar.y = self.y;
   }
 
@@ -243,8 +235,7 @@ updatebarscale(barfrac, rateofchange) {
 createfontstring(font, fontscale, player) {
   if(isDefined(player)) {
     fontelem = newclienthudelem(player);
-  }
-  else {
+  } else {
     fontelem = newhudelem();
   }
 
@@ -299,8 +290,7 @@ createservertimer(font, fontscale) {
 createicon(shader, width, height, player) {
   if(isDefined(player)) {
     iconelem = newclienthudelem(player);
-  }
-  else {
+  } else {
     iconelem = newhudelem();
   }
 
@@ -373,8 +363,7 @@ createbar(color, width, height, flashfrac) {
 
   if(!level.splitscreen) {
     barelembg setshader("black", width + 4, height + 4);
-  }
-  else {
+  } else {
     barelembg setshader("black", width + 0, height + 0);
   }
 
@@ -387,8 +376,7 @@ createprimaryprogressbar() {
 
   if(level.splitscreen) {
     bar setpoint("TOP", undefined, level.primaryprogressbarx, level.primaryprogressbary);
-  }
-  else {
+  } else {
     bar setpoint("CENTER", undefined, level.primaryprogressbarx, level.primaryprogressbary);
   }
 
@@ -400,8 +388,7 @@ createprimaryprogressbartext() {
 
   if(level.splitscreen) {
     text setpoint("TOP", undefined, level.primaryprogressbartextx, level.primaryprogressbartexty);
-  }
-  else {
+  } else {
     text setpoint("CENTER", undefined, level.primaryprogressbartextx, level.primaryprogressbartexty);
   }
 
@@ -515,8 +502,7 @@ get_countdown_hud(x) {
 
   if(!isDefined(x)) {
     xpos = -225;
-  }
-  else {
+  } else {
     xpos = x;
   }
 

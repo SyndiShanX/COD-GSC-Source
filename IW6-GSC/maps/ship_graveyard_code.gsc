@@ -64,17 +64,13 @@ tutorial_player_recover() {
 
     if(level.console || level.player usinggamepad()) {
       thread maps\_utility::display_hint_timeout("hint_down_gamepad", 4);
-    }
-    else if(maps\_utility::is_command_bound("+togglecrouch")) {
+    } else if(maps\_utility::is_command_bound("+togglecrouch")) {
       thread maps\_utility::display_hint_timeout("hint_down_crouch", 4);
-    }
-    else if(maps\_utility::is_command_bound("+stance")) {
+    } else if(maps\_utility::is_command_bound("+stance")) {
       thread maps\_utility::display_hint_timeout("hint_down_stance", 4);
-    }
-    else if(maps\_utility::is_command_bound("+movedown")) {
+    } else if(maps\_utility::is_command_bound("+movedown")) {
       thread maps\_utility::display_hint_timeout("hint_down_hold_crouch", 4);
-    }
-    else {
+    } else {
       thread maps\_utility::display_hint_timeout("hint_down_crouch", 4);
     }
   }
@@ -377,8 +373,7 @@ a1_patrol_1_setup() {
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "jumper") {
     self waittill("done_jumping_in");
-  }
-  else {
+  } else {
     thread maps\ship_graveyard_util::paired_death_think(level.baker);
     maps\ship_graveyard_util::teleport_to_target();
     return;
@@ -514,8 +509,7 @@ wreck_hint_up() {
 
   if(level.console || level.player usinggamepad()) {
     thread maps\_utility::display_hint_timeout("hint_up_gamepad", 4);
-  }
-  else {
+  } else {
     thread maps\_utility::display_hint_timeout("hint_up_stand", 4);
   }
 }
@@ -668,8 +662,7 @@ delete_on_path_end() {
 
   if(!var_0) {
     self delete();
-  }
-  else {
+  } else {
     self notify("kill_me");
   }
 
@@ -956,7 +949,7 @@ stealth_2_middle_boat_think() {
     var_9 = getaiarray("axis");
 
     foreach(var_11 in var_9) {
-    var_11.favoriteenemy = level.player;
+      var_11.favoriteenemy = level.player;
     }
   }
 
@@ -1264,8 +1257,7 @@ baker_weld_door() {
 
   if(!maps\ship_graveyard_util::greenlight_check()) {
     var_1 maps\_anim::anim_single([level.baker, var_3, var_2, var_14, var_5], "weld_approach");
-  }
-  else {
+  } else {
     var_18 = level.baker maps\_utility::getanim("weld_approach");
     var_19 = var_3 maps\_utility::getanim("weld_approach");
     var_20 = var_2 maps\_utility::getanim("weld_approach");
@@ -1320,22 +1312,22 @@ baker_weld_door() {
   common_scripts\utility::flag_wait("start_new_trench");
 
   foreach(var_10 in var_2.brushes) {
-  var_10 delete();
+    var_10 delete();
   }
 
   foreach(var_10 in var_3.brushes) {
-  var_10 delete();
+    var_10 delete();
   }
 
   var_2 delete();
   var_3 delete();
 
   foreach(var_10 in var_8) {
-  var_10 delete();
+    var_10 delete();
   }
 
   foreach(var_10 in var_7) {
-  var_10 delete();
+    var_10 delete();
   }
 
   var_7 = undefined;
@@ -1623,7 +1615,7 @@ sonar_movers() {
   var_0 = getEntArray("sonar_ping_mover", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread sonar_mover_think();
+    var_2 thread sonar_mover_think();
   }
 }
 
@@ -1634,13 +1626,13 @@ sonar_wreck_think() {
   var_3 = getglassarray("lighthouse_glass");
 
   foreach(var_5 in var_3) {
-  deleteglass(var_5);
+    deleteglass(var_5);
   }
 
   var_7 = getEntArray("sonar_big_wreck_d", "targetname");
 
   foreach(var_9 in var_7) {
-  var_9 linkto(var_1);
+    var_9 linkto(var_1);
   }
 
   var_2.target = "sonar_wreck_move";
@@ -2557,7 +2549,7 @@ depth_charges() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2.baseaccuracy = 0.01;
+    var_2.baseaccuracy = 0.01;
   }
 
   maps\_utility::delaythread(2, ::depth_charges_near_player);
@@ -2584,7 +2576,7 @@ depth_charges() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2 kill();
+    var_2 kill();
   }
 
   level.baker maps\ship_graveyard_util::dyn_swimspeed_disable();
@@ -2935,8 +2927,7 @@ shark_room_end() {
 
   if(common_scripts\utility::flag("baker_past_sharks")) {
     level.baker thread maps\_utility::follow_path_and_animate(common_scripts\utility::get_target_ent("baker_wreck_stealth_path_4"), 250);
-  }
-  else if(common_scripts\utility::flag("player_warp_hesh")) {
+  } else if(common_scripts\utility::flag("player_warp_hesh")) {
     level.baker notify("stop_loop");
     level.baker stopanimscripted();
     level.baker.moveplaybackrate = 1;
@@ -3132,7 +3123,7 @@ big_wreck_encounter() {
 
   if(var_0.size > 0) {
     foreach(var_2 in var_0) {
-    var_2 setgoalentity(level.player);
+      var_2 setgoalentity(level.player);
     }
   }
 }

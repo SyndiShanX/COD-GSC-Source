@@ -76,8 +76,7 @@ moveto_volume_think(var_0) {
 
   if(isDefined(var_11.target)) {
     var_11 = var_11 common_scripts\utility::get_target_ent();
-  }
-  else {
+  } else {
     var_11 = undefined;
   }
 
@@ -335,8 +334,7 @@ anim_generic_reach_and_animate(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     maps\_anim::anim_generic_custom_animmode(var_0, var_3, var_1, var_2);
-  }
-  else {
+  } else {
     maps\_anim::anim_generic(var_0, var_1, var_2);
   }
 }
@@ -701,11 +699,9 @@ init_jog_animset_alert() {
 
   if(self == level.hesh) {
     self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_r];
-  }
-  else if(self == level.elias) {
+  } else if(self == level.elias) {
     self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_l];
-  }
-  else {
+  } else {
     self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_1];
   }
 
@@ -748,11 +744,9 @@ init_run_animset_alert() {
 
   if(self == level.hesh) {
     self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_r];
-  }
-  else if(self == level.elias) {
+  } else if(self == level.elias) {
     self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_l];
-  }
-  else {
+  } else {
     self.customidleanimset["stand"] = [ % youngblood_hesh_alert_idle_1];
   }
 
@@ -943,8 +937,7 @@ videotaper_think() {
 
     if(!isDefined(var_1.classname)) {
       var_0 = var_1;
-    }
-    else if(!issubstr(var_1.classname, "trigger")) {
+    } else if(!issubstr(var_1.classname, "trigger")) {
       var_0 = var_1;
     }
   }
@@ -1193,8 +1186,7 @@ chaos_checkpoint(var_0) {
   }
   if(level.gameskill < 2) {
     var_0 = var_0 + 3;
-  }
-  else if(level.gameskill == 2) {
+  } else if(level.gameskill == 2) {
     var_0 = var_0 + 1;
   }
 
@@ -1424,11 +1416,9 @@ yb_follow_path_and_animate(var_0, var_1) {
 
     if(isDefined(level.struct_class_names["targetname"][var_2.targetname])) {
       var_4 = ::yb_follow_path_animate_set_struct;
-    }
-    else if(isDefined(var_2.classname)) {
+    } else if(isDefined(var_2.classname)) {
       var_4 = ::yb_follow_path_animate_set_ent;
-    }
-    else {
+    } else {
       var_4 = ::yb_follow_path_animate_set_node;
     }
 
@@ -1449,8 +1439,7 @@ yb_follow_path_and_animate(var_0, var_1) {
 
     if(isDefined(var_2.animation)) {
       var_2 waittill(var_2.animation);
-    }
-    else {
+    } else {
       for(;;) {
         self waittill("goal");
 
@@ -1530,8 +1519,7 @@ yb_follow_path_animate_set_node(var_0) {
 
     if(isDefined(var_0.script_parameters) && issubstr(var_0.script_parameters, "gravity")) {
       var_0 maps\_anim::anim_generic_gravity(self, var_0.animation);
-    }
-    else {
+    } else {
       var_0 maps\_anim::anim_generic_run(self, var_0.animation);
     }
 
@@ -1549,8 +1537,7 @@ yb_follow_path_animate_set_ent(var_0) {
 
     if(isDefined(var_0.script_parameters) && issubstr(var_0.script_parameters, "gravity")) {
       var_0 maps\_anim::anim_generic_gravity(self, var_0.animation);
-    }
-    else {
+    } else {
       var_0 maps\_anim::anim_generic_run(self, var_0.animation);
     }
 
@@ -1570,8 +1557,7 @@ yb_follow_path_animate_set_struct(var_0) {
 
     if(isDefined(var_0.script_parameters) && issubstr(var_0.script_parameters, "gravity")) {
       var_0 maps\_anim::anim_generic_gravity(self, var_0.animation);
-    }
-    else {
+    } else {
       var_0 maps\_anim::anim_generic_run(self, var_0.animation);
     }
 

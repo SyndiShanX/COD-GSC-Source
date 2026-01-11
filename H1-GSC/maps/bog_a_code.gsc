@@ -790,8 +790,7 @@ threatbias_lower_trigger() {
 
     if(!isDefined(var_0.normal_threatbias)) {
       var_0.normal_threatbias = var_0.threatbias;
-    }
-    else if(var_0.normal_threatbias != var_0.threatbias) {
+    } else if(var_0.normal_threatbias != var_0.threatbias) {
       continue;
     }
     var_0.threatbias = var_0.threatbias - 1500;
@@ -1453,8 +1452,7 @@ draw_laser_line(var_0) {
   for(;;) {
     self rotateto(vectortoangles(var_0.origin - self.origin), 0.1);
 
-    if(self.dolaser) {
-    }
+    if(self.dolaser) {}
 
     wait 0.1;
   }
@@ -2037,8 +2035,7 @@ price_waits_at_node_and_waves(var_0, var_1) {
 
     if(var_2) {
       var_0 maps\_anim::anim_single_solo(level.price, "wave1");
-    }
-    else {
+    } else {
       if(common_scripts\utility::flag("friendlies_move_up_the_bridge")) {
         objective_ring(2);
       }
@@ -2541,8 +2538,7 @@ shanty_fence_cut() {
 
   if(getdvarint("use_old_fence_cutting") == 1) {
     var_1 maps\_anim::anim_reach_and_plant(var_5, "fence_cut");
-  }
-  else {
+  } else {
     var_1 maps\_anim::anim_reach(var_5, "fence_cut");
   }
 
@@ -2559,8 +2555,7 @@ shanty_fence_cut() {
 
   if(getdvarint("use_old_fence_cutting") == 1) {
     var_1 thread maps\_anim::anim_custom_animmode(var_5, "gravity", "fence_cut");
-  }
-  else {
+  } else {
     var_1 thread maps\_anim::anim_single(var_5, "fence_cut");
   }
 

@@ -467,8 +467,7 @@ func_12EB0(var_00) {
 
     if(isDefined(var_3["entity"])) {
       var_0.moving_platform = var_3["entity"];
-    }
-    else {
+    } else {
       var_0.moving_platform = undefined;
     }
 
@@ -495,8 +494,7 @@ func_936E(var_00) {
 
   if(self.canbeplaced && var_0.team != "spectator") {
     thread func_9379();
-  }
-  else {
+  } else {
     ims_setcancelled();
   }
 }
@@ -536,8 +534,7 @@ func_9375() {
 
   if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 60));
-  }
-  else {
+  } else {
     scripts\mp\entityheadicons::setplayerheadicon(var_00, (0, 0, 60));
   }
 
@@ -578,8 +575,7 @@ func_9375() {
   for(var_10 = 0; var_10 < self.config.func_C228; var_10++) {
     if(func_C229()) {
       var_11 = func_FCA8(var_10 + 1, self.config.func_C228 - 4);
-    }
-    else {
+    } else {
       var_11 = var_10 + 1;
     }
 
@@ -613,7 +609,7 @@ func_9375() {
   thread func_937D();
 
   foreach(var_05 in level.players) {
-  thread func_9374(var_05);
+    thread func_9374(var_05);
   }
 }
 
@@ -650,8 +646,7 @@ func_9372() {
 
   if(isDefined(self.isplaced)) {
     self notify("death");
-  }
-  else {
+  } else {
     ims_setcancelled(0);
   }
 }
@@ -666,8 +661,7 @@ func_9378() {
 
   if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
   }
 
@@ -680,8 +674,7 @@ func_9378() {
       if(isDefined(var_01)) {
         if(isDefined(self.owner) && isDefined(self.owner.func_9381) && var_01 == self.owner.func_9381) {
           continue;
-        }
-        else {
+        } else {
           var_01 delete();
         }
       }
@@ -910,8 +903,7 @@ func_9384(var_00, var_01, var_02) {
 
   if(isDefined(var_02)) {
     var_04 = var_1.func_AC48[var_00];
-  }
-  else {
+  } else {
     var_04 = var_1.func_AC47[var_00];
   }
 

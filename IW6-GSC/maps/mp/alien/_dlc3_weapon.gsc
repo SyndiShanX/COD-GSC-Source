@@ -55,8 +55,7 @@ special_gun_detonate_hint_watcher() {
     if(is_venom_weapon(var_2)) {
       if(!isDefined(self.projectile_time_out_num)) {
         self.projectile_time_out_num = 1;
-      }
-      else if(self.projectile_time_out_num > var_0) {
+      } else if(self.projectile_time_out_num > var_0) {
         var_0 = 3;
         self.projectile_time_out_num = 0;
         thread show_specialweapon_hint_repeat();
@@ -313,8 +312,7 @@ cloud_melt_alien(var_0, var_1, var_2, var_3, var_4, var_5) {
   while(var_6 < var_2) {
     if(isDefined(var_3)) {
       self dodamage(var_0, self.origin, var_1, var_1, "MOD_UNKNOWN");
-    }
-    else {
+    } else {
       self dodamage(var_0, self.origin, var_1);
     }
 
@@ -418,14 +416,11 @@ spitter_ammo_think() {
 get_venom_weapon() {
   if(self hasweapon("iw6_aliendlc11_mp")) {
     return "iw6_aliendlc11_mp";
-  }
-  else if(self hasweapon("iw6_aliendlc11li_mp")) {
+  } else if(self hasweapon("iw6_aliendlc11li_mp")) {
     return "iw6_aliendlc11li_mp";
-  }
-  else if(self hasweapon("iw6_aliendlc11fi_mp")) {
+  } else if(self hasweapon("iw6_aliendlc11fi_mp")) {
     return "iw6_aliendlc11fi_mp";
-  }
-  else if(self hasweapon("iw6_aliendlc11sp_mp")) {
+  } else if(self hasweapon("iw6_aliendlc11sp_mp")) {
     return "iw6_aliendlc11sp_mp";
   }
 

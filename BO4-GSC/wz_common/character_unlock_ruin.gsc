@@ -10,11 +10,10 @@
 #include scripts\mp_common\item_world;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_ruin;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_ruin", &__init__, undefined, #"character_unlock_ruin_fixup");
+  system::register(#"character_unlock_ruin", &__init__, undefined, # "character_unlock_ruin_fixup");
 }
 
 __init__() {
@@ -87,6 +86,6 @@ on_player_killed() {
   attacker.var_faf1dae6++;
 
   if(attacker.var_faf1dae6 == 1) {
-    attacker character_unlock::function_c8beca5e(#"ruin_unlock", #"hash_4e9ba934add76371", 1);
+    attacker character_unlock::function_c8beca5e(#"ruin_unlock", # "hash_4e9ba934add76371", 1);
   }
 }

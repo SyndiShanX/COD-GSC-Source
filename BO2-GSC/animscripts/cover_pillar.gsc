@@ -31,8 +31,7 @@ main() {
   if(self.node has_spawnflag(1024)) {
     if(usingpistol) {
       animscripts\cover_corner::corner_think("left", -90);
-    }
-    else {
+    } else {
       animscripts\cover_corner::corner_think("left", 180);
     }
   } else if(usingpistol)

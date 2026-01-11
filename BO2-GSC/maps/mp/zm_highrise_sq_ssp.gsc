@@ -98,8 +98,7 @@ corpse_room_watcher() {
 
     if(is_in_room) {
       n_count++;
-    }
-    else {
+    } else {
       n_count = 0;
     }
 
@@ -127,8 +126,7 @@ ssp_2_zombie_death_check() {
 
   if(self istouching(t_corpse_room)) {
     level notify("ssp2_corpse_made", 1);
-  }
-  else {
+  } else {
     level notify("ssp2_corpse_made", 0);
   }
 }
@@ -195,8 +193,7 @@ exit_stage_1(success) {
   flag_set("ssp1_complete");
 }
 
-exit_stage_2(success) {
-}
+exit_stage_2(success) {}
 
 watch_model_sliquification(n_end_limit, str_complete_flag) {
   n_count = 0;

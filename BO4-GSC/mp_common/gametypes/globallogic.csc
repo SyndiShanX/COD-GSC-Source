@@ -16,11 +16,10 @@
 #include scripts\killstreaks\killstreak_detect;
 #include scripts\mp_common\gametypes\display_transition;
 #include scripts\mp_common\player\player;
-
 #namespace globallogic;
 
 autoexec __init__system__() {
-  system::register(#"globallogic", &__init__, undefined, #"visionset_mgr");
+  system::register(#"globallogic", &__init__, undefined, # "visionset_mgr");
 }
 
 __init__() {
@@ -58,9 +57,9 @@ __init__() {
   clientfield::register("toplayer", "thermal_sight", 1, 1, "int", &function_765b7c63, 0, 0);
   clientfield::register("toplayer", "strobe_light", 1, 1, "int", &fireflykillcam, 0, 0);
   clientfield::register("allplayers", "cold_blooded", 1, 1, "int", &function_194072a7, 0, 0);
-  level.var_20369084 = #"rob_sonar_set_enemy_cold";
-  level._effect[#"annihilate_explosion"] = #"hash_17591c79f2960fba";
-  level._effect[#"pineapplegun_explosion"] = #"hash_84cd1f227fcd07e";
+  level.var_20369084 = # "rob_sonar_set_enemy_cold";
+  level._effect[# "annihilate_explosion"] = # "hash_17591c79f2960fba";
+  level._effect[# "pineapplegun_explosion"] = # "hash_84cd1f227fcd07e";
   level.gameended = 0;
   level.postgame = 0;
   level.new_health_model = getdvarint(#"new_health_model", 1) > 0;
@@ -134,8 +133,8 @@ pineapplegun_effect_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fi
       where = self.origin;
     }
 
-    if(isDefined(level._effect[#"pineapplegun_explosion"])) {
-      playFX(localclientnum, level._effect[#"pineapplegun_explosion"], where);
+    if(isDefined(level._effect[# "pineapplegun_explosion"])) {
+      playFX(localclientnum, level._effect[# "pineapplegun_explosion"], where);
     }
   }
 }
@@ -146,19 +145,19 @@ play_plant_sound(param1, param2) {
   }
 
   tagpos = self gettagorigin("j_ring_ri_2");
-  self playSound(self.localclientnum, #"fly_bomb_buttons_npc", tagpos);
+  self playSound(self.localclientnum, # "fly_bomb_buttons_npc", tagpos);
 }
 
 updateenemyequipment(local_client_num, newval) {
   if(isDefined(level.var_58253868)) {
-    self renderoverridebundle::function_c8d97b8e(local_client_num, #"friendly", #"hash_66ac79c57723c169");
+    self renderoverridebundle::function_c8d97b8e(local_client_num, # "friendly", # "hash_66ac79c57723c169");
   }
 
   if(isDefined(level.var_420d7d7e)) {
-    self renderoverridebundle::function_c8d97b8e(local_client_num, #"enemy", #"hash_691f7dc47ae8aa08");
+    self renderoverridebundle::function_c8d97b8e(local_client_num, # "enemy", # "hash_691f7dc47ae8aa08");
   }
 
-  self renderoverridebundle::function_c8d97b8e(local_client_num, #"friendly", #"hash_ebb37dab2ee0ae3");
+  self renderoverridebundle::function_c8d97b8e(local_client_num, # "friendly", # "hash_ebb37dab2ee0ae3");
 }
 
 function_116b413e(local_client_num, newval) {
@@ -180,7 +179,7 @@ function_765b7c63(local_client_num, oldval, newval, bnewent, binitialsnap, field
   players = getplayers(local_client_num);
 
   foreach(player in players) {
-    if(util::function_fbce7263(player.team, self.team) && player hasperk(local_client_num, #"specialty_immunenvthermal")) {
+    if(util::function_fbce7263(player.team, self.team) && player hasperk(local_client_num, # "specialty_immunenvthermal")) {
       player function_194072a7(local_client_num, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump);
     }
   }
@@ -196,7 +195,7 @@ fireflykillcam(local_client_num, oldval, newval, bnewent, binitialsnap, fieldnam
     return;
   }
 
-  if(newval && !self hastalent(local_client_num, #"talent_resistance")) {
+  if(newval && !self hastalent(local_client_num, # "talent_resistance")) {
     self function_36b630a3(0);
     return;
   }

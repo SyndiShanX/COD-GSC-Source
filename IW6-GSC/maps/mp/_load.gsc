@@ -175,8 +175,7 @@ exploder_load(trigger) {
   if(isDefined(trigger.script_chance) && randomfloat(1) > trigger.script_chance) {
     if(isDefined(trigger.script_delay)) {
       wait trigger.script_delay;
-    }
-    else {
+    } else {
       wait 4;
     }
     level thread exploder_load(trigger);
@@ -201,8 +200,7 @@ setupExploders() {
     if(isDefined(ents[i].script_exploder)) {
       if((ents[i].model == "fx") && ((!isDefined(ents[i].targetname)) || (ents[i].targetname != "exploderchunk"))) {
         ents[i] hide();
-      }
-      else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
+      } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
         ents[i] hide();
         ents[i] notsolid();
 
@@ -282,8 +280,7 @@ setupExploders() {
 
     if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
-    }
-    else {
+    } else {
       ent.v["fxid"] = exploder.script_fxid;
     }
     ent.v["exploder"] = exploder.script_exploder;
@@ -306,8 +303,7 @@ setupExploders() {
 
     if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname])) {
       ent.v["exploder_type"] = exploder.targetname;
-    }
-    else {
+    } else {
       ent.v["exploder_type"] = "normal";
     }
 

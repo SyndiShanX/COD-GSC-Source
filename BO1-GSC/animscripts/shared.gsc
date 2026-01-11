@@ -1340,9 +1340,7 @@ playLookAnimation(lookAnim, lookTime, canStopCallback) {
   }
   for(i = 0; i < lookTime * 10; i++) {
     if(IsAlive(self.enemy)) {
-      if(self canSeeEnemy() && [
-          [canStopCallback]
-        ]()) {
+      if(self canSeeEnemy() && [[canStopCallback]]()) {
         return;
       }
     }

@@ -625,8 +625,7 @@ get_name_for_nationality(var_0) {
 
   if(isai(self) && self isbadguy()) {
     self.ainame = var_3;
-  }
-  else {
+  } else {
     self.name = var_3;
   }
 }

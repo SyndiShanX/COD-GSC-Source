@@ -33,8 +33,7 @@ watchGrenadeUsage() {
 
     if(weaponName == "c4") {
       self beginC4Tracking();
-    }
-    else if(weaponName == "smoke_grenade_american") {
+    } else if(weaponName == "smoke_grenade_american") {
       self beginsmokegrenadetracking();
     }
     //else if( weaponName == "semtex_grenade" )
@@ -52,8 +51,7 @@ beginsmokegrenadetracking() {
   }
   if(level.smokegrenades > 2 && getdvar("player_sustainAmmo") != "0") {
     grenade delete();
-  }
-  else {
+  } else {
     grenade thread smoke_grenade_death();
   }
 }
@@ -73,8 +71,7 @@ track_semtex_grenade(grenade) {
 
   if(!isDefined(level.thrown_semtex_grenades)) {
     level.thrown_semtex_grenades = 1;
-  }
-  else {
+  } else {
     level.thrown_semtex_grenades++;
   }
 
@@ -255,8 +252,7 @@ claymoreDetonation() {
       wait 0.4;
       if(isDefined(self.owner)) {
         self detonate(self.owner);
-      }
-      else {
+      } else {
         self detonate(undefined);
       }
 
@@ -343,8 +339,7 @@ c4Damage() {
 
   if(level.c4explodethisframe) {
     wait .1 + randomfloat(.4);
-  }
-  else {
+  } else {
     wait .05;
   }
 
@@ -358,8 +353,7 @@ c4Damage() {
 
   if(isplayer(attacker)) {
     self detonate(attacker);
-  }
-  else {
+  } else {
     self detonate();
   }
   // won't get here; got death notify.

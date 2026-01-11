@@ -79,7 +79,7 @@ getwatchernames(weapons) {
   names = [];
 
   foreach(index, weapon in weapons) {
-  names[index] = getsubstr(weapon, 0, weapon.size - 3);
+    names[index] = getsubstr(weapon, 0, weapon.size - 3);
   }
 
   return names;
@@ -92,8 +92,7 @@ weapons_get_dvar_int(dvar, def) {
 weapons_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }
@@ -173,17 +172,17 @@ resetwatchers() {
   team = self.team;
 
   foreach(watcher in self.weaponobjectwatcherarray) {
-  resetweaponobjectwatcher(watcher, team);
+    resetweaponobjectwatcher(watcher, team);
   }
 }
 
 createbasewatchers() {
   foreach(index, weapon in level.watcherweapons) {
-  self createweaponobjectwatcher(level.watcherweaponnames[index], weapon, self.team);
+    self createweaponobjectwatcher(level.watcherweaponnames[index], weapon, self.team);
   }
 
   foreach(index, weapon in level.retrievableweapons) {
-  self createweaponobjectwatcher(level.retrievableweaponnames[index], weapon, self.team);
+    self createweaponobjectwatcher(level.retrievableweaponnames[index], weapon, self.team);
   }
 }
 
@@ -286,11 +285,9 @@ waittillnotmoving_and_notstunned() {
   }
 }
 
-voidonspawn(unused0, unused1) {
-}
+voidonspawn(unused0, unused1) {}
 
-voidondamage(unused0) {
-}
+voidondamage(unused0) {}
 
 deleteent(attacker, emp) {
   self delete();
@@ -352,8 +349,7 @@ weapondetonate(attacker, weaponname) {
 
     if(isplayer(attacker)) {
       self detonate(attacker);
-    }
-    else {
+    } else {
       self detonate();
     }
   } else if(isDefined(self.owner) && isplayer(self.owner)) {
@@ -445,8 +441,7 @@ addweaponobject(watcher, weapon) {
 
   if(isDefined(watcher.ondamage)) {
     weapon thread[[watcher.ondamage]](watcher);
-  }
-  else {
+  } else {
     weapon thread weaponobjectdamage(watcher);
   }
 
@@ -484,8 +479,7 @@ addweaponobject(watcher, weapon) {
   if(watcher.deleteonkillbrush) {
     if(isDefined(level.deleteonkillbrushoverride)) {
       weapon thread[[level.deleteonkillbrushoverride]](self, watcher);
-    }
-    else {
+    } else {
       weapon thread deleteonkillbrush(self);
     }
   }
@@ -498,8 +492,7 @@ watchscramble(watcher) {
 
   if(self maps\mp\_scrambler::checkscramblerstun()) {
     self thread stunstart(watcher);
-  }
-  else {
+  } else {
     self stunstop();
   }
 
@@ -618,8 +611,7 @@ weaponobjectdamage(watcher) {
 
   if(level.weaponobjectexplodethisframe) {
     wait(0.1 + randomfloat(0.4));
-  }
-  else {
+  } else {
     wait 0.05;
   }
 
@@ -664,8 +656,7 @@ watchobjectdamage(owner) {
 
     if(isDefined(attacker) && isplayer(attacker) && attacker != owner) {
       self.playdialog = 1;
-    }
-    else {
+    } else {
       self.playdialog = 0;
     }
   }
@@ -693,8 +684,7 @@ stunstart(watcher, time) {
 
   if(isDefined(time)) {
     wait(time);
-  }
-  else {
+  } else {
     return;
   }
 
@@ -861,8 +851,7 @@ commononspawnuseweaponobject(watcher, owner) {
   if(watcher.detectable) {
     if(isDefined(watcher.ismovable) && watcher.ismovable) {
       self thread weaponobjectdetectionmovable(owner.pers["team"]);
-    }
-    else {
+    } else {
       self thread weaponobjectdetectiontrigger_wait(owner.pers["team"]);
     }
 
@@ -1178,8 +1167,7 @@ hackerinit(watcher) {
 
   if(isDefined(level.hackerhints[self.name])) {
     self.hackertrigger sethintstring(level.hackerhints[self.name].hint);
-  }
-  else {
+  } else {
     self.hackertrigger sethintstring(&"MP_GENERIC_HACKING");
   }
 
@@ -1232,8 +1220,7 @@ hackerthink(trigger, watcher) {
 
     if(isDefined(player) && player.sessionstate == "playing") {
       player notify("grenade_fire", self, self.name, 1);
-    }
-    else {
+    } else {
       watcher thread waitanddetonate(self, 0.0);
     }
 
@@ -1495,8 +1482,7 @@ proximityweaponobjectdetonation(watcher) {
 
   if(isDefined(self.owner) && isplayer(self.owner)) {
     self[[watcher.detonate]](self.owner);
-  }
-  else {
+  } else {
     self[[watcher.detonate]]();
   }
 }
@@ -1633,8 +1619,7 @@ watchweaponobjectdetonation() {
 
     if(self isusingoffhand()) {
       weap = self getcurrentoffhand();
-    }
-    else {
+    } else {
       weap = self getcurrentweapon();
     }
 
@@ -1852,8 +1837,7 @@ watchhatchettrigger(trigger, callback, playersoundonuse, npcsoundonuse) {
 
     if(player.grenadetypeprimary == "hatchet_mp") {
       maxammo = player.grenadetypeprimarycount;
-    }
-    else if(isDefined(player.grenadetypesecondary) && player.grenadetypesecondary == "hatchet_mp") {
+    } else if(isDefined(player.grenadetypesecondary) && player.grenadetypesecondary == "hatchet_mp") {
       maxammo = player.grenadetypesecondarycount;
     }
 
@@ -1902,16 +1886,14 @@ onspawnretrievableweaponobject(watcher, player) {
   if(isDefined(self.stucktoplayer)) {
     if(isalive(self.stucktoplayer) || !isDefined(self.stucktoplayer.body)) {
       triggerparentent = self.stucktoplayer;
-    }
-    else {
+    } else {
       triggerparentent = self.stucktoplayer.body;
     }
   }
 
   if(isDefined(triggerparentent)) {
     triggerorigin = triggerparentent.origin + vectorscale((0, 0, 1), 10.0);
-  }
-  else {
+  } else {
     up = anglestoup(self.angles);
     triggerorigin = self.origin + up;
   }
@@ -1926,15 +1908,13 @@ onspawnretrievableweaponobject(watcher, player) {
 
   if(isDefined(level.retrievehints[watcher.name])) {
     self.pickuptrigger sethintstring(level.retrievehints[watcher.name].hint);
-  }
-  else {
+  } else {
     self.pickuptrigger sethintstring(&"MP_GENERIC_PICKUP");
   }
 
   if(level.teambased) {
     self.pickuptrigger setteamfortrigger(player.pers["team"]);
-  }
-  else {
+  } else {
     self.pickuptrigger setteamfortrigger("none");
   }
 
@@ -1956,8 +1936,7 @@ onspawnretrievableweaponobject(watcher, player) {
 
     if(isDefined(level.destroyhints[watcher.name])) {
       self.enemytrigger sethintstring(level.destroyhints[watcher.name].hint);
-    }
-    else {
+    } else {
       self.enemytrigger sethintstring(&"MP_GENERIC_DESTROY");
     }
 

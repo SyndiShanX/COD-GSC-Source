@@ -226,8 +226,7 @@ player_watch_riotshield_use(resource, rank) {
 
   if(self player_has_enough_currency(Ceil(resource.upgrades[rank].cost))) {
     return true;
-  }
-  else {
+  } else {
     self[[resource.callbacks.CancelUse]](resource, rank);
     self notify("action_finish_used");
     self notify("player_action_slot_restart");
@@ -240,8 +239,7 @@ player_watch_equalizer_use(resource, rank) {
   self waittill_any_timeout(3, "action_use");
   if(self player_has_enough_currency(Ceil(resource.upgrades[rank].cost))) {
     return true;
-  }
-  else {
+  } else {
     self[[resource.callbacks.CancelUse]](resource, rank);
     self notify("action_finish_used");
     self notify("player_action_slot_restart");
@@ -302,8 +300,7 @@ player_use(resource, rank) {
   if(self[[resource.callbacks.CanUse]](resource)) {
     if(!show_alternate_spend_hint(resource)) {
       self thread maps\mp\alien\_hud::createSpendHintHUD(resource, rank);
-    }
-    else {
+    } else {
       self thread maps\mp\alien\_hud::createSpendHintHUD(resource, rank, &"ALIENS_PATCH_CANCEL_USE");
     }
 

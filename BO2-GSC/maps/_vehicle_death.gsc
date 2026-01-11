@@ -236,11 +236,9 @@ helicopter_crash_movement(point, dir) {
   if(isDefined(level.heli_crash_smoke_trail_fx)) {
     if(issubstr(self.vehicletype, "v78")) {
       playFXOnTag(level.heli_crash_smoke_trail_fx, self, "tag_origin");
-    }
-    else if(self.vehicletype == "drone_firescout_axis" || self.vehicletype == "drone_firescout_isi") {
+    } else if(self.vehicletype == "drone_firescout_axis" || self.vehicletype == "drone_firescout_isi") {
       playFXOnTag(level.heli_crash_smoke_trail_fx, self, "tag_main_rotor");
-    }
-    else {
+    } else {
       playFXOnTag(level.heli_crash_smoke_trail_fx, self, "tag_engine_left");
     }
   }
@@ -341,8 +339,7 @@ helicopter_crash_rotation(point, dir) {
 
     if(ang_vel[1] < 360 * -1) {
       ang_vel = (ang_vel[0], 360 * -1, ang_vel[2]);
-    }
-    else if(ang_vel[1] > 360) {
+    } else if(ang_vel[1] > 360) {
       ang_vel = (ang_vel[0], 360, ang_vel[2]);
     }
 
@@ -416,8 +413,7 @@ helicopter_crash_zone_accel(dir) {
 
     if(ang_vel[1] < max_angluar_vel * -1) {
       ang_vel = (ang_vel[0], max_angluar_vel * -1, ang_vel[2]);
-    }
-    else if(ang_vel[1] > max_angluar_vel) {
+    } else if(ang_vel[1] > max_angluar_vel) {
       ang_vel = (ang_vel[0], max_angluar_vel, ang_vel[2]);
     }
 
@@ -436,8 +432,7 @@ helicopter_collision() {
 
     if(normal[2] < 0.7) {
       self setvehvelocity(self.velocity + normal * 70);
-    }
-    else {
+    } else {
       createdynentandlaunch(self.deathmodel, self.origin, self.angles, self.origin, self.velocity * 0.03, self.deathfx, 1);
       self notify("crash_done");
     }
@@ -565,8 +560,7 @@ aircraft_crash_move(point, dir) {
 
     if(ang_vel[2] < 500 * -1) {
       ang_vel = (ang_vel[0], ang_vel[1], 500 * -1);
-    }
-    else if(ang_vel[2] > 500) {
+    } else if(ang_vel[2] > 500) {
       ang_vel = (ang_vel[0], ang_vel[1], 500);
     }
 
@@ -617,8 +611,7 @@ helicopter_crash_move(point, dir) {
 
     if(ang_vel[1] < 360 * -1) {
       ang_vel = (ang_vel[0], 360 * -1, ang_vel[2]);
-    }
-    else if(ang_vel[1] > 360) {
+    } else if(ang_vel[1] > 360) {
       ang_vel = (ang_vel[0], 360, ang_vel[2]);
     }
 
@@ -662,8 +655,7 @@ boat_crash_movement(point, dir) {
 
     if(ang_vel[1] < 360 * -1) {
       ang_vel = (ang_vel[0], 360 * -1, ang_vel[2]);
-    }
-    else if(ang_vel[1] > 360) {
+    } else if(ang_vel[1] > 360) {
       ang_vel = (ang_vel[0], 360, ang_vel[2]);
     }
 
@@ -744,11 +736,9 @@ crash_path_check(node) {
 
       if(isDefined(targ1) && isDefined(targ1.target) && isDefined(targ.targetname) && targ1.target == targ.targetname) {
         return false;
-      }
-      else if(isDefined(targ1) && targ1 == node) {
+      } else if(isDefined(targ1) && targ1 == node) {
         return false;
-      }
-      else {
+      } else {
         targ = targ1;
       }
 
@@ -787,8 +777,7 @@ death_fx_thread(struct) {
   if(isDefined(struct.waitdelay)) {
     if(struct.waitdelay >= 0) {
       wait(struct.waitdelay);
-    }
-    else {
+    } else {
       self waittill("death_finished");
     }
   }
@@ -812,8 +801,7 @@ death_fx_thread(struct) {
       if(isDefined(struct.tag)) {
         if(isDefined(struct.stayontag) && struct.stayontag == 1) {
           thread loop_fx_on_vehicle_tag(struct.effect, struct.delay, struct.tag);
-        }
-        else {
+        } else {
           thread playloopedfxontag(struct.effect, struct.delay, struct.tag);
         }
       } else {
@@ -823,8 +811,7 @@ death_fx_thread(struct) {
     } else if(isDefined(struct.tag)) {
       if(isDefined(self.modeldummyon) && self.modeldummyon) {
         playFXOnTag(struct.effect, deathfx_ent(), struct.tag);
-      }
-      else {
+      } else {
         playFXOnTag(struct.effect, self, struct.tag);
       }
     } else {
@@ -836,8 +823,7 @@ death_fx_thread(struct) {
   if(isDefined(struct.sound) && !isDefined(self.delete_on_death)) {
     if(struct.bsoundlooping) {
       thread death_firesound(struct.sound);
-    }
-    else {
+    } else {
       self play_sound_in_space(struct.sound);
     }
   }
@@ -1006,20 +992,15 @@ death_update_crash(point, dir) {
   if(!isDefined(self.destructibledef)) {
     if(isDefined(self.script_crashtypeoverride)) {
       crashtype = self.script_crashtypeoverride;
-    }
-    else if(self.vehicleclass == "plane") {
+    } else if(self.vehicleclass == "plane") {
       crashtype = "aircraft";
-    }
-    else if(self.vehicleclass == "helicopter") {
+    } else if(self.vehicleclass == "helicopter") {
       crashtype = "helicopter";
-    }
-    else if(self.vehicleclass == "boat") {
+    } else if(self.vehicleclass == "boat") {
       crashtype = "boat";
-    }
-    else if(isDefined(self.currentnode) && crash_path_check(self.currentnode)) {
+    } else if(isDefined(self.currentnode) && crash_path_check(self.currentnode)) {
       crashtype = "none";
-    }
-    else {
+    } else {
       crashtype = "tank";
     }
 
@@ -1030,8 +1011,7 @@ death_update_crash(point, dir) {
     if(crashtype == "helicopter") {
       if(isDefined(self.script_nocorpse)) {
         self thread helicopter_explode();
-      }
-      else {
+      } else {
         self thread helicopter_crash(point, dir);
       }
     }
@@ -1043,8 +1023,7 @@ death_update_crash(point, dir) {
     if(crashtype == "tank") {
       if(!isDefined(self.rollingdeath)) {
         self vehicle_setspeed(0, 25, "Dead");
-      }
-      else {
+      } else {
         self waittill("deathrolloff");
         self vehicle_setspeed(0, 25, "Dead, finished path intersection");
       }

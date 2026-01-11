@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\weapons\grenades;
-
 #namespace grenades;
 
 autoexec __init__system__() {

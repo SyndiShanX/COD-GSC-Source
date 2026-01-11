@@ -6,7 +6,6 @@
 #include scripts\core_common\player\player_shared;
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
-
 #namespace status_effect_wound;
 
 autoexec __init__system__() {
@@ -61,7 +60,7 @@ wound_apply(var_756fda07, weapon, applicant) {
 
 function_a54d41f7(starttime) {
   self notify(#"hash_77a943337c92549a");
-  self endon(#"hash_77a943337c92549a", #"endstatuseffect");
+  self endon(#"hash_77a943337c92549a", # "endstatuseffect");
 
   for(var_1420e67b = self.endtime; self.endtime > gettime(); var_1420e67b = self.endtime) {
     waitframe(1);
@@ -75,10 +74,10 @@ function_a54d41f7(starttime) {
 
 private function_f6fec56f() {
   self notify(#"hash_35c63d8ef4b4825");
-  self endon(#"hash_35c63d8ef4b4825", #"endstatuseffect");
+  self endon(#"hash_35c63d8ef4b4825", # "endstatuseffect");
 
   while(true) {
-    waitresult = self.owner waittill(#"fully_healed", #"death", #"disconnect", #"healing_disabled");
+    waitresult = self.owner waittill(#"fully_healed", # "death", # "disconnect", # "healing_disabled");
 
     if(waitresult._notify != "fully_healed") {
       return;

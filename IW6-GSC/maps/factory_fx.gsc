@@ -287,7 +287,7 @@ fx_assembly_setup() {
   var_0 = getEntArray("factory_welding_base_01", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  playFXOnTag(level._effect["glow_green_light_30_nolight"], var_2, "tag_light_green");
+    playFXOnTag(level._effect["glow_green_light_30_nolight"], var_2, "tag_light_green");
   }
 }
 
@@ -309,28 +309,28 @@ lgt_ambush_begin() {
   var_2 = getEntArray("ambush_assembly_lights", "script_noteworthy");
 
   foreach(var_4 in var_0) {
-  var_4 setlightintensity(1.75);
+    var_4 setlightintensity(1.75);
   }
 
   foreach(var_4 in var_1) {
-  var_4 setlightintensity(3.0);
+    var_4 setlightintensity(3.0);
   }
 
   var_8 = getEntArray("ambush_console", "targetname");
 
   foreach(var_4 in var_8) {
-  var_4 = playFX(level._effect["lights_console_blue"], var_4.origin);
+    var_4 = playFX(level._effect["lights_console_blue"], var_4.origin);
   }
 
   level waittill("ambush_triggered");
   wait 16.75;
 
   foreach(var_4 in var_0) {
-  var_4 setlightintensity(0.01);
+    var_4 setlightintensity(0.01);
   }
 
   foreach(var_4 in var_1) {
-  var_4 setlightintensity(0.01);
+    var_4 setlightintensity(0.01);
   }
 
   wait 0.75;
@@ -362,8 +362,7 @@ lgt_vision_fog_init() {
 trigger_vf_sunsamplesize() {
   if(level.ps3 == 1) {
     setsaveddvar("sm_sunsamplesizenear", 0.1);
-  }
-  else {
+  } else {
     setsaveddvar("sm_sunsamplesizenear", 0.25);
   }
 
@@ -371,8 +370,7 @@ trigger_vf_sunsamplesize() {
 
   if(level.ps3 == 1) {
     maps\_utility::lerp_saveddvar("sm_sunsamplesizenear", 0.1, 2);
-  }
-  else {
+  } else {
     maps\_utility::lerp_saveddvar("sm_sunsamplesizenear", 0.65, 2);
   }
 
@@ -380,8 +378,7 @@ trigger_vf_sunsamplesize() {
 
   if(level.ps3 == 1) {
     maps\_utility::lerp_saveddvar("sm_sunsamplesizenear", 0.3, 1);
-  }
-  else {
+  } else {
     maps\_utility::lerp_saveddvar("sm_sunsamplesizenear", 0.65, 2);
   }
 }
@@ -422,13 +419,13 @@ trigger_vf_powerstealth() {
   var_0 = getEntArray("lgt_powerstealth_racks", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 setlightradius(20);
+    var_2 setlightradius(20);
   }
 
   common_scripts\utility::flag_wait_any("entered_factory_1", "card_swiped");
 
   foreach(var_2 in var_0) {
-  var_2 setlightradius(700);
+    var_2 setlightradius(700);
   }
 
   var_6 = 0;
@@ -443,7 +440,7 @@ trigger_vf_powerstealth() {
   var_6 = !var_6;
 
   foreach(var_2 in var_0) {
-  var_2 setlightradius(var_7);
+    var_2 setlightradius(var_7);
   }
 }
 
@@ -533,8 +530,7 @@ trigger_vf_weapon_reveal() {
 
   if(maps\_utility::is_gen4()) {
     lgt_weapon_reveal_sequence_ng();
-  }
-  else {
+  } else {
     var_0 = getent("satellite_room_vert_pieces", "targetname");
     var_1 = getent("satellite_ROG_01", "targetname");
     var_2 = getent("satellite_ROG_02", "targetname");
@@ -561,17 +557,17 @@ trigger_vf_weapon_reveal() {
 
 lgt_weapon_rim_dim(var_0, var_1) {
   foreach(var_3 in var_0) {
-  var_3 thread changelightintensityovertime(0.2, 2.0);
+    var_3 thread changelightintensityovertime(0.2, 2.0);
   }
 
   foreach(var_3 in var_1) {
-  var_3 thread changelightintensityovertime(0.1, 2.0);
+    var_3 thread changelightintensityovertime(0.1, 2.0);
   }
 
   wait 2.0;
 
   foreach(var_3 in var_0) {
-  var_3 setlightradius(13);
+    var_3 setlightradius(13);
   }
 }
 
@@ -581,18 +577,18 @@ lgt_weapon_reveal_sequence() {
   var_2 = getEntArray("lgt_sat_room_rim_keep", "script_noteworthy");
 
   foreach(var_4 in var_1) {
-  var_4 setlightintensity(0.3);
+    var_4 setlightintensity(0.3);
   }
 
   foreach(var_4 in var_2) {
-  var_4 setlightintensity(0.3);
+    var_4 setlightintensity(0.3);
   }
 
   common_scripts\utility::flag_wait("lgt_weapon_room_jump");
   wait 4.5;
 
   foreach(var_4 in var_0) {
-  var_4 thread changelightintensityovertime(1, 0.75);
+    var_4 thread changelightintensityovertime(1, 0.75);
   }
 
   common_scripts\utility::flag_wait("lgt_weapon_sequencing");
@@ -631,18 +627,18 @@ lgt_weapon_reveal_sequence_ng() {
   var_2 = getEntArray("lgt_sat_room_rim_keep", "script_noteworthy");
 
   foreach(var_4 in var_1) {
-  var_4 setlightintensity(0.85);
+    var_4 setlightintensity(0.85);
   }
 
   foreach(var_4 in var_2) {
-  var_4 setlightintensity(0.85);
+    var_4 setlightintensity(0.85);
   }
 
   common_scripts\utility::flag_wait("lgt_weapon_room_jump");
   wait 4.5;
 
   foreach(var_4 in var_0) {
-  var_4 thread changelightintensityovertime(1.0, 0.75);
+    var_4 thread changelightintensityovertime(1.0, 0.75);
   }
 
   common_scripts\utility::flag_wait("lgt_weapon_sequencing");
@@ -661,7 +657,7 @@ lgt_weapon_reveal_sequence_ng() {
   var_10 = getEntArray("lgt_weapon_room_03", "script_noteworthy");
 
   foreach(var_4 in var_10) {
-  var_4 thread changelightintensityovertime(3.25, 0.1);
+    var_4 thread changelightintensityovertime(3.25, 0.1);
   }
 
   wait 1;
@@ -669,7 +665,7 @@ lgt_weapon_reveal_sequence_ng() {
   var_10 = getEntArray("lgt_weapon_room_04", "script_noteworthy");
 
   foreach(var_4 in var_10) {
-  var_4 setlightintensity(3);
+    var_4 setlightintensity(3);
   }
 }
 
@@ -751,8 +747,7 @@ fx_thermal_glitch_flashbang_spotlight() {
     if(level.player.thermal && isalive(level.player)) {
       if(var_3 == "flashed") {
         var_2 = var_0;
-      }
-      else if(var_3 == "spotlight_blind") {
+      } else if(var_3 == "spotlight_blind") {
         var_2 = var_1;
       }
 
@@ -789,7 +784,7 @@ fx_ambush_spawn_assembly_smoke() {
   var_0 = getEntArray("gas_node", "targetname");
 
   foreach(var_2 in var_0) {
-  playFX(level._effect["factory_ambush_smoke_grenade"], var_2.origin, (0, 0, 1), (1, 0, 0));
+    playFX(level._effect["factory_ambush_smoke_grenade"], var_2.origin, (0, 0, 1), (1, 0, 0));
   }
 
   common_scripts\utility::waitframe();
@@ -1052,7 +1047,7 @@ fx_outdoor_ambient() {
     var_1 = 0;
 
     foreach(var_3 in level.fx_outdoor_triggers) {
-    var_1 = var_1 || level.player istouching(var_3);
+      var_1 = var_1 || level.player istouching(var_3);
     }
 
     if(var_1 != var_0) {
@@ -1101,7 +1096,7 @@ fx_show_hide(var_0, var_1) {
     var_2 = getEntArray(var_0, "targetname");
 
     foreach(var_4 in var_2) {
-    var_4 show();
+      var_4 show();
     }
   }
 
@@ -1109,7 +1104,7 @@ fx_show_hide(var_0, var_1) {
     var_2 = getEntArray(var_1, "targetname");
 
     foreach(var_4 in var_2) {
-    var_4 hide();
+      var_4 hide();
     }
   }
 }
@@ -1119,7 +1114,7 @@ fx_show_delete(var_0, var_1) {
     var_2 = getEntArray(var_0, "targetname");
 
     foreach(var_4 in var_2) {
-    var_4 show();
+      var_4 show();
     }
   }
 
@@ -1127,7 +1122,7 @@ fx_show_delete(var_0, var_1) {
     var_2 = getEntArray(var_1, "targetname");
 
     foreach(var_4 in var_2) {
-    var_4 delete();
+      var_4 delete();
     }
   }
 }
@@ -1513,14 +1508,11 @@ fx_screen_raindrops() {
 
         if(var_2[0] < -40) {
           playFXOnTag(level._effect["raindrops_screen_20_" + var_0], level.screenrain, "tag_origin");
-        }
-        else if(var_2[0] < -25) {
+        } else if(var_2[0] < -25) {
           playFXOnTag(level._effect["raindrops_screen_10_" + var_0], level.screenrain, "tag_origin");
-        }
-        else if(var_2[0] < 25) {
+        } else if(var_2[0] < 25) {
           playFXOnTag(level._effect["raindrops_screen_5_" + var_0], level.screenrain, "tag_origin");
-        }
-        else if(var_2[0] < 40) {
+        } else if(var_2[0] < 40) {
           playFXOnTag(level._effect["raindrops_screen_3_" + var_0], level.screenrain, "tag_origin");
         }
       }

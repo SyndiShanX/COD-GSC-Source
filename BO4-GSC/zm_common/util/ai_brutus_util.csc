@@ -10,7 +10,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\zm\ai\zm_ai_brutus;
-
 #namespace zombie_brutus_util;
 
 autoexec __init__system__() {

@@ -46,8 +46,7 @@ exceededmaxremoteuavs(var_00) {
   if(level.gametype == "dm") {
     if(isDefined(level.remote_uav[var_00]) || isDefined(level.remote_uav[level.otherteam[var_00]])) {
       return 1;
-    }
-    else {
+    } else {
       return 0;
     }
   } else if(isDefined(level.remote_uav[var_00]))
@@ -392,8 +391,7 @@ clearplayerlockfromremoteuavlaunch(var_00) {
 func_4A07(var_00, var_01, var_02, var_03, var_04) {
   if(level.console) {
     var_05 = spawnhelicopter(var_01, var_03, var_04, "remote_uav_mp", "vehicle_remote_uav");
-  }
-  else {
+  } else {
     var_05 = spawnhelicopter(var_01, var_03, var_04, "remote_uav_mp_pc", "vehicle_remote_uav");
   }
 
@@ -547,8 +545,7 @@ func_DFAA(var_00) {
 
     if(isDefined(var_4["position"])) {
       var_05 = var_4["position"];
-    }
-    else {
+    } else {
       var_05 = var_03;
       var_4["endpos"] = var_03;
     }
@@ -564,7 +561,7 @@ func_DFAA(var_00) {
       foreach(var_11 in level.teamnamelist) {
         if(var_11 != self.team) {
           foreach(var_13 in level.uavmodels[var_11]) {
-          var_9[var_9.size] = var_13;
+            var_9[var_9.size] = var_13;
           }
         }
       }
@@ -580,11 +577,9 @@ func_DFAA(var_00) {
 
     if(isDefined(var_06)) {
       var_16 = var_06;
-    }
-    else if(isDefined(var_07)) {
+    } else if(isDefined(var_07)) {
       var_16 = var_07;
-    }
-    else if(isDefined(var_08)) {
+    } else if(isDefined(var_08)) {
       var_16 = var_08;
     }
 
@@ -769,12 +764,10 @@ remoteuav_markplayer(var_00) {
 
   if(isplayer(var_00)) {
     var_00 setperk("specialty_radarblip", 1);
-  }
-  else {
+  } else {
     if(isDefined(var_0.uavtype)) {
       var_01 = "compassping_enemy_uav";
-    }
-    else {
+    } else {
       var_01 = "compassping_sentry_enemy";
     }
 
@@ -827,8 +820,7 @@ remoteuav_processtaggedassist(var_00) {
 
     if(isDefined(var_00)) {
       thread scripts\mp\gamescore::processassist(var_00);
-    }
-    else {
+    } else {
       thread scripts\mp\utility\game::giveunifiedpoints("assist");
     }
   }
@@ -845,11 +837,9 @@ func_DFAC(var_00) {
   if(isDefined(var_00)) {
     if(isplayer(self)) {
       var_02 = self.guid;
-    }
-    else if(isDefined(self.birthtime)) {
+    } else if(isDefined(self.birthtime)) {
       var_02 = self.birthtime;
-    }
-    else {
+    } else {
       var_02 = self.func_2B0C;
     }
 
@@ -866,8 +856,7 @@ func_DFAC(var_00) {
 
   if(isplayer(self)) {
     self unsetperk("specialty_radarblip", 1);
-  }
-  else {
+  } else {
     if(isDefined(self.func_DFAF)) {
       scripts\mp\objidpoolmanager::returnminimapid(self.func_DFAF);
     }
@@ -986,8 +975,7 @@ remoteuav_rangecountdown() {
 
   if(isDefined(self.heliinproximity)) {
     var_00 = 3;
-  }
-  else {
+  } else {
     var_00 = 6;
   }
 
@@ -1065,8 +1053,7 @@ remoteuav_light_fx() {
 remoteuav_dialog(var_00) {
   if(var_00 == "tag") {
     var_01 = 1000;
-  }
-  else {
+  } else {
     var_01 = 5000;
   }
 
@@ -1153,8 +1140,7 @@ watchstingerproximity(var_00) {
 
         if(isDefined(self.owner)) {
           radiusdamage(self.origin, 400, 1000, 1000, self.owner, "MOD_EXPLOSIVE", "stinger_mp");
-        }
-        else {
+        } else {
           radiusdamage(self.origin, 400, 1000, 1000, undefined, "MOD_EXPLOSIVE", "stinger_mp");
         }
 
@@ -1216,8 +1202,7 @@ watchsamproximity(var_00, var_01) {
 
           if(isDefined(var_3.owner)) {
             radiusdamage(var_3.origin, 400, 1000, 1000, var_3.owner, "MOD_EXPLOSIVE", "stinger_mp");
-          }
-          else {
+          } else {
             radiusdamage(var_3.origin, 400, 1000, 1000, undefined, "MOD_EXPLOSIVE", "stinger_mp");
           }
 
@@ -1315,8 +1300,7 @@ func_DFAE() {
 
     if(!self.inheliproximity && var_00) {
       self.inheliproximity = 1;
-    }
-    else if(self.inheliproximity && !var_00) {
+    } else if(self.inheliproximity && !var_00) {
       self.inheliproximity = 0;
       self.heliinproximity = undefined;
     }

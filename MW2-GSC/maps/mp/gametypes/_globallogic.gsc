@@ -21,7 +21,7 @@ init() {
     level.rankedMatch = true;
   }
 
-    level.script = toLower(getDvar("mapname"));
+  level.script = toLower(getDvar("mapname"));
   level.gametype = toLower(getDvar("g_gametype"));
 
   level.otherTeam["allies"] = "axis";
@@ -56,8 +56,7 @@ init() {
 
   if(level.splitScreen) {
     precacheString(&"MP_ENDED_GAME");
-  }
-  else {
+  } else {
     precacheString(&"MP_HOST_ENDED_GAME");
   }
 
@@ -122,12 +121,12 @@ runLevelAndQuit() {
   exitLevel();
 }
 
-  registerDvars() {
-    makeDvarServerInfo("ui_bomb_timer", 0);
-    makeDvarServerInfo("ui_danger_team", "");
+registerDvars() {
+  makeDvarServerInfo("ui_bomb_timer", 0);
+  makeDvarServerInfo("ui_danger_team", "");
 
-    makeDvarServerInfo("camera_thirdPerson", getDvarInt("scr_thirdPerson"));
-  }
+  makeDvarServerInfo("camera_thirdPerson", getDvarInt("scr_thirdPerson"));
+}
 
 SetupCallbacks() {
   level.onXPEvent = ::onXPEvent;
@@ -169,21 +168,21 @@ xpRateThread() {
   }
 }
 
-  testMenu() {
-    self endon("death");
-    self endon("disconnect");
+testMenu() {
+  self endon("death");
+  self endon("disconnect");
 
-    for(;;) {
-      wait(10.0);
+  for(;;) {
+    wait(10.0);
 
-      notifyData = spawnStruct();
-      notifyData.titleText = &"MP_CHALLENGE_COMPLETED";
-      notifyData.notifyText = "wheee";
-      notifyData.sound = "mp_challenge_complete";
+    notifyData = spawnStruct();
+    notifyData.titleText = &"MP_CHALLENGE_COMPLETED";
+    notifyData.notifyText = "wheee";
+    notifyData.sound = "mp_challenge_complete";
 
-      self thread maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
-    }
+    self thread maps\mp\gametypes\_hud_message::notifyMessage(notifyData);
   }
+}
 
 testShock() {
   self endon("death");

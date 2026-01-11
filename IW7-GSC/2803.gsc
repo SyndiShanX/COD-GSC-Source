@@ -218,8 +218,7 @@ func_10FAD() {
 
       if(!softsighttest(var_02)) {
         continue;
-      }
-      else {
+      } else {
         stinger_finalizelock(var_02);
       }
 

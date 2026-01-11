@@ -46,11 +46,9 @@ get_gump_info(localclientnum, test_ent, gump_trigs) {
 
     if(demoismoviecamera()) {
       self.view = level.gump_view_index_camera_movie;
-    }
-    else if(demoiseditcamera()) {
+    } else if(demoiseditcamera()) {
       self.view = level.gump_view_index_camera_edit;
-    }
-    else if(demoisdollycamera()) {
+    } else if(demoisdollycamera()) {
       self.view = level.gump_view_index_camera_dolly;
     }
   }

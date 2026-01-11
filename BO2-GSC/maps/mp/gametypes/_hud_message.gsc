@@ -224,15 +224,13 @@ shownotifymessage(notifydata, duration) {
 
   if(isDefined(notifydata.glowcolor)) {
     glowcolor = notifydata.glowcolor;
-  }
-  else {
+  } else {
     glowcolor = (0, 0, 0);
   }
 
   if(isDefined(notifydata.color)) {
     color = notifydata.color;
-  }
-  else {
+  } else {
     color = (1, 1, 1);
   }
 
@@ -241,15 +239,13 @@ shownotifymessage(notifydata, duration) {
   if(isDefined(notifydata.titletext)) {
     if(isDefined(notifydata.titlelabel)) {
       self.notifytitle.label = notifydata.titlelabel;
-    }
-    else {
+    } else {
       self.notifytitle.label = &"";
     }
 
     if(isDefined(notifydata.titlelabel) && !isDefined(notifydata.titleisstring)) {
       self.notifytitle setvalue(notifydata.titletext);
-    }
-    else {
+    } else {
       self.notifytitle settext(notifydata.titletext);
     }
 
@@ -262,15 +258,13 @@ shownotifymessage(notifydata, duration) {
   if(isDefined(notifydata.notifytext)) {
     if(isDefined(notifydata.textlabel)) {
       self.notifytext.label = notifydata.textlabel;
-    }
-    else {
+    } else {
       self.notifytext.label = &"";
     }
 
     if(isDefined(notifydata.textlabel) && !isDefined(notifydata.textisstring)) {
       self.notifytext setvalue(notifydata.notifytext);
-    }
-    else {
+    } else {
       self.notifytext settext(notifydata.notifytext);
     }
 
@@ -285,8 +279,7 @@ shownotifymessage(notifydata, duration) {
     if(self issplitscreen()) {
       if(isDefined(notifydata.text2label)) {
         self iprintlnbold(notifydata.text2label, notifydata.notifytext2);
-      }
-      else {
+      } else {
         self iprintlnbold(notifydata.notifytext2);
       }
     } else {
@@ -294,8 +287,7 @@ shownotifymessage(notifydata, duration) {
 
       if(isDefined(notifydata.text2label)) {
         self.notifytext2.label = notifydata.text2label;
-      }
-      else {
+      } else {
         self.notifytext2.label = &"";
       }
 
@@ -423,8 +415,7 @@ lowermessagethink() {
 setmatchscorehudelemforteam(team) {
   if(level.roundscorecarry) {
     self setvalue(getteamscore(team));
-  }
-  else {
+  } else {
     self setvalue(getroundswon(team));
   }
 }
@@ -503,8 +494,7 @@ teamoutcomenotify(winner, isround, endreasontext) {
   } else if(winner == "tie") {
     if(isround) {
       outcometitle settext(game["strings"]["round_draw"]);
-    }
-    else {
+    } else {
       outcometitle settext(game["strings"]["draw"]);
     }
 
@@ -513,8 +503,7 @@ teamoutcomenotify(winner, isround, endreasontext) {
   } else if(isDefined(self.pers["team"]) && winner == team) {
     if(isround) {
       outcometitle settext(game["strings"]["round_win"]);
-    }
-    else {
+    } else {
       outcometitle settext(game["strings"]["victory"]);
     }
 
@@ -526,8 +515,7 @@ teamoutcomenotify(winner, isround, endreasontext) {
   } else {
     if(isround) {
       outcometitle settext(game["strings"]["round_loss"]);
-    }
-    else {
+    } else {
       outcometitle settext(game["strings"]["defeat"]);
     }
 
@@ -581,8 +569,7 @@ teamoutcomenotify(winner, isround, endreasontext) {
 
   if(isround) {
     teamscores[team] setvalue(getteamscore(team));
-  }
-  else {
+  } else {
     teamscores[team][[level.setmatchscorehudelemforteam]](team);
   }
 
@@ -603,12 +590,10 @@ teamoutcomenotify(winner, isround, endreasontext) {
 
     if(isround) {
       teamscores[enemyteam] setvalue(getteamscore(enemyteam));
-    }
-    else {
+    } else {
       teamscores[enemyteam][
-    }
-        [level.setmatchscorehudelemforteam]
-      ](enemyteam);
+        }
+        [level.setmatchscorehudelemforteam]](enemyteam);
 
     teamscores[enemyteam].hidewheninmenu = 0;
     teamscores[enemyteam].archived = 0;
@@ -729,11 +714,9 @@ outcomenotify(winner, isroundend, endreasontext) {
 
   if(!maps\mp\_utility::isoneround() && !isroundend) {
     outcometitle settext(game["strings"]["game_over"]);
-  }
-  else if(players[0].pointstowin == 0) {
+  } else if(players[0].pointstowin == 0) {
     outcometitle settext(game["strings"]["tie"]);
-  }
-  else if(self isintop(players, 3)) {
+  } else if(self isintop(players, 3)) {
     outcometitle settext(game["strings"]["victory"]);
     outcometitle.color = (0.42, 0.68, 0.46);
   } else {
@@ -930,8 +913,7 @@ wageroutcomenotify(winner, endreasontext) {
 
       if(isDefined(players[i].wagerwinnings)) {
         secondcp.targetvalue = players[i].wagerwinnings;
-      }
-      else {
+      } else {
         secondcp.targetvalue = 0;
       }
 
@@ -1039,8 +1021,7 @@ teamwageroutcomenotify(winner, isroundend, endreasontext) {
   if(winner == "tie") {
     if(isroundend) {
       outcometitle settext(game["strings"]["round_draw"]);
-    }
-    else {
+    } else {
       outcometitle settext(game["strings"]["draw"]);
     }
 
@@ -1052,8 +1033,7 @@ teamwageroutcomenotify(winner, isroundend, endreasontext) {
   } else if(isDefined(self.pers["team"]) && winner == team) {
     if(isroundend) {
       outcometitle settext(game["strings"]["round_win"]);
-    }
-    else {
+    } else {
       outcometitle settext(game["strings"]["victory"]);
     }
 
@@ -1061,8 +1041,7 @@ teamwageroutcomenotify(winner, isroundend, endreasontext) {
   } else {
     if(isroundend) {
       outcometitle settext(game["strings"]["round_loss"]);
-    }
-    else {
+    } else {
       outcometitle settext(game["strings"]["defeat"]);
     }
 
@@ -1183,13 +1162,13 @@ resetoutcomenotify(hudelemlist1, hudelemlist2, hudelem3, hudelem4, hudelem5, hud
 
   if(isDefined(hudelemlist1)) {
     foreach(elem in hudelemlist1) {
-    destroyhudelem(elem);
+      destroyhudelem(elem);
     }
   }
 
   if(isDefined(hudelemlist2)) {
     foreach(elem in hudelemlist2) {
-    destroyhudelem(elem);
+      destroyhudelem(elem);
     }
   }
 }
@@ -1229,22 +1208,19 @@ updateoutcome(firsttitle, secondtitle, thirdtitle) {
 
     if(isDefined(firsttitle) && isDefined(players[0])) {
       firsttitle setplayernamestring(players[0]);
-    }
-    else if(isDefined(firsttitle)) {
+    } else if(isDefined(firsttitle)) {
       firsttitle.alpha = 0;
     }
 
     if(isDefined(secondtitle) && isDefined(players[1])) {
       secondtitle setplayernamestring(players[1]);
-    }
-    else if(isDefined(secondtitle)) {
+    } else if(isDefined(secondtitle)) {
       secondtitle.alpha = 0;
     }
 
     if(isDefined(thirdtitle) && isDefined(players[2])) {
       thirdtitle setplayernamestring(players[2]);
-    }
-    else if(isDefined(thirdtitle)) {
+    } else if(isDefined(thirdtitle)) {
       thirdtitle.alpha = 0;
     }
   }

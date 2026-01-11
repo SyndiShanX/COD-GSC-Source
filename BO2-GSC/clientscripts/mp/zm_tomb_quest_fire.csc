@@ -25,8 +25,7 @@ barbecue_fx_loop(localclientnum) {
 barbecue_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self thread barbecue_fx_loop(localclientnum);
-  }
-  else {
+  } else {
     self notify("stop_bbq_fx_loop");
   }
 }

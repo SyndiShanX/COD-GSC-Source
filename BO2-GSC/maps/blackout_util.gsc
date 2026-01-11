@@ -38,20 +38,15 @@
 load_gumps_blackout() {
   if(issubstr(level.skipto_point, "dev")) {
     load_gump("blackout_gump_messiah");
-  }
-  else if(is_after_skipto("mason_salazar_caught")) {
+  } else if(is_after_skipto("mason_salazar_caught")) {
     load_gump("blackout_gump_deck");
-  }
-  else if(is_after_skipto("mason_vent")) {
+  } else if(is_after_skipto("mason_vent")) {
     load_gump("blackout_gump_mason_after");
-  }
-  else if(is_after_skipto("mason_cctv")) {
+  } else if(is_after_skipto("mason_cctv")) {
     load_gump("blackout_gump_messiah");
-  }
-  else if(is_after_skipto("mason_interrogation_room")) {
+  } else if(is_after_skipto("mason_interrogation_room")) {
     load_gump("blackout_gump_mason_before");
-  }
-  else {
+  } else {
     load_gump("blackout_gump_intro");
   }
 }
@@ -328,14 +323,14 @@ elevator_models_link() {
   e_elevator_mason = get_ent("mason_elevator", "targetname", 1);
 
   foreach(model in a_models_mason) {
-  model linkto(e_elevator_mason);
+    model linkto(e_elevator_mason);
   }
 
   a_models_vtol = get_ent_array("vtol_elevator_detail", "targetname", 1);
   e_elevator_vtol = get_ent("vtol_elevator", "targetname", 1);
 
   foreach(model in a_models_vtol) {
-  model linkto(e_elevator_vtol);
+    model linkto(e_elevator_vtol);
   }
 }
 
@@ -356,8 +351,7 @@ _copy_kvps_to_target(target) {
 
   if(isDefined(self.angles)) {
     target.angles = self.angles;
-  }
-  else {
+  } else {
     target.angles = (0, 0, 0);
   }
 
@@ -382,7 +376,7 @@ elevator_disconnect_paths() {
   a_nodes = getnodearray("elevator_pathnode", "targetname");
 
   foreach(node in a_nodes) {
-  node maps\_dynamic_nodes::node_disconnect_from_path();
+    node maps\_dynamic_nodes::node_disconnect_from_path();
   }
 }
 
@@ -391,7 +385,7 @@ elevator_connect_paths() {
   a_nodes = getnodearray("elevator_pathnode", "targetname");
 
   foreach(node in a_nodes) {
-  node maps\_dynamic_nodes::node_connect_to_path();
+    node maps\_dynamic_nodes::node_connect_to_path();
   }
 
   m_mason_elevator = get_ent("mason_elevator", "targetname", 1);
@@ -423,8 +417,7 @@ skipto_check_conditional_dvars() {
 
   if(str_karma_alive == "1") {
     level.is_karma_alive = 1;
-  }
-  else if(str_karma_alive == "0") {
+  } else if(str_karma_alive == "0") {
     level.is_karma_alive = 0;
   }
 
@@ -432,8 +425,7 @@ skipto_check_conditional_dvars() {
 
   if(str_defalco_alive == "1") {
     level.is_defalco_alive = 1;
-  }
-  else if(str_defalco_alive == "0") {
+  } else if(str_defalco_alive == "0") {
     level.is_defalco_alive = 0;
   }
 
@@ -451,8 +443,7 @@ skipto_check_conditional_dvars() {
 
   if(str_briggs_alive == "1") {
     level.is_briggs_alive = 1;
-  }
-  else if(str_briggs_alive == "0") {
+  } else if(str_briggs_alive == "0") {
     level.is_briggs_alive = 0;
   }
 }
@@ -560,8 +551,7 @@ remove_dead_turret_trigger(trigger) {
 
   if(trigger.script_noteworthy == "bridge_turret_box") {
     set_objective(level.obj_hack_perk1, self, "remove", undefined, 0);
-  }
-  else {
+  } else {
     set_objective(level.obj_hack_perk2, self, "remove", undefined, 0);
   }
 
@@ -635,8 +625,7 @@ run_hackable_turret(trig) {
 
   if(trig.script_noteworthy == "bridge_turret_box") {
     set_objective(level.obj_hack_perk1, trig, "interact", undefined, 0);
-  }
-  else {
+  } else {
     set_objective(level.obj_hack_perk2, trig, "interact", undefined, 0);
   }
 
@@ -648,8 +637,7 @@ run_hackable_turret(trig) {
 
     if(trig.script_noteworthy == "bridge_turret_box") {
       set_objective(level.obj_hack_perk1, undefined, "delete");
-    }
-    else {
+    } else {
       set_objective(level.obj_hack_perk2, undefined, "delete");
     }
 
@@ -736,11 +724,9 @@ turret_hack_rumble() {
   earthquake(0.1, 1, self.origin, 1000, self);
 }
 
-become_vulnerable_callback(ai) {
-}
+become_vulnerable_callback(ai) {}
 
-become_invulnerable_callback(ai) {
-}
+become_invulnerable_callback(ai) {}
 
 #using_animtree("animated_props");
 #using_animtree("player");
@@ -796,8 +782,7 @@ breadcrumb_and_flag(breadcrumb, objective, flag_name, show_message) {
 
   if(isDefined(first_trig.target)) {
     objective_breadcrumb(objective, breadcrumb);
-  }
-  else {
+  } else {
     first_trig waittill("trigger");
   }
 
@@ -811,8 +796,7 @@ init_hero_startstruct(str_hero_name, str_struct_targetname) {
 
   if(isDefined(s_start_pos.angles)) {
     v_angles = s_start_pos.angles;
-  }
-  else {
+  } else {
     v_angles = (0, 0, 0);
   }
 
@@ -979,8 +963,7 @@ waittill_player_away(distance, distance_2d) {
   do {
     if(distance_2d) {
       my_dist_sq = distance2dsquared(self.origin, level.player.origin);
-    }
-    else {
+    } else {
       my_dist_sq = distancesquared(self.origin, level.player.origin);
     }
 
@@ -1008,8 +991,7 @@ waittill_player_nearby(distance, override_notify, distance_2d, do_trace) {
   do {
     if(distance_2d) {
       my_dist_sq = distance2dsquared(self.origin, level.player.origin);
-    }
-    else {
+    } else {
       my_dist_sq = distancesquared(self.origin, level.player.origin);
     }
 
@@ -1047,8 +1029,7 @@ give_redshirt_gas_mask() {
   if(!b_has_gas_mask) {
     if(self.model == "c_mul_neomax_la_medium") {
       str_gas_mask_model = "c_mul_neomarx_la_medium_gasmask";
-    }
-    else {
+    } else {
       str_gas_mask_model = "c_mul_neomarx_la_light_gasmask";
     }
 
@@ -1203,15 +1184,14 @@ init_kill_functions() {
   all_spawners = getspawnerarray();
 
   foreach(spawner in all_spawners) {
-  spawner add_spawn_function(::weapon_kill_reporter);
+    spawner add_spawn_function(::weapon_kill_reporter);
   }
 }
 
 min_val(a, b) {
   if(a < b) {
     return a;
-  }
-  else {
+  } else {
     return b;
   }
 }
@@ -1266,8 +1246,7 @@ set_post_branching_scene_stats() {
 
   if(!level.is_farid_alive) {
     set_farid_killed();
-  }
-  else if(level.is_defalco_alive) {
+  } else if(level.is_defalco_alive) {
     set_defalco_killed();
   }
 }
@@ -1278,16 +1257,14 @@ get_branching_scene_label() {
 
   if(level.is_defalco_alive) {
     scene_name = scene_name + "alive_";
-  }
-  else {
+  } else {
     scene_name = scene_name + "dead_";
   }
 
   if(level.is_farid_alive) {
     if(level.is_karma_alive) {
       scene_name = scene_name + "a";
-    }
-    else {
+    } else {
       scene_name = scene_name + "b";
     }
   } else if(level.is_karma_alive)
@@ -1341,8 +1318,7 @@ retrieve_story_stats() {
   level.is_farid_alive = !level.player get_story_stat("FARID_DEAD_IN_YEMEN");
   level.is_harper_alive = !level.player get_story_stat("HARPER_DEAD_IN_YEMEN");
 
-  if(level.is_farid_alive == level.is_harper_alive) {
-  }
+  if(level.is_farid_alive == level.is_harper_alive) {}
 
   if(level.is_harper_alive && level.player get_story_stat("HARPER_SCARRED")) {
     sp_harper = get_ent("harper", "targetname", 1);
@@ -1532,11 +1508,9 @@ waittill_trigger_timeout_or_notify(trigger_name, timeout_time, notify_name) {
 
   if(isDefined(timeout_time)) {
     wait(timeout_time);
-  }
-  else if(isDefined(trigger)) {
+  } else if(isDefined(trigger)) {
     trigger waittill("trigger");
-  }
-  else {
+  } else {
     self waittill(notify_name);
   }
 }
@@ -1576,8 +1550,7 @@ _populate_boat_models(n_x_min, n_x_max, n_y_min, n_y_max) {
 
         if(m_boat_model == "veh_iw_sea_slava_cruiser_des") {
           v_position = v_position + vectorscale((0, 0, 1), 250.0);
-        }
-        else if(m_boat_model == "veh_iw_arleigh_burke_des") {
+        } else if(m_boat_model == "veh_iw_arleigh_burke_des") {
           v_position = v_position + vectorscale((0, 0, 1), 1000.0);
         }
 
@@ -1609,11 +1582,9 @@ _vehicle_on_spline() {
 
     if(str_boat_vehicle == "ambient_barge") {
       vh_boat setspeed(16);
-    }
-    else if(str_boat_vehicle == "ambient_gunboat_medium") {
+    } else if(str_boat_vehicle == "ambient_gunboat_medium") {
       vh_boat setspeed(31);
-    }
-    else if(str_boat_vehicle == "ambient_gunboat_small") {
+    } else if(str_boat_vehicle == "ambient_gunboat_small") {
       vh_boat setspeed(61);
     }
 
@@ -1835,8 +1806,7 @@ fa38_init_fx(is_hovering) {
 
   if(is_true(is_hovering)) {
     self notify("hover");
-  }
-  else {
+  } else {
     self notify("fly");
   }
 }
@@ -1966,18 +1936,16 @@ fxanim_play_fx(str_model_targetname, str_joint, str_notify, str_fx) {
   e_models = getEntArray(str_model_targetname, "targetname");
 
   foreach(e_model in e_models) {
-  e_model thread fxanim_play_fx_think(str_joint, str_notify, str_fx);
+    e_model thread fxanim_play_fx_think(str_joint, str_notify, str_fx);
   }
 }
 
 play_spark_fx(e_wire) {
   if(e_wire.model == "fxanim_gp_wirespark_med_mod") {
     str_tag = "med_spark_06_jnt";
-  }
-  else if(e_wire.model == "fxanim_gp_wirespark_long_mod") {
+  } else if(e_wire.model == "fxanim_gp_wirespark_long_mod") {
     str_tag = "long_spark_06_jnt";
-  }
-  else {
+  } else {
     assertmsg(e_wire.model + " is not supported by play_spark_fx() yet");
 
   }
@@ -2042,7 +2010,7 @@ menendez_cleanup() {
   server_room_exit_door_close();
 
   foreach(salute in level.salutes) {
-  end_scene(salute.loop);
+    end_scene(salute.loop);
   }
 
   level.salutes = undefined;
@@ -2102,8 +2070,7 @@ refill_weapon_clip(weapon_name) {
 toggle_messiah_mode(mode_on) {
   if(mode_on) {
     vision_set_menendez();
-  }
-  else {
+  } else {
     vision_set_default();
   }
 }
@@ -2206,7 +2173,7 @@ cleanup_structs(str_value, str_key) {
   a_s_structs = getstructarray(str_value, str_key);
 
   foreach(s_struct in a_s_structs) {
-  s_struct structdelete();
+    s_struct structdelete();
   }
 }
 
@@ -2214,7 +2181,7 @@ give_scene_models_guns(str_scene_name) {
   a_m_guys = get_model_or_models_from_scene(str_scene_name);
 
   foreach(m_guy in a_m_guys) {
-  m_guy attach("t6_wpn_ar_xm8_world", "tag_weapon_right");
+    m_guy attach("t6_wpn_ar_xm8_world", "tag_weapon_right");
   }
 }
 
@@ -2402,7 +2369,7 @@ init_ambient_models() {
   a_s_spots = getstructarray("ambient_ship_spot", "script_noteworthy");
 
   foreach(s_spot in a_s_spots) {
-  s_spot thread ambient_model_move_loop(int(s_spot.script_string));
+    s_spot thread ambient_model_move_loop(int(s_spot.script_string));
   }
 }
 
@@ -2438,7 +2405,7 @@ init_ambient_fake_vehicle() {
   a_structs = get_struct_array("fake_ambient_vehicle_spline", "script_noteworthy");
 
   foreach(struct in a_structs) {
-  struct thread create_fake_vehicle_and_go_path();
+    struct thread create_fake_vehicle_and_go_path();
   }
 }
 
@@ -2850,8 +2817,7 @@ ambient_allies_weapons_think(n_missile_pct) {
 
     if(!isDefined(target)) {
       wait 0.05;
-    }
-    else {
+    } else {
       wait(randomfloatrange(4, 6));
     }
   }
@@ -3001,8 +2967,7 @@ emergency_light_play_cheap_fx_out_of_range_of_trigger(m_light) {
 
     if(b_inside_trigger) {
       wait 1;
-    }
-    else {
+    } else {
       self waittill("trigger");
     }
   }
@@ -3144,8 +3109,7 @@ spawn_drone_stack_formation(n_count, str_spline, n_speed) {
 get_offset_scale(i) {
   if(i % 2 == 0) {
     return i / 2 * -1;
-  }
-  else {
+  } else {
     return i - i / 2 + 0.5;
   }
 }
@@ -3314,8 +3278,7 @@ start_combat_vo_group_friendly(a_chatter_generic, str_endon_flag, a_chatter_cond
 
   if(!flag(str_endon_flag)) {
     level thread start_combat_vo_group_friendly(a_chatter_generic, str_endon_flag, a_chatter_conditional, str_conditional_flag);
-  }
-  else {
+  } else {
     _kill_all_queued_dialog("allies");
   }
 }
@@ -3346,8 +3309,7 @@ start_combat_vo_group_enemy(a_chatter_generic, str_endon_flag, a_chatter_conditi
 
   if(!flag(str_endon_flag)) {
     level thread start_combat_vo_group_enemy(a_chatter_generic, str_endon_flag, a_chatter_conditional, str_conditional_flag);
-  }
-  else {
+  } else {
     _kill_all_queued_dialog("axis");
   }
 }
@@ -3413,13 +3375,12 @@ set_force_no_cull_on_actors_during_scene(str_scene, str_flag_override) {
   a_ents = arraycombine(get_ais_from_scene(str_scene), get_model_or_models_from_scene(str_scene), 1, 0);
 
   foreach(ent in a_ents) {
-  ent setforcenocull();
+    ent setforcenocull();
   }
 
   if(!isDefined(str_flag_override)) {
     scene_wait(str_scene);
-  }
-  else {
+  } else {
     flag_wait(str_flag_override);
   }
 
@@ -3435,13 +3396,12 @@ remove_blend_times_for_scene(str_scene, str_flag_override) {
   a_ents = arraycombine(get_ais_from_scene(str_scene), get_model_or_models_from_scene(str_scene), 1, 0);
 
   foreach(ent in a_ents) {
-  notetrack_set_blend_time_zero(ent);
+    notetrack_set_blend_time_zero(ent);
   }
 
   if(!isDefined(str_flag_override)) {
     scene_wait(str_scene);
-  }
-  else {
+  } else {
     flag_wait(str_flag_override);
   }
 
@@ -3457,13 +3417,12 @@ set_blend_times_for_scene(str_scene, str_flag_override) {
   a_ents = arraycombine(get_ais_from_scene(str_scene), get_model_or_models_from_scene(str_scene), 1, 0);
 
   foreach(ent in a_ents) {
-  notetrack_set_blend_times(ent);
+    notetrack_set_blend_times(ent);
   }
 
   if(!isDefined(str_flag_override)) {
     scene_wait(str_scene);
-  }
-  else {
+  } else {
     flag_wait(str_flag_override);
   }
 
@@ -3496,8 +3455,7 @@ remove_launchers_on_easy_difficulty() {
     while(true) {
       if(getdifficulty() == "easy") {
         self custom_ai_weapon_loadout(str_secondary, undefined, self.sidearm);
-      }
-      else {
+      } else {
         self custom_ai_weapon_loadout(str_launcher, str_secondary, self.sidearm);
       }
 
@@ -3554,6 +3512,6 @@ kill_all_living_enemies() {
   a_axis = getaiarray("axis");
 
   foreach(guy in a_axis) {
-  guy delay_thread(randomfloatrange(0.5, 3.0), ::bloody_death);
+    guy delay_thread(randomfloatrange(0.5, 3.0), ::bloody_death);
   }
 }

@@ -170,8 +170,7 @@ processfaceevents(localclientnum) {
 
   if(isDefined(self.face_disable) && self.face_disable) {
     state = "face_disable";
-  }
-  else if(isDefined(self.face_death) && self.face_death) {
+  } else if(isDefined(self.face_death) && self.face_death) {
     state = "face_death";
   }
 
@@ -215,8 +214,7 @@ processfaceevents(localclientnum) {
 
     if(state == "face_disable") {
       numanims = 0;
-    }
-    else {
+    } else {
       numanims = level.facestates[state]["animation"].size;
     }
 
@@ -329,16 +327,14 @@ processfaceevents(localclientnum) {
     } else if(level.facestates[state]["statetype"] == "nullstate") {
       if(isDefined(self.face_curr_event) && isDefined(level.facestates[self.face_curr_event])) {
         self setanimknob(level.facestates[self.face_curr_event]["animation"][self.face_curr_event_idx], 1.0, 0.1, 1.0);
-      }
-      else if(isDefined(self.face_curr_base) && isDefined(level.facestates[self.face_curr_base]["animation"][self.face_curr_base_idx])) {
+      } else if(isDefined(self.face_curr_base) && isDefined(level.facestates[self.face_curr_base]["animation"][self.face_curr_base_idx])) {
         self setanimknob(level.facestates[self.face_curr_base]["animation"][self.face_curr_base_idx], 1.0, 0.1, 1.0);
       }
     }
 
     if(isDefined(self.face_curr_event)) {
       state = self waitforanypriorityreturn(self.face_curr_event);
-    }
-    else {
+    } else {
       state = self waitforanypriorityreturn(self.face_curr_base);
     }
   }
@@ -359,15 +355,13 @@ showstate(state) {
 
         if(isDefined(self.face_disable) && self.face_disable) {
           disablechar = "-";
-        }
-        else {
+        } else {
           disablechar = "+";
         }
 
         if(isDefined(self.face_death) && self.face_death) {
           deathchar = "D";
-        }
-        else {
+        } else {
           deathchar = "A";
         }
 
@@ -385,8 +379,7 @@ setfacestate(state) {
     if(isDefined(self.face_curr_event)) {
       if(is_true(self.zombie_face) && !issubstr(self.face_curr_event, "zombie_")) {
         self.face_curr_event = "zombie_" + self.face_curr_event;
-      }
-      else if(!is_true(self.zombie_face) && issubstr(self.face_curr_event, "zombie_")) {
+      } else if(!is_true(self.zombie_face) && issubstr(self.face_curr_event, "zombie_")) {
         self.face_curr_base = "face_alert";
         self.face_state = self.face_curr_base;
         return;
@@ -396,8 +389,7 @@ setfacestate(state) {
     } else if(isDefined(self.face_curr_base)) {
       if(is_true(self.zombie_face) && !issubstr(self.face_curr_base, "zombie_")) {
         self.face_curr_base = "zombie_" + self.face_curr_base;
-      }
-      else if(!is_true(self.zombie_face) && issubstr(self.face_curr_base, "zombie_")) {
+      } else if(!is_true(self.zombie_face) && issubstr(self.face_curr_base, "zombie_")) {
         self.face_curr_base = "face_alert";
       }
 

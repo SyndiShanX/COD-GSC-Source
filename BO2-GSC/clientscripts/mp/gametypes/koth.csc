@@ -14,19 +14,18 @@ main() {
   level._effect["zoneEdgeMarkerWndw"] = loadfx("maps/mp_maps/fx_mp_koth_marker_neutral_wndw");
 }
 
-onprecachegametype() {
-}
+onprecachegametype() {}
 
 hardpoint(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(level.hardpoints.size == 0) {
     hardpoints = getstructarray("koth_zone_center", "targetname");
 
     foreach(point in hardpoints) {
-    level.hardpoints[point.script_index] = point;
+      level.hardpoints[point.script_index] = point;
     }
 
     foreach(point in level.hardpoints) {
-    level.visuals[point.script_index] = getstructarray(point.target, "targetname");
+      level.visuals[point.script_index] = getstructarray(point.target, "targetname");
     }
 
     if(isDefined(level.overridemapdefinedhardpointsfunc)) {
@@ -36,7 +35,7 @@ hardpoint(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
 
   if(isDefined(level.hardpointfx[localclientnum])) {
     foreach(fx in level.hardpointfx[localclientnum]) {
-    stopfx(localclientnum, fx);
+      stopfx(localclientnum, fx);
     }
   }
 
@@ -50,8 +49,7 @@ hardpoint(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
         }
         if(isDefined(visual.angles)) {
           forward = anglesToForward(visual.angles);
-        }
-        else {
+        } else {
           forward = (0, 0, 0);
         }
 

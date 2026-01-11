@@ -226,11 +226,9 @@ player_set_shield_health(damage, max_damage) {
 
   if(shieldhealth >= 50) {
     self.shield_damage_level = 0;
-  }
-  else if(shieldhealth >= 25) {
+  } else if(shieldhealth >= 25) {
     self.shield_damage_level = 2;
-  }
-  else {
+  } else {
     self.shield_damage_level = 3;
   }
 
@@ -242,11 +240,9 @@ deployed_set_shield_health(damage, max_damage) {
 
   if(shieldhealth >= 50) {
     self.shield_damage_level = 0;
-  }
-  else if(shieldhealth >= 25) {
+  } else if(shieldhealth >= 25) {
     self.shield_damage_level = 2;
-  }
-  else {
+  } else {
     self.shield_damage_level = 3;
   }
 
@@ -359,8 +355,7 @@ is_riotshield_damage(mod, player, amount) {
   return false;
 }
 
-riotshield_damage(amount) {
-}
+riotshield_damage(amount) {}
 
 riotshield_fling_zombie(player, fling_vec, index) {
   if(!isDefined(self) || !isalive(self)) {
@@ -389,8 +384,7 @@ zombie_knockdown(player, gib) {
 
   if(isDefined(level.override_riotshield_damage_func)) {
     self[[level.override_riotshield_damage_func]](player, gib);
-  }
-  else {
+  } else {
     if(gib) {
       self.a.gib_ref = random(level.riotshield_gib_refs);
       self thread maps\mp\animscripts\zm_death::do_gib();
@@ -410,8 +404,7 @@ riotshield_knockdown_zombie(player, gib) {
   }
   if(isDefined(self.riotshield_knockdown_func)) {
     self[[self.riotshield_knockdown_func]](player, gib);
-  }
-  else {
+  } else {
     self zombie_knockdown(player, gib);
   }
 
@@ -588,8 +581,7 @@ attack_shield(shield) {
 
   if(isDefined(shield.owner.player_shield_apply_damage)) {
     shield.owner[[shield.owner.player_shield_apply_damage]](100, 0);
-  }
-  else {
+  } else {
     shield.owner player_damage_shield(100, 0);
   }
 
@@ -657,8 +649,7 @@ riotshield_debug_print(msg, color) {
   print3d(self.origin + vectorscale((0, 0, 1), 60.0), msg, color, 1, 1, 40);
 }
 
-shield_zombie_attract_func(poi) {
-}
+shield_zombie_attract_func(poi) {}
 
 shield_zombie_arrive_func(poi) {
   self endon("death");

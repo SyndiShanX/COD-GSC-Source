@@ -276,8 +276,7 @@ player_heartbeat() {
 set_player_hearbeat_rate(var_0) {
   if(!isDefined(var_0) || isstring(var_0)) {
     level.player_heartbeat_rate = 0.75;
-  }
-  else {
+  } else {
     level.player_heartbeat_rate = var_0;
   }
 }
@@ -285,8 +284,7 @@ set_player_hearbeat_rate(var_0) {
 player_playing_hurt_sounds() {
   if(level.player.health < 50) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

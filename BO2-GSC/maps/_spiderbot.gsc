@@ -53,11 +53,9 @@ build_spiderbot_anims() {
   level.spiderbot_anims[level.jump][2] = % ai_spider_idle;
 }
 
-precache_fx() {
-}
+precache_fx() {}
 
-update_idle_anim() {
-}
+update_idle_anim() {}
 
 spiderbot_animating() {
   self endon("death");
@@ -72,16 +70,13 @@ spiderbot_animating() {
     right = anglestoright(self.angles);
     side_vel = vectordot(right, velocity);
 
-    if(self ent_flag("playing_scripted_anim")) {
-    } else if(self.in_air) {
-    } else if(abs(side_vel) > 0.4 && abs(side_vel) > abs(speed)) {
+    if(self ent_flag("playing_scripted_anim")) {} else if(self.in_air) {} else if(abs(side_vel) > 0.4 && abs(side_vel) > abs(speed)) {
       anim_rate = abs(side_vel) / 15;
       anim_rate = clamp(anim_rate, 0.0, 1.5);
 
       if(side_vel < speed) {
         self setanimknoball( % ai_spider_strafe_l, % root, 1, 0.2, anim_rate);
-      }
-      else {
+      } else {
         self setanimknoball( % ai_spider_strafe_r, % root, 1, 0.2, anim_rate);
       }
 
@@ -96,8 +91,7 @@ spiderbot_animating() {
 
       if(angular_velocity[2] > 0) {
         self setanimknoball( % ai_spider_idle_turn_l, % root, 1, 0.2, anim_rate);
-      }
-      else {
+      } else {
         self setanimknoball( % ai_spider_idle_turn_r, % root, 1, 0.2, anim_rate);
       }
 
@@ -113,8 +107,7 @@ spiderbot_animating() {
 
       if(speed > next_anim_speed) {
         self.current_anim_speed++;
-      }
-      else if(speed < prev_anim_speed) {
+      } else if(speed < prev_anim_speed) {
         self.current_anim_speed--;
       }
 
@@ -150,8 +143,7 @@ watch_for_jump() {
 
       if(v_up[2] < 0.7071) {
         v_force = v_up * 165;
-      }
-      else {
+      } else {
         v_forward = v_forward * v_movement[0];
         v_right = v_right * v_movement[1];
         v_up = v_up * v_movement[2];

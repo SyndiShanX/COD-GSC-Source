@@ -211,8 +211,7 @@ add_context_sensative_timeout(var_00, var_01, var_02, var_03) {
 
   if(!isDefined(level.context_sensative_dialog_timeouts[var_00])) {
     var_04 = 1;
-  }
-  else if(!isDefined(level.context_sensative_dialog_timeouts[var_00][var_01])) {
+  } else if(!isDefined(level.context_sensative_dialog_timeouts[var_00][var_01])) {
     var_04 = 1;
   }
 
@@ -1045,8 +1044,7 @@ context_sensative_dialog_kill_thread() {
 
     if(level.enemieskilledintimewindow >= 2) {
       var_02 = "small_group";
-    }
-    else {
+    } else {
       var_02 = "single";
 
       if(randomint(3) != 1) {
@@ -1154,8 +1152,7 @@ context_sensative_dialog_play_random_group_sound(var_00, var_01, var_02) {
   if(!scripts\engine\utility::flag("allow_context_sensative_dialog")) {
     if(var_02) {
       scripts\engine\utility::flag_wait("allow_context_sensative_dialog");
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -1334,8 +1331,7 @@ debug_circle_drawlines(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_05 + 1 >= var_0.size) {
       var_07 = var_0[0];
-    }
-    else {
+    } else {
       var_07 = var_0[var_05 + 1];
     }
 

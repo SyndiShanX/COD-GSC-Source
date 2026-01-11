@@ -27,8 +27,7 @@ main() {
 
   if(isplayer(self.enemy)) {
     self meleebiteattackplayer(self.enemy);
-  }
-  else {
+  } else {
     self meleestrugglevsai();
   }
 }
@@ -53,8 +52,7 @@ killplayer(player) {
   }
   if(isDefined(self)) {
     player dodamage(damage, player.origin, self);
-  }
-  else {
+  } else {
     player dodamage(damage, player.origin);
   }
 
@@ -117,8 +115,7 @@ attackmiss() {
 
       if(dirtoenemy[0] * forward[1] - dirtoenemy[1] * forward[0] > 0) {
         self setflaggedanimrestart("miss_anim", % german_shepherd_attack_player_miss_turnr, 1, 0, 1);
-      }
-      else {
+      } else {
         self setflaggedanimrestart("miss_anim", % german_shepherd_attack_player_miss_turnl, 1, 0, 1);
       }
     }
@@ -176,8 +173,7 @@ removesafetyhealth(player) {
 
   if(healthfrac > 0.25) {
     player setnormalhealth(healthfrac - 0.25);
-  }
-  else {
+  } else {
     player setnormalhealth(0.01);
   }
 }

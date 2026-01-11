@@ -246,8 +246,7 @@ process_challenge_quad_kills(rider, n_damage) {
   if(isDefined(level.rts.kill_stats.quad_kills) && level.rts.kill_stats.quad_kills != -1) {
     if(isDefined(rider) && (isDefined(rider.quad_kill_counted) && rider.quad_kill_counted)) {
       return;
-    }
-    else if(isDefined(self.quad_kill_counted) && self.quad_kill_counted) {
+    } else if(isDefined(self.quad_kill_counted) && self.quad_kill_counted) {
       return;
     }
     if(isDefined(rider) && rider.health - n_damage > 0) {
@@ -256,8 +255,7 @@ process_challenge_quad_kills(rider, n_damage) {
     if(issubstr(level.player maps\_so_rts_support::get_player_rts_mode(), "quad")) {
       if(isDefined(rider)) {
         rider.quad_kill_counted = 1;
-      }
-      else {
+      } else {
         self.quad_kill_counted = 1;
       }
 
@@ -282,11 +280,9 @@ process_challenge_sentry_kills(str_weapon, str_means_of_death) {
 
     if(str_weapon == "auto_gun_turret_sp_minigun_rts") {
       was_turret_kill = 1;
-    }
-    else if(rts_mode == "sentry_turret_friendly") {
+    } else if(rts_mode == "sentry_turret_friendly") {
       was_turret_kill = 1;
-    }
-    else if(rts_mode == "human" && level.rts.player.usingvehicle && str_means_of_death == "MOD_UNKNOWN") {
+    } else if(rts_mode == "human" && level.rts.player.usingvehicle && str_means_of_death == "MOD_UNKNOWN") {
       was_turret_kill = 1;
     }
 

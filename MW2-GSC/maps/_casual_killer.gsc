@@ -256,8 +256,7 @@ casual_killer_startMoveTransition() {
 
   if(self casual_killer_is_jogging()) {
     startAnim = % casual_killer_jog_start;
-  }
-  else {
+  } else {
     startAnim = % casual_killer_walk_start;
   }
 
@@ -280,8 +279,7 @@ casual_killer_is_jogging() {
   if(isarray(self.run_overrideanim)) {
     if(self.run_overrideanim[0] == % casual_killer_jog_A || self.run_overrideanim[0] == % casual_killer_jog_B) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }

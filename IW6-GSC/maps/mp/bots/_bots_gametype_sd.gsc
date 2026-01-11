@@ -369,11 +369,9 @@ atk_bomber_update() {
 
       if(RandomFloat(1.0) < chance_plant_most_exposed_node) {
         best_botTarget = botTargets_sorted[0];
-      }
-      else if(RandomFloat(1.0) < chance_plant_second_most_exposed_node) {
+      } else if(RandomFloat(1.0) < chance_plant_second_most_exposed_node) {
         best_botTarget = botTargets_sorted[1];
-      }
-      else {
+      } else {
         best_botTarget = Random(botTargets_sorted);
       }
 
@@ -451,11 +449,9 @@ clear_target_zone_update() {
 
       if(IsAI(level.atk_bomber) && isDefined(level.atk_bomber.bombZoneGoal)) {
         bombZoneTarget = level.atk_bomber.bombZoneGoal;
-      }
-      else if(isDefined(level.bomb_zone_assaulting)) {
+      } else if(isDefined(level.bomb_zone_assaulting)) {
         bombZoneTarget = level.bomb_zone_assaulting;
-      }
-      else {
+      } else {
         bombZoneTarget = find_closest_bombzone_to_player(level.atk_bomber);
       }
 
@@ -519,8 +515,7 @@ bomb_defuser_update() {
         pathResult = self bot_waittill_goal_or_fail();
         if(pathResult == "bad_path") {
           self.defuser_bad_path_counter++;
-        }
-        else {
+        } else {
           break;
         }
       }
@@ -714,8 +709,7 @@ sd_press_use(time, self_end_notify, emergency_plant) {
   chance_to_prone = 0;
   if(self BotGetDifficultySetting("strategyLevel") == 1) {
     chance_to_prone = 40;
-  }
-  else if(self BotGetDifficultySetting("strategyLevel") >= 2) {
+  } else if(self BotGetDifficultySetting("strategyLevel") >= 2) {
     chance_to_prone = 80;
   }
 
@@ -744,8 +738,7 @@ notify_enemy_team_bomb_used(type) {
     hearing_dist = 0;
     if(type == "plant") {
       hearing_dist = 300 + (player BotGetDifficultySetting("strategyLevel") * 100);
-    }
-    else if(type == "defuse") {
+    } else if(type == "defuse") {
       hearing_dist = 500 + (player BotGetDifficultySetting("strategyLevel") * 500);
     }
 
@@ -953,11 +946,9 @@ initialize_sd_role() {
         random_choice = RandomInt(4);
         if(random_choice == 3 && level.allow_random_killers && strategy_level > 0) {
           self bot_set_role("random_killer");
-        }
-        else if(random_choice == 2 && level.allow_backstabbers && strategy_level > 0) {
+        } else if(random_choice == 2 && level.allow_backstabbers && strategy_level > 0) {
           self bot_set_role("backstabber");
-        }
-        else {
+        } else {
           self bot_set_role("defender");
         }
       }
@@ -1004,11 +995,9 @@ initialize_sd_role() {
 
         if(players_at_zone_0.size < players_at_zone_1.size) {
           self.defend_zone = possible_zones[0];
-        }
-        else if(players_at_zone_1.size < players_at_zone_0.size) {
+        } else if(players_at_zone_1.size < players_at_zone_0.size) {
           self.defend_zone = possible_zones[1];
-        }
-        else {
+        } else {
           self.defend_zone = Random(possible_zones);
         }
 
@@ -1040,8 +1029,7 @@ force_all_players_to_role(players, role, max_random_wait_time) {
   foreach(player in players) {
     if(isDefined(max_random_wait_time)) {
       player thread bot_set_role_delayed(role, RandomFloatRange(0.0, max_random_wait_time));
-    }
-    else {
+    } else {
       player thread bot_set_role(role);
     }
   }
@@ -1187,11 +1175,9 @@ bot_sd_ai_director_update() {
 
         if(defenders.size > 0) {
           possible_defusers = defenders;
-        }
-        else if(backstabbers.size > 0) {
+        } else if(backstabbers.size > 0) {
           possible_defusers = backstabbers;
-        }
-        else if(random_killers.size > 0) {
+        } else if(random_killers.size > 0) {
           possible_defusers = random_killers;
         }
 
@@ -1212,8 +1198,7 @@ bot_sd_ai_director_update() {
           if(isDefined(player.role)) {
             if(player.role == "atk_bomber") {
               player thread bot_set_role(undefined);
-            }
-            else if(player.role != "defend_planted_bomb") {
+            } else if(player.role != "defend_planted_bomb") {
               player thread bot_set_role_delayed("defend_planted_bomb", RandomFloatRange(0.0, 3.0));
             }
           }
@@ -1246,8 +1231,7 @@ bot_sd_ai_director_update() {
         if(should_check_role) {
           if(atk_bomber_roles.size != 1) {
             AssertMsg("No attackers chosen to plant bomb. atk_bomber_roles.size: " + atk_bomber_roles.size + ", Living Attackers: " + attackers.size);
-          }
-          else {
+          } else {
             Assert(atk_bomber_roles[0] == level.atk_bomber);
           }
         }

@@ -784,9 +784,7 @@ wait_for_player_to_take_weapon(param_00) {
     }
 
     if(isDefined(level.magicwheel_weapon_take_check)) {
-      if([
-          [level.magicwheel_weapon_take_check]
-        ](param_00, var_01, self)) {
+      if([[level.magicwheel_weapon_take_check]](param_00, var_01, self)) {
         break;
       } else {
         continue;

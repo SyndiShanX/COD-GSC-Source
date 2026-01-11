@@ -276,8 +276,7 @@ EMP_TeamTracker() {
       }
       if(!level.teamEMPed[player.team] && !player isEMPed()) {
         player enableJammedEffect(false);
-      }
-      else {
+      } else {
         player enableJammedEffect(true);
       }
     }

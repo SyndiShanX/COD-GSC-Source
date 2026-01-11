@@ -33,11 +33,9 @@ item_outline_weapon_monitor() {
 
     if(var_03 == 3) {
       enable_outline_for_player(var_01, self, get_hudoutline_item(var_01, var_02), 1, 0, "high");
-    }
-    else if(var_03 == 1) {
+    } else if(var_03 == 1) {
       enable_outline_for_player(var_01, self, 4, 1, 0, "high");
-    }
-    else {
+    } else {
       disable_outline_for_player(var_01, self);
     }
 
@@ -56,8 +54,7 @@ get_hudoutline_item(var_00, var_01) {
 
       if(var_03 > 1) {
         var_02 = 4500;
-      }
-      else {
+      } else {
         var_02 = var_0.cost * 0.5;
       }
     } else
@@ -66,8 +63,7 @@ get_hudoutline_item(var_00, var_01) {
 
   if(scripts\cp\cp_persistence::player_has_enough_currency(var_02) || scripts\engine\utility::is_true(var_0.enabled)) {
     return 3;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -134,14 +130,11 @@ get_hudoutline_for_player_health(var_00) {
 
   if(var_01 <= 0.33 || scripts\cp\cp_laststand::player_in_laststand(var_00)) {
     return 4;
-  }
-  else if(var_01 <= 0.66) {
+  } else if(var_01 <= 0.66) {
     return 5;
-  }
-  else if(var_01 <= 1.0) {
+  } else if(var_01 <= 1.0) {
     return 3;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -276,7 +269,7 @@ save_outline_settings() {
   }
 
   foreach(var_02 in var_00) {
-  level.hudoutlinesettings[var_02] = getdvar(var_02);
+    level.hudoutlinesettings[var_02] = getdvar(var_02);
   }
 }
 
@@ -287,6 +280,6 @@ restore_outline_settings() {
     return;
   }
   foreach(var_02 in var_00) {
-  setdvar(var_02, level.hudoutlinesettings[var_02]);
+    setdvar(var_02, level.hudoutlinesettings[var_02]);
   }
 }

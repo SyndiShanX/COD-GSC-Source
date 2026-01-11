@@ -166,14 +166,13 @@ main() {
 
       if(trigger.script_flag == "activate_cafeteria" || trigger.script_flag == "activate_cellblock_east" || trigger.script_flag == "activate_cellblock_west" || trigger.script_flag == "activate_cellblock_barber" || trigger.script_flag == "activate_cellblock_gondola" || trigger.script_flag == "activate_cellblock_east_west" || trigger.script_flag == "activate_warden_office") {
         continue;
-      }
-      else {
+      } else {
         if(isDefined(trigger.target)) {
           str_target = trigger.target;
           a_door_and_clip = getEntArray(str_target, "targetname");
 
           foreach(ent in a_door_and_clip) {
-          ent delete();
+            ent delete();
           }
         }
 
@@ -239,37 +238,37 @@ main() {
   a_t_travel_triggers = getEntArray("travel_trigger", "script_noteworthy");
 
   foreach(trigger in a_t_travel_triggers) {
-  trigger delete();
+    trigger delete();
   }
 
   a_e_gondola_lights = getEntArray("gondola_state_light", "targetname");
 
   foreach(light in a_e_gondola_lights) {
-  light delete();
+    light delete();
   }
 
   a_e_gondola_landing_gates = getEntArray("gondola_landing_gates", "targetname");
 
   foreach(model in a_e_gondola_landing_gates) {
-  model delete();
+    model delete();
   }
 
   a_e_gondola_landing_doors = getEntArray("gondola_landing_doors", "targetname");
 
   foreach(model in a_e_gondola_landing_doors) {
-  model delete();
+    model delete();
   }
 
   a_e_gondola_gates = getEntArray("gondola_gates", "targetname");
 
   foreach(model in a_e_gondola_gates) {
-  model delete();
+    model delete();
   }
 
   a_e_gondola_doors = getEntArray("gondola_doors", "targetname");
 
   foreach(model in a_e_gondola_doors) {
-  model delete();
+    model delete();
   }
 
   m_gondola = getent("zipline_gondola", "targetname");
@@ -286,7 +285,7 @@ main() {
   a_afterlife_props = getEntArray("afterlife_show", "targetname");
 
   foreach(m_prop in a_afterlife_props) {
-  m_prop delete();
+    m_prop delete();
   }
 
   spork_portal = getent("afterlife_show_spork", "targetname");
@@ -294,7 +293,7 @@ main() {
   a_audio = getEntArray("at_headphones", "script_noteworthy");
 
   foreach(model in a_audio) {
-  model delete();
+    model delete();
   }
 
   m_spoon_pickup = getent("pickup_spoon", "targetname");
@@ -304,7 +303,7 @@ main() {
   t_crafting_table = getEntArray("open_craftable_trigger", "targetname");
 
   foreach(trigger in t_crafting_table) {
-  trigger delete();
+    trigger delete();
   }
 
   t_warden_fence = getent("warden_fence_damage", "targetname");
@@ -360,7 +359,7 @@ main() {
   a_m_generator_core = getEntArray("generator_core", "targetname");
 
   foreach(generator in a_m_generator_core) {
-  generator delete();
+    generator delete();
   }
 
   e_playerclip = getent("electric_chair_playerclip", "targetname");

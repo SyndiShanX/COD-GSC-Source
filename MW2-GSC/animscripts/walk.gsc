@@ -59,8 +59,7 @@ DoWalkAnimOverride(walkAnim) {
   if(isarray(self.walk_overrideanim)) {
     if(isDefined(self.walk_override_weights)) {
       moveAnim = choose_from_weighted_array(self.walk_overrideanim, self.walk_override_weights);
-    }
-    else {
+    } else {
       moveAnim = self.walk_overrideanim[randomint(self.walk_overrideanim.size)];
     }
   } else {
@@ -74,8 +73,7 @@ DoWalkAnimOverride(walkAnim) {
 GetWalkAnim(desiredAnim) {
   if(self.stairsState == "up") {
     return moveAnim("stairs_up");
-  }
-  else if(self.stairsState == "down") {
+  } else if(self.stairsState == "down") {
     return moveAnim("stairs_down");
   }
 

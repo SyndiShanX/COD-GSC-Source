@@ -115,8 +115,7 @@ main() {
 
   if(level.script == "ending") {
     level._effect["light_glow_white_bulb"] = LoadFX("dust/light_shaft_motes_afchase");
-  }
-  else {
+  } else {
     level._effect["light_glow_white_bulb"] = LoadFX("misc/light_glow_white_bulb");
   }
 

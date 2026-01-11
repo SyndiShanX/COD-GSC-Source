@@ -17,8 +17,7 @@ treeburst() {
 
   if(isDefined(self.script_falldirection)) {
     yaw = self.script_falldirection;
-  }
-  else {
+  } else {
     yaw = randomint(360);
   }
 

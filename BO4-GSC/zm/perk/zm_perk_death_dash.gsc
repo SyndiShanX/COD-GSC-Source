@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_perk_death_dash;
 
 autoexec __init__system__() {
@@ -33,9 +32,9 @@ __init__() {
 
 function_27473e44() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_death_dash", #"perk_death_dash", 2000, #"hash_2f712a7c17494226", getweapon("zombie_perk_bottle_death_dash"), getweapon("zombie_perk_totem_death_dash"), #"zmperksdeathdash");
+    zm_perks::register_perk_basic_info(#"specialty_death_dash", # "perk_death_dash", 2000, # "hash_2f712a7c17494226", getweapon("zombie_perk_bottle_death_dash"), getweapon("zombie_perk_totem_death_dash"), # "zmperksdeathdash");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_death_dash", #"perk_death_dash", 2000, #"zombie/perk_death_dash", getweapon("zombie_perk_bottle_death_dash"), getweapon("zombie_perk_totem_death_dash"), #"zmperksdeathdash");
+    zm_perks::register_perk_basic_info(#"specialty_death_dash", # "perk_death_dash", 2000, # "zombie/perk_death_dash", getweapon("zombie_perk_bottle_death_dash"), getweapon("zombie_perk_totem_death_dash"), # "zmperksdeathdash");
   }
 
   zm_perks::register_perk_clientfields(#"specialty_death_dash", &register_clientfield, &set_clientfield);
@@ -81,7 +80,7 @@ take_perk(b_pause, str_perk, str_result, n_slot) {
 }
 
 private function_3b2d1c3e() {
-  self endon(#"hash_34c48ce219158e58", #"death");
+  self endon(#"hash_34c48ce219158e58", # "death");
   self thread function_607b1eb0();
 
   while(true) {
@@ -95,7 +94,7 @@ private function_3b2d1c3e() {
 
 private function_607b1eb0() {
   level endon(#"end_game");
-  self endon(#"hash_34c48ce219158e58", #"death");
+  self endon(#"hash_34c48ce219158e58", # "death");
   self.var_d675d730.var_af84e9df = 0;
 
   while(true) {
@@ -167,7 +166,7 @@ private function_3d5b29a6() {
 
 private function_f3d1b75c() {
   level endon(#"end_game");
-  self endon(#"hash_34c48ce219158e58", #"death");
+  self endon(#"hash_34c48ce219158e58", # "death");
 
   while(self getstance() === "crouch") {
     waitframe(1);
@@ -181,7 +180,7 @@ private function_f3d1b75c() {
 }
 
 function_b1d12202() {
-  self endon(#"hash_34c48ce219158e58", #"death");
+  self endon(#"hash_34c48ce219158e58", # "death");
   self clientfield::set("death_dash_trail", 1);
   self clientfield::set_to_player("death_dash_dash_postfx", 1);
   self.var_d675d730.n_kill_count = 0;
@@ -195,7 +194,7 @@ function_b1d12202() {
     var_23322f89 = 5;
   }
 
-  self waittilltimeout(var_23322f89, #"hash_ba882779cc9c10d");
+  self waittilltimeout(var_23322f89, # "hash_ba882779cc9c10d");
   self function_38139f98();
 }
 
@@ -204,7 +203,7 @@ function_aeda9580(var_8e317f6c) {
     return;
   }
 
-  self endon(#"hash_6e2a731bbdb686b8", #"hash_34c48ce219158e58", #"death", #"disconnect", #"bled_out");
+  self endon(#"hash_6e2a731bbdb686b8", # "hash_34c48ce219158e58", # "death", # "disconnect", # "bled_out");
   level endon(#"end_game");
   self.var_d675d730.var_4aee0032 = 1;
   self.var_d675d730.var_e09a4919 = gettime();
@@ -239,7 +238,7 @@ function_aeda9580(var_8e317f6c) {
 
 function_d5fc01cc() {
   s_trace = groundtrace(self.origin, self.origin + (0, 0, -96), 0, self);
-  v_pos = s_trace[#"position"];
+  v_pos = s_trace[# "position"];
   n_dist = self.origin[2] - v_pos[2];
 
   if(n_dist >= 48) {
@@ -250,7 +249,7 @@ function_d5fc01cc() {
 }
 
 function_749be7c5() {
-  self endon(#"hash_6e2a731bbdb686b8", #"hash_34c48ce219158e58", #"death", #"disconnect", #"bled_out");
+  self endon(#"hash_6e2a731bbdb686b8", # "hash_34c48ce219158e58", # "death", # "disconnect", # "bled_out");
   level endon(#"end_game");
 
   while(true) {
@@ -277,16 +276,16 @@ function_749be7c5() {
 }
 
 function_c1c51837(e_player) {
-  self endon(#"hash_34c48ce219158e58", #"death", #"disconnect", #"bled_out");
+  self endon(#"hash_34c48ce219158e58", # "death", # "disconnect", # "bled_out");
   self.var_48a548c1 = 1;
   [[e_player.var_72755c0]] - > waitinqueue(self);
   self namespace_9ff9f642::burn(#"perk_death_dash", e_player, undefined, undefined);
   self.var_b364c165 = 1;
   e_player.var_d675d730.n_kill_count++;
 
-  if(self.zm_ai_category == #"basic" || self.zm_ai_category == #"popcorn" || self.zm_ai_category == #"enhanced") {
+  if(self.zm_ai_category == # "basic" || self.zm_ai_category == # "popcorn" || self.zm_ai_category == # "enhanced") {
     if(self.no_gib !== 1) {
-      var_d3876bb9 = [&gibserverutils::gibhead, &gibserverutils::gibleftarm, &gibserverutils::gibleftleg, &gibserverutils::giblegs, &gibserverutils::gibrightarm, &gibserverutils::gibrightleg, &gibserverutils::annihilate];
+      var_d3876bb9 = [ &gibserverutils::gibhead, &gibserverutils::gibleftarm, &gibserverutils::gibleftleg, &gibserverutils::giblegs, &gibserverutils::gibrightarm, &gibserverutils::gibrightleg, &gibserverutils::annihilate];
       var_d3876bb9 = array::randomize(var_d3876bb9);
       [
         [var_d3876bb9[0]]
@@ -309,13 +308,13 @@ function_c1c51837(e_player) {
     n_damage = 1700;
 
     switch (self.zm_ai_category) {
-      case #"heavy":
+      case # "heavy":
         n_damage = 0.2 * self.maxhealth;
         break;
-      case #"miniboss":
+      case # "miniboss":
         n_damage = 0.1 * self.maxhealth;
         break;
-      case #"boss":
+      case # "boss":
         n_damage = 0.05 * self.maxhealth;
         break;
     }
@@ -327,7 +326,7 @@ function_c1c51837(e_player) {
 }
 
 function_38139f98() {
-  self endon(#"hash_34c48ce219158e58", #"death", #"disconnect", #"bled_out");
+  self endon(#"hash_34c48ce219158e58", # "death", # "disconnect", # "bled_out");
   self clientfield::set("death_dash_trail", 0);
   self clientfield::set_to_player("death_dash_dash_postfx", 0);
   self notify(#"hash_6e2a731bbdb686b8");
@@ -338,11 +337,11 @@ function_38139f98() {
 }
 
 function_1dbd75d3(var_85dcb56c) {
-  self endon(#"hash_21b3435b159fa349", #"disconnect");
+  self endon(#"hash_21b3435b159fa349", # "disconnect");
   self.var_d675d730.var_d566ea4 = 1;
 
   if(self hasperk(#"specialty_death_dash") && isDefined(self.var_d675d730.var_775a4a2a)) {
-    self zm_perks::function_2ac7579(self.var_d675d730.var_775a4a2a, 2, #"perk_death_dash");
+    self zm_perks::function_2ac7579(self.var_d675d730.var_775a4a2a, 2, # "perk_death_dash");
   }
 
   self thread function_7d72c6f9(var_85dcb56c);
@@ -351,9 +350,9 @@ function_1dbd75d3(var_85dcb56c) {
 }
 
 function_7d72c6f9(var_85dcb56c) {
-  self endon(#"hash_21b3435b159fa349", #"disconnect");
+  self endon(#"hash_21b3435b159fa349", # "disconnect");
   self.var_d675d730.var_471d9402 = var_85dcb56c;
-  self zm_perks::function_13880aa5(self.var_d675d730.var_775a4a2a, 0, #"perk_dying_wish");
+  self zm_perks::function_13880aa5(self.var_d675d730.var_775a4a2a, 0, # "perk_dying_wish");
 
   while(true) {
     wait 0.1;
@@ -363,7 +362,7 @@ function_7d72c6f9(var_85dcb56c) {
     n_percentage = math::clamp(n_percentage, 0.02, var_85dcb56c);
 
     if(self hasperk(#"specialty_death_dash") && isDefined(self.var_d675d730.var_775a4a2a)) {
-      self zm_perks::function_13880aa5(self.var_d675d730.var_775a4a2a, n_percentage, #"perk_death_dash");
+      self zm_perks::function_13880aa5(self.var_d675d730.var_775a4a2a, n_percentage, # "perk_death_dash");
     }
   }
 }
@@ -379,8 +378,8 @@ reset_cooldown() {
     assert(isDefined(self.var_d675d730.var_775a4a2a), "<dev string:x38>");
 
     if(isDefined(self.var_d675d730.var_775a4a2a)) {
-      self zm_perks::function_2ac7579(self.var_d675d730.var_775a4a2a, 1, #"perk_death_dash");
-      self zm_perks::function_13880aa5(self.var_d675d730.var_775a4a2a, 1, #"perk_death_dash");
+      self zm_perks::function_2ac7579(self.var_d675d730.var_775a4a2a, 1, # "perk_death_dash");
+      self zm_perks::function_13880aa5(self.var_d675d730.var_775a4a2a, 1, # "perk_death_dash");
     }
   }
 }
@@ -402,7 +401,7 @@ private function_69153101() {
     return false;
   }
 
-  if(level.var_2439365b === #"turret") {
+  if(level.var_2439365b === # "turret") {
     return false;
   }
 

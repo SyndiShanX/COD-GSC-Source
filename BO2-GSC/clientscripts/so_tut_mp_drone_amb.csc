@@ -181,8 +181,7 @@ trig_enter_alarm(trigplayer) {
   playSound(0, "amb_scanner_alarm", (-460, -809, -438));
 }
 
-trig_leave_alarm(trigplayer) {
-}
+trig_leave_alarm(trigplayer) {}
 
 setpoialarms(set, location) {
   origin = undefined;
@@ -204,8 +203,7 @@ setpoialarms(set, location) {
   }
   if(set == 1) {
     playloopat("amb_under_attack_alarm", origin);
-  }
-  else {
+  } else {
     stoploopat("amb_under_attack_alarm", origin);
   }
 }

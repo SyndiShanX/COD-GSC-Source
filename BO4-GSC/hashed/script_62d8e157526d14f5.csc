@@ -7,7 +7,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_e7b06f1b;
 
 autoexec __init__system__() {

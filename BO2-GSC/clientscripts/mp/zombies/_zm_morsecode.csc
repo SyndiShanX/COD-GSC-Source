@@ -157,7 +157,7 @@ morse_code_lights_on() {
       continue;
     }
     foreach(location in level.morse_code_locations[clientnum]) {
-    location._fx = playFXOnTag(clientnum, location.fx_name, location, "tag_origin");
+      location._fx = playFXOnTag(clientnum, location.fx_name, location, "tag_origin");
     }
   }
 }

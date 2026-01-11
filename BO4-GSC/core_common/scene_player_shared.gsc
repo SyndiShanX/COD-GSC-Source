@@ -21,7 +21,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\core_common\weapons_shared;
-
 #namespace scene;
 
 class class_6572d7cd: csceneplayer, csceneobject {}
@@ -171,7 +170,7 @@ class csceneplayer: csceneobject {
 
   function _camanimscripted(player, str_camera, v_origin, v_angles, n_start_time = 0) {
     player notify(#"camanimscripted");
-    player endon(#"camanimscripted", #"disconnect");
+    player endon(#"camanimscripted", # "disconnect");
 
     if(_o_scene._s scene::is_igc()) {
       player thread scene::scene_disable_player_stuff(_o_scene._s, _s);
@@ -241,8 +240,8 @@ class csceneplayer: csceneobject {
   }
 
   function function_6e4dc270(player) {
-    player endon(#"new_shot", #"disconnect");
-    _o_scene waittilltimeout(0.1, #"scene_done", #"scene_stop", #"scene_skip_completed");
+    player endon(#"new_shot", # "disconnect");
+    _o_scene waittilltimeout(0.1, # "scene_done", # "scene_stop", # "scene_skip_completed");
 
     if(_n_streamer_req != -1) {
       player playerstreamerrequest("clear", player.var_231881b1[_o_scene._str_name]);
@@ -253,8 +252,8 @@ class csceneplayer: csceneobject {
 
   function function_509b9f47(player) {
     player notify(#"hash_375ad02201949a8d");
-    player endon(#"camanimscripted", #"hash_375ad02201949a8d", #"disconnect");
-    _o_scene waittilltimeout(0.1, #"scene_done", #"scene_stop", #"scene_skip_completed");
+    player endon(#"camanimscripted", # "hash_375ad02201949a8d", # "disconnect");
+    _o_scene waittilltimeout(0.1, # "scene_done", # "scene_stop", # "scene_skip_completed");
     stop_camera(player);
 
     if(isDefined(_o_scene._b_testing) && _o_scene._b_testing) {
@@ -271,16 +270,16 @@ class csceneplayer: csceneobject {
 
     if(isDefined(var_55b4f21e.var_6eb7f9a0)) {
       switch (var_55b4f21e.var_6eb7f9a0) {
-        case #"bank1":
+        case # "bank1":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 0);
           break;
-        case #"bank2":
+        case # "bank2":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 1);
           break;
-        case #"bank3":
+        case # "bank3":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 2);
           break;
-        case #"bank4":
+        case # "bank4":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 3);
           break;
       }
@@ -504,7 +503,7 @@ class csceneplayer: csceneobject {
   }
 
   function function_d4446494(player) {
-    player endon(#"hash_7ba9e3058f933eb", #"hash_feb654ece8faa3d", #"death");
+    player endon(#"hash_7ba9e3058f933eb", # "hash_feb654ece8faa3d", # "death");
 
     while(true) {
       s_waitresult = player waittill(#"hash_940a817baf9765e");
@@ -514,75 +513,75 @@ class csceneplayer: csceneobject {
       }
 
       switch (s_waitresult.str_input) {
-        case #"move_up":
-        case #"move_down":
+        case # "move_up":
+        case # "move_down":
           if(s_waitresult.str_input == "move_up") {
             if(player gamepadusedlast()) {
-              level.interactive_shot interactive_shot::set_text(player, #"hash_66ac13c66930481e");
+              level.interactive_shot interactive_shot::set_text(player, # "hash_66ac13c66930481e");
             } else {
-              level.interactive_shot interactive_shot::set_text(player, #"hash_2e61b9986055044e");
+              level.interactive_shot interactive_shot::set_text(player, # "hash_2e61b9986055044e");
             }
           } else if(player gamepadusedlast()) {
-            level.interactive_shot interactive_shot::set_text(player, #"hash_f7f3ef0446b4447");
+            level.interactive_shot interactive_shot::set_text(player, # "hash_f7f3ef0446b4447");
           } else {
-            level.interactive_shot interactive_shot::set_text(player, #"hash_63aa233af2b054f1");
+            level.interactive_shot interactive_shot::set_text(player, # "hash_63aa233af2b054f1");
           }
 
           break;
-        case #"move_right":
-        case #"move_left":
+        case # "move_right":
+        case # "move_left":
           if(s_waitresult.str_input == "move_right") {
             if(player gamepadusedlast()) {
-              level.interactive_shot interactive_shot::set_text(player, #"hash_b89e8fe23b5a6ff");
+              level.interactive_shot interactive_shot::set_text(player, # "hash_b89e8fe23b5a6ff");
             } else {
-              level.interactive_shot interactive_shot::set_text(player, #"hash_5cafbb3ef224b89");
+              level.interactive_shot interactive_shot::set_text(player, # "hash_5cafbb3ef224b89");
             }
           } else if(player gamepadusedlast()) {
-            level.interactive_shot interactive_shot::set_text(player, #"hash_43fe6cadb07b27b2");
+            level.interactive_shot interactive_shot::set_text(player, # "hash_43fe6cadb07b27b2");
           } else {
-            level.interactive_shot interactive_shot::set_text(player, #"hash_121d78dfceea3bf2");
+            level.interactive_shot interactive_shot::set_text(player, # "hash_121d78dfceea3bf2");
           }
 
           break;
-        case #"jump":
-          level.interactive_shot interactive_shot::set_text(player, #"hash_5b57ca9476df902b");
+        case # "jump":
+          level.interactive_shot interactive_shot::set_text(player, # "hash_5b57ca9476df902b");
           break;
-        case #"stance":
-          level.interactive_shot interactive_shot::set_text(player, #"hash_30214ec564c2c09b");
+        case # "stance":
+          level.interactive_shot interactive_shot::set_text(player, # "hash_30214ec564c2c09b");
           break;
-        case #"use":
-          level.interactive_shot interactive_shot::set_text(player, #"hash_1c489083f5cdb3f6");
+        case # "use":
+          level.interactive_shot interactive_shot::set_text(player, # "hash_1c489083f5cdb3f6");
           break;
-        case #"weapon_switch":
-          level.interactive_shot interactive_shot::set_text(player, #"hash_5d8ce20bafb14fec");
+        case # "weapon_switch":
+          level.interactive_shot interactive_shot::set_text(player, # "hash_5d8ce20bafb14fec");
           break;
-        case #"sprint":
+        case # "sprint":
           if(player gamepadusedlast()) {
-            level.interactive_shot interactive_shot::set_text(player, #"hash_6b873520c198df93");
+            level.interactive_shot interactive_shot::set_text(player, # "hash_6b873520c198df93");
           } else {
-            level.interactive_shot interactive_shot::set_text(player, #"hash_7f72586820c8b86d");
+            level.interactive_shot interactive_shot::set_text(player, # "hash_7f72586820c8b86d");
           }
 
           break;
-        case #"melee":
-          level.interactive_shot interactive_shot::set_text(player, #"hash_6c4731677fa269b1");
+        case # "melee":
+          level.interactive_shot interactive_shot::set_text(player, # "hash_6c4731677fa269b1");
           break;
-        case #"attack":
+        case # "attack":
           break;
-        case #"dpad_up":
-          level.interactive_shot interactive_shot::set_text(player, #"hash_327b92f099f4b62e");
+        case # "dpad_up":
+          level.interactive_shot interactive_shot::set_text(player, # "hash_327b92f099f4b62e");
           break;
-        case #"dpad_down":
-          level.interactive_shot interactive_shot::set_text(player, #"hash_51f4288480f483f7");
+        case # "dpad_down":
+          level.interactive_shot interactive_shot::set_text(player, # "hash_51f4288480f483f7");
           break;
-        case #"dpad_left":
-          level.interactive_shot interactive_shot::set_text(player, #"hash_2f8bb64325eeac62");
+        case # "dpad_left":
+          level.interactive_shot interactive_shot::set_text(player, # "hash_2f8bb64325eeac62");
           break;
-        case #"dpad_right":
-          level.interactive_shot interactive_shot::set_text(player, #"hash_2c841879f1d933ef");
+        case # "dpad_right":
+          level.interactive_shot interactive_shot::set_text(player, # "hash_2c841879f1d933ef");
           break;
         default:
-          level.interactive_shot interactive_shot::set_text(player, #"");
+          level.interactive_shot interactive_shot::set_text(player, # "");
           break;
       }
     }
@@ -597,7 +596,7 @@ class csceneplayer: csceneobject {
     player notify(#"hash_940a817baf9765e", {
       #str_input: var_a0332034
     });
-    s_waitresult = player waittill(#"hash_7ba9e3058f933eb", #"hash_feb654ece8faa3d", #"death");
+    s_waitresult = player waittill(#"hash_7ba9e3058f933eb", # "hash_feb654ece8faa3d", # "death");
 
     if(isDefined(player) && level.interactive_shot interactive_shot::is_open(player)) {
       level.interactive_shot interactive_shot::close(player);
@@ -648,35 +647,35 @@ class csceneplayer: csceneobject {
     }
 
     switch (var_ec50a0d3.var_9532f6db) {
-      case #"move_up":
-      case #"move_down":
+      case # "move_up":
+      case # "move_down":
         v_movement = player getnormalizedmovement();
         return v_movement[0];
-      case #"move_right":
-      case #"move_left":
+      case # "move_right":
+      case # "move_left":
         v_movement = player getnormalizedmovement();
         return v_movement[1];
-      case #"jump":
+      case # "jump":
         return (player actionbuttonpressed() ? 1 : 0);
-      case #"stance":
+      case # "stance":
         return (player stancebuttonpressed() ? 1 : 0);
-      case #"use":
+      case # "use":
         return (player usebuttonpressed() ? 1 : 0);
-      case #"weapon_switch":
+      case # "weapon_switch":
         return (player weaponswitchbuttonpressed() ? 1 : 0);
-      case #"sprint":
+      case # "sprint":
         return (player sprintbuttonpressed() ? 1 : 0);
-      case #"melee":
+      case # "melee":
         return (player meleebuttonpressed() ? 1 : 0);
-      case #"attack":
+      case # "attack":
         return (!player flagsys::get(#"hash_6ce14241f77af1e7") && var_966ea21d ? 1 : 0);
-      case #"dpad_up":
+      case # "dpad_up":
         return (player actionslotonebuttonpressed() ? 1 : 0);
-      case #"dpad_down":
+      case # "dpad_down":
         return (player actionslottwobuttonpressed() ? 1 : 0);
-      case #"dpad_left":
+      case # "dpad_left":
         return (player actionslotthreebuttonpressed() ? 1 : 0);
-      case #"dpad_right":
+      case # "dpad_right":
         return (player actionslotfourbuttonpressed() ? 1 : 0);
       default:
         v_movement = player getnormalizedmovement();
@@ -724,7 +723,7 @@ class csceneplayer: csceneobject {
 
   function function_7d761e79(player) {
     player notify(#"hash_7ba9e3058f933eb");
-    player endon(#"hash_7ba9e3058f933eb", #"death");
+    player endon(#"hash_7ba9e3058f933eb", # "death");
     b_movement = 1;
     var_1c45c7f8 = 0;
     var_966ea21d = 0;
@@ -760,9 +759,7 @@ class csceneplayer: csceneobject {
       }
 
       foreach(o_obj in _o_scene._a_objects) {
-        o_obj.var_efc540b6 = [
-          [o_obj]
-        ] - > function_376c9d87(var_ec50a0d3, n_movement, player);
+        o_obj.var_efc540b6 = [[o_obj]] - > function_376c9d87(var_ec50a0d3, n_movement, player);
 
         if(!isDefined(o_obj.var_efc540b6)) {
           o_obj.var_efc540b6 = isDefined(o_obj._str_current_anim) ? o_obj._str_current_anim : csceneobject::get_animation_name(_str_shot);
@@ -1013,16 +1010,16 @@ class csceneplayer: csceneobject {
 
     if(isDefined(var_55b4f21e.var_143deeac)) {
       switch (var_55b4f21e.var_143deeac) {
-        case #"bank1":
+        case # "bank1":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 0);
           break;
-        case #"bank2":
+        case # "bank2":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 1);
           break;
-        case #"bank3":
+        case # "bank3":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 2);
           break;
-        case #"bank4":
+        case # "bank4":
           player clientfield::set_to_player("player_pbg_bank_scene_system", 3);
           break;
       }
@@ -1308,7 +1305,7 @@ class csceneplayer: csceneobject {
 
     self notify(#"hash_30095f69ee804b7e");
     self endon(#"hash_30095f69ee804b7e");
-    _o_scene endon(#"scene_done", #"scene_stop", #"scene_skip_completed", #"hash_3168dab591a18b9b");
+    _o_scene endon(#"scene_done", # "scene_stop", # "scene_skip_completed", # "hash_3168dab591a18b9b");
     s_waitresult = _e waittill(#"death");
     var_1f97724a = 1;
     _e notify(#"hash_6e7fd8207fd988c6", {

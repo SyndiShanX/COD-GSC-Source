@@ -425,8 +425,7 @@ menu_fx_option_set() {
 
     if(temparray.size == 3) {
       setting = (float(temparray[0]), float(temparray[1]), float(temparray[2]));
-    }
-    else {
+    } else {
       clear_settable_fx();
       return;
     }
@@ -468,8 +467,7 @@ menu_selection() {
 
   if(level.selected_fx_ents.size < 1) {
     set_fx_hudelement("No ent is selected.");
-  }
-  else {
+  } else {
     for(i = level.effect_list_offset; i < level.createfx_options.size; i++) {
       if(drawncount > level.effect_list_offset_max) {
         break;
@@ -704,8 +702,7 @@ draw_effects_list(title) {
 
   if(level.effect_list_offset >= keys.size) {
     level.effect_list_offset = 0;
-  }
-  else if(level.effect_list_offset < 0) {
+  } else if(level.effect_list_offset < 0) {
     level.effect_list_offset = int(floor(keys.size / level.effect_list_offset_max) * level.effect_list_offset_max);
   }
 

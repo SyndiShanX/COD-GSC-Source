@@ -43,8 +43,7 @@ setup_player() {
 
     if(isDefined(var_1.angles)) {
       level.player setplayerangles(var_1.angles);
-    }
-    else {
+    } else {
       iprintlnbold("Your script_struct " + level.start_point + "_start has no angles! Set some.");
     }
   } else {}
@@ -76,8 +75,7 @@ spawn_ally(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_2 = level.start_point + "_" + var_0;
-  }
-  else {
+  } else {
     var_2 = var_1 + "_" + var_0;
   }
 
@@ -254,13 +252,13 @@ show_dufflebags(var_0) {
     var_3 = get_bag_parts();
 
     foreach(var_5 in var_3) {
-    var_2 showpart(var_5);
+      var_2 showpart(var_5);
     }
   }
 
   if(isDefined(var_0) && var_0 == 1) {
     foreach(var_9 in level.bags) {
-    var_9 hide();
+      var_9 hide();
     }
   }
 }
@@ -270,13 +268,13 @@ hide_dufflebags(var_0) {
     var_3 = get_bag_parts();
 
     foreach(var_5 in var_3) {
-    var_2 hidepart(var_5);
+      var_2 hidepart(var_5);
     }
   }
 
   if(isDefined(var_0) && var_0 == 1) {
     foreach(var_9 in level.bags) {
-    var_9 show();
+      var_9 show();
     }
   }
 }
@@ -285,7 +283,7 @@ hide_dufflebag(var_0) {
   var_1 = get_bag_parts();
 
   foreach(var_3 in var_1) {
-  self hidepart(var_3);
+    self hidepart(var_3);
   }
 
   if(isDefined(var_0) && var_0 && isDefined(self.animatedduffle)) {
@@ -297,7 +295,7 @@ show_dufflebag(var_0) {
   var_1 = get_bag_parts();
 
   foreach(var_3 in var_1) {
-  self showpart(var_3);
+    self showpart(var_3);
   }
 
   if(isDefined(var_0) && var_0 && isDefined(self.animatedduffle)) {
@@ -366,7 +364,7 @@ reassign_goal_volume(var_0, var_1) {
   var_2 = getent(var_1, "targetname");
 
   foreach(var_4 in var_0) {
-  var_4 setgoalvolumeauto(var_2);
+    var_4 setgoalvolumeauto(var_2);
   }
 }
 
@@ -463,8 +461,7 @@ hold_fire_unless_ads(var_0) {
 
   if(var_0 == "nvgs_on") {
     wait 3;
-  }
-  else {
+  } else {
     wait 0.8;
   }
 
@@ -552,8 +549,7 @@ player_dms_ahead_test() {
 
   if(isDefined(self.last_set_goalent)) {
     var_0 = self[[level.drs_ahead_test]](self.last_set_goalent, 50);
-  }
-  else if(isDefined(self.last_set_goalnode)) {
+  } else if(isDefined(self.last_set_goalnode)) {
     var_0 = self[[level.drs_ahead_test]](self.last_set_goalnode, 50);
   }
 
@@ -607,8 +603,7 @@ fire_grenade() {
     }
     if(isDefined(var_6) && var_6 == "fire_grenade") {
       var_7 = 1;
-    }
-    else {
+    } else {
       var_7 = level.player attackbuttonpressed();
     }
 
@@ -640,8 +635,7 @@ fire_grenade() {
 
         if(!common_scripts\utility::flag("rpg_spawn")) {
           var_4 = 0;
-        }
-        else if(var_4 > 200 && !common_scripts\utility::flag("enemy_cave_spawn")) {
+        } else if(var_4 > 200 && !common_scripts\utility::flag("enemy_cave_spawn")) {
           var_4 = 0;
 
           if(var_5) {
@@ -664,7 +658,7 @@ vehicle_hit_drift() {
   var_0 = getEntArray("exfil_drift_trigger", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread drift_hit();
+    var_2 thread drift_hit();
   }
 }
 
@@ -675,8 +669,7 @@ drift_hit() {
     if(var_0 maps\_vehicle::isvehicle() && isDefined(var_0) && isalive(var_0)) {
       if(var_0 == level.playerjeep) {
         playFX(loadfx("fx/treadfx/bigjump_land_snow_night"), var_0.origin);
-      }
-      else {
+      } else {
         var_1 = anglesToForward(var_0.angles);
         var_2 = var_1 * 20;
         playFX(loadfx("fx/treadfx/bigjump_land_snow_night"), var_0.origin + var_2);
@@ -718,8 +711,7 @@ add_ice_radius(var_0, var_1) {
 
     if(level.icehole_to_move < 4) {
       level.icehole_to_move++;
-    }
-    else {
+    } else {
       level.icehole_to_move = 1;
     }
 
@@ -887,8 +879,7 @@ play_crash_anim(var_0) {
 
       if(var_11 > 0) {
         dynamic_icehole_crash(self, 0);
-      }
-      else {
+      } else {
         dynamic_icehole_crash(self, 1);
       }
     }
@@ -948,11 +939,9 @@ play_icehole_anim(var_0) {
         if(var_6 < 0.95) {
           if(var_14 > 0) {
             dynamic_icehole_crash(self, 0);
-          }
-          else if(var_8 > 0.965) {
+          } else if(var_8 > 0.965) {
             dynamic_icehole_crash(self, 2);
-          }
-          else {
+          } else {
             dynamic_icehole_crash(self, 1);
           }
         } else
@@ -960,11 +949,9 @@ play_icehole_anim(var_0) {
       } else if(var_6 < 0.95) {
         if(var_14 > 0) {
           dynamic_icehole_crash(self, 1);
-        }
-        else if(var_8 > 0.965) {
+        } else if(var_8 > 0.965) {
           dynamic_icehole_crash(self, 2);
-        }
-        else {
+        } else {
           dynamic_icehole_crash(self, 0);
         }
       } else
@@ -1001,14 +988,11 @@ dynamic_icehole_crash(var_0, var_1) {
 
     if(var_1 == 0) {
       var_2 = randomint(45) + 45;
-    }
-    else if(var_1 == 1) {
+    } else if(var_1 == 1) {
       var_2 = 45 - randomint(90);
-    }
-    else if(randomint(1)) {
+    } else if(randomint(1)) {
       var_2 = randomint(90);
-    }
-    else {
+    } else {
       var_2 = randomint(90) + 270;
     }
 
@@ -1065,14 +1049,11 @@ dynamic_player_crash(var_0, var_1, var_2) {
 
   if(var_1 == 0) {
     var_3 = randomint(180) - 180;
-  }
-  else if(var_1 == 1) {
+  } else if(var_1 == 1) {
     var_3 = 0 - randomint(180);
-  }
-  else if(randomint(1)) {
+  } else if(randomint(1)) {
     var_3 = randomint(90);
-  }
-  else {
+  } else {
     var_3 = randomint(90) + 270;
   }
 
@@ -1182,8 +1163,7 @@ driver_dies(var_0) {
 vehicle_crash_guy(var_0) {
   if(!isDefined(self) || self.vehicle_position == 0) {
     return;
-  }
-  else {
+  } else {
     self.deathanim = undefined;
     self.noragdoll = undefined;
     var_0.riders = common_scripts\utility::array_remove(var_0.riders, self);
@@ -1219,8 +1199,7 @@ waittill_still(var_0, var_1) {
   while(var_2 > var_1) {
     if(isDefined(self)) {
       var_2 = self vehicle_getvelocity();
-    }
-    else {
+    } else {
       break;
     }
 
@@ -1319,8 +1298,7 @@ player_viewhands_minigun_hand(var_0) {
 
   if(var_0 == "LEFT") {
     var_1 = ::spinbuttonpressed;
-  }
-  else if(var_0 == "RIGHT") {
+  } else if(var_0 == "RIGHT") {
     var_1 = ::firebuttonpressed;
   }
 
@@ -1328,8 +1306,7 @@ player_viewhands_minigun_hand(var_0) {
 
   if(var_0 == "LEFT") {
     var_2 = "L";
-  }
-  else if(var_0 == "RIGHT") {
+  } else if(var_0 == "RIGHT") {
     var_2 = "R";
   }
 
@@ -1381,8 +1358,7 @@ player_viewhands_minigun_idle(var_0) {
 
   if(var_0 == "LEFT") {
     var_1 = "L";
-  }
-  else if(var_0 == "RIGHT") {
+  } else if(var_0 == "RIGHT") {
     var_1 = "R";
   }
 
@@ -1399,8 +1375,7 @@ player_viewhands_minigun_presed(var_0) {
 
   if(var_0 == "LEFT") {
     var_1 = "L";
-  }
-  else if(var_0 == "RIGHT") {
+  } else if(var_0 == "RIGHT") {
     var_1 = "R";
   }
 
@@ -1965,8 +1940,7 @@ ambient_animate(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2) && var_2 == 1) {
     var_8 = maps\_utility::dronespawn_bodyonly(self);
-  }
-  else {
+  } else {
     var_2 = 0;
     var_8 = maps\_utility::spawn_ai();
   }
@@ -2114,8 +2088,7 @@ screenshakefade(var_0, var_1, var_2, var_3) {
 
   if(var_5 > 0) {
     var_6 = var_0 / var_5;
-  }
-  else {
+  } else {
     var_6 = var_0;
   }
 
@@ -2124,8 +2097,7 @@ screenshakefade(var_0, var_1, var_2, var_3) {
 
   if(var_7 > 0) {
     var_9 = var_0 / var_7;
-  }
-  else {
+  } else {
     var_9 = var_0;
   }
 
@@ -2157,8 +2129,7 @@ introscreen_generic_fade_in_on_flag(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_3)) {
     maps\_hud_util::start_overlay();
-  }
-  else {
+  } else {
     maps\_hud_util::fade_out(var_3);
   }
 
@@ -2172,7 +2143,7 @@ glass_destroy_targetname(var_0) {
   var_1 = getglassarray(var_0);
 
   foreach(var_3 in var_1) {
-  destroyglass(var_3);
+    destroyglass(var_3);
   }
 }
 
@@ -2543,8 +2514,7 @@ guy_runtovehicle_custom(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_0.script_startingposition)) {
     var_7 = var_1 maps\_vehicle_aianim::vehicle_getinstart(var_0.script_startingposition);
-  }
-  else if(!var_1.usedpositions[0]) {
+  } else if(!var_1.usedpositions[0]) {
     var_7 = var_1 maps\_vehicle_aianim::vehicle_getinstart(0);
 
     if(var_2) {
@@ -2615,8 +2585,7 @@ guy_runtovehicle_custom(var_0, var_1, var_2, var_3) {
 
     if(isDefined(var_13.vehicle_getinsoundtag)) {
       var_8 = var_1 gettagorigin(var_13.vehicle_getinsoundtag);
-    }
-    else {
+    } else {
       var_8 = var_1.origin;
     }
 
@@ -2645,8 +2614,7 @@ guy_runtovehicle_custom(var_0, var_1, var_2, var_3) {
 set_run_anim_ref(var_0, var_1) {
   if(isDefined(var_1)) {
     self.alwaysrunforward = var_1;
-  }
-  else {
+  } else {
     self.alwaysrunforward = 1;
   }
 

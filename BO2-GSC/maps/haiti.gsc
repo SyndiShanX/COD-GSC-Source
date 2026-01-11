@@ -57,7 +57,7 @@ main() {
   a_m_clips = getEntArray("compile_paths_clips", "targetname");
 
   foreach(m_clip in a_m_clips) {
-  m_clip delete();
+    m_clip delete();
   }
 
   fxanim_deconstruct();
@@ -162,14 +162,11 @@ setup_skiptos() {
 load_gumps() {
   if(maps\_skipto::is_after_skipto("e5-2_sliding_door")) {
     load_gump("haiti_gump_hangar");
-  }
-  else if(maps\_skipto::is_after_skipto("e3_foyer")) {
+  } else if(maps\_skipto::is_after_skipto("e3_foyer")) {
     load_gump("haiti_gump_interior");
-  }
-  else if(maps\_skipto::is_after_skipto("e1_intro")) {
+  } else if(maps\_skipto::is_after_skipto("e1_intro")) {
     load_gump("haiti_gump_front_door");
-  }
-  else {
+  } else {
     load_gump("haiti_gump_intro");
   }
 }
@@ -397,7 +394,7 @@ delete_ent(str_targetname) {
   a_m_to_delete = getEntArray(str_targetname, "targetname");
 
   foreach(m_to_delete in a_m_to_delete) {
-  m_to_delete delete();
+    m_to_delete delete();
   }
 }
 

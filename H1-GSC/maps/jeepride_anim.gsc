@@ -186,8 +186,7 @@ play_griggs_brain_splatter_sfx(var_0) {
 play_griggs_custom_fire_sfx(var_0) {
   if(isDefined(var_0.scriptedweapon) && var_0.scriptedweapon == "wpn_h1_pst_m1911_vm") {
     var_0.scriptedweaponmodel thread maps\_utility::play_sound_on_tag("scn_griggs_drag_colt_shot", "TAG_FLASH");
-  }
-  else {
+  } else {
     var_0 thread maps\_utility::play_sound_on_tag("scn_griggs_drag_saw_shot", "TAG_FLASH");
   }
 }

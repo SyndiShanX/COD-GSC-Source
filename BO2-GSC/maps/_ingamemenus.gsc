@@ -36,8 +36,7 @@ onmenuresponse() {
     if(response == "endround") {
       if(!level.gameended) {
         level thread maps\_cooplogic::forceend();
-      }
-      else {
+      } else {
         self closemenu();
         self closeingamemenu();
       }

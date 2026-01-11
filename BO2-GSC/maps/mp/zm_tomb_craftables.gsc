@@ -27,8 +27,7 @@ randomize_craftable_spawns() {
 
     if(n_loc_index == a_alt_locations.size) {
       continue;
-    }
-    else {
+    } else {
       s_original_pos.origin = a_alt_locations[n_loc_index].origin;
       s_original_pos.angles = a_alt_locations[n_loc_index].angles;
     }
@@ -369,17 +368,13 @@ craftable_add_glow_fx() {
 
     if(issubstr(s_craftable.name, "fire")) {
       n_elem = 1;
-    }
-    else if(issubstr(s_craftable.name, "air")) {
+    } else if(issubstr(s_craftable.name, "air")) {
       n_elem = 2;
-    }
-    else if(issubstr(s_craftable.name, "lightning")) {
+    } else if(issubstr(s_craftable.name, "lightning")) {
       n_elem = 3;
-    }
-    else if(issubstr(s_craftable.name, "water")) {
+    } else if(issubstr(s_craftable.name, "water")) {
       n_elem = 4;
-    }
-    else {
+    } else {
       iprintlnbold("ERROR: Unknown staff element type in craftable_add_glow_fx: " + s_craftable.name);
 
       return;
@@ -584,7 +579,7 @@ onpickup_common(player) {
   self thread piece_pickup_conversation(player);
 
   foreach(spawn in self.spawns) {
-  spawn notify("stop_debug_position");
+    spawn notify("stop_debug_position");
   }
 }
 
@@ -792,8 +787,7 @@ quadrotor_return_condition_watcher() {
 
   if(isDefined(level.maxis_quadrotor)) {
     level notify("drone_should_return");
-  }
-  else {
+  } else {
     level notify("drone_available");
   }
 }
@@ -965,11 +959,9 @@ sqcommoncraftable() {
   level.sq_craftable = maps\mp\zombies\_zm_craftables::craftable_trigger_think("sq_common_craftable_trigger", "sq_common", "sq_common", "", 1, 0);
 }
 
-droponmover(player) {
-}
+droponmover(player) {}
 
-pickupfrommover() {
-}
+pickupfrommover() {}
 
 setup_quadrotor_purchase(player) {
   if(self.stub.weaponname == "equip_dieseldrone_zm") {
@@ -990,8 +982,7 @@ setup_quadrotor_purchase(player) {
 
     if(isDefined(self.stub.craftablestub.use_actionslot)) {
       player setactionslot(self.stub.craftablestub.use_actionslot, "weapon", "equip_dieseldrone_zm");
-    }
-    else {
+    } else {
       player setactionslot(2, "weapon", "equip_dieseldrone_zm");
     }
 
@@ -1056,8 +1047,7 @@ tomb_check_crafted_weapon_persistence(player) {
   if(self.stub.equipname == "equip_dieseldrone_zm") {
     if(level.quadrotor_status.picked_up) {
       return true;
-    }
-    else if(level.quadrotor_status.crafted) {
+    } else if(level.quadrotor_status.crafted) {
       return false;
     }
   } else if(self.stub.weaponname == "staff_air_zm" || self.stub.weaponname == "staff_fire_zm" || self.stub.weaponname == "staff_lightning_zm" || self.stub.weaponname == "staff_water_zm") {
@@ -1072,8 +1062,7 @@ tomb_check_crafted_weapon_persistence(player) {
 
       if(isDefined(level.zombie_craftablestubs[self.stub.equipname].str_taken)) {
         self.stub.hint_string = level.zombie_craftablestubs[self.stub.equipname].str_taken;
-      }
-      else {
+      } else {
         self.stub.hint_string = "";
       }
 
@@ -1098,8 +1087,7 @@ tomb_check_crafted_weapon_persistence(player) {
 is_unclaimed_staff_weapon(str_weapon) {
   if(!maps\mp\zombies\_zm_equipment::is_limited_equipment(str_weapon)) {
     return true;
-  }
-  else {
+  } else {
     s_elemental_staff = get_staff_info_from_weapon_name(str_weapon, 0);
     str_weapon_check = s_elemental_staff.weapname;
     players = get_players();
@@ -1123,8 +1111,7 @@ get_staff_info_from_weapon_name(str_name, b_base_info_only) {
     if(s_staff.weapname == str_name || s_staff.upgrade.weapname == str_name) {
       if(s_staff.charger.is_charged && !b_base_info_only) {
         return s_staff.upgrade;
-      }
-      else {
+      } else {
         return s_staff;
       }
     }
@@ -1171,8 +1158,7 @@ track_staff_weapon_respawn(player) {
   for(has_weapon = 0; isalive(player); has_weapon = 0) {
     if(isDefined(s_elemental_staff.charger.is_inserted) && s_elemental_staff.charger.is_inserted || isDefined(s_upgraded_staff.charger.is_inserted) && s_upgraded_staff.charger.is_inserted || isDefined(s_upgraded_staff.ee_in_use) && s_upgraded_staff.ee_in_use) {
       has_weapon = 1;
-    }
-    else {
+    } else {
       weapons = player getweaponslistprimaries();
 
       foreach(weapon in weapons) {
@@ -1281,6 +1267,6 @@ hide_staff_model() {
   staffs = getEntArray("craftable_staff_model", "script_noteworthy");
 
   foreach(stave in staffs) {
-  stave ghost();
+    stave ghost();
   }
 }

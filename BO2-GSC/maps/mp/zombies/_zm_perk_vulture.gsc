@@ -398,14 +398,11 @@ _vulture_model_blink_timeout(player) {
   while(i < n_frames) {
     if(i < n_flash_slow) {
       n_multiplier = n_flash_slow;
-    }
-    else if(i < n_flash_medium) {
+    } else if(i < n_flash_medium) {
       n_multiplier = 10;
-    }
-    else if(i < n_flash_fast) {
+    } else if(i < n_flash_fast) {
       n_multiplier = 5;
-    }
-    else {
+    } else {
       n_multiplier = 2;
     }
 
@@ -440,8 +437,7 @@ _vulture_spawn_fx(str_identifier, v_fx_origin, str_bonus, e_temp) {
 
   if(isplayer(self)) {
     self waittill_any(str_identifier, "disconnect", "vulture_perk_lost");
-  }
-  else {
+  } else {
     self waittill(str_identifier);
   }
 
@@ -478,8 +474,7 @@ get_vulture_drop_type() {
 
   if(n_roll < n_cutoff_ammo) {
     str_bonus = "ammo";
-  }
-  else {
+  } else {
     str_bonus = "points";
   }
 
@@ -653,8 +648,7 @@ toggle_stink_overlay(b_show_overlay) {
 
   if(b_show_overlay) {
     self thread _ramp_up_stink_overlay();
-  }
-  else {
+  } else {
     self thread _ramp_down_stink_overlay();
   }
 }
@@ -694,8 +688,7 @@ set_vulture_overlay(fraction) {
 
   if(fraction > 0) {
     state maps\mp\_visionset_mgr::vsmgr_set_state_active(self, 1 - fraction);
-  }
-  else {
+  } else {
     state maps\mp\_visionset_mgr::vsmgr_set_state_inactive(self);
   }
 }
@@ -933,8 +926,7 @@ zombies_drop_stink_on_death() {
 
   if(isDefined(self.attacker) && isplayer(self.attacker) && self.attacker hasperk("specialty_nomotionsensor")) {
     self thread do_vulture_death(self.attacker);
-  }
-  else if(isDefined(self.is_stink_zombie) && self.is_stink_zombie && isDefined(self.stink_ent)) {
+  } else if(isDefined(self.is_stink_zombie) && self.is_stink_zombie && isDefined(self.stink_ent)) {
     str_identifier = "_" + self getentitynumber() + "_" + gettime();
     self thread _drop_zombie_stink(level, str_identifier, "stink");
   }
@@ -1089,7 +1081,7 @@ _powerup_drop_think() {
 vulture_zombies_find_exit_point() {
   if(getdvarint(#"_id_38E68F2B") > 0) {
     foreach(struct in level.enemy_dog_locations) {
-    debugstar(struct.origin, 200, (1, 1, 1));
+      debugstar(struct.origin, 200, (1, 1, 1));
     }
   }
 
@@ -1121,9 +1113,8 @@ zombie_goes_to_exit_location() {
 
     if(isDefined(level.default_find_exit_position_override)) {
       b_passed_override = [
-    }
-        [level.default_find_exit_position_override]
-      ]();
+        }
+        [level.default_find_exit_position_override]]();
 
     if(!flag("wait_and_revive") && b_passed_override) {
       break;
@@ -1190,8 +1181,7 @@ get_zone_dog_locations(str_zone) {
   return a_dog_locations;
 }
 
-vulture_vision_toggle(b_enable) {
-}
+vulture_vision_toggle(b_enable) {}
 
 vulture_handle_solo_quick_revive() {
   flag_wait("initial_blackscreen_passed");

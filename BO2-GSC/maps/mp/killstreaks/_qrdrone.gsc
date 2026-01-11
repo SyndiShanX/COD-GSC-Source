@@ -251,8 +251,7 @@ updatecarryqrdroneplacement(carryqrdrone) {
         if(self attackbuttonpressed()) {
           self notify("place_carryQRDrone");
         }
-      } else {
-      }
+      } else {}
     }
 
     lastcanplacecarryqrdrone = carryqrdrone.canbeplaced;
@@ -619,8 +618,7 @@ qrdrone_update_damage_fx(health_percent) {
 
   if(isDefined(effect)) {
     qrdrone_play_single_fx_on_tag(effect, "tag_origin");
-  }
-  else if(isDefined(self.damage_fx_ent)) {
+  } else if(isDefined(self.damage_fx_ent)) {
     self.damage_fx_ent delete();
   }
 }
@@ -708,8 +706,7 @@ qrdrone_death(attacker, weapon, dir, damagetype) {
       attacker addweaponstat(weapon, "destroyed_qrdrone", 1);
       attacker maps\mp\_challenges::addflyswatterstat(weapon, self);
       attacker addweaponstat(weapon, "destroyed_controlled_killstreak", 1);
-    } else {
-    }
+    } else {}
   }
 
   self thread qrdrone_crash_movement(attacker, dir);
@@ -811,12 +808,10 @@ qrdrone_crash_accel() {
       if(randomint(100) > 40) {
         if(velocity[2] > 150.0) {
           self.crash_accel = self.crash_accel * 0.75;
-        }
-        else if(velocity[2] < 40.0 && count < 60) {
+        } else if(velocity[2] < 40.0 && count < 60) {
           if(abs(self.angles[0]) > 30 || abs(self.angles[2]) > 30) {
             self.crash_accel = randomfloatrange(160, 200);
-          }
-          else {
+          } else {
             self.crash_accel = randomfloatrange(85, 120);
           }
         }
@@ -853,8 +848,7 @@ qrdrone_watch_distance() {
 
   if(isDefined(qrdrone_height)) {
     self.maxheight = qrdrone_height.origin[2];
-  }
-  else {
+  } else {
     self.maxheight = int(maps\mp\killstreaks\_airsupport::getminimumflyheight());
   }
 
@@ -928,8 +922,7 @@ qrdrone_rangecountdown() {
 
   if(isDefined(self.heliinproximity)) {
     countdown = 6.1;
-  }
-  else {
+  } else {
     countdown = 6.1;
   }
 
@@ -1084,8 +1077,7 @@ qrdrone_light_fx() {
 qrdrone_dialog(dialoggroup) {
   if(dialoggroup == "tag") {
     waittime = 1000;
-  }
-  else {
+  } else {
     waittime = 5000;
   }
 
@@ -1108,8 +1100,7 @@ qrdrone_watchheliproximity() {
 
     if(!self.inheliproximity && inheliproximity) {
       self.inheliproximity = 1;
-    }
-    else if(self.inheliproximity && !inheliproximity) {
+    } else if(self.inheliproximity && !inheliproximity) {
       self.inheliproximity = 0;
       self.heliinproximity = undefined;
     }
@@ -1294,8 +1285,7 @@ flash_signal_failure(drone) {
 
     if(i < 6) {
       wait 0.4;
-    }
-    else {
+    } else {
       wait 0.2;
     }
 
@@ -1303,8 +1293,7 @@ flash_signal_failure(drone) {
 
     if(i < 5) {
       wait 0.2;
-    }
-    else {
+    } else {
       wait 0.1;
     }
 

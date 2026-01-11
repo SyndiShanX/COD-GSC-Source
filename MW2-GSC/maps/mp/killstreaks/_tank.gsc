@@ -22,7 +22,7 @@ init() {
   precacheModel("sentry_gun");
   precacheModel("vehicle_m1a1_abrams_d_static");
   precacheTurret( "abrams_minigun_mp" );
-	
+  	
 
   setDevDvar( "tankDir", "" );
   setDevDvar( "tankForceTrigger", 0 );
@@ -30,7 +30,7 @@ init() {
   	setDevDvar( "tankDebug", 0 );
   }
 
-	
+  	
   level.killstreakFuncs["tank"] = ::useTank;
   level.tankFire = loadfx( "explosions/large_vehicle_explosion" );
   level.tankCover = loadfx( "props/american_smoke_grenade_mp" );
@@ -39,11 +39,11 @@ init() {
   level.otherDir["reverse"] = "forward";
 
   tankSpawners = Vehicle_GetSpawnerArray();
-	
+  	
   if( !tankSpawners.size ) {
   	return;
   }
-	
+  	
   if(!isDefined( getVehicleNode( "startnode", "targetname" ) ) )
   {
   	assertEx ( !isDefined( getVehicleNode( "startnode", "targetname" ) ), "Vehicle spawn is setup but tank path is not setup in this level bug your friendly neighborhood LD.");
@@ -53,7 +53,7 @@ init() {
   level.tankSpawner["allies"] = tankSpawners[0];
   level.tankSpawner["axis"] = tankSpawners[0];
   level.pathCount = 0;
-	
+  	
   foreach ( spawner in tankSpawners )
   {
   	if( isSubStr( spawner.model, "bradley" ) ) {
@@ -64,9 +64,9 @@ init() {
   		level.tankSpawner["axis"] = spawner;
   	}
   }
-	
+  	
   level setupPaths();
-	
+  	
   */
 }
 
@@ -125,8 +125,7 @@ tryUseTank() {
 
   if(self.team == "allies") {
     tank = level.tankSpawner["allies"] spawnArmor(self, "vehicle_bradley");
-  }
-  else {
+  } else {
     tank = level.tankSpawner["axis"] spawnArmor(self, "vehicle_bmp");
   }
 
@@ -221,8 +220,7 @@ forceDirection() {
       if(self.veh_pathdir != forceDir) {
         if(forceDir == "forward") {
           self stopToForward();
-        }
-        else {
+        } else {
           self stopToReverse();
         }
       }
@@ -232,22 +230,21 @@ forceDirection() {
   }
 }
 
-  //=================================================================
-  //
-  //					Movement/Update Functions
-  //
-  //=================================================================
+//=================================================================
+//
+//					Movement/Update Functions
+//
+//=================================================================
 
-  setDirection(direction) {
-    if(self.veh_pathdir != direction) {
-      if(direction == "forward") {
-        self stopToForward();
-      }
-      else {
-        self stopToReverse();
-      }
+setDirection(direction) {
+  if(self.veh_pathdir != direction) {
+    if(direction == "forward") {
+      self stopToForward();
+    } else {
+      self stopToReverse();
     }
   }
+}
 
 setEngagementSpeed() {
   self endon("death");
@@ -381,8 +378,7 @@ checkDanger() {
 
     if(self.numEnemiesClose > 1) {
       self thread setDangerSpeed();
-    }
-    else {
+    } else {
       self thread setStandardSpeed();
     }
 
@@ -411,16 +407,15 @@ tankUpdate(startNode, waitNode) {
       wait(0.05);
     }
 
-      while(isDefined(self.changingDirection)) {
-        wait(0.05);
-      }
+    while(isDefined(self.changingDirection)) {
+      wait(0.05);
+    }
 
     endNode = self getNodeNearEnemies();
 
     if(isDefined(endNode)) {
       self.endNode = endNode;
-    }
-    else {
+    } else {
       self.endNode = undefined;
     }
 
@@ -573,15 +568,13 @@ relativeAngle(ent1) {
   if(targetCosine > 0) {
     if(targetCosine > .9) {
       return "front";
-    }
-    else {
+    } else {
       return "front_side";
     }
   } else {
     if(targetCosine < -.9) {
       return "rear";
-    }
-    else {
+    } else {
       return "rear_side";
     }
   }
@@ -645,26 +638,19 @@ drawLine(start, end, timeSlice, color) {
 modifyDamage(damageType, amount, attacker) {
   if(damageType == "MOD_RIFLE_BULLET") {
     return (amount);
-  }
-  else if(damageType == "MOD_PISTOL_BULLET") {
+  } else if(damageType == "MOD_PISTOL_BULLET") {
     return (amount);
-  }
-  else if(damageType == "MOD_IMPACT") {
+  } else if(damageType == "MOD_IMPACT") {
     return (amount);
-  }
-  else if(damageType == "MOD_MELEE") {
+  } else if(damageType == "MOD_MELEE") {
     return (0);
-  }
-  else if(damageType == "MOD_EXPLOSIVE_BULLET") {
+  } else if(damageType == "MOD_EXPLOSIVE_BULLET") {
     return (amount);
-  }
-  else if(damageType == "MOD_GRENADE") {
+  } else if(damageType == "MOD_GRENADE") {
     return (amount * 5);
-  }
-  else if(damageType == "MOD_GRENADE_SPLASH") {
+  } else if(damageType == "MOD_GRENADE_SPLASH") {
     return (amount * 5);
-  }
-  else {
+  } else {
     return amount * 10;
   }
 }
@@ -856,8 +842,7 @@ acquireTarget(targets) {
 
   if(targets.size == 1) {
     self.bestTarget = targets[0];
-  }
-  else {
+  } else {
     self.bestTarget = self getBestTarget(targets);
   }
 
@@ -1163,8 +1148,7 @@ acquireMiniTarget(targets) {
 
   if(targets.size == 1) {
     self.bestMiniTarget = targets[0];
-  }
-  else {
+  } else {
     self.bestMiniTarget = self getBestMiniTarget(targets);
   }
 
@@ -1640,8 +1624,7 @@ handleBranchNode(direction) {
 
     if(tank.veh_pathdir == "forward") {
       nextLinkNode = self getNextNode();
-    }
-    else {
+    } else {
       nextLinkNode = self getPrevNode();
     }
 
@@ -1678,26 +1661,23 @@ nodeTracker() {
     if(getDvarInt("tankForceTrigger")) {
       if(tank.veh_pathdir == "forward") {
         tank thread forceTrigger(self, self getNextNode(), tank);
-      }
-      else {
+      } else {
         tank thread forceTrigger(self, self getPrevNode(), tank);
       }
     }
 
-      tank.forwardGraphId = self.forwardGraphId;
+    tank.forwardGraphId = self.forwardGraphId;
     tank.reverseGraphId = self.reverseGraphId;
 
     if(!isDefined(self.target) || self.targetname == "branchnode") {
       nodeType = "TRANS";
-    }
-    else {
+    } else {
       nodeType = "NODE";
     }
 
     if(isDefined(wasForced)) {
       debugPrint3D(self.origin, nodeType, (1, 0.5, 0), 1, 2, 100);
-    }
-    else {
+    } else {
       debugPrint3D(self.origin, nodeType, (0, 1, 0), 1, 2, 100);
     }
   }
@@ -1767,8 +1747,7 @@ getReverseGraphNode() {
 getNextNode() {
   if(isDefined(self.target)) {
     return (GetVehicleNode(self.target, "targetname"));
-  }
-  else {
+  } else {
     return (self.next);
   }
 }
@@ -1809,8 +1788,7 @@ initNodeGraph(astarBaseNodes) {
 
       if(isDefined(checkNode.target)) {
         checkNode = GetVehicleNode(checkNode.target, "targetname");
-      }
-      else {
+      } else {
         checkNode = checkNode.next;
       }
     }
@@ -1839,8 +1817,7 @@ initNodeGraph(astarBaseNodes) {
         while(!isDefined(checkNode.graphId)) {
           if(isDefined(checkNode.target)) {
             nextNode = GetVehicleNode(checkNode.target, "targetname");
-          }
-          else {
+          } else {
             nextNode = checkNode.next;
           }
 
@@ -2021,8 +1998,7 @@ drawPath(pathNodes) {
 
     if(startNode.linkDirs[endNode.graphId] == "reverse") {
       level thread drawLink(startNode.node.origin, endNode.node.origin, (1, 0, 0));
-    }
-    else {
+    } else {
       level thread drawLink(startNode.node.origin, endNode.node.origin, (0, 1, 0));
     }
 
@@ -2041,8 +2017,7 @@ drawPath(pathNodes) {
 
         if(isDefined(vehNode.target)) {
           vehNode = GetVehicleNode(vehNode.target, "targetname");
-        }
-        else {
+        } else {
           vehNode = vehNode.next;
         }
 

@@ -4,7 +4,6 @@
 **************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace ct_shared_aar_medals;
 
 class cct_shared_aar_medals: cluielem {
@@ -50,15 +49,15 @@ class cct_shared_aar_medals: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"ct_shared_aar_medals");
+    cluielem::open(localclientnum, # "ct_shared_aar_medals");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, #"defaultstate");
-    set_data(localclientnum, "medalGoldThreshold", #"");
-    set_data(localclientnum, "medalSilverThreshold", #"");
-    set_data(localclientnum, "medalBronzeThreshold", #"");
+    set_state(localclientnum, # "defaultstate");
+    set_data(localclientnum, "medalGoldThreshold", # "");
+    set_data(localclientnum, "medalSilverThreshold", # "");
+    set_data(localclientnum, "medalBronzeThreshold", # "");
   }
 
   function register_clientside(uid) {

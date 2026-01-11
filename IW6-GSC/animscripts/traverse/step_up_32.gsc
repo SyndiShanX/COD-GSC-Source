@@ -6,8 +6,7 @@
 main() {
   if(self.type == "dog") {
     animscripts\traverse\shared::dog_jump_up(32.0, 5);
-  }
-  else {
+  } else {
     low_wall_human();
   }
 }

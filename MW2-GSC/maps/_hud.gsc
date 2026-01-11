@@ -69,8 +69,7 @@ init() {
 
   if(level.console) {
     level.fontHeight = 12;
-  }
-  else {
+  } else {
     level.fontHeight = 12;
   }
 }

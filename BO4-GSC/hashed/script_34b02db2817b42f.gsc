@@ -20,7 +20,6 @@
 #include scripts\zm_common\zm_ui_inventory;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_90b0490e;
 
 preload() {
@@ -57,7 +56,7 @@ preload() {
     array::run_all(a_parts, &delete);
   }
 
-  clientfield::register("scriptmover", "" + #"hash_2184dd4e9090521f", 20000, 1, "int");
+  clientfield::register("scriptmover", "" + # "hash_2184dd4e9090521f", 20000, 1, "int");
   namespace_bd74bbd2::register(#"sc_mk2z_1", 20000, "sc_mk2z_1", &function_a66f0de2, &function_17f3e9e2);
   namespace_bd74bbd2::register(#"sc_mk2z_2", 20000, "sc_mk2z_2", &function_a66f0de2, &function_17f3e9e2);
   namespace_bd74bbd2::register(#"sc_mk2z_3", 20000, "sc_mk2z_3", &function_a66f0de2, &function_17f3e9e2);
@@ -108,7 +107,7 @@ private start_step_1() {
 
   iprintlnbold("<dev string:x50>" + level.var_74170866.s_cabinet.script_string + "<dev string:x5a>");
 
-    level.var_74170866.n_step = 1;
+  level.var_74170866.n_step = 1;
   s_cabinet = level.var_74170866.s_cabinet;
   e_canister = util::spawn_model(s_cabinet.model, s_cabinet.origin, s_cabinet.angles);
   s_cabinet.e_canister = e_canister;
@@ -116,7 +115,7 @@ private start_step_1() {
 }
 
 private run_step_1() {
-  level endon(#"end_game", #"insanity_mode_triggered");
+  level endon(#"end_game", # "insanity_mode_triggered");
 
   if(isDefined(level.var_74170866.s_cabinet.a_e_doors[0])) {
     exploder::exploder("fxexp_mk2_Z_smoke_orange_emit_closet_" + level.var_74170866.s_cabinet.script_string);
@@ -146,7 +145,7 @@ private run_step_1() {
 }
 
 function_4b4ede() {
-  self endon(#"death", #"burn_cabinet");
+  self endon(#"death", # "burn_cabinet");
 
   while(true) {
     s_notify = self waittill(#"damage");
@@ -165,7 +164,7 @@ function_4b4ede() {
 }
 
 function_e08b0124(e_player) {
-  self sethintstringforplayer(e_player, zm_utility::function_d6046228(#"hash_12346bdab086516e", #"hash_184ab2db21c5bc9a"));
+  self sethintstringforplayer(e_player, zm_utility::function_d6046228(#"hash_12346bdab086516e", # "hash_184ab2db21c5bc9a"));
   return true;
 }
 
@@ -175,7 +174,7 @@ private function_9d66ea6f(e_item, e_player) {
     println(e_player.name + "<dev string:x65>");
   }
 
-    level.var_74170866.e_player = e_player;
+  level.var_74170866.e_player = e_player;
   namespace_a01a2431::function_605e5c25(e_player);
   e_player.var_9c20e2c9 = 1;
   e_player playSound("evt_canister_pickup");
@@ -195,10 +194,10 @@ private function_9d66ea6f(e_item, e_player) {
 private start_step_2() {
   iprintlnbold("<dev string:x92>");
 
-    if(zm_white_main_quest::function_6cebbce1()) {
-      iprintlnbold("<dev string:xaa>");
+  if(zm_white_main_quest::function_6cebbce1()) {
+    iprintlnbold("<dev string:xaa>");
 
-    }
+  }
 
   while(zm_white_main_quest::function_6cebbce1()) {
     wait 3;
@@ -210,12 +209,12 @@ private start_step_2() {
 }
 
 private run_step_2() {
-  level endon(#"end_game", #"hash_7456b125dbebe41c");
+  level endon(#"end_game", # "hash_7456b125dbebe41c");
   pixbeginevent(#"hash_2573979b6db7cb52");
 
   iprintlnbold("<dev string:xfe>" + level.var_74170866.s_fireplace.script_string);
 
-    level.var_74170866.s_fireplace.var_7126b6eb triggerenable(1);
+  level.var_74170866.s_fireplace.var_7126b6eb triggerenable(1);
   level thread function_7130498();
   level thread function_20b366ef();
   level flag::wait_till(#"chimney_grenaded");
@@ -245,7 +244,7 @@ function_7130498() {
     if(istouching(waitresult.position, level.var_74170866.s_fireplace.var_7126b6eb)) {
       iprintlnbold("<dev string:x10f>");
 
-        level flag::set(#"chimney_grenaded");
+      level flag::set(#"chimney_grenaded");
     }
   }
 }
@@ -260,7 +259,7 @@ function_20b366ef() {
     if(istouching(v_origin, level.var_74170866.s_fireplace.var_7126b6eb)) {
       iprintlnbold("<dev string:x13c>");
 
-        level flag::set(#"chimney_grenaded");
+      level flag::set(#"chimney_grenaded");
     }
   }
 }
@@ -273,7 +272,7 @@ private start_step_3() {
 }
 
 private function_473f437() {
-  self endon(#"death", #"stop_think");
+  self endon(#"death", # "stop_think");
 
   while(true) {
     s_notify = self waittill(#"trigger_activated");
@@ -294,7 +293,7 @@ private function_a66f0de2() {
   s_unitrigger = level.var_74170866.var_fead3ae9 zm_item_pickup::create_item_pickup(&function_b9a31cb, &function_f6048ee, &function_5b4f9f76, 96);
   zm_unitrigger::unitrigger_force_per_player_triggers(s_unitrigger);
   level.var_74170866.var_fead3ae9 setModel("p8_zm_whi_fuse_pickup_fluid_magenta_pink");
-  level.var_74170866.var_fead3ae9 clientfield::set("" + #"hash_2184dd4e9090521f", 1);
+  level.var_74170866.var_fead3ae9 clientfield::set("" + # "hash_2184dd4e9090521f", 1);
 }
 
 private function_b9a31cb(e_item, e_player) {
@@ -303,7 +302,7 @@ private function_b9a31cb(e_item, e_player) {
     println(e_player.name + "<dev string:x16d>");
   }
 
-    exploder::stop_exploder("fxexp_mk2_Z_fire_chimney_" + level.var_74170866.s_fireplace.script_string + "_house");
+  exploder::stop_exploder("fxexp_mk2_Z_fire_chimney_" + level.var_74170866.s_fireplace.script_string + "_house");
   zm_ui_inventory::function_7df6bb60("zm_white_ww_mk2z_ammo", 2, e_player);
   e_player.var_f7694097 = 3;
   e_player playSound("evt_canister_pickup");
@@ -389,7 +388,7 @@ private complete_quest() {
     println(level.var_74170866.e_player.name + "<dev string:x18a>");
   }
 
-    level.var_74170866.e_player = undefined;
+  level.var_74170866.e_player = undefined;
   level.var_74170866.n_step = 5;
 }
 

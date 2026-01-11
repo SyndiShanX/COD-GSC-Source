@@ -755,7 +755,7 @@ setCrateLook(crate, outlineNum, HUDColor) {
   crate.outlineColor = outlineNum;
 
   foreach(icon in crate.entityHeadIcons) {
-  icon.color = HUDColor;
+    icon.color = HUDColor;
   }
 }
 

@@ -309,9 +309,7 @@ list_menu(list, x, y, scale, func, sort, start_num) {
     if(current_num != old_num) {
       old_num = current_num;
       if(isDefined(func)) {
-        [
-          [func]
-        ](list[current_num]);
+        [[func]](list[current_num]);
       }
     }
     wait(0.1);

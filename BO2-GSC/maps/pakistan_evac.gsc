@@ -260,8 +260,7 @@ player_enters_hanger() {
 
   if(level.harper_face_burn == 1) {
     level.harper force_goal(v_harper_idle_pos, 16, 0);
-  }
-  else {
+  } else {
     level.harper force_goal(v_harper_idle_pos, 16, 0);
   }
 
@@ -505,8 +504,7 @@ standoff_ai_setup() {
   level notify("standoff_ai_setup_done");
 }
 
-soldier_stance(str_suffix, str_align_targetname) {
-}
+soldier_stance(str_suffix, str_align_targetname) {}
 
 standoff_aim_chinese() {
   self endon("death");

@@ -407,9 +407,9 @@ roadkill_dialogue() {
   /*
   Shepherd: I don't care how many rpgs they have. The time line dictates that we cross this river in 4 minutes, and we will be on time.
   Foley: Yes sir. (Foley whistles up at the bridge and signals for them to start).
-	
+  	
   Foley: Hunter two! Keep the pressure on the rpg teams. If the bridge layer gets hit, shepherd will make us swim.
-	
+  	
   Foley: Up there! They're making a push for the bridge layer! Beat them back!
   Foley: They're retreating, keep hitting them!
   Foley: Hunter two! The bridge is finished, we're oscar mike! Move out!
@@ -418,20 +418,20 @@ roadkill_dialogue() {
   Dunn: Weren't you listening? Shepherd called in a major fire mission.
   AR3: Won't that be danger close for the task force?
   Dunn: Since when does Shepherd care about danger close?
-	
+  	
   <Coughing sounds>
-	
+  	
   later at the end of the ride:
   Straight ahead, top floor, he's got an RPG!
 
   in school:
   Hunter 2-3, We're in the school. Heavy resistance.
   Copy that hunter 2-1.
-	
+  	
   Upstairs:
   "I'm cutting through history class."
   "Roger that."
-	
+  	
   */
 
   /*
@@ -441,13 +441,13 @@ roadkill_dialogue() {
 
   // Brodsky, use your Javelin to take out the armor!	
   level.scr_sound[ "generic" ][ "roadkill_fly_takeoutarmor" ] = "roadkill_fly_takeoutarmor";
-	
+  	
   // Brodsky, switch to your Javelin!	
   level.scr_sound[ "generic" ][ "roadkill_fly_switchtojavelin" ] = "roadkill_fly_switchtojavelin";
-	
+  	
   // Engage that armored vehicle across the river! 	
   level.scr_sound[ "generic" ][ "roadkill_fly_acrossriver" ] = "roadkill_fly_acrossriver";
-	
+  	
   // Target that armored vehicle with your Javelin!	
   level.scr_sound[ "generic" ][ "roadkill_fly_targetvehicle" ] = "roadkill_fly_targetvehicle";
 
@@ -457,41 +457,41 @@ roadkill_dialogue() {
   // Brodsky - good job on taking out the enemy armor. Now let's get over there and take that town.	
   level.scr_sound[ "generic" ][ "roadkill_shp_taketown" ] = "roadkill_shp_taketown";
 
-	
+  	
   // Hu-ahh!! What was that, a 1000 pounder?	
   level.scr_sound[ "generic" ][ "roadkill_ar3_whatwasthat" ] = "roadkill_ar3_whatwasthat";
-	
+  	
   // I dunno but damn that was kick ass, huah?	
   level.scr_sound[ "generic" ][ "roadkill_ar4_idunno" ] = "roadkill_ar4_idunno";
-	
+  	
   // Goliath Actual to Hunter 2-1, what's going on out there, over?	
   level.scr_radio[ "roadkill_ar3_goingon" ] = "roadkill_ar3_goingon";
-	
+  	
   // Hunter 2-1 to Goliath Actual, we took fire and were separated from Hunter 2-3! We're working our way back around, over!	
   level.scr_sound[ "generic" ][ "roadkill_fly_tookfire" ] = "roadkill_fly_tookfire";
-	
+  	
   // Goliath Actual solid copy.	
   level.scr_radio[ "roadkill_ar3_solidcopy" ] = "roadkill_ar3_solidcopy";
-	
+  	
 
   // Wonder what's got him all worked up?	
   level.scr_sound[ "generic" ][ "roadkill_cpd_allworkedup" ] = "roadkill_cpd_allworkedup";
-	
+  	
   // Stop stop stop!	
   level.scr_sound[ "generic" ][ "roadkill_cpd_stopstopstop" ] = "roadkill_cpd_stopstopstop";
 
   // What's going on?	
   level.scr_sound[ "generic" ][ "roadkill_fly_whatsgoingon" ] = "roadkill_fly_whatsgoingon";
-	
+  	
   // We're being shot at!	
   level.scr_sound[ "generic" ][ "roadkill_cpd_beingshotat" ] = "roadkill_cpd_beingshotat";
-	
+  	
   // Quick, he's getting away!	
   level.scr_sound[ "generic" ][ "roadkill_ar1_gettingaway" ] = "roadkill_ar1_gettingaway";
-	
+  	
   // You got him you got him!	
   level.scr_sound[ "generic" ][ "roadkill_ar1_yougothim" ] = "roadkill_ar1_yougothim";
-	
+  	
   // Nice, nice!	
   level.scr_sound[ "generic" ][ "roadkill_cpd_nicenice" ] = "roadkill_cpd_nicenice";
 
@@ -500,8 +500,8 @@ roadkill_dialogue() {
 
   // Nevermind, Allen handled it	
   level.scr_sound[ "generic" ][ "roadkill_cpd_handledit" ] = "roadkill_cpd_handledit";
-	
-	
+  	
+  	
   */
 
   // Allen! Switch to your M203!			
@@ -995,43 +995,43 @@ roadkill_dialogue() {
   /*
   // Shot. Nine o'clock. Three hundred twenty six meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Twelve o'clock. One hundred fifteen meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Three o'clock. Three hundred fifty seven meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Six o'clock. Three hundred eighty one meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Seven o'clock. One hundred ten meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Six o'clock. Four hundred twenty three meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Eleven o'clock. One hundred eight meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Twelve o'clock. Eighty six meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Nine o'clock. Two hundred eighty five meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Six o'clock. Five hundred sixty meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Seven o'clock. Two hundred fifty two meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Nine o'clock. Three hundred eighty one meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Nine o'clock. Three hundred thirty two meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
-	
+  	
   // Shot. Three o'clock. Two hundred seventy seven meters
   level.scr_sound[ "generic" ][ ".	" ] = ".	";
   */
@@ -1155,87 +1155,87 @@ roadkill_dialogue() {
   level.scr_sound["generic"]["roadkill_fly_getflashbang"] = "roadkill_fly_getflashbang";
 
   /*
-	
-	
-	
-	
-	
-	
-	hold your dispersion
-	hitman 2 says alpha cleared this town under heavy fire
-	no causies were reported
-	bro why'd they shoot at us
-	contact right
-	here we go boys
-	yeah, happy birthday
-	try not to get shot in the face
-	
-	2nd floor balcony, shoot that mfucker
-	I'm losing her
-	don't leave me
-	shoot that fucking gunner
-	hit that building
-	
-	increase the rate of fire
-	get some get some
-	gogogogogo
-	
-	slow down
-	fuck mark nineteen's down
-	I got one, saw his knee explode
-	
-	
-	
-	contact 12 o clock!
+  	
+  	
+  	
+  	
+  	
+  	
+  	hold your dispersion
+  	hitman 2 says alpha cleared this town under heavy fire
+  	no causies were reported
+  	bro why'd they shoot at us
+  	contact right
+  	here we go boys
+  	yeah, happy birthday
+  	try not to get shot in the face
+  	
+  	2nd floor balcony, shoot that mfucker
+  	I'm losing her
+  	don't leave me
+  	shoot that fucking gunner
+  	hit that building
+  	
+  	increase the rate of fire
+  	get some get some
+  	gogogogogo
+  	
+  	slow down
+  	fuck mark nineteen's down
+  	I got one, saw his knee explode
+  	
+  	
+  	
+  	contact 12 o clock!
 
-	//Here we go boys!
-	Floor it, we're sitting ducks out here!
-	
-	Slow down, we're getting strung out!
-	
-	Hitman 2, this is Hitman-3 interrogative, our humvee got shot up and we're cut off from you, over.
-	
-	Solid copy hitman-3, hang tight, we'll make our way back to you, over.
-	
-	Hitman 2 solid copy.
-	
-	Assassin Actual to hitman 2, what's going on out there?
-	
-	Hitman 2 to Assassin Actual, we took fire got separated from hitman 3. We're working our way back around, over.
-	
-	Assassin 2 solid copy.
-	
-	We're cut off! (Enemy technical rams into the convoy)
-	Push through!
-	
-	
-	
-	Hitman 3, this is hitman 2, give me a sitrep over.
-	
-	Hitman 3 copies, we're taking cover behind our disabled vehicles, over.
-	
-	
-	
-	
-	
-	
-	
-	Hitman 2 to Assassin Actual, over.
-	This is Assassin Actual, send traffic over.
-	Interrogative, we're taking small arms fire from multiple targets over.
-	
+  	//Here we go boys!
+  	Floor it, we're sitting ducks out here!
+  	
+  	Slow down, we're getting strung out!
+  	
+  	Hitman 2, this is Hitman-3 interrogative, our humvee got shot up and we're cut off from you, over.
+  	
+  	Solid copy hitman-3, hang tight, we'll make our way back to you, over.
+  	
+  	Hitman 2 solid copy.
+  	
+  	Assassin Actual to hitman 2, what's going on out there?
+  	
+  	Hitman 2 to Assassin Actual, we took fire got separated from hitman 3. We're working our way back around, over.
+  	
+  	Assassin 2 solid copy.
+  	
+  	We're cut off! (Enemy technical rams into the convoy)
+  	Push through!
+  	
+  	
+  	
+  	Hitman 3, this is hitman 2, give me a sitrep over.
+  	
+  	Hitman 3 copies, we're taking cover behind our disabled vehicles, over.
+  	
+  	
+  	
+  	
+  	
+  	
+  	
+  	Hitman 2 to Assassin Actual, over.
+  	This is Assassin Actual, send traffic over.
+  	Interrogative, we're taking small arms fire from multiple targets over.
+  	
 
-After first jav kill:
-Good work Brodsky. Keep it up, there are two more armored vehicles moving in.
+  After first jav kill:
+  Good work Brodsky. Keep it up, there are two more armored vehicles moving in.
 
-After second jav kill:
-Nice one Brodsky.
+  After second jav kill:
+  Nice one Brodsky.
 
-Last jav kill:
-That's the last of the armored vehicles sir.
+  Last jav kill:
+  That's the last of the armored vehicles sir.
 
-They called in a 1000 pounder!
+  They called in a 1000 pounder!
 
-		
-	*/
+  		
+  	*/
 }

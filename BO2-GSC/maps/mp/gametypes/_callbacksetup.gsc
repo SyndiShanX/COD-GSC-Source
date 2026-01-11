@@ -177,5 +177,4 @@ codecallback_glasssmash(pos, dir) {
   level notify("glass_smash", pos, dir);
 }
 
-callbackvoid() {
-}
+callbackvoid() {}

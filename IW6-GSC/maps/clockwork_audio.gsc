@@ -91,7 +91,7 @@ aud_gear_sounds() {
   var_0 = getaiarray("allies");
 
   foreach(var_2 in var_0) {
-  var_2 setclothtype("cloth type");
+    var_2 setclothtype("cloth type");
   }
 }
 
@@ -932,7 +932,7 @@ pa_announcements_interior_combat_thread(var_0, var_1) {
     var_8 = get_closest_speaker_nodes(var_2);
 
     foreach(var_6, var_10 in var_4) {
-    var_10.origin = var_8[var_6].origin;
+      var_10.origin = var_8[var_6].origin;
     }
 
     if(gettime() > var_5.delay && !var_5.waiting_for_sound) {
@@ -975,7 +975,7 @@ pa_announcements_cqb_thread(var_0, var_1) {
     var_8 = get_closest_speaker_nodes(var_2);
 
     foreach(var_6, var_10 in var_4) {
-    var_10.origin = var_8[var_6].origin;
+      var_10.origin = var_8[var_6].origin;
     }
 
     if(gettime() > var_5.delay && !var_5.waiting_for_sound) {
@@ -1018,7 +1018,7 @@ pa_announcements_chaos_thread(var_0, var_1) {
     var_8 = get_closest_speaker_nodes(var_2);
 
     foreach(var_6, var_10 in var_4) {
-    var_10.origin = var_8[var_6].origin;
+      var_10.origin = var_8[var_6].origin;
     }
 
     if(gettime() > var_5.delay && !var_5.waiting_for_sound) {
@@ -1045,7 +1045,7 @@ speaker_playSound(var_0, var_1) {
   self.waiting_for_sound = 1;
 
   foreach(var_3 in var_0) {
-  var_3 playSound(var_1, "sounddone");
+    var_3 playSound(var_1, "sounddone");
   }
 
   var_0[0] waittill("sounddone");

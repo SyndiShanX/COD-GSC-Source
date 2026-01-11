@@ -6,7 +6,6 @@
 #include scripts\core_common\sound_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
-
 #namespace tabun;
 
 init_shared() {
@@ -20,18 +19,18 @@ init_shared() {
   level.poisonduration = getdvarint(#"scr_poisonduration", 8);
   level.poisondamage = getdvarint(#"scr_poisondamage", 13);
   level.poisondamagehardcore = getdvarint(#"scr_poisondamagehardcore", 5);
-  level.fx_tabun_0 = #"tabun_tiny_mp";
-  level.fx_tabun_1 = #"tabun_small_mp";
-  level.fx_tabun_2 = #"tabun_medium_mp";
-  level.fx_tabun_3 = #"tabun_large_mp";
-  level.fx_tabun_single = #"tabun_center_mp";
+  level.fx_tabun_0 = # "tabun_tiny_mp";
+  level.fx_tabun_1 = # "tabun_small_mp";
+  level.fx_tabun_2 = # "tabun_medium_mp";
+  level.fx_tabun_3 = # "tabun_large_mp";
+  level.fx_tabun_single = # "tabun_center_mp";
   level.fx_tabun_radius0 = getdvarint(#"scr_fx_tabun_radius0", 55);
   level.fx_tabun_radius1 = getdvarint(#"scr_fx_tabun_radius1", 55);
   level.fx_tabun_radius2 = getdvarint(#"scr_fx_tabun_radius2", 50);
   level.fx_tabun_radius3 = getdvarint(#"scr_fx_tabun_radius3", 25);
-  level.sound_tabun_start = #"wpn_gas_hiss_start";
-  level.sound_tabun_loop = #"wpn_gas_hiss_lp";
-  level.sound_tabun_stop = #"wpn_gas_hiss_end";
+  level.sound_tabun_start = # "wpn_gas_hiss_start";
+  level.sound_tabun_loop = # "wpn_gas_hiss_lp";
+  level.sound_tabun_stop = # "wpn_gas_hiss_end";
   level.sound_shock_tabun_start = "";
   level.sound_shock_tabun_loop = "";
   level.sound_shock_tabun_stop = "";
@@ -85,10 +84,10 @@ damageeffectarea(owner, position, radius, height, killcament) {
     level thread util::drawcylinder(position, radius, height, undefined, "<dev string:x38>");
   }
 
-    if(isDefined(level.dogsonflashdogs)) {
-      owner thread[[level.dogsonflashdogs]](shockeffectarea);
-      owner thread[[level.dogsonflashdogs]](gaseffectarea);
-    }
+  if(isDefined(level.dogsonflashdogs)) {
+    owner thread[[level.dogsonflashdogs]](shockeffectarea);
+    owner thread[[level.dogsonflashdogs]](gaseffectarea);
+  }
 
   loopwaittime = 0.5;
   durationoftabun = level.tabungasduration;
@@ -114,7 +113,7 @@ damageeffectarea(owner, position, radius, height, killcament) {
           if(!players[i] hasperk(#"specialty_proximityprotection")) {
             trace = bulletTrace(position, players[i].origin + (0, 0, 12), 0, players[i]);
 
-            if(trace[#"fraction"] == 1) {
+            if(trace[# "fraction"] == 1) {
               players[i].lastpoisonedby = owner;
               players[i] thread damageinpoisonarea(shockeffectarea, killcament, trace, position);
             }
@@ -141,7 +140,7 @@ damageeffectarea(owner, position, radius, height, killcament) {
 }
 
 damageinpoisonarea(gaseffectarea, killcament, trace, position) {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
   self thread watch_death();
   self.inpoisonarea = 1;
   tabunshocksound = spawn("script_origin", (0, 0, 1));
@@ -151,7 +150,7 @@ damageinpoisonarea(gaseffectarea, killcament, trace, position) {
   tabunshocksound playLoopSound(level.sound_shock_tabun_loop);
   timer = 0;
 
-  while(trace[#"fraction"] == 1 && isDefined(gaseffectarea) && self istouching(gaseffectarea) && self.sessionstate == "playing" && isDefined(self.lastpoisonedby)) {
+  while(trace[# "fraction"] == 1 && isDefined(gaseffectarea) && self istouching(gaseffectarea) && self.sessionstate == "playing" && isDefined(self.lastpoisonedby)) {
     damage = level.poisondamage;
 
     if(level.hardcoremode) {
@@ -217,7 +216,7 @@ generatelocations(position, owner) {
     debugstar(startpos, 2000, black);
   }
 
-    spawnalllocs(owner, startpos);
+  spawnalllocs(owner, startpos);
 }
 
 singlelocation(position, owner) {
@@ -234,12 +233,12 @@ hitpos(start, end, color) {
   level.tabun_debug = getdvarint(#"scr_tabun_debug", 0);
 
   if(level.tabun_debug) {
-    debugstar(trace[#"position"], 2000, color);
+    debugstar(trace[# "position"], 2000, color);
   }
 
-  thread tabun_debug_line(start, trace[#"position"], color, 1, 80);
+  thread tabun_debug_line(start, trace[# "position"], color, 1, 80);
 
-    return trace[#"position"];
+  return trace[# "position"];
 }
 
 spawnalllocs(owner, startpos) {
@@ -259,35 +258,35 @@ spawnalllocs(owner, startpos) {
   sw = startpos + (negcos45 * defaultdistance, negcos45 * defaultdistance, 0);
   se = startpos + (negcos45 * defaultdistance, cos45 * defaultdistance, 0);
   locations = [];
-  locations[#"color"] = [];
-  locations[#"loc"] = [];
-  locations[#"tracepos"] = [];
-  locations[#"distsqrd"] = [];
-  locations[#"fxtoplay"] = [];
-  locations[#"radius"] = [];
-  locations[#"color"][0] = red;
-  locations[#"color"][1] = red;
-  locations[#"color"][2] = blue;
-  locations[#"color"][3] = blue;
-  locations[#"color"][4] = green;
-  locations[#"color"][5] = green;
-  locations[#"color"][6] = white;
-  locations[#"color"][7] = white;
-  locations[#"point"][0] = north;
-  locations[#"point"][1] = ne;
-  locations[#"point"][2] = east;
-  locations[#"point"][3] = se;
-  locations[#"point"][4] = south;
-  locations[#"point"][5] = sw;
-  locations[#"point"][6] = west;
-  locations[#"point"][7] = nw;
+  locations[# "color"] = [];
+  locations[# "loc"] = [];
+  locations[# "tracepos"] = [];
+  locations[# "distsqrd"] = [];
+  locations[# "fxtoplay"] = [];
+  locations[# "radius"] = [];
+  locations[# "color"][0] = red;
+  locations[# "color"][1] = red;
+  locations[# "color"][2] = blue;
+  locations[# "color"][3] = blue;
+  locations[# "color"][4] = green;
+  locations[# "color"][5] = green;
+  locations[# "color"][6] = white;
+  locations[# "color"][7] = white;
+  locations[# "point"][0] = north;
+  locations[# "point"][1] = ne;
+  locations[# "point"][2] = east;
+  locations[# "point"][3] = se;
+  locations[# "point"][4] = south;
+  locations[# "point"][5] = sw;
+  locations[# "point"][6] = west;
+  locations[# "point"][7] = nw;
 
   for(count = 0; count < 8; count++) {
-    trace = hitpos(startpos, locations[#"point"][count], locations[#"color"][count]);
-    locations[#"tracepos"][count] = trace;
-    locations[#"loc"][count] = startpos / 2 + trace / 2;
-    locations[#"loc"][count] -= (0, 0, 12);
-    locations[#"distsqrd"][count] = distancesquared(startpos, trace);
+    trace = hitpos(startpos, locations[# "point"][count], locations[# "color"][count]);
+    locations[# "tracepos"][count] = trace;
+    locations[# "loc"][count] = startpos / 2 + trace / 2;
+    locations[# "loc"][count] -= (0, 0, 12);
+    locations[# "distsqrd"][count] = distancesquared(startpos, trace);
   }
 
   centroid = getcenteroflocations(locations);
@@ -301,24 +300,24 @@ spawnalllocs(owner, startpos) {
 
     switch (fxtoplay) {
       case 0:
-        locations[#"fxtoplay"][i] = level.fx_tabun_0;
-        locations[#"radius"][i] = level.fx_tabun_radius0;
+        locations[# "fxtoplay"][i] = level.fx_tabun_0;
+        locations[# "radius"][i] = level.fx_tabun_radius0;
         break;
       case 1:
-        locations[#"fxtoplay"][i] = level.fx_tabun_1;
-        locations[#"radius"][i] = level.fx_tabun_radius1;
+        locations[# "fxtoplay"][i] = level.fx_tabun_1;
+        locations[# "radius"][i] = level.fx_tabun_radius1;
         break;
       case 2:
-        locations[#"fxtoplay"][i] = level.fx_tabun_2;
-        locations[#"radius"][i] = level.fx_tabun_radius2;
+        locations[# "fxtoplay"][i] = level.fx_tabun_2;
+        locations[# "radius"][i] = level.fx_tabun_radius2;
         break;
       case 3:
-        locations[#"fxtoplay"][i] = level.fx_tabun_3;
-        locations[#"radius"][i] = level.fx_tabun_radius3;
+        locations[# "fxtoplay"][i] = level.fx_tabun_3;
+        locations[# "radius"][i] = level.fx_tabun_radius3;
         break;
       default:
-        locations[#"fxtoplay"][i] = undefined;
-        locations[#"radius"][i] = 0;
+        locations[# "fxtoplay"][i] = undefined;
+        locations[# "radius"][i] = 0;
         break;
     }
   }
@@ -327,8 +326,8 @@ spawnalllocs(owner, startpos) {
   freepassused = 0;
 
   for(i = 0; i < 8; i++) {
-    if(locations[#"radius"][i] != level.fx_tabun_radius0) {
-      if(freepassused == 0 && locations[#"radius"][i] == level.fx_tabun_radius1) {
+    if(locations[# "radius"][i] != level.fx_tabun_radius0) {
+      if(freepassused == 0 && locations[# "radius"][i] == level.fx_tabun_radius1) {
         freepassused = 1;
         continue;
       }
@@ -349,9 +348,9 @@ spawnalllocs(owner, startpos) {
   spawntimedfx(level.fx_tabun_3, startpos);
 
   for(count = 0; count < 8; count++) {
-    if(isDefined(locations[#"fxtoplay"][count])) {
-      spawntimedfx(locations[#"fxtoplay"][count], locations[#"loc"][count]);
-      thread damageeffectarea(owner, locations[#"loc"][count], locations[#"radius"][count], locations[#"radius"][count], killcament);
+    if(isDefined(locations[# "fxtoplay"][count])) {
+      spawntimedfx(locations[# "fxtoplay"][count], locations[# "loc"][count]);
+      thread damageeffectarea(owner, locations[# "loc"][count], locations[# "radius"][count], locations[# "radius"][count], killcament);
     }
   }
 }
@@ -373,13 +372,13 @@ setuptabunfx(owner, locations, count) {
   previous = count - 1;
 
   if(previous < 0) {
-    previous += locations[#"loc"].size;
+    previous += locations[# "loc"].size;
   }
 
   next = count + 1;
 
-  if(next >= locations[#"loc"].size) {
-    next -= locations[#"loc"].size;
+  if(next >= locations[# "loc"].size) {
+    next -= locations[# "loc"].size;
   }
 
   effect0dist = level.fx_tabun_radius0 * level.fx_tabun_radius0;
@@ -389,13 +388,13 @@ setuptabunfx(owner, locations, count) {
   effect4dist = level.fx_tabun_radius3;
   fxtoplay = -1;
 
-  if(locations[#"distsqrd"][count] > effect0dist && locations[#"distsqrd"][previous] > effect1dist && locations[#"distsqrd"][next] > effect1dist) {
+  if(locations[# "distsqrd"][count] > effect0dist && locations[# "distsqrd"][previous] > effect1dist && locations[# "distsqrd"][next] > effect1dist) {
     fxtoplay = 0;
-  } else if(locations[#"distsqrd"][count] > effect1dist && locations[#"distsqrd"][previous] > effect2dist && locations[#"distsqrd"][next] > effect2dist) {
+  } else if(locations[# "distsqrd"][count] > effect1dist && locations[# "distsqrd"][previous] > effect2dist && locations[# "distsqrd"][next] > effect2dist) {
     fxtoplay = 1;
-  } else if(locations[#"distsqrd"][count] > effect2dist && locations[#"distsqrd"][previous] > effect3dist && locations[#"distsqrd"][next] > effect3dist) {
+  } else if(locations[# "distsqrd"][count] > effect2dist && locations[# "distsqrd"][previous] > effect3dist && locations[# "distsqrd"][next] > effect3dist) {
     fxtoplay = 2;
-  } else if(locations[#"distsqrd"][count] > effect3dist && locations[#"distsqrd"][previous] > effect4dist && locations[#"distsqrd"][next] > effect4dist) {
+  } else if(locations[# "distsqrd"][count] > effect3dist && locations[# "distsqrd"][previous] > effect4dist && locations[# "distsqrd"][next] > effect4dist) {
     fxtoplay = 3;
   }
 
@@ -405,8 +404,8 @@ setuptabunfx(owner, locations, count) {
 getcenteroflocations(locations) {
   centroid = (0, 0, 0);
 
-  for(i = 0; i < locations[#"loc"].size; i++) {
-    centroid += locations[#"loc"][i] / locations[#"loc"].size;
+  for(i = 0; i < locations[# "loc"].size; i++) {
+    centroid += locations[# "loc"][i] / locations[# "loc"].size;
   }
 
   level.tabun_debug = getdvarint(#"scr_tabun_debug", 0);
@@ -416,21 +415,21 @@ getcenteroflocations(locations) {
     debugstar(centroid, 2000, purple);
   }
 
-    return centroid;
+  return centroid;
 }
 
 getcenter(locations) {
   center = (0, 0, 0);
-  curx = locations[#"tracepos"][0][0];
-  cury = locations[#"tracepos"][0][1];
+  curx = locations[# "tracepos"][0][0];
+  cury = locations[# "tracepos"][0][1];
   minx = curx;
   maxx = curx;
   miny = cury;
   maxy = cury;
 
-  for(i = 1; i < locations[#"tracepos"].size; i++) {
-    curx = locations[#"tracepos"][i][0];
-    cury = locations[#"tracepos"][i][1];
+  for(i = 1; i < locations[# "tracepos"].size; i++) {
+    curx = locations[# "tracepos"][i][0];
+    cury = locations[# "tracepos"][i][1];
 
     if(curx > maxx) {
       maxx = curx;
@@ -450,7 +449,7 @@ getcenter(locations) {
 
   avgx = (maxx + minx) / 2;
   avgy = (maxy + miny) / 2;
-  center = (avgx, avgy, locations[#"tracepos"][0][2]);
+  center = (avgx, avgy, locations[# "tracepos"][0][2]);
 
   level.tabun_debug = getdvarint(#"scr_tabun_debug", 0);
 
@@ -459,7 +458,7 @@ getcenter(locations) {
     debugstar(center, 2000, cyan);
   }
 
-    return center;
+  return center;
 }
 
 tabun_debug_line(from, to, color, depthtest, time) {

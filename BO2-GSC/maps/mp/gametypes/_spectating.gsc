@@ -5,7 +5,7 @@
 
 init() {
   foreach(team in level.teams) {
-  level.spectateoverride[team] = spawnStruct();
+    level.spectateoverride[team] = spawnStruct();
   }
 
   level thread onplayerconnect();
@@ -97,7 +97,7 @@ otherlocalplayerstillalive() {
 
 allowspectateallteams(allow) {
   foreach(team in level.teams) {
-  self allowspectateteam(team, allow);
+    self allowspectateteam(team, allow);
   }
 }
 

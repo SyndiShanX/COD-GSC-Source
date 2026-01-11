@@ -60,8 +60,7 @@ meleebiteattackplayer(player) {
 
     if(isplayer(self.enemy) && self.enemy getstance() == "prone") {
       self meleewithoffset(vectorscale((0, 0, -1), 9.0));
-    }
-    else {
+    } else {
       self melee();
     }
 

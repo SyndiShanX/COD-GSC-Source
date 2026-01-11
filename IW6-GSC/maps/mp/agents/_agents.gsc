@@ -202,8 +202,7 @@ spawn_agent_player(optional_spawnOrigin, optional_spawnAngles, optional_owner, u
   self thread maps\mp\bots\_bots::bot_think_crate();
   if(self.agent_type == "player") {
     self thread maps\mp\bots\_bots::bot_think_level_actions();
-  }
-  else if(self.agent_type == "odin_juggernaut") {
+  } else if(self.agent_type == "odin_juggernaut") {
     self thread maps\mp\bots\_bots::bot_think_level_actions(128);
   }
   self thread maps\mp\bots\_bots_strategy::bot_think_tactical_goals();
@@ -320,11 +319,9 @@ on_agent_generic_damaged(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath,
   if(isDefined(eAttacker) && eAttacker != self && iDamage > 0 && (!isDefined(sHitLoc) || sHitLoc != "shield")) {
     if(iDFlags &level.iDFLAGS_STUN) {
       typeHit = "stun";
-    }
-    else if(!shouldWeaponFeedback(sWeapon)) {
+    } else if(!shouldWeaponFeedback(sWeapon)) {
       typeHit = "none";
-    }
-    else {
+    } else {
       typeHit = ter_op(iDamage >= self.health, "hitkill", "standard");
     }
 
@@ -400,8 +397,7 @@ initPlayerClass() {
   } else {
     if(self maps\mp\bots\_bots_loadout::bot_setup_loadout_callback()) {
       self.class = "callback";
-    }
-    else {
+    } else {
       self.class = "class1";
     }
   }

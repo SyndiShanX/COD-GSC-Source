@@ -22,14 +22,11 @@ shellshockondamage(cause, damage) {
 
     if(damage >= 90) {
       time = 4;
-    }
-    else if(damage >= 50) {
+    } else if(damage >= 50) {
       time = 3;
-    }
-    else if(damage >= 25) {
+    } else if(damage >= 25) {
       time = 2;
-    }
-    else if(damage > 10) {
+    } else if(damage > 10) {
       time = 2;
     }
 

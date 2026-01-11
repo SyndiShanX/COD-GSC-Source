@@ -10,8 +10,7 @@ drone_give_soul() {
 
   if(isDefined(self.script_moveplaybackrate)) {
     self.moveplaybackrate = self.script_moveplaybackrate;
-  }
-  else {
+  } else {
     self.moveplaybackrate = 1;
   }
 
@@ -176,8 +175,7 @@ assign_drone_tree() {
   if(isDefined(self.type)) {
     if(self.type == "dog") {
       assign_animals_tree();
-    }
-    else {
+    } else {
       assign_generic_human_tree();
     }
   }

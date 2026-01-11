@@ -264,11 +264,9 @@ doIntro() {
   if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
     if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies") {
       self leaderDialogOnPlayer("allies_gametype");
-    }
-    else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
+    } else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
       self leaderDialogOnPlayer("axis_gametype");
-    }
-    else if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary()) {
+    } else if(!self isSplitscreenPlayer() || self isSplitscreenPlayerPrimary()) {
       self leaderDialogOnPlayer("gametype");
     }
   }
@@ -355,11 +353,9 @@ onGameEnded() {
     if(level.splitscreen) {
       if(winner == "allies") {
         playSoundOnPlayers(game["music"]["victory_allies"], "allies");
-      }
-      else if(winner == "axis") {
+      } else if(winner == "axis") {
         playSoundOnPlayers(game["music"]["victory_axis"], "axis");
-      }
-      else {
+      } else {
         playSoundOnPlayers(game["music"]["nuke_music"]);
       }
     } else {
@@ -381,11 +377,9 @@ onGameEnded() {
       }
       if(player.pers["team"] != "allies" && player.pers["team"] != "axis") {
         player playLocalSound(game["music"]["nuke_music"]);
-      }
-      else if(isDefined(winner) && isPlayer(winner) && player == winner) {
+      } else if(isDefined(winner) && isPlayer(winner) && player == winner) {
         player playLocalSound(game["music"]["victory_" + player.pers["team"]]);
-      }
-      else if(!level.splitScreen) {
+      } else if(!level.splitScreen) {
         player playLocalSound(game["music"]["defeat_" + player.pers["team"]]);
       }
     }

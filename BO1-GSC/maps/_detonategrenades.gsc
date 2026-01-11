@@ -42,8 +42,7 @@ begin_smoke_grenade_tracking() {
   }
   if(level.smokegrenades > 2 && getDvar(#"player_sustainAmmo") != "0") {
     grenade delete();
-  }
-  else {
+  } else {
     grenade thread smoke_grenade_death();
   }
 }
@@ -156,8 +155,7 @@ claymore_detonation() {
       wait 0.4;
       if(isDefined(self.owner)) {
         self detonate(self.owner);
-      }
-      else {
+      } else {
         self detonate(undefined);
       }
       return;
@@ -215,8 +213,7 @@ satchel_damage() {
   }
   if(level.satchelexplodethisframe) {
     wait .1 + randomfloat(.4);
-  }
-  else {
+  } else {
     wait .05;
   }
   if(!isDefined(self)) {

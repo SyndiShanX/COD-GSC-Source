@@ -100,8 +100,7 @@ jump_pad_start(ent_player, endon_condition) {
   if(isDefined(self.script_wait)) {
     if(self.script_wait < 1) {
       self playSound("evt_jump_pad_charge_short");
-    }
-    else {
+    } else {
       self playSound("evt_jump_pad_charge");
     }
 
@@ -207,15 +206,13 @@ jump_pad_start(ent_player, endon_condition) {
 
   if(isDefined(end_point.target)) {
     poi_spot = getstruct(end_point.target, "targetname");
-  }
-  else {
+  } else {
     poi_spot = end_point;
   }
 
   if(!isDefined(self.script_index)) {
     ent_player.script_index = undefined;
-  }
-  else {
+  } else {
     ent_player.script_index = self.script_index;
   }
 
@@ -253,8 +250,7 @@ jump_pad_start(ent_player, endon_condition) {
 jump_pad_cancel(ent_player) {
   ent_player notify("left_jump_pad");
 
-  if(isDefined(ent_player.poi_spot) && !is_true(ent_player._padded)) {
-  }
+  if(isDefined(ent_player.poi_spot) && !is_true(ent_player._padded)) {}
 
   if(isDefined(self.name)) {
     self._action_overrides = strtok(self.name, ",");
@@ -374,8 +370,7 @@ disconnect_failsafe_pad_poi_clean() {
 failsafe_pad_poi_clean(ent_trig, ent_poi) {
   if(isDefined(ent_trig.script_wait)) {
     wait(ent_trig.script_wait);
-  }
-  else {
+  } else {
     wait 0.5;
   }
 
@@ -480,17 +475,13 @@ jump_pad_player_overrides(st_behavior, int_clean) {
 
   switch (st_behavior) {
     case "no_sprint":
-      if(!int_clean) {
-      } else {
-      }
+      if(!int_clean) {} else {}
 
       break;
     default:
       if(isDefined(level._jump_pad_level_behavior)) {
         self[[level._jump_pad_level_behavior]](st_behavior, int_clean);
-      }
-      else {
-      }
+      } else {}
 
       break;
   }

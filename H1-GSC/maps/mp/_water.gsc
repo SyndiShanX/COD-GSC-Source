@@ -54,8 +54,7 @@ init() {
 player_set_in_water(var_0) {
   if(var_0) {
     self.inwater = 1;
-  }
-  else {
+  } else {
     self.inwater = undefined;
   }
 }
@@ -69,7 +68,7 @@ watchforhostmigration() {
     self waittill("player_migrated");
 
     foreach(var_1 in level.waterline_ents) {
-    self initwaterclienttrigger(var_1.script_noteworthy, var_1);
+      self initwaterclienttrigger(var_1.script_noteworthy, var_1);
     }
   }
 }
@@ -82,7 +81,7 @@ onplayerconnectfunctions() {
     var_0 thread watchforhostmigration();
 
     foreach(var_2 in level.waterline_ents) {
-    var_0 initwaterclienttrigger(var_2.script_noteworthy, var_2);
+      var_0 initwaterclienttrigger(var_2.script_noteworthy, var_2);
     }
   }
 }
@@ -202,8 +201,7 @@ playerinwater(var_0) {
 
       if(isDefined(level.watermovescale)) {
         self.movespeedscaler = level.baseplayermovescale * level.watermovescale;
-      }
-      else {
+      } else {
         self.movespeedscaler = level.baseplayermovescale;
       }
 
@@ -236,8 +234,7 @@ playerinwater(var_0) {
 
         if(var_2 == "primary" || var_2 == "altmode") {
           self.water_last_weapon = var_1;
-        }
-        else if(isDefined(self.lastnonuseweapon) && self hasweapon(self.lastnonuseweapon)) {
+        } else if(isDefined(self.lastnonuseweapon) && self hasweapon(self.lastnonuseweapon)) {
           self.water_last_weapon = self.lastnonuseweapon;
         }
       }
@@ -346,8 +343,7 @@ inwaterwake(var_0) {
 
     if(var_1 > 0) {
       wait(max(1 - var_1 / 120, 0.1));
-    }
-    else {
+    } else {
       wait 0.3;
     }
 
@@ -394,8 +390,7 @@ onplayerdeath() {
 
   if(isDefined(level.ishorde) && level.ishorde) {
     common_scripts\utility::waittill_any("death", "becameSpectator");
-  }
-  else {
+  } else {
     self waittill("death");
   }
 
@@ -425,8 +420,7 @@ inshallowwater(var_0, var_1) {
 isabovewaterline(var_0, var_1) {
   if(getplayereyeheight() + var_1 >= level getwaterline(var_0)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -505,16 +499,14 @@ playerdisableunderwater() {
 
       if(!isDefined(self.heavyexodata.hasrockets) || self.heavyexodata.hasrockets == 0) {
         self disableoffhandsecondaryweapons();
-      }
-      else {
+      } else {
         self enableoffhandsecondaryweapons();
       }
     }
 
     if(isDefined(level.ishorde) && isplayer(self)) {
       maps\mp\gametypes\_weapons::restoreweapon("underwater");
-    }
-    else if(isDefined(self.water_last_weapon)) {
+    } else if(isDefined(self.water_last_weapon)) {
       maps\mp\_utility::switch_to_last_weapon(self.water_last_weapon);
     }
 

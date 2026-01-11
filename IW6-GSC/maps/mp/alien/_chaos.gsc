@@ -139,8 +139,7 @@ update_spending_currency_event(player, spending_type, weapon_ref) {
   }
   if(spending_type == "weapon" && is_new_weapon_pick_up(player, weapon_ref)) {
     process_chaos_event("new_weapon_pick_up");
-  }
-  else {
+  } else {
     process_chaos_event("inc_combo_counter_only");
   }
 }
@@ -364,7 +363,7 @@ process_chaos_event_internal(event_info) {
     total_score = calculate_total_score();
 
     foreach(player in level.players) {
-    player maps\mp\alien\_persistence::eog_player_update_stat("score", total_score, true);
+      player maps\mp\alien\_persistence::eog_player_update_stat("score", total_score, true);
     }
   }
 }
@@ -425,8 +424,7 @@ LUA_omnvar_update_monitor(ent, omnvar_name, additional_endon) {
       chaos_event_notify(omnvar_name, value, ent);
       if(isPlayer(ent)) {
         ent setClientOmnvar(omnvar_name, value);
-      }
-      else {
+      } else {
         setOmnvar(omnvar_name, value);
       }
 
@@ -521,8 +519,7 @@ process_event_notify_queue() {
       }
       if(isPlayer(event.ent)) {
         event.ent IPrintLnBold(event.event_string);
-      }
-      else {
+      } else {
         IPrintLnBold(event.event_string);
       }
       wait 2;
@@ -633,7 +630,7 @@ perk_progression(combo_counter) {
 
 unset_players_perks() {
   foreach(player in level.players) {
-  unset_player_perks(player);
+    unset_player_perks(player);
   }
 
   set_all_perks_inactivated();
@@ -1153,7 +1150,7 @@ upgrade_all_skills(boxEnt) {
   inc_num_skill_upgrade_earned();
 
   foreach(player in level.players) {
-  upgrade_player_all_skills(player);
+    upgrade_player_all_skills(player);
   }
 }
 
@@ -1161,7 +1158,7 @@ upgrade_player_all_skills(player) {
   resource_type_list = ["defense", "offense"];
 
   foreach(resource_type in resource_type_list) {
-  player notify("luinotifyserver", resource_type + "_try_upgrade");
+    player notify("luinotifyserver", resource_type + "_try_upgrade");
   }
 }
 
@@ -1207,8 +1204,7 @@ get_grace_period_end_time(current_time, duration) {
 
   if(level.grace_period_end_time <= current_time) {
     level.grace_period_end_time = current_time + duration;
-  }
-  else {
+  } else {
     level.grace_period_end_time += duration;
   }
 
@@ -1225,7 +1221,7 @@ give_bonus_score(boxEnt) {
 
 give_bonus_cash(boxEnt) {
   foreach(player in level.players) {
-  player maps\mp\alien\_persistence::give_player_currency(BONUS_CASH);
+    player maps\mp\alien\_persistence::give_player_currency(BONUS_CASH);
   }
 }
 
@@ -1253,7 +1249,7 @@ remove_other_chaos_offhand_item(player) {
   chaos_offhand_item_list = ["alienflare_mp", "alienthrowingknife_mp", "alientrophy_mp"];
 
   foreach(item in chaos_offhand_item_list) {
-  player takeWeapon(item);
+    player takeWeapon(item);
   }
 }
 

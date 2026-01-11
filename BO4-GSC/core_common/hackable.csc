@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\duplicaterender_mgr;
 #include scripts\core_common\system_shared;
-
 #namespace hackable;
 
 autoexec __init__system__() {

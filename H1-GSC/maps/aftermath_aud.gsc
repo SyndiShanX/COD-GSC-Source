@@ -89,11 +89,9 @@ aud_start_mix_player_dying() {
 aud_player_walking_foley(var_0) {
   if(var_0 == "crouch") {
     level.player maps\_utility::delaythread(0.4, maps\_utility::play_sound_on_entity, "step_prone_gravel_aftermath");
-  }
-  else if(var_0 == "prone") {
+  } else if(var_0 == "prone") {
     level.player maps\_utility::delaythread(0.4, maps\_utility::play_sound_on_entity, "step_prone_plr_gravel_aftermath");
-  }
-  else {
+  } else {
     level.player maps\_utility::delaythread(0.4, maps\_utility::play_sound_on_entity, "step_crchwalk_plr_gravel_aftermath");
   }
 }

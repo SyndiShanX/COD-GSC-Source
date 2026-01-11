@@ -58,7 +58,7 @@ init() {
   level.killstreak_timers = [];
 
   foreach(team in level.teams) {
-  level.killstreak_timers[team] = [];
+    level.killstreak_timers[team] = [];
   }
 
   level.iskillstreakweapon = ::iskillstreakweapon;
@@ -231,8 +231,7 @@ overrideentitycameraindemo(killstreaktype, value) {
 iskillstreakavailable(killstreak) {
   if(isDefined(level.menureferenceforkillstreak[killstreak])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -289,8 +288,7 @@ givekillstreakifstreakcountmatches(index, killstreak, streakcount) {
 
   if(self.pers["killstreaksEarnedThisKillstreak"] > index && isroundbased()) {
     hasalreadyearnedkillstreak = 1;
-  }
-  else {
+  } else {
     hasalreadyearnedkillstreak = 0;
   }
 
@@ -444,8 +442,7 @@ givekillstreakinternal(killstreaktype, do_not_update_death_count, noxp) {
 
   if(isDefined(noxp)) {
     self.pers["killstreak_has_been_used"][self.pers["killstreak_has_been_used"].size] = noxp;
-  }
-  else {
+  } else {
     self.pers["killstreak_has_been_used"][self.pers["killstreak_has_been_used"].size] = 0;
   }
 
@@ -553,8 +550,7 @@ givekillstreakweapon(weapon, isinventory, usestoredammo) {
 
       if(currentweapon == weapon && !maps\mp\killstreaks\_killstreak_weapons::isheldinventorykillstreakweapon(weapon)) {
         return weaponmaxammo(weapon);
-      }
-      else if(isDefined(usestoredammo) && usestoredammo && self.pers["killstreak_ammo_count"][self.pers["killstreak_ammo_count"].size - 1] > 0) {
+      } else if(isDefined(usestoredammo) && usestoredammo && self.pers["killstreak_ammo_count"][self.pers["killstreak_ammo_count"].size - 1] > 0) {
         switch (weapon) {
           case "inventory_minigun_mp":
             if(isDefined(self.minigunactive) && self.minigunactive) {
@@ -584,8 +580,7 @@ givekillstreakweapon(weapon, isinventory, usestoredammo) {
     } else {
       if(weapon == "inventory_ai_tank_drop_mp" || weapon == "inventory_supplydrop_mp" || weapon == "inventory_minigun_drop_mp" || weapon == "inventory_m32_drop_mp" || weapon == "inventory_missile_drone_mp") {
         delta = 1;
-      }
-      else {
+      } else {
         delta = 0;
       }
 
@@ -604,8 +599,7 @@ activatenextkillstreak(do_not_update_death_count) {
 
   if(isDefined(level.usingmomentum) && level.usingmomentum) {
     self setinventoryweapon("");
-  }
-  else {
+  } else {
     self setactionslot(4, "");
   }
 
@@ -666,14 +660,11 @@ giveownedkillstreak() {
 switchtolastnonkillstreakweapon() {
   if(isDefined(self.laststand) && self.laststand && isDefined(self.laststandpistol) && self hasweapon(self.laststandpistol)) {
     self switchtoweapon(self.laststandpistol);
-  }
-  else if(self hasweapon(self.lastnonkillstreakweapon)) {
+  } else if(self hasweapon(self.lastnonkillstreakweapon)) {
     self switchtoweapon(self.lastnonkillstreakweapon);
-  }
-  else if(self hasweapon(self.lastdroppableweapon)) {
+  } else if(self hasweapon(self.lastdroppableweapon)) {
     self switchtoweapon(self.lastdroppableweapon);
-  }
-  else {
+  } else {
     return false;
   }
 
@@ -778,8 +769,7 @@ removekillstreakwhendone(killstreak, haskillstreakbeenused, isfrominventory) {
   }
   if(successful && (!self haskillstreakinclass(getkillstreakmenuname(killstreak)) || isDefined(isfrominventory) && isfrominventory)) {
     changeweaponafterkillstreak(killstreak, 1);
-  }
-  else {
+  } else {
     killstreakforcurrentweapon = getkillstreakfromweapon(currentweapon);
 
     if(maps\mp\killstreaks\_killstreak_weapons::isgameplayweapon(currentweapon)) {
@@ -994,8 +984,7 @@ trackweaponusage() {
 
     if(weapons.size > 0) {
       self.lastnonkillstreakweapon = weapons[0];
-    }
-    else {
+    } else {
       self.lastnonkillstreakweapon = "knife_mp";
     }
   }
@@ -1079,8 +1068,7 @@ killstreakwaiter() {
     if(isDefined(level.usingscorestreaks) && level.usingscorestreaks) {
       if(weapon == inventoryweapon && inventorybuttonpressed) {
         isfrominventory = 1;
-      }
-      else if(weapon == inventoryweapon && (weapon == "inventory_missile_drone_mp" || weapon == "inventory_ai_tank_drop_mp")) {
+      } else if(weapon == inventoryweapon && (weapon == "inventory_missile_drone_mp" || weapon == "inventory_ai_tank_drop_mp")) {
         self switchtolastnonkillstreakweapon();
         continue;
       } else if(self getammocount(weapon) <= 0 && weapon != "killstreak_ai_tank_mp") {
@@ -1090,8 +1078,7 @@ killstreakwaiter() {
     } else if(isDefined(level.usingmomentum) && level.usingmomentum) {
       if(weapon == self getinventoryweapon() && inventorybuttonpressed) {
         isfrominventory = 1;
-      }
-      else if(self.momentum < level.killstreaks[killstreak].momentumcost) {
+      } else if(self.momentum < level.killstreaks[killstreak].momentumcost) {
         self switchtolastnonkillstreakweapon();
         continue;
       }
@@ -1445,25 +1432,20 @@ createkillstreaktimerforteam(killstreaktype, xposition, team) {
 createkillstreaktimer(killstreaktype) {
   if(killstreaktype == "radar_mp") {
     xposition = 0;
-  }
-  else if(killstreaktype == "counteruav_mp") {
+  } else if(killstreaktype == "counteruav_mp") {
     xposition = 20;
-  }
-  else if(killstreaktype == "missile_swarm_mp") {
+  } else if(killstreaktype == "missile_swarm_mp") {
     xposition = 40;
-  }
-  else if(killstreaktype == "emp_mp") {
+  } else if(killstreaktype == "emp_mp") {
     xposition = 60;
-  }
-  else if(killstreaktype == "radardirection_mp") {
+  } else if(killstreaktype == "radardirection_mp") {
     xposition = 80;
-  }
-  else {
+  } else {
     xposition = 0;
   }
 
   foreach(team in level.teams) {
-  createkillstreaktimerforteam(killstreaktype, xposition, team);
+    createkillstreaktimerforteam(killstreaktype, xposition, team);
   }
 }
 
@@ -1473,7 +1455,7 @@ destroykillstreaktimers() {
   if(isDefined(level.killstreak_timers)) {
     foreach(team in level.teams) {
       foreach(killstreaktimer in level.killstreak_timers[team]) {
-      killstreaktimer.icon destroyelem();
+        killstreaktimer.icon destroyelem();
       }
     }
 
@@ -1571,8 +1553,7 @@ watchforemoveremoteweapon() {
 initridekillstreak_internal(streak) {
   if(isDefined(streak) && (streak == "qrdrone" || streak == "killstreak_remote_turret_mp" || streak == "killstreak_ai_tank_mp" || streak == "qrdrone_mp")) {
     laptopwait = "timeout";
-  }
-  else {
+  } else {
     laptopwait = self waittill_any_timeout(0.6, "disconnect", "death", "weapon_switch_started");
   }
 
@@ -1638,8 +1619,7 @@ initridekillstreak_internal(streak) {
 
   if(blackoutwait == "disconnect") {
     return "disconnect";
-  }
-  else {
+  } else {
     return "success";
   }
 }

@@ -52,17 +52,13 @@ start_env_movie() {
 world_clock_get_offset() {
   if(issubstr(self.model, "chicago")) {
     return -6;
-  }
-  else if(issubstr(self.model, "los_angeles")) {
+  } else if(issubstr(self.model, "los_angeles")) {
     return -8;
-  }
-  else if(issubstr(self.model, "new_york")) {
+  } else if(issubstr(self.model, "new_york")) {
     return -5;
-  }
-  else if(issubstr(self.model, "tokyo")) {
+  } else if(issubstr(self.model, "tokyo")) {
     return 9;
-  }
-  else if(issubstr(self.model, "hong_kong")) {
+  } else if(issubstr(self.model, "hong_kong")) {
     return 8;
   }
 
@@ -86,8 +82,7 @@ world_clock_run(localclientnum, set, newent) {
 
     if(hours < 0) {
       hours = hours + 24;
-    }
-    else if(hours >= 24) {
+    } else if(hours >= 24) {
       hours = hours - 24;
     }
 
@@ -113,7 +108,7 @@ refresh_map_shaders(localclientnum) {
 
 refresh_all_map_shaders(localclientnum) {
   foreach(map in level.m_map_monitors) {
-  map refresh_map_shaders(localclientnum);
+    map refresh_map_shaders(localclientnum);
   }
 }
 
@@ -184,8 +179,7 @@ world_map_translate_to(localclientnum, pos_x, pos_y, map_scale) {
 set_speeding_osprey(localclientnum, set, newent) {
   if(set) {
     self.booster_speed_override = 1200.0;
-  }
-  else {
+  } else {
     self.booster_speed_override = undefined;
   }
 }
@@ -236,8 +230,7 @@ set_hologram_shown(localclientnum, set, newent) {
 
   if(set) {
     self setshaderconstant(localclientnum, 1, self.color_id, 0, 0, 0);
-  }
-  else {
+  } else {
     self setshaderconstant(localclientnum, 1, self.color_id, 1, 0, 0);
   }
 }

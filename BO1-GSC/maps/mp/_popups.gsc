@@ -195,8 +195,7 @@ displayPopUpsWaiter() {
       self.startMessageNotifyQueue[i - 1] = undefined;
       if(isDefined(nextNotifyData.duration)) {
         duration = nextNotifyData.duration;
-      }
-      else {
+      } else {
         duration = level.startMessageDefaultDuration;
       }
       self maps\mp\gametypes\_hud_message::showNotifyMessage(nextNotifyData, duration);
@@ -216,8 +215,7 @@ displayPopUpsWaiter() {
       self.wagerNotifyQueue[i - 1] = undefined;
       if(isDefined(subMessage)) {
         self displayWagerPopup(message, points, subMessage);
-      }
-      else {
+      } else {
         self displayWagerPopup(message, points);
       }
       if(isDefined(announcement)) {
@@ -315,8 +313,7 @@ displayPopUpsWaiter() {
       self.messageNotifyQueue[i - 1] = undefined;
       if(isDefined(nextNotifyData.duration)) {
         duration = nextNotifyData.duration;
-      }
-      else {
+      } else {
         duration = level.regularGameMessages.waittime;
       }
       self maps\mp\gametypes\_hud_message::showNotifyMessage(nextNotifyData, duration);

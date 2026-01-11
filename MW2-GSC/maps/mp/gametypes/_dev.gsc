@@ -63,8 +63,7 @@ updateDevSettings() {
   showspawns = getdvarInt("scr_showspawns");
   if(showspawns > 1) {
     showspawns = 1;
-  }
-  else if(showspawns < 0) {
+  } else if(showspawns < 0) {
     showspawns = 0;
   }
 
@@ -74,8 +73,7 @@ updateDevSettings() {
 
     if(level.showspawns) {
       showSpawnpoints();
-    }
-    else {
+    } else {
       hideSpawnpoints();
     }
   }
@@ -105,7 +103,7 @@ updateDevSettings() {
 
   if(getDvar("scr_list_weapons") != "") {
     foreach(baseWeapon, _ in level.baseWeaponList) {
-    iPrintLn(baseWeapon);
+      iPrintLn(baseWeapon);
     }
 
     setDevDvar("scr_list_weapons", "");
@@ -113,7 +111,7 @@ updateDevSettings() {
 
   if(getdvarint("scr_predatorme") == 1) {
     foreach(player in level.players) {
-    level thread maps\mp\killstreaks\_remotemissile::_fire_noplayer(0, player);
+      level thread maps\mp\killstreaks\_remotemissile::_fire_noplayer(0, player);
     }
 
     setDevDvar("scr_predatorme", "");
@@ -129,42 +127,42 @@ updateDevSettings() {
 
   if(getdvarint("scr_giveradar") == 1) {
     foreach(player in level.players) {
-    player maps\mp\killstreaks\_killstreaks::giveKillstreak("uav");
+      player maps\mp\killstreaks\_killstreaks::giveKillstreak("uav");
     }
 
     setDevDvar("scr_giveradar", "0");
   }
   if(getdvarint("scr_giveairstrike") == 1) {
     foreach(player in level.players) {
-    player maps\mp\killstreaks\_killstreaks::giveKillstreak("airstrike");
+      player maps\mp\killstreaks\_killstreaks::giveKillstreak("airstrike");
     }
 
     setDevDvar("scr_giveairstrike", "0");
   }
   if(getdvarint("scr_giveairdrop") == 1) {
     foreach(player in level.players) {
-    player maps\mp\killstreaks\_killstreaks::giveKillstreak("airdrop");
+      player maps\mp\killstreaks\_killstreaks::giveKillstreak("airdrop");
     }
 
     setDevDvar("scr_giveairdrop", "0");
   }
   if(getdvarint("scr_givehelicopter") == 1) {
     foreach(player in level.players) {
-    player maps\mp\killstreaks\_killstreaks::giveKillstreak("helicopter");
+      player maps\mp\killstreaks\_killstreaks::giveKillstreak("helicopter");
     }
 
     setDevDvar("scr_givehelicopter", "0");
   }
   if(getdvarint("scr_giveac130") == 1) {
     foreach(player in level.players) {
-    player maps\mp\killstreaks\_killstreaks::giveKillstreak("ac130");
+      player maps\mp\killstreaks\_killstreaks::giveKillstreak("ac130");
     }
 
     setDevDvar("scr_giveac130", "0");
   }
   if(getdvarint("scr_giveremotemissile") == 1) {
     foreach(player in level.players) {
-    player maps\mp\killstreaks\_killstreaks::giveKillstreak("predator_missile");
+      player maps\mp\killstreaks\_killstreaks::giveKillstreak("predator_missile");
     }
 
     setDevDvar("scr_giveremotemissile", "0");
@@ -179,7 +177,7 @@ updateDevSettings() {
 
     if(isDefined(level.killstreakFuncs[streakName])) {
       foreach(player in level.players) {
-      player maps\mp\killstreaks\_killstreaks::giveKillstreak(streakName);
+        player maps\mp\killstreaks\_killstreaks::giveKillstreak(streakName);
       }
     } else {
       println("\"" + getDvar("scr_givekillstreak") + "\" is not a valid value for scr_givekillstreak. Try:");
@@ -200,8 +198,7 @@ updateDevSettings() {
 
       if(isDefined(tokens[1])) {
         slotId = int(tokens[1]);
-      }
-      else {
+      } else {
         slotId = 0;
       }
 
@@ -242,8 +239,7 @@ updateDevSettings() {
 
           if(isDefined(tokens[2])) {
             player thread maps\mp\killstreaks\_killstreaks::killstreakUsePressed();
-          }
-          else {
+          } else {
             player thread[[level.killstreakFuncs[streakName]]]();
           }
 
@@ -257,8 +253,7 @@ updateDevSettings() {
 
             if(streakName == "airdrop_mega") {
               level thread maps\mp\killstreaks\_airdrop::doC130FlyBy(player, level.mapCenter, randomFloat(360), "airdrop_mega");
-            }
-            else {
+            } else {
               level thread maps\mp\killstreaks\_airdrop::doFlyBy(player, level.mapCenter, randomFloat(360), "airdrop");
             }
           }
@@ -401,8 +396,7 @@ updateDevSettings() {
 
     if(level.teamBased && (!level.teamCount["allies"] || !level.teamCount["axis"])) {
       println("scr_set_rank may not work because there are not players on both teams");
-    }
-    else if(!level.teamBased && (level.teamCount["allies"] + level.teamCount["axis"] < 2)) {
+    } else if(!level.teamBased && (level.teamCount["allies"] + level.teamCount["axis"] < 2)) {
       println("scr_set_rank may not work because there are not at least two players");
     }
 
@@ -459,18 +453,18 @@ updateDevSettings() {
       switch (splashType) {
         case "splash":
           foreach(player in level.players) {
-          player thread maps\mp\gametypes\_hud_message::splashNotify(splashName, splashValue);
+            player thread maps\mp\gametypes\_hud_message::splashNotify(splashName, splashValue);
           }
           break;
         case "killstreak":
           foreach(player in level.players) {
-          player thread maps\mp\gametypes\_hud_message::killstreakSplashNotify(splashName, splashValue);
+            player thread maps\mp\gametypes\_hud_message::killstreakSplashNotify(splashName, splashValue);
           }
           break;
         case "challenge":
         case "perk_challenge":
           foreach(player in level.players) {
-          player thread maps\mp\gametypes\_hud_message::challengeSplashNotify(splashName);
+            player thread maps\mp\gametypes\_hud_message::challengeSplashNotify(splashName);
           }
           break;
         case "splooge":
@@ -489,7 +483,7 @@ updateDevSettings() {
 
   if(getDvar("scr_addlower") != "") {
     foreach(player in level.players) {
-    player thread testLowerMessage();
+      player thread testLowerMessage();
     }
 
     setDevDvar("scr_addlower", "");
@@ -537,7 +531,7 @@ updateDevSettings() {
     promotion = (getDvar("scr_show_endgameupdate") == "2");
 
     foreach(player in level.players) {
-    player thread testEndGameUpdate(promotion);
+      player thread testEndGameUpdate(promotion);
     }
 
     setDevDvar("scr_show_endgameupdate", "");
@@ -555,8 +549,7 @@ testEndGameUpdate(promotion) {
 
   if(isDefined(promotion) && promotion) {
     self setClientDvar("ui_promotion", 1);
-  }
-  else {
+  } else {
     self setClientDvar("ui_promotion", 0);
   }
 
@@ -614,8 +607,7 @@ xKillsY(attackerName, victimName) {
   for(index = 0; index < level.players.size; index++) {
     if(level.players[index].name == attackerName) {
       attacker = level.players[index];
-    }
-    else if(level.players[index].name == victimName) {
+    } else if(level.players[index].name == victimName) {
       victim = level.players[index];
     }
   }
@@ -670,14 +662,12 @@ updateMinimapSetting() {
           mincorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
           if(corners[1].origin[0] > corners[0].origin[0]) {
             maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-          }
-          else {
+          } else {
             mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
           }
           if(corners[1].origin[1] > corners[0].origin[1]) {
             maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-          }
-          else {
+          } else {
             mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
           }
 
@@ -727,8 +717,7 @@ updateMinimapSetting() {
           }
           if(angleside > angletop) {
             angle = angleside;
-          }
-          else {
+          } else {
             angle = angletop;
           }
 
@@ -800,7 +789,7 @@ drawMiniMapBounds(viewpos, mincorner, maxcorner) {
 
   /*diagonal = maxcorner - mincorner;
   side = vecscale(north, vectordot(diagonal, north));
-	
+  	
   origcorner0 = mincorner;
   origcorner1 = mincorner + side;
   origcorner2 = maxcorner;
@@ -1111,13 +1100,13 @@ updateTestWeapon() {
   self giveMaxAmmo(weaponName);
 }
 
-  onPlayerConnect() {
-    for(;;) {
-      level waittill("connected", player);
+onPlayerConnect() {
+  for(;;) {
+    level waittill("connected", player);
 
-      player thread updateReflectionProbe();
-    }
+    player thread updateReflectionProbe();
   }
+}
 
 updateReflectionProbe() {
   for(;;) {

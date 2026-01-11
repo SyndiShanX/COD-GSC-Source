@@ -769,9 +769,7 @@ function unlock_all(b_do_open = 1) {
         [c_door]
       ] - > unlock();
       if(b_do_open) {
-        [
-          [c_door]
-        ] - > open();
+        [[c_door]] - > open();
       }
     }
   }
@@ -785,9 +783,7 @@ function unlock(str_name, str_name_type = "targetname", b_do_open = 1) {
         [s_inst.c_door]
       ] - > unlock();
       if(b_do_open) {
-        [
-          [s_inst.c_door]
-        ] - > open();
+        [[s_inst.c_door]] - > open();
       }
     }
   }

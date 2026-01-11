@@ -46,7 +46,7 @@ init() {
   level.botClasses[3] = "class0";
   level.botClasses[4] = "class0";
 
-    level.defaultClass = "CLASS_ASSAULT";
+  level.defaultClass = "CLASS_ASSAULT";
 
   level.classTableName = "mp/classTable.csv";
 
@@ -67,8 +67,7 @@ getWeaponChoice(response) {
   tokens = strtok(response, ",");
   if(tokens.size > 1) {
     return int(tokens[1]);
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -121,8 +120,7 @@ cac_getOffhand(classIndex) {
 table_getWeapon(tableName, classIndex, weaponIndex) {
   if(weaponIndex == 0) {
     return tableLookup(tableName, 0, "loadoutPrimary", classIndex + 1);
-  }
-  else {
+  } else {
     return tableLookup(tableName, 0, "loadoutSecondary", classIndex + 1);
   }
 }
@@ -133,23 +131,20 @@ table_getWeaponAttachment(tableName, classIndex, weaponIndex, attachmentIndex) {
   if(weaponIndex == 0) {
     if(!isDefined(attachmentIndex) || attachmentIndex == 0) {
       tempName = tableLookup(tableName, 0, "loadoutPrimaryAttachment", classIndex + 1);
-    }
-    else {
+    } else {
       tempName = tableLookup(tableName, 0, "loadoutPrimaryAttachment2", classIndex + 1);
     }
   } else {
     if(!isDefined(attachmentIndex) || attachmentIndex == 0) {
       tempName = tableLookup(tableName, 0, "loadoutSecondaryAttachment", classIndex + 1);
-    }
-    else {
+    } else {
       tempName = tableLookup(tableName, 0, "loadoutSecondaryAttachment2", classIndex + 1);
     }
   }
 
   if(tempName == "" || tempName == "none") {
     return "none";
-  }
-  else {
+  } else {
     return tempName;
   }
 }
@@ -157,8 +152,7 @@ table_getWeaponAttachment(tableName, classIndex, weaponIndex, attachmentIndex) {
 table_getWeaponCamo(tableName, classIndex, weaponIndex) {
   if(weaponIndex == 0) {
     return tableLookup(tableName, 0, "loadoutPrimaryCamo", classIndex + 1);
-  }
-  else {
+  } else {
     return tableLookup(tableName, 0, "loadoutSecondaryCamo", classIndex + 1);
   }
 }
@@ -510,22 +504,18 @@ giveLoadout(team, class, allowCopycat) {
   offhandSecondaryWeapon = loadoutOffhand + "_mp";
   if(loadoutOffhand == "flash_grenade") {
     self SetOffhandSecondaryClass("flash");
-  }
-  else {
+  } else {
     self SetOffhandSecondaryClass("smoke");
   }
 
   self giveWeapon(offhandSecondaryWeapon);
   if(loadOutOffhand == "smoke_grenade") {
     self setWeaponAmmoClip(offhandSecondaryWeapon, 1);
-  }
-  else if(loadOutOffhand == "flash_grenade") {
+  } else if(loadOutOffhand == "flash_grenade") {
     self setWeaponAmmoClip(offhandSecondaryWeapon, 2);
-  }
-  else if(loadOutOffhand == "concussion_grenade") {
+  } else if(loadOutOffhand == "concussion_grenade") {
     self setWeaponAmmoClip(offhandSecondaryWeapon, 2);
-  }
-  else {
+  } else {
     self setWeaponAmmoClip(offhandSecondaryWeapon, 1);
   }
 
@@ -644,8 +634,7 @@ trackRiotShield() {
 
       if(self.hasRiotShield) {
         self MoveShieldModel("weapon_riot_shield_mp", "tag_shield_back", "tag_weapon_left");
-      }
-      else {
+      } else {
         self AttachShieldModel("weapon_riot_shield_mp", "tag_weapon_left");
       }
 
@@ -659,8 +648,7 @@ trackRiotShield() {
 
       if(self.hasRiotShield) {
         self MoveShieldModel("weapon_riot_shield_mp", "tag_weapon_left", "tag_shield_back");
-      }
-      else {
+      } else {
         self DetachShieldModel("weapon_riot_shield_mp", "tag_weapon_left");
       }
 
@@ -679,8 +667,7 @@ tryAttach(placement) // deprecated; hopefully we won't need to bring this defens
 {
   if(!isDefined(placement) || placement != "back") {
     tag = "tag_weapon_left";
-  }
-  else {
+  } else {
     tag = "tag_shield_back";
   }
 
@@ -700,8 +687,7 @@ tryDetach(placement) // deprecated; hopefully we won't need to bring this defens
 {
   if(!isDefined(placement) || placement != "back") {
     tag = "tag_weapon_left";
-  }
-  else {
+  } else {
     tag = "tag_shield_back";
   }
 
@@ -763,8 +749,7 @@ buildWeaponName(baseName, attachment1, attachment2) {
 
   if(!isValidWeapon(weaponName + "_mp")) {
     return (baseName + "_mp");
-  }
-  else {
+  } else {
     return (weaponName + "_mp");
   }
 }
@@ -807,8 +792,7 @@ setKillstreaks(streak1, streak2, streak3) {
 
   if(self _hasPerk("specialty_hardline")) {
     modifier = -1;
-  }
-  else {
+  } else {
     modifier = 0;
   }
 
@@ -934,8 +918,7 @@ getPerkForClass(perkSlot, className) {
 
   if(isSubstr(className, "custom")) {
     return cac_getPerk(class_num, perkSlot);
-  }
-  else {
+  } else {
     return table_getPerk(level.classTableName, class_num, perkSlot);
   }
 }
@@ -1137,7 +1120,7 @@ isValidWeapon(refString) {
     level.weaponRefs = [];
 
     foreach(weaponRef in level.weaponList) {
-    level.weaponRefs[weaponRef] = true;
+      level.weaponRefs[weaponRef] = true;
     }
   }
 

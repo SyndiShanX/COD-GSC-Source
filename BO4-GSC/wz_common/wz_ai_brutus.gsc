@@ -39,7 +39,6 @@
 #include scripts\mp_common\player\player_damage;
 #include scripts\wz_common\wz_ai_utils;
 #include scripts\wz_common\wz_ai_zombie;
-
 #namespace wz_ai_brutus;
 
 autoexec __init__system__() {
@@ -116,7 +115,7 @@ function_6a482c74(params) {
 
 function_bad305c7() {
   self.var_2cee3556 = [];
-  self.var_2cee3556[#"brutus_base_itemlist_all"] = 15;
+  self.var_2cee3556[# "brutus_base_itemlist_all"] = 15;
 }
 
 function_6090f71a() {
@@ -132,7 +131,7 @@ function_6090f71a() {
   self clientfield::set("brutus_spawn_clientfield", 1);
   var_7dd9d338 = "c_t8_zmb_mob_brutus_baton";
 
-  if(self.subarchetype === #"brutus_special") {
+  if(self.subarchetype === # "brutus_special") {
     var_7dd9d338 = "c_t8_zmb_mob_brutus_boss_baton";
   }
 
@@ -398,7 +397,7 @@ private function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weap
     final_damage = self.health + 1;
   }
 
-    return final_damage;
+  return final_damage;
 }
 
 private getclosestnode(entity, nodes) {
@@ -432,7 +431,7 @@ private getclosestnode(entity, nodes) {
 
 function_b510a832() {
   level endon(#"game_ended");
-  self endon(#"death", #"state_changed");
+  self endon(#"death", # "state_changed");
   start_node = getclosestnode(self, self.patrol_path.path);
   start_index = 0;
 
@@ -454,7 +453,7 @@ function_b510a832() {
 
       self.var_80780af2 = next_goal;
       self.var_9a79d89d = next_goal;
-      waitresult = self waittilltimeout(30, #"goal");
+      waitresult = self waittilltimeout(30, # "goal");
 
       if(isDefined(self.var_50826790) && self.var_50826790) {
         self.var_ef59b90 = 5;

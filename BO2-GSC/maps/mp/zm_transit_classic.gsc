@@ -118,8 +118,7 @@ main() {
   level.zombie_vars["zombie_intermission_time"] = 12;
 }
 
-zm_traversal_override_ignores() {
-}
+zm_traversal_override_ignores() {}
 
 zm_traversal_override(traversealias) {
   suffix = "";
@@ -181,8 +180,7 @@ init_bus() {
 closest_player_transit(origin, players) {
   if(isDefined(level.the_bus) && level.the_bus.numaliveplayersridingbus > 0 || !(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths)) {
     player = getclosest(origin, players);
-  }
-  else {
+  } else {
     player = get_closest_player_using_paths(origin, players);
   }
 
@@ -294,8 +292,7 @@ collapsing_bridge_init() {
   for(i = 0; i < bridge.size; i++) {
     if(isDefined(bridge[i].script_angles)) {
       rot_angle = bridge[i].script_angles;
-    }
-    else {
+    } else {
       rot_angle = (0, 0, 0);
     }
 
@@ -430,8 +427,7 @@ callback_spectator_respawn_custom_score() {
 
     if(self.account_val >= money_required) {
       self.account_val = self.account_val - money_required;
-    }
-    else {
+    } else {
       self.account_val = 0;
     }
   } else {
@@ -439,8 +435,7 @@ callback_spectator_respawn_custom_score() {
 
     if(account_val >= money_required) {
       self set_map_stat("depositBox", account_val - money_required);
-    }
-    else {
+    } else {
       self set_map_stat("depositBox", 0);
     }
   }
@@ -468,11 +463,9 @@ transit_custom_deny_vox(door_buy) {
 
       if(x > 66) {
         self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "perk_deny", undefined, 0);
-      }
-      else if(x > 33) {
+      } else if(x > 33) {
         self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "no_money_box", undefined, 0);
-      }
-      else {
+      } else {
         self maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "no_money_weapon", undefined, 0);
       }
 
@@ -496,8 +489,7 @@ transit_custom_powerup_vo_response(powerup_player, powerup) {
   foreach(player in players) {
     if(player == powerup_player) {
       continue;
-    }
-    else if(distancesquared(player.origin, powerup_player.origin) < dist) {
+    } else if(distancesquared(player.origin, powerup_player.origin) < dist) {
       player do_player_general_vox("general", "exert_laugh", 10, 5);
     }
   }

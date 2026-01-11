@@ -9,7 +9,6 @@
 #include scripts\killstreaks\ai\escort;
 #include scripts\killstreaks\ai\state;
 #include scripts\killstreaks\ai\target;
-
 #namespace ai_patrol;
 
 init() {
@@ -193,15 +192,15 @@ private is_debugging(dvar) {
   return 0;
 }
 
-  function function_38d931e7() {
-    goalinfo = self function_4794d6a3();
+function function_38d931e7() {
+  goalinfo = self function_4794d6a3();
 
-    if(!isDefined(goalinfo.var_9e404264) || goalinfo.var_9e404264) {
-      return true;
-    }
-
-    return false;
+  if(!isDefined(goalinfo.var_9e404264) || goalinfo.var_9e404264) {
+    return true;
   }
+
+  return false;
+}
 
 function_6b33bfb8(radius) {
   if(self function_38d931e7()) {
@@ -357,7 +356,7 @@ private function_7c779aaf() {
   self endon(#"hash_5824b020cde66d5");
   fx_marker = self.var_74e8fd19;
   hud_marker = self.var_e2aca908;
-  self waittill(#"death", #"state_changed");
+  self waittill(#"death", # "state_changed");
 
   if(isDefined(self)) {
     self function_3ec67269();

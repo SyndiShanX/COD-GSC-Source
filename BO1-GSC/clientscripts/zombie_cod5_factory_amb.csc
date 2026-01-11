@@ -91,20 +91,15 @@ switch_progress_sound() {
   if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "1") {
       time = .5;
-    }
-    else if(self.script_noteworthy == "2") {
+    } else if(self.script_noteworthy == "2") {
       time = 1;
-    }
-    else if(self.script_noteworthy == "3") {
+    } else if(self.script_noteworthy == "3") {
       time = 1.5;
-    }
-    else if(self.script_noteworthy == "4") {
+    } else if(self.script_noteworthy == "4") {
       time = 2;
-    }
-    else if(self.script_noteworthy == "5") {
+    } else if(self.script_noteworthy == "5") {
       time = 2.5;
-    }
-    else {
+    } else {
       time = 0;
     }
     wait(time);

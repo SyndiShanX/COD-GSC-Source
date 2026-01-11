@@ -124,8 +124,7 @@ update_debug_friendlycolor(var_0) {
 
   if(isDefined(self.script_forcecolor)) {
     level.debug_color_friendlies[var_0] = self.script_forcecolor;
-  }
-  else {
+  } else {
     level.debug_color_friendlies[var_0] = undefined;
   }
 
@@ -146,8 +145,7 @@ new_color_being_set(var_0) {
 
     if(!isDefined(self.dontcolormove)) {
       thread maps\_colors::goto_current_colorindex();
-    }
-    else {
+    } else {
       self.dontcolormove = undefined;
     }
   }
@@ -225,8 +223,7 @@ _hint_stick_get_config_suffix(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(isDefined(level.ps3) && level.ps3 || isDefined(level.ps4) && level.ps4) {
       if(issubstr(var_6, "southpaw") || var_5 && issubstr(var_6, "legacy")) {
         return var_4;
-      }
-      else {
+      } else {
         return var_3;
       }
     } else if(issubstr(var_6, "southpaw") || var_5 && issubstr(var_6, "legacy"))
@@ -346,11 +343,9 @@ hintprint(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   if(isDefined(var_4)) {
     var_16 = 3;
-  }
-  else if(isDefined(var_3)) {
+  } else if(isDefined(var_3)) {
     var_16 = 2;
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     var_16 = 1;
   }
 
@@ -383,9 +378,7 @@ hintprint(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
           ](var_2)) {
           break;
         }
-      } else if([
-          [level.hint_breakfunc]
-        ]()) {
+      } else if([[level.hint_breakfunc]]()) {
         break;
       }
     }
@@ -413,14 +406,12 @@ hintdisplayhandlerupdate(var_0) {
   while(level.player maps\_utility::ent_flag("global_hint_in_use")) {
     if(!level.player common_scripts\utility::is_player_gamepad_enabled() && isDefined(level.hint_list[var_0]["pc"])) {
       level.current_hint settext(level.hint_list[var_0]["pc"]);
-    }
-    else {
+    } else {
       var_1 = getsticksconfig();
 
       if(issubstr(var_1, "southpaw") && isDefined(level.hint_list[var_0]["southpaw"])) {
         level.current_hint settext(level.hint_list[var_0]["southpaw"]);
-      }
-      else {
+      } else {
         level.current_hint settext(level.hint_list[var_0]["gamepad"]);
       }
     }
@@ -432,22 +423,19 @@ hintdisplayhandlerupdate(var_0) {
 hintdisplayhandlersetup(var_0) {
   if(!level.player common_scripts\utility::is_player_gamepad_enabled() && isDefined(level.hint_list[var_0]["pc"])) {
     level.trigger_hint_string[var_0] = level.hint_list[var_0]["pc"];
-  }
-  else {
+  } else {
     var_1 = getsticksconfig();
 
     if(issubstr(var_1, "southpaw") && isDefined(level.hint_list[var_0]["southpaw"])) {
       level.trigger_hint_string[var_0] = level.hint_list[var_0]["southpaw"];
-    }
-    else {
+    } else {
       level.trigger_hint_string[var_0] = level.hint_list[var_0]["gamepad"];
     }
   }
 
   if((isDefined(level.hint_list[var_0]["pc"]) || isDefined(level.hint_list[var_0]["southpaw"])) && ![[level.trigger_hint_func[var_0]]]()) {
     thread hintdisplayhandlerupdate(var_0);
-  }
-  else {
+  } else {
     level.player notify("HintDisplayHandlerEnd");
   }
 }
@@ -606,20 +594,15 @@ function_stack_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(isDefined(var_6)) {
       var_0[[var_1]](var_2, var_3, var_4, var_5, var_6);
-    }
-    else if(isDefined(var_5)) {
+    } else if(isDefined(var_5)) {
       var_0[[var_1]](var_2, var_3, var_4, var_5);
-    }
-    else if(isDefined(var_4)) {
+    } else if(isDefined(var_4)) {
       var_0[[var_1]](var_2, var_3, var_4);
-    }
-    else if(isDefined(var_3)) {
+    } else if(isDefined(var_3)) {
       var_0[[var_1]](var_2, var_3);
-    }
-    else if(isDefined(var_2)) {
+    } else if(isDefined(var_2)) {
       var_0[[var_1]](var_2);
-    }
-    else {
+    } else {
       var_0[[var_1]]();
     }
 
@@ -695,8 +678,7 @@ array_waitlogic2(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     wait(var_2);
-  }
-  else {
+  } else {
     var_0 waittill(var_1);
   }
 }
@@ -704,14 +686,11 @@ array_waitlogic2(var_0, var_1, var_2) {
 exec_call(var_0) {
   if(var_0.parms.size == 0) {
     var_0.caller call[[var_0.func]]();
-  }
-  else if(var_0.parms.size == 1) {
+  } else if(var_0.parms.size == 1) {
     var_0.caller call[[var_0.func]](var_0.parms[0]);
-  }
-  else if(var_0.parms.size == 2) {
+  } else if(var_0.parms.size == 2) {
     var_0.caller call[[var_0.func]](var_0.parms[0], var_0.parms[1]);
-  }
-  else if(var_0.parms.size == 3) {
+  } else if(var_0.parms.size == 3) {
     var_0.caller call[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2]);
   }
 
@@ -727,14 +706,11 @@ exec_call(var_0) {
 exec_call_noself(var_0) {
   if(var_0.parms.size == 0) {
     call[[var_0.func]]();
-  }
-  else if(var_0.parms.size == 1) {
+  } else if(var_0.parms.size == 1) {
     call[[var_0.func]](var_0.parms[0]);
-  }
-  else if(var_0.parms.size == 2) {
+  } else if(var_0.parms.size == 2) {
     call[[var_0.func]](var_0.parms[0], var_0.parms[1]);
-  }
-  else if(var_0.parms.size == 3) {
+  } else if(var_0.parms.size == 3) {
     call[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2]);
   }
 
@@ -757,14 +733,11 @@ exec_func(var_0, var_1) {
 
   if(var_0.parms.size == 0) {
     var_0.caller[[var_0.func]]();
-  }
-  else if(var_0.parms.size == 1) {
+  } else if(var_0.parms.size == 1) {
     var_0.caller[[var_0.func]](var_0.parms[0]);
-  }
-  else if(var_0.parms.size == 2) {
+  } else if(var_0.parms.size == 2) {
     var_0.caller[[var_0.func]](var_0.parms[0], var_0.parms[1]);
-  }
-  else if(var_0.parms.size == 3) {
+  } else if(var_0.parms.size == 3) {
     var_0.caller[[var_0.func]](var_0.parms[0], var_0.parms[1], var_0.parms[2]);
   }
 
@@ -896,14 +869,12 @@ dynamic_run_speed_proc(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(self.last_set_goalent)) {
       var_19 = [
-    }
-        [level.drs_ahead_test]
-      ](self.last_set_goalent, var_1);
+        }
+        [level.drs_ahead_test]](self.last_set_goalent, var_1);
     else if(isDefined(self.last_set_goalnode)) {
       var_19 = [
-    }
-        [level.drs_ahead_test]
-      ](self.last_set_goalnode, var_1);
+        }
+        [level.drs_ahead_test]](self.last_set_goalnode, var_1);
 
     if(isDefined(self.cqbwalking) && self.cqbwalking && !self.dontchangemoveplaybackrate) {
       self.moveplaybackrate = 1;
@@ -944,8 +915,7 @@ stop_dynamic_run_speed() {
   if(isDefined(level.scr_anim["generic"]["DRS_run"])) {
     if(isarray(level.scr_anim["generic"]["DRS_run"])) {
       maps\_utility::set_generic_run_anim_array("DRS_run");
-    }
-    else {
+    } else {
       maps\_utility::set_generic_run_anim("DRS_run");
     }
   } else
@@ -965,8 +935,7 @@ dynamic_run_ahead_test(var_0, var_1) {
   if(!isDefined(var_0.classname)) {
     if(!isDefined(var_0.type)) {
       var_2 = maps\_spawner::get_target_structs;
-    }
-    else {
+    } else {
       var_2 = maps\_spawner::get_target_nodes;
     }
   } else
@@ -985,15 +954,13 @@ dynamic_run_set(var_0) {
     case "sprint":
       if(isDefined(self.cqbwalking) && self.cqbwalking && !self.dontchangemoveplaybackrate) {
         self.moveplaybackrate = 1;
-      }
-      else if(!self.dontchangemoveplaybackrate) {
+      } else if(!self.dontchangemoveplaybackrate) {
         self.moveplaybackrate = 1.15;
       }
 
       if(isarray(level.scr_anim["generic"]["DRS_sprint"])) {
         maps\_utility::set_generic_run_anim_array("DRS_sprint");
-      }
-      else {
+      } else {
         maps\_utility::set_generic_run_anim("DRS_sprint");
       }
 
@@ -1009,8 +976,7 @@ dynamic_run_set(var_0) {
       if(isDefined(level.scr_anim["generic"]["DRS_run"])) {
         if(isarray(level.scr_anim["generic"]["DRS_run"])) {
           maps\_utility::set_generic_run_anim_array("DRS_run");
-        }
-        else {
+        } else {
           maps\_utility::set_generic_run_anim("DRS_run");
         }
       } else
@@ -1031,8 +997,7 @@ dynamic_run_set(var_0) {
       if(isDefined(level.scr_anim["generic"]["DRS_combat_jog"])) {
         if(isarray(level.scr_anim["generic"]["DRS_combat_jog"])) {
           maps\_utility::set_generic_run_anim_array("DRS_combat_jog");
-        }
-        else {
+        } else {
           maps\_utility::set_generic_run_anim("DRS_combat_jog");
         }
       } else
@@ -1130,8 +1095,7 @@ movespeed_ramp_over_time(var_0, var_1, var_2, var_3, var_4) {
 
     if(isai(var_0)) {
       var_0 maps\_utility::set_moveplaybackrate(var_5, undefined, var_4);
-    }
-    else {
+    } else {
       var_0 setmovespeedscale(var_5);
     }
 
@@ -1140,8 +1104,7 @@ movespeed_ramp_over_time(var_0, var_1, var_2, var_3, var_4) {
 
   if(isai(var_0)) {
     var_0 maps\_utility::set_moveplaybackrate(var_2, undefined, var_4);
-  }
-  else {
+  } else {
     var_0 setmovespeedscale(var_2);
   }
 }
@@ -1312,8 +1275,7 @@ update_rumble_intensity(var_0, var_1) {
 
     if(isDefined(self.rumble_base_entity)) {
       self.origin = self.rumble_base_entity.origin + (0, 0, var_3);
-    }
-    else {
+    } else {
       self.origin = var_0 getEye() + (0, 0, var_3);
     }
 
@@ -1434,23 +1396,17 @@ delaythread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(var_7)) {
     thread[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7);
-  }
-  else if(isDefined(var_6)) {
+  } else if(isDefined(var_6)) {
     thread[[var_0]](var_2, var_3, var_4, var_5, var_6);
-  }
-  else if(isDefined(var_5)) {
+  } else if(isDefined(var_5)) {
     thread[[var_0]](var_2, var_3, var_4, var_5);
-  }
-  else if(isDefined(var_4)) {
+  } else if(isDefined(var_4)) {
     thread[[var_0]](var_2, var_3, var_4);
-  }
-  else if(isDefined(var_3)) {
+  } else if(isDefined(var_3)) {
     thread[[var_0]](var_2, var_3);
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     thread[[var_0]](var_2);
-  }
-  else {
+  } else {
     thread[[var_0]]();
   }
 }
@@ -1462,23 +1418,17 @@ delaychildthread_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(var_7)) {
     childthread[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7);
-  }
-  else if(isDefined(var_6)) {
+  } else if(isDefined(var_6)) {
     childthread[[var_0]](var_2, var_3, var_4, var_5, var_6);
-  }
-  else if(isDefined(var_5)) {
+  } else if(isDefined(var_5)) {
     childthread[[var_0]](var_2, var_3, var_4, var_5);
-  }
-  else if(isDefined(var_4)) {
+  } else if(isDefined(var_4)) {
     childthread[[var_0]](var_2, var_3, var_4);
-  }
-  else if(isDefined(var_3)) {
+  } else if(isDefined(var_3)) {
     childthread[[var_0]](var_2, var_3);
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     childthread[[var_0]](var_2);
-  }
-  else {
+  } else {
     childthread[[var_0]]();
   }
 }
@@ -1520,9 +1470,7 @@ comparesizesfx(var_0, var_1, var_2, var_3) {
     for(var_6 = 0; var_6 < var_5.size; var_6++) {
       var_7 = distance(var_1[var_5[var_6]].v["origin"], var_0);
 
-      if([
-          [var_3]
-        ](var_7, var_2)) {
+      if([[var_3]](var_7, var_2)) {
         continue;
       }
       var_2 = var_7;
@@ -1569,7 +1517,7 @@ add_trigger_func_thread() {
   self.trigger_functions = undefined;
 
   foreach(var_3 in var_1) {
-  thread[[var_3]](var_0);
+    thread[[var_3]](var_0);
   }
 }
 
@@ -1655,8 +1603,7 @@ _flag_wait_trigger(var_0, var_1) {
 ai_save_ignore_setting(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     self._ignore_settings_old[var_1] = var_0;
-  }
-  else {
+  } else {
     self._ignore_settings_old[var_1] = "none";
   }
 
@@ -1667,8 +1614,7 @@ ai_restore_ignore_setting(var_0, var_1) {
   if(isDefined(self._ignore_settings_old)) {
     if(isstring(self._ignore_settings_old[var_0]) && self._ignore_settings_old[var_0] == "none") {
       return var_1;
-    }
-    else {
+    } else {
       return self._ignore_settings_old[var_0];
     }
   }
@@ -1683,7 +1629,7 @@ _tff_sync_triggers() {
     return;
   }
   foreach(var_2 in var_0) {
-  var_2 thread _tff_sync_trigger_think();
+    var_2 thread _tff_sync_trigger_think();
   }
 }
 

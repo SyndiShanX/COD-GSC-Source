@@ -225,7 +225,7 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
       }
     }
 
-      assert(weaponTokens.size > 1 && weaponTokens.size <= 4);
+    assert(weaponTokens.size > 1 && weaponTokens.size <= 4);
 
     assertEx(weaponTokens[weaponTokens.size - 1] == "mp", "weaponTokens[weaponTokens.size - 1]: " + weaponTokens[weaponTokens.size - 1]);
     weaponTokens[weaponTokens.size - 1] = undefined; // remove the trailing "mp"

@@ -11,8 +11,7 @@ initweapon(var_0) {
 
   if(getweaponclipmodel(var_0) != "") {
     self.weaponinfo[var_0].useclip = 1;
-  }
-  else {
+  } else {
     self.weaponinfo[var_0].useclip = 0;
   }
 }
@@ -158,15 +157,13 @@ main() {
 
   if(self.team == "allies") {
     self.suppressionthreshold = 0.75;
-  }
-  else {
+  } else {
     self.suppressionthreshold = 0.5;
   }
 
   if(self.team == "allies") {
     self.randomgrenaderange = 0;
-  }
-  else {
+  } else {
     self.randomgrenaderange = 128;
   }
 
@@ -302,25 +299,21 @@ handleikevent() {
 
     if(var_14[0] || var_14[1]) {
       var_23 = max(var_17[0], var_17[1]);
-    }
-    else {
+    } else {
       var_23 = 0;
     }
 
     if(var_14[2] || var_14[3]) {
       var_24 = max(var_17[2], var_17[3]);
-    }
-    else {
+    } else {
       var_24 = 0;
     }
 
     if(var_16[0] == 1 && var_16[1] == 1) {
       var_10 = min(var_23, var_24);
-    }
-    else if(var_16[0] == 1) {
+    } else if(var_16[0] == 1) {
       var_10 = var_23;
-    }
-    else {
+    } else {
       var_10 = var_24;
     }
 

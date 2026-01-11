@@ -629,14 +629,14 @@ startHeliTweak2() {
   /*
   heliName = "md500_rush_2";
   thread heli_tweak( heliName );
-	
+  	
   wait 4;
-	
+  	
   heliName = "md500_rush_1";
   thread heli_tweak( heliName );
-	
+  	
   wait 2;
-	
+  	
   heliName = "md500_rush_3";
   thread heli_tweak( heliName );
   */
@@ -1132,7 +1132,7 @@ house_approach_dialogue() {
   level.scarecrow disable_ai_color();
   node1 = getnode( "scarecrow_breachhouse_start", "targetname" );
   level.scarecrow setgoalnode( node1 );
-	
+  	
   level.ozone disable_ai_color();
   node2 = getnode( "ozone_breachhouse_start", "targetname" );
   level.ozone setgoalnode( node2 );
@@ -1361,9 +1361,9 @@ house_briefing_scarecrow() {
     delaythread(10, ::flag_set, "photographs_done");
 
     /*
-		
+    		
     photosnap_notetracks = 15;
-		
+    		
     while( photosnap_notetracks > 0 )
     {
     	level.scarecrow waittillmatch( "single anim", "ps_scn_estate_photo_snap" );
@@ -1778,13 +1778,13 @@ ending_attackers_spawn() {
 
   /*
   dist = length( guy.origin - level.player.origin );
-	
+  	
   while( dist > 700 )
   {
   	dist = length( guy.origin - level.player.origin );
   	wait 0.1;
   }
-	
+  	
   if( isalive( level.player ) )
   {
   	guy.baseAccuracy = 1000000;
@@ -1811,9 +1811,9 @@ ending_drag_damagecheck() {
   {
   	level.player waittill ( "damage" );
   }
-	
+  	
   level notify ( "ending_normal_death" );
-	
+  	
   thread ending_drag_failure();
   */
 }
@@ -2794,7 +2794,7 @@ ending_gasoline_price_radio() {
   /*
   //Ghost, come in, this is Price! We're under attack by Shepherd's men at the boneyard! 	
   radio_dialogue( "est_pri_comein" );
-	
+  	
   //(off mike) Soap, hold the left flank! 	
   radio_dialogue( "est_pri_holdleftflank" );
 

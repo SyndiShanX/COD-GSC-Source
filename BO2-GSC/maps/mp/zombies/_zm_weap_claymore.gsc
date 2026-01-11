@@ -82,8 +82,7 @@ buy_claymores() {
 
             if(isDefined(model)) {
               model thread maps\mp\zombies\_zm_weapons::weapon_show(who);
-            }
-            else if(isDefined(self.clientfieldname)) {
+            } else if(isDefined(self.clientfieldname)) {
               level setclientfield(self.clientfieldname, 1);
             }
 
@@ -330,8 +329,7 @@ claymore_detonation() {
 
       if(isDefined(self.owner)) {
         self detonate(self.owner);
-      }
-      else {
+      } else {
         self detonate(undefined);
       }
 
@@ -383,8 +381,7 @@ satchel_damage() {
 
   if(level.satchelexplodethisframe) {
     wait(0.1 + randomfloat(0.4));
-  }
-  else {
+  } else {
     wait 0.05;
   }
 
@@ -432,8 +429,7 @@ show_claymore_hint(string) {
 
   if(string == "claymore_purchased") {
     text = &"ZOMBIE_CLAYMORE_HOWTO";
-  }
-  else {
+  } else {
     text = &"ZOMBIE_CLAYMORE_ALREADY_PURCHASED";
   }
 

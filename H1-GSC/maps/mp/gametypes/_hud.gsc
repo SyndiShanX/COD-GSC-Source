@@ -40,8 +40,7 @@ fontpulseinit(var_0) {
 
   if(isDefined(var_0)) {
     self.maxfontscale = min(var_0, 6.3);
-  }
-  else {
+  } else {
     self.maxfontscale = min(self.fontscale * 2, 6.3);
   }
 

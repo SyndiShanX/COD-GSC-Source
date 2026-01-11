@@ -286,15 +286,13 @@ cac_modified_damage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_
   if(isDefined(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_bulletdamage") && maps\mp\_utility::isbulletdamage(var_3)) {
     if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest")) {
       var_10 = var_9;
-    }
-    else {
+    } else {
       var_10 = var_10 + var_2 * level.bulletdamagemod;
     }
   } else if(isDefined(var_1) && var_1 maps\mp\_utility::_hasperk("specialty_explosivedamage") && isexplosivedamagemod(var_3)) {
     if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest")) {
       var_10 = var_9;
-    }
-    else {
+    } else {
       var_10 = var_10 + var_2 * level.explosivedamagemod;
     }
   } else if(isDefined(var_0) && isplayer(var_0) && var_0 maps\mp\_utility::_hasperk("specialty_armorvest"))
@@ -429,15 +427,13 @@ get_specialtydata(var_0, var_1, var_2) {
     if(issubstr(var_3, "grenade")) {
       if(var_0 == "specialty_fraggrenade") {
         self.perkscustom["grenades_count"] = var_4;
-      }
-      else {
+      } else {
         self.perkscustom["grenades_count"] = 1;
       }
 
       if(var_0 == "specialty_specialgrenade" && isDefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp") {
         self.perkscustom["specialgrenades_count"] = var_4;
-      }
-      else {
+      } else {
         self.perkscustom["specialgrenades_count"] = 1;
       }
 
@@ -469,8 +465,7 @@ giveperkinventory() {
 setweaponammooverall(var_0, var_1) {
   if(isweaponcliponly(var_0)) {
     self setweaponammoclip(var_0, var_1);
-  }
-  else {
+  } else {
     self setweaponammoclip(var_0, var_1);
     var_2 = var_1 - self getweaponammoclip(var_0);
     self setweaponammostock(var_0, var_2);

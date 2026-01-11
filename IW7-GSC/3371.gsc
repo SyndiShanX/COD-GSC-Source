@@ -120,8 +120,7 @@ arcade_game_player_disconnect_or_death(var_00, var_01, var_02, var_03) {
 
   if(var_04 == "disconnect") {
     var_1.active_player = undefined;
-  }
-  else {
+  } else {
     [[var_03]](var_01, var_00);
     var_00 giveuponsuppressiontime(var_02);
     var_00 scripts\engine\utility::allow_weapon_switch(1);
@@ -167,9 +166,7 @@ arcade_game_player_gets_too_far_away(var_00, var_01, var_02, var_03, var_04, var
           var_00 giveuponsuppressiontime(var_02);
         }
 
-        [
-          [var_03]
-        ](var_01, var_00);
+        [[var_03]](var_01, var_00);
         var_1.active_player = undefined;
         scripts\cp\cp_interaction::add_to_current_interaction_list(var_01);
         var_00 scripts\engine\utility::allow_weapon_switch(1);
@@ -254,14 +251,11 @@ saveplayerpregameweapon(var_00) {
 
   if(var_01 == "none") {
     var_02 = 1;
-  }
-  else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, var_01)) {
+  } else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, var_01)) {
     var_02 = 1;
-  }
-  else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, getweaponbasename(var_01))) {
+  } else if(scripts\engine\utility::array_contains(level.additional_laststand_weapon_exclusion, getweaponbasename(var_01))) {
     var_02 = 1;
-  }
-  else if(scripts\cp\utility::is_melee_weapon(var_01, 1)) {
+  } else if(scripts\cp\utility::is_melee_weapon(var_01, 1)) {
     var_02 = 1;
   }
 
@@ -274,8 +268,7 @@ saveplayerpregameweapon(var_00) {
 
   if(isDefined(var_01)) {
     return var_01;
-  }
-  else {
+  } else {
     return var_00 getcurrentweapon();
   }
 }
@@ -358,8 +351,7 @@ restore_player_grenades_post_game() {
 set_arcade_game_award_type(var_00) {
   if(scripts\engine\utility::is_true(var_0.in_afterlife_arcade)) {
     var_0.arcade_game_award_type = "soul_power";
-  }
-  else {
+  } else {
     var_0.arcade_game_award_type = "tickets";
   }
 }

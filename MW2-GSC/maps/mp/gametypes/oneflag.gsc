@@ -50,14 +50,11 @@ main() {
 
   if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("camera_thirdPerson")) {
+  } else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_diehard")) {
+  } else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 
@@ -324,8 +321,7 @@ onBeginUse(player) {
 
   if(team == self maps\mp\gametypes\_gameobjects::getOwnerTeam()) {
     self.trigger.radius = 1024;
-  }
-  else {
+  } else {
     self.trigger.radius = self.oldRadius;
   }
 }
@@ -339,8 +335,7 @@ onPickup(player) {
 
   if(team == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
 
@@ -432,8 +427,7 @@ onUse(player) {
   team = player.pers["team"];
   if(team == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
 

@@ -184,8 +184,7 @@ set_avatar_dof(var_0) {
 fstop_clamp(var_0) {
   if(var_0 < 0.125) {
     var_0 = 0.125;
-  }
-  else if(var_0 > 128) {
+  } else if(var_0 > 128) {
     var_0 = 128;
   }
 
@@ -197,8 +196,7 @@ vl_dof_based_on_focus_weap_cac(var_0) {
 
   if(maps\mp\_vl_cao::iscollectionsmenuactive()) {
     var_1 = -0.0740886 * var_0 + 9.45422;
-  }
-  else {
+  } else {
     var_1 = -0.200097 * var_0 + 19.836;
   }
 
@@ -226,8 +224,7 @@ cammove(var_0, var_1, var_2, var_3) {
 
   if(isDefined(self.cut)) {
     self.origin = var_0;
-  }
-  else {
+  } else {
     self moveto(var_0, var_1, var_2, var_3);
   }
 }
@@ -235,8 +232,7 @@ cammove(var_0, var_1, var_2, var_3) {
 camrotate(var_0, var_1, var_2, var_3) {
   if(isDefined(self.cut)) {
     self.angles = var_0;
-  }
-  else {
+  } else {
     self rotateto(var_0, var_1, var_2, var_3);
   }
 }
@@ -250,8 +246,7 @@ checkcamposition(var_0, var_1, var_2) {
 
   if(var_3 >= var_2) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

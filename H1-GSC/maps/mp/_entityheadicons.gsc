@@ -212,8 +212,7 @@ setteamheadicon(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1)) {
     self.entityheadiconoffset = var_1;
-  }
-  else {
+  } else {
     self.entityheadiconoffset = (0, 0, 0);
   }
 
@@ -294,8 +293,7 @@ setplayerheadicon(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     self.entityheadiconoffset = var_1;
-  }
-  else {
+  } else {
     self.entityheadiconoffset = (0, 0, 0);
   }
 

@@ -8,7 +8,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace archetype_avogadro;
 
 autoexec __init__system__() {
@@ -16,9 +15,9 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + #"avogadro_bolt_fx", 16000, 1, "int", &function_9452b8f1, 0, 0);
-  clientfield::register("actor", "" + #"avogadro_phase_fx", 16000, 1, "int", &function_1d2d070c, 0, 0);
-  clientfield::register("actor", "" + #"avogadro_health_fx", 16000, 2, "int", &function_ae4cd3d4, 0, 0);
+  clientfield::register("scriptmover", "" + # "avogadro_bolt_fx", 16000, 1, "int", &function_9452b8f1, 0, 0);
+  clientfield::register("actor", "" + # "avogadro_phase_fx", 16000, 1, "int", &function_1d2d070c, 0, 0);
+  clientfield::register("actor", "" + # "avogadro_health_fx", 16000, 2, "int", &function_ae4cd3d4, 0, 0);
   ai::add_archetype_spawn_function(#"avogadro", &initavogadro);
 }
 

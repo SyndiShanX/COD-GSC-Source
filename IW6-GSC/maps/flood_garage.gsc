@@ -37,8 +37,7 @@ garage() {
 
   if(maps\_utility::getdifficulty() == "fu") {
     level.cw_player_allowed_underwater_time = 10;
-  }
-  else {
+  } else {
     level.cw_player_allowed_underwater_time = 15;
   }
 
@@ -356,13 +355,13 @@ float_cars() {
   var_0 = getEntArray("floating_car", "script_linkname");
 
   foreach(var_2 in var_0) {
-  var_2 thread floater_logic("car_bob");
+    var_2 thread floater_logic("car_bob");
   }
 
   var_4 = getEntArray("floating_container", "script_noteworthy");
 
   foreach(var_6 in var_4) {
-  var_6 thread floater_logic("bob");
+    var_6 thread floater_logic("bob");
   }
 }
 

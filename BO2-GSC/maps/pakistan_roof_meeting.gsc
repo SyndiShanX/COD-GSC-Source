@@ -51,7 +51,7 @@ skipto_roof_meeting() {
   level thread run_scene("rooftop_meeting_talkers_idle");
 
   foreach(ai_soldier in getEntArray("anthem_helipad_soldiers_ai", "targetname")) {
-  ai_soldier set_ignoreall(1);
+    ai_soldier set_ignoreall(1);
   }
 
   level thread courtyard_sounds();
@@ -909,8 +909,7 @@ detection_tarp_blocker_think() {
   while(true) {
     if(level.player istouching(getent("drone_detection_tarp_trigger", "targetname"))) {
       level.b_under_tarp = 1;
-    }
-    else {
+    } else {
       level.b_under_tarp = 0;
     }
 
@@ -920,7 +919,7 @@ detection_tarp_blocker_think() {
 
 detection_blocker_cleanup() {
   foreach(m_blocker in getEntArray("drone_detection_blocker", "script_noteworthy")) {
-  m_blocker delete();
+    m_blocker delete();
   }
 }
 
@@ -928,13 +927,12 @@ courtyard_cleanup() {
   a_enemies = getEntArray("anthem_courtyard_soldiers_ai", "targetname");
 
   foreach(ai_enemy in a_enemies) {
-  ai_enemy delete();
+    ai_enemy delete();
   }
 
   a_enemies = simple_spawn("anthem_rearguard");
 
-  foreach(ai_enemy in a_enemies) {
-  }
+  foreach(ai_enemy in a_enemies) {}
 }
 
 melee_attach_knife_player(e_player_body) {
@@ -1011,7 +1009,7 @@ train_enter() {
   v_start_position = m_train.origin + vectorscale((1, 0, 0), 6144.0);
 
   foreach(m_attachment in getEntArray("train_engine", "target")) {
-  m_attachment linkto(m_train, "tag_origin");
+    m_attachment linkto(m_train, "tag_origin");
   }
 
   m_train moveto(v_start_position, 0.05);

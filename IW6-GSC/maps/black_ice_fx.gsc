@@ -719,48 +719,39 @@ heat_column_fx() {
     if(var_14 < var_4) {
       if(var_17 > 0.33) {
         var_18 = 5;
-      }
-      else if(var_17 > -0.33) {
+      } else if(var_17 > -0.33) {
         var_18 = 4;
-      }
-      else {
+      } else {
         var_18 = 3;
       }
     } else if(var_14 < var_3) {
       if(var_17 > 0.65) {
         var_18 = 5;
-      }
-      else if(var_17 > -0.33) {
+      } else if(var_17 > -0.33) {
         var_18 = 4;
-      }
-      else {
+      } else {
         var_18 = 3;
       }
     } else if(var_14 < var_2) {
       if(var_17 > 0.35) {
         var_18 = 3;
-      }
-      else {
+      } else {
         var_18 = 2;
       }
     } else if(var_14 < var_1) {
       if(var_17 > 0.75) {
         var_18 = 3;
-      }
-      else if(var_17 > -0.33) {
+      } else if(var_17 > -0.33) {
         var_18 = 2;
-      }
-      else {
+      } else {
         var_18 = 1;
       }
     } else if(var_14 < var_0) {
       if(var_17 > 0.6) {
         var_18 = 2;
-      }
-      else if(var_17 > -0.25) {
+      } else if(var_17 > -0.25) {
         var_18 = 1;
-      }
-      else {
+      } else {
         var_18 = 0;
       }
     } else
@@ -900,11 +891,9 @@ pipedeckvisionswitching(var_0, var_1) {
 
   if(var_3 <= var_2) {
     var_0 = var_1;
-  }
-  else if(var_0 > var_1) {
+  } else if(var_0 > var_1) {
     var_0 = var_0 - var_2;
-  }
-  else {
+  } else {
     var_0 = var_0 + var_2;
   }
 
@@ -1095,13 +1084,13 @@ coldbreathfx() {
   var_0 = level._allies;
 
   foreach(var_2 in var_0) {
-  var_2 thread turn_on_cold_breath_fx();
+    var_2 thread turn_on_cold_breath_fx();
   }
 
   common_scripts\utility::flag_wait("flag_catwalks_end");
 
   foreach(var_2 in var_0) {
-  self notify("stop personal effect");
+    self notify("stop personal effect");
   }
 }
 
@@ -1163,8 +1152,7 @@ fx_screen_bokehdots_rain() {
   for(;;) {
     if(common_scripts\utility::flag("flag_fx_screen_bokehdots_rain")) {
       playFXOnTag(common_scripts\utility::getfx("bokeh_splats_01"), level.view_particle_source, "tag_origin");
-    }
-    else {
+    } else {
       stopFXOnTag(common_scripts\utility::getfx("bokeh_splats_01"), level.view_particle_source, "tag_origin");
     }
 
@@ -1192,14 +1180,11 @@ fx_screen_raindrops() {
 
         if(var_1[0] < -40) {
           playFXOnTag(level._effect["raindrops_screen_20"], level.view_particle_source, "tag_origin");
-        }
-        else if(var_1[0] < -25) {
+        } else if(var_1[0] < -25) {
           playFXOnTag(level._effect["raindrops_screen_10"], level.view_particle_source, "tag_origin");
-        }
-        else if(var_1[0] < 25) {
+        } else if(var_1[0] < 25) {
           playFXOnTag(level._effect["raindrops_screen_5"], level.view_particle_source, "tag_origin");
-        }
-        else if(var_1[0] < 40) {
+        } else if(var_1[0] < 40) {
           playFXOnTag(level._effect["raindrops_screen_3"], level.view_particle_source, "tag_origin");
         }
       }
@@ -1229,8 +1214,7 @@ fx_screen_oildrops() {
 
         if(var_1[0] < 25) {
           playFXOnTag(level._effect["oildrops_screen_5"], level.view_particle_source, "tag_origin");
-        }
-        else if(var_1[0] < 40) {
+        } else if(var_1[0] < 40) {
           playFXOnTag(level._effect["oildrops_screen_3"], level.view_particle_source, "tag_origin");
         }
       }

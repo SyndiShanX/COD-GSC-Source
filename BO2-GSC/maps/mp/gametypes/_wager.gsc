@@ -171,8 +171,7 @@ determinewagerwinnings() {
   }
   if(!level.teambased) {
     calculatefreeforallpayouts();
-  }
-  else {
+  } else {
     calculateteampayouts();
   }
 }
@@ -183,8 +182,7 @@ calculatefreeforallpayouts() {
 
   if(playerrankings.size == 2) {
     payoutpercentages = array(0.7, 0.3);
-  }
-  else if(playerrankings.size == 1) {
+  } else if(playerrankings.size == 1) {
     payoutpercentages = array(1.0);
   }
 
@@ -300,8 +298,7 @@ finalizewagergame() {
 
     if(isDefined(player.pers["wager_sideBetWinnings"])) {
       payoutwagerwinnings(player, player.wagerwinnings + player.pers["wager_sideBetWinnings"]);
-    }
-    else {
+    } else {
       payoutwagerwinnings(player, player.wagerwinnings);
     }
 
@@ -436,8 +433,7 @@ setupblankrandomplayer(takeweapons, chooserandombody, weapon) {
   self setradarvisibility();
 }
 
-assignrandombody() {
-}
+assignrandombody() {}
 
 queuewagerpopup(message, points, submessage, announcement) {
   self endon("disconnect");
@@ -490,15 +486,13 @@ setradarvisibility() {
   if(isDefined(level.inthemoneyonradar) && level.inthemoneyonradar) {
     if(prevscoreplace <= 3 && isDefined(self.score) && self.score > 0) {
       self unsetperk("specialty_gpsjammer");
-    }
-    else {
+    } else {
       self setperk("specialty_gpsjammer");
     }
   } else if(isDefined(level.firstplaceonradar) && level.firstplaceonradar) {
     if(prevscoreplace == 1 && isDefined(self.score) && self.score > 0) {
       self unsetperk("specialty_gpsjammer");
-    }
-    else {
+    } else {
       self setperk("specialty_gpsjammer");
     }
   }
@@ -530,8 +524,7 @@ playerscored() {
 
     if(!wasinthemoney && isinthemoney) {
       level.placement["all"][i] wagerannouncer("wm_in_the_money");
-    }
-    else if(wasinthemoney && !isinthemoney) {
+    } else if(wasinthemoney && !isinthemoney) {
       level.placement["all"][i] wagerannouncer("wm_oot_money");
     }
 
@@ -749,8 +742,7 @@ showpowerupmessage(powerupindex, doanimation) {
 
   if(level.inprematchperiod) {
     level waittill("prematch_over");
-  }
-  else if(doanimation) {
+  } else if(doanimation) {
     wait(pulsetime);
   }
 
@@ -824,8 +816,7 @@ gethighestwagerweaponusage(statname) {
 
     if(!isDefined(weaponstats[statname]) || !getbaseweaponitemindex(wagerweaponsused[i])) {
       continue;
-    }
-    else if(!isDefined(bestweapon) || weaponstats[statname] > highestvalue) {
+    } else if(!isDefined(bestweapon) || weaponstats[statname] > highestvalue) {
       bestweapon = wagerweaponsused[i];
       highestvalue = weaponstats[statname];
     }
@@ -840,8 +831,7 @@ setwagerafteractionreportstats() {
 
   if(isDefined(topweapon)) {
     topkills = self.wagerweaponusage[topweapon]["kills"];
-  }
-  else {
+  } else {
     topweapon = self gethighestwagerweaponusage("timeUsed");
   }
 
@@ -854,8 +844,7 @@ setwagerafteractionreportstats() {
 
   if(isDefined(level.onwagerawards)) {
     self[[level.onwagerawards]]();
-  }
-  else {
+  } else {
     for(i = 0; i < 3; i++) {
       self maps\mp\gametypes\_persistence::setafteractionreportstat("wagerAwards", 0, i);
     }

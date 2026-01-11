@@ -139,8 +139,7 @@ collectible_wait_for_pickup() {
 
     if(player_is_looking_at) {
       self.trigger sethintstring(&"SCRIPT_COLLECTIBLE_PICKUP");
-    }
-    else {
+    } else {
       self.trigger sethintstring("");
     }
 

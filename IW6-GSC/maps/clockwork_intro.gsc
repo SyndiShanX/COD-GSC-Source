@@ -303,7 +303,7 @@ player_intro_anims(var_0, var_1, var_2, var_3) {
   wait 2.467;
 
   foreach(var_7 in var_3) {
-  level.player giveweapon(var_7);
+    level.player giveweapon(var_7);
   }
 
   level.player switchtoweapon("gm6+scopegm6_sp+silencer03_sp");
@@ -349,7 +349,7 @@ intro_anims() {
   var_2 = level.player getweaponslistprimaries();
 
   foreach(var_4 in var_2) {
-  level.player takeweapon(var_4);
+    level.player takeweapon(var_4);
   }
 
   wait 1.5;
@@ -361,7 +361,7 @@ intro_anims() {
   level.allies[2] thread handle_cipher_intro_anim(var_0);
 
   foreach(var_7 in level.allies) {
-  var_7 maps\_utility::forceuseweapon("gm6+scopegm6_sp+silencer03_sp", "primary");
+    var_7 maps\_utility::forceuseweapon("gm6+scopegm6_sp+silencer03_sp", "primary");
   }
 
   wait 1;
@@ -370,7 +370,7 @@ intro_anims() {
   common_scripts\utility::flag_set("FLAG_obj_enterbase");
 
   foreach(var_7 in level.allies) {
-  var_7 maps\_utility::enable_cqbwalk();
+    var_7 maps\_utility::enable_cqbwalk();
   }
 
   wait 5;
@@ -525,7 +525,7 @@ intro_checkpoint_vo() {
   level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_mrk_wevegot3on");
 
   foreach(var_1 in level.introcp_guys_tower) {
-  var_1 thread handle_com_tower_kill();
+    var_1 thread handle_com_tower_kill();
   }
 
   level.allies[0] thread maps\clockwork_code::char_dialog_add_and_go("clockwork_mrk_letsdropemtogether");
@@ -1220,13 +1220,13 @@ allies_reach_and_start_scene(var_0, var_1, var_2, var_3, var_4, var_5) {
   wait 0.05;
 
   foreach(var_8 in var_1) {
-  var_8 maps\clockwork_code::hide_dufflebag();
+    var_8 maps\clockwork_code::hide_dufflebag();
   }
 
   level.intro_keegandrag_guy thread kill_guy_at_end_of_anim();
 
   foreach(var_11 in var_1) {
-  var_11 thread waittill_end_of_anim_for_loop(var_0, "clock_ambush_wait", "stop_clock_ambush_wait");
+    var_11 thread waittill_end_of_anim_for_loop(var_0, "clock_ambush_wait", "stop_clock_ambush_wait");
   }
 }
 
@@ -1754,8 +1754,7 @@ player_looking_at_stabguy() {
 
       if(var_0) {
         common_scripts\utility::flag_set("player_looking_at_stab_guy");
-      }
-      else {
+      } else {
         common_scripts\utility::flag_clear("player_looking_at_stab_guy");
       }
 
@@ -1893,7 +1892,7 @@ start_ambush_scene() {
     level waittill("enable_stab");
 
     foreach(var_1 in level.ambush_enemies) {
-    var_1 thread ambush_notify_on_player_kill();
+      var_1 thread ambush_notify_on_player_kill();
     }
 
     thread ambush_notify_on_player_shot();
@@ -2002,7 +2001,7 @@ animate_ambush_scene_enemies() {
   }
 
   foreach(var_4 in level.ambush_enemies) {
-  var_4 maps\_utility::anim_stopanimscripted();
+    var_4 maps\_utility::anim_stopanimscripted();
   }
 
   level.jeep notify("stop_loop");
@@ -2129,8 +2128,7 @@ intro_ambush_vo() {
 
   if(common_scripts\utility::flag("start_enemies_provoked_early")) {
     level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_beencleaner");
-  }
-  else {
+  } else {
     level.allies[0] maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_nicejob");
   }
 
@@ -2208,7 +2206,7 @@ intro_drive() {
   thread entrance_drones();
 
   foreach(var_4 in level.allies) {
-  var_4.alertlevel = "noncombat";
+    var_4.alertlevel = "noncombat";
   }
 
   level.gold_jeep_player_door delete();
@@ -2348,7 +2346,7 @@ exit_jeep_anims() {
     level.jeep maps\_vehicle::vehicle_unload();
   } else {
     foreach(var_1 in level.allies) {
-    var_1 thread vehicle_play_guy_anim("clockwork_garage_arrival", var_1, 0, 0, 1);
+      var_1 thread vehicle_play_guy_anim("clockwork_garage_arrival", var_1, 0, 0, 1);
     }
   }
 
@@ -2359,7 +2357,7 @@ exit_jeep_anims() {
   level.allies[2].animname = "cipher";
 
   foreach(var_1 in level.allies) {
-  var_1 maps\_utility::gun_recall();
+    var_1 maps\_utility::gun_recall();
   }
 
   level.jeep.animname = "garage_arrival_jeep";
@@ -2542,7 +2540,7 @@ destroy_player_ambush() {
   level.player.ignoreme = 0;
 
   foreach(var_1 in level.allies) {
-  var_1.ignoreme = 0;
+    var_1.ignoreme = 0;
   }
 
   if(self.vehicletype == "btr80") {

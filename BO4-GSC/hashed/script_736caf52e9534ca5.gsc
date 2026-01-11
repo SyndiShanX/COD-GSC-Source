@@ -274,11 +274,9 @@ private function_cf210752() {
   }
 }
 
-function_83af8a0b(zone, wave) {
-}
+function_83af8a0b(zone, wave) {}
 
-on_shutdown(zone, wave) {
-}
+on_shutdown(zone, wave) {}
 
 function_b39d6747(var_cf4def2a) {
   if(!isDefined(level.deathZoneElem)) {

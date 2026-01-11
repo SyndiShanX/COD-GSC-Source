@@ -30,7 +30,7 @@ regular_hive(custom_get_score_component_list_func) {
     level thread maps\mp\alien\_spawnlogic::encounter_cycle_spawn("drill_planted", "door_planted");
 
     foreach(regular_hive in selected_regular_hives) {
-    regular_hive thread regular_hive_listener(get_hive_score_component_list_func(custom_get_score_component_list_func));
+      regular_hive thread regular_hive_listener(get_hive_score_component_list_func(custom_get_score_component_list_func));
     }
 
     result = level waittill_any_return("regular_hive_destroyed", "regular_door_destroyed");
@@ -422,8 +422,7 @@ give_door_score() {
 get_door_score_component_list() {
   if(is_progression_door(self)) {
     return ["progression_door"];
-  }
-  else {
+  } else {
     return ["side_area"];
   }
 }
@@ -457,8 +456,7 @@ calculate_and_show_hive_scores(get_score_component_list_func) {
 get_blocker_hive_score_component_name_list() {
   if(isPlayingSolo()) {
     return ["personal_blocker"];
-  }
-  else {
+  } else {
     return ["team_blocker", "personal_blocker"];
   }
 }
@@ -466,8 +464,7 @@ get_blocker_hive_score_component_name_list() {
 get_regular_hive_score_component_name_list() {
   if(isPlayingSolo()) {
     return ["drill", "personal", "challenge"];
-  }
-  else {
+  } else {
     return ["drill", "team", "personal", "challenge"];
   }
 }
@@ -560,8 +557,7 @@ set_hive_icon(shader, coll_dist, icon_width, icon_height) {
 
     if(someone_is_close) {
       icon_fade_in(self.icon);
-    }
-    else {
+    } else {
       icon_fade_out(self.icon);
     }
 
@@ -761,7 +757,7 @@ show_dead_hive_model() {
     return;
   }
   foreach(piece in self.dead_hive_model) {
-  piece show();
+    piece show();
   }
 }
 
@@ -813,7 +809,7 @@ init_hive_locs() {
       location_ent.scriptables = GetScriptableArray(location_ent.target, "targetname");
 
       foreach(scriptable in location_ent.scriptables) {
-      scriptable.is_hive = true;
+        scriptable.is_hive = true;
       }
 
       removeables = [];
@@ -822,8 +818,7 @@ init_hive_locs() {
       foreach(ent in targeted_ents) {
         if(isDefined(ent.script_noteworthy) && ent.script_noteworthy == "fx_ent") {
           fx_ents[fx_ents.size] = ent;
-        }
-        else if(isDefined(ent.script_noteworthy) && IsSubStr(ent.script_noteworthy, "waypointdist")) {
+        } else if(isDefined(ent.script_noteworthy) && IsSubStr(ent.script_noteworthy, "waypointdist")) {
           tok = StrTok(ent.script_noteworthy, " ");
           if(isDefined(tok) && tok.size && tok[0] == "waypointdist") {
             assert(tok.size == 2);
@@ -857,7 +852,7 @@ init_hive_locs() {
 
       if(isDefined(location_ent.dead_hive_model)) {
         foreach(piece in location_ent.dead_hive_model) {
-        piece hide();
+          piece hide();
         }
       }
 
@@ -911,8 +906,7 @@ get_blocker_hive_index() {
 
   if(level.cycle_count == (index_1 - 1) || level.cycle_count == index_1) {
     return 1;
-  }
-  else {
+  } else {
     return 2;
   }
 }
@@ -1003,8 +997,7 @@ debug_spitter_population() {
 
       if(agent GetThreatBiasGroup() == "spitters") {
         level.spitters_against_chopper[level.spitters_against_chopper.size] = agent;
-      }
-      else {
+      } else {
         level.spitters_against_players[level.spitters_against_players.size] = agent;
       }
     }

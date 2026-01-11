@@ -28,8 +28,7 @@ func_13A34(var_00) {
 
   if(level.hardcoremode) {
     var_01 = 10;
-  }
-  else {
+  } else {
     var_01 = 30;
   }
 

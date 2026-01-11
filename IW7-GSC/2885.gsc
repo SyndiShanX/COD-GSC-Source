@@ -20,8 +20,7 @@ func_B23E() {
 
   if(!isDefined(level.func_9AF3) || !scripts\sp\utility::func_9BB5() || var_00) {
     scripts\engine\utility::delaythread(0.05, scripts\engine\utility::flag_set, "introscreen_complete");
-  }
-  else {
+  } else {
     if(isDefined(level.func_9AF3.func_4C88)) {
       [
         [level.func_9AF3.func_4C88]
@@ -62,8 +61,7 @@ func_9AF9(var_00, var_01, var_02, var_03) {
 
   if(!isDefined(var_03)) {
     scripts\sp\hud_util::func_10CCC();
-  }
-  else {
+  } else {
     scripts\sp\hud_util::func_6AA3(var_03);
   }
 
@@ -78,8 +76,7 @@ introscreen_corner_line(var_00, var_01, var_02, var_03) {
 
   if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  }
-  else {
+  } else {
     level.intro_offset++;
   }
 
@@ -258,8 +255,7 @@ func_6A98(var_00, var_01, var_02) {
 func_3F6A(var_00, var_01) {
   if(var_00 == 0) {
     level.func_3F69.func_10466 playSound(var_01);
-  }
-  else {
+  } else {
     level.func_7661.func_10466 playSound(var_01);
   }
 }
@@ -305,8 +301,7 @@ func_DB9A(var_00, var_01) {
 func_22FD(var_00) {
   if(var_00 == 0) {
     level endon("chyron_faze_out_text_intro");
-  }
-  else {
+  } else {
     level endon("chyron_faze_out_text_gamenotify");
   }
 
@@ -357,8 +352,7 @@ func_22FD(var_00) {
 func_22FC(var_00) {
   if(var_00 == 0) {
     level endon("chyron_faze_out_text_intro");
-  }
-  else {
+  } else {
     level endon("chyron_faze_out_text_gamenotify");
   }
 
@@ -368,8 +362,7 @@ func_22FC(var_00) {
   for(;;) {
     if(level.func_3F69.func_22FE) {
       var_01 = var_01 - 0.07;
-    }
-    else {
+    } else {
       if(var_01 < 0.15 || var_01 > 0.6) {
         var_02 = var_02 * -1;
       }
@@ -396,7 +389,7 @@ func_22FC(var_00) {
       level.func_3F69.func_22FE = 0;
 
       foreach(var_04 in level.func_3F69.func_22FD) {
-      var_4.func_DAE6 = 0;
+        var_4.func_DAE6 = 0;
       }
     }
 
@@ -407,8 +400,7 @@ func_22FC(var_00) {
 func_11151(var_00) {
   if(var_00 == 0) {
     level endon("chyron_faze_out_text_intro");
-  }
-  else {
+  } else {
     level endon("chyron_faze_out_text_gamenotify");
   }
 
@@ -547,7 +539,7 @@ func_6AA9(var_00, var_01) {
     }
 
     foreach(var_03 in level.func_3F69.func_11151) {
-    var_03 thread func_913E(var_01);
+      var_03 thread func_913E(var_01);
     }
   } else {
     level notify("chyron_faze_out_text_gamenotify");
@@ -560,7 +552,7 @@ func_6AA9(var_00, var_01) {
     }
 
     foreach(var_03 in level.func_7661.func_11151) {
-    var_03 thread func_913E(var_01);
+      var_03 thread func_913E(var_01);
     }
   }
 }
@@ -632,8 +624,7 @@ func_DB9D(var_00, var_01) {
 
   if(var_00 == 0) {
     level endon("chyron_faze_out_text_intro");
-  }
-  else {
+  } else {
     level endon("chyron_faze_out_text_gamenotify");
   }
 
@@ -1128,7 +1119,7 @@ func_A03D(var_00) {
   var_6.count = var_4.size;
 
   foreach(var_08 in var_04) {
-  var_06 thread func_6AB6(var_08);
+    var_06 thread func_6AB6(var_08);
   }
 
   var_06 waittill("fadein_letter_done");
@@ -1230,8 +1221,7 @@ func_2B9E(var_00, var_01, var_02, var_03) {
 
     if(var_04 % 2) {
       var_06 = var_03;
-    }
-    else {
+    } else {
       var_06 = randomfloatrange(0.05, 0.2);
     }
 
@@ -1257,17 +1247,13 @@ func_490F(var_00) {
     if(isDefined(var_02)) {
       if(var_2.text == "'") {
         var_06 = 10;
-      }
-      else if(var_2.text == "M") {
+      } else if(var_2.text == "M") {
         var_06 = 24;
-      }
-      else if(var_2.text == "E") {
+      } else if(var_2.text == "E") {
         var_06 = 18;
-      }
-      else if(var_2.text == "T") {
+      } else if(var_2.text == "T") {
         var_06 = 18;
-      }
-      else if(var_2.text == " ") {
+      } else if(var_2.text == " ") {
         var_06 = 14;
       }
     }

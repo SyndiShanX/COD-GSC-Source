@@ -18,8 +18,7 @@ init() {
 
   if(isDefined(level.legacy_cymbal_monkey) && level.legacy_cymbal_monkey) {
     level.cymbal_monkey_model = "weapon_zombie_monkey_bomb";
-  }
-  else {
+  } else {
     level.cymbal_monkey_model = "t6_wpn_zmb_monkey_bomb_world";
   }
 
@@ -238,8 +237,7 @@ proximity_detonate(owner) {
 
     if(isDefined(owner)) {
       self detonate(owner);
-    }
-    else {
+    } else {
       self detonate(undefined);
     }
 
@@ -352,8 +350,7 @@ grenade_stolen_by_sam(ent_grenade, ent_model, ent_actor) {
 
   if(direction[1] < 0 || direction[0] > 0 && direction[1] > 0) {
     direction = (direction[0], direction[1] * -1, 0);
-  }
-  else if(direction[0] < 0) {
+  } else if(direction[0] < 0) {
     direction = (direction[0] * -1, direction[1], 0);
   }
 
@@ -428,8 +425,7 @@ do_monkey_sound(model, info) {
   if(!self.monk_scream_vox && level.music_override == 0) {
     if(isDefined(level.cymbal_monkey_dual_view) && level.cymbal_monkey_dual_view) {
       self playsoundtoteam("zmb_monkey_song", "allies");
-    }
-    else {
+    } else {
       self playSound("zmb_monkey_song");
     }
   }

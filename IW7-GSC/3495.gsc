@@ -34,11 +34,9 @@ func_2A6B(var_00, var_01, var_02, var_03) {
 
   if(isDefined(var_05)) {
     var_06 = var_5.origin[2] + 100;
-  }
-  else if(isDefined(level.airstrikeheightscale)) {
+  } else if(isDefined(level.airstrikeheightscale)) {
     var_06 = 850 * level.airstrikeheightscale;
-  }
-  else {
+  } else {
     var_06 = 850;
   }
 
@@ -682,7 +680,7 @@ jackaldelete() {
   }
 
   foreach(var_01 in level.carepackagedropnodes) {
-  var_1.free = undefined;
+    var_1.free = undefined;
   }
 
   self delete();
@@ -941,8 +939,7 @@ isreadytofire(var_00) {
 
   if(var_03 >= var_04) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -958,8 +955,7 @@ acquireturrettarget(var_00) {
 
   if(var_0.size == 1) {
     self.turrettarget = var_0[0];
-  }
-  else {
+  } else {
     self.turrettarget = getbesttarget(var_00);
   }
 
@@ -1242,7 +1238,7 @@ tracegroundpoint(var_00, var_01) {
 
   if(isDefined(self.dropcrates)) {
     foreach(var_07 in self.dropcrates) {
-    var_5[var_5.size] = var_07;
+      var_5[var_5.size] = var_07;
     }
   }
 
@@ -1250,8 +1246,7 @@ tracegroundpoint(var_00, var_01) {
 
   if(var_9["position"][2] < var_04) {
     var_10 = var_04;
-  }
-  else {
+  } else {
     var_10 = var_9["position"][2];
   }
 
@@ -1367,8 +1362,7 @@ dropship_change_thrust_sfx() {
 getothermode(var_00) {
   if(var_00 == "follow_player") {
     var_00 = "guard_location";
-  }
-  else {
+  } else {
     var_00 = "follow_player";
   }
 

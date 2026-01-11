@@ -68,8 +68,7 @@ add_bcs_location_mapping(var_00, var_01) {
 bcs_location_trigger_mapping() {
   if(scripts\engine\utility::issp()) {
     sp();
-  }
-  else {
+  } else {
     metropolis();
     quarry();
     breakneck();

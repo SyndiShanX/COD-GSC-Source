@@ -15,8 +15,7 @@ ally_dog_sniff_mode(var_0) {
 ally_dog_bark_not_growl(var_0) {
   if(isDefined(var_0) && var_0) {
     self.script_bark_not_growl = var_0;
-  }
-  else {
+  } else {
     self.script_bark_not_growl = undefined;
   }
 }
@@ -43,8 +42,7 @@ init_ally_dog(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_1.use_pip = var_3;
-  }
-  else {
+  } else {
     var_1.use_pip = 0;
   }
 
@@ -135,8 +133,7 @@ timed_remove_arrow(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_1 waittill("death");
-  }
-  else {
+  } else {
     wait(var_0);
   }
 }
@@ -218,11 +215,9 @@ watch_attack(var_0) {
 
     if(var_1 == "dog_attack_override") {
       var_2 = 1;
-    }
-    else if(var_1 == "dog_attack_command" && var_0.dog_hud_visible[0] && !common_scripts\utility::flag("dog_control_lockout")) {
+    } else if(var_1 == "dog_attack_command" && var_0.dog_hud_visible[0] && !common_scripts\utility::flag("dog_control_lockout")) {
       var_2 = 1;
-    }
-    else if(self.ally_current_state != ::ally_dog_attack_free) {
+    } else if(self.ally_current_state != ::ally_dog_attack_free) {
       var_2 = 1;
     }
 
@@ -401,8 +396,7 @@ ally_dog_follow_owner_internal(var_0, var_1) {
 
     if(isplayer(var_0)) {
       var_10 = vectornormalize(vector2d(var_0 getvelocity()));
-    }
-    else {
+    } else {
       var_10 = vectornormalize(vector2d(var_9 - var_8));
     }
 
@@ -415,8 +409,7 @@ ally_dog_follow_owner_internal(var_0, var_1) {
 
     if(var_1) {
       var_12 = _pick_best_node_heeled_by_owner(var_11, var_0, var_10);
-    }
-    else {
+    } else {
       var_12 = _pick_best_node_behind_owner(var_11, var_0, var_10);
     }
 
@@ -450,8 +443,7 @@ ally_dog_follow_owner_internal(var_0, var_1) {
 
     if(var_14 > var_7) {
       maps\_utility_dogs::disable_dog_walk();
-    }
-    else {
+    } else {
       maps\_utility_dogs::enable_dog_walk(1);
     }
 
@@ -606,8 +598,7 @@ _dog_guard(var_0) {
 
         if(var_2.a.special == "dying_crawl") {
           self.goalradius = 75;
-        }
-        else {
+        } else {
           self.goalradius = 64;
         }
 
@@ -624,8 +615,7 @@ _dog_guard(var_0) {
 
       if(var_2.a.special == "dying_crawl") {
         self.goalradius = 75;
-      }
-      else {
+      } else {
         self.goalradius = 64;
       }
     }
@@ -830,8 +820,7 @@ get_owner_pointing_info(var_0, var_1, var_2) {
 
       if(isDefined(var_14)) {
         var_8["enemy"] = var_14;
-      }
-      else {
+      } else {
         var_15 = get_dog_enemies(var_0);
         var_14 = maps\_utility::get_closest_living(var_10, var_15, 256);
 
@@ -1100,8 +1089,7 @@ check_against_active_zones(var_0, var_1) {
 
     if(isDefined(var_2.script_linkto)) {
       var_8 = common_scripts\utility::getstruct(var_2.script_linkto, "script_linkname");
-    }
-    else if(isDefined(var_2.target)) {
+    } else if(isDefined(var_2.target)) {
       var_8 = var_2 common_scripts\utility::get_target_ent();
     }
 
@@ -1255,7 +1243,7 @@ hudoutline_wait_death(var_0, var_1) {
   var_2 = getcorpsearray();
 
   foreach(var_4 in var_2) {
-  var_4 hudoutlinedisable();
+    var_4 hudoutlinedisable();
   }
 }
 

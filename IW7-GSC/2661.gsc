@@ -14,7 +14,7 @@ give_attacker_kill_rewards(var_00, var_01) {
     var_02 = get_reward_point_for_kill();
 
     foreach(var_04 in level.players) {
-    givekillreward(var_04, var_02, "large");
+      givekillreward(var_04, var_02, "large");
     }
 
     return;
@@ -105,7 +105,9 @@ givekillreward(var_00, var_01, var_02, var_03) {
 
   if(scripts\engine\utility::flag_exist("cortex_started") && scripts\engine\utility::flag("cortex_started")) {
     if(isDefined(level.add_cortex_charge_func)) {
-      [[level.add_cortex_charge_func]](var_01);
+      [
+        [level.add_cortex_charge_func]
+      ](var_01);
     }
   }
 }

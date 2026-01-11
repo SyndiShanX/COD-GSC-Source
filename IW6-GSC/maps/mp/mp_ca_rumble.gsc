@@ -296,8 +296,7 @@ random_mortars_fire(start_org, end_org, air_time, owner, trace_test, play_fx) {
   if(!isDefined(air_time)) {
     if(isDefined(level.ending_flourish) && level.ending_flourish) {
       air_time = 2.5;
-    }
-    else {
+    } else {
       air_time = RandomFloatRange(10.0, 12.0);
     }
   }
@@ -401,12 +400,12 @@ setup_destructibles() {
   sharks = getEntArray("dest_shark", "targetname");
   if(sharks.size) {
     foreach(shark in sharks) {
-    shark thread update_destructibles(level._effect["vfx_mp_ca_rumble_shark_hit"], level._effect["vfx_mp_ca_rumble_shark_death"]);
+      shark thread update_destructibles(level._effect["vfx_mp_ca_rumble_shark_hit"], level._effect["vfx_mp_ca_rumble_shark_death"]);
     }
   }
   if(orcas.size) {
     foreach(orca in orcas) {
-    orca thread update_destructibles(level._effect["vfx_mp_ca_rumble_orca_hit"], level._effect["vfx_mp_ca_rumble_orca_death"]);
+      orca thread update_destructibles(level._effect["vfx_mp_ca_rumble_orca_hit"], level._effect["vfx_mp_ca_rumble_orca_death"]);
     }
   }
 }
@@ -439,8 +438,7 @@ update_destructibles(effect_id, death_effect_id) {
 
   if(!isDefined(explosionDirection)) {
     self waittill("damage", amount, attacker, direction_vec, hit_point, damage_type);
-  }
-  else {
+  } else {
     direction_vec = explosionDirection;
   }
 
@@ -510,13 +508,13 @@ update_metal_detector() {
   self thread metal_detector_monitor_alive(my_devices);
   while(1) {
     foreach(device in my_devices) {
-    device thread metal_detector_on();
+      device thread metal_detector_on();
     }
 
     self waittill("trigger");
 
     foreach(device in my_devices) {
-    device thread metal_detector_off();
+      device thread metal_detector_off();
     }
 
     wait 5.0;
@@ -526,7 +524,7 @@ update_metal_detector() {
 metal_detector_monitor_alive(my_devices) {
   self waittill("detector_damaged");
   foreach(device in my_devices) {
-  device DoDamage(10000, device.origin);
+    device DoDamage(10000, device.origin);
   }
 
   self notify("detector_destroyed");
@@ -914,7 +912,7 @@ update_trolley() {
   trolley_mesh_extras = getEntArray("moving_trolley_extras", "targetname");
   if(trolley_mesh_extras.size > 0) {
     foreach(extra in trolley_mesh_extras) {
-    extra linkto(trolley);
+      extra linkto(trolley);
     }
   }
 

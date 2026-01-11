@@ -287,11 +287,9 @@ player_smoke_hint() {
 
   if(level.console || level.player usinggamepad()) {
     maps\_utility::display_hint("hint_crouch_stance");
-  }
-  else if(maps\_utility::is_command_bound("+togglecrouch") || !maps\_utility::is_command_bound("+stance")) {
+  } else if(maps\_utility::is_command_bound("+togglecrouch") || !maps\_utility::is_command_bound("+stance")) {
     maps\_utility::display_hint("hint_crouch_crouch");
-  }
-  else {
+  } else {
     maps\_utility::display_hint("hint_crouch_stance");
   }
 }
@@ -579,8 +577,7 @@ event_topdrive_fall_ally1_duck(var_0) {
 
   if(common_scripts\utility::flag("flag_player_at_topdrive")) {
     var_0 maps\_anim::anim_single_solo(self, "topdrive_duck");
-  }
-  else {
+  } else {
     common_scripts\utility::flag_set("flag_topdrive_ally1_full_anim");
     var_0 maps\_anim::anim_single_solo(self, "topdrive_duck_full");
   }
@@ -640,8 +637,7 @@ heli_spawn() {
 
   if(var_0 && common_scripts\utility::flag("flag_player_at_topdrive") && common_scripts\utility::flag("flag_topdrive_ally1_full_anim")) {
     var_1 thread heli_spot_search_intro();
-  }
-  else {
+  } else {
     var_1 heli_spotlight_on();
   }
 

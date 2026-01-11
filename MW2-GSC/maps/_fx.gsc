@@ -60,8 +60,7 @@ script_print_fx() {
 
   if(isDefined(self.target)) {
     org = getent(self.target).origin;
-  }
-  else {
+  } else {
     org = "undefined";
   }
 
@@ -86,8 +85,7 @@ script_playFX(id, pos, pos2) {
 
   if(isDefined(pos2)) {
     playFX(id, pos, pos2);
-  }
-  else {
+  } else {
     playFX(id, pos);
   }
 }

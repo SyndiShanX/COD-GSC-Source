@@ -895,8 +895,7 @@ scoreFactors_Safeguard(spawnPoint) {
 logBadspawn(typeString) {
   if(!isDefined(typeString)) {
     typeString = "";
-  }
-  else {
+  } else {
     typeString = "(" + typeString + ")";
   }
   println("^1 Spawn Error: Bad spawn used. " + typeString + "\n");

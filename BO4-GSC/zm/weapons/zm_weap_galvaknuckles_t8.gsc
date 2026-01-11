@@ -7,7 +7,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_melee_weapon;
-
 #namespace zm_weap_galvaknuckles_t8;
 
 autoexec __init__system__() {
@@ -21,7 +20,7 @@ private __init__() {
 }
 
 private __main__() {
-  zm_melee_weapon::init(#"galvaknuckles_t8", #"galvaknuckles_t8_flourish", 5000, "tazer_upgrade", #"hash_60606b68e93a29c8", "galva", undefined);
+  zm_melee_weapon::init(#"galvaknuckles_t8", # "galvaknuckles_t8_flourish", 5000, "tazer_upgrade", # "hash_60606b68e93a29c8", "galva", undefined);
 }
 
 on_ai_killed(s_params) {

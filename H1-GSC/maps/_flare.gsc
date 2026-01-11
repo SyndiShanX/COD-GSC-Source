@@ -77,8 +77,7 @@ normalized_color(var_0) {
   if(var_0[0] > var_0[1]) {
     if(var_0[0] > var_0[2]) {
       var_1 = var_0[0];
-    }
-    else {
+    } else {
       var_1 = var_0[2];
     }
   } else if(var_0[1] > var_0[2])

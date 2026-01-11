@@ -60,7 +60,7 @@ Melee_StealthCheck() {
   if(isDefined(self.ent_flag) && isDefined(self.ent_flag["_stealth_enabled"]) && self.ent_flag["_stealth_enabled"]) {
     if(isDefined(self.ent_flag["_stealth_attack"]) && !self.ent_flag["_stealth_attack"])
   }
-      return true;
+  return true;
 
   return false;
 }
@@ -118,8 +118,7 @@ Melee_ChooseAction() {
   if(Melee_Standard_ChooseAction()) {
     if(isDefined(self.specialMelee_Standard)) {
       self.melee.func = self.specialMelee_Standard;
-    }
-    else {
+    } else {
       self.melee.func = ::Melee_Standard_Main;
     }
     return true;
@@ -231,11 +230,9 @@ Melee_IsValid() {
 
   if(isDefined(self.meleeChargeDistSq)) {
     chargeDistSq = self.meleeChargeDistSq;
-  }
-  else if(isplayer(target)) {
+  } else if(isplayer(target)) {
     chargeDistSq = CHARGE_RANGE_SQ_VS_PLAYER;
-  }
-  else {
+  } else {
     chargeDistSq = CHARGE_RANGE_SQ;
   }
 
@@ -312,8 +309,7 @@ Melee_IsValid() {
   // Check if our enemy is in a proper pose to get melee'd
   if(isPlayer(target)) {
     enemyPose = target getStance();
-  }
-  else {
+  } else {
     enemyPose = target.a.pose;
   }
 
@@ -338,8 +334,7 @@ Melee_IsValid() {
   // Have extra tolerance when already in progress, since some animations twist the origin quite a bit ( for example standard melee )
   if(self.melee.inProgress) {
     yawThreshold = 110;
-  }
-  else {
+  } else {
     yawThreshold = 60;
   }
 
@@ -444,18 +439,15 @@ Melee_Standard_ChooseAction() {
 Melee_Standard_ResetGiveUpTime() {
   if(isDefined(self.meleeChargeDistSq)) {
     chargeDistSq = self.meleeChargeDistSq;
-  }
-  else if(isplayer(self.melee.target)) {
+  } else if(isplayer(self.melee.target)) {
     chargeDistSq = CHARGE_RANGE_SQ_VS_PLAYER;
-  }
-  else {
+  } else {
     chargeDistSq = CHARGE_RANGE_SQ;
   }
 
   if(distanceSquared(self.origin, self.melee.target.origin) > chargeDistSq) {
     self.melee.giveUpTime = gettime() + 3000;
-  }
-  else {
+  } else {
     self.melee.giveUpTime = gettime() + 1000;
   }
 }
@@ -599,8 +591,7 @@ Melee_Standard_GetInPosition() {
 
   if(isplayer(self.melee.target) && self.melee.target == self.enemy) {
     self orientMode("face enemy");
-  }
-  else {
+  } else {
     self orientMode("face point", self.melee.target.origin);
   }
 
@@ -733,7 +724,7 @@ Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_Wrestle(angleDiff) {
     return false;
   }
 
-    self.melee.winner = true;
+  self.melee.winner = true;
   self.melee.animName = % bog_melee_R_attack;
   target.melee.animName = % bog_melee_R_defend;
   target.melee.surviveAnimName = % bog_melee_R_backdeath2;
@@ -760,7 +751,7 @@ Melee_AIvsAI_Exposed_ChooseAnimationAndPosition_Behind(angleDiff) {
     return false;
   }
 
-    self.melee.winner = true;
+  self.melee.winner = true;
   self.melee.animName = % melee_sync_attack;
   target.melee.animName = % melee_sync_defend;
 
@@ -838,12 +829,11 @@ Melee_Decide_Winner() {
     return;
   }
 
-    // Figure out who wins
-    if(isDefined(self.magic_bullet_shield)) {
-      assert(!isDefined(target.magic_bullet_shield));
-      self.melee.winner = true;
-    }
-  else if(isDefined(target.magic_bullet_shield)) {
+  // Figure out who wins
+  if(isDefined(self.magic_bullet_shield)) {
+    assert(!isDefined(target.magic_bullet_shield));
+    self.melee.winner = true;
+  } else if(isDefined(target.magic_bullet_shield)) {
     self.melee.winner = false;
   } else {
     self.melee.winner = cointoss();
@@ -1119,8 +1109,7 @@ Melee_AIvsAI_GetInPosition_UpdateAndValidateTarget(initialTargetOrigin, giveUpTi
   assert(isDefined(self.melee.precisePositioning));
   if(self.melee.precisePositioning) {
     positionThreshold = sqr16;
-  }
-  else {
+  } else {
     positionThreshold = sqr36;
   }
 
@@ -1210,15 +1199,15 @@ Melee_AIvsAI_GetInPosition() {
   self notify("MDBG_att_getInPosition", self.melee.target);
   self.melee.target notify("MDBG_def_getInPosition", self);
 
-    while(Melee_AIvsAI_GetInPosition_UpdateAndValidateTarget(initialTargetOrigin, giveUpTime)) {
-      if(Melee_AIvsAI_GetInPosition_IsSuccessful(initialTargetOrigin)) {
-        return Melee_AIvsAI_GetInPosition_Finalize(initialTargetOrigin);
-      }
-
-      // play run forward anim
-      self orientMode("face point", self.melee.startPos);
-      wait .05;
+  while(Melee_AIvsAI_GetInPosition_UpdateAndValidateTarget(initialTargetOrigin, giveUpTime)) {
+    if(Melee_AIvsAI_GetInPosition_IsSuccessful(initialTargetOrigin)) {
+      return Melee_AIvsAI_GetInPosition_Finalize(initialTargetOrigin);
     }
+
+    // play run forward anim
+    self orientMode("face point", self.melee.startPos);
+    wait .05;
+  }
 
   Melee_StopMovement();
   return false;
@@ -1246,8 +1235,7 @@ Melee_AIvsAI_Execute() {
   // If we have faceYaw specified, use them, otherwise stay oriented as we were
   if(isDefined(self.melee.faceYaw)) {
     self orientMode("face angle", self.melee.faceYaw);
-  }
-  else {
+  } else {
     self orientMode("face current");
   }
 
@@ -1451,8 +1439,7 @@ Melee_HandleNoteTracks_Death(interruptAnimation) {
   // set whether we should die immediately if melee were to end, or finish playing the animation
   if(isDefined(interruptAnimation) && interruptAnimation) {
     self.melee.interruptDeath = true;
-  }
-  else {
+  } else {
     self.melee.animatedDeath = true;
   }
 }
@@ -1538,8 +1525,7 @@ Melee_EndScript_CheckDeath() {
   if(!isAlive(self) && isDefined(self.melee.death)) {
     if(isDefined(self.melee.animatedDeath)) {
       self.deathFunction = ::Melee_DeathHandler_Delayed;
-    }
-    else {
+    } else {
       self.deathFunction = ::Melee_DeathHandler_Regular;
     }
   }
@@ -1562,8 +1548,7 @@ Melee_EndScript_CheckPositionAndMovement() {
   newOrigin = self getDropToFloorPosition();
   if(isDefined(newOrigin)) {
     self forceTeleport(newOrigin, self.angles);
-  }
-  else {
+  } else {
     println("Warning: Melee animation might have ended up in solid for entity #" + self getentnum());
   }
 }
@@ -1592,8 +1577,7 @@ Melee_EndScript_CheckStateChanges() {
   if(isDefined(self.melee.wasAllowingPain)) {
     if(self.melee.wasAllowingPain) {
       self enable_pain();
-    }
-    else {
+    } else {
       self disable_pain();
     }
   }

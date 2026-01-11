@@ -9,11 +9,9 @@ func_5F84(var_00) {
 
   if(isDefined(self.func_5F76)) {
     var_01 = squared(self.func_5F76);
-  }
-  else if(isDefined(var_00)) {
+  } else if(isDefined(var_00)) {
     var_01 = squared(var_00);
-  }
-  else {
+  } else {
     var_01 = squared(300);
   }
 
@@ -54,8 +52,7 @@ func_5557() {
 
   if(isDefined(self.func_51E4)) {
     scripts\sp\utility::func_51E1(self.func_51E4);
-  }
-  else {
+  } else {
     scripts\sp\utility::func_4145();
   }
 

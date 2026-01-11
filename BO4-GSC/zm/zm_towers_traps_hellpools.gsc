@@ -32,7 +32,6 @@
 #include scripts\zm_common\zm_ui_inventory;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_traps_hellpools;
 
 autoexec __init__system__() {
@@ -123,7 +122,7 @@ function_55d14d78() {
   var_f6e18b6c = self.script_noteworthy;
 
   switch (var_f6e18b6c) {
-    case #"odin":
+    case # "odin":
       level.var_15783f81 = struct::get("zm_towers_hellpool_odin_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
       var_c65eed8e = getEntArray("zm_towers_hellpool_odin", "script_noteworthy");
@@ -141,12 +140,12 @@ function_55d14d78() {
 
       foreach(s_trap_button in level.a_s_trap_buttons) {
         if(s_trap_button.script_int === 3) {
-          s_trap_button.scene_ents[#"prop 1"] clientfield::set("trap_switch_green", 1);
+          s_trap_button.scene_ents[# "prop 1"] clientfield::set("trap_switch_green", 1);
         }
       }
 
       break;
-    case #"zeus":
+    case # "zeus":
       level.var_15783f81 = struct::get("zm_towers_hellpool_zeus_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
       var_c65eed8e = getEntArray("zm_towers_hellpool_zeus", "script_noteworthy");
@@ -164,12 +163,12 @@ function_55d14d78() {
 
       foreach(s_trap_button in level.a_s_trap_buttons) {
         if(s_trap_button.script_int === 4) {
-          s_trap_button.scene_ents[#"prop 1"] clientfield::set("trap_switch_green", 1);
+          s_trap_button.scene_ents[# "prop 1"] clientfield::set("trap_switch_green", 1);
         }
       }
 
       break;
-    case #"danu":
+    case # "danu":
       level.var_15783f81 = struct::get("zm_towers_hellpool_danu_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
       var_c65eed8e = getEntArray("zm_towers_hellpool_danu", "script_noteworthy");
@@ -187,12 +186,12 @@ function_55d14d78() {
 
       foreach(s_trap_button in level.a_s_trap_buttons) {
         if(s_trap_button.script_int === 1) {
-          s_trap_button.scene_ents[#"prop 1"] clientfield::set("trap_switch_green", 1);
+          s_trap_button.scene_ents[# "prop 1"] clientfield::set("trap_switch_green", 1);
         }
       }
 
       break;
-    case #"ra":
+    case # "ra":
       level.var_15783f81 = struct::get("zm_towers_hellpool_ra_scene", "script_noteworthy");
       level.var_15783f81 scene::init();
       var_c65eed8e = getEntArray("zm_towers_hellpool_ra", "script_noteworthy");
@@ -210,7 +209,7 @@ function_55d14d78() {
 
       foreach(s_trap_button in level.a_s_trap_buttons) {
         if(s_trap_button.script_int === 2) {
-          s_trap_button.scene_ents[#"prop 1"] clientfield::set("trap_switch_green", 1);
+          s_trap_button.scene_ents[# "prop 1"] clientfield::set("trap_switch_green", 1);
         }
       }
 
@@ -258,7 +257,7 @@ function_1d86d117() {
     }
   }
 
-  self waittilltimeout(self._trap_duration, #"trap_deactivate");
+  self waittilltimeout(self._trap_duration, # "trap_deactivate");
 
   foreach(e_trap in level.var_482bcfef) {
     if(e_trap.script_string === self.script_string) {
@@ -302,7 +301,7 @@ activate_trap(e_player) {
 
     self flag::set("activated");
     self thread function_692db12();
-    self waittilltimeout(15, #"hash_5aa6001392300725");
+    self waittilltimeout(15, # "hash_5aa6001392300725");
     self deactivate_trap();
   }
 }
@@ -354,7 +353,7 @@ function_db9410fa(e_trap) {
       e_trap.activated_by_player contracts::increment_zm_contract(#"contract_zm_trap_kills");
     }
 
-    if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"heavy") {
+    if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "heavy") {
       self.marked_for_death = 0;
       return;
     }
@@ -373,7 +372,7 @@ function_db9410fa(e_trap) {
 }
 
 function_506285c3(t_damage) {
-  self endoncallback(&function_6f5e73b5, #"death", #"disconnect");
+  self endoncallback(&function_6f5e73b5, # "death", # "disconnect");
 
   if(isalive(self) && !(isDefined(self.var_62b59590) && self.var_62b59590)) {
     self.var_62b59590 = 1;

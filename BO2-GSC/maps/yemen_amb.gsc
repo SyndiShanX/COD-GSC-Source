@@ -10,8 +10,7 @@
 yemen_drone_control_tones(activate) {
   if(activate) {
     level thread play_drone_control_tones();
-  }
-  else {
+  } else {
     level notify("stop_drone_control_tones");
   }
 }
@@ -34,8 +33,7 @@ waitfor_enough_drones() {
 
     if(!isDefined(drones) || drones.size <= 3) {
       wait 1;
-    }
-    else {
+    } else {
       break;
     }
   }

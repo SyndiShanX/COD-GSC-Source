@@ -39,9 +39,9 @@ main() {
 
   weapon_list_debug();
 
-    if(!isDefined(level.visionThermalDefault)) {
-      level.visionThermalDefault = "cheat_bw";
-    }
+  if(!isDefined(level.visionThermalDefault)) {
+    level.visionThermalDefault = "cheat_bw";
+  }
   VisionSetThermal(level.visionThermalDefault);
 
   VisionSetPain("near_death");
@@ -359,7 +359,7 @@ main() {
     AssertMsg("Attempted to run a Special Op, but not in Special Ops mode. Probably need to add +set specialops 1 to Launcher Custom Command Line Options.");
   }
 
-    maps\_names::setup_names();
+  maps\_names::setup_names();
 
   thread handle_starts();
   thread handle_getviewpos();
@@ -367,10 +367,10 @@ main() {
 
   thread maps\_debug::mainDebug();
 
-    if(!isDefined(level.trigger_flags)) {
-      // may have been defined by AI spawning
-      init_trigger_flags();
-    }
+  if(!isDefined(level.trigger_flags)) {
+    // may have been defined by AI spawning
+    init_trigger_flags();
+  }
 
   level.killspawn_groups = [];
   init_script_triggers();
@@ -1148,25 +1148,25 @@ star(total) {
   PrintLn(" ");
 }
 
-  exploder_load(trigger) {
-    level endon("killexplodertridgers" + trigger.script_exploder);
-    trigger waittill("trigger");
-    if(isDefined(trigger.script_chance) && RandomFloat(1) > trigger.script_chance) {
-      if(!trigger script_delay()) {
-        wait 4;
-      }
-
-      level thread exploder_load(trigger);
-      return;
+exploder_load(trigger) {
+  level endon("killexplodertridgers" + trigger.script_exploder);
+  trigger waittill("trigger");
+  if(isDefined(trigger.script_chance) && RandomFloat(1) > trigger.script_chance) {
+    if(!trigger script_delay()) {
+      wait 4;
     }
 
-    if(!trigger script_delay() && isDefined(trigger.script_exploder_delay)) {
-      wait(trigger.script_exploder_delay);
-    }
-
-    exploder(trigger.script_exploder);
-    level notify("killexplodertridgers" + trigger.script_exploder);
+    level thread exploder_load(trigger);
+    return;
   }
+
+  if(!trigger script_delay() && isDefined(trigger.script_exploder_delay)) {
+    wait(trigger.script_exploder_delay);
+  }
+
+  exploder(trigger.script_exploder);
+  level notify("killexplodertridgers" + trigger.script_exploder);
+}
 
 shock_onpain() {
   PreCacheShellShock("pain");
@@ -1349,8 +1349,7 @@ setupExploders() {
     // 		ent.v[ "worldfx" ] = true;
     if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
-    }
-    else {
+    } else {
       ent.v["fxid"] = exploder.script_fxid;
     }
     ent.v["exploder"] = exploder.script_exploder;
@@ -1384,8 +1383,7 @@ setupExploders() {
 
     if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname])) {
       ent.v["exploder_type"] = exploder.targetname;
-    }
-    else {
+    } else {
       ent.v["exploder_type"] = "normal";
     }
 
@@ -1492,14 +1490,11 @@ playerDamageShellshock() {
 
       if(scaled_damage >= 90) {
         time = 4;
-      }
-      else if(scaled_damage >= 50) {
+      } else if(scaled_damage >= 50) {
         time = 3;
-      }
-      else if(scaled_damage >= 25) {
+      } else if(scaled_damage >= 25) {
         time = 2;
-      }
-      else if(scaled_damage > 10) {
+      } else if(scaled_damage > 10) {
         time = 1;
       }
 
@@ -1515,12 +1510,11 @@ map_is_early_in_the_game() {
     return true;
   }
 
-    if(isDefined(level.early_level[level.script])) {
-      return level.early_level[level.script];
-    }
-    else {
-      return false;
-    }
+  if(isDefined(level.early_level[level.script])) {
+    return level.early_level[level.script];
+  } else {
+    return false;
+  }
 }
 
 player_throwgrenade_timer() {
@@ -1808,17 +1802,17 @@ deprecatedTraverseThink() {
   }
 }
 
-  pianoDamageThink() {
-    org = self GetOrigin();
-    //
-    // 	self SetHintString(&"SCRIPT_PLATFORM_PIANO" );
-    note[0] = "large";
-    note[1] = "small";
-    for(;;) {
-      self waittill("trigger");
-      thread play_sound_in_space("bullet_" + random(note) + "_piano", org);
-    }
+pianoDamageThink() {
+  org = self GetOrigin();
+  //
+  // 	self SetHintString(&"SCRIPT_PLATFORM_PIANO" );
+  note[0] = "large";
+  note[1] = "small";
+  for(;;) {
+    self waittill("trigger");
+    thread play_sound_in_space("bullet_" + random(note) + "_piano", org);
   }
+}
 
 pianoThink() {
   org = self GetOrigin();
@@ -1962,15 +1956,13 @@ waterThink() {
       // controll the allowed stances in this water height
       if(abs(d) > level.depth_allow_crouch) {
         level.player AllowCrouch(false);
-      }
-      else {
+      } else {
         level.player AllowCrouch(true);
       }
 
       if(abs(d) > level.depth_allow_prone) {
         level.player AllowProne(false);
-      }
-      else {
+      } else {
         level.player AllowProne(true);
       }
 
@@ -2004,8 +1996,7 @@ waterThink_rampSpeed(newSpeed) {
     currentSpeed = GetDvarInt("g_speed");
     if(qSlower) {
       SetSavedDvar("g_speed", (currentSpeed - speedStepSize));
-    }
-    else {
+    } else {
       SetSavedDvar("g_speed", (currentSpeed + speedStepSize));
     }
     wait 0.05;
@@ -2117,12 +2108,11 @@ get_trigger_targs() {
 
   if(isDefined(self.targetname)) {
     AssertEx(isDefined(target_origin), self.targetname + " at " + self.origin + " has no target origin.");
-  }
-  else {
+  } else {
     AssertEx(isDefined(target_origin), self.classname + " at " + self.origin + " has no target origin.");
   }
 
-    array = [];
+  array = [];
   array["triggers"] = triggers;
   array["target_origin"] = target_origin;
   return array;
@@ -2241,8 +2231,7 @@ trigger_lookat_think(trigger, endOnFlag) {
 
       if(do_sighttrace) {
         wait(0.5);
-      }
-      else {
+      } else {
         wait 0.05;
       }
     }
@@ -2396,11 +2385,10 @@ handle_starts() {
     // was a start set with default_start()?
     if(isDefined(level.default_start)) {
       level.start_point = "default";
+    } else {
+      if(level_has_start_points())
     }
-    else {
-    if(level_has_start_points())
-    }
-      level.start_point = level.start_functions[0]["name"];
+    level.start_point = level.start_functions[0]["name"];
     else {
       level.start_point = "default";
     }
@@ -2417,12 +2405,11 @@ handle_starts() {
   } else {
     if(isDefined(level.start_loc_string[level.start_point])) {
       thread indicate_start(level.start_loc_string[level.start_point]);
-    }
-    else {
+    } else {
       thread indicate_start(level.start_point);
     }
 
-      start_array = level.start_arrays[level.start_point];
+    start_array = level.start_arrays[level.start_point];
     thread[[start_array["start_func"]]]();
   }
 
@@ -2628,7 +2615,7 @@ devhelp_hudElements(hudarray, alpha) {
   for(i = 0; i < hudarray.size; i++) {
     for(p = 0; p < 5; p++)
   }
-      hudarray[i][p].alpha = alpha;
+  hudarray[i][p].alpha = alpha;
 }
 
 devhelp() {
@@ -2891,35 +2878,35 @@ eq_trigger(trigger) {
     }
   }
   /*
-	num = level.eq_trigger_num;
-	trigger.eq_num = num;
-	level.eq_trigger_num ++ ;
-	waittillframeend;// let the ai get their eq_num table created
-	waittillframeend;// let the ai get their eq_num table created
-	level.eq_trigger_table[ num ] = [];
-	if( isDefined( trigger.script_linkTo ) )
-	{
-		tokens = StrTok( trigger.script_linkto, " " );
-		for( i = 0; i < tokens.size; i ++ )
-		{
-			target_trigger = GetEnt( tokens[ i ], "script_linkname" );
-			// add the trigger num to the list of triggers this trigger hears
-			level.eq_trigger_table[ num ][ level.eq_trigger_table[ num ].size ] = target_trigger.eq_num;
-		}
-	}
+  	num = level.eq_trigger_num;
+  	trigger.eq_num = num;
+  	level.eq_trigger_num ++ ;
+  	waittillframeend;// let the ai get their eq_num table created
+  	waittillframeend;// let the ai get their eq_num table created
+  	level.eq_trigger_table[ num ] = [];
+  	if( isDefined( trigger.script_linkTo ) )
+  	{
+  		tokens = StrTok( trigger.script_linkto, " " );
+  		for( i = 0; i < tokens.size; i ++ )
+  		{
+  			target_trigger = GetEnt( tokens[ i ], "script_linkname" );
+  			// add the trigger num to the list of triggers this trigger hears
+  			level.eq_trigger_table[ num ][ level.eq_trigger_table[ num ].size ] = target_trigger.eq_num;
+  		}
+  	}
 
-	for( ;; )
-	{
-		trigger waittill( "trigger", other );
+  	for( ;; )
+  	{
+  		trigger waittill( "trigger", other );
 
-		// are we already registered with this trigger?
-		if( other.eq_table[ num ] ) {
-			continue;
-		}
+  		// are we already registered with this trigger?
+  		if( other.eq_table[ num ] ) {
+  			continue;
+  		}
 
-		other thread [[ level.touched_eq_function[ other.is_the_player ] ]]( num, trigger );
-	}
-	 */
+  		other thread [[ level.touched_eq_function[ other.is_the_player ] ]]( num, trigger );
+  	}
+  	 */
 }
 
 player_ignores_triggers() {
@@ -3690,8 +3677,7 @@ ammo_pickup(sWeaponType) {
   // give player one more ammo, play pickup sound, and delete the ammo and trigger
   if(isDefined(emptyActionSlotAmmo)) {
     triggerer GiveWeapon(weaponToGetAmmo); // this will only be for C4 and claymores if the player is totally out of them
-  }
-  else {
+  } else {
     rounds = 1;
     if(sWeaponType == "556" || sWeaponType == "762") {
       rounds = 30;
@@ -3875,8 +3861,7 @@ trigger_fog(trigger) {
     // when you leave the trigger set it to whichever point it was closest too
     if(progress > 0.5) {
       progress = 1;
-    }
-    else {
+    } else {
       progress = 0;
     }
 
@@ -4295,12 +4280,12 @@ trigger_glass_break(trigger) {
 
       if(isDefined(direction)) {
         foreach(glass in glassID) {
-        DestroyGlass(glass, direction);
+          DestroyGlass(glass, direction);
         }
         break;
       } else {
         foreach(glass in glassID) {
-        DestroyGlass(glass);
+          DestroyGlass(glass);
         }
         break;
       }
@@ -4382,8 +4367,7 @@ watchWeaponChange() {
 
     if(weap_has_thermal(newWeapon)) {
       self thread thermal_tracker();
-    }
-    else {
+    } else {
       self notify("acogThermalTracker");
     }
   }
@@ -4499,8 +4483,7 @@ loop_friendly_thermal_Reflector_Effect(player_id, onlyForThisPlayer) {
   for(;;) {
     if(isDefined(onlyForThisPlayer)) {
       PlayFXOnTagForClients(level.friendly_thermal_Reflector_Effect, self, "J_Spine4", onlyForThisPlayer);
-    }
-    else {
+    } else {
       playFXOnTag(level.friendly_thermal_Reflector_Effect, self, "J_Spine4");
     }
 
@@ -4572,7 +4555,7 @@ claymore_pickup_think_global() {
     targets = getEntArray(self.target, "targetname");
     //give_ammo_count = targets.size + 1;
     foreach(t in targets) {
-    t Delete();
+      t Delete();
     }
   }
 
@@ -4645,16 +4628,14 @@ ammo_icon_think() {
       weapon = other GetCurrentPrimaryWeapon();
       if(weapon == "none") {
         show = false;
+      } else {
+        if((other GetFractionMaxAmmo(weapon)) > .9)
       }
-      else {
-      if((other GetFractionMaxAmmo(weapon)) > .9)
-      }
-        show = false;
+      show = false;
 
       if(player_looking_at(self.origin, 0.8, true) && show) {
         ammo_icon_fade_in(icon);
-      }
-      else {
+      } else {
         ammo_icon_fade_out(icon);
       }
       wait 0.25;

@@ -167,10 +167,8 @@ getBestStepOutPos() {
   }
   if(self.a.cornerMode == "lean") {
     return "lean";
-  }
-  else {
-  if(self.a.cornerMode == "B") {
-  }
+  } else {
+    if(self.a.cornerMode == "B") {}
     if(self.cornerDirection == "left") {
       if(yaw < 0 - self.ABangleCutoff) {
         return "A";
@@ -318,8 +316,7 @@ stepOut() {
   newCornerMode = "none";
   if(hasEnemySightPos()) {
     newCornerMode = getCornerMode(self.coverNode, getEnemySightPos());
-  }
-  else {
+  } else {
     newCornerMode = getCornerMode(self.coverNode);
   }
   if(newCornerMode == "none") {
@@ -336,8 +333,7 @@ stepOut() {
   if(self.a.cornerMode == "lean") {
     if(self.cornerDirection == "left") {
       self.rightaimlimit = 0;
-    }
-    else {
+    } else {
       self.leftaimlimit = 0;
     }
   }
@@ -382,8 +378,7 @@ stepOutAndShootEnemy() {
     if(weaponAnims() == "rocketlauncher" && (distSqToShootPos < squared(512) || self.a.rockets < 1)) {
       if(self.a.pose == "stand") {
         animscripts\shared::throwDownWeapon( % RPG_stand_throw);
-      }
-      else {
+      } else {
         animscripts\shared::throwDownWeapon( % RPG_crouch_throw);
       }
       self thread runCombat();
@@ -569,8 +564,7 @@ returnToCover() {
   self thread resetAnimSpecial(0.3);
   if(suppressed) {
     rate = 1.5;
-  }
-  else {
+  } else {
     rate = 1;
   }
   self.changingCoverPos = true;
@@ -599,8 +593,7 @@ returnToCover() {
   self.changingCoverPos = false;
   if(self.cornerDirection == "left") {
     self.a.special = "cover_left";
-  }
-  else {
+  } else {
     self.a.special = "cover_right";
   }
   self.keepClaimedNodeInGoal = false;
@@ -681,8 +674,7 @@ lookForEnemy(lookTime) {
   lookanim = undefined;
   if(self isSuppressedWrapper()) {
     lookanim = animArray("look_to_alert_fast");
-  }
-  else {
+  } else {
     lookanim = animArray("look_to_alert");
   }
   self setflaggedanimknoballrestart("looking_end", lookanim, % body, 1, .1, 1.0);
@@ -761,8 +753,7 @@ idle() {
     useTwitch = (randomint(2) == 0 && animArrayAnyExist("alert_idle_twitch"));
     if(useTwitch) {
       idleanim = animArrayPickRandom("alert_idle_twitch");
-    }
-    else {
+    } else {
       idleanim = animarray("alert_idle");
     }
     playIdleAnimation(idleAnim, useTwitch);
@@ -780,8 +771,7 @@ flinch() {
 playIdleAnimation(idleAnim, needsRestart) {
   if(needsRestart) {
     self setFlaggedAnimKnobAllRestart("idle", idleAnim, % body, 1, .1, 1);
-  }
-  else {
+  } else {
     self setFlaggedAnimKnobAll("idle", idleAnim, % body, 1, .1, 1);
   }
   self animscripts\shared::DoNoteTracks("idle");
@@ -825,8 +815,7 @@ GoToCover(coveranim, transTime, playTime) {
   self animMode("zonly_physics");
   if(self.cornerDirection == "left") {
     self.a.special = "cover_left";
-  }
-  else {
+  } else {
     self.a.special = "cover_right";
   }
 }
@@ -909,8 +898,7 @@ set_standing_animarray_aiming() {
   }
   if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
     self.a.array["exposed_idle"] = array( % exposed_idle_alert_v1, % exposed_idle_alert_v2, % exposed_idle_alert_v3);
-  }
-  else {
+  } else {
     self.a.array["exposed_idle"] = array( % exposed2_idle_alert_v1, % exposed2_idle_alert_v2, % exposed2_idle_alert_v3);
   }
   if(self usingBoltActionWeapon()) {
@@ -946,8 +934,7 @@ set_crouching_animarray_aiming() {
   self.a.array["semi5"] = % exposed_crouch_shoot_semi5;
   if(self usingShotgun()) {
     self.a.array["single"] = array( % shotgun_crouch_fire);
-  }
-  else {
+  } else {
     self.a.array["single"] = array( % exposed_crouch_shoot_semi1);
   }
   self.a.array["burst2"] = % exposed_crouch_shoot_burst3;

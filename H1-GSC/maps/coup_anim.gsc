@@ -619,15 +619,13 @@ killed_by_player(var_0) {
 playdriveranim(var_0, var_1) {
   if(isDefined(var_1)) {
     printturnanim(" ---" + var_1 + ", " + var_0);
-  }
-  else {
+  } else {
     printturnanim(" ---, " + var_0);
   }
 
   if(var_0 == "bigleft2center" && var_1 == "turnleft3") {
     self setanimknob(maps\_utility::getanim("wheel_bigleftloop2center"), 1, 0, 1);
-  }
-  else {
+  } else {
     self setanimknob(maps\_utility::getanim("wheel_" + var_0), 1, 0, 1);
   }
 
@@ -637,8 +635,7 @@ playdriveranim(var_0, var_1) {
 loopdriveranim(var_0, var_1, var_2) {
   if(isDefined(var_1)) {
     printturnanim(" --- (loop) " + var_1 + ", " + var_0);
-  }
-  else {
+  } else {
     printturnanim(" --- (loop) , " + var_0);
   }
 
@@ -646,8 +643,7 @@ loopdriveranim(var_0, var_1, var_2) {
 
   if(var_0 == "bigleft_idle" && var_1 == "turnleft3") {
     self setanimknob(maps\_utility::getanim("wheel_bigleftloop_idle"), 1, 0, 1);
-  }
-  else {
+  } else {
     self setanimknob(maps\_utility::getanim("wheel_" + var_0), 1, 0, 1);
   }
 

@@ -219,8 +219,7 @@ setTeamHeadIcon(team, offset) {
 
   if(isDefined(offset)) {
     self.entityHeadIconOffset = offset;
-  }
-  else {
+  } else {
     self.entityHeadIconOffset = (0, 0, 0);
   }
 
@@ -270,8 +269,7 @@ setPlayerHeadIcon(player, offset) {
 
   if(isDefined(offset)) {
     self.entityHeadIconOffset = offset;
-  }
-  else {
+  } else {
     self.entityHeadIconOffset = (0, 0, 0);
   }
 

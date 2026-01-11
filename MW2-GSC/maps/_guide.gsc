@@ -41,8 +41,7 @@ leadshowstuff_path(position, arrowtime) {
   level endon("newtrigger");
   if(isDefined(position.target)) {
     targ = getent(position.target, "targetname");
-  }
-  else {
+  } else {
     targ = undefined;
   }
   lasttarg = position;
@@ -50,8 +49,7 @@ leadshowstuff_path(position, arrowtime) {
     waitforrecentfire();
     if(isDefined(targ.target)) {
       targ = getent(targ.target, "targetname");
-    }
-    else {
+    } else {
       return;
     }
     if(!isDefined(targ)) {
@@ -77,15 +75,13 @@ lastshottime() {
   while(1) {
     if(level.player usebuttonpressed()) {
       lastshottime = 0;
-    }
-    else {
+    } else {
       lastshottime += .05;
     }
 
     if(lastshottime > 4) {
       level.hasfiredrecently = false;
-    }
-    else {
+    } else {
       level.hasfiredrecently = true;
     }
     wait .05;

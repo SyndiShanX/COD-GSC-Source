@@ -130,8 +130,7 @@ init_audio_snapshot_clientfields() {
 audio_snapshot_clientfield_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     playloopat(fieldname, (0, 0, 0));
-  }
-  else {
+  } else {
     stoploopat(fieldname, (0, 0, 0));
   }
 }
@@ -164,8 +163,7 @@ fxanim_loop_audio(fieldname, val) {
 
     if(val) {
       stoploopat(s.soundname, s.origin);
-    }
-    else {
+    } else {
       playloopat(s.soundname, s.origin);
     }
   } else if(isDefined(level.fxanim_start_loops[fieldname])) {
@@ -173,8 +171,7 @@ fxanim_loop_audio(fieldname, val) {
 
     if(val) {
       playloopat(s.soundname, s.origin);
-    }
-    else {
+    } else {
       stoploopat(s.soundname, s.origin);
     }
   }

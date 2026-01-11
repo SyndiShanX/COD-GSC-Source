@@ -385,8 +385,7 @@ chooserandomguns() {
 
       if(guncycle + 1 == numguncycles) {
         player maps\mp\gametypes\_wager::wagerannouncer("wm_final_weapon");
-      }
-      else {
+      } else {
         player maps\mp\gametypes\_wager::wagerannouncer("wm_weapons_cycled");
       }
 
@@ -457,8 +456,7 @@ givecustomloadout(takeallweapons, alreadyspawned) {
 
   if(isDefined(takeallweapons) && !takeallweapons) {
     self thread takeoldweapons();
-  }
-  else {
+  } else {
     self enableweaponcycling();
   }
 
@@ -493,8 +491,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     if(isDefined(level.sharpshootermultiplier) && level.sharpshootermultiplier == 2) {
       if(!isDefined(attacker.pers["x2kills"])) {
         attacker.pers["x2kills"] = 1;
-      }
-      else {
+      } else {
         attacker.pers["x2kills"]++;
       }
 
@@ -502,8 +499,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     } else if(isDefined(level.sharpshootermultiplier) && level.sharpshootermultiplier == 3) {
       if(!isDefined(attacker.pers["x3kills"])) {
         attacker.pers["x3kills"] = 1;
-      }
-      else {
+      } else {
         attacker.pers["x3kills"]++;
       }
 
@@ -604,8 +600,7 @@ onspawnplayer(predictedspawn) {
 
   if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "shrp");
     self thread infiniteammo();
   }

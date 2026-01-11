@@ -107,8 +107,7 @@ get_all_ents_in_chain(sEntityType) {
   }
   if(aChain.size > 0) {
     return aChain;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -121,8 +120,7 @@ wait_for_level_notify_or_timeout(msg1, timer) {
 get_ai_within_radius(fRadius, org, sTeam) {
   if(isDefined(sTeam)) {
     ai = getaiarray(sTeam);
-  }
-  else {
+  } else {
     ai = getaiarray();
   }
 
@@ -284,8 +282,7 @@ trigArrayWait(sTrig) {
 
   if(aTriggers.size == 1) {
     trigWait(sTrig);
-  }
-  else {
+  } else {
     for(i = 0; i < aTriggers.size; i++) {
       aTriggers[i] thread trigArrayWait2(aTriggers);
     }
@@ -318,8 +315,7 @@ triggersEnable(triggerName, noteworthyOrTargetname, bool) {
   assertEx(isDefined(aTriggers), triggerName + " does not exist");
   if(bool == true) {
     array_thread(aTriggers, ::trigger_on);
-  }
-  else {
+  } else {
     array_thread(aTriggers, ::trigger_off);
   }
 }
@@ -486,15 +482,13 @@ get_closest_ally(eEnt) {
 
   if(!isDefined(eEnt)) {
     org = level.player getorigin();
-  }
-  else {
+  } else {
     org = eEnt getorigin();
   }
 
   if(isDefined(level.excludedAi)) {
     guy = get_closest_ai_exclude(org, "allies", level.excludedAi);
-  }
-  else {
+  } else {
     guy = get_closest_ai(org, "allies");
   }
 
@@ -524,8 +518,7 @@ getAIarrayTouchingVolume(sTeamName, sVolumeName, eVolume) {
 
   if(sTeamName == "all") {
     aTeam = getaiarray();
-  }
-  else {
+  } else {
     aTeam = getaiarray(sTeamName);
   }
 
@@ -556,8 +549,7 @@ npcDelete(sVolumeName, sNPCtype, boolKill, aExclude) {
   ai = undefined;
   if(sNPCtype == "all") {
     ai = getaiarray();
-  }
-  else {
+  } else {
     ai = getaiarray(sNPCtype);
   }
 
@@ -579,8 +571,7 @@ npcDelete(sVolumeName, sNPCtype, boolKill, aExclude) {
       //decide weather to kill or delete
       if(boolKill == true) {
         ai[i] kill((0, 0, 0));
-      }
-      else {
+      } else {
         ai[i] delete();
       }
     }
@@ -629,8 +620,7 @@ getDudesFromArray(aSpawnArray, sScript_Noteworthy) {
 
   if(aDudes.size > 0) {
     return aDudes;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -713,8 +703,7 @@ forceToNode(sNode) {
 setPosture(posture) {
   if(posture == "all") {
     self allowedStances("stand", "crouch", "prone");
-  }
-  else {
+  } else {
     self allowedStances(posture);
   }
 }
@@ -836,8 +825,7 @@ door_open(sType, bPlaySound, bPlayDefaultFx) {
 door_connectpaths(bPlayDefaultFx) {
   if(self.classname == "script_brushmodel") {
     self connectpaths();
-  }
-  else {
+  } else {
     blocker = getent(self.target, "targetname");
     assertex(isDefined(blocker), "A script_model door needs to target a script_brushmodel that blocks the door.");
     blocker hide();
@@ -892,8 +880,7 @@ debug_circle_drawlines(circlepoints, duration, color, fillCenter, center) {
     start = circlepoints[i];
     if(i + 1 >= circlepoints.size) {
       end = circlepoints[0];
-    }
-    else {
+    } else {
       end = circlepoints[i + 1];
     }
 

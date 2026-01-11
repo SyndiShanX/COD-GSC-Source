@@ -7,8 +7,7 @@
 #include clientscripts\createfx\panama_3_fx;
 #include clientscripts\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_ac130_dropping_paratroopers"] = loadfx("bio/shrimps/fx_ac130_dropping_paratroopers");

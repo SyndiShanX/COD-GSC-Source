@@ -244,16 +244,16 @@ array_levelthread(ents, process,
     for(i = 0; i < ents.size; i++) {
       for(p = 0; p < excluders.size; p++)
     }
-        if(ents[i] == excluders[p]) {
-          exclude[i] = true;
-        }
+    if(ents[i] == excluders[p]) {
+      exclude[i] = true;
+    }
   }
   for(i = 0; i < ents.size; i++) {
     if(!exclude[i]) {
       if(isDefined(var)) {
         level thread[[process]](ents[i],
-      }
-          var);
+        }
+        var);
       else {
         level thread[[process]](ents[i]);
       }
@@ -335,15 +335,13 @@ setLowerMessage(text, time, combineMessageAndTimer) {
   self notify("lower_message_set");
   if(!isDefined(combineMessageAndTimer) || !combineMessageAndTimer) {
     self.lowerMessage setText(text);
-  }
-  else {
+  } else {
     self.lowerMessage setText("");
   }
   if(isDefined(time) && time > 0) {
     if(!isDefined(combineMessageAndTimer) || !combineMessageAndTimer) {
       self.lowerTimer.label = &"";
-    }
-    else {
+    } else {
       self.lowerTimer.label = text;
     }
     self.lowerTimer setTimer(time);
@@ -431,8 +429,7 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
       if(isDefined(playerteam)) {
         if(playerteam == team && isDefined(printFriendly) && printFriendly != &"") {
           player iprintln(printFriendly, printarg);
-        }
-        else if(playerteam == otherteam && isDefined(printEnemy) && printEnemy != &"") {
+        } else if(playerteam == otherteam && isDefined(printEnemy) && printEnemy != &"") {
           player iprintln(printEnemy, printarg);
         }
       }
@@ -494,11 +491,9 @@ dvarIntValue(dVar, defVal, minVal, maxVal) {
   value = getDvarInt(dVar);
   if(value > maxVal) {
     value = maxVal;
-  }
-  else if(value < minVal) {
+  } else if(value < minVal) {
     value = minVal;
-  }
-  else {
+  } else {
     return value;
   }
   setDvar(dVar, value);
@@ -513,11 +508,9 @@ dvarFloatValue(dVar, defVal, minVal, maxVal) {
   value = getDvarFloat(dVar);
   if(value > maxVal) {
     value = maxVal;
-  }
-  else if(value < minVal) {
+  } else if(value < minVal) {
     value = minVal;
-  }
-  else {
+  } else {
     return value;
   }
   setDvar(dVar, value);
@@ -563,14 +556,12 @@ loop_fx_sound(alias, origin, ender, timeout) {
 exploder_damage() {
   if(isDefined(self.v["delay"])) {
     delay = self.v["delay"];
-  }
-  else {
+  } else {
     delay = 0;
   }
   if(isDefined(self.v["damage_radius"])) {
     radius = self.v["damage_radius"];
-  }
-  else {
+  } else {
     radius = 128;
   }
   damage = self.v["damage"];
@@ -607,11 +598,10 @@ activate_exploder(num) {
     }
     if(isDefined(ent.v["fxid"]) && ent.v["fxid"] != "No FX") {
       ent thread cannon_effect();
+    } else {
+      if(isDefined(ent.v["soundalias"]))
     }
-    else {
-    if(isDefined(ent.v["soundalias"]))
-    }
-      ent thread sound_effect();
+    ent thread sound_effect();
     if(isDefined(ent.v["damage"])) {
       ent thread exploder_damage();
     }
@@ -624,11 +614,10 @@ activate_exploder(num) {
     }
     if(ent.v["exploder_type"] == "exploder") {
       ent thread brush_show();
+    } else {
+      if((ent.v["exploder_type"] == "exploderchunk") || (ent.v["exploder_type"] == "exploderchunk visible"))
     }
-    else {
-    if((ent.v["exploder_type"] == "exploderchunk") || (ent.v["exploder_type"] == "exploderchunk visible"))
-    }
-      ent thread brush_throw();
+    ent thread brush_throw();
     else {
       ent thread brush_delete();
     }
@@ -675,8 +664,7 @@ play_sound_in_space(alias, origin, master) {
   org.origin = origin;
   if(isDefined(master) && master) {
     org playsoundasmaster(alias);
-  }
-  else {
+  } else {
     org playSound(alias);
   }
   wait(10.0);
@@ -737,8 +725,7 @@ createExploder(fxid) {
 getOtherTeam(team) {
   if(team == "allies") {
     return "axis";
-  }
-  else if(team == "axis") {
+  } else if(team == "axis") {
     return "allies";
   }
   assertMsg("getOtherTeam: invalid team " + team);
@@ -1031,9 +1018,7 @@ compareSizesFx(org, array, dist, compareFunc) {
     keys = getArrayKeys(array);
     for(i = 0; i < keys.size; i++) {
       newdistSqr = DistanceSquared(array[keys[i]].v["origin"], org);
-      if([
-          [compareFunc]
-        ](newdistSqr, distSqr))
+      if([[compareFunc]](newdistSqr, distSqr))
         continue;
       distSqr = newdistSqr;
       struct = array[keys[i]];
@@ -1064,9 +1049,7 @@ compareSizes(org, array, dist, compareFunc) {
     keys = GetArrayKeys(array);
     for(i = 0; i < keys.size; i++) {
       newdistSqr = DistanceSquared(array[keys[i]].origin, org);
-      if([
-          [compareFunc]
-        ](newdistSqr, distSqr))
+      if([[compareFunc]](newdistSqr, distSqr))
         continue;
       distSqr = newdistSqr;
       ent = array[keys[i]];
@@ -1471,8 +1454,7 @@ playSoundinSpace(alias, origin, master) {
   org.origin = origin;
   if(isDefined(master) && master) {
     org playsoundasmaster(alias);
-  }
-  else {
+  } else {
     org playSound(alias);
   }
   wait(10.0);

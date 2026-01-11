@@ -95,13 +95,13 @@ hydroplayerconnected(localclientnum) {
   water_sheeting_triggers = getEntArray(0, "prone_water_fx", "targetname");
 
   foreach(trigger in water_sheeting_triggers) {
-  trigger thread water_prone_fx(localclientnum);
+    trigger thread water_prone_fx(localclientnum);
   }
 
   security_camera_balls = getEntArray(localclientnum, "security_camera_ball", "targetname");
 
   foreach(cameraball in security_camera_balls) {
-  cameraball thread cameratrackplayer(localclientnum);
+    cameraball thread cameratrackplayer(localclientnum);
   }
 }
 
@@ -165,8 +165,7 @@ water_prone_fx(localclientnum) {
     while(player istouching(self)) {
       if(player getstance(localclientnum) == "prone") {
         startwatersheetingfx(localclientnum);
-      }
-      else {
+      } else {
         stopwatersheetingfx(localclientnum, 2);
       }
 

@@ -129,7 +129,7 @@ players_use_nuke_monitor(nuke_trig) {
   level endon("all_players_using_nuke");
 
   foreach(player in level.players) {
-  player thread watch_for_use_nuke_trigger(nuke_trig);
+    player thread watch_for_use_nuke_trigger(nuke_trig);
   }
 
   while(true) {
@@ -266,7 +266,7 @@ watch_player_escape(escape_ent, escape_start_time) {
   level.num_players_escaped = players_escaped.size;
 
   foreach(player in players_left) {
-  player IPrintLnBold(&"ALIEN_COLLECTIBLES_YOU_DIDNT_MAKE_IT");
+    player IPrintLnBold(&"ALIEN_COLLECTIBLES_YOU_DIDNT_MAKE_IT");
   }
 
   if(players_escaped.size == 0) {
@@ -282,7 +282,7 @@ watch_player_escape(escape_ent, escape_start_time) {
   teleport_loc = teleport_struct.origin;
 
   foreach(player in players_escaped) {
-  player thread player_blend_to_chopper();
+    player thread player_blend_to_chopper();
   }
 
   wait 1.6;
@@ -320,8 +320,7 @@ watch_player_escape(escape_ent, escape_start_time) {
 
   if(players_escaped.size == level.players.size) {
     win_msg = maps\mp\alien\_hud::get_end_game_string_index("all_escape");
-  }
-  else {
+  } else {
     win_msg = maps\mp\alien\_hud::get_end_game_string_index("some_escape");
   }
 
@@ -397,8 +396,7 @@ force_crouch(force_on) {
 
   if(isDefined(force_on) && force_on == false) {
     self notify("remove_force_crouch");
-  }
-  else {
+  } else {
     while(1) {
       if(self GetStance() != "crouch") {
         self setstance("crouch");
@@ -424,8 +422,7 @@ wait_for_escape_conditions_met(trig) {
       }
       if(player IsTouching(trig)) {
         alive_players_inside[alive_players_inside.size] = player;
-      }
-      else {
+      } else {
         alive_players_outside[alive_players_outside.size] = player;
       }
     }
@@ -608,8 +605,7 @@ wait_for_special_spawn() {
 
   if(level.infinite_event_index == 1) {
     wait 5;
-  }
-  else {
+  } else {
     wait level.infinite_event_interval;
   }
 
@@ -622,7 +618,7 @@ setup_special_spawn_trigs() {
   level.special_spawn_trigs = getEntArray("force_special_spawn_trig", "targetname");
 
   foreach(trig in level.special_spawn_trigs) {
-  trig thread watch_special_spawn_trig();
+    trig thread watch_special_spawn_trig();
   }
 }
 
@@ -856,8 +852,7 @@ call_in_hive_heli(primary_target) {
 
   if(level.hive_heli ent_flag_exist("assault_ready")) {
     level.hive_heli ent_flag_clear("assault_ready");
-  }
-  else {
+  } else {
     level.hive_heli ent_flag_init("assault_ready");
   }
 
@@ -968,8 +963,7 @@ hive_heli_assault_loop() {
 
       if(!is_hardcore_mode()) {
         self heli_loop(4, false, ::get_assault_loop_loc, "blocker_hive_destroyed", 35);
-      }
-      else {
+      } else {
         self heli_loop(6, false, ::get_assault_loop_loc, "blocker_hive_destroyed", 35);
       }
 
@@ -1056,8 +1050,7 @@ get_assault_loop_loc() {
 
   if(flag_exist("evade") && flag("evade")) {
     return loop_struct.origin + (0, 0, 600);
-  }
-  else {
+  } else {
     return loop_struct.origin;
   }
 }
@@ -1262,8 +1255,7 @@ heli_fly_to(path_goal_pos, speed, endon_msg) {
 
   if(isDefined(self.near_goal) && self.near_goal) {
     self waittill("near_goal");
-  }
-  else {
+  } else {
     self waittill("goal");
   }
 }
@@ -1602,7 +1594,7 @@ init_chaos_airdrop() {
     loc.sub_locs[0] = loc.origin;
     sub_locs = getstructarray(loc.target, "targetname");
     foreach(sub_loc in sub_locs) {
-    loc.sub_locs[loc.sub_locs.size] = sub_loc.origin;
+      loc.sub_locs[loc.sub_locs.size] = sub_loc.origin;
     }
 
     loc.weight = 0;

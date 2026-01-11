@@ -39,8 +39,7 @@ main() {
 
   if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
     level._effect["_attack_heli_spotlight"] = loadfx("misc/hunted_spotlight_model_dim");
-  }
-  else {
+  } else {
     level._effect["_attack_heli_spotlight"] = loadfx("misc/spotlight_large");
   }
 

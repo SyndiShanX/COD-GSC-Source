@@ -76,7 +76,7 @@ begin_atrium() {
   common_scripts\utility::flag_wait("atrium_done");
 
   foreach(var_1 in level.allies) {
-  var_1.ignoresuppression = 1;
+    var_1.ignoresuppression = 1;
   }
 }
 
@@ -270,7 +270,7 @@ wall_chunks_show() {
   var_0 show();
 
   foreach(var_4 in var_1) {
-  var_4 show();
+    var_4 show();
   }
 
   var_6 = getent("bust_wall_clip", "targetname");
@@ -284,7 +284,7 @@ wall_chunks_hide() {
   var_0 hide();
 
   foreach(var_3 in var_1) {
-  var_3 hide();
+    var_3 hide();
   }
 
   var_5 = getent("bust_wall_clip", "targetname");
@@ -319,7 +319,7 @@ start_atrium_combat() {
   var_1 = array_spawn_targetname_allow_fail_setthreat_insideaware("atrium_mk32_guys");
 
   foreach(var_3 in var_1) {
-  var_3.accuracy = 0.01;
+    var_3.accuracy = 0.01;
   }
 
   thread maps\_utility::autosave_tactical();
@@ -395,7 +395,7 @@ atrium_done(var_0) {
   maps\enemyhq_code::safe_activate_trigger_with_targetname("TRIG_atrium_done");
 
   foreach(var_2 in level.allies) {
-  var_2.ignoresuppression = 0;
+    var_2.ignoresuppression = 0;
   }
 }
 
@@ -454,7 +454,7 @@ check_triggers_flagset(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 thread set_flag_in_trigger();
+    var_3 thread set_flag_in_trigger();
   }
 }
 

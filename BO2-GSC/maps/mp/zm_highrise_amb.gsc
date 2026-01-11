@@ -37,8 +37,7 @@ sndmusicegg_wait(bear_origin) {
 
   if(level.meteor_counter == 3) {
     level thread sndmuseggplay(temp_ent, "mus_zmb_secret_song", 190);
-  }
-  else {
+  } else {
     wait 1.5;
     temp_ent delete();
   }

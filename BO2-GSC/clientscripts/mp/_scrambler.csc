@@ -215,15 +215,13 @@ scramblerupdate(localclientnum) {
 
       if(nearestenemy < level.scramblervoouterradius) {
         enemyvoscrambleramount = 1 - (nearestenemy - level.scramblerinnerradius) / (level.scramblervoouterradius - level.scramblerinnerradius);
-      }
-      else {
+      } else {
         enemyvoscrambleramount = 0;
       }
 
       if(nearestfriendly < level.scramblerinnerradius) {
         friendlyscrambleramount = 1.0;
-      }
-      else if(nearestfriendly < level.scramblervoouterradius) {
+      } else if(nearestfriendly < level.scramblervoouterradius) {
         friendlyscrambleramount = 1 - (nearestfriendly - level.scramblerinnerradius) / (level.scramblervoouterradius - level.scramblerinnerradius);
       }
 
@@ -231,15 +229,13 @@ scramblerupdate(localclientnum) {
 
       if(level.scramblers.size > 0 && isDefined(nearestenemyscramblercent)) {
         player setnearestenemyscrambler(nearestenemyscramblercent);
-      }
-      else {
+      } else {
         player clearnearestenemyscrambler();
       }
 
       if(isglobalscrambler && player hasperk(localclientnum, "specialty_immunecounteruav") == 0) {
         player setenemyglobalscrambler(1);
-      }
-      else {
+      } else {
         player setenemyglobalscrambler(0);
       }
 

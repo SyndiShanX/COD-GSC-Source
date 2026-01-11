@@ -4,7 +4,6 @@
 *****************************************************/
 
 #include scripts\core_common\clientfield_shared;
-
 #namespace globallogic_score;
 
 autoexec __init__() {

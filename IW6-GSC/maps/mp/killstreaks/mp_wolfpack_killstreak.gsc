@@ -299,8 +299,7 @@ UpdateMoveState() {
     if(isDefined(self.lastBadPathTime) && (GetTime() - self.lastBadPathTime < 3000)) {
       if(Distance2DSquared(attackPoint, self.lastBadPathGoal) < 16) {
         bLastBadMeleeTarget = true;
-      }
-      else if(isDefined(self.lastBadPathMoveState) && self.lastBadPathMoveState == "pursuit" && Distance2DSquared(self.lastBadPathUltimateGoal, self.enemy.origin) < 16) {
+      } else if(isDefined(self.lastBadPathMoveState) && self.lastBadPathMoveState == "pursuit" && Distance2DSquared(self.lastBadPathUltimateGoal, self.enemy.origin) < 16) {
         bLastBadMeleeTarget = true;
       }
     }

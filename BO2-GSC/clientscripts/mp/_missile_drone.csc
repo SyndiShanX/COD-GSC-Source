@@ -28,8 +28,7 @@ missile_drone_projectile_animate_cb(localclientnum, oldval, newval, bnewent, bin
 missile_drone_projectile_active_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self thread clientscripts\mp\_fx::blinky_light(localclientnum, "tag_target", level._effect["missile_drone_friendly_light"], level._effect["missile_drone_enemy_light"]);
-  }
-  else {
+  } else {
     self thread clientscripts\mp\_fx::stop_blinky_light(localclientnum);
   }
 }
@@ -37,11 +36,9 @@ missile_drone_projectile_active_cb(localclientnum, oldval, newval, bnewent, bini
 missile_drone_active_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 2) {
     self targetacquired(localclientnum);
-  }
-  else if(newval == 1) {
+  } else if(newval == 1) {
     self targetscan(localclientnum);
-  }
-  else {
+  } else {
     self targetlost(localclientnum);
   }
 }

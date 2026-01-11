@@ -183,8 +183,7 @@ fan_trap_damage(parent) {
 
     if(isplayer(ent)) {
       ent thread player_fan_trap_damage();
-    }
-    else {
+    } else {
       if(is_true(ent.is_brutus)) {
         ent maps\mp\zombies\_zm_ai_brutus::trap_damage_callback(self);
         return;
@@ -218,8 +217,7 @@ player_fan_trap_damage() {
 
   if(!self hasperk("specialty_armorvest") || self.health - 100 < 1) {
     radiusdamage(self.origin, 10, self.health + 100, self.health + 100);
-  }
-  else {
+  } else {
     self dodamage(50, self.origin);
   }
 }
@@ -361,8 +359,7 @@ acid_trap_damage() {
 
     if(isplayer(ent)) {
       ent thread player_acid_damage(self);
-    }
-    else {
+    } else {
       if(is_true(ent.is_brutus)) {
         ent maps\mp\zombies\_zm_ai_brutus::trap_damage_callback(self);
         return;
@@ -448,7 +445,7 @@ init_tower_trap_trigs() {
   trap_trigs = getEntArray("tower_trap_activate_trigger", "targetname");
 
   foreach(trigger in trap_trigs) {
-  trigger thread tower_trap_trigger_think();
+    trigger thread tower_trap_trigger_think();
   }
 }
 
@@ -653,8 +650,7 @@ tower_trap_fires(a_zombies) {
 hint_string(string, cost) {
   if(isDefined(cost)) {
     self sethintstring(string, cost);
-  }
-  else {
+  } else {
     self sethintstring(string);
   }
 

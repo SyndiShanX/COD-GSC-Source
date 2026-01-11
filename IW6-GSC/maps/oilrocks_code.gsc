@@ -260,7 +260,7 @@ apache_sun_settings() {
 
 apache_sun_settings_restore() {
   foreach(var_2, var_1 in level.apache_sun_settings) {
-  setsaveddvar(var_2, var_1);
+    setsaveddvar(var_2, var_1);
   }
 }
 
@@ -376,7 +376,7 @@ player_in_out_apache() {
     var_1 = level.player.riding_heli.angles;
 
     foreach(var_3 in level.apache_target_manager) {
-    level.player.riding_heli thread vehicle_scripts\_apache_player::hud_hidetargets([var_3]);
+      level.player.riding_heli thread vehicle_scripts\_apache_player::hud_hidetargets([var_3]);
     }
 
     level notify("new_missile_nag_thread");

@@ -8,7 +8,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\throttle_shared;
-
 #namespace gib;
 
 autoexec main() {
@@ -188,8 +187,8 @@ private _gibentityinternal(entity, gibflag) {
 
 private _getgibbedlegmodel(entity) {
   gibstate = _getgibbedstate(entity);
-  rightleggibbed = gibstate& 128;
-  leftleggibbed = gibstate& 256;
+  rightleggibbed = gibstate & 128;
+  leftleggibbed = gibstate & 256;
 
   if(rightleggibbed && leftleggibbed) {
     return (isDefined(entity.gib_data) ? entity.gib_data.legdmg4 : entity.legdmg4);
@@ -212,8 +211,8 @@ private _getgibbedstate(entity) {
 
 private _getgibbedtorsomodel(entity) {
   gibstate = _getgibbedstate(entity);
-  rightarmgibbed = gibstate& 16;
-  leftarmgibbed = gibstate& 32;
+  rightarmgibbed = gibstate & 16;
+  leftarmgibbed = gibstate & 32;
 
   if(rightarmgibbed && leftarmgibbed) {
     return (isDefined(entity.gib_data) ? entity.gib_data.torsodmg2 : entity.torsodmg2);
@@ -233,7 +232,7 @@ private _hasgibdef(entity) {
 private _hasgibpieces(entity, gibflag) {
   hasgibpieces = 0;
   gibstate = _getgibbedstate(entity);
-  entity.gib_state = gibstate | gibflag& 512 - 1;
+  entity.gib_state = gibstate | gibflag & 512 - 1;
 
   if(isDefined(_getgibbedtorsomodel(entity)) && isDefined(_getgibbedlegmodel(entity))) {
     hasgibpieces = 1;
@@ -248,9 +247,9 @@ private _setgibbed(entity, gibflag, gibdir) {
     angles = vectortoangles(gibdir);
     yaw = angles[1];
     yaw_bits = getbitsforangle(yaw, 3);
-    entity.gib_state = (_getgibbedstate(entity) | gibflag& 512 - 1) + (yaw_bits << 9);
+    entity.gib_state = (_getgibbedstate(entity) | gibflag & 512 - 1) + (yaw_bits << 9);
   } else {
-    entity.gib_state = _getgibbedstate(entity) | gibflag& 512 - 1;
+    entity.gib_state = _getgibbedstate(entity) | gibflag & 512 - 1;
   }
 
   entity.gibbed = 1;
@@ -282,7 +281,7 @@ copygibstate(originalentity, newentity) {
 }
 
 isgibbed(entity, gibflag) {
-  return _getgibbedstate(entity)&gibflag;
+  return _getgibbedstate(entity) &gibflag;
 }
 
 gibhat(entity) {
@@ -492,7 +491,7 @@ togglespawngibs(entity, shouldspawngibs) {
   if(!shouldspawngibs) {
     entity.gib_state = _getgibbedstate(entity) | 1;
   } else {
-    entity.gib_state = _getgibbedstate(entity)&-2;
+    entity.gib_state = _getgibbedstate(entity) &-2;
   }
 
   entity clientfield::set("gib_state", entity.gib_state);

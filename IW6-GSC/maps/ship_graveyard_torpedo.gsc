@@ -146,8 +146,7 @@ draw_trigger_hints() {
 
   if(maps\ship_graveyard_util::game_is_pc()) {
     var_5 settext(&"SHIP_GRAVEYARD_HINT_LT");
-  }
-  else {
+  } else {
     var_5 settext(&"SHIP_GRAVEYARD_HINT_LT_360");
   }
 
@@ -303,8 +302,7 @@ torpedo_fire(var_0, var_1) {
       if(var_14[0] == 0) {
         if(isDefined(self getlocalplayerprofiledata("invertedPitch")) && self getlocalplayerprofiledata("invertedPitch")) {
           var_14 = (var_15[0] * -1.0, var_14[1], var_14[2]);
-        }
-        else {
+        } else {
           var_14 = (var_15[0], var_14[1], var_14[2]);
         }
       }
@@ -321,8 +319,7 @@ torpedo_fire(var_0, var_1) {
 
     if(var_9.angles[0] > var_16) {
       var_9.angles = (var_16, var_9.angles[1], 0);
-    }
-    else if(var_9.angles[0] < var_17 * -1) {
+    } else if(var_9.angles[0] < var_17 * -1) {
       var_9.angles = (var_17 * -1, var_9.angles[1], 0);
     }
 
@@ -337,8 +334,7 @@ torpedo_fire(var_0, var_1) {
 
         if(var_4 < var_5.size) {
           var_6 = var_5[var_4];
-        }
-        else if(var_4 == var_5.size) {
+        } else if(var_4 == var_5.size) {
           var_6 = level.sonar_boat.target_points[0].origin + (-166, 154, -156);
           var_18 = 0.25;
         } else
@@ -432,11 +428,9 @@ dominator_accelerate(var_0, var_1, var_2) {
   if(var_8 == 0) {
     if(var_0 == "yaw") {
       var_4 = var_4 * 3.5;
-    }
-    else if(var_0 == "roll") {
+    } else if(var_0 == "roll") {
       var_4 = var_4 * 1.5;
-    }
-    else {
+    } else {
       var_4 = var_4 * 2.1;
     }
   }
@@ -447,11 +441,9 @@ dominator_accelerate(var_0, var_1, var_2) {
 
   if(var_0 == "yaw") {
     var_1 = var_1 + (0, var_4, 0);
-  }
-  else if(var_0 == "roll") {
+  } else if(var_0 == "roll") {
     var_1 = var_1 + (0, 0, var_4);
-  }
-  else {
+  } else {
     var_1 = var_1 + (var_4, 0, 0);
   }
 
@@ -499,8 +491,7 @@ dominator_earthquake(var_0, var_1) {
 
   if(var_0 < 0.2) {
     self playrumbleonentity("damage_heavy");
-  }
-  else {
+  } else {
     self playrumbleonentity("damage_heavy");
     wait 0.2;
     self playrumbleonentity("damage_light");
@@ -772,7 +763,7 @@ disable_torpedo_ui() {
   level notify("kill_hud_logic");
 
   foreach(var_1 in level.torpedo_hud_items) {
-  var_1 destroy();
+    var_1 destroy();
   }
 
   if(common_scripts\utility::flag("pause_dynamic_dof")) {

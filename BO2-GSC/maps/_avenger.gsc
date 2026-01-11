@@ -33,8 +33,7 @@ precache_extra_models(is_2x) {
 
   if(is_2x) {
     a_models = _get_avenger_death_model_2x_array();
-  }
-  else {
+  } else {
     a_models = _get_avenger_death_model_array();
   }
 
@@ -167,8 +166,7 @@ rotate_dead_piece() {
 
     if(ang_vel[2] < 500 * -1) {
       ang_vel = (ang_vel[0], ang_vel[1], 500 * -1);
-    }
-    else if(ang_vel[2] > 500) {
+    } else if(ang_vel[2] > 500) {
       ang_vel = (ang_vel[0], ang_vel[1], 500);
     }
 

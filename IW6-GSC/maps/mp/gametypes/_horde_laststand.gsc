@@ -98,8 +98,7 @@ registerLastStandParameter(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon
 
   if(isDefined(attacker) && IsPlayer(attacker) && (attacker getCurrentPrimaryWeapon() != "none")) {
     lastStandParams.sPrimaryWeapon = attacker getCurrentPrimaryWeapon();
-  }
-  else {
+  } else {
     lastStandParams.sPrimaryWeapon = undefined;
   }
 

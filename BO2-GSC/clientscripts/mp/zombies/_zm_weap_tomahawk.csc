@@ -22,8 +22,7 @@ init() {
 tomahawk_in_use(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     println("tomahawk - IN USE");
-  }
-  else {
+  } else {
     println("tomahawk - AVAILABLE");
   }
 }

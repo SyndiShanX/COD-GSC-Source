@@ -21,7 +21,6 @@
 #include scripts\core_common\visionset_mgr_shared;
 #include scripts\mp_common\item_inventory;
 #include scripts\weapons\heatseekingmissile;
-
 #namespace dart;
 
 autoexec __init__system__() {
@@ -42,9 +41,9 @@ private kill_vehicle(attackingplayer, weapon = level.weaponnone) {
 }
 
 private on_item_use(params) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
-  if(!isDefined(params.item) || !isDefined(params.item.itementry) || !isDefined(params.item.itementry.weapon) || params.item.itementry.weapon.name != #"dart") {
+  if(!isDefined(params.item) || !isDefined(params.item.itementry) || !isDefined(params.item.itementry.weapon) || params.item.itementry.weapon.name != # "dart") {
     return;
   }
 
@@ -95,7 +94,7 @@ private function_1e845317() {
 }
 
 private function_bd506c77() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   remoteweapon = getweapon(#"warzone_remote");
 
   if(self hasweapon(remoteweapon)) {
@@ -103,12 +102,12 @@ private function_bd506c77() {
   }
 
   if(self isswitchingweapons()) {
-    self waittilltimeout(2, #"weapon_change");
+    self waittilltimeout(2, # "weapon_change");
   }
 
   self giveweapon(remoteweapon);
   self switchtoweapon(remoteweapon, 1);
-  self waittilltimeout(2, #"weapon_change");
+  self waittilltimeout(2, # "weapon_change");
 }
 
 private take_remote() {
@@ -117,7 +116,7 @@ private take_remote() {
 }
 
 private throw_dart(spawnorigin, spawnangles, itemid) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   playereyepos = self getplayercamerapos();
   vehicle = spawnvehicle(#"veh_dart_wz", spawnorigin, spawnangles);
 
@@ -169,7 +168,7 @@ private spawn_trace() {
   var_f45df727 = eyepos + forward * 200;
   traceresults = {};
   traceresults.trace = bulletTrace(eyepos, var_f45df727, 1, self, 1, 1);
-  traceresults.isvalid = traceresults.trace[#"fraction"] >= 1;
+  traceresults.isvalid = traceresults.trace[# "fraction"] >= 1;
   traceresults.waterdepth = 0;
   traceresults.origin = endpos;
   traceresults.angles = eyeangle;
@@ -183,14 +182,14 @@ private function_f35d7cf3(playereyepos, vehicle) {
   endpos = vehicle.origin;
   trace = bulletTrace(eyepos, endpos, 1, self, 1, 1);
 
-  if(trace[#"fraction"] < 1) {
+  if(trace[# "fraction"] < 1) {
     return false;
   }
 
   mins = (vehicle.radius * -1, vehicle.radius * -1, vehicle.radius * -1);
   maxs = (vehicle.radius, vehicle.radius, vehicle.radius);
   trace = physicstraceex(eyepos, endpos, mins, maxs, self, 1);
-  return trace[#"fraction"] >= 1;
+  return trace[# "fraction"] >= 1;
 }
 
 on_vehicle_damage(params) {
@@ -208,7 +207,7 @@ event_handler[enter_vehicle] codecallback_vehicleenter(eventstruct) {
 
   vehicle = eventstruct.vehicle;
 
-  if(!isDefined(vehicle.scriptvehicletype) || vehicle.scriptvehicletype != #"dart_wz") {
+  if(!isDefined(vehicle.scriptvehicletype) || vehicle.scriptvehicletype != # "dart_wz") {
     return;
   }
 
@@ -229,7 +228,7 @@ watchremotecontroldeactivate() {
   self endon("45eaa61d466e347f");
   dart = self;
   player = self.owner;
-  dart endon(#"death", #"remote_weapon_end");
+  dart endon(#"death", # "remote_weapon_end");
   player endon(#"disconnect");
 
   while(player attackbuttonpressed()) {
@@ -253,7 +252,7 @@ event_handler[exit_vehicle] codecallback_vehicleexit(eventstruct) {
 
   vehicle = eventstruct.vehicle;
 
-  if(!isDefined(vehicle.scriptvehicletype) || vehicle.scriptvehicletype != #"dart_wz") {
+  if(!isDefined(vehicle.scriptvehicletype) || vehicle.scriptvehicletype != # "dart_wz") {
     return;
   }
 
@@ -264,7 +263,7 @@ watchownerdisconnect(player) {
   self notify("3e0604a78c24647e");
   self endon("3e0604a78c24647e");
   self endon(#"death");
-  player waittill(#"disconnect", #"death");
+  player waittill(#"disconnect", # "death");
   self makevehicleunusable();
   self kill_vehicle(self);
 }
@@ -272,8 +271,8 @@ watchownerdisconnect(player) {
 private function_d13b1540(vehicle) {
   self notify("6f85cb6661241b51");
   self endon("6f85cb6661241b51");
-  self endon(#"death", #"disconnect");
-  vehicle endon(#"death", #"exit_vehicle");
+  self endon(#"death", # "disconnect");
+  vehicle endon(#"death", # "exit_vehicle");
   var_51fede25 = gettime() + 30000;
   self vehicle::set_vehicle_drivable_time_starting_now(30000);
   var_5fa298a1 = var_51fede25 - 10000;
@@ -362,7 +361,7 @@ function_3a595d3c() {
   results = bulletTrace(camera_pos, camera_pos + dir * 96, 1, self, 1, 1);
 
   if(isDefined(results)) {
-    if(isDefined(results[#"fraction"]) && results[#"fraction"] > 0.99) {
+    if(isDefined(results[# "fraction"]) && results[# "fraction"] > 0.99) {
       return true;
     }
   }
@@ -379,7 +378,7 @@ private function_c6ac711a(target) {
     return false;
   }
 
-  if(!isDefined(target.weapon) || target.weapon.name != #"dart") {
+  if(!isDefined(target.weapon) || target.weapon.name != # "dart") {
     return false;
   }
 
@@ -487,7 +486,7 @@ function_ea9fe221(dart, collision) {
       forward = anglesToForward(dart.angles);
       moveamount = vectorscale(forward, 300 * -1);
       trace = physicstrace(dart.origin, dart.origin + moveamount, (4 * -1, 4 * -1, 4 * -1), (4, 4, 4), undefined, 1);
-      cam = spawn("script_model", trace[#"position"]);
+      cam = spawn("script_model", trace[# "position"]);
       cam setModel(#"tag_origin");
       cam linkto(dart);
       cam util::deleteaftertime(5);

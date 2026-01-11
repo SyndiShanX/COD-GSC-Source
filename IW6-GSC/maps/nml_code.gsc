@@ -103,7 +103,7 @@ opening_shot() {
   var_3 = getaiarray("axis");
 
   foreach(var_5 in var_3) {
-  var_5 kill();
+    var_5 kill();
   }
 
   maps\nml_util::team_unset_colors(128);
@@ -268,7 +268,7 @@ mansion_dialogue() {
   var_0 = common_scripts\utility::getstructarray("mansion_physics_node", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread physics_jolt_node();
+    var_2 thread physics_jolt_node();
   }
 
   wait 3;
@@ -956,8 +956,7 @@ post_crater_dog_setup() {
 
   if(!level.console && !level.player usinggamepad()) {
     var_1 sethintstring(&"NML_HINT_SYNC_KB");
-  }
-  else {
+  } else {
     var_1 sethintstring(&"NML_HINT_SYNC");
   }
 
@@ -1001,7 +1000,7 @@ player_drive_dog_pc() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   level.dog.idlelookattargets = undefined;
@@ -1124,8 +1123,7 @@ pc_dog_drive_dialogue_3() {
 
   if(!level.console && !level.player usinggamepad()) {
     maps\_utility::display_hint("hint_bark_kb");
-  }
-  else {
+  } else {
     maps\_utility::display_hint("hint_bark");
   }
 
@@ -1255,8 +1253,7 @@ pc_dog_drive_enemies() {
 
   if(!level.console && !level.player usinggamepad() && maps\_utility::is_command_bound("+sprint_zoom")) {
     maps\_utility::display_hint_timeout("hint_dog_sprintzoom", 9);
-  }
-  else {
+  } else {
     maps\_utility::display_hint_timeout("hint_dog_sprint", 9);
   }
 
@@ -1963,8 +1960,7 @@ tunnel_pipe_sway(var_0) {
 
   if(level.player istouching(var_1)) {
     var_0 rotateto((var_2, 0, 0), var_3, var_3 * 0.3, var_3 * 0.3);
-  }
-  else {
+  } else {
     var_0 rotateto((0, 0, var_2), var_3, var_3 * 0.3, var_3 * 0.3);
   }
 
@@ -2108,7 +2104,7 @@ pipe_warning_fx() {
   var_0 = common_scripts\utility::getstructarray(self.target, "targetname");
 
   foreach(var_2 in var_0) {
-  common_scripts\utility::noself_delaycall(randomfloatrange(0, 0.5), ::playfx, common_scripts\utility::getfx("pipe_dust"), var_2.origin);
+    common_scripts\utility::noself_delaycall(randomfloatrange(0, 0.5), ::playfx, common_scripts\utility::getfx("pipe_dust"), var_2.origin);
   }
 }
 
@@ -2464,8 +2460,7 @@ mall_lookout() {
 
   if(!common_scripts\utility::flag("mall_guy_died_by_dog")) {
     level.baker maps\_utility::smart_dialogue("nml_hsh_goodkill");
-  }
-  else {
+  } else {
     level.baker maps\_utility::smart_dialogue("nml_hsh_goodboyriley");
   }
 
@@ -2503,8 +2498,7 @@ mall_lookout() {
 
   if(!level.console && !level.player usinggamepad()) {
     var_1 sethintstring(&"NML_HINT_SYNC_KB");
-  }
-  else {
+  } else {
     var_1 sethintstring(&"NML_HINT_SYNC");
   }
 
@@ -2597,8 +2591,7 @@ mall_lone_patrol_think() {
 
   if(self istouching(var_1)) {
     common_scripts\utility::flag_set("mall_lone_patrol_dead");
-  }
-  else {
+  } else {
     wait 0.3;
     maps\nml_stealth::player_set_spotted();
   }

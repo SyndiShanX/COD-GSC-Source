@@ -45,8 +45,7 @@ func_48BE(var_00) {
 
   if(!isDefined(level.func_4EE9)) {
     level.func_4EE9 = [var_01];
-  }
-  else if(level.func_4EE9.size > 50) {
+  } else if(level.func_4EE9.size > 50) {
     var_02 = [];
     level.func_4EE9[0] delete();
 

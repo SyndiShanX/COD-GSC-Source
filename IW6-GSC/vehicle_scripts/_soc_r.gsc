@@ -88,8 +88,7 @@ boat_mginit(var_0, var_1, var_2) {
 
   if(self.script_turretmg == 0) {
     thread maps\_vehicle_code::_mgoff();
-  }
-  else {
+  } else {
     self.script_turretmg = 1;
     thread maps\_vehicle_code::_mgon();
   }

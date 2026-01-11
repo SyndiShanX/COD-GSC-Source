@@ -49,8 +49,7 @@ pc_upgradedog() {
 
   if(var_0) {
     var_1 = "dog";
-  }
-  else {
+  } else {
     var_1 = "wolf";
   }
 
@@ -75,8 +74,7 @@ pc_downgradedog() {
 
   if(var_1) {
     var_2 = "dog";
-  }
-  else {
+  } else {
     var_2 = "wolf";
   }
 
@@ -110,8 +108,7 @@ pc_furmonitor() {
     if(var_0 != var_1) {
       if(var_1) {
         pc_upgradedog();
-      }
-      else {
+      } else {
         pc_downgradedog();
       }
     }
@@ -126,8 +123,7 @@ setmeleeattackdist() {
   for(;;) {
     if(isDefined(self.enemy) && isplayer(self.enemy)) {
       self.meleeattackdist = anim.dogattackplayerdist;
-    }
-    else {
+    } else {
       self.meleeattackdist = anim.dogattackaidist;
     }
 

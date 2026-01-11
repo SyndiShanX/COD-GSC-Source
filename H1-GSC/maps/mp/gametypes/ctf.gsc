@@ -100,11 +100,9 @@ onstartgametype() {
 
   if(game["status"] == "halftime") {
     setomnvar("ui_current_round", 2);
-  }
-  else if(game["status"] == "overtime") {
+  } else if(game["status"] == "overtime") {
     setomnvar("ui_current_round", 3);
-  }
-  else if(game["status"] == "overtime_halftime") {
+  } else if(game["status"] == "overtime_halftime") {
     setomnvar("ui_current_round", 4);
   }
 
@@ -392,8 +390,7 @@ createteamflag(var_0) {
 
   if(!isDefined(var_2)) {
     common_scripts\utility::error("No ctf_zone_" + var_1 + " trigger found in map.");
-  }
-  else {
+  } else {
     var_3[0] = getent("ctf_flag_" + var_1, "targetname");
 
     if(!isDefined(var_3[0])) {
@@ -516,8 +513,7 @@ onbeginuse(var_0) {
 
   if(var_1 == maps\mp\gametypes\_gameobjects::getownerteam()) {
     self.trigger.radius = 1024;
-  }
-  else {
+  } else {
     self.trigger.radius = self.oldradius;
   }
 }
@@ -532,8 +528,7 @@ onpickup(var_0) {
 
   if(var_1 == "allies") {
     var_2 = "axis";
-  }
-  else {
+  } else {
     var_2 = "allies";
   }
 
@@ -736,8 +731,7 @@ onuse(var_0) {
 
   if(var_1 == "allies") {
     var_2 = "axis";
-  }
-  else {
+  } else {
     var_2 = "allies";
   }
 
@@ -769,8 +763,7 @@ onuse(var_0) {
 
   if(maps\mp\gametypes\_gameobjects::getownerteam() == "allies") {
     setomnvar("ui_mlg_game_mode_status_1", 0);
-  }
-  else {
+  } else {
     setomnvar("ui_mlg_game_mode_status_2", 0);
   }
 
@@ -789,7 +782,7 @@ settimetobeat(var_0) {
 
 updatetimetobeatomnvar() {
   foreach(var_1 in level.players) {
-  var_1 playerupdatetimetobeatomnvars();
+    var_1 playerupdatetimetobeatomnvars();
   }
 }
 
@@ -874,8 +867,7 @@ ontimelimit() {
   if(maps\mp\_utility::inovertime()) {
     if(game["status"] == "overtime") {
       level thread maps\mp\gametypes\_gamelogic::endgame("overtime_halftime", game["end_reason"]["time_limit_reached"]);
-    }
-    else if(game["status"] == "overtime_halftime") {
+    } else if(game["status"] == "overtime_halftime") {
       var_1 = game["teamScoredFirstHalf"];
 
       if(isDefined(var_1)) {
@@ -1154,8 +1146,7 @@ flageffects() {
 
   if(isDefined(self.carrier)) {
     friendlyenemylinkedeffects(level.flagstowedfxid, self.carrier, "J_SpineUpper");
-  }
-  else {
+  } else {
     var_0 = self.visuals[0];
     friendlyenemyeffects(level.flaggroundfxid, var_0.origin, anglesToForward(var_0.angles));
   }

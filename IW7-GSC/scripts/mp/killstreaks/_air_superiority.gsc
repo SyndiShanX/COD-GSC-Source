@@ -95,9 +95,7 @@ cleanupgamemodes(param_00, param_01, param_02) {
 func_6CC8(param_00, param_01, param_02, param_03, param_04) {
   if(isDefined(param_03)) {
     foreach(var_06 in param_03) {
-      if([
-          [param_02]
-        ](param_00, param_01, var_06)) {
+      if([[param_02]](param_00, param_01, var_06)) {
         param_04.targets[param_04.targets.size] = var_06;
       }
     }

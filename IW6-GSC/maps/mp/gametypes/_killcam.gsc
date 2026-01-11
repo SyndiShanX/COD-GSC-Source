@@ -206,8 +206,7 @@ setCinematicCameraStyle(cameraStyle, leadingActorId, supportingActorId) {
 
   if(!level.showingFinalKillcam) {
     self thread waitSkipKillcamButton(timeUntilRespawn);
-  }
-  else {
+  } else {
     self notify("showing_final_killcam");
   }
 

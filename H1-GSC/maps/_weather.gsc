@@ -122,35 +122,25 @@ playerweather() {
 rainlevelrandomwait() {
   if(level.rainlevel == 0) {
     return randomfloat(30);
-  }
-  else if(level.rainlevel == 1) {
+  } else if(level.rainlevel == 1) {
     return randomfloat(24);
-  }
-  else if(level.rainlevel == 2) {
+  } else if(level.rainlevel == 2) {
     return randomfloat(20);
-  }
-  else if(level.rainlevel == 3) {
+  } else if(level.rainlevel == 3) {
     return randomfloat(15);
-  }
-  else if(level.rainlevel == 4) {
+  } else if(level.rainlevel == 4) {
     return randomfloat(12);
-  }
-  else if(level.rainlevel == 5) {
+  } else if(level.rainlevel == 5) {
     return randomfloat(9);
-  }
-  else if(level.rainlevel == 6) {
+  } else if(level.rainlevel == 6) {
     return randomfloat(8);
-  }
-  else if(level.rainlevel == 7) {
+  } else if(level.rainlevel == 7) {
     return randomfloat(8);
-  }
-  else if(level.rainlevel == 8) {
+  } else if(level.rainlevel == 8) {
     return randomfloat(7);
-  }
-  else if(level.rainlevel == 9) {
+  } else if(level.rainlevel == 9) {
     return randomfloat(6);
-  }
-  else if(level.rainlevel == 10) {
+  } else if(level.rainlevel == 10) {
     return randomfloat(5);
   }
 }
@@ -158,35 +148,25 @@ rainlevelrandomwait() {
 rainlevelwait() {
   if(level.rainlevel == 0) {
     return 20;
-  }
-  else if(level.rainlevel == 1) {
+  } else if(level.rainlevel == 1) {
     return 18;
-  }
-  else if(level.rainlevel == 2) {
+  } else if(level.rainlevel == 2) {
     return 16;
-  }
-  else if(level.rainlevel == 3) {
+  } else if(level.rainlevel == 3) {
     return 14;
-  }
-  else if(level.rainlevel == 4) {
+  } else if(level.rainlevel == 4) {
     return 12;
-  }
-  else if(level.rainlevel == 5) {
+  } else if(level.rainlevel == 5) {
     return 10;
-  }
-  else if(level.rainlevel == 6) {
+  } else if(level.rainlevel == 6) {
     return 9;
-  }
-  else if(level.rainlevel == 7) {
+  } else if(level.rainlevel == 7) {
     return 8;
-  }
-  else if(level.rainlevel == 8) {
+  } else if(level.rainlevel == 8) {
     return 7;
-  }
-  else if(level.rainlevel == 9) {
+  } else if(level.rainlevel == 9) {
     return 6;
-  }
-  else if(level.rainlevel == 10) {
+  } else if(level.rainlevel == 10) {
     return 5;
   }
 }
@@ -265,35 +245,25 @@ lightningflash(var_0, var_1, var_2) {
 thunder() {
   if(level.rainlevel == 0) {
     wait(6 + randomfloat(2));
-  }
-  else if(level.rainlevel == 1) {
+  } else if(level.rainlevel == 1) {
     wait(5 + randomfloat(1.8));
-  }
-  else if(level.rainlevel == 2) {
+  } else if(level.rainlevel == 2) {
     wait(4.5 + randomfloat(1.6));
-  }
-  else if(level.rainlevel == 3) {
+  } else if(level.rainlevel == 3) {
     wait(4 + randomfloat(1.6));
-  }
-  else if(level.rainlevel == 4) {
+  } else if(level.rainlevel == 4) {
     wait(3.5 + randomfloat(1.5));
-  }
-  else if(level.rainlevel == 5) {
+  } else if(level.rainlevel == 5) {
     wait(3 + randomfloat(1.5));
-  }
-  else if(level.rainlevel == 6) {
+  } else if(level.rainlevel == 6) {
     wait(2.5 + randomfloat(1.2));
-  }
-  else if(level.rainlevel == 7) {
+  } else if(level.rainlevel == 7) {
     wait(2 + randomfloat(1));
-  }
-  else if(level.rainlevel == 8) {
+  } else if(level.rainlevel == 8) {
     wait(1.9 + randomfloat(0.5));
-  }
-  else if(level.rainlevel == 9) {
+  } else if(level.rainlevel == 9) {
     wait 1.5;
-  }
-  else if(level.rainlevel == 10) {
+  } else if(level.rainlevel == 10) {
     wait 1;
   }
 
@@ -303,8 +273,7 @@ thunder() {
 
   if(level.rainlevel <= 8) {
     var_0 playSound("elm_thunder_distant", "sounddone");
-  }
-  else {
+  } else {
     var_0 playSound("elm_thunder_distant", "sounddone");
     var_0 thread maps\_utility::play_sound_on_entity("elm_thunder_strike");
   }

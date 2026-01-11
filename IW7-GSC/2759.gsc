@@ -44,8 +44,7 @@ getrandomvariantfrombaseref(var_00) {
 
   if(var_1.size == 0) {
     return undefined;
-  }
-  else {
+  } else {
     return var_1[randomint(var_1.size)];
   }
 }
@@ -76,14 +75,11 @@ getrarityforlootitem(var_00) {
 
   if(var_02 == 1) {
     var_01 = "";
-  }
-  else if(var_02 == 2) {
+  } else if(var_02 == 2) {
     var_01 = "rare";
-  }
-  else if(var_02 == 3) {
+  } else if(var_02 == 3) {
     var_01 = "legend";
-  }
-  else {
+  } else {
     var_01 = "epic";
   }
 

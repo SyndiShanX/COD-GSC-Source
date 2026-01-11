@@ -45,7 +45,7 @@ main() {
     testGrenadeThrowAnimOffsets();
   }
 
-    self transitionToCombat();
+  self transitionToCombat();
 
   self do_friendly_fire_reaction();
 
@@ -141,17 +141,17 @@ testGrenadeThrowAnimOffsets() {
   self.keepClaimedNodeIfValid = false;
 }
 
-  setup_anim_array() {
-    if(self.a.pose == "stand") {
-      self set_animarray_standing();
-    } else if(self.a.pose == "crouch") {
-      self set_animarray_crouching();
-    } else if(self.a.pose == "prone") {
-      self set_animarray_prone();
-    } else {
-      assertMsg("Unsupported self.a.pose: " + self.a.pose);
-    }
+setup_anim_array() {
+  if(self.a.pose == "stand") {
+    self set_animarray_standing();
+  } else if(self.a.pose == "crouch") {
+    self set_animarray_crouching();
+  } else if(self.a.pose == "prone") {
+    self set_animarray_prone();
+  } else {
+    assertMsg("Unsupported self.a.pose: " + self.a.pose);
   }
+}
 
 // SETUP FUNCTIONS
 setup() {
@@ -223,8 +223,7 @@ exposedCombatStopUsingRPGCheck(distSqToShootPos) {
 
     if(self.a.pose == "stand") {
       animscripts\shared::throwDownWeapon( % RPG_stand_throw);
-    }
-    else {
+    } else {
       animscripts\shared::throwDownWeapon( % RPG_crouch_throw);
     }
 
@@ -309,7 +308,7 @@ exposedCombatCheckPutAwayPistol(distSqToShootPos) {
   if(usingSidearm() && self.a.pose == "stand" && !isDefined(self.forceSideArm)) {
     if((distSqToShootPos > pistolPutBackDistSq) || (self.combatMode == "ambush_nodes_only" && (!isDefined(self.enemy) || !self cansee(self.enemy))))
   }
-      switchToLastWeapon( % pistol_stand_switch);
+  switchToLastWeapon( % pistol_stand_switch);
 }
 
 exposedCombatPositionAdjust() {
@@ -437,7 +436,7 @@ needToTurn() {
   // Old way, slower
   /*
   yawToShootEntOrPos = getAimYawToShootEntOrPos(); // yaw to where we think our enemy will be in x seconds
-	
+  	
   return (abs( yawToShootEntOrPos ) > self.turnThreshold);
   */
 
@@ -624,8 +623,7 @@ watchShootEntVelocity() {
     } else {
       if(isDefined(self.shootEnt)) {
         prevpos = self.shootEnt.origin;
-      }
-      else {
+      } else {
         prevpos = self.origin;
       }
       prevshootent = self.shootEnt;
@@ -644,21 +642,21 @@ shouldSwapShotgun() {
   if( self.a.pose != "stand" ) {
   	return false;
   }
-	
+  	
   if( self usingSidearm() ) {
   	return false;
   }
-	
+  	
   usingShotgun = isShotgun( self.primaryweapon );
   wantShotgun = isDefined( self.wantShotgun ) && self.wantShotgun );
-	
+  	
   if( wantShotgun == usingShotgun ) {
   	return false;
   }
-	
+  	
   if( !wantShotgun ) // there is no standing shotgun putaway animation
   	return false;
-	
+  	
   return true;*/
 }
 
@@ -748,11 +746,9 @@ doTurn(direction, amount) {
     // ( ensure transTime <= 0.2 / rate )
     if(rate > 2) {
       transTime = .05;
-    }
-    else if(rate > 1.3) {
+    } else if(rate > 1.3) {
       transTime = .1;
-    }
-    else {
+    } else {
       transTime = .15;
     }
   }
@@ -760,14 +756,11 @@ doTurn(direction, amount) {
   angle = 0;
   if(amount > 157.5) {
     angle = 180;
-  }
-  else if(amount > 112.5) {
+  } else if(amount > 112.5) {
     angle = 135;
-  }
-  else if(amount > 67.5) {
+  } else if(amount > 67.5) {
     angle = 90;
-  }
-  else {
+  } else {
     angle = 45;
   }
 
@@ -776,14 +769,11 @@ doTurn(direction, amount) {
 
   if(isDefined(self.turnToMatchNode)) {
     self animmode("angle deltas", false);
-  }
-  else if(isDefined(self.node) && isDefined(anim.isCombatPathNode[self.node.type]) && distanceSquared(self.origin, self.node.origin) < 16 * 16) {
+  } else if(isDefined(self.node) && isDefined(anim.isCombatPathNode[self.node.type]) && distanceSquared(self.origin, self.node.origin) < 16 * 16) {
     self animmode("angle deltas", false);
-  }
-  else if(isAnimDeltaInGoal(turnanim)) {
+  } else if(isAnimDeltaInGoal(turnanim)) {
     self animMode("zonly_physics", false);
-  }
-  else {
+  } else {
     self animmode("angle deltas", false);
   }
 
@@ -797,8 +787,7 @@ doTurn(direction, amount) {
 
   if(isDefined(self.heat)) {
     rate = min(1.0, rate); // TEMP 1.0, adjust animations first
-  }
-  else if(isDefined(self.turnToMatchNode)) {
+  } else if(isDefined(self.turnToMatchNode)) {
     rate = max(1.5, rate);
   }
 
@@ -982,8 +971,7 @@ tryExposedThrowGrenade(throwAt, minDist) {
 
         if(threw) {
           setAnimAimWeight(1, .5); // ease into aiming
-        }
-        else {
+        } else {
           setAnimAimWeight(1, 0);
         }
       }
@@ -1023,8 +1011,7 @@ transitionTo(newPose) {
 
   if(newPose == "stand") {
     rate = 2; // gotta stand up fast!
-  }
-  else {
+  } else {
     rate = 1.5;
   }
 
@@ -1065,8 +1052,7 @@ keepTryingToMelee() {
     if(isDefined(self.enemy)) {
       if(isPlayer(self.enemy)) {
         checkDistSq = 200 * 200;
-      }
-      else {
+      } else {
         checkDistSq = 100 * 100;
       }
 
@@ -1288,8 +1274,7 @@ switchToLastWeapon(swapAnim, cleanUp) {
 
   if(isDefined(cleanUp)) {
     self DoNoteTracksPostCallbackWithEndon("weapon swap", ::handleCleanUpPutaway, "end_weapon_swap");
-  }
-  else {
+  } else {
     self DoNoteTracksPostCallbackWithEndon("weapon swap", ::handlePutaway, "end_weapon_swap");
   }
   self clearanim(self.swapAnim, 0.2);
@@ -1316,8 +1301,7 @@ handlePutaway(notetrack) {
 handleCleanUpPutaway(notetrack) {
   if(notetrack == "pistol_putaway") {
     self thread putGunBackInHandOnKillAnimScript();
-  }
-  else if(issubstr(notetrack, "anim_gunhand")) {
+  } else if(issubstr(notetrack, "anim_gunhand")) {
     self notify("end_weapon_swap");
   }
 }
@@ -1329,8 +1313,7 @@ rpgDeath() {
 
   if(randomFloat(1) > 0.5) {
     self SetFlaggedAnimKnobAll("deathanim", % RPG_stand_death, % root, 1, .05, 1);
-  }
-  else {
+  } else {
     self SetFlaggedAnimKnobAll("deathanim", % RPG_stand_death_stagger, % root, 1, .05, 1);
   }
 

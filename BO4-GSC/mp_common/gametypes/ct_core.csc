@@ -7,7 +7,6 @@
 #include scripts\core_common\renderoverridebundle;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\ct_utils;
-
 #namespace ct_core;
 
 function_46e95cc7() {

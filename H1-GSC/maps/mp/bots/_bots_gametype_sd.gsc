@@ -41,7 +41,7 @@ setup_bot_sd() {
 
   if(var_0) {
     foreach(var_2 in level.bombzones) {
-    var_2 thread maps\mp\bots\_bots_gametype_common::monitor_bombzone_control();
+      var_2 thread maps\mp\bots\_bots_gametype_common::monitor_bombzone_control();
     }
 
     thread bot_sd_ai_director_update();
@@ -220,8 +220,7 @@ atk_bomber_update() {
         if(isDefined(level.sdbomb) && !isDefined(level.sdbomb.carrier)) {
           level.sdbomb maps\mp\gametypes\_gameobjects::setpickedup(self);
         }
-      } else {
-      }
+      } else {}
 
       return;
     }
@@ -307,8 +306,7 @@ atk_bomber_update() {
 get_round_end_time() {
   if(level.bombplanted) {
     return level.defuseendtime;
-  }
-  else {
+  } else {
     return gettime() + maps\mp\gametypes\_gamelogic::gettimeremaining();
   }
 }
@@ -349,11 +347,9 @@ clear_target_zone_update() {
 
       if(isai(level.atk_bomber) && isDefined(level.atk_bomber.bombzonegoal)) {
         var_1 = level.atk_bomber.bombzonegoal;
-      }
-      else if(isDefined(level.bomb_zone_assaulting)) {
+      } else if(isDefined(level.bomb_zone_assaulting)) {
         var_1 = level.bomb_zone_assaulting;
-      }
-      else {
+      } else {
         var_1 = maps\mp\bots\_bots_gametype_common::find_closest_bombzone_to_player(level.atk_bomber);
       }
 
@@ -398,8 +394,7 @@ bomb_defuser_update() {
 
   if(self.defuser_bad_path_counter <= 1) {
     var_3 = cautious_approach_till_close(var_2, undefined);
-  }
-  else {
+  } else {
     self botclearscriptgoal();
     var_3 = self botsetscriptgoal(var_2, 20, "critical");
   }
@@ -422,8 +417,7 @@ bomb_defuser_update() {
 
           if(isDefined(var_7)) {
             self botsetscriptgoal(var_7, 20, "critical");
-          }
-          else {
+          } else {
             break;
           }
         } else
@@ -775,11 +769,9 @@ initialize_sd_role() {
   if(self.team == game["attackers"]) {
     if(level.bombplanted) {
       bot_set_role("defend_planted_bomb");
-    }
-    else if(!isDefined(level.atk_bomber)) {
+    } else if(!isDefined(level.atk_bomber)) {
       set_new_bomber();
-    }
-    else if(level.attack_behavior == "rush") {
+    } else if(level.attack_behavior == "rush") {
       bot_set_role("clear_target_zone");
     }
   } else {
@@ -792,8 +784,7 @@ initialize_sd_role() {
       if(!isDefined(self.role) && level.allow_backstabbers && var_3 > 0) {
         if(var_0.size == 0) {
           bot_set_role("backstabber");
-        }
-        else {
+        } else {
           var_4 = 1;
 
           foreach(var_6 in var_0) {
@@ -823,11 +814,9 @@ initialize_sd_role() {
 
         if(var_9 == 3 && level.allow_random_killers && var_3 > 0) {
           bot_set_role("random_killer");
-        }
-        else if(var_9 == 2 && level.allow_backstabbers && var_3 > 0) {
+        } else if(var_9 == 2 && level.allow_backstabbers && var_3 > 0) {
           bot_set_role("backstabber");
-        }
-        else {
+        } else {
           bot_set_role("defender");
         }
       }
@@ -835,8 +824,7 @@ initialize_sd_role() {
       if(!isDefined(self.role)) {
         if(var_1.size < 4) {
           bot_set_role("defender");
-        }
-        else {
+        } else {
           foreach(var_11 in var_1) {
             var_12 = level.bot_personality_type[var_11.personality];
 
@@ -869,18 +857,15 @@ initialize_sd_role() {
 
       if(var_14.size == 1) {
         self.defend_zone = var_14[0];
-      }
-      else {
+      } else {
         var_15 = get_players_defending_zone(var_14[0]);
         var_16 = get_players_defending_zone(var_14[1]);
 
         if(var_15.size < var_16.size) {
           self.defend_zone = var_14[0];
-        }
-        else if(var_16.size < var_15.size) {
+        } else if(var_16.size < var_15.size) {
           self.defend_zone = var_14[1];
-        }
-        else {
+        } else {
           self.defend_zone = common_scripts\utility::random(var_14);
         }
       }
@@ -1050,11 +1035,9 @@ bot_sd_ai_director_update() {
 
         if(var_26.size > 0) {
           var_25 = var_26;
-        }
-        else if(var_27.size > 0) {
+        } else if(var_27.size > 0) {
           var_25 = var_27;
-        }
-        else if(var_28.size > 0) {
+        } else if(var_28.size > 0) {
           var_25 = var_28;
         }
 

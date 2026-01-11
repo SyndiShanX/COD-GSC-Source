@@ -107,8 +107,7 @@ comExpNotifyWatcher() {
 
   if(!level.teamBased) {
     level waittill("radar_status_change_players");
-  }
-  else {
+  } else {
     while(teamsFinished.size < 2) {
       level waittill("radar_status_change", team);
       teamsFinished[teamsFinished.size] = team;
@@ -195,8 +194,7 @@ updateSatcomActiveOmnvar(team) {
   radarStrength = 0;
   if(isDefined(team)) {
     radarStrength = getRadarStrengthForTeam(team);
-  }
-  else {
+  } else {
     radarStrength = getRadarStrengthForPlayer(self);
   }
 
@@ -206,8 +204,7 @@ updateSatcomActiveOmnvar(team) {
 
   if(radarStrength > CONST_UPLINK_MIN) {
     self SetClientOmnvar("ui_satcom_active", true);
-  }
-  else {
+  } else {
     self SetClientOmnvar("ui_satcom_active", false);
   }
 }

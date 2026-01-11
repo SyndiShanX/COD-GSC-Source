@@ -37,7 +37,6 @@
 #include scripts\wz_common\wz_holiday;
 #include scripts\wz_common\wz_jukebox;
 #include scripts\wz_common\wz_loadouts;
-
 #namespace wz_open_skyscrapers;
 
 event_handler[level_init] main(eventstruct) {
@@ -58,7 +57,7 @@ event_handler[level_init] main(eventstruct) {
   level wz_open_skyscrapers_death_circle::function_6f6f5189();
 
   if(isDefined(getgametypesetting(#"wzheavymetalheroes")) && getgametypesetting(#"wzheavymetalheroes")) {
-    level.var_2089aa11 = #"supply_drop_stash_parent_dlc1_heroes";
+    level.var_2089aa11 = # "supply_drop_stash_parent_dlc1_heroes";
     namespace_3d2704b3::function_f0297225(#"supply_drop_stash_parent_dlc1_flare_gun_heroes", 2, 4);
   }
 
@@ -69,7 +68,7 @@ event_handler[level_init] main(eventstruct) {
 
   init_devgui();
 
-    level wz_open_skyscrapers_ai_zones::init();
+  level wz_open_skyscrapers_ai_zones::init();
   wz_firing_range::init_targets("firing_range_target");
   wz_firing_range::init_targets("firing_range_target_challenge");
   item_world::function_cbc32e1b(30000);
@@ -169,49 +168,49 @@ function_4b227faf() {
 
   foreach(group in item_spawn_groups) {
     switch (group.scriptbundlename) {
-      case #"open_skyscraper_vehicles_arav":
+      case # "open_skyscraper_vehicles_arav":
         var_d5d9cd1 = group;
         break;
-      case #"open_skyscraper_vehicles_atv":
+      case # "open_skyscraper_vehicles_atv":
         var_96bc77ce = group;
         break;
-      case #"open_skyscraper_vehicles_cargo_truck":
+      case # "open_skyscraper_vehicles_cargo_truck":
         var_208aaa54 = group;
         break;
-      case #"open_skyscraper_vehicles_cargo_truck_clearing":
+      case # "open_skyscraper_vehicles_cargo_truck_clearing":
         var_25dfca32 = group;
         break;
-      case #"open_skyscraper_vehicles_heli":
+      case # "open_skyscraper_vehicles_heli":
         var_4b606147 = group;
         break;
-      case #"open_skyscraper_vehicles_heli_clearing":
+      case # "open_skyscraper_vehicles_heli_clearing":
         var_d6662d66 = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac":
+      case # "open_skyscraper_vehicles_zodiac":
         var_dc1ea650 = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac_docks":
+      case # "open_skyscraper_vehicles_zodiac_docks":
         var_707ce24b = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac_nuketown":
+      case # "open_skyscraper_vehicles_zodiac_nuketown":
         var_e3ab2d7f = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac_hydro_dam":
+      case # "open_skyscraper_vehicles_zodiac_hydro_dam":
         var_169219e9 = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac_skyscraper":
+      case # "open_skyscraper_vehicles_zodiac_skyscraper":
         var_4bf01581 = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac_hijacked":
+      case # "open_skyscraper_vehicles_zodiac_hijacked":
         var_993b03f = group;
         break;
-      case #"open_skyscraper_vehicles_muscle_car_hot_pursuit":
+      case # "open_skyscraper_vehicles_muscle_car_hot_pursuit":
         var_5864ac74 = group;
         break;
-      case #"open_skyscraper_vehicles_pbr":
+      case # "open_skyscraper_vehicles_pbr":
         var_25e0e288 = group;
         break;
-      case #"open_skyscraper_vehicles_suv_base":
+      case # "open_skyscraper_vehicles_suv_base":
         var_284a1b99 = group;
         break;
       default:
@@ -347,49 +346,49 @@ function_eef7849() {
 
   foreach(group in item_spawn_groups) {
     switch (group.scriptbundlename) {
-      case #"open_skyscraper_vehicles_arav":
+      case # "open_skyscraper_vehicles_arav":
         var_d5d9cd1 = group;
         break;
-      case #"open_skyscraper_vehicles_atv":
+      case # "open_skyscraper_vehicles_atv":
         var_96bc77ce = group;
         break;
-      case #"open_skyscraper_vehicles_cargo_truck":
+      case # "open_skyscraper_vehicles_cargo_truck":
         var_208aaa54 = group;
         break;
-      case #"open_skyscraper_vehicles_cargo_truck_clearing":
+      case # "open_skyscraper_vehicles_cargo_truck_clearing":
         var_25dfca32 = group;
         break;
-      case #"open_skyscraper_vehicles_heli":
+      case # "open_skyscraper_vehicles_heli":
         var_4b606147 = group;
         break;
-      case #"open_skyscraper_vehicles_heli_clearing":
+      case # "open_skyscraper_vehicles_heli_clearing":
         var_d6662d66 = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac":
+      case # "open_skyscraper_vehicles_zodiac":
         var_dc1ea650 = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac_docks":
+      case # "open_skyscraper_vehicles_zodiac_docks":
         var_707ce24b = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac_nuketown":
+      case # "open_skyscraper_vehicles_zodiac_nuketown":
         var_e3ab2d7f = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac_hydro_dam":
+      case # "open_skyscraper_vehicles_zodiac_hydro_dam":
         var_169219e9 = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac_skyscraper":
+      case # "open_skyscraper_vehicles_zodiac_skyscraper":
         var_4bf01581 = group;
         break;
-      case #"open_skyscraper_vehicles_zodiac_hijacked":
+      case # "open_skyscraper_vehicles_zodiac_hijacked":
         var_993b03f = group;
         break;
-      case #"open_skyscraper_vehicles_muscle_car_hot_pursuit":
+      case # "open_skyscraper_vehicles_muscle_car_hot_pursuit":
         var_5864ac74 = group;
         break;
-      case #"open_skyscraper_vehicles_pbr":
+      case # "open_skyscraper_vehicles_pbr":
         var_25e0e288 = group;
         break;
-      case #"open_skyscraper_vehicles_suv_base":
+      case # "open_skyscraper_vehicles_suv_base":
         var_284a1b99 = group;
         break;
       default:
@@ -490,22 +489,22 @@ function_eef7849() {
 
 function_df930125(str_type) {
   switch (str_type) {
-    case #"atv_spawn":
+    case # "atv_spawn":
       return (0, 0, 1);
-    case #"cargo_truck_spawn":
-    case #"cargo_truck_clearing_spawn":
+    case # "cargo_truck_spawn":
+    case # "cargo_truck_clearing_spawn":
       return (1, 0, 1);
-    case #"heli_spawn":
-    case #"heli_clearing_spawn":
+    case # "heli_spawn":
+    case # "heli_clearing_spawn":
       return (1, 0, 0);
-    case #"arav_clearing_spawn":
-    case #"arav_spawn":
+    case # "arav_clearing_spawn":
+    case # "arav_spawn":
       return (0, 1, 1);
-    case #"pbr_spawn":
+    case # "pbr_spawn":
       return (0, 1, 0);
-    case #"muscle_car_spawn":
+    case # "muscle_car_spawn":
       return (1, 1, 0);
-    case #"suv_spawn":
+    case # "suv_spawn":
       return (1, 0, 1);
     default:
       return (1, 0.5, 0);
@@ -591,7 +590,7 @@ function_f567f0cd() {
 }
 
 function_1221d304() {
-  a_str_types = array(#"vehicle_boct_mil_truck_cargo_wz_dark", #"vehicle_boct_mil_truck_cargo_wz_green", #"vehicle_boct_mil_truck_cargo_wz_tan", #"vehicle_boct_mil_boat_tactical_raft_wz_blk", #"vehicle_boct_mil_boat_tactical_raft_wz_gry", #"vehicle_boct_mil_boat_tactical_raft_wz_odg", #"veh_quad_player_wz_blk", #"hash_232abda4e81275f4", #"veh_quad_player_wz_grn", #"hash_2f8d60a5381870ee", #"veh_quad_player_wz_tan", #"vehicle_t8_mil_helicopter_light_transport_wz_grey", #"vehicle_t8_mil_helicopter_light_transport_wz_tan", #"vehicle_t8_mil_helicopter_light_transport_wz_dark", #"vehicle_t8_mil_helicopter_light_transport_wz_black", #"veh_fav_player_wz_blk", #"veh_fav_player_wz_grn", #"veh_fav_player_wz_tan", #"veh_muscle_car_convertible_player_wz_bandit_blk", #"veh_muscle_car_convertible_player_wz_blu", #"veh_muscle_car_convertible_player_wz_grn", #"veh_muscle_car_convertible_player_wz_org", #"veh_muscle_car_convertible_player_wz_phantom", #"veh_muscle_car_convertible_player_wz_red", #"veh_muscle_car_convertible_player_wz_replacer", #"veh_muscle_car_convertible_player_wz_wht", #"veh_muscle_car_convertible_player_wz_ylw", #"veh_muscle_car_convertible_player_wz_blk", #"veh_muscle_car_convertible_player_wz_racing_grn", #"veh_suv_player_police_wz", #"vehicle_boct_mil_boat_pbr_wz_police", #"veh_suv_player_wz_blk", #"veh_suv_player_wz_gry", #"veh_suv_player_wz_met_gry", #"veh_suv_player_wz_wht", #"vehicle_t8_mil_helicopter_light_transport_wz_police", #"veh_suv_player_private_security_wz", #"veh_quad_player_wz_police", #"hash_482e864157620248", #"hash_1d37bc413f25898e", #"hash_1d37af413f257377", #"hash_8ea0340ead96490", #"hash_79bf6a7491c80c7", #"hash_32e4c0a7619f03a9", #"hash_22d9b5a7a0d9dd73", #"vehicle_boct_mil_boat_pbr_wz_black", #"vehicle_boct_mil_boat_pbr_wz_green", #"vehicle_boct_mil_boat_pbr_wz_grey", #"vehicle_boct_mil_boat_pbr_wz_tan", #"vehicle_t8_mil_helicopter_light_gunner_wz_black", #"vehicle_t8_mil_helicopter_light_gunner_wz_dark", #"vehicle_t8_mil_helicopter_light_gunner_wz_green", #"vehicle_t8_mil_helicopter_light_gunner_wz_grey", #"vehicle_t8_mil_helicopter_light_gunner_wz_tan", #"hash_77ac4aa97a8b5aa2", #"vehicle_t8_mil_tank_wz_black", #"vehicle_t8_mil_tank_wz_green", #"vehicle_t8_mil_tank_wz_grey", #"vehicle_t8_mil_tank_wz_tan", #"veh_motorcycle_sidecar_player_wz", #"veh_motorcycle_sidecar_player_wz", #"veh_motorcycle_sidecar_player_wz_dark_grey", #"veh_motorcycle_sidecar_player_wz_light_grey", #"veh_motorcycle_sidecar_player_wz_metal_grey", #"hash_275b12ca9b3cc010", #"veh_motorcycle_sidecar_player_wz_tan", #"veh_motorcycle_sidecar_player_wz_white", #"veh_motorcycle_sidecar_player_wz_heroes", #"vehicle_t8_mil_helicopter_light_gunner_wz_heroes", #"veh_fav_player_wz_heroes");
+  a_str_types = array(#"vehicle_boct_mil_truck_cargo_wz_dark", # "vehicle_boct_mil_truck_cargo_wz_green", # "vehicle_boct_mil_truck_cargo_wz_tan", # "vehicle_boct_mil_boat_tactical_raft_wz_blk", # "vehicle_boct_mil_boat_tactical_raft_wz_gry", # "vehicle_boct_mil_boat_tactical_raft_wz_odg", # "veh_quad_player_wz_blk", # "hash_232abda4e81275f4", # "veh_quad_player_wz_grn", # "hash_2f8d60a5381870ee", # "veh_quad_player_wz_tan", # "vehicle_t8_mil_helicopter_light_transport_wz_grey", # "vehicle_t8_mil_helicopter_light_transport_wz_tan", # "vehicle_t8_mil_helicopter_light_transport_wz_dark", # "vehicle_t8_mil_helicopter_light_transport_wz_black", # "veh_fav_player_wz_blk", # "veh_fav_player_wz_grn", # "veh_fav_player_wz_tan", # "veh_muscle_car_convertible_player_wz_bandit_blk", # "veh_muscle_car_convertible_player_wz_blu", # "veh_muscle_car_convertible_player_wz_grn", # "veh_muscle_car_convertible_player_wz_org", # "veh_muscle_car_convertible_player_wz_phantom", # "veh_muscle_car_convertible_player_wz_red", # "veh_muscle_car_convertible_player_wz_replacer", # "veh_muscle_car_convertible_player_wz_wht", # "veh_muscle_car_convertible_player_wz_ylw", # "veh_muscle_car_convertible_player_wz_blk", # "veh_muscle_car_convertible_player_wz_racing_grn", # "veh_suv_player_police_wz", # "vehicle_boct_mil_boat_pbr_wz_police", # "veh_suv_player_wz_blk", # "veh_suv_player_wz_gry", # "veh_suv_player_wz_met_gry", # "veh_suv_player_wz_wht", # "vehicle_t8_mil_helicopter_light_transport_wz_police", # "veh_suv_player_private_security_wz", # "veh_quad_player_wz_police", # "hash_482e864157620248", # "hash_1d37bc413f25898e", # "hash_1d37af413f257377", # "hash_8ea0340ead96490", # "hash_79bf6a7491c80c7", # "hash_32e4c0a7619f03a9", # "hash_22d9b5a7a0d9dd73", # "vehicle_boct_mil_boat_pbr_wz_black", # "vehicle_boct_mil_boat_pbr_wz_green", # "vehicle_boct_mil_boat_pbr_wz_grey", # "vehicle_boct_mil_boat_pbr_wz_tan", # "vehicle_t8_mil_helicopter_light_gunner_wz_black", # "vehicle_t8_mil_helicopter_light_gunner_wz_dark", # "vehicle_t8_mil_helicopter_light_gunner_wz_green", # "vehicle_t8_mil_helicopter_light_gunner_wz_grey", # "vehicle_t8_mil_helicopter_light_gunner_wz_tan", # "hash_77ac4aa97a8b5aa2", # "vehicle_t8_mil_tank_wz_black", # "vehicle_t8_mil_tank_wz_green", # "vehicle_t8_mil_tank_wz_grey", # "vehicle_t8_mil_tank_wz_tan", # "veh_motorcycle_sidecar_player_wz", # "veh_motorcycle_sidecar_player_wz", # "veh_motorcycle_sidecar_player_wz_dark_grey", # "veh_motorcycle_sidecar_player_wz_light_grey", # "veh_motorcycle_sidecar_player_wz_metal_grey", # "hash_275b12ca9b3cc010", # "veh_motorcycle_sidecar_player_wz_tan", # "veh_motorcycle_sidecar_player_wz_white", # "veh_motorcycle_sidecar_player_wz_heroes", # "vehicle_t8_mil_helicopter_light_gunner_wz_heroes", # "veh_fav_player_wz_heroes");
 
   foreach(str_type in a_str_types) {
     if(self.vehicletype == str_type) {
@@ -604,66 +603,66 @@ function_1221d304() {
 
 function_b2775b52() {
   switch (self.vehicletype) {
-    case #"veh_quad_player_wz_blk":
-    case #"hash_232abda4e81275f4":
-    case #"veh_quad_player_wz_grn":
-    case #"veh_quad_player_wz_tan":
-    case #"hash_2f8d60a5381870ee":
+    case # "veh_quad_player_wz_blk":
+    case # "hash_232abda4e81275f4":
+    case # "veh_quad_player_wz_grn":
+    case # "veh_quad_player_wz_tan":
+    case # "hash_2f8d60a5381870ee":
       return (0, 0, 1);
-    case #"vehicle_boct_mil_truck_cargo_wz_tan":
-    case #"vehicle_boct_mil_truck_cargo_wz_dark":
-    case #"vehicle_boct_mil_truck_cargo_wz_green":
+    case # "vehicle_boct_mil_truck_cargo_wz_tan":
+    case # "vehicle_boct_mil_truck_cargo_wz_dark":
+    case # "vehicle_boct_mil_truck_cargo_wz_green":
       return (1, 0, 1);
-    case #"vehicle_t8_mil_helicopter_light_transport_wz_grey":
-    case #"vehicle_t8_mil_helicopter_light_transport_wz_black":
-    case #"hash_482e864157620248":
-    case #"vehicle_t8_mil_helicopter_light_gunner_wz_green":
-    case #"vehicle_t8_mil_helicopter_light_gunner_wz_dark":
-    case #"vehicle_t8_mil_helicopter_light_transport_wz_tan":
-    case #"vehicle_t8_mil_helicopter_light_gunner_wz_tan":
-    case #"vehicle_t8_mil_helicopter_light_gunner_wz_grey":
-    case #"hash_1d37af413f257377":
-    case #"hash_1d37bc413f25898e":
-    case #"vehicle_t8_mil_helicopter_light_gunner_wz_black":
-    case #"vehicle_t8_mil_helicopter_light_transport_wz_dark":
+    case # "vehicle_t8_mil_helicopter_light_transport_wz_grey":
+    case # "vehicle_t8_mil_helicopter_light_transport_wz_black":
+    case # "hash_482e864157620248":
+    case # "vehicle_t8_mil_helicopter_light_gunner_wz_green":
+    case # "vehicle_t8_mil_helicopter_light_gunner_wz_dark":
+    case # "vehicle_t8_mil_helicopter_light_transport_wz_tan":
+    case # "vehicle_t8_mil_helicopter_light_gunner_wz_tan":
+    case # "vehicle_t8_mil_helicopter_light_gunner_wz_grey":
+    case # "hash_1d37af413f257377":
+    case # "hash_1d37bc413f25898e":
+    case # "vehicle_t8_mil_helicopter_light_gunner_wz_black":
+    case # "vehicle_t8_mil_helicopter_light_transport_wz_dark":
       return (1, 0, 0);
-    case #"vehicle_boct_mil_boat_tactical_raft_wz_blk":
-    case #"vehicle_boct_mil_boat_tactical_raft_wz_gry":
-    case #"vehicle_boct_mil_boat_tactical_raft_wz_odg":
+    case # "vehicle_boct_mil_boat_tactical_raft_wz_blk":
+    case # "vehicle_boct_mil_boat_tactical_raft_wz_gry":
+    case # "vehicle_boct_mil_boat_tactical_raft_wz_odg":
       return (1, 0.5, 0);
-    case #"veh_fav_player_wz_blk":
-    case #"veh_fav_player_wz_tan":
-    case #"veh_fav_player_wz_grn":
-    case #"hash_79bf6a7491c80c7":
-    case #"hash_22d9b5a7a0d9dd73":
-    case #"hash_32e4c0a7619f03a9":
+    case # "veh_fav_player_wz_blk":
+    case # "veh_fav_player_wz_tan":
+    case # "veh_fav_player_wz_grn":
+    case # "hash_79bf6a7491c80c7":
+    case # "hash_22d9b5a7a0d9dd73":
+    case # "hash_32e4c0a7619f03a9":
       return (0.501961, 0.501961, 0);
-    case #"vehicle_boct_mil_boat_pbr_wz_tan":
-    case #"vehicle_boct_mil_boat_pbr_wz_grey":
-    case #"vehicle_boct_mil_boat_pbr_wz_green":
-    case #"vehicle_boct_mil_boat_pbr_wz_police":
-    case #"vehicle_boct_mil_boat_pbr_wz_black":
+    case # "vehicle_boct_mil_boat_pbr_wz_tan":
+    case # "vehicle_boct_mil_boat_pbr_wz_grey":
+    case # "vehicle_boct_mil_boat_pbr_wz_green":
+    case # "vehicle_boct_mil_boat_pbr_wz_police":
+    case # "vehicle_boct_mil_boat_pbr_wz_black":
       return (0, 1, 0);
-    case #"veh_suv_player_wz_blk":
-    case #"veh_suv_player_wz_met_gry":
-    case #"veh_suv_player_wz_wht":
-    case #"veh_suv_player_wz_gry":
-    case #"veh_suv_player_private_security_wz":
-    case #"veh_suv_player_police_wz":
+    case # "veh_suv_player_wz_blk":
+    case # "veh_suv_player_wz_met_gry":
+    case # "veh_suv_player_wz_wht":
+    case # "veh_suv_player_wz_gry":
+    case # "veh_suv_player_private_security_wz":
+    case # "veh_suv_player_police_wz":
       return (0, 1, 1);
-    case #"veh_muscle_car_convertible_player_wz_wht":
-    case #"veh_muscle_car_convertible_player_wz_replacer":
-    case #"veh_muscle_car_convertible_player_wz_grn":
-    case #"veh_muscle_car_convertible_player_wz_red":
-    case #"veh_muscle_car_convertible_player_wz_org":
-    case #"veh_muscle_car_convertible_player_wz_blk":
-    case #"veh_muscle_car_convertible_player_wz_bandit_blk":
-    case #"veh_muscle_car_convertible_player_wz_racing_grn":
-    case #"veh_muscle_car_convertible_player_wz_blu":
-    case #"veh_muscle_car_convertible_player_wz_ylw":
-    case #"veh_muscle_car_convertible_player_wz_phantom":
+    case # "veh_muscle_car_convertible_player_wz_wht":
+    case # "veh_muscle_car_convertible_player_wz_replacer":
+    case # "veh_muscle_car_convertible_player_wz_grn":
+    case # "veh_muscle_car_convertible_player_wz_red":
+    case # "veh_muscle_car_convertible_player_wz_org":
+    case # "veh_muscle_car_convertible_player_wz_blk":
+    case # "veh_muscle_car_convertible_player_wz_bandit_blk":
+    case # "veh_muscle_car_convertible_player_wz_racing_grn":
+    case # "veh_muscle_car_convertible_player_wz_blu":
+    case # "veh_muscle_car_convertible_player_wz_ylw":
+    case # "veh_muscle_car_convertible_player_wz_phantom":
       return (0, 1, 1);
-    case #"veh_quad_player_wz_police":
+    case # "veh_quad_player_wz_police":
       return (0.545098, 0.270588, 0.0745098);
     default:
       return (1, 0, 1);
@@ -675,7 +674,7 @@ function_6a3e277() {
     return;
   }
 
-  self endon(#"death", #"veh_submerged");
+  self endon(#"death", # "veh_submerged");
   self util::delay("<dev string:x372>", undefined, &function_fe9593b2);
   level flag::wait_till("<dev string:x33d>");
 
@@ -720,7 +719,7 @@ function_2d706436() {
     return;
   }
 
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   while(getdvarint(#"hash_9af4a204686e76d", 0)) {
     n_height = getwaterheight(self.origin) - self.origin[2];
@@ -738,14 +737,14 @@ function_f2c2f4f9() {
     return;
   }
 
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   var_af2b54d8 = util::spawn_model("<dev string:x3a6>");
   self thread util::delete_on_death_or_notify(var_af2b54d8, "<dev string:x3b3>");
 
   while(getdvarint(#"hash_363b1c69ef9f1237", 0)) {
     v_eye = self getEye();
     a_trace = bulletTrace(v_eye, v_eye + vectorscale(anglesToForward(self getplayerangles()), 1000000), 0, self);
-    var_af2b54d8.origin = a_trace[#"position"];
+    var_af2b54d8.origin = a_trace[# "position"];
     n_depth = getwaterheight(var_af2b54d8.origin) - var_af2b54d8.origin[2];
     var_62ce46e5 = var_af2b54d8.origin + (0, 0, n_depth);
     v_color = (1, 0, 0);
@@ -800,7 +799,7 @@ function_38146f54() {
     return;
   }
 
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   while(getdvarint(#"hash_184bc9c4871144d3", 0)) {
     waitframe(2);
@@ -984,12 +983,12 @@ function_9cc59537() {
 
               a_trace = bulletTrace(point.origin + (0, 0, 24), v_test, 0, level.players[0]);
 
-              if(distancesquared(a_trace[#"position"], point.origin + (0, 0, 24)) < var_47748885 * var_47748885 - 2 && !isDefined(a_trace[#"dynent"])) {
+              if(distancesquared(a_trace[# "position"], point.origin + (0, 0, 24)) < var_47748885 * var_47748885 - 2 && !isDefined(a_trace[# "dynent"])) {
                 v_color = (1, 0, 0);
                 b_failed = 1;
 
                 if(var_4b82457c < 256) {
-                  debugstar(a_trace[#"position"], 8, v_color);
+                  debugstar(a_trace[# "position"], 8, v_color);
                 }
               }
             }
@@ -999,12 +998,12 @@ function_9cc59537() {
             foreach(v_test in var_7cb887a8) {
               a_trace = bulletTrace(point.origin + (0, 0, 16), v_test, 0, level.players[0]);
 
-              if(distancesquared(a_trace[#"position"], point.origin + (0, 0, 16)) < var_47748885 * var_47748885 - 3 && !isDefined(a_trace[#"dynent"])) {
+              if(distancesquared(a_trace[# "position"], point.origin + (0, 0, 16)) < var_47748885 * var_47748885 - 3 && !isDefined(a_trace[# "dynent"])) {
                 v_color = (1, 0, 0);
                 b_failed = 1;
 
                 if(var_4b82457c < 256) {
-                  debugstar(a_trace[#"position"], 8, v_color);
+                  debugstar(a_trace[# "position"], 8, v_color);
                 }
               }
             }
@@ -1154,12 +1153,12 @@ function_317da0a9(item_spawn_groups, group, point, var_9b62e326, var_cc2e4f94, n
   foreach(v_test in var_7cb887a8) {
     a_trace = bulletTrace(point.origin + (0, 0, n_z), v_test, 0, level.players[0]);
 
-    if(isvehicle(a_trace[#"entity"])) {
-      var_c24ea284 = a_trace[#"entity"];
+    if(isvehicle(a_trace[# "entity"])) {
+      var_c24ea284 = a_trace[# "entity"];
       a_trace = bulletTrace(point.origin + (0, 0, n_z), v_test, 0, var_c24ea284);
     }
 
-    if(distancesquared(a_trace[#"position"], point.origin + (0, 0, n_z)) < var_cc2e4f94 * var_cc2e4f94 - 2) {
+    if(distancesquared(a_trace[# "position"], point.origin + (0, 0, n_z)) < var_cc2e4f94 * var_cc2e4f94 - 2) {
       b_failed = 1;
     }
   }
@@ -1179,7 +1178,7 @@ function_e8f0335f() {
     return;
   }
 
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   var_b3a9e916 = getdvarint(#"hash_796c892495c48172", 1);
 
   while(getdvarint(#"hash_15ce8723d2ead5ef", 1)) {
@@ -1211,15 +1210,15 @@ function_e8f0335f() {
     var_7cb887a8 = [];
     var_3e832e74 = 360 / 8;
 
-    if(var_11cc451b[#"position"][2] > physicstrace[#"position"][2]) {
+    if(var_11cc451b[# "position"][2] > physicstrace[# "position"][2]) {
       var_708a2754 = var_11cc451b;
     }
 
-    origin = var_708a2754[#"position"];
+    origin = var_708a2754[# "position"];
 
-    if(var_708a2754[#"fraction"] < 1 && vectordot(var_708a2754[#"normal"], (0, 0, 1)) >= 0.707) {
-      if(var_708a2754[#"position"][2] > -10000) {
-        origin = var_708a2754[#"position"];
+    if(var_708a2754[# "fraction"] < 1 && vectordot(var_708a2754[# "normal"], (0, 0, 1)) >= 0.707) {
+      if(var_708a2754[# "position"][2] > -10000) {
+        origin = var_708a2754[# "position"];
       }
     }
 
@@ -1236,16 +1235,16 @@ function_e8f0335f() {
       foreach(v_test in var_7cb887a8) {
         a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, level.players[0]);
 
-        if(isDefined(a_trace[#"entity"])) {
-          a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, a_trace[#"entity"]);
+        if(isDefined(a_trace[# "entity"])) {
+          a_trace = bulletTrace(origin + (0, 0, 12), v_test, 0, a_trace[# "entity"]);
         }
 
-        if(distancesquared(a_trace[#"position"], origin + (0, 0, 12)) < 32 * 32 - 2) {
+        if(distancesquared(a_trace[# "position"], origin + (0, 0, 12)) < 32 * 32 - 2) {
           v_color = (1, 0, 0);
           b_failed = 1;
 
           if(distance2d(origin, level.players[0] getorigin()) < 512) {
-            debugstar(a_trace[#"position"], 1, v_color);
+            debugstar(a_trace[# "position"], 1, v_color);
           }
         }
       }
@@ -1283,7 +1282,7 @@ private event_handler[event_9673dc9a] function_f9b68fd7(eventstruct) {
     var_91d1913b = distance2d(dynent.origin, level.players[0].origin);
 
     if(level.players[0] util::is_player_looking_at(dynent.origin, 0.8, 0) && var_91d1913b <= 6000) {
-      if(isDefined(dynent.var_15d44120) && dynent.var_15d44120 !== #"hash_1dcbe8021fb16344") {
+      if(isDefined(dynent.var_15d44120) && dynent.var_15d44120 !== # "hash_1dcbe8021fb16344") {
         function_a476d876(dynent.origin, dynent.angles, (1, 0.5, 0), 10);
 
         if(var_91d1913b <= 768) {
@@ -1396,7 +1395,7 @@ function_97714f49() {
         eye = player getEye();
         eye = (eye[0], eye[1], eye[2] + 20);
         trace = bulletTrace(eye, eye + vectorscale(direction_vec, 100000), 1, player);
-        tracepoint = trace[#"position"];
+        tracepoint = trace[# "position"];
       }
 
       setdvar(#"hash_5fd194403e0d175e", 0);

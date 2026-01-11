@@ -21,8 +21,7 @@ debugchains() {
   for(;;) {
     if(getdvar("chain") == "1") {
       for(var_3 = 0; var_3 < var_2.size; var_3++) {
-        if(distance(level.player getorigin(), var_2[var_3].origin) < 1500) {
-        }
+        if(distance(level.player getorigin(), var_2[var_3].origin) < 1500) {}
       }
 
       var_5 = getaiarray("allies");
@@ -30,8 +29,7 @@ debugchains() {
       for(var_3 = 0; var_3 < var_5.size; var_3++) {
         var_6 = var_5[var_3] animscripts\utility::getclaimednode();
 
-        if(isDefined(var_6)) {
-        }
+        if(isDefined(var_6)) {}
       }
     }
 
@@ -70,8 +68,7 @@ debug_enemyposproc() {
   for(;;) {
     wait 0.05;
 
-    if(isalive(self.enemy)) {
-    }
+    if(isalive(self.enemy)) {}
 
     if(!animscripts\utility::hasenemysightpos()) {
       continue;
@@ -90,14 +87,12 @@ debug_enemyposreplay() {
     if(!isalive(var_1)) {
       continue;
     }
-    if(isDefined(var_1.lastenemysightpos)) {
-    }
+    if(isDefined(var_1.lastenemysightpos)) {}
 
     if(isDefined(var_1.goodshootpos)) {
       if(var_1 isbadguy()) {
         var_3 = (1, 0, 0);
-      }
-      else {
+      } else {
         var_3 = (0, 0, 1);
       }
 
@@ -447,9 +442,7 @@ debugmisstime() {
   self endon("death");
 
   for(;;) {
-    if(self.a.misstime <= 0) {
-    } else {
-    }
+    if(self.a.misstime <= 0) {} else {}
 
     wait 0.05;
   }
@@ -491,14 +484,11 @@ get_direction() {
 
   if(var_3 > 135) {
     return "back";
-  }
-  else if(var_3 < 45) {
+  } else if(var_3 < 45) {
     return "forward";
-  }
-  else if(var_3 > 45 && var_3 < 135) {
+  } else if(var_3 > 45 && var_3 < 135) {
     return "left";
-  }
-  else {
+  } else {
     return "right";
   }
 }
@@ -961,15 +951,13 @@ updateminimapsetting() {
 
         if(var_4[1].origin[0] > var_4[0].origin[0]) {
           var_6 = (var_4[1].origin[0], var_6[1], var_6[2]);
-        }
-        else {
+        } else {
           var_7 = (var_4[1].origin[0], var_7[1], var_7[2]);
         }
 
         if(var_4[1].origin[1] > var_4[0].origin[1]) {
           var_6 = (var_6[0], var_4[1].origin[1], var_6[2]);
-        }
-        else {
+        } else {
           var_7 = (var_7[0], var_4[1].origin[1], var_7[2]);
         }
 
@@ -1020,8 +1008,7 @@ updateminimapsetting() {
 
         if(var_18 > var_19) {
           var_20 = var_18;
-        }
-        else {
+        } else {
           var_20 = var_19;
         }
 
@@ -1043,8 +1030,7 @@ updateminimapsetting() {
         level.minimapplayer = var_3;
         level.minimaporigin = var_9;
         thread drawminimapbounds(var_5, var_7, var_6);
-      } else {
-      }
+      } else {}
     }
   }
 }
@@ -1131,8 +1117,7 @@ islookingatorigin(var_0) {
 
   if(var_5 > var_3) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -1186,8 +1171,7 @@ draw_colornodes(var_0, var_1) {
 
         if(isDefined(var_5[var_6].classname) && var_5[var_6].classname == "info_volume") {
           var_7 = "V-" + var_2[var_3];
-        }
-        else {
+        } else {
           var_7 = "N-" + var_2[var_3];
         }
 
@@ -1230,8 +1214,7 @@ try_to_draw_line_to_node() {
 
   if(isDefined(self.node)) {
     var_0 = self.node.origin;
-  }
-  else if(isDefined(self getgoalvolume())) {
+  } else if(isDefined(self getgoalvolume())) {
     var_1 = self getgoalvolume();
     var_0 = var_1.origin;
   } else
@@ -1304,14 +1287,11 @@ displaythreat(var_0, var_1) {
   var_8 = !isplayer(self) && self.pacifist;
 
   for(var_9 = 0; var_9 <= var_5; var_9++) {
-    if(isDefined(var_1)) {
-    }
+    if(isDefined(var_1)) {}
 
-    if(isDefined(var_4)) {
-    }
+    if(isDefined(var_4)) {}
 
-    if(var_8) {
-    }
+    if(var_8) {}
 
     wait 0.05;
   }
@@ -1385,8 +1365,7 @@ draw_color_friendlies() {
 
 playernode() {
   for(;;) {
-    if(isDefined(level.player.node)) {
-    }
+    if(isDefined(level.player.node)) {}
 
     wait 0.05;
   }
@@ -1617,8 +1596,7 @@ chasecam_onent(var_0) {
 
 viewfx() {
   foreach(var_1 in level.createfxent) {
-    if(isDefined(var_1.looper)) {
-    }
+    if(isDefined(var_1.looper)) {}
   }
 }
 

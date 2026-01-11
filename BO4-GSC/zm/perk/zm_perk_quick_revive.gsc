@@ -16,7 +16,6 @@
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_perk_quick_revive;
 
 autoexec __init__system__() {
@@ -29,9 +28,9 @@ __init__() {
 
 enable_quick_revive_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_quickrevive", #"perk_quick_revive", 2000, #"hash_1fe09aea69fefa7", getweapon("zombie_perk_bottle_revive"), getweapon("zombie_perk_totem_quick_revive"), #"zmperksquickrevive");
+    zm_perks::register_perk_basic_info(#"specialty_quickrevive", # "perk_quick_revive", 2000, # "hash_1fe09aea69fefa7", getweapon("zombie_perk_bottle_revive"), getweapon("zombie_perk_totem_quick_revive"), # "zmperksquickrevive");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_quickrevive", #"perk_quick_revive", 2000, #"zombie/perk_quickrevive", getweapon("zombie_perk_bottle_revive"), getweapon("zombie_perk_totem_quick_revive"), #"zmperksquickrevive");
+    zm_perks::register_perk_basic_info(#"specialty_quickrevive", # "perk_quick_revive", 2000, # "zombie/perk_quickrevive", getweapon("zombie_perk_bottle_revive"), getweapon("zombie_perk_totem_quick_revive"), # "zmperksquickrevive");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_quickrevive", &quick_revive_precache);
@@ -48,11 +47,11 @@ quick_revive_precache() {
     return;
   }
 
-  level._effect[#"revive_light"] = #"zombie/fx_perk_quick_revive_zmb";
-  level.machine_assets[#"specialty_quickrevive"] = spawnStruct();
-  level.machine_assets[#"specialty_quickrevive"].weapon = getweapon("zombie_perk_bottle_revive");
-  level.machine_assets[#"specialty_quickrevive"].off_model = "p7_zm_vending_revive";
-  level.machine_assets[#"specialty_quickrevive"].on_model = "p7_zm_vending_revive";
+  level._effect[# "revive_light"] = # "zombie/fx_perk_quick_revive_zmb";
+  level.machine_assets[# "specialty_quickrevive"] = spawnStruct();
+  level.machine_assets[# "specialty_quickrevive"].weapon = getweapon("zombie_perk_bottle_revive");
+  level.machine_assets[# "specialty_quickrevive"].off_model = "p7_zm_vending_revive";
+  level.machine_assets[# "specialty_quickrevive"].on_model = "p7_zm_vending_revive";
 }
 
 quick_revive_register_clientfield() {}
@@ -81,7 +80,7 @@ turn_revive_on() {
     machine_triggers = getEntArray("vending_revive", "target");
 
     for(i = 0; i < machine.size; i++) {
-      machine[i] setModel(level.machine_assets[#"specialty_quickrevive"].off_model);
+      machine[i] setModel(level.machine_assets[# "specialty_quickrevive"].off_model);
 
       if(isDefined(level.quick_revive_final_pos)) {
         level.quick_revive_default_origin = level.quick_revive_final_pos;
@@ -104,7 +103,7 @@ turn_revive_on() {
           continue;
         }
 
-        machine[i] setModel(level.machine_assets[#"specialty_quickrevive"].on_model);
+        machine[i] setModel(level.machine_assets[# "specialty_quickrevive"].on_model);
         machine[i] playSound(#"zmb_perks_power_on");
         machine[i] vibrate((0, -100, 0), 0.3, 0.4, 3);
         machine_model = machine[i];
@@ -126,8 +125,8 @@ turn_revive_on() {
     util::wait_network_frame();
     array::thread_all(machine, &zm_perks::set_power_on, 1);
 
-    if(isDefined(level.machine_assets[#"specialty_quickrevive"].power_on_callback)) {
-      array::thread_all(machine, level.machine_assets[#"specialty_quickrevive"].power_on_callback);
+    if(isDefined(level.machine_assets[# "specialty_quickrevive"].power_on_callback)) {
+      array::thread_all(machine, level.machine_assets[# "specialty_quickrevive"].power_on_callback);
     }
 
     level notify(#"specialty_quickrevive_power_on");
@@ -136,15 +135,15 @@ turn_revive_on() {
       machine_model.ishidden = 0;
     }
 
-    notify_str = level waittill(#"revive_off", #"revive_hide", #"stop_quickrevive_logic");
+    notify_str = level waittill(#"revive_off", # "revive_hide", # "stop_quickrevive_logic");
     should_hide = 0;
 
     if(notify_str._notify == "revive_hide") {
       should_hide = 1;
     }
 
-    if(isDefined(level.machine_assets[#"specialty_quickrevive"].power_off_callback)) {
-      array::thread_all(machine, level.machine_assets[#"specialty_quickrevive"].power_off_callback);
+    if(isDefined(level.machine_assets[# "specialty_quickrevive"].power_off_callback)) {
+      array::thread_all(machine, level.machine_assets[# "specialty_quickrevive"].power_off_callback);
     }
 
     for(i = 0; i < machine.size; i++) {
@@ -169,7 +168,7 @@ unhide_quickrevive() {
     level.quick_revive_machine.origin = level.quick_revive_final_pos;
   }
 
-  playFX(level._effect[#"poltergeist"], level.quick_revive_machine.origin);
+  playFX(level._effect[# "poltergeist"], level.quick_revive_machine.origin);
 
   if(isDefined(level.quick_revive_trigger) && isDefined(level.quick_revive_trigger.blocker_model)) {
     level.quick_revive_trigger.blocker_model hide();
@@ -236,7 +235,7 @@ restart_quickrevive() {
       continue;
     }
 
-    if(trigger.script_noteworthy == #"specialty_quickrevive") {
+    if(trigger.script_noteworthy == # "specialty_quickrevive") {
       trigger notify(#"stop_quickrevive_logic");
       trigger thread zm_perks::vending_trigger_think();
       trigger triggerenable(1);

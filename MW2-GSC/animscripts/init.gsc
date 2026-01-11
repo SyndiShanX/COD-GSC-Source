@@ -41,8 +41,7 @@ initWeapon(weapon) {
 
   if(getWeaponClipModel(weapon) != "") {
     self.weaponInfo[weapon].useClip = true;
-  }
-  else {
+  } else {
     self.weaponInfo[weapon].useClip = false;
   }
 }
@@ -219,16 +218,14 @@ main() {
 
   if(self.team == "allies") {
     self.suppressionThreshold = 0.5;
-  }
-  else {
+  } else {
     self.suppressionThreshold = 0.0;
   }
 
   // Random range makes the grenades less accurate and do less damage, but also makes it difficult to throw back.
   if(self.team == "allies") {
     self.randomGrenadeRange = 0;
-  }
-  else {
+  } else {
     self.randomGrenadeRange = 256;
   }
 
@@ -260,7 +257,7 @@ main() {
   self thread printEyeOffsetFromNode();
   self thread showLikelyEnemyPathDir();
 
-    self thread monitorFlash();
+  self thread monitorFlash();
 
   self thread onDeath();
 
@@ -316,8 +313,7 @@ showLikelyEnemyPathDir() {
       line(self.origin + (0, 0, 60), printpos);
       if(isDefined(dir)) {
         print3d(printpos, "likelyEnemyPathDir: " + yaw, (1, 1, 1), 1, 0.5);
-      }
-      else {
+      } else {
         print3d(printpos, "likelyEnemyPathDir: undefined", (1, 1, 1), 1, 0.5);
       }
 
@@ -327,18 +323,18 @@ showLikelyEnemyPathDir() {
   }
 }
 
-  setNameAndRank_andAddToSquad() {
-    self endon("death");
-    if(!isDefined(level.loadoutComplete)) {
-      level waittill("loadout complete");
-    }
-
-    self maps\_names::get_name();
-
-    // needs to run after the name has been set since bcs changes self.voice from "multilingual"
-    //to something more specific
-    self thread animscripts\squadManager::addToSquad(); // slooooow
+setNameAndRank_andAddToSquad() {
+  self endon("death");
+  if(!isDefined(level.loadoutComplete)) {
+    level waittill("loadout complete");
   }
+
+  self maps\_names::get_name();
+
+  // needs to run after the name has been set since bcs changes self.voice from "multilingual"
+  //to something more specific
+  self thread animscripts\squadManager::addToSquad(); // slooooow
+}
 
 // Debug thread to see when stances are being allowed
 PollAllowedStancesThread() {
@@ -492,9 +488,9 @@ firstInit() {
 
   setDvarIfUninitialized("debug_delta", "off");
 
-    if(!isDefined(level.flag)) {
-      common_scripts\utility::init_flags();
-    }
+  if(!isDefined(level.flag)) {
+    common_scripts\utility::init_flags();
+  }
 
   maps\_gameskill::setSkill();
   level.painAI = undefined;
@@ -536,8 +532,7 @@ firstInit() {
 initDeveloperDvars() {
   if(getdebugdvar("debug_noanimscripts") == "") {
     setdvar("debug_noanimscripts", "off");
-  }
-  else if(getdebugdvar("debug_noanimscripts") == "on") {
+  } else if(getdebugdvar("debug_noanimscripts") == "on") {
     anim.defaultException = animscripts\init::infiniteLoop;
   }
 
@@ -590,7 +585,7 @@ initGrenades() {
 
   thread animscripts\combat_utility::grenadeTimerDebug();
 
-    initGrenadeThrowAnims();
+  initGrenadeThrowAnims();
 }
 
 initAdvanceToEnemy() {

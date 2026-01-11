@@ -94,11 +94,9 @@ monitorrigswitch() {
     if(isDefined(self.oldperks) && isDefined(self.perks) && self.oldperks.size > 0) {
       if(scripts\mp\utility\game::func_2287(self.perks, "specialty_support_killstreaks") && scripts\mp\utility\game::func_2287(self.oldperks, "specialty_support_killstreaks")) {
         continue;
-      }
-      else if(!scripts\mp\utility\game::func_2287(self.oldperks, "specialty_support_killstreaks")) {
+      } else if(!scripts\mp\utility\game::func_2287(self.oldperks, "specialty_support_killstreaks")) {
         continue;
-      }
-      else {
+      } else {
         func_E275();
         updatekillstreakselectedui();
       }
@@ -110,8 +108,7 @@ func_B9CB() {
   while(isDefined(self)) {
     if(scripts\mp\utility\game::bot_is_fireteam_mode()) {
       self waittill("disconnect");
-    }
-    else {
+    } else {
       scripts\engine\utility::waittill_any("disconnect", "joined_team", "joined_spectators");
     }
 
@@ -213,8 +210,7 @@ func_F866() {
 func_7FEE() {
   if(self.streakpoints == func_7FA2() && self.streaktype != "specialist") {
     var_00 = 0;
-  }
-  else {
+  } else {
     var_00 = self.streakpoints;
   }
 
@@ -305,8 +301,7 @@ updatekillstreakselectedui() {
 
   if(isDefined(var_03)) {
     self setclientomnvar("ui_score_streak_selected_slot", var_03);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_score_streak_selected_slot", -1);
   }
 }
@@ -386,14 +381,11 @@ func_A6BA() {
 
     if(var_2.func_EF88 == "no_fire_weapon") {
       thread func_127C7(var_2.weapon, var_02, 1);
-    }
-    else if(var_2.func_EF88 == "gesture_script_weapon") {
+    } else if(var_2.func_EF88 == "gesture_script_weapon") {
       self giveandfireoffhand(var_2.weapon);
-    }
-    else if(isDefined(var_2.weapon) && var_2.weapon != "none") {
+    } else if(isDefined(var_2.weapon) && var_2.weapon != "none") {
       thread func_127C7(var_2.weapon, var_02);
-    }
-    else {
+    } else {
       var_01 = getclosestenemysqdist();
       thread func_A69A(var_02);
     }
@@ -764,8 +756,7 @@ func_DDF0(var_00) {
   if(isDefined(self.class_num)) {
     if(self getrankedplayerdata(level.loadoutsgroup, "squadMembers", "killstreakSetups", 0, "killstreak") == var_00) {
       self.func_6DEB = gettime();
-    }
-    else if(self getrankedplayerdata(level.loadoutsgroup, "squadMembers", "killstreakSetups", 2, "killstreak") == var_00 && isDefined(self.func_6DEB)) {
+    } else if(self getrankedplayerdata(level.loadoutsgroup, "squadMembers", "killstreakSetups", 2, "killstreak") == var_00 && isDefined(self.func_6DEB)) {
       if(gettime() - self.func_6DEB < 20000) {
         thread scripts\mp\missions::processchallenge("wargasm");
       }
@@ -922,8 +913,7 @@ func_E131(var_00) {
 
   if(var_00 == 0) {
     func_D65E();
-  }
-  else if(var_00 >= 4) {
+  } else if(var_00 >= 4) {
     func_51D3(var_00);
   }
 }
@@ -1024,14 +1014,11 @@ getstreakcost(var_00) {
       if(isDefined(self.pers["gamemodeLoadout"])) {
         if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak1"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak1"] == var_00) {
           var_01 = 2;
-        }
-        else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak2"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak2"] == var_00) {
+        } else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak2"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak2"] == var_00) {
           var_01 = 4;
-        }
-        else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak3"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak3"] == var_00) {
+        } else if(isDefined(self.pers["gamemodeLoadout"]["loadoutKillstreak3"]) && self.pers["gamemodeLoadout"]["loadoutKillstreak3"] == var_00) {
           var_01 = 6;
-        }
-        else {}
+        } else {}
       } else if(issubstr(self.curclass, "custom")) {
         for(var_02 = 0; var_02 < 3; var_2++) {
           var_03 = self getrankedplayerdata(level.loadoutsgroup, "squadMembers", "loadouts", self.class_num, "specialistStreaks", var_02);
@@ -1043,8 +1030,7 @@ getstreakcost(var_00) {
 
         if(var_02 == 1) {
           var_01 = 500;
-        }
-        else if(var_02 == 2) {
+        } else if(var_02 == 2) {
           var_01 = 800;
         }
       } else if(issubstr(self.curclass, "callback")) {
@@ -1063,8 +1049,7 @@ getstreakcost(var_00) {
 
         if(issubstr(self.curclass, "axis")) {
           var_06 = "axis";
-        }
-        else if(issubstr(self.curclass, "allies")) {
+        } else if(issubstr(self.curclass, "allies")) {
           var_06 = "allies";
         }
 
@@ -1118,11 +1103,9 @@ func_A6B0() {
 
       if(var_00 == "ks_select_up") {
         var_02 = func_7FED(var_01);
-      }
-      else if(var_00 == "ks_select_down") {
+      } else if(var_00 == "ks_select_down") {
         var_02 = detonate(var_01);
-      }
-      else {}
+      } else {}
 
       func_F837(var_02);
     }
@@ -1507,8 +1490,7 @@ setstreakpoints(var_00) {
 
   if(isDefined(self.streakpoints)) {
     self.previousstreakpoints = self.streakpoints;
-  }
-  else {
+  } else {
     self.previousstreakpoints = 0;
   }
 
@@ -1644,8 +1626,7 @@ killstreakhit(var_00, var_01, var_02, var_03) {
         if(var_06 == "weapon_lmg") {
           if(!isDefined(var_0.shotslandedlmg)) {
             var_0.shotslandedlmg = 1;
-          }
-          else {
+          } else {
             var_0.shotslandedlmg++;
           }
         }
@@ -1697,8 +1678,7 @@ initridekillstreak(var_00) {
 initridekillstreak_internal(var_00) {
   if(isDefined(var_00) && func_9E6F(var_00)) {
     var_01 = "timeout";
-  }
-  else {
+  } else {
     var_01 = scripts\engine\utility::waittill_any_timeout(1.0, "disconnect", "death", "weapon_switch_started");
   }
 
@@ -1747,8 +1727,7 @@ initridekillstreak_internal(var_00) {
   if(var_02 != "disconnect") {
     if(!isDefined(var_00) || !issubstr(var_00, "odin") || !issubstr(var_00, "pointSelect")) {
       thread clearrideintro(1.0);
-    }
-    else {
+    } else {
       self notify("intro_cleared");
     }
 
@@ -1771,8 +1750,7 @@ initridekillstreak_internal(var_00) {
 
   if(var_02 == "disconnect") {
     return "disconnect";
-  }
-  else {
+  } else {
     return "success";
   }
 }
@@ -1880,8 +1858,7 @@ func_D507(var_00, var_01) {
 
     if(scripts\mp\utility\game::istrue(var_03)) {
       thread func_13A4C(var_02);
-    }
-    else {
+    } else {
       return 0;
     }
   }

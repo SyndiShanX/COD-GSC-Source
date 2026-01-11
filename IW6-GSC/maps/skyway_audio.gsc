@@ -45,7 +45,7 @@ skyway_train_ambience() {
 
   if(isDefined(var_0)) {
     foreach(var_2 in var_0) {
-    maps\_utility::delaythread(0.1, maps\skyway_util::trig_watcher, var_2, ::play_ambient_sfx_int, ::play_ambient_sfx_ext);
+      maps\_utility::delaythread(0.1, maps\skyway_util::trig_watcher, var_2, ::play_ambient_sfx_int, ::play_ambient_sfx_ext);
     }
   }
 }
@@ -102,7 +102,7 @@ play_rail_sfx() {
   var_0 = getEntArray("train_rail_sfx", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 playLoopSound("emt_skyway_train_rail");
+    var_2 playLoopSound("emt_skyway_train_rail");
   }
 }
 
@@ -111,14 +111,14 @@ play_wind_sfx() {
   var_0 = getEntArray("sfx_wind_01", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 playLoopSound("emt_skyway_wind_01");
+    var_2 playLoopSound("emt_skyway_wind_01");
   }
 
   level.train_wind02_sfx_ents = [];
   var_4 = getEntArray("sfx_wind_02", "targetname");
 
   foreach(var_6 in var_4) {
-  var_6 playLoopSound("emt_skyway_wind_02");
+    var_6 playLoopSound("emt_skyway_wind_02");
   }
 }
 
@@ -142,31 +142,25 @@ sfx_impact_train(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     if(level.player.car == "train_sat_1" || level.player.car == "train_sat_2") {
       level.player playSound("scn_skyway_train_shake_lg");
-    }
-    else if(level.player.car == "train_hangar") {
+    } else if(level.player.car == "train_hangar") {
       level.player playSound("scn_skyway_train_shake_hanger_lg");
-    }
-    else {
+    } else {
       level.player playSound("scn_skyway_train_shake_roof_lg");
     }
   } else if(var_1 > 0.66) {
     if(level.player.car == "train_sat_1" || level.player.car == "train_sat_2") {
       level.player playSound("scn_skyway_train_shake_lg");
-    }
-    else if(level.player.car == "train_hangar") {
+    } else if(level.player.car == "train_hangar") {
       level.player playSound("scn_skyway_train_shake_hanger_lg");
-    }
-    else {
+    } else {
       level.player playSound("scn_skyway_train_shake_roof_lg");
     }
   } else if(var_1 > 0.13) {
     if(level.player.car == "train_sat_1" || level.player.car == "train_sat_2") {
       level.player playSound("scn_skyway_train_shake_med");
-    }
-    else if(level.player.car == "train_hangar") {
+    } else if(level.player.car == "train_hangar") {
       level.player playSound("scn_skyway_train_shake_hanger_med");
-    }
-    else {
+    } else {
       level.player playSound("scn_skyway_train_shake_roof_med");
     }
   } else {}

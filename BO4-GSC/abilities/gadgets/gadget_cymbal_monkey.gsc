@@ -9,7 +9,6 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace gadget_cymbal_monkey;
 
 autoexec __init__system__() {
@@ -30,7 +29,7 @@ function_1c601b99() {
 }
 
 private __main__() {
-  level._effect[#"monkey_glow"] = #"zm_weapons/fx8_cymbal_monkey_light";
+  level._effect[# "monkey_glow"] = # "zm_weapons/fx8_cymbal_monkey_light";
 }
 
 private function_a23699fe() {
@@ -95,7 +94,7 @@ private function_17c51c94(monkey, ent) {
 }
 
 private event_handler[grenade_fire] function_4776caf4(eventstruct) {
-  if(eventstruct.weapon.name == #"cymbal_monkey") {
+  if(eventstruct.weapon.name == # "cymbal_monkey") {
     e_grenade = eventstruct.projectile;
     e_grenade ghost();
     e_grenade.angles = self.angles;
@@ -105,7 +104,7 @@ private event_handler[grenade_fire] function_4776caf4(eventstruct) {
     e_grenade.mdl_monkey.var_38af96b9 = e_grenade;
     e_grenade.mdl_monkey.team = e_grenade.team;
     e_grenade.mdl_monkey clientfield::set("enemyequip", 1);
-    e_grenade waittill(#"stationary", #"death");
+    e_grenade waittill(#"stationary", # "death");
 
     if(!isDefined(e_grenade) && isDefined(mdl_monkey)) {
       mdl_monkey delete();
@@ -128,7 +127,7 @@ function_b9934c1d() {
 
   self.fuse_lit = 1;
   self playSound(#"hash_4509539f9e7954e2");
-  playFXOnTag(level._effect[#"monkey_glow"], self, "tag_weapon");
+  playFXOnTag(level._effect[# "monkey_glow"], self, "tag_weapon");
   self thread scene::play(#"cin_t8_monkeybomb_dance", self);
   self thread util::delay(6.5, "death", &function_4e61e1d);
   var_de3026af = gettime() + int(8 * 1000);

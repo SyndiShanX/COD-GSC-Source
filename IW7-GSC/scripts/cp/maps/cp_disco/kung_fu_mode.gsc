@@ -1644,9 +1644,7 @@ enter_kung_fu(param_00, param_01) {
   param_00.disable_consumables = 1;
   param_00.kung_fu_mode = 1;
   param_00.allow_carry = 0;
-  [
-    [level.kung_fu_interaction_func]
-  ](param_00);
+  [[level.kung_fu_interaction_func]](param_00);
   param_00.kungfu_style = param_01;
   param_00.no_deadeye = 1;
   param_01 = param_00.kung_fu_progression.active_discipline;
@@ -1763,9 +1761,7 @@ unset_kung_fu_mode(param_00, param_01) {
   }
 
   param_00.allow_carry = undefined;
-  [
-    [level.kung_fu_interaction_func]
-  ](param_00);
+  [[level.kung_fu_interaction_func]](param_00);
   if(!param_00 hasweapon(param_01)) {
     param_01 = param_00 scripts\cp\utility::getvalidtakeweapon();
   }

@@ -9,7 +9,6 @@
 #include scripts\core_common\renderoverridebundle;
 #include scripts\core_common\struct;
 #include scripts\mp_common\player\player;
-
 #namespace infect;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -23,7 +22,7 @@ function_fd78da38(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
       foreach(player in getplayers(localclientnum)) {
         if(player.team !== self.team && !player function_21c0fa55()) {
           if(player flag::exists(#"friendly")) {
-            player renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? #"hash_1cbf6d26721c59a7" : #"hash_1c90592671f4c6e9", 0);
+            player renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? # "hash_1cbf6d26721c59a7" : # "hash_1c90592671f4c6e9", 0);
           }
         }
       }
@@ -32,7 +31,7 @@ function_fd78da38(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     }
 
     if(self flag::exists(#"friendly")) {
-      self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? #"hash_1cbf6d26721c59a7" : #"hash_1c90592671f4c6e9", 0);
+      self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? # "hash_1cbf6d26721c59a7" : # "hash_1c90592671f4c6e9", 0);
     }
   }
 }

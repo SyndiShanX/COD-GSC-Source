@@ -66,8 +66,7 @@ func_AF27() {
 func_AF25() {
   if(!isDefined(self.func_A43E)) {
     self.func_A43E = 1;
-  }
-  else {
+  } else {
     self.func_A43E++;
   }
 }
@@ -272,8 +271,7 @@ func_A448() {
 
       if(func_11579(self.func_A447)) {
         self _meth_8406(1);
-      }
-      else {
+      } else {
         self _meth_8406(0);
       }
 
@@ -298,8 +296,7 @@ func_A448() {
 
       if(func_11579(self.func_A447)) {
         self _meth_8406(1);
-      }
-      else {
+      } else {
         self _meth_8406(0);
       }
 
@@ -372,8 +369,7 @@ func_A440(var_00) {
     }
     if(isplayer(self.func_A445)) {
       self _meth_8402(self.func_A445, (0, 0, 64), 0);
-    }
-    else {
+    } else {
       self _meth_8402(self.func_A445, (0, 0, 0), 0);
     }
 

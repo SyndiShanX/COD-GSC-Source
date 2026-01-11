@@ -19,8 +19,7 @@ autoexec event_funcs() {
   add_spawn_function_group("mason_reflection", "targetname", ::reflection_scene_head_track);
 }
 
-skipto_intro() {
-}
+skipto_intro() {}
 
 main() {
   println("Intro");

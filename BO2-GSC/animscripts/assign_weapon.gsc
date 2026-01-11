@@ -346,7 +346,7 @@ add_weapons_to_class_and_faction(str_faction, str_class, a_weapon_list, attach_f
   }
 
   foreach(str_weapon in a_weapon_list) {
-  add_weapon_to_class_and_faction(str_faction, str_class, str_weapon, attach_forced, attach_banned, zero_attachment_perc, one_attachment_perc, two_attachment_perc, three_attachment_perc);
+    add_weapon_to_class_and_faction(str_faction, str_class, str_weapon, attach_forced, attach_banned, zero_attachment_perc, one_attachment_perc, two_attachment_perc, three_attachment_perc);
   }
 }
 
@@ -569,8 +569,7 @@ assemble_attachments_for_weapon(str_weapon, str_faction, str_class, num_attachme
 
   if(isDefined(forced_attachment)) {
     attachment1 = forced_attachment;
-  }
-  else {
+  } else {
     attachment1 = random(weapon_attachments);
   }
 
@@ -593,8 +592,7 @@ assemble_attachments_for_weapon(str_weapon, str_faction, str_class, num_attachme
   if(isDefined(attachment2)) {
     if(is_later_in_alphabet(attachment2, attachment1)) {
       str_weapon_with_attachments = str_weapon + "_sp+" + attachment1 + "+" + attachment2;
-    }
-    else {
+    } else {
       str_weapon_with_attachments = str_weapon + "_sp+" + attachment2 + "+" + attachment1;
     }
 

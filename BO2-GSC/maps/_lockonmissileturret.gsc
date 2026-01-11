@@ -30,22 +30,19 @@ init(buseadslockon, func_getbestmissileturrettarget, maxtargets, bmanualtargetse
 
   if(!isDefined(func_getbestmissileturrettarget)) {
     level.func_getbestmissileturrettarget = ::getbestmissileturrettarget;
-  }
-  else {
+  } else {
     level.func_getbestmissileturrettarget = func_getbestmissileturrettarget;
   }
 
   if(!isDefined(maxtargets)) {
     level.missileturretmaxtargets = 1;
-  }
-  else {
+  } else {
     level.missileturretmaxtargets = maxtargets;
   }
 
   if(!isDefined(bmanualtargetset)) {
     level.bmanualtargetset = 0;
-  }
-  else {
+  } else {
     level.bmanualtargetset = bmanualtargetset;
   }
 }
@@ -182,8 +179,7 @@ missilefirednotify(b_multi_target_turret) {
       if(isDefined(self.missileturretfiring) && !self.missileturretfiring) {
         if(level.missileturretmaxtargets > 1 && self.missileturrettargetlist.size > 0) {
           self thread multilockmissilefire();
-        }
-        else {
+        } else {
           missile missile_settarget(undefined);
         }
       }
@@ -211,8 +207,7 @@ multilockmissilefire() {
     if(isstillvalidtarget(self.missileturrettargetlist[i])) {
       if(seat == 0) {
         turret fireweapon(self.missileturrettargetlist[i]);
-      }
-      else {
+      } else {
         turret setgunnertargetent(self.missileturrettargetlist[i], (0, 0, 0), seat - 1);
         missile = turret firegunnerweapon(seat - 1);
         missile setforcenocull();
@@ -376,8 +371,7 @@ missileturretmultilockloop() {
 
   if(!isDefined(self.missileturrettargetlist)) {
     self.missileturrettargetlist = [];
-  }
-  else {
+  } else {
     for(i = 0; i < self.missileturrettargetlist.size; i++) {
       self.missileturrettargetlist[i] = undefined;
     }
@@ -449,8 +443,7 @@ missileturretmultilockloop() {
 
         if(self.seat == 0) {
           turret settargetentity(self.missileturrettargetlist[0]);
-        }
-        else {
+        } else {
           turret settargetentity(self.missileturrettargetlist[0], (0, 0, 0), self.seat - 1);
         }
       }
@@ -616,8 +609,7 @@ getbestmissileturrettarget() {
   return chosenent;
 }
 
-getbestmissileturrettargetlist() {
-}
+getbestmissileturrettargetlist() {}
 
 insidemissileturretreticlenolock(target) {
   weaponname = self getturretweaponname();
@@ -883,8 +875,7 @@ getturretweaponname() {
   if(isDefined(viewlockedent)) {
     if(viewlockedent.classname == "misc_turret") {
       return viewlockedent.weaponinfo;
-    }
-    else if(viewlockedent.classname == "script_vehicle") {
+    } else if(viewlockedent.classname == "script_vehicle") {
       for(i = 0; i < 5; i++) {
         weapon_name = viewlockedent seatgetweapon(i);
 

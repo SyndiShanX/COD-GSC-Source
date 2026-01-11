@@ -52,7 +52,7 @@ onplayerspawned() {
     foreach(s_stat in level._challenges.a_players[self.characterindex].a_stats) {
       if(s_stat.b_medal_awarded && !s_stat.b_reward_claimed) {
         foreach(m_board in level.a_m_challenge_boards) {
-        self setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
+          self setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
         }
       }
     }
@@ -60,7 +60,7 @@ onplayerspawned() {
     foreach(s_stat in level._challenges.s_team.a_stats) {
       if(s_stat.b_medal_awarded && s_stat.a_b_player_rewarded[self.characterindex]) {
         foreach(m_board in level.a_m_challenge_boards) {
-        self setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
+          self setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
         }
       }
     }
@@ -186,8 +186,7 @@ team_stats_init(n_index) {
 challenge_exists(str_name) {
   if(isDefined(level._challenges.a_stats[str_name])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -199,8 +198,7 @@ get_stat(str_stat, player) {
 
   if(s_parent_stat.b_team) {
     s_stat = level._challenges.s_team.a_stats[str_stat];
-  }
-  else {
+  } else {
     s_stat = level._challenges.a_players[player.characterindex].a_stats[str_stat];
   }
 
@@ -257,7 +255,7 @@ check_stat_complete(s_stat) {
     }
 
     foreach(m_board in level.a_m_challenge_boards) {
-    m_board showpart(s_stat.str_glow_tag);
+      m_board showpart(s_stat.str_glow_tag);
     }
 
     if(isplayer(self)) {
@@ -281,8 +279,7 @@ check_stat_complete(s_stat) {
 stat_reward_available(stat, player) {
   if(isstring(stat)) {
     s_stat = get_stat(stat, player);
-  }
-  else {
+  } else {
     s_stat = stat;
   }
 
@@ -413,8 +410,7 @@ update_box_prompt(player) {
     if(self.stub.b_busy) {
       if(self.stub ent_flag("waiting_for_grab") && (!isDefined(self.stub.player_using) || self.stub.player_using == player)) {
         str_hint = &"ZM_TOMB_CH_G";
-      }
-      else {
+      } else {
         str_hint = &"";
       }
     } else {
@@ -473,9 +469,7 @@ update_box_prompt(player) {
 
         if(n_character_index != 4) {
           s_player_stat = level._challenges.a_players[n_character_index].a_stats[str_name];
-        }
-        else {
-        }
+        } else {}
       }
 
       self sethintstring(self.stub.hint_string);
@@ -570,8 +564,7 @@ open_box(player, ut_stub, fp_reward_override, param1) {
 
   if(isDefined(fp_reward_override)) {
     ut_stub[[fp_reward_override]](player, param1);
-  }
-  else {
+  } else {
     ut_stub spawn_reward(player, s_select_stat);
   }
 
@@ -710,7 +703,7 @@ devgui_award_challenge(n_index) {
     }
 
     foreach(m_board in level.a_m_challenge_boards) {
-    m_board showpart(s_stat.str_glow_tag);
+      m_board showpart(s_stat.str_glow_tag);
     }
   } else {
     a_keys = getarraykeys(level._challenges.a_players[0].a_stats);
@@ -726,7 +719,7 @@ devgui_award_challenge(n_index) {
       player setclientfieldtoplayer(s_stat.s_parent.cf_complete, 1);
 
       foreach(m_board in level.a_m_challenge_boards) {
-      m_board showpart(s_stat.str_glow_tag);
+        m_board showpart(s_stat.str_glow_tag);
       }
     }
   }

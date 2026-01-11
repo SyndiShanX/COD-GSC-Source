@@ -538,7 +538,7 @@ mission_object_control() {
       var_3 = getEntArray("script_model_garage_post_stuff_01", "targetname");
 
       foreach(var_5 in var_3) {
-      var_5 hide();
+        var_5 hide();
       }
 
       maps\_utility::flavorbursts_off("allies");
@@ -668,11 +668,11 @@ script_noteworthy_hide_and_show(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     foreach(var_4 in var_2) {
-    var_4 hide();
+      var_4 hide();
     }
   } else {
     foreach(var_4 in var_2) {
-    var_4 show();
+      var_4 show();
     }
   }
 }
@@ -688,11 +688,11 @@ streets_vehicle_hide_at_start() {
   var_1 = getEntArray("flood_street_car_1", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-  var_0 = common_scripts\utility::add_to_array(var_0, var_3);
+    var_0 = common_scripts\utility::add_to_array(var_0, var_3);
   }
 
   foreach(var_3 in var_0) {
-  var_3 hide();
+    var_3 hide();
   }
 }
 
@@ -707,11 +707,11 @@ streets_vehicle_show_after_knife_kill() {
   var_1 = getEntArray("flood_street_car_1", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-  var_0 = common_scripts\utility::add_to_array(var_0, var_3);
+    var_0 = common_scripts\utility::add_to_array(var_0, var_3);
   }
 
   foreach(var_3 in var_0) {
-  var_3 show();
+    var_3 show();
   }
 }
 
@@ -726,7 +726,7 @@ swept_cleanup() {
   var_0 = getEntArray("swept_underwater_cleanup", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -747,7 +747,7 @@ palm_tree_control(var_0) {
   var_3[var_3.size] = "flood_shake_tree_right_6";
 
   foreach(var_5 in var_1) {
-  var_5 hide();
+    var_5 hide();
   }
 
   if(isDefined(var_0)) {
@@ -760,7 +760,7 @@ palm_tree_control(var_0) {
     }
 
     foreach(var_5 in var_2) {
-    var_5 hide();
+      var_5 hide();
     }
 
     level waittill("end_streets");
@@ -774,7 +774,7 @@ palm_tree_control(var_0) {
     }
 
     foreach(var_5 in var_2) {
-    var_5 show();
+      var_5 show();
     }
   }
 
@@ -789,14 +789,14 @@ show_rushing_water_trees_infil_trees_cleanup(var_0) {
     var_1 = getEntArray("infil_optimize_delay_delete", "script_noteworthy");
 
     foreach(var_3 in var_1) {
-    var_3 delete();
+      var_3 delete();
     }
   }
 
   var_5 = getEntArray("palm_tree_in_rushing_water", "script_noteworthy");
 
   foreach(var_3 in var_5) {
-  var_3 show();
+    var_3 show();
   }
 }
 
@@ -804,7 +804,7 @@ infil_optimize_tree_cleanup() {
   var_0 = getEntArray("infil_optimize", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -812,7 +812,7 @@ embassy_palms_cleanup() {
   var_0 = getEntArray("embassy_palms", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 

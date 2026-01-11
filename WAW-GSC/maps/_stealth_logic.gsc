@@ -278,8 +278,7 @@ friendly_init() {
     self._stealth.logic.getangles_func = ::friendly_getangles_player;
     if(level.Console) {
       self._stealth.logic.getvelocity_func = ::friendly_getvelocity;
-    }
-    else {
+    } else {
       self._stealth.logic.getvelocity_func = ::player_getvelocity_pc;
       self._stealth.logic.player_pc_velocity = 0;
     }
@@ -330,8 +329,7 @@ player_getvelocity_pc() {
   sub["prone"] = 10;
   if(!velocity) {
     self._stealth.logic.player_pc_velocity = 0;
-  }
-  else if(velocity > self._stealth.logic.player_pc_velocity) {
+  } else if(velocity > self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity += add[stance];
     if(self._stealth.logic.player_pc_velocity > velocity) {
       self._stealth.logic.player_pc_velocity = velocity;
@@ -440,8 +438,7 @@ friendly_compute_stances_player() {
     self._stealth.logic.stance = self._stealth.logic.oldstance;
     if(self._stealth.logic.stance_change > .05) {
       self._stealth.logic.stance_change -= .05;
-    }
-    else {
+    } else {
       self._stealth.logic.stance_change = 0;
       self._stealth.logic.stance = stance;
       self._stealth.logic.oldstance = stance;
@@ -762,8 +759,7 @@ enemy_corpse_logic() {
       if(found) {
         if(!ent_flag("_stealth_found_corpse")) {
           self ent_flag_set("_stealth_found_corpse");
-        }
-        else {
+        } else {
           self notify("_stealth_found_corpse");
         }
         self ent_flag_clear("_stealth_saw_corpse");
@@ -773,8 +769,7 @@ enemy_corpse_logic() {
         self._stealth.logic.corpse.corpse_entity = corpse;
         if(!ent_flag("_stealth_saw_corpse")) {
           self ent_flag_set("_stealth_saw_corpse");
-        }
-        else {
+        } else {
           self notify("_stealth_saw_corpse");
         }
         level notify("_stealth_saw_corpse");
@@ -841,8 +836,7 @@ enemy_corpse_found(corpse) {
   wait randomfloatrange(.25, .5);
   if(!flag("_stealth_found_corpse")) {
     flag_set("_stealth_found_corpse");
-  }
-  else {
+  } else {
     level notify("_stealth_found_corpse");
   }
   thread enemy_corpse_clear();
@@ -866,8 +860,7 @@ enemy_corpse_alert_level() {
   enemy = undefined;
   if(isDefined(self.enemy)) {
     enemy = self.enemy;
-  }
-  else {
+  } else {
     enemy = get_closest_player(self.origin);
   }
   if(!isDefined(enemy._stealth.logic.spotted_list[self.ai_number])) {

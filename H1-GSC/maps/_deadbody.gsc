@@ -23,8 +23,7 @@ main() {
 
   if(var_0 > 0) {
     level.max_number_of_dead_bodies = var_0;
-  }
-  else {
+  } else {
     level.max_number_of_dead_bodies = 0;
   }
 
@@ -53,8 +52,7 @@ spawn_dead_body(var_0) {
 
   if(isDefined(self.script_index)) {
     var_1 = self.script_index;
-  }
-  else {
+  } else {
     level.dead_body_count++;
 
     if(level.dead_body_count > 3) {
@@ -129,8 +127,7 @@ lookat_custom_death_anim(var_0) {
   for(;;) {
     if(distancesquared(level.player.origin, self.origin) > 5000 && (!checksighttrace(self) || !common_scripts\utility::within_fov(level.player getEye(), level.player getplayerangles(), self.origin + (0, 0, 12), var_1))) {
       var_2 = 0;
-    }
-    else {
+    } else {
       var_2++;
     }
 

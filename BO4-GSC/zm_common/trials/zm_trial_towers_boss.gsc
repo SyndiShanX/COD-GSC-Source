@@ -28,7 +28,6 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_trial_towers_boss;
 
 autoexec __init__system__() {
@@ -145,7 +144,7 @@ private boss_fight() {
   level thread function_95785950(187, level.var_8b66546e, "m_quest", "basket_nag");
   level thread function_95785950(211, level.var_49328379, "m_quest", "heart_nag");
   array::thread_all(level.players, &function_3d487e02);
-  e_elephant = spawner::simple_spawn_single(sp_spawner, &function_f9da4403, var_47312393, #"hash_266f53fb994e6120");
+  e_elephant = spawner::simple_spawn_single(sp_spawner, &function_f9da4403, var_47312393, # "hash_266f53fb994e6120");
 
   while(!isDefined(e_elephant.ai.riders) || e_elephant.ai.riders.size < 2) {
     wait 0.1;
@@ -175,9 +174,9 @@ private function_13576d14() {
 
     recordent(var_e220a902);
 
-      var_d7267ad9 = "towers_boss_tower_badplace_" + var_6848389e;
+    var_d7267ad9 = "towers_boss_tower_badplace_" + var_6848389e;
     var_e220a902.badplace_name = var_d7267ad9;
-    badplace_box(var_d7267ad9, 0, groundtrace(var_e220a902.origin + (0, 0, 8), var_e220a902.origin + (0, 0, -100000), 0, var_e220a902)[#"position"], var_a406cb50, "all");
+    badplace_box(var_d7267ad9, 0, groundtrace(var_e220a902.origin + (0, 0, 8), var_e220a902.origin + (0, 0, -100000), 0, var_e220a902)[# "position"], var_a406cb50, "all");
     var_6848389e++;
     waitframe(1);
   }
@@ -190,8 +189,8 @@ private function_33935d5f() {
   e_clip = getent(self.target, "targetname");
 
   while(!self.b_exploded) {
-    waitresult = self waittill(#"trigger", #"tower_boss_scripted_trigger_tower");
-    shouldexplode = isDefined(waitresult.activator) && isDefined(waitresult.activator.archetype) && waitresult.activator.archetype === #"elephant";
+    waitresult = self waittill(#"trigger", # "tower_boss_scripted_trigger_tower");
+    shouldexplode = isDefined(waitresult.activator) && isDefined(waitresult.activator.archetype) && waitresult.activator.archetype === # "elephant";
 
     if(shouldexplode || waitresult._notify == "tower_boss_scripted_trigger_tower") {
       if(isDefined(e_clip)) {
@@ -214,7 +213,7 @@ private function_33935d5f() {
 private function_92e1954c() {
   self notify("602480c649d8e17f");
   self endon("602480c649d8e17f");
-  level endon(#"end_game", #"boss_battle_done");
+  level endon(#"end_game", # "boss_battle_done");
 
   while(true) {
     level waittill(#"hash_3aa3137f1bf70773");
@@ -227,7 +226,7 @@ private function_92e1954c() {
 private function_4d682898() {
   self notify("1d04cafdc26414eb");
   self endon("1d04cafdc26414eb");
-  level endon(#"end_game", #"boss_battle_done");
+  level endon(#"end_game", # "boss_battle_done");
 
   while(true) {
     level waittill(#"basket_hit");
@@ -240,7 +239,7 @@ private function_4d682898() {
 private function_3d487e02() {
   self notify("72b45c7bc8c76fc3");
   self endon("72b45c7bc8c76fc3");
-  level endon(#"end_game", #"boss_battle_done");
+  level endon(#"end_game", # "boss_battle_done");
   self endon(#"disconnect");
   b_success = 0;
   params = getstatuseffect(#"hash_12a64221f4d27f9b");
@@ -253,7 +252,7 @@ private function_3d487e02() {
       self status_effect::status_effect_apply(params, weapon, undefined, 0, 3000, undefined, waitresult.origin);
 
       if(!(isDefined(b_success) && b_success)) {
-        b_success = self zm_audio::create_and_play_dialog(#"m_quest", #"spear_warn");
+        b_success = self zm_audio::create_and_play_dialog(#"m_quest", # "spear_warn");
       }
     }
   }
@@ -289,7 +288,7 @@ private function_dd2db3df() {
 private function_95785950(var_c625106d, var_86163b89, n_stage, var_39acfdda) {
   self notify("683195b7da79b6b9");
   self endon("683195b7da79b6b9");
-  level endon(#"end_game", #"boss_battle_done");
+  level endon(#"end_game", # "boss_battle_done");
 
   while(true) {
     wait var_c625106d;
@@ -314,7 +313,7 @@ private function_ae1cbf2e() {
 private function_1a05e10c(str_notify, var_f13787ad, var_ca8a3a53) {
   self notify("588886ce796505cd");
   self endon("588886ce796505cd");
-  level endon(#"end_game", #"boss_battle_done");
+  level endon(#"end_game", # "boss_battle_done");
 
   for(b_success = 0; !b_success; b_success = zm_audio::function_bca32e49(var_f13787ad, var_ca8a3a53)) {
     level waittill(str_notify);

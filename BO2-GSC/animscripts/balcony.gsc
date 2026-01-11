@@ -36,8 +36,7 @@ balconyglobalsinit() {
 balconydamage(idamage, smeansofdeath) {
   if(isDefined(self.a.doingbalconydeath) && self.a.doingbalconydeath) {
     self.health = idamage + 1;
-  }
-  else if(self.health <= idamage) {
+  } else if(self.health <= idamage) {
     if(candobalcony(smeansofdeath)) {
       self.do_balcony_death_now = 1;
       self.health = idamage + 1;
@@ -60,8 +59,7 @@ candobalcony(smeansofdeath) {
 
   if(!isDefined(self.balcony_node)) {
     return false;
-  }
-  else if(isDefined(self.balcony_node.balconydeathcounter) && self.balcony_node.balconydeathcounter > 0) {
+  } else if(isDefined(self.balcony_node.balconydeathcounter) && self.balcony_node.balconydeathcounter > 0) {
     debug_balcony("not doing balcony death: balconyDeathCounter is at " + self.balcony_node.balconydeathcounter);
 
     self.balcony_node.balconydeathcounter--;

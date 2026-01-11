@@ -48,20 +48,15 @@ getRemainingBurstDelayTime() {
 getBurstDelayTime() {
   if(self usingSidearm()) {
     return randomFloatRange(.15, .55);
-  }
-  else if(self usingShotgun()) {
+  } else if(self usingShotgun()) {
     return randomFloatRange(1.0, 1.7);
-  }
-  else if(self isSniper()) {
+  } else if(self isSniper()) {
     return getSniperBurstDelayTime();
-  }
-  else if(self.fastBurst) {
+  } else if(self.fastBurst) {
     return randomFloatRange(.1, .35);
-  }
-  else if(self usingBoltActionWeapon()) {
+  } else if(self usingBoltActionWeapon()) {
     return randomFloatRange(1.0, 1.5);
-  }
-  else {
+  } else {
     return randomFloatRange(.2, .7);
   }
 }
@@ -153,8 +148,7 @@ shootUntilShootBehaviorChange() {
       }
       if(numShots == 1) {
         self FireUntilOutOfAmmo(animArrayPickRandom("single"), true, numShots);
-      }
-      else {
+      } else {
         self FireUntilOutOfAmmo(animArray(self.shootStyle + numShots), true, numShots);
       }
     } else {
@@ -418,8 +412,7 @@ tryWeaponThrowDown() {
   }
   if(self.secondaryweapon == "") {
     self.weapon = "walther";
-  }
-  else {
+  } else {
     self.weapon = self.secondaryweapon;
   }
   self thread putGunBackInHandOnKillAnimScript();
@@ -509,8 +502,7 @@ getGrenadeThrowOffset(throwAnim) {
   if(offset[2] == 64) {
     if(isDefined(throwAnim)) {
       println("^1Warning: undefined grenade throw animation used; hand offset unknown");
-    }
-    else {
+    } else {
       println("^1Warning: grenade throw animation ", throwAnim, " has no recorded hand offset");
     }
   }
@@ -539,8 +531,7 @@ ThrowGrenadeAtPlayerASAP_combat_utility() {
 setActiveGrenadeTimer(throwingAt) {
   if(isPlayer(throwingAt)) {
     self.activeGrenadeTimer = "player_" + self.grenadeWeapon;
-  }
-  else {
+  } else {
     self.activeGrenadeTimer = "AI_" + self.grenadeWeapon;
   }
   if(!isDefined(anim.grenadeTimers[self.activeGrenadeTimer])) {
@@ -767,8 +758,7 @@ grenadeDebug(state, duration, showMissReason) {
     print3d(self getShootAtPos() + (0, 0, 10), state);
     if(isDefined(showMissReason) && isDefined(self.grenadeMissReason)) {
       print3d(self getShootAtPos() + (0, 0, 0), "Failed: " + self.grenadeMissReason);
-    }
-    else if(isDefined(self.activeGrenadeTimer)) {
+    } else if(isDefined(self.activeGrenadeTimer)) {
       print3d(self getShootAtPos() + (0, 0, 0), "Timer: " + self.activeGrenadeTimer);
     }
     wait .05;
@@ -785,8 +775,7 @@ setGrenadeMissReason(reason) {
 TryGrenadePosProc(throwingAt, destination, optionalAnimation, armOffset) {
   if(!isGrenadePosSafe(throwingAt, destination)) {
     return false;
-  }
-  else if(distanceSquared(self.origin, destination) < 200 * 200) {
+  } else if(distanceSquared(self.origin, destination) < 200 * 200) {
     return false;
   }
   trace = physicsTrace(destination + (0, 0, 1), destination + (0, 0, -500));
@@ -991,8 +980,7 @@ DoGrenadeThrow(throw_anim, nextGrenadeTimeToUse, secondGrenadeOfDouble) {
   self notify("stop grenade check");
   if(attachSide != "none") {
     self detach(model, attachside);
-  }
-  else {
+  } else {
     print("No grenade hand set: ");
     println(throw_anim);
     println("animation in console does not specify grenade hand");
@@ -1237,8 +1225,7 @@ tryRunningToEnemy(ignoreSuppression) {
   }
   if(self isingoal(self.enemy.origin)) {
     self FindReacquireDirectPath(ignoreSuppression);
-  }
-  else {
+  } else {
     self FindReacquireProximatePath(ignoreSuppression);
   }
   if(self ReacquireMove()) {
@@ -1403,8 +1390,7 @@ shouldThrowFlashBangAtEnemy() {
 startFlashBanged() {
   if(isDefined(self.flashduration)) {
     duration = self.flashduration;
-  }
-  else {
+  } else {
     duration = self getFlashBangedStrength() * 1000;
   }
   self.flashendtime = gettime() + duration;
@@ -1432,8 +1418,7 @@ monitorFlash() {
     minamountdist = 0.2;
     if(amount_distance > 1 - minamountdist) {
       amount_distance = 1.0;
-    }
-    else {
+    } else {
       amount_distance = amount_distance / (1 - minamountdist);
     }
     duration = 4.5 * amount_distance;

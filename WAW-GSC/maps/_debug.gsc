@@ -17,11 +17,10 @@ mainDebug() {
   }
   if(getdebugdvar("debug_corner") == "") {
     setdvar("debug_corner", "off");
+  } else {
+    if(getdebugdvar("debug_corner") == "on")
   }
-  else {
-  if(getdebugdvar("debug_corner") == "on")
-  }
-    debug_corner();
+  debug_corner();
   if(getdvar("chain") == "1") {
     thread debugchains();
   }
@@ -135,8 +134,7 @@ debug_enemyPosReplay() {
     if(guy.goodShootPosValid) {
       if(guy.team == "axis") {
         color = (1, 0, 0);
-      }
-      else {
+      } else {
         color = (0, 0, 1);
       }
       nodeOffset = guy.origin + (0, 0, 54);
@@ -432,8 +430,7 @@ debugMisstime() {
   for(;;) {
     if(self.a.misstime <= 0) {
       print3d(self gettagorigin("TAG_EYE") + (0, 0, 15), "hit", (0.3, 1, 1), 1);
-    }
-    else {
+    } else {
       print3d(self gettagorigin("TAG_EYE") + (0, 0, 15), self.a.misstime / 20, (0.3, 1, 1), 1);
     }
     wait(0.05);
@@ -1132,8 +1129,7 @@ deathspawnerPreview() {
       ent = array[p];
       if(isDefined(ent.truecount)) {
         print3d(ent.origin, i + ": " + ent.truecount, (0, 0.8, 0.6), 5);
-      }
-      else {
+      } else {
         print3d(ent.origin, i + ": " + ".", (0, 0.8, 0.6), 5);
       }
     }
@@ -1170,8 +1166,7 @@ lastSightPosWatch() {
     }
     if(guy animscripts\utility::hasEnemySightPos()) {
       org = guy animscripts\utility::getEnemySightPos();
-    }
-    else {
+    } else {
       org = undefined;
     }
     for(;;) {
@@ -1241,14 +1236,12 @@ updateMinimapSetting() {
         mincorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
         if(corners[1].origin[0] > corners[0].origin[0]) {
           maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-        }
-        else {
+        } else {
           mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
         }
         if(corners[1].origin[1] > corners[0].origin[1]) {
           maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-        }
-        else {
+        } else {
           mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
         }
         viewpostocorner = maxcorner - viewpos;
@@ -1291,8 +1284,7 @@ updateMinimapSetting() {
         }
         if(angleside > angletop) {
           angle = angleside;
-        }
-        else {
+        } else {
           angle = angletop;
         }
         znear = minimapheight - 1000;
@@ -1413,8 +1405,7 @@ islookingatorigin(origin) {
   vectordot = vectordot(anglevec, normalvec);
   if(vectordot > insidedot) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -1828,8 +1819,7 @@ debug_animSound() {
   }
   if(level.animsound_locked) {
     level.animsound_hud_locked.alpha = 1;
-  }
-  else {
+  } else {
     level.animsound_hud_locked.alpha = 0;
   }
   if(!isDefined(level.animSounds)) {

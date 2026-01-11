@@ -27,8 +27,7 @@ bot_cache_entrances_to_gametype_array(var_0, var_1, var_2, var_3) {
   foreach(var_10, var_8 in var_0) {
     if(isDefined(var_0[var_10].bottarget)) {
       var_4[var_6] = var_0[var_10].bottarget.origin;
-    }
-    else {
+    } else {
       var_0[var_10].nearest_node = getclosestnodeinsight(var_0[var_10].origin);
 
       if(!isDefined(var_0[var_10].nearest_node)) {
@@ -66,7 +65,7 @@ bot_cache_entrances(var_0, var_1, var_2, var_3) {
     var_6 = getallnodes();
 
     foreach(var_8 in var_6) {
-    var_8.on_path_from = undefined;
+      var_8.on_path_from = undefined;
     }
   }
 
@@ -95,7 +94,7 @@ bot_cache_entrances(var_0, var_1, var_2, var_3) {
         var_16 = maps\mp\bots\_bots_util::get_extended_path(var_0[var_11], var_0[var_13]);
 
         foreach(var_8 in var_16) {
-        var_8.on_path_from[var_1[var_11]][var_1[var_13]] = 1;
+          var_8.on_path_from[var_1[var_11]][var_1[var_13]] = 1;
         }
       }
     }
@@ -321,18 +320,10 @@ bot_gametype_attacker_defender_ai_director_update() {
       var_1 = gettime() + 1000;
 
       foreach(var_3 in var_0) {
-        var_4 = [
-          [level.bot_gametype_allied_attackers_for_team]
-        ](var_3);
-        var_5 = [
-          [level.bot_gametype_allied_defenders_for_team]
-        ](var_3);
-        var_6 = [
-          [level.bot_gametype_attacker_limit_for_team]
-        ](var_3);
-        var_7 = [
-          [level.bot_gametype_defender_limit_for_team]
-        ](var_3);
+        var_4 = [[level.bot_gametype_allied_attackers_for_team]](var_3);
+        var_5 = [[level.bot_gametype_allied_defenders_for_team]](var_3);
+        var_6 = [[level.bot_gametype_attacker_limit_for_team]](var_3);
+        var_7 = [[level.bot_gametype_defender_limit_for_team]](var_3);
 
         if(var_4.size > var_6) {
           var_8 = [];
@@ -497,8 +488,7 @@ monitor_zone_control() {
 
     if(var_1 == "neutral" || var_1 == "none") {
       botzonesetteam(var_0, "free");
-    }
-    else {
+    } else {
       botzonesetteam(var_0, var_1);
     }
 
@@ -516,8 +506,7 @@ monitor_bombzone_control() {
   for(;;) {
     if(self.bombplantedon) {
       var_1 = common_scripts\utility::get_enemy_team(self.ownerteam);
-    }
-    else {
+    } else {
       var_1 = self.ownerteam;
     }
 
@@ -567,8 +556,7 @@ get_bombzone_node_to_plant_on(var_0, var_1) {
   if(var_0.bottargets.size >= 2) {
     if(var_1) {
       var_2 = self botnodescoremultiple(var_0.bottargets, "node_exposed");
-    }
-    else {
+    } else {
       var_2 = self botnodescoremultiple(var_0.bottargets, "node_hide_anywhere", "ignore_occupancy");
     }
 
@@ -613,11 +601,9 @@ get_bombzone_node_to_defuse_on(var_0) {
 
   if(randomfloat(1.0) < var_2) {
     return var_1[0];
-  }
-  else if(randomfloat(1.0) < var_3) {
+  } else if(randomfloat(1.0) < var_3) {
     return var_1[1];
-  }
-  else {
+  } else {
     return common_scripts\utility::random(var_1);
   }
 }
@@ -627,8 +613,7 @@ bombzone_press_use(var_0, var_1, var_2, var_3) {
 
   if(self botgetdifficultysetting("strategyLevel") == 1) {
     var_4 = 40;
-  }
-  else if(self botgetdifficultysetting("strategyLevel") >= 2) {
+  } else if(self botgetdifficultysetting("strategyLevel") >= 2) {
     var_4 = 80;
   }
 
@@ -683,8 +668,7 @@ get_ai_hearing_bomb_plant_sound(var_0) {
 
     if(var_0 == "plant") {
       var_5 = 300 + var_4 botgetdifficultysetting("strategyLevel") * 100;
-    }
-    else if(var_0 == "defuse") {
+    } else if(var_0 == "defuse") {
       var_5 = 500 + var_4 botgetdifficultysetting("strategyLevel") * 500;
     }
 

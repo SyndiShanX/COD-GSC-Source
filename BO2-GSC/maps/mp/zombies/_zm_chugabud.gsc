@@ -26,8 +26,7 @@ init() {
 
 chugabug_
 
-chugabud_player_init() {
-}
+chugabud_player_init() {}
 
 chugabud_laststand() {
   self endon("player_suicide");
@@ -42,8 +41,7 @@ chugabud_laststand() {
 
   if(isDefined(self.insta_killed) && self.insta_killed || isDefined(self.disable_chugabud_corpse)) {
     create_corpse = 0;
-  }
-  else {
+  } else {
     create_corpse = 1;
   }
 
@@ -261,7 +259,7 @@ chugabud_give_loadout() {
 
   if(loadout.weapons.size > 1 || primaries.size > 1) {
     foreach(weapon in primaries) {
-    self takeweapon(weapon);
+      self takeweapon(weapon);
     }
   }
 
@@ -492,9 +490,9 @@ get_chugabug_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_height
 
             if(isDefined(level._chugabud_reject_node_override_func)) {
               override_abort = [
-            }
+                }
                 [level._chugabud_reject_node_override_func]
-              ](v_origin, n_node);
+            ](v_origin, n_node);
 
             if(!override_abort) {
               found_node = n_node;
@@ -561,7 +559,7 @@ chugabud_save_perks(ent) {
   perk_array = ent get_perk_array(1);
 
   foreach(perk in perk_array) {
-  ent unsetperk(perk);
+    ent unsetperk(perk);
   }
 
   return perk_array;
@@ -595,13 +593,12 @@ chugabud_hostmigration() {
     chugabuds = getEntArray("player_chugabud_model", "script_noteworthy");
 
     foreach(model in chugabuds) {
-    playFXOnTag(level._effect["powerup_on"], model, "tag_origin");
+      playFXOnTag(level._effect["powerup_on"], model, "tag_origin");
     }
   }
 }
 
-player_revived_cleanup_chugabud_corpse() {
-}
+player_revived_cleanup_chugabud_corpse() {}
 
 player_has_chugabud_corpse() {
   if(isDefined(self.e_chugabud_corpse)) {

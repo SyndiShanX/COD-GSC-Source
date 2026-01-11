@@ -12,8 +12,7 @@ init() {
   level.objPoints = [];
   if(level.splitscreen) {
     level.objPointSize = 15;
-  }
-  else {
+  } else {
     level.objPointSize = 8;
   }
   level.objpoint_alpha_default = .5;
@@ -34,8 +33,7 @@ createTeamObjpoint(name, origin, team, shader, alpha, scale) {
   }
   if(team != "all") {
     objPoint = newTeamHudElem(team);
-  }
-  else {
+  } else {
     objPoint = newHudElem();
   }
   objPoint.name = name;
@@ -49,8 +47,7 @@ createTeamObjpoint(name, origin, team, shader, alpha, scale) {
   objPoint setWaypoint(true);
   if(isDefined(alpha)) {
     objPoint.alpha = alpha;
-  }
-  else {
+  } else {
     objPoint.alpha = level.objpoint_alpha_default;
   }
   objPoint.baseAlpha = objPoint.alpha;
@@ -100,8 +97,7 @@ setOriginByName(name, origin) {
 getObjPointByName(name) {
   if(isDefined(level.objPoints[name])) {
     return level.objPoints[name];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -109,8 +105,7 @@ getObjPointByName(name) {
 getObjPointByIndex(index) {
   if(isDefined(level.objPointNames[index])) {
     return level.objPoints[level.objPointNames[index]];
-  }
-  else {
+  } else {
     return undefined;
   }
 }

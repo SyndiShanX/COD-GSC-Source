@@ -116,8 +116,7 @@ gate_splash() {
 
     if(level.gameskill >= 3) {
       level.time_splash SetValue(FLAG_TIME_VALUE_VETERAN);
-    }
-    else {
+    } else {
       level.time_splash SetValue(FLAG_TIME_VALUE);
     }
   }
@@ -138,7 +137,7 @@ finishline() {
   trigger waittill("trigger", player);
 
   foreach(player in level.players) {
-  player.finish_time = getTime();
+    player.finish_time = getTime();
   }
 
   assert(isplayer(player));

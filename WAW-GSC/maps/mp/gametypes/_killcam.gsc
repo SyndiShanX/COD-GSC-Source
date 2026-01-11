@@ -55,8 +55,7 @@ killcam(
   }
   if(getdvar("scr_killcam_posttime") == "") {
     postdelay = 2;
-  }
-  else {
+  } else {
     postdelay = getdvarfloat("scr_killcam_posttime");
     if(postdelay < 0.05) {
       postdelay = 0.05;
@@ -122,8 +121,7 @@ killcam(
   }
   if(respawn) {
     self.kc_skiptext setText(&"PLATFORM_PRESS_TO_RESPAWN");
-  }
-  else {
+  } else {
     self.kc_skiptext setText(&"PLATFORM_PRESS_TO_SKIP");
   }
   self.kc_skiptext.alpha = 1;
@@ -132,8 +130,7 @@ killcam(
       self.kc_timer = createFontString("objective", 2.0);
       if(level.console) {
         self.kc_timer setPoint("BOTTOM", undefined, 0, -80);
-      }
-      else {
+      } else {
         self.kc_timer setPoint("BOTTOM", undefined, 0, -60);
       }
       self.kc_timer.archived = false;

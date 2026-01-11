@@ -279,6 +279,6 @@ field_birds() {
   common_scripts\utility::flag_wait("field_entrance");
 
   foreach(var_7 in var_0) {
-  var_7 maps\interactive_models\_birds::birds_loadfromstruct();
+    var_7 maps\interactive_models\_birds::birds_loadfromstruct();
   }
 }

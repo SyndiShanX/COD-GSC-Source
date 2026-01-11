@@ -39,15 +39,13 @@ init(notifyname, origin, angles, theanim, animmode, root, rate, goaltime, lerpti
 
   if(isDefined(animmode)) {
     self.codescripted["AnimMode"] = animmode;
-  }
-  else {
+  } else {
     self.codescripted["AnimMode"] = "normal";
   }
 
   if(isDefined(root)) {
     self.codescripted["root"] = root;
-  }
-  else {
+  } else {
     self.codescripted["root"] = % body;
   }
 
@@ -55,15 +53,13 @@ init(notifyname, origin, angles, theanim, animmode, root, rate, goaltime, lerpti
 
   if(isDefined(goaltime)) {
     self.codescripted["goalTime"] = goaltime;
-  }
-  else {
+  } else {
     self.codescripted["goalTime"] = 0.2;
   }
 
   if(isDefined(lerptime)) {
     self.codescripted["lerpTime"] = lerptime;
-  }
-  else {
+  } else {
     self.codescripted["lerpTime"] = 0.0;
   }
 }

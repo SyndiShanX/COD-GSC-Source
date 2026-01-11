@@ -146,15 +146,13 @@ create_loopsound() {
     if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
       if(isDefined(self.looper)) {
         self.looper thread loop_fx_sound(self.v["soundalias"], self.v["origin"], "death");
-      }
-      else {
+      } else {
         thread loop_fx_sound(self.v["soundalias"], self.v["origin"], "stop_loop");
       }
     } else {
       if(isDefined(self.looper)) {
         self.looper thread loop_fx_sound(self.v["soundalias"], self.v["origin"]);
-      }
-      else {
+      } else {
         thread loop_fx_sound(self.v["soundalias"], self.v["origin"]);
       }
     }
@@ -190,8 +188,7 @@ loopfxthread() {
 
     if(isDefined(self.fxStop)) {
       level waittill("stop fx" + self.fxStop);
-    }
-    else {
+    } else {
       return;
     }
 
@@ -201,8 +198,7 @@ loopfxthread() {
 
     if(isDefined(self.fxStart)) {
       level waittill("start fx" + self.fxStart);
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -369,11 +365,10 @@ setup_fx() {
 
   //	println ("^a Command:", self.script_fxcommand, " Effect:", self.script_fxID, " Delay:", self.script_delay, " ", self.origin);
   if(isDefined(self.model)) {
-    if(self.model == "toilet") {
+    if(self.model == "toilet") {}
+    self thread burnville_paratrooper_hack();
+    return;
   }
-      self thread burnville_paratrooper_hack();
-      return;
-    }
 
   org = undefined;
   if(isDefined(self.target)) {

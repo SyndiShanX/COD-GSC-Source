@@ -523,8 +523,7 @@ inittransdistandanglesforarchetype(var_0) {
       if(isDefined(anim.archetypes[var_0]["cover_exit"][var_4]) && isDefined(anim.archetypes[var_0]["cover_exit"][var_4][var_2])) {
         if(animhasnotetrack(anim.archetypes[var_0]["cover_exit"][var_4][var_2], "code_move")) {
           var_5 = getnotetracktimes(anim.archetypes[var_0]["cover_exit"][var_4][var_2], "code_move")[0];
-        }
-        else {
+        } else {
           var_5 = 1;
         }
 

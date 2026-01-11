@@ -105,8 +105,7 @@ evasive_startManeuvers(vehicle, points) {
 
     if(isDefined(points[i + 1])) {
       evadeDirectionYaw = vectorToAngles(points[i + 1]["pos"] - points[i]["pos"]);
-    }
-    else {
+    } else {
       evadeDirectionYaw = (0, forwardYaw, 0);
     }
 
@@ -114,8 +113,7 @@ evasive_startManeuvers(vehicle, points) {
     goalYawAngle = evadeDirectionYaw[1];
     if(points[i]["goalYawMethod"] == "average") {
       goalYawAngle = ((evadeDirectionYaw[1] + forwardYaw) / 2);
-    }
-    else if(points[i]["goalYawMethod"] == "forward") {
+    } else if(points[i]["goalYawMethod"] == "forward") {
       goalYawAngle = vehicle.angles[1];
     }
 

@@ -215,8 +215,7 @@ prevent_riders_from_unloading() {
   self.dontunloadonend = 1;
 }
 
-add_vehicle_to_convoy_target_pool() {
-}
+add_vehicle_to_convoy_target_pool() {}
 
 find_target_after_getout(a_target_ents) {
   self endon("death");
@@ -234,8 +233,7 @@ find_target_after_getout(a_target_ents) {
 
     if(!isnodeoccupied(nd_best) && (isDefined(nd_best.script_string) && nd_best.script_string == self.team)) {
       b_found_node = 1;
-    }
-    else {
+    } else {
       arrayremovevalue(a_cover, nd_best);
       wait 0.05;
     }
@@ -283,8 +281,7 @@ add_missile_turret_target() {
   if(isDefined(self.classname) && self.classname == "script_vehicle") {
     if(self.vehicletype == "civ_van_sprinter") {
       v_offset = vectorscale((0, 0, 1), 60.0);
-    }
-    else if(self.vehicletype == "civ_bigrig_la2") {
+    } else if(self.vehicletype == "civ_bigrig_la2") {
       v_offset = vectorscale((0, 0, 1), 80.0);
     }
   }
@@ -353,8 +350,7 @@ bigrig_add_trailer() {
   }
 }
 
-_play_bigrig_trailer_anim() {
-}
+_play_bigrig_trailer_anim() {}
 
 convoy_trigger_proc() {
   self maps\la_2_convoy::_waittill_triggered_by_convoy();
@@ -393,8 +389,7 @@ toggle_occluders() {
 
     if(b_is_in_volume) {
       n_value = 1;
-    }
-    else {
+    } else {
       n_value = 0;
     }
 
@@ -465,7 +460,7 @@ la_drones_setup() {
   a_drone_triggers = arraycombine(a_drone_triggers, a_drone_triggers_allies, 1, 0);
 
   foreach(drone_trigger in a_drone_triggers) {
-  maps\_drones::drones_speed_modifier(drone_trigger.script_string, -0.3, 0.3);
+    maps\_drones::drones_speed_modifier(drone_trigger.script_string, -0.3, 0.3);
   }
 
   maps\_drones::drones_speed_modifier("warehouse_st_right_blockade", -0.2, 0.4);
@@ -488,8 +483,7 @@ _drone_throws_molotov_proc() {
 drones_assign_global_spawner(str_side, str_spawner_targetname) {
   if(str_side == "allies") {
     str_targetname = "drone_allies";
-  }
-  else {
+  } else {
     str_targetname = "drone_axis";
   }
 
@@ -580,8 +574,7 @@ la_2_objectives() {
 
   if(!flag("harper_dead")) {
     maps\_objectives::set_objective(level.obj_follow_van, level.convoy.vh_van, "follow");
-  }
-  else {
+  } else {
     maps\_objectives::set_objective(level.obj_follow_ambulance, level.convoy.vh_van, "follow");
   }
 
@@ -682,11 +675,9 @@ convoy_move_to_position(str_struct_names) {
   }
 }
 
-convoy_move_to_dogfight_position(str_structs_name) {
-}
+convoy_move_to_dogfight_position(str_structs_name) {}
 
-skipto_f35_wakeup() {
-}
+skipto_f35_wakeup() {}
 
 skipto_f35_boarding() {
   skipto_teleport("f35_boarding_skipto");

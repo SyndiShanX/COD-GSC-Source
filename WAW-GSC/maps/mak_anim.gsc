@@ -435,8 +435,7 @@ event2_snare_trap(guy) {
   what_to_gib = randomintrange(0, 2);
   if(0) {
     guy.a.gib_ref = "left_arm";
-  }
-  else {
+  } else {
     guy.a.gib_ref = "right_arm";
   }
   dist = Distance(node.origin, branch.origin);

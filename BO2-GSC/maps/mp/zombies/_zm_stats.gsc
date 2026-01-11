@@ -214,8 +214,7 @@ update_players_stats_at_match_end(players) {
   if(isDefined(level.gamemodulewinningteam)) {
     if(level.gamemodulewinningteam == "B") {
       matchrecorderincrementheaderstat("winningTeam", 1);
-    }
-    else if(level.gamemodulewinningteam == "A") {
+    } else if(level.gamemodulewinningteam == "A") {
       matchrecorderincrementheaderstat("winningTeam", 2);
     }
   }
@@ -296,11 +295,9 @@ update_playing_utc_time(matchendutctime) {
   }
 }
 
-survival_classic_custom_stat_update() {
-}
+survival_classic_custom_stat_update() {}
 
-grief_custom_stat_update() {
-}
+grief_custom_stat_update() {}
 
 add_game_mode_group_stat(game_mode, stat_name, value) {
   if(is_true(level.zm_disable_recording_stats)) {
@@ -422,8 +419,7 @@ set_map_weaponlocker_stat(stat_name, value, map) {
   }
   if(isDefined(value)) {
     self setdstat("PlayerStatsByMap", map, "weaponLocker", stat_name, value);
-  }
-  else {
+  } else {
     self setdstat("PlayerStatsByMap", map, "weaponLocker", stat_name, 0);
   }
 }
@@ -562,8 +558,7 @@ get_stat_distance_traveled() {
 
   if(miles < 1 && remainder < 0.5) {
     miles = 1;
-  }
-  else if(remainder >= 0.5) {
+  } else if(remainder >= 0.5) {
     miles++;
   }
 
@@ -938,17 +933,13 @@ do_stats_for_gibs(zombie, limb_tags_array) {
 
       if(limb == level._zombie_gib_piece_index_right_arm) {
         stat_name = "right_arm_gibs";
-      }
-      else if(limb == level._zombie_gib_piece_index_left_arm) {
+      } else if(limb == level._zombie_gib_piece_index_left_arm) {
         stat_name = "left_arm_gibs";
-      }
-      else if(limb == level._zombie_gib_piece_index_right_leg) {
+      } else if(limb == level._zombie_gib_piece_index_right_leg) {
         stat_name = "right_leg_gibs";
-      }
-      else if(limb == level._zombie_gib_piece_index_left_leg) {
+      } else if(limb == level._zombie_gib_piece_index_left_leg) {
         stat_name = "left_leg_gibs";
-      }
-      else if(limb == level._zombie_gib_piece_index_head) {
+      } else if(limb == level._zombie_gib_piece_index_head) {
         stat_name = "head_gibs";
       }
 

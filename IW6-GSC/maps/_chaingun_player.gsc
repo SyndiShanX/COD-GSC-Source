@@ -237,8 +237,7 @@ player_use_chaingun_with_viewmodel(var_0, var_1, var_2) {
     if(var_10 != var_9) {
       if(var_9) {
         var_0 thread animate_turret_with_viewmodel("chaingun_hands_idle2fire", "chaingun_hands_fire", "turret_gun_idle2fire", "turret_gun_fire");
-      }
-      else {
+      } else {
         var_0 thread animate_turret_with_viewmodel("chaingun_hands_idle2fire", "chaingun_hands_idle", "turret_gun_fire2idle", "turret_gun_idle");
       }
 

@@ -203,7 +203,7 @@ createfx_control_room_closet() {
   a_m_destroyed = getEntArray("control_room_destroyed", "targetname");
 
   foreach(m_destroyed in a_m_destroyed) {
-  m_destroyed hide();
+    m_destroyed hide();
   }
 
   m_door = getent("trappedinthecloset", "targetname");
@@ -211,12 +211,12 @@ createfx_control_room_closet() {
   level waittill("bomb_exploded");
 
   foreach(m_destroyed in a_m_destroyed) {
-  m_destroyed show();
+    m_destroyed show();
   }
 
   a_m_clean = getEntArray("control_room_clean", "targetname");
 
   foreach(m_clean in a_m_clean) {
-  m_clean delete();
+    m_clean delete();
   }
 }

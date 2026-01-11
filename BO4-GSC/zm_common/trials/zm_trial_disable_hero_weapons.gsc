@@ -8,7 +8,6 @@
 #include scripts\zm_common\trials\zm_trial_disable_upgraded_weapons;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_trial_disable_hero_weapons;
 
 autoexec __init__system__() {
@@ -24,7 +23,7 @@ __init__() {
 }
 
 private on_begin() {
-  weapon_names = array(#"hero_chakram_lv1", #"hero_chakram_lv2", #"hero_chakram_lv3", #"hero_chakram_lh_lv1", #"hero_chakram_lh_lv2", #"hero_chakram_lh_lv3", #"hero_hammer_lv1", #"hero_hammer_lv2", #"hero_hammer_lv3", #"hero_katana_t8_lv1", #"hero_katana_t8_lv2", #"hero_katana_t8_lv3", #"hero_scepter_lv1", #"hero_scepter_lv2", #"hero_scepter_lv3", #"hero_sword_pistol_lv1", #"hero_sword_pistol_lv2", #"hero_sword_pistol_lv3", #"hero_sword_pistol_lh_lv1", #"hero_sword_pistol_lh_lv2", #"hero_sword_pistol_lh_lv3");
+  weapon_names = array(#"hero_chakram_lv1", # "hero_chakram_lv2", # "hero_chakram_lv3", # "hero_chakram_lh_lv1", # "hero_chakram_lh_lv2", # "hero_chakram_lh_lv3", # "hero_hammer_lv1", # "hero_hammer_lv2", # "hero_hammer_lv3", # "hero_katana_t8_lv1", # "hero_katana_t8_lv2", # "hero_katana_t8_lv3", # "hero_scepter_lv1", # "hero_scepter_lv2", # "hero_scepter_lv3", # "hero_sword_pistol_lv1", # "hero_sword_pistol_lv2", # "hero_sword_pistol_lv3", # "hero_sword_pistol_lh_lv1", # "hero_sword_pistol_lh_lv2", # "hero_sword_pistol_lh_lv3");
   level.var_3e2ac3b6 = [];
 
   foreach(weapon_name in weapon_names) {

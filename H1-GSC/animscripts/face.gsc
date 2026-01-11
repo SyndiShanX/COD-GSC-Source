@@ -180,8 +180,7 @@ playfacethread(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       if(self.a.facewaitforresult == "notify") {
         playfacethread(self.facewaiting[var_6]["facialanim"], self.facewaiting[var_6]["soundAlias"], self.facewaiting[var_6]["importance"], self.facewaiting[var_6]["notifyString"]);
-      }
-      else if(isDefined(var_3)) {
+      } else if(isDefined(var_3)) {
         self.faceresult = "failed";
         self notify(var_3);
       }
@@ -346,8 +345,7 @@ playfacialanim(var_0, var_1, var_2) {
 
   if(isDefined(self.bdisabledefaultfacialanims) && self.bdisabledefaultfacialanims) {
     self clearanim( % head, 0.2);
-  }
-  else {
+  } else {
     if(isDefined(var_0) && animhasfacialoverride(var_0)) {
       self clearanim( % head, 0.2);
       return;
@@ -362,8 +360,7 @@ playfacialanim(var_0, var_1, var_2) {
     }
     if(isDefined(var_2) && var_2 >= 0 && var_2 < anim.facial[var_1].size) {
       var_3 = var_2;
-    }
-    else {
+    } else {
       var_3 = randomint(anim.facial[var_1].size);
     }
 
@@ -373,8 +370,7 @@ playfacialanim(var_0, var_1, var_2) {
     if(var_1 == "death") {
       if(isDefined(var_0)) {
         thread end_facial_on_death(getanimlength(var_0));
-      }
-      else {
+      } else {
         thread end_facial_on_death();
       }
     }

@@ -1171,8 +1171,7 @@ loco_gunhold_player_drop_weapon(var_0) {
 
   if(maps\_utility::is_gen4()) {
     thread maps\_art::dof_enable_script(0, 2, 1.8, 20, 61, 6, 0.1);
-  }
-  else {
+  } else {
     thread maps\_art::dof_enable_script(0, 2, 1.8, 20, 61, 2.2, 0.16);
   }
 

@@ -49,8 +49,7 @@ init() {
   level.near_miss = 0;
 }
 
-screecher_debug() {
-}
+screecher_debug() {}
 
 screecher_spawning_logic() {
   level endon("intermission");
@@ -121,11 +120,9 @@ screecher_spawning_logic() {
 
       if(spawn_points.size >= 3) {
         spawn_point = spawn_points[2];
-      }
-      else if(spawn_points.size >= 2) {
+      } else if(spawn_points.size >= 2) {
         spawn_point = spawn_points[1];
-      }
-      else if(spawn_points.size >= 1) {
+      } else if(spawn_points.size >= 1) {
         spawn_point = spawn_points[0];
       }
 
@@ -269,8 +266,7 @@ screecher_get_closest_valid_player(origin, ignore_player) {
   while(!valid_player_found) {
     if(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths) {
       player = get_closest_player_using_paths(origin, players);
-    }
-    else {
+    } else {
       player = getclosest(origin, players);
     }
 
@@ -332,8 +328,7 @@ screecher_find_flesh() {
 
     if(isDefined(self.favoriteenemy)) {
       self thread zombie_pathing();
-    }
-    else {
+    } else {
       self thread screecher_runaway();
     }
 
@@ -371,8 +366,7 @@ screecher_prespawn() {
     }
 
     self forceteleport(spot.origin, spot.angles);
-  } else {
-  }
+  } else {}
 
   self set_zombie_run_cycle("super_sprint");
   self setphysparams(15, 0, 24);
@@ -511,8 +505,7 @@ screecher_attack() {
 
   if(isDefined(player.screecher)) {
     return;
-  }
-  else {
+  } else {
     player.screecher = self;
   }
 
@@ -777,9 +770,7 @@ screecher_detach(player) {
 
     if(isDefined(player.screecher_weapon) && player.screecher_weapon != "none" && is_player_valid(player) && !is_equipment_that_blocks_purchase(player.screecher_weapon)) {
       player switchtoweapon(player.screecher_weapon);
-    }
-    else if(flag("solo_game") && player hasperk("specialty_quickrevive")) {
-    } else if(!player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
+    } else if(flag("solo_game") && player hasperk("specialty_quickrevive")) {} else if(!player maps\mp\zombies\_zm_laststand::player_is_in_laststand()) {
       primaryweapons = player getweaponslistprimaries();
 
       if(isDefined(primaryweapons) && primaryweapons.size > 0) {
@@ -896,8 +887,7 @@ screecher_cleanup() {
 
       if(player.screecher_weapon != "none" && is_player_valid(player)) {
         player switchtoweapon(player.screecher_weapon);
-      }
-      else {
+      } else {
         primaryweapons = player getweaponslistprimaries();
 
         if(isDefined(primaryweapons) && primaryweapons.size > 0) {
@@ -993,15 +983,13 @@ screecher_melee_damage(player) {
   if(player hasweapon("bowie_knife_zm")) {
     if(one_player) {
       melee_score = 30;
-    }
-    else {
+    } else {
       melee_score = 10;
     }
   } else if(player hasweapon("tazer_knuckles_zm")) {
     if(one_player) {
       melee_score = 30;
-    }
-    else {
+    } else {
       melee_score = 15;
     }
   } else if(one_player)
@@ -1032,8 +1020,7 @@ screecher_melee_damage(player) {
 
   if(level.zombie_vars[player.team]["zombie_insta_kill"]) {
     self.player_score = 30;
-  }
-  else {
+  } else {
     player thread do_player_general_vox("general", "screecher_cut");
   }
 
@@ -1136,8 +1123,7 @@ screecher_print(str) {
     if(isDefined(self)) {
       if(isDefined(self.debug_msg)) {
         self.debug_msg[self.debug_msg.size] = str;
-      }
-      else {
+      } else {
         self.debug_msg = [];
         self.debug_msg[self.debug_msg.size] = str;
       }

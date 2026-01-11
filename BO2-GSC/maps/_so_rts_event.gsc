@@ -112,8 +112,7 @@ event_populate(table) {
 event_clearall(type) {
   if(!isDefined(type)) {
     level.rts.event_queue = [];
-  }
-  else {
+  } else {
     unprocessed = [];
 
     for(i = 0; i < level.rts.event_queue.size; i++) {
@@ -203,8 +202,7 @@ event_process() {
 
         if(level.rts.event_types[event.data.type] == "sfx" || level.rts.event_types[event.data.type] == "fx") {
           tabtype = "\\t\\t\\t";
-        }
-        else {
+        } else {
           tabtype = "\\t\\t";
         }
 
@@ -267,8 +265,7 @@ event_listener(event) {
 
   if(isDefined(event.onetimeonly) && event.onetimeonly) {
     return;
-  }
-  else {
+  } else {
     level thread event_listener(event);
   }
 }
@@ -334,8 +331,7 @@ trigger_event(ref, param) {
 
   if(isDefined(level.rts.events[ref])) {
     return add_event_to_trigger(level.rts.events[ref], param);
-  }
-  else {
+  } else {
     println("@@@@@ (" + gettime() + ") WARNING: Event triggered but no reference was found (" + ref + ")");
 
   }
@@ -383,16 +379,14 @@ event_trigger(event) {
       if(isDefined(event.data.param2)) {
         if(event.data.param2 == "player") {
           target = level.rts.player;
-        }
-        else {
+        } else {
           target = getent(event.data.param2, "targetname");
         }
       }
 
       if(isDefined(target) && (target == level.rts.player || isDefined(target.rts_unloaded))) {
         thread event_playSound(alias, event.def.ref, target);
-      }
-      else {
+      } else {
         target = event.data.param3;
         assert(target == "allies" || target == "axis" || target == "dparam", "Unexpected data passed to event_trigger Type:" + event.data.type + " Ref:" + event.def.ref);
 
@@ -429,8 +423,7 @@ event_trigger(event) {
       if(isDefined(event.data.param2)) {
         if(event.data.param2 == "player") {
           position = level.rts.player.origin;
-        }
-        else {
+        } else {
           target = getent(event.data.param2, "targetname");
           assert(isDefined(target), "entity not found");
 
@@ -446,11 +439,9 @@ event_trigger(event) {
 
       if(isDefined(entity)) {
         entity playSound(alias);
-      }
-      else if(isDefined(position)) {
+      } else if(isDefined(position)) {
         playsoundatposition(alias, position);
-      }
-      else {
+      } else {
         level.rts.player playlocalsound(alias);
       }
 
@@ -469,8 +460,7 @@ event_trigger(event) {
       if(isDefined(tag)) {
         if(isDefined(event.dparam)) {
           entity = event.dparam;
-        }
-        else if(isDefined(event.data.param2)) {
+        } else if(isDefined(event.data.param2)) {
           entity = getent(event.data.param2, "targetname");
         }
 
@@ -479,12 +469,10 @@ event_trigger(event) {
       } else {
         if(isDefined(event.dparam)) {
           position = event.dparam;
-        }
-        else if(isDefined(event.data.param2)) {
+        } else if(isDefined(event.data.param2)) {
           if(event.data.param2 == "player") {
             position = level.rts.player.origin;
-          }
-          else {
+          } else {
             entity = getent(event.data.param2, "targetname");
             assert(isDefined(entity), "entity not found");
             position = entity.origin;

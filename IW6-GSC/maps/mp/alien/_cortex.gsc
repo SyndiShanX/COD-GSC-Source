@@ -118,11 +118,9 @@ cortex_blast(var_0) {
 
   if(isDefined(level.cortex_carrier)) {
     var_3 = level.cortex_carrier;
-  }
-  else if(isDefined(level.cortex)) {
+  } else if(isDefined(level.cortex)) {
     var_3 = level.cortex;
-  }
-  else if(isDefined(var_0)) {
+  } else if(isDefined(var_0)) {
     var_3 = var_0;
   }
 
@@ -157,8 +155,7 @@ place_cortex(var_0) {
 
   if(var_2["fraction"] == 1) {
     return;
-  }
-  else {
+  } else {
     var_1 = var_2["position"];
   }
 
@@ -181,8 +178,7 @@ place_cortex(var_0) {
 restore_last_weapon() {
   if(self.lastweapon != "aliendeployable_crate_marker_mp") {
     self switchtoweapon(self.lastweapon);
-  }
-  else {
+  } else {
     self switchtoweapon(self getweaponslistprimaries()[0]);
   }
 }
@@ -200,8 +196,7 @@ create_cortex(var_0, var_1) {
 
   if(var_2) {
     level.cortex thread maps\mp\alien\_drill::angles_to_ground(var_0, var_1, (0, 0, 0));
-  }
-  else {
+  } else {
     level.cortex.angles = var_1;
   }
 
@@ -282,8 +277,7 @@ turn_off_cortex() {
 
   if(isDefined(level.cortex_use_trigger)) {
     level.cortex_use_trigger makeunusable();
-  }
-  else {
+  } else {
     level.cortex makeunusable();
   }
 
@@ -299,8 +293,7 @@ turn_on_cortex() {
 
   if(isDefined(level.cortex_use_trigger)) {
     level.cortex_use_trigger makeusable();
-  }
-  else {
+  } else {
     level.cortex makeusable();
   }
 

@@ -6,8 +6,7 @@
 satfarm_m880_init(var_0, var_1, var_2) {
   if(isDefined(var_1)) {
     var_3 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(var_0);
-  }
-  else {
+  } else {
     var_3 = maps\_vehicle::spawn_vehicle_from_targetname(var_0);
   }
 
@@ -28,8 +27,7 @@ satfarm_m880_init(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_3 thread launch_prep_drive();
-  }
-  else {
+  } else {
     var_3 thread launch_prep_static();
   }
 }

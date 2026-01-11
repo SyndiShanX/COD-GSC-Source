@@ -71,14 +71,11 @@ play_screen_fx_dirt(localclientnum) {
 
   if(pick_one == 0) {
     animateui(localclientnum, "fullscreen_dirt", "dirt", "in", 0);
-  }
-  else if(pick_one == 1) {
+  } else if(pick_one == 1) {
     animateui(localclientnum, "fullscreen_dirt", "dirt_right_splash", "in", 0);
-  }
-  else if(pick_one == 2) {
+  } else if(pick_one == 2) {
     animateui(localclientnum, "fullscreen_dirt", "dirt_left_splash", "in", 0);
-  }
-  else {
+  } else {
     animateui(localclientnum, "fullscreen_dirt", "blurred_dirt_random", "in", 0);
   }
 }
@@ -88,14 +85,11 @@ play_screen_fx_dust(localclientnum) {
 
   if(pick_one == 0) {
     animateui(localclientnum, "fullscreen_dust", "dust", "in", 0);
-  }
-  else if(pick_one == 1) {
+  } else if(pick_one == 1) {
     animateui(localclientnum, "fullscreen_dust", "dust_right_splash", "in", 0);
-  }
-  else if(pick_one == 2) {
+  } else if(pick_one == 2) {
     animateui(localclientnum, "fullscreen_dust", "dust_left_splash", "in", 0);
-  }
-  else {
+  } else {
     animateui(localclientnum, "fullscreen_dust", "blurred_dust_random", "in", 0);
   }
 }
@@ -117,8 +111,7 @@ play_driving_fx_firstperson(localclientnum, speed, speed_fraction) {
 
         if(screen_fx_type == "dirt") {
           play_screen_fx_dirt(localclientnum);
-        }
-        else {
+        } else {
           play_screen_fx_dust(localclientnum);
         }
 
@@ -145,8 +138,7 @@ play_driving_fx(localclientnum) {
 
     if(maxspeed > 0) {
       speed_fraction = abs(speed) / maxspeed;
-    }
-    else {
+    } else {
       speed_fraction = 0;
     }
 

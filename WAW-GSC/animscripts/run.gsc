@@ -25,15 +25,13 @@ MoveRun() {
       if(self animscripts\utility::IsInCombat()) {
         if(isDefined(self.run_combatanim)) {
           MoveStandCombatOverride();
-        }
-        else {
+        } else {
           MoveStandCombatNormal();
         }
       } else {
         if(isDefined(self.run_noncombatanim)) {
           MoveStandNoncombatOverride();
-        }
-        else {
+        } else {
           MoveStandNoncombatNormal();
         }
       }
@@ -44,8 +42,7 @@ MoveRun() {
       }
       if(isDefined(self.crouchrun_combatanim)) {
         MoveCrouchRunOverride();
-      }
-      else {
+      } else {
         MoveCrouchRunNormal();
       }
       break;
@@ -321,8 +318,7 @@ runLoopIsNearBeginning() {
   animfraction *= 3.0;
   if(animfraction > 3) {
     animfraction -= 2.0;
-  }
-  else if(animfraction > 2) {
+  } else if(animfraction > 2) {
     animfraction -= 1.0;
   }
   if(animfraction < .15 / loopLength) {
@@ -420,8 +416,7 @@ changeWeaponStandRun() {
   }
   if(wantShotgun) {
     shotgunSwitchStandRunInternal("shotgunPullout", % shotgun_CQBrun_pullout, "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
-  }
-  else {
+  } else {
     shotgunSwitchStandRunInternal("shotgunPutaway", % shotgun_CQBrun_putaway, "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
   }
   self notify("switchEnded");

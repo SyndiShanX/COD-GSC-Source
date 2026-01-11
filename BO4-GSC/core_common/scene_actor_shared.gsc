@@ -10,7 +10,6 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\util_shared;
-
 #namespace scene;
 
 class csceneactor: csceneobject {
@@ -54,7 +53,7 @@ class csceneactor: csceneobject {
   function function_d09b043() {
     self notify(#"hash_74f6d3a1ddcff42");
     self endon(#"hash_74f6d3a1ddcff42");
-    _o_scene endon(#"scene_done", #"scene_stop", #"scene_skip_completed", #"hash_3168dab591a18b9b");
+    _o_scene endon(#"scene_done", # "scene_stop", # "scene_skip_completed", # "hash_3168dab591a18b9b");
     s_waitresult = _e waittill(#"death");
     var_1f97724a = 1;
     _e notify(#"hash_6e7fd8207fd988c6", {

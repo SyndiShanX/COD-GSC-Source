@@ -8,7 +8,6 @@
 #include scripts\core_common\filter_shared;
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
-
 #namespace visionset_mgr;
 
 autoexec __init__system__() {
@@ -46,9 +45,9 @@ register_visionset_info(name, version, lerp_step_count, visionset_from, visionse
     return;
   }
 
-  level.vsmgr[#"visionset"].info[name].visionset_from = visionset_from;
-  level.vsmgr[#"visionset"].info[name].visionset_to = visionset_to;
-  level.vsmgr[#"visionset"].info[name].visionset_type = visionset_type;
+  level.vsmgr[# "visionset"].info[name].visionset_from = visionset_from;
+  level.vsmgr[# "visionset"].info[name].visionset_to = visionset_to;
+  level.vsmgr[# "visionset"].info[name].visionset_type = visionset_type;
 }
 
 register_overlay_info_style_none(name, version, lerp_step_count) {
@@ -56,7 +55,7 @@ register_overlay_info_style_none(name, version, lerp_step_count) {
     return;
   }
 
-  level.vsmgr[#"overlay"].info[name].style = 0;
+  level.vsmgr[# "overlay"].info[name].style = 0;
 }
 
 register_overlay_info_style_filter(name, version, lerp_step_count, filter_index, pass_index, material_name, constant_index) {
@@ -64,11 +63,11 @@ register_overlay_info_style_filter(name, version, lerp_step_count, filter_index,
     return;
   }
 
-  level.vsmgr[#"overlay"].info[name].style = 2;
-  level.vsmgr[#"overlay"].info[name].filter_index = filter_index;
-  level.vsmgr[#"overlay"].info[name].pass_index = pass_index;
-  level.vsmgr[#"overlay"].info[name].material_name = material_name;
-  level.vsmgr[#"overlay"].info[name].constant_index = constant_index;
+  level.vsmgr[# "overlay"].info[name].style = 2;
+  level.vsmgr[# "overlay"].info[name].filter_index = filter_index;
+  level.vsmgr[# "overlay"].info[name].pass_index = pass_index;
+  level.vsmgr[# "overlay"].info[name].material_name = material_name;
+  level.vsmgr[# "overlay"].info[name].constant_index = constant_index;
 }
 
 register_overlay_info_style_blur(name, version, lerp_step_count, transition_in, transition_out, magnitude) {
@@ -76,10 +75,10 @@ register_overlay_info_style_blur(name, version, lerp_step_count, transition_in, 
     return;
   }
 
-  level.vsmgr[#"overlay"].info[name].style = 3;
-  level.vsmgr[#"overlay"].info[name].transition_in = transition_in;
-  level.vsmgr[#"overlay"].info[name].transition_out = transition_out;
-  level.vsmgr[#"overlay"].info[name].magnitude = magnitude;
+  level.vsmgr[# "overlay"].info[name].style = 3;
+  level.vsmgr[# "overlay"].info[name].transition_in = transition_in;
+  level.vsmgr[# "overlay"].info[name].transition_out = transition_out;
+  level.vsmgr[# "overlay"].info[name].magnitude = magnitude;
 }
 
 register_overlay_info_style_electrified(name, version, lerp_step_count, duration) {
@@ -87,8 +86,8 @@ register_overlay_info_style_electrified(name, version, lerp_step_count, duration
     return;
   }
 
-  level.vsmgr[#"overlay"].info[name].style = 4;
-  level.vsmgr[#"overlay"].info[name].duration = duration;
+  level.vsmgr[# "overlay"].info[name].style = 4;
+  level.vsmgr[# "overlay"].info[name].duration = duration;
 }
 
 register_overlay_info_style_burn(name, version, lerp_step_count, duration) {
@@ -96,8 +95,8 @@ register_overlay_info_style_burn(name, version, lerp_step_count, duration) {
     return;
   }
 
-  level.vsmgr[#"overlay"].info[name].style = 5;
-  level.vsmgr[#"overlay"].info[name].duration = duration;
+  level.vsmgr[# "overlay"].info[name].style = 5;
+  level.vsmgr[# "overlay"].info[name].duration = duration;
 }
 
 register_overlay_info_style_poison(name, version, lerp_step_count) {
@@ -105,7 +104,7 @@ register_overlay_info_style_poison(name, version, lerp_step_count) {
     return;
   }
 
-  level.vsmgr[#"overlay"].info[name].style = 6;
+  level.vsmgr[# "overlay"].info[name].style = 6;
 }
 
 register_overlay_info_style_transported(name, version, lerp_step_count, duration) {
@@ -113,8 +112,8 @@ register_overlay_info_style_transported(name, version, lerp_step_count, duration
     return;
   }
 
-  level.vsmgr[#"overlay"].info[name].style = 7;
-  level.vsmgr[#"overlay"].info[name].duration = duration;
+  level.vsmgr[# "overlay"].info[name].style = 7;
+  level.vsmgr[# "overlay"].info[name].duration = duration;
 }
 
 register_overlay_info_style_speed_blur(name, version, lerp_step_count, amount, inner_radius, outer_radius, velocity_should_scale, velocity_scale, blur_in, blur_out, should_offset) {
@@ -122,15 +121,15 @@ register_overlay_info_style_speed_blur(name, version, lerp_step_count, amount, i
     return;
   }
 
-  level.vsmgr[#"overlay"].info[name].style = 8;
-  level.vsmgr[#"overlay"].info[name].amount = amount;
-  level.vsmgr[#"overlay"].info[name].inner_radius = inner_radius;
-  level.vsmgr[#"overlay"].info[name].outer_radius = outer_radius;
-  level.vsmgr[#"overlay"].info[name].velocity_should_scale = velocity_should_scale;
-  level.vsmgr[#"overlay"].info[name].velocity_scale = velocity_scale;
-  level.vsmgr[#"overlay"].info[name].blur_in = blur_in;
-  level.vsmgr[#"overlay"].info[name].blur_out = blur_out;
-  level.vsmgr[#"overlay"].info[name].should_offset = should_offset;
+  level.vsmgr[# "overlay"].info[name].style = 8;
+  level.vsmgr[# "overlay"].info[name].amount = amount;
+  level.vsmgr[# "overlay"].info[name].inner_radius = inner_radius;
+  level.vsmgr[# "overlay"].info[name].outer_radius = outer_radius;
+  level.vsmgr[# "overlay"].info[name].velocity_should_scale = velocity_should_scale;
+  level.vsmgr[# "overlay"].info[name].velocity_scale = velocity_scale;
+  level.vsmgr[# "overlay"].info[name].blur_in = blur_in;
+  level.vsmgr[# "overlay"].info[name].blur_out = blur_out;
+  level.vsmgr[# "overlay"].info[name].should_offset = should_offset;
 }
 
 register_overlay_info_style_postfx_bundle(name, version, lerp_step_count, bundle, duration) {
@@ -138,9 +137,9 @@ register_overlay_info_style_postfx_bundle(name, version, lerp_step_count, bundle
     return;
   }
 
-  level.vsmgr[#"overlay"].info[name].style = 1;
-  level.vsmgr[#"overlay"].info[name].bundle = bundle;
-  level.vsmgr[#"overlay"].info[name].duration = duration;
+  level.vsmgr[# "overlay"].info[name].style = 1;
+  level.vsmgr[# "overlay"].info[name].bundle = bundle;
+  level.vsmgr[# "overlay"].info[name].duration = duration;
 }
 
 is_type_currently_default(localclientnum, type) {
@@ -369,7 +368,7 @@ demo_jump_monitor() {
   oldlerps = [];
 
   while(true) {
-    level waittill(#"demo_jump", #"demo_player_switch", #"visionset_mgr_reset");
+    level waittill(#"demo_jump", # "demo_player_switch", # "visionset_mgr_reset");
 
     foreach(v in level.vsmgr) {
       if(!v.in_use) {

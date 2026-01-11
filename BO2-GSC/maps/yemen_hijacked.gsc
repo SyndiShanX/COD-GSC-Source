@@ -58,8 +58,7 @@ skipto_hijacked_bridge() {
   flag_set("menendez_hijack_vtol_active");
 }
 
-skipto_hijacked_menendez() {
-}
+skipto_hijacked_menendez() {}
 
 main() {
   iprintln("Event Name");
@@ -143,7 +142,7 @@ hijacked_skipto_quadrotors_init() {
   a_vh_quadrotors = getEntArray("allied_quadrotor", "targetname");
 
   foreach(vh_quadrotor in a_vh_quadrotors) {
-  vh_quadrotor.origin = level.player.origin + (randomintrange(34, 128), randomintrange(34, 128), randomintrange(34, 128));
+    vh_quadrotor.origin = level.player.origin + (randomintrange(34, 128), randomintrange(34, 128), randomintrange(34, 128));
   }
 }
 
@@ -159,7 +158,7 @@ allied_quadrotors_move_ahead_and_delete() {
   a_quadrotors = getEntArray("allied_quadrotor", "targetname");
 
   foreach(vh_quadrotor in a_quadrotors) {
-  vh_quadrotor.goalpos = s_goal.origin;
+    vh_quadrotor.goalpos = s_goal.origin;
   }
 
   wait 15;
@@ -171,11 +170,11 @@ hijacked_destructibles_setup() {
   a_m_building_destroyed = getEntArray("bridge_building_destroyed", "targetname");
 
   foreach(m_bridge_destroyed in a_m_bridge_destroyed_parts) {
-  m_bridge_destroyed hide();
+    m_bridge_destroyed hide();
   }
 
   foreach(m_building_destroyed in a_m_building_destroyed) {
-  m_building_destroyed hide();
+    m_building_destroyed hide();
   }
 }
 
@@ -247,7 +246,7 @@ give_models_guns(str_scene, str_gun) {
   a_models = get_model_or_models_from_scene(str_scene);
 
   foreach(m_guy in a_models) {
-  m_guy attach(str_gun, "tag_weapon_right");
+    m_guy attach(str_gun, "tag_weapon_right");
   }
 }
 
@@ -417,11 +416,11 @@ capture_fake_battle() {
   o_target = spawn("script_origin", s_shoot_spot.origin);
 
   foreach(ai_seal in a_ai_seals) {
-  ai_seal shoot_at_target_untill_dead(o_target);
+    ai_seal shoot_at_target_untill_dead(o_target);
   }
 
   foreach(ai_seal in a_ai_seals_b) {
-  ai_seal shoot_at_target_untill_dead(o_target);
+    ai_seal shoot_at_target_untill_dead(o_target);
   }
 
   level waittill("first_flashback");
@@ -440,7 +439,7 @@ quadrotors_guard_bridge() {
   nd_goal = getvehiclenode("hijacked_hostile_formation_bridge_spline_end", "targetname");
 
   foreach(vh_quad in a_vh_quads) {
-  vh_quad.goalpos = nd_goal.origin;
+    vh_quad.goalpos = nd_goal.origin;
   }
 }
 
@@ -571,11 +570,11 @@ hijacked_bridge_swap() {
   a_m_bridge_destroyed_parts = getEntArray("bridge_destroyed", "targetname");
 
   foreach(m_bridge_destroyed in a_m_bridge_destroyed_parts) {
-  m_bridge_destroyed show();
+    m_bridge_destroyed show();
   }
 
   foreach(m_bridge_whole in a_m_bridge_whole_parts) {
-  m_bridge_whole delete();
+    m_bridge_whole delete();
   }
 }
 
@@ -584,11 +583,11 @@ hijacked_bridge_building_swap() {
   a_m_building_destroyed = getEntArray("bridge_building_destroyed", "targetname");
 
   foreach(m_building_destroyed in a_m_building_destroyed) {
-  m_building_destroyed show();
+    m_building_destroyed show();
   }
 
   foreach(m_building_whole in a_m_building_whole) {
-  m_building_whole delete();
+    m_building_whole delete();
   }
 }
 

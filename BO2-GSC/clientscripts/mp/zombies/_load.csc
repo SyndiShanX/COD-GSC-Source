@@ -50,14 +50,11 @@ setup_default_client_flag_callbacks() {
   level._client_flag_callbacks["scriptmover"][15] = clientscripts\mp\zombies\_callbacks::emp_callback;
 }
 
-warnmissilelocking(localclientnum, set) {
-}
+warnmissilelocking(localclientnum, set) {}
 
-warnmissilelocked(localclientnum, set) {
-}
+warnmissilelocked(localclientnum, set) {}
 
-warnmissilefired(localclientnum, set) {
-}
+warnmissilefired(localclientnum, set) {}
 
 main() {
   level thread clientscripts\mp\_utility::servertime();

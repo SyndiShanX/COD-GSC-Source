@@ -35,8 +35,7 @@ master_ninja_enemy_spawned() {
   if(isDefined(var_0) && var_0 == level.player) {
     if(var_1 == "MOD_MELEE") {
       common_scripts\utility::flag_set("master_ninja_melee_kill");
-    }
-    else {
+    } else {
       common_scripts\utility::flag_set("master_ninja_illegal_kill");
     }
   }
@@ -128,8 +127,7 @@ weapon_master_vehicle_damaged() {
     } else if(var_4 == "mod_projectile" || var_4 == "mod_projectile_splash") {
       if(var_0 >= 900) {
         var_7 = "javelin";
-      }
-      else if(var_0 >= 300) {
+      } else if(var_0 >= 300) {
         if(var_1 == level.player) {
           var_7 = "rpg";
         }
@@ -151,8 +149,7 @@ weapon_master_vehicle_spawned() {
 
   if(isDefined(var_1) && var_1 == level.player && isDefined(var_3) && var_2 != "MOD_MELEE") {
     weapon_master_register_kill(var_3);
-  }
-  else {
+  } else {
     wait 0.25;
 
     if(level.weapon_master_explosive == "unknown" || level.weapon_master_vehicle_id != var_0) {

@@ -21,8 +21,7 @@ main() {
 
   if(var_1) {
     level.anim_prop_models[var_2]["sway"] = % ow_crane_cable_wind;
-  }
-  else {
+  } else {
     level.anim_prop_models[var_2]["sway"] = "ow_crane_cable_wind";
   }
 }

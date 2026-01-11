@@ -4,7 +4,6 @@
 ***************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace ct_progressbar_status;
 
 class cct_progressbar_status: cluielem {
@@ -68,12 +67,12 @@ class cct_progressbar_status: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"ct_progressbar_status");
+    cluielem::open(localclientnum, # "ct_progressbar_status");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, #"defaultstate");
+    set_state(localclientnum, # "defaultstate");
   }
 
   function register_clientside(uid) {

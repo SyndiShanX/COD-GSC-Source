@@ -43,22 +43,17 @@ killcam(
   if(getdvar("scr_killcam_time") == "") {
     if(sWeapon == "artillery_mp" || sWeapon == "stealth_bomb_mp") {
       camtime = (gettime() - killcamentitystarttime) / 1000 - predelay - .1;
-    }
-    else if(level.showingFinalKillcam) {
+    } else if(level.showingFinalKillcam) {
       camtime = 4.0;
-    }
-    else if(sWeapon == "javelin_mp") {
+    } else if(sWeapon == "javelin_mp") {
       camtime = 8;
-    }
-    else if(issubstr(sWeapon, "remotemissile_")) {
+    } else if(issubstr(sWeapon, "remotemissile_")) {
       camtime = 5;
-    }
-    else if(!timeUntilRespawn || timeUntilRespawn > 5.0) // if we're not going to respawn, we can take more time to watch what happened
+    } else if(!timeUntilRespawn || timeUntilRespawn > 5.0) // if we're not going to respawn, we can take more time to watch what happened
       camtime = 5.0;
     else if(sWeapon == "frag_grenade_mp" || sWeapon == "frag_grenade_short_mp" || sWeapon == "semtex_mp") {
       camtime = 4.25; // show long enough to see grenade thrown
-    }
-    else {
+    } else {
       camtime = 2.5;
     }
   } else
@@ -76,8 +71,7 @@ killcam(
   // time after player death that killcam continues for
   if(getdvar("scr_killcam_posttime") == "") {
     postdelay = 2;
-  }
-  else {
+  } else {
     postdelay = getdvarfloat("scr_killcam_posttime");
     if(postdelay < 0.05) {
       postdelay = 0.05;
@@ -85,13 +79,13 @@ killcam(
   }
 
   /* timeline:
-	
+  	
   |camtime |postdelay|
   || predelay|
-	
+  	
   ^ killcam start^ player death^ killcam end
    ^ player starts watching killcam
-	
+  	
   */
 
   killcamlength = camtime + postdelay;
@@ -190,8 +184,7 @@ killcam(
   if(timeUntilRespawn && !level.gameEnded) {
     if(timeUntilRespawn > 0) {
       setLowerMessage("kc_info", game["strings"]["waiting_to_spawn"], timeUntilRespawn);
-    }
-    else {
+    } else {
       setLowerMessage("kc_info", &"PLATFORM_PRESS_TO_SKIP");
     }
   } else if(!level.gameEnded) {
@@ -200,8 +193,7 @@ killcam(
 
   if(!level.showingFinalKillcam) {
     self.kc_skiptext.alpha = 1;
-  }
-  else {
+  } else {
     self.kc_skiptext.alpha = 0;
   }
 
@@ -216,8 +208,7 @@ killcam(
 
   if(!level.showingFinalKillcam) {
     self thread waitSkipKillcamButton(timeUntilRespawn);
-  }
-  else {
+  } else {
     self notify("showing_final_killcam");
   }
 

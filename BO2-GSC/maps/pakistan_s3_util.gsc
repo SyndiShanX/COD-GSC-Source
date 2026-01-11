@@ -121,8 +121,7 @@ player_soct_driving_rumble() {
 
       if(rval < 800) {
         level.player playrumbleonentity("pullout_small");
-      }
-      else {
+      } else {
         level.player playrumbleonentity("anim_light");
       }
 
@@ -171,8 +170,7 @@ hide_harper(hide_him, delay) {
   if(isDefined(level.harper)) {
     if(hide_him) {
       level.harper hide();
-    }
-    else {
+    } else {
       level.harper show();
     }
   }
@@ -208,8 +206,7 @@ vehicle_switch(nd_start) {
 
       if(isDefined(level.static_vehicle_switch_fadeout)) {
         screen_fade_out(0.5, "compass_static");
-      }
-      else {
+      } else {
         screen_fade_out(0.5);
       }
 
@@ -230,8 +227,7 @@ vehicle_switch(nd_start) {
 
       if(isDefined(level.static_vehicle_switch_fadeout)) {
         screen_fade_in(0.25, "compass_static");
-      }
-      else {
+      } else {
         level thread vehicle_switch_fade_in();
       }
 
@@ -356,8 +352,7 @@ salazar_soct_speed_control() {
 
       if(n_dist > 1500) {
         n_speed_new = n_speed_new - 3 * floor(n_dist / 1500);
-      }
-      else if(n_dist < 512) {
+      } else if(n_dist < 512) {
         n_speed_new = self.n_speed_max;
       }
 
@@ -385,8 +380,7 @@ player_drone_speed_control() {
   while(true) {
     if(isDefined(level.player.viewlockedentity) && level.player.viewlockedentity == self) {
       self player_in_drone();
-    }
-    else {
+    } else {
       self player_in_soct();
     }
 
@@ -406,15 +400,13 @@ player_in_soct() {
 
   if(n_dot_to_heli > 0.4) {
     n_speed_new = self _normal_speed_control();
-  }
-  else if(n_dot_to_heli < -0.4) {
+  } else if(n_dot_to_heli < -0.4) {
     v_heli_forward = anglesToForward(self.angles);
     n_dot_directions = vectordot(v_player_forward, v_heli_forward);
 
     if(n_dot_directions > 0) {
       n_speed_new = 86;
-    }
-    else {
+    } else {
       n_speed_new = 0;
     }
   } else
@@ -435,8 +427,7 @@ _normal_speed_control() {
 
   if(n_dist_frac < 0.95) {
     n_speed_new = 86;
-  }
-  else {
+  } else {
     n_dist_percent = 1 - n_dist_frac;
     n_speed_new = linear_map(n_dist_percent, 0, 1, 0, 86);
   }
@@ -653,11 +644,9 @@ enemy_soct_must_shoot_logic(e_priority_target) {
 random_friendly_target() {
   if(randomint(2) == 0) {
     vh_friendly = level.vh_player_soct;
-  }
-  else if(randomint(2) == 1) {
+  } else if(randomint(2) == 1) {
     vh_friendly = level.vh_salazar_soct;
-  }
-  else {
+  } else {
     vh_friendly = level.vh_player_soct;
   }
 
@@ -671,8 +660,7 @@ friendly_drone_shoot_logic() {
     if(isDefined(level.player.vehicle_state)) {
       if(level.player.vehicle_state == 2) {
         self disable_turret(0);
-      }
-      else if(level.player.vehicle_state == 1) {
+      } else if(level.player.vehicle_state == 1) {
         self enable_turret(0);
       }
     }
@@ -711,8 +699,7 @@ enemy_soct_setup(b_consistent_shooting, e_priority_target, b_powerfull_weapons, 
 
   if(isDefined(b_consistent_shooting) && b_consistent_shooting) {
     self thread enemy_soct_must_shoot_logic(e_priority_target);
-  }
-  else {
+  } else {
     self thread enemy_soct_shoot_logic();
   }
 
@@ -757,11 +744,9 @@ soct_stop_shooting_on_script_noteworthy(str_noteworthy) {
 enemy_soct_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
   if(self.targetname == "heli_crash_soct") {
     n_damage = 0;
-  }
-  else if(isDefined(e_attacker.vehicletype) && e_attacker.vehicletype == "boat_soct_axis") {
+  } else if(isDefined(e_attacker.vehicletype) && e_attacker.vehicletype == "boat_soct_axis") {
     n_damage = 0;
-  }
-  else if(str_weapon == "boat_gun_turret") {
+  } else if(str_weapon == "boat_gun_turret") {
     n_damage = int(ceil(n_damage / 6));
   }
 
@@ -787,8 +772,7 @@ temp_magic_bullet_shield(n_seconds_to_wait) {
 
   if(isDefined(n_seconds_to_wait)) {
     wait(n_seconds_to_wait);
-  }
-  else if(isDefined(self.classname) && self.classname == "script_vehicle") {
+  } else if(isDefined(self.classname) && self.classname == "script_vehicle") {
     self waittill("stop_magic_bullet");
   }
 
@@ -926,8 +910,7 @@ drone_kill_count() {
       if(isDefined(weaponname) && weaponname == "firescout_missile_turret") {
         if(!isDefined(level.num_drone_missile_kills)) {
           level.num_drone_missile_kills = 1;
-        }
-        else {
+        } else {
           level.num_drone_missile_kills++;
         }
       }
@@ -940,8 +923,7 @@ drone_kill_count() {
 set_lock_on_target(v_offset) {
   if(isDefined(v_offset)) {
     target_set(self, v_offset);
-  }
-  else {
+  } else {
     target_set(self);
   }
 
@@ -1088,8 +1070,7 @@ heli_shoot_logic(b_hind) {
     if(self.can_shoot) {
       if(isDefined(b_hind) && b_hind) {
         self fireweapon(level.vh_salazar_soct);
-      }
-      else {
+      } else {
         self fire_turret(0);
       }
     }
@@ -1478,11 +1459,9 @@ enemy_soct_speed_control(override_max_speed_ahead) {
 
       if(isDefined(self.wait_for_the_player_speed)) {
         n_speed_new = self.wait_for_the_player_speed;
-      }
-      else if(isDefined(self.slowing_down_speed)) {
+      } else if(isDefined(self.slowing_down_speed)) {
         n_speed_new = self.slowing_down_speed;
-      }
-      else if(n_dot_to_player < 0.14) {
+      } else if(n_dot_to_player < 0.14) {
         n_speed_new = 83;
         self setspeedimmediate(n_speed_new, 26, 12);
       } else if(isDefined(override_max_speed_ahead))
@@ -1556,11 +1535,9 @@ waittill_vo_done() {
   while(true) {
     if(isDefined(level.harper.is_talking) && level.harper.is_talking) {
       wait 0.01;
-    }
-    else if(isDefined(level.disable_harper_background_vo)) {
+    } else if(isDefined(level.disable_harper_background_vo)) {
       wait 0.01;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -1614,8 +1591,7 @@ general_help_vo() {
 
       if(a_help_vo[n_array_counter] == "harp_eyes_on_the_road_0" && level.player.vehicle_state == 2) {
         level.harper say_dialog(a_help_vo[n_array_counter]);
-      }
-      else {
+      } else {
         level.harper say_dialog(a_help_vo[n_array_counter]);
       }
 
@@ -1727,8 +1703,7 @@ checkpoint_save_restored() {
 get_restored_checkpoint_start_node() {
   if(isDefined(self.currentnode.target)) {
     nd_start = getvehiclenode(self.currentnode.target, "targetname");
-  }
-  else {
+  } else {
     nd_start = self.currentnode;
   }
 
@@ -1825,8 +1800,7 @@ vehicle_health_overlay(max_alpha) {
 
   if(isDefined(level.vh_player_drone) && self == level.vh_player_drone) {
     i_am_the_drone = 1;
-  }
-  else {
+  } else {
     i_am_the_drone = 0;
   }
 
@@ -1844,11 +1818,9 @@ vehicle_health_overlay(max_alpha) {
 
     if(i_am_the_drone && is_player_in_drone()) {
       alpha = 1.0 - frac;
-    }
-    else if(!i_am_the_drone && !is_player_in_drone()) {
+    } else if(!i_am_the_drone && !is_player_in_drone()) {
       alpha = 1.0 - frac;
-    }
-    else {
+    } else {
       alpha = 0.0;
     }
 
@@ -1856,8 +1828,7 @@ vehicle_health_overlay(max_alpha) {
 
     if(alpha < 0.0) {
       alpha = 0.0;
-    }
-    else if(alpha > 1.0) {
+    } else if(alpha > 1.0) {
       alpha = 1.0;
     }
 
@@ -2186,8 +2157,7 @@ info_volume_vehicle_collide(str_model_to_delete, v_position, str_fx_name, a_str_
   while(true) {
     if(isDefined(self.script_string)) {
       a_vehicles = getvehiclearray(self.script_string);
-    }
-    else {
+    } else {
       a_vehicles = getvehiclearray("axis", "allies");
     }
 
@@ -2311,8 +2281,7 @@ drone_follow_linked_structs(str_struct, start_speed, use_near_goal, only_use_tur
 
     if(isDefined(use_near_goal)) {
       self waittill("near_goal");
-    }
-    else {
+    } else {
       self waittill("goal");
     }
 
@@ -2639,14 +2608,11 @@ bounce_player_after_water_sheeting(bounce_scale) {
 
   if(dp > 0.5) {
     directional_impact_scale = 0.7;
-  }
-  else if(dp > 0.4) {
+  } else if(dp > 0.4) {
     directional_impact_scale = 0.8;
-  }
-  else if(dp > 0.3) {
+  } else if(dp > 0.3) {
     directional_impact_scale = 0.9;
-  }
-  else {
+  } else {
     directional_impact_scale = 1.0;
   }
 
@@ -2679,8 +2645,7 @@ player_soct_monitor_tags_update() {
     if(!is_player_in_drone()) {
       if(level.player_soct_test_for_water == 0) {
         in_water = "0";
-      }
-      else {
+      } else {
         in_water = getdvar(#"_id_56879D89");
         water_height = getwaterheight(self.origin);
 
@@ -2715,15 +2680,13 @@ player_soct_monitor_tags_update() {
 
       if(show_monitor1) {
         self showpart("tag_monitor_damaged_1");
-      }
-      else {
+      } else {
         self hidepart("tag_monitor_damaged_1");
       }
 
       if(show_monitor2) {
         self showpart("tag_monitor_damaged_2");
-      }
-      else {
+      } else {
         self hidepart("tag_monitor_damaged_2");
       }
     }
@@ -2984,8 +2947,7 @@ player_soct_damage_override(einflictor, eattacker, idamage, idflags, smeansofdea
     idamage = 0;
   }
 
-  if(idamage > 30) {
-  }
+  if(idamage > 30) {}
 
   self.vehicle_health = self.vehicle_health - idamage;
 
@@ -3070,8 +3032,7 @@ player_drone_damage_override(einflictor, eattacker, idamage, idflags, smeansofde
     if(isDefined(sweapon) && sweapon == "boat_gun_turret") {
       if(isDefined(eattacker.b_powerfull_weapons)) {
         reduced_damage = 3 * idamage / 4;
-      }
-      else {
+      } else {
         reduced_damage = idamage * self.drone_soct_damage_scale;
       }
 
@@ -3156,8 +3117,7 @@ damage_player_vehicle(n_damage, str_rumble) {
 
   if(level.player.vehicle_state == 2) {
     e_vehicle = level.vh_player_drone;
-  }
-  else if(level.player.vehicle_state == 1) {
+  } else if(level.player.vehicle_state == 1) {
     e_vehicle = level.vh_player_soct;
   }
 
@@ -3184,8 +3144,7 @@ soct_swap_to_damged_version() {
 
     if(level.player get_temp_stat(1)) {
       level.vh_player_soct setModel("veh_t6_mil_super_soc_t_damaged");
-    }
-    else {
+    } else {
       level.vh_player_soct setModel("veh_t6_mil_soc_t_damaged");
     }
 
@@ -3201,8 +3160,7 @@ soct_swap_to_dead_version() {
 
     if(level.player get_temp_stat(1)) {
       level.vh_player_soct setModel("veh_t6_mil_super_soc_t_dead");
-    }
-    else {
+    } else {
       level.vh_player_soct setModel("veh_t6_mil_soc_t_dead");
     }
   }

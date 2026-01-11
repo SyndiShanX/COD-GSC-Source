@@ -13,7 +13,7 @@ obelisk() {
   level thread maps\mp\alien\_spawnlogic::encounter_cycle_spawn("drill_planted");
 
   foreach(var_2 in var_0) {
-  var_2 thread obelisk_listener(var_2);
+    var_2 thread obelisk_listener(var_2);
   }
 
   level waittill("obelisk_destroyed");
@@ -212,7 +212,7 @@ sfx_scanner_off(var_0) {
 
 wait_for_all_scanned_obelisk_destroyed(var_0, var_1, var_2) {
   foreach(var_4 in level.scanned_obelisks) {
-  var_4 thread obelisk_damage_listener(var_4, var_0, var_1, "waypoint_alien_destroy");
+    var_4 thread obelisk_damage_listener(var_4, var_0, var_1, "waypoint_alien_destroy");
   }
 
   for(;;) {

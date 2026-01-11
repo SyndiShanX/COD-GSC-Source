@@ -90,11 +90,9 @@ leak_drain(P) {
 
   if(Q == self.A) {
     vec = vector_multiply(self.up, -1);
-  }
-  else if(Q == self.B) {
+  } else if(Q == self.B) {
     vec = self.up;
-  }
-  else {
+  } else {
     vec = vectorFromLineToPoint(self.A, self.B, P);
   }
 

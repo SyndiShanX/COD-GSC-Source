@@ -242,11 +242,9 @@ music_onplayerspawned_stub() {
     if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
       if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies") {
         maps\mp\_utility::leaderdialogonplayer("allies_gametype");
-      }
-      else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
+      } else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
         maps\mp\_utility::leaderdialogonplayer("axis_gametype");
-      }
-      else if(!maps\mp\_utility::issecondarysplitscreenplayer()) {
+      } else if(!maps\mp\_utility::issecondarysplitscreenplayer()) {
         maps\mp\_utility::leaderdialogonplayer("gametype");
       }
     }
@@ -379,8 +377,7 @@ onplayerspawned_stub() {
 
       if(var_3 == "fe") {
         level.voice_count[self.team][var_3] = (level.voice_count[self.team][var_3] + 1) % var_2;
-      }
-      else {
+      } else {
         level.voice_count[self.team][var_3] = (level.voice_count[self.team][var_3] + 1) % var_1;
       }
 
@@ -489,8 +486,7 @@ set_hud_feedback(icon) {
 
   if(getDvarInt("camera_thirdPerson")) {
     yOffset = self GetThirdPersonCrosshairOffset() * 240;
-  }
-  else {
+  } else {
     yOffset = getdvarfloat("cg_crosshairVerticalOffset") * 240;
   }
 
@@ -601,8 +597,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
   if(getdvar("scr_killcam_posttime") == "") {
     var_21 = 2;
-  }
-  else {
+  } else {
     var_21 = getdvarfloat("scr_killcam_posttime");
 
     if(var_21 < 0.05) {
@@ -618,8 +613,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
     }
     if(var_12 - var_20 >= 1) {
       var_21 = var_12 - var_20;
-    }
-    else {
+    } else {
       var_21 = 1;
       var_20 = var_12 - 1;
     }
@@ -634,15 +628,13 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
   }
   if(isplayer(var_14)) {
     self setclientomnvar("ui_killcam_victim_id", var_14 getentitynumber());
-  }
-  else {
+  } else {
     self setclientomnvar("ui_killcam_victim_id", -1);
   }
 
   if(isplayer(var_13)) {
     self setclientomnvar("ui_killcam_killedby_id", var_13 getentitynumber());
-  }
-  else if(isagent(var_13)) {
+  } else if(isagent(var_13)) {
     self setclientomnvar("ui_killcam_killedby_id", -1);
   }
 
@@ -659,8 +651,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
     if(isDefined(var_25)) {
       if(maps\mp\_utility::ismeleemod(var_15) && !maps\mp\gametypes\_weapons::isriotshield(var_4)) {
         var_25 = "iw5_combatknife";
-      }
-      else {
+      } else {
         var_25 = maps\mp\_utility::strip_suffix(var_25, "_lefthand");
         var_25 = maps\mp\_utility::strip_suffix(var_25, "_mp");
       }
@@ -692,18 +683,15 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
   if(isplayer(var_14) && var_14.pers["nemesis_guid"] == var_13.guid && var_14.pers["nemesis_tracking"][var_13.guid] >= 2) {
     self setclientomnvar("ui_killcam_killedby_nemesis", 1);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_killcam_killedby_nemesis", 0);
   }
 
   if(!var_11 && !level.gameended) {
     self setclientomnvar("ui_killcam_text", "skip");
-  }
-  else if(!level.gameended) {
+  } else if(!level.gameended) {
     self setclientomnvar("ui_killcam_text", "respawn");
-  }
-  else {
+  } else {
     self setclientomnvar("ui_killcam_text", "none");
   }
 
@@ -757,12 +745,12 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
   if(level.multiteambased) {
     foreach(var_30 in level.teamnamelist) {
-    self allowspectateteam(var_30, 1);
+      self allowspectateteam(var_30, 1);
     }
   }
 
   foreach(var_30 in level.teamnamelist) {
-  self allowspectateteam(var_30, 1);
+    self allowspectateteam(var_30, 1);
   }
 
   thread maps\mp\gametypes\_killcam::endedkillcamcleanup();
@@ -795,8 +783,7 @@ killcam_stub(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
   if(!level.showingfinalkillcam) {
     thread maps\mp\gametypes\_killcam::waitskipkillcambutton(var_10);
-  }
-  else {
+  } else {
     self notify("showing_final_killcam");
   }
 
@@ -858,8 +845,7 @@ callback_playerconnect_stub() {
   if(!isDefined(self.pers["clientid"])) {
     if(game["clientid"] >= 30) {
       self.pers["clientid"] = getlowestavailableclientid();
-    }
-    else {
+    } else {
       self.pers["clientid"] = game["clientid"];
     }
 
@@ -923,8 +909,7 @@ callback_playerconnect_stub() {
 
     if(istestclient(self) || isai(self)) {
       var_6 = 1;
-    }
-    else {
+    } else {
       var_6 = 0;
     }
 
@@ -939,8 +924,7 @@ callback_playerconnect_stub() {
 
       if(!isDefined(level.matchdata["botJoinCount"])) {
         level.matchdata["botJoinCount"] = 1;
-      }
-      else {
+      } else {
         level.matchdata["botJoinCount"]++;
       }
     }
@@ -1021,7 +1005,9 @@ callback_playerconnect_stub() {
     }
 
     if(isDefined(level.onplayerconnectaudioinit)) {
-      [[level.onplayerconnectaudioinit]]();
+      [
+        [level.onplayerconnectaudioinit]
+      ]();
     }
 
     if(!isDefined(self.pers["team"])) {
@@ -1171,8 +1157,7 @@ callback_playerdisconnect_stub(var_0) {
 
   if(self.sessionstate == "playing" && !(isDefined(self.fauxdead) && self.fauxdead)) {
     removefromalivecount(1);
-  }
-  else if(self.sessionstate == "spectator" || self.sessionstate == "dead") {
+  } else if(self.sessionstate == "spectator" || self.sessionstate == "dead") {
     level thread maps\mp\gametypes\_gamelogic::updategameevents();
   }
 }

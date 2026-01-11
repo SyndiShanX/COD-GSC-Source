@@ -102,8 +102,7 @@ try_slide_hint(var_0, var_1) {
 magicburst(var_0, var_1, var_2, var_3) {
   if(!isDefined(var_3)) {
     var_4 = randomintrange(5, 9);
-  }
-  else {
+  } else {
     var_4 = var_3;
   }
 
@@ -126,8 +125,7 @@ hesh_calls_riley(var_0, var_1) {
 call_riley(var_0, var_1) {
   if(isDefined(var_0)) {
     var_2 = ["deerhunt_hsh_rileyhere_2", "deerhunt_hsh_riley_2", "deerhunt_hsh_cmonboy_2", "deerhunt_hsh_rileyfollow_2"];
-  }
-  else {
+  } else {
     var_2 = ["deerhunt_hsh_rileyhere_3", "deerhunt_hsh_riley_3", "deerhunt_hsh_cmonboy_3", "deerhunt_hsh_rileyfollow_3"];
   }
 
@@ -135,8 +133,7 @@ call_riley(var_0, var_1) {
 
   if(isDefined(self.last_call_line)) {
     var_3 = get_random_from_array_except(var_2, self.last_call_line);
-  }
-  else {
+  } else {
     var_3 = common_scripts\utility::random(var_2);
   }
 
@@ -197,8 +194,7 @@ return_struct_spline(var_0) {
     if(isDefined(var_3)) {
       if(var_3 == var_0 || maps\_utility::is_in_array(var_2, var_3)) {
         return var_2;
-      }
-      else {
+      } else {
         var_2 = common_scripts\utility::add_to_array(var_2, var_3);
         var_1 = var_3;
       }
@@ -271,8 +267,7 @@ manual_hint_display(var_0, var_1) {
   for(;;) {
     if(distance2dsquared(self.origin, level.player.origin) > var_2) {
       clear_hints();
-    }
-    else if(distance2dsquared(self.origin, level.player.origin) < var_2) {
+    } else if(distance2dsquared(self.origin, level.player.origin) < var_2) {
       thread keyhint("matv_enter", undefined, undefined, 1);
     }
 
@@ -461,8 +456,7 @@ dog_drag_to_cover(var_0, var_1) {
 
   if(isstring(var_1)) {
     level waittill(var_1);
-  }
-  else {
+  } else {
     wait(var_1);
   }
 
@@ -538,8 +532,7 @@ kill_me_from_closest_enemy(var_0) {
 
   if(self.team == "axis") {
     var_1 = "allies";
-  }
-  else {
+  } else {
     var_1 = "axis";
   }
 
@@ -657,8 +650,7 @@ do_bokeh(var_0, var_1, var_2, var_3, var_4) {
 get_spot_in_front_of_ent(var_0) {
   if(self == level.player) {
     var_1 = level.player getplayerangles();
-  }
-  else {
+  } else {
     var_1 = self.angles;
   }
 
@@ -722,8 +714,7 @@ shoot_rocket(var_0, var_1) {
 
   if(common_scripts\utility::cointoss()) {
     var_4 = "tag_missile_right";
-  }
-  else {
+  } else {
     var_4 = "tag_missile_left";
   }
 
@@ -731,8 +722,7 @@ shoot_rocket(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_6 = var_1;
-  }
-  else {
+  } else {
     var_7 = level.player getplayerangles();
     var_7 = (0, var_7[1], 0);
     var_8 = anglesToForward(var_7);
@@ -852,11 +842,9 @@ set_flag_if_not_set(var_0) {
 delete_me_on_notifies(var_0, var_1, var_2) {
   if(!isDefined(var_1) && !isDefined(var_2)) {
     var_3 = common_scripts\utility::waittill_any_return(var_0);
-  }
-  else if(!isDefined(var_2)) {
+  } else if(!isDefined(var_2)) {
     var_3 = common_scripts\utility::waittill_any_return(var_0, var_1);
-  }
-  else {
+  } else {
     var_3 = common_scripts\utility::waittill_any_return(var_0, var_1, var_2);
   }
 
@@ -1034,8 +1022,7 @@ set_flag_on_targetname_trigger_by_player(var_0) {
 hesh_says_on_you() {
   if(common_scripts\utility::cointoss()) {
     level.hesh maps\_utility::smart_dialogue_generic("deerhunt_hsh_onyou");
-  }
-  else {
+  } else {
     level.hesh maps\_utility::smart_dialogue_generic("deerhunt_hsh_onyourgo");
   }
 }
@@ -1077,8 +1064,7 @@ grenades_by_difficulty() {
 
   if(randomint(100) < 40) {
     self.grenadeammo = var_0;
-  }
-  else {
+  } else {
     self.grenadeammo = 0;
   }
 }
@@ -1103,8 +1089,7 @@ fade_out_in(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1)) {
     level waittill(var_1);
-  }
-  else {
+  } else {
     wait(var_2);
   }
 
@@ -1266,8 +1251,7 @@ custom_moveplaybackrate_together(var_0) {
 
       if(var_11 > var_1) {
         var_11 = var_1;
-      }
-      else if(var_11 < var_1 * -1) {
+      } else if(var_11 < var_1 * -1) {
         var_11 = var_1 * -1;
       }
 

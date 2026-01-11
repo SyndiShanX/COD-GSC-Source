@@ -589,9 +589,7 @@ func_D4C2(param_00, param_01, param_02) {
 
   for(var_03 = 0; var_03 < param_01 * 10; var_03++) {
     if(isalive(self.isnodeoccupied)) {
-      if(scripts\anim\utility_common::canseeenemy() && [
-          [param_02]
-        ]()) {
+      if(scripts\anim\utility_common::canseeenemy() && [[param_02]]()) {
         return;
       }
     }

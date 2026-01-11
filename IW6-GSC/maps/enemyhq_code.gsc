@@ -305,8 +305,7 @@ ambient_animate(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2) && var_2 == 1) {
     var_6 = maps\_utility::dronespawn_bodyonly(self);
-  }
-  else {
+  } else {
     var_2 = 0;
     var_6 = maps\_utility::spawn_ai();
   }
@@ -449,11 +448,9 @@ c4_hint(var_0, var_1) {
 do_nag_dialog(var_0, var_1) {
   if(isstring(var_0)) {
     thread maps\_utility::add_dialogue_line(var_0, var_1);
-  }
-  else if(var_0 == level.player) {
+  } else if(var_0 == level.player) {
     radio_dialog_add_and_go(var_1);
-  }
-  else {
+  } else {
     var_0 char_dialog_add_and_go(var_1);
   }
 }
@@ -504,7 +501,7 @@ reassign_goal_volume(var_0, var_1) {
   var_2 = getent(var_1, "targetname");
 
   foreach(var_4 in var_0) {
-  var_4 setgoalvolumeauto(var_2);
+    var_4 setgoalvolumeauto(var_2);
   }
 }
 
@@ -770,7 +767,7 @@ player_bust_thru_scene(var_0, var_1) {
   var_2 = maps\_utility::get_ai_group_ai("field_chaos_guys");
 
   foreach(var_4 in var_2) {
-  var_4 delete();
+    var_4 delete();
   }
 
   level.truck_player_arms show();
@@ -1044,8 +1041,7 @@ screenshakefade(var_0, var_1, var_2, var_3) {
 
   if(var_5 > 0) {
     var_6 = var_0 / var_5;
-  }
-  else {
+  } else {
     var_6 = var_0;
   }
 
@@ -1054,8 +1050,7 @@ screenshakefade(var_0, var_1, var_2, var_3) {
 
   if(var_7 > 0) {
     var_9 = var_0 / var_7;
-  }
-  else {
+  } else {
     var_9 = var_0;
   }
 
@@ -1179,8 +1174,7 @@ gasmask_on_npc(var_0) {
 
   if(var_0) {
     self attach("prop_sas_gasmask_attach", "j_head", 1);
-  }
-  else {
+  } else {
     self.gasmask = spawn("script_model", (0, 0, 0));
     self.gasmask setModel("prop_sas_gasmask_attach");
     self.gasmask linkto(self, "tag_eye", (-4.027, 0, -2.948), (-90, -90, 180));

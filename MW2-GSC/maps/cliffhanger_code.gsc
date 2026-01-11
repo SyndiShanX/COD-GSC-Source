@@ -264,7 +264,7 @@ base_loud_speakers() {
     }
 
     foreach(speaker in speakers) {
-    speaker playSound(dialog);
+      speaker playSound(dialog);
     }
 
     wait(RandomIntRange(12, 16));
@@ -316,10 +316,10 @@ bmp_headlights() {
   self waittill("death");
 
   /*
-	stopFXOnTag( level._effect[ "lighthaze_snow_headlights" ], self, "tag_front_light_left" );
-	stopFXOnTag( level._effect[ "lighthaze_snow_headlights" ], self, "tag_front_light_right" );
- 	stopFXOnTag( level._effect[ "lighthaze_snow_spotlight" ], self, "tag_turret_light" );
-*/
+  	stopFXOnTag( level._effect[ "lighthaze_snow_headlights" ], self, "tag_front_light_left" );
+  	stopFXOnTag( level._effect[ "lighthaze_snow_headlights" ], self, "tag_front_light_right" );
+   	stopFXOnTag( level._effect[ "lighthaze_snow_spotlight" ], self, "tag_turret_light" );
+  */
 }
 
 bmp_shoots_player() {
@@ -368,7 +368,7 @@ price_kills_me_if_too_close() {
   if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "truck_guys")
   }
-      return;
+  return;
   if(!isDefined(self.script_stealth)) {
     return;
   }
@@ -399,8 +399,7 @@ price_kills_me_do_the_killing() {
 
   if(!isDefined(level.price.stargets)) {
     level.price.stargets = 1;
-  }
-  else {
+  } else {
     level.price.stargets++;
   }
 
@@ -1250,7 +1249,7 @@ script_chatgroups() {
         if(closest_talker ent_flag_exist("_stealth_normal")) {
           if(!closest_talker ent_flag("_stealth_normal"))
         }
-            continue;
+        continue;
 
         //find next closest member of same chat group
         next_closest = find_next_member(closest_enemies, i, closest_chat_group);
@@ -1263,7 +1262,7 @@ script_chatgroups() {
         if(next_closest ent_flag_exist("_stealth_normal")) {
           if(!next_closest ent_flag("_stealth_normal"))
         }
-            continue;
+        continue;
         d = Distance(next_closest.origin, closest_talker.origin);
         if(d > 220) {
           //println( d );
@@ -1278,8 +1277,7 @@ script_chatgroups() {
       if(isDefined(level.last_talker)) {
         if(level.last_talker == closest_talker) {
           talker = next_closest;
-        }
-        else {
+        } else {
           talker = closest_talker;
         }
       } else
@@ -1475,8 +1473,7 @@ c4_player_obj() {
 
   if(self.script_noteworthy == "mig_c4") {
     flag_set("mig_c4_planted");
-  }
-  else {
+  } else {
     flag_set("fuel_c4_planted");
   }
 
@@ -1498,7 +1495,7 @@ c4_player_obj() {
 show_closest_c4() {
   possible_c4_models = getEntArray("possible_c4_models", "targetname");
   foreach(model in possible_c4_models) {
-  model Hide();
+    model Hide();
   }
   current_c4 = getClosest(level.player.origin, possible_c4_models);
   current_c4 Show();
@@ -1882,8 +1879,7 @@ setObjectiveRemaining(objName, objString, objRemaining) {
 
   if(!objRemaining) {
     Objective_String(objective.id, objString);
-  }
-  else {
+  } else {
     Objective_String(objective.id, objString, objRemaining);
   }
 }
@@ -1893,8 +1889,7 @@ setObjectiveOnEntity(objName, ent, offset) {
   //objective = level.objectives[ objName ];
   if(isDefined(offset)) {
     Objective_OnEntity(objID, ent, offset);
-  }
-  else {
+  } else {
     Objective_OnEntity(objID, ent);
   }
 }
@@ -1951,14 +1946,14 @@ misc_precache() {
   level.strings["obj_snowmobile"] = &"CLIFFHANGER_OBJ_EVACUATE";
 
   foreach(string in level.strings) {
-  PreCacheString(string);
+    PreCacheString(string);
   }
 }
 
 model_initializations() {
   c4s = getEntArray("base_c4_models", "targetname");
   foreach(c4 in c4s) {
-  c4 Hide();
+    c4 Hide();
   }
 }
 
@@ -2282,7 +2277,7 @@ dialog_price_battlechatter() {
         if(dot >= 0.77) {
           //in front
         }
-          continue;
+        continue;
 
         current_time = GetTime();
 
@@ -2367,8 +2362,7 @@ dialog_player_kill() {
     PrintLn("--------- player kill: " + method);
     if((method != "MOD_RIFLE_BULLET") && (method != "MOD_PISTOL_BULLET")) {
       play_Sound_Over_Radio("cliff_pri_melee_plyr");
-    }
-    else {
+    } else {
       play_Sound_Over_Radio("cliff_pri_killfirm_plyr");
     }
   }
@@ -2908,8 +2902,7 @@ play_Sound_Over_Radio(soundAlias, force_transmit_on_turn, timeout) {
 
   if(isDefined(force_transmit_on_turn) && force_transmit_on_turn == true) {
     return radio_dialogue(soundAlias, timeout);
-  }
-  else {
+  } else {
     return radio_dialogue_safe(soundAlias);
   }
 }
@@ -2943,7 +2936,7 @@ slidetest() {
 player_dies_if_he_moves() {
   flag_assert("start_big_explosion");
 
-    level endon("start_big_explosion");
+  level endon("start_big_explosion");
 
   org = level.player.origin;
   for(;;) {
@@ -2966,7 +2959,7 @@ player_dies_if_he_moves() {
     return;
   }
 
-    level.player Kill();
+  level.player Kill();
 }
 
 guy_starts_shooting() {
@@ -3100,8 +3093,7 @@ dynamic_price_run_set(speed) {
     case "sprint":
       if(isDefined(self.cqbwalking) && self.cqbwalking) {
         self.moveplaybackrate = 1;
-      }
-      else {
+      } else {
         self.moveplaybackrate = 1.15;
       }
       self set_generic_run_anim("DRS_sprint");
@@ -3170,7 +3162,7 @@ hide_extra_migs() {
     return;
   }
 
-    extra_tarmac_migs = getEntArray("extra_tarmac_migs", "script_noteworthy");
+  extra_tarmac_migs = getEntArray("extra_tarmac_migs", "script_noteworthy");
   extra_tarmac_mig_delayed = getEntArray("extra_tarmac_mig_delayed", "script_noteworthy");
   migs_turn_on_and_off = extra_tarmac_migs;
   migs_turn_on_and_off = array_combine(migs_turn_on_and_off, extra_tarmac_mig_delayed);
@@ -3514,7 +3506,7 @@ random_yelling(enemies) {
 kill_all_enemies() {
   enemies = GetAIArray("axis");
   foreach(mf in enemies) {
-  mf Delete();
+    mf Delete();
   }
 }
 
@@ -3825,8 +3817,7 @@ dialog_first_encounter() {
   } else {
     if(IsAlive(targetguy2)) {
       targetguy2 thread price_stealth_kills_guy(targetguy);
-    }
-    else {
+    } else {
       thread price_goes_in_two();
     }
   }
@@ -3960,11 +3951,11 @@ dialog_second_encounter() {
   if(flag("said_nicely_done")) {
     //Same plan.
   }
-    level.price dialogue_queue("cliff_pri_sameplan");
+  level.price dialogue_queue("cliff_pri_sameplan");
   else {
     //You take the one on the left.
   }
-    level.price dialogue_queue("cliff_pri_youtakeleft");
+  level.price dialogue_queue("cliff_pri_youtakeleft");
 
   // – “On three.”
   level.price playSound("Cliff_pri_onthree");

@@ -166,7 +166,7 @@ initWeaponHUD() {
   	self.hud_totalammo setParent( self.hud_bullets[0] );
   	self.hud_totalammo setPoint( "TOPRIGHT", "BOTTOMRIGHT", 0, 5 );
   }
-	
+  	
   if( !isDefined( self.hud_weaponname ) )
   {
   	self.hud_weaponname = createFontString( "default", 1.5 );
@@ -269,8 +269,7 @@ setHudWeaponType(type) {
 
         if(index % 2) {
           self.hud_bullets[index] setIconShader("hud_bullets_support_back");
-        }
-        else {
+        } else {
           self.hud_bullets[index] setIconShader("hud_bullets_support_front");
         }
 
@@ -337,11 +336,9 @@ updateHudWeaponAmmo(weapon, ammoCount) {
       for(index = 4; index >= 0; index--) {
         if(diff > bulletOffset) {
           self.hud_bullets[index].alpha = 0;
-        }
-        else if((bulletOffset - diff) <= 20) {
+        } else if((bulletOffset - diff) <= 20) {
           self.hud_bullets[index].alpha = level.bulletAlphas[diff - (bulletOffset - 20)];
-        }
-        else {
+        } else {
           self.hud_bullets[index].alpha = 1;
         }
 

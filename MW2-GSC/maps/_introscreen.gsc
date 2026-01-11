@@ -464,9 +464,9 @@ introscreen_delay(string1, string2, string3, string4, pausetime1, pausetime2, ti
     return;
   }
 
-    if(flying_intro()) {
-      return;
-    }
+  if(flying_intro()) {
+    return;
+  }
 
   switch (level.script) {
     case "airport":
@@ -586,8 +586,7 @@ _CornerLineThread(string, size, interval, index_key) {
 
   if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  }
-  else {
+  } else {
     level.intro_offset++;
   }
 
@@ -1178,7 +1177,7 @@ flying_intro() {
     slamzoom = false;
   }
 
-    extra_delay = 0;
+  extra_delay = 0;
   special_save = false;
 
   if(slamzoom) {
@@ -1289,7 +1288,7 @@ flying_intro() {
   if(!special_save) {
     // string not found for AUTOSAVE_LEVELSTART
   }
-    SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
+  SaveGame("levelstart", &"AUTOSAVE_LEVELSTART", "whatever", true);
   wait(0.5);
   flag_set("pullup_weapon");
 

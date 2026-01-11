@@ -31,8 +31,7 @@ movecqb() {
   }
   if(isDefined(self.timeofmaincqbupdate)) {
     var_0 = self.timeofmaincqbupdate;
-  }
-  else {
+  } else {
     var_0 = 0;
   }
 
@@ -41,8 +40,7 @@ movecqb() {
 
   if(self.stairsstate == "none") {
     var_2 = 0.3;
-  }
-  else {
+  } else {
     var_2 = 0.1;
   }
 
@@ -121,8 +119,7 @@ cqbtracking() {
 
   if(var_0) {
     animscripts\run::endfaceenemyaimtracking();
-  }
-  else {
+  } else {
     thread animscripts\run::faceenemyaimtracking();
   }
 }
@@ -192,8 +189,7 @@ findcqbpointsofinterest() {
 
         if(var_9 < 0) {
           var_3.cqb_point_of_interest = undefined;
-        }
-        else {
+        } else {
           var_3.cqb_point_of_interest = level.cqbpointsofinterest[var_9];
         }
 

@@ -143,8 +143,7 @@ random_earthquakes() {
 
     if(!isDefined(level.next_quake_sound)) {
       var_1 = "elm_nml_quake_sm";
-    }
-    else {
+    } else {
       var_1 = level.next_quake_sound;
     }
 

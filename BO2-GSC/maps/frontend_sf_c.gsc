@@ -193,7 +193,7 @@ scene_socotra_models() {
   wait 3.0;
 
   foreach(building in prop_buildings) {
-  building thread holo_table_prop_blink_on();
+    building thread holo_table_prop_blink_on();
   }
 
   level waittill("cliffs_up");
@@ -207,7 +207,7 @@ scene_socotra_models() {
   prop_base notify("stop_geo_fx");
 
   foreach(prop in prop_buildings) {
-  prop clearclientflag(15);
+    prop clearclientflag(15);
   }
 
   prop_rock clearclientflag(15);
@@ -244,8 +244,7 @@ scene_overflow_briefing() {
 
   if(have_intel) {
     run_scene("pakistan_have_intel");
-  }
-  else {
+  } else {
     run_scene("pakistan_no_intel");
   }
 

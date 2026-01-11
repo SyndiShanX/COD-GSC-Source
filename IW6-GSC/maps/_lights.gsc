@@ -37,8 +37,7 @@ flickerlight(var_0, var_1, var_2, var_3) {
 
     if(var_2 != var_3) {
       var_5 = var_5 + randomfloatrange(var_2, var_3);
-    }
-    else {
+    } else {
       var_5 = var_5 + var_2;
     }
 
@@ -217,8 +216,7 @@ generic_flickering() {
       if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "on") {
         if(!isDefined(self.lit_models)) {
           self.lit_models[0] = var_1;
-        }
-        else {
+        } else {
           self.lit_models[self.lit_models.size] = var_1;
         }
 
@@ -228,8 +226,7 @@ generic_flickering() {
       if(isDefined(var_1.script_noteworthy) && var_1.script_noteworthy == "off") {
         if(!isDefined(self.unlit_models)) {
           self.unlit_models[0] = var_1;
-        }
-        else {
+        } else {
           self.unlit_models[self.unlit_models.size] = var_1;
         }
 
@@ -265,15 +262,13 @@ generic_flickering() {
 
       if(!isDefined(self.lit_models)) {
         self.lit_models[0] = var_4;
-      }
-      else {
+      } else {
         self.lit_models[self.lit_models.size] = var_4;
       }
 
       if(!isDefined(self.unlit_models)) {
         self.unlit_models[0] = getent(var_4.target, "targetname");
-      }
-      else {
+      } else {
         self.unlit_models[self.unlit_models.size] = getent(var_4.target, "targetname");
       }
 
@@ -352,7 +347,7 @@ generic_flicker_pause() {
 
       if(isDefined(self.unlit_models)) {
         foreach(var_5 in self.unlit_models) {
-        var_5 show();
+          var_5 show();
         }
       }
     }
@@ -387,7 +382,7 @@ generic_flicker_pause() {
 
       if(isDefined(self.unlit_models)) {
         foreach(var_5 in self.unlit_models) {
-        var_5 hide();
+          var_5 hide();
         }
       }
     }
@@ -426,7 +421,7 @@ generic_flicker() {
 
         if(isDefined(self.unlit_models)) {
           foreach(var_10 in self.unlit_models) {
-          var_10 show();
+            var_10 show();
           }
         }
       } else {
@@ -445,7 +440,7 @@ generic_flicker() {
 
           if(isDefined(self.unlit_models)) {
             foreach(var_10 in self.unlit_models) {
-            var_10 hide();
+              var_10 hide();
             }
           }
         }
@@ -482,7 +477,7 @@ generic_flicker() {
 
       if(isDefined(self.unlit_models)) {
         foreach(var_10 in self.unlit_models) {
-        var_10 hide();
+          var_10 hide();
         }
       }
     }
@@ -509,8 +504,7 @@ flickerlightintensity(var_0, var_1) {
 
       if(var_4 > 0.2) {
         var_4 = randomfloatrange(0, 0.3);
-      }
-      else {
+      } else {
         var_4 = var_2;
       }
 
@@ -790,13 +784,13 @@ init_linked_ents() {
         var_4 = getEntArray(var_2.target, "targetname");
 
         foreach(var_6 in var_4) {
-        self.unlit_models[self.unlit_models.size] = var_6;
+          self.unlit_models[self.unlit_models.size] = var_6;
         }
       }
     }
 
     foreach(var_2 in self.lit_models) {
-    var_2.visible = 1;
+      var_2.visible = 1;
     }
 
     foreach(var_2 in self.unlit_models) {

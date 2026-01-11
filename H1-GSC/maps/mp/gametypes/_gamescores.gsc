@@ -9,8 +9,7 @@ gethighestscoringplayer() {
 
   if(!level.placement["all"].size) {
     return undefined;
-  }
-  else {
+  } else {
     return level.placement["all"][0];
   }
 }
@@ -195,8 +194,7 @@ _setteamscore(var_0, var_1) {
 
   if(maps\mp\_utility::inovertime() && !isDefined(level.overtimescorewinoverride) || isDefined(level.overtimescorewinoverride) && !level.overtimescorewinoverride) {
     thread maps\mp\gametypes\_gamelogic::onscorelimit();
-  }
-  else {
+  } else {
     thread maps\mp\gametypes\_gamelogic::checkteamscorelimitsoon(var_0);
     thread maps\mp\gametypes\_gamelogic::checkscorelimit();
   }
@@ -207,8 +205,7 @@ updateteamscore(var_0) {
 
   if(!maps\mp\_utility::isroundbased() || !maps\mp\_utility::isobjectivebased()) {
     var_1 = _getteamscore(var_0);
-  }
-  else {
+  } else {
     var_1 = game["roundsWon"][var_0];
   }
 
@@ -226,7 +223,7 @@ sendupdatedteamscores() {
   maps\mp\_utility::waittillslowprocessallowed();
 
   foreach(var_1 in level.players) {
-  var_1 updatescores();
+    var_1 updatescores();
   }
 }
 
@@ -311,8 +308,7 @@ updateplacement() {
 
   if(level.multiteambased) {
     mtdm_updateteamplacement();
-  }
-  else if(level.teambased) {
+  } else if(level.teambased) {
     updateteamplacement();
   }
 }
@@ -336,8 +332,7 @@ getbetterplayer(var_0, var_1) {
 
   if(common_scripts\utility::cointoss()) {
     return var_0;
-  }
-  else {
+  } else {
     return var_1;
   }
 }
@@ -363,7 +358,7 @@ mtdm_updateteamplacement() {
   var_0["spectator"] = [];
 
   foreach(var_2 in level.teamnamelist) {
-  var_0[var_2] = [];
+    var_0[var_2] = [];
   }
 
   var_4 = level.placement["all"];
@@ -376,7 +371,7 @@ mtdm_updateteamplacement() {
   }
 
   foreach(var_2 in level.teamnamelist) {
-  level.placement[var_2] = var_0[var_2];
+    level.placement[var_2] = var_0[var_2];
   }
 }
 

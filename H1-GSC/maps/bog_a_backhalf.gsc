@@ -242,8 +242,7 @@ tank_defense_victory_check() {
   for(var_6 = 0; var_6 < var_0.size; var_6++) {
     if(!isDefined(var_0[var_6].count)) {
       var_7 = 1;
-    }
-    else {
+    } else {
       var_7 = var_0[var_6].count;
     }
 
@@ -291,8 +290,7 @@ tank_defense_killspawner_monitor() {
   for(var_3 = 0; var_3 < var_0.size; var_3++) {
     if(!isDefined(var_0[var_3].count)) {
       var_4 = 1;
-    }
-    else {
+    } else {
       var_4 = var_0[var_3].count;
     }
 
@@ -540,17 +538,13 @@ cobra_sequence_reminder() {
 
     if(var_0 == 0) {
       maps\_utility::radio_dialogue_queue("buttonedup");
-    }
-    else if(var_0 == 1) {
+    } else if(var_0 == 1) {
       maps\_utility::radio_dialogue_queue("whereistheairsupport");
-    }
-    else if(var_0 == 2) {
+    } else if(var_0 == 2) {
       maps\_utility::radio_dialogue_queue("canttakebuilding");
-    }
-    else if(var_0 == 3) {
+    } else if(var_0 == 3) {
       maps\_utility::radio_dialogue_queue("rippingusapart");
-    }
-    else if(var_0 == 4) {
+    } else if(var_0 == 4) {
       maps\_utility::radio_dialogue_queue("plantbeacon");
       var_0 = 0;
     }
@@ -570,8 +564,7 @@ cobra_flightplan(var_0) {
 
   if(isDefined(self.target)) {
     var_3 = getent(self.target, "targetname");
-  }
-  else {}
+  } else {}
 
   var_4 = [];
 
@@ -625,8 +618,7 @@ cobra_flightplan(var_0) {
 
     if(isDefined(var_12.script_decel)) {
       self vehicle_setspeed(var_1, var_8, var_12.script_decel);
-    }
-    else {
+    } else {
       self vehicle_setspeed(var_1, var_8);
     }
 
@@ -764,8 +756,7 @@ cobra_missile_fired_earthquake(var_0) {
 
   if(isDefined(var_0) && var_0 == 1) {
     level.player playrumbleonentity("generic_attack_heavy_500");
-  }
-  else {
+  } else {
     level.player playrumbleonentity("generic_attack_medium_500");
   }
 }
@@ -1079,8 +1070,7 @@ ending_sequence() {
 
   if(getdvarint("use_old_tank_dialogue") == 1) {
     var_5 = 220;
-  }
-  else {
+  } else {
     var_5 = 300;
   }
 

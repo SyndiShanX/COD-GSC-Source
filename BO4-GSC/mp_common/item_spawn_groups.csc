@@ -6,7 +6,6 @@
 #include script_68c78107b4aa059c;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\struct;
-
 #namespace item_spawn_group;
 
 setup(localclientnum, seedvalue, reset = 1) {

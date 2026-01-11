@@ -220,7 +220,7 @@ stat_notify_register_func(var_0) {
 stat_notify(var_0, var_1) {
   if(isDefined(self.stat_notify_func)) {
     foreach(var_3 in self.stat_notify_func) {
-    self[[var_3]](var_0, var_1);
+      self[[var_3]](var_0, var_1);
     }
   }
 }

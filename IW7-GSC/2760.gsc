@@ -85,11 +85,9 @@ func_AC06(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
     if(var_12 == 0) {
       var_14 = 20;
-    }
-    else if(var_12 == 1) {
+    } else if(var_12 == 1) {
       var_14 = -20;
-    }
-    else if(var_12 == 2) {}
+    } else if(var_12 == 2) {}
 
     var_15 = rotatepointaroundvector(var_10, var_08, var_13);
     var_15 = rotatepointaroundvector(var_09, var_15, var_14);
@@ -148,7 +146,7 @@ func_AC09(var_00, var_01) {
         var_03 = undefined;
 
         foreach(var_09 in var_0.func_B8AC) {
-        var_09 notify("missile_targetChanged");
+          var_09 notify("missile_targetChanged");
         }
       }
 
@@ -241,8 +239,7 @@ func_AC14(var_00, var_01) {
 
   if(level.func_A876.size + level.func_A875.size < 4) {
     level.func_A876[level.func_A876.size] = var_00;
-  }
-  else {
+  } else {
     var_00 delete();
   }
 }
@@ -340,7 +337,7 @@ func_AC0E(var_00, var_01, var_02, var_03) {
   var_0.func_AC03[var_05] = var_04;
 
   foreach(var_11 in var_04) {
-  level thread func_AC0C(var_11, var_00, var_05);
+    level thread func_AC0C(var_11, var_00, var_05);
   }
 
   var_13 = 1;
@@ -424,8 +421,7 @@ func_AC0A(var_00) {
 
   if(var_0.model != "vehicle_av8b_harrier_jet_mp") {
     var_01 = var_00 gettagorigin("tag_missile_target");
-  }
-  else {
+  } else {
     var_01 = var_00 gettagorigin("tag_body");
   }
 

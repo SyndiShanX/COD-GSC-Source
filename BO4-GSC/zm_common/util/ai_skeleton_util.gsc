@@ -16,11 +16,10 @@
 #include scripts\zm_common\zm_round_spawning;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
-
 #namespace zombie_skeleton_util;
 
 autoexec __init__system__() {
-  system::register(#"zombie_skeleton_util", &__init__, undefined, #"zm_ai_skeleton");
+  system::register(#"zombie_skeleton_util", &__init__, undefined, # "zm_ai_skeleton");
 }
 
 private __init__() {
@@ -83,8 +82,8 @@ function_1ea880bd(b_force_spawn = 0, var_eb3a8721, round_number, b_spear, b_helm
     s_spawn_loc = var_eb3a8721;
   } else if(isDefined(level.var_edd123b1)) {
     s_spawn_loc = [[level.var_edd123b1]]();
-  } else if(isarray(level.zm_loc_types) && level.zm_loc_types[#"zombie_location"].size > 0) {
-    a_s_spawn_locs = function_3ce1516d(level.zm_loc_types[#"zombie_location"]);
+  } else if(isarray(level.zm_loc_types) && level.zm_loc_types[# "zombie_location"].size > 0) {
+    a_s_spawn_locs = function_3ce1516d(level.zm_loc_types[# "zombie_location"]);
     s_spawn_loc = array::random(a_s_spawn_locs);
   }
 
@@ -176,8 +175,8 @@ function_331e9312() {
 }
 
 function_d325f6a4(entity) {
-  if(isarray(level.zm_loc_types[#"zombie_location"]) && level.zm_loc_types[#"zombie_location"].size >= 1) {
-    a_locs = function_3ce1516d(level.zm_loc_types[#"zombie_location"]);
+  if(isarray(level.zm_loc_types[# "zombie_location"]) && level.zm_loc_types[# "zombie_location"].size >= 1) {
+    a_locs = function_3ce1516d(level.zm_loc_types[# "zombie_location"]);
     a_locs = array::randomize(a_locs);
   }
 
@@ -245,7 +244,7 @@ get_favorite_enemy() {
 
 function_ad4293a8() {
   self endon(#"death");
-  a_s_spawn_locs = function_3ce1516d(level.zm_loc_types[#"zombie_location"]);
+  a_s_spawn_locs = function_3ce1516d(level.zm_loc_types[# "zombie_location"]);
 
   if(!isarray(a_s_spawn_locs) || a_s_spawn_locs.size < 1) {
     self.b_ignore_cleanup = 1;
@@ -310,11 +309,11 @@ private function_3ce1516d(a_s_spawn_locs) {
 }
 
 alloc_dynamic_buffer(origin, radius, half_height) {
-  assert(self.archetype === #"skeleton", "<dev string:x38>");
+  assert(self.archetype === # "skeleton", "<dev string:x38>");
   self.var_dbbbae12 = ai::t_cylinder(origin, radius, half_height);
 }
 
 function_9ac81c11() {
-  assert(self.archetype === #"skeleton", "<dev string:x77>");
+  assert(self.archetype === # "skeleton", "<dev string:x77>");
   self.var_dbbbae12 = undefined;
 }

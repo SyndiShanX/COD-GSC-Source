@@ -40,7 +40,7 @@ iss_get_satellite_model() {
   model linkto(node);
 
   foreach(part in level.iss_ents["satellite"]) {
-  part linkto(model);
+    part linkto(model);
   }
 
   return model;
@@ -859,7 +859,7 @@ emp_heli_crash_guys_fallout() {
 
 street_hide_moment() {
   foreach(member in level.team) {
-  member ent_flag_wait("street_hide");
+    member ent_flag_wait("street_hide");
   }
 
   flag_wait("street_player_hide");
@@ -917,7 +917,7 @@ street_hide_moment() {
   glass = getglassarray("street_hide_glass");
   dir = anglesToForward((0, 345, 0));
   foreach(piece in glass) {
-  destroyglass(piece, dir * 200);
+    destroyglass(piece, dir * 200);
   }
 
   //	time = 4.5;
@@ -1011,8 +1011,7 @@ street_heli_player_kill() {
       time -= interval;
       if(time <= 0) {
         count = 0;
-      }
-      else {
+      } else {
         count--;
       }
     }
@@ -1172,7 +1171,7 @@ street_crash_cars() {
     thread play_loopsound_in_space("fire_dumpster_medium", fx.origin);
   }
   foreach(light in info["light"]) {
-  light setlightintensity(light.old_intensity);
+    light setlightintensity(light.old_intensity);
   }
 
   wait .05;
@@ -1681,7 +1680,7 @@ street_btr_animate_heli() {
 
   wait 5;
   foreach(part in parts) {
-  part delete();
+    part delete();
   }
 }
 
@@ -1762,8 +1761,7 @@ corner_palm_style_door_open(soundalias) {
 
   if(isDefined(soundalias)) {
     self playSound(soundalias);
-  }
-  else {
+  } else {
     self playSound("door_wood_slow_open");
   }
 
@@ -1864,8 +1862,7 @@ corner_truck_engine_crash() {
 
     if(i > 8) {
       wait .2;
-    }
-    else {
+    } else {
       wait .1;
     }
   }
@@ -1887,7 +1884,7 @@ corner_vehicle_engine_crash_setup() {
   array = [];
 
   foreach(ent in ents) {
-  array[ent.script_noteworthy] = ent;
+    array[ent.script_noteworthy] = ent;
   }
 
   array["clip"] linkto(self);
@@ -2085,8 +2082,7 @@ meetup_runner_walk(name) {
 
   if(distance(node.origin, self.origin) > 48) {
     node anim_generic_reach(self, "patrol_bored_walk_2_bored");
-  }
-  else {
+  } else {
     node = self;
   }
 
@@ -2468,7 +2464,7 @@ emp_teleport_team(team, nodes) {
 
 emp_teleport_team_specific(team, nodes) {
   foreach(node in nodes) {
-  level.team[node.script_noteworthy] thread teleport_actor(node);
+    level.team[node.script_noteworthy] thread teleport_actor(node);
   }
 }
 
@@ -2663,8 +2659,7 @@ kill_random_teammate(num, del) {
 
     if(del) {
       member delete();
-    }
-    else {
+    } else {
       member kill();
     }
     num--;
@@ -2684,8 +2679,7 @@ kill_random_teammate(num, del) {
 
     if(del) {
       member delete();
-    }
-    else {
+    } else {
       member kill();
     }
     num--;
@@ -2702,8 +2696,7 @@ add_team(team) {
   array = [];
   if(!isarray(team)) {
     array[array.size] = team;
-  }
-  else {
+  } else {
     array = team;
   }
 
@@ -2990,8 +2983,7 @@ anim_generic_gravity_run(guy, anime, tag) {
 set_pushplayer(value) {
   if(value) {
     self.dontchangepushplayer = true;
-  }
-  else {
+  } else {
     self.dontchangepushplayer = undefined;
   }
 
@@ -3034,7 +3026,7 @@ fx_rain_pause() {
   array = array_combine( array, getfxarraybyID( "rain_splash_lite_8x128" ) );
   array = array_combine( array, getfxarraybyID( "rain_splash_lite_64x64" ) );
   array = array_combine( array, getfxarraybyID( "rain_splash_lite_128x128" ) );
-	
+  	
   array_thread( array, ::pauseEffect );*/
 }
 
@@ -3197,24 +3189,24 @@ dcemp_create_triggerfx() {
   }
   //ISS FX
   else {
-  if(isissfx)
+    if(isissfx)
   }
-    flag_wait("iss_fx");
+  flag_wait("iss_fx");
   //RAIN FX
   else {
-  if(distancesquared(self.v["origin"], rain.node.origin) < rain.radius)
+    if(distancesquared(self.v["origin"], rain.node.origin) < rain.radius)
   }
-    flag_wait("rain_fx");
+  flag_wait("rain_fx");
   //RAIN FX2
   else {
-  if(distancesquared(self.v["origin"], rain.node.origin) < rain.radius)
+    if(distancesquared(self.v["origin"], rain.node.origin) < rain.radius)
   }
-    flag_wait("rain_fx2");
+  flag_wait("rain_fx2");
   //END FX
   else {
-  if(distancesquared(self.v["origin"], end.node.origin) < end.radius || isendfx)
+    if(distancesquared(self.v["origin"], end.node.origin) < end.radius || isendfx)
   }
-    flag_wait("end_fx");
+  flag_wait("end_fx");
 
   //OTHER FX just start at first frame
   self common_scripts\_fx::create_triggerfx();
@@ -3299,7 +3291,7 @@ script2model_precache() {
   }
 
   foreach(model in precachelist) {
-  precachemodel(model);
+    precachemodel(model);
   }
 }
 

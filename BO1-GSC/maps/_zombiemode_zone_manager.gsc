@@ -96,9 +96,7 @@ zone_init(zone_name) {
       if(spawner.classname == "actor_zombie_dog") {
         zone.dog_spawners[zone.dog_spawners.size] = spawner;
       } else if(isDefined(level.ignore_spawner_func)) {
-        ignore = [
-          [level.ignore_spawner_func]
-        ](spawner);
+        ignore = [[level.ignore_spawner_func]](spawner);
         if(!ignore) {
           zone.spawners[zone.spawners.size] = spawner;
         }

@@ -125,8 +125,7 @@ main() {
   maps\mp\zm_nuked_perks::init_nuked_perks();
   maps\mp\zombies\_zm::init();
 
-  if(level.splitscreen && getdvarint(#"splitscreen_playerCount") > 2) {
-  } else
+  if(level.splitscreen && getdvarint(#"splitscreen_playerCount") > 2) {} else
     level.custom_intermission = ::nuked_standard_intermission;
 
   level thread maps\mp\_sticky_grenade::init();
@@ -389,8 +388,7 @@ zombie_crater_locomotion() {
 
   if(self.zombie_move_speed == "sprint") {
     self setanimstatefromasd("zm_move_sprint_crawl", 2);
-  }
-  else {
+  } else {
     self setanimstatefromasd("zm_move_sprint_crawl", 1);
   }
 
@@ -563,8 +561,7 @@ setup_rex_starts() {
   add_gameloc("nuked", ::dummy, "nuked", ::dummy);
 }
 
-dummy() {
-}
+dummy() {}
 
 precache_team_characters() {
   precachemodel("c_zom_player_cdc_fb");
@@ -642,11 +639,9 @@ include_powerups() {
   include_powerup("fire_sale");
 }
 
-include_perks() {
-}
+include_perks() {}
 
-include_equipment_for_level() {
-}
+include_equipment_for_level() {}
 
 include_weapons() {
   include_weapon("knife_zm", 0);
@@ -961,8 +956,7 @@ custom_debris_function() {
     self set_hint_string(self, "default_buy_door", cost);
     self waittill("trigger", who, force);
 
-    if(getdvarint(#"zombie_unlock_all") > 0 || is_true(force)) {
-    } else {
+    if(getdvarint(#"zombie_unlock_all") > 0 || is_true(force)) {} else {
       if(!who usebuttonpressed()) {
         continue;
       }
@@ -974,8 +968,7 @@ custom_debris_function() {
     if(is_player_valid(who)) {
       players = get_players();
 
-      if(getdvarint(#"zombie_unlock_all") > 0) {
-      } else if(who.score >= self.zombie_cost)
+      if(getdvarint(#"zombie_unlock_all") > 0) {} else if(who.score >= self.zombie_cost)
         who maps\mp\zombies\_zm_score::minus_to_player_score(self.zombie_cost);
       else {
         play_sound_at_pos("no_purchase", self.origin);
@@ -1090,8 +1083,7 @@ sndmusegg2_wait(bear_origin) {
 
   if(level.meteor_counter == 3) {
     level thread sndmuseggplay(temp_ent, "zmb_nuked_song_2", 60);
-  }
-  else {
+  } else {
     wait 1.5;
     temp_ent delete();
   }

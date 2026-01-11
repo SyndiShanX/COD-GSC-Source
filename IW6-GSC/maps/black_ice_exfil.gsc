@@ -96,7 +96,7 @@ main() {
   var_26 = common_scripts\utility::array_combine(var_27, var_26);
 
   foreach(var_29 in var_26) {
-  var_29 linkto(var_24);
+    var_29 linkto(var_24);
   }
 
   var_26 = common_scripts\utility::array_add(var_26, var_1);
@@ -105,7 +105,7 @@ main() {
   var_31 = [var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14, var_15, var_16, var_17, var_18, var_19, var_20, var_21];
 
   foreach(var_33 in var_31) {
-  thread maps\black_ice_fx::fx_exfil_lifeboat_wake(var_33);
+    thread maps\black_ice_fx::fx_exfil_lifeboat_wake(var_33);
   }
 
   thread ladder_chase_explosion_fx();
@@ -315,8 +315,7 @@ player_viewkick_distance(var_0, var_1, var_2, var_3, var_4) {
 player_rumble_distance(var_0, var_1, var_2, var_3, var_4) {
   if(var_0 < var_2) {
     level.player playrumbleonentity(var_1);
-  }
-  else if(var_0 < var_4) {
+  } else if(var_0 < var_4) {
     level.player playrumbleonentity(var_3);
   }
 }
@@ -567,8 +566,7 @@ rubberband_far_ally_steam_reaction_runout(var_0) {
     if(var_4 > var_1) {
       if(var_3 > var_2) {
         var_3 = var_3 - var_1;
-      }
-      else {
+      } else {
         var_3 = var_3 + var_1;
       }
     } else
@@ -591,8 +589,7 @@ ally_rubber_banding_solo(var_0) {
 
     if(var_4 > var_3) {
       var_4 = var_3;
-    }
-    else if(var_4 < 0) {
+    } else if(var_4 < 0) {
       var_4 = 0;
     }
 
@@ -660,7 +657,7 @@ fires() {
   var_1 = common_scripts\utility::getstructarray("struct_exfil_fires", "targetname");
 
   foreach(var_3 in var_1) {
-  playFX(common_scripts\utility::getfx(common_scripts\utility::random(var_0)), var_3.origin + (0, 0, -200));
+    playFX(common_scripts\utility::getfx(common_scripts\utility::random(var_0)), var_3.origin + (0, 0, -200));
   }
 }
 
@@ -690,8 +687,7 @@ rubberband_ladder_chase(var_0) {
 
     if(var_6 < var_1) {
       level.jump_distance_allowed = 1;
-    }
-    else {
+    } else {
       level.jump_distance_allowed = 0;
     }
 
@@ -748,8 +744,7 @@ ladder_player_jumpcheck() {
     if(level.player jumpbuttonpressed()) {
       if(var_0) {
         var_1 = 1;
-      }
-      else {
+      } else {
         var_0 = 1;
       }
     } else {
@@ -869,8 +864,7 @@ player_lerp_speed(var_0, var_1, var_2, var_3, var_4) {
 player_fail_rigexplode() {
   if(!common_scripts\utility::flag("flag_player_dying_on_rig")) {
     common_scripts\utility::flag_set("flag_player_dying_on_rig");
-  }
-  else {
+  } else {
     return;
   }
 
@@ -1047,14 +1041,14 @@ shrink_pdeck_lights() {
   var_2 = getEntArray("lights_pipedeck_c", "targetname");
 
   foreach(var_4 in var_0) {
-  var_4 setlightradius(12);
+    var_4 setlightradius(12);
   }
 
   foreach(var_4 in var_1) {
-  var_4 setlightradius(12);
+    var_4 setlightradius(12);
   }
 
   foreach(var_4 in var_2) {
-  var_4 setlightradius(12);
+    var_4 setlightradius(12);
   }
 }

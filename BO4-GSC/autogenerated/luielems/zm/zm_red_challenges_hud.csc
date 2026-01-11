@@ -4,7 +4,6 @@
 ***************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace zm_red_challenges_hud;
 
 class czm_red_challenges_hud: cluielem {
@@ -63,14 +62,14 @@ class czm_red_challenges_hud: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"zm_red_challenges_hud");
+    cluielem::open(localclientnum, # "zm_red_challenges_hud");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, #"defaultstate");
-    set_data(localclientnum, "challengeText", #"");
-    set_data(localclientnum, "bottomText", #"");
+    set_state(localclientnum, # "defaultstate");
+    set_data(localclientnum, "challengeText", # "");
+    set_data(localclientnum, "bottomText", # "");
     set_data(localclientnum, "bInLocation", 0);
     set_data(localclientnum, "progress", 0);
     set_data(localclientnum, "tributeAvailable", 0);

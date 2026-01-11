@@ -23,8 +23,7 @@ init_flags() {
   flag_init("obj_capture_menendez");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_capture() {
   capture_skipto_setup();
@@ -110,7 +109,7 @@ kill_friendly_quadrotors() {
   enemies = getaiarray("axis");
 
   foreach(quad in a_vh_quads) {
-  quad notify("death", enemies[0]);
+    quad notify("death", enemies[0]);
   }
 
   wait(randomfloatrange(0.3, 0.5));
@@ -205,8 +204,7 @@ _set_vtol_turret_target(e_target, v_target) {
 
   if(isDefined(e_target)) {
     self setgunnertargetent(e_target, (0, 0, 0), 0);
-  }
-  else {
+  } else {
     self setgunnertargetvec(v_target, 0);
   }
 }
@@ -266,7 +264,7 @@ clean_up_left_over_ais_and_vehs() {
   enemies = getaiarray("axis");
 
   foreach(enemy in enemies) {
-  enemy delete();
+    enemy delete();
   }
 
   enemy_veh = getvehiclearray("axis");
@@ -286,7 +284,7 @@ clean_up_left_over_ais_and_vehs() {
   menendez = get_model_or_models_from_scene("surrender_menendez", "capture_menendez");
 
   foreach(friend in friendlies) {
-  friend aim_at_target(menendez, 500);
+    friend aim_at_target(menendez, 500);
   }
 }
 

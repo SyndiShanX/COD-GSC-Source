@@ -293,9 +293,7 @@ escape_game_logic() {
 }
 
 enable_escape_exit_interaction() {
-  var_00 = [
-    [level.get_escape_exit_interactions]
-  ]();
+  var_00 = [[level.get_escape_exit_interactions]]();
   var_01 = scripts\engine\utility::random(var_00);
   make_waypoint_on_escape_exit(var_01);
   var_02 = spawn("script_origin", var_01.origin);
@@ -522,9 +520,7 @@ onplayerconnect() {
       var_00 scripts\cp\zombies\zombie_afterlife_arcade::player_init_afterlife(var_00);
       var_00 scripts\cp\cp_persistence::lb_player_update_stat("waveNum", level.wave_num, 1);
       if(isDefined(level.custom_onplayerconnect_func)) {
-        [
-          [level.custom_onplayerconnect_func]
-        ](var_00);
+        [[level.custom_onplayerconnect_func]](var_00);
       }
 
       var_00 thread scripts\cp\zombies\escape_multiplier_combos::score_multiplier_init(var_00);
@@ -959,9 +955,7 @@ zombie_laststand_currency_penalth_amount(param_00) {
 }
 
 zombie_callbackplayerkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
-  [
-    [level.callbackplayerlaststand]
-  ](param_00, param_01, param_02, param_04, param_05, param_07, param_08, param_09);
+  [[level.callbackplayerlaststand]](param_00, param_01, param_02, param_04, param_05, param_07, param_08, param_09);
   scripts\cp\zombies\zombies_clientmatchdata::logplayerdeath();
 }
 

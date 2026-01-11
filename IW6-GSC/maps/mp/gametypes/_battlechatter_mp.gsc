@@ -310,20 +310,15 @@ grenadeTracking() {
 
     if(weaponName == "frag_grenade_mp") {
       level thread sayLocalSound(self, "frag_out");
-    }
-    else if(weaponName == "semtex_mp") {
+    } else if(weaponName == "semtex_mp") {
       level thread sayLocalSound(self, "semtex_out");
-    }
-    else if(weaponName == "flash_grenade_mp") {
+    } else if(weaponName == "flash_grenade_mp") {
       level thread sayLocalSound(self, "flash_out");
-    }
-    else if(weaponName == "concussion_grenade_mp") {
+    } else if(weaponName == "concussion_grenade_mp") {
       level thread sayLocalSound(self, "conc_out");
-    }
-    else if(weaponName == "smoke_grenade_mp") {
+    } else if(weaponName == "smoke_grenade_mp") {
       level thread sayLocalSound(self, "smoke_out");
-    }
-    else if(weaponName == "c4_mp") {
+    } else if(weaponName == "c4_mp") {
       level thread sayLocalSound(self, "c4_plant");
     }
   }
@@ -529,8 +524,7 @@ doThreatCalloutResponse(soundAlias, location) {
     team = self.team;
     if(!IsAgent(self)) {
       mf = self hasFemaleCustomizationModel();
-    }
-    else {
+    } else {
       mf = false;
     }
     voiceNum = self.pers["voiceNum"];
@@ -553,8 +547,7 @@ doThreatCalloutResponse(soundAlias, location) {
       }
       if(!IsAgent(player)) {
         playerMF = player HasFemaleCustomizationModel();
-      }
-      else {
+      } else {
         playerMF = false;
       }
 
@@ -565,8 +558,7 @@ doThreatCalloutResponse(soundAlias, location) {
         echoAlias = prefix + "co_loc_" + location + "_echo";
         if(SoundExists(echoAlias) && cointoss()) {
           newAlias = echoAlias;
-        }
-        else {
+        } else {
           newAlias = prefix + level.bcSounds["callout_response_generic"];
         }
 

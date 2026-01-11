@@ -190,8 +190,7 @@ killstreak_debug_text(text) {
   if(isDefined(level.killstreak_rule_debug)) {
     if(level.killstreak_rule_debug == 1.0) {
       iprintln(text);
-    }
-    else if(level.killstreak_rule_debug == 2.0) {
+    } else if(level.killstreak_rule_debug == 2.0) {
       iprintlnbold(text);
     }
   }

@@ -104,8 +104,7 @@ _fire(lifeId, player) {
 
   if(remoteMissileSpawnArray.size > 0) {
     remoteMissileSpawn = player getBestSpawnPoint(remoteMissileSpawnArray);
-  }
-  else {
+  } else {
     remoteMissileSpawn = undefined;
   }
 

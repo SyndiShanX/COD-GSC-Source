@@ -267,8 +267,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
         if(do_mortar) {
           if(isDefined(level._explosion_delay) && isDefined(level._explosion_delay[mortar_name])) {
             wait(level._explosion_delay[mortar_name]);
-          }
-          else {
+          } else {
             wait(randomfloatrange(level._explosion_min_delay[mortar_name], level._explosion_max_delay[mortar_name]));
           }
 
@@ -282,8 +281,7 @@ mortar_loop(mortar_name, barrage_amount, no_terrain) {
       if(barrage_amount > 1) {
         if(isDefined(level._explosion_barrage_delay) && isDefined(level._explosion_barrage_delay[mortar_name])) {
           wait(level._explosion_barrage_delay[mortar_name]);
-        }
-        else {
+        } else {
           wait(randomfloatrange(level._explosion_barrage_min_delay[mortar_name], level._explosion_barrage_max_delay[mortar_name]));
         }
       }
@@ -342,8 +340,7 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
 
   if(is_struct) {
     temp_ent explosion_incoming(mortar_name);
-  }
-  else {
+  } else {
     self explosion_incoming(mortar_name);
   }
 
@@ -366,8 +363,7 @@ explosion_activate(mortar_name, blast_radius, min_damage, max_damage, quake_powe
 
   if(is_struct) {
     temp_ent explosion_boom(mortar_name, quake_power, quake_time, quake_radius);
-  }
-  else {
+  } else {
     self explosion_boom(mortar_name, quake_power, quake_time, quake_radius);
   }
 
@@ -415,8 +411,7 @@ explosion_boom(mortar_name, power, time, radius, is_struct) {
 
   if(!isDefined(is_struct)) {
     explosion_sound(mortar_name);
-  }
-  else {
+  } else {
     temp_ent = spawn("script_origin", self.origin);
     temp_ent explosion_sound(mortar_name);
     temp_ent thread delete_temp_ent();
@@ -463,11 +458,9 @@ explosion_sound(mortar_name) {
 
   if(level._effecttype[mortar_name] == "mortar_water") {
     self playSound("exp_mortar_water");
-  }
-  else if(level._effecttype[mortar_name] == "artillery") {
+  } else if(level._effecttype[mortar_name] == "artillery") {
     self playSound("exp_mortar");
-  }
-  else if(level._effecttype[mortar_name] == "bomb") {
+  } else if(level._effecttype[mortar_name] == "bomb") {
     self playSound("exp_mortar");
   }
 }
@@ -479,11 +472,9 @@ explosion_incoming(mortar_name) {
 
   if(level._effecttype[mortar_name] == "mortar_water") {
     self playSound("prj_mortar_incoming", "sounddone");
-  }
-  else if(level._effecttype[mortar_name] == "artillery") {
+  } else if(level._effecttype[mortar_name] == "artillery") {
     self playSound("prj_mortar_incoming", "sounddone");
-  }
-  else if(level._effecttype[mortar_name] == "bomb") {
+  } else if(level._effecttype[mortar_name] == "bomb") {
     self playSound("prj_mortar_incoming", "sounddone");
   }
 
@@ -508,8 +499,7 @@ setup_mortar_terrain() {
   if(isDefined(self.script_hidden)) {
     if(isDefined(self.script_hidden)) {
       self.hidden_terrain = getent(self.script_hidden, "targetname");
-    }
-    else if(isDefined(self.terrain) && isDefined(self.terrain[0].target)) {
+    } else if(isDefined(self.terrain) && isDefined(self.terrain[0].target)) {
       self.hidden_terrain = getent(self.terrain[0].target, "targetname");
     }
 
@@ -591,8 +581,7 @@ mortar_boom(origin, power, time, radius, effect, bisstruct, bshellshock, custom_
 
   if(isDefined(effect)) {
     playFX(effect, origin);
-  }
-  else {
+  } else {
     playFX(level.mortar, origin);
   }
 
@@ -650,8 +639,7 @@ incoming_sound(soundnum, bisstruct) {
 
   if(!isDefined(level.lastmortarincomingtime)) {
     level.lastmortarincomingtime = currenttime;
-  }
-  else if(currenttime - level.lastmortarincomingtime < 1000) {
+  } else if(currenttime - level.lastmortarincomingtime < 1000) {
     wait 1;
     return;
   } else
@@ -677,8 +665,7 @@ mortar_rumble_on_all_players(high_rumble_string, low_rumble_string, rumble_org, 
     if(isDefined(high_rumble_range) && isDefined(low_rumble_range) && isDefined(rumble_org)) {
       if(distance(players[i].origin, rumble_org) < high_rumble_range) {
         players[i] playrumbleonentity(high_rumble_string);
-      }
-      else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
+      } else if(distance(players[i].origin, rumble_org) < low_rumble_range) {
         players[i] playrumbleonentity(low_rumble_string);
       }
 

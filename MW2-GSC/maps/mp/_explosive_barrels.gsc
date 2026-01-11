@@ -131,8 +131,7 @@ oil_spill_burn_after() {
   // do not pass damage owner if they have disconnected before the barrels explode
   if(!isDefined(self.damageOwner)) {
     self radiusdamage(self.origin, 4, 10, 10);
-  }
-  else {
+  } else {
     self radiusdamage(self.origin, 4, 10, 10, self.damageOwner);
   }
 }
@@ -181,8 +180,7 @@ oil_spill_burn(P, dest) {
 
         if(!isDefined(self.damageOwner)) {
           self radiusdamage(barrels[i].origin, 4, d, d);
-        }
-        else {
+        } else {
           self radiusdamage(barrels[i].origin, 4, d, d, self.damageOwner);
         }
         //barrels[i] dodamage(, P);
@@ -201,8 +199,7 @@ oil_spill_burn(P, dest) {
     d = (80 + randomfloat(10));
     if(!isDefined(self.damageOwner)) {
       self radiusdamage(self.barrel.origin, 4, d, d);
-    }
-    else {
+    } else {
       self radiusdamage(self.barrel.origin, 4, d, d, self.damageOwner);
     }
   }
@@ -216,8 +213,7 @@ oil_spill_burn_section(P) {
   while(time < 5) {
     if(!isDefined(self.damageOwner)) {
       self radiusdamage(P, 32, 5, 1);
-    }
-    else {
+    } else {
       self radiusdamage(P, 32, 5, 1, self.damageOwner);
     }
     time += 1;
@@ -336,8 +332,7 @@ explodable_barrel_explode() {
   // do not pass damage owner if they have disconnected before the barrels explode
   if(!isDefined(self.damageOwner)) {
     self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, undefined, "MOD_EXPLOSIVE", "barrel_mp");
-  }
-  else {
+  } else {
     self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, self.damageOwner, "MOD_EXPLOSIVE", "barrel_mp");
   }
 
@@ -347,8 +342,7 @@ explodable_barrel_explode() {
 
   if(randomint(2) == 0) {
     self setModel("com_barrel_piece");
-  }
-  else {
+  } else {
     self setModel("com_barrel_piece2");
   }
   self setCanDamage(false);

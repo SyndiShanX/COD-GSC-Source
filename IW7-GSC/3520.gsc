@@ -39,8 +39,7 @@ func_10588(var_00) {
 
   if(var_0.allowgrenadedamage) {
     func_1058A("landingExclusionZone");
-  }
-  else {
+  } else {
     func_1058B("landingzone");
   }
 
@@ -48,8 +47,7 @@ func_10588(var_00) {
 
   if(var_0.allowhide) {
     func_1058F("summonExclusionZone");
-  }
-  else {
+  } else {
     func_10590("spaceship_summon_trigger");
   }
 
@@ -67,11 +65,11 @@ func_10588(var_00) {
 
   if(!var_0.func_10DBB) {
     foreach(var_02 in level.func_FE33["axis"]) {
-    func_105CB(var_02, "axis");
+      func_105CB(var_02, "axis");
     }
 
     foreach(var_02 in level.func_FE33["allies"]) {
-    func_105CB(var_02, "allies");
+      func_105CB(var_02, "allies");
     }
   }
 
@@ -199,7 +197,7 @@ func_1059E(var_00, var_01) {
 func_105CE(var_00) {
   if(isDefined(var_00) && isDefined(var_0.outlineids)) {
     foreach(var_02 in var_0.outlineids) {
-    scripts\mp\utility\game::outlinedisable(var_02, var_00);
+      scripts\mp\utility\game::outlinedisable(var_02, var_00);
     }
 
     var_0.outlineids = undefined;
@@ -268,8 +266,7 @@ func_105DF(var_00, var_01, var_02, var_03) {
     foreach(var_06, var_05 in var_01) {
       if(isDefined(var_03)) {
         playfxontagforclients(scripts\engine\utility::getfx(var_05), var_00, var_06, var_03);
-      }
-      else {
+      } else {
         playFXOnTag(scripts\engine\utility::getfx(var_05), var_00, var_06);
       }
 
@@ -415,8 +412,7 @@ func_1059F(var_00, var_01) {
 
     if(var_14 > 1.0) {
       var_14 = 1.0;
-    }
-    else if(var_14 < 0.0) {
+    } else if(var_14 < 0.0) {
       var_14 = 0.0;
     }
 
@@ -556,11 +552,9 @@ func_3758(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
     if(var_13 < 10000) {
       var_02 = var_02 * 1.0;
-    }
-    else if(var_13 < 30000) {
+    } else if(var_13 < 30000) {
       var_02 = var_02 * 0.5;
-    }
-    else {
+    } else {
       var_02 = var_02 * 0.25;
     }
   }
@@ -843,8 +837,7 @@ func_105B8(var_00) {
     if(isDefined(var_0.func_10574)) {
       if(func_10579(var_0.func_10574, var_00)) {
         func_10581(var_0.func_10574, var_00);
-      }
-      else {
+      } else {
         var_00 iprintlnbold(&"MP_JACKAL_CANT_LAND");
       }
 
@@ -856,8 +849,7 @@ func_105B8(var_00) {
 
       if(isDefined(var_01)) {
         func_10576(var_01, var_00);
-      }
-      else if(func_1057A(var_00)) {
+      } else if(func_1057A(var_00)) {
         func_105CF(var_00);
       }
     }
@@ -1024,7 +1016,7 @@ func_10590(var_00) {
     level.func_105ED = var_01;
 
     foreach(var_03 in var_01) {
-    func_105E3(var_03);
+      func_105E3(var_03);
     }
   }
 }
@@ -1035,7 +1027,7 @@ func_1058F(var_00) {
 
   if(var_1.size > 0) {
     foreach(var_03 in var_01) {
-    func_105E3(var_03);
+      func_105E3(var_03);
     }
   }
 }
@@ -1239,7 +1231,9 @@ func_105E4(var_00, var_01, var_02) {
         var_0.func_A41D[var_06] = undefined;
 
         if(isDefined(var_05) && isDefined(var_02)) {
-          [[var_02]](var_05, var_00);
+          [
+            [var_02]
+          ](var_05, var_00);
         }
 
         continue;

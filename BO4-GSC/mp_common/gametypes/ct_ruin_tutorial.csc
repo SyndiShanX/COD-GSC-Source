@@ -4,7 +4,6 @@
 ****************************************************/
 
 #include scripts\mp_common\gametypes\ct_core;
-
 #namespace ct_ruin_tutorial;
 
 init() {

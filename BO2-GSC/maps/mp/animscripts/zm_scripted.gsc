@@ -30,8 +30,7 @@ init(origin, angles, animstate, animsubstate, animmode) {
 
   if(isDefined(animmode)) {
     self.codescripted["AnimMode"] = animmode;
-  }
-  else {
+  } else {
     self.codescripted["AnimMode"] = "normal";
   }
 }

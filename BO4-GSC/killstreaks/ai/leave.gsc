@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\ai\state;
-
 #namespace ai_leave;
 
 init() {
@@ -81,7 +80,7 @@ make_leave() {
   self function_d4c687c9();
   self pathmode("move allowed");
   self setgoal(self.exit_spawn.origin, 0, 32);
-  self waittilltimeout(10, #"goal");
+  self waittilltimeout(10, # "goal");
   waittillframeend();
   self delete();
 }

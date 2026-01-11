@@ -52,7 +52,7 @@ stryker_setmode_ai() {
     iprintln("^2stryker - " + self.turretMode + " mode");
   }
 
-    self thread stryker_turret_think();
+  self thread stryker_turret_think();
 }
 
 stryker_setmode_manual(origin) {
@@ -72,7 +72,7 @@ stryker_setmode_manual(origin) {
     iprintln("^2stryker - " + self.turretMode + " mode");
   }
 
-    wait STRYKER_MANUAL_AI_DURATION;
+  wait STRYKER_MANUAL_AI_DURATION;
 
   thread stryker_suppression_complete_dialog();
   thread stryker_laser_reminder_dialog();
@@ -83,7 +83,7 @@ stryker_turret_think() {
   assert(isDefined(self.turretMode));
   assert(isDefined(level.stryker_settings[self.turretMode]));
 
-    self notify("stryker_turret_think");
+  self notify("stryker_turret_think");
   self endon("stryker_turret_think");
   self endon("death");
 
@@ -115,7 +115,7 @@ stryker_scan_start() {
     iprintln("^2stryker - scan start");
   }
 
-    alternate = 0;
+  alternate = 0;
 
   for(;;) {
     // get random point in front of stryker
@@ -144,7 +144,7 @@ stryker_scan_stop() {
     iprintln("^2stryker - scan stop");
   }
 
-    self clearTurretTarget();
+  self clearTurretTarget();
   self.scanning = undefined;
   self notify("stop_scanning");
 }
@@ -266,13 +266,12 @@ stryker_shoot_target(target) {
     iprintln("^2stryker - shooting a target");
     if(self.turretMode == "ai") {
       thread draw_line_for_time(self.origin + (0, 0, 100), target.origin + targetOffset, 1, 1, 0, 2.0);
-    }
-    else {
+    } else {
       thread draw_line_for_time(self.origin + (0, 0, 100), target.origin + targetOffset, 1, 0, 0, 2.0);
     }
   }
 
-    self setTurretTargetEnt(target, targetOffset);
+  self setTurretTargetEnt(target, targetOffset);
   if(self.lastTarget != target) {
     self waittill_notify_or_timeout("turret_rotate_stopped", 1.0);
   }
@@ -299,8 +298,7 @@ stryker_fire_shots(target, targetOffset) {
   for(i = 0; i < shots; i++) {
     if(isDefined(target) && isDefined(targetOffset)) {
       self fireWeapon("tag_flash", target, targetOffset, 0.0);
-    }
-    else {
+    } else {
       self fireWeapon("tag_flash", undefined, (0, 0, 0), 0.0);
     }
     wait level.stryker_settings[self.turretMode].fire_time;

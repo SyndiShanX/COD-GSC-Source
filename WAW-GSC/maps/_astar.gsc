@@ -121,8 +121,7 @@ getDist(node1, node2) {}
 drawPath(pathNodes, duration, id) {
   if(!isDefined(id)) {
     id = "msg";
-  }
-  {
+  } {
     level notify("draw new path" + id);
     for(i = 1; i < pathNodes.size; i++) {
       level thread drawLink(pathNodes[i].origin, pathNodes[i - 1].origin, duration, id);
@@ -140,8 +139,7 @@ drawPathOffshoots(pathNodes, duration) {
       }
       if(pathNodes[i].link[p] == pathNodes[i + 1]) {
         level thread drawLinkFull(pathNodes[i], pathNodes[i].link[p], (1, 0, 0), false, duration);
-      }
-      else {
+      } else {
         level thread drawLinkFull(pathNodes[i], pathNodes[i].link[p], (0, 0, 1), true, duration);
       }
     }

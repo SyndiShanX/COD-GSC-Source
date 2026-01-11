@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace multi_stage_friendly_lockon;
 
 class cmulti_stage_friendly_lockon: cluielem {

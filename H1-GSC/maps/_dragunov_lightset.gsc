@@ -26,8 +26,7 @@ dragunov_scope_monitor(var_0) {
 
     if(var_6 && !var_2) {
       level.player lightsetoverrideenableforplayer(var_0, 0);
-    }
-    else if(!var_6 && var_2) {
+    } else if(!var_6 && var_2) {
       level.player lightsetoverridedisableforplayer(0);
     }
 

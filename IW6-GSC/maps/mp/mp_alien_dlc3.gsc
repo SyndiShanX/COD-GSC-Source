@@ -84,8 +84,7 @@ main() {
 
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.base_player_count_multiplier = 1;
-  }
-  else {
+  } else {
     level.base_player_count_multiplier = 0.49;
   }
 
@@ -143,7 +142,7 @@ adjust_endgame_camera() {
   var_0 = getEntArray("mp_global_intermission", "classname");
 
   foreach(var_2 in var_0) {
-  var_2.angles = (0, 91, 0);
+    var_2.angles = (0, 91, 0);
   }
 }
 
@@ -372,8 +371,7 @@ shroom_bounce() {
 
   if(maps\mp\alien\_utility::is_true(maps\mp\alien\_utility::is_in_laststand())) {
     self setvelocity((var_0[0] + randomintrange(120, 150), var_0[1] + randomintrange(120, 150), randomintrange(200, 400)));
-  }
-  else {
+  } else {
     self setvelocity((var_0[0] + randomintrange(-160, 160), var_0[1] + randomintrange(-160, 160), randomintrange(700, 900)));
     self playlocalsound("plr_bounce");
   }
@@ -442,7 +440,7 @@ descent_get_non_agent_enemies() {
 
   if(isDefined(level.alive_plants)) {
     foreach(var_2 in level.alive_plants) {
-    var_0 = common_scripts\utility::array_add(var_0, var_2.coll_model);
+      var_0 = common_scripts\utility::array_add(var_0, var_2.coll_model);
     }
 
     return var_0;
@@ -1218,7 +1216,7 @@ gate_blocker(var_0) {
   level notify("ff_down");
 
   foreach(var_4 in level.players) {
-  var_4 maps\mp\_utility::clearlowermessage("vanguard_use_hint");
+    var_4 maps\mp\_utility::clearlowermessage("vanguard_use_hint");
   }
 
   switch (var_0) {
@@ -1451,15 +1449,14 @@ change_player_facing() {
   }
 
   foreach(var_1 in level.players) {
-  var_1 setplayerangles(var_1.angles + (0, -90, 0));
+    var_1 setplayerangles(var_1.angles + (0, -90, 0));
   }
 }
 
 set_spawn_table() {
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     set_chaos_spawn_table();
-  }
-  else {
+  } else {
     if(maps\mp\alien\_utility::is_hardcore_mode()) {
       set_hardcore_extinction_spawn_table();
       return;
@@ -1472,8 +1469,7 @@ set_spawn_table() {
 set_container_spawn_table() {
   if(maps\mp\alien\_utility::is_hardcore_mode()) {
     set_hardcore_container_spawn_table();
-  }
-  else {
+  } else {
     set_regular_container_spawn_table();
   }
 }
@@ -1481,8 +1477,7 @@ set_container_spawn_table() {
 set_alien_definition_table() {
   if(maps\mp\alien\_utility::is_hardcore_mode()) {
     set_hardcore_alien_definition_table();
-  }
-  else {
+  } else {
     set_regular_alien_definition_table();
   }
 }
@@ -1524,8 +1519,7 @@ set_chaos_spawn_table() {
 set_hardcore_extinction_spawn_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_dlc3_hardcore_sp.csv";
-  }
-  else {
+  } else {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_dlc3_hardcore_mp.csv";
   }
 }
@@ -1533,8 +1527,7 @@ set_hardcore_extinction_spawn_table() {
 set_regular_extinction_spawn_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table = "mp/alien/cycle_spawn_dlc3_sp.csv";
-  }
-  else {
+  } else {
     level.alien_cycle_table = "mp/alien/cycle_spawn_dlc3.csv";
   }
 }
@@ -1542,8 +1535,7 @@ set_regular_extinction_spawn_table() {
 set_hardcore_container_spawn_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.container_spawn_table = "mp/alien/dlc3_container_spawn_hardcore_sp.csv";
-  }
-  else {
+  } else {
     level.container_spawn_table = "mp/alien/dlc3_container_spawn_hardcore.csv";
   }
 }
@@ -1551,8 +1543,7 @@ set_hardcore_container_spawn_table() {
 set_regular_container_spawn_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.container_spawn_table = "mp/alien/dlc3_container_spawn_sp.csv";
-  }
-  else {
+  } else {
     level.container_spawn_table = "mp/alien/dlc3_container_spawn.csv";
   }
 }
@@ -1560,8 +1551,7 @@ set_regular_container_spawn_table() {
 set_regular_alien_definition_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.default_alien_definition = "mp/alien/dlc3_alien_definition_sp.csv";
-  }
-  else {
+  } else {
     level.default_alien_definition = "mp/alien/dlc3_alien_definition.csv";
   }
 }
@@ -1569,8 +1559,7 @@ set_regular_alien_definition_table() {
 set_hardcore_alien_definition_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.default_alien_definition = "mp/alien/dlc3_alien_definition_hardcore_sp.csv";
-  }
-  else {
+  } else {
     level.default_alien_definition = "mp/alien/dlc3_alien_definition_hardcore.csv";
   }
 }
@@ -1917,8 +1906,7 @@ set_end_cam_position() {
 descent_player_initial_spawn_loc_override() {
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     chaos_player_initial_spawn_loc_override();
-  }
-  else {
+  } else {
     regular_player_initial_spawn_loc_override();
   }
 }
@@ -2016,8 +2004,7 @@ dlc3_egg() {
         case "area1":
           if(var_1.size >= 2) {
             var_5 delete();
-          }
-          else {
+          } else {
             var_1[var_1.size] = var_5;
           }
 
@@ -2025,8 +2012,7 @@ dlc3_egg() {
         case "area2":
           if(var_2.size >= 2) {
             var_5 delete();
-          }
-          else {
+          } else {
             var_2[var_2.size] = var_5;
           }
 
@@ -2034,8 +2020,7 @@ dlc3_egg() {
         case "area3":
           if(var_3.size >= 2) {
             var_5 delete();
-          }
-          else {
+          } else {
             var_3[var_3.size] = var_5;
           }
 
@@ -2047,7 +2032,7 @@ dlc3_egg() {
   var_0 = getEntArray("easter_egg", "targetname");
 
   foreach(var_5 in var_0) {
-  var_5 thread wait_for_egg_dmg();
+    var_5 thread wait_for_egg_dmg();
   }
 }
 
@@ -2129,7 +2114,7 @@ killfxonplayerdeath(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     if(isarray(var_0)) {
       foreach(var_4 in var_0) {
-      var_4 delete();
+        var_4 delete();
       }
     } else
       var_0 delete();

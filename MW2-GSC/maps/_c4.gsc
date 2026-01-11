@@ -54,11 +54,9 @@ c4_location(tag, origin_offset, angles_offset, org) {
 
   if(isDefined(tag)) {
     tag_origin = self gettagorigin(tag);
-  }
-  else if(isDefined(org)) {
+  } else if(isDefined(org)) {
     tag_origin = org;
-  }
-  else {
+  } else {
     assertmsg("need to specify either a 'tag' or an 'org' parameter to attach the c4 to");
   }
 
@@ -67,8 +65,7 @@ c4_location(tag, origin_offset, angles_offset, org) {
 
   if(isDefined(tag)) {
     c4_model linkto(self, tag, origin_offset, angles_offset);
-  }
-  else {
+  } else {
     c4_model.angles = self.angles;
   }
 
@@ -210,8 +207,7 @@ remove_detonator() {
     } else {
       if((self HasWeapon(self.old_weapon)) && (self.old_weapon != "c4")) {
         self switchtoweapon(self.old_weapon);
-      }
-      else {
+      } else {
         self switchtoweapon(self GetWeaponsListPrimaries()[0]);
       }
     }

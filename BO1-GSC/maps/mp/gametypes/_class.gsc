@@ -37,33 +37,28 @@ init() {
   level.defaultClass = "CLASS_ASSAULT";
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowfrag")) {
     level.weapons["frag"] = "frag_grenade_mp";
-  }
-  else {
+  } else {
     level.weapons["frag"] = "";
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowsmoke")) {
     level.weapons["smoke"] = "smoke_grenade_mp";
-  }
-  else {
+  } else {
     level.weapons["smoke"] = "";
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowflash")) {
     level.weapons["flash"] = "flash_grenade_mp";
-  }
-  else {
+  } else {
     level.weapons["flash"] = "";
   }
   level.weapons["concussion"] = "concussion_grenade_mp";
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowsatchel")) {
     level.weapons["satchel_charge"] = "satchel_charge_mp";
-  }
-  else {
+  } else {
     level.weapons["satchel_charge"] = "";
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowbetty")) {
     level.weapons["betty"] = "mine_bouncing_betty_mp";
-  }
-  else {
+  } else {
     level.weapons["betty"] = "";
   }
   if(maps\mp\gametypes\_tweakables::getTweakableValue("weapon", "allowrpgs")) {
@@ -99,8 +94,7 @@ init() {
       if(isDefined(attachment_tokens)) {
         if(attachment_tokens.size == 0) {
           weapon_class_register(weapon + "_" + attachment + "_mp", weapon_type);
-        }
-        else {
+        } else {
           for(k = 0; k < attachment_tokens.size; k++) {
             weapon_class_register(weapon + "_" + attachment_tokens[k] + "_mp", weapon_type);
           }
@@ -205,20 +199,15 @@ load_default_loadout_raw(team, class, stat_num) {
 weapon_class_register(weapon, weapon_type) {
   if(isSubstr("weapon_smg weapon_cqb weapon_assault weapon_lmg weapon_sniper weapon_shotgun weapon_launcher weapon_special", weapon_type)) {
     level.primary_weapon_array[weapon] = 1;
-  }
-  else if(isSubstr("weapon_pistol", weapon_type)) {
+  } else if(isSubstr("weapon_pistol", weapon_type)) {
     level.side_arm_array[weapon] = 1;
-  }
-  else if(weapon_type == "weapon_grenade") {
+  } else if(weapon_type == "weapon_grenade") {
     level.grenade_array[weapon] = 1;
-  }
-  else if(weapon_type == "weapon_explosive") {
+  } else if(weapon_type == "weapon_explosive") {
     level.inventory_array[weapon] = 1;
-  }
-  else if(weapon_type == "weapon_rifle") {
+  } else if(weapon_type == "weapon_rifle") {
     level.inventory_array[weapon] = 1;
-  }
-  else {
+  } else {
     assertex(false, "Weapon group info is missing from statsTable for: " + weapon_type);
   }
 }
@@ -380,8 +369,7 @@ getWeaponChoice(response) {
   tokens = strtok(response, ",");
   if(tokens.size > 1) {
     return int(tokens[1]);
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -983,8 +971,7 @@ giveLoadout(team, class) {
     }
     if(isDefined(self.pers["weapon"]) && self.pers["weapon"] != "none") {
       weapon = self.pers["weapon"];
-    }
-    else {
+    } else {
       weapon = self.custom_class[class_num]["primary"];
     }
     primaryAttachmentsAllowed = true;

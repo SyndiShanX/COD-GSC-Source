@@ -57,11 +57,9 @@ setup_deathfunc(func_name) {
 
   if(isDefined(func_name)) {
     self.deathfunction = func_name;
-  }
-  else if(isDefined(level.custom_faller_death)) {
+  } else if(isDefined(level.custom_faller_death)) {
     self.deathfunction = level.custom_faller_death;
-  }
-  else {
+  } else {
     self.deathfunction = ::zombie_fall_death_func;
   }
 }
@@ -440,8 +438,7 @@ stop_zombie_fall_dust_fx(zombie) {
 handle_fall_notetracks(note, spot) {
   if(note == "deathout") {
     self.deathfunction = ::faller_death_ragdoll;
-  }
-  else if(note == "fire") {
+  } else if(note == "fire") {
     victims = zombie_fall_get_vicitims(spot);
 
     for(i = 0; i < victims.size; i++) {
@@ -528,8 +525,7 @@ zombie_faller_emerge(spot) {
 
   if(isDefined(self.zombie_faller_location.emerge_bottom) && self.zombie_faller_location.emerge_bottom) {
     self animscripted(self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_floor");
-  }
-  else {
+  } else {
     self animscripted(self.zombie_faller_location.origin, self.zombie_faller_location.angles, "zombie_riser_elevator_from_ceiling");
   }
 

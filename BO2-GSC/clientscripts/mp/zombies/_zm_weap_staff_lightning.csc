@@ -75,8 +75,7 @@ lightning_arc_play_fx_thread(localclientnum) {
 lightning_arc_play_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self thread lightning_arc_play_fx_thread(localclientnum);
-  }
-  else {
+  } else {
     self notify("stop_arc_fx");
 
     if(isDefined(self.fx_arc)) {

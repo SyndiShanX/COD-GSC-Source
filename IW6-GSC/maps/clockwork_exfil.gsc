@@ -340,7 +340,7 @@ place_allies_in_jeep() {
   wait 0.01;
 
   foreach(var_1 in level.allies) {
-  level.playerjeep thread maps\_vehicle_aianim::guy_enter(var_1);
+    level.playerjeep thread maps\_vehicle_aianim::guy_enter(var_1);
   }
 
   wait 0.01;
@@ -410,21 +410,21 @@ handle_dead_bodies() {
   var_0 = getEntArray("chaos_decals_delete", "targetname");
 
   foreach(var_3 in var_0) {
-  var_3 delete();
+    var_3 delete();
   }
 
   common_scripts\utility::flag_wait("spawn_more_chaos1");
   var_0 = getEntArray("chaos_decals1", "targetname");
 
   foreach(var_3 in var_0) {
-  var_3 delete();
+    var_3 delete();
   }
 
   common_scripts\utility::flag_wait("chaos_stairstop_player");
   var_0 = getEntArray("chaos_decals2", "targetname");
 
   foreach(var_3 in var_0) {
-  var_3 delete();
+    var_3 delete();
   }
 }
 
@@ -445,8 +445,7 @@ handle_aggressive_cleanup() {
     foreach(var_2 in level.aggressive_cleanup) {
       if(isai(var_2)) {
         var_3 = var_2 getEye();
-      }
-      else {
+      } else {
         var_3 = var_2 gettagorigin("tag_eye");
       }
 
@@ -464,7 +463,7 @@ handle_aggressive_cleanup() {
   }
 
   foreach(var_2 in level.aggressive_cleanup) {
-  var_2 delete();
+    var_2 delete();
   }
 
   level.aggressive_cleanup = undefined;
@@ -497,7 +496,7 @@ elevator_movement() {
   var_7 = getEntArray("NVG_breakroom_door_clip", "targetname");
 
   foreach(var_9 in var_7) {
-  var_9 delete();
+    var_9 delete();
   }
 
   var_11 = "head_elite_pmc_head_b";
@@ -526,7 +525,7 @@ elevator_movement() {
   }
 
   foreach(var_17 in var_6) {
-  var_17 linkto(var_0);
+    var_17 linkto(var_0);
   }
 
   var_0 moveto(var_3.origin, 0.01);
@@ -566,7 +565,7 @@ elevator_movement() {
   var_22 = getaiarray("axis");
 
   foreach(var_24 in var_22) {
-  var_24 delete();
+    var_24 delete();
   }
 
   common_scripts\utility::array_thread(level.allies, maps\_utility::disable_arrivals);
@@ -575,7 +574,7 @@ elevator_movement() {
   common_scripts\utility::array_thread(level.allies, maps\_utility::set_ignoreme, 1);
 
   foreach(var_27 in level.allies) {
-  var_27.alertlevel = "noncombat";
+    var_27.alertlevel = "noncombat";
   }
 
   wait 0.05;
@@ -602,7 +601,7 @@ elevator_movement() {
   maps\clockwork_code::screenshakefade(0.05, 0.5);
 
   foreach(var_27 in level.allies) {
-  var_27.alertlevel = "noncombat";
+    var_27.alertlevel = "noncombat";
   }
 
   common_scripts\utility::flag_wait("elevator_enemies_start");
@@ -1422,8 +1421,7 @@ tendwounded() {
   if(isalive(var_2)) {
     if(!common_scripts\utility::flag("chaos_upstairs_anims")) {
       var_2 kill();
-    }
-    else {
+    } else {
       var_2 delete();
     }
   }
@@ -2055,7 +2053,7 @@ commander_vo(var_0, var_1) {
     allies_move_to_jeep();
   } else {
     foreach(var_3 in level.allies) {
-    var_3 maps\_utility::enable_ai_color();
+      var_3 maps\_utility::enable_ai_color();
     }
   }
 }
@@ -2386,7 +2384,7 @@ in_to_jeep() {
     thread handle_sneak_vo();
 
     foreach(var_4 in var_21) {
-    var_4 maps\clockwork_code::fast_walk(1);
+      var_4 maps\clockwork_code::fast_walk(1);
     }
   } else {
     thread wakeup_enemies(var_19);
@@ -2697,8 +2695,7 @@ baker_in_to_jeep_anim() {
 
   if(common_scripts\utility::flag("exfil_fire_fail")) {
     level.allies[0] maps\_utility::anim_stopanimscripted();
-  }
-  else {
+  } else {
     level.playerjeep notify("end_loop");
   }
 
@@ -2819,7 +2816,7 @@ crash_event() {
   var_4 = maps\_utility::array_spawn_targetname("exfil_exterior_base", 1);
 
   foreach(var_2 in var_4) {
-  var_2 set_diff_accuracy();
+    var_2 set_diff_accuracy();
   }
 
   waittillframeend;
@@ -2990,14 +2987,14 @@ canal_event() {
   common_scripts\utility::array_thread(var_0, maps\_utility::stop_magic_bullet_shield);
 
   foreach(var_5 in var_0) {
-  var_5 kill();
+    var_5 kill();
   }
 
   level.allies[0] thread maps\clockwork_code::char_dialog_add_and_go("clockwork_bkr_shoottheice");
   var_7 = maps\_utility::array_spawn_targetname("exfil_exterior_tunnel", 1);
 
   foreach(var_9 in var_7) {
-  var_9 set_diff_accuracy();
+    var_9 set_diff_accuracy();
   }
 
   common_scripts\utility::flag_wait("spawn_tunnel_jeep");
@@ -3178,7 +3175,7 @@ new_cliff_moment() {
   level.enemy_snowmobile = maps\_utility::array_removedead(level.enemy_snowmobile);
 
   foreach(var_1 in level.enemy_snowmobile) {
-  var_1 maps\_vehicle_spline_zodiac::wipeout("left behind!");
+    var_1 maps\_vehicle_spline_zodiac::wipeout("left behind!");
   }
 
   level.enemy_jeep_a[level.enemy_jeep_a.size] = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("enemy_jeep_cave1");
@@ -3766,7 +3763,7 @@ enemy_jeep_group_fire() {
 
 jeeps_fire() {
   foreach(var_1 in self.riders) {
-  var_1 thread jeep_ai(self);
+    var_1 thread jeep_ai(self);
   }
 }
 
@@ -3804,8 +3801,7 @@ crash_vehicle_on_death() {
 
       if(!common_scripts\utility::flag("start_icehole_shooting")) {
         maps\clockwork_code::play_crash_anim(self.origin);
-      }
-      else {
+      } else {
         var_6 = randomintrange(1, 3);
 
         if(var_6 == 1 && !level.justplayed) {
@@ -3966,8 +3962,7 @@ player_view_clamp() {
     if(isalive(level.player)) {
       if(var_2 <= -0.5) {
         level.player lerpviewangleclamp(0, 0, 0, 180, 180, 30, 25);
-      }
-      else {
+      } else {
         level.player lerpviewangleclamp(0, 0, 0, 180, 180, 30, 5);
       }
     }
@@ -3980,11 +3975,9 @@ set_diff_accuracy() {
   if(isalive(self)) {
     if(maps\_utility::getdifficulty() == "fu") {
       self.baseaccuracy = 0.4;
-    }
-    else if(maps\_utility::getdifficulty() == "hard") {
+    } else if(maps\_utility::getdifficulty() == "hard") {
       self.baseaccuracy = 0.35;
-    }
-    else {
+    } else {
       self.baseaccuracy = 0.3;
     }
   }

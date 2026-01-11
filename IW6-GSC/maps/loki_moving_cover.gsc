@@ -220,7 +220,7 @@ animate_combat_two_intro_debris() {
   var_1 = getEntArray("combat_two_intro_debris_move", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(var_0);
+    var_3 linkto(var_0);
   }
 
   level.moving_cover_start_node maps\_anim::anim_single_solo(var_0, "combat_two_intro_debris_move");
@@ -344,8 +344,7 @@ ramp_up_accurracy(var_0, var_1) {
 stop_in_your_face_hint() {
   if(common_scripts\utility::flag("gun_picked_up")) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -393,7 +392,7 @@ start_moving_cover(var_0, var_1, var_2) {
   var_3 = getEntArray("explosion_debris_col", "targetname");
 
   foreach(var_5 in var_3) {
-  var_5 linkto(var_5 common_scripts\utility::get_target_ent());
+    var_5 linkto(var_5 common_scripts\utility::get_target_ent());
   }
 
   var_7 = var_1;
@@ -449,8 +448,7 @@ ai_follow_cover(var_0, var_1) {
 
     if(bullettracepassed(self.origin, var_3, 0, undefined)) {
       maps\loki_util::jkuline(self.origin, var_3);
-    }
-    else {
+    } else {
       maps\loki_util::jkuline(self.origin, var_3, (1, 0, 0));
     }
 

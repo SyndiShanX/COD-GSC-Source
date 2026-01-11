@@ -142,8 +142,7 @@ is_player_facing(zombie, v_punch_yaw) {
 
   if(yaw_diff < 35) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -169,8 +168,7 @@ zombie_punch_damage(ai_zombie, n_mod) {
   if(isDefined(n_mod)) {
     if(isDefined(self.b_punch_upgraded) && self.b_punch_upgraded) {
       n_base_damage = 11275;
-    }
-    else {
+    } else {
       n_base_damage = 2250;
     }
 
@@ -274,8 +272,7 @@ knockdown_zombie_animate() {
 
     if(randomint(100) > 75) {
       animation_side = "belly";
-    }
-    else {
+    } else {
       animation_side = "back";
     }
   } else if(self.damageyaw > 75 && self.damageyaw < 135) {
@@ -299,8 +296,7 @@ knockdown_zombie_animate() {
   if(isDefined(self.a.gib_ref)) {
     if(self.a.gib_ref == "no_legs" || self.a.gib_ref == "no_arms" || (self.a.gib_ref == "left_leg" || self.a.gib_ref == "right_leg") && randomint(100) > 25 || (self.a.gib_ref == "left_arm" || self.a.gib_ref == "right_arm") && randomint(100) > 75) {
       animation_duration = "_late";
-    }
-    else if(randomint(100) > 75) {
+    } else if(randomint(100) > 75) {
       animation_duration = "_early";
     }
   } else if(randomint(100) > 25)

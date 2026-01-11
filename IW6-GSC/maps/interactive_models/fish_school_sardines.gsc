@@ -114,7 +114,7 @@ sardines(var_0) {
 
   foreach(var_2 in var_0.fish.model) {
     foreach(var_4 in var_2) {
-    precachemodel(var_4);
+      precachemodel(var_4);
     }
   }
 
@@ -153,8 +153,7 @@ sardines_line(var_0) {
 
   if(var_1.size >= 1) {
     var_2 = common_scripts\utility::getclosest(self.origin, var_1);
-  }
-  else {
+  } else {
     var_1 = getvehiclenodearray("fish_path", "script_noteworthy");
     var_2 = undefined;
 
@@ -175,8 +174,7 @@ sardines_line(var_0) {
 
   if(isDefined(self.interactive_number)) {
     self.numpieces = int(min(var_9, self.interactive_number));
-  }
-  else {
+  } else {
     self.numpieces = var_9;
   }
 
@@ -232,8 +230,7 @@ sardines_linethinkloop(var_0, var_1) {
   if(self.startstopstate == "start_instant") {
     if(isDefined(var_2)) {
       var_6 = self.spacing * var_1;
-    }
-    else {
+    } else {
       var_6 = self.spacing * self.numpieces;
     }
 
@@ -260,8 +257,7 @@ sardines_linethinkloop(var_0, var_1) {
   while(!isDefined(var_2) || var_2 > 0 || self.numberoffishinexistence > 0) {
     if(self.startstopstate == "stop" && (!isDefined(var_2) || var_2 > var_0.line.taper)) {
       var_2 = var_0.line.taper;
-    }
-    else if(self.startstopstate == "stop_instant") {
+    } else if(self.startstopstate == "stop_instant") {
       break;
     }
 
@@ -326,8 +322,7 @@ sardines_linethinkloop(var_0, var_1) {
 sardines_lineattachmodelsandtaperends(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = min(var_1, var_2);
-  }
-  else {
+  } else {
     var_3 = var_1;
   }
 
@@ -371,16 +366,14 @@ sardines_linespawnpieces(var_0) {
 
         if(var_2 > 1) {
           var_6 = self.pieces[var_2 - 2].offset;
-        }
-        else {
+        } else {
           var_6 = 0;
         }
       }
 
       if(var_2 == self.numpieces - 1) {
         var_3.offset = 0.5 * (var_5 + self.pieces[0].offset);
-      }
-      else {
+      } else {
         var_3.offset = 0.85 * (randomfloatrange(-18, 18) + 1.5 * var_5 - 0.5 * var_6);
       }
 
@@ -408,7 +401,7 @@ sardines_linespawnpieces(var_0) {
 
 sardines_linedeletepieces() {
   foreach(var_1 in self.pieces) {
-  var_1 delete();
+    var_1 delete();
   }
 
   self.pieces = undefined;
@@ -429,8 +422,7 @@ sardines_ball(var_0) {
 
   if(!isDefined(var_1)) {
     self.locations[1] = self.origin + (-800, 0, 0);
-  }
-  else {
+  } else {
     while(isDefined(var_1)) {
       self.locations[self.locations.size] = var_1.origin + (0, 0, 32);
 
@@ -763,8 +755,7 @@ sardines_ballpanic(var_0, var_1, var_2, var_3) {
 
       if(var_5 == 0 || var_5 == var_23.pieces.size - 1) {
         var_23.pieces[var_5] thread sardines_pieceswimpath(var_0, var_25[var_5], var_3, undefined, var_24, 3);
-      }
-      else {
+      } else {
         var_23.pieces[var_5] thread sardines_pieceswimpath(var_0, var_25[var_5], var_3, undefined, var_24);
       }
 
@@ -855,8 +846,7 @@ sardines_pieceswimpath(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_4)) {
     sardines_pieceswimpath(var_0, var_4, var_2, var_3, undefined, var_5);
-  }
-  else {
+  } else {
     self notify("path_complete");
   }
 }

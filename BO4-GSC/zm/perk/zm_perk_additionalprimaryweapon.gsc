@@ -21,7 +21,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_perk_additionalprimaryweapon;
 
 autoexec __init__system__() {
@@ -35,9 +34,9 @@ __init__() {
 
 enable_additional_primary_weapon_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_additionalprimaryweapon", #"perk_additional_primary_weapon", 4000, #"hash_3010c651fdffa112", getweapon("zombie_perk_bottle_additionalprimaryweapon"), getweapon("zombie_perk_totem_mule_kick"), #"zmperksmulekick");
+    zm_perks::register_perk_basic_info(#"specialty_additionalprimaryweapon", # "perk_additional_primary_weapon", 4000, # "hash_3010c651fdffa112", getweapon("zombie_perk_bottle_additionalprimaryweapon"), getweapon("zombie_perk_totem_mule_kick"), # "zmperksmulekick");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_additionalprimaryweapon", #"perk_additional_primary_weapon", 4000, #"zombie/perk_additionalprimaryweapon", getweapon("zombie_perk_bottle_additionalprimaryweapon"), getweapon("zombie_perk_totem_mule_kick"), #"zmperksmulekick");
+    zm_perks::register_perk_basic_info(#"specialty_additionalprimaryweapon", # "perk_additional_primary_weapon", 4000, # "zombie/perk_additionalprimaryweapon", getweapon("zombie_perk_bottle_additionalprimaryweapon"), getweapon("zombie_perk_totem_mule_kick"), # "zmperksmulekick");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_additionalprimaryweapon", &additional_primary_weapon_precache);
@@ -53,11 +52,11 @@ additional_primary_weapon_precache() {
     return;
   }
 
-  level._effect[#"additionalprimaryweapon_light"] = "zombie/fx_perk_mule_kick_zmb";
-  level.machine_assets[#"specialty_additionalprimaryweapon"] = spawnStruct();
-  level.machine_assets[#"specialty_additionalprimaryweapon"].weapon = getweapon("zombie_perk_bottle_additionalprimaryweapon");
-  level.machine_assets[#"specialty_additionalprimaryweapon"].off_model = "p7_zm_vending_three_gun";
-  level.machine_assets[#"specialty_additionalprimaryweapon"].on_model = "p7_zm_vending_three_gun";
+  level._effect[# "additionalprimaryweapon_light"] = "zombie/fx_perk_mule_kick_zmb";
+  level.machine_assets[# "specialty_additionalprimaryweapon"] = spawnStruct();
+  level.machine_assets[# "specialty_additionalprimaryweapon"].weapon = getweapon("zombie_perk_bottle_additionalprimaryweapon");
+  level.machine_assets[# "specialty_additionalprimaryweapon"].off_model = "p7_zm_vending_three_gun";
+  level.machine_assets[# "specialty_additionalprimaryweapon"].on_model = "p7_zm_vending_three_gun";
 }
 
 additional_primary_weapon_register_clientfield() {
@@ -88,7 +87,7 @@ take_additional_primary_weapon_perk(b_pause, str_perk, str_result, n_slot) {
   self notify(#"hash_4dba2ff9e70127f5");
 
   if(isDefined(self.laststandpistol)) {
-    self endon(#"disconnect", #"hash_499749b8848c21fd");
+    self endon(#"disconnect", # "hash_499749b8848c21fd");
 
     if(self.laststandpistol !== self.var_2a62e678) {
       self clientfield::set_player_uimodel("hudItems.perks.additional_primary_weapon", 0);
@@ -132,7 +131,7 @@ take_additional_primary_weapon_perk(b_pause, str_perk, str_result, n_slot) {
 
 function_1a9f3a91() {
   self notify(#"hash_499749b8848c21fd");
-  self endon(#"disconnect", #"hash_4dba2ff9e70127f5", #"hash_499749b8848c21fd");
+  self endon(#"disconnect", # "hash_4dba2ff9e70127f5", # "hash_499749b8848c21fd");
 
   while(isDefined(self.s_loadout)) {
     wait 0.05;
@@ -146,7 +145,7 @@ function_1a9f3a91() {
   }
 
   while(true) {
-    s_result = self waittill(#"weapon_change", #"hash_29c66728ccd27f03");
+    s_result = self waittill(#"weapon_change", # "hash_29c66728ccd27f03");
 
     if(isDefined(self.laststandpistol)) {
       self clientfield::set_player_uimodel("hudItems.perks.additional_primary_weapon", 0);
@@ -163,7 +162,7 @@ function_1a9f3a91() {
           self.var_2a62e678 = s_result.weapon;
         }
 
-        if(self.var_67ba1237.size && isinarray(self.var_67ba1237, #"specialty_additionalprimaryweapon")) {
+        if(self.var_67ba1237.size && isinarray(self.var_67ba1237, # "specialty_additionalprimaryweapon")) {
           self.var_64f51f65 = self.var_2a62e678;
         }
       }

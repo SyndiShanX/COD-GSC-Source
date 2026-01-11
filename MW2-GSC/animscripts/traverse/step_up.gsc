@@ -13,8 +13,7 @@
 main() {
   if(self.type == "dog") {
     dog_jump_up(40, 3);
-  }
-  else {
+  } else {
     step_up_human();
   }
 }

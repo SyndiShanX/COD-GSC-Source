@@ -177,8 +177,7 @@ create_lights(clientnum) {
 mixer_get_ramp() {
   if(self.mixer.mix_pos == 0) {
     return self.mixer.right_to_left_ramp;
-  }
-  else {
+  } else {
     return self.mixer.left_to_right_ramp;
   }
 }
@@ -226,8 +225,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_color)) {
       self.lights[0] setmixerlightcolor("right", self.script_light2_color);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightcolor("right", self.lights[client_num] getlightcolor());
     }
 
@@ -235,8 +233,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_intensity)) {
       self.lights[0] setmixerlightintensity("right", self.script_light2_intensity);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightintensity("right", self.lights[client_num] getlightintensity());
     }
 
@@ -244,8 +241,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_radius)) {
       self.lights[0] setmixerlightradius("right", self.script_light2_radius);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightradius("right", self.lights[client_num] getlightradius());
     }
 
@@ -258,8 +254,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_inner_fov)) {
       self.lights[0] setmixerlightfovrange("right", outer, self.script_light2_inner_fov);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightfovrange("right", outer);
     }
 
@@ -267,8 +262,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_exponent)) {
       self.lights[0] setmixerlightexponent("right", self.script_light2_exponent);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightexponent("right", self.lights[client_num] getlightexponent());
     }
   }
@@ -288,8 +282,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_delay_min)) {
       self.lights[0] setmixerlightparam("right", 0, self.script_light2_delay_min);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 0, self.script_delay_min);
     }
 
@@ -297,8 +290,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_delay_max)) {
       self.lights[0] setmixerlightparam("right", 1, self.script_light2_delay_max);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 1, self.script_delay_max);
     }
 
@@ -306,8 +298,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_intensity_min)) {
       self.lights[0] setmixerlightparam("right", 2, self.script_light2_intensity_min);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 2, self.script_intensity_min);
     }
 
@@ -315,8 +306,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_intensity_max)) {
       self.lights[0] setmixerlightparam("right", 3, self.script_light2_intensity_max);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 3, self.script_intensity_max);
     }
 
@@ -324,8 +314,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_burst_min)) {
       self.lights[0] setmixerlightparam("right", 4, self.script_light2_burst_min);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 4, self.script_light_burst_min);
     }
 
@@ -333,8 +322,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_burst_max)) {
       self.lights[0] setmixerlightparam("right", 5, self.script_light2_burst_max);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 5, self.script_light_burst_max);
     }
 
@@ -342,8 +330,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_burst_time)) {
       self.lights[0] setmixerlightparam("right", 6, self.script_light2_burst_time);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 6, self.script_light_burst_time);
     }
 
@@ -351,8 +338,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_fade_duration)) {
       self.lights[0] setmixerlightparam("right", 7, self.script_light2_fade_duration);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 7, self.script_fade_duration);
     }
 
@@ -360,8 +346,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_burst_intensity)) {
       self.lights[0] setmixerlightparam("right", 8, self.script_light2_burst_intensity);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 8, self.script_burst_intensity);
     }
 
@@ -369,8 +354,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_sound)) {
       self.lights[0] setmixerlightparam("right", 9, self.script_light2_sound);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 9, self.script_light_sound);
     }
 
@@ -378,8 +362,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_fx)) {
       self.lights[0] setmixerlightparam("right", 10, self.script_light2_fx);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 10, self.script_light_fx);
     }
 
@@ -387,8 +370,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_wait_min)) {
       self.lights[0] setmixerlightparam("right", 11, self.script_light2_wait_min);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 11, self.script_wait_min);
     }
 
@@ -396,8 +378,7 @@ init_mixer_lights(client_num) {
 
     if(isDefined(self.script_light2_wait_min)) {
       self.lights[0] setmixerlightparam("right", 12, self.script_light2_wait_max);
-    }
-    else {
+    } else {
       self.lights[0] setmixerlightparam("right", 12, self.script_wait_max);
     }
   }
@@ -416,8 +397,7 @@ init_mixer_lights(client_num) {
 
   if(isDefined(self.script_light2_fx)) {
     self.mixer.lights[1].script_light_fx = self.script_light2_fx;
-  }
-  else {
+  } else {
     self.mixer.lights[1].script_light_fx = self.mixer.lights[0].script_light_fx;
   }
 
@@ -428,78 +408,67 @@ init_mixer_lights(client_num) {
 
   if(isDefined(self.script_light2_color)) {
     self.mixer.lights[1].light_color = self.script_light2_color;
-  }
-  else {
+  } else {
     self.mixer.lights[1].light_color = self.mixer.lights[0].light_color;
   }
 
   if(isDefined(self.script_light2_intensity)) {
     self.mixer.lights[1].light_intensity = self.script_light2_intensity;
-  }
-  else {
+  } else {
     self.mixer.lights[1].light_intensity = self.mixer.lights[0].light_intensity;
   }
 
   if(isDefined(self.script_light2_radius)) {
     self.mixer.lights[1].light_radius = self.script_light2_radius;
-  }
-  else {
+  } else {
     self.mixer.lights[1].light_radius = self.mixer.lights[0].light_radius;
   }
 
   if(isDefined(self.script_light2_inner_fov)) {
     self.mixer.lights[1].light_inner_fov = self.script_light2_inner_fov;
-  }
-  else {
+  } else {
     self.mixer.lights[1].light_inner_fov = self.mixer.lights[0].light_inner_fov;
   }
 
   if(isDefined(self.script_light2_outer_fov)) {
     self.mixer.lights[1].light_outer_fov = self.script_light2_outer_fov;
-  }
-  else {
+  } else {
     self.mixer.lights[1].light_outer_fov = self.mixer.lights[0].light_outer_fov;
   }
 
   if(isDefined(self.script_light2_exponent)) {
     self.mixer.lights[1].light_exponent = self.script_light2_exponent;
-  }
-  else {
+  } else {
     self.mixer.lights[1].light_exponent = self.mixer.lights[0].light_exponent;
   }
 
   if(isDefined(self.script_light2_burst_max)) {
     self.mixer.lights[1].script_burst_max = self.script_light2_burst_max;
-  }
-  else {
+  } else {
     self.mixer.lights[1].script_burst_max = self.mixer.lights[0].script_burst_max;
   }
 
   if(isDefined(self.script_light2_burst_min)) {
     self.mixer.lights[1].script_burst_min = self.script_light2_burst_min;
-  }
-  else {
+  } else {
     self.mixer.lights[1].script_burst_min = self.mixer.lights[0].script_burst_min;
   }
 
   if(isDefined(self.script_light2_burst_time)) {
     self.mixer.lights[1].script_burst_time = self.script_light2_burst_time;
-  }
-  else {
+  } else {
     self.mixer.lights[1].script_burst_time = self.mixer.lights[0].script_burst_time;
   }
 
   if(isDefined(self.script_light2_fade_duration)) {
     self.mixer.lights[1].script_fade_duration = self.script_light2_fade_duration;
-  }
-  else {
+  } else {
     self.mixer.lights[1].script_fade_duration = self.mixer.lights[0].script_fade_duration;
   }
 
   if(isDefined(self.script_light2_burst_intensity)) {
     self.mixer.lights[1].script_burst_intensity = self.script_light2_burst_intensity;
-  }
-  else {
+  } else {
     self.mixer.lights[1].script_burst_intensity = self.mixer.lights[0].script_burst_intensity;
   }
 
@@ -553,29 +522,25 @@ setup_mixer_lights() {
 
   if((!isDefined(light_type) || light_type == "") && !isDefined(self.script_light_type)) {
     light_type = "light_solid";
-  }
-  else if(isDefined(self.script_light_type) && isDefined(level._light_types[self.script_light_type])) {
+  } else if(isDefined(self.script_light_type) && isDefined(level._light_types[self.script_light_type])) {
     light_type = self.script_light_type;
   }
 
   if(ismixerlightbehaviorhardcoded(light_type)) {
     self.lights[0] setmixerlightbehavior("left", light_type);
-  }
-  else {
+  } else {
     add_light_thread(self.mixer.lights[0], light_type, 0);
   }
 
   if(!isDefined(self.script_light2_targetname) || self.script_light2_targetname == "") {
     light_type = "light_off";
-  }
-  else {
+  } else {
     light_type = self.script_light2_targetname;
   }
 
   if(ismixerlightbehaviorhardcoded(light_type)) {
     self.lights[0] setmixerlightbehavior("right", light_type);
-  }
-  else {
+  } else {
     add_light_thread(self.mixer.lights[1], light_type, 1);
   }
 

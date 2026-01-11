@@ -22,11 +22,9 @@ swarm_start(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
   }
   if(newval && newval != oldval && newval != 2) {
     player thread swarm_think(localclientnum, self.origin);
-  }
-  else if(!newval) {
+  } else if(!newval) {
     level notify("missile_swarm_stop");
-  }
-  else if(newval == 2) {
+  } else if(newval == 2) {
     level notify("missile_emp_death");
     level notify("missile_swarm_stop");
   }

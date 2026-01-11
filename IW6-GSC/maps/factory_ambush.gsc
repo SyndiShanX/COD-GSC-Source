@@ -112,7 +112,7 @@ ambush_setup() {
   var_8 = getEntArray("smoke_canister", "script_noteworthy");
 
   foreach(var_10 in var_8) {
-  var_10 hide();
+    var_10 hide();
   }
 
   var_12 = getent("ambush_breach_player_pda", "targetname");
@@ -121,14 +121,14 @@ ambush_setup() {
   var_13 = getEntArray("ambush_window_mantle", "targetname");
 
   foreach(var_15 in var_13) {
-  var_15 movez(-100, 0.1);
+    var_15 movez(-100, 0.1);
   }
 
   var_17 = [];
   var_17 = getEntArray("ambush_fan", "targetname");
 
   foreach(var_19 in var_17) {
-  var_19 thread ambush_fan_spin();
+    var_19 thread ambush_fan_spin();
   }
 
   thread maps\factory_anim::ambush_anim_setup();
@@ -339,11 +339,9 @@ setup_computer_use_hint() {
 
     if(level.player.thermal_anim_active) {
       continue;
-    }
-    else if(level.player isthrowinggrenade() || level.player ismeleeing()) {
+    } else if(level.player isthrowinggrenade() || level.player ismeleeing()) {
       continue;
-    }
-    else {
+    } else {
       break;
     }
 
@@ -536,8 +534,7 @@ ambush_fastrope(var_0, var_1, var_2, var_3, var_4) {
   }
   if(!isDefined(var_1)) {
     var_1 = var_0 + "_node";
-  }
-  else {
+  } else {
     var_1 = var_1 + "_node";
   }
 
@@ -594,8 +591,7 @@ player_is_using_riot_shield() {
 
   if(var_0 == "riotshield_iw6_sp") {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -658,8 +654,7 @@ thermal_battle_logic() {
 
   if(common_scripts\utility::flag("ambush_player_on_mezzanine_left")) {
     thread ambush_wave_4_left_path();
-  }
-  else {
+  } else {
     thread ambush_wave_4_right_path();
   }
 
@@ -697,8 +692,7 @@ safety_to_prevent_rushing() {
   while(level.player.health > 25) {
     if(isDefined(var_2) && isalive(var_2)) {
       level.player dodamage(30, var_2.origin, var_2, var_2, "MOD_RIFLE_BULLET");
-    }
-    else {
+    } else {
       var_3 = getent("ambush_fastroper_mid_5_node", "targetname");
       level.player dodamage(30, var_3.origin, undefined, undefined, "MOD_RIFLE_BULLET");
     }
@@ -721,7 +715,7 @@ thermal_battle_elongate() {
   common_scripts\utility::flag_set("ambush_thermal_allies_movedup_01");
 
   foreach(var_1 in level.squad) {
-  var_1 thread ally_pick_up_weapon();
+    var_1 thread ally_pick_up_weapon();
   }
 }
 
@@ -731,11 +725,9 @@ ally_pick_up_weapon() {
 
   if(self == level.squad["ALLY_ALPHA"]) {
     maps\_utility::forceuseweapon("cz805bren+reflex_sp", "primary");
-  }
-  else if(self == level.squad["ALLY_BRAVO"]) {
+  } else if(self == level.squad["ALLY_BRAVO"]) {
     maps\_utility::forceuseweapon("pp19+reflexsmg_sp", "primary");
-  }
-  else if(self == level.squad["ALLY_CHARLIE"]) {
+  } else if(self == level.squad["ALLY_CHARLIE"]) {
     maps\_utility::forceuseweapon("m27", "primary");
   }
 }
@@ -917,13 +909,12 @@ ambush_riotshield_smoke() {
 
   if(var_8 == "riotshield_cleanup_left") {
     var_1 = maps\_utility::get_ai_group_ai("riotshield_right");
-  }
-  else {
+  } else {
     var_1 = maps\_utility::get_ai_group_ai("riotshield_left");
   }
 
   foreach(var_4 in var_1) {
-  var_4 thread kill_after_time(1, 3);
+    var_4 thread kill_after_time(1, 3);
   }
 }
 
@@ -945,7 +936,7 @@ ambush_riotshield_back() {
   maps\_utility::waittill_aigroupcount("riotshield_back", 1);
 
   foreach(var_4 in var_1) {
-  var_4 thread kill_after_time(12);
+    var_4 thread kill_after_time(12);
   }
 }
 
@@ -1070,7 +1061,7 @@ ambush_smoke_penalty() {
       var_5 = var_1 maps\_utility::get_ai_touching_volume("axis");
 
       foreach(var_7 in var_5) {
-      var_7.script_accuracy = 2;
+        var_7.script_accuracy = 2;
       }
 
       maps\_utility::clear_custom_gameskill_func();
@@ -1198,8 +1189,7 @@ kill_after_time(var_0, var_1) {
 
   if(isDefined(var_1)) {
     wait(randomfloatrange(var_0, var_1));
-  }
-  else {
+  } else {
     wait(var_0);
   }
 
@@ -1217,7 +1207,7 @@ wait_and_kill_guys_in_volume(var_0, var_1) {
   var_3 = var_2 maps\_utility::get_ai_touching_volume("axis");
 
   foreach(var_5 in var_3) {
-  var_5 thread kill_after_time(0.0, 3.0);
+    var_5 thread kill_after_time(0.0, 3.0);
   }
 }
 
@@ -1366,8 +1356,7 @@ create_mover_prefab(var_0, var_1) {
     if(var_8.code_classname == "script_origin") {
       if(isDefined(var_8.script_noteworthy)) {
         var_3 = var_8;
-      }
-      else {
+      } else {
         var_2 = var_8;
         var_2.audio_org = undefined;
       }
@@ -1377,7 +1366,7 @@ create_mover_prefab(var_0, var_1) {
   }
 
   foreach(var_11 in var_4) {
-  var_11 linkto(var_2);
+    var_11 linkto(var_2);
   }
 
   if(isDefined(var_3)) {
@@ -1397,7 +1386,7 @@ setup_ambush_flood_spawner_limited_triggers() {
   var_0 = getEntArray("flood_spawner_limited", "targetname");
 
   foreach(var_2 in var_0) {
-  thread flood_trigger_limited_think(var_2);
+    thread flood_trigger_limited_think(var_2);
   }
 }
 
@@ -1432,8 +1421,7 @@ flood_spawner_limited_think(var_0) {
 
     if(isDefined(self.script_forcespawn)) {
       var_3 = self stalingradspawn(var_1);
-    }
-    else {
+    } else {
       var_3 = self dospawn(var_1);
     }
 

@@ -13,7 +13,6 @@
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_perk_deadshot;
 
 autoexec __init__system__() {
@@ -26,9 +25,9 @@ __init__() {
 
 enable_deadshot_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_deadshot", #"perk_dead_shot", 2000, #"hash_29881d32839ebaa1", getweapon("zombie_perk_bottle_deadshot"), getweapon("zombie_perk_totem_deadshot"), #"zmperksdeadshot");
+    zm_perks::register_perk_basic_info(#"specialty_deadshot", # "perk_dead_shot", 2000, # "hash_29881d32839ebaa1", getweapon("zombie_perk_bottle_deadshot"), getweapon("zombie_perk_totem_deadshot"), # "zmperksdeadshot");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_deadshot", #"perk_dead_shot", 2000, #"zombie/perk_deadshot", getweapon("zombie_perk_bottle_deadshot"), getweapon("zombie_perk_totem_deadshot"), #"zmperksdeadshot");
+    zm_perks::register_perk_basic_info(#"specialty_deadshot", # "perk_dead_shot", 2000, # "zombie/perk_deadshot", getweapon("zombie_perk_bottle_deadshot"), getweapon("zombie_perk_totem_deadshot"), # "zmperksdeadshot");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_deadshot", &deadshot_precache);
@@ -44,11 +43,11 @@ deadshot_precache() {
     return;
   }
 
-  level._effect[#"deadshot_light"] = #"hash_2225287695ddf9c9";
-  level.machine_assets[#"specialty_deadshot"] = spawnStruct();
-  level.machine_assets[#"specialty_deadshot"].weapon = getweapon("zombie_perk_bottle_deadshot");
-  level.machine_assets[#"specialty_deadshot"].off_model = "p7_zm_vending_ads";
-  level.machine_assets[#"specialty_deadshot"].on_model = "p7_zm_vending_ads";
+  level._effect[# "deadshot_light"] = # "hash_2225287695ddf9c9";
+  level.machine_assets[# "specialty_deadshot"] = spawnStruct();
+  level.machine_assets[# "specialty_deadshot"].weapon = getweapon("zombie_perk_bottle_deadshot");
+  level.machine_assets[# "specialty_deadshot"].off_model = "p7_zm_vending_ads";
+  level.machine_assets[# "specialty_deadshot"].on_model = "p7_zm_vending_ads";
 }
 
 deadshot_register_clientfield() {

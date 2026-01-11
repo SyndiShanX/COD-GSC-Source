@@ -53,7 +53,7 @@ friendly_init() {
 
 friendly_custom_acc_behavior(array) {
   foreach(key, func in array) {
-  self ai_create_behavior_function("accuracy", key, func);
+    self ai_create_behavior_function("accuracy", key, func);
   }
 
   function = self._stealth.behavior.ai_functions["accuracy"]["hidden"];

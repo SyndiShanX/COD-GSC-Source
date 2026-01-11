@@ -24,8 +24,7 @@ func_9197(var_00, var_01, var_02, var_03, var_04) {
 
   if(func_919F(var_00, self)) {
     func_91A7(var_00, self, var_01, var_02, var_03, var_04);
-  }
-  else {
+  } else {
     var_05 = level.func_91AA[var_00].func_6631.size;
     level.func_91AA[var_00].func_6631[var_05] = func_9190(self, var_01, var_02, var_03, var_04);
     thread func_9195(var_00);
@@ -62,8 +61,7 @@ func_9197(var_00, var_01, var_02, var_03, var_04) {
 
     if(level.func_91AB != var_08 && var_06 < var_09) {
       func_9186(var_08);
-    }
-    else if(level.func_91AB == var_08) {
+    } else if(level.func_91AB == var_08) {
       func_1251(self, var_01, var_02, var_03, var_04, var_08);
     }
   }
@@ -191,8 +189,7 @@ func_9185() {
 
   if(isDefined(var_01)) {
     func_9186(var_01);
-  }
-  else {
+  } else {
     level.func_91AB = undefined;
   }
 }
@@ -224,7 +221,7 @@ func_9186(var_00) {
 
     if(isDefined(level.func_91AA[level.func_91AB].func_3E65) && level.func_91AA[level.func_91AB].func_3E65.size > 0) {
       foreach(var_02 in level.func_91AA[level.func_91AB].func_3E65) {
-      func_9191(var_02);
+        func_9191(var_02);
       }
     }
   }
@@ -248,8 +245,7 @@ func_1250(var_00) {
 func_1251(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(!isDefined(level.func_91AA[var_05].func_3E65) || level.func_91AA[var_05].func_3E65.size == 0) {
     var_00 hudoutlineenable(var_01, var_02, var_03, var_04);
-  }
-  else {
+  } else {
     var_06 = func_12AA(var_05, 1);
     var_07 = 0;
 
@@ -272,8 +268,7 @@ func_1251(var_00, var_01, var_02, var_03, var_04, var_05) {
 func_11DA(var_00, var_01) {
   if(!isDefined(level.func_91AA[var_01].func_3E65) || level.func_91AA[var_01].func_3E65.size == 0) {
     self hudoutlinedisable();
-  }
-  else {
+  } else {
     var_02 = func_12AA(var_01, 1);
     var_03 = 0;
 
@@ -302,9 +297,7 @@ func_91A5(var_00) {
   level endon("hudoutline_new_channel_settings");
   wait 0.05;
   var_01 = func_9192();
-  var_02 = [
-    [level.func_91AA[var_00].func_F88E]
-  ]();
+  var_02 = [[level.func_91AA[var_00].func_F88E]]();
 
   foreach(var_05, var_04 in var_01) {
     if(isDefined(var_2[var_05])) {

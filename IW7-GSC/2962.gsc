@@ -55,8 +55,7 @@ func_12DAB(var_00) {
 
   if(isDefined(self.func_EDAD)) {
     level.func_4EBE[var_00] = self.func_EDAD;
-  }
-  else {
+  } else {
     level.func_4EBE[var_00] = undefined;
   }
 
@@ -79,8 +78,7 @@ func_BF01(var_00) {
 
     if(isDefined(self.func_5955)) {
       self.func_5955 = undefined;
-    }
-    else {
+    } else {
       thread scripts\sp\colors::_meth_8467();
     }
   }
@@ -96,9 +94,7 @@ func_65FA(var_00, var_01) {
 
 func_13764(var_00, var_01, var_02) {
   var_00 endon("done");
-  [
-    [var_01]
-  ](var_02);
+  [[var_01]](var_02);
   var_00 notify("done");
 }
 
@@ -136,8 +132,7 @@ func_12DB(var_00, var_01, var_02, var_03, var_04, var_05) {
     if(isDefined(level.func_DADB) && level.func_DADB || isDefined(level.func_DADC) && level.func_DADC) {
       if(issubstr(var_06, "southpaw") || var_05 && issubstr(var_06, "legacy")) {
         return var_04;
-      }
-      else {
+      } else {
         return var_03;
       }
     } else if(issubstr(var_06, "southpaw") || var_05 && issubstr(var_06, "legacy"))
@@ -196,8 +191,7 @@ func_9021(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   if(isDefined(self.func_4B7A)) {
     if(self.func_4B7A == var_00) {
       return;
-    }
-    else {
+    } else {
       self.func_4B7A = var_00;
       scripts\sp\utility::func_65E1("global_hint_in_use");
       wait 0.05;
@@ -251,11 +245,9 @@ destroy_hint_on_c6_grab(var_00) {
   for(;;) {
     if(!isDefined(level.player.melee)) {
       wait 0.05;
-    }
-    else if(!isDefined(level.player.melee.func_B5FE)) {
+    } else if(!isDefined(level.player.melee.func_B5FE)) {
       wait 0.05;
-    }
-    else {
+    } else {
       break;
     }
 
@@ -328,20 +320,15 @@ func_74DB(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
     if(isDefined(var_06)) {
       var_00[[var_01]](var_02, var_03, var_04, var_05, var_06);
-    }
-    else if(isDefined(var_05)) {
+    } else if(isDefined(var_05)) {
       var_00[[var_01]](var_02, var_03, var_04, var_05);
-    }
-    else if(isDefined(var_04)) {
+    } else if(isDefined(var_04)) {
       var_00[[var_01]](var_02, var_03, var_04);
-    }
-    else if(isDefined(var_03)) {
+    } else if(isDefined(var_03)) {
       var_00[[var_01]](var_02, var_03);
-    }
-    else if(isDefined(var_02)) {
+    } else if(isDefined(var_02)) {
       var_00[[var_01]](var_02);
-    }
-    else {
+    } else {
       var_00[[var_01]]();
     }
 
@@ -399,8 +386,7 @@ func_22DA(var_00, var_01, var_02) {
 
   if(isDefined(var_02)) {
     wait(var_02);
-  }
-  else {
+  } else {
     var_00 waittill(var_01);
   }
 }
@@ -408,14 +394,11 @@ func_22DA(var_00, var_01, var_02) {
 func_68CC(var_00) {
   if(var_0.func_C8FD.size == 0) {
     var_0.func_376B call[[var_0.func]]();
-  }
-  else if(var_0.func_C8FD.size == 1) {
+  } else if(var_0.func_C8FD.size == 1) {
     var_0.func_376B call[[var_0.func]](var_0.func_C8FD[0]);
-  }
-  else if(var_0.func_C8FD.size == 2) {
+  } else if(var_0.func_C8FD.size == 2) {
     var_0.func_376B call[[var_0.func]](var_0.func_C8FD[0], var_0.func_C8FD[1]);
-  }
-  else if(var_0.func_C8FD.size == 3) {
+  } else if(var_0.func_C8FD.size == 3) {
     var_0.func_376B call[[var_0.func]](var_0.func_C8FD[0], var_0.func_C8FD[1], var_0.func_C8FD[2]);
   }
 
@@ -431,14 +414,11 @@ func_68CC(var_00) {
 func_68CD(var_00) {
   if(var_0.func_C8FD.size == 0) {
     call[[var_0.func]]();
-  }
-  else if(var_0.func_C8FD.size == 1) {
+  } else if(var_0.func_C8FD.size == 1) {
     call[[var_0.func]](var_0.func_C8FD[0]);
-  }
-  else if(var_0.func_C8FD.size == 2) {
+  } else if(var_0.func_C8FD.size == 2) {
     call[[var_0.func]](var_0.func_C8FD[0], var_0.func_C8FD[1]);
-  }
-  else if(var_0.func_C8FD.size == 3) {
+  } else if(var_0.func_C8FD.size == 3) {
     call[[var_0.func]](var_0.func_C8FD[0], var_0.func_C8FD[1], var_0.func_C8FD[2]);
   }
 
@@ -461,14 +441,11 @@ func_68CE(var_00, var_01) {
 
   if(var_0.func_C8FD.size == 0) {
     var_0.func_376B[[var_0.func]]();
-  }
-  else if(var_0.func_C8FD.size == 1) {
+  } else if(var_0.func_C8FD.size == 1) {
     var_0.func_376B[[var_0.func]](var_0.func_C8FD[0]);
-  }
-  else if(var_0.func_C8FD.size == 2) {
+  } else if(var_0.func_C8FD.size == 2) {
     var_0.func_376B[[var_0.func]](var_0.func_C8FD[0], var_0.func_C8FD[1]);
-  }
-  else if(var_0.func_C8FD.size == 3) {
+  } else if(var_0.func_C8FD.size == 3) {
     var_0.func_376B[[var_0.func]](var_0.func_C8FD[0], var_0.func_C8FD[1], var_0.func_C8FD[2]);
   }
 
@@ -599,14 +576,12 @@ func_5F8E(var_00, var_01, var_02, var_03, var_04) {
 
     if(isDefined(self.func_A905)) {
       var_19 = [
-    }
-        [level.func_5EFB]
-      ](self.func_A905, var_01);
+        }
+        [level.func_5EFB]](self.func_A905, var_01);
     else if(isDefined(self.func_A906)) {
       var_19 = [
-    }
-        [level.func_5EFB]
-      ](self.func_A906, var_01);
+        }
+        [level.func_5EFB]](self.func_A906, var_01);
 
     if(scripts\anim\utility::func_9D9B() && !self.func_5953) {
       self.moveplaybackrate = 1;
@@ -647,8 +622,7 @@ func_10FE6() {
   if(isDefined(level.func_EC85["generic"]["DRS_run"])) {
     if(isarray(level.func_EC85["generic"]["DRS_run"])) {
       scripts\sp\utility::func_F3CC("DRS_run");
-    }
-    else {
+    } else {
       scripts\sp\utility::func_F3CB("DRS_run");
     }
   } else
@@ -674,15 +648,13 @@ func_5F8C(var_00) {
     case "sprint":
       if(scripts\anim\utility::func_9D9B() && !self.func_5953) {
         self.moveplaybackrate = 1;
-      }
-      else if(!self.func_5953) {
+      } else if(!self.func_5953) {
         self.moveplaybackrate = 1.15;
       }
 
       if(isarray(level.func_EC85["generic"]["DRS_sprint"])) {
         scripts\sp\utility::func_F3CC("DRS_sprint");
-      }
-      else {
+      } else {
         scripts\sp\utility::func_F3CB("DRS_sprint");
       }
 
@@ -698,8 +670,7 @@ func_5F8C(var_00) {
       if(isDefined(level.func_EC85["generic"]["DRS_run"])) {
         if(isarray(level.func_EC85["generic"]["DRS_run"])) {
           scripts\sp\utility::func_F3CC("DRS_run");
-        }
-        else {
+        } else {
           scripts\sp\utility::func_F3CB("DRS_run");
         }
       } else
@@ -720,8 +691,7 @@ func_5F8C(var_00) {
       if(isDefined(level.func_EC85["generic"]["DRS_combat_jog"])) {
         if(isarray(level.func_EC85["generic"]["DRS_combat_jog"])) {
           scripts\sp\utility::func_F3CC("DRS_combat_jog");
-        }
-        else {
+        } else {
           scripts\sp\utility::func_F3CB("DRS_combat_jog");
         }
       } else
@@ -802,18 +772,15 @@ func_8A0B(var_00, var_01, var_02, var_03) {
 
   if(self.a.pose == "crouch") {
     var_05 = var_05 + "_crouch";
-  }
-  else if(self.script == "cover_right") {
+  } else if(self.script == "cover_right") {
     var_05 = var_05 + "_coverR";
-  }
-  else if(scripts\anim\utility::func_9D9B()) {
+  } else if(scripts\anim\utility::func_9D9B()) {
     var_05 = var_05 + "_cqb";
   }
 
   if(var_04) {
     self give_capture_credit(scripts\sp\utility::func_7ECF(var_05), 1, 0, 1.1);
-  }
-  else {
+  } else {
     scripts\sp\anim::func_1EC7(self, var_05);
   }
 }
@@ -1102,23 +1069,17 @@ func_50E5(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 
   if(isDefined(var_07)) {
     childthread[[var_00]](var_02, var_03, var_04, var_05, var_06, var_07);
-  }
-  else if(isDefined(var_06)) {
+  } else if(isDefined(var_06)) {
     childthread[[var_00]](var_02, var_03, var_04, var_05, var_06);
-  }
-  else if(isDefined(var_05)) {
+  } else if(isDefined(var_05)) {
     childthread[[var_00]](var_02, var_03, var_04, var_05);
-  }
-  else if(isDefined(var_04)) {
+  } else if(isDefined(var_04)) {
     childthread[[var_00]](var_02, var_03, var_04);
-  }
-  else if(isDefined(var_03)) {
+  } else if(isDefined(var_03)) {
     childthread[[var_00]](var_02, var_03);
-  }
-  else if(isDefined(var_02)) {
+  } else if(isDefined(var_02)) {
     childthread[[var_00]](var_02);
-  }
-  else {
+  } else {
     childthread[[var_00]]();
   }
 }
@@ -1158,9 +1119,7 @@ func_4461(var_00, var_01, var_02, var_03) {
     for(var_06 = 0; var_06 < var_5.size; var_6++) {
       var_07 = distance(var_1[var_5[var_06]].v["origin"], var_00);
 
-      if([
-          [var_03]
-        ](var_07, var_02)) {
+      if([[var_03]](var_07, var_02)) {
         continue;
       }
       var_02 = var_07;
@@ -1207,7 +1166,7 @@ func_1789() {
   self.func_1274A = undefined;
 
   foreach(var_03 in var_01) {
-  thread[[var_03]](var_00);
+    thread[[var_03]](var_00);
   }
 }
 
@@ -1274,8 +1233,7 @@ func_7615(var_00, var_01) {
 
   if(var_01) {
     func_22D4(var_0.fx, scripts\engine\utility::pauseeffect);
-  }
-  else {
+  } else {
     scripts\engine\utility::array_thread(var_0.fx, scripts\engine\utility::pauseeffect);
   }
 }
@@ -1318,7 +1276,7 @@ func_28D9(var_00) {
     var_01 = _getaiarray(var_00);
   } else {
     foreach(var_00 in anim.func_115E7) {
-    scripts\sp\utility::func_F2DC(var_00, 1);
+      scripts\sp\utility::func_F2DC(var_00, 1);
     }
 
     var_01 = _getaiarray();
@@ -1463,8 +1421,7 @@ dyndof_getplayerorigin() {
     } else if(isDefined(var_0.model)) {
       if(scripts\sp\utility::hastag(var_0.model, "tag_camera")) {
         var_0.dyndof_hastag = 1;
-      }
-      else {
+      } else {
         var_0.dyndof_hastag = 0;
       }
     }

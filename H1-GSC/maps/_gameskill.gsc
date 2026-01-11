@@ -240,7 +240,7 @@ setglobaldifficulty() {
 
 updategameskill() {
   foreach(var_1 in level.players) {
-  var_1.gameskill = var_1 maps\_utility::get_player_gameskill();
+    var_1.gameskill = var_1 maps\_utility::get_player_gameskill();
   }
 
   level.gameskill = level.player.gameskill;
@@ -545,8 +545,7 @@ playerhealthregen() {
         if(getdvarint("cg_altDamageMode") == 0) {
           if(isusinghdr()) {
             thread blurview(2, 2);
-          }
-          else {
+          } else {
             thread blurview(3.6, 2);
           }
         } else if(isusinghdr())
@@ -617,8 +616,7 @@ playerhealthregen() {
       if(getdvarint("cg_altDamageMode") == 0) {
         if(isusinghdr()) {
           thread blurview(2, 2);
-        }
-        else {
+        } else {
           thread blurview(3.6, 2);
         }
       } else if(isusinghdr())
@@ -688,8 +686,7 @@ default_door_node_flashbang_frequency() {
   if(self isbadguy()) {
     if(level.gameskill >= 2) {
       self.doorflashchance = 0.8;
-    }
-    else {
+    } else {
       self.doorflashchance = 0.6;
     }
   }
@@ -705,8 +702,7 @@ grenadeawareness() {
     if(level.gameskill >= 2) {
       if(randomint(100) < 33) {
         self.grenadeawareness = 0.2;
-      }
-      else {
+      } else {
         self.grenadeawareness = 0.5;
       }
     } else if(randomint(100) < 33)
@@ -884,8 +880,7 @@ bloodsplatter() {
 
     if(var_1 == 0) {
       var_0.alpha = 0;
-    }
-    else {
+    } else {
       var_0.alpha = 1;
     }
 
@@ -1005,8 +1000,7 @@ compassflashingoverlay(var_0) {
 add_hudelm_position_internal(var_0) {
   if(level.console) {
     self.fontscale = 2;
-  }
-  else {
+  } else {
     self.fontscale = 1.6;
   }
 
@@ -1029,8 +1023,7 @@ add_hudelm_position_internal(var_0) {
 
   if(level.console) {
     self.background setshader("popmenu_bg", 650, 52);
-  }
-  else {
+  } else {
     self.background setshader("popmenu_bg", 650, 42);
   }
 
@@ -1559,9 +1552,7 @@ auto_adust_zone_complete(var_0) {
     }
 
     player_attacker(var_0) {
-      if([
-          [level.custom_player_attacker]
-        ](var_0))
+      if([[level.custom_player_attacker]](var_0))
         return 1;
 
       if(isplayer(var_0)) {
@@ -1612,16 +1603,12 @@ auto_adust_zone_complete(var_0) {
       aa_add_event("aa_player_damage_dealt", var_0);
 
       if(!level.player maps\_utility::isads()) {
-        [
-          [level.global_damage_func]
-        ](var_1, self.damagelocation, var_2);
+        [[level.global_damage_func]](var_1, self.damagelocation, var_2);
         return 0;
       }
 
       if(!bullet_attack(var_1)) {
-        [
-          [level.global_damage_func]
-        ](var_1, self.damagelocation, var_2);
+        [[level.global_damage_func]](var_1, self.damagelocation, var_2);
         return 0;
       }
 

@@ -104,7 +104,7 @@ watchhostmigration() {
 
 ph_precache() {
   foreach(var_1 in level.proplist) {
-  precachemodel(var_1.modelname);
+    precachemodel(var_1.modelname);
   }
 }
 
@@ -257,8 +257,7 @@ phclass() {
 getspawnpoint() {
   if(self.pers["team"] == game["attackers"]) {
     var_0 = "mp_sd_spawn_attacker";
-  }
-  else {
+  } else {
     var_0 = "mp_sd_spawn_defender";
   }
 
@@ -276,8 +275,7 @@ getpkspawnpoint() {
 
   if(level.usestartspawns && level.ingraceperiod) {
     var_1 = maps\mp\gametypes\_spawnlogic::getbeststartspawn("mp_tdm_spawn_" + var_0 + "_start");
-  }
-  else {
+  } else {
     var_2 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(var_0);
     var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_awayfromenemies(var_2, var_0);
   }
@@ -367,8 +365,7 @@ propcontrolshud() {
 
   if(common_scripts\utility::is_player_gamepad_enabled()) {
     self.matchslopekey.label = &"MP_PH_SLOPE";
-  }
-  else {
+  } else {
     self.matchslopekey.label = &"MP_PH_SLOPE_PC";
   }
 
@@ -452,8 +449,7 @@ updatetextongamepadchange() {
       if(var_1) {
         if(!maps\mp\_utility::is_true(self.slopelocked)) {
           self.matchslopekey.label = &"MP_PH_SLOPE";
-        }
-        else {
+        } else {
           self.matchslopekey.label = &"MP_PH_SLOPED";
         }
       } else if(!maps\mp\_utility::is_true(self.slopelocked))
@@ -1076,8 +1072,7 @@ proplockwatch() {
       }
       if(self.lock) {
         unlockprop();
-      }
-      else {
+      } else {
         lockprop();
       }
 
@@ -1158,8 +1153,7 @@ proplockwatch() {
 
         if(common_scripts\utility::is_player_gamepad_enabled()) {
           self.matchslopekey.label = &"MP_PH_SLOPED";
-        }
-        else {
+        } else {
           self.matchslopekey.label = &"MP_PH_SLOPED_PC";
         }
       } else {
@@ -1174,8 +1168,7 @@ proplockwatch() {
 
         if(common_scripts\utility::is_player_gamepad_enabled()) {
           self.matchslopekey.label = &"MP_PH_SLOPE";
-        }
-        else {
+        } else {
           self.matchslopekey.label = &"MP_PH_SLOPE_PC";
         }
       }
@@ -1231,8 +1224,7 @@ madpropswatch() {
 set_pitch_roll_for_ground_normal(var_0) {
   if(!isDefined(var_0)) {
     var_1 = self;
-  }
-  else {
+  } else {
     var_1 = var_0;
   }
 
@@ -1252,8 +1244,7 @@ set_pitch_roll_for_ground_normal(var_0) {
 
   if(var_9 < 0) {
     var_9 = -1;
-  }
-  else {
+  } else {
     var_9 = 1;
   }
 
@@ -1283,8 +1274,7 @@ propmoveunlock() {
 allowmove(var_0) {
   if(var_0) {
     self playerlinkto(level.ph_linker, "tag_player");
-  }
-  else {
+  } else {
     self unlink();
   }
 }
@@ -1359,8 +1349,7 @@ propspectatekeys() {
 
   if(checkifvalidpropspectate()) {
     spectateprop();
-  }
-  else {
+  } else {
     findvalidspectateprop(1);
     spectateprop();
   }
@@ -1409,15 +1398,13 @@ findvalidspectateprop(var_0) {
   for(;;) {
     if(maps\mp\_utility::is_true(var_0)) {
       self.spectatenumber++;
-    }
-    else {
+    } else {
       self.spectatenumber--;
     }
 
     if(var_0 && self.spectatableprops.size <= self.spectatenumber) {
       self.spectatenumber = 0;
-    }
-    else if(self.spectatenumber < 0) {
+    } else if(self.spectatenumber < 0) {
       self.spectatenumber = self.spectatableprops.size - 1;
     }
 
@@ -1495,8 +1482,7 @@ returntoprop() {
 
   if(self.lock) {
     self playerlinkto(self.propanchor);
-  }
-  else {
+  } else {
     self.propanchor linktosynchronizedparent(self);
     self.propanchor.origin = self.origin;
   }
@@ -1639,8 +1625,7 @@ flashenemies(var_0, var_1) {
     if(var_5 <= var_6) {
       if(var_5 <= var_7) {
         var_8 = 1;
-      }
-      else {
+      } else {
         var_8 = 1 - (var_5 - var_7) / (var_6 - var_7);
       }
 
@@ -1953,8 +1938,7 @@ ontimelimit() {
     if(isDefined(var_1) && isDefined(var_2)) {
       if(maps\mp\_utility::isgameparticipant(var_2)) {
         var_6 = var_2 getentitynumber();
-      }
-      else {
+      } else {
         var_6 = -1;
       }
 
@@ -2103,8 +2087,7 @@ attackerswaittime() {
 
   if(level.madpropsmode) {
     var_0 = level.madpropssettings.madpropshidetime - (gettime() - level.starttime) / 1000.0;
-  }
-  else {
+  } else {
     var_0 = level.phsettings.prophidetime - (gettime() - level.starttime) / 1000.0;
   }
 
@@ -2202,15 +2185,14 @@ hidehudintermission() {
   level.whistling.alpha = 0;
 
   foreach(var_1 in level.players) {
-  var_1 propabilitykeysvisible(0);
+    var_1 propabilitykeysvisible(0);
   }
 }
 
 propabilitykeysvisible(var_0) {
   if(maps\mp\_utility::is_true(var_0)) {
     var_1 = 1;
-  }
-  else {
+  } else {
     var_1 = 0;
   }
 
@@ -2277,8 +2259,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
 
   if(var_10.team == game["attackers"]) {
     thread respawnattacker();
-  }
-  else {
+  } else {
     thread maps\mp\gametypes\_deathicons::adddeathicon(var_10.body, var_10, var_10.team, 5.0, var_1, 0);
   }
 
@@ -2365,8 +2346,7 @@ playdamagesoundph(var_0) {
   if(self.team == "axis") {
     if(self hasfemalecustomizationmodel()) {
       self playSound("generic_pain_enemy_fm_" + var_1);
-    }
-    else {
+    } else {
       self playSound("generic_pain_enemy_" + var_1);
     }
   } else if(self hasfemalecustomizationmodel())
@@ -2382,8 +2362,7 @@ playdeathsoundph() {
   if(self.team == game["attackers"]) {
     if(self hasfemalecustomizationmodel()) {
       self playSound("generic_death_enemy_fm_" + var_0);
-    }
-    else {
+    } else {
       self playSound("generic_death_enemy_" + var_0);
     }
   }

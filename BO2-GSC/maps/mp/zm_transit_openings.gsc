@@ -339,8 +339,7 @@ zombieanimnotetrackthink(notifystring, chunk, node) {
 
     if(notetrack == "end") {
       return;
-    }
-    else if(notetrack == "board" || notetrack == "destroy_piece") {
+    } else if(notetrack == "board" || notetrack == "destroy_piece") {
       node.zbarrier setzbarrierpiecestate(chunk, "opening");
 
       if(isDefined(node.rebuildtrigger)) {
@@ -382,8 +381,7 @@ buswatchtriggervisibility(opening) {
   }
   if(!isDefined(level.buswatchtriggervisibility_spread)) {
     level.buswatchtriggervisibility_spread = 0;
-  }
-  else {
+  } else {
     level.buswatchtriggervisibility_spread++;
     wait(0.05 * level.buswatchtriggervisibility_spread);
   }
@@ -391,8 +389,7 @@ buswatchtriggervisibility(opening) {
   while(true) {
     if(no_valid_repairable_boards(opening)) {
       opening.rebuildtrigger setinvisibletoall();
-    }
-    else {
+    } else {
       opening.rebuildtrigger setvisibletoall();
     }
 
@@ -700,8 +697,7 @@ teleportthreadex(verticaloffset, delay, frames) {
 
   if(amount > 10.0) {
     amount = 10.0;
-  }
-  else if(amount < -10.0) {
+  } else if(amount < -10.0) {
     amount = -10.0;
   }
 
@@ -770,8 +766,7 @@ zombieattachtobus(thebus, opening, removeafterdone) {
 
     if(opening.bindtag == "door_front_jnt") {
       from_front = 1;
-    }
-    else {
+    } else {
       from_rear = 1;
     }
   } else {
@@ -949,8 +944,7 @@ zombieattachleftorright(bus) {
   if(!(isDefined(bus.doorsclosed) && bus.doorsclosed)) {
     if(tag == "window_right_1_jnt" || tag == "window_right_2_jnt" || tag == "window_right_3_jnt") {
       return "_r";
-    }
-    else if(tag == "window_right_4_jnt") {
+    } else if(tag == "window_right_4_jnt") {
       return "_l";
     }
   }
@@ -960,8 +954,7 @@ zombieattachleftorright(bus) {
   if(isDefined(side)) {
     if(side == "right") {
       openings = bus.openingright;
-    }
-    else if(side == "left") {
+    } else if(side == "left") {
       openings = bus.openingleft;
     }
 
@@ -1121,8 +1114,7 @@ zombieshoulddetachfromwindow() {
   if(isDefined(monkey)) {
     if(monkey maps\mp\zm_transit_bus::entity_is_on_bus(1)) {
       return false;
-    }
-    else {
+    } else {
       return true;
     }
   }
@@ -1155,17 +1147,13 @@ zombiecanjumponroof(opening) {
 
   if(level.round_number <= 5) {
     percentchance = 5;
-  }
-  else if(level.round_number <= 10) {
+  } else if(level.round_number <= 10) {
     percentchance = 20;
-  }
-  else if(level.round_number <= 20) {
+  } else if(level.round_number <= 20) {
     percentchance = 30;
-  }
-  else if(level.round_number <= 25) {
+  } else if(level.round_number <= 25) {
     percentchance = 40;
-  }
-  else {
+  } else {
     percentchance = 50;
   }
 
@@ -1363,8 +1351,7 @@ zombieonbusenemy() {
   if(isDefined(new_enemy) && isDefined(self.favoriteenemy) && isDefined(new_enemy) && self.favoriteenemy != new_enemy) {
     if(!(isDefined(self.favoriteenemy.isonbus) && self.favoriteenemy.isonbus)) {
       self.favoriteenemy = new_enemy;
-    }
-    else if(self.isonbusroof == new_enemy.isonbusroof) {
+    } else if(self.isonbusroof == new_enemy.isonbusroof) {
       self.favoriteenemy = new_enemy;
     }
   }
@@ -1423,8 +1410,7 @@ zombiemoveonbus() {
 
         if(!level.the_bus maps\mp\zm_transit_bus::busispointinside(monkey.origin)) {
           self zombiewalktoexit();
-        }
-        else {
+        } else {
           self setgoalpos(monkey.origin);
         }
       } else {
@@ -1457,8 +1443,7 @@ zombiemoveonbus() {
 
         if(self_is_on_bus_roof) {
           self.goalradius = 16;
-        }
-        else {
+        } else {
           self.goalradius = 32;
         }
 
@@ -1680,8 +1665,7 @@ zombieattackplayeronturret(player) {
 
     if(dist_from_turret2 > 1024) {
       self setgoalpos(enemy_origin, direction_angles);
-    }
-    else {
+    } else {
       self zombiescriptedattack(player, direction_angles, ::zombiedamageplayerturret);
     }
 
@@ -1871,8 +1855,7 @@ zombieheighttraverse() {
 
     if(!(isDefined(level.bus_roof_open) && level.bus_roof_open) || isDefined(level.bus_roof_tearing) && level.bus_roof_tearing || !closer_to_hatch) {
       self zombiewindowtoroof();
-    }
-    else if(self zombiepathtoladder()) {
+    } else if(self zombiepathtoladder()) {
       self zombieclimbtoroof();
     }
   } else if(self zombiepathtoroofopening())

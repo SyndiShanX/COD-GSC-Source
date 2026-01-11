@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\duplicaterender_mgr;
-
 #namespace flak_drone;
 
 init_shared() {

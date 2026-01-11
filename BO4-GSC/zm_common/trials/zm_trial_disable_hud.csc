@@ -7,7 +7,6 @@
 #include scripts\zm\perk\zm_perk_death_perception;
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_disable_hud;
 
 autoexec __init__system__() {
@@ -27,7 +26,7 @@ private on_begin(local_client_num, params) {
 }
 
 function_40349f7c(localclientnum) {
-  level endon(#"hash_38932f8deb28b470", #"end_game");
+  level endon(#"hash_38932f8deb28b470", # "end_game");
   wait 12;
   level.var_dc60105c = 1;
   maxclients = getmaxlocalclients();

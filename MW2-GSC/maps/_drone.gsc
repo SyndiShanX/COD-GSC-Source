@@ -80,8 +80,7 @@ drone_give_soul() {
 
   if(isDefined(self.script_moveplaybackrate)) {
     self.moveplaybackrate = self.script_moveplaybackrate;
-  }
-  else {
+  } else {
     self.moveplaybackrate = 1;
   }
 
@@ -128,8 +127,7 @@ drone_init() {
   if(isDefined(self.target)) {
     if(!isDefined(self.script_moveoverride)) {
       self thread drone_move();
-    }
-    else {
+    } else {
       self thread drone_wait_move();
     }
   }
@@ -149,8 +147,7 @@ drone_array_handling(drone) {
 
   if(isDefined(drone) && isDefined(drone.struct_array_index)) {
     structarray_remove_index(level.drones[team], drone.struct_array_index);
-  }
-  else {
+  } else {
     structarray_remove_undefined(level.drones[team]);
   }
 }
@@ -310,8 +307,7 @@ drone_fight(animset, struct, moveToDest) {
   if(self.team == "axis") {
     if(iRand == 1) {
       self.weaponsound = "drone_ak47_fire_npc";
-    }
-    else if(iRand == 2) {
+    } else if(iRand == 2) {
       self.weaponsound = "drone_g36c_fire_npc";
     }
     if(iRand == 3) {
@@ -320,8 +316,7 @@ drone_fight(animset, struct, moveToDest) {
   } else {
     if(iRand == 1) {
       self.weaponsound = "drone_m4carbine_fire_npc";
-    }
-    else if(iRand == 2) {
+    } else if(iRand == 2) {
       self.weaponsound = "drone_m16_fire_npc";
     }
     if(iRand == 3) {
@@ -365,8 +360,7 @@ drone_fight(animset, struct, moveToDest) {
       if(animset == "coverprone") {
         if(cointoss()) {
           bPopUpToFire = 0;
-        }
-        else {
+        } else {
           bPopUpToFire = 1;
         }
       }
@@ -384,8 +378,7 @@ drone_fight(animset, struct, moveToDest) {
       if(isDefined(level.drone_anims[self.team][animset]["fire"])) {
         if((animset == "coverprone") && (bPopUpToFire == 1)) {
           self thread drone_play_looping_anim(level.drone_anims[self.team][animset]["fire_exposed"], 1);
-        }
-        else {
+        } else {
           self thread drone_play_looping_anim(level.drone_anims[self.team][animset]["fire"], 1);
         }
 
@@ -595,7 +588,7 @@ drone_init_path() {
         Line( node.origin, node.origin + vec1, (1,0,0), 1, 1, 1000 );
         Line( node.origin, node.origin + vec2, (0,0,1), 1, 1, 1000 );
         Line( node.origin, node.origin + vec, (0,1,0), 1, 1, 1000 );
-				
+        				
 
         thread maps\_debug::drawArrowForever( node.origin, node.angles );
 
@@ -802,15 +795,14 @@ getPathArray(firstTargetName, initialPoint) {
 
   if(test_ent.size) {
     goal_type = "entity";
+  } else {
+    if(test_nod.size)
   }
+  goal_type = "node";
   else {
-  if(test_nod.size)
+    if(test_str.size)
   }
-    goal_type = "node";
-  else {
-  if(test_str.size)
-  }
-    goal_type = "struct";
+  goal_type = "struct";
 
   for(;;) {
     index = nodes.size;

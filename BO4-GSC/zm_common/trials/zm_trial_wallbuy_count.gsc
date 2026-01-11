@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_trial_wallbuy_count;
 
 autoexec __init__system__() {
@@ -75,7 +74,7 @@ is_active() {
 }
 
 private wallbuy_watcher() {
-  level endon(#"hash_31c14df051f6c165", #"game_ended");
+  level endon(#"hash_31c14df051f6c165", # "game_ended");
 
   while(true) {
     s_notify = level waittill(#"weapon_bought");

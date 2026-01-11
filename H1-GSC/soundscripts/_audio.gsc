@@ -323,11 +323,9 @@ trigger_multiple_audio_trigger(var_0) {
 
         if(var_10 == var_1[0]) {
           var_9 = 0;
-        }
-        else if(var_10 == var_1[1]) {
+        } else if(var_10 == var_1[1]) {
           var_9 = 1;
-        }
-        else if(var_10 != "") {
+        } else if(var_10 != "") {
           var_11 = trigger_multiple_audio_progress(var_3, var_4, var_5, var_2.origin);
 
           if(var_11 < 0.5) {
@@ -337,15 +335,13 @@ trigger_multiple_audio_trigger(var_0) {
             soundscripts\_audio_zone_manager::azm_start_zone(var_1[1]);
             var_9 = 1;
           }
-        } else {
-        }
+        } else {}
       } else {
         var_11 = trigger_multiple_audio_progress(var_3, var_4, var_5, var_2.origin);
 
         if(var_11 < 0.5) {
           var_9 = 0;
-        }
-        else {
+        } else {
           var_9 = 1;
         }
       }
@@ -363,7 +359,9 @@ trigger_multiple_audio_trigger(var_0) {
         if(isDefined(self.script_audio_enter_func)) {
           if(isDefined(var_1) && isDefined(var_1[0])) {
             if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func])) {
-              [[level._audio.trigger_functions[self.script_audio_enter_func]]](var_1[0]);
+              [
+                [level._audio.trigger_functions[self.script_audio_enter_func]]
+              ](var_1[0]);
             }
           } else if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
             [[level._audio.trigger_functions[self.script_audio_enter_func]]]("front");
@@ -381,7 +379,9 @@ trigger_multiple_audio_trigger(var_0) {
         if(isDefined(self.script_audio_enter_func)) {
           if(isDefined(var_1) && isDefined(var_1[1])) {
             if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func])) {
-              [[level._audio.trigger_functions[self.script_audio_enter_func]]](var_1[1]);
+              [
+                [level._audio.trigger_functions[self.script_audio_enter_func]]
+              ](var_1[1]);
             }
           } else if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func]))
             [[level._audio.trigger_functions[self.script_audio_enter_func]]]("back");
@@ -394,7 +394,9 @@ trigger_multiple_audio_trigger(var_0) {
 
       if(isDefined(self.script_audio_enter_func)) {
         if(isDefined(level._audio.trigger_functions[self.script_audio_enter_func])) {
-          [[level._audio.trigger_functions[self.script_audio_enter_func]]]();
+          [
+            [level._audio.trigger_functions[self.script_audio_enter_func]]
+          ]();
         }
       }
     }
@@ -426,7 +428,9 @@ trigger_multiple_audio_trigger(var_0) {
         var_15 = trigger_multiple_audio_progress_point(var_3, var_4, var_2.origin);
 
         if(isDefined(level._audio.trigger_functions[self.script_audio_point_func])) {
-          [[level._audio.trigger_functions[self.script_audio_point_func]]](var_15);
+          [
+            [level._audio.trigger_functions[self.script_audio_point_func]]
+          ](var_15);
         }
       }
 
@@ -448,7 +452,9 @@ trigger_multiple_audio_trigger(var_0) {
 
           if(isDefined(self.script_audio_progress_func)) {
             if(isDefined(level._audio.trigger_functions[self.script_audio_progress_func])) {
-              [[level._audio.trigger_functions[self.script_audio_progress_func]]](var_11);
+              [
+                [level._audio.trigger_functions[self.script_audio_progress_func]]
+              ](var_11);
             }
           }
 
@@ -487,7 +493,9 @@ trigger_multiple_audio_trigger(var_0) {
         if(isDefined(self.script_audio_exit_func)) {
           if(isDefined(var_1) && isDefined(var_1[1])) {
             if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func])) {
-              [[level._audio.trigger_functions[self.script_audio_exit_func]]](var_1[1]);
+              [
+                [level._audio.trigger_functions[self.script_audio_exit_func]]
+              ](var_1[1]);
             }
           } else if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
             [[level._audio.trigger_functions[self.script_audio_exit_func]]]("back");
@@ -511,7 +519,9 @@ trigger_multiple_audio_trigger(var_0) {
         if(isDefined(self.script_audio_exit_func)) {
           if(isDefined(var_1) && isDefined(var_1[0])) {
             if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func])) {
-              [[level._audio.trigger_functions[self.script_audio_exit_func]]](var_1[0]);
+              [
+                [level._audio.trigger_functions[self.script_audio_exit_func]]
+              ](var_1[0]);
             }
           } else if(isDefined(level._audio.trigger_functions[self.script_audio_exit_func]))
             [[level._audio.trigger_functions[self.script_audio_exit_func]]]("front");
@@ -597,8 +607,7 @@ trigger_multiple_audio_register_callback(var_0) {
   }
 
   if(isDefined(level._audio.trigger_function_keys)) {
-    foreach(var_3 in level._audio.trigger_function_keys) {
-    }
+    foreach(var_3 in level._audio.trigger_function_keys) {}
 
     level._audio.trigger_function_keys = undefined;
   }
@@ -631,8 +640,7 @@ trigger_multiple_audio_get_zone_from(var_0, var_1) {
 
   if(var_1) {
     return var_0[1];
-  }
-  else {
+  } else {
     return var_0[0];
   }
 }
@@ -644,8 +652,7 @@ trigger_multiple_audio_get_zone_to(var_0, var_1) {
 
   if(var_1) {
     return var_0[0];
-  }
-  else {
+  } else {
     return var_0[1];
   }
 }
@@ -770,8 +777,7 @@ aud_print_zone_small(var_0) {
 equal_strings(var_0, var_1) {
   if(isDefined(var_0) && isDefined(var_1)) {
     return var_0 == var_1;
-  }
-  else {
+  } else {
     return !isDefined(var_0) && !isDefined(var_1);
   }
 }
@@ -797,8 +803,7 @@ aud_fade_loop_out_and_delete(var_0, var_1) {
 aud_min(var_0, var_1) {
   if(var_0 <= var_1) {
     return var_0;
-  }
-  else {
+  } else {
     return var_1;
   }
 }
@@ -806,8 +811,7 @@ aud_min(var_0, var_1) {
 aud_max(var_0, var_1) {
   if(var_0 >= var_1) {
     return var_0;
-  }
-  else {
+  } else {
     return var_1;
   }
 }
@@ -815,8 +819,7 @@ aud_max(var_0, var_1) {
 aud_clamp(var_0, var_1, var_2) {
   if(var_0 < var_1) {
     var_0 = var_1;
-  }
-  else if(var_0 > var_2) {
+  } else if(var_0 > var_2) {
     var_0 = var_2;
   }
 
@@ -826,8 +829,7 @@ aud_clamp(var_0, var_1, var_2) {
 aud_get_envelope_domain(var_0) {
   if(isarray(var_0)) {
     return [var_0[0][0], var_0[var_0.size - 1][0]];
-  }
-  else {
+  } else {
     return [var_0.env_array[0][0], var_0.env_array[var_0.env_array.size - 1][0]];
   }
 }
@@ -945,7 +947,7 @@ aud_start_slow_mo_gunshot_callback(var_0, var_1) {
   var_2 = getaiarray("axis");
 
   foreach(var_4 in var_2) {
-  var_4 thread aud_impact_monitor(var_1);
+    var_4 thread aud_impact_monitor(var_1);
   }
 
   var_6 = 0;
@@ -955,9 +957,7 @@ aud_start_slow_mo_gunshot_callback(var_0, var_1) {
     if(level.player attackbuttonpressed()) {
       if(!var_6) {
         var_6 = 1;
-        [
-          [var_0]
-        ](var_7);
+        [[var_0]](var_7);
       }
     } else
       var_6 = 0;
@@ -974,7 +974,9 @@ aud_impact_monitor(var_0) {
     self waittill("damage", var_2, var_3, var_4, var_5, var_6);
 
     if(isDefined(var_5)) {
-      [[var_0]](var_1, var_2, var_3, var_5, var_6);
+      [
+        [var_0]
+      ](var_1, var_2, var_3, var_5, var_6);
     }
   }
 }
@@ -1000,8 +1002,7 @@ aud_wait_delay(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1) && var_1) {
     aud_slomo_wait(var_7);
-  }
-  else {
+  } else {
     wait(var_7);
   }
 }
@@ -1100,8 +1101,7 @@ aud_get_progress_map(var_0) {
 is_deathsdoor_audio_enabled() {
   if(!isDefined(level._audio.deathsdoor_enabled)) {
     return 1;
-  }
-  else {
+  } else {
     return level._audio.deathsdoor_enabled;
   }
 }
@@ -1215,8 +1215,7 @@ set_damb_stringtable(var_0) {
 get_damb_stringtable() {
   if(!isDefined(level._audio.stringtables["damb"])) {
     return "soundtables\" + level.script + ".csv ";
-  }
-  else {
+  } else {
     return "soundtables\" + level._audio.stringtables["
   }
   damb "];
@@ -1229,8 +1228,7 @@ set_damb_component_stringtable(var_0) {
 get_damb_component_stringtable(var_0) {
   if(!isDefined(level._audio.stringtables["damb_comp"])) {
     return "soundtables\" + level.script + ".csv ";
-  }
-  else {
+  } else {
     return "soundtables\" + level._audio.stringtables["
   }
   damb_comp "];
@@ -1243,8 +1241,7 @@ set_damb_loops_stringtable(var_0) {
 get_damb_loops_stringtable(var_0) {
   if(!isDefined(level._audio.stringtables["damb_loops"])) {
     return "soundtables\" + level.script + ".csv ";
-  }
-  else {
+  } else {
     return "soundtables\" + level._audio.stringtables["
   }
   damb_loops "];
@@ -1257,8 +1254,7 @@ set_reverb_stringtable(var_0) {
 get_reverb_stringtable() {
   if(!isDefined(level._audio.stringtables["reverb"])) {
     return "soundtables\" + level.script + ".csv ";
-  }
-  else {
+  } else {
     return "soundtables\" + level._audio.stringtables["
   }
   reverb "];
@@ -1271,8 +1267,7 @@ set_zone_stringtable(var_0) {
 get_zone_stringtable() {
   if(!isDefined(level._audio.stringtables["zone"])) {
     return "soundtables\" + level.script + ".csv ";
-  }
-  else {
+  } else {
     return "soundtables\" + level._audio.stringtables["
   }
   zone "];
@@ -1288,8 +1283,7 @@ aud_get_threat_level(var_0, var_1, var_2) {
 
   if(isDefined(var_4)) {
     var_3 = var_4;
-  }
-  else {
+  } else {
     var_5 = 3;
     var_6 = 10;
     var_7 = 100;
@@ -1321,8 +1315,7 @@ aud_get_threat_level(var_0, var_1, var_2) {
 
           if(var_15 < var_9) {
             var_16 = 1.0;
-          }
-          else {
+          } else {
             var_16 = 1.0 - (var_15 - var_9) / (var_8 - var_9);
           }
 
@@ -1333,8 +1326,7 @@ aud_get_threat_level(var_0, var_1, var_2) {
 
     if(var_11 > 0) {
       var_3 = var_12 / var_11;
-    }
-    else {
+    } else {
       var_3 = 0;
     }
   }
@@ -1388,8 +1380,7 @@ deprecated_aud_fade_sound_in(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_5) {
     var_0 soundscripts\_snd_playsound::snd_play_loop(var_1);
-  }
-  else {
+  } else {
     var_0 soundscripts\_snd_playsound::snd_play(var_1);
   }
 
@@ -1456,8 +1447,7 @@ aud_play_pcap_vo(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     deprecated_aud_delay_play_2d_sound(var_0, var_1, var_3, var_4);
-  }
-  else {
+  } else {
     deprecated_aud_delay_play_linked_sound(var_0, var_5, var_1, var_3, var_4);
   }
 }
@@ -1565,8 +1555,7 @@ deprecated_aud_play_linked_sound(var_0, var_1, var_2, var_3, var_4, var_5, var_6
 
   if(isDefined(var_4)) {
     var_10 linkto(var_1, "tag_origin", var_4, (0, 0, 0));
-  }
-  else {
+  } else {
     var_10 linkto(var_1);
   }
 
@@ -1641,22 +1630,19 @@ deprecated__audio_msg_handler(var_0, var_1) {
     case "aud_play_dynamic_explosion":
       if(isDefined(var_1.spread_width)) {
         var_5 = var_1.spread_width;
-      }
-      else {
+      } else {
         var_5 = undefined;
       }
 
       if(isDefined(var_1.rear_dist)) {
         var_6 = var_1.rear_dist;
-      }
-      else {
+      } else {
         var_6 = undefined;
       }
 
       if(isDefined(var_1.velocity)) {
         var_7 = var_1.velocity;
-      }
-      else {
+      } else {
         var_7 = undefined;
       }
 

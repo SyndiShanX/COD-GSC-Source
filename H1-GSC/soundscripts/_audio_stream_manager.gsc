@@ -134,8 +134,7 @@ sm_mix_ambience(var_0) {
 
   if(var_0.size == 1) {
     smx_set_values_for_struct(level._audio.stream.ambience.curr, var_0[0].alias, var_0[0].vol, var_0[0].fade);
-  }
-  else if(var_0.size == 2) {
+  } else if(var_0.size == 2) {
     smx_set_values_for_struct(level._audio.stream.ambience.prev, var_0[0].alias, var_0[0].vol, var_0[0].fade);
     smx_set_values_for_struct(level._audio.stream.ambience.curr, var_0[1].alias, var_0[1].vol, var_0[1].fade);
   }

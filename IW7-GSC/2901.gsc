@@ -72,7 +72,7 @@ func_1718(var_00, var_01) {
 
 func_171A(var_00, var_01) {
   foreach(var_03 in var_01) {
-  level.func_BE4D[var_00][level.func_BE4D[var_00].size] = var_03;
+    level.func_BE4D[var_00][level.func_BE4D[var_00].size] = var_03;
   }
 }
 
@@ -140,8 +140,7 @@ func_7B05(var_00) {
   if(isDefined(self.func_29B8) && self.func_29B8) {
     if(self.script_team == "axis") {
       return;
-    }
-    else {
+    } else {
       self.voice = "unitednationsjackal";
     }
   }
@@ -193,8 +192,7 @@ func_7B07(var_00) {
 
   if(isai(self) && self isbadguy()) {
     self.func_1A53 = var_04;
-  }
-  else {
+  } else {
     self.name = var_04;
   }
 }
@@ -205,8 +203,7 @@ func_7E38(var_00) {
 
     if(scripts\engine\utility::cointoss()) {
       return "SN ";
-    }
-    else {
+    } else {
       return "AN ";
     }
   } else if(var_00 == 5) {

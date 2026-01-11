@@ -162,11 +162,9 @@ bot_fireteam_buddy_think() {
 
   if(distancesquared(self.origin, self.owner.origin) > var_01) {
     self botsetflag("force_sprint", 1);
-  }
-  else if(self.owner issprinting()) {
+  } else if(self.owner issprinting()) {
     self botsetflag("force_sprint", 1);
-  }
-  else {
+  } else {
     self botsetflag("force_sprint", 0);
   }
 }
@@ -239,8 +237,7 @@ bot_fireteam_buddy_search() {
 
       if(isDefined(self.owner)) {
         self.personality_update_function = ::bot_fireteam_buddy_think;
-      }
-      else {
+      } else {
         scripts\mp\bots\bots_personality::bot_assign_personality_functions();
       }
     }
@@ -268,8 +265,7 @@ fireteam_tdm_set_hunt_leader(var_00) {
     if(var_1.size > 0) {
       if(var_1.size == 1) {
         level.fireteam_hunt_leader[var_00] = var_1[0];
-      }
-      else {
+      } else {
         level.fireteam_hunt_leader[var_00] = var_1[randomint(var_1.size)];
       }
 
@@ -366,8 +362,7 @@ fireteam_tdm_find_hunt_zone(var_00) {
 
         if(isDefined(level.fireteam_hunt_target_zone[var_00])) {
           var_05 = level.fireteam_hunt_target_zone[var_00];
-        }
-        else {
+        } else {
           var_03 = 1;
           var_04 = 1;
           var_05 = var_02;
@@ -382,8 +377,7 @@ fireteam_tdm_find_hunt_zone(var_00) {
             if(!isDefined(var_06) || var_06 != var_05) {
               if(var_05 == var_02) {
                 var_04 = 1;
-              }
-              else if(gettime() > level.fireteam_hunt_next_zone_search_time[var_00]) {
+              } else if(gettime() > level.fireteam_hunt_next_zone_search_time[var_00]) {
                 var_04 = 1;
               }
             }
@@ -487,8 +481,7 @@ bot_fireteam_hunt_zone_find_node() {
 
       if(isDefined(var_06) && var_06 == level.fireteam_hunt_target_zone[self.team]) {
         self botsetflag("force_sprint", 0);
-      }
-      else {
+      } else {
         self botsetflag("force_sprint", 1);
       }
 
@@ -520,8 +513,7 @@ bot_fireteam_monitor_killstreak_earned() {
 
           if(isDefined(self.fireteam_commander.commanding_bot)) {
             var_02 = self.fireteam_commander.commanding_bot;
-          }
-          else {
+          } else {
             var_02 = self.fireteam_commander getspectatingplayer();
           }
 

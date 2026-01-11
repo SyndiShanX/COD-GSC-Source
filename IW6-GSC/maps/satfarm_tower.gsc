@@ -90,7 +90,7 @@ post_missile_launch_main() {
   var_1 = getEntArray("elevator_bottom_crates", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-  var_3 retargetscriptmodellighting(var_0);
+    var_3 retargetscriptmodellighting(var_0);
   }
 
   common_scripts\utility::flag_set("post_missile_launch_begin");
@@ -132,7 +132,7 @@ warehouse_main() {
     var_2 = getEntArray("elevator_bottom_crates", "script_noteworthy");
 
     foreach(var_4 in var_2) {
-    var_4 retargetscriptmodellighting(var_1);
+      var_4 retargetscriptmodellighting(var_1);
     }
   }
 
@@ -168,8 +168,7 @@ breach() {
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
     var_2 sethintstring(&"SATFARM_BREACH_CONSOLE");
-  }
-  else {
+  } else {
     var_2 sethintstring(&"SATFARM_BREACH");
   }
 
@@ -283,8 +282,7 @@ catch_weapon_switch() {
 slowmo_player_cleanup() {
   if(isDefined(level.playerspeed)) {
     self setmovespeedscale(level.playerspeed);
-  }
-  else {
+  } else {
     self setmovespeedscale(1);
   }
 }
@@ -360,8 +358,7 @@ breach_enemy_setup() {
 
   if(self.script_noteworthy != "breach_rpg_guy") {
     thread enemy_breach_anims();
-  }
-  else {
+  } else {
     breach_rpg_guy();
   }
 
@@ -493,8 +490,7 @@ missile_launch_setup() {
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
     var_6 sethintstring(&"SATFARM_MISSILE_LAUNCH_CONSOLE");
-  }
-  else {
+  } else {
     var_6 sethintstring(&"SATFARM_MISSILE_LAUNCH");
   }
 
@@ -699,8 +695,7 @@ breach_ally_tank_fight_logic() {
 
   if(self.script_noteworthy == "breach_ally_tank_1") {
     self.tank_target = level.breach_enemy_tank_1;
-  }
-  else if(self.script_noteworthy == "breach_ally_tank_2") {
+  } else if(self.script_noteworthy == "breach_ally_tank_2") {
     self.tank_target = level.breach_enemy_tank_2;
   }
 
@@ -1046,8 +1041,7 @@ fire_extinguisher_shot() {
 
   if(common_scripts\utility::flag("player_shot_extinguisher")) {
     radiusdamage(var_0.origin, 220, 200, 50);
-  }
-  else {
+  } else {
     var_1 = common_scripts\utility::getstruct("fire_extinguisher_end_2", "targetname");
     radiusdamage(var_1.origin, 80, 200, 50);
   }
@@ -1190,7 +1184,7 @@ building_hit_moment() {
   var_1 = getEntArray("clean_light", "targetname");
 
   foreach(var_3 in var_0) {
-  var_3 hide();
+    var_3 hide();
   }
 
   common_scripts\utility::flag_wait("building_hit");
@@ -1219,11 +1213,11 @@ break_light() {
   var_1 = getEntArray("clean_light", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 hide();
+    var_3 hide();
   }
 
   foreach(var_3 in var_0) {
-  var_3 show();
+    var_3 show();
   }
 
   var_7 = common_scripts\utility::getstruct("destroyed_light_spark_fx", "targetname");
@@ -1491,7 +1485,7 @@ elevator_enemies() {
   level.player_elevator_clip_back notsolid();
 
   foreach(var_2 in level.warehouse_elevator_doors) {
-  var_2 unlink();
+    var_2 unlink();
   }
 
   foreach(var_2 in level.warehouse_elevator_doors) {
@@ -1518,7 +1512,7 @@ elevator_enemies() {
   common_scripts\utility::flag_set("elevator_enemies_unload");
 
   foreach(var_2 in level.warehouse_elevator_doors) {
-  var_2 linkto(level.warehouse_elevator_origin, "tag_origin");
+    var_2 linkto(level.warehouse_elevator_origin, "tag_origin");
   }
 }
 
@@ -1532,13 +1526,13 @@ warehouse_elevator_setup() {
   level.warehouse_elevator_doors = getEntArray("warehouse_elevator_doors", "targetname");
 
   foreach(var_1 in level.warehouse_elevator_doors) {
-  var_1 linkto(level.warehouse_elevator_origin, "tag_origin");
+    var_1 linkto(level.warehouse_elevator_origin, "tag_origin");
   }
 
   var_3 = getEntArray("tc_elevator_models", "targetname");
 
   foreach(var_5 in var_3) {
-  var_5 linkto(level.warehouse_elevator_origin, "tag_origin");
+    var_5 linkto(level.warehouse_elevator_origin, "tag_origin");
   }
 }
 
@@ -1654,7 +1648,7 @@ warehouse_elevator() {
   level.player_elevator_clip_back solid();
 
   foreach(var_2 in level.warehouse_elevator_doors) {
-  var_2 unlink();
+    var_2 unlink();
   }
 
   foreach(var_2 in level.warehouse_elevator_doors) {
@@ -1675,14 +1669,14 @@ warehouse_elevator() {
   wait 2;
 
   foreach(var_2 in level.warehouse_elevator_doors) {
-  var_2 linkto(level.warehouse_elevator_origin, "tag_origin");
+    var_2 linkto(level.warehouse_elevator_origin, "tag_origin");
   }
 
   level.warehouse_elevator_origin moveto(level.warehouse_elevator_origin.origin + (0, 0, -448), 15, 1, 1);
   wait 15;
 
   foreach(var_2 in level.warehouse_elevator_doors) {
-  var_2 unlink();
+    var_2 unlink();
   }
 
   common_scripts\utility::flag_set("elevator_landed");
@@ -1731,7 +1725,7 @@ warehouse_lift() {
   var_0 linkto(level.warehouse_lift_tag_origin, "tag_origin");
 
   foreach(var_4 in var_1) {
-  var_4 linkto(level.warehouse_lift_tag_origin, "tag_origin");
+    var_4 linkto(level.warehouse_lift_tag_origin, "tag_origin");
   }
 
   var_6 = getent("warehouse_lift_player_clip", "targetname");
@@ -1840,7 +1834,7 @@ warehouse_combat() {
   thread set_accuracy(var_4, "axis", 0.1);
 
   foreach(var_7 in level.warehouse_enemies) {
-  var_7.health = 5;
+    var_7.health = 5;
   }
 
   maps\_utility::autosave_by_name("warehouse_combat_2");
@@ -1857,7 +1851,7 @@ warehouse_combat() {
 
   if(level.warehouse_enemies.size > 0) {
     foreach(var_11 in level.warehouse_enemies) {
-    var_11 delete();
+      var_11 delete();
     }
   }
 }
@@ -1920,7 +1914,7 @@ warehouse_right_flank() {
     var_0 = getEntArray("warehouse_right_flank_triggers", "targetname");
 
     foreach(var_2 in var_0) {
-    var_2 common_scripts\utility::trigger_off();
+      var_2 common_scripts\utility::trigger_off();
     }
   } else {
     wait 0.5;
@@ -1944,7 +1938,7 @@ warehouse_right_flank_threatbiasgroup(var_0) {
   level.player setthreatbiasgroup("ignore_group");
 
   foreach(var_2 in var_0) {
-  var_2 setthreatbiasgroup("right_flank_enemies");
+    var_2 setthreatbiasgroup("right_flank_enemies");
   }
 
   setignoremegroup("ignore_group", "right_flank_enemies");
@@ -2279,7 +2273,7 @@ train_car() {
   var_0 = common_scripts\utility::getstructarray("model_to_spawn_in", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  spawn_model_from_struct(var_2);
+    spawn_model_from_struct(var_2);
   }
 
   var_4 = getEntArray("train_car", "targetname");
@@ -2331,7 +2325,7 @@ train_car() {
   }
 
   foreach(var_17 in var_4) {
-  var_17 delete();
+    var_17 delete();
   }
 
   level.train_car_tag_origin delete();
@@ -2592,8 +2586,7 @@ ambient_building_explosions(var_0) {
 
     if(level.player istouching(var_4)) {
       var_2 = common_scripts\utility::getstructarray("ceiling_dust_fx_first_floor", "script_noteworthy");
-    }
-    else if(level.player istouching(var_3)) {
+    } else if(level.player istouching(var_3)) {
       var_2 = common_scripts\utility::getstructarray("ceiling_dust_fx_second_floor", "script_noteworthy");
     }
 
@@ -2660,8 +2653,7 @@ wall_lights_think(var_0) {
   for(;;) {
     if(isDefined(var_0)) {
       var_2 rotatevelocity((0, 0, 360), var_1);
-    }
-    else {
+    } else {
       self rotatevelocity((360, 0, 0), var_1);
     }
 

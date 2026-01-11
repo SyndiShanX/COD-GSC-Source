@@ -357,8 +357,7 @@ should_connect_teslas(var_0, var_1, var_2) {
   if(distancesquared(var_0.origin, var_1.origin) <= var_2 && sighttracepassed(var_0.origin + (0, 0, 30), var_1.origin + (0, 0, 30), 0, var_0, var_1)) {
     if(abs(var_0.origin[2] - var_1.origin[2]) >= 60) {
       return 0;
-    }
-    else {
+    } else {
       return 1;
     }
   }
@@ -377,17 +376,13 @@ connect_tesla_generators(var_0, var_1) {
 
   if(var_3 <= 65) {
     var_2 = "tesla_connect_50";
-  }
-  else if(var_3 <= 115) {
+  } else if(var_3 <= 115) {
     var_2 = "tesla_connect_100";
-  }
-  else if(var_3 <= 165) {
+  } else if(var_3 <= 165) {
     var_2 = "tesla_connect_150";
-  }
-  else if(var_3 <= 215) {
+  } else if(var_3 <= 215) {
     var_2 = "tesla_connect_200";
-  }
-  else if(var_3 <= 260) {
+  } else if(var_3 <= 260) {
     var_2 = "tesla_connect_250";
   }
 
@@ -591,8 +586,7 @@ tesla_bolt_death(var_0) {
 
   if(isDefined(var_0.owner) && isalive(var_0.owner)) {
     self dodamage(var_0.damage_amount, self.origin, var_0.owner, var_0, "MOD_UNKNOWN");
-  }
-  else {
+  } else {
     var_1 = undefined;
     var_2 = undefined;
     self dodamage(var_0.damage_amount, self.origin, var_1, var_2, "MOD_UNKNOWN");

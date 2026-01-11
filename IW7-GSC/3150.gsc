@@ -32,9 +32,9 @@ func_A18B(var_00, var_01, var_02) {
     default:
       if(isDefined(var_02)) {
         return [
-      }
+          }
           [var_02]
-        ](var_00);
+      ](var_00);
 
       break;
   }
@@ -278,8 +278,7 @@ func_67C5(var_00) {
 
       if(var_02 == 0 || var_02 == 1 || var_02 == 6) {
         self playSound("jackal_evade_long");
-      }
-      else {
+      } else {
         self playSound("jackal_evade_short");
       }
 

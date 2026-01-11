@@ -13,7 +13,6 @@
 #include scripts\core_common\gameobjects_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\throttle_shared;
-
 #namespace planner_commander;
 
 autoexec __init__system__() {
@@ -63,7 +62,7 @@ private function_b1c3f0bd(commander, &blackboard) {
   assert(isstruct(commander));
   assert(isarray(blackboard));
   possiblesquads = array();
-  idlebots = blackboard[#"idle_doppelbots"];
+  idlebots = blackboard[# "idle_doppelbots"];
 
   foreach(idlebot in idlebots) {
     squad = array();
@@ -71,7 +70,7 @@ private function_b1c3f0bd(commander, &blackboard) {
     possiblesquads[possiblesquads.size] = squad;
   }
 
-  blackboard[#"possible_squads"] = possiblesquads;
+  blackboard[# "possible_squads"] = possiblesquads;
   aiprofile_endentry();
   pixendevent();
 }
@@ -82,17 +81,17 @@ private function_12b9fafb(commander, &blackboard) {
   assert(isstruct(commander));
   assert(isarray(blackboard));
   targets = array();
-  priorities = array(#"hash_179ccf9d7cfd1e31", #"hash_254689c549346d57", #"hash_4bd86f050b36e1f6", #"hash_19c0ac460bdb9928", #"hash_160b01bbcd78c723", #"hash_c045a5aa4ac7c1d", #"hash_47fd3da20e90cd01", #"hash_64fc5c612a94639c", #"(-4) unimportant");
+  priorities = array(#"hash_179ccf9d7cfd1e31", # "hash_254689c549346d57", # "hash_4bd86f050b36e1f6", # "hash_19c0ac460bdb9928", # "hash_160b01bbcd78c723", # "hash_c045a5aa4ac7c1d", # "hash_47fd3da20e90cd01", # "hash_64fc5c612a94639c", # "(-4) unimportant");
 
   foreach(priority in priorities) {
     targets[priority] = array();
   }
 
-  gameobjects = blackboard[#"gameobjects"];
-  blackboard[#"gameobjects"] = undefined;
+  gameobjects = blackboard[# "gameobjects"];
+  blackboard[# "gameobjects"] = undefined;
 
   foreach(gameobject in gameobjects) {
-    priority = gameobject[#"strategy"].("doppelbotspriority");
+    priority = gameobject[# "strategy"].("doppelbotspriority");
     targetsize = targets[priority].size;
     targets[priority][targetsize] = gameobject;
   }
@@ -112,11 +111,11 @@ private function_12b9fafb(commander, &blackboard) {
     return;
   }
 
-  missioncomponents = blackboard[#"missioncomponents"];
-  blackboard[#"missioncomponents"] = undefined;
+  missioncomponents = blackboard[# "missioncomponents"];
+  blackboard[# "missioncomponents"] = undefined;
 
   foreach(component in missioncomponents) {
-    priority = component[#"strategy"].("doppelbotspriority");
+    priority = component[# "strategy"].("doppelbotspriority");
     targetsize = targets[priority].size;
     targets[priority][targetsize] = component;
   }
@@ -136,11 +135,11 @@ private function_12b9fafb(commander, &blackboard) {
     return;
   }
 
-  gpbundles = blackboard[#"gpbundles"];
-  blackboard[#"gpbundles"] = undefined;
+  gpbundles = blackboard[# "gpbundles"];
+  blackboard[# "gpbundles"] = undefined;
 
   foreach(bundle in gpbundles) {
-    priority = bundle[#"strategy"].("doppelbotspriority");
+    priority = bundle[# "strategy"].("doppelbotspriority");
     targetsize = targets[priority].size;
     targets[priority][targetsize] = bundle;
   }
@@ -160,7 +159,7 @@ private function_12b9fafb(commander, &blackboard) {
     return;
   }
 
-  blackboard[#"targets"] = targets;
+  blackboard[# "targets"] = targets;
   commander.var_6365d720 = targets.size;
   aiprofile_endentry();
   pixendevent();
@@ -202,7 +201,7 @@ private _debugcommander(commander) {
       xoffset = 0;
       yoffset = 200;
       textscale = 0.7;
-      team = blackboard::getstructblackboardattribute(commander, #"team");
+      team = blackboard::getstructblackboardattribute(commander, # "team");
 
       if(commander.pause) {
         recordtext(function_9e72a96(commander.planner.name) + "<dev string:x38>" + function_9e72a96(team) + "<dev string:x41>", position + (xoffset, yoffset, 0), (1, 1, 1), "<dev string:x4c>", textscale);
@@ -218,7 +217,7 @@ private _debugcommander(commander) {
       var_b5dfd8a6 = strategiccommandutility::function_45c5edc6(side);
 
       if(!isDefined(var_b5dfd8a6)) {
-        var_b5dfd8a6 = #"default_strategicbundle";
+        var_b5dfd8a6 = # "default_strategicbundle";
       }
 
       yoffset += 13;
@@ -231,36 +230,36 @@ private _debugcommander(commander) {
 
       }
 
-      attackgameobjects = blackboard::getstructblackboardattribute(commander, #"gameobjects_assault");
+      attackgameobjects = blackboard::getstructblackboardattribute(commander, # "gameobjects_assault");
 
       for(index = 0; index < attackgameobjects.size; index++) {
-        if(isDefined(attackgameobjects[index][#"identifier"])) {
-          record3dtext(attackgameobjects[index][#"identifier"], attackgameobjects[index][#"origin"] + (0, 0, offset), (1, 0, 0), "<dev string:x4c>");
+        if(isDefined(attackgameobjects[index][# "identifier"])) {
+          record3dtext(attackgameobjects[index][# "identifier"], attackgameobjects[index][# "origin"] + (0, 0, offset), (1, 0, 0), "<dev string:x4c>");
         }
 
-        recordsphere(attackgameobjects[index][#"origin"], 20, (1, 0, 0));
+        recordsphere(attackgameobjects[index][# "origin"], 20, (1, 0, 0));
 
       }
 
-      defendgameobjects = blackboard::getstructblackboardattribute(commander, #"gameobjects_defend");
+      defendgameobjects = blackboard::getstructblackboardattribute(commander, # "gameobjects_defend");
 
       for(index = 0; index < defendgameobjects.size; index++) {
-        if(isDefined(defendgameobjects[index][#"identifier"])) {
-          record3dtext(defendgameobjects[index][#"identifier"], defendgameobjects[index][#"origin"] + (0, 0, offset), (1, 0.5, 0), "<dev string:x4c>");
+        if(isDefined(defendgameobjects[index][# "identifier"])) {
+          record3dtext(defendgameobjects[index][# "identifier"], defendgameobjects[index][# "origin"] + (0, 0, offset), (1, 0.5, 0), "<dev string:x4c>");
         }
 
-        recordsphere(defendgameobjects[index][#"origin"], 20, (1, 0.5, 0));
+        recordsphere(defendgameobjects[index][# "origin"], 20, (1, 0.5, 0));
 
       }
 
-      objectives = blackboard::getstructblackboardattribute(commander, #"objectives");
+      objectives = blackboard::getstructblackboardattribute(commander, # "objectives");
 
       for(index = 0; index < objectives.size; index++) {
-        recordsphere(objectives[index][#"origin"], 20, (0, 0, 1));
+        recordsphere(objectives[index][# "origin"], 20, (0, 0, 1));
 
       }
 
-      excluded = blackboard::getstructblackboardattribute(commander, #"gameobjects_exclude");
+      excluded = blackboard::getstructblackboardattribute(commander, # "gameobjects_exclude");
       excludedmap = [];
 
       foreach(excludename in excluded) {
@@ -288,7 +287,7 @@ private _debugcommander(commander) {
 }
 
 private function_9962ffd8(commander) {
-  team = blackboard::getstructblackboardattribute(commander, #"team");
+  team = blackboard::getstructblackboardattribute(commander, # "team");
   pause = 1;
 
   while(isDefined(commander) && !commander.shutdown) {
@@ -420,42 +419,42 @@ private _evaluatesquads(commander) {
 
 private _initializeblackboard(commander, team) {
   blackboard::createblackboardforentity(commander);
-  blackboard::registerblackboardattribute(commander, #"doppelbots", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"gameobjects_assault", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"gameobjects_assault_destroyed", 0, undefined);
-  blackboard::registerblackboardattribute(commander, #"gameobjects_assault_total", 0, undefined);
-  blackboard::registerblackboardattribute(commander, #"gameobjects_defend", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"idle_doppelbots", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"objectives", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"players", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"bot_vehicles", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"allow_escort", 1, undefined);
-  blackboard::registerblackboardattribute(commander, #"allow_golden_path", 1, undefined);
-  blackboard::registerblackboardattribute(commander, #"allow_progress_throttling", 0, undefined);
-  blackboard::registerblackboardattribute(commander, #"gameobjects_exclude", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"gameobjects_force_attack", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"gameobjects_force_defend", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"gameobjects_priority", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"gameobjects_restrict", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"team", team, undefined);
-  blackboard::registerblackboardattribute(commander, #"throttling_total_gameobjects", undefined, undefined);
-  blackboard::registerblackboardattribute(commander, #"throttling_total_gameobjects_enemy", undefined, undefined);
-  blackboard::registerblackboardattribute(commander, #"throttling_enemy_commander", undefined, undefined);
-  blackboard::registerblackboardattribute(commander, #"throttling_lower_bound", undefined, undefined);
-  blackboard::registerblackboardattribute(commander, #"throttling_upper_bound", undefined, undefined);
-  blackboard::registerblackboardattribute(commander, #"pathing_calculated_paths", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"pathing_requested_bots", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"pathing_requested_points", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"hash_f5c6c6aa7dc0f6d", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"hash_6e9081699001bcd9", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"hash_4984fd4b0ba666a2", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"missioncomponents", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"gameobjects", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"gameobjects_vehicles", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"targets", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"entities", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"gpbundles", array(), undefined);
-  blackboard::registerblackboardattribute(commander, #"current_squad", -1, undefined);
+  blackboard::registerblackboardattribute(commander, # "doppelbots", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "gameobjects_assault", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "gameobjects_assault_destroyed", 0, undefined);
+  blackboard::registerblackboardattribute(commander, # "gameobjects_assault_total", 0, undefined);
+  blackboard::registerblackboardattribute(commander, # "gameobjects_defend", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "idle_doppelbots", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "objectives", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "players", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "bot_vehicles", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "allow_escort", 1, undefined);
+  blackboard::registerblackboardattribute(commander, # "allow_golden_path", 1, undefined);
+  blackboard::registerblackboardattribute(commander, # "allow_progress_throttling", 0, undefined);
+  blackboard::registerblackboardattribute(commander, # "gameobjects_exclude", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "gameobjects_force_attack", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "gameobjects_force_defend", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "gameobjects_priority", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "gameobjects_restrict", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "team", team, undefined);
+  blackboard::registerblackboardattribute(commander, # "throttling_total_gameobjects", undefined, undefined);
+  blackboard::registerblackboardattribute(commander, # "throttling_total_gameobjects_enemy", undefined, undefined);
+  blackboard::registerblackboardattribute(commander, # "throttling_enemy_commander", undefined, undefined);
+  blackboard::registerblackboardattribute(commander, # "throttling_lower_bound", undefined, undefined);
+  blackboard::registerblackboardattribute(commander, # "throttling_upper_bound", undefined, undefined);
+  blackboard::registerblackboardattribute(commander, # "pathing_calculated_paths", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "pathing_requested_bots", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "pathing_requested_points", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "hash_f5c6c6aa7dc0f6d", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "hash_6e9081699001bcd9", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "hash_4984fd4b0ba666a2", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "missioncomponents", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "gameobjects", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "gameobjects_vehicles", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "targets", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "entities", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "gpbundles", array(), undefined);
+  blackboard::registerblackboardattribute(commander, # "current_squad", -1, undefined);
 }
 
 private _initializedaemonfunctions(functype) {
@@ -497,7 +496,7 @@ private function_f9d38682(commander) {
     botentries = plannersquadutility::getblackboardattribute(commander.squads[index], "doppelbots");
 
     foreach(botentry in botentries) {
-      bot = botentry[#"__unsafe__"][#"bot"];
+      bot = botentry[# "__unsafe__"][# "bot"];
 
       if(strategiccommandutility::isvalidbot(bot)) {
         var_c7a9b9a8[bot getentitynumber()] = bot;
@@ -522,12 +521,12 @@ private function_f9d38682(commander) {
     }
   }
 
-  doppelbots = blackboard::getstructblackboardattribute(commander, #"doppelbots");
+  doppelbots = blackboard::getstructblackboardattribute(commander, # "doppelbots");
   var_ad63c778 = 0;
 
   if(doppelbots.size > var_c7a9b9a8.size) {
     foreach(botentry in doppelbots) {
-      bot = botentry[#"__unsafe__"][#"bot"];
+      bot = botentry[# "__unsafe__"][# "bot"];
 
       if(strategiccommandutility::isvalidbot(bot) && !isDefined(var_c7a9b9a8[bot getentitynumber()])) {
         var_ad63c778++;
@@ -536,9 +535,7 @@ private function_f9d38682(commander) {
       if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
         aiprofile_endentry();
         pixendevent();
-        [
-          [level.strategic_command_throttle]
-        ] - > waitinqueue(commander);
+        [[level.strategic_command_throttle]] - > waitinqueue(commander);
         commander.strategizestarttime = getrealtime();
         pixbeginevent("commanderOrphanBotCount");
         aiprofile_beginentry("commanderOrphanBotCount");
@@ -574,7 +571,7 @@ private _plan(commander, &blackboard) {
       commander.strategizestarttime = getrealtime();
     }
   }
-  while(planner::getblackboardattribute(commander.planner, #"idle_doppelbots").size > 0);
+  while(planner::getblackboardattribute(commander.planner, # "idle_doppelbots").size > 0);
 
   commander.plan = var_80d439bc;
   commander.planstarttime = planstarttime;
@@ -586,7 +583,7 @@ private _reclaimescortparameters(commander, &blackboard) {
   aiprofile_beginentry("commanderReclaimEscortParameters");
   assert(isstruct(commander));
   assert(isarray(blackboard));
-  players = blackboard[#"players"];
+  players = blackboard[# "players"];
 
   for(index = 0; index < commander.squads.size; index++) {
     escorts = plannersquadutility::getblackboardattribute(commander.squads[index], "escorts");
@@ -599,19 +596,19 @@ private _reclaimescortparameters(commander, &blackboard) {
 
     foreach(escort in escorts) {
       foreach(player in players) {
-        if(!isDefined(player[#"entnum"]) || !isDefined(escort[#"entnum"]) || player[#"entnum"] !== escort[#"entnum"]) {
+        if(!isDefined(player[# "entnum"]) || !isDefined(escort[# "entnum"]) || player[# "entnum"] !== escort[# "entnum"]) {
           continue;
         }
 
         switch (order) {
-          case #"order_escort_mainguard":
-            player[#"escortmainguard"] = arraycombine(player[#"escortmainguard"], squadbots, 1, 0);
+          case # "order_escort_mainguard":
+            player[# "escortmainguard"] = arraycombine(player[# "escortmainguard"], squadbots, 1, 0);
             break;
-          case #"order_escort_rearguard":
-            player[#"escortrearguard"] = arraycombine(player[#"escortrearguard"], squadbots, 1, 0);
+          case # "order_escort_rearguard":
+            player[# "escortrearguard"] = arraycombine(player[# "escortrearguard"], squadbots, 1, 0);
             break;
-          case #"order_escort_vanguard":
-            player[#"escortvanguard"] = arraycombine(player[#"escortvanguard"], squadbots, 1, 0);
+          case # "order_escort_vanguard":
+            player[# "escortvanguard"] = arraycombine(player[# "escortvanguard"], squadbots, 1, 0);
             break;
         }
       }
@@ -619,9 +616,7 @@ private _reclaimescortparameters(commander, &blackboard) {
       if(getrealtime() - commander.strategizestarttime > commander.maxframetime) {
         aiprofile_endentry();
         pixendevent();
-        [
-          [level.strategic_command_throttle]
-        ] - > waitinqueue(commander);
+        [[level.strategic_command_throttle]] - > waitinqueue(commander);
         commander.strategizestarttime = getrealtime();
         pixbeginevent("commanderReclaimEscortParameters");
         aiprofile_beginentry("commanderReclaimEscortParameters");
@@ -644,16 +639,16 @@ private function_ac4ff936(commander, &blackboard) {
   aiprofile_beginentry("commanderReclaimTargets");
   assert(isstruct(commander));
   assert(isarray(blackboard));
-  targets = blackboard[#"targets"];
+  targets = blackboard[# "targets"];
 
   for(index = 0; index < commander.squads.size; index++) {
     gameobjects = plannersquadutility::getblackboardattribute(commander.squads[index], "gameobjects");
 
     if(isarray(gameobjects)) {
       foreach(gameobjectentry in gameobjects) {
-        if(gameobjectentry[#"claimed"]) {
-          strategy = gameobjectentry[#"strategy"];
-          gameobject = gameobjectentry[#"__unsafe__"][#"object"];
+        if(gameobjectentry[# "claimed"]) {
+          strategy = gameobjectentry[# "strategy"];
+          gameobject = gameobjectentry[# "__unsafe__"][# "object"];
 
           if(isDefined(gameobject)) {
             priority = strategy.("doppelbotspriority");
@@ -664,8 +659,8 @@ private function_ac4ff936(commander, &blackboard) {
             }
 
             foreach(var_128fdd23 in targets[priority]) {
-              if(var_128fdd23[#"type"] === "gameobject" && var_128fdd23[#"__unsafe__"][#"object"] == gameobject) {
-                var_128fdd23[#"claimed"] = 1;
+              if(var_128fdd23[# "type"] === "gameobject" && var_128fdd23[# "__unsafe__"][# "object"] == gameobject) {
+                var_128fdd23[# "claimed"] = 1;
               }
             }
           }
@@ -691,7 +686,7 @@ private function_ac4ff936(commander, &blackboard) {
     }
   }
 
-  blackboard[#"targets"] = targets;
+  blackboard[# "targets"] = targets;
   aiprofile_endentry();
   pixendevent();
 }
@@ -735,7 +730,7 @@ private function_60f42acc(commander) {
     botentries = plannersquadutility::getblackboardattribute(fitsquads[index], "doppelbots");
 
     foreach(botentry in botentries) {
-      bot = botentry[#"__unsafe__"][#"bot"];
+      bot = botentry[# "__unsafe__"][# "bot"];
 
       if(strategiccommandutility::isvalidbot(bot)) {
         fitbots[bot getentitynumber()] = bot;
@@ -761,10 +756,10 @@ private function_60f42acc(commander) {
   }
 
   idlebots = [];
-  doppelbots = blackboard::getstructblackboardattribute(commander, #"doppelbots");
+  doppelbots = blackboard::getstructblackboardattribute(commander, # "doppelbots");
 
   foreach(botentry in doppelbots) {
-    bot = botentry[#"__unsafe__"][#"bot"];
+    bot = botentry[# "__unsafe__"][# "bot"];
 
     if(strategiccommandutility::isvalidbot(bot) && !isDefined(fitbots[bot getentitynumber()])) {
       idlebots[idlebots.size] = botentry;
@@ -788,10 +783,10 @@ private function_60f42acc(commander) {
     }
   }
 
-  var_fa3efaa4 = blackboard::getstructblackboardattribute(commander, #"bot_vehicles");
+  var_fa3efaa4 = blackboard::getstructblackboardattribute(commander, # "bot_vehicles");
 
   foreach(var_a6b55625 in var_fa3efaa4) {
-    bot = var_a6b55625[#"__unsafe__"][#"bot"];
+    bot = var_a6b55625[# "__unsafe__"][# "bot"];
 
     if(strategiccommandutility::isvalidbot(bot) && !isDefined(fitbots[bot getentitynumber()])) {
       idlebots[idlebots.size] = var_a6b55625;
@@ -815,7 +810,7 @@ private function_60f42acc(commander) {
     }
   }
 
-  blackboard::setstructblackboardattribute(commander, #"idle_doppelbots", idlebots);
+  blackboard::setstructblackboardattribute(commander, # "idle_doppelbots", idlebots);
   aiprofile_endentry();
   pixendevent();
 }
@@ -824,14 +819,14 @@ private function_d8b8afde(commander, &blackboard) {
   pixbeginevent(#"commandersorttargetlist");
   aiprofile_beginentry("commanderSortTargetList");
   priorities = array("escortbiped", "destroy", "capturearea", "defend", "goto", "gameobject");
-  targets = blackboard[#"targets"];
+  targets = blackboard[# "targets"];
 
   foreach(priority, var_5a60beef in targets) {
     sortedtargets = associativearray("gameobject", [], "goto", [], "escortbiped", [], "destroy", [], "defend", [], "capturearea", []);
 
     foreach(target in var_5a60beef) {
-      size = sortedtargets[target[#"type"]].size;
-      sortedtargets[target[#"type"]][size] = target;
+      size = sortedtargets[target[# "type"]].size;
+      sortedtargets[target[# "type"]][size] = target;
     }
 
     combined = [];
@@ -860,7 +855,7 @@ private function_d8b8afde(commander, &blackboard) {
     }
   }
 
-  blackboard[#"targets"] = targets;
+  blackboard[# "targets"] = targets;
   aiprofile_endentry();
   pixendevent();
 }
@@ -884,7 +879,7 @@ private _strategize(commander) {
     return;
   }
 
-  if(blackboard::getstructblackboardattribute(commander, #"idle_doppelbots").size == 0) {
+  if(blackboard::getstructblackboardattribute(commander, # "idle_doppelbots").size == 0) {
     _disbandsquads(commander);
     return;
   }
@@ -929,15 +924,11 @@ private _updateblackboarddaemons(commander) {
 
     foreach(daemonjob in commander.daemons) {
       if(gettime() - daemonjob.lastupdatetime > daemonjob.updaterate) {
-        [
-          [level.strategic_command_throttle]
-        ] - > waitinqueue(daemonjob);
+        [[level.strategic_command_throttle]] - > waitinqueue(daemonjob);
         commander.var_22765a25 = getrealtime();
         pixbeginevent(daemonjob.daemonname);
         aiprofile_beginentry(daemonjob.daemonname);
-        [
-          [daemonjob.func]
-        ](commander);
+        [[daemonjob.func]](commander);
         daemonjob.lastupdatetime = gettime();
         aiprofile_endentry();
         pixendevent();
@@ -1045,31 +1036,31 @@ initializeenemythrottle(commander, enemycommander, upperbound, lowerbound, total
   assert(upperbound >= -1 && upperbound <= 1);
   assert(lowerbound >= -1 && lowerbound <= 1);
   assert(lowerbound <= upperbound);
-  blackboard::setstructblackboardattribute(commander, #"allow_progress_throttling", 1);
-  blackboard::setstructblackboardattribute(commander, #"throttling_enemy_commander", enemycommander);
-  blackboard::setstructblackboardattribute(commander, #"throttling_lower_bound", lowerbound);
-  blackboard::setstructblackboardattribute(commander, #"throttling_upper_bound", upperbound);
-  blackboard::setstructblackboardattribute(commander, #"throttling_total_gameobjects", totalgameobjects);
-  blackboard::setstructblackboardattribute(commander, #"throttling_total_gameobjects_enemy", totalgameobjectsenemy);
+  blackboard::setstructblackboardattribute(commander, # "allow_progress_throttling", 1);
+  blackboard::setstructblackboardattribute(commander, # "throttling_enemy_commander", enemycommander);
+  blackboard::setstructblackboardattribute(commander, # "throttling_lower_bound", lowerbound);
+  blackboard::setstructblackboardattribute(commander, # "throttling_upper_bound", upperbound);
+  blackboard::setstructblackboardattribute(commander, # "throttling_total_gameobjects", totalgameobjects);
+  blackboard::setstructblackboardattribute(commander, # "throttling_total_gameobjects_enemy", totalgameobjectsenemy);
 }
 
 getdaemonapifunction(functionname) {
   assert((isstring(functionname) || ishash(functionname)) && functionname != "<dev string:x165>", "<dev string:x168>");
-  assert(isDefined(level._daemonscriptfunctions[#"api"][functionname]), "<dev string:x1a5>" + functionname + "<dev string:x1cc>");
-  return level._daemonscriptfunctions[#"api"][functionname];
+  assert(isDefined(level._daemonscriptfunctions[# "api"][functionname]), "<dev string:x1a5>" + functionname + "<dev string:x1cc>");
+  return level._daemonscriptfunctions[# "api"][functionname];
 }
 
 getutilityapifunction(functionname) {
   assert((isstring(functionname) || ishash(functionname)) && functionname != "<dev string:x165>", "<dev string:x1e4>");
-  assert(isDefined(level._squadutilityscriptfunctions[#"api"][functionname]), "<dev string:x21f>" + functionname + "<dev string:x1cc>");
-  return level._squadutilityscriptfunctions[#"api"][functionname];
+  assert(isDefined(level._squadutilityscriptfunctions[# "api"][functionname]), "<dev string:x21f>" + functionname + "<dev string:x1cc>");
+  return level._squadutilityscriptfunctions[# "api"][functionname];
 }
 
 pausecommander(commander) {
   assert(isstruct(commander));
 
   if(!commander.pause) {
-    team = blackboard::getstructblackboardattribute(commander, #"team");
+    team = blackboard::getstructblackboardattribute(commander, # "team");
     iprintlnbold("<dev string:x244>" + team + "<dev string:x7c>");
 
     commander.pause = 1;
@@ -1080,23 +1071,23 @@ registerdaemonapi(functionname, functionptr) {
   assert((isstring(functionname) || ishash(functionname)) && functionname != "<dev string:x165>", "<dev string:x25d>");
   assert(isfunctionptr(functionptr), "<dev string:x29f>");
   plannercommander::_initializedaemonfunctions(#"api");
-  assert(!isDefined(level._daemonscriptfunctions[#"api"][functionname]), "<dev string:x1a5>" + functionname + "<dev string:x2e1>");
-  level._daemonscriptfunctions[#"api"][functionname] = functionptr;
+  assert(!isDefined(level._daemonscriptfunctions[# "api"][functionname]), "<dev string:x1a5>" + functionname + "<dev string:x2e1>");
+  level._daemonscriptfunctions[# "api"][functionname] = functionptr;
 }
 
 registerutilityapi(functionname, functionptr) {
   assert((isstring(functionname) || ishash(functionname)) && functionname != "<dev string:x165>", "<dev string:x2f7>");
   assert(isfunctionptr(functionptr), "<dev string:x337>");
   plannercommander::_initializeutilityfunctions(#"api");
-  assert(!isDefined(level._squadutilityscriptfunctions[#"api"][functionname]), "<dev string:x21f>" + functionname + "<dev string:x2e1>");
-  level._squadutilityscriptfunctions[#"api"][functionname] = functionptr;
+  assert(!isDefined(level._squadutilityscriptfunctions[# "api"][functionname]), "<dev string:x21f>" + functionname + "<dev string:x2e1>");
+  level._squadutilityscriptfunctions[# "api"][functionname] = functionptr;
 }
 
 function_2974807c(commander) {
   assert(isstruct(commander));
 
   if(commander.pause) {
-    team = blackboard::getstructblackboardattribute(commander, #"team");
+    team = blackboard::getstructblackboardattribute(commander, # "team");
     iprintlnbold("<dev string:x377>" + function_9e72a96(team) + "<dev string:x7c>");
 
     commander.pause = 0;
@@ -1105,12 +1096,12 @@ function_2974807c(commander) {
 
 setforcegoalattribute(commander, attribute, oldvalue, value) {
   assert(isstruct(commander));
-  blackboard::setstructblackboardattribute(commander, #"force_goal", value);
+  blackboard::setstructblackboardattribute(commander, # "force_goal", value);
 }
 
 setgoldenpathattribute(commander, attribute, oldvalue, value) {
   assert(isstruct(commander));
-  blackboard::setstructblackboardattribute(commander, #"allow_golden_path", value);
+  blackboard::setstructblackboardattribute(commander, # "allow_golden_path", value);
 }
 
 shutdowncommander(commander) {

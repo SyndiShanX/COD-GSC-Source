@@ -34,8 +34,7 @@ main() {
 
   if(isDefined(self.script_string)) {
     self setModel(self.script_string);
-  }
-  else if(issubstr(self.vehicletype, "low")) {
+  } else if(issubstr(self.vehicletype, "low")) {
     idx = randomint(level.horse_model_variants["low"].size);
     self setModel(level.horse_model_variants["low"][idx]);
   } else {
@@ -801,8 +800,7 @@ gallop_driving() {
   while(true) {
     if(abs(self getspeed()) < 0.1) {
       wait 0.01;
-    }
-    else if(abs(self getspeed()) >= 0.1) {
+    } else if(abs(self getspeed()) >= 0.1) {
       if(self getspeedmph() < 22) {
         if(!self.isjumping) {
           self playSound("fly_horse_hoofhit_t_plr_01");
@@ -879,8 +877,7 @@ horse_breathing() {
 
     if(wait_time >= 1.5) {
       self.soundsnout playSound("chr_horse_breath_i_mono");
-    }
-    else if(wait_time < 1.5) {
+    } else if(wait_time < 1.5) {
       self.soundsnout playSound("chr_horse_breath_t_mono");
     }
 
@@ -909,8 +906,7 @@ update_idle_anim() {
       if(!isai(driver)) {
         if(randomint(100) > 50) {
           idle_struct = level.horse_idles[0];
-        }
-        else {
+        } else {
           idle_struct = level.horse_idles[3];
         }
 
@@ -929,8 +925,7 @@ update_idle_anim() {
 
     if(isDefined(idle_struct.transitions[anim_index])) {
       self.idle_anim_finished_state = idle_struct.transitions[anim_index];
-    }
-    else {
+    } else {
       self.idle_anim_finished_state = self.idle_state;
     }
 
@@ -1026,8 +1021,7 @@ horse_animating() {
       }
     }
 
-    if(self.ent_flag["mounting_horse"] || self.ent_flag["dismounting_horse"] || self.ent_flag["playing_scripted_anim"] || self.ent_flag["pause_animation"]) {
-    } else if(speed < -0.05) {
+    if(self.ent_flag["mounting_horse"] || self.ent_flag["dismounting_horse"] || self.ent_flag["playing_scripted_anim"] || self.ent_flag["pause_animation"]) {} else if(speed < -0.05) {
       self.current_anim_speed = level.reverse;
       anim_rate = speed / level.horse_speeds[self.current_anim_speed];
       anim_rate = clamp(anim_rate, 0.5, 1.5);
@@ -1076,8 +1070,7 @@ update_run_anim(speed) {
 
   if(speed > next_anim_speed) {
     self.current_anim_speed++;
-  }
-  else if(speed < prev_anim_speed) {
+  } else if(speed < prev_anim_speed) {
     self.current_anim_speed--;
   }
 
@@ -1104,11 +1097,9 @@ update_run_anim(speed) {
 update_horse_fx(speed) {
   if(!isDefined(self.current_fx_speed)) {
     self.current_fx_speed = speed;
-  }
-  else if(self.current_fx_speed == speed) {
+  } else if(self.current_fx_speed == speed) {
     return;
-  }
-  else {
+  } else {
     self.current_fx_speed = speed;
   }
 
@@ -1116,11 +1107,9 @@ update_horse_fx(speed) {
 
   if(speed == level.trot) {
     player thread horse_fx("player_dust_riding_trot");
-  }
-  else if(speed == level.run || speed == level.sprint) {
+  } else if(speed == level.run || speed == level.sprint) {
     player thread horse_fx("player_dust_riding_gallup");
-  }
-  else {
+  } else {
     player thread horse_fx();
   }
 }
@@ -1248,8 +1237,7 @@ watch_for_weapon_switch_left_hand(driver) {
 
     if(needs_left) {
       self.driver.body hide();
-    }
-    else {
+    } else {
       self.driver.body show();
     }
   }
@@ -1293,8 +1281,7 @@ waitch_for_180turn(driver) {
   while(true) {
     if(driver jumpbuttonpressed()) {
       self horse_turn180();
-    }
-    else {
+    } else {
       wait 0.05;
     }
   }
@@ -1419,8 +1406,7 @@ watch_for_sprint(driver) {
 is_sprint_allowed() {
   if(isDefined(level.horse_allow_sprint)) {
     return level.horse_allow_sprint;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -1547,8 +1533,7 @@ watch_mounting() {
 
     if(need_left_hand) {
       self.driver.body hide();
-    }
-    else {
+    } else {
       self.driver.body show();
     }
 
@@ -1602,8 +1587,7 @@ watch_mounting() {
     self.driver.body notify("stop_player_ride");
     self.driver disableweapons();
 
-    if(is_true(self.disable_mount_anim)) {
-    } else if(!self.driver isthrowinggrenade())
+    if(is_true(self.disable_mount_anim)) {} else if(!self.driver isthrowinggrenade())
       self.driver waittill("weapon_change");
 
     self useby(self.driver);
@@ -1665,8 +1649,7 @@ set_mount_direction(horse, mount_org) {
 update_view_hands(no_left) {
   if(no_left) {
     self setviewmodel(level.player_viewmodel_noleft);
-  }
-  else {
+  } else {
     self setviewmodel(level.player_viewmodel);
   }
 }
@@ -1674,8 +1657,7 @@ update_view_hands(no_left) {
 ready_horse() {
   if(is_true(level.horse_in_combat)) {
     self setflaggedanimknoballrestart("mount_horse", level.horse_anims[10][0], % root, 1, 0.2, 0);
-  }
-  else {
+  } else {
     self setflaggedanimknoballrestart("mount_horse", level.horse_anims[10][0], % root, 1, 0.2, 0);
   }
 }
@@ -1780,8 +1762,7 @@ dismount(horse) {
   if(is_true(level.horse_in_combat)) {
     if(isDefined(horse.dismount_right)) {
       horse_dismount_anim = level.horse_anims[11][1];
-    }
-    else {
+    } else {
       horse_dismount_anim = level.horse_anims[11][0];
     }
   } else if(isDefined(horse.dismount_right))
@@ -1796,8 +1777,7 @@ dismount(horse) {
   if(is_true(level.horse_in_combat)) {
     if(isDefined(horse.dismount_right)) {
       player_dismount_anim = level.horse_player_anims[11][1];
-    }
-    else {
+    } else {
       player_dismount_anim = level.horse_player_anims[11][0];
     }
   } else if(isDefined(horse.dismount_right))
@@ -1837,8 +1817,7 @@ dismount(horse) {
 get_driver() {
   if(isDefined(self.driver) && isDefined(self.driver.body)) {
     return self.driver.body;
-  }
-  else if(isDefined(self.riders) && self.riders.size > 0 && (!isDefined(self.unloadque) || self.unloadque.size == 0)) {
+  } else if(isDefined(self.riders) && self.riders.size > 0 && (!isDefined(self.unloadque) || self.unloadque.size == 0)) {
     return self.riders[0];
   }
 
@@ -1855,8 +1834,7 @@ is_on_horseback() {
 
 watch_for_horse_melee(horse) {
   while(true) {
-    if(level.player meleebuttonpressed()) {
-    }
+    if(level.player meleebuttonpressed()) {}
 
     wait 0.05;
   }

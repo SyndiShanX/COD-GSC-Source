@@ -26,8 +26,7 @@ func_45D0(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isalive(var_00) && !scripts\mp\utility\game::istrue(var_0.func_5F6F)) {
     startcontrol(var_00, var_1.streakname, var_02, var_05);
-  }
-  else {
+  } else {
     self notify(var_02);
     return 0;
   }

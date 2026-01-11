@@ -157,7 +157,7 @@ bunker_setup() {
   a_sp_spawners = arraycombine(a_sp_spawners1, a_sp_spawners2, 0, 0);
 
   foreach(spawner in a_sp_spawners) {
-  spawner add_spawn_function(::ai_set_allow_friendly_fire);
+    spawner add_spawn_function(::ai_set_allow_friendly_fire);
   }
 
   level thread bunker_cocaine_fog();
@@ -170,19 +170,19 @@ bunker_setup() {
   a_e_lights = getEntArray("firelight_bunker", "targetname");
 
   foreach(light in a_e_lights) {
-  light setlightintensity(5.0);
+    light setlightintensity(5.0);
   }
 
   a_nd_table1 = getnodearray("post_table1_kick", "script_noteworthy");
 
   foreach(node in a_nd_table1) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 
   a_nd_table3 = getnodearray("post_table3_kick", "script_noteworthy");
 
   foreach(node in a_nd_table3) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 
   e_trigger = getent("mason_bunker_firetrigger", "targetname");
@@ -560,7 +560,7 @@ bunker_waittill_enemy_alerted() {
     a_ai_cartel = getaiarray("axis", "neutral");
 
     foreach(guy in a_ai_cartel) {
-    guy notify("bunker_alerted");
+      guy notify("bunker_alerted");
     }
 
     level.woods thread woods_kicks_off_coke_fog();
@@ -579,8 +579,7 @@ bunker_enemy_alerted() {
 
   if(self.script_noteworthy == "bunker_1st_room_coke_worker") {
     self thread coke_worker_run_away_and_die();
-  }
-  else if(self.script_noteworthy == "cartel_table_watcher") {
+  } else if(self.script_noteworthy == "cartel_table_watcher") {
     self thread bunker_patroller_play_table_kick();
   }
 }
@@ -629,15 +628,13 @@ bunker_patroller_play_table_kick() {
 }
 
 bunker_table_kick_1_deathfunction() {
-  if(!flag("bunker_table_01_flipped")) {
-  }
+  if(!flag("bunker_table_01_flipped")) {}
 
   return false;
 }
 
 bunker_table_kick_2_deathfunction() {
-  if(!flag("bunker_table_03_flipped")) {
-  }
+  if(!flag("bunker_table_03_flipped")) {}
 
   return false;
 }
@@ -652,11 +649,9 @@ pick_new_ai_table_kick_1() {
 
     if(a_ai.size > 1) {
       n_index = randomintrange(0, a_ai.size - 1);
-    }
-    else if(a_ai.size == 1) {
+    } else if(a_ai.size == 1) {
       n_index = 0;
-    }
-    else {
+    } else {
       return;
     }
 
@@ -683,11 +678,9 @@ pick_new_ai_table_kick_2() {
 
     if(a_ai.size > 1) {
       n_index = randomintrange(0, a_ai.size - 1);
-    }
-    else if(a_ai.size == 1) {
+    } else if(a_ai.size == 1) {
       n_index = 0;
-    }
-    else {
+    } else {
       return;
     }
 
@@ -711,7 +704,7 @@ bunker_table_flipped_01(e_table) {
   a_nd_table1 = getnodearray("post_table1_kick", "script_noteworthy");
 
   foreach(node in a_nd_table1) {
-  setenablenode(node, 1);
+    setenablenode(node, 1);
   }
 
   nd_old = getnode("bunker_table_node_1", "targetname");
@@ -730,7 +723,7 @@ bunker_table_flipped_03(e_table) {
   a_nd_table3 = getnodearray("post_table3_kick", "script_noteworthy");
 
   foreach(node in a_nd_table3) {
-  setenablenode(node, 1);
+    setenablenode(node, 1);
   }
 
   nd_old = getnode("bunker_table_node_3", "targetname");
@@ -983,8 +976,7 @@ check_bunker_near_clear(a_ai_rearbunker) {
   foreach(guy in a_ai_rearbunker) {
     if(isDefined(guy.script_noteworthy) && guy.script_noteworthy == "bunker_2nd_room_end") {
       continue;
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -1060,8 +1052,7 @@ bunker_2ndroom_vo() {
 cia_easter_egg_vo() {
   if(is_mature()) {
     self queue_dialog("maso_what_the_fuck_ci_0");
-  }
-  else {
+  } else {
     self queue_dialog("maso_what_the_cia_0");
   }
 }
@@ -1161,8 +1152,7 @@ bunker_mortar_dust_fx(t_room1, t_room2) {
 
     if(self istouching(t_room1)) {
       exploder(665);
-    }
-    else if(self istouching(t_room2)) {
+    } else if(self istouching(t_room2)) {
       exploder(666);
     }
   }
@@ -1226,8 +1216,7 @@ cocaine_vision_think() {
     }
     if(!flag("cocaine_overlay_active")) {
       flag_set("cocaine_overlay_active");
-    }
-    else if(n_alpha > level.fade_hud.alpha) {
+    } else if(n_alpha > level.fade_hud.alpha) {
       level.fade_hud notify("coke_vision_retrigger");
       n_partial_fadein_time = (n_alpha - level.fade_hud.alpha) * n_full_fadein_time;
       level.fade_hud thread coke_vision_fade_in_and_out(n_partial_fadein_time, n_fadeout_time, n_wait_time, n_alpha);

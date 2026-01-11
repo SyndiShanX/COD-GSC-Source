@@ -117,8 +117,7 @@ main() {
 
   if(!isDefined(level.flag)) {
     common_scripts\utility::init_flags();
-  }
-  else {
+  } else {
     var_0 = getarraykeys(level.flag);
     common_scripts\utility::array_levelthread(var_0, ::check_flag_for_stat_tracking);
   }
@@ -127,8 +126,7 @@ main() {
 
   if(issplitscreen()) {
     setsaveddvar("cg_fovScale", "0.75");
-  }
-  else {
+  } else {
     setsaveddvar("cg_fovScale", "1");
   }
 
@@ -146,11 +144,9 @@ main() {
 
   if(maps\_utility::is_specialop()) {
     setsaveddvar("sv_saveOnStartMap", 0);
-  }
-  else if(isDefined(level.credits_active)) {
+  } else if(isDefined(level.credits_active)) {
     setsaveddvar("sv_saveOnStartMap", 0);
-  }
-  else {
+  } else {
     setsaveddvar("sv_saveOnStartMap", 1);
   }
 
@@ -262,8 +258,7 @@ main() {
 
   if(isDefined(level.handle_starts_endons)) {
     thread[[level.handle_starts_endons]]();
-  }
-  else {
+  } else {
     thread handle_starts();
   }
 
@@ -511,8 +506,7 @@ playerdamagerumble() {
 map_is_early_in_the_game() {
   if(isDefined(level.early_level[level.script])) {
     return level.early_level[level.script];
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -589,15 +583,13 @@ waterthink() {
 
       if(abs(var_4) > level.depth_allow_crouch) {
         level.player allowcrouch(0);
-      }
-      else {
+      } else {
         level.player allowcrouch(1);
       }
 
       if(abs(var_4) > level.depth_allow_prone) {
         level.player allowprone(0);
-      }
-      else {
+      } else {
         level.player allowprone(1);
       }
 
@@ -629,8 +621,7 @@ waterthink_rampspeed(var_0) {
 
     if(var_4) {
       setsaveddvar("g_speed", var_3 - var_6);
-    }
-    else {
+    } else {
       setsaveddvar("g_speed", var_3 + var_6);
     }
 
@@ -707,11 +698,9 @@ handle_starts() {
   if(!isDefined(level.start_point)) {
     if(isDefined(level.default_start)) {
       level.start_point = "default";
-    }
-    else if(maps\_utility::level_has_start_points()) {
+    } else if(maps\_utility::level_has_start_points()) {
       level.start_point = level.start_functions[0]["name"];
-    }
-    else {
+    } else {
       level.start_point = "default";
     }
   }
@@ -829,8 +818,7 @@ create_start(var_0, var_1) {
 
     if(var_1 != var_4) {
       var_2 = 1 - abs(var_4 - var_1) / var_4;
-    }
-    else {
+    } else {
       var_3 = (1, 1, 0);
     }
   }
@@ -987,8 +975,7 @@ start_list_settext(var_0, var_1, var_2) {
 
     if(isDefined(var_1[var_4])) {
       var_5 = var_1[var_4];
-    }
-    else {
+    } else {
       var_5 = "";
     }
 
@@ -1047,8 +1034,7 @@ ammo_pickup(var_0) {
     var_1[var_1.size] = "c4";
   else if(var_0 == "claymore") {
     var_1[var_1.size] = "claymore";
-  }
-  else if(var_0 == "556") {
+  } else if(var_0 == "556") {
     var_1[var_1.size] = "m4_grenadier";
     var_1[var_1.size] = "m4_grunt";
     var_1[var_1.size] = "m4_sd_cloth";
@@ -1166,17 +1152,14 @@ ammo_pickup(var_0) {
 
   if(isDefined(var_5)) {
     var_3 giveweapon(var_4);
-  }
-  else {
+  } else {
     var_9 = 1;
 
     if(var_0 == "556" || var_0 == "762") {
       var_9 = 30;
-    }
-    else if(var_0 == "45") {
+    } else if(var_0 == "45") {
       var_9 = 25;
-    }
-    else if(var_0 == "pistol") {
+    } else if(var_0 == "pistol") {
       var_9 = 15;
     }
 
@@ -1199,8 +1182,7 @@ remove_level_first_frame() {
 load_friendlies() {
   if(isDefined(game["total characters"])) {
     var_0 = game["total characters"];
-  }
-  else {
+  } else {
     return;
   }
 
@@ -1434,8 +1416,7 @@ thermal_tracker() {
 
     if(turn_thermal_on(var_0, var_1)) {
       thermal_effectson();
-    }
-    else if(turn_thermal_off(var_0, var_1)) {
+    } else if(turn_thermal_off(var_0, var_1)) {
       thermal_effectsoff();
     }
 
@@ -1514,8 +1495,7 @@ loop_friendly_thermal_reflector_effect(var_0, var_1) {
   for(;;) {
     if(isDefined(var_1)) {
       playfxontagforclients(level.friendly_thermal_reflector_effect, self, "J_Spine4", var_1);
-    }
-    else {
+    } else {
       playFXOnTag(level.friendly_thermal_reflector_effect, self, "J_Spine4");
     }
 
@@ -1542,8 +1522,7 @@ claymore_pickup_think_global() {
 
     if(!var_1 hasweapon("claymore")) {
       var_1 giveweapon("claymore");
-    }
-    else {
+    } else {
       var_2 = var_1 getammocount("claymore");
     }
 
@@ -1581,7 +1560,7 @@ claymore_pickup_think_global() {
     var_6 = getEntArray(self.target, "targetname");
 
     foreach(var_8 in var_6) {
-    var_8 delete();
+      var_8 delete();
     }
   }
 
@@ -1677,15 +1656,13 @@ ammo_icon_think() {
 
       if(var_4 == "none") {
         var_3 = 0;
-      }
-      else if(var_2 getfractionmaxammo(var_4) > 0.9) {
+      } else if(var_2 getfractionmaxammo(var_4) > 0.9) {
         var_3 = 0;
       }
 
       if(maps\_utility::player_looking_at(self.origin, 0.8, 1) && var_3) {
         ammo_icon_fade_in(var_1);
-      }
-      else {
+      } else {
         ammo_icon_fade_out(var_1);
       }
 
@@ -1750,7 +1727,7 @@ weapon_list_debug() {
   var_9 = [];
 
   foreach(var_11 in var_8) {
-  var_9[var_11.code_classname] = 1;
+    var_9[var_11.code_classname] = 1;
   }
 
   foreach(var_14, var_6 in var_9) {}
@@ -1938,7 +1915,7 @@ default_footsteps() {
   var_4 = ["brick", "carpet", "foliage", "grass", "gravel", "ice", "metal", "painted metal", "mud", "plaster", "sand", "snow", "slush", "water", "wood", "ceramic"];
 
   foreach(var_6 in var_4) {
-  animscripts\utility::setnotetracksound(var_0, var_6, var_2, var_3);
+    animscripts\utility::setnotetracksound(var_0, var_6, var_2, var_3);
   }
 
   var_0 = "bodyfall small";
@@ -1951,6 +1928,6 @@ default_footsteps() {
   animscripts\utility::setnotetrackeffect(var_0, var_1, "rock", loadfx("fx/impacts/bodyfall_default_large_runner"), var_2, var_3);
 
   foreach(var_6 in var_4) {
-  animscripts\utility::setnotetracksound(var_0, var_6, var_2, var_3);
+    animscripts\utility::setnotetracksound(var_0, var_6, var_2, var_3);
   }
 }

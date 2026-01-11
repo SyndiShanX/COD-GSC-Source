@@ -143,8 +143,7 @@ damage_visionset_think(local_client_num) {
   }
 }
 
-default_flag_change_handler(localclientnum, flag, set, newent) {
-}
+default_flag_change_handler(localclientnum, flag, set, newent) {}
 
 init_client_flags() {
   level.cf_player_underwater = 15;

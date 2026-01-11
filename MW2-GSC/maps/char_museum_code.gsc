@@ -39,8 +39,7 @@ ai_death_track(array) {
 
   if(isDefined(self)) {
     level.anim_ai[array] = array_remove(level.anim_ai[array], self);
-  }
-  else {
+  } else {
     level.anim_ai[array] = [];
   }
 }
@@ -53,8 +52,7 @@ drone_anim_first_frame(node) {
 ai_idle(animation) {
   if(isai(self)) {
     self ai_idle_ai(animation);
-  }
-  else {
+  } else {
     self ai_idle_drone(animation);
   }
 }
@@ -116,8 +114,7 @@ custom_ai_idle() {
 ai_loop_random(animation, array) {
   if(isai(self)) {
     self ai_loop_random_ai(animation, array);
-  }
-  else {
+  } else {
     self ai_loop_random_drone(animation, array);
   }
 }
@@ -193,15 +190,14 @@ ai_wait_current_anim(percent, delay) {
 
   if(isDefined(percent) && isDefined(self.animtime)) {
     time *= (percent - self.animtime);
+  } else {
+    if(isDefined(percent))
   }
+  time *= percent;
   else {
-  if(isDefined(percent))
+    if(isDefined(self.animtime))
   }
-    time *= percent;
-  else {
-  if(isDefined(self.animtime))
-  }
-    time *= (1.0 - self.animtime);
+  time *= (1.0 - self.animtime);
 
   final = (time / self.anim_speed) + delay;
 
@@ -213,8 +209,7 @@ ai_wait_current_anim(percent, delay) {
 ai_next_anim(xanim, percent, delay) {
   if(isai(self)) {
     self ai_next_anim_ai(xanim, percent, delay);
-  }
-  else {
+  } else {
     self ai_next_anim_drone(xanim, percent, delay);
   }
 }
@@ -279,8 +274,7 @@ custom_ai_next_anim() {
 ai_current_anim_stop() {
   if(isai(self)) {
     self ai_current_anim_stop_ai();
-  }
-  else {
+  } else {
     self ai_current_anim_stop_drone();
   }
 }
@@ -321,8 +315,7 @@ custom_ai_current_anim_stop() {
 _setanim(animation, weight, blend, rate) {
   if(isai(self)) {
     self _setanim_ai(animation, weight, blend, rate);
-  }
-  else {
+  } else {
     self _setanim_drone(animation, weight, blend, rate);
   }
 }
@@ -353,8 +346,7 @@ custom_setanim() {
 
   if(isDefined(self.anim_mode)) {
     self animMode(self.anim_mode);
-  }
-  else {
+  } else {
     self animMode("nogravity");
   }
   self setanim(animation, weight, blend, rate);
@@ -378,8 +370,7 @@ set_anim_time(node, time) {
 
   if(isai(self)) {
     self ForceTeleport(endPoint, ent.angles + (0, angles, 0));
-  }
-  else {
+  } else {
     self.origin = endPoint;
     self.angles = ent.angles + (0, angles, 0);
   }
@@ -415,18 +406,16 @@ camera_move(targetname, speed, acc, dec) {
 
   if(!acc && !dec) {
     level.player playerlinktoblend(level.camera, undefined, time);
-  }
-  else {
+  } else {
     level.player playerlinktoblend(level.camera, undefined, time, time * acc, time * dec);
   }
 
   if(time > .5 && time < 1.0) {
     wait time;
+  } else {
+    if(time > 1.0)
   }
-  else {
-  if(time > 1.0)
-  }
-    wait time - 1.0;
+  wait time - 1.0;
 
   old_camera delaycall(1.5, ::delete);
 }
@@ -454,7 +443,7 @@ set_civilian_ai() {
 
 do_anim(name) {
   foreach(ent in level.anim_ai[name]) {
-  ent ent_flag_set("do_anim");
+    ent ent_flag_set("do_anim");
   }
 }
 
@@ -670,7 +659,7 @@ sign_departure_status() {
 
   snds = getEntArray("snd_departure_board", "targetname");
   foreach(member in snds) {
-  member playSound(member.script_soundalias);
+    member playSound(member.script_soundalias);
   }
 
   array = array_randomize(level.departure_status_array);
@@ -935,8 +924,7 @@ panic_icon() {
 
       if(player_looking_at(self.origin, 0.8, true) && show) {
         icon_fade_in(icon);
-      }
-      else {
+      } else {
         icon_fade_out(icon);
       }
       wait 0.25;

@@ -486,7 +486,7 @@ setFirstInfected(wasChosen) {
   }
 
   foreach(player in level.players) {
-  player thread maps\mp\gametypes\_hud_message::SplashNotify("first_infected");
+    player thread maps\mp\gametypes\_hud_message::SplashNotify("first_infected");
   }
   level thread teamPlayerCardSplash("callout_first_infected", self);
   playSoundOnPlayers("mp_enemy_obj_captured");
@@ -559,8 +559,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   if(self.team == "allies" && isDefined(attacker)) {
     if(isPlayer(attacker) && attacker != self) {
       processKill = true;
-    }
-    else if(level.infect_allowSuicide && (attacker == self || !isPlayer(attacker))) {
+    } else if(level.infect_allowSuicide && (attacker == self || !isPlayer(attacker))) {
       processKill = true;
       wasSuicide = true;
     }
@@ -596,8 +595,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     } else {
       if(isDefined(attacker.isInitialInfected)) {
         attacker thread setInitialToNormalInfected(true, sMeansOfDeath);
-      }
-      else {
+      } else {
         attacker thread maps\mp\gametypes\_rank::xpEventPopup("infected_survivor");
         maps\mp\gametypes\_gamescore::givePlayerScore("infected_survivor", attacker, self, true);
         attacker thread maps\mp\gametypes\_rank::giveRankXP("infected_survivor");
@@ -687,7 +685,7 @@ finalSurvivorUAV(finalPlayer) {
       removeUAV = true;
 
       foreach(player in level.players) {
-      player playLocalSound("recondrone_tag");
+        player playLocalSound("recondrone_tag");
       }
     }
   }
@@ -798,8 +796,7 @@ updateTeamScores() {
 setSpecialLoadouts() {
   if(isUsingDefaultClass("allies", 0)) {
     level.infect_loadouts["allies"] = getMatchRulesSpecialClass("allies", 0);
-  }
-  else {
+  } else {
     level.infect_loadouts["allies"]["loadoutPrimary"] = "iw6_maul";
     level.infect_loadouts["allies"]["loadoutPrimaryAttachment"] = "none";
     level.infect_loadouts["allies"]["loadoutPrimaryAttachment2"] = "none";

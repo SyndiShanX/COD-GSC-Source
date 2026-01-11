@@ -56,7 +56,6 @@
 #include scripts\zm_common\zm_transformation;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_ai_brutus;
 
 autoexec __init__system__() {
@@ -67,14 +66,14 @@ __init__() {
   registerbehaviorscriptfunctions();
   spawner::add_archetype_spawn_function(#"brutus", &function_debbd9da);
   spawner::function_89a2cd87(#"brutus", &function_6090f71a);
-  level._effect[#"brutus"] = [];
-  level._effect[#"brutus"][#"lockdown_stub_type_pap"] = "maps/zm_escape/fx8_alcatraz_perk_lock";
-  level._effect[#"brutus"][#"lockdown_stub_type_perks"] = "maps/zm_escape/fx8_alcatraz_perk_s_lock";
-  level._effect[#"brutus"][#"lockdown_stub_type_crafting_tables"] = "maps/zm_escape/fx8_alcatraz_w_bench_lock";
-  level thread aat::register_immunity("zm_aat_brain_decay", #"brutus", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_frostbite", #"brutus", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", #"brutus", 1, 1, 1);
-  level thread aat::register_immunity("zm_aat_plasmatic_burst", #"brutus", 1, 1, 1);
+  level._effect[# "brutus"] = [];
+  level._effect[# "brutus"][# "lockdown_stub_type_pap"] = "maps/zm_escape/fx8_alcatraz_perk_lock";
+  level._effect[# "brutus"][# "lockdown_stub_type_perks"] = "maps/zm_escape/fx8_alcatraz_perk_s_lock";
+  level._effect[# "brutus"][# "lockdown_stub_type_crafting_tables"] = "maps/zm_escape/fx8_alcatraz_w_bench_lock";
+  level thread aat::register_immunity("zm_aat_brain_decay", # "brutus", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_frostbite", # "brutus", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", # "brutus", 1, 1, 1);
+  level thread aat::register_immunity("zm_aat_plasmatic_burst", # "brutus", 1, 1, 1);
   clientfield::register("actor", "brutus_shock_attack", 1, 1, "counter");
   clientfield::register("actor", "brutus_spawn_clientfield", 1, 1, "int");
   clientfield::register("toplayer", "brutus_shock_attack_player", 1, 1, "counter");
@@ -198,7 +197,7 @@ function_6090f71a() {
 }
 
 on_brutus_killed(params) {
-  if(self.archetype !== #"brutus") {
+  if(self.archetype !== # "brutus") {
     return;
   }
 
@@ -273,7 +272,7 @@ private brutustargetservice(entity) {
     zone = zm_utility::get_current_zone();
 
     if(isDefined(zone)) {
-      wait_locations = level.zones[zone].a_loc_types[#"wait_location"];
+      wait_locations = level.zones[zone].a_loc_types[# "wait_location"];
 
       if(isDefined(wait_locations) && wait_locations.size > 0) {
         entity zm_utility::function_64259898(wait_locations[0].origin, 200);
@@ -287,23 +286,23 @@ private brutustargetservice(entity) {
 
   zm_lockdown_util::function_f3cff6ff(entity);
 
-    if(!isDefined(entity.var_722a34a3)) {
-      entity.var_52e3b294 = undefined;
-      pointofinterest = entity zm_utility::get_zombie_point_of_interest(entity.origin);
+  if(!isDefined(entity.var_722a34a3)) {
+    entity.var_52e3b294 = undefined;
+    pointofinterest = entity zm_utility::get_zombie_point_of_interest(entity.origin);
 
-      if(isDefined(pointofinterest) && pointofinterest.size > 0) {
-        foreach(poi in pointofinterest) {
-          if(isDefined(poi) && isentity(poi) && isDefined(poi.classname) && poi.classname == "grenade") {
-            goalpos = getclosestpointonnavmesh(poi.origin, 10, self getpathfindingradius());
+    if(isDefined(pointofinterest) && pointofinterest.size > 0) {
+      foreach(poi in pointofinterest) {
+        if(isDefined(poi) && isentity(poi) && isDefined(poi.classname) && poi.classname == "grenade") {
+          goalpos = getclosestpointonnavmesh(poi.origin, 10, self getpathfindingradius());
 
-            if(isDefined(goalpos)) {
-              entity.var_722a34a3 = poi;
-              entity.var_52e3b294 = goalpos;
-            }
+          if(isDefined(goalpos)) {
+            entity.var_722a34a3 = poi;
+            entity.var_52e3b294 = goalpos;
           }
         }
       }
     }
+  }
 
   if(isDefined(entity.var_52e3b294) && entity zm_utility::function_64259898(entity.var_52e3b294)) {
     return 1;
@@ -350,7 +349,7 @@ private function_3c3e6f4a(entity) {
 
   zm_lockdown_util::function_f3cff6ff(entity);
 
-    stub_types = [];
+  stub_types = [];
   array::add(stub_types, "lockdown_stub_type_crafting_tables");
   array::add(stub_types, "lockdown_stub_type_perks");
   array::add(stub_types, "lockdown_stub_type_pap");
@@ -369,7 +368,7 @@ private function_3c3e6f4a(entity) {
   if(!function_943e4c08(entity, entity ai::function_9139c839().var_78a5f50)) {
     zm_lockdown_util::function_78eae22a(entity, stub, 9);
 
-      return 0;
+    return 0;
   }
 
   var_801b2d64 = undefined;
@@ -381,11 +380,11 @@ private function_3c3e6f4a(entity) {
 
     if(!isDefined(var_7162cf15)) {
       var_7162cf15 = [];
-      var_7162cf15[#"point"] = stub.origin;
+      var_7162cf15[# "point"] = stub.origin;
       halfheight = (stub.origin - zm_utility::groundpos(stub.origin))[2] + 1;
     }
 
-    queryresults = positionquery_source_navigation(var_7162cf15[#"point"], 0, 256, halfheight, 20, 1);
+    queryresults = positionquery_source_navigation(var_7162cf15[# "point"], 0, 256, halfheight, 20, 1);
 
     if(queryresults.data.size == 0) {
       return 0;
@@ -406,7 +405,7 @@ private function_3c3e6f4a(entity) {
 
   zm_lockdown_util::function_f3cff6ff(entity);
 
-    return 1;
+  return 1;
 }
 
 private function_eb1f805(entity) {
@@ -569,7 +568,7 @@ private function_85e8940a(entity) {
     }
 
     if(isai(ent)) {
-      if(ent.zm_ai_category === #"basic") {
+      if(ent.zm_ai_category === # "basic") {
         ent zombie_utility::setup_zombie_knockdown(entity);
       }
     }
@@ -612,16 +611,16 @@ private function_30afd2be(type, stub) {
   var_b8576908 = 2000;
 
   switch (type) {
-    case #"lockdown_stub_type_crafting_tables":
+    case # "lockdown_stub_type_crafting_tables":
       var_491c5d62 = 1;
       break;
-    case #"lockdown_stub_type_magic_box":
+    case # "lockdown_stub_type_magic_box":
       var_491c5d62 = 1;
       break;
-    case #"lockdown_stub_type_pap":
+    case # "lockdown_stub_type_pap":
       var_491c5d62 = 3;
       break;
-    case #"lockdown_stub_type_perks":
+    case # "lockdown_stub_type_perks":
       var_491c5d62 = 3;
       break;
     default:
@@ -733,7 +732,7 @@ smoke_vo(v_pos) {
     waitresult = t_smoke waittill(#"trigger");
 
     if(isplayer(waitresult.activator)) {
-      b_played = waitresult.activator zm_audio::create_and_play_dialog(#"brutus", #"smoke_react");
+      b_played = waitresult.activator zm_audio::create_and_play_dialog(#"brutus", # "smoke_react");
 
       if(isDefined(b_played) && b_played) {
         t_smoke notify(#"hash_617485dc39ba3f5e");
@@ -745,14 +744,14 @@ smoke_vo(v_pos) {
 }
 
 function_9a4a6d02() {
-  self waittilltimeout(20, #"hash_617485dc39ba3f5e");
+  self waittilltimeout(20, # "hash_617485dc39ba3f5e");
   self delete();
 }
 
 private function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultiplier, damageoverride) {
   if(!(isDefined(self.hashelmet) && self.hashelmet)) {
     if(isDefined(attacker) && isplayer(attacker) && attacker hasperk(#"specialty_mod_awareness")) {
-      if(self.zm_ai_category === #"boss") {
+      if(self.zm_ai_category === # "boss") {
         damage *= 1.1;
       } else {
         damage *= 1.2;
@@ -763,7 +762,7 @@ private function_55bb9c72(attacker, damage, weapon, var_81dcad68, damagemultipli
   }
 
   if(weaponhasattachment(weapon, "fmj2")) {
-    if(self.zm_ai_category === #"boss") {
+    if(self.zm_ai_category === # "boss") {
       damagemultiplier *= 1.1;
     } else {
       damagemultiplier = min(1, damagemultiplier + 0.1);
@@ -832,7 +831,7 @@ private function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weap
 
   if(shitloc !== "head" && shitloc !== "helmet") {
     if(weaponhasattachment(weapon, "fmj") && var_9000ab2 < 1) {
-      if(self.zm_ai_category == #"boss") {
+      if(self.zm_ai_category == # "boss") {
         var_9000ab2 *= 1.1;
       } else {
         var_9000ab2 = min(1, var_9000ab2 + 0.1);
@@ -846,7 +845,7 @@ private function_83a6d3ae(inflictor, attacker, damage, flags, meansofdeath, weap
 }
 
 instakill_override(player, mod, shitloc) {
-  if(self.archetype === #"brutus") {
+  if(self.archetype === # "brutus") {
     return true;
   }
 
@@ -860,7 +859,7 @@ function_88efcb() {
 
   if(isDefined(level.var_f47ae5da)) {
     s_spawn_loc = [[level.var_f47ae5da]]();
-  } else if(level.zm_loc_types[#"brutus_location"].size > 0) {
+  } else if(level.zm_loc_types[# "brutus_location"].size > 0) {
     s_spawn_loc = zombie_brutus_util::get_best_brutus_spawn_pos();
   }
 

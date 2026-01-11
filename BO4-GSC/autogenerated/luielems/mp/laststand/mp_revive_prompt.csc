@@ -4,7 +4,6 @@
 ********************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace mp_revive_prompt;
 
 class cmp_revive_prompt: cluielem {
@@ -21,7 +20,7 @@ class cmp_revive_prompt: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"mp_revive_prompt");
+    cluielem::open(localclientnum, # "mp_revive_prompt");
   }
 
   function function_fa582112(localclientnum) {

@@ -85,13 +85,12 @@ bot_dom_debug() {
       foreach(flag in flags) {
         if(flag.classname != "trigger_radius") {
           BotDebugDrawTrigger(true, flag, (0, 1, 0), true);
-        }
-        else {
+        } else {
           bot_draw_cylinder(flag.origin, flag.radius, flag.height, 0.05, undefined, (0, 1, 0), true);
         }
 
         foreach(node in flag.nodes) {
-        bot_draw_cylinder(node.origin, 10, 10, 0.05, undefined, (0, 1, 0), true, 4);
+          bot_draw_cylinder(node.origin, 10, 10, 0.05, undefined, (0, 1, 0), true, 4);
         }
       }
     }
@@ -249,8 +248,7 @@ setup_bot_dom() {
 bot_get_all_possible_flags() {
   if(isDefined(level.all_dom_flags)) {
     return level.all_dom_flags;
-  }
-  else {
+  } else {
     return level.flags;
   }
 }
@@ -438,8 +436,7 @@ bot_choose_flag() {
   override_targets = self get_override_flag_targets();
   if(override_targets.size > 0) {
     all_possible_flags = override_targets;
-  }
-  else {
+  } else {
     all_possible_flags = level.flags;
   }
 
@@ -449,16 +446,14 @@ bot_choose_flag() {
     if(no_flags_captured_yet) {
       if(flag_has_been_captured_before(all_possible_flags[i])) {
         no_flags_captured_yet = false;
-      }
-      else {
+      } else {
         Assert(team == "neutral");
       }
     }
 
     if(team != self.team) {
       flags_to_take[flags_to_take.size] = all_possible_flags[i];
-    }
-    else {
+    } else {
       flags_to_defend[flags_to_defend.size] = all_possible_flags[i];
     }
   }
@@ -520,8 +515,7 @@ bot_choose_flag() {
 
     if(flags_to_take.size > 1) {
       flags_to_take_sorted = get_array_of_closest(self.origin, flags_to_take);
-    }
-    else {
+    } else {
       flags_to_take_sorted = flags_to_take;
     }
 
@@ -545,11 +539,9 @@ bot_choose_flag() {
         random_roll = RandomInt(100);
         if(random_roll < chance_to_take_closest) {
           flag_num = 0;
-        }
-        else if(random_roll < chance_to_take_closest + chance_to_take_middle) {
+        } else if(random_roll < chance_to_take_closest + chance_to_take_middle) {
           flag_num = 1;
-        }
-        else {
+        } else {
           flag_num = 2;
         }
 
@@ -594,8 +586,7 @@ bot_choose_flag() {
           } else {
             if(random_roll < 50 + (50 / (flags_to_take_sorted.size - 1))) {
               flag = flags_to_take_sorted[1];
-            }
-            else {
+            } else {
               flag = flags_to_take_sorted[2];
             }
           }
@@ -623,8 +614,7 @@ bot_choose_flag() {
           random_roll = RandomInt(100);
           if(random_roll < chance_to_take_flag[0]) {
             flag = flags_to_take_sorted[0];
-          }
-          else {
+          } else {
             flag = flags_to_take_sorted[1];
           }
         } else if(flag_combined_dist.size == 3) {
@@ -657,11 +647,9 @@ bot_choose_flag() {
           random_roll = RandomInt(100);
           if(random_roll < chance_to_take_flag[0]) {
             flag = flags_to_take_sorted[0];
-          }
-          else if(random_roll < chance_to_take_flag[0] + chance_to_take_flag[1]) {
+          } else if(random_roll < chance_to_take_flag[0] + chance_to_take_flag[1]) {
             flag = flags_to_take_sorted[1];
-          }
-          else {
+          } else {
             flag = flags_to_take_sorted[2];
           }
         }
@@ -672,8 +660,7 @@ bot_choose_flag() {
 
     if(flags_to_defend.size > 1) {
       flags_to_defend_sorted = get_array_of_closest(self.origin, flags_to_defend);
-    }
-    else {
+    } else {
       flags_to_defend_sorted = flags_to_defend;
     }
 
@@ -695,8 +682,7 @@ bot_choose_flag() {
         random_roll = RandomInt(100);
         if(random_roll < 70) {
           flag = flags_to_defend_sorted_to_third_flag[0];
-        }
-        else {
+        } else {
           flag = flags_to_defend_sorted_to_third_flag[1];
         }
       } else {
@@ -743,8 +729,7 @@ bot_should_defend(chance_to_override_personality_and_defend) {
   personality_type = level.bot_personality_type[self.personality];
   if(personality_type == "stationary") {
     return true;
-  }
-  else if(personality_type == "active") {
+  } else if(personality_type == "active") {
     return false;
   }
 
@@ -1100,8 +1085,7 @@ get_ally_flags(team) {
 bot_should_defend_flag(flag, num_flags_defending) {
   if(num_flags_defending == 1) {
     max_num_bots_defending_this_flag = 1;
-  }
-  else {
+  } else {
     max_num_bots_defending_this_flag = 2;
   }
 

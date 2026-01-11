@@ -92,8 +92,7 @@ slipgunbuildable() {
 
   if(!(isDefined(level.slipgun_as_equipment) && level.slipgun_as_equipment)) {
     persist = 2;
-  }
-  else {
+  } else {
     persist = 1;
   }
 
@@ -163,8 +162,7 @@ ondrop_keys(player) {
   self keyscreateglint();
 }
 
-onpickup_keys(player) {
-}
+onpickup_keys(player) {}
 
 escape_pod_key_prompt(player) {
   if(!flag("escape_pod_needs_reset")) {
@@ -213,8 +211,7 @@ elevator_key_prompt(player) {
   if(!isDefined(self.stub.elevator)) {
     if(isDefined(self.stub.script_noteworthy)) {
       error("Cannot locate elevator " + self.stub.script_noteworthy);
-    }
-    else {
+    } else {
       error("Cannot locate elevator ");
     }
   } else {

@@ -182,8 +182,7 @@ psource_hud_preview() {
     view = level.psource_views[pick];
     if(isDefined(view.temp_image)) {
       level.photosource setshader(view.temp_image, 200, 150);
-    }
-    else {
+    } else {
       level.photosource setshader(view.image, 200, 150);
     }
     level.photosource.alpha = 1;
@@ -226,16 +225,14 @@ psource_viewwait(index) {
 
     if(level.psource_selectindex == index) {
       thread plot_circle_star_fortime(level.psource_selectrad, frametime, (1, 1, 0));
-    }
-    else {
+    } else {
       thread plot_circle_fortime(level.psource_selectrad, frametime, (0, 1, 0));
     }
     if(isDefined(level.psource_viewindex) && level.psource_viewindex == index) {
       thread debug_message("image: " + self.image, self.origin, frametime);
       if(viewradexpandcount > viewradexpandmax) {
         viewraddir = -1;
-      }
-      else if(viewradexpandcount < 0) {
+      } else if(viewradexpandcount < 0) {
         viewraddir = 1;
       }
       viewradexpandcount += viewraddir;
@@ -311,8 +308,7 @@ psource_hudshow() {
   level.photosourcemod setshader("psourcemodify", level.photosourcemodsize * 2, level.photosourcemodsize);
   if(isDefined(self.temp_image)) {
     level.photosource setshader(self.temp_image, 640, 480);
-  }
-  else {
+  } else {
     level.photosource setshader(self.image, 640, 480);
   }
   level.player freezecontrols(true);
@@ -438,7 +434,7 @@ psource_delete() {
   for(i = 0; i < level.psource_views.size; i++) {
     if(i != level.psource_selectindex)
   }
-      newarray[newarray.size] = level.psource_views[i];
+  newarray[newarray.size] = level.psource_views[i];
   level.psource_views = newarray;
   flag_set("psource_refresh");
   setdvar("psource_delete", "");
@@ -457,8 +453,7 @@ psource_editmode_update() {
   }
   if(!level.psource_editmode) {
     level.psource_editmode = true;
-  }
-  else {
+  } else {
     level.psource_editmode = false;
   }
   setdvar("psource_editmode", "");
@@ -478,8 +473,7 @@ psource_getcurrentview() {
   view = undefined;
   if(isDefined(level.psource_views[level.psource_selectindex])) {
     view = level.psource_views[level.psource_selectindex];
-  }
-  else {
+  } else {
     view = psource_newview(false);
   }
   return view;
@@ -538,8 +532,7 @@ islookingorg(view) {
   vectordot = vectordot(anglevec, normalvec);
   if(vectordot > insidedot) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

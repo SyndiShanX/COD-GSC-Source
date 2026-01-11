@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_items;
 
 autoexec __init__system__() {
@@ -97,13 +96,13 @@ __main__() {
 
     var_7a1b3d24 = getdvarint(#"hash_7f8707c59bcda3cb", 0);
 
-      if(var_7a1b3d24 === 0) {
-        if(a_items.size > var_b38ebe37) {
-          for(i = var_b38ebe37; i < a_items.size; i++) {
-            a_items[i] delete();
-          }
+    if(var_7a1b3d24 === 0) {
+      if(a_items.size > var_b38ebe37) {
+        for(i = var_b38ebe37; i < a_items.size; i++) {
+          a_items[i] delete();
         }
       }
+    }
   }
 
   level thread function_307756a0();

@@ -25,7 +25,7 @@ initfinalkillcam() {
   initfinalkillcamteam("none");
 
   foreach(team in level.teams) {
-  initfinalkillcamteam(team);
+    initfinalkillcamteam(team);
   }
 
   level.finalkillcam_winner = undefined;
@@ -83,7 +83,7 @@ erasefinalkillcam() {
   clearfinalkillcamteam("none");
 
   foreach(team in level.teams) {
-  clearfinalkillcamteam(team);
+    clearfinalkillcamteam(team);
   }
 
   level.finalkillcam_winner = undefined;
@@ -146,8 +146,7 @@ dofinalkillcam() {
   level.infinalkillcam = 0;
 }
 
-startlastkillcam() {
-}
+startlastkillcam() {}
 
 areanyplayerswatchingthekillcam() {
   players = level.players;
@@ -183,8 +182,7 @@ killcam(attackernum, targetnum, killcamentity, killcamentityindex, killcamentity
     }
     if(maxtime - camtime >= 1) {
       postdelay = maxtime - camtime;
-    }
-    else {
+    } else {
       postdelay = 1;
       camtime = maxtime - 1;
     }
@@ -210,7 +208,7 @@ killcam(attackernum, targetnum, killcamentity, killcamentityindex, killcamentity
   recordkillcamsettings(attackernum, targetnum, sweapon, deathtime, deathtimeoffset, offsettime, killcamentityindex, killcamentitystarttime, perks, killstreaks, attacker);
 
   foreach(team in level.teams) {
-  self allowspectateteam(team, 1);
+    self allowspectateteam(team, 1);
   }
 
   self allowspectateteam("freelook", 1);
@@ -489,7 +487,7 @@ finalkillcam(winner) {
   self.psoffsettime = killcamsettings.offsettime;
 
   foreach(team in level.teams) {
-  self allowspectateteam(team, 1);
+    self allowspectateteam(team, 1);
   }
 
   self allowspectateteam("freelook", 1);
@@ -539,14 +537,11 @@ iskillcamentityweapon(sweapon) {
 iskillcamgrenadeweapon(sweapon) {
   if(sweapon == "frag_grenade_mp") {
     return true;
-  }
-  else if(sweapon == "frag_grenade_short_mp") {
+  } else if(sweapon == "frag_grenade_short_mp") {
     return true;
-  }
-  else if(sweapon == "sticky_grenade_mp") {
+  } else if(sweapon == "sticky_grenade_mp") {
     return true;
-  }
-  else if(sweapon == "tabun_gas_mp") {
+  } else if(sweapon == "tabun_gas_mp") {
     return true;
   }
 
@@ -559,14 +554,11 @@ calckillcamtime(sweapon, entitystarttime, predelay, respawn, maxtime) {
   if(getdvar(#"_id_C45D9077") == "") {
     if(iskillcamentityweapon(sweapon)) {
       camtime = (gettime() - entitystarttime) / 1000 - predelay - 0.1;
-    }
-    else if(!respawn) {
+    } else if(!respawn) {
       camtime = 5.0;
-    }
-    else if(iskillcamgrenadeweapon(sweapon)) {
+    } else if(iskillcamgrenadeweapon(sweapon)) {
       camtime = 4.25;
-    }
-    else {
+    } else {
       camtime = 2.5;
     }
   } else
@@ -590,8 +582,7 @@ calcpostdelay() {
 
   if(getdvar(#"_id_0D34D95D") == "") {
     postdelay = 2;
-  }
-  else {
+  } else {
     postdelay = getdvarfloat(#"_id_0D34D95D");
 
     if(postdelay < 0.05) {
@@ -625,16 +616,14 @@ addkillcamskiptext(respawn) {
 
   if(respawn) {
     self.kc_skiptext settext(&"PLATFORM_PRESS_TO_RESPAWN");
-  }
-  else {
+  } else {
     self.kc_skiptext settext(&"PLATFORM_PRESS_TO_SKIP");
   }
 
   self.kc_skiptext.alpha = 1;
 }
 
-addkillcamtimer(camtime) {
-}
+addkillcamtimer(camtime) {}
 
 initkcelements() {
   if(!isDefined(self.kc_skiptext)) {

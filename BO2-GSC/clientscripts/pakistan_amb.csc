@@ -130,8 +130,7 @@ splash_trig_think_ai() {
 
     if(who isplayer()) {
       continue;
-    }
-    else {
+    } else {
       playSound(0, "fly_npc_jump_into_water", who.origin);
 
       while(who istouching(self)) {

@@ -30,8 +30,7 @@ main(notifyname, character, node, scr_thread, bitflags) {
   self notify("new_sequence");
   if((!isDefined(level.scripted_animation_slot)) || (!isDefined(level.scripted_animation_slot[notifyname]))) {
     level.scripted_animation_slot[notifyname] = 1;
-  }
-  else {
+  } else {
     level.scripted_animation_slot[notifyname]++;
   }
   if(isDefined(node)) {
@@ -74,11 +73,10 @@ main(notifyname, character, node, scr_thread, bitflags) {
   }
   if((isDefined(node)) && (!level.scripted_animation_counter[notifyname])) {
     level.scripted_animation[notifyname][0] notify("anim_notify" + notifyname);
+  } else {
+    if(getdvar("debug") == "1")
   }
-  else {
-  if(getdvar("debug") == "1")
-  }
-    println("Counter for sequence ", notifyname, " was ", level.scripted_animation_counter[notifyname]);
+  println("Counter for sequence ", notifyname, " was ", level.scripted_animation_counter[notifyname]);
 }
 
 checkanim(notifyname, total) {
@@ -120,14 +118,12 @@ idle_anim(node, notifyname, character, bitflags) {
   self endon("g_scripted_idle_anim");
   if(isDefined(node.classname)) {
     org = node.origin;
-  }
-  else {
+  } else {
     org = getStartOrigin(node.origin, node.angles, level.scr_anim[notifyname][character]["idle"][0]);
   }
   if((isDefined(bitflags)) && (bitflags &level.teleport)) {
     self teleport(org);
-  }
-  else {
+  } else {
     oldradius = self.goalradius;
     self.goalradius = 0;
     self setgoalpos(org);

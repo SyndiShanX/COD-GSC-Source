@@ -169,8 +169,7 @@ powerup_hud_monitor() {
   while(flashing_timer >= flashing_min_timer) {
     if(flashing_timer < 5) {
       flashing_delta_time = 0.1;
-    }
-    else {
+    } else {
       flashing_delta_time = 0.2;
     }
 
@@ -657,8 +656,7 @@ powerup_setup(powerup_override, powerup_team, powerup_location) {
 
   if(!isDefined(powerup_override)) {
     powerup = get_valid_powerup();
-  }
-  else {
+  } else {
     powerup = powerup_override;
 
     if("tesla" == powerup && tesla_powerup_active()) {
@@ -743,8 +741,7 @@ special_drop_setup() {
 
   if(level.round_number <= 10) {
     powerup = get_valid_powerup();
-  }
-  else {
+  } else {
     powerup = level.zombie_special_drop_array[randomint(level.zombie_special_drop_array.size)];
 
     if(level.round_number > 15 && randomint(100) < (level.round_number - 15) * 5) {
@@ -789,9 +786,9 @@ special_drop_setup() {
     default:
       if(isDefined(level._zombiemode_special_drop_setup)) {
         is_powerup = [
-      }
+          }
           [level._zombiemode_special_drop_setup]
-        ](powerup);
+      ](powerup);
       else {
         is_powerup = 0;
         playFX(level._effect["lightning_dog_spawn"], self.origin);
@@ -878,8 +875,7 @@ powerup_zombie_grab(powerup_team) {
 
         if(isDefined(level._game_mode_powerup_zombie_grab)) {
           level thread[[level._game_mode_powerup_zombie_grab]](self, who);
-        }
-        else {
+        } else {
           println("Unrecognized poweup.");
 
         }
@@ -932,8 +928,7 @@ powerup_grab(powerup_team) {
 
         if(isDefined(level.zombie_powerup_grab_func)) {
           level thread[[level.zombie_powerup_grab_func]]();
-        }
-        else {
+        } else {
           switch (self.powerup_name) {
             case "nuke":
               level thread nuke_powerup(self, players[i].team);
@@ -961,8 +956,7 @@ powerup_grab(powerup_team) {
 
               if(isDefined(level.use_new_carpenter_func)) {
                 level thread[[level.use_new_carpenter_func]](self.origin);
-              }
-              else {
+              } else {
                 level thread start_carpenter(self.origin);
               }
 
@@ -1006,8 +1000,7 @@ powerup_grab(powerup_team) {
             default:
               if(isDefined(level._zombiemode_powerup_grab)) {
                 level thread[[level._zombiemode_powerup_grab]](self, players[i]);
-              }
-              else {
+              } else {
                 println("Unrecognized poweup.");
 
               }
@@ -1217,8 +1210,7 @@ powerup_vo(type) {
 
   if(type == "tesla") {
     self maps\mp\zombies\_zm_audio::create_and_play_dialog("weapon_pickup", type);
-  }
-  else {
+  } else {
     self maps\mp\zombies\_zm_audio::create_and_play_dialog("powerup", type);
   }
 
@@ -1240,14 +1232,11 @@ powerup_wobble_fx() {
 
   if(self.solo) {
     self setclientfield("powerup_fx", 2);
-  }
-  else if(self.caution) {
+  } else if(self.caution) {
     self setclientfield("powerup_fx", 4);
-  }
-  else if(self.zombie_grabbable) {
+  } else if(self.zombie_grabbable) {
     self setclientfield("powerup_fx", 3);
-  }
-  else {
+  } else {
     self setclientfield("powerup_fx", 1);
   }
 }
@@ -1263,8 +1252,7 @@ powerup_wobble() {
 
     if(yaw > 300) {
       yaw = 300;
-    }
-    else if(yaw < 60) {
+    } else if(yaw < 60) {
       yaw = 60;
     }
 
@@ -1348,8 +1336,7 @@ powerup_delete() {
 powerup_delete_delayed(time) {
   if(isDefined(time)) {
     wait(time);
-  }
-  else {
+  } else {
     wait 0.01;
   }
 
@@ -1419,8 +1406,7 @@ nuke_powerup(drop_item, player_team) {
 nuke_flash(team) {
   if(isDefined(team)) {
     get_players()[0] playsoundtoteam("evt_nuke_flash", team);
-  }
-  else {
+  } else {
     get_players()[0] playSound("evt_nuke_flash");
   }
 
@@ -1455,8 +1441,7 @@ double_points_powerup(drop_item, player) {
     if(isDefined(player._race_team)) {
       if(player._race_team == 1) {
         level._race_team_double_points = 1;
-      }
-      else {
+      } else {
         level._race_team_double_points = 2;
       }
     }
@@ -1557,8 +1542,7 @@ check_for_instakill(player, mod, hit_location) {
     }
     if(player.use_weapon_type == "MOD_MELEE") {
       player.last_kill_method = "MOD_MELEE";
-    }
-    else {
+    } else {
       player.last_kill_method = "MOD_UNKNOWN";
     }
 
@@ -1584,8 +1568,7 @@ check_for_instakill(player, mod, hit_location) {
 
     if(player.use_weapon_type == "MOD_MELEE") {
       player.last_kill_method = "MOD_MELEE";
-    }
-    else {
+    } else {
       player.last_kill_method = "MOD_UNKNOWN";
     }
 
@@ -1828,8 +1811,7 @@ play_firesale_audio() {
   }
   if(isDefined(level.sndannouncerisrich) && level.sndannouncerisrich) {
     self playLoopSound("mus_fire_sale_rich");
-  }
-  else {
+  } else {
     self playLoopSound("mus_fire_sale");
   }
 
@@ -1864,8 +1846,7 @@ play_bonfiresale_audio() {
   }
   if(isDefined(level.sndannouncerisrich) && level.sndannouncerisrich) {
     self playLoopSound("mus_fire_sale_rich");
-  }
-  else {
+  } else {
     self playLoopSound("mus_fire_sale");
   }
 
@@ -1947,8 +1928,7 @@ random_weapon_powerup(item, player) {
 
   if(weapon_string == "knife_ballistic_zm") {
     weapon = player maps\mp\zombies\_zm_melee_weapon::give_ballistic_knife(weapon_string, 0);
-  }
-  else if(weapon_string == "knife_ballistic_upgraded_zm") {
+  } else if(weapon_string == "knife_ballistic_upgraded_zm") {
     weapon = player maps\mp\zombies\_zm_melee_weapon::give_ballistic_knife(weapon_string, 1);
   }
 
@@ -2116,8 +2096,7 @@ minigun_weapon_powerup_remove(ent_player, str_gun_return_notify) {
 
   if(primaryweapons.size > 0) {
     ent_player switchtoweapon(primaryweapons[0]);
-  }
-  else {
+  } else {
     allweapons = ent_player getweaponslist(1);
 
     for(i = 0; i < allweapons.size; i++) {
@@ -2254,8 +2233,7 @@ tesla_weapon_powerup_remove(ent_player, str_gun_return_notify) {
 
   if(primaryweapons.size > 0) {
     ent_player switchtoweapon(primaryweapons[0]);
-  }
-  else {
+  } else {
     allweapons = ent_player getweaponslist(1);
 
     for(i = 0; i < allweapons.size; i++) {
@@ -2315,8 +2293,7 @@ print_powerup_drop(powerup, type) {
 
   if(type == "random") {
     level.powerup_random_count++;
-  }
-  else {
+  } else {
     level.powerup_score_count++;
   }
 
@@ -2439,8 +2416,7 @@ get_near_boards(windows) {
 
       if(isDefined(windows[j].zbarrier)) {
         origin = windows[j].zbarrier.origin;
-      }
-      else {
+      } else {
         origin = windows[j].origin;
       }
 
@@ -2470,8 +2446,7 @@ get_far_boards(windows) {
 
       if(isDefined(windows[j].zbarrier)) {
         origin = windows[j].zbarrier.origin;
-      }
-      else {
+      } else {
         origin = windows[j].origin;
       }
 

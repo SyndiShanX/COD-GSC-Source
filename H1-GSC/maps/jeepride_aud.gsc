@@ -201,11 +201,10 @@ start_scripted_sfx_node() {
     ["auto2637", undefined, undefined, undefined, "first_hind_mix"],
     ["auto4115", "scn_uaz_convoy_arrival_01", undefined, undefined, undefined],
     ["auto4059", "scn_uaz_convoy_arrival_02", undefined, undefined, undefined],
-    ["auto4088", "scn_uaz_convoy_arrival_03", undefined, undefined, undefined]
-  ];
+    ["auto4088", "scn_uaz_convoy_arrival_03", undefined, undefined, undefined]];
 
   foreach(var_2 in var_0) {
-  thread handle_scripted_sfx_node(var_2);
+    thread handle_scripted_sfx_node(var_2);
   }
 }
 

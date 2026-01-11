@@ -46,8 +46,7 @@ setentityheadicon(team, owner, offset, icon, constant_size) {
 
   if(isDefined(offset)) {
     self.entityheadiconoffset = offset;
-  }
-  else {
+  } else {
     self.entityheadiconoffset = (0, 0, 0);
   }
 

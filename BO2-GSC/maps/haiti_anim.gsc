@@ -114,8 +114,7 @@ intruder_fx(m_prop) {
   m_prop play_fx("cutter_on", undefined, undefined, 1.3, 1, "tag_fx");
 }
 
-precache_intro_anims() {
-}
+precache_intro_anims() {}
 
 #using_animtree("generic_human");
 #using_animtree("animated_props");
@@ -554,8 +553,7 @@ vtol_piece_think(str_end, time, accel, fx_tag) {
   self delete();
 }
 
-precahce_front_door_anims() {
-}
+precahce_front_door_anims() {}
 
 #using_animtree("animated_props");
 
@@ -567,8 +565,7 @@ front_door_anims() {
   precache_assets(1);
 }
 
-precahce_interior_anims() {
-}
+precahce_interior_anims() {}
 
 #using_animtree("generic_human");
 #using_animtree("animated_props");
@@ -641,8 +638,7 @@ interior_anims() {
   precache_assets(1);
 }
 
-precache_endings_anims() {
-}
+precache_endings_anims() {}
 
 #using_animtree("player");
 #using_animtree("generic_human");

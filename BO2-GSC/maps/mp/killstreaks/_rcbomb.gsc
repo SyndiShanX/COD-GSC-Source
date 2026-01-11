@@ -114,8 +114,7 @@ usekillstreakrcbomb(hardpointtype) {
 
   if(!isDefined(ret) && level.gameended) {
     ret = 1;
-  }
-  else if(!isDefined(ret)) {
+  } else if(!isDefined(ret)) {
     ret = 0;
   }
 
@@ -271,8 +270,7 @@ watchforscramblers() {
 
     if(shouldscramble == 1 && scrambled == 0) {
       self setclientflag(9);
-    }
-    else if(shouldscramble == 0 && scrambled == 1) {
+    } else if(shouldscramble == 0 && scrambled == 1) {
       self clearclientflag(9);
     }
 
@@ -477,8 +475,7 @@ blowup(attacker, weaponname) {
         attacker addweaponstat("rcbomb_mp", "destroyed", 1);
         attacker addweaponstat(weaponname, "destroyed_controlled_killstreak", 1);
       }
-    } else {
-    }
+    } else {}
   }
 
   wait 1;

@@ -201,7 +201,7 @@ main() {
   wait 0.05;
   friendlies = getaiarray("allies");
   foreach(friend in friendlies) {
-  friend.baseaccuracy = 0.4;
+    friend.baseaccuracy = 0.4;
   }
 
   after0 = get_golf_geo("golf_after", 0);
@@ -398,7 +398,7 @@ startGolf() {
   allies = getaiarray("allies");
   locations = getEntArray("start_golf_friendly_teleport", "targetname");
   foreach(i, guy in allies) {
-  guy forceTeleport(locations[i].origin, locations[i].angles);
+    guy forceTeleport(locations[i].origin, locations[i].angles);
   }
 
   trig = getent("start_golf_friendly_trigger", "script_noteworthy");
@@ -710,8 +710,7 @@ checkpoint_cleared_dialog_ac130() {
     }
     if(!isDefined(marine1)) {
       marine1 = guy;
-    }
-    else {
+    } else {
       marine2 = guy;
     }
     if(isDefined(marine1) && isDefined(marine2)) {
@@ -862,7 +861,7 @@ level_ending_sequence() {
 
   allies = getaiarray("allies");
   foreach(friend in allies) {
-  friend.baseaccuracy = 100;
+    friend.baseaccuracy = 100;
   }
 
   housenode_foley = getnode("housenode_foley", "targetname");

@@ -308,15 +308,13 @@ dog_pant(var_0) {
   if(self.script == "dog_stop") {
     if(var_1) {
       var_2 = "anml_dog_pants_med_plr";
-    }
-    else {
+    } else {
       var_2 = "anml_dog_pants_med";
     }
   } else {
     if(self.movemode == "walk" || isDefined(self.movementtype) && (self.movementtype == "walk_fast" || self.movementtype == "sniff" || self.movementtype == "sneak")) {
       var_2 = "anml_dog_pants_med";
-    }
-    else {
+    } else {
       var_2 = "anml_dog_pants_fast";
     }
 
@@ -333,8 +331,7 @@ enable_dog_walk(var_0) {
 
   if(isDefined(var_0)) {
     self.movementtype = "walk_fast";
-  }
-  else {
+  } else {
     self.movementtype = "walk";
   }
 }

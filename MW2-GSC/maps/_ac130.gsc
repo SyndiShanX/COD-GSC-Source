@@ -447,8 +447,7 @@ overlay() {
 
   if(!is_coop()) {
     setsaveddvar("g_friendlynamedist", 0);
-  }
-  else {
+  } else {
     setsaveddvar("g_friendlynamedist", 2000);
   }
 
@@ -828,8 +827,7 @@ changeWeapons() {
 
       if(level.ac130player == level.player) {
         setsaveddvar("cg_playerFovScale0", fovFraction);
-      }
-      else {
+      } else {
         setsaveddvar("cg_playerFovScale1", fovFraction);
       }
     }
@@ -937,8 +935,7 @@ weaponFiredCoOpTracer(weaponName) {
   muzzleFX = undefined;
   if(issubstr(tolower(weaponName), "105")) {
     muzzleFX = level._effect["coop_muzzleflash_105mm"];
-  }
-  else if(issubstr(tolower(weaponName), "40")) {
+  } else if(issubstr(tolower(weaponName), "40")) {
     muzzleFX = level._effect["coop_muzzleflash_40mm"];
   }
 
@@ -981,14 +978,14 @@ thermalVision() {
       if(isDefined(level.HUDItem["thermal_mode"])) {
         // BHOT
       }
-        level.HUDItem["thermal_mode"] settext(&"AC130_HUD_THERMAL_BHOT");
+      level.HUDItem["thermal_mode"] settext(&"AC130_HUD_THERMAL_BHOT");
       inverted = "1";
     } else {
       level.ac130player visionSetThermalForPlayer("ac130", 0.51);
       if(isDefined(level.HUDItem["thermal_mode"])) {
         // WHOT
       }
-        level.HUDItem["thermal_mode"] settext(&"AC130_HUD_THERMAL_WHOT");
+      level.HUDItem["thermal_mode"] settext(&"AC130_HUD_THERMAL_WHOT");
       inverted = "0";
     }
   }
@@ -1000,8 +997,7 @@ setAmmo() {
 
   if(flag("clear_to_engage")) {
     ammoCount = 1;
-  }
-  else {
+  } else {
     ammoCount = 0;
   }
 
@@ -1144,8 +1140,7 @@ getFriendlysCenter() {
   for(i = 0; i < friendlies.size; i++) {
     if(!isDefined(averageVec)) {
       averageVec = friendlies[i].origin;
-    }
-    else {
+    } else {
       averageVec += friendlies[i].origin;
     }
   }
@@ -1555,11 +1550,9 @@ context_Sensative_Dialog_Kill_Thread() {
 
     if(level.enemiesKilledInTimeWindow >= 3) {
       soundAlias2 = "large_group";
-    }
-    else if(level.enemiesKilledInTimeWindow == 2) {
+    } else if(level.enemiesKilledInTimeWindow == 2) {
       soundAlias2 = "small_group";
-    }
-    else {
+    } else {
       soundAlias2 = "single";
       if(randomint(3) != 1) {
         level.enemiesKilledInTimeWindow = 0;
@@ -1673,8 +1666,7 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
   if(!flag("allow_context_sensative_dialog")) {
     if(force_transmit_on_turn) {
       flag_wait("allow_context_sensative_dialog");
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -1902,8 +1894,7 @@ debug_circle_drawlines(circlepoints, duration, color, fillCenter, center) {
     start = circlepoints[i];
     if(i + 1 >= circlepoints.size) {
       end = circlepoints[0];
-    }
-    else {
+    } else {
       end = circlepoints[i + 1];
     }
 

@@ -166,8 +166,7 @@ handle_teargas_volume(var_0) {
 
       if(isDefined(var_4)) {
         var_3 thread ai_flee_from_teargas(var_4);
-      }
-      else {
+      } else {
         var_5 = getent(self.target, "targetname");
 
         if(isDefined(var_5)) {
@@ -213,8 +212,7 @@ add_teargas_cloud_radius(var_0, var_1, var_2) {
 
     if(isDefined(var_2)) {
       badplace_brush(var_13, 15, var_2, "allies");
-    }
-    else {
+    } else {
       badplace_cylinder(var_13, 15, var_1, var_0, 100, "allies");
     }
   }
@@ -224,8 +222,7 @@ add_teargas_cloud_radius(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     badplace_brush(var_14, 15, var_2, "axis");
-  }
-  else {
+  } else {
     badplace_cylinder(var_14, 15, var_1, var_0, 100, "axis");
   }
 
@@ -290,8 +287,7 @@ ai_cough() {
     if(isDefined(self)) {
       if(isalive(self)) {
         self.teargas_coughing = undefined;
-      }
-      else {
+      } else {
         self stopsounds();
       }
     }

@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\system_shared;
-
 #namespace rewindobjects;
 
 autoexec __init__system__() {

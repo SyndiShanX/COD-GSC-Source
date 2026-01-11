@@ -51,7 +51,7 @@ floor_indicators_remove(localclientnum) {
     level notify("kill_floor_indicators_" + localclientnum);
 
     foreach(indicator in indicators) {
-    indicator delete();
+      indicator delete();
     }
   }
 }
@@ -90,8 +90,7 @@ escape_pod_tell_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
   if(newval == 1) {
     self.tell_fx = playFXOnTag(localclientnum, level._effect["elevator_tell"], self, "tag_origin");
-  }
-  else if(isDefined(self.tell_fx)) {
+  } else if(isDefined(self.tell_fx)) {
     stopfx(localclientnum, self.tell_fx);
   }
 }
@@ -101,8 +100,7 @@ escape_pod_sparks_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
   if(newval == 1) {
     self.sparks_fx = playFXOnTag(localclientnum, level._effect["elevator_sparks"], self, "tag_origin");
-  }
-  else if(isDefined(self.sparks_fx)) {
+  } else if(isDefined(self.sparks_fx)) {
     stopfx(localclientnum, self.sparks_fx);
   }
 }
@@ -112,8 +110,7 @@ escape_pod_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
   if(newval == 1) {
     self.impact_fx = playFXOnTag(localclientnum, level._effect["elevator_impact"], self, "tag_origin");
-  }
-  else if(isDefined(self.impact_fx)) {
+  } else if(isDefined(self.impact_fx)) {
     stopfx(localclientnum, self.impact_fx);
   }
 }
@@ -123,8 +120,7 @@ escape_pod_light_fx(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
   if(newval == 1) {
     self.light_fx = playFXOnTag(localclientnum, level._effect["elevator_light"], self, "tag_animate");
-  }
-  else if(isDefined(self.light_fx)) {
+  } else if(isDefined(self.light_fx)) {
     stopfx(localclientnum, self.light_fx);
   }
 }

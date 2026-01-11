@@ -163,8 +163,7 @@ add_context_sensative_timeout(name1, name2, groupNum, timeoutDuration) {
   createStruct = false;
   if(!isDefined(level.context_sensative_dialog_timeouts[name1])) {
     createStruct = true;
-  }
-  else if(!isDefined(level.context_sensative_dialog_timeouts[name1][name2])) {
+  } else if(!isDefined(level.context_sensative_dialog_timeouts[name1][name2])) {
     createStruct = true;
   }
   if(createStruct) {

@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\scene_shared;
-
 #namespace struct;
 
 autoexec __init__() {

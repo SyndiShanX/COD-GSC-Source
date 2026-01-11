@@ -128,7 +128,7 @@ hordeShowDropLocations() {
   while(true) {
     if(GetDvarInt("scr_hordeShowDropLocations") > 0) {
       foreach(dropLocation in level.hordeDropLocations) {
-      drawDropLocation(dropLocation);
+        drawDropLocation(dropLocation);
       }
     }
 

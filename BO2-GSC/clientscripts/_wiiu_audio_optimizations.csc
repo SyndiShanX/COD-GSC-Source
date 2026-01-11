@@ -11,8 +11,7 @@ main() {
   mixthreadcore = backendcore;
   maxaxppcusage = 30;
 
-  if(mapname == "mp_overflow") {
-  }
+  if(mapname == "mp_overflow") {}
 
   if(mapname == "angola") {
     maxaxppcusage = 15;

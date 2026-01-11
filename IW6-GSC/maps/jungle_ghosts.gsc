@@ -54,8 +54,7 @@ main() {
 
   if(maps\jungle_ghosts_util::game_is_pc()) {
     maps\_utility::add_hint_string("hint_drag", &"JUNGLE_GHOSTS_HINT_PLANE_DRAG", ::player_pushing_forward);
-  }
-  else {
+  } else {
     maps\_utility::add_hint_string("hint_drag", &"JUNGLE_GHOSTS_HINT_PLANE_DRAG_NORMAL", ::player_pushing_forward);
   }
 
@@ -484,7 +483,7 @@ init_level_flags() {
   var_0[var_0.size] = "jump_vo_trig";
 
   foreach(var_2 in var_0) {
-  init_flag_and_set_on_targetname_trigger(var_2);
+    init_flag_and_set_on_targetname_trigger(var_2);
   }
 }
 
@@ -553,8 +552,7 @@ should_toggle_silencer() {
   if(isDefined(var_1.size)) {
     if(var_1[0] == "alt") {
       return 1;
-    }
-    else {
+    } else {
       return 0;
     }
   }
@@ -760,7 +758,7 @@ stream_start() {
   var_3 = getaiarray("allies");
 
   foreach(var_6, var_5 in var_2) {
-  var_3[var_6] forceteleport(var_5.origin, var_5.angles);
+    var_3[var_6] forceteleport(var_5.origin, var_5.angles);
   }
 
   setup_squad_stealth();
@@ -796,7 +794,7 @@ stream_waterfall_start() {
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1) {
-  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
+    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
   }
 
   setup_squad_stealth();
@@ -831,7 +829,7 @@ stream_backend_start() {
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1) {
-  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
+    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
   }
 
   setup_squad_stealth();
@@ -868,7 +866,7 @@ tall_grass_start() {
   var_3 = getaiarray("allies");
 
   foreach(var_6, var_5 in var_2) {
-  var_3[var_6] forceteleport(var_5.origin, var_5.angles);
+    var_3[var_6] forceteleport(var_5.origin, var_5.angles);
   }
 
   level.squad = common_scripts\utility::array_combine(level.alpha, level.bravo);
@@ -914,7 +912,7 @@ tall_grass_start_cold() {
   var_3 = getaiarray("allies");
 
   foreach(var_6, var_5 in var_2) {
-  var_3[var_6] forceteleport(var_5.origin, var_5.angles);
+    var_3[var_6] forceteleport(var_5.origin, var_5.angles);
   }
 
   var_7 = getent("stream_backend_moveup", "targetname");
@@ -956,7 +954,7 @@ tall_grass_chopper_start() {
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1) {
-  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
+    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
   }
 
   common_scripts\utility::array_thread(level.alpha, maps\_utility::set_force_color, "r");
@@ -1003,7 +1001,7 @@ runway_start() {
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1) {
-  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
+    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
   }
 
   level.squad = common_scripts\utility::array_combine(level.alpha, level.bravo);
@@ -1041,7 +1039,7 @@ escape_runway_start() {
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1) {
-  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
+    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
   }
 
   common_scripts\utility::array_thread(level.alpha, maps\_utility::set_force_color, "r");
@@ -1080,7 +1078,7 @@ escape_jungle_start() {
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1) {
-  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
+    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
   }
 
   common_scripts\utility::array_thread(level.alpha, maps\_utility::set_force_color, "r");
@@ -1126,7 +1124,7 @@ escape_river_start() {
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1) {
-  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
+    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
   }
 
   common_scripts\utility::array_thread(level.alpha, maps\_utility::set_force_color, "r");
@@ -1164,7 +1162,7 @@ escape_waterfall_start() {
   var_2 = getaiarray("allies");
 
   foreach(var_5, var_4 in var_1) {
-  var_2[var_5] forceteleport(var_4.origin, var_4.angles);
+    var_2[var_5] forceteleport(var_4.origin, var_4.angles);
   }
 
   common_scripts\utility::array_thread(level.alpha, maps\_utility::set_force_color, "r");
@@ -1182,7 +1180,7 @@ escape_setup_swimming() {
   level thread maps\jungle_ghosts_util::player_swim_think();
 
   foreach(var_1 in level.squad) {
-  var_1 thread maps\jungle_ghosts_util::enable_ai_swim();
+    var_1 thread maps\jungle_ghosts_util::enable_ai_swim();
   }
 }
 
@@ -1349,8 +1347,7 @@ world_fire_damage(var_0) {
 
   if(var_0 == "m") {
     var_1 = 25;
-  }
-  else if(var_0 == "l") {
+  } else if(var_0 == "l") {
     var_1 = 50;
   }
 

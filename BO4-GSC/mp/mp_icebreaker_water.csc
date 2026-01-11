@@ -8,7 +8,6 @@
 #include scripts\core_common\postfx_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace mp_icebreaker_water;
 
 autoexec __init__system__() {
@@ -47,7 +46,7 @@ toggle_player_freezing_water(localclientnum, oldval, newval, bnewent, binitialsn
         self.var_f809ca21 = 0;
       }
 
-      self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen", #"reveal threshold", self.var_f809ca21);
+      self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen", # "reveal threshold", self.var_f809ca21);
       wait 5 * 0.2;
     }
 
@@ -71,7 +70,7 @@ toggle_player_freezing_water(localclientnum, oldval, newval, bnewent, binitialsn
       self.var_f809ca21 = 1;
     }
 
-    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen", #"reveal threshold", self.var_f809ca21);
+    self postfx::function_c8b5f318("pstfx_frost_loop_fullscreen", # "reveal threshold", self.var_f809ca21);
     wait 10 * 0.1;
   }
 }

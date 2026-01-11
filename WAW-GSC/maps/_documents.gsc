@@ -56,8 +56,7 @@ get_closest_document(array) {
   }
   if(isDefined(ent)) {
     return array[ent];
-  }
-  else {
+  } else {
     return;
   }
 }

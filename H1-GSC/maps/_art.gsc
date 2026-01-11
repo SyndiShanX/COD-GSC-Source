@@ -66,8 +66,7 @@ create_default_vision_set_fog(var_0) {
 get_fog_filename() {
   if(isusinghdr()) {
     return "\\share\\raw\\maps\\createart\\" + common_scripts\utility::get_template_level() + "_fog_hdr.gsc";
-  }
-  else {
+  } else {
     return "\\share\\raw\\maps\\createart\\" + common_scripts\utility::get_template_level() + "_fog.gsc";
   }
 }
@@ -158,7 +157,7 @@ dof_init() {
   dof_set_generic("results", "current", var_0, var_1, var_2, var_3, var_4, var_5, 1.0, 0.5);
 
   foreach(var_7 in level.players) {
-  var_7 thread dof_update();
+    var_7 thread dof_update();
   }
 
   level.player maps\_utility::delaythread(1, ::dof_monitor_prone);
@@ -179,8 +178,7 @@ dof_enable_script(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(var_6 <= 0.0) {
     dof_set_generic("script", "current", var_0, var_1, var_2, var_3, var_4, var_5, 1.0, var_7);
-  }
-  else if(level.dof["script"]["current"]["weight"] <= 0.0) {
+  } else if(level.dof["script"]["current"]["weight"] <= 0.0) {
     dof_set_generic("script", "current", var_0, var_1, var_2, var_3, var_4, var_5, 0.0, var_7);
   }
 }
@@ -208,15 +206,13 @@ dof_blend_interior_ads_element(var_0, var_1, var_2, var_3) {
 
     if(var_4 > var_2) {
       var_4 = var_2;
-    }
-    else if(var_4 < 1) {
+    } else if(var_4 < 1) {
       var_4 = 1;
     }
 
     if(var_0 - var_4 <= var_1) {
       return var_1;
-    }
-    else {
+    } else {
       return var_0 - var_4;
     }
   } else if(var_0 < var_1) {
@@ -224,15 +220,13 @@ dof_blend_interior_ads_element(var_0, var_1, var_2, var_3) {
 
     if(var_4 > var_2) {
       var_4 = var_2;
-    }
-    else if(var_4 < 1) {
+    } else if(var_4 < 1) {
       var_4 = 1;
     }
 
     if(var_0 + var_4 >= var_1) {
       return var_1;
-    }
-    else {
+    } else {
       return var_0 + var_4;
     }
   }
@@ -246,8 +240,7 @@ dof_blend_interior_ads() {
   if(var_0 < 1.0) {
     if(self adsbuttonpressed() && self playerads() > 0.0) {
       var_0 = min(1, var_0 + 0.7);
-    }
-    else {
+    } else {
       var_0 = 0;
     }
 
@@ -264,8 +257,7 @@ dof_blend_interior_ads() {
 
   if(isDefined(level.dof_blend_interior_ads_scalar)) {
     var_1 = level.dof_blend_interior_ads_scalar;
-  }
-  else {
+  } else {
     var_1 = 0.1;
   }
 
@@ -367,8 +359,7 @@ dof_process_ads() {
 
   if(isDefined(self.dof_ref_ent)) {
     var_12 = combineangles(self.dof_ref_ent.angles, var_11);
-  }
-  else {
+  } else {
     var_12 = var_11;
   }
 
@@ -452,8 +443,7 @@ dof_process_physical_ads(var_0) {
 
   if(isDefined(self.dof_ref_ent)) {
     var_6 = combineangles(self.dof_ref_ent.angles, var_5);
-  }
-  else {
+  } else {
     var_6 = var_5;
   }
 
@@ -570,8 +560,7 @@ javelin_dof(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_6 > 2500) {
       var_6 = 2500;
-    }
-    else if(var_6 < 1000) {
+    } else if(var_6 < 1000) {
       var_6 = 1000;
     }
   }
@@ -651,7 +640,7 @@ tess_init() {
   level.tess.time_remaining = 0.0;
 
   foreach(var_2 in level.players) {
-  var_2 thread tess_update();
+    var_2 thread tess_update();
   }
 }
 

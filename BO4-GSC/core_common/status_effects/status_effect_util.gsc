@@ -10,7 +10,6 @@
 #include scripts\core_common\globallogic\globallogic_score;
 #include scripts\core_common\player\player_role;
 #include scripts\core_common\util_shared;
-
 #namespace status_effect;
 
 private register_status_effect(status_effect_type) {
@@ -339,7 +338,7 @@ private wait_for_end() {
   }
 
   self notify(#"endwaiter");
-  self endon(#"endwaiter", #"endstatuseffect");
+  self endon(#"endwaiter", # "endstatuseffect");
   self.owner endon(#"disconnect");
 
   while(self.endtime > level.time) {
@@ -571,8 +570,8 @@ private function_5d973c5f() {
 
 function_150a8541() {
   self notify(#"loadoutwatcher");
-  self endon(#"loadoutwatcher", #"endstatuseffect");
-  self.owner endon(#"death", #"disconnect");
+  self endon(#"loadoutwatcher", # "endstatuseffect");
+  self.owner endon(#"death", # "disconnect");
   var_eff9d37f = self.owner function_3c54ae98(self.setype);
 
   while(true) {
@@ -591,7 +590,7 @@ function_150a8541() {
 
 function_72886b31() {
   self notify(#"deathwatcher");
-  self endon(#"deathwatcher", #"endstatuseffect");
+  self endon(#"deathwatcher", # "endstatuseffect");
   self.owner waittill(#"death");
 
   if(isDefined(self.var_4b22e697)) {

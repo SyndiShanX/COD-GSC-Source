@@ -49,8 +49,7 @@ ambush_to_seek() {
       flag_wait("detailed_enemy_population_info_available");
       if((level.ambush_to_seeker + level.enemy_seekers) > level.current_enemy_population / 3) {
         continue;
-      }
-      else {
+      } else {
         break;
       }
     }
@@ -93,8 +92,7 @@ release_doggy() {
 
   if(!isDefined(level.gameskill)) {
     num_of_dogs = max(int(getdvar("g_gameskill")), 1);
-  }
-  else {
+  } else {
     num_of_dogs = max(level.gameskill, 1);
   }
 

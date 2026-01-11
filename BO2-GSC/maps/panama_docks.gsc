@@ -389,7 +389,7 @@ elevator_ride() {
   a_end_scene_vehicles = spawn_vehicles_from_targetname("end_scene_vehicles");
 
   foreach(vh_vehicle in a_end_scene_vehicles) {
-  vh_vehicle godon();
+    vh_vehicle godon();
   }
 
   setmusicstate("PANAMA_ELEVATOR");

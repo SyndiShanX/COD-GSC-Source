@@ -38,8 +38,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 stage_vo_max() {
   level endon("sq_wisp_failed");
@@ -295,8 +294,7 @@ ctw_max_fail_watch() {
 
     if(self.n_sq_energy <= 15.0 && !flag("sq_m_wisp_weak")) {
       flag_set("sq_m_wisp_weak");
-    }
-    else if(self.n_sq_energy > 15.0 && flag("sq_m_wisp_weak")) {
+    } else if(self.n_sq_energy > 15.0 && flag("sq_m_wisp_weak")) {
       flag_clear("sq_m_wisp_weak");
     }
 
@@ -374,8 +372,7 @@ ctw_power_up_zombie() {
 
   if(flag("sq_is_max_tower_built")) {
     str_fx = "fx_wisp_m";
-  }
-  else {
+  } else {
     str_fx = "vulture_fx_wisp";
   }
 

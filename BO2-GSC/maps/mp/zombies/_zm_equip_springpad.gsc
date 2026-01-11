@@ -230,8 +230,7 @@ startspringpaddeploy(weapon, armed) {
 
     self thread springpadthink(weapon, electricradius, armed);
 
-    if(!(isDefined(level.equipment_springpad_needs_power) && level.equipment_springpad_needs_power)) {
-    }
+    if(!(isDefined(level.equipment_springpad_needs_power) && level.equipment_springpad_needs_power)) {}
 
     self thread maps\mp\zombies\_zm_buildables::delete_on_disconnect(weapon);
     weapon waittill("death");
@@ -548,8 +547,7 @@ debugspringpad(radius) {
 
       if(isDefined(self.springpad_kills)) {
         text = "" + self.springpad_kills + "";
-      }
-      else if(isDefined(self.owner.springpad_kills)) {
+      } else if(isDefined(self.owner.springpad_kills)) {
         text = "[" + self.owner.springpad_kills + "]";
       }
 

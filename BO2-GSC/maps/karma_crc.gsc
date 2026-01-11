@@ -23,8 +23,7 @@ init_flags() {
   flag_init("crc_breach_guards_spawned");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_crc() {
   iprintln("crc");
@@ -66,7 +65,7 @@ crc_flashbang_add_script_noteworthy(ent) {
 
 init_door_clip() {
   foreach(door in getEntArray("script_doors", "script_noteworthy")) {
-  getent(door.target, "targetname") linkto(door);
+    getent(door.target, "targetname") linkto(door);
   }
 }
 
@@ -74,7 +73,7 @@ init_crc_glass_monster_clip() {
   a_clip_brushes = getEntArray("crc_glass_clip", "targetname");
 
   foreach(e_brush in a_clip_brushes) {
-  e_brush thread crc_glass_monster_clip_think();
+    e_brush thread crc_glass_monster_clip_think();
   }
 }
 
@@ -124,7 +123,7 @@ crc_glass_monster_clip_think() {
 
       if(isDefined(s_start_point.target)) {
         foreach(ent in getEntArray(s_start_point.target, "targetname")) {
-        ent delete();
+          ent delete();
         }
       }
     }
@@ -210,7 +209,7 @@ close_crc_door() {
 
 crc_salazar_terminal_idle() {
   foreach(e_trigger in getEntArray("crc_entrance_color_trigger", "targetname")) {
-  e_trigger delete();
+    e_trigger delete();
   }
 
   level.ai_salazar say_dialog("sala_clear_0", 1.0);

@@ -17,8 +17,7 @@ play_woods_ambulence_dialog() {
   level.player say_dialog("wood_come_on_you_sick_fu_0");
 }
 
-dialog_intro_to_slums() {
-}
+dialog_intro_to_slums() {}
 
 slum_vo_ambulance() {
   flag_wait("ambulance_complete");

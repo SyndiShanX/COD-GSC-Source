@@ -109,8 +109,7 @@ precache_sq() {
   precachevehicle("heli_quadrotor2_zm");
 }
 
-sq_prestart_hide() {
-}
+sq_prestart_hide() {}
 
 sq_buried_clientfield_init() {
   registerclientfield("actor", "buried_sq_maxis_ending_update_eyeball_color", 12000, 1, "int");
@@ -163,7 +162,7 @@ sq_easy_cleanup() {
   sq_buildables = getEntArray("buildable_sq_common", "targetname");
 
   foreach(item in sq_buildables) {
-  item delete();
+    item delete();
   }
 
   t_generator = getent("generator_use_trigger", "targetname");
@@ -220,8 +219,7 @@ init_sidequest() {
   if(level.richcompleted) {
     if(!level.maxcompleted) {
       playfx_on_tower("sq_tower_bolts");
-    }
-    else {
+    } else {
       flag_set("sq_players_out_of_sync");
     }
 
@@ -383,7 +381,7 @@ playfx_on_tower(str_fx, delete_old) {
 
   if(delete_old) {
     foreach(m_fx_spot in a_fx_spots) {
-    m_fx_spot delete();
+      m_fx_spot delete();
     }
   }
 
@@ -395,8 +393,7 @@ playfx_on_tower(str_fx, delete_old) {
 
   if(delete_old) {
     playFX(level._effect[str_fx], s_spot.origin, anglesToForward(s_spot.angles));
-  }
-  else {
+  } else {
     playFXOnTag(level._effect[str_fx], m_fx_spot, "tag_origin");
   }
 }
@@ -409,7 +406,7 @@ sq_give_player_rewards() {
   players = get_players();
 
   foreach(player in players) {
-  player thread sq_give_player_all_perks();
+    player thread sq_give_player_all_perks();
   }
 }
 
@@ -476,11 +473,11 @@ sq_assign_signs() {
   a_ric_signs = array(a_signs[a_sign_keys[3]], a_signs[a_sign_keys[4]], a_max_signs[0]);
 
   foreach(m_sign in a_max_signs) {
-  m_sign.is_max_sign = 1;
+    m_sign.is_max_sign = 1;
   }
 
   foreach(m_sign in a_ric_signs) {
-  m_sign.is_ric_sign = 1;
+    m_sign.is_ric_sign = 1;
   }
 }
 
@@ -492,8 +489,7 @@ complete_sidequest() {
   level thread sidequest_done();
 }
 
-sidequest_done() {
-}
+sidequest_done() {}
 
 init_navcard() {
   flag_wait("start_zombie_round_logic");
@@ -612,8 +608,7 @@ update_sidequest_stats(stat_name) {
 
   if(stat_name == "sq_buried_maxis_complete") {
     maxis_complete = 1;
-  }
-  else if(stat_name == "sq_buried_rich_complete") {
+  } else if(stat_name == "sq_buried_rich_complete") {
     rich_complete = 1;
   }
 
@@ -622,8 +617,7 @@ update_sidequest_stats(stat_name) {
   foreach(player in players) {
     if(stat_name == "sq_buried_started") {
       player.buried_sq_started = 1;
-    }
-    else if(stat_name == "navcard_applied_zm_buried") {
+    } else if(stat_name == "navcard_applied_zm_buried") {
       player maps\mp\zombies\_zm_stats::set_global_stat(level.navcard_needed, 0);
       thread sq_refresh_player_navcard_hud();
     } else if(!(isDefined(player.buried_sq_started) && player.buried_sq_started)) {
@@ -677,7 +671,7 @@ sq_refresh_player_navcard_hud() {
   players = get_players();
 
   foreach(player in players) {
-  player thread sq_refresh_player_navcard_hud_internal();
+    player thread sq_refresh_player_navcard_hud_internal();
   }
 }
 
@@ -717,8 +711,7 @@ richtofensay(vox_line, time, play_in_3d) {
 
   if(isDefined(play_in_3d) && play_in_3d) {
     level.rich_sq_player playSound(vox_line);
-  }
-  else {
+  } else {
     level.rich_sq_player playsoundtoplayer(vox_line, level.rich_sq_player);
   }
 
@@ -1074,8 +1067,7 @@ sq_metagame() {
   if(level.n_metagame_machine_lights_on == 12) {
     if(is_blue_on && is_orange_on) {
       return;
-    }
-    else if(!bulb_on[0] || !bulb_on[1] || !bulb_on[2]) {
+    } else if(!bulb_on[0] || !bulb_on[1] || !bulb_on[2]) {
       return;
     }
   } else
@@ -1110,8 +1102,7 @@ sq_metagame() {
 
   if(is_orange_on) {
     level notify("end_game_reward_starts_maxis");
-  }
-  else {
+  } else {
     level notify("end_game_reward_starts_richtofen");
   }
 }
@@ -1245,8 +1236,7 @@ vo_stuhlingerpossessed() {
   while(true) {
     wait(randomintrange(120, 480));
 
-    for(nvo = randomintrange(1, 8); noldvo == nvo; nvo = randomintrange(1, 8)) {
-    }
+    for(nvo = randomintrange(1, 8); noldvo == nvo; nvo = randomintrange(1, 8)) {}
 
     noldvo = nvo;
 

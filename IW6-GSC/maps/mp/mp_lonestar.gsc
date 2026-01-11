@@ -308,8 +308,7 @@ quake_event_trigger(duration, waitTime) {
 quake_event_wait() {
   if(isDefined(self.script_wait)) {
     return self.script_wait;
-  }
-  else if(isDefined(self.script_wait_min) && isDefined(self.script_wait_max)) {
+  } else if(isDefined(self.script_wait_min) && isDefined(self.script_wait_max)) {
     return RandomFloatRange(self.script_wait_min, self.script_wait_max);
   }
 
@@ -321,23 +320,17 @@ quake_event_trigger_wait(func, var1, var2, var3, var4, var5, var6) {
     self waittill("trigger", quakeTime);
     if(isDefined(var6)) {
       self thread[[func]](quakeTime, var1, var2, var3, var4, var5, var6);
-    }
-    else if(isDefined(var5)) {
+    } else if(isDefined(var5)) {
       self thread[[func]](quakeTime, var1, var2, var3, var4, var5);
-    }
-    else if(isDefined(var4)) {
+    } else if(isDefined(var4)) {
       self thread[[func]](quakeTime, var1, var2, var3, var4);
-    }
-    else if(isDefined(var3)) {
+    } else if(isDefined(var3)) {
       self thread[[func]](quakeTime, var1, var2, var3);
-    }
-    else if(isDefined(var2)) {
+    } else if(isDefined(var2)) {
       self thread[[func]](quakeTime, var1, var2);
-    }
-    else if(isDefined(var1)) {
+    } else if(isDefined(var1)) {
       self thread[[func]](quakeTime, var1);
-    }
-    else {
+    } else {
       self thread[[func]](quakeTime);
     }
   }
@@ -749,8 +742,7 @@ quake_event_pole_link_nodes() {
     assert(nodes.size == 2);
     if(isDefined(nodes[0].target) && isDefined(nodes[1].targetname) && nodes[0].target == nodes[1].targetname) {
       ConnectNodePair(nodes[0], nodes[1], true);
-    }
-    else {
+    } else {
       ConnectNodePair(nodes[1], nodes[0], true);
     }
   }
@@ -760,8 +752,7 @@ quake_event_pole_link_nodes() {
     assert(nodes2.size == 2);
     if(isDefined(nodes2[0].target) && isDefined(nodes2[1].targetname) && nodes2[0].target == nodes2[1].targetname) {
       ConnectNodePair(nodes2[0], nodes2[1], true);
-    }
-    else {
+    } else {
       ConnectNodePair(nodes2[1], nodes2[0], true);
     }
   }

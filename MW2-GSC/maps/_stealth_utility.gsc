@@ -551,7 +551,7 @@ stealth_plugin_event_all(array) {
 
   if(isDefined(array)) {
     foreach(key, value in array) {
-    self maps\_stealth_event_enemy::stealth_event_mod(key, value);
+      self maps\_stealth_event_enemy::stealth_event_mod(key, value);
     }
   }
 }
@@ -1597,11 +1597,11 @@ enable_stealth_system() {
   flag_set("_stealth_enabled");
   ai = getaispeciesarray("all", "all");
   foreach(key, value in ai) {
-  value enable_stealth_for_ai();
+    value enable_stealth_for_ai();
   }
 
   foreach(player in level.players) {
-  player maps\_stealth_visibility_friendly::friendly_visibility_logic();
+    player maps\_stealth_visibility_friendly::friendly_visibility_logic();
   }
 
   maps\_stealth_visibility_system::system_event_change("hidden");
@@ -1625,7 +1625,7 @@ disable_stealth_system() {
   flag_clear("_stealth_enabled");
   ai = getaispeciesarray("all", "all");
   foreach(key, value in ai) {
-  value disable_stealth_for_ai();
+    value disable_stealth_for_ai();
   }
 
   foreach(player in level.players) {

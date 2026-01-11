@@ -7,7 +7,7 @@ catchup_function() {
   var_0 = ["apache_chase_gunboat", "apache_chase_gaz_road", "apache_chase_gunboat_hvt", "apache_chase_zpu", "apache_chase_additional_zpu"];
 
   foreach(var_2 in var_0) {
-  maps\_utility::array_delete(getEntArray(var_2, "targetname"));
+    maps\_utility::array_delete(getEntArray(var_2, "targetname"));
   }
 }
 
@@ -47,7 +47,7 @@ apache_chase_enemies() {
   getent("apache_chase_gunboat_hvt", "targetname").script_vehicle_selfremove = 1;
 
   foreach(var_2 in var_0) {
-  maps\_utility::array_spawn_function_targetname(var_2, ::apache_chase_enemies_turret_think_delay);
+    maps\_utility::array_spawn_function_targetname(var_2, ::apache_chase_enemies_turret_think_delay);
   }
 
   var_0 = common_scripts\utility::array_combine(var_0, ["apache_chase_zpu", "apache_chase_additional_zpu"]);
@@ -57,8 +57,7 @@ apache_chase_enemies() {
   foreach(var_2 in var_0) {
     if(var_2 == "apache_chase_zpu" || var_2 == "apache_chase_additional_zpu") {
       var_5 = common_scripts\utility::array_combine(var_5, spawn_vehicles_not_already_spawning(var_2));
-    }
-    else {
+    } else {
       var_5 = common_scripts\utility::array_combine(var_5, maps\_vehicle_code::spawn_vehicles_from_targetname_newstyle(var_2));
     }
 

@@ -34,23 +34,20 @@ cover_wall_think(coverType) {
     if(coverType == "crouch") {
       if(isRPD(self.weapon)) {
         weaponInfo = "rpd_bipod_crouch";
-      }
-      else {
+      } else {
         weaponInfo = "saw_bipod_crouch";
       }
     } else {
       if(isRPD(self.weapon)) {
         weaponInfo = "rpd_bipod_stand";
-      }
-      else {
+      } else {
         weaponInfo = "saw_bipod_stand";
       }
     }
 
     if(isRPD(self.weapon)) {
       weaponModel = "weapon_rpd_MG_Setup";
-    }
-    else {
+    } else {
       weaponModel = "weapon_saw_MG_Setup";
     }
 
@@ -95,8 +92,7 @@ cover_wall_think(coverType) {
 
   if(self.coverType == "stand") {
     self.a.special = "cover_stand";
-  }
-  else {
+  } else {
     self.a.special = "cover_crouch";
   }
 
@@ -171,8 +167,7 @@ popUpAndShoot() {
     if(usingRocketLauncher() && (distSqToShootPos < squared(512) || self.a.rockets < 1)) {
       if(self.a.pose == "stand") {
         animscripts\shared::throwDownWeapon( % RPG_stand_throw);
-      }
-      else {
+      } else {
         animscripts\shared::throwDownWeapon( % RPG_crouch_throw);
       }
     }
@@ -222,13 +217,13 @@ shootAsTold() {
 
       // NYI
       /*changeCoverMode();
-			
+      			
       // if they're moving too fast for us to respond intelligently to them,
       // give up on firing at them for the moment
       if( needToChangeCoverMode() ) {
       	break;
       }
-			
+      			
       continue;*/
     }
 
@@ -311,8 +306,7 @@ idle() {
     useTwitch = (randomint(2) == 0 && animArrayAnyExist("hide_idle_twitch"));
     if(useTwitch) {
       idleanim = animArrayPickRandom("hide_idle_twitch");
-    }
-    else {
+    } else {
       idleanim = animarray("hide_idle");
     }
 
@@ -346,8 +340,7 @@ flinch() {
 playIdleAnimation(idleAnim, needsRestart) {
   if(needsRestart) {
     self setFlaggedAnimKnobAllRestart("idle", idleAnim, % body, 1, 0.25, 1);
-  }
-  else {
+  } else {
     self setFlaggedAnimKnobAll("idle", idleAnim, % body, 1, 0.25, 1);
   }
 
@@ -370,8 +363,7 @@ look(lookTime) {
   lookanim = undefined;
   if(self isSuppressedWrapper()) {
     lookanim = animArray("look_to_hide_fast");
-  }
-  else {
+  } else {
     lookanim = animArray("look_to_hide");
   }
 
@@ -429,8 +421,7 @@ pop_up() {
 
   if(self.coverType == "crouch") {
     self setup_cover_crouch(newCoverMode);
-  }
-  else {
+  } else {
     self setup_cover_stand(newCoverMode);
   }
 
@@ -439,8 +430,7 @@ pop_up() {
 
   if(self.coverType == "stand") {
     self.a.special = "cover_stand_aim";
-  }
-  else {
+  } else {
     self.a.special = "cover_crouch_aim";
   }
 
@@ -492,8 +482,7 @@ DoNoteTracksForPopup(animname) {
 setup_additive_aim(transTime) {
   if(self.a.coverMode == "left" || self.a.coverMode == "right") {
     aimCoverMode = "crouch";
-  }
-  else {
+  } else {
     aimCoverMode = self.a.coverMode;
   }
 
@@ -546,8 +535,7 @@ go_to_hide() {
 
   if(self.coverType == "stand") {
     self.a.special = "cover_stand";
-  }
-  else {
+  } else {
     self.a.special = "cover_crouch";
   }
 
@@ -570,8 +558,7 @@ tryThrowingGrenade(throwAt, safe) {
   } else {
     if(isDefined(safe) && safe) {
       theanim = animArrayPickRandom("grenade_safe");
-    }
-    else {
+    } else {
       theanim = animArrayPickRandom("grenade_exposed");
     }
   }
@@ -715,8 +702,7 @@ setup_crouching_anim_array(exposedAnimSet) {
   if(weapon_pump_action_shotgun()) {
     if(exposedAnimSet == "lean" || exposedAnimSet == "stand") {
       anim_array["single"] = array( % shotgun_stand_fire_1A);
-    }
-    else {
+    } else {
       anim_array["single"] = array( % shotgun_crouch_fire);
     }
   } else {
@@ -801,8 +787,7 @@ setup_standing_anim_array(exposedAnimSet) {
 
     if(weapon_pump_action_shotgun()) {
       anim_array["single"] = array( % shotgun_stand_fire_1A);
-    }
-    else {
+    } else {
       anim_array["single"] = array( % exposed_shoot_semi1);
     }
 

@@ -5,8 +5,7 @@
 
 #include maps\mp\_utility;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_mp_sand_blowing_lg_slow"] = loadfx("maps/mp_maps/fx_mp_sand_blowing_lg_slow");

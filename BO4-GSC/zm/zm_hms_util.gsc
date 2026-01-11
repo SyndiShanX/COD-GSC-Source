@@ -23,7 +23,6 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_hms_util;
 
 autoexec __init__system__() {
@@ -100,7 +99,7 @@ function_51b752a9(str_alias, n_variant = int(-1), b_wait_if_busy = 0, var_a97d4e
   }
 
   level endon(#"game_ended");
-  self endon(#"player_downed", #"death", #"disconnect");
+  self endon(#"player_downed", # "death", # "disconnect");
 
   if(!zm_utility::is_player_valid(self)) {
     return;
@@ -411,8 +410,8 @@ function_6d41bab8(v_pos, n_radius) {
   if(isDefined(v_pos)) {
     v_drop_point = function_9cc082d2(v_pos, 64);
 
-    if(isDefined(v_drop_point) && zm_utility::check_point_in_playable_area(v_drop_point[#"point"])) {
-      return v_drop_point[#"point"];
+    if(isDefined(v_drop_point) && zm_utility::check_point_in_playable_area(v_drop_point[# "point"])) {
+      return v_drop_point[# "point"];
     }
 
     if(!isDefined(v_drop_point) && isDefined(n_radius)) {
@@ -426,7 +425,7 @@ function_6d41bab8(v_pos, n_radius) {
 }
 
 function_45bb11e4(spot) {
-  self endoncallback(&zm_spawner::function_fe3cb19a, #"death");
+  self endoncallback(&zm_spawner::function_fe3cb19a, # "death");
   self.var_5535a47d = 1;
   self zm_spawner::function_fe3cb19a();
   self.mdl_anchor = util::spawn_model("tag_origin", self.origin, self.angles);
@@ -438,7 +437,7 @@ function_45bb11e4(spot) {
 
   self.mdl_anchor moveto(spot.origin, 0.05);
   self.mdl_anchor rotateto(spot.angles, 0.05);
-  self.mdl_anchor waittill(#"movedone", #"death");
+  self.mdl_anchor waittill(#"movedone", # "death");
   waitframe(1);
   self.create_eyes = 1;
   self show();
@@ -453,7 +452,7 @@ function_45bb11e4(spot) {
 
   if(isDefined(self.archetype)) {
     switch (self.archetype) {
-      case #"nova_crawler":
+      case # "nova_crawler":
         str_shot_name = "nova_crawler";
         break;
     }
@@ -522,7 +521,7 @@ function_a496116d(e_player, n_cost) {
   }
 
   self zm_utility::play_sound_on_ent("no_purchase");
-  e_player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
+  e_player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
   return 0;
 }
 
@@ -676,7 +675,7 @@ private devgui() {
     str_command = getdvarstring(#"hash_6c7113bf98c41367", "<dev string:x9d>");
 
     switch (str_command) {
-      case #"give_targets":
+      case # "give_targets":
         zm_devgui::zombie_devgui_goto_round(10);
         level flag::set(#"spawn_zombies");
         level flag::set(#"infinite_round_spawning");

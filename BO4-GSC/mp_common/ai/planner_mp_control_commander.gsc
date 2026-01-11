@@ -11,7 +11,6 @@
 #include scripts\core_common\ai\systems\planner;
 #include scripts\mp_common\ai\planner_mp_commander_utility;
 #include scripts\mp_common\ai\planner_mp_control_squad;
-
 #namespace plannermpcontrolcommander;
 
 private createcommanderplanner(team) {
@@ -26,7 +25,7 @@ createcommander(team) {
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreBotPresence");
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreForceGoal");
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreTeam");
-  plannercommanderutility::addsquadevaluator(commander, "commanderScoreAge", [#"maxage": 20000]);
+  plannercommanderutility::addsquadevaluator(commander, "commanderScoreAge", [# "maxage": 20000]);
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreAlive");
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreControlZones");
   return commander;

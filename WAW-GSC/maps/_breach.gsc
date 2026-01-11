@@ -120,8 +120,7 @@ breach_think(aBreachers, sBreachType, sHintString, bSpawnHostiles, bPlayDefaultF
   }
   if(iFirstBreachers > 0) {
     assertEx(iFirstBreachers == 1, ".firstBreacher property has been set on " + iFirstBreachers + " AI. Max is one AI ");
-  }
-  else {
+  } else {
     self.closestAI = getClosest(self.animEnt.origin, aBreachers);
   }
   if(aBreachers.size == 1) {
@@ -207,8 +206,7 @@ breacher_think(eVolume, sBreachType, bShoot) {
   sAnimFlash = undefined;
   if(self == eVolume.closestAI) {
     AInumber = "01";
-  }
-  else {
+  } else {
     AInumber = "02";
   }
   if((eVolume.singleBreacher == true) && (sBreachType == "explosive_breach_left")) {
@@ -218,8 +216,7 @@ breacher_think(eVolume, sBreachType, bShoot) {
     case "explosive_breach_left":
       if((isDefined(self.usebreachapproach)) && (self.usebreachapproach == false)) {
         sAnimStart = "detcord_stack_left_start_no_approach_" + AInumber;
-      }
-      else {
+      } else {
         sAnimStart = "detcord_stack_left_start_" + AInumber;
       }
       sAnimIdle = "detcord_stack_leftidle_" + AInumber;
@@ -501,8 +498,7 @@ door_open(sType, eVolume, bPlaySound) {
 door_connectpaths() {
   if(self.classname == "script_brushmodel") {
     self connectpaths();
-  }
-  else {
+  } else {
     blocker = getent(self.target, "targetname");
     assertex(isDefined(blocker), "A script_model door needs to target a script_brushmodel that blocks the door.");
     blocker hide();
@@ -516,11 +512,9 @@ door_fall_over(animEnt) {
   vector = undefined;
   if(self.classname == "script_model") {
     vector = anglesToForward(self.angles);
-  }
-  else if(self.classname == "script_brushmodel") {
+  } else if(self.classname == "script_brushmodel") {
     vector = self.vector;
-  }
-  else {
+  } else {
     assertmsg("door needs to be either a script_model or a script_brushmodel");
   }
   dist = (vector[0] * 20, vector[1] * 20, vector[2] * 20);

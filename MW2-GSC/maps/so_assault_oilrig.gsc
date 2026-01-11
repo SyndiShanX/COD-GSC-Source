@@ -15,7 +15,7 @@ main() {
 
   remove_triggers = getEntArray("redshirt_trigger", "targetname");
   foreach(trigger in remove_triggers) {
-  trigger Delete();
+    trigger Delete();
   }
 
   add_start("start_map", ::start_map);
@@ -184,8 +184,7 @@ track_if_player_is_shooting_at_intimidating_heli(eHeli) {
 
     if(!isDefined(attacker) || !isplayer(attacker)) {
       continue;
-    }
-    else {
+    } else {
       flag_set("player_shoots_or_aims_rocket_at_intimidating_heli");
       break;
     }

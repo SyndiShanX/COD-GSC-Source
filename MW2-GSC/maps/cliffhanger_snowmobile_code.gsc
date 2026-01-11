@@ -615,9 +615,9 @@ hk_heli() {
     return;
   }
 
-    if(level.start_point != "snowspawn") {
-      flag_wait("enemies_persue_on_bike");
-    }
+  if(level.start_point != "snowspawn") {
+    flag_wait("enemies_persue_on_bike");
+  }
 
   hk_spawner = getent("hunter_killer", "targetname");
 
@@ -626,7 +626,7 @@ hk_heli() {
     wait(1);
   }
 
-    hk = hk_spawner spawn_vehicle();
+  hk = hk_spawner spawn_vehicle();
   level.hk = hk;
   flag_set("hk_gives_chase");
   hk.attack_progress = 4000;
@@ -637,23 +637,23 @@ hk_heli() {
   hk thread hk_moves();
   hk thread hk_wait_until_player_stops_progressing();
   /*
-	for( ;; )
-	{
-//		hk SetVehGoalPos( level.player.origin + (0,0,1200), false );	
-		angles = vectortoangles( level.player.origin - hk.origin );
-		yaw = angles[ 1 ];
-		if( hk.warnings >= 8 )
-		{
-			hk SetGoalYaw( yaw );
-		}
-		else
-		{
-			hk ClearGoalYaw();
-		}
-		
-		wait( 0.05 );
-	}
-	*/
+  	for( ;; )
+  	{
+  //		hk SetVehGoalPos( level.player.origin + (0,0,1200), false );	
+  		angles = vectortoangles( level.player.origin - hk.origin );
+  		yaw = angles[ 1 ];
+  		if( hk.warnings >= 8 )
+  		{
+  			hk SetGoalYaw( yaw );
+  		}
+  		else
+  		{
+  			hk ClearGoalYaw();
+  		}
+  		
+  		wait( 0.05 );
+  	}
+  	*/
 }
 
 hk_fires_on_player() {
@@ -680,11 +680,10 @@ hk_fires_on_player() {
   forward_dist = level.player.vehicle vehicle_getSpeed() * 80;
   if(forward_dist < 2000 && self.warnings < 9) {
     forward_dist = 2000;
+  } else {
+    if(forward_dist > 4000)
   }
-  else {
-  if(forward_dist > 4000)
-  }
-    forward_dist = 4000;
+  forward_dist = 4000;
 
   forward_org = forward * forward_dist;
   level.hk_lookat_ent.origin = level.player.origin + forward_org;
@@ -910,8 +909,7 @@ hk_wait_until_player_stops_progressing() {
     if(new_index == old_index) {
       if(new_progress < old_progress + req_dist) {
         self.warnings++;
-      }
-      else {
+      } else {
         self.warnings = 0;
       }
     } else

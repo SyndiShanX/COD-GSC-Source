@@ -204,8 +204,7 @@ obj_exfil() {
 
   if(common_scripts\utility::flag("player_at_silenthawk")) {
     objective_state(var_0, "done");
-  }
-  else {
+  } else {
     objective_state(var_0, "failed");
   }
 }
@@ -215,7 +214,7 @@ create_fx_ent_setup() {
   var_0 = getEntArray("deck_intact_odin", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   var_4 = getent("island_antenna", "targetname");
@@ -227,7 +226,7 @@ create_fx_ent_setup() {
   var_7 = getEntArray("deck_damaged", "targetname");
 
   foreach(var_2 in var_7) {
-  var_2 movez(-4096, 0.05);
+    var_2 movez(-4096, 0.05);
   }
 
   var_10 = getEntArray("deck_clean", "targetname");

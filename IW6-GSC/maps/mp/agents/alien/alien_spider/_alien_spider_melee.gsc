@@ -103,8 +103,7 @@ spawnregenpod(var_0) {
 
   if(var_3 == "drained") {
     self setscriptablepartstate(0, "not_killed");
-  }
-  else if(var_3 == "killed") {
+  } else if(var_3 == "killed") {
     self setscriptablepartstate(0, "killed");
 
     if(!isDefined(var_2) && isDefined(self.final_attacker)) {
@@ -211,11 +210,9 @@ spawnregenpodsraw() {
 
   if(var_0 <= 1 && var_0 > 0.66) {
     var_1 = 18;
-  }
-  else if(var_0 <= 0.66 && var_0 > 0.33) {
+  } else if(var_0 <= 0.66 && var_0 > 0.33) {
     var_1 = 15;
-  }
-  else {
+  } else {
     var_1 = 12;
   }
 
@@ -380,16 +377,14 @@ beamsweepattack() {
 
   if(!isDefined(self.sweep_dummy)) {
     self.sweep_dummy = spawn("script_origin", var_7);
-  }
-  else {
+  } else {
     self.sweep_dummy unlink();
     self.sweep_dummy.origin = var_7;
   }
 
   if(!isDefined(self.beam_origin_dummy)) {
     self.beam_origin_dummy = spawn("script_origin", self.origin);
-  }
-  else {
+  } else {
     self.beam_origin_dummy.origin = self.origin;
   }
 
@@ -473,11 +468,9 @@ beamattack() {
 
   if(!maps\mp\alien\_utility::isplayingsolo()) {
     var_1 = 4.5;
-  }
-  else if(isDefined(self.has_fired_beam)) {
+  } else if(isDefined(self.has_fired_beam)) {
     var_1 = 3.5;
-  }
-  else {
+  } else {
     var_1 = 1.75;
   }
 
@@ -562,8 +555,7 @@ beam_anim_turn_monitor(var_0, var_1, var_2) {
 
   if(!isDefined(var_0)) {
     return;
-  }
-  else {
+  } else {
     var_0 endon("death");
   }
 
@@ -583,8 +575,7 @@ beam_anim_turn_monitor(var_0, var_1, var_2) {
     if(var_4.rotatedyaw > var_2) {
       if(var_4.projintooutright > 0) {
         var_5 = 1;
-      }
-      else {
+      } else {
         var_5 = 0;
       }
 
@@ -632,8 +623,7 @@ update_target_dummy(var_0, var_1, var_2) {
 
     if(self.origin[2] <= var_6[2]) {
       var_7 = (0, 0, 0);
-    }
-    else {
+    } else {
       var_8 = distance(var_6, self.origin);
 
       if(var_8 <= 0.001 && var_8 >= -0.001) {
@@ -675,8 +665,7 @@ get_edge_of_cone(var_0, var_1, var_2) {
 
   if(distance(var_7, var_1) <= distance(var_8, var_1)) {
     return var_7;
-  }
-  else {
+  } else {
     return var_8;
   }
 }
@@ -875,8 +864,7 @@ projectilespit() {
 
   if(var_0.size == 0) {
     var_2 = var_1;
-  }
-  else {
+  } else {
     var_2[0] = var_0[0];
 
     for(var_3 = 0; var_3 < 2; var_3++) {
@@ -999,8 +987,7 @@ spitattack(var_0) {
 
   if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active)) {
     playFXOnTag(level._effect["easter_egg_spitter_trail"], var_4, "tag_origin");
-  }
-  else {
+  } else {
     playFXOnTag(level._effect["projectile_spit_trail"], var_4, "tag_origin");
   }
 
@@ -1011,8 +998,7 @@ spitattack(var_0) {
 
   if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active)) {
     stopFXOnTag(level._effect["easter_egg_spitter_trail"], var_4, "tag_origin");
-  }
-  else {
+  } else {
     stopFXOnTag(level._effect["projectile_spit_trail"], var_4, "tag_origin");
   }
 
@@ -1076,18 +1062,15 @@ damage_player(var_0, var_1) {
 
   if(!isDefined(var_0.last_spitter_gas_damage_time)) {
     var_6 = var_2;
-  }
-  else if(var_0.last_spitter_gas_damage_time + var_2 * 1000.0 > var_5) {
+  } else if(var_0.last_spitter_gas_damage_time + var_2 * 1000.0 > var_5) {
     return;
-  }
-  else {
+  } else {
     var_6 = min(var_2, (var_5 - var_0.last_spitter_gas_damage_time) * 0.001);
   }
 
   if(!maps\mp\alien\_utility::isplayingsolo()) {
     var_7 = int(var_3 * var_6);
-  }
-  else {
+  } else {
     var_7 = int(var_4 * var_6);
   }
 
@@ -1330,8 +1313,7 @@ geteggattackindex(var_0) {
 
   if(distancesquared(var_0, self.origin) < var_1) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -1403,8 +1385,7 @@ throwegg(var_0, var_1) {
 
   if(isevenint(var_1)) {
     var_6 linkto(self, "tag_tail_laser_r");
-  }
-  else {
+  } else {
     var_6 linkto(self, "tag_tail_laser_l");
   }
 
@@ -1415,8 +1396,7 @@ throwegg(var_0, var_1) {
 
   if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active)) {
     playFXOnTag(level._effect["easter_egg_trl"], var_6, "tag_origin");
-  }
-  else {
+  } else {
     playFXOnTag(level._effect["egg_launch_trail"], var_6, "tag_origin");
   }
 
@@ -1504,8 +1484,7 @@ burst_out(var_0, var_1, var_2, var_3) {
 
   if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active)) {
     playFX(level._effect["easter_egg_explode"], common_scripts\utility::drop_to_ground(var_5, 32, -500));
-  }
-  else {
+  } else {
     playFX(level._effect["egg_explosion"], common_scripts\utility::drop_to_ground(var_5, 32, -500));
   }
 
@@ -1534,7 +1513,7 @@ clear_ignore_enemy() {
   maps\mp\alien\_utility::disable_alien_scripted();
 
   foreach(var_1 in maps\mp\alien\_utility::get_players()) {
-  self getenemyinfo(var_1);
+    self getenemyinfo(var_1);
   }
 }
 
@@ -1669,8 +1648,7 @@ processeggdamage(var_0, var_1, var_2) {
 
   if(maps\mp\alien\_utility::is_true(level.spider_boss_easter_egg_active)) {
     playFX(level._effect["easter_egg_explode"], common_scripts\utility::drop_to_ground(var_0.origin, 32, -500));
-  }
-  else {
+  } else {
     playFX(level._effect["egg_explosion"], common_scripts\utility::drop_to_ground(var_0.origin, 32, -500));
   }
 
@@ -1777,8 +1755,7 @@ get_posture_spawn_event() {
 
   if(var_2 > var_1) {
     var_0 = var_0 % (var_2 - var_1);
-  }
-  else {
+  } else {
     var_0 = 0;
   }
 
@@ -1887,8 +1864,7 @@ downed_state() {
 
   if(!var_3) {
     maps\mp\agents\_scriptedagents::playanimuntilnotetrack("pain_exit", "pain_exit", "end");
-  }
-  else {
+  } else {
     maps\mp\agents\_scriptedagents::playanimuntilnotetrack("pain_wounded", "pain_wounded", "end");
   }
 

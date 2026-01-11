@@ -174,14 +174,12 @@ scramblerUpdate() {
       }
       if(nearestEnemy < level.scramblerVOOuterRadius) {
         enemyVOScramblerAmount = 1 - ((nearestEnemy - level.scramblerInnerRadius) / (level.scramblerVOOuterRadius - level.scramblerInnerRadius));
-      }
-      else {
+      } else {
         enemyVOScramblerAmount = 0;
       }
       if(nearestFriendly < level.scramblerInnerRadius) {
         friendlyScramblerAmount = 1.0;
-      }
-      else if(nearestFriendly < level.scramblerVOOuterRadius) {
+      } else if(nearestFriendly < level.scramblerVOOuterRadius) {
         friendlyScramblerAmount = 1 - ((nearestFriendly - level.scramblerInnerRadius) / (level.scramblerVOOuterRadius - level.scramblerInnerRadius));
       }
       player SetFriendlyScramblerAmount(friendlyScramblerAmount);
@@ -192,8 +190,7 @@ scramblerUpdate() {
       }
       if(isGlobalScrambler) {
         player SetEnemyGlobalScrambler(1);
-      }
-      else {
+      } else {
         player SetEnemyGlobalScrambler(0);
       }
       if(enemyVOScramblerAmount > 1) {

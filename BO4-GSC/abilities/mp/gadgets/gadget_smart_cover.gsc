@@ -12,7 +12,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\util;
-
 #namespace smart_cover;
 
 autoexec __init__system__() {
@@ -42,7 +41,7 @@ function_a430cceb(attacker, weapon) {
   }
 
   if(isDefined(attacker) && isplayer(attacker) && concertinawire.owner !== attacker && isDefined(weapon)) {
-    attacker stats::function_e24eec31(weapon, #"hash_1c9da51ed1906285", 1);
+    attacker stats::function_e24eec31(weapon, # "hash_1c9da51ed1906285", 1);
   }
 
   self callback::callback(#"hash_15858698313c5f32", {

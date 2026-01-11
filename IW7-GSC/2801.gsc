@@ -44,8 +44,7 @@ func_109C1(var_00) {
 
   if(level.teambased) {
     var_03 scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 40));
-  }
-  else {
+  } else {
     var_03 scripts\mp\entityheadicons::setplayerheadicon(self, (0, 0, 40));
   }
 
@@ -166,7 +165,7 @@ func_13B54(var_00, var_01) {
       var_2.func_109B2 = 1;
 
       foreach(var_04 in level.func_109BE) {
-      var_02 scripts\mp\utility\game::giveperk(var_04);
+        var_02 scripts\mp\utility\game::giveperk(var_04);
       }
 
       if(!(isDefined(var_2.powers) && var_02 scripts\mp\powers::hasequipment("power_speedBoost") && var_2.powers["power_speedBoost"].active)) {
@@ -231,7 +230,7 @@ func_41E0() {
     self.func_109BA = undefined;
 
     foreach(var_01 in level.func_109BE) {
-    scripts\mp\utility\game::removeperk(var_01);
+      scripts\mp\utility\game::removeperk(var_01);
     }
 
     if(isDefined(self.speedstripmod)) {
@@ -315,8 +314,7 @@ func_D534(var_00, var_01) {
     if(isDefined(var_00) && var_04) {
       if(self.team == var_0.team) {
         var_02 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_friendly"), var_03, self, anglestoup(var_0.angles), anglesToForward(var_0.angles));
-      }
-      else {
+      } else {
         var_02 = spawnfxforclient(scripts\engine\utility::getfx("speed_strip_enemy"), var_03, self, anglestoup(var_0.angles), anglesToForward(var_0.angles));
       }
 

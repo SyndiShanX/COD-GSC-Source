@@ -46,12 +46,10 @@ checkcodcasterplayerdataexists(param_00) {
 init() {
   setcodcasterclientmatchdata("map", level.script);
   var_00 = spawnStruct();
-  var_00.playerfields = [
-    ["damageDone", 0],
+  var_00.playerfields = [["damageDone", 0],
     ["longestKillstreak", 0],
     ["shutdowns", 0],
-    ["gametypePoints", 0]
-  ];
+    ["gametypePoints", 0]];
   var_00.players = [];
   level.codcastermatchdata = var_00;
 }

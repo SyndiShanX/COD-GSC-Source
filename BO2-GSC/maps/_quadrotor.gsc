@@ -75,8 +75,7 @@ quadrotor_think() {
   if(isDefined(self.script_startstate)) {
     if(self.script_startstate == "off") {
       self quadrotor_off();
-    }
-    else {
+    } else {
       self.state_machine set_state(self.script_startstate);
     }
   } else
@@ -164,8 +163,7 @@ quadrotor_fireupdate() {
 
       if(isDefined(self.enemy) && isai(self.enemy)) {
         wait(randomfloatrange(2, 2.5));
-      }
-      else {
+      } else {
         wait(randomfloatrange(0.5, 1.5) * maps\_gameskill::getcurrentdifficultysetting("quadrotor_burst_scale"));
       }
     } else
@@ -187,8 +185,7 @@ quadrotor_adjust_goal_for_enemy_height(goalpos) {
   if(isDefined(self.enemy)) {
     if(isai(self.enemy)) {
       offset = 45;
-    }
-    else {
+    } else {
       offset = -100;
     }
 
@@ -240,8 +237,7 @@ quadrotor_movementupdate() {
   if(!self.vehonpath) {
     if(isDefined(self.attachedpath)) {
       self script_delay();
-    }
-    else if(distancesquared(self.origin, self.goalpos) < 10000 && (self.goalpos[2] > old_goalpos[2] + 10 || self.origin[2] + 10 < self.goalpos[2])) {
+    } else if(distancesquared(self.origin, self.goalpos) < 10000 && (self.goalpos[2] > old_goalpos[2] + 10 || self.origin[2] + 10 < self.goalpos[2])) {
       self setvehgoalpos(self.goalpos, 1);
       self pathvariableoffset(vectorscale((0, 0, 1), 20.0), 2);
       self waittill_any_or_timeout(4, "near_goal", "force_goal");
@@ -372,8 +368,7 @@ quadrotor_find_new_position() {
     }
     if(isDefined(node.quadrotor_fails) || isDefined(node.quadrotor_claimed)) {
       score = randomfloat(30);
-    }
-    else {
+    } else {
       score = randomfloat(100);
     }
 
@@ -458,14 +453,11 @@ quadrotor_scripted() {
 quadrotor_get_damage_effect(health_pct) {
   if(health_pct < 0.25) {
     return level._effect["quadrotor_damage04"];
-  }
-  else if(health_pct < 0.5) {
+  } else if(health_pct < 0.5) {
     return level._effect["quadrotor_damage03"];
-  }
-  else if(health_pct < 0.75) {
+  } else if(health_pct < 0.75) {
     return level._effect["quadrotor_damage02"];
-  }
-  else if(health_pct < 0.9) {
+  } else if(health_pct < 0.9) {
     return level._effect["quadrotor_damage01"];
   }
 
@@ -504,8 +496,7 @@ quadrotor_update_damage_fx() {
 
   if(isDefined(effect)) {
     quadrotor_play_single_fx_on_tag(effect, "tag_origin");
-  }
-  else if(isDefined(self.damage_fx_ent)) {
+  } else if(isDefined(self.damage_fx_ent)) {
     self.damage_fx_ent delete();
   }
 }
@@ -534,8 +525,7 @@ quadrotor_damage() {
 
       if(yaw_vel < 0) {
         yaw_vel = yaw_vel - 150;
-      }
-      else {
+      } else {
         yaw_vel = yaw_vel + 150;
       }
 
@@ -688,11 +678,9 @@ quadrotor_fire_for_time(totalfiretime) {
   while(time < totalfiretime && !isDefined(self.emped)) {
     if(isDefined(self.enemy) && isDefined(self.enemy.attackeraccuracy) && self.enemy.attackeraccuracy == 0) {
       self fireweapon(undefined, undefined, 1);
-    }
-    else if(aifirechance > 1) {
+    } else if(aifirechance > 1) {
       self fireweapon(undefined, undefined, firecount % aifirechance);
-    }
-    else {
+    } else {
       self fireweapon();
     }
 
@@ -717,12 +705,10 @@ quadrotor_crash_accel() {
       if(randomint(100) > 40) {
         if(self.velocity[2] > 150.0) {
           self.crash_accel = self.crash_accel * 0.75;
-        }
-        else if(self.velocity[2] < 40.0 && count < 60) {
+        } else if(self.velocity[2] < 40.0 && count < 60) {
           if(abs(self.angles[0]) > 30 || abs(self.angles[2]) > 30) {
             self.crash_accel = randomfloatrange(160, 200);
-          }
-          else {
+          } else {
             self.crash_accel = randomfloatrange(85, 120);
           }
         }
@@ -780,8 +766,7 @@ quadrotor_collision() {
 
       if(normal[2] < 0.6) {
         fx_origin = self.origin - normal * 28;
-      }
-      else {
+      } else {
         fx_origin = self.origin - normal * 10;
       }
 
@@ -795,8 +780,7 @@ quadrotor_collision() {
         if(self.angles[0] < 0) {
           if(self.angles[0] < -15) {
             self.angles = (-15, self.angles[1], self.angles[2]);
-          }
-          else if(self.angles[0] > -10) {
+          } else if(self.angles[0] > -10) {
             self.angles = (-10, self.angles[1], self.angles[2]);
           }
         } else if(self.angles[0] > 15)
@@ -815,8 +799,7 @@ quadrotor_collision() {
 
         if(normal[2] < 0.6) {
           fx_origin = self.origin - normal * 28;
-        }
-        else {
+        } else {
           fx_origin = self.origin - normal * 10;
         }
 
@@ -843,8 +826,7 @@ quadrotor_set_team(team) {
   self.vteam = team;
 
   if(isDefined(self.vehmodelenemy)) {
-    if(issubstr(level.script, "so_rts_")) {
-    } else if(team == "axis") {
+    if(issubstr(level.script, "so_rts_")) {} else if(team == "axis") {
       self setModel(self.vehmodelenemy);
       self setvehweapon("quadrotor_turret_enemy");
     } else {

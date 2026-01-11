@@ -2004,9 +2004,7 @@ func_12C64(param_00, param_01) {
     if(isDefined(level.var_462E[var_04])) {
       var_05 = level.var_462E[var_04];
       if(isDefined(var_05) && isDefined(var_05.var_12BFB)) {
-        [
-          [var_05.var_12BFB]
-        ](param_00);
+        [[var_05.var_12BFB]](param_00);
       }
     }
 

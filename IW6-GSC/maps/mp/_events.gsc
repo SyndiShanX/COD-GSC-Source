@@ -45,8 +45,7 @@ init() {
 
     if(ref == "win" || ref == "loss" || ref == "tie") {
       value = float(value);
-    }
-    else {
+    } else {
       value = int(value);
     }
 
@@ -133,8 +132,7 @@ onPlayerConnect() {
 damagedPlayer(victim, damage, weapon) {
   if(damage < 50 && damage > 10) {
     self maps\mp\killstreaks\_killstreaks::giveAdrenaline("damage");
-  }
-  else {
+  } else {
     self maps\mp\killstreaks\_killstreaks::giveAdrenaline("heavy_damage");
   }
 }
@@ -156,8 +154,7 @@ killedPlayerNotifySys(killId, victim, weapon, meansOfDeath) {
 
   if(self.killsInAFrameCount > 1) {
     self thread notifyKilledPlayer(killId, victim, weapon, meansOfDeath, self.killsInAFrameCount);
-  }
-  else {
+  } else {
     self notify("got_a_kill", victim, weapon, meansOfDeath);
   }
 
@@ -236,8 +233,7 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
     if(meansOfDeath == "MOD_HEAD_SHOT") {
       if(isDefined(victim.lastStand)) {
         execution(killId, weapon, meansOfDeath);
-      }
-      else {
+      } else {
         headShot(killId, weapon, meansOfDeath);
       }
     }
@@ -271,15 +267,13 @@ killedPlayer(killId, victim, weapon, meansOfDeath) {
 
     if(isDefined(victim.attackerPosition)) {
       attackerPosition = victim.attackerPosition;
-    }
-    else {
+    } else {
       attackerPosition = self.origin;
     }
 
     if(isPointBlank(self, weapon, meansOfDeath, attackerPosition, victim)) {
       self thread pointblank(killId, weapon, meansOfDeath);
-    }
-    else if(isLongShot(self, weapon, meansOfDeath, attackerPosition, victim)) {
+    } else if(isLongShot(self, weapon, meansOfDeath, attackerPosition, victim)) {
       self thread longshot(killId, weapon, meansOfDeath);
     }
 

@@ -8,8 +8,7 @@
 #include clientscripts\mp\createfx\mp_takeoff_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_light_exit_sign"] = loadfx("light/fx_light_exit_sign_glow");

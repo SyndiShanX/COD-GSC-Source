@@ -1029,8 +1029,7 @@ screenshake(scale, duration, fade_in, fade_out) {
   fade_in_frame_count = fade_in * RUMBLE_FRAMES_PER_SEC;
   if(fade_in_frame_count > 0) {
     fade_in_scale_step = scale / fade_in_frame_count;
-  }
-  else {
+  } else {
     fade_in_scale_step = scale;
   }
 
@@ -1038,8 +1037,7 @@ screenshake(scale, duration, fade_in, fade_out) {
   fade_out_start_frame = frame_count - fade_out_frame_count;
   if(fade_out_frame_count > 0) {
     fade_out_scale_step = scale / fade_out_frame_count;
-  }
-  else {
+  } else {
     fade_out_scale_step = scale;
   }
 
@@ -1168,7 +1166,7 @@ threewayfight_threads() {
       if(level.ai_cap[self.team] < level.ai_cap[self.team + "_alive"] && !isDefined(self.ridingvehicle)) {
         println("^2didn't spawn " + self.team + " guy because of ai_cap.");
 
-          self waittill("finished spawning");
+        self waittill("finished spawning");
         self delete();
       } else {
         self thread ai_cap_count();
@@ -1235,8 +1233,9 @@ react_to_player() {
     if(
       (msg == "bulletwhizby" && self.waittill_stack.a == level.player) ||
       (msg == "damage" && self.waittill_stack.b == level.player)
-    )
+    ) {
       break;
+    }
   }
 
   self waittill_stack_clear(); // removes variables used by waittill_stack.
@@ -1367,7 +1366,7 @@ littlebird_reaction(path_name) {
     // debug shit
     level thread mark_heli_path(current_path);
 
-      self SetMaxPitchRoll(25, 25);
+    self SetMaxPitchRoll(25, 25);
     self maps\_vehicle::set_heli_move("fast");
     self Vehicle_SetSpeed(65, 25, 25);
 
@@ -1438,8 +1437,7 @@ rpg_guy() {
 
   if(isDefined(goal.radius)) {
     self.goalradius = goal.radius;
-  }
-  else {
+  } else {
     self.goalradius = 32;
   }
 
@@ -1503,8 +1501,7 @@ spray_guy() {
   node = getnode(self.target, "targetname");
   if(isDefined(node.radius)) {
     self.goalradius = node.radius;
-  }
-  else {
+  } else {
     self.goalradius = 32;
   }
   self setgoalnode(node);
@@ -1525,8 +1522,7 @@ spray_guy() {
   self SetEntityTarget(target_arr[0], 1);
   if(isDefined(self.script_wait)) {
     move_time = self.script_wait;
-  }
-  else {
+  } else {
     move_time = randomfloatrange(1, 2.5);
   }
 
@@ -1606,8 +1602,7 @@ delete_excess() {
       }
       if(isDefined(safe_volume) && guy istouching(safe_volume)) {
         continue;
-      }
-      else if(!isDefined(safe_volume) && DistanceSquared(guy.origin, level.player.origin) < dist) {
+      } else if(!isDefined(safe_volume) && DistanceSquared(guy.origin, level.player.origin) < dist) {
         continue;
       }
 
@@ -1807,8 +1802,7 @@ guy_free_attack(guy, pos) {
   while(true) {
     if(within_fov(self.origin, self.angles, level.player.origin, fov)) {
       stance = "stand";
-    }
-    else {
+    } else {
       stance = "crouch";
     }
 
@@ -2274,7 +2268,7 @@ main_turret_think(target_ai) {
 
     println("btr80 aquired a new target");
 
-      self ent_flag_set("have_target");
+    self ent_flag_set("have_target");
     self main_turret_attack(target_ent, (0, 0, 20), false, 5);
     self ent_flag_clear("have_target");
   }
@@ -2292,8 +2286,7 @@ main_turret_attack(target_ent, offset, no_vis, timeout) {
 
   if(!isDefined(target_ent.fake_target)) {
     self SetTurretTargetEnt(target_ent, offset);
-  }
-  else {
+  } else {
     self SetTurretTargetEnt(target_ent.fake_target, offset);
   }
 
@@ -2397,11 +2390,9 @@ get_ai_enemies() {
   team = "";
   if(isDefined(self.team)) {
     team = self.team;
-  }
-  else if(isDefined(self.script_team)) {
+  } else if(isDefined(self.script_team)) {
     team = self.script_team;
-  }
-  else {
+  } else {
     assertmsg("get_ai_enemies used on entity with no team");
   }
 
@@ -2419,8 +2410,7 @@ get_ai_enemies() {
   if(team != "allies") {
     if(enemies.size > 0) {
       enemies = array_insert(enemies, level.player, 0);
-    }
-    else {
+    } else {
       enemies[0] = level.player;
     }
   }
@@ -2484,8 +2474,7 @@ random_delayed_kill(min_delay, max_delay) {
 
   if(isDefined(guy)) {
     self Kill(guy getEye(), guy);
-  }
-  else {
+  } else {
     self Kill(self getEye());
   }
 }
@@ -2611,8 +2600,7 @@ fire_missile(target_arr, number) {
 
     if(isDefined(target_ent.script_delay)) {
       wait target_ent.script_delay;
-    }
-    else {
+    } else {
       wait randomfloatrange(0.2, 0.3);
     }
   }
@@ -2641,7 +2629,7 @@ move_spawn_and_go(path_ent) {
     level thread mark_heli_path(path_ent);
   }
 
-    return vehicle;
+  return vehicle;
 }
 
 new_vehicle_path(path_start) {
@@ -2659,8 +2647,7 @@ turret_fire_control(mg_guy) {
 
     if(flag("minigun_fire")) {
       flag_waitopen("minigun_fire");
-    }
-    else {
+    } else {
       flag_wait("minigun_fire");
     }
   }
@@ -2697,24 +2684,24 @@ drawpath() {
     return;
   }
 
-    while(true) {
-      if(self Vehicle_GetSpeed() < 5) {
-        wait 0.1;
-        continue;
-      }
-      old_origin = self.origin;
+  while(true) {
+    if(self Vehicle_GetSpeed() < 5) {
       wait 0.1;
-
-      Line(old_origin, self.origin, (1, 1, 1), 1, false, 500);
-
-      vector = anglesToForward(self.angles);
-      origin1 = self.origin + (vector * 100);
-      vector = AnglesToRight(self.angles);
-      origin2 = self.origin - (vector * 30);
-      origin3 = self.origin + (vector * 30);
-
-      draw_tri(origin1, origin2, origin3);
+      continue;
     }
+    old_origin = self.origin;
+    wait 0.1;
+
+    Line(old_origin, self.origin, (1, 1, 1), 1, false, 500);
+
+    vector = anglesToForward(self.angles);
+    origin1 = self.origin + (vector * 100);
+    vector = AnglesToRight(self.angles);
+    origin2 = self.origin - (vector * 30);
+    origin3 = self.origin + (vector * 30);
+
+    draw_tri(origin1, origin2, origin3);
+  }
 }
 
 mark_heli_path(ent) {
@@ -2836,8 +2823,7 @@ debug_stance(stance) {
     if(getdvarint("debug_stance", 0)) {
       if(stance == "stand") {
         Print3d(self.origin + (0, 0, 80), "S");
-      }
-      else {
+      } else {
         Print3d(self.origin + (0, 0, 80), "C");
       }
     }

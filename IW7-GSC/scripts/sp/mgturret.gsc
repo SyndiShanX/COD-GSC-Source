@@ -905,9 +905,7 @@ func_B6A9(param_00, param_01, param_02) {
       }
 
       if(isDefined(self.var_1F5F)) {
-        [
-          [self.var_1F5F]
-        ]();
+        [[self.var_1F5F]]();
       }
 
       if(param_00) {

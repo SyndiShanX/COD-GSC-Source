@@ -11,8 +11,7 @@
 #include clientscripts\mp\_rotating_object;
 
 on_connect(localclientnum) {
-  if(!sessionmodeiszombiesgame()) {
-  }
+  if(!sessionmodeiszombiesgame()) {}
 
   player = getlocalplayer(localclientnum);
   assert(isDefined(player));
@@ -55,8 +54,7 @@ dtp_effects() {
     if(!issplitscreen() && isDefined(localplayer) && localplayer == self) {
       if(isDefined(level.iswinter) && level.iswinter) {
         animateui(localclientnum, "fullscreen_snow", "dirt", "in", 0);
-      }
-      else {
+      } else {
         animateui(localclientnum, "fullscreen_dirt", "dirt", "in", 0);
       }
     }

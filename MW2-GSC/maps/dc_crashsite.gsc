@@ -380,7 +380,7 @@ AAA_sequence_player_crash_site() {
 
   //wait ( 3 );
   foreach(guy in anim_actors_leader_and_dunn) {
-  guy.ignorme = true;
+    guy.ignorme = true;
   }
   level.player.ignoreme = true;
 
@@ -631,12 +631,12 @@ crash_white_out() {
 
   //old way
   /*
-	
+  	
   white_overlay = create_client_overlay( "white", 0 );
   white_overlay fadeOverTime( .75 );
   white_overlay.alpha = 1;
   wait( .75 );
-	
+  	
   */
 
   return white_overlay;
@@ -807,11 +807,9 @@ player_killing_crash_enemies_at_good_pace() {
   timeElapsed = currentTime - level.lasttimePlayerKilledEnemy;
   if(currentTime == level.lasttimePlayerKilledEnemy) {
     return true;
-  }
-  else if(timeElapsed > 5000) {
+  } else if(timeElapsed > 5000) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }

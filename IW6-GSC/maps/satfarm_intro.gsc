@@ -580,7 +580,7 @@ tank_deploy_chutes(var_0) {
   self waittillmatch("single anim", "spawn_main_chutes");
 
   foreach(var_7 in var_4) {
-  var_7 show();
+    var_7 show();
   }
 
   var_1 thread maps\_anim::anim_single(var_4, "main_chute_deploy");
@@ -588,7 +588,7 @@ tank_deploy_chutes(var_0) {
   var_3 delete();
 
   foreach(var_7 in var_4) {
-  var_7 delete();
+    var_7 delete();
   }
 }
 
@@ -705,7 +705,7 @@ start_strafe_1() {
   level.strafe_1_bullet_tags = sortbydistance(level.strafe_1_bullet_tags, level.player.origin);
 
   foreach(var_1 in level.strafe_1_bullet_tags) {
-  var_1 thread bullet_strafe_start();
+    var_1 thread bullet_strafe_start();
   }
 }
 
@@ -714,7 +714,7 @@ start_strafe_2() {
   level.strafe_2_bullet_tags = common_scripts\utility::array_reverse(level.strafe_2_bullet_tags);
 
   foreach(var_1 in level.strafe_2_bullet_tags) {
-  var_1 thread bullet_strafe_start();
+    var_1 thread bullet_strafe_start();
   }
 }
 
@@ -730,7 +730,7 @@ saf_c17_lower_backdoor_top_setup(var_0) {
   var_2 = getEntArray("saf_c17_lower_backdoor_top_script_model", "script_noteworthy");
 
   foreach(var_4 in var_2) {
-  var_4 linkto(var_1);
+    var_4 linkto(var_1);
   }
 
   common_scripts\utility::flag_wait("cargo_doors_opened");
@@ -751,7 +751,7 @@ saf_c17_lower_backdoor_setup(var_0) {
   var_2 = getEntArray("saf_c17_lower_backdoor_script_model", "script_noteworthy");
 
   foreach(var_4 in var_2) {
-  var_4 linkto(var_1);
+    var_4 linkto(var_1);
   }
 
   common_scripts\utility::flag_wait("cargo_doors_opened");

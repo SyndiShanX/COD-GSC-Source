@@ -51,16 +51,14 @@ UpdateState() {
         if(prevState == "none") {
           if(self.moveMode == "run" || self.moveMode == "sprint") {
             self PlaySoundOnMovingEnt(ter_op(self.bIsWolf, "anml_wolf_pants_mp_fast", "anml_dog_pants_mp_fast"));
-          }
-          else {
+          } else {
             self PlaySoundOnMovingEnt(ter_op(self.bIsWolf, "anml_wolf_pants_mp_med", "anml_dog_pants_mp_med"));
           }
         } else {
           if(GetTime() > self.timeOfNextSound) {
             if(RandomInt(10) < 4) {
               self PlaySoundOnMovingEnt(ter_op(self.bIsWolf, "anml_wolf_whine", "anml_dog_whine"));
-            }
-            else {
+            } else {
               self PlaySoundOnMovingEnt(ter_op(self.bIsWolf, "anml_wolf_pants_mp_med", "anml_dog_pants_mp_med"));
             }
             self SetTimeOfNextSound();
@@ -79,8 +77,7 @@ UpdateState() {
 DetermineState() {
   if(ShouldAttackIdle()) {
     return "idle_combat";
-  }
-  else {
+  } else {
     return "idle_noncombat";
   }
 }
@@ -102,8 +99,7 @@ ExitState(prevState) {
 PlayIdleAnim() {
   if(self.animSubstate == "idle_combat") {
     self SetAnimState("attack_idle");
-  }
-  else {
+  } else {
     self SetAnimState("casual_idle");
   }
 }
@@ -112,8 +108,7 @@ UpdateAngle() {
   faceTarget = undefined;
   if(isDefined(self.enemy) && DistanceSquared(self.enemy.origin, self.origin) < 1024 * 1024) {
     faceTarget = self.enemy;
-  }
-  else if(isDefined(self.owner) && DistanceSquared(self.owner.origin, self.origin) > 24 * 24) {
+  } else if(isDefined(self.owner) && DistanceSquared(self.owner.origin, self.origin) > 24 * 24) {
     faceTarget = self.owner;
   }
 
@@ -137,21 +132,17 @@ GetTurnAnimState(angleDiff) {
   if(self ShouldAttackIdle()) {
     if(angleDiff < -135 || angleDiff > 135) {
       return "attack_turn_180";
-    }
-    else if(angleDiff < 0) {
+    } else if(angleDiff < 0) {
       return "attack_turn_right_90";
-    }
-    else {
+    } else {
       return "attack_turn_left_90";
     }
   } else {
     if(angleDiff < -135 || angleDiff > 135) {
       return "casual_turn_180";
-    }
-    else if(angleDiff < 0) {
+    } else if(angleDiff < 0) {
       return "casual_turn_right_90";
-    }
-    else {
+    } else {
       return "casual_turn_left_90";
     }
   }
@@ -250,8 +241,7 @@ DoHitReaction(hitAngle) {
 
   if(angleDiff > 0) {
     animIndex = 1;
-  }
-  else {
+  } else {
     animIndex = 0;
   }
 

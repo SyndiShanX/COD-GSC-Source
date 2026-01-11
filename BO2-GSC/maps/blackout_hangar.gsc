@@ -111,8 +111,7 @@ objective_breadcrumb_to_salazar() {
 
     if(isDefined(t_current.target)) {
       t_current = getent(t_current.target, "targetname");
-    }
-    else {
+    } else {
       t_current = undefined;
     }
   }

@@ -18,8 +18,7 @@ func_13A12() {
 onweapondamage(var_00, var_01, var_02, var_03, var_04) {
   if(!isDefined(var_00)) {
     return;
-  }
-  else if(var_02 == "MOD_IMPACT") {
+  } else if(var_02 == "MOD_IMPACT") {
     return;
   }
   if(issubstr(self.weapon_name, "iw7_tacburst_mpl")) {

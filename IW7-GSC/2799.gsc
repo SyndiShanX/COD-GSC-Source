@@ -352,8 +352,7 @@ logbadspawn(var_00, var_01) {
   }
   if(!isDefined(var_00)) {
     var_00 = "";
-  }
-  else {
+  } else {
     var_00 = var_00;
   }
 
@@ -380,8 +379,7 @@ getspawnpoint(var_00, var_01, var_02, var_03) {
   if(isDefined(var_06)) {
     if(!scripts\mp\utility\game::istrue(var_6.func_9D60)) {
       return var_06;
-    }
-    else {
+    } else {
       var_05 = var_06;
     }
   }
@@ -426,8 +424,7 @@ getspawnpoint(var_00, var_01, var_02, var_03) {
 
     if(isDefined(var_09) && gettime() - var_09 < 5000) {
       var_05 = var_0[randomint(var_0.size)];
-    }
-    else {
+    } else {
       level.spawnglobals.lastbadspawntime[self.team] = gettime();
     }
   }
@@ -443,7 +440,9 @@ getmuzzlepos(var_00, var_01, var_02) {
 
   if(scripts\mp\spawnlogic::shoulduseprecomputedlos() && !scripts\mp\spawnlogic::isttlosdataavailable()) {
     if(isDefined(level.matchrecording_logeventmsg)) {
-      [[level.matchrecording_logeventmsg]]("LOG_GENERIC_MESSAGE", gettime(), "ERROR: TTLOS System disabled! Could not access visDistData");
+      [
+        [level.matchrecording_logeventmsg]
+      ]("LOG_GENERIC_MESSAGE", gettime(), "ERROR: TTLOS System disabled! Could not access visDistData");
     }
 
     if(!isDefined(level.func_8C28)) {

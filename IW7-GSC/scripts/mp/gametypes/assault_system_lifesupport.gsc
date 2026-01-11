@@ -112,9 +112,7 @@ func_BA35() {
     if(!isDefined(self.var_D41E[var_01])) {
       self.var_D41E[var_01] = var_00;
       if(isDefined(self.var_C5B5)) {
-        [
-          [self.var_C5B5]
-        ](self, var_00);
+        [[self.var_C5B5]](self, var_00);
       }
 
       if(self.var_D41E.size == 1) {

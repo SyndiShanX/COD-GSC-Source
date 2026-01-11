@@ -71,7 +71,7 @@ kill_buckets(localclientnum, set, newent) {
 
   if(isstereoon()) {
     foreach(dyn_ent in dyn_ents) {
-    setdynentenabled(dyn_ent, 0);
+      setdynentenabled(dyn_ent, 0);
     }
   }
 }
@@ -95,8 +95,7 @@ link_cardboard_box_to_barge(localclientnum, set, newent) {
 play_tow_futz(localclientnum, set, newent) {
   if(set) {
     enable_filter_custom_tow(level.localplayers[0]);
-  }
-  else {
+  } else {
     disable_filter_custom_tow(level.localplayers[0]);
   }
 }
@@ -104,8 +103,7 @@ play_tow_futz(localclientnum, set, newent) {
 play_tow_highlight(localclientnum, set, newent) {
   if(set) {
     towlockedon = 1;
-  }
-  else {
+  } else {
     towlockedon = 0;
   }
 

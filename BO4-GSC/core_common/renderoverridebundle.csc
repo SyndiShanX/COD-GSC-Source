@@ -9,7 +9,6 @@
 #include scripts\core_common\shoutcaster;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace renderoverridebundle;
 
 autoexec __init__system__() {
@@ -22,8 +21,8 @@ __init__() {
     #var_383fe4d6: []
   };
   callback::on_localclient_connect(&function_d7ae6bbb);
-  function_f72f089c(#"hash_ebb37dab2ee0ae3", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendlyequip_cp" : #"rob_sonar_set_friendlyequip_mp", &function_6803f977);
-  function_f72f089c(#"hash_16bdbd0b3de5c91a", #"hash_71fbf1094f57b910", &function_fac25f84);
+  function_f72f089c(#"hash_ebb37dab2ee0ae3", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", &function_6803f977);
+  function_f72f089c(#"hash_16bdbd0b3de5c91a", # "hash_71fbf1094f57b910", &function_fac25f84);
 }
 
 function_d7ae6bbb(clientnum) {
@@ -83,7 +82,7 @@ function_2dbeddb5(local_client_num, var_166900a8) {
 
 function_e04728e4(local_client_num) {
   while(true) {
-    result = level waittill(#"demo_jump", #"killcam_begin", #"killcam_end", #"player_switch", #"joined_team", #"localplayer_spawned", #"hash_7f642789ed08aae0", #"thermal_toggle");
+    result = level waittill(#"demo_jump", # "killcam_begin", # "killcam_end", # "player_switch", # "joined_team", # "localplayer_spawned", # "hash_7f642789ed08aae0", # "thermal_toggle");
 
     if(result._notify == "killcam_end") {
       function_9129cbe3(local_client_num);
@@ -94,7 +93,7 @@ function_e04728e4(local_client_num) {
 
       if(isalive(entity)) {
         foreach(flag, var_166900a8 in entity_array) {
-          if(shoutcaster::is_shoutcaster(local_client_num) && (var_166900a8 == #"hash_2f86d28434166be7" || var_166900a8 == #"hash_16bdbd0b3de5c91a")) {
+          if(shoutcaster::is_shoutcaster(local_client_num) && (var_166900a8 == # "hash_2f86d28434166be7" || var_166900a8 == # "hash_16bdbd0b3de5c91a")) {
             continue;
           }
 
@@ -162,7 +161,7 @@ fade_bundle(localclientnum, flag, bundle, fadeduration) {
 function_9e7290f5(currenttime, elapsedtime, localclientnum, fadeduration, from, to, bundle) {
   percent = elapsedtime / fadeduration;
   amount = to * percent + from * (1 - percent);
-  self function_78233d29(bundle, "", #"alpha", amount);
+  self function_78233d29(bundle, "", # "alpha", amount);
 }
 
 function_318de8bd(local_client_num, var_80292ef8) {
@@ -230,7 +229,7 @@ function_c8d97b8e(local_client_num, flag, var_166900a8) {
 }
 
 function_6803f977(local_client_num, bundle) {
-  if(!self function_4e0ca360() || self.team === #"free") {
+  if(!self function_4e0ca360() || self.team === # "free") {
     return false;
   }
 
@@ -253,7 +252,7 @@ function_ce7fd1b9(local_client_num, bundle) {
     return false;
   }
 
-  if(self function_4e0ca360() && self.team !== #"free") {
+  if(self function_4e0ca360() && self.team !== # "free") {
     return false;
   }
 

@@ -75,8 +75,8 @@ init() {
       printLn("weapon,mp/" + weapon_name + "_mp");
     }
 
-      // the alphabetize function is slow so we try not to do it for every weapon/attachment combo; a code solution would be better.
-      attachmentNames = [];
+    // the alphabetize function is slow so we try not to do it for every weapon/attachment combo; a code solution would be better.
+    attachmentNames = [];
     for(innerLoopCount = 0; innerLoopCount < 10; innerLoopCount++) {
       // generating attachment combinations
       attachmentName = tablelookup("mp/statStable.csv", 0, weaponId, innerLoopCount + 11);
@@ -120,13 +120,13 @@ init() {
       println("// " + weapon_name + " virtual assets");
     }
 
-      foreach(combo in attachmentCombos) {
-        if(getDvar("scr_dump_weapon_assets") != "") {
-          println("weapon,mp/" + weapon_name + "_" + combo + "_mp");
-        }
-
-          level.weaponList[level.weaponList.size] = weapon_name + "_" + combo + "_mp";
+    foreach(combo in attachmentCombos) {
+      if(getDvar("scr_dump_weapon_assets") != "") {
+        println("weapon,mp/" + weapon_name + "_" + combo + "_mp");
       }
+
+      level.weaponList[level.weaponList.size] = weapon_name + "_" + combo + "_mp";
+    }
   }
 
   foreach(weaponName in level.weaponList) {
@@ -182,8 +182,7 @@ init() {
 
     if(isSubStr(stow_model, "weapon_stow_")) {
       level.stow_offset_array[weapon] = stow_model;
-    }
-    else {
+    } else {
       level.stow_priority_model_array[weapon + "_mp"] = stow_model;
     }
   }
@@ -290,17 +289,13 @@ bombSquadWaiter() {
 
     if(weaponName == "c4_mp") {
       weaponEnt thread createBombSquadModel("weapon_c4_bombsquad", "tag_origin", team, self);
-    }
-    else if(weaponName == "claymore_mp") {
+    } else if(weaponName == "claymore_mp") {
       weaponEnt thread createBombSquadModel("weapon_claymore_bombsquad", "tag_origin", team, self);
-    }
-    else if(weaponName == "frag_grenade_mp") {
+    } else if(weaponName == "frag_grenade_mp") {
       weaponEnt thread createBombSquadModel("projectile_m67fraggrenade_bombsquad", "tag_weapon", team, self);
-    }
-    else if(weaponName == "frag_grenade_short_mp") {
+    } else if(weaponName == "frag_grenade_short_mp") {
       weaponEnt thread createBombSquadModel("projectile_m67fraggrenade_bombsquad", "tag_weapon", team, self);
-    }
-    else if(weaponName == "semtex_mp") {
+    } else if(weaponName == "semtex_mp") {
       weaponEnt thread createBombSquadModel("projectile_semtex_grenade_bombsquad", "tag_weapon", team, self);
     }
   }
@@ -587,7 +582,7 @@ dropWeaponForDeath(attacker) {
       println("didn't drop weapon: not defined");
     }
 
-      return;
+    return;
   }
 
   if(weapon == "none") {
@@ -595,7 +590,7 @@ dropWeaponForDeath(attacker) {
       println("didn't drop weapon: weapon == none");
     }
 
-      return;
+    return;
   }
 
   if(!self hasWeapon(weapon)) {
@@ -603,7 +598,7 @@ dropWeaponForDeath(attacker) {
       println("didn't drop weapon: don't have it anymore (" + weapon + ")");
     }
 
-      return;
+    return;
   }
 
   if(weapon != "riotshield_mp") {
@@ -612,7 +607,7 @@ dropWeaponForDeath(attacker) {
         println("didn't drop weapon: no ammo for weapon modes");
       }
 
-        return;
+      return;
     }
 
     clipAmmoR = self GetWeaponAmmoClip(weapon, "right");
@@ -622,7 +617,7 @@ dropWeaponForDeath(attacker) {
         println("didn't drop weapon: no ammo in clip");
       }
 
-        return;
+      return;
     }
 
     stockAmmo = self GetWeaponAmmoStock(weapon);
@@ -645,7 +640,7 @@ dropWeaponForDeath(attacker) {
     println("dropped weapon: " + weapon);
   }
 
-    self.droppedDeathWeapon = true;
+  self.droppedDeathWeapon = true;
 
   item.owner = self;
   item.ownersattacker = attacker;
@@ -744,7 +739,7 @@ watchPickup() {
     println("picked up weapon: " + weapname + ", " + isDefined(self.ownersattacker));
   }
 
-    assert(isDefined(player.tookWeaponFrom));
+  assert(isDefined(player.tookWeaponFrom));
 
   // make sure the owner information on the dropped item is preserved
   droppedWeaponName = droppedItem getItemWeaponName();
@@ -1043,8 +1038,7 @@ watchGrenadeUsage() {
 
     if(weaponName == "c4_mp") {
       self beginC4Tracking();
-    }
-    else {
+    } else {
       self beginGrenadeTracking();
     }
 
@@ -1269,8 +1263,7 @@ setClaymoreTeamHeadIcon(team) {
   wait .05;
   if(level.teamBased) {
     self maps\mp\_entityheadicons::setTeamHeadIcon(team, (0, 0, 20));
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(self.owner, (0, 0, 20));
   }
 }
@@ -1345,49 +1338,48 @@ showCone(angle, range, color) {
   }
 }
 
-  claymoreDetonation() {
-    self endon("death");
+claymoreDetonation() {
+  self endon("death");
 
-    self waittill("missile_stuck");
+  self waittill("missile_stuck");
 
-    damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - level.claymoreDetonateRadius), 0, level.claymoreDetonateRadius, level.claymoreDetonateRadius * 2);
-    self thread deleteOnDeath(damagearea);
+  damagearea = spawn("trigger_radius", self.origin + (0, 0, 0 - level.claymoreDetonateRadius), 0, level.claymoreDetonateRadius, level.claymoreDetonateRadius * 2);
+  self thread deleteOnDeath(damagearea);
 
-    while(1) {
-      damagearea waittill("trigger", player);
+  while(1) {
+    damagearea waittill("trigger", player);
 
-      if(getdvarint("scr_claymoredebug") != 1) {
-        if(isDefined(self.owner) && player == self.owner) {
-          continue;
-        }
-        if(!friendlyFireCheck(self.owner, player, 0)) {
-          continue;
-        }
-      }
-      if(lengthsquared(player getVelocity()) < 10) {
+    if(getdvarint("scr_claymoredebug") != 1) {
+      if(isDefined(self.owner) && player == self.owner) {
         continue;
       }
-
-      if(!player shouldAffectClaymore(self)) {
+      if(!friendlyFireCheck(self.owner, player, 0)) {
         continue;
       }
-
-      if(player damageConeTrace(self.origin, self) > 0) {
-        break;
-      }
+    }
+    if(lengthsquared(player getVelocity()) < 10) {
+      continue;
     }
 
-    self playSound("claymore_activated");
-
-    if(player _hasPerk("specialty_delaymine")) {
-      wait 3.0;
-    }
-    else {
-      wait level.claymoreDetectionGracePeriod;
+    if(!player shouldAffectClaymore(self)) {
+      continue;
     }
 
-    self detonate();
+    if(player damageConeTrace(self.origin, self) > 0) {
+      break;
+    }
   }
+
+  self playSound("claymore_activated");
+
+  if(player _hasPerk("specialty_delaymine")) {
+    wait 3.0;
+  } else {
+    wait level.claymoreDetectionGracePeriod;
+  }
+
+  self detonate();
+}
 
 shouldAffectClaymore(claymore) {
   if(isDefined(claymore.disabled)) {
@@ -1567,8 +1559,7 @@ c4Damage() {
 
   if(level.c4explodethisframe) {
     wait .1 + randomfloat(.4);
-  }
-  else {
+  } else {
     wait .05;
   }
 
@@ -1685,8 +1676,7 @@ detectIconWaiter(detectTeam) {
 
     if(level.teamBased && player.team != detectTeam) {
       continue;
-    }
-    else if(!level.teamBased && player == self.owner.owner) {
+    } else if(!level.teamBased && player == self.owner.owner) {
       continue;
     }
 
@@ -1905,8 +1895,7 @@ weaponDamageTracePassed(from, to, startRadius, ent) {
     thread debugprint(from, ".dmg");
     if(isDefined(ent)) {
       thread debugprint(to, "." + ent.classname);
-    }
-    else {
+    } else {
       thread debugprint(to, ".undefined");
     }
     if(trace["fraction"] == 1) {
@@ -2223,11 +2212,9 @@ stow_on_back() {
 
       if(stowWeapon == self.primaryWeapon) {
         stowCamo = self.loadoutPrimaryCamo;
-      }
-      else if(stowWeapon == self.secondaryWeapon) {
+      } else if(stowWeapon == self.secondaryWeapon) {
         stowCamo = self.loadoutSecondaryCamo;
-      }
-      else {
+      } else {
         stowCamo = 0;
       }
     }
@@ -2364,8 +2351,7 @@ updateMoveSpeedScale(weaponType) {
 
   if(!isDefined(weaponType) || weaponType == "primary" || weaponType != "secondary") {
     weaponType = self.primaryWeapon;
-  }
-  else {
+  } else {
     weaponType = self.secondaryWeapon;
   }
 
@@ -2376,8 +2362,7 @@ updateMoveSpeedScale(weaponType) {
 
   if(!isDefined(weaponType)) {
     weapClass = "none";
-  }
-  else {
+  } else {
     weapClass = weaponClass(weaponType);
   }
 

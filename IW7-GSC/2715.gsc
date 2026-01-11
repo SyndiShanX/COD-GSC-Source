@@ -82,15 +82,13 @@ updatehitmarker(var_00, var_01, var_02) {
 
   if(var_01) {
     self setclientomnvar("damage_feedback_kill", 1);
-  }
-  else {
+  } else {
     self setclientomnvar("damage_feedback_kill", 0);
   }
 
   if(var_02) {
     self setclientomnvar("damage_feedback_headshot", 1);
-  }
-  else {
+  } else {
     self setclientomnvar("damage_feedback_headshot", 0);
   }
 }

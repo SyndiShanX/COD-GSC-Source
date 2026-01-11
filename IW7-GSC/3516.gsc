@@ -516,8 +516,7 @@ func_114CF() {
 
   if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
   }
 

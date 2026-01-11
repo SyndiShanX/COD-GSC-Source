@@ -192,8 +192,7 @@ watchdamage() {
       if(self.owner isenemyplayer(attacker)) {
         maps\mp\_scoreevents::processscoreevent("destroyed_strafe_run", attacker, self.owner, weapon);
         attacker maps\mp\_challenges::addflyswatterstat(weapon, self);
-      } else {
-      }
+      } else {}
 
       return;
     }
@@ -373,8 +372,7 @@ startstrafe() {
   }
 }
 
-firststrafe() {
-}
+firststrafe() {}
 
 firerockets() {
   self notify("firing_rockets");

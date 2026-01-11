@@ -254,8 +254,7 @@ giveMoney_helper(attacker, type) {
   if((isDefined(type)) && (issubstr(tolower(type), "melee"))) {
     if(juggernaut) {
       killType = "juggernaut_kill_melee";
-    }
-    else {
+    } else {
       killType = "kill_melee";
     }
     playBonusSound = true;
@@ -268,8 +267,7 @@ giveMoney_helper(attacker, type) {
         if(isDefined(self.kill_reward_money)) {
           if(killType == "kill_melee" && isDefined(self.kill_melee_reward_money)) {
             player thread giveMoney(killType, self.kill_melee_reward_money, attacker);
-          }
-          else {
+          } else {
             player thread giveMoney(killType, self.kill_reward_money, attacker);
           }
         } else
@@ -321,7 +319,7 @@ giveMoney_helper(attacker, type) {
 give_objective_reward() {
   if(getdvar("money_sharing") == "1") {
     foreach(player in level.players) {
-    player giveMoney("objective");
+      player giveMoney("objective");
     }
   } else if(isDefined(self) && isPlayer(self))
     self giveMoney("objective");
@@ -411,8 +409,7 @@ updatePlayerMoney(type, value, attacker) {
   if(!isDefined(value)) {
     if(isDefined(level.scoreInfo[type])) {
       value = getScoreInfoValue(type);
-    }
-    else {
+    } else {
       value = getScoreInfoValue("kill");
     }
   }
@@ -423,8 +420,7 @@ updatePlayerMoney(type, value, attacker) {
 
   if(!(type == "kill" || type == "kill_melee" || type == "headshot")) {
     self.summary["summary"]["completion"] += value; // if custom reward type, it counts towards level completion
-  }
-  else if(type == "assist") {
+  } else if(type == "assist") {
     // assist points can never add up over kill points
     if(value > getScoreInfoValue("kill")) {
       value = getScoreInfoValue("kill");
@@ -549,8 +545,7 @@ showMoney(amount) {
 
   if(getDvarInt("scr_loot_slowPrint")) {
     self.moneyString setPulseFX(100, int(getDvarFloat("scr_loot_showTime") * 1000), 1000);
-  }
-  else {
+  } else {
     self.moneyString thread fontPulse(self);
   }
 
@@ -585,8 +580,7 @@ showLoot(lootString, lootIcon, lootSound, lootColor) {
 
   if(getDvarInt("scr_loot_slowPrint")) {
     self.lootString setPulseFX(100, int(getDvarFloat("scr_loot_showTime") * 1000), 1000);
-  }
-  else {
+  } else {
     self.lootString thread fontPulse(self);
   }
 

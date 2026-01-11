@@ -989,8 +989,7 @@ setupBuildingCollapse() {
 
     if(isDefined(curNode.target)) {
       curNode = getstruct(curNode.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -1327,7 +1326,9 @@ debugDescent() {
 checkDbgDvar(dvarName, callback, notifyStr) {
   if(GetDvarInt(dvarName) > 0) {
     if(isDefined(callback)) {
-      [[callback]](GetDvarInt(dvarName));
+      [
+        [callback]
+      ](GetDvarInt(dvarName));
     }
 
     if(isDefined(notifyStr)) {

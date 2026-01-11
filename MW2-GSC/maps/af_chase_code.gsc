@@ -81,8 +81,7 @@ zodiac_treadfx_stop_notify(chaseobj) {
   while(1) {
     if(chaseobj Vehicle_GetSpeed() < 4) {
       chaseobj notify("zodiac_treadfx_stop");
-    }
-    else if(!chaseobj ent_flag("in_air")) {
+    } else if(!chaseobj ent_flag("in_air")) {
       chaseobj notify("zodiac_treadfx_go");
     }
     wait .05;
@@ -254,8 +253,7 @@ listen_landed() {
       }
       if(self == level.players_boat) {
         zodiac_fx("player_zodiac_bumpbig");
-      }
-      else {
+      } else {
         zodiac_fx("zodiac_bumpbig");
       }
 
@@ -267,8 +265,7 @@ listen_landed() {
       }
       if(self == level.players_boat) {
         zodiac_fx("player_zodiac_bump");
-      }
-      else {
+      } else {
         zodiac_fx("zodiac_bump");
       }
     }
@@ -297,8 +294,7 @@ water_bump(bumptype) {
 
   if(bumptype == "bump_big") {
     level.player PlayRumbleOnEntity("damage_heavy");
-  }
-  else {
+  } else {
     level.player PlayRumbleOnEntity("damage_light");
   }
 
@@ -358,15 +354,13 @@ listen_turn_spray() {
     if(self Vehicle_GetSpeed() > 40) {
       if(velocity[1] < -150.0) {
         zodiac_fx("zodiac_sway_right");
-      }
-      else if(velocity[1] > 150.0) {
+      } else if(velocity[1] > 150.0) {
         zodiac_fx("zodiac_sway_left");
       }
     } else if(self Vehicle_GetSpeed() > 10) {
       if(velocity[1] < -30.0) {
         zodiac_fx("zodiac_sway_right_light");
-      }
-      else if(velocity[1] > 30.0) {
+      } else if(velocity[1] > 30.0) {
         zodiac_fx("zodiac_sway_left_light");
       }
     }
@@ -406,8 +400,7 @@ autosave_boat_chase() {
 
   if(isDefined(self.targetname)) {
     autosave_by_name(self.targetname);
-  }
-  else {
+  } else {
     autosave_by_name("boat_chase");
   }
 }
@@ -436,7 +429,7 @@ bread_crumb_chase() {
     return;
   }
 
-    currenttime = GetTime();
+  currenttime = GetTime();
   lastcrumb = undefined;
   test_array = [];
   count = 0;
@@ -479,8 +472,7 @@ bread_crumb_chase() {
 breadcrumb_docatchup(trailing_fraction) {
   if(trailing_fraction < .25) {
     flag_set("zodiac_catchup");
-  }
-  else {
+  } else {
     flag_clear("zodiac_catchup");
   }
 }
@@ -494,8 +486,8 @@ bread_crumb_fail() {
     return;
   }
 
-    // Shepherd got away.
-    level notify("stop_deadquote_for_gettingout_of_bounds");
+  // Shepherd got away.
+  level notify("stop_deadquote_for_gettingout_of_bounds");
   SetDvar("ui_deadquote", &"AF_CHASE_MISSION_FAILED_KEEP_UP");
   if(level.start_point != "test_boat_current") {
     missionFailedWrapper();
@@ -648,9 +640,9 @@ kill_ai_in_volume() {
   ai = GetAIArray();
 
   foreach(guy in ai) {
-  if(guy IsTouching(volume) && !guy is_hero())
+    if(guy IsTouching(volume) && !guy is_hero())
   }
-    guy Delete();
+  guy Delete();
 
   //hack.. shortcutting adding another volume. want to delete these fx forever.
   tester = spawn("script_origin", (0, 0, 0));
@@ -844,8 +836,7 @@ conveyerbelt_speed(yaw, speed, rate) {
   speedinc = 0;
   if(iterations != 0) {
     speedinc = speeddiff / iterations;
-  }
-  else {
+  } else {
     return;
   }
 
@@ -880,11 +871,9 @@ conveyerbelt_player_speed_mod() {
   }
   if(speed > CONVEYERBELT_PLAYER_MAX_SPEED) {
     mod = 0;
-  }
-  else if(speed < CONVEYERBELT_PLAYER_MIN_SPEED) {
+  } else if(speed < CONVEYERBELT_PLAYER_MIN_SPEED) {
     mod = 1;
-  }
-  else {
+  } else {
     players_dif = speed - CONVEYERBELT_PLAYER_MIN_SPEED;
     mod = 1 - (players_dif / dif);
   }
@@ -945,7 +934,7 @@ river_current(noteworthy) {
     return;
   }
 
-    current_node = getstruct(noteworthy, "script_noteworthy");
+  current_node = getstruct(noteworthy, "script_noteworthy");
   next_node = getstruct(current_node.target, "targetname");
 
   maxdropspeed_cos = Cos(35);
@@ -1002,8 +991,7 @@ river_current(noteworthy) {
 
     if(mindropspeed > maxdropspeed_lower_cap) {
       maxdropspeed = mindropspeed + 20;
-    }
-    else {
+    } else {
       maxdropspeed = maxdropspeed_lower_cap;
     }
     next_node = getstruct(current_node.target, "targetname");
@@ -1026,11 +1014,9 @@ river_current(noteworthy) {
 
     if(dot > mindropspeed_cos) {
       speed = mindropspeed;
-    }
-    else if(dot < maxdropspeed_cos) {
+    } else if(dot < maxdropspeed_cos) {
       speed = maxdropspeed;
-    }
-    else {
+    } else {
       speed = maxdropspeed_cos / dot * maxdropspeed;
     }
 
@@ -1113,8 +1099,7 @@ bread_crumb_button() {
     }
     if(flag("debug_crumbs")) {
       flag_clear("debug_crumbs");
-    }
-    else {
+    } else {
       flag_set("debug_crumbs");
     }
     while(level.player ButtonPressed("BUTTON_Y")) {
@@ -1183,7 +1168,7 @@ has_good_enemy_for_grenade_launcher(start, angles) {
     if(Distance(spot.origin, self.enemy.origin) < spot.radius) {
       if(!burning_barrel_in_spots_radius(spot))
     }
-        return true;
+    return true;
   }
 
   return false;
@@ -1530,11 +1515,10 @@ dvar_warn() {
 get_boat_rider(num) {
   if(!isDefined(level.boatrider)) {
     level.boatrider = [];
+  } else {
+    if(isDefined(level.boatrider[num]))
   }
-  else {
-  if(isDefined(level.boatrider[num]))
-  }
-    return level.boatrider[num];
+  return level.boatrider[num];
 
   level.boatrider[num] = spawn_targetname(num, true);
   level.boatrider[num] magic_bullet_shield();
@@ -1651,16 +1635,14 @@ dialog_fire_volley_of_missiles_at_player(base_origin) {
   if(dot < 0) {
     if(cointoss()) {
       level.price thread generic_dialogue_queue("afchase_pri_rightright", .5);
-    }
-    else {
+    } else {
       level.price thread generic_dialogue_queue("afchase_pri_right", .5);
     }
 
   } else {
     if(cointoss()) {
       level.price thread generic_dialogue_queue("afchase_pri_leftleft", .5);
-    }
-    else {
+    } else {
       level.price thread generic_dialogue_queue("afchase_pri_left", .5);
     }
   }
@@ -1731,7 +1713,7 @@ fire_volley_of_missiles_at_player() {
   flag_clear("heli_firing");
   wait 15;
   foreach(ent in shotorgs) {
-  ent Delete();
+    ent Delete();
   }
   linkorg Delete();
 }
@@ -1966,8 +1948,7 @@ setup_boat_for_drive() {
 
   if(!boatrider ent_flag_exist("price_animated_into_boat")) {
     boatrider thread boatrider_think(self);
-  }
-  else {
+  } else {
     boatrider ent_flag_wait("price_animated_into_boat");
     level notify("stop_animate_price_into_boat");
     level.price StopAnimScripted();
@@ -1993,8 +1974,7 @@ price_ai_mods(price) {
   price.baseaccuracy = 25;
 }
 
-players_boat() {
-}
+players_boat() {}
 
 change_target_on_vehicle_spawner(boat_targetname, boat_destination_node) {
   boat = GetEnt(boat_targetname, "targetname");
@@ -2104,12 +2084,12 @@ rpg_bridge_guy_target() {
     if(GetTime() > self.rpg_setup_time) {
       if(bullettraced_to_player)
     }
-        if(BulletTracePassed(self GetTagOrigin("tag_flash"), target_ent.origin + random_vec, false, self)) {
-          if(Distance(self.origin, level.player.origin) < firing_range)
-        }
-            if(GetTime() > level.next_rpg_firetime) {
-              break;
-            }
+    if(BulletTracePassed(self GetTagOrigin("tag_flash"), target_ent.origin + random_vec, false, self)) {
+      if(Distance(self.origin, level.player.origin) < firing_range)
+    }
+    if(GetTime() > level.next_rpg_firetime) {
+      break;
+    }
 
     wait .05;
   }
@@ -2203,7 +2183,7 @@ dialog_boat_battlechatter() {
     return;
   }
 
-    level endon("price_stops_talking_about_helicopters");
+  level endon("price_stops_talking_about_helicopters");
 
   level.player endon("death");
   self endon("death");
@@ -2226,8 +2206,7 @@ dialog_boat_battlechatter() {
 
     if(type == "dialog_direction") {
       level.price thread generic_dialogue_queue(picked + level.dialog_dir, timeout[type]);
-    }
-    else {
+    } else {
       level.price thread generic_dialogue_queue(picked, timeout[type]);
     }
 
@@ -2280,8 +2259,7 @@ dialog_boat_nag() {
 
       if(doradio) {
         level.price thread generic_dialogue_queue(picked, 1);
-      }
-      else {
+      } else {
         level.price thread price_anim_single_on_boat(side + "_" + picked);
       }
 
@@ -2335,15 +2313,14 @@ dialog_boat_direction_nag() {
     return;
   }
 
-    self endon("death");
+  self endon("death");
   level.enemy_boat endon("death");
   level.player endon("death");
 
   while(1) {
     if(!in_front_by_velocity(level.players_boat, level.enemy_boat) && next_nag < GetTime()) {
       wrong_way_time_count += .05;
-    }
-    else {
+    } else {
       wrong_way_time_count = 0;
     }
 
@@ -2640,9 +2617,9 @@ boat_squish_ragdoll_or_bust() {
 make_room_for_priority_squished_guy_corpse() {
   corpses = GetCorpseArray();
   foreach(corpse in corpses) {
-  if(Distance(corpse.origin, level.player getEye()) > 600)
+    if(Distance(corpse.origin, level.player getEye()) > 600)
   }
-    corpse Delete();
+  corpse Delete();
 }
 
 explode_barrels_in_radius_think() {
@@ -2662,7 +2639,7 @@ explode_barrels_in_radius_think() {
 
   for(i = 0; i < 10; i++) {
     foreach(barrel in my_barrels) {
-    barrel notify("damage", 50, level.player, (0, 0, 0), barrel.origin, "MOD_EXPLOSIVE");
+      barrel notify("damage", 50, level.player, (0, 0, 0), barrel.origin, "MOD_EXPLOSIVE");
     }
     wait .05;
 

@@ -50,16 +50,14 @@ UpdateState() {
         if(prevState == "none") {
           if(self.moveMode == "run" || self.moveMode == "sprint") {
             self PlaySoundOnMovingEnt("alien_minion_idle");
-          }
-          else {
+          } else {
             self PlaySoundOnMovingEnt("alien_minion_idle");
           }
         } else {
           if(GetTime() > self.timeOfNextSound) {
             if(RandomInt(10) < 4) {
               self PlaySoundOnMovingEnt("alien_minion_idle");
-            }
-            else {
+            } else {
               self PlaySoundOnMovingEnt("alien_minion_idle");
             }
             self SetTimeOfNextSound();
@@ -78,8 +76,7 @@ UpdateState() {
 DetermineState() {
   if(ShouldAttackIdle()) {
     return "idle_combat";
-  }
-  else {
+  } else {
     return "idle_noncombat";
   }
 }
@@ -101,8 +98,7 @@ ExitState(prevState) {
 PlayIdleAnim() {
   if(self.animSubstate == "idle_combat") {
     self SetAnimState("attack_idle");
-  }
-  else {
+  } else {
     self SetAnimState("casual_idle");
   }
 }
@@ -111,8 +107,7 @@ UpdateAngle() {
   faceTarget = undefined;
   if(isDefined(self.enemy) && DistanceSquared(self.enemy.origin, self.origin) < 1024 * 1024) {
     faceTarget = self.enemy;
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     faceTarget = self.owner;
   }
 
@@ -136,21 +131,17 @@ GetTurnAnimState(angleDiff) {
   if(self ShouldAttackIdle()) {
     if(angleDiff < -135 || angleDiff > 135) {
       return "attack_turn_180";
-    }
-    else if(angleDiff < 0) {
+    } else if(angleDiff < 0) {
       return "attack_turn_right_90";
-    }
-    else {
+    } else {
       return "attack_turn_left_90";
     }
   } else {
     if(angleDiff < -135 || angleDiff > 135) {
       return "casual_turn_180";
-    }
-    else if(angleDiff < 0) {
+    } else if(angleDiff < 0) {
       return "casual_turn_right_90";
-    }
-    else {
+    } else {
       return "casual_turn_left_90";
     }
   }
@@ -249,8 +240,7 @@ DoHitReaction(hitAngle) {
 
   if(angleDiff > 0) {
     animIndex = 1;
-  }
-  else {
+  } else {
     animIndex = 0;
   }
 

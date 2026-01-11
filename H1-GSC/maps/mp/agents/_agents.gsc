@@ -95,8 +95,7 @@ spawn_agent_player(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(self.agent_override_difficulty)) {
     if(self.agent_override_difficulty == "follow_code_and_dev_dvar") {
       maps\mp\bots\_bots_util::bot_set_difficulty(self botgetdifficulty(), 1);
-    }
-    else {
+    } else {
       maps\mp\bots\_bots_util::bot_set_difficulty(var_5);
     }
   } else
@@ -267,18 +266,15 @@ on_agent_generic_damaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7,
   if(isDefined(var_1) && var_1 != self && var_2 > 0 && (!isDefined(var_8) || var_8 != "shield")) {
     if(var_3 &level.idflags_stun) {
       var_12 = "stun";
-    }
-    else if(!maps\mp\gametypes\_damage::shouldweaponfeedback(var_5)) {
+    } else if(!maps\mp\gametypes\_damage::shouldweaponfeedback(var_5)) {
       var_12 = "none";
-    }
-    else {
+    } else {
       var_12 = "standard";
 
       if(isDefined(level.iszombiegame) && level.iszombiegame) {
         if(var_5 == "trap_zm_mp") {
           var_12 = "none";
-        }
-        else if(var_2 < self.health) {
+        } else if(var_2 < self.health) {
           switch (var_8) {
             case "neck":
             case "helmet":
@@ -333,8 +329,7 @@ on_agent_player_killed(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 
     if(maps\mp\_utility::getgametypenumlives() != 1 && (isDefined(self.respawn_on_death) && self.respawn_on_death)) {
       self thread[[maps\mp\agents\_agent_utility::agentfunc("spawn")]]();
-    }
-    else {
+    } else {
       maps\mp\agents\_agent_utility::deactivateagent();
     }
   }
@@ -352,11 +347,9 @@ on_humanoid_agent_killed_common(var_0, var_1, var_2, var_3, var_4, var_5, var_6,
 initplayerclass() {
   if(isDefined(self.class_override)) {
     self.class = self.class_override;
-  }
-  else if(maps\mp\bots\_bots_loadout::bot_setup_loadout_callback()) {
+  } else if(maps\mp\bots\_bots_loadout::bot_setup_loadout_callback()) {
     self.class = "callback";
-  }
-  else {
+  } else {
     self.class = "class1";
   }
 }

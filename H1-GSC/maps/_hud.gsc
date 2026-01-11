@@ -18,8 +18,7 @@ init() {
 
   if(level.console) {
     level.fontheight = 12;
-  }
-  else {
+  } else {
     level.fontheight = 12;
   }
 }

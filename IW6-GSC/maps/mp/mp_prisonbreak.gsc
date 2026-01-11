@@ -103,7 +103,7 @@ initPrisoners() {
 
   spawnPoints = getEntArray("mp_spawn", "classname");
   foreach(spawnPoint in spawnPoints) {
-  level thread createPrisoner(spawnPoint);
+    level thread createPrisoner(spawnPoint);
   }
 }
 
@@ -209,8 +209,7 @@ initInsertionVehicles() {
       path[path.size] = waypoint;
       if(isDefined(waypoint.target)) {
         waypoint = getEnt(waypoint.target, "targetname");
-      }
-      else {
+      } else {
         break;
       }
     }
@@ -267,8 +266,7 @@ attackerRide() {
 
       if(i == 2) {
         exitTag = "tag_walker3";
-      }
-      else {
+      } else {
         exitTag = "tag_walker0";
       }
 
@@ -281,8 +279,7 @@ attackerRide() {
 
       if(i == 2) {
         exitTag = "tag_walker1";
-      }
-      else {
+      } else {
         exitTag = "tag_walker2";
       }
 
@@ -321,8 +318,7 @@ attackerRide() {
 
   if(isDriver) {
     level.sd_insertionVehicles[vehIndex].driver = false;
-  }
-  else {
+  } else {
     level.sd_insertionVehicles[vehIndex].passenger = false;
   }
 }
@@ -350,8 +346,7 @@ vehicleMove(vehicleIndex) {
     decelTime = 0;
     if(i == 0) {
       accelTime = time / 2;
-    }
-    else if(i == path.size - 1) {
+    } else if(i == path.size - 1) {
       decelTime = time / 2;
     }
 
@@ -1300,7 +1295,7 @@ hand_icon_update(type, origin, angles, icon_id, end_ons) {
     }
 
     foreach(end_on in end_ons) {
-    self endon(end_on);
+      self endon(end_on);
     }
   }
 

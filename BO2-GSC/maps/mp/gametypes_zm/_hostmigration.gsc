@@ -41,8 +41,7 @@ updatetimerpausedness() {
   }
 }
 
-callback_hostmigrationsave() {
-}
+callback_hostmigrationsave() {}
 
 callback_prehostmigrationsave() {
   undo_link_changes();
@@ -98,9 +97,9 @@ callback_hostmigration() {
     if(isDefined(level.hostmigration_link_entity_callback)) {
       if(!isDefined(level.players[i]._host_migration_link_entity)) {
         level.players[i]._host_migration_link_entity = level.players[i][
-      }
+          }
           [level.hostmigration_link_entity_callback]
-        ]();
+      ]();
     }
 
     level.players[i] thread hostmigrationtimerthink();
@@ -151,7 +150,7 @@ callback_hostmigration() {
   hostmigrationwait();
 
   foreach(player in level.players) {
-  player thread post_migration_become_vulnerable();
+    player thread post_migration_become_vulnerable();
   }
 
   zombies = getaiarray(level.zombie_team);
@@ -222,9 +221,7 @@ matchstarttimerconsole(type, duration) {
 
   if(counttime >= 2) {
     matchstarttimerconsole_internal(counttime, matchstarttimer);
-  }
-  else {
-  }
+  } else {}
 
   matchstarttimer destroyelem();
   matchstarttext destroyelem();
@@ -401,9 +398,9 @@ find_alternate_player_place(v_origin, min_radius, max_radius, max_height, ignore
 
             if(isDefined(level._chugabud_reject_node_override_func)) {
               override_abort = [
-            }
+                }
                 [level._chugabud_reject_node_override_func]
-              ](v_origin, n_node);
+            ](v_origin, n_node);
 
             if(!override_abort) {
               found_node = n_node;

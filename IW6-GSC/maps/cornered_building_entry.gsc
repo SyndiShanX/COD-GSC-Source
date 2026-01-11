@@ -194,8 +194,7 @@ begin_building_entry() {
 
   if(maps\cornered_code::is_e3()) {
     thread maps\_utility::autosave_by_name_silent("building_entry");
-  }
-  else {
+  } else {
     thread maps\_utility::autosave_tactical();
   }
 }
@@ -209,8 +208,7 @@ begin_shadow_kill() {
 
   if(maps\cornered_code::is_e3()) {
     thread maps\_utility::autosave_by_name_silent("shadow_kill");
-  }
-  else {
+  } else {
     thread maps\_utility::autosave_tactical();
   }
 }
@@ -249,7 +247,7 @@ building_entry() {
     maps\cornered_code_rappel::cornered_start_rappel("rope_ref_stealth", "player_rappel_ground_ref_stealth", var_0);
 
     foreach(var_2 in level.allies) {
-    var_2 maps\cornered_code_rappel_allies::ally_rappel_start_rope(var_0.rappel_type);
+      var_2 maps\cornered_code_rappel_allies::ally_rappel_start_rope(var_0.rappel_type);
     }
 
     level.player thread maps\cornered_code::player_flap_sleeves();
@@ -326,8 +324,7 @@ handle_building_entry() {
   if(!maps\cornered_code::is_e3()) {
     if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
       var_1 sethintstring(&"CORNERED_ENTER_BUILDING_CONSOLE");
-    }
-    else {
+    } else {
       var_1 sethintstring(&"CORNERED_ENTER_BUILDING");
     }
   }
@@ -513,8 +510,7 @@ glass_cutter_off(var_0) {
 delete_glass_cutter(var_0) {
   if(var_0.animname == "rorke") {
     level.rorke_glass_cutter delete();
-  }
-  else {
+  } else {
     level.player_glass_cutter delete();
   }
 }
@@ -630,8 +626,7 @@ upload_virus_setup() {
   if(!maps\cornered_code::is_e3()) {
     if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
       level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
-    }
-    else {
+    } else {
       level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS");
     }
   }
@@ -724,8 +719,7 @@ upload_virus_enter() {
     if(!maps\cornered_code::is_e3()) {
       if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
         level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
-      }
-      else {
+      } else {
         level.rack_pull_out_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS");
       }
     }
@@ -740,8 +734,7 @@ upload_virus_enter() {
     if(!maps\cornered_code::is_e3()) {
       if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
         level.virus_upload_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS_CONSOLE");
-      }
-      else {
+      } else {
         level.virus_upload_trigger sethintstring(&"CORNERED_START_UPLOAD_VIRUS");
       }
     }
@@ -801,8 +794,7 @@ upload_virus_anims() {
 
   if(common_scripts\utility::flag("force_player_to_end_virus_upload")) {
     upload_virus_exit();
-  }
-  else {
+  } else {
     upload_virus_loop();
   }
 }
@@ -1014,8 +1006,7 @@ player_in_upload_volume() {
 
   if(level.player.currentweapon == "imbel+acog_sp+silencer_sp") {
     wait 1.0;
-  }
-  else {
+  } else {
     wait 0.5;
   }
 
@@ -1141,8 +1132,7 @@ force_player_to_end_upload() {
   } else {
     if(isDefined(level.rack_shut)) {
       level.rack_pull_out_trigger common_scripts\utility::trigger_off();
-    }
-    else {
+    } else {
       level.virus_upload_trigger common_scripts\utility::trigger_off();
     }
 
@@ -1154,8 +1144,7 @@ force_player_to_end_upload() {
 
       if(level.player.currentweapon == "imbel+acog_sp+silencer_sp") {
         wait 1.0;
-      }
-      else {
+      } else {
         wait 0.5;
       }
 
@@ -1193,8 +1182,7 @@ watch_player_after_shadow_kill() {
 
   if(isDefined(level.rack_shut)) {
     level.rack_pull_out_trigger common_scripts\utility::trigger_off();
-  }
-  else {
+  } else {
     level.virus_upload_trigger common_scripts\utility::trigger_off();
   }
 
@@ -1311,8 +1299,7 @@ gun_down_trigger_internal() {
 
     if(!isDefined(level.player.computer_idf)) {
       level.player.equipped_weapon = level.player getcurrentweapon();
-    }
-    else {
+    } else {
       level.player.computer_idf = undefined;
     }
 
@@ -1334,8 +1321,7 @@ gun_down_trigger_internal() {
 
     if(level.player.equipped_weapon == "imbel+acog_sp+silencer_sp") {
       wait 1.0;
-    }
-    else {
+    } else {
       wait 0.5;
     }
 
@@ -1355,8 +1341,7 @@ gun_down_trigger_internal() {
 
     if(level.player.equipped_hide_weapon == "imbel_hide_acog_silenced_cornered+acog_sp+silencer_sp") {
       wait 0.5;
-    }
-    else {
+    } else {
       wait 0.5;
     }
 
@@ -1385,8 +1370,7 @@ gun_down_trigger_internal() {
 
     if(level.player.equipped_hide_weapon == "imbel_hide_acog_silenced_cornered+acog_sp+silencer_sp") {
       wait 0.5;
-    }
-    else {
+    } else {
       wait 0.5;
     }
 
@@ -1406,8 +1390,7 @@ gun_down_trigger_internal() {
 
     if(level.player.equipped_weapon == "imbel+acog_sp+silencer_sp") {
       wait 0.5;
-    }
-    else {
+    } else {
       wait 0.5;
     }
 
@@ -1551,7 +1534,7 @@ festival_balloons_internal(var_0, var_1) {
   var_1 linkto(level.vista_pivot);
 
   foreach(var_3 in var_0) {
-  var_3 linkto(var_1, "J_prop_1");
+    var_3 linkto(var_1, "J_prop_1");
   }
 
   wait(randomfloatrange(0.3, 2.5));
@@ -1620,8 +1603,7 @@ ambient_building_elevators(var_0, var_1) {
   while(!common_scripts\utility::flag("baker_security_vo")) {
     if(common_scripts\utility::cointoss()) {
       self.going_up = 1;
-    }
-    else {
+    } else {
       self.going_up = undefined;
     }
 
@@ -1871,8 +1853,7 @@ power_junction_patrollers() {
 
   if(self.script_noteworthy == "shadow_kill_enemy") {
     thread shadow_kill_enemy_setup();
-  }
-  else {
+  } else {
     thread maps\cornered_code::wait_till_shot(undefined, "enemies_aware");
     thread stealth_is_broken();
     thread alert_all_on_death();
@@ -2443,7 +2424,7 @@ shadowkill_phone() {
   level.shadowkill_struct maps\_anim::anim_single(level.shadowkill_enemy_phone_array, "shadowkill_enter_enemy");
 
   foreach(var_1 in level.shadowkill_enemy_phone_array) {
-  var_1 thread maps\cornered_code::entity_cleanup("player_exiting_building");
+    var_1 thread maps\cornered_code::entity_cleanup("player_exiting_building");
   }
 }
 
@@ -2459,7 +2440,7 @@ handle_phone_if_stealth_is_broken() {
   }
 
   foreach(var_1 in level.shadowkill_enemy_phone_array) {
-  var_1 thread maps\cornered_code::entity_cleanup();
+    var_1 thread maps\cornered_code::entity_cleanup();
   }
 }
 
@@ -2587,8 +2568,7 @@ handle_rappel_inverted() {
   if(!maps\cornered_code::is_e3()) {
     if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
       var_0 sethintstring(&"CORNERED_EXIT_BUILDING_CONSOLE");
-    }
-    else {
+    } else {
       var_0 sethintstring(&"CORNERED_EXIT_BUILDING");
     }
   }
@@ -2737,7 +2717,7 @@ player_exit_building() {
   maps\cornered_code_rappel::cornered_start_random_wind();
 
   foreach(var_2 in level.allies) {
-  var_2 maps\cornered_code_rappel_allies::ally_rappel_start_rope(var_0.rappel_type);
+    var_2 maps\cornered_code_rappel_allies::ally_rappel_start_rope(var_0.rappel_type);
   }
 
   level.player_exit_to_inverted_rope delete();
@@ -2809,13 +2789,13 @@ detonate_lights_off() {
   level.large_outside_lights_on = getEntArray("large_outside_lights_on", "targetname");
 
   foreach(var_2 in level.large_outside_lights_on) {
-  var_2 hide();
+    var_2 hide();
   }
 
   level.large_outside_lights_off = getEntArray("large_outside_lights_off", "targetname");
 
   foreach(var_5 in level.large_outside_lights_off) {
-  var_5 show();
+    var_5 show();
   }
 
   for(var_7 = 10; var_7 <= 35; var_7++) {
@@ -2850,11 +2830,11 @@ detonate_lights_off() {
 turn_lights_off(var_0, var_1) {
   if(var_1 == "lights") {
     foreach(var_3 in var_0) {
-    var_3 setlightintensity(0.01);
+      var_3 setlightintensity(0.01);
     }
   } else {
     foreach(var_6 in var_0) {
-    var_6 delete();
+      var_6 delete();
     }
   }
 }
@@ -2887,8 +2867,7 @@ funnel_player_internal(var_0, var_1, var_2) {
 
       if(var_2 == "right") {
         level.rappel_max_lateral_dist_right = var_0;
-      }
-      else {
+      } else {
         level.rappel_max_lateral_dist_left = var_0;
       }
     }
@@ -3025,8 +3004,7 @@ player_inverted_kill_fail() {
 player_pounce_anim() {
   if(common_scripts\utility::flag("inverted_kill_fail")) {
     level.rappel_entry_anim_struct thread maps\_anim::anim_single(level.arms_and_legs, "pounce_player_fail");
-  }
-  else {
+  } else {
     level.rappel_entry_anim_struct thread maps\_anim::anim_single(level.arms_and_legs, "pounce_player");
     level thread do_inverted_kill_blood();
   }
@@ -3398,8 +3376,7 @@ inverted_kill_enemies_setup() {
 
     if(isDefined(self.walkin_anim)) {
       self stopanimscripted();
-    }
-    else {
+    } else {
       level.rappel_entry_anim_struct notify("stop_player_inverted_kill_enemy_idle");
       waittillframeend;
     }
@@ -3656,8 +3633,7 @@ allies_inverted_rappel_movement() {
 
   if(self.animname == "rorke") {
     inverted_rappel_movement_rorke();
-  }
-  else {
+  } else {
     inverted_rappel_movement_baker();
   }
 }

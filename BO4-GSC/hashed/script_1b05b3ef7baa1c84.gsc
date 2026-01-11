@@ -136,50 +136,50 @@ debug_print(endpos) {
   }
 }
 
-  function function_35579833(trigger, model, callback, weapon, playersoundonuse, npcsoundonuse) {
-    self endon(#"death");
-    self endon(#"delete");
-    level endon(#"game_ended");
-    max_ammo = weapon.maxammo + 1;
-    var_462338e8 = isDefined(level.var_2547ba72) && level.var_2547ba72;
-    while(true) {
-      waitresult = trigger waittill(#"trigger");
-      player = waitresult.activator;
-      if(!isalive(player)) {
-        continue;
+function function_35579833(trigger, model, callback, weapon, playersoundonuse, npcsoundonuse) {
+  self endon(#"death");
+  self endon(#"delete");
+  level endon(#"game_ended");
+  max_ammo = weapon.maxammo + 1;
+  var_462338e8 = isDefined(level.var_2547ba72) && level.var_2547ba72;
+  while(true) {
+    waitresult = trigger waittill(#"trigger");
+    player = waitresult.activator;
+    if(!isalive(player)) {
+      continue;
+    }
+    if(!player isonground() && !(isDefined(trigger.var_de9cafd) && trigger.var_de9cafd)) {
+      continue;
+    }
+    if(isDefined(trigger.triggerteam) && player.team != trigger.triggerteam) {
+      continue;
+    }
+    if(isDefined(trigger.claimedby) && player != trigger.claimedby) {
+      continue;
+    }
+    ammo_stock = player getweaponammostock(weapon);
+    ammo_clip = player getweaponammoclip(weapon);
+    current_weapon = player getcurrentweapon();
+    total_ammo = ammo_stock + ammo_clip;
+    var_34eba11f = 1;
+    if(total_ammo > 0 && ammo_stock == total_ammo && current_weapon == weapon) {
+      var_34eba11f = 0;
+    }
+    if(total_ammo >= max_ammo || !var_34eba11f) {
+      continue;
+    }
+    if(var_462338e8 || player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed() || isDefined(trigger.var_de9cafd) && trigger.var_de9cafd) {
+      if(isDefined(playersoundonuse)) {
+        player playlocalsound(playersoundonuse);
       }
-      if(!player isonground() && !(isDefined(trigger.var_de9cafd) && trigger.var_de9cafd)) {
-        continue;
+      if(isDefined(npcsoundonuse)) {
+        player playSound(npcsoundonuse);
       }
-      if(isDefined(trigger.triggerteam) && player.team != trigger.triggerteam) {
-        continue;
-      }
-      if(isDefined(trigger.claimedby) && player != trigger.claimedby) {
-        continue;
-      }
-      ammo_stock = player getweaponammostock(weapon);
-      ammo_clip = player getweaponammoclip(weapon);
-      current_weapon = player getcurrentweapon();
-      total_ammo = ammo_stock + ammo_clip;
-      var_34eba11f = 1;
-      if(total_ammo > 0 && ammo_stock == total_ammo && current_weapon == weapon) {
-        var_34eba11f = 0;
-      }
-      if(total_ammo >= max_ammo || !var_34eba11f) {
-        continue;
-      }
-      if(var_462338e8 || player usebuttonpressed() && !player.throwinggrenade && !player meleebuttonpressed() || isDefined(trigger.var_de9cafd) && trigger.var_de9cafd) {
-        if(isDefined(playersoundonuse)) {
-          player playlocalsound(playersoundonuse);
-        }
-        if(isDefined(npcsoundonuse)) {
-          player playSound(npcsoundonuse);
-        }
-        player thread[[callback]](weapon, model, trigger);
-        break;
-      }
+      player thread[[callback]](weapon, model, trigger);
+      break;
     }
   }
+}
 
 pick_up(weapon, model, trigger) {
   if(self hasweapon(weapon)) {

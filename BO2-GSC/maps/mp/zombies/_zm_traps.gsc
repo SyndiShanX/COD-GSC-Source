@@ -33,8 +33,7 @@ trap_init() {
 
     if(isDefined(level._zombiemode_trap_activate_funcs) && isDefined(level._zombiemode_trap_activate_funcs[self._trap_type])) {
       self._trap_activate_func = level._zombiemode_trap_activate_funcs[self._trap_type];
-    }
-    else {
+    } else {
       switch (self.script_noteworthy) {
         case "rotating":
           self._trap_activate_func = ::trap_activate_rotating;
@@ -53,8 +52,7 @@ trap_init() {
 
     if(isDefined(level._zombiemode_trap_use_funcs) && isDefined(level._zombiemode_trap_use_funcs[self._trap_type])) {
       self._trap_use_func = level._zombiemode_trap_use_funcs[self._trap_type];
-    }
-    else {
+    } else {
       self._trap_use_func = ::trap_use_think;
     }
   }
@@ -123,8 +121,7 @@ trap_init() {
       case "script_model":
         if(components[i].model == self._trap_light_model_off) {
           self._trap_lights[self._trap_lights.size] = components[i];
-        }
-        else if(components[i].model == self._trap_switch_model) {
+        } else if(components[i].model == self._trap_switch_model) {
           self._trap_switches[self._trap_switches.size] = components[i];
         }
     }
@@ -187,8 +184,7 @@ trap_use_think(trap) {
     if(is_player_valid(who) && !trap._trap_in_use) {
       if(who.score >= trap.zombie_cost) {
         who maps\mp\zombies\_zm_score::minus_to_player_score(trap.zombie_cost);
-      }
-      else {
+      } else {
         continue;
       }
 
@@ -303,8 +299,7 @@ trap_activate_electric() {
 
     if(number != 0) {
       exploder(number);
-    }
-    else {
+    } else {
       clientnotify(self.script_string + "1");
     }
   }
@@ -380,8 +375,7 @@ trap_activate_rotating() {
   self notify("trap_done");
 }
 
-trap_activate_flipper() {
-}
+trap_activate_flipper() {}
 
 trap_audio_fx(trap) {
   sound_origin = undefined;
@@ -483,8 +477,7 @@ player_elec_damage() {
 
     if(is_true(level.trap_electric_visionset_registered)) {
       maps\mp\_visionset_mgr::vsmgr_activate("overlay", "zm_trap_electric", self, 1.25, 1.25);
-    }
-    else {
+    } else {
       self setelectrified(1.25);
     }
 
@@ -516,8 +509,7 @@ player_fire_damage() {
 
     if(is_true(level.trap_fire_visionset_registered)) {
       maps\mp\_visionset_mgr::vsmgr_activate("overlay", "zm_trap_burn", self, 1.25, 1.25);
-    }
-    else {
+    } else {
       self setburn(1.25);
     }
 
@@ -575,8 +567,7 @@ zombie_trap_death(trap, param) {
 
       if(isDefined(self.fire_damage_func)) {
         self[[self.fire_damage_func]](trap);
-      }
-      else {
+      } else {
         level notify("trap_kill", self, trap);
         self dodamage(self.health + 666, self.origin, trap);
       }

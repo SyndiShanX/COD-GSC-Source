@@ -106,8 +106,7 @@ func_11B01() {
     if(self.sessionteam == "none") {
       if(isDefined(self.pers["team"]) && self.pers["team"] == "allies") {
         self.timeplayed["allies"]++;
-      }
-      else if(isDefined(self.pers["team"]) && self.pers["team"] == "axis") {
+      } else if(isDefined(self.pers["team"]) && self.pers["team"] == "axis") {
         self.timeplayed["axis"]++;
       }
 
@@ -134,7 +133,7 @@ func_12EF3() {
     scripts\mp\hostmigration::waittillhostmigrationdone();
 
     foreach(var_01 in level.players) {
-    var_01 func_12EEE();
+      var_01 func_12EEE();
     }
 
     wait 10.0;
@@ -303,8 +302,7 @@ _meth_81A2() {
 
   if(level.team["allies"] > level.team["axis"] + level.teambalance || level.team["axis"] > level.team["allies"] + level.teambalance) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -528,8 +526,7 @@ func_F6BE() {
 getplayermodelindex() {
   if(level.rankedmatch) {
     return self getrankedplayerdata("rankedloadouts", "squadMembers", "body");
-  }
-  else {
+  } else {
     return self getrankedplayerdata("privateloadouts", "squadMembers", "body");
   }
 }
@@ -537,8 +534,7 @@ getplayermodelindex() {
 getplayerheadmodel() {
   if(level.rankedmatch) {
     return self getrankedplayerdata("rankedloadouts", "squadMembers", "head");
-  }
-  else {
+  } else {
     return self getrankedplayerdata("privateloadouts", "squadMembers", "head");
   }
 }
@@ -554,11 +550,9 @@ getplayermodelname(var_00) {
 func_FADC() {
   if(isai(self) || level.gametype == "infect" && self.team == "allies" && isDefined(self.infected_archtype) && self.infected_archtype == "archetype_scout") {
     var_00 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.loadoutarchetype) + 1;
-  }
-  else if(isDefined(self.changedarchetypeinfo)) {
+  } else if(isDefined(self.changedarchetypeinfo)) {
     var_00 = scripts\mp\archetypes\archcommon::getrigindexfromarchetyperef(self.changedarchetypeinfo.archetype) + 1;
-  }
-  else {
+  } else {
     var_00 = getdvarint("forceArchetype", 0);
   }
 
@@ -568,8 +562,7 @@ func_FADC() {
 
   if(isplayer(self) && var_00 == 0) {
     setmodelfromcustomization();
-  }
-  else {
+  } else {
     func_72A5(var_00);
   }
 
@@ -593,11 +586,9 @@ func_FADC() {
   if(scripts\mp\utility\game::isjuggernaut()) {
     if(isDefined(self.isjuggernautmaniac) && self.isjuggernautmaniac) {
       thread[[game[self.team + "_model"]["JUGGERNAUT_MANIAC"]]]();
-    }
-    else if(isDefined(self.isjuggernautlevelcustom) && self.isjuggernautlevelcustom) {
+    } else if(isDefined(self.isjuggernautlevelcustom) && self.isjuggernautlevelcustom) {
       thread[[game[self.team + "_model"]["JUGGERNAUT_CUSTOM"]]]();
-    }
-    else {
+    } else {
       thread[[game[self.team + "_model"]["JUGGERNAUT"]]]();
     }
   }
@@ -793,17 +784,13 @@ getjointeampermissions(var_00) {
 
   if(var_01 < level.func_115D7) {
     return 1;
-  }
-  else if(var_02 > 0) {
+  } else if(var_02 > 0) {
     return 1;
-  }
-  else if(!scripts\mp\utility\game::matchmakinggame()) {
+  } else if(!scripts\mp\utility\game::matchmakinggame()) {
     return 1;
-  }
-  else if(level.gametype == "infect") {
+  } else if(level.gametype == "infect") {
     return 1;
-  }
-  else {
+  } else {
     bbprint("mp_exceeded_team_max_error", "player_xuid %s isHost %i", self getxuid(), self ishost());
 
     if(self ishost()) {

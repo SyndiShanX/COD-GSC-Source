@@ -32,8 +32,7 @@ MoveRun() {
 
       if(self animscripts\utility::IsInCombat()) {
         MoveStandCombatNormal();
-      }
-      else {
+      } else {
         MoveStandNoncombatNormal();
       }
       break;
@@ -44,8 +43,7 @@ MoveRun() {
 
       if(isDefined(self.crouchrun_combatanim)) {
         MoveCrouchRunOverride();
-      }
-      else {
+      } else {
         MoveCrouchRunNormal();
       }
       break;
@@ -73,8 +71,7 @@ GetRunAnim() {
 
   if(self.stairsState == "up") {
     return moveAnim("stairs_up");
-  }
-  else if(self.stairsState == "down") {
+  } else if(self.stairsState == "down") {
     return moveAnim("stairs_down");
   }
 
@@ -155,11 +152,9 @@ RunNGun(validTarget) {
 
     if(abs(diff) < runNGunTransitionPoint * 0.7) {
       self.runNGunWeight = newWeight;
-    }
-    else if(diff > 0) {
+    } else if(diff > 0) {
       self.runNGunWeight = self.runNGunWeight + runNGunIncrement;
-    }
-    else {
+    } else {
       self.runNGunWeight = self.runNGunWeight - runNGunIncrement;
     }
   }
@@ -253,7 +248,7 @@ RunningReactToBullets() {
   assert(!isDefined(self.trackLoopThread));
   self.trackLoopThread = undefined;
 
-    self endon("interrupt_react_to_bullet");
+  self endon("interrupt_react_to_bullet");
 
   self.reactingToBullet = true;
   self orientmode("face motion");
@@ -281,7 +276,7 @@ CustomRunningReactToBullets() {
   assert(!isDefined(self.trackLoopThread));
   self.trackLoopThread = undefined;
 
-    self.reactingToBullet = true;
+  self.reactingToBullet = true;
   self orientmode("face motion");
 
   assert(isDefined(self.run_overrideBulletReact));
@@ -396,10 +391,9 @@ MoveStandCombatNormal() {
       assert(!isDefined(self.trackLoopThread));
       self.trackLoopThread = undefined;
 
-        if(CanShootWhileRunningForward()) {
-          decidedAnimation = self RunNGun(true);
-        }
-      else if(CanShootWhileRunningBackward()) {
+      if(CanShootWhileRunningForward()) {
+        decidedAnimation = self RunNGun(true);
+      } else if(CanShootWhileRunningBackward()) {
         self RunNGun_Backward();
         return;
       }
@@ -421,8 +415,7 @@ MoveStandCombatNormal() {
 
     if(ShouldSprintForVariation()) {
       runAnim = moveAnim("sprint_short");
-    }
-    else {
+    } else {
       runAnim = GetRunAnim();
     }
 
@@ -453,7 +446,7 @@ faceEnemyAimTracking() {
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "faceEnemyAimTracking";
 
-    self endon("killanimscript");
+  self endon("killanimscript");
   self endon("end_face_enemy_tracking");
 
   self setDefaultAimLimits();
@@ -502,7 +495,7 @@ stopShootWhileMovingThreads() // we don't stop them if we shoot while moving aga
   assert(!isDefined(self.trackLoopThread));
   self.trackLoopThread = undefined;
 
-    self.runNGun = undefined;
+  self.runNGun = undefined;
 }
 
 RunDecideWhatAndHowToShoot() {
@@ -576,15 +569,13 @@ MoveStandNoncombatNormal() {
 
   if(self ShouldSprint()) {
     runAnim = GetSprintAnim();
-  }
-  else {
+  } else {
     runAnim = GetRunAnim();
   }
 
   if(self.stairsState == "none") {
     transTime = 0.3; // 0.3 because it pops when the AI goes from combat to noncombat
-  }
-  else {
+  } else {
     transTime = 0.1; // need to transition to stairs quickly
   }
 
@@ -706,8 +697,7 @@ runLoopIsNearBeginning() {
   animfraction *= 3.0;
   if(animfraction > 3) {
     animfraction -= 2.0;
-  }
-  else if(animfraction > 2) {
+  } else if(animfraction > 2) {
     animfraction -= 1.0;
   }
 
@@ -836,8 +826,7 @@ changeWeaponStandRun() {
 
   if(wantShotgun) {
     shotgunSwitchStandRunInternal("shotgunPullout", % shotgun_CQBrun_pullout, "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
-  }
-  else {
+  } else {
     shotgunSwitchStandRunInternal("shotgunPutaway", % shotgun_CQBrun_putaway, "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
   }
 

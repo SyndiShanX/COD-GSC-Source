@@ -152,8 +152,7 @@ manage_gates() {
       armory_windows = true;
       if(GetMatchData("hasBots") == 1) {
         OPEN_DELAY = 0;
-      }
-      else {
+      } else {
         OPEN_DELAY = 45;
       }
       break;
@@ -239,8 +238,7 @@ move_gate(gate, direction, time, dynamic_path) {
       if(isDefined(model)) {
         if(time >= 1) {
           model MoveTo(model.origin + (0, 0, 104), time, time / 8, time / 4);
-        }
-        else {
+        } else {
           model.origin = model.origin + (0, 0, 104);
         }
       }
@@ -254,8 +252,7 @@ move_gate(gate, direction, time, dynamic_path) {
       if(isDefined(model)) {
         if(time >= 1) {
           model MoveTo(model.origin - (0, 0, 104), time, time / 8, time / 4);
-        }
-        else {
+        } else {
           model.origin = model.origin - (0, 0, 104);
         }
       }
@@ -271,8 +268,7 @@ move_gate(gate, direction, time, dynamic_path) {
       if(isDefined(model)) {
         if(time >= 1) {
           model MoveTo(model.origin + (0, 0, 104), time, time / 8, time / 4);
-        }
-        else {
+        } else {
           model.origin = model.origin + (0, 0, 104);
         }
       }
@@ -280,8 +276,7 @@ move_gate(gate, direction, time, dynamic_path) {
       if(isDefined(model)) {
         if(time >= 1) {
           model MoveTo(model.origin - (0, 0, 104), time, time / 8, time / 4);
-        }
-        else {
+        } else {
           model.origin = model.origin - (0, 0, 104);
         }
       }
@@ -637,8 +632,7 @@ manage_announcements() {
     if(!flag("ready_to_announce")) {
       if(!isDefined(override)) {
         continue;
-      }
-      else {
+      } else {
         level waittill_notify_or_timeout("allow_override", 5);
       }
     }
@@ -650,17 +644,13 @@ manage_announcements() {
         if(gender == true) {
           if(team == "axis") {
             lines = level.announcements[type].lines[2];
-          }
-
-          else {
+          } else {
             lines = level.announcements[type].lines[0];
           }
         } else {
           if(team == "axis") {
             lines = level.announcements[type].lines[3];
-          }
-
-          else {
+          } else {
             lines = level.announcements[type].lines[1];
           }
         }
@@ -696,8 +686,7 @@ manage_announcements() {
       thread allow_announcement_override(lines);
       if(type == "generic_kill") {
         thread announcer_cooldown_manager(2);
-      }
-      else {
+      } else {
         thread announcer_cooldown_manager(ANNOUNCER_COOLDOWN);
       }
       level.announcements[type] thread announcement_cooldown();
@@ -768,8 +757,7 @@ kill_watcher() {
   while(1) {
     if(level.gametype != "horde") {
       self waittill("got_a_kill", victim, weapon, meansOfDeath);
-    }
-    else {
+    } else {
       self waittill("horde_kill", victim, weapon, meansOfDeath);
     }
 
@@ -789,8 +777,7 @@ kill_watcher() {
         if(level.teamBased) {
           if(cointoss()) {
             level notify("announcement", "melee_kill", self.team, undefined);
-          }
-          else {
+          } else {
             level notify("announcement", "melee_kill_noteam", undefined, undefined);
           }
         } else
@@ -803,8 +790,7 @@ kill_watcher() {
       if(meansOfDeath == "MOD_HEAD_SHOT" && level.last_announcer_line != "mod_head_shot") {
         if(level.teamBased) {
           level notify("announcement", "headshot", self.team, undefined);
-        }
-        else {
+        } else {
           level notify("announcement", "headshot_noteam", undefined, undefined);
         }
 
@@ -815,8 +801,7 @@ kill_watcher() {
       if(weapon == "guard_dog_mp" && level.last_announcer_line != "guard_dog_mp") {
         if(level.teamBased) {
           level notify("announcement", "dog_kill", self.team, undefined);
-        }
-        else {
+        } else {
           level notify("announcement", "dog_kill_noteam", undefined, undefined);
         }
 
@@ -827,8 +812,7 @@ kill_watcher() {
       if(maps\mp\_events::isLongShot(self, weapon, meansOfDeath, self.origin, victim) && level.last_announcer_line != "long_shot") {
         if(level.teamBased) {
           level notify("announcement", "long_shot", self.team, undefined);
-        }
-        else {
+        } else {
           level notify("announcement", "long_shot_noteam", undefined, undefined);
         }
 
@@ -839,8 +823,7 @@ kill_watcher() {
       if(self.recentKillCount == 2) {
         if(level.teamBased) {
           level notify("announcement", "double_kill", self.team, undefined);
-        }
-        else {
+        } else {
           level notify("announcement", "double_kill_noteam", undefined, undefined);
         }
       }
@@ -853,8 +836,7 @@ kill_watcher() {
         if(self isSavior(victim, curTime) && level.last_announcer_line != "savior") {
           if(level.teamBased) {
             level notify("announcement", "savior", self.team, undefined);
-          }
-          else {
+          } else {
             level notify("announcement", "savior_noteam", undefined, undefined);
           }
 
@@ -864,8 +846,7 @@ kill_watcher() {
           if(victim.lastkilledplayer != self) {
             if(level.teamBased) {
               level notify("announcement", "avenger", self.team, undefined);
-            }
-            else {
+            } else {
               level notify("announcement", "avenger_noteam", undefined, undefined);
             }
 
@@ -876,8 +857,7 @@ kill_watcher() {
       if(self.recentKillCount == 3) {
         if(level.teamBased) {
           level notify("announcement", "triple_kill", self.team, undefined);
-        }
-        else {
+        } else {
           level notify("announcement", "triple_kill_noteam", undefined, undefined);
         }
       }
@@ -977,9 +957,7 @@ determine_score_big_lead() {
 
     if(ghosts_score == old_ghosts_score && federation_score == old_federation_score && time > 60000) {
       time_since_score_changed++;
-    }
-
-    else {
+    } else {
       time_since_score_changed = 0;
     }
 
@@ -1163,16 +1141,14 @@ select_random_prize() {
     if(!flag("killstreak_additional")) {
       if(level.teamBased) {
         level notify("announcement", "ks_first", player.team, undefined, true);
-      }
-      else {
+      } else {
         level notify("announcement", "ks_first_noteam", undefined, undefined, true);
       }
       flag_set("killstreak_additional");
     } else {
       if(level.teamBased) {
         level notify("announcement", "ks_additional", player.team, undefined, true);
-      }
-      else {
+      } else {
         level notify("announcement", "ks_additional_noteam", undefined, undefined, true);
       }
     }
@@ -1472,13 +1448,9 @@ can_kill_character(trap, victim) {
   if(level.teambased) {
     if(isDefined(trap.player) && victim == trap.player) {
       return true;
-    }
-
-    else if(isDefined(trap.player) && isDefined(victim.owner) && victim.owner == trap.player) {
+    } else if(isDefined(trap.player) && isDefined(victim.owner) && victim.owner == trap.player) {
       return true;
-    }
-
-    else if(isDefined(trap.team) && victim.team == trap.team && !level.friendlyfire) {
+    } else if(isDefined(trap.team) && victim.team == trap.team && !level.friendlyfire) {
       return false;
     }
   }
@@ -1504,9 +1476,7 @@ damage_targets(trap, attacker, array_targets, damage) {
     }
     if(isDefined(target.owner) && target.owner == trap.owner) {
       target notify("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
-    }
-
-    else if(level.teamBased && isDefined(trap.team) && isDefined(target.team) && target.team == trap.team) {
+    } else if(level.teamBased && isDefined(trap.team) && isDefined(target.team) && target.team == trap.team) {
       continue;
     }
     target notify("damage", damage, attacker, direction_vec, point, meansOfDeath, modelName, tagName, partName, iDFlags, weapon);
@@ -1670,8 +1640,7 @@ careStrike(owner, spawn_location, dropSite, animation) {
 
     if(dist < minDist) {
       minDist = dist;
-    }
-    else if(dist > minDist) {
+    } else if(dist > minDist) {
       break;
     }
 
@@ -2020,34 +1989,32 @@ box_kill_numbers() {
   while(1) {
     if(level.box_kill_counter == 99) {
       level notify("announcement", "puzzle_box_max", undefined, undefined, true);
-    }
-    else if(level.box_kill_counter > 1 && level.box_kill_counter % 10 == 0) {
+    } else if(level.box_kill_counter > 1 && level.box_kill_counter % 10 == 0) {
       level notify("announcement", "puzzle_box", undefined, undefined, false);
     }
 
     if(level.box_kill_counter > 99) {
       box_counter = 99;
-    }
-    else {
+    } else {
       box_counter = level.box_kill_counter;
     }
 
     if(box_counter < 10) {
       counter_ones = GetSubStr(box_counter, 0, 1);
       foreach(number in counter_ones_digit) {
-      number setModel("shns_score_num_" + counter_ones + "_small");
+        number setModel("shns_score_num_" + counter_ones + "_small");
       }
     }
 
     if(box_counter > 9 && counter < 99) {
       counter_ones = GetSubStr(box_counter, 1, 2);
       foreach(number in counter_ones_digit) {
-      number setModel("shns_score_num_" + counter_ones + "_small");
+        number setModel("shns_score_num_" + counter_ones + "_small");
       }
 
       counter_tens = GetSubStr(box_counter, 0, 1);
       foreach(number in counter_tens_digit) {
-      number setModel("shns_score_num_" + counter_tens + "_small");
+        number setModel("shns_score_num_" + counter_tens + "_small");
       }
     }
     if(box_counter >= 50 && !flag("played_easter_egg_video")) {
@@ -2082,8 +2049,7 @@ match_end_event() {
   result = RandomIntRange(1, 10);
   if(result == 1) {
     level notify("announcement", "outro_rare", undefined, undefined, true);
-  }
-  else {
+  } else {
     level notify("announcement", "outro", undefined, undefined, true);
   }
 
@@ -2095,28 +2061,21 @@ get_highest_scoring_players() {
 
   if(!level.teambased) {
     players_sorted_by_score = array_sort_with_func(level.players, ::is_score_a_greater_than_b);
-  }
-  else {
+  } else {
     ghosts_score = GetTeamScore("allies");
     federation_score = GetTeamScore("axis");
 
     if(ghosts_score == federation_score) {
       winning_team = undefined;
-    }
-
-    else if(ghosts_score > federation_score) {
+    } else if(ghosts_score > federation_score) {
       winning_team = "allies";
-    }
-
-    else {
+    } else {
       winning_team = "axis";
     }
 
     if(isDefined(winning_team)) {
       players_sorted_by_score = array_sort_with_func(level.teamList[winning_team], ::is_score_a_greater_than_b);
-    }
-
-    else {
+    } else {
       players_sorted_by_score = array_sort_with_func(level.players, ::is_score_a_greater_than_b);
     }
   }
@@ -2124,8 +2083,7 @@ get_highest_scoring_players() {
   for(i = 0; i < 3; i++) {
     if(isDefined(players_sorted_by_score[i])) {
       top_scorers[top_scorers.size] = players_sorted_by_score[i];
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -2365,16 +2323,16 @@ flashing_neon_sign() {
   }
 
   foreach(letter in sign_on) {
-  letter Hide();
+    letter Hide();
   }
   foreach(letter in sign_on_right) {
-  letter Hide();
+    letter Hide();
   }
   foreach(letter in sign_off) {
-  letter Show();
+    letter Show();
   }
   foreach(letter in sign_off_right) {
-  letter Show();
+    letter Show();
   }
 }
 
@@ -2477,8 +2435,7 @@ looped_turret_light(ID, ID_enemy, player) {
   while(GetTime() < time) {
     if(!player isInKillcam()) {
       ActivateClientExploder(ID, player);
-    }
-    else {
+    } else {
       ActivateClientExploder(ID_enemy, player);
     }
 

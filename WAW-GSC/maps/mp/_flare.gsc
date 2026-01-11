@@ -65,8 +65,7 @@ flareVision(player, flareEffectArea, position) {
   }
   if(!isDefined(flareEffectArea)) {
     wait(flare_get_dvar("flareBurnOutFadeWait", level.flareBurnOutFadeWait));
-  }
-  else if(distance(position, player.origin) < level.flareVisionEffectRadius) {
+  } else if(distance(position, player.origin) < level.flareVisionEffectRadius) {
     wait(flare_get_dvar("flareLookAwayFadeWait", level.flareLookAwayFadeWait));
   }
   player.inFlareVisionArea = false;

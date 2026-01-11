@@ -678,9 +678,7 @@ function getallotherplayers() {
       continue;
     }
     if(isDefined(level.customalivecheck)) {
-      if(![
-          [level.customalivecheck]
-        ](player)) {
+      if(![[level.customalivecheck]](player)) {
         continue;
       }
     }
@@ -748,9 +746,7 @@ function spawnpointupdate_zm(spawnpoint) {
       continue;
     }
     if(isDefined(level.customalivecheck)) {
-      if(![
-          [level.customalivecheck]
-        ](player)) {
+      if(![[level.customalivecheck]](player)) {
         continue;
       }
     }

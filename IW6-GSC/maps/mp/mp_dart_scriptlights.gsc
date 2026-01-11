@@ -106,8 +106,7 @@ mp_dart_pulsing_light() {
       if((isDefined(ent.script_noteworthy)) && (ent.script_noteworthy == "on")) {
         if(!isDefined(self.lit_models)) {
           self.lit_models[0] = ent;
-        }
-        else {
+        } else {
           self.lit_models[self.lit_models.size] = ent;
         }
         continue;
@@ -115,8 +114,7 @@ mp_dart_pulsing_light() {
       if((isDefined(ent.script_noteworthy)) && (ent.script_noteworthy == "off")) {
         if(!isDefined(self.unlit_models)) {
           self.unlit_models[0] = ent;
-        }
-        else {
+        } else {
           self.unlit_models[self.unlit_models.size] = ent;
         }
         self.unlit_model = ent;
@@ -166,7 +164,7 @@ mp_dart_generic_flicker_pause() {
       }
       if(isDefined(self.unlit_models)) {
         foreach(unlit_model in self.unlit_models) {
-        unlit_model show();
+          unlit_model show();
         }
       }
     }
@@ -201,7 +199,7 @@ mp_dart_generic_flicker_pause() {
       }
       if(isDefined(self.unlit_models)) {
         foreach(unlit_model in self.unlit_models) {
-        unlit_model hide();
+          unlit_model hide();
         }
       }
     }
@@ -243,7 +241,7 @@ mp_dart_generic_flicker() {
         }
         if(isDefined(self.unlit_models)) {
           foreach(unlit_model in self.unlit_models) {
-          unlit_model show();
+            unlit_model show();
           }
         }
       } else {
@@ -298,7 +296,7 @@ mp_dart_generic_flicker() {
       }
       if(isDefined(self.unlit_models)) {
         foreach(unlit_model in self.unlit_models) {
-        unlit_model hide();
+          unlit_model hide();
         }
       }
     }

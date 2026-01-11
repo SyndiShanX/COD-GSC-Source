@@ -40,8 +40,7 @@ main() {
 
   if(getgametypesetting("allowMapScripting")) {
     level maps\mp\mp_dockside_crane::init();
-  }
-  else {
+  } else {
     crate_triggers = getEntArray("crate_kill_trigger", "targetname");
 
     for(i = 0; i < crate_triggers.size; i++) {

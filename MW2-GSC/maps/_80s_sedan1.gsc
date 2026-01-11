@@ -34,8 +34,7 @@ main(model, type) {
   build_compassicon("automobile", false);
 }
 
-init_local() {
-}
+init_local() {}
 
 set_vehicle_anims(positions) {
   return positions;

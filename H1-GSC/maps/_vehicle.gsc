@@ -23,8 +23,7 @@ init_vehicles() {
 
   if(isDefined(level.optimizedvehicletriggerprocess)) {
     common_scripts\utility::array_levelthread(level.vehicle_processtriggers, ::trigger_process_set);
-  }
-  else {
+  } else {
     common_scripts\utility::array_levelthread(level.vehicle_processtriggers, maps\_vehicle_code::trigger_process);
   }
 
@@ -36,7 +35,7 @@ init_vehicles() {
 
   if(isDefined(level.helicopter_landed_fx_override)) {
     foreach(var_3, var_2 in level.helicopter_landed_fx_override) {
-    level._heli_landed_fx[loadfx(var_3)] = loadfx(var_2);
+      level._heli_landed_fx[loadfx(var_3)] = loadfx(var_2);
     }
   }
 
@@ -55,7 +54,7 @@ create_vehicle_from_spawngroup_and_gopath(var_0) {
   var_1 = scripted_spawn(var_0);
 
   foreach(var_3 in var_1) {
-  level thread gopath(var_3);
+    level thread gopath(var_3);
   }
 
   return var_1;
@@ -271,8 +270,7 @@ swap_deathfx_effect_only(var_0, var_1, var_2, var_3) {
     }
     if(isDefined(var_3)) {
       var_6.effect = loadfx(var_3);
-    }
-    else {
+    } else {
       var_6.effect = undefined;
     }
 
@@ -573,8 +571,7 @@ move_truck_junk_here(var_0, var_1) {
 dummy_to_vehicle() {
   if(ishelicopter()) {
     self.modeldummy.origin = self gettagorigin("tag_ground");
-  }
-  else {
+  } else {
     self.modeldummy.origin = self.origin;
     self.modeldummy.angles = self.angles;
   }
@@ -701,7 +698,7 @@ spawn_vehicles_from_targetname_and_drive(var_0) {
   var_1 = spawn_vehicles_from_targetname(var_0);
 
   foreach(var_3 in var_1) {
-  thread gopath(var_3);
+    thread gopath(var_3);
   }
 
   return var_1;
@@ -906,7 +903,7 @@ build_all_treadfx(var_0, var_1) {
   var_2 = get_surface_types();
 
   foreach(var_4 in var_2) {
-  set_vehicle_effect(var_0, var_4);
+    set_vehicle_effect(var_0, var_4);
   }
 }
 
@@ -934,8 +931,7 @@ set_vehicle_effect(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_2)) {
     update_vehicle_effect(var_0, var_1, var_2, var_4);
-  }
-  else if(isDefined(level._vehicle_effect[var_0]) && isDefined(level._vehicle_effect[var_0][var_1])) {
+  } else if(isDefined(level._vehicle_effect[var_0]) && isDefined(level._vehicle_effect[var_0][var_1])) {
     level._vehicle_effect[var_0][var_1] = undefined;
     level._vehicle_sound_effect[var_0][var_1] = var_4;
   }
@@ -1006,7 +1002,7 @@ add_vehicle_fx_to_bank(var_0) {
     var_2 = maps\_treadfx::get_surface_types_variation(var_4);
 
     foreach(var_6 in var_2) {
-    level._vehicle_effect_bank[var_0][var_6] = loadfx(var_0);
+      level._vehicle_effect_bank[var_0][var_6] = loadfx(var_0);
     }
   }
 }
@@ -1032,7 +1028,7 @@ switch_vehicle_fx(var_0, var_1) {
     var_6 = maps\_treadfx::get_surface_types_variation(var_8);
 
     foreach(var_10 in var_6) {
-    override_vehicle_effect(var_0, var_10, var_5, var_4, var_3, var_1);
+      override_vehicle_effect(var_0, var_10, var_5, var_4, var_3, var_1);
     }
   }
 }
@@ -1304,8 +1300,7 @@ vehicle_single_light_on(var_0) {
   }
   if(isDefined(var_1.delay)) {
     var_2 = var_1.delay;
-  }
-  else {
+  } else {
     var_2 = 0;
   }
 
@@ -1383,8 +1378,7 @@ build_single_tread(var_0) {
 vehicle_set_health(var_0) {
   if(isDefined(self.healthbuffer)) {
     self.health = var_0 + self.healthbuffer;
-  }
-  else {
+  } else {
     self.health = var_0;
   }
 
@@ -1616,8 +1610,7 @@ set_crush_vehicle_clips(var_0, var_1, var_2) {
 
   if(isDefined(var_0) && isDefined(var_0.targetname)) {
     var_3 = getEntArray(var_0.targetname + "_" + var_1 + "_clip", "targetname");
-  }
-  else {
+  } else {
     var_4 = getEntArray("script_brushmodel", "classname");
 
     foreach(var_6 in var_4) {
@@ -1754,8 +1747,7 @@ volume_up(var_0) {
 
   if(isDefined(self.snd_disable_vehicle_system)) {
     self.snd_disable_vehicle_system = 0;
-  }
-  else {
+  } else {
     self vehicle_turnengineon();
   }
 
@@ -1772,8 +1764,7 @@ volume_down(var_0) {
 
   if(isDefined(self.snd_disable_vehicle_system)) {
     self.snd_disable_vehicle_system = 1;
-  }
-  else {
+  } else {
     self vehicle_turnengineoff();
   }
 }

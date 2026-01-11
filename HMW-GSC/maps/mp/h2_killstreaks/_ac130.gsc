@@ -508,8 +508,7 @@ ac130_25mm_sound() {
   for(;;) {
     if(self attackButtonPressed() && self.ac130Weapon == "ac130_25mm_mp" && !self.ac130Reloading["ac130_25mm_mp"]) {
       soundEnt playLoopSound("ac130_25mm_fire");
-    }
-    else {
+    } else {
       soundEnt stopLoopSound();
     }
 

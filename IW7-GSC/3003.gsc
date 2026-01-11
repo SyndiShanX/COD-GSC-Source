@@ -56,8 +56,7 @@ func_D629() {
 
   if(isDefined(self.script_animation)) {
     func_1F82();
-  }
-  else {
+  } else {
     func_BC59();
 
     if(isDefined(self.script_delay)) {
@@ -97,14 +96,14 @@ func_5D49() {
   var_00 = self.func_E4FB;
 
   foreach(var_02 in var_00) {
-  var_02 scripts\sp\utility::func_B14F();
+    var_02 scripts\sp\utility::func_B14F();
   }
 
   self waittill("landed");
   var_00 = scripts\sp\utility::func_22B9(var_00);
 
   foreach(var_02 in var_00) {
-  var_02 scripts\sp\utility::func_1101B();
+    var_02 scripts\sp\utility::func_1101B();
   }
 }
 
@@ -123,7 +122,7 @@ func_FA1E() {
   scripts\sp\anim::func_1EC1(self.func_226D, "pod_exit");
 
   foreach(var_03 in self.func_226D) {
-  var_03 linkto(self);
+    var_03 linkto(self);
   }
 
   self attach("veh_mil_air_ca_drop_pod_large_static_rail_c6", "tag_origin");
@@ -196,13 +195,13 @@ func_5FF0() {
   }
 
   foreach(var_02 in self.func_4D94.func_75C6) {
-  thread scripts\sp\utility::func_75C4(var_00, var_02);
+    thread scripts\sp\utility::func_75C4(var_00, var_02);
   }
 
   scripts\engine\utility::waittill_any("landed", "death");
 
   foreach(var_02 in self.func_4D94.func_75C6) {
-  thread scripts\sp\utility::func_75F8(var_00, var_02);
+    thread scripts\sp\utility::func_75F8(var_00, var_02);
   }
 }
 
@@ -258,8 +257,7 @@ func_D60B(var_00) {
   }
   if(isDefined(var_00)) {
     self waittill("pop_doors");
-  }
-  else {
+  } else {
     self waittill("dropping");
     scripts\engine\utility::waittill_any_timeout(self.func_4D94.droptime * 0.9, "pop_doors");
   }
@@ -281,8 +279,7 @@ func_514A() {
 func_36E8() {
   if(isDefined(self.speed)) {
     var_00 = self.speed;
-  }
-  else {
+  } else {
     var_00 = 1000;
   }
 
@@ -318,8 +315,7 @@ func_C12A(var_00) {
 func_BC59() {
   if(isDefined(self.script_parameters)) {
     self.func_4D94.func_56F3 = int(self.script_parameters);
-  }
-  else {
+  } else {
     self.func_4D94.func_56F3 = 4000;
   }
 

@@ -25,8 +25,7 @@ init_flags() {
   flag_init("morals_scene_complete");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 switch_head() {
   level.ai_harper = self;
@@ -224,8 +223,7 @@ morals_vtol_setup() {
   vh_vtol veh_magic_bullet_shield(1);
 }
 
-morals_ambient_qrotor_delete() {
-}
+morals_ambient_qrotor_delete() {}
 
 shoot_down_vtol() {
   level.player enableinvulnerability();
@@ -370,7 +368,7 @@ vtol_approach() {
 
   if(isDefined(ai_in_scene)) {
     foreach(ai_dude in ai_in_scene) {
-    ai_dude magic_bullet_shield();
+      ai_dude magic_bullet_shield();
     }
   }
 
@@ -379,7 +377,7 @@ vtol_approach() {
 
     if(isDefined(ai_in_scene1)) {
       foreach(ai_dude1 in ai_in_scene1) {
-      ai_dude1 magic_bullet_shield();
+        ai_dude1 magic_bullet_shield();
       }
     }
   }
@@ -518,8 +516,7 @@ play_gun_shot_fx_rumble(b_farid_shot) {
   if(is_mature()) {
     if(b_farid_shot) {
       overlay setshader("overlay_low_health_splat", 640, 480);
-    }
-    else {
+    } else {
       overlay setshader("overlay_harper_blood", 640, 480);
     }
 
@@ -702,7 +699,7 @@ morals_mason_intro() {
     player_weapons = level.player getweaponslist();
 
     foreach(weapon in player_weapons) {
-    level.player givestartammo(weapon);
+      level.player givestartammo(weapon);
     }
   }
 }

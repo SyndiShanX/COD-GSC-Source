@@ -82,8 +82,7 @@ gundebug() {
     if(getdvarint(var_1, 0)) {
       level.player.gungameprevgunindex = level.player.gungamegunindex;
 
-      for(level.player.gungamegunindex--; level.player.gungamegunindex < 0; level.player.gungamegunindex = level.player.gungamegunindex + level.gun_guns.size) {
-      }
+      for(level.player.gungamegunindex--; level.player.gungamegunindex < 0; level.player.gungamegunindex = level.player.gungamegunindex + level.gun_guns.size) {}
 
       level.player givenextgun();
       setdvar(var_1, 0);
@@ -173,8 +172,7 @@ onplayerconnect() {
 getspawnpoint() {
   if(level.ingraceperiod) {
     var_0 = maps\mp\gametypes\_spawnlogic::getstartspawnffa(self.pers["team"]);
-  }
-  else {
+  } else {
     var_1 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(self.pers["team"]);
     var_0 = maps\mp\gametypes\_spawnscoring::getspawnpoint_freeforall(var_1);
   }
@@ -196,8 +194,7 @@ gungameclassupdate(var_0) {
 
   if(!maps\mp\gametypes\_class::isvalidprimary(var_0.basename)) {
     self.pers["loadoutSecondary"] = var_0.fullname;
-  }
-  else {
+  } else {
     self.pers["loadoutPrimary"] = var_0.fullname;
   }
 }
@@ -206,7 +203,7 @@ streamprimariesfunc() {
   var_0 = [];
 
   foreach(var_2 in level.gun_guns) {
-  var_0[var_0.size] = var_2.fullname;
+    var_0[var_0.size] = var_2.fullname;
   }
 
   var_4 = [];
@@ -418,8 +415,7 @@ getnextgun() {
 addattachments(var_0) {
   if(var_0 == "h1_rpg") {
     var_1 = "h1_rpg_mp";
-  }
-  else {
+  } else {
     var_1 = maps\mp\gametypes\_class::buildweaponname(var_0, "none", "none");
   }
 
@@ -432,14 +428,11 @@ ontimelimit() {
 
   if(!isDefined(var_0) || !var_0.size) {
     thread maps\mp\gametypes\_gamelogic::endgame("tie", game["end_reason"]["time_limit_reached"]);
-  }
-  else if(var_0.size == 1) {
+  } else if(var_0.size == 1) {
     thread maps\mp\gametypes\_gamelogic::endgame(var_0[0], game["end_reason"]["time_limit_reached"]);
-  }
-  else if(var_0[var_0.size - 1].gungamegunindex > var_0[var_0.size - 2].gungamegunindex) {
+  } else if(var_0[var_0.size - 1].gungamegunindex > var_0[var_0.size - 2].gungamegunindex) {
     thread maps\mp\gametypes\_gamelogic::endgame(var_0[var_0.size - 1], game["end_reason"]["time_limit_reached"]);
-  }
-  else {
+  } else {
     thread maps\mp\gametypes\_gamelogic::endgame("tie", game["end_reason"]["time_limit_reached"]);
   }
 }
@@ -504,8 +497,7 @@ guninfo(var_0, var_1, var_2, var_3) {
 
   if(var_0 == "h1_rpg") {
     var_4.fullname = "h1_rpg_mp";
-  }
-  else {
+  } else {
     var_4.fullname = maps\mp\gametypes\_class::buildweaponname(var_0, var_5, "none");
   }
 

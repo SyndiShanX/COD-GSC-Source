@@ -55,7 +55,7 @@ sq_easy_cleanup() {
   sq_buildables = getEntArray("buildable_sq_common", "targetname");
 
   foreach(item in sq_buildables) {
-  item delete();
+    item delete();
   }
 }
 
@@ -129,8 +129,7 @@ sidequest_logic() {
   maxissay("vox_maxi_turbine_terminal_0", (11360, 8489, -576));
 }
 
-complete_sidequest() {
-}
+complete_sidequest() {}
 
 sidequest_main() {
   sidequest_init_tracker();
@@ -251,12 +250,10 @@ sidequest_debug_tracker_update(mainkey, subkey) {
 
     if(isDefined(value) && !isint(value) && isDefined(value.classname)) {
       self settext(str + "[X]");
-    }
-    else if(isDefined(value)) {
+    } else if(isDefined(value)) {
       if(!isint(value) && !isDefined(value.classname) && isDefined(value.targetname) && value.targetname == "screecher_escape") {
         self settext(str + "[X]");
-      }
-      else {
+      } else {
         self settext(str + value);
       }
     } else
@@ -299,8 +296,7 @@ turbine_power_watcher(player) {
 
     if(is_true(player.turbine_power_is_on) && !is_true(player.turbine_emped)) {
       self.powered = 1;
-    }
-    else if(is_true(player.turbine_emped) || !is_true(player.turbine_power_is_on)) {
+    } else if(is_true(player.turbine_emped) || !is_true(player.turbine_power_is_on)) {
       wait 2;
       self.powered = 0;
 
@@ -349,8 +345,7 @@ maxis_sidequest_a() {
     if(get_how_many_progressed_from("maxis", "A_turbine_1", "A_turbine_2") == 2) {
       if(avogadro_at_tower()) {
         level thread maxissay("vox_maxi_turbine_2tower_avo_0", (7737, -416, -142));
-      }
-      else {
+      } else {
         level thread maxissay("vox_maxi_turbine_2tower_0", (7737, -416, -142));
       }
 
@@ -362,8 +357,7 @@ maxis_sidequest_a() {
 
     if(!level.sq_progress["maxis"]["B_complete"]) {
       level.sq_progress["maxis"]["A_complete"] = 0;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -449,8 +443,7 @@ maxis_sidequest_c() {
 
       if(isDefined(level.sq_progress["maxis"]["C_turbine_1"])) {
         zone = level.sq_progress["maxis"]["C_screecher_1"];
-      }
-      else {
+      } else {
         zone = level.sq_progress["maxis"]["C_screecher_2"];
       }
 
@@ -465,8 +458,7 @@ maxis_sidequest_c() {
 
       if(isDefined(level.sq_progress["maxis"]["C_turbine_1"])) {
         zone = level.sq_progress["maxis"]["C_screecher_1"];
-      }
-      else {
+      } else {
         zone = level.sq_progress["maxis"]["C_screecher_2"];
       }
 
@@ -638,8 +630,7 @@ richtofen_sidequest_b() {
 
     level.sq_progress["rich"]["B_zombies_tower"]--;
 
-    if(level.sq_progress["rich"]["B_zombies_tower"] > 0) {
-    }
+    if(level.sq_progress["rich"]["B_zombies_tower"] > 0) {}
   }
 
   level thread richtofensay("vox_zmba_sidequest_blow_nomag_0");
@@ -810,8 +801,7 @@ turbine_watch_cleanup() {
 get_how_many_progressed_from(story, a, b) {
   if(isDefined(level.sq_progress[story][a]) && !isDefined(level.sq_progress[story][b]) || !isDefined(level.sq_progress[story][a]) && isDefined(level.sq_progress[story][b])) {
     return 1;
-  }
-  else if(isDefined(level.sq_progress[story][a]) && isDefined(level.sq_progress[story][b])) {
+  } else if(isDefined(level.sq_progress[story][a]) && isDefined(level.sq_progress[story][b])) {
     return 2;
   }
 
@@ -835,8 +825,7 @@ update_sidequest_stats(stat_name) {
 
   if(stat_name == "sq_transit_maxis_complete") {
     maxis_complete = 1;
-  }
-  else if(stat_name == "sq_transit_rich_complete") {
+  } else if(stat_name == "sq_transit_rich_complete") {
     rich_complete = 1;
   }
 
@@ -845,8 +834,7 @@ update_sidequest_stats(stat_name) {
   foreach(player in players) {
     if(stat_name == "sq_transit_started") {
       player.transit_sq_started = 1;
-    }
-    else if(stat_name == "navcard_applied_zm_transit") {
+    } else if(stat_name == "navcard_applied_zm_transit") {
       player maps\mp\zombies\_zm_stats::set_global_stat(level.navcard_needed, 0);
       thread sq_refresh_player_navcard_hud();
     } else if(!(isDefined(player.transit_sq_started) && player.transit_sq_started)) {
@@ -936,8 +924,7 @@ maxissay(line, org, playonent, playonenttag, ignore_power_state) {
 
   if(isDefined(playonent)) {
     playonent playsoundontag(line, playonenttag);
-  }
-  else {
+  } else {
     playsoundatposition(line, org);
   }
 
@@ -1019,8 +1006,7 @@ survivor_vox() {
           if(flag("power_on")) {
             if(i == -1 || i > 4) {
               playsoundatposition("vox_maxi_tv_distress_0", (8000, -6656, 160));
-            }
-            else if(i < 4) {
+            } else if(i < 4) {
               playsoundatposition(level.survivor_vox[i], (8000, -6656, 160));
             }
 

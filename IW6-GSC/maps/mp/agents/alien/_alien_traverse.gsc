@@ -176,8 +176,7 @@ alienRegularTraversal(startNode, animState, animIndexArray, endInOriented, flexH
 
   if(result.need_support) {
     doTraversalWithFlexibleHeight(animState, animIndex, animEntry, result.start_notetrack, result.end_notetrack, flexHeightEndAtTraverseEnd, ::alienTraverseNotetrackHandler);
-  }
-  else {
+  } else {
     PlayAnimNUntilNotetrack(animState, animIndex, "canned_traverse", "end", ::alienTraverseNotetrackHandler);
   }
 
@@ -266,8 +265,7 @@ doTraversalWithFlexibleHeight_internal(animState, animIndex, animLabel, animEntr
 
   if(remaining_height <= not_scaled_anim_height) {
     anim_scale = 1;
-  }
-  else {
+  } else {
     anim_scale = (remaining_height - not_scaled_anim_height) / scaled_anim_height;
   }
 
@@ -379,8 +377,7 @@ alienClimbUp(startNode, endNode, animState, longerEndAnim) {
 
   if(canDoLongerEndAnim) {
     PlayAnimNUntilNotetrack(animState, 4, "canned_traverse", "stop_teleport", ::alienTraverseNotetrackHandler);
-  }
-  else {
+  } else {
     PlayAnimNUntilNotetrack(animState, 3, "canned_traverse", "stop_teleport", ::alienTraverseNotetrackHandler);
   }
 
@@ -456,8 +453,7 @@ alienClimbDown(startNode, endNode, animState) {
 
   if(canDoJump) {
     PlayAnimNUntilNotetrack(animState, 4, "canned_traverse", "stop_teleport");
-  }
-  else {
+  } else {
     PlayAnimNUntilNotetrack(animState, 3, "canned_traverse", "stop_teleport");
   }
 
@@ -493,8 +489,7 @@ doTraverseClimbLerp(startAnim, startNode, verticalProbeDis, horizontalProbeDis, 
 
   if(probeForward) {
     horizontal_probe_direction = (lerp_target_pos - startNode.origin) * (1, 1, 0);
-  }
-  else {
+  } else {
     horizontal_probe_direction = (startNode.origin - lerp_target_pos) * (1, 1, 0);
   }
 

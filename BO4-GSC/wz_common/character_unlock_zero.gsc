@@ -8,11 +8,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_zero;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_zero", &__init__, undefined, #"character_unlock_zero_fixup");
+  system::register(#"character_unlock_zero", &__init__, undefined, # "character_unlock_zero_fixup");
 }
 
 __init__() {
@@ -29,7 +28,7 @@ function_2613aeec(enabled) {
 function_2a798d57() {
   if(self character_unlock::function_f0406288(#"zero_unlock")) {
     if(self stats::get_stat_global(#"destroy_equipment") >= 50) {
-      self character_unlock::function_c8beca5e(#"zero_unlock", #"hash_178b421c5b67b4d5", 1);
+      self character_unlock::function_c8beca5e(#"zero_unlock", # "hash_178b421c5b67b4d5", 1);
     }
   }
 }
@@ -37,10 +36,10 @@ function_2a798d57() {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(itementry.name === #"cu32_item") {
+  if(itementry.name === # "cu32_item") {
     if(self character_unlock::function_f0406288(#"zero_unlock")) {
       if(self stats::get_stat_global(#"destroy_equipment") >= 50) {
-        self character_unlock::function_c8beca5e(#"zero_unlock", #"hash_178b421c5b67b4d5", 1);
+        self character_unlock::function_c8beca5e(#"zero_unlock", # "hash_178b421c5b67b4d5", 1);
       }
     }
   }

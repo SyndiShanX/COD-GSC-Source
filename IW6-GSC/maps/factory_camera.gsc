@@ -71,25 +71,20 @@ sat_camera_feedback(var_0) {
 
     if(self.cam_offsetforward <= -0.5) {
       sat_give_feedback(level.sat_feedback_behind);
-    }
-    else if(self.cam_offsetright >= var_1) {
+    } else if(self.cam_offsetright >= var_1) {
       if(self.cam_offsetup <= -1 * var_1) {
         sat_give_feedback(level.sat_feedback_right_down);
-      }
-      else if(self.cam_offsetup >= var_1) {
+      } else if(self.cam_offsetup >= var_1) {
         sat_give_feedback(level.sat_feedback_right_up);
-      }
-      else {
+      } else {
         sat_give_feedback(level.sat_feedback_right);
       }
     } else if(self.cam_offsetright <= -1 * var_1) {
       if(self.cam_offsetup <= -1 * var_1) {
         sat_give_feedback(level.sat_feedback_left_down);
-      }
-      else if(self.cam_offsetup >= var_1) {
+      } else if(self.cam_offsetup >= var_1) {
         sat_give_feedback(level.sat_feedback_left_up);
-      }
-      else {
+      } else {
         sat_give_feedback(level.sat_feedback_left);
       }
     } else if(self.cam_offsetup <= -1 * var_1)
@@ -841,7 +836,7 @@ binocular_face_scanning_data() {
     }
 
     foreach(var_6 in var_4) {
-    var_6 settext(var_6.defaulttext + int(randomfloatrange(0.0, 10000) * 100000) / 100000);
+      var_6 settext(var_6.defaulttext + int(randomfloatrange(0.0, 10000) * 100000) / 100000);
     }
 
     wait 0.05;
@@ -1069,7 +1064,7 @@ monitor_binoculars_variable_zoom() {
         thread maps\factory_audio::aud_binoculars_zoom_in();
 
       foreach(var_1 in self.binocular_reticle_pieces) {
-      var_1.alpha = 1.0;
+        var_1.alpha = 1.0;
       }
 
       wait 0.15;
@@ -1081,11 +1076,11 @@ monitor_binoculars_variable_zoom() {
 
       if(isDefined(self.binoculars_trace["entity"]) && isai(self.binoculars_trace["entity"]) && self.binoculars_trace["entity"] isbadguy()) {
         foreach(var_1 in self.binocular_reticle_pieces) {
-        var_1.alpha = 1.0;
+          var_1.alpha = 1.0;
         }
       } else {
         foreach(var_1 in self.binocular_reticle_pieces) {
-        var_1.alpha = 0.0;
+          var_1.alpha = 0.0;
         }
       }
 
@@ -1113,11 +1108,9 @@ binoculars_zoom() {
 
   if(self.current_binocular_zoom_level == 0) {
     setsaveddvar("cg_fov", 65);
-  }
-  else if(self.current_binocular_zoom_level == 1) {
+  } else if(self.current_binocular_zoom_level == 1) {
     setsaveddvar("cg_fov", 43);
-  }
-  else if(self.current_binocular_zoom_level == 2) {
+  } else if(self.current_binocular_zoom_level == 2) {
     setsaveddvar("cg_fov", 27);
   }
 }
@@ -1172,26 +1165,19 @@ binoculars_angles_display() {
 
     if(var_1 > 337.5 || var_1 < 22.5) {
       self.camera_hud_item["heading"] settext("N");
-    }
-    else if(var_1 < 67.5) {
+    } else if(var_1 < 67.5) {
       self.camera_hud_item["heading"] settext("NE");
-    }
-    else if(var_1 < 112.5) {
+    } else if(var_1 < 112.5) {
       self.camera_hud_item["heading"] settext("E");
-    }
-    else if(var_1 < 157.5) {
+    } else if(var_1 < 157.5) {
       self.camera_hud_item["heading"] settext("SE");
-    }
-    else if(var_1 < 202.5) {
+    } else if(var_1 < 202.5) {
       self.camera_hud_item["heading"] settext("S");
-    }
-    else if(var_1 < 247.5) {
+    } else if(var_1 < 247.5) {
       self.camera_hud_item["heading"] settext("SW");
-    }
-    else if(var_1 < 292.5) {
+    } else if(var_1 < 292.5) {
       self.camera_hud_item["heading"] settext("W");
-    }
-    else {
+    } else {
       self.camera_hud_item["heading"] settext("NW");
     }
 
@@ -1208,8 +1194,7 @@ sat_camera_reticule() {
     if(isDefined(level.sat_current_target)) {
       if(isDefined(self.binoculars_trace["entity"]) && isDefined(self.binoculars_trace["entity"].targetname) && self.binoculars_trace["entity"].targetname == level.sat_current_target.target) {
         var_0 = 1;
-      }
-      else {
+      } else {
         var_0 = 0;
       }
     } else

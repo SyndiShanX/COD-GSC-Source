@@ -174,8 +174,7 @@ destructible_info(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8,
 
   if(!isDefined(var_11)) {
     level.destructible_type[var_12].parts[var_0][var_1].v["createEntityForAnimation"] = 0;
-  }
-  else {
+  } else {
     level.destructible_type[var_12].parts[var_0][var_1].v["createEntityForAnimation"] = var_11;
   }
 }
@@ -373,8 +372,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
       if(var_16) {
         if(var_5 == level.player) {
           self.player_damage = self.player_damage + var_0;
-        }
-        else if(var_5 != self) {
+        } else if(var_5 != self) {
           self.non_player_damage = self.non_player_damage + var_0;
         }
 
@@ -458,8 +456,7 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
             if(self.playingfxpartscount < 3) {
               destructible_playfxontag_internal(var_20, var_19, var_21);
-            }
-            else {
+            } else {
               while(self.playingfxpartscount >= 3) {
                 wait 0.05;
               }
@@ -511,12 +508,9 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
         if(var_29 == "setanim") {
           var_19 setanim(var_27, 1.0, 1.0, 1.0);
-        }
-        else if(var_29 == "setanimknob") {
+        } else if(var_29 == "setanimknob") {
           var_19 setanimknob(var_27, 1.0, 1.0, 1.0);
-        }
-        else {
-        }
+        } else {}
       }
     }
 
@@ -543,12 +537,9 @@ destructible_update_part(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
         if(var_29 == "setanim") {
           var_30 setanim(var_27, 1.0, 1.0, 1.0);
-        }
-        else if(var_29 == "setanimknob") {
+        } else if(var_29 == "setanimknob") {
           var_30 setanimknob(var_27, 1.0, 1.0, 1.0);
-        }
-        else {
-        }
+        } else {}
       }
     }
 
@@ -856,8 +847,7 @@ health_drain(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(!isDefined(self.disablebadplace)) {
       if(var_6 == "both") {
         badplace_cylinder(var_7, 0, self.origin, var_5, 128, "allies", "axis");
-      }
-      else {
+      } else {
         badplace_cylinder(var_7, 0, self.origin, var_5, 128, var_6);
       }
     }
@@ -956,8 +946,7 @@ explode(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_6)) {
     var_7 = self gettagorigin(var_6);
-  }
-  else {
+  } else {
     var_7 = self.origin;
   }
 
@@ -966,7 +955,7 @@ explode(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(self.partsspawnedents)) {
     foreach(var_9 in self.partsspawnedents) {
-    var_9 delete();
+      var_9 delete();
     }
   }
 
@@ -1045,8 +1034,7 @@ arcademode_car_kill() {
 get_destructible_index(var_0, var_1, var_2) {
   if(var_1 >= 0) {
     return level.destructible_type[self.destuctableinfo].parts[var_0][var_1].v[var_2];
-  }
-  else if(var_1 == -1) {
+  } else if(var_1 == -1) {
     var_3 = undefined;
 
     for(var_4 = 0; var_4 < level.destructible_type[self.destuctableinfo].parts[var_0].size; var_4++) {
@@ -1125,15 +1113,13 @@ play_loop_sound_on_destructible(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_3.origin = var_2 gettagorigin(var_1);
-  }
-  else {
+  } else {
     var_3.origin = var_2.origin;
   }
 
   if(soundexists(var_0)) {
     var_3 playLoopSound(var_0);
-  }
-  else {}
+  } else {}
 
   var_2 thread force_stop_sound(var_0);
   var_2 waittill("stop sound" + var_0);
@@ -1166,8 +1152,7 @@ notifydamageafterframe(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 get_dummy() {
   if(self.modeldummyon) {
     var_0 = self.modeldummy;
-  }
-  else {
+  } else {
     var_0 = self;
   }
 

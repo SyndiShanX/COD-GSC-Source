@@ -42,7 +42,7 @@ init_game_mode_objects(mode, location) {
           trigs = getEntArray(i, "vision_trig", "targetname");
 
           foreach(trig in trigs) {
-          trig delete();
+            trig delete();
           }
         }
     }
@@ -233,8 +233,7 @@ door_monitor(team, doornum, spots, doors, signs) {
 
     if(team == "1") {
       level._team_1_current_door++;
-    }
-    else {
+    } else {
       level._team_2_current_door++;
     }
 

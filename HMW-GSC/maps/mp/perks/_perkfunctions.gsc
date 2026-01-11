@@ -37,8 +37,7 @@ updateTISpawnPosition() {
 isValidTISpawnPosition() {
   if(Canspawn(self.origin) && self IsOnGround()) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -104,8 +103,7 @@ GlowStickSetupAndWaitForDeath(owner) {
   self setModel(level.spawnGlowModel["enemy"]);
   if(level.teamBased) {
     self maps\mp\_entityheadIcons::setTeamHeadIcon(self.team, (0, 0, 20));
-  }
-  else {
+  } else {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(owner, (0, 0, 20));
   }
 
@@ -141,8 +139,7 @@ GlowStickTeamUpdater(showForTeam, showEffect, owner) {
 
   if(showEffect == level.spawnGlow["friendly"]) {
     self thread h2_glowstick_fx(fxEnt);
-  }
-  else {
+  } else {
     TriggerFx(fxEnt);
   }
 
@@ -433,17 +430,13 @@ unsetpersonaluav() {
   }
 }
 
-setoverkillpro() {
-}
+setoverkillpro() {}
 
-unsetoverkillpro() {
-}
+unsetoverkillpro() {}
 
-setempimmune() {
-}
+setempimmune() {}
 
-unsetempimmune() {
-}
+unsetempimmune() {}
 
 setautospot() {
   autospotadswatcher();
@@ -495,11 +488,9 @@ autospotadswatcher() {
   }
 }
 
-setregenspeed() {
-}
+setregenspeed() {}
 
-unsetregenspeed() {
-}
+unsetregenspeed() {}
 
 setsharpfocus() {
   self setviewkickscale(0.5);
@@ -556,8 +547,7 @@ setmarksman(var_0) {
 
   if(!isDefined(var_0)) {
     var_0 = 10;
-  }
-  else {
+  } else {
     var_0 = int(var_0) * 2;
   }
 
@@ -577,8 +567,7 @@ setstunresistance(var_0) {
 
   if(!isDefined(var_0)) {
     self.stunscaler = 0.5;
-  }
-  else {
+  } else {
     self.stunscaler = int(var_0) / 10;
   }
 }
@@ -605,8 +594,7 @@ perkusedeathtracker() {
   self._useperkenabled = undefined;
 }
 
-setrearview() {
-}
+setrearview() {}
 
 unsetrearview() {
   self notify("end_perkUseTracker");
@@ -689,11 +677,9 @@ unsetsteelnerves() {
   maps\mp\_utility::_unsetperk("specialty_holdbreath");
 }
 
-setdelaymine() {
-}
+setdelaymine() {}
 
-unsetdelaymine() {
-}
+unsetdelaymine() {}
 
 setlocaljammer() {
   if(!maps\mp\_utility::isemped()) {
@@ -963,11 +949,9 @@ blastshield_overlay() {
   overlay destroy();
 }
 
-setfreefall() {
-}
+setfreefall() {}
 
-unsetfreefall() {
-}
+unsetfreefall() {}
 
 setpainted(var_0) {
   if(isplayer(self)) {
@@ -1022,11 +1006,9 @@ unsetfinalstand() {
   maps\mp\_utility::_unsetperk("specialty_pistoldeath");
 }
 
-setuav() {
-}
+setuav() {}
 
-unsetuav() {
-}
+unsetuav() {}
 
 setstoppingpower() {}
 
@@ -1156,8 +1138,7 @@ setlightarmor(var_0) {
 
   if(isDefined(var_0)) {
     self.maxlightarmorhp = var_0;
-  }
-  else {
+  } else {
     self.maxlightarmorhp = 150;
   }
 

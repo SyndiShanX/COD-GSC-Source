@@ -25,8 +25,7 @@ init() {
     dvarString = ("scr_" + level.gameType + "_teamBalanceEndOfRound");
     if(level.gameType == "sd") {
       setdvar(dvarString, "1");
-    }
-    else {
+    } else {
       setdvar(dvarString, "0");
     }
   }
@@ -213,15 +212,13 @@ getTeamBalance() {
   for(i = 0; i < players.size; i++) {
     if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       level.team["allies"]++;
-    }
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
+    } else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       level.team["axis"]++;
     }
   }
   if((level.team["allies"] > (level.team["axis"] + level.teambalance)) || (level.team["axis"] > (level.team["allies"] + level.teambalance))) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -229,8 +226,7 @@ getTeamBalance() {
 canAutobalance(player) {
   if(!level.teamBalanceEndOfRound && ((isDefined(player.isDefusing) && player.isDefusing) || (isDefined(player.isPlanting) && player.isPlanting) || isDefined(player.carryObject) || isDefined(player.dont_auto_balance))) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -245,8 +241,7 @@ balanceMostRecent() {
     }
     if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       AlliedPlayers[AlliedPlayers.size] = players[i];
-    }
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
+    } else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       AxisPlayers[AxisPlayers.size] = players[i];
     }
   }
@@ -259,20 +254,17 @@ balanceMostRecent() {
         }
         if(!isDefined(MostRecent)) {
           MostRecent = AlliedPlayers[j];
-        }
-        else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
+        } else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
           MostRecent = AlliedPlayers[j];
         }
       }
       if(isDefined(MostRecent)) {
         MostRecent changeTeam("axis");
-      }
-      else {
+      } else {
         for(j = 0; j < AlliedPlayers.size; j++) {
           if(!isDefined(MostRecent)) {
             MostRecent = AlliedPlayers[j];
-          }
-          else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
+          } else if(AlliedPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
             MostRecent = AlliedPlayers[j];
           }
         }
@@ -285,20 +277,17 @@ balanceMostRecent() {
         }
         if(!isDefined(MostRecent)) {
           MostRecent = AxisPlayers[j];
-        }
-        else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
+        } else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
           MostRecent = AxisPlayers[j];
         }
       }
       if(isDefined(MostRecent)) {
         MostRecent changeTeam("allies");
-      }
-      else {
+      } else {
         for(j = 0; j < AxisPlayers.size; j++) {
           if(!isDefined(MostRecent)) {
             MostRecent = AxisPlayers[j];
-          }
-          else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
+          } else if(AxisPlayers[j].pers["teamTime"] > MostRecent.pers["teamTime"]) {
             MostRecent = AxisPlayers[j];
           }
         }
@@ -312,8 +301,7 @@ balanceMostRecent() {
     for(i = 0; i < players.size; i++) {
       if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
         AlliedPlayers[AlliedPlayers.size] = players[i];
-      }
-      else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
+      } else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
         AxisPlayers[AxisPlayers.size] = players[i];
       }
     }
@@ -330,8 +318,7 @@ balanceDeadPlayers() {
   for(i = 0; i < players.size; i++) {
     if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       AlliedPlayers[AlliedPlayers.size] = players[i];
-    }
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
+    } else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       AxisPlayers[AxisPlayers.size] = players[i];
     }
   }
@@ -359,8 +346,7 @@ balanceDeadPlayers() {
     for(i = 0; i < players.size; i++) {
       if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
         AlliedPlayers[AlliedPlayers.size] = players[i];
-      }
-      else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
+      } else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
         AxisPlayers[AxisPlayers.size] = players[i];
       }
     }
@@ -393,8 +379,7 @@ changeTeam(team) {
   self maps\mp\gametypes\_globallogic::updateObjectiveText();
   if(level.teamBased) {
     self.sessionteam = assignment;
-  }
-  else {
+  } else {
     self.sessionteam = "none";
   }
   if(!isAlive(self)) {
@@ -582,8 +567,7 @@ CountPlayers() {
     }
     if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "allies")) {
       allies++;
-    }
-    else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
+    } else if((isDefined(players[i].pers["team"])) && (players[i].pers["team"] == "axis")) {
       axis++;
     }
   }

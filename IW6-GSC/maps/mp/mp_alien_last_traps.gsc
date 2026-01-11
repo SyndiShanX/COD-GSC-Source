@@ -56,8 +56,7 @@ wait_for_tesla_switch_activation(var_0) {
 
     if(!isDefined(self.script_noteworthy) || self.script_noteworthy != "tesla_generator") {
       self setModel("mp_zeb_garage_switch_on");
-    }
-    else {
+    } else {
       self playLoopSound("alien_fence_gen_lp");
     }
 
@@ -73,8 +72,7 @@ wait_for_tesla_switch_activation(var_0) {
 
     if(!isDefined(self.script_noteworthy) || self.script_noteworthy != "tesla_generator") {
       self setModel("mp_zeb_garage_switch_off");
-    }
-    else {
+    } else {
       self stoploopsound("alien_fence_gen_lp");
     }
 
@@ -146,8 +144,7 @@ run_tesla_trap() {
 
       if(var_7.alien_type == "ancestor") {
         var_8 = var_7 gettagorigin("tag_weapon_chest");
-      }
-      else if(var_7.alien_type == "elite") {
+      } else if(var_7.alien_type == "elite") {
         var_8 = var_7 gettagorigin("tag_eye");
       }
 
@@ -157,14 +154,11 @@ run_tesla_trap() {
 
       if(var_9 >= 100 && var_9 <= var_0 && var_10 <= var_1 * 2) {
         var_11 = 1;
-      }
-      else if(var_9 >= 40 && var_9 <= var_0 && var_10 <= var_1) {
+      } else if(var_9 >= 40 && var_9 <= var_0 && var_10 <= var_1) {
         var_11 = 1;
-      }
-      else if(var_9 > 0 && var_9 <= 40 && var_10 <= var_1) {
+      } else if(var_9 > 0 && var_9 <= 40 && var_10 <= var_1) {
         var_11 = 1;
-      }
-      else if(var_9 <= 0 && var_9 > var_2 && var_10 <= var_1) {
+      } else if(var_9 <= 0 && var_9 > var_2 && var_10 <= var_1) {
         var_11 = 1;
       }
 
@@ -190,8 +184,7 @@ tesla_trap_attack(var_0, var_1) {
 
   if(isDefined(var_0.owner) && isalive(var_0.owner)) {
     self dodamage(var_0.damage_amount, self.origin, var_0.owner, var_0, "MOD_UNKNOWN");
-  }
-  else {
+  } else {
     var_2 = undefined;
     var_3 = undefined;
     self dodamage(var_0.damage_amount, self.origin, var_2, var_3, "MOD_UNKNOWN");
@@ -270,8 +263,7 @@ disable_traps_when_ancestor_attacks() {
   foreach(var_7 in level.tesla_traps) {
     if(!isDefined(var_7.script_noteworthy) || var_7.script_noteworthy != "tesla_generator") {
       var_7 setModel("mp_zeb_garage_switch_off");
-    }
-    else {
+    } else {
       var_7 stoploopsound("alien_fence_gen_lp");
     }
 
@@ -282,7 +274,7 @@ disable_traps_when_ancestor_attacks() {
     maps\mp\alien\_outline_proto::enable_outline(var_7, 4, 1);
 
     foreach(var_9 in var_7.teslas) {
-    level thread disable_tesla(var_9);
+      level thread disable_tesla(var_9);
     }
   }
 
@@ -464,8 +456,7 @@ useholdthink(var_0, var_1) {
 
   if(isDefined(var_1)) {
     self.usetime = var_1;
-  }
-  else {
+  } else {
     self.usetime = 3000;
   }
 

@@ -41,8 +41,7 @@ vectorangle(v1, v2) {
 
   if(dot >= 1) {
     return 0;
-  }
-  else if(dot <= -1) {
+  } else if(dot <= -1) {
     return 180;
   }
 
@@ -197,8 +196,7 @@ copterai() {
 
         if(isDefined(descendingent)) {
           gotopos = result["position"];
-        }
-        else {
+        } else {
           flying = 1;
         }
       }
@@ -207,13 +205,11 @@ copterai() {
 
       if(insidetargets.size == 0) {
         flying = 1;
-      }
-      else {
+      } else {
         if(outsidetargets.size > 0) {
           if(!isDefined(descendingent)) {
             flying = 1;
-          }
-          else {
+          } else {
             calcedgotopos = 1;
             gotopos = determinebestpos(insidetargets, descendingent, self.origin);
 
@@ -239,8 +235,7 @@ copterai() {
           } else if(isDefined(descendingent)) {
             if(isDefined(self.finaldest)) {
               gotopos = self.finaldest;
-            }
-            else {
+            } else {
               gotopos = descendingent.origin;
             }
           } else
@@ -259,8 +254,7 @@ copterai() {
 
       if(outsidetargets.size == 0 && disttoarea > self.areaent.radius + desireddist * 0.25) {
         returningtoarea = 1;
-      }
-      else if(disttoarea < self.areaent.radius * 0.5) {
+      } else if(disttoarea < self.areaent.radius * 0.5) {
         returningtoarea = 0;
       }
 
@@ -415,14 +409,12 @@ determinebestattackpos(targetpos, curpos, desireddist) {
 
   if(isDefined(bestpos)) {
     gotopos = bestpos;
-  }
-  else {
+  } else {
     dist = distance(targetposcopterheight, curpos);
 
     if(dist > desireddist) {
       gotopos = self.origin + vectorscale(vectornormalize(attackdirx), 0 - (dist - desireddist));
-    }
-    else {
+    } else {
       gotopos = self.origin;
     }
   }
@@ -431,8 +423,7 @@ determinebestattackpos(targetpos, curpos, desireddist) {
 }
 
 getrandompos(origin, radius) {
-  for(pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0); distancesquared(pos, origin) > radius * radius; pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0)) {
-  }
+  for(pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0); distancesquared(pos, origin) > radius * radius; pos = origin + ((randomfloat(2) - 1) * radius, (randomfloat(2) - 1) * radius, 0)) {}
 
   return pos;
 }
@@ -498,8 +489,7 @@ setcopterdest(newlocation, descend, dontascend) {
 
   if(isDefined(descend) && descend) {
     self.finalzdest = newlocation[2];
-  }
-  else {
+  } else {
     self.finalzdest = self.finaldest[2];
   }
 
@@ -539,8 +529,7 @@ coptermove() {
 
     if(self.dontascend) {
       movingvertically = 1;
-    }
-    else if(!neardest) {
+    } else if(!neardest) {
       desiredz = getabovebuildingslocation(self.origin)[2];
       movinghorizontally = abs(self.origin[2] - desiredz) <= 256;
       movingvertically = !movinghorizontally;
@@ -550,8 +539,7 @@ coptermove() {
     if(movinghorizontally) {
       if(movingvertically) {
         thisdest = (self.finaldest[0], self.finaldest[1], self.finalzdest);
-      }
-      else {
+      } else {
         thisdest = self.finaldest;
       }
     } else {
@@ -580,11 +568,9 @@ coptermove() {
 
     if(isDefined(self.desireddirentity) && isDefined(self.desireddirentity.origin)) {
       self.destdir = vectornormalize(self.desireddirentity.origin + self.desireddirentityoffset - (self.origin + level.coptercenteroffset));
-    }
-    else if(isDefined(self.desireddir)) {
+    } else if(isDefined(self.desireddir)) {
       self.destdir = self.desireddir;
-    }
-    else if(movingvertically) {
+    } else if(movingvertically) {
       self.destdir = anglesToForward(self.angles);
       self.destdir = vectornormalize((self.destdir[0], self.destdir[1], 0));
     } else {

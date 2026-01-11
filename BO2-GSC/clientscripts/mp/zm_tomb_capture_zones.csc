@@ -402,8 +402,7 @@ sndexploderloop(play, num) {
 
   if(play) {
     playloopat("amb_monolith_sparks", origin);
-  }
-  else {
+  } else {
     stoploopat("amb_monolith_sparks", origin);
   }
 }
@@ -494,8 +493,7 @@ pap_monolith_ring_callback(localclientnumber, oldval, newval, bnewent, binitials
   if(isDefined(m_pack_a_punch)) {
     if(newval) {
       m_pack_a_punch thread crystal_flicker(localclientnumber, 0, 0.2, 0.7, 1.0, 0.05, 0.35);
-    }
-    else {
+    } else {
       m_pack_a_punch thread crystal_glow_lerp_to_value(localclientnumber, 0.65, 5);
     }
   }
@@ -593,8 +591,7 @@ emergence_hole_callback(localclientnumber, oldval, newval, bnewent, binitialsnap
   }
   if(newval) {
     self emergence_hole_spawn(localclientnumber);
-  }
-  else {
+  } else {
     b_delete_despawn_fx = self emergence_hole_despawn(localclientnumber, oldval && !bnewent && !bwasdemojump);
     self emergence_hole_fx_stop(localclientnumber, b_delete_despawn_fx);
   }
@@ -738,11 +735,11 @@ play_pap_anim(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, 
 
 clear_all_pack_a_punch_anims() {
   foreach(anim_name in level.pack_a_punch_anim_sequence["assemble"]) {
-  self clearanim(anim_name, 0);
+    self clearanim(anim_name, 0);
   }
 
   foreach(anim_name in level.pack_a_punch_anim_sequence["disassemble"]) {
-  self clearanim(anim_name, 0);
+    self clearanim(anim_name, 0);
   }
 }
 
@@ -880,8 +877,7 @@ perk_machine_smoke_fx_callback(localclientnumber, oldval, newval, bnewent, binit
   if(isDefined(s_pipes)) {
     if(newval == 1) {
       s_pipes perk_pipe_smoke_fx_enable(localclientnumber);
-    }
-    else {
+    } else {
       s_pipes perk_pipe_smoke_fx_disable(localclientnumber);
     }
   }

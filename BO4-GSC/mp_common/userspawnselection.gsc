@@ -14,7 +14,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\gametypes\globallogic_spawn;
-
 #namespace userspawnselection;
 
 autoexec __init__system__() {
@@ -315,13 +314,13 @@ closespawnselectionmenuforallplayers() {
 }
 
 function_b55c5868() {
-  self endon(#"disconnect", #"end_respawn");
+  self endon(#"disconnect", # "end_respawn");
   self openspawnselect();
   self thread watchforselectiontimeout();
 }
 
 waitforspawnselection() {
-  self endon(#"disconnect", #"end_respawn");
+  self endon(#"disconnect", # "end_respawn");
 
   while(true) {
     waitresult = self waittill(#"menuresponse");
@@ -363,7 +362,7 @@ waitforspawnselection() {
 }
 
 watchforselectiontimeout() {
-  self endon(#"disconnect", #"end_respawn");
+  self endon(#"disconnect", # "end_respawn");
   self.spawnselect_start_time = gettime();
 
   while(true) {
@@ -400,7 +399,7 @@ filter_spawnpoints(spawnpoints) {
   if(!isDefined(level.spawnselect.vox_plr_1_revive_down_2[spawbeaconid])) {
     print("<dev string:x38>");
 
-      level.spawnselect.lastchosenplayerspawns[e_player.clientid] = -1;
+    level.spawnselect.lastchosenplayerspawns[e_player.clientid] = -1;
     return undefined;
   }
 
@@ -433,7 +432,7 @@ private function_259770ba(e_player) {
   if(!isDefined(level.spawnselect.vox_plr_1_revive_down_2[spawbeaconid])) {
     print("<dev string:x38>");
 
-      level.spawnselect.lastchosenplayerspawns[e_player.clientid] = -1;
+    level.spawnselect.lastchosenplayerspawns[e_player.clientid] = -1;
     return undefined;
   }
 
@@ -474,7 +473,7 @@ private function_259770ba(e_player) {
 
     println("<dev string:x1d6>");
 
-      assert(e_player.team == level.spawnselect.vox_plr_1_revive_down_2[spawbeaconid].team);
+    assert(e_player.team == level.spawnselect.vox_plr_1_revive_down_2[spawbeaconid].team);
     return undefined;
   }
 
@@ -595,11 +594,11 @@ getteamclientfieldvalue(team) {
 
   teamname = util::get_team_mapping(team);
 
-  if(team == #"allies") {
+  if(team == # "allies") {
     return 1;
-  } else if(team == #"axis") {
+  } else if(team == # "axis") {
     return 2;
-  } else if(team == #"neutral") {
+  } else if(team == # "neutral") {
     return 3;
   }
 

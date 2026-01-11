@@ -507,7 +507,7 @@ bot_build_claimed_list(items) {
   keys = getarraykeys(items);
 
   foreach(key in keys) {
-  claimed[key] = 0;
+    claimed[key] = 0;
   }
 
   return claimed;

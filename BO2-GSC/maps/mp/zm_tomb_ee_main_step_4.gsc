@@ -128,8 +128,7 @@ ee_mechz_spawn(n_spawn_pos) {
 
   if(isDefined(level.mechz_find_flesh_override_func)) {
     level thread[[level.mechz_find_flesh_override_func]]();
-  }
-  else {
+  } else {
     self thread mechz_find_flesh();
   }
 

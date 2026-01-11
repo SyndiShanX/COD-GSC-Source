@@ -8,7 +8,6 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace shroud;
 
 autoexec __init__system__() {
@@ -107,7 +106,7 @@ private function_a252eaf0(localclientnum, entnum, team) {
 private function_27e74bc4() {
   self notify("7fcaa52d398d10a6");
   self endon("7fcaa52d398d10a6");
-  self waittill(#"death", #"disconnect");
+  self waittill(#"death", # "disconnect");
 
   if(isDefined(self.var_981be9e8)) {
     self.var_981be9e8 delete();

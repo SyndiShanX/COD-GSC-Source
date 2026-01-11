@@ -43,8 +43,7 @@ main() {
 swing_trail_fx(localclientnum, set, newent) {
   if(set) {
     self.trailfx = playFXOnTag(localclientnum, level._effect["harper_swing_trail"], self, "j_spineupper");
-  }
-  else if(isDefined(self.trailfx)) {
+  } else if(isDefined(self.trailfx)) {
     stopfx(localclientnum, self.trailfx);
     self.trailfx = undefined;
   }
@@ -136,8 +135,7 @@ toggle_gas_suit(localclientnum, set, newent) {
 toggle_outline(localclientnum, set, newent) {
   if(set) {
     self sethudoutlinecolor(1);
-  }
-  else {
+  } else {
     self sethudoutlinecolor(0);
   }
 }
@@ -245,8 +243,7 @@ frost_filter_over_time(n_duration, inside_chamber, set) {
 
       if(isDefined(inside_chamber)) {
         max_intensity = 0.2;
-      }
-      else {
+      } else {
         max_intensity = 1;
       }
 
@@ -262,8 +259,7 @@ frost_filter_over_time(n_duration, inside_chamber, set) {
 
       if(isDefined(inside_chamber)) {
         max_intensity = 0.2;
-      }
-      else {
+      } else {
         max_intensity = 1;
       }
 

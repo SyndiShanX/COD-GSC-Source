@@ -65,12 +65,10 @@ main() {
     case "rebirth":
       if(!isDefined(level.start_point)) {
         introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", &"REBIRTH_MASON_INTROSCREEN_2", &"REBIRTH_MASON_INTROSCREEN_3", &"REBIRTH_MASON_INTROSCREEN_4", &"REBIRTH_MASON_INTROSCREEN_5");
-      }
-      else {
+      } else {
         if(level.start_point == "default" || level.start_point == "mason_stealth" || level.start_point == "mason_lab") {
           introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", &"REBIRTH_MASON_INTROSCREEN_2", &"REBIRTH_MASON_INTROSCREEN_3", &"REBIRTH_MASON_INTROSCREEN_4", &"REBIRTH_MASON_INTROSCREEN_5");
-        }
-        else {
+        } else {
           if(level.start_point != "btr_rail") {
             introscreen_redact_delay(&"REBIRTH_MASON_INTROSCREEN_1", &"REBIRTH_HUDSON_INTROSCREEN_2", &"REBIRTH_HUDSON_INTROSCREEN_3", &"REBIRTH_HUDSON_INTROSCREEN_4");
           }
@@ -133,8 +131,7 @@ introscreen_create_redacted_line(string, redacted_line_time, start_rubout_time, 
   if(!isDefined(scale)) {
     if(level.splitscreen && !level.hidef) {
       fontScale = 2.5;
-    }
-    else {
+    } else {
       fontScale = 1.5;
     }
   } else
@@ -197,8 +194,7 @@ introscreen_create_line(string, type, scale, font, color) {
   if(!isDefined(scale)) {
     if(level.splitscreen && !level.hidef) {
       fontScale = 2.75;
-    }
-    else {
+    } else {
       fontScale = 1.75;
     }
   } else
@@ -324,8 +320,7 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
   }
   if(isDefined(level.introscreen_shader_fadeout_time)) {
     level.introblack FadeOverTime(level.introscreen_shader_fadeout_time);
-  }
-  else {
+  } else {
     level.introblack FadeOverTime(1.5);
   }
   level.introblack.alpha = 0;

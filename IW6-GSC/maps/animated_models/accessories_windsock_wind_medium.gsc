@@ -21,8 +21,7 @@ main() {
 
   if(var_1) {
     level.anim_prop_models[var_2]["wind_medium"] = % windsock_wind_medium;
-  }
-  else {
+  } else {
     level.anim_prop_models[var_2]["wind_medium"] = "windsock_wind_medium";
   }
 }

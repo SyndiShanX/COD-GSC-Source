@@ -205,11 +205,9 @@ onMenuResponse() {
     } else if(!level.console) {
       if(menu == game["menu_quickcommands"]) {
         maps\mp\gametypes\_quickmessages::quickcommands(response);
-      }
-      else if(menu == game["menu_quickstatements"]) {
+      } else if(menu == game["menu_quickstatements"]) {
         maps\mp\gametypes\_quickmessages::quickstatements(response);
-      }
-      else if(menu == game["menu_quickresponses"]) {
+      } else if(menu == game["menu_quickresponses"]) {
         maps\mp\gametypes\_quickmessages::quickresponses(response);
       }
     }
@@ -233,11 +231,9 @@ getTeamAssignment() {
     if(playerCounts["allies"] == playerCounts["axis"]) {
       if(getTeamScore("allies") == getTeamScore("axis")) {
         assignment = teams[randomInt(2)];
-      }
-      else if(getTeamScore("allies") < getTeamScore("axis")) {
+      } else if(getTeamScore("allies") < getTeamScore("axis")) {
         assignment = "allies";
-      }
-      else {
+      } else {
         assignment = "axis";
       }
     } else if(playerCounts["allies"] < playerCounts["axis"]) {
@@ -417,9 +413,9 @@ menuClass(response) {
   }
 
   if((isDefined(self.pers["class"]) && self.pers["class"] == class) &&
-    (isDefined(self.pers["primary"]) && self.pers["primary"] == primary))
+    (isDefined(self.pers["primary"]) && self.pers["primary"] == primary)) {
     return;
-
+  }
   if(self.sessionstate == "playing") {
     self.pers["class"] = class;
     self.class = class;
@@ -472,8 +468,7 @@ addToTeam(team, firstConnect) {
     } else {
       if(team == "spectator") {
         self.sessionteam = "spectator";
-      }
-      else {
+      } else {
         self.sessionteam = "none";
       }
     }

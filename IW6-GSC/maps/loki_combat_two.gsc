@@ -124,7 +124,7 @@ hide_combat_two_intro_debris() {
   var_4 = getEntArray("intel_laptop", "script_noteworthy");
 
   foreach(var_6 in var_4) {
-  var_6 hide();
+    var_6 hide();
   }
 }
 
@@ -176,7 +176,7 @@ enemy_spawn(var_0, var_1) {
     var_2 = getEntArray(var_0, "targetname");
 
     foreach(var_4 in var_2) {
-    var_4 maps\_utility::add_spawn_function(var_1);
+      var_4 maps\_utility::add_spawn_function(var_1);
     }
   }
 
@@ -200,8 +200,7 @@ detectexposedandreacquire() {
 
     if(isDefined(self.node) && self.node.type != "Exposed 3D" && distancesquared(self.origin, self.node.origin) < var_0) {
       var_4 = 1;
-    }
-    else if(distancesquared(self.origin, var_2) > var_0) {
+    } else if(distancesquared(self.origin, var_2) > var_0) {
       var_4 = 1;
     }
 
@@ -1074,7 +1073,7 @@ ally_1_animation() {
   var_5 = getEntArray("spinning_crate_collision", "targetname");
 
   foreach(var_7 in var_5) {
-  var_7 linkto(var_4);
+    var_7 linkto(var_4);
   }
 
   var_3 = [];
@@ -1250,7 +1249,7 @@ diable_nodes_if_near_player() {
   var_0 = getEntArray("disable_nodes", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread turn_off_nodes();
+    var_2 thread turn_off_nodes();
   }
 }
 
@@ -1305,13 +1304,13 @@ turn_off_nodes() {
       var_0 = getnodearray("node_to_disable", "targetname");
 
       foreach(var_2 in var_0) {
-      var_2 disconnectnode();
+        var_2 disconnectnode();
       }
     } else {
       var_0 = getnodearray("node_to_disable", "targetname");
 
       foreach(var_2 in var_0) {
-      var_2 connectnode();
+        var_2 connectnode();
       }
     }
 
@@ -1376,7 +1375,7 @@ moving_large_debris() {
   var_3 = 2000;
 
   foreach(var_5 in var_0) {
-  var_5 hide();
+    var_5 hide();
   }
 
   common_scripts\utility::flag_wait("moving_cover_done2");
@@ -1402,7 +1401,7 @@ moving_large_debris() {
   common_scripts\utility::flag_wait("charge_set");
 
   foreach(var_5 in var_0) {
-  var_5 delete();
+    var_5 delete();
   }
 }
 

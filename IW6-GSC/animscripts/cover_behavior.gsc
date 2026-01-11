@@ -52,16 +52,13 @@ main(var_0) {
     }
 
     if(isDefined(var_0.movetonearbycover)) {
-      if([
-          [var_0.movetonearbycover]
-        ]())
+      if([[var_0.movetonearbycover]]())
         continue;
     }
 
     if(animscripts\utility::isspaceai()) {
       self safeteleport(self.covernode.origin);
-    }
-    else {
+    } else {
       self safeteleport(self.covernode.origin, getcorrectcoverangles());
     }
 
@@ -196,8 +193,7 @@ attacksuppressableenemy(var_0, var_1) {
 
     if(!self.providecoveringfire && gettime() - self.lastsuppressiontime > 5000 && randomint(3) < 2) {
       var_2 = "ambush";
-    }
-    else if(!animscripts\shoot_behavior::shouldsuppress()) {
+    } else if(!animscripts\shoot_behavior::shouldsuppress()) {
       var_2 = "ambush";
     }
 
@@ -265,8 +261,7 @@ isenemyvisiblefromexposed() {
 
   if(distancesquared(self.enemy.origin, self.couldntseeenemypos) < 256) {
     return 0;
-  }
-  else {
+  } else {
     return animscripts\utility::canseeenemyfromexposed();
   }
 }
@@ -345,8 +340,7 @@ getpermutation(var_0) {
 
   if(var_0 == 1) {
     var_1[0] = 0;
-  }
-  else if(var_0 == 2) {
+  } else if(var_0 == 2) {
     var_1[0] = randomint(2);
     var_1[1] = 1 - var_1[0];
   } else {
@@ -376,14 +370,11 @@ calloptionalbehaviorcallback(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_5 = [[var_0]](var_1, var_2, var_3);
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     var_5 = [[var_0]](var_1, var_2);
-  }
-  else if(isDefined(var_1)) {
+  } else if(isDefined(var_1)) {
     var_5 = [[var_0]](var_1);
-  }
-  else {
+  } else {
     var_5 = [[var_0]]();
   }
 
@@ -441,8 +432,7 @@ lookforenemy(var_0) {
 
   if(self.a.lastencountertime + 6000 > gettime()) {
     return lookfast(var_0);
-  }
-  else {
+  } else {
     var_1 = calloptionalbehaviorcallback(var_0.look, 2 + randomfloat(2));
 
     if(var_1) {
@@ -468,9 +458,7 @@ idle(var_0, var_1) {
 
   if(isDefined(var_0.flinch)) {
     if(!self.a.idlingatcover && gettime() - self.suppressionstart < 600) {
-      if([
-          [var_0.flinch]
-        ]())
+      if([[var_0.flinch]]())
         return 1;
     } else
       thread flinchwhensuppressed(var_0);
@@ -483,8 +471,7 @@ idle(var_0, var_1) {
 
   if(isDefined(var_1)) {
     idlewait(var_1);
-  }
-  else {
+  } else {
     idlewaitabit();
   }
 
@@ -565,8 +552,7 @@ trythrowinggrenade(var_0, var_1) {
 
   if(animscripts\utility::ispartiallysuppressedwrapper()) {
     return calloptionalbehaviorcallback(var_0.grenadehidden, var_1);
-  }
-  else {
+  } else {
     return calloptionalbehaviorcallback(var_0.grenade, var_1);
   }
 }
@@ -640,8 +626,7 @@ resetlookforbettercovertime() {
 
   if(isDefined(self.didshufflemove) && var_0 > self.a.getboredofthisnodetime) {
     self.a.getboredofthisnodetime = var_0 + randomintrange(2000, 5000);
-  }
-  else if(isDefined(self.enemy)) {
+  } else if(isDefined(self.enemy)) {
     var_1 = distance2d(self.origin, self.enemy.origin);
 
     if(var_1 < self.engagemindist) {
@@ -664,8 +649,7 @@ resetlookforbettercovertime() {
 resetseekoutenemytime() {
   if(isDefined(self.aggressivemode)) {
     self.seekoutenemytime = gettime() + randomintrange(500, 1000);
-  }
-  else {
+  } else {
     self.seekoutenemytime = gettime() + randomintrange(3000, 5000);
   }
 }
@@ -713,7 +697,7 @@ set_standing_turns() {
   var_0 = animscripts\utility::lookupanimarray("exposed_turn");
 
   foreach(var_3, var_2 in var_0) {
-  self.a.array[var_3] = var_2;
+    self.a.array[var_3] = var_2;
   }
 }
 
@@ -721,7 +705,7 @@ set_crouching_turns() {
   var_0 = animscripts\utility::lookupanimarray("exposed_turn_crouch");
 
   foreach(var_3, var_2 in var_0) {
-  self.a.array[var_3] = var_2;
+    self.a.array[var_3] = var_2;
   }
 }
 
@@ -744,8 +728,7 @@ turntomatchnodedirection(var_0) {
     if(self.a.pose == "stand" && var_1 gethighestnodestance() != "stand") {
       if(var_2 > 45 && var_2 < 90) {
         self orientmode("face angle", self.angles[1]);
-      }
-      else {
+      } else {
         self orientmode("face current");
       }
 
@@ -769,11 +752,9 @@ turntomatchnodedirection(var_0) {
     if(abs(var_6) > 45) {
       if(self.swimmer) {
         set_swimming_turns();
-      }
-      else if(self.a.pose == "stand") {
+      } else if(self.a.pose == "stand") {
         set_standing_turns();
-      }
-      else {
+      } else {
         set_crouching_turns();
       }
 

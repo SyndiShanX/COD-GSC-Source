@@ -3375,7 +3375,7 @@ steamroom_gate_swap() {
     {
     	continue;
     }
-		
+    		
     if( within_fov( level.player.origin, level.player GetPlayerAngles(), level.steamroom_gate_closed.origin, level.cosine[ "45" ] ) )
     {
     	continue;
@@ -4070,7 +4070,7 @@ steamroom_price_start_ambush() {
   /*
   vol = GetEnt( "goalvolume_steamroom_patrollers", "targetname" );
   numGuysNeeded = 7;
-	
+  	
   guys = get_ai_group_ai( "steamroom_patrollers" );
   while( guys.size && !all_dead( guys ) )
   {

@@ -515,8 +515,7 @@ bellsHitSway(attacker) {
   swing_dir = vectordot(vec, vec2) * 2.0;
   if(swing_dir > 0.0) {
     swing_dir = Max(0.3, swing_dir);
-  }
-  else {
+  } else {
     swing_dir = Min(-0.3, swing_dir);
   }
 
@@ -818,9 +817,7 @@ debugWatchDvars() {
     foreach(dvar, callback in level.dbgDvarCallback) {
       value = GetDvar(dvar);
       if(value != "") {
-        [
-          [callback]
-        ](value);
+        [[callback]](value);
         SetDvar(dvar, "");
       }
     }

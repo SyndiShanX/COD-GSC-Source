@@ -394,7 +394,7 @@ start_move_out() {
 
   /*
   level.player SwitchToWeapon( "javelin" );
-	
+  	
   level endon( "bmps_destroyed" );
   count = 0;
   for( ;; )
@@ -838,13 +838,13 @@ roadkill_ride() {
   wait( 24.5 );
   // Hold off, it’s a civilian.	
   add_func( ::foley_line, "roadkill_fly_holdoff" );
-	
+  	
   // Bet he’s scouting us.	
   add_func( ::dunn_line, "roadkill_cpd_scoutingus" );
-	
+  	
   // Doesn’t mean you can shoot him.	
   add_func( ::foley_line, "roadkill_fly_doesntmean" );
-	
+  	
   do_funcs();
 
   // Wonder what's got him all worked up?	
@@ -1537,7 +1537,7 @@ dismount_dialogue_and_friendly_progression_logic() {
   guys = get_force_color_guys("allies", "c");
   AssertEx(!guys.size, "Found cyan guys!");
 
-    delayThread(1.1, ::flag_set, "friendlies_run_to_school");
+  delayThread(1.1, ::flag_set, "friendlies_run_to_school");
 
   // Follow me let's go!	
   thread foley_line("roadkill_fly_followme");

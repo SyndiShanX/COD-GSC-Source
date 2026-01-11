@@ -71,7 +71,7 @@ init_battleChatter() {
   SetDvarIfUninitialized("debug_bcdrawobjects", "off");
   SetDvarIfUninitialized("debug_bcinteraction", "off");
 
-    anim.bcPrintFailPrefix = "^3***** BCS FAILURE: ";
+  anim.bcPrintFailPrefix = "^3***** BCS FAILURE: ";
   anim.bcPrintWarnPrefix = "^3***** BCS WARNING: ";
 
   bcs_setup_teams_array();
@@ -372,7 +372,7 @@ init_battleChatter() {
     thread bcDrawObjects();
   }
 
-    anim.squadCreateFuncs[anim.squadCreateFuncs.size] = ::init_squadBattleChatter;
+  anim.squadCreateFuncs[anim.squadCreateFuncs.size] = ::init_squadBattleChatter;
   anim.squadCreateStrings[anim.squadCreateStrings.size] = "::init_squadBattleChatter";
 
   foreach(team in anim.teams) {
@@ -424,7 +424,7 @@ init_battleChatter() {
   - anim.threatCallouts[] is indexed by the types of possible threat callouts for this AI,
   and holds %chance weights that help determine if that the AI will
   try to use that type of threat callout to alert players to a threat.
-	
+  	
   - These are matched against the values of self.allowedCallouts[] for each AI, to determine
   whether the AI can use a particular kind of callout - not all nationalities get all callouts.
   self.allowedCallouts gets set up for each AI in battlechatter_ai::init_aiBattleChatter.
@@ -961,7 +961,7 @@ playThreatEvent() {
     animscripts\utility::showDebugLine(self.origin + (0, 0, 50), threat.origin + (0, 0, 50), (1, 0, 0), 1.5);
   }
 
-    success = false;
+  success = false;
 
   switch (self.chatQueue["threat"].eventType) {
     case "infantry":
@@ -1022,7 +1022,7 @@ threatInfantry(threat, forceDetail) {
   if(!isDefined(callout) || (isDefined(callout) && !isDefined(callout.type))) {
     /*
     printStr = anim.bcPrintFailPrefix + "Couldn't find a threat callout type using getThreatInfantryCalloutType. ";
-		
+    		
     if( isDefined( threat ) && isDefined( threat.classname ) )
     {
     	printStr += "Threat classname was: " + threat.classname;
@@ -1035,7 +1035,7 @@ threatInfantry(threat, forceDetail) {
     {
     	printStr += "Threat wasn't defined!";
     }
-		
+    		
     PrintLn( printStr );
     */
     return false;
@@ -1458,9 +1458,9 @@ getThreatInfantryCalloutType(threat) {
       } else {
         debugstring = anim.bcPrintWarnPrefix + "Calling out a location at origin " + location.origin + " with a canned response, but there are no AIs able to respond.";
 
-          if(self canSayPlayerName()) {
-            self addPossibleThreatCallout("player_location");
-          }
+        if(self canSayPlayerName()) {
+          self addPossibleThreatCallout("player_location");
+        }
 
         self addPossibleThreatCallout("generic_location");
       }
@@ -1758,19 +1758,19 @@ playResponseEvent() {
     animscripts\utility::showDebugLine(self.origin + (0, 0, 50), respondTo.origin + (0, 0, 50), (1, 1, 0), 1.5);
   }
 
-    switch (self.chatQueue["response"].eventType) {
-      case "exposed":
-        self responseThreatExposed(respondTo, modifier);
-        break;
+  switch (self.chatQueue["response"].eventType) {
+    case "exposed":
+      self responseThreatExposed(respondTo, modifier);
+      break;
 
-      case "callout":
-        self responseThreatCallout(respondTo, modifier);
-        break;
+    case "callout":
+      self responseThreatCallout(respondTo, modifier);
+      break;
 
-      case "ack":
-        self responseGeneric(respondTo, modifier);
-        break;
-    }
+    case "ack":
+      self responseGeneric(respondTo, modifier);
+      break;
+  }
 
   self notify("done speaking");
 }
@@ -1890,7 +1890,7 @@ orderMove(modifier, orderTo) {
     animscripts\utility::showDebugLine(self.origin + (0, 0, 50), orderTo.origin + (0, 0, 50), (0, 1, 0), 1.5);
   }
 
-    self tryOrderTo(chatPhrase, orderTo);
+  self tryOrderTo(chatPhrase, orderTo);
 
   chatPhrase addOrderAlias("move", modifier);
 
@@ -2096,7 +2096,7 @@ playPhrase(chatPhrase, noSound) {
     if(!SoundExists(chatPhrase.soundAliases[i])) {
       PrintLn(anim.bcPrintFailPrefix + "Tried to play an alias that doesn't exist: '" + chatPhrase.soundAliases[i] + "'.");
 
-        continue;
+      continue;
     }
 
     startTime = GetTime();
@@ -2275,11 +2275,9 @@ quietFilter(action, type, modifier) {
     case "inform":
       if(type == "attack" && modifier == "grenade") {
         return true;
-      }
-      else if(type == "incoming" && modifier == "grenade") {
+      } else if(type == "incoming" && modifier == "grenade") {
         return true;
-      }
-      else if(type == "reloading" && modifier == "generic") {
+      } else if(type == "reloading" && modifier == "generic") {
         return true;
       }
       break;
@@ -2392,8 +2390,7 @@ getQueueEvents() {
     } else {
       if(self.chatQueue[queueEvents[i]].expireTime == 0) {
         queueEventStates[i] = "b " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
-      }
-      else {
+      } else {
         queueEventStates[i] = "r " + queueEvents[i] + eventState + " " + self.chatQueue[queueEvents[i]].priority;
       }
     }
@@ -2548,8 +2545,7 @@ isOfficer() {
 bcGetClaimedNode() {
   if(IsPlayer(self)) {
     return self.node;
-  }
-  else {
+  } else {
     return self GetClaimedNode();
   }
 }
@@ -2557,8 +2553,7 @@ bcGetClaimedNode() {
 enemy_team_name() {
   if(self IsBadGuy()) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2804,14 +2799,11 @@ getDirectionFacingFlank(vOrigin, vPoint, vFacing) {
 
   if(angle > 315 || angle < 45) {
     direction = "front";
-  }
-  else if(angle < 135) {
+  } else if(angle < 135) {
     direction = "right";
-  }
-  else if(angle < 225) {
+  } else if(angle < 225) {
     direction = "rear";
-  }
-  else {
+  } else {
     direction = "left";
   }
 
@@ -2872,36 +2864,27 @@ getDirectionCompass(vOrigin, vPoint) {
 
   if(angle < 0) {
     angle += 360;
-  }
-  else if(angle > 360) {
+  } else if(angle > 360) {
     angle -= 360;
   }
 
   if(angle < 22.5 || angle > 337.5) {
     direction = "north";
-  }
-  else if(angle < 67.5) {
+  } else if(angle < 67.5) {
     direction = "northwest";
-  }
-  else if(angle < 112.5) {
+  } else if(angle < 112.5) {
     direction = "west";
-  }
-  else if(angle < 157.5) {
+  } else if(angle < 157.5) {
     direction = "southwest";
-  }
-  else if(angle < 202.5) {
+  } else if(angle < 202.5) {
     direction = "south";
-  }
-  else if(angle < 247.5) {
+  } else if(angle < 247.5) {
     direction = "southeast";
-  }
-  else if(angle < 292.5) {
+  } else if(angle < 292.5) {
     direction = "east";
-  }
-  else if(angle < 337.5) {
+  } else if(angle < 337.5) {
     direction = "northeast";
-  }
-  else {
+  } else {
     direction = "impossible";
   }
 
@@ -3087,10 +3070,9 @@ isUsingSameVoice(otherguy) {
     return false;
   }
 
-    if((IsString(self.npcID) && IsString(otherguy.npcID)) && (self.npcID == otherguy.npcID)) {
-      return true;
-    }
-  else if((!isString(self.npcID) && !isString(otherguy.npcID)) && (self.npcID == otherguy.npcID)) {
+  if((IsString(self.npcID) && IsString(otherguy.npcID)) && (self.npcID == otherguy.npcID)) {
+    return true;
+  } else if((!isString(self.npcID) && !isString(otherguy.npcID)) && (self.npcID == otherguy.npcID)) {
     return true;
   } else {
     return false;
@@ -3141,8 +3123,8 @@ addThreatCalloutEcho(reportAlias, respondTo) {
   if(!SoundExists(alias)) {
     PrintLn(anim.bcPrintFailPrefix + "Can't find echo alias '" + alias + "'.");
 
-      // TODO maybe output to data csv/txt file later
-      return false;
+    // TODO maybe output to data csv/txt file later
+    return false;
   }
 
   self.soundAliases[self.soundAliases.size] = alias;
@@ -3158,8 +3140,8 @@ addThreatCalloutResponseAlias(modifier) {
   if(!SoundExists(alias)) {
     PrintLn(anim.bcPrintFailPrefix + "Can't find callout response alias '" + alias + "'.");
 
-      // TODO maybe output to data csv/txt file later
-      return false;
+    // TODO maybe output to data csv/txt file later
+    return false;
   }
 
   self.soundAliases[self.soundAliases.size] = alias;
@@ -3264,8 +3246,8 @@ addThreatCalloutLandmarkAlias(landmark, frontArcDirection, isRelative) {
   if(!SoundExists(alias)) {
     PrintLn(anim.bcPrintFailPrefix + "Can't find sound alias '" + alias + "'. Does landmark '" + landmarkStr + "' have callout references in the battlechatter csv for nationality '" + self.owner.countryID + "'?");
 
-      // TODO maybe output to data csv/txt file later
-      return false;
+    // TODO maybe output to data csv/txt file later
+    return false;
   }
 
   self.soundAliases[self.soundAliases.size] = alias;
@@ -3332,7 +3314,7 @@ addThreatCalloutLocationAlias(location) {
     PrintLn(printStr);
     // TODO maybe output to data csv/txt file later
 
-      return false;
+    return false;
   }
 
   location_add_last_callout_time(location);
@@ -3426,8 +3408,7 @@ createChatEvent(eventAction, eventType, priority) {
 
   if(isDefined(priority)) {
     chatEvent.priority = priority;
-  }
-  else {
+  } else {
     chatEvent.priority = anim.eventPriority[eventAction][eventType];
   }
 
@@ -3697,8 +3678,8 @@ playFlavorBurstLine(burster, alias) {
     self thread flavorBurstLineDebug(burster, alias);
   }
 
-    // make a separate origin to play the sound off of so that mission dialogue doesn't get cut off when played on this guy at the same time
-    soundOrg = spawn("script_origin", burster.origin);
+  // make a separate origin to play the sound off of so that mission dialogue doesn't get cut off when played on this guy at the same time
+  soundOrg = spawn("script_origin", burster.origin);
   soundOrg LinkTo(burster);
 
   soundOrg playSound(alias, alias, true);
@@ -3817,7 +3798,7 @@ battleChatter_canPrint() {
     return (true);
   }
 
-    return (false);
+  return (false);
 }
 
 battleChatter_canPrintDump() {
@@ -3825,7 +3806,7 @@ battleChatter_canPrintDump() {
     return true;
   }
 
-    return false;
+  return false;
 }
 
 // SRS 10/16/08: this used to be unnecessarily covered with two functions
@@ -4032,8 +4013,7 @@ voice_is_british_based() {
   self endon("death");
   if(self.voice == "british" || self.voice == "spanish" || self.voice == "italian" || self.voice == "german") {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

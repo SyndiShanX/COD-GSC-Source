@@ -1632,9 +1632,7 @@ dj_state_manager(param_00) {
     level.dj notify("state_changed", level.dj.desired_state);
     switch (level.dj.desired_state) {
       case "open_window":
-        [
-          [level.dj_states["open_window"]]
-        ]();
+        [[level.dj_states["open_window"]]]();
         set_dj_state("idle");
         break;
 
@@ -1644,9 +1642,7 @@ dj_state_manager(param_00) {
       case "close_window":
       case "approach_mic":
       case "idle":
-        [
-          [level.dj_states[level.dj.desired_state]]
-        ]();
+        [[level.dj_states[level.dj.desired_state]]]();
         break;
     }
 

@@ -15,7 +15,7 @@ door_system_init(var_00) {
   }
 
   foreach(var_03 in var_01) {
-  var_03 thread door_think();
+    var_03 thread door_think();
   }
 }
 
@@ -131,20 +131,15 @@ door_state_next(var_00) {
 
   if(var_00 == 0) {
     var_02 = 3;
-  }
-  else if(var_00 == 2) {
+  } else if(var_00 == 2) {
     var_02 = 1;
-  }
-  else if(var_00 == 1) {
+  } else if(var_00 == 1) {
     var_02 = 0;
-  }
-  else if(var_00 == 3) {
+  } else if(var_00 == 3) {
     var_02 = 2;
-  }
-  else if(var_00 == 4) {
+  } else if(var_00 == 4) {
     var_02 = var_1.stateprev;
-  }
-  else {}
+  } else {}
 
   return var_02;
 }
@@ -166,7 +161,7 @@ door_state_update(var_00) {
 
     if(isDefined(var_1.lights_on)) {
       foreach(var_06 in var_1.lights_on) {
-      var_06 show();
+        var_06 show();
       }
     }
 
@@ -193,8 +188,7 @@ door_state_update(var_00) {
         if(var_3.spawnflags & 1) {
           if(isDefined(var_3.script_noteworthy) && var_3.script_noteworthy == "always_disconnect") {
             var_03 disconnectpaths();
-          }
-          else {
+          } else {
             var_03 connectpaths();
           }
         }
@@ -222,7 +216,7 @@ door_state_update(var_00) {
   } else if(var_1.statecurr == 1 || var_1.statecurr == 3) {
     if(isDefined(var_1.lights_off)) {
       foreach(var_06 in var_1.lights_off) {
-      var_06 show();
+        var_06 show();
       }
     }
 
@@ -242,8 +236,7 @@ door_state_update(var_00) {
 
           if(var_3.script_noteworthy == "clockwise_wheel") {
             var_03 rotatevelocity((0, 0, -1 * var_24 / var_22), var_22, var_23, var_23);
-          }
-          else if(var_3.script_noteworthy == "counterclockwise_wheel") {
+          } else if(var_3.script_noteworthy == "counterclockwise_wheel") {
             var_03 rotatevelocity((0, 0, var_24 / var_22), var_22, var_23, var_23);
           }
         }
@@ -264,8 +257,7 @@ door_state_update(var_00) {
 
           if(var_3.script_noteworthy == "clockwise_wheel") {
             var_03 rotatevelocity((0, 0, var_24 / var_22), var_22, var_23, var_23);
-          }
-          else if(var_3.script_noteworthy == "counterclockwise_wheel") {
+          } else if(var_3.script_noteworthy == "counterclockwise_wheel") {
             var_03 rotatevelocity((0, 0, -1 * var_24 / var_22), var_22, var_23, var_23);
           }
         }
@@ -317,7 +309,7 @@ door_state_update(var_00) {
 
     if(isDefined(var_1.lights_off)) {
       foreach(var_06 in var_1.lights_off) {
-      var_06 show();
+        var_06 show();
       }
     }
 
@@ -335,7 +327,7 @@ door_state_update(var_00) {
   var_1.func_10E27 = 1;
 
   foreach(var_03 in var_1.doors) {
-  var_3.func_10E27 = 1;
+    var_3.func_10E27 = 1;
   }
 
   var_01 notify("door_state_done");
@@ -399,13 +391,13 @@ door_state_exit(var_00) {
   if(var_00 == 0 || var_00 == 2) {
     if(isDefined(var_1.lights_on)) {
       foreach(var_03 in var_1.lights_on) {
-      var_03 hide();
+        var_03 hide();
       }
     }
   } else if(var_00 == 1 || var_00 == 3) {
     if(isDefined(var_1.lights_off)) {
       foreach(var_03 in var_1.lights_off) {
-      var_03 hide();
+        var_03 hide();
       }
     }
 
@@ -457,7 +449,7 @@ waittill_any_triggered_return_triggerer(var_00) {
   var_01 = self;
 
   foreach(var_03 in var_00) {
-  var_01 thread return_triggerer(var_03);
+    var_01 thread return_triggerer(var_03);
   }
 
   var_01 waittill("interrupted");
@@ -478,8 +470,7 @@ return_triggerer(var_00) {
 
         if(var_03 != "prone") {
           continue;
-        }
-        else {
+        } else {
           var_04 = vectornormalize(anglesToForward(var_2.angles));
           var_05 = vectornormalize(var_0.origin - var_2.origin);
           var_06 = vectordot(var_04, var_05);

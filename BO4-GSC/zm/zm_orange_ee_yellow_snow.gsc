@@ -36,7 +36,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_orange_ee_yellow_snow;
 
 preload() {
@@ -53,10 +52,10 @@ preload() {
 main() {
   level function_47274b1e();
   level function_19f2a68d();
-  zm_sq::register(#"yellow_snowballs", #"step_1", #"hash_2ed342ae0266e20", &function_8ba3d474, &function_f5a84740);
-  zm_sq::register(#"yellow_snowballs", #"step_2", #"hash_2ed342ae0266e20", &function_37507fb7, &function_6ad60943);
-  zm_sq::register(#"yellow_snowballs", #"step_3", #"hash_2ed342ae0266e20", &function_80794c22, &function_2b9f7a47);
-  zm_sq::register(#"yellow_snowballs", #"step_4", #"hash_2ed342ae0266e20", &function_985dbc38, &function_256ebdea);
+  zm_sq::register(#"yellow_snowballs", # "step_1", # "hash_2ed342ae0266e20", &function_8ba3d474, &function_f5a84740);
+  zm_sq::register(#"yellow_snowballs", # "step_2", # "hash_2ed342ae0266e20", &function_37507fb7, &function_6ad60943);
+  zm_sq::register(#"yellow_snowballs", # "step_3", # "hash_2ed342ae0266e20", &function_80794c22, &function_2b9f7a47);
+  zm_sq::register(#"yellow_snowballs", # "step_4", # "hash_2ed342ae0266e20", &function_985dbc38, &function_256ebdea);
   level waittill(#"all_players_spawned");
   level function_698e6ba();
 
@@ -170,7 +169,7 @@ function_f77c5d83() {
   while(!b_hidden) {
     s_result = self waittill(#"damage");
 
-    if(s_result.weapon.name === #"snowball" || s_result.weapon.name === #"snowball_upgraded") {
+    if(s_result.weapon.name === # "snowball" || s_result.weapon.name === # "snowball_upgraded") {
       level.var_c2dce33e -= 1;
       self hide();
       self setCanDamage(0);
@@ -203,13 +202,13 @@ function_37507fb7(var_a276c861) {
       s_campfire.e_fire setModel("p8_zm_gla_nor_fire_pit_01_wood_pile_emissive");
 
       switch (s_campfire.script_noteworthy) {
-        case #"snowball_campfire_1":
+        case # "snowball_campfire_1":
           exploder::exploder("fxexp_campfire_house_blue");
           break;
-        case #"snowball_campfire_2":
+        case # "snowball_campfire_2":
           exploder::exploder("fxexp_campfire_crevasse_blue");
           break;
-        case #"snowball_campfire_3":
+        case # "snowball_campfire_3":
           exploder::exploder("fxexp_campfire_beach_blue");
           break;
       }
@@ -221,13 +220,13 @@ function_37507fb7(var_a276c861) {
       s_campfire.e_fire setModel("p8_zm_gla_nor_fire_pit_01_wood_pile");
 
       switch (s_campfire.script_noteworthy) {
-        case #"snowball_campfire_1":
+        case # "snowball_campfire_1":
           exploder::stop_exploder("fxexp_campfire_house_blue");
           break;
-        case #"snowball_campfire_2":
+        case # "snowball_campfire_2":
           exploder::stop_exploder("fxexp_campfire_crevasse_blue");
           break;
-        case #"snowball_campfire_3":
+        case # "snowball_campfire_3":
           exploder::stop_exploder("fxexp_campfire_beach_blue");
           break;
       }
@@ -255,9 +254,9 @@ soul_captured(var_f0e6c7a2, ent) {
     var_f0e6c7a2.var_7944be4a = n_souls_required;
   }
 
-    if(var_f0e6c7a2.var_7944be4a >= n_souls_required) {
-      var_f0e6c7a2 function_a66f0de2();
-    }
+  if(var_f0e6c7a2.var_7944be4a >= n_souls_required) {
+    var_f0e6c7a2 function_a66f0de2();
+  }
 }
 
 function_a66f0de2() {
@@ -272,7 +271,7 @@ function_6ad60943(var_a276c861, var_19e802fa) {
 
   iprintlnbold("<dev string:x38>");
 
-    level.var_292feb3b setModel("p8_zm_ora_specimen_container_lrg_cracked");
+  level.var_292feb3b setModel("p8_zm_ora_specimen_container_lrg_cracked");
   level thread function_cf298764();
 }
 
@@ -342,8 +341,8 @@ function_2b9f7a47(var_a276c861, var_19e802fa) {
 
 function_985dbc38(var_a276c861) {
   if(!var_a276c861) {
-    zm_orange_pablo::register_drop_off(10, #"hash_1edb26dc1cc6e119", #"hash_3ca7be08f434c427", &function_901d1798, &function_6d2ddf57);
-    zm_orange_pablo::function_3f9e02b8(2, #"hash_423ddf1f1bc39137", #"hash_423ddf1f1bc39137", &function_ae42be1);
+    zm_orange_pablo::register_drop_off(10, # "hash_1edb26dc1cc6e119", # "hash_3ca7be08f434c427", &function_901d1798, &function_6d2ddf57);
+    zm_orange_pablo::function_3f9e02b8(2, # "hash_423ddf1f1bc39137", # "hash_423ddf1f1bc39137", &function_ae42be1);
     level.var_3af3c634 zm_unitrigger::create("", 96);
     level.var_3af3c634 thread function_c0ee8171();
     level flag::wait_till(#"hash_3ff453a959b4445b");
@@ -458,7 +457,7 @@ function_b4b483e7() {
       iprintlnbold("<dev string:xc9>");
     }
 
-      wait 2.5;
+    wait 2.5;
   }
 }
 

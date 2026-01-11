@@ -54,7 +54,7 @@ onplayerconnect() {
 
     if(!var_0.stats.size) {
       foreach(var_3, var_2 in level.awards) {
-      var_0 maps\mp\_utility::initplayerstat(var_3, level.awards[var_3].defaultvalue);
+        var_0 maps\mp\_utility::initplayerstat(var_3, level.awards[var_3].defaultvalue);
       }
     }
 
@@ -365,8 +365,7 @@ statvaluechanged(var_0) {
 
   if(var_1 == var_2) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }

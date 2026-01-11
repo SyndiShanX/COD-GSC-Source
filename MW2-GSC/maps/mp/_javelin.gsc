@@ -43,33 +43,33 @@ DrawStar(point, color) {
   Line(point + (0, 0, 10), point - (0, 0, 10), color);
 }
 
-  EyeTraceForward() {
-    origin = self getEye();
-    angles = self GetPlayerAngles();
-    forward = anglesToForward(angles);
-    endpoint = origin + forward * 15000;
+EyeTraceForward() {
+  origin = self getEye();
+  angles = self GetPlayerAngles();
+  forward = anglesToForward(angles);
+  endpoint = origin + forward * 15000;
 
-    res = bulletTrace(origin, endpoint, false, undefined);
+  res = bulletTrace(origin, endpoint, false, undefined);
 
-    if(res["surfacetype"] == "none") {
-      return undefined;
-    }
-    if(res["surfacetype"] == "default") {
-      return undefined;
-    }
-
-    ent = res["entity"];
-    if(isDefined(ent)) {
-      if(ent == level.ac130.planeModel) {
-        return undefined;
-      }
-    }
-
-    results = [];
-    results[0] = res["position"];
-    results[1] = res["normal"];
-    return results;
+  if(res["surfacetype"] == "none") {
+    return undefined;
   }
+  if(res["surfacetype"] == "default") {
+    return undefined;
+  }
+
+  ent = res["entity"];
+  if(isDefined(ent)) {
+    if(ent == level.ac130.planeModel) {
+      return undefined;
+    }
+  }
+
+  results = [];
+  results[0] = res["position"];
+  results[1] = res["normal"];
+  return results;
+}
 
 LockMissesReset() {
   self.javelinLockMisses = undefined;
@@ -78,8 +78,7 @@ LockMissesReset() {
 LockMissesIncr() {
   if(!isDefined(self.javelinLockMisses)) {
     self.javelinLockMisses = 1;
-  }
-  else {
+  } else {
     self.javelinLockMisses++;
   }
 }
@@ -224,13 +223,13 @@ JavelinUsageLoop() {
 
       if(debugDraw && isDefined(self.javelinPoints)) {
         foreach(javPoint in self.javelinPoints) {
-        DrawStar(javPoint, (0.8, 1.0, 0.8));
+          DrawStar(javPoint, (0.8, 1.0, 0.8));
         }
         DrawStar(self.javelinPoints[self.javelinPoints.size - 1], (1, 1, 0.2));
         DrawStar(AveragePoint(self.javelinPoints), (0.2, 0.2, 1));
       }
 
-        timePassed = GetTime() - lastGatherTime;
+      timePassed = GetTime() - lastGatherTime;
       if(timePassed < GATHER_DELAY) {
         continue;
       }
@@ -292,7 +291,7 @@ JavelinUsageLoop() {
         DrawStar(self.javelinTargetPoint, (0.5, 1.0, 0.6));
       }
 
-        insideReticle = self WorldPointInReticle_Circle(self.javelinTargetPoint, 65, 45);
+      insideReticle = self WorldPointInReticle_Circle(self.javelinTargetPoint, 65, 45);
       if(!insideReticle) {
         ResetJavelinLocking();
         continue;
@@ -300,8 +299,7 @@ JavelinUsageLoop() {
 
       if(self TargetPointTooClose(self.javelinTargetPoint)) {
         self WeaponLockTargetTooClose(true);
-      }
-      else {
+      } else {
         self WeaponLockTargetTooClose(false);
       }
 
@@ -323,7 +321,7 @@ JavelinUsageLoop() {
         DrawStar(self.javelinTargetPoint, (0.1, 0.15, 1.0));
       }
 
-        insideReticle = self WorldPointInReticle_Circle(self.javelinTargetPoint, 65, 45);
+      insideReticle = self WorldPointInReticle_Circle(self.javelinTargetPoint, 65, 45);
       if(!insideReticle) {
         ResetJavelinLocking();
         continue;
@@ -331,8 +329,7 @@ JavelinUsageLoop() {
 
       if(self TargetPointTooClose(self.javelinTargetPoint)) {
         self WeaponLockTargetTooClose(true);
-      }
-      else {
+      } else {
         self WeaponLockTargetTooClose(false);
       }
 
@@ -358,7 +355,7 @@ GetTargetList() {
 
     if(level.UAVModels[level.otherTeam[self.team]].size) {
       foreach(UAV in level.UAVModels[level.otherTeam[self.team]]) {
-      targets[targets.size] = UAV;
+        targets[targets.size] = UAV;
       }
     }
 
@@ -402,8 +399,7 @@ DebugSightLine(start, end, passed) {
 
   if(passed) {
     color = (0.3, 1.0, 0.3);
-  }
-  else {
+  } else {
     color = (1.0, 0.2, 0.2);
   }
 

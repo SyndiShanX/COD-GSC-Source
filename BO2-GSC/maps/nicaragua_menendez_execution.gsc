@@ -49,8 +49,7 @@ init_flags() {
   flag_init("end_execution");
 }
 
-init_spawn_functions() {
-}
+init_spawn_functions() {}
 
 main() {
   init_flags();
@@ -71,7 +70,7 @@ menendez_chickens_setup() {
   a_chickens = getEntArray("menendez_chicken", "targetname");
 
   foreach(m_chicken in a_chickens) {
-  m_chicken thread chicken_anim_loop();
+    m_chicken thread chicken_anim_loop();
   }
 }
 
@@ -159,7 +158,7 @@ close_shed_door() {
   a_menendez_hill_ents = getEntArray("menendez_hill", "script_noteworthy");
 
   foreach(e_menendez_hill in a_menendez_hill_ents) {
-  e_menendez_hill delete();
+    e_menendez_hill delete();
   }
 
   a_ai = getaiarray();
@@ -220,8 +219,7 @@ execution_scene() {
 
   if(is_mature()) {
     level.player thread wait_axe_grab();
-  }
-  else {
+  } else {
     level thread execution_non_mature_objective();
   }
 }
@@ -239,8 +237,7 @@ execution_non_mature_objective() {
 execution_logic(n_index) {
   if(n_index == 5) {
     ai_pdf = get_ais_from_scene("axe_attack_pdf_loop", "execution_pdf_" + n_index);
-  }
-  else {
+  } else {
     ai_pdf = get_ais_from_scene("execution_loop", "execution_pdf_" + n_index);
   }
 
@@ -330,8 +327,7 @@ execution_rage() {
 
   if(flag("axe_attack_player_started")) {
     level thread rage_high_logic("execution_pdfs");
-  }
-  else {
+  } else {
     level thread rage_high_logic("execution_pdfs", 1);
   }
 }

@@ -279,8 +279,7 @@ genericBulletKill(data, victim, weapon) {
   time = data.time;
   if(player.pers["lastBulletKillTime"] == time) {
     player.pers["bulletStreak"]++;
-  }
-  else {
+  } else {
     player.pers["bulletStreak"] = 1;
   }
   player.pers["lastBulletKillTime"] = time;
@@ -369,8 +368,7 @@ isHighestScoringPlayer(player) {
   players = level.players;
   if(level.teamBased) {
     team = player.pers["team"];
-  }
-  else {
+  } else {
     team = "all";
   }
   highScore = player.score;

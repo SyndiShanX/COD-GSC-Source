@@ -8,7 +8,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_fcd611c3;
 
 autoexec __init__system__() {
@@ -42,43 +41,43 @@ function_26f124d8() {
   }
 
   switch (level.var_e91491fb) {
-    case #"ads":
+    case # "ads":
       if(self isplayerads()) {
         return true;
       }
 
       return false;
-    case #"jump":
+    case # "jump":
       if(self isplayerjumping()) {
         return true;
       }
 
       return false;
-    case #"slide":
+    case # "slide":
       if(self isplayersliding()) {
         return true;
       }
 
       return false;
-    case #"hash_6c6c8f6b349b8751":
+    case # "hash_6c6c8f6b349b8751":
       if(self isplayerjumping() || self isplayersliding()) {
         return true;
       }
 
       return false;
-    case #"crouch":
+    case # "crouch":
       if(self getstance() === "crouch") {
         return true;
       }
 
       return false;
-    case #"prone":
+    case # "prone":
       if(self getstance() === "prone") {
         return true;
       }
 
       return false;
-    case #"movement":
+    case # "movement":
     default:
       v_velocity = self getvelocity();
 

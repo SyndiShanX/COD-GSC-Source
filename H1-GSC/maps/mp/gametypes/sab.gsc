@@ -219,12 +219,10 @@ getspawnpoint() {
 
   if(level.usestartspawns) {
     var_1 = maps\mp\gametypes\_spawnlogic::getrandomstartspawn("mp_sab_spawn_" + var_0 + "_start");
-  }
-  else if(isDefined(level.bombplanted) && level.bombplanted && (isDefined(level.bombowner) && var_0 == level.bombowner.team)) {
+  } else if(isDefined(level.bombplanted) && level.bombplanted && (isDefined(level.bombowner) && var_0 == level.bombowner.team)) {
     if(var_0 == "axis") {
       var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_awayfromenemies(level.spawn_axis_planted);
-    }
-    else {
+    } else {
       var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_awayfromenemies(level.spawn_allies_planted);
     }
   } else if(var_0 == "axis")
@@ -263,8 +261,7 @@ sabotage() {
 
   if(!isDefined(var_0)) {
     common_scripts\utility::error("No sab_bomb_pickup_trig trigger found in map.");
-  }
-  else {
+  } else {
     var_1 = maps\mp\gametypes\common_bomb_gameobject::getcarrybombvisuals("sab_bomb");
 
     if(!isDefined(var_1)) {
@@ -325,8 +322,7 @@ createbombzone(var_0, var_1) {
 onbeginuse(var_0) {
   if(!maps\mp\gametypes\_gameobjects::isfriendlyteam(var_0.pers["team"])) {
     maps\mp\gametypes\common_bomb_gameobject::onbeginplantbomb(var_0);
-  }
-  else {
+  } else {
     maps\mp\gametypes\common_bomb_gameobject::onbegindefusebomb(var_0, level.sabbombmodel);
   }
 }
@@ -343,8 +339,7 @@ onpickup(var_0) {
 
   if(var_1 == "allies") {
     var_2 = "axis";
-  }
-  else {
+  } else {
     var_2 = "allies";
   }
 
@@ -445,8 +440,7 @@ bombplanted(var_0, var_1) {
 
   if(var_3 == "_allies") {
     setomnvar("ui_mlg_game_mode_status_1", 1);
-  }
-  else if(var_3 == "_axis") {
+  } else if(var_3 == "_axis") {
     setomnvar("ui_mlg_game_mode_status_1", 2);
   }
 

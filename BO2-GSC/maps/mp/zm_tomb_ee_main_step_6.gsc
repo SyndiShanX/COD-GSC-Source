@@ -32,8 +32,7 @@ stage_logic() {
   stage_completed("little_girl_lost", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 ruins_fist_glow_monitor() {
   if(flag("ee_all_players_upgraded_punch")) {
@@ -104,17 +103,13 @@ spawn_punch_upgrade_tablet(v_origin, e_player) {
 
     if(e_player hasweapon("staff_fire_upgraded_zm")) {
       e_player.str_punch_element = "fire";
-    }
-    else if(e_player hasweapon("staff_air_upgraded_zm")) {
+    } else if(e_player hasweapon("staff_air_upgraded_zm")) {
       e_player.str_punch_element = "air";
-    }
-    else if(e_player hasweapon("staff_lightning_upgraded_zm")) {
+    } else if(e_player hasweapon("staff_lightning_upgraded_zm")) {
       e_player.str_punch_element = "lightning";
-    }
-    else if(e_player hasweapon("staff_water_upgraded_zm")) {
+    } else if(e_player hasweapon("staff_water_upgraded_zm")) {
       e_player.str_punch_element = "ice";
-    }
-    else {
+    } else {
       e_player.str_punch_element = "upgraded";
     }
 

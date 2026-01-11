@@ -40,7 +40,7 @@ skipto_village() {
   triggers = getEntArray("player_escaping_village_trigger", "targetname");
 
   foreach(trigger in triggers) {
-  trigger trigger_off();
+    trigger trigger_off();
   }
 }
 
@@ -48,7 +48,7 @@ clean_up_beartrap_test() {
   a_enemies = getEntArray("beartrap_enemy_test_ai", "targetname");
 
   foreach(ai_enemy in a_enemies) {
-  ai_enemy delete();
+    ai_enemy delete();
   }
 }
 
@@ -137,8 +137,7 @@ village_stealth_hint() {
 
   if(!level.console && !level.player gamepadusedlast()) {
     level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER_PC", 3);
-  }
-  else {
+  } else {
     level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER", 3);
   }
 }
@@ -196,8 +195,7 @@ village_runner_logic() {
 
     if(isDefined(nd_next.target)) {
       nd_next = getnode(nd_next.target, "targetname");
-    }
-    else {
+    } else {
       at_last_node = 1;
     }
 
@@ -419,8 +417,7 @@ enemy_enter_meatshield_room(str_scene_enemy_attack) {
 
     if(rval < 500) {
       level.meatshield_random_attacker_index = 0;
-    }
-    else {
+    } else {
       level.meatshield_random_attacker_index = 1;
     }
   } else {
@@ -786,7 +783,7 @@ clean_up_village_guards() {
   a_enemies = getEntArray("village_guards", "script_noteworthy");
 
   foreach(e_enemy in a_enemies) {
-  e_enemy delete();
+    e_enemy delete();
   }
 
   flag_set("stop_village_ambient");
@@ -842,8 +839,7 @@ fail_by_firing() {
 
     if(isDefined(weapon) && issubstr(weapon, "bear")) {
       continue;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -859,8 +855,7 @@ fail_by_grenade_throw() {
 
     if(isDefined(grenade_name) && issubstr(grenade_name, "bear")) {
       continue;
-    }
-    else {
+    } else {
       break;
     }
   }

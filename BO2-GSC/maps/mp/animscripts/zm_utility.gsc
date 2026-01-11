@@ -73,8 +73,7 @@ initialize(animscript) {
 getnodeyawtoorigin(pos) {
   if(isDefined(self.node)) {
     yaw = self.node.angles[1] - getyaw(pos);
-  }
-  else {
+  } else {
     yaw = self.angles[1] - getyaw(pos);
   }
 
@@ -87,12 +86,10 @@ getnodeyawtoenemy() {
 
   if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
-  }
-  else {
+  } else {
     if(isDefined(self.node)) {
       forward = anglesToForward(self.node.angles);
-    }
-    else {
+    } else {
       forward = anglesToForward(self.angles);
     }
 
@@ -102,8 +99,7 @@ getnodeyawtoenemy() {
 
   if(isDefined(self.node)) {
     yaw = self.node.angles[1] - getyaw(pos);
-  }
-  else {
+  } else {
     yaw = self.angles[1] - getyaw(pos);
   }
 
@@ -116,8 +112,7 @@ getcovernodeyawtoenemy() {
 
   if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
-  }
-  else {
+  } else {
     forward = anglesToForward(self.covernode.angles + self.animarray["angle_step_out"][self.a.cornermode]);
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
@@ -140,8 +135,7 @@ getyawtoenemy() {
 
   if(isvalidenemy(self.enemy)) {
     pos = self.enemy.origin;
-  }
-  else {
+  } else {
     forward = anglesToForward(self.angles);
     forward = vectorscale(forward, 150);
     pos = self.origin + forward;
@@ -328,8 +322,7 @@ quadrantanimweights(yaw) {
 
     if(leftweight > 0) {
       result["left"] = leftweight;
-    }
-    else {
+    } else {
       result["right"] = -1 * leftweight;
     }
   } else if(useleans) {
@@ -337,8 +330,7 @@ quadrantanimweights(yaw) {
 
     if(leftweight > 0) {
       result["left"] = leftweight;
-    }
-    else {
+    } else {
       result["right"] = -1 * leftweight;
     }
   } else {
@@ -346,11 +338,9 @@ quadrantanimweights(yaw) {
 
     if(leftweight > backweight) {
       result["left"] = 1;
-    }
-    else if(leftweight < forwardweight) {
+    } else if(leftweight < forwardweight) {
       result["right"] = 1;
-    }
-    else {
+    } else {
       result["back"] = 1;
     }
   }
@@ -363,14 +353,11 @@ getquadrant(angle) {
 
   if(angle < 45 || angle > 315) {
     quadrant = "front";
-  }
-  else if(angle < 135) {
+  } else if(angle < 135) {
     quadrant = "left";
-  }
-  else if(angle < 225) {
+  } else if(angle < 225) {
     quadrant = "back";
-  }
-  else {
+  } else {
     quadrant = "right";
   }
 
@@ -414,8 +401,7 @@ showlastenemysightpos(string) {
   }
   if(self.enemy.team == "allies") {
     color = (0.4, 0.7, 1);
-  }
-  else {
+  } else {
     color = (1, 0.7, 0.4);
   }
 
@@ -445,8 +431,7 @@ debugposinternal(org, string, size) {
 
   if(self.enemy.team == "allies") {
     color = (0.4, 0.7, 1);
-  }
-  else {
+  } else {
     color = (1, 0.7, 0.4);
   }
 
@@ -501,8 +486,7 @@ getnodeoffset(node) {
     case "Cover Left Wide":
       if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_left_crouch_offset);
-      }
-      else {
+      } else {
         nodeoffset = calculatenodeoffset(right, forward, cover_left_stand_offset);
       }
 
@@ -511,8 +495,7 @@ getnodeoffset(node) {
     case "Cover Right Wide":
       if(node isnodedontstand() && !node isnodedontcrouch()) {
         nodeoffset = calculatenodeoffset(right, forward, cover_right_crouch_offset);
-      }
-      else {
+      } else {
         nodeoffset = calculatenodeoffset(right, forward, cover_right_stand_offset);
       }
 
@@ -727,8 +710,7 @@ isnodedontcrouch() {
 doesnodeallowstance(stance) {
   if(stance == "stand") {
     return !self isnodedontstand();
-  }
-  else {
+  } else {
     assert(stance == "crouch");
     return !self isnodedontcrouch();
   }
@@ -768,8 +750,7 @@ animarraypickrandom(animname) {
 
   if(self.a.array[animname].size > 1) {
     index = randomint(self.a.array[animname].size);
-  }
-  else {
+  } else {
     index = 0;
   }
 
@@ -981,8 +962,7 @@ is_skeleton(skeleton) {
 get_skeleton() {
   if(isDefined(self.skeleton)) {
     return self.skeleton;
-  }
-  else {
+  } else {
     return "base";
   }
 }
@@ -1028,8 +1008,7 @@ play_sound_in_space(alias, origin, master) {
 
   if(isDefined(master) && master) {
     org playsoundasmaster(alias);
-  }
-  else {
+  } else {
     org playSound(alias);
   }
 

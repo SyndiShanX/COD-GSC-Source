@@ -8,8 +8,7 @@
 #include clientscripts\mp\createfx\zm_prison_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("maps/zombie_alcatraz/fx_zombie_eye_single_red");
@@ -242,8 +241,7 @@ fxanim_setup_pulley(localclientnum, oldval, newval, bnewent, binitialsnap, field
 
   if(newval == 1) {
     str_master_key_location = "east";
-  }
-  else if(newval == 2) {
+  } else if(newval == 2) {
     str_master_key_location = "west";
   }
 

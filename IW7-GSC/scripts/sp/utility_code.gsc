@@ -91,9 +91,7 @@ func_65FA(param_00, param_01) {
 
 func_13764(param_00, param_01, param_02) {
   param_00 endon("done");
-  [
-    [param_01]
-  ](param_02);
+  [[param_01]](param_02);
   param_00 notify("done");
 }
 
@@ -1115,9 +1113,7 @@ func_4461(param_00, param_01, param_02, param_03) {
     var_05 = getarraykeys(param_01);
     for(var_06 = 0; var_06 < var_05.size; var_06++) {
       var_07 = distance(param_01[var_05[var_06]].v["origin"], param_00);
-      if([
-          [param_03]
-        ](var_07, param_02)) {
+      if([[param_03]](var_07, param_02)) {
         continue;
       }
 

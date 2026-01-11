@@ -7,11 +7,9 @@
 #include clientscripts\createfx\yemen_fx;
 #include clientscripts\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_balcony_explosion"] = loadfx("maps/yemen/fx_balcony_explosion01");

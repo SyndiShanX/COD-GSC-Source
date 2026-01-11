@@ -72,11 +72,9 @@ h2_getStreakNameFromIndex(index, number) {
     default:
       if(number == 0) {
         return "radar_mp";
-      }
-      else if(number == 1) {
+      } else if(number == 1) {
         return "airdrop_marker_mp";
-      }
-      else {
+      } else {
         return "predator_mp";
       }
   }
@@ -289,7 +287,7 @@ waitForChangeTeam() {
 
     if(isDefined(self.pers["killstreaks"])) {
       foreach(index, streakStruct in self.pers["killstreaks"]) {
-      self.pers["killstreaks"][index] = undefined;
+        self.pers["killstreaks"][index] = undefined;
       }
     }
   }
@@ -358,8 +356,7 @@ givehardpoint(streakName, streakCost) {
 
   if(!isDefined(streakCost)) {
     self.pers["killstreaks"][0].lifeId = -1;
-  }
-  else {
+  } else {
     self.pers["killstreaks"][0].lifeId = self.pers["deaths"];
   }
 
@@ -478,8 +475,7 @@ hardpointitemwaiter() {
 
       if(self hasWeapon(lastWeapon)) {
         self switchToWeapon(lastWeapon);
-      }
-      else {
+      } else {
         self switchToWeapon(firstPrimary);
       }
     }
@@ -540,8 +536,7 @@ hardpointnotify(var_0, var_1) {
 killstreakearned(var_0) {
   if(var_0 == "radar_mp") {
     self.firstkillstreakearned = gettime();
-  }
-  else if(isDefined(self.firstkillstreakearned) && var_0 == "helicopter_mp") {
+  } else if(isDefined(self.firstkillstreakearned) && var_0 == "helicopter_mp") {
     if(gettime() - self.firstkillstreakearned < 20000) {
       thread maps\mp\gametypes\_missions::genericchallenge("wargasm");
     }
@@ -644,8 +639,7 @@ triggerhardpoint() {
 
   if(isSubStr(streakName, "airdrop")) {
     result = self[[level.killstreakfuncs[streakName]]](lifeId, kID);
-  }
-  else {
+  } else {
     result = self[[level.killstreakfuncs[streakName]]](lifeId);
   }
 
@@ -667,8 +661,7 @@ killstreakLeaderDialog(streakName) {
 
     if((level.teamBased && player.team == self.team) || (!level.teamBased && player == self)) {
       player maps\mp\_utility::leaderDialogOnPlayer(friendlyDialog);
-    }
-    else {
+    } else {
       player maps\mp\_utility::leaderDialogOnPlayer(enemyDialog);
     }
   }

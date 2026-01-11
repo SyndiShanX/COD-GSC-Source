@@ -70,7 +70,7 @@ oceaninmotion() {
   var_00 = getEntArray("bobbing_boat", "targetname");
 
   foreach(var_02 in var_00) {
-  thread bobbingboat(var_02);
+    thread bobbingboat(var_02);
   }
 }
 
@@ -82,7 +82,7 @@ bobbingboat(var_00) {
     var_0.func_BE10 = getEntArray(var_0.target, "targetname");
 
     foreach(var_02 in var_0.func_BE10) {
-    var_2.deltapos = var_2.origin - var_0.origin;
+      var_2.deltapos = var_2.origin - var_0.origin;
     }
   }
 
@@ -146,7 +146,7 @@ func_F9BA() {
   var_00 = getEntArray("wine_keg", "targetname");
 
   foreach(var_02 in var_00) {
-  var_02 thread func_13957();
+    var_02 thread func_13957();
   }
 }
 

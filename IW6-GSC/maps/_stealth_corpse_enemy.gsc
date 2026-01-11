@@ -123,8 +123,7 @@ enemy_corpse_saw_behavior() {
 
   if(self.type != "dog") {
     maps\_stealth_shared_utilities::stealth_set_run_anim("_stealth_combat_jog");
-  }
-  else {
+  } else {
     maps\_utility::clear_run_anim();
     self.script_growl = 1;
     self.script_nobark = 1;
@@ -205,8 +204,7 @@ enemy_corpse_logic() {
 
         if(self.type != "dog") {
           var_3 = level._stealth.logic.corpse.found_distsqrd;
-        }
-        else {
+        } else {
           var_3 = level._stealth.logic.corpse.found_dog_distsqrd;
         }
 
@@ -252,8 +250,7 @@ enemy_corpse_logic() {
       if(var_0) {
         if(!maps\_utility::ent_flag("_stealth_found_corpse")) {
           maps\_utility::ent_flag_set("_stealth_found_corpse");
-        }
-        else {
+        } else {
           self notify("_stealth_found_corpse");
         }
 
@@ -266,8 +263,7 @@ enemy_corpse_logic() {
 
         if(!maps\_utility::ent_flag("_stealth_saw_corpse")) {
           maps\_utility::ent_flag_set("_stealth_saw_corpse");
-        }
-        else {
+        } else {
           self notify("_stealth_saw_corpse");
         }
 
@@ -300,8 +296,7 @@ remove_corpse_loop_while_stealth_broken() {
 
       if(self.type != "dog") {
         var_5 = level._stealth.logic.corpse.found_distsqrd;
-      }
-      else {
+      } else {
         var_5 = level._stealth.logic.corpse.found_dog_distsqrd;
       }
 
@@ -335,8 +330,7 @@ enemy_corpse_alert_level() {
 
   if(isDefined(self.enemy)) {
     var_0 = self.enemy;
-  }
-  else {
+  } else {
     var_0 = common_scripts\utility::random(level.players);
   }
 
@@ -372,8 +366,7 @@ enemy_corpse_found(var_0) {
 
   if(!maps\_stealth_utility::stealth_group_corpse_flag()) {
     maps\_stealth_shared_utilities::group_flag_set("_stealth_found_corpse");
-  }
-  else {
+  } else {
     level notify(var_1);
   }
 
@@ -421,7 +414,7 @@ enemy_default_corpse_behavior() {
 
 enemy_custom_corpse_behavior(var_0) {
   foreach(var_3, var_2 in var_0) {
-  maps\_stealth_shared_utilities::ai_create_behavior_function("corpse", var_3, var_2);
+    maps\_stealth_shared_utilities::ai_create_behavior_function("corpse", var_3, var_2);
   }
 }
 

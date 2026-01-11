@@ -193,8 +193,7 @@ outlineaddplayertoexistingallandteamoutlines(var_00) {
       if(var_5.type == "ALL" || var_5.type == "TEAM" && var_5.team == var_0.team) {
         if(!scripts\engine\utility::array_contains(var_5.playersvisibleto, var_00)) {
           var_5.playersvisibleto[var_5.playersvisibleto.size] = var_00;
-        }
-        else {}
+        } else {}
 
         if(!isDefined(var_03) || var_5.priority > var_3.priority) {
           var_03 = var_05;
@@ -213,7 +212,7 @@ outlinedisableinternalall(var_00) {
     return;
   }
   foreach(var_03, var_02 in var_0.outlines) {
-  outlinedisableinternal(var_03, var_00);
+    outlinedisableinternal(var_03, var_00);
   }
 }
 
@@ -383,8 +382,7 @@ outlinerefreshpending(var_00, var_01) {
 
       if(isDefined(var_05)) {
         var_00 hudoutlineenableforclient(var_04, var_5.colorindex, var_5.func_525C, var_5.func_6C10);
-      }
-      else {
+      } else {
         var_00 hudoutlinedisableforclient(var_04);
       }
 
@@ -416,8 +414,7 @@ canoutlineforplayer(var_00) {
 _hudoutlineenableforclient(var_00, var_01, var_02, var_03) {
   if(var_01 == 7) {
     self hudoutlinedisableforclient(var_00);
-  }
-  else {
+  } else {
     self hudoutlineenableforclient(var_00, var_01, var_02, var_03);
   }
 }
@@ -425,8 +422,7 @@ _hudoutlineenableforclient(var_00, var_01, var_02, var_03) {
 _hudoutlineenableforclients(var_00, var_01, var_02, var_03) {
   if(var_01 == 7) {
     self hudoutlinedisableforclients(var_00);
-  }
-  else {
+  } else {
     self hudoutlineenableforclients(var_00, var_01, var_02, var_03);
   }
 }

@@ -116,8 +116,7 @@ playerisclose(other) {
   infront = playerisinfront(other);
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
   a = flat_origin(other.origin);
@@ -126,8 +125,7 @@ playerisclose(other) {
   dist = distance(a, point);
   if(dist < 3000) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -138,8 +136,7 @@ playerisinfront(other) {
   dot = vectordot(forwardvec, normalvec);
   if(dot > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

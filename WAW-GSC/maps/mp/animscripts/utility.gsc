@@ -10,8 +10,7 @@ anim_get_dvar_int(dvar, def) {
 anim_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }
@@ -21,15 +20,13 @@ set_orient_mode(mode, val1) {
   if(level.dog_debug_orient == self getentnum()) {
     if(isDefined(val1)) {
       println("DOG:Setting orient mode: " + mode + " " + val1 + " " + getTime());
-    }
-    else {
+    } else {
       println("DOG:Setting orient mode: " + mode + " " + getTime());
     }
   }
   if(isDefined(val1)) {
     self OrientMode(mode, val1);
-  }
-  else {
+  } else {
     self OrientMode(mode);
   }
 }

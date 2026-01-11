@@ -185,8 +185,7 @@ dispatchNotify(slot) {
 
   if(isDefined(nextNotifyData.name)) {
     actionNotify(nextNotifyData);
-  }
-  else {
+  } else {
     showNotifyMessage(nextNotifyData);
   }
 }
@@ -250,11 +249,9 @@ showNotifyMessage(notifyData) {
 
   if(isDefined(notifyData.duration)) {
     duration = notifyData.duration;
-  }
-  else if(level.gameEnded) {
+  } else if(level.gameEnded) {
     duration = 2.0;
-  }
-  else {
+  } else {
     duration = 4.0;
   }
 
@@ -270,8 +267,7 @@ showNotifyMessage(notifyData) {
 
   if(isDefined(notifyData.glowColor)) {
     glowColor = notifyData.glowColor;
-  }
-  else {
+  } else {
     glowColor = game["colors"]["cyan"];
   }
 
@@ -280,15 +276,13 @@ showNotifyMessage(notifyData) {
   if(isDefined(notifyData.titleText)) {
     if(isDefined(notifyData.titleLabel)) {
       self.notifyTitle.label = notifyData.titleLabel;
-    }
-    else {
+    } else {
       self.notifyTitle.label = &"";
     }
 
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString)) {
       self.notifyTitle setValue(notifyData.titleText);
-    }
-    else {
+    } else {
       self.notifyTitle setText(notifyData.titleText);
     }
     self.notifyTitle setPulseFX(int(25 * duration), int(duration * 1000), 1000);
@@ -303,15 +297,13 @@ showNotifyMessage(notifyData) {
   if(isDefined(notifyData.notifyText)) {
     if(isDefined(notifyData.textLabel)) {
       self.notifyText.label = notifyData.textLabel;
-    }
-    else {
+    } else {
       self.notifyText.label = &"";
     }
 
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString)) {
       self.notifyText setValue(notifyData.notifyText);
-    }
-    else {
+    } else {
       self.notifyText setText(notifyData.notifyText);
     }
     self.notifyText setPulseFX(100, int(duration * 1000), 1000);
@@ -325,8 +317,7 @@ showNotifyMessage(notifyData) {
 
     if(isDefined(notifyData.text2Label)) {
       self.notifyText2.label = notifyData.text2Label;
-    }
-    else {
+    } else {
       self.notifyText2.label = &"";
     }
 
@@ -342,8 +333,7 @@ showNotifyMessage(notifyData) {
 
     if(level.splitscreen || self isSplitscreenPlayer()) {
       self.notifyIcon setShader(notifyData.iconName, 30, 30);
-    }
-    else {
+    } else {
       self.notifyIcon setShader(notifyData.iconName, 60, 60);
     }
 
@@ -650,14 +640,12 @@ actionNotifyMessage(actionData) {
         self SetClientOmnvar("ui_splash_killstreak_idx", splashIdx);
         if(isDefined(actionData.playerCardPlayer) && actionData.playerCardPlayer != self) {
           self SetClientOmnvar("ui_splash_killstreak_clientnum", actionData.playerCardPlayer GetEntityNumber());
-        }
-        else {
+        } else {
           self SetClientOmnvar("ui_splash_killstreak_clientnum", -1);
         }
         if(isDefined(actionData.optionalNumber)) {
           self SetClientOmnvar("ui_splash_killstreak_optional_number", actionData.optionalNumber);
-        }
-        else {
+        } else {
           self SetClientOmnvar("ui_splash_killstreak_optional_number", 0);
         }
         break;
@@ -708,8 +696,7 @@ actionNotifyMessage(actionData) {
     if(isDefined(actionData.leaderSound)) {
       if(isDefined(actionData.leaderSoundGroup)) {
         self leaderDialogOnPlayer(actionData.leaderSound, actionData.leaderSoundGroup, true);
-      }
-      else {
+      } else {
         self leaderDialogOnPlayer(actionData.leaderSound);
       }
     }
@@ -834,18 +821,15 @@ outcomeOverlay(winner) {
   if(level.teamBased) {
     if(winner == "tie") {
       self matchOutcomeNotify("draw");
-    }
-    else if(winner == self.team) {
+    } else if(winner == self.team) {
       self matchOutcomeNotify("victory");
-    }
-    else {
+    } else {
       self matchOutcomeNotify("defeat");
     }
   } else {
     if(winner == self) {
       self matchOutcomeNotify("victory");
-    }
-    else {
+    } else {
       self matchOutcomeNotify("defeat");
     }
   }
@@ -949,8 +933,7 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
   } else if(winner == "tie") {
     if(isRound) {
       self SetClientOmnvar("ui_round_end_title", game["round_end"]["round_draw"]);
-    }
-    else {
+    } else {
       self SetClientOmnvar("ui_round_end_title", game["round_end"]["draw"]);
     }
     winner = "allies";
@@ -959,15 +942,13 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
   } else if(isDefined(self.pers["team"]) && winner == team) {
     if(isRound) {
       self SetClientOmnvar("ui_round_end_title", game["round_end"]["round_win"]);
-    }
-    else {
+    } else {
       self SetClientOmnvar("ui_round_end_title", game["round_end"]["victory"]);
     }
   } else {
     if(isRound) {
       self SetClientOmnvar("ui_round_end_title", game["round_end"]["round_loss"]);
-    }
-    else {
+    } else {
       self SetClientOmnvar("ui_round_end_title", game["round_end"]["defeat"]);
     }
   }
@@ -1015,8 +996,7 @@ outcomeNotify(winner, endReasonText) {
     self.deaths == firstPlace.deaths) {
     if(self != firstPlace) {
       tied = true;
-    }
-    else {
+    } else {
       if(isDefined(secondPlace) &&
         secondPlace.score == firstPlace.score &&
         secondPlace.deaths == firstPlace.deaths) {

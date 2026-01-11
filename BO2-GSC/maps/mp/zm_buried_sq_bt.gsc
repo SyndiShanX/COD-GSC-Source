@@ -199,5 +199,4 @@ wait_for_richtofen_tower() {
   flag_set("sq_is_ric_tower_built");
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}

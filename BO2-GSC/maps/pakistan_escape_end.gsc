@@ -131,8 +131,7 @@ player_hotel_collision_effects() {
 hotel_super_soct_condition_vo() {
   level.vh_salazar_soct waittill("turn_left");
 
-  if(level.player.vehicle_state == 1) {
-  }
+  if(level.player.vehicle_state == 1) {}
 }
 
 hotel_drone_condition_vo() {
@@ -194,8 +193,7 @@ escape_bosses_vo() {
 takedown_apache_vo() {
   trigger_wait("apache_retreat");
 
-  if(level.player.vehicle_state == 2) {
-  }
+  if(level.player.vehicle_state == 2) {}
 }
 
 hack_triggers() {
@@ -285,8 +283,7 @@ near_pipes_drone() {
 
   if(level.player.vehicle_state == 2) {
     wait 2.6;
-  }
-  else {
+  } else {
     wait 2;
   }
 
@@ -363,8 +360,7 @@ elevator_logic(n_elevator_number, n_move_time) {
 
   if(is_player_in_drone()) {
     time_scale = 1.0;
-  }
-  else {
+  } else {
     time_scale = 0.5;
   }
 
@@ -437,8 +433,7 @@ hallway_ai_logic() {
 
   if(self.script_noteworthy == "behind") {
     self change_movemode("sprint");
-  }
-  else {
+  } else {
     self disable_tactical_walk();
   }
 
@@ -511,8 +506,7 @@ super_soct_speed_control(b_initial) {
   while(true) {
     if(level.player.vehicle_state == 1) {
       self setspeed(self.n_speed_based_on_soct, 26, 12);
-    }
-    else if(level.player.vehicle_state == 2) {
+    } else if(level.player.vehicle_state == 2) {
       self setspeed(self.n_speed_based_on_drone, 26, 12);
     }
 
@@ -554,8 +548,7 @@ soct_walkway_ai_logic() {
 
   if(self.targetname == "factory_walkway_2_behind_ai") {
     self change_movemode("sprint");
-  }
-  else {
+  } else {
     self disable_tactical_walk();
   }
 

@@ -56,8 +56,7 @@ apache_hints_island() {
 ads_hint() {
   if(getkeybinding("+toggleads_throw")["count"] > 0) {
     level.player apache_hints_display_hint_timeout("hint_apache_ads", 5.0);
-  }
-  else {
+  } else {
     level.player apache_hints_display_hint_timeout("hint_apache_ads_hold", 5.0);
   }
 }

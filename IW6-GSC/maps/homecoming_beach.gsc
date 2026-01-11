@@ -451,7 +451,7 @@ bunker_balcony_damage_state(var_0) {
   var_1 = ["left", "mid", "right"];
 
   foreach(var_3 in var_1) {
-  var_0[var_3] maps\_utility::show_entity();
+    var_0[var_3] maps\_utility::show_entity();
   }
 
   common_scripts\utility::array_thread(var_0["supports"], maps\_utility::show_entity);
@@ -559,8 +559,7 @@ beach_wave1_logic() {
 
     if(var_9 maps\homecoming_util::noteworthy_check("frontline_artillery_drones")) {
       level.artillery_hit_drones = common_scripts\utility::array_add(level.artillery_hit_drones, var_10);
-    }
-    else if(var_9 maps\homecoming_util::noteworthy_check("beach_javelin_drone")) {} else {
+    } else if(var_9 maps\homecoming_util::noteworthy_check("beach_javelin_drone")) {} else {
       level.beachfronelinedrones = common_scripts\utility::array_removeundefined(level.beachfronelinedrones);
       level.beachfronelinedrones = common_scripts\utility::array_add(level.beachfronelinedrones, var_10);
     }
@@ -669,7 +668,7 @@ beach_wave1_enemy_ai(var_0, var_1, var_2) {
   var_5 = var_0.unloadspawners;
 
   foreach(var_7 in var_5) {
-  var_4 = var_4 + var_7.script_index;
+    var_4 = var_4 + var_7.script_index;
   }
 
   while(!common_scripts\utility::flag("FLAG_start_wave1_retreat")) {
@@ -805,7 +804,7 @@ hovercraft_missile_barrage(var_0) {
   var_2 = [];
 
   foreach(var_4 in var_1) {
-  var_2[var_4.script_index] = var_4;
+    var_2[var_4.script_index] = var_4;
   }
 
   for(var_6 = 0; var_6 < var_2.size; var_6++) {
@@ -813,8 +812,7 @@ hovercraft_missile_barrage(var_0) {
 
     if(var_4 maps\_utility::script_delay()) {
       var_4 maps\_utility::script_delay();
-    }
-    else {
+    } else {
       wait 1;
     }
 
@@ -900,8 +898,7 @@ metal_tower_collapse() {
   foreach(var_5 in var_1) {
     if(var_5 maps\homecoming_util::parameters_check("window")) {
       var_3 = common_scripts\utility::array_add(var_3, var_5);
-    }
-    else {
+    } else {
       var_2 = var_5;
     }
 
@@ -909,7 +906,7 @@ metal_tower_collapse() {
   }
 
   foreach(var_8 in var_3) {
-  var_8 linkto(var_2);
+    var_8 linkto(var_2);
   }
 
   var_0 delete();
@@ -1542,8 +1539,7 @@ beach_playerhind_attack_target_player(var_0) {
 
     if(var_6 == "stand" || !level.player istouching(var_4)) {
       var_3 = randomintrange(25, 40);
-    }
-    else {
+    } else {
       var_3 = randomintrange(100, 150);
     }
 
@@ -1594,14 +1590,14 @@ beach_hind_balcony_logic() {
   var_0 endon("death");
 
   foreach(var_2 in level.balconystumblers) {
-  var_2.alreadystumbling = 0;
+    var_2.alreadystumbling = 0;
   }
 
   var_4 = [];
   var_5 = getEntArray("balcony_playercheck_triggers", "targetname");
 
   foreach(var_7 in var_5) {
-  var_4[var_7.script_noteworthy] = var_7;
+    var_4[var_7.script_noteworthy] = var_7;
   }
 
   var_9 = getEntArray("hind_balcony_missile_targets", "targetname");
@@ -1775,11 +1771,9 @@ playerhind_player_hind_hint() {
 
   if(isDefined(var_3) && var_3["count"] > 0) {
     maps\_utility::display_hint("hind_prone_hint_hold");
-  }
-  else if(isDefined(var_4) && var_4["count"] > 0) {
+  } else if(isDefined(var_4) && var_4["count"] > 0) {
     maps\_utility::display_hint("hind_prone_hint_toggle");
-  }
-  else if(isDefined(var_5) && var_5["count"] > 0) {
+  } else if(isDefined(var_5) && var_5["count"] > 0) {
     maps\_utility::display_hint("hind_prone_hint");
   }
 }
@@ -1936,8 +1930,7 @@ beach_wave1_ai(var_0) {
 
   if(var_1[0].team == "axis") {
     var_2 = ::beach_enemy_default;
-  }
-  else {
+  } else {
     var_2 = ::beach_ally_default;
   }
 
@@ -1976,7 +1969,7 @@ bunker_balcony_bullet_impacts() {
   var_2 = ["balcony_impact_sand_1", "balcony_impact_sand_1"];
 
   foreach(var_4 in var_0) {
-  var_4 childthread bunker_balcony_bullet_impacts_think(var_1, var_2);
+    var_4 childthread bunker_balcony_bullet_impacts_think(var_1, var_2);
   }
 }
 
@@ -2203,7 +2196,7 @@ beach_bunker_stumble_event() {
   var_3 = common_scripts\utility::getstructarray("bunker_stairs_explosion_soundspot", "targetname");
 
   foreach(var_5 in var_3) {
-  thread common_scripts\utility::play_sound_in_space(var_5.script_sound, var_5.origin);
+    thread common_scripts\utility::play_sound_in_space(var_5.script_sound, var_5.origin);
   }
 
   common_scripts\utility::exploder("hallway_exp");
@@ -2356,8 +2349,7 @@ beach_battlehinds_manager(var_0) {
 
   if(isDefined(var_1.script_linkto)) {
     var_2 = var_1 common_scripts\utility::get_linked_ents();
-  }
-  else {
+  } else {
     var_2 = common_scripts\utility::array_add(var_2, var_0);
   }
 

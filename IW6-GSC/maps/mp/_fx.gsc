@@ -18,8 +18,7 @@ script_print_fx() {
 
   if(isDefined(self.target)) {
     org = getent(self.target).origin;
-  }
-  else {
+  } else {
     org = "undefined";
   }
 

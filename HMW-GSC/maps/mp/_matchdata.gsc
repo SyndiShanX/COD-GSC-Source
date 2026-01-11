@@ -188,8 +188,7 @@ logplayerlife(var_0) {
 
   if(isDefined(self.spawntimedecisecondsfrommatchstart)) {
     setmatchdata("lives", self.lifeid, "spawnTimeDeciSecondsFromMatchStart", self.spawntimedecisecondsfrommatchstart);
-  }
-  else {
+  } else {
     setmatchdata("lives", self.lifeid, "spawnTimeDeciSecondsFromMatchStart", -1);
   }
 
@@ -405,11 +404,9 @@ determineweaponnameandattachments(var_0, var_1) {
 
   if(maps\mp\_utility::iskillstreakweapon(var_0)) {
     var_7 = maps\mp\_utility::strip_suffix(var_0, "_mp");
-  }
-  else if(var_0 == "destructible") {
+  } else if(var_0 == "destructible") {
     var_7 = var_0;
-  }
-  else if(isDefined(var_2) && (var_2 == "primary" || var_2 == "altmode" || var_2 == "melee") && (var_3 == "pistol" || var_3 == "smg" || var_3 == "rifle" || var_3 == "spread" || var_3 == "mg" || var_3 == "grenade" || var_3 == "rocketlauncher" || var_3 == "sniper" || var_3 == "cone" || var_3 == "beam" || var_3 == "shield")) {
+  } else if(isDefined(var_2) && (var_2 == "primary" || var_2 == "altmode" || var_2 == "melee") && (var_3 == "pistol" || var_3 == "smg" || var_3 == "rifle" || var_3 == "spread" || var_3 == "mg" || var_3 == "grenade" || var_3 == "rocketlauncher" || var_3 == "sniper" || var_3 == "cone" || var_3 == "beam" || var_3 == "shield")) {
     if(var_2 == "altmode") {
       if(isDefined(var_1)) {
         var_0 = var_1;
@@ -593,15 +590,11 @@ logspecialassists(var_0, var_1) {
 
         if(var_1 == "assist_uav") {
           setmatchdata("lives", var_2, "assists", var_3, "assistUAV", 1);
-        }
-        else if(var_1 == "assist_concussion") {
+        } else if(var_1 == "assist_concussion") {
           setmatchdata("lives", var_2, "assists", var_3, "assistConcussion", 1);
-        }
-        else if(var_1 == "assist_flash") {
+        } else if(var_1 == "assist_flash") {
           setmatchdata("lives", var_2, "assists", var_3, "assistFlash", 1);
-        }
-        else {
-        }
+        } else {}
 
         break;
       }
@@ -785,24 +778,21 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(!isDefined(level.matchdata["deathCount"])) {
     level.matchdata["deathCount"] = 1;
-  }
-  else {
+  } else {
     level.matchdata["deathCount"]++;
   }
 
   if(var_25 <= 3.0) {
     if(!isDefined(level.matchdata["badSpawnDiedTooFastCount"])) {
       level.matchdata["badSpawnDiedTooFastCount"] = 1;
-    }
-    else {
+    } else {
       level.matchdata["badSpawnDiedTooFastCount"]++;
     }
 
     if(self.spawninfo.badspawn == 0) {
       if(!isDefined(level.matchdata["badSpawnByAnyMeansCount"])) {
         level.matchdata["badSpawnByAnyMeansCount"] = 1;
-      }
-      else {
+      } else {
         level.matchdata["badSpawnByAnyMeansCount"]++;
       }
 
@@ -813,16 +803,14 @@ logplayerdeath(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
   if(isplayer(var_1) && var_26 <= 3.0) {
     if(!isDefined(level.matchdata["badSpawnKilledTooFastCount"])) {
       level.matchdata["badSpawnKilledTooFastCount"] = 1;
-    }
-    else {
+    } else {
       level.matchdata["badSpawnKilledTooFastCount"]++;
     }
 
     if(var_1.spawninfo.badspawn == 0) {
       if(!isDefined(level.matchdata["badSpawnByAnyMeansCount"])) {
         level.matchdata["badSpawnByAnyMeansCount"] = 1;
-      }
-      else {
+      } else {
         level.matchdata["badSpawnByAnyMeansCount"]++;
       }
 
@@ -839,23 +827,20 @@ logplayerdata() {
 
   if(maps\mp\_utility::getpersstat("assists") > 255) {
     setmatchdata("players", self.clientid, "assists", 255);
-  }
-  else {
+  } else {
     setmatchdata("players", self.clientid, "assists", maps\mp\_utility::getpersstat("assists"));
   }
 
   if(maps\mp\_utility::getpersstat("longestStreak") > 255) {
     setmatchdata("players", self.clientid, "longestStreak", 255);
-  }
-  else {
+  } else {
     setmatchdata("players", self.clientid, "longestStreak", maps\mp\_utility::getpersstat("longestStreak"));
   }
 
   if(isDefined(self) && isDefined(self.pers) && isDefined(self.pers["validationInfractions"])) {
     if(maps\mp\_utility::getpersstat("validationInfractions") > 255) {
       setmatchdata("players", self.clientid, "validationInfractions", 255);
-    }
-    else {
+    } else {
       setmatchdata("players", self.clientid, "validationInfractions", maps\mp\_utility::getpersstat("validationInfractions"));
     }
   }
@@ -920,8 +905,7 @@ endofgamesummarylogger() {
 
       if(getdvarint("g_hardcore")) {
         var_6 = level.gametype + "_HC";
-      }
-      else if(getdvarint("g_oldschool")) {
+      } else if(getdvarint("g_oldschool")) {
         var_6 = level.gametype + "_OS";
       }
 
@@ -934,11 +918,9 @@ endofgamesummarylogger() {
 
       if(level.gametype == "war") {
         combinelbstat(var_1, "assists", var_6);
-      }
-      else if(level.gametype == "dm") {
+      } else if(level.gametype == "dm") {
         combinelbstat(var_1, "headshots", var_6);
-      }
-      else if(level.gametype == "conf") {
+      } else if(level.gametype == "conf") {
         combinelbstat(var_1, "confirms", var_6, "confirmed");
         combinelbstat(var_1, "denies", var_6, "denied");
       } else if(level.gametype == "sd") {

@@ -156,7 +156,7 @@ activate_kill_nodamage() {
   level thread fail_kill_nodamage(self);
 
   foreach(var_1 in level.players) {
-  var_1 thread kill_nodamage_monitor();
+    var_1 thread kill_nodamage_monitor();
   }
 }
 
@@ -218,7 +218,7 @@ activate_kill_spider() {
   var_0 = int(gettime() + self.goal * 1000);
 
   foreach(var_2 in level.players) {
-  var_2 setclientomnvar("ui_intel_timer", var_0);
+    var_2 setclientomnvar("ui_intel_timer", var_0);
   }
 
   level.current_challenge_timer = self.goal;
@@ -400,8 +400,7 @@ beacon_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var
     case "kill_marked":
       if(isDefined(self.marked_for_challenge)) {
         maps\mp\alien\_challenge::update_challenge("kill_marked", 1);
-      }
-      else if(var_3 != "MOD_SUICIDE") {
+      } else if(var_3 != "MOD_SUICIDE") {
         maps\mp\alien\_challenge::update_challenge("kill_marked", 0, 1);
       }
 
@@ -483,8 +482,7 @@ beacon_custom_onalienagentdamaged_func(var_0, var_1, var_2, var_3, var_4, var_5,
 beacon_shock_turret_hit_marker_override(var_0, var_1) {
   if(isDefined(var_0.owner)) {
     var_0.owner thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_1);
-  }
-  else {
+  } else {
     var_0 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_1);
   }
 }

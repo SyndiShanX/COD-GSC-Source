@@ -85,17 +85,13 @@ grenadeTracking() {
 
     if(weaponName == "frag_grenade_mp") {
       level thread sayLocalSound(self, "frag_out");
-    }
-    else if(weaponName == "flash_grenade_mp") {
+    } else if(weaponName == "flash_grenade_mp") {
       level thread sayLocalSound(self, "flash_out");
-    }
-    else if(weaponName == "concussion_grenade_mp") {
+    } else if(weaponName == "concussion_grenade_mp") {
       level thread sayLocalSound(self, "conc_out");
-    }
-    else if(weaponName == "smoke_grenade_mp") {
+    } else if(weaponName == "smoke_grenade_mp") {
       level thread sayLocalSound(self, "smoke_out");
-    }
-    else if(weaponName == "c4_mp") {
+    } else if(weaponName == "c4_mp") {
       level thread sayLocalSound(self, "c4_plant");
     }
   }

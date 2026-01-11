@@ -164,8 +164,7 @@ damageTarget(dir) {
         break;
       case 2: {
         rotation = 1;
-        if(isDefined(attacker) && isPlayer(attacker)) {
-        }
+        if(isDefined(attacker) && isPlayer(attacker)) {}
 
         self rotateyaw(self.angles[2] + (180 * rotation), .3);
         self playSound("amb_target_twirl");

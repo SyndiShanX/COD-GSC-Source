@@ -3,8 +3,7 @@
  * Script: clientscripts\_qrcode.csc
 **************************************/
 
-init() {
-}
+init() {}
 
 setup_qr_code(mapname, slot, userrequest) {
   if(isDefined(mapname)) {

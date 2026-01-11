@@ -107,8 +107,7 @@ aud_check(var_0) {
         level.player setclienttriggeraudiozone("int_horizontal");
       else if(var_0 == "ending_ground") {
         level.player setclienttriggeraudiozone("int_postgarden");
-      }
-      else {
+      } else {
         return;
         return;
         return;
@@ -133,7 +132,7 @@ aud_intro(var_0) {
 
 aud_ally_gear_rustle() {
   foreach(var_1 in level.allies) {
-  var_1 thread aud_ally_gear_rustle_2();
+    var_1 thread aud_ally_gear_rustle_2();
   }
 }
 
@@ -157,8 +156,7 @@ aud_ally_gear_rustle_2() {
 intro_convoy() {
   if(getdvar("intro_mask") == "0") {
     wait 9;
-  }
-  else {
+  } else {
     wait 12;
   }
 
@@ -185,11 +183,9 @@ intro_convoy() {
 aud_binoculars(var_0) {
   if(var_0 == "on") {
     self playSound("fly_binoc_vision_on");
-  }
-  else if(var_0 == "off") {
+  } else if(var_0 == "off") {
     self playSound("fly_binoc_vision_off");
-  }
-  else if(var_0 == "bg_loop") {
+  } else if(var_0 == "bg_loop") {
     var_1 = spawn("script_origin", self.origin);
     var_1 playLoopSound("fly_binoc_bg_loop");
     self waittill("stop_binocular_bg_loop_sound");
@@ -199,8 +195,7 @@ aud_binoculars(var_0) {
     self playSound("fly_binoc_zoom_in");
   else if(var_0 == "zoom_out") {
     self playSound("fly_binoc_zoom_out");
-  }
-  else if(var_0 == "scan_loop") {
+  } else if(var_0 == "scan_loop") {
     self.scan_loop_sound = spawn("script_origin", self.origin);
     self.scan_loop_sound playLoopSound("fly_binoc_scan_loop");
     common_scripts\utility::waittill_any("stop_binocular_scan_loop_sound", "stop_binocular_bg_loop_sound");
@@ -218,14 +213,11 @@ aud_binoculars(var_0) {
     self playSound("fly_binoc_scan_positive");
   else if(var_0 == "negative") {
     self playSound("fly_binoc_scan_negative");
-  }
-  else if(var_0 == "seeker_move") {
+  } else if(var_0 == "seeker_move") {
     self playSound("fly_binoc_seeker_move");
-  }
-  else if(var_0 == "seeker_on") {
+  } else if(var_0 == "seeker_on") {
     self playSound("fly_binoc_seeker_on");
-  }
-  else if(var_0 == "seeker_off") {
+  } else if(var_0 == "seeker_off") {
     self playSound("fly_binoc_seeker_off");
   }
 }
@@ -384,8 +376,7 @@ aud_rappel(var_0) {
 
     if(common_scripts\utility::flag("player_has_exited_the_building") && !common_scripts\utility::flag("inverted_rappel_finished")) {
       wait 1.35;
-    }
-    else {
+    } else {
       wait 1.9;
     }
 
@@ -756,11 +747,9 @@ aud_party(var_0) {
     level.aud_outside_music common_scripts\utility::play_loopsound_in_space("outside_party_music", (-22880, 658, 13956));
   else if(var_0 == "out_music") {
     level.aud_outside_music playLoopSound("outside_party_music");
-  }
-  else if(var_0 == "crowd") {
+  } else if(var_0 == "crowd") {
     level.aud_outside_crowd playLoopSound("outside_party_crowd");
-  }
-  else if(var_0 == "fade_in") {
+  } else if(var_0 == "fade_in") {
     wait 4;
     wait 5;
   } else if(var_0 == "crowd_swell") {
@@ -841,11 +830,9 @@ aud_bar(var_0) {
 aud_door(var_0) {
   if(var_0 == "elevator_open") {
     thread common_scripts\utility::play_sound_in_space("crnd_elev_door_open", (-22544, 2351, 22701));
-  }
-  else if(var_0 == "elevator_close") {
+  } else if(var_0 == "elevator_close") {
     thread common_scripts\utility::play_sound_in_space("crnd_elevator_close", (-22544, 2351, 22701));
-  }
-  else if(var_0 == "carani") {
+  } else if(var_0 == "carani") {
     wait 2.35;
     thread common_scripts\utility::play_sound_in_space("crnd_office_door_open_03", (-22233, 3097, 22667));
     wait 1;
@@ -941,11 +928,9 @@ aud_rappel_combat(var_0, var_1) {
     thread common_scripts\utility::play_sound_in_space("crnd_into_garden_window_01", (-24976, 6182, 21134));
   else if(var_0 == "window2") {
     thread common_scripts\utility::play_sound_in_space("crnd_into_garden_window_02", (-24889, 6317, 21130));
-  }
-  else if(var_0 == "window3") {
+  } else if(var_0 == "window3") {
     thread common_scripts\utility::play_sound_in_space("crnd_into_garden_window_03", level.player.origin);
-  }
-  else if(var_0 == "copy") {
+  } else if(var_0 == "copy") {
     wait 1.6;
     var_1 playSound("falling_item");
   } else if(var_0 == "hit")
@@ -1059,8 +1044,7 @@ aud_hvt(var_0, var_1) {
       }
       if(var_0 == "v2") {
         var_1 playSound("crnd_hvt_villain_02");
-      }
-      else if(var_0 == "v3") {
+      } else if(var_0 == "v3") {
         wait 11.7;
         var_1 playSound("crnd_hvt_villain_03");
       } else {
@@ -1167,8 +1151,7 @@ aud_collapse(var_0) {
     wait 9.33;
   else if(var_0 == "slide3") {
     wait 18.2;
-  }
-  else if(var_0 == "tilt2") {
+  } else if(var_0 == "tilt2") {
     wait 0.32;
     thread common_scripts\utility::play_sound_in_space("crnd_building_tilt_02", (-22390, 3961, 20527));
     wait 9.97;
@@ -1232,8 +1215,7 @@ aud_collapse(var_0) {
     wait 12.93;
   else if(var_0 == "stairs2") {
     wait 15.3;
-  }
-  else {
+  } else {
     if(var_0 == "metal") {
       return;
     }
@@ -1242,8 +1224,7 @@ aud_collapse(var_0) {
     }
     if(var_0 == "event1") {
       wait 0.5;
-    }
-    else {
+    } else {
       if(var_0 == "event3") {
         return;
       }

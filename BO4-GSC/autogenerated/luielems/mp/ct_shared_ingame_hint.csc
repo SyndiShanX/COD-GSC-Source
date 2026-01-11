@@ -4,7 +4,6 @@
 ***************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace ct_shared_ingame_hint;
 
 class cct_shared_ingame_hint: cluielem {
@@ -67,13 +66,13 @@ class cct_shared_ingame_hint: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"ct_shared_ingame_hint");
+    cluielem::open(localclientnum, # "ct_shared_ingame_hint");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, #"defaultstate");
-    set_data(localclientnum, "inGameHint", #"");
+    set_state(localclientnum, # "defaultstate");
+    set_data(localclientnum, "inGameHint", # "");
   }
 
   function register_clientside(uid) {

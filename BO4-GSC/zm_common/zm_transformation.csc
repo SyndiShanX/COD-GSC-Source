@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace zm_transform;
 
 autoexec __init__system__() {
@@ -20,7 +19,7 @@ __init__() {
 }
 
 function_201c2cb7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrenderoverridebundle(isDefined(self.var_fab3cf78) ? self.var_fab3cf78 : #"hash_435832b390f73dff");
+  self playrenderoverridebundle(isDefined(self.var_fab3cf78) ? self.var_fab3cf78 : # "hash_435832b390f73dff");
 }
 
 function_341e5a97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -44,6 +43,6 @@ function_341e5a97(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 function_8a817bd6(model) {
-  self waittilltimeout(60, #"death", #"unlock_model");
+  self waittilltimeout(60, # "death", # "unlock_model");
   util::unlock_model(model);
 }

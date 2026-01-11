@@ -98,8 +98,7 @@ anims() {
 
   if(getdvarint("use_old_door_openings") == 1) {
     level.scr_anim["price"]["hunted_open_creek_gate"] = % hunted_open_barndoor;
-  }
-  else {
+  } else {
     level.scr_anim["price"]["hunted_open_creek_gate"] = % h1_hunted_open_grilldoor;
   }
 
@@ -111,8 +110,7 @@ anims() {
 
   if(getdvarint("use_old_door_openings") == 1) {
     level.scr_anim["price"]["hunted_open_big_barn_gate"] = % hunted_open_barndoor;
-  }
-  else {
+  } else {
     level.scr_anim["price"]["hunted_open_big_barn_gate"] = % h1_hunted_open_barndoor_02;
   }
 

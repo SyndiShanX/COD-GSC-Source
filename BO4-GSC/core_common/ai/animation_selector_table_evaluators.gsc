@@ -4,7 +4,6 @@
 ******************************************************************/
 
 #include scripts\core_common\ai\systems\animation_selector_table;
-
 #namespace animation_selector_table_evaluators;
 
 autoexec registerastscriptfunctions() {

@@ -13,7 +13,6 @@
 #include scripts\mp_common\item_drop;
 #include scripts\mp_common\item_inventory;
 #include scripts\mp_common\item_world;
-
 #namespace wz_cash_safe;
 
 autoexec __init__system__() {
@@ -145,7 +144,7 @@ private function_c92a5584(activator) {
   }
 
   foreach(item in activator.inventory.items) {
-    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== #"cash") {
+    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== # "cash") {
       continue;
     }
 
@@ -208,7 +207,7 @@ private function_2cef7d98() {
   var_22aec194 = undefined;
 
   foreach(item in self.inventory.items) {
-    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== #"cash") {
+    if(!isDefined(item) || !isstruct(item.itementry) || item.itementry.itemtype !== # "cash") {
       continue;
     }
 
@@ -247,11 +246,7 @@ private function_a6eac3b7() {
       player = getentbynum(int(args[0]));
 
       if(isplayer(player)) {
-        [
-          [level._setteamscore]
-        ](player.team, [
-          [level._getteamscore]
-        ](player.team) + int(args[1]));
+        [[level._setteamscore]](player.team, [[level._getteamscore]](player.team) + int(args[1]));
       }
     }
   }

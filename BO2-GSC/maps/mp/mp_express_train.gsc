@@ -26,7 +26,7 @@ init() {
   traintriggers = getEntArray("train_kill_trigger", "targetname");
 
   foreach(brush in brushes) {
-  brush disconnectpaths();
+    brush disconnectpaths();
   }
 
   waittime = 0.05;
@@ -122,7 +122,7 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     wait(gatedownwait);
 
     foreach(gate in gates) {
-    gate stoploopsound(2);
+      gate stoploopsound(2);
     }
 
     wait 2;
@@ -147,8 +147,7 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     for(i = 1; i < cars.size; i++) {
       if(i == 1) {
         wait 0.4;
-      }
-      else {
+      } else {
         wait 0.35;
       }
 
@@ -189,7 +188,7 @@ train_think(gates, entrygate, exitgate, cars, start, killcam) {
     array_func(gates, ::gate_move);
 
     foreach(gate in gates) {
-    gate playSound("amb_gate_move");
+      gate playSound("amb_gate_move");
     }
 
     wait 6;
@@ -271,8 +270,7 @@ gate_move(z_dist) {
 
   if(!isDefined(z_dist)) {
     self moveto(self.og_origin, 5);
-  }
-  else {
+  } else {
     self.og_origin = self.origin;
     self movez(z_dist, 5);
   }

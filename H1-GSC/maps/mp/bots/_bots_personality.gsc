@@ -70,7 +70,7 @@ bot_balance_personality() {
     var_3[var_9] = 0;
 
     foreach(var_7 in var_5) {
-    var_2[var_7] = 0;
+      var_2[var_7] = 0;
     }
   }
 
@@ -92,7 +92,7 @@ bot_balance_personality() {
   var_13 = [];
 
   foreach(var_15 in var_1) {
-  var_13[var_15] = int(var_3[var_15] / level.bot_personality_types_desired[var_15]);
+    var_13[var_15] = int(var_3[var_15] / level.bot_personality_types_desired[var_15]);
   }
 
   var_17 = undefined;
@@ -120,13 +120,13 @@ bot_balance_personality() {
     var_23 = [];
 
     foreach(var_15 in var_1) {
-    var_23[var_15] = level.bot_personality_types_desired[var_15] - var_3[var_15] % level.bot_personality_types_desired[var_15];
+      var_23[var_15] = level.bot_personality_types_desired[var_15] - var_3[var_15] % level.bot_personality_types_desired[var_15];
     }
 
     var_26 = 0;
 
     foreach(var_15 in var_1) {
-    var_26 = var_26 + var_23[var_15];
+      var_26 = var_26 + var_23[var_15];
     }
 
     var_29 = randomfloat(var_26);
@@ -162,8 +162,7 @@ bot_balance_personality() {
 
   if(var_36 - var_34 >= 2) {
     var_32 = var_33;
-  }
-  else {
+  } else {
     var_32 = common_scripts\utility::random(level.bot_personality[var_17]);
   }
 
@@ -201,9 +200,9 @@ update_personality_camper() {
 
       if(isDefined(level.override_find_camp_node)) {
         var_1 = [
-      }
+          }
           [level.override_find_camp_node]
-        ]();
+      ]();
 
       if(!var_1) {
         var_1 = find_camp_node();
@@ -327,8 +326,7 @@ clear_script_goal_on(var_0, var_1, var_2, var_3, var_4) {
     if(var_7 == "node_relinquished" || var_7 == "goal" || var_7 == "script_goal_changed") {
       if(!self bothasscriptgoal()) {
         var_8 = 0;
-      }
-      else {
+      } else {
         var_9 = self botgetscriptgoal();
         var_8 = maps\mp\bots\_bots_util::bot_vectors_are_equal(var_5, var_9);
       }
@@ -419,7 +417,7 @@ bot_monitor_watch_entrances_camp() {
 
   while(isDefined(self.watch_nodes)) {
     foreach(var_1 in self.watch_nodes) {
-    var_1.watch_node_chance[self.entity_number] = 1.0;
+      var_1.watch_node_chance[self.entity_number] = 1.0;
     }
 
     maps\mp\bots\_bots_strategy::prioritize_watch_nodes_toward_enemies(0.5);
@@ -650,8 +648,7 @@ find_camp_node_worker() {
 
       if(var_20 < 66 && var_20 >= 33) {
         var_3 = (var_3[0], var_3[1] + 45, 0);
-      }
-      else if(var_20 < 33) {
+      } else if(var_20 < 33) {
         var_3 = (var_3[0], var_3[1] - 45, 0);
       }
 
@@ -664,8 +661,7 @@ find_camp_node_worker() {
 
         if(var_18) {
           var_19 = self botnodepickmultiple(var_19, var_21, var_21, "node_camp", anglesToForward(var_3), "lenient");
-        }
-        else {
+        } else {
           var_19 = self botnodepickmultiple(var_19, var_21, var_21, "node_camp", anglesToForward(var_3));
         }
 
@@ -683,15 +679,12 @@ find_camp_node_worker() {
 
       if(isDefined(var_15)) {
         var_16 = 0;
-      }
-      else if(isDefined(self.camping_needs_fallback_camp_location)) {
+      } else if(isDefined(self.camping_needs_fallback_camp_location)) {
         if(var_17 == 1 && !var_18) {
           var_17 = 3;
-        }
-        else if(var_17 == 3 && !var_18) {
+        } else if(var_17 == 3 && !var_18) {
           var_18 = 1;
-        }
-        else if(var_17 == 3 && var_18) {
+        } else if(var_17 == 3 && var_18) {
           var_16 = 0;
         }
       } else
@@ -719,8 +712,7 @@ find_ambush_node(var_0, var_1) {
 
   if(isDefined(var_0)) {
     self.point_to_ambush = var_0;
-  }
-  else {
+  } else {
     var_2 = undefined;
     var_3 = getnodesinradius(self.origin, 5000, 0, 2000);
 
@@ -730,8 +722,7 @@ find_ambush_node(var_0, var_1) {
 
     if(isDefined(var_2)) {
       self.point_to_ambush = var_2.origin;
-    }
-    else {
+    } else {
       return 0;
     }
   }
@@ -810,8 +801,7 @@ bot_random_path_default() {
 bot_setup_callback_class() {
   if(maps\mp\bots\_bots_loadout::bot_setup_loadout_callback()) {
     return "callback";
-  }
-  else {
+  } else {
     return "class0";
   }
 }

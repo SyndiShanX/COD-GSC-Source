@@ -504,8 +504,7 @@ func_10FA8(var_00, var_01) {
   for(;;) {
     if(!isDefined(var_00)) {
       var_04 = var_03;
-    }
-    else {
+    } else {
       var_04 = var_00 getpointinbounds(0, 0, 0);
     }
 

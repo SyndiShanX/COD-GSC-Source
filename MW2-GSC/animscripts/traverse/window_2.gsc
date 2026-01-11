@@ -9,8 +9,7 @@
 main() {
   if(self.type == "dog") {
     dog_wall_and_window_hop("wallhop", 40);
-  }
-  else {
+  } else {
     self advancedWindowTraverse( % windowclimb, 35);
   }
 }

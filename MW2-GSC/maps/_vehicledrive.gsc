@@ -17,8 +17,7 @@ main() {
 vehicle_wait(startinvehicle) {
   if(!isDefined(startinvehicle)) {
     startinvehicle = false;
-  }
-  else if(startinvehicle) {
+  } else if(startinvehicle) {
     if(getdvar("player_vehicle_dismountable") == "off") {
       self makeUnusable();
     }
@@ -28,16 +27,14 @@ vehicle_wait(startinvehicle) {
   while(self.health > 0) {
     if(!(startinvehicle)) {
       self waittill("trigger");
-    }
-    else {
+    } else {
       startinvehicle = false;
       self useby(level.player);
     }
     owner = self getvehicleowner();
     if(isDefined(owner) && isplayer(owner)) {
       self thread vehicle_enter();
-    }
-    else {
+    } else {
       self thread vehicle_exit();
     }
     if(startinvehicle) {
@@ -91,17 +88,13 @@ vehicle_giveHealth() {
 
   if(skill == ("easy")) {
     self.health = 3000;
-  }
-  else if(skill == ("medium")) {
+  } else if(skill == ("medium")) {
     self.health = 2500;
-  }
-  else if(skill == ("hard")) {
+  } else if(skill == ("hard")) {
     self.health = 2000;
-  }
-  else if(skill == ("fu")) {
+  } else if(skill == ("fu")) {
     self.health = 1300;
-  }
-  else {
+  } else {
     self.health = 2000;
   }
 
@@ -117,17 +110,17 @@ Protect_Player() {
   self endon("death");
   playerCurrentHealth = level.player.health;
   /*
-	if(self.vehicletype == "flak88" || self.vehicletype == "flak88_forward")
-	{
-		if(!isDefined(level.player.oldthreatbias))
-		{
-			level.player.oldthreatbias = level.player.threatbias;
-//			level.player.ignoreme = true;
-		}
-		level.player.threatbias = -3000;			
+  	if(self.vehicletype == "flak88" || self.vehicletype == "flak88_forward")
+  	{
+  		if(!isDefined(level.player.oldthreatbias))
+  		{
+  			level.player.oldthreatbias = level.player.threatbias;
+  //			level.player.ignoreme = true;
+  		}
+  		level.player.threatbias = -3000;			
 
-	}
-	*/
+  	}
+  	*/
   while(isalive(level.player)) {
     level.player waittill("damage", ammount);
     /*
@@ -217,8 +210,7 @@ vehicle_ridehandle() {
     if(self.health < self.maximumhealth && time > regentimer && time > regeninctimer) {
       if(self.health + health_regeninc > self.maximumhealth) {
         self.health = self.maximumhealth;
-      }
-      else {
+      } else {
         self.health += health_regeninc;
       }
       regeninctimer = gettime() + 250;

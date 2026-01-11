@@ -13,7 +13,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\wz_common\wz_ai_utils;
-
 #namespace namespace_87f097c4;
 
 autoexec __init__system__() {

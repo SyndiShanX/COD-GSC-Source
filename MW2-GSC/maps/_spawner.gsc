@@ -56,44 +56,44 @@ main() {
   // for combat mode testing
   setDvarIfUninitialized("scr_force_ai_combat_mode", "0");
 
-    /*
-    	spawners = getSpawnerArray();
-    	for( i = 0; i < spawners.size; i++ )
-    	{
-    		spawner = spawners[ i ];
-    		if( !isDefined( spawner.targetname ) ) {
-    			continue;
-    		}
-    			
-    		triggers = getEntArray( spawner.targetname, "target" );
-    		for( j = 0; j < triggers.size; j++ )
-    		{
-    			trigger = triggers[ j ];
-    			
-    			if( ( isDefined( trigger.targetname ) ) && ( trigger.targetname == "flood_spawner" ) ) {
-    				continue;
-    			}
-    			
-    			switch( trigger.classname )
-    			{
-    			case "trigger_multiple":
-    			case "trigger_once":
-    			case "trigger_use":
-    			case "trigger_damage":
-    			case "trigger_radius":
-    			case "trigger_lookat":
-    				if( spawner.count ) {
-    					trigger thread doAutospawn( spawner );
-    				}
-    				break;
-    			}
-    		}
-    	}
-    */
+  /*
+  	spawners = getSpawnerArray();
+  	for( i = 0; i < spawners.size; i++ )
+  	{
+  		spawner = spawners[ i ];
+  		if( !isDefined( spawner.targetname ) ) {
+  			continue;
+  		}
+  			
+  		triggers = getEntArray( spawner.targetname, "target" );
+  		for( j = 0; j < triggers.size; j++ )
+  		{
+  			trigger = triggers[ j ];
+  			
+  			if( ( isDefined( trigger.targetname ) ) && ( trigger.targetname == "flood_spawner" ) ) {
+  				continue;
+  			}
+  			
+  			switch( trigger.classname )
+  			{
+  			case "trigger_multiple":
+  			case "trigger_once":
+  			case "trigger_use":
+  			case "trigger_damage":
+  			case "trigger_radius":
+  			case "trigger_lookat":
+  				if( spawner.count ) {
+  					trigger thread doAutospawn( spawner );
+  				}
+  				break;
+  			}
+  		}
+  	}
+  */
 
-    //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  //* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-    level._nextcoverprint = 0;
+  level._nextcoverprint = 0;
   level._ai_group = [];
   level.killedaxis = 0;
   level.ffpoints = 0;
@@ -456,8 +456,7 @@ trigger_spawner_spawns_guys() {
 
   if(isDefined(self.script_forcespawn)) {
     spawned = self stalingradspawn(dontShareEnemyInfo);
-  }
-  else {
+  } else {
     spawned = self dospawn(dontShareEnemyInfo);
   }
 
@@ -625,7 +624,7 @@ reincrement_count_if_deleted(spawner) {
   if(isDefined(self.script_force_count)) {
     if(self.script_force_count)
   }
-      return;
+  return;
 
   self waittill("death");
   if(!isDefined(self)) {
@@ -651,7 +650,7 @@ delete_start(startnum) {
       if(isDefined(ai[i].script_start)) {
         if(ai[i].script_start == startnum)
       }
-          ai[i] thread delete_me();
+      ai[i] thread delete_me();
     }
   }
 }
@@ -939,7 +938,7 @@ spawn_prethink() {
     return;
   }
 
-    prof_begin("spawn_prethink");
+  prof_begin("spawn_prethink");
 
   if(isDefined(self.script_difficulty)) {
     switch (self.script_difficulty) {
@@ -975,7 +974,7 @@ spawn_prethink() {
     if(isDefined(level._ai_delete)) {
       if(isDefined(level._ai_delete[self.script_delete]))
     }
-        array_size = level._ai_delete[self.script_delete].size;
+    array_size = level._ai_delete[self.script_delete].size;
 
     level._ai_delete[self.script_delete][array_size] = self;
   }
@@ -989,7 +988,7 @@ spawn_prethink() {
     if(isDefined(level._ai_health)) {
       if(isDefined(level._ai_health[self.script_health]))
     }
-        array_size = level._ai_health[self.script_health].size;
+    array_size = level._ai_health[self.script_health].size;
 
     level._ai_health[self.script_health][array_size] = self;
   }
@@ -1051,8 +1050,7 @@ spawn_prethink() {
 
     if(isDefined(self.targetname)) {
       spawn thread spawn_think(self.targetname);
-    }
-    else {
+    } else {
       spawn thread spawn_think();
     }
   }
@@ -1128,23 +1126,22 @@ run_spawn_functions() {
     func = self.spawn_funcs[i];
     if(isDefined(func["param5"])) {
       thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"], func["param5"]);
+    } else {
+      if(isDefined(func["param4"]))
     }
+    thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
     else {
-    if(isDefined(func["param4"]))
+      if(isDefined(func["param3"]))
     }
-      thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
+    thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
     else {
-    if(isDefined(func["param3"]))
+      if(isDefined(func["param2"]))
     }
-      thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
+    thread[[func["function"]]](func["param1"], func["param2"]);
     else {
-    if(isDefined(func["param2"]))
+      if(isDefined(func["param1"]))
     }
-      thread[[func["function"]]](func["param1"], func["param2"]);
-    else {
-    if(isDefined(func["param1"]))
-    }
-      thread[[func["function"]]](func["param1"]);
+    thread[[func["function"]]](func["param1"]);
     else {
       thread[[func["function"]]]();
     }
@@ -1156,23 +1153,22 @@ run_spawn_functions() {
       func = level.spawn_funcs[self.team][i];
       if(isDefined(func["param5"])) {
         thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"], func["param5"]);
+      } else {
+        if(isDefined(func["param4"]))
       }
+      thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
       else {
-      if(isDefined(func["param4"]))
+        if(isDefined(func["param3"]))
       }
-        thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
+      thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
       else {
-      if(isDefined(func["param3"]))
+        if(isDefined(func["param2"]))
       }
-        thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
+      thread[[func["function"]]](func["param1"], func["param2"]);
       else {
-      if(isDefined(func["param2"]))
+        if(isDefined(func["param1"]))
       }
-        thread[[func["function"]]](func["param1"], func["param2"]);
-      else {
-      if(isDefined(func["param1"]))
-      }
-        thread[[func["function"]]](func["param1"]);
+      thread[[func["function"]]](func["param1"]);
       else {
         thread[[func["function"]]]();
       }
@@ -1181,7 +1177,7 @@ run_spawn_functions() {
 
   self.saved_spawn_functions = self.spawn_funcs;
 
-    self.spawn_funcs = undefined;
+  self.spawn_funcs = undefined;
   // if you want to use the .spawner as reference then you need to yank it
   // at the top of the spawn function, for var space sake.
   self.spawner = undefined;
@@ -1249,24 +1245,16 @@ deathFunctions() {
     array = self.deathFuncs[i];
     switch (array["params"]) {
       case 0:
-        [
-          [array["func"]]
-        ](attacker);
+        [[array["func"]]](attacker);
         break;
       case 1:
-        [
-          [array["func"]]
-        ](attacker, array["param1"]);
+        [[array["func"]]](attacker, array["param1"]);
         break;
       case 2:
-        [
-          [array["func"]]
-        ](attacker, array["param1"], array["param2"]);
+        [[array["func"]]](attacker, array["param1"], array["param2"]);
         break;
       case 3:
-        [
-          [array["func"]]
-        ](attacker, array["param1"], array["param2"], array["param3"]);
+        [[array["func"]]](attacker, array["param1"], array["param2"], array["param3"]);
         break;
     }
   }
@@ -1354,8 +1342,7 @@ spawn_team_axis() {
   // for combat mode testing
   if(getdvar("scr_force_ai_combat_mode") == "ambush") {
     self.combatMode = "ambush";
-  }
-  else if(getdvar("scr_force_ai_combat_mode") == "ambush_nodes_only") {
+  } else if(getdvar("scr_force_ai_combat_mode") == "ambush_nodes_only") {
     self.combatMode = "ambush_nodes_only";
   }
 }
@@ -1536,11 +1523,9 @@ spawn_think_script_inits() {
   // create threatbiasgroups
   if(isDefined(self.script_threatbiasgroup)) {
     self setthreatbiasgroup(self.script_threatbiasgroup);
-  }
-  else if(self.team == "neutral") {
+  } else if(self.team == "neutral") {
     self setthreatbiasgroup("civilian");
-  }
-  else {
+  } else {
     self setthreatbiasgroup(self.team);
   }
 
@@ -1637,127 +1622,127 @@ spawn_think_debug_checks() {
   }
 }
 
-  // Actually do the spawn_think
-  spawn_think_action(targetname) {
-    // handle default ai flags for ent_flag * functions
-    self thread AI_damage_think();
-    self thread tanksquish();
-    self thread death_achievements();
-    self thread specops_think();
+// Actually do the spawn_think
+spawn_think_action(targetname) {
+  // handle default ai flags for ent_flag * functions
+  self thread AI_damage_think();
+  self thread tanksquish();
+  self thread death_achievements();
+  self thread specops_think();
 
-    //dont call this if you dont want AI guy to glow when the player uses thermal vision. Ai only glow when player is in thermal.
-    if(!isDefined(level.ai_dont_glow_in_thermal)) {
-      self ThermalDrawEnable();
-    }
-
-    // ai get their values from spawners and theres no need to have this value on ai
-    self.spawner_number = undefined;
-
-    if(!isDefined(self.unique_id)) {
-      set_ai_number();
-    }
-
-    // functions called on death
-    if(!isDefined(self.deathFuncs)) {
-      self.deathFuncs = [];
-    }
-
-    self thread deathFunctions();
-
-    level thread maps\_friendlyfire::friendly_fire_think(self);
-
-    self.walkdist = 16;
-
-    // which eq triggers am I touching?
-    //thread setup_ai_eq_triggers();
-
-    /# spawn_think_debug_checks();
-
-    init_reset_AI();
-
-    spawn_think_game_skill_related();
-
-    spawn_think_script_inits();
-
-    [[level.team_specific_spawn_functions[self.team]]]();
-
-    // special function for this AI's subclass, juggernaut, etc
-    assertex(isDefined(level.subclass_spawn_functions[self.subclass]), "subclass spawn function not defined for '" + self.subclass + "'");
-    thread[[level.subclass_spawn_functions[self.subclass]]]();
-
-    self thread maps\_damagefeedback::monitorDamage();
-
-    self common_scripts\_dynamic_world::ai_init();
-
-    set_goal_height_from_settings();
-
-    //
-    // lots of returns from this point on. spawn_think_action may early out at any point.
-    //
-
-    // The AI will spawn and attack the player
-    if(isDefined(self.script_playerseek)) {
-      self setgoalentity(level.player);
-      return;
-    }
-
-    // the AI will be linked into the stealth system
-    if(isDefined(self.script_stealth)) {
-      if(isDefined(self.script_stealth_function)) {
-        assertex(isDefined(level.stealth_default_func[self.script_stealth_function]), "spawner at " + self.origin + " has .script_stealth_function set to key of '" + self.script_stealth_function + "' but there is no reference for that key. Use stealth_set_default_stealth_function( key, func ) to set the key to a proper stealth function");
-        func = level.stealth_default_func[self.script_stealth_function];
-        self thread[[func]]();
-      } else
-        self thread[[level.global_callbacks["_spawner_stealth_default"]]]();
-    }
-
-    if(isDefined(self.script_idleanim)) {
-      self thread[[level.global_callbacks["_idle_call_idle_func"]]]();
-      return;
-    }
-
-    if(isDefined(self.script_idlereach) && !isDefined(self.script_moveoverride)) {
-      self thread[[level.global_callbacks["_idle_call_idle_func"]]]();
-    }
-
-    // The AI will spawn and follow a patrol
-    if(isDefined(self.script_patroller) && !isDefined(self.script_moveoverride)) {
-      self thread maps\_patrol::patrol();
-      return;
-    }
-
-    // The AI will spawn and use his .radius as a goalradius, and his goalradius will get smaller over time.
-    if(isDefined(self.script_delayed_playerseek)) {
-      if(!isDefined(self.script_radius)) {
-        self.goalradius = 800;
-      }
-
-      self setgoalentity(level.player);
-      level thread delayed_player_seek_think(self);
-      return;
-    }
-
-    if(isDefined(self.used_an_mg42)) // This AI was called upon to use an MG42 so he's not going to run to his node.
-    {
-      return;
-    }
-
-    if((isDefined(self.script_moveoverride) && self.script_moveoverride == 1)) {
-      set_goal_from_settings();
-      self setgoalpos(self.origin);
-      return;
-    }
-
-    assertEx(self.goalradius == 4, "Changed the goalradius on guy with export " + self.export+" without waiting for spawn_failed. Note that this change will NOT show up by putting a breakpoint on the actors goalradius field because breakpoints don't properly handle the first frame an actor exists.");
-    set_goal_from_settings();
-
-    // The AI will run to a target node and use the node's .radius as his goalradius.
-    // If script_seekgoal is set, then he will run to his node with a goalradius of 0, then set his goal radius
-    //to the node's radius.
-    if(isDefined(self.target)) {
-      self thread go_to_node();
-    }
+  //dont call this if you dont want AI guy to glow when the player uses thermal vision. Ai only glow when player is in thermal.
+  if(!isDefined(level.ai_dont_glow_in_thermal)) {
+    self ThermalDrawEnable();
   }
+
+  // ai get their values from spawners and theres no need to have this value on ai
+  self.spawner_number = undefined;
+
+  if(!isDefined(self.unique_id)) {
+    set_ai_number();
+  }
+
+  // functions called on death
+  if(!isDefined(self.deathFuncs)) {
+    self.deathFuncs = [];
+  }
+
+  self thread deathFunctions();
+
+  level thread maps\_friendlyfire::friendly_fire_think(self);
+
+  self.walkdist = 16;
+
+  // which eq triggers am I touching?
+  //thread setup_ai_eq_triggers();
+
+  /# spawn_think_debug_checks();
+
+  init_reset_AI();
+
+  spawn_think_game_skill_related();
+
+  spawn_think_script_inits();
+
+  [[level.team_specific_spawn_functions[self.team]]]();
+
+  // special function for this AI's subclass, juggernaut, etc
+  assertex(isDefined(level.subclass_spawn_functions[self.subclass]), "subclass spawn function not defined for '" + self.subclass + "'");
+  thread[[level.subclass_spawn_functions[self.subclass]]]();
+
+  self thread maps\_damagefeedback::monitorDamage();
+
+  self common_scripts\_dynamic_world::ai_init();
+
+  set_goal_height_from_settings();
+
+  //
+  // lots of returns from this point on. spawn_think_action may early out at any point.
+  //
+
+  // The AI will spawn and attack the player
+  if(isDefined(self.script_playerseek)) {
+    self setgoalentity(level.player);
+    return;
+  }
+
+  // the AI will be linked into the stealth system
+  if(isDefined(self.script_stealth)) {
+    if(isDefined(self.script_stealth_function)) {
+      assertex(isDefined(level.stealth_default_func[self.script_stealth_function]), "spawner at " + self.origin + " has .script_stealth_function set to key of '" + self.script_stealth_function + "' but there is no reference for that key. Use stealth_set_default_stealth_function( key, func ) to set the key to a proper stealth function");
+      func = level.stealth_default_func[self.script_stealth_function];
+      self thread[[func]]();
+    } else
+      self thread[[level.global_callbacks["_spawner_stealth_default"]]]();
+  }
+
+  if(isDefined(self.script_idleanim)) {
+    self thread[[level.global_callbacks["_idle_call_idle_func"]]]();
+    return;
+  }
+
+  if(isDefined(self.script_idlereach) && !isDefined(self.script_moveoverride)) {
+    self thread[[level.global_callbacks["_idle_call_idle_func"]]]();
+  }
+
+  // The AI will spawn and follow a patrol
+  if(isDefined(self.script_patroller) && !isDefined(self.script_moveoverride)) {
+    self thread maps\_patrol::patrol();
+    return;
+  }
+
+  // The AI will spawn and use his .radius as a goalradius, and his goalradius will get smaller over time.
+  if(isDefined(self.script_delayed_playerseek)) {
+    if(!isDefined(self.script_radius)) {
+      self.goalradius = 800;
+    }
+
+    self setgoalentity(level.player);
+    level thread delayed_player_seek_think(self);
+    return;
+  }
+
+  if(isDefined(self.used_an_mg42)) // This AI was called upon to use an MG42 so he's not going to run to his node.
+  {
+    return;
+  }
+
+  if((isDefined(self.script_moveoverride) && self.script_moveoverride == 1)) {
+    set_goal_from_settings();
+    self setgoalpos(self.origin);
+    return;
+  }
+
+  assertEx(self.goalradius == 4, "Changed the goalradius on guy with export " + self.export+" without waiting for spawn_failed. Note that this change will NOT show up by putting a breakpoint on the actors goalradius field because breakpoints don't properly handle the first frame an actor exists.");
+  set_goal_from_settings();
+
+  // The AI will run to a target node and use the node's .radius as his goalradius.
+  // If script_seekgoal is set, then he will run to his node with a goalradius of 0, then set his goal radius
+  //to the node's radius.
+  if(isDefined(self.target)) {
+    self thread go_to_node();
+  }
+}
 
 // this is called during init (spawn_think_action) and reset (scrub_guy)
 init_reset_AI() {
@@ -1785,8 +1770,7 @@ init_reset_AI() {
 scrub_guy() {
   if(self.team == "neutral") {
     self setthreatbiasgroup("civilian");
-  }
-  else {
+  } else {
     self setthreatbiasgroup(self.team);
   }
 
@@ -1993,15 +1977,13 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
 
     if(node_has_radius(node)) {
       self.goalradius = node.radius;
-    }
-    else {
+    } else {
       self.goalradius = level.default_goalradius;
     }
 
     if(isDefined(node.height)) {
       self.goalheight = node.height;
-    }
-    else {
+    } else {
       self.goalheight = level.default_goalheight;
     }
 
@@ -2078,8 +2060,7 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
 
   if(isDefined(self getGoalVolume())) {
     self setGoalVolumeAuto(self getGoalVolume());
-  }
-  else {
+  } else {
     self.goalradius = level.default_goalradius;
   }
 }
@@ -2213,9 +2194,7 @@ crawl_target_and_init_flags(ent, get_func) {
       }
 
       if(isDefined(ent.target)) {
-        new_targets = [
-          [get_func]
-        ](ent.target);
+        new_targets = [[get_func]](ent.target);
         targets = add_to_array(targets, new_targets);
       }
     }
@@ -2280,8 +2259,7 @@ get_node_funcs_based_on_target(node, goal_type) {
 set_goal_height_from_settings() {
   if(isDefined(self.script_goalheight)) {
     self.goalheight = self.script_goalheight;
-  }
-  else {
+  } else {
     self.goalheight = level.default_goalheight;
   }
 }
@@ -2307,8 +2285,7 @@ set_goal_from_settings(node) {
   if(!isDefined(self getGoalVolume())) {
     if(self.type == "civilian") {
       self.goalradius = 128;
-    }
-    else {
+    } else {
       self.goalradius = level.default_goalradius;
     }
   }
@@ -2426,8 +2403,7 @@ fallback_ai_think_death(ai, num) {
 fallback_ai_think(num, node, spawner) {
   if((!isDefined(self.fallback)) || (!isDefined(self.fallback[num]))) {
     self.fallback[num] = true;
-  }
-  else {
+  } else {
     return;
   }
 
@@ -2599,22 +2575,20 @@ fallback_text(fallbackers, start, end) {
       if(total - temp > 1) {
         if(randomint(100) > 66) {
           msg = "dawnville_defensive_german_1";
+        } else {
+          if(randomint(100) > 66)
         }
-        else {
-        if(randomint(100) > 66)
-        }
-          msg = "dawnville_defensive_german_2";
+        msg = "dawnville_defensive_german_2";
         else {
           msg = "dawnville_defensive_german_3";
         }
       } else {
         if(randomint(100) > 66) {
           msg = "dawnville_defensive_german_4";
+        } else {
+          if(randomint(100) > 66)
         }
-        else {
-        if(randomint(100) > 66)
-        }
-          msg = "dawnville_defensive_german_5";
+        msg = "dawnville_defensive_german_5";
         else {
           msg = "dawnville_defensive_german_1";
         }
@@ -2623,22 +2597,20 @@ fallback_text(fallbackers, start, end) {
       if(temp > 1) {
         if(randomint(100) > 66) {
           msg = "dawnville_defensive_german_2";
+        } else {
+          if(randomint(100) > 66)
         }
-        else {
-        if(randomint(100) > 66)
-        }
-          msg = "dawnville_defensive_german_3";
+        msg = "dawnville_defensive_german_3";
         else {
           msg = "dawnville_defensive_german_4";
         }
       } else {
         if(randomint(100) > 66) {
           msg = "dawnville_defensive_german_5";
+        } else {
+          if(randomint(100) > 66)
         }
-        else {
-        if(randomint(100) > 66)
-        }
-          msg = "dawnville_defensive_german_1";
+        msg = "dawnville_defensive_german_1";
         else {
           msg = "dawnville_defensive_german_2";
         }
@@ -2712,8 +2684,7 @@ arrive(node) {
 
   if(node.radius != 0) {
     self.goalradius = node.radius;
-  }
-  else {
+  } else {
     self.goalradius = level.default_goalradius;
   }
 }
@@ -2753,12 +2724,10 @@ fallback() {
   self setgoalnode(dest);
   if(isDefined(self.script_seekgoal)) {
     self thread arrive(dest);
-  }
-  else {
+  } else {
     if(dest.radius != 0) {
       self.goalradius = dest.radius;
-    }
-    else {
+    } else {
       self.goalradius = level.default_goalradius;
     }
   }
@@ -2825,30 +2794,28 @@ friendly_wave(trigger) {
     targs = getEntArray(trigger.target, "targetname");
     for(i = 0; i < targs.size; i++) {
       if(isDefined(targs[i].classname[7])) {
-        if(targs[i].classname[7] != "l") {
+        if(targs[i].classname[7] != "l") {}
+        println("Friendyl_wave spawner at ", targs[i].origin, " is not an ally");
+        assert = true;
       }
-          println("Friendyl_wave spawner at ", targs[i].origin, " is not an ally");
-          assert = true;
-        }
     }
     if(assert) {
       error("Look above");
     }
   }
 
-    while(1) {
-      trigger waittill("trigger");
-      level notify("friendly_died");
-      if(trigger.targetname == "friendly_wave") {
-        level.friendly_wave_trigger = trigger;
-      }
-      else {
-        level.friendly_wave_trigger = undefined;
-        println("friendly wave OFF");
-      }
-
-      wait(1);
+  while(1) {
+    trigger waittill("trigger");
+    level notify("friendly_died");
+    if(trigger.targetname == "friendly_wave") {
+      level.friendly_wave_trigger = trigger;
+    } else {
+      level.friendly_wave_trigger = undefined;
+      println("friendly wave OFF");
     }
+
+    wait(1);
+  }
 }
 
 set_spawncount(count) {
@@ -2920,8 +2887,7 @@ friendly_wave_masterthread() {
 
         if(isDefined(spawn[num].script_forcespawn)) {
           spawned = spawn[num] stalingradspawn(dontShareEnemyInfo);
-        }
-        else {
+        } else {
           spawned = spawn[num] dospawn(dontShareEnemyInfo);
         }
 
@@ -2934,16 +2900,14 @@ friendly_wave_masterthread() {
 
         if(isDefined(level.friendlywave_thread)) {
           level thread[[level.friendlywave_thread]](spawned);
-        }
-        else {
+        } else {
           spawned setgoalentity(level.player);
         }
 
         if(script_delay) {
           if(level.friendly_wave_trigger.script_delay == 0) {
             waittillframeend;
-          }
-          else {
+          } else {
             wait level.friendly_wave_trigger.script_delay;
           }
           num++;
@@ -2961,13 +2925,13 @@ friendly_mgTurret(trigger) {
     error("No target for friendly_mg42 trigger, origin:" + trigger getorigin());
   }
 
-    node = getnode(trigger.target, "targetname");
+  node = getnode(trigger.target, "targetname");
 
   if(!isDefined(node.target)) {
     error("No mg42 for friendly_mg42 trigger's node, origin: " + node.origin);
   }
 
-    mg42 = getent(node.target, "targetname");
+  mg42 = getent(node.target, "targetname");
   mg42 setmode("auto_ai"); // auto, auto_ai, manual
   mg42 cleartargetentity();
 
@@ -3043,11 +3007,10 @@ friendly_mg42_useable(mg42, node) {
   }
 
   if(isDefined(self.chainnode)) {
-    if(distance(level.player.origin, self.chainnode.origin) > 1100) {
+    if(distance(level.player.origin, self.chainnode.origin) > 1100) {}
+    // 		println( "^a too far from chain node" );
+    return false;
   }
-      // 		println( "^a too far from chain node" );
-      return false;
-    }
   return true;
 }
 
@@ -3124,8 +3087,7 @@ friendly_mg42_think(mg42, node) {
   while(1) {
     if(distance(self.origin, node.origin) < 32) {
       self useturret(mg42); // dude should be near the mg42
-    }
-    else {
+    } else {
       break; // a friendly is too far from mg42, stop using turret
     }
 
@@ -3270,8 +3232,7 @@ spawnWaypointFriendlies() {
 
   if(isDefined(self.script_forcespawn)) {
     spawn = self stalingradspawn();
-  }
-  else {
+  } else {
     spawn = self dospawn();
   }
 
@@ -3291,7 +3252,7 @@ waittillDeathOrLeaveSquad() {
 friendlySpawnWave() {
   /*
   	Triggers a spawn point for incoming friendlies.
-	
+  	
   	trigger targetname friendly_spawn
   	Targets a trigger or triggers. The targetted trigger targets a script origin.
   	Touching the friendly_spawn trigger enables the targetted trigger.
@@ -3308,7 +3269,7 @@ friendlySpawnWave() {
     }
   }
 
-    array_thread(getEntArray(self.target, "targetname"), ::friendlySpawnWave_triggerThink, self);
+  array_thread(getEntArray(self.target, "targetname"), ::friendlySpawnWave_triggerThink, self);
   for(;;) {
     self waittill("trigger", other);
     // If we're the current friendly spawn spot then stop friendly spawning because
@@ -3334,7 +3295,7 @@ flood_and_secure(instantRespawn) {
   /*
   	Spawns AI that run to a spot then get a big goal radius. They stop spawning when auto delete kicks in, then start
   	again when they are retriggered or the player gets close.
-	
+  	
   	trigger targetname flood_and_secure
   	ai spawn and run to goal with small goalradius then get large goalradius
   	spawner starts with a notify from any flood_and_secure trigger that triggers it
@@ -3376,17 +3337,14 @@ flood_and_secure(instantRespawn) {
 
     if(self isTouching(level.player)) {
       playerTriggered = true;
-    }
-    else {
+    } else {
       if(!isalive(other)) {
         continue;
       }
       if(isplayer(other)) {
         playerTriggered = true;
-      }
-      else {
-      if(!isDefined(other.isSquad) || !other.isSquad) {
-      }
+      } else {
+        if(!isDefined(other.isSquad) || !other.isSquad) {}
         // Non squad AI are not allowed to spawn enemies
         continue;
       }
@@ -3412,8 +3370,7 @@ flood_and_secure(instantRespawn) {
 
     if(playerTriggered) {
       wait(5);
-    }
-    else {
+    } else {
       wait(0.1);
     }
   }
@@ -3443,7 +3400,7 @@ cull_spawners_leaving_one_set(spawners) {
   		highest_num = spawners[ i ].script_randomspawn;
   	}
   }
-	
+  	
   selection = randomint( highest_num + 1 );
   for( i = 0;i < spawners.size;i++ )
   {
@@ -3550,8 +3507,7 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
 
   if(isDefined(self.script_delay)) {
     delay = self.script_delay;
-  }
-  else {
+  } else {
     delay = 0;
   }
 
@@ -3587,8 +3543,7 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
 
     if(isDefined(self.script_forcespawn)) {
       spawn = self stalingradspawn(dontShareEnemyInfo);
-    }
-    else {
+    } else {
       spawn = self dospawn(dontShareEnemyInfo);
     }
 
@@ -3612,8 +3567,7 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
       self waittill("spawn_died", deleted, playerKill);
       if(delay > 2) {
         delay = randomint(4) + 2; // first delay can be long, after that its always a set amount.
-      }
-      else {
+      } else {
         delay = 0.5 + randomfloat(0.5);
       }
     }
@@ -3629,20 +3583,20 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
       // or NOT
       if( playerKill || oneShot ) {
       */
-      }
-      if(playerWasNearby(playerKill || oneShot, ent.ai)) {
-        count--;
-      }
+    }
+    if(playerWasNearby(playerKill || oneShot, ent.ai)) {
+      count--;
+    }
 
-      if(!instantRespawn) {
-        waitUntilWaveRelease();
-      }
+    if(!instantRespawn) {
+      waitUntilWaveRelease();
     }
   }
+}
 
-  prof_end("flood_and_secure_spawner_think");
+prof_end("flood_and_secure_spawner_think");
 
-  self delete();
+self delete();
 }
 
 waittillDeletedOrDeath(spawn) {
@@ -3775,8 +3729,7 @@ flood_and_secure_spawn_goal() {
 
   if(node.radius) {
     self.goalradius = node.radius;
-  }
-  else {
+  } else {
     self.goalradius = 256;
   }
 
@@ -3786,8 +3739,7 @@ flood_and_secure_spawn_goal() {
     newNode = getnode(node.target, "targetname");
     if(isDefined(newNode)) {
       node = newNode;
-    }
-    else {
+    } else {
       break;
     }
 
@@ -3795,8 +3747,7 @@ flood_and_secure_spawn_goal() {
 
     if(node.radius) {
       self.goalradius = node.radius;
-    }
-    else {
+    } else {
       self.goalradius = 256;
     }
 
@@ -3895,28 +3846,28 @@ friendlychain() {
     assert(isDefined(node.script_noteworthy));
   }
 
-    for(;;) {
-      self waittill("trigger");
-      // 		if( level.currentObjective != self.script_noteworthy2 )
-      while(level.player istouching(self)) {
-        wait(0.05);
-      }
-
-      if(!objectiveIsAllowed()) {
-        wait(0.05);
-        continue;
-      }
-
-      if(isDefined(level.lastFriendlyTrigger) && level.lastFriendlyTrigger == self) {
-        continue;
-      }
-
-      level notify("new_friendly_trigger");
-      level.lastFriendlyTrigger = self;
-
-      array_thread(triggers, ::friendlyTrigger);
-      wait(0.5);
+  for(;;) {
+    self waittill("trigger");
+    // 		if( level.currentObjective != self.script_noteworthy2 )
+    while(level.player istouching(self)) {
+      wait(0.05);
     }
+
+    if(!objectiveIsAllowed()) {
+      wait(0.05);
+      continue;
+    }
+
+    if(isDefined(level.lastFriendlyTrigger) && level.lastFriendlyTrigger == self) {
+      continue;
+    }
+
+    level notify("new_friendly_trigger");
+    level.lastFriendlyTrigger = self;
+
+    array_thread(triggers, ::friendlyTrigger);
+    wait(0.5);
+  }
 }
 
 objectiveIsAllowed() {
@@ -3984,7 +3935,7 @@ deathChainSpawnerLogic() {
 
   level.deathSpawnerEnts[num][level.deathSpawnerEnts[num].size] = self;
 
-    org = self.origin;
+  org = self.origin;
   self waittillDeathOrEmpty();
 
   newDeathSpawners = [];
@@ -4010,7 +3961,7 @@ deathChainSpawnerLogic() {
 
   level.deathSpawnerEnts[num] = newDeathSpawners;
 
-    level notify("spawner dot" + org);
+  level notify("spawner dot" + org);
   level.deathSpawner[num]--;
   level notify("spawner_expired" + num);
 }
@@ -4033,22 +3984,22 @@ friendlychain_onDeath() {
   // for debugging deathspawners
   level.deathSpawnerEnts = [];
 
-    for(i = 0; i < spawners.size; i++) {
-      if(!isDefined(spawners[i].script_deathchain)) {
-        continue;
-      }
-
-      num = spawners[i].script_deathchain;
-      if(!isDefined(level.deathSpawner[num])) {
-        level.deathSpawner[num] = 0;
-
-        level.deathSpawnerEnts[num] = [];
-
-      }
-
-      spawners[i] thread deathChainSpawnerLogic();
-      // 		level.deathSpawner[ num ]++;
+  for(i = 0; i < spawners.size; i++) {
+    if(!isDefined(spawners[i].script_deathchain)) {
+      continue;
     }
+
+    num = spawners[i].script_deathchain;
+    if(!isDefined(level.deathSpawner[num])) {
+      level.deathSpawner[num] = 0;
+
+      level.deathSpawnerEnts[num] = [];
+
+    }
+
+    spawners[i] thread deathChainSpawnerLogic();
+    // 		level.deathSpawner[ num ]++;
+  }
 
   for(i = 0; i < triggers.size; i++) {
     if(!isDefined(triggers[i].script_deathchain)) {
@@ -4403,8 +4354,7 @@ find_unclaimed_node(nodes) {
   for(i = 0; i < nodes.size; i++) {
     if(nodes[i].claimed) {
       continue;
-    }
-    else {
+    } else {
       return nodes[i];
     }
   }
@@ -4497,8 +4447,7 @@ flood_spawner_think(trigger) {
 
     if(isDefined(self.script_forcespawn)) {
       soldier = self stalingradspawn(dontShareEnemyInfo);
-    }
-    else {
+    } else {
       soldier = self dospawn(dontShareEnemyInfo);
     }
 
@@ -4537,7 +4486,7 @@ player_saw_kill(guy, attacker) {
   if(isDefined(self.script_force_count)) {
     if(self.script_force_count)
   }
-      return true;
+  return true;
 
   if(!isDefined(guy)) {
     return false;
@@ -4613,8 +4562,8 @@ pyramid_spawn(trigger) {
     assertEx(issubstr(spawners[i].classname, "actor"), "Pyramid spawner targets non AI!");
   }
 
-    // the spawners have to report their death to the head of the pyramid so it can kill itself when they're all gone
-    self.spawners = 0;
+  // the spawners have to report their death to the head of the pyramid so it can kill itself when they're all gone
+  self.spawners = 0;
   array_thread(spawners, ::pyramid_spawner_reports_death, self);
 
   offset = randomint(spawners.size);
@@ -4916,9 +4865,9 @@ objective_event_init(trigger) {
     return;
   }
 
-    while(level.deathSpawner[trigger.script_deathChain] > 0) {
-      level waittill("spawner_expired" + trigger.script_deathChain);
-    }
+  while(level.deathSpawner[trigger.script_deathChain] > 0) {
+    level waittill("spawner_expired" + trigger.script_deathChain);
+  }
 
   flag_set(flag);
 }
@@ -5061,8 +5010,7 @@ achieve_engineer_turret(attacker) {
 
   if(!isDefined(attacker.owner.achieve_engineer_turret)) {
     attacker.owner.achieve_engineer_turret = 1;
-  }
-  else {
+  } else {
     attacker.owner.achieve_engineer_turret++;
   }
 
@@ -5086,8 +5034,7 @@ achieve_ten_plus_hellfire(attacker) {
 
   if(!isDefined(attacker.achieve_ten_plus_hellfire)) {
     attacker.achieve_ten_plus_hellfire = 1;
-  }
-  else {
+  } else {
     attacker.achieve_ten_plus_hellfire++;
   }
 
@@ -5135,8 +5082,7 @@ achieve_key_master_shotgun(attacker, type) {
 
   if(!isDefined(attacker.achieve_key_master_shotgun)) {
     attacker.achieve_key_master_shotgun = 1;
-  }
-  else {
+  } else {
     attacker.achieve_key_master_shotgun++;
   }
 
@@ -5179,8 +5125,7 @@ achieve_some_like_hot_thermal(attacker, type) {
 
   if(!isDefined(attacker.achieve_some_like_hot_thermal)) {
     attacker.achieve_some_like_hot_thermal = 1;
-  }
-  else {
+  } else {
     attacker.achieve_some_like_hot_thermal++;
   }
 
@@ -5210,8 +5155,7 @@ achieve_2_birds_1_stone(attacker, type) {
 
   if(!isDefined(attacker.achieve_2_birds_1_stone)) {
     attacker.achieve_2_birds_1_stone = 1;
-  }
-  else {
+  } else {
     attacker.achieve_2_birds_1_stone++;
   }
 
@@ -5235,8 +5179,7 @@ achieve_driveby(attacker) {
 
   if(!isDefined(attacker.achieve_driveby)) {
     attacker.achieve_driveby = 1;
-  }
-  else {
+  } else {
     attacker.achieve_driveby++;
   }
 
@@ -5262,8 +5205,7 @@ achieve_harder_they_fall(attacker) {
 
   if(!isDefined(attacker.achieve_harder_they_fall)) {
     attacker.achieve_harder_they_fall = 1;
-  }
-  else {
+  } else {
     attacker.achieve_harder_they_fall++;
   }
 
@@ -5308,8 +5250,7 @@ achieve_slowmo_breach_kills(attacker) {
 
   if(!isDefined(attacker.achieve_slowmo_breach_kills)) {
     attacker.achieve_slowmo_breach_kills = 1;
-  }
-  else {
+  } else {
     attacker.achieve_slowmo_breach_kills++;
   }
 
@@ -5337,8 +5278,7 @@ achieve_downed_kills(attacker) {
 
   if(!isDefined(attacker.achieve_downed_kills)) {
     attacker.achieve_downed_kills = 1;
-  }
-  else {
+  } else {
     attacker.achieve_downed_kills++;
   }
 
@@ -5399,8 +5339,7 @@ achieve_akimbo(attacker, type) {
 
   if(!isDefined(attacker.achieve_akimbo)) {
     attacker.achieve_akimbo = 1;
-  }
-  else {
+  } else {
     attacker.achieve_akimbo++;
   }
 
@@ -5454,8 +5393,7 @@ achieve_threesome(attacker, type, weapon) {
 
   if(!isDefined(attacker.achieve_threesome)) {
     attacker.achieve_threesome = 1;
-  }
-  else {
+  } else {
     attacker.achieve_threesome++;
   }
 

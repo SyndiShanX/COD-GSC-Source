@@ -2215,9 +2215,7 @@ minethrown(param_00, param_01, param_02, param_03) {
   var_07 = vectornormalize(var_05["normal"]);
   var_08 = vectortoangles(var_07);
   var_08 = var_08 + (90, 0, 0);
-  var_09 = [
-    [param_02]
-  ](var_06, param_00, param_01, var_08);
+  var_09 = [[param_02]](var_06, param_00, param_01, var_08);
   var_09 thread minedamagemonitor();
   self delete();
 }

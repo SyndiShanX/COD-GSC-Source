@@ -48,14 +48,11 @@ get_death_anim() {
 
   if(self.damageyaw > 135 || self.damageyaw <= -135) {
     deathanim = animarray("death_b");
-  }
-  else if(self.damageyaw > 45 && self.damageyaw < 135) {
+  } else if(self.damageyaw > 45 && self.damageyaw < 135) {
     deathanim = animarray("death_l");
-  }
-  else if(self.damageyaw > -135 && self.damageyaw < -45) {
+  } else if(self.damageyaw > -135 && self.damageyaw < -45) {
     deathanim = animarray("death_r");
-  }
-  else {
+  } else {
     deathanim = animarray("death_f");
   }
 

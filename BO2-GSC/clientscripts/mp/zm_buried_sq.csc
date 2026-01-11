@@ -171,8 +171,7 @@ _disable_wisp_fx(localclientnumber) {
 toggle_sq_special_round(localclientnumber, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     level.sq_special_round_enabled = 1;
-  }
-  else {
+  } else {
     level.sq_special_round_enabled = 0;
   }
 }
@@ -468,8 +467,7 @@ sq_bp_tag09(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
 toggle_richtofen_ending(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     level thread run_richtofen_earthquake_and_rumble(localclientnum);
-  }
-  else {
+  } else {
     self notify("richtofen_ending_done");
   }
 }
@@ -482,7 +480,7 @@ run_richtofen_earthquake_and_rumble(localclientnumber) {
   playSound(0, "zmb_sq_endgame_earthquake_rich", (0, 0, 0));
 
   foreach(player in a_players) {
-  player earthquake(0.5, 12, player.origin, 99999);
+    player earthquake(0.5, 12, player.origin, 99999);
   }
 
   for(i = 0; i < 9; i = i + 0.25) {

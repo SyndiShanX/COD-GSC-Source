@@ -60,7 +60,6 @@
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_playerzombie;
 
 zombify_player() {
@@ -103,7 +102,7 @@ zombify_player() {
 }
 
 playerzombie_player_damage() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   self thread playerzombie_infinite_health();
   self.zombiehealth = level.zombie_health;
 
@@ -128,7 +127,7 @@ playerzombie_player_damage() {
 }
 
 playerzombie_downed_state() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   downtime = 15;
   starttime = gettime();
   endtime = starttime + downtime * 1000;
@@ -154,7 +153,7 @@ playerzombie_downed_state() {
 }
 
 playerzombie_downed_hud() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   text = newdebughudelem(self);
   text.alignx = "<dev string:x38>";
   text.aligny = "<dev string:x41>";
@@ -180,7 +179,7 @@ playerzombie_downed_hud() {
 }
 
 playerzombie_infinite_health() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   bighealth = 100000;
 
   while(true) {
@@ -193,7 +192,7 @@ playerzombie_infinite_health() {
 }
 
 playerzombie_soundboard() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   self.playerzombie_soundboard_disable = 0;
   self.buttonpressed_use = 0;
   self.buttonpressed_attack = 0;
@@ -247,19 +246,19 @@ can_do_input(inputtype) {
   cando = 0;
 
   switch (inputtype) {
-    case #"use":
+    case # "use":
       if(gettime() >= self.usesound_nexttime && !self.buttonpressed_use) {
         cando = 1;
       }
 
       break;
-    case #"attack":
+    case # "attack":
       if(gettime() >= self.attacksound_nexttime && !self.buttonpressed_attack) {
         cando = 1;
       }
 
       break;
-    case #"ads":
+    case # "ads":
       if(gettime() >= self.usesound_nexttime && !self.buttonpressed_ads) {
         cando = 1;
       }

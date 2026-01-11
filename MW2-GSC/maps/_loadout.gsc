@@ -1788,16 +1788,14 @@ give_loadout_specialops(character_selected) {
       player setActionSlot(4, "weapon", "claymore");
       if(!is_coop()) {
         player giveMaxAmmo("claymore");
-      }
-      else {
+      } else {
         player SetWeaponAmmoStock("claymore", 4);
       }
       player giveWeapon("c4");
       player setActionSlot(2, "weapon", "c4");
       if(!is_coop()) {
         player giveMaxAmmo("c4");
-      }
-      else {
+      } else {
         player SetWeaponAmmoStock("c4", 5);
       }
       player SetOffhandSecondaryClass("other");
@@ -1849,8 +1847,7 @@ give_loadout_specialops(character_selected) {
       so_player_giveWeapon("m1014");
       if(i == 0) {
         so_player_set_switchToWeapon("m4m203_reflex_arctic");
-      }
-      else {
+      } else {
         so_player_set_switchToWeapon("m1014");
       }
       so_player_setup_body(i);
@@ -1862,322 +1859,322 @@ give_loadout_specialops(character_selected) {
       switch (level.gameskill) {
         case 2:
           player SetWeaponAmmoStock("flash_grenade", 2); //flash count = 2
-          player SetWeaponAmmoStock("m203_m4_reflex_arctic", 4); //m203 count = 5 ( one is in the clip )
-          break;
-        case 3:
-          player SetWeaponAmmoStock("flash_grenade", 1); //flash count = 1
-          player SetWeaponAmmoStock("m203_m4_reflex_arctic", 1); //m203 count = 2 ( one is in the clip )
+          player SetWeaponAmmoStock("m203_m4_reflex_arctic", 4); //m203 count = 5 ( one is in the clip ) {
           break;
       }
+      case 3:
+        player SetWeaponAmmoStock("flash_grenade", 1); //flash count = 1
+      player SetWeaponAmmoStock("m203_m4_reflex_arctic", 1); //m203 count = 2 ( one is in the clip ) {
+      break;
     }
-
-    return;
   }
+}
 
-  if(level.script == "so_assault_oilrig") {
-    level.so_campaign = "seal";
+return;
+}
 
-    switch_char = char_switcher();
+if(level.script == "so_assault_oilrig") {
+  level.so_campaign = "seal";
 
-    for(i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-      so_player_giveWeapon("m4m203_reflex");
-      so_player_giveWeapon("m1014");
-      so_player_giveWeapon("claymore");
-      so_player_set_maxammo("claymore");
-      so_player_setactionslot(4, "weapon", "claymore");
-      if(i == 0) {
-        so_player_set_switchToWeapon("m4m203_reflex");
-      }
-      else {
-        so_player_set_switchToWeapon("m4m203_reflex");
-      }
-      so_player_setup_body(i);
-    }
+  switch_char = char_switcher();
 
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_killspree_trainer") {
-    level.so_campaign = "ranger";
-
-    switch_char = char_switcher();
-
-    for(i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-      so_player_giveWeapon("m4_grunt");
-      so_player_giveWeapon("usp");
-      if(i == 0) {
-        so_player_set_switchToWeapon("m4_grunt");
-      }
-      else {
-        so_player_set_switchToWeapon("m4_grunt");
-      }
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_defuse_favela_escape") {
-    level.so_campaign = "desert";
-
-    switch_char = char_switcher();
-
-    for(i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-      so_player_giveWeapon("m1014_eotech");
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-
-    foreach(player in level.players) {
-      player giveWeapon("glock_akimbo", 0, true);
-      player switchToWeapon("glock_akimbo");
-    }
-
-    return;
-  }
-  /*
-  	if( level.script == "so_defense_dcemp" )
-  	{
-  		level.so_campaign = "ranger";
-
-  		switch_char = char_switcher();
-
-  		for( i = 0; i < level.players.size; i++ )
-  		{
-  			so_player_num( i );
-  			so_player_giveWeapon( "m4m203_eotech" );
-  			so_player_giveWeapon( "Beretta" );
-  			so_player_giveWeapon( "fraggrenade" );
-  			so_player_giveWeapon( "flash_grenade" );
-  			so_player_set_setOffhandSecondaryClass( "flash" );
-  			so_player_set_switchToWeapon( "m4m203_eotech" );
-  			so_player_setup_body( i );
-  		}
-
-  		so_players_give_loadout();
-  		
-  		return;
-  	}
-  */
-  if(level.script == "so_timed_so_quicky") {
-    //		level.so_campaign = "ranger";
-    //		level.so_campaign = "seal";
-    //		level.so_campaign = "arctic";
-    level.so_campaign = "woodland";
-    //		level.so_campaign = "desert";
-    //		level.so_campaign = "ghillie";
-
-    give_default_loadout();
-
-    foreach(player in level.players) {
-      player takeWeapon("mp5");
-      player giveWeapon("m14ebr_thermal");
-      player switchToWeapon("m14ebr_thermal");
-    }
-
-    return;
-  }
-
-  if(level.script == "so_takeover_oilrig") {
-    level.so_campaign = "seal";
-
-    switch_char = char_switcher();
-
-    for(i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-
-      so_player_giveWeapon("m240");
-      so_player_set_maxammo("m240");
-
-      so_player_giveWeapon("m79");
-      so_player_set_maxammo("m79");
-
-      so_player_giveWeapon("fraggrenade");
-      so_player_set_maxammo("fraggrenade");
-
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_maxammo("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-
-      so_player_giveWeapon("claymore");
-      so_player_set_maxammo("claymore");
-      so_player_setactionslot(4, "weapon", "claymore");
-
-      so_player_set_switchToWeapon("m240");
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_takeover_estate") {
-    level.so_campaign = "woodland";
-    level.so_stealth = true;
-
-    switch_char = char_switcher();
-
-    for(i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-      so_player_giveWeapon("m4m203_eotech");
-      so_player_giveWeapon("barrett");
-      so_player_giveWeapon("claymore");
-      so_player_set_maxammo("claymore");
-      so_player_setactionslot(4, "weapon", "claymore");
-      so_player_set_switchToWeapon("m4m203_eotech");
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_intel_boneyard") {
-    level.so_campaign = "desert";
-
-    switch_char = char_switcher();
-
-    for(i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-      so_player_giveWeapon("m4m203_reflex");
-      so_player_giveWeapon("cheytac");
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+    so_player_giveWeapon("m4m203_reflex");
+    so_player_giveWeapon("m1014");
+    so_player_giveWeapon("claymore");
+    so_player_set_maxammo("claymore");
+    so_player_setactionslot(4, "weapon", "claymore");
+    if(i == 0) {
       so_player_set_switchToWeapon("m4m203_reflex");
-      so_player_setup_body(i);
+    } else {
+      so_player_set_switchToWeapon("m4m203_reflex");
     }
-
-    so_players_give_loadout();
-    return;
+    so_player_setup_body(i);
   }
 
-  if(level.script == "so_juggernauts_favela") {
-    level.so_campaign = "desert";
+  so_players_give_loadout();
+  return;
+}
 
-    switch_char = char_switcher();
-
-    for(i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-
-      so_player_giveWeapon("m79");
-      so_player_set_maxammo("m79");
-      so_player_giveWeapon("rpg_player");
-      so_player_set_maxammo("rpg_player");
-
-      so_player_giveWeapon("c4");
-      so_player_set_maxammo("c4");
-      so_player_setactionslot(2, "weapon", "c4");
-
-      so_player_giveWeapon("claymore");
-      so_player_set_maxammo("claymore");
-      so_player_setactionslot(4, "weapon", "claymore");
-
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-      so_player_set_switchToWeapon("m79");
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-
-    return;
-  }
-
-  if(level.script == "so_download_arcadia") {
-    level.so_campaign = "ranger";
-
-    switch_char = char_switcher();
-
-    for(i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-
-      so_player_giveWeapon("scar_h_reflex");
-      so_player_giveWeapon("beretta");
-      so_player_set_switchToWeapon("scar_h_reflex");
-
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_chopper_invasion") {
-    level.so_campaign = "ranger";
-
-    switch_char = char_switcher();
-
-    for(i = 0; i < level.players.size; i++) {
-      so_player_num(i);
-
-      so_player_giveWeapon("c4");
-      so_player_set_maxammo("c4");
-      so_player_setactionslot(2, "weapon", "c4");
-
-      so_player_giveWeapon("claymore");
-      so_player_set_maxammo("claymore");
-      so_player_setactionslot(4, "weapon", "claymore");
-
-      so_player_giveWeapon("fraggrenade");
-      so_player_giveWeapon("flash_grenade");
-      so_player_set_setOffhandSecondaryClass("flash");
-
-      so_player_giveWeapon("ump45_digital_eotech");
-      so_player_giveWeapon("deserteagle");
-      so_player_set_switchToWeapon("ump45_digital_eotech");
-
-      so_player_setup_body(i);
-    }
-
-    so_players_give_loadout();
-    return;
-  }
-
-  if(level.script == "so_snowrace1_cliffhanger") {
-    level.so_campaign = "arctic";
-    give_default_loadout();
-    return;
-  }
-
-  if(level.script == "so_snowrace2_cliffhanger") {
-    level.so_campaign = "arctic";
-    give_default_loadout();
-    return;
-  }
-
-  // -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
-  println("loadout.gsc: No level listing in _loadout::give_loadout_specialops(), giving default guns");
-  level.testmap = true;
+if(level.script == "so_killspree_trainer") {
   level.so_campaign = "ranger";
 
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+    so_player_giveWeapon("m4_grunt");
+    so_player_giveWeapon("usp");
+    if(i == 0) {
+      so_player_set_switchToWeapon("m4_grunt");
+    } else {
+      so_player_set_switchToWeapon("m4_grunt");
+    }
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_defuse_favela_escape") {
+  level.so_campaign = "desert";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+    so_player_giveWeapon("m1014_eotech");
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+
+  foreach(player in level.players) {
+    player giveWeapon("glock_akimbo", 0, true);
+    player switchToWeapon("glock_akimbo");
+  }
+
+  return;
+}
+/*
+	if( level.script == "so_defense_dcemp" )
+	{
+		level.so_campaign = "ranger";
+
+		switch_char = char_switcher();
+
+		for( i = 0; i < level.players.size; i++ )
+		{
+			so_player_num( i );
+			so_player_giveWeapon( "m4m203_eotech" );
+			so_player_giveWeapon( "Beretta" );
+			so_player_giveWeapon( "fraggrenade" );
+			so_player_giveWeapon( "flash_grenade" );
+			so_player_set_setOffhandSecondaryClass( "flash" );
+			so_player_set_switchToWeapon( "m4m203_eotech" );
+			so_player_setup_body( i );
+		}
+
+		so_players_give_loadout();
+		
+		return;
+	}
+*/
+if(level.script == "so_timed_so_quicky") {
+  //		level.so_campaign = "ranger";
+  //		level.so_campaign = "seal";
+  //		level.so_campaign = "arctic";
+  level.so_campaign = "woodland";
+  //		level.so_campaign = "desert";
+  //		level.so_campaign = "ghillie";
+
   give_default_loadout();
+
+  foreach(player in level.players) {
+    player takeWeapon("mp5");
+    player giveWeapon("m14ebr_thermal");
+    player switchToWeapon("m14ebr_thermal");
+  }
+
+  return;
+}
+
+if(level.script == "so_takeover_oilrig") {
+  level.so_campaign = "seal";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+
+    so_player_giveWeapon("m240");
+    so_player_set_maxammo("m240");
+
+    so_player_giveWeapon("m79");
+    so_player_set_maxammo("m79");
+
+    so_player_giveWeapon("fraggrenade");
+    so_player_set_maxammo("fraggrenade");
+
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_maxammo("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+
+    so_player_giveWeapon("claymore");
+    so_player_set_maxammo("claymore");
+    so_player_setactionslot(4, "weapon", "claymore");
+
+    so_player_set_switchToWeapon("m240");
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_takeover_estate") {
+  level.so_campaign = "woodland";
+  level.so_stealth = true;
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+    so_player_giveWeapon("m4m203_eotech");
+    so_player_giveWeapon("barrett");
+    so_player_giveWeapon("claymore");
+    so_player_set_maxammo("claymore");
+    so_player_setactionslot(4, "weapon", "claymore");
+    so_player_set_switchToWeapon("m4m203_eotech");
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_intel_boneyard") {
+  level.so_campaign = "desert";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+    so_player_giveWeapon("m4m203_reflex");
+    so_player_giveWeapon("cheytac");
+    so_player_set_switchToWeapon("m4m203_reflex");
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_juggernauts_favela") {
+  level.so_campaign = "desert";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+
+    so_player_giveWeapon("m79");
+    so_player_set_maxammo("m79");
+    so_player_giveWeapon("rpg_player");
+    so_player_set_maxammo("rpg_player");
+
+    so_player_giveWeapon("c4");
+    so_player_set_maxammo("c4");
+    so_player_setactionslot(2, "weapon", "c4");
+
+    so_player_giveWeapon("claymore");
+    so_player_set_maxammo("claymore");
+    so_player_setactionslot(4, "weapon", "claymore");
+
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+    so_player_set_switchToWeapon("m79");
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+
+  return;
+}
+
+if(level.script == "so_download_arcadia") {
+  level.so_campaign = "ranger";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+
+    so_player_giveWeapon("scar_h_reflex");
+    so_player_giveWeapon("beretta");
+    so_player_set_switchToWeapon("scar_h_reflex");
+
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_chopper_invasion") {
+  level.so_campaign = "ranger";
+
+  switch_char = char_switcher();
+
+  for(i = 0; i < level.players.size; i++) {
+    so_player_num(i);
+
+    so_player_giveWeapon("c4");
+    so_player_set_maxammo("c4");
+    so_player_setactionslot(2, "weapon", "c4");
+
+    so_player_giveWeapon("claymore");
+    so_player_set_maxammo("claymore");
+    so_player_setactionslot(4, "weapon", "claymore");
+
+    so_player_giveWeapon("fraggrenade");
+    so_player_giveWeapon("flash_grenade");
+    so_player_set_setOffhandSecondaryClass("flash");
+
+    so_player_giveWeapon("ump45_digital_eotech");
+    so_player_giveWeapon("deserteagle");
+    so_player_set_switchToWeapon("ump45_digital_eotech");
+
+    so_player_setup_body(i);
+  }
+
+  so_players_give_loadout();
+  return;
+}
+
+if(level.script == "so_snowrace1_cliffhanger") {
+  level.so_campaign = "arctic";
+  give_default_loadout();
+  return;
+}
+
+if(level.script == "so_snowrace2_cliffhanger") {
+  level.so_campaign = "arctic";
+  give_default_loadout();
+  return;
+}
+
+// -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --
+println("loadout.gsc: No level listing in _loadout::give_loadout_specialops(), giving default guns");
+level.testmap = true;
+level.so_campaign = "ranger";
+
+give_default_loadout();
 }
 
 // To precache possible weapons for alternate character loadout
 possible_precache(possible_precache_items) {
   foreach(item in possible_precache_items) {
-  PreCacheItem(item);
+    PreCacheItem(item);
   }
 }
 
@@ -2212,8 +2209,7 @@ give_default_loadout_coop(num) {
   so_player_giveWeapon("m1014");
   if(num == 0) {
     so_player_set_switchToWeapon("mp5");
-  }
-  else {
+  } else {
     so_player_set_switchToWeapon("m1014");
   }
   so_player_setup_body(num);
@@ -2496,7 +2492,7 @@ coop_gamesetup_menu() {
   maps\_gameskill::setGlobalDifficulty();
 
   foreach(idx, player in level.players) {
-  player maps\_gameskill::setDifficulty();
+    player maps\_gameskill::setDifficulty();
   }
 
   // character selection:
@@ -2840,8 +2836,7 @@ so_player_SetActionSlot(slot, parm1, parm2) {
   }
   if(isDefined(level.so_player_SetActionSlot[num])) {
     index = level.so_player_SetActionSlot[num].size;
-  }
-  else {
+  } else {
     index = 0;
   }
   level.so_player_SetActionSlot[num][index] = struct;
@@ -2888,8 +2883,7 @@ so_players_give_action(num) {
   foreach(struct in level.so_player_SetActionSlot[num]) {
     if(isDefined(struct.parm2)) {
       player SetActionSlot(struct.slot, struct.parm1, struct.parm2);
-    }
-    else {
+    } else {
       player SetActionSlot(struct.slot, struct.parm1);
     }
   }
@@ -2959,7 +2953,7 @@ UpdateModel(modelFunc) {
       hide_tag_list = GetWeaponHideTags(weapon);
       if(isDefined(hide_tag_list)) {
         foreach(part in hide_tag_list) {
-        self HidePart_AllInstances(part, weapon_model);
+          self HidePart_AllInstances(part, weapon_model);
         }
       }
     }

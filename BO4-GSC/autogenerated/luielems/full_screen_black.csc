@@ -4,7 +4,6 @@
 ********************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace full_screen_black;
 
 class cfull_screen_black: cluielem {
@@ -37,7 +36,7 @@ class cfull_screen_black: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"full_screen_black");
+    cluielem::open(localclientnum, # "full_screen_black");
   }
 
   function function_fa582112(localclientnum) {

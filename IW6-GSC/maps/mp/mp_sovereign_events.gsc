@@ -406,7 +406,7 @@ halon_system_killstreak_explode(attacker) {
   }
   inflictor RadiusDamage(self.origin, 400, 1200, 1000, attacker, "MOD_EXPLOSIVE", "sovereign_gas_mp");
   foreach(visual in visuals) {
-  visual Delete();
+    visual Delete();
   }
 }
 

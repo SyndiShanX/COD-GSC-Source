@@ -101,8 +101,7 @@ addplayertosquad(var_0) {
   if(!isDefined(var_0)) {
     if(isDefined(self.script_squadname)) {
       var_0 = self.script_squadname;
-    }
-    else {
+    } else {
       var_0 = self.team;
     }
   }
@@ -121,8 +120,7 @@ squadchange() {
 
   if(!isDefined(self.script_squadname)) {
     var_0 = self.team + self.script_flanker;
-  }
-  else {
+  } else {
     var_0 = self.script_squadname + self.script_flanker;
   }
 
@@ -147,8 +145,7 @@ addtosquad(var_0) {
 
     if(isDefined(self.script_squadname)) {
       var_0 = self.script_squadname;
-    }
-    else {
+    } else {
       var_0 = self.team;
     }
   }
@@ -162,8 +159,7 @@ addtosquad(var_0) {
   if(isDefined(self.squad)) {
     if(self.squad == var_1) {
       return;
-    }
-    else {
+    } else {
       removefromsquad();
     }
   }
@@ -196,8 +192,7 @@ removefromsquad() {
 
   if(isDefined(self)) {
     var_1 = self.memberid;
-  }
-  else {
+  } else {
     for(var_2 = 0; var_2 < var_0.members.size; var_2++) {
       if(var_0.members[var_2] == self) {
         var_1 = var_2;
@@ -255,8 +250,7 @@ removeofficerfromsquad() {
 
   if(isDefined(self)) {
     var_1 = self.officerid;
-  }
-  else {
+  } else {
     for(var_2 = 0; var_2 < var_0.officers.size; var_2++) {
       if(var_0.officers[var_2] == self) {
         var_1 = var_2;
@@ -347,8 +341,7 @@ membercombatwaiter() {
 
     if(!isDefined(self.enemy)) {
       self.squad notify("squadupdate", "combat");
-    }
-    else {
+    } else {
       self.squad.isincombat = 1;
     }
 
@@ -359,8 +352,7 @@ membercombatwaiter() {
 updateheading() {
   if(isDefined(self.enemy)) {
     self.forward = vectornormalize(self.enemy.origin - self.origin);
-  }
-  else {
+  } else {
     var_0 = (0, 0, 0);
     var_1 = 0;
 
@@ -395,8 +387,7 @@ updateorigin() {
 
   if(var_1) {
     self.origin = (var_0[0] / var_1, var_0[1] / var_1, var_0[2] / var_1);
-  }
-  else {
+  } else {
     self.origin = var_0;
   }
 }
@@ -462,8 +453,7 @@ updateall() {
 
   if(var_1) {
     self.origin = (var_0[0] / var_1, var_0[1] / var_1, var_0[2] / var_1);
-  }
-  else {
+  } else {
     self.origin = var_0;
   }
 
@@ -587,8 +577,7 @@ aiupdatecombat(var_0) {
   if(isDefined(self.lastenemysightpos)) {
     if(self.combattime < 0) {
       self.combattime = var_0;
-    }
-    else {
+    } else {
       self.combattime = self.combattime + var_0;
     }
 
@@ -601,8 +590,7 @@ aiupdatecombat(var_0) {
 
   if(self.combattime > 0) {
     self.combattime = 0 - var_0;
-  }
-  else {
+  } else {
     self.combattime = self.combattime - var_0;
   }
 }
@@ -611,8 +599,7 @@ aiupdatesuppressed(var_0) {
   if(self.suppressed) {
     if(self.suppressedtime < 0) {
       self.suppressedtime = var_0;
-    }
-    else {
+    } else {
       self.suppressedtime = self.suppressedtime + var_0;
     }
   } else {

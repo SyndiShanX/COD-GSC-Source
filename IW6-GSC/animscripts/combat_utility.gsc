@@ -14,8 +14,7 @@ gettargetangleoffset(var_0) {
 getsniperburstdelaytime() {
   if(isplayer(self.enemy)) {
     return randomfloatrange(self.enemy.gs.min_sniper_burst_delay_time, self.enemy.gs.max_sniper_burst_delay_time);
-  }
-  else {
+  } else {
     return randomfloatrange(anim.min_sniper_burst_delay_time, anim.max_sniper_burst_delay_time);
   }
 }
@@ -34,17 +33,13 @@ getremainingburstdelaytime() {
 getburstdelaytime() {
   if(animscripts\utility::usingsidearm()) {
     return randomfloatrange(0.15, 0.55);
-  }
-  else if(animscripts\utility::weapon_pump_action_shotgun()) {
+  } else if(animscripts\utility::weapon_pump_action_shotgun()) {
     return randomfloatrange(1.0, 1.7);
-  }
-  else if(issniper()) {
+  } else if(issniper()) {
     return getsniperburstdelaytime();
-  }
-  else if(self.fastburst) {
+  } else if(self.fastburst) {
     return randomfloatrange(0.1, 0.35);
-  }
-  else {
+  } else {
     return randomfloatrange(0.4, 0.9);
   }
 }
@@ -133,8 +128,7 @@ shootuntilshootbehaviorchange() {
 
   if(isDefined(self.enemy) && distancesquared(self.origin, self.enemy.origin) > 160000) {
     var_0 = randomintrange(1, 5);
-  }
-  else {
+  } else {
     var_0 = 10;
   }
 
@@ -147,14 +141,12 @@ shootuntilshootbehaviorchange() {
 
     if(self.shootstyle == "full") {
       fireuntiloutofammo(animscripts\utility::animarray("fire"), 1, animscripts\shared::decidenumshotsforfull());
-    }
-    else if(self.shootstyle == "burst" || self.shootstyle == "semi") {
+    } else if(self.shootstyle == "burst" || self.shootstyle == "semi") {
       var_1 = animscripts\shared::decidenumshotsforburst();
 
       if(var_1 == 1) {
         fireuntiloutofammo(animscripts\utility::animarraypickrandom("single"), 1, var_1);
-      }
-      else {
+      } else {
         fireuntiloutofammo(animscripts\utility::animarray(self.shootstyle + var_1), 1, var_1);
       }
     } else if(self.shootstyle == "single")
@@ -241,19 +233,16 @@ aimidlethread(var_0) {
 
     if(isDefined(self.a.leanaim)) {
       var_4 = animscripts\utility::animarraypickrandom("lean_idle");
-    }
-    else if(animscripts\utility::animarrayanyexist("exposed_idle")) {
+    } else if(animscripts\utility::animarrayanyexist("exposed_idle")) {
       var_4 = animscripts\utility::animarraypickrandom("exposed_idle");
-    }
-    else {
+    } else {
       wait 0.5;
 
     }
 
     if(var_4 == var_1) {
       self setflaggedanimlimitedrestart(var_3, var_4, 1, 0.2);
-    }
-    else {
+    } else {
       self setflaggedanimknoblimitedrestart(var_3, var_4, 1, 0.2);
     }
 
@@ -296,17 +285,13 @@ fireuntiloutofammo(var_0, var_1, var_2) {
 
   if(isDefined(self.shootrateoverride)) {
     var_4 = self.shootrateoverride;
-  }
-  else if(self.shootstyle == "full") {
+  } else if(self.shootstyle == "full") {
     var_4 = animscripts\weaponlist::autoshootanimrate() * randomfloatrange(0.5, 1.0);
-  }
-  else if(self.shootstyle == "burst") {
+  } else if(self.shootstyle == "burst") {
     var_4 = animscripts\weaponlist::burstshootanimrate();
-  }
-  else if(animscripts\utility::usingsidearm()) {
+  } else if(animscripts\utility::usingsidearm()) {
     var_4 = 3.0;
-  }
-  else if(animscripts\utility::usingshotgun()) {
+  } else if(animscripts\utility::usingshotgun()) {
     var_4 = shotgunfirerate();
   }
 
@@ -435,8 +420,7 @@ notifyonanimend(var_0, var_1) {
 issingleshot() {
   if(weaponburstcount(self.weapon) > 0) {
     return 0;
-  }
-  else if(weaponisauto(self.weapon)) {
+  } else if(weaponisauto(self.weapon)) {
     return 0;
   }
 
@@ -651,8 +635,7 @@ getdesiredgrenadetimervalue() {
 getgrenadetimertime(var_0) {
   if(var_0.isplayertimer) {
     return var_0.player.grenadetimers[var_0.timername];
-  }
-  else {
+  } else {
     return anim.grenadetimers[var_0.timername];
   }
 }
@@ -746,8 +729,7 @@ grenadecooldownelapsed(var_0) {
 trygrenadeposproc(var_0, var_1, var_2, var_3) {
   if(!self isgrenadepossafe(var_0, var_1)) {
     return 0;
-  }
-  else if(distancesquared(self.origin, var_1) < 40000) {
+  } else if(distancesquared(self.origin, var_1) < 40000) {
     return 0;
   }
 
@@ -845,8 +827,7 @@ trygrenadethrow(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   if(isDefined(var_1)) {
     if(!isDefined(var_4)) {
       var_9 = self checkgrenadethrowpos(var_3, var_1, var_5, "min energy", "min time", "max time");
-    }
-    else {
+    } else {
       var_9 = self checkgrenadethrowpos(var_3, var_1, var_5, "min time", "min energy");
     }
   } else {
@@ -856,16 +837,14 @@ trygrenadethrow(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
     if(var_11 < 800) {
       if(var_11 < 256) {
         var_10 = 0;
-      }
-      else {
+      } else {
         var_10 = var_10 * ((var_11 - 256) / 544);
       }
     }
 
     if(!isDefined(var_4)) {
       var_9 = self checkgrenadethrow(var_3, var_10, "min energy", "min time", "max time");
-    }
-    else {
+    } else {
       var_9 = self checkgrenadethrow(var_3, var_10, "min time", "min energy");
     }
   }
@@ -899,8 +878,7 @@ trygrenadethrow(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(isDefined(var_6)) {
       thread dogrenadethrow(var_7, var_9, var_12, var_13);
-    }
-    else {
+    } else {
       dogrenadethrow(var_7, var_9, var_12, var_13);
     }
 
@@ -973,8 +951,7 @@ dogrenadethrow(var_0, var_1, var_2, var_3) {
 
   if(var_5 != "none") {
     self detach(var_4, var_5);
-  }
-  else {}
+  } else {}
 
   self.isholdinggrenade = undefined;
   self.grenadeawareness = self.oldgrenawareness;
@@ -1180,8 +1157,7 @@ usecovernodeifpossible(var_0) {
 
   if(self usecovernode(var_0)) {
     return 1;
-  }
-  else {}
+  } else {}
 
   self.keepclaimednodeifvalid = var_1;
   self.keepclaimednode = var_2;
@@ -1465,8 +1441,7 @@ monitorflash() {
 
     if(var_0 > 1 - var_5) {
       var_0 = 1.0;
-    }
-    else {
+    } else {
       var_0 = var_0 / (1 - var_5);
     }
 

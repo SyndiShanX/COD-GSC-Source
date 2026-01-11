@@ -69,7 +69,7 @@ system_state_spotted() {
   var_0 = level._stealth.group.groups;
 
   foreach(var_4, var_2 in var_0) {
-  maps\_stealth_shared_utilities::group_flag_clear("_stealth_spotted", var_4);
+    maps\_stealth_shared_utilities::group_flag_clear("_stealth_spotted", var_4);
   }
 }
 
@@ -298,7 +298,7 @@ system_default_event_distances() {
 system_set_event_distances(var_0) {
   foreach(var_6, var_2 in var_0) {
     foreach(var_5, var_4 in var_2) {
-    level._stealth.logic.ai_event[var_6][var_5] = var_4;
+      level._stealth.logic.ai_event[var_6][var_5] = var_4;
     }
   }
 }

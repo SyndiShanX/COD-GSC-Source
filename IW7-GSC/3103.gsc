@@ -18,8 +18,7 @@ func_61F8(var_00) {
 
   if(var_00 || var_01) {
     var_02 = 0;
-  }
-  else {
+  } else {
     var_02 = 1;
   }
 
@@ -31,8 +30,7 @@ func_61F8(var_00) {
 
   if(self.script_team == "axis") {
     func_0BDC::func_105DB("jackal", "JACKAL_R7_SKELTER", "jackal", "enemy_jackal", 1);
-  }
-  else {
+  } else {
     func_0BDC::func_105DB("jackal", undefined, "ally_jackal", "ally_jackal");
   }
 

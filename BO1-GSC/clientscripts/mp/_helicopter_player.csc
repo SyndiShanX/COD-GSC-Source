@@ -58,8 +58,7 @@ playWarningLight(localClientNum, set) {
   if(set) {
     if(!isDefined(self.warningLightCount)) {
       self.warningLightCount = 1;
-    }
-    else {
+    } else {
       self.warningLightCount++;
     }
     if(!isDefined(self.warningLight)) {

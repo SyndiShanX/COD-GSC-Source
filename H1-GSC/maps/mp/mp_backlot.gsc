@@ -23,7 +23,7 @@ movehpvisuals() {
   var_0 = getEntArray("hp_zone_1", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2.origin = var_2.origin + (0, 0, -3);
+    var_2.origin = var_2.origin + (0, 0, -3);
   }
 }
 

@@ -4,12 +4,11 @@
 ****************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace initial_black;
 
 class cinitial_black: cluielem {
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"initial_black");
+    cluielem::open(localclientnum, # "initial_black");
   }
 
   function function_fa582112(localclientnum) {

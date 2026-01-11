@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\mp_crossfire_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\mp_crossfire_fog::main();
   }
 }

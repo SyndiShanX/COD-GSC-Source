@@ -468,14 +468,11 @@ fx_screen_raindrops() {
     if(common_scripts\utility::flag("player_is_ziplining")) {
       if(var_1[0] < -40) {
         playFXOnTag(level._effect["raindrops_screen_20_" + var_0], level.screenrain, "tag_origin");
-      }
-      else if(var_1[0] < -25) {
+      } else if(var_1[0] < -25) {
         playFXOnTag(level._effect["raindrops_screen_10_" + var_0], level.screenrain, "tag_origin");
-      }
-      else if(var_1[0] < 25) {
+      } else if(var_1[0] < 25) {
         playFXOnTag(level._effect["raindrops_screen_5_" + var_0], level.screenrain, "tag_origin");
-      }
-      else if(var_1[0] < 40) {
+      } else if(var_1[0] < 40) {
         playFXOnTag(level._effect["raindrops_screen_3_" + var_0], level.screenrain, "tag_origin");
       }
     }

@@ -257,11 +257,9 @@ StingerUsageLoop() {
 
       if(checkVehicleModelForLock(self.stingerTarget.model)) {
         self WeaponLockFinalize(self.stingerTarget);
-      }
-      else if(isPlayer(self.stingerTarget)) {
+      } else if(isPlayer(self.stingerTarget)) {
         self WeaponLockFinalize(self.stingerTarget, (100, 0, 64));
-      }
-      else {
+      } else {
         self WeaponLockFinalize(self.stingerTarget, (100, 0, -32));
       }
 

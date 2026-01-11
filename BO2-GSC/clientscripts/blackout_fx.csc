@@ -7,8 +7,7 @@
 #include clientscripts\createfx\blackout_fx;
 #include clientscripts\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_com_sparks_slow"] = loadfx("maps/command_center/fx_com_sparks_slow");

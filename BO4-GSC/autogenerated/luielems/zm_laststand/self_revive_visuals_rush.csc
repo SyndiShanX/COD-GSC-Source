@@ -4,7 +4,6 @@
 ****************************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace self_revive_visuals_rush;
 
 class cself_revive_visuals_rush: cluielem {
@@ -13,7 +12,7 @@ class cself_revive_visuals_rush: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"self_revive_visuals_rush");
+    cluielem::open(localclientnum, # "self_revive_visuals_rush");
   }
 
   function function_fa582112(localclientnum) {

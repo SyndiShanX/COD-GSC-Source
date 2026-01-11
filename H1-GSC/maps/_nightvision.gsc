@@ -111,8 +111,7 @@ h1_view_weapon_laser_update() {
 
     if(has_laser_sight_nightvision(self getcurrentweapon())) {
       self laseron();
-    }
-    else {
+    } else {
       self laseroff();
     }
 

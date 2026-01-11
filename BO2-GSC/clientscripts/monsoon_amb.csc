@@ -266,8 +266,7 @@ snd_amb_ruin_off() {
   level notify("snd_amb_off");
 }
 
-snd_pa_start() {
-}
+snd_pa_start() {}
 
 lab_alarms() {
   level waittill("snd_alarm");

@@ -288,8 +288,7 @@ get_vol_from_speed(player) {
 absolute_value(fowd) {
   if(fowd < 0) {
     return (fowd * -1);
-  }
-  else {
+  } else {
     return fowd;
   }
 }

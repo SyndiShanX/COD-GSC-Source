@@ -121,8 +121,7 @@ useBallDrone(ballDroneType) {
   if(!isDefined(ballDrone)) {
     if(is_aliens()) {
       self.drone_failed = true;
-    }
-    else {
+    } else {
       self IPrintLnBold(&"KILLSTREAKS_UNAVAILABLE");
     }
 
@@ -205,8 +204,7 @@ createBallDrone(ballDroneType) {
   if(!is_aliens()) {
     if(level.teamBased) {
       drone maps\mp\_entityheadicons::setTeamHeadIcon(drone.team, (0, 0, 25));
-    }
-    else {
+    } else {
       drone maps\mp\_entityheadicons::setPlayerHeadIcon(drone.owner, (0, 0, 25));
     }
   }
@@ -411,15 +409,13 @@ watchConnectedplayFX() {
       if(level.teamBased) {
         if(player.team == self.team) {
           self[[settings.playFXCallback]]("friendly", player);
-        }
-        else {
+        } else {
           self[[settings.playFXCallback]]("enemy", player);
         }
       } else {
         if(player == self.owner) {
           self[[settings.playFXCallback]]("friendly", player);
-        }
-        else {
+        } else {
           self[[settings.playFXCallback]]("enemy", player);
         }
       }
@@ -440,15 +436,13 @@ watchJoinedTeamplayFX() {
       if(level.teamBased) {
         if(player.team == self.team) {
           self[[settings.playFXCallback]]("friendly", player);
-        }
-        else {
+        } else {
           self[[settings.playFXCallback]]("enemy", player);
         }
       } else {
         if(player == self.owner) {
           self[[settings.playFXCallback]]("friendly", player);
-        }
-        else {
+        } else {
           self[[settings.playFXCallback]]("enemy", player);
         }
       }
@@ -470,8 +464,7 @@ startBallDrone(ballDrone) {
 
       if(isDefined(ballDrone.turret) && isDefined(ballDrone.turret.idleTarget)) {
         ballDrone SetLookAtEnt(ballDrone.turret.idleTarget);
-      }
-      else {
+      } else {
         ballDrone SetLookAtEnt(self);
       }
       break;
@@ -645,8 +638,7 @@ low_entries_watcher() {
       while(self IsTouching(trigger) || self.owner IsTouching(trigger)) {
         if(isDefined(trigger.script_parameters)) {
           self.low_entry = float(trigger.script_parameters);
-        }
-        else {
+        } else {
           self.low_entry = 0.5;
         }
 
@@ -917,8 +909,7 @@ removeFromBallDroneListOnDeath() {
 exceededMaxBallDrones() {
   if(level.ballDrones.size >= maxVehiclesAllowed()) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

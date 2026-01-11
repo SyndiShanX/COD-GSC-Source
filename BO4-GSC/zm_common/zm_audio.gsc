@@ -30,7 +30,6 @@
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_audio;
 
 autoexec __init__system__() {
@@ -59,7 +58,7 @@ ai_killed(s_params) {
 function_198818fe() {
   if(isDefined(self.archetype)) {
     switch (self.archetype) {
-      case #"brutus":
+      case # "brutus":
         n_delay = 5;
         break;
     }
@@ -142,9 +141,9 @@ zmbvox() {
 
   announcer_ent = spawn("script_origin", (0, 0, 0));
   level.vox zmbvoxinitspeaker("announcer", "vox_zmba_", announcer_ent);
-  level.exert_sounds[0][#"burp"] = "evt_belch";
-  level.exert_sounds[0][#"hitmed"] = "null";
-  level.exert_sounds[0][#"hitlrg"] = "null";
+  level.exert_sounds[0][# "burp"] = "evt_belch";
+  level.exert_sounds[0][# "hitmed"] = "null";
+  level.exert_sounds[0][# "hitlrg"] = "null";
 
   if(isDefined(level.setupcustomcharacterexerts)) {
     [[level.setupcustomcharacterexerts]]();
@@ -196,11 +195,11 @@ oh_shit_vox() {
           }
 
           if(self != e_player && sighttracepassed(self.origin + (0, 0, 30), e_player.origin + (0, 0, 30), 0, undefined)) {
-            e_player create_and_play_dialog(#"surrounded", #"see_" + self zm_vo::function_82f9bc9f());
+            e_player create_and_play_dialog(#"surrounded", # "see_" + self zm_vo::function_82f9bc9f());
           }
         }
       } else {
-        self create_and_play_dialog(#"surrounded", #"self");
+        self create_and_play_dialog(#"surrounded", # "self");
       }
 
       wait 4;
@@ -215,7 +214,7 @@ function_2c31a0a6() {
     waitresult = level waittill(#"crawler_created");
 
     if(isplayer(waitresult.player)) {
-      waitresult.player create_and_play_dialog(#"general", #"crawl_spawn");
+      waitresult.player create_and_play_dialog(#"general", # "crawl_spawn");
       wait 1;
     }
   }
@@ -235,7 +234,7 @@ function_aa7d1d97() {
       if(isalive(waitresult.entity)) {
         if(waitresult.area === "left_arm" || waitresult.area === "right_arm") {
           if(waitresult.entity.damageweapon !== getweapon(#"zhield_spectral_dw")) {
-            waitresult.attacker create_and_play_dialog(#"general", #"gib");
+            waitresult.attacker create_and_play_dialog(#"general", # "gib");
           }
         }
       }
@@ -244,7 +243,7 @@ function_aa7d1d97() {
 }
 
 player_killstreak_timer() {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
 
   if(getdvarstring(#"zombie_kills") == "") {
     setdvar(#"zombie_kills", 8);
@@ -359,7 +358,7 @@ get_mod_kill(impact, mod, weapon, zombie, instakill, dist, player) {
   str_weapon = function_350fc8cc(weapon, zombie, mod, player);
 
   if(isDefined(str_weapon)) {
-    return (str_weapon == #"novox" ? undefined : str_weapon);
+    return (str_weapon == # "novox" ? undefined : str_weapon);
   }
 
   if(isDefined(weapon.isheroweapon) && weapon.isheroweapon) {
@@ -370,7 +369,7 @@ get_mod_kill(impact, mod, weapon, zombie, instakill, dist, player) {
     return "specialround";
   }
 
-  if(zombie.archetype === #"zombie_dog") {
+  if(zombie.archetype === # "zombie_dog") {
     return;
   }
 
@@ -384,9 +383,9 @@ get_mod_kill(impact, mod, weapon, zombie, instakill, dist, player) {
     }
   }
 
-  if(zombie.archetype === #"zombie") {
+  if(zombie.archetype === # "zombie") {
     if(mod == "MOD_MELEE") {
-      return #"melee";
+      return # "melee";
     } else if(isDefined(zombie.missinglegs) && zombie.missinglegs) {
       return "crawler";
     }
@@ -446,48 +445,48 @@ function_350fc8cc(weapon, zombie, mod, player) {
       str_weapon = str_weapon_name;
 
       switch (str_weapon) {
-        case #"minigun":
+        case # "minigun":
           if(mod == "MOD_RIFLE_BULLET" && player function_6049efce(str_weapon)) {
             return str_weapon;
           } else {
-            return #"novox";
+            return # "novox";
           }
 
           break;
-        case #"scepter":
+        case # "scepter":
           if(!(isDefined(zombie.var_4857363e) && zombie.var_4857363e)) {
-            return #"novox";
+            return # "novox";
           }
 
           break;
-        case #"flamethrower":
+        case # "flamethrower":
           if(mod == "MOD_IMPACT") {
-            return #"novox";
+            return # "novox";
           } else if(mod == "MOD_BURNED" && !(isDefined(zombie.var_d9e7a08a) && zombie.var_d9e7a08a) && player function_6049efce(str_weapon)) {
             return str_weapon;
           }
 
           break;
-        case #"gravityspikes":
+        case # "gravityspikes":
           if(!(isDefined(zombie.var_46d39f48) && zombie.var_46d39f48)) {
-            return #"novox";
+            return # "novox";
           }
 
           break;
-        case #"katana":
+        case # "katana":
           if(mod == "MOD_MELEE" && !player flagsys::get("katana_dash") && player function_6049efce(str_weapon)) {
             return str_weapon;
           } else {
-            return #"novox";
+            return # "novox";
           }
 
           break;
-        case #"hammer":
+        case # "hammer":
           if(mod == "MOD_MELEE") {
             if(player function_6049efce(str_weapon)) {
               return str_weapon;
             } else {
-              return #"novox";
+              return # "novox";
             }
           }
 
@@ -500,76 +499,76 @@ function_350fc8cc(weapon, zombie, mod, player) {
         }
       }
 
-      if(str_weapon == #"chakram") {
+      if(str_weapon == # "chakram") {
         if(isDefined(player) && isDefined(player.var_fbe120be) && player.var_fbe120be) {
           if(player function_6049efce(str_weapon, 3, 0.75)) {
-            str_weapon = #"chakram_multi";
+            str_weapon = # "chakram_multi";
           } else {
-            return #"novox";
+            return # "novox";
           }
         } else {
-          return #"novox";
+          return # "novox";
         }
       }
 
-      if(str_weapon == #"sword_pistol") {
+      if(str_weapon == # "sword_pistol") {
         if(mod == "MOD_MELEE") {
           if(player function_6049efce(str_weapon)) {
-            str_weapon = #"sword";
+            str_weapon = # "sword";
           } else {
-            return #"novox";
+            return # "novox";
           }
         } else if(mod == "MOD_UNKNOWN" || mod == "MOD_PROJECTILE" || isDefined(zombie.var_8c8102a5) && zombie.var_8c8102a5) {
-          return #"novox";
+          return # "novox";
         } else if(player function_6049efce(str_weapon)) {
-          str_weapon = #"pistol";
+          str_weapon = # "pistol";
         }
       }
     } else {
       if(zm_weapons::is_wonder_weapon(weapon)) {
         switch (weapon.name) {
-          case #"ray_gun_upgraded":
-          case #"ray_gun":
+          case # "ray_gun_upgraded":
+          case # "ray_gun":
             if(player function_6049efce(weapon.name)) {
-              str_weapon = #"raygun";
+              str_weapon = # "raygun";
             }
 
             break;
-          case #"ray_gun_mk2":
-          case #"ray_gun_mk2_upgraded":
+          case # "ray_gun_mk2":
+          case # "ray_gun_mk2_upgraded":
             if(player function_6049efce(weapon.name)) {
-              str_weapon = #"raygun_mk2";
+              str_weapon = # "raygun_mk2";
             }
 
             break;
-          case #"ww_tesla_sniper_t8":
+          case # "ww_tesla_sniper_t8":
             if(player function_6049efce(weapon.name)) {
-              str_weapon = #"tempest";
+              str_weapon = # "tempest";
             }
 
             break;
-          case #"thundergun":
+          case # "thundergun":
             if(player function_6049efce(weapon.name)) {
-              str_weapon = #"thundergun";
+              str_weapon = # "thundergun";
             } else {
-              str_weapon = #"no_vox";
+              str_weapon = # "no_vox";
             }
 
             break;
-          case #"tundragun":
+          case # "tundragun":
             if(player function_6049efce(weapon.name)) {
-              str_weapon = #"tundragun";
+              str_weapon = # "tundragun";
             } else {
-              str_weapon = #"no_vox";
+              str_weapon = # "no_vox";
             }
 
             break;
-          case #"ww_freezegun_t8":
-            if(zombie.archetype === #"zombie_dog") {
+          case # "ww_freezegun_t8":
+            if(zombie.archetype === # "zombie_dog") {
               break;
             }
           default:
-            str_weapon = #"wonder";
+            str_weapon = # "wonder";
             break;
         }
       }
@@ -587,36 +586,36 @@ function_350fc8cc(weapon, zombie, mod, player) {
   }
 
   switch (zombie.damageweapon.name) {
-    case #"homunculus":
-    case #"cymbal_monkey":
-      str_weapon = #"homunculus";
+    case # "homunculus":
+    case # "cymbal_monkey":
+      str_weapon = # "homunculus";
       break;
-    case #"bowie_knife_story_1":
-    case #"bowie_knife":
-    case #"knife":
-      str_weapon = #"melee";
+    case # "bowie_knife_story_1":
+    case # "bowie_knife":
+    case # "knife":
+      str_weapon = # "melee";
       break;
-    case #"special_ballisticknife_t8_dw_upgraded":
-    case #"special_ballisticknife_t8_dw":
+    case # "special_ballisticknife_t8_dw_upgraded":
+    case # "special_ballisticknife_t8_dw":
       if(mod == "MOD_MELEE") {
-        str_weapon = #"melee";
+        str_weapon = # "melee";
       } else {
-        str_weapon = #"ballistic";
+        str_weapon = # "ballistic";
       }
 
       break;
-    case #"galvaknuckles_t8":
-      str_weapon = #"galva";
+    case # "galvaknuckles_t8":
+      str_weapon = # "galva";
       break;
-    case #"eq_wraith_fire":
-    case #"molotov_fire":
-    case #"eq_molotov_extra":
-    case #"wraith_fire_fire":
-    case #"eq_molotov":
-    case #"eq_wraith_fire_extra":
-      str_weapon = #"molotov";
+    case # "eq_wraith_fire":
+    case # "molotov_fire":
+    case # "eq_molotov_extra":
+    case # "wraith_fire_fire":
+    case # "eq_molotov":
+    case # "eq_wraith_fire_extra":
+      str_weapon = # "molotov";
       break;
-    case #"mini_turret":
+    case # "mini_turret":
       str_weapon = undefined;
       break;
   }
@@ -649,45 +648,45 @@ function_2d93d659(w_weapon) {
   if(isDefined(str_weapon_name) && isDefined(n_variant)) {
     if(self.var_8095a228 === n_variant) {
       self.var_8095a228++;
-      self thread create_and_play_dialog(#"hero_ready", str_weapon_name, n_variant, 1, #"hero_weapon_activated");
+      self thread create_and_play_dialog(#"hero_ready", str_weapon_name, n_variant, 1, # "hero_weapon_activated");
     }
   }
 }
 
 function_fa4dfde0(w_weapon) {
   switch (w_weapon.name) {
-    case #"hero_scepter_lv3":
-    case #"hero_scepter_lv2":
-    case #"hero_scepter_lv1":
-      return #"scepter";
-    case #"hero_hammer_lv3":
-    case #"hero_hammer_lv2":
-    case #"hero_hammer_lv1":
-      return #"hammer";
-    case #"hero_chakram_lv2":
-    case #"hero_chakram_lv3":
-    case #"hero_chakram_lv1":
-      return #"chakram";
-    case #"hero_sword_pistol_lv2":
-    case #"hero_sword_pistol_lv3":
-    case #"hero_sword_pistol_lv1":
-      return #"sword_pistol";
-    case #"hero_flamethrower_t8_lv1":
-    case #"hero_flamethrower_t8_lv2":
-    case #"hero_flamethrower_t8_lv3":
-      return #"flamethrower";
-    case #"hero_minigun_t8_lv1":
-    case #"hero_minigun_t8_lv3":
-    case #"hero_minigun_t8_lv2":
-      return #"minigun";
-    case #"hero_katana_t8_lv1":
-    case #"hero_katana_t8_lv2":
-    case #"hero_katana_t8_lv3":
-      return #"katana";
-    case #"hero_gravityspikes_t8_lv3":
-    case #"hero_gravityspikes_t8_lv2":
-    case #"hero_gravityspikes_t8_lv1":
-      return #"gravityspikes";
+    case # "hero_scepter_lv3":
+    case # "hero_scepter_lv2":
+    case # "hero_scepter_lv1":
+      return # "scepter";
+    case # "hero_hammer_lv3":
+    case # "hero_hammer_lv2":
+    case # "hero_hammer_lv1":
+      return # "hammer";
+    case # "hero_chakram_lv2":
+    case # "hero_chakram_lv3":
+    case # "hero_chakram_lv1":
+      return # "chakram";
+    case # "hero_sword_pistol_lv2":
+    case # "hero_sword_pistol_lv3":
+    case # "hero_sword_pistol_lv1":
+      return # "sword_pistol";
+    case # "hero_flamethrower_t8_lv1":
+    case # "hero_flamethrower_t8_lv2":
+    case # "hero_flamethrower_t8_lv3":
+      return # "flamethrower";
+    case # "hero_minigun_t8_lv1":
+    case # "hero_minigun_t8_lv3":
+    case # "hero_minigun_t8_lv2":
+      return # "minigun";
+    case # "hero_katana_t8_lv1":
+    case # "hero_katana_t8_lv2":
+    case # "hero_katana_t8_lv3":
+      return # "katana";
+    case # "hero_gravityspikes_t8_lv3":
+    case # "hero_gravityspikes_t8_lv2":
+    case # "hero_gravityspikes_t8_lv1":
+      return # "gravityspikes";
   }
 }
 
@@ -698,7 +697,7 @@ function_6049efce(weapon, n_kill_count = 10, var_b0f9afde = 6) {
 
 function_7ea301dd(weapon, var_b0f9afde = 6) {
   self notify(weapon + "sndMultiKillTracker");
-  self endon(weapon + "sndMultiKillTracker", #"death");
+  self endon(weapon + "sndMultiKillTracker", # "death");
 
   if(!isDefined(self.var_4cbaf28d)) {
     self.var_4cbaf28d = [];
@@ -729,10 +728,10 @@ function_d2429d4f(str_weapon) {
   var_300d3c47 = 0;
 
   switch (str_weapon) {
-    case #"gravityspikes":
-    case #"flamethrower":
-    case #"katana":
-    case #"minigun":
+    case # "gravityspikes":
+    case # "flamethrower":
+    case # "katana":
+    case # "minigun":
       var_300d3c47 = 1;
       break;
   }
@@ -741,7 +740,7 @@ function_d2429d4f(str_weapon) {
 }
 
 timer_actual(kills, time) {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
   timer = gettime() + time * 1000;
 
   while(gettime() < timer) {
@@ -759,7 +758,7 @@ timer_actual(kills, time) {
           }
         }
       } else {
-        self create_and_play_dialog(#"kill", #"streak_self");
+        self create_and_play_dialog(#"kill", # "streak_self");
       }
 
       wait 10;
@@ -794,7 +793,7 @@ zmbvoxinitspeaker(speaker, prefix, ent) {
 
 custom_kill_damaged_vo(player) {
   self notify(#"sound_damage_player_updated");
-  self endon(#"death", #"sound_damage_player_updated");
+  self endon(#"death", # "sound_damage_player_updated");
   self.sound_damage_player = player;
   wait 2;
   self.sound_damage_player = undefined;
@@ -887,7 +886,7 @@ zmbvoxadd(category, subcategory, suffix, percentage = 100, cooldown = 0, var_502
 }
 
 function_ef9ba49c(category, delay = 2, var_ba54b77d = -1, n_range = 800, endons, var_618a04 = 0) {
-  subcategory = #"react";
+  subcategory = # "react";
   self endon(#"death");
 
   if(!isDefined(endons)) {
@@ -1001,7 +1000,7 @@ create_and_play_dialog(category, subcategory, force_variant, b_wait_if_busy = 0,
       println("<dev string:x6f>" + category + "<dev string:x8c>" + subcategory + "<dev string:xcb>");
     }
 
-      return false;
+    return false;
   }
 
   if(sndvoxoverride() || isDefined(level.var_b625a184) && level.var_b625a184) {
@@ -1054,7 +1053,7 @@ create_and_play_dialog(category, subcategory, force_variant, b_wait_if_busy = 0,
       iprintln("<dev string:xe3>");
     }
 
-      return false;
+    return false;
   }
 
   return true;
@@ -1269,7 +1268,7 @@ can_speak(var_7faa9b94 = 0, var_7d84f04b = 0) {
 }
 
 do_player_or_npc_playvox(sound_to_play, toself = 0, category, subcategory) {
-  self endon(#"death", #"vo_clear");
+  self endon(#"death", # "vo_clear");
   self.str_vo_being_spoken = sound_to_play;
   self.isspeaking = 1;
   self.var_5b6ebfd0 = toself;
@@ -1301,7 +1300,7 @@ play_vo_internal(str_sound, e_to_player) {
     if(isplayer(self) && isentity(e_to_player)) {
       self playsoundtoplayer(str_sound, e_to_player);
       n_time = float(max(isDefined(soundgetplaybacktime(str_sound)) ? soundgetplaybacktime(str_sound) : 500, 500)) / 1000;
-      s = self waittilltimeout(n_time, #"vo_clear");
+      s = self waittilltimeout(n_time, # "vo_clear");
     } else {
       if(isDefined(self gettagorigin("J_head"))) {
         self playsoundwithnotify(str_sound, "vo_done", "J_head");
@@ -1309,7 +1308,7 @@ play_vo_internal(str_sound, e_to_player) {
         self playsoundwithnotify(str_sound, "vo_done");
       }
 
-      s = self waittill(#"vo_done", #"vo_clear");
+      s = self waittill(#"vo_done", # "vo_clear");
     }
 
     if(s._notify != "vo_clear") {
@@ -1527,7 +1526,7 @@ zmbvoxgetlinevariant(prefix, suffix, var_651f2941, force_variant) {
       println("<dev string:x15c>" + suffix + "<dev string:x188>" + prefix);
     }
 
-      return undefined;
+    return undefined;
   }
 
   if(isDefined(force_variant)) {
@@ -1544,7 +1543,7 @@ zmbvoxgetlinevariant(prefix, suffix, var_651f2941, force_variant) {
         println("<dev string:x15c>" + suffix + "<dev string:x188>" + prefix);
       }
 
-        return undefined;
+      return undefined;
     }
 
     variation = array::random(self.sound_dialog_available[suffix]);
@@ -1949,7 +1948,7 @@ secretuse(notify_string, color, qualifier_func, arg1, arg2) {
 
     print3d(self.origin, "<dev string:x18c>", color, 1);
 
-      players = level.players;
+    players = level.players;
 
     foreach(player in players) {
       qualifier_passed = 1;
@@ -1988,7 +1987,7 @@ function_4138a262() {
     }
   }
 
-  if(isDefined(level.musicsystem.states[#"round_start_first"]) && level.round_number <= 1) {
+  if(isDefined(level.musicsystem.states[# "round_start_first"]) && level.round_number <= 1) {
     level thread sndmusicsystem_playstate("round_start_first");
     return;
   }
@@ -2017,118 +2016,118 @@ sndannouncer_init() {
     level.zmannouncerprefix = "zmba";
   }
 
-  sndannouncervoxadd(#"carpenter", #"hash_4d495ea70e8796d2");
-  sndannouncervoxadd(#"insta_kill", #"hash_4c409b9a3baca485");
-  sndannouncervoxadd(#"double_points", #"hash_1ee1ecb2bf07589c");
-  sndannouncervoxadd(#"nuke", #"hash_61ee7a1e5b4c68c7");
-  sndannouncervoxadd(#"full_ammo", #"hash_773c07eb3a67a793");
-  sndannouncervoxadd(#"fire_sale", #"hash_3cf43f66b71287e5");
-  sndannouncervoxadd(#"minigun", #"hash_7e30cbacaffa9676");
-  sndannouncervoxadd(#"bonus_points_team", #"hash_5540d7f63941a8b3");
-  sndannouncervoxadd(#"bonus_points_player", #"hash_5540d7f63941a8b3");
-  sndannouncervoxadd(#"bonus_points_player_shared", #"hash_5540d7f63941a8b3");
-  sndannouncervoxadd(#"hero_weapon_power", #"hash_49a75f92b85c0f95");
-  sndannouncervoxadd(#"zombie_blood", #"hash_2f095e1811169fc7");
-  sndannouncervoxadd(#"bonfire_sale", #"hash_554659b1fbc7a5bd");
-  sndannouncervoxadd(#"boxmove", #"hash_523d2f6c8930a8ee");
-  sndannouncervoxadd(#"dogstart", #"hash_12ca8e434ec4d884");
-  sndannouncervoxadd(#"shield_upgrade", #"hash_1853f3e031b48c22");
+  sndannouncervoxadd(#"carpenter", # "hash_4d495ea70e8796d2");
+  sndannouncervoxadd(#"insta_kill", # "hash_4c409b9a3baca485");
+  sndannouncervoxadd(#"double_points", # "hash_1ee1ecb2bf07589c");
+  sndannouncervoxadd(#"nuke", # "hash_61ee7a1e5b4c68c7");
+  sndannouncervoxadd(#"full_ammo", # "hash_773c07eb3a67a793");
+  sndannouncervoxadd(#"fire_sale", # "hash_3cf43f66b71287e5");
+  sndannouncervoxadd(#"minigun", # "hash_7e30cbacaffa9676");
+  sndannouncervoxadd(#"bonus_points_team", # "hash_5540d7f63941a8b3");
+  sndannouncervoxadd(#"bonus_points_player", # "hash_5540d7f63941a8b3");
+  sndannouncervoxadd(#"bonus_points_player_shared", # "hash_5540d7f63941a8b3");
+  sndannouncervoxadd(#"hero_weapon_power", # "hash_49a75f92b85c0f95");
+  sndannouncervoxadd(#"zombie_blood", # "hash_2f095e1811169fc7");
+  sndannouncervoxadd(#"bonfire_sale", # "hash_554659b1fbc7a5bd");
+  sndannouncervoxadd(#"boxmove", # "hash_523d2f6c8930a8ee");
+  sndannouncervoxadd(#"dogstart", # "hash_12ca8e434ec4d884");
+  sndannouncervoxadd(#"shield_upgrade", # "hash_1853f3e031b48c22");
 
   if(zm_utility::is_standard()) {
-    sndannouncervoxadd(#"game_start", #"hash_7d784b195050f75f");
-    sndannouncervoxadd(#"points_spawning", #"hash_646845f33ad513ae");
-    sndannouncervoxadd(#"multiplier_rising", #"hash_50b840aeb746403");
-    sndannouncervoxadd(#"multiplier_50", #"hash_1a9b68e180865ba1");
-    sndannouncervoxadd(#"multiplier_75", #"hash_1a9b65e180865688");
-    sndannouncervoxadd(#"multiplier_100", #"hash_1a9b66e18086583b");
-    sndannouncervoxadd(#"multiplier_125", #"hash_1a9b6be1808660ba");
-    sndannouncervoxadd(#"multiplier_150", #"hash_1a9b6ce18086626d");
-    sndannouncervoxadd(#"picked_up_key", #"hash_3867b4fd5932968a");
-    sndannouncervoxadd(#"specialty_berserker", #"hash_70503fc906187e02");
-    sndannouncervoxadd(#"specialty_phdflopper", #"hash_7b66342b9cdb1b0d");
-    sndannouncervoxadd(#"specialty_cooldown", #"hash_4b9e2835c9165954");
-    sndannouncervoxadd(#"specialty_shield", #"hash_21a6409eae2b8aa9");
-    sndannouncervoxadd(#"specialty_awareness", #"hash_4fb2d077e5dcb19c");
-    sndannouncervoxadd(#"specialty_extraammo", #"hash_52fd3e1c86fae905");
-    sndannouncervoxadd(#"specialty_deadshot", #"hash_7d9ebc736dc5c25d");
-    sndannouncervoxadd(#"specialty_quickrevive", #"hash_7a34372ef3e6346a");
-    sndannouncervoxadd(#"specialty_electriccherry", #"hash_29f880b55da36b01");
-    sndannouncervoxadd(#"specialty_additionalprimaryweapon", #"hash_674b1b55a9da1d5d");
-    sndannouncervoxadd(#"specialty_widowswine", #"hash_12cddd02a9942f4");
-    sndannouncervoxadd(#"specialty_staminup", #"hash_aa9d8fbea60223c");
-    sndannouncervoxadd(#"specialty_camper", #"hash_7eede5144457270f");
-    sndannouncervoxadd(#"specialty_etherealrazor", #"hash_5cc1d7e95e2997f1");
-    sndannouncervoxadd(#"specialty_zombshell", #"hash_128987fbb6bdfef");
-    sndannouncervoxadd(#"specialty_wolf_protector", #"hash_10a34f0962908792");
-    sndannouncervoxadd(#"specialty_death_dash", #"hash_406c5704d041fd85");
-    sndannouncervoxadd(#"perk_generic", #"hash_43dafce207fa7ff4");
-    sndannouncervoxadd(#"hero_weapon_ready", #"hash_279b4769ea79b472");
-    sndannouncervoxadd(#"extra_life", #"hash_788159511078e87f");
-    sndannouncervoxadd(#"incoming_blight_father", #"hash_639624432c8aa9a9");
-    sndannouncervoxadd(#"incoming_stoker", #"hash_5cc0ecbbf45f025d");
-    sndannouncervoxadd(#"incoming_boss", #"hash_2014f409889112e");
-    sndannouncervoxadd(#"incoming_mini_boss", #"hash_50e18452b9e9f79c");
-    sndannouncervoxadd(#"incoming_heavy", #"hash_162307bf1d9cd28a");
-    sndannouncervoxadd(#"power_activated", #"hash_1903816aeeed7cdb");
-    sndannouncervoxadd(#"rush_zone_nag", #"hash_643588a5ac2630e9");
-    sndannouncervoxadd(#"defend_start", #"hash_52b5e94b0f834e89");
-    sndannouncervoxadd(#"defend_complete", #"hash_54ce3eea0889438");
-    sndannouncervoxadd(#"player_out", #"hash_46140c2ff7ed0028");
-    sndannouncervoxadd(#"player_last_man_standing", #"hash_445a8d6ac36b6ce4");
-    sndannouncervoxadd(#"player_respawn", #"hash_2c7fcf9c80b61898");
-    sndannouncervoxadd(#"timer_10", #"hash_12d38add4b1b4225");
-    sndannouncervoxadd(#"timer_9", #"hash_75115605ce26435f");
-    sndannouncervoxadd(#"timer_8", #"hash_75115505ce2641ac");
-    sndannouncervoxadd(#"timer_7", #"hash_75115c05ce264d91");
-    sndannouncervoxadd(#"timer_6", #"hash_75115b05ce264bde");
-    sndannouncervoxadd(#"timer_5", #"hash_75115a05ce264a2b");
-    sndannouncervoxadd(#"timer_4", #"hash_75115905ce264878");
-    sndannouncervoxadd(#"timer_3", #"hash_75116005ce26545d");
-    sndannouncervoxadd(#"timer_2", #"hash_75115f05ce2652aa");
-    sndannouncervoxadd(#"timer_1", #"hash_75115e05ce2650f7");
-    sndannouncervoxadd(#"lead_gained", #"hash_442eb3cbb773a1ff");
-    sndannouncervoxadd(#"lead_lost", #"hash_3de4c149127a437b");
-    sndannouncervoxadd(#"second_place_gained", #"hash_35d45a5646f89aa5");
-    sndannouncervoxadd(#"third_place_gained", #"hash_519c3a0ce3e3266e");
-    sndannouncervoxadd(#"dropped_to_third_place", #"hash_38d8439ae5fc2c7a");
-    sndannouncervoxadd(#"dropped_to_last_place", #"hash_c085a88269ae2cf");
-    sndannouncervoxadd(#"player_down", #"hash_3dca2528566ddf10");
-    sndannouncervoxadd(#"pap_avail", #"hash_67b680cea28e5157");
-    sndannouncervoxadd(#"hash_77e06980e2fc1567", #"hash_5100f8a2b1c77bd4");
-    sndannouncervoxadd(#"hash_79b3b9e8ed3f0631", #"hash_1f56554135705816");
-    sndannouncervoxadd(#"hash_3acd6d72567def3a", #"hash_4a4a214d167991b");
-    sndannouncervoxadd(#"carpenter", #"hash_642d1c987098b98a");
-    sndannouncervoxadd(#"insta_kill", #"hash_709765ed03192a2d");
-    sndannouncervoxadd(#"double_points", #"hash_660aab11b5d4ebe4");
-    sndannouncervoxadd(#"nuke", #"hash_4918bf9ec93d41df");
-    sndannouncervoxadd(#"full_ammo", #"hash_52598fa43214b60b");
-    sndannouncervoxadd(#"fire_sale", #"hash_3f9078bc10e0529d");
-    sndannouncervoxadd(#"bonus_points_team", #"hash_451ad4649125eabb");
-    sndannouncervoxadd(#"bonus_points_player_shared", #"hash_451ad4649125eabb");
-    sndannouncervoxadd(#"hero_weapon_power", #"hash_93327b9599b606d");
-    sndannouncervoxadd(#"hellhound", #"hash_1ee46eef183307d9");
-    sndannouncervoxadd(#"nova_6", #"hash_133c3414ba1817b5");
-    sndannouncervoxadd(#"zmb_tigers", #"hash_33120300ceee6b04");
-    sndannouncervoxadd(#"tigers", #"hash_6ee21c358714ed5a");
-    sndannouncervoxadd(#"catalyst", #"hash_51aa5a9d6896a049");
-    sndannouncervoxadd(#"catalysts", #"hash_5b183378b7f2428e");
-    sndannouncervoxadd(#"stoker", #"hash_5eb48315f77f748c");
-    sndannouncervoxadd(#"stokers", #"hash_6c2fbd538d93cd4d");
-    sndannouncervoxadd(#"blightfather", #"hash_243f4785815444b2");
-    sndannouncervoxadd(#"blightfathers", #"hash_6bcb48dac230d3f3");
-    sndannouncervoxadd(#"marauder", #"hash_2fff3bb943f4b1af");
-    sndannouncervoxadd(#"marauders", #"hash_36457ce78ca38d4");
-    sndannouncervoxadd(#"destroyer", #"hash_771d36fe61955de3");
-    sndannouncervoxadd(#"destroyers", #"hash_7c02023fd0cdfbb0");
-    sndannouncervoxadd(#"warden", #"hash_48ad0ff98fe175ef");
-    sndannouncervoxadd(#"wardens", #"hash_5f87c10f7c1ad814");
-    sndannouncervoxadd(#"werewolf", #"hash_23c5292237128e03");
-    sndannouncervoxadd(#"nosferatu", #"hash_38bb4e0a7dfc9a1d");
-    sndannouncervoxadd(#"hash_e5dacec7371220e", #"hash_6e2246878a31d24d");
-    sndannouncervoxadd(#"lightning_hounds", #"hash_2fabde0f1747632a");
-    sndannouncervoxadd(#"bombers", #"hash_5bfc95be3db89d7e");
-    sndannouncervoxadd(#"hash_6acb03a0373891c1", #"hash_2629e8b3b9215214");
-    sndannouncervoxadd(#"electric_zombie", #"hash_3a33b9a23485f075");
+    sndannouncervoxadd(#"game_start", # "hash_7d784b195050f75f");
+    sndannouncervoxadd(#"points_spawning", # "hash_646845f33ad513ae");
+    sndannouncervoxadd(#"multiplier_rising", # "hash_50b840aeb746403");
+    sndannouncervoxadd(#"multiplier_50", # "hash_1a9b68e180865ba1");
+    sndannouncervoxadd(#"multiplier_75", # "hash_1a9b65e180865688");
+    sndannouncervoxadd(#"multiplier_100", # "hash_1a9b66e18086583b");
+    sndannouncervoxadd(#"multiplier_125", # "hash_1a9b6be1808660ba");
+    sndannouncervoxadd(#"multiplier_150", # "hash_1a9b6ce18086626d");
+    sndannouncervoxadd(#"picked_up_key", # "hash_3867b4fd5932968a");
+    sndannouncervoxadd(#"specialty_berserker", # "hash_70503fc906187e02");
+    sndannouncervoxadd(#"specialty_phdflopper", # "hash_7b66342b9cdb1b0d");
+    sndannouncervoxadd(#"specialty_cooldown", # "hash_4b9e2835c9165954");
+    sndannouncervoxadd(#"specialty_shield", # "hash_21a6409eae2b8aa9");
+    sndannouncervoxadd(#"specialty_awareness", # "hash_4fb2d077e5dcb19c");
+    sndannouncervoxadd(#"specialty_extraammo", # "hash_52fd3e1c86fae905");
+    sndannouncervoxadd(#"specialty_deadshot", # "hash_7d9ebc736dc5c25d");
+    sndannouncervoxadd(#"specialty_quickrevive", # "hash_7a34372ef3e6346a");
+    sndannouncervoxadd(#"specialty_electriccherry", # "hash_29f880b55da36b01");
+    sndannouncervoxadd(#"specialty_additionalprimaryweapon", # "hash_674b1b55a9da1d5d");
+    sndannouncervoxadd(#"specialty_widowswine", # "hash_12cddd02a9942f4");
+    sndannouncervoxadd(#"specialty_staminup", # "hash_aa9d8fbea60223c");
+    sndannouncervoxadd(#"specialty_camper", # "hash_7eede5144457270f");
+    sndannouncervoxadd(#"specialty_etherealrazor", # "hash_5cc1d7e95e2997f1");
+    sndannouncervoxadd(#"specialty_zombshell", # "hash_128987fbb6bdfef");
+    sndannouncervoxadd(#"specialty_wolf_protector", # "hash_10a34f0962908792");
+    sndannouncervoxadd(#"specialty_death_dash", # "hash_406c5704d041fd85");
+    sndannouncervoxadd(#"perk_generic", # "hash_43dafce207fa7ff4");
+    sndannouncervoxadd(#"hero_weapon_ready", # "hash_279b4769ea79b472");
+    sndannouncervoxadd(#"extra_life", # "hash_788159511078e87f");
+    sndannouncervoxadd(#"incoming_blight_father", # "hash_639624432c8aa9a9");
+    sndannouncervoxadd(#"incoming_stoker", # "hash_5cc0ecbbf45f025d");
+    sndannouncervoxadd(#"incoming_boss", # "hash_2014f409889112e");
+    sndannouncervoxadd(#"incoming_mini_boss", # "hash_50e18452b9e9f79c");
+    sndannouncervoxadd(#"incoming_heavy", # "hash_162307bf1d9cd28a");
+    sndannouncervoxadd(#"power_activated", # "hash_1903816aeeed7cdb");
+    sndannouncervoxadd(#"rush_zone_nag", # "hash_643588a5ac2630e9");
+    sndannouncervoxadd(#"defend_start", # "hash_52b5e94b0f834e89");
+    sndannouncervoxadd(#"defend_complete", # "hash_54ce3eea0889438");
+    sndannouncervoxadd(#"player_out", # "hash_46140c2ff7ed0028");
+    sndannouncervoxadd(#"player_last_man_standing", # "hash_445a8d6ac36b6ce4");
+    sndannouncervoxadd(#"player_respawn", # "hash_2c7fcf9c80b61898");
+    sndannouncervoxadd(#"timer_10", # "hash_12d38add4b1b4225");
+    sndannouncervoxadd(#"timer_9", # "hash_75115605ce26435f");
+    sndannouncervoxadd(#"timer_8", # "hash_75115505ce2641ac");
+    sndannouncervoxadd(#"timer_7", # "hash_75115c05ce264d91");
+    sndannouncervoxadd(#"timer_6", # "hash_75115b05ce264bde");
+    sndannouncervoxadd(#"timer_5", # "hash_75115a05ce264a2b");
+    sndannouncervoxadd(#"timer_4", # "hash_75115905ce264878");
+    sndannouncervoxadd(#"timer_3", # "hash_75116005ce26545d");
+    sndannouncervoxadd(#"timer_2", # "hash_75115f05ce2652aa");
+    sndannouncervoxadd(#"timer_1", # "hash_75115e05ce2650f7");
+    sndannouncervoxadd(#"lead_gained", # "hash_442eb3cbb773a1ff");
+    sndannouncervoxadd(#"lead_lost", # "hash_3de4c149127a437b");
+    sndannouncervoxadd(#"second_place_gained", # "hash_35d45a5646f89aa5");
+    sndannouncervoxadd(#"third_place_gained", # "hash_519c3a0ce3e3266e");
+    sndannouncervoxadd(#"dropped_to_third_place", # "hash_38d8439ae5fc2c7a");
+    sndannouncervoxadd(#"dropped_to_last_place", # "hash_c085a88269ae2cf");
+    sndannouncervoxadd(#"player_down", # "hash_3dca2528566ddf10");
+    sndannouncervoxadd(#"pap_avail", # "hash_67b680cea28e5157");
+    sndannouncervoxadd(#"hash_77e06980e2fc1567", # "hash_5100f8a2b1c77bd4");
+    sndannouncervoxadd(#"hash_79b3b9e8ed3f0631", # "hash_1f56554135705816");
+    sndannouncervoxadd(#"hash_3acd6d72567def3a", # "hash_4a4a214d167991b");
+    sndannouncervoxadd(#"carpenter", # "hash_642d1c987098b98a");
+    sndannouncervoxadd(#"insta_kill", # "hash_709765ed03192a2d");
+    sndannouncervoxadd(#"double_points", # "hash_660aab11b5d4ebe4");
+    sndannouncervoxadd(#"nuke", # "hash_4918bf9ec93d41df");
+    sndannouncervoxadd(#"full_ammo", # "hash_52598fa43214b60b");
+    sndannouncervoxadd(#"fire_sale", # "hash_3f9078bc10e0529d");
+    sndannouncervoxadd(#"bonus_points_team", # "hash_451ad4649125eabb");
+    sndannouncervoxadd(#"bonus_points_player_shared", # "hash_451ad4649125eabb");
+    sndannouncervoxadd(#"hero_weapon_power", # "hash_93327b9599b606d");
+    sndannouncervoxadd(#"hellhound", # "hash_1ee46eef183307d9");
+    sndannouncervoxadd(#"nova_6", # "hash_133c3414ba1817b5");
+    sndannouncervoxadd(#"zmb_tigers", # "hash_33120300ceee6b04");
+    sndannouncervoxadd(#"tigers", # "hash_6ee21c358714ed5a");
+    sndannouncervoxadd(#"catalyst", # "hash_51aa5a9d6896a049");
+    sndannouncervoxadd(#"catalysts", # "hash_5b183378b7f2428e");
+    sndannouncervoxadd(#"stoker", # "hash_5eb48315f77f748c");
+    sndannouncervoxadd(#"stokers", # "hash_6c2fbd538d93cd4d");
+    sndannouncervoxadd(#"blightfather", # "hash_243f4785815444b2");
+    sndannouncervoxadd(#"blightfathers", # "hash_6bcb48dac230d3f3");
+    sndannouncervoxadd(#"marauder", # "hash_2fff3bb943f4b1af");
+    sndannouncervoxadd(#"marauders", # "hash_36457ce78ca38d4");
+    sndannouncervoxadd(#"destroyer", # "hash_771d36fe61955de3");
+    sndannouncervoxadd(#"destroyers", # "hash_7c02023fd0cdfbb0");
+    sndannouncervoxadd(#"warden", # "hash_48ad0ff98fe175ef");
+    sndannouncervoxadd(#"wardens", # "hash_5f87c10f7c1ad814");
+    sndannouncervoxadd(#"werewolf", # "hash_23c5292237128e03");
+    sndannouncervoxadd(#"nosferatu", # "hash_38bb4e0a7dfc9a1d");
+    sndannouncervoxadd(#"hash_e5dacec7371220e", # "hash_6e2246878a31d24d");
+    sndannouncervoxadd(#"lightning_hounds", # "hash_2fabde0f1747632a");
+    sndannouncervoxadd(#"bombers", # "hash_5bfc95be3db89d7e");
+    sndannouncervoxadd(#"hash_6acb03a0373891c1", # "hash_2629e8b3b9215214");
+    sndannouncervoxadd(#"electric_zombie", # "hash_3a33b9a23485f075");
   }
 }
 
@@ -2206,7 +2205,7 @@ sndannouncerplayvox(type, player, str_sound, var_e08a84d6, b_wait_if_busy = 0, v
         }
       }
 
-        player playsoundtoplayer(str_sound, player);
+      player playsoundtoplayer(str_sound, player);
       wait n_wait;
       player.zmannouncertalking = undefined;
       player notify(#"hash_26a44682c9fd6f62", {
@@ -2348,7 +2347,7 @@ vo_clear_underwater() {
 }
 
 sndplayerhitalert(e_victim, str_meansofdeath, e_inflictor, weapon, shitloc, damage) {
-  str_alias = #"zmb_hit_alert";
+  str_alias = # "zmb_hit_alert";
 
   if(!isDefined(e_inflictor)) {
     return;
@@ -2402,12 +2401,12 @@ checkforvalidmod(str_meansofdeath) {
   }
 
   switch (str_meansofdeath) {
-    case #"mod_melee_weapon_butt":
-    case #"mod_crush":
-    case #"mod_hit_by_object":
-    case #"mod_grenade_splash":
-    case #"mod_melee_assassinate":
-    case #"mod_melee":
+    case # "mod_melee_weapon_butt":
+    case # "mod_crush":
+    case # "mod_hit_by_object":
+    case # "mod_grenade_splash":
+    case # "mod_melee_assassinate":
+    case # "mod_melee":
       return false;
   }
 
@@ -2418,16 +2417,16 @@ checkforvalidweapon(weapon) {
   b_isvalid = 1;
 
   switch (weapon.name) {
-    case #"zhield_spectral_dw":
-    case #"zhield_spectral_dw_upgraded":
+    case # "zhield_spectral_dw":
+    case # "zhield_spectral_dw_upgraded":
       b_isvalid = 0;
       break;
-    case #"hero_flamethrower_t8_lv1":
-    case #"hero_flamethrower_t8_lv2":
-    case #"hero_flamethrower_t8_lv3":
-    case #"hero_scepter_lv3":
-    case #"hero_scepter_lv2":
-    case #"hero_scepter_lv1":
+    case # "hero_flamethrower_t8_lv1":
+    case # "hero_flamethrower_t8_lv2":
+    case # "hero_flamethrower_t8_lv3":
+    case # "hero_scepter_lv3":
+    case # "hero_scepter_lv2":
+    case # "hero_scepter_lv1":
       b_isvalid = 0;
       break;
   }
@@ -2456,7 +2455,7 @@ event_handler[bhtn_action_start] function_320145f7(eventstruct) {
   notify_string = eventstruct.action;
 
   switch (notify_string) {
-    case #"death":
+    case # "death":
       if(isDefined(self.bgb_tone_death) && self.bgb_tone_death) {
         level thread zmbaivox_playvox(self, "death_whimsy", 1, 4);
       } else if(isDefined(self.bgb_quacknarok) && self.bgb_quacknarok) {
@@ -2466,26 +2465,26 @@ event_handler[bhtn_action_start] function_320145f7(eventstruct) {
       }
 
       break;
-    case #"pain":
+    case # "pain":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case #"behind":
+    case # "behind":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case #"electrocute":
+    case # "electrocute":
       level thread zmbaivox_playvox(self, notify_string, 1, 3);
       break;
-    case #"attack_melee_notetrack":
+    case # "attack_melee_notetrack":
       level thread zmbaivox_playvox(self, "attack_melee", 1, 2, 1);
       break;
-    case #"sprint":
-    case #"ambient":
-    case #"crawler":
-    case #"teardown":
-    case #"taunt":
+    case # "sprint":
+    case # "ambient":
+    case # "crawler":
+    case # "teardown":
+    case # "taunt":
       level thread zmbaivox_playvox(self, notify_string, 0, 1);
       break;
-    case #"attack_melee":
+    case # "attack_melee":
       break;
     default:
       level thread zmbaivox_playvox(self, notify_string, 0, 2);
@@ -2494,7 +2493,7 @@ event_handler[bhtn_action_start] function_320145f7(eventstruct) {
 }
 
 zmbaivox_notifyconvert() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   level endon(#"game_ended");
   self thread zmbaivox_playdeath();
   self thread zmbaivox_playelectrocution();
@@ -2591,7 +2590,7 @@ zmbaivox_playdeath() {
 }
 
 zmbaivox_playelectrocution() {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
 
   while(true) {
     waitresult = self waittill(#"damage");
@@ -2601,7 +2600,7 @@ zmbaivox_playelectrocution() {
       continue;
     }
 
-    if(weapon.name === #"zombie_beast_lightning_dwl" || weapon.name === #"zombie_beast_lightning_dwl2" || weapon.name === #"zombie_beast_lightning_dwl3") {
+    if(weapon.name === # "zombie_beast_lightning_dwl" || weapon.name === # "zombie_beast_lightning_dwl2" || weapon.name === # "zombie_beast_lightning_dwl3") {
       bhtnactionstartevent(self, "electrocute");
       self notify(#"bhtn_action_notify", {
         #action: "electrocute"
@@ -2612,7 +2611,7 @@ zmbaivox_playelectrocution() {
 
 zmbaivox_ambientdelay() {
   self notify(#"sndambientdelay");
-  self endon(#"sndambientdelay", #"death", #"disconnect");
+  self endon(#"sndambientdelay", # "death", # "disconnect");
   wait 2;
   self.delayambientvox = 0;
 }
@@ -2647,7 +2646,7 @@ is_last_zombie() {
 
 zombie_behind_vox() {
   level endon(#"unloaded");
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   if(!isDefined(level._zbv_vox_last_update_time)) {
     level._zbv_vox_last_update_time = 0;
@@ -2681,13 +2680,13 @@ zombie_behind_vox() {
 
       if(isDefined(zombs[i].zombie_move_speed)) {
         switch (zombs[i].zombie_move_speed) {
-          case #"walk":
+          case # "walk":
             dist = 150;
             break;
-          case #"run":
+          case # "run":
             dist = 175;
             break;
-          case #"sprint":
+          case # "sprint":
             dist = 200;
             break;
         }
@@ -2728,15 +2727,15 @@ play_ambient_zombie_vocals() {
 
     if(isDefined(self.zombie_move_speed)) {
       switch (self.zombie_move_speed) {
-        case #"walk":
+        case # "walk":
           type = "ambient";
           float = 3;
           break;
-        case #"run":
+        case # "run":
           type = "sprint";
           float = 3;
           break;
-        case #"sprint":
+        case # "sprint":
           type = "sprint";
           float = 3;
           break;

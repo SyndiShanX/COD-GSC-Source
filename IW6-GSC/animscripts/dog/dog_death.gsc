@@ -49,11 +49,9 @@ main() {
 
   if(isDefined(self.custom_deathsound)) {
     self playSound(self.custom_deathsound);
-  }
-  else if(self isdogbeingdriven()) {
+  } else if(self isdogbeingdriven()) {
     self playSound("anml_dog_shot_death_plr");
-  }
-  else {
+  } else {
     self playSound("anml_dog_shot_death");
   }
 

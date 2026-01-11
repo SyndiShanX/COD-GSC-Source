@@ -57,14 +57,11 @@ main() {
 
     if(val == "throw1") {
       throwanim = % grenade_return_running_throw_forward;
-    }
-    else if(val == "throw2") {
+    } else if(val == "throw2") {
       throwanim = % grenade_return_standing_throw_forward_1;
-    }
-    else if(val == "throw3") {
+    } else if(val == "throw3") {
       throwanim = % grenade_return_standing_throw_forward_2;
-    }
-    else if(val == "throw4") {
+    } else if(val == "throw4") {
       throwanim = % grenade_return_standing_throw_overhand_forward;
     }
   }

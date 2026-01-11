@@ -38,8 +38,7 @@ is_roomtype_valid(var_0) {}
 apply_reverb(var_0) {
   if(!isDefined(level.audio.reverb_settings[var_0])) {
     var_1 = level.audio.reverb_settings["default"];
-  }
-  else {
+  } else {
     var_1 = level.audio.reverb_settings[var_0];
   }
 

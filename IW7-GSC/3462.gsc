@@ -144,8 +144,7 @@ getsingleairstrikedanger(var_00, var_01, var_02, var_03) {
   if(scripts\mp\utility\game::func_9F0F(var_03)) {
     if(distancesquared(var_00, var_01) < level.dangermaxradius[var_03]) {
       return 1;
-    }
-    else {
+    } else {
       return 0;
     }
   }
@@ -470,8 +469,7 @@ callstrike_bombeffect(var_00, var_01, var_02, var_03, var_04, var_05, var_06, va
 
   if(level.splitscreen) {
     playFXOnTag(level.airstrikessfx, var_11, "tag_origin");
-  }
-  else {
+  } else {
     playFXOnTag(level.airstrikefx, var_11, "tag_origin");
   }
 
@@ -557,8 +555,7 @@ func_3788(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_11 < 4) {
       var_11++;
-    }
-    else {
+    } else {
       var_11 = 0;
     }
 
@@ -645,8 +642,7 @@ callstrike_explosivebullets(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_11 < 4) {
       var_11++;
-    }
-    else {
+    } else {
       var_11 = 0;
     }
 
@@ -805,8 +801,7 @@ targetgetdist(var_00, var_01) {
 
   if(var_02) {
     var_03 = 1;
-  }
-  else {
+  } else {
     var_03 = -1;
   }
 
@@ -826,8 +821,7 @@ targetisclose(var_00, var_01, var_02) {
 
   if(var_03) {
     var_04 = 1;
-  }
-  else {
+  } else {
     var_04 = -1;
   }
 
@@ -838,8 +832,7 @@ targetisclose(var_00, var_01, var_02) {
 
   if(var_08 < var_02) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -851,8 +844,7 @@ targetisinfront(var_00, var_01) {
 
   if(var_04 > 0) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -898,8 +890,7 @@ selectairstrikelocation(var_00, var_01, var_02) {
 
     if(self.team == "allies") {
       var_13 = "UN_";
-    }
-    else {
+    } else {
       var_13 = "PD_";
     }
 

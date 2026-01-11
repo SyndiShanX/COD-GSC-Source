@@ -11,8 +11,7 @@ init() {
 
   if(level.splitscreen) {
     level.objpointsize = 15;
-  }
-  else {
+  } else {
     level.objpointsize = 8;
   }
 
@@ -37,11 +36,9 @@ createteamobjpoint(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_2 == "all") {
     var_6 = newhudelem();
-  }
-  else if(var_2 == "mlg") {
+  } else if(var_2 == "mlg") {
     var_6 = newteamhudelem("spectator");
-  }
-  else {
+  } else {
     var_6 = newteamhudelem(var_2);
   }
 
@@ -57,8 +54,7 @@ createteamobjpoint(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_4)) {
     var_6.alpha = var_4;
-  }
-  else {
+  } else {
     var_6.alpha = level.objpoint_alpha_default;
   }
 
@@ -122,8 +118,7 @@ setoriginbyname(var_0, var_1) {
 getobjpointbyname(var_0) {
   if(isDefined(level.objpoints[var_0])) {
     return level.objpoints[var_0];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -131,8 +126,7 @@ getobjpointbyname(var_0) {
 getobjpointbyindex(var_0) {
   if(isDefined(level.objpointnames[var_0])) {
     return level.objpoints[level.objpointnames[var_0]];
-  }
-  else {
+  } else {
     return undefined;
   }
 }

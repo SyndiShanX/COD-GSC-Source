@@ -75,8 +75,7 @@ onplayerspawned() {
 
       if(var_3 == "fe") {
         level.voice_count[self.team][var_3] = (level.voice_count[self.team][var_3] + 1) % var_2;
-      }
-      else {
+      } else {
         level.voice_count[self.team][var_3] = (level.voice_count[self.team][var_3] + 1) % var_1;
       }
 
@@ -228,8 +227,7 @@ dosound(var_0, var_1, var_2) {
 
   if(isagent(self) || isDefined(var_1) && var_1) {
     self playsoundtoteam(var_0, var_3);
-  }
-  else {
+  } else {
     self playsoundtoteam(var_0, var_3, self);
   }
 
@@ -256,8 +254,7 @@ dothreatcalloutresponse(var_0, var_1) {
 
     if(!isagent(self)) {
       var_4 = self hasfemalecustomizationmodel();
-    }
-    else {
+    } else {
       var_4 = 0;
     }
 
@@ -280,8 +277,7 @@ dothreatcalloutresponse(var_0, var_1) {
       }
       if(!isagent(var_8)) {
         var_9 = var_8 hasfemalecustomizationmodel();
-      }
-      else {
+      } else {
         var_9 = 0;
       }
 
@@ -291,8 +287,7 @@ dothreatcalloutresponse(var_0, var_1) {
 
         if(common_scripts\utility::cointoss() && soundexists(var_11)) {
           var_12 = var_11;
-        }
-        else {
+        } else {
           var_12 = var_10 + level.bcsounds["callout_response_generic"];
         }
 

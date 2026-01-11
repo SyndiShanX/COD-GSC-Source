@@ -381,7 +381,7 @@ dump_missing_anims() {
 
   foreach(var_7, var_3 in level.missing_animation_parameters) {
     foreach(var_5 in var_0) {
-    var_1[var_1.size] = var_5 + var_7;
+      var_1[var_1.size] = var_5 + var_7;
     }
   }
 
@@ -659,27 +659,27 @@ create_slowmo_breaches_from_entities() {
   }
 
   foreach(var_26 in var_3) {
-  var_0 = var_26 breach_spawner_setup(var_0, "enemy");
+    var_0 = var_26 breach_spawner_setup(var_0, "enemy");
   }
 
   foreach(var_26 in var_4) {
-  var_0 = var_26 breach_spawner_setup(var_0, "hostage");
+    var_0 = var_26 breach_spawner_setup(var_0, "hostage");
   }
 
   foreach(var_26 in var_5) {
-  var_0 = var_26 breach_spawner_setup(var_0, "friendlyenemy");
+    var_0 = var_26 breach_spawner_setup(var_0, "friendlyenemy");
   }
 
   foreach(var_26 in var_6) {
-  var_0 = var_26 breach_spawner_setup(var_0, "friendlyhostage");
+    var_0 = var_26 breach_spawner_setup(var_0, "friendlyhostage");
   }
 
   foreach(var_26 in var_7) {
-  var_0 = var_26 breach_spawner_setup(var_0, "coopenemy");
+    var_0 = var_26 breach_spawner_setup(var_0, "coopenemy");
   }
 
   foreach(var_26 in var_8) {
-  var_0 = var_26 breach_spawner_setup(var_0, "coophostage");
+    var_0 = var_26 breach_spawner_setup(var_0, "coophostage");
   }
 
   foreach(var_39 in var_13) {
@@ -721,7 +721,7 @@ create_slowmo_breaches_from_entities() {
   }
 
   foreach(var_18, var_55 in var_0) {
-  level thread slowmo_breach_think(var_55, var_18);
+    level thread slowmo_breach_think(var_55, var_18);
   }
 
   foreach(var_39 in var_15) {
@@ -793,7 +793,7 @@ get_breach_indices_from_ents(var_0) {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-  var_1[var_1.size] = var_3.script_slowmo_breach;
+    var_1[var_1.size] = var_3.script_slowmo_breach;
   }
 
   return var_1;
@@ -865,8 +865,7 @@ breach_spawner_setup(var_0, var_1) {
 
   if(var_0.size) {
     return var_0;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -919,11 +918,11 @@ slowmo_breach_think(var_0, var_1) {
   var_15 = [];
 
   foreach(var_18, var_17 in var_4) {
-  var_15[var_18] = var_18;
+    var_15[var_18] = var_18;
   }
 
   foreach(var_18, var_17 in var_5) {
-  var_15[var_18] = var_18;
+    var_15[var_18] = var_18;
   }
 
   if(var_15.size) {
@@ -931,15 +930,13 @@ slowmo_breach_think(var_0, var_1) {
 
     if(isDefined(var_4[var_20])) {
       var_4 = var_4[var_20];
-    }
-    else {
+    } else {
       var_4 = [];
     }
 
     if(isDefined(var_5[var_20])) {
       var_5 = var_5[var_20];
-    }
-    else {
+    } else {
       var_5 = [];
     }
   }
@@ -1024,7 +1021,7 @@ slowmo_breach_think(var_0, var_1) {
   var_2 wait_for_breach_or_deletion(var_0);
 
   foreach(var_28 in var_2.scene_models) {
-  var_28 delete();
+    var_28 delete();
   }
 
   if(isDefined(var_6)) {
@@ -1100,8 +1097,7 @@ breach_participants_ready_to_proceed(var_0, var_1, var_2) {
 
     if(coop_player_touching_valid_door_volume(var_2, var_3)) {
       return 1;
-    }
-    else {
+    } else {
       return 0;
     }
   }
@@ -1229,8 +1225,7 @@ friendly_can_teleport() {
 breach_friendly_hint() {
   if(maps\_utility::is_coop()) {
     thread breach_hint_create(&"SCRIPT_BREACH_NEED_PLAYER");
-  }
-  else {
+  } else {
     thread breach_hint_create(&"SCRIPT_BREACH_NEED_FRIENDLY");
   }
 }
@@ -1444,8 +1439,7 @@ friendlies_breach(var_0, var_1) {
 
   if(var_14) {
     var_18 = common_scripts\utility::getclosest(var_12.origin, var_1);
-  }
-  else {
+  } else {
     var_18 = get_teleport_optimized_breachfriendly(var_12.origin, var_3, var_1, var_13);
   }
 
@@ -1466,15 +1460,13 @@ friendlies_breach(var_0, var_1) {
   if(var_1.size) {
     if(var_14) {
       var_19 = common_scripts\utility::getclosest(var_12.origin, var_1);
-    }
-    else {
+    } else {
       var_19 = get_teleport_optimized_breachfriendly(var_12.origin, var_3, var_1, var_13);
     }
 
     if(isDefined(var_19)) {
       var_19 thread friendly_breach(2, var_12, var_4);
-    }
-    else {}
+    } else {}
   }
 
   wait 1;
@@ -1858,8 +1850,7 @@ friendly_breach(var_0, var_1, var_2) {
 friendlies_shoot_while_breaching(var_0) {
   if(var_0 == 1) {
     wait 1;
-  }
-  else {
+  } else {
     wait 2;
   }
 
@@ -1940,8 +1931,7 @@ breach_group_trigger_think() {
 slowmo_player_cleanup() {
   if(isDefined(level.playerspeed)) {
     self setmovespeedscale(level.playerspeed);
-  }
-  else {
+  } else {
     self setmovespeedscale(1);
   }
 }
@@ -2323,8 +2313,7 @@ breach_hostage_spawner_think() {
   }
   if(anim_exists(self.animation + "_idle")) {
     thread maps\_anim::anim_generic_loop(self, self.animation + "_idle", "stop_idle");
-  }
-  else {
+  } else {
     var_2 = "hostage_knees_loop";
     thread maps\_anim::anim_generic_loop(self, var_2, "stop_idle");
   }
@@ -2378,8 +2367,7 @@ hostage_mission_fail() {
 
         if(level.last_player_damage == gettime()) {
           maps\_player_death::set_deadquote(&"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE");
-        }
-        else {
+        } else {
           maps\_player_death::set_deadquote(&"SCRIPT_MISSIONFAIL_KILLEDHOSTAGE", "@SCRIPT_MISSIONFAIL_KILLEDHOSTAGE");
         }
 
@@ -2390,8 +2378,7 @@ hostage_mission_fail() {
       } else {
         if(coop_breached_from_same_door_in_a_muliti_door_room(var_2)) {
           maps\_player_death::set_deadquote(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED_USEMULTIDOOR");
-        }
-        else {
+        } else {
           maps\_player_death::set_deadquote(&"SCRIPT_MISSIONFAIL_HOSTAGEEXECUTED");
         }
 
@@ -2417,8 +2404,7 @@ coop_breached_from_same_door_in_a_muliti_door_room(var_0) {
 
   if(isDefined(var_0.has_passive_breacher)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -2478,7 +2464,7 @@ add_breach_func(var_0) {
 
 breach_functions(var_0) {
   foreach(var_2 in level._slowmo_breach_funcs) {
-  thread[[var_2]](var_0);
+    thread[[var_2]](var_0);
   }
 }
 
@@ -2709,8 +2695,7 @@ _slomo_breach_chair_guy_normal() {
 
   if(common_scripts\utility::cointoss()) {
     maps\_utility::set_generic_deathanim(self.animation + "_death");
-  }
-  else {
+  } else {
     maps\_utility::set_generic_deathanim(self.animation + "_death2");
   }
 }
@@ -2782,7 +2767,7 @@ delete_breach(var_0) {
   common_scripts\utility::array_thread(var_1, maps\_utility::self_delete);
 
   foreach(var_3 in level.breach_groups[var_0].lookat_triggers) {
-  var_3 delete();
+    var_3 delete();
   }
 }
 
@@ -2911,8 +2896,7 @@ get_manhandled() {
 
   if(anim_exists(var_3)) {
     self.reference thread maps\_anim::anim_generic_loop(self, var_3, "stop_idle");
-  }
-  else {
+  } else {
     var_3 = undefined;
   }
 
@@ -3001,8 +2985,7 @@ price_breach_ent_rotatesto_player() {
 
     if(var_7 < 0) {
       var_0 addyaw(var_9);
-    }
-    else {
+    } else {
       var_0 addyaw(var_9 * -1);
     }
 
@@ -3071,8 +3054,7 @@ assert_if_anim_not_defined(var_0) {}
 anim_exists(var_0) {
   if(isDefined(level.scr_anim["generic"][var_0])) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

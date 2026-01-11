@@ -96,13 +96,13 @@ init_morse_code() {
 
 turn_all_lights_off(a_discs) {
   foreach(disc in a_discs) {
-  disc maps\mp\zm_tomb_quest_crypt::bryce_cake_light_update(0);
+    disc maps\mp\zm_tomb_quest_crypt::bryce_cake_light_update(0);
   }
 }
 
 turn_all_lights_on(a_discs) {
   foreach(disc in a_discs) {
-  disc maps\mp\zm_tomb_quest_crypt::bryce_cake_light_update(1);
+    disc maps\mp\zm_tomb_quest_crypt::bryce_cake_light_update(1);
   }
 }
 
@@ -150,8 +150,7 @@ light_show_morse(a_discs, message) {
 
         if(letter_code[j] == ".") {
           wait 0.2;
-        }
-        else if(letter_code[j] == "-") {
+        } else if(letter_code[j] == "-") {
           wait 1.0;
         }
 

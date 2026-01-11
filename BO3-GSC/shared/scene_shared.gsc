@@ -148,9 +148,7 @@ class csceneobject: cscriptbundleobjectbase {
         return false;
       }
       if(!isspawner(_e)) {
-        b_allows_multiple = [
-          [scene()]
-        ] - > allows_multiple();
+        b_allows_multiple = [[scene()]] - > allows_multiple();
         e = scene::get_existing_ent(_str_name, b_allows_multiple);
         if(isDefined(e)) {
           return false;
@@ -363,11 +361,7 @@ class csceneobject: cscriptbundleobjectbase {
         current_playing_anim = [];
       }
       current_playing_anim[player_num] = str_animation;
-      if(isDefined([
-          [_o_bundle]
-        ] - > is_skipping_scene()) && [
-          [_o_bundle]
-        ] - > is_skipping_scene()) {
+      if(isDefined([[_o_bundle]] - > is_skipping_scene()) && [[_o_bundle]] - > is_skipping_scene()) {
         thread skip_scene(1);
       }
       player animation::play(str_animation, player_align, player_tag, player_rate, 0, 0, n_lerp, n_time_frac, _s.showweaponinfirstperson);
@@ -493,9 +487,7 @@ class csceneobject: cscriptbundleobjectbase {
       flagsys::set("ready");
     } else {
       if(n_rate > 0) {
-        [
-          [scene()]
-        ] - > wait_till_scene_ready();
+        [[scene()]] - > wait_till_scene_ready();
       } else if(isDefined(_s.aligntarget)) {
         foreach(o_obj in _o_bundle._a_objects) {
           if(o_obj._str_name == _s.aligntarget) {
@@ -692,9 +684,7 @@ class csceneobject: cscriptbundleobjectbase {
     if(![
         [_o_bundle]
       ] - > has_next_scene()) {
-      if([
-          [_o_bundle]
-        ] - > is_player_anim_ending_early()) {
+      if([[_o_bundle]] - > is_player_anim_ending_early()) {
         if(!([
             [_o_bundle]
           ] - > is_skipping_scene()) && [
@@ -1015,9 +1005,7 @@ class csceneobject: cscriptbundleobjectbase {
       if(!isDefined(_e) && is_player() && (isDefined(_s.newplayermethod) && _s.newplayermethod)) {
         _e = _player;
       } else if(!isDefined(_e) || isspawner(_e)) {
-        b_allows_multiple = [
-          [scene()]
-        ] - > allows_multiple();
+        b_allows_multiple = [[scene()]] - > allows_multiple();
         if(cscriptbundleobjectbase::error(b_allows_multiple && (isDefined(_s.nospawn) && _s.nospawn), "Scene that allow multiple instances must be allowed to spawn (uncheck 'Do Not Spawn').")) {
           return;
         }
@@ -1086,9 +1074,7 @@ class csceneobject: cscriptbundleobjectbase {
     if(is_player()) {
       _str_name = "player " + _s.player;
     } else {
-      if([
-          [scene()]
-        ] - > allows_multiple()) {
+      if([[scene()]] - > allows_multiple()) {
         if(isDefined(_s.name)) {
           _str_name = (_s.name + "_gen") + level.scene_object_id;
         } else {
@@ -1463,17 +1449,13 @@ class cscene: cscriptbundlebase {
     wait(0.05);
     foreach(o_scene_object in _a_objects) {
       if(o_scene_object._is_valid) {
-        [
-          [o_scene_object]
-        ] - > skip_scene_on_client();
+        [[o_scene_object]] - > skip_scene_on_client();
       }
     }
     wait(0.05);
     foreach(o_scene_object in _a_objects) {
       if(o_scene_object._is_valid) {
-        [
-          [o_scene_object]
-        ] - > skip_scene_on_server();
+        [[o_scene_object]] - > skip_scene_on_server();
       }
     }
     self notify("skip_camera_anims");
@@ -1799,9 +1781,7 @@ class cscene: cscriptbundlebase {
   function has_init_state() {
     b_has_init_state = 0;
     foreach(o_scene_object in _a_objects) {
-      if([
-          [o_scene_object]
-        ] - > has_init_state()) {
+      if([[o_scene_object]] - > has_init_state()) {
         b_has_init_state = 1;
         break;
       }
@@ -2580,13 +2560,11 @@ class cscene: cscriptbundlebase {
       _e_root.scenes[_e_root.scenes.size] = self;
       a_objs = get_valid_object_defs();
       foreach(s_obj in a_objs) {
-        cscriptbundlebase::add_object([
-          [
+        cscriptbundlebase::add_object([[
             [
               [self]
             ] - > new_object()
-          ]
-        ] - > first_init(s_obj, self));
+          ]] - > first_init(s_obj, self));
       }
       _n_request_time = gettime();
       if(!(isDefined(_s.dontsync) && _s.dontsync)) {
@@ -3456,9 +3434,7 @@ function get_active_scenes(str_scenedef) {
 function get_active_scene(str_scenedef) {
   if(isDefined(str_scenedef) && isDefined(self.scenes)) {
     foreach(o_scene in self.scenes) {
-      if(([
-          [o_scene]
-        ] - > get_name()) == str_scenedef) {
+      if(([[o_scene]] - > get_name()) == str_scenedef) {
         return o_scene;
       }
     }

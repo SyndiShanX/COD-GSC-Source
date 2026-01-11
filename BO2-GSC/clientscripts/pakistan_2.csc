@@ -650,21 +650,21 @@ cleanup_underwater_dynents() {
   a_e_dynents = getdynentarray("underwater_phys_ent");
 
   foreach(e_dynent in a_e_dynents) {
-  setdynentenabled(e_dynent, 0);
+    setdynentenabled(e_dynent, 0);
   }
 
   level waittill("clean_gren_phy");
   a_e_dynents = getdynentarray("grenade_phys_ent");
 
   foreach(e_dynent in a_e_dynents) {
-  setdynentenabled(e_dynent, 0);
+    setdynentenabled(e_dynent, 0);
   }
 
   level waittill("clean_fire_phy");
   a_e_dynents = getdynentarray("firewater_phys_ent");
 
   foreach(e_dynent in a_e_dynents) {
-  setdynentenabled(e_dynent, 0);
+    setdynentenabled(e_dynent, 0);
   }
 }
 
@@ -739,8 +739,7 @@ surveillance_box_position_think() {
 toggle_water_fx_actor(localclientnum, set, newent) {
   if(set) {
     self.fx_handle = playFXOnTag(localclientnum, level._effect["water_wake"], self, "tag_origin");
-  }
-  else {
+  } else {
     deletefx(localclientnum, self.fx_handle);
   }
 }

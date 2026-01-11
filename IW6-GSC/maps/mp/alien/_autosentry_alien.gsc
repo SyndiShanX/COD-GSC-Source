@@ -449,8 +449,7 @@ giveSentry(sentryType) {
 
   if(isDefined(sentryGun)) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -1014,8 +1013,7 @@ turret_handleUse() {
 
       if(self.heatLevel >= level.sentrySettings[self.sentryType].overheatTime) {
         barFrac = 1;
-      }
-      else {
+      } else {
         barFrac = self.heatLevel / level.sentrySettings[self.sentryType].overheatTime;
       }
 
@@ -1105,8 +1103,7 @@ sentry_setPlaced() {
       if(IsAlive(self.originalOwner)) {
         if(level.Console || self.originalOwner usinggamepad()) {
           self.originalOwner setLowerMessage("pickup_hint", level.sentrySettings[self.sentryType].ownerHintString, 3.0, undefined, undefined, undefined, undefined, undefined, true);
-        }
-        else {
+        } else {
           self.originalOwner setLowerMessage("pickup_hint", &"ALIENS_PATCH_PRESS_TO_CARRY", 3.0, undefined, undefined, undefined, undefined, undefined, true);
         }
       }
@@ -1116,8 +1113,7 @@ sentry_setPlaced() {
 
       if(level.Console || self.originalOwner usinggamepad()) {
         self.originalOwner thread turret_handlePickup(self);
-      }
-      else {
+      } else {
         self.originalOwner thread turret_handlePickup_PC(self);
       }
       self thread turret_handleUse();
@@ -1161,8 +1157,7 @@ sentry_setCarried(carrier) {
   assert(isPlayer(carrier));
   if(isDefined(self.originalOwner)) {
     assertEx(carrier == self.originalOwner, "sentry_setCarried() specified carrier does not own this sentry");
-  }
-  else {
+  } else {
     assertEx(carrier == self.owner, "sentry_setCarried() specified carrier does not own this sentry");
   }
 
@@ -1235,8 +1230,7 @@ sentry_onCarrierDeath(carrier) {
 
   if(self.canBePlaced) {
     self sentry_setPlaced();
-  }
-  else {
+  } else {
     self delete();
   }
 }
@@ -1299,8 +1293,7 @@ sentry_setActive() {
 
         if(player == self.owner) {
           self enablePlayerUse(player);
-        }
-        else {
+        } else {
           self disablePlayerUse(player);
         }
         break;
@@ -1330,8 +1323,7 @@ sentry_setInactive() {
 
   if(level.teamBased) {
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
   }
 }
@@ -1490,8 +1482,7 @@ sentry_heatMonitor() {
   for(;;) {
     if(self.heatLevel != lastHeatLevel) {
       wait(fireTime);
-    }
-    else {
+    } else {
       self.heatLevel = max(0, self.heatLevel - 0.05);
     }
 

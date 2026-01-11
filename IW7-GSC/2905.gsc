@@ -108,8 +108,7 @@ func_C97C(var_00) {
 
     if(isDefined(var_7.radius) && var_7.radius > 0) {
       self.goalradius = var_7.radius;
-    }
-    else {
+    } else {
       self.goalradius = 32;
     }
 
@@ -208,8 +207,7 @@ func_C97C(var_00) {
           if(var_13 == "pause") {
             if(isDefined(self.func_C99D) && isDefined(self.func_C99D[var_13])) {
               var_18 = self.func_C99D[var_13][randomint(self.func_C99D[var_13].size)];
-            }
-            else {
+            } else {
               var_18 = var_18 + randomintrange(1, 6);
             }
           }
@@ -258,11 +256,9 @@ func_C981(var_00, var_01, var_02) {
 
   if(isDefined(self.func_C9A7) && isDefined(self.func_C9A7[var_00])) {
     var_03 scripts\sp\anim::func_1EC8(self, "gravity", self.func_C9A7[var_00], undefined, var_01, var_04);
-  }
-  else if(isDefined(self.script_animation) && isDefined(level.func_EC85["generic"]["patrol_stop_" + self.script_animation])) {
+  } else if(isDefined(self.script_animation) && isDefined(level.func_EC85["generic"]["patrol_stop_" + self.script_animation])) {
     scripts\sp\anim::func_1EC8(self, "gravity", "patrol_stop_" + self.script_animation, undefined, var_01);
-  }
-  else {
+  } else {
     var_03 scripts\sp\anim::func_1EC8(self, "gravity", "patrol_stop", undefined, var_01, var_04);
   }
 }
@@ -270,11 +266,9 @@ func_C981(var_00, var_01, var_02) {
 func_C980(var_00, var_01) {
   if(isDefined(self.func_C9A3) && isDefined(self.func_C9A3[var_00])) {
     scripts\sp\anim::func_1EC8(self, "gravity", self.func_C9A3[var_00], undefined, var_01);
-  }
-  else if(isDefined(self.script_animation) && isDefined(level.func_EC85["generic"]["patrol_start_" + self.script_animation])) {
+  } else if(isDefined(self.script_animation) && isDefined(level.func_EC85["generic"]["patrol_start_" + self.script_animation])) {
     scripts\sp\anim::func_1EC8(self, "gravity", "patrol_start_" + self.script_animation, undefined, var_01);
-  }
-  else {
+  } else {
     scripts\sp\anim::func_1EC8(self, "gravity", "patrol_start", undefined, var_01);
   }
 }

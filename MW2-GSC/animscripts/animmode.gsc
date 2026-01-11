@@ -39,8 +39,7 @@ main() {
   newOrigin = self getDropToFloorPosition(origin);
   if(isDefined(newOrigin)) {
     origin = newOrigin;
-  }
-  else {
+  } else {
     println("Custom animation may be playing in solid for entity '" + self getentnum() + "'\n");
   }
 
@@ -82,8 +81,7 @@ main() {
   if(!loop) {
     if(animHasNoteTrack(animationName, "finish")) {
       endMarker = "finish";
-    }
-    else if(animHasNoteTrack(animationName, "stop anim")) {
+    } else if(animHasNoteTrack(animationName, "stop anim")) {
       endMarker = "stop anim";
     }
   }

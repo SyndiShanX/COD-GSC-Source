@@ -63,8 +63,7 @@ conf_get_tag_in_sight() {
 
     if(!isDefined(tag.unreachable) && !findpath(self.origin, tag.curorigin, tag, 0, 1)) {
       tag.unreachable = 1;
-    }
-    else {
+    } else {
       tag.unreachable = 0;
     }
 

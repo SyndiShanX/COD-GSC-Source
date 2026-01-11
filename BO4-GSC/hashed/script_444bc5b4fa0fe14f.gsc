@@ -8,7 +8,6 @@
 #include scripts\zm_common\zm_round_spawning;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace namespace_c56530a8;
 
 autoexec __init__system__() {
@@ -49,7 +48,7 @@ private on_begin(var_49d0b42a, var_d2d5c522, var_17d04dfe, var_6a68f1d6) {
   level.var_fb0b57a7 = 0;
   zm_trial_util::function_2976fa44(level.var_88bac0b7);
   zm_trial_util::function_dace284(level.var_fb0b57a7);
-  level.var_1c7412f9 = #"catalyst";
+  level.var_1c7412f9 = # "catalyst";
   zm_round_spawning::function_c1571721(&zm_trial_add_special::function_51ec9e09);
   zm_round_spawning::function_54fee373(&zm_trial_add_special::function_1b1d71e7);
   zm_round_spawning::function_2876740e(level.var_1c7412f9, &zm_trial_add_special::function_a7c00976);

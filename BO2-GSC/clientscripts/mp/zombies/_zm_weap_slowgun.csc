@@ -75,8 +75,7 @@ sndparalyzerloop(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 slowgun_player_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self thread play_sizzle_player(localclientnum);
-  }
-  else {
+  } else {
     self notify("end_sizzle");
   }
 }

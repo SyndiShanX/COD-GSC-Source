@@ -187,8 +187,7 @@ socotra_orangeobjectivewatch() {
 
   if(flag("rts_mode")) {
     level.orange_outro_obj show();
-  }
-  else {
+  } else {
     level.orange_outro_obj hide();
   }
 
@@ -206,13 +205,13 @@ socotra_floorwatch() {
 
   while(true) {
     foreach(floor in level.rts_floors) {
-    floor hide();
+      floor hide();
     }
 
     level waittill("rts_ON");
 
     foreach(floor in level.rts_floors) {
-    floor show();
+      floor show();
     }
 
     level waittill("rts_OFF");
@@ -532,7 +531,7 @@ intro_delete_canisters(canisters) {
   scene_wait("intro_canisters");
 
   foreach(c in canisters) {
-  c delete();
+    c delete();
   }
 }
 
@@ -592,7 +591,7 @@ enemyspawninit() {
   level.rts.enemyspawnlocs = getEntArray("enemy_spawn_loc", "targetname");
 
   foreach(loc in level.rts.enemyspawnlocs) {
-  loc.timestamp = 0;
+    loc.timestamp = 0;
   }
 
   maps\_so_rts_catalog::setpkgqty("infantry_enemy_elite_pkg", "axis", -1);
@@ -697,8 +696,7 @@ force_fire_turret_on_target_when_possible_with_vo(squad) {
     while(!maps\_turret::is_target_in_turret_view(v_target, 1)) {
       if(isDefined(squad.target)) {
         v_target = squad.target.origin;
-      }
-      else {
+      } else {
         v_target = squad.centerpoint;
       }
 
@@ -719,8 +717,7 @@ circletarget(squad) {
 
   if(isDefined(squad.target)) {
     vec_from_target = self.origin - squad.target.origin;
-  }
-  else {
+  } else {
     vec_from_target = self.origin - squad.centerpoint;
   }
 
@@ -768,8 +765,7 @@ turretontargetfortime(squad, time) {
 
   if(isDefined(squad.target)) {
     center_pt = squad.target.origin;
-  }
-  else {
+  } else {
     center_pt = squad.centerpoint;
   }
 
@@ -916,7 +912,7 @@ largestcomparefunc(e1, e2, val) {
 
 infantry_init(squadid) {
   foreach(guy in level.rts.squads[squadid].members) {
-  guy.goalradius = 256;
+    guy.goalradius = 256;
   }
 }
 
@@ -1248,8 +1244,7 @@ socotra_karma_damagewatch() {
 
     if(level.rts.karma.health_slice > amount) {
       level.rts.karma.health_slice = level.rts.karma.health_slice - amount;
-    }
-    else {
+    } else {
       rebatehp = int(amount - level.rts.karma.health_slice);
       amount = level.rts.karma.health_slice;
       level.rts.karma.health_slice = 0;
@@ -1263,8 +1258,7 @@ socotra_karma_damagewatch() {
 
     if(health < 0) {
       health = 0;
-    }
-    else {
+    } else {
       health = int(health / level.rts.karma.health_max * 255);
     }
 
@@ -1547,7 +1541,7 @@ socotra_karma_spawn() {
   }
 
   foreach(unit in level.rts.enemy_units) {
-  unitdefend(unit, enemydefensespots[randomint(enemydefensespots.size)].origin);
+    unitdefend(unit, enemydefensespots[randomint(enemydefensespots.size)].origin);
   }
 
   level.rts.vtol.rts_unloaded = 0;
@@ -1597,7 +1591,7 @@ socotra_karma_spawn() {
     luinotifyevent(&"rts_add_squad", 3, regsquad.id, regsquad.pkg_ref.idx, 0);
 
     foreach(guy in regsquad.members) {
-    luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), regsquad.id, 35, 0, regsquad.pkg_ref.idx);
+      luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), regsquad.id, 35, 0, regsquad.pkg_ref.idx);
     }
 
     luinotifyevent(&"rts_add_squad", 3, karmasquad.id, karmasquad.pkg_ref.idx, 0);
@@ -1605,7 +1599,7 @@ socotra_karma_spawn() {
     luinotifyevent(&"rts_add_squad", 3, heavysquad.id, heavysquad.pkg_ref.idx, 0);
 
     foreach(guy in heavysquad.members) {
-    luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), heavysquad.id, 35, 0, heavysquad.pkg_ref.idx);
+      luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), heavysquad.id, 35, 0, heavysquad.pkg_ref.idx);
     }
 
     scene_wait("karma_rescue_player");
@@ -1632,7 +1626,7 @@ socotra_karma_spawn() {
     luinotifyevent(&"rts_add_squad", 3, regsquad.id, regsquad.pkg_ref.idx, 0);
 
     foreach(guy in regsquad.members) {
-    luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), regsquad.id, 35, 0, regsquad.pkg_ref.idx);
+      luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), regsquad.id, 35, 0, regsquad.pkg_ref.idx);
     }
 
     luinotifyevent(&"rts_add_squad", 3, karmasquad.id, karmasquad.pkg_ref.idx, 0);
@@ -1640,7 +1634,7 @@ socotra_karma_spawn() {
     luinotifyevent(&"rts_add_squad", 3, heavysquad.id, heavysquad.pkg_ref.idx, 0);
 
     foreach(guy in heavysquad.members) {
-    luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), heavysquad.id, 35, 0, heavysquad.pkg_ref.idx);
+      luinotifyevent(&"rts_add_friendly_human", 5, guy getentitynumber(), heavysquad.id, 35, 0, heavysquad.pkg_ref.idx);
     }
   }
 
@@ -1671,13 +1665,12 @@ socotra_karma_spawn() {
   maps\_so_rts_squad::squad_unloaded(squadid);
 
   foreach(dude in level.rts.squads[squadid].members) {
-  dude.goalradius = 128;
+    dude.goalradius = 128;
   }
 
   if(isDefined(level.rts.player.ally)) {
     maps\_so_rts_squad::ordersquadfollowai(squadid, level.rts.player);
-  }
-  else {
+  } else {
     maps\_so_rts_squad::ordersquadfollowai(squadid, level.rts.karma);
   }
 
@@ -1744,8 +1737,7 @@ karma_helpme(origin, radius) {
 
   if(who == level.rts.player) {
     squadid = level.rts.player.ally.squadid;
-  }
-  else {
+  } else {
     squadid = who.squadid;
   }
 
@@ -1793,8 +1785,7 @@ vehicle_set_team(team) {
 
   if(issubstr(self.vehicletype, "quadrotor")) {
     self thread maps\_quadrotor::quadrotor_set_team(team);
-  }
-  else {
+  } else {
     self.vteam = team;
   }
 }
@@ -2126,8 +2117,7 @@ populate_dead_bodies() {
   }
 }
 
-socotra_level_scenario_one_registerevents() {
-}
+socotra_level_scenario_one_registerevents() {}
 
 socotra_pick_safehouses() {
   level.rts.max_poi_infantry = 3;
@@ -2185,7 +2175,7 @@ socotra_pick_safehouses() {
   set_objective(level.obj_search, undefined, "*", level.rts.safehouses_cleared);
 
   foreach(house in level.rts.safehouses) {
-  house thread safehouse_capturewatch();
+    house thread safehouse_capturewatch();
   }
 }
 
@@ -2229,7 +2219,7 @@ safehouse_capturewatch() {
     maps\_so_rts_squad::ordersquaddefend(level.rts.karma.origin, who.squadid);
 
     foreach(guy in level.rts.squads[who.squadid].members) {
-    guy.goalradius = 128;
+      guy.goalradius = 128;
     }
   }
 
@@ -2238,7 +2228,7 @@ safehouse_capturewatch() {
 
 socotra_poi_inf_spawn(squadid) {
   foreach(guy in level.rts.squads[squadid].members) {
-  guy.goalradius = 256;
+    guy.goalradius = 256;
   }
 }
 
@@ -2266,8 +2256,7 @@ socotra_outro_success(alignnode) {
 
   if(flag("fps_mode")) {
     level.rts.player maps\_so_rts_ai::restorereplacement();
-  }
-  else {
+  } else {
     level.rts.player clearclientflag(3);
   }
 
@@ -2433,11 +2422,9 @@ socotravoxalloc(entity) {
 
   if(pkg_ref == "infantry_ally_reg_pkg") {
     unit = "alpha";
-  }
-  else if(pkg_ref == "infantry_ally_reg2_pkg") {
+  } else if(pkg_ref == "infantry_ally_reg2_pkg") {
     unit = "kilo";
-  }
-  else {
+  } else {
     return;
   }
 
@@ -2489,8 +2476,7 @@ socotra_nextavailunit(nextsquad, playerdied) {
   } else {
     if(!isDefined(nextsquad)) {
       nextsquad = maps\_so_rts_squad::getnextvalidsquad();
-    }
-    else {
+    } else {
       maps\_so_rts_squad::removedeadfromsquad(nextsquad);
 
       if(!(isDefined(level.rts.squads[nextsquad].selectable) && level.rts.squads[nextsquad].selectable)) {
@@ -2500,8 +2486,7 @@ socotra_nextavailunit(nextsquad, playerdied) {
 
     if(nextsquad != -1) {
       level thread squadselectnextaiandtakeover(nextsquad, playerdied);
-    }
-    else {
+    } else {
       maps\_so_rts_event::trigger_event("died_all_pkgs");
       level.rts.lastfpspoint = level.rts.player.origin;
       level thread player_eyeinthesky();
@@ -2515,8 +2500,7 @@ watch_quad_death() {
 
   if(isplayer(attacker)) {
     level notify("player_killed_quad", level.player maps\_so_rts_support::get_player_rts_mode(), dmg_type);
-  }
-  else if(self.team == "axis") {
+  } else if(self.team == "axis") {
     level notify("ally_killed_quad", self, attacker);
   }
 }

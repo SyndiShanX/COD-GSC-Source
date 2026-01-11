@@ -162,8 +162,7 @@ func_E3D9(var_00, var_01, var_02, var_03, var_04) {
 
   if(isDefined(var_04)) {
     var_00 linkto(var_1.func_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 180, 0));
-  }
-  else {
+  } else {
     var_00 linkto(var_1.func_3FFD, "j_cranebase", (0, 0, -39.3664), (0, 0, 0));
   }
 }
@@ -227,8 +226,7 @@ func_E3D1(var_00, var_01, var_02, var_03, var_04) {
 
       if(var_00 == "a") {
         level.func_E35D.func_A2E8[var_00] thread func_E3CC(var_03);
-      }
-      else {
+      } else {
         level.func_E35D.func_A2E8[var_00] thread func_E3CC(var_03, 1);
       }
 
@@ -297,8 +295,7 @@ func_E3D2(var_00, var_01) {
 func_E3CE(var_00, var_01, var_02, var_03) {
   if(isDefined(var_03)) {
     level.func_E35D.func_A2E8[var_00].func_3FFD give_attacker_kill_rewards(level.func_EC85["crane"][var_03], 10, 0, 1 / var_01);
-  }
-  else if(var_00 == "a") {
+  } else if(var_00 == "a") {
     var_01 = getanimlength( % shipcrib_crane_clamp_extended_rotate_cc) / 0.45;
     level.func_E35D.func_A2E8[var_00].func_3FFD playSound("scn_ship_titan_jackal_lower_plr_start_lr");
     level.func_E35D.func_A2E8[var_00].func_3FFD playLoopSound("scn_ship_titan_jackal_lower_plr_lp_lr");
@@ -312,8 +309,7 @@ func_E3CE(var_00, var_01, var_02, var_03) {
 func_E3CD(var_00, var_01, var_02, var_03) {
   if(!isDefined(level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3)) {
     level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3 = 1;
-  }
-  else {
+  } else {
     level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3 = level.func_E35D.func_A2E8[var_00].func_3FFB.func_8BA3 + 1;
   }
 
@@ -339,8 +335,7 @@ func_E3CD(var_00, var_01, var_02, var_03) {
 
   if(!isDefined(var_02)) {
     var_06 = 1;
-  }
-  else {
+  } else {
     var_06 = -1;
   }
 

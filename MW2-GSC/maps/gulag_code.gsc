@@ -489,8 +489,7 @@ debug_heli_times() {
     foreach(index, array in time_array) {
       if(isDefined(array["flag"])) {
         PrintLn(array["name"] + " " + array["total_time"] + " " + array["flag"]);
-      }
-      else {
+      } else {
         PrintLn(array["name"] + " " + array["total_time"]);
       }
     }
@@ -744,11 +743,10 @@ modify_speed_to_match_player_heli(fly_in_progress_dist) {
 
     if(dif < min_units) {
       dif = min_units;
+    } else {
+      if(dif > max_units)
     }
-    else {
-    if(dif > max_units)
-    }
-      dif = max_units;
+    dif = max_units;
 
     dif += min_units * -1;
 
@@ -1021,8 +1019,7 @@ toggle_f15_viewing(dvar_val) {
     if(dvar != old_dvar) {
       if(dvar == dvar_val || dvar == 2) {
         self Show();
-      }
-      else {
+      } else {
         self Hide();
       }
     }
@@ -1916,7 +1913,7 @@ ghost_tries_to_open_door() {
   /*
   ents = getEntArray( "cell_door_weapons", "targetname" );
   loc = ents[0].origin;
-	
+  	
   thread play_sound_in_space( "scn_gulag_jail_door_buzzer", loc );
   wait( 1.2 );
   thread play_sound_in_space( "scn_gulag_jail_door_unlock", loc );
@@ -1928,7 +1925,7 @@ ghost_tries_to_open_door() {
   thread play_sound_in_space( "scn_gulag_armory_door_open", loc );
   wait( 0.5 );
   thread play_sound_in_space( "scn_gulag_armory_door_open", loc );
-	
+  	
   wait( 1 );
 
   thread play_sound_in_space( "scn_gulag_armory_door_open", loc );
@@ -3524,8 +3521,7 @@ updateLaserStatus_forced() {
 
   if(animscripts\shared::canUseLaser()) {
     self LaserForceOn();
-  }
-  else {
+  } else {
     self LaserForceOff();
   }
 }
@@ -3766,40 +3762,40 @@ gulag_center_shifts_as_we_move_in() {
   waits[waits.size] = array;
 
   /*
-	//9 heli spins out of control
-	array = [];
-	array[ "flag" ] = "player_heli_backs_up";
-	array[ "time" ] = 1.8;
-	array[ "in" ] = array[ "time" ] * 0.25;
-	array[ "out" ] = array[ "time" ] * 0.25;
-	array[ "delay" ] = array[ "time" ];
-	waits[ waits.size ] = array;
+  	//9 heli spins out of control
+  	array = [];
+  	array[ "flag" ] = "player_heli_backs_up";
+  	array[ "time" ] = 1.8;
+  	array[ "in" ] = array[ "time" ] * 0.25;
+  	array[ "out" ] = array[ "time" ] * 0.25;
+  	array[ "delay" ] = array[ "time" ];
+  	waits[ waits.size ] = array;
 
-	//10 heli spins out of control
-	array = [];
-	array[ "time" ] = 1.8;
-	array[ "in" ] = array[ "time" ] * 0.25;
-	array[ "out" ] = array[ "time" ] * 0.25;
-	array[ "delay" ] = array[ "time" ];
-	waits[ waits.size ] = array;
-	
-	//11 back to above center
-	array = [];
-//	array[ "pre_delay" ] = 5;
-	array[ "time" ] = 4;
-	array[ "in" ] = array[ "time" ] * 0.25;
-	array[ "out" ] = array[ "time" ] * 0.25;
-	array[ "delay" ] = array[ "time" ] + 2;
-	waits[ waits.size ] = array;
-	
-	//12 to center
-	array = [];
-	array[ "time" ] = 4;
-	array[ "in" ] = array[ "time" ] * 0.25;
-	array[ "out" ] = array[ "time" ] * 0.25;
-	array[ "delay" ] = array[ "time" ];
-	waits[ waits.size ] = array;
-	*/
+  	//10 heli spins out of control
+  	array = [];
+  	array[ "time" ] = 1.8;
+  	array[ "in" ] = array[ "time" ] * 0.25;
+  	array[ "out" ] = array[ "time" ] * 0.25;
+  	array[ "delay" ] = array[ "time" ];
+  	waits[ waits.size ] = array;
+  	
+  	//11 back to above center
+  	array = [];
+  //	array[ "pre_delay" ] = 5;
+  	array[ "time" ] = 4;
+  	array[ "in" ] = array[ "time" ] * 0.25;
+  	array[ "out" ] = array[ "time" ] * 0.25;
+  	array[ "delay" ] = array[ "time" ] + 2;
+  	waits[ waits.size ] = array;
+  	
+  	//12 to center
+  	array = [];
+  	array[ "time" ] = 4;
+  	array[ "in" ] = array[ "time" ] * 0.25;
+  	array[ "out" ] = array[ "time" ] * 0.25;
+  	array[ "delay" ] = array[ "time" ];
+  	waits[ waits.size ] = array;
+  	*/
 
   flag_wait("slamraam_gets_players_attention");
 
@@ -3844,9 +3840,9 @@ gulag_center_shifts_as_we_move_in() {
 
     center thread ent_debug_print(index);
 
-      if(isDefined(array["delay"])) {
-        wait(array["delay"]);
-      }
+    if(isDefined(array["delay"])) {
+      wait(array["delay"]);
+    }
 
     ent = next_ent;
     index++;
@@ -4451,7 +4447,7 @@ get_global_fx(name) {
 insure_player_has_enemies_to_fight_for_door_sequence() {
   flag_assert("open_cell_door2");
 
-    level endon("open_cell_door2");
+  level endon("open_cell_door2");
   spawners = getEntArray("close_fighter_spawner", "targetname");
   vol = GetEnt("door_guys_fight_vol", "targetname");
 
@@ -5316,8 +5312,7 @@ part_blows_up_early() {
   }
 }
 
-flyby_earthquake() {
-}
+flyby_earthquake() {}
 
 landing_blocker_think() {
   landing_blockers = getEntArray("landing_blocker", "targetname");

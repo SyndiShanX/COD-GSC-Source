@@ -7,7 +7,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace namespace_9d58c1cd;
 
 init() {}
@@ -204,7 +203,7 @@ function_43c140b4(localclientnum) {
 }
 
 play_elevator_rumble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  self playrumbleonentity(localclientnum, #"hash_64b33287bc9d79f5");
+  self playrumbleonentity(localclientnum, # "hash_64b33287bc9d79f5");
 }
 
 function_69a31ba8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -214,7 +213,7 @@ function_69a31ba8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(!isDefined(level.var_7d33d419[localclientnum])) {
     var_5980d6d5 = struct::get("s_cr_sp_pi");
-    level.var_7d33d419[localclientnum] = util::spawn_model(localclientnum, #"hash_66161656c8ef4b2d", var_5980d6d5.origin, var_5980d6d5.angles);
+    level.var_7d33d419[localclientnum] = util::spawn_model(localclientnum, # "hash_66161656c8ef4b2d", var_5980d6d5.origin, var_5980d6d5.angles);
   }
 
   level.var_7d33d419[localclientnum] endon(#"death");

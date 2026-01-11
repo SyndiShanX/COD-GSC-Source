@@ -23,8 +23,7 @@ main() {
 
   if(isDefined(player)) {
     player on_player_connect(0);
-  }
-  else {
+  } else {
     onplayerconnect_callback(::on_player_connect);
   }
 
@@ -53,8 +52,7 @@ settings() {
 player_underwater_flag_handler(localclientnum, set, newent) {
   if(set) {
     self clientscripts\_swimming::underwater();
-  }
-  else {
+  } else {
     self clientscripts\_swimming::surface();
   }
 }
@@ -241,8 +239,7 @@ swimmingtracker() {
 
     if(level._swimming.is_swimming_enabled) {
       self._swimming.current_depth = get_swimming_depth();
-    }
-    else {
+    } else {
       self._swimming.current_depth = 0;
     }
 
@@ -569,8 +566,7 @@ killunderwaterfx(fx_handle, time_out) {
 get_kill_fx_endon() {
   if(!isDefined(level._swimming.fx_num)) {
     level._swimming.fx_num = 0;
-  }
-  else {
+  } else {
     level._swimming.fx_num++;
   }
 
@@ -684,8 +680,7 @@ swimmingarmshide() {
 
   if(msg == "_swimming:hide_arms") {
     self endon("_swimming:show_arms");
-  }
-  else {
+  } else {
     self endon("underwater");
   }
 
@@ -714,12 +709,10 @@ swimmingarms() {
 
     if(len < 0.5) {
       new_swim_state = 0;
-    }
-    else if(abs(move[0]) > abs(move[1])) {
+    } else if(abs(move[0]) > abs(move[1])) {
       if(move[0] > 0) {
         new_swim_state = 1;
-      }
-      else {
+      } else {
         new_swim_state = 2;
       }
     } else if(move[1] < 0)

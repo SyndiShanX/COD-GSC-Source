@@ -76,8 +76,7 @@ evasive_startmaneuvers(var_0, var_1) {
   for(var_3 = 1; var_3 < var_1.size; var_3++) {
     if(isDefined(var_1[var_3 + 1])) {
       var_4 = vectortoangles(var_1[var_3 + 1]["pos"] - var_1[var_3]["pos"]);
-    }
-    else {
+    } else {
       var_4 = (0, var_2, 0);
     }
 
@@ -85,8 +84,7 @@ evasive_startmaneuvers(var_0, var_1) {
 
     if(var_1[var_3]["goalYawMethod"] == "average") {
       var_5 = (var_4[1] + var_2) / 2;
-    }
-    else if(var_1[var_3]["goalYawMethod"] == "forward") {
+    } else if(var_1[var_3]["goalYawMethod"] == "forward") {
       var_5 = var_0.angles[1];
     }
 

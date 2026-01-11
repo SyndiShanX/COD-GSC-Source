@@ -15,7 +15,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\zm_common\zm_utility;
-
 #namespace bat;
 
 autoexec main() {
@@ -31,7 +30,7 @@ private function_9b3fe343(localclientnum) {
     self duplicate_render::update_dr_filters(localclientnum);
   }
 
-  util::playFXOnTag(localclientnum, #"hash_1cb1e3e527bd121c", self, "tag_eye");
+  util::playFXOnTag(localclientnum, # "hash_1cb1e3e527bd121c", self, "tag_eye");
 }
 
 battransformfx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {

@@ -30,7 +30,7 @@ setup_bot_sab() {
 
   if(var_0) {
     foreach(var_2 in level.bombzones) {
-    var_2 thread maps\mp\bots\_bots_gametype_common::monitor_bombzone_control();
+      var_2 thread maps\mp\bots\_bots_gametype_common::monitor_bombzone_control();
     }
 
     level.protect_radius = 600;
@@ -91,8 +91,7 @@ bot_sab_think() {
 
           if(randomfloat(1.0) < 0.75 || var_6 < var_7) {
             var_0 = "hunt_carrier";
-          }
-          else {
+          } else {
             var_0 = "defend_zone";
           }
 
@@ -119,8 +118,7 @@ bot_sab_think() {
 
               if(isDefined(var_10) && maps\mp\bots\_bots_personality::find_ambush_node(var_10, 512)) {
                 self botsetscriptgoalnode(self.node_ambushing_from, "guard", self.ambush_yaw);
-              }
-              else {
+              } else {
                 var_9 = 0;
               }
             }
@@ -153,8 +151,7 @@ bot_sab_think() {
 
       if(!isDefined(var_14)) {
         self.role = "defuser";
-      }
-      else if(isai(var_14)) {
+      } else if(isai(var_14)) {
         var_15 = distance(self.origin, var_13.curorigin);
         var_16 = distance(var_14.origin, var_13.curorigin);
 
@@ -166,8 +163,7 @@ bot_sab_think() {
 
       if(isDefined(self.role) && self.role == "defuser") {
         defuse_bomb(var_13);
-      }
-      else if(!bot_is_protecting_point(var_13.curorigin)) {
+      } else if(!bot_is_protecting_point(var_13.curorigin)) {
         var_12["min_goal_time"] = 2;
         var_12["max_goal_time"] = 4;
         var_12["override_origin_node"] = common_scripts\utility::random(var_13.bottargets);
@@ -180,8 +176,7 @@ bot_sab_think() {
 get_round_end_time() {
   if(level.bombplanted) {
     return level.defuseendtime;
-  }
-  else {
+  } else {
     return gettime() + maps\mp\gametypes\_gamelogic::gettimeremaining();
   }
 }
@@ -233,8 +228,7 @@ defuse_bomb(var_0) {
 
           if(isDefined(var_5)) {
             self botsetscriptgoal(var_5, 20, "critical");
-          }
-          else {
+          } else {
             break;
           }
         } else
@@ -330,7 +324,7 @@ notify_enemy_team_bomb_used(var_0) {
   var_2 = maps\mp\bots\_bots_gametype_common::find_closest_bombzone_to_player(self);
 
   foreach(var_4 in var_1) {
-  var_4 thread investigate_someone_using_bomb(var_2);
+    var_4 thread investigate_someone_using_bomb(var_2);
   }
 }
 

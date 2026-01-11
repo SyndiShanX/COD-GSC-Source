@@ -198,14 +198,12 @@ snd_start_autofx_audio() {
   snd_play_auto_fx("fx_alcatraz_light_round_oo", "amb_outside_lights", 0, 0, 0, 0);
 }
 
-sndnuclearbomb() {
-}
+sndnuclearbomb() {}
 
 afterlifeaudio(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self activateafterlifeaudio();
-  }
-  else {
+  } else {
     self deactivateafterlifeaudio();
   }
 }

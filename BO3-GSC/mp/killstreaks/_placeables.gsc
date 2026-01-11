@@ -355,9 +355,7 @@ function shutdownoncancelevent(placeable) {
   if(isDefined(placeable)) {
     if(placeable.cancelable) {
       if(isDefined(placeable.oncancel)) {
-        [
-          [placeable.oncancel]
-        ](placeable);
+        [[placeable.oncancel]](placeable);
       }
     } else if(isDefined(placeable.onshutdown)) {
       [

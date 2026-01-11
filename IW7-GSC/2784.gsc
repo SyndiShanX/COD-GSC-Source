@@ -130,8 +130,7 @@ func_13B15(var_00) {
     }
     if(!scripts\mp\equipment\phase_shift::isentityphaseshifted(var_03)) {
       var_03 thread func_10DDD(var_01);
-    }
-    else {
+    } else {
       var_03 scripts\mp\equipment\phase_shift::exitphaseshift(1);
     }
 

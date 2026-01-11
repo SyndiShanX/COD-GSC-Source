@@ -31,7 +31,9 @@ codecallback_playerconnect() {
     maps\_callbackglobal::callback_playerconnect();
 
     if(isDefined(level._gamemode_playerconnect)) {
-      [[level._gamemode_playerconnect]]();
+      [
+        [level._gamemode_playerconnect]
+      ]();
     }
 
     return;
@@ -220,5 +222,4 @@ setdefaultcallbacks() {
   level.callbackplayerlaststand = maps\_callbackglobal::callback_playerlaststand;
 }
 
-callbackvoid() {
-}
+callbackvoid() {}

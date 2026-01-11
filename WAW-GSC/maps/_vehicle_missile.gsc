@@ -36,19 +36,18 @@ turret_think() {
   difficultyScaler = 1.0;
   if(level.cobrapilot_difficulty == "easy") {
     difficultyScaler = 0.5;
+  } else {
+    if(level.cobrapilot_difficulty == "medium")
   }
+  difficultyScaler = 1.7;
   else {
-  if(level.cobrapilot_difficulty == "medium")
+    if(level.cobrapilot_difficulty == "hard")
   }
-    difficultyScaler = 1.7;
+  difficultyScaler = 1.0;
   else {
-  if(level.cobrapilot_difficulty == "hard")
+    if(level.cobrapilot_difficulty == "insane")
   }
-    difficultyScaler = 1.0;
-  else {
-  if(level.cobrapilot_difficulty == "insane")
-  }
-    difficultyScaler = 1.5;
+  difficultyScaler = 1.5;
   self.attackRadius *= difficultyScaler;
   if(getdvar("cobrapilot_debug") == "1") {
     iprintln("surface-to-air missile range difficultyScaler = " + difficultyScaler);

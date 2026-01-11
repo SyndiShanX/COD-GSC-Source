@@ -57,8 +57,7 @@ decidewhatandhowtoshoot(objective) {
 
     if(self.weapon == "none") {
       nogunshoot();
-    }
-    else if(!self.a.allow_shooting) {
+    } else if(!self.a.allow_shooting) {
       setshootstyle("none", 0);
 
       if(isDefined(self.enemy)) {
@@ -68,17 +67,13 @@ decidewhatandhowtoshoot(objective) {
       result = rpgshoot();
     else if(self.weaponclass == "pistol") {
       result = pistolshoot();
-    }
-    else if(self.weaponclass == "spread") {
+    } else if(self.weaponclass == "spread") {
       result = shotgunshoot();
-    }
-    else if(self.weaponclass == "gas") {
+    } else if(self.weaponclass == "gas") {
       result = flamethrower_shoot();
-    }
-    else if(usinggrenadelauncher()) {
+    } else if(usinggrenadelauncher()) {
       result = grenadeshoot();
-    }
-    else {
+    } else {
       result = rifleshoot();
     }
 
@@ -137,14 +132,12 @@ rifleshoot() {
 
       if(!isDefined(self.enemy)) {
         havenothingtoshoot();
-      }
-      else {
+      } else {
         markenemyposinvisible();
 
         if((self.providecoveringfire || randomint(5) > 0) && shouldsuppress()) {
           self.shootobjective = "suppress";
-        }
-        else {
+        } else {
           self.shootobjective = "ambush";
         }
 
@@ -170,8 +163,7 @@ rifleshoot() {
     if(!cansuppressenemy()) {
       if(self.shootobjective == "suppress" || self.team == "allies" && !isvalidenemy(self.enemy)) {
         havenothingtoshoot();
-      }
-      else {
+      } else {
         assert(self.shootobjective == "ambush");
         self.shootstyle = "none";
         likelyenemydir = self getanglestolikelyenemypath();
@@ -179,8 +171,7 @@ rifleshoot() {
         if(!isDefined(likelyenemydir)) {
           if(isDefined(self.covernode)) {
             likelyenemydir = self.covernode.angles;
-          }
-          else {
+          } else {
             likelyenemydir = self.angles;
           }
         }
@@ -210,8 +201,7 @@ rifleshoot() {
 
       if(self.shootobjective == "suppress") {
         self setshootstyleforsuppression();
-      }
-      else {
+      } else {
         assert(self.shootobjective == "ambush");
         self.shootstyle = "none";
 
@@ -238,8 +228,7 @@ shouldstopambushing() {
   if(!isDefined(self.ambushendtime)) {
     if(self.team == "allies") {
       self.ambushendtime = gettime() + randomintrange(4000, 10000);
-    }
-    else {
+    } else {
       self.ambushendtime = gettime() + randomintrange(40000, 60000);
     }
   }
@@ -307,8 +296,7 @@ grenadeshoot() {
 
   if(self.bulletsinclip > 1) {
     self.shootstyle = "burst";
-  }
-  else {
+  } else {
     self.shootstyle = "single";
   }
 }
@@ -503,8 +491,7 @@ setshootstyleforvisibleenemy() {
   if(distancesq < 90000) {
     if(isDefined(self.shootent) && isDefined(self.shootent.magic_bullet_shield)) {
       return setshootstyle("single", 0);
-    }
-    else {
+    } else {
       return setshootstyle("full", 0);
     }
   } else if(distancesq < 810000 || shootingplayerathigherdifficulty())
@@ -513,8 +500,7 @@ setshootstyleforvisibleenemy() {
   if(self.providecoveringfire || distancesq < 2560000) {
     if(shoulddosemiforvariety()) {
       return setshootstyle("semi", 0);
-    }
-    else {
+    } else {
       return setshootstyle("burst", 0);
     }
   }
@@ -543,8 +529,7 @@ setshootstyleforsuppression() {
   if(self.providecoveringfire || distancesq < 1690000) {
     if(shoulddosemiforvariety()) {
       return setshootstyle("semi", 0);
-    }
-    else {
+    } else {
       return setshootstyle("burst", 0);
     }
   }
@@ -558,8 +543,7 @@ setshootstyle(style, fastburst) {
 }
 
 shoulddosemiforvariety() {
-  if(self.weaponclass != "rifle") {
-  }
+  if(self.weaponclass != "rifle") {}
 
   return 0;
 
@@ -575,8 +559,7 @@ shoulddosemiforvariety() {
 
   if(randomint(100) < 50) {
     dosemi = 1;
-  }
-  else {
+  } else {
     dosemi = 0;
   }
 

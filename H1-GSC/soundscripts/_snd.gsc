@@ -46,11 +46,9 @@ snd_music_message(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     childthread snd_message("snd_music_handler", var_0, var_1, var_2);
-  }
-  else if(isDefined(var_1)) {
+  } else if(isDefined(var_1)) {
     childthread snd_message("snd_music_handler", var_0, var_1);
-  }
-  else {
+  } else {
     childthread snd_message("snd_music_handler", var_0);
   }
 }
@@ -59,14 +57,11 @@ snd_message(var_0, var_1, var_2, var_3) {
   if(isDefined(level._snd.messages[var_0])) {
     if(isDefined(var_3)) {
       thread[[level._snd.messages[var_0]]](var_1, var_2, var_3);
-    }
-    else if(isDefined(var_2)) {
+    } else if(isDefined(var_2)) {
       thread[[level._snd.messages[var_0]]](var_1, var_2);
-    }
-    else if(isDefined(var_1)) {
+    } else if(isDefined(var_1)) {
       thread[[level._snd.messages[var_0]]](var_1);
-    }
-    else {
+    } else {
       thread[[level._snd.messages[var_0]]]();
     }
   }
@@ -120,8 +115,7 @@ snd_slate(var_0) {}
 snd_throttle_wait() {
   if(self.count >= self.max_calls_per_frame) {
     wait 0.05;
-  }
-  else {
+  } else {
     self.count++;
   }
 
@@ -199,8 +193,7 @@ snd_parse_soundtables(var_0, var_1, var_2, var_3, var_4) {
 
             if(!isDefined(var_12)) {
               var_16 = 1;
-            }
-            else if(var_15 != var_13) {
+            } else if(var_15 != var_13) {
               var_5[var_13] = var_12;
               var_16 = 1;
             }

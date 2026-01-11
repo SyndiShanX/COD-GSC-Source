@@ -67,8 +67,7 @@ spawn_manager_create_spawn_manager_struct(from_ent) {
 
   if(is_trigger || !isDefined(from_ent.name)) {
     spawn_manager_ent.sm_id = from_ent.targetname;
-  }
-  else {
+  } else {
     spawn_manager_ent.sm_id = from_ent.name;
   }
 
@@ -216,8 +215,7 @@ spawn_manager_can_spawn(spawngroupsize) {
 
   if(self.script_forcespawn == 0) {
     return totalfree > 0 && activefree > 0 && globalfree > 0 && canspawngroup && self.enable;
-  }
-  else {
+  } else {
     return totalfree > 0 && activefree > 0 && self.enable;
   }
 }
@@ -251,8 +249,7 @@ spawn_manager_spawn_group(spawner, spawngroupsize) {
 
     if(isDefined(spawner) && isDefined(spawner.targetname)) {
       ai = spawner spawn_manager_spawn(2.0);
-    }
-    else {
+    } else {
       continue;
     }
 
@@ -355,8 +352,7 @@ spawn_manager_think() {
         if(potential_spawners.size > 0 || priority_spawners.size > 0) {
           if(priority_spawners.size > 0) {
             spawner = random(priority_spawners);
-          }
-          else {
+          } else {
             spawner = random(potential_spawners);
           }
 
@@ -368,8 +364,7 @@ spawn_manager_think() {
 
           if(!isfirsttime) {
             spawn_manager_wait();
-          }
-          else {
+          } else {
             isfirsttime = 0;
           }
 
@@ -493,7 +488,7 @@ start_triggers(trigger_type) {
       targets = get_spawn_manager_array(trig.target);
 
       foreach(target in targets) {
-      trig thread spawn_manager_enable_trigger_think(target);
+        trig thread spawn_manager_enable_trigger_think(target);
       }
     }
   }
@@ -586,8 +581,7 @@ spawner_calculate_active_count(spawn_manager) {
 spawn_manager_get_spawn_group_size() {
   if(self.sm_group_size_min < self.sm_group_size_max) {
     self.sm_group_size = randomintrange(self.sm_group_size_min, self.sm_group_size_max + 1);
-  }
-  else {
+  } else {
     self.sm_group_size = self.sm_group_size_min;
   }
 
@@ -619,8 +613,7 @@ get_min_value(value) {
     if(isDefined(values[i])) {
       if(!isDefined(values[i + 1]) && i > 0) {
         return int(values[i - 1]);
-      }
-      else {
+      } else {
         return int(values[i]);
       }
     }
@@ -660,11 +653,9 @@ spawn_manager_wait() {
 
     if(players.size == 2) {
       coop_scalar = 0.7;
-    }
-    else if(players.size == 3) {
+    } else if(players.size == 3) {
       coop_scalar = 0.5;
-    }
-    else if(players.size == 4) {
+    } else if(players.size == 4) {
       coop_scalar = 0.3;
     }
 
@@ -715,8 +706,7 @@ calculate_count() {
   if(!isDefined(self.sm_count)) {
     if(isDefined(self.count) && self.count != 0) {
       self.sm_count = self.count;
-    }
-    else {
+    } else {
       self.sm_count = 9999;
     }
   }
@@ -726,8 +716,7 @@ calculate_count() {
 
   if(isDefined(self.sm_id)) {
     assert(self.count_max >= self.count_min, "Max range should be greater or equal to the min value for sm_count on spawn manager " + self.sm_id);
-  }
-  else {
+  } else {
     assert(self.count_max >= self.count_min, "Max range should be greater or equal to the min value for sm_count on spawner with targetname " + self.targetname);
   }
 
@@ -794,8 +783,7 @@ spawn_manager_debug_hud_update(active_ai, spawn_ai, max_ai, active_managers, pot
       if(isDefined(level.current_debug_spawn_manager) && level.debugactivemanagers[i] == level.current_debug_spawn_manager) {
         if(!level.debugactivemanagers[i].enable) {
           level.spawn_manager_debug_hud[i].color = vectorscale((0, 1, 0), 0.4);
-        }
-        else {
+        } else {
           level.spawn_manager_debug_hud[i].color = (0, 1, 0);
         }
       } else if(level.debugactivemanagers[i].enable)
@@ -1059,8 +1047,7 @@ spawn_manager_debug_spawn_manager_values_dpad() {
   if(increase_value || decrease_value) {
     if(increase_value) {
       add = 1;
-    }
-    else {
+    } else {
       add = -1;
     }
 

@@ -127,11 +127,11 @@ jet_init() {
   }
 
   foreach(engine_fx in self.engine_fxs) {
-  engine_fx.origin += negative_vec;
+    engine_fx.origin += negative_vec;
   }
 
   foreach(flash_fx in self.flash_fxs) {
-  flash_fx.origin += negative_vec;
+    flash_fx.origin += negative_vec;
   }
 
   jet_origin = self.origin;
@@ -160,8 +160,7 @@ jet_timer() {
 
   if(GetDvar("jet_flyby_timer") != "") {
     level.civilianJetFlyBy_timer = 5 + GetDvarInt("jet_flyby_timer");
-  }
-  else {
+  } else {
     level.civilianJetFlyBy_timer = (0.25 + RandomFloatRange(0.3, 0.7)) * 60 * timeLimit;
   }
 
@@ -185,8 +184,7 @@ getTimeInterval() {
 
   if(isDefined(game["status"]) && game["status"] == "overtime") {
     return 1.0;
-  }
-  else {
+  } else {
     return getWatchedDvar("timelimit");
   }
 }
@@ -203,7 +201,7 @@ getWatchedDvar(dvarString) {
 
 jet_flyby() {
   foreach(part in self.jet_parts) {
-  part Show();
+    part Show();
   }
 
   engine_fx_array = [];
@@ -230,39 +228,37 @@ jet_flyby() {
   wait 0.05;
 
   foreach(engine_fx_ent in engine_fx_array) {
-  playFXOnTag(self.jet_engine_fx, engine_fx_ent, "tag_origin");
+    playFXOnTag(self.jet_engine_fx, engine_fx_ent, "tag_origin");
   }
 
   foreach(flash_fx_ent in flash_fx_array) {
     if(isDefined(flash_fx_ent.color) && flash_fx_ent.color == "blink") {
       playFXOnTag(self.jet_flash_fx_blink, flash_fx_ent, "tag_origin");
-    }
-    else if(isDefined(flash_fx_ent.color) && flash_fx_ent.color == "red") {
+    } else if(isDefined(flash_fx_ent.color) && flash_fx_ent.color == "red") {
       playFXOnTag(self.jet_flash_fx_red, flash_fx_ent, "tag_origin");
-    }
-    else {
+    } else {
       playFXOnTag(self.jet_flash_fx_green, flash_fx_ent, "tag_origin");
     }
   }
 
   foreach(part in self.jet_parts) {
-  part MoveTo(part.origin + self.jet_fly_vec, self.jet_flight_time);
+    part MoveTo(part.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   foreach(engine_fx_ent in engine_fx_array) {
-  engine_fx_ent MoveTo(engine_fx_ent.origin + self.jet_fly_vec, self.jet_flight_time);
+    engine_fx_ent MoveTo(engine_fx_ent.origin + self.jet_fly_vec, self.jet_flight_time);
   }
   foreach(flash_fx_ent in flash_fx_array) {
-  flash_fx_ent MoveTo(flash_fx_ent.origin + self.jet_fly_vec, self.jet_flight_time);
+    flash_fx_ent MoveTo(flash_fx_ent.origin + self.jet_fly_vec, self.jet_flight_time);
   }
 
   wait(self.jet_flight_time + 1);
 
   foreach(engine_fx_ent in engine_fx_array) {
-  engine_fx_ent Delete();
+    engine_fx_ent Delete();
   }
   foreach(flash_fx_ent in flash_fx_array) {
-  flash_fx_ent Delete();
+    flash_fx_ent Delete();
   }
 
   self notify("flyby_done");
@@ -300,8 +296,7 @@ playsound_float(alias, origin, master) {
   org.origin = origin;
   if(isDefined(master) && master) {
     org PlaySoundAsMaster(alias);
-  }
-  else {
+  } else {
     org playSound(alias);
   }
   wait(10.0);
@@ -337,8 +332,7 @@ targetisinfront(other, target) {
 
   if(dot > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -348,8 +342,7 @@ targetisclose(other, target) {
 
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
 
@@ -360,8 +353,7 @@ targetisclose(other, target) {
 
   if(dist < 3000) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -459,8 +451,7 @@ vending_machine_damage_monitor(vending_machine) {
 
       if(!isDefined(self.vm_fx_loc)) {
         playfx_loc = self.vm_normal.origin + ((17, -13, 52) - (-20, 18, 0));
-      }
-      else {
+      } else {
         playfx_loc = self.vm_fx_loc;
       }
 
@@ -574,8 +565,7 @@ metal_detector() {
 
   if(!isSP()) {
     self.alarm_interval = CONST_alarm_interval;
-  }
-  else {
+  } else {
     self.alarm_interval = CONST_alarm_interval_sp;
   }
 
@@ -626,8 +616,7 @@ annoyance_tracker() {
   interval = self.alarm_interval + 0.15;
   if(self.tolerance) {
     self.tolerance--;
-  }
-  else {
+  } else {
     self.alarm_annoyance = 1;
   }
 
@@ -814,7 +803,7 @@ motion_light() {
 
             if(isDefined(light.lightRigs)) {
               foreach(rig in light.lightRigs) {
-              rig setModel("com_two_light_fixture_on");
+                rig setModel("com_two_light_fixture_on");
               }
             }
           }
@@ -837,7 +826,7 @@ motion_light_timeout(lights, timeout) {
     light SetLightIntensity(0);
     if(isDefined(light.lightRigs)) {
       foreach(rig in light.lightRigs) {
-      rig setModel("com_two_light_fixture_off");
+        rig setModel("com_two_light_fixture_off");
       }
     }
   }
@@ -969,8 +958,7 @@ trigger_door() {
 doorOpen(openTime, doorSide) {
   if(doorSide) {
     self RotateTo((0, self.baseYaw + 90, 1), openTime, 0.1, 0.75);
-  }
-  else {
+  } else {
     self RotateTo((0, self.baseYaw - 90, 1), openTime, 0.1, 0.75);
   }
 
@@ -1003,7 +991,7 @@ use_toggle() {
 
   self.lightsOn = 1;
   foreach(light in lights) {
-  light SetLightIntensity(1.5 * self.lightsOn);
+    light SetLightIntensity(1.5 * self.lightsOn);
   }
 
   for(;;) {
@@ -1012,13 +1000,13 @@ use_toggle() {
     self.lightsOn = !self.lightsOn;
     if(self.lightsOn) {
       foreach(light in lights) {
-      light SetLightIntensity(1.5);
+        light SetLightIntensity(1.5);
       }
 
       self playSound("switch_auto_lights_on");
     } else {
       foreach(light in lights) {
-      light SetLightIntensity(0);
+        light SetLightIntensity(0);
       }
 
       self playSound("switch_auto_lights_off");
@@ -1204,23 +1192,20 @@ fan_blade_rotate(type) {
   if(type == "slow") {
     if(isDefined(self.script_noteworthy) && (self.script_noteworthy == "lockedspeed")) {
       speed = 180;
-    }
-    else {
+    } else {
       speed = RandomFloatRange(100 * speed_multiplier, 360 * speed_multiplier);
     }
   } else if(type == "fast")
     speed = RandomFloatRange(720 * speed_multiplier, 1000 * speed_multiplier);
   else if(type == "veryslow") {
     speed = RandomFloatRange(1 * speed_multiplier, 2 * speed_multiplier);
-  }
-  else {
+  } else {
     AssertMsg("Type must be fast, slow, or veryslow");
   }
 
   if(isDefined(self.script_noteworthy) && (self.script_noteworthy == "lockedspeed")) {
     wait 0;
-  }
-  else {
+  } else {
     wait RandomFloatRange(0, 1);
   }
 
@@ -1235,14 +1220,11 @@ fan_blade_rotate(type) {
 
     if(dot_x > 0.9) {
       self RotateVelocity((speed, 0, 0), time);
-    }
-    else if(dot_y > 0.9) {
+    } else if(dot_y > 0.9) {
       self RotateVelocity((speed, 0, 0), time);
-    }
-    else if(dot_z > 0.9) {
+    } else if(dot_z > 0.9) {
       self RotateVelocity((0, speed, 0), time);
-    }
-    else {
+    } else {
       self RotateVelocity((0, speed, 0), time);
     }
 
@@ -1277,8 +1259,7 @@ playerTouchTriggerThink(trigger, enterFunc, exitFunc) {
 
   if(!isSP()) {
     touchName = self.guid;
-  }
-  else {
+  } else {
     touchName = "player" + GetTime();
   }
 

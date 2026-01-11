@@ -105,8 +105,7 @@ faceTarget() {
   faceTarget = undefined;
   if(IsAlive(self.enemy) && DistanceSquared(self.enemy.origin, self.origin) < 1600 * 1600) {
     faceTarget = self.enemy;
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     faceTarget = self.owner;
   }
 

@@ -217,8 +217,7 @@ applyloadout() {
     if(!isDefined(self.costume)) {
       if(isplayer(self)) {
         self.costume = maps\mp\gametypes\_class::cao_getactivecostume();
-      }
-      else if(isagent(self) && self.agent_type == "player") {
+      } else if(isagent(self) && self.agent_type == "player") {
         self.costume = maps\mp\gametypes\_teams::getdefaultcostume();
       }
     }
@@ -251,11 +250,9 @@ applyloadout() {
   if(isDefined(loadoutDeathStreak) && loadoutDeathStreak != "specialty_null" && gettime() == self.spawnTime) {
     if(loadoutDeathStreak == "specialty_copycat") {
       deathVal = 3;
-    }
-    else if(loadoutDeathStreak == "specialty_combathigh") {
+    } else if(loadoutDeathStreak == "specialty_combathigh") {
       deathVal = 5;
-    }
-    else {
+    } else {
       deathVal = 4;
     }
 
@@ -380,11 +377,9 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
 
   if(issubstr(var_1, "axis")) {
     var_13 = "axis";
-  }
-  else if(issubstr(var_1, "allies")) {
+  } else if(issubstr(var_1, "allies")) {
     var_13 = "allies";
-  }
-  else {
+  } else {
     var_13 = "none";
   }
 
@@ -708,8 +703,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
 
   if(maps\mp\_utility::invirtuallobby()) {
     var_46 = self.charactercamoloadout.camoindex;
-  }
-  else {
+  } else {
     var_46 = self getplayerdata(common_scripts\utility::getstatsgroup_common(), "characterCamoIndex");
   }
 
@@ -946,8 +940,7 @@ h2_buildweaponname(baseName, attachment1, attachment2, camo, perks) {
 
     if(issubstr(weaponName, "_" + attachment)) {
       weaponName = weaponName;
-    }
-    else {
+    } else {
       weaponName += "_" + attachment;
     }
 

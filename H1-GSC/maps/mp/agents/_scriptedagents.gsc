@@ -61,7 +61,9 @@ waituntilnotetrack(var_0, var_1, var_2, var_3, var_4) {
     }
 
     if(isDefined(var_4)) {
-      [[var_4]](var_8, var_2, var_3, var_6);
+      [
+        [var_4]
+      ](var_8, var_2, var_3, var_6);
     }
   }
 }
@@ -94,8 +96,7 @@ getanimscalefactors(var_0, var_1, var_2) {
 
     if(vectordot(var_10, var_0) < 0) {
       var_7 = 0;
-    }
-    else if(var_5 > 0) {
+    } else if(var_5 > 0) {
       var_7 = var_3 / var_5;
     }
   } else if(var_5 > 0)
@@ -118,8 +119,7 @@ getangleindex(var_0, var_1) {
 
   if(var_0 < 0) {
     return int(ceil((180 + var_0 - var_1) / 45));
-  }
-  else {
+  } else {
     return int(floor((180 + var_0 + var_1) / 45));
   }
 }

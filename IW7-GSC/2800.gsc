@@ -251,8 +251,7 @@ updatemlgspectator() {
 
         if(!self isspectatingplayer() && isDefined(self.spectatingplayerbeforeballcam)) {
           self spectateclientnum(self.spectatingplayerbeforeballcam getentitynumber());
-        }
-        else {
+        } else {
           self cameraunlink();
         }
 
@@ -289,8 +288,7 @@ updatemlgspectator() {
 
       if(var_06 > 600) {
         self.codcasterballcamfollow.origin = var_11;
-      }
-      else {
+      } else {
         self.codcasterballcamfollow moveto(var_11, 0.5, 0, 0.2);
       }
 
@@ -338,15 +336,13 @@ setspectatepermissions() {
 
       if(var_02 != "spectator") {
         func_F87A(var_02);
-      }
-      else if(isDefined(self.pers["last_team"])) {
+      } else if(isDefined(self.pers["last_team"])) {
         var_02 = self.pers["last_team"];
         func_F87A(var_02);
       } else if(scripts\mp\utility\game::gameflag("prematch_done")) {
         if(randomint(2)) {
           var_02 = "allies";
-        }
-        else {
+        } else {
           var_02 = "axis";
         }
 
@@ -363,8 +359,7 @@ setspectatepermissions() {
     case 3:
       if(var_02 == "spectator") {
         func_F71A();
-      }
-      else {
+      } else {
         func_F87A(var_02);
       }
 

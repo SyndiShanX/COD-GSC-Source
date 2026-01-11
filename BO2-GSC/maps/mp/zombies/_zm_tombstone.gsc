@@ -122,8 +122,7 @@ tombstone_laststand() {
 
   if(self hasweapon(lethal_grenade)) {
     dc.grenade = self getweaponammoclip(lethal_grenade);
-  }
-  else {
+  } else {
     dc.grenade = 0;
   }
 
@@ -220,7 +219,7 @@ tombstone_give() {
 
     if(dc.weapon.size > 1 || primaries.size > 1) {
       foreach(weapon in primaries) {
-      self takeweapon(weapon);
+        self takeweapon(weapon);
       }
     }
 
@@ -285,8 +284,7 @@ tombstone_give() {
 
     if(self hasweapon(self get_player_lethal_grenade())) {
       self getweaponammoclip(self get_player_lethal_grenade());
-    }
-    else {
+    } else {
       self giveweapon(self get_player_lethal_grenade());
     }
 
@@ -326,8 +324,7 @@ tombstone_timeout() {
   for(i = 0; i < 40; i++) {
     if(i % 2) {
       self.icon ghost();
-    }
-    else {
+    } else {
       self.icon show();
     }
 
@@ -411,7 +408,7 @@ tombstone_hostmigration() {
     tombstones = getEntArray("player_tombstone_model", "script_noteworthy");
 
     foreach(model in tombstones) {
-    playFXOnTag(level._effect["powerup_on"], model, "tag_origin");
+      playFXOnTag(level._effect["powerup_on"], model, "tag_origin");
     }
   }
 }

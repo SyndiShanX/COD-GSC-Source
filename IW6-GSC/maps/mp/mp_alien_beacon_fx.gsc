@@ -197,7 +197,7 @@ fx_intro_lightning() {
   common_scripts\utility::exploder(11);
 
   foreach(var_1 in level.players) {
-  var_1 playSound("scn_beacon_intro_lightning");
+    var_1 playSound("scn_beacon_intro_lightning");
   }
 }
 
@@ -236,7 +236,7 @@ ship_camera_tilting() {
   level thread ship_camera_tilting_watcher();
 
   foreach(var_3 in level.players) {
-  var_3 playersetgroundreferenceent(var_0);
+    var_3 playersetgroundreferenceent(var_0);
   }
 
   for(;;) {
@@ -265,8 +265,7 @@ ship_camera_tilting_watcher() {
 
     if(var_0 == "drill_planted") {
       level.pause_tilting = 1;
-    }
-    else {
+    } else {
       level.pause_tilting = 0;
     }
 
@@ -303,8 +302,7 @@ beacon_door_drilling_fx() {
 
     if(var_1) {
       thread sfx_drill_off_cargo_blocker();
-    }
-    else {
+    } else {
       thread maps\mp\alien\_drill::sfx_drill_off(1);
     }
 

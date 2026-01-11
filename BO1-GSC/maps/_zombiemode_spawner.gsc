@@ -1958,8 +1958,7 @@ find_flesh() {
         if(isDefined(self.ignore_player[i])) {
           if(!isDefined(self.ignore_player[i].ignore_counter)) {
             self.ignore_player[i].ignore_counter = 0;
-          }
-          else {
+          } else {
             self.ignore_player[i].ignore_counter += 1;
           }
         }

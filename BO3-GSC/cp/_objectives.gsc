@@ -349,9 +349,7 @@ function set(str_obj_type, a_target_or_list, b_breadcrumb) {
     o_objective = level.a_objectives[str_obj_type];
     if(isDefined(a_target_or_list)) {
       foreach(target in a_target_or_list) {
-        [
-          [o_objective]
-        ] - > add_target(target);
+        [[o_objective]] - > add_target(target);
       }
     }
   } else {
@@ -539,14 +537,8 @@ function destroy_temp_icon() {
 function private on_player_spawned() {
   if(isDefined(level.a_objectives)) {
     foreach(o_objective in level.a_objectives) {
-      if([
-          [o_objective]
-        ] - > is_breadcrumb() && !([
-          [o_objective]
-        ] - > is_done())) {
-        [
-          [o_objective]
-        ] - > add_player(self);
+      if([[o_objective]] - > is_breadcrumb() && !([[o_objective]] - > is_done())) {
+        [[o_objective]] - > add_player(self);
       }
     }
   }

@@ -13,7 +13,6 @@
 #include scripts\mp\mp_seaside_alt_sound;
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\load;
-
 #namespace mp_seaside_alt;
 
 event_handler[level_init] main(eventstruct) {
@@ -24,7 +23,7 @@ event_handler[level_init] main(eventstruct) {
 
   init_devgui();
 
-    load::main();
+  load::main();
   compass::setupminimap("");
   level.cleandepositpoints = array((56, -1016, 711), (1120, 288, 712), (-499, -2437, 776), (775, -2820, 725));
   function_2cdcf5c3();

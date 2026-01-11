@@ -213,8 +213,7 @@ doQuickMessage(soundalias, saytext) {
   } else {
     if(self.sessionteam == "allies") {
       self.headiconteam = "allies";
-    }
-    else if(self.sessionteam == "axis") {
+    } else if(self.sessionteam == "axis") {
       self.headiconteam = "axis";
     }
 

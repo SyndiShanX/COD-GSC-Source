@@ -135,8 +135,7 @@ doAirstrike(lifeId, origin, yaw, owner, team) {
 
   if(isDefined(self.airStrikeType)) {
     airstrikeType = self.airStrikeType;
-  }
-  else {
+  } else {
     airstrikeType = "default";
   }
 
@@ -577,16 +576,14 @@ doPlaneStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint,
 
   if(typeOfStrike == "harrier") {
     plane = spawnplane(owner, "script_model", pathStart, "hud_minimap_harrier_green", "hud_minimap_harrier_red");
-  }
-  else {
+  } else {
     plane = spawnplane(owner, "script_model", pathStart, "compass_objpoint_airstrike_friendly", "compass_objpoint_airstrike_busy");
   }
 
   if(typeOfStrike == "harrier") {
     if(owner.team == "allies") {
       plane setModel("vehicle_av8b_harrier_jet_mp");
-    }
-    else {
+    } else {
       plane setModel("vehicle_av8b_harrier_jet_opfor_mp");
     }
   } else
@@ -750,8 +747,7 @@ callStrike(lifeId, owner, coord, yaw) {
     planeHalfDistance = 12000;
     planeFlySpeed = 2000;
 
-    if(!isDefined(heightEnt))
-    {
+    if(!isDefined(heightEnt)) {
       println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
       planeFlyHeight = 950;
       planeBombExplodeDistance = 1500;
@@ -767,8 +763,7 @@ callStrike(lifeId, owner, coord, yaw) {
     planeHalfDistance = 24000;
     planeFlySpeed = 7000;
 
-    if(!isDefined(heightEnt))
-    {
+    if(!isDefined(heightEnt)) {
       println("NO DEFINED AIRSTRIKE HEIGHT SCRIPT_ORIGIN IN LEVEL");
       planeFlyHeight = 850;
       planeBombExplodeDistance = 1500;
@@ -791,8 +786,7 @@ callStrike(lifeId, owner, coord, yaw) {
 
   if(self.airStrikeType == "stealth") {
     endPoint = coord + vector_multiply(anglesToForward(direction), planeHalfDistance * 4);
-  }
-  else {
+  } else {
     endPoint = coord + vector_multiply(anglesToForward(direction), planeHalfDistance);
   }
 
@@ -834,8 +828,7 @@ callStrike(lifeId, owner, coord, yaw) {
 
   } else if(self.airStrikeType == "stealth") {
     level thread doBomberStrike(lifeId, owner, requiredDeathCount, coord, startPoint + (0, 0, randomInt(1000)), endPoint + (0, 0, randomInt(1000)), bombTime, flyTime, direction, self.airStrikeType);
-  } else
-  {
+  } else {
     level thread doPlaneStrike(lifeId, owner, requiredDeathCount, coord, startPoint + (0, 0, randomInt(500)), endPoint + (0, 0, randomInt(500)), bombTime, flyTime, direction, self.airStrikeType);
 
     wait randomfloatrange(1.5, 2.5);
@@ -868,8 +861,7 @@ targetGetDist(other, target) {
   infront = targetisinfront(other, target);
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
   a = flat_origin(other.origin);
@@ -888,8 +880,7 @@ targetisclose(other, target, closeDist) {
   infront = targetisinfront(other, target);
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
   a = flat_origin(other.origin);
@@ -898,8 +889,7 @@ targetisclose(other, target, closeDist) {
   dist = distance(a, point);
   if(dist < closeDist) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -910,8 +900,7 @@ targetisinfront(other, target) {
   dot = vectordot(forwardvec, normalvec);
   if(dot > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -928,8 +917,7 @@ selectAirstrikeLocation(lifeId, airStrikeType) {
 
   if(airStrikeType == "precision" || airStrikeType == "stealth") {
     chooseDirection = true;
-  }
-  else {
+  } else {
     chooseDirection = false;
   }
 
@@ -956,9 +944,7 @@ selectAirstrikeLocation(lifeId, airStrikeType) {
   self waittill("confirm_location", location, directionYaw);
   if(!chooseDirection) {
     directionYaw = randomint(360);
-  }
-
-  else {
+  } else {
     if(getdvar("mapname") == "co_hunted") {
       directionYaw += 115;
     }

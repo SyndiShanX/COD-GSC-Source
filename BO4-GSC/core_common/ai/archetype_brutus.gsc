@@ -7,7 +7,6 @@
 #include scripts\core_common\ai\systems\ai_interface;
 #include scripts\core_common\ai\systems\blackboard;
 #include scripts\core_common\spawner_shared;
-
 #namespace archetypebrutus;
 
 autoexec init() {

@@ -53,8 +53,7 @@ opening_vo() {
 
   if(players.size == 1) {
     players[0] vo_play_soliloquy(level.soliloquy_convos["solo_intro_" + players[0].character_name]);
-  }
-  else if(is_player_character_present("Arlington")) {
+  } else if(is_player_character_present("Arlington")) {
     vo_play_four_part_conversation(level.four_part_convos["intro_plr_3"]);
   }
 
@@ -399,8 +398,7 @@ vo_play_four_part_conversation(convo) {
 
     if(!isDefined(e_arlington) || !isDefined(e_sal) || !isDefined(e_billy) || !isDefined(e_finn)) {
       return;
-    }
-    else {
+    } else {
       foreach(player in players) {
         if(isDefined(player)) {
           player.dontspeak = 1;
@@ -426,14 +424,11 @@ vo_play_four_part_conversation(convo) {
 
       if(issubstr(convo[i], "plr_0")) {
         speaking_player = e_finn;
-      }
-      else if(issubstr(convo[i], "plr_1")) {
+      } else if(issubstr(convo[i], "plr_1")) {
         speaking_player = e_sal;
-      }
-      else if(issubstr(convo[i], "plr_2")) {
+      } else if(issubstr(convo[i], "plr_2")) {
         speaking_player = e_billy;
-      }
-      else if(issubstr(convo[i], "plr_3")) {
+      } else if(issubstr(convo[i], "plr_3")) {
         speaking_player = e_arlington;
       }
 
@@ -480,8 +475,7 @@ electric_chair_vo() {
     if(players.size == 4 && n_players_on_bridge_count == 4) {
       if(count_zombies_in_zone("zone_golden_gate_bridge") > 0) {
         vo_play_four_part_conversation(level.four_part_convos["chair_combat_" + randomintrange(1, 3)]);
-      }
-      else {
+      } else {
         vo_play_four_part_conversation(level.four_part_convos["chair" + randomintrange(1, 3)]);
       }
     } else if(isDefined(players[0]) && players[0] istouching(e_nml_zone)) {

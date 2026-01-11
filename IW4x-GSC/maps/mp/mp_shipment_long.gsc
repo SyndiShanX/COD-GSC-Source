@@ -23,8 +23,7 @@ main() {
 
   if(getDvar("g_gametype") != "koth") {
     level thread deleteChaModels();
-  }
-  else {
+  } else {
     level thread deleteBarrels();
   }
 }

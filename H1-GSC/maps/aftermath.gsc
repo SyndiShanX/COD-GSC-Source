@@ -623,11 +623,9 @@ limp() {
 
     if(var_5 == "crouch") {
       var_2 = 0.1;
-    }
-    else if(var_5 == "prone") {
+    } else if(var_5 == "prone") {
       var_2 = 0.6;
-    }
-    else {
+    } else {
       var_2 = 1.0;
     }
 
@@ -687,8 +685,7 @@ player_jump_punishment() {
 setup_force_fall() {
   if(getdvarint("aftermath_body_sense", 1) == 1) {
     var_0 = getEntArray("force_fall_body_sense", "targetname");
-  }
-  else {
+  } else {
     var_0 = getEntArray("force_fall", "targetname");
   }
 

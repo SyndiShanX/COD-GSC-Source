@@ -378,8 +378,7 @@ waterkilltriggerthink(triggers) {
 
       if(isplayer(entity)) {
         entity dodamage(entity.health * 2, triggers[triggertouched].origin + (0, 0, 1), triggers[triggertouched], triggers[triggertouched], 0, "MOD_HIT_BY_OBJECT", 0, "hydro_water_mp");
-      }
-      else {
+      } else {
         entity dodamage(entity.health * 2, triggers[triggertouched].origin + (0, 0, 1), triggers[triggertouched], triggers[triggertouched], 0, "MOD_CRUSH");
       }
 

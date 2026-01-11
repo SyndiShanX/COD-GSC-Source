@@ -49,8 +49,7 @@ randomattackidle() {
 
   if(isfacingenemy(0.866)) {
     self orientmode("face angle", self.angles[1]);
-  }
-  else {
+  } else {
     if(isDefined(self.enemy)) {
       var_0 = vectortoyaw(self.enemy.origin - self.origin);
       var_1 = angleclamp180(var_0 - self.angles[1]);
@@ -62,8 +61,7 @@ randomattackidle() {
 
         if(var_1 > 0) {
           var_2 = % german_shepherd_rotate_ccw;
-        }
-        else {
+        } else {
           var_2 = % german_shepherd_rotate_cw;
         }
 
@@ -81,8 +79,7 @@ randomattackidle() {
 
   if(should_growl()) {
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_growl, 1, 0.2, 1);
-  }
-  else {
+  } else {
     var_3 = 33;
     var_4 = 66;
 
@@ -100,8 +97,7 @@ randomattackidle() {
 
     if(var_5 < var_3) {
       self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_b, 1, 0.2, self.animplaybackrate);
-    }
-    else {
+    } else {
       if(var_5 < var_4) {
         self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_bark, 1, 0.2, self.animplaybackrate);
         return;

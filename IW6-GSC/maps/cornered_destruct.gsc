@@ -645,7 +645,7 @@ hvt_office_props() {
   var_6 = getEntArray("hvt_office_debris_couch1_cushions", "targetname");
 
   foreach(var_8 in var_6) {
-  var_8 linkto(var_4);
+    var_8 linkto(var_4);
   }
 
   var_10 = getent("hvt_office_debris_couch2", "targetname");
@@ -654,7 +654,7 @@ hvt_office_props() {
   var_12 = getEntArray("hvt_office_debris_couch2_cushions", "targetname");
 
   foreach(var_8 in var_12) {
-  var_8 linkto(var_10);
+    var_8 linkto(var_10);
   }
 
   var_15 = getent("hvt_debris_plant1", "targetname");
@@ -731,13 +731,13 @@ hvt_office_environment() {
   var_0 = common_scripts\utility::getstructarray("hvt_office_phys", "targetname");
 
   foreach(var_2 in var_0) {
-  physicsjitter(var_2.origin, 300, 200, 1.0, 1.0);
+    physicsjitter(var_2.origin, 300, 200, 1.0, 1.0);
   }
 
   var_4 = getEntArray("hvt_office_junk", "targetname");
 
   foreach(var_2 in var_4) {
-  var_2 physicslaunchclient(var_2.origin + (0, 0, -4), (0, -15, 60));
+    var_2 physicslaunchclient(var_2.origin + (0, 0, -4), (0, -15, 60));
   }
 
   wait 2.0;
@@ -933,8 +933,7 @@ stairwell_baker() {
 
   if(level.player istouching(var_0)) {
     level.hvt_office_anim_struct maps\_anim::anim_single_solo(self, "cornered_stairs_run");
-  }
-  else {
+  } else {
     level.hvt_office_anim_struct maps\_anim::anim_single_solo(self, "cornered_stairs_wait");
 
     if(!common_scripts\utility::flag("allies_move_to_rescue")) {
@@ -1118,7 +1117,7 @@ office_props() {
   }
 
   foreach(var_12 in var_10) {
-  var_12 thread office_jitter();
+    var_12 thread office_jitter();
   }
 }
 
@@ -1155,7 +1154,7 @@ office_door_to_lobby() {
   var_2 = getEntArray("door_to_lobby_handles", "targetname");
 
   foreach(var_4 in var_2) {
-  var_4 linkto(var_0);
+    var_4 linkto(var_0);
   }
 
   var_6 = maps\_utility::spawn_anim_model("exfil_bldg");
@@ -1459,7 +1458,7 @@ watch_for_player_death() {
   level.player waittill("death");
 
   foreach(var_1 in level.fall_arms_and_legs) {
-  var_1 hide();
+    var_1 hide();
   }
 }
 
@@ -1784,7 +1783,7 @@ fall_props_lobby_furniture() {
       var_7 = getEntArray("pillows_" + var_4.script_noteworthy, "targetname");
 
       foreach(var_9 in var_7) {
-      var_9 linkto(var_4);
+        var_9 linkto(var_4);
       }
     }
   }
@@ -1820,13 +1819,13 @@ fall_prop_corner_collapse() {
   var_1[0] waittillmatch("single anim", "shatter_1");
 
   foreach(var_3 in var_5) {
-  var_3 delete();
+    var_3 delete();
   }
 
   var_9 = getglassarray("glass_level_1");
 
   foreach(var_3 in var_9) {
-  destroyglass(var_3);
+    destroyglass(var_3);
   }
 
   var_12 = getent("corner_beam", "targetname");
@@ -1834,25 +1833,25 @@ fall_prop_corner_collapse() {
   wait 0.7;
 
   foreach(var_3 in var_9) {
-  deleteglass(var_3);
+    deleteglass(var_3);
   }
 
   var_1[0] waittillmatch("single anim", "shatter_2");
 
   foreach(var_3 in var_6) {
-  var_3 delete();
+    var_3 delete();
   }
 
   var_17 = getglassarray("glass_level_2");
 
   foreach(var_3 in var_17) {
-  destroyglass(var_3);
+    destroyglass(var_3);
   }
 
   wait 0.7;
 
   foreach(var_3 in var_17) {
-  deleteglass(var_3);
+    deleteglass(var_3);
   }
 }
 
@@ -1890,7 +1889,7 @@ fall_props_parachute() {
   var_0 maps\_anim::anim_first_frame(var_1, "cornered_exfil");
 
   foreach(var_3 in var_1) {
-  var_3 hide();
+    var_3 hide();
   }
 
   common_scripts\utility::flag_wait("parachute_exfil");
@@ -1932,7 +1931,7 @@ fall_props_ext_bldg() {
   common_scripts\utility::waitframe();
 
   foreach(var_6 in var_0) {
-  var_6 linkto(var_1, "J_prop_1");
+    var_6 linkto(var_1, "J_prop_1");
   }
 
   common_scripts\utility::flag_wait("go_exfil_bldg");
@@ -1973,7 +1972,7 @@ fall_break_glass() {
   var_0 = getglassarray("lobby_atrium_glass");
 
   foreach(var_2 in var_0) {
-  thread fall_break_glass_with_delay(var_2, 0.05, 0.06, 0, 1, 0.1);
+    thread fall_break_glass_with_delay(var_2, 0.05, 0.06, 0, 1, 0.1);
   }
 
   var_4 = getglassarray("lobby_atrium_glass_doors");
@@ -1981,14 +1980,14 @@ fall_break_glass() {
   maps\_utility::array_delete(var_5);
 
   foreach(var_2 in var_4) {
-  thread fall_break_glass_with_delay(var_2, 0.05, 0.06, 0, 1, 0);
+    thread fall_break_glass_with_delay(var_2, 0.05, 0.06, 0, 1, 0);
   }
 
   common_scripts\utility::flag_wait("fall_down_shake");
   wait 1.6;
 
   foreach(var_2 in var_4) {
-  deleteglass(var_2);
+    deleteglass(var_2);
   }
 }
 
@@ -2104,11 +2103,9 @@ random_building_shake_loop(var_0, var_1, var_2, var_3) {
 
     if(var_4 < 2) {
       level.player playrumbleonentity("light_1s");
-    }
-    else if(var_4 >= 2 && var_4 < 3) {
+    } else if(var_4 >= 2 && var_4 < 3) {
       level.player playrumbleonentity("light_2s");
-    }
-    else {
+    } else {
       level.player playrumbleonentity("light_3s");
     }
 

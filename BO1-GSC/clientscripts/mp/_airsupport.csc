@@ -90,8 +90,7 @@ planeTurn(localClientNum, plane, yaw, halfLife, startTime, isTurningRight) {
   rightTurn = 1;
   if(isTurningRight) {
     turnDirection = rightTurn;
-  }
-  else {
+  } else {
     turnDirection = leftTurn;
   }
   yawY = getDvarFloatDefault(#"scr_planeyaw", -1.5 * turnDirection);

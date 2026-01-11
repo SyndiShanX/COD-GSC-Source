@@ -73,15 +73,13 @@ toy_lv_slot_machine_lightstimer() {
   for(;;) {
     if(var_0) {
       var_0 = randomint(100) < 50;
-    }
-    else {
+    } else {
       var_0 = randomint(100) < 20;
     }
 
     if(var_0) {
       wait(randomfloatrange(1, 4));
-    }
-    else {
+    } else {
       wait(randomfloatrange(0.4, 1));
     }
 
@@ -115,7 +113,7 @@ toy_lv_slot_machine_stopflashing(var_0) {
   self waittill("stop flashing");
 
   foreach(var_2 in level._interactive["lv_slot_machine_flashing_tags"]) {
-  self hidepart(var_2);
+    self hidepart(var_2);
   }
 
   if(isDefined(var_0)) {
@@ -131,7 +129,7 @@ toy_lv_slot_machine_switchlightson(var_0, var_1) {
   }
 
   foreach(var_3 in level._interactive["lv_slot_machine_flashing_tags"]) {
-  self showpart(var_3);
+    self showpart(var_3);
   }
 
   if(isDefined(var_1)) {
@@ -140,8 +138,7 @@ toy_lv_slot_machine_switchlightson(var_0, var_1) {
 
   if(common_scripts\utility::issp()) {
     self playSound("dst_slot_machine_light_flkr_on", "lightsSound", 1);
-  }
-  else {
+  } else {
     self playSound("dst_slot_machine_light_flkr_on");
   }
 }
@@ -154,7 +151,7 @@ toy_lv_slot_machine_switchlightsoff(var_0, var_1) {
   }
 
   foreach(var_3 in level._interactive["lv_slot_machine_flashing_tags"]) {
-  self hidepart(var_3);
+    self hidepart(var_3);
   }
 
   if(isDefined(var_1)) {
@@ -163,8 +160,7 @@ toy_lv_slot_machine_switchlightsoff(var_0, var_1) {
 
   if(common_scripts\utility::issp()) {
     self playSound("dst_slot_machine_light_flkr_off", "lightsSound", 1);
-  }
-  else {
+  } else {
     self playSound("dst_slot_machine_light_flkr_off");
   }
 }

@@ -61,8 +61,7 @@ isfacingenemy(tolerancecosangle) {
 randomattackidle() {
   if(isfacingenemy(-0.5)) {
     self set_orient_mode("face current");
-  }
-  else {
+  } else {
     self set_orient_mode("face enemy");
   }
 

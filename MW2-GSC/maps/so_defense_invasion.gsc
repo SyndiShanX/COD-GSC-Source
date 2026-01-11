@@ -112,7 +112,7 @@ so_defense_init() {
   // Remove unwanted sentries
   sentries = getEntArray("misc_turret", "classname");
   foreach(sentry in sentries) {
-  sentry Delete();
+    sentry Delete();
   }
   common_scripts\_sentry::main();
 
@@ -347,8 +347,7 @@ so_defense_announce_start_music(wave) {
 
   if(wave == "SO_DEFENSE_INVASION_WAVE_5") {
     thread music_loop("so_defense_invasion_finalwave_music", 114);
-  }
-  else {
+  } else {
     thread music_loop("so_defense_invasion_music", 191);
   }
 }

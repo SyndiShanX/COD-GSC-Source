@@ -60,8 +60,7 @@ main() {
 
   if(isDefined(self.skip_death_notetracks) && self.skip_death_notetracks) {
     self waittillmatch("death_anim", "end");
-  }
-  else {
+  } else {
     self maps\mp\animscripts\zm_shared::donotetracks("death_anim", self.handle_death_notetracks);
   }
 }
@@ -150,29 +149,21 @@ get_tag_for_damage_location() {
 
   if(self.damagelocation == "helmet") {
     tag = "j_head";
-  }
-  else if(self.damagelocation == "head") {
+  } else if(self.damagelocation == "head") {
     tag = "j_head";
-  }
-  else if(self.damagelocation == "neck") {
+  } else if(self.damagelocation == "neck") {
     tag = "j_neck";
-  }
-  else if(self.damagelocation == "torso_upper") {
+  } else if(self.damagelocation == "torso_upper") {
     tag = "j_spineupper";
-  }
-  else if(self.damagelocation == "torso_lower") {
+  } else if(self.damagelocation == "torso_lower") {
     tag = "j_spinelower";
-  }
-  else if(self.damagelocation == "right_arm_upper") {
+  } else if(self.damagelocation == "right_arm_upper") {
     tag = "j_elbow_ri";
-  }
-  else if(self.damagelocation == "left_arm_upper") {
+  } else if(self.damagelocation == "left_arm_upper") {
     tag = "j_elbow_le";
-  }
-  else if(self.damagelocation == "right_arm_lower") {
+  } else if(self.damagelocation == "right_arm_lower") {
     tag = "j_wrist_ri";
-  }
-  else if(self.damagelocation == "left_arm_lower") {
+  } else if(self.damagelocation == "left_arm_lower") {
     tag = "j_wrist_le";
   }
 
@@ -371,8 +362,7 @@ get_limb_data(gib_ref) {
 
   if(isDefined(temp_array[gib_ref])) {
     return temp_array[gib_ref];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -385,8 +375,7 @@ throw_gib(limb_tags_array) {
 
     if(isDefined(self.launch_gib_up)) {
       self gib("up", limb_tags_array);
-    }
-    else {
+    } else {
       self gib("normal", limb_tags_array);
     }
   }

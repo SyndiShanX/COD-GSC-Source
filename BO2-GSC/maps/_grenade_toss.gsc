@@ -51,8 +51,7 @@ force_grenade_toss(pos, grenade_weapon, explode_time, anime, throw_tag) {
         case "none":
           if(self.a.pose == "stand") {
             throw_anim = % stand_grenade_throw;
-          }
-          else {
+          } else {
             throw_anim = % crouch_grenade_throw;
           }
 

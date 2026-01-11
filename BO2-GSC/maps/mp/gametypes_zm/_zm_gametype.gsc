@@ -154,7 +154,9 @@ game_objects_allowed(mode, location) {
 post_init_gametype() {
   if(isDefined(level.gamemode_map_postinit)) {
     if(isDefined(level.gamemode_map_postinit[level.scr_zm_ui_gametype])) {
-      [[level.gamemode_map_postinit[level.scr_zm_ui_gametype]]]();
+      [
+        [level.gamemode_map_postinit[level.scr_zm_ui_gametype]]
+      ]();
     }
   }
 }
@@ -165,7 +167,9 @@ post_gametype_main(mode) {
 
   if(isDefined(level.gamemode_map_preinit)) {
     if(isDefined(level.gamemode_map_preinit[mode])) {
-      [[level.gamemode_map_preinit[mode]]]();
+      [
+        [level.gamemode_map_preinit[mode]]
+      ]();
     }
   }
 }
@@ -324,8 +328,7 @@ game_module_player_damage_callback(einflictor, eattacker, idamage, idflags, smea
     if(isDefined(level._effect["butterflies"])) {
       if(isDefined(sweapon) && weapontype(sweapon) == "grenade") {
         playFX(level._effect["butterflies"], self.origin + vectorscale((0, 0, 1), 40.0));
-      }
-      else {
+      } else {
         playFX(level._effect["butterflies"], vpoint, vdir);
       }
     }
@@ -392,7 +395,9 @@ rungametypeprecache(gamemode) {
   }
   if(isDefined(level.gamemode_map_precache)) {
     if(isDefined(level.gamemode_map_precache[gamemode])) {
-      [[level.gamemode_map_precache[gamemode]]]();
+      [
+        [level.gamemode_map_precache[gamemode]]
+      ]();
     }
   }
 
@@ -444,8 +449,7 @@ rungametypemain(gamemode, mode_main_func, use_round_logic) {
   if(isDefined(mode_main_func)) {
     if(isDefined(use_round_logic) && use_round_logic) {
       level thread round_logic(mode_main_func);
-    }
-    else {
+    } else {
       level thread non_round_logic(mode_main_func);
     }
   }
@@ -534,8 +538,7 @@ round_logic(mode_logic_func) {
 
     if(get_gamemode_var("team_1_score") > get_gamemode_var("team_2_score")) {
       matchwonteam = "A";
-    }
-    else {
+    } else {
       matchwonteam = "B";
     }
 
@@ -557,8 +560,7 @@ end_rounds_early(winner) {
 
   if(isDefined(winner)) {
     level notify("game_module_ended", winner);
-  }
-  else {
+  } else {
     level notify("end_game");
   }
 }
@@ -686,8 +688,7 @@ createtimer() {
 
   if(isDefined(level.timercountdown) && level.timercountdown) {
     elem settenthstimer(level.timelimit * 60);
-  }
-  else {
+  } else {
     elem settenthstimerup(0.1);
   }
 
@@ -865,8 +866,7 @@ onspawnintermission() {
   }
 }
 
-onspawnspectator(origin, angles) {
-}
+onspawnspectator(origin, angles) {}
 
 mayspawn() {
   if(isDefined(level.custommayspawnlogic)) {
@@ -910,8 +910,7 @@ module_hud_full_screen_overlay() {
 
   if(is_encounter() || getdvar(#"ui_gametype") == "zcleansed") {
     level waittill_any_or_timeout(25, "start_fullscreen_fade_out");
-  }
-  else {
+  } else {
     level waittill_any_or_timeout(25, "start_zombie_round_logic");
   }
 
@@ -971,16 +970,14 @@ create_module_hud_team_winer_score() {
 
   if(self._encounters_team == "B" && get_gamemode_var("team_2_score") > get_gamemode_var("team_1_score")) {
     self._team_winer_score settext(&"ZOMBIE_MATCH_WON");
-  }
-  else if(self._encounters_team == "B" && get_gamemode_var("team_2_score") < get_gamemode_var("team_1_score")) {
+  } else if(self._encounters_team == "B" && get_gamemode_var("team_2_score") < get_gamemode_var("team_1_score")) {
     self._team_winer_score.color = (1, 0, 0);
     self._team_winer_score settext(&"ZOMBIE_MATCH_LOST");
   }
 
   if(self._encounters_team == "A" && get_gamemode_var("team_1_score") > get_gamemode_var("team_2_score")) {
     self._team_winer_score settext(&"ZOMBIE_MATCH_WON");
-  }
-  else if(self._encounters_team == "A" && get_gamemode_var("team_1_score") < get_gamemode_var("team_2_score")) {
+  } else if(self._encounters_team == "A" && get_gamemode_var("team_1_score") < get_gamemode_var("team_2_score")) {
     self._team_winer_score.color = (1, 0, 0);
     self._team_winer_score settext(&"ZOMBIE_MATCH_LOST");
   }
@@ -1104,8 +1101,7 @@ module_hud_create_team_name() {
 
   if(isDefined(level.game_module_team_name_override_og_x)) {
     elem.og_x = level.game_module_team_name_override_og_x;
-  }
-  else {
+  } else {
     elem.og_x = 85;
   }
 
@@ -1411,17 +1407,14 @@ get_player_spawns_for_gametype() {
   return player_spawns;
 }
 
-onendgame(winningteam) {
-}
+onendgame(winningteam) {}
 
 onroundendgame(roundwinner) {
   if(game["roundswon"]["allies"] == game["roundswon"]["axis"]) {
     winner = "tie";
-  }
-  else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
+  } else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
     winner = "axis";
-  }
-  else {
+  } else {
     winner = "allies";
   }
 
@@ -1622,8 +1615,7 @@ menu_onmenuresponse() {
       self closemenu();
       self closeingamemenu();
 
-      if(level.rankedmatch && issubstr(response, "custom")) {
-      }
+      if(level.rankedmatch && issubstr(response, "custom")) {}
 
       self.selectedclass = 1;
       self[[level.class]](response);
@@ -1659,8 +1651,7 @@ menuallieszombies() {
 
     if(level.teambased) {
       self.sessionteam = "allies";
-    }
-    else {
+    } else {
       self.sessionteam = "none";
       self.ffateam = "allies";
     }

@@ -154,15 +154,13 @@ adjustmovespeed(var_00, var_01) {
 
   if(scripts\engine\utility::is_true(var_0.slowed)) {
     var_0.slowed = undefined;
-  }
-  else {
+  } else {
     return;
   }
 
   if(!isDefined(var_0.asm.cur_move_mode)) {
     var_02 = self.movemode;
-  }
-  else {
+  } else {
     var_02 = var_0.asm.cur_move_mode;
   }
 
@@ -210,11 +208,9 @@ freeze_zombie(var_00) {
 
   if(isDefined(var_0.func_7387) && issubstr(var_0.func_7387, "window")) {
     var_00 setscriptablepartstate("frozen", "frozen_traverse");
-  }
-  else if(scripts\engine\utility::is_true(var_0.dismember_crawl)) {
+  } else if(scripts\engine\utility::is_true(var_0.dismember_crawl)) {
     var_00 setscriptablepartstate("frozen", "frozen_crawl");
-  }
-  else {
+  } else {
     var_00 setscriptablepartstate("frozen", "frozen");
   }
 

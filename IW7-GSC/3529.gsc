@@ -123,8 +123,7 @@ func_1863(var_00) {
 
   if(level.teambased) {
     level.uavmodels[self.team][level.uavmodels[self.team].size] = self;
-  }
-  else {
+  } else {
     level.uavmodels[self.owner.guid + "_" + gettime()] = self;
   }
 }
@@ -371,8 +370,7 @@ func_20CF(var_00, var_01) {
   }
   if(var_00 == var_03) {
     var_04 = "cyan";
-  }
-  else if(var_00 != var_03) {
+  } else if(var_00 != var_03) {
     if(level.teambased && var_0.team != var_02 || !level.teambased) {
       var_04 = "orange";
       var_05 = 1;
@@ -584,8 +582,7 @@ dodamagetokillstreak(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if(isagent(self)) {
     self getrandomarmkillstreak(var_00, var_04, var_01, var_02, var_05, var_06);
-  }
-  else {
+  } else {
     self notify("damage", var_00, var_01, var_07, var_08, var_05, var_11, var_12, var_13, var_14, var_06, var_04, var_09, var_10, var_02);
   }
 }
@@ -707,8 +704,7 @@ func_13B84(var_00, var_01, var_02) {
 
     if(scripts\mp\utility\game::func_9EF0(self)) {
       var_04 notify(var_01, 0);
-    }
-    else {
+    } else {
       var_04 notify(var_01, self.origin);
     }
   } else {
@@ -858,8 +854,7 @@ watchhostmigrationlifetime(var_00, var_01, var_02) {
 
   if(isDefined(self.func_DCFC) && getplayerkillstreakcombatmode(self.func_DCFC) == "MANUAL") {
     self.func_DCFC setclientomnvar("ui_remote_c8_countdown", var_07);
-  }
-  else if(isDefined(self.streakname) && scripts\mp\utility\game::func_9F2C(self.streakname)) {
+  } else if(isDefined(self.streakname) && scripts\mp\utility\game::func_9F2C(self.streakname)) {
     self.owner setclientomnvar("ui_killstreak_countdown", var_07);
   }
 

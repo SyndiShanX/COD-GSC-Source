@@ -237,8 +237,7 @@ main() {
 
   if(getdvarint("use_old_captainprice_briefing") == 1) {
     level.scr_face["price"]["expecting_us"] = % blackout_price_facial_moveout;
-  }
-  else {
+  } else {
     maps\_anim::addnotetrack_dialogue("price", "dialog", "captainpricebrief", "blackout_pri_halfaclick");
   }
 
@@ -361,8 +360,7 @@ player_rappel() {
 
   if(getdvarint("use_old_evac") == 1) {
     level.scr_anim["player_rig"]["player_evac"] = % blackout_bh_evac_player;
-  }
-  else {
+  } else {
     level.scr_animtree["evac_rig"] = #animtree;
     level.scr_model["evac_rig"] = "worldbody_h1_sas_woodland";
     level.scr_anim["evac_rig"]["player_evac"] = % h1_blackout_bh_evac_player;

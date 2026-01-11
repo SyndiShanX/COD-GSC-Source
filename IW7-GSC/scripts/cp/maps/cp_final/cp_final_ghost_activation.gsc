@@ -1484,15 +1484,13 @@ set_up_controlling_struct() {
 }
 
 get_initial_queen_placement() {
-  var_00 = [
-    ["1", "4"],
+  var_00 = [["1", "4"],
     ["3", "4"],
     ["4", "4"],
     ["5", "4"],
     ["6", "4"],
     ["7", "4"],
-    ["8", "4"]
-  ];
+    ["8", "4"]];
   return scripts\engine\utility::random(var_00);
 }
 
@@ -1682,11 +1680,9 @@ place_paper_at(param_00, param_01) {
 select_first_piece_of_paper() {
   var_00 = spawnStruct();
   var_01 = ["cp_final_button_combo_paper_1a", "cp_final_button_combo_paper_2a", "cp_final_button_combo_paper_3a"];
-  var_02 = [
-    ["up_D_pad", "right_D_pad", "down_D_pad"],
+  var_02 = [["up_D_pad", "right_D_pad", "down_D_pad"],
     ["down_D_pad", "up_D_pad", "right_D_pad"],
-    ["up_D_pad", "down_D_pad", "up_D_pad"]
-  ];
+    ["up_D_pad", "down_D_pad", "up_D_pad"]];
   var_03 = randomint(var_01.size);
   var_00.model = var_01[var_03];
   var_00.button_combo = var_02[var_03];
@@ -1696,11 +1692,9 @@ select_first_piece_of_paper() {
 select_second_piece_of_paper() {
   var_00 = spawnStruct();
   var_01 = ["cp_final_button_combo_paper_1b", "cp_final_button_combo_paper_2b", "cp_final_button_combo_paper_3b"];
-  var_02 = [
-    ["right_D_pad", "right_D_pad", "down_D_pad"],
+  var_02 = [["right_D_pad", "right_D_pad", "down_D_pad"],
     ["up_D_pad", "up_D_pad", "down_D_pad"],
-    ["down_D_pad", "down_D_pad", "right_D_pad"]
-  ];
+    ["down_D_pad", "down_D_pad", "right_D_pad"]];
   var_03 = randomint(var_01.size);
   var_00.model = var_01[var_03];
   var_00.button_combo = var_02[var_03];
@@ -1710,11 +1704,9 @@ select_second_piece_of_paper() {
 select_third_piece_of_paper() {
   var_00 = spawnStruct();
   var_01 = ["cp_final_button_combo_paper_1c", "cp_final_button_combo_paper_2c", "cp_final_button_combo_paper_3c"];
-  var_02 = [
-    ["up_D_pad", "down_D_pad"],
+  var_02 = [["up_D_pad", "down_D_pad"],
     ["right_D_pad", "up_D_pad"],
-    ["down_D_pad", "right_D_pad"]
-  ];
+    ["down_D_pad", "right_D_pad"]];
   var_03 = randomint(var_01.size);
   var_00.model = var_01[var_03];
   var_00.button_combo = var_02[var_03];

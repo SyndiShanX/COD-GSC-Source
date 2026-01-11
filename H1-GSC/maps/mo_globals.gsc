@@ -174,8 +174,7 @@ ai_floodspawn_think() {
     for(;;) {
       if(isDefined(self.forcespawn)) {
         var_0 = self stalingradspawn();
-      }
-      else {
+      } else {
         var_0 = self dospawn();
       }
 
@@ -203,12 +202,10 @@ ai_magicbulletshield_think() {
     }
     if(isDefined(self.stopbulletshieldtime)) {
       var_0.stopbulletshieldtime = self.stopbulletshieldtime;
-    }
-    else if(isDefined(self.stopbulletshieldnotifymsg)) {
+    } else if(isDefined(self.stopbulletshieldnotifymsg)) {
       var_0.stopbulletshieldnotifyent = self.stopbulletshieldnotifyent;
       var_0.stopbulletshieldnotifymsg = self.stopbulletshieldnotifymsg;
-    } else {
-    }
+    } else {}
 
     var_0 thread ai_magicbulletshield_think2();
   }
@@ -221,16 +218,12 @@ ai_magicbulletshield_think2() {
 
   if(isDefined(self.stopforcegoaltime)) {
     wait(self.stopforcegoaltime);
-  }
-  else if(isDefined(self.stopforcegoalnotifymsg)) {
+  } else if(isDefined(self.stopforcegoalnotifymsg)) {
     if(tolower(self.stopforcegoalnotifyent) == "self") {
       self waittill(self.stopforcegoalnotifymsg);
-    }
-    else if(tolower(self.stopforcegoalnotifyent) == "level") {
+    } else if(tolower(self.stopforcegoalnotifyent) == "level") {
       level waittill(self.stopforcegoalnotifymsg);
-    }
-    else {
-    }
+    } else {}
   } else
     return;
 
@@ -250,12 +243,10 @@ ai_setforcecolor_think() {
 
     if(isDefined(self.setforcecolortime)) {
       var_0.setforcecolortime = self.setforcecolortime;
-    }
-    else if(isDefined(self.setforcecolornotifymsg)) {
+    } else if(isDefined(self.setforcecolornotifymsg)) {
       var_0.setforcecolornotifyent = self.setforcecolornotifyent;
       var_0.setforcecolornotifymsg = self.setforcecolornotifymsg;
-    } else {
-    }
+    } else {}
 
     var_0 thread ai_setforcecolor_think2();
   }
@@ -266,16 +257,12 @@ ai_setforcecolor_think2() {
 
   if(isDefined(self.setforcecolortime)) {
     wait(self.setforcecolortime);
-  }
-  else if(isDefined(self.setforcecolornotifymsg)) {
+  } else if(isDefined(self.setforcecolornotifymsg)) {
     if(tolower(self.setforcecolornotifyent) == "self") {
       self waittill(self.setforcecolornotifymsg);
-    }
-    else if(tolower(self.setforcecolornotifyent) == "level") {
+    } else if(tolower(self.setforcecolornotifyent) == "level") {
       level waittill(self.setforcecolornotifymsg);
-    }
-    else {
-    }
+    } else {}
   }
 
   maps\_utility::set_force_color(self.setforcecolorvalue);
@@ -292,12 +279,10 @@ ai_setforcegoal_think() {
     }
     if(isDefined(self.stopforcegoaltime)) {
       var_0.stopforcegoaltime = self.stopforcegoaltime;
-    }
-    else if(isDefined(self.stopforcegoalnotifymsg)) {
+    } else if(isDefined(self.stopforcegoalnotifymsg)) {
       var_0.stopforcegoalnotifyent = self.stopforcegoalnotifyent;
       var_0.stopforcegoalnotifymsg = self.stopforcegoalnotifymsg;
-    } else {
-    }
+    } else {}
 
     var_0 thread ai_setforcegoal_think2();
   }
@@ -309,16 +294,12 @@ ai_setforcegoal_think2() {
 
   if(isDefined(self.stopforcegoaltime)) {
     wait(self.stopforcegoaltime);
-  }
-  else if(isDefined(self.stopforcegoalnotifymsg)) {
+  } else if(isDefined(self.stopforcegoalnotifymsg)) {
     if(tolower(self.stopforcegoalnotifyent) == "self") {
       self waittill(self.stopforcegoalnotifymsg);
-    }
-    else if(tolower(self.stopforcegoalnotifyent) == "level") {
+    } else if(tolower(self.stopforcegoalnotifyent) == "level") {
       level waittill(self.stopforcegoalnotifymsg);
-    }
-    else {
-    }
+    } else {}
   }
 
   maps\_utility::unset_forcegoal();
@@ -335,12 +316,10 @@ ai_ignoreme_think() {
     }
     if(isDefined(self.stopignoretime)) {
       var_0.stopignoretime = self.stopignoretime;
-    }
-    else if(isDefined(self.stopignorenotifymsg)) {
+    } else if(isDefined(self.stopignorenotifymsg)) {
       var_0.stopignorenotifyent = self.stopignorenotifyent;
       var_0.stopignorenotifymsg = self.stopignorenotifymsg;
-    } else {
-    }
+    } else {}
 
     var_0 thread ai_ignoreme_think2();
   }
@@ -352,16 +331,12 @@ ai_ignoreme_think2() {
 
   if(isDefined(self.stopignoretime)) {
     wait(self.stopignoretime);
-  }
-  else if(isDefined(self.stopignorenotifymsg)) {
+  } else if(isDefined(self.stopignorenotifymsg)) {
     if(tolower(self.stopignorenotifyent) == "self") {
       self waittill(self.stopignorenotifymsg);
-    }
-    else if(tolower(self.stopignorenotifyent) == "level") {
+    } else if(tolower(self.stopignorenotifyent) == "level") {
       level waittill(self.stopignorenotifymsg);
-    }
-    else {
-    }
+    } else {}
   }
 
   self.ignoreme = 0;
@@ -614,8 +589,7 @@ interactive_wallthink() {
 
       if(distance(var_2, var_1.origin) < var_1.radius) {
         var_3 = var_1.origin;
-      }
-      else {
+      } else {
         var_0 = anglesToForward(var_1.angles);
         var_4 = maps\_utility::vector_multiply(var_0, 88);
         var_3 = var_1.origin + var_4;
@@ -635,8 +609,7 @@ interactive_wallthink() {
 
       if(distance(var_2, var_1.origin) < var_1.radius) {
         var_3 = var_1.origin;
-      }
-      else {
+      } else {
         var_0 = anglesToForward(var_1.angles);
         var_4 = maps\_utility::vector_multiply(var_0, 72);
         var_3 = var_1.origin + var_4;
@@ -669,8 +642,7 @@ interactive_wallthink() {
 
   if(isDefined(var_0)) {
     playFX(level._effect["exp_wall"], var_2, var_0);
-  }
-  else {
+  } else {
     playFX(level._effect["exp_wall"], var_2);
   }
 
@@ -717,8 +689,7 @@ interactive_cratethink() {
 
   if(var_2 > 0) {
     playFX(level._effect["exp_crate1"], self.origin);
-  }
-  else {
+  } else {
     playFX(level._effect["exp_crate2"], self.origin);
   }
 
@@ -763,8 +734,7 @@ auto_save_think() {
 
   if(isDefined(self.script_noteworthy)) {
     maps\_utility::autosave_by_name(self.script_noteworthy);
-  }
-  else {
+  } else {
     maps\_utility::autosave_by_name("default");
   }
 }

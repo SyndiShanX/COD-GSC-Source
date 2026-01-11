@@ -127,7 +127,7 @@ start_common() {
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_grenadeammo, 0);
 
   foreach(var_2 in level._allies) {
-  var_2.old_react_dist = var_2.newenemyreactiondistsq;
+    var_2.old_react_dist = var_2.newenemyreactiondistsq;
   }
 
   setup_spawners();
@@ -239,8 +239,7 @@ cw_low_cleanup() {
 
   if(var_0.size > 0) {
     common_scripts\utility::array_thread(var_0, maps\_utility::set_ignoreall, 1);
-  }
-  else {
+  } else {
     return;
   }
 
@@ -391,8 +390,7 @@ cw_barracks_fast(var_0) {
   }
   if(var_0 getanimtime(var_0 maps\_utility::getanim("cw_hallsweep")) > 0.16) {
     var_1 = [level._allies[0], level._allies[1], level.op_barracks];
-  }
-  else {
+  } else {
     var_1 = [level._allies[0], level._allies[1], level.op_barracks, var_0];
   }
 
@@ -451,7 +449,7 @@ cw_common() {
   common_scripts\utility::array_thread(level._allies, maps\_utility::set_ignoreall, 0);
 
   foreach(var_1 in level._allies) {
-  var_1.newenemyreactiondistsq = var_1.old_react_dist;
+    var_1.newenemyreactiondistsq = var_1.old_react_dist;
   }
 
   var_3 = getent("cw_vig_common_room_breach", "targetname");
@@ -600,8 +598,7 @@ high_catwalk_kill() {
 
   if(!isDefined(var_1)) {
     return;
-  }
-  else if(!isDefined(var_2) || common_scripts\utility::flag("flag_no_catwalk_kill")) {
+  } else if(!isDefined(var_2) || common_scripts\utility::flag("flag_no_catwalk_kill")) {
     var_1 delete();
     return;
   }
@@ -714,8 +711,7 @@ breach_wait_nag_proc(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_1 = ["blackice_bkr_muchtime", "blackice_bkr_move"];
-  }
-  else if(!isarray(var_1)) {
+  } else if(!isarray(var_1)) {
     var_1 = [var_1];
   }
 
@@ -821,8 +817,7 @@ cw_common_breach_trig_proc() {
   for(;;) {
     if(!isDefined(self.trigger_off) && (level.player isthrowinggrenade() || !level.player maps\_utility::player_looking_at(var_0.origin, 0.9, 1))) {
       common_scripts\utility::trigger_off();
-    }
-    else if(isDefined(self.trigger_off) && !level.player isthrowinggrenade() && level.player maps\_utility::player_looking_at(var_0.origin, 0.9, 1)) {
+    } else if(isDefined(self.trigger_off) && !level.player isthrowinggrenade() && level.player maps\_utility::player_looking_at(var_0.origin, 0.9, 1)) {
       common_scripts\utility::trigger_on();
     }
 
@@ -869,8 +864,7 @@ cw_breach_bullets() {
 
     if(common_scripts\utility::flag("cw_gps_common_door") && randomint(5) == 0) {
       magicbullet(var_4[randomint(var_4.size)], var_0[var_1].origin, level.player getEye());
-    }
-    else {
+    } else {
       if(!bullettracepassed(var_0[var_1].origin, var_2[var_3].origin, 1, undefined)) {
         continue;
       }
@@ -918,11 +912,9 @@ common_gps_autokill() {
     while(var_0 < 30) {
       if(self istouching(var_1)) {
         var_0 = 0;
-      }
-      else if(self istouching(var_3)) {
+      } else if(self istouching(var_3)) {
         var_0 = 30;
-      }
-      else if(!self istouching(var_2)) {
+      } else if(!self istouching(var_2)) {
         var_0 = var_0 + 0.05;
       }
 

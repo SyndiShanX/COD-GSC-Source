@@ -161,7 +161,7 @@ save_intel_for_all_players() {
 
   PrintLn(">> SP PERCENT UPDATE - save_intel_for_all_players()");
 
-    maps\_endmission::updateSpPercent();
+  maps\_endmission::updateSpPercent();
 }
 
 give_point() {
@@ -197,8 +197,7 @@ intel_feedback(found_by_player) {
     //if I found it and I already had it
     if(found_by_player == player && player GetPlayerIntelIsFound(self.num)) {
       remaining_print.label = &"SCRIPT_INTELLIGENCE_PREV_FOUND";
-    }
-    else {
+    } else {
       // && 1/30 pieces of enemy intel found.
       remaining_print.label = &"SCRIPT_INTELLIGENCE_OF_FOURTYFIVE";
       player give_point();

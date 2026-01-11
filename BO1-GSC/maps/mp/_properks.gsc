@@ -429,8 +429,7 @@ medalEarned(medalName, weapon) {
   if(self ownsAndUsingPerk("specialty_longersprint")) {
     if(medalName == "MEDAL_FIRST_BLOOD") {
       self maps\mp\gametypes\_persistence::statAdd("PERKS_MARATHON_FIRST_BLOOD_MEDAL", 1, false);
-    }
-    else if(medalName == "MEDAL_FLAG_CAPTURE") {
+    } else if(medalName == "MEDAL_FLAG_CAPTURE") {
       self maps\mp\gametypes\_persistence::statAdd("PERKS_MARATHON_CAPTURE_MEDAL", 1, false);
     }
   }

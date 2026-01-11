@@ -43,8 +43,7 @@ fontPulseInit(maxFontScale) {
   self.baseFontScale = self.fontScale;
   if(isDefined(maxFontScale)) {
     self.maxFontScale = min(maxFontScale, 6.3);
-  }
-  else {
+  } else {
     self.maxFontScale = min(self.fontScale * 2, 6.3);
   }
   self.inFrames = 2;

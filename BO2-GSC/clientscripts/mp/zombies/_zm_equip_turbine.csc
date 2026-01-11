@@ -19,8 +19,7 @@ turbine_activated_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
   if(newval & 1) {
     if(newval & 2) {
       self clientscripts\mp\zombies\_zm_equipment::play_fx_for_all_clients(level._effect["turbine_low"], "tag_animate");
-    }
-    else {
+    } else {
       self clientscripts\mp\zombies\_zm_equipment::play_fx_for_all_clients(level._effect["turbine_on"], "tag_animate");
     }
   } else if(newval & 2)

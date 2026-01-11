@@ -165,8 +165,7 @@ player_should_see_craft_warning(var_0, var_1, var_2) {
 
   if(maps\mp\alien\_utility::is_true(var_2)) {
     return 1;
-  }
-  else if(maps\mp\alien\_utility::is_true(self.iscarrying)) {
+  } else if(maps\mp\alien\_utility::is_true(self.iscarrying)) {
     return 0;
   }
 
@@ -345,7 +344,7 @@ resetplayercraftingitemsonrespawn() {
     var_1 = common_scripts\utility::array_remove_duplicates(var_0);
 
     foreach(var_1 in var_0) {
-    maps\mp\alien\_pillage::give_crafting_item(var_1);
+      maps\mp\alien\_pillage::give_crafting_item(var_1);
     }
   }
 }
@@ -482,7 +481,7 @@ oncancel(var_0, var_1, var_2) {
         var_4 = strtok(var_0, "_");
 
         foreach(var_6 in var_4) {
-        var_3 maps\mp\alien\_pillage::give_crafting_item(var_6);
+          var_3 maps\mp\alien\_pillage::give_crafting_item(var_6);
         }
       }
     }
@@ -665,8 +664,7 @@ updateplacement(var_0, var_1) {
 
     if(isDefined(var_6["entity"])) {
       self.moving_platform = var_6["entity"];
-    }
-    else {
+    } else {
       self.moving_platform = undefined;
     }
 
@@ -679,8 +677,7 @@ updateplacement(var_0, var_1) {
 
         if(isDefined(self.firstplacement)) {
           var_1 forceusehinton(var_3.placestring);
-        }
-        else {
+        } else {
           var_1 forceusehinton(var_3.placestringnocancel);
         }
       } else {
@@ -805,8 +802,7 @@ ongameended(var_0) {
 cleanup(var_0) {
   if(isDefined(self.isplaced)) {
     self notify("death");
-  }
-  else {
+  } else {
     oncancel(var_0);
   }
 }
@@ -919,8 +915,7 @@ crafting_menu_monitor() {
           case "pipe_bomb":
             if(maps\mp\alien\_crafting_traps::can_craft_pipe_bomb()) {
               var_2 = 1;
-            }
-            else {
+            } else {
               maps\mp\_utility::setlowermessage("no_items", &"ALIEN_CRAFTING_NO_CRAFT_EXPLOSIVE", 3);
               self playlocalsound("ui_craft_deny");
             }
@@ -929,8 +924,7 @@ crafting_menu_monitor() {
           case "sticky_flare":
             if(maps\mp\alien\_crafting_traps::can_craft_sticky_flare()) {
               var_2 = 1;
-            }
-            else {
+            } else {
               maps\mp\_utility::setlowermessage("no_items", &"ALIEN_CRAFTING_NO_CRAFT_TACTICAL", 3);
               self playlocalsound("ui_craft_deny");
             }
@@ -942,8 +936,7 @@ crafting_menu_monitor() {
           case "venomx_grenade":
             if(maps\mp\alien\_crafting_traps::can_craft_venom_grenade()) {
               var_2 = 1;
-            }
-            else {
+            } else {
               maps\mp\_utility::setlowermessage("no_items", &"ALIEN_CRAFTING_NO_CRAFT_EXPLOSIVE", 3);
               self playlocalsound("ui_craft_deny");
             }
@@ -952,8 +945,7 @@ crafting_menu_monitor() {
           case "cortex_grenade":
             if(maps\mp\alien\_crafting_traps::can_craft_cortex_grenade()) {
               var_2 = 1;
-            }
-            else {
+            } else {
               maps\mp\_utility::setlowermessage("no_items", &"ALIEN_CRAFTING_NO_CRAFT_EXPLOSIVE", 3);
               self playlocalsound("ui_craft_deny");
             }

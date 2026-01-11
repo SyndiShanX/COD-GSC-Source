@@ -303,9 +303,7 @@ function skeletontargetservice(behaviortreeentity) {
   player = get_closest_valid_player(behaviortreeentity.origin, behaviortreeentity.ignore_player);
   if(!isDefined(player)) {
     if(isDefined(behaviortreeentity.ignore_player)) {
-      if(isDefined(level._should_skip_ignore_player_logic) && [
-          [level._should_skip_ignore_player_logic]
-        ]()) {
+      if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
         return;
       }
       behaviortreeentity.ignore_player = [];

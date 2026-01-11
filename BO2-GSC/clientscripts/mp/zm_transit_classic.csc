@@ -75,7 +75,7 @@ sidequest_complete_fx_lightning(electric_struct) {
     players = getlocalplayers();
 
     foreach(clientnum, player in players) {
-    playFX(clientnum, level._effect["sq_common_lightning"], electric_struct.origin - vectorscale((0, 0, 1), 768.0));
+      playFX(clientnum, level._effect["sq_common_lightning"], electric_struct.origin - vectorscale((0, 0, 1), 768.0));
     }
 
     wait(randomfloatrange(1, 2));
@@ -91,8 +91,7 @@ sidequest_complete_pyramid_watch() {
 
     if(story == "sq_max") {
       story = "maxis";
-    }
-    else {
+    } else {
       story = "richtofen";
     }
 

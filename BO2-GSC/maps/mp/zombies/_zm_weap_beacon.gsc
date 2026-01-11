@@ -241,8 +241,7 @@ proximity_detonate(owner) {
 
     if(isDefined(owner)) {
       self detonate(owner);
-    }
-    else {
+    } else {
       self detonate(undefined);
     }
 
@@ -345,8 +344,7 @@ player_throw_beacon(grenade, num_attractors, max_attract_dist, attract_dist_diff
 
         if(flag("three_robot_round") && flag("fire_link_enabled")) {
           model thread start_artillery_launch_ee(grenade);
-        }
-        else {
+        } else {
           model thread start_artillery_launch_normal(grenade);
         }
 
@@ -378,8 +376,7 @@ grenade_stolen_by_sam(ent_grenade, ent_model, ent_actor) {
 
   if(direction[1] < 0 || direction[0] > 0 && direction[1] > 0) {
     direction = (direction[0], direction[1] * -1, 0);
-  }
-  else if(direction[0] < 0) {
+  } else if(direction[0] < 0) {
     direction = (direction[0] * -1, direction[1], 0);
   }
 
@@ -452,8 +449,7 @@ do_beacon_sound(model, info) {
   if(!self.monk_scream_vox && level.music_override == 0) {
     if(isDefined(level.beacon_dual_view) && level.beacon_dual_view) {
       self playsoundtoteam("null", "allies");
-    }
-    else {
+    } else {
       self playSound("null");
     }
   }
@@ -489,8 +485,7 @@ do_beacon_sound(model, info) {
 play_delayed_explode_vox() {
   wait 6.5;
 
-  if(isDefined(self)) {
-  }
+  if(isDefined(self)) {}
 }
 
 get_thrown_beacon() {

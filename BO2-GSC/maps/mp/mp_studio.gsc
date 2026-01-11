@@ -73,8 +73,7 @@ triggercheck(target) {
       while(isDefined(player) && player istouching(self) && distance <= 90) {
         if(distancesquared(target.origin, target.railpoints[0]) < distancesquared(player.origin, target.railpoints[0])) {
           target.preferrednextpos = 0;
-        }
-        else {
+        } else {
           target.preferrednextpos = 1;
         }
 
@@ -199,8 +198,7 @@ movetarget(dir, dis, speed) {
 
     if(self.preferrednextpos == 0) {
       self.preferrednextpos = 1;
-    }
-    else {
+    } else {
       self.preferrednextpos = 0;
     }
 

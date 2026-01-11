@@ -752,8 +752,7 @@ vanguard_in_range() {
 
     if(level.is_mp_descent) {
       return self.origin[2] < level.vanguardMaxHeight;
-    }
-    else {
+    } else {
       return true;
     }
   } else {
@@ -771,8 +770,7 @@ vanguard_rangeCountdown() {
 
   if(isDefined(self.heliInProximity)) {
     countdown = UAV_REMOTE_HELI_RANGE_COUNTDOWN;
-  }
-  else {
+  } else {
     countdown = UAV_REMOTE_PAST_RANGE_COUNTDOWN;
   }
 
@@ -930,8 +928,7 @@ vanguard_watchHeliProximity() {
 
     if(!self.inHeliProximity && inHeliProximity) {
       self.inHeliProximity = true;
-    }
-    else if(self.inHeliProximity && !inHeliProximity) {
+    } else if(self.inHeliProximity && !inHeliProximity) {
       self.inHeliProximity = false;
       self.heliInProximity = undefined;
     }

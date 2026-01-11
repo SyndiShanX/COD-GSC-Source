@@ -7,11 +7,9 @@
 #include clientscripts\createfx\so_rts_mp_socotra_fx;
 #include clientscripts\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 #using_animtree("fxanim_props");
 

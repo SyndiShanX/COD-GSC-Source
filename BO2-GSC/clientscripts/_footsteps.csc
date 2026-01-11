@@ -94,11 +94,9 @@ bigdogfootstepcbfunc(client_num, pos, surface, notetrack, bone) {
 
   if(issubstr(notetrack, "small")) {
     sound_alias = "fly_step_walk_bigdog_" + surface;
-  }
-  else if(issubstr(notetrack, "shuffle")) {
+  } else if(issubstr(notetrack, "shuffle")) {
     sound_alias = "fly_step_turn_bigdog_" + surface;
-  }
-  else if(issubstr(notetrack, "scrape")) {
+  } else if(issubstr(notetrack, "scrape")) {
     sound_alias = "fly_step_scrape_bigdog_" + surface;
 
     if(!isDefined(level._effect[self.species]) || !isDefined(level._effect[self.species]["step_sparks"])) {
@@ -176,8 +174,7 @@ buildmovementsoundaliasname(movementtype, ground_type, firstperson, quiet) {
 
   if(firstperson) {
     sound_alias = sound_alias + "_plr_";
-  }
-  else {
+  } else {
     sound_alias = sound_alias + "_npc_";
   }
 
@@ -201,8 +198,7 @@ do_foot_effect(client_num, ground_type, foot_pos, on_fire) {
 
     if(self.type == "actor" && isDefined(level._effect[self.species]) && isDefined(level._effect[self.species][effectname])) {
       effect = level._effect[self.species][effectname];
-    }
-    else if(isDefined(level._effect["human"]) && isDefined(level._effect["human"][effectname])) {
+    } else if(isDefined(level._effect["human"]) && isDefined(level._effect["human"][effectname])) {
       effect = level._effect["human"][effectname];
     }
 

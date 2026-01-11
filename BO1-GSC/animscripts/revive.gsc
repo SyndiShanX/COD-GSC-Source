@@ -121,8 +121,7 @@ reviver_selection_think(team) {
       friendlies = GetAIArray(self.team);
       if(self.a.oldRevivers.size > 0) {
         ai = get_array_of_closest(self.origin, friendlies, self.a.oldRevivers, undefined, anim.reviverPingDist);
-      }
-      else {
+      } else {
         ai = get_array_of_closest(self.origin, friendlies, undefined, undefined, anim.reviverPingDist);
       }
       for(i = 0; i < ai.size; i++) {
@@ -196,8 +195,7 @@ handle_reviver_goal_change() {
   if(isDefined(self.a.bleeder) && IsAlive(self.a.bleeder)) {
     if(self.a.revivedOnce) {
       self.a.bleeder thread bleeder_getup();
-    }
-    else {
+    } else {
       self.a.bleeder thread reviver_selection_think(self.a.bleeder.team);
     }
   }

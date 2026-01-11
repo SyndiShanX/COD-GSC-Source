@@ -1023,18 +1023,12 @@ func_D49E(param_00, param_01) {
 }
 
 func_F2AE(param_00) {
-  [
-    [self.var_1F66["hiding"][param_00]]
-  ]();
-  [
-    [self.var_1F66["exposed"][param_00]]
-  ]();
+  [[self.var_1F66["hiding"][param_00]]]();
+  [[self.var_1F66["exposed"][param_00]]]();
 }
 
 func_F2AF(param_00) {
-  [
-    [self.var_1F66["exposed"][param_00]]
-  ]();
+  [[self.var_1F66["exposed"][param_00]]]();
 }
 
 transitiontostance(param_00) {

@@ -73,7 +73,7 @@ update_blocker_achievements(var_0, var_1) {
       maps\mp\alien\_achievement::update_achievement_all_players("KILL_KRAKEN_AND_ALL_CHALLENGES", 1);
 
       foreach(var_3 in level.players) {
-      var_3 maps\mp\alien\_achievement::update_achievement("KILL_KRAKEN_WITH_RELIC", 1, var_3);
+        var_3 maps\mp\alien\_achievement::update_achievement("KILL_KRAKEN_WITH_RELIC", 1, var_3);
       }
 
       break;

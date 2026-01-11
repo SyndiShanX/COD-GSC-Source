@@ -27,14 +27,11 @@ friendly_stance_handler() {
 
       if(var_0[self._stealth.logic.stance]) {
         thread friendly_stance_handler_change_stance_down();
-      }
-      else if(maps\_utility::ent_flag("_stealth_stay_still")) {
+      } else if(maps\_utility::ent_flag("_stealth_stay_still")) {
         thread friendly_stance_handler_resume_path();
-      }
-      else if(!var_0[self._stealth.behavior.stance_up] && self._stealth.behavior.stance_up != self._stealth.logic.stance) {
+      } else if(!var_0[self._stealth.behavior.stance_up] && self._stealth.behavior.stance_up != self._stealth.logic.stance) {
         thread friendly_stance_handler_change_stance_up();
-      }
-      else if(maps\_utility::ent_flag("_stealth_stance_change")) {
+      } else if(maps\_utility::ent_flag("_stealth_stance_change")) {
         self notify("_stealth_stance_dont_change");
       }
 
@@ -98,11 +95,9 @@ friendly_stance_handler_return_ai_sight(var_0, var_1) {
 
   if(var_4 > 0.3) {
     return self._stealth.behavior.stance_handler["looking_towards"][var_1];
-  }
-  else if(var_4 < -0.7) {
+  } else if(var_4 < -0.7) {
     return self._stealth.behavior.stance_handler["looking_away"][var_1];
-  }
-  else {
+  } else {
     return self._stealth.behavior.stance_handler["neutral"][var_1];
   }
 }
@@ -119,8 +114,7 @@ friendly_stance_handler_change_stance_down() {
     case "crouch":
       if(self._stealth.behavior.no_prone) {
         friendly_stance_handler_stay_still();
-      }
-      else {
+      } else {
         self allowedstances("prone");
       }
 
@@ -221,19 +215,19 @@ friendly_default_stance_handler_distances() {
 friendly_set_stance_handler_distances(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     foreach(var_5, var_4 in var_0) {
-    self._stealth.behavior.stance_handler["looking_away"][var_5] = var_4;
+      self._stealth.behavior.stance_handler["looking_away"][var_5] = var_4;
     }
   }
 
   if(isDefined(var_1)) {
     foreach(var_5, var_4 in var_1) {
-    self._stealth.behavior.stance_handler["neutral"][var_5] = var_4;
+      self._stealth.behavior.stance_handler["neutral"][var_5] = var_4;
     }
   }
 
   if(isDefined(var_2)) {
     foreach(var_5, var_4 in var_2) {
-    self._stealth.behavior.stance_handler["looking_towards"][var_5] = var_4;
+      self._stealth.behavior.stance_handler["looking_towards"][var_5] = var_4;
     }
   }
 }

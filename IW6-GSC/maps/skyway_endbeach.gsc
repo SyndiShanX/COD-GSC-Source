@@ -68,11 +68,11 @@ start() {
   var_1 = getEntArray("bridge_end_2", "script_noteworthy");
 
   foreach(var_3 in var_0) {
-  var_3 hide();
+    var_3 hide();
   }
 
   foreach(var_3 in var_1) {
-  var_3 hide();
+    var_3 hide();
   }
 
   if(level.start_point == "end_beach_final") {
@@ -431,15 +431,13 @@ player_drags_ally(var_0) {
     if(var_4 == "LR") {
       if(var_7) {
         maps\_utility::display_hint_timeout("hint_drag_leftright_pc");
-      }
-      else {
+      } else {
         maps\_utility::display_hint_timeout("hint_drag_leftright");
       }
     } else if(var_4 == "L") {
       if(var_7) {
         maps\_utility::display_hint_timeout("hint_drag_left_pc");
-      }
-      else {
+      } else {
         maps\_utility::display_hint_timeout("hint_drag_left");
       }
     } else if(var_7)
@@ -515,11 +513,9 @@ player_drags_ally(var_0) {
 
           if(var_8 == var_3.size - 1) {
             var_4 = "LR";
-          }
-          else if(var_4 == "L") {
+          } else if(var_4 == "L") {
             var_4 = "R";
-          }
-          else {
+          } else {
             var_4 = "L";
           }
 
@@ -534,8 +530,7 @@ player_drags_ally(var_0) {
 get_ltrig_press(var_0) {
   if(var_0) {
     return level.player buttonpressed("mouse1");
-  }
-  else {
+  } else {
     return level.player adsbuttonpressed();
   }
 }
@@ -543,8 +538,7 @@ get_ltrig_press(var_0) {
 get_rtrig_press(var_0) {
   if(var_0) {
     return level.player buttonpressed("mouse2");
-  }
-  else {
+  } else {
     return level.player attackbuttonpressed();
   }
 }
@@ -558,17 +552,13 @@ beach_idle(var_0, var_1) {
 
   if(issubstr(var_1, "1_1")) {
     level.player common_scripts\utility::delaycall(2, ::lerpviewangleclamp, 3.4, 1, 0, 25, 60, 45, 15);
-  }
-  else if(issubstr(var_1, "1_2")) {
+  } else if(issubstr(var_1, "1_2")) {
     level.player lerpviewangleclamp(0.05, 0, 0, 5, 120, 45, 0);
-  }
-  else if(issubstr(var_1, "2_1")) {
+  } else if(issubstr(var_1, "2_1")) {
     level.player lerpviewangleclamp(0.05, 0, 0, 25, 60, 45, 15);
-  }
-  else if(issubstr(var_1, "2_2")) {
+  } else if(issubstr(var_1, "2_2")) {
     level.player lerpviewangleclamp(0.05, 0, 0, 5, 120, 45, 0);
-  }
-  else if(issubstr(var_1, "5_1")) {
+  } else if(issubstr(var_1, "5_1")) {
     level.player lerpviewangleclamp(0.05, 0, 0, 45, 30, 50, 15);
   }
 
@@ -684,7 +674,7 @@ fx_rorke_bleedout(var_0) {
 
 event_sinking_boats() {
   foreach(var_1 in level._endbeach.boats) {
-  thread maps\_anim::anim_single_solo(var_1, "sink");
+    thread maps\_anim::anim_single_solo(var_1, "sink");
   }
 
   level waittill("notify_start_rogs");
@@ -818,8 +808,7 @@ rog_hits_far(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_3 = var_1;
-  }
-  else {
+  } else {
     var_3 = 0;
   }
 
@@ -1241,8 +1230,7 @@ god_rays_from_world_location(var_0, var_1, var_2, var_3, var_4) {
 
       if(level.player.origin[0] < var_0[0]) {
         var_6 = atan((level.player.origin[1] - var_0[1]) / (level.player.origin[0] - var_0[0]));
-      }
-      else {
+      } else {
         var_6 = 180 + atan((level.player.origin[1] - var_0[1]) / (level.player.origin[0] - var_0[0]));
       }
 

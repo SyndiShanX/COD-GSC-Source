@@ -779,7 +779,7 @@ can_player_banzai_melee() {
   if(maps\_collectibles::has_collectible("collectible_berserker")) {
     if(IsPlayer(self) && self.collectibles_berserker_mode_on)
   }
-      return false;
+  return false;
   return true;
 }
 
@@ -1389,8 +1389,7 @@ showBanzaiHint(player) {
   level.banzaiHintElem[num].color = (1, 1, 1);
   if(player.firstTime) {
     level.banzaiHintElem[num] setText(&"SCRIPT_PLATFORM_BANZAI_DEATH_TOO_LATE");
-  }
-  else {
+  } else {
     level.banzaiHintElem[num] setText(&"SCRIPT_PLATFORM_BANZAI_HINT");
   }
   level.banzaiHintElem[num].x = 0;

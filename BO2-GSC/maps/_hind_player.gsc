@@ -120,8 +120,7 @@ next_cockpit_damage_state() {
 
   if(self.current_cockpit_state - 1 < 0) {
     self detach(self.console_models[self.console_models.size - 1], "origin_animate_jnt");
-  }
-  else {
+  } else {
     self detach(self.console_models[self.current_cockpit_state - 1], "origin_animate_jnt");
   }
 
@@ -297,29 +296,25 @@ create_tutorial_hud(no_wait) {
 update_tutorial_hud() {
   if(self.tut_hud["fly_controls"]) {
     level.fly_up_hud settext("Press [{+smoke}] to fly up");
-  }
-  else {
+  } else {
     level.fly_up_hud settext("");
   }
 
   if(self.tut_hud["fly_controls"]) {
     level.fly_down_hud settext("Press [{+speed_throw}] to fly down.");
-  }
-  else {
+  } else {
     level.fly_down_hud settext("");
   }
 
   if(self.tut_hud["gun_controls"]) {
     level.fire_hud settext("[{+attack}] mini-gun");
-  }
-  else {
+  } else {
     level.fire_hud settext("");
   }
 
   if(self.tut_hud["rocket_controls"]) {
     level.rocket_hud settext("[{+speed_throw}] rocket pods - [{+usereload}] reload");
-  }
-  else {
+  } else {
     level.rocket_hud settext("");
   }
 }
@@ -448,8 +443,7 @@ reload_chopper_sounds() {
 advance_pod_index() {
   if(self._rocket_pods.pod_index == self._rocket_pods.pods.size - 1) {
     self._rocket_pods.pod_index = 0;
-  }
-  else {
+  } else {
     self._rocket_pods.pod_index++;
   }
 }
@@ -626,8 +620,7 @@ fire_rocket(rocket) {
 
   if(trace_dist_sq < 25000000 && trace_dist_sq > 250000) {
     end_origin = trace["position"];
-  }
-  else {
+  } else {
     end_origin = start_origin + forward * 1000;
   }
 
@@ -662,8 +655,7 @@ update_rocket_hud(rocket_count, ammo_left, reloading) {
 
   if(isDefined(rocket_count)) {
     level._rocket_hud settext(rocket_count);
-  }
-  else {
+  } else {
     level._rocket_hud settext("");
   }
 
@@ -957,8 +949,7 @@ hud_minigun_think() {
 
       if(swap_counter == 5) {
         swap_counter = 1;
-      }
-      else {
+      } else {
         swap_counter++;
       }
     }

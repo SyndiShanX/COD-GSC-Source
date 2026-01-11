@@ -46,7 +46,7 @@ main() {
   var_1 = getarraykeys(var_0.anims);
 
   foreach(var_3 in var_1) {
-  var_0.animlengths[var_3] = getanimlength(var_0.anims[var_3]);
+    var_0.animlengths[var_3] = getanimlength(var_0.anims[var_3]);
   }
 
   if(!isDefined(level._interactive)) {
@@ -65,7 +65,7 @@ oilrig_jumpsuits(var_0) {
     var_1 = getEntArray(var_0.targetname, "targetname");
 
     foreach(var_3 in var_1) {
-    var_3 thread oilrig_jumpsuit(var_0);
+      var_3 thread oilrig_jumpsuit(var_0);
     }
   }
 }
@@ -87,7 +87,7 @@ oilrig_jumpsuit(var_0) {
 oilrig_jumpsuit_precache(var_0) {
   if(!common_scripts\utility::issp()) {
     foreach(var_2 in var_0) {
-    call[[level.func["precacheMpAnim"]]](var_2);
+      call[[level.func["precacheMpAnim"]]](var_2);
     }
   }
 }
@@ -120,21 +120,17 @@ oilrig_jumpsuit_ondamage(var_0, var_1) {
     if(abs(var_17) > 90) {
       if(var_17 > 0 && 180 - abs(var_17) > var_15) {
         var_5 = var_5 + "br";
-      }
-      else if(var_17 < 0 && 180 - abs(var_17) > var_15) {
+      } else if(var_17 < 0 && 180 - abs(var_17) > var_15) {
         var_5 = var_5 + "bl";
-      }
-      else {
+      } else {
         var_5 = var_5 + "b";
       }
     } else if(abs(var_17) < 90) {
       if(var_17 < 0 && abs(var_17) > var_15) {
         var_5 = var_5 + "fl";
-      }
-      else if(var_17 > 0 && abs(var_17) > var_15) {
+      } else if(var_17 > 0 && abs(var_17) > var_15) {
         var_5 = var_5 + "fr";
-      }
-      else {
+      } else {
         var_5 = var_5 + "f";
       }
     }
@@ -182,8 +178,7 @@ oilrig_jumpsuit_ondamage(var_0, var_1) {
 
     if(common_scripts\utility::issp()) {
       self call[[var_3]](var_0[var_5], 1, 0, 1);
-    }
-    else {
+    } else {
       self call[[var_3]](var_0[var_5]);
     }
 
@@ -201,8 +196,7 @@ oilrig_jumpsuit_ondamage(var_0, var_1) {
 
     if(common_scripts\utility::issp()) {
       self call[[var_2]](var_0[var_5], 0);
-    }
-    else {
+    } else {
       self call[[var_2]]();
     }
 
@@ -221,8 +215,7 @@ oilrig_jumpsuit_playidleanim(var_0, var_1) {
   for(var_5 = 0; var_5 < var_4; var_5++) {
     if(common_scripts\utility::issp()) {
       self call[[var_3]](var_0["idle1"], 1, 0, 1);
-    }
-    else {
+    } else {
       self call[[var_3]](var_0["idle1"]);
     }
 
@@ -238,8 +231,7 @@ oilrig_jumpsuit_playidleanim(var_0, var_1) {
 
   if(common_scripts\utility::issp()) {
     self call[[var_3]](var_0["idle2"], 1, 0, 1);
-  }
-  else {
+  } else {
     self call[[var_3]](var_0["idle2"]);
   }
 
@@ -248,8 +240,7 @@ oilrig_jumpsuit_playidleanim(var_0, var_1) {
 
   if(common_scripts\utility::issp()) {
     self call[[var_2]](var_0["idle2"], 0);
-  }
-  else {
+  } else {
     self call[[var_2]]();
   }
 }

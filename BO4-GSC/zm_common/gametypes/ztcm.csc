@@ -5,7 +5,6 @@
 
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\struct;
-
 #namespace ztcm;
 
 event_handler[gametype_init] main(eventstruct) {

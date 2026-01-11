@@ -152,8 +152,7 @@ draw_tank_tag(tag, opcolor) {
   for(;;) {
     if(self tank_tag_is_valid(tag)) {
       drawtag(tag.str_tag, vectorscale((0, 1, 0), 255.0));
-    }
-    else {
+    } else {
       drawtag(tag.str_tag, vectorscale((1, 0, 0), 255.0));
     }
 
@@ -172,7 +171,7 @@ tank_debug_tags() {
     if(getdvar(#"_id_55B41FB9") == "on") {
       if(!(isDefined(self.tags_drawing) && self.tags_drawing)) {
         foreach(s_tag in self.a_tank_tags) {
-        self thread draw_tank_tag(s_tag);
+          self thread draw_tank_tag(s_tag);
         }
 
         self.tags_drawing = 1;
@@ -241,7 +240,7 @@ tank_setup() {
   a_tank_jump_down_spots = getstructarray("tank_jump_down_spots", "script_noteworthy");
 
   foreach(s_spot in a_tank_jump_down_spots) {
-  self tank_jump_down_store_offset(s_spot);
+    self tank_jump_down_store_offset(s_spot);
   }
 
   self thread players_on_tank_update();
@@ -302,8 +301,7 @@ tank_rumble_update() {
   while(self.b_already_on_tank) {
     if(level.vh_tank ent_flag("tank_moving")) {
       self setclientfieldtoplayer("player_rumble_and_shake", 6);
-    }
-    else {
+    } else {
       self setclientfieldtoplayer("player_rumble_and_shake", 0);
     }
 
@@ -396,7 +394,7 @@ tank_station() {
   a_call_boxes = getEntArray("trig_tank_station_call", "targetname");
 
   foreach(t_call_box in a_call_boxes) {
-  t_call_box thread tank_call_box();
+    t_call_box thread tank_call_box();
   }
 
   self.t_use waittill("trigger");
@@ -571,8 +569,7 @@ tank_movement() {
 
     if(isDefined(self.b_no_cost) && self.b_no_cost) {
       self.t_use sethintstring(&"ZM_TOMB_X2ATF");
-    }
-    else {
+    } else {
       self.t_use sethintstring(&"ZM_TOMB_X2AT", 500);
     }
 
@@ -660,8 +657,7 @@ wait_for_tank_cooldown() {
 
   if(self.n_cooldown_timer < 2) {
     self.n_cooldown_timer = 2;
-  }
-  else if(self.n_cooldown_timer > 120) {
+  } else if(self.n_cooldown_timer > 120) {
     self.n_cooldown_timer = 120;
   }
 
@@ -853,8 +849,7 @@ tank_tag_is_valid(s_tag, disable_sides) {
 
     if(issubstr(self.n_next_node.script_string, "disable_" + s_tag.side)) {
       return 0;
-    }
-    else {
+    } else {
       return 1;
     }
   }
@@ -864,8 +859,7 @@ tank_tag_is_valid(s_tag, disable_sides) {
 
   if(at_church) {
     return !(isDefined(s_tag.disabled_at_church) && s_tag.disabled_at_church);
-  }
-  else if(at_bunker) {
+  } else if(at_bunker) {
     return !(isDefined(s_tag.disabled_at_bunker) && s_tag.disabled_at_bunker);
   }
 
@@ -1062,8 +1056,7 @@ tank_zombie_think() {
           if(a_eligible_players.size > 0) {
             if(a_players_on_tank.size == a_players.size) {
               self.favoriteenemy = random(a_eligible_players);
-            }
-            else {
+            } else {
               self.favoriteenemy = tomb_get_closest_player_using_paths(self.origin, a_eligible_players);
             }
           }
@@ -1093,12 +1086,10 @@ tank_zombie_think() {
       case "tag_chase":
         if(!isDefined(self.tank_re_eval_time)) {
           self.tank_re_eval_time = 6.0;
-        }
-        else if(self.tank_re_eval_time <= 0.0) {
+        } else if(self.tank_re_eval_time <= 0.0) {
           if(self entity_on_tank()) {
             self set_zombie_on_tank();
-          }
-          else {
+          } else {
             self stop_chasing_tank();
           }
 
@@ -1138,8 +1129,7 @@ tank_zombie_think() {
       case "on_tank":
         if(a_players_on_tank.size == 0) {
           choose_tag_and_jump_down();
-        }
-        else if(!isDefined(self.favoriteenemy) || !is_player_valid(self.favoriteenemy, 1)) {
+        } else if(!isDefined(self.favoriteenemy) || !is_player_valid(self.favoriteenemy, 1)) {
           self.favoriteenemy = random(a_players_on_tank);
         }
 
@@ -1237,8 +1227,7 @@ tank_mark_tag_occupied(str_tag, ai_occupier, set_occupied) {
     return true;
   else if(current_occupier != ai_occupier) {
     return false;
-  }
-  else {
+  } else {
     self.tag_occupied[str_tag] = undefined;
     return true;
   }
@@ -1393,8 +1382,7 @@ tank_flamethrower(str_tag, n_flamethrower_id) {
 
       if(a_targets.size > 0) {
         wait 6.0;
-      }
-      else {
+      } else {
         wait 3.0;
       }
 
@@ -1458,11 +1446,9 @@ enemy_location_override() {
   if(isDefined(self.tank_state)) {
     if(self.tank_state == "tank_chase") {
       self.goalradius = 128;
-    }
-    else if(self.tank_state == "tag_chase") {
+    } else if(self.tank_state == "tag_chase") {
       self.goalradius = 16;
-    }
-    else {
+    } else {
       self.goalradius = 32;
     }
 
@@ -1508,8 +1494,7 @@ enemy_location_override() {
 
       if(front_dist < back_dist) {
         location = tank_front;
-      }
-      else {
+      } else {
         location = tank_back;
       }
 
@@ -1535,8 +1520,7 @@ adjust_enemyoverride() {
 closest_player_tank(origin, players) {
   if(isDefined(level.vh_tank) && level.vh_tank.n_players_on > 0 || !(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths)) {
     player = getclosest(origin, players);
-  }
-  else {
+  } else {
     player = get_closest_player_using_paths(origin, players);
   }
 
@@ -1572,8 +1556,7 @@ tomb_get_path_length_to_tank() {
 
   if(path_length_1 < path_length_2) {
     return path_length_1;
-  }
-  else {
+  } else {
     return path_length_2;
   }
 }

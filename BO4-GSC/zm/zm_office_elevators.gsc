@@ -20,7 +20,6 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_office_elevators;
 
 init() {
@@ -48,7 +47,7 @@ init() {
   elevator1.active = 0;
   elevator1.var_5a3b55a3 = getvehiclenode("elev1_level3_start", "targetname");
   elevator1.var_7237c31e = getvehiclenode("elev1_level2_start", "targetname");
-  elevator1.var_243802fa = #"hash_7041e0919c53eb4e";
+  elevator1.var_243802fa = # "hash_7041e0919c53eb4e";
   elevator1.takedamage = 0;
   elevator1 setmovingplatformenabled(1);
   elevator2.cost = 500;
@@ -57,7 +56,7 @@ init() {
   elevator2.active = 0;
   elevator2.var_5a3b55a3 = getvehiclenode("elev2_level2_start", "targetname");
   elevator2.var_7237c31e = getvehiclenode("elev2_level1_start", "targetname");
-  elevator2.var_243802fa = #"hash_5a26031141f5cc33";
+  elevator2.var_243802fa = # "hash_5a26031141f5cc33";
   elevator2.takedamage = 0;
   elevator2 setmovingplatformenabled(1);
   elevator1 init_elevator1_doors();
@@ -82,18 +81,18 @@ init() {
 }
 
 function_3d4e24ea() {
-  level._effect[#"hash_4a38c13e2040d160"] = #"hash_11e609d597dcebf2";
-  level.fx_elevator_light = level._effect[#"hash_4a38c13e2040d160"];
-  level._effect[#"hash_336249bfea00c9ea"] = #"hash_48ec8658075edc9d";
-  level.var_dca712ff = level._effect[#"hash_336249bfea00c9ea"];
-  level._effect[#"hash_3718db938f7babf7"] = #"hash_142b1b8f881ae741";
-  level.var_715ae9f9 = level._effect[#"hash_3718db938f7babf7"];
-  level._effect[#"hash_3b796b3101b76878"] = #"hash_4fc36e212e5b5b8a";
-  level.var_e33251c7 = level._effect[#"hash_3b796b3101b76878"];
-  level._effect[#"hash_1d090c7817f1e26d"] = #"hash_340a3cade524696d";
-  level.var_41a1bc06 = level._effect[#"hash_1d090c7817f1e26d"];
-  level._effect[#"hash_7c83294db356d63a"] = #"hash_499e66437fc6ab02";
-  level.var_8caf5068 = level._effect[#"hash_7c83294db356d63a"];
+  level._effect[# "hash_4a38c13e2040d160"] = # "hash_11e609d597dcebf2";
+  level.fx_elevator_light = level._effect[# "hash_4a38c13e2040d160"];
+  level._effect[# "hash_336249bfea00c9ea"] = # "hash_48ec8658075edc9d";
+  level.var_dca712ff = level._effect[# "hash_336249bfea00c9ea"];
+  level._effect[# "hash_3718db938f7babf7"] = # "hash_142b1b8f881ae741";
+  level.var_715ae9f9 = level._effect[# "hash_3718db938f7babf7"];
+  level._effect[# "hash_3b796b3101b76878"] = # "hash_4fc36e212e5b5b8a";
+  level.var_e33251c7 = level._effect[# "hash_3b796b3101b76878"];
+  level._effect[# "hash_1d090c7817f1e26d"] = # "hash_340a3cade524696d";
+  level.var_41a1bc06 = level._effect[# "hash_1d090c7817f1e26d"];
+  level._effect[# "hash_7c83294db356d63a"] = # "hash_499e66437fc6ab02";
+  level.var_8caf5068 = level._effect[# "hash_7c83294db356d63a"];
 }
 
 registergondola_moving_watcher() {
@@ -394,14 +393,14 @@ init_buy() {
 elevator_buy_think(elevator) {
   if(zm_utility::is_standard()) {
     if(function_8b1a219a()) {
-      level.var_31560d97 = #"hash_3e8b1cb2500ba3a7";
+      level.var_31560d97 = # "hash_3e8b1cb2500ba3a7";
     } else {
-      level.var_31560d97 = #"hash_146622decb4e7399";
+      level.var_31560d97 = # "hash_146622decb4e7399";
     }
   } else if(function_8b1a219a()) {
-    level.var_31560d97 = #"hash_65d7c16bd5a94c67";
+    level.var_31560d97 = # "hash_65d7c16bd5a94c67";
   } else {
-    level.var_31560d97 = #"hash_6362bcfbec5e8759";
+    level.var_31560d97 = # "hash_6362bcfbec5e8759";
   }
 
   self setcursorhint("HINT_NOICON");
@@ -438,7 +437,7 @@ elevator_buy_think(elevator) {
       self elevator_move_to(elevator);
     } else {
       zm_utility::play_sound_at_pos("no_purchase", self.origin);
-      who zm_audio::create_and_play_dialog(#"general", #"outofmoney");
+      who zm_audio::create_and_play_dialog(#"general", # "outofmoney");
     }
 
     wait 0.05;
@@ -644,7 +643,7 @@ elev_clean_up_corpses() {
 }
 
 elev_remove_corpses() {
-  playFX(level._effect[#"dog_gib"], self.origin);
+  playFX(level._effect[# "dog_gib"], self.origin);
   self delete();
 }
 

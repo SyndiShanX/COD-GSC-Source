@@ -147,8 +147,7 @@ processfaceevents(localclientnum) {
 
   if(isDefined(self.face_disable) && self.face_disable) {
     state = "face_disable";
-  }
-  else if(isDefined(self.face_death) && self.face_death) {
+  } else if(isDefined(self.face_death) && self.face_death) {
     state = "face_death";
   }
 
@@ -192,8 +191,7 @@ processfaceevents(localclientnum) {
 
     if(state == "face_disable") {
       numanims = 0;
-    }
-    else {
+    } else {
       numanims = level.facestates[state]["animation"].size;
     }
 
@@ -306,16 +304,14 @@ processfaceevents(localclientnum) {
     } else if(level.facestates[state]["statetype"] == "nullstate") {
       if(isDefined(self.face_curr_event)) {
         self setanimknob(level.facestates[self.face_curr_event]["animation"][self.face_curr_event_idx], 1.0, 0.1, 1.0);
-      }
-      else if(isDefined(self.face_curr_base)) {
+      } else if(isDefined(self.face_curr_base)) {
         self setanimknob(level.facestates[self.face_curr_base]["animation"][self.face_curr_base_idx], 1.0, 0.1, 1.0);
       }
     }
 
     if(isDefined(self.face_curr_event)) {
       state = self waitforanypriorityreturn(self.face_curr_event);
-    }
-    else {
+    } else {
       state = self waitforanypriorityreturn(self.face_curr_base);
     }
   }
@@ -336,15 +332,13 @@ showstate(state) {
 
         if(isDefined(self.face_disable) && self.face_disable) {
           disablechar = "-";
-        }
-        else {
+        } else {
           disablechar = "+";
         }
 
         if(isDefined(self.face_death) && self.face_death) {
           deathchar = "D";
-        }
-        else {
+        } else {
           deathchar = "A";
         }
 
@@ -361,8 +355,7 @@ setfacestate(state) {
   if(state == "face_advance") {
     if(isDefined(self.face_curr_event)) {
       self.face_state = self.face_curr_event;
-    }
-    else if(isDefined(self.face_curr_base)) {
+    } else if(isDefined(self.face_curr_base)) {
       self.face_state = self.face_curr_base;
     }
 

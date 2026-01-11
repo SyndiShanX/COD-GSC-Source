@@ -89,12 +89,11 @@ enemy_alert_level_logic_start_attacking(enemy) {
   if(self ent_flag("_stealth_bad_event_listener") || enemy._stealth.logic.spotted_list[self.unique_id] > self._stealth.logic.alert_level.max_warnings) {
     if(self ent_flag("_stealth_bad_event_listener")) {
       self stealth_debug_print("BROKEN STEALTH. Received ent '" + enemy.unique_id + "' as an enemy from code. Attacked because the reason was a bad_event_listener...ie a gunshot or something equally bad");
-    }
-    else {
+    } else {
       self stealth_debug_print("BROKEN STEALTH. Received ent '" + enemy.unique_id + "' as an enemy from code. Attacked because " + enemy.unique_id + " had been spotted more than the max_warning amount of " + self._stealth.logic.alert_level.max_warnings);
     }
 
-      self maps\_stealth_threat_enemy::enemy_alert_level_change("attack");
+    self maps\_stealth_threat_enemy::enemy_alert_level_change("attack");
     return true;
   }
 

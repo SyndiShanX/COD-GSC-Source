@@ -11,8 +11,7 @@ main() {
 
   if(!isDefined(level.introscreen) || !maps\_utility::is_default_start() || var_0) {
     maps\_utility::delaythread(0.05, common_scripts\utility::flag_set, "introscreen_complete");
-  }
-  else {
+  } else {
     if(isDefined(level.introscreen.customfunc)) {
       [
         [level.introscreen.customfunc]
@@ -53,8 +52,7 @@ introscreen_generic_fade_in(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_3)) {
     maps\_hud_util::start_overlay();
-  }
-  else {
+  } else {
     maps\_hud_util::fade_out(var_3);
   }
 
@@ -69,8 +67,7 @@ introscreen_corner_line(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  }
-  else {
+  } else {
     level.intro_offset++;
   }
 
@@ -249,8 +246,7 @@ fade_glow(var_0, var_1, var_2) {
 chyron_sound(var_0, var_1) {
   if(var_0 == 0) {
     level.chyron.sound_org playSound(var_1);
-  }
-  else {
+  } else {
     level.game_messages.sound_org playSound(var_1);
   }
 }
@@ -296,8 +292,7 @@ quick_cursor(var_0, var_1) {
 artifacts(var_0) {
   if(var_0 == 0) {
     level endon("chyron_faze_out_text_intro");
-  }
-  else {
+  } else {
     level endon("chyron_faze_out_text_gamenotify");
   }
 
@@ -348,8 +343,7 @@ artifacts(var_0) {
 artifact_pulse(var_0) {
   if(var_0 == 0) {
     level endon("chyron_faze_out_text_intro");
-  }
-  else {
+  } else {
     level endon("chyron_faze_out_text_gamenotify");
   }
 
@@ -359,8 +353,7 @@ artifact_pulse(var_0) {
   for(;;) {
     if(level.chyron.artifacts_fade) {
       var_1 = var_1 - 0.07;
-    }
-    else {
+    } else {
       if(var_1 < 0.15 || var_1 > 0.6) {
         var_2 = var_2 * -1;
       }
@@ -387,7 +380,7 @@ artifact_pulse(var_0) {
       level.chyron.artifacts_fade = 0;
 
       foreach(var_4 in level.chyron.artifacts) {
-      var_4.pulse = 0;
+        var_4.pulse = 0;
       }
     }
 
@@ -398,8 +391,7 @@ artifact_pulse(var_0) {
 strips(var_0) {
   if(var_0 == 0) {
     level endon("chyron_faze_out_text_intro");
-  }
-  else {
+  } else {
     level endon("chyron_faze_out_text_gamenotify");
   }
 
@@ -538,7 +530,7 @@ fade_out_text(var_0, var_1) {
     }
 
     foreach(var_3 in level.chyron.strips) {
-    var_3 thread hud_destroy(var_1);
+      var_3 thread hud_destroy(var_1);
     }
   } else {
     level notify("chyron_faze_out_text_gamenotify");
@@ -551,7 +543,7 @@ fade_out_text(var_0, var_1) {
     }
 
     foreach(var_3 in level.game_messages.strips) {
-    var_3 thread hud_destroy(var_1);
+      var_3 thread hud_destroy(var_1);
     }
   }
 }
@@ -623,8 +615,7 @@ quick_pulse(var_0, var_1) {
 
   if(var_0 == 0) {
     level endon("chyron_faze_out_text_intro");
-  }
-  else {
+  } else {
     level endon("chyron_faze_out_text_gamenotify");
   }
 

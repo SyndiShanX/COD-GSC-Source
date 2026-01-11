@@ -213,8 +213,7 @@ stunned_callback(localClientNum, set) {
   PrintLn("stunned_callback");
   if(set) {
     self notify("stunned");
-  }
-  else {
+  } else {
     self notify("not_stunned");
   }
 }

@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\util_shared;
-
 #namespace flag;
 
 init(str_flag, b_val = 0, b_is_trigger = 0) {

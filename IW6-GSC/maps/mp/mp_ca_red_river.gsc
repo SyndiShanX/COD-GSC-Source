@@ -70,7 +70,7 @@ redriver_breach_init() {
   foreach(breach in breaches) {
     pathnodes = GetNodeArray(breach.target, "targetname");
     foreach(p in pathnodes) {
-    p DisconnectNode();
+      p DisconnectNode();
     }
   }
 
@@ -108,7 +108,7 @@ redriver_breach_update() {
 
   pathnodes = GetNodeArray(self.target, "targetname");
   foreach(p in pathnodes) {
-  p ConnectNode();
+    p ConnectNode();
   }
 }
 
@@ -138,13 +138,13 @@ setup_pinatas() {
   pinatas = getEntArray("pinata", "targetname");
   if(pinatas.size > 0) {
     foreach(pinata in pinatas) {
-    pinata thread update_pinata(level._effect["mp_ca_red_river_pinata_boom"]);
+      pinata thread update_pinata(level._effect["mp_ca_red_river_pinata_boom"]);
     }
   }
   largePinatas = getEntArray("pinata_large", "targetname");
   if(largePinatas.size > 0) {
     foreach(pinata in largePinatas) {
-    pinata thread update_pinata(level._effect["mp_ca_red_river_pinata_boom_lg"]);
+      pinata thread update_pinata(level._effect["mp_ca_red_river_pinata_boom_lg"]);
     }
   }
 }
@@ -177,8 +177,7 @@ update_pinata(death_effect) {
 
   if(!isDefined(explosionDirection)) {
     self waittill("damage", amount, attacker, direction_vec, hit_point, damage_type);
-  }
-  else {
+  } else {
     direction_vec = explosionDirection;
   }
 

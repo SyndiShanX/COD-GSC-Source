@@ -274,8 +274,7 @@ cargoship_can_change_anyset(var_0, var_1) {
 
   if(var_2) {
     var_4 = !var_5;
-  }
-  else {
+  } else {
     var_4 = !isDefined(var_0) || !is_lightning_vision_set(var_0) || var_5;
   }
 
@@ -519,8 +518,7 @@ flash(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_8 = var_4;
-  }
-  else {
+  } else {
     var_8 = (randomfloatrange(20, 30) * -1, randomfloatrange(20, 25), 0);
   }
 

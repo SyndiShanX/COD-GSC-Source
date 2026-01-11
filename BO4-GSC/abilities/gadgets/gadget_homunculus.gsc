@@ -10,7 +10,6 @@
 #include scripts\core_common\scene_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace gadget_homunculus;
 
 autoexec __init__system__() {
@@ -113,7 +112,7 @@ private function_62318121(homunculus, ent) {
 }
 
 private event_handler[grenade_fire] function_4776caf4(eventstruct) {
-  if(eventstruct.weapon.name == #"homunculus") {
+  if(eventstruct.weapon.name == # "homunculus") {
     grenade = eventstruct.projectile;
     grenade ghost();
     grenade.angles = self.angles;
@@ -135,7 +134,7 @@ private event_handler[grenade_fire] function_4776caf4(eventstruct) {
     }
 
     homunculus thread scene::play(#"aib_t8_zm_zod_homunculus_throw_loop_01", homunculus);
-    grenade waittill(#"stationary", #"death");
+    grenade waittill(#"stationary", # "death");
 
     if(isDefined(grenade)) {
       homunculus unlink();
@@ -188,7 +187,7 @@ private event_handler[grenade_fire] function_4776caf4(eventstruct) {
 }
 
 function_1dba4a2() {
-  self endon(#"death", #"hash_3e410dbcd9e66000");
+  self endon(#"death", # "hash_3e410dbcd9e66000");
   self.mover endon(#"death");
 
   while(true) {
@@ -262,7 +261,7 @@ private function_b053b486() {
 private drop_to_ground(b_immediate = 0) {
   self endon(#"death");
   s_trace = groundtrace(self.origin + (0, 0, 16), self.origin + (0, 0, -1000), 0, self);
-  var_a75fe4be = s_trace[#"position"];
+  var_a75fe4be = s_trace[# "position"];
 
   if(b_immediate) {
     self.mover moveto(var_a75fe4be, 0.01);
@@ -279,11 +278,11 @@ private drop_to_ground(b_immediate = 0) {
 }
 
 private jump(scene_ents) {
-  scene_ents[#"homunculus"] endon(#"death");
-  scene_ents[#"homunculus"] waittill(#"jumped");
+  scene_ents[# "homunculus"] endon(#"death");
+  scene_ents[# "homunculus"] waittill(#"jumped");
 
-  if(isDefined(scene_ents[#"homunculus"].mover)) {
-    scene_ents[#"homunculus"].mover movez(40, 0.35);
+  if(isDefined(scene_ents[# "homunculus"].mover)) {
+    scene_ents[# "homunculus"].mover movez(40, 0.35);
   }
 }
 

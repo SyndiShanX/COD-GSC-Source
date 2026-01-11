@@ -329,9 +329,7 @@ logplayerdeath(param_00, param_01, param_02, param_03, param_04, param_05, param
         [level.matchrecording_logevent]
       ](self.clientid, self.team, "DEATH", self.origin[0], self.origin[1], var_12);
       if(issubstr(tolower(param_03), "bullet") && isDefined(param_04) && !scripts\mp\utility::iskillstreakweapon(param_04)) {
-        [
-          [level.matchrecording_logevent]
-        ](param_01.clientid, param_01.team, "BULLET", param_01.origin[0], param_01.origin[1], var_12, undefined, self.origin[0], self.origin[1]);
+        [[level.matchrecording_logevent]](param_01.clientid, param_01.team, "BULLET", param_01.origin[0], param_01.origin[1], var_12, undefined, self.origin[0], self.origin[1]);
       }
     }
   } else {

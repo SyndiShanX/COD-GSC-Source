@@ -37,7 +37,7 @@ create_intel_section(var_0) {
         var_5 = "";
 
         foreach(var_7 in var_4) {
-        var_5 = var_5 + var_7;
+          var_5 = var_5 + var_7;
         }
 
         iprintln(var_5);
@@ -115,8 +115,7 @@ intel_pillage_allowed_func() {
 
   if(self getcoopplayerdatareservedint(var_1) < var_0) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -251,8 +250,7 @@ intel_listener() {
 
   if(self.type == 1) {
     self.pillage_trigger sethintstring(&"ALIEN_PILLAGE_INTEL_PICKUP_INTEL");
-  }
-  else {
+  } else {
     self.pillage_trigger sethintstring(&"ALIEN_PILLAGE_INTEL_PICKUP_INTEL");
   }
 
@@ -535,8 +533,7 @@ toggle_usablity_on_distance() {
 
       if(var_6) {
         enable_usability(var_5);
-      }
-      else {
+      } else {
         disable_usability(var_5);
       }
 
@@ -574,11 +571,9 @@ intel_pillage_outline() {
 
     if(var_2 == 3) {
       maps\mp\alien\_outline_proto::enable_outline_for_player(var_1.pillage_trigger, self, 3, 0, "high");
-    }
-    else if(var_2 == 4) {
+    } else if(var_2 == 4) {
       maps\mp\alien\_outline_proto::enable_outline_for_player(var_1.pillage_trigger, self, 1, 0, "high");
-    }
-    else {
+    } else {
       maps\mp\alien\_outline_proto::disable_outline_for_player(var_1.pillage_trigger, self);
     }
 
@@ -599,8 +594,7 @@ get_intel_item_outline_color(var_0) {
 
   if(var_0.type == 1) {
     var_1 = 27225;
-  }
-  else {
+  } else {
     var_1 = 4900;
   }
 

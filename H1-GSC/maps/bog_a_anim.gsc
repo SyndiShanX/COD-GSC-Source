@@ -198,8 +198,7 @@ script_models() {
 
   if(getdvarint("use_old_fence_cutting") == 1) {
     level.scr_anim["fence"]["fence_cut"] = % icbm_fence_cutting_guy1_fence;
-  }
-  else {
+  } else {
     level.scr_anim["fence"]["fence_cut"] = % h1_bog_a_fence_cutting_guy1_fence;
   }
 

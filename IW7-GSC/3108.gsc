@@ -120,8 +120,7 @@ func_10A44(var_00) {
 
     if(isDefined(var_03) && var_02 != "") {
       self notify("splinenode_label", var_02, var_00, var_01, var_03);
-    }
-    else {
+    } else {
       self notify("splinenode_label", var_02, var_00, var_01);
     }
   }
@@ -195,8 +194,7 @@ func_10A46(var_00, var_01, var_02) {
 
   if(isDefined(var_02)) {
     self _meth_847B(var_01, var_02);
-  }
-  else {
+  } else {
     self _meth_847B(var_01);
   }
 

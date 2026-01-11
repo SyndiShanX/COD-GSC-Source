@@ -154,7 +154,7 @@ alien_scene_init() {
   level.scene_trigs = getEntArray("scene_trig", "targetname");
 
   foreach(trig in level.scene_trigs) {
-  trig thread setup_scene();
+    trig thread setup_scene();
   }
 }
 
@@ -354,8 +354,7 @@ alien_lurker_init() {
 
       if(!IsSubStr(spawn_loc.script_noteworthy, "lurker")) {
         continue;
-      }
-      else {
+      } else {
         spawn_types = array_remove(spawn_types, spawn_types[0]);
       }
 
@@ -415,8 +414,7 @@ wave_spawners_init() {
       foreach(type in spawn_types) {
         if(isDefined(level.alien_wave[type])) {
           level.alien_wave[type].spawn_locs[level.alien_wave[type].spawn_locs.size] = spawn_loc;
-        }
-        else {
+        } else {
           assertex(true, msg_prefix + "has unknown spawn type: " + type);
         }
       }
@@ -554,8 +552,7 @@ get_blocker_hive(hive_id) {
 make_spitter_attack_chopper(attack) {
   if(attack) {
     group = "spitters";
-  }
-  else {
+  } else {
     group = "other_aliens";
   }
 
@@ -572,7 +569,7 @@ make_spitter_attack_chopper(attack) {
 
 escape_spawning(cycle_count) {
   foreach(player in level.players) {
-  player.threatbias = 100000;
+    player.threatbias = 100000;
   }
 
   maps\mp\alien\_spawn_director::start_cycle(cycle_count);
@@ -585,8 +582,7 @@ escape_spawning(cycle_count) {
 
   if(flag_exist("nuke_went_off") && flag("nuke_went_off")) {
     level waittill_any_timeout(10, "game_ended");
-  }
-  else {
+  } else {
     wait 7;
   }
 
@@ -885,8 +881,7 @@ debug_circle(center, radius, color, depthTest, segments, time) {
       start = circlepoints[i];
       if(i + 1 >= circlepoints.size) {
         end = circlepoints[0];
-      }
-      else {
+      } else {
         end = circlepoints[i + 1];
       }
 
@@ -940,14 +935,14 @@ lurker_loop() {
     alive_lurkers = get_alive_lurkers();
 
     foreach(lurker in alive_lurkers) {
-    lurker thread send_away_and_die();
+      lurker thread send_away_and_die();
     }
 
     wait 6;
 
     if(get_alive_lurkers().size > 0) {
       foreach(lurker in get_alive_lurkers()) {
-      lurker Suicide();
+        lurker Suicide();
       }
     }
 
@@ -1118,8 +1113,7 @@ send_away_and_die() {
 
   if(isDefined(self.lurker)) {
     self thread alien_ai_debug_print("Lurker x_X");
-  }
-  else {
+  } else {
     self thread alien_ai_debug_print("x_X");
   }
 
@@ -1156,7 +1150,7 @@ clear_ignore_enemy() {
   self disable_alien_scripted();
 
   foreach(player in get_players()) {
-  self GetEnemyInfo(player);
+    self GetEnemyInfo(player);
   }
 }
 
@@ -1405,8 +1399,7 @@ get_meteoroid_impact_node() {
 
   if(free_nodes.size > 0) {
     return free_nodes[randomint(free_nodes.size)];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -1436,8 +1429,7 @@ get_meteoroid_impact_node_escape() {
 
     if(isDefined(closest_node) && isDefined(closest_node.script_noteworthy) && closest_node.script_noteworthy == "escape_blocker_meteor") {
       return closest_node;
-    }
-    else {
+    } else {
       return free_nodes[randomint(free_nodes.size)];
     }
   } else {
@@ -1810,8 +1802,7 @@ encounter_cycle_spawn(force_cycle_start_notify, endon_notify) {
   msg = undefined;
   if(isDefined(force_cycle_start_notify)) {
     msg = level waittill_any_timeout(cycle_spawn_delay, force_cycle_start_notify);
-  }
-  else {
+  } else {
     wait cycle_spawn_delay;
   }
 
@@ -1849,8 +1840,7 @@ get_cycle_spawn_delay() {
 get_extra_spawn_delay() {
   if(is_chaos_mode()) {
     return 0;
-  }
-  else {
+  } else {
     return (getNumActiveAgents() * 3.0);
   }
 }

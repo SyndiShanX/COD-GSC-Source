@@ -9,7 +9,6 @@
 #include scripts\core_common\ai\systems\gib;
 #include scripts\core_common\ai\systems\shared;
 #include scripts\core_common\ai_shared;
-
 #namespace animationstatenetwork;
 
 autoexec registerdefaultnotetrackhandlerfunctions() {

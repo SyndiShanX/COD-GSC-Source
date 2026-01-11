@@ -92,8 +92,7 @@ fire_turret_for_time(turret_index, time) {
 
       if(isDefined(self.turret_audio_ring_override_alias)) {
         alias2 = self.turret_audio_ring_override_alias;
-      }
-      else {
+      } else {
         alias = "wpn_gaz_quad50_turret_loop_npc";
       }
 
@@ -155,20 +154,15 @@ turret_ai_thread(turret_index, weapon_type, enemy_team, optional_wait_min, optio
         fire_turret_for_time(turret_index, 1.75);
       else if(weapon_type == "huey_minigun") {
         burst_fire(turret_index, 0.5, 0.1);
-      }
-      else if(weapon_type == "huey_spotlight") {
+      } else if(weapon_type == "huey_spotlight") {
         wait(randomfloat(1, 4));
-      }
-      else if(weapon_type == "target_finder_only") {
+      } else if(weapon_type == "target_finder_only") {
         wait 1;
-      }
-      else if(weapon_type == "flame") {
+      } else if(weapon_type == "flame") {
         flame_fire(turret_index, 2);
-      }
-      else if(weapon_type == "grenade") {
+      } else if(weapon_type == "grenade") {
         burst_fire(turret_index, 2, 1.5);
-      }
-      else if(weapon_type == "grenade_btr") {
+      } else if(weapon_type == "grenade_btr") {
         burst_fire_rebirthbtr(turret_index, 2, 1.5);
       }
 
@@ -257,9 +251,8 @@ choose_target(turret_index, enemy_team) {
 
     if(isDefined(level.heli_attack_drone_targets_func)) {
       ai = [
-    }
-        [level.heli_attack_drone_targets_func]
-      ](ai, enemy_team);
+        }
+        [level.heli_attack_drone_targets_func]](ai, enemy_team);
 
     best_target = score_target(ai, turret_index);
     self.turret_ai_array[turret_index].target_ent = best_target;
@@ -302,8 +295,7 @@ flame_fire(turret_index, interval) {
 score_target(target_array, turret_index) {
   if(!isDefined(target_array) || !isDefined(turret_index)) {
     return;
-  }
-  else {
+  } else {
     best_score = 0;
     best_target = undefined;
 
@@ -350,8 +342,7 @@ setup_driver_turret_aim_assist(driver_turret, target_radius, target_offset) {
       if(isDefined(driver_turret)) {
         if(isDefined(best_target)) {
           self setgunnertargetent(best_target, target_offset, driver_turret);
-        }
-        else {
+        } else {
           self cleargunnertarget(driver_turret);
         }
       } else if(isDefined(best_target))
@@ -369,8 +360,7 @@ setup_driver_turret_aim_assist(driver_turret, target_radius, target_offset) {
 update_forced_gunner_targets() {
   if(isDefined(self._forced_target_ent_array)) {
     self._forced_target_ent_array = remove_dead_from_array(self._forced_target_ent_array);
-  }
-  else {
+  } else {
     turret_debug_message("_vehicle_turret_ai couldn't update_forced_gunner_targets since none exist. ");
   }
 }
@@ -381,15 +371,13 @@ set_forced_target(target_array) {
 
     if(!isarray(target_array)) {
       forced_targets[forced_targets.size] = target_array;
-    }
-    else {
+    } else {
       forced_targets = target_array;
     }
 
     if(!isDefined(self._forced_target_ent_array) || self._forced_target_ent_array.size == 0) {
       self._forced_target_ent_array = forced_targets;
-    }
-    else {
+    } else {
       for(i = 0; i < forced_targets.size; i++) {
         array_add(self._forced_target_ent_array, forced_targets[i]);
       }

@@ -14,7 +14,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\weapons\tacticalinsertion;
-
 #namespace spawning;
 
 autoexec __init__system__() {
@@ -116,8 +115,8 @@ private init_spawn_system() {
   spawnsystem.ispawn_teammask = [];
   spawnsystem.ispawn_teammask_free = 1;
   spawnsystem.ispawn_teammask_free = 1;
-  spawnsystem.ispawn_teammask[#"free"] = spawnsystem.ispawn_teammask_free;
-  spawnsystem.ispawn_teammask[#"neutral"] = spawnsystem.var_146943ea;
+  spawnsystem.ispawn_teammask[# "free"] = spawnsystem.ispawn_teammask_free;
+  spawnsystem.ispawn_teammask[# "neutral"] = spawnsystem.var_146943ea;
   init_teams();
   callback::add_callback(#"init_teams", &init_teams);
 }
@@ -137,7 +136,7 @@ init_teams() {
     count++;
   }
 
-  spawnsystem.ispawn_teammask[#"all"] = all;
+  spawnsystem.ispawn_teammask[# "all"] = all;
 }
 
 updateallspawnpoints() {
@@ -262,7 +261,7 @@ private use_start_spawns(predictedspawn) {
   }
 
   if(level.teambased) {
-    spawnteam = self.pers[#"team"];
+    spawnteam = self.pers[# "team"];
 
     if(level.aliveplayers[spawnteam].size + level.spawningplayers[self.team].size >= level.spawn_start[spawnteam].size) {
       if(!predictedspawn) {
@@ -271,7 +270,7 @@ private use_start_spawns(predictedspawn) {
 
       return false;
     }
-  } else if(isDefined(level.spawn_start[#"free"]) && level.aliveplayers[#"free"].size + level.spawningplayers[#"free"].size >= level.spawn_start[#"free"].size) {
+  } else if(isDefined(level.spawn_start[# "free"]) && level.aliveplayers[# "free"].size + level.spawningplayers[# "free"].size >= level.spawn_start[# "free"].size) {
     if(!predictedspawn) {
       level.usestartspawns = 0;
     }
@@ -313,12 +312,12 @@ onspawnplayer(predictedspawn = 0) {
       if(level.teambased) {
         array::add(level.spawningplayers[self.team], self);
       } else {
-        array::add(level.spawningplayers[#"free"], self);
+        array::add(level.spawningplayers[# "free"], self);
       }
     }
 
     if(level.teambased) {
-      spawnteam = self.pers[#"team"];
+      spawnteam = self.pers[# "team"];
 
       if(game.switchedsides && level.spawnsystem.var_3709dc53) {
         spawnteam = util::getotherteam(spawnteam);
@@ -336,7 +335,7 @@ onspawnplayer(predictedspawn = 0) {
 
       spawnpoint = get_spawnpoint_random(var_c162f039, predictedspawn);
     } else {
-      spawnpoint = get_spawnpoint_random(level.spawn_start[#"free"], predictedspawn);
+      spawnpoint = get_spawnpoint_random(level.spawn_start[# "free"], predictedspawn);
     }
 
     if(isDefined(spawnpoint)) {
@@ -347,8 +346,8 @@ onspawnplayer(predictedspawn = 0) {
     spawn_point = getspawnpoint(self, predictedspawn);
 
     if(isDefined(spawn_point)) {
-      spawn_origin = spawn_point[#"origin"];
-      spawn_angles = spawn_point[#"angles"];
+      spawn_origin = spawn_point[# "origin"];
+      spawn_angles = spawn_point[# "angles"];
     }
   }
 
@@ -377,10 +376,10 @@ onspawnplayer(predictedspawn = 0) {
 private getspawnpoint(player_entity, predictedspawn = 0) {
   if(sessionmodeiswarzonegame()) {
     point_team = "free";
-    influencer_team = player_entity.pers[#"team"];
+    influencer_team = player_entity.pers[# "team"];
   } else if(level.teambased) {
-    point_team = player_entity.pers[#"team"];
-    influencer_team = player_entity.pers[#"team"];
+    point_team = player_entity.pers[# "team"];
+    influencer_team = player_entity.pers[# "team"];
   } else {
     point_team = "free";
     influencer_team = "free";
@@ -400,7 +399,7 @@ private getspawnpoint(player_entity, predictedspawn = 0) {
   best_spawn = get_best_spawnpoint(point_team, influencer_team, player_entity, predictedspawn, use_fallback_points);
 
   if(!predictedspawn) {
-    player_entity.last_spawn_origin = best_spawn[#"origin"];
+    player_entity.last_spawn_origin = best_spawn[# "origin"];
   }
 
   return best_spawn;
@@ -408,9 +407,9 @@ private getspawnpoint(player_entity, predictedspawn = 0) {
 
 get_best_spawnpoint(point_team, influencer_team, player, predictedspawn, use_fallback_points) {
   if(level.teambased) {
-    vis_team_mask = util::getotherteamsmask(player.pers[#"team"]);
+    vis_team_mask = util::getotherteamsmask(player.pers[# "team"]);
   } else {
-    vis_team_mask = level.spawnsystem.ispawn_teammask[#"all"];
+    vis_team_mask = level.spawnsystem.ispawn_teammask[# "all"];
   }
 
   lists = [];
@@ -450,8 +449,8 @@ get_best_spawnpoint(point_team, influencer_team, player, predictedspawn, use_fal
 
     if(!isDefined(spawn_point)) {
       spawn_point = [];
-      spawn_point[#"origin"] = (0, 0, 0);
-      spawn_point[#"angles"] = (0, 0, 0);
+      spawn_point[# "origin"] = (0, 0, 0);
+      spawn_point[# "angles"] = (0, 0, 0);
     }
   }
 
@@ -468,9 +467,9 @@ get_best_spawnpoint(point_team, influencer_team, player, predictedspawn, use_fal
       mpspawnpointsused = {
         #reason: "point used",
         #var_c734ddf2: getplayerspawnid(player),
-        #x: spawn_point[#"origin"][0],
-        #y: spawn_point[#"origin"][1],
-        #z: spawn_point[#"origin"][2],
+        #x: spawn_point[# "origin"][0],
+        #y: spawn_point[# "origin"][1],
+        #z: spawn_point[# "origin"][2],
         #var_50641dd5: var_c1c41f09
       };
       function_92d1707f(#"hash_608dde355fff78f5", mpspawnpointsused);
@@ -713,7 +712,7 @@ spawn_exploration_wait_for_one_frame() {
 }
 
 private has_player_explored_spawn_point(spawnpoint, player) {
-  return spawnpoint.explored& 1 << player getentitynumber();
+  return spawnpoint.explored & 1 << player getentitynumber();
 }
 
 private set_player_explored_spawn_point(spawnpoint, player) {
@@ -1024,9 +1023,7 @@ get_spawnpoint_final(spawnpoints, predictedspawn, isintermmissionspawn = 0) {
         continue;
       }
 
-      if([
-          [var_e627dced]
-        ](spawnpoints[i].origin)) {
+      if([[var_e627dced]](spawnpoints[i].origin)) {
         continue;
       }
 
@@ -1177,7 +1174,7 @@ spawnpoint_debug() {
     spawnsystem_debug_command = getdvarstring(#"spawnsystem_debug_command");
 
     switch (spawnsystem_debug_command) {
-      case #"next_best":
+      case # "next_best":
         selectedplayerindex = getdvarint(#"spawnsystem_debug_current_player", 0);
 
         foreach(player in level.players) {
@@ -1192,20 +1189,20 @@ spawnpoint_debug() {
         }
 
         if(level.teambased) {
-          point_team = selectedplayer.pers[#"team"];
-          influencer_team = selectedplayer.pers[#"team"];
-          vis_team_mask = util::getotherteamsmask(selectedplayer.pers[#"team"]);
+          point_team = selectedplayer.pers[# "team"];
+          influencer_team = selectedplayer.pers[# "team"];
+          vis_team_mask = util::getotherteamsmask(selectedplayer.pers[# "team"]);
         } else {
           point_team = "<dev string:x31f>";
           influencer_team = "<dev string:x31f>";
-          vis_team_mask = level.spawnsystem.ispawn_teammask[#"all"];
+          vis_team_mask = level.spawnsystem.ispawn_teammask[# "all"];
         }
 
         nextbestspawnpoint = getbestspawnpoint(point_team, influencer_team, vis_team_mask, selectedplayer, 0);
-        selectedplayer setorigin(nextbestspawnpoint[#"origin"]);
-        selectedplayer setplayerangles(nextbestspawnpoint[#"angles"]);
+        selectedplayer setorigin(nextbestspawnpoint[# "origin"]);
+        selectedplayer setplayerangles(nextbestspawnpoint[# "angles"]);
         break;
-      case #"refresh":
+      case # "refresh":
         level flagsys::set(#"spawnpoints_dirty");
         break;
     }

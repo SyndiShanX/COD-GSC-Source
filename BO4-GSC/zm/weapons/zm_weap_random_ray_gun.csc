@@ -12,7 +12,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
-
 #namespace ww_random_ray_gun;
 
 autoexec __init__system__() {
@@ -20,22 +19,22 @@ autoexec __init__system__() {
 }
 
 __init__() {
-  clientfield::register("scriptmover", "" + #"hash_64f62d9a3170948e", 1, 1, "int", &shrink_globe, 0, 0);
-  clientfield::register("actor", "" + #"hash_6848ec3d200d443b", 1, 1, "int", &shrink_zombie, 0, 0);
-  clientfield::register("vehicle", "" + #"hash_6848ec3d200d443b", 1, 1, "int", &shrink_zombie, 0, 0);
-  clientfield::register("actor", "" + #"hash_6f59675863e19a50", 1, 1, "int", &function_d8cf1bd7, 0, 0);
-  clientfield::register("vehicle", "" + #"hash_6f59675863e19a50", 1, 1, "int", &function_d8cf1bd7, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_32156a79f13e8c37", 1, 1, "int", &function_751c64a4, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_30c86f39ae8ea002", 1, 1, "int", &function_7fe3e4c8, 0, 0);
-  clientfield::register("actor", "" + #"hash_1dd40649a6474f30", 1, 1, "int", &function_1af615a9, 0, 0);
-  clientfield::register("vehicle", "" + #"hash_1dd40649a6474f30", 1, 1, "int", &function_1af615a9, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_12b19992ccb300e7", 1, 1, "int", &function_ac54fdec, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_54fdcf7f8eb5449e", 1, 1, "int", &drag_portal, 0, 0);
-  clientfield::register("scriptmover", "" + #"hash_69b312bcaae6308b", 1, 1, "int", &function_68a87cde, 0, 0);
-  clientfield::register("actor", "" + #"hash_2ff818c8cb4c17ba", 1, 1, "int", &function_332e7c58, 0, 0);
-  clientfield::register("vehicle", "" + #"hash_2ff818c8cb4c17ba", 1, 1, "int", &function_3b7e3b9, 0, 0);
-  clientfield::register("actor", "" + #"hash_3bedaaea2c17af23", 1, 1, "int", &function_dd9a8d7c, 0, 0);
-  clientfield::register("vehicle", "" + #"hash_3bedaaea2c17af23", 1, 1, "int", &function_51595e12, 0, 0);
+  clientfield::register("scriptmover", "" + # "hash_64f62d9a3170948e", 1, 1, "int", &shrink_globe, 0, 0);
+  clientfield::register("actor", "" + # "hash_6848ec3d200d443b", 1, 1, "int", &shrink_zombie, 0, 0);
+  clientfield::register("vehicle", "" + # "hash_6848ec3d200d443b", 1, 1, "int", &shrink_zombie, 0, 0);
+  clientfield::register("actor", "" + # "hash_6f59675863e19a50", 1, 1, "int", &function_d8cf1bd7, 0, 0);
+  clientfield::register("vehicle", "" + # "hash_6f59675863e19a50", 1, 1, "int", &function_d8cf1bd7, 0, 0);
+  clientfield::register("scriptmover", "" + # "hash_32156a79f13e8c37", 1, 1, "int", &function_751c64a4, 0, 0);
+  clientfield::register("scriptmover", "" + # "hash_30c86f39ae8ea002", 1, 1, "int", &function_7fe3e4c8, 0, 0);
+  clientfield::register("actor", "" + # "hash_1dd40649a6474f30", 1, 1, "int", &function_1af615a9, 0, 0);
+  clientfield::register("vehicle", "" + # "hash_1dd40649a6474f30", 1, 1, "int", &function_1af615a9, 0, 0);
+  clientfield::register("scriptmover", "" + # "hash_12b19992ccb300e7", 1, 1, "int", &function_ac54fdec, 0, 0);
+  clientfield::register("scriptmover", "" + # "hash_54fdcf7f8eb5449e", 1, 1, "int", &drag_portal, 0, 0);
+  clientfield::register("scriptmover", "" + # "hash_69b312bcaae6308b", 1, 1, "int", &function_68a87cde, 0, 0);
+  clientfield::register("actor", "" + # "hash_2ff818c8cb4c17ba", 1, 1, "int", &function_332e7c58, 0, 0);
+  clientfield::register("vehicle", "" + # "hash_2ff818c8cb4c17ba", 1, 1, "int", &function_3b7e3b9, 0, 0);
+  clientfield::register("actor", "" + # "hash_3bedaaea2c17af23", 1, 1, "int", &function_dd9a8d7c, 0, 0);
+  clientfield::register("vehicle", "" + # "hash_3bedaaea2c17af23", 1, 1, "int", &function_51595e12, 0, 0);
 }
 
 shrink_globe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -46,7 +45,7 @@ shrink_globe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     self.fx_globe = playFX(localclientnum, "zm_weapons/fx8_www_shrink_globe", self.origin, v_forward, v_up);
 
     if(!isDefined(self.var_66db8b1a)) {
-      self playSound(localclientnum, #"hash_fe927ec8b31e2d");
+      self playSound(localclientnum, # "hash_fe927ec8b31e2d");
       self.var_66db8b1a = self playLoopSound(#"hash_57b1409fb6e001f3");
     }
 
@@ -63,7 +62,7 @@ shrink_globe(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
   if(isDefined(self.var_66db8b1a)) {
     self stoploopsound(self.var_66db8b1a);
     self.var_66db8b1a = undefined;
-    self playSound(localclientnum, #"hash_12c7ff63913e6a34");
+    self playSound(localclientnum, # "hash_12c7ff63913e6a34");
   }
 }
 
@@ -86,17 +85,17 @@ function_847080fa(localclientnum) {
     e_model attach(self.head, "J_Head");
   }
 
-  playSound(localclientnum, #"hash_1b7646cdadf52c4d", self.origin + (0, 0, 35));
+  playSound(localclientnum, # "hash_1b7646cdadf52c4d", self.origin + (0, 0, 35));
 
   switch (self.archetype) {
-    case #"zombie":
-      var_99d5ab4f = #"aib_t8_zm_zombie_base_dth_shrink_ww_wkud";
+    case # "zombie":
+      var_99d5ab4f = # "aib_t8_zm_zombie_base_dth_shrink_ww_wkud";
       break;
-    case #"nosferatu":
-      var_99d5ab4f = #"aib_t8_zm_nfrtu_dth_shrink_ww_wkud";
+    case # "nosferatu":
+      var_99d5ab4f = # "aib_t8_zm_nfrtu_dth_shrink_ww_wkud";
       break;
-    case #"bat":
-      var_99d5ab4f = #"aib_t8_zm_bat_dth_shrink_ww_wkud";
+    case # "bat":
+      var_99d5ab4f = # "aib_t8_zm_bat_dth_shrink_ww_wkud";
       break;
   }
 
@@ -118,7 +117,7 @@ function_847080fa(localclientnum) {
     var_cf6d072d *= 1.00433;
   }
 
-  playSound(localclientnum, #"hash_6abe8c2d3548831c", e_model.origin + (0, 0, 35));
+  playSound(localclientnum, # "hash_6abe8c2d3548831c", e_model.origin + (0, 0, 35));
   playFX(localclientnum, "zm_weapons/fx8_www_shrink_enemy_death", e_model.origin + (0, 0, 35));
   e_model delete();
 }
@@ -144,7 +143,7 @@ function_751c64a4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(newval == 1) {
     self.registerplayer_lift_clipbamfupdate = playFX(localclientnum, "zm_weapons/fx8_www_dazed_vortex", self.origin, v_forward, v_up);
-    playSound(localclientnum, #"hash_65790bfd14f9d80e", self.sound_origin);
+    playSound(localclientnum, # "hash_65790bfd14f9d80e", self.sound_origin);
     audio::playloopat(#"hash_23133277b3364bd2", self.sound_origin);
     return;
   }
@@ -155,7 +154,7 @@ function_751c64a4(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   v_origin = self.origin;
-  playSound(localclientnum, #"hash_1bb8f665af965ffb", self.sound_origin);
+  playSound(localclientnum, # "hash_1bb8f665af965ffb", self.sound_origin);
   audio::stoploopat(#"hash_23133277b3364bd2", self.sound_origin);
   wait 1;
   playFX(localclientnum, "zm_weapons/fx8_www_dazed_vortex_end", v_origin, v_forward, v_up);
@@ -176,7 +175,7 @@ function_7fe3e4c8(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 function_1af615a9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     sound_origin = self gettagorigin("j_head");
-    playSound(localclientnum, #"hash_483ba5ccc74b82ae", sound_origin);
+    playSound(localclientnum, # "hash_483ba5ccc74b82ae", sound_origin);
     self.var_3403f7a9 = util::playFXOnTag(localclientnum, "zm_weapons/fx8_www_dazed_enemy_glow_eye", self, "j_head");
     return;
   }
@@ -195,7 +194,7 @@ function_ac54fdec(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
     if(!isDefined(self.sound_origin)) {
       self.sound_origin = self.origin + (0, 0, 50);
-      playSound(localclientnum, #"hash_2d629f848398a470", self.sound_origin);
+      playSound(localclientnum, # "hash_2d629f848398a470", self.sound_origin);
       audio::playloopat(#"hash_5a6410f04ce4b3a0", self.sound_origin);
     }
 
@@ -203,7 +202,7 @@ function_ac54fdec(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   }
 
   if(isDefined(self.sound_origin)) {
-    playSound(localclientnum, #"hash_49211352d3711451", self.sound_origin);
+    playSound(localclientnum, # "hash_49211352d3711451", self.sound_origin);
     audio::stoploopat(#"hash_5a6410f04ce4b3a0", self.sound_origin);
   }
 
@@ -219,9 +218,9 @@ drag_portal(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
 
     if(!isDefined(self.sound_origin)) {
       self.sound_origin = self.origin + (0, 0, 50);
-      playSound(localclientnum, #"hash_457eb103eafefe25", self.sound_origin);
+      playSound(localclientnum, # "hash_457eb103eafefe25", self.sound_origin);
       audio::playloopat(#"hash_31a9e607641ce8eb", self.sound_origin);
-      self thread function_872ccd5b(#"hash_31a9e607641ce8eb", #"hash_3ab7968f3d5362bc");
+      self thread function_872ccd5b(#"hash_31a9e607641ce8eb", # "hash_3ab7968f3d5362bc");
     }
 
     return;
@@ -229,7 +228,7 @@ drag_portal(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bw
 
   if(isDefined(self.sound_origin)) {
     self notify(#"hash_d35390d5b5c613b");
-    playSound(localclientnum, #"hash_3ab7968f3d5362bc", self.sound_origin);
+    playSound(localclientnum, # "hash_3ab7968f3d5362bc", self.sound_origin);
     audio::stoploopat(#"hash_31a9e607641ce8eb", self.sound_origin);
   }
 
@@ -277,11 +276,11 @@ function_9fe38370(localclientnum, newval, str_tag) {
   if(newval) {
     self.var_4b8417f6 = util::playFXOnTag(localclientnum, "zm_weapons/fx8_www_drag_enemy_torso", self, str_tag);
 
-    if(self.archetype === #"zombie" || self.archetype === #"nosferatu") {
+    if(self.archetype === # "zombie" || self.archetype === # "nosferatu") {
       self thread function_84884488(localclientnum);
     }
 
-    self playSound(localclientnum, #"hash_71ccbe40ffaafe22");
+    self playSound(localclientnum, # "hash_71ccbe40ffaafe22");
   }
 }
 
@@ -292,7 +291,7 @@ function_84884488(localclientnum) {
   self playrenderoverridebundle(#"hash_429426f01ad84c8b");
   wait 0.7;
 
-  if(self.archetype === #"zombie" || self.archetype === #"catalyst" || self.archetype === #"nosferatu") {
+  if(self.archetype === # "zombie" || self.archetype === # "catalyst" || self.archetype === # "nosferatu") {
     if(!isDefined(level.var_4fea6622)) {
       level.var_4fea6622 = 0;
     }
@@ -334,7 +333,7 @@ function_30c6d85() {
 
   iprintlnbold("<dev string:x38>" + level.var_4fea6622);
 
-    self waittilltimeout(1.2, #"death");
+  self waittilltimeout(1.2, # "death");
   level.var_4fea6622--;
 
   iprintlnbold("<dev string:x4f>" + level.var_4fea6622);

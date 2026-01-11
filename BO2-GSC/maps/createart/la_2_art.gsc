@@ -22,8 +22,7 @@ main(n_fog_blend_time) {
 
   if(b_blend_exposure) {
     level thread blend_exposure_over_time(n_exposure, n_fog_blend_time);
-  }
-  else {
+  } else {
     setdvar("r_exposureTweak", 1);
     setdvar("r_exposureValue", n_exposure);
   }

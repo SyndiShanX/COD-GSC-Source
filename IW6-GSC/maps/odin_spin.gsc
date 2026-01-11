@@ -278,7 +278,7 @@ prespawn_decomp_crates() {
   link_bags_to_spin_crates("spin_decomp_bags_3", var_4["decomp_crate_03"]);
 
   foreach(var_6 in var_4) {
-  level.sat_ent_del[level.sat_ent_del.size] = var_6;
+    level.sat_ent_del[level.sat_ent_del.size] = var_6;
   }
 
   var_0 maps\_anim::anim_first_frame(var_4, "decompression_props");
@@ -326,7 +326,7 @@ prespawn_decomp_panels() {
     var_4 = getEntArray(var_3.target, "targetname");
 
     foreach(var_6 in var_4) {
-    var_6 linkto(var_1[var_8]);
+      var_6 linkto(var_1[var_8]);
     }
 
     var_3 linkto(var_1[var_8]);
@@ -364,7 +364,7 @@ spinning_room_geo_simple(var_0, var_1, var_2, var_3, var_4) {
   var_6 = getEntArray(var_0, "targetname");
 
   foreach(var_8 in var_6) {
-  var_8 linkto(var_5);
+    var_8 linkto(var_5);
   }
 
   var_10 = getent("spin_geo_final_pos", "targetname");
@@ -388,7 +388,7 @@ spin_busted_module() {
   var_2 = getent("busted_module_path2", "targetname");
 
   foreach(var_4 in var_0) {
-  var_4 linkto(var_1);
+    var_4 linkto(var_1);
   }
 
   common_scripts\utility::flag_wait("playsound");
@@ -427,21 +427,17 @@ spin_push_to_spacejump() {
   for(;;) {
     if(level.player.origin[1] < var_2 - level.spin_allowance_y) {
       var_4 = 0 - (level.player.origin[1] - var_2 + level.spin_allowance_y) * var_0;
-    }
-    else if(level.player.origin[1] > var_2 + level.spin_allowance_y) {
+    } else if(level.player.origin[1] > var_2 + level.spin_allowance_y) {
       var_4 = 0 - (level.player.origin[1] - var_2 - level.spin_allowance_y) * var_0;
-    }
-    else {
+    } else {
       var_4 = 0;
     }
 
     if(level.player.origin[2] < var_3 - level.spin_allowance_z) {
       var_5 = 0 - (level.player.origin[2] - var_3 + level.spin_allowance_z) * var_0;
-    }
-    else if(level.player.origin[2] > var_3 + level.spin_allowance_z) {
+    } else if(level.player.origin[2] > var_3 + level.spin_allowance_z) {
       var_5 = 0 - (level.player.origin[2] - var_3 - level.spin_allowance_z) * var_0;
-    }
-    else {
+    } else {
       var_5 = 0;
     }
 
@@ -463,21 +459,17 @@ spin_push_to_spacejump() {
 
     if(var_4 == 0 && (var_6 < 200 || var_6 > -200)) {
       var_6 = 0;
-    }
-    else if(var_6 > var_4) {
+    } else if(var_6 > var_4) {
       var_6 = var_6 - 100;
-    }
-    else {
+    } else {
       var_6 = var_6 + 100;
     }
 
     if(var_5 == 0 && (var_7 < 200 || var_7 > -200)) {
       var_7 = 0;
-    }
-    else if(var_7 > var_5) {
+    } else if(var_7 > var_5) {
       var_7 = var_7 - 100;
-    }
-    else {
+    } else {
       var_7 = var_7 + 100;
     }
 
@@ -506,8 +498,7 @@ spin_push_to_spacejump() {
     if(level.player.origin[0] <= var_13.origin[0]) {
       if(!common_scripts\utility::flag("disable_kyra_leader")) {
         level.ally.moveplaybackrate = 3;
-      }
-      else {
+      } else {
         level.ally.moveplaybackrate = 1;
       }
 
@@ -738,11 +729,9 @@ spin_do_moving_debris(var_0, var_1, var_2, var_3) {
 
         if(var_16 == 0) {
           var_10 thread spin_debris_rotation(var_13, var_15, var_14);
-        }
-        else if(var_16 == 1) {
+        } else if(var_16 == 1) {
           var_10 thread spin_debris_rotation(var_14, var_13, var_15);
-        }
-        else if(var_16 == 2) {
+        } else if(var_16 == 2) {
           var_10 thread spin_debris_rotation(var_15, var_14, var_13);
         }
       }
@@ -759,8 +748,7 @@ spin_do_moving_prefab_debris(var_0, var_1, var_2, var_3) {
   for(var_8 = 1; var_8 <= var_4; var_8++) {
     if(var_8 < 10) {
       var_9 = "0" + var_8;
-    }
-    else {
+    } else {
       var_9 = "" + var_8;
     }
 
@@ -821,11 +809,9 @@ spin_do_moving_prefab_debris(var_0, var_1, var_2, var_3) {
 
       if(var_23 == 0) {
         var_17 thread spin_debris_rotation(var_20, var_22, var_21);
-      }
-      else if(var_23 == 1) {
+      } else if(var_23 == 1) {
         var_17 thread spin_debris_rotation(var_21, var_20, var_22);
-      }
-      else if(var_23 == 2) {
+      } else if(var_23 == 2) {
         var_17 thread spin_debris_rotation(var_22, var_21, var_20);
       }
     }
@@ -952,7 +938,7 @@ do_spacejump_debris(var_0) {
       var_4 = getEntArray(var_3.script_linkto, "script_linkname");
 
       foreach(var_6 in var_4) {
-      var_6 linkto(var_3);
+        var_6 linkto(var_3);
       }
 
       var_8 = randomfloatrange(15.0, 45.0);
@@ -975,11 +961,9 @@ do_spacejump_debris(var_0) {
 
       if(var_11 == 0) {
         var_3 thread spin_debris_rotation(var_8, var_10, var_9);
-      }
-      else if(var_11 == 1) {
+      } else if(var_11 == 1) {
         var_3 thread spin_debris_rotation(var_9, var_8, var_10);
-      }
-      else if(var_11 == 2) {
+      } else if(var_11 == 2) {
         var_3 thread spin_debris_rotation(var_10, var_9, var_8);
       }
     }

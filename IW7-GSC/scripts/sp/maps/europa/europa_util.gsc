@@ -83,9 +83,7 @@ func_B285() {
   }
 
   var_00 scripts\code\character::setmodelfromarray(var_03);
-  var_00 scripts\code\character::attachhead(var_02, [
-    [var_01]
-  ]());
+  var_00 scripts\code\character::attachhead(var_02, [[var_01]]());
   return var_00;
 }
 
@@ -1091,9 +1089,7 @@ func_7988(param_00) {
     return var_01;
   }
 
-  var_01 = [
-    [level.getnodefunction]
-  ](param_00, "targetname");
+  var_01 = [[level.getnodefunction]](param_00, "targetname");
   if(isDefined(var_01)) {
     return var_01;
   }

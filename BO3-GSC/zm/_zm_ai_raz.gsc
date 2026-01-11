@@ -129,9 +129,7 @@ function function_684ce0() {
       level.round_spawn_func = &function_a33bc00f;
       level.round_wait_func = &function_692370a0;
       if(isDefined(level.var_95444cb4)) {
-        level.var_51a5abd0 = [
-          [level.var_95444cb4]
-        ]();
+        level.var_51a5abd0 = [[level.var_95444cb4]]();
       } else {
         level.var_51a5abd0 = level.var_51a5abd0 + randomintrange(5, 8);
       }
@@ -526,9 +524,7 @@ function function_7ed6c714(n_to_spawn = 1, var_e41e673a, b_force_spawn = 0, var_
       s_spawn_loc = var_b7959229;
     } else {
       if(isDefined(level.var_a3559c05)) {
-        s_spawn_loc = [
-          [level.var_a3559c05]
-        ](level.var_6bca5baa, var_19764360);
+        s_spawn_loc = [[level.var_a3559c05]](level.var_6bca5baa, var_19764360);
       } else if(level.zm_loc_types["raz_location"].size > 0) {
         s_spawn_loc = array::random(level.zm_loc_types["raz_location"]);
       }

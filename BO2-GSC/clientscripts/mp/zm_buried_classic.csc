@@ -34,8 +34,6 @@ init_jail_animtree() {
   scriptmodelsuseanimtree(#animtree);
 }
 
-player_flashlight_test(localclientnum) {
-}
+player_flashlight_test(localclientnum) {}
 
-perk_vulture_custom_scripts() {
-}
+perk_vulture_custom_scripts() {}

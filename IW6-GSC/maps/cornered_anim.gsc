@@ -519,8 +519,7 @@ prop_anims() {
 
   if(getdvar("intro_mask") == "0") {
     level.scr_anim["intro_gun"]["cornered_intro_rorke_gun"] = % cornered_intro_rorke_gun;
-  }
-  else {
+  } else {
     level.scr_anim["intro_gun"]["cornered_intro_rorke_gun"] = % cornered_level_intro_merrick_start_gun;
   }
 

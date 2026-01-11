@@ -134,8 +134,7 @@ drone_animation(localclientnum) {
 
   if(getgametypesetting("allowMapScripting")) {
     self animscripted(level.drone_anims[self.script_animation], 1.0, 0.0, 1.0);
-  }
-  else {
+  } else {
     self animscripted(level.drone_anims[self.script_animation + "_off"], 1.0, 0.0, 1.0);
   }
 }
@@ -159,8 +158,7 @@ drone_animate_fx(localclientnum) {
 
   if(getgametypesetting("allowMapScripting")) {
     self animflaggedscripted("fx", level.drone_anims[self.script_animation], 1.0, 0.0, 1.0);
-  }
-  else {
+  } else {
     self animflaggedscripted("fx", level.drone_anims[self.script_animation + "_off"], 1.0, 0.0, 1.0);
   }
 

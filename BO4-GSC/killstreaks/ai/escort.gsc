@@ -10,7 +10,6 @@
 #include scripts\killstreaks\ai\state;
 #include scripts\killstreaks\ai\target;
 #include scripts\killstreaks\ai\tracking;
-
 #namespace ai_escort;
 
 init() {
@@ -154,7 +153,7 @@ get_point_of_interest() {
 function_d15dd929(origin) {
   result = function_9cc082d2(origin + (0, 0, 100), 200);
 
-  if(isDefined(result) && isDefined(result[#"materialflags"]) && result[#"materialflags"]& 2) {
+  if(isDefined(result) && isDefined(result[# "materialflags"]) && result[# "materialflags"] & 2) {
     return false;
   }
 
@@ -221,7 +220,7 @@ function_b6f15bda() {
       if(isDefined(var_84e7232)) {
         recordsphere(var_84e7232, 8, (0, 1, 1), "<dev string:x40>");
 
-          var_b6a10143 = ai::t_cylinder(var_56bd1bef, 80, 30);
+        var_b6a10143 = ai::t_cylinder(var_56bd1bef, 80, 30);
         assert(isDefined(var_b6a10143.origin));
         tacpoints = tacticalquery(self.ai.escort.var_db083d2c, cylinder, self, var_b6a10143, var_84e7232, var_56bd1bef);
       }
@@ -236,7 +235,7 @@ function_b6f15bda() {
       if(isDefined(var_84e7232)) {
         recordsphere(var_84e7232, 8, (1, 0.5, 0), "<dev string:x40>");
 
-          cylinder = ai::t_cylinder(var_84e7232, self.ai.escort.var_5a529222, 30);
+        cylinder = ai::t_cylinder(var_84e7232, self.ai.escort.var_5a529222, 30);
         var_8f3583cf = ai::t_cylinder(self.origin, 200, 30);
         assert(isDefined(var_8f3583cf.origin));
         tacpoints = tacticalquery(self.ai.escort.var_db083d2c, cylinder, self, var_8f3583cf, var_84e7232, var_56bd1bef);

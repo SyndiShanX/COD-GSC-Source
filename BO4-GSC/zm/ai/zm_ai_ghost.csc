@@ -6,7 +6,6 @@
 #include scripts\core_common\ai\systems\fx_character;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\system_shared;
-
 #namespace zm_ai_ghost;
 
 autoexec __init__system__() {
@@ -25,14 +24,14 @@ private function_20705e4c(localclientnum) {
   self endon(#"death");
 
   while(true) {
-    waitresult = self waittill(#"set_invisible", #"set_visible", #"hash_6ab654a4c018818c");
+    waitresult = self waittill(#"set_invisible", # "set_visible", # "hash_6ab654a4c018818c");
 
     switch (waitresult._notify) {
-      case #"set_invisible":
+      case # "set_invisible":
         self fxclientutils::function_ae92446(localclientnum, self, self.fxdef);
         break;
-      case #"set_visible":
-      case #"hash_6ab654a4c018818c":
+      case # "set_visible":
+      case # "hash_6ab654a4c018818c":
         self fxclientutils::playfxbundle(localclientnum, self, self.fxdef);
         break;
     }

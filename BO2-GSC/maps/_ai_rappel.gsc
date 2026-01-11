@@ -39,8 +39,7 @@ start_ai_rappel(time_to_rappel, rappel_point_struct, create_rope, delete_rope) {
   if(isDefined(rappel_point_struct)) {
     if(isstring(rappel_point_struct)) {
       rappel_start = getstruct(rappel_point_struct, "targetname");
-    }
-    else {
+    } else {
       rappel_start = rappel_point_struct;
     }
   } else
@@ -56,8 +55,7 @@ start_ai_rappel(time_to_rappel, rappel_point_struct, create_rope, delete_rope) {
 
   if(isDefined(rappel_start.target)) {
     rappel_end = getstruct(rappel_start.target, "targetname");
-  }
-  else {
+  } else {
     rappel_end_pos = physicstrace(rappel_start.origin, rappel_start.origin - vectorscale((0, 0, 1), 10000.0));
     rappel_end = spawnStruct();
     rappel_end.origin = rappel_end_pos;
@@ -126,8 +124,7 @@ rappel_move_ai_thread(move_ent, rappel_end, time_to_rappel, rappel_face_player) 
 
   if(rappel_face_player) {
     self thread rappel_face_player(move_ent, time_to_rappel);
-  }
-  else {
+  } else {
     move_ent rotateto(rappel_end.angles, randomfloatrange(1, time_to_rappel));
   }
 

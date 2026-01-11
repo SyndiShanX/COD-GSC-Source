@@ -70,8 +70,7 @@ clean_previous_ai(_flag, name, type) {
   ai = undefined;
   if(!isDefined(name)) {
     ai = getaispeciesarray("axis", "all");
-  }
-  else {
+  } else {
     ai = get_living_aispecies_array(name, type);
   }
   for(i = 0; i < ai.size; i++) {

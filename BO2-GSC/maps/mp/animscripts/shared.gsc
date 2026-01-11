@@ -45,14 +45,12 @@ handlenotetrack(note, flagname, customfunction, var1) {
       if(isDefined(customfunction)) {
         if(!isDefined(var1)) {
           return [
-        }
-            [customfunction]
-          ](note);
+            }
+            [customfunction]](note);
         else {
           return [
-        }
-            [customfunction]
-          ](note, var1);
+            }
+            [customfunction]](note, var1);
       }
 
       break;
@@ -180,23 +178,20 @@ trackloop() {
     } else {
       if(yawdelta > self.rightaimlimit) {
         yawdelta = self.rightaimlimit;
-      }
-      else if(yawdelta < self.leftaimlimit) {
+      } else if(yawdelta < self.leftaimlimit) {
         yawdelta = self.leftaimlimit;
       }
 
       if(pitchdelta > self.upaimlimit) {
         pitchdelta = self.upaimlimit;
-      }
-      else if(pitchdelta < self.downaimlimit) {
+      } else if(pitchdelta < self.downaimlimit) {
         pitchdelta = self.downaimlimit;
       }
     }
 
     if(firstframe) {
       firstframe = 0;
-    }
-    else {
+    } else {
       yawdeltachange = yawdelta - prevyawdelta;
 
       if(abs(yawdeltachange) > maxyawdeltachange) {

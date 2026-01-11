@@ -70,8 +70,7 @@ follow_ent(e_followee) {
 
       if(trace_goalpos["position"] == candidate_goalpos) {
         self.goalpos = e_followee.origin + v_forward * 128;
-      }
-      else {
+      } else {
         self.goalpos = e_followee.origin + vectorscale((0, 0, 1), 60.0);
       }
     }
@@ -151,8 +150,7 @@ quadrotor_fireupdate() {
 
       if(isDefined(self.enemy) && isai(self.enemy)) {
         wait(randomfloatrange(0.5, 1.0));
-      }
-      else {
+      } else {
         current_time = gettime();
 
         if(current_time - self.time_last_spoke_killed_line > current_killed_line_cooldown) {
@@ -215,8 +213,7 @@ quadrotor_adjust_goal_for_enemy_height(goalpos) {
   if(isDefined(self.enemy)) {
     if(isai(self.enemy)) {
       offset = 45;
-    }
-    else {
+    } else {
       offset = -100;
     }
 
@@ -271,8 +268,7 @@ quadrotor_movementupdate() {
   if(!self.vehonpath) {
     if(isDefined(self.attachedpath)) {
       self script_delay();
-    }
-    else if(distancesquared(self.origin, self.goalpos) < 10000 && (self.goalpos[2] > old_goalpos[2] + 10 || self.origin[2] + 10 < self.goalpos[2])) {
+    } else if(distancesquared(self.origin, self.goalpos) < 10000 && (self.goalpos[2] > old_goalpos[2] + 10 || self.origin[2] + 10 < self.goalpos[2])) {
       self setvehgoalpos(self.goalpos, 1, 2, 0);
       self pathvariableoffset(vectorscale((0, 0, 1), 20.0), 2);
       self waittill_any_or_timeout(4, "near_goal", "force_goal");
@@ -318,23 +314,20 @@ quadrotor_movementupdate() {
           if(flag("activate_zone_nml")) {
             exit_path = getvehiclenode("quadrotor_bunker_north_exit_path", "targetname");
             is_valid_exit_path_found = self setvehgoalpos(exit_path.origin, 1, 2, 1);
-          } else {
-          }
+          } else {}
 
           if(!is_valid_exit_path_found) {
             if(flag("activate_zone_bunker_3b")) {
               exit_path = getvehiclenode("quadrotor_bunker_west_exit_path", "targetname");
               is_valid_exit_path_found = self setvehgoalpos(exit_path.origin, 1, 2, 1);
-            } else {
-            }
+            } else {}
           }
 
           if(!is_valid_exit_path_found) {
             if(flag("activate_zone_bunker_4b")) {
               exit_path = getvehiclenode("quadrotor_bunker_south_exit_path", "targetname");
               is_valid_exit_path_found = self setvehgoalpos(exit_path.origin, 1, 2, 1);
-            } else {
-            }
+            } else {}
           }
 
           break;
@@ -612,8 +605,7 @@ quadrotor_find_new_position() {
     }
     if(isDefined(node.quadrotor_fails) || isDefined(node.quadrotor_claimed)) {
       score = randomfloat(30);
-    }
-    else {
+    } else {
       score = randomfloat(100);
     }
 
@@ -657,8 +649,7 @@ quadrotor_damage() {
 
       if(yaw_vel < 0) {
         yaw_vel = yaw_vel - 150;
-      }
-      else {
+      } else {
         yaw_vel = yaw_vel + 150;
       }
 
@@ -794,8 +785,7 @@ quadrotor_fire_for_time(totalfiretime) {
   while(time < totalfiretime && !isDefined(self.emped)) {
     if(isDefined(self.enemy) && isDefined(self.enemy.attackeraccuracy) && self.enemy.attackeraccuracy == 0) {
       self fireweapon(undefined, undefined, 1);
-    }
-    else {
+    } else {
       self fireweapon();
     }
 
@@ -821,12 +811,10 @@ quadrotor_crash_accel() {
       if(randomint(100) > 40) {
         if(self.velocity[2] > 150.0) {
           self.crash_accel = self.crash_accel * 0.75;
-        }
-        else if(self.velocity[2] < 40.0 && count < 60) {
+        } else if(self.velocity[2] < 40.0 && count < 60) {
           if(abs(self.angles[0]) > 30 || abs(self.angles[2]) > 30) {
             self.crash_accel = randomfloatrange(160, 200);
-          }
-          else {
+          } else {
             self.crash_accel = randomfloatrange(85, 120);
           }
         }
@@ -890,8 +878,7 @@ quadrotor_collision() {
 
       if(normal[2] < 0.6) {
         fx_origin = self.origin - normal * 28;
-      }
-      else {
+      } else {
         fx_origin = self.origin - normal * 10;
       }
 
@@ -918,8 +905,7 @@ quadrotor_collision() {
         if(self.angles[0] < 0) {
           if(self.angles[0] < -15) {
             self.angles = (-15, self.angles[1], self.angles[2]);
-          }
-          else if(self.angles[0] > -10) {
+          } else if(self.angles[0] > -10) {
             self.angles = (-10, self.angles[1], self.angles[2]);
           }
         } else if(self.angles[0] > 15)
@@ -938,8 +924,7 @@ quadrotor_collision() {
 
         if(normal[2] < 0.6) {
           fx_origin = self.origin - normal * 28;
-        }
-        else {
+        } else {
           fx_origin = self.origin - normal * 10;
         }
 

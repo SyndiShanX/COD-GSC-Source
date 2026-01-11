@@ -165,8 +165,7 @@ afterlife_powerups() {
 
   if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
     spawn_infinite_powerup_drop(s_powerup_loc.origin, "double_points");
-  }
-  else {
+  } else {
     spawn_infinite_powerup_drop(s_powerup_loc.origin, "insta_kill");
   }
 
@@ -174,8 +173,7 @@ afterlife_powerups() {
 
   if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
     spawn_infinite_powerup_drop(s_powerup_loc.origin, "double_points");
-  }
-  else {
+  } else {
     spawn_infinite_powerup_drop(s_powerup_loc.origin, "full_ammo");
   }
 }
@@ -252,16 +250,14 @@ spawn_infinite_powerup_drop(v_origin, str_type) {
 
   if(isDefined(str_type)) {
     intro_powerup = maps\mp\zombies\_zm_powerups::specific_powerup_drop(str_type, v_origin);
-  }
-  else {
+  } else {
     intro_powerup = maps\mp\zombies\_zm_powerups::powerup_drop(v_origin);
   }
 
   level._powerup_timeout_override = undefined;
 }
 
-powerup_infinite_time() {
-}
+powerup_infinite_time() {}
 
 power_on_perk_machines() {
   level waittill_any("unlock_all_perk_machines", "open_sesame");

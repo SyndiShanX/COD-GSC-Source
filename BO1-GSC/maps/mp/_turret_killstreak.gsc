@@ -300,8 +300,7 @@ updateTurretPlacement(turret) {
     if(turret.canBePlaced != lastPlacedTurret) {
       if(good_spot_check) {
         turret setModel(level.auto_turret_settings[turret.turretType].modelGoodPlacement);
-      }
-      else {
+      } else {
         turret setModel(level.auto_turret_settings[turret.turretType].modelBadPlacement);
       }
       lastPlacedTurret = turret.canBePlaced;
@@ -393,8 +392,7 @@ initTurret(turret) {
   turret SetDefaultDropPitch(45.0);
   if(turret.turretType == "sentry") {
     turret thread turret_sentry_think(self);
-  }
-  else if(turret.turretType == "tow") {
+  } else if(turret.turretType == "tow") {
     turret thread turret_tow_think(self);
   }
   turret.turret_active = true;
@@ -478,8 +476,7 @@ watchDamage() {
       owner = self.owner;
       if(self.turretType == "sentry") {
         owner maps\mp\gametypes\_globallogic_audio::leaderDialogOnPlayer("sentry_destroyed", "item_destroyed");
-      }
-      else if(self.turretType == "tow") {
+      } else if(self.turretType == "tow") {
         owner maps\mp\gametypes\_globallogic_audio::leaderDialogOnPlayer("sam_destroyed", "item_destroyed");
       }
       self.damageTaken = self.health;
@@ -633,8 +630,7 @@ destroyTurret() {
   self waittill("destroy_turret", playDeathAnim);
   if(self.turretType == "sentry") {
     maps\mp\_killstreakrules::killstreakStop("autoturret_mp", self.team);
-  }
-  else {
+  } else {
     maps\mp\_killstreakrules::killstreakStop("auto_tow_mp", self.team);
   }
   self.turret_active = false;
@@ -680,14 +676,12 @@ spawnTurretPickUpTrigger(player) {
   self.pickUpTrigger = spawn("trigger_radius_use", pos);
   if(self.turretType == "sentry") {
     self.pickUpTrigger SetCursorHint("HINT_NOICON", "auto_gun_turret_mp");
-  }
-  else {
+  } else {
     self.pickUpTrigger SetCursorHint("HINT_NOICON", "tow_turret_mp");
   }
   if(isDefined(level.auto_turret_settings[self.turretType].hintString)) {
     self.pickUpTrigger SetHintString(level.auto_turret_settings[self.turretType].hintString);
-  }
-  else {
+  } else {
     self.pickUpTrigger SetHintString(&"MP_GENERIC_PICKUP");
   }
   if(level.teamBased) {
@@ -785,8 +779,7 @@ spawnTurretHackerTrigger(player) {
   self.hackerTrigger = spawn("trigger_radius_use", triggerOrigin, level.weaponobjects_hacker_trigger_width, level.weaponobjects_hacker_trigger_height);
   if(self.turretType == "sentry") {
     self.hackerTrigger SetCursorHint("HINT_NOICON", "auto_gun_turret_mp");
-  }
-  else {
+  } else {
     self.hackerTrigger SetCursorHint("HINT_NOICON", "tow_turret_mp");
   }
   self.hackerTrigger SetIgnoreEntForTrigger(self);

@@ -87,8 +87,7 @@ create_fresh_friendly_icon(var_0) {
 
   if(common_scripts\utility::flag("coop_show_constant_icon")) {
     self.friendlyicon.alpha = 1.0;
-  }
-  else {
+  } else {
     self.friendlyicon.alpha = 0.0;
   }
 }
@@ -157,7 +156,7 @@ friendly_hud_destroy_on_mission_end() {
   level waittill("special_op_terminated");
 
   foreach(var_1 in level.players) {
-  var_1 player_friendly_hud_destroy();
+    var_1 player_friendly_hud_destroy();
   }
 }
 

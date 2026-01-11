@@ -121,8 +121,7 @@ add_to_group(group, model) {
 add_model_to_group(model) {
   if(isDefined(level.model_group_map[model])) {
     add_to_group(level.model_group_map[model], model);
-  }
-  else {
+  } else {
     add_to_group("miscmodel", model);
   }
 }
@@ -294,8 +293,7 @@ add_menu_child(parent_menu, child_menu, child_title, child_number_override, func
 
   if(!isDefined(child_number_override)) {
     size = level.menu_sys[parent_menu].children_menu.size;
-  }
-  else {
+  } else {
     size = child_number_override;
   }
 
@@ -369,8 +367,7 @@ set_menu_hudelem(text, type, y_offset) {
 
   if(isDefined(type) && type == "title") {
     scale = 2;
-  }
-  else {
+  } else {
     scale = 1.3;
     y = y + 30;
   }
@@ -446,8 +443,7 @@ menu_input() {
 
     if(key > level.menu_sys[menu_name].options.size) {
       continue;
-    }
-    else if(isDefined(level.menu_sys[menu_name].parent_menu) && key == level.menu_sys[menu_name].options.size) {
+    } else if(isDefined(level.menu_sys[menu_name].parent_menu) && key == level.menu_sys[menu_name].options.size) {
       level notify("disable " + menu_name);
       level enable_menu(level.menu_sys[menu_name].parent_menu);
     } else if(isDefined(level.menu_sys[menu_name].function) && isDefined(level.menu_sys[menu_name].function[key])) {
@@ -455,8 +451,7 @@ menu_input() {
 
       if(isDefined(level.menu_sys[menu_name].func_key) && isDefined(level.menu_sys[menu_name].func_key[key]) && level.menu_sys[menu_name].func_key[key] == keystring) {
         error_msg = level[[level.menu_sys[menu_name].function[key]]]();
-      }
-      else {
+      } else {
         error_msg = level[[level.menu_sys[menu_name].function[key]]]();
       }
 
@@ -469,11 +464,9 @@ menu_input() {
 
     if(!isDefined(level.menu_sys[menu_name].children_menu)) {
       continue;
-    }
-    else if(!isDefined(level.menu_sys[menu_name].children_menu[key])) {
+    } else if(!isDefined(level.menu_sys[menu_name].children_menu[key])) {
       continue;
-    }
-    else if(!isDefined(level.menu_sys[level.menu_sys[menu_name].children_menu[key]])) {
+    } else if(!isDefined(level.menu_sys[level.menu_sys[menu_name].children_menu[key]])) {
       continue;
     }
     if(isDefined(level.menu_sys[menu_name].children_func) && isDefined(level.menu_sys[menu_name].children_func[key])) {
@@ -579,8 +572,7 @@ list_menu(list, x, y, scale, func) {
 move_list_menu(hud_array, dir, space, num) {
   if(dir == "up") {
     movement = space;
-  }
-  else {
+  } else {
     movement = space * -1;
   }
 
@@ -1002,8 +994,7 @@ select_dynent_group() {
 
   if(!isDefined(selected)) {
     level notify("stop_select_group");
-  }
-  else {
+  } else {
     level.dyn_ent_selected_group = level.dynent_groups[selected];
   }
 
@@ -1334,23 +1325,17 @@ xform_input_handler() {
     } else if(isDefined(object)) {
       if(key == "button_b") {
         object devaddyaw(2);
-      }
-      else if(key == "button_x") {
+      } else if(key == "button_x") {
         object devaddyaw(2 * -1);
-      }
-      else if(key == "button_y") {
+      } else if(key == "button_y") {
         object devaddpitch(2 * -1);
-      }
-      else if(key == "button_a") {
+      } else if(key == "button_a") {
         object devaddpitch(2);
-      }
-      else if(key == "button_lshldr") {
+      } else if(key == "button_lshldr") {
         object devaddroll(2 * -1);
-      }
-      else if(key == "button_rshldr") {
+      } else if(key == "button_rshldr") {
         object devaddroll(2);
-      }
-      else if(key == "button_lstick") {
+      } else if(key == "button_lstick") {
         object.angles = (0, 0, 0);
       }
     }
@@ -1376,8 +1361,7 @@ place_copy(type) {
 
     if(type == "destructible") {
       model_name = level.selected_object getdestructiblename();
-    }
-    else {
+    } else {
       model_name = level.selected_object.model;
     }
 
@@ -1447,8 +1431,7 @@ spawn_selected_object(model_name, with_trace, type) {
 
   if(isDefined(type) && type == "destructible") {
     level.selected_object = codespawn("script_model", vector, 0, 0, 0, model_name);
-  }
-  else {
+  } else {
     level.selected_object = spawn("script_model", vector);
     level.selected_object setModel(model_name);
   }
@@ -1661,8 +1644,7 @@ save_master(save_msg, filename, save_array, type) {
 
       if(isDefined(check) && check != "failed") {
         level thread save_complete(check);
-      }
-      else {
+      } else {
         level thread save_failed();
       }
 
@@ -1783,8 +1765,7 @@ save(model_array, filename, type) {
 
   if(type == "dynent") {
     classname = "dyn_model";
-  }
-  else {
+  } else {
     classname = "misc_model";
   }
 
@@ -1817,8 +1798,7 @@ save(model_array, filename, type) {
 
   if(saved) {
     return level.fullpath_file;
-  }
-  else {
+  } else {
     return "failed";
   }
 }

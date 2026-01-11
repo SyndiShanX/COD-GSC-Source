@@ -38,9 +38,7 @@ tryUseHeliSniper(lifeId, streakName) {
 
   if(isDefined(self.isJuggernautLevelCustom) && self.isJuggernautLevelCustom == true) {
     return false;
-  }
-
-  else if(!isDefined(level.air_node_mesh) ||
+  } else if(!isDefined(level.air_node_mesh) ||
     !isDefined(closestStart) ||
     !isDefined(closestNode)) {
     self iPrintLnBold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
@@ -191,11 +189,9 @@ getBestHeight(centerPoint) {
 
   if(isDefined(heightEnt)) {
     trueHeight = heightEnt.origin[2];
-  }
-  else if(isDefined(level.airstrikeHeightScale)) {
+  } else if(isDefined(level.airstrikeHeightScale)) {
     trueHeight = 850 * level.airstrikeHeightScale;
-  }
-  else {
+  } else {
     trueHeight = 850;
   }
 
@@ -275,8 +271,7 @@ heliPickup(chopper, streakName) {
 
   if(isDefined(closestStartNode.angles)) {
     startAng = closestStartNode.angles;
-  }
-  else {
+  } else {
     startAng = (0, 0, 0);
   }
 
@@ -286,8 +281,7 @@ heliPickup(chopper, streakName) {
 
   if(isDefined(closestStartNode.neighbors[0])) {
     closestNode = closestStartNode.neighbors[0];
-  }
-  else {
+  } else {
     closestNode = getClosestNode(self.origin);
   }
 
@@ -514,8 +508,7 @@ heliReturnToDropsite() {
 
       if(loc.script_parameters == "pickupNodehigh") {
         closestNodeIsHigh = true;
-      }
-      else {
+      } else {
         closestNodeIsHigh = false;
       }
     }

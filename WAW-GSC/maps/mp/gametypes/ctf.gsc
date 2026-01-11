@@ -193,11 +193,9 @@ onScoreLimit() {
   winner = undefined;
   if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
     winner = "tie";
-  }
-  else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
+  } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
     winner = "axis";
-  }
-  else {
+  } else {
     winner = "allies";
   }
   logString("scorelimit, win: " + winner + ", allies: " + game["teamScores"]["allies"] + ", axis: " + game["teamScores"]["axis"]);
@@ -216,11 +214,9 @@ onRoundEndGame(winningTeam) {
   ctf_setTeamScore("axis", game["ctf_teamscore"]["axis"]);
   if(game["teamScores"]["allies"] == game["teamScores"]["axis"]) {
     winner = "tie";
-  }
-  else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
+  } else if(game["teamScores"]["axis"] > game["teamScores"]["allies"]) {
     winner = "axis";
-  }
-  else {
+  } else {
     winner = "allies";
   }
   maps\mp\gametypes\_globallogic::updateWinLossStats(winner);
@@ -249,15 +245,13 @@ onSpawnPlayer() {
   if(level.useStartSpawns) {
     if(spawnteam == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
     }
   } else {
     if(spawnteam == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_axis);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_allies);
     }
   }
@@ -438,8 +432,7 @@ ctf_endGame(winningTeam, endReasonText) {
 onTimeLimit() {
   if(level.teamBased) {
     ctf_endGame(game["defenders"], game["strings"]["time_limit_reached"]);
-  }
-  else {
+  } else {
     ctf_endGame(undefined, game["strings"]["time_limit_reached"]);
   }
 }
@@ -461,8 +454,7 @@ onDrop(player) {
   }
   if(isDefined(player)) {
     player logString(team + " flag dropped");
-  }
-  else {
+  } else {
     logString(team + " flag dropped");
   }
   player playLocalSound("flag_drop_plr");
@@ -505,8 +497,7 @@ onPickup(player) {
       squadID = getplayersquadid(player);
       if(isDefined(squadID)) {
         maps\mp\gametypes\_globallogic::leaderDialog("wetake_flag", otherTeam, undefined, undefined, "squad_take", squadID);
-      }
-      else {
+      } else {
         maps\mp\gametypes\_globallogic::leaderDialog("wetake_flag", otherTeam);
       }
       maps\mp\gametypes\_globallogic::leaderDialog("theytake_flag", team);
@@ -667,8 +658,7 @@ returnFlagHudElems(time) {
   level.ReturnMessageElems["allies"][ownerteam] setTimer(time);
   if(time <= 0) {
     return false;
-  }
-  else {
+  } else {
     wait time;
   }
   return true;

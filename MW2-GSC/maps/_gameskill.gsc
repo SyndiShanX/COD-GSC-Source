@@ -89,7 +89,7 @@ setSkill(reset) {
 
     thread playerHealthDebug();
 
-      thread gameskill_change_monitor();
+    thread gameskill_change_monitor();
   }
 
   //createprintchannel( "script_autodifficulty" );
@@ -423,7 +423,7 @@ setGlobalDifficulty() {
 
 updateGameSkill() {
   foreach(player in level.players) {
-  player.gameskill = player get_player_gameskill();
+    player.gameskill = player get_player_gameskill();
   }
 
   level.gameskill = level.player.gameskill;
@@ -732,11 +732,9 @@ printHealthDebug() {
       type = i % 3;
       if(type == 0) {
         width = player.health / player.maxhealth * 300;
-      }
-      else if(type == 1) {
+      } else if(type == 1) {
         width = (player.playerInvulTimeEnd - GetTime()) / 1000 * 40;
-      }
-      else if(type == 2) {
+      } else if(type == 2) {
         width = (player.deathInvulnerableTimeout - GetTime()) / 1000 * 40;
       }
 
@@ -758,90 +756,89 @@ destroyHealthDebug() {
   }
 }
 
-  /*
-  // this is run on each enemy AI.
-  axisAccuracyControl()
-  {
-  	self endon( "long_death" );
-  	self endon( "death" );
-  	
-  	//prof_begin( "axisAccuracyControl" );
-  	
-  	SetDvarIfUninitialized( "scr_dynamicaccuracy", "off" );
-  	if( GetDvar( "scr_dynamicaccuracy" ) != "on" )
-  	{
-  // 		self simpleAccuracyControl();
-  	}
-  	else
-  	{
-  		for( ;; )
-  		{
-  			wait( 0.05 );
-  			waittillframeend;// in case our accuracy changed this frame
-  			
-  			//prof_begin( "axisAccuracyControl" );
-  			
-  			if( isDefined( self.enemy ) && IsPlayer( self.enemy ) && self CanSee( self.enemy ) )
-  			{
-  				self.a.accuracyGrowthMultiplier += 0.05 * anim.accuracyGrowthRate;
-  				if( self.a.accuracyGrowthMultiplier > anim.accuracyGrowthMax ) {
-  					self.a.accuracyGrowthMultiplier = anim.accuracyGrowthMax;
-  				}
-  			}
-  			else
-  			{
-  				self.a.accuracyGrowthMultiplier = 1;
-  			}
-  			
-  			self setEnemyAccuracy();
-  			
-  			//prof_end( "axisAccuracyControl" );
-  		}
-  	}
-  	
-  	//prof_end( "axisAccuracyControl" );
+/*
+// this is run on each enemy AI.
+axisAccuracyControl()
+{
+	self endon( "long_death" );
+	self endon( "death" );
+	
+	//prof_begin( "axisAccuracyControl" );
+	
+	SetDvarIfUninitialized( "scr_dynamicaccuracy", "off" );
+	if( GetDvar( "scr_dynamicaccuracy" ) != "on" )
+	{
+// 		self simpleAccuracyControl();
+	}
+	else
+	{
+		for( ;; )
+		{
+			wait( 0.05 );
+			waittillframeend;// in case our accuracy changed this frame
+			
+			//prof_begin( "axisAccuracyControl" );
+			
+			if( isDefined( self.enemy ) && IsPlayer( self.enemy ) && self CanSee( self.enemy ) )
+			{
+				self.a.accuracyGrowthMultiplier += 0.05 * anim.accuracyGrowthRate;
+				if( self.a.accuracyGrowthMultiplier > anim.accuracyGrowthMax ) {
+					self.a.accuracyGrowthMultiplier = anim.accuracyGrowthMax;
+				}
+			}
+			else
+			{
+				self.a.accuracyGrowthMultiplier = 1;
+			}
+			
+			self setEnemyAccuracy();
+			
+			//prof_end( "axisAccuracyControl" );
+		}
+	}
+	
+	//prof_end( "axisAccuracyControl" );
+}
+
+alliesAccuracyControl()
+{
+	self endon( "long_death" );
+	self endon( "death" );
+	
+// 	self simpleAccuracyControl();
+}
+*/
+
+set_accuracy_based_on_situation() {
+  if(self animscripts\combat_utility::isSniper() && IsAlive(self.enemy)) {
+    self setSniperAccuracy();
+    return;
   }
 
-  alliesAccuracyControl()
-  {
-  	self endon( "long_death" );
-  	self endon( "death" );
-  	
-  // 	self simpleAccuracyControl();
-  }
-  */
-
-  set_accuracy_based_on_situation() {
-    if(self animscripts\combat_utility::isSniper() && IsAlive(self.enemy)) {
-      self setSniperAccuracy();
+  if(IsPlayer(self.enemy)) {
+    resetMissDebounceTime();
+    if(self.a.missTime > GetTime()) {
+      self.accuracy = 0;
       return;
     }
-
-    if(IsPlayer(self.enemy)) {
-      resetMissDebounceTime();
-      if(self.a.missTime > GetTime()) {
-        self.accuracy = 0;
-        return;
-      }
-    }
-
-    if(self.script == "move") {
-      if(self isCQBWalkingOrFacingEnemy()) {
-        self.accuracy = anim.walk_accuracy * self.baseAccuracy;
-      }
-      else {
-        self.accuracy = anim.run_accuracy * self.baseAccuracy;
-      }
-      return;
-    }
-
-    self.accuracy = self.baseAccuracy;
-
-    // rambo corner is more accurate so it's still a threat to the player
-    if(isDefined(self.isRambo) && isDefined(self.ramboAccuracyMult)) {
-      self.accuracy *= self.ramboAccuracyMult;
-    }
   }
+
+  if(self.script == "move") {
+    if(self isCQBWalkingOrFacingEnemy()) {
+      self.accuracy = anim.walk_accuracy * self.baseAccuracy;
+    } else {
+      self.accuracy = anim.run_accuracy * self.baseAccuracy;
+    }
+    return;
+  }
+
+  self.accuracy = self.baseAccuracy;
+
+  // rambo corner is more accurate so it's still a threat to the player
+  if(isDefined(self.isRambo) && isDefined(self.ramboAccuracyMult)) {
+    self.accuracy *= self.ramboAccuracyMult;
+  }
+}
 
 setSniperAccuracy() {
   /*
@@ -1278,13 +1275,13 @@ player_health_packets() {
   // 	thread draw_player_health_packets();
   self.player_health_packets = 3;
   /*
-	for( ;; )
-	{
-		self ent_flag_wait( "player_has_red_flashing_overlay" );
-// 		change_player_health_packets( - 1 );
-		self ent_flag_waitopen( "player_has_red_flashing_overlay" );
-	}
-	*/
+  	for( ;; )
+  	{
+  		self ent_flag_wait( "player_has_red_flashing_overlay" );
+  // 		change_player_health_packets( - 1 );
+  		self ent_flag_waitopen( "player_has_red_flashing_overlay" );
+  	}
+  	*/
 }
 
 playerHealthRegenInit() {
@@ -1407,7 +1404,7 @@ playerHealthRegen() {
         logRegen(newHealth);
       }
 
-        self SetNormalHealth(newHealth);
+      self SetNormalHealth(newHealth);
       oldRatio = self.health / self.maxHealth;
       continue;
     }
@@ -1507,13 +1504,13 @@ logHit(newhealth, invulTime) {
   	level.hitlog = [];
   	thread showHitLog();
   }
-	
+  	
   data = spawnStruct();
   data.regen = false;
   data.time = GetTime();
   data.health = newhealth / level.player.maxhealth;
   data.invulTime = invulTime;
-	
+  	
   level.hitlog[ level.hitlog.size ] = data;*/
 }
 
@@ -1523,21 +1520,21 @@ logRegen(newhealth) {
   	level.hitlog = [];
   	thread showHitLog();
   }
-	
+  	
   data = spawnStruct();
   data.regen = true;
   data.time = GetTime();
   data.health = newhealth / level.player.maxhealth;
-	
+  	
   level.hitlog[ level.hitlog.size ] = data;*/
 }
 
 showHitLog() {
   /* level.player waittill( "death" );
-	
+  	
   PrintLn( "" );
   PrintLn( "^3Hit Log:" );
-	
+  	
   prevhealth = 1;
   prevtime = 0;
   for( i = 0; i < level.hitlog.size; i++ )
@@ -1561,32 +1558,32 @@ showHitLog() {
   	prevtime = level.hitlog[ i ].time;
   	prevhealth = level.hitlog[ i ].health;
   }
-	
+  	
   PrintLn( "" );*/
 }
 
-  playerInvul(timer) {
-    Assert(IsPlayer(self));
+playerInvul(timer) {
+  Assert(IsPlayer(self));
 
-    if(isDefined(self.flashendtime) && self.flashendtime > GetTime()) {
-      timer = timer * getCurrentDifficultySetting("flashbangedInvulFactor");
-    }
-
-    if(timer > 0) {
-      if(!isDefined(self.noPlayerInvul)) {
-        self.attackeraccuracy = 0;
-      }
-      self.IgnoreRandomBulletDamage = true;
-
-      self.playerInvulTimeEnd = GetTime() + timer * 1000;
-
-        wait(timer);
-    }
-
-    update_player_attacker_accuracy();
-
-    self ent_flag_clear("player_is_invulnerable");
+  if(isDefined(self.flashendtime) && self.flashendtime > GetTime()) {
+    timer = timer * getCurrentDifficultySetting("flashbangedInvulFactor");
   }
+
+  if(timer > 0) {
+    if(!isDefined(self.noPlayerInvul)) {
+      self.attackeraccuracy = 0;
+    }
+    self.IgnoreRandomBulletDamage = true;
+
+    self.playerInvulTimeEnd = GetTime() + timer * 1000;
+
+    wait(timer);
+  }
+
+  update_player_attacker_accuracy();
+
+  self ent_flag_clear("player_is_invulnerable");
+}
 
 default_door_node_flashbang_frequency() {
   //added .doorFragChance and .doorFlashChance for throwing frag/flash grenades through doors.
@@ -1618,16 +1615,14 @@ grenadeAwareness() {
       // hard and fu
       if(RandomInt(100) < 33) {
         self.grenadeawareness = 0.2;
-      }
-      else {
+      } else {
         self.grenadeawareness = 0.5;
       }
     } else {
       // normal
       if(RandomInt(100) < 33) {
         self.grenadeawareness = 0;
-      }
-      else {
+      } else {
         self.grenadeawareness = 0.2;
       }
     }
@@ -1770,8 +1765,7 @@ add_hudelm_position_internal(alignY) {
 
   if(level.console) {
     self.fontScale = 2;
-  }
-  else {
+  } else {
     self.fontScale = 1.6;
   }
 
@@ -1807,8 +1801,7 @@ add_hudelm_position_internal(alignY) {
   self.background.vertAlign = "middle";
   if(level.console) {
     self.background SetShader("popmenu_bg", 650, 52);
-  }
-  else {
+  } else {
     self.background SetShader("popmenu_bg", 650, 42);
   }
   self.background.alpha = .5;
@@ -2378,9 +2371,9 @@ aa_init_stats() {
     return;
   }
 
-    //prof_begin( "aa_init_stats" );
+  //prof_begin( "aa_init_stats" );
 
-    level.sp_stat_tracking_func = maps\_gameskill::auto_adjust_new_zone;
+  level.sp_stat_tracking_func = maps\_gameskill::auto_adjust_new_zone;
 
   SetDvar("aa_player_kills", "0");
   SetDvar("aa_enemy_deaths", "0");
@@ -2435,7 +2428,7 @@ aa_time_tracking() {
     return; // shortcut for generating clipmodels gah.
   }
 
-    waittillframeend; // so level.start_point is defined
+  waittillframeend; // so level.start_point is defined
   for(;;) {
     //prof_begin( "aa_time_tracking" );
 
@@ -2447,20 +2440,20 @@ aa_time_tracking() {
       }
     }
 
-      /*
-      level.sprint_key = GetKeyBinding( "+breath_sprint" );
-      sprinting = false;
-      sprinting = level.player command_used( "+sprint" );
-      if( !sprinting )
-      {
-      	sprinting = level.player command_used( "+breath_sprint" );
-      }
-      if( sprinting )
-      {
-      	aa_add_event_float( "aa_sprint_time", 0.2 );
-      }
-      */
-      wait(0.2);
+    /*
+    level.sprint_key = GetKeyBinding( "+breath_sprint" );
+    sprinting = false;
+    sprinting = level.player command_used( "+sprint" );
+    if( !sprinting )
+    {
+    	sprinting = level.player command_used( "+breath_sprint" );
+    }
+    if( sprinting )
+    {
+    	aa_add_event_float( "aa_sprint_time", 0.2 );
+    }
+    */
+    wait(0.2);
   }
 }
 
@@ -2495,9 +2488,9 @@ auto_adjust_new_zone(zone) {
     return;
   }
 
-    if(!isDefined(level.auto_adjust_flags)) {
-      level.auto_adjust_flags = [];
-    }
+  if(!isDefined(level.auto_adjust_flags)) {
+    level.auto_adjust_flags = [];
+  }
 
   flag_wait("auto_adjust_initialized");
 
@@ -2613,7 +2606,7 @@ auto_adust_zone_complete(zone) {
     msg = "Cheated in AA sequence: ";
   }
 
-    msg += level.script + "/" + zone;
+  msg += level.script + "/" + zone;
   keys = GetArrayKeys(aa_array);
   //	array_levelthread( keys, ::aa_print_vals, aa_array );
 
@@ -2675,8 +2668,7 @@ player_did_most_damage() {
   return self.player_damage * 1.75 > self.non_player_damage;
 }
 
-empty_kill_func(type, loc, point) {
-}
+empty_kill_func(type, loc, point) {}
 
 auto_adjust_enemy_died(amount, attacker, type, point) {
   //prof_begin( "auto_adjust_enemy_died" );

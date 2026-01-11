@@ -179,8 +179,7 @@ func_3110(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
     if(isDefined(var_05) && (var_05 == "zmb_imsprojectile_mp" || var_05 == "zmb_fireworksprojectile_mp")) {
       var_02 = 0;
-    }
-    else {
+    } else {
       var_02 = max(10, var_16);
     }
 
@@ -293,8 +292,7 @@ func_C4D0(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if(self.croc_chomp) {
     var_02 = 1;
-  }
-  else if(var_08 == "head" || var_02 > 1) {
+  } else if(var_08 == "head" || var_02 > 1) {
     var_13 = "standard";
 
     if(self.helmetlocation == "head") {
@@ -558,8 +556,7 @@ func_3116() {
 
         if(!var_07) {
           var_0++;
-        }
-        else {
+        } else {
           var_00 = 0;
         }
       } else

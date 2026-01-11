@@ -45,8 +45,7 @@ main() {
   self setProneAnimNodes(-45, 45, % prone_legs_down, % exposed_modern, % prone_legs_up);
   if(self.a.pose != "prone") {
     self prone_transitionTo("prone");
-  }
-  else {
+  } else {
     self EnterProneWrapper(0);
   }
 
@@ -210,8 +209,7 @@ tryThrowingGrenade(throwAt, safe) {
   theanim = undefined;
   if(isDefined(safe) && safe) {
     theanim = animArrayPickRandom("grenade_safe");
-  }
-  else {
+  } else {
     theanim = animArrayPickRandom("grenade_exposed");
   }
 
@@ -264,8 +262,7 @@ prone_transitionTo(newPose) {
 
   if(shouldFireWhileChangingPose()) {
     transAnim = animArray(self.a.pose + "_2_" + newPose + "_firing");
-  }
-  else {
+  } else {
     transAnim = animArray(self.a.pose + "_2_" + newPose);
   }
 
@@ -307,15 +304,13 @@ proneTo(newPose, rate) {
   if(shouldFireWhileChangingPose()) {
     if(newPose == "crouch") {
       transAnim = % prone_2_crouch_firing;
-    }
-    else if(newPose == "stand") {
+    } else if(newPose == "stand") {
       transAnim = % prone_2_stand_firing;
     }
   } else {
     if(newPose == "crouch") {
       transAnim = % prone_2_crouch;
-    }
-    else if(newPose == "stand") {
+    } else if(newPose == "stand") {
       transAnim = % prone_2_stand_nodelta;
     }
   }

@@ -7,7 +7,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\trials\zm_trial_reset_loadout;
 #include scripts\zm_common\zm_perks;
-
 #namespace zm_perk_bandolier;
 
 autoexec __init__system__() {
@@ -19,7 +18,7 @@ __init__() {
 }
 
 function_27473e44() {
-  zm_perks::register_perk_basic_info(#"specialty_extraammo", #"perk_bandolier", 3000, #"zombie/perk_bandolier", getweapon("zombie_perk_bottle_bandolier"), getweapon("zombie_perk_totem_bandolier"), #"zmperksbandolier");
+  zm_perks::register_perk_basic_info(#"specialty_extraammo", # "perk_bandolier", 3000, # "zombie/perk_bandolier", getweapon("zombie_perk_bottle_bandolier"), getweapon("zombie_perk_totem_bandolier"), # "zmperksbandolier");
   zm_perks::register_perk_precache_func(#"specialty_extraammo", &perk_precache);
   zm_perks::register_perk_clientfields(#"specialty_extraammo", &perk_register_clientfield, &perk_set_clientfield);
   zm_perks::register_perk_machine(#"specialty_extraammo", &perk_machine_setup);
@@ -33,10 +32,10 @@ perk_precache() {
     return;
   }
 
-  level.machine_assets[#"specialty_extraammo"] = spawnStruct();
-  level.machine_assets[#"specialty_extraammo"].weapon = getweapon("zombie_perk_bottle_bandolier");
-  level.machine_assets[#"specialty_extraammo"].off_model = "p7_zm_vending_sleight";
-  level.machine_assets[#"specialty_extraammo"].on_model = "p7_zm_vending_sleight";
+  level.machine_assets[# "specialty_extraammo"] = spawnStruct();
+  level.machine_assets[# "specialty_extraammo"].weapon = getweapon("zombie_perk_bottle_bandolier");
+  level.machine_assets[# "specialty_extraammo"].off_model = "p7_zm_vending_sleight";
+  level.machine_assets[# "specialty_extraammo"].on_model = "p7_zm_vending_sleight";
 }
 
 perk_register_clientfield() {}
@@ -68,7 +67,7 @@ set_ammo(b_max_ammo = 1) {
   a_weapons = self getweaponslistprimaries();
 
   foreach(weapon in a_weapons) {
-    if(weaponhasattachment(weapon, "uber") && weapon.statname == #"smg_capacity_t8") {
+    if(weaponhasattachment(weapon, "uber") && weapon.statname == # "smg_capacity_t8") {
       continue;
     }
 

@@ -617,8 +617,7 @@ audio_sfx_truck_idle_loop_stop() {}
 audio_sfx_alternate_rolling_loop_alias() {
   if(level.rollingloop == "emt_movingcover2_rolling1_loop") {
     level.rollingloop = "emt_movingcover2_rolling2_loop";
-  }
-  else {
+  } else {
     level.rollingloop = "emt_movingcover2_rolling1_loop";
   }
 }

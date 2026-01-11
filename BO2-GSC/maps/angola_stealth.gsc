@@ -25,8 +25,7 @@ player_start_stealth_battle() {
   while(true) {
     if(isDefined(level.player.climbing_tree)) {
       level.player.stealth_visible_distance = 60;
-    }
-    else {
+    } else {
       level.player.stealth_visible_distance = level.player.ground_visible_distance;
     }
 
@@ -70,8 +69,7 @@ spawn_fn_ai_jungle_patrol(player_favourate_enemy, str_category, ignore_surpressi
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "walk") {
     self change_movemode("cqb_walk");
-  }
-  else {
+  } else {
     self set_run_anim("walk");
   }
 
@@ -84,8 +82,7 @@ spawn_fn_ai_jungle_patrol(player_favourate_enemy, str_category, ignore_surpressi
 
   if(isDefined(self.script_int)) {
     change_arrivals_anim_frac = self.script_int;
-  }
-  else {
+  } else {
     change_arrivals_anim_frac = 60;
   }
 
@@ -129,8 +126,7 @@ spawn_fn_ai_jungle_patrol(player_favourate_enemy, str_category, ignore_surpressi
 update_node_arrivals(disable_frac) {
   if(self.disable_node_arrivals == 0) {
     self.disable_node_arrivals = 1;
-  }
-  else {
+  } else {
     frac = randomfloatrange(0, 100);
 
     if(frac <= disable_frac) {
@@ -188,8 +184,7 @@ patrol_search_for_player() {
       self.can_see_player_start_time = undefined;
     }
 
-    if(isDefined(str_message)) {
-    }
+    if(isDefined(str_message)) {}
 
     if(isDefined(self.can_see_player_start_time)) {
       time = gettime();
@@ -197,11 +192,9 @@ patrol_search_for_player() {
 
       if(level.player.stealth_num_times_player_seen == 1) {
         can_see_player_time = 2.0;
-      }
-      else if(level.player.stealth_num_times_player_seen == 2) {
+      } else if(level.player.stealth_num_times_player_seen == 2) {
         can_see_player_time = 1.5;
-      }
-      else {
+      } else {
         can_see_player_time = 1.25;
       }
 

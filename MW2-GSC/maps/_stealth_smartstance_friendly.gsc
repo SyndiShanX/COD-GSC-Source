@@ -169,8 +169,7 @@ friendly_stance_handler_change_stance_down() {
     case "crouch":
       if(self._stealth.behavior.no_prone) {
         friendly_stance_handler_stay_still();
-      }
-      else {
+      } else {
         self allowedstances("prone");
       }
       break;
@@ -331,19 +330,19 @@ friendly_default_stance_handler_distances() {
 friendly_set_stance_handler_distances(looking_away, neutral, looking_towards) {
   if(isDefined(looking_away)) {
     foreach(key, value in looking_away) {
-    self._stealth.behavior.stance_handler["looking_away"][key] = value;
+      self._stealth.behavior.stance_handler["looking_away"][key] = value;
     }
   }
 
   if(isDefined(neutral)) {
     foreach(key, value in neutral) {
-    self._stealth.behavior.stance_handler["neutral"][key] = value;
+      self._stealth.behavior.stance_handler["neutral"][key] = value;
     }
   }
 
   if(isDefined(looking_towards)) {
     foreach(key, value in looking_towards) {
-    self._stealth.behavior.stance_handler["looking_towards"][key] = value;
+      self._stealth.behavior.stance_handler["looking_towards"][key] = value;
     }
   }
 }

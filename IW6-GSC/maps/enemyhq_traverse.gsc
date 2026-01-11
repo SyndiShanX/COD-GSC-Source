@@ -94,7 +94,7 @@ player_rpg_shield() {
   }
 
   foreach(var_2 in var_0) {
-  missile_deleteattractor(var_2);
+    missile_deleteattractor(var_2);
   }
 }
 
@@ -114,7 +114,7 @@ player_rpg_attractor() {
   }
 
   foreach(var_3 in var_0) {
-  missile_deleteattractor(var_3);
+    missile_deleteattractor(var_3);
   }
 }
 
@@ -210,7 +210,7 @@ fudge_ally_accuracy() {
   common_scripts\utility::flag_wait("to_basement");
 
   foreach(var_1 in level.allies) {
-  var_1 maps\_utility::set_baseaccuracy(var_1.oldaccuracy);
+    var_1 maps\_utility::set_baseaccuracy(var_1.oldaccuracy);
   }
 }
 
@@ -266,8 +266,7 @@ handle_rpg_sniper() {
 
   if(level.rpg_ambush_guys.size > 1) {
     common_scripts\utility::array_thread(level.rpg_ambush_guys, ::kill_allies_on_next_shot);
-  }
-  else {
+  } else {
     common_scripts\utility::array_thread(level.rpg_ambush_guys, ::fake_ally_kill_me);
   }
 }

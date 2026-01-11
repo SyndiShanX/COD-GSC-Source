@@ -65,8 +65,7 @@ section_hint_string_init() {
 hints_ads_escape() {
   if(common_scripts\utility::flag("esc_combat_done") || level.player adsbuttonpressed()) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -124,8 +123,7 @@ escape_no_push_zone() {
   while(!common_scripts\utility::flag("player_open_escape_door")) {
     if(common_scripts\utility::flag("player_at_escape_door")) {
       common_scripts\utility::flag_set("no_push_zone");
-    }
-    else {
+    } else {
       common_scripts\utility::flag_clear("no_push_zone");
     }
 
@@ -430,7 +428,7 @@ cq_room_destruction() {
   var_1 = getEntArray("cq_dyn_cargo_01_static", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 delete();
+    var_3 delete();
   }
 }
 
@@ -621,8 +619,7 @@ third_enemy_shooting() {
     for(var_4 = 0; var_4 < 3; var_4++) {
       if(isalive(self)) {
         self shoot(1, var_2.origin, 1);
-      }
-      else {
+      } else {
         break;
       }
 
@@ -740,8 +737,7 @@ play_console_scene() {
 ally_dialogue_overlap_check(var_0) {
   if(common_scripts\utility::flag("escape_overlap_dialogue")) {
     maps\_utility::smart_radio_dialogue_overlap(var_0);
-  }
-  else {
+  } else {
     maps\_utility::smart_radio_dialogue(var_0);
   }
 }
@@ -885,8 +881,7 @@ ramping_explosions() {
 
     if(common_scripts\utility::cointoss()) {
       level.player playrumbleonentity("light_3s");
-    }
-    else {
+    } else {
       level.player playrumbleonentity("heavy_1s");
     }
 
@@ -931,7 +926,7 @@ escape_explosion_player_timeout() {
   wait 0.5;
 
   foreach(var_5 in var_0) {
-  playFX(common_scripts\utility::getfx("spc_explosion_1200"), var_5.origin);
+    playFX(common_scripts\utility::getfx("spc_explosion_1200"), var_5.origin);
   }
 
   wait 0.5;
@@ -956,13 +951,13 @@ escape_cleanup(var_0) {
   var_1 = getEntArray("space_cover_test", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 delete();
+    var_3 delete();
   }
 
   var_5 = getEntArray("cq_dynamic_objects", "script_noteworthy");
 
   foreach(var_7 in var_5) {
-  var_7 delete();
+    var_7 delete();
   }
 }
 

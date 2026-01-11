@@ -53,8 +53,7 @@ main() {
 
   if(isDefined(self.a.arrivaltype) && self.a.arrivaltype == "prone_saw") {
     animscripts\cover_wall::useselfplacedturret("saw_bipod_prone", "weapon_saw_MG_Setup");
-  }
-  else if(isDefined(self.node.turret)) {
+  } else if(isDefined(self.node.turret)) {
     animscripts\cover_wall::usestationaryturret();
   }
 
@@ -71,8 +70,7 @@ main() {
 
   if(self.a.pose != "prone") {
     prone_transitionto("prone");
-  }
-  else {
+  } else {
     animscripts\utility::enterpronewrapper(0);
   }
 
@@ -170,8 +168,7 @@ trythrowinggrenade(var_0, var_1) {
 
   if(isDefined(var_1) && var_1) {
     var_2 = animscripts\utility::animarraypickrandom("grenade_safe");
-  }
-  else {
+  } else {
     var_2 = animscripts\utility::animarraypickrandom("grenade_exposed");
   }
 
@@ -222,8 +219,7 @@ prone_transitionto(var_0) {
 
   if(shouldfirewhilechangingpose()) {
     var_1 = animscripts\utility::animarray(self.a.pose + "_2_" + var_0 + "_firing");
-  }
-  else {
+  } else {
     var_1 = animscripts\utility::animarray(self.a.pose + "_2_" + var_0);
   }
 
@@ -255,8 +251,7 @@ proneto(var_0, var_1) {
   if(shouldfirewhilechangingpose()) {
     if(var_0 == "crouch") {
       var_2 = % prone_2_crouch_firing;
-    }
-    else if(var_0 == "stand") {
+    } else if(var_0 == "stand") {
       var_2 = % prone_2_stand_firing;
     }
   } else if(var_0 == "crouch")

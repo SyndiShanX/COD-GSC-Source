@@ -113,7 +113,7 @@ main_af_caves_backhalf_postload() {
 
   netting_destroyed = getEntArray("netting_destroyed", "targetname");
   foreach(destroyed_piece in netting_destroyed) {
-  destroyed_piece Hide();
+    destroyed_piece Hide();
   }
 
   //
@@ -285,11 +285,9 @@ price_hasnt_killed_a_fool_in_the_last_few_seconds(iSeconds) {
   timeElapsed = currentTime - level.lasttimePriceKilledEnemy;
   if(currentTime == level.lasttimePriceKilledEnemy) {
     return false;
-  }
-  else if(timeElapsed > (iSeconds * 1000)) {
+  } else if(timeElapsed > (iSeconds * 1000)) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -529,8 +527,7 @@ uav_bridge_01_think() {
 player_is_crouched() {
   if(level.player GetStance() == "crouch") {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -538,13 +535,11 @@ player_is_crouched() {
 player_is_using_riot_shield() {
   if(!player_has_riot_shield()) {
     return false;
-  }
-  else {
+  } else {
     currentWeapon = level.player GetCurrentWeapon();
     if(currentWeapon == "riotshield") {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -778,8 +773,7 @@ dialogue_overlook_to_breach() {
 player_has_frags() {
   if(level.player GetWeaponAmmoStock("fraggrenade") > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -787,8 +781,7 @@ player_has_frags() {
 player_has_flash() {
   if(level.player GetWeaponAmmoStock("flash_grenade") > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2644,8 +2637,7 @@ triggersEnable(triggerName, noteworthyOrTargetname, bool) {
   AssertEx(isDefined(aTriggers), triggerName + " does not exist");
   if(bool == true) {
     array_thread(aTriggers, ::trigger_on);
-  }
-  else {
+  } else {
     array_thread(aTriggers, ::trigger_off);
   }
 }
@@ -2685,8 +2677,7 @@ hint_temp(string, timeOut) {
 
   if(isDefined(timeOut)) {
     wait(timeOut);
-  }
-  else {
+  } else {
     return;
   }
 
@@ -2775,10 +2766,10 @@ make_door_from_prefab(sTargetname) {
   door_org.angles = door_brushes[0].angles;
 
   foreach(model in door_models) {
-  model LinkTo(door_org);
+    model LinkTo(door_org);
   }
   foreach(brush in door_brushes) {
-  brush LinkTo(door_org);
+    brush LinkTo(door_org);
   }
 
   door = door_org;
@@ -2846,8 +2837,7 @@ cooking_destructible_think() {
   //vehicle_slamraam_destroyed
 }
 
-generic_damage_triggers_think() {
-}
+generic_damage_triggers_think() {}
 
 spawn_vehicles_from_targetname_and_drive_on_flag(sTargetname, sFlag) {
   flag_wait(sFlag);

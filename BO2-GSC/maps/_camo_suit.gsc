@@ -88,8 +88,7 @@ player_camo_suit() {
 
   if(level.script == "monsoon") {
     self.camo_visible_dist = 350;
-  }
-  else {
+  } else {
     self.camo_visible_dist = 500;
   }
 
@@ -122,8 +121,7 @@ player_camo_suit() {
     while(ent_flag("camo_suit_on")) {
       if(self isfiring() && !issubstr(self getcurrentweapon(), "silencer")) {
         self.maxvisibledist = self.camo_visible_dist * 2;
-      }
-      else if(!ent_flag("camo_suit_damaged")) {
+      } else if(!ent_flag("camo_suit_damaged")) {
         self.maxvisibledist = self.camo_visible_dist;
       }
 

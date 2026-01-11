@@ -121,7 +121,7 @@ precache_rage_mode_overlays() {
   a_images[a_images.size] = "hud_nicar_rage_girl_image";
 
   foreach(image in a_images) {
-  precacheshader(image);
+    precacheshader(image);
   }
 
   level.rage_mode_images = a_images;
@@ -421,8 +421,7 @@ rage_high_ammo_check() {
 
     if(n_bullets_used >= n_clip_size) {
       n_ammo_give = 1;
-    }
-    else {
+    } else {
       n_ammo_give = n_clip_size - n_bullets_used;
     }
 
@@ -661,8 +660,7 @@ blood_splat_logic(n_alpha_max_forced) {
 
   if(isDefined(level.player.b_in_courtyard) && level.player.b_in_courtyard && flag("rage_off")) {
     level.player visionsetnaked("rage_mode_low", 0.05);
-  }
-  else {
+  } else {
     level.player visionsetnaked("rage_mode_high", 0.05);
   }
 }
@@ -753,20 +751,15 @@ rage_high_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str
 
   if(level.n_rage_kills == 0) {
     n_damage = 1;
-  }
-  else if(level.n_rage_kills == 1) {
+  } else if(level.n_rage_kills == 1) {
     n_damage = int(n_damage * s_rage_settings_high.n_damage_frac_kill_1);
-  }
-  else if(level.n_rage_kills == 2) {
+  } else if(level.n_rage_kills == 2) {
     n_damage = int(n_damage * s_rage_settings_high.n_damage_frac_kill_2);
-  }
-  else if(level.n_rage_kills == 3) {
+  } else if(level.n_rage_kills == 3) {
     n_damage = int(n_damage * s_rage_settings_high.n_damage_frac_kill_3);
-  }
-  else if(level.n_rage_kills == 4) {
+  } else if(level.n_rage_kills == 4) {
     n_damage = int(n_damage * s_rage_settings_high.n_damage_frac_kill_4);
-  }
-  else {
+  } else {
     n_damage = int(n_damage * s_rage_settings_high.n_damage_frac_cap);
   }
 

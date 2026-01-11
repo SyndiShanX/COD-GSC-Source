@@ -46,7 +46,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_transformation;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_ai_catalyst;
 
 autoexec __init__system__() {
@@ -82,15 +81,15 @@ __init__() {
   clientfield::register("actor", "water_catalyst_purified", 1, 1, "int");
   clientfield::register("actor", "electricity_catalyst_blast", 1, 1, "int");
   clientfield::register("actor", "plasma_catalyst_blast", 1, 1, "int");
-  level thread aat::register_immunity("zm_aat_brain_decay", #"catalyst", 1, 1, 0);
-  level thread aat::register_immunity("zm_aat_kill_o_watt", #"catalyst", 1, 1, 0);
+  level thread aat::register_immunity("zm_aat_brain_decay", # "catalyst", 1, 1, 0);
+  level thread aat::register_immunity("zm_aat_kill_o_watt", # "catalyst", 1, 1, 0);
   zm_spawner::register_zombie_death_event_callback(&killed_callback);
   zm_round_spawning::register_archetype(#"catalyst", &function_55f82550, &round_spawn, undefined, 25);
   zm_round_spawning::function_306ce518(#"catalyst", &function_587a3171);
 
   spawner::add_archetype_spawn_function(#"catalyst", &zombie_utility::updateanimationrate);
 
-    spawner::add_archetype_spawn_function(#"zombie", &function_59e10bc5);
+  spawner::add_archetype_spawn_function(#"zombie", &function_59e10bc5);
   spawner::function_89a2cd87(#"catalyst", &function_47fdbfbb);
   function_6e75e858();
   registertransformations();
@@ -99,8 +98,8 @@ __init__() {
 }
 
 private function_52ce9654() {
-  if(isarray(level.zm_loc_types) && level.zm_loc_types[#"zombie_location"].size > 0) {
-    a_s_spawn_locs = level.zm_loc_types[#"zombie_location"];
+  if(isarray(level.zm_loc_types) && level.zm_loc_types[# "zombie_location"].size > 0) {
+    a_s_spawn_locs = level.zm_loc_types[# "zombie_location"];
     var_31b16a0 = [];
 
     foreach(s_spawn_loc in a_s_spawn_locs) {
@@ -117,8 +116,8 @@ private function_52ce9654() {
       var_31b16a0[var_31b16a0.size] = s_spawn_loc;
     }
 
-    if(isarray(level.zm_loc_types[#"blight_father_location"]) && level.zm_loc_types[#"blight_father_location"].size > 0) {
-      var_31b16a0 = arraycombine(var_31b16a0, level.zm_loc_types[#"blight_father_location"], 0, 0);
+    if(isarray(level.zm_loc_types[# "blight_father_location"]) && level.zm_loc_types[# "blight_father_location"].size > 0) {
+      var_31b16a0 = arraycombine(var_31b16a0, level.zm_loc_types[# "blight_father_location"], 0, 0);
     }
 
     ai_catalyst = zombie_utility::spawn_zombie(array::random(level.a_sp_catalyst), undefined, array::random(var_31b16a0));
@@ -138,10 +137,10 @@ private function_52ce9654() {
 }
 
 private registertransformations() {
-  zm_transform::function_cfca77a7(function_bbb2bab5(1), #"catalyst_corrosive", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_corrosive_spawn_pre_split", "aib_vign_zm_zod_catalyst_corrosive_spawn_post_split");
-  zm_transform::function_cfca77a7(function_bbb2bab5(3), #"catalyst_electric", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_electric_spawn_pre_split", "aib_vign_zm_zod_catalyst_electric_spawn_post_split");
-  zm_transform::function_cfca77a7(function_bbb2bab5(2), #"catalyst_plasma", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_plasma_spawn_pre_split", "aib_vign_zm_zod_catalyst_plasma_spawn_post_split");
-  zm_transform::function_cfca77a7(function_bbb2bab5(4), #"catalyst_water", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_water_spawn_pre_split", "aib_vign_zm_zod_catalyst_water_spawn_post_split");
+  zm_transform::function_cfca77a7(function_bbb2bab5(1), # "catalyst_corrosive", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_corrosive_spawn_pre_split", "aib_vign_zm_zod_catalyst_corrosive_spawn_post_split");
+  zm_transform::function_cfca77a7(function_bbb2bab5(3), # "catalyst_electric", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_electric_spawn_pre_split", "aib_vign_zm_zod_catalyst_electric_spawn_post_split");
+  zm_transform::function_cfca77a7(function_bbb2bab5(2), # "catalyst_plasma", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_plasma_spawn_pre_split", "aib_vign_zm_zod_catalyst_plasma_spawn_post_split");
+  zm_transform::function_cfca77a7(function_bbb2bab5(4), # "catalyst_water", &function_39212989, 5, &function_f4043bc8, &function_2ed1300e, "aib_vign_zm_zod_catalyst_water_spawn_pre_split", "aib_vign_zm_zod_catalyst_water_spawn_post_split");
 }
 
 private registerbehaviorscriptfunctions() {
@@ -182,19 +181,19 @@ private function_47fdbfbb() {
   health_multiplier = 1;
 
   switch (self.subarchetype) {
-    case #"catalyst_corrosive":
+    case # "catalyst_corrosive":
       health_multiplier = self ai::function_9139c839().var_51ce117f;
       self.var_17a22c08 = self ai::function_9139c839().var_57140ac3;
       break;
-    case #"catalyst_electric":
+    case # "catalyst_electric":
       health_multiplier = self ai::function_9139c839().var_6e7acfb4;
       self.var_17a22c08 = self ai::function_9139c839().var_fe586e50;
       break;
-    case #"catalyst_plasma":
+    case # "catalyst_plasma":
       health_multiplier = self ai::function_9139c839().var_33236cb0;
       self.var_17a22c08 = self ai::function_9139c839().var_145b14e6;
       break;
-    case #"catalyst_water":
+    case # "catalyst_water":
       health_multiplier = self ai::function_9139c839().var_bacb0199;
       self.var_17a22c08 = self ai::function_9139c839().var_ead9d81d;
       break;
@@ -323,7 +322,7 @@ private function_f4e7fd8f(behaviortreeentity) {
 }
 
 function_3eaa8337() {
-  a_s_spawn_locs = level.zm_loc_types[#"zombie_location"];
+  a_s_spawn_locs = level.zm_loc_types[# "zombie_location"];
   var_91562d8c = [];
   var_f2a95155 = [];
 
@@ -352,8 +351,8 @@ function_3eaa8337() {
     var_f2a95155[var_f2a95155.size] = s_spawn_loc;
   }
 
-  if(isDefined(level.zm_loc_types[#"blight_father_location"]) && level.zm_loc_types[#"blight_father_location"].size > 0) {
-    var_91562d8c = arraycombine(var_91562d8c, level.zm_loc_types[#"blight_father_location"], 0, 0);
+  if(isDefined(level.zm_loc_types[# "blight_father_location"]) && level.zm_loc_types[# "blight_father_location"].size > 0) {
+    var_91562d8c = arraycombine(var_91562d8c, level.zm_loc_types[# "blight_father_location"], 0, 0);
   }
 
   if(isDefined(level.var_78a428fe)) {
@@ -371,7 +370,7 @@ function_3eaa8337() {
   } else {
     if(zm_devgui::any_player_in_noclip()) {}
 
-      return false;
+    return false;
   }
 
   if(isDefined(self) && isentity(self)) {
@@ -416,7 +415,7 @@ private function_19287ba5() {
 }
 
 private function_d647a79d(entity) {
-  return self.subarchetype === #"catalyst_corrosive";
+  return self.subarchetype === # "catalyst_corrosive";
 }
 
 private function_cda81e65(entity) {
@@ -443,7 +442,7 @@ private function_e13aa91c() {
   self notify("734b0571937e2a76");
   self endon("734b0571937e2a76");
   self endon(#"death");
-  self endoncallback(&function_d4953883, #"hash_11d4cfae418fcfe1");
+  self endoncallback(&function_d4953883, # "hash_11d4cfae418fcfe1");
   self clientfield::set("corrosive_miasma_clientfield", 1);
   var_7a79774b = getstatuseffect("dot_corrosive_catalyst");
 
@@ -453,7 +452,7 @@ private function_e13aa91c() {
     foreach(player in level.players) {
       if(isalive(player) && !(isDefined(player.var_a0a1475c) && player.var_a0a1475c) && !player scene::is_igc_active() && distancesquared(player.origin, self.origin) <= self ai::function_9139c839().var_f3af70e6 * self ai::function_9139c839().var_f3af70e6 && (abs(player.origin[2] - trigger_midpoint[2]) <= self ai::function_9139c839().var_2a523c14 / 2 || abs(player getEye()[2] - trigger_midpoint[2]) <= self ai::function_9139c839().var_2a523c14 / 2)) {
         player status_effect::status_effect_apply(var_7a79774b, undefined, self, 0);
-        player thread zm_audio::create_and_play_dialog(#"catalyst_decay_gas", #"react");
+        player thread zm_audio::create_and_play_dialog(#"catalyst_decay_gas", # "react");
       }
     }
 
@@ -547,7 +546,7 @@ private function_21cbb589(behaviortreeentity, asmstatename) {
 }
 
 private function_d697a1e3() {
-  self endon(#"hash_321b8431208f19bd", #"death");
+  self endon(#"hash_321b8431208f19bd", # "death");
   self clientfield::set("electricity_catalyst_blast", 1);
   wait self ai::function_9139c839().var_ce7e1def;
 
@@ -594,7 +593,7 @@ private function_6c92ebda(behaviortreeentity, asmstatename) {
 }
 
 private function_e137506e(electriccatalyst) {
-  self endon(#"death", #"disconnect", #"hash_7283e5f17e4fa10a");
+  self endon(#"death", # "disconnect", # "hash_7283e5f17e4fa10a");
   electriccatalyst waittill(#"death");
   self notify(#"killed_electric_catalyst");
 }
@@ -619,11 +618,11 @@ private function_e7a0424c(behaviortreeentity) {
   self.var_6b8f84c7 = behaviortreeentity;
   var_116cfaae = behaviortreeentity ai::function_9139c839().var_10a535a6;
   var_a7594ae8 = behaviortreeentity ai::function_9139c839().var_ea39f524;
-  self endoncallback(&function_73961a38, #"death", #"disconnect", #"killed_electric_catalyst", #"hash_11d4cfae418fcfe1");
+  self endoncallback(&function_73961a38, # "death", # "disconnect", # "killed_electric_catalyst", # "hash_11d4cfae418fcfe1");
   self thread function_e137506e(self.var_6b8f84c7);
   blind_status_effect = getstatuseffect("blind_zm_catalyst");
   self status_effect::status_effect_apply(blind_status_effect, undefined, self.var_6b8f84c7, 0, var_116cfaae);
-  self util::delay(1.3, undefined, &zm_audio::create_and_play_dialog, #"catalyst_radiant_scream", #"react");
+  self util::delay(1.3, undefined, &zm_audio::create_and_play_dialog, # "catalyst_radiant_scream", # "react");
   wait float(var_116cfaae) / 1000;
 
   if(self status_effect::function_4617032e(blind_status_effect.setype)) {
@@ -767,7 +766,7 @@ private function_3b07d86e() {
       player dodamage(var_2ffdfebc, v_blast_origin, self, self, "none", "MOD_EXPLOSIVE");
       var_6826a387 = getstatuseffect(#"hash_528115ad9eebc84f");
       player status_effect::status_effect_apply(var_6826a387, undefined, self, 0, undefined, undefined, v_blast_origin);
-      player thread zm_audio::create_and_play_dialog(#"catalyst_plasma_detonation", #"react");
+      player thread zm_audio::create_and_play_dialog(#"catalyst_plasma_detonation", # "react");
     }
 
     level thread function_49248f23(v_blast_origin, var_84dd3dd);
@@ -1089,16 +1088,16 @@ function_bbe2a1d2(var_3b720eb2) {
 function_e1763259(var_3d9951bb) {
   switch (var_3d9951bb) {
     case 1:
-      var_b62aefe1 = #"catalyst_corrosive";
+      var_b62aefe1 = # "catalyst_corrosive";
       break;
     case 3:
-      var_b62aefe1 = #"catalyst_electric";
+      var_b62aefe1 = # "catalyst_electric";
       break;
     case 2:
-      var_b62aefe1 = #"catalyst_plasma";
+      var_b62aefe1 = # "catalyst_plasma";
       break;
     case 4:
-      var_b62aefe1 = #"catalyst_water";
+      var_b62aefe1 = # "catalyst_water";
       break;
   }
 
@@ -1174,25 +1173,25 @@ function_3f664506(e_catalyst, player, v_loc) {
   b_stun = 0;
 
   switch (self.zm_ai_category) {
-    case #"popcorn":
-    case #"basic":
-    case #"enhanced":
+    case # "popcorn":
+    case # "basic":
+    case # "enhanced":
       var_103da188 = self.health;
 
-      if(self.archetype === #"zombie" || self.archetype === #"catalyst") {
+      if(self.archetype === # "zombie" || self.archetype === # "catalyst") {
         self function_27a8f02d();
       }
 
       break;
-    case #"heavy":
+    case # "heavy":
       var_103da188 = self.maxhealth * 0.5;
       b_stun = 1;
       break;
-    case #"miniboss":
+    case # "miniboss":
       var_103da188 = self.maxhealth * 0.2;
       b_stun = 1;
       break;
-    case #"boss":
+    case # "boss":
       var_103da188 = 2700;
       break;
     default:
@@ -1230,24 +1229,24 @@ function_587a3171(n_round_number) {
     }
   }
 
-    while(true) {
-      level waittill(#"hash_5d3012139f083ccb");
+  while(true) {
+    level waittill(#"hash_5d3012139f083ccb");
 
-      if(zm_round_spawning::function_d0db51fc(#"catalyst")) {
-        if(isDefined(var_f31e767a)) {
-          level.var_1643d0d = array(array::pop(var_f31e767a));
+    if(zm_round_spawning::function_d0db51fc(#"catalyst")) {
+      if(isDefined(var_f31e767a)) {
+        level.var_1643d0d = array(array::pop(var_f31e767a));
 
-          if(!var_f31e767a.size) {
-            var_f31e767a = undefined;
-          }
-
-          continue;
+        if(!var_f31e767a.size) {
+          var_f31e767a = undefined;
         }
 
-        level.var_1643d0d = arraycopy(level.var_3ecc60fc);
-        arrayremoveindex(level.var_1643d0d, randomint(level.var_1643d0d.size));
+        continue;
       }
+
+      level.var_1643d0d = arraycopy(level.var_3ecc60fc);
+      arrayremoveindex(level.var_1643d0d, randomint(level.var_1643d0d.size));
     }
+  }
 }
 
 function_55f82550(var_dbce0c44) {
@@ -1293,10 +1292,10 @@ private function_255c7194() {
 
 private function_fa69f8d2(type) {
   var_7a56405a = [];
-  var_7a56405a[1] = #"catalyst_corrosive";
-  var_7a56405a[3] = #"catalyst_electric";
-  var_7a56405a[2] = #"catalyst_plasma";
-  var_7a56405a[4] = #"catalyst_water";
+  var_7a56405a[1] = # "catalyst_corrosive";
+  var_7a56405a[3] = # "catalyst_electric";
+  var_7a56405a[2] = # "catalyst_plasma";
+  var_7a56405a[4] = # "catalyst_water";
   player = getplayers()[0];
   direction = player getplayerangles();
   direction_vec = anglesToForward(direction);
@@ -1334,7 +1333,7 @@ private function_fa69f8d2(type) {
   if(isDefined(catalyst_zombie)) {
     wait 0.5;
     catalyst_zombie zm_transform::function_bbaec2fd();
-    catalyst_zombie forceteleport(trace[#"position"], player.angles + (0, 180, 0));
+    catalyst_zombie forceteleport(trace[# "position"], player.angles + (0, 180, 0));
 
     if(catalyst_zombie.catalyst_type == 1) {
       level thread function_4329a51b(catalyst_zombie);

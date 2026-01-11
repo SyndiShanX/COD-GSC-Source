@@ -17,7 +17,6 @@
 #include scripts\core_common\vehicles\hawk;
 #include scripts\killstreaks\airsupport;
 #include scripts\killstreaks\killstreaks_shared;
-
 #namespace hawk_mp;
 
 autoexec __init__system__() {
@@ -51,7 +50,7 @@ function_6ada73f(spawnpos) {
 }
 
 spawn_hawk() {
-  self endon(#"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist", #"changed_specialist_death");
+  self endon(#"disconnect", # "joined_team", # "joined_spectators", # "changed_specialist", # "changed_specialist_death");
 
   if(isDefined(self.hawk) && isDefined(self.hawk.vehicle)) {
     self.hawk.vehicle hawk::hawk_destroy(1);
@@ -67,22 +66,22 @@ spawn_hawk() {
   spawnpos = self.origin + (0, 0, 90) + forward;
   trace = self function_6ada73f(spawnpos);
 
-  if(trace[#"fraction"] < 1) {
+  if(trace[# "fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 75) + forward;
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[#"fraction"] < 1) {
+  if(trace[# "fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 45) + forward;
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[#"fraction"] < 1) {
+  if(trace[# "fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 75);
     trace = function_6ada73f(spawnpos);
   }
 
-  if(trace[#"fraction"] < 1) {
+  if(trace[# "fraction"] < 1) {
     spawnpos = self.origin + (0, 0, 45);
   }
 
@@ -221,7 +220,7 @@ function_e219515e() {
 }
 
 hawk_update(vehicle) {
-  self endon(#"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist", #"changed_specialist_death");
+  self endon(#"disconnect", # "joined_team", # "joined_spectators", # "changed_specialist", # "changed_specialist_death");
   vehicle endon(#"death");
   playerorigin = self.origin;
 
@@ -325,7 +324,7 @@ function_d89c1628(vehicle) {
 }
 
 function_1e7eecd7(vehicle, var_44e9a475) {
-  self endon(#"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist", #"changed_specialist_death");
+  self endon(#"disconnect", # "joined_team", # "joined_spectators", # "changed_specialist", # "changed_specialist_death");
   vehicle endon(#"death");
 
   if(var_44e9a475) {
@@ -388,7 +387,7 @@ function_1e7eecd7(vehicle, var_44e9a475) {
 }
 
 function_1b057db2() {
-  self endon(#"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist", #"changed_specialist_death");
+  self endon(#"disconnect", # "joined_team", # "joined_spectators", # "changed_specialist", # "changed_specialist_death");
   self notify("414b03c7ca83a5f6");
   self endon("414b03c7ca83a5f6");
   var_10a85d23 = self gestures::function_c77349d4("gestable_drone_hawk_pda");
@@ -407,7 +406,7 @@ function_1b057db2() {
   while(!var_37ea2019 && isalive(self) && self.hawk.controlling) {
     if(self gestures::play_gesture(var_10a85d23, undefined, 0)) {
       var_37ea2019 = 1;
-      self waittill(#"exit_vehicle", #"death");
+      self waittill(#"exit_vehicle", # "death");
       self.var_f97921ea = gettime();
       self stopgestureviewmodel(var_10a85d23, 0, 0);
     }
@@ -424,7 +423,7 @@ function_c4770b46(vehicle) {
   self notify("55aca6b6f13bcce2");
   self endon("55aca6b6f13bcce2");
   vehicle endon(#"death");
-  self endon(#"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist", #"changed_specialist_death", #"exit_vehicle");
+  self endon(#"disconnect", # "joined_team", # "joined_spectators", # "changed_specialist", # "changed_specialist_death", # "exit_vehicle");
 
   while(self function_9096c10()) {
     waitframe(1);
@@ -462,7 +461,7 @@ watch_timeout(duration) {
 
 watch_team_change(hawk) {
   hawk endon(#"death");
-  waitresult = self waittill(#"disconnect", #"joined_team", #"joined_spectator", #"changed_specialist", #"changed_specialist_death");
+  waitresult = self waittill(#"disconnect", # "joined_team", # "joined_spectator", # "changed_specialist", # "changed_specialist_death");
 
   if(!isDefined(hawk)) {
     return;
@@ -668,13 +667,13 @@ function_d9c32f9() {
 targeting_hud_think(vehicle) {
   self notify("72283ec71c2a76c1");
   self endon("72283ec71c2a76c1");
-  self endon(#"disconnect", #"joined_team", #"joined_spectators", #"changed_specialist", #"changed_specialist_death");
+  self endon(#"disconnect", # "joined_team", # "joined_spectators", # "changed_specialist", # "changed_specialist_death");
   vehicle endon(#"death");
   level endon(#"game_ended");
   stance_offsets = [];
-  stance_offsets[#"stand"] = (0, 0, 60);
-  stance_offsets[#"crouch"] = (0, 0, 40);
-  stance_offsets[#"prone"] = (0, 0, 12);
+  stance_offsets[# "stand"] = (0, 0, 60);
+  stance_offsets[# "crouch"] = (0, 0, 40);
+  stance_offsets[# "prone"] = (0, 0, 12);
   player = self;
   targets = self getvalidtargets(vehicle, stance_offsets);
   framessincetargetscan = 0;

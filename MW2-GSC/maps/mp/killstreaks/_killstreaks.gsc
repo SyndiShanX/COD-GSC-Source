@@ -318,7 +318,7 @@ usedKillstreak(streakName, awardXp) {
 
 clearKillstreaks() {
   foreach(index, streakStruct in self.pers["killstreaks"]) {
-  self.pers["killstreaks"][index] = undefined;
+    self.pers["killstreaks"][index] = undefined;
   }
 }
 
@@ -374,8 +374,7 @@ killstreakUseWaiter() {
     if(!isRideKillstreak(streakName) || !result) {
       if(!self hasWeapon(self getLastWeapon())) {
         self switchToWeapon(self getFirstPrimaryWeapon());
-      }
-      else {
+      } else {
         self switchToWeapon(self getLastWeapon());
       }
     }
@@ -433,7 +432,7 @@ checkKillstreakReward(streakCount) {
       	self.pers["lastEarnedStreak"] = streakName;
       	continue;
       }
-			
+      			
       useStreakName = strTok( streakName, "-" )[0];
       */
     } else {
@@ -499,8 +498,7 @@ giveKillstreak(streakName, isEarned, awardXp, owner) {
 
   if(!self.pers["killstreaks"][0].earned) {
     self.pers["killstreaks"][0].lifeId = -1;
-  }
-  else {
+  } else {
     self.pers["killstreaks"][0].lifeId = self.pers["deaths"];
   }
 
@@ -639,8 +637,7 @@ initRideKillstreak_internal() {
 
   if(blackOutWait == "disconnect") {
     return ("disconnect");
-  }
-  else {
+  } else {
     return ("success");
   }
 }

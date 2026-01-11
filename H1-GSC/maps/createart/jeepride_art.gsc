@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\jeepride_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\jeepride_fog::main();
   }
 }

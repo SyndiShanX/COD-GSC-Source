@@ -93,8 +93,7 @@ portable_mg_behavior() {
 
   if(var_3.issetup) {
     leave_gun_and_run_to_new_spot(var_3);
-  }
-  else {
+  } else {
     run_to_new_spot_and_setup_gun(var_3);
   }
 
@@ -162,14 +161,11 @@ manual_think(var_0) {
 burst_fire_settings(var_0) {
   if(var_0 == "delay") {
     return 0.2;
-  }
-  else if(var_0 == "delay_range") {
+  } else if(var_0 == "delay_range") {
     return 0.5;
-  }
-  else if(var_0 == "burst") {
+  } else if(var_0 == "burst") {
     return 0.5;
-  }
-  else {
+  } else {
     return 1.5;
   }
 }
@@ -180,29 +176,25 @@ burst_fire_unmanned() {
 
   if(isDefined(self.script_delay_min)) {
     var_0 = self.script_delay_min;
-  }
-  else {
+  } else {
     var_0 = burst_fire_settings("delay");
   }
 
   if(isDefined(self.script_delay_max)) {
     var_1 = self.script_delay_max - var_0;
-  }
-  else {
+  } else {
     var_1 = burst_fire_settings("delay_range");
   }
 
   if(isDefined(self.script_burst_min)) {
     var_2 = self.script_burst_min;
-  }
-  else {
+  } else {
     var_2 = burst_fire_settings("burst");
   }
 
   if(isDefined(self.script_burst_max)) {
     var_3 = self.script_burst_max - var_2;
-  }
-  else {
+  } else {
     var_3 = burst_fire_settings("burst_range");
   }
 
@@ -303,8 +295,7 @@ random_spread(var_0) {
   for(;;) {
     if(isplayer(var_0)) {
       var_0.origin = self.manual_target getorigin();
-    }
-    else {
+    } else {
       var_0.origin = self.manual_target.origin;
     }
 
@@ -333,29 +324,25 @@ burst_fire(var_0, var_1) {
 
   if(isDefined(var_0.script_delay_min)) {
     var_2 = var_0.script_delay_min;
-  }
-  else {
+  } else {
     var_2 = burst_fire_settings("delay");
   }
 
   if(isDefined(var_0.script_delay_max)) {
     var_3 = var_0.script_delay_max - var_2;
-  }
-  else {
+  } else {
     var_3 = burst_fire_settings("delay_range");
   }
 
   if(isDefined(var_0.script_burst_min)) {
     var_4 = var_0.script_burst_min;
-  }
-  else {
+  } else {
     var_4 = burst_fire_settings("burst");
   }
 
   if(isDefined(var_0.script_burst_max)) {
     var_5 = var_0.script_burst_max - var_4;
-  }
-  else {
+  } else {
     var_5 = burst_fire_settings("burst_range");
   }
 
@@ -430,8 +417,7 @@ _spawner_mg42_think() {
 
     if(var_2.size) {
       var_3 = maps\_utility::get_closest_ai_exclude(var_0.origin, undefined, var_2);
-    }
-    else {
+    } else {
       var_3 = maps\_utility::get_closest_ai(var_0.origin, undefined);
     }
 
@@ -551,8 +537,7 @@ player_safe() {
 stance_num() {
   if(level.player getstance() == "prone") {
     return (0, 0, 5);
-  }
-  else if(level.player getstance() == "crouch") {
+  } else if(level.player getstance() == "crouch") {
     return (0, 0, 25);
   }
 
@@ -758,8 +743,7 @@ move_use_turret(var_0, var_1, var_2) {
 
     if(isDefined(var_2)) {
       var_0 settargetentity(var_2);
-    }
-    else {
+    } else {
       var_0 cleartargetentity();
     }
   }
@@ -879,8 +863,7 @@ mg42_target_drones(var_0, var_1, var_2) {
 
   if(!isDefined(level.drones)) {
     var_4 = 1;
-  }
-  else {
+  } else {
     var_4 = 0;
   }
 
@@ -888,11 +871,9 @@ mg42_target_drones(var_0, var_1, var_2) {
     if(var_4) {
       if(isDefined(self.drones_targets_sets_to_default)) {
         self setmode(self.defaultonmode);
-      }
-      else if(var_0) {
+      } else if(var_0) {
         self setmode("auto_nonai");
-      }
-      else {
+      } else {
         self setmode("auto_ai");
       }
 
@@ -918,8 +899,7 @@ mg42_target_drones(var_0, var_1, var_2) {
 
     if(var_1 == "allies") {
       var_6 = "axis";
-    }
-    else {
+    } else {
       var_6 = "allies";
     }
 
@@ -950,8 +930,7 @@ mg42_target_drones(var_0, var_1, var_2) {
 
       if(var_0) {
         self setmode("manual");
-      }
-      else {
+      } else {
         self setmode("manual_ai");
       }
 
@@ -1341,8 +1320,7 @@ find_a_new_turret_spot(var_0) {
 
   if(var_2.issetup) {
     leave_gun_and_run_to_new_spot(var_2);
-  }
-  else {
+  } else {
     pickup_gun(var_2);
     run_to_new_spot_and_setup_gun(var_2);
   }
@@ -1494,8 +1472,7 @@ turret_user_moves() {
 
   if(var_5.issetup) {
     leave_gun_and_run_to_new_spot(var_5);
-  }
-  else {
+  } else {
     run_to_new_spot_and_setup_gun(var_5);
   }
 

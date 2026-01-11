@@ -14,7 +14,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace rat;
 
 autoexec __init__system__() {
@@ -412,7 +411,7 @@ derriesezombiespawnnavmeshtest(params, inrat) {
   wait 0.2;
 
   foreach(zone in level.zones) {
-    foreach(loc in zone.a_loc_types[#"zombie_location"]) {
+    foreach(loc in zone.a_loc_types[# "zombie_location"]) {
       angles = (0, 0, 0);
       enemy forceteleport(loc.origin, angles);
       wait 0.2;

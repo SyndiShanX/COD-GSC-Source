@@ -182,8 +182,7 @@ func_F030(var_00, var_01, var_02) {
 
   if(isDefined(var_02)) {
     self.func_EEF9 = var_02;
-  }
-  else {
+  } else {
     self.func_EEF9 = "cannon_missile_ca_hardpoint cannon_small_ca,3,1,amb_turret_sml_l_ts_1,amb_turret_sml_l_ts_5,amb_turret_sml_r_ts_1,amb_turret_sml_r_ts_5,amb_turret_sml_r_ts_6,amb_turret_sml_r_ts_7,amb_turret_sml_l_ts_6,amb_turret_sml_l_ts_7 cannon_flak_ca,3,1 cannon_phalanx";
   }
 

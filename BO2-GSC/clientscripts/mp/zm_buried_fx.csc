@@ -9,8 +9,7 @@
 #include clientscripts\mp\_fx;
 #include clientscripts\mp\zm_buried_amb;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("maps/zombie/fx_zombie_eye_single_blue");
@@ -217,8 +216,7 @@ play_fx_prop_anims(localclientnum) {
     if(isDefined(prop.fxanim_waittill_1)) {
       if(!isinarray(level.fxanim_notifies_to_become_clientfields, prop.fxanim_waittill_1)) {
         fxanim_props[fxanim_props.size] = prop;
-      }
-      else {
+      } else {
         if(!isDefined(level._fxanim_clientfield_props[prop.fxanim_waittill_1])) {
           level._fxanim_clientfield_props[prop.fxanim_waittill_1] = [];
         }
@@ -387,8 +385,7 @@ handle_fxanim_exploders(fieldname, val) {
   }
   if(val) {
     clientscripts\mp\_fx::activate_exploder(level._fxanim_exploders[fieldname]);
-  }
-  else {
+  } else {
     clientscripts\mp\_fx::deactivate_exploder(level._fxanim_exploders[fieldname]);
   }
 }

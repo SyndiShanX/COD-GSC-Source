@@ -384,8 +384,7 @@ level_end(guy) {
   nextmission();
 }
 
-midair_collision_notetrack(guy) {
-}
+midair_collision_notetrack(guy) {}
 
 f35_eject_notify_start(e_player_body) {
   clientnotify("stop_f35_snap");
@@ -489,8 +488,7 @@ f35_eject_notetrack_hit_building(e_player_body) {
   level.player thread rumble_loop(n_rumble_count, n_loop_time, str_rumble);
 }
 
-f35_eject_notetrack_body_impact(e_player_body) {
-}
+f35_eject_notetrack_body_impact(e_player_body) {}
 
 init_vo() {
   add_dialog("convoy_death", "We lost a vehicle! What are you doing, Mason?!");
@@ -518,8 +516,7 @@ vo_rooftops() {
 
   if(!flag("harper_dead")) {
     vh_van thread say_dialog("bastards_are_every_009", 8);
-  }
-  else {
+  } else {
     vh_van thread say_dialog("samu_you_gotta_keep_them_0", 8);
   }
 
@@ -630,8 +627,7 @@ vo_pip_pacing() {
 
   if(!flag("harper_dead")) {
     vh_van say_dialog("shit_its_a_fuc_018", 1);
-  }
-  else {
+  } else {
     vh_van say_dialog("samu_the_attack_devastate_0", 1);
   }
 
@@ -685,8 +681,7 @@ vo_convoy_distance_check_nag() {
       if(!flag("harper_dead")) {
         if(n_line_choice == 0) {
           vh_van thread say_dialog("take_the_heat_off_009");
-        }
-        else {
+        } else {
           vh_van thread say_dialog("harp_where_are_you_secti_0");
         }
       } else if(n_line_choice == 0)
@@ -734,9 +729,7 @@ vo_f35_startup() {
     level.player say_dialog("authorization_acce_017");
   }
 
-  if(flag("F35_pilot_saved")) {
-  } else {
-  }
+  if(flag("F35_pilot_saved")) {} else {}
 }
 
 delete_harper() {
@@ -814,8 +807,7 @@ vo_eject() {
 
   if(!flag("harper_dead")) {
     vh_van say_dialog("harp_what_are_you_doing_0");
-  }
-  else {
+  } else {
     vh_van say_dialog("samu_section_what_are_y_0");
   }
 
@@ -823,8 +815,7 @@ vo_eject() {
 
   if(!flag("harper_dead")) {
     vh_van say_dialog("harp_it_s_suicide_0");
-  }
-  else {
+  } else {
     vh_van say_dialog("samu_i_hope_you_re_sure_a_0");
   }
 }
@@ -850,8 +841,7 @@ vo_hotel() {
   }
 }
 
-vo_to_implement() {
-}
+vo_to_implement() {}
 
 vo_f38_target_lock_on_and_off() {
   level endon("dogfight_done");

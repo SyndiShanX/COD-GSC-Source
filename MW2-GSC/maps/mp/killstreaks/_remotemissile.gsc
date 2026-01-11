@@ -136,8 +136,7 @@ _fire(lifeId, player) {
 
   if(remoteMissileSpawnArray.size > 0) {
     remoteMissileSpawn = player getBestSpawnPoint(remoteMissileSpawnArray);
-  }
-  else {
+  } else {
     remoteMissileSpawn = undefined;
   }
 
@@ -210,18 +209,18 @@ _fire_noplayer(lifeId, player) {
   player CameraUnlink();
 }
 
-  handleDamage() {
-    self endon("death");
-    self endon("deleted");
+handleDamage() {
+  self endon("death");
+  self endon("deleted");
 
-    self setCanDamage(true);
+  self setCanDamage(true);
 
-    for(;;) {
-      self waittill("damage");
+  for(;;) {
+    self waittill("damage");
 
-      println("projectile damaged!");
-    }
+    println("projectile damaged!");
   }
+}
 
 MissileEyes(player, rocket) {
   //level endon ( "game_ended" );

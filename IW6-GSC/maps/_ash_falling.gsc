@@ -17,8 +17,7 @@ ash_fall_thread(var_0) {
   for(;;) {
     if(maps\_utility::is_coop()) {
       playfxontagforclients(level._effect["ash"], self, "tag_origin", self);
-    }
-    else {
+    } else {
       playFX(level._effect["ash"], self.origin);
     }
 

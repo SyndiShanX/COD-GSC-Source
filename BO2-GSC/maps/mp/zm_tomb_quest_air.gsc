@@ -35,7 +35,7 @@ air_puzzle_1_init() {
   level.a_ceiling_rings = getEntArray("ceiling_ring", "script_noteworthy");
 
   foreach(e_ring in level.a_ceiling_rings) {
-  e_ring ceiling_ring_init();
+    e_ring ceiling_ring_init();
   }
 }
 
@@ -138,7 +138,7 @@ air_puzzle_2_run() {
   a_smoke_pos = getstructarray("puzzle_smoke_origin", "targetname");
 
   foreach(s_smoke_pos in a_smoke_pos) {
-  s_smoke_pos thread air_puzzle_smoke();
+    s_smoke_pos thread air_puzzle_smoke();
   }
 
   while(true) {

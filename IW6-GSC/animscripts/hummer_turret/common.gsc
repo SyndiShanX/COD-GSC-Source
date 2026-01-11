@@ -169,11 +169,9 @@ turret_track_rotatedirection(var_0) {
 
     if(var_6 == 0) {
       turret_update_rotatedirection("none");
-    }
-    else if(var_6 > 0) {
+    } else if(var_6 > 0) {
       turret_update_rotatedirection("right");
-    }
-    else {
+    } else {
       turret_update_rotatedirection("left");
     }
 
@@ -208,8 +206,7 @@ gunner_turning_anims(var_0) {
     if(!var_0 turret_aiming_near_target(var_0.firetarget, var_0.closeenoughaimdegrees)) {
       if(var_0.rotatedirection == "right") {
         var_3 = self.additiveturretrotateright;
-      }
-      else if(var_0.rotatedirection == "left") {
+      } else if(var_0.rotatedirection == "left") {
         var_3 = self.additiveturretrotateleft;
       }
 
@@ -357,11 +354,9 @@ turret_target_updater(var_0) {
     if(turret_target_validate(var_1) || !isDefined(var_1)) {
       if(!isDefined(var_1) && isDefined(var_2)) {
         var_3 = 1;
-      }
-      else if(isDefined(var_1) && !isDefined(var_2)) {
+      } else if(isDefined(var_1) && !isDefined(var_2)) {
         var_3 = 1;
-      }
-      else if(isDefined(var_1) && var_1 != var_2) {
+      } else if(isDefined(var_1) && var_1 != var_2) {
         var_3 = 1;
       }
 
@@ -411,11 +406,9 @@ set_manual_target(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     self waittill(var_3);
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     wait(randomfloatrange(var_1, var_2));
-  }
-  else {
+  } else {
     wait(var_1);
   }
 

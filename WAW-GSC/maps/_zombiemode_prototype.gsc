@@ -452,9 +452,7 @@ spectators_respawn() {
     players = get_players();
     for(i = 0; i < players.size; i++) {
       if(players[i].sessionstate == "spectator") {
-        players[i][
-          [level.spawnPlayer]
-        ]();
+        players[i][[level.spawnPlayer]]();
       }
     }
     wait(1);
@@ -1315,11 +1313,9 @@ nazizombies_upload_highscore() {
   playersRank = 1;
   if(level.players_playing == 1) {
     playersRank = 4;
-  }
-  else if(level.players_playing == 2) {
+  } else if(level.players_playing == 2) {
     playersRank = 3;
-  }
-  else if(level.players_playing == 3) {
+  } else if(level.players_playing == 3) {
     playersRank = 2;
   }
   players = get_players();
@@ -1356,14 +1352,11 @@ makeRankNumber(wave, players, time) {
   padding = "";
   if(10 > time) {
     padding += "0000";
-  }
-  else if(100 > time) {
+  } else if(100 > time) {
     padding += "000";
-  }
-  else if(1000 > time) {
+  } else if(1000 > time) {
     padding += "00";
-  }
-  else if(10000 > time) {
+  } else if(10000 > time) {
     padding += "0";
   }
   rank = wave + "" + players + padding + time;

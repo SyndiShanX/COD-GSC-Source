@@ -982,7 +982,7 @@ mugger_jackpot_fx(jackpot_origin) {
   wait(0.1);
   playFXOnTag(level.mugger_fx["smoke"], level.jackpot_zone, "tag_fx");
   foreach(player in level.players) {
-  player.mugger_fx_playing = true;
+    player.mugger_fx_playing = true;
   }
   level.jackpot_zone.mugger_fx_playing = true;
 }

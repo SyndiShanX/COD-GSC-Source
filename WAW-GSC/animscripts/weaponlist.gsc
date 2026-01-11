@@ -75,8 +75,7 @@ RefillClip() {
   assertEX(isDefined(self.bulletsInClip), "RefillClip failed");
   if(self.bulletsInClip <= 0) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }

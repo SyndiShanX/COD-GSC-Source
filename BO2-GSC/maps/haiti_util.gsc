@@ -21,8 +21,7 @@ add_cleanup_ent(str_category) {
 
   if(isarray(self)) {
     level.a_e_cleanup[str_category] = arraycombine(level.a_e_cleanup[str_category], self, 1, 0);
-  }
-  else {
+  } else {
     level.a_e_cleanup[str_category][level.a_e_cleanup[str_category].size] = self;
   }
 }
@@ -87,8 +86,7 @@ player_stick(b_look, n_clamp_right, n_clamp_left, n_clamp_top, n_clamp_bottom) {
 
   if(b_look) {
     self playerlinktodelta(self.m_link, "tag_origin", 1, n_clamp_right, n_clamp_left, n_clamp_top, n_clamp_bottom, 1);
-  }
-  else {
+  } else {
     self playerlinktoabsolute(self.m_link, "tag_origin");
   }
 }
@@ -111,8 +109,7 @@ setup_harper() {
 
   if(!level.is_harper_alive) {
     str_search = "substitute";
-  }
-  else if(level.is_harper_scarred) {
+  } else if(level.is_harper_scarred) {
     str_search = "scarred";
   }
 
@@ -124,9 +121,7 @@ setup_harper() {
 
   if(level.is_harper_alive) {
     level.ai_harper = init_hero("harper", ::harper_think);
-  }
-  else {
-  }
+  } else {}
 }
 
 enemy_battle_think(b_aggressive, b_ally_priority) {
@@ -199,8 +194,7 @@ ai_jetpack_ally_attack_think(str_aigroup) {
   while(isDefined(nd_goal)) {
     if(isDefined(nd_goal.target)) {
       self setgoalnode(nd_goal);
-    }
-    else {
+    } else {
       self setgoalpos(nd_goal.origin);
     }
 
@@ -217,8 +211,7 @@ ai_jetpack_ally_attack_think(str_aigroup) {
 
     if(isDefined(nd_goal.target)) {
       nd_goal = getnode(nd_goal.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -326,11 +319,9 @@ sniper_think() {
 
       if(n_dist_sq < 1000000) {
         self.script_accuracy = 8;
-      }
-      else if(n_dist_sq < 2250000) {
+      } else if(n_dist_sq < 2250000) {
         self.script_accuracy = 4;
-      }
-      else {
+      } else {
         self.script_accuracy = 2;
       }
     }
@@ -353,8 +344,7 @@ squad_replenish_init() {
 
   if(level.is_harper_alive) {
     level.n_player_squad_size = 3;
-  }
-  else {
+  } else {
     level.n_player_squad_size = 4;
   }
 
@@ -408,8 +398,7 @@ spawn_squad_member(n_delay) {
 
   if(isDefined(s_loc.script_string) && s_loc.script_string == "jetwing") {
     level thread maps\_jetpack_ai::create_jetpack_ai(s_loc, "ally_player_squad");
-  }
-  else {
+  } else {
     for(ai_squad_member = undefined; !isDefined(ai_squad_member); ai_squad_member = simple_spawn_single(random(level.a_sp_player_squad))) {
       wait 0.5;
       flag_wait("squad_spawning");
@@ -572,8 +561,7 @@ ambient_allies_weapons_think(n_missile_pct) {
 
     if(!isDefined(target)) {
       wait 0.05;
-    }
-    else {
+    } else {
       wait(randomfloatrange(4, 6));
     }
   }
@@ -592,8 +580,7 @@ spawn_static_actors(str_structname, n_delay_max) {
   foreach(s_static_loc in a_s_static_locs) {
     if(isDefined(s_static_loc.script_string) && isDefined(level.a_sp_actors[s_static_loc.script_string])) {
       sp_actor = level.a_sp_actors[s_static_loc.script_string];
-    }
-    else {
+    } else {
       sp_actor = level.a_sp_actors[randomint(level.a_sp_actors.size)];
     }
 
@@ -605,8 +592,7 @@ spawn_static_actors(str_structname, n_delay_max) {
 
     if(!issubstr(s_static_loc.script_animation, "loop")) {
       m_drone animscripted("drone_anim", m_drone.origin, m_drone.angles, level.scr_anim[s_static_loc.script_animation]);
-    }
-    else {
+    } else {
       m_drone delay_thread(randomfloat(n_delay_max), ::loop_anim, level.drones.anims[s_static_loc.script_animation]);
     }
 
@@ -642,7 +628,7 @@ door_think(str_targetname, str_flag_open, str_flag_close, v_slide, n_time) {
       a_m_link = getEntArray(m_door.target, "targetname");
 
       foreach(m_link in a_m_link) {
-      m_link linkto(m_door);
+        m_link linkto(m_door);
       }
     }
 

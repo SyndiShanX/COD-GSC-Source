@@ -12,7 +12,7 @@ callback_hostmigration() {
   level thread hostmigrationconnectwatcher();
 
   foreach(var_01 in level.characters) {
-  var_1.hostmigrationcontrolsfrozen = 0;
+    var_1.hostmigrationcontrolsfrozen = 0;
   }
 
   level.hostmigrationtimer = 1;

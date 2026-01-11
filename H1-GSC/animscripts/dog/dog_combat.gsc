@@ -9,8 +9,7 @@ main() {
 
   if(!isalive(self.enemy)) {
     combatidle();
-  }
-  else {
+  } else {
     if(isplayer(self.enemy)) {
       meleebiteattackplayer();
       return;
@@ -83,8 +82,7 @@ dog_player_kill(var_0) {
 
   if(isalive(var_0)) {
     self kill(self.origin, var_0);
-  }
-  else {
+  } else {
     self kill(self.origin);
   }
 }
@@ -101,8 +99,7 @@ dog_death_hud(var_0, var_1) {
 
   if(var_1) {
     var_2 setshader("hud_hyena_melee", 50, 50);
-  }
-  else {
+  } else {
     var_2 setshader("hud_dog_melee", 50, 50);
   }
 
@@ -143,15 +140,13 @@ attackmiss() {
 
     if(vectordot(var_2, var_1) > 0.707 || vectordot(var_3, var_1) > 0) {
       thread animscripts\dog\dog_stop::lookattarget("normal");
-    }
-    else {
+    } else {
       self.skipstartmove = 1;
       thread attackmisstracktargetthread();
 
       if(var_2[0] * var_1[1] - var_2[1] * var_1[0] > 0) {
         var_0 = % german_shepherd_attack_player_miss_turnr;
-      }
-      else {
+      } else {
         var_0 = % german_shepherd_attack_player_miss_turnl;
       }
     }
@@ -248,8 +243,7 @@ removesafetyhealth() {
 
   if(var_0 > 0.25) {
     self.meleeingplayer setnormalhealth(var_0 - 0.25);
-  }
-  else {
+  } else {
     self.meleeingplayer setnormalhealth(0.01);
   }
 }
@@ -463,8 +457,7 @@ meleestrugglevsai() {
 
   if(isDefined(self.enemy.syncedmeleetarget) || shouldwaitincombatidle() || !isai(self.enemy) || isDefined(self.enemy.istraversing)) {
     combatidle();
-  }
-  else {
+  } else {
     self.enemy setnextdogattackallowtime(500);
     self.safetochangescript = 0;
     self animmode("zonly_physics");
@@ -1188,8 +1181,7 @@ playerview_startsequence(var_0) {
 
   if(isDefined(var_4)) {
     self.origin = var_4;
-  }
-  else {
+  } else {
     self.origin = var_1.origin;
   }
 
@@ -1228,11 +1220,9 @@ playerview_endsequence(var_0) {
 
     if(isDefined(self.necksnapped)) {
       self setflaggedanimrestart("viewanim", % player_view_dog_knockdown_neck_snap, 1, 0.2, 1);
-    }
-    else if(isDefined(var_0.dog_downed_player)) {
+    } else if(isDefined(var_0.dog_downed_player)) {
       self setflaggedanimknobrestart("viewanim", % player_view_dog_knockdown_laststand, 1, 0.1, 1);
-    }
-    else {
+    } else {
       thread savednotify(var_0);
       self setflaggedanimrestart("viewanim", % player_view_dog_knockdown_saved);
     }

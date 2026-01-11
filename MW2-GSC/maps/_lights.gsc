@@ -21,8 +21,7 @@ flickerLight(color0, color1, minDelay, maxDelay) {
 
     if(minDelay != maxDelay) {
       delay += randomfloatrange(minDelay, maxDelay);
-    }
-    else {
+    } else {
       delay += minDelay;
     }
 
@@ -294,8 +293,7 @@ flickerLightIntensity(minDelay, maxDelay) {
       wait(randomfloatrange(.05, .1));
       if(curr > .2) {
         curr = randomfloatrange(0, .3);
-      }
-      else {
+      } else {
         curr = on;
       }
 

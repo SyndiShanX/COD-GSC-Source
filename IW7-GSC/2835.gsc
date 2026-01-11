@@ -131,7 +131,7 @@ func_957E() {
   level.func_11AE = [];
 
   foreach(var_17 in var_15) {
-  level.func_11AE[var_17.classname] = var_17;
+    level.func_11AE[var_17.classname] = var_17;
   }
 }
 
@@ -201,13 +201,13 @@ func_22AE(var_00) {
   var_01 = [];
 
   foreach(var_03 in var_00) {
-  var_1[var_03] = 1;
+    var_1[var_03] = 1;
   }
 
   var_05 = [];
 
   foreach(var_08, var_07 in var_01) {
-  var_5[var_5.size] = var_08;
+    var_5[var_5.size] = var_08;
   }
 
   return var_05;
@@ -293,7 +293,7 @@ func_12732() {
       var_05 = getEntArray(var_4.targetname, "target");
 
       foreach(var_07 in var_05) {
-      var_2[var_2.size] = var_07;
+        var_2[var_2.size] = var_07;
       }
 
       var_05 = undefined;
@@ -315,8 +315,7 @@ func_12732() {
 func_159B(var_00) {
   if(var_00 == "allies") {
     thread func_78D8(self.func_ED33, var_00);
-  }
-  else {
+  } else {
     thread func_78D8(self.func_ED34, var_00);
   }
 }
@@ -388,8 +387,7 @@ func_EB12(var_00, var_01) {
 func_D968(var_00, var_01) {
   if(issubstr(var_0.func_ED33, var_01)) {
     self.func_4709[self.func_4709.size] = var_00;
-  }
-  else {
+  } else {
     self.func_4708[self.func_4708.size] = var_00;
   }
 }
@@ -397,8 +395,7 @@ func_D968(var_00, var_01) {
 func_D969(var_00, var_01) {
   if(issubstr(var_0.func_ED34, var_01)) {
     self.func_4709[self.func_4709.size] = var_00;
-  }
-  else {
+  } else {
     self.func_4708[self.func_4708.size] = var_00;
   }
 }
@@ -447,7 +444,7 @@ func_D923(var_00, var_01, var_02) {
   }
 
   foreach(var_07 in var_08) {
-  var_3[var_3.size] = var_07;
+    var_3[var_3.size] = var_07;
   }
 
   level.func_22DD[var_00][var_01] = var_03;
@@ -643,15 +640,13 @@ func_F3D2(var_00) {
 
   if(isDefined(self.func_43AB)) {
     self thread[[self.func_43AB]](var_00);
-  }
-  else {
+  } else {
     self give_more_perk(var_00);
   }
 
   if(func_9CFA(var_00)) {
     thread func_72C8(var_00);
-  }
-  else if(isDefined(var_0.radius) && var_0.radius > 0) {
+  } else if(isDefined(var_0.radius) && var_0.radius > 0) {
     self.goalradius = var_0.radius;
   }
 
@@ -659,18 +654,15 @@ func_F3D2(var_00) {
 
   if(isDefined(var_01)) {
     self give_laststand(var_01);
-  }
-  else {
+  } else {
     self getplayerheadmodel();
   }
 
   if(isDefined(var_0.fixednodesaferadius)) {
     self.fixednodesaferadius = var_0.fixednodesaferadius;
-  }
-  else if(isDefined(level.func_6E02)) {
+  } else if(isDefined(level.func_6E02)) {
     self.fixednodesaferadius = level.func_6E02;
-  }
-  else {
+  } else {
     self.fixednodesaferadius = 64;
   }
 }
@@ -690,8 +682,7 @@ func_9CFA(var_00) {
 
   if(self.fixednode) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -1274,8 +1265,7 @@ func_AEE0() {
 
   if(isDefined(level.func_73E0)) {
     [[level.func_73E0]]();
-  }
-  else {
+  } else {
     wait 2;
   }
 

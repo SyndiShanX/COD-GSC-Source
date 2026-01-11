@@ -175,8 +175,7 @@ setTeamSpyplaneWrapper(team, value) {
   radarType = "ui_radar_" + team;
   if(radarType == "ui_radar_allies") {
     setMatchFlag("radar_allies", value);
-  }
-  else {
+  } else {
     setMatchFlag("radar_axis", value);
   }
   level notify("radar_status_change", team);
@@ -186,8 +185,7 @@ setTeamSatelliteWrapper(team, value) {
   radarType = "ui_radar_" + team;
   if(radarType == "ui_radar_allies") {
     setMatchFlag("radar_allies", value);
-  }
-  else {
+  } else {
     setMatchFlag("radar_axis", value);
   }
   if(value == false) {

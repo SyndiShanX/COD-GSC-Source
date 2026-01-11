@@ -52,7 +52,7 @@ main() {
   a_m_clips = getEntArray("compile_paths_clips", "targetname");
 
   foreach(m_clip in a_m_clips) {
-  m_clip delete();
+    m_clip delete();
   }
 }
 
@@ -198,11 +198,9 @@ skipto_karma_2() {
 load_gumps_karma() {
   if(is_after_skipto("construction")) {
     load_gump("karma_gump_club");
-  }
-  else if(is_after_skipto("dropdown")) {
+  } else if(is_after_skipto("dropdown")) {
     load_gump("karma_gump_construction");
-  }
-  else {
+  } else {
     load_gump("karma_gump_checkin");
   }
 }

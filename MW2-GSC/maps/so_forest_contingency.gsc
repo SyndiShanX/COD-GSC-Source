@@ -116,7 +116,7 @@ stealth_achievement_end() {
 
   if(!flag("broke_stealth") && !flag("enemy_killed")) {
     foreach(player in level.players) {
-    player maps\_utility::player_giveachievement_wrapper("SPECTER");
+      player maps\_utility::player_giveachievement_wrapper("SPECTER");
     }
   }
 }
@@ -126,7 +126,7 @@ remove_extra_vehicles() {
   remove_ents = array_merge(remove_ents, getEntArray("cargo2_group2", "targetname"));
   remove_ents = array_merge(remove_ents, getEntArray("cargo3_group2", "targetname"));
   foreach(ent in remove_ents) {
-  ent Delete();
+    ent Delete();
   }
 }
 
@@ -370,7 +370,7 @@ woods_first_patrol_cqb() {
   flag_wait("first_patrol_cqb");
   first_patrol_cqb = getEntArray("first_patrol_cqb", "targetname");
   foreach(guy in first_patrol_cqb) {
-  guy spawn_ai();
+    guy spawn_ai();
   }
 }
 

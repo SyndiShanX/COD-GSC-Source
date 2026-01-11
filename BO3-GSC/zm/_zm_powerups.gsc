@@ -630,9 +630,7 @@ function powerup_grab(powerup_team) {
       grabbers[0] = self.powerup_player;
     } else {
       if(isDefined(level.powerup_grab_get_players_override)) {
-        grabbers = [
-          [level.powerup_grab_get_players_override]
-        ]();
+        grabbers = [[level.powerup_grab_get_players_override]]();
       } else {
         grabbers = getplayers();
       }

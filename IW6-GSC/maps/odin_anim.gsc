@@ -559,13 +559,13 @@ decomp_explosion_anim_props(var_0, var_1) {
   var_4 = getEntArray("decomp_explode_wall", "targetname");
 
   foreach(var_6 in var_4) {
-  var_6 delete();
+    var_6 delete();
   }
 
   var_8 = getEntArray("spin_decomp_delete", "script_noteworthy");
 
   foreach(var_6 in var_8) {
-  var_6 delete();
+    var_6 delete();
   }
 }
 
@@ -760,12 +760,10 @@ move_and_spin_and_animate_spin_dead_guy(var_0, var_1, var_2, var_3, var_4, var_5
 
   if(isDefined(var_4)) {
     var_9 maps\_anim::anim_single_solo(var_8, var_4, "tag_origin");
-  }
-  else {
+  } else {
     if(distance(var_9.origin + var_0, var_9.origin) / var_2 < 70) {
       var_9 rotateto((randomfloatrange(-180, 180), randomfloatrange(-180, 180), randomfloatrange(-180, 180)), var_2);
-    }
-    else {
+    } else {
       var_9 rotatepitch(6000, var_2);
     }
 

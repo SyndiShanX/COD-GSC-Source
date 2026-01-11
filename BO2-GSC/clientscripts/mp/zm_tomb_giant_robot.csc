@@ -44,11 +44,9 @@ register_giant_robot(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
   if(self.model == "veh_t6_dlc_zm_robot_0") {
     level.a_giant_robots[localclientnum][0] = self;
-  }
-  else if(self.model == "veh_t6_dlc_zm_robot_1") {
+  } else if(self.model == "veh_t6_dlc_zm_robot_1") {
     level.a_giant_robots[localclientnum][1] = self;
-  }
-  else if(self.model == "veh_t6_dlc_zm_robot_2") {
+  } else if(self.model == "veh_t6_dlc_zm_robot_2") {
     level.a_giant_robots[localclientnum][2] = self;
   }
 }
@@ -114,8 +112,7 @@ play_eject_warning_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 play_eject_steam_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self thread loop_eject_steam_fx(localclientnum);
-  }
-  else {
+  } else {
     self notify("stop_eject_steam_fx");
 
     if(isDefined(self.fieldname)) {
@@ -155,7 +152,7 @@ all_tubes_play_eject_steam_fx(localclientnum, oldval, newval, bnewent, binitials
     }
   } else if(isDefined(level.a_s_tubes[localclientnum])) {
     foreach(struct in level.a_s_tubes[localclientnum]) {
-    struct notify("stop_all_tubes_eject_steam");
+      struct notify("stop_all_tubes_eject_steam");
     }
   }
 }
@@ -179,8 +176,7 @@ sndplaysteamfx(the_notify, origin) {
 gr_eject_player_impact_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self.fieldname = playFX(localclientnum, level._effect["beacon_shell_explosion"], self.origin);
-  }
-  else if(isDefined(self.fieldname)) {
+  } else if(isDefined(self.fieldname)) {
     stopfx(localclientnum, self.fieldname);
   }
 }

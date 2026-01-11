@@ -249,7 +249,7 @@ asd_intro() {
   vh_asd thread intro_asd_think();
 
   foreach(ai_guard in a_ai_guards) {
-  ai_guard thread asd_intro_guard_think(vh_asd);
+    ai_guard thread asd_intro_guard_think(vh_asd);
   }
 }
 
@@ -585,8 +585,7 @@ e9_keep_player_busy_at_start_trigger(delay, str_category) {
 
       if(dt < min_spawn_wait_time) {
         delay = min_spawn_wait_time - dt;
-      }
-      else {
+      } else {
         delay = randomfloatrange(1.0, 3.0);
       }
 
@@ -697,8 +696,7 @@ make_ent_ignore_battle(str_targetname, use_magic_shield, delay) {
     e_ent.saved_health = e_ent.health;
     e_ent.health = 99999;
 
-    if(isDefined(use_magic_shield)) {
-    }
+    if(isDefined(use_magic_shield)) {}
   } else {
     iprintlnbold("Ent " + str_targetname + " is missing and cannot be set to ignore.");
 
@@ -716,8 +714,7 @@ make_ent_a_battle_target(str_targetname, magic_bullet_shield, delay) {
   e_ent.ignoreme = 0;
   e_ent.health = e_ent.saved_health;
 
-  if(isDefined(magic_bullet_shield)) {
-  }
+  if(isDefined(magic_bullet_shield)) {}
 }
 
 little_bird_attack_drinks_area() {
@@ -920,7 +917,7 @@ civilians_injured_from_battle_anim() {
   a_ais = get_model_or_models_from_scene("sundeck_civ_injured_and_helper_idle");
 
   foreach(ai in a_ais) {
-  ai add_cleanup_ent("sundeck_intro");
+    ai add_cleanup_ent("sundeck_intro");
   }
 }
 
@@ -930,7 +927,7 @@ civilians_running_from_battle_anim() {
   a_ais = get_ais_from_scene("sundeck_civ_injured_and_helper");
 
   foreach(ai in a_ais) {
-  ai add_cleanup_ent("sundeck_intro");
+    ai add_cleanup_ent("sundeck_intro");
   }
 }
 
@@ -1149,8 +1146,7 @@ nag_move_forward(n_wait_min, n_wait_max) {
   while(true) {
     if(cointoss()) {
       level.ai_harper queue_dialog(a_harper_nag[randomint(a_harper_nag.size)], 0, undefined, undefined, 0);
-    }
-    else {
+    } else {
       level.ai_salazar queue_dialog(a_salazar_nag[randomint(a_salazar_nag.size)], 0, undefined, undefined, 0);
     }
 
@@ -1253,7 +1249,7 @@ sec_explosion() {
 
 pmc_defalco_extract_init() {
   foreach(e_trig in getEntArray("pmc_defalco_extract_trigger", "targetname")) {
-  e_trig thread pmc_defalco_extract_think();
+    e_trig thread pmc_defalco_extract_think();
   }
 }
 

@@ -14,8 +14,7 @@ setParent(element) {
   self.parent addChild(self);
   if(isDefined(self.point)) {
     self setPoint(self.point, self.relativePoint, self.xOffset, self.yOffset);
-  }
-  else {
+  } else {
     self setPoint("TOPLEFT");
   }
 }
@@ -102,16 +101,14 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     offsetX = int(element.width / 2);
     if(relativeX == "left" || element.alignX == "right") {
       xFactor = -1;
-    }
-    else {
+    } else {
       xFactor = 1;
     }
   } else {
     offsetX = element.width;
     if(relativeX == "left") {
       xFactor = -1;
-    }
-    else {
+    } else {
       xFactor = 1;
     }
   }
@@ -123,16 +120,14 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     offsetY = int(element.height / 2);
     if(relativeY == "top" || element.alignY == "bottom") {
       yFactor = -1;
-    }
-    else {
+    } else {
       yFactor = 1;
     }
   } else {
     offsetY = element.height;
     if(relativeY == "top") {
       yFactor = -1;
-    }
-    else {
+    } else {
       yFactor = 1;
     }
   }
@@ -157,17 +152,14 @@ setPointBar(point, relativePoint, xOffset, yOffset) {
   self.bar.y = self.y;
   if(self.alignX == "left") {
     self.bar.x = self.x;
-  }
-  else if(self.alignX == "right") {
+  } else if(self.alignX == "right") {
     self.bar.x = self.x - self.width;
-  }
-  else {
+  } else {
     self.bar.x = self.x - int(self.width / 2);
   }
   if(self.alignY == "top") {
     self.bar.y = self.y;
-  }
-  else if(self.alignY == "bottom") {
+  } else if(self.alignY == "bottom") {
     self.bar.y = self.y;
   }
   self updateBar(self.bar.frac);
@@ -220,8 +212,7 @@ createFontString(font, fontScale) {
 createServerFontString(font, fontScale, team) {
   if(isDefined(team)) {
     fontElem = newTeamHudElem(team);
-  }
-  else {
+  } else {
     fontElem = newHudElem(self);
   }
   fontElem.elemType = "font";
@@ -242,8 +233,7 @@ createServerFontString(font, fontScale, team) {
 createServerTimer(font, fontScale, team) {
   if(isDefined(team)) {
     timerElem = newTeamHudElem(team);
-  }
-  else {
+  } else {
     timerElem = newHudElem(self);
   }
   timerElem.elemType = "timer";
@@ -282,8 +272,7 @@ createIcon(shader, width, height) {
 createServerIcon(shader, width, height, team) {
   if(isDefined(team)) {
     iconElem = newTeamHudElem(team);
-  }
-  else {
+  } else {
     iconElem = newHudElem(self);
   }
   iconElem.elemType = "icon";
@@ -305,8 +294,7 @@ createServerIcon(shader, width, height, team) {
 createServerBar(color, width, height, flashFrac, team, selected) {
   if(isDefined(team)) {
     barElem = newTeamHudElem(team);
-  }
-  else {
+  } else {
     barElem = newHudElem(self);
   }
   barElem.x = 0;
@@ -322,8 +310,7 @@ createServerBar(color, width, height, flashFrac, team, selected) {
   }
   if(isDefined(team)) {
     barElemFrame = newTeamHudElem(team);
-  }
-  else {
+  } else {
     barElemFrame = newHudElem(self);
   }
   barElemFrame.elemType = "icon";
@@ -341,15 +328,13 @@ createServerBar(color, width, height, flashFrac, team, selected) {
   barElemFrame setParent(level.uiParent);
   if(isDefined(selected)) {
     barElemFrame setShader("progress_bar_fg_sel", width, height);
-  }
-  else {
+  } else {
     barElemFrame setShader("progress_bar_fg", width, height);
   }
   barElemFrame.hidden = false;
   if(isDefined(team)) {
     barElemBG = newTeamHudElem(team);
-  }
-  else {
+  } else {
     barElemBG = newHudElem(self);
   }
   barElemBG.elemType = "bar";
@@ -418,8 +403,7 @@ createBar(color, width, height, flashFrac) {
   barElemBG setParent(level.uiParent);
   if(!level.splitScreen) {
     barElemBG setShader("progress_bar_bg", width + 4, height + 4);
-  }
-  else {
+  } else {
     barElemBG setShader("progress_bar_bg", width + 0, height + 0);
   }
   barElemBG.hidden = false;
@@ -440,8 +424,7 @@ createPrimaryProgressBar() {
   bar = createBar((1, 1, 1), level.primaryProgressBarWidth, level.primaryProgressBarHeight);
   if(level.splitScreen) {
     bar setPoint("TOP", undefined, level.primaryProgressBarX, level.primaryProgressBarY);
-  }
-  else {
+  } else {
     bar setPoint("CENTER", undefined, level.primaryProgressBarX, level.primaryProgressBarY);
   }
   return bar;
@@ -451,8 +434,7 @@ createPrimaryProgressBarText() {
   text = createFontString("objective", level.primaryProgressBarFontSize);
   if(level.splitScreen) {
     text setPoint("TOP", undefined, level.primaryProgressBarTextX, level.primaryProgressBarTextY);
-  }
-  else {
+  } else {
     text setPoint("CENTER", undefined, level.primaryProgressBarTextX, level.primaryProgressBarTextY);
   }
   text.sort = -1;
@@ -596,8 +578,7 @@ showPerk(index, perk, ypos) {
     xpos = -5;
     if(level.splitScreen) {
       ypos = 0 - (80 + iconsize * (2 - index));
-    }
-    else {
+    } else {
       ypos = 0 - (90 + iconsize * (2 - index));
     }
     icon = createIcon("white", iconsize, iconsize);

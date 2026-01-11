@@ -14,8 +14,7 @@ main() {
   maps\mp\createfx\mp_magma_fx::main();
 }
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_mp_magma_ash_ember_lg"] = loadfx("maps/mp_maps/fx_mp_magma_ash_ember_lg");

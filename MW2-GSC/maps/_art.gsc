@@ -14,9 +14,9 @@ main() {
     SetDvar("scr_art_tweak", 0);
   }
 
-    if(GetDvar("scr_cmd_plr_sun") == "") {
-      SetDevDvar("scr_cmd_plr_sun", "0");
-    }
+  if(GetDvar("scr_cmd_plr_sun") == "") {
+    SetDevDvar("scr_cmd_plr_sun", "0");
+  }
 
   if(GetDvar("scr_dof_enable") == "") {
     SetSavedDvar("scr_dof_enable", "1");
@@ -243,8 +243,7 @@ cloudlight(sunlight_bright, sunlight_dark, diffuse_high, diffuse_low) {
 
     if(direction == "up") {
       next_target = sunlight + scale(30) + jitter;
-    }
-    else {
+    } else {
       next_target = sunlight - scale(30) + jitter;
     }
 
@@ -261,8 +260,7 @@ cloudlight(sunlight_bright, sunlight_dark, diffuse_high, diffuse_low) {
 
     if(next_target > sunlight) {
       brighten(next_target, (3 + RandomInt(3)), .05);
-    }
-    else {
+    } else {
       darken(next_target, (3 + RandomInt(3)), .05);
     }
   }
@@ -472,19 +470,17 @@ updateDoF() {
   } else {
     if(nearEnd < 50) {
       nearEnd = 50;
+    } else {
+      if(nearEnd > 512)
     }
-    else {
-    if(nearEnd > 512)
-    }
-      nearEnd = 512;
+    nearEnd = 512;
 
     if(farStart > 2500) {
       farStart = 2500;
+    } else {
+      if(farStart < 1000)
     }
-    else {
-    if(farStart < 1000)
-    }
-      farStart = 1000;
+    farStart = 1000;
   }
 
   traceDist = Distance(playerEye, trace["position"]);
@@ -546,11 +542,10 @@ javelin_dof(trace, enemies, playerEye, playerForward, adsFrac) {
 
     if(farStart > 2500) {
       farStart = 2500;
+    } else {
+      if(farStart < 1000)
     }
-    else {
-    if(farStart < 1000)
-    }
-      farStart = 1000;
+    farStart = 1000;
   }
 
   traceDist = Distance(playerEye, trace["position"]);
@@ -613,30 +608,26 @@ changeDoFValue(valueName, targetValue, maxChange) {
     changeVal = (self.dof[valueName] - targetValue) * 0.5;
     if(changeVal > maxChange) {
       changeVal = maxChange;
-    }
-    else if(changeVal < 1) {
+    } else if(changeVal < 1) {
       changeVal = 1;
     }
 
     if(self.dof[valueName] - changeVal < targetValue) {
       self.dof[valueName] = targetValue;
-    }
-    else {
+    } else {
       self.dof[valueName] -= changeVal;
     }
   } else if(self.dof[valueName] < targetValue) {
     changeVal = (targetValue - self.dof[valueName]) * 0.5;
     if(changeVal > maxChange) {
       changeVal = maxChange;
-    }
-    else if(changeVal < 1) {
+    } else if(changeVal < 1) {
       changeVal = 1;
     }
 
     if(self.dof[valueName] + changeVal > targetValue) {
       self.dof[valueName] = targetValue;
-    }
-    else {
+    } else {
       self.dof[valueName] += changeVal;
     }
   }

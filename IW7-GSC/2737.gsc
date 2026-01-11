@@ -8,8 +8,7 @@ gethighestscoringplayer() {
 
   if(!level.placement["all"].size) {
     return undefined;
-  }
-  else {
+  } else {
     return level.placement["all"][0];
   }
 }
@@ -230,8 +229,7 @@ updateteamscore(var_00) {
 
   if(!scripts\mp\utility\game::isroundbased() || !scripts\mp\utility\game::isobjectivebased() || scripts\mp\utility\game::ismoddedroundgame()) {
     var_01 = _getteamscore(var_00);
-  }
-  else {
+  } else {
     var_01 = game["roundsWon"][var_00];
   }
 
@@ -254,8 +252,7 @@ func_12F4A(var_00) {
     case "teamScores":
       if(scripts\mp\utility\game::inovertime()) {
         game["teamScores"][var_00] = game["preOvertimeScore"][var_00] + game["overtimeScore"][var_00] + game["teamScores"][var_00];
-      }
-      else if(scripts\mp\utility\game::func_E269()) {
+      } else if(scripts\mp\utility\game::func_E269()) {
         game["totalScore"][var_00] = game["totalScore"][var_00] + game["teamScores"][var_00];
         game["teamScores"][var_00] = game["totalScore"][var_00];
       }
@@ -369,8 +366,7 @@ updateplacement() {
 
   if(level.multiteambased) {
     func_BD7B();
-  }
-  else if(level.teambased) {
+  } else if(level.teambased) {
     updateteamplacement();
   }
 }
@@ -394,8 +390,7 @@ func_7E06(var_00, var_01) {
 
   if(scripts\engine\utility::cointoss()) {
     return var_00;
-  }
-  else {
+  } else {
     return var_01;
   }
 }
@@ -421,7 +416,7 @@ func_BD7B() {
   var_0["spectator"] = [];
 
   foreach(var_02 in level.teamnamelist) {
-  var_0[var_02] = [];
+    var_0[var_02] = [];
   }
 
   var_04 = level.placement["all"];
@@ -434,7 +429,7 @@ func_BD7B() {
   }
 
   foreach(var_02 in level.teamnamelist) {
-  level.placement[var_02] = var_0[var_02];
+    level.placement[var_02] = var_0[var_02];
   }
 }
 

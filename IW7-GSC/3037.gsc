@@ -209,8 +209,7 @@ func_A268(var_00) {
 
   if(var_00) {
     level.func_D127.func_6D2D playSound("jackal_microlite_space_left");
-  }
-  else {
+  } else {
     level.func_D127.func_6D2E playSound("jackal_microlite_space_right");
   }
 
@@ -228,8 +227,7 @@ func_A2CC(var_00) {
 
   if(isDefined(var_01) && isDefined(var_1[0]) && var_1[2] > 0.05) {
     var_02 = var_1[0];
-  }
-  else {
+  } else {
     var_02 = self.func_5F27;
   }
 
@@ -553,8 +551,7 @@ func_A27A(var_00) {
 func_A27B() {
   if(scripts\sp\utility::func_D15B("weapons")) {
     self.missiles.func_B446 = 12;
-  }
-  else {
+  } else {
     self.missiles.func_B446 = 8;
   }
 
@@ -577,8 +574,7 @@ func_A26A(var_00) {
 
     if(var_00) {
       thread func_A277();
-    }
-    else {
+    } else {
       self notify("jackal_missiles_off");
     }
   }
@@ -601,8 +597,7 @@ func_A277() {
     if(level.player fragbuttonpressed() && !var_02 && !level.player scripts\sp\utility::func_65DB("disable_jackal_missiles")) {
       if(self.missiles.count <= 0) {
         func_A273();
-      }
-      else {
+      } else {
         level.func_D127 scripts\sp\utility::func_65E1("player_jackal_missile");
         var_01 = func_A275(var_00, var_01);
         level.func_D127 scripts\sp\utility::func_65DD("player_jackal_missile");
@@ -611,8 +606,7 @@ func_A277() {
 
     if(level.player fragbuttonpressed()) {
       var_02 = 1;
-    }
-    else {
+    } else {
       var_02 = 0;
     }
 
@@ -634,14 +628,11 @@ func_A275(var_00, var_01) {
 
     if(var_02 == 4) {
       var_07 = var_06 * var_04;
-    }
-    else if(var_02 == 3) {
+    } else if(var_02 == 3) {
       var_07 = var_06 * var_05;
-    }
-    else if(var_02 == 2) {
+    } else if(var_02 == 2) {
       var_07 = var_06 * var_04 * -1;
-    }
-    else if(var_02 == 1) {
+    } else if(var_02 == 1) {
       var_07 = var_06 * var_05 * -1;
     }
 
@@ -697,15 +688,13 @@ func_A274(var_00, var_01, var_02) {
 
   if(isDefined(self.func_B83B)) {
     var_10 = self.func_B83B;
-  }
-  else {
+  } else {
     var_10 = "missile_flare_short";
   }
 
   if(isDefined(self.func_B803)) {
     var_11 = self.func_B803;
-  }
-  else {
+  } else {
     var_11 = undefined;
   }
 
@@ -713,8 +702,7 @@ func_A274(var_00, var_01, var_02) {
 
   if(isDefined(var_00)) {
     var_13 = 1;
-  }
-  else {
+  } else {
     var_13 = 0;
     var_00 = scripts\engine\utility::spawn_tag_origin();
     var_0.func_5F27 = 1;
@@ -792,23 +780,17 @@ func_A271() {
 
   if(self.missiles.count == 1) {
     func_A26C("jackal_hud_1missileremaini");
-  }
-  else if(self.missiles.count == 15) {
+  } else if(self.missiles.count == 15) {
     func_A26C("jackal_hud_15missilesremai");
-  }
-  else if(self.missiles.count == 10) {
+  } else if(self.missiles.count == 10) {
     func_A26C("jackal_hud_10missilesremai");
-  }
-  else if(self.missiles.count == 5) {
+  } else if(self.missiles.count == 5) {
     func_A26C("jackal_hud_5missilesremain");
-  }
-  else if(self.missiles.count == 4) {
+  } else if(self.missiles.count == 4) {
     func_A26C("jackal_hud_4missilesremain");
-  }
-  else if(self.missiles.count == 3) {
+  } else if(self.missiles.count == 3) {
     func_A26C("jackal_hud_3missilesremain");
-  }
-  else if(self.missiles.count == 2) {
+  } else if(self.missiles.count == 2) {
     func_A26C("jackal_hud_2missilesremain");
   }
 }

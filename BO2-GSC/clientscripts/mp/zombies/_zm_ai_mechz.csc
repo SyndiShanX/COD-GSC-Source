@@ -222,8 +222,7 @@ mechzfootstepcbfunc(localclientnum, pos, surface, notetrack, bone) {
 
   if(bone == "j_ball_ri") {
     playFXOnTag(localclientnum, level._effect["mech_footstep_steam"], self, "tag_foot_steam_RI");
-  }
-  else if(bone == "j_ball_le") {
+  } else if(bone == "j_ball_le") {
     playFXOnTag(localclientnum, level._effect["mech_footstep_steam"], self, "tag_foot_steam_LE");
   }
 

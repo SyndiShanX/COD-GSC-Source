@@ -271,8 +271,7 @@ all_staffs_inserted_in_puzzle_room() {
 
   if(n_staffs_inserted == 4) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

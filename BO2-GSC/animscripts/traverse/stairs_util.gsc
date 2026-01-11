@@ -12,8 +12,7 @@ build_traverse_data(traversedata, stair_anims, transition_stair_count_in, transi
 
   if(stair_count < 0) {
     traversedata["traverseAnimTransOut"] = undefined;
-  }
-  else {
+  } else {
     traversedata["traverseAnim"] = build_anim_array(stair_anims, stair_count);
   }
 
@@ -24,8 +23,7 @@ build_traverse_data(traversedata, stair_anims, transition_stair_count_in, transi
 
   if(animscripts\utility::aihasonlypistol()) {
     traversedata["traverseAllowAiming"] = 0;
-  }
-  else {
+  } else {
     traversedata["traverseAllowAiming"] = 1;
   }
 

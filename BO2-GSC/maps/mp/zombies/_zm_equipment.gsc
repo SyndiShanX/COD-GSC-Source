@@ -103,8 +103,7 @@ limit_zombie_equipment(equipment_name, limited) {
 
   if(limited) {
     level._limited_equipment[level._limited_equipment.size] = equipment_name;
-  }
-  else {
+  } else {
     arrayremovevalue(level._limited_equipment, equipment_name, 0);
   }
 }
@@ -399,8 +398,7 @@ setup_equipment_client_hintelem() {
 
   if(level.splitscreen) {
     self.hintelem init_equipment_hint_hudelem(160, 90, "center", "middle", 1.6, 1.0);
-  }
-  else {
+  } else {
     self.hintelem init_equipment_hint_hudelem(320, 220, "center", "bottom", 1.6, 1.0);
   }
 }
@@ -621,7 +619,9 @@ equipment_transfer(weaponname, fromplayer, toplayer) {
     toplayer equipment_to_deployed(weaponname);
 
     if(isDefined(level.zombie_equipment[weaponname].transfer_fn)) {
-      [[level.zombie_equipment[weaponname].transfer_fn]](fromplayer, toplayer);
+      [
+        [level.zombie_equipment[weaponname].transfer_fn]
+      ](fromplayer, toplayer);
     }
 
     fromplayer equipment_release(weaponname);
@@ -640,7 +640,9 @@ equipment_transfer(weaponname, fromplayer, toplayer) {
     }
 
     if(isDefined(level.zombie_equipment[weaponname].transfer_fn)) {
-      [[level.zombie_equipment[weaponname].transfer_fn]](fromplayer, toplayer);
+      [
+        [level.zombie_equipment[weaponname].transfer_fn]
+      ](fromplayer, toplayer);
     }
 
     equipment_damage = toplayer player_get_equipment_damage(weaponname);
@@ -775,8 +777,7 @@ equipment_buy(equipment) {
 
   if((equipment == "riotshield_zm" || equipment == "alcatraz_shield_zm") && isDefined(self.player_shield_reset_health)) {
     self[[self.player_shield_reset_health]]();
-  }
-  else {
+  } else {
     self player_set_equipment_damage(equipment, 0);
   }
 
@@ -813,22 +814,19 @@ generate_equipment_unitrigger(classname, origin, angles, flags, radius, script_h
 
   if(isDefined(script_length)) {
     unitrigger_stub.script_length = script_length;
-  }
-  else {
+  } else {
     unitrigger_stub.script_length = 13.5;
   }
 
   if(isDefined(script_width)) {
     unitrigger_stub.script_width = script_width;
-  }
-  else {
+  } else {
     unitrigger_stub.script_width = 27.5;
   }
 
   if(isDefined(script_height)) {
     unitrigger_stub.script_height = script_height;
-  }
-  else {
+  } else {
     unitrigger_stub.script_height = 24;
   }
 
@@ -864,8 +862,7 @@ generate_equipment_unitrigger(classname, origin, angles, flags, radius, script_h
 
   if(isDefined(moving) && moving) {
     maps\mp\zombies\_zm_unitrigger::register_unitrigger(unitrigger_stub, think);
-  }
-  else {
+  } else {
     maps\mp\zombies\_zm_unitrigger::register_static_unitrigger(unitrigger_stub, think);
   }
 
@@ -930,8 +927,7 @@ placed_equipment_think(model, equipname, origin, angles, tradius, toffset) {
 
   if(isDefined(level.retrievehints[watchername])) {
     hint = level.retrievehints[watchername].hint;
-  }
-  else {
+  } else {
     hint = &"MP_GENERIC_PICKUP";
   }
 
@@ -1058,8 +1054,7 @@ dropped_equipment_think(model, equipname, origin, angles, tradius, toffset) {
 
   if(isDefined(level.retrievehints[watchername])) {
     hint = level.retrievehints[watchername].hint;
-  }
-  else {
+  } else {
     hint = &"MP_GENERIC_PICKUP";
   }
 
@@ -1299,8 +1294,7 @@ player_damage_equipment(equipment, damage, origin) {
   if(self.equipment_damage[equipment] > 1500) {
     if(isDefined(level.placeable_equipment_destroy_fn[equipment])) {
       self[[level.placeable_equipment_destroy_fn[equipment]]]();
-    }
-    else {
+    } else {
       equipment_disappear_fx(origin);
     }
 
@@ -1312,8 +1306,7 @@ item_damage(damage) {
   if(isDefined(self.isriotshield) && self.isriotshield) {
     if(isDefined(level.riotshield_damage_callback) && isDefined(self.owner)) {
       self.owner[[level.riotshield_damage_callback]](damage, 0);
-    }
-    else if(isDefined(level.deployed_riotshield_damage_callback)) {
+    } else if(isDefined(level.deployed_riotshield_damage_callback)) {
       self[[level.deployed_riotshield_damage_callback]](damage);
     }
   } else if(isDefined(self.owner))
@@ -1367,8 +1360,7 @@ get_item_health() {
 
     if(isDefined(self.owner)) {
       damage = self.owner.shielddamagetaken;
-    }
-    else if(isDefined(level.deployed_riotshield_damage_callback)) {
+    } else if(isDefined(level.deployed_riotshield_damage_callback)) {
       damage = self.shielddamagetaken;
     }
   } else if(isDefined(self.owner)) {
@@ -1444,22 +1436,19 @@ item_attract_zombies() {
   while(true) {
     if(isDefined(level.vert_equipment_attack_range)) {
       vdistmax = level.vert_equipment_attack_range;
-    }
-    else {
+    } else {
       vdistmax = 36;
     }
 
     if(isDefined(level.max_equipment_attack_range)) {
       distmax = level.max_equipment_attack_range * level.max_equipment_attack_range;
-    }
-    else {
+    } else {
       distmax = 4096;
     }
 
     if(isDefined(level.min_equipment_attack_range)) {
       distmin = level.min_equipment_attack_range * level.min_equipment_attack_range;
-    }
-    else {
+    } else {
       distmin = 2025;
     }
 
@@ -1556,8 +1545,7 @@ attack_item(item) {
 
     if(self.a.gib_ref == "no_legs") {
       melee_anim = "zm_stumpy_melee";
-    }
-    else if(self.zombie_move_speed == "run" || self.zombie_move_speed == "sprint") {
+    } else if(self.zombie_move_speed == "run" || self.zombie_move_speed == "sprint") {
       melee_anim = "zm_run_melee_crawl";
     }
   }
@@ -1568,8 +1556,7 @@ attack_item(item) {
 
   if(isDefined(self.custom_item_dmg)) {
     item thread item_damage(self.custom_item_dmg);
-  }
-  else {
+  } else {
     item thread item_damage(100);
   }
 
@@ -1639,8 +1626,7 @@ destructible_equipment_list_check() {
   while(i < level.destructible_equipment.size) {
     if(!isDefined(level.destructible_equipment[i])) {
       arrayremoveindex(level.destructible_equipment, i);
-    }
-    else {
+    } else {
       i++;
     }
   }
@@ -1665,8 +1651,7 @@ equipment_disappear_fx(origin, fx, angles) {
 
   if(isDefined(angles)) {
     playFX(effect, origin, anglesToForward(angles));
-  }
-  else {
+  } else {
     playFX(effect, origin);
   }
 

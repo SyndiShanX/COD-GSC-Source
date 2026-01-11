@@ -26,8 +26,7 @@ meleestrugglevsai_first_attack(var_0) {
 
   if(isDefined(self.controlling_dog) && self.controlling_dog) {
     thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_intro_plr");
-  }
-  else {
+  } else {
     thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_npc");
   }
 
@@ -185,8 +184,7 @@ meleestrugglevsai_short(var_0, var_1) {
 
         if(isDefined(self.controlling_dog) && self.controlling_dog) {
           thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_quick_back_plr");
-        }
-        else {
+        } else {
           thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_quick_back_npc");
         }
 
@@ -194,8 +192,7 @@ meleestrugglevsai_short(var_0, var_1) {
       default:
         if(isDefined(self.controlling_dog) && self.controlling_dog) {
           thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_plr");
-        }
-        else {
+        } else {
           thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_npc");
         }
     }
@@ -277,8 +274,7 @@ handlestartaipart(var_0) {
 
   if(isDefined(self.enemy.fndogmeleevictim)) {
     self.enemy animcustom(self.enemy.fndogmeleevictim);
-  }
-  else {
+  } else {
     self.enemy animcustom(::meleestrugglevsdog_short);
   }
 }
@@ -294,8 +290,7 @@ handlevxnotetrack(var_0) {
 
       if(issubstr(var_0, "right")) {
         var_1 = "right";
-      }
-      else if(issubstr(var_0, "left")) {
+      } else if(issubstr(var_0, "left")) {
         var_1 = "left";
       }
 
@@ -342,8 +337,7 @@ meleestrugglevsdog_short() {
 
         if(isDefined(self.syncedmeleetarget.controlling_dog)) {
           thread animscripts\face::saygenericdialogue("dogdeathshortplr");
-        }
-        else {
+        } else {
           thread animscripts\face::saygenericdialogue("dogdeathshort");
         }
 
@@ -358,8 +352,7 @@ meleestrugglevsdog_short() {
 
         if(isDefined(self.syncedmeleetarget.controlling_dog)) {
           thread animscripts\face::saygenericdialogue("dogdeathshortplr");
-        }
-        else {
+        } else {
           thread animscripts\face::saygenericdialogue("dogdeathshort");
         }
 
@@ -374,8 +367,7 @@ meleestrugglevsdog_short() {
 
         if(isDefined(self.syncedmeleetarget.controlling_dog)) {
           thread animscripts\face::saygenericdialogue("dogdeathshortplr");
-        }
-        else {
+        } else {
           thread animscripts\face::saygenericdialogue("dogdeathshort");
         }
 
@@ -383,8 +375,7 @@ meleestrugglevsdog_short() {
       default:
         if(isDefined(self.syncedmeleetarget.controlling_dog)) {
           thread animscripts\face::saygenericdialogue("dogdeathlongplr");
-        }
-        else {
+        } else {
           thread animscripts\face::saygenericdialogue("dogdeathlong");
         }
     }

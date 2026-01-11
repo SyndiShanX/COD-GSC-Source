@@ -33,8 +33,7 @@ run_subclass_spawn_function() {
 subclass_regular() {
   if(self.team == "allies") {
     subclass_regular_allies();
-  }
-  else {
+  } else {
     subclass_regular_axis();
   }
 }
@@ -46,5 +45,4 @@ subclass_regular_allies() {
   self.maxfaceenemydist = 350;
 }
 
-subclass_regular_axis() {
-}
+subclass_regular_axis() {}

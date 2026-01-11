@@ -7,11 +7,10 @@
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_customgame;
 #include scripts\zm_common\zm_stats;
-
 #namespace zm_bgb_wall_power;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_wall_power", &__init__, undefined, #"bgb");
+  system::register(#"zm_bgb_wall_power", &__init__, undefined, # "bgb");
 }
 
 __init__() {
@@ -23,7 +22,7 @@ __init__() {
 }
 
 event() {
-  self endon(#"disconnect", #"bgb_update");
+  self endon(#"disconnect", # "bgb_update");
   self waittill(#"zm_bgb_wall_power_used");
   self playsoundtoplayer(#"zmb_bgb_wall_power", self);
   self zm_stats::increment_challenge_stat(#"gum_gobbler_wall_power");

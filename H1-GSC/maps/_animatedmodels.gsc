@@ -28,7 +28,7 @@ main() {
     var_1 = " ";
 
     foreach(var_3 in level.init_animatedmodels_dump) {
-    var_1 = var_1 + (var_3 + " ");
+      var_1 = var_1 + (var_3 + " ");
     }
   }
 
@@ -50,8 +50,7 @@ main() {
 
     if(var_8) {
       var_6 thread animatetreewind();
-    }
-    else {
+    } else {
       var_6 thread animatemodel();
     }
   }
@@ -237,8 +236,7 @@ heliwind_init_spawn_tracker() {
 heliwind_track_heli_alive() {
   if(isspawner(self)) {
     self waittill("spawned", var_0);
-  }
-  else {
+  } else {
     var_0 = self;
   }
 

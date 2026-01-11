@@ -73,8 +73,7 @@ func_A2A9(var_00) {
 func_490C(var_00, var_01) {
   if(!isDefined(var_00)) {
     self.func_CB89 = func_1063A();
-  }
-  else {
+  } else {
     self.func_CB89 = var_00;
   }
 
@@ -158,8 +157,7 @@ func_B156(var_00, var_01, var_02, var_03) {
 
     if(var_04 == "tag_flash") {
       var_04 = "tag_flash_2";
-    }
-    else {
+    } else {
       var_04 = "tag_flash";
     }
 
@@ -216,8 +214,7 @@ func_C3DB(var_00, var_01, var_02) {
 
   if(isDefined(self.func_B6B6)) {
     var_03 = self.func_B6B6;
-  }
-  else {
+  } else {
     var_03 = "magic_spaceship_30mm_projectile";
   }
 
@@ -241,8 +238,7 @@ func_C3DB(var_00, var_01, var_02) {
 
     if(var_06 == "TAG_FLASH_right") {
       var_06 = "TAG_FLASH_left";
-    }
-    else {
+    } else {
       var_06 = "TAG_FLASH_right";
     }
 
@@ -260,8 +256,7 @@ func_C3D9(var_00, var_01, var_02, var_03) {
 
   if(isDefined(self.func_B6B6)) {
     var_06 = self.func_B6B6;
-  }
-  else {
+  } else {
     var_06 = "magic_spaceship_30mm_projectile";
   }
 
@@ -282,8 +277,7 @@ func_C3D9(var_00, var_01, var_02, var_03) {
 
     if(var_08 || !isDefined(var_00)) {
       var_11 = var_10 + anglesToForward(self.angles) * 1000;
-    }
-    else {
+    } else {
       var_11 = func_7D3F(var_0.origin, var_02, var_03);
     }
 
@@ -291,8 +285,7 @@ func_C3D9(var_00, var_01, var_02, var_03) {
 
     if(var_07 == "tag_flash_right") {
       var_07 = "tag_flash_left";
-    }
-    else {
+    } else {
       var_07 = "tag_flash_right";
     }
 
@@ -304,15 +297,13 @@ func_7D3F(var_00, var_01, var_02) {
   if(isDefined(var_02)) {
     if(isDefined(var_01)) {
       return var_00 + scripts\engine\utility::randomvectorrange(var_01, var_02);
-    }
-    else {
+    } else {
       return var_00 + scripts\engine\utility::randomvectorrange(0, var_02);
     }
   } else if(isDefined(var_01)) {
     if(isDefined(var_02)) {
       return var_00 + scripts\engine\utility::randomvectorrange(var_01, var_02);
-    }
-    else {
+    } else {
       return var_00 + scripts\engine\utility::randomvectorrange(0, var_01);
     }
   }
@@ -330,8 +321,7 @@ func_B155(var_00, var_01, var_02, var_03) {
 
   if(isDefined(var_03)) {
     var_07 = var_03;
-  }
-  else {
+  } else {
     var_07 = 0.1;
   }
 
@@ -345,8 +335,7 @@ func_B155(var_00, var_01, var_02, var_03) {
     if(isDefined(var_01)) {
       if(isDefined(var_1.model) && scripts\sp\utility::hastag(var_1.model, "tag_eye")) {
         var_12 = var_01 gettagorigin("tag_eye");
-      }
-      else {
+      } else {
         var_12 = var_1.origin;
       }
     } else {
@@ -366,8 +355,7 @@ func_B155(var_00, var_01, var_02, var_03) {
 
       if(var_04 == "tag_flash") {
         var_04 = "tag_flash_2";
-      }
-      else {
+      } else {
         var_04 = "tag_flash";
       }
     }
@@ -506,7 +494,7 @@ func_A335(var_00) {
   self showallparts();
 
   foreach(var_02 in self.func_8E5D) {
-  self _meth_8189(var_02);
+    self _meth_8189(var_02);
   }
 }
 
@@ -601,8 +589,7 @@ func_A19D(var_00) {
 
   if(var_00) {
     setdvar("scr_jackalDemigod", 1);
-  }
-  else {
+  } else {
     setdvar("scr_jackalDemigod", 0);
   }
 }
@@ -662,8 +649,7 @@ func_ACF8() {
   for(;;) {
     if(!isDefined(level.func_D127)) {
       var_00 = level.player;
-    }
-    else {
+    } else {
       var_00 = level.func_D127;
     }
 
@@ -742,8 +728,7 @@ func_19B8(var_00) {
 
   if(var_00) {
     self.func_3D4F = 1;
-  }
-  else {
+  } else {
     self.func_3D4F = undefined;
   }
 }
@@ -886,8 +871,7 @@ func_A202(var_00) {
 func_A288(var_00) {
   if(var_00) {
     func_1980(1, 1);
-  }
-  else {
+  } else {
     func_1980();
   }
 }
@@ -905,8 +889,7 @@ func_A342(var_00, var_01, var_02) {
 
   if(isDefined(var_02) && var_02) {
     var_03 = self.origin;
-  }
-  else {
+  } else {
     var_03 = undefined;
   }
 
@@ -950,8 +933,7 @@ func_7BBA() {
 
   if(isDefined(var_00)) {
     return var_0.origin;
-  }
-  else {
+  } else {
     return level.player.origin;
   }
 }
@@ -961,8 +943,7 @@ func_7BB9() {
 
   if(isDefined(var_00)) {
     return var_0.angles;
-  }
-  else {
+  } else {
     return level.player.angles;
   }
 }
@@ -1246,8 +1227,7 @@ func_394B(var_00, var_01) {
 
   if(var_00 > var_01) {
     var_00 = var_01;
-  }
-  else if(var_00 < var_01 * -1) {
+  } else if(var_00 < var_01 * -1) {
     var_00 = var_01 * -1;
   }
 
@@ -1341,8 +1321,7 @@ func_A16E(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 
   if(isDefined(var_07)) {
     self.func_A491 = var_07;
-  }
-  else {
+  } else {
     self.func_A491 = 0;
   }
 
@@ -1383,8 +1362,7 @@ func_A25B(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_05) && var_05) {
     self linkto(level.func_D127, var_01, var_02, var_03);
-  }
-  else if(!isDefined(var_04)) {
+  } else if(!isDefined(var_04)) {
     level.player.spaceship_linked_ent = self;
     level.player _meth_8468(self, var_01, var_00, var_02, var_03);
   } else {
@@ -1518,8 +1496,7 @@ func_A07D() {
 
   if(self.model == "veh_mil_air_un_jackal_landed_03b") {
     var_01 = (-3.99147, 0, -15.6889);
-  }
-  else {
+  } else {
     var_01 = (0, 0, 0);
   }
 
@@ -1555,8 +1532,7 @@ func_A2DA() {
 func_8B87() {
   if(self.func_93D2.size > 0) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -1588,8 +1564,7 @@ func_9C1B(var_00) {
 
   if(var_01 > var_00) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -1621,8 +1596,7 @@ func_9C1A(var_00) {
 
   if(var_01 < var_00) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -1657,8 +1631,7 @@ func_A14D(var_00) {
 
   if(var_00) {
     _setsaveddvar("spaceshipResolvePenetration", 0);
-  }
-  else {
+  } else {
     _setsaveddvar("spaceshipResolvePenetration", 1);
   }
 }
@@ -1678,8 +1651,7 @@ func_A162(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_targetAid");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_targetAid");
   }
 }
@@ -1711,8 +1683,7 @@ func_A163(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_targetAid_update");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_targetAid_update");
   }
 }
@@ -1724,8 +1695,7 @@ jackal_disable_damage_vision_distortion(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_damage_vision_distortion");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_damage_vision_distortion");
   }
 }
@@ -1775,8 +1745,7 @@ func_A15C(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_mode_switch");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_mode_switch");
   }
 }
@@ -1788,8 +1757,7 @@ func_A154(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_cockpit_VO");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_cockpit_VO");
   }
 }
@@ -1801,8 +1769,7 @@ func_A15B(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_missiles");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_missiles");
   }
 }
@@ -1814,8 +1781,7 @@ func_A14F(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_emp");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_emp");
   }
 }
@@ -1827,8 +1793,7 @@ func_A158(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_map_boundary_autoturn");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_map_boundary_autoturn");
   }
 }
@@ -1840,8 +1805,7 @@ func_A159(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_map_boundary_push");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_map_boundary_push");
   }
 }
@@ -1853,8 +1817,7 @@ func_A15A(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_map_boundary_warning");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_map_boundary_warning");
   }
 }
@@ -1866,8 +1829,7 @@ func_A155(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_juke");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_juke");
   }
 
@@ -1881,8 +1843,7 @@ func_A161(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_roll");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_roll");
   }
 
@@ -1898,8 +1859,7 @@ func_A15E(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_overheat");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_overheat");
   }
 }
@@ -1911,8 +1871,7 @@ func_A14E(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_dogfight");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_dogfight");
   }
 }
@@ -1924,8 +1883,7 @@ func_A151(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_flares");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_flares");
   }
 }
@@ -1986,8 +1944,7 @@ func_A166(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_weapon_switch");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_weapon_switch");
   }
 }
@@ -2042,8 +1999,7 @@ func_A15F(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_pilot_assist");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("disable_jackal_pilot_assist");
   }
 
@@ -2058,8 +2014,7 @@ func_A15D(var_00) {
 
   if(var_00) {
     level.func_A056.func_1C54 = 0;
-  }
-  else {
+  } else {
     level.func_A056.func_1C54 = 1;
   }
 }
@@ -2071,8 +2026,7 @@ func_A14B(var_00) {
 
   if(var_00) {
     level.func_A056.func_1C3C = 0;
-  }
-  else {
+  } else {
     level.func_A056.func_1C3C = 1;
   }
 }
@@ -2084,8 +2038,7 @@ func_A165(var_00) {
 
   if(var_00) {
     level.func_A056.func_1C6D = 0;
-  }
-  else {
+  } else {
     level.func_A056.func_1C6D = 1;
   }
 }
@@ -2173,8 +2126,7 @@ func_A164(var_00) {
 
   if(var_00) {
     level.func_A056.func_1C6C = 0;
-  }
-  else {
+  } else {
     level.func_A056.func_1C6C = 1;
   }
 
@@ -2195,7 +2147,7 @@ func_A156(var_00) {
     level.player scripts\sp\utility::func_65E1("disable_jackal_lockon");
 
     foreach(var_02 in level.func_A056.targets) {
-    var_02 func_105D9();
+      var_02 func_105D9();
     }
 
     setomnvar("ui_jackal_callouts_enabled", 0);
@@ -2242,8 +2194,7 @@ func_A0BE(var_00) {
 func_9CC8() {
   if(isDefined(self.func_AEDF)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -2334,29 +2285,25 @@ func_D2A0(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 
   if(!isDefined(var_02)) {
     self.func_AB78 = 1000;
-  }
-  else {
+  } else {
     self.func_AB78 = var_02;
   }
 
   if(!isDefined(var_03)) {
     self.func_AB82 = 0.05;
-  }
-  else {
+  } else {
     self.func_AB82 = var_03;
   }
 
   if(!isDefined(var_04)) {
     self.func_AB8D = 0.15;
-  }
-  else {
+  } else {
     self.func_AB8D = var_04;
   }
 
   if(!isDefined(var_05)) {
     self.func_AB72 = 0.07;
-  }
-  else {
+  } else {
     self.func_AB72 = var_05;
   }
 
@@ -2391,50 +2338,43 @@ func_D29A(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if(!isDefined(var_02)) {
     var_12 = self.func_11514;
-  }
-  else {
+  } else {
     var_12 = var_02;
   }
 
   if(!isDefined(var_03)) {
     var_13 = self.func_AB78;
-  }
-  else {
+  } else {
     var_13 = var_03;
   }
 
   if(!isDefined(var_04)) {
     var_14 = self.func_AB82;
-  }
-  else {
+  } else {
     var_14 = var_04;
   }
 
   if(!isDefined(var_05)) {
     var_15 = self.func_AB8D;
-  }
-  else {
+  } else {
     var_15 = var_05;
   }
 
   if(!isDefined(var_06)) {
     var_16 = self.func_AB72;
-  }
-  else {
+  } else {
     var_16 = var_06;
   }
 
   if(!isDefined(var_07)) {
     var_17 = self.func_BC68;
-  }
-  else {
+  } else {
     var_17 = var_07;
   }
 
   if(!isDefined(var_08)) {
     var_18 = self.func_AFF9;
-  }
-  else {
+  } else {
     var_18 = var_08;
   }
 
@@ -2545,15 +2485,13 @@ func_D2A2(var_00, var_01, var_02) {
 
   if(self.func_11535 > var_11) {
     self.func_11535 = var_11;
-  }
-  else if(self.func_11535 < var_12) {
+  } else if(self.func_11535 < var_12) {
     self.func_11535 = var_12;
   }
 
   if(self.func_11533 < var_13) {
     self.func_11533 = var_13;
-  }
-  else if(self.func_11533 > var_14) {
+  } else if(self.func_11533 > var_14) {
     self.func_11533 = var_14;
   }
 
@@ -2626,8 +2564,7 @@ func_4323(var_00) {
 
   if(var_00) {
     var_01 = "cockpit_light_monitor";
-  }
-  else {
+  } else {
     var_01 = "cockpit_light_monitor_boot";
   }
 
@@ -2896,8 +2833,7 @@ func_11544(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 
   if(isDefined(var_02)) {
     self.func_AEDF.func_3A5C = var_02;
-  }
-  else {
+  } else {
     self.func_AEDF.func_3A5C = "none";
   }
 
@@ -2905,8 +2841,7 @@ func_11544(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 
   if(!isDefined(var_03)) {
     self.func_AEDF.func_3782 = "none";
-  }
-  else {
+  } else {
     self.func_AEDF.func_3782 = var_03;
   }
 
@@ -2916,8 +2851,7 @@ func_11544(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 
   if(isDefined(var_06) && var_06) {
     var_08 = 0;
-  }
-  else {
+  } else {
     var_08 = 1;
   }
 
@@ -2929,8 +2863,7 @@ func_11544(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
       if(!isDefined(var_01)) {
         if(isDefined(self.func_EDB8)) {
           self.name = self.func_EDB8;
-        }
-        else {
+        } else {
           scripts\sp\names::func_7B07("unitednations");
         }
 
@@ -2953,8 +2886,7 @@ func_11544(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 
     if(isstring(var_01)) {
       self _meth_8307(var_01, &"");
-    }
-    else {
+    } else {
       self _meth_8307("", var_01);
     }
 
@@ -3173,8 +3105,7 @@ func_105D7(var_00) {
 
   if(isDefined(var_00)) {
     var_01 = var_00;
-  }
-  else {
+  } else {
     var_01 = "jackal_impact_target";
   }
 
@@ -3245,8 +3176,7 @@ func_105D6() {
 
   if(self.func_AEDF.func_C940) {
     level.func_A056.func_C93E = scripts\engine\utility::array_add(level.func_A056.func_C93E, self);
-  }
-  else if(self.func_AEDF.func_3A5B) {
+  } else if(self.func_AEDF.func_3A5B) {
     func_0B76::func_F42C(self.func_AEDF.func_3A5C);
   }
 
@@ -3256,8 +3186,7 @@ func_105D6() {
 func_7B9B() {
   if(scripts\engine\utility::player_is_in_jackal()) {
     return level.func_D127 gettagorigin("tag_camera");
-  }
-  else {
+  } else {
     return level.player getEye();
   }
 }
@@ -3265,8 +3194,7 @@ func_7B9B() {
 func_7B9F() {
   if(scripts\engine\utility::player_is_in_jackal()) {
     return level.func_D127 gettagangles("tag_camera");
-  }
-  else {
+  } else {
     return level.player getEye();
   }
 }
@@ -3300,8 +3228,7 @@ func_10CD3(var_00, var_01) {
     if(isstring(var_01)) {
       if(_isstruct(scripts\engine\utility::getstruct(var_01, "targetname"))) {
         var_01 = scripts\engine\utility::getstruct(var_01, "targetname");
-      }
-      else if(_isent(getent(var_01, "targetname"))) {
+      } else if(_isent(getent(var_01, "targetname"))) {
         var_01 = getent(var_01, "targetname");
       }
     }
@@ -3310,8 +3237,7 @@ func_10CD3(var_00, var_01) {
 
     if(isDefined(var_1.angles)) {
       var_03 = var_1.angles;
-    }
-    else {
+    } else {
       var_03 = (0, 0, 0);
     }
 
@@ -3338,33 +3264,25 @@ func_10CD4(var_00, var_01, var_02, var_03) {
 
   if(var_02 == "runway") {
     var_00 func_F48D("runway");
-  }
-  else if(var_02 == "retribution") {
+  } else if(var_02 == "retribution") {
     var_00 func_F48D("retribution");
-  }
-  else if(var_02 == "shipcrib_europa_launch") {
+  } else if(var_02 == "shipcrib_europa_launch") {
     var_00 func_F48D("shipcrib_europa_launch");
-  }
-  else {
+  } else {
     var_00 func_F48D("instant_" + var_02);
   }
 
   if(isDefined(var_03)) {
     var_00 func_F5BD(var_03);
-  }
-  else if(var_02 == "land") {
+  } else if(var_02 == "land") {
     var_00 func_F5BD("vtol");
-  }
-  else if(var_02 == "runway") {
+  } else if(var_02 == "runway") {
     var_00 func_F5BD("runway");
-  }
-  else if(var_02 == "retribution") {
+  } else if(var_02 == "retribution") {
     var_00 func_F5BD("retribution");
-  }
-  else if(var_02 == "shipcrib") {
+  } else if(var_02 == "shipcrib") {
     var_00 func_F5BD("shipcrib");
-  }
-  else {
+  } else {
     var_00 func_F5BD("instant");
   }
 
@@ -3372,8 +3290,7 @@ func_10CD4(var_00, var_01, var_02, var_03) {
     if(isstring(var_01)) {
       if(_isstruct(scripts\engine\utility::getstruct(var_01, "targetname"))) {
         var_01 = scripts\engine\utility::getstruct(var_01, "targetname");
-      }
-      else if(_isent(getent(var_01, "targetname"))) {
+      } else if(_isent(getent(var_01, "targetname"))) {
         var_01 = getent(var_01, "targetname");
       }
     }
@@ -3382,8 +3299,7 @@ func_10CD4(var_00, var_01, var_02, var_03) {
 
     if(isDefined(var_1.angles)) {
       var_05 = var_1.angles;
-    }
-    else {
+    } else {
       var_05 = (0, 0, 0);
     }
 
@@ -3577,7 +3493,7 @@ func_A2D7(var_00) {
   }
 
   foreach(var_03, var_02 in level.func_A056.func_BBB9["force"].func_3C66) {
-  level.func_A056 thread func_A0D0("force", var_03, (0, 0, 0), var_00);
+    level.func_A056 thread func_A0D0("force", var_03, (0, 0, 0), var_00);
   }
 }
 
@@ -3654,8 +3570,7 @@ func_A0D0(var_00, var_01, var_02, var_03) {
 func_A325(var_00, var_01, var_02) {
   if(length(var_02) == 0) {
     self.func_BBB9[var_00].func_3C66 = scripts\sp\utility::func_22B3(self.func_BBB9[var_00].func_3C66, [var_01]);
-  }
-  else {
+  } else {
     self.func_BBB9[var_00].func_3C66[var_01] = var_02;
   }
 }
@@ -3701,8 +3616,7 @@ func_137DB() {
   for(;;) {
     if(func_A2A7()) {
       return;
-    }
-    else {
+    } else {
       wait 0.05;
     }
   }
@@ -3712,8 +3626,7 @@ func_137D9() {
   for(;;) {
     if(!func_A2A7()) {
       return;
-    }
-    else {
+    } else {
       wait 0.05;
     }
   }
@@ -3789,7 +3702,7 @@ func_CF50(var_00) {
   func_E0A1();
 
   foreach(var_02 in level.func_A056.func_12F96) {
-  var_02 func_104A6(var_00);
+    var_02 func_104A6(var_00);
   }
 }
 
@@ -3800,8 +3713,7 @@ func_104A0() {
 func_7A5B(var_00) {
   if(scripts\engine\utility::player_is_in_jackal()) {
     return var_00;
-  }
-  else {
+  } else {
     return var_00 + "_grnd";
   }
 }
@@ -3809,8 +3721,7 @@ func_7A5B(var_00) {
 func_9BDE() {
   if(isDefined(self.classname) && self.classname == "script_vehicle_jackal_fake_enemy") {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -3818,8 +3729,7 @@ func_9BDE() {
 func_9CF5() {
   if(isDefined(self.spawnflags) && self.spawnflags & 1) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -3827,8 +3737,7 @@ func_9CF5() {
 func_A2A7() {
   if(isDefined(self.owner) && self.owner == level.player) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -3850,8 +3759,7 @@ func_A06A(var_00) {
 
   if(var_00) {
     level.player scripts\sp\utility::func_65E1("flag_player_landing_enabled");
-  }
-  else {
+  } else {
     level.player scripts\sp\utility::func_65DD("flag_player_landing_enabled");
   }
 
@@ -3888,7 +3796,7 @@ func_A24B(var_00, var_01) {
   }
 
   foreach(var_04 in var_02) {
-  func_6211(var_04, var_01);
+    func_6211(var_04, var_01);
   }
 }
 
@@ -3912,7 +3820,7 @@ func_A24A(var_00) {
     var_3.func_1270F delete();
 
     foreach(var_07 in var_3.lights) {
-    var_07 delete();
+      var_07 delete();
     }
   }
 }
@@ -3974,16 +3882,14 @@ func_9C87(var_00, var_01) {
 
   if(_isent(var_00) || _isstruct(var_00)) {
     var_02 = var_0.origin;
-  }
-  else if(!_isvector(var_00)) {} else
+  } else if(!_isvector(var_00)) {} else
     var_02 = var_00;
 
   var_03 = vectordot(vectornormalize(var_02 - self.origin), anglesToForward(self.angles));
 
   if(var_03 > var_01) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -3993,16 +3899,14 @@ func_9B92(var_00, var_01) {
 
   if(_isent(var_00) || _isstruct(var_00)) {
     var_02 = var_0.origin;
-  }
-  else if(!_isvector(var_00)) {} else
+  } else if(!_isvector(var_00)) {} else
     var_02 = var_00;
 
   var_03 = distance(self.origin, var_02);
 
   if(var_03 < var_01) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -4067,8 +3971,7 @@ func_7AFB() {
 func_7B9E() {
   if(!isDefined(level.func_D127)) {
     return 0;
-  }
-  else {
+  } else {
     return length(level.func_D127.spaceship_vel);
   }
 }
@@ -4076,8 +3979,7 @@ func_7B9E() {
 func_7B9C() {
   if(!isDefined(level.func_D127)) {
     return 0;
-  }
-  else {
+  } else {
     var_00 = rotatevectorinverted(level.func_D127.spaceship_vel, level.func_D127.angles);
     return var_0[0];
   }
@@ -4100,8 +4002,7 @@ func_D165(var_00, var_01, var_02, var_03, var_04, var_05) {
 func_D155(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(isDefined(var_04) && var_04) {
     var_06 = "absolute";
-  }
-  else {
+  } else {
     var_06 = "desires";
   }
 
@@ -4242,8 +4143,7 @@ func_2B74(var_00, var_01, var_02, var_03, var_04, var_05) {
 
     if(var_07 < 0.5) {
       self linkto(var_00, var_04, rotatevectorinverted(var_18 - var_16, var_08), var_15 - var_08);
-    }
-    else {
+    } else {
       self linkto(var_01, var_05, rotatevectorinverted(var_18 - var_17, var_09), var_15 - var_09);
     }
 
@@ -4261,11 +4161,9 @@ func_2B74(var_00, var_01, var_02, var_03, var_04, var_05) {
 func_13DE7(var_00, var_01) {
   if(var_0[var_01] > 180) {
     var_02 = var_0[var_01] - 360;
-  }
-  else if(var_0[var_01] < -180) {
+  } else if(var_0[var_01] < -180) {
     var_02 = var_0[var_01] + 360;
-  }
-  else {
+  } else {
     var_02 = var_0[var_01];
   }
 
@@ -4453,8 +4351,7 @@ func_A1ED(var_00, var_01, var_02, var_03) {
 
   if(isDefined(var_03) && var_03) {
     var_04 = _calccsplineclosestpoint(var_00, self.origin);
-  }
-  else {
+  } else {
     var_04 = getcsplinepointposition(var_00, 0);
   }
 
@@ -4591,8 +4488,7 @@ func_A1F4(var_00, var_01, var_02, var_03) {
 
   if(isDefined(var_03) && var_03) {
     var_05 = var_4.angles;
-  }
-  else {
+  } else {
     var_05 = undefined;
   }
 
@@ -4611,8 +4507,7 @@ func_A1EC(var_00, var_01, var_02, var_03) {
 
   if(isDefined(var_03)) {
     self _meth_8455(var_00, var_01, var_03);
-  }
-  else {
+  } else {
     self _meth_8455(var_00, var_01);
   }
 
@@ -4620,8 +4515,7 @@ func_A1EC(var_00, var_01, var_02, var_03) {
 
   if(var_01) {
     self waittill("goal");
-  }
-  else {
+  } else {
     self waittill("near_goal");
   }
 }
@@ -4783,8 +4677,7 @@ func_19A0(var_00) {
 
   if(var_00) {
     func_19A2();
-  }
-  else {
+  } else {
     func_1986();
   }
 }
@@ -4800,8 +4693,7 @@ func_19AB(var_00, var_01, var_02, var_03) {
 func_19AC(var_00, var_01, var_02, var_03) {
   if(!isDefined(var_00)) {
     self.var_1198.func_23A4 = func_0C21::func_9536();
-  }
-  else {
+  } else {
     self.var_1198.func_23A4.speed = var_00;
 
     if(isDefined(var_01)) {
@@ -4823,8 +4715,7 @@ func_19AC(var_00, var_01, var_02, var_03) {
 func_19AD(var_00, var_01, var_02, var_03) {
   if(!isDefined(var_00)) {
     self.var_1198.func_1113B = func_0C21::func_976D();
-  }
-  else {
+  } else {
     self.var_1198.func_1113B.speed = var_00;
 
     if(isDefined(var_01)) {
@@ -4864,8 +4755,7 @@ func_ACE8(var_00, var_01) {
     }
     if(isDefined(var_01)) {
       var_02 = self gettagorigin(var_01);
-    }
-    else {
+    } else {
       var_02 = self.origin;
     }
 
@@ -4903,8 +4793,7 @@ func_1995(var_00) {
 
   if(var_00 == "up") {
     var_01 = _func_2EE(self.asmname, "cannon_state", "up", 0);
-  }
-  else {
+  } else {
     var_01 = _func_2EE(self.asmname, "cannon_state", "down", 0);
   }
 
@@ -5001,8 +4890,7 @@ func_D52C(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_04)) {
     func_D52D(var_06, "sounddone", var_04);
-  }
-  else {
+  } else {
     var_06 waittill("sounddone");
   }
 
@@ -5049,8 +4937,7 @@ func_A287(var_00) {
   if(isDefined(var_00)) {
     if(isDefined(level.script) && level.script == "moonjackal") {
       level.player scripts\engine\utility::delaycall(1, ::_meth_82C0, "jackal_mute_engines", 1);
-    }
-    else {
+    } else {
       level.player _meth_82C0("jackal_mute_engines", var_00);
     }
   } else
@@ -5061,8 +4948,7 @@ func_A388(var_00) {
   if(isDefined(var_00)) {
     if(isDefined(level.script) && level.script == "moonjackal") {
       level.player scripts\engine\utility::delaycall(2, ::_meth_82C0, "jackal_cockpit", 0.5);
-    }
-    else {
+    } else {
       level.player _meth_82C0("jackal_cockpit", var_00);
     }
   } else
@@ -5129,8 +5015,7 @@ func_9BCF() {
 func_9CB2() {
   if(isDefined(self.var_1198) && self.var_1198.func_EF72) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -5138,8 +5023,7 @@ func_9CB2() {
 func_9B67() {
   if(isDefined(self.var_1198) && self.var_1198.animscriptedactive) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -5147,8 +5031,7 @@ func_9B67() {
 func_9C06() {
   if(isDefined(self.var_1198) && isDefined(self.var_1198.func_90EE)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

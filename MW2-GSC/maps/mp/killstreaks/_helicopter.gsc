@@ -207,8 +207,7 @@ tryUseHelicopter(lifeId, heliType) {
 
     if(isDefined(heliType)) {
       streakName = "helicopter_" + heliType;
-    }
-    else {
+    } else {
       streakName = "helicopter";
     }
 
@@ -527,7 +526,7 @@ endRide(chopper) {
 
   weaponList = self GetWeaponsListExclusives();
   foreach(weapon in weaponList) {
-  self takeWeapon(weapon);
+    self takeWeapon(weapon);
   }
 
   if(isDefined(chopper)) {
@@ -647,8 +646,7 @@ heli_think(lifeId, owner, startnode, heli_team, heliType) {
       vehicleType = "cobra_minigun_mp";
       if(owner.team == "allies") {
         vehicleModel = "vehicle_apache_mp";
-      }
-      else {
+      } else {
         vehicleModel = "vehicle_mi-28_mp";
       }
       break;
@@ -656,8 +654,7 @@ heli_think(lifeId, owner, startnode, heli_team, heliType) {
       vehicleType = "pavelow_mp";
       if(owner.team == "allies") {
         vehicleModel = "vehicle_pavelow";
-      }
-      else {
+      } else {
         vehicleModel = "vehicle_pavelow_opfor";
       }
       break;
@@ -665,8 +662,7 @@ heli_think(lifeId, owner, startnode, heli_team, heliType) {
       vehicleType = "cobra_mp";
       if(owner.team == "allies") {
         vehicleModel = "vehicle_cobra_helicopter_fly_low";
-      }
-      else {
+      } else {
         vehicleModel = "vehicle_mi24p_hind_mp";
       }
       break;
@@ -687,8 +683,7 @@ heli_think(lifeId, owner, startnode, heli_team, heliType) {
 
   if(heliType == "flares") {
     chopper.maxhealth = level.heli_maxhealth * 2; // max health
-  }
-  else {
+  } else {
     chopper.maxhealth = level.heli_maxhealth; // max health
   }
 
@@ -734,8 +729,7 @@ heli_think(lifeId, owner, startnode, heli_team, heliType) {
       chopper thread heli_leave_on_timeout(40.0);
       if(attackAreas.size) {
         chopper thread heli_fly_well(attackAreas);
-      }
-      else {
+      } else {
         chopper thread heli_fly_loop_path(loopNode);
       }
       break;
@@ -824,8 +818,7 @@ sentry_attackTargets() {
 
     if(self isFiringTurret()) {
       self thread sentry_burstFireStart();
-    }
-    else {
+    } else {
       self thread sentry_burstFireStop();
     }
   }
@@ -986,7 +979,7 @@ canTarget_turret(player) {
 
 getBestPrimaryTarget(targets) {
   foreach(player in targets) {
-  update_player_threat(player);
+    update_player_threat(player);
   }
 
   // find primary target, highest threat level
@@ -1127,11 +1120,9 @@ heli_damage_monitor() {
       validAttacker = undefined;
       if(isDefined(attacker.owner) && (!isDefined(self.owner) || attacker.owner != self.owner)) {
         validAttacker = attacker.owner;
-      }
-      else if(!isDefined(attacker.owner) && attacker.classname == "script_vehicle") {
+      } else if(!isDefined(attacker.owner) && attacker.classname == "script_vehicle") {
         return;
-      }
-      else if(!isDefined(self.owner) || attacker != self.owner) {
+      } else if(!isDefined(self.owner) || attacker != self.owner) {
         validAttacker = attacker;
       }
 
@@ -1412,8 +1403,7 @@ attack_secondary() {
         // if selected target is not in missile hit range, skip
         if(self missile_target_sight_check(self.missileTarget)) {
           self thread missile_support(self.missileTarget, level.heli_missile_rof);
-        }
-        else {
+        } else {
           break;
         }
 
@@ -1496,8 +1486,7 @@ attack_primary() {
 
     if(randomInt(5) < 3) {
       angle = currentTarget.angles[1] + randomFloatRange(-30, 30);
-    }
-    else {
+    } else {
       angle = randomInt(360);
     }
 
@@ -1888,8 +1877,7 @@ debug_print3d_simple(message, ent, offset, frames) {
   if(isDefined(level.heli_debug) && level.heli_debug == 1.0) {
     if(isDefined(frames)) {
       thread draw_text(message, (0.8, 0.8, 0.8), ent, offset, frames);
-    }
-    else {
+    } else {
       thread draw_text(message, (0.8, 0.8, 0.8), ent, offset, 0);
     }
   }

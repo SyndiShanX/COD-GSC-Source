@@ -21,7 +21,7 @@ init() {
   level.fontheight = 12;
 
   foreach(team in level.teams) {
-  level.hud[team] = spawnStruct();
+    level.hud[team] = spawnStruct();
   }
 
   level.primaryprogressbary = -61;
@@ -79,8 +79,7 @@ fontpulse(player) {
 
   if(self.outframes == 0) {
     self.fontscale = 0.01;
-  }
-  else {
+  } else {
     self.fontscale = self.fontscale;
   }
 
@@ -126,8 +125,7 @@ fadetoblackforxsec(startwait, blackscreenwait, fadeintime, fadeouttime, shaderna
 
   if(isDefined(shadername)) {
     self.blackscreen setshader(shadername, 640, 480);
-  }
-  else {
+  } else {
     self.blackscreen setshader("black", 640, 480);
   }
 

@@ -63,8 +63,7 @@ TimeUntilspawn(includeTeamkillDelay) {
     result = self[[level.onRespawnDelay]]();
     if(isDefined(result)) {
       respawnDelay = result;
-    }
-    else {
+    } else {
       respawnDelay = getDvarInt("scr_" + level.gameType + "_playerrespawndelay");
     }
 
@@ -381,35 +380,28 @@ checkPredictedSpawnpointCorrectness(spawnpointorigin) {
     dist = distance(self.predictedSpawnPoint.origin, spawnpointorigin);
     if(dist <= 0) {
       level.spawnpointPrediction.buckets[0]++;
-    }
-    else if(dist <= 128) {
+    } else if(dist <= 128) {
       level.spawnpointPrediction.buckets[1]++;
-    }
-    else if(dist <= 256) {
+    } else if(dist <= 256) {
       level.spawnpointPrediction.buckets[2]++;
-    }
-    else if(dist <= 512) {
+    } else if(dist <= 512) {
       level.spawnpointPrediction.buckets[3]++;
-    }
-    else if(dist <= 1024) {
+    } else if(dist <= 1024) {
       level.spawnpointPrediction.buckets[4]++;
-    }
-    else if(dist <= 2048) {
+    } else if(dist <= 2048) {
       level.spawnpointPrediction.buckets[5]++;
-    }
-    else {
+    } else {
       level.spawnpointPrediction.buckets[6]++;
     }
 
     if(dist > 0) {
       println("Predicted player " + self.name + " would spawn at " + self.predictedSpawnPoint.origin + ", but spawned " + dist + " units away at " + spawnpointorigin);
-    }
-    else {
+    } else {
       println("Predicted " + self.name + "'s spawn " + ((gettime() - self.predictedSpawnPointTime) / 1000) + " seconds ahead of time");
     }
   }
 
-    self notify("used_predicted_spawnpoint");
+  self notify("used_predicted_spawnpoint");
   self.predictedSpawnPoint = undefined;
 }
 
@@ -504,8 +496,7 @@ spawnPlayer() {
 
     if(level.teamBased) {
       self playSoundToTeam("tactical_spawn", level.otherTeam[self.team]);
-    }
-    else {
+    } else {
       self playSound("tactical_spawn");
     }
 
@@ -539,7 +530,7 @@ spawnPlayer() {
     assert((level.teamBased && self.sessionteam == self.team) || (!level.teamBased && self.sessionteam == "none"));
   }
 
-    hadSpawned = self.hasSpawned;
+  hadSpawned = self.hasSpawned;
 
   self.fauxDead = undefined;
 
@@ -642,8 +633,7 @@ spawnPlayer() {
 
   if(!gameFlag("prematch_done")) {
     self freezeControlsWrapper(true);
-  }
-  else {
+  } else {
     self freezeControlsWrapper(false);
   }
 
@@ -654,11 +644,9 @@ spawnPlayer() {
 
     if(game["status"] == "overtime") {
       thread maps\mp\gametypes\_hud_message::oldNotifyMessage(game["strings"]["overtime"], game["strings"]["overtime_hint"], undefined, (1, 0, 0), "mp_last_stand");
-    }
-    else if(getIntProperty("useRelativeTeamColors", 0)) {
+    } else if(getIntProperty("useRelativeTeamColors", 0)) {
       thread maps\mp\gametypes\_hud_message::oldNotifyMessage(game["strings"][team + "_name"], undefined, game["icons"][team] + "_blue", game["colors"]["blue"]);
-    }
-    else {
+    } else {
       thread maps\mp\gametypes\_hud_message::oldNotifyMessage(game["strings"][team + "_name"], undefined, game["icons"][team], game["colors"][team]);
     }
 
@@ -748,8 +736,7 @@ in_spawnSpectator(origin, angles) {
 
   if(isDefined(self.pers["team"]) && self.pers["team"] == "spectator") {
     self.statusicon = "";
-  }
-  else {
+  } else {
     self.statusicon = "hud_status_dead";
   }
 
@@ -814,8 +801,7 @@ spawnIntermission() {
   if(level.rankedMatch && (self.postGamePromotion || self.pers["postGameChallenges"])) {
     if(self.postGamePromotion) {
       self playLocalSound("mp_level_up");
-    }
-    else {
+    } else {
       self playLocalSound("mp_challenge_complete");
     }
 
@@ -956,8 +942,7 @@ Callback_PlayerDisconnect() {
 
   if(self.sessionstate == "playing") {
     self maps\mp\gametypes\_playerlogic::removeFromAliveCount(true);
-  }
-  else if(self.sessionstate == "spectator") {
+  } else if(self.sessionstate == "spectator") {
     level thread maps\mp\gametypes\_gamelogic::updateGameEvents();
   }
 }
@@ -1051,7 +1036,7 @@ Callback_PlayerConnect() {
 
   connectTime = getTime();
 
-    level notify("connected", self);
+  level notify("connected", self);
   self.connected = true;
 
   if(self isHost()) {
@@ -1093,7 +1078,7 @@ Callback_PlayerConnect() {
       self.sessionteam = maps\mp\gametypes\_menus::getTeamAssignment();
     }
 
-      assert(getdvarint("scr_runlevelandquit") == 1 || (level.teamBased && (self.sessionteam == "allies" || self.sessionteam == "axis")) || (!level.teamBased && self.sessionteam == "none"));
+    assert(getdvarint("scr_runlevelandquit") == 1 || (level.teamBased && (self.sessionteam == "allies" || self.sessionteam == "axis")) || (!level.teamBased && self.sessionteam == "none"));
     //assert( (level.teamBased && self.sessionteam == self.team) || (!level.teamBased && self.sessionteam == "none") );
     setMatchData("players", self.clientid, "team", self.sessionteam);
   }
@@ -1148,10 +1133,10 @@ Callback_PlayerConnect() {
   waittillframeend;
 
   foreach(player in level.players) {
-  assert(player != self);
+    assert(player != self);
   }
 
-    level.players[level.players.size] = self;
+  level.players[level.players.size] = self;
 
   if(level.teambased) {
     self updateScores();
@@ -1163,8 +1148,7 @@ Callback_PlayerConnect() {
 
     if(matchMakingGame()) {
       self maps\mp\gametypes\_menus::addToTeam(maps\mp\gametypes\_menus::getTeamAssignment(), true);
-    }
-    else {
+    } else {
       self maps\mp\gametypes\_menus::addToTeam("spectator", true);
     }
 
@@ -1183,10 +1167,10 @@ Callback_PlayerConnect() {
     self.team = undefined;
   }
 
-    // only give a loss on the first connect
-    if(firstConnect) {
-      maps\mp\gametypes\_gamelogic::updateLossStats(self);
-    }
+  // only give a loss on the first connect
+  if(firstConnect) {
+    maps\mp\gametypes\_gamelogic::updateLossStats(self);
+  }
 
   level endon("game_ended");
 
@@ -1217,8 +1201,7 @@ Callback_PlayerConnect() {
 
     if(self.pers["team"] == "spectator") {
       self maps\mp\gametypes\_menus::beginTeamChoice();
-    }
-    else {
+    } else {
       self maps\mp\gametypes\_menus::beginClassChoice();
     }
   }
@@ -1288,7 +1271,7 @@ setRestXPGoal() {
 
   hoursSinceLastGame *= getDvarFloat("scr_restxp_timescale");
 
-    experience = self getPlayerData("experience");
+  experience = self getPlayerData("experience");
 
   minRestXPTime = getDvarFloat("scr_restxp_minRestTime"); // hours
   restXPGainRate = getDvarFloat("scr_restxp_levelsPerDay") / 24.0;
@@ -1357,8 +1340,7 @@ kickIfDontspawn() {
 
   if(self isHost()) {
     kickWait(120);
-  }
-  else {
+  } else {
     kickWait(waittime);
   }
 

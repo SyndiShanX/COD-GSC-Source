@@ -22,8 +22,7 @@ intro_cargo_light_test() {
 
   if(maps\_utility::is_gen4()) {
     var_0 = 15;
-  }
-  else {
+  } else {
     var_0 = 1.8;
   }
 

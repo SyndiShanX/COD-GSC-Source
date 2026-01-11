@@ -14,8 +14,7 @@ main(origin, duration, shock_range, nmaxdamagebase, nrandamagebase, nmindamageba
 
   if(!isDefined(duration)) {
     duration = 12;
-  }
-  else if(duration < 7) {
+  } else if(duration < 7) {
     duration = 7;
   }
 
@@ -49,8 +48,7 @@ shellshock_thread(duration, nmaxdamagebase, nrandamagebase, nmindamagebase, nexp
 
   if(isDefined(nrandamagebase) && nrandamagebase > 0) {
     maxdamage = nmaxdamagebase + randomint(nrandamagebase);
-  }
-  else {
+  } else {
     maxdamage = nmaxdamagebase;
   }
 

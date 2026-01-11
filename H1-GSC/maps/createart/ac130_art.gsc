@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\ac130_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\ac130_fog::main();
   }
 }

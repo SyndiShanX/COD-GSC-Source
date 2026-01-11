@@ -59,8 +59,7 @@ circle_target() {
   }
 }
 
-setup_defenses() {
-}
+setup_defenses() {}
 
 attack_target() {
   self notify("movementUpdate");
@@ -149,8 +148,7 @@ helicopter_movement() {
   while(true) {
     if(isDefined(self.cur_target)) {
       self attack_target();
-    }
-    else {
+    } else {
       wait 0.05;
     }
   }

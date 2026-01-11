@@ -34,7 +34,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_orange_mq_soapstone;
 
 preload() {
@@ -92,7 +91,7 @@ function_d878e1ee(var_a276c861) {
   zm_ui_inventory::function_7df6bb60(#"zm_orange_objective_progress", 4);
 
   if(!var_a276c861) {
-    zm_orange_pablo::function_3f9e02b8(7, #"hash_3a5a3e5c65b49526", #"hash_f90cca21dd0dd02", &function_a9c8883f);
+    zm_orange_pablo::function_3f9e02b8(7, # "hash_3a5a3e5c65b49526", # "hash_f90cca21dd0dd02", &function_a9c8883f);
     waitframe(1);
     zm_orange_pablo::function_d83490c5(7);
     level flag::wait_till(#"hash_710c2f40baf302c8");

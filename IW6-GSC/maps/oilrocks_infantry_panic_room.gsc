@@ -48,8 +48,7 @@ main2() {
 
   if(!isDefined(level.panic_room_startpoint)) {
     maps\_utility::nextmission();
-  }
-  else {
+  } else {
     iprintlnbold("started at panic room, skipping nextmission!");
   }
 }
@@ -282,7 +281,7 @@ rorke_take_down() {
 anim_reach_failsafe_hideprint(var_0, var_1) {
   if(isarray(var_0)) {
     foreach(var_3 in var_0) {
-    thread maps\_anim::anim_reach_failsafe(var_3, var_1);
+      thread maps\_anim::anim_reach_failsafe(var_3, var_1);
     }
 
     return;
@@ -341,8 +340,7 @@ modify_moveplaybackrate_together_local(var_0) {
 
       if(var_11 > var_1) {
         var_11 = var_1;
-      }
-      else if(var_11 < var_1 * -1) {
+      } else if(var_11 < var_1 * -1) {
         var_11 = var_1 * -1;
       }
 
@@ -394,7 +392,7 @@ window_crash() {
   var_1 = getglassorigin(var_0[0]);
 
   foreach(var_3 in var_0) {
-  destroyglass(var_3, anglesToForward(level.rorke.angles));
+    destroyglass(var_3, anglesToForward(level.rorke.angles));
   }
 }
 

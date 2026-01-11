@@ -1128,8 +1128,7 @@ sentry_placed_listener(rank) {
   if(IsSentient(newSentry)) {
     if(!is_chaos_mode()) {
       newSentry.threatbias = -1000;
-    }
-    else {
+    } else {
       newSentry.threatbias = -3500;
     }
   }
@@ -1559,8 +1558,7 @@ get_valid_minigun_turret_count() {
 CanPurchase_dpad_ims(def, rank) {
   if(isDefined(self.imsList)) {
     valid_ims_count = get_valid_equipment_count(self.imsList);
-  }
-  else {
+  } else {
     valid_ims_count = 0;
   }
 
@@ -2268,8 +2266,7 @@ is_equipment_valid(owner) {
 
   if(isDefined(self.in_world_area)) {
     equipment_world_area = self.in_world_area;
-  }
-  else {
+  } else {
     equipment_world_area = self get_in_world_area();
   }
 

@@ -38,7 +38,7 @@ exit_stage(success) {
   a_structs = getstructarray("fire_link", "targetname");
 
   foreach(unitrigger_stub in a_structs) {
-  unregister_unitrigger(unitrigger_stub);
+    unregister_unitrigger(unitrigger_stub);
   }
 }
 

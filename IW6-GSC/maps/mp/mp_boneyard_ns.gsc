@@ -60,11 +60,9 @@ main() {
   flag_inits();
   if(level.gameType == "sd" || level.gameType == "sr" || level.gameType == "grind") {
     setup_no_events(true, CONST_HORIZONTAL_FIRE);
-  }
-  else if(level.gameType == "blitz" || level.gameType == "horde" || isMLGSystemLink()) {
+  } else if(level.gameType == "blitz" || level.gameType == "horde" || isMLGSystemLink()) {
     setup_no_events(true);
-  }
-  else {
+  } else {
     setup_events();
   }
 
@@ -127,12 +125,12 @@ setup_events() {
 
   level.rocket_explo = getEntArray("rocket_explo_obj", "targetname");
   foreach(part in level.rocket_explo) {
-  part setup_rocket_explo_part();
+    part setup_rocket_explo_part();
   }
 
   tanks = GetScriptableArray("scriptable_toy_com_propane_tank02_cheap", "classname");
   foreach(tank in tanks) {
-  tank thread rocket_explo_tank_clip_swap();
+    tank thread rocket_explo_tank_clip_swap();
   }
 
   level thread maps\mp\mp_boneyard_ns_killstreak::boneyard_killstreak_activate();
@@ -186,7 +184,7 @@ setup_no_events(enable_killstreak, killstreak_exception) {
 
   tanks = GetScriptableArray("scriptable_toy_com_propane_tank02_cheap", "classname");
   foreach(tank in tanks) {
-  tank thread rocket_explo_tank_clip_swap();
+    tank thread rocket_explo_tank_clip_swap();
   }
 
   delayThread(3, ::mp_exploder, 21);
@@ -327,7 +325,7 @@ setup_rocket_explo_part() {
 
   wait(0.1);
   foreach(node in self.crash_path) {
-  DisconnectNodePair(node, GetNode(node.target, "targetname"));
+    DisconnectNodePair(node, GetNode(node.target, "targetname"));
   }
 }
 
@@ -485,7 +483,7 @@ event_rocket_explode(count_time, launch_time) {
   thread building_impact_timing();
 
   foreach(part in level.rocket_explo) {
-  part thread rocket_explo_drop_part();
+    part thread rocket_explo_drop_part();
   }
 
   explo_time = GetAnimLength(rocket_anim) * GetNotetrackTimes(rocket_anim, "rog_hit")[0];
@@ -645,7 +643,7 @@ rocket_explo_drop_part() {
 
   wait(0.1);
   foreach(node in self.crash_path) {
-  ConnectNodePair(node, GetNode(node.target, "targetname"));
+    ConnectNodePair(node, GetNode(node.target, "targetname"));
   }
 }
 
@@ -770,16 +768,14 @@ join_sync_exploders_proc() {
 
     if(myTime > -60000) {
       ActivateClientExploder(explo.num, self, myTime / 1000.0);
-    }
-    else {
+    } else {
       ActivateClientExploder(explo.num, self, -60);
     }
   }
 
   if(flag("flag_rocket_launched")) {
     GetScriptableArray("countdown_clock", "targetname")[0] SetScriptablePartState(0, 0);
-  }
-  else if(flag("flag_rocket_countdown_fx")) {
+  } else if(flag("flag_rocket_countdown_fx")) {
     self thread join_sync_countdown();
   }
 }

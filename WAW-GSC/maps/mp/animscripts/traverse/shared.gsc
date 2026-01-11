@@ -28,8 +28,7 @@ teleportThreadEx(verticalOffset, delay, frames) {
   amount = verticalOffset / frames;
   if(amount > 10.0) {
     amount = 10.0;
-  }
-  else if(amount < -10.0) {
+  } else if(amount < -10.0) {
     amount = -10.0;
   }
   offset = (0, 0, amount);

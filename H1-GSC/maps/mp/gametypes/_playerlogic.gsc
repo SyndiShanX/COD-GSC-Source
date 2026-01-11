@@ -47,8 +47,7 @@ getrespawndelay() {
 
   if(isDefined(var_0)) {
     return var_0;
-  }
-  else {
+  } else {
     return getdvarint("scr_" + level.gametype + "_playerrespawndelay");
   }
 }
@@ -116,8 +115,7 @@ mayspawn(var_0) {
 
     if(!self.pers["lives"] && maps\mp\_utility::gamehasstarted()) {
       return 0;
-    }
-    else if(maps\mp\_utility::gamehasstarted()) {
+    } else if(maps\mp\_utility::gamehasstarted()) {
       if(!level.ingraceperiod && !self.hasspawned && (isDefined(level.allowlatecomers) && !level.allowlatecomers)) {
         return 0;
       }
@@ -154,8 +152,7 @@ spawnclient() {
     if(maps\mp\_utility::isroundbased() && !maps\mp\_utility::islastround()) {
       if(isDefined(self.tagavailable) && self.tagavailable) {
         maps\mp\_utility::setlowermessage("spawn_info", game["strings"]["spawn_tag_wait"]);
-      }
-      else {
+      } else {
         maps\mp\_utility::setlowermessage("spawn_info", game["strings"]["spawn_next_round"]);
       }
 
@@ -519,8 +516,7 @@ spawnplayer(var_0, var_1) {
   if(!isDefined(var_1)) {
     if(maps\mp\_utility::invirtuallobby()) {
       var_1 = 0;
-    }
-    else {
+    } else {
       var_1 = 1;
     }
   }
@@ -569,8 +565,7 @@ spawnplayer(var_0, var_1) {
     if(!isDefined(self.costume)) {
       if(isplayer(self)) {
         self.costume = maps\mp\gametypes\_class::cao_getactivecostume();
-      }
-      else if(isagent(self) && self.agent_type == "player") {
+      } else if(isagent(self) && self.agent_type == "player") {
         self.costume = maps\mp\gametypes\_teams::getdefaultcostume();
       }
     }
@@ -595,9 +590,7 @@ spawnplayer(var_0, var_1) {
 
       self onlystreamactiveweapon(0);
 
-      if(gettime() >= var_6) {
-      } else {
-      }
+      if(gettime() >= var_6) {} else {}
 
       self.waitingtospawnamortize = 0;
     }
@@ -792,8 +785,7 @@ spawnplayer(var_0, var_1) {
 
   if(isDefined(level.custom_giveloadout)) {
     self[[level.custom_giveloadout]](var_0);
-  }
-  else if(var_1) {
+  } else if(var_1) {
     maps\mp\gametypes\_class::applyloadout();
     self notify("spawnplayer_giveloadout");
   }
@@ -923,8 +915,7 @@ spawnintermission() {
   if(level.rankedmatch && (self.postgamepromotion || isDefined(var_0) && var_0)) {
     if(self.postgamepromotion) {
       self playlocalsound("mp_level_up");
-    }
-    else if(isDefined(var_0)) {
+    } else if(isDefined(var_0)) {
       self playlocalsound("mp_challenge_complete");
     }
 
@@ -1134,8 +1125,7 @@ callback_playerdisconnect(var_0) {
 
   if(self.sessionstate == "playing" && !(isDefined(self.fauxdead) && self.fauxdead)) {
     removefromalivecount(1);
-  }
-  else if(self.sessionstate == "spectator" || self.sessionstate == "dead") {
+  } else if(self.sessionstate == "spectator" || self.sessionstate == "dead") {
     level thread maps\mp\gametypes\_gamelogic::updategameevents();
   }
 }
@@ -1159,8 +1149,7 @@ removeplayerondisconnect() {
 initclientdvarssplitscreenspecific() {
   if(level.splitscreen || self issplitscreenplayer()) {
     self setclientdvars("cg_hudGrenadeIconHeight", "37.5", "cg_hudGrenadeIconWidth", "37.5", "cg_hudGrenadeIconOffset", "75", "cg_hudGrenadePointerHeight", "18", "cg_hudGrenadePointerWidth", "37.5", "cg_hudGrenadePointerPivot", "18 40.5", "cg_fovscale", "0.75");
-  }
-  else {
+  } else {
     self setclientdvars("cg_hudGrenadeIconHeight", "25", "cg_hudGrenadeIconWidth", "25", "cg_hudGrenadeIconOffset", "50", "cg_hudGrenadePointerHeight", "12", "cg_hudGrenadePointerWidth", "25", "cg_hudGrenadePointerPivot", "12 27", "cg_fovscale", "1");
   }
 }
@@ -1180,8 +1169,7 @@ initclientdvars() {
 
   if(isDefined(level.alwaysdrawfriendlynames) && level.alwaysdrawfriendlynames) {
     setdvar("cg_drawFriendlyNamesAlways", 1);
-  }
-  else {
+  } else {
     setdvar("cg_drawFriendlyNamesAlways", 0);
   }
 
@@ -1189,8 +1177,7 @@ initclientdvars() {
 
   if(maps\mp\_utility::getgametypenumlives()) {
     self setclientdvars("cg_deadChatWithDead", 1, "cg_deadChatWithTeam", 0, "cg_deadHearTeamLiving", 0, "cg_deadHearAllLiving", 0);
-  }
-  else {
+  } else {
     self setclientdvars("cg_deadChatWithDead", 0, "cg_deadChatWithTeam", 1, "cg_deadHearTeamLiving", 1, "cg_deadHearAllLiving", 0);
   }
 
@@ -1362,8 +1349,7 @@ callback_playerconnect() {
   if(!isDefined(self.pers["clientid"])) {
     if(game["clientid"] >= 30) {
       self.pers["clientid"] = getlowestavailableclientid();
-    }
-    else {
+    } else {
       self.pers["clientid"] = game["clientid"];
     }
 
@@ -1427,8 +1413,7 @@ callback_playerconnect() {
 
     if(istestclient(self) || isai(self)) {
       var_6 = 1;
-    }
-    else {
+    } else {
       var_6 = 0;
     }
 
@@ -1443,8 +1428,7 @@ callback_playerconnect() {
 
       if(!isDefined(level.matchdata["botJoinCount"])) {
         level.matchdata["botJoinCount"] = 1;
-      }
-      else {
+      } else {
         level.matchdata["botJoinCount"]++;
       }
     }
@@ -1525,7 +1509,9 @@ callback_playerconnect() {
     }
 
     if(isDefined(level.onplayerconnectaudioinit)) {
-      [[level.onplayerconnectaudioinit]]();
+      [
+        [level.onplayerconnectaudioinit]
+      ]();
     }
 
     if(!isDefined(self.pers["team"])) {
@@ -1657,8 +1643,7 @@ kickifdontspawn() {
 
   if(self ishost()) {
     kickwait(120);
-  }
-  else {
+  } else {
     kickwait(var_0);
   }
 

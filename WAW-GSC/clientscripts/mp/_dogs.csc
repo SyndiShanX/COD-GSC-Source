@@ -107,11 +107,9 @@ enemyWatcher(localClientNum) {
 getOtherTeam(team) {
   if(team == "allies") {
     return "axis";
-  }
-  else if(team == "axis") {
+  } else if(team == "axis") {
     return "allies";
-  }
-  else if(team == "free") {
+  } else if(team == "free") {
     return "free";
   }
   assertMsg("getOtherTeam: invalid team " + team);
@@ -289,8 +287,7 @@ dog_get_dvar_int(dvar, def) {
 dog_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     return def;
   }
 }

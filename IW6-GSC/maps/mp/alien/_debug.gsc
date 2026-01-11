@@ -56,9 +56,7 @@ debug_nuke() {
 
     if(common_scripts\utility::flag_exist("cortex_started") && common_scripts\utility::flag("cortex_started")) {
       if(isDefined(level.add_cortex_charge_func)) {
-        [
-          [level.add_cortex_charge_func]
-        ](amount);
+        [[level.add_cortex_charge_func]](amount);
       }
     }
 
@@ -234,8 +232,7 @@ parse_loadout(loadout_string) {
 adjust_drill_loc(drop_loc) {
   if(isDefined(level.debug_drill_loc)) {
     return level.debug_drill_loc;
-  }
-  else {
+  } else {
     return drop_loc;
   }
 }
@@ -436,14 +433,14 @@ debug_print_encounter_performance(player) {
   foreach(key, score_component in level.encounter_score_components) {
     if(isDefined(score_component.team_encounter_performance)) {
       foreach(performance_item, value in score_component.team_encounter_performance) {
-      println(performance_item + ": " + value);
+        println(performance_item + ": " + value);
       }
     }
   }
 
   println("---- Personal ----");
   foreach(key, value in player.encounter_performance) {
-  println(key + ": " + value);
+    println(key + ": " + value);
   }
 
   println("==============================================================================");
@@ -487,8 +484,7 @@ debug_print_achievement_unlocked(unlock_id, progress) {
   if(getDvarInt("debug_alien_achievement", 0) == 1) {
     if(isDefined(progress)) {
       println("(DEBUG) Achievement unlock: " + unlock_id + "(" + progress + ")");
-    }
-    else {
+    } else {
       println("(DEBUG) Achievement unlock: " + unlock_id);
     }
   }
@@ -522,7 +518,7 @@ devgui_SetPrestigeNerf() {
     nerf_reference = getdvar("scr_setprestigenerf");
 
     foreach(player in level.players) {
-    player maps\mp\alien\_prestige::activate_nerf(nerf_reference);
+      player maps\mp\alien\_prestige::activate_nerf(nerf_reference);
     }
 
     if(nerf_reference == "nerf_smaller_wallet") {
@@ -549,7 +545,7 @@ set_playerWalletToSmallerSize() {
 
 set_playerToHigherThreatbias() {
   foreach(player in level.players) {
-  player.threatbias = player maps\mp\alien\_prestige::prestige_getThreatbiasScalar();
+    player.threatbias = player maps\mp\alien\_prestige::prestige_getThreatbiasScalar();
   }
 }
 
@@ -619,7 +615,7 @@ jumpTo_registerPlayerSpawnPos(player_spawn_pos_list) {
   level.debug_startPointLocations = [];
 
   foreach(pos in player_spawn_pos_list) {
-  level.debug_startPointLocations[level.debug_startPointLocations.size] = drop_to_ground(pos, 100, -250);
+    level.debug_startPointLocations[level.debug_startPointLocations.size] = drop_to_ground(pos, 100, -250);
   }
 }
 
@@ -993,8 +989,7 @@ show_all_nearby_spawn_nodes(selected_spawn_node, time, dist) {
 draw_debug_box_on(spawn_node, color, time) {
   if(isDefined(spawn_node.angles)) {
     angles = spawn_node.angles;
-  }
-  else {
+  } else {
     angles = (0, 0, 0);
   }
 

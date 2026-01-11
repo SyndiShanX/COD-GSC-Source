@@ -521,8 +521,7 @@ onPlayerConnect() {
 
       if(isDefined(player.connecttime)) {
         player.connect_time = player.connecttime;
-      }
-      else {
+      } else {
         player.connect_time = gettime();
       }
 
@@ -543,8 +542,7 @@ onPlayerConnect() {
 
       if(!is_casual_mode()) {
         player SetClientOmnvar("allow_write_leaderboards", 1);
-      }
-      else {
+      } else {
         player SetClientOmnvar("allow_write_leaderboards", 0);
       }
 
@@ -611,8 +609,7 @@ initial_spawn_pos_override() {
 get_hotjoin_skill_points() {
   if(isDefined(level.hotjoin_skill_points_fun)) {
     return [[level.hotjoin_skill_points_fun]]();
-  }
-  else {
+  } else {
     return default_hotjoin_skill_points();
   }
 }
@@ -622,8 +619,7 @@ default_hotjoin_skill_points() {
 
   if(is_hardcore_mode()) {
     point_from_hive_destroyed = 0;
-  }
-  else {
+  } else {
     point_from_hive_destroyed = max(0, level.num_hive_destroyed - HIVE_SKILL_POINT_PENALTY);
   }
 
@@ -788,8 +784,7 @@ watchDisconnectEndGame() {
 
   if(is_chaos_mode()) {
     gameShouldEnd = maps\mp\alien\_chaos_laststand::chaos_gameShouldEnd(self);
-  }
-  else {
+  } else {
     gameShouldEnd = maps\mp\alien\_laststand::gameShouldEnd(self);
   }
 
@@ -1095,11 +1090,10 @@ healthRegen(hurtTime, healthRatio, healthCap) {
       if(self.health < Int(healthCap)) {
         if((self.health + regenData.regenAmount) > Int(healthCap))
       }
-          self.health = Int(healthCap);
-        else {
-          self.health += regenData.regenAmount;
-        }
+      self.health = Int(healthCap);
       else {
+        self.health += regenData.regenAmount;
+      } else {
         break;
       }
     }
@@ -1155,8 +1149,7 @@ alien_make_entity_sentient(team, expendable) {
   if(self should_make_entity_sentient()) {
     if(isDefined(expendable)) {
       return self MakeEntitySentient(team, expendable);
-    }
-    else {
+    } else {
       return self MakeEntitySentient(team);
     }
   }
@@ -1233,8 +1226,7 @@ custom_giveloadout(fakespawn) {
     case "perk_pistol_magnum_4":
       if(self maps\mp\alien\_persistence::is_upgrade_enabled("magnum_acog_upgrade")) {
         self.default_starting_pistol = "iw6_alienmagnum_mp_acogpistol_scope5";
-      }
-      else {
+      } else {
         self.default_starting_pistol = "iw6_alienmagnum_mp";
       }
       break;
@@ -1902,8 +1894,7 @@ blackBox_EndGame(endcondition, playtime) {
 
     if(isDefined(player.name)) {
       player_name = player.name;
-    }
-    else {
+    } else {
       player_name = "-error";
     }
 
@@ -2189,7 +2180,9 @@ run_encounters() {
     level.current_encounter_info = encounter_info;
 
     if(should_run_pre_encounter_func(start_point_enable, encounter_index, start_point_index)) {
-      [[encounter_info.pre_encounter_func]]();
+      [
+        [encounter_info.pre_encounter_func]
+      ]();
     }
 
     if(should_skip_encounter(start_point_enable, encounter_index, start_point_index)) {
@@ -2311,7 +2304,7 @@ should_skip_encounter(start_point_enable, encounter_index, start_point_index) {
 
 give_players_points(skill_point) {
   foreach(player in level.players) {
-  player maps\mp\alien\_persistence::give_player_points(int(skill_point));
+    player maps\mp\alien\_persistence::give_player_points(int(skill_point));
   }
 }
 

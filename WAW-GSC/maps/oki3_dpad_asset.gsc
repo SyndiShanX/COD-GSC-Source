@@ -297,8 +297,7 @@ air_support_switch_back() {
   if(isDefined(primaryWeapons)) {
     if(maps\_collectibles::has_collectible("collectible_sticksstones") || maps\_collectibles::has_collectible("collectible_berserker")) {
       self SwitchToWeapon(primaryWeapons[0]);
-    }
-    else {
+    } else {
       self SwitchToWeapon(primaryWeapons[1]);
     }
   }

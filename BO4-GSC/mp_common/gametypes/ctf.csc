@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\shoutcaster;
 #include scripts\core_common\util_shared;
-
 #namespace ctf;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -37,7 +36,7 @@ ctf_reset_score(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname
 
 on_localclient_connect(localclientnum) {
   level.var_8b7ba196[localclientnum] = util::getnextobjid(localclientnum);
-  objective_add(localclientnum, level.var_8b7ba196[localclientnum], "invisible", #"flag_taken", (0, 0, 0), util::get_other_team(function_9b3f0ed1(localclientnum)));
+  objective_add(localclientnum, level.var_8b7ba196[localclientnum], "invisible", # "flag_taken", (0, 0, 0), util::get_other_team(function_9b3f0ed1(localclientnum)));
   level thread function_27ecd662(localclientnum);
 }
 

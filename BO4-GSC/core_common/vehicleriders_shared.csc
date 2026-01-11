@@ -6,7 +6,6 @@
 #include scripts\core_common\array_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
-
 #namespace vehicle;
 
 autoexec init() {
@@ -65,16 +64,16 @@ play_vehicle_anim(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   foreach(s_rider in s_bundle.objects) {
     if(s_rider.position == str_pos) {
       switch (str_action) {
-        case #"enter":
+        case # "enter":
           str_vh_anim = s_rider.vehicleenteranim;
           break;
-        case #"exit":
+        case # "exit":
           str_vh_anim = s_rider.vehicleexitanim;
           break;
-        case #"close":
+        case # "close":
           str_vh_anim = s_rider.vehiclecloseanim;
           break;
-        case #"death":
+        case # "death":
           str_vh_anim = s_rider.vehicleriderdeathanim;
           break;
       }

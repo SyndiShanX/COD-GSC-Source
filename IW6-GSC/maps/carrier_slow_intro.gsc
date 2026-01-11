@@ -56,8 +56,7 @@ setup_slow_intro() {
 begin_slow_intro() {
   if(isDefined(level.player)) {
     var_0 = newclienthudelem(level.player);
-  }
-  else {
+  } else {
     var_0 = newhudelem();
   }
 

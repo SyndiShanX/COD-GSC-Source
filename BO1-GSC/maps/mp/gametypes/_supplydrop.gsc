@@ -314,11 +314,9 @@ isSupplyDropGrenadeAllowed(hardpointType, killstreakWeapon) {
   if(self maps\mp\_killstreakrules::isKillstreakAllowed(hardpointType, self.team) == false) {
     if(isDefined(self.lastStand) && self.lastStand && isDefined(self.laststandpistol) && self hasWeapon(self.laststandpistol)) {
       self switchToWeapon(self.laststandpistol);
-    }
-    else if(isDefined(self.lastNonKillstreakWeapon) && self.lastNonKillstreakWeapon != killstreakWeapon && self.lastNonKillstreakWeapon != "none") {
+    } else if(isDefined(self.lastNonKillstreakWeapon) && self.lastNonKillstreakWeapon != killstreakWeapon && self.lastNonKillstreakWeapon != "none") {
       self SwitchToWeapon(self.lastNonKillstreakWeapon);
-    }
-    else if(isDefined(self.lastDroppableWeapon) && self.lastDroppableWeapon != killstreakWeapon && self.lastDroppableWeapon != "none") {
+    } else if(isDefined(self.lastDroppableWeapon) && self.lastDroppableWeapon != killstreakWeapon && self.lastDroppableWeapon != "none") {
       self SwitchToWeapon(self.lastDroppableWeapon);
     }
     return false;
@@ -892,8 +890,7 @@ crateKill() {
     }
     if(vel < stationaryThreshold) {
       numFramesStationary++;
-    }
-    else {
+    } else {
       numFramesStationary = 0;
     }
     if(numFramesStationary >= maxFramesTillStationary) {
@@ -1259,8 +1256,7 @@ getHeliEnd(drop_origin, drop_direction) {
   dist = -1 * getDvarIntDefault(#"scr_supplydropOutgoingDistance", 15000);
   if(RandomIntRange(0, 2) == 0) {
     turn = RandomIntRange(60, 121);
-  }
-  else {
+  } else {
     turn = -1 * RandomIntRange(60, 121);
   }
   direction = drop_direction + (0, turn, 0);

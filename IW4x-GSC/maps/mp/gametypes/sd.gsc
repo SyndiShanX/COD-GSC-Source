@@ -40,14 +40,11 @@ main() {
 
   if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("camera_thirdPerson")) {
+  } else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_diehard")) {
+  } else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 
@@ -150,15 +147,13 @@ getSpawnPoint() {
   if(getDvar("mapname") == "mp_shipment_long") {
     if(self.pers["team"] == game["attackers"]) {
       spawnPointName = "mp_cha_spawn_allies_start";
-    }
-    else {
+    } else {
       spawnPointName = "mp_cha_spawn_axis_start";
     }
   } else {
     if(self.pers["team"] == game["attackers"]) {
       spawnPointName = "mp_sd_spawn_attacker";
-    }
-    else {
+    } else {
       spawnPointName = "mp_sd_spawn_defender";
     }
   }
@@ -222,8 +217,7 @@ onDeadEvent(team) {
   if(team == "all") {
     if(level.bombPlanted) {
       sd_endGame(game["attackers"], game["strings"][game["defenders"] + "_eliminated"]);
-    }
-    else {
+    } else {
       sd_endGame(game["defenders"], game["strings"][game["attackers"] + "_eliminated"]);
     }
   } else if(team == game["attackers"]) {
@@ -473,8 +467,7 @@ onUseDefuseObject(player) {
 
   if(isDefined(level.bombOwner) && (level.bombOwner.bombPlantedTime + 3000 + (level.defuseTime * 1000)) > getTime() && isReallyAlive(level.bombOwner)) {
     player thread maps\mp\gametypes\_hud_message::SplashNotify("ninja_defuse", (maps\mp\gametypes\_rank::getScoreInfoValue("defuse")));
-  }
-  else {
+  } else {
     player thread maps\mp\gametypes\_hud_message::SplashNotify("defuse", maps\mp\gametypes\_rank::getScoreInfoValue("defuse"));
   }
 

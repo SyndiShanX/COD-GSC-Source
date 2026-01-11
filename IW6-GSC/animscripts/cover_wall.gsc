@@ -106,8 +106,7 @@ cover_wall_think(var_0) {
     if(var_0 == "crouch") {
       if(isrpd(self.weapon)) {
         var_1 = "rpd_bipod_crouch";
-      }
-      else {
+      } else {
         var_1 = "saw_bipod_crouch";
       }
     } else if(isrpd(self.weapon))
@@ -118,8 +117,7 @@ cover_wall_think(var_0) {
 
     if(isrpd(self.weapon)) {
       var_2 = "weapon_rpd_MG_Setup";
-    }
-    else {
+    } else {
       var_2 = "weapon_saw_MG_Setup";
     }
 
@@ -164,8 +162,7 @@ cover_wall_think(var_0) {
 
   if(self.covertype == "stand") {
     self.a.special = "cover_stand";
-  }
-  else {
+  } else {
     self.a.special = "cover_crouch";
   }
 
@@ -242,8 +239,7 @@ popupandshoot() {
     if(animscripts\utility::usingrocketlauncher() && animscripts\utility::shoulddroprocketlauncher(var_0)) {
       if(self.a.pose == "stand") {
         animscripts\shared::throwdownweapon(animscripts\utility::lookupanim("combat", "drop_rpg_stand"));
-      }
-      else {
+      } else {
         animscripts\shared::throwdownweapon(animscripts\utility::lookupanim("combat", "drop_rpg_crouch"));
       }
     }
@@ -356,8 +352,7 @@ idle() {
 
     if(var_0) {
       var_1 = animscripts\utility::animarraypickrandom("hide_idle_twitch");
-    }
-    else {
+    } else {
       var_1 = animscripts\utility::animarray("hide_idle");
     }
 
@@ -388,8 +383,7 @@ flinch() {
 playidleanimation(var_0, var_1) {
   if(var_1) {
     self setflaggedanimknoballrestart("idle", var_0, % body, 1, 0.25, 1);
-  }
-  else {
+  } else {
     self setflaggedanimknoball("idle", var_0, % body, 1, 0.25, 1);
   }
 
@@ -412,8 +406,7 @@ look(var_0) {
 
   if(animscripts\utility::issuppressedwrapper()) {
     var_1 = animscripts\utility::animarray("look_to_hide_fast");
-  }
-  else {
+  } else {
     var_1 = animscripts\utility::animarray("look_to_hide");
   }
 
@@ -467,8 +460,7 @@ pop_up() {
 
   if(self.covertype == "crouch") {
     setup_cover_crouch(var_0);
-  }
-  else {
+  } else {
     setup_cover_stand(var_0);
   }
 
@@ -477,8 +469,7 @@ pop_up() {
 
   if(self.covertype == "stand") {
     self.a.special = "cover_stand_aim";
-  }
-  else {
+  } else {
     self.a.special = "cover_crouch_aim";
   }
 
@@ -523,8 +514,7 @@ donotetracksforpopup(var_0) {
 setup_additive_aim(var_0) {
   if(self.a.covermode == "left" || self.a.covermode == "right") {
     var_1 = "crouch";
-  }
-  else {
+  } else {
     var_1 = self.a.covermode;
   }
 
@@ -566,8 +556,7 @@ go_to_hide() {
 
   if(self.covertype == "stand") {
     self.a.special = "cover_stand";
-  }
-  else {
+  } else {
     self.a.special = "cover_crouch";
   }
 
@@ -587,11 +576,9 @@ trythrowinggrenade(var_0, var_1) {
 
   if(isDefined(self.rambochance) && randomfloat(1.0) < self.rambochance) {
     var_2 = animscripts\utility::animarraypickrandom("grenade_rambo");
-  }
-  else if(isDefined(var_1) && var_1) {
+  } else if(isDefined(var_1) && var_1) {
     var_2 = animscripts\utility::animarraypickrandom("grenade_safe");
-  }
-  else {
+  } else {
     var_2 = animscripts\utility::animarraypickrandom("grenade_exposed");
   }
 
@@ -685,8 +672,7 @@ setup_crouching_anim_array(var_0) {
   if(animscripts\utility::weapon_pump_action_shotgun()) {
     if(var_0 == "lean" || var_0 == "stand") {
       self.a.array["single"] = animscripts\utility::lookupanim("shotgun_stand", "single");
-    }
-    else {
+    } else {
       self.a.array["single"] = animscripts\utility::lookupanim("shotgun_crouch", "single");
     }
   }
@@ -712,8 +698,7 @@ setup_standing_anim_array(var_0) {
 
     if(animscripts\utility::weapon_pump_action_shotgun()) {
       self.a.array["single"] = animscripts\utility::lookupanim("shotgun_stand", "single");
-    }
-    else {
+    } else {
       self.a.array["single"] = var_1["single"];
     }
 
@@ -766,8 +751,7 @@ needtochangecovermode() {
 
   if(self.a.covermode == "lean") {
     return var_0 < 10;
-  }
-  else {
+  } else {
     return var_0 > 45;
   }
 }
@@ -816,8 +800,7 @@ getshootpospitch(var_0) {
 setdefaultwallanimmode() {
   if(self.swimmer) {
     self animmode("nogravity");
-  }
-  else {
+  } else {
     self animmode("zonly_physics");
   }
 }

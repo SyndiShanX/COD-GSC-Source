@@ -116,8 +116,7 @@ stealth_flag_debug_print(var_0) {}
 group_flag_init(var_0) {
   if(isDefined(self.script_stealthgroup)) {
     self.script_stealthgroup = maps\_utility::string(self.script_stealthgroup);
-  }
-  else {
+  } else {
     self.script_stealthgroup = "default";
   }
 
@@ -283,8 +282,7 @@ enemy_go_back() {
   } else if(isDefined(var_0)) {
     if(self.type != "dog") {
       stealth_set_run_anim("_stealth_patrol_walk", 1);
-    }
-    else {
+    } else {
       maps\_utility::set_dog_walk_anim();
       self.script_growl = undefined;
     }
@@ -376,14 +374,11 @@ enemy_find_original_goal() {
   }
   if(isDefined(self.last_set_goalnode)) {
     self._stealth.behavior.last_spot = self.last_set_goalnode.origin;
-  }
-  else if(isDefined(self.last_set_goalent)) {
+  } else if(isDefined(self.last_set_goalent)) {
     self._stealth.behavior.last_spot = self.last_set_goalent.origin;
-  }
-  else if(isDefined(self.last_set_goalpos)) {
+  } else if(isDefined(self.last_set_goalpos)) {
     self._stealth.behavior.last_spot = self.last_set_goalpos;
-  }
-  else {
+  } else {
     self._stealth.behavior.last_spot = self.origin;
   }
 }
@@ -403,8 +398,7 @@ enemy_react_and_displace_to(var_0, var_1) {
   }
   if(isDefined(var_0)) {
     var_2 = var_0.origin;
-  }
-  else {
+  } else {
     var_2 = var_1;
   }
 
@@ -418,14 +412,11 @@ enemy_react_and_displace_to(var_0, var_1) {
 
   if(var_7 > 315 || var_7 < 45) {
     var_8 = "8";
-  }
-  else if(var_7 < 135) {
+  } else if(var_7 < 135) {
     var_8 = "6";
-  }
-  else if(var_7 < 225) {
+  } else if(var_7 < 225) {
     var_8 = "2";
-  }
-  else {
+  } else {
     var_8 = "4";
   }
 
@@ -449,8 +440,7 @@ enemy_runto_and_lookaround(var_0, var_1) {
 
   if(isDefined(var_0)) {
     self setgoalnode(var_0);
-  }
-  else {
+  } else {
     self setgoalpos(var_1);
   }
 
@@ -559,8 +549,7 @@ enemy_announce_spotted_acknowledge(var_0, var_1) {
 
   if(isDefined(self.npcid)) {
     var_2 = self.npcid;
-  }
-  else {
+  } else {
     var_2 = randomint(3);
   }
 
@@ -664,8 +653,7 @@ enemy_animation_custom(var_0) {
   if(var_0 != "doFlashBanged") {
     if(isDefined(var_3) || isDefined(self.has_delta)) {
       var_1 stealth_anim(self, var_2, var_3);
-    }
-    else {
+    } else {
       var_1 stealth_anim_custom_animmode(self, "gravity", var_2);
     }
   }
@@ -818,7 +806,7 @@ event_awareness_enders(var_0) {
     }
 
     foreach(var_2 in var_0) {
-    maps\_utility::add_wait(maps\_utility::waittill_msg, var_2);
+      maps\_utility::add_wait(maps\_utility::waittill_msg, var_2);
     }
   }
 

@@ -571,9 +571,7 @@ defense_cautious_approach() {
     var_03 = var_03 + 0.25;
     if(var_03 >= 0.5) {
       var_03 = 0;
-      if([
-          [level.bot_funcs["should_start_cautious_approach"]]
-        ](0)) {
+      if([[level.bot_funcs["should_start_cautious_approach"]]](0)) {
         var_02 = 0;
       }
     }

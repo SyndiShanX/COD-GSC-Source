@@ -80,8 +80,7 @@ zombie_spoon_func() {
   }
   if(self maps\mp\zombies\_zm_zonemgr::entity_in_zone("cellblock_shower")) {
     level.n_spoon_kill_count++;
-  }
-  else {
+  } else {
     return;
   }
 

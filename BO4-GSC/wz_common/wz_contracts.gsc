@@ -13,7 +13,6 @@
 #include scripts\mp_common\laststand_warzone;
 #include scripts\mp_common\player\player_killed;
 #include scripts\mp_common\teams\teams;
-
 #namespace wz_contracts;
 
 autoexec __init__system__() {
@@ -53,13 +52,13 @@ finalize_init() {
     level.var_29ab88df = &function_29ab88df;
     level callback::add_callback(#"hash_7119d854cd41a4fd", &function_28ba0ba6);
     level callback::add_callback(#"vehicle_emped", &function_362499ea);
-    level.operator_weapons = [#"ar_fastfire_t8_operator": 1, #"ar_stealth_t8_operator": 1, #"tr_longburst_t8_operator": 1, #"tr_midburst_t8_operator": 1, #"tr_powersemi_t8_operator": 1, #"sniper_fastrechamber_t8_operator": 1, #"sniper_quickscope_t8_operator": 1, #"lmg_spray_t8_operator": 1, #"lmg_standard_t8_operator": 1, #"smg_accurate_t8_operator": 1, #"smg_fastfire_t8_operator": 1, #"pistol_revolver_t8_operator": 1];
-    level.var_f290f0ba = [#"hash_6a0d13acf3e5687d": 1, #"hash_33f7121f70c3065f": 2, #"hash_2b546c0315159617": 3, #"hash_3ad3de90342f2d4b": 4, #"hash_61373b747c6a21fd": 5, #"hash_43647ef7af66f82f": 6, #"hash_49e8a607ea22e650": 7, #"zombie_stash_graveyard_quest": 8, #"hash_ca8b234ad1fea38": 9, #"hash_4ee6deffa30cc6e2": 10, #"hash_47a63bc4a605b45f": 11, #"hash_779cba7072600ad1": 12, #"hash_75cc919e81dc8b19": 13, #"hash_2a93e93b275c38ed": 14, #"hash_734bf5054445e0df": 15, #"hash_408b3ed7db6f9401": 16, #"hash_550872d1d1938f94": 17, #"zombie_stash_graveyard_ee": 18, #"hash_a211476d10546c": 19, #"hash_7d028af90dad72ae": 20, #"zombie_supply_stash_boxinggym": 21, #"zombie_supply_stash_diner": 22, #"zombie_supply_stash_lighthouse": 23, #"hash_2783dbab1f862606": 24, #"hash_6dea2e4afc816818": 25, #"hash_4b49cb98f0fd776a": 26, #"hash_468067e2be6e3cfd": 27, #"zombie_stash_graveyard": 28, #"hospital_stash": 29, #"hash_78f8f730158519ff": 30];
+    level.operator_weapons = [# "ar_fastfire_t8_operator": 1, # "ar_stealth_t8_operator": 1, # "tr_longburst_t8_operator": 1, # "tr_midburst_t8_operator": 1, # "tr_powersemi_t8_operator": 1, # "sniper_fastrechamber_t8_operator": 1, # "sniper_quickscope_t8_operator": 1, # "lmg_spray_t8_operator": 1, # "lmg_standard_t8_operator": 1, # "smg_accurate_t8_operator": 1, # "smg_fastfire_t8_operator": 1, # "pistol_revolver_t8_operator": 1];
+    level.var_f290f0ba = [# "hash_6a0d13acf3e5687d": 1, # "hash_33f7121f70c3065f": 2, # "hash_2b546c0315159617": 3, # "hash_3ad3de90342f2d4b": 4, # "hash_61373b747c6a21fd": 5, # "hash_43647ef7af66f82f": 6, # "hash_49e8a607ea22e650": 7, # "zombie_stash_graveyard_quest": 8, # "hash_ca8b234ad1fea38": 9, # "hash_4ee6deffa30cc6e2": 10, # "hash_47a63bc4a605b45f": 11, # "hash_779cba7072600ad1": 12, # "hash_75cc919e81dc8b19": 13, # "hash_2a93e93b275c38ed": 14, # "hash_734bf5054445e0df": 15, # "hash_408b3ed7db6f9401": 16, # "hash_550872d1d1938f94": 17, # "zombie_stash_graveyard_ee": 18, # "hash_a211476d10546c": 19, # "hash_7d028af90dad72ae": 20, # "zombie_supply_stash_boxinggym": 21, # "zombie_supply_stash_diner": 22, # "zombie_supply_stash_lighthouse": 23, # "hash_2783dbab1f862606": 24, # "hash_6dea2e4afc816818": 25, # "hash_4b49cb98f0fd776a": 26, # "hash_468067e2be6e3cfd": 27, # "zombie_stash_graveyard": 28, # "hospital_stash": 29, # "hash_78f8f730158519ff": 30];
     callback::add_callback(#"hash_5775ae80fc576ea6", &function_314e09eb);
 
     thread devgui_setup();
 
-      level thread contracts::function_d589391f();
+    level thread contracts::function_d589391f();
   }
 }
 
@@ -78,7 +77,7 @@ on_ai_killed(params) {
     if(isDefined(params.weapon)) {
       weapon = params.weapon;
 
-      if(weapon.statname == #"ray_gun" || weapon.statname == #"ray_gun_mk2") {
+      if(weapon.statname == # "ray_gun" || weapon.statname == # "ray_gun_mk2") {
         attacker increment_wz_contract(#"hash_662a7934c69c5aa7");
       }
     }
@@ -97,7 +96,7 @@ on_vehicle_killed(params) {
       if(isDefined(params.weapon)) {
         weapon = params.weapon;
 
-        if(weapon.statname == #"eq_tripwire") {
+        if(weapon.statname == # "eq_tripwire") {
           attacker increment_wz_contract(#"hash_5468af4499f0c7fe");
         }
       }
@@ -230,8 +229,8 @@ on_player_killed() {
     }
   }
 
-  if(isDefined(attacker) && isDefined(attacker.pers) && isDefined(attacker.pers[#"characterindex"])) {
-    n_character_index = attacker.pers[#"characterindex"];
+  if(isDefined(attacker) && isDefined(attacker.pers) && isDefined(attacker.pers[# "characterindex"])) {
+    n_character_index = attacker.pers[# "characterindex"];
     rf = getplayerrolefields(n_character_index, currentsessionmode());
 
     if(isDefined(rf)) {
@@ -256,7 +255,7 @@ on_player_killed() {
   }
 
   if(isDefined(weapon)) {
-    if(weapon.statname == #"melee_bowie") {
+    if(weapon.statname == # "melee_bowie") {
       if(!isDefined(attacker.var_6f3e3a9c)) {
         attacker.var_6f3e3a9c = 1;
         attacker thread function_e49226a4();
@@ -270,7 +269,7 @@ on_player_killed() {
       }
     }
 
-    if(weapon.statname == #"hatchet") {
+    if(weapon.statname == # "hatchet") {
       n_dist = distance(attacker.origin, self.origin);
 
       if(n_dist >= 3937.01) {
@@ -283,31 +282,31 @@ on_player_killed() {
 
     if(isDefined(weaponclass)) {
       switch (weaponclass) {
-        case #"weapon_assault":
+        case # "weapon_assault":
           attacker increment_wz_contract(#"contract_wz_ar_kill");
           var_49f7c24a = 1;
           break;
-        case #"weapon_lmg":
+        case # "weapon_lmg":
           attacker increment_wz_contract(#"contract_wz_lmg_kill");
           var_49f7c24a = 1;
           break;
-        case #"weapon_pistol":
+        case # "weapon_pistol":
           attacker increment_wz_contract(#"contract_wz_pistol_kill");
           var_49f7c24a = 1;
           break;
-        case #"weapon_cqb":
+        case # "weapon_cqb":
           attacker increment_wz_contract(#"contract_wz_shotgun_kill");
           var_49f7c24a = 1;
           break;
-        case #"weapon_smg":
+        case # "weapon_smg":
           attacker increment_wz_contract(#"contract_wz_smg_kill");
           var_49f7c24a = 1;
           break;
-        case #"weapon_sniper":
+        case # "weapon_sniper":
           attacker increment_wz_contract(#"contract_wz_sniper_kill");
           var_49f7c24a = 1;
           break;
-        case #"weapon_grenade":
+        case # "weapon_grenade":
           if(!isDefined(attacker.var_c9daf540)) {
             attacker.var_c9daf540 = 1;
             attacker thread function_db2da6f7();
@@ -447,12 +446,12 @@ private function_902ef0de(var_38280f2f, delta) {
     delta *= getdvarint(#"scr_contract_debug_multiplier", 1);
   }
 
-    if(delta <= 0) {
-      return;
-    }
+  if(delta <= 0) {
+    return;
+  }
 
-  target_value = self.pers[#"contracts"][var_38280f2f].target_value;
-  old_progress = isDefined(self.pers[#"contracts"][var_38280f2f].current_value) ? self.pers[#"contracts"][var_38280f2f].current_value : self.pers[#"contracts"][var_38280f2f].var_59cb904f;
+  target_value = self.pers[# "contracts"][var_38280f2f].target_value;
+  old_progress = isDefined(self.pers[# "contracts"][var_38280f2f].current_value) ? self.pers[# "contracts"][var_38280f2f].current_value : self.pers[# "contracts"][var_38280f2f].var_59cb904f;
 
   if(old_progress == target_value) {
     return;
@@ -465,7 +464,7 @@ private function_902ef0de(var_38280f2f, delta) {
   }
 
   if(new_progress != old_progress) {
-    self.pers[#"contracts"][var_38280f2f].current_value = new_progress;
+    self.pers[# "contracts"][var_38280f2f].current_value = new_progress;
 
     if(isDefined(level.contract_ids[var_38280f2f])) {
       self luinotifyevent(#"hash_4b04b1cb4b3498d0", 2, level.contract_ids[var_38280f2f], new_progress);
@@ -478,7 +477,7 @@ private function_902ef0de(var_38280f2f, delta) {
     }
 
     var_9d12108c = isDefined(self.team) && isDefined(self.timeplayed[self.team]) ? self.timeplayed[self.team] : 0;
-    self.pers[#"contracts"][var_38280f2f].var_be5bf249 = self stats::get_stat_global(#"time_played_total") - self.pers[#"hash_5651f00c6c1790a4"] + var_9d12108c;
+    self.pers[# "contracts"][var_38280f2f].var_be5bf249 = self stats::get_stat_global(#"time_played_total") - self.pers[# "hash_5651f00c6c1790a4"] + var_9d12108c;
     params = spawnStruct();
     params.player = self;
     params.var_38280f2f = var_38280f2f;
@@ -501,12 +500,12 @@ private function_902ef0de(var_38280f2f, delta) {
 
 private function_a221f6d7(var_38280f2f) {
   switch (var_38280f2f) {
-    case #"contract_wz_quads_placement":
-    case #"hash_42580a6cc2bf989e":
-    case #"contract_wz_solo_placement":
-    case #"hash_48730ce04835417f":
-    case #"contract_wz_win_without_healing":
-    case #"contract_wz_win_match":
+    case # "contract_wz_quads_placement":
+    case # "hash_42580a6cc2bf989e":
+    case # "contract_wz_solo_placement":
+    case # "hash_48730ce04835417f":
+    case # "contract_wz_win_without_healing":
+    case # "contract_wz_win_match":
       return true;
   }
 
@@ -523,18 +522,18 @@ private function_a7cdb8f0(var_38280f2f) {
 
 private function_8bb21397(var_38280f2f) {
   switch (var_38280f2f) {
-    case #"hash_114034ef741c57c":
-    case #"hash_67444eea6c3a2b4":
-    case #"hash_137173b281445b4d":
-    case #"hash_158213f4ee12211e":
-    case #"hash_17ed7af10aadfdbf":
-    case #"hash_1dbb5150a78086fb":
-    case #"contract_wz_time_played":
-    case #"hash_395b9be57a35044e":
-    case #"hash_47ce5d5ec0614886":
-    case #"hash_533d85cab61c7cbe":
-    case #"hash_6bdbeb895b012fb2":
-    case #"hash_6f4d7d1506be4c97":
+    case # "hash_114034ef741c57c":
+    case # "hash_67444eea6c3a2b4":
+    case # "hash_137173b281445b4d":
+    case # "hash_158213f4ee12211e":
+    case # "hash_17ed7af10aadfdbf":
+    case # "hash_1dbb5150a78086fb":
+    case # "contract_wz_time_played":
+    case # "hash_395b9be57a35044e":
+    case # "hash_47ce5d5ec0614886":
+    case # "hash_533d85cab61c7cbe":
+    case # "hash_6bdbeb895b012fb2":
+    case # "hash_6f4d7d1506be4c97":
       return true;
   }
 
@@ -670,7 +669,7 @@ on_player_item_pickup(params) {
   if(isplayer(self)) {
     itementry = item.itementry;
 
-    if(itementry.itemtype == #"backpack") {
+    if(itementry.itemtype == # "backpack") {
       if(!(isDefined(self.var_9ed7994f) && self.var_9ed7994f)) {
         self.var_9ed7994f = 1;
         self increment_wz_contract(#"contract_wz_backpack_scavenged");
@@ -712,7 +711,7 @@ function_9d4c3c52(params) {
   if(isplayer(self)) {
     itementry = item.itementry;
 
-    if(itementry.itemtype == #"armor_shard") {
+    if(itementry.itemtype == # "armor_shard") {
       self increment_wz_contract(#"hash_209c6ecb45a25a6a");
     }
   }
@@ -723,80 +722,80 @@ function_9b431779(n_time_played) {
 }
 
 function_7870114(var_38280f2f) {
-  if(var_38280f2f == #"contract_wz_time_played") {
+  if(var_38280f2f == # "contract_wz_time_played") {
     return true;
   }
 
   switch (level.gametype) {
-    case #"warzone_solo":
-    case #"warzone_escape_solo":
-      if(var_38280f2f == #"hash_1dbb5150a78086fb") {
+    case # "warzone_solo":
+    case # "warzone_escape_solo":
+      if(var_38280f2f == # "hash_1dbb5150a78086fb") {
         return true;
       }
 
       break;
-    case #"warzone_duo":
-    case #"warzone_escape_duo":
-      if(var_38280f2f == #"hash_67444eea6c3a2b4") {
+    case # "warzone_duo":
+    case # "warzone_escape_duo":
+      if(var_38280f2f == # "hash_67444eea6c3a2b4") {
         return true;
       }
 
       break;
-    case #"warzone_quad":
-    case #"warzone_escape_quad":
-    case #"warzone_escape_quad_dbno":
-      if(var_38280f2f == #"hash_6f4d7d1506be4c97") {
+    case # "warzone_quad":
+    case # "warzone_escape_quad":
+    case # "warzone_escape_quad_dbno":
+      if(var_38280f2f == # "hash_6f4d7d1506be4c97") {
         return true;
       }
 
       break;
-    case #"warzone_closequarters_duo":
-    case #"warzone_closequarters_solo":
-    case #"warzone_closequarters_quads":
-      if(var_38280f2f == #"hash_bc7c4d0a20fd6b5") {
+    case # "warzone_closequarters_duo":
+    case # "warzone_closequarters_solo":
+    case # "warzone_closequarters_quads":
+      if(var_38280f2f == # "hash_bc7c4d0a20fd6b5") {
         return true;
       }
 
       break;
-    case #"warzone_hot_pursuit":
-      if(var_38280f2f == #"hash_47ce5d5ec0614886") {
+    case # "warzone_hot_pursuit":
+      if(var_38280f2f == # "hash_47ce5d5ec0614886") {
         return true;
       }
 
       break;
-    case #"warzone_hardcore_duo":
-    case #"warzone_hardcore_quad":
-    case #"warzone_hardcore_solo":
-      if(var_38280f2f == #"hash_395b9be57a35044e") {
+    case # "warzone_hardcore_duo":
+    case # "warzone_hardcore_quad":
+    case # "warzone_hardcore_solo":
+      if(var_38280f2f == # "hash_395b9be57a35044e") {
         return true;
       }
 
       break;
-    case #"warzone_ambush_quads":
-    case #"warzone_ambush_duo":
-    case #"warzone_ambush_solo":
-      if(var_38280f2f == #"hash_114034ef741c57c") {
+    case # "warzone_ambush_quads":
+    case # "warzone_ambush_duo":
+    case # "warzone_ambush_solo":
+      if(var_38280f2f == # "hash_114034ef741c57c") {
         return true;
       }
 
       break;
-    case #"warzone_dbno_quad":
-    case #"hash_6ebd226da5b61bfb":
-    case #"warzone_dbno":
-      if(var_38280f2f == #"hash_137173b281445b4d") {
+    case # "warzone_dbno_quad":
+    case # "hash_6ebd226da5b61bfb":
+    case # "warzone_dbno":
+      if(var_38280f2f == # "hash_137173b281445b4d") {
         return true;
       }
 
       break;
-    case #"warzone_bigteam_quad":
-    case #"warzone_bigteam_dbno_quad":
-      if(var_38280f2f == #"hash_16f3e3af0442596a") {
+    case # "warzone_bigteam_quad":
+    case # "warzone_bigteam_dbno_quad":
+      if(var_38280f2f == # "hash_16f3e3af0442596a") {
         return true;
       }
 
       break;
-    case #"warzone_spectre_rising":
-      if(var_38280f2f == #"hash_533d85cab61c7cbe") {
+    case # "warzone_spectre_rising":
+      if(var_38280f2f == # "hash_533d85cab61c7cbe") {
         return true;
       }
 
@@ -806,7 +805,7 @@ function_7870114(var_38280f2f) {
   var_819e1b79 = isDefined(getgametypesetting(#"wzplayerinsertiontypeindex")) ? getgametypesetting(#"wzplayerinsertiontypeindex") : 0;
 
   if(var_819e1b79 == 1) {
-    if(var_38280f2f == #"hash_17ed7af10aadfdbf") {
+    if(var_38280f2f == # "hash_17ed7af10aadfdbf") {
       return true;
     }
   }
@@ -821,60 +820,60 @@ function_e82e67c5(n_time_played) {
 
   n_minutes_played = int(float(n_time_played) / 60000);
 
-  if(!isDefined(self.pers[#"hash_19cc2444a15d6778"])) {
-    self.pers[#"hash_19cc2444a15d6778"] = 0;
+  if(!isDefined(self.pers[# "hash_19cc2444a15d6778"])) {
+    self.pers[# "hash_19cc2444a15d6778"] = 0;
   }
 
-  var_89bb208b = n_minutes_played - self.pers[#"hash_19cc2444a15d6778"];
+  var_89bb208b = n_minutes_played - self.pers[# "hash_19cc2444a15d6778"];
 
   if(var_89bb208b <= 0) {
     return;
   }
 
-  self.pers[#"hash_19cc2444a15d6778"] = n_minutes_played;
+  self.pers[# "hash_19cc2444a15d6778"] = n_minutes_played;
   self increment_wz_contract(#"contract_wz_time_played", var_89bb208b);
 
   switch (level.gametype) {
-    case #"warzone_solo":
-    case #"warzone_escape_solo":
+    case # "warzone_solo":
+    case # "warzone_escape_solo":
       self increment_wz_contract(#"hash_1dbb5150a78086fb", var_89bb208b);
       break;
-    case #"warzone_duo":
-    case #"warzone_escape_duo":
+    case # "warzone_duo":
+    case # "warzone_escape_duo":
       self increment_wz_contract(#"hash_67444eea6c3a2b4", var_89bb208b);
       break;
-    case #"warzone_quad":
-    case #"warzone_escape_quad":
+    case # "warzone_quad":
+    case # "warzone_escape_quad":
       self increment_wz_contract(#"hash_6f4d7d1506be4c97", var_89bb208b);
       break;
-    case #"warzone_closequarters_duo":
-    case #"warzone_closequarters_solo":
-    case #"warzone_closequarters_quads":
+    case # "warzone_closequarters_duo":
+    case # "warzone_closequarters_solo":
+    case # "warzone_closequarters_quads":
       self increment_wz_contract(#"hash_bc7c4d0a20fd6b5", var_89bb208b);
       break;
-    case #"warzone_hot_pursuit":
+    case # "warzone_hot_pursuit":
       self increment_wz_contract(#"hash_47ce5d5ec0614886", var_89bb208b);
       break;
-    case #"warzone_hardcore_duo":
-    case #"warzone_hardcore_quad":
-    case #"warzone_hardcore_solo":
+    case # "warzone_hardcore_duo":
+    case # "warzone_hardcore_quad":
+    case # "warzone_hardcore_solo":
       self increment_wz_contract(#"hash_395b9be57a35044e", var_89bb208b);
       break;
-    case #"warzone_ambush_quads":
-    case #"warzone_ambush_duo":
-    case #"warzone_ambush_solo":
+    case # "warzone_ambush_quads":
+    case # "warzone_ambush_duo":
+    case # "warzone_ambush_solo":
       self increment_wz_contract(#"hash_114034ef741c57c", var_89bb208b);
       break;
-    case #"warzone_dbno_quad":
-    case #"hash_6ebd226da5b61bfb":
-    case #"warzone_dbno":
+    case # "warzone_dbno_quad":
+    case # "hash_6ebd226da5b61bfb":
+    case # "warzone_dbno":
       self increment_wz_contract(#"hash_137173b281445b4d", var_89bb208b);
       break;
-    case #"warzone_bigteam_quad":
-    case #"warzone_bigteam_dbno_quad":
+    case # "warzone_bigteam_quad":
+    case # "warzone_bigteam_dbno_quad":
       self increment_wz_contract(#"hash_16f3e3af0442596a", var_89bb208b);
       break;
-    case #"warzone_spectre_rising":
+    case # "warzone_spectre_rising":
       self increment_wz_contract(#"hash_533d85cab61c7cbe", var_89bb208b);
       break;
   }
@@ -976,7 +975,7 @@ function_5648f82(team) {
 
   if(isDefined(team)) {
     foreach(player in getplayers(team)) {
-      if(level.gametype != #"warzone_bigteam_quad" && level.gametype != #"warzone_bigteam_dbno_quad") {
+      if(level.gametype != # "warzone_bigteam_quad" && level.gametype != # "warzone_bigteam_dbno_quad") {
         player increment_wz_contract(#"contract_wz_win_match");
       }
 

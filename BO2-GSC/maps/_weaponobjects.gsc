@@ -181,8 +181,7 @@ create_use_weapon_object_watcher(name, weapon, ownerteam) {
 weapon_detonate(attacker) {
   if(isDefined(attacker)) {
     self detonate(attacker);
-  }
-  else {
+  } else {
     self detonate();
   }
 }
@@ -369,16 +368,14 @@ on_spawn_retrievable_weapon_object(watcher, player) {
   if(isDefined(self.stucktoplayer)) {
     if(isalive(self.stucktoplayer) || !isDefined(self.stucktoplayer.body)) {
       triggerparentent = self.stucktoplayer;
-    }
-    else {
+    } else {
       triggerparentent = self.stucktoplayer.body;
     }
   }
 
   if(isDefined(triggerparentent)) {
     triggerorigin = triggerparentent.origin + vectorscale((0, 0, 1), 10.0);
-  }
-  else {
+  } else {
     up = anglestoup(self.angles);
     triggerorigin = self.origin + up;
   }
@@ -388,8 +385,7 @@ on_spawn_retrievable_weapon_object(watcher, player) {
 
   if(isDefined(level.retrievehints[watcher.name])) {
     self.pickuptrigger sethintstring(level.retrievehints[watcher.name].hint);
-  }
-  else {
+  } else {
     self.pickuptrigger sethintstring(&"WEAPON_GENERIC_PICKUP");
   }
 
@@ -412,8 +408,7 @@ weapons_get_dvar_int(dvar, def) {
 weapons_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }
@@ -582,8 +577,7 @@ weapon_object_damage(watcher) {
 
   if(level.weaponobjectexplodethisframe) {
     wait(0.1 + randomfloat(0.4));
-  }
-  else {
+  } else {
     wait 0.05;
   }
 
@@ -655,8 +649,7 @@ stunstart(watcher, time) {
 
   if(isDefined(time)) {
     wait(time);
-  }
-  else {
+  } else {
     return;
   }
 

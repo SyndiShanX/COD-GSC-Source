@@ -380,15 +380,9 @@ func_F725() {
   var_01 = func_7C6D(level.var_7683);
   anim.var_C86F = level.var_54D0["pain_test"][var_01];
   level.var_6A04 = level.var_54D0["explosivePlantTime"][var_01];
-  anim.var_B750 = [
-    [var_00]
-  ]("min_sniper_burst_delay_time", level.var_7683);
-  anim.var_B461 = [
-    [var_00]
-  ]("max_sniper_burst_delay_time", level.var_7683);
-  setsaveddvar("ai_accuracyDistScale", [
-    [var_00]
-  ]("accuracyDistScale", level.var_7683));
+  anim.var_B750 = [[var_00]]("min_sniper_burst_delay_time", level.var_7683);
+  anim.var_B461 = [[var_00]]("max_sniper_burst_delay_time", level.var_7683);
+  setsaveddvar("ai_accuracyDistScale", [[var_00]]("accuracyDistScale", level.var_7683));
   func_F679();
   anim.var_3546 = level.var_54D0["c12_DismemberRecoveryTime"][var_01];
   anim.var_35EC = level.var_54D0["c12_RocketTellHoldTime"][var_01];
@@ -512,61 +506,25 @@ func_14F3() {
 }
 
 func_20A1(param_00, param_01) {
-  self.gs.invultime_preshield = [
-    [param_00]
-  ]("invulTime_preShield", param_01);
-  self.gs.invultime_onshield = [
-    [param_00]
-  ]("invulTime_onShield", param_01);
-  self.gs.invultime_postshield = [
-    [param_00]
-  ]("invulTime_postShield", param_01);
-  self.gs.playerhealth_regularregendelay = [
-    [param_00]
-  ]("playerHealth_RegularRegenDelay", param_01) * level.var_54D0["regularRegenDelayScalar"];
-  self.gs.worthydamageratio = [
-    [param_00]
-  ]("worthyDamageRatio", param_01);
-  self.var_33F = int([
-    [param_00]
-  ]("threatbias", param_01));
-  self.gs.longregentime = [
-    [param_00]
-  ]("longRegenTime", param_01) * level.var_54D0["longRegenTimeScalar"];
-  self.gs.healthoverlaycutoff = [
-    [param_00]
-  ]("healthOverlayCutoff", param_01);
-  self.gs.var_DE8D = [
-    [param_00]
-  ]("health_regenRate", param_01);
-  self.gs.var_CF81 = [
-    [param_00]
-  ]("base_enemy_accuracy", param_01);
+  self.gs.invultime_preshield = [[param_00]]("invulTime_preShield", param_01);
+  self.gs.invultime_onshield = [[param_00]]("invulTime_onShield", param_01);
+  self.gs.invultime_postshield = [[param_00]]("invulTime_postShield", param_01);
+  self.gs.playerhealth_regularregendelay = [[param_00]]("playerHealth_RegularRegenDelay", param_01) * level.var_54D0["regularRegenDelayScalar"];
+  self.gs.worthydamageratio = [[param_00]]("worthyDamageRatio", param_01);
+  self.var_33F = int([[param_00]]("threatbias", param_01));
+  self.gs.longregentime = [[param_00]]("longRegenTime", param_01) * level.var_54D0["longRegenTimeScalar"];
+  self.gs.healthoverlaycutoff = [[param_00]]("healthOverlayCutoff", param_01);
+  self.gs.var_DE8D = [[param_00]]("health_regenRate", param_01);
+  self.gs.var_CF81 = [[param_00]]("base_enemy_accuracy", param_01);
   func_12E0B();
-  self.gs.var_D396 = int([
-    [param_00]
-  ]("playerGrenadeBaseTime", param_01));
-  self.gs.var_D397 = int([
-    [param_00]
-  ]("playerGrenadeRangeTime", param_01));
-  self.gs.var_D382 = int([
-    [param_00]
-  ]("playerDoubleGrenadeTime", param_01));
-  self.gs.var_B750 = [
-    [param_00]
-  ]("min_sniper_burst_delay_time", param_01);
-  self.gs.var_B461 = [
-    [param_00]
-  ]("max_sniper_burst_delay_time", param_01);
-  self.var_E7 = int([
-    [param_00]
-  ]("player_deathInvulnerableTime", param_01));
-  self.var_C6 = int([
-    [param_00]
-  ]("player_criticalBulletDamageDist", param_01));
-  self.var_DF = 100 / [
-    [param_00]
-  ]("playerDifficultyHealth", param_01);
+  self.gs.var_D396 = int([[param_00]]("playerGrenadeBaseTime", param_01));
+  self.gs.var_D397 = int([[param_00]]("playerGrenadeRangeTime", param_01));
+  self.gs.var_D382 = int([[param_00]]("playerDoubleGrenadeTime", param_01));
+  self.gs.var_B750 = [[param_00]]("min_sniper_burst_delay_time", param_01);
+  self.gs.var_B461 = [[param_00]]("max_sniper_burst_delay_time", param_01);
+  self.var_E7 = int([[param_00]]("player_deathInvulnerableTime", param_01));
+  self.var_C6 = int([[param_00]]("player_criticalBulletDamageDist", param_01));
+  self.var_DF = 100 / [[param_00]]("playerDifficultyHealth", param_01);
 }
 
 func_12E0B() {
@@ -579,15 +537,9 @@ func_12E0B() {
 }
 
 func_20A2(param_00, param_01) {
-  self.gs.var_B8D7 = [
-    [param_00]
-  ]("missTimeConstant", param_01);
-  self.gs.var_B8D9 = [
-    [param_00]
-  ]("missTimeDistanceFactor", param_01);
-  self.gs.double_grenades_allowed = [
-    [param_00]
-  ]("double_grenades_allowed", param_01);
+  self.gs.var_B8D7 = [[param_00]]("missTimeConstant", param_01);
+  self.gs.var_B8D9 = [[param_00]]("missTimeDistanceFactor", param_01);
+  self.gs.double_grenades_allowed = [[param_00]]("double_grenades_allowed", param_01);
 }
 
 func_F355() {
@@ -2232,9 +2184,7 @@ func_2628(param_00, param_01, param_02, param_03) {
     return;
   }
 
-  [
-    [level.vehicle_canturrettargetpoint]
-  ](param_02, self.var_DD, param_03);
+  [[level.vehicle_canturrettargetpoint]](param_02, self.var_DD, param_03);
   func_14DB("aa_player_kills", 1);
 }
 
@@ -2263,9 +2213,7 @@ func_14F0(param_00, param_01, param_02) {
     return 0;
   }
 
-  [
-    [level._meth_83D4]
-  ](param_01, self.var_DD, param_02);
+  [[level._meth_83D4]](param_01, self.var_DD, param_02);
   func_14DB("aa_ads_damage_dealt", param_00);
   return 1;
 }

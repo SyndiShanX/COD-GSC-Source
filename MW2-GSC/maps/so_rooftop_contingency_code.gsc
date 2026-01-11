@@ -123,9 +123,9 @@ wait_to_pickup_uav() {
     wait_to_pickup = false;
   }
 
-    if(level.gameSkill < 2) {
-      wait_to_pickup = false;
-    }
+  if(level.gameSkill < 2) {
+    wait_to_pickup = false;
+  }
 
   if(wait_to_pickup) {
     // Just wait for the first wave to be wiped out

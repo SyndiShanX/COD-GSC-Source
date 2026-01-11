@@ -16,7 +16,6 @@
 #using scripts\wz_common\vehicle;
 #namespace namespace_ec746226;
 
-event_handler[gametype_init] main(eventstruct) {
-}
+event_handler[gametype_init] main(eventstruct) {}
 
 # /

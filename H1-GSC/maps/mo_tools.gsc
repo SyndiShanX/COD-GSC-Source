@@ -158,8 +158,7 @@ door_breach(var_0, var_1, var_2, var_3) {
 
   if(var_3 == "kick") {
     var_0 maps\_anim::anim_reach_solo(var_1, var_3);
-  }
-  else {
+  } else {
     var_1 setgoalnode(var_0);
     var_1 waittill("goal");
   }
@@ -354,8 +353,7 @@ ai_clear_dialog_logic(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(var_4 == level.player) {
       thread radio_msg_stack(var_5);
-    }
-    else {
+    } else {
       var_4 thread maps\_utility::play_sound_on_entity(var_5);
     }
   } else {
@@ -370,8 +368,7 @@ ai_clear_dialog_logic(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     var_10 = 2;
 
-    for(var_11 = level.ai_clear_dialog_last; var_11 == level.ai_clear_dialog_last; var_11 = randomint(var_10)) {
-    }
+    for(var_11 = level.ai_clear_dialog_last; var_11 == level.ai_clear_dialog_last; var_11 = randomint(var_10)) {}
 
     level.ai_clear_dialog_last = var_11;
     wait 0.5;

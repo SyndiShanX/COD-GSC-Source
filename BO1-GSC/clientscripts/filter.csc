@@ -173,14 +173,11 @@ enable_filter_hazmat(player, filterid, overlayid, stage, opacity) {
   player set_filter_pass_enabled(filterid, 0, true);
   if(stage == 1) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_1"], 1);
-  }
-  else if(stage == 2) {
+  } else if(stage == 2) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_2"], 1);
-  }
-  else if(stage == 3) {
+  } else if(stage == 3) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_3"], 1);
-  }
-  else if(stage == 4) {
+  } else if(stage == 4) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_4"], 1);
   }
   player set_overlay_enabled(overlayid, true);

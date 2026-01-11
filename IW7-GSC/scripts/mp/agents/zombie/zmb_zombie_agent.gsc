@@ -1126,25 +1126,19 @@ func_13F55() {
       var_01 = self.synctransients;
       self.sharpturnnotifydist = level.var_13FA8[self.synctransients];
       if(isDefined(level.var_BCE5[self.agent_type])) {
-        self.moveratescale = [
-          [level.var_BCE5[self.agent_type]]
-        ]();
+        self.moveratescale = [[level.var_BCE5[self.agent_type]]]();
       } else {
         self.moveratescale = 1;
       }
 
       if(isDefined(level.var_C082[self.agent_type])) {
-        self.var_C081 = [
-          [level.var_C082[self.agent_type]]
-        ]();
+        self.var_C081 = [[level.var_C082[self.agent_type]]]();
       } else {
         self.var_C081 = 1;
       }
 
       if(isDefined(level.var_126E9[self.agent_type])) {
-        self.traverseratescale = [
-          [level.var_126E9[self.agent_type]]
-        ]();
+        self.traverseratescale = [[level.var_126E9[self.agent_type]]]();
       } else {
         self.traverseratescale = 1;
       }

@@ -4,7 +4,6 @@
 *************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace luielembar;
 
 class cluielembar: cluielem {
@@ -49,7 +48,7 @@ class cluielembar: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"luielembar");
+    cluielem::open(localclientnum, # "luielembar");
   }
 
   function function_fa582112(localclientnum) {

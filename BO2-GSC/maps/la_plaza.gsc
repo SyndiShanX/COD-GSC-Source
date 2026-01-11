@@ -30,7 +30,7 @@ autoexec init_plaza() {
   level thread cart_1_watcher();
 
   foreach(m_prop_link in a_prop_links) {
-  m_prop_link linkto(a_prop);
+    m_prop_link linkto(a_prop);
   }
 
   a_prop = getent("plaza_cart_2", "targetname");
@@ -38,7 +38,7 @@ autoexec init_plaza() {
   level thread cart_2_watcher();
 
   foreach(m_prop_link in a_prop_links) {
-  m_prop_link linkto(a_prop);
+    m_prop_link linkto(a_prop);
   }
 }
 
@@ -409,13 +409,13 @@ handle_shop_guy_1_nodes() {
   nodes = getnodearray("plaza_shop_guy_1_nodes", "script_noteworthy");
 
   foreach(node in nodes) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 
   scene_wait("plaza_shopguy01");
 
   foreach(node in nodes) {
-  setenablenode(node, 1);
+    setenablenode(node, 1);
   }
 }
 
@@ -423,13 +423,13 @@ handle_shop_guy_2_nodes() {
   nodes = getnodearray("plaza_shop_guy_2_nodes", "script_noteworthy");
 
   foreach(node in nodes) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 
   scene_wait("plaza_shopguy02");
 
   foreach(node in nodes) {
-  setenablenode(node, 1);
+    setenablenode(node, 1);
   }
 }
 
@@ -538,7 +538,7 @@ plaza_harper_movement_left() {
   a_plaza_right_color = getEntArray("plaza_right_color", "script_noteworthy");
 
   foreach(t_plaza_right_color in a_plaza_right_color) {
-  t_plaza_right_color delete();
+    t_plaza_right_color delete();
   }
 
   level.harper.plaza_right = 0;
@@ -551,7 +551,7 @@ plaza_harper_movement_right() {
   a_plaza_left_color = getEntArray("plaza_left_color", "script_noteworthy");
 
   foreach(t_plaza_left_color in a_plaza_left_color) {
-  t_plaza_left_color delete();
+    t_plaza_left_color delete();
   }
 
   level.harper.plaza_right = 1;
@@ -718,8 +718,7 @@ lockbreaker() {
   level thread intruder_sam();
 }
 
-lockbreaker_planted(m_player) {
-}
+lockbreaker_planted(m_player) {}
 
 lockbreaker_door_open(m_player) {
   m_left_org = getent("lockbreaker_left", "targetname");
@@ -775,8 +774,7 @@ intruder_sam() {
 
   if(level.b_sam_success) {
     run_scene("sam_out");
-  }
-  else {
+  } else {
     vh_sam dodamage(10000, vh_sam.origin, undefined, undefined, "explosive");
     run_scene("sam_thrown_out");
   }

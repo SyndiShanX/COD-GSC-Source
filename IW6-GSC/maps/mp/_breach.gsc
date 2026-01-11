@@ -553,7 +553,7 @@ breach_icon_update(type, origin, angles, icon_id, end_ons) {
     }
 
     foreach(end_on in end_ons) {
-    self endon(end_on);
+      self endon(end_on);
     }
   }
 

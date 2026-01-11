@@ -200,9 +200,7 @@ function function_e5e94978() {
         self.attacker zm_score::player_add_points(str_notify, self.damagemod, self.damagelocation, undefined, self.team, self.damageweapon);
       }
       if(isDefined(level.hero_power_update)) {
-        [
-          [level.hero_power_update]
-        ](self.attacker, self);
+        [[level.hero_power_update]](self.attacker, self);
       }
     }
     util::wait_network_frame();

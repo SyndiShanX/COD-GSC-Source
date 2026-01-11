@@ -76,8 +76,7 @@ ent_released_from_claw_grab_achievement(e_releaser, e_held_by_mechz) {
   if(isDefined(e_releaser) && isDefined(e_held_by_mechz) && isplayer(e_releaser) && isplayer(e_held_by_mechz)) {
     if(e_releaser == e_held_by_mechz) {
       e_releaser notify("mechz_grab_released_self");
-    }
-    else {
+    } else {
       e_releaser notify("mechz_grab_released_friendly");
     }
   }
@@ -234,8 +233,7 @@ claw_grapple() {
 
   if(isDefined(self.e_grabbed)) {
     n_time = n_dist / 200;
-  }
-  else {
+  } else {
     n_time = n_dist / 1000;
   }
 
@@ -272,8 +270,7 @@ claw_grapple() {
 
     if(isplayer(self.e_grabbed) && is_player_valid(self.e_grabbed)) {
       self.e_grabbed thread mechz_unlink_on_laststand(self);
-    }
-    else if(isai(self.e_grabbed)) {
+    } else if(isai(self.e_grabbed)) {
       self.e_grabbed thread mechz_zombie_flamethrower_gib(self);
     }
 

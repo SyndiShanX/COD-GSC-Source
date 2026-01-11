@@ -281,8 +281,7 @@ startsubwooferdeploy(weapon, armed) {
 
     if(weapon.power_on) {
       self thread subwooferthink(weapon, armed);
-    }
-    else {
+    } else {
       self iprintlnbold(&"ZOMBIE_NEED_LOCAL_POWER");
     }
 
@@ -396,8 +395,7 @@ wait_and_take_equipment() {
   self thread maps\mp\zombies\_zm_equipment::equipment_release(level.subwoofer_name);
 }
 
-init_animtree() {
-}
+init_animtree() {}
 
 subwoofer_fx(weapon) {
   weapon endon("death");
@@ -466,8 +464,7 @@ subwooferthink(weapon, armed) {
 
     if(self.subwoofer_power_level == 3) {
       vibrateamplitude = 8;
-    }
-    else if(self.subwoofer_power_level == 2) {
+    } else if(self.subwoofer_power_level == 2) {
       vibrateamplitude = 13;
     }
 
@@ -495,14 +492,11 @@ subwooferthink(weapon, armed) {
 
       if(distanceentityandsubwoofer <= 32400) {
         action = "burst";
-      }
-      else if(distanceentityandsubwoofer <= 230400) {
+      } else if(distanceentityandsubwoofer <= 230400) {
         action = "fling";
-      }
-      else if(distanceentityandsubwoofer <= 1440000) {
+      } else if(distanceentityandsubwoofer <= 1440000) {
         action = "stumble";
-      }
-      else {
+      } else {
         continue;
       }
 
@@ -745,8 +739,7 @@ knockdown_zombie_animate() {
   if(isDefined(self.a.gib_ref)) {
     if(self.a.gib_ref == "no_legs" || self.a.gib_ref == "no_arms" || (self.a.gib_ref == "left_leg" || self.a.gib_ref == "right_leg") && randomint(100) > 25 || (self.a.gib_ref == "left_arm" || self.a.gib_ref == "right_arm") && randomint(100) > 75) {
       animation_duration = "_late";
-    }
-    else if(randomint(100) > 75) {
+    } else if(randomint(100) > 75) {
       animation_duration = "_early";
     }
   } else if(randomint(100) > 25)
@@ -793,8 +786,7 @@ debugsubwoofer() {
 
       if(self.subwoofer_power_level <= 1) {
         health_color = red;
-      }
-      else if(self.subwoofer_power_level <= 3) {
+      } else if(self.subwoofer_power_level <= 3) {
         health_color = yellow;
       }
 

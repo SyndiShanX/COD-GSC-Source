@@ -45,8 +45,7 @@ CodeCallback_VehicleDamage(inflictor, attacker, damage, dFlags, meansOfDeath, sW
   sWeapon = maps\mp\_utility::weaponMap(sWeapon);
   if(isDefined(self.damageCallback)) {
     self[[self.damageCallback]](inflictor, attacker, damage, dFlags, meansOfDeath, sWeapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
-  }
-  else {
+  } else {
     self Vehicle_FinishDamage(inflictor, attacker, damage, dFlags, meansOfDeath, sWeapon, point, dir, hitLoc, timeOffset, modelIndex, partName);
   }
 }

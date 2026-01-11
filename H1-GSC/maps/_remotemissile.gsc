@@ -21,8 +21,7 @@ init() {
 
   if(isDefined(level.uav_missile_override)) {
     precacheitem(level.uav_missile_override);
-  }
-  else {
+  } else {
     precacheitem("remote_missile");
   }
 
@@ -48,11 +47,9 @@ init() {
 
   if(isDefined(level.remotemissile_usethermal) && level.remotemissile_usethermal) {
     visionsetmissilecam("missilecam");
-  }
-  else if(!isDefined(level.vision_uav)) {
+  } else if(!isDefined(level.vision_uav)) {
     visionsetmissilecam("missilecam");
-  }
-  else {
+  } else {
     visionsetmissilecam(level.vision_uav);
   }
 
@@ -65,7 +62,7 @@ init() {
   common_scripts\utility::flag_set("uav_enabled");
 
   foreach(var_1 in level.players) {
-  var_1 maps\_utility::ent_flag_init("controlling_UAV");
+    var_1 maps\_utility::ent_flag_init("controlling_UAV");
   }
 }
 
@@ -141,8 +138,7 @@ is_radio_defined(var_0) {
 should_break_available() {
   if(isDefined(level.uav_is_not_available)) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -150,8 +146,7 @@ should_break_available() {
 should_break_destroyed() {
   if(isDefined(level.uav_is_destroyed)) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -189,8 +184,7 @@ disable_uav(var_0, var_1) {
 
   if(isDefined(var_1) && var_1) {
     remove_uav_weapon();
-  }
-  else {
+  } else {
     disable_uav_weapon();
   }
 }
@@ -201,11 +195,9 @@ restore_uav_weapon(var_0) {
   }
   if(isstring(var_0)) {
     var_1 = var_0;
-  }
-  else if(isDefined(self.uav_weaponname)) {
+  } else if(isDefined(self.uav_weaponname)) {
     var_1 = self.uav_weaponname;
-  }
-  else {
+  } else {
     return;
   }
 
@@ -252,8 +244,7 @@ give_remotemissile_weapon(var_0) {
 set_remotemissile_actionslot() {
   if(!self hasweapon("claymore")) {
     self.remotemissile_actionslot = 4;
-  }
-  else {
+  } else {
     self.remotemissile_actionslot = 2;
   }
 }
@@ -457,8 +448,7 @@ play_kills_dialogue() {
     var_0 = "uav_3_kills";
   else if(var_1 > 1) {
     var_0 = "uav_few_kills";
-  }
-  else if(var_1 > 0) {
+  } else if(var_1 > 0) {
     var_0 = "uav_1_kill";
   }
 
@@ -502,11 +492,9 @@ play_kills_dialogue() {
 
   if(var_3 > 0) {
     var_11 = "uav_btr_kill";
-  }
-  else if(var_5 > 0) {
+  } else if(var_5 > 0) {
     var_11 = "uav_helo_kill";
-  }
-  else if(var_4 > 1) {
+  } else if(var_4 > 1) {
     var_11 = "uav_multi_vehicle_kill";
 
     if(is_radio_defined("uav_multi_vehicle_kill2") && common_scripts\utility::cointoss()) {
@@ -565,8 +553,7 @@ cancel_on_player_damage() {
 
   if(maps\_utility::is_survival()) {
     common_scripts\utility::waittill_any("player_has_red_flashing_overlay", "player_downed", "dtest", "force_out_of_uav");
-  }
-  else {
+  } else {
     common_scripts\utility::waittill_any("damage", "dtest", "force_out_of_uav");
   }
 
@@ -701,8 +688,7 @@ abortlaptopswitch(var_0) {
 
   if(isDefined(level.remotemissile_usethermal) && level.remotemissile_usethermal) {
     var_0 visionsetthermalforplayer(level.visionthermaldefault, 0.5);
-  }
-  else if(isDefined(maps\_utility::get_vision_set_fog(level.lvl_visionset))) {
+  } else if(isDefined(maps\_utility::get_vision_set_fog(level.lvl_visionset))) {
     var_0 maps\_utility::fog_set_changes(level.lvl_visionset, 0.5);
   }
 
@@ -766,8 +752,7 @@ uavremotelaunchersequence(var_0, var_1) {
 
   if(!var_4) {
     abortlaptopswitch(var_0);
-  }
-  else {
+  } else {
     var_5 = 0.25;
     var_0 visionsetnakedforplayer(level.vision_black, var_5);
 
@@ -791,8 +776,7 @@ uavremotelaunchersequence(var_0, var_1) {
     if(isDefined(var_6)) {
       if(maps\_utility::is_specialop()) {
         var_6 hideonclient(self);
-      }
-      else {
+      } else {
         var_6 hide();
       }
     }
@@ -817,8 +801,7 @@ uavremotelaunchersequence(var_0, var_1) {
 
     if(isDefined(level.activate_uav_hud_cb)) {
       var_0[[level.activate_uav_hud_cb]]();
-    }
-    else {
+    } else {
       var_0 text_titlecreate();
       text_titlesettext(&"HELLFIRE_DRONE_VIEW");
     }
@@ -871,8 +854,7 @@ uavremotelaunchersequence(var_0, var_1) {
 
     if(isDefined(level.firemissile_uav_hud_cb)) {
       var_0[[level.firemissile_uav_hud_cb]](0);
-    }
-    else {
+    } else {
       text_titlesettext(&"HELLFIRE_MISSILE_VIEW");
       text_noticedestroy();
     }
@@ -884,8 +866,7 @@ uavremotelaunchersequence(var_0, var_1) {
 
     if(isDefined(level.uav_missile_tag_for_camera)) {
       var_0 cameralinkto(var_10, level.uav_missile_tag_for_camera);
-    }
-    else {
+    } else {
       var_0 cameralinkto(var_10, "tag_origin");
     }
 
@@ -984,7 +965,7 @@ missile_kills(var_0) {
   var_1 = maps\_utility::getvehiclearray();
 
   foreach(var_3 in var_1) {
-  var_3 thread missile_kill_vehicle(var_0);
+    var_3 thread missile_kill_vehicle(var_0);
   }
 
   wait 1;
@@ -1080,8 +1061,7 @@ exitfromcamera_missile(var_0, var_1) {
 
   if(isDefined(level.firemissile_uav_hud_cb)) {
     var_0[[level.firemissile_uav_hud_cb]](1);
-  }
-  else {
+  } else {
     text_titledestroy();
   }
 
@@ -1106,8 +1086,7 @@ exitfromcamera_missile(var_0, var_1) {
   if(isDefined(var_2)) {
     if(maps\_utility::is_specialop()) {
       var_2 showonclient(self);
-    }
-    else {
+    } else {
       var_2 show();
     }
   }
@@ -1173,8 +1152,7 @@ exitfromcamera_uav(var_0, var_1) {
 
   if(isDefined(level.deactivate_uav_hud_cb)) {
     var_0[[level.deactivate_uav_hud_cb]](0);
-  }
-  else {
+  } else {
     text_titlefadeout();
     text_noticefadeout();
   }
@@ -1194,8 +1172,7 @@ exitfromcamera_uav(var_0, var_1) {
 
   if(isDefined(level.deactivate_uav_hud_cb)) {
     var_0[[level.deactivate_uav_hud_cb]](1);
-  }
-  else {
+  } else {
     text_titledestroy();
     text_noticedestroy();
   }
@@ -1217,8 +1194,7 @@ exitfromcamera_uav(var_0, var_1) {
   if(isDefined(var_2)) {
     if(maps\_utility::is_specialop()) {
       var_2 showonclient(self);
-    }
-    else {
+    } else {
       var_2 show();
     }
   }
@@ -1306,8 +1282,7 @@ waitforattackcommand(var_0) {
 
   if(var_1 == "launch") {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -1357,8 +1332,7 @@ huditemshide() {
 huditemsshow() {
   if(level.players.size > 0) {
     setdvar("ui_remotemissile_playernum", 0);
-  }
-  else {
+  } else {
     setsaveddvar("compass", "1");
     setsaveddvar("ammoCounterHide", "0");
     setsaveddvar("actionSlotsHide", "0");
@@ -1385,14 +1359,11 @@ firemissilefromuavplayer(var_0) {
 
   if(isDefined(level.uav_missile_override)) {
     var_7 = magicbullet(level.uav_missile_override, var_5, var_6, var_0);
-  }
-  else if(isDefined(level.remote_missile_snow)) {
+  } else if(isDefined(level.remote_missile_snow)) {
     var_7 = magicbullet("remote_missile_snow", var_5, var_6, var_0);
-  }
-  else if(isDefined(level.remote_missile_invasion)) {
+  } else if(isDefined(level.remote_missile_invasion)) {
     var_7 = magicbullet("remote_missile_invasion", var_5, var_6, var_0);
-  }
-  else {
+  } else {
     var_7 = magicbullet("remote_missile", var_5, var_6, var_0);
   }
 
@@ -1431,24 +1402,20 @@ draw_target() {
 
   if(isDefined(self.helicopter_predator_target_shader)) {
     target_set(self, (0, 0, -96));
-  }
-  else {
+  } else {
     target_set(self, (0, 0, 64));
   }
 
   if(isai(self)) {
     if(issplitscreen()) {
       target_setshader(self, "remotemissile_infantry_target_2plr");
-    }
-    else {
+    } else {
       target_setshader(self, "remotemissile_infantry_target");
     }
   } else if(isplayer(self)) {
     if(isDefined(self.is_controlling_uav) && self.is_controlling_uav) {
       target_setshader(self, "hud_fofbox_self_sp");
-    }
-    else {
-    }
+    } else {}
   } else
     target_setshader(self, "veh_hud_target");
 

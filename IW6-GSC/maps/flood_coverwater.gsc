@@ -162,8 +162,7 @@ player_underwater_think(var_0) {
 
   if(!isDefined(level._audio.in_deathsdoor)) {
     level.player clearclienttriggeraudiozone(0.01);
-  }
-  else {
+  } else {
     maps\_audio::set_deathsdoor();
   }
 
@@ -194,8 +193,7 @@ ai_in_coverwater(var_0) {
 
   if(isDefined(self.cw_ai_only_stand)) {
     self.cw_ai_only_stand = self.cw_ai_only_stand;
-  }
-  else {
+  } else {
     self.cw_ai_only_stand = 1;
   }
 
@@ -270,16 +268,14 @@ water_surface_think(var_0) {
 
     if(var_5 == "MOD_MELEE") {
       playFX(common_scripts\utility::getfx("melee_water"), var_4);
-    }
-    else if(var_2.classname != "script_vehicle_nh90") {
+    } else if(var_2.classname != "script_vehicle_nh90") {
       if(getsubstr(self.targetname, self.targetname.size - 5) == "above") {
         var_8 = var_4 - (0, 0, 1);
         var_9 = var_8 + 120 * var_3;
 
         if(isplayer(var_2)) {
           magicbullet("coverwater_magicbullet_under", var_8, var_9, level.player);
-        }
-        else {
+        } else {
           magicbullet("coverwater_magicbullet_under", var_8, var_9);
         }
 
@@ -290,8 +286,7 @@ water_surface_think(var_0) {
 
         if(isplayer(var_2)) {
           magicbullet("coverwater_magicbullet_above", var_8, var_9, level.player);
-        }
-        else {
+        } else {
           magicbullet("coverwater_magicbullet_above", var_8, var_9);
         }
 
@@ -321,8 +316,7 @@ player_water_height_think(var_0) {
         if(isDefined(level.cw_player_is_drowning) && level.cw_player_is_drowning) {
           if(level.cw_player_drowning_damage_count > 10) {
             maps\flood_util::player_water_movement(var_1 * 0.5, 0.25);
-          }
-          else {
+          } else {
             maps\flood_util::player_water_movement(var_1 * (1 - level.cw_player_drowning_damage_count * 0.05), 0.25);
           }
         } else
@@ -336,8 +330,7 @@ player_water_height_think(var_0) {
 
       if(var_5 > 100) {
         var_5 = 100;
-      }
-      else if(var_5 < var_2) {
+      } else if(var_5 < var_2) {
         var_5 = var_2;
       }
 
@@ -417,8 +410,7 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
   for(;;) {
     if(!isplayer(self) && self.cw_in_rising_water) {
       wait(randomfloatrange(0.05, 0.1));
-    }
-    else {
+    } else {
       wait(randomfloatrange(0.15, 0.25));
     }
 
@@ -457,16 +449,14 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
       if(!common_scripts\utility::flag("cw_player_underwater")) {
         if(distance(self getvelocity(), (0, 0, 0)) < 5) {
           var_10 = "water_stop_player";
-        }
-        else {
+        } else {
           var_10 = "water_movement_player";
         }
       }
     } else if(isDefined(level._effect["water_" + self.a.movement])) {
       if(self.cw_in_rising_water) {
         var_10 = "water_" + self.a.movement + "_rising";
-      }
-      else {
+      } else {
         var_10 = "water_" + self.a.movement;
       }
     }
@@ -485,8 +475,7 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
 
               if(randomint(3) == 0) {
                 playFXOnTag(level._effect["scrnfx_water_splash_med"], level.cw_player_view_fx_source, "tag_origin");
-              }
-              else {
+              } else {
                 playFXOnTag(level._effect["scrnfx_water_splash_high"], level.cw_player_view_fx_source, "tag_origin");
               }
             }
@@ -504,8 +493,7 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
 
         if(self.cw_in_rising_water) {
           playFX(common_scripts\utility::getfx("sprint_splash_rising"), var_5);
-        }
-        else {
+        } else {
           playFX(common_scripts\utility::getfx("sprint_splash"), var_5);
         }
       }
@@ -533,8 +521,7 @@ entity_fx_and_anims_think(var_0, var_1, var_2, var_3) {
 
     if(self getEye()[2] + 6 - var_9 > 0) {
       playFX(var_11, var_5, var_15, var_14);
-    }
-    else {
+    } else {
       playFX(common_scripts\utility::getfx("underwater_movement"), var_5, var_15, var_14);
     }
   }
@@ -617,11 +604,9 @@ is_player_eye_underwater(var_0) {
 
   if(var_2["surfacetype"] == "water") {
     return 1;
-  }
-  else if(isDefined(var_2["entity"]) && isDefined(var_2["entity"].script_noteworthy) && var_2["entity"].script_noteworthy == "consider_underwater") {
+  } else if(isDefined(var_2["entity"]) && isDefined(var_2["entity"].script_noteworthy) && var_2["entity"].script_noteworthy == "consider_underwater") {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

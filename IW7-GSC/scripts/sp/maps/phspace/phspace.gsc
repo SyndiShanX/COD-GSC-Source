@@ -453,8 +453,7 @@ func_CADF() {
 
     if(isDefined(level.func_D127) && level.func_D127 func_0BDC::func_A2A7()) {
       var_00 = level.func_D127.origin;
-    }
-    else {
+    } else {
       var_00 = level.player.origin;
     }
 

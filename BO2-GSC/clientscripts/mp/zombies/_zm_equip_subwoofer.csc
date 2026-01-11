@@ -104,5 +104,4 @@ subwoofer_delayed_removal_from_active_list() {
   level._active_subwoofers["" + self getentitynumber()] = undefined;
 }
 
-init_animtree() {
-}
+init_animtree() {}

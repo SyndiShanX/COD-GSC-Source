@@ -10,7 +10,6 @@
 #include scripts\core_common\perks;
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\weapon_utils;
-
 #namespace armor;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -83,7 +82,7 @@ setlightarmor(optionalarmorvalue, var_2274e560, var_cdeeec29) {
 }
 
 removelightarmorondeath() {
-  self endon(#"disconnect", #"give_light_armor", #"remove_light_armor");
+  self endon(#"disconnect", # "give_light_armor", # "remove_light_armor");
   self waittill(#"death");
   unsetlightarmor();
 }
@@ -94,7 +93,7 @@ unsetlightarmor() {
 }
 
 removelightarmoronmatchend() {
-  self endon(#"disconnect", #"remove_light_armor");
+  self endon(#"disconnect", # "remove_light_armor");
   level waittill(#"game_ended");
   self thread unsetlightarmor();
 }
@@ -298,7 +297,7 @@ private function_37f4e0e0(smeansofdeath, shitloc) {
 }
 
 private function_7538fede(weapon) {
-  if(weapon.name == #"ar_stealth_t8_operator") {
+  if(weapon.name == # "ar_stealth_t8_operator") {
     return true;
   }
 

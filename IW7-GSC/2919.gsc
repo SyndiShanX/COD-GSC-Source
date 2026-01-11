@@ -34,7 +34,7 @@ func_DBCC() {
     self.func_DBC1.alpha = 1.0;
 
     foreach(var_01 in self.func_DBC6) {
-    var_1.func_DBC2.alpha = 1.0;
+      var_1.func_DBC2.alpha = 1.0;
     }
   }
 
@@ -57,13 +57,13 @@ func_DBCD() {
 
     if(scripts\engine\utility::is_true(self.func_DBC5.func_26E3)) {
       foreach(var_05 in _getaiarray("axis")) {
-      func_DBC0(var_05);
+        func_DBC0(var_05);
       }
     }
 
     if(scripts\engine\utility::is_true(self.func_DBC5.func_1CC7)) {
       foreach(var_05 in _getaiarray("allies")) {
-      func_DBC0(var_05);
+        func_DBC0(var_05);
       }
     }
 
@@ -114,8 +114,7 @@ func_DBC3(var_00, var_01, var_02, var_03, var_04) {
 
   if(getdvarint("radar_color_dist_scaled") >= 1) {
     var_0.func_DBC2.color = (scripts\engine\utility::ter_op(var_13 >= 0, 1.0, _pow(1.0 + var_13, 4)), _pow(1.0 - abs(var_13), 1), scripts\engine\utility::ter_op(var_13 <= 0, 1.0, _pow(1.0 - var_13, 4))) * var_0.func_DBC2.func_439E;
-  }
-  else {
+  } else {
     var_0.func_DBC2.color = (1, 0, 0) * var_0.func_DBC2.func_439E;
   }
 
@@ -163,8 +162,7 @@ func_DBC4(var_00, var_01, var_02, var_03, var_04) {
 
   if(getdvarint("radar_color_dist_scaled") >= 1) {
     var_0.func_DBC2.color = (0.5 * (1.0 - _pow(var_12, 0.5)) + 0.5, 0.0, 0.0) * var_0.func_DBC2.func_439E;
-  }
-  else {
+  } else {
     var_0.func_DBC2.color = (1, 0, 0) * var_0.func_DBC2.func_439E;
   }
 
@@ -198,8 +196,7 @@ func_DBC4(var_00, var_01, var_02, var_03, var_04) {
 func_DBC7() {
   if(isDefined(self.team)) {
     return self.team;
-  }
-  else if(isDefined(self.script_team)) {
+  } else if(isDefined(self.script_team)) {
     return self.script_team;
   }
 
@@ -210,7 +207,7 @@ func_DBC8() {
   self.func_DBC1.alpha = 0.0;
 
   foreach(var_01 in self.func_DBC6) {
-  var_1.func_DBC2.alpha = 0;
+    var_1.func_DBC2.alpha = 0;
   }
 }
 
@@ -219,7 +216,7 @@ func_DBCB() {
   level.func_DBD5 = undefined;
 
   foreach(var_01 in self.func_DBC6) {
-  func_DBD0(var_01);
+    func_DBD0(var_01);
   }
 
   self.func_DBC1 destroy();
@@ -238,8 +235,7 @@ func_DBC0(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if(isDefined(var_02)) {
     var_07 = var_02;
-  }
-  else if(issubstr(var_0.classname, "capitalship")) {
+  } else if(issubstr(var_0.classname, "capitalship")) {
     var_07 = "hud_radar_capital_ship";
     var_08 = 20;
     var_09 = 20;

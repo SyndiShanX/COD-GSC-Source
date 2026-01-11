@@ -268,7 +268,7 @@ func_DFBF() {
   scripts\engine\utility::flag_set("frag_force_delete");
 
   foreach(var_01 in level.func_0149.func_B37A) {
-  var_01 func_E012();
+    var_01 func_E012();
   }
 
   scripts\engine\utility::waitframe();
@@ -317,8 +317,7 @@ func_734D(var_00, var_01, var_02, var_03) {
   for(var_07 = 0; var_07 < var_1.size; var_7++) {
     if(distance(var_1[var_07].origin, var_00) > var_02) {
       continue;
-    }
-    else if(!isDefined(var_1[var_07].ent) || !isalive(var_1[var_07].ent)) {
+    } else if(!isDefined(var_1[var_07].ent) || !isalive(var_1[var_07].ent)) {
       var_4[var_4.size] = var_1[var_07];
       continue;
     } else if(var_1[var_07].ent.health < var_1[var_07].health) {
@@ -348,8 +347,7 @@ func_734D(var_00, var_01, var_02, var_03) {
 
       if(var_07 < var_08) {
         setomnvar("ui_fragreticles_" + var_07 + "_lock_state", 1);
-      }
-      else if(var_07 < var_08 + var_09) {
+      } else if(var_07 < var_08 + var_09) {
         if(!isalive(var_11[var_07])) {
           setomnvar("ui_fragreticles_" + var_07 + "_lock_state", 2);
           var_15 linkto(var_11[var_07].ent, func_129D(var_11[var_07].ent), (0, 0, 0), (0, 0, 0));
@@ -379,8 +377,7 @@ func_734D(var_00, var_01, var_02, var_03) {
 func_129D(var_00) {
   if(isDefined(var_0.classname) && !issubstr(var_0.classname, "seeker")) {
     return "j_SpineUpper";
-  }
-  else {
+  } else {
     return "tag_origin";
   }
 }
@@ -406,7 +403,7 @@ func_7352(var_00, var_01) {
   scripts\engine\utility::flag_wait_or_timeout("frag_force_delete", 2.0);
 
   foreach(var_04 in var_02) {
-  var_04 notify("frag_outline_display_done");
+    var_04 notify("frag_outline_display_done");
   }
 }
 
@@ -470,8 +467,7 @@ func_1339D(var_00) {
 func_385C(var_00, var_01) {
   if(_isent(self) || isai(self)) {
     var_02 = [self, var_01, level.player];
-  }
-  else {
+  } else {
     var_02 = [var_01, level.player];
   }
 
@@ -588,8 +584,7 @@ func_13C7E(var_00, var_01, var_02, var_03) {
   if(getdvarint("scr_damage_debug") != 0) {
     if(var_7["fraction"] == 1) {
       thread debugline(var_04, var_01, (1, 1, 1));
-    }
-    else {
+    } else {
       thread debugline(var_04, var_7["position"], (1, 0.9, 0.8));
       thread debugline(var_7["position"], var_01, (1, 0.4, 0.3));
     }

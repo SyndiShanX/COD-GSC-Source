@@ -77,8 +77,7 @@ vampire_regen_health(health) {
   sav = self.maxhealth;
   if((self.health + health) > self.maxhealth) {
     self.health = self.maxhealth;
-  }
-  else {
+  } else {
     self.health = self.health + health;
   }
   self.maxhealth = sav;

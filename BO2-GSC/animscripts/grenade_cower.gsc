@@ -28,8 +28,7 @@ main() {
 
   if(isDefined(self.grenade)) {
     grenadeangle = angleclamp180(vectortoangles(self.grenade.origin - self.origin)[1] - self.angles[1]);
-  }
-  else {
+  } else {
     grenadeangle = self.angles[1];
   }
 
@@ -53,8 +52,7 @@ trydive(grenadeangle) {
 
   if(abs(grenadeangle) > 90) {
     diveanim = animarray("dive_forward");
-  }
-  else {
+  } else {
     diveanim = animarray("dive_backward");
   }
 

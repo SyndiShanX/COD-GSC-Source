@@ -39,17 +39,13 @@ addtosystem(var_0) {
 
     if(issubstr(var_1, "grigsby")) {
       self.npcid = "grg";
-    }
-    else if(issubstr(var_1, "griggs")) {
+    } else if(issubstr(var_1, "griggs")) {
       self.npcid = "grg";
-    }
-    else if(issubstr(var_1, "price")) {
+    } else if(issubstr(var_1, "price")) {
       self.npcid = "pri";
-    }
-    else if(issubstr(var_1, "gaz")) {
+    } else if(issubstr(var_1, "gaz")) {
       self.npcid = "gaz";
-    }
-    else {
+    } else {
       setnpcid();
     }
   } else
@@ -182,8 +178,7 @@ init_aibattlechatter() {
 
   if(isDefined(self.script_battlechatter) && !self.script_battlechatter) {
     self.battlechatter = 0;
-  }
-  else {
+  } else {
     self.battlechatter = level.battlechatter[self.team];
   }
 
@@ -229,8 +224,7 @@ addresponseevent(var_0, var_1, var_2, var_3) {
   if(var_2 != level.player) {
     if(isstring(var_2.npcid) && isstring(self.npcid) && var_2.npcid == self.npcid) {
       return;
-    }
-    else if(!isstring(var_2.npcid) && !isstring(self.npcid) && var_2.npcid == self.npcid) {
+    } else if(!isstring(var_2.npcid) && !isstring(self.npcid) && var_2.npcid == self.npcid) {
       return;
     }
   }
@@ -325,8 +319,7 @@ squadofficerwaiter() {
 
     if(self.officers.size) {
       var_1 = self.officers;
-    }
-    else {
+    } else {
       var_1 = self.members;
     }
 
@@ -745,8 +738,7 @@ evaluatemoveevent(var_0) {
   } else if(isDefined(var_2) && distance(self.origin, var_2.origin) < 600) {
     if(animscripts\battlechatter::isofficer()) {
       addorderevent("move", "follow", var_2);
-    }
-    else {
+    } else {
       if(self.combattime < 0.0) {
         return;
       }
@@ -863,8 +855,7 @@ addsituationalorder() {
 
   if(self.squad.squadstates["combat"].isactive) {
     addsituationalcombatorder();
-  }
-  else {
+  } else {
     addsituationalidleorder();
   }
 }
@@ -889,21 +880,17 @@ addsituationalcombatorder() {
   if(var_0.squadstates["suppressed"].isactive) {
     if(var_0.squadstates["move"].isactive) {
       addorderevent("cover", "generic");
-    }
-    else if(var_0.squadstates["cover"].isactive) {
+    } else if(var_0.squadstates["cover"].isactive) {
       addorderevent("action", "grenade");
-    }
-    else if(randomfloat(1) > 0.5) {
+    } else if(randomfloat(1) > 0.5) {
       addorderevent("displace", "generic");
-    }
-    else {
+    } else {
       addorderevent("cover", "generic");
     }
   } else {
     if(self.team == "allies") {
       var_1 = getaiarray("axis");
-    }
-    else {
+    } else {
       var_1 = getaiarray("allies");
     }
 
@@ -934,8 +921,7 @@ addsituationalcombatorder() {
 
       if(var_2) {
         addorderevent("attack", "window");
-      }
-      else {
+      } else {
         addorderevent("action", "suppress");
       }
     }
@@ -975,8 +961,7 @@ endcustomevent(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2.type = var_1;
-  }
-  else {
+  } else {
     var_2.type = "custom";
   }
 

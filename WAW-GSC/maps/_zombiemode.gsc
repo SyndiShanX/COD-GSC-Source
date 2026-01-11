@@ -703,9 +703,7 @@ spectators_respawn() {
     players = get_players();
     for(i = 0; i < players.size; i++) {
       if(players[i].sessionstate == "spectator") {
-        players[i][
-          [level.spawnPlayer]
-        ]();
+        players[i][[level.spawnPlayer]]();
         if(isDefined(level.script) && level.script == "nazi_zombie_sumpf" && level.round_number > 6 && players[i].score < 1500) {
           players[i].old_score = players[i].score;
           players[i].score = 1500;
@@ -1709,11 +1707,9 @@ nazizombies_upload_highscore() {
   playersRank = 1;
   if(level.players_playing == 1) {
     playersRank = 4;
-  }
-  else if(level.players_playing == 2) {
+  } else if(level.players_playing == 2) {
     playersRank = 3;
-  }
-  else if(level.players_playing == 3) {
+  } else if(level.players_playing == 3) {
     playersRank = 2;
   }
   map_name = GetDvar("mapname");
@@ -1813,14 +1809,11 @@ makeRankNumber(wave, players, time) {
   padding = "";
   if(10 > time) {
     padding += "0000";
-  }
-  else if(100 > time) {
+  } else if(100 > time) {
     padding += "000";
-  }
-  else if(1000 > time) {
+  } else if(1000 > time) {
     padding += "00";
-  }
-  else if(10000 > time) {
+  } else if(10000 > time) {
     padding += "0";
   }
   rank = wave + "" + players + padding + time;

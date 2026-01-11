@@ -209,18 +209,16 @@ init_vehicles() {
   a_vehicles = arraycombine(a_script_models, getEntArray("script_vehicle", "classname"), 0, 0);
 
   foreach(veh in a_vehicles) {
-  global_vehicle_spawn_func(veh);
+    global_vehicle_spawn_func(veh);
   }
 }
 
 global_vehicle_spawn_func(veh) {
   if(is_police_car(veh)) {
     veh thread police_car();
-  }
-  else if(is_police_motorcycle(veh)) {
+  } else if(is_police_motorcycle(veh)) {
     veh thread police_motorcycle();
-  }
-  else if(is_suv(veh) && (!isDefined(veh.script_animation) && !isDefined("open_suv_doors") || isDefined(veh.script_animation) && isDefined("open_suv_doors") && veh.script_animation == "open_suv_doors")) {
+  } else if(is_suv(veh) && (!isDefined(veh.script_animation) && !isDefined("open_suv_doors") || isDefined(veh.script_animation) && isDefined("open_suv_doors") && veh.script_animation == "open_suv_doors")) {
     veh open_suv_doors();
   }
 }

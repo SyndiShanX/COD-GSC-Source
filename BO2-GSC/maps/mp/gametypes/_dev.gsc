@@ -206,8 +206,7 @@ updatedevsettingszm() {
     if(getdvar(#"r_streamDumpDistance") == "3") {
       if(!isDefined(level.streamdumpteamindex)) {
         level.streamdumpteamindex = 0;
-      }
-      else {
+      } else {
         level.streamdumpteamindex++;
       }
 
@@ -276,15 +275,13 @@ updatedevsettings() {
 
   if(show_spawns >= 1) {
     show_spawns = 1;
-  }
-  else {
+  } else {
     show_spawns = 0;
   }
 
   if(show_start_spawns >= 1) {
     show_start_spawns = 1;
-  }
-  else {
+  } else {
     show_start_spawns = 0;
   }
 
@@ -294,8 +291,7 @@ updatedevsettings() {
 
     if(level.show_spawns) {
       showspawnpoints();
-    }
-    else {
+    } else {
       hidespawnpoints();
     }
   }
@@ -306,8 +302,7 @@ updatedevsettings() {
 
     if(level.show_start_spawns) {
       showstartspawnpoints();
-    }
-    else {
+    } else {
       hidestartspawnpoints();
     }
   }
@@ -319,14 +314,11 @@ updatedevsettings() {
 
     if(getdvar(#"scr_playerwarp") == "host") {
       warpalltohost();
-    }
-    else if(getdvar(#"scr_playerwarp") == "enemies_host") {
+    } else if(getdvar(#"scr_playerwarp") == "enemies_host") {
       warpalltohost(getdvar(#"scr_playerwarp"));
-    }
-    else if(getdvar(#"scr_playerwarp") == "friendlies_host") {
+    } else if(getdvar(#"scr_playerwarp") == "friendlies_host") {
       warpalltohost(getdvar(#"scr_playerwarp"));
-    }
-    else if(getdvar(#"scr_playerwarp") == "next_start_spawn") {
+    } else if(getdvar(#"scr_playerwarp") == "next_start_spawn") {
       players = get_players();
       setdvar("scr_playerwarp", "");
 
@@ -447,15 +439,13 @@ updatedevsettings() {
 
       if(!isDefined(level.devgui_unlimited_ammo)) {
         level.devgui_unlimited_ammo = 1;
-      }
-      else {
+      } else {
         level.devgui_unlimited_ammo = !level.devgui_unlimited_ammo;
       }
 
       if(level.devgui_unlimited_ammo) {
         iprintln("Giving unlimited ammo to all players");
-      }
-      else {
+      } else {
         iprintln("Stopping unlimited ammo for all players");
       }
 
@@ -472,8 +462,7 @@ updatedevsettings() {
     } else if(getdvar(#"scr_player_momentum") != "") {
       if(!isDefined(level.devgui_unlimited_momentum)) {
         level.devgui_unlimited_momentum = 1;
-      }
-      else {
+      } else {
         level.devgui_unlimited_momentum = !level.devgui_unlimited_momentum;
       }
 
@@ -588,8 +577,7 @@ updatedevsettings() {
     if(getdvar(#"r_streamDumpDistance") == "3") {
       if(!isDefined(level.streamdumpteamindex)) {
         level.streamdumpteamindex = 0;
-      }
-      else {
+      } else {
         level.streamdumpteamindex++;
       }
 
@@ -663,14 +651,11 @@ updatedevsettings() {
 
     if(event == "painfront") {
       player dodamage(1, player.origin + forward);
-    }
-    else if(event == "painback") {
+    } else if(event == "painback") {
       player dodamage(1, player.origin - forward);
-    }
-    else if(event == "painleft") {
+    } else if(event == "painleft") {
       player dodamage(1, player.origin - right);
-    }
-    else if(event == "painright") {
+    } else if(event == "painright") {
       player dodamage(1, player.origin + right);
     }
 
@@ -775,8 +760,7 @@ updatedevsettings() {
 
   if(getdvar(#"debug_dynamic_ai_spawning") == "1" && !isDefined(level.larry)) {
     thread larry_thread();
-  }
-  else if(getdvar(#"debug_dynamic_ai_spawning") == "0") {
+  } else if(getdvar(#"debug_dynamic_ai_spawning") == "0") {
     level notify("kill_larry");
   }
 
@@ -1033,15 +1017,13 @@ updateminimapsetting() {
 
           if(corners[1].origin[0] > corners[0].origin[0]) {
             maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-          }
-          else {
+          } else {
             mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
           }
 
           if(corners[1].origin[1] > corners[0].origin[1]) {
             maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-          }
-          else {
+          } else {
             mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
           }
 
@@ -1091,8 +1073,7 @@ updateminimapsetting() {
 
           if(angleside > angletop) {
             angle = angleside;
-          }
-          else {
+          } else {
             angle = angletop;
           }
 
@@ -1242,8 +1223,7 @@ testscriptruntimeerror() {
 
   if(myerror == "assert") {
     testscriptruntimeerrorassert();
-  }
-  else {
+  } else {
     testscriptruntimeerror1();
   }
 
@@ -1396,11 +1376,9 @@ addenemyu2() {
 
   if(type == 3) {
     ent thread maps\mp\killstreaks\_radar::usekillstreaksatellite("radardirection_mp");
-  }
-  else if(type == 2) {
+  } else if(type == 2) {
     ent thread maps\mp\killstreaks\_radar::usekillstreakcounteruav("counteruav_mp");
-  }
-  else {
+  } else {
     ent thread maps\mp\killstreaks\_radar::usekillstreakradar("radar_mp");
   }
 
@@ -1596,7 +1574,7 @@ showstartspawnpoints() {
     color = team_colors[team];
 
     foreach(spawnpoint in level.spawn_start[team]) {
-    showonespawnpoint(spawnpoint, color, "hide_startspawnpoints");
+      showonespawnpoint(spawnpoint, color, "hide_startspawnpoints");
     }
   }
 
@@ -1657,8 +1635,7 @@ engagement_distance_debug_toggle() {
 dvar_turned_on(val) {
   if(val <= 0) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -1819,8 +1796,7 @@ engage_dists_add(weapontypestr, values) {
 get_engage_dists(weapontypestr) {
   if(isDefined(level.engagedists[weapontypestr])) {
     return level.engagedists[weapontypestr];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -1835,8 +1811,7 @@ engage_dists_watcher() {
 
     if(!isDefined(player.lastweapon)) {
       player.lastweapon = playerweapon;
-    }
-    else if(player.lastweapon == playerweapon) {
+    } else if(player.lastweapon == playerweapon) {
       wait 0.05;
       continue;
     }
@@ -1845,8 +1820,7 @@ engage_dists_watcher() {
 
     if(isDefined(values)) {
       level.weaponengagedistvalues = values;
-    }
-    else {
+    } else {
       level.weaponengagedistvalues = undefined;
     }
 
@@ -2107,8 +2081,7 @@ larry_ai_damage(larry) {
 
     if(isDefined(self.cac_debug_location)) {
       larry.menu[larry.menu_hitloc] settext(self.cac_debug_location);
-    }
-    else {
+    } else {
       larry.menu[larry.menu_hitloc] settext("<unknown>");
     }
 
@@ -2237,8 +2210,7 @@ watch_botsdvars() {
 
       if(hasplayerweaponprev) {
         iprintlnbold("LARRY has player weapon: ON");
-      }
-      else {
+      } else {
         iprintlnbold("LARRY has player weapon: OFF");
       }
     }
@@ -2248,8 +2220,7 @@ watch_botsdvars() {
 
       if(grenadesonlyprev) {
         iprintlnbold("LARRY using grenades only: ON");
-      }
-      else {
+      } else {
         iprintlnbold("LARRY using grenades only: OFF");
       }
     }
@@ -2259,8 +2230,7 @@ watch_botsdvars() {
 
       if(secondarygrenadesonlyprev) {
         iprintlnbold("LARRY using secondary grenades only: ON");
-      }
-      else {
+      } else {
         iprintlnbold("LARRY using secondary grenades only: OFF");
       }
     }
@@ -2838,8 +2808,7 @@ drawpath(linecolor, textcolor, textalpha, textscale, textoffset, drawtime, endon
 
     if(ent.targetname == "heli_loop_start") {
       entfirsttarget = ent.target;
-    }
-    else if(ent.target == entfirsttarget) {
+    } else if(ent.target == entfirsttarget) {
       break;
     }
 
@@ -2908,8 +2877,7 @@ node_get(player) {
     }
     if(player buttonpressed("BUTTON_A")) {
       return node;
-    }
-    else if(player buttonpressed("BUTTON_B")) {
+    } else if(player buttonpressed("BUTTON_B")) {
       return undefined;
     }
 

@@ -170,8 +170,7 @@ next_in_list(value, list) {
     if(value == list[i]) {
       if(isDefined(list[i + 1])) {
         value = list[i + 1];
-      }
-      else {
+      } else {
         value = list[0];
       }
 
@@ -191,8 +190,7 @@ prev_in_list(value, list) {
     if(value == list[i]) {
       if(isDefined(list[i - 1])) {
         value = list[i - 1];
-      }
-      else {
+      } else {
         value = list[list.size - 1];
       }
 
@@ -217,8 +215,7 @@ dev_cac_cycle_body(forward, tag) {
 
   if(forward) {
     player.cac_body_type = next_in_list(player.cac_body_type, keys);
-  }
-  else {
+  } else {
     player.cac_body_type = prev_in_list(player.cac_body_type, keys);
   }
 
@@ -234,8 +231,7 @@ dev_cac_cycle_head(forward, tag) {
 
   if(forward) {
     player.cac_head_type = next_in_list(player.cac_head_type, keys);
-  }
-  else {
+  } else {
     player.cac_head_type = prev_in_list(player.cac_head_type, keys);
   }
 
@@ -252,8 +248,7 @@ dev_cac_cycle_character(forward, tag) {
 
   if(forward) {
     player.cac_body_type = next_in_list(player.cac_body_type, keys);
-  }
-  else {
+  } else {
     player.cac_body_type = prev_in_list(player.cac_body_type, keys);
   }
 
@@ -278,8 +273,7 @@ dev_cac_cycle_player(forward) {
   for(i = 0; i < players.size; i++) {
     if(forward) {
       level.dev_cac_player = next_in_list(level.dev_cac_player, players);
-    }
-    else {
+    } else {
       level.dev_cac_player = prev_in_list(level.dev_cac_player, players);
     }
 
@@ -305,8 +299,7 @@ dev_cac_overlay_think() {
   dev_cac_overlay_destroy(hud);
 }
 
-dev_cac_overlay_update(hud) {
-}
+dev_cac_overlay_update(hud) {}
 
 dev_cac_overlay_destroy(hud) {
   for(i = 0; i < hud.menu.size; i++) {
@@ -387,8 +380,7 @@ color(value) {
 
   if(value > 0) {
     r = r - value;
-  }
-  else {
+  } else {
     g = g + value;
   }
 
@@ -430,8 +422,7 @@ dev_cac_gdt_update_think() {
     level.cac_attributes[key][asset] = value;
     players = get_players();
 
-    for(i = 0; i < players.size; i++) {
-    }
+    for(i = 0; i < players.size; i++) {}
   }
 
 }

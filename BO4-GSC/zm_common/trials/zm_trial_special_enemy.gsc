@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_special_enemy;
 
 autoexec __init__system__() {
@@ -75,7 +74,7 @@ private on_ai_killed(params) {
     return;
   }
 
-  if(level.var_44445188 === #"no_headshots" && isplayer(params.eattacker) && zm_utility::is_headshot(params.weapon, params.shitloc, params.smeansofdeath)) {
+  if(level.var_44445188 === # "no_headshots" && isplayer(params.eattacker) && zm_utility::is_headshot(params.weapon, params.shitloc, params.smeansofdeath)) {
     zm_trial::fail(#"hash_11e532a4f9c3e482", array(params.eattacker));
     return;
   }
@@ -115,7 +114,7 @@ private spawn_enemy() {
   assert(isDefined(level.var_1cc18005));
   assert(isDefined(level.var_1cc18005[challenge.enemy_type]), "<dev string:x5a>" + function_9e72a96(challenge.enemy_type));
 
-    spawn_callback = level.var_1cc18005[challenge.enemy_type];
+  spawn_callback = level.var_1cc18005[challenge.enemy_type];
   spawn_success = [[spawn_callback]]();
 
   if(isDefined(spawn_success) && spawn_success) {

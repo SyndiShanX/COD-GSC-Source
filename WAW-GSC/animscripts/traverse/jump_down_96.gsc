@@ -8,8 +8,7 @@
 main() {
   if(self.type == "human") {
     jump_down_human();
-  }
-  else if(self.type == "dog") {
+  } else if(self.type == "dog") {
     dog_jump_down(96, 7);
   }
 }

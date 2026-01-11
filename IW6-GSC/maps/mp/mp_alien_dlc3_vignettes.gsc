@@ -161,8 +161,7 @@ descent_vo_if_looking_at_ark() {
 
   if(randomint(2) == 0) {
     var_0 = ["descent_gdf_cif1wevedetecteda"];
-  }
-  else {
+  } else {
     var_0 = ["descent_gdf_cif1wevedetecteda2"];
   }
 

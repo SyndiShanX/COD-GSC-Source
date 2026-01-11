@@ -8,7 +8,6 @@
 #include scripts\core_common\struct;
 #include scripts\zm\zm_hms_util;
 #include scripts\zm_common\zm_sq_modules;
-
 #namespace namespace_bd74bbd2;
 
 register(id, version, script_noteworthy, var_92f252fd, var_af245552) {
@@ -75,13 +74,13 @@ private soul_captured(var_f0e6c7a2, ent) {
     var_f0e6c7a2.var_7944be4a = n_souls_required;
   }
 
-    if(var_f0e6c7a2.var_7944be4a >= n_souls_required) {
-      var_f0e6c7a2 thread[[var_f0e6c7a2.var_92f252fd]]();
-    }
+  if(var_f0e6c7a2.var_7944be4a >= n_souls_required) {
+    var_f0e6c7a2 thread[[var_f0e6c7a2.var_92f252fd]]();
+  }
 }
 
 private function_fab8c488() {
-  self endon(#"death", #"event_end");
+  self endon(#"death", # "event_end");
 
   while(self zm_hms_util::function_b8a27acc()) {
     wait 0.1;
@@ -92,7 +91,7 @@ private function_fab8c488() {
 }
 
 private player_enter_watcher() {
-  self endon(#"death", #"event_end");
+  self endon(#"death", # "event_end");
 
   while(!self zm_hms_util::function_b8a27acc()) {
     wait 0.1;
@@ -103,7 +102,7 @@ private player_enter_watcher() {
 }
 
 private function_b1e6482f() {
-  self endon(#"death", #"player_enter", #"event_end");
+  self endon(#"death", # "player_enter", # "event_end");
   wait 5;
   level thread[[level.var_345df07[self.id].var_af245552]]();
   end(self.id);

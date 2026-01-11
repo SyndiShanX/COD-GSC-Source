@@ -426,11 +426,11 @@ func_117A0() {
     self.owner stoprumble("thor_thrust_rumble");
 
     foreach(var_01 in self.func_B88C) {
-    self.owner setclientomnvar(var_1.omnvar, undefined);
+      self.owner setclientomnvar(var_1.omnvar, undefined);
     }
 
     foreach(var_04 in self.func_B888) {
-    self.owner setclientomnvar(var_4.omnvar, -1);
+      self.owner setclientomnvar(var_4.omnvar, -1);
     }
   }
 
@@ -504,11 +504,11 @@ func_11795(var_00) {
     self.owner stoprumble("thor_thrust_rumble");
 
     foreach(var_03 in self.func_B88C) {
-    self.owner setclientomnvar(var_3.omnvar, undefined);
+      self.owner setclientomnvar(var_3.omnvar, undefined);
     }
 
     foreach(var_06 in self.func_B888) {
-    self.owner setclientomnvar(var_6.omnvar, -1);
+      self.owner setclientomnvar(var_6.omnvar, -1);
     }
   }
 
@@ -545,8 +545,7 @@ func_11791(var_00, var_01) {
 
     if(scripts\mp\utility\game::istrue(var_01)) {
       scripts\mp\utility\game::func_1136C(scripts\engine\utility::getlastweapon(), 1);
-    }
-    else {
+    } else {
       thread func_11794();
     }
 
@@ -822,8 +821,7 @@ func_117A2() {
 
       if(var_0.thorrigangle == -360) {
         self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_thrust", 1);
-      }
-      else {
+      } else {
         self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_rev_thrust", 1);
       }
 
@@ -836,8 +834,7 @@ func_117A2() {
 
     if(var_0.thorrigangle == -360) {
       self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_idle", 1);
-    }
-    else {
+    } else {
       self scriptmodelplayanim("iw7_mp_killstreak_thor_extend_rev_idle", 1);
     }
 
@@ -1038,8 +1035,7 @@ func_139D1(var_00, var_01, var_02) {
 
     if(scripts\mp\killstreaks\utility::func_A69F(var_2.streakinfo, "passive_seek_cluster")) {
       var_22 thread delayseekopentargetinview(0.3, var_22.owner, var_07, var_09);
-    }
-    else {
+    } else {
       var_22 thread func_50E6(0.3, var_03);
     }
 
@@ -1184,8 +1180,7 @@ func_13B42(var_00, var_01) {
 
   if(var_1.func_C239 > 0) {
     var_01 notify("finished_single_fire");
-  }
-  else {
+  } else {
     var_01 scriptmodelplayanim("iw7_mp_killstreak_thor_extend_reload", 1);
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(2);
     var_01 notify("start_reload");
@@ -1271,15 +1266,14 @@ func_117A6() {
   level endon("game_ended");
 
   foreach(var_01 in level.participants) {
-  func_20D2(var_01);
+    func_20D2(var_01);
   }
 }
 
 func_20D2(var_00) {
   if(level.teambased && var_0.team != self.team) {
     return;
-  }
-  else if(!level.teambased) {
+  } else if(!level.teambased) {
     return;
   }
   var_01 = scripts\mp\utility\game::outlineenableforplayer(var_00, "cyan", self.owner, 1, 1, "killstreak");
@@ -1300,8 +1294,7 @@ removeoutline(var_00, var_01, var_02) {
 
   if(isDefined(var_02)) {
     scripts\engine\utility::waittill_any_in_array_or_timeout_no_endon_death(var_03, var_02);
-  }
-  else {
+  } else {
     scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_03);
   }
 
@@ -1334,8 +1327,7 @@ func_11790(var_00) {
 
     if(self.enemieskilledintimewindow > 1) {
       self.owner scripts\mp\utility\game::leaderdialogonplayer(var_1.func_1352C);
-    }
-    else {
+    } else {
       self.owner scripts\mp\utility\game::leaderdialogonplayer(var_1.func_1352D);
     }
 

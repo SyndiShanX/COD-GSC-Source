@@ -118,11 +118,9 @@ showNotifyMessage(notifyData) {
   waitRequireVisibility(0);
   if(isDefined(notifyData.duration)) {
     duration = notifyData.duration;
-  }
-  else if(level.gameEnded) {
+  } else if(level.gameEnded) {
     duration = 2.0;
-  }
-  else {
+  } else {
     duration = 4.0;
   }
   self notify("notifyMessageBegin", duration);
@@ -135,22 +133,19 @@ showNotifyMessage(notifyData) {
   }
   if(isDefined(notifyData.glowColor)) {
     glowColor = notifyData.glowColor;
-  }
-  else {
+  } else {
     glowColor = (0.0, 0.0, 0.0);
   }
   anchorElem = self.notifyTitle;
   if(isDefined(notifyData.titleText)) {
     if(isDefined(notifyData.titleLabel)) {
       self.notifyTitle.label = notifyData.titleLabel;
-    }
-    else {
+    } else {
       self.notifyTitle.label = &"";
     }
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString)) {
       self.notifyTitle setValue(notifyData.titleText);
-    }
-    else {
+    } else {
       self.notifyTitle setText(notifyData.titleText);
     }
     self.notifyTitle setPulseFX(100, int(duration * 1000), 1000);
@@ -160,14 +155,12 @@ showNotifyMessage(notifyData) {
   if(isDefined(notifyData.notifyText)) {
     if(isDefined(notifyData.textLabel)) {
       self.notifyText.label = notifyData.textLabel;
-    }
-    else {
+    } else {
       self.notifyText.label = &"";
     }
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString)) {
       self.notifyText setValue(notifyData.notifyText);
-    }
-    else {
+    } else {
       self.notifyText setText(notifyData.notifyText);
     }
     self.notifyText setPulseFX(100, int(duration * 1000), 1000);
@@ -179,16 +172,14 @@ showNotifyMessage(notifyData) {
     if(level.splitScreen) {
       if(isDefined(notifyData.text2Label)) {
         self iPrintLnBold(notifyData.text2Label, notifyData.notifyText2);
-      }
-      else {
+      } else {
         self iPrintLnBold(notifyData.notifyText2);
       }
     } else {
       self.notifyText2 setParent(anchorElem);
       if(isDefined(notifyData.text2Label)) {
         self.notifyText2.label = notifyData.text2Label;
-      }
-      else {
+      } else {
         self.notifyText2.label = &"";
       }
       self.notifyText2 setText(notifyData.notifyText2);
@@ -357,8 +348,7 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
   } else if(winner == "tie") {
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_draw"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["draw"]);
     }
     outcomeTitle.color = (1, 1, 1);
@@ -366,16 +356,14 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
   } else if(isDefined(self.pers["team"]) && winner == team) {
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_win"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["victory"]);
     }
     outcomeTitle.color = (0.6, 0.9, 0.6);
   } else {
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_loss"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["defeat"]);
     }
     outcomeTitle.color = (0.7, 0.3, 0.2);
@@ -582,20 +570,17 @@ updateOutcome(firstTitle, secondTitle, thirdTitle) {
     players = level.placement["all"];
     if(isDefined(firstTitle) && isDefined(players[0])) {
       firstTitle setPlayerNameString(players[0]);
-    }
-    else if(isDefined(firstTitle)) {
+    } else if(isDefined(firstTitle)) {
       firstTitle.alpha = 0;
     }
     if(isDefined(secondTitle) && isDefined(players[1])) {
       secondTitle setPlayerNameString(players[1]);
-    }
-    else if(isDefined(secondTitle)) {
+    } else if(isDefined(secondTitle)) {
       secondTitle.alpha = 0;
     }
     if(isDefined(thirdTitle) && isDefined(players[2])) {
       thirdTitle setPlayerNameString(players[2]);
-    }
-    else if(isDefined(thirdTitle)) {
+    } else if(isDefined(thirdTitle)) {
       thirdTitle.alpha = 0;
     }
   }

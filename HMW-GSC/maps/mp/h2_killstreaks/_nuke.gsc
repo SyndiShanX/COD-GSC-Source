@@ -152,7 +152,7 @@ nukeSoundIncoming() {
   level endon("nuke_cancelled");
 
   foreach(player in level.players) {
-  player playlocalsound("nuke_incoming");
+    player playlocalsound("nuke_incoming");
   }
 }
 
@@ -193,7 +193,7 @@ nukeEffects() {
       thread draw_line_for_time(nukeEnt.origin, lineTop, (1, 0, 0), 10);
     }
 
-      nukeEnt thread nukeEffect(player);
+    nukeEnt thread nukeEffect(player);
     player.nuked = true;
   }
 }
@@ -271,12 +271,10 @@ nukeDeath() {
 
   if(level.teamBased) {
     thread maps\mp\gametypes\_gamelogic::endGame(level.nukeInfo.team, game["strings"]["nuclear_strike"], true);
-  }
-  else {
+  } else {
     if(isDefined(level.nukeInfo.player)) {
       thread maps\mp\gametypes\_gamelogic::endGame(level.nukeInfo.player, game["strings"]["nuclear_strike"], true);
-    }
-    else {
+    } else {
       thread maps\mp\gametypes\_gamelogic::endGame(level.nukeInfo, game["strings"]["nuclear_strike"], true);
     }
   }

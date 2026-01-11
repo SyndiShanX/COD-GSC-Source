@@ -108,8 +108,7 @@ restore_timer_on_save_restored(start_time, v_is_countup_timer, v_show_hours, v_s
 
     if(v_is_countup_timer == 1) {
       start_time = start_time + (level.checkpoint_time - n_timer_start_time) / 1000;
-    }
-    else {
+    } else {
       start_time = start_time - (level.checkpoint_time - n_timer_start_time) / 1000;
     }
 
@@ -196,8 +195,7 @@ add_visor_text(string_to_display, duration, color, alpha, flicker, flicker_time_
 
   if(flicker) {
     v_flicker = 1;
-  }
-  else {
+  } else {
     v_flicker = 0;
   }
 
@@ -323,8 +321,7 @@ play_bink_on_hud(str_bink_name, b_looping, b_in_memory, b_paused, b_sync_audio, 
 
     if(time_remaining > 1) {
       wait(time_remaining);
-    }
-    else {
+    } else {
       wait(time_remaining - 1);
     }
 

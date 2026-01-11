@@ -89,8 +89,7 @@ settargettooclose(var_0) {
 
   if(var_2 < var_1) {
     self weaponlocktargettooclose(1);
-  }
-  else {
+  } else {
     self weaponlocktargettooclose(0);
   }
 }
@@ -110,8 +109,7 @@ setnoclearance() {
 
   if(getdvar("missileDebugDraw") == "1") {
     var_6 = 1;
-  }
-  else {
+  } else {
     var_6 = 0;
   }
 
@@ -129,11 +127,9 @@ setnoclearance() {
     if(var_15["fraction"] < 1) {
       var_12 = 1;
 
-      if(var_6) {
-      } else
+      if(var_6) {} else
         break;
-    } else if(var_6) {
-    }
+    } else if(var_6) {}
   }
 
   self weaponlocknoclearance(var_12);

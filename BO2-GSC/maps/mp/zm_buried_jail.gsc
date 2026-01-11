@@ -37,8 +37,7 @@ jail_open_door(jumpback) {
 
   if(is_true(jumpback)) {
     level.cell_door setanim(level.jail_open_jumpback, 1, 1, 1);
-  }
-  else {
+  } else {
     level.cell_door setanim(level.jail_open, 1, 1, 1);
   }
 

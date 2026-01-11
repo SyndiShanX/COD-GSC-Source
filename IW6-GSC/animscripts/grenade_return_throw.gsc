@@ -22,8 +22,7 @@ main() {
   if(var_1 < 600 && islowthrowsafe()) {
     if(var_1 < 300) {
       var_2 = animscripts\utility::lookupanim("grenade", "return_throw_short");
-    }
-    else {
+    } else {
       var_2 = animscripts\utility::lookupanim("grenade", "return_throw_long");
     }
   }

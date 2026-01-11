@@ -14,8 +14,7 @@ move_player_to_start_point(var_0) {
 
   if(isDefined(var_2)) {
     self setplayerangles(vectortoangles(var_2.origin - var_1.origin));
-  }
-  else {
+  } else {
     self setplayerangles(var_1.angles);
   }
 }
@@ -73,7 +72,7 @@ break_glass(var_0, var_1) {
   var_2 = getglassarray(var_0);
 
   foreach(var_4 in var_2) {
-  destroyglass(var_4, var_1);
+    destroyglass(var_4, var_1);
   }
 }
 
@@ -173,13 +172,12 @@ safe_delete_linkname(var_0) {
 safe_delete(var_0) {
   if(isDefined(var_0)) {
     var_0 delete();
-  }
-  else {}
+  } else {}
 }
 
 safe_delete_array(var_0) {
   foreach(var_2 in var_0) {
-  safe_delete(var_2);
+    safe_delete(var_2);
   }
 }
 
@@ -214,8 +212,7 @@ toggle_thermal_vision() {
   }
   if(self.thermal == 0) {
     turn_on_thermal_vision();
-  }
-  else {
+  } else {
     turn_off_thermal_vision();
   }
 }
@@ -310,8 +307,7 @@ nag_line_generator(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_0)) {
     var_0 = randomizer_create(["factory_bkr_whatreyoudoing", "factory_bkr_letsgo", "factory_bkr_letsgo2"]);
-  }
-  else {
+  } else {
     var_0 = randomizer_create(var_0);
   }
 
@@ -320,8 +316,7 @@ nag_line_generator(var_0, var_1, var_2, var_3) {
 
     if(isDefined(var_2)) {
       maps\_utility::smart_radio_dialogue(var_8);
-    }
-    else {
+    } else {
       thread maps\_utility::smart_dialogue(var_8);
     }
 
@@ -408,7 +403,7 @@ open_door(var_0, var_1, var_2, var_3) {
   }
   if(isDefined(var_3) && var_3 == 1) {
     foreach(var_6 in var_4.path_connectors) {
-    var_6 connectpaths();
+      var_6 connectpaths();
     }
   }
 
@@ -419,7 +414,7 @@ open_door(var_0, var_1, var_2, var_3) {
     var_4 waittill("rotatedone");
 
     foreach(var_6 in var_4.path_connectors) {
-    var_6 disconnectpaths();
+      var_6 disconnectpaths();
     }
   }
 }
@@ -429,8 +424,7 @@ create_automatic_sliding_door(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_5) || var_5.size == 0) {
     iprintln("create_automatic_sliding_door failed. No parts");
-  }
-  else {
+  } else {
     var_6 = undefined;
     var_7 = undefined;
     var_8 = undefined;
@@ -519,8 +513,7 @@ automatic_sliding_door_logic() {
 
         if(self.door_name == "sliding_door_sat_enter_02" || self.door_name == "sliding_door_sat_exit_01") {
           thread maps\factory_audio::sfx_metal_door_open(self);
-        }
-        else {
+        } else {
           thread maps\factory_audio::sfx_glass_door_open(self);
         }
 
@@ -535,8 +528,7 @@ automatic_sliding_door_logic() {
 
       if(self.door_name == "sliding_door_sat_enter_02" || self.door_name == "sliding_door_sat_exit_01") {
         thread maps\factory_audio::sfx_metal_door_close(self);
-      }
-      else {
+      } else {
         thread maps\factory_audio::sfx_glass_door_close(self);
       }
 
@@ -928,8 +920,7 @@ god_rays_from_world_location(var_0, var_1, var_2, var_3, var_4) {
 
       if(level.player.origin[0] < var_0[0]) {
         var_6 = atan((level.player.origin[1] - var_0[1]) / (level.player.origin[0] - var_0[0]));
-      }
-      else {
+      } else {
         var_6 = 180 + atan((level.player.origin[1] - var_0[1]) / (level.player.origin[0] - var_0[0]));
       }
 
@@ -970,8 +961,7 @@ god_rays_from_moving_source(var_0, var_1, var_2, var_3, var_4, var_5) {
     for(;;) {
       if(isDefined(var_1)) {
         var_9 = var_0 gettagorigin("tag_flash");
-      }
-      else {
+      } else {
         var_9 = var_0.origin;
       }
 
@@ -979,8 +969,7 @@ god_rays_from_moving_source(var_0, var_1, var_2, var_3, var_4, var_5) {
 
       if(level.player.origin[0] < var_9[0]) {
         var_7 = atan((level.player.origin[1] - var_9[1]) / (level.player.origin[0] - var_9[0]));
-      }
-      else {
+      } else {
         var_7 = 180 + atan((level.player.origin[1] - var_9[1]) / (level.player.origin[0] - var_9[0]));
       }
 

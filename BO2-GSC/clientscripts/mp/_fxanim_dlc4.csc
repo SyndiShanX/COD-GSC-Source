@@ -80,8 +80,7 @@ _fxanim_wait() {
 
   if(isDefined(self.fxanim_wait)) {
     wait(self.fxanim_wait);
-  }
-  else if(isDefined(self.fxanim_wait_min) && isDefined(self.fxanim_wait_max)) {
+  } else if(isDefined(self.fxanim_wait_min) && isDefined(self.fxanim_wait_max)) {
     n_wait_time = randomfloatrange(self.fxanim_wait_min, self.fxanim_wait_max);
     wait(n_wait_time);
   }
@@ -92,18 +91,15 @@ _fxanim_change_anim(n_fxanim_id) {
 
   if(n_fxanim_id == -1 && isDefined(self.fxanim_waittill_1)) {
     str_waittill = self.fxanim_waittill_1;
-  }
-  else if(n_fxanim_id == 0 && isDefined(self.fxanim_waittill_2)) {
+  } else if(n_fxanim_id == 0 && isDefined(self.fxanim_waittill_2)) {
     str_waittill = self.fxanim_waittill_2;
-  }
-  else if(n_fxanim_id == 1 && isDefined(self.fxanim_waittill_3)) {
+  } else if(n_fxanim_id == 1 && isDefined(self.fxanim_waittill_3)) {
     str_waittill = self.fxanim_waittill_3;
   }
 
   if(!isDefined(str_waittill) && n_fxanim_id != -1) {
     self _fxanim_wait_for_anim_to_end(n_fxanim_id);
-  }
-  else {
+  } else {
     a_changer = strtok(str_waittill, "_");
     level waittill(str_waittill);
   }
@@ -114,8 +110,7 @@ _fxanim_wait_for_anim_to_end(n_fxanim_id) {
 
   if(issubstr(str_scene, "_loop")) {
     self waittillmatch("looping anim", "end");
-  }
-  else {
+  } else {
     self waittillmatch("single anim", "end");
   }
 }
@@ -124,8 +119,7 @@ _fxanim_animate(str_scene) {
   if(!isDefined(level.scr_anim["fxanim_props_dlc4"][str_scene])) {
     if(isDefined(str_scene)) {
       println("Error: fxanim entity at " + self.origin + " is missing animation: " + str_scene);
-    }
-    else {
+    } else {
       println("Error: fxanim entity at " + self.origin + " is missing animation");
     }
 
@@ -168,11 +162,9 @@ _fxanim_get_anim_count() {
 
   if(!isDefined(self.fxanim_scene_2)) {
     n_fx_count = 1;
-  }
-  else if(!isDefined(self.fxanim_scene_3)) {
+  } else if(!isDefined(self.fxanim_scene_3)) {
     n_fx_count = 2;
-  }
-  else {
+  } else {
     n_fx_count = 3;
   }
 

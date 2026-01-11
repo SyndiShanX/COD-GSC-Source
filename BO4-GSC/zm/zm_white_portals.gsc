@@ -25,7 +25,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_white_portals;
 
 init() {
@@ -86,7 +85,7 @@ function_24167ed8() {
 }
 
 function_ab07399f() {
-  foreach(t_crafting in level.var_4fe2f84d[#"ztable_white_open"]) {
+  foreach(t_crafting in level.var_4fe2f84d[# "ztable_white_open"]) {
     if(isDefined(t_crafting.var_4f749ffe)) {
       t_crafting.var_ae360c37 = getent(t_crafting.var_4f749ffe.target, "targetname");
       t_crafting.var_ae360c37 ghost();
@@ -101,7 +100,7 @@ function_5702b2e7(e_player) {
     t_crafting = self;
   }
 
-  if(t_crafting.blueprint.name == #"zblueprint_white_mmtd") {
+  if(t_crafting.blueprint.name == # "zblueprint_white_mmtd") {
     t_crafting.var_4f749ffe show();
     t_crafting.var_ae360c37 show();
     level flag::set(#"hash_2120a14c5eeab590");
@@ -211,7 +210,7 @@ teleport_player(user) {
     return;
   }
 
-  user endoncallback(&function_96e88318, #"death");
+  user endoncallback(&function_96e88318, # "death");
   destination = undefined;
 
   if(isDefined(user.teleporting) && user.teleporting == 1) {
@@ -280,7 +279,7 @@ teleport_player(user) {
 
   destination = var_298e4578.var_52a6f692;
   user clientfield::increment_to_player("teleporter_depart", 1);
-  playFX(level._effect[#"portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[# "portal_origin"], self.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_out", self.origin);
   level thread function_fe50866d(user, self, var_298e4578);
   self function_134670b9(1);
@@ -289,7 +288,7 @@ teleport_player(user) {
   var_298e4578 thread cooldown_portal_timer(user);
   user thread function_c234a5ce();
   user clientfield::increment_to_player("teleporter_arrive", 1);
-  playFX(level._effect[#"portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[# "portal_dest"], var_298e4578.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_go", var_298e4578.origin);
   user playsoundtoplayer(#"hash_39876bf613387fef", user);
   wait 0.5;
@@ -305,7 +304,7 @@ function_96e88318(str_notify) {
 }
 
 function_c234a5ce() {
-  self endoncallback(&function_4f5d4783, #"death");
+  self endoncallback(&function_4f5d4783, # "death");
   self val::set(#"teleport_exit", "ignoreme", 1);
   wait 1;
   self function_4f5d4783();
@@ -326,7 +325,7 @@ function_26ddb915() {
 }
 
 cooldown_portal_timer(e_user) {
-  self endon(#"death", #"hash_3c91bf90cecbe758");
+  self endon(#"death", # "hash_3c91bf90cecbe758");
   e_user endon(#"death");
 
   if(!isDefined(self.a_e_users)) {
@@ -476,7 +475,7 @@ function_e9848fa7() {
 }
 
 function_9d689cc4(portal, portal_exit) {
-  self endoncallback(&function_2ef25d40, #"damage", #"death", #"cancel_teleport");
+  self endoncallback(&function_2ef25d40, # "damage", # "death", # "cancel_teleport");
 
   if(!isDefined(portal)) {
     portal = self function_e9848fa7();
@@ -529,8 +528,8 @@ function_2ef25d40(str_notify) {
 
 function_71be28e1(zombie, start_portal, end_portal) {
   self endon(#"death");
-  playFX(level._effect[#"teleport_depart"], zombie.origin);
-  playFX(level._effect[#"portal_origin"], start_portal.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[# "teleport_depart"], zombie.origin);
+  playFX(level._effect[# "portal_origin"], start_portal.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_out", zombie.origin);
   zombie function_1f034d46(end_portal.origin);
   zombie.b_ignore_cleanup = 1;
@@ -546,14 +545,14 @@ function_71be28e1(zombie, start_portal, end_portal) {
   zombie setentitypaused(0);
   zombie forceteleport(end_portal.origin + anglesToForward(end_portal.angles) * randomfloatrange(0, 32), end_target.angles);
   zombie function_1f034d46();
-  playFX(level._effect[#"teleport_arrive"], zombie.origin);
-  playFX(level._effect[#"portal_dest"], end_portal.origin, (1, 0, 0), (0, 0, 1));
+  playFX(level._effect[# "teleport_arrive"], zombie.origin);
+  playFX(level._effect[# "portal_dest"], end_portal.origin, (1, 0, 0), (0, 0, 1));
   playsoundatposition(#"evt_teleporter_go", zombie.origin);
   self.b_ignore_cleanup = self.var_693b80bb;
 }
 
 function_554c780b() {
-  self endon(#"death", #"reached_portal");
+  self endon(#"death", # "reached_portal");
   wait 2;
   self.b_ignore_cleanup = self.var_693b80bb;
 }
@@ -635,82 +634,82 @@ portal_init() {
   }
 
   switch (self.script_noteworthy) {
-    case #"portal_yellow_backyard":
+    case # "portal_yellow_backyard":
       self.var_7b89ada3 = 0;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case #"portal_yellow_house":
+    case # "portal_yellow_house":
       self.var_7b89ada3 = 1;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case #"portal_red_house":
+    case # "portal_red_house":
       self.var_7b89ada3 = 2;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case #"portal_green_house":
+    case # "portal_green_house":
       self.var_7b89ada3 = 3;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case #"portal_green_backyard":
+    case # "portal_green_backyard":
       self.var_7b89ada3 = 4;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case #"portal_street_mid":
+    case # "portal_street_mid":
       self.var_7b89ada3 = 5;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case #"portal_street_start":
+    case # "portal_street_start":
       self.var_7b89ada3 = 6;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case #"portal_prisoner_holding":
+    case # "portal_prisoner_holding":
       self.var_7b89ada3 = 7;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case #"portal_operations":
+    case # "portal_operations":
       self.var_7b89ada3 = 8;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case #"portal_transfusion_facility":
+    case # "portal_transfusion_facility":
       self.var_7b89ada3 = 9;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case #"portal_apd_interrogation":
+    case # "portal_apd_interrogation":
       self.var_7b89ada3 = 10;
       self.n_floor = 1;
       self.e_model hide();
       break;
-    case #"portal_diner":
+    case # "portal_diner":
       self.var_7b89ada3 = 11;
       self.n_floor = 2;
       self.e_model hide();
       break;
-    case #"portal_beds":
+    case # "portal_beds":
       self.var_7b89ada3 = 12;
       self.n_floor = 2;
       self.e_model hide();
       break;
-    case #"portal_lounge":
+    case # "portal_lounge":
       self.var_7b89ada3 = 13;
       self.n_floor = 2;
       self.e_model hide();
       break;
-    case #"portal_power":
+    case # "portal_power":
       self.var_7b89ada3 = 14;
       self.n_floor = 2;
       self.e_model hide();
       break;
-    case #"portal_storage":
+    case # "portal_storage":
       self.var_7b89ada3 = 15;
       self.n_floor = 2;
       self.e_model hide();
@@ -811,7 +810,7 @@ function_a09d62f1() {
 
         iprintlnbold("<dev string:x38>");
 
-          break;
+        break;
     }
   }
 }
@@ -946,34 +945,34 @@ function_3566160b(str_location, n_newval) {
   str_clientfield = "";
 
   switch (str_location) {
-    case #"portal_yellow_house":
+    case # "portal_yellow_house":
       str_clientfield = "portal_map_indicator_yellow_house";
       break;
-    case #"portal_red_house":
+    case # "portal_red_house":
       str_clientfield = "portal_map_indicator_red_house";
       break;
-    case #"portal_green_backyard":
+    case # "portal_green_backyard":
       str_clientfield = "portal_map_indicator_green_house_backyard";
       break;
-    case #"portal_street_mid":
+    case # "portal_street_mid":
       str_clientfield = "portal_map_indicator_street_middle";
       break;
-    case #"portal_prisoner_holding":
+    case # "portal_prisoner_holding":
       str_clientfield = "portal_map_indicator_prisoner_holding";
       break;
-    case #"portal_transfusion_facility":
+    case # "portal_transfusion_facility":
       str_clientfield = "portal_map_indicator_transfusion_facility";
       break;
-    case #"portal_diner":
+    case # "portal_diner":
       str_clientfield = "portal_map_indicator_diner";
       break;
-    case #"portal_beds":
+    case # "portal_beds":
       str_clientfield = "portal_map_indicator_beds";
       break;
-    case #"portal_power":
+    case # "portal_power":
       str_clientfield = "portal_map_indicator_power";
       break;
-    case #"portal_storage":
+    case # "portal_storage":
       str_clientfield = "portal_map_indicator_storage";
       break;
   }

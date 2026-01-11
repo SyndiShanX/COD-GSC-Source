@@ -79,9 +79,10 @@ onusedeployable(var_00) {
     var_01 = level.boxsettings[var_0.boxtype];
 
     if(isDefined(level.func_5222)) {
-      [[level.func_5222]](1);
-    }
-    else {
+      [
+        [level.func_5222]
+      ](1);
+    } else {
       setviewmodeldepthoffield(self, var_1.minigunweapon);
     }
 
@@ -99,7 +100,7 @@ startpath(var_00) {
   var_01 = [];
 
   foreach(var_03 in var_00 getweaponslistprimaries()) {
-  var_1[var_1.size] = getweaponbasename(var_03);
+    var_1[var_1.size] = getweaponbasename(var_03);
   }
 
   var_05 = undefined;

@@ -164,8 +164,7 @@ startcombat() {
 
   if(isDefined(self.force_civilian_stand_run)) {
     var_0 = 1;
-  }
-  else if(isDefined(self.force_civilian_hunched_run)) {
+  } else if(isDefined(self.force_civilian_hunched_run)) {
     var_0 = 0;
   }
 
@@ -195,8 +194,7 @@ checkcombatstate() {
 
     if(var_0 && !var_1) {
       startnoncombat();
-    }
-    else if(!var_0 && var_1) {
+    } else if(!var_0 && var_1) {
       startcombat();
     }
 

@@ -133,8 +133,7 @@ stopblindaiming(fireanim, animname) {
   if(isDefined(fireanim) && isDefined(animname)) {
     if(animhasnotetrack(fireanim, "stop_aim")) {
       self waittillmatch(animname, "stop_aim");
-    }
-    else {
+    } else {
       self waittillmatch(animname, "end");
     }
   }
@@ -228,8 +227,7 @@ turntomatchnodedirection(nodeangleoffset) {
     if(self.a.pose == "stand" && node gethighestnodestance() != "stand") {
       if(absrelyaw > 45 && absrelyaw < 90) {
         self orientmode("face angle", self.angles[1]);
-      }
-      else {
+      } else {
         self orientmode("face current");
       }
 

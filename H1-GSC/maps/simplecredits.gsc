@@ -54,8 +54,7 @@ skipbuttonpressed() {
 showskipbuttonpressed() {
   if(level.player usinggamepad()) {
     return level.player buttonpressed("BUTTON_Y") || level.player buttonpressed("BUTTON_B") || level.player buttonpressed("BUTTON_A") || level.player buttonpressed("BUTTON_X");
-  }
-  else {
+  } else {
     return level.player buttonpressed("SPACE") || level.player buttonpressed("ESCAPE") || level.player buttonpressed("ENTER") || level.player buttonpressed("MOUSE1");
   }
 }
@@ -81,8 +80,7 @@ skipcreditscheck() {
       } else if(!level.wanttoshowskip) {
         if(level.console || level.player usinggamepad()) {
           level.skipcredits settext(&"PLATFORM_HOLD_TO_SKIP");
-        }
-        else {
+        } else {
           level.skipcredits settext(&"PLATFORM_HOLD_TO_SKIP_KEYBOARD");
         }
 
@@ -169,8 +167,7 @@ quitcredits() {
 
   if(isDefined(level.credits_frommenu)) {
     changelevel("");
-  }
-  else {
+  } else {
     maps\_endmission::credits_end();
   }
 }

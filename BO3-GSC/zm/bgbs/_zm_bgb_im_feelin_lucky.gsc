@@ -40,9 +40,7 @@ function activation() {
     }
     if(str_powerup === "free_perk") {
       if(isDefined(level.var_2d0e5eb6)) {
-        str_powerup = [
-          [level.var_2d0e5eb6]
-        ]();
+        str_powerup = [[level.var_2d0e5eb6]]();
       } else {
         str_powerup = function_29a9b9b8();
       }

@@ -31,8 +31,7 @@ init() {
       targets[targets.size] = target;
       if(isDefined(target.target)) {
         target = getEnt(target.target, "targetname");
-      }
-      else {
+      } else {
         break;
       }
     }

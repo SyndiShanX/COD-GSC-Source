@@ -65,11 +65,9 @@ trophyUsed(grenade) {
 
   if(isDefined(self.trophyRemainingAmmo) && self.trophyRemainingAmmo > 0) {
     trophy.ammo = self.trophyRemainingAmmo;
-  }
-  else if(is_aliens()) {
+  } else if(is_aliens()) {
     trophy.ammo = 5;
-  }
-  else {
+  } else {
     trophy.ammo = 2;
   }
 
@@ -95,8 +93,7 @@ trophyUsed(grenade) {
 
   if(level.teamBased) {
     trophy maps\mp\_entityheadicons::setTeamHeadIcon(self.team, (0, 0, 65));
-  }
-  else {
+  } else {
     trophy maps\mp\_entityheadicons::setPlayerHeadIcon(self, (0, 0, 65));
   }
 
@@ -190,15 +187,13 @@ trophyActive(owner) {
 
   if(is_aliens() && self.model == "mp_weapon_alien_crate") {
     position = self.origin;
-  }
-  else {
+  } else {
     position = self GetTagOrigin("camera_jnt");
   }
 
   if(isDefined(self.cameraOffset)) {
     self.cameraOffsetVector = (0, 0, self.cameraOffset);
-  }
-  else {
+  } else {
     self.cameraOffsetVector = position - self.origin;
   }
   normalProtectionDistanceSquared = 256 * 256;

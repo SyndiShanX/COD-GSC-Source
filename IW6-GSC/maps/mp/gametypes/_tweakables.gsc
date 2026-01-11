@@ -307,8 +307,7 @@ init() {
   if(level.console) {
     if(level.xb3 || level.ps4) {
       registerTweakable("game", "graceperiod", "scr_game_graceperiod", 20);
-    }
-    else {
+    } else {
       registerTweakable("game", "graceperiod", "scr_game_graceperiod", 15);
     }
 

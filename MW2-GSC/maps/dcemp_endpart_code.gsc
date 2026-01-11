@@ -197,8 +197,7 @@ manual_mg_path(start_target, noloop) {
 
   if(isDefined(start_target)) {
     self.current_target = start_target;
-  }
-  else {
+  } else {
     self.current_target = getstruct(self.target, "targetname");
   }
 
@@ -222,11 +221,9 @@ manual_mg_path(start_target, noloop) {
 
     if(isDefined(self.current_target.target)) {
       self.current_target = getstruct(self.current_target.target, "targetname");
-    }
-    else if(isDefined(self.target)) {
+    } else if(isDefined(self.target)) {
       self.current_target = getstruct(self.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -409,7 +406,7 @@ whitehouse_cleanup_approach() {
   // kill east side enemies and friendly mg guys
   allied_mg = get_ai_group_ai("allied_mg");
   foreach(ai in allied_mg) {
-  ai kill();
+    ai kill();
   }
 
   enemies = get_ai_group_ai("whitehouse_approach_enemies");
@@ -629,8 +626,7 @@ hero_dynamic_speed() {
   while(true) {
     if(within_fov(level.player.origin, level.player.angles, self.origin, level.cosine["60"])) {
       self.moveplaybackrate = 1.0;
-    }
-    else {
+    } else {
       self.moveplaybackrate = 2.5;
     }
     wait 0.05;

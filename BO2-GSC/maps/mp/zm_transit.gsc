@@ -332,16 +332,14 @@ main() {
 
   if(level.splitscreen && getdvarint(#"splitscreen_playerCount") > 2) {
     level.optimise_for_splitscreen = 1;
-  }
-  else {
+  } else {
     level.optimise_for_splitscreen = 0;
   }
 
   if(level.ps3) {
     if(isDefined(level.optimise_for_splitscreen) && level.optimise_for_splitscreen) {
       level.culldist = 1500;
-    }
-    else {
+    } else {
       level.culldist = 4500;
     }
   } else if(isDefined(level.optimise_for_splitscreen) && level.optimise_for_splitscreen)
@@ -471,8 +469,7 @@ setup_rex_starts() {
   add_gameloc("farm", ::dummy, "farm", ::dummy);
 }
 
-dummy() {
-}
+dummy() {}
 
 init_clientflags() {
   level._clientflag_vehicle_bus_flashing_lights = 0;
@@ -485,8 +482,7 @@ init_clientflags() {
 set_player_in_fog(onoff) {
   if(onoff) {
     self setclientfield("playerinfog", 1);
-  }
-  else {
+  } else {
     self setclientfield("playerinfog", 0);
   }
 }
@@ -653,8 +649,7 @@ ignore_traverse() {
 
       if(randomint(100) > 50) {
         self setanimstatefromasd("zm_inert", "inert1");
-      }
-      else {
+      } else {
         self setanimstatefromasd("zm_inert", "inert2");
       }
 
@@ -705,8 +700,7 @@ inert_substate_override(substate) {
   if(isDefined(self.isonbus) && self.isonbus || in_bar) {
     if(randomint(100) > 50) {
       substate = "inert1";
-    }
-    else {
+    } else {
       substate = "inert2";
     }
   }
@@ -1002,11 +996,9 @@ initcharacterstartindex() {
   }
 }
 
-precacheextrazombies() {
-}
+precacheextrazombies() {}
 
-giveextrazombies() {
-}
+giveextrazombies() {}
 
 give_team_characters() {
   if(isDefined(level.hotjoin_player_setup) && [[level.hotjoin_player_setup]]("c_zom_suit_viewhands")) {
@@ -1900,8 +1892,7 @@ custom_add_weapons() {
   }
 }
 
-include_game_modules() {
-}
+include_game_modules() {}
 
 initial_round_wait_func() {
   flag_wait("initial_blackscreen_passed");
@@ -2115,8 +2106,7 @@ zm_transit_emp_detonate(grenade_origin) {
   test_ent delete();
 }
 
-emp_detonate_boss(grenade_origin) {
-}
+emp_detonate_boss(grenade_origin) {}
 
 register_screecher_lights() {
   level.safety_lights = getstructarray("screecher_escape", "targetname");
@@ -2229,9 +2219,7 @@ zombie_transit_devgui(cmd) {
 
       if(cmd_strings[1] == "regular") {
         spawnername = "zombie_spawner";
-      }
-      else if(cmd_strings[1] == "screecher") {
-      } else
+      } else if(cmd_strings[1] == "screecher") {} else
         return;
 
       direction = player getplayerangles();
@@ -2265,8 +2253,7 @@ zombie_transit_devgui(cmd) {
       if(isDefined(opening)) {
         if(isDefined(opening.zombie)) {
           iprintln("Zombie already attached to opening: " + attach_name);
-        }
-        else {
+        } else {
           origin = level.the_bus gettagorigin(attach_name);
 
           if(isDefined(jump)) {
@@ -2274,8 +2261,7 @@ zombie_transit_devgui(cmd) {
 
             if(isDefined(opening.enabled) && opening.enabled) {
               debugstar(jump_origin, 1000, (0, 1, 0));
-            }
-            else {
+            } else {
               debugstar(jump_origin, 1000, (1, 0, 0));
             }
           }
@@ -2302,8 +2288,7 @@ zombie_transit_devgui(cmd) {
       if(isDefined(level.ambushpercentageperstop)) {
         if(cmd_strings[1] == "always") {
           level.ambushpercentageperstop = 100;
-        }
-        else if(cmd_strings[1] == "never") {
+        } else if(cmd_strings[1] == "never") {
           level.ambushpercentageperstop = 0;
         }
       }
@@ -2312,8 +2297,7 @@ zombie_transit_devgui(cmd) {
     case "gas":
       if(cmd_strings[1] == "add") {
         level.the_bus maps\mp\zm_transit_bus::busgasadd(getdvarint(#"_id_69C4D2C1"));
-      }
-      else if(cmd_strings[1] == "remove") {
+      } else if(cmd_strings[1] == "remove") {
         level.the_bus maps\mp\zm_transit_bus::busgasremove(getdvarint(#"_id_69C4D2C1"));
       }
 
@@ -2354,7 +2338,7 @@ zombie_transit_devgui(cmd) {
         vehnodes = getvehiclenodearray("emp_stop_point", "script_noteworthy");
 
         foreach(node in vehnodes) {
-        maps\mp\zombies\_zm_devgui::showonespawnpoint(node, (0, 0, 1), "kill_debug_print_emp_points", undefined, "EMP STOP");
+          maps\mp\zombies\_zm_devgui::showonespawnpoint(node, (0, 0, 1), "kill_debug_print_emp_points", undefined, "EMP STOP");
         }
       }
 
@@ -3022,8 +3006,7 @@ powerup_intro_vox(powerup) {
   foreach(player in players) {
     if(player maps\mp\zombies\_zm_stats::get_global_stat("POWERUP_INTRO_PLAYED") == 1) {
       continue;
-    }
-    else {
+    } else {
       player maps\mp\zombies\_zm_stats::set_global_stat("powerup_intro_played", 1);
       say_intro = 1;
     }
@@ -3151,8 +3134,7 @@ sndmusicegg(bear_origin) {
 
   if(level.meteor_counter == 3) {
     level thread sndplaymusicegg(player, temp_ent);
-  }
-  else {
+  } else {
     wait 1.5;
     temp_ent delete();
   }

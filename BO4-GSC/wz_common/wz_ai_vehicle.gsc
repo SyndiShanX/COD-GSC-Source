@@ -11,7 +11,6 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\killstreaks\ai_tank_shared;
 #include scripts\weapons\heatseekingmissile;
-
 #namespace wz_ai_vehicle;
 
 function_e1a09b01() {
@@ -29,8 +28,8 @@ state_combat_enter(params) {
 
 path_update_interrupt_by_attacker() {
   self notify(#"path_update_interrupt_by_attacker");
-  self endon(#"death", #"change_state", #"near_goal", #"reached_end_node", #"amws_end_interrupt_watch", #"path_update_interrupt_by_attacker");
-  self waittill(#"locking on", #"missile_lock", #"damage");
+  self endon(#"death", # "change_state", # "near_goal", # "reached_end_node", # "amws_end_interrupt_watch", # "path_update_interrupt_by_attacker");
+  self waittill(#"locking on", # "missile_lock", # "damage");
 
   if(self.locked_on || self.locking_on) {
     self.debug_ai_move_to_points_considered = [];
@@ -39,7 +38,7 @@ path_update_interrupt_by_attacker() {
 
     self.debug_ai_move_to_point = undefined;
 
-      self function_d4c687c9();
+    self function_d4c687c9();
     self.lock_evade_now = 1;
   }
 
@@ -48,7 +47,7 @@ path_update_interrupt_by_attacker() {
 
 path_update_interrupt() {
   self notify(#"path_update_interrupt_by_attacker");
-  self endon(#"death", #"change_state", #"near_goal", #"reached_end_node", #"amws_end_interrupt_watch", #"path_update_interrupt_by_attacker");
+  self endon(#"death", # "change_state", # "near_goal", # "reached_end_node", # "amws_end_interrupt_watch", # "path_update_interrupt_by_attacker");
   wait 1;
 
   while(true) {
@@ -75,7 +74,7 @@ path_update_interrupt() {
 }
 
 state_combat_update(params) {
-  self endon(#"change_state", #"death");
+  self endon(#"change_state", # "death");
   self setspeed(self.settings.defaultmovespeed);
   self setacceleration(isDefined(self.settings.default_move_acceleration) ? self.settings.default_move_acceleration : 10);
   heatseekingmissile::initlockfield(self);

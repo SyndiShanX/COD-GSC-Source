@@ -43,8 +43,7 @@ unitrigger_force_per_player_triggers(unitrigger_stub, opt_on_off) {
 unitrigger_trigger(player) {
   if(self.trigger_per_player) {
     return self.playertrigger[player getentitynumber()];
-  }
-  else {
+  } else {
     return self.trigger;
   }
 }
@@ -52,8 +51,7 @@ unitrigger_trigger(player) {
 unitrigger_origin() {
   if(isDefined(self.originfunc)) {
     origin = self[[self.originfunc]]();
-  }
-  else {
+  } else {
     origin = self.origin;
   }
 
@@ -69,8 +67,7 @@ register_unitrigger_internal(unitrigger_stub, trigger_func) {
 
   if(isDefined(trigger_func)) {
     unitrigger_stub.trigger_func = trigger_func;
-  }
-  else if(isDefined(unitrigger_stub.unitrigger_system) && isDefined(level._unitriggers.system_trigger_funcs[unitrigger_stub.unitrigger_system])) {
+  } else if(isDefined(unitrigger_stub.unitrigger_system) && isDefined(level._unitriggers.system_trigger_funcs[unitrigger_stub.unitrigger_system])) {
     unitrigger_stub.trigger_func = level._unitriggers.system_trigger_funcs[unitrigger_stub.unitrigger_system];
   }
 
@@ -247,8 +244,7 @@ debug_unitriggers() {
 
         if(!isDefined(triggerstub.in_zone)) {
           color = vectorscale((1, 1, 0), 0.65);
-        }
-        else if(level.zones[triggerstub.in_zone].is_active) {
+        } else if(level.zones[triggerstub.in_zone].is_active) {
           color = (1, 1, 0);
         }
 
@@ -293,8 +289,7 @@ cleanup_trigger(trigger, player) {
 
   if(isDefined(trigger.stub.trigger_per_player) && trigger.stub.trigger_per_player) {
     trigger.stub.playertrigger[player getentitynumber()] = undefined;
-  }
-  else {
+  } else {
     trigger.stub.trigger = undefined;
   }
 
@@ -330,8 +325,7 @@ assess_and_apply_visibility(trigger, stub, player, default_keep) {
 
     if(isDefined(stub.inactive_reasses_time)) {
       trigger.reassess_time = stub.inactive_reasses_time;
-    }
-    else {
+    } else {
       trigger.reassess_time = 1.0;
     }
   }
@@ -487,9 +481,9 @@ run_visibility_function_for_all_triggers() {
     for(i = 0; i < players.size; i++) {
       if(isDefined(self.playertrigger[players[i] getentitynumber()])) {
         self.playertrigger[players[i] getentitynumber()][
-      }
+          }
           [self.prompt_and_visibility_func]
-        ](players[i]);
+      ](players[i]);
     }
   } else if(isDefined(self.trigger))
     self.trigger[[self.prompt_and_visibility_func]](getplayers()[0]);
@@ -556,8 +550,7 @@ build_trigger_from_unitrigger_stub(stub, player) {
     if(isDefined(stub.cursor_hint)) {
       if(stub.cursor_hint == "HINT_WEAPON" && isDefined(stub.cursor_hint_weapon)) {
         trigger setcursorhint(stub.cursor_hint, stub.cursor_hint_weapon);
-      }
-      else {
+      } else {
         trigger setcursorhint(stub.cursor_hint);
       }
     }
@@ -571,14 +564,11 @@ build_trigger_from_unitrigger_stub(stub, player) {
     if(isDefined(stub.hint_string)) {
       if(isDefined(stub.hint_parm2)) {
         trigger sethintstring(stub.hint_string, stub.hint_parm1, stub.hint_parm2);
-      }
-      else if(isDefined(stub.hint_parm1)) {
+      } else if(isDefined(stub.hint_parm1)) {
         trigger sethintstring(stub.hint_string, stub.hint_parm1);
-      }
-      else if(isDefined(stub.cost)) {
+      } else if(isDefined(stub.cost)) {
         trigger sethintstring(stub.hint_string, stub.cost);
-      }
-      else {
+      } else {
         trigger sethintstring(stub.hint_string);
       }
     }
@@ -684,8 +674,7 @@ get_closest_unitriggers(org, array, dist) {
     }
     array[i].dsquared = newdistsq;
 
-    for(j = 0; j < triggers.size && newdistsq > triggers[j].dsquared; j++) {
-    }
+    for(j = 0; j < triggers.size && newdistsq > triggers[j].dsquared; j++) {}
 
     arrayinsert(triggers, array[i], j);
 

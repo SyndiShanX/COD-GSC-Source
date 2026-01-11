@@ -34,8 +34,7 @@ main() {
 
   if(isDefined(self.flashedanim)) {
     self setanimknoball(self.flashedanim, % body);
-  }
-  else {
+  } else {
     self thread flashbanganim();
   }
 

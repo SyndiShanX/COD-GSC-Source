@@ -15,13 +15,12 @@
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\tacticalinsertion;
 #include scripts\weapons\weaponobjects;
-
 #namespace trophy_system;
 
 init_shared() {
-  level.trophylongflashfx = #"weapon/fx_trophy_flash";
-  level.trophydetonationfx = #"weapon/fx_trophy_detonation";
-  level.fx_trophy_radius_indicator = #"weapon/fx_trophy_radius_indicator";
+  level.trophylongflashfx = # "weapon/fx_trophy_flash";
+  level.trophydetonationfx = # "weapon/fx_trophy_detonation";
+  level.fx_trophy_radius_indicator = # "weapon/fx_trophy_radius_indicator";
   trophydeployanim = "p8_fxanim_mp_eqp_trophy_system_world_anim";
   trophyspinanim = "p8_fxanim_mp_eqp_trophy_system_world_open_anim";
   level.var_4f3822f4 = &trophysystemdetonate;
@@ -84,14 +83,14 @@ on_player_killed(s_params) {
     return;
   }
 
-  if(weapon.name == #"trophy_system") {
+  if(weapon.name == # "trophy_system") {
     scoreevents::processscoreevent(#"trophy_system_kill", attacker, self, weapon);
   }
 }
 
 createtrophysystemwatcher(watcher) {
   watcher.ondetonatecallback = &trophysystemdetonate;
-  watcher.activatesound = #"wpn_claymore_alert";
+  watcher.activatesound = # "wpn_claymore_alert";
   watcher.hackable = 1;
   watcher.hackertoolradius = level.equipmenthackertoolradius;
   watcher.hackertooltimems = level.equipmenthackertooltimems;
@@ -110,7 +109,7 @@ createtrophysystemwatcher(watcher) {
 }
 
 trophysystemstopped() {
-  self endon(#"death", #"trophysystemstopped");
+  self endon(#"death", # "trophysystemstopped");
   self util::waittillnotmoving();
   self.trophysystemstationary = 1;
   self notify(#"trophysystemstopped");
@@ -142,7 +141,7 @@ ontrophysystemspawn(watcher, player) {
   self.trophysystemstationary = 1;
 
   if(isalive(player)) {
-    player stats::function_e24eec31(self.weapon, #"used", 1);
+    player stats::function_e24eec31(self.weapon, # "used", 1);
   }
 
   self thread trophyactive(player);
@@ -195,7 +194,7 @@ ontrophysystemsmashed(attacker, callback_data) {
 
 trophyactive(owner) {
   owner endon(#"disconnect");
-  self endon(#"death", #"hacked");
+  self endon(#"death", # "hacked");
 
   while(true) {
     if(!isDefined(self)) {
@@ -234,7 +233,7 @@ trophyactive(owner) {
       }
 
       switch (grenade.model) {
-        case #"t6_wpn_grenade_supply_projectile":
+        case # "t6_wpn_grenade_supply_projectile":
           continue;
       }
 
@@ -340,7 +339,7 @@ function_3170d645(projectile, trophy) {
 
     ent = entities[i];
 
-    if(isDefined(ent.owner) && !ent util::isenemyteam(player.team) && (ent.classname === "noclass" || ent.classname === "script_model" || ent.classname === "script_vehicle" || ent.archetype === #"mp_dog" || ent.archetype === #"human" || isDefined(ent.aitype)) && (ent.item !== level.weaponnone || ent.weapon !== level.weaponnone || ent.meleeweapon !== level.weaponnone || ent.turretweapon !== level.weaponnone) && isDefined(ent.takedamage) && ent.takedamage) {
+    if(isDefined(ent.owner) && !ent util::isenemyteam(player.team) && (ent.classname === "noclass" || ent.classname === "script_model" || ent.classname === "script_vehicle" || ent.archetype === # "mp_dog" || ent.archetype === # "human" || isDefined(ent.aitype)) && (ent.item !== level.weaponnone || ent.weapon !== level.weaponnone || ent.meleeweapon !== level.weaponnone || ent.turretweapon !== level.weaponnone) && isDefined(ent.takedamage) && ent.takedamage) {
       if((isDefined(ent.health) ? ent.health : 0) > 0) {
         var_48b7bfeb = 1;
         break;
@@ -362,7 +361,7 @@ function_3170d645(projectile, trophy) {
         continue;
       }
 
-      var_2e36557f |= useobj.userate && (!player util::isenemyteam(useobj.claimteam) || useobj.interactteam === #"enemy");
+      var_2e36557f |= useobj.userate && (!player util::isenemyteam(useobj.claimteam) || useobj.interactteam === # "enemy");
 
       if(var_2e36557f) {
         break;
@@ -384,7 +383,7 @@ function_3170d645(projectile, trophy) {
         continue;
       }
 
-      var_2e36557f |= useobj.userate && (!player util::isenemyteam(useobj.claimteam) || useobj.interactteam === #"enemy");
+      var_2e36557f |= useobj.userate && (!player util::isenemyteam(useobj.claimteam) || useobj.interactteam === # "enemy");
 
       if(var_2e36557f) {
         break;
@@ -404,7 +403,7 @@ function_3170d645(projectile, trophy) {
         continue;
       }
 
-      var_2e36557f |= useobj.userate && (!player util::isenemyteam(useobj.claimteam) || useobj.interactteam === #"enemy");
+      var_2e36557f |= useobj.userate && (!player util::isenemyteam(useobj.claimteam) || useobj.interactteam === # "enemy");
 
       if(var_2e36557f) {
         break;

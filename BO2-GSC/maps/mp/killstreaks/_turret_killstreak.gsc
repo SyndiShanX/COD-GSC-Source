@@ -319,8 +319,7 @@ usesentryturret(hardpointtype) {
 
   if(!isDefined(self.numturrets)) {
     self.numturrets = 1;
-  }
-  else {
+  } else {
     self.numturrets++;
   }
 
@@ -468,8 +467,7 @@ watchownerdeath(turret) {
 
   if(!turret.hasbeenplanted) {
     self returnturrettoinventory(turret);
-  }
-  else if(turret.canbeplaced && turret.carried) {
+  } else if(turret.canbeplaced && turret.carried) {
     if(level.teambased && self.team != turret.team) {
       self stopcarryturret(turret);
       turret notify("destroy_turret", 0);
@@ -563,11 +561,9 @@ startcarryturret(turret) {
 
   if(turret.turrettype == "sentry") {
     turret notify("stop_burst_fire_unmanned");
-  }
-  else if(turret.turrettype == "tow") {
+  } else if(turret.turrettype == "tow") {
     turret notify("target_lost");
-  }
-  else if(turret.turrettype == "microwave") {
+  } else if(turret.turrettype == "microwave") {
     turret notify("stop_microwave");
   }
 
@@ -640,8 +636,7 @@ updateturretplacement(turret) {
     if(turret.canbeplaced != lastplacedturret && !(turret.turrettype == "microwave" && firstmodel == 1)) {
       if(good_spot_check) {
         turret setModel(level.auto_turret_settings[turret.turrettype].modelgoodplacement);
-      }
-      else {
+      } else {
         turret setModel(level.auto_turret_settings[turret.turrettype].modelbadplacement);
       }
 
@@ -651,8 +646,7 @@ updateturretplacement(turret) {
     if(turret.turrettype == "microwave" && firstmodel == 1) {
       if(turret.canbeplaced) {
         turret setModel(level.auto_turret_settings[turret.turrettype].modelgoodplacementanimate);
-      }
-      else {
+      } else {
         turret setModel(level.auto_turret_settings[turret.turrettype].modelbadplacementanimate);
       }
 
@@ -766,11 +760,9 @@ initturret(turret) {
 
   if(turret.turrettype == "sentry") {
     turret thread turret_sentry_think(self);
-  }
-  else if(turret.turrettype == "tow") {
+  } else if(turret.turrettype == "tow") {
     turret thread turret_tow_think(self);
-  }
-  else if(turret.turrettype == "microwave") {
+  } else if(turret.turrettype == "microwave") {
     turret thread turret_microwave_think(self);
   }
 
@@ -855,11 +847,9 @@ watchdamage() {
         self.damagetaken = self.damagetaken + damage * 10;
       else if(type == "MOD_PROJECTILE" && (weaponname == "smaw_mp" || weaponname == "fhj18_mp")) {
         self.damagetaken = self.damagetaken + 200 * self.explosivedamagereduction;
-      }
-      else if((type == "MOD_PROJECTILE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_PROJECTILE_SPLASH") && damage != 0 && weaponname != "emp_grenade_mp" && !isexplosivebulletweapon(weaponname)) {
+      } else if((type == "MOD_PROJECTILE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_PROJECTILE_SPLASH") && damage != 0 && weaponname != "emp_grenade_mp" && !isexplosivebulletweapon(weaponname)) {
         self.damagetaken = self.damagetaken + self.explosivedamagereduction * damage;
-      }
-      else if(type == "MOD_MELEE") {
+      } else if(type == "MOD_MELEE") {
         if(isplayer(attacker)) {
           attacker playlocalsound("fly_riotshield_impact_knife");
         }
@@ -913,8 +903,7 @@ watchdamage() {
       if(self isenemyplayer(attacker) && self.owner != attacker) {
         if(self.turrettype == "sentry") {
           maps\mp\_scoreevents::processscoreevent("destroyed_sentry_gun", attacker, self, weaponname);
-        }
-        else if(self.turrettype == "microwave") {
+        } else if(self.turrettype == "microwave") {
           maps\mp\_scoreevents::processscoreevent("destroyed_microwave_turret", attacker, self, weaponname);
         }
 
@@ -934,8 +923,7 @@ watchdamage() {
 
       if(self.turrettype == "sentry") {
         owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("sentry_destroyed", "item_destroyed");
-      }
-      else if(self.turrettype == "microwave") {
+      } else if(self.turrettype == "microwave") {
         owner maps\mp\gametypes\_globallogic_audio::leaderdialogonplayer("microwave_destroyed", "item_destroyed");
       }
 
@@ -1084,8 +1072,7 @@ stunturret(duration, isdead, isemp) {
 
   if(isDefined(duration)) {
     wait(duration);
-  }
-  else {
+  } else {
     return;
   }
 
@@ -1157,8 +1144,7 @@ isstunweapon(weapon) {
 scramblerstun(stun) {
   if(stun) {
     self thread stunturret(0, 1);
-  }
-  else {
+  } else {
     self setmode("auto_nonai");
 
     if(self.turrettype != "tow" && !self.controlled) {
@@ -1294,8 +1280,7 @@ spawnturretpickuptrigger(player) {
 
   if(isDefined(level.auto_turret_settings[self.turrettype].hintstring)) {
     self.pickuptrigger sethintstring(level.auto_turret_settings[self.turrettype].hintstring);
-  }
-  else {
+  } else {
     self.pickuptrigger sethintstring(&"MP_GENERIC_PICKUP");
   }
 
@@ -1954,8 +1939,7 @@ disabletriggerthink(trigger, owner) {
     if(self isenemyplayer(attacker)) {
       if(self.turrettype == "sentry") {
         maps\mp\_scoreevents::processscoreevent("destroyed_sentry_gun", attacker, self, "knife_mp");
-      }
-      else if(self.turrettype == "microwave") {
+      } else if(self.turrettype == "microwave") {
         maps\mp\_scoreevents::processscoreevent("destroyed_microwave_turret", attacker, self, "knife_mp");
       }
 
@@ -2173,8 +2157,7 @@ turretscanstopwaitercleanup(ent) {
   }
 }
 
-turretscanstopnotify() {
-}
+turretscanstopnotify() {}
 
 startturretremotecontrol(turret) {
   self.killstreak_waitamount = level.auto_turret_timeout * 1000;
@@ -2293,7 +2276,7 @@ remove_turret_dangerous_nodes() {
   if(isDefined(self.dangerous_nodes)) {
     foreach(node in self.dangerous_nodes) {
       foreach(team in level.teams) {
-      node setdangerous(team, 0);
+        node setdangerous(team, 0);
       }
     }
   }

@@ -15,8 +15,7 @@ initWeapon(weapon, slot) {
   self.weaponInfo[weapon].hasClip = true;
   if(getWeaponClipModel(weapon) != "") {
     self.weaponInfo[weapon].useClip = true;
-  }
-  else {
+  } else {
     self.weaponInfo[weapon].useClip = false;
   }
 }
@@ -135,23 +134,19 @@ main() {
   self.suppressedTime = 0;
   if(self.team == "allies") {
     self.suppressionThreshold = 0.75;
-  }
-  else {
+  } else {
     self.suppressionThreshold = 0.5;
   }
   if(self.team == "allies") {
     self.randomGrenadeRange = 0;
-  }
-  else {
+  } else {
     self.randomGrenadeRange = 128;
   }
   if(animscripts\weaponList::usingAutomaticWeapon()) {
     self.ramboChance = 15;
-  }
-  else if(animscripts\weaponList::usingSemiAutoWeapon()) {
+  } else if(animscripts\weaponList::usingSemiAutoWeapon()) {
     self.ramboChance = 7;
-  }
-  else {
+  } else {
     self.ramboChance = 0;
   }
   if(self.team == "axis") {
@@ -226,8 +221,7 @@ showLikelyEnemyPathDir() {
       line(self.origin + (0, 0, 60), printpos);
       if(isDefined(dir)) {
         print3d(printpos, "likelyEnemyPathDir: " + yaw, (1, 1, 1), 1, 0.5);
-      }
-      else {
+      } else {
         print3d(printpos, "likelyEnemyPathDir: undefined", (1, 1, 1), 1, 0.5);
       }
       if(getdebugdvar("replay_debug") == "1") {
@@ -932,8 +926,7 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
           idealAdd = 0;
           if(trans == "left" || trans == "left_crouch") {
             idealAdd = 90;
-          }
-          else if(trans == "right" || trans == "right_crouch") {
+          } else if(trans == "right" || trans == "right_crouch") {
             idealAdd = -90;
           }
           if(isDefined(anim.coverTransAngles[trans][i])) {
@@ -951,8 +944,7 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
           idealAdd = 0;
           if(trans == "left" || trans == "left_crouch") {
             idealAdd = 90;
-          }
-          else if(trans == "right" || trans == "right_crouch") {
+          } else if(trans == "right" || trans == "right_crouch") {
             idealAdd = -90;
           }
           if(isDefined(anim.coverExitAngles[trans][i])) {
@@ -1006,11 +998,10 @@ FindBestSplitTime(exitanim, isapproach, isright, arrayname, debugname) {
       anim.defaultException = animscripts\init::empty;
       if(getdebugdvar("debug_noanimscripts") == "") {
         setdvar("debug_noanimscripts", "off");
+      } else {
+        if(getdebugdvar("debug_noanimscripts") == "on")
       }
-      else {
-      if(getdebugdvar("debug_noanimscripts") == "on")
-      }
-        anim.defaultException = animscripts\init::infiniteLoop;
+      anim.defaultException = animscripts\init::infiniteLoop;
       if(getdebugdvar("debug_grenadehand") == "") {
         setdvar("debug_grenadehand", "off");
       }

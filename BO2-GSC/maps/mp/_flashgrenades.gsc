@@ -38,8 +38,7 @@ monitorflash_internal(amount_distance, amount_angle, attacker, direct_on_player)
 
   if(amount_angle < 0.5) {
     amount_angle = 0.5;
-  }
-  else if(amount_angle > 0.8) {
+  } else if(amount_angle > 0.8) {
     amount_angle = 1;
   }
 
@@ -56,8 +55,7 @@ monitorflash_internal(amount_distance, amount_angle, attacker, direct_on_player)
 
   if(duration > 2) {
     rumbleduration = 0.75;
-  }
-  else {
+  } else {
     rumbleduration = 0.25;
   }
 
@@ -66,9 +64,7 @@ monitorflash_internal(amount_distance, amount_angle, attacker, direct_on_player)
   if(level.teambased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team && attacker != self) {
     if(level.friendlyfire == 0) {
       return;
-    }
-    else if(level.friendlyfire == 1) {
-    } else if(level.friendlyfire == 2) {
+    } else if(level.friendlyfire == 1) {} else if(level.friendlyfire == 2) {
       duration = duration * 0.5;
       rumbleduration = rumbleduration * 0.5;
       hurtvictim = 0;

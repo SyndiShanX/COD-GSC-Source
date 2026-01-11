@@ -35,8 +35,7 @@ advancedtraverse2(var_0, var_1) {
 
     if(!animhasnotetrack(var_0, "blend")) {
       wait 0.2;
-    }
-    else {
+    } else {
       self waittillmatch("traverse", "blend");
     }
   }
@@ -53,8 +52,7 @@ handle_death(var_0) {
 
     if(self.traversedeath > 1) {
       self setflaggedanimknoball("deathanim", % traverse90_end_death, % body, 1, 0.2, 1);
-    }
-    else {
+    } else {
       self setflaggedanimknoball("deathanim", % traverse90_start_death, % body, 1, 0.2, 1);
     }
 

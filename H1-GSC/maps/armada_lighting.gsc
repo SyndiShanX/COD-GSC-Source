@@ -186,8 +186,7 @@ play_flickering_light() {
   var_2["off"] = "emt_light_flicker_off";
   var_2["loop"] = "emt_light_flicker_lp";
   var_2["vol_env"] = [[var_0, 0.2],
-    [var_1, 1.0]
-  ];
+    [var_1, 1.0]];
   thread maps\_lighting::model_flicker_preset("flicker_1", 0, var_0, var_1, undefined, undefined, 0.5, 1, 0.005, 0.05, undefined, var_2, 100);
   thread maps\_lighting::model_flicker_preset("flicker_2", 0, var_0, var_1, undefined, undefined, 0.01, 5, 0.005, 0.05, undefined, var_2, 100);
 }

@@ -131,8 +131,7 @@ patrol(start_target) {
 
     if(isDefined(currentgoal.radius) && currentgoal.radius > 0) {
       self.goalradius = currentgoal.radius;
-    }
-    else {
+    } else {
       self.goalradius = 32;
     }
 

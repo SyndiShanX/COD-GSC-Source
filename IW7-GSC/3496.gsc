@@ -467,8 +467,7 @@ func_52CA(var_00, var_01, var_02) {
 
   if(isDefined(var_01)) {
     scripts\mp\killstreaks\killstreaks::func_532A(var_00, var_01, var_03, level.uavmodels[var_01]);
-  }
-  else {
+  } else {
     var_04 = [];
 
     foreach(var_07, var_06 in level.uavmodels) {

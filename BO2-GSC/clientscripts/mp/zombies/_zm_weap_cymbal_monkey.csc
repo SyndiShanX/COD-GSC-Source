@@ -14,8 +14,7 @@ init() {
 
   if(is_true(level.legacy_cymbal_monkey)) {
     level.cymbal_monkey_model = "weapon_zombie_monkey_bomb";
-  }
-  else {
+  } else {
     level.cymbal_monkey_model = "t6_wpn_zmb_monkey_bomb_world";
   }
 

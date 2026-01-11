@@ -7,7 +7,6 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace namespace_8eb9bc0a;
 
 autoexec __init__system__() {
@@ -21,13 +20,13 @@ __init__() {
   adddebugcommand("<dev string:x7d>");
   adddebugcommand("<dev string:xd0>");
 
-    devbuild = isprofilebuild();
+  devbuild = isprofilebuild();
 
   devbuild = 1;
 
-    if(devbuild) {
-      level thread function_97346595();
-    }
+  if(devbuild) {
+    level thread function_97346595();
+  }
 }
 
 zombie_open_sesame() {
@@ -104,24 +103,23 @@ function_97346595() {
         adddebugcommand("<dev string:x116>");
       }
 
-        if(new_value != 0) {
-          if(new_value == 2) {
-            level thread zombie_open_sesame();
-          }
-
-          remainingplayers = 4 - players.size;
-
-          adddebugcommand("<dev string:x11c>" + remainingplayers);
-
-            waitframe(1);
-
-          adddebugcommand("<dev string:x13b>");
-
+      if(new_value != 0) {
+        if(new_value == 2) {
+          level thread zombie_open_sesame();
         }
-      else {
+
+        remainingplayers = 4 - players.size;
+
+        adddebugcommand("<dev string:x11c>" + remainingplayers);
+
+        waitframe(1);
+
+        adddebugcommand("<dev string:x13b>");
+
+      } else {
         adddebugcommand("<dev string:x156>");
 
-          players = getplayers();
+        players = getplayers();
 
         foreach(player in players) {
           player disableinvulnerability();

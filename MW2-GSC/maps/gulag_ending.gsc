@@ -29,7 +29,7 @@ endlog_common() {
     return;
   }
 
-    cafe_ceiling_chunks = getEntArray("cafe_ceiling_chunk", "targetname");
+  cafe_ceiling_chunks = getEntArray("cafe_ceiling_chunk", "targetname");
   array_thread(cafe_ceiling_chunks, ::self_delete);
 
   cafe_ceiling_chunk_smalls = getEntArray("cafe_ceiling_chunk_small", "targetname");
@@ -460,7 +460,7 @@ start_cafeteria() {
   ending_window_littlebird = GetEnt( "ending_window_littlebird", "script_noteworthy" );
   heli = ending_window_littlebird spawn_vehicle();
   path = heli vehicle_get_path_array();
-	
+  	
   heli Delete();
   wait( 0.05 );
   heli = ending_window_littlebird spawn_vehicle();

@@ -182,17 +182,13 @@ HintPrint(string, breakfunc) {
       Hint FadeOverTime(MYFLASHTIME);
       Hint.alpha = MYALPHALOW;
       HintPrintWait(MYFLASHTIME, breakfunc);
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
       Hint FadeOverTime(MYFLASHTIME);
       Hint.alpha = MYALPHAHIGH;
       HintPrintWait(MYFLASHTIME);
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
     }

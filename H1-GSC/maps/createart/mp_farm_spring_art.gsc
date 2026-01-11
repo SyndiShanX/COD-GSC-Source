@@ -9,8 +9,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\mp_farm_spring_fog_hdr::setupfog();
-  }
-  else {
+  } else {
     maps\createart\mp_farm_spring_fog::setupfog();
   }
 

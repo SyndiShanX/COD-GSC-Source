@@ -148,8 +148,7 @@ skipto_setup() {
 load_gumps_monsoon() {
   if(is_after_skipto("ruins_interior")) {
     load_gump("monsoon_gump_interior");
-  }
-  else {
+  } else {
     load_gump("monsoon_gump_exterior");
   }
 }
@@ -316,7 +315,7 @@ monsoon_hero_rampage(b_on) {
 
 set_squad_blood_impact(str_value) {
   foreach(hero in get_heroes()) {
-  hero bloodimpact(str_value);
+    hero bloodimpact(str_value);
   }
 }
 
@@ -655,8 +654,7 @@ _rain_thread(n_level) {
 
   if(n_level >= 3) {
     level thread _wind_shake();
-  }
-  else {
+  } else {
     level.player stoprumble("tank_rumble");
   }
 
@@ -665,11 +663,9 @@ _rain_thread(n_level) {
   while(true) {
     if(!flag("intro_goggles_off")) {
       playFX(getfx("player_rain_binoc"), level.player getorigin());
-    }
-    else if(flag("ruins_door_destroyed")) {
+    } else if(flag("ruins_door_destroyed")) {
       playFX(getfx("player_rain_temple"), level.player getorigin());
-    }
-    else {
+    } else {
       playFX(getfx("player_rain"), level.player getorigin());
     }
 
@@ -703,8 +699,7 @@ _rain_drops() {
 
     if(tracedata["fraction"] == 1 && !flag("player_flying_wingsuit")) {
       level.player setclientflag(6);
-    }
-    else {
+    } else {
       level.player clearclientflag(6);
     }
 
@@ -766,14 +761,13 @@ outside_lift_init() {
 
     if(m_lift.b_top) {
       outside_lift_move_down();
-    }
-    else {
+    } else {
       outside_lift_move_up();
     }
   }
 
   foreach(model in a_m_doors) {
-  model delete();
+    model delete();
   }
 
   t_use delete();
@@ -1035,14 +1029,11 @@ waittill_input(str_hint, str_buttonpress, str_direction) {
 
   if(str_buttonpress == "ltrig_rtrig") {
     self _input_both_triggers_pulled();
-  }
-  else if(str_buttonpress == "ltrig") {
+  } else if(str_buttonpress == "ltrig") {
     self _input_left_trigger_pulled();
-  }
-  else if(str_buttonpress == "lstick" || str_buttonpress == "rstick") {
+  } else if(str_buttonpress == "lstick" || str_buttonpress == "rstick") {
     self _input_stick(str_buttonpress, str_direction);
-  }
-  else {
+  } else {
     self _input_button(str_buttonpress);
   }
 
@@ -1097,8 +1088,7 @@ _input_stick(str_stick, str_direction) {
   while(true) {
     if(str_stick == "lstick") {
       stick = self get_normalized_movement(1, 1)[n_axis];
-    }
-    else {
+    } else {
       stick = self get_normalized_camera_movement(1, 1)[n_axis];
     }
 
@@ -1243,8 +1233,7 @@ _sway_model(n_degree, n_time) {
 _sway_attach_vines() {
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "no_vines") {
     return;
-  }
-  else if(self.model == "t5_foliage_tree_aquilaria01v2_small_no_vines") {
+  } else if(self.model == "t5_foliage_tree_aquilaria01v2_small_no_vines") {
     self.vine_model = spawn_anim_model("aquilaria", self.origin, self.angles);
     self.vine_model linkto(self);
     self.vine_model thread anim_loop(self.vine_model, "vines");
@@ -1282,8 +1271,7 @@ add_ai_to_gaz() {
 plant_c4(s_align) {
   if(!isDefined(s_align.script_noteworthy)) {
     plant_c4_spawn(s_align);
-  }
-  else {
+  } else {
     ai_enemy = simple_spawn_single("base_activity_enemy");
     ai_enemy attach("t6_wpn_c4_world", "tag_weapon_left");
     ai_enemy thread plant_c4_death();
@@ -1324,8 +1312,7 @@ plant_c4_think() {
 
   if(isDefined(attacker) && isplayer(attacker)) {
     radiusdamage(v_origin, 200, 300, 50, attacker, "MOD_EXPLOSIVE");
-  }
-  else {
+  } else {
     radiusdamage(v_origin, 200, 300, 50, self, "MOD_EXPLOSIVE");
   }
 
@@ -1342,7 +1329,7 @@ plant_c4_trigger_think() {
   a_s_pos = getstructarray(self.target, "targetname");
 
   foreach(s_pos in a_s_pos) {
-  level thread plant_c4(s_pos);
+    level thread plant_c4(s_pos);
   }
 }
 
@@ -1457,8 +1444,7 @@ play_single_spark(guy) {
 play_loop_spark(guy) {
   if(guy.targetname == "DDM_1") {
     guy play_fx("single_weld_spark_loop", undefined, undefined, "stop_weld_loop_ddm_1", 1, "fx_sparks");
-  }
-  else {
+  } else {
     guy play_fx("single_weld_spark_loop", undefined, undefined, "stop_weld_loop_ddm_2", 1, "fx_sparks");
   }
 }
@@ -1466,8 +1452,7 @@ play_loop_spark(guy) {
 stop_loop_spark(guy) {
   if(guy.targetname == "DDM_1") {
     guy notify("stop_weld_loop_ddm_1");
-  }
-  else {
+  } else {
     guy notify("stop_weld_loop_ddm_2");
   }
 }
@@ -1475,14 +1460,11 @@ stop_loop_spark(guy) {
 say_squad_dialog(str_ref) {
   if(issubstr(str_ref, "harp")) {
     level.harper say_dialog(str_ref);
-  }
-  else if(issubstr(str_ref, "sala")) {
+  } else if(issubstr(str_ref, "sala")) {
     level.salazar say_dialog(str_ref);
-  }
-  else if(issubstr(str_ref, "cros")) {
+  } else if(issubstr(str_ref, "cros")) {
     level.crosby say_dialog(str_ref);
-  }
-  else if(issubstr(str_ref, "sect")) {
+  } else if(issubstr(str_ref, "sect")) {
     level.player say_dialog(str_ref);
   }
 }

@@ -130,14 +130,11 @@ main() {
 
   if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("camera_thirdPerson")) {
+  } else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_diehard")) {
+  } else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 
@@ -299,22 +296,18 @@ getSpawnPoint() {
   if(level.useStartSpawns) {
     if(spawnteam == game["attackers"]) {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_attackers_start);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_defenders_start);
     }
   } else {
     if(spawnteam == game["attackers"]) {
       if((!level.aPlanted && !level.bPlanted)) {
         spawnPoints = maps\mp\gametypes\_spawnlogic::getTeamSpawnPoints(spawnteam);
-      }
-      else if(level.aPlanted && !level.bPlanted) {
+      } else if(level.aPlanted && !level.bPlanted) {
         spawnPoints = level.spawn_attackers_a;
-      }
-      else if(level.bPlanted && !level.aPlanted) {
+      } else if(level.bPlanted && !level.aPlanted) {
         spawnPoints = level.spawn_attackers_b;
-      }
-      else {
+      } else {
         spawnPoints = maps\mp\gametypes\_spawnlogic::getTeamSpawnPoints(spawnteam);
       }
 
@@ -322,14 +315,11 @@ getSpawnPoint() {
     } else {
       if((!level.aPlanted && !level.bPlanted)) {
         spawnPoints = maps\mp\gametypes\_spawnlogic::getTeamSpawnPoints(spawnteam);
-      }
-      else if(level.aPlanted && !level.bPlanted) {
+      } else if(level.aPlanted && !level.bPlanted) {
         spawnPoints = level.spawn_defenders_a;
-      }
-      else if(level.bPlanted && !level.aPlanted) {
+      } else if(level.bPlanted && !level.aPlanted) {
         spawnPoints = level.spawn_defenders_b;
-      }
-      else {
+      } else {
         spawnPoints = maps\mp\gametypes\_spawnlogic::getTeamSpawnPoints(spawnteam);
       }
 
@@ -382,8 +372,7 @@ onDeadEvent(team) {
   if(team == "all") {
     if(level.bombPlanted) {
       dd_endGame(game["attackers"], game["strings"][game["defenders"] + "_eliminated"]);
-    }
-    else {
+    } else {
       dd_endGame(game["defenders"], game["strings"][game["attackers"] + "_eliminated"]);
     }
   } else if(team == game["attackers"]) {
@@ -611,8 +600,7 @@ bombPlanted(destroyedObj, player) {
 
   if(level.destroyedObject.label == "_a") {
     level.aPlanted = true;
-  }
-  else {
+  } else {
     level.bPlanted = true;
   }
 
@@ -638,8 +626,7 @@ bombHandler(player, destType) {
 
   if(self.label == "_a") {
     level.aPlanted = false;
-  }
-  else {
+  } else {
     level.bPlanted = false;
   }
 
@@ -685,7 +672,7 @@ bombHandler(player, destType) {
 
     if(level.bombExploded < 2) {
       foreach(splashPlayer in level.players) {
-      splashPlayer thread maps\mp\gametypes\_hud_message::SplashNotify("time_added");
+        splashPlayer thread maps\mp\gametypes\_hud_message::SplashNotify("time_added");
       }
     }
 
@@ -693,8 +680,7 @@ bombHandler(player, destType) {
 
     if(level.bombExploded > 1) {
       dd_endGame(game["attackers"], game["strings"]["target_destroyed"]);
-    }
-    else {
+    } else {
       level thread teamPlayerCardSplash("callout_time_added", player);
     }
   } else //defused
@@ -714,8 +700,7 @@ bombHandler(player, destType) {
 
     if(isDefined(level.bombOwner) && (level.bombOwner.bombPlantedTime + 4000 + (level.defuseTime * 1000)) > getTime() && isReallyAlive(level.bombOwner)) {
       player thread maps\mp\gametypes\_hud_message::SplashNotify("ninja_defuse", (maps\mp\gametypes\_rank::getScoreInfoValue("defuse")));
-    }
-    else {
+    } else {
       player thread maps\mp\gametypes\_hud_message::SplashNotify("defuse", maps\mp\gametypes\_rank::getScoreInfoValue("defuse"));
     }
 
@@ -737,11 +722,9 @@ playDemolitionTickingSound(site) {
 
     if(!isDefined(site.waitTime) || site.waitTime > 10) {
       wait 1.0;
-    }
-    else if(isDefined(site.waitTime) && site.waitTime > 5) {
+    } else if(isDefined(site.waitTime) && site.waitTime > 5) {
       wait 0.5;
-    }
-    else {
+    } else {
       wait 0.25;
     }
     maps\mp\gametypes\_hostmigration::waitTillHostMigrationDone();
@@ -753,11 +736,9 @@ setBombTimerDvar() {
 
   if(level.bombsPlanted == 1) {
     setDvar("ui_bomb_timer", 2);
-  }
-  else if(level.bombsPlanted == 2) {
+  } else if(level.bombsPlanted == 2) {
     setDvar("ui_bomb_timer", 3);
-  }
-  else {
+  } else {
     setDvar("ui_bomb_timer", 0);
   }
 }

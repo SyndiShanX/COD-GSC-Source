@@ -64,7 +64,7 @@ upgrade_init_player(var_0) {
     }
 
     foreach(var_3, var_2 in level.upgrade_chal_stat_map) {
-    var_0 upgrade_notify_stat(var_3, 0);
+      var_0 upgrade_notify_stat(var_3, 0);
     }
   }
 }
@@ -145,8 +145,7 @@ upgrade_notify_stat(var_0, var_1) {
 
       if(var_0 == "intel") {
         upgrade_challenge_complete_for_intel(var_2);
-      }
-      else {
+      } else {
         upgrade_challenge_complete(var_2);
       }
 

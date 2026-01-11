@@ -47,7 +47,7 @@ init() {
   level.overrideactorkilled = ::callback_killstreakactorkilled;
 
   foreach(player in getplayers()) {
-  player thread onplayerspawned();
+    player thread onplayerspawned();
   }
 
   level thread onplayerconnect();
@@ -79,8 +79,7 @@ iskillstreakregistered(killstreaktype) {
 
   if(isDefined(level.killstreaks[killstreaktype])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -201,8 +200,7 @@ doesplayerhavekillstreak(killstreak) {
 iskillstreakavailable(killstreak) {
   if(isDefined(level.menureferenceforkillstreak[killstreak])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -397,8 +395,7 @@ givekillstreakinternal(killstreaktype, do_not_update_death_count, noxp) {
 
   if(isDefined(noxp)) {
     self.pers["killstreak_has_been_used"][self.pers["killstreak_has_been_used"].size] = noxp;
-  }
-  else {
+  } else {
     self.pers["killstreak_has_been_used"][self.pers["killstreak_has_been_used"].size] = 0;
   }
 
@@ -554,11 +551,9 @@ changeweaponafterkillstreak(killstreak) {
 
   if(isDefined(self.laststand) && self.laststand && isDefined(self.laststandpistol) && self hasweapon(self.laststandpistol)) {
     self switchtoweapon(self.laststandpistol);
-  }
-  else if(isDefined(self.lastnonkillstreakweapon) && self hasweapon(self.lastnonkillstreakweapon)) {
+  } else if(isDefined(self.lastnonkillstreakweapon) && self hasweapon(self.lastnonkillstreakweapon)) {
     self switchtoweapon(self.lastnonkillstreakweapon);
-  }
-  else if(isDefined(self.lastdroppableweapon) && self hasweapon(self.lastdroppableweapon)) {
+  } else if(isDefined(self.lastdroppableweapon) && self hasweapon(self.lastdroppableweapon)) {
     self switchtoweapon(self.lastdroppableweapon);
   }
 }
@@ -734,8 +729,7 @@ trackweaponusage() {
 
     if(weapons.size > 0) {
       self.lastnonkillstreakweapon = weapons[0];
-    }
-    else {
+    } else {
       self.lastnonkillstreakweapon = "knife_mp";
     }
   }
@@ -967,8 +961,7 @@ playkillstreakstartdialog(killstreaktype, team, playnonteambasedenemysounds) {
   }
 }
 
-playkillstreakreadydialog(killstreaktype) {
-}
+playkillstreakreadydialog(killstreaktype) {}
 
 playkillstreakreadyandinformdialog(killstreaktype) {
   if(isDefined(level.killstreaks[killstreaktype].informdialog)) {

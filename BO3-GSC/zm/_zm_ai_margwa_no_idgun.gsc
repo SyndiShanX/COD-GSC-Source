@@ -437,9 +437,7 @@ function private margwa_bodyfall() {
       if(powerup == "carpenter") {
         continue;
       }
-      if(![
-          [level.zombie_powerups[powerup].func_should_drop_with_regular_powerups]
-        ]()) {
+      if(![[level.zombie_powerups[powerup].func_should_drop_with_regular_powerups]]()) {
         continue;
       }
       var_3bd46762[var_3bd46762.size] = powerup;

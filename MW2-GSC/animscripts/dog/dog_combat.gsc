@@ -19,8 +19,7 @@ main() {
 
   if(isplayer(self.enemy)) {
     self meleeBiteAttackPlayer();
-  }
-  else {
+  } else {
     self meleeStruggleVsAI();
   }
 }
@@ -90,8 +89,7 @@ dog_player_kill(killer) {
   self DisableInvulnerability();
   if(isalive(killer)) {
     self kill(self.origin, killer);
-  }
-  else {
+  } else {
     self kill(self.origin);
   }
 }
@@ -152,8 +150,7 @@ attackMiss() {
 
       if((dirToEnemy[0] * forward[1] - dirToEnemy[1] * forward[0]) > 0) {
         missAnim = % german_shepherd_attack_player_miss_turnR;
-      }
-      else {
+      } else {
         missAnim = % german_shepherd_attack_player_miss_turnL;
       }
     }
@@ -185,19 +182,19 @@ dogMelee() {
     return;
   }
 
-    if(isDefined(self.meleeingPlayer)) {
-      if(self.meleeingPlayer isLinked()) {
-        return undefined;
-      }
-
-      if(self.meleeingPlayer isMantling()) {
-        return undefined;
-      }
-
-      if(self.meleeingPlayer.lastStand && self.meleeingPlayer.ignoreMe) {
-        return undefined;
-      }
+  if(isDefined(self.meleeingPlayer)) {
+    if(self.meleeingPlayer isLinked()) {
+      return undefined;
     }
+
+    if(self.meleeingPlayer isMantling()) {
+      return undefined;
+    }
+
+    if(self.meleeingPlayer.lastStand && self.meleeingPlayer.ignoreMe) {
+      return undefined;
+    }
+  }
 
   if(isDefined(self.enemy)) {
     if(distance2D(self.origin, self.enemy.origin) < 32) {
@@ -249,8 +246,7 @@ removeSafetyHealth() {
   healthFrac = self.meleeingPlayer getnormalhealth();
   if(healthFrac > 0.25) {
     self.meleeingPlayer setnormalhealth(healthFrac - 0.25);
-  }
-  else {
+  } else {
     self.meleeingPlayer setnormalhealth(0.01);
   }
 }
@@ -319,7 +315,7 @@ handleMeleeFinishAttackNoteTracks(note) {
         break;
       }
 
-        self thread killplayer();
+      self thread killplayer();
       break;
 
     case "stop_tracking":
@@ -336,7 +332,7 @@ handle_dogbite_notetrack(note) {
         break;
       }
 
-        self thread killplayer();
+      self thread killplayer();
       break;
   }
 }
@@ -416,9 +412,9 @@ meleeBiteAttackPlayer() {
       iprintln("dog " + (self getentnum()) + " attack player " + getTime());
     }
 
-      //self thread play_sound_on_tag( "anml_dog_growl", "tag_eye" );
+    //self thread play_sound_on_tag( "anml_dog_growl", "tag_eye" );
 
-      self.meleeingPlayer setNextDogAttackAllowTime(500);
+    self.meleeingPlayer setNextDogAttackAllowTime(500);
 
     yawToEnemy = vectorToYaw(self.enemy.origin - self.origin);
     if(AbsAngleClamp180(yawToEnemy - self.angles[1]) > 120) {
@@ -1153,8 +1149,7 @@ PlayerView_StartSequence(dog) {
   newOrigin = player getDropToFloorPosition(player.origin);
   if(isDefined(newOrigin)) {
     self.origin = newOrigin;
-  }
-  else {
+  } else {
     self.origin = player.origin;
   }
 

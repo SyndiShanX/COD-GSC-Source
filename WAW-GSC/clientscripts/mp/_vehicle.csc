@@ -56,32 +56,27 @@ vehicle_rumble(localClientNum) {
   }
   if(isDefined(rumblestruct.scale)) {
     self.rumble_scale = rumblestruct.scale;
-  }
-  else {
+  } else {
     self.rumble_scale = 0.15;
   }
   if(isDefined(rumblestruct.duration)) {
     self.rumble_duration = rumblestruct.duration;
-  }
-  else {
+  } else {
     self.rumble_duration = 4.5;
   }
   if(isDefined(rumblestruct.radius)) {
     self.rumble_radius = rumblestruct.radius;
-  }
-  else {
+  } else {
     self.rumble_radius = 600;
   }
   if(isDefined(rumblestruct.basetime)) {
     self.rumble_basetime = rumblestruct.basetime;
-  }
-  else {
+  } else {
     self.rumble_basetime = 1;
   }
   if(isDefined(rumblestruct.randomaditionaltime)) {
     self.rumble_randomaditionaltime = rumblestruct.randomaditionaltime;
-  }
-  else {
+  } else {
     self.rumble_randomaditionaltime = 1;
   }
   self.player_touching = 0;
@@ -152,8 +147,7 @@ tread(localClientNum, tagname, side, relativeOffset) {
     waitTime = (waitTime * 35);
     if(waitTime < 0.1) {
       waitTime = 0.1;
-    }
-    else if(waitTime > 0.3) {
+    } else if(waitTime > 0.3) {
       waitTime = 0.3;
     }
     wait waitTime;

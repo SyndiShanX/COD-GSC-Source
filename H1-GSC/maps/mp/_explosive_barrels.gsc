@@ -115,8 +115,7 @@ oil_spill_burn_after() {
 
   if(!isDefined(self.damageowner)) {
     self radiusdamage(self.origin, 4, 10, 10);
-  }
-  else {
+  } else {
     self radiusdamage(self.origin, 4, 10, 10, self.damageowner);
   }
 }
@@ -164,8 +163,7 @@ oil_spill_burn(var_0, var_1) {
 
         if(!isDefined(self.damageowner)) {
           self radiusdamage(var_8[var_13].origin, 4, var_17, var_17);
-        }
-        else {
+        } else {
           self radiusdamage(var_8[var_13].origin, 4, var_17, var_17, self.damageowner);
         }
       }
@@ -186,8 +184,7 @@ oil_spill_burn(var_0, var_1) {
 
     if(!isDefined(self.damageowner)) {
       self radiusdamage(self.barrel.origin, 4, var_17, var_17);
-    }
-    else {
+    } else {
       self radiusdamage(self.barrel.origin, 4, var_17, var_17, self.damageowner);
     }
   }
@@ -201,8 +198,7 @@ oil_spill_burn_section(var_0) {
   while(var_2 < 5) {
     if(!isDefined(self.damageowner)) {
       self radiusdamage(var_0, 32, 5, 1);
-    }
-    else {
+    } else {
       self radiusdamage(var_0, 32, 5, 1, self.damageowner);
     }
 
@@ -320,8 +316,7 @@ explodable_barrel_explode() {
 
   if(!isDefined(self.damageowner)) {
     self radiusdamage(self.origin + (0, 0, 30), var_9, var_8, var_7, undefined, "MOD_EXPLOSIVE", "barrel_mp");
-  }
-  else {
+  } else {
     self radiusdamage(self.origin + (0, 0, 30), var_9, var_8, var_7, self.damageowner, "MOD_EXPLOSIVE", "barrel_mp");
   }
 
@@ -330,8 +325,7 @@ explodable_barrel_explode() {
 
   if(randomint(2) == 0) {
     self setModel("com_barrel_piece");
-  }
-  else {
+  } else {
     self setModel("com_barrel_piece2");
   }
 

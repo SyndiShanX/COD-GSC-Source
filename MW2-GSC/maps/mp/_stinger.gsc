@@ -99,31 +99,31 @@ DrawStar(point) {
   Line(point + (0, 0, 10), point - (0, 0, 10));
 }
 
-  LockSightTest(target) {
-    eyePos = self getEye();
+LockSightTest(target) {
+  eyePos = self getEye();
 
-    if(!isDefined(target)) //targets can disapear during targeting.
-      return false;
-
-    passed = BulletTracePassed(eyePos, target.origin, false, target);
-    if(passed) {
-      return true;
-    }
-
-    front = target GetPointInBounds(1, 0, 0);
-    passed = BulletTracePassed(eyePos, front, false, target);
-    if(passed) {
-      return true;
-    }
-
-    back = target GetPointInBounds(-1, 0, 0);
-    passed = BulletTracePassed(eyePos, back, false, target);
-    if(passed) {
-      return true;
-    }
-
+  if(!isDefined(target)) //targets can disapear during targeting.
     return false;
+
+  passed = BulletTracePassed(eyePos, target.origin, false, target);
+  if(passed) {
+    return true;
   }
+
+  front = target GetPointInBounds(1, 0, 0);
+  passed = BulletTracePassed(eyePos, front, false, target);
+  if(passed) {
+    return true;
+  }
+
+  back = target GetPointInBounds(-1, 0, 0);
+  passed = BulletTracePassed(eyePos, back, false, target);
+  if(passed) {
+    return true;
+  }
+
+  return false;
+}
 
 StingerDebugDraw(target) {
   if(GetDVar("missileDebugDraw") != "1") {
@@ -187,7 +187,7 @@ GetTargetList() {
 
     if(level.UAVModels[level.otherTeam[self.team]].size) {
       foreach(UAV in level.UAVModels[level.otherTeam[self.team]]) {
-      targets[targets.size] = UAV;
+        targets[targets.size] = UAV;
       }
     }
 
@@ -325,8 +325,7 @@ StingerUsageLoop() {
       //PrintLn( "Locked!");
       if(self.stingerTarget.model == "vehicle_av8b_harrier_jet_mp" || self.stingerTarget.model == "vehicle_little_bird_armed") {
         self WeaponLockFinalize(self.stingerTarget);
-      }
-      else {
+      } else {
         self WeaponLockFinalize(self.stingerTarget, (100, 0, -32));
       }
 

@@ -499,8 +499,7 @@ waterball_main_setup(var_0) {
 
     if(var_0 == "waterball_path_1") {
       thread waterball_main_spawn(var_0, "medium_water_splash", 8, 0);
-    }
-    else {
+    } else {
       thread waterball_main_spawn(var_0, "medium_water_splash", 666, 0);
     }
 
@@ -521,8 +520,7 @@ waterball_main_spawn(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3) && var_3) {
     var_5 = randomfloatrange(-300, 0);
-  }
-  else {
+  } else {
     var_5 = randomfloatrange(-300, 300);
   }
 
@@ -1211,8 +1209,7 @@ loadingdocks_no_jump() {
   for(;;) {
     if(common_scripts\utility::flag("loadingdocks_no_jump")) {
       level.player allowjump(0);
-    }
-    else {
+    } else {
       level.player allowjump(1);
     }
 
@@ -1255,8 +1252,7 @@ check_player_warehouse_mantle() {
     if(common_scripts\utility::flag("player_warehouse_mantle")) {
       if(level.player ismantling()) {
         common_scripts\utility::flag_set("player_doing_warehouse_mantle");
-      }
-      else {
+      } else {
         common_scripts\utility::flag_clear("player_doing_warehouse_mantle");
       }
     }
@@ -1311,8 +1307,7 @@ angry_flood_collision_dodamage(var_0) {
 
     if(var_0 * level.player.damagemultiplier > level.player.health) {
       thread angry_flood_finishing_move(var_0);
-    }
-    else {
+    } else {
       thread maps\flood_fx::fx_bokehdots_close();
       level.player dodamage(var_0, level.player.origin);
     }
@@ -1370,8 +1365,7 @@ angry_flood_collision_cheater_spawn(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3) && var_3) {
     var_9 thread maps\flood_fx::fx_angry_flood_nearmiss(0);
-  }
-  else {
+  } else {
     var_9 thread angry_flood_collision_dodamage(100);
   }
 
@@ -1421,8 +1415,7 @@ alley_bokehdots_old() {
     while(common_scripts\utility::flag("alley_bokehdots")) {
       if(common_scripts\utility::flag("alley_move_shitfuck")) {
         thread maps\flood_fx::fx_bokehdots_and_waterdrops_heavy();
-      }
-      else {}
+      } else {}
 
       var_4 = distance2d(level.player.origin, var_1) / var_3;
       var_4 = randomfloatrange(var_4 * 2.85, var_4 * 3.15);
@@ -1551,7 +1544,7 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
     var_5 setcontents(33);
 
     foreach(var_7 in var_3) {
-    var_7 movez(var_0, 0.01, 0, 0);
+      var_7 movez(var_0, 0.01, 0, 0);
     }
 
     if(var_2 == "coverwater_warehouse") {
@@ -1617,7 +1610,7 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
     var_30 = 4;
 
     foreach(var_7 in var_17) {
-    var_7 movez(45, var_30, 0, 4);
+      var_7 movez(45, var_30, 0, 4);
     }
 
     wait(var_30);
@@ -1628,7 +1621,7 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
     var_30 = 5;
 
     foreach(var_7 in var_25) {
-    var_7 movez(53, var_30, 2, 2);
+      var_7 movez(53, var_30, 2, 2);
     }
 
     wait(var_30);
@@ -1640,7 +1633,7 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
       var_30 = 5;
 
       foreach(var_7 in var_25) {
-      var_7 movez(40, var_30, 2, 2);
+        var_7 movez(40, var_30, 2, 2);
       }
 
       wait(var_30);
@@ -1649,7 +1642,7 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
       var_30 = 2;
 
       foreach(var_7 in var_25) {
-      var_7 movez(10, var_30, 1, 1);
+        var_7 movez(10, var_30, 1, 1);
       }
 
       wait(var_30);
@@ -1657,7 +1650,7 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
       var_30 = 3;
 
       foreach(var_7 in var_25) {
-      var_7 movez(30, var_30, 1, 2);
+        var_7 movez(30, var_30, 1, 2);
       }
 
       wait(var_30);
@@ -1671,14 +1664,14 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
       var_30 = 12;
 
       foreach(var_7 in var_25) {
-      var_7 movez(35, var_30, 6, 6);
+        var_7 movez(35, var_30, 6, 6);
       }
     } else {
       maps\flood_util::jkuprint("wr: stairs close");
       var_30 = 3;
 
       foreach(var_7 in var_25) {
-      var_7 movez(10, var_30, 1, 1);
+        var_7 movez(10, var_30, 1, 1);
       }
 
       wait(var_30);
@@ -1686,7 +1679,7 @@ start_coverheight_water_rising(var_0, var_1, var_2) {
       var_30 = 8;
 
       foreach(var_7 in var_25) {
-      var_7 movez(25, var_30, 4, 4);
+        var_7 movez(25, var_30, 4, 4);
       }
     }
   }
@@ -1991,8 +1984,7 @@ player_hurt_sounds() {
 player_playing_hurt_sounds() {
   if(level.player.health < 50) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -2043,8 +2035,7 @@ angry_flood_rumble() {
 
     if(var_1 > 666) {
       var_0.origin = var_0.origin + (0, 0, -2);
-    }
-    else {
+    } else {
       var_0.origin = var_0.origin + (0, 0, -8);
     }
 
@@ -2081,13 +2072,13 @@ broken_door_rumbles() {
   var_0 = getEntArray("warehouse_rumble", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 playrumblelooponentity("water_splash");
+    var_2 playrumblelooponentity("water_splash");
   }
 
   level waittill("player_at_stairs");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -2097,13 +2088,13 @@ runback_death_toggle(var_0) {
   switch (var_0) {
     case "on":
       foreach(var_3 in var_1) {
-      var_3 common_scripts\utility::trigger_on();
+        var_3 common_scripts\utility::trigger_on();
       }
 
       break;
     case "off":
       foreach(var_3 in var_1) {
-      var_3 common_scripts\utility::trigger_off();
+        var_3 common_scripts\utility::trigger_off();
       }
 
       break;

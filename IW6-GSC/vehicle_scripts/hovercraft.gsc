@@ -13,8 +13,7 @@ main(var_0, var_1, var_2) {
 
   if(var_2 == "script_vehicle_hovercraft_enemy") {
     maps\_vehicle::build_drive( % hovercraft_enemy_upper_fans, undefined, 0);
-  }
-  else {
+  } else {
     maps\_vehicle::build_drive( % hovercraft_movement, undefined, 0);
   }
 

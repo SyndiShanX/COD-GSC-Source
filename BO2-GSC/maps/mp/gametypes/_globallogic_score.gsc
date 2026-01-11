@@ -194,8 +194,7 @@ gethighestscoringplayer() {
 
   if(tie || !isDefined(winner)) {
     return undefined;
-  }
-  else {
+  } else {
     return winner;
   }
 }
@@ -221,8 +220,7 @@ roundtonearestfive(score) {
 
   if(rounding <= 2) {
     return score - rounding;
-  }
-  else {
+  } else {
     return score + (5 - rounding);
   }
 }
@@ -574,7 +572,7 @@ giveteamscoreforobjective_delaypostprocessing(team, score) {
 
 postprocessteamscores(teams) {
   foreach(team in teams) {
-  onteamscore_postprocess(team);
+    onteamscore_postprocess(team);
   }
 
   thread maps\mp\gametypes\_globallogic::checkscorelimit();
@@ -608,7 +606,7 @@ _setteamscore(team, teamscore) {
 resetteamscores() {
   if(!isDefined(level.roundscorecarry) || level.roundscorecarry == 0 || maps\mp\_utility::isfirstround()) {
     foreach(team in level.teams) {
-    game["teamScores"][team] = 0;
+      game["teamScores"][team] = 0;
     }
   }
 
@@ -639,7 +637,7 @@ updateteamscores(team) {
 
 updateallteamscores() {
   foreach(team in level.teams) {
-  updateteamscores(team);
+    updateteamscores(team);
   }
 }
 
@@ -775,8 +773,7 @@ incpersstat(dataname, increment, record_stats, includegametype) {
 
   if(isDefined(includegametype) && includegametype) {
     self addplayerstatwithgametype(dataname, increment);
-  }
-  else {
+  } else {
     self addplayerstat(dataname, increment);
   }
 
@@ -1020,8 +1017,7 @@ trackattackeedeath(attackername, rank, xp, prestige, xuid) {
 
   if(self.pers["nemesis_name"] == attackername && self.pers["nemesis_tracking"][attackername] >= 2) {
     self setclientuivisibilityflag("killcam_nemesis", 1);
-  }
-  else {
+  } else {
     self setclientuivisibilityflag("killcam_nemesis", 0);
   }
 
@@ -1141,8 +1137,7 @@ processassist(killedplayer, damagedone, weapon) {
 
   if(assist_level_value < 1) {
     assist_level_value = 1;
-  }
-  else if(assist_level_value > 3) {
+  } else if(assist_level_value > 3) {
     assist_level_value = 3;
   }
 

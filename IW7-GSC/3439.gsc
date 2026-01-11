@@ -52,23 +52,17 @@ func_13B32() {
 
     if(var_03 >= 0 && var_03 <= 120) {
       var_01 = -25;
-    }
-    else if(var_03 > 120 && var_03 <= 150) {
+    } else if(var_03 > 120 && var_03 <= 150) {
       var_01 = -20;
-    }
-    else if(var_03 > 150 && var_03 <= 180) {
+    } else if(var_03 > 150 && var_03 <= 180) {
       var_01 = -15;
-    }
-    else if(var_03 > 180 && var_03 <= 210) {
+    } else if(var_03 > 180 && var_03 <= 210) {
       var_01 = -10;
-    }
-    else if(var_03 > 210 && var_03 <= 250) {
+    } else if(var_03 > 210 && var_03 <= 250) {
       var_01 = 0;
-    }
-    else if(var_03 > 250 && var_03 <= 330) {
+    } else if(var_03 > 250 && var_03 <= 330) {
       var_01 = 5;
-    }
-    else if(var_03 > 330) {
+    } else if(var_03 > 330) {
       var_01 = 10;
     }
 
@@ -90,29 +84,21 @@ func_7FC8(var_00) {
 
   if(var_00 >= 10 && var_00 <= 20) {
     var_01 = 1;
-  }
-  else if(var_00 > 20 && var_00 <= 30) {
+  } else if(var_00 > 20 && var_00 <= 30) {
     var_01 = 2;
-  }
-  else if(var_00 > 30 && var_00 <= 40) {
+  } else if(var_00 > 30 && var_00 <= 40) {
     var_01 = 3;
-  }
-  else if(var_00 > 40 && var_00 <= 50) {
+  } else if(var_00 > 40 && var_00 <= 50) {
     var_01 = 4;
-  }
-  else if(var_00 > 50 && var_00 <= 60) {
+  } else if(var_00 > 50 && var_00 <= 60) {
     var_01 = 5;
-  }
-  else if(var_00 > 60 && var_00 <= 70) {
+  } else if(var_00 > 60 && var_00 <= 70) {
     var_01 = 6;
-  }
-  else if(var_00 > 70 && var_00 <= 80) {
+  } else if(var_00 > 70 && var_00 <= 80) {
     var_01 = 7;
-  }
-  else if(var_00 > 80 && var_00 <= 90) {
+  } else if(var_00 > 80 && var_00 <= 90) {
     var_01 = 8;
-  }
-  else if(var_00 > 90 && var_00 <= 100) {
+  } else if(var_00 > 90 && var_00 <= 100) {
     var_01 = 9;
   }
 
@@ -223,8 +209,7 @@ func_5802() {
 
     if(var_00 >= var_01) {
       self setclientomnvar("ui_dodge_charges", 1);
-    }
-    else {
+    } else {
       self setclientomnvar("ui_dodge_charges", 0);
     }
 
@@ -420,8 +405,7 @@ func_E864() {
 
     if(!isDefined(self.func_B94A)) {
       self.func_B94A = 1.5;
-    }
-    else {
+    } else {
       self.func_B94A = self.func_B94A + 1.5;
       continue;
     }

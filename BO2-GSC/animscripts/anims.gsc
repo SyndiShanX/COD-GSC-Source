@@ -113,8 +113,7 @@ animarraygeneric(animname, scriptoverride, errorifmissing, my_anim_array, global
 
   if(isDefined(scriptoverride)) {
     animscript = scriptoverride;
-  }
-  else if(isDefined(self.a.script_suffix)) {
+  } else if(isDefined(self.a.script_suffix)) {
     animscript = animscript + self.a.script_suffix;
   }
 
@@ -170,8 +169,7 @@ animarrayanyexist(animname, scriptoverride) {
 
   if(!isDefined(animarray) || !isarray(animarray) && animarray == % void) {
     return false;
-  }
-  else if(!isarray(animarray)) {
+  } else if(!isarray(animarray)) {
     return true;
   }
 
@@ -189,8 +187,7 @@ animarraypickrandom(animname, scriptoverride, oncepercache) {
 
   if(animarray.size > 1) {
     index = randomint(animarray.size);
-  }
-  else {
+  } else {
     index = 0;
   }
 
@@ -260,8 +257,7 @@ animarrayinternal(anim_array, animtype, animscript, animpose, animweaponanims, a
   if(!isDefined(theanim)) {
     if(animweaponanims != "rifle") {
       theanim = animarrayinternal(anim_array, animtype, animscript, animpose, "rifle", animname, errorifmissing, globalarraylookup);
-    }
-    else if(isDefined(self.covernode) && animscript != "combat" && globalarraylookup) {
+    } else if(isDefined(self.covernode) && animscript != "combat" && globalarraylookup) {
       theanim = animarrayinternal(anim_array, animtype, "combat", animpose, animweaponanims, animname, errorifmissing, globalarraylookup);
     }
 

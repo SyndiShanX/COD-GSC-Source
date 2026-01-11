@@ -15,7 +15,7 @@ callback_hostmigration() {
   setmatchdata("hostMigrationCount", var_0);
 
   foreach(var_2 in level.characters) {
-  var_2.hostmigrationcontrolsfrozen = 0;
+    var_2.hostmigrationcontrolsfrozen = 0;
   }
 
   level.hostmigrationtimer = 1;

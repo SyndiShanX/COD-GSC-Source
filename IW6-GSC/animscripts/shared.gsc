@@ -121,8 +121,7 @@ updateattachedweaponmodels() {
 updatelaserstatus() {
   if(isDefined(self.custom_laser_function)) {
     [[self.custom_laser_function]]();
-  }
-  else {
+  } else {
     if(self.a.weaponpos["right"] == "none") {
       return;
     }
@@ -231,8 +230,7 @@ dropweaponwrapper(var_0, var_1) {
 
   if(issubstr(tolower(var_2), "rpg")) {
     var_2 = "rpg_player";
-  }
-  else if(issubstr(tolower(var_2), "panzerfaust3")) {
+  } else if(issubstr(tolower(var_2), "panzerfaust3")) {
     var_2 = "panzerfaust3_player";
   }
 
@@ -360,8 +358,7 @@ ramboaiminternal(var_0) {
       if(abs(var_3 - var_2) > 10) {
         if(var_3 > var_2) {
           var_3 = var_2 + 10;
-        }
-        else {
+        } else {
           var_3 = var_2 - 10;
         }
       }
@@ -399,14 +396,11 @@ decidenumshotsforburst() {
 
   if(var_1) {
     var_0 = var_1;
-  }
-  else if(animscripts\weaponlist::usingsemiautoweapon()) {
+  } else if(animscripts\weaponlist::usingsemiautoweapon()) {
     var_0 = anim.semifirenumshots[randomint(anim.semifirenumshots.size)];
-  }
-  else if(self.fastburst) {
+  } else if(self.fastburst) {
     var_0 = anim.fastburstfirenumshots[randomint(anim.fastburstfirenumshots.size)];
-  }
-  else {
+  } else {
     var_0 = anim.burstfirenumshots[randomint(anim.burstfirenumshots.size)];
   }
 
@@ -429,11 +423,9 @@ decidenumshotsforfull() {
 
     if(var_1 < 3) {
       var_0 = randomintrange(2, 6);
-    }
-    else if(var_1 < 8) {
+    } else if(var_1 < 8) {
       var_0 = randomintrange(6, 12);
-    }
-    else {
+    } else {
       var_0 = randomintrange(12, 20);
     }
   }
@@ -453,8 +445,7 @@ handledropclip(var_0) {
   if(self.weaponinfo[self.weapon].hasclip) {
     if(animscripts\utility::usingsidearm()) {
       self playSound("weap_reload_pistol_clipout_npc");
-    }
-    else {
+    } else {
       self playSound("weap_reload_smg_clipout_npc");
     }
 
@@ -500,8 +491,7 @@ handledropclip(var_0) {
 
         if(animscripts\utility::usingsidearm()) {
           self playSound("weap_reload_pistol_clipin_npc");
-        }
-        else {
+        } else {
           self playSound("weap_reload_smg_clipin_npc");
         }
 
@@ -586,9 +576,7 @@ playlookanimation(var_0, var_1, var_2) {
 
   for(var_3 = 0; var_3 < var_1 * 10; var_3++) {
     if(isalive(self.enemy)) {
-      if(animscripts\utility::canseeenemy() && [
-          [var_2]
-        ]())
+      if(animscripts\utility::canseeenemy() && [[var_2]]())
         return;
     }
 

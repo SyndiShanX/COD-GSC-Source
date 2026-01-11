@@ -47,7 +47,6 @@
 #include scripts\mp_common\player\player_killed;
 #include scripts\mp_common\player\player_utils;
 #include scripts\mp_common\util;
-
 #namespace bounty;
 
 event_handler[gametype_init] main(eventstruct) {
@@ -161,9 +160,9 @@ function_41c54fc4() {
 private onconnect() {
   waitframe(1);
 
-  if(!isDefined(self.pers[#"money"])) {
-    self.pers[#"money"] = level.var_6fb8c585;
-    self.pers[#"money_earned"] = 0;
+  if(!isDefined(self.pers[# "money"])) {
+    self.pers[# "money"] = level.var_6fb8c585;
+    self.pers[# "money_earned"] = 0;
 
     if(game.roundsplayed > 0) {
       numteammates = 0;
@@ -174,13 +173,13 @@ private onconnect() {
           continue;
         }
 
-        if(!isDefined(player.pers[#"money_earned"])) {
+        if(!isDefined(player.pers[# "money_earned"])) {
           continue;
         }
 
         if(player.team == self.team) {
           numteammates++;
-          var_69c2bc0d += player.pers[#"money_earned"];
+          var_69c2bc0d += player.pers[# "money_earned"];
         }
       }
 
@@ -190,16 +189,16 @@ private onconnect() {
     }
   }
 
-  if(level.var_aad2ad58 && !isDefined(self.pers[#"dynamic_loadout"].weapons[1])) {
-    self.pers[#"dynamic_loadout"].weapons[1] = spawnStruct();
-    self.pers[#"dynamic_loadout"].weapons[1].name = #"pistol_standard_t8";
-    self.pers[#"dynamic_loadout"].weapons[1].attachments = [];
-    self.pers[#"dynamic_loadout"].weapons[1].ammo = -1;
-    self.pers[#"dynamic_loadout"].weapons[1].startammo = level.var_2f990fc4;
+  if(level.var_aad2ad58 && !isDefined(self.pers[# "dynamic_loadout"].weapons[1])) {
+    self.pers[# "dynamic_loadout"].weapons[1] = spawnStruct();
+    self.pers[# "dynamic_loadout"].weapons[1].name = # "pistol_standard_t8";
+    self.pers[# "dynamic_loadout"].weapons[1].attachments = [];
+    self.pers[# "dynamic_loadout"].weapons[1].ammo = -1;
+    self.pers[# "dynamic_loadout"].weapons[1].startammo = level.var_2f990fc4;
     dynamic_loadout::function_ff8ef46b(1, "luielement.BountyHunterLoadout.secondary", 7);
   }
 
-  self clientfield::set_to_player("bountyMoney", self.pers[#"money"]);
+  self clientfield::set_to_player("bountyMoney", self.pers[# "money"]);
 
   if(level.ingraceperiod === 1 && level.draftstage != 3) {
     wait 1;
@@ -223,7 +222,7 @@ function_feeebad() {
 }
 
 private onspawned() {
-  self clientfield::set_to_player("bountyMoney", self.pers[#"money"]);
+  self clientfield::set_to_player("bountyMoney", self.pers[# "money"]);
 
   if(isDefined(level.purchasephase) && level.purchasephase) {
     self freezecontrols(1);
@@ -238,7 +237,7 @@ private onspawned() {
 }
 
 private function_9b85340e() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   waitframe(1);
   self buy_menu_open();
 }
@@ -265,12 +264,12 @@ private onstartgametype() {
   thread function_c04cc87c();
 
   if(level.scoreroundwinbased) {
-    [[level._setteamscore]](#"allies", game.stat[#"roundswon"][#"allies"]);
-    [[level._setteamscore]](#"axis", game.stat[#"roundswon"][#"axis"]);
+    [[level._setteamscore]](#"allies", game.stat[# "roundswon"][# "allies"]);
+    [[level._setteamscore]](#"axis", game.stat[# "roundswon"][# "axis"]);
   }
 
   laststand_mp::function_414115a0(level.laststandtimer, level.laststandhealth);
-  level.var_4cfc17cc = struct::get_script_bundle("killstreak", #"killstreak_bounty_deposit_site_heli");
+  level.var_4cfc17cc = struct::get_script_bundle("killstreak", # "killstreak_bounty_deposit_site_heli");
   function_fb6f71d5();
   function_9f5ae64d();
   level thread function_7cb5420e(level.var_b9aad767);
@@ -283,7 +282,7 @@ private onspawnplayer(predictedspawn) {
 }
 
 function_5439aa67() {
-  self endon(#"death", #"revived");
+  self endon(#"death", # "revived");
 
   while(isDefined(self)) {
     if(self function_cf8de58d()) {
@@ -315,8 +314,8 @@ private function_95002a59(attacker, victim, inflictor, weapon, meansofdeath) {
 
   if(isDefined(attacker)) {
     [[level.var_37d62931]](attacker, 1);
-    attacker.pers[#"downs"] = (isDefined(attacker.pers[#"downs"]) ? attacker.pers[#"downs"] : 0) + 1;
-    attacker.downs = attacker.pers[#"downs"];
+    attacker.pers[# "downs"] = (isDefined(attacker.pers[# "downs"]) ? attacker.pers[# "downs"] : 0) + 1;
+    attacker.downs = attacker.pers[# "downs"];
   }
 
   self thread function_5439aa67();
@@ -324,8 +323,8 @@ private function_95002a59(attacker, victim, inflictor, weapon, meansofdeath) {
 
 private onplayerrevived(revivee, reviver) {
   [[level.var_37d62931]](reviver, 1);
-  reviver.pers[#"revives"] = (isDefined(reviver.pers[#"revives"]) ? reviver.pers[#"revives"] : 0) + 1;
-  reviver.revives = reviver.pers[#"revives"];
+  reviver.pers[# "revives"] = (isDefined(reviver.pers[# "revives"]) ? reviver.pers[# "revives"] : 0) + 1;
+  reviver.revives = reviver.pers[# "revives"];
   revivee notify(#"revived");
 }
 
@@ -468,7 +467,7 @@ private ondeadevent(team) {
     challenges::last_man_defeat_3_enemies(level.var_a379a090);
   }
 
-  if(game.stat[#"roundswon"][level.var_a379a090] >= level.roundwinlimit - 1) {
+  if(game.stat[# "roundswon"][level.var_a379a090] >= level.roundwinlimit - 1) {
     function_36f8016e(level.var_a379a090, 6);
     return;
   }
@@ -568,7 +567,7 @@ private ononeleftevent(team) {
   for(i = 0; i < players.size; i++) {
     player = players[i];
 
-    if(isDefined(player.pers[#"team"]) && player.pers[#"team"] == team && isDefined(player.pers[#"class"])) {
+    if(isDefined(player.pers[# "team"]) && player.pers[# "team"] == team && isDefined(player.pers[# "class"])) {
       if(player.sessionstate == "playing" && !player.afk) {
         break;
       }
@@ -667,7 +666,7 @@ private onplayerdamage(params) {
 
 private function_f7b64ada() {
   if(game.state == "playing") {
-    foreach(weapondata in self.pers[#"dynamic_loadout"].weapons) {
+    foreach(weapondata in self.pers[# "dynamic_loadout"].weapons) {
       weapondata.ammo = -1;
     }
   }
@@ -726,7 +725,7 @@ private function_4f2c425d() {
 }
 
 private givelastattackerwarning(team) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   fullhealthtime = 0;
   interval = 0.05;
   self.lastmansd = 1;
@@ -766,7 +765,7 @@ function_c04436fc() {
 private function_9698aa74(winner) {
   foreach(player in level.players) {
     if(isalive(player)) {
-      foreach(weapondata in player.pers[#"dynamic_loadout"].weapons) {
+      foreach(weapondata in player.pers[# "dynamic_loadout"].weapons) {
         weapondata.ammo = -1;
       }
     }
@@ -775,7 +774,7 @@ private function_9698aa74(winner) {
     player dynamic_loadout::removearmor();
 
     if(!level.var_59e1bdd9) {
-      player.pers[#"pickup_health"] = 0;
+      player.pers[# "pickup_health"] = 0;
     }
 
     if(!player laststand_mp::is_cheating()) {
@@ -801,7 +800,7 @@ private function_b3faa437() {
   var_8b6f8e45 = [];
   var_8b6f8e45[0] = spawn("script_model", var_85b31568);
   var_8b6f8e45[0] setModel("p8_heist_duffel_bag_set_open");
-  var_7e7897b8 = gameobjects::create_carry_object(#"neutral", usetrigger, var_8b6f8e45, (0, 0, 0), #"bag_o_money");
+  var_7e7897b8 = gameobjects::create_carry_object(#"neutral", usetrigger, var_8b6f8e45, (0, 0, 0), # "bag_o_money");
   var_7e7897b8 gameobjects::set_use_hint_text(#"hash_ee4d709a0f80280");
   var_7e7897b8 gameobjects::allow_carry(#"any");
   var_7e7897b8 gameobjects::set_visible_team(#"any");
@@ -814,7 +813,7 @@ private function_b3faa437() {
   var_7e7897b8.ondrop = &function_62d627a0;
   var_7e7897b8.var_22389d70 = 0;
   var_7e7897b8.var_78149e41 = gameobjects::get_next_obj_id();
-  objective_add(var_7e7897b8.var_78149e41, "invisible", var_7e7897b8, #"hash_34a0ac740c9d0bc2");
+  objective_add(var_7e7897b8.var_78149e41, "invisible", var_7e7897b8, # "hash_34a0ac740c9d0bc2");
   objective_onentity(var_7e7897b8.var_78149e41, var_7e7897b8);
   var_7e7897b8 gameobjects::set_visible_team(#"none");
   level.var_7e7897b8 = var_7e7897b8;
@@ -889,7 +888,7 @@ private function_62d627a0(player) {
   if(isDefined(self.var_78149e41)) {
     objective_setstate(self.var_78149e41, "invisible");
     objective_onentity(self.var_78149e41, self);
-    objective_setteam(self.var_78149e41, #"none");
+    objective_setteam(self.var_78149e41, # "none");
     objective_setvisibletoplayer(self.var_78149e41, player);
     function_3ae6fa3(self.var_78149e41, player.team, 0);
   }
@@ -982,9 +981,9 @@ private function_7cb5420e(delay) {
   }
 
   var_fa5724d5 = function_7f8c4043();
-  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, #"wpn_t8_eqp_grenade_smoke_world");
+  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, # "wpn_t8_eqp_grenade_smoke_world");
   level.var_b167ae9a = gameobjects::get_next_obj_id();
-  objective_add(level.var_b167ae9a, "active", level.var_8fcae189, #"hash_7e7657e9c8f441eb");
+  objective_add(level.var_b167ae9a, "active", level.var_8fcae189, # "hash_7e7657e9c8f441eb");
   function_da7940a3(level.var_b167ae9a, 1);
 }
 
@@ -1001,13 +1000,13 @@ private function_2ad9733b() {
 
 private function_f878f4bf(var_fa5724d5, context) {
   assert(isDefined(var_fa5724d5));
-  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, #"wpn_t8_eqp_grenade_smoke_world");
+  level.var_8fcae189 = ir_strobe::function_284b1d4c(var_fa5724d5, # "wpn_t8_eqp_grenade_smoke_world");
   var_8ff770b8 = randomfloatrange(level.var_aad1f6f2, level.var_8ce231e3);
   wait var_8ff770b8;
-  destination = getstartorigin(var_fa5724d5, (0, 0, 0), #"ai_swat_rifle_ent_litlbird_rappel_stn_vehicle2");
+  destination = getstartorigin(var_fa5724d5, (0, 0, 0), # "ai_swat_rifle_ent_litlbird_rappel_stn_vehicle2");
   var_6aa266d6 = helicopter::getvalidrandomstartnode(destination).origin;
   helicopter = function_d23cf101(var_6aa266d6, vectortoangles(destination - var_6aa266d6), context);
-  helicopter endon(#"death", #"hash_69d2c68fdf86b6d7");
+  helicopter endon(#"death", # "hash_69d2c68fdf86b6d7");
   helicopter.hardpointtype = undefined;
   waitframe(1);
   function_554b5692(helicopter);
@@ -1032,7 +1031,7 @@ private function_f878f4bf(var_fa5724d5, context) {
   waitresult = level.var_ad7774db waittill(#"hash_5677d0c5246418e5");
 
   for(prevprogress = 0; waitresult._notify == "timeout" && level.var_ad7774db.curprogress > prevprogress; prevprogress = level.var_ad7774db.curprogress) {
-    waitresult = level.var_ad7774db waittilltimeout(0.25, #"hash_5677d0c5246418e5");
+    waitresult = level.var_ad7774db waittilltimeout(0.25, # "hash_5677d0c5246418e5");
   }
 
   if(!isDefined(level.var_ad7774db)) {
@@ -1050,7 +1049,7 @@ private function_f878f4bf(var_fa5724d5, context) {
 }
 
 private function_4af1c786(helicopter, var_5ad5316d) {
-  helicopter endon(#"death", #"hash_589604da14bd8976");
+  helicopter endon(#"death", # "hash_589604da14bd8976");
   var_45d0806d = var_5ad5316d;
   lerp_duration = max((helicopter.origin[2] - var_5ad5316d[2] - 600) / 625, 0.8);
   helicopter animation::play(#"ai_swat_rifle_ent_litlbird_rappel_stn_vehicle2", var_45d0806d, (0, helicopter.angles[1], 0), 1, 0.1, 0.2, lerp_duration);
@@ -1072,7 +1071,7 @@ private function_554b5692(helicopter) {
 
 private function_f9a7a3d8(helicopter) {
   assert(isDefined(helicopter.rope));
-  helicopter endon(#"death", #"hash_69d2c68fdf86b6d7", #"hash_3478587618f28c8");
+  helicopter endon(#"death", # "hash_69d2c68fdf86b6d7", # "hash_3478587618f28c8");
   helicopter.rope endon(#"death");
   helicopter.rope show();
   helicopter.rope animation::play(#"hash_751de00c6e9e0862", helicopter, "tag_origin_animate", 1, 0.2, 0.1, undefined, undefined, undefined, 0);
@@ -1092,7 +1091,7 @@ private function_b48e2739(helicopter) {
     return;
   }
 
-  helicopter endon(#"hash_69d2c68fdf86b6d7", #"death");
+  helicopter endon(#"hash_69d2c68fdf86b6d7", # "death");
   helicopter.rope endon(#"death");
   helicopter notify(#"hash_3478587618f28c8");
   helicopter.rope thread animation::play(#"hash_3d52f6faf02fd23", helicopter, "tag_origin_animate", 1, 0.2, 0.1, undefined, undefined, undefined, 0);
@@ -1143,7 +1142,7 @@ function_36f403(helicopter) {
         while(true) {
           recordsphere(var_a9a839e2, 8, (0, 0, 1), "<dev string:x38>");
 
-            var_baa92af9 = ispointinnavvolume(helicopter.origin, "navvolume_big");
+          var_baa92af9 = ispointinnavvolume(helicopter.origin, "navvolume_big");
 
           if(var_baa92af9 && !issentient(helicopter)) {
             helicopter makesentient();
@@ -1162,7 +1161,7 @@ function_36f403(helicopter) {
   }
 
   helicopter function_9ffc1856(var_b4c35bb7, 1);
-  helicopter waittilltimeout(20, #"near_goal", #"death");
+  helicopter waittilltimeout(20, # "near_goal", # "death");
 
   if(isDefined(helicopter)) {
     helicopter stoploopsound(1);
@@ -1234,7 +1233,7 @@ private function_1aca4a4e(helicopter, destination) {
         helicopter.var_7f4a508d = var_7f4a508d;
 
         if(!ispointinnavvolume(var_7f4a508d, "navvolume_big")) {
-          self waittilltimeout(10, #"hash_340ab3c2b94ff86a");
+          self waittilltimeout(10, # "hash_340ab3c2b94ff86a");
         }
       }
     }
@@ -1350,7 +1349,7 @@ private function_8de67419(leavenode) {
     while(true) {
       recordsphere(var_a9a839e2, 8, (0, 0, 1), "<dev string:x38>");
 
-        var_baa92af9 = ispointinnavvolume(self.origin, "navvolume_big");
+      var_baa92af9 = ispointinnavvolume(self.origin, "navvolume_big");
 
       if(!var_baa92af9) {
         self function_60d50ea4();
@@ -1372,7 +1371,7 @@ function_8debcb6(origin) {
   objective_delete(level.var_b167ae9a);
   trigger = spawn("trigger_radius_new", origin, 0, 90, 100);
   trigger triggerignoreteam();
-  useobj = gameobjects::create_use_object(#"none", trigger, [], (0, 0, 0), #"hash_7e7657e9c8f441eb");
+  useobj = gameobjects::create_use_object(#"none", trigger, [], (0, 0, 0), # "hash_7e7657e9c8f441eb");
   useobj gameobjects::set_visible_team(#"any");
   useobj gameobjects::allow_use(#"any");
   useobj gameobjects::set_owner_team(#"neutral");
@@ -1412,7 +1411,7 @@ function_d8151863(origin) {
   fwd = (0, 0, 1);
   right = (0, -1, 0);
   useobj.fx = spawnfx(#"ui/fx_dom_marker_team_r90", origin, fwd, right);
-  useobj.fx.team = #"none";
+  useobj.fx.team = # "none";
   triggerfx(useobj.fx, 0.001);
 }
 
@@ -1457,8 +1456,8 @@ function_37e1bbbf(player) {
   useobj function_572ce431();
   player playsoundtoplayer(#"hash_19f756f885db9bb8", player);
   [[level.var_37d62931]](player, 1);
-  player.pers[#"objscore"]++;
-  player.objscore = player.pers[#"objscore"];
+  player.pers[# "objscore"]++;
+  player.objscore = player.pers[# "objscore"];
   level thread popups::displayteammessagetoall(#"hash_6bea5c334a4ab164", player);
   level function_c04436fc();
   team = player getteam();
@@ -1610,14 +1609,14 @@ private function_d4a84cde(team, player, result) {
 }
 
 function_3a77006e(amount, reason) {
-  if(!isDefined(self.pers[#"money"]) || self laststand_mp::is_cheating()) {
+  if(!isDefined(self.pers[# "money"]) || self laststand_mp::is_cheating()) {
     return;
   }
 
-  self.pers[#"money"] += amount;
-  self.pers[#"money_earned"] += amount;
-  [[level._setplayerscore]](self, self.pers[#"money_earned"]);
-  self clientfield::set_to_player("bountyMoney", self.pers[#"money"]);
+  self.pers[# "money"] += amount;
+  self.pers[# "money_earned"] += amount;
+  [[level._setplayerscore]](self, self.pers[# "money_earned"]);
+  self clientfield::set_to_player("bountyMoney", self.pers[# "money"]);
   bb::function_95a5b5c2(reason, "", self.team, self.origin, self);
 }
 
@@ -1663,8 +1662,8 @@ function_b968a61c() {
     player = level.players[0];
 
     if(isplayer(player)) {
-      player.pers[#"money"] += var_9b37b387;
-      player clientfield::set_to_player("<dev string:xd2>", player.pers[#"money"]);
+      player.pers[# "money"] += var_9b37b387;
+      player clientfield::set_to_player("<dev string:xd2>", player.pers[# "money"]);
     }
 
     setdvar(#"hash_312d65fd43c7008c", 0);

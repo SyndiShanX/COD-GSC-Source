@@ -14,7 +14,6 @@
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreaks_shared;
-
 #namespace icepick;
 
 init_shared() {
@@ -201,7 +200,7 @@ onplayerconnect() {
 }
 
 function_c1d2f9aa() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   self flagsys::wait_till(#"loadout_given");
   self ability_player::function_c9b950e3();
 }
@@ -279,7 +278,7 @@ private function_808efdee(hacker, entity) {
     return false;
   }
 
-  if(entity.team == #"spectator") {
+  if(entity.team == # "spectator") {
     return false;
   }
 
@@ -328,7 +327,7 @@ function_39d1ce95(entity, entityweapon) {
   }
 
   switch (entityweapon.name) {
-    case #"supplydrop":
+    case # "supplydrop":
       if(isDefined(level.cratemodelfriendly)) {
         streamermodelhint(level.cratemodelfriendly, 10);
       }
@@ -397,7 +396,7 @@ private sort_vehicles(&array, sort_func) {
 }
 
 private starthack(player) {
-  player endoncallback(&function_4802ca63, #"death", #"hash_7b4714f415b8f49e");
+  player endoncallback(&function_4802ca63, # "death", # "hash_7b4714f415b8f49e");
   level.var_fdb0a658 = 1;
   player clientfield::set_player_uimodel("IcePickInfo.hackStarted", 1);
   icepickweapon = getweapon(#"gadget_icepick");
@@ -468,7 +467,7 @@ private starthack(player) {
 }
 
 private function_aaf0a382(entities, player, max) {
-  player endon(#"death", #"hash_7b4714f415b8f49e");
+  player endon(#"death", # "hash_7b4714f415b8f49e");
   var_e8e3cc00 = 0;
 
   foreach(entity in entities) {
@@ -494,7 +493,7 @@ private function_aaf0a382(entities, player, max) {
 }
 
 private function_2b2ed159(entity, attackingplayer) {
-  attackingplayer endon(#"death", #"hash_7b4714f415b8f49e");
+  attackingplayer endon(#"death", # "hash_7b4714f415b8f49e");
   var_87bdc7d3 = int(function_ab1f58d0(entity) * 1000);
   var_7570395 = 0;
   attackingplayer.var_e989badb = entity;
@@ -573,7 +572,7 @@ private function_2b2ed159(entity, attackingplayer) {
   attackingplayer.var_86f63ff1++;
 
   if(isplayer(entity)) {
-    targetname = #"player";
+    targetname = # "player";
     playernum = entity.entnum;
     thread function_39026c34(attackingplayer, entity, 1);
   } else {
@@ -604,7 +603,7 @@ private function_2b2ed159(entity, attackingplayer) {
 }
 
 function_4802ca63(str_notify) {
-  if(str_notify != #"hash_7b4714f415b8f49e" || !isDefined(self) || !isplayer(self)) {
+  if(str_notify != # "hash_7b4714f415b8f49e" || !isDefined(self) || !isplayer(self)) {
     return;
   }
 
@@ -628,7 +627,7 @@ function_4a82368f(entity, owner) {
     owner clientfield::set_to_player("hackedvehpostfx", 1);
   }
 
-  entity waittill(#"death", #"remote_weapon_end", #"hash_2476803a0d5fa572");
+  entity waittill(#"death", # "remote_weapon_end", # "hash_2476803a0d5fa572");
 
   if(!isDefined(owner)) {
     return;
@@ -782,7 +781,7 @@ private function_bf744a1e(attackingplayer, var_11a83c3a) {
 
 private function_f255c737(var_11a83c3a) {
   assert(isDefined(var_11a83c3a));
-  var_11a83c3a endon(#"death", #"hack_end");
+  var_11a83c3a endon(#"death", # "hack_end");
   settingsbundle = function_13f4415c();
 
   while(gettime() <= var_11a83c3a.hackendtime && level.gameended !== 1) {
@@ -827,7 +826,7 @@ function_39026c34(attackingplayer, var_11a83c3a, var_4f6e2cbe) {
 }
 
 private function_9a1266be() {
-  self endon(#"death", #"hash_2945c35e0b146804", #"hash_5e72464fef90323e");
+  self endon(#"death", # "hash_2945c35e0b146804", # "hash_5e72464fef90323e");
   wait 1;
   self function_de8a54a6(0.01);
 }
@@ -883,7 +882,7 @@ private gadget_icepick_off(slot, weapon) {
 }
 
 private function_d1f6e8d0(player) {
-  player endon(#"hash_2945c35e0b146804", #"death");
+  player endon(#"hash_2945c35e0b146804", # "death");
 
   if(!isDefined(player.var_46fccfba)) {
     player.var_46fccfba = 0;
@@ -922,11 +921,11 @@ private function_d1f6e8d0(player) {
 }
 
 function_f1148c2c(player) {
-  player endon(#"death", #"hash_7b4714f415b8f49e");
+  player endon(#"death", # "hash_7b4714f415b8f49e");
   player notify(#"hash_5e72464fef90323e");
 
   if(player isswitchingweapons()) {
-    player waittilltimeout(1, #"weapon_change_complete");
+    player waittilltimeout(1, # "weapon_change_complete");
   }
 
   if(isDefined(player) && isplayer(player)) {
@@ -935,7 +934,7 @@ function_f1148c2c(player) {
 }
 
 private function_6b9d6894(player) {
-  player endon(#"hash_2945c35e0b146804", #"death", #"disconnect");
+  player endon(#"hash_2945c35e0b146804", # "death", # "disconnect");
 
   if(!isDefined(player.var_3ca20bb9)) {
     player.var_3ca20bb9 = 0;
@@ -945,7 +944,7 @@ private function_6b9d6894(player) {
     waitresult = player waittill(#"menuresponse");
 
     switch (waitresult.response) {
-      case #"id":
+      case # "id":
         if(!(isDefined(player.var_c1911c44) ? player.var_c1911c44 : 0) && waitresult.intpayload === 1) {
           if(isDefined(level.var_fdb0a658) && level.var_fdb0a658) {
             player iprintlnbold(#"weapon/icepick_unavailable");
@@ -966,7 +965,7 @@ private function_6b9d6894(player) {
         }
 
         break;
-      case #"back":
+      case # "back":
         if(waitresult.intpayload == 1) {
           player switchtoweapon();
         }
@@ -981,7 +980,7 @@ private function_28f0bd8e(hacker) {
   hacker endon(#"hash_ea5ac4d11419268");
   objectiveid = hacker.var_1d6ad02e;
   settingsbundle = function_13f4415c();
-  hacker waittilltimeout(isDefined(settingsbundle.var_9baf2d44) ? settingsbundle.var_9baf2d44 : 0, #"death", #"disconnect");
+  hacker waittilltimeout(isDefined(settingsbundle.var_9baf2d44) ? settingsbundle.var_9baf2d44 : 0, # "death", # "disconnect");
 
   if(isDefined(objectiveid)) {
     gameobjects::release_obj_id(objectiveid);
@@ -994,7 +993,7 @@ private function_28f0bd8e(hacker) {
 }
 
 private function_b76c8353(hacker) {
-  hacker endon(#"death", #"hash_2945c35e0b146804");
+  hacker endon(#"death", # "hash_2945c35e0b146804");
   settingsbundle = function_13f4415c();
   var_a1a18ce2 = isDefined(settingsbundle.var_679962fc) ? settingsbundle.var_679962fc : 1000;
   var_49c01cfb = gettime() + var_a1a18ce2;
@@ -1010,7 +1009,7 @@ private function_b76c8353(hacker) {
     hacker.var_1d6ad02e = gameobjects::get_next_obj_id();
   }
 
-  objective_add(hacker.var_1d6ad02e, "active", hacker, #"exposed_hacker");
+  objective_add(hacker.var_1d6ad02e, "active", hacker, # "exposed_hacker");
   objective_setteam(hacker.var_1d6ad02e, hacker.team);
   function_da7940a3(hacker.var_1d6ad02e, 1);
   function_3ae6fa3(hacker.var_1d6ad02e, hacker.team, 0);
@@ -1022,29 +1021,29 @@ function_42bb8ac1(weapon, originalowner, newowner, var_53c10ed8) {
   }
 
   switch (weapon.name) {
-    case #"gadget_spawnbeacon":
+    case # "gadget_spawnbeacon":
       leaderdialog = "enemySpawnBeaconHack";
       break;
-    case #"cobra_20mm_comlink":
-    case #"helicopter_comlink":
-    case #"inventory_helicopter_comlink":
+    case # "cobra_20mm_comlink":
+    case # "helicopter_comlink":
+    case # "inventory_helicopter_comlink":
       leaderdialog = "enemyAttackChopperHack";
       break;
-    case #"counteruav":
+    case # "counteruav":
       leaderdialog = "enemyCUAVHack";
       break;
-    case #"drone_squadron":
-    case #"inventory_drone_squadron":
+    case # "drone_squadron":
+    case # "inventory_drone_squadron":
       leaderdialog = "enemyDroneSquadronHack";
       break;
-    case #"supplydrop":
+    case # "supplydrop":
       leaderdialog = "enemyCarePackageHack";
       break;
-    case #"uav":
+    case # "uav":
       leaderdialog = "enemyUAVHack";
       break;
-    case #"ultimate_turret":
-    case #"inventory_ultimate_turret":
+    case # "ultimate_turret":
+    case # "inventory_ultimate_turret":
       leaderdialog = "enemySentryHack";
       break;
   }
@@ -1062,78 +1061,78 @@ function_42bb8ac1(weapon, originalowner, newowner, var_53c10ed8) {
 
 function_d545fd0a(player, weapon) {
   switch (weapon.name) {
-    case #"supplydrop":
+    case # "supplydrop":
       var_d975dd49 = "hacked_care_package";
       break;
-    case #"counteruav":
+    case # "counteruav":
       var_d975dd49 = "hacked_cuav";
       break;
-    case #"uav":
+    case # "uav":
       var_d975dd49 = "hacked_uav";
       break;
-    case #"gadget_spawnbeacon":
+    case # "gadget_spawnbeacon":
       var_d975dd49 = "hacked_spawn_beacon";
       break;
-    case #"planemortar":
-    case #"inventory_planemortar":
+    case # "planemortar":
+    case # "inventory_planemortar":
       var_d975dd49 = "hacked_planemortar";
       break;
-    case #"inventory_remote_missile":
-    case #"remote_missile":
+    case # "inventory_remote_missile":
+    case # "remote_missile":
       var_d975dd49 = "hacked_hellstorm";
       break;
-    case #"inventory_straferun":
-    case #"straferun":
+    case # "inventory_straferun":
+    case # "straferun":
       var_d975dd49 = "hacked_warthog";
       break;
-    case #"dart":
-    case #"inventory_dart":
+    case # "dart":
+    case # "inventory_dart":
       var_d975dd49 = "hacked_dart";
       break;
-    case #"inventory_drone_squadron":
-    case #"drone_squadron":
+    case # "inventory_drone_squadron":
+    case # "drone_squadron":
       var_d975dd49 = "hacked_drone_squad";
       break;
-    case #"inventory_helicopter_comlink":
-    case #"cobra_20mm_comlink":
-    case #"helicopter_comlink":
+    case # "inventory_helicopter_comlink":
+    case # "cobra_20mm_comlink":
+    case # "helicopter_comlink":
       var_d975dd49 = "hacked_attack_chopper";
       break;
-    case #"overwatch_helicopter":
-    case #"inventory_overwatch_helicopter":
+    case # "overwatch_helicopter":
+    case # "inventory_overwatch_helicopter":
       var_d975dd49 = "hacked_sniper_chopper";
       break;
-    case #"ac130":
-    case #"inventory_ac130":
+    case # "ac130":
+    case # "inventory_ac130":
       var_d975dd49 = "hacked_ac130";
       break;
-    case #"tank_robot":
-    case #"inventory_tank_robot":
-    case #"ai_tank_marker":
+    case # "tank_robot":
+    case # "inventory_tank_robot":
+    case # "ai_tank_marker":
       var_d975dd49 = "hacked_mantis";
       break;
-    case #"ultimate_turret":
-    case #"inventory_ultimate_turret":
+    case # "ultimate_turret":
+    case # "inventory_ultimate_turret":
       var_d975dd49 = "hacked_ult_turret";
       break;
-    case #"recon_car":
-    case #"inventory_recon_car":
+    case # "recon_car":
+    case # "inventory_recon_car":
       var_d975dd49 = "hacked_rcxd";
       break;
-    case #"gadget_supplypod":
+    case # "gadget_supplypod":
       var_d975dd49 = "hacked_supplypod";
       break;
-    case #"gadget_smart_cover":
-    case #"ability_smart_cover":
+    case # "gadget_smart_cover":
+    case # "ability_smart_cover":
       var_d975dd49 = "hacked_barricade";
       break;
-    case #"eq_sensor":
+    case # "eq_sensor":
       var_d975dd49 = "hacked_sensor_dart";
       break;
-    case #"eq_seeker_mine":
+    case # "eq_seeker_mine":
       var_d975dd49 = "hacked_seeker";
       break;
-    case #"trophy_system":
+    case # "trophy_system":
       var_d975dd49 = "hacked_trophy";
       break;
   }

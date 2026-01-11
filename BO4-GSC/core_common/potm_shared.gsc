@@ -13,7 +13,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
-
 #namespace potm;
 
 autoexec __init__system__() {
@@ -67,7 +66,7 @@ private init() {
     game.var_aafe322f = [];
     game.var_12ffe1e3 = [];
     game.potmevents = [];
-    game.var_8ea529d1 = #"potm";
+    game.var_8ea529d1 = # "potm";
 
     debuginit();
 
@@ -292,7 +291,7 @@ post_round_potm() {
 }
 
 function_b0bc26b3(deathtime, starttime) {
-  self endon(#"disconnect", #"end_killcam");
+  self endon(#"disconnect", # "end_killcam");
   var_a7e16ed3 = deathtime - starttime;
   waitbeforedeath = 1;
   timetowait = max(0, float(var_a7e16ed3) / 1000 - waitbeforedeath);
@@ -308,7 +307,7 @@ function_b0bc26b3(deathtime, starttime) {
 }
 
 function_f909006c(currentevent) {
-  self endon(#"disconnect", #"end_killcam");
+  self endon(#"disconnect", # "end_killcam");
 
   if(!isDefined(currentevent.var_b86d6c40)) {
     return;
@@ -337,19 +336,19 @@ function_f909006c(currentevent) {
       var_e0aa3530 = var_dcbc5c97[index];
 
       if(var_e0aa3530.time - starttime < timeelapsed) {
-        if(var_e0aa3530.bookmarkname == #"medal") {
+        if(var_e0aa3530.bookmarkname == # "medal") {
           medalstruct = {};
           medalstruct.medal_index = var_e0aa3530.eventdata.tableindex;
 
           if(!util::function_8570168d() && isDefined(medalstruct.medal_index)) {
             luinotifyevent(#"medal_received", 1, medalstruct.medal_index);
           }
-        } else if(var_e0aa3530.bookmarkname == #"score_event") {
+        } else if(var_e0aa3530.bookmarkname == # "score_event") {
           if(isDefined(var_e0aa3530.eventdata.event_info)) {
             label = rank::getscoreinfolabel(var_e0aa3530.eventdata.event_info);
             score = rank::getscoreinfovalue(var_e0aa3530.eventdata.event_info);
             combatefficiencyscore = rank::function_4587103(var_e0aa3530.eventdata.event_info);
-            eventindex = level.scoreinfo[var_e0aa3530.eventdata.event_info][#"row"];
+            eventindex = level.scoreinfo[var_e0aa3530.eventdata.event_info][# "row"];
           } else {
             label = var_e0aa3530.eventdata.label;
             score = var_e0aa3530.eventdata.score;
@@ -358,7 +357,7 @@ function_f909006c(currentevent) {
           }
 
           if(!isDefined(label)) {
-            label = #"hash_480234a872bd64ac";
+            label = # "hash_480234a872bd64ac";
           }
 
           if(!isDefined(score)) {
@@ -462,7 +461,7 @@ private play_potm_on_player(event) {
     self[[game.var_321b0d80]](event.clientxuid);
   }
 
-  var_f699686a = #"melee_amuletfist_t8";
+  var_f699686a = # "melee_amuletfist_t8";
   hide_event = 0;
   killcamparams = event.currentevent.killcamparams;
 
@@ -491,7 +490,7 @@ function_afe21831() {
 
 function_cd1447ce() {
   self endon(#"disconnect");
-  level endon(#"game_ended", #"potm_finished");
+  level endon(#"game_ended", # "potm_finished");
 
   while(true) {
     waitresult = self waittill(#"menuresponse");
@@ -511,7 +510,7 @@ function_cd1447ce() {
 }
 
 function_a76f0a49() {
-  level endon(#"game_ended", #"potm_finished");
+  level endon(#"game_ended", # "potm_finished");
   numplayers = 0;
 
   foreach(player in level.players) {
@@ -587,7 +586,7 @@ private function_caf394b8(duration) {
 }
 
 private function_60211cf4(sequence) {
-  level endon(#"potm_finished", #"game_ended");
+  level endon(#"potm_finished", # "game_ended");
   assert(sequence.params.events.size > 0);
   starttimescale = 1;
 
@@ -609,7 +608,7 @@ private function_60211cf4(sequence) {
     event = sequence.params.events[cameraindex];
     processevent = 1;
 
-    if(isDefined(event.cameraname) && event.cameraname == #"hash_520dfab6dc8b7832") {
+    if(isDefined(event.cameraname) && event.cameraname == # "hash_520dfab6dc8b7832") {
       level thread function_d1cb3471();
     }
 
@@ -707,7 +706,7 @@ private function_404ffafb(var_353e7913, var_550d79fc, var_19e3f5ac) {
 }
 
 private function_b1b3bfc5(event, var_50c26ba) {
-  level endon(#"potm_finished", #"game_ended");
+  level endon(#"potm_finished", # "game_ended");
 
   if(!game.var_50b05a28) {
     return;
@@ -850,7 +849,7 @@ private function_b1b3bfc5(event, var_50c26ba) {
 }
 
 private function_a85adb2c(delta) {
-  self endon(#"end_killcam", #"hash_17418db31d60118f");
+  self endon(#"end_killcam", # "hash_17418db31d60118f");
   time = gettime();
   delta -= 300;
 
@@ -1338,7 +1337,7 @@ private function_e81fe19d(bookmark) {
 function_5b1e9ed4(modulename, bookmarkname, time, var_81538b15, var_f28fb772, scoreeventpriority, einflictor, var_50d1e41a, overrideentitycamera, eventdata) {
   var_7491f0eb = 0;
 
-  if(modulename == #"potm") {
+  if(modulename == # "potm") {
     var_7491f0eb = 1;
   }
 
@@ -1350,7 +1349,7 @@ function_5b1e9ed4(modulename, bookmarkname, time, var_81538b15, var_f28fb772, sc
 
   if(!isDefined(var_50d1e41a) || var_50d1e41a.size <= 0) {
     var_50d1e41a = [];
-    array::add(var_50d1e41a, #"");
+    array::add(var_50d1e41a, # "");
   }
 
   var_6f810a5 = "<dev string:x6af>";
@@ -1430,7 +1429,7 @@ function_5b1e9ed4(modulename, bookmarkname, time, var_81538b15, var_f28fb772, sc
   } else {
     bookmark.eventdata = {};
     bookmark.eventdata.tableindex = 0;
-    bookmark.eventdata.event_info = #"";
+    bookmark.eventdata.event_info = # "";
   }
 
   if(isDefined(scoreeventpriority)) {
@@ -1552,7 +1551,7 @@ kill_bookmark(var_81538b15, var_f28fb772, einflictor, var_50d1e41a, overrideenti
     return;
   }
 
-  bookmark = function_5b1e9ed4(game.var_8ea529d1, #"kill", gettime(), var_81538b15, var_f28fb772, 0, einflictor, var_50d1e41a, overrideentitycamera);
+  bookmark = function_5b1e9ed4(game.var_8ea529d1, # "kill", gettime(), var_81538b15, var_f28fb772, 0, einflictor, var_50d1e41a, overrideentitycamera);
   function_47a69b74(bookmark);
 }
 
@@ -1597,7 +1596,7 @@ function_651a5f4(var_81538b15, einflictor = var_81538b15) {
     return;
   }
 
-  bookmark = function_5b1e9ed4(game.var_8ea529d1, #"object_destroy", gettime(), var_81538b15, undefined, 0, einflictor);
+  bookmark = function_5b1e9ed4(game.var_8ea529d1, # "object_destroy", gettime(), var_81538b15, undefined, 0, einflictor);
   function_47a69b74(bookmark);
 }
 
@@ -1663,7 +1662,7 @@ private function_79c0d595(bookmarkname, etype, var_50d1e41a) {
             return info;
           }
 
-          if(info.var_38446242 == #"") {
+          if(info.var_38446242 == # "") {
             result = info;
             var_bee9d27f = 1;
           }
@@ -1671,13 +1670,13 @@ private function_79c0d595(bookmarkname, etype, var_50d1e41a) {
       }
 
       if(!var_bee9d27f) {
-        if(info.var_4e86a573 == #"" && info.var_38446242 == level.var_837aa533) {
+        if(info.var_4e86a573 == # "" && info.var_38446242 == level.var_837aa533) {
           result = info;
           var_91d32f1 = 1;
           continue;
         }
 
-        if(!var_91d32f1 && info.var_4e86a573 == #"" && info.var_38446242 == #"") {
+        if(!var_91d32f1 && info.var_4e86a573 == # "" && info.var_38446242 == # "") {
           result = info;
         }
       }
@@ -1699,7 +1698,7 @@ private function_876f528(infoindex) {
 }
 
 private function_e38a52f0(clientnum, bookmark) {
-  if(bookmark.bookmarkname == #"player_revived") {
+  if(bookmark.bookmarkname == # "player_revived") {
     return (bookmark.mainclientnum == clientnum || bookmark.otherclientnum == clientnum);
   }
 
@@ -1733,7 +1732,7 @@ private function_cbc0ec1c(bookmark, preparinginformation) {
 }
 
 private function_d832ee94(preparinginformation, bookmark) {
-  if(bookmark.bookmarkname != #"medal" && bookmark.bookmarkname != #"score_event") {
+  if(bookmark.bookmarkname != # "medal" && bookmark.bookmarkname != # "score_event") {
     return;
   }
 
@@ -2133,14 +2132,14 @@ private updatedebugmenudata(forceupdate) {
   menu = level.potmdebugmenu;
   debugeventnum = getdvarint(#"scr_potm_debug_event_num", 0);
   oldestarchivetime = getearliestarchiveclientinfotime();
-  hostplayer setluimenudata(menu, #"oldestarchivetime", oldestarchivetime);
+  hostplayer setluimenudata(menu, # "oldestarchivetime", oldestarchivetime);
 
   if(isDefined(level.potmdebugeventnum) && level.potmdebugeventnum == debugeventnum && !forceupdate) {
     return;
   }
 
   level.potmdebugeventnum = debugeventnum;
-  infoindex = #"n/a";
+  infoindex = # "n/a";
   starttime = -1;
   endtime = -1;
   duration = -1;
@@ -2160,16 +2159,16 @@ private updatedebugmenudata(forceupdate) {
     var_1be0f2c3 = function_c7e98e25(event);
   }
 
-  hostplayer setluimenudata(menu, #"count", game.potmevents.size);
-  hostplayer setluimenudata(menu, #"eventnum", int(debugeventnum));
-  hostplayer setluimenudata(menu, #"eventinfoindex", infoindex);
-  hostplayer setluimenudata(menu, #"eventstarttime", int(starttime));
-  hostplayer setluimenudata(menu, #"eventendtime", int(endtime));
-  hostplayer setluimenudata(menu, #"eventduration", int(duration));
-  hostplayer setluimenudata(menu, #"scoreeventpriority", int(priority));
-  hostplayer setluimenudata(menu, #"hash_752b983964003a68", int(var_e567d17));
-  hostplayer setluimenudata(menu, #"hash_5935b658727b020c", var_1be0f2c3);
-  hostplayer setluimenudata(menu, #"hash_33d80b75d9c6d88d", var_4775155a);
+  hostplayer setluimenudata(menu, # "count", game.potmevents.size);
+  hostplayer setluimenudata(menu, # "eventnum", int(debugeventnum));
+  hostplayer setluimenudata(menu, # "eventinfoindex", infoindex);
+  hostplayer setluimenudata(menu, # "eventstarttime", int(starttime));
+  hostplayer setluimenudata(menu, # "eventendtime", int(endtime));
+  hostplayer setluimenudata(menu, # "eventduration", int(duration));
+  hostplayer setluimenudata(menu, # "scoreeventpriority", int(priority));
+  hostplayer setluimenudata(menu, # "hash_752b983964003a68", int(var_e567d17));
+  hostplayer setluimenudata(menu, # "hash_5935b658727b020c", var_1be0f2c3);
+  hostplayer setluimenudata(menu, # "hash_33d80b75d9c6d88d", var_4775155a);
 }
 
 private updatedebugmenustate() {

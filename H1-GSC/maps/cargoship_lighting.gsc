@@ -187,11 +187,11 @@ activate_lights(var_0, var_1, var_2) {
   var_4 = common_scripts\utility::getstructarray(var_0, "targetname");
 
   foreach(var_6 in var_3) {
-  var_6 set_light_intensity(!var_1, var_2);
+    var_6 set_light_intensity(!var_1, var_2);
   }
 
   foreach(var_6 in var_4) {
-  var_6 set_light_intensity(!var_1, var_2);
+    var_6 set_light_intensity(!var_1, var_2);
   }
 }
 
@@ -361,8 +361,7 @@ special_lighting_trigger_think() {
 
     if(common_scripts\utility::flag("escape_exterior_visionset")) {
       var_0 = "cargoship_exterior_outro";
-    }
-    else {
+    } else {
       var_0 = "cargoship_exterior";
     }
 

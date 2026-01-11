@@ -10,8 +10,7 @@
 main() {
   if(self.type == "dog") {
     dog_wall_and_window_hop("window_40", 40);
-  }
-  else {
+  } else {
     low_wall_human();
   }
 }

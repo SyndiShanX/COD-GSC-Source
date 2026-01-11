@@ -14,8 +14,7 @@ player_viewhands_minigun(var_0, var_1, var_2) {
 
   if(!isDefined(var_2)) {
     var_0.animname = "suburban_hands";
-  }
-  else {
+  } else {
     var_0.animname = var_2;
   }
 
@@ -96,8 +95,7 @@ player_viewhands_minigun_hand(var_0) {
 
   if(var_0 == "LEFT") {
     var_1 = ::spinbuttonpressed;
-  }
-  else if(var_0 == "RIGHT") {
+  } else if(var_0 == "RIGHT") {
     var_1 = ::firebuttonpressed;
   }
 
@@ -141,8 +139,7 @@ player_viewhands_minigun_idle(var_0) {
 
   if(var_0 == "LEFT") {
     var_1 = "L";
-  }
-  else if(var_0 == "RIGHT") {
+  } else if(var_0 == "RIGHT") {
     var_1 = "R";
   }
 
@@ -158,8 +155,7 @@ player_viewhands_minigun_presed(var_0) {
 
   if(var_0 == "LEFT") {
     var_1 = "L";
-  }
-  else if(var_0 == "RIGHT") {
+  } else if(var_0 == "RIGHT") {
     var_1 = "R";
   }
 

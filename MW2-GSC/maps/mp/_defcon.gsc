@@ -54,7 +54,7 @@ defconKillstreakThread() {
 
   requiredKillCount = getDvarInt("scr_defconStreak");
 
-    level thread defconKillstreakWait(requiredKillCount);
+  level thread defconKillstreakWait(requiredKillCount);
   level thread defconKillstreakWait(requiredKillCount - 1);
   level thread defconKillstreakWait(requiredKillCount - 2);
 

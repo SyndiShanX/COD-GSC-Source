@@ -133,8 +133,7 @@ handle_skiptos() {
   if(!isDefined(level.skipto_point)) {
     if(isDefined(level.default_skipto)) {
       level.skipto_point = level.default_skipto;
-    }
-    else if(level_has_skipto_points()) {
+    } else if(level_has_skipto_points()) {
       level.skipto_point = level.skipto_functions[0]["name"];
     }
 
@@ -162,8 +161,7 @@ handle_skiptos() {
   if(!is_default_skipto()) {
     if(isDefined(skipto_array["skipto_loc_string"])) {
       thread indicate_skipto(skipto_array["skipto_loc_string"]);
-    }
-    else {
+    } else {
       thread indicate_skipto(level.skipto_point);
     }
   }
@@ -236,8 +234,7 @@ create_skipto(skipto, index) {
   if(index != -1) {
     if(index != 4) {
       alpha = 1 - abs(4 - index) / 4;
-    }
-    else {
+    } else {
       color = (1, 1, 0);
     }
   }
@@ -321,8 +318,7 @@ display_skiptos() {
     if(s_name != "cancel" && s_name != "default" && s_name != "no_game") {
       skipto_string = skipto_string + " -> ";
 
-      if(isDefined(level.skipto_arrays[s_name]["skipto_loc_string"])) {
-      }
+      if(isDefined(level.skipto_arrays[s_name]["skipto_loc_string"])) {}
     }
 
     strings[strings.size] = skipto_string;
@@ -415,8 +411,7 @@ skipto_list_settext(hud_array, strings, num) {
 
     if(isDefined(strings[index])) {
       text = strings[index];
-    }
-    else {
+    } else {
       text = "";
     }
 

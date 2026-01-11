@@ -160,11 +160,9 @@ onplayerspawned() {
     if(isDefined(game["dialog"]["gametype"]) && (!level.splitscreen || self == level.players[0])) {
       if(isDefined(game["dialog"]["allies_gametype"]) && self.team == "allies") {
         maps\mp\_utility::leaderdialogonplayer("allies_gametype");
-      }
-      else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
+      } else if(isDefined(game["dialog"]["axis_gametype"]) && self.team == "axis") {
         maps\mp\_utility::leaderdialogonplayer("axis_gametype");
-      }
-      else if(!maps\mp\_utility::issecondarysplitscreenplayer()) {
+      } else if(!maps\mp\_utility::issecondarysplitscreenplayer()) {
         maps\mp\_utility::leaderdialogonplayer("gametype");
       }
     }
@@ -233,11 +231,9 @@ ongameended() {
     if(level.splitscreen) {
       if(var_0 == "allies") {
         maps\mp\_utility::playsoundonplayers(game["music"]["victory_allies"], "allies");
-      }
-      else if(var_0 == "axis") {
+      } else if(var_0 == "axis") {
         maps\mp\_utility::playsoundonplayers(game["music"]["victory_axis"], "axis");
-      }
-      else {
+      } else {
         maps\mp\_utility::playsoundonplayers(game["music"]["defeat_allies"], "allies");
         maps\mp\_utility::playsoundonplayers(game["music"]["defeat_axis"], "axis");
       }
@@ -309,9 +305,10 @@ gamewinnerdialog() {
     maps\mp\_utility::leaderdialog("mission_failure", "axis");
   } else if(var_0 == "axis") {
     if(isDefined(level.ishorde)) {
-      [[level.hordevomissionfail]]();
-    }
-    else {
+      [
+        [level.hordevomissionfail]
+      ]();
+    } else {
       maps\mp\_utility::leaderdialog("mission_success", "axis");
       maps\mp\_utility::leaderdialog("mission_failure", "allies");
     }

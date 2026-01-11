@@ -19,11 +19,10 @@
 #include scripts\mp_common\userspawnselection;
 #include scripts\weapons\deployable;
 #include scripts\weapons\weaponobjects;
-
 #namespace spawn_beacon;
 
 autoexec __init__system__() {
-  system::register(#"spawn_beacon", &__init__, undefined, #"killstreaks");
+  system::register(#"spawn_beacon", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {
@@ -87,8 +86,8 @@ function_5bfd1343(attacker, var_f231d134, killtime, capturedobjective, spawnbeac
 }
 
 function_1f5ed165() {
-  if((isDefined(level.spawnbeaconsettings.settingsbundle.var_b4403828) ? level.spawnbeaconsettings.settingsbundle.var_b4403828 : 0) && isDefined(self.var_d7cf6658) && isarray(self.var_d7cf6658) && isDefined(self.var_d7cf6658[#"friendly"].trigger)) {
-    self.var_d7cf6658[#"friendly"].trigger triggerenable(0);
+  if((isDefined(level.spawnbeaconsettings.settingsbundle.var_b4403828) ? level.spawnbeaconsettings.settingsbundle.var_b4403828 : 0) && isDefined(self.var_d7cf6658) && isarray(self.var_d7cf6658) && isDefined(self.var_d7cf6658[# "friendly"].trigger)) {
+    self.var_d7cf6658[# "friendly"].trigger triggerenable(0);
   }
 }
 
@@ -163,7 +162,7 @@ playerspawnedfromspawnbeacon(spawnbeacon, var_d8f817bc) {
     var_f8e6b703 = player match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
 
     if(isDefined(var_f8e6b703)) {
-      player match_record::set_stat(#"lives", var_f8e6b703, #"hash_674598aa9fe3d19a", 1);
+      player match_record::set_stat(#"lives", var_f8e6b703, # "hash_674598aa9fe3d19a", 1);
     }
   }
 
@@ -216,7 +215,7 @@ function_fa81d248(attacker, weapon) {
   }
 
   if(isDefined(attacker) && isplayer(attacker) && spawnbeacon.owner !== attacker && isDefined(weapon)) {
-    attacker stats::function_e24eec31(weapon, #"hash_1c9da51ed1906285", 1);
+    attacker stats::function_e24eec31(weapon, # "hash_1c9da51ed1906285", 1);
   }
 
   userspawnselection::removespawnbeacon(self.objectiveid);
@@ -271,14 +270,14 @@ private function_4ddddf03(placedspawnbeacon) {
   userspawnselection::registeravailablespawnbeacon(placedspawnbeacon.objectiveid, placedspawnbeacon);
 
   if(isDefined(level.spawnbeaconsettings.settingsbundle.var_6ee7f72) ? level.spawnbeaconsettings.settingsbundle.var_6ee7f72 : 0) {
-    function_6c529d0b(placedspawnbeacon, level.spawnbeaconsettings.settingsbundle.var_ac0a9508, player getteam(), #"enemy", #"hash_10169ccdcca54ccf", &function_741d9675, &function_70ca26fc, &function_d77d0cbb);
-    placedspawnbeacon.var_d7cf6658[#"enemy"] gameobjects::set_use_time(isDefined(level.spawnbeaconsettings.settingsbundle.deactivatetime) ? level.spawnbeaconsettings.settingsbundle.deactivatetime : 0);
+    function_6c529d0b(placedspawnbeacon, level.spawnbeaconsettings.settingsbundle.var_ac0a9508, player getteam(), # "enemy", # "hash_10169ccdcca54ccf", &function_741d9675, &function_70ca26fc, &function_d77d0cbb);
+    placedspawnbeacon.var_d7cf6658[# "enemy"] gameobjects::set_use_time(isDefined(level.spawnbeaconsettings.settingsbundle.deactivatetime) ? level.spawnbeaconsettings.settingsbundle.deactivatetime : 0);
   }
 
   if(isDefined(level.spawnbeaconsettings.settingsbundle.var_b4403828) ? level.spawnbeaconsettings.settingsbundle.var_b4403828 : 0) {
-    function_6c529d0b(placedspawnbeacon, level.spawnbeaconsettings.settingsbundle.var_69fd6325, player getteam(), #"friendly", #"hash_f91a28adadc5409", &function_e67b6bd, &function_4f5f518a, &function_d77d0cbb);
-    player clientclaimtrigger(placedspawnbeacon.var_d7cf6658[#"friendly"].trigger);
-    placedspawnbeacon.var_d7cf6658[#"friendly"] gameobjects::set_use_time(isDefined(level.spawnbeaconsettings.settingsbundle.pickuptime) ? level.spawnbeaconsettings.settingsbundle.pickuptime : 0);
+    function_6c529d0b(placedspawnbeacon, level.spawnbeaconsettings.settingsbundle.var_69fd6325, player getteam(), # "friendly", # "hash_f91a28adadc5409", &function_e67b6bd, &function_4f5f518a, &function_d77d0cbb);
+    player clientclaimtrigger(placedspawnbeacon.var_d7cf6658[# "friendly"].trigger);
+    placedspawnbeacon.var_d7cf6658[# "friendly"] gameobjects::set_use_time(isDefined(level.spawnbeaconsettings.settingsbundle.pickuptime) ? level.spawnbeaconsettings.settingsbundle.pickuptime : 0);
   }
 
   placedspawnbeacon.var_a08c7e4 = placedspawnbeacon influencers::create_influencer("activeSpawnBeacon", placedspawnbeacon.origin, util::getteammask(player getteam()));
@@ -383,11 +382,11 @@ function_f989dc0a(watcher, owner) {
 
   if(!(isDefined(owner.var_c4a4cb7d.previouslyhacked) && owner.var_c4a4cb7d.previouslyhacked)) {
     if(isDefined(owner)) {
-      owner stats::function_e24eec31(spawnbeacon.weapon, #"used", 1);
+      owner stats::function_e24eec31(spawnbeacon.weapon, # "used", 1);
     }
 
     spawnbeacon.var_1df612a0 = gettime();
-    waitresult = spawnbeacon waittilltimeout(0.05, #"stationary");
+    waitresult = spawnbeacon waittilltimeout(0.05, # "stationary");
     spawnbeacon deployable::function_dd266e08(owner);
     spawnbeacon.isdisabled = 0;
     spawnbeacon notify(#"beacon_enabled");

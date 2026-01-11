@@ -829,9 +829,7 @@ updatetunedataondisconnect(param_00) {
     return;
   }
 
-  [
-    [level.ratkingtuning]
-  ](level.agenttunedata["ratking"]);
+  [[level.ratkingtuning]](level.agenttunedata["ratking"]);
 }
 
 cp_disco_pap_machine_func(param_00, param_01) {

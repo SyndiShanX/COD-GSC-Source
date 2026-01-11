@@ -2083,8 +2083,7 @@ initactivisioncredits() {
 
   if(level.console && !level.xenon) {
     addcenterheading(&"CREDIT_THIS_PRODUCT_USES_FMOD");
-  }
-  else {
+  } else {
     addcenterheading(&"CREDIT_USES_MILES_SOUND_SYSTEM");
   }
 
@@ -2445,8 +2444,7 @@ playcredits() {
 
       if(isDefined(level.linelist[var_0].delay)) {
         var_1 = level.linelist[var_0].delay;
-      }
-      else {
+      } else {
         var_1 = 0.037 * var_5;
       }
     } else if(var_2 == "centergradientimage") {
@@ -2850,8 +2848,7 @@ playcredits() {
       var_6 thread delaydestroy(level.destroydelayvalue);
       var_6 moveovertime(level.moveovertimevalue);
       var_6.y = -120;
-    } else {
-    }
+    } else {}
 
     wait(var_1 * level.delayscale);
   }

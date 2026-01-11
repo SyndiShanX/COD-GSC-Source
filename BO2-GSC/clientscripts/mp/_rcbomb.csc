@@ -100,8 +100,7 @@ start_light_fx(localclientnum, blink) {
   if(friend) {
     if(blink) {
       self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_friendly_light_blink"], self, "tag_origin");
-    }
-    else {
+    } else {
       self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_friendly_light"], self, "tag_origin");
     }
 
@@ -109,8 +108,7 @@ start_light_fx(localclientnum, blink) {
   } else {
     if(blink) {
       self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_enemy_light_blink"], self, "tag_origin");
-    }
-    else {
+    } else {
       self.fx = playFXOnTag(localclientnum, level._effect["rcbomb_enemy_light"], self, "tag_origin");
     }
 
@@ -166,14 +164,11 @@ play_screen_fx_dirt(localclientnum) {
 
   if(pick_one == 0) {
     animateui(localclientnum, "fullscreen_dirt", "dirt", "in", 0);
-  }
-  else if(pick_one == 1) {
+  } else if(pick_one == 1) {
     animateui(localclientnum, "fullscreen_dirt", "dirt_right_splash", "in", 0);
-  }
-  else if(pick_one == 2) {
+  } else if(pick_one == 2) {
     animateui(localclientnum, "fullscreen_dirt", "dirt_left_splash", "in", 0);
-  }
-  else {
+  } else {
     animateui(localclientnum, "fullscreen_dirt", "blurred_dirt_random", "in", 0);
   }
 }
@@ -183,14 +178,11 @@ play_screen_fx_dust(localclientnum) {
 
   if(pick_one == 0) {
     animateui(localclientnum, "fullscreen_dust", "dust", "in", 0);
-  }
-  else if(pick_one == 1) {
+  } else if(pick_one == 1) {
     animateui(localclientnum, "fullscreen_dust", "dust_right_splash", "in", 0);
-  }
-  else if(pick_one == 2) {
+  } else if(pick_one == 2) {
     animateui(localclientnum, "fullscreen_dust", "dust_left_splash", "in", 0);
-  }
-  else {
+  } else {
     animateui(localclientnum, "fullscreen_dust", "blurred_dust_random", "in", 0);
   }
 }
@@ -222,11 +214,9 @@ play_driving_fx_firstperson(localclientnum, speed, speed_fraction, surf_type) {
 
   if(speed < slow_speed * -1) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_reverse_1st"], self, "tag_origin");
-  }
-  else if(speed_fraction >= normal_speed_fraction && !(speed_fraction < decelerating_speed_fraction && throttle < decelerating_throttle_fraction)) {
+  } else if(speed_fraction >= normal_speed_fraction && !(speed_fraction < decelerating_speed_fraction && throttle < decelerating_throttle_fraction)) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_1st"], self, "tag_origin");
-  }
-  else if(speed > slow_speed) {
+  } else if(speed > slow_speed) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_slow_1st"], self, "tag_origin");
   }
 
@@ -257,8 +247,7 @@ play_driving_fx_firstperson(localclientnum, speed, speed_fraction, surf_type) {
 
         if(screen_fx_type == "dirt") {
           play_screen_fx_dirt(localclientnum);
-        }
-        else {
+        } else {
           play_screen_fx_dust(localclientnum);
         }
 
@@ -293,11 +282,9 @@ play_driving_fx_thirdperson(localclientnum, speed, speed_fraction, surf_type) {
 
   if(speed < slow_speed * -1) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_reverse_3rd"], self, "tag_origin");
-  }
-  else if(speed_fraction >= normal_speed_fraction) {
+  } else if(speed_fraction >= normal_speed_fraction) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_3rd"], self, "tag_origin");
-  }
-  else if(speed > slow_speed) {
+  } else if(speed > slow_speed) {
     playFXOnTag(localclientnum, level._effect[surf_type]["rcbomb_driving_slow_3rd"], self, "tag_origin");
   }
 
@@ -323,14 +310,12 @@ play_driving_screen_fx(localclientnum) {
 
     if(maxspeed > 0) {
       speed_fraction = abs(speed) / maxspeed;
-    }
-    else {
+    } else {
       speed_fraction = 0;
     }
 
     if(self iswheelcolliding("back_left") || self iswheelcolliding("back_right")) {
-      if(self islocalclientdriver(localclientnum)) {
-      }
+      if(self islocalclientdriver(localclientnum)) {}
     }
   }
 }
@@ -352,8 +337,7 @@ play_driving_fx(localclientnum) {
 
     if(maxspeed > 0) {
       speed_fraction = abs(speed) / maxspeed;
-    }
-    else {
+    } else {
       speed_fraction = 0;
     }
 
@@ -363,8 +347,7 @@ play_driving_fx(localclientnum) {
       if(isDefined(surf_type)) {
         if(self islocalclientdriver(localclientnum)) {
           play_driving_fx_firstperson(localclientnum, speed, speed_fraction, surf_type);
-        }
-        else {
+        } else {
           play_driving_fx_thirdperson(localclientnum, speed, speed_fraction, surf_type);
         }
       }
@@ -402,8 +385,7 @@ collisionhandler(localclientnum) {
       if(isDefined(player)) {
         if(hit_intensity > 15) {
           player playrumbleonentity(driver_local_client, "damage_heavy");
-        }
-        else {
+        } else {
           player playrumbleonentity(driver_local_client, "damage_light");
         }
       }

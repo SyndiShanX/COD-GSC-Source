@@ -214,8 +214,7 @@ main() {
 
   if(getdvar("village_defend_one_minute") != "1") {
     level.stopwatch = 4;
-  }
-  else {
+  } else {
     level.stopwatch = 1;
   }
 
@@ -262,14 +261,11 @@ main() {
 
   if(level.gameskill == 0) {
     level.enemywavesallowed = 1;
-  }
-  else if(level.gameskill == 1) {
+  } else if(level.gameskill == 1) {
     level.enemywavesallowed = 3;
-  }
-  else if(level.gameskill == 2) {
+  } else if(level.gameskill == 2) {
     level.enemywavesallowed = 4;
-  }
-  else if(level.gameskill == 3) {
+  } else if(level.gameskill == 3) {
     level.enemywavesallowed = 5;
   }
 
@@ -871,8 +867,7 @@ southern_hill_vanguard_nav() {
 
   if(!isDefined(self.script_noteworthy)) {
     var_0 = getnode("default_vanguard_dest", "targetname");
-  }
-  else {
+  } else {
     var_1 = getnodearray("vanguard_node", "targetname");
 
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
@@ -993,8 +988,7 @@ southern_hill_killzone_sequence() {
 
     if(isDefined(var_2.target)) {
       var_2 = getent(var_2.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
 
@@ -1006,8 +1000,7 @@ southern_hill_killzone_sequence() {
 
     if(isDefined(var_3.target)) {
       var_3 = getent(var_3.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
 
@@ -1700,8 +1693,7 @@ hunt_player(var_0) {
   while(self.goalradius > 640) {
     if(level.player istouching(var_1)) {
       self setgoalnode(var_2);
-    }
-    else {
+    } else {
       self setgoalpos(level.player.origin);
     }
 
@@ -1725,11 +1717,9 @@ helidrop_clacker_divert(var_0) {
   if(isDefined(self.script_noteworthy)) {
     if(self.script_noteworthy == "helidrop_bait_grassyknoll" && !common_scripts\utility::flag("farslope_exploded")) {
       var_1 = getnode("bait_farslope", "targetname");
-    }
-    else if(self.script_noteworthy == "helidrop_bait_grassyknoll" && common_scripts\utility::flag("farslope_exploded") && !common_scripts\utility::flag("nearslope_exploded")) {
+    } else if(self.script_noteworthy == "helidrop_bait_grassyknoll" && common_scripts\utility::flag("farslope_exploded") && !common_scripts\utility::flag("nearslope_exploded")) {
       var_1 = getnode("bait_nearslope", "targetname");
-    }
-    else if(self.script_noteworthy == "helidrop_bait_grassyknoll" && common_scripts\utility::flag("farslope_exploded") && common_scripts\utility::flag("nearslope_exploded")) {
+    } else if(self.script_noteworthy == "helidrop_bait_grassyknoll" && common_scripts\utility::flag("farslope_exploded") && common_scripts\utility::flag("nearslope_exploded")) {
       if(common_scripts\utility::flag("fall_back_to_barn")) {
         common_scripts\utility::flag_wait("storm_the_tavern");
       }
@@ -1740,21 +1730,17 @@ helidrop_clacker_divert(var_0) {
       var_1 = getnode("bait_crashsite", "targetname");
     else if(self.script_noteworthy == "helidrop_bait_crashsite" && common_scripts\utility::flag("crashsite_exploded") && !common_scripts\utility::flag("cliffside_exploded")) {
       var_1 = getnode("bait_crashsite", "targetname");
-    }
-    else if(self.script_noteworthy == "helidrop_bait_crashsite" && common_scripts\utility::flag("crashsite_exploded") && common_scripts\utility::flag("cliffside_exploded")) {
+    } else if(self.script_noteworthy == "helidrop_bait_crashsite" && common_scripts\utility::flag("crashsite_exploded") && common_scripts\utility::flag("cliffside_exploded")) {
       var_1 = getnode("bait_crashsite", "targetname");
-    }
-    else if(self.script_noteworthy == "helidrop_bait_trees" && !common_scripts\utility::flag("cliffside_exploded")) {
+    } else if(self.script_noteworthy == "helidrop_bait_trees" && !common_scripts\utility::flag("cliffside_exploded")) {
       var_1 = getnode("bait_trees", "targetname");
     }
 
     if(self.script_noteworthy == "helidrop_bait_trees" && common_scripts\utility::flag("cliffside_exploded") && !common_scripts\utility::flag("crashsite_exploded")) {
       var_1 = getnode("bait_crashsite", "targetname");
-    }
-    else if(self.script_noteworthy == "spawnHillFlank") {
+    } else if(self.script_noteworthy == "spawnHillFlank") {
       var_1 = getnode("bait_nearslope", "targetname");
-    }
-    else {
+    } else {
       self.goalradius = 2400;
 
       switch (level.genericbaitcount) {
@@ -1923,8 +1909,7 @@ clacker_marker_setup() {
 
     if(isDefined(var_1.target)) {
       var_1 = getent(var_1.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
 
@@ -1968,8 +1953,7 @@ clacker_markers(var_0, var_1) {
   var_2 = undefined;
 
   while(isDefined(var_0)) {
-    if(level.player istouching(var_0)) {
-    }
+    if(level.player istouching(var_0)) {}
 
     while(isDefined(var_0) && level.player istouching(var_0)) {
       if(!isDefined(var_2) || var_2.size <= 0) {
@@ -2223,8 +2207,7 @@ player_interior_detect_init() {
     for(var_2 = 0; var_2 < var_0.size; var_2++) {
       if(level.player istouching(var_0[var_2])) {
         level.playerindoors = 1;
-      }
-      else {
+      } else {
         var_1++;
       }
 
@@ -2716,8 +2699,7 @@ autosaves_safety(var_0, var_1, var_2) {
 
     if(var_2) {
       wait 3;
-    }
-    else {
+    } else {
       wait 10;
     }
 
@@ -2843,8 +2825,7 @@ fading_pulse_effect(var_0, var_1, var_2, var_3) {
   for(;;) {
     if(level.hudelem.alpha >= 1) {
       var_4 = var_1;
-    }
-    else {
+    } else {
       var_4 = var_2;
     }
 
@@ -2952,8 +2933,7 @@ rescue_chopper() {
 
     if(distance(level.player.origin, var_0.origin) >= var_0.radius) {
       continue;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -3081,8 +3061,7 @@ killzone_detonation(var_0, var_1) {
 
     if(!isDefined(var_1)) {
       radiusdamage(var_4.origin, 240, 100500, 100500);
-    }
-    else {
+    } else {
       radiusdamage(var_4.origin, 240, 100500, 100500, var_1);
     }
 
@@ -3096,11 +3075,9 @@ killzone_detonation(var_0, var_1) {
 
       if(var_3 == var_0.size - 1) {
         level.player playrumbleonentity(var_11);
-      }
-      else if(randomint(3) == 0) {
+      } else if(randomint(3) == 0) {
         level.player playrumbleonentity(var_9);
-      }
-      else {
+      } else {
         level.player playrumbleonentity(var_10);
       }
     }
@@ -3674,8 +3651,7 @@ airstrike_support_paint_target() {
 
   if(!isDefined(var_0)) {
     level notify("no_airstrike_ammo");
-  }
-  else if(var_0 == 0) {
+  } else if(var_0 == 0) {
     level notify("no_airstrike_ammo");
   }
 
@@ -3684,11 +3660,9 @@ airstrike_support_paint_target() {
 
   if(isDefined(var_1[0]) && var_1[0] == level.playerpreviousweapon) {
     level.player switchtoweapon(var_1[0]);
-  }
-  else if(isDefined(var_1[1]) && var_1[1] == level.playerpreviousweapon) {
+  } else if(isDefined(var_1[1]) && var_1[1] == level.playerpreviousweapon) {
     level.player switchtoweapon(var_1[1]);
-  }
-  else {
+  } else {
     level.player switchtoweapon(var_1[0]);
   }
 
@@ -3701,11 +3675,9 @@ airstrike_support_paint_target() {
 
   if(level.airstrikesupportcallsremaining % 2 == 0) {
     maps\_utility::radio_dialogue_queue("airstrikewarning");
-  }
-  else if(level.airstrikesupportcallsremaining % 2 != 0) {
+  } else if(level.airstrikesupportcallsremaining % 2 != 0) {
     maps\_utility::radio_dialogue_queue("airstrikewarning");
-  }
-  else if(level.airstrikesupportcallsremaining <= 0) {
+  } else if(level.airstrikesupportcallsremaining <= 0) {
     maps\_utility::radio_dialogue_queue("airstrikewarning");
   }
 }
@@ -3830,8 +3802,7 @@ playcontrail() {
 
   if(!isDefined(level.mapcenter)) {
     var_0 = (0, 0, 0);
-  }
-  else {
+  } else {
     var_0 = level.mapcenter;
   }
 
@@ -3863,8 +3834,7 @@ targetisinfront(var_0, var_1) {
 
   if(var_4 > 0) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -3874,8 +3844,7 @@ targetisclose(var_0, var_1) {
 
   if(var_2) {
     var_3 = 1;
-  }
-  else {
+  } else {
     var_3 = -1;
   }
 
@@ -3886,8 +3855,7 @@ targetisclose(var_0, var_1) {
 
   if(var_7 < 10500) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -3947,8 +3915,7 @@ playsoundinspace(var_0, var_1, var_2) {
 
   if(isDefined(var_2) && var_2) {
     var_3 playsoundasmaster(var_0);
-  }
-  else {
+  } else {
     var_3 playSound(var_0);
   }
 

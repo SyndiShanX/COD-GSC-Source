@@ -49,11 +49,9 @@ init() {
   ac130Origin = getEnt("ac130Origin", "targetname");
   if(isDefined(ac130Origin)) {
     uavOrigin = ac130Origin.origin;
-  }
-  else if(miniMapOrigins.size) {
+  } else if(miniMapOrigins.size) {
     uavOrigin = maps\mp\gametypes\_spawnlogic::findBoxCenter(miniMapOrigins[0].origin, miniMapOrigins[1].origin);
-  }
-  else {
+  } else {
     uavOrigin = (0, 0, 0);
   }
 
@@ -137,8 +135,7 @@ launchUAV(owner, team, duration, isCounter) {
 
   if(isCounter) {
     UAVModel addActiveCounterUAV();
-  }
-  else {
+  } else {
     UAVModel addActiveUAV();
   }
 
@@ -167,8 +164,7 @@ launchUAV(owner, team, duration, isCounter) {
 
   if(isCounter) {
     UAVModel removeActiveCounterUAV();
-  }
-  else {
+  } else {
     UAVModel removeActiveUAV();
   }
 
@@ -237,8 +233,7 @@ damageTracker(isCounterUAV) {
       if(isPlayer(attacker) && (!isDefined(self.owner) || attacker != self.owner)) {
         if(isCounterUAV) {
           thread teamplayercardsplash("destroyed_counter_radar", attacker);
-        }
-        else {
+        } else {
           thread teamplayercardsplash("destroyed_radar", attacker);
         }
 
@@ -276,8 +271,7 @@ useUAV(uavType) {
 
   if(uavType == "counter_uav") {
     self notify("used_counter_uav");
-  }
-  else {
+  } else {
     self notify("used_uav");
   }
 
@@ -305,8 +299,7 @@ updateTeamUAVStatus(team) {
 
   if(!activeCounterUAVs) {
     h2_unblockTeamRadar(team);
-  }
-  else {
+  } else {
     h2_blockTeamRadar(team);
   }
 
@@ -317,8 +310,7 @@ updateTeamUAVStatus(team) {
 
   if(activeUAVs > 1) {
     level.radarMode[team] = "fast_radar";
-  }
-  else {
+  } else {
     level.radarMode[team] = "normal_radar";
   }
 
@@ -347,8 +339,7 @@ updatePlayersUAVStatus() {
 
     if(activeUAVs > 1) {
       player.radarMode = "fast_radar";
-    }
-    else {
+    } else {
       player.radarMode = "normal_radar";
     }
 
@@ -363,8 +354,7 @@ updatePlayersUAVStatus() {
 
     if(totalActiveCounterUAVs == 1 && player == counterUAVPlayer) {
       player h2_jamPlayerRadar(false);
-    }
-    else {
+    } else {
       player h2_jamPlayerRadar(true);
     }
   }
@@ -404,8 +394,7 @@ usePlayerUAV(doubleUAV, useTime) {
 
   if(doubleUAV) {
     self.radarMode = "fast_radar";
-  }
-  else {
+  } else {
     self.radarMode = "normal_radar";
   }
 
@@ -449,8 +438,7 @@ stingerProximityDetonate(targetEnt, player) {
     // UAV already destroyed
     if(!isDefined(targetEnt)) {
       center = lastCenter;
-    }
-    else {
+    } else {
       center = targetEnt GetPointInBounds(0, 0, 0);
     }
 
@@ -486,8 +474,7 @@ stingerProximityDetonate(targetEnt, player) {
 addUAVModel(UAVModel) {
   if(level.teamBased) {
     level.UAVModels[UAVModel.team][level.UAVModels[UAVModel.team].size] = UAVModel;
-  }
-  else {
+  } else {
     level.UAVModels[UAVModel.owner.guid + "_" + getTime()] = UAVModel;
   }
 }
@@ -523,8 +510,7 @@ removeUAVModel(UAVModel) {
 addActiveUAV() {
   if(level.teamBased) {
     level.activeUAVs[self.team]++;
-  }
-  else {
+  } else {
     level.activeUAVs[self.owner.guid]++;
   }
   /*
@@ -558,8 +544,7 @@ addActiveUAV() {
 addActiveCounterUAV() {
   if(level.teamBased) {
     level.activeCounterUAVs[self.team]++;
-  }
-  else {
+  } else {
     level.activeCounterUAVs[self.owner.guid]++;
   }
   /*

@@ -78,11 +78,9 @@ watchrestartfx(localclientnum) {
 spawn_solid_fx(localclientnum) {
   if(self islocalclientdriver(localclientnum)) {
     fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_viewmodel_light"], self, "tag_body");
-  }
-  else if(self friendnotfoe(localclientnum)) {
+  } else if(self friendnotfoe(localclientnum)) {
     fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_friendly_light"], self, "tag_body");
-  }
-  else {
+  } else {
     fx_handle = playFXOnTag(localclientnum, level._effect["qrdrone_enemy_light"], self, "tag_body");
   }
 
@@ -189,11 +187,9 @@ blink_light(localclientnum) {
 
   if(self islocalclientdriver(localclientnum)) {
     self thread loop_local_sound(localclientnum, "wpn_crossbow_alert", 1, level._effect["qrdrone_viewmodel_light"]);
-  }
-  else if(self friendnotfoe(localclientnum)) {
+  } else if(self friendnotfoe(localclientnum)) {
     self thread loop_local_sound(localclientnum, "wpn_crossbow_alert", 1, level._effect["qrdrone_friendly_light"]);
-  }
-  else {
+  } else {
     self thread loop_local_sound(localclientnum, "wpn_crossbow_alert", 1, level._effect["qrdrone_enemy_light"]);
   }
 }
@@ -211,8 +207,7 @@ collisionhandler(localclientnum) {
       if(isDefined(player)) {
         if(hit_intensity > 15) {
           player playrumbleonentity(driver_local_client, "damage_heavy");
-        }
-        else {
+        } else {
           player playrumbleonentity(driver_local_client, "damage_light");
         }
       }
@@ -245,8 +240,7 @@ getminimumflyheight() {
 
   if(isDefined(airsupport_height)) {
     planeflyheight = airsupport_height.origin[2];
-  }
-  else {
+  } else {
     println("WARNING:Missing air_support_height entity in the map.Using default height.");
 
     planeflyheight = 850;
@@ -270,8 +264,7 @@ qrdrone_watch_distance() {
 
   if(isDefined(qrdrone_height)) {
     self.maxheight = qrdrone_height.origin[2];
-  }
-  else {
+  } else {
     self.maxheight = int(getminimumflyheight());
   }
 

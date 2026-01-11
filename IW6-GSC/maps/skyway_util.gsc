@@ -44,8 +44,7 @@ train_build(var_0, var_1) {
 
         if(isDefined(var_8.targetname)) {
           var_6.body_ext[var_8.targetname] = var_8;
-        }
-        else {
+        } else {
           var_6.body_ext[var_6.body_int.size] = var_8;
         }
 
@@ -60,8 +59,7 @@ train_build(var_0, var_1) {
 
         if(isDefined(var_8.targetname)) {
           var_6.body_int[var_8.targetname] = var_8;
-        }
-        else {
+        } else {
           var_6.body_int[var_6.body_int.size] = var_8;
         }
 
@@ -182,8 +180,7 @@ train_build(var_0, var_1) {
 
         if(isDefined(var_8.script_flag) && var_8.script_flag == "flag_force_mantle") {
           var_2.force_mantle_trigs[var_2.force_mantle_trigs.size] = var_8;
-        }
-        else {
+        } else {
           var_6.trigs[var_6.trigs.size] = var_8;
         }
       }
@@ -230,7 +227,7 @@ train_build(var_0, var_1) {
   var_2.other_linked_parts_count = 0;
 
   foreach(var_6 in var_2.cars) {
-  var_2.other_linked_parts_count = var_2.other_linked_parts_count + var_6.other_linked_parts_count;
+    var_2.other_linked_parts_count = var_2.other_linked_parts_count + var_6.other_linked_parts_count;
   }
 
   common_scripts\utility::array_call(var_2.force_mantle_trigs, ::setmovingplatformtrigger);
@@ -260,11 +257,9 @@ train_queue_path_anim(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_3 == "none") {
     self.path_array[self.path_array.size] = var_6;
-  }
-  else if(var_3 == "next") {
+  } else if(var_3 == "next") {
     self.path_array = maps\_utility::array_merge([var_6], self.path_array);
-  }
-  else if(var_3 == "clear") {
+  } else if(var_3 == "clear") {
     self.path_array = [var_6];
   }
 
@@ -288,8 +283,7 @@ train_queue_path_anim_loop(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(var_7 = 0; var_7 < var_0.size; var_7++) {
     if(var_7 == 0) {
       train_queue_path_anim(var_0[var_7], var_1, var_2, var_3, var_4, var_5);
-    }
-    else {
+    } else {
       train_queue_path_anim(var_0[var_7], var_1, var_2);
     }
 
@@ -738,8 +732,7 @@ blend_link_over_time(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(var_7 < 0.5) {
       self linkto(var_0, var_4, rotatevectorinverted(var_18 - var_16, var_8), var_15 - var_8);
-    }
-    else {
+    } else {
       self linkto(var_1, var_5, rotatevectorinverted(var_18 - var_17, var_9), var_15 - var_9);
     }
 
@@ -803,8 +796,7 @@ train_overlay(var_0, var_1, var_2, var_3, var_4) {
   foreach(var_6 in self.cars) {
     if(isDefined(var_3)) {
       var_7 = var_3;
-    }
-    else {
+    } else {
       var_7 = var_6.overlayweight;
     }
 
@@ -820,7 +812,7 @@ sat_acc_overlay(var_0, var_1, var_2, var_3) {
   }
 
   foreach(var_5 in self.accessory) {
-  var_5 thread sat_acc_overlay_solo(var_0, var_1, var_2);
+    var_5 thread sat_acc_overlay_solo(var_0, var_1, var_2);
   }
 }
 
@@ -948,8 +940,7 @@ rooftop_jumpcheck(var_0, var_1) {
     if(level.player jumpbuttonpressed()) {
       if(!var_2 && common_scripts\utility::flag(var_1)) {
         return;
-      }
-      else if(!var_2) {
+      } else if(!var_2) {
         var_2 = 1;
       }
     } else
@@ -1022,15 +1013,13 @@ delay_multi_fx(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_2)) {
     var_2 = [];
-  }
-  else if(!isarray(var_2)) {
+  } else if(!isarray(var_2)) {
     var_2 = [var_2];
   }
 
   if(!isDefined(var_3)) {
     var_3 = [];
-  }
-  else if(!isarray(var_3)) {
+  } else if(!isarray(var_3)) {
     var_3 = [var_3];
   }
 
@@ -1048,11 +1037,11 @@ delay_multi_fx_proc(var_0, var_1, var_2, var_3, var_4) {
 
   foreach(var_6 in var_1) {
     foreach(var_8 in var_3) {
-    stopFXOnTag(common_scripts\utility::getfx(var_8), var_6, var_4);
+      stopFXOnTag(common_scripts\utility::getfx(var_8), var_6, var_4);
     }
 
     foreach(var_8 in var_2) {
-    playFXOnTag(common_scripts\utility::getfx(var_8), var_6, var_4);
+      playFXOnTag(common_scripts\utility::getfx(var_8), var_6, var_4);
     }
   }
 }
@@ -1425,15 +1414,14 @@ hero_train_impact(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8)
   wait 0.2;
 
   foreach(var_14 in var_3) {
-  var_11 thread maps\_utility::play_sound_on_entity(var_14);
+    var_11 thread maps\_utility::play_sound_on_entity(var_14);
   }
 
   wait 7;
 
   if(isDefined(var_8) && var_8) {
     common_scripts\utility::flag_set("flag_pause_ambient_train_shakes");
-  }
-  else {
+  } else {
     common_scripts\utility::flag_clear("flag_pause_ambient_train_shakes");
   }
 
@@ -1548,8 +1536,7 @@ train_factor_explosion_time_offset_weight_dir(var_0, var_1, var_2) {
 
     if(isDefined(var_2)) {
       var_13.overlayweight = var_2;
-    }
-    else {
+    } else {
       var_13.overlayweight = factor_value_min_max(var_7, var_8, var_19);
     }
 
@@ -1567,7 +1554,7 @@ train_factor_explosion_time_offset_weight_dir(var_0, var_1, var_2) {
   }
 
   foreach(var_13 in self.cars) {
-  var_13.overlaydelay = var_13.overlaydelay - var_11 * (1 - var_1);
+    var_13.overlaydelay = var_13.overlaydelay - var_11 * (1 - var_1);
   }
 
   return var_9;
@@ -1767,7 +1754,7 @@ spawn_allies(var_0) {
   var_2 = getEntArray(var_0, "script_noteworthy");
 
   foreach(var_4 in var_2) {
-  var_4 maps\_utility::add_spawn_function(::spawnfunc_ally);
+    var_4 maps\_utility::add_spawn_function(::spawnfunc_ally);
   }
 
   if(isDefined(level._ally)) {
@@ -1889,8 +1876,7 @@ retreat_proc(var_0, var_1, var_2, var_3) {
 
     if(var_4.size > 0) {
       var_1 = var_4;
-    }
-    else {
+    } else {
       var_1 = undefined;
     }
   }
@@ -1914,7 +1900,7 @@ retreat_proc(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     foreach(var_11 in var_3) {
-    level notify(var_11);
+      level notify(var_11);
     }
   }
 }
@@ -2028,13 +2014,12 @@ flag_wait_badplace_brush(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_0.size > 2) {
     common_scripts\utility::flag_wait_or_timeout(var_0[2], var_0[1]);
-  }
-  else {
+  } else {
     wait(var_0[1]);
   }
 
   foreach(var_7, var_6 in var_3) {
-  badplace_brush_moving(var_1 + var_7, var_2, var_6, "axis", var_4);
+    badplace_brush_moving(var_1 + var_7, var_2, var_6, "axis", var_4);
   }
 }
 
@@ -2068,8 +2053,7 @@ badplace_brush_flatten_angles() {
 normalize_value(var_0, var_1, var_2) {
   if(var_2 > var_1) {
     return 1.0;
-  }
-  else if(var_2 < var_0) {
+  } else if(var_2 < var_0) {
     return 0.0;
   }
 
@@ -2186,7 +2170,7 @@ show_train_geo(var_0, var_1) {
       var_6.sus_b show_if_defined();
 
       foreach(var_9 in var_6.other_linked_parts) {
-      common_scripts\utility::array_thread(var_9, ::show_if_defined);
+        common_scripts\utility::array_thread(var_9, ::show_if_defined);
       }
 
       continue;
@@ -2538,8 +2522,7 @@ setup_player_for_animated_sequence(var_0, var_1, var_2, var_3, var_4, var_5, var
 
   if(isDefined(var_7)) {
     var_10 = maps\_utility::spawn_anim_model(var_7);
-  }
-  else {
+  } else {
     var_10 = common_scripts\utility::spawn_tag_origin();
   }
 
@@ -2551,8 +2534,7 @@ setup_player_for_animated_sequence(var_0, var_1, var_2, var_3, var_4, var_5, var
   if(var_0) {
     if(isarray(var_1)) {
       level.player playerlinktodelta(var_9, "tag_player", var_8, var_1[0], var_1[1], var_1[2], var_1[3], 1);
-    }
-    else {
+    } else {
       level.player playerlinktodelta(var_9, "tag_player", var_8, var_1, var_1, var_1, var_1, 1);
     }
   }
@@ -2713,14 +2695,11 @@ wind_watcher() {
   for(;;) {
     if(common_scripts\utility::flag("wind_3")) {
       var_0 = 3;
-    }
-    else if(common_scripts\utility::flag("wind_2")) {
+    } else if(common_scripts\utility::flag("wind_2")) {
       var_0 = 2;
-    }
-    else if(common_scripts\utility::flag("wind_1")) {
+    } else if(common_scripts\utility::flag("wind_1")) {
       var_0 = 1;
-    }
-    else {
+    } else {
       var_0 = 0;
     }
 
@@ -2764,8 +2743,7 @@ setup_door(var_0, var_1, var_2) {
 
   if(isstring(var_0)) {
     var_3 = getent(var_0, "targetname");
-  }
-  else {
+  } else {
     var_3 = var_0;
   }
 
@@ -2807,8 +2785,7 @@ setup_door(var_0, var_1, var_2) {
 
     if(isDefined(var_2)) {
       var_3.col_brush linkto(var_3, var_2);
-    }
-    else {
+    } else {
       var_3.col_brush linkto(var_3);
     }
   } else if(var_3.classname == "script_brushmodel")
@@ -2873,16 +2850,14 @@ waittill_looking(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_1)) {
     var_0 = var_0 gettagorigin(var_1);
-  }
-  else {
+  } else {
     var_0 = var_0.origin;
   }
 
   for(;;) {
     if(level.player maps\_utility::player_looking_at(var_0, var_7, 1)) {
       var_9 = 1;
-    }
-    else {
+    } else {
       var_9 = 0;
     }
 
@@ -2995,11 +2970,9 @@ waittill_notify_func(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     self[[var_1]](var_2, var_3);
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     self[[var_1]](var_2);
-  }
-  else {
+  } else {
     self[[var_1]]();
   }
 }
@@ -3344,8 +3317,7 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5, v
 set_twitch(var_0) {
   if(var_0) {
     self.a.bdisablemovetwitch = 0;
-  }
-  else {
+  } else {
     self.a.bdisablemovetwitch = 1;
   }
 }
@@ -3355,8 +3327,7 @@ flag_wait_func(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     self[[var_1]](var_2);
-  }
-  else {
+  } else {
     self[[var_1]]();
   }
 }
@@ -3366,8 +3337,7 @@ waittill_func(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     self[[var_1]](var_2);
-  }
-  else {
+  } else {
     self[[var_1]]();
   }
 }
@@ -3471,8 +3441,7 @@ check_angles(var_0, var_1, var_2) {
 
   if(abs(int(var_0) - int(var_1)) <= var_2) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

@@ -109,8 +109,7 @@ getminimumflyheight() {
 
   if(isDefined(airsupport_height)) {
     planeflyheight = airsupport_height.origin[2];
-  }
-  else {
+  } else {
     println("WARNING:Missing air_support_height entity in the map.Using default height.");
 
     planeflyheight = 850;
@@ -620,8 +619,7 @@ debug_print3d_simple(message, ent, offset, frames) {
   if(isDefined(level.airsupport_debug) && level.airsupport_debug == 1.0) {
     if(isDefined(frames)) {
       thread draw_text(message, vectorscale((1, 1, 1), 0.8), ent, offset, frames);
-    }
-    else {
+    } else {
       thread draw_text(message, vectorscale((1, 1, 1), 0.8), ent, offset, 0);
     }
   }
@@ -795,8 +793,7 @@ monitorspeed(spawnprotectiontime) {
 
     if(speedsq < minspeedsq) {
       self.nottargettedai_underminspeedtimer = self.nottargettedai_underminspeedtimer + waitperiodmilliseconds;
-    }
-    else {
+    } else {
       self.nottargettedai_underminspeedtimer = 0;
     }
 

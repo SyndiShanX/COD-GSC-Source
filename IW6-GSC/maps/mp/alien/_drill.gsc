@@ -180,8 +180,7 @@ spawn_drill_raw(model, pos, angles, marker, drop_to_ground) {
   level.drill.state = "idle";
   if(drop_to_ground) {
     level.drill thread angles_to_ground(pos, angles, (0, 0, -4));
-  }
-  else {
+  } else {
     level.drill.angles = angles;
   }
 
@@ -218,8 +217,7 @@ drill_pickup_listener(marker) {
 
   if(isDefined(level.drill_use_trig)) {
     use_trig = level.drill_use_trig;
-  }
-  else {
+  } else {
     use_trig = self;
   }
 
@@ -483,8 +481,7 @@ watch_to_repair(hive_struct) {
 
     if(isDefined(level.drill_repair)) {
       self SetHintString(level.drill_repair);
-    }
-    else {
+    } else {
       self SetHintString(&"ALIEN_COLLECTIBLES_DRILL_REPAIR");
     }
     self waittill("trigger", player);
@@ -518,8 +515,7 @@ watch_to_repair(hive_struct) {
       if(!hive_struct is_door() && !hive_struct is_door_hive() && level.script != "mp_alien_dlc3") {
         if(level.script == "mp_alien_last") {
           level.drill_sfx_lp playLoopSound("alien_conduit_on_lp");
-        }
-        else {
+        } else {
           level.drill_sfx_lp playLoopSound("alien_laser_drill_lp");
         }
       }
@@ -912,7 +908,9 @@ handle_bomb_damage() {
     }
 
     if(isDefined(level.level_drill_damage_adjust_function)) {
-      [[level.level_drill_damage_adjust_function]](amount, attacker, weapon);
+      [
+        [level.level_drill_damage_adjust_function]
+      ](amount, attacker, weapon);
     }
 
     level.drill.health = level.drill_last_health;
@@ -928,11 +926,9 @@ handle_bomb_damage() {
 
       if(!isDefined(attacker)) {
         atkr = "no_atkr";
-      }
-      else if(isDefined(attacker) && isDefined(attacker.model)) {
+      } else if(isDefined(attacker) && isDefined(attacker.model)) {
         atkr = attacker.model;
-      }
-      else {
+      } else {
         atkr = "no_model";
       }
 
@@ -972,8 +968,7 @@ handle_bomb_damage() {
         if(hardcore_ratio <= 0.75 && !repair_hint1_given) {
           if(isDefined(level.drill_repair_hint)) {
             IPrintLnBold(level.drill_repair_hint);
-          }
-          else {
+          } else {
             iprintlnbold(&"ALIEN_COLLECTIBLES_DRILL_REPAIR_HINT");
           }
 
@@ -981,8 +976,7 @@ handle_bomb_damage() {
         } else if(hardcore_ratio <= 0.5 && !repair_hint2_given) {
           if(isDefined(level.drill_repair_hint)) {
             IPrintLnBold(level.drill_repair_hint);
-          }
-          else {
+          } else {
             iprintlnbold(&"ALIEN_COLLECTIBLES_DRILL_REPAIR_HINT");
           }
 
@@ -990,8 +984,7 @@ handle_bomb_damage() {
         } else if(hardcore_ratio <= 0.25 && !repair_hint3_given) {
           if(isDefined(level.drill_repair_hint_urgent)) {
             IPrintLnBold(level.drill_repair_hint_urgent);
-          }
-          else {
+          } else {
             IPrintLnbold(&"ALIEN_COLLECTIBLES_REACT_DRILL");
           }
 
@@ -1004,8 +997,7 @@ handle_bomb_damage() {
 
         if(hardcore_ratio < 0.5 && (GetTime() - last_damage_time > DRILL_HEALTH_VO_SPAM_DELAY)) {
           level thread maps\mp\alien\_music_and_dialog::playVOforDrillHot();
-        }
-        else if(GetTime() - last_damage_time > DRILL_HEALTH_VO_SPAM_DELAY) {
+        } else if(GetTime() - last_damage_time > DRILL_HEALTH_VO_SPAM_DELAY) {
           level thread maps\mp\alien\_music_and_dialog::playVOForDrillDamaged();
         }
 
@@ -1034,8 +1026,7 @@ sfx_overheat() {
 
   if(level.script == "mp_alien_dlc3") {
     level.drill_overheat_lp_02 playLoopSound("alien_drill_scanner_overheat_lp");
-  }
-  else {
+  } else {
     level.drill_overheat_lp_02 playLoopSound("alien_laser_drill_overheat_lp");
   }
 }
@@ -1205,8 +1196,7 @@ useHoldThink(player, useTime) {
 
   if(isDefined(useTime)) {
     self.useTime = useTime;
-  }
-  else {
+  } else {
     self.useTime = 3000;
   }
 
@@ -1429,8 +1419,7 @@ watchBombStuck(owner) {
 restore_last_weapon() {
   if(self.lastweapon != "aliendeployable_crate_marker_mp") {
     self SwitchToWeapon(self.lastweapon);
-  }
-  else {
+  } else {
     self SwitchToWeapon(self GetWeaponsListPrimaries()[0]);
   }
 }
@@ -1573,8 +1562,7 @@ sfx_drill_off(door) {
 
   if(!door) {
     drill playSound("alien_laser_drill_stop");
-  }
-  else {
+  } else {
     playSoundAtPos(coord, "alien_laser_drill_stop");
   }
 
@@ -1605,8 +1593,7 @@ sfx_drill_offline() {
 
   if(level.script == "mp_alien_dlc3") {
     level.drill playSound("alien_drill_scanner_shutdown");
-  }
-  else {
+  } else {
     drill playSound("alien_laser_drill_shutdown");
   }
 
@@ -1752,8 +1739,7 @@ player_should_see_drill_hint(destroy_loc, check_distance, ignore_carrying_check)
 
   if(is_true(ignore_carrying_check)) {
     return true;
-  }
-  else if(is_true(self.isCarrying)) {
+  } else if(is_true(self.isCarrying)) {
     return false;
   }
 
@@ -1763,8 +1749,7 @@ player_should_see_drill_hint(destroy_loc, check_distance, ignore_carrying_check)
 get_drill_entity() {
   if(isDefined(level.drill.vehicle)) {
     return level.drill.vehicle;
-  }
-  else {
+  } else {
     return level.drill;
   }
 }
@@ -1788,8 +1773,7 @@ open_door() {
 slide_open() {
   if(!isDefined(self.script_angles)) {
     self delete();
-  }
-  else {
+  } else {
     self moveto(self.origin + self.script_angles, 1);
   }
 }

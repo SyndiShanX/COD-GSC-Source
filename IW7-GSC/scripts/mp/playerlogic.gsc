@@ -752,9 +752,7 @@ spawnplayer(param_00) {
   }
 
   self motionblurhqenable();
-  [
-    [level.onspawnplayer]
-  ]();
+  [[level.onspawnplayer]]();
   if(isDefined(var_01)) {
     checkpredictedspawnpointcorrectness(var_01.origin);
   }

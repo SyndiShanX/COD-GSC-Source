@@ -36,7 +36,7 @@ roof_stealth_start() {
   var_0 = level.player getweaponslistprimaries();
 
   foreach(var_2 in var_0) {
-  level.player takeweapon(var_2);
+    level.player takeweapon(var_2);
   }
 
   level.player disableoffhandweapons();
@@ -112,8 +112,7 @@ ally0_instruction_vo(var_0) {
   if(!common_scripts\utility::flag("player_passed_table")) {
     if(common_scripts\utility::flag("cw_player_underwater")) {
       maps\_utility::radio_dialogue("flood_vrg_onlytwomoreup");
-    }
-    else {
+    } else {
       var_0 maps\_utility::dialogue_queue("flood_diz_yougoleft");
     }
 
@@ -172,8 +171,7 @@ ally0_instruction_vo_holdup(var_0) {
   if(!common_scripts\utility::flag("player_passed_table")) {
     if(common_scripts\utility::flag("cw_player_underwater")) {
       maps\_utility::radio_dialogue("flood_vrg_holdup_2");
-    }
-    else {
+    } else {
       var_0 thread maps\_utility::dialogue_queue("flood_vrg_holdup");
     }
   }
@@ -355,7 +353,7 @@ float_stuff() {
   var_0 = getEntArray("stealth_bob", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 maps\_utility::delaythread(randomfloatrange(0, 1.5), ::floater_logic, "stealth_bob");
+    var_2 maps\_utility::delaythread(randomfloatrange(0, 1.5), ::floater_logic, "stealth_bob");
   }
 }
 
@@ -517,11 +515,9 @@ break_stealth_mg(var_0) {
 
   if(var_0 == "start") {
     setdvar("ui_deadquote", &"FLOOD_STEALTH_FAIL0");
-  }
-  else if(randomint(2)) {
+  } else if(randomint(2)) {
     setdvar("ui_deadquote", &"FLOOD_STEALTH_FAIL1");
-  }
-  else {
+  } else {
     setdvar("ui_deadquote", &"FLOOD_STEALTH_FAIL2");
   }
 }

@@ -6,8 +6,7 @@
 #include maps\mp\_utility;
 #include maps\mp\createfx\zm_nuked_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["powerup_on"] = loadfx("misc/fx_zombie_powerup_on");

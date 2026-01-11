@@ -171,8 +171,7 @@ _start() {
 
   if(!isDefined(self.flareauto) || self.flareauto) {
     childthread vehicle_scripts\_chopper_missile_defense_utility::monitorflarerelease_auto(::hud_makeused_flares, ::hud_makefree_flares);
-  }
-  else {
+  } else {
     childthread vehicle_scripts\_chopper_missile_defense_utility::monitorflarerelease_input(::hud_makeused_flares, ::hud_makefree_flares);
   }
 
@@ -202,19 +201,16 @@ monitorstateshud() {
 
     if(vehicle_scripts\_chopper_missile_defense_utility::isanymissilefiredonme()) {
       self.hud_currentstate = "incoming";
-    }
-    else if(vehicle_scripts\_chopper_missile_defense_utility::isanyenemylockedontome() && !vehicle_scripts\_chopper_missile_defense_utility::isanymissilefiredonme()) {
+    } else if(vehicle_scripts\_chopper_missile_defense_utility::isanyenemylockedontome() && !vehicle_scripts\_chopper_missile_defense_utility::isanymissilefiredonme()) {
       self.hud_currentstate = "warning";
-    }
-    else {
+    } else {
       self.hud_currentstate = "none";
     }
 
     if(self.hud_currentstate != self.hud_laststate) {
       if(self.hud_laststate == "warning") {
         var_0 common_scripts\utility::stop_loop_sound_on_entity("missile_locking");
-      }
-      else if(self.hud_laststate == "incoming") {
+      } else if(self.hud_laststate == "incoming") {
         var_0 common_scripts\utility::stop_loop_sound_on_entity("missile_incoming");
       }
 

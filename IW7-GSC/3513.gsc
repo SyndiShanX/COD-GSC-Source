@@ -184,8 +184,7 @@ rc8_watchupdateuav() {
 rc8_setuavstrength() {
   if(level.teambased) {
     rc8_updateteamuavstatus(self.team);
-  }
-  else {
+  } else {
     rc8_updateplayersuavstatus();
   }
 }
@@ -199,15 +198,13 @@ rc8_updateteamuavstatus(var_00, var_01) {
 
   if(isDefined(var_01)) {
     var_07 = var_01;
-  }
-  else {
+  } else {
     var_07 = scripts\mp\killstreaks\uav::_getradarstrength(var_00);
   }
 
   if(var_00 == "axis") {
     var_08 = level.axisactiveuavs;
-  }
-  else {
+  } else {
     var_08 = level.alliesactiveuavs;
   }
 
@@ -217,8 +214,7 @@ rc8_updateteamuavstatus(var_00, var_01) {
 
   if(var_07 <= var_02) {
     var_07 = var_02;
-  }
-  else if(var_07 >= var_03) {
+  } else if(var_07 >= var_03) {
     var_07 = var_03;
   }
 
@@ -226,8 +222,7 @@ rc8_updateteamuavstatus(var_00, var_01) {
 
   if(var_07 >= var_05) {
     self _meth_85A5(0);
-  }
-  else {
+  } else {
     self _meth_85A5(1);
   }
 
@@ -270,8 +265,7 @@ rc8_updateplayersuavstatus(var_00) {
 
   if(var_05 <= var_01) {
     var_05 = var_01;
-  }
-  else if(var_05 >= var_02) {
+  } else if(var_05 >= var_02) {
     var_05 = var_02;
   }
 
@@ -279,8 +273,7 @@ rc8_updateplayersuavstatus(var_00) {
 
   if(var_05 >= getuavstrengthlevelneutral()) {
     self _meth_85A5(0);
-  }
-  else {
+  } else {
     self _meth_85A5(1);
   }
 
@@ -416,8 +409,7 @@ func_DCF8(var_00) {
 
         if(vectordot(var_04, var_03) < 0.92) {
           self botlookatpoint(var_0.origin, 0.5, "script_forced");
-        }
-        else {
+        } else {
           break;
         }
       }
@@ -918,8 +910,7 @@ func_560D(var_00, var_01) {
 
   if(scripts\mp\utility\game::istrue(var_01)) {
     self.func_DCFC scripts\mp\utility\game::_switchtoweapon("iw7_c8landing_mp");
-  }
-  else {
+  } else {
     self.func_DCFC scripts\mp\utility\game::_switchtoweapon("iw7_c8shutdown_mp");
   }
 
@@ -964,8 +955,7 @@ func_627B(var_00) {
 
   if(var_01 == "AI") {
     scripts\mp\utility\game::func_C638("remote_c8_ai");
-  }
-  else {
+  } else {
     scripts\engine\utility::waitframe();
     self.func_DCFC scripts\mp\utility\game::freezecontrolswrapper(1);
     scripts\mp\utility\game::func_C638("remote_c8_user");
@@ -973,8 +963,7 @@ func_627B(var_00) {
 
   if(scripts\mp\utility\game::istrue(var_00)) {
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.6);
-  }
-  else {
+  } else {
     scripts\mp\hostmigration::waitlongdurationwithhostmigrationpause(1.2);
   }
 
@@ -1022,8 +1011,7 @@ getothermode(var_00) {
 
   if(var_00 == "AI") {
     var_01 = "MANUAL";
-  }
-  else {
+  } else {
     var_01 = "AI";
   }
 
@@ -1344,8 +1332,7 @@ rc8_disable_movement(var_00) {
   } else {
     if(!isDefined(self.disabledmovement)) {
       self.disabledmovement = 0;
-    }
-    else {
+    } else {
       self.disabledmovement--;
     }
 
@@ -1366,8 +1353,7 @@ rc8_disable_attack(var_00) {
   } else {
     if(!isDefined(self.func_55B1)) {
       self.func_55B1 = 0;
-    }
-    else {
+    } else {
       self.func_55B1--;
     }
 
@@ -1388,8 +1374,7 @@ rc8_disable_rotation(var_00) {
   } else {
     if(!isDefined(self.disablerotation)) {
       self.disablerotation = 0;
-    }
-    else {
+    } else {
       self.disablerotation--;
     }
 

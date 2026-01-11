@@ -112,7 +112,9 @@ init_player_score() {
 reset_encounter_performance() {
   foreach(component_name, score_component in level.encounter_score_components) {
     if(isDefined(score_component.reset_team_performance_func)) {
-      [[score_component.reset_team_performance_func]](score_component);
+      [
+        [score_component.reset_team_performance_func]
+      ](score_component);
     }
   }
 
@@ -129,7 +131,9 @@ reset_players_encounter_performance_and_LUA() {
 component_specific_init(player) {
   foreach(component_name, score_component in level.encounter_score_components) {
     if(isDefined(score_component.player_init_func)) {
-      [[score_component.player_init_func]](player);
+      [
+        [score_component.player_init_func]
+      ](player);
     }
   }
 }
@@ -137,14 +141,16 @@ component_specific_init(player) {
 reset_player_encounter_performance(player) {
   foreach(component_name, score_component in level.encounter_score_components) {
     if(isDefined(score_component.reset_player_performance_func)) {
-      [[score_component.reset_player_performance_func]](player);
+      [
+        [score_component.reset_player_performance_func]
+      ](player);
     }
   }
 }
 
 reset_end_game_score() {
   foreach(eog_component_name, score_component in level.eog_score_components) {
-  self.end_game_score[eog_component_name] = 0;
+    self.end_game_score[eog_component_name] = 0;
   }
 }
 
@@ -172,7 +178,7 @@ calculate_players_total_end_game_score() {
   }
 
   foreach(player in level.players) {
-  calculate_total_end_game_score(player);
+    calculate_total_end_game_score(player);
   }
 }
 
@@ -186,7 +192,7 @@ get_partial_hive_score_component_list() {
 
 update_players_encounter_performance(score_component_name, performance_type, amount) {
   foreach(player in level.players) {
-  player update_personal_encounter_performance(score_component_name, performance_type, amount);
+    player update_personal_encounter_performance(score_component_name, performance_type, amount);
   }
 }
 
@@ -198,7 +204,7 @@ calculate_and_show_encounter_scores(players_list, score_component_name_list) {
 
 calculate_encounter_scores(players_list, score_component_name_list) {
   foreach(player in players_list) {
-  calculate_player_encounter_scores(player, score_component_name_list);
+    calculate_player_encounter_scores(player, score_component_name_list);
   }
 }
 
@@ -260,8 +266,7 @@ init_challenge_score_component() {
 init_challenge_score(score_component_struct) {
   if(isPlayingSolo()) {
     score_component_struct.max_score = SOLO_CONST_MAX_SCORE_COMPLETE_CHALLENGE;
-  }
-  else {
+  } else {
     score_component_struct.max_score = COOP_CONST_MAX_SCORE_COMPLETE_CHALLENGE;
   }
 
@@ -468,8 +473,7 @@ calculate_personal_skill_score(player, score_component_struct) {
 
   if(get_player_encounter_performance(player, "shots_fired") == 0) {
     accuracy_ratio = 1.0;
-  }
-  else {
+  } else {
     accuracy_ratio = get_player_encounter_performance(player, "shots_hit") / get_player_encounter_performance(player, "shots_fired");
   }
 
@@ -587,8 +591,7 @@ update_encounter_performance_internal(performance_list, performance_type, amount
 register_scoring_mode() {
   if(isPlayingSolo()) {
     SetOmnvar("ui_alien_is_solo", true);
-  }
-  else {
+  } else {
     SetOmnvar("ui_alien_is_solo", false);
   }
 }
@@ -660,8 +663,7 @@ update_performance_alien_damage(eAttacker, iDamage, sMeansOfDeath) {
 
   if(isPlayer(eAttacker)) {
     eAttacker update_personal_encounter_performance(personal_score_component_name, "damage_done_on_alien", iDamage);
-  }
-  else if(isDefined(eAttacker.owner)) {
+  } else if(isDefined(eAttacker.owner)) {
     eAttacker.owner update_personal_encounter_performance(personal_score_component_name, "damage_done_on_alien", iDamage);
   }
 }

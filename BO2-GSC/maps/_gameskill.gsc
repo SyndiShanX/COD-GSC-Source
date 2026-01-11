@@ -489,11 +489,9 @@ printhealthdebug() {
 
       if(i == 0) {
         width = player.health / player.maxhealth * 300;
-      }
-      else if(i == 1) {
+      } else if(i == 1) {
         width = (level.playerinvultimeend - gettime()) / 1000 * 40;
-      }
-      else if(i == 2) {
+      } else if(i == 2) {
         width = (level.player_deathinvulnerabletimeout - gettime()) / 1000 * 40;
       }
 
@@ -870,8 +868,7 @@ grenadeawareness() {
     if(level.gameskill >= 2) {
       if(randomint(100) < 33) {
         self.grenadeawareness = 0.2;
-      }
-      else {
+      } else {
         self.grenadeawareness = 0.5;
       }
     } else if(randomint(100) < 33)
@@ -962,8 +959,7 @@ new_style_health_overlay() {
 
     if(overlay.alpha < targetdamagealpha) {
       overlay.alpha = targetdamagealpha;
-    }
-    else if(overlay.alpha != 0) {
+    } else if(overlay.alpha != 0) {
       level thread healthfadeoffwatcher(overlay, 0.75);
       overlay fadeovertime(0.75);
       overlay.alpha = 0;
@@ -980,8 +976,7 @@ healthoverlay() {
 add_hudelm_position_internal(aligny) {
   if(level.console) {
     self.fontscale = 2;
-  }
-  else {
+  } else {
     self.fontscale = 1.6;
   }
 
@@ -1004,8 +999,7 @@ add_hudelm_position_internal(aligny) {
 
   if(level.console) {
     self.background setshader("popmenu_bg", 650, 52);
-  }
-  else {
+  } else {
     self.background setshader("popmenu_bg", 650, 42);
   }
 
@@ -1284,8 +1278,7 @@ increment_take_cover_warnings_on_death() {
   debugtakecoverwarnings();
 }
 
-empty_kill_func(type, loc, point, attacker, amount) {
-}
+empty_kill_func(type, loc, point, attacker, amount) {}
 
 update_skill_on_change() {
   level endon("stop_update_skill_on_change");

@@ -62,7 +62,7 @@ remote_vehicle_setup() {
   var_08 = -99999999;
 
   foreach(var_05 in level.bot_heli_nodes) {
-  var_08 = max(var_08, var_5.origin[2]);
+    var_08 = max(var_08, var_5.origin[2]);
   }
 
   level.bot_vanguard_height_trace_size = var_08 - level.bot_map_min_z + 100;
@@ -80,8 +80,7 @@ remote_vehicle_setup() {
 
   if(isDefined(level.teleportgetactivepathnodezonesfunc)) {
     var_11 = [[level.teleportgetactivepathnodezonesfunc]]();
-  }
-  else {
+  } else {
     var_11 = [];
 
     for(var_12 = 0; var_12 < level.zonecount; var_12++) {
@@ -194,15 +193,13 @@ bot_killstreak_remote_control(var_00, var_01, var_02, var_03, var_04) {
   if(!isDefined(var_07)) {
     if(self getstance() == "prone") {
       self botsetstance("prone");
-    }
-    else if(self getstance() == "crouch") {
+    } else if(self getstance() == "crouch") {
       self botsetstance("crouch");
     }
   } else if(self botgetdifficultysetting("strategyLevel") > 0) {
     if(randomint(100) > 50) {
       self botsetstance("prone");
-    }
-    else {
+    } else {
       self botsetstance("crouch");
     }
   }
@@ -390,14 +387,11 @@ bot_control_switchblade_cluster() {
 
       if(var_37 == "recruit") {
         var_09 = var_22.origin;
-      }
-      else if(var_36 < 5000) {
+      } else if(var_36 < 5000) {
         var_09 = var_22.origin;
-      }
-      else if(length(var_22 getentityvelocity()) < 25) {
+      } else if(length(var_22 getentityvelocity()) < 25) {
         var_09 = var_22.origin;
-      }
-      else if(gettime() - var_08 > 500) {
+      } else if(gettime() - var_08 > 500) {
         var_08 = gettime();
         var_38 = 3.0;
 
@@ -413,17 +407,13 @@ bot_control_switchblade_cluster() {
 
       if(var_40 < 30) {
         var_41 = 0.0;
-      }
-      else if(var_40 < 100) {
+      } else if(var_40 < 100) {
         var_41 = 0.15;
-      }
-      else if(var_40 < 200) {
+      } else if(var_40 < 200) {
         var_41 = 0.3;
-      }
-      else if(var_40 < 400) {
+      } else if(var_40 < 400) {
         var_41 = 0.6;
-      }
-      else {
+      } else {
         var_41 = 1.0;
       }
 
@@ -433,8 +423,7 @@ bot_control_switchblade_cluster() {
 
       if(var_41 > 0) {
         self botsetscriptmove(var_39[1], 0.05, var_41, 1, 1);
-      }
-      else if(gettime() > var_04) {
+      } else if(gettime() > var_04) {
         if(var_03 < 2) {
           self botpressbutton("attack");
           var_3++;
@@ -651,8 +640,7 @@ bot_control_vanguard() {
 
         if(var_19 > 10) {
           self botpressbutton("lethal");
-        }
-        else if(var_19 < -10) {
+        } else if(var_19 < -10) {
           self botpressbutton("tactical");
         }
 
@@ -690,8 +678,7 @@ bot_control_vanguard() {
 
       if(isDefined(var_22)) {
         var_22 = undefined;
-      }
-      else {
+      } else {
         var_19 = self.vehicle_controlling.origin[2] - var_21;
 
         if(var_19 < 20 && !var_05) {
@@ -854,8 +841,7 @@ vanguard_control_aiming() {
     if(isDefined(var_06)) {
       if((isai(var_06) || isplayer(var_06)) && length(var_06 getentityvelocity()) < 25) {
         var_00 = var_6.origin;
-      }
-      else if(gettime() - var_03 < 500) {
+      } else if(gettime() - var_03 < 500) {
         if(var_04 != var_06) {
           var_00 = var_6.origin;
         }
@@ -894,9 +880,7 @@ vanguard_control_aiming() {
 
 vanguard_pick_node(var_00) {
   var_0.bot_visited_times[self.entity_number]++;
-  var_01 = [
-    [level.bot_ks_funcs["heli_node_get_origin"]["vanguard"]]
-  ](var_00);
+  var_01 = [[level.bot_ks_funcs["heli_node_get_origin"]["vanguard"]]](var_00);
   var_02 = bot_vanguard_find_unvisited_nodes(var_00);
   var_03 = var_02;
   var_02 = [];
@@ -904,9 +888,7 @@ vanguard_pick_node(var_00) {
   foreach(var_05 in var_03) {
     if(var_5.valid_for_vanguard) {
       if(var_0.origin[2] != var_0.vanguard_origin[2] || var_5.origin[2] != var_5.vanguard_origin[2]) {
-        var_06 = [
-          [level.bot_ks_funcs["heli_node_get_origin"]["vanguard"]]
-        ](var_05);
+        var_06 = [[level.bot_ks_funcs["heli_node_get_origin"]["vanguard"]]](var_05);
         var_07 = playerphysicstrace(var_01, var_06);
 
         if(distancesquared(var_07, var_06) < 1) {
@@ -923,7 +905,7 @@ vanguard_pick_node(var_00) {
 
   if(var_2.size == 0 && var_3.size > 0) {
     foreach(var_05 in var_03) {
-    var_5.bot_visited_times[self.entity_number]++;
+      var_5.bot_visited_times[self.entity_number]++;
     }
   }
 
@@ -1121,15 +1103,13 @@ heli_pilot_control_heli_aiming() {
 
     if(var_23 > 180) {
       var_23 = 360 - var_23;
-    }
-    else if(var_23 < -180) {
+    } else if(var_23 < -180) {
       var_23 = -360 + var_23;
     }
 
     if(var_23 > 15) {
       var_22 = var_21 - 15;
-    }
-    else if(var_23 < -15) {
+    } else if(var_23 < -15) {
       var_22 = var_21 + 15;
     }
 
@@ -1383,8 +1363,7 @@ monitor_odin_marker() {
 
     if(scripts\mp\bots\bots_util::bot_point_is_on_pathgrid(self.odin.targeting_marker.origin, 200)) {
       self.odin.targeting_marker.nearest_point_on_pathgrid = self.odin.targeting_marker.origin;
-    }
-    else {
+    } else {
       self.odin.targeting_marker.nearest_point_on_pathgrid = undefined;
     }
 
@@ -1443,8 +1422,7 @@ bot_control_odin(var_00) {
 
         if(isplayer(var_10)) {
           var_04 = func_2E2F(var_10);
-        }
-        else {
+        } else {
           var_04 = var_10;
         }
       } else {
@@ -1491,8 +1469,7 @@ bot_end_odin_watcher(var_00) {
 func_2E2F(var_00) {
   if(level.teambased && self.team == var_0.team) {
     return var_0.origin;
-  }
-  else {
+  } else {
     if(length(var_00 getentityvelocity()) < 25) {
       return var_0.origin;
     }
@@ -1689,8 +1666,7 @@ heli_pick_node_furthest_from_center(var_00, var_01) {
 
   if(isDefined(var_02)) {
     return var_02;
-  }
-  else {
+  } else {
     return scripts\engine\utility::random(var_00);
   }
 }
@@ -1776,8 +1752,7 @@ bot_killstreak_get_outside_players(var_00, var_01, var_02) {
 
     if(var_01 == "ally") {
       var_07 = level.teambased && var_00 == var_6.team;
-    }
-    else if(var_01 == "enemy") {
+    } else if(var_01 == "enemy") {
       var_07 = !level.teambased || var_00 != var_6.team;
     }
 
@@ -1847,8 +1822,7 @@ bot_control_heli(var_00) {
 bot_get_heli_goal_dist_sq(var_00) {
   if(var_00) {
     return squared(100);
-  }
-  else {
+  } else {
     return squared(30);
   }
 }
@@ -1856,15 +1830,14 @@ bot_get_heli_goal_dist_sq(var_00) {
 bot_get_heli_slowdown_dist_sq(var_00) {
   if(var_00) {
     return squared(300);
-  }
-  else {
+  } else {
     return squared(90);
   }
 }
 
 bot_control_heli_main_move_loop(var_00, var_01) {
   foreach(var_03 in level.bot_heli_nodes) {
-  var_3.bot_visited_times[self.entity_number] = 0;
+    var_3.bot_visited_times[self.entity_number] = 0;
   }
 
   var_05 = find_closest_heli_node_2d(self.vehicle_controlling.origin, var_00);
@@ -1885,9 +1858,7 @@ bot_control_heli_main_move_loop(var_00, var_01) {
       var_06 = undefined;
 
       if(isDefined(var_05)) {
-        var_13 = [
-          [level.bot_ks_funcs["heli_node_get_origin"][var_00]]
-        ](var_05);
+        var_13 = [[level.bot_ks_funcs["heli_node_get_origin"][var_00]]](var_05);
 
         if(var_01) {
           var_14 = var_5.origin + (scripts\mp\utility\game::gethelipilotmeshoffset() + level.bot_heli_pilot_traceoffset);
@@ -1913,8 +1884,7 @@ bot_control_heli_main_move_loop(var_00, var_01) {
 
         if(var_17 > 10) {
           self botpressbutton("lethal");
-        }
-        else if(var_17 < -10) {
+        } else if(var_17 < -10) {
           self botpressbutton("tactical");
         }
       }
@@ -1923,8 +1893,7 @@ bot_control_heli_main_move_loop(var_00, var_01) {
 
       if(var_01) {
         var_08 = length2dsquared(var_18);
-      }
-      else {
+      } else {
         var_08 = lengthsquared(var_18);
       }
 
@@ -1934,8 +1903,7 @@ bot_control_heli_main_move_loop(var_00, var_01) {
 
         if(self botgetdifficulty() == "recruit") {
           self.next_goal_time = gettime() + randomintrange(5000, 7000);
-        }
-        else {
+        } else {
           self.next_goal_time = gettime() + randomintrange(3000, 5000);
         }
 
@@ -1983,9 +1951,8 @@ get_random_outside_target() {
   } else {
     if(isDefined(level.teleportgetactivenodesfunc)) {
       var_08 = [
-    }
-        [level.teleportgetactivenodesfunc]
-      ]();
+        }
+        [level.teleportgetactivenodesfunc]]();
     else {
       var_08 = getallnodes();
     }

@@ -86,11 +86,9 @@ playerluistart() {
     thread playerluistartupcaocostume(var_1);
   else if(var_0 == 8) {
     thread playerluistartupcaocamo(var_1);
-  }
-  else if(var_0 == 6) {
+  } else if(var_0 == 6) {
     thread playerluistartupcacweapon(var_1);
-  }
-  else if(var_0 == 9) {
+  } else if(var_0 == 9) {
     thread playerluistartupcaocollections(var_1);
   }
 }
@@ -204,8 +202,7 @@ getclassforloadout(var_0) {
 
   if(var_1 <= 100) {
     var_1 = "lobby" + var_1;
-  }
-  else if(var_1 <= 200) {
+  } else if(var_1 <= 200) {
     var_1 = var_1 - 101;
     var_1 = "class" + var_1;
   } else
@@ -237,8 +234,7 @@ playerchangecameramode(var_0, var_1) {
   if(var_1) {
     if(isDefined(var_2.mode)) {
       var_2.pushmode[var_2.pushmode.size] = var_2.mode;
-    }
-    else {
+    } else {
       var_2.mode = "";
     }
   }
@@ -475,7 +471,7 @@ waitstreamweapon(var_0, var_1, var_2) {
 
 playerreloadallavatarmodels() {
   foreach(var_2, var_1 in level.vlavatars) {
-  playerrefreshavatar(var_2);
+    playerrefreshavatar(var_2);
   }
 }
 
@@ -563,18 +559,13 @@ player_sticks_in_lefty_config(var_0) {
     if(isDefined(var_1)) {
       if(var_1 == "thumbstick_default") {
         return 0;
-      }
-      else if(var_1 == "thumbstick_southpaw") {
+      } else if(var_1 == "thumbstick_southpaw") {
         return 1;
-      }
-      else if(var_1 == "thumbstick_legacy") {
+      } else if(var_1 == "thumbstick_legacy") {
         return var_0 == 1;
-      }
-      else if(var_1 == "thumbstick_legacysouthpaw") {
+      } else if(var_1 == "thumbstick_legacysouthpaw") {
         return var_0 == 0;
-      }
-      else {
-      }
+      } else {}
     }
   }
 
@@ -584,8 +575,7 @@ player_sticks_in_lefty_config(var_0) {
 player_get_right_stick(var_0) {
   if(player_sticks_in_lefty_config(var_0.index)) {
     return var_0.unnormalizedleftstickangle;
-  }
-  else {
+  } else {
     var_1 = self getunnormalizedcameramovement();
     return var_1[var_0.index];
   }
@@ -600,8 +590,7 @@ player_update_right_stick(var_0) {
 
     if(var_0.index == 1) {
       var_3 = -12;
-    }
-    else {
+    } else {
       var_3 = -5;
     }
 
@@ -655,8 +644,7 @@ prep_for_controls(var_0, var_1) {
 
     if(isagent(var_0)) {
       var_0 setplayerangles(var_1);
-    }
-    else {
+    } else {
       var_0.angles = var_1;
     }
   }
@@ -670,8 +658,7 @@ rightstickrotateavatar(var_0, var_1, var_2, var_3) {
 
     if(isDefined(var_0.teleportlinker) && var_0 islinked() && var_0 getlinkedparent() == var_0.teleportlinker) {
       var_0.teleportlinker.angles = var_5;
-    }
-    else {
+    } else {
       var_0 setplayerangles(var_5);
     }
   } else {
@@ -879,8 +866,7 @@ isweaponloaded(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     if(var_2) {
       var_3 = var_0 loadweapons(var_1);
-    }
-    else {
+    } else {
       var_3 = var_0 worldweaponsloaded(var_1);
 
       if(!var_3) {
@@ -1272,8 +1258,7 @@ add_party_member_class_change(var_0) {
 weaponroomscenelightsoff() {
   if(!isDefined(level.weapon_room_lights)) {
     var_0 = ["weapons_lobby", "weapons_collection", "characters_collection", "characters_personalization", "heads_personalization", "heads_collection"];
-  }
-  else {
+  } else {
     var_0 = [level.weapon_room_lights];
   }
 
@@ -1284,8 +1269,7 @@ weaponroomscenelightsoff() {
       if(!isDefined(var_5.baseintensity)) {
         if(isDefined(var_5.script_multiplier)) {
           var_5.baseintensity = var_5.script_multiplier;
-        }
-        else {
+        } else {
           var_5.baseintensity = var_5 getlightintensity();
         }
       }
@@ -1315,7 +1299,7 @@ weaponroomscenelightsupdate(var_0) {
   level.weapon_room_lights = var_0;
 
   foreach(var_3 in var_1) {
-  var_3 setlightintensity(var_3.baseintensity);
+    var_3 setlightintensity(var_3.baseintensity);
   }
 }
 

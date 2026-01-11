@@ -11,8 +11,7 @@ main() {
   build_unload_groups(::unload_groups);
 }
 
-precache_submodels() {
-}
+precache_submodels() {}
 
 set_vehicle_anims(positions) {
   return positions;

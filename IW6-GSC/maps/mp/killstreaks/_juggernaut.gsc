@@ -166,11 +166,9 @@ watchJuggHostMigrationFinishedInit() {
     foreach(player in level.players) {
       if(isAI(player)) {
         continue;
-      }
-      else if(player isJuggernaut() && !(isDefined(player.isJuggernautLevelCustom) && player.isJuggernautLevelCustom)) {
+      } else if(player isJuggernaut() && !(isDefined(player.isJuggernautLevelCustom) && player.isJuggernautLevelCustom)) {
         player SetClientOmnvar("ui_juggernaut", 1);
-      }
-      else {
+      } else {
         player SetClientOmnvar("ui_juggernaut", 0);
       }
     }

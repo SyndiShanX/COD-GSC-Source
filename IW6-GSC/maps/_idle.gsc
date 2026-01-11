@@ -34,8 +34,7 @@ idle() {
 
   if(!isDefined(self.target)) {
     var_0 = self;
-  }
-  else {
+  } else {
     var_0 = getnode(self.target, "targetname");
     var_1 = getent(self.target, "targetname");
     var_2 = common_scripts\utility::getstruct(self.target, "targetname");
@@ -43,11 +42,9 @@ idle() {
 
     if(isDefined(var_0)) {
       var_3 = ::get_node;
-    }
-    else if(isDefined(var_1)) {
+    } else if(isDefined(var_1)) {
       var_3 = ::get_ent;
-    }
-    else if(isDefined(var_2)) {
+    } else if(isDefined(var_2)) {
       var_3 = common_scripts\utility::getstruct;
     }
 
@@ -97,8 +94,7 @@ idle_reach_node(var_0, var_1) {
 
   if(isDefined(self.script_patroller)) {
     self waittill("_patrol_reached_path_end");
-  }
-  else {
+  } else {
     var_0 maps\_anim::anim_generic_reach(self, var_1);
   }
 }
@@ -233,8 +229,7 @@ reaction_proc(var_0, var_1, var_2, var_3) {
   if(var_4 != "doFlashBanged") {
     if(isDefined(var_3) || isDefined(self.has_delta)) {
       var_0 maps\_anim::anim_generic(self, var_2, var_3);
-    }
-    else {
+    } else {
       var_0 maps\_anim::anim_generic_custom_animmode(self, "gravity", var_2);
     }
   }
@@ -265,8 +260,7 @@ clear_bulletshield_on_alert(var_0) {
 
   if(!isDefined(self._stealth)) {
     self waittill("_idle_reaction");
-  }
-  else {
+  } else {
     var_0 common_scripts\utility::waittill_either("stop_loop", "stop_idle_proc");
   }
 

@@ -12,8 +12,7 @@ player_handle_zipline_turret(var_0) {
   if(!maps\cornered_code::is_e3()) {
     if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
       var_1 sethintstring(&"CORNERED_DEPLOY_ZIPLINE_TURRET_CONSOLE");
-    }
-    else {
+    } else {
       var_1 sethintstring(&"CORNERED_DEPLOY_ZIPLINE_TURRET");
     }
   }
@@ -117,8 +116,7 @@ turret_moving() {
 
     if(distance(var_0, var_1) > 0.01) {
       thread maps\cornered_audio::aud_zipline("aim", distance(var_0, var_1));
-    }
-    else {
+    } else {
       thread maps\cornered_audio::aud_zipline("stop_loop");
     }
 

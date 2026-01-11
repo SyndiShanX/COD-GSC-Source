@@ -15,8 +15,7 @@ debug_script_structs() {
       struct = level.struct[i];
       if(isDefined(struct.targetname)) {
         println("---" + i + " : " + struct.targetname);
-      }
-      else {
+      } else {
         println("---" + i + " : " + "NONE");
       }
     }

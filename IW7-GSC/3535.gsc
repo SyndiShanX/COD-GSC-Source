@@ -100,8 +100,7 @@ markasrelaysource(var_00) {
 
   if(!isDefined(self.relaysource)) {
     self.relaysource = [];
-  }
-  else if(isDefined(self.relaysource[var_01])) {
+  } else if(isDefined(self.relaysource[var_01])) {
     self notify("markAsRelaySource");
     self endon("markAsRelaySource");
   }

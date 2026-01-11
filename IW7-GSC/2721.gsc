@@ -23,8 +23,7 @@ func_5910(var_00) {
 
   if(var_2.func_38EE) {
     thread func_590C(var_00, var_01, var_02);
-  }
-  else {
+  } else {
     scripts\mp\hud_message::showerrormessage("MP_CANNOT_PLACE_DOMESHIELD");
     scripts\mp\powers::func_D74C("power_domeshield");
     var_00 delete();
@@ -93,8 +92,7 @@ domeshield_destroy(var_00) {
 
   if(var_00) {
     domeshield_setstate(3);
-  }
-  else {
+  } else {
     domeshield_setstate(4);
   }
 
@@ -140,8 +138,7 @@ domeshield_handledamagefatal(var_00, var_01, var_02, var_03, var_04) {
 domeshield_domehandledamage(var_00, var_01, var_02, var_03, var_04) {
   if(var_02 == "MOD_MELEE") {
     var_03 = 0;
-  }
-  else {
+  } else {
     var_03 = scripts\mp\damage::handleshotgundamage(var_01, var_02, var_03);
     var_03 = scripts\mp\damage::handleapdamage(var_01, var_02, var_03);
     var_03 = domeshield_domehandlesuperdamage(var_01, var_02, var_03);

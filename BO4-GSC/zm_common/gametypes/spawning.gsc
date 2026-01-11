@@ -9,7 +9,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\gametypes\spawnlogic;
 #include scripts\zm_common\util;
-
 #namespace spawning;
 
 __init__() {
@@ -43,7 +42,7 @@ init_spawn_system() {
   spawnsystem.objective_facing_bonus = 0;
   spawnsystem.ispawn_teammask = [];
   spawnsystem.ispawn_teammask_free = 1;
-  spawnsystem.ispawn_teammask[#"free"] = spawnsystem.ispawn_teammask_free;
+  spawnsystem.ispawn_teammask[# "free"] = spawnsystem.ispawn_teammask_free;
   all = spawnsystem.ispawn_teammask_free;
   count = 1;
 
@@ -53,7 +52,7 @@ init_spawn_system() {
     count++;
   }
 
-  spawnsystem.ispawn_teammask[#"all"] = all;
+  spawnsystem.ispawn_teammask[# "all"] = all;
 }
 
 on_player_connecting() {
@@ -97,7 +96,7 @@ ongrenadethrow() {
     waitresult = self waittill(#"grenade_fire");
     grenade = waitresult.projectile;
     weapon = waitresult.weapon;
-    level thread create_grenade_influencers(self.pers[#"team"], weapon, grenade);
+    level thread create_grenade_influencers(self.pers[# "team"], weapon, grenade);
     waitframe(1);
   }
 }
@@ -173,8 +172,8 @@ create_player_influencers() {
     team_mask = level.spawnsystem.ispawn_teammask_free;
     other_team_mask = level.spawnsystem.ispawn_teammask_free;
     weapon_team_mask = level.spawnsystem.ispawn_teammask_free;
-  } else if(isDefined(self.pers[#"team"])) {
-    team = self.pers[#"team"];
+  } else if(isDefined(self.pers[# "team"])) {
+    team = self.pers[# "team"];
     team_mask = util::getteammask(team);
     enemy_teams_mask = util::getotherteamsmask(team);
   } else {
@@ -195,7 +194,7 @@ create_player_influencers() {
     self create_entity_masked_friendly_influencer("friend", team_mask);
   }
 
-  if(!isDefined(self.pers[#"team"]) || self.pers[#"team"] == "spectator") {
+  if(!isDefined(self.pers[# "team"]) || self.pers[# "team"] == "spectator") {
     self enable_influencers(0);
   }
 }
@@ -246,7 +245,7 @@ player_influencers_set_team() {
     team_mask = level.spawnsystem.ispawn_teammask_free;
     enemy_teams_mask = level.spawnsystem.ispawn_teammask_free;
   } else {
-    team = self.pers[#"team"];
+    team = self.pers[# "team"];
     team_mask = util::getteammask(team);
     enemy_teams_mask = util::getotherteamsmask(team);
   }
@@ -334,7 +333,7 @@ onspawnplayer_unified(predictedspawn = 0) {
     return;
   }
 
-    use_new_spawn_system = 0;
+  use_new_spawn_system = 0;
   initial_spawn = 1;
 
   if(isDefined(self.uspawn_already_spawned)) {
@@ -359,8 +358,8 @@ onspawnplayer_unified(predictedspawn = 0) {
 
 getspawnpoint(player_entity, predictedspawn = 0) {
   if(level.teambased) {
-    point_team = player_entity.pers[#"team"];
-    influencer_team = player_entity.pers[#"team"];
+    point_team = player_entity.pers[# "team"];
+    influencer_team = player_entity.pers[# "team"];
   } else {
     point_team = "free";
     influencer_team = "free";
@@ -373,7 +372,7 @@ getspawnpoint(player_entity, predictedspawn = 0) {
   best_spawn = get_best_spawnpoint(point_team, influencer_team, player_entity, predictedspawn);
 
   if(!predictedspawn) {
-    player_entity.last_spawn_origin = best_spawn[#"origin"];
+    player_entity.last_spawn_origin = best_spawn[# "origin"];
   }
 
   return best_spawn;
@@ -381,7 +380,7 @@ getspawnpoint(player_entity, predictedspawn = 0) {
 
 get_debug_spawnpoint(player) {
   if(level.teambased) {
-    team = player.pers[#"team"];
+    team = player.pers[# "team"];
   } else {
     team = "free";
   }
@@ -424,7 +423,7 @@ get_debug_spawnpoint(player) {
 
 get_best_spawnpoint(point_team, influencer_team, player, predictedspawn) {
   if(level.teambased) {
-    vis_team_mask = util::getotherteamsmask(player.pers[#"team"]);
+    vis_team_mask = util::getotherteamsmask(player.pers[# "team"]);
   } else {
     vis_team_mask = level.spawnsystem.ispawn_teammask_free;
   }
@@ -435,9 +434,9 @@ get_best_spawnpoint(point_team, influencer_team, player, predictedspawn) {
     var_48eba3a3 = {
       #reason: "point used",
       #var_c734ddf2: getplayerspawnid(player),
-      #x: spawn_point[#"origin"][0],
-      #y: spawn_point[#"origin"][1],
-      #z: spawn_point[#"origin"][2]
+      #x: spawn_point[# "origin"][0],
+      #y: spawn_point[# "origin"][1],
+      #z: spawn_point[# "origin"][2]
     };
     function_92d1707f(#"hash_263d9506f7e11fdd", var_48eba3a3);
   }
@@ -472,7 +471,7 @@ teams_have_enmity(team1, team2) {
     return true;
   }
 
-  return team1 != #"neutral" && team2 != #"neutral" && team1 != team2;
+  return team1 != # "neutral" && team2 != # "neutral" && team1 != team2;
 }
 
 remove_unused_spawn_entities() {
@@ -529,7 +528,7 @@ spawn_point_class_name_being_used(name) {
 }
 
 initialspawnprotection(specialtyname, spawnmonitorspeed) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   if(!isDefined(level.spawnprotectiontime) || level.spawnprotectiontime == 0) {
     return;

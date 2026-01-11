@@ -107,7 +107,7 @@ do_cross_vignette() {
   level notify("shield_down");
 
   foreach(var_1 in level.players) {
-  var_1 thread cross_vignette_unstuck();
+    var_1 thread cross_vignette_unstuck();
   }
 
   level.dr_cross scriptmodelplayanimdeltamotion("alien_last_cross_vignette_scene");
@@ -159,7 +159,7 @@ handle_cross_vignette_aliens() {
   level.cross_aliens = [];
 
   foreach(var_2 in var_0) {
-  thread spawn_single_vignette_alien(var_2);
+    thread spawn_single_vignette_alien(var_2);
   }
 
   level waittill("cross_landing");
@@ -309,8 +309,7 @@ final_battle_left_ancestor() {
 
   if(!common_scripts\utility::flag("final_battle_start_vo_over")) {
     level thread play_godfather_vo("last_gdf_inc_westgate", 5);
-  }
-  else {
+  } else {
     level thread play_godfather_vo("last_gdf_inc_westgate");
   }
 
@@ -469,8 +468,7 @@ final_battle_middle_ancestor() {
 
   if(!common_scripts\utility::flag("final_battle_start_vo_over")) {
     level thread play_godfather_vo("last_gdf_inc_northgate", 5);
-  }
-  else {
+  } else {
     level thread play_godfather_vo("last_gdf_inc_northgate");
   }
 
@@ -541,8 +539,7 @@ final_battle_right_ancestor() {
 
   if(!common_scripts\utility::flag("final_battle_start_vo_over")) {
     level thread play_godfather_vo("last_gdf_inc_eastgate", 4);
-  }
-  else {
+  } else {
     level thread play_godfather_vo("last_gdf_inc_eastgate");
   }
 
@@ -718,7 +715,7 @@ do_ending() {
   thread medusa_100_state_fx();
 
   foreach(var_1 in level.players) {
-  var_1 playrumbleonentity("heavy_3s");
+    var_1 playrumbleonentity("heavy_3s");
   }
 
   var_8 = gettime() - level.final_battle_start_time;
@@ -743,8 +740,7 @@ update_lb_aliensession_last_escape(var_0) {
 get_lb_final_battle_rank(var_0) {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     return solo_final_battle_rank(var_0);
-  }
-  else {
+  } else {
     return coop_final_battle_rank(var_0);
   }
 }
@@ -756,14 +752,11 @@ solo_final_battle_rank(var_0) {
 
   if(var_0 <= var_1) {
     return 0;
-  }
-  else if(var_0 <= var_2) {
+  } else if(var_0 <= var_2) {
     return 1;
-  }
-  else if(var_0 <= var_3) {
+  } else if(var_0 <= var_3) {
     return 2;
-  }
-  else {
+  } else {
     return 3;
   }
 }
@@ -775,14 +768,11 @@ coop_final_battle_rank(var_0) {
 
   if(var_0 <= var_1) {
     return 0;
-  }
-  else if(var_0 <= var_2) {
+  } else if(var_0 <= var_2) {
     return 1;
-  }
-  else if(var_0 <= var_3) {
+  } else if(var_0 <= var_3) {
     return 2;
-  }
-  else {
+  } else {
     return 3;
   }
 }
@@ -859,7 +849,7 @@ set_players_escaped() {
 
 give_players_completion_awards() {
   foreach(var_1 in level.players) {
-  var_1 maps\mp\alien\_persistence::award_completion_tokens();
+    var_1 maps\mp\alien\_persistence::award_completion_tokens();
   }
 }
 
@@ -890,7 +880,7 @@ run_cortex_logic() {
     wait_for_all_player_use();
 
     foreach(var_3 in level.players) {
-    var_3 forceusehintoff(&"MP_ALIEN_LAST_CORTEX_START_HINT");
+      var_3 forceusehintoff(&"MP_ALIEN_LAST_CORTEX_START_HINT");
     }
 
     common_scripts\utility::flag_set("cortex_started");
@@ -958,7 +948,7 @@ run_cortex_logic() {
   wait_for_all_player_use();
 
   foreach(var_3 in level.players) {
-  var_3 forceusehintoff(&"MP_ALIEN_LAST_CORTEX_DETONATE_HINT");
+    var_3 forceusehintoff(&"MP_ALIEN_LAST_CORTEX_DETONATE_HINT");
   }
 
   setomnvar("ui_alien_boss_status", 0);
@@ -1007,21 +997,17 @@ get_cortex_charge_max(var_0) {
 
   if(var_0 == 1) {
     var_1 = 38000;
-  }
-  else if(var_0 == 2) {
+  } else if(var_0 == 2) {
     var_1 = 55000;
-  }
-  else if(var_0 == 3) {
+  } else if(var_0 == 3) {
     var_1 = 88000;
-  }
-  else if(var_0 == 4) {
+  } else if(var_0 == 4) {
     var_1 = 115000;
   }
 
   if(maps\mp\alien\_utility::is_hardcore_mode()) {
     return var_1 * 1.15;
-  }
-  else {
+  } else {
     return var_1;
   }
 }
@@ -1082,14 +1068,11 @@ cortex_threat_think(var_0) {
 
     if(maps\mp\alien\_utility::is_true(level.room_exploit_threat_active)) {
       var_0.threatbias = int(-8000);
-    }
-    else if(var_7 < 2500) {
+    } else if(var_7 < 2500) {
       var_0.threatbias = int(-3000);
-    }
-    else if(var_7 > 5000) {
+    } else if(var_7 > 5000) {
       var_0.threatbias = int(-1200);
-    }
-    else {
+    } else {
       var_8 = 2500;
       var_9 = 1800;
       var_10 = (var_7 - 2500) / var_8;
@@ -1127,7 +1110,7 @@ players_use_cortex_monitor(var_0, var_1) {
   level endon("all_players_using_cortex");
 
   foreach(var_3 in level.players) {
-  var_3 thread watch_for_use_cortex_trigger(var_0, var_1);
+    var_3 thread watch_for_use_cortex_trigger(var_0, var_1);
   }
 
   for(;;) {
@@ -1176,8 +1159,7 @@ watch_for_use_cortex_trigger(var_0, var_1) {
   for(;;) {
     if(self ismeleeing() || self isthrowinggrenade() || !self isonground() || self getstance() == "prone") {
       self forceusehintoff(var_2);
-    }
-    else if(player_looking_at(var_0.origin, 0.7) && player_in_front_of(var_0.origin)) {
+    } else if(player_looking_at(var_0.origin, 0.7) && player_in_front_of(var_0.origin)) {
       if(distancesquared(self getEye(), var_0.origin) < var_3) {
         self forceusehinton(var_2);
 
@@ -1267,7 +1249,7 @@ shut_base_gates() {
   var_4 = getent("garage_front_gate_clip", "targetname");
 
   foreach(var_6 in var_3) {
-  var_6 movez(-101, 2.0, 0.3, 0.1);
+    var_6 movez(-101, 2.0, 0.3, 0.1);
   }
 
   var_4 movez(-101, 2.0, 0.3, 0.1);
@@ -1734,15 +1716,13 @@ check_for_room_exploit() {
 
     if(var_0 == 0 && var_3 >= level.players.size * 0.75) {
       var_0 = gettime();
-    }
-    else if(var_3 < level.players.size * 0.75) {
+    } else if(var_3 < level.players.size * 0.75) {
       var_0 = 0;
     }
 
     if(var_0 != 0 && gettime() - var_0 > var_1) {
       level.room_exploit_threat_active = 1;
-    }
-    else {
+    } else {
       level.room_exploit_threat_active = 0;
     }
 
@@ -1776,6 +1756,6 @@ initial_entity_setup() {
   var_8 = getnodearray("main_gate_ramp_nodes", "targetname");
 
   foreach(var_10 in var_8) {
-  var_10 disconnectnode();
+    var_10 disconnectnode();
   }
 }

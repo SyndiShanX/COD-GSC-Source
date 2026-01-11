@@ -564,9 +564,7 @@ function manage_zones(initial_zone) {
         continue;
       }
       if(isDefined(level.zone_occupied_func)) {
-        newzone.is_occupied = [
-          [level.zone_occupied_func]
-        ](zkeys[z]);
+        newzone.is_occupied = [[level.zone_occupied_func]](zkeys[z]);
       } else {
         newzone.is_occupied = any_player_in_zone(zkeys[z]);
       }
@@ -679,9 +677,7 @@ function old_manage_zones(initial_zone) {
         continue;
       }
       if(isDefined(level.zone_occupied_func)) {
-        zone.is_occupied = [
-          [level.zone_occupied_func]
-        ](zkeys[z]);
+        zone.is_occupied = [[level.zone_occupied_func]](zkeys[z]);
       } else {
         zone.is_occupied = any_player_in_zone(zkeys[z]);
       }

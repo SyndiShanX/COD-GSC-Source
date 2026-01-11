@@ -26,14 +26,11 @@ watchGrenadeUsage() {
     }
     if(weaponName == "satchel_charge_new") {
       self beginSatchelTracking();
-    }
-    else if(weaponName == "smoke_grenade_american") {
+    } else if(weaponName == "smoke_grenade_american") {
       self beginsmokegrenadetracking();
-    }
-    else if(weaponName == "mortar_round") {
+    } else if(weaponName == "mortar_round") {
       self beginMortarTracking();
-    }
-    else {
+    } else {
       self beginGrenadeTracking();
     }
   }
@@ -46,8 +43,7 @@ beginsmokegrenadetracking() {
   }
   if(level.smokegrenades > 2 && getdvar("player_sustainAmmo") != "0") {
     grenade delete();
-  }
-  else {
+  } else {
     grenade thread smoke_grenade_death();
   }
 }
@@ -163,8 +159,7 @@ claymoreDetonation() {
       wait 0.4;
       if(isDefined(self.owner)) {
         self detonate(self.owner);
-      }
-      else {
+      } else {
         self detonate(undefined);
       }
       return;
@@ -219,8 +214,7 @@ satchelDamage() {
   }
   if(level.satchelexplodethisframe) {
     wait .1 + randomfloat(.4);
-  }
-  else {
+  } else {
     wait .05;
   }
   if(!isDefined(self)) {

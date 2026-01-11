@@ -363,8 +363,7 @@ goggles_zoom_sound(str_direction) {
 
   if(str_direction == "in") {
     e_binoc playSound("evt_binocs_hud_zoom_out");
-  }
-  else {
+  } else {
     e_binoc playSound("evt_binocs_hud_zoom_in");
   }
 
@@ -542,8 +541,7 @@ cliff_swing_success_window_grab_start(guy) {
   cliff_swing_success_window_player(0.6, 0.2, "monsoon_gloves_impact", &"MONSOON_PROMPT_GLOVES_ON", "ltrig_rtrig");
 }
 
-cliff_swing_6_landing(guy) {
-}
+cliff_swing_6_landing(guy) {}
 
 cliff_swing_flying_rumble(guy) {
   level.player playrumblelooponentity("monsoon_player_swing");
@@ -592,8 +590,7 @@ cliff_swing_fail(str_flag, str_scene) {
   if(!flag(str_flag)) {
     if(str_flag == "input_lstick_detected") {
       delay_thread(0.75, ::missionfailedwrapper);
-    }
-    else if(str_flag == "cliff_hands_up") {
+    } else if(str_flag == "cliff_hands_up") {
       delay_thread(0.75, ::missionfailedwrapper);
     }
 
@@ -733,8 +730,7 @@ cliff_swing_success_window_player(n_time_scale, n_scale_timer, str_rumble, str_p
 
     if(!flag("cliff_swing_fail_checked")) {
       level thread run_scene("cliff_impact_ready");
-    }
-    else {
+    } else {
       m_body_double = get_model_or_models_from_scene("cliff_impact_raise", "player_body_double");
 
       if(isDefined(m_body_double)) {

@@ -64,8 +64,7 @@ skipto_slums_main() {
   level thread church_right_mg();
 }
 
-skipto_slums_halfway() {
-}
+skipto_slums_halfway() {}
 
 init_flags() {
   flag_init("ambulance_complete");
@@ -280,7 +279,7 @@ intro_ambulance() {
     a_staff = get_ai_group_ai("ambulance_staff");
 
     foreach(e_civ in a_staff) {
-    e_civ thread intro_civilian_saved();
+      e_civ thread intro_civilian_saved();
     }
 
     a_digbats = get_ai_group_ai("ambulance_digbats");
@@ -347,11 +346,9 @@ play_digbat_dialog(num) {
 
   if(num == 0) {
     self say_dialog("db1_enemy_forces_0");
-  }
-  else if(num == 1) {
+  } else if(num == 1) {
     self say_dialog("db2_kill_them_0");
-  }
-  else {
+  } else {
     self say_dialog("db3_die_here_american_0");
   }
 }
@@ -615,7 +612,7 @@ e_01_left_path_cleanup() {
   a_ai = get_ai_group_ai("slums_left_narrow");
 
   foreach(ai in a_ai) {
-  ai kill();
+    ai kill();
   }
 }
 
@@ -672,8 +669,7 @@ init_fire_building_civilians() {
 
       if(level.player is_player_looking_at(self.origin, 0.5, 1)) {
         continue;
-      }
-      else {
+      } else {
         self die();
       }
     }
@@ -896,7 +892,7 @@ e_03_building_destroy() {
   a_library_destroyed = getEntArray("jc_library_destroyed", "targetname");
 
   foreach(e_piece in a_library_destroyed) {
-  e_piece hide();
+    e_piece hide();
   }
 
   trigger_wait("sm_slums_building_destroy");
@@ -909,7 +905,7 @@ e_03_building_destroy() {
   a_pdf = getEntArray("howitzer_target", "script_noteworthy");
 
   foreach(e_drone in a_pdf) {
-  e_drone thread drone_fakedeath(1);
+    e_drone thread drone_fakedeath(1);
   }
 
   exploder(550);
@@ -917,7 +913,7 @@ e_03_building_destroy() {
   wait 0.1;
 
   foreach(e_piece in a_library_destroyed) {
-  e_piece show();
+    e_piece show();
   }
 
   a_library_pristine = getEntArray("jc_library_intact", "targetname");
@@ -1084,7 +1080,7 @@ e_15_dumpster_push() {
   a_pushers = get_ai_group_ai("slums_dumpster_pushers");
 
   foreach(e_pusher in a_pushers) {
-  e_pusher setgoalvolumeauto(e_volume);
+    e_pusher setgoalvolumeauto(e_volume);
   }
 
   m_clip disconnectpaths();
@@ -1353,8 +1349,7 @@ ambient_slums_dog() {
 
     if(isDefined(end_struct.target)) {
       end_struct = getstruct(end_struct.target, "targetname");
-    }
-    else {
+    } else {
       end_struct = undefined;
     }
   }
@@ -1371,7 +1366,7 @@ cleanup_slums_ai_by_targetname(str_targetname) {
   a_guys = getEntArray(str_targetname, "targetname");
 
   foreach(e_guy in a_guys) {
-  e_guy delete();
+    e_guy delete();
   }
 }
 
@@ -1420,7 +1415,7 @@ cleanup_initial_mgnest_through_digbat_parking_lot() {
     a_guys = get_ai_from_spawn_manager(str_sm, 1);
 
     foreach(e_guy in a_guys) {
-    e_guy delete();
+      e_guy delete();
     }
 
     wait 0.05;
@@ -1494,8 +1489,7 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
     if(isDefined(node.script_requires_player)) {
       if(node.script_requires_player > 1) {
         player_wait_dist = node.script_requires_player;
-      }
-      else {
+      } else {
         player_wait_dist = 256;
       }
 
@@ -1504,16 +1498,14 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
 
     if(node.type == "Path" || isDefined(node.script_string) && node.script_string == "anim_waitscene") {
       self.disablearrivals = 1;
-    }
-    else {
+    } else {
       self.disableexits = 0;
       self.disablearrivals = 0;
     }
 
     if(isDefined(node.script_radius)) {
       self.goalradius = node.radius;
-    }
-    else {
+    } else {
       self.goalradius = 32;
     }
 
@@ -1559,8 +1551,7 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
         } else if(a_string_tokens[1] == "coverwall") {
           if(self == level.mason) {
             level.noriega notify("stop_going_to_node_slums");
-          }
-          else {
+          } else {
             level.mason notify("stop_going_to_node_slums");
           }
 
@@ -1580,8 +1571,7 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
         } else if(a_string_tokens[1] == "coverstairs") {
           if(self == level.mason) {
             level.noriega notify("stop_going_to_node_slums");
-          }
-          else {
+          } else {
             level.mason notify("stop_going_to_node_slums");
           }
 
@@ -1602,8 +1592,7 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
         } else if(a_string_tokens[1] == "behindcar") {
           if(self == level.mason) {
             level.noriega notify("stop_going_to_node_slums");
-          }
-          else {
+          } else {
             level.mason notify("stop_going_to_node_slums");
           }
 
@@ -1630,8 +1619,7 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
         } else if(a_string_tokens[1] == "gobarrels") {
           if(self == level.mason) {
             level.noriega notify("stop_going_to_node_slums");
-          }
-          else {
+          } else {
             level.mason notify("stop_going_to_node_slums");
           }
 
@@ -1702,8 +1690,7 @@ slums_go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, require
   self notify("reached_path_end");
 }
 
-get_animation_endings() {
-}
+get_animation_endings() {}
 
 print_out_end_location_of_animation(_anim, str_align_node, animname) {
   align_node = getstruct(str_align_node, "targetname");
@@ -1738,8 +1725,7 @@ set_slums_at_cover_ai_params() {
 set_slums_moving_ai_params() {
   if(self == level.mason) {
     self change_movemode("sprint");
-  }
-  else if(self == level.noriega) {
+  } else if(self == level.noriega) {
     self change_movemode("run");
   }
 
@@ -1809,8 +1795,7 @@ mn_moveup_after_apache_attack() {
   flag_set("mv_noriega_to_gazebo");
 }
 
-mn_move_along_cafe_wall() {
-}
+mn_move_along_cafe_wall() {}
 
 mn_moveup_into_bottleneck_right() {
   waittill_spawn_manager_cleared("sm_slums_bottleneck");
@@ -1894,8 +1879,7 @@ mw_warp_end_failsafe() {
 
       if(!level.player is_player_looking_at(temp_node.origin + vectorscale((0, 0, 1), 30.0), 0.6, 1)) {
         mason_node = temp_node;
-      }
-      else {
+      } else {
         safe_to_warp = 0;
       }
     } else
@@ -1913,8 +1897,7 @@ mw_warp_end_failsafe() {
 
       if(!level.player is_player_looking_at(temp_node.origin + vectorscale((0, 0, 1), 30.0), 0.6, 1)) {
         noriega_node = temp_node;
-      }
-      else {
+      } else {
         safe_to_warp = 0;
       }
     } else
@@ -2086,14 +2069,11 @@ slum_edge_vo() {
 get_player_location(location_1, location_2, location_3) {
   if(level.player istouching(location_1)) {
     return location_1;
-  }
-  else if(level.player istouching(location_2)) {
+  } else if(level.player istouching(location_2)) {
     return location_2;
-  }
-  else if(level.player istouching(location_3)) {
+  } else if(level.player istouching(location_3)) {
     return location_3;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -2115,8 +2095,7 @@ play_vo_in_section(trigger_name) {
 
     if(isai(random_dude)) {
       random_dude say_dialog(new_line);
-    }
-    else {
+    } else {
       random_dude say_dialog(new_line, 0, 1);
     }
   }

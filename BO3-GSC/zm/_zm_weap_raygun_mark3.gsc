@@ -186,9 +186,7 @@ function raygun_mark3_damage_response(str_mod, str_hit_location, v_hit_origin, e
   if(isDefined(w_weapon)) {
     if(w_weapon == level.w_raygun_mark3lh || w_weapon == level.w_raygun_mark3lh_upgraded) {
       if(isDefined(self.func_raygun_mark3_damage_response)) {
-        return [
-          [self.func_raygun_mark3_damage_response]
-        ](str_mod, str_hit_location, v_hit_origin, e_player, n_amount, w_weapon, v_direction, str_tag, str_model, str_part, n_flags, e_inflictor, n_chargelevel);
+        return [[self.func_raygun_mark3_damage_response]](str_mod, str_hit_location, v_hit_origin, e_player, n_amount, w_weapon, v_direction, str_tag, str_model, str_part, n_flags, e_inflictor, n_chargelevel);
       }
       if(w_weapon == level.w_raygun_mark3lh) {
         self thread zm_utility::slowdown_ai("raygun_mark3lh");

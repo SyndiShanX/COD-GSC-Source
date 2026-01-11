@@ -46,8 +46,7 @@ setentityheadicon(team, owner, offset, icon, constant_size, off) {
 
   if(isDefined(offset)) {
     self.entityheadiconoffset = offset;
-  }
-  else {
+  } else {
     self.entityheadiconoffset = (0, 0, 0);
   }
 
@@ -88,8 +87,7 @@ updateentityheadteamicon(entity, team, icon, constant_size, off) {
 
   if(isDefined(off)) {
     headicon setwaypoint(constant_size, "", 0, off);
-  }
-  else {
+  } else {
     headicon setwaypoint(constant_size);
   }
 
@@ -112,8 +110,7 @@ updateentityheadclienticon(entity, icon, constant_size, off) {
 
   if(isDefined(off)) {
     headicon setwaypoint(constant_size, "", 0, off);
-  }
-  else {
+  } else {
     headicon setwaypoint(constant_size);
   }
 

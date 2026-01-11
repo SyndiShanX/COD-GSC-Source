@@ -170,7 +170,7 @@ powerstealth_setup() {
   var_8 = getEntArray("powerstealth_final_kills", "targetname");
 
   foreach(var_10 in var_8) {
-  var_10 maps\_utility::add_spawn_function(::final_alpha_kill_think);
+    var_10 maps\_utility::add_spawn_function(::final_alpha_kill_think);
   }
 
   maps\factory_util::safe_trigger_by_targetname("powerstealth_final_kills_spawner");
@@ -345,8 +345,7 @@ watch_for_player(var_0, var_1, var_2, var_3) {
     if(isDefined(var_5)) {
       if(var_5 > 200) {
         continue;
-      }
-      else {
+      } else {
         var_6 = common_scripts\utility::within_fov(self.origin, self.angles, level.player.origin, var_4);
 
         if(!var_6) {
@@ -360,8 +359,7 @@ watch_for_player(var_0, var_1, var_2, var_3) {
 
         if(!isDefined(var_2)) {
           wait(var_5 / 100);
-        }
-        else {
+        } else {
           wait(var_5 / 175);
         }
 
@@ -369,8 +367,7 @@ watch_for_player(var_0, var_1, var_2, var_3) {
 
         if(!var_7) {
           continue;
-        }
-        else {
+        } else {
           break;
         }
       }
@@ -381,8 +378,7 @@ watch_for_player(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1)) {
     self notify(var_1);
-  }
-  else {
+  } else {
     self.goalradius = 8;
     self stopanimscripted();
     self setgoalpos(self.origin);
@@ -468,8 +464,7 @@ final_alpha_kill_think() {
 
   if(var_1.script_noteworthy == "ps_break_area_a_org") {
     thread break_area_gun_handling_a();
-  }
-  else {
+  } else {
     thread break_area_gun_handling_b();
   }
 
@@ -486,8 +481,7 @@ final_alpha_kill_think() {
 
     if(self.animname == "opfor01") {
       level.guard_breakarea_01 thread maps\factory_audio::stealth_kill_table_right_sfx();
-    }
-    else {
+    } else {
       level.guard_breakarea_02 thread maps\factory_audio::stealth_kill_table_left_sfx();
     }
 
@@ -656,8 +650,7 @@ monitor_player_distance() {
 
     if(var_0 > 100) {
       continue;
-    }
-    else {
+    } else {
       wait 3.0;
       self stopanimscripted();
       self.ignoreall = 0;
@@ -713,7 +706,7 @@ powerstealth_enc() {
   common_scripts\utility::flag_wait("powerstealth_end");
 
   foreach(var_1 in level.squad) {
-  var_1.script_pushable = 0;
+    var_1.script_pushable = 0;
   }
 
   common_scripts\utility::flag_clear("_stealth_spotted");
@@ -878,8 +871,7 @@ ps_second_wave_alpha() {
 
   if(!common_scripts\utility::flag("guard_tunnel_dead") && !common_scripts\utility::flag("guard_tunnel_alerted")) {
     tunnel_first_position();
-  }
-  else {
+  } else {
     var_0 = getnode("baker_first_position_node", "script_noteworthy");
     self setgoalnode(var_0);
   }
@@ -895,8 +887,7 @@ ps_second_wave_alpha() {
   if(!common_scripts\utility::flag("guard_tunnel_alerted")) {
     if(common_scripts\utility::flag("ps_player_with_alpha_second") && isalive(level.guard_tunnel) && level.player istouching(var_1)) {
       tunnel_melee_scene();
-    }
-    else {
+    } else {
       var_0 = getnode("alpha_quick_kill", "script_noteworthy");
       self.goalradius = 8;
       self setgoalnode(var_0);
@@ -1022,7 +1013,7 @@ bravo_office_lights() {
   var_0 = getEntArray("office_light_right_path", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  thread bravo_office_lights_flicker(var_2);
+    thread bravo_office_lights_flicker(var_2);
   }
 }
 
@@ -1127,8 +1118,7 @@ ps_second_wave_charlie() {
 
   if(level.player istouching(getent("vol_ps_top_level", "script_noteworthy"))) {
     thread maps\_utility::smart_radio_dialogue("factory_hsh_loganandiare");
-  }
-  else {
+  } else {
     thread maps\_utility::smart_radio_dialogue("factory_hsh_flashlightisdown");
   }
 
@@ -1192,14 +1182,14 @@ ps_final_wave() {
   common_scripts\utility::flag_wait("ps_second_kills_done");
 
   foreach(var_1 in level.squad) {
-  var_1 pushplayer(0);
+    var_1 pushplayer(0);
   }
 
   common_scripts\utility::flag_wait_all("powerstealth_end", "ps_break_area_done");
   common_scripts\utility::flag_set("ps_final_kills_done");
 
   foreach(var_1 in level.squad) {
-  var_1 maps\_utility::enable_ai_color_dontmove();
+    var_1 maps\_utility::enable_ai_color_dontmove();
   }
 
   maps\factory_util::safe_trigger_by_targetname("sca_ps_final_kills_done");
@@ -1231,8 +1221,7 @@ ps_final_wave_alpha() {
 
   if(!common_scripts\utility::flag("ps_break_area_triggered")) {
     ps_final_wave_alpha_execute();
-  }
-  else {
+  } else {
     ps_final_wave_alpha_breakout();
   }
 
@@ -1335,7 +1324,7 @@ ps_final_wave_alpha_execute() {
   level.break_area_guard_array = [var_0, var_1];
 
   foreach(var_0 in level.break_area_guard_array) {
-  var_0 thread ps_check_for_player_damage();
+    var_0 thread ps_check_for_player_damage();
   }
 
   wait 0.8;
@@ -1454,8 +1443,7 @@ ps_final_wave_charlie() {
 
   if(!common_scripts\utility::flag("throat_stab_chair")) {
     charlie_finish_office();
-  }
-  else if(isDefined(level.sleeping_guard) && !isDefined(level.player.in_stab_animation)) {
+  } else if(isDefined(level.sleeping_guard) && !isDefined(level.player.in_stab_animation)) {
     self.ignoreall = 0;
     self.favoriteenemy = level.sleeping_guard;
     level.sleeping_guard waittill("death");
@@ -1573,7 +1561,7 @@ ps_end() {
   var_0 = getEntArray("sca_ps_delete", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 common_scripts\utility::trigger_off();
+    var_2 common_scripts\utility::trigger_off();
   }
 }
 
@@ -1639,8 +1627,7 @@ handle_sleeping_guy(var_0) {
 
   if(isDefined(level.player.in_stab_animation)) {
     level.player waittill("stab_finished");
-  }
-  else {
+  } else {
     var_1 thread maps\factory_audio::stealth_kill_console_sfx(var_0);
     var_1 thread knock_over_chair("sleeper_shot");
   }
@@ -1904,8 +1891,7 @@ custom_door_open(var_0, var_1, var_2, var_3, var_4) {
 teleport_squad(var_0, var_1) {
   if(!isDefined(var_1)) {
     var_2 = ["ALLY_ALPHA", "ALLY_BRAVO", "ALLY_CHARLIE", "ALLY_ECHO"];
-  }
-  else {
+  } else {
     var_2 = ["ALLY_ALPHA", "ALLY_BRAVO", "ALLY_CHARLIE"];
   }
 
@@ -1951,14 +1937,11 @@ spawn_crate_above_round_door() {
 
     if(var_0 == 0) {
       var_1 = "shipping_frame_50cal";
-    }
-    else if(var_0 == 1) {
+    } else if(var_0 == 1) {
       var_1 = "shipping_frame_crates";
-    }
-    else if(var_0 == 2) {
+    } else if(var_0 == 2) {
       var_1 = "shipping_frame_minigun";
-    }
-    else {
+    } else {
       var_1 = "shipping_frame_crates";
     }
 
@@ -2097,7 +2080,7 @@ animate_tank_crane() {
   wait 4.0;
 
   foreach(var_2 in var_0) {
-  var_2 movex(-675, 18, 2, 6);
+    var_2 movex(-675, 18, 2, 6);
   }
 
   level.tank_crane_soundorg_loop movex(-675, 18, 2, 6);
@@ -2106,7 +2089,7 @@ animate_tank_crane() {
   wait 18.0;
 
   foreach(var_2 in var_0) {
-  var_2 movez(-60, 10, 2, 6);
+    var_2 movez(-60, 10, 2, 6);
   }
 
   level.tank_crane_soundorg_loop movez(-44, 10, 2, 6);
@@ -2130,7 +2113,7 @@ factory_entrance_reveal_animate_loading_crate01a() {
   var_2 = getEntArray(var_0.target, "targetname");
 
   foreach(var_4 in var_2) {
-  var_4 linkto(var_0);
+    var_4 linkto(var_0);
   }
 
   wait 0.7;
@@ -2148,7 +2131,7 @@ factory_entrance_reveal_animate_loading_crate02() {
   var_5 = getEntArray(var_0.target, "targetname");
 
   foreach(var_7 in var_5) {
-  var_7 linkto(var_0);
+    var_7 linkto(var_0);
   }
 
   var_0 moveto(var_1.origin, 0.7, 0.3, 0.3);
@@ -2172,7 +2155,7 @@ factory_entrance_reveal_animate_loader01() {
   var_3 = getEntArray(var_0.target, "targetname");
 
   foreach(var_5 in var_3) {
-  var_5 linkto(var_0);
+    var_5 linkto(var_0);
   }
 
   var_7 = getent("loading_crate_02a_origin", "targetname");
@@ -2180,7 +2163,7 @@ factory_entrance_reveal_animate_loader01() {
   var_8 = getEntArray(var_7.target, "targetname");
 
   foreach(var_10 in var_8) {
-  var_10 linkto(var_7);
+    var_10 linkto(var_7);
   }
 
   var_7.origin = var_0.origin + (0, 0, -15);

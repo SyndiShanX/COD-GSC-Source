@@ -114,7 +114,7 @@ main() {
   var_5 = getEntArray("trigger_hurt", "classname");
 
   foreach(var_7 in var_5) {
-  var_7 thread hurtplayersthink();
+    var_7 thread hurtplayersthink();
   }
 
   level.func["damagefeedback"] = maps\mp\gametypes\_damagefeedback::updatedamagefeedback;
@@ -158,8 +158,7 @@ exploder_load(var_0) {
   if(isDefined(var_0.script_chance) && randomfloat(1) > var_0.script_chance) {
     if(isDefined(var_0.script_delay)) {
       wait(var_0.script_delay);
-    }
-    else {
+    } else {
       wait 4;
     }
 
@@ -273,8 +272,7 @@ setupexploders() {
 
     if(!isDefined(var_6.script_fxid)) {
       var_7.v["fxid"] = "No FX";
-    }
-    else {
+    } else {
       var_7.v["fxid"] = var_6.script_fxid;
     }
 
@@ -307,8 +305,7 @@ setupexploders() {
 
     if(isDefined(var_6.targetname) && isDefined(var_5[var_6.targetname])) {
       var_7.v["exploder_type"] = var_6.targetname;
-    }
-    else {
+    } else {
       var_7.v["exploder_type"] = "normal";
     }
 
@@ -418,19 +415,19 @@ deleteduringreflectionprobegeneration() {
   var_0 = getEntArray("boost_jump_border", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   var_0 = getEntArray("mp_recovery_signage", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   var_6 = getEntArray("horde_dome", "targetname");
 
   foreach(var_8 in var_6) {
-  var_8 delete();
+    var_8 delete();
   }
 
   var_10 = getEntArray("hp_zone_center", "targetname");
@@ -440,7 +437,7 @@ deleteduringreflectionprobegeneration() {
       var_0 = getEntArray(var_12.target, "targetname");
 
       foreach(var_2 in var_0) {
-      var_2 delete();
+        var_2 delete();
       }
     }
   }
@@ -448,7 +445,7 @@ deleteduringreflectionprobegeneration() {
   var_16 = getEntArray("orbital_bad_spawn_overlay", "targetname");
 
   foreach(var_18 in var_16) {
-  var_18 delete();
+    var_18 delete();
   }
 }
 

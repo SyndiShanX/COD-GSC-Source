@@ -30,8 +30,7 @@ init() {
   minimapOrigins = getEntArray("minimap_corner", "targetname");
   if(miniMapOrigins.size) {
     uavOrigin = maps\mp\gametypes\_spawnlogic::findBoxCenter(miniMapOrigins[0].origin, miniMapOrigins[1].origin);
-  }
-  else {
+  } else {
     uavOrigin = (0, 0, 0);
   }
 
@@ -187,8 +186,7 @@ launchUAV(owner, duration, uavType) {
 
   if(isDefined(level.spawnpoints)) {
     spawns = level.spawnPoints;
-  }
-  else {
+  } else {
     spawns = level.startSpawnPoints;
   }
 
@@ -440,8 +438,7 @@ _getRadarStrength(team) {
 
   if(activeCounterUAVs > 0) {
     radarStrength = -3;
-  }
-  else {
+  } else {
     radarStrength = activeUAVs;
   }
 
@@ -464,8 +461,7 @@ updateTeamUAVStatus(team) {
 
   if(radarStrength >= GetUAVStrengthLevelNeutral()) {
     unblockTeamRadar(team);
-  }
-  else {
+  } else {
     blockTeamRadar(team);
   }
 
@@ -477,8 +473,7 @@ updateTeamUAVStatus(team) {
 
   if(radarStrength >= GetUAVStrengthLevelShowEnemyFastSweep()) {
     level.radarMode[team] = "fast_radar";
-  }
-  else {
+  } else {
     level.radarMode[team] = "normal_radar";
   }
 
@@ -515,8 +510,7 @@ updatePlayersUAVStatus() {
 
     if(radarStrength >= GetUAVStrengthLevelNeutral()) {
       player.isRadarBlocked = false;
-    }
-    else {
+    } else {
       player.isRadarBlocked = true;
     }
 
@@ -528,8 +522,7 @@ updatePlayersUAVStatus() {
 
     if(radarStrength >= GetUAVStrengthLevelShowEnemyFastSweep()) {
       player.radarMode = "fast_radar";
-    }
-    else {
+    } else {
       player.radarMode = "normal_radar";
     }
 
@@ -576,8 +569,7 @@ usePlayerUAV(doubleUAV, useTime) {
 
   if(doubleUAV) {
     self.radarMode = "fast_radar";
-  }
-  else {
+  } else {
     self.radarMode = "normal_radar";
   }
 
@@ -616,8 +608,7 @@ stingerProximityDetonate(targetEnt, player) {
   while(true) {
     if(!isDefined(targetEnt)) {
       center = lastCenter;
-    }
-    else {
+    } else {
       center = targetEnt GetPointInBounds(0, 0, 0);
     }
 
@@ -651,8 +642,7 @@ stingerProximityDetonate(targetEnt, player) {
 addUAVModel() {
   if(level.teamBased) {
     level.UAVModels[self.team][level.UAVModels[self.team].size] = self;
-  }
-  else {
+  } else {
     level.UAVModels[self.owner.guid + "_" + GetTime()] = self;
   }
 }
@@ -709,8 +699,7 @@ addActiveUAV() {
 addActiveCounterUAV() {
   if(level.teamBased) {
     level.activeCounterUAVs[self.team]++;
-  }
-  else {
+  } else {
     level.activeCounterUAVs[self.owner.guid]++;
   }
 }
@@ -785,8 +774,7 @@ watch3DPing(uavType, uavEnt) {
         }
         if(IsAI(friendly)) {
           friendly ai_3d_sighting_model(enemy);
-        }
-        else {
+        } else {
           id = outlineEnableForPlayer(enemy, "orange", friendly, false, "killstreak");
 
           fadeTime = uavConfig.highlightFadeTime;

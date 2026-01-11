@@ -36,8 +36,7 @@ usingsemiautoweapon() {
 autoshootanimrate() {
   if(usingautomaticweapon()) {
     return 0.1 / weaponfiretime(self.weapon) * getdvarfloat(#"_id_DA8BDE9E");
-  }
-  else {
+  } else {
     return 0.2;
   }
 }
@@ -45,8 +44,7 @@ autoshootanimrate() {
 burstshootanimrate() {
   if(usingautomaticweapon()) {
     return 0.16 / weaponfiretime(self.weapon);
-  }
-  else {
+  } else {
     return 0.2;
   }
 }
@@ -86,11 +84,9 @@ refillclip() {
 
   if(self.bulletsinclip <= 0) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
 
-precacheweaponswitchfx() {
-}
+precacheweaponswitchfx() {}

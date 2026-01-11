@@ -27,7 +27,7 @@ friendly_init() {
 
 friendly_custom_color_behavior(var_0) {
   foreach(var_3, var_2 in var_0) {
-  maps\_stealth_shared_utilities::ai_create_behavior_function("color", var_3, var_2);
+    maps\_stealth_shared_utilities::ai_create_behavior_function("color", var_3, var_2);
   }
 
   var_4 = self._stealth.behavior.ai_functions["color"]["hidden"];

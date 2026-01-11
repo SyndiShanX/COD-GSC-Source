@@ -39,8 +39,7 @@ func_0118(var_00, var_01, var_02, var_03) {
 onweapondamage(var_00, var_01, var_02, var_03, var_04) {
   if(!isDefined(var_00)) {
     return;
-  }
-  else if(var_02 == "MOD_IMPACT") {
+  } else if(var_02 == "MOD_IMPACT") {
     return;
   }
   func_20BF(var_00, var_04);

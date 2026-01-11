@@ -10,7 +10,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
-
 #namespace dart_wz;
 
 autoexec __init__system__() {
@@ -58,7 +57,7 @@ private function_32a729d9(localclientnum, value) {
 private dart_static_postfx(localclientnum) {
   self notify("3edfd3cf94760371");
   self endon("3edfd3cf94760371");
-  self endon(#"death", #"exit_vehicle", #"hash_16c59bda348653cd");
+  self endon(#"death", # "exit_vehicle", # "hash_16c59bda348653cd");
 
   while(true) {
     vehicle = getplayervehicle(self);
@@ -107,7 +106,7 @@ timeout_beep(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
     return;
   }
 
-  self endon(#"death", #"exit_vehicle", #"timeout_beep");
+  self endon(#"death", # "exit_vehicle", # "timeout_beep");
   interval = 1;
   time = gettime();
   var_ff8d278a = time + 30000 - 4000;

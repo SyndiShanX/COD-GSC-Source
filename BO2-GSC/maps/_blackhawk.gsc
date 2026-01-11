@@ -10,8 +10,7 @@ main() {
 
   if(self.vehicletype == "heli_blackhawk_stealth_la2") {
     build_aianims(::setanims, ::set_vehicle_anims);
-  }
-  else {
+  } else {
     init_fastrope();
     build_aianims(::setrappelanims, ::set_vehicle_rappel_anims);
     build_attach_models(::set_attached_models);

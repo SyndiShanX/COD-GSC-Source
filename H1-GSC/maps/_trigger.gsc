@@ -693,7 +693,7 @@ trigger_spawngroup(var_0) {
   var_2 = common_scripts\utility::random(level.spawn_groups[var_1]);
 
   foreach(var_5, var_4 in var_2) {
-  var_4 maps\_utility::spawn_ai();
+    var_4 maps\_utility::spawn_ai();
   }
 }
 
@@ -772,7 +772,7 @@ get_trigger_targs() {
     var_2 = common_scripts\utility::getstructarray(self.target, "targetname");
 
     foreach(var_5 in var_2) {
-    var_3[var_3.size] = var_5;
+      var_3[var_3.size] = var_5;
     }
 
     if(var_3.size == 1) {
@@ -999,8 +999,7 @@ trigger_battlechatter(var_0) {
 
   if(isDefined(var_1)) {
     var_1 waittill("trigger", var_3);
-  }
-  else {
+  } else {
     var_0 waittill("trigger", var_3);
   }
 
@@ -1009,8 +1008,7 @@ trigger_battlechatter(var_0) {
   if(isDefined(var_1)) {
     if(var_3.team != level.player.team && level.player istouching(var_0)) {
       var_4 = level.player animscripts\battlechatter::getclosestfriendlyspeaker("custom");
-    }
-    else if(var_3.team == level.player.team) {
+    } else if(var_3.team == level.player.team) {
       var_5 = "axis";
 
       if(level.player.team == "axis") {
@@ -1094,13 +1092,13 @@ trigger_glass_break(var_0) {
 
       if(isDefined(var_5)) {
         foreach(var_7 in var_1) {
-        destroyglass(var_7, var_5);
+          destroyglass(var_7, var_5);
         }
 
         break;
       } else {
         foreach(var_7 in var_1) {
-        destroyglass(var_7);
+          destroyglass(var_7);
         }
 
         break;
@@ -1315,8 +1313,7 @@ trigger_multiple_visionset_preh1(var_0) {
 
         if(var_7 < 0.5) {
           var_6 maps\_utility::vision_set_fog_changes(var_0.script_visionset_start, var_0.script_delay);
-        }
-        else {
+        } else {
           var_6 maps\_utility::vision_set_fog_changes(var_0.script_visionset_end, var_0.script_delay);
         }
 
@@ -1419,8 +1416,7 @@ trigger_multiple_visionset(var_0, var_1) {
             if(var_3 && can_reset_vision_type(var_0, "visionset")) {
               if(var_8 < 0.5) {
                 level.player maps\_utility::vision_set_fog_changes(var_0.script_visionset_start, var_0.script_delay);
-              }
-              else {
+              } else {
                 level.player maps\_utility::vision_set_fog_changes(var_0.script_visionset_end, var_0.script_delay);
               }
             } else if(isDefined(var_0.script_visionset) && can_reset_vision_type(var_0, "visionset"))
@@ -1487,11 +1483,9 @@ can_reset_vision_type(var_0, var_1) {
 
   if(var_1 == "visionset") {
     return !isDefined(var_2.script_visionset);
-  }
-  else if(var_1 == "lightset") {
+  } else if(var_1 == "lightset") {
     return !isDefined(var_2.script_lightset);
-  }
-  else if(var_1 == "clut") {
+  } else if(var_1 == "clut") {
     return !isDefined(var_2.script_clut);
   }
 
@@ -1651,8 +1645,7 @@ vision_set_fog_progress(var_0, var_1) {
 
   if(var_1 < 0.5) {
     self.vision_set_transition_ent.vision_set = var_0.script_visionset_start;
-  }
-  else {
+  } else {
     self.vision_set_transition_ent.vision_set = var_0.script_visionset_end;
   }
 
@@ -1758,8 +1751,7 @@ trigger_fog(var_0) {
 
     if(var_7 > 0.5) {
       var_7 = 1;
-    }
-    else {
+    } else {
       var_7 = 0;
     }
 
@@ -1853,8 +1845,7 @@ trigger_fog_preh1(var_0) {
 
     if(var_11 > 0.5) {
       var_11 = 1;
-    }
-    else {
+    } else {
       var_11 = 0;
     }
 
@@ -1966,7 +1957,7 @@ trigger_multiple_fx_volume(var_0) {
   var_0.fx = [];
 
   foreach(var_3 in level.createfxent) {
-  assign_fx_to_trigger(var_3, var_0, var_1);
+    assign_fx_to_trigger(var_3, var_0, var_1);
   }
 
   var_1 delete();
@@ -2100,8 +2091,7 @@ trigger_wakevolume_think(var_0) {
     if(!isDefined(var_1)) {
       continue;
     }
-    if(var_1 maps\_utility::ent_flag_exist("in_wake_volume")) {
-    } else
+    if(var_1 maps\_utility::ent_flag_exist("in_wake_volume")) {} else
       var_1 maps\_utility::ent_flag_init("in_wake_volume");
 
     if(distancesquared(var_1.origin, level.player.origin) < 9250000) {
@@ -2122,8 +2112,7 @@ volume_wakefx(var_0) {
     if(self istouching(var_0)) {
       if(var_1 > 0) {
         wait(max(1 - var_1 / 120, 0.1));
-      }
-      else {
+      } else {
         wait 0.15;
       }
 
@@ -2185,8 +2174,7 @@ trigger_fallingwatervolume_think(var_0) {
     if(!isDefined(var_1)) {
       continue;
     }
-    if(var_1 maps\_utility::ent_flag_exist("in_fallingwater_volume")) {
-    } else
+    if(var_1 maps\_utility::ent_flag_exist("in_fallingwater_volume")) {} else
       var_1 maps\_utility::ent_flag_init("in_fallingwater_volume");
 
     if(distancesquared(var_1.origin, level.player.origin) < 6250000) {
@@ -2306,8 +2294,7 @@ stopeffectonplayerview(var_0, var_1) {
     if(isDefined(level.effectonplayerview)) {
       if(var_1) {
         killfxontag(common_scripts\utility::getfx(var_0), level.effectonplayerviewent, "tag_origin");
-      }
-      else {
+      } else {
         stopFXOnTag(common_scripts\utility::getfx(var_0), level.effectonplayerviewent, "tag_origin");
       }
     }

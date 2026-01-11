@@ -593,8 +593,7 @@ fxanim_drones() {
   level.scr_anim["fxanim_ambient_f35"]["f35_ambient_2"][0] = % fxanim_la_drone_ambient_02_anim;
 }
 
-temp_vo() {
-}
+temp_vo() {}
 
 bloody_model_death(ch_lapd) {
   a_tags = [];

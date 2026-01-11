@@ -245,8 +245,7 @@ func_10696(var_00) {
 
     if(var_00 func_3913(var_16, var_12)) {
       var_0.func_473D[var_07 + "_" + var_08] = _spawncovernode(var_16, var_12, "cover stand", 512, var_14);
-    }
-    else {
+    } else {
       var_13 = var_02;
     }
 
@@ -316,15 +315,13 @@ func_B9FB() {
 
   if(isDefined(self.func_473D["right_a"])) {
     var_00 = self.func_473D["right_a"];
-  }
-  else if(isDefined(self.func_473D["left_a"])) {
+  } else if(isDefined(self.func_473D["left_a"])) {
     var_00 = self.func_473D["left_a"];
   }
 
   if(isDefined(self.func_473D["right_b"])) {
     var_01 = self.func_473D["right_b"];
-  }
-  else if(isDefined(self.func_473D["left_b"])) {
+  } else if(isDefined(self.func_473D["left_b"])) {
     var_01 = self.func_473D["left_b"];
   }
 
@@ -463,7 +460,7 @@ func_475E(var_00) {
 
   if(isDefined(self.func_BE07.func_132AA)) {
     foreach(var_09 in self.func_BE07.func_132AA) {
-    var_09 delete();
+      var_09 delete();
     }
   }
 
@@ -549,8 +546,7 @@ func_475C(var_00, var_01) {
 
   if(scripts\engine\utility::flag_exist("in_vr_mode") && scripts\engine\utility::flag("in_vr_mode")) {
     playFX(level.func_7649["coverwall_explosion_vr"], var_02);
-  }
-  else {
+  } else {
     playFX(level.func_7649["coverwall_explosion"], var_02);
   }
 

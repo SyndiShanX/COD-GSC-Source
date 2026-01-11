@@ -10,8 +10,7 @@ anim_get_dvar_int(dvar, def) {
 anim_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }
@@ -21,16 +20,14 @@ set_orient_mode(mode, val1) {
   if(level.dog_debug_orient == self getentnum()) {
     if(isDefined(val1)) {
       println("DOG:Setting orient mode: " + mode + " " + val1 + " " + gettime());
-    }
-    else {
+    } else {
       println("DOG:Setting orient mode: " + mode + " " + gettime());
     }
   }
 
   if(isDefined(val1)) {
     self orientmode(mode, val1);
-  }
-  else {
+  } else {
     self orientmode(mode);
   }
 }
@@ -94,8 +91,7 @@ current_yaw_line_debug(duration) {
 
   if(level.lastdebugheight == 15) {
     level.lastdebugheight = 30;
-  }
-  else {
+  } else {
     level.lastdebugheight = 15;
   }
 }
@@ -103,14 +99,11 @@ current_yaw_line_debug(duration) {
 getanimdirection(damageyaw) {
   if(damageyaw > 135 || damageyaw <= -135) {
     return "front";
-  }
-  else if(damageyaw > 45 && damageyaw <= 135) {
+  } else if(damageyaw > 45 && damageyaw <= 135) {
     return "right";
-  }
-  else if(damageyaw > -45 && damageyaw <= 45) {
+  } else if(damageyaw > -45 && damageyaw <= 45) {
     return "back";
-  }
-  else {
+  } else {
     return "left";
   }
 

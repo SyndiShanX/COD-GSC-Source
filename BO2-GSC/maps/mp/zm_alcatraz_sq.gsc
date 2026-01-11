@@ -113,29 +113,25 @@ start_alcatraz_sidequest() {
 
   if(isDefined(level.host_migration_listener_custom_func)) {
     level thread[[level.host_migration_listener_custom_func]]();
-  }
-  else {
+  } else {
     level thread host_migration_listener();
   }
 
   if(isDefined(level.manage_electric_chairs_custom_func)) {
     level thread[[level.manage_electric_chairs_custom_func]]();
-  }
-  else {
+  } else {
     level thread manage_electric_chairs();
   }
 
   if(isDefined(level.plane_flight_thread_custom_func)) {
     level thread[[level.plane_flight_thread_custom_func]]();
-  }
-  else {
+  } else {
     level thread plane_flight_thread();
   }
 
   if(isDefined(level.track_quest_status_thread_custom_func)) {
     level thread[[level.track_quest_status_thread_custom_func]]();
-  }
-  else {
+  } else {
     level thread track_quest_status_thread();
   }
 
@@ -186,8 +182,7 @@ host_migration_listener() {
     if(!flag("key_found")) {
       if(level.is_master_key_west) {
         exploder(101);
-      }
-      else {
+      } else {
         exploder(100);
       }
     }
@@ -396,8 +391,7 @@ watch_devgui_plane() {
       if(level.n_plane_fuel_count == 5) {
         if(isDefined(level.plane_boarding_thread_custom_func)) {
           e_triggerer thread[[level.plane_boarding_thread_custom_func]]();
-        }
-        else {
+        } else {
           iprintlnbold("LINK PLAYER TO PLANE, START COUNTDOWN IF NOT YET STARTED");
 
           e_triggerer thread plane_boarding_thread();
@@ -468,8 +462,7 @@ key_door_trigger_visibility(player) {
 
   if(flag("key_found")) {
     self sethintstring(&"ZM_PRISON_KEY_DOOR");
-  }
-  else {
+  } else {
     self sethintstring(self.stub.hint_string);
   }
 
@@ -655,8 +648,7 @@ key_pulley(str_master_key_location) {
 
   if(str_master_key_location == "west") {
     level setclientfield("fxanim_pulley_down_start", 1);
-  }
-  else if(str_master_key_location == "east") {
+  } else if(str_master_key_location == "east") {
     level setclientfield("fxanim_pulley_down_start", 2);
   }
 
@@ -877,8 +869,7 @@ snddryercountdown(num) {
   for(i = num; i > 0; i--) {
     if(i <= 10) {
       ent playSound("zmb_quest_nixie_count_final");
-    }
-    else {
+    } else {
       ent playSound("zmb_quest_nixie_count");
     }
 
@@ -1096,8 +1087,7 @@ plane_fly_trigger_thread() {
 
         if(isDefined(level.plane_boarding_thread_custom_func)) {
           e_triggerer thread[[level.plane_boarding_thread_custom_func]]();
-        }
-        else {
+        } else {
           e_triggerer thread plane_boarding_thread();
         }
       }
@@ -1205,8 +1195,7 @@ plane_boarding_thread() {
 
   if(level.characters_in_nml.size == 1) {
     self vo_bridge_soliloquy();
-  }
-  else if(level.characters_in_nml.size == 4) {
+  } else if(level.characters_in_nml.size == 4) {
     vo_bridge_four_part_convo();
   }
 
@@ -1398,8 +1387,7 @@ plane_flight_thread() {
     if(!level.final_flight_activated) {
       if(isDefined(level.brutus_on_the_bridge_custom_func)) {
         level thread[[level.brutus_on_the_bridge_custom_func]]();
-      }
-      else {
+      } else {
         level thread brutus_on_the_bridge();
       }
     }
@@ -1431,15 +1419,13 @@ brutus_on_the_bridge() {
 
   if(isDefined(level.last_brutus_on_bridge_custom_func)) {
     level thread[[level.last_brutus_on_bridge_custom_func]]();
-  }
-  else {
+  } else {
     level thread last_brutus_on_bridge();
   }
 
   if(isDefined(level.brutus_despawn_manager_custom_func)) {
     level thread[[level.brutus_despawn_manager_custom_func]]();
-  }
-  else {
+  } else {
     level thread brutus_despawn_manager();
   }
 
@@ -1630,8 +1616,7 @@ manage_electric_chairs() {
 
       if(isDefined(level.electric_chair_trigger_thread_custom_func)) {
         t_electric_chair thread[[level.electric_chair_trigger_thread_custom_func]](i);
-      }
-      else {
+      } else {
         t_electric_chair thread electric_chair_trigger_thread(i);
       }
 
@@ -1729,8 +1714,7 @@ electric_chair_trigger_thread(chair_number) {
 
       if(isDefined(level.electric_chair_player_thread_custom_func)) {
         e_triggerer thread[[level.electric_chair_player_thread_custom_func]](m_linkpoint, chair_number, n_effects_duration);
-      }
-      else {
+      } else {
         e_triggerer thread electric_chair_player_thread(m_linkpoint, chair_number, n_effects_duration);
       }
 
@@ -1874,8 +1858,7 @@ play_fx(str_fx, v_origin, v_angles, time_to_delete_or_notify, b_link_to_self, st
     if(isDefined(b_link_to_self) && b_link_to_self) {
       if(isDefined(str_tag)) {
         m_fx linkto(self, str_tag, (0, 0, 0), (0, 0, 0));
-      }
-      else {
+      } else {
         m_fx linkto(self);
       }
     }
@@ -1921,11 +1904,9 @@ _play_fx_delete(ent, time_to_delete_or_notify) {
 
   if(isstring(time_to_delete_or_notify)) {
     ent waittill_either("death", time_to_delete_or_notify);
-  }
-  else if(time_to_delete_or_notify > 0) {
+  } else if(time_to_delete_or_notify > 0) {
     ent waittill_notify_or_timeout("death", time_to_delete_or_notify);
-  }
-  else {
+  } else {
     ent waittill("death");
   }
 
@@ -2010,11 +1991,11 @@ player_death_watcher() {
 array_set_visible_to_all(a_ents, is_visible) {
   if(is_visible) {
     foreach(ent in a_ents) {
-    ent setvisibletoall();
+      ent setvisibletoall();
     }
   } else {
     foreach(ent in a_ents) {
-    ent setinvisibletoall();
+      ent setinvisibletoall();
     }
   }
 }

@@ -23,7 +23,7 @@ init() {
   level.soul_catcher_clip["rune_3"] = getent("wolf_clip_infirmary", "targetname");
 
   foreach(e_clip in level.soul_catcher_clip) {
-  e_clip setinvisibletoall();
+    e_clip setinvisibletoall();
   }
 
   level thread create_anim_references_on_server();
@@ -46,8 +46,7 @@ init() {
 
     if(is_classic()) {
       level.soul_catchers[i] thread soul_catcher_state_manager();
-    }
-    else {
+    } else {
       level.soul_catchers[i] thread grief_soul_catcher_state_manager();
     }
 
@@ -281,11 +280,9 @@ zombie_soul_catcher_death() {
 
   if(n_eating_anim == 3) {
     total_wait_time = 3.0 + getanimlength( % ai_zombie_dreamcatcher_wallconsume_align_f);
-  }
-  else if(n_eating_anim == 4) {
+  } else if(n_eating_anim == 4) {
     total_wait_time = 3.0 + getanimlength( % ai_zombie_dreamcatcher_wallconsume_align_r);
-  }
-  else {
+  } else {
     total_wait_time = 3.0 + getanimlength( % ai_zombie_dreamcatcher_wallconsume_align_l);
   }
 
@@ -336,14 +333,12 @@ which_eating_anim() {
 
   if(forward_dot > 0.85) {
     return 3;
-  }
-  else {
+  } else {
     right_dot = vectordot(anglestoright(soul_catcher.angles), self.origin - soul_catcher.origin);
 
     if(right_dot > 0) {
       return 4;
-    }
-    else {
+    } else {
       return 5;
     }
   }
@@ -366,8 +361,7 @@ soul_catcher_check() {
 
   if(level.soul_catchers_charged == 1) {
     self thread first_wolf_complete_vo();
-  }
-  else if(level.soul_catchers_charged >= level.soul_catchers.size) {
+  } else if(level.soul_catchers_charged >= level.soul_catchers.size) {
     self thread final_wolf_complete_vo();
   }
 }
@@ -494,8 +488,7 @@ tomahawk_upgrade_quest() {
 
   if(isDefined(self.retriever_trigger)) {
     self.retriever_trigger setinvisibletoplayer(self);
-  }
-  else {
+  } else {
     trigger = getent("retriever_pickup_trigger", "script_noteworthy");
     self.retriever_trigger = trigger;
     self.retriever_trigger setinvisibletoplayer(self);
@@ -599,8 +592,7 @@ hellhole_tomahawk(grenade) {
 spawn_infinite_powerup_drop(v_origin, str_type) {
   if(isDefined(str_type)) {
     intro_powerup = maps\mp\zombies\_zm_powerups::specific_powerup_drop(str_type, v_origin);
-  }
-  else {
+  } else {
     intro_powerup = maps\mp\zombies\_zm_powerups::powerup_drop(v_origin);
   }
 }

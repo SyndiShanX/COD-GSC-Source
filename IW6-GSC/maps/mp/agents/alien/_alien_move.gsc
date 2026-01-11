@@ -327,8 +327,7 @@ WaitForJumpSoon() {
   startNode = self GetNegotiationStartNode();
   if(isDefined(startNode) && distanceSquared(self.origin, startNode.origin) < ALLOW_SLIDE_DIST_SQR || self.oriented) {
     self ScrAgentSetAnimMode("code_move_slide");
-  }
-  else {
+  } else {
     self ContinueMovement();
   }
 }
@@ -659,8 +658,7 @@ doRunStart() {
   negStartNode = self GetNegotiationStartNode();
   if(isDefined(negStartNode)) {
     goalPos = negStartNode.origin;
-  }
-  else {
+  } else {
     goalPos = self GetPathGoalPos();
   }
 
@@ -767,14 +765,11 @@ shouldDoStopAnim() {
 shouldDoLeapArrivalAnim(startNode, angleIndex) {
   if(startNode.type == "Jump" || startNode.type == "Jump Attack") {
     return true;
-  }
-  else if(traversalStartFromIdle(startNode.animscript)) {
+  } else if(traversalStartFromIdle(startNode.animscript)) {
     return true;
-  }
-  else if(incomingAngleStraightAhead(self maps\mp\alien\_utility::get_alien_type(), angleIndex)) {
+  } else if(incomingAngleStraightAhead(self maps\mp\alien\_utility::get_alien_type(), angleIndex)) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -831,8 +826,7 @@ CanDoTurnAnim(turnAnim) {
   trace_passed = self AIPhysicsTracePassed(self.origin + HEIGHT_OFFSET_COOR, codeMovePoint + HEIGHT_OFFSET_COOR, self.radius - RADIUS_OFFSET, self.height - HEIGHT_OFFSET);
   if(trace_passed) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

@@ -23,11 +23,10 @@
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\util;
 #include scripts\weapons\heatseekingmissile;
-
 #namespace straferun;
 
 autoexec __init__system__() {
-  system::register(#"straferun", &__init__, undefined, #"killstreaks");
+  system::register(#"straferun", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {
@@ -112,8 +111,8 @@ usekillstreakstraferun(hardpointtype) {
   plane setdrawinfrared(1);
   self.straferunkills = 0;
   self.straferunbda = 0;
-  self killstreaks::play_killstreak_start_dialog("straferun", self.pers[#"team"], killstreak_id);
-  self stats::function_e24eec31(getweapon(#"straferun"), #"used", 1);
+  self killstreaks::play_killstreak_start_dialog("straferun", self.pers[# "team"], killstreak_id);
+  self stats::function_e24eec31(getweapon(#"straferun"), # "used", 1);
   plane thread function_d4896942();
   target_set(plane, (0, 0, 0));
   plane.gunsoundentity = spawn("script_model", plane gettagorigin("tag_flash"));
@@ -144,7 +143,7 @@ usekillstreakstraferun(hardpointtype) {
   plane thread watchforownerexit(self);
   plane thread targetting_delay::function_7e1a12ce(12000);
   plane thread function_c24cc26a();
-  util::function_5a68c330(21, self.team, self getentitynumber(), level.killstreaks[#"straferun"].uiname);
+  util::function_5a68c330(21, self.team, self getentitynumber(), level.killstreaks[# "straferun"].uiname);
   aiutility::addaioverridedamagecallback(plane, &function_16abaea4);
   return true;
 }
@@ -279,11 +278,11 @@ watchdamage() {
 
     self.damage_debug = damage + "<dev string:x66>" + weapon.name + "<dev string:x6b>";
 
-      if(!isDefined(weapon) || weapons::getbaseweapon(weapon) != level.weaponflechette) {
-        if(mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE") {
-          damage += 5400;
-        }
+    if(!isDefined(weapon) || weapons::getbaseweapon(weapon) != level.weaponflechette) {
+      if(mod == "MOD_PROJECTILE" || mod == "MOD_PROJECTILE_SPLASH" || mod == "MOD_EXPLOSIVE") {
+        damage += 5400;
       }
+    }
 
     if(!issentient(self) && damage > 0) {
       self.attacker = attacker;
@@ -351,7 +350,7 @@ watchforkills() {
 
 watchforownerexit(owner) {
   self endon(#"death");
-  owner waittill(#"disconnect", #"joined_team", #"joined_spectators");
+  owner waittill(#"disconnect", # "joined_team", # "joined_spectators");
   self.leavenexttime = 1;
 }
 
@@ -381,19 +380,19 @@ dostraferuns() {
       self.straferungunradius = getdvarint(#"scr_straferunradius", level.straferungunradius);
       self.straferungunoffset = getdvarint(#"scr_straferunoffset", level.straferungunoffset);
 
-        if(isDefined(noteworthynode)) {
-          if(isDefined(noteworthynode.script_parameters)) {
-            self.straferungunlookahead = float(noteworthynode.script_parameters);
-          }
-
-          if(isDefined(noteworthynode.script_radius)) {
-            self.straferungunradius = float(noteworthynode.script_radius);
-          }
-
-          if(isDefined(noteworthynode.script_float)) {
-            self.straferungunoffset = float(noteworthynode.script_float);
-          }
+      if(isDefined(noteworthynode)) {
+        if(isDefined(noteworthynode.script_parameters)) {
+          self.straferungunlookahead = float(noteworthynode.script_parameters);
         }
+
+        if(isDefined(noteworthynode.script_radius)) {
+          self.straferungunradius = float(noteworthynode.script_radius);
+        }
+
+        if(isDefined(noteworthynode.script_float)) {
+          self.straferungunoffset = float(noteworthynode.script_float);
+        }
+      }
 
       if(isDefined(self.owner)) {
         self thread startstrafe();
@@ -420,7 +419,7 @@ dostraferuns() {
 }
 
 function_d4896942() {
-  self endon(#"death", #"strafe_stop");
+  self endon(#"death", # "strafe_stop");
 
   while(true) {
     self waittill(#"flare_deployed");
@@ -432,7 +431,7 @@ function_d4896942() {
 }
 
 startstrafe() {
-  self endon(#"death", #"strafe_stop");
+  self endon(#"death", # "strafe_stop");
 
   if(isDefined(self.strafing)) {
     iprintlnbold("TRYING TO STRAFE WHEN ALREADY STRAFING!\n");
@@ -453,21 +452,21 @@ startstrafe() {
     perfectattackstartvector = gunorigin + vectorscale(forwardnoz, self.straferungunlookahead);
     attackstartvector = perfectattackstartvector + vectorscale(right, randomfloatrange(0 - self.straferungunradius, self.straferungunradius));
     trace = bulletTrace(attackstartvector, (attackstartvector[0], attackstartvector[1], -500), 0, self, 0);
-    self turretsettarget(0, trace[#"position"]);
+    self turretsettarget(0, trace[# "position"]);
     self fireweapon();
-    self shellshockplayers(trace[#"position"]);
+    self shellshockplayers(trace[# "position"]);
 
     if(getdvarint(#"scr_devstraferunbulletsdebugdraw", 0)) {
       time = 300;
-      airsupport::debug_line(attackstartvector, trace[#"position"] - (0, 0, 20), (1, 0, 0), time, 0);
+      airsupport::debug_line(attackstartvector, trace[# "position"] - (0, 0, 20), (1, 0, 0), time, 0);
 
       if(count % 30 == 0) {
         trace = bulletTrace(perfectattackstartvector, (perfectattackstartvector[0], perfectattackstartvector[1], -100000), 0, self, 0, 1);
-        airsupport::debug_line(trace[#"position"] + (0, 0, 20), trace[#"position"] - (0, 0, 20), (0, 0, 1), time, 0);
+        airsupport::debug_line(trace[# "position"] + (0, 0, 20), trace[# "position"] - (0, 0, 20), (0, 0, 1), time, 0);
       }
     }
 
-      count++;
+    count++;
     wait weaponshoottime;
   }
 }
@@ -476,7 +475,7 @@ firststrafe() {}
 
 firerockets() {
   self notify(#"firing_rockets");
-  self endon(#"death", #"strafe_stop", #"firing_rockets");
+  self endon(#"death", # "strafe_stop", # "firing_rockets");
   self.owner endon(#"disconnect");
   forward = anglesToForward(self.angles);
   self.firedrockettargets = [];
@@ -526,7 +525,7 @@ firerockets() {
       rocket thread airsupport::debug_draw_bomb_path(undefined, (0, 0.5, 0), 400);
     }
 
-      wait level.straferunrocketdelay;
+    wait level.straferunrocketdelay;
   }
 }
 
@@ -657,7 +656,7 @@ cantargetplayer(player) {
     return false;
   }
 
-  if(player.team == #"spectator") {
+  if(player.team == # "spectator") {
     return false;
   }
 
@@ -846,7 +845,7 @@ deletewhenparentdies(parent) {
 }
 
 unlinkwhenparentdies(parent) {
-  self endon(#"reset", #"unlink");
+  self endon(#"reset", # "unlink");
   parent waittill(#"death");
   self unlink();
 }

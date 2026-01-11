@@ -10,8 +10,7 @@ print3dthreadzip(var_0) {
   self endon("death");
 
   for(;;) {
-    if(isDefined(self)) {
-    }
+    if(isDefined(self)) {}
 
     wait 0.05;
   }
@@ -177,8 +176,7 @@ guy_stops_animating_on_high_alert(var_0, var_1, var_2) {
   }
   if(isDefined(var_1)) {
     maps\_anim::anim_generic(self, var_1);
-  }
-  else {
+  } else {
     self stopanimscripted();
   }
 }
@@ -229,7 +227,7 @@ chess_guys() {
   common_scripts\utility::array_thread(var_2, ::chess_guys_drop_weapon);
 
   foreach(var_6 in var_2) {
-  var_6 thread wait_to_investigate(var_2);
+    var_6 thread wait_to_investigate(var_2);
   }
 }
 
@@ -488,8 +486,7 @@ monitor_bbc_stop(var_0) {
       case "off":
         if(self.model != self.offmodel) {
           var_0 scalevolume(0, 0.1);
-        }
-        else {
+        } else {
           var_0 scalevolume(1, 0.1);
         }
 
@@ -588,8 +585,7 @@ field_russian_think() {
 
   if(common_scripts\utility::cointoss()) {
     self allowedstances("stand");
-  }
-  else {
+  } else {
     self allowedstances("crouch");
   }
 
@@ -1174,8 +1170,7 @@ street_walker_think() {
 
   if(!isDefined(level.street_walker_delay)) {
     level.street_walker_delay = 0.0;
-  }
-  else {
+  } else {
     level.street_walker_delay = level.street_walker_delay + randomfloatrange(0.2, 0.4);
   }
 
@@ -1578,9 +1573,7 @@ price_attack_hunt() {
 
     if(!isDefined(self.enemy.dont_hit_me)) {
       self.noshoot = undefined;
-    }
-    else {
-    }
+    } else {}
 
     wait 0.05;
   }
@@ -1920,8 +1913,7 @@ trigger_monitor_player_lean() {
   for(;;) {
     if(level.player isleaning()) {
       common_scripts\utility::trigger_off();
-    }
-    else {
+    } else {
       common_scripts\utility::trigger_on();
     }
 
@@ -2140,8 +2132,7 @@ gaz_and_kamarov_fight() {
 
   if(self == level.gaz) {
     common_scripts\utility::flag_set("gaz_at_fight");
-  }
-  else {
+  } else {
     common_scripts\utility::flag_set("kam_at_fight");
     level.binocs = get_prop("binocs");
     thread binocs_delete();
@@ -2627,12 +2618,10 @@ blackout_flashlight_death(var_0, var_1, var_2, var_3) {
 
   if(var_1.health == 50000) {
     var_1 waittill("damage");
-  }
-  else {
+  } else {
     if(distance(var_4, var_1.origin) > 8) {
       var_1 thread maps\_anim::anim_single_solo(var_1, "fl_death_local");
-    }
-    else {
+    } else {
       var_0 thread maps\_anim::anim_single_solo(var_1, "fl_death");
     }
 
@@ -2926,8 +2915,7 @@ gaz_opens_door_and_enters() {
 
   if(getdvarint("use_old_gaz_blackout_door") == 1) {
     var_0 maps\_anim::anim_generic(level.gaz, "smooth_door_open");
-  }
-  else {
+  } else {
     var_0 maps\_anim::anim_single_solo(level.gaz, "open_blackout_door");
   }
 
@@ -3044,7 +3032,7 @@ open_door_trigger(var_0) {
 
   if(isDefined(var_4)) {
     foreach(var_6 in var_4) {
-    var_6 linkto(var_3);
+      var_6 linkto(var_3);
     }
   }
 
@@ -3539,8 +3527,7 @@ tango_down_detection() {
 
   if(randomint(100) > 50) {
     level.price maps\_anim::anim_single_queue(level.price, "tango_down");
-  }
-  else {
+  } else {
     level.gaz maps\_anim::anim_single_queue(level.gaz, "tango_down");
   }
 }
@@ -4028,8 +4015,7 @@ shoot_magic_rocket(var_0) {
 
   if(!isDefined(var_1.speed)) {
     var_2.units_per_second = 2000;
-  }
-  else {
+  } else {
     var_2.units_per_second = var_1.speed;
   }
 

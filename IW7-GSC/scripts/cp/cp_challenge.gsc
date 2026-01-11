@@ -14,9 +14,7 @@ init_coop_challenge() {
 }
 
 func_C9B9() {
-  [
-    [level.challenge_pause_func]
-  ]();
+  [[level.challenge_pause_func]]();
 }
 
 func_956D() {
@@ -169,9 +167,7 @@ activate_new_challenge(param_00) {
 }
 
 func_7897(param_00) {
-  return [
-    [level.challenge_scalar_func]
-  ](param_00);
+  return [[level.challenge_scalar_func]](param_00);
 }
 
 func_3C15() {

@@ -232,11 +232,9 @@ onRoundEndGame(winningTeam) {
   [[level._setTeamScore]]("axis", game["roundswon"]["axis"]);
   if(game["roundswon"]["allies"] == game["roundswon"]["axis"]) {
     winner = "tie";
-  }
-  else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
+  } else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
     winner = "axis";
-  }
-  else {
+  } else {
     winner = "allies";
   }
   return winner;
@@ -256,15 +254,13 @@ onSpawnPlayer() {
   if(level.useStartSpawns) {
     if(spawnteam == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
     }
   } else {
     if(spawnteam == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_axis);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_allies);
     }
   }
@@ -471,8 +467,7 @@ onDrop(player) {
   }
   if(isDefined(player)) {
     player logString(team + " flag dropped");
-  }
-  else {
+  } else {
     logString(team + " flag dropped");
   }
   if(isDefined(player)) {
@@ -504,8 +499,7 @@ onDrop(player) {
   enemy_team_mask = maps\mp\gametypes\_spawning::get_team_mask(team);
   if(isDefined(player)) {
     flag_origin = player.origin;
-  }
-  else {
+  } else {
     flag_origin = self.curorigin;
   }
   self.spawn_influencer_dropped = addsphereinfluencer(level.spawnsystem.eINFLUENCER_TYPE_GAME_MODE,
@@ -548,8 +542,7 @@ onPickup(player) {
     self maps\mp\gametypes\_gameobjects::returnHome();
     if(isDefined(player)) {
       player logString(team + " flag returned");
-    }
-    else {
+    } else {
       logString(team + " flag returned");
     }
     if(!level.teamFlags["allies"] isHome() && !level.teamFlags["axis"] isHome()) {
@@ -744,8 +737,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
     for(index = 0; index < level.flags.size; index++) {
       if(isDefined(level.flags[index].carrier)) {
         flagOrigin = level.flags[index].carrier.origin;
-      }
-      else {
+      } else {
         flagOrigin = level.flags[index].curorigin;
       }
       dist = Distance2d(self.origin, flagOrigin);
@@ -753,8 +745,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
         inFlagZone = true;
         if(level.flags[index].ownerteam == attacker.pers["team"]) {
           defendedFlag = true;
-        }
-        else {
+        } else {
           offendedFlag = true;
         }
       }
@@ -763,8 +754,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
         inFlagZone = true;
         if(level.flags[index].ownerteam == attacker.pers["team"]) {
           defendedFlag = true;
-        }
-        else {
+        } else {
           offendedFlag = true;
         }
       }
@@ -837,8 +827,7 @@ returnFlagHudElems(time) {
   level.ReturnMessageElems["allies"][ownerteam] setTimer(time);
   if(time <= 0) {
     return false;
-  }
-  else {
+  } else {
     wait time;
   }
   return true;

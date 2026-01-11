@@ -283,8 +283,7 @@ createHudInfo(elemName, font, fontSize, xPos, yPos, text, color) {
 
   if(level.splitscreen) {
     hudElem setPoint("TOPLEFT", "TOPLEFT", (xPos - 35), (yPos - 5));
-  }
-  else {
+  } else {
     hudElem setPoint("TOPLEFT", "TOPLEFT", xPos, yPos);
   }
 
@@ -399,10 +398,10 @@ cycleZones() {
     }
 
     if(isDefined(hitEntity) {
-    ) {
-    }
+      ) {}
       level.grnd_zone LinkTo(hitEntity);
-    } else if(level.grnd_zone IsLinked()) {
+    }
+    else if(level.grnd_zone IsLinked()) {
       level.grnd_zone Unlink();
     }
 
@@ -417,7 +416,7 @@ cycleZones() {
     playFXOnTag(level.grnd_fx["smoke"], level.grnd_zone, "tag_fx");
 
     foreach(player in level.players) {
-    player.grnd_fx_playing = true;
+      player.grnd_fx_playing = true;
     }
 
     if(level.matchRules_dropTime) {
@@ -642,8 +641,7 @@ getDropZoneCrateType() {
         crateType = maps\mp\killstreaks\_airdrop::getRandomCrateType("airdrop_grnd");
         if(isDefined(level.grnd_previousCrateTypes[crateType])) {
           crateType = undefined;
-        }
-        else {
+        } else {
           break;
         }
 
@@ -667,8 +665,7 @@ getDropZoneCrateType() {
 isInGrindZone() {
   if(distance2D(level.grnd_zone.origin, self.origin) < GRND_ZONE_TOUCH_RADIUS && (self.origin[2] > (level.grnd_zone.origin[2] - 50))) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -694,8 +691,7 @@ createZones() {
     foreach(zone in chestSpawns) {
       if(zone.origin[2] > 10000) {
         level.grnd_dropZones2[level.grnd_dropZones2.size] = zone;
-      }
-      else {
+      } else {
         level.grnd_dropZones1[level.grnd_dropZones1.size] = zone;
       }
     }

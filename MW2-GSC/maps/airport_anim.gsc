@@ -766,8 +766,7 @@ makarov_aim_player(guy) {
 
     if(angleYaw < 0) {
       leftWeight = angleYaw / -60;
-    }
-    else if(angleYaw > 0) {
+    } else if(angleYaw > 0) {
       rightWeight = angleYaw / 60;
     }
 

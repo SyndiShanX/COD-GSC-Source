@@ -271,8 +271,7 @@ showIcons(icon_friendly, icon_enemy, instruction_text, num_icons) {
     objective_player(self.locationObjectives[i], self getEntityNumber());
     if(level.air_support_locs[level.script][i]["in_use"] == true) {
       objective_icon(self.locationObjectives[i], icon_enemy);
-    }
-    else {
+    } else {
       objective_icon(self.locationObjectives[i], icon_friendly);
     }
   }
@@ -549,11 +548,9 @@ getBestHeight(centerPoint) {
 
   if(isDefined(heightEnt)) {
     trueHeight = heightEnt.origin[2];
-  }
-  else if(isDefined(level.airstrikeHeightScale)) {
+  } else if(isDefined(level.airstrikeHeightScale)) {
     trueHeight = 850 * level.airstrikeHeightScale;
-  }
-  else {
+  } else {
     trueHeight = 850;
   }
 
@@ -862,8 +859,7 @@ airshipFlyGunner(owner, pathStart, pathGoal, pathEnd, flyHeight) {
   loopNode = level.heli_loop_nodes[randomInt(level.heli_loop_nodes.size)];
   if(attackAreas.size) {
     self thread maps\mp\killstreaks\_helicopter::heli_fly_well(attackAreas);
-  }
-  else {
+  } else {
     self thread maps\mp\killstreaks\_helicopter::heli_fly_loop_path(loopNode);
   }
 

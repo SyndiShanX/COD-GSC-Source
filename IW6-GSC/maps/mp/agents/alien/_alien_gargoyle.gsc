@@ -67,8 +67,7 @@ handle_badpath(var_0) {
 gargoyle_approach(var_0, var_1) {
   if(is_enemy_vanguard(var_0)) {
     return approach_vanguard(var_0);
-  }
-  else {
+  } else {
     return approach_enemy(var_0);
   }
 }
@@ -656,8 +655,7 @@ hover(var_0) {
 
   if(gettime() > self.last_air_dodge_time + 1500) {
     var_1 = 0;
-  }
-  else {
+  } else {
     var_1 = 1;
   }
 
@@ -764,8 +762,7 @@ get_enemy_target_position(var_0) {
   if(issentient(var_0)) {
     if(!isDefined(var_0.usingremote)) {
       return var_0 getEye();
-    }
-    else {
+    } else {
       return var_0.origin + (0, 0, 32);
     }
   }
@@ -897,8 +894,7 @@ strafe_run_loop() {
 
   if(var_0 == 0) {
     maps\mp\agents\_scriptedagents::playanimnuntilnotetrack("attack_strafe_run_loop_single", var_0, "attack_melee");
-  }
-  else {
+  } else {
     var_1 = var_0 - 1;
     maps\mp\agents\_scriptedagents::playanimnuntilnotetrack("attack_strafe_run_loop_multi_start", var_1, "attack_melee");
     maps\mp\agents\_scriptedagents::playanimnuntilnotetrack("attack_strafe_run_loop_multi_loop", var_1, "attack_melee");
@@ -919,8 +915,7 @@ register_air_attack_end(var_0, var_1) {
 
     if(var_4 > 800) {
       var_3 = 0;
-    }
-    else if(var_4 < 100) {
+    } else if(var_4 < 100) {
       var_3 = try_air_dodge_up(var_0);
     }
   }

@@ -21,7 +21,6 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\vehicles\smart_bomb;
 #include scripts\weapons\arc;
-
 #namespace seeker_mine;
 
 autoexec __init__system__() {
@@ -48,17 +47,17 @@ update_dvars() {
   }
 }
 
-  function is_in_water(location) {
-    var_8a7edebd = 15;
-    depth = getwaterheight(location) - self.origin[2];
-    inwater = depth > var_8a7edebd;
+function is_in_water(location) {
+  var_8a7edebd = 15;
+  depth = getwaterheight(location) - self.origin[2];
+  inwater = depth > var_8a7edebd;
 
-    if(inwater) {
-      return true;
-    }
-
-    return false;
+  if(inwater) {
+    return true;
   }
+
+  return false;
+}
 
 function_b23e4b45() {
   self.settings = struct::get_script_bundle("vehiclecustomsettings", self.scriptbundlesettings);
@@ -104,8 +103,8 @@ function_b23e4b45() {
     if(isDefined(var_921106a1)) {
       results = groundtrace(var_921106a1 + (0, 0, 70), var_921106a1 + (0, 0, -70), 0, self);
 
-      if(isDefined(results) && isDefined(results[#"position"])) {
-        var_921106a1 = results[#"position"];
+      if(isDefined(results) && isDefined(results[# "position"])) {
+        var_921106a1 = results[# "position"];
 
         if(bullettracepassed(self.origin + (0, 0, 10), var_921106a1, 0, self, self, 0, 0)) {
           recordline(self.origin + (0, 0, 10), var_921106a1, (0, 0, 1), "<dev string:x38>");
@@ -114,7 +113,7 @@ function_b23e4b45() {
 
           recordsphere(var_921106a1, 3, (0, 0, 1), "<dev string:x38>");
 
-            newpos = var_921106a1;
+          newpos = var_921106a1;
         } else {
           recordline(self.origin + (0, 0, 10), var_921106a1, (1, 0.5, 0), "<dev string:x38>");
 
@@ -195,8 +194,8 @@ function_d3a9800e() {
 private function_d39f1cf2() {
   trace = groundtrace(self.origin + (0, 0, 70), self.origin + (0, 0, -100), 0, self);
 
-  if(isDefined(trace[#"entity"])) {
-    entity = trace[#"entity"];
+  if(isDefined(trace[# "entity"])) {
+    entity = trace[# "entity"];
 
     if(entity ismovingplatform()) {
       return true;
@@ -252,7 +251,7 @@ function_d017dfc() {
 }
 
 function_391d5d90(params) {
-  self endon(#"death", #"change_state");
+  self endon(#"death", # "change_state");
 
   for(;;) {
     if(function_112a6b52()) {
@@ -282,8 +281,8 @@ function_391d5d90(params) {
 }
 
 waittill_pathing_done(maxtime = 15) {
-  self endon(#"death", #"change_state");
-  result = self waittilltimeout(maxtime, #"near_goal", #"hash_f6b2d6a37e22523", #"switch_enemy");
+  self endon(#"death", # "change_state");
+  result = self waittilltimeout(maxtime, # "near_goal", # "hash_f6b2d6a37e22523", # "switch_enemy");
 }
 
 function_33d3892a() {
@@ -340,7 +339,7 @@ function_3acf1c61() {
 }
 
 function_d03a7fe8() {
-  self endon(#"death", #"change_state");
+  self endon(#"death", # "change_state");
 
   for(;;) {
     if(isDefined(self.favoriteenemy) && isalive(self.favoriteenemy)) {
@@ -388,7 +387,7 @@ function_32e99568(params) {
 }
 
 function_13ade03e() {
-  self endon(#"death", #"change_state");
+  self endon(#"death", # "change_state");
 
   while(true) {
     self animation::play("p8_fxanim_mp_drone_seeker_shock_anim", self.origin, self.angles, 1, 0.2, 0.1, undefined, undefined, undefined, 0);
@@ -509,7 +508,7 @@ private function_82e5be34() {
 function_d15dd929(radius, origin) {
   result = function_9cc082d2(origin + (0, 0, 100), 200);
 
-  if(isDefined(result) && isDefined(result[#"materialflags"]) && result[#"materialflags"]& 2) {
+  if(isDefined(result) && isDefined(result[# "materialflags"]) && result[# "materialflags"] & 2) {
     return false;
   }
 
@@ -572,9 +571,7 @@ function_3e16dec3(params) {
       }
 
       if(isDefined(level.var_477515d3)) {
-        [
-          [level.var_477515d3]
-        ] - > waitinqueue(self);
+        [[level.var_477515d3]] - > waitinqueue(self);
       }
 
       forward = anglesToForward(self.angles);
@@ -586,7 +583,7 @@ function_3e16dec3(params) {
       if(isDefined(tacpoints) && tacpoints.size != 0) {
         record3dtext("<dev string:x49>", self.origin - (0, 0, 20), (1, 0, 0));
 
-          newpos = tacpoints[0].origin;
+        newpos = tacpoints[0].origin;
         newpos = getclosestpointonnavmesh(newpos, 500, self getpathfindingradius() * 1.2, self.var_6e9e073d);
 
         if(isDefined(newpos)) {
@@ -615,7 +612,7 @@ function_3e16dec3(params) {
           if(isDefined(tacpoints) && tacpoints.size != 0) {
             record3dtext("<dev string:x49>", self.origin - (0, 0, 20), (1, 0, 0));
 
-              newpos = tacpoints[0].origin;
+            newpos = tacpoints[0].origin;
             newpos = getclosestpointonnavmesh(newpos, 500, self getpathfindingradius() * 1.2);
 
             if(isDefined(newpos)) {
@@ -638,7 +635,7 @@ function_3e16dec3(params) {
 function_ab9a9770(target) {
   results = groundtrace(target.origin + (0, 0, 70), target.origin + (0, 0, -100), 0, target);
 
-  if(isDefined(results) && isDefined(results[#"entity"]) && results[#"entity"] ismovingplatform()) {
+  if(isDefined(results) && isDefined(results[# "entity"]) && results[# "entity"] ismovingplatform()) {
     return true;
   }
 
@@ -766,9 +763,7 @@ function_3e3b6ce1() {
       canseetarget = var_b9733045 && target sightconetrace(self function_d3a9800e(), self, anglesToForward(self.angles), self.settings.var_e7260470);
 
       if(isDefined(level.var_6cfbe5a)) {
-        [
-          [level.var_6cfbe5a]
-        ] - > waitinqueue(self);
+        [[level.var_6cfbe5a]] - > waitinqueue(self);
       }
 
       if(function_33d3892a()) {
@@ -797,7 +792,7 @@ function_45eb6b84(target) {
 }
 
 function_55be8453() {
-  self endon(#"death", #"change_state");
+  self endon(#"death", # "change_state");
   waitframe(2);
   firsttime = 1;
 
@@ -868,13 +863,13 @@ function_d55a99f2(var_4700521d = 500, var_53050fec = 1, var_30336a7c = 0) {
 
   record3dtext("<dev string:x58>", self.origin - (0, 0, 20), (1, 0, 0));
 
-    newpos = getclosestpointonnavmesh(self.origin, var_4700521d, self getpathfindingradius() * 1.2);
+  newpos = getclosestpointonnavmesh(self.origin, var_4700521d, self getpathfindingradius() * 1.2);
 
   if(isDefined(newpos)) {
     trace = groundtrace(newpos + (0, 0, 70), newpos + (0, 0, -70), 0, undefined);
 
-    if(isDefined(trace[#"position"])) {
-      newpos = trace[#"position"];
+    if(isDefined(trace[# "position"])) {
+      newpos = trace[# "position"];
 
       if(var_30336a7c && !sighttracepassed(self.origin, newpos, 0, self)) {
         return false;

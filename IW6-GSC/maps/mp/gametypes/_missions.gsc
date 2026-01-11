@@ -132,8 +132,7 @@ onPlayerConnect() {
 
     if(cardTitle == "cardtitle_infected") {
       player.infected = true;
-    }
-    else if(cardTitle == "cardtitle_plague") {
+    } else if(cardTitle == "cardtitle_plague") {
       player.plague = true;
     }
   }
@@ -218,7 +217,7 @@ monitorTacInsertionsDestroyed() {
 initMissionData() {
   keys = getArrayKeys(level.killstreakFuncs);
   foreach(key in keys) {
-  self.pers[key] = 0;
+    self.pers[key] = 0;
   }
 
   self.pers["lastBulletKillTime"] = 0;
@@ -238,8 +237,7 @@ getChallengeStatus(name) {
 
   if(isDefined(self.challengeData[name])) {
     return self.challengeData[name];
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -525,8 +523,7 @@ killedBestEnemyPlayer(wasBest) {
 
   if(self.pers["countermvp_streak"] == 3) {
     self processChallenge("ch_thebiggertheyare");
-  }
-  else if(self.pers["countermvp_streak"] == 5) {
+  } else if(self.pers["countermvp_streak"] == 5) {
     self processChallenge("ch_thehardertheyfall");
   }
 }
@@ -539,8 +536,7 @@ isHighestScoringPlayer(player) {
   players = level.players;
   if(level.teamBased) {
     team = player.pers["team"];
-  }
-  else {
+  } else {
     team = "all";
   }
 
@@ -630,8 +626,7 @@ ch_kills(data, time) {
 
     if(killData.sWeapon == player.primaryWeapon) {
       loadoutPrimaryCount++;
-    }
-    else if(killData.sWeapon == player.secondaryWeapon) {
+    } else if(killData.sWeapon == player.secondaryWeapon) {
       loadoutSecondaryCount++;
     }
 
@@ -728,16 +723,14 @@ ch_kills(data, time) {
       if(isDefined(victimteam) && victimteam != player.pers["team"]) {
         if(isHighestScoringPlayer(data.victim) && level.players.size >= 6) {
           player killedBestEnemyPlayer(true);
-        }
-        else {
+        } else {
           player killedBestEnemyPlayer(false);
         }
       }
     } else {
       if(isHighestScoringPlayer(data.victim) && level.players.size >= 4) {
         player killedBestEnemyPlayer(true);
-      }
-      else {
+      } else {
         player killedBestEnemyPlayer(false);
       }
     }
@@ -754,8 +747,7 @@ ch_kills(data, time) {
   if(isReallyAlive(player) && data.sWeapon != "none") {
     if(isDefined(player.killsThisLifePerWeapon[data.sWeapon])) {
       player.killsThisLifePerWeapon[data.sWeapon]++;
-    }
-    else {
+    } else {
       player.killsThisLifePerWeapon[data.sWeapon] = 1;
     }
   }
@@ -915,8 +907,7 @@ ch_kills(data, time) {
   if(data.sWeapon == "none") {
     if(isDefined(data.victim.explosiveInfo) && isDefined(data.victim.explosiveInfo["weapon"])) {
       data.sWeapon = data.victim.explosiveInfo["weapon"];
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -955,8 +946,7 @@ ch_kills(data, time) {
             foreach(attachment in weaponAttachments) {
               if(attachment == "acog") {
                 attachCounter++;
-              }
-              else if(attachment == "akimbo") {
+              } else if(attachment == "akimbo") {
                 attachCounter++;
               }
             }
@@ -1229,11 +1219,9 @@ ch_kills(data, time) {
   } else if(isSubStr(data.sMeansOfDeath, "MOD_IMPACT")) {
     if(isStrStart(data.sWeapon, "frag_")) {
       player processChallenge("ch_thinkfast");
-    }
-    else if(isStrStart(data.sWeapon, "concussion_")) {
+    } else if(isStrStart(data.sWeapon, "concussion_")) {
       player processChallenge("ch_thinkfastconcussion");
-    }
-    else if(isStrStart(data.sWeapon, "flash_")) {
+    } else if(isStrStart(data.sWeapon, "flash_")) {
       player processChallenge("ch_thinkfastflash");
     }
 
@@ -1466,8 +1454,7 @@ ch_kills(data, time) {
   if(player IsItemUnlocked("specialty_stun_resistance") && player _hasPerk("specialty_stun_resistance")) {
     if(isDefined(player.lastFlashedTime) && (GetTime() - player.lastFlashedTime) < 5000) {
       player processChallenge("ch_stunresistance");
-    }
-    else if(isDefined(player.lastConcussedTime) && (GetTime() - player.lastConcussedTime) < 5000) {
+    } else if(isDefined(player.lastConcussedTime) && (GetTime() - player.lastConcussedTime) < 5000) {
       player processChallenge("ch_stunresistance");
     }
   }
@@ -1493,8 +1480,7 @@ ch_bulletDamageCommon(data, player, time, weaponClass) {
   }
   if(player.pers["lastBulletKillTime"] == time) {
     player.pers["bulletStreak"]++;
-  }
-  else {
+  } else {
     player.pers["bulletStreak"] = 1;
   }
 
@@ -1696,8 +1682,7 @@ ch_roundwin(data) {
 playerDamaged(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sHitLoc) {
   if(is_aliens()) {
     return;
-  }
-  else {
+  } else {
     playerDamaged_regularMP(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sHitLoc);
   }
 }
@@ -1742,8 +1727,7 @@ playerDamaged_regularMP(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, s
 playerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon, sHitLoc, modifiers) {
   if(is_aliens()) {
     return;
-  }
-  else {
+  } else {
     playerKilled_regularMP(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon, sHitLoc, modifiers);
   }
 }
@@ -1751,8 +1735,7 @@ playerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeap
 playerKilled_regularMP(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon, sHitLoc, modifiers) {
   if(self isUsingRemote()) {
     self.anglesOnDeath = self.angles;
-  }
-  else {
+  } else {
     self.anglesOnDeath = self getPlayerAngles();
   }
   if(isDefined(attacker)) {
@@ -1858,8 +1841,7 @@ playerAssist(killedPlayer) {
 useHardpoint(hardpointType) {
   if(is_aliens()) {
     return;
-  }
-  else {
+  } else {
     useHardpoint_regularMP(hardpointType);
   }
 }
@@ -2177,8 +2159,7 @@ monitorMiscCallback(result) {
 healthRegenerated() {
   if(is_aliens()) {
     return;
-  }
-  else {
+  } else {
     healthRegenerated_regularMP();
   }
 }
@@ -2218,8 +2199,7 @@ resetBrinkOfDeathKillStreakShortly() {
 playerSpawned() {
   if(is_aliens()) {
     return;
-  }
-  else {
+  } else {
     playerSpawned_regularMP();
   }
 }
@@ -2248,8 +2228,7 @@ isAtBrinkOfDeath() {
 processChallenge(baseName, progressInc, forceSetProgress) {
   if(is_aliens()) {
     return;
-  }
-  else {
+  } else {
     processChallenge_regularMP(baseName, progressInc, forceSetProgress);
   }
 }
@@ -2282,8 +2261,7 @@ processChallenge_regularMP(baseName, progressInc, forceSetProgress) {
     wasCompletedThisMatch = isDefined(self.operationsMaxed) && isDefined(self.operationsMaxed[baseName]);
     if(isReplayOperation && !wasCompletedThisMatch) {
       missionStatus = level.challengeInfo[baseName]["targetval"].size;
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -2505,14 +2483,11 @@ getWeaponAttachmentFromChallenge(challengeRef) {
   prefix = "ch_";
   if(isSubStr(challengeRef, "ch_marksman_")) {
     prefix = "ch_marksman_";
-  }
-  else if(isSubStr(challengeRef, "ch_expert_")) {
+  } else if(isSubStr(challengeRef, "ch_expert_")) {
     prefix = "ch_expert_";
-  }
-  else if(isSubStr(challengeRef, "pr_marksman_")) {
+  } else if(isSubStr(challengeRef, "pr_marksman_")) {
     prefix = "pr_marksman_";
-  }
-  else if(isSubStr(challengeRef, "pr_expert_")) {
+  } else if(isSubStr(challengeRef, "pr_expert_")) {
     prefix = "pr_expert_";
   }
 
@@ -2775,8 +2750,7 @@ monitorKillstreakProgress() {
 
     if(streakCount == 10 && self.killstreaks.size == 0) {
       self processChallenge("ch_theloner");
-    }
-    else if(streakCount == 9) {
+    } else if(streakCount == 9) {
       if(isDefined(self.killstreaks[7]) && isDefined(self.killstreaks[8]) && isDefined(self.killstreaks[9])) {
         self processChallenge("ch_6fears7");
       }
@@ -2908,8 +2882,7 @@ monitorMantle() {
     currWeaponName = self GetCurrentWeapon();
     if(currWeaponName == "none") {
       self.mantling = true;
-    }
-    else {
+    } else {
       self.mantling = false;
     }
 
@@ -3554,8 +3527,7 @@ processChallengeForTeam(challengeName, team) {
 allowKillChallengeForKillstreak(player, weaponName) {
   if(player isJuggernaut()) {
     return true;
-  }
-  else if(weaponName == "ims_projectile_mp") {
+  } else if(weaponName == "ims_projectile_mp") {
     return true;
   }
 

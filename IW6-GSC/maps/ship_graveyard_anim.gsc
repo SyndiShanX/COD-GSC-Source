@@ -381,8 +381,7 @@ radio() {
 weld_fx_on(var_0) {
   if(!isDefined(var_0.welding) || var_0.welding == 0) {
     var_0.welding = 1;
-  }
-  else {
+  } else {
     return;
   }
 

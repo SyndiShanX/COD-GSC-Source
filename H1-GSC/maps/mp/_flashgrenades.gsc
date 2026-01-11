@@ -53,8 +53,7 @@ monitorflash() {
 
     if(var_3 < 0.5) {
       var_3 = 0.5;
-    }
-    else if(var_3 > 0.8) {
+    } else if(var_3 > 0.8) {
       var_3 = 1;
     }
 
@@ -72,17 +71,14 @@ monitorflash() {
 
     if(var_9 > 2) {
       var_10 = 0.75;
-    }
-    else {
+    } else {
       var_10 = 0.25;
     }
 
     if(level.teambased && isDefined(var_4) && isDefined(var_4.team) && var_4.team == self.team && var_4 != self) {
       if(level.friendlyfire == 0) {
         continue;
-      }
-      else if(level.friendlyfire == 1) {
-      } else if(level.friendlyfire == 2) {
+      } else if(level.friendlyfire == 1) {} else if(level.friendlyfire == 2) {
         var_9 = var_9 * 0.5;
         var_10 = var_10 * 0.5;
         var_8 = 0;
@@ -101,11 +97,9 @@ monitorflash() {
 
       if(var_11 == "mp_crash_snow") {
         var_4 maps\mp\gametypes\_missions::processchallenge("ch_wc_tactical");
-      }
-      else if(var_11 == "mp_farm_spring") {
+      } else if(var_11 == "mp_farm_spring") {
         var_4 maps\mp\gametypes\_missions::processchallenge("ch_stpatty_tactical");
-      }
-      else if(var_11 == "mp_bog_summer") {
+      } else if(var_11 == "mp_bog_summer") {
         var_4 maps\mp\gametypes\_missions::processchallenge("ch_summer_tactical");
       }
     }

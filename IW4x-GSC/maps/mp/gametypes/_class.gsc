@@ -4,7 +4,6 @@
 ****************************************/
 
 #include common_scripts\utility;
-
 #include maps\mp\_utility;
 #include maps\mp\gametypes\_hud_util;
 
@@ -70,8 +69,7 @@ getWeaponChoice(response) {
   tokens = strtok(response, ",");
   if(tokens.size > 1) {
     return int(tokens[1]);
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -123,8 +121,7 @@ cac_getOffhand(classIndex) {
 table_getWeapon(tableName, classIndex, weaponIndex) {
   if(weaponIndex == 0) {
     return tableLookup(tableName, 0, "loadoutPrimary", classIndex + 1);
-  }
-  else {
+  } else {
     return tableLookup(tableName, 0, "loadoutSecondary", classIndex + 1);
   }
 }
@@ -135,23 +132,20 @@ table_getWeaponAttachment(tableName, classIndex, weaponIndex, attachmentIndex) {
   if(weaponIndex == 0) {
     if(!isDefined(attachmentIndex) || attachmentIndex == 0) {
       tempName = tableLookup(tableName, 0, "loadoutPrimaryAttachment", classIndex + 1);
-    }
-    else {
+    } else {
       tempName = tableLookup(tableName, 0, "loadoutPrimaryAttachment2", classIndex + 1);
     }
   } else {
     if(!isDefined(attachmentIndex) || attachmentIndex == 0) {
       tempName = tableLookup(tableName, 0, "loadoutSecondaryAttachment", classIndex + 1);
-    }
-    else {
+    } else {
       tempName = tableLookup(tableName, 0, "loadoutSecondaryAttachment2", classIndex + 1);
     }
   }
 
   if(tempName == "" || tempName == "none") {
     return "none";
-  }
-  else {
+  } else {
     return tempName;
   }
 }
@@ -159,8 +153,7 @@ table_getWeaponAttachment(tableName, classIndex, weaponIndex, attachmentIndex) {
 table_getWeaponCamo(tableName, classIndex, weaponIndex) {
   if(weaponIndex == 0) {
     return tableLookup(tableName, 0, "loadoutPrimaryCamo", classIndex + 1);
-  }
-  else {
+  } else {
     return tableLookup(tableName, 0, "loadoutSecondaryCamo", classIndex + 1);
   }
 }
@@ -343,9 +336,7 @@ giveLoadout(team, class, allowCopycat) {
       loadoutSecondaryAttachment = "none";
       loadoutSecondaryAttachment2 = "none";
       loadoutSecondaryCamo = "none";
-    }
-
-    else if(loadoutPrimary == "throwingknife" && loadoutSecondary == "none") {
+    } else if(loadoutPrimary == "throwingknife" && loadoutSecondary == "none") {
       clearAmmo = true;
       loadoutPrimary = "usp";
       loadoutPrimaryAttachment = "tactical";
@@ -471,8 +462,7 @@ giveLoadout(team, class, allowCopycat) {
 
   if(loadoutSecondary == "none") {
     secondaryName = "none";
-  }
-  else {
+  } else {
     secondaryName = buildWeaponName(loadoutSecondary, loadoutSecondaryAttachment, loadoutSecondaryAttachment2);
     self _giveWeapon(secondaryName, int(tableLookup("mp/camoTable.csv", 1, loadoutSecondaryCamo, 0)));
   }
@@ -551,14 +541,11 @@ giveLoadout(team, class, allowCopycat) {
 
   if(loadoutOffhand == "none") {
     self SetOffhandSecondaryClass("none");
-  }
-  else if(loadoutOffhand == "flash_grenade") {
+  } else if(loadoutOffhand == "flash_grenade") {
     self SetOffhandSecondaryClass("flash");
-  }
-  else if(loadoutOffhand == "smoke_grenade" || loadoutOffhand == "concussion_grenade") {
+  } else if(loadoutOffhand == "smoke_grenade" || loadoutOffhand == "concussion_grenade") {
     self SetOffhandSecondaryClass("smoke");
-  }
-  else {
+  } else {
     self SetOffhandSecondaryClass("flash");
   }
 
@@ -570,11 +557,9 @@ giveLoadout(team, class, allowCopycat) {
 
       if(loadOutOffhand == "flash_grenade") {
         self setWeaponAmmoClip(offhandSecondaryWeapon, 2);
-      }
-      else if(loadOutOffhand == "concussion_grenade") {
+      } else if(loadOutOffhand == "concussion_grenade") {
         self setWeaponAmmoClip(offhandSecondaryWeapon, 2);
-      }
-      else {
+      } else {
         self setWeaponAmmoClip(offhandSecondaryWeapon, 1);
       }
       break;
@@ -694,22 +679,19 @@ trackRiotShield() {
       }
       if(self.hasRiotShield) {
         self MoveShieldModel("weapon_riot_shield_mp", "tag_shield_back", "tag_weapon_left");
-      }
-      else {
+      } else {
         self AttachShieldModel("weapon_riot_shield_mp", "tag_weapon_left");
       }
 
       self.hasRiotShield = true;
       self.hasRiotShieldEquipped = true;
-    } else if((self IsMantling()) && (newWeapon == "none")) {
-    } else if(self.hasRiotShieldEquipped) {
+    } else if((self IsMantling()) && (newWeapon == "none")) {} else if(self.hasRiotShieldEquipped) {
       assert(self.hasRiotShield);
       self.hasRiotShield = self hasWeapon("riotshield_mp");
 
       if(self.hasRiotShield) {
         self MoveShieldModel("weapon_riot_shield_mp", "tag_weapon_left", "tag_shield_back");
-      }
-      else {
+      } else {
         self DetachShieldModel("weapon_riot_shield_mp", "tag_weapon_left");
       }
 
@@ -723,12 +705,10 @@ trackRiotShield() {
   }
 }
 
-tryAttach(placement)
-{
+tryAttach(placement) {
   if(!isDefined(placement) || placement != "back") {
     tag = "tag_weapon_left";
-  }
-  else {
+  } else {
     tag = "tag_shield_back";
   }
 
@@ -744,12 +724,10 @@ tryAttach(placement)
   self AttachShieldModel("weapon_riot_shield_mp", tag);
 }
 
-tryDetach(placement)
-{
+tryDetach(placement) {
   if(!isDefined(placement) || placement != "back") {
     tag = "tag_weapon_left";
-  }
-  else {
+  } else {
     tag = "tag_shield_back";
   }
 
@@ -810,8 +788,7 @@ buildWeaponName(baseName, attachment1, attachment2) {
 
   if(!isValidWeapon(weaponName + "_mp")) {
     return (baseName + "_mp");
-  }
-  else {
+  } else {
     return (weaponName + "_mp");
   }
 }
@@ -854,8 +831,7 @@ setKillstreaks(streak1, streak2, streak3) {
 
   if(self _hasPerk("specialty_hardline") && (getDvarInt("scr_classic") != 1)) {
     modifier = -1;
-  }
-  else {
+  } else {
     modifier = 0;
   }
 
@@ -910,8 +886,7 @@ setKillstreaks(streak1, streak2, streak3) {
   self.killstreaks = newKillstreaks;
 }
 
-replenishLoadout()
-{
+replenishLoadout() {
   team = self.pers["team"];
   class = self.pers["class"];
 
@@ -971,8 +946,7 @@ getPerkForClass(perkSlot, className) {
 
   if(isSubstr(className, "custom")) {
     return cac_getPerk(class_num, perkSlot);
-  }
-  else {
+  } else {
     return table_getPerk(level.classTableName, class_num, perkSlot);
   }
 }
@@ -1180,7 +1154,7 @@ isValidWeapon(refString) {
     level.weaponRefs = [];
 
     foreach(weaponRef in level.weaponList) {
-    level.weaponRefs[weaponRef] = true;
+      level.weaponRefs[weaponRef] = true;
     }
   }
 

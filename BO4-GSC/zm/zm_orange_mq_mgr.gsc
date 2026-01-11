@@ -39,7 +39,6 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_orange_mq_mgr;
 
 preload() {
@@ -50,7 +49,7 @@ preload() {
   namespace_4b68b2b3::preload();
   zm_orange_mq_hell::preload();
   zm_orange_mq_sendoff::preload();
-  clientfield::register("toplayer", "" + #"hash_668f474410d5c1d0", 24000, 1, "int");
+  clientfield::register("toplayer", "" + # "hash_668f474410d5c1d0", 24000, 1, "int");
 }
 
 main() {
@@ -63,23 +62,23 @@ main() {
   zm_orange_mq_sendoff::init();
   level flag::init("sam_music_done");
   level flag::init(#"hash_18b94410e3b6b0bf");
-  zm_sq::register(#"main_quest", #"hash_86e283359f19a5f", #"main_quest_step1", &zm_orange_mq_dials::function_77ed3bab, &zm_orange_mq_dials::function_51ecc801);
-  zm_sq::register(#"main_quest", #"hash_467104204a4803ad", #"main_quest_step2", &zm_orange_mq_vessel::function_a5254494, &zm_orange_mq_vessel::function_77e4073b);
-  zm_sq::register(#"main_quest", #"hash_7c16d3a3e4250b9a", #"main_quest_step3", &zm_orange_mq_blood::function_8d43b840, &zm_orange_mq_blood::function_2d9e1e29);
-  zm_sq::register(#"main_quest", #"hash_2dfcd4264b2c2340", #"main_quest_step4", &zm_orange_mq_campfire::function_13dda28a, &zm_orange_mq_campfire::function_a874e5d0);
-  zm_sq::register(#"main_quest", #"hash_c2e45a40a675911", #"main_quest_step5", &zm_orange_mq_soapstone::function_d878e1ee, &zm_orange_mq_soapstone::function_9ee4c8c3);
-  zm_sq::register(#"main_quest", #"hash_72bc0ec65f4afcca", #"hash_6289c5eef32eca15", &zm_orange_mq_fuse::function_742dfdb5, &zm_orange_mq_fuse::function_9e34b0d4);
-  zm_sq::register(#"main_quest", #"hash_28c88f40ace27a7b", #"hash_6289c2eef32ec4fc", &zm_orange_mq_fuse::function_c723e684, &zm_orange_mq_fuse::function_3d5a45fb);
-  zm_sq::register(#"main_quest", #"hash_382d731d4de07ed3", #"main_quest_step7", &zm_orange_mq_blood::function_8d43b840, &zm_orange_mq_blood::function_2d9e1e29);
-  zm_sq::register(#"main_quest", #"hash_2c00866b95e17ff5", #"main_quest_step8", &zm_orange_mq_campfire::function_13dda28a, &zm_orange_mq_campfire::function_a874e5d0);
-  zm_sq::register(#"main_quest", #"hash_ebca448700872b8", #"hash_62afa5eef34f62f2", &namespace_4b68b2b3::function_1faf4b9, &namespace_4b68b2b3::function_a8748143);
-  zm_sq::register(#"main_quest", #"hash_810019231f11ea1", #"hash_62afa4eef34f613f", &namespace_4b68b2b3::function_91fbb734, &namespace_4b68b2b3::function_c2898bf0);
-  zm_sq::register(#"main_quest", #"hash_11c4f1ecb0dd5a34", #"main_quest_step10", &zm_orange_mq_blood::function_8d43b840, &zm_orange_mq_blood::function_2d9e1e29);
-  zm_sq::register(#"main_quest", #"hash_d0bf3cf30a07a84", #"main_quest_step11", &zm_orange_mq_campfire::function_13dda28a, &zm_orange_mq_campfire::function_a874e5d0);
-  zm_sq::register(#"main_quest", #"hash_13b9abe1bd17294c", #"main_quest_step12", &namespace_4b68b2b3::function_816c3132, &namespace_4b68b2b3::function_3c9be590);
-  zm_sq::register(#"main_quest", #"hash_7d78cef11f6afb5e", #"main_quest_step13", &zm_orange_mq_hell::function_5309464a, &zm_orange_mq_hell::function_ae270d9e);
-  zm_sq::register(#"main_quest", #"hash_2bd81e2b05fccbed", #"main_quest_step14", &zm_orange_mq_sendoff::function_5309464a, &zm_orange_mq_sendoff::function_ae270d9e);
-  zm_sq::register(#"main_quest", #"hash_49b41abaa9addedd", #"main_quest_step15", &function_d4147875, &function_895265b1, 1);
+  zm_sq::register(#"main_quest", # "hash_86e283359f19a5f", # "main_quest_step1", &zm_orange_mq_dials::function_77ed3bab, &zm_orange_mq_dials::function_51ecc801);
+  zm_sq::register(#"main_quest", # "hash_467104204a4803ad", # "main_quest_step2", &zm_orange_mq_vessel::function_a5254494, &zm_orange_mq_vessel::function_77e4073b);
+  zm_sq::register(#"main_quest", # "hash_7c16d3a3e4250b9a", # "main_quest_step3", &zm_orange_mq_blood::function_8d43b840, &zm_orange_mq_blood::function_2d9e1e29);
+  zm_sq::register(#"main_quest", # "hash_2dfcd4264b2c2340", # "main_quest_step4", &zm_orange_mq_campfire::function_13dda28a, &zm_orange_mq_campfire::function_a874e5d0);
+  zm_sq::register(#"main_quest", # "hash_c2e45a40a675911", # "main_quest_step5", &zm_orange_mq_soapstone::function_d878e1ee, &zm_orange_mq_soapstone::function_9ee4c8c3);
+  zm_sq::register(#"main_quest", # "hash_72bc0ec65f4afcca", # "hash_6289c5eef32eca15", &zm_orange_mq_fuse::function_742dfdb5, &zm_orange_mq_fuse::function_9e34b0d4);
+  zm_sq::register(#"main_quest", # "hash_28c88f40ace27a7b", # "hash_6289c2eef32ec4fc", &zm_orange_mq_fuse::function_c723e684, &zm_orange_mq_fuse::function_3d5a45fb);
+  zm_sq::register(#"main_quest", # "hash_382d731d4de07ed3", # "main_quest_step7", &zm_orange_mq_blood::function_8d43b840, &zm_orange_mq_blood::function_2d9e1e29);
+  zm_sq::register(#"main_quest", # "hash_2c00866b95e17ff5", # "main_quest_step8", &zm_orange_mq_campfire::function_13dda28a, &zm_orange_mq_campfire::function_a874e5d0);
+  zm_sq::register(#"main_quest", # "hash_ebca448700872b8", # "hash_62afa5eef34f62f2", &namespace_4b68b2b3::function_1faf4b9, &namespace_4b68b2b3::function_a8748143);
+  zm_sq::register(#"main_quest", # "hash_810019231f11ea1", # "hash_62afa4eef34f613f", &namespace_4b68b2b3::function_91fbb734, &namespace_4b68b2b3::function_c2898bf0);
+  zm_sq::register(#"main_quest", # "hash_11c4f1ecb0dd5a34", # "main_quest_step10", &zm_orange_mq_blood::function_8d43b840, &zm_orange_mq_blood::function_2d9e1e29);
+  zm_sq::register(#"main_quest", # "hash_d0bf3cf30a07a84", # "main_quest_step11", &zm_orange_mq_campfire::function_13dda28a, &zm_orange_mq_campfire::function_a874e5d0);
+  zm_sq::register(#"main_quest", # "hash_13b9abe1bd17294c", # "main_quest_step12", &namespace_4b68b2b3::function_816c3132, &namespace_4b68b2b3::function_3c9be590);
+  zm_sq::register(#"main_quest", # "hash_7d78cef11f6afb5e", # "main_quest_step13", &zm_orange_mq_hell::function_5309464a, &zm_orange_mq_hell::function_ae270d9e);
+  zm_sq::register(#"main_quest", # "hash_2bd81e2b05fccbed", # "main_quest_step14", &zm_orange_mq_sendoff::function_5309464a, &zm_orange_mq_sendoff::function_ae270d9e);
+  zm_sq::register(#"main_quest", # "hash_49b41abaa9addedd", # "main_quest_step15", &function_d4147875, &function_895265b1, 1);
 
   if(zm_utility::is_ee_enabled()) {
     level thread function_93a140f7();
@@ -127,7 +126,7 @@ play_outro() {
 
   zm_hms_util::function_3c173d37();
   level zm_audio::sndvoxoverride(1);
-  lui::play_movie(#"zm_orange_outro", "fullscreen", 1, 0, 0, #"1b4c9133da73a711322404314402765ab0d23fd362a167d6f0c65bb215113d9400000000000000ff", undefined, 0);
+  lui::play_movie(#"zm_orange_outro", "fullscreen", 1, 0, 0, # "1b4c9133da73a711322404314402765ab0d23fd362a167d6f0c65bb215113d9400000000000000ff", undefined, 0);
 }
 
 function_d4147875(var_5ea5c94d) {
@@ -147,11 +146,11 @@ function_d4147875(var_5ea5c94d) {
   println("<dev string:x71>");
   sam_spawner = getent("mq_gehen_s", "targetname");
   level.sam = sam_spawner spawnfromspawner("sam", 1);
-  level.sam.team = #"allies";
+  level.sam.team = # "allies";
   util::magic_bullet_shield(level.sam);
   eddie_spawner = getent("mq_gehen_e", "targetname");
   eddie = eddie_spawner spawnfromspawner("eddie", 1);
-  eddie.team = #"allies";
+  eddie.team = # "allies";
   util::magic_bullet_shield(eddie);
   waitframe(1);
   println("<dev string:x93>");
@@ -239,7 +238,7 @@ hud_disable() {
     player showcrosshair(0);
     player allowcrouch(0);
     player thread function_b20c4898();
-    player clientfield::set_to_player("" + #"hash_668f474410d5c1d0", 1);
+    player clientfield::set_to_player("" + # "hash_668f474410d5c1d0", 1);
     player val::set(#"gehen", "disable_weapons", 1);
   }
 }
@@ -248,7 +247,7 @@ hud_enable() {
   foreach(player in getplayers()) {
     player showcrosshair(1);
     player allowcrouch(1);
-    player clientfield::set_to_player("" + #"hash_668f474410d5c1d0", 0);
+    player clientfield::set_to_player("" + # "hash_668f474410d5c1d0", 0);
   }
 }
 
@@ -277,7 +276,7 @@ function_c40f70df(var_21c1ba1) {
   self hide();
   w_current = self getcurrentweapon();
 
-  if(w_current.name == #"ww_tesla_sniper_t8" || w_current.name == #"ww_tesla_sniper_upgraded_t8") {
+  if(w_current.name == # "ww_tesla_sniper_t8" || w_current.name == # "ww_tesla_sniper_upgraded_t8") {
     self zm_weapons::weapon_give(level.weaponzmfists, 1);
   }
 
@@ -289,12 +288,12 @@ function_c40f70df(var_21c1ba1) {
     str_stance = self getstance();
 
     switch (str_stance) {
-      case #"crouch":
+      case # "crouch":
         self setstance("stand");
         println("<dev string:x20d>" + var_21c1ba1 + "<dev string:x248>");
         wait 0.2;
         break;
-      case #"prone":
+      case # "prone":
         self setstance("stand");
         println("<dev string:x20d>" + var_21c1ba1 + "<dev string:x273>");
         wait 1;

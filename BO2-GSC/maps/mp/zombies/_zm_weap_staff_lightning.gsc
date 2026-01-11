@@ -237,8 +237,7 @@ staff_lightning_ball_damage_over_time(e_source, e_target, e_attacker) {
 
       if(n_damage_per_pulse < e_target.health && !instakill_on) {
         e_target do_damage_network_safe(e_attacker, n_damage_per_pulse, e_source.str_weapon, "MOD_RIFLE_BULLET");
-      }
-      else {
+      } else {
         e_target thread zombie_shock_eyes();
         e_target thread staff_lightning_kill_zombie(e_attacker, e_source.str_weapon);
         break;

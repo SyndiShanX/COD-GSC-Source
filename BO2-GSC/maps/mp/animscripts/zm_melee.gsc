@@ -17,8 +17,7 @@ meleecombat() {
 
   if(is_true(self.sliding_on_goo)) {
     self animmode("slide");
-  }
-  else {
+  } else {
     self animmode("zonly_physics");
   }
 
@@ -73,8 +72,7 @@ meleecombat() {
         if(self.enemy.health >= oldhealth) {
           if(isDefined(self.melee_miss_func)) {
             self[[self.melee_miss_func]]();
-          }
-          else if(isDefined(level.melee_miss_func)) {
+          } else if(isDefined(level.melee_miss_func)) {
             self[[level.melee_miss_func]]();
           }
         }
@@ -99,8 +97,7 @@ meleecombat() {
 
     if(is_true(self.sliding_on_goo)) {
       self orientmode("face enemy");
-    }
-    else {
+    } else {
       self orientmode("face default");
     }
 
@@ -123,8 +120,7 @@ meleecombat() {
 
   if(is_true(self.sliding_on_goo)) {
     self animmode("slide");
-  }
-  else {
+  } else {
     self animmode("none");
   }
 
@@ -251,8 +247,7 @@ set_zombie_melee_anim_state(zombie) {
   if(!isDefined(melee_anim_state)) {
     if(!zombie.has_legs && zombie.a.gib_ref == "no_legs") {
       melee_anim_state = "zm_stumpy_melee";
-    }
-    else {
+    } else {
       switch (zombie.zombie_move_speed) {
         case "walk":
           melee_anim_state = append_missing_legs_suffix("zm_walk_melee");

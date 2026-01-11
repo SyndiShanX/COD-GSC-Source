@@ -73,7 +73,7 @@ getenemyteamwithlowestplayercount(player_team) {
   counts = [];
 
   foreach(team in level.teams) {
-  counts[team] = 0;
+    counts[team] = 0;
   }
 
   foreach(player in level.players) {
@@ -109,7 +109,7 @@ getenemyteamwithgreatestbotcount(player_team) {
   counts = [];
 
   foreach(team in level.teams) {
-  counts[team] = 0;
+    counts[team] = 0;
   }
 
   foreach(player in level.players) {
@@ -651,14 +651,11 @@ bot_damage_think() {
     if(isDefined(weapon)) {
       if(weapon == "proximity_grenade_mp" || weapon == "proximity_grenade_aoe_mp") {
         continue;
-      }
-      else if(weapon == "claymore_mp") {
+      } else if(weapon == "claymore_mp") {
         continue;
-      }
-      else if(weapon == "satchel_charge_mp") {
+      } else if(weapon == "satchel_charge_mp") {
         continue;
-      }
-      else if(weapon == "bouncingbetty_mp") {
+      } else if(weapon == "bouncingbetty_mp") {
         continue;
       }
     }
@@ -698,8 +695,7 @@ bot_killcam_think() {
 
   if(!level.killcam) {
     self waittill("death");
-  }
-  else {
+  } else {
     self waittill("begin_killcam");
   }
 
@@ -789,11 +785,9 @@ bot_failsafe_node_valid(nearest, node) {
 
   if(isDefined(level.spawn_all) && level.spawn_all.size > 0) {
     spawns = arraysort(level.spawn_all, node.origin);
-  }
-  else if(isDefined(level.spawnpoints) && level.spawnpoints.size > 0) {
+  } else if(isDefined(level.spawnpoints) && level.spawnpoints.size > 0) {
     spawns = arraysort(level.spawnpoints, node.origin);
-  }
-  else if(isDefined(level.spawn_start) && level.spawn_start.size > 0) {
+  } else if(isDefined(level.spawn_start) && level.spawn_start.size > 0) {
     spawns = arraycombine(level.spawn_start["allies"], level.spawn_start["axis"], 1, 0);
     spawns = arraysort(spawns, node.origin);
   } else
@@ -1071,11 +1065,9 @@ bot_update_wander() {
 
   if(isDefined(level.spawn_all) && level.spawn_all.size > 0) {
     spawns = arraysort(level.spawn_all, self.origin);
-  }
-  else if(isDefined(level.spawnpoints) && level.spawnpoints.size > 0) {
+  } else if(isDefined(level.spawnpoints) && level.spawnpoints.size > 0) {
     spawns = arraysort(level.spawnpoints, self.origin);
-  }
-  else if(isDefined(level.spawn_start) && level.spawn_start.size > 0) {
+  } else if(isDefined(level.spawn_start) && level.spawn_start.size > 0) {
     spawns = arraycombine(level.spawn_start["allies"], level.spawn_start["axis"], 1, 0);
     spawns = arraysort(spawns, self.origin);
   } else
@@ -1310,14 +1302,11 @@ bot_get_difficulty() {
 
     if(difficulty == 0) {
       level.bot_difficulty = "easy";
-    }
-    else if(difficulty == 1) {
+    } else if(difficulty == 1) {
       level.bot_difficulty = "normal";
-    }
-    else if(difficulty == 2) {
+    } else if(difficulty == 2) {
       level.bot_difficulty = "hard";
-    }
-    else if(difficulty == 3) {
+    } else if(difficulty == 3) {
       level.bot_difficulty = "fu";
     }
   }
@@ -1575,8 +1564,7 @@ bot_update_crate() {
 
       if(crate.owner == self) {
         time = level.crateownerusetime / 1000 + 0.5;
-      }
-      else {
+      } else {
         time = level.cratenonownerusetime / 1000 + 0.5;
       }
 
@@ -1618,8 +1606,7 @@ bot_update_crate() {
 
         if(crate.owner == self) {
           end = level.crateownerusetime + 1000;
-        }
-        else {
+        } else {
           end = level.cratenonownerusetime + 1000;
         }
 
@@ -1720,8 +1707,7 @@ bot_get_vehicle_entity() {
   if(self isremotecontrolling()) {
     if(isDefined(self.rcbomb)) {
       return self.rcbomb;
-    }
-    else if(isDefined(self.qrdrone)) {
+    } else if(isDefined(self.qrdrone)) {
       return self.qrdrone;
     }
   }
@@ -1873,8 +1859,7 @@ bot_use_supply_drop(weapon) {
 
   if(weapon == "missile_drone_mp" || weapon == "inventory_missile_drone_mp") {
     self lookat(drop_point + vectorscale((0, 0, 1), 384.0));
-  }
-  else {
+  } else {
     self lookat(drop_point);
   }
 
@@ -1899,8 +1884,7 @@ bot_use_item(weapon) {
   for(i = 0; i < 10; i++) {
     if(self getcurrentweapon() == weapon || self getcurrentweapon() == "none") {
       self pressattackbutton();
-    }
-    else {
+    } else {
       return;
     }
 
@@ -1961,13 +1945,13 @@ bot_killstreak_dangerous_think(origin, team, attacker) {
   }
 
   foreach(node in nodes) {
-  node setdangerous(team, 1);
+    node setdangerous(team, 1);
   }
 
   attacker wait_endon(25, "death");
 
   foreach(node in nodes) {
-  node setdangerous(team, 0);
+    node setdangerous(team, 0);
   }
 }
 
@@ -1991,8 +1975,7 @@ bot_dive_to_prone(exit_stance) {
   }
 }
 
-gametype_void() {
-}
+gametype_void() {}
 
 bot_debug_star(origin, seconds, color) {
   if(!isDefined(seconds)) {
@@ -2152,8 +2135,7 @@ bot_crosshair_follow() {
     trace = bulletTrace(eye, eye + direction_vec, 0, undefined);
     origin = trace["position"] + (0, 0, 0);
 
-    if(distancesquared(self.origin, origin) > 16384) {
-    }
+    if(distancesquared(self.origin, origin) > 16384) {}
   }
 
 }

@@ -430,9 +430,7 @@ function onroundendgame(winningteam) {
         if(team === winningteam) {
           score++;
         }
-        [
-          [level._setteamscore]
-        ](team, score);
+        [[level._setteamscore]](team, score);
       }
     } else {
       if(isDefined(game["ball_overtime_score_to_beat"]) && game["ball_overtime_score_to_beat"] > game["ball_overtime_best_score"]) {
@@ -445,9 +443,7 @@ function onroundendgame(winningteam) {
         if(team === winningteam) {
           score = score + added_score;
         }
-        [
-          [level._setteamscore]
-        ](team, score);
+        [[level._setteamscore]](team, score);
       }
     }
     return winningteam;

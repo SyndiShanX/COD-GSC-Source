@@ -43,8 +43,7 @@ player_getvelocity_pc() {
 
   if(!var_0) {
     self._stealth.logic.player_pc_velocity = 0;
-  }
-  else if(var_0 > self._stealth.logic.player_pc_velocity) {
+  } else if(var_0 > self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity = self._stealth.logic.player_pc_velocity + var_2[var_1];
 
     if(self._stealth.logic.player_pc_velocity > var_0) {
@@ -73,16 +72,14 @@ friendly_compute_score(var_0) {
   if(isDefined(self.type) && self.type == "dog") {
     if(isDefined(self.sprint) && self.sprint) {
       var_0 = "crouch";
-    }
-    else {
+    } else {
       var_0 = "prone";
     }
   }
 
   if(maps\_stealth_utility::stealth_group_spotted_flag()) {
     var_1 = "spotted";
-  }
-  else {
+  } else {
     var_1 = "hidden";
   }
 
@@ -131,14 +128,13 @@ player_movespeed_calc_loop() {
 
     if(maps\_utility::ent_flag("_stealth_in_shadow")) {
       var_3 = 0;
-    }
-    else {
+    } else {
       var_3 = self[[var_1]]();
     }
 
     foreach(var_9, var_5 in self._stealth.logic.movespeed_multiplier) {
       foreach(var_8, var_7 in var_5) {
-      var_7 = var_3 * self._stealth.logic.movespeed_scale[var_9][var_8];
+        var_7 = var_3 * self._stealth.logic.movespeed_scale[var_9][var_8];
       }
     }
 
@@ -180,8 +176,7 @@ friendly_compute_stances_player() {
 
     if(self._stealth.logic.stance_change > 0.05) {
       self._stealth.logic.stance_change = self._stealth.logic.stance_change - 0.05;
-    }
-    else {
+    } else {
       self._stealth.logic.stance_change = 0;
       self._stealth.logic.stance = var_0;
       self._stealth.logic.oldstance = var_0;
@@ -207,8 +202,7 @@ friendly_init() {
 
     if(level.console) {
       self._stealth.logic.getvelocity_func = ::friendly_getvelocity;
-    }
-    else {
+    } else {
       self._stealth.logic.getvelocity_func = ::player_getvelocity_pc;
       self._stealth.logic.player_pc_velocity = 0;
     }

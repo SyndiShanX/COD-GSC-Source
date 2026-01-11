@@ -21,7 +21,7 @@ start() {
   thread chase_scripted_flyovers();
 
   foreach(var_1 in level.squad) {
-  var_1.grenadeammo = 0;
+    var_1.grenadeammo = 0;
   }
 
   thread chase_ally_vehicle_setup();
@@ -96,14 +96,14 @@ setup_trailer_platform() {
   var_5 = getEntArray("trailer_node", "script_noteworthy");
 
   foreach(var_7 in var_5) {
-  var_7 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
+    var_7 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
   }
 
   thread semi_trailer_death_trigger();
   var_9 = getEntArray("trailer_side_rail", "targetname");
 
   foreach(var_11 in var_9) {
-  var_11 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
+    var_11 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
   }
 
   common_scripts\utility::flag_wait("player_mount_vehicle_start");
@@ -112,7 +112,7 @@ setup_trailer_platform() {
   setsaveddvar("player_sprintUnlimited", "0");
 
   foreach(var_3 in var_1) {
-  var_3 delete();
+    var_3 delete();
   }
 }
 
@@ -166,7 +166,7 @@ chase_player_mount_moving_trailer() {
   var_9["ally_charlie"] = level.squad["ALLY_CHARLIE"];
 
   foreach(var_11 in var_9) {
-  var_11 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
+    var_11 linkto(level.ally_vehicle_trailer, "body_anim_jnt");
   }
 
   level.ally_vehicle_trailer thread maps\_anim::anim_single(var_9, "factory_car_chase_intro_ally_pulls_up_player", "body_anim_jnt");
@@ -319,7 +319,7 @@ chase_headlight_fx_swap(var_0) {
 
 chase_blockade_crash() {
   foreach(var_1 in level.squad) {
-  var_1.ignoreme = 1;
+    var_1.ignoreme = 1;
   }
 
   level.player.ignoreme = 1;
@@ -347,7 +347,7 @@ chase_blockade_crash() {
   wait 2;
 
   foreach(var_1 in level.squad) {
-  var_1.ignoreall = 1;
+    var_1.ignoreall = 1;
   }
 
   level.ally_vehicle thread maps\_utility::play_sound_on_tag("scn_factory_horn_long", "tag_origin");
@@ -447,7 +447,7 @@ car_chase_intro_car_crash() {
   var_0[var_0.size] = level.factory_car_chase_intro_side_car03_blowup;
 
   foreach(var_4 in var_0) {
-  var_4 delete();
+    var_4 delete();
   }
 }
 
@@ -491,7 +491,7 @@ chase_spawn_drone_group(var_0, var_1, var_2) {
     chase_wait_for_semi_touch(var_2);
 
     foreach(var_5 in var_3) {
-    var_5 delete();
+      var_5 delete();
     }
   }
 }
@@ -554,8 +554,7 @@ vehicle_catch_fire_when_shot() {
 vehicle_crash_guy(var_0) {
   if(!isDefined(self) || self.vehicle_position == 0) {
     return;
-  }
-  else {
+  } else {
     self.deathanim = undefined;
     self.noragdoll = undefined;
     var_0.riders = common_scripts\utility::array_remove(var_0.riders, self);

@@ -130,9 +130,7 @@ powercell_dropoff() {
       self thread play_sound_on_entity("zmb_power_cell_insert");
       user notify("powercell_dropoff");
       if(isDefined(level.powercell_dropoff_func)) {
-        [
-          [level.powercell_dropoff_func]
-        ]();
+        [[level.powercell_dropoff_func]]();
       }
       user maps\_zombiemode_rank::giveRankXP("powercell");
     } else {

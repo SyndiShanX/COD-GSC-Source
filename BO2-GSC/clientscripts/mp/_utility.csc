@@ -38,8 +38,7 @@ getstructarray(name, type) {
 
   if(!isDefined(array)) {
     return [];
-  }
-  else {
+  } else {
     return array;
   }
 }
@@ -71,20 +70,15 @@ array_func(entities, func, arg1, arg2, arg3, arg4, arg5) {
 single_func(entity, func, arg1, arg2, arg3, arg4, arg5) {
   if(isDefined(arg5)) {
     entity[[func]](arg1, arg2, arg3, arg4, arg5);
-  }
-  else if(isDefined(arg4)) {
+  } else if(isDefined(arg4)) {
     entity[[func]](arg1, arg2, arg3, arg4);
-  }
-  else if(isDefined(arg3)) {
+  } else if(isDefined(arg3)) {
     entity[[func]](arg1, arg2, arg3);
-  }
-  else if(isDefined(arg2)) {
+  } else if(isDefined(arg2)) {
     entity[[func]](arg1, arg2);
-  }
-  else if(isDefined(arg1)) {
+  } else if(isDefined(arg1)) {
     entity[[func]](arg1);
-  }
-  else {
+  } else {
     entity[[func]]();
   }
 }
@@ -108,20 +102,15 @@ array_thread(entities, func, arg1, arg2, arg3, arg4, arg5) {
 single_thread(entity, func, arg1, arg2, arg3, arg4, arg5) {
   if(isDefined(arg5)) {
     entity thread[[func]](arg1, arg2, arg3, arg4, arg5);
-  }
-  else if(isDefined(arg4)) {
+  } else if(isDefined(arg4)) {
     entity thread[[func]](arg1, arg2, arg3, arg4);
-  }
-  else if(isDefined(arg3)) {
+  } else if(isDefined(arg3)) {
     entity thread[[func]](arg1, arg2, arg3);
-  }
-  else if(isDefined(arg2)) {
+  } else if(isDefined(arg2)) {
     entity thread[[func]](arg1, arg2);
-  }
-  else if(isDefined(arg1)) {
+  } else if(isDefined(arg1)) {
     entity thread[[func]](arg1);
-  }
-  else {
+  } else {
     entity thread[[func]]();
   }
 }
@@ -271,176 +260,151 @@ array(a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r, s, t, u, v, w, x, y,
 
   if(isDefined(a)) {
     array[0] = a;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(b)) {
     array[1] = b;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(c)) {
     array[2] = c;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(d)) {
     array[3] = d;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(e)) {
     array[4] = e;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(f)) {
     array[5] = f;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(g)) {
     array[6] = g;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(h)) {
     array[7] = h;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(i)) {
     array[8] = i;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(j)) {
     array[9] = j;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(k)) {
     array[10] = k;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(l)) {
     array[11] = l;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(m)) {
     array[12] = m;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(n)) {
     array[13] = n;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(o)) {
     array[14] = o;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(p)) {
     array[15] = p;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(q)) {
     array[16] = q;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(r)) {
     array[17] = r;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(s)) {
     array[18] = s;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(t)) {
     array[19] = t;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(u)) {
     array[20] = u;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(v)) {
     array[21] = v;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(w)) {
     array[22] = w;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(x)) {
     array[23] = x;
-  }
-  else {
+  } else {
     return array;
   }
 
   if(isDefined(y)) {
     array[24] = y;
-  }
-  else {
+  } else {
     return array;
   }
 
@@ -462,8 +426,7 @@ add_to_array(array, ent, allow_dupes) {
 
   if(!isDefined(array)) {
     array[0] = ent;
-  }
-  else if(allow_dupes || !isinarray(array, ent)) {
+  } else if(allow_dupes || !isinarray(array, ent)) {
     array[array.size] = ent;
   }
 
@@ -545,8 +508,7 @@ array_waitlogic2(ent, msg, timeout) {
 
   if(isDefined(timeout)) {
     wait(timeout);
-  }
-  else {
+  } else {
     ent waittill(msg);
   }
 }
@@ -697,8 +659,7 @@ watchforplayerrespawnforteambasedfx(localclientnum, entity, startfxfunc, fxhandl
 
     if(isDefined(optarg1)) {
       entity thread[[startfxfunc]](localclientnum, optarg1);
-    }
-    else {
+    } else {
       entity thread[[startfxfunc]](localclientnum);
     }
 
@@ -872,8 +833,7 @@ getexploderid(ent) {
 getclientfield(field_name) {
   if(self == level) {
     return codegetworldclientfield(field_name);
-  }
-  else {
+  } else {
     return codegetclientfield(self, field_name);
   }
 }
@@ -986,8 +946,7 @@ releaseobjid(localclientnum, objid) {
 clamp(val, val_min, val_max) {
   if(val < val_min) {
     val = val_min;
-  }
-  else if(val > val_max) {
+  } else if(val > val_max) {
     val = val_max;
   }
 

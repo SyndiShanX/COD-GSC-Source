@@ -244,22 +244,19 @@ death_monitor() {
 
   if(isDefined(self.func_862D)) {
     var_06 = self.func_862D;
-  }
-  else {
+  } else {
     var_06 = undefined;
   }
 
   if(isDefined(self.func_90D1)) {
     var_07 = 1;
-  }
-  else {
+  } else {
     var_07 = 0;
   }
 
   if(isDefined(self.func_3D4F)) {
     var_08 = 1;
-  }
-  else {
+  } else {
     var_08 = 0;
   }
 
@@ -375,15 +372,13 @@ death_monitor() {
 func_7819() {
   if(self.spaceship_mode == "fly") {
     var_00 = "_fly";
-  }
-  else {
+  } else {
     var_00 = "_hover";
   }
 
   if(level.func_241D) {
     var_01 = "";
-  }
-  else {
+  } else {
     var_01 = "_space";
   }
 
@@ -433,8 +428,7 @@ func_3E80(var_00, var_01, var_02, var_03) {
 
   if(level.func_241D) {
     var_04 = "";
-  }
-  else {
+  } else {
     var_04 = "_space";
   }
 
@@ -663,8 +657,7 @@ func_107D8(var_00) {
   while(var_01 > 0) {
     if(isDefined(level.func_D127)) {
       var_04 = distance(level.func_D127.origin, var_00);
-    }
-    else {
+    } else {
       break;
     }
 

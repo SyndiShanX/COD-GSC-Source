@@ -125,7 +125,7 @@ player_dynamic_move_speed() {
   actor = undefined;
 
   foreach(member in level.team) {
-  member.plane_origin = spawnStruct();
+    member.plane_origin = spawnStruct();
   }
 
   SetDvarIfUninitialized("debug_playerDMS", 0);
@@ -186,20 +186,19 @@ player_dynamic_move_speed() {
       Print3d(actor.origin, "dist: " + Distance(level.player.origin, actor.origin), (1, 1, 1), 1);
     }
 
-      //if he's wait out in front - really slow him down
-      if(DistanceSquared(level.player.origin, actor.origin) > squared(100) && ahead) {
-        if(GetDvarInt("debug_playerDMS")) {
-          PrintLn("TOOO FAR AHEAD!!!!!!!!!!!");
-        }
-
-          if(current > .55) {
-            current -= .015;
-          }
+    //if he's wait out in front - really slow him down
+    if(DistanceSquared(level.player.origin, actor.origin) > squared(100) && ahead) {
+      if(GetDvarInt("debug_playerDMS")) {
+        PrintLn("TOOO FAR AHEAD!!!!!!!!!!!");
       }
+
+      if(current > .55) {
+        current -= .015;
+      }
+    }
     //if he's too close - take him as much as 20% under his baseline
     else {
-    if(DistanceSquared(level.player.origin, actor.origin) < squared(50) || ahead) {
-    }
+      if(DistanceSquared(level.player.origin, actor.origin) < squared(50) || ahead) {}
       if(current < .78) {
         current += .015;
       }
@@ -210,24 +209,21 @@ player_dynamic_move_speed() {
     }
     //if he's REALLY far away - take him as much as 75% over his baseline ( as long as total speed doesn't reach 110%, capped below )
     else {
-    if(DistanceSquared(level.player.origin, actor.origin) > squared(300)) {
-    }
+      if(DistanceSquared(level.player.origin, actor.origin) > squared(300)) {}
       if(current < 1.75) {
         current += .02;
       }
     }
     //if he's far away - take him as much as 35% over his baseline
     else {
-    if(DistanceSquared(level.player.origin, actor.origin) > squared(100)) {
-    }
+      if(DistanceSquared(level.player.origin, actor.origin) > squared(100)) {}
       if(current < 1.35) {
         current += .01;
       }
     }
     //if he's in range - take him back to his baseline
     else {
-    if(DistanceSquared(level.player.origin, actor.origin) < squared(85)) {
-    }
+      if(DistanceSquared(level.player.origin, actor.origin) < squared(85)) {}
       if(current > 1.0) {
         current -= .01;
       }
@@ -238,8 +234,7 @@ player_dynamic_move_speed() {
 
     if(current > 1.65 || flag("player_DMS_allow_sprint")) {
       level.player AllowSprint(true);
-    }
-    else {
+    } else {
       level.player AllowSprint(false);
     }
 
@@ -253,7 +248,7 @@ player_dynamic_move_speed() {
       PrintLn("baseline: " + level.player.baseline_speed + ", 	adjusted: " + level.player.adjusted_baseline);
     }
 
-      level.player SetMoveSpeedScale((level.player.adjusted_baseline));
+    level.player SetMoveSpeedScale((level.player.adjusted_baseline));
     wait .05;
   }
 }
@@ -267,7 +262,7 @@ player_DMS_get_plane() {
     Line(A, B, (0, 0, 1), 1);
   }
 
-    return PointOnSegmentNearestToPoint(A, B, P);
+  return PointOnSegmentNearestToPoint(A, B, P);
 }
 
 player_DMS_ahead_test() {
@@ -275,8 +270,7 @@ player_DMS_ahead_test() {
   //this is a test to see if we're closer to their goal than they are
   if(isDefined(self.last_set_goalent)) {
     ahead = self[[level.drs_ahead_test]](self.last_set_goalent, 50);
-  }
-  else if(isDefined(self.last_set_goalnode)) {
+  } else if(isDefined(self.last_set_goalnode)) {
     ahead = self[[level.drs_ahead_test]](self.last_set_goalnode, 50);
   }
 
@@ -309,7 +303,7 @@ elevator_floor_indicator() {
   temp = getEntArray("elev_num", "targetname");
   lights = [];
   foreach(item in temp) {
-  lights[item.script_noteworthy] = item;
+    lights[item.script_noteworthy] = item;
   }
 
   lights["down"] Hide();
@@ -535,8 +529,7 @@ lobby_people_logic() {
 
   if(isDefined(self.deleteme)) {
     self Delete();
-  }
-  else {
+  } else {
     self Kill();
   }
 }
@@ -592,8 +585,7 @@ lobby_generic_logic() {
   self.ignoreme = true;
   if(IsSentient(self)) {
     self.IgnoreRandomBulletDamage = true;
-  }
-  else {
+  } else {
     self enable_ignorerandombulletdamage_drone();
   }
   self.grenadeawareness = 0;
@@ -610,8 +602,7 @@ lobby_generic_logic() {
 
   if(isDefined(self.script_noteworthy) && (self.script_noteworthy == "crawler" || self.script_noteworthy == "crawler2")) {
     self lobby_generic_logic_crawlers();
-  }
-  else {
+  } else {
     self lobby_generic_non_crawlers();
   }
 }
@@ -893,8 +884,7 @@ lobby_ai_logic() {
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "new_lobby_people") {
     self thread lobby_ai_new();
-  }
-  else {
+  } else {
     self thread lobby_ai_run();
   }
 }
@@ -1001,8 +991,7 @@ instant_ragdoll() {
 
   if(getdvarint("ragdoll_enable")) {
     self StartRagdoll();
-  }
-  else {
+  } else {
     self kill();
   }
 }
@@ -1398,8 +1387,7 @@ lobby_moveout_to_stairs_post() {
   if(level.lobby_cleanup == 4) {
     if(!flag("player_set_speed_stairs")) {
       thread flag_set_delayed("stairs_go_up", 1);
-    }
-    else {
+    } else {
       flag_set("stairs_go_up");
     }
   }
@@ -1830,15 +1818,13 @@ upperdeck_runners_setup() {
 
   if(IsSubStr(self.classname, "female")) {
     self.animname = "female_civ_" + RandomIntRange(1, 2);
-  }
-  else {
+  } else {
     self.animname = "male_civ_" + RandomIntRange(1, 2);
   }
 
   if(self.script_animation == "airport_civ_cellphone_hide") {
     self thread anim_generic_first_frame(self, self.script_animation);
-  }
-  else {
+  } else {
     self thread anim_generic_loop(self, self.script_animation);
   }
 }
@@ -1883,13 +1869,11 @@ upperdeck_canned_deaths_setup(_flag) {
 
   if(IsSpawner(self)) {
     drone = spawn_ai(true);
-  }
-  else {
+  } else {
     name = undefined;
     if(IsSubStr(self.model, "female")) {
       name = "civilian_female_suit";
-    }
-    else {
+    } else {
       name = "civilian_male_suit";
     }
 
@@ -1922,15 +1906,13 @@ upperdeck_canned_deaths_grab_info(node) {
 
   if(IsSentient(self)) {
     self.IgnoreRandomBulletDamage = true;
-  }
-  else {
+  } else {
     self enable_ignorerandombulletdamage_drone();
   }
 
   if(isDefined(node.script_wait)) {
     self.script_wait = node.script_wait;
-  }
-  else {
+  } else {
     self.script_wait = 0;
   }
 
@@ -1940,8 +1922,7 @@ upperdeck_canned_deaths_grab_info(node) {
 
   if(isDefined(node.script_delay)) {
     self.script_delay = node.script_delay;
-  }
-  else {
+  } else {
     self.script_delay = GetAnimLength(getGenericAnim(node.animation)) - .5;
   }
 
@@ -2088,8 +2069,7 @@ upperdeck_canned_deaths_group(mate, type) {
 
   if(IsSentient(self)) {
     self.IgnoreRandomBulletDamage = false;
-  }
-  else {
+  } else {
     self disable_ignorerandombulletdamage_drone();
   }
   mate disable_ignorerandombulletdamage_drone();
@@ -2157,8 +2137,7 @@ upperdeck_canned_deaths_single(type) {
 
   if(IsSentient(self)) {
     self.IgnoreRandomBulletDamage = false;
-  }
-  else {
+  } else {
     self disable_ignorerandombulletdamage_drone();
   }
 
@@ -2284,7 +2263,7 @@ upperdeck_canned_deaths_execute_fire(enemy) {
 
   targets = enemy get_linked_structs();
   foreach(obj in targets) {
-  delayThread(RandomFloat(.25), ::_radiusdamage, obj.origin, 8, 1000, 1000);
+    delayThread(RandomFloat(.25), ::_radiusdamage, obj.origin, 8, 1000, 1000);
   }
 
   time = .1;
@@ -2474,8 +2453,7 @@ cop_function(_flag, time) {
   }
   if(self.animation == "airport_security_guard_pillar_react_L") {
     self.deathanim = % airport_security_guard_pillar_death_L;
-  }
-  else {
+  } else {
     self.deathanim = % airport_security_guard_pillar_death_R;
   }
 
@@ -2774,8 +2752,7 @@ massacre_rentacops_rambo() {
 
   if(cointoss()) {
     anime = "corner_standL_rambo_jam";
-  }
-  else {
+  } else {
     anime = "corner_standL_rambo_set";
   }
 
@@ -3547,10 +3524,9 @@ massacre_killers(node) {
 
   if(self.script_noteworthy == "m4") {
     self ent_flag_set("massacre_ready");
-  }
-  else {
+  } else {
     foreach(member in level.team) {
-    member ent_flag_wait("massacre_ready");
+      member ent_flag_wait("massacre_ready");
     }
 
     delayThread(4, ::activate_trigger, "massacre_rentacop_rush_guy", "target");
@@ -3911,7 +3887,7 @@ massacre_restaurant_destroy() {
     pieces = getEntArray(pole.target, "targetname");
 
     foreach(piece in pieces) {
-    piece Hide();
+      piece Hide();
     }
 
     pole Hide();
@@ -4392,8 +4368,7 @@ gate_do_jog2() {
   self set_generic_run_anim("casual_killer_jog_A");
   if(self.script_noteworthy == "saw") {
     self.moveplaybackrate = 1.1;
-  }
-  else {
+  } else {
     self.moveplaybackrate = 1.0;
   }
 
@@ -4621,12 +4596,12 @@ gate_departures_status() {
 
   snds = getEntArray("snd_departure_board", "targetname");
   foreach(member in snds) {
-  member playSound(member.script_soundalias);
+    member playSound(member.script_soundalias);
   }
 
   array = array_randomize(level.departure_status_array);
   foreach(index, value in array) {
-  value delayThread((index * .1), ::sign_departure_status_flip_to, "delayed");
+    value delayThread((index * .1), ::sign_departure_status_flip_to, "delayed");
   }
 }
 
@@ -4787,7 +4762,7 @@ basement_pre_moveout() {
 
 basement_moveup() {
   foreach(member in level.team) {
-  member enable_cqbwalk();
+    member enable_cqbwalk();
   }
 
   //4 to beginning of hallway
@@ -4796,8 +4771,7 @@ basement_moveup() {
     name = node.script_noteworthy;
     if(name == "makarov") {
       level.team[name] thread follow_path(node);
-    }
-    else if(name == "saw") {
+    } else if(name == "saw") {
       level.team[name].noDodgeMove = true;
       level.team[name] delayThread(.75, ::follow_path, node);
     } else
@@ -4910,7 +4884,7 @@ tarmac_riotshield_group_van(_flag, vanname, name) {
   group endon("break_group");
 
   foreach(member in team) {
-  member disable_exits();
+    member disable_exits();
   }
   group group_sprint_on();
   group group_lock_angles(dir);
@@ -4921,7 +4895,7 @@ tarmac_riotshield_group_van(_flag, vanname, name) {
 
   group group_sprint_off();
   foreach(member in team) {
-  member enable_exits();
+    member enable_exits();
   }
 
   level notify("tarmac_riotshield_group_van_ready");
@@ -4942,8 +4916,7 @@ tarmac_riotshield_group_van_combine() {
   group = group_create(team);
   if(group.ai_array.size < 9) {
     group.fleethreshold = 2;
-  }
-  else {
+  } else {
     group.fleethreshold = floor(group.ai_array.size * .25);
   }
   group thread tarmac_riotshield_group_handle_break(team);
@@ -4951,7 +4924,7 @@ tarmac_riotshield_group_van_combine() {
 
   group group_sprint_off();
   foreach(member in team) {
-  member enable_exits();
+    member enable_exits();
   }
 
   node = getstruct("tarmac_riot_node_retreat1_group_van", "targetname");
@@ -5002,7 +4975,7 @@ tarmac_riotshield_group_last_stand() {
   }
 
   foreach(group in groups) {
-  group.fleethreshold = 10;
+    group.fleethreshold = 10;
   }
 }
 
@@ -5051,7 +5024,7 @@ tarmac_riotshield_group_last_stand_proc(actors, nodes) {
   groups = [];
   foreach(key, team in teams) {
     foreach(member in team) {
-    member enable_exits();
+      member enable_exits();
     }
     node = nodes[key];
     dir = anglesToForward(node.angles);
@@ -5105,8 +5078,7 @@ tarmac_move_through_smoke() {
     //only structs don't have types, nodes do
     if(!isDefined(node.type)) {
       goal_type = "struct";
-    }
-    else {
+    } else {
       goal_type = "node";
     }
   } else
@@ -5144,8 +5116,7 @@ tarmac_enemies_wave1() {
 
   if(!isDefined(self.script_noteworthy) || !issubstr(self.script_noteworthy, "riotshield_group")) {
     self.goalradius = 1500;
-  }
-  else {
+  } else {
     return; // dont want riotshield guys going blue just yet
   }
 
@@ -5175,7 +5146,7 @@ tarmac_riotshield_group(name) {
 
   team = get_living_ai_array(name, "script_noteworthy");
   foreach(member in team) {
-  member riotshield_lock_orientation(360);
+    member riotshield_lock_orientation(360);
   }
 
   group = group_create(team);
@@ -5250,7 +5221,7 @@ tarmac_riotshield_group_handle_break(team) {
 
   team = array_removeDead(team);
   foreach(member in team) {
-  member set_force_color("blue");
+    member set_force_color("blue");
   }
 }
 
@@ -5362,8 +5333,7 @@ tarmac_enemies_2ndfloor() {
     self.allowdeath = true;
     if(cointoss()) {
       self anim_generic(self, "coverstand_grenadeA");
-    }
-    else {
+    } else {
       self anim_generic(self, "coverstand_grenadeB");
     }
 
@@ -5468,8 +5438,7 @@ tarmac_security() {
 
   if(isDefined(self.script_noteworthy)) {
     self thread tarmac_sec_node_behavior_loop();
-  }
-  else {
+  } else {
     self thread tarmac_sec_node_simple_loop();
   }
 
@@ -5668,7 +5637,7 @@ tarmac_sec_node_goal(node) {
 tarmac_sec_do_this_node(node, name) {
   //self thread tarmac_sec_debug_node( node );
 
-    func = self.tarmac_sec_node_funcs[name];
+  func = self.tarmac_sec_node_funcs[name];
   self[[func]](node);
 }
 
@@ -5758,8 +5727,7 @@ fake_fire() {
 
   if(type == "easy") {
     MagicBullet(self.weapon, self GetTagOrigin("tag_flash"), level.player getEye() + (RandomFloat(32), RandomFloat(32), RandomFloat(32)));
-  }
-  else {
+  } else {
     MagicBullet(self.weapon, self GetTagOrigin("tag_flash"), level.player getEye() + (RandomFloat(64), RandomFloat(64), RandomFloat(64)));
   }
 }
@@ -6049,8 +6017,7 @@ tarmac_van_setup(name) {
 tarmac_van_attach_guy(van) {
   if(isDefined(self.script_startingposition) && van.seats[self.script_startingposition]["free"]) {
     self tarmac_van_guy_take_seat(van, self.script_startingposition);
-  }
-  else {
+  } else {
     foreach(index, seat in van.seats) {
       if(!seat["free"]) {
         continue;
@@ -6068,8 +6035,7 @@ tarmac_van_guy_take_seat(van, index) {
 
   if(index == 0) {
     van.seats[index]["node"] thread anim_generic_loop(self, "bm21_driver_idle");
-  }
-  else {
+  } else {
     van.seats[index]["node"] thread anim_generic_loop(self, "riotshield_idle");
   }
   van.seats[index]["guy"] = self;
@@ -6318,8 +6284,7 @@ tarmac_bcs_enemy() {
 
     if((cointoss() && self.script_soundalias != "enemy_bus") || self.script_soundalias == "enemy_underplane") {
       level.makarov dialogue_queue(self.script_soundalias);
-    }
-    else {
+    } else {
       level.team["m4"] dialogue_queue(self.script_soundalias);
     }
 
@@ -7090,8 +7055,7 @@ spray_and_pray_move_target(array) {
 
     if(array["node_origin"] == array["start_origin"]) {
       array["node_origin"] = array["end_origin"];
-    }
-    else {
+    } else {
       array["node_origin"] = array["start_origin"];
     }
   }
@@ -7166,8 +7130,7 @@ spray_and_pray_get_target(delay, speed_scaler, forward, height, angle, dist) {
 
   if(forward) {
     array["node_origin"] = array["end_origin"];
-  }
-  else {
+  } else {
     array["node_origin"] = array["start_origin"];
   }
 
@@ -7630,8 +7593,7 @@ friendly_fire_handle_aggrissive_num() {
   level.friendly_fire_aggressive_num++;
   if(level.friendly_fire_aggressive_num >= CONST_FF_AGGRISSIVE_NUM) {
     flag_set("friendly_fire_warning");
-  }
-  else {
+  } else {
     thread friendly_fire_decrement_aggressive_num();
   }
 }
@@ -7695,7 +7657,7 @@ friendly_fire_watch_player_flash() {
     if(flag("friendly_fire_warning")) {
       // You blew your cover... don't fire on Makarov's squad.
     }
-      level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
+    level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
     break;
   }
 }
@@ -7715,7 +7677,7 @@ friendly_fire_watch_player_fire() {
     if(flag("friendly_fire_warning")) {
       // You blew your cover... don't fire on Makarov's squad.
     }
-      level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
+    level.fail_string = &"AIRPORT_FAIL_BLEW_COVER_FIRE";
   }
 }
 
@@ -7751,16 +7713,14 @@ friendly_fire_watch_player() {
           level.makarov StopSounds();
           if(cointoss()) {
             level.makarov thread dialogue_queue("check_fire1");
-          }
-          else {
+          } else {
             level.makarov thread dialogue_queue("check_fire2");
           }
         } else {
           level.team["m4"] StopSounds();
           if(cointoss()) {
             level.team["m4"] thread dialogue_queue("check_fire1");
-          }
-          else {
+          } else {
             level.team["m4"] thread dialogue_queue("check_fire2");
           }
         }
@@ -8092,15 +8052,14 @@ jet_engine_state_check() {
   state = "idle";
   if(self.script_health < 0) {
     state = "death";
+  } else {
+    if(self.script_health < self.max_health * .8)
   }
+  state = "burning";
   else {
-  if(self.script_health < self.max_health * .8)
+    if(self.script_health < self.max_health)
   }
-    state = "burning";
-  else {
-  if(self.script_health < self.max_health)
-  }
-    state = "damaged";
+  state = "damaged";
 
   if(state == self.state) {
     return;
@@ -8547,8 +8506,7 @@ GrenadeDangerbsc() {
       guy StopSounds();
       if(cointoss()) {
         guy dialogue_queue("grenade1");
-      }
-      else {
+      } else {
         guy dialogue_queue("grenade2");
       }
 
@@ -8632,7 +8590,7 @@ music_sfx_to_music(alias, time, fade, timesfx) {
 
   println(" *** switching from sfx to music *** ");
 
-    music_loop(alias, time, fade);
+  music_loop(alias, time, fade);
   wait .1;
   snd delete();
 }

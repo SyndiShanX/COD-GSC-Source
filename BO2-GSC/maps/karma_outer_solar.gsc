@@ -26,8 +26,7 @@ init_flags() {
   flag_init("club_door_closed");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_club_solar() {
   cleanup_ents("cleanup_checkin");
@@ -67,7 +66,7 @@ main() {
   setmusicstate("KARMA_1_OUTER_SOLAR");
 
   foreach(ent in getEntArray("velvet_rope", "script_noteworthy")) {
-  ent setscale(0.9);
+    ent setscale(0.9);
   }
 
   trigger_wait("t_club_entrance");
@@ -114,7 +113,7 @@ bar_glass_visibility_think() {
   flag_wait("start_club_encounter");
 
   foreach(e_glass in getEntArray("club_glass", "targetname")) {
-  e_glass show();
+    e_glass show();
   }
 }
 
@@ -284,7 +283,7 @@ init_solar_systems() {
 start_civs_outer_solar(str_kill_flag) {
   if(!is_mature()) {
     foreach(e_dancer in getEntArray("dancers", "script_noteworthy")) {
-    e_dancer delete();
+      e_dancer delete();
     }
 
     level thread init_solar_systems();
@@ -477,7 +476,7 @@ outer_solar_cleanup() {
   wait 0.1;
 
   foreach(e_door in getEntArray("script_doors", "script_noteworthy")) {
-  e_door delete();
+    e_door delete();
   }
 
   if(is_mature()) {

@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\village_defend_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\village_defend_fog::main();
   }
 }

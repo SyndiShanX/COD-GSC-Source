@@ -132,8 +132,7 @@ simulateweaponfire(owner) {
 simulateweaponfiremachinegun(owner, weapon) {
   if(weaponissemiauto(weapon)) {
     simulateweaponfiremachinegunsemiauto(owner, weapon);
-  }
-  else {
+  } else {
     simulateweaponfiremachinegunfullauto(owner, weapon);
   }
 }
@@ -148,8 +147,7 @@ simulateweaponfiremachinegunsemiauto(owner, weapon) {
   while(true) {
     if(clipsize <= 1) {
       burst_count = 1;
-    }
-    else {
+    } else {
       burst_count = randomintrange(1, clipsize);
     }
 
@@ -254,8 +252,7 @@ fireburst(owner, weapon, firetime, count, interrupt) {
 finishwhileloop(weapon, reloadtime, burst_spacing_min, burst_spacing_max) {
   if(shouldplayreloadsound()) {
     playreloadsounds(weapon, reloadtime);
-  }
-  else {
+  } else {
     wait(randomfloatrange(burst_spacing_min, burst_spacing_max));
   }
 }

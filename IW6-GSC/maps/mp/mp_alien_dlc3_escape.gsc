@@ -62,7 +62,7 @@ escape_timer() {
   level thread escape_earthquakes();
 
   foreach(var_1 in level.players) {
-  var_1 thread escape_timer_fx();
+    var_1 thread escape_timer_fx();
   }
 
   wait 300;
@@ -276,14 +276,11 @@ get_lb_final_escape_rank(var_0) {
 
   if(var_0 <= var_1) {
     return 0;
-  }
-  else if(var_0 <= var_2) {
+  } else if(var_0 <= var_2) {
     return 1;
-  }
-  else if(var_0 <= var_3) {
+  } else if(var_0 <= var_3) {
     return 2;
-  }
-  else {
+  } else {
     return 3;
   }
 }
@@ -485,7 +482,7 @@ escape_falling_boulders_fx() {
 
 wait_for_player_to_place_cortex(var_0) {
   foreach(var_2 in level.players) {
-  var_2 thread check_for_player_near_spot_with_cortex(var_0);
+    var_2 thread check_for_player_near_spot_with_cortex(var_0);
   }
 
   var_4 = common_scripts\utility::getstruct(var_0, "targetname");
@@ -511,8 +508,7 @@ alien_death_trail(var_0) {
 
   if(isDefined(level.drill)) {
     var_1.origin = level.drill.origin + (0, 0, 0);
-  }
-  else if(isDefined(level.drill_carrier)) {
+  } else if(isDefined(level.drill_carrier)) {
     var_1.origin = level.drill_carrier.origin + (0, 0, 0);
   }
 
@@ -537,8 +533,7 @@ do_trail_death() {
 
     if(isDefined(level.drill)) {
       var_3.origin = level.drill.origin + (0, 0, 70);
-    }
-    else if(isDefined(level.drill_carrier)) {
+    } else if(isDefined(level.drill_carrier)) {
       var_3.origin = level.drill_carrier.origin + (0, 0, 70);
     }
 
@@ -582,7 +577,7 @@ do_trail_death() {
 
 clear_cortex_lowermessage() {
   foreach(var_1 in level.players) {
-  var_1 maps\mp\_utility::clearlowermessage("plant_cortex");
+    var_1 maps\mp\_utility::clearlowermessage("plant_cortex");
   }
 }
 
@@ -652,8 +647,7 @@ player_should_see_cortex_hint(var_0, var_1, var_2) {
 
   if(maps\mp\alien\_utility::is_true(var_2)) {
     return 1;
-  }
-  else if(maps\mp\alien\_utility::is_true(self.iscarrying)) {
+  } else if(maps\mp\alien\_utility::is_true(self.iscarrying)) {
     return 0;
   }
 

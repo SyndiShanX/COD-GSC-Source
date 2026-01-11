@@ -51,7 +51,7 @@ skipto_lab_battle() {
   level thread challenge_kill_challenge_watch();
 
   foreach(hero in level.heroes) {
-  hero change_movemode("cqb_walk");
+    hero change_movemode("cqb_walk");
   }
 
   level thread emergency_light_init();
@@ -240,7 +240,7 @@ init_lab_interior() {
   a_exit_blood_01 = getEntArray("exit_blood_01", "targetname");
 
   foreach(blood in a_exit_blood_01) {
-  blood hide();
+    blood hide();
   }
 
   wait 0.05;
@@ -257,14 +257,14 @@ init_lab_interior() {
   a_defend_crash_show = getEntArray("defend_crash_show", "targetname");
 
   foreach(crash_piece in a_defend_crash_show) {
-  crash_piece hide();
+    crash_piece hide();
   }
 
   wait 0.05;
   a_defend_pillar_show = getEntArray("defend_pillar_show", "targetname");
 
   foreach(piece in a_defend_pillar_show) {
-  piece hide();
+    piece hide();
   }
 
   wait 0.05;
@@ -301,7 +301,7 @@ lab_entrance() {
   level.ignoreneutralfriendlyfire = 1;
 
   foreach(hero in level.heroes) {
-  hero.grenadeawareness = 0;
+    hero.grenadeawareness = 0;
   }
 
   level.harper thread harper_lab_intro();
@@ -678,7 +678,7 @@ asd_tutorial_intro() {
   flag_wait("end_player_asd_anim");
 
   foreach(hero in level.heroes) {
-  hero.grenadeawareness = 1;
+    hero.grenadeawareness = 1;
   }
 
   level thread asd_lobby_guys();
@@ -883,8 +883,7 @@ asd_battle_dialog() {
 
   if(is_mature()) {
     level.harper queue_dialog("harp_they_sure_as_hell_do_0", 0.5);
-  }
-  else {
+  } else {
     level.harper queue_dialog("harp_they_definitely_don_0", 0.5);
   }
 }
@@ -1010,8 +1009,7 @@ player_nitrogen_death(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
   if(smeansofdeath == "MOD_GAS") {
     if(isDefined(level.player.b_been_frozen) && level.player.b_been_frozen) {
       return 0;
-    }
-    else {
+    } else {
       level.dont_save_now = 1;
       level.player.b_been_frozen = 1;
       level.player.ignoreme = 1;
@@ -1067,13 +1065,13 @@ lab_color_triggers() {
   a_lab_color_triggers = getEntArray("lab_color_triggers", "script_noteworthy");
 
   foreach(trigger in a_lab_color_triggers) {
-  trigger thread notify_targeted_trigger();
+    trigger thread notify_targeted_trigger();
   }
 
   a_lower_lab_color_triggers = getEntArray("lower_lab_color_triggers", "script_noteworthy");
 
   foreach(trigger in a_lower_lab_color_triggers) {
-  trigger thread notify_targeted_trigger();
+    trigger thread notify_targeted_trigger();
   }
 }
 
@@ -1292,8 +1290,7 @@ init_lab_scientists() {
 
   if(self cansee(level.player)) {
     self die();
-  }
-  else {
+  } else {
     self delete();
   }
 }
@@ -1548,7 +1545,7 @@ kill_ai_group(str_ai_group) {
   a_str_ai_group = get_ai_group_ai(str_ai_group);
 
   foreach(guy in a_str_ai_group) {
-  guy die();
+    guy die();
   }
 }
 
@@ -1594,7 +1591,7 @@ monitor_lift_guys() {
   ai_axis = getaiarray("axis");
 
   foreach(ai in ai_axis) {
-  ai die();
+    ai die();
   }
 }
 
@@ -1611,7 +1608,7 @@ elevator_transition() {
   setmusicstate("MONSOON_LAB_UPSTAIRS_CLEAR");
 
   foreach(hero in level.heroes) {
-  hero disable_ai_color(1);
+    hero disable_ai_color(1);
   }
 
   level thread elevator_harper_approach();
@@ -2084,7 +2081,7 @@ fight_to_isaac_main() {
   level thread asd_nitrogen_challenge_watch();
 
   foreach(hero in level.heroes) {
-  hero enable_ai_color();
+    hero enable_ai_color();
   }
 
   level thread reverse_hero_rampage();
@@ -2141,7 +2138,7 @@ fight_to_isaac_main() {
   a_ai_axis = getaiarray("axis");
 
   foreach(ai in a_ai_axis) {
-  ai die();
+    ai die();
   }
 
   nd_harper_pre_ddm = getnode("harper_pre_ddm", "targetname");
@@ -2282,8 +2279,7 @@ harper_titus_asd(ai_harper) {
 
   if(isDefined(level.vh_nitrogen_asd)) {
     ai_harper maps\_titus::magic_bullet_titus(level.vh_nitrogen_asd.origin + vectorscale((0, 0, 1), 40.0));
-  }
-  else {
+  } else {
     ai_harper maps\_titus::magic_bullet_titus(e_titus_target.origin);
   }
 }

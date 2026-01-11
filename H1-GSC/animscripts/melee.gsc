@@ -104,8 +104,7 @@ melee_chooseaction() {
   if(melee_standard_chooseaction()) {
     if(isDefined(self.specialmelee_standard)) {
       self.melee.func = self.specialmelee_standard;
-    }
-    else {
+    } else {
       self.melee.func = ::melee_standard_main;
     }
 
@@ -195,11 +194,9 @@ melee_isvalid() {
 
   if(isDefined(self.meleechargedistsq)) {
     var_2 = self.meleechargedistsq;
-  }
-  else if(isplayer(var_0)) {
+  } else if(isplayer(var_0)) {
     var_2 = 40000;
-  }
-  else {
+  } else {
     var_2 = 25600;
   }
 
@@ -255,8 +252,7 @@ melee_isvalid() {
 
   if(isplayer(var_0)) {
     var_3 = var_0 getstance();
-  }
-  else {
+  } else {
     var_3 = var_0.a.pose;
   }
 
@@ -274,8 +270,7 @@ melee_isvalid() {
 
   if(self.melee.inprogress) {
     var_4 = 110;
-  }
-  else {
+  } else {
     var_4 = 60;
   }
 
@@ -363,18 +358,15 @@ melee_standard_chooseaction() {
 melee_standard_resetgiveuptime() {
   if(isDefined(self.meleechargedistsq)) {
     var_0 = self.meleechargedistsq;
-  }
-  else if(isplayer(self.melee.target)) {
+  } else if(isplayer(self.melee.target)) {
     var_0 = 40000;
-  }
-  else {
+  } else {
     var_0 = 25600;
   }
 
   if(distancesquared(self.origin, self.melee.target.origin) > var_0) {
     self.melee.giveuptime = gettime() + 3000;
-  }
-  else {
+  } else {
     self.melee.giveuptime = gettime() + 1000;
   }
 }
@@ -496,8 +488,7 @@ melee_standard_getinposition() {
 
   if(isplayer(self.melee.target) && self.melee.target == self.enemy) {
     self orientmode("face enemy");
-  }
-  else {
+  } else {
     self orientmode("face point", self.melee.target.origin);
   }
 
@@ -674,11 +665,9 @@ melee_aivsai_exposed_chooseanimationandposition_behind(var_0) {
 melee_aivsai_exposed_chooseanimationandposition_buildexposedlist() {
   if(isDefined(self.meleeforcedexposedflip)) {
     var_0[0] = ::melee_aivsai_exposed_chooseanimationandposition_flip;
-  }
-  else if(isDefined(self.meleeforcedexposedwrestle)) {
+  } else if(isDefined(self.meleeforcedexposedwrestle)) {
     var_0[0] = ::melee_aivsai_exposed_chooseanimationandposition_wrestle;
-  }
-  else {
+  } else {
     var_0[0] = ::melee_aivsai_exposed_chooseanimationandposition_flip;
     var_0[1] = ::melee_aivsai_exposed_chooseanimationandposition_wrestle;
     var_0[2] = ::melee_aivsai_exposed_chooseanimationandposition_kick;
@@ -734,11 +723,9 @@ melee_decide_winner() {
 
   if(isDefined(self.magic_bullet_shield)) {
     self.melee.winner = 1;
-  }
-  else if(isDefined(var_0.magic_bullet_shield)) {
+  } else if(isDefined(var_0.magic_bullet_shield)) {
     self.melee.winner = 0;
-  }
-  else {
+  } else {
     self.melee.winner = common_scripts\utility::cointoss();
   }
 }
@@ -853,8 +840,7 @@ melee_aivsai_chooseaction() {
     return 0;
   else if(melee_aivsai_specialcover_canexecute() && melee_aivsai_specialcover_chooseanimationandposition()) {
     self.melee.precisepositioning = 1;
-  }
-  else {
+  } else {
     if(!melee_aivsai_exposed_chooseanimationandposition()) {
       return 0;
     }
@@ -963,8 +949,7 @@ melee_aivsai_getinposition_updateandvalidatetarget(var_0, var_1) {
 
   if(self.melee.precisepositioning) {
     var_4 = 256;
-  }
-  else {
+  } else {
     var_4 = 1296;
   }
 
@@ -1050,8 +1035,7 @@ melee_aivsai_execute() {
 
   if(isDefined(self.melee.faceyaw)) {
     self orientmode("face angle", self.melee.faceyaw);
-  }
-  else {
+  } else {
     self orientmode("face current");
   }
 
@@ -1136,14 +1120,12 @@ melee_partnerendedmeleemonitorthread() {
   if(isDefined(self.melee.death)) {
     if(isDefined(self.melee.animateddeath) || isDefined(self.melee.interruptdeath)) {
       self kill();
-    }
-    else {
+    } else {
       self.melee.death = undefined;
 
       if(melee_partnerendedmeleemonitorthread_shouldanimsurvive()) {
         self.melee.survive = 1;
-      }
-      else {
+      } else {
         self notify("end_melee");
       }
     }
@@ -1194,8 +1176,7 @@ melee_handlenotetracks_shoulddieafterunsync() {
 melee_handlenotetracks_death(var_0) {
   if(isDefined(var_0) && var_0) {
     self.melee.interruptdeath = 1;
-  }
-  else {
+  } else {
     self.melee.animateddeath = 1;
   }
 }
@@ -1249,9 +1230,7 @@ melee_handlenotetracks(var_0) {
 
       if(maps\_utility::hastag(self.model, "TAG_KNIFE_FX")) {
         playFXOnTag(level._effect["melee_knife_ai"], self, "TAG_KNIFE_FX");
-      }
-      else {
-      }
+      } else {}
 
       if(isDefined(self.melee.partner) && isDefined(self.melee.partner.melee)) {
         self.melee.partner melee_handlenotetracks_death(1);
@@ -1278,8 +1257,7 @@ melee_endscript_checkdeath() {
   if(!isalive(self) && isDefined(self.melee.death)) {
     if(isDefined(self.melee.animateddeath)) {
       self.deathfunction = ::melee_deathhandler_delayed;
-    }
-    else {
+    } else {
       self.deathfunction = ::melee_deathhandler_regular;
     }
   }
@@ -1297,8 +1275,7 @@ melee_endscript_checkpositionandmovement() {
 
   if(isDefined(var_0)) {
     self forceteleport(var_0, self.angles);
-  }
-  else {}
+  } else {}
 }
 
 melee_endscript_checkweapon() {
@@ -1315,8 +1292,7 @@ melee_endscript_checkstatechanges() {
   if(isDefined(self.melee.wasallowingpain)) {
     if(self.melee.wasallowingpain) {
       maps\_utility::enable_pain();
-    }
-    else {
+    } else {
       maps\_utility::disable_pain();
     }
   }

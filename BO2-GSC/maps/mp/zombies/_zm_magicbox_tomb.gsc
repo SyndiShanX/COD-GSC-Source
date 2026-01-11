@@ -85,7 +85,7 @@ wait_then_create_base_magic_box_fx() {
   }
 
   foreach(chest in level.chests) {
-  chest.zbarrier setclientfield("magicbox_initial_fx", 1);
+    chest.zbarrier setclientfield("magicbox_initial_fx", 1);
   }
 }
 
@@ -159,8 +159,7 @@ magic_box_arrives() {
   if(isDefined(s_zone_capture_area)) {
     if(!s_zone_capture_area ent_flag("player_controlled")) {
       self setclientfield("magicbox_amb_fx", 1);
-    }
-    else {
+    } else {
       self setclientfield("magicbox_amb_fx", 2);
     }
   }
@@ -182,8 +181,7 @@ magic_box_leaves() {
   if(isDefined(s_zone_capture_area)) {
     if(s_zone_capture_area ent_flag("player_controlled")) {
       self setclientfield("magicbox_amb_fx", 3);
-    }
-    else {
+    } else {
       self setclientfield("magicbox_amb_fx", 0);
     }
   }

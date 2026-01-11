@@ -81,11 +81,9 @@ setup_sentry_grenade_launcher() {
 
   if(common_scripts\utility::issp() && !is_specialop()) {
     precacheturret("sentry_gun");
-  }
-  else if(is_specialop()) {
+  } else if(is_specialop()) {
     precacheturret("sentry_gun_so");
-  }
-  else {
+  } else {
     precacheturret("sentry_gun_mp");
   }
 
@@ -126,7 +124,7 @@ init_placed_sentries(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 sentry_init(undefined, var_0);
+    var_3 sentry_init(undefined, var_0);
   }
 }
 
@@ -332,11 +330,9 @@ sentry_init(var_0, var_1, var_2) {
   if(common_scripts\utility::issp()) {
     if(isDefined(level.sentry_settings) && isDefined(level.sentry_settings["sentry_minigun"]) && isDefined(level.sentry_settings["sentry_minigun"].bullet_armor)) {
       self.bullet_armor = level.sentry_settings["sentry_minigun"].bullet_armor;
-    }
-    else if(self.weaponinfo == "sentry_gun") {
+    } else if(self.weaponinfo == "sentry_gun") {
       self.bullet_armor = 2000;
-    }
-    else {
+    } else {
       self.bullet_armor = 1200;
     }
   } else if(self.weaponinfo == "sentry_gun")
@@ -504,8 +500,7 @@ sentry_player_use_wait() {
     }
     if(!common_scripts\utility::issp()) {
       var_0 playlocalsound("sentry_pickup");
-    }
-    else {
+    } else {
       var_0 playSound("sentry_pickup");
     }
 
@@ -662,8 +657,7 @@ sentry_overheat_monitor() {
 
     if(self isfiringturret()) {
       self.overheat = self.overheat + 1;
-    }
-    else if(self.overheat > 0) {
+    } else if(self.overheat > 0) {
       self.overheat = self.overheat - 1;
     }
 
@@ -1043,8 +1037,7 @@ spawn_and_place_sentry(var_0, var_1, var_2, var_3) {
 
     if(!common_scripts\utility::issp()) {
       common_scripts\utility::waittill_any("sentry_placement_finished", "sentry_placement_canceled", "death");
-    }
-    else {
+    } else {
       common_scripts\utility::waittill_any("sentry_placement_finished", "sentry_placement_canceled");
     }
   }
@@ -1075,8 +1068,7 @@ sentry_placement_cancel_monitor(var_0) {
 
   if(!common_scripts\utility::issp()) {
     common_scripts\utility::waittill_any("sentry_placement_canceled", "death", "disconnect");
-  }
-  else {
+  } else {
     common_scripts\utility::waittill_any("sentry_placement_canceled");
   }
 
@@ -1199,8 +1191,7 @@ updatesentrypositionthread(var_0) {
 updatesentryposition(var_0) {
   if(isDefined(level.custom_sentry_position_func)) {
     [[level.custom_sentry_position_func]](var_0);
-  }
-  else {
+  } else {
     var_1 = self canplayerplacesentry();
     var_0.origin = var_1["origin"];
     var_0.angles = var_1["angles"];
@@ -1224,8 +1215,7 @@ sentry_placement_hint_show(var_0) {
 
   if(self.forced_hint) {
     self forceusehinton(&"SENTRY_PLACE");
-  }
-  else {
+  } else {
     self forceusehinton(&"SENTRY_CANNOT_PLACE");
   }
 }
@@ -1319,8 +1309,7 @@ sentry_health_monitor() {
     if(isDefined(var_0) && isplayer(var_0)) {
       if(!common_scripts\utility::issp()) {
         var_0[[level.func["damagefeedback"]]]("false");
-      }
-      else if(is_specialop()) {
+      } else if(is_specialop()) {
         var_0[[level.func["damagefeedback"]]](self);
       }
 
@@ -1360,8 +1349,7 @@ sentry_hit_bullet_armor(var_0, var_1) {
 
   if(!issubstr(var_0, "BULLET")) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }

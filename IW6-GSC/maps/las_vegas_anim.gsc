@@ -45,7 +45,7 @@ creepwalk() {
   var_0 = ["keegan", "hesh", "merrick", "elias"];
 
   foreach(var_2 in var_0) {
-  creepwalk_anims(var_2);
+    creepwalk_anims(var_2);
   }
 }
 
@@ -191,11 +191,9 @@ rorke_scripted_fire(var_0) {
 
   if(var_0.scripted_fire_count == 7) {
     thread common_scripts\utility::play_sound_in_space("scn_weap_mp443_finale_rorke", var_1);
-  }
-  else if(var_0.scripted_fire_count == 1) {
+  } else if(var_0.scripted_fire_count == 1) {
     thread common_scripts\utility::play_sound_in_space("scn_weap_mp443_shoot_logan", var_1);
-  }
-  else {
+  } else {
     thread common_scripts\utility::play_sound_in_space("scn_weap_mp443_fire_rorke", var_1);
   }
 
@@ -213,8 +211,7 @@ rorke_scripted_fire(var_0) {
 
   if(var_0.scripted_fire_count == 1) {
     thread rorke_shoots_player();
-  }
-  else if(var_0.scripted_fire_count == 2) {
+  } else if(var_0.scripted_fire_count == 2) {
     level.player.smash_use_count = 25;
     level.elias thread maps\_utility::play_sound_on_tag("vegas_els_death_efforts_2_1", "j_head");
   } else if(var_0.scripted_fire_count == 3)
@@ -231,8 +228,7 @@ rorke_scripted_fire(var_0) {
 
     if(var_0.scripted_fire_count < 4) {
       var_5 = vectortoangles(var_1 - var_9);
-    }
-    else {
+    } else {
       var_5 = level.rorke gettagangles("tag_flash");
     }
 
@@ -303,7 +299,7 @@ rorke_shoots_player() {
   common_scripts\utility::flag_wait("elias_death_done");
 
   foreach(var_3 in level.player.hudstuff) {
-  var_3 destroy();
+    var_3 destroy();
   }
 }
 
@@ -383,8 +379,7 @@ leave_gun(var_0) {
 get_rescue_gun(var_0) {
   if(isDefined(level.rescue_gun)) {
     var_1 = level.rescue_gun.model;
-  }
-  else {
+  } else {
     var_1 = getweaponmodel(var_0.sidearm);
   }
 
@@ -409,8 +404,7 @@ rescue_drop_gun(var_0) {
 
   if(var_0.weapon == var_0.sidearm) {
     var_0 animscripts\shared::placeweaponon(level.rescue_gun.weapon, "none");
-  }
-  else {
+  } else {
     var_0 detach(var_3, "tag_weapon_right");
   }
 }
@@ -523,7 +517,7 @@ kitchen_entry_doors_open(var_0) {
   var_1 = getEntArray("kitchen_entry_doors", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3.og_angles = var_3.angles;
+    var_3.og_angles = var_3.angles;
   }
 
   thread maps\las_vegas_code::doors_open(var_1, 1.4, "double_door_wood_creeky", -110, 0, 0.5);
@@ -776,7 +770,7 @@ entrance_getup_hand_fx(var_0, var_1) {
   var_7 = ["j_sleave_reshape_top_le_1", "j_pinkypalm_le", "j_ringpalm_le", "j_webbing_le", "j_sleave_reshape_bottom_le_1", "j_sleave_reshape_bottom_le_2"];
 
   foreach(var_9 in var_7) {
-  level thread fx_on_hand_thread(var_9, "fx_on_wrist");
+    level thread fx_on_hand_thread(var_9, "fx_on_wrist");
   }
 
   thread fx_forearm_thread("fx_on_wrist", "le");
@@ -951,7 +945,7 @@ hallway_roll_flash(var_0) {
   var_7 = 1.5;
 
   foreach(var_9 in level.heroes) {
-  var_9 maps\_utility::setflashbangimmunity(1);
+    var_9 maps\_utility::setflashbangimmunity(1);
   }
 
   var_11 = magicgrenademanual("flash_grenade", var_1, var_6, var_7);
@@ -968,7 +962,7 @@ hallway_roll_flash(var_0) {
   wait 1;
 
   foreach(var_9 in level.heroes) {
-  var_9 maps\_utility::setflashbangimmunity(0);
+    var_9 maps\_utility::setflashbangimmunity(0);
   }
 }
 
@@ -1217,7 +1211,7 @@ init_wounded_archetype() {
       continue;
     }
     foreach(var_9, var_8 in var_5) {
-    set_trans_dist_angles("wounded", var_9, var_6);
+      set_trans_dist_angles("wounded", var_9, var_6);
     }
   }
 }
@@ -1240,8 +1234,7 @@ set_trans_dist_angles(var_0, var_1, var_2) {
     if(isDefined(anim.archetypes[var_0]["cover_exit"][var_1][var_2])) {
       if(animhasnotetrack(anim.archetypes[var_0]["cover_exit"][var_1][var_2], "code_move")) {
         var_4 = getnotetracktimes(anim.archetypes[var_0]["cover_exit"][var_1][var_2], "code_move")[0];
-      }
-      else {
+      } else {
         var_4 = 1;
       }
 

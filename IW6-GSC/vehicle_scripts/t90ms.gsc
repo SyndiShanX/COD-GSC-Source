@@ -26,8 +26,7 @@ main(var_0, var_1, var_2) {
 
   if(issubstr(var_2, "_turret_flood")) {
     maps\_vehicle::build_turret("dshk_gaz_flood", "TAG_MACHINE_GUN", "vehicle_t90ms_tank_iw6_remote_gun", 1028, "auto_ai", 0.2, 20, -14);
-  }
-  else if(issubstr(var_2, "_turret")) {
+  } else if(issubstr(var_2, "_turret")) {
     maps\_vehicle::build_turret("dshk_gaz", "TAG_MACHINE_GUN", "vehicle_t90ms_tank_iw6_remote_gun", 1028, "auto_ai", 0.2, 20, -14);
   }
 

@@ -26,8 +26,7 @@ civilian_nonCombatMoveTurn(angleDiff) {
 
   if(isDefined(turnAnim) && animscripts\move::pathChange_canDoTurnAnim(turnAnim)) {
     return turnAnim;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -38,35 +37,28 @@ civilian_combatMoveTurn(angleDiff) {
   if(angleDiff < -22.5) {
     if(angleDiff > -45) {
       turnAnim = % civilian_run_upright_turnL45;
-    }
-    else if(angleDiff > -112.5) {
+    } else if(angleDiff > -112.5) {
       turnAnim = % civilian_run_upright_turnL90;
-    }
-    else if(angleDiff > -157.5) {
+    } else if(angleDiff > -157.5) {
       turnAnim = % civilian_run_upright_turnL135;
-    }
-    else {
+    } else {
       turnAnim = % civilian_run_upright_turn180;
     }
   } else if(angleDiff > 22.5) {
     if(angleDiff < 45) {
       turnAnim = % civilian_run_upright_turnR45;
-    }
-    else if(angleDiff < 112.5) {
+    } else if(angleDiff < 112.5) {
       turnAnim = % civilian_run_upright_turnR90;
-    }
-    else if(angleDiff < 157.5) {
+    } else if(angleDiff < 157.5) {
       turnAnim = % civilian_run_upright_turnR135;
-    }
-    else {
+    } else {
       turnAnim = % civilian_run_upright_turn180;
     }
   }
 
   if(isDefined(turnAnim) && animscripts\move::pathChange_canDoTurnAnim(turnAnim)) {
     return turnAnim;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -78,8 +70,7 @@ civilian_combatHunchedMoveTurn(angleDiff) {
   if(angleDiff < -22.5) {
     if(angleDiff > -45) {
       turnAnim = % civilian_run_hunched_turnL45;
-    }
-    else if(angleDiff > -112.5) {
+    } else if(angleDiff > -112.5) {
       turnAnim = % civilian_run_hunched_turnL90;
       largeTurnAnim = randomAnimOfTwo( % civilian_run_hunched_turnL90_slide, % civilian_run_hunched_turnL90_stumble);
     } else if(angleDiff > -157.5)
@@ -90,8 +81,7 @@ civilian_combatHunchedMoveTurn(angleDiff) {
   } else if(angleDiff > 22.5) {
     if(angleDiff < 45) {
       turnAnim = % civilian_run_hunched_turnR45;
-    }
-    else if(angleDiff < 112.5) {
+    } else if(angleDiff < 112.5) {
       turnAnim = % civilian_run_hunched_turnR90;
       largeTurnAnim = randomAnimOfTwo( % civilian_run_hunched_turnR90_slide, % civilian_run_hunched_turnR90_stumble);
     } else if(angleDiff < 157.5)
@@ -107,8 +97,7 @@ civilian_combatHunchedMoveTurn(angleDiff) {
 
   if(isDefined(turnAnim) && animscripts\move::pathChange_canDoTurnAnim(turnAnim)) {
     return turnAnim;
-  }
-  else {
+  } else {
     return undefined;
   }
 }

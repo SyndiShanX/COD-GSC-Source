@@ -157,8 +157,7 @@ setDoubleLoad() {
 
           if(ammoReserves - difference > 0) {
             self setWeaponAmmoStock(weapon, (ammoReserves - difference));
-          }
-          else {
+          } else {
             self setWeaponAmmoStock(weapon, 0);
           }
         }
@@ -175,8 +174,7 @@ unsetDoubleLoad() {
 setMarksman(power) {
   if(!isDefined(power)) {
     power = 10;
-  }
-  else {
+  } else {
     power = Int(power) * 2;
   }
 
@@ -242,8 +240,7 @@ setStunResistance(power) {
 
   if(power == 10) {
     self.stunScaler = 0;
-  }
-  else {
+  } else {
     self.stunScaler = power / 10;
   }
 }
@@ -511,11 +508,9 @@ setCombatSpeedScalar() {
   }
   if(self.weaponSpeed <= .8) {
     self.combatSpeedScalar = 1.4;
-  }
-  else if(self.weaponSpeed <= .9) {
+  } else if(self.weaponSpeed <= .9) {
     self.combatSpeedScalar = 1.3;
-  }
-  else {
+  } else {
     self.combatSpeedScalar = 1.2;
   }
 
@@ -841,8 +836,7 @@ updateTISpawnPosition() {
 isValidTISpawnPosition() {
   if(Canspawn(self.origin) && self IsOnGround()) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -908,8 +902,7 @@ GlowStickSetupAndWaitForDeath(owner) {
   self setModel(level.spawnGlowModel["enemy"]);
   if(level.teamBased) {
     self maps\mp\_entityheadIcons::setTeamHeadIcon(self.team, (0, 0, 20));
-  }
-  else {
+  } else {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(owner, (0, 0, 20));
   }
 
@@ -1536,8 +1529,7 @@ giveGamblerChoice(abilityArray) {
 
   if(!gameFlag("prematch_done")) {
     gameFlagWait("prematch_done");
-  }
-  else if(gameFlag("prematch_done") && self.streakType != "specialist") {
+  } else if(gameFlag("prematch_done") && self.streakType != "specialist") {
     self waittill("giveLoadout");
   }
 
@@ -1877,8 +1869,7 @@ unsetCustomJuiced(death) {
       Assert(isDefined(self.juggMoveSpeedScaler));
       if(isDefined(self.juggMoveSpeedScaler)) {
         self.moveSpeedScaler = self.juggMoveSpeedScaler;
-      }
-      else {
+      } else {
         self.moveSpeedScaler = 0.7;
       }
     } else {
@@ -2016,8 +2007,7 @@ setDeadeye() {
 setDeadeyeInternal() {
   if(self.critChance < 50) {
     self.critChance = (self.deadeyekillCount + 1) * 10;
-  }
-  else {
+  } else {
     self.critChance = 50;
   }
 
@@ -2219,8 +2209,7 @@ unsetJuiced(death) {
       Assert(isDefined(self.juggMoveSpeedScaler));
       if(isDefined(self.juggMoveSpeedScaler)) {
         self.moveSpeedScaler = self.juggMoveSpeedScaler;
-      }
-      else {
+      } else {
         self.moveSpeedScaler = 0.7;
       }
     } else {

@@ -50,12 +50,9 @@ handlestartaim(var_0) {
     }
     if(self.a.pose == "stand") {
       animscripts\animset::set_animarray_standing();
-    }
-    else if(self.a.pose == "crouch") {
+    } else if(self.a.pose == "crouch") {
       animscripts\animset::set_animarray_crouching();
-    }
-    else {
-    }
+    } else {}
 
     animscripts\combat::set_aim_and_turn_limits();
     self.previouspitchdelta = 0.0;
@@ -147,8 +144,7 @@ determinenodeapproachtype(var_0) {
 
     if(var_1 == "Cover Crouch") {
       return "crouch_saw";
-    }
-    else if(var_1 == "Cover Prone") {
+    } else if(var_1 == "Cover Prone") {
       return "prone_saw";
     }
   }
@@ -158,11 +154,9 @@ determinenodeapproachtype(var_0) {
   }
   if(isDefined(var_0.arrivalstance)) {
     var_4 = var_0.arrivalstance;
-  }
-  else if(isDefined(var_0.classname) && var_0.classname == "script_origin") {
+  } else if(isDefined(var_0.classname) && var_0.classname == "script_origin") {
     var_4 = "stand";
-  }
-  else {
+  } else {
     var_4 = var_0 gethighestnodestance();
   }
 
@@ -214,8 +208,7 @@ determineexposedapproachtype(var_0) {
 
   if(isDefined(var_0.arrivalstance)) {
     var_1 = var_0.arrivalstance;
-  }
-  else {
+  } else {
     var_1 = var_0 gethighestnodestance();
   }
 
@@ -225,8 +218,7 @@ determineexposedapproachtype(var_0) {
 
   if(var_1 == "crouch") {
     var_2 = "exposed_crouch";
-  }
-  else {
+  } else {
     var_2 = "exposed";
   }
 
@@ -366,8 +358,7 @@ setupapproachnode(var_0) {
   } else if(usereadystand()) {
     if(animscripts\utility::shouldcqb()) {
       var_2 = "exposed_ready_cqb";
-    }
-    else {
+    } else {
       var_2 = "exposed_ready";
     }
   }
@@ -477,11 +468,9 @@ startcoverapproach(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(self.animarchetype) && isDefined(anim.archetypes[self.animarchetype]) && isDefined(anim.archetypes[self.animarchetype]["CoverTransLongestDist"][var_0])) {
       self.arrivalstartdist = anim.archetypes[self.animarchetype]["CoverTransLongestDist"][var_0];
-    }
-    else if(isDefined(anim.archetypes["soldier"]["CoverTransLongestDist"][var_0])) {
+    } else if(isDefined(anim.archetypes["soldier"]["CoverTransLongestDist"][var_0])) {
       self.arrivalstartdist = anim.archetypes["soldier"]["CoverTransLongestDist"][var_0];
-    }
-    else {
+    } else {
       self.arrivalstartdist = 8;
     }
 
@@ -656,8 +645,7 @@ exposedapproachwaittillclose() {
 
     if(isDefined(var_0) && !isDefined(self.heat)) {
       var_1 = var_0.origin;
-    }
-    else {
+    } else {
       var_1 = self.pathgoalpos;
     }
 
@@ -666,8 +654,7 @@ exposedapproachwaittillclose() {
 
     if(isDefined(self.animarchetype) && isDefined(anim.archetypes[self.animarchetype]) && isDefined(anim.archetypes[self.animarchetype]["longestExposedApproachDist"])) {
       var_3 = anim.archetypes[self.animarchetype]["longestExposedApproachDist"];
-    }
-    else {
+    } else {
       var_3 = anim.archetypes["soldier"]["longestExposedApproachDist"];
     }
 
@@ -712,18 +699,15 @@ faceenemyatendofapproach(var_0) {
 calculatelastminuteanimdistance(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(self.faceenemyarrival)) {
     var_1 = self.angles[1];
-  }
-  else if(faceenemyatendofapproach(var_2)) {
+  } else if(faceenemyatendofapproach(var_2)) {
     var_1 = vectortoyaw(self.enemy.origin - self.pathgoalpos);
-  }
-  else {
+  } else {
     var_5 = isDefined(var_2) && var_3;
     var_5 = var_5 && var_2.type != "Path" && var_2.type != "Path 3D" && (var_2.type != "Ambush" || !animscripts\utility::recentlysawenemy());
 
     if(var_5) {
       var_1 = animscripts\utility::getnodeforwardyaw(var_2);
-    }
-    else {
+    } else {
       var_6 = self getanglestolikelyenemypath();
 
       if(isDefined(var_6)) {
@@ -789,8 +773,7 @@ dolastminuteexposedapproach() {
 
   if(isDefined(self.approachtypefunc)) {
     var_0 = self[[self.approachtypefunc]]();
-  }
-  else if(animscripts\utility::isunstableground()) {
+  } else if(animscripts\utility::isunstableground()) {
     var_0 = "exposed_unstable";
 
     if(self.movemode == "run") {
@@ -799,8 +782,7 @@ dolastminuteexposedapproach() {
   } else if(usereadystand()) {
     if(animscripts\utility::shouldcqb()) {
       var_0 = "exposed_ready_cqb";
-    }
-    else {
+    } else {
       var_0 = "exposed_ready";
     }
   } else if(animscripts\utility::shouldcqb())
@@ -815,8 +797,7 @@ dolastminuteexposedapproach() {
 
   if(isDefined(var_2) && isDefined(self.pathgoalpos) && !isDefined(self.disablecoverarrivalsonly)) {
     var_3 = distancesquared(self.pathgoalpos, var_2.origin) < var_1;
-  }
-  else {
+  } else {
     var_3 = 0;
   }
 

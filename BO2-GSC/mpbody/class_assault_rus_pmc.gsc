@@ -11,8 +11,7 @@ precache() {
 
   if(level.multiteam) {
     game["set_player_model"]["team4"]["default"] = ::set_player_model;
-  }
-  else {
+  } else {
     game["set_player_model"]["axis"]["default"] = ::set_player_model;
   }
 }

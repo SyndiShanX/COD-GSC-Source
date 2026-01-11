@@ -34,11 +34,9 @@ init() {
 play_artillery_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(issubstr(fieldname, 0)) {
     ai_robot = level.a_giant_robots[localclientnum][0];
-  }
-  else if(issubstr(fieldname, 1)) {
+  } else if(issubstr(fieldname, 1)) {
     ai_robot = level.a_giant_robots[localclientnum][1];
-  }
-  else {
+  } else {
     ai_robot = level.a_giant_robots[localclientnum][2];
   }
 

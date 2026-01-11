@@ -14,7 +14,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\zm_common\zm_spawner;
-
 #namespace zm_behavior_utility;
 
 setupattackproperties() {

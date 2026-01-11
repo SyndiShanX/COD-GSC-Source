@@ -35,7 +35,6 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_characters;
 #include scripts\zm_common\zm_stats;
-
 #namespace globallogic_player;
 
 freezeplayerforroundend() {
@@ -70,24 +69,24 @@ callback_playerconnect() {
     self thread globallogic::listenforgameend();
   }
 
-  if(!level.splitscreen && !isDefined(self.pers[#"score"])) {
+  if(!level.splitscreen && !isDefined(self.pers[# "score"])) {
     iprintln(#"mp/connected", self);
   }
 
-  if(!isDefined(self.pers[#"score"])) {
+  if(!isDefined(self.pers[# "score"])) {
     self thread zm_stats::adjustrecentstats();
   }
 
-  if(gamemodeismode(0) && !isDefined(self.pers[#"matchesplayedstatstracked"])) {
+  if(gamemodeismode(0) && !isDefined(self.pers[# "matchesplayedstatstracked"])) {
     gamemode = util::getcurrentgamemode();
     self globallogic::incrementmatchcompletionstat(gamemode, "played", "started");
 
-    if(!isDefined(self.pers[#"matcheshostedstatstracked"]) && self islocaltohost()) {
+    if(!isDefined(self.pers[# "matcheshostedstatstracked"]) && self islocaltohost()) {
       self globallogic::incrementmatchcompletionstat(gamemode, "hosted", "started");
-      self.pers[#"matcheshostedstatstracked"] = 1;
+      self.pers[# "matcheshostedstatstracked"] = 1;
     }
 
-    self.pers[#"matchesplayedstatstracked"] = 1;
+    self.pers[# "matchesplayedstatstracked"] = 1;
     self thread zm_stats::uploadstatssoon();
   }
 
@@ -97,7 +96,7 @@ callback_playerconnect() {
   bb::function_afcc007d(self.name, lpselfnum, lpxuid);
 
   if(level.forceradar == 1) {
-    self.pers[#"hasradar"] = 1;
+    self.pers[# "hasradar"] = 1;
     self.hasspyplane = 1;
     level.activeuavs[self getentitynumber()] = 1;
   }
@@ -113,28 +112,28 @@ callback_playerconnect() {
   self[[level.player_stats_init]]();
   self.killedplayerscurrent = [];
 
-  if(!isDefined(self.pers[#"best_kill_streak"])) {
-    self.pers[#"killed_players"] = [];
-    self.pers[#"killed_by"] = [];
-    self.pers[#"nemesis_tracking"] = [];
-    self.pers[#"artillery_kills"] = 0;
-    self.pers[#"dog_kills"] = 0;
-    self.pers[#"nemesis_name"] = "";
-    self.pers[#"nemesis_rank"] = 0;
-    self.pers[#"nemesis_rankicon"] = 0;
-    self.pers[#"nemesis_xp"] = 0;
-    self.pers[#"nemesis_xuid"] = "";
-    self.pers[#"best_kill_streak"] = 0;
+  if(!isDefined(self.pers[# "best_kill_streak"])) {
+    self.pers[# "killed_players"] = [];
+    self.pers[# "killed_by"] = [];
+    self.pers[# "nemesis_tracking"] = [];
+    self.pers[# "artillery_kills"] = 0;
+    self.pers[# "dog_kills"] = 0;
+    self.pers[# "nemesis_name"] = "";
+    self.pers[# "nemesis_rank"] = 0;
+    self.pers[# "nemesis_rankicon"] = 0;
+    self.pers[# "nemesis_xp"] = 0;
+    self.pers[# "nemesis_xuid"] = "";
+    self.pers[# "best_kill_streak"] = 0;
   }
 
-  if(!isDefined(self.pers[#"music"])) {
-    self.pers[#"music"] = spawnStruct();
-    self.pers[#"music"].spawn = 0;
-    self.pers[#"music"].inque = 0;
-    self.pers[#"music"].currentstate = "SILENT";
-    self.pers[#"music"].previousstate = "SILENT";
-    self.pers[#"music"].nextstate = "UNDERSCORE";
-    self.pers[#"music"].returnstate = "UNDERSCORE";
+  if(!isDefined(self.pers[# "music"])) {
+    self.pers[# "music"] = spawnStruct();
+    self.pers[# "music"].spawn = 0;
+    self.pers[# "music"].inque = 0;
+    self.pers[# "music"].currentstate = "SILENT";
+    self.pers[# "music"].previousstate = "SILENT";
+    self.pers[# "music"].nextstate = "UNDERSCORE";
+    self.pers[# "music"].returnstate = "UNDERSCORE";
   }
 
   self.leaderdialogqueue = [];
@@ -144,29 +143,29 @@ callback_playerconnect() {
   self.currentleaderdialog = "";
   self.currentleaderdialogtime = 0;
 
-  if(!isDefined(self.pers[#"cur_kill_streak"])) {
-    self.pers[#"cur_kill_streak"] = 0;
+  if(!isDefined(self.pers[# "cur_kill_streak"])) {
+    self.pers[# "cur_kill_streak"] = 0;
   }
 
-  if(!isDefined(self.pers[#"cur_total_kill_streak"])) {
-    self.pers[#"cur_total_kill_streak"] = 0;
+  if(!isDefined(self.pers[# "cur_total_kill_streak"])) {
+    self.pers[# "cur_total_kill_streak"] = 0;
     self setplayercurrentstreak(0);
   }
 
-  if(!isDefined(self.pers[#"totalkillstreakcount"])) {
-    self.pers[#"totalkillstreakcount"] = 0;
+  if(!isDefined(self.pers[# "totalkillstreakcount"])) {
+    self.pers[# "totalkillstreakcount"] = 0;
   }
 
-  if(!isDefined(self.pers[#"killstreaksearnedthiskillstreak"])) {
-    self.pers[#"killstreaksearnedthiskillstreak"] = 0;
+  if(!isDefined(self.pers[# "killstreaksearnedthiskillstreak"])) {
+    self.pers[# "killstreaksearnedthiskillstreak"] = 0;
   }
 
-  if(isDefined(level.usingscorestreaks) && level.usingscorestreaks && !isDefined(self.pers[#"killstreak_quantity"])) {
-    self.pers[#"killstreak_quantity"] = [];
+  if(isDefined(level.usingscorestreaks) && level.usingscorestreaks && !isDefined(self.pers[# "killstreak_quantity"])) {
+    self.pers[# "killstreak_quantity"] = [];
   }
 
-  if(isDefined(level.usingscorestreaks) && level.usingscorestreaks && !isDefined(self.pers[#"held_killstreak_ammo_count"])) {
-    self.pers[#"held_killstreak_ammo_count"] = [];
+  if(isDefined(level.usingscorestreaks) && level.usingscorestreaks && !isDefined(self.pers[# "held_killstreak_ammo_count"])) {
+    self.pers[# "held_killstreak_ammo_count"] = [];
   }
 
   self.lastkilltime = 0;
@@ -181,12 +180,12 @@ callback_playerconnect() {
   self.teamkillsthisround = 0;
   player::init_heal(1, 1);
 
-  if(!isDefined(level.livesdonotreset) || !level.livesdonotreset || !isDefined(self.pers[#"lives"])) {
-    self.pers[#"lives"] = level.numlives;
+  if(!isDefined(level.livesdonotreset) || !level.livesdonotreset || !isDefined(self.pers[# "lives"])) {
+    self.pers[# "lives"] = level.numlives;
   }
 
   if(!level.teambased) {
-    self.pers[#"team"] = undefined;
+    self.pers[# "team"] = undefined;
   }
 
   self.hasspawned = 0;
@@ -200,8 +199,8 @@ callback_playerconnect() {
   }
 
   if(game.state == "postgame") {
-    self.pers[#"needteam"] = 1;
-    self.pers[#"team"] = "spectator";
+    self.pers[# "needteam"] = 1;
+    self.pers[# "team"] = "spectator";
     self.team = "spectator";
     self.sessionteam = "spectator";
     self setclientuivisibilityflag("hud_visible", 0);
@@ -222,21 +221,21 @@ callback_playerconnect() {
   }
 
   if(level.oldschool) {
-    self.pers[#"class"] = undefined;
-    self.curclass = self.pers[#"class"];
+    self.pers[# "class"] = undefined;
+    self.curclass = self.pers[# "class"];
   }
 
-  if(isDefined(self.pers[#"team"])) {
-    self.team = self.pers[#"team"];
+  if(isDefined(self.pers[# "team"])) {
+    self.team = self.pers[# "team"];
   }
 
-  if(isDefined(self.pers[#"class"])) {
-    self.curclass = self.pers[#"class"];
+  if(isDefined(self.pers[# "class"])) {
+    self.curclass = self.pers[# "class"];
   }
 
-  if(!isDefined(self.pers[#"team"]) || isDefined(self.pers[#"needteam"])) {
-    self.pers[#"needteam"] = undefined;
-    self.pers[#"team"] = "spectator";
+  if(!isDefined(self.pers[# "team"]) || isDefined(self.pers[# "needteam"])) {
+    self.pers[# "needteam"] = undefined;
+    self.pers[# "team"] = "spectator";
     self.team = "spectator";
     self.sessionstate = "dead";
     [[level.spawnspectator]]();
@@ -252,13 +251,13 @@ callback_playerconnect() {
       ](0);
     }
 
-    if(self.pers[#"team"] == "spectator") {
+    if(self.pers[# "team"] == "spectator") {
       self.sessionteam = "spectator";
       self thread spectate_player_watcher();
     }
 
     if(level.teambased) {
-      self.sessionteam = self.pers[#"team"];
+      self.sessionteam = self.pers[# "team"];
 
       if(!isalive(self)) {
         self.statusicon = "hud_status_dead";
@@ -266,17 +265,17 @@ callback_playerconnect() {
 
       self thread spectating::setspectatepermissions();
     }
-  } else if(self.pers[#"team"] == "spectator") {
+  } else if(self.pers[# "team"] == "spectator") {
     [[level.spawnspectator]]();
     self.sessionteam = "spectator";
     self.sessionstate = "spectator";
     self thread spectate_player_watcher();
   } else {
-    self.sessionteam = self.pers[#"team"];
+    self.sessionteam = self.pers[# "team"];
     self.sessionstate = "dead";
     [[level.spawnspectator]]();
 
-    if(globallogic_utils::isvalidclass(self.pers[#"class"])) {
+    if(globallogic_utils::isvalidclass(self.pers[# "class"])) {
       self thread[[level.spawnclient]]();
     }
 
@@ -307,7 +306,7 @@ spectate_player_watcher() {
   self.watchingactiveclient = 1;
 
   while(true) {
-    if(self.pers[#"team"] != "spectator" || level.gameended) {
+    if(self.pers[# "team"] != "spectator" || level.gameended) {
       self val::reset(#"spectate", "freezecontrols");
       self.watchingactiveclient = 0;
       break;
@@ -319,7 +318,7 @@ spectate_player_watcher() {
       }
     }
 
-      count = 0;
+    count = 0;
 
     for(i = 0; i < level.players.size; i++) {
       if(level.players[i].team != "spectator") {
@@ -337,9 +336,7 @@ spectate_player_watcher() {
       self.watchingactiveclient = 1;
     } else {
       if(self.watchingactiveclient) {
-        [
-          [level.onspawnspectator]
-        ]();
+        [[level.onspawnspectator]]();
         self val::set(#"spectate", "freezecontrols", 1);
       }
 
@@ -387,9 +384,9 @@ function_7314957c(player, result) {
   lpselfnum = player getentitynumber();
   lpxuid = player getxuid(1);
   bb::function_e0dfa262(player.name, lpselfnum, lpxuid);
-  primaryweaponname = #"";
+  primaryweaponname = # "";
   primaryweaponattachstr = "";
-  secondaryweaponname = #"";
+  secondaryweaponname = # "";
   secondaryweaponattachstr = "";
 
   if(isDefined(player.primaryloadoutweapon)) {
@@ -405,9 +402,9 @@ function_7314957c(player, result) {
   resultstr = result;
 
   if(isDefined(player.team) && result == player.team) {
-    resultstr = #"win";
-  } else if(result == #"allies" || result == #"axis") {
-    resultstr = #"lose";
+    resultstr = # "win";
+  } else if(result == # "allies" || result == # "axis") {
+    resultstr = # "lose";
   }
 
   timeplayed = game.timepassed / 1000;
@@ -447,7 +444,7 @@ function_7314957c(player, result) {
   end_match_zm.revives = player player::function_2abc116("revives");
   end_match_zm.doors = player player::function_2abc116("doors_purchased");
   end_match_zm.downs = player player::function_2abc116("downs");
-  function_92d1707f(#"hash_4c5946fa1191bc64", #"hash_71960e91f80c3365", var_906bdcf3, #"hash_4682ee0eb5071d2", var_811ed119, #"hash_209c80d657442a83", var_a14ea2be, #"end_match_zm", end_match_zm);
+  function_92d1707f(#"hash_4c5946fa1191bc64", # "hash_71960e91f80c3365", var_906bdcf3, # "hash_4682ee0eb5071d2", var_811ed119, # "hash_209c80d657442a83", var_a14ea2be, # "end_match_zm", end_match_zm);
 }
 
 callback_playerdisconnect() {
@@ -470,15 +467,15 @@ callback_playerdisconnect() {
     setdvar(#"splitscreen_playernum", isarray(players) ? players.size : 0);
   }
 
-  if(isDefined(self.score) && isDefined(self.pers) && isDefined(self.pers[#"team"])) {
-    print("<dev string:xac>" + self.pers[#"team"] + "<dev string:xbb>" + self.score);
+  if(isDefined(self.score) && isDefined(self.pers) && isDefined(self.pers[# "team"])) {
+    print("<dev string:xac>" + self.pers[# "team"] + "<dev string:xbb>" + self.score);
 
-      level.dropteam += 1;
+    level.dropteam += 1;
   }
 
   [[level.onplayerdisconnect]]();
   lpselfnum = self getentitynumber();
-  function_7314957c(self, #"disconnected");
+  function_7314957c(self, # "disconnected");
 
   for(entry = 0; entry < level.players.size; entry++) {
     if(level.players[entry] == self) {
@@ -493,23 +490,23 @@ callback_playerdisconnect() {
   }
 
   for(entry = 0; entry < level.players.size; entry++) {
-    if(isDefined(level.players[entry].pers[#"killed_players"][self.name])) {
-      level.players[entry].pers[#"killed_players"][self.name] = undefined;
+    if(isDefined(level.players[entry].pers[# "killed_players"][self.name])) {
+      level.players[entry].pers[# "killed_players"][self.name] = undefined;
     }
 
     if(isDefined(level.players[entry].killedplayerscurrent[self.name])) {
       level.players[entry].killedplayerscurrent[self.name] = undefined;
     }
 
-    if(isDefined(level.players[entry].pers[#"killed_by"][self.name])) {
-      level.players[entry].pers[#"killed_by"][self.name] = undefined;
+    if(isDefined(level.players[entry].pers[# "killed_by"][self.name])) {
+      level.players[entry].pers[# "killed_by"][self.name] = undefined;
     }
 
-    if(isDefined(level.players[entry].pers[#"nemesis_tracking"][self.name])) {
-      level.players[entry].pers[#"nemesis_tracking"][self.name] = undefined;
+    if(isDefined(level.players[entry].pers[# "nemesis_tracking"][self.name])) {
+      level.players[entry].pers[# "nemesis_tracking"][self.name] = undefined;
     }
 
-    if(level.players[entry].pers[#"nemesis_name"] == self.name) {
+    if(level.players[entry].pers[# "nemesis_name"] == self.name) {
       level.players[entry] choosenextbestnemesis();
     }
   }
@@ -535,7 +532,7 @@ callback_playermelee(eattacker, idamage, weapon, vorigin, vdir, boneindex, shiel
 }
 
 choosenextbestnemesis() {
-  nemesisarray = self.pers[#"nemesis_tracking"];
+  nemesisarray = self.pers[# "nemesis_tracking"];
   nemesisarraykeys = getarraykeys(nemesisarray);
   nemesisamount = 0;
   nemesisname = "";
@@ -551,16 +548,16 @@ choosenextbestnemesis() {
     }
   }
 
-  self.pers[#"nemesis_name"] = nemesisname;
+  self.pers[# "nemesis_name"] = nemesisname;
 
   if(nemesisname != "") {
     for(playerindex = 0; playerindex < level.players.size; playerindex++) {
       if(level.players[playerindex].name == nemesisname) {
         nemesisplayer = level.players[playerindex];
-        self.pers[#"nemesis_rank"] = nemesisplayer.pers[#"rank"];
-        self.pers[#"nemesis_rankicon"] = nemesisplayer.pers[#"rankxp"];
-        self.pers[#"nemesis_xp"] = nemesisplayer.pers[#"prestige"];
-        self.pers[#"nemesis_xuid"] = nemesisplayer getxuid();
+        self.pers[# "nemesis_rank"] = nemesisplayer.pers[# "rank"];
+        self.pers[# "nemesis_rankicon"] = nemesisplayer.pers[# "rankxp"];
+        self.pers[# "nemesis_xp"] = nemesisplayer.pers[# "prestige"];
+        self.pers[# "nemesis_xuid"] = nemesisplayer getxuid();
         break;
       }
     }
@@ -568,7 +565,7 @@ choosenextbestnemesis() {
     return;
   }
 
-  self.pers[#"nemesis_xuid"] = "";
+  self.pers[# "nemesis_xuid"] = "";
 }
 
 notifyconnecting() {

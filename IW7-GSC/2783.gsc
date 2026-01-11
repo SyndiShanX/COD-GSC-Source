@@ -110,11 +110,9 @@ func_D445(var_00) {
 
   if(scripts\mp\weapons::isplantedequipment(var_00)) {
     var_00 scripts\mp\weapons::deleteexplosive();
-  }
-  else if(var_00 scripts\mp\domeshield::isdomeshield()) {
+  } else if(var_00 scripts\mp\domeshield::isdomeshield()) {
     var_00 thread scripts\mp\domeshield::domeshield_delete();
-  }
-  else {
+  } else {
     var_00 delete();
   }
 

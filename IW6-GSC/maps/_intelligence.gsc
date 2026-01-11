@@ -174,8 +174,7 @@ hold_count_check() {
   while(isDefined(self) && isDefined(level.player)) {
     if(level.player usebuttonpressed() && distance(level.player.origin, self.origin) < 128 && isalive(level.player)) {
       level.player.hold_count++;
-    }
-    else {
+    } else {
       setdvar("ui_securing", "");
       self stoploopsound("intelligence_pickup_loop");
       self notify("stopped_pressing");
@@ -215,8 +214,7 @@ intel_upload_text(var_0, var_1) {
 
     if(var_4 < var_3 / 2) {
       var_0 settext(&"SCRIPT_INTELLIGENCE_UPLOADING");
-    }
-    else {
+    } else {
       var_0 settext("");
     }
 
@@ -270,8 +268,7 @@ intel_feedback(var_0) {
 
     if(var_0 == var_5 && var_5 getplayerintelisfound(self.num)) {
       var_6.label = &"SCRIPT_RORKEFILE_PREV_FOUND";
-    }
-    else {
+    } else {
       var_6.label = &"SCRIPT_INTELLIGENCE_OF_EIGHTEEN";
       var_5 give_point();
       var_7 = var_5 getlocalplayerprofiledata("cheatPoints");

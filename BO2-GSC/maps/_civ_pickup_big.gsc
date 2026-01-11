@@ -8,8 +8,7 @@
 main() {
   if(issubstr(self.vehicletype, "wturret")) {
     build_aianims(::set_50cal_gunner_anims, ::set_50cal_vehicle_anims);
-  }
-  else {
+  } else {
     build_aianims(::setanims, ::set_vehicle_anims);
   }
 

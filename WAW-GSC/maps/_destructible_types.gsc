@@ -1136,8 +1136,7 @@ vehicle_80s_sedan1_lowres(destructibleType, color) {
   sColorSuffix = undefined;
   if(color == "green") {
     sColorSuffix = "dest";
-  }
-  else {
+  } else {
     sColorSuffix = "_destroyed";
   }
   destructible_state(undefined, "vehicle_80s_sedan1_" + color + sColorSuffix);

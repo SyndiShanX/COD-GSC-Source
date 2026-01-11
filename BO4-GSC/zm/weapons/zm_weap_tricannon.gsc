@@ -12,7 +12,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_weap_tricannon;
 
 autoexec __init__system__() {
@@ -40,8 +39,8 @@ __init__() {
   clientfield::register("actor", "water_tricannon_slow_fx", 1, 1, "int");
   clientfield::register("allplayers", "fire_tricannon_muzzle_fx", 1, 1, "counter");
   clientfield::register("allplayers", "water_tricannon_muzzle_fx", 1, 1, "counter");
-  level._effect[#"earth_impact"] = #"hash_4587acdb7cd704b6";
-  level._effect[#"fire_impact"] = #"hash_65320106e9ad659c";
+  level._effect[# "earth_impact"] = # "hash_4587acdb7cd704b6";
+  level._effect[# "fire_impact"] = # "hash_65320106e9ad659c";
   level.custom_magic_box_selection_logic = &function_a543db40;
   level.var_ee565b3f = &function_689d923b;
   level.var_bb2323e4 = &function_73a498c8;
@@ -88,7 +87,7 @@ function_68e4ed32(weapon) {
   a_targets = getentitiesinradius(self.origin, 192, 15);
 
   foreach(ai in a_targets) {
-    if(!isalive(ai) || ai.archetype !== #"zombie" && ai.archetype !== #"catalyst" || ai getteam() !== level.zombie_team || ai function_dd070839()) {
+    if(!isalive(ai) || ai.archetype !== # "zombie" && ai.archetype !== # "catalyst" || ai getteam() !== level.zombie_team || ai function_dd070839()) {
       continue;
     }
 
@@ -120,7 +119,7 @@ function_321f468b() {
   v_start = self getweaponmuzzlepoint();
 
   foreach(ai in a_targets) {
-    if(!isalive(ai) || ai.archetype !== #"zombie" && ai.archetype !== #"catalyst" || ai getteam() !== level.zombie_team || ai function_dd070839()) {
+    if(!isalive(ai) || ai.archetype !== # "zombie" && ai.archetype !== # "catalyst" || ai getteam() !== level.zombie_team || ai function_dd070839()) {
       continue;
     }
 
@@ -158,7 +157,7 @@ function_54d03fdd(weapon, b_packed) {
 
   self.var_b01de37[weapon] = 4;
 
-    v_start = self getweaponmuzzlepoint();
+  v_start = self getweaponmuzzlepoint();
   var_ee5864e0 = self getweaponforwarddir();
   var_ae51959e = getentitiesinradius(self.origin, 350);
   var_ae51959e = arraysortclosest(var_ae51959e, self.origin, undefined);
@@ -235,7 +234,7 @@ function_54d03fdd(weapon, b_packed) {
     }
 
     if(n_dist_sq < 122500) {
-      if(ai.zm_ai_category === #"heavy" || ai.zm_ai_category === #"miniboss") {
+      if(ai.zm_ai_category === # "heavy" || ai.zm_ai_category === # "miniboss") {
         ai ai::stun();
         continue;
       }
@@ -254,14 +253,14 @@ function_8ef8873e(weapon) {
 
   self.var_b01de37[weapon] = 2;
 
-    self function_68e4ed32(weapon);
+  self function_68e4ed32(weapon);
 }
 
 function_71233d37(params) {
-  playFX(level._effect[#"earth_impact"], params.vpoint);
+  playFX(level._effect[# "earth_impact"], params.vpoint);
 
   if(params.idamage >= self.health) {
-    if(self.archetype == #"zombie") {
+    if(self.archetype == # "zombie") {
       self clientfield::set("zombie_gut_explosion", 1);
       waitframe(5);
 
@@ -273,7 +272,7 @@ function_71233d37(params) {
     return;
   }
 
-  if(self.zm_ai_category === #"heavy" || self.zm_ai_category === #"miniboss") {
+  if(self.zm_ai_category === # "heavy" || self.zm_ai_category === # "miniboss") {
     self ai::stun();
     return;
   }
@@ -292,7 +291,7 @@ function_14d49bd7(weapon) {
 
   self.var_b01de37[weapon] = 1;
 
-    self clientfield::increment("water_tricannon_muzzle_fx", 1);
+  self clientfield::increment("water_tricannon_muzzle_fx", 1);
   self function_68e4ed32(weapon);
   v_start = self getweaponmuzzlepoint();
   v_forward = self getweaponforwarddir();
@@ -301,10 +300,10 @@ function_14d49bd7(weapon) {
   v_impact = results.position;
 
   if(weapon == getweapon(#"ww_tricannon_water_t8" + "_upgraded")) {
-    var_bdbde2d2 = #"hash_64aafe3cc04860be";
+    var_bdbde2d2 = # "hash_64aafe3cc04860be";
     n_duration = 5;
   } else {
-    var_bdbde2d2 = #"hash_7dd6cbed104dd8bd";
+    var_bdbde2d2 = # "hash_7dd6cbed104dd8bd";
     n_duration = 4;
   }
 
@@ -331,8 +330,8 @@ function_cee7424b(v_impact, var_bdbde2d2, n_duration) {
     var_ae51959e = arraysortclosest(var_ae51959e, v_impact, undefined, undefined, 112);
 
     foreach(ai in var_ae51959e) {
-      if(ai.zm_ai_category === #"heavy" || ai.zm_ai_category === #"miniboss") {
-        if(var_bdbde2d2 == #"hash_64aafe3cc04860be") {
+      if(ai.zm_ai_category === # "heavy" || ai.zm_ai_category === # "miniboss") {
+        if(var_bdbde2d2 == # "hash_64aafe3cc04860be") {
           ai thread namespace_9ff9f642::slowdown(#"hash_111531769a0bf9e");
         } else {
           ai thread namespace_9ff9f642::slowdown(#"hash_7eece5e5a5f9cc4d");
@@ -358,7 +357,7 @@ function_16149496() {
   do {
     waitframe(1);
   }
-  while(isDefined(self.a_n_slowdown_timeouts[#"hash_7dd6cbed104dd8bd"]) || isDefined(self.a_n_slowdown_timeouts[#"hash_64aafe3cc04860be"]) || isDefined(self.a_n_slowdown_timeouts[#"hash_7eece5e5a5f9cc4d"]) || isDefined(self.a_n_slowdown_timeouts[#"hash_f87f19d867f4e2e"]));
+  while(isDefined(self.a_n_slowdown_timeouts[# "hash_7dd6cbed104dd8bd"]) || isDefined(self.a_n_slowdown_timeouts[# "hash_64aafe3cc04860be"]) || isDefined(self.a_n_slowdown_timeouts[# "hash_7eece5e5a5f9cc4d"]) || isDefined(self.a_n_slowdown_timeouts[# "hash_f87f19d867f4e2e"]));
 
   self clientfield::set("water_tricannon_slow_fx", 0);
 }
@@ -372,7 +371,7 @@ function_5a24e804(weapon) {
 
   self.var_b01de37[weapon] = 3;
 
-    self function_68e4ed32(weapon);
+  self function_68e4ed32(weapon);
   self clientfield::increment("fire_tricannon_muzzle_fx", 1);
 }
 
@@ -398,11 +397,11 @@ function_3e2e539(params) {
       return false;
     }
 
-    if(self.zm_ai_category === #"heavy" || self.zm_ai_category === #"miniboss") {
+    if(self.zm_ai_category === # "heavy" || self.zm_ai_category === # "miniboss") {
       self ai::stun();
 
       if(isDefined(params.vpoint) && isDefined(params.vdir)) {
-        playFX(level._effect[#"fire_impact"], params.vpoint, params.vdir);
+        playFX(level._effect[# "fire_impact"], params.vpoint, params.vdir);
       }
 
       params.einflictor notify(#"death");
@@ -469,41 +468,41 @@ function_73a498c8(oldweapondata, newweapondata) {
   w_tricannon_water_upg = getweapon(#"ww_tricannon_water_t8" + "_upgraded");
   a_w_tricannon = array(w_tricannon, w_tricannon_upg, w_tricannon_earth, w_tricannon_earth_upg, w_tricannon_air, w_tricannon_air_upg, w_tricannon_fire, w_tricannon_fire_upg, w_tricannon_water, w_tricannon_water_upg);
 
-  if(isinarray(a_w_tricannon, oldweapondata[#"weapon"]) && isinarray(a_w_tricannon, newweapondata[#"weapon"])) {
+  if(isinarray(a_w_tricannon, oldweapondata[# "weapon"]) && isinarray(a_w_tricannon, newweapondata[# "weapon"])) {
     weapondata = [];
 
-    if(oldweapondata[#"weapon"] === w_tricannon_water_upg || newweapondata[#"weapon"] === w_tricannon_water_upg) {
-      weapondata[#"weapon"] = w_tricannon_earth_upg;
-    } else if(oldweapondata[#"weapon"] === w_tricannon_air_upg || newweapondata[#"weapon"] === w_tricannon_air_upg) {
-      weapondata[#"weapon"] = w_tricannon_earth_upg;
-    } else if(oldweapondata[#"weapon"] === w_tricannon_fire_upg || newweapondata[#"weapon"] === w_tricannon_fire_upg) {
-      weapondata[#"weapon"] = w_tricannon_fire_upg;
-    } else if(oldweapondata[#"weapon"] === w_tricannon_earth_upg || newweapondata[#"weapon"] === w_tricannon_earth_upg) {
-      weapondata[#"weapon"] = w_tricannon_earth_upg;
-    } else if(oldweapondata[#"weapon"] === w_tricannon_upg || newweapondata[#"weapon"] === w_tricannon_upg) {
-      weapondata[#"weapon"] = w_tricannon_upg;
-    } else if(oldweapondata[#"weapon"] === w_tricannon_water || newweapondata[#"weapon"] === w_tricannon_water) {
-      weapondata[#"weapon"] = w_tricannon_fire;
-    } else if(oldweapondata[#"weapon"] === w_tricannon_air || newweapondata[#"weapon"] === w_tricannon_air) {
-      weapondata[#"weapon"] = w_tricannon_earth;
-    } else if(oldweapondata[#"weapon"] === w_tricannon_fire || newweapondata[#"weapon"] === w_tricannon_fire) {
-      weapondata[#"weapon"] = w_tricannon_fire;
-    } else if(oldweapondata[#"weapon"] === w_tricannon_earth || newweapondata[#"weapon"] === w_tricannon_earth) {
-      weapondata[#"weapon"] = w_tricannon_earth;
+    if(oldweapondata[# "weapon"] === w_tricannon_water_upg || newweapondata[# "weapon"] === w_tricannon_water_upg) {
+      weapondata[# "weapon"] = w_tricannon_earth_upg;
+    } else if(oldweapondata[# "weapon"] === w_tricannon_air_upg || newweapondata[# "weapon"] === w_tricannon_air_upg) {
+      weapondata[# "weapon"] = w_tricannon_earth_upg;
+    } else if(oldweapondata[# "weapon"] === w_tricannon_fire_upg || newweapondata[# "weapon"] === w_tricannon_fire_upg) {
+      weapondata[# "weapon"] = w_tricannon_fire_upg;
+    } else if(oldweapondata[# "weapon"] === w_tricannon_earth_upg || newweapondata[# "weapon"] === w_tricannon_earth_upg) {
+      weapondata[# "weapon"] = w_tricannon_earth_upg;
+    } else if(oldweapondata[# "weapon"] === w_tricannon_upg || newweapondata[# "weapon"] === w_tricannon_upg) {
+      weapondata[# "weapon"] = w_tricannon_upg;
+    } else if(oldweapondata[# "weapon"] === w_tricannon_water || newweapondata[# "weapon"] === w_tricannon_water) {
+      weapondata[# "weapon"] = w_tricannon_fire;
+    } else if(oldweapondata[# "weapon"] === w_tricannon_air || newweapondata[# "weapon"] === w_tricannon_air) {
+      weapondata[# "weapon"] = w_tricannon_earth;
+    } else if(oldweapondata[# "weapon"] === w_tricannon_fire || newweapondata[# "weapon"] === w_tricannon_fire) {
+      weapondata[# "weapon"] = w_tricannon_fire;
+    } else if(oldweapondata[# "weapon"] === w_tricannon_earth || newweapondata[# "weapon"] === w_tricannon_earth) {
+      weapondata[# "weapon"] = w_tricannon_earth;
     } else {
-      weapondata[#"weapon"] = w_tricannon;
+      weapondata[# "weapon"] = w_tricannon;
     }
 
-    weapon = weapondata[#"weapon"];
-    weapondata[#"clip"] = newweapondata[#"clip"] + oldweapondata[#"clip"];
-    weapondata[#"stock"] = newweapondata[#"stock"] + oldweapondata[#"stock"];
-    weapondata[#"fuel"] = newweapondata[#"fuel"] + oldweapondata[#"fuel"];
-    weapondata[#"clip"] = int(min(weapondata[#"clip"], weapon.clipsize));
-    weapondata[#"stock"] = int(min(weapondata[#"stock"], weapon.maxammo));
-    weapondata[#"fuel"] = int(min(weapondata[#"fuel"], weapon.fuellife));
-    weapondata[#"heat"] = int(min(newweapondata[#"heat"], oldweapondata[#"heat"]));
-    weapondata[#"overheat"] = int(min(newweapondata[#"overheat"], oldweapondata[#"overheat"]));
-    weapondata[#"power"] = int(max(isDefined(newweapondata[#"power"]) ? newweapondata[#"power"] : 0, isDefined(oldweapondata[#"power"]) ? oldweapondata[#"power"] : 0));
+    weapon = weapondata[# "weapon"];
+    weapondata[# "clip"] = newweapondata[# "clip"] + oldweapondata[# "clip"];
+    weapondata[# "stock"] = newweapondata[# "stock"] + oldweapondata[# "stock"];
+    weapondata[# "fuel"] = newweapondata[# "fuel"] + oldweapondata[# "fuel"];
+    weapondata[# "clip"] = int(min(weapondata[# "clip"], weapon.clipsize));
+    weapondata[# "stock"] = int(min(weapondata[# "stock"], weapon.maxammo));
+    weapondata[# "fuel"] = int(min(weapondata[# "fuel"], weapon.fuellife));
+    weapondata[# "heat"] = int(min(newweapondata[# "heat"], oldweapondata[# "heat"]));
+    weapondata[# "overheat"] = int(min(newweapondata[# "overheat"], oldweapondata[# "overheat"]));
+    weapondata[# "power"] = int(max(isDefined(newweapondata[# "power"]) ? newweapondata[# "power"] : 0, isDefined(oldweapondata[# "power"]) ? oldweapondata[# "power"] : 0));
     return weapondata;
   }
 }

@@ -123,8 +123,7 @@ friendly_fire_think(var_0) {
 
     if(isDefined(var_0.type) && var_0.type == "civilian") {
       var_11 = 1;
-    }
-    else {
+    } else {
       var_11 = issubstr(var_0.classname, "civilian");
     }
 
@@ -149,8 +148,7 @@ friendly_fire_think(var_0) {
       if(var_12) {
         if(isDefined(var_0.friend_kill_points)) {
           level.player.participation = level.player.participation + var_0.friend_kill_points;
-        }
-        else {
+        } else {
           level.player.participation = level.player.participation + level.friendlyfire["friend_kill_points"];
         }
       } else
@@ -161,16 +159,13 @@ friendly_fire_think(var_0) {
       if(check_grenade(var_0, var_5) && savecommit_aftergrenade()) {
         if(var_12) {
           return;
-        }
-        else {
+        } else {
           continue;
         }
       }
 
       if(isDefined(level.friendly_fire_fail_check)) {
-        [
-          [level.friendly_fire_fail_check]
-        ](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
+        [[level.friendly_fire_fail_check]](var_0, var_1, var_2, var_3, var_4, var_5, var_6);
         continue;
       }
 
@@ -225,8 +220,7 @@ savecommit_aftergrenade() {
 
   if(var_0 < 4500) {
     return 1;
-  }
-  else if(var_0 - level.lastautosavetime < 4500) {
+  } else if(var_0 - level.lastautosavetime < 4500) {
     return 1;
   }
 
@@ -249,8 +243,7 @@ participation_point_flattenovertime() {
   for(;;) {
     if(level.player.participation > 0) {
       level.player.participation--;
-    }
-    else if(level.player.participation < 0) {
+    } else if(level.player.participation < 0) {
       level.player.participation++;
     }
 
@@ -293,17 +286,13 @@ missionfail(var_0) {
   }
   if(var_0) {
     maps\_player_death::set_deadquote(&"SCRIPT_MISSIONFAIL_CIVILIAN_KILLED");
-  }
-  else if(isDefined(level.custom_friendly_fire_message)) {
+  } else if(isDefined(level.custom_friendly_fire_message)) {
     maps\_player_death::set_deadquote(level.custom_friendly_fire_message);
-  }
-  else if(level.campaign == "british") {
+  } else if(level.campaign == "british") {
     maps\_player_death::set_deadquote(&"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
-  }
-  else if(level.campaign == "russian") {
+  } else if(level.campaign == "russian") {
     maps\_player_death::set_deadquote(&"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
-  }
-  else {
+  } else {
     maps\_player_death::set_deadquote(&"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
   }
 

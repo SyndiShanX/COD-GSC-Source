@@ -240,15 +240,13 @@ deck_danger_zone() {
   e_kill_zone = getent("deck_kill_zone", "targetname");
 
   while(isalive(self)) {
-    if(self istouching(e_danger_zone)) {
-    } else if(self istouching(e_kill_zone)) {
+    if(self istouching(e_danger_zone)) {} else if(self istouching(e_kill_zone)) {
       level.player.overrideplayerdamage = undefined;
       screen_message_delete();
       magicbullet("avenger_missile_turret_blackout", self.origin + vectorscale((0, 0, 1), 1000.0), self.origin);
       wait 0.3;
       self dodamage(1000, self.origin);
-    } else {
-    }
+    } else {}
 
     wait 0.25;
   }
@@ -433,7 +431,7 @@ drone_cover_toggle(b_enabled) {
   a_nodes = getnodearray("drone_cover_node", "script_noteworthy");
 
   foreach(node in a_nodes) {
-  setenablenode(node, b_enabled);
+    setenablenode(node, b_enabled);
   }
 }
 
@@ -548,8 +546,7 @@ outro_launchers_fire() {
   array_thread(a_launchers, ::outro_launcher_logic);
 }
 
-outro_launcher_logic() {
-}
+outro_launcher_logic() {}
 
 run_mason_deck_final_deck_attackers() {
   s_goalpos = get_struct("outro_pmc_goal", "targetname");
@@ -561,7 +558,7 @@ run_mason_deck_final_deck_attackers() {
   a_enemies = getaiarray("axis");
 
   foreach(guy in a_enemies) {
-  guy thread func_outro_enemy_attacker(s_goalpos, e_target);
+    guy thread func_outro_enemy_attacker(s_goalpos, e_target);
   }
 
   n_spawned = 0;
@@ -573,8 +570,7 @@ run_mason_deck_final_deck_attackers() {
 
     if(n_index == 4) {
       simple_spawn_single(sp_rpg, ::func_outro_warp_to_deck_struct, a_warp_structs[n_index]);
-    }
-    else {
+    } else {
       simple_spawn_single(sp_assault, ::func_outro_warp_to_deck_struct, a_warp_structs[n_index]);
     }
 
@@ -1001,8 +997,7 @@ sky_cowbell_drone_tracker() {
 
   if(b_is_avenger) {
     level.sky_cowbell.avenger_count++;
-  }
-  else {
+  } else {
     level.sky_cowbell.pegasus_count++;
   }
 
@@ -1011,8 +1006,7 @@ sky_cowbell_drone_tracker() {
 
   if(b_is_avenger) {
     level.sky_cowbell.avenger_count--;
-  }
-  else {
+  } else {
     level.sky_cowbell.pegasus_count--;
   }
 }
@@ -1323,7 +1317,7 @@ claw_fire_direction_func() {
   a_enemies = getaiarray("axis");
 
   foreach(ai_guy in a_enemies) {
-  ai_guy._fire_direction_targeted = undefined;
+    ai_guy._fire_direction_targeted = undefined;
   }
 
   if(a_shooters.size > 0) {
@@ -1372,7 +1366,7 @@ _claw_fire_guns_at_targets_in_range(v_position) {
   a_guys_within_range = get_within_range(v_position, a_enemies, 256);
 
   foreach(ai_guy in a_guys_within_range) {
-  ai_guy._fire_direction_targeted = 1;
+    ai_guy._fire_direction_targeted = 1;
   }
 
   n_time = gettime();
@@ -1507,8 +1501,7 @@ notetrack_outro_lookat_ship_1(m_player_body) {
   _fire_outro_magic_bullet_at_bridge();
 }
 
-notetrack_outro_lookat_ship_2(m_player_body) {
-}
+notetrack_outro_lookat_ship_2(m_player_body) {}
 
 notetrack_outro_lookat_ship_3(m_player_body) {
   wait 4.5;

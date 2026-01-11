@@ -921,9 +921,7 @@ function on_damage(eattacker, einflictor, weapon, meansofdeath, damage) {
     }
     default: {
       if(isDefined(level.shellshockonplayerdamage)) {
-        [
-          [level.shellshockonplayerdamage]
-        ](meansofdeath, damage, weapon);
+        [[level.shellshockonplayerdamage]](meansofdeath, damage, weapon);
       }
       break;
     }

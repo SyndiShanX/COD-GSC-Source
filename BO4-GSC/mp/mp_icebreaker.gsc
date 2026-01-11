@@ -7,7 +7,6 @@
 #include scripts\mp\mp_icebreaker_scripted;
 #include scripts\mp\mp_icebreaker_water;
 #include scripts\mp_common\load;
-
 #namespace mp_icebreaker;
 
 event_handler[level_init] main(eventstruct) {

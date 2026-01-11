@@ -196,8 +196,7 @@ run_mason_catwalk() {
   clean_up_mason_catwalk();
 }
 
-clean_up_mason_catwalk() {
-}
+clean_up_mason_catwalk() {}
 
 scene_salazar_exit() {
   level.salazar change_movemode("cqb_sprint");
@@ -429,8 +428,7 @@ catwalk_random_shooting() {
 
       if(isalive(ai_target)) {
         hit_pos = ai_target gettagorigin("J_head");
-      }
-      else {
+      } else {
         rand_pct = randomfloat(1.0);
         hit_pos = lerpvector(nearest[0].origin, nearest[1].origin, rand_pct);
         hit_pos = hit_pos + (0, 0, randomfloatrange(-12, 12));
@@ -807,8 +805,7 @@ ziptie_intro_then_loop(str_scene) {
   end_scene(str_scene + "_loop");
 }
 
-ziptie_enemy_think(ai_guy) {
-}
+ziptie_enemy_think(ai_guy) {}
 
 ziptie_friendly_think(ai_guy) {
   ai_guy attach("t6_wpn_ar_xm8_world", "tag_weapon_right");

@@ -86,8 +86,7 @@ rage_mode_reset() {
 
     if(n_rage_warp_previous < level.n_rage_warp_final) {
       level thread fade_warp_low_to_high(n_rage_warp_previous, level.n_rage_warp_final, 1);
-    }
-    else if(n_rage_warp_previous > level.n_rage_warp_final) {
+    } else if(n_rage_warp_previous > level.n_rage_warp_final) {
       level thread fade_warp_high_to_low(n_rage_warp_previous, level.n_rage_warp_final, 1);
     }
 
@@ -114,8 +113,7 @@ rage_mode_low() {
 
     if(n_rage_warp_previous < level.n_rage_warp_final) {
       level thread fade_warp_low_to_high(n_rage_warp_previous, level.n_rage_warp_final, 0.5);
-    }
-    else if(n_rage_warp_previous > level.n_rage_warp_final) {
+    } else if(n_rage_warp_previous > level.n_rage_warp_final) {
       level thread fade_warp_high_to_low(n_rage_warp_previous, level.n_rage_warp_final, 0.5);
     }
 
@@ -199,8 +197,7 @@ fade_fov_lerp(n_fov_1, n_fov_2, n_fade_time, n_time_increment) {
 
     if(n_fov_1 < n_fov_2) {
       n_fov = n_fov_1 * (1 - n_time) + n_fov_2 * n_time;
-    }
-    else {
+    } else {
       n_fov = n_fov_1 + n_fov_2 - (n_fov_2 * (1 - n_time) + n_fov_1 * n_time);
     }
 
@@ -231,8 +228,7 @@ rage_mode_fade(n_rage_value_previous) {
   for(i = 0; i <= level.n_steps; i++) {
     if(n_rage_value_previous < level.n_rage_value_high) {
       level.n_rage_value = level.n_start_value + i * level.n_blend_amount;
-    }
-    else {
+    } else {
       level.n_rage_value = level.n_start_value - i * level.n_blend_amount;
     }
 
@@ -244,8 +240,7 @@ rage_mode_fade(n_rage_value_previous) {
 _get_number_of_steps(n_step_size, n_rage_values_diff) {
   if(n_rage_values_diff == 0) {
     n_steps = 1;
-  }
-  else {
+  } else {
     n_steps = n_rage_values_diff / n_step_size;
   }
 
@@ -466,8 +461,7 @@ rage_health_fade(n_alpha_1, n_alpha_2, n_fade_time) {
 
       if(n_alpha_1 < n_alpha_2) {
         n_alpha = n_alpha_1 * (1 - n_time) + n_alpha_2 * n_time;
-      }
-      else {
+      } else {
         n_alpha = n_alpha_1 + n_alpha_2 - (n_alpha_2 * (1 - n_time) + n_alpha_1 * n_time);
       }
 
@@ -516,8 +510,7 @@ rage_health_hit_fade(n_opacity_1, n_opacity_2) {
 
     if(n_opacity_1 < n_opacity_2) {
       n_opacity = n_opacity_1 * (1 - n_time) + n_opacity_2 * n_time;
-    }
-    else {
+    } else {
       n_opacity = n_opacity_1 + n_opacity_2 - (n_opacity_2 * (1 - n_time) + n_opacity_1 * n_time);
     }
 
@@ -592,7 +585,7 @@ enable_bunker_lightflares() {
   }
 
   foreach(light in a_lights) {
-  a_light_fx[a_light_fx.size] = playfxondynent(level._effect["fx_nic_tinhat_cage"], light);
+    a_light_fx[a_light_fx.size] = playfxondynent(level._effect["fx_nic_tinhat_cage"], light);
   }
 
   disable_bunker_lightflares(a_light_fx);
@@ -602,7 +595,7 @@ disable_bunker_lightflares(a_fx) {
   level waittill("bunker_lightflares_off");
 
   foreach(fx in a_fx) {
-  deletefx(0, fx);
+    deletefx(0, fx);
   }
 }
 

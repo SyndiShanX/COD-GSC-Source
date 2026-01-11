@@ -213,7 +213,7 @@ air_strip_choppers() {
   var_0 = maps\satfarm_code_heli::spawn_hind_enemies(3, "heli_nav_mesh_air_strip_array_start");
 
   foreach(var_2 in var_0) {
-  var_2 thread maps\satfarm_code::chopper_insta_kill();
+    var_2 thread maps\satfarm_code::chopper_insta_kill();
   }
 
   wait 4.0;
@@ -308,8 +308,7 @@ fence_smash_wait() {
 
   if(var_1 == "saf_hangar_fence_breach_fence_left") {
     common_scripts\utility::exploder(5011);
-  }
-  else if(var_1 == "saf_hangar_fence_breach_fence_right") {
+  } else if(var_1 == "saf_hangar_fence_breach_fence_right") {
     common_scripts\utility::exploder(5012);
   }
 
@@ -334,7 +333,7 @@ hangar_wall_smash_setup() {
   var_3 = getEntArray("hangar_wall_section", "script_noteworthy");
 
   foreach(var_5 in var_3) {
-  var_5 hide();
+    var_5 hide();
   }
 
   common_scripts\utility::flag_wait("hangar_blasted");
@@ -347,7 +346,7 @@ hangar_wall_smash_setup() {
   thread maps\satfarm_audio::walldowncheck();
 
   foreach(var_5 in var_3) {
-  var_5 show();
+    var_5 show();
   }
 
   var_9 = getEntArray("hangar_wall_smash_trigger", "targetname");
@@ -497,8 +496,7 @@ air_strip_ai_quick_cleanup_spawn_function(var_0) {
   if(isDefined(self.script_parameters)) {
     if(self.script_parameters == "delete_on_goal") {
       thread maps\satfarm_code::waittill_goal(32, 1);
-    }
-    else if(self.script_parameters == "delete_on_goal_mortar") {
+    } else if(self.script_parameters == "delete_on_goal_mortar") {
       thread maps\satfarm_code::waittill_goal(128, undefined, 1);
     }
   }
@@ -795,11 +793,9 @@ hangar_runner_anims() {
       if(isDefined(self.script_parameters)) {
         if(self.script_parameters == "fed_guy_01") {
           thread maps\_utility::smart_dialogue("satfarm_fs5_getoutofthe");
-        }
-        else if(self.script_parameters == "fed_guy_02") {
+        } else if(self.script_parameters == "fed_guy_02") {
           thread maps\_utility::smart_dialogue("satfarm_saf1_runmovemove");
-        }
-        else if(self.script_parameters == "fed_guy_03") {
+        } else if(self.script_parameters == "fed_guy_03") {
           thread maps\_utility::smart_dialogue("satfarm_fs6_watchout");
         }
       }
@@ -853,8 +849,7 @@ setup_falling_sat_dish(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_3 maps\_utility::ent_flag_wait("crash");
-  }
-  else {
+  } else {
     common_scripts\utility::flag_wait(var_1);
   }
 

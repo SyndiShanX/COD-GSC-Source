@@ -260,8 +260,7 @@ electric_cherry_reload_attack() {
           if(isDefined(n_zombie_limit)) {
             if(n_zombies_hit < n_zombie_limit) {
               n_zombies_hit++;
-            }
-            else {
+            } else {
               break;
             }
           }
@@ -346,11 +345,9 @@ weapon_replaced_monitor(weapon) {
 electric_cherry_reload_fx(n_fraction) {
   if(n_fraction >= 0.67) {
     self setclientfield("electric_cherry_reload_fx", 1);
-  }
-  else if(n_fraction >= 0.33 && n_fraction < 0.67) {
+  } else if(n_fraction >= 0.33 && n_fraction < 0.67) {
     self setclientfield("electric_cherry_reload_fx", 2);
-  }
-  else {
+  } else {
     self setclientfield("electric_cherry_reload_fx", 3);
   }
 

@@ -28,7 +28,7 @@ main() {
     return;
   }
 
-    [[self.exception["stop_immediate"]]]();
+  [[self.exception["stop_immediate"]]]();
   // We do the exception_stop script a little late so that the AI has some animation they're playing
   // otherwise they'd go into basepose.
   thread delayedException();
@@ -46,8 +46,7 @@ main() {
   if(!transitionedToIdle) {
     if(self.a.weaponPos["right"] == "none" && self.a.weaponPos["left"] == "none") {
       transitionedToIdle = true;
-    }
-    else if(AngleClamp180(self getMuzzleAngle()[0]) > 20) {
+    } else if(AngleClamp180(self getMuzzleAngle()[0]) > 20) {
       transitionedToIdle = true;
     }
   }

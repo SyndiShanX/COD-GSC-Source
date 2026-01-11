@@ -96,8 +96,7 @@ get_selected_dpad_left() {
   defense = self getcoopplayerdata("alienPlayerLoadout", "defense");
   if(defense == "dpad_placeholder_def_1" && maps\mp\alien\_utility::is_chaos_mode()) {
     return "dpad_minigun_turret";
-  }
-  else {
+  } else {
     return defense;
   }
 }
@@ -106,8 +105,7 @@ get_selected_dpad_right() {
   offense = self getcoopplayerdata("alienPlayerLoadout", "offense");
   if(offense == "dpad_placeholder_off_1" && maps\mp\alien\_utility::is_chaos_mode()) {
     return "dpad_ims";
-  }
-  else {
+  } else {
     return offense;
   }
 }
@@ -169,8 +167,7 @@ wait_to_set_player_currency(amount) {
   wait(0.5);
   if(self is_upgrade_enabled("more_cash_upgrade")) {
     set_player_currency(CURRENCY_UPGRADE_START);
-  }
-  else {
+  } else {
     set_player_currency(amount);
   }
 }
@@ -214,8 +211,7 @@ give_player_currency(amount, font_size, sHitloc, skip_prestige_scalar) {
 
   if(!isDefined(self.total_currency_earned)) {
     self.total_currency_earned = amount;
-  }
-  else {
+  } else {
     self.total_currency_earned += (new_amount - current_amount);
   }
 
@@ -384,8 +380,7 @@ get_starting_skill_point() {
 
   if(self is_upgrade_enabled("free_skill_points_upgrade")) {
     return FREE_SKILL_POINTS;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -636,11 +631,9 @@ award_completion_tokens() {
   if(num_active_relics > 0 && !is_true(self.pers["hotjoined"])) {
     if(num_active_relics == 1) {
       numAwarded = numAwarded + 1;
-    }
-    else if(num_active_relics == 2) {
+    } else if(num_active_relics == 2) {
       numAwarded = numAwarded + 2;
-    }
-    else if(num_active_relics >= 3) {
+    } else if(num_active_relics >= 3) {
       numAwarded = numAwarded + 3;
     }
 
@@ -1383,8 +1376,7 @@ give_player_xp(xp) {
     if(at_max_rank == false) {
       if(new_rank == 30) {
         display_rank = 1;
-      }
-      else {
+      } else {
         display_rank = new_rank + 1;
       }
 

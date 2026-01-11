@@ -242,8 +242,7 @@ soundloopthink() {
 
       started = !started;
     }
-  } else {
-  }
+  } else {}
 }
 
 soundlinethink() {
@@ -281,15 +280,13 @@ soundlinethink() {
 
       if(started) {
         soundstoplineemitter(self.script_sound, self.origin, target.origin);
-      }
-      else {
+      } else {
         soundlineemitter(self.script_sound, self.origin, target.origin);
       }
 
       started = !started;
     }
-  } else {
-  }
+  } else {}
 }
 
 startsoundloops() {
@@ -440,8 +437,7 @@ trig_enter_bump(ent) {
   }
 }
 
-trig_leave_bump(ent) {
-}
+trig_leave_bump(ent) {}
 
 bump_trigger_listener() {
   if(isDefined(self.script_label)) {
@@ -514,8 +510,7 @@ setup_room_and_context() {
 
   if(getlocalclienthealth(0) > 40) {
     setsoundcontext("health", "full");
-  }
-  else {
+  } else {
     setsoundcontext("health", "half");
   }
 }
@@ -578,11 +573,9 @@ closest_point_on_line_to_point(point, linestart, lineend) {
 
   if(t < 0.0) {
     self.origin = linestart;
-  }
-  else if(t > 1.0) {
+  } else if(t > 1.0) {
     self.origin = lineend;
-  }
-  else {
+  } else {
     start_x = linestart[0] + t * (lineend[0] - linestart[0]);
     start_y = linestart[1] + t * (lineend[1] - linestart[1]);
     start_z = linestart[2] + t * (lineend[2] - linestart[2]);
@@ -811,11 +804,9 @@ move_sound_along_line() {
 
     if(closest_dist > 1048576) {
       wait 2;
-    }
-    else if(closest_dist > 262144) {
+    } else if(closest_dist > 262144) {
       wait 0.2;
-    }
-    else {
+    } else {
       wait 0.05;
     }
   }

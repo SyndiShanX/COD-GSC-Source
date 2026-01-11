@@ -363,8 +363,7 @@ officer_run() {
         self.health = level.difficulty * 90;
         if(cointoss()) {
           level thread say_dialogue("hide_tank");
-        }
-        else {
+        } else {
           level thread say_dialogue("hide_tank2");
         }
       }
@@ -419,8 +418,7 @@ officer_run() {
         tank setspeed(3, 1, 1);
         if(cointoss()) {
           level thread say_dialogue("hide_truck", undefined, 1);
-        }
-        else {
+        } else {
           level thread say_dialogue("hide_truck2", undefined, 1);
         }
         if(isDefined(level.officers_sniper) && isalive(level.officers_sniper)) {

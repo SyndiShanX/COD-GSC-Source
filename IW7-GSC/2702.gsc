@@ -248,8 +248,7 @@ bhg_handledamage(var_00, var_01, var_02, var_03, var_04) {
 
   if(scripts\mp\utility\game::isfmjdamage(var_01, var_02)) {
     var_06 = 2;
-  }
-  else if(var_03 >= scripts\mp\weapons::minegettwohitthreshold()) {
+  } else if(var_03 >= scripts\mp\weapons::minegettwohitthreshold()) {
     var_06 = 2;
   }
 
@@ -460,8 +459,7 @@ bhg_trackimpulsefielddebuffend(var_00, var_01, var_02) {
 
     if(level.teambased) {
       var_04 = scripts\mp\utility\game::clearscrambler(var_0.origin, 256, scripts\mp\utility\game::getotherteam(var_1.team), var_01);
-    }
-    else {
+    } else {
       var_04 = scripts\mp\utility\game::clearscrambler(var_0.origin, 256, undefined, var_01);
     }
 

@@ -26,7 +26,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
 #include scripts\mp_common\gametypes\globallogic_audio;
-
 #namespace player_insertion;
 
 autoexec __init__system__() {
@@ -78,7 +77,7 @@ __init__() {
 
 function_1e4302d0(value, index) {
   assert(index < 2);
-  newvalue = value << 1 | index& 1;
+  newvalue = value << 1 | index & 1;
   return newvalue;
 }
 
@@ -130,8 +129,8 @@ private on_finalize_initialization() {
 private function_fd3c1bcc(start, end, default_val) {
   trace = worldtrace(start, end);
 
-  if(trace[#"fraction"] < 1) {
-    return trace[#"position"];
+  if(trace[# "fraction"] < 1) {
+    return trace[# "position"];
   }
 
   return default_val;
@@ -283,7 +282,7 @@ function_20cba65e(player) {
     return 0;
   }
 
-  platoons = array(#"platoon_1", #"platoon_2", #"platoon_3", #"platoon_4", #"platoon_5");
+  platoons = array(#"platoon_1", # "platoon_2", # "platoon_3", # "platoon_4", # "platoon_5");
   var_9257bec = [];
 
   for(index = 0; index < platoons.size; index++) {
@@ -511,9 +510,9 @@ function_82c73974(insertion) {
   insertion thread function_a4deb676();
   insertion flagsys::set(#"hash_122f326d72f4c884");
   level function_e59d879f(insertion, function_d9dfa25(), 1);
-  function_dd34168c(insertion, #"insertion_teleport_completed");
-  insertion flagsys::wait_till_timeout(2 + 5 + 0.5, #"insertion_presentation_completed");
-  function_dd34168c(insertion, #"insertion_begin_completed");
+  function_dd34168c(insertion, # "insertion_teleport_completed");
+  insertion flagsys::wait_till_timeout(2 + 5 + 0.5, # "insertion_presentation_completed");
+  function_dd34168c(insertion, # "insertion_begin_completed");
 }
 
 function_dd34168c(insertion, flag) {
@@ -553,8 +552,8 @@ function_35742117(insertion) {
   insertion thread globallogic_audio::function_85818e24("matchstart");
   level thread function_a4deb676();
   insertion flagsys::set(#"hash_122f326d72f4c884");
-  function_dd34168c(insertion, #"hash_60fcdd11812a0134");
-  function_dd34168c(insertion, #"insertion_teleport_completed");
+  function_dd34168c(insertion, # "hash_60fcdd11812a0134");
+  function_dd34168c(insertion, # "insertion_teleport_completed");
   level callback::callback(#"hash_774be40ec06d5212");
   function_a5fd9aa8(insertion);
 
@@ -570,7 +569,7 @@ function_35742117(insertion) {
     });
   }
 
-  function_dd34168c(insertion, #"insertion_begin_completed");
+  function_dd34168c(insertion, # "insertion_begin_completed");
   wait 5 + 5 / 3;
   function_a5fd9aa8(insertion);
 
@@ -597,10 +596,10 @@ function_51c5f95f(insertion) {
   insertion thread globallogic_audio::function_85818e24("matchstart");
   level thread function_a4deb676();
   insertion flagsys::set(#"hash_122f326d72f4c884");
-  function_dd34168c(insertion, #"hash_60fcdd11812a0134");
-  function_dd34168c(insertion, #"insertion_teleport_completed");
+  function_dd34168c(insertion, # "hash_60fcdd11812a0134");
+  function_dd34168c(insertion, # "insertion_teleport_completed");
   level function_57d4a011(insertion);
-  insertion flagsys::wait_till_timeout(0.5, #"insertion_presentation_completed");
+  insertion flagsys::wait_till_timeout(0.5, # "insertion_presentation_completed");
   function_26fbfab4(insertion);
   var_990e3011 = 3;
 
@@ -621,7 +620,7 @@ function_51c5f95f(insertion) {
     player thread function_adc8cff4();
   }
 
-  function_dd34168c(insertion, #"insertion_begin_completed");
+  function_dd34168c(insertion, # "insertion_begin_completed");
 }
 
 function_26fbfab4(insertion) {
@@ -647,7 +646,7 @@ function_26fbfab4(insertion) {
 }
 
 function_135ed50e() {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
   var_850118f3 = 5;
 
   if(getdvarint(#"hash_7f8ced042799da77", 0) != 0) {
@@ -754,7 +753,7 @@ function_57d4a011(insertion) {
 }
 
 function_adc8cff4(reinserting = 0) {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
   self startcameratween(0.5);
   util::wait_network_frame();
   self show();
@@ -780,7 +779,7 @@ getmapcenter() {
 }
 
 function_7bf9c38f(reinserting) {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
   self flagsys::set(#"hash_224cb97b8f682317");
   self flagsys::set(#"hash_287397edba8966f9");
   speed = 4400;
@@ -838,7 +837,7 @@ function_7bf9c38f(reinserting) {
 }
 
 function_a25e421c() {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
 
   if(isalive(self)) {
     self thread status_effect::function_6519f95f();
@@ -1092,7 +1091,7 @@ function_ca5b6591(insertion, startorigin, endorigin, var_872f085f) {
     insertion.cameraent[index] moveto(finaltargetpos, timetotarget);
   }
 
-  insertion flagsys::wait_till_timeout(0.05, #"insertion_presentation_completed");
+  insertion flagsys::wait_till_timeout(0.05, # "insertion_presentation_completed");
   function_a5fd9aa8(insertion);
 
   foreach(player in insertion.players) {
@@ -1343,10 +1342,10 @@ private function_e59d879f(insertion, s_formation, var_cf46aa72) {
   function_948ac812(insertion);
   bot_insertion::function_24ca8ecf(insertion);
   vehiclespawners = [];
-  vehiclespawners[#"c130_spawner"] = getent("c130_spawner", "targetname");
-  vehiclespawners[#"chinook_spawner"] = getent("chinook_spawner", "targetname");
-  vehiclespawners[#"gunship_spawner"] = getent("gunship_spawner", "targetname");
-  vehiclespawners[#"heli_infil_spawner"] = getent("heli_infil_spawner", "targetname");
+  vehiclespawners[# "c130_spawner"] = getent("c130_spawner", "targetname");
+  vehiclespawners[# "chinook_spawner"] = getent("chinook_spawner", "targetname");
+  vehiclespawners[# "gunship_spawner"] = getent("gunship_spawner", "targetname");
+  vehiclespawners[# "heli_infil_spawner"] = getent("heli_infil_spawner", "targetname");
 
   if(vehiclespawners.size == 0) {
     return 0;
@@ -1355,9 +1354,9 @@ private function_e59d879f(insertion, s_formation, var_cf46aa72) {
   spawner::global_spawn_throttle(1);
 
   if(true) {
-    var_69f4f44c = vehiclespawners[#"chinook_spawner"];
+    var_69f4f44c = vehiclespawners[# "chinook_spawner"];
   } else {
-    var_69f4f44c = vehiclespawners[#"c130_spawner"];
+    var_69f4f44c = vehiclespawners[# "c130_spawner"];
   }
 
   startpoint = insertion.start_point;
@@ -1579,8 +1578,8 @@ function_d9dfa25() {
     }
   }
 
-  var_86cb4eb8[#"left"] = array((1200, -2300, 0), (-200, -2300, 0), (-1600, -2300, 0), (-3000, -2300, 0));
-  var_86cb4eb8[#"right"] = array((1200, 2300, 0), (-200, 2300, 0), (-1600, 2300, 0), (-3000, 2300, 0));
+  var_86cb4eb8[# "left"] = array((1200, -2300, 0), (-200, -2300, 0), (-1600, -2300, 0), (-3000, -2300, 0));
+  var_86cb4eb8[# "right"] = array((1200, 2300, 0), (-200, 2300, 0), (-1600, 2300, 0), (-3000, 2300, 0));
   var_5637e595 = {
     #var_c85ebc15: 4,
     #var_f5cff63: array("gunship_spawner", "gunship_spawner", "gunship_spawner", "gunship_spawner"),
@@ -1600,7 +1599,7 @@ function_45b56b0a(insertion, startpoint, endpoint, var_872f085f, vehiclespawners
   offset = (500, -50, 600);
   goaloffset = (0, 0, -400);
   rotatedstart = startpoint + rotatepoint(offset, var_872f085f);
-  var_31e5487a = vehiclespawners[#"heli_infil_spawner"];
+  var_31e5487a = vehiclespawners[# "heli_infil_spawner"];
   insertion.var_933bdcf2 = var_31e5487a spawnfromspawner("insertion_presentation");
 
   if(!isDefined(insertion.var_933bdcf2)) {
@@ -1682,14 +1681,14 @@ function_700e474f(startorigin, endorigin, var_872f085f, goal, index) {
 
   self setspeedimmediate(120);
   self thread function_71da60d1();
-  self waittill(#"goal", #"near_goal");
+  self waittill(#"goal", # "near_goal");
   self vehlookat(var_9fa20618);
   self function_a57c34b7(var_9fa20618, 0, 0);
-  self waittill(#"goal", #"near_goal");
+  self waittill(#"goal", # "near_goal");
   self vehlookat(endorigin);
   self function_a57c34b7(endorigin, 0, 0);
   self setspeed(250);
-  self waittill(#"goal", #"near_goal");
+  self waittill(#"goal", # "near_goal");
   self delete();
 }
 
@@ -1737,7 +1736,7 @@ function_ea6a4f96(startorigin, endorigin, var_872f085f, offsetvec, var_35c96bb3)
     }
   }
 
-  self waittill(#"goal", #"near_goal");
+  self waittill(#"goal", # "near_goal");
   self delete();
 }
 
@@ -1895,7 +1894,7 @@ private function_afdad0c8(insertion, plane, startpoint, endpoint, var_671fc488) 
     player flagsys::set(#"hash_224cb97b8f682317");
   }
 
-  function_dd34168c(insertion, #"hash_60fcdd11812a0134");
+  function_dd34168c(insertion, # "hash_60fcdd11812a0134");
   wait 1;
 
   foreach(vehicle in insertion.var_41091905) {
@@ -1922,7 +1921,7 @@ private function_afdad0c8(insertion, plane, startpoint, endpoint, var_671fc488) 
 
   wait 5;
   currentvalue = level clientfield::get("infiltration_compass");
-  newvalue = ~(1 << insertion.index)&currentvalue;
+  newvalue = ~(1 << insertion.index) &currentvalue;
   level clientfield::set("infiltration_compass", newvalue);
 }
 
@@ -2038,7 +2037,7 @@ function_2e54d73e(insertion, passenger, vehicle) {
     vehicle endon(#"death");
   }
 
-  waitresult = passenger waittill(#"disconnect", #"player_jumped");
+  waitresult = passenger waittill(#"disconnect", # "player_jumped");
 
   if(isDefined(insertion.passengercount)) {
     insertion.passengercount--;
@@ -2061,7 +2060,7 @@ private function_ced05c63(note, payload) {
 function_2d683dc2(aircraft) {
   self notify("2c6c5668dc17cb7b");
   self endon("2c6c5668dc17cb7b");
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
   self function_b9a53f50();
   self function_b80277f7();
   self function_ced05c63(#"hash_3a41cbe85bdb81e1", {
@@ -2168,7 +2167,7 @@ function_4feecc32() {
 }
 
 function_2b276ae0() {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
   wait 1;
   self setclientuivisibilityflag("weapon_hud_visible", 0);
   self val::reset(#"player_insertion", "freezecontrols");
@@ -2180,7 +2179,7 @@ function_2b276ae0() {
 }
 
 function_712f9f52() {
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
   self setclientuivisibilityflag("weapon_hud_visible", 0);
   [[level.wingsuit_hud]] - > open(self);
   callback::function_d8abfc3d(#"parachute", &function_66c91693);
@@ -2226,7 +2225,7 @@ function_c71552d0(insertion, fadeouttime, blacktime, fadeintime, rumble) {
   }
 
   wait fadeouttime + blacktime;
-  insertion flagsys::wait_till_timeout(2, #"insertion_teleport_completed");
+  insertion flagsys::wait_till_timeout(2, # "insertion_teleport_completed");
   function_a5fd9aa8(insertion);
 
   foreach(player in insertion.players) {
@@ -2379,10 +2378,10 @@ private function_943c98fb(insertion) {
     start_insertion = 0;
 
     switch (string) {
-      case #"start_insertion":
+      case # "start_insertion":
         start_insertion = 1;
         break;
-      case #"repath_flight":
+      case # "repath_flight":
         insertion on_finalize_initialization();
       default:
         break;
@@ -2420,7 +2419,7 @@ function_4910c182(insertion) {
     player function_a25e421c();
   }
 
-  level flagsys::wait_till_timeout(0.5, #"insertion_presentation_completed");
+  level flagsys::wait_till_timeout(0.5, # "insertion_presentation_completed");
   function_26fbfab4();
   var_990e3011 = 3;
 

@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\duplicaterender_mgr;
-
 #namespace hacker_tool;
 
 init_shared() {

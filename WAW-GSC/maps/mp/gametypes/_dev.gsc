@@ -195,8 +195,7 @@ xKillsY(attackerName, victimName) {
   for(index = 0; index < level.players.size; index++) {
     if(level.players[index].name == attackerName) {
       attacker = level.players[index];
-    }
-    else if(level.players[index].name == victimName) {
+    } else if(level.players[index].name == victimName) {
       victim = level.players[index];
     }
   }
@@ -243,14 +242,12 @@ updateMinimapSetting() {
           mincorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
           if(corners[1].origin[0] > corners[0].origin[0]) {
             maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-          }
-          else {
+          } else {
             mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
           }
           if(corners[1].origin[1] > corners[0].origin[1]) {
             maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-          }
-          else {
+          } else {
             mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
           }
           viewpostocorner = maxcorner - viewpos;
@@ -293,8 +290,7 @@ updateMinimapSetting() {
           }
           if(angleside > angletop) {
             angle = angleside;
-          }
-          else {
+          } else {
             angle = angletop;
           }
           znear = minimapheight - 1000;

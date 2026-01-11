@@ -26,7 +26,6 @@
 #include scripts\mp_common\gametypes\spawning;
 #include scripts\mp_common\gametypes\spawnlogic;
 #include scripts\mp_common\util;
-
 #namespace prop_controls;
 
 notifyonplayercommand(command, key) {
@@ -45,55 +44,55 @@ function_255e9614(command, key) {
   self endon(command + "_" + key);
 
   switch (key) {
-    case #"+attack":
+    case # "+attack":
       function_9024fce3(&attackbuttonpressed, command);
       break;
-    case #"+toggleads_throw":
+    case # "+toggleads_throw":
       function_9024fce3(&adsbuttonpressed, command);
       break;
-    case #"+changeseat":
+    case # "+changeseat":
       function_9024fce3(&changeseatbuttonpressed, command);
       break;
-    case #"+usereload":
+    case # "+usereload":
       function_9024fce3(&usebuttonpressed, command);
       break;
-    case #"+smoke":
+    case # "+smoke":
       function_9024fce3(&secondaryoffhandbuttonpressed, command);
       break;
-    case #"+frag":
+    case # "+frag":
       function_9024fce3(&fragbuttonpressed, command);
       break;
-    case #"+actionslot 1":
+    case # "+actionslot 1":
       function_9024fce3(&actionslotonebuttonpressed, command);
       break;
-    case #"+actionslot 2":
+    case # "+actionslot 2":
       function_9024fce3(&actionslottwobuttonpressed, command);
       break;
-    case #"+actionslot 3":
+    case # "+actionslot 3":
       function_9024fce3(&actionslotthreebuttonpressed, command);
       break;
-    case #"+actionslot 4":
+    case # "+actionslot 4":
       function_9024fce3(&actionslotfourbuttonpressed, command);
       break;
-    case #"-actionslot 1":
+    case # "-actionslot 1":
       function_21e5a72f(&actionslotonebuttonpressed, command);
       break;
-    case #"-actionslot 2":
+    case # "-actionslot 2":
       function_21e5a72f(&actionslottwobuttonpressed, command);
       break;
-    case #"-actionslot 3":
+    case # "-actionslot 3":
       function_21e5a72f(&actionslotthreebuttonpressed, command);
       break;
-    case #"-actionslot 4":
+    case # "-actionslot 4":
       function_21e5a72f(&actionslotfourbuttonpressed, command);
       break;
-    case #"+stance":
+    case # "+stance":
       function_21e5a72f(&stancebuttonpressed, command);
       break;
-    case #"+breath_sprint":
+    case # "+breath_sprint":
       function_21e5a72f(&sprintbuttonpressed, command);
       break;
-    case #"+melee":
+    case # "+melee":
       function_21e5a72f(&meleebuttonpressed, command);
       break;
   }
@@ -213,9 +212,9 @@ propcontrolshud() {
   self.changepropkey = addupperrighthudelem(#"mp_ph_change", 0);
   self.currenthudy -= 20;
   self.var_8e3b5c8c = addupperrighthudelem(#"hash_fb73fdc2aff963f");
-  self.matchslopekey = addupperrighthudelem(#"hash_7f59350f5f223501", undefined, undefined, #"hash_4c7fbb5c1ccd5107");
+  self.matchslopekey = addupperrighthudelem(#"hash_7f59350f5f223501", undefined, undefined, # "hash_4c7fbb5c1ccd5107");
   self.lockpropkey = addupperrighthudelem(#"mp_ph_lock");
-  self.spinpropkey = addupperrighthudelem(#"mp_ph_spin", undefined, undefined, #"hash_39e61050ab8d325e");
+  self.spinpropkey = addupperrighthudelem(#"mp_ph_spin", undefined, undefined, # "hash_39e61050ab8d325e");
   self setnewabilityhud();
   self.zoomkey = addupperrighthudelem(#"mp_ph_zoom");
   self thread updatetextongamepadchange();
@@ -250,7 +249,7 @@ cleanuppropcontrolshud() {
 
 updatetextongamepadchange() {
   level endon(#"game_ended");
-  self endon(#"disconnect", #"death");
+  self endon(#"disconnect", # "death");
 
   if(level.console) {
     return;
@@ -267,20 +266,20 @@ updatetextongamepadchange() {
 
       if(var_4084aa7) {
         if(!(isDefined(self.slopelocked) && self.slopelocked)) {
-          self.matchslopekey.label = #"hash_7f59350f5f223501";
+          self.matchslopekey.label = # "hash_7f59350f5f223501";
         } else {
-          self.matchslopekey.label = #"hash_6ca8e1ea720ba9f";
+          self.matchslopekey.label = # "hash_6ca8e1ea720ba9f";
         }
 
-        self.spinpropkey.label = #"mp_ph_spin";
+        self.spinpropkey.label = # "mp_ph_spin";
       } else {
         if(!(isDefined(self.slopelocked) && self.slopelocked)) {
-          self.matchslopekey.label = #"hash_4c7fbb5c1ccd5107";
+          self.matchslopekey.label = # "hash_4c7fbb5c1ccd5107";
         } else {
-          self.matchslopekey.label = #"hash_3cd8ecbf9f39b3e9";
+          self.matchslopekey.label = # "hash_3cd8ecbf9f39b3e9";
         }
 
-        self.spinpropkey.label = #"hash_39e61050ab8d325e";
+        self.spinpropkey.label = # "hash_39e61050ab8d325e";
       }
     }
 
@@ -289,7 +288,7 @@ updatetextongamepadchange() {
 }
 
 propinputwatch() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   level endon(#"game_ended");
 
   if(isai(self)) {
@@ -304,7 +303,7 @@ propinputwatch() {
   self.debugnextpropindex = 1;
 
   while(true) {
-    waitresult = self waittill(#"lock", #"spin", #"changeprop", #"settoslope", #"propability", #"cloneprop", #"hide");
+    waitresult = self waittill(#"lock", # "spin", # "changeprop", # "settoslope", # "propability", # "cloneprop", # "hide");
     msg = waitresult._notify;
 
     if(!isDefined(msg)) {
@@ -417,7 +416,7 @@ propchange() {
     }
   }
 
-    self propchangeto(self.prop.info);
+  self propchangeto(self.prop.info);
 
   if(level.phsettings.var_bca517c5) {
     playFXOnTag("player/fx_plyr_clone_reaper_appear", self.prop, "tag_origin");
@@ -437,7 +436,7 @@ propchange() {
     return;
   }
 
-    self propdeductchange();
+  self propdeductchange();
 }
 
 prophaschangesleft() {
@@ -445,7 +444,7 @@ prophaschangesleft() {
     return true;
   }
 
-    return self.changesleft > 0;
+  return self.changesleft > 0;
 }
 
 propdeductchange() {
@@ -453,7 +452,7 @@ propdeductchange() {
     return;
   }
 
-    propsetchangesleft(self.changesleft - 1);
+  propsetchangesleft(self.changesleft - 1);
 }
 
 propsetchangesleft(newvalue) {
@@ -532,9 +531,9 @@ propmatchslope() {
 
     if(prop::useprophudserver()) {
       if(self is_player_gamepad_enabled()) {
-        self.matchslopekey.label = #"hash_6ca8e1ea720ba9f";
+        self.matchslopekey.label = # "hash_6ca8e1ea720ba9f";
       } else {
-        self.matchslopekey.label = #"hash_3cd8ecbf9f39b3e9";
+        self.matchslopekey.label = # "hash_3cd8ecbf9f39b3e9";
       }
     }
 
@@ -552,11 +551,11 @@ propmatchslope() {
 
   if(prop::useprophudserver()) {
     if(self is_player_gamepad_enabled()) {
-      self.matchslopekey.label = #"hash_7f59350f5f223501";
+      self.matchslopekey.label = # "hash_7f59350f5f223501";
       return;
     }
 
-    self.matchslopekey.label = #"hash_4c7fbb5c1ccd5107";
+    self.matchslopekey.label = # "hash_4c7fbb5c1ccd5107";
   }
 }
 
@@ -583,7 +582,7 @@ prophasclonesleft() {
     return true;
   }
 
-    return self.clonesleft > 0;
+  return self.clonesleft > 0;
 }
 
 propdeductclonechange() {
@@ -591,7 +590,7 @@ propdeductclonechange() {
     return;
   }
 
-    propsetclonesleft(self.clonesleft - 1);
+  propsetclonesleft(self.clonesleft - 1);
 }
 
 propsetclonesleft(newvalue) {
@@ -615,7 +614,7 @@ prophasflashesleft() {
     return true;
   }
 
-    return self.abilityleft > 0;
+  return self.abilityleft > 0;
 }
 
 propdeductflash() {
@@ -623,7 +622,7 @@ propdeductflash() {
     return;
   }
 
-    propsetflashesleft(self.abilityleft - 1);
+  propsetflashesleft(self.abilityleft - 1);
 }
 
 propsetflashesleft(newvalue) {
@@ -729,16 +728,16 @@ get_ground_normal(traceignore, debug) {
 
   foreach(point in tracepoints) {
     trace = bulletTrace(point + (0, 0, 4), point + (0, 0, -16), 0, ignore);
-    tracehit = trace[#"fraction"] > 0 && trace[#"fraction"] < 1;
+    tracehit = trace[# "fraction"] > 0 && trace[# "fraction"] < 1;
 
     if(tracehit) {
-      avgnormal += trace[#"normal"];
+      avgnormal += trace[# "normal"];
       tracehitcount++;
     }
 
     if(debug) {
       if(tracehit) {
-        line(point, point + trace[#"normal"] * 30, (0, 1, 0));
+        line(point, point + trace[# "normal"] * 30, (0, 1, 0));
         continue;
       }
 
@@ -756,18 +755,18 @@ get_ground_normal(traceignore, debug) {
       line(self.origin, self.origin + avgnormal * 20, (1, 1, 1));
     }
 
-      return avgnormal;
+    return avgnormal;
   }
 
   if(debug) {
     sphere(self.origin, 5, (1, 0, 0));
   }
 
-    return undefined;
+  return undefined;
 }
 
 propmoveunlock() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   level endon(#"game_ended");
   var_554b8919 = 0;
   var_cd6d7e01 = 0;
@@ -827,7 +826,7 @@ unlockprop() {
     self.lock = 0;
 
     if(prop::useprophudserver()) {
-      self.lockpropkey.label = #"mp_ph_lock";
+      self.lockpropkey.label = # "mp_ph_lock";
       self thread flashlockpropkey();
     }
   }
@@ -853,13 +852,13 @@ lockprop() {
   self notify(#"locked");
 
   if(prop::useprophudserver()) {
-    self.lockpropkey.label = #"mp_ph_locked";
+    self.lockpropkey.label = # "mp_ph_locked";
     self thread flashlockpropkey();
   }
 }
 
 flashlockpropkey() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   level endon(#"game_ended");
   self notify(#"flashlockpropkey");
   self endon(#"flashlockpropkey");
@@ -911,105 +910,105 @@ function_6de7bc19(success, type, player, origin1, text1, origin2, text2, origin3
   level.var_f8f7808e.text3 = text3;
 }
 
-  function canlock() {
-    killtriggers = getEntArray("trigger_hurt", "classname");
-    oobtriggers = getEntArray("trigger_out_of_bounds", "classname");
-    triggers = arraycombine(killtriggers, oobtriggers, 0, 0);
-    var_1bc5fbd6 = getEntArray("prop_no_lock", "targetname");
+function canlock() {
+  killtriggers = getEntArray("trigger_hurt", "classname");
+  oobtriggers = getEntArray("trigger_out_of_bounds", "classname");
+  triggers = arraycombine(killtriggers, oobtriggers, 0, 0);
+  var_1bc5fbd6 = getEntArray("prop_no_lock", "targetname");
 
-    if(var_1bc5fbd6.size > 0) {
-      triggers = arraycombine(triggers, var_1bc5fbd6, 0, 0);
+  if(var_1bc5fbd6.size > 0) {
+    triggers = arraycombine(triggers, var_1bc5fbd6, 0, 0);
+  }
+
+  foreach(trigger in triggers) {
+    if(trigger istouchingvolume(self.origin, self getmins(), self getmaxs())) {
+      function_6de7bc19(0, "<dev string:x38>", self, trigger.origin, trigger.classname);
+
+      return 0;
+    }
+  }
+
+  if(self isplayerswimming()) {
+    function_6de7bc19(1, "<dev string:x40>", self);
+
+    return 1;
+  }
+
+  if(!self isonground() || self iswallrunning()) {
+    trace1 = self function_97f02d5c();
+    frac = trace1[# "fraction"];
+    org1 = trace1[# "position"];
+
+    if(frac == 1) {
+      function_6de7bc19(0, "<dev string:x47>", self, org1, "<dev string:x50>");
+
+      return 0;
     }
 
     foreach(trigger in triggers) {
-      if(trigger istouchingvolume(self.origin, self getmins(), self getmaxs())) {
-        function_6de7bc19(0, "<dev string:x38>", self, trigger.origin, trigger.classname);
+      if(trigger istouchingvolume(org1, self getmins(), self getmaxs())) {
+        function_6de7bc19(0, "<dev string:x53>", self, trigger.origin, trigger.classname);
 
-          return 0;
+        return 0;
       }
     }
 
-    if(self isplayerswimming()) {
-      function_6de7bc19(1, "<dev string:x40>", self);
+    point = getnearestpathpoint(org1, 256);
 
-        return 1;
+    if(!isDefined(point)) {
+      function_6de7bc19(0, "<dev string:x5c>", self, org1);
+
+      return 0;
     }
 
-    if(!self isonground() || self iswallrunning()) {
-      trace1 = self function_97f02d5c();
-      frac = trace1[#"fraction"];
-      org1 = trace1[#"position"];
+    distz = point[2] - org1[2];
 
-      if(frac == 1) {
-        function_6de7bc19(0, "<dev string:x47>", self, org1, "<dev string:x50>");
+    if(distz > 50) {
+      point2 = getnearestpathpoint(org1, 50);
 
-          return 0;
+      if(!isDefined(point2)) {
+        function_6de7bc19(0, "<dev string:x63>", self, org1, "<dev string:x6f>", point, "<dev string:x5c>");
+
+        return 0;
       }
-
-      foreach(trigger in triggers) {
-        if(trigger istouchingvolume(org1, self getmins(), self getmaxs())) {
-          function_6de7bc19(0, "<dev string:x53>", self, trigger.origin, trigger.classname);
-
-            return 0;
-        }
-      }
-
-      point = getnearestpathpoint(org1, 256);
-
-      if(!isDefined(point)) {
-        function_6de7bc19(0, "<dev string:x5c>", self, org1);
-
-          return 0;
-      }
-
-      distz = point[2] - org1[2];
-
-      if(distz > 50) {
-        point2 = getnearestpathpoint(org1, 50);
-
-        if(!isDefined(point2)) {
-          function_6de7bc19(0, "<dev string:x63>", self, org1, "<dev string:x6f>", point, "<dev string:x5c>");
-
-            return 0;
-        }
-      }
-
-      dist2d = distance2d(point, org1);
-
-      if(dist2d > 100) {
-        function_6de7bc19(0, "<dev string:x77>", self, org1, "<dev string:x6f>", point, "<dev string:x5c>");
-
-          return 0;
-      }
-
-      org2 = self function_56cae8fa();
-
-      foreach(trigger in triggers) {
-        if(trigger istouchingvolume(org2, self getmins(), self getmaxs())) {
-          function_6de7bc19(0, "<dev string:x80>", self, trigger.origin, trigger.classname);
-
-            return 0;
-        }
-      }
-
-      function_6de7bc19(1, "<dev string:x86>", self, org1, "<dev string:x53>", org2, "<dev string:x80>", point, "<dev string:x8c>" + distance(org1, point));
-
-        return 1;
     }
 
-    function_6de7bc19(1, "<dev string:x94>", self);
+    dist2d = distance2d(point, org1);
 
-      return 1;
+    if(dist2d > 100) {
+      function_6de7bc19(0, "<dev string:x77>", self, org1, "<dev string:x6f>", point, "<dev string:x5c>");
+
+      return 0;
+    }
+
+    org2 = self function_56cae8fa();
+
+    foreach(trigger in triggers) {
+      if(trigger istouchingvolume(org2, self getmins(), self getmaxs())) {
+        function_6de7bc19(0, "<dev string:x80>", self, trigger.origin, trigger.classname);
+
+        return 0;
+      }
+    }
+
+    function_6de7bc19(1, "<dev string:x86>", self, org1, "<dev string:x53>", org2, "<dev string:x80>", point, "<dev string:x8c>" + distance(org1, point));
+
+    return 1;
   }
 
+  function_6de7bc19(1, "<dev string:x94>", self);
+
+  return 1;
+}
+
 propcamerazoom() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   level endon(#"game_ended");
   var_fc464c9b = 10;
   self.thirdpersonrange = self.prop.info.proprange;
 
   while(true) {
-    waitresult = self waittill(#"zoomin", #"zoomout");
+    waitresult = self waittill(#"zoomin", # "zoomout");
     zoom = waitresult._notify;
 
     if(!isDefined(zoom)) {
@@ -1041,8 +1040,8 @@ propcamerazoom() {
 
 setnewabilityhud() {
   switch (self.currentability) {
-    case #"flash":
-      self.abilitykey.label = #"mp_ph_flash";
+    case # "flash":
+      self.abilitykey.label = # "mp_ph_flash";
       break;
     default:
       assertmsg("<dev string:x9d>");
@@ -1052,14 +1051,14 @@ setnewabilityhud() {
 
 setnewabilitycount(var_8c8fd413, count) {
   switch (var_8c8fd413) {
-    case #"flash":
+    case # "flash":
       if(!isDefined(count)) {
         count = level.phsettings.propnumflashes;
       }
 
       propsetflashesleft(count);
       break;
-    case #"CLONE":
+    case # "CLONE":
       if(!isDefined(count)) {
         count = level.phsettings.propnumclones;
       }
@@ -1275,7 +1274,7 @@ function_d8b858d4(var_2953b091, fade_in_time, fade_out_time) {
 }
 
 watchspecialgrenadethrow() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   level endon(#"game_ended");
   self notify(#"watchspecialgrenadethrow");
   self endon(#"watchspecialgrenadethrow");
@@ -1532,7 +1531,7 @@ function_2b14e8b1() {
     self clientfield::set_to_player("PROP.hide_prop", 1);
 
     if(prop::useprophudserver()) {
-      self.var_8e3b5c8c.label = #"hash_54ba1311175de71e";
+      self.var_8e3b5c8c.label = # "hash_54ba1311175de71e";
     }
 
     return;
@@ -1541,6 +1540,6 @@ function_2b14e8b1() {
   self clientfield::set_to_player("PROP.hide_prop", 0);
 
   if(prop::useprophudserver()) {
-    self.var_8e3b5c8c.label = #"hash_fb73fdc2aff963f";
+    self.var_8e3b5c8c.label = # "hash_fb73fdc2aff963f";
   }
 }

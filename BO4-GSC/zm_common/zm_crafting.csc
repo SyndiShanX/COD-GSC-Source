@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_items;
 #include scripts\zm_common\zm_progress;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_crafting;
 
 autoexec __init__system__() {

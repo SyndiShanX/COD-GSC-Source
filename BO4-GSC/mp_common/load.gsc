@@ -10,7 +10,6 @@
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\mp_common\load;
 #include scripts\mp_common\util;
-
 #namespace load;
 
 main() {
@@ -21,7 +20,7 @@ main() {
 
   util::apply_dev_overrides();
 
-    setclearanceceiling(30);
+  setclearanceceiling(30);
   register_clientfields();
   level.aitriggerspawnflags = getaitriggerflags();
   level.vehicletriggerspawnflags = getvehicletriggerflags();
@@ -86,7 +85,7 @@ setup_traversals() {
   for(i = 0; i < potential_traverse_nodes.size; i++) {
     node = potential_traverse_nodes[i];
 
-    if(node.type == #"begin") {
+    if(node.type == # "begin") {
       node init_traverse();
     }
   }

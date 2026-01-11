@@ -50,8 +50,7 @@ dowalkanimoverride(var_0) {
   if(isarray(self.walk_overrideanim)) {
     if(isDefined(self.walk_override_weights)) {
       var_1 = common_scripts\utility::choose_from_weighted_array(self.walk_overrideanim, self.walk_override_weights);
-    }
-    else {
+    } else {
       var_1 = self.walk_overrideanim[randomint(self.walk_overrideanim.size)];
     }
   } else
@@ -64,8 +63,7 @@ dowalkanimoverride(var_0) {
 getwalkanim(var_0) {
   if(self.stairsstate == "up") {
     return animscripts\utility::getmoveanim("stairs_up");
-  }
-  else if(self.stairsstate == "down") {
+  } else if(self.stairsstate == "down") {
     return animscripts\utility::getmoveanim("stairs_down");
   }
 

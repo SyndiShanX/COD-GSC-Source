@@ -56,8 +56,7 @@ func_18A5(var_00) {
 
   if(level.teambased) {
     var_02 scripts\mp\entityheadicons::setteamheadicon(self.team, (0, 0, 65));
-  }
-  else {
+  } else {
     var_02 scripts\mp\entityheadicons::setplayerheadicon(self, (0, 0, 65));
   }
 
@@ -278,8 +277,7 @@ func_CEA4(var_00, var_01) {
     if(isDefined(var_00) && var_04) {
       if(self.team == var_0.team) {
         var_02 = spawnfxforclient(scripts\engine\utility::getfx("adrenaline_mist_friendly"), var_03, self);
-      }
-      else {
+      } else {
         var_02 = spawnfxforclient(scripts\engine\utility::getfx("adrenaline_mist_enemy"), var_03, self);
       }
 

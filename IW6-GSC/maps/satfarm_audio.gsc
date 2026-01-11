@@ -303,8 +303,7 @@ gaz_crush(var_0) {
 
     if(!common_scripts\utility::flag("aud_exfil")) {
       thread common_scripts\utility::play_sound_in_space("satf_tank_metal_crush", var_0);
-    }
-    else {
+    } else {
       thread common_scripts\utility::play_sound_in_space("satf_tank_metal_crush_small", var_0);
     }
 
@@ -684,8 +683,7 @@ player_tank_turret_sounds() {
   while(common_scripts\utility::flag("player_in_tank") && !common_scripts\utility::flag("aud_tank_destroyed")) {
     if(level.bthermalon == 1) {
       level.player setclienttriggeraudiozone("thermal");
-    }
-    else {
+    } else {
       level.player clearclienttriggeraudiozone(1);
     }
 

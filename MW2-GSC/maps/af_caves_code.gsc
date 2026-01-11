@@ -1475,7 +1475,7 @@ waittill_trigger_array(triggers) {
 hide_triggers(trigger_name) {
   friendly_trigger = getEntArray(trigger_name, "script_noteworthy");
   foreach(trigger in friendly_trigger) {
-  trigger trigger_off();
+    trigger trigger_off();
   }
 }
 

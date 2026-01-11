@@ -123,8 +123,7 @@ init() {
 
   if(isDefined(level.mechz_spawning_logic_override_func)) {
     level thread[[level.mechz_spawning_logic_override_func]]();
-  }
-  else {
+  } else {
     level thread mechz_spawning_logic();
   }
 
@@ -234,8 +233,7 @@ flamethrower_fx_watcher() {
 
     if(notetrack == "start_ft") {
       self.fx_field = self.fx_field | 64;
-    }
-    else if(notetrack == "stop_ft") {
+    } else if(notetrack == "stop_ft") {
       self.fx_field = self.fx_field &~64;
     }
 
@@ -272,8 +270,7 @@ play_ambient_mechz_vocals() {
 
   while(true) {
     if(isDefined(self)) {
-      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {
-      } else
+      if(isDefined(self.favoriteenemy) && distance(self.origin, self.favoriteenemy.origin) <= 150) {} else
         self playSound("zmb_ai_mechz_vox_ambient");
     }
 
@@ -337,14 +334,11 @@ mechz_round_tracker() {
 
       if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
         level.mechz_zombie_per_round = 1;
-      }
-      else if(level.mechz_round_count < 2) {
+      } else if(level.mechz_round_count < 2) {
         level.mechz_zombie_per_round = 1;
-      }
-      else if(level.mechz_round_count < 5) {
+      } else if(level.mechz_round_count < 5) {
         level.mechz_zombie_per_round = 2;
-      }
-      else {
+      } else {
         level.mechz_zombie_per_round = 3;
       }
 
@@ -355,8 +349,7 @@ mechz_round_tracker() {
 
       if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
         n_round_gap = randomintrange(level.mechz_min_round_fq_solo, level.mechz_max_round_fq_solo);
-      }
-      else {
+      } else {
         n_round_gap = randomintrange(level.mechz_min_round_fq, level.mechz_max_round_fq);
       }
 
@@ -403,8 +396,7 @@ mechz_spawning_logic() {
   }
 }
 
-mechz_prespawn() {
-}
+mechz_prespawn() {}
 
 mechz_attach_objects() {
   self detachall();
@@ -556,8 +548,7 @@ mechz_spawn() {
 
   if(isDefined(level.mechz_find_flesh_override_func)) {
     level thread[[level.mechz_find_flesh_override_func]]();
-  }
-  else {
+  } else {
     self thread mechz_find_flesh();
   }
 
@@ -622,8 +613,7 @@ get_best_mechz_spawn_pos(ignore_used_positions) {
 
   if(isDefined(best_pos)) {
     best_pos.has_been_used = 1;
-  }
-  else if(level.zombie_mechz_locations.size > 0) {
+  } else if(level.zombie_mechz_locations.size > 0) {
     return level.zombie_mechz_locations[randomint(level.zombie_mechz_locations.size)];
   }
 
@@ -914,13 +904,12 @@ mechz_get_closest_valid_player() {
     default:
       if(isDefined(level.closest_player_override)) {
         player = [
-      }
+          }
           [level.closest_player_override]
-        ](self.origin, players);
+      ](self.origin, players);
       else if(isDefined(level.calc_closest_player_using_paths) && level.calc_closest_player_using_paths) {
         player = get_closest_player_using_paths(self.origin, players);
-      }
-      else {
+      } else {
         player = getclosest(self.origin, players);
       }
 
@@ -993,8 +982,7 @@ get_favorite_enemy(origin, players) {
     }
     if(isDefined(distances[i])) {
       dist = distances[i];
-    }
-    else {
+    } else {
       continue;
     }
 
@@ -1068,29 +1056,21 @@ mechz_get_aim_anim(anim_prefix, target_pos, right_offset) {
 
   if(centered_ud && centered_lr) {
     return anim_prefix + "_aim_5";
-  }
-  else if(centered_ud && right_anim) {
+  } else if(centered_ud && right_anim) {
     return anim_prefix + "_aim_6";
-  }
-  else if(centered_ud) {
+  } else if(centered_ud) {
     return anim_prefix + "_aim_4";
-  }
-  else if(centered_lr && up_anim) {
+  } else if(centered_lr && up_anim) {
     return anim_prefix + "_aim_8";
-  }
-  else if(centered_lr) {
+  } else if(centered_lr) {
     return anim_prefix + "_aim_2";
-  }
-  else if(right_anim && up_anim) {
+  } else if(right_anim && up_anim) {
     return anim_prefix + "_aim_9";
-  }
-  else if(right_anim) {
+  } else if(right_anim) {
     return anim_prefix + "_aim_3";
-  }
-  else if(up_anim) {
+  } else if(up_anim) {
     return anim_prefix + "_aim_7";
-  }
-  else {
+  } else {
     return anim_prefix + "_aim_1";
   }
 }
@@ -1121,8 +1101,7 @@ watch_for_player_dist() {
 
     if(isDefined(player) && (isDefined(player.is_player_slowed) && player.is_player_slowed)) {
       reset_dist = level.mechz_reset_dist_sq / 2;
-    }
-    else {
+    } else {
       reset_dist = level.mechz_reset_dist_sq;
     }
 
@@ -1276,8 +1255,7 @@ mechz_find_flesh() {
     } else if(isDefined(self.jump_requested) && self.jump_requested || isDefined(self.force_jump) && self.force_jump) {
       if(self mechz_in_range_for_jump()) {
         self mechz_do_jump();
-      }
-      else {
+      } else {
         if(getdvarint(#"_id_E7121222") > 1) {
           println("\\n\\tMZ: Jump Requested, going to jump pos\\n");
         }
@@ -1318,8 +1296,7 @@ mechz_find_flesh() {
 
     if(isDefined(level.damage_prone_players_override_func)) {
       level thread[[level.damage_prone_players_override_func]]();
-    }
-    else {
+    } else {
       self thread damage_prone_players();
     }
 
@@ -1343,8 +1320,7 @@ damage_prone_players() {
         if(player_z < mechz_z && mechz_z - player_z <= 75) {
           if(isDefined(self.meleedamage)) {
             idamage = self.meleedamage;
-          }
-          else {
+          } else {
             idamage = 50;
           }
 
@@ -1440,8 +1416,7 @@ mechz_damage_override(inflictor, attacker, damage, flags, meansofdeath, weapon, 
 
       if(!(isDefined(self.powerplant_covered) && self.powerplant_covered)) {
         self.powerplant_dmg = self.powerplant_dmg + final_damage;
-      }
-      else {
+      } else {
         self.powerplant_cover_dmg = self.powerplant_cover_dmg + final_damage;
       }
     }
@@ -1556,8 +1531,7 @@ mechz_non_attacker_damage_override(damage, weapon, attacker) {
   return false;
 }
 
-mechz_instakill_override() {
-}
+mechz_instakill_override() {}
 
 mechz_nuke_override() {
   self endon("death");
@@ -1572,23 +1546,17 @@ mechz_set_locomotion_speed() {
 
   if(!isDefined(self.favoriteenemy)) {
     self.zombie_move_speed = "walk";
-  }
-  else if(isDefined(self.force_run) && self.force_run) {
+  } else if(isDefined(self.force_run) && self.force_run) {
     self.zombie_move_speed = "run";
-  }
-  else if(isDefined(self.force_sprint) && self.force_sprint) {
+  } else if(isDefined(self.force_sprint) && self.force_sprint) {
     self.zombie_move_speed = "sprint";
-  }
-  else if(isDefined(self.favoriteenemy) && self.favoriteenemy entity_on_tank() && isDefined(level.vh_tank) && level.vh_tank ent_flag("tank_activated")) {
+  } else if(isDefined(self.favoriteenemy) && self.favoriteenemy entity_on_tank() && isDefined(level.vh_tank) && level.vh_tank ent_flag("tank_activated")) {
     self.zombie_move_speed = "run";
-  }
-  else if(isDefined(self.favoriteenemy) && distancesquared(self.origin, self.favoriteenemy.origin) > level.mechz_dist_for_sprint) {
+  } else if(isDefined(self.favoriteenemy) && distancesquared(self.origin, self.favoriteenemy.origin) > level.mechz_dist_for_sprint) {
     self.zombie_move_speed = "run";
-  }
-  else if(!(isDefined(self.has_powerplant) && self.has_powerplant)) {
+  } else if(!(isDefined(self.has_powerplant) && self.has_powerplant)) {
     self.zombie_move_speed = "walk";
-  }
-  else {
+  } else {
     self.zombie_move_speed = "walk";
   }
 
@@ -1655,7 +1623,7 @@ start_see_mech_zombie_vo() {
   }
   if(isalive(ai_mechz)) {
     foreach(player in a_players) {
-    player thread player_looking_at_mechz_watcher(ai_mechz);
+      player thread player_looking_at_mechz_watcher(ai_mechz);
     }
   }
 }

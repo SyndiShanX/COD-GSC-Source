@@ -18,8 +18,7 @@ main(allowed) {
   if(getdvar(#"_id_2070E289") != "") {
     if(getdvarint(#"_id_2070E289") != 0) {
       vehicles_enabled = 1;
-    }
-    else {
+    } else {
       vehicles_enabled = 0;
     }
   }
@@ -151,8 +150,7 @@ createcarryobject(ownerteam, trigger, visuals, offset) {
 
   if(issubstr(trigger.classname, "use")) {
     carryobject.triggertype = "use";
-  }
-  else {
+  } else {
     carryobject.triggertype = "proximity";
   }
 
@@ -200,8 +198,7 @@ createcarryobject(ownerteam, trigger, visuals, offset) {
 
   if(carryobject.triggertype == "use") {
     carryobject thread carryobjectusethink();
-  }
-  else {
+  } else {
     carryobject thread carryobjectproxthink();
   }
 
@@ -400,8 +397,7 @@ giveobject(object) {
 
       if(!object.allowweapons) {
         self.carryicon setpoint("CENTER", "CENTER", 0, 60);
-      }
-      else {
+      } else {
         self.carryicon.x = -135;
         self.carryicon.y = -103;
         self.carryicon.horzalign = "user_right";
@@ -459,8 +455,7 @@ setdropped() {
 
   if(isDefined(self.carrier)) {
     angletrace = bulletTrace(self.carrier.origin + vectorscale((0, 0, 1), 20.0), self.carrier.origin - vectorscale((0, 0, 1), 2000.0), 0, self.carrier.body);
-  }
-  else {
+  } else {
     angletrace = bulletTrace(self.safeorigin + vectorscale((0, 0, 1), 20.0), self.safeorigin - vectorscale((0, 0, 1), 20.0), 0, undefined);
   }
 
@@ -625,8 +620,7 @@ createuseobject(ownerteam, trigger, visuals, offset, descriptionallies, descript
 
   if(issubstr(trigger.classname, "use")) {
     useobject.triggertype = "use";
-  }
-  else {
+  } else {
     useobject.triggertype = "proximity";
   }
 
@@ -894,8 +888,7 @@ setclaimteam(newteam) {
 
   if(self.claimteam == "none" && gettime() - self.lastclaimtime > 1000) {
     self.curprogress = 0;
-  }
-  else if(newteam != "none" && newteam != self.lastclaimteam) {
+  } else if(newteam != "none" && newteam != self.lastclaimteam) {
     self.curprogress = 0;
   }
 
@@ -1042,11 +1035,9 @@ updateuserate() {
   if(self.decayprogress) {
     if(numclaimants && !numother) {
       self.userate = numclaimants;
-    }
-    else if(!numclaimants && numother) {
+    } else if(!numclaimants && numother) {
       self.userate = numother;
-    }
-    else if(!numclaimants && !numother) {
+    } else if(!numclaimants && !numother) {
       self.userate = 1;
     }
   } else if(numclaimants && !numother)
@@ -1121,8 +1112,7 @@ useholdthink(player) {
     if(isDefined(useweapon)) {
       if(lastweapon != "none") {
         player switchtoweapon(lastweapon);
-      }
-      else {
+      } else {
         player takeweapon(useweapon);
       }
     } else
@@ -1181,8 +1171,7 @@ useholdthinkloop(player, lastweapon) {
 
         if(lastweapon != "none") {
           player switchtoweapon(lastweapon);
-        }
-        else {
+        } else {
           player takeweapon(useweapon);
         }
       } else
@@ -1246,8 +1235,7 @@ updatetrigger() {
   }
   if(self.interactteam == "none") {
     self.trigger.origin = self.trigger.origin - vectorscale((0, 0, 1), 50000.0);
-  }
-  else if(self.interactteam == "any") {
+  } else if(self.interactteam == "any") {
     self.trigger.origin = self.curorigin;
     self.trigger setteamfortrigger("none");
   } else if(self.interactteam == "friendly") {
@@ -1255,11 +1243,9 @@ updatetrigger() {
 
     if(self.ownerteam == "allies") {
       self.trigger setteamfortrigger("allies");
-    }
-    else if(self.ownerteam == "axis") {
+    } else if(self.ownerteam == "axis") {
       self.trigger setteamfortrigger("axis");
-    }
-    else {
+    } else {
       self.trigger.origin = self.trigger.origin - vectorscale((0, 0, 1), 50000.0);
     }
   } else if(self.interactteam == "enemy") {
@@ -1267,11 +1253,9 @@ updatetrigger() {
 
     if(self.ownerteam == "allies") {
       self.trigger setteamfortrigger("axis");
-    }
-    else if(self.ownerteam == "axis") {
+    } else if(self.ownerteam == "axis") {
       self.trigger setteamfortrigger("allies");
-    }
-    else {
+    } else {
       self.trigger setteamfortrigger("none");
     }
   }
@@ -1319,16 +1303,14 @@ updateworldicon(relativeteam, showicon) {
 
       if(isDefined(self.compassicons[relativeteam])) {
         objpoint setwaypoint(iswaypoint, self.worldicons[relativeteam], objpoint.isdistanceshown);
-      }
-      else {
+      } else {
         objpoint setwaypoint(iswaypoint, "", objpoint.isdistanceshown);
       }
 
       if(self.type == "carryObject") {
         if(isDefined(self.carrier) && !shouldpingobject(relativeteam)) {
           objpoint settargetent(self.carrier);
-        }
-        else {
+        } else {
           objpoint cleartargetent();
         }
       }
@@ -1397,8 +1379,7 @@ updatecompassicon(relativeteam, showicon) {
 shouldpingobject(relativeteam) {
   if(relativeteam == "friendly" && self.objidpingfriendly) {
     return true;
-  }
-  else if(relativeteam == "enemy" && self.objidpingenemy) {
+  } else if(relativeteam == "enemy" && self.objidpingenemy) {
     return true;
   }
 
@@ -1411,8 +1392,7 @@ getupdateteams(relativeteam) {
   if(relativeteam == "friendly") {
     if(self isfriendlyteam("allies")) {
       updateteams[0] = "allies";
-    }
-    else if(self isfriendlyteam("axis")) {
+    } else if(self isfriendlyteam("axis")) {
       updateteams[0] = "axis";
     }
   } else if(relativeteam == "enemy") {
@@ -1613,11 +1593,9 @@ getrelativeteam(team) {
 
   if(team == self.ownerteam) {
     return "friendly";
-  }
-  else if(team == enemyteam) {
+  } else if(team == enemyteam) {
     return "enemy";
-  }
-  else {
+  } else {
     return "neutral";
   }
 }
@@ -1643,15 +1621,13 @@ caninteractwith(team) {
     case "friendly":
       if(team == self.ownerteam) {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
     case "enemy":
       if(team != self.ownerteam) {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
     default:
@@ -1724,11 +1700,9 @@ _enableweapon() {
 getenemyteam(team) {
   if(team == "neutral") {
     return "none";
-  }
-  else if(team == "allies") {
+  } else if(team == "allies") {
     return "axis";
-  }
-  else {
+  } else {
     return "allies";
   }
 }
@@ -1799,8 +1773,7 @@ createdistanceobject(ownerteam, trigger, offset, wholeteamhastoreach, descriptio
 
   if(isDefined(wholeteamhastoreach) && wholeteamhastoreach) {
     distanceobject thread distanceobjectforwholeteamthink();
-  }
-  else {
+  } else {
     distanceobject thread distanceobjectthink();
   }
 

@@ -17,8 +17,7 @@ init() {
 
   if(level.console) {
     level.fontheight = 12;
-  }
-  else {
+  } else {
     level.fontheight = 12;
   }
 
@@ -273,16 +272,14 @@ func_8DFA(var_00, var_01, var_02) {
 
   if(var_02 == level.func_8DF1[var_00]) {
     return;
-  }
-  else if(var_02 < level.func_8DF1[var_00]) {
+  } else if(var_02 < level.func_8DF1[var_00]) {
     var_10 = 0;
   }
 
   for(var_11 = 0; var_11 < var_01; var_11 = var_11 + 0.05) {
     if(var_10) {
       level.func_8DF1[var_00] = level.func_8DF1[var_00] + var_06;
-    }
-    else {
+    } else {
       level.func_8DF1[var_00] = level.func_8DF1[var_00] - var_06;
     }
 
@@ -300,11 +297,9 @@ func_8E00(var_00) {
 
   if(var_00 == "oxygen") {
     var_01 = randomfloatrange(-0.5, 0.5) + level.func_8DF1[var_00];
-  }
-  else if(var_00 == "temperature") {
+  } else if(var_00 == "temperature") {
     var_01 = randomintrange(-1, 1) + level.func_8DF1[var_00];
-  }
-  else if(var_00 == "pressure") {
+  } else if(var_00 == "pressure") {
     var_01 = randomfloatrange(-0.5, 0.5) + level.func_8DF1[var_00];
   }
 

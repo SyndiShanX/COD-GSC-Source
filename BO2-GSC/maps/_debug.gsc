@@ -26,8 +26,7 @@ maindebug() {
 
   if(getdebugdvar("debug_corner") == "") {
     setdvar("debug_corner", "off");
-  }
-  else if(getdebugdvar("debug_corner") == "on") {
+  } else if(getdebugdvar("debug_corner") == "on") {
     debug_corner();
   }
 
@@ -161,8 +160,7 @@ debug_enemyposreplay() {
     if(guy.goodshootposvalid) {
       if(guy.team == "axis") {
         color = (1, 0, 0);
-      }
-      else {
+      } else {
         color = (0, 0, 1);
       }
 
@@ -512,8 +510,7 @@ debugmisstime() {
   for(;;) {
     if(self.a.misstime <= 0) {
       print3d(self gettagorigin("TAG_EYE") + vectorscale((0, 0, 1), 15.0), "hit", (0.3, 1, 1), 1);
-    }
-    else {
+    } else {
       print3d(self gettagorigin("TAG_EYE") + vectorscale((0, 0, 1), 15.0), self.a.misstime / 20, (0.3, 1, 1), 1);
     }
 
@@ -1165,8 +1162,7 @@ debug_nuke() {
   setdvar("debug_nuke", "off");
 }
 
-debug_misstime() {
-}
+debug_misstime() {}
 
 camera() {
   wait 0.05;
@@ -1316,8 +1312,7 @@ lastsightposwatch() {
     }
     if(guy animscripts\utility::hasenemysightpos()) {
       org = guy animscripts\utility::getenemysightpos();
-    }
-    else {
+    } else {
       org = undefined;
     }
 
@@ -1388,15 +1383,13 @@ updateminimapsetting() {
 
         if(corners[1].origin[0] > corners[0].origin[0]) {
           maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-        }
-        else {
+        } else {
           mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
         }
 
         if(corners[1].origin[1] > corners[0].origin[1]) {
           maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-        }
-        else {
+        } else {
           mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
         }
 
@@ -1447,8 +1440,7 @@ updateminimapsetting() {
 
         if(angleside > angletop) {
           angle = angleside;
-        }
-        else {
+        } else {
           angle = angletop;
         }
 
@@ -1592,8 +1584,7 @@ islookingatorigin(origin) {
 
   if(vectordot > insidedot) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -1722,8 +1713,7 @@ debugthreatcalc() {
 
   if(entnum == 0) {
     entity = players[0];
-  }
-  else {
+  } else {
     for(i = 0; i < ai.size; i++) {
       if(entnum != ai[i] getentnum()) {
         continue;
@@ -2033,8 +2023,7 @@ debug_animsound() {
 
   if(level.animsound_locked) {
     level.animsound_hud_locked.alpha = 1;
-  }
-  else {
+  } else {
     level.animsound_hud_locked.alpha = 0;
   }
 
@@ -2328,8 +2317,7 @@ print_aliases_to_file(file) {
 
         if(notetrack == "#" + anime) {
           fprintln(file, tab + "addOnStart_animSound( " + tostr(animnames[i]) + ", " + tostr(anime) + ", " + tostr(alias) + " ); ");
-        }
-        else {
+        } else {
           fprintln(file, tab + "addNotetrack_animSound( " + tostr(animnames[i]) + ", " + tostr(anime) + ", " + tostr(notetrack) + ", " + tostr(alias) + " ); ");
         }
 
@@ -2390,8 +2378,7 @@ complete_me() {
   nextmission();
 }
 
-debug_bayonet() {
-}
+debug_bayonet() {}
 
 new_hud(hud_name, msg, x, y, scale) {
   if(!isDefined(level.hud_array)) {
@@ -2523,8 +2510,7 @@ set_event_printname_thread(text, focus) {
 
   if(focus) {
     level.event_hudelem.color = (1, 1, 0);
-  }
-  else {
+  } else {
     level.event_hudelem.color = (1, 1, 1);
   }
 
@@ -2548,8 +2534,7 @@ set_event_printname_thread(text, focus) {
 
     if(toggle && enabled) {
       level.event_hudelem.alpha = 1;
-    }
-    else if(toggle) {
+    } else if(toggle) {
       level.event_hudelem.alpha = 0;
     }
 
@@ -2587,8 +2572,7 @@ engagement_distance_debug_toggle() {
 dvar_turned_on(val) {
   if(val <= 0) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -2712,8 +2696,7 @@ engage_dists_add(weapontypestr, values) {
 get_engage_dists(weapontypestr) {
   if(isDefined(level.engagedists[weapontypestr])) {
     return level.engagedists[weapontypestr];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -2728,8 +2711,7 @@ engage_dists_watcher() {
 
     if(!isDefined(player.lastweapon)) {
       player.lastweapon = playerweapon;
-    }
-    else if(player.lastweapon == playerweapon) {
+    } else if(player.lastweapon == playerweapon) {
       wait 0.05;
       continue;
     }
@@ -2738,8 +2720,7 @@ engage_dists_watcher() {
 
     if(isDefined(values)) {
       level.weaponengagedistvalues = values;
-    }
-    else {
+    } else {
       level.weaponengagedistvalues = undefined;
     }
 
@@ -2878,8 +2859,7 @@ debug_ai_engage_dist() {
 
           if(!isDefined(level.weaponengagedistvalues)) {
             drawcolor = level.white;
-          }
-          else {
+          } else {
             engagedistmin = level.weaponengagedistvalues.engagedistmin;
             engagedistoptimal = level.weaponengagedistvalues.engagedistoptimal;
             engagedistmulligan = level.weaponengagedistvalues.engagedistmulligan;
@@ -2954,8 +2934,7 @@ dynamic_ai_spawner() {
 
   if(spawnfriendly && isDefined(level.friendly_spawner)) {
     get_players()[0] thread spawn_guy_placement(level.friendly_spawner);
-  }
-  else {
+  } else {
     get_players()[0] thread spawn_guy_placement(level.enemy_spawner);
   }
 
@@ -3213,8 +3192,7 @@ ai_puppet_manager() {
         } else {
           if(isDefined(level.ai_puppet.scriptenemy)) {
             to_target = level.ai_puppet.scriptenemy.origin - level.ai_puppet.origin;
-          }
-          else {
+          } else {
             to_target = level.playercursor["position"] - level.ai_puppet.origin;
           }
 
@@ -3230,8 +3208,7 @@ ai_puppet_manager() {
       if(isDefined(level.playercursorai)) {
         if(isDefined(level.ai_puppet) && level.playercursorai == level.ai_puppet) {
           ai_puppet_release(1);
-        }
-        else {
+        } else {
           if(isDefined(level.ai_puppet)) {
             ai_puppet_release(0);
           }
@@ -3285,8 +3262,7 @@ ai_puppet_manager() {
       if(isDefined(level.ai_puppet.scriptenemy) && !level.ai_puppet_highlighting) {
         if(isai(level.ai_puppet.scriptenemy)) {
           ai_puppeteer_render_ai(level.ai_puppet.scriptenemy, (1, 0, 0));
-        }
-        else if(isDefined(level.ai_puppet_target)) {
+        } else if(isDefined(level.ai_puppet_target)) {
           self thread ai_puppeteer_render_point(level.ai_puppet_target.origin, level.ai_puppet_target_normal, anglesToForward(self getplayerangles()), (1, 0, 0));
         }
       }

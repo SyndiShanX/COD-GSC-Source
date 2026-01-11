@@ -6,8 +6,7 @@
 enable_dog_kinect() {
   if(level.script == "enemyhq") {
     speechenablegrammar("speech/iw6/grammars/en-us_rileyenemyhq.cfg", 1);
-  }
-  else if(level.script == "nml") {
+  } else if(level.script == "nml") {
     speechenablegrammar("speech/iw6/grammars/en-us_rileynml.cfg", 1);
   }
 
@@ -20,8 +19,7 @@ disable_dog_kinect() {
 
   if(level.script == "enemyhq") {
     speechenablegrammar("speech/iw6/grammars/en-us_rileyenemyhq.cfg", 0);
-  }
-  else if(level.script == "nml") {
+  } else if(level.script == "nml") {
     speechenablegrammar("speech/iw6/grammars/en-us_rileynml.cfg", 0);
   }
 }
@@ -50,8 +48,7 @@ listen_for_dog_kinect_commands(var_0) {
         if(var_1 > var_3) {
           if(isDefined(var_0.controlling_dog) && var_0 maps\_utility::ent_flag("pause_dog_command")) {
             level.player notify("attack_command");
-          }
-          else {
+          } else {
             level.player notify("fired_laser");
           }
         }

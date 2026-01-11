@@ -90,11 +90,9 @@ showNotifyMessage(notifyData) {
   waitRequireVisibility(0);
   if(isDefined(notifyData.duration)) {
     duration = notifyData.duration;
-  }
-  else if(level.gameEnded) {
+  } else if(level.gameEnded) {
     duration = 2.0;
-  }
-  else {
+  } else {
     duration = 4.0;
   }
   self thread resetOnCancel();
@@ -103,8 +101,7 @@ showNotifyMessage(notifyData) {
   }
   if(isDefined(notifyData.glowColor)) {
     glowColor = notifyData.glowColor;
-  }
-  else {
+  } else {
     glowColor = (0.0, 0.0, 0.0);
   }
   anchorElem = self.notifyTitle;
@@ -112,21 +109,18 @@ showNotifyMessage(notifyData) {
     if(level.splitScreen) {
       if(isDefined(notifyData.titleLabel)) {
         self iPrintLnBold(notifyData.titleLabel, notifyData.titleText);
-      }
-      else {
+      } else {
         self iPrintLnBold(notifyData.titleText);
       }
     } else {
       if(isDefined(notifyData.titleLabel)) {
         self.notifyTitle.label = notifyData.titleLabel;
-      }
-      else {
+      } else {
         self.notifyTitle.label = &"";
       }
       if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString)) {
         self.notifyTitle setValue(notifyData.titleText);
-      }
-      else {
+      } else {
         self.notifyTitle setText(notifyData.titleText);
       }
       self.notifyTitle setPulseFX(100, int(duration * 1000), 1000);
@@ -138,21 +132,18 @@ showNotifyMessage(notifyData) {
     if(level.splitScreen) {
       if(isDefined(notifyData.textLabel)) {
         self iPrintLnBold(notifyData.textLabel, notifyData.notifyText);
-      }
-      else {
+      } else {
         self iPrintLnBold(notifyData.notifyText);
       }
     } else {
       if(isDefined(notifyData.textLabel)) {
         self.notifyText.label = notifyData.textLabel;
-      }
-      else {
+      } else {
         self.notifyText.label = &"";
       }
       if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString)) {
         self.notifyText setValue(notifyData.notifyText);
-      }
-      else {
+      } else {
         self.notifyText setText(notifyData.notifyText);
       }
       self.notifyText setPulseFX(100, int(duration * 1000), 1000);
@@ -165,22 +156,19 @@ showNotifyMessage(notifyData) {
     if(level.splitScreen) {
       if(isDefined(notifyData.text2Label)) {
         self iPrintLnBold(notifyData.text2Label, notifyData.notifyText2);
-      }
-      else {
+      } else {
         self iPrintLnBold(notifyData.notifyText2);
       }
     } else {
       self.notifyText2 setParent(anchorElem);
       if(isDefined(notifyData.text2Label)) {
         self.notifyText2.label = notifyData.text2Label;
-      }
-      else {
+      } else {
         self.notifyText2.label = &"";
       }
       if(isDefined(notifyData.text2Label) && !isDefined(notifyData.textIsString)) {
         self.notifyText2 setValue(notifyData.notifyText2);
-      }
-      else {
+      } else {
         self.notifyText2 setText(notifyData.notifyText2);
       }
       self.notifyText2 setText(notifyData.notifyText2);
@@ -194,22 +182,19 @@ showNotifyMessage(notifyData) {
     if(level.splitScreen) {
       if(isDefined(notifyData.text3Label)) {
         self iPrintLnBold(notifyData.text3Label, notifyData.notifyText3);
-      }
-      else {
+      } else {
         self iPrintLnBold(notifyData.notifyText3);
       }
     } else {
       self.notifyText3 setParent(anchorElem);
       if(isDefined(notifyData.text3Label)) {
         self.notifyText3.label = notifyData.text3Label;
-      }
-      else {
+      } else {
         self.notifyText3.label = &"";
       }
       if(isDefined(notifyData.text3Label) && !isDefined(notifyData.textIsString)) {
         self.notifyText3 setValue(notifyData.notifyText3);
-      }
-      else {
+      } else {
         self.notifyText3 setText(notifyData.notifyText3);
       }
       self.notifyText3 setText(notifyData.notifyText3);

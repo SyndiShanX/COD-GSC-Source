@@ -43,8 +43,7 @@ addtosystem(var_0) {
   if(forceenglish()) {
     if(self.team == "allies") {
       self.script_battlechatter = 0;
-    }
-    else {
+    } else {
       self.voice = "american";
     }
   }
@@ -313,22 +312,19 @@ init_aibattlechatter() {
 
   if(isDefined(self.script_battlechatter) && !self.script_battlechatter) {
     self.battlechatter = 0;
-  }
-  else {
+  } else {
     self.battlechatter = level.battlechatter[self.team];
   }
 
   if(animscripts\battlechatter::voicecanburst()) {
     self.flavorbursts = 1;
-  }
-  else {
+  } else {
     self.flavorbursts = 0;
   }
 
   if(level.friendlyfire_warnings) {
     maps\_utility::set_friendlyfire_warnings(1);
-  }
-  else {
+  } else {
     maps\_utility::set_friendlyfire_warnings(0);
   }
 
@@ -475,8 +471,7 @@ squadofficerwaiter() {
 
     if(self.officers.size) {
       var_1 = self.officers;
-    }
-    else {
+    } else {
       var_1 = self.members;
     }
 
@@ -535,8 +530,7 @@ getthreatsovertime(var_0, var_1) {
 
       if(isDefined(var_13) && !animscripts\battlechatter::location_called_out_recently(var_13)) {
         var_8[var_8.size] = var_12;
-      }
-      else {
+      } else {
         var_9[var_9.size] = var_12;
       }
     }
@@ -552,11 +546,11 @@ getthreatsovertime(var_0, var_1) {
   var_5 = [];
 
   foreach(var_16 in var_8) {
-  var_5[var_5.size] = var_16;
+    var_5[var_5.size] = var_16;
   }
 
   foreach(var_16 in var_9) {
-  var_5[var_5.size] = var_16;
+    var_5[var_5.size] = var_16;
   }
 
   return var_5;
@@ -581,11 +575,9 @@ squadthreatwaiter() {
   for(;;) {
     if(self.team == "allies") {
       var_0 = getthreatsovertime(getaiarray("axis", "team3"), 0.5);
-    }
-    else if(self.team == "team3") {
+    } else if(self.team == "team3") {
       var_0 = getthreatsovertime(getaiarray("allies", "axis"), 0.5);
-    }
-    else {
+    } else {
       wait 0.5;
       var_0 = getaiarray("allies", "team3");
       var_0[var_0.size] = level.player;
@@ -789,8 +781,7 @@ evaluatemoveevent(var_0) {
   if(self.team != "axis" && self.team != "team3") {
     if(!isDefined(var_1)) {
       var_1 = level.player;
-    }
-    else if(randomint(100) < anim.eventchance["moveEvent"]["ordertoplayer"]) {
+    } else if(randomint(100) < anim.eventchance["moveEvent"]["ordertoplayer"]) {
       var_1 = level.player;
     }
   }
@@ -798,8 +789,7 @@ evaluatemoveevent(var_0) {
   if(self.combattime > 0.0) {
     if(randomint(100) < anim.eventchance["moveEvent"]["coverme"]) {
       addorderevent("action", "coverme", var_1);
-    }
-    else {
+    } else {
       addorderevent("move", "combat", var_1);
     }
   } else if(nationalityokformoveordernoncombat())
@@ -1129,8 +1119,7 @@ endcustomevent(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2.type = var_1;
-  }
-  else {
+  } else {
     var_2.type = "custom";
   }
 

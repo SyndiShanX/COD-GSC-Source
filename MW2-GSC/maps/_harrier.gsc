@@ -83,8 +83,7 @@ playerisinfront(other) {
   dot = vectordot(forwardvec, normalvec);
   if(dot > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

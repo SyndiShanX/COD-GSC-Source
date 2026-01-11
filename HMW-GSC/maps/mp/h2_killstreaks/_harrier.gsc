@@ -29,11 +29,9 @@ beginHarrier(lifeId, startPoint, pos) {
 
   if(isDefined(heightEnt)) {
     trueHeight = heightEnt.origin[2];
-  }
-  else if(isDefined(level.airstrikeHeightScale)) {
+  } else if(isDefined(level.airstrikeHeightScale)) {
     trueHeight = 850 * level.airstrikeHeightScale;
-  }
-  else {
+  } else {
     trueHeight = 850;
   }
 
@@ -484,8 +482,7 @@ fireOnTarget(facingTolerance, zOffset) {
   for(;;) {
     if(self isReadyToFire(facingTolerance)) {
       break;
-    }
-    else {
+    } else {
       wait(.25);
     }
   }
@@ -531,8 +528,7 @@ isReadyToFire(tolerance) {
 
   if(targetCosine >= facingCosine) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -543,8 +539,7 @@ acquireGroundTarget(targets) {
 
   if(targets.size == 1) {
     self.bestTarget = targets[0];
-  }
-  else {
+  } else {
     self.bestTarget = self getBestTarget(targets);
   }
 
@@ -578,8 +573,7 @@ wouldCollide(destination) {
 
   if(trace["position"] == destination) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -817,8 +811,7 @@ fireMissile(missileTarget) {
 
   if(isDefined(missileTarget.targetEnt)) {
     missile = self fireWeapon("tag_flash", missileTarget.targetEnt, (0, 0, -250));
-  }
-  else {
+  } else {
     missile = self fireWeapon("tag_flash", missileTarget, (0, 0, -250));
   }
 
@@ -1072,8 +1065,7 @@ evasiveManuverOne() {
   yaw = self.angles[1];
   if(cointoss()) {
     direction = (0, yaw + 90, 0);
-  }
-  else {
+  } else {
     direction = (0, yaw - 90, 0);
   }
 

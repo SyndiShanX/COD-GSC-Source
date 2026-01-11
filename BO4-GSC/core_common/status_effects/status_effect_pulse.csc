@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\filter_shared;
 #include scripts\core_common\system_shared;
-
 #namespace status_effect_pulse;
 
 autoexec __init__system__() {
@@ -35,7 +34,7 @@ start_pulse_effects(localplayer, bwastimejump = 0) {
   filter::set_filter_tactical_amount(localplayer, 2, 1);
 
   if(!bwastimejump) {
-    playSound(0, #"mpl_plr_emp_activate", (0, 0, 0));
+    playSound(0, # "mpl_plr_emp_activate", (0, 0, 0));
   }
 
   audio::playloopat("mpl_plr_emp_looper", (0, 0, 0));
@@ -46,7 +45,7 @@ stop_pulse_effects(localplayer, oldval, bwastimejump = 0) {
   filter::disable_filter_tactical(localplayer, 2);
 
   if(oldval != 0 && !bwastimejump) {
-    playSound(0, #"mpl_plr_emp_deactivate", (0, 0, 0));
+    playSound(0, # "mpl_plr_emp_deactivate", (0, 0, 0));
   }
 
   audio::stoploopat("mpl_plr_emp_looper", (0, 0, 0));

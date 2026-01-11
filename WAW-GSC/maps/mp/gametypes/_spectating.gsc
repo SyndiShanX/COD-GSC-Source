@@ -52,11 +52,9 @@ updateSpectateSettings() {
 getOtherTeam(team) {
   if(team == "axis") {
     return "allies";
-  }
-  else if(team == "allies") {
+  } else if(team == "allies") {
     return "axis";
-  }
-  else {
+  } else {
     return "none";
   }
 }

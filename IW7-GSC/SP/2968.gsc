@@ -332,9 +332,7 @@ func_1321C(param_00) {
 
       self vehicle_setspeed(0, var_06);
       if(isDefined(var_04.target)) {
-        thread func_C82A([
-          [var_05]
-        ](var_04.target));
+        thread func_C82A([[var_05]](var_04.target));
       }
 
       var_04 scripts\sp\utility::script_delay();
@@ -362,9 +360,7 @@ func_1321C(param_00) {
         }
 
         func_1445("script_flag_wait_" + var_04.var_EDA0, var_07, var_06);
-        thread func_C82A([
-          [var_05]
-        ](var_04.target));
+        thread func_C82A([[var_05]](var_04.target));
       }
 
       scripts\engine\utility::flag_wait(var_04.var_EDA0);
@@ -467,9 +463,7 @@ func_1321B(param_00, param_01, param_02) {
     if(isDefined(var_07.var_EDFA)) {
       var_09 = 0;
       if(isDefined(var_07.target)) {
-        var_09 = isDefined([
-          [var_08]
-        ](var_07.target));
+        var_09 = isDefined([[var_08]](var_07.target));
       }
 
       thread scripts\sp\vehicle_code::func_13200(var_07.var_EEFB, var_09);

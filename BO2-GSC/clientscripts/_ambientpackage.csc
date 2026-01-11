@@ -119,8 +119,7 @@ declareambientpackage(package, defaultpackage) {
 
   if(isDefined(defaultpackage)) {
     level.ambientpackages[package].defaultpackage = defaultpackage;
-  }
-  else {
+  } else {
     level.ambientpackages[package].defaultpackage = 0;
   }
 
@@ -176,8 +175,7 @@ declareambientroom(room, defaultroom) {
 
   if(isDefined(defaultroom)) {
     level.ambientrooms[room].defaultroom = defaultroom;
-  }
-  else {
+  } else {
     level.ambientrooms[room].defaultroom = 0;
   }
 
@@ -526,8 +524,7 @@ ambientelementthread() {
         if(getdvarint(#"_id_0AEB127D") > 0) {
           if(level.ambientpackagescriptoriginpool[index].soundid == -1) {
             col = vectorscale((1, 0, 0), 0.8);
-          }
-          else {
+          } else {
             col = vectorscale((0, 1, 0), 0.8);
           }
 
@@ -628,8 +625,7 @@ findhighestpriorityambientroom() {
   if(isDefined(roomarray)) {
     for(i = 0; i < roomarray.size; i++) {
       for(j = 0; j < level.ambientrooms[roomarray[i]].priority.size; j++) {
-        if(level.ambientrooms[roomarray[i]].refcount[j]) {
-        }
+        if(level.ambientrooms[roomarray[i]].refcount[j]) {}
 
         if(level.ambientrooms[roomarray[i]].refcount[j] && level.ambientrooms[roomarray[i]].priority[j] > priority) {
           room = roomarray[i];
@@ -676,21 +672,16 @@ updateactiveambientroom() {
     } else {
       if(isDefined(newroom) && isDefined(newroom.tone)) {
         newroom.id = playLoopSound(0, newroom.ent, newroom.tone, newroom.fadein);
-      }
-      else {
-      }
+      } else {}
 
       if(isDefined(oldroom) && isDefined(oldroom.tone)) {
         stoploopsound(0, oldroom.ent, oldroom.fadeout);
-      }
-      else {
-      }
+      } else {}
     }
 
     if(!isDefined(newroom) || !isDefined(newroom.reverb)) {
       deactivatereverb("snd_enveffectsprio_level", 2);
-    }
-    else {
+    } else {
       setreverb("snd_enveffectsprio_level", newroom.reverb.reverbroomtype, newroom.reverb.dry, newroom.reverb.wet, newroom.reverb.fade);
     }
 
@@ -796,8 +787,7 @@ switchactiveambientroom(ambientroom, roomcollidercent) {
 
   if(isDefined(ambientroom) && ambientroom != "") {
     newroom = level.ambientrooms[ambientroom];
-  }
-  else {
+  } else {
     newroom = undefined;
     defaultroom = finddefaultroom();
 
@@ -820,9 +810,7 @@ switchactiveambientroom(ambientroom, roomcollidercent) {
   } else {
     if(isDefined(newroom) && isDefined(newroom.tone)) {
       newroom.id = playLoopSound(0, newroom.ent, newroom.tone, newroom.fadein);
-    }
-    else {
-    }
+    } else {}
 
     if(isDefined(oldroom) && isDefined(oldroom.tone)) {
       stoploopsound(0, oldroom.ent, oldroom.fadeout);
@@ -831,8 +819,7 @@ switchactiveambientroom(ambientroom, roomcollidercent) {
 
   if(!isDefined(newroom) || !isDefined(newroom.reverb)) {
     deactivatereverb("snd_enveffectsprio_level", 2);
-  }
-  else {
+  } else {
     setreverb("snd_enveffectsprio_level", newroom.reverb.reverbroomtype, newroom.reverb.dry, newroom.reverb.wet, newroom.reverb.fade);
   }
 

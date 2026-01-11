@@ -894,8 +894,7 @@ weaponsSystems_Detach_Weapon(modelname, tagname) {
 
   if(qAttached) {
     self detach(modelname, tagname);
-  }
-  else {
+  } else {
     println("FAILED TO DETACH MODEL: " + modelname + " from tag: " + tagname);
   }
 }
@@ -1096,11 +1095,9 @@ reset_fov_for_player() {
 change_fov_scale_for_player(scale) {
   if(self == level.player) {
     setsaveddvar("cg_playerFovScale0", scale);
-  }
-  else if(self == level.player2) {
+  } else if(self == level.player2) {
     setsaveddvar("cg_playerFovScale1", scale);
-  }
-  else {
+  } else {
     assertMsg("Flyable helicopters currently only supports single player or coop with 2 players. Playing with more than 2 players is not yet supported");
   }
 }
@@ -1216,11 +1213,9 @@ cobraTarget_UpdateShaders_All(player) {
 
     if(level.cobraWeapon[player.currentWeapon].v["targetType"] == "dummy") {
       cobraTarget_UpdateShader(player, level.cobraTarget[i], "target");
-    }
-    else if(level.cobraTarget[i].targetType == level.cobraWeapon[player.currentWeapon].v["targetType"]) {
+    } else if(level.cobraTarget[i].targetType == level.cobraWeapon[player.currentWeapon].v["targetType"]) {
       cobraTarget_UpdateShader(player, level.cobraTarget[i], "target");
-    }
-    else {
+    } else {
       cobraTarget_UpdateShader(player, level.cobraTarget[i], "invalid");
     }
   }
@@ -1394,8 +1389,7 @@ cobraTarget_check_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeight) 
 
   if(cobraTarget_isLockingOn(targetStruct, boxHalfWidth, boxHalfHeight)) {
     thread cobraTarget_holdWait_missileLock_Ground(targetStruct, boxHalfWidth, boxHalfHeight);
-  }
-  else {
+  } else {
     cobraTarget_UpdateShader(level.player, targetStruct, "target");
   }
 }
@@ -1895,8 +1889,7 @@ health_think() {
     bDeath = false;
     if((self.health - damage) <= 0) {
       bDeath = true;
-    }
-    else {
+    } else {
       if(getdvar("cobrapilot_sounds_enabled") == "1") {
         self.pilot playLocalSound("helicopter_collide");
       }
@@ -1927,11 +1920,11 @@ cobra_death() {
   self.crashing = true;
   self thread maps\_vehicle::kill_fx( self.model );
   self thread maps\_vehicle::helicopter_crash_move();
-	
+  	
   self waittill( "crash_done" );
   self notify( "stop_looping_death_fx" );
   self notify( "death_finished" );
-	
+  	
   self useby( self.pilot );
   self.pilot enablehealthshield( false );
   self.pilot kill ( self.pilot.origin );
@@ -2119,8 +2112,7 @@ ammo_Reload_Station_Notify(notifyString) {
     vehicle = undefined;
     if(getdvar("cobrapilot_farp_mode") == "0") {
       self waittill("trigger", vehicle);
-    }
-    else if(getdvar("cobrapilot_farp_mode") == "1") {
+    } else if(getdvar("cobrapilot_farp_mode") == "1") {
       assert(isDefined(trig));
       trig waittill("trigger", vehicle);
     }
@@ -2142,8 +2134,7 @@ ammo_Reload_Station_Notify(notifyString) {
 
     if(isDefined(trig)) {
       level notify(notifyString, regenPoint, trig);
-    }
-    else {
+    } else {
       level notify(notifyString, regenPoint, self);
     }
     level notify("health_regen");
@@ -2401,8 +2392,7 @@ gunner_lookAtTarget(eTarget) {
   for(;;) {
     if(isDefined(self.lookingAtTarget) && isDefined(eTarget)) {
       blendTime = 0.1;
-    }
-    else {
+    } else {
       blendTime = 1.0;
     }
 

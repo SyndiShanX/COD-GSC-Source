@@ -144,8 +144,7 @@ onSpawnPlayer() {
       team = level.flags[i] getFlagTeam();
       if(team == myTeam) {
         flagsOwned++;
-      }
-      else if(team == enemyTeam) {
+      } else if(team == enemyTeam) {
         enemyFlagsOwned++;
       }
     }
@@ -169,8 +168,7 @@ onSpawnPlayer() {
   if(!isDefined(spawnpoint)) {
     if(self.pers["team"] == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
     }
   }
@@ -185,11 +183,9 @@ onEndGame(winningTeam) {
 onRoundEndGame(roundWinner) {
   if(game["roundswon"]["allies"] == game["roundswon"]["axis"]) {
     winner = "tie";
-  }
-  else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
+  } else if(game["roundswon"]["axis"] > game["roundswon"]["allies"]) {
     winner = "axis";
-  }
-  else {
+  } else {
     winner = "allies";
   }
   return winner;
@@ -209,20 +205,16 @@ domFlags() {
   game["flagmodels"]["neutral"] = "mp_flag_neutral";
   if(game["allies"] == "marines") {
     game["flagmodels"]["allies"] = "mp_flag_allies_1";
-  }
-  else if(game["allies"] == "rebels") {
+  } else if(game["allies"] == "rebels") {
     game["flagmodels"]["allies"] = "mp_flag_allies_3";
-  }
-  else {
+  } else {
     game["flagmodels"]["allies"] = "mp_flag_allies_2";
   }
   if(game["axis"] == "russian") {
     game["flagmodels"]["axis"] = "mp_flag_axis_1";
-  }
-  else if(game["axis"] == "tropas") {
+  } else if(game["axis"] == "tropas") {
     game["flagmodels"]["axis"] = "mp_flag_axis_3";
-  }
-  else {
+  } else {
     game["flagmodels"]["axis"] = "mp_flag_axis_2";
   }
   precacheModel(game["flagmodels"]["neutral"]);
@@ -323,8 +315,7 @@ onBeginUse(player) {
   self.didStatusNotify = false;
   if(ownerTeam == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
   if(ownerTeam == "neutral") {
@@ -492,15 +483,19 @@ updateDomScores() {
     numFlags = getTeamFlagCount("allies");
     numOwnedFlags += numFlags;
     if(numFlags) {
-      [[level._setTeamScore]]("allies", [
-    }
+      [
+        [level._setTeamScore]
+      ]("allies", [
+        }
         [level._getTeamScore]
       ]("allies") + numFlags);
     numFlags = getTeamFlagCount("axis");
     numOwnedFlags += numFlags;
     if(numFlags) {
-      [[level._setTeamScore]]("axis", [
-    }
+      [
+        [level._setTeamScore]
+      ]("axis", [
+        }
         [level._getTeamScore]
       ]("axis") + numFlags);
     level.endGameOnScoreLimit = true;
@@ -709,8 +704,7 @@ flagSetup() {
     for(i = 0; i < flags.size; i++) {
       if(isDefined(flags[i].descriptor.script_linkto)) {
         adjdescs = strtok(flags[i].descriptor.script_linkto, " ");
-      }
-      else {
+      } else {
         adjdescs = [];
       }
       for(j = 0; j < adjdescs.size; j++) {

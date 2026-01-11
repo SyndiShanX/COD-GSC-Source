@@ -139,8 +139,7 @@ playerisclose(var_0) {
 
   if(var_1) {
     var_2 = 1;
-  }
-  else {
+  } else {
     var_2 = -1;
   }
 
@@ -151,8 +150,7 @@ playerisclose(var_0) {
 
   if(var_6 < 3000) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -168,8 +166,7 @@ playerisinfront(var_0) {
 
   if(var_3 > 0) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

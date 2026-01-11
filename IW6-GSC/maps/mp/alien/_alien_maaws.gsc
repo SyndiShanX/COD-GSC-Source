@@ -38,8 +38,7 @@ tryuse_dpad_maaws_internal(var_0, var_1) {
 
   if(var_1 > 3) {
     self setweaponammoclip(var_2, 3);
-  }
-  else if(var_1 > 0) {
+  } else if(var_1 > 0) {
     self setweaponammoclip(var_2, 2);
   }
 
@@ -106,8 +105,7 @@ within_fov_set_dot(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_4) || var_4 == "forward") {
     var_7 = anglesToForward(var_1);
-  }
-  else {
+  } else {
     var_7 = anglestoright(var_1);
   }
 
@@ -125,8 +123,7 @@ missile_bullet_trace(var_0, var_1, var_2, var_3) {
 
   if(var_4["entity"] != var_2) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -266,8 +263,7 @@ damage_alien_on_drill(var_0) {
   if(isDefined(var_1) && isDefined(level.alien_on_drill) && isalive(level.alien_on_drill)) {
     if(distancesquared(level.alien_on_drill.origin, var_1) < 10000) {
       level.alien_on_drill dodamage(275, var_1, self, var_0, "MOD_PROJECTILE");
-    }
-    else if(distancesquared(level.alien_on_drill.origin, var_1) < 62500) {
+    } else if(distancesquared(level.alien_on_drill.origin, var_1) < 62500) {
       level.alien_on_drill dodamage(125, var_1, self, var_0, "MOD_PROJECTILE");
     }
   }
@@ -351,8 +347,7 @@ get_array_of_targets(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     var_6 = get_alien_targets_in_fov(self.origin, self.angles, var_1, var_2);
-  }
-  else {
+  } else {
     var_6 = get_alien_targets_in_fov(var_0.origin, var_0.angles, var_1);
   }
 
@@ -471,8 +466,7 @@ manage_bullet_trace_queue(var_0) {
 get_alien_origin(var_0) {
   if(isalive(var_0) && isDefined(var_0.alien_type) && (var_0.alien_type == "seeder" || var_0.alien_type == "elite")) {
     var_1 = var_0 gettagorigin("TAG_ORIGIN");
-  }
-  else if(isDefined(var_0.alien_type) && var_0.alien_type == "seeder_spore") {
+  } else if(isDefined(var_0.alien_type) && var_0.alien_type == "seeder_spore") {
     if(!isDefined(var_0.coll_model)) {
       return undefined;
     }
@@ -483,8 +477,7 @@ get_alien_origin(var_0) {
     var_1 = var_0.origin + (0, 0, 110);
   else if(isalive(var_0) && isDefined(var_0.model) && maps\mp\alien\_utility::has_tag(var_0.model, "J_SpineUpper")) {
     var_1 = var_0 gettagorigin("J_SpineUpper");
-  }
-  else {
+  } else {
     var_1 = var_0.origin + (0, 0, 10);
   }
 
@@ -531,8 +524,7 @@ canceluse_dpad_maaws(var_0, var_1) {
 player_not_carrying_drill_or_cortex() {
   if(!isDefined(level.drill_carrier) || isDefined(level.drill_carrier) && self != level.drill_carrier) {
     return 1;
-  }
-  else if(!isDefined(level.cortex_carrier) || isDefined(level.cortex_carrier) && self != level.cortex_carrier) {
+  } else if(!isDefined(level.cortex_carrier) || isDefined(level.cortex_carrier) && self != level.cortex_carrier) {
     return 1;
   }
 

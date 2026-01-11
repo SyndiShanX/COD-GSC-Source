@@ -144,10 +144,8 @@ createFxLogic() {
   }
   if(getdvar("createfx_map") == "") {
     setdvar("createfx_map", level.script);
-  }
-  else {
-  if(getdvar("createfx_map") == level.script) {
-  }
+  } else {
+    if(getdvar("createfx_map") == level.script) {}
     playerPos = [];
     playerPos[0] = getdvarint("createfx_playerpos_x");
     playerPos[1] = getdvarint("createfx_playerpos_y");
@@ -316,8 +314,7 @@ createFxLogic() {
   }
   if(level.selected_fx_ents.size) {
     lastSelectEntity = level.selected_fx_ents[level.selected_fx_ents.size - 1];
-  }
-  else {
+  } else {
     lastSelectEntity = undefined;
   }
 }
@@ -421,8 +418,7 @@ button_is_clicked(name, name2) {
 toggle_entity_selection(index, ent) {
   if(isDefined(level.selected_fx[index])) {
     deselect_entity(index, ent);
-  }
-  else {
+  } else {
     select_entity(index, ent);
   }
 }
@@ -802,8 +798,9 @@ generate_client_fx_log(autosave) {
     cfxprintln(file, "
         cfxprintln(file, "main()"); cfxprintln(file, "{");
         if(!autosave) {
-          println(" *** CREATING EFFECT, COPY THESE LINES TO ", level.script, "_fx.csc *** "); cfxprintln(file, "
-        }
+          println(" *** CREATING EFFECT, COPY THESE LINES TO ", level.script, "_fx.csc *** ");
+          cfxprintln(file, "
+          }
           for(i = 0; i < level.createFXent.size; i++) {
             if(file != -1) {
               wait .05;
@@ -856,7 +853,11 @@ generate_client_fx_log(autosave) {
             script_gen_dump_addline("clientscripts\\createfx\\" + level.script + "_fx::main();", level.script + "_fx");
             maps\_load::script_gen_dump();
           }
-          cfxprintln(file, "}"); saved = closefile(file); assertex(saved == 1, "File not saved (see above message?): " + filename); flag_clear("createfx_saving"); println("CreateFX entities placed: " + level.createFxEnt.size);
+          cfxprintln(file, "}");
+          saved = closefile(file);
+          assertex(saved == 1, "File not saved (see above message?): " + filename);
+          flag_clear("createfx_saving");
+          println("CreateFX entities placed: " + level.createFxEnt.size);
         }
         generate_fx_log(autosave) {
           flag_waitopen("createfx_saving");
@@ -889,8 +890,9 @@ generate_client_fx_log(autosave) {
                 ent.v["angles"] = (angles[0], angles[1], angles[2]);
               }
               if(!autosave) {
-                println(" *** CREATING EFFECT, COPY THESE LINES TO ", level.script, "_fx.gsc *** "); cfxprintln(file, "
-              }
+                println(" *** CREATING EFFECT, COPY THESE LINES TO ", level.script, "_fx.gsc *** ");
+                cfxprintln(file, "
+                }
                 for(i = 0; i < level.createFXent.size; i++) {
                   if(file != -1) {
                     wait .05;
@@ -942,11 +944,14 @@ generate_client_fx_log(autosave) {
                   script_gen_dump_addline("maps\\createfx\\" + level.script + "_fx::main();", level.script + "_fx");
                   maps\_load::script_gen_dump();
                 }
-                cfxprintln(file, "}"); saved = closefile(file); assertex(saved == 1, "File not saved (see above message?): " + filename);
+                cfxprintln(file, "}");
+                saved = closefile(file);
+                assertex(saved == 1, "File not saved (see above message?): " + filename);
                 if(level.clientscripts && !autosave) {
                   generate_client_fx_log(autosave);
                 }
-                flag_clear("createfx_saving"); println("CreateFX entities placed: " + level.createFxEnt.size);
+                flag_clear("createfx_saving");
+                println("CreateFX entities placed: " + level.createFxEnt.size);
               }
               print_fx_options(ent, tab, file, autosave) {
                 for(i = 0; i < level.createFX_options.size; i++) {
@@ -1051,11 +1056,10 @@ generate_client_fx_log(autosave) {
                   rotater.angles = ent.v["angles"];
                   if(level.selectedRotate_pitch != 0) {
                     rotater devAddPitch(level.selectedRotate_pitch);
+                  } else {
+                    if(level.selectedRotate_yaw != 0)
                   }
-                  else {
-                  if(level.selectedRotate_yaw != 0)
-                  }
-                    rotater devAddYaw(level.selectedRotate_yaw);
+                  rotater devAddYaw(level.selectedRotate_yaw);
                   else {
                     rotater devAddRoll(level.selectedRotate_roll);
                   }
@@ -1071,11 +1075,10 @@ generate_client_fx_log(autosave) {
                 for(p = 0; p < timer * 20; p++) {
                   if(level.selectedRotate_pitch != 0) {
                     org devAddPitch(level.selectedRotate_pitch);
+                  } else {
+                    if(level.selectedRotate_yaw != 0)
                   }
-                  else {
-                  if(level.selectedRotate_yaw != 0)
-                  }
-                    org devAddYaw(level.selectedRotate_yaw);
+                  org devAddYaw(level.selectedRotate_yaw);
                   else {
                     org devAddRoll(level.selectedRotate_roll);
                   }

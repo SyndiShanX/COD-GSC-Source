@@ -36,14 +36,12 @@ init(notifyName, origin, angles, theAnim, animMode, root, rate) {
   self.codeScripted["anim"] = theAnim;
   if(isDefined(animMode)) {
     self.codeScripted["animMode"] = animMode;
-  }
-  else {
+  } else {
     self.codeScripted["animMode"] = "normal";
   }
   if(isDefined(root)) {
     self.codeScripted["root"] = root;
-  }
-  else {
+  } else {
     self.codeScripted["root"] = % body;
   }
   self.codeScripted["rate"] = rate;

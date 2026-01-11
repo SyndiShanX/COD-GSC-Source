@@ -94,8 +94,7 @@ play_sam_creaking_sounds() {
   while(true) {
     if(!isDefined(level.num_planes_shot)) {
       wait_max = 15;
-    }
-    else {
+    } else {
       wait_max = get_wait_max();
     }
 
@@ -107,14 +106,11 @@ play_sam_creaking_sounds() {
 get_wait_max() {
   if(level.num_planes_shot < 2) {
     return 12;
-  }
-  else if(level.num_planes_shot < 6) {
+  } else if(level.num_planes_shot < 6) {
     return 8;
-  }
-  else if(level.num_planes_shot < 9) {
+  } else if(level.num_planes_shot < 9) {
     return 6;
-  }
-  else {
+  } else {
     return 4;
   }
 }
@@ -143,8 +139,7 @@ play_intro_radio() {
 la_drone_control_tones(activate) {
   if(activate) {
     level thread play_drone_control_tones();
-  }
-  else {
+  } else {
     level notify("stop_drone_control_tones");
   }
 }
@@ -167,8 +162,7 @@ waitfor_enough_drones() {
 
     if(!isDefined(drones) || drones.size <= 2) {
       wait 1;
-    }
-    else {
+    } else {
       break;
     }
 

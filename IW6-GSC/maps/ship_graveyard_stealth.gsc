@@ -251,8 +251,7 @@ sight_trigger_think() {
 
     if(common_scripts\utility::flag("_stealth_spotted") || level.player maps\_utility::ent_flag("flashlight_on")) {
       level.player.maxvisibledist = level.underwater_visible_dist["spotted"];
-    }
-    else {
+    } else {
       level.player.maxvisibledist = level.underwater_visible_dist["hidden"];
     }
 
@@ -305,8 +304,7 @@ stealth_idle(var_0, var_1) {
 
     if(isDefined(level.scr_anim[var_6]) && isDefined(level.scr_anim[var_6][var_1 + "_idle"])) {
       var_5 = common_scripts\utility::array_add(var_5, self.prop);
-    }
-    else {
+    } else {
       self.prop linkto(self, "tag_inhand", (0, 0, 0), (0, 0, 0));
     }
   }
@@ -317,7 +315,7 @@ stealth_idle(var_0, var_1) {
   self.anim_blend_time_override = 1;
 
   foreach(var_8 in var_5) {
-  var_0 thread maps\_anim::anim_loop_solo(var_8, var_1 + "_idle");
+    var_0 thread maps\_anim::anim_loop_solo(var_8, var_1 + "_idle");
   }
 }
 
@@ -340,8 +338,7 @@ prop_drop(var_0) {
 
   if(var_0.animname == "bangstick") {
     var_0 thread bang_stick_rotate();
-  }
-  else if(var_0.animname == "torch") {
+  } else if(var_0.animname == "torch") {
     var_0 thread torch_rotate();
 
     if(var_0.welding) {

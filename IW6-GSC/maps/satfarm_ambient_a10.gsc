@@ -299,8 +299,7 @@ monitor_missile_distance(var_0, var_1, var_2) {
 
       if(var_1 maps\satfarm_code::istank()) {
         var_1 thread maps\satfarm_code::handle_tank_death();
-      }
-      else {
+      } else {
         var_1 kill();
       }
     }

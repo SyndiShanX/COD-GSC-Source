@@ -171,8 +171,7 @@ _register_undefined_perk(str_perk) {
 perk_meteor_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self.meteor_fx = playFXOnTag(localclientnum, level._effect["perk_meteor"], self, "tag_origin");
-  }
-  else if(isDefined(self.meteor_fx)) {
+  } else if(isDefined(self.meteor_fx)) {
     stopfx(localclientnum, self.meteor_fx);
   }
 }
@@ -182,8 +181,7 @@ chugabud_whos_who_shader(localclientnum, oldval, newval, bnewent, binitialsnap, 
 
   if(newval == 1) {
     n_value = 1.0;
-  }
-  else {
+  } else {
     n_value = 0;
   }
 

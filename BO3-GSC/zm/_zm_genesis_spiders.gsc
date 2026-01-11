@@ -622,9 +622,7 @@ function function_f4bd92a2(n_to_spawn, s_spawn_point) {
     var_19764360 = get_favorite_enemy();
     if(isDefined(level.var_21f08627)) {
       if(!isDefined(s_spawn_point)) {
-        s_spawn_point = [
-          [level.var_21f08627]
-        ](level.var_c38a4fee, var_19764360);
+        s_spawn_point = [[level.var_21f08627]](level.var_c38a4fee, var_19764360);
       }
       ai = zombie_utility::spawn_zombie(level.var_c38a4fee[0]);
       if(isDefined(ai)) {

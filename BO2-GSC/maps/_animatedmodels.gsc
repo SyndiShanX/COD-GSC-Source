@@ -30,8 +30,7 @@ main() {
 
   if(getdvar(#"_id_55B6AAF4") == "1") {
     array_thread(animated_models, ::model_init);
-  }
-  else {
+  } else {
     array_thread(animated_models, ::model_disable);
     return;
   }

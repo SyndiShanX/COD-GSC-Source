@@ -69,8 +69,7 @@ RemoveTargetted() {
       foreach(tgtModel in tgtModels) {
         if(tgtModel.classname == "light_omni" || tgtModel.classname == "light_spot") {
           tgtModel SetLightIntensity(0);
-        }
-        else {
+        } else {
           tgtModel Delete();
         }
       }

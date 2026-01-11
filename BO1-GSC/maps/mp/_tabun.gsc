@@ -67,8 +67,7 @@ watchTabunGrenadeDetonation(owner) {
   }
   if(weapons_get_dvar_int("scr_enable_new_tabun", 1)) {
     generateLocations(position, owner);
-  }
-  else {
+  } else {
     singleLocation(position, owner);
   }
 }
@@ -374,14 +373,12 @@ getcenter(locations) {
     curY = locations["tracePos"][i][1];
     if(curX > maxX) {
       maxX = curX;
-    }
-    else if(curX < minX) {
+    } else if(curX < minX) {
       minX = curX;
     }
     if(curY > maxY) {
       maxY = curY;
-    }
-    else if(curY < minY) {
+    } else if(curY < minY) {
       minY = curY;
     }
   }

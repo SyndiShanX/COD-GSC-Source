@@ -43,8 +43,7 @@ tagmarkedplayer(var_00, var_01) {
   while(isalive(var_00) && gettime() < var_02) {
     if(level.gametype != "dm") {
       var_03 = _playfxontagforteam(scripts\engine\utility::getfx("marked_target"), var_01, "tag_origin", self.team);
-    }
-    else {
+    } else {
       var_03 = playfxontagforclients(scripts\engine\utility::getfx("marked_target"), var_01, "tag_origin", self);
     }
 

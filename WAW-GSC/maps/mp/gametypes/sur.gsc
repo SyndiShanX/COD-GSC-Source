@@ -356,8 +356,7 @@ onDrop(player) {
     }
     if(isDefined(player)) {
       player logString("bomb dropped");
-    }
-    else {
+    } else {
       logString("bomb dropped");
     }
   }
@@ -443,11 +442,9 @@ onSpawnPlayer() {
     safeZoneOwningTeam = level.safeZoneObject maps\mp\gametypes\_gameobjects::getOwnerTeam();
     if(self.pers["team"] == safeZoneOwningTeam) {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, level.safeZoneObject.nearSpawns);
-    }
-    else if(level.spawnDelay >= level.safeZoneAutoDestroyTime && gettime() > level.safeZoneRevealTime + 10000) {
+    } else if(level.spawnDelay >= level.safeZoneAutoDestroyTime && gettime() > level.safeZoneRevealTime + 10000) {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, level.safeZoneObject.outerSpawns);
     }
   }
@@ -609,8 +606,7 @@ setUpNearbySpawns() {
     outer[outer.size] = spawns[i];
     if(i <= (thirdSize * 2)) {
       second[second.size] = spawns[i];
-    }
-    else {
+    } else {
       third[third.size] = spawns[i];
     }
   }
@@ -654,8 +650,7 @@ PickCargoTospawn() {
     if(isDefined(level.prevCargoSpot2) && cargoSpot == level.prevCargoSpot2) {
       if(level.cargoSpots.size > 2) {
         continue;
-      }
-      else {
+      } else {
         cost += 512;
       }
     }
@@ -704,8 +699,7 @@ PickSafeZoneTospawn() {
     if(isDefined(level.prevSafeZone2) && safeZone == level.prevSafeZone2) {
       if(level.safeZones.size > 2) {
         continue;
-      }
-      else {
+      } else {
         cost += 512;
       }
     }

@@ -61,8 +61,7 @@ busstateactivate(name) {
   assert(isDefined(keys));
 }
 
-busstatedeactivate() {
-}
+busstatedeactivate() {}
 
 declarebusstate(name) {
   if(!isDefined(level.busstates)) {
@@ -102,8 +101,7 @@ busvolumes(names, value) {
   }
 }
 
-busvolumeall(value) {
-}
+busvolumeall(value) {}
 
 argsasdict(a, b, c, d, e, f, g) {
   names = [];

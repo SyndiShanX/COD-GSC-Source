@@ -357,8 +357,7 @@ prepare_option_for_change(var_00, var_01) {
 
   if(isDefined(var_0["input_func"])) {
     thread[[var_0["input_func"]]](var_01 + 3);
-  }
-  else {
+  } else {
     scripts\common\createfx::createfx_centerprint("To change " + var_0["description"] + " on selected entities, type \fx newvalue");
   }
 
@@ -454,8 +453,7 @@ input_reactive_radius(var_00) {
 
     if(level.player buttonpressed("-")) {
       var_01 = -10;
-    }
-    else if(level.player buttonpressed("=")) {
+    } else if(level.player buttonpressed("=")) {
       var_01 = 10;
     }
 
@@ -641,8 +639,7 @@ increment_list_offset() {
 
   if(level.effect_list_offset >= var_0.size - level.effect_list_offset_max) {
     level.effect_list_offset = 0;
-  }
-  else {
+  } else {
     level.effect_list_offset = level.effect_list_offset + level.effect_list_offset_max;
   }
 }

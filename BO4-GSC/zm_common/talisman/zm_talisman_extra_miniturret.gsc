@@ -14,7 +14,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_talisman;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_talisman_extra_miniturret;
 
 autoexec __init__system__() {

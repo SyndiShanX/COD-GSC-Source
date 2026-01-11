@@ -98,8 +98,7 @@ getpreferredweapon() {
   if(isDefined(self.wantshotgun) && self.wantshotgun) {
     if(isshotgun(self.primaryweapon)) {
       return self.primaryweapon;
-    }
-    else if(isshotgun(self.secondaryweapon)) {
+    } else if(isshotgun(self.secondaryweapon)) {
       return self.secondaryweapon;
     }
   }
@@ -147,8 +146,7 @@ getenemyeyepos() {
   if(isDefined(self.enemy)) {
     if(common_scripts\utility::flag("_cloaked_stealth_enabled")) {
       self.a.lastenemypos = animscripts\combat_utility::get_last_known_shoot_pos(self.enemy);
-    }
-    else {
+    } else {
       self.a.lastenemypos = self.enemy getshootatpos();
     }
 
@@ -167,16 +165,13 @@ getnodeforwardyaw(var_0) {
   if(!isDefined(self.heat)) {
     if(isnodecoverleft(var_0)) {
       return var_0.angles[1] + 90;
-    }
-    else if(isnodecoverright(var_0)) {
+    } else if(isnodecoverright(var_0)) {
       return var_0.angles[1] - 90;
-    }
-    else if(var_0.type == "Cover Multi") {
+    } else if(var_0.type == "Cover Multi") {
       if(isDefined(self.cover) && isDefined(self.cover.state)) {
         if(self.cover.state == "right") {
           return var_0.angles[1] - 90;
-        }
-        else if(self.cover.state == "left") {
+        } else if(self.cover.state == "left") {
           return var_0.angles[1] + 90;
         }
       }
@@ -189,8 +184,7 @@ getnodeforwardyaw(var_0) {
 getnodeyawtoorigin(var_0) {
   if(isDefined(self.node)) {
     var_1 = self.node.angles[1] - getyaw(var_0);
-  }
-  else {
+  } else {
     var_1 = self.angles[1] - getyaw(var_0);
   }
 
@@ -203,12 +197,10 @@ getnodeyawtoenemy() {
 
   if(isDefined(self.enemy)) {
     var_0 = self.enemy.origin;
-  }
-  else {
+  } else {
     if(isDefined(self.node)) {
       var_1 = anglesToForward(self.node.angles);
-    }
-    else {
+    } else {
       var_1 = anglesToForward(self.angles);
     }
 
@@ -218,8 +210,7 @@ getnodeyawtoenemy() {
 
   if(isDefined(self.node)) {
     var_2 = self.node.angles[1] - getyaw(var_0);
-  }
-  else {
+  } else {
     var_2 = self.angles[1] - getyaw(var_0);
   }
 
@@ -244,8 +235,7 @@ getyawtoenemy() {
 
   if(isDefined(self.enemy)) {
     var_0 = self.enemy.origin;
-  }
-  else {
+  } else {
     var_1 = anglesToForward(self.angles);
     var_1 = var_1 * 150;
     var_0 = self.origin + var_1;
@@ -359,14 +349,11 @@ choosepose(var_0) {
     case "stand":
       if(isstanceallowedwrapper("stand")) {
         var_1 = "stand";
-      }
-      else if(isstanceallowedwrapper("crouch")) {
+      } else if(isstanceallowedwrapper("crouch")) {
         var_1 = "crouch";
-      }
-      else if(isstanceallowedwrapper("prone")) {
+      } else if(isstanceallowedwrapper("prone")) {
         var_1 = "prone";
-      }
-      else {
+      } else {
         var_1 = "stand";
       }
 
@@ -374,14 +361,11 @@ choosepose(var_0) {
     case "crouch":
       if(isstanceallowedwrapper("crouch")) {
         var_1 = "crouch";
-      }
-      else if(isstanceallowedwrapper("stand")) {
+      } else if(isstanceallowedwrapper("stand")) {
         var_1 = "stand";
-      }
-      else if(isstanceallowedwrapper("prone")) {
+      } else if(isstanceallowedwrapper("prone")) {
         var_1 = "prone";
-      }
-      else {
+      } else {
         var_1 = "crouch";
       }
 
@@ -389,14 +373,11 @@ choosepose(var_0) {
     case "prone":
       if(isstanceallowedwrapper("prone")) {
         var_1 = "prone";
-      }
-      else if(isstanceallowedwrapper("crouch")) {
+      } else if(isstanceallowedwrapper("crouch")) {
         var_1 = "crouch";
-      }
-      else if(isstanceallowedwrapper("stand")) {
+      } else if(isstanceallowedwrapper("stand")) {
         var_1 = "stand";
-      }
-      else {
+      } else {
         var_1 = "prone";
       }
 
@@ -485,11 +466,9 @@ quadrantanimweights(var_0) {
   if(var_1 > 0) {
     if(var_2 > var_1) {
       var_3["left"] = 1;
-    }
-    else if(var_2 < -1 * var_1) {
+    } else if(var_2 < -1 * var_1) {
       var_3["right"] = 1;
-    }
-    else {
+    } else {
       var_3["front"] = 1;
     }
   } else {
@@ -497,11 +476,9 @@ quadrantanimweights(var_0) {
 
     if(var_2 > var_4) {
       var_3["left"] = 1;
-    }
-    else if(var_2 < var_1) {
+    } else if(var_2 < var_1) {
       var_3["right"] = 1;
-    }
-    else {
+    } else {
       var_3["back"] = 1;
     }
   }
@@ -514,14 +491,11 @@ getquadrant(var_0) {
 
   if(var_0 < 45 || var_0 > 315) {
     var_1 = "front";
-  }
-  else if(var_0 < 135) {
+  } else if(var_0 < 135) {
     var_1 = "left";
-  }
-  else if(var_0 < 225) {
+  } else if(var_0 < 225) {
     var_1 = "back";
-  }
-  else {
+  } else {
     var_1 = "right";
   }
 
@@ -583,8 +557,7 @@ showlastenemysightpos(var_0) {
   }
   if(self.enemy.team == "allies") {
     var_1 = (0.4, 0.7, 1);
-  }
-  else {
+  } else {
     var_1 = (1, 0.7, 0.4);
   }
 
@@ -600,8 +573,7 @@ showlastenemysightpos(var_0) {
 hasenemysightpos() {
   if(isDefined(self.node)) {
     return canseeenemyfromexposed() || cansuppressenemyfromexposed();
-  }
-  else {
+  } else {
     return canseeenemy() || cansuppressenemy();
   }
 }
@@ -658,8 +630,7 @@ debugposinternal(var_0, var_1, var_2) {
 
   if(self.enemy.team == "allies") {
     var_4 = (0.4, 0.7, 1);
-  }
-  else {
+  } else {
     var_4 = (1, 0.7, 0.4);
   }
 
@@ -682,14 +653,11 @@ debugburstprint(var_0, var_1) {
 
   if(var_0 == self.bulletsinclip) {
     var_3 = "all rounds";
-  }
-  else if(var_2 < 0.25) {
+  } else if(var_2 < 0.25) {
     var_3 = "small burst";
-  }
-  else if(var_2 < 0.5) {
+  } else if(var_2 < 0.5) {
     var_3 = "med burst";
-  }
-  else {
+  } else {
     var_3 = "long burst";
   }
 
@@ -914,8 +882,7 @@ getnodeoffset(var_0, var_1) {
     case "Cover Left 3D":
       if(var_0 gethighestnodestance() == "crouch") {
         var_9 = calculatenodeoffset(var_10, var_11, var_2);
-      }
-      else {
+      } else {
         var_9 = calculatenodeoffset(var_10, var_11, var_3);
       }
 
@@ -924,8 +891,7 @@ getnodeoffset(var_0, var_1) {
     case "Cover Right 3D":
       if(var_0 gethighestnodestance() == "crouch") {
         var_9 = calculatenodeoffset(var_10, var_11, var_4);
-      }
-      else {
+      } else {
         var_9 = calculatenodeoffset(var_10, var_11, var_5);
       }
 
@@ -962,8 +928,7 @@ canseeenemy(var_0) {
   if(common_scripts\utility::flag("_cloaked_stealth_enabled")) {
     if(isDefined(self.enemy_who_surprised_me) && self.enemy_who_surprised_me == self.enemy) {
       return 1;
-    }
-    else {
+    } else {
       return self cansee(self.enemy);
     }
   }
@@ -991,8 +956,7 @@ canseeenemyfromexposed() {
 
   if(!isDefined(self.node)) {
     var_1 = self cansee(self.enemy);
-  }
-  else {
+  } else {
     var_1 = canseepointfromexposedatnode(var_0, self.node);
   }
 
@@ -1475,8 +1439,7 @@ setnotetracksound(var_0, var_1, var_2, var_3) {
 
   if(isDefined(level._notetrackfx[var_0][var_1])) {
     var_4 = level._notetrackfx[var_0][var_1];
-  }
-  else {
+  } else {
     var_4 = spawnStruct();
     level._notetrackfx[var_0][var_1] = var_4;
   }
@@ -1583,8 +1546,7 @@ gettwitchanim(var_0) {
 randomanimoftwo(var_0, var_1) {
   if(randomint(2)) {
     return var_0;
-  }
-  else {
+  } else {
     return var_1;
   }
 }
@@ -1607,92 +1569,79 @@ array(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_
 
   if(isDefined(var_0)) {
     var_14[0] = var_0;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_1)) {
     var_14[1] = var_1;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_2)) {
     var_14[2] = var_2;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_3)) {
     var_14[3] = var_3;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_4)) {
     var_14[4] = var_4;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_5)) {
     var_14[5] = var_5;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_6)) {
     var_14[6] = var_6;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_7)) {
     var_14[7] = var_7;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_8)) {
     var_14[8] = var_8;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_9)) {
     var_14[9] = var_9;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_10)) {
     var_14[10] = var_10;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_11)) {
     var_14[11] = var_11;
-  }
-  else {
+  } else {
     return var_14;
   }
 
   if(isDefined(var_12)) {
     var_14[12] = var_12;
-  }
-  else {
+  } else {
     return var_14;
   }
 
@@ -1734,14 +1683,11 @@ usingsidearm() {
 getaicurrentweaponslot() {
   if(self.weapon == self.primaryweapon) {
     return "primary";
-  }
-  else if(self.weapon == self.secondaryweapon) {
+  } else if(self.weapon == self.secondaryweapon) {
     return "secondary";
-  }
-  else if(self.weapon == self.sidearm) {
+  } else if(self.weapon == self.sidearm) {
     return "sidearm";
-  }
-  else {}
+  } else {}
 }
 
 aihasweapon(var_0) {
@@ -2071,7 +2017,7 @@ lookupanimarray(var_0) {
         var_1 = anim.archetypes["soldier"][var_0];
 
         foreach(var_4, var_3 in anim.archetypes[self.animarchetype][var_0]) {
-        var_1[var_4] = var_3;
+          var_1[var_4] = var_3;
         }
 
         return var_1;
@@ -2167,8 +2113,7 @@ follow_enemy_with_laser(var_0, var_1) {
   }
   if(!isDefined(var_0.laser_follower)) {
     var_0.laser_follower = 1;
-  }
-  else {
+  } else {
     return;
   }
 
@@ -2259,7 +2204,7 @@ set_team_run_twitch_animation(var_0, var_1) {
   var_2 = getaiarray(var_0);
 
   foreach(var_4 in var_2) {
-  var_4.noruntwitch = !var_1;
+    var_4.noruntwitch = !var_1;
   }
 
   if(level.h1_team_run_twitch_enabled[var_0] != var_1) {
@@ -2274,8 +2219,7 @@ using_improved_transitions() {
 using_tight_turn_anims() {
   if(isDefined(level.script)) {
     var_0 = level.script;
-  }
-  else {
+  } else {
     var_0 = tolower(getdvar("mapname"));
   }
 
@@ -2318,8 +2262,7 @@ using_tight_turn_anims() {
 using_cqb_tight_turn_20() {
   if(isDefined(level.script)) {
     var_0 = level.script;
-  }
-  else {
+  } else {
     var_0 = tolower(getdvar("mapname"));
   }
 
@@ -2362,8 +2305,7 @@ using_exit_node_to_cover_arrival_early_out() {
 
   if(isDefined(level.script)) {
     var_0 = level.script;
-  }
-  else {
+  } else {
     var_0 = tolower(getdvar("mapname"));
   }
 
@@ -2398,8 +2340,7 @@ using_exit_node_to_cover_arrival_early_out() {
 using_cover_transition_angle_correction() {
   if(isDefined(level.script)) {
     var_0 = level.script;
-  }
-  else {
+  } else {
     var_0 = tolower(getdvar("mapname"));
   }
 

@@ -8,7 +8,6 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\renderoverridebundle;
 #include scripts\core_common\util_shared;
-
 #namespace dog;
 
 init_shared() {
@@ -38,7 +37,7 @@ watchdeath(localclientnum) {
 private function_654bd68b(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     if(self flag::exists(#"friendly")) {
-      self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendlyequip_cp" : #"rob_sonar_set_friendlyequip_mp", 0);
+      self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", 0);
     }
   }
 }
@@ -46,7 +45,7 @@ private function_654bd68b(localclientnum, oldvalue, newvalue, bnewent, binitials
 function_14740469(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(newval) {
     if(isDefined(self) && self hasdobj(localclientnum)) {
-      self setflaggedanimknobrestart(#"hash_506d2ece42569653", #"ai_nomad_dog_additive_bark_01", 1, 0.1, 1);
+      self setflaggedanimknobrestart(#"hash_506d2ece42569653", # "ai_nomad_dog_additive_bark_01", 1, 0.1, 1);
     }
 
     return;

@@ -31,8 +31,7 @@ hurtgen_style() {
 
       if(isDefined(level.foley)) {
         var_6 = distance(level.foley.origin, var_0[var_4].origin);
-      }
-      else {
+      } else {
         var_6 = 360;
       }
 
@@ -96,8 +95,7 @@ railyard_style(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     while(level.istopbarrage == 0) {
       if(isDefined(var_10)) {
         wait(var_10 + (randomfloat(var_0) + randomfloat(var_0)));
-      }
-      else {
+      } else {
         wait(randomfloat(var_0) + randomfloat(var_0));
       }
 
@@ -200,15 +198,13 @@ script_mortargroup_mortarzone() {
 
   if(isDefined(self.script_radius)) {
     var_3 = self.script_radius;
-  }
-  else {
+  } else {
     var_3 = 0;
   }
 
   if(isDefined(self.script_delay_min) && isDefined(self.script_delay_max)) {
     var_4 = 1;
-  }
-  else {
+  } else {
     var_4 = 0;
   }
 
@@ -220,8 +216,7 @@ script_mortargroup_mortarzone() {
   while(level.mortars[self.script_mortargroup].size > 0 && level.mortarzone == self.script_mortargroup || var_2) {
     if(var_4) {
       wait(randomfloat(self.script_delay_max - self.script_delay_min) + self.script_delay_min);
-    }
-    else if(var_8) {
+    } else if(var_8) {
       if(var_5 < var_7) {
         wait(randomfloat(0.5));
         var_5++;
@@ -303,8 +298,7 @@ is_lastblast(var_0, var_1) {
 script_mortargroup_domortar() {
   if(isDefined(self.targetname) && isDefined(level.mortarthread[self.targetname])) {
     level thread[[level.mortarthread[self.targetname]]](self);
-  }
-  else {
+  } else {
     thread activate_mortar(undefined, undefined, undefined, undefined, undefined, undefined, 1);
   }
 
@@ -381,8 +375,7 @@ bunker_style_mortar() {
 
   if(isDefined(var_4) && var_4.size > 0) {
     var_1 = maps\_utility::array_merge(var_3, var_4);
-  }
-  else {
+  } else {
     var_1 = var_3;
   }
 
@@ -425,15 +418,13 @@ bunker_style_mortar_think(var_0, var_1) {
 
   if(isDefined(level.mortarmininterval)) {
     var_2 = level.mortarmininterval;
-  }
-  else {
+  } else {
     var_2 = 4;
   }
 
   if(isDefined(level.mortarmaxinterval)) {
     var_3 = level.mortarmaxinterval;
-  }
-  else {
+  } else {
     var_3 = 6;
   }
 
@@ -464,8 +455,7 @@ bunker_style_mortar_activate(var_0, var_1, var_2, var_3, var_4) {
     if(!isDefined(level.mortarnoquake)) {
       if(common_scripts\utility::cointoss()) {
         earthquake(0.2, 1.5, var_5.origin, 1250);
-      }
-      else {
+      } else {
         earthquake(0.35, 2.75, var_5.origin, 1250);
       }
     }
@@ -485,8 +475,7 @@ bunker_style_mortar_explode(var_0, var_1) {
   }
   if(isDefined(level.mortar_min_dist)) {
     var_2 = level.mortar_min_dist;
-  }
-  else {
+  } else {
     var_2 = 1024;
   }
 
@@ -555,15 +544,13 @@ bog_style_mortar_think(var_0, var_1) {
 
   if(isDefined(level.mortarmininterval)) {
     var_2 = level.mortarmininterval;
-  }
-  else {
+  } else {
     var_2 = 0.5;
   }
 
   if(isDefined(level.mortarmaxinterval)) {
     var_3 = level.mortarmaxinterval;
-  }
-  else {
+  } else {
     var_3 = 3;
   }
 
@@ -585,8 +572,7 @@ bog_style_mortar_activate(var_0, var_1, var_2, var_3) {
 
   if(isDefined(level.mortar_min_dist)) {
     var_4 = level.mortar_min_dist;
-  }
-  else {
+  } else {
     var_4 = 300;
   }
 
@@ -688,8 +674,7 @@ bog_style_mortar_explode(var_0, var_1) {
 
   if(isDefined(var_1)) {
     thread common_scripts\utility::play_sound_in_space(var_1);
-  }
-  else {
+  } else {
     thread common_scripts\utility::play_sound_in_space(level.scr_sound["mortar"][self.script_fxid]);
   }
 
@@ -721,8 +706,7 @@ bog_style_mortar_trigger(var_0) {
 
   if(var_0 == "on") {
     bog_style_mortar_on(self.script_mortargroup);
-  }
-  else if(var_0 == "off") {
+  } else if(var_0 == "off") {
     bog_style_mortar_off(self.script_mortargroup);
   }
 }
@@ -761,8 +745,7 @@ bunker_style_mortar_trigger(var_0) {
 
   if(var_0 == "on") {
     bunker_style_mortar_on(self.script_mortargroup);
-  }
-  else if(var_0 == "off") {
+  } else if(var_0 == "off") {
     bunker_style_mortar_off(self.script_mortargroup);
   }
 }
@@ -806,8 +789,7 @@ setup_mortar_terrain() {
   if(isDefined(self.script_hidden)) {
     if(isDefined(self.script_hidden)) {
       self.hidden_terrain = getent(self.script_hidden, "targetname");
-    }
-    else if(isDefined(self.terrain) && isDefined(self.terrain[0].target)) {
+    } else if(isDefined(self.terrain) && isDefined(self.terrain[0].target)) {
       self.hidden_terrain = getent(self.terrain[0].target, "targetname");
     }
 
@@ -877,8 +859,7 @@ mortar_boom(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_4)) {
     playFX(var_4, var_0);
-  }
-  else {
+  } else {
     playFX(level.mortar, var_0);
   }
 
@@ -906,8 +887,7 @@ mortar_sound(var_0) {
 
   if(!var_0) {
     self playSound("mortar_explosion" + var_1);
-  }
-  else {
+  } else {
     common_scripts\utility::play_sound_in_space("mortar_explosion" + var_1, self.origin);
   }
 }
@@ -917,8 +897,7 @@ incoming_sound(var_0, var_1) {
 
   if(!isDefined(level.lastmortarincomingtime)) {
     level.lastmortarincomingtime = var_2;
-  }
-  else if(var_2 - level.lastmortarincomingtime < 1000) {
+  } else if(var_2 - level.lastmortarincomingtime < 1000) {
     wait 1;
     return;
   } else
@@ -931,8 +910,7 @@ incoming_sound(var_0, var_1) {
   if(var_0 == 1) {
     if(var_1) {
       thread common_scripts\utility::play_sound_in_space("mortar_incoming1", self.origin);
-    }
-    else {
+    } else {
       self playSound("mortar_incoming1");
     }
 
@@ -940,8 +918,7 @@ incoming_sound(var_0, var_1) {
   } else if(var_0 == 2) {
     if(var_1) {
       thread common_scripts\utility::play_sound_in_space("mortar_incoming2", self.origin);
-    }
-    else {
+    } else {
       self playSound("mortar_incoming2");
     }
 
@@ -949,8 +926,7 @@ incoming_sound(var_0, var_1) {
   } else {
     if(var_1) {
       thread common_scripts\utility::play_sound_in_space("mortar_incoming3", self.origin);
-    }
-    else {
+    } else {
       self playSound("mortar_incoming3");
     }
 

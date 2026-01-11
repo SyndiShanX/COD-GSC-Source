@@ -67,8 +67,7 @@ markeractivate(var_00, var_01, var_02) {
 
     if(isDefined(var_07)) {
       var_6.linkparent = var_07;
-    }
-    else {
+    } else {
       var_6.linkparent = undefined;
     }
   }
@@ -89,11 +88,9 @@ markeractivate(var_00, var_01, var_02) {
 deployableexclusion(var_00) {
   if(var_00 == "mp_satcom") {
     return 1;
-  }
-  else if(issubstr(var_00, "paris_catacombs_iron")) {
+  } else if(issubstr(var_00, "paris_catacombs_iron")) {
     return 1;
-  }
-  else if(issubstr(var_00, "mp_warhawk_iron_gate")) {
+  } else if(issubstr(var_00, "mp_warhawk_iron_gate")) {
     return 1;
   }
 
@@ -152,8 +149,7 @@ box_setactive(var_00) {
 
     if(!isDefined(self getlinkedparent())) {
       scripts\mp\objidpoolmanager::minimap_objective_position(var_02, self.origin);
-    }
-    else {
+    } else {
       scripts\mp\objidpoolmanager::minimap_objective_onentity(var_02, self);
     }
 
@@ -209,7 +205,7 @@ box_setactive(var_00) {
     }
   } else {
     foreach(var_04 in level.participants) {
-    _box_setactivehelper(var_04, isDefined(self.owner) && self.owner == var_04, var_1.canusecallback);
+      _box_setactivehelper(var_04, isDefined(self.owner) && self.owner == var_04, var_1.canusecallback);
     }
   }
 
@@ -227,8 +223,7 @@ _box_setactivehelper(var_00, var_01, var_02) {
   if(var_01) {
     if(!isDefined(var_02) || var_00[[var_02]](self)) {
       box_enableplayeruse(var_00);
-    }
-    else {
+    } else {
       box_disableplayeruse(var_00);
       thread doubledip(var_00);
     }
@@ -527,8 +522,7 @@ useholdthink(var_00, var_01) {
 
   if(isDefined(var_01)) {
     var_0.boxparams.usetime = var_01;
-  }
-  else {
+  } else {
     var_0.boxparams.usetime = 3000;
   }
 
@@ -561,8 +555,7 @@ useholdthinkloop(var_00) {
 
     if(isDefined(var_0.objectivescaler)) {
       var_1.userate = 1 * var_0.objectivescaler;
-    }
-    else {
+    } else {
       var_1.userate = 1;
     }
 

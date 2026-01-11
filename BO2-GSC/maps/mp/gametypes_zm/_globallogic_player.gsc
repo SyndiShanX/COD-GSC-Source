@@ -91,8 +91,7 @@ callback_playerconnect() {
 
   if(level.forceradar == 2) {
     self setclientuivisibilityflag("g_compassShowEnemies", level.forceradar);
-  }
-  else {
+  } else {
     self setclientuivisibilityflag("g_compassShowEnemies", 0);
   }
 
@@ -106,8 +105,7 @@ callback_playerconnect() {
 
   if(sessionmodeiszombiesgame()) {
     self[[level.player_stats_init]]();
-  }
-  else {
+  } else {
     self maps\mp\gametypes_zm\_globallogic_score::initpersstat("score");
 
     if(level.resetplayerscoreeveryround) {
@@ -372,8 +370,7 @@ callback_playerconnect() {
 
     if(maps\mp\gametypes_zm\_globallogic_utils::isvalidclass(self.pers["class"])) {
       self thread[[level.spawnclient]]();
-    }
-    else {
+    } else {
       self maps\mp\gametypes_zm\_globallogic_ui::showmainmenuforteam();
     }
 
@@ -639,8 +636,7 @@ figureoutattacker(eattacker) {
 
     if(eattacker.classname == "script_vehicle" && isDefined(eattacker.owner)) {
       eattacker = eattacker.owner;
-    }
-    else if(eattacker.classname == "auto_turret" && isDefined(eattacker.owner)) {
+    } else if(eattacker.classname == "auto_turret" && isDefined(eattacker.owner)) {
       eattacker = eattacker.owner;
     }
   }
@@ -652,8 +648,7 @@ figureoutweapon(sweapon, einflictor) {
   if(sweapon == "none" && isDefined(einflictor)) {
     if(isDefined(einflictor.targetname) && einflictor.targetname == "explodable_barrel") {
       sweapon = "explodable_barrel_mp";
-    }
-    else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
+    } else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
       sweapon = "destructible_car_mp";
     }
   }
@@ -754,8 +749,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
   if(level.onlyheadshots) {
     if(smeansofdeath == "MOD_PISTOL_BULLET" || smeansofdeath == "MOD_RIFLE_BULLET") {
       return;
-    }
-    else if(smeansofdeath == "MOD_HEAD_SHOT") {
+    } else if(smeansofdeath == "MOD_HEAD_SHOT") {
       idamage = 150;
     }
   }
@@ -1079,8 +1073,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
 
     if(wasinlaststand && isDefined(lastweaponbeforedroppingintolaststand)) {
       weaponname = lastweaponbeforedroppingintolaststand;
-    }
-    else {
+    } else {
       weaponname = self.lastdroppableweapon;
     }
 
@@ -1116,8 +1109,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
   } else {
     if(isDefined(level.lastobituaryplayer) && level.lastobituaryplayer == attacker) {
       level.lastobituaryplayercount++;
-    }
-    else {
+    } else {
       level notify("reset_obituary_count");
       level.lastobituaryplayer = attacker;
       level.lastobituaryplayercount = 1;
@@ -1240,8 +1232,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
       lpattacknum = attacker getentitynumber();
       dokillcam = 1;
 
-      if(level.teambased && self.team == attacker.team && smeansofdeath == "MOD_GRENADE" && level.friendlyfire == 0) {
-      } else if(level.teambased && self.team == attacker.team) {
+      if(level.teambased && self.team == attacker.team && smeansofdeath == "MOD_GRENADE" && level.friendlyfire == 0) {} else if(level.teambased && self.team == attacker.team) {
         if(!ignoreteamkills(sweapon, smeansofdeath)) {
           teamkill_penalty = self[[level.getteamkillpenalty]](einflictor, attacker, smeansofdeath, sweapon);
           attacker maps\mp\gametypes_zm\_globallogic_score::incpersstat("teamkills_nostats", teamkill_penalty, 0);
@@ -1255,11 +1246,9 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
 
           if(maps\mp\gametypes_zm\_globallogic_utils::gettimepassed() < 5000) {
             teamkilldelay = 1;
-          }
-          else if(attacker.pers["teamkills_nostats"] > 1 && maps\mp\gametypes_zm\_globallogic_utils::gettimepassed() < 8000 + attacker.pers["teamkills_nostats"] * 1000) {
+          } else if(attacker.pers["teamkills_nostats"] > 1 && maps\mp\gametypes_zm\_globallogic_utils::gettimepassed() < 8000 + attacker.pers["teamkills_nostats"] * 1000) {
             teamkilldelay = 1;
-          }
-          else {
+          } else {
             teamkilldelay = attacker teamkilldelay();
           }
 
@@ -1290,9 +1279,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
               attacker.pers["cur_kill_streak"]++;
 
               if(attacker.pers["cur_kill_streak"] >= 3) {
-                if(attacker.pers["cur_kill_streak"] <= 30) {
-                } else {
-                }
+                if(attacker.pers["cur_kill_streak"] <= 30) {} else {}
               }
             }
           }
@@ -1310,12 +1297,8 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
 
         killstreak = undefined;
 
-        if(isDefined(killstreak)) {
-        } else if(smeansofdeath == "MOD_HEAD_SHOT") {
-        } else if(smeansofdeath == "MOD_MELEE") {
-          if(sweapon == "riotshield_mp") {
-          } else {
-          }
+        if(isDefined(killstreak)) {} else if(smeansofdeath == "MOD_HEAD_SHOT") {} else if(smeansofdeath == "MOD_MELEE") {
+          if(sweapon == "riotshield_mp") {} else {}
         }
 
         attacker thread maps\mp\gametypes_zm\_globallogic_score::trackattackerkill(self.name, self.pers["rank"], self.pers["rankxp"], self.pers["prestige"], self getxuid(1));
@@ -1326,8 +1309,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
         if(level.teambased && attacker.team != "spectator") {
           if(isai(attacker)) {
             maps\mp\gametypes_zm\_globallogic_score::giveteamscore("kill", attacker.aiteam, attacker, self);
-          }
-          else {
+          } else {
             maps\mp\gametypes_zm\_globallogic_score::giveteamscore("kill", attacker.team, attacker, self);
           }
         }
@@ -1419,8 +1401,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
 
   if(isDefined(attacker) && isplayer(attacker) && attacker != self && (!level.teambased || attacker.team != self.team)) {
     self thread maps\mp\_challenges::playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, shitloc, attackerstance);
-  }
-  else {
+  } else {
     self notify("playerKilledChallengesProcessed");
   }
 
@@ -1430,8 +1411,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
 
   if(isplayer(attacker)) {
     bbprint("mpattacks", "gametime %d attackerspawnid %d attackerweapon %s attackerx %d attackery %d attackerz %d victimspawnid %d victimx %d victimy %d victimz %d damage %d damagetype %s damagelocation %s death %d", gettime(), getplayerspawnid(attacker), sweapon, lpattackorigin, getplayerspawnid(self), self.origin, idamage, smeansofdeath, shitloc, 1);
-  }
-  else {
+  } else {
     bbprint("mpattacks", "gametime %d attackerweapon %s victimspawnid %d victimx %d victimy %d victimz %d damage %d damagetype %s damagelocation %s death %d", gettime(), sweapon, getplayerspawnid(self), self.origin, idamage, smeansofdeath, shitloc, 1);
   }
 
@@ -1453,8 +1433,7 @@ callback_playerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdi
 
     if(isDefined(killcamentity.starttime)) {
       killcamentitystarttime = killcamentity.starttime;
-    }
-    else {
+    } else {
       killcamentitystarttime = killcamentity.birthtime;
     }
 
@@ -1678,8 +1657,7 @@ ignoreteamkills(sweapon, smeansofdeath) {
   return false;
 }
 
-callback_playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {
-}
+callback_playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shitloc, psoffsettime, deathanimduration) {}
 
 damageshellshockandrumble(eattacker, einflictor, sweapon, smeansofdeath, idamage) {
   self thread maps\mp\gametypes_zm\_weapons::onweapondamage(eattacker, einflictor, sweapon, smeansofdeath, idamage);
@@ -1947,8 +1925,7 @@ updateweapon(einflictor, sweapon) {
   if(sweapon == "none" && isDefined(einflictor)) {
     if(isDefined(einflictor.targetname) && einflictor.targetname == "explodable_barrel") {
       sweapon = "explodable_barrel_mp";
-    }
-    else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
+    } else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
       sweapon = "destructible_car_mp";
     }
   }
@@ -2040,5 +2017,4 @@ getkillcamentity(attacker, einflictor, sweapon) {
   return einflictor;
 }
 
-playkillbattlechatter(attacker, sweapon, victim) {
-}
+playkillbattlechatter(attacker, sweapon, victim) {}

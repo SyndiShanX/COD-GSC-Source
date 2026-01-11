@@ -211,8 +211,7 @@ startturretdeploy(weapon) {
 
     if(weapon.power_on) {
       turret thread maps\mp\zombies\_zm_mgturret::burst_fire_unmanned();
-    }
-    else {
+    } else {
       self iprintlnbold(&"ZOMBIE_NEED_LOCAL_POWER");
     }
 

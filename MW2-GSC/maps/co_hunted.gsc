@@ -33,8 +33,7 @@ main() {
 
   if(level.console) {
     level.hint_text_size = 1.6;
-  }
-  else {
+  } else {
     level.hint_text_size = 1.2;
   }
 
@@ -140,8 +139,7 @@ gameplay_logic(gametype) {
 
     if(level.player == level.ac130gunner) {
       level.ground_player = level.player2;
-    }
-    else {
+    } else {
       level.ground_player = level.player;
     }
 
@@ -239,8 +237,7 @@ move_enemies_to_closest_goal_radius(gametype) {
 
   if(gametype == "specop") {
     move_deadlier_hunters_to_new_goal(level.current_goal);
-  }
-  else {
+  } else {
     move_hunters_to_new_goal(level.current_goal);
   }
 
@@ -252,8 +249,7 @@ move_enemies_to_closest_goal_radius(gametype) {
 
       if(gametype == "specop") {
         move_deadlier_hunters_to_new_goal(closest_goal);
-      }
-      else {
+      } else {
         move_hunters_to_new_goal(closest_goal);
       }
     }
@@ -279,7 +275,7 @@ move_hunters_to_new_goal(closest_goal) {
   //the script has received the "death" notify but after the AI has died.
 
   foreach(enemy in level.hunter_enemies) {
-  enemy setgoalpos(closest_goal.origin);
+    enemy setgoalpos(closest_goal.origin);
   }
 }
 
@@ -290,8 +286,7 @@ move_deadlier_hunters_to_new_goal(closest_goal) {
   foreach(enemy in level.hunter_enemies) {
     if(RandomInt(100) < CONST_specop_difficulty) {
       enemy setgoalpos(closest_goal.origin);
-    }
-    else {
+    } else {
       enemy setgoalentity(level.ground_player);
     }
   }
@@ -313,11 +308,9 @@ hint_timeout() {
 ShouldBreakLaserHintPrint() {
   if(!isDefined(level.ground_player)) {
     return false;
-  }
-  else if(isDefined(level.ground_player.hint_timeout) && level.ground_player.hint_timeout <= 0) {
+  } else if(isDefined(level.ground_player.hint_timeout) && level.ground_player.hint_timeout <= 0) {
     return true;
-  }
-  else {
+  } else {
     return level.ground_player ent_flag("player_used_laser");
   }
 }
@@ -652,8 +645,7 @@ spawn_enemy_group() {
   if(level.selection >= level.enemy_force.size) {
     if(getdvar("no_respawn") == "1") {
       return;
-    }
-    else {
+    } else {
       level.selection = 0;
     }
   }
@@ -695,9 +687,9 @@ enemy_monitor_loop() {
     for(i = 0; i < enemies.size; i++) {
       if(isDefined(enemies[i].script_noteworthy))
     }
-        if(enemies[i].script_noteworthy == "defender") {
-          roaming--;
-        }
+    if(enemies[i].script_noteworthy == "defender") {
+      roaming--;
+    }
 
     println("roaming/total: " + roaming + "/" + total);
     if(roaming < 13) {

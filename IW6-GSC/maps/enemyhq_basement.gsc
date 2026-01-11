@@ -136,7 +136,7 @@ basement_combat_handlers() {
   var_0 = getaiarray("axis");
 
   foreach(var_3 in var_0) {
-  var_3.script_forcecolor = "r";
+    var_3.script_forcecolor = "r";
   }
 
   var_0 = maps\enemyhq_code::array_spawn_targetname_allow_fail("basement_guys4");
@@ -238,7 +238,7 @@ teargas_patrol() {
   var_0 = maps\_utility::array_removedead_or_dying(var_0);
 
   foreach(var_2 in var_0) {
-  var_2 setgoalpos(var_2.origin);
+    var_2 setgoalpos(var_2.origin);
   }
 
   wait 1;
@@ -310,7 +310,7 @@ handle_gas() {
   var_3 = [];
 
   foreach(var_5 in var_2) {
-  var_3[var_3.size] = var_5 spawn_animate_and_get_shot(100, 1, 1);
+    var_3[var_3.size] = var_5 spawn_animate_and_get_shot(100, 1, 1);
   }
 
   wait 1;
@@ -481,7 +481,7 @@ give_player_teargas() {
   level.player.gasmask_on = 1;
 
   foreach(var_1 in level.allies) {
-  var_1.gasmask_on = 1;
+    var_1.gasmask_on = 1;
   }
 
   level.player takeweapon("flash_grenade");
@@ -1003,7 +1003,7 @@ pre_breach_guys() {
   common_scripts\utility::exploder(307);
 
   foreach(var_5 in var_3) {
-  var_5 delete();
+    var_5 delete();
   }
 
   wait 0.2;

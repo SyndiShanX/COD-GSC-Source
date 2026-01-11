@@ -96,8 +96,7 @@ findcqbpointsofinterest() {
 
         if(best < 0) {
           ai[i].cqb_point_of_interest = undefined;
-        }
-        else {
+        } else {
           ai[i].cqb_point_of_interest = level.cqbpointsofinterest[best];
         }
 

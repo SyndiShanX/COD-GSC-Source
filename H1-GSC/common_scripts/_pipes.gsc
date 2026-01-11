@@ -323,8 +323,7 @@ pipebreakthink4() {
     default:
       if(isDefined(self.master.firstsnd)) {
         thread common_scripts\utility::play_sound_in_space("expl_gas_pipe_burst", self.fxnode.origin);
-      }
-      else {
+      } else {
         self.master.firstsnd = 1;
         thread common_scripts\utility::play_sound_in_space("expl_gas_pipe_burst_decay", self.fxnode.origin);
       }
@@ -362,8 +361,7 @@ pipesetup() {
 
   if(isDefined(self.script_parameters) && self.script_parameters == "use_bullet_hitnormal") {
     self.use_bullet_hitnormal = 1;
-  }
-  else if(isDefined(self.target)) {
+  } else if(isDefined(self.target)) {
     var_0 = common_scripts\utility::getstruct(self.target, "targetname");
 
     if(isDefined(var_0)) {

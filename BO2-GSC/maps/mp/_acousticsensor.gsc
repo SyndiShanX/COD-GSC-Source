@@ -131,8 +131,7 @@ watchacousticsensordamage(watcher) {
     }
     if(type == "MOD_MELEE") {
       self.damagetaken = damagemax;
-    }
-    else {
+    } else {
       self.damagetaken = self.damagetaken + damage;
     }
 

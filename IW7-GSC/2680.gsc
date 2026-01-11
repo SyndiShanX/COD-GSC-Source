@@ -98,9 +98,7 @@ frontend_camera_watcher(param_00) {
   self endon("disconnect");
   self cameralinkto(level.camera_anchor, "tag_origin");
   level.active_section = frontendscenegetactivesection();
-  [
-    [param_00]
-  ](level.active_section);
+  [[param_00]](level.active_section);
   scripts\engine\utility::waitframe();
   for(;;) {
     var_01 = frontendscenegetactivesection();

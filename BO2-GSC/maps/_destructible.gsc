@@ -39,11 +39,9 @@ destructible_event_callback(destructible_event, attacker) {
 
     if(explosion_radius == "sm") {
       explosion_radius = 150;
-    }
-    else if(explosion_radius == "lg") {
+    } else if(explosion_radius == "lg") {
       explosion_radius = 450;
-    }
-    else {
+    } else {
       explosion_radius = int(explosion_radius);
     }
 
@@ -88,8 +86,7 @@ simple_explosion(attacker) {
 
   if(isDefined(attacker)) {
     self radiusdamage(self.origin + offset, 300, 300, 100, attacker);
-  }
-  else {
+  } else {
     self radiusdamage(self.origin + offset, 300, 300, 100);
   }
 
@@ -102,8 +99,7 @@ complex_explosion(attacker, max_radius) {
 
   if(isDefined(attacker)) {
     self radiusdamage(self.origin + offset, max_radius, 300, 100, attacker);
-  }
-  else {
+  } else {
     self radiusdamage(self.origin + offset, max_radius, 300, 100);
   }
 

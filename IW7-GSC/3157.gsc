@@ -74,15 +74,13 @@ func_3E9A(var_00, var_01, var_02) {
 
   if(self.asm.shootparams.func_FF0B == 1) {
     var_04 = "single";
-  }
-  else {
+  } else {
     var_04 = var_03 + self.asm.shootparams.func_FF0B;
   }
 
   if(scripts\asm\asm::asm_hasalias(var_01, var_04)) {
     var_05 = scripts\asm\asm::asm_lookupanimfromalias(var_01, var_04);
-  }
-  else {
+  } else {
     var_05 = scripts\asm\asm::asm_lookupanimfromalias(var_01, "fire");
   }
 
@@ -165,8 +163,7 @@ getnodeyawfromoffsettable(var_00, var_01, var_02) {
 
   if(isDefined(var_02)) {
     var_03 = var_02;
-  }
-  else if(isnode(var_01) && !var_01 doesnodeallowstance(var_03)) {
+  } else if(isnode(var_01) && !var_01 doesnodeallowstance(var_03)) {
     var_03 = var_01 gethighestnodestance();
   }
 
@@ -220,8 +217,7 @@ getnodeyawoffset(var_00, var_01) {
   if(!isDefined(self.heat)) {
     if(scripts\engine\utility::isnodecoverleft(var_00)) {
       return 90;
-    }
-    else if(scripts\engine\utility::isnodecoverright(var_00)) {
+    } else if(scripts\engine\utility::isnodecoverright(var_00)) {
       return -90;
     }
   }
@@ -278,8 +274,7 @@ func_7FF1(var_00, var_01, var_02) {
 
   if(var_02 == "exposed") {
     var_03 = anim.func_C046[var_00];
-  }
-  else if(var_02 == "lean" || var_02 == "leanover") {
+  } else if(var_02 == "lean" || var_02 == "leanover") {
     var_03 = anim.func_C04D[var_00];
   }
 
@@ -300,8 +295,7 @@ func_7FF2(var_00, var_01, var_02) {
   if(self.asm.func_7360) {
     if(var_02 == "lean") {
       var_03 = anim.func_7364[var_00];
-    }
-    else if(var_02 == "A" || var_02 == "full" || var_02 == "right" || var_02 == "left") {
+    } else if(var_02 == "A" || var_02 == "full" || var_02 == "right" || var_02 == "left") {
       var_03 = anim.func_7363[var_00];
     }
   } else if(var_02 == "lean")
@@ -340,8 +334,7 @@ getnodetypename(var_00) {
   if(isDefined(var_00)) {
     if(func_C04A(var_00)) {
       return "Cover Exposed 3D";
-    }
-    else {
+    } else {
       return var_0.type;
     }
   }
@@ -355,11 +348,9 @@ choosestrongdamagedeath(var_00, var_01, var_02) {
   if(abs(self.damageyaw) > 150) {
     if(scripts\engine\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot")) {
       var_03 = "legs";
-    }
-    else if(self.damagelocation == "torso_lower") {
+    } else if(self.damagelocation == "torso_lower") {
       var_03 = "torso_lower";
-    }
-    else {
+    } else {
       var_03 = "default";
     }
   } else if(self.damageyaw < 0)

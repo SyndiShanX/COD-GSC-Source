@@ -75,23 +75,18 @@ wait_then_fn(notifyStr, enders, fn, arg1, arg2, arg3, arg4) {
   }
   if(isString(notifyStr)) {
     self waittill(notifyStr);
-  }
-  else {
+  } else {
     wait(notifyStr);
   }
   if(isDefined(arg4)) {
     self[[fn]](arg1, arg2, arg3, arg4);
-  }
-  else if(isDefined(arg3)) {
+  } else if(isDefined(arg3)) {
     self[[fn]](arg1, arg2, arg3);
-  }
-  else if(isDefined(arg2)) {
+  } else if(isDefined(arg2)) {
     self[[fn]](arg1, arg2);
-  }
-  else if(isDefined(arg1)) {
+  } else if(isDefined(arg1)) {
     self[[fn]](arg1);
-  }
-  else {
+  } else {
     self[[fn]]();
   }
 }
@@ -161,8 +156,7 @@ single_anim(animArray, animName, notifyStr, restartAnim, animRate) {
   if(isSP()) {
     if(isDefined(restartAnim) && restartAnim) {
       self call[[level.func["setflaggedanimknobrestart"]]](notifyStr, animation, 1, 0.1, animRate);
-    }
-    else {
+    } else {
       self call[[level.func["setflaggedanimknob"]]](notifyStr, animation, 1, 0.1, animRate);
     }
   } else {
@@ -237,7 +231,7 @@ detect_people(radius, notifyStr, endonStr) {
     endonStr[0] = tempStr;
   }
   foreach(str in endonStr) {
-  self endon(str);
+    self endon(str);
   }
 
   self.detect_people_trigger[notifyStr] = spawn("trigger_radius", self.origin, 23, radius, radius);
@@ -264,7 +258,7 @@ detect_player_event(radius, notifyStr, endonStr, eventStr) {
     endonStr[0] = tempStr;
   }
   foreach(str in endonStr) {
-  self endon(str);
+    self endon(str);
   }
 
   while(1) {
@@ -345,8 +339,7 @@ newtonsMethod(x0, x1, p3, p2, p1, p0, tolerance) {
 
     if(x > x1) {
       x = (oldX + (3 * x1)) / 4;
-    }
-    else if(x < x0) {
+    } else if(x < x0) {
       x = (oldX + (3 * x0)) / 4;
     }
     iterations--;
@@ -412,8 +405,7 @@ clampAndNormalize(x, min, max) {
   AssertEx(min != max, "clampAndNormalize: min must not equal max");
   if(min < max) {
     x = clamp(x, min, max);
-  }
-  else x = clamp(x, max, min);
+  } else x = clamp(x, max, min);
   return (x - min) / (max - min);
 }
 

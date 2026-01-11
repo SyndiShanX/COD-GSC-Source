@@ -30,7 +30,9 @@ bot_killstreak_setup() {
     bot_register_killstreak_func("directional_uav", ::bot_killstreak_simple_use);
 
     if(isDefined(level.mapcustombotkillstreakfunc)) {
-      [[level.mapcustombotkillstreakfunc]]();
+      [
+        [level.mapcustombotkillstreakfunc]
+      ]();
     }
   }
 
@@ -51,8 +53,7 @@ bot_killstreak_valid_for_specific_streaktype(var_00, var_01, var_02) {
 
   if(bot_killstreak_is_valid_internal(var_00, "bots", undefined, var_01)) {
     return 1;
-  }
-  else if(var_02) {}
+  } else if(var_02) {}
 
   return 0;
 }
@@ -99,8 +100,7 @@ bot_killstreak_is_valid_internal(var_00, var_01, var_02, var_03) {
 bot_killstreak_is_valid_single(var_00, var_01) {
   if(var_01 == "humans") {
     return isDefined(level.killstreaksetups[var_00]) && scripts\mp\utility\game::getkillstreakindex(var_00) != -1;
-  }
-  else if(var_01 == "bots") {
+  } else if(var_01 == "bots") {
     return isDefined(level.killstreak_botfunc[var_00]);
   }
 }
@@ -179,8 +179,7 @@ bot_think_killstreak() {
             if(scripts\mp\utility\game::isspecialistkillstreak(var_2.streakname)) {
               if(!var_2.func_9E0B) {
                 var_03 = "specialist";
-              }
-              else {
+              } else {
                 continue;
               }
             }
@@ -387,8 +386,7 @@ bot_killstreak_drop(var_00, var_01, var_02, var_03, var_04) {
 
       if(var_15.size > 0) {
         var_09 = scripts\engine\utility::random(var_15);
-      }
-      else {
+      } else {
         var_09 = scripts\engine\utility::random(var_10);
       }
     }
@@ -474,8 +472,7 @@ bot_killstreak_choose_loc_enemies(var_00, var_01, var_02, var_03) {
   for(var_10 = 0; var_10 < var_05; var_10++) {
     if(var_09) {
       var_11 = var_05 - 1 - var_10;
-    }
-    else {
+    } else {
       var_11 = var_10;
     }
 
@@ -493,11 +490,9 @@ bot_killstreak_choose_loc_enemies(var_00, var_01, var_02, var_03) {
 
   if(var_06 >= 0) {
     var_13 = getzoneorigin(var_06);
-  }
-  else if(var_8.size > 0) {
+  } else if(var_8.size > 0) {
     var_13 = getzoneorigin(scripts\engine\utility::random(var_08));
-  }
-  else {
+  } else {
     var_13 = getzoneorigin(randomint(level.zonecount));
   }
 

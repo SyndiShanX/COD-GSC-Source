@@ -409,8 +409,7 @@ input_reactive_radius(menu_index) {
     val = 0;
     if(level.player ButtonPressed("-")) {
       val = -10;
-    }
-    else if(level.player ButtonPressed("=")) {
+    } else if(level.player ButtonPressed("=")) {
       val = 10;
     }
 

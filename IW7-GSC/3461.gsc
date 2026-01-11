@@ -128,7 +128,7 @@ setairdropcratecollision(var_00) {
   level.airdropcratecollision = getent(var_1[0].target, "targetname");
 
   foreach(var_03 in var_01) {
-  var_03 deletecrateold();
+    var_03 deletecrateold();
   }
 }
 
@@ -222,9 +222,9 @@ getcratetypefordroptype(var_00) {
     default:
       if(isDefined(level.getrandomcratetypeforgamemode)) {
         return [
-      }
+          }
           [level.getrandomcratetypeforgamemode]
-        ](var_00);
+      ](var_00);
 
       return getrandomcratetype(var_00);
   }
@@ -310,14 +310,11 @@ airdropmarkeractivate(var_00, var_01) {
 
   if(issubstr(tolower(var_00), "juggernaut")) {
     level doc130flyby(var_03, var_02, randomfloat(360), var_00);
-  }
-  else if(issubstr(tolower(var_00), "escort_airdrop")) {
+  } else if(issubstr(tolower(var_00), "escort_airdrop")) {
     var_03 scripts\mp\killstreaks\escort_airdrop::func_6CE4(var_01, var_02, randomfloat(360), "escort_airdrop");
-  }
-  else if(var_00 == "dronedrop") {
+  } else if(var_00 == "dronedrop") {
     level func_581F(var_03, var_02, randomfloat(360), var_00);
-  }
-  else {
+  } else {
     level doflyby(var_03, var_02, randomfloat(360), var_00);
   }
 }
@@ -557,8 +554,7 @@ createairdropcrate(var_00, var_01, var_02, var_03, var_04, var_05) {
 
     if(level.teambased) {
       var_6.friendlymodel thread cratemodelteamupdater(var_6.team);
-    }
-    else {
+    } else {
       var_6.friendlymodel thread cratemodelplayerupdater(var_00, 1);
     }
 
@@ -566,11 +562,9 @@ createairdropcrate(var_00, var_01, var_02, var_03, var_04, var_05) {
 
     if(level.multiteambased) {
       var_6.enemymodel thread cratemodelenemyteamsupdater(var_6.team);
-    }
-    else if(level.teambased) {
+    } else if(level.teambased) {
       var_6.enemymodel thread cratemodelteamupdater(level.otherteam[var_6.team]);
-    }
-    else {
+    } else {
       var_6.enemymodel thread cratemodelplayerupdater(var_00, 0);
     }
   }
@@ -637,8 +631,7 @@ cratesetupforuse(var_00, var_01, var_02, var_03) {
 
   if(level.teambased) {
     var_09 = scripts\mp\entityheadicons::setheadicon(self.team, var_01, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     var_09 = scripts\mp\entityheadicons::setheadicon(self.owner, var_01, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
   }
 
@@ -648,8 +641,7 @@ cratesetupforuse(var_00, var_01, var_02, var_03) {
 
   if(isDefined(level.iconvisall)) {
     [[level.iconvisall]](self, var_01);
-  }
-  else {
+  } else {
     foreach(var_07 in level.players) {
       if(var_7.team == "spectator") {
         var_09 = scripts\mp\entityheadicons::setheadicon(var_07, var_01, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
@@ -723,8 +715,7 @@ watchcratereroll(var_00) {
 
   if(level.teambased) {
     var_05 = scripts\mp\entityheadicons::setheadicon(self.team, var_04, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     var_05 = scripts\mp\entityheadicons::setheadicon(self.owner, var_04, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
   }
 
@@ -734,8 +725,7 @@ watchcratereroll(var_00) {
 
   if(isDefined(level.iconvisall)) {
     [[level.iconvisall]](self, var_04);
-  }
-  else {
+  } else {
     foreach(var_07 in level.players) {
       if(var_7.team == "spectator") {
         var_05 = scripts\mp\entityheadicons::setheadicon(var_07, var_04, (0, 0, 24), 14, 14, 0, undefined, undefined, undefined, undefined, 0);
@@ -796,11 +786,9 @@ createobjective(var_00, var_01, var_02, var_03, var_04) {
 
   if(!isDefined(self getlinkedparent()) && !scripts\mp\utility\game::istrue(var_03)) {
     scripts\mp\objidpoolmanager::minimap_objective_position(var_05, self.origin);
-  }
-  else if(scripts\mp\utility\game::istrue(var_03) && scripts\mp\utility\game::istrue(var_04)) {
+  } else if(scripts\mp\utility\game::istrue(var_03) && scripts\mp\utility\game::istrue(var_04)) {
     scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_05, self);
-  }
-  else {
+  } else {
     scripts\mp\objidpoolmanager::minimap_objective_onentity(var_05, self);
   }
 
@@ -811,8 +799,7 @@ createobjective(var_00, var_01, var_02, var_03, var_04) {
     if(!level.teambased && isDefined(self.owner)) {
       if(scripts\mp\utility\game::istrue(var_02)) {
         scripts\mp\objidpoolmanager::minimap_objective_playerteam(var_05, self.owner getentitynumber());
-      }
-      else {
+      } else {
         scripts\mp\objidpoolmanager::minimap_objective_playerenemyteam(var_05, self.owner getentitynumber());
       }
     } else
@@ -838,11 +825,9 @@ createobjective_engineer(var_00, var_01, var_02) {
 
   if(!isDefined(self getlinkedparent()) && !scripts\mp\utility\game::istrue(var_01)) {
     scripts\mp\objidpoolmanager::minimap_objective_position(var_03, self.origin);
-  }
-  else if(scripts\mp\utility\game::istrue(var_01) && scripts\mp\utility\game::istrue(var_02)) {
+  } else if(scripts\mp\utility\game::istrue(var_01) && scripts\mp\utility\game::istrue(var_02)) {
     scripts\mp\objidpoolmanager::minimap_objective_onentitywithrotation(var_03, self);
-  }
-  else {
+  } else {
     scripts\mp\objidpoolmanager::minimap_objective_onentity(var_03, self);
   }
 
@@ -1069,8 +1054,7 @@ waitfordropcratemsg(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(isDefined(var_0.killcament)) {
     if(isDefined(var_0.carestrike)) {
       var_07 = -2100;
-    }
-    else {
+    } else {
       var_07 = 0;
     }
 
@@ -1150,8 +1134,7 @@ droptimeout(var_00, var_01, var_02) {
 
   if(var_02 == "supply") {
     var_03 = 20.0;
-  }
-  else if(var_02 == "bomb_trap") {
+  } else if(var_02 == "bomb_trap") {
     var_03 = 60.0;
   }
 
@@ -1209,8 +1192,7 @@ func_581F(var_00, var_01, var_02, var_03, var_04) {
   }
   if(var_03 == "dronedrop_grnd") {
     var_05 = var_1.droporigin;
-  }
-  else {
+  } else {
     var_05 = var_1.location;
   }
 
@@ -1454,8 +1436,7 @@ func_13A04(var_00, var_01, var_02) {
 
     if(var_10) {
       var_14 = var_04;
-    }
-    else {
+    } else {
       var_14 = var_03;
     }
 
@@ -1465,8 +1446,7 @@ func_13A04(var_00, var_01, var_02) {
 
     if(!var_10) {
       thread func_BA1C(var_13 + var_14, var_5[var_16 + 1] + var_14);
-    }
-    else {
+    } else {
       thread func_BA1D(var_13 + var_14);
     }
 
@@ -1634,16 +1614,14 @@ func_BA1C(var_00, var_01) {
     if(var_08) {
       if(var_05 < level.func_109C4["medium_sharpturn"].func_B75B) {
         func_12F22("near_sharpturn", var_05);
-      }
-      else {
+      } else {
         func_12F22("medium_sharpturn", var_05);
       }
     } else if(var_05 < level.func_109C4["near"].func_B491)
       func_12F22("near", var_05);
     else if(var_05 < level.func_109C4["medium"].func_B491) {
       func_12F22("medium", var_05);
-    }
-    else {
+    } else {
       func_12F22("far", var_05);
     }
 
@@ -1743,8 +1721,7 @@ doc130flyby(var_00, var_01, var_02, var_03) {
 
     if(var_17 < var_15) {
       var_15 = var_17;
-    }
-    else if(var_17 > var_15) {
+    } else if(var_17 > var_15) {
       break;
     }
     if(var_17 < 320) {
@@ -1805,8 +1782,7 @@ domegac130flyby(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_18 < var_16) {
       var_16 = var_18;
-    }
-    else if(var_18 > var_16) {
+    } else if(var_18 > var_16) {
       break;
     }
     if(var_18 < 256) {
@@ -1870,8 +1846,7 @@ dropnuke(var_00, var_01, var_02) {
 
     if(var_16 < var_15) {
       var_15 = var_16;
-    }
-    else if(var_16 > var_15) {
+    } else if(var_16 > var_15) {
       break;
     }
     if(var_16 < 256) {
@@ -2049,8 +2024,7 @@ crateothercapturethink(var_00, var_01) {
     }
     if(isDefined(level.overridecrateusetime)) {
       var_05 = level.overridecrateusetime;
-    }
-    else {
+    } else {
       var_05 = undefined;
     }
 
@@ -2117,8 +2091,7 @@ crateallcapturethink(var_00) {
     }
     if(isDefined(level.overridecrateusetime)) {
       var_02 = level.overridecrateusetime;
-    }
-    else {
+    } else {
       var_02 = undefined;
     }
 
@@ -2192,8 +2165,7 @@ killstreakcratethink(var_00) {
 
   if(isDefined(game["strings"][self.cratetype + "_hint"])) {
     var_01 = game["strings"][self.cratetype + "_hint"];
-  }
-  else {
+  } else {
     var_01 = &"PLATFORM_GET_KILLSTREAK";
   }
 
@@ -2227,8 +2199,7 @@ killstreakcratethink(var_00) {
     if(isDefined(self.owner)) {
       if(var_04 == self.owner) {
         var_04 thread scripts\mp\missions::func_D991("ch_scorestreak_uses_dronepackage");
-      }
-      else if(!level.teambased || var_4.team != self.team) {
+      } else if(!level.teambased || var_4.team != self.team) {
         switch (var_00) {
           case "airdrop_osprey_gunner":
           case "airdrop_escort":
@@ -2411,19 +2382,16 @@ juggernautcratethink(var_00) {
       if(!level.teambased || var_1.team != self.team) {
         if(self.cratetype == "airdrop_juggernaut_maniac") {
           var_01 thread hijacknotify(self, "maniac");
-        }
-        else if(scripts\mp\utility\game::isstrstart(self.cratetype, "juggernaut_")) {
+        } else if(scripts\mp\utility\game::isstrstart(self.cratetype, "juggernaut_")) {
           var_01 thread hijacknotify(self, self.cratetype);
-        }
-        else {
+        } else {
           var_01 thread hijacknotify(self, "juggernaut");
         }
       } else if(self.cratetype == "airdrop_juggernaut_maniac")
         self.owner scripts\mp\hud_message::showsplash("giveaway_juggernaut_maniac", undefined, var_01);
       else if(scripts\mp\utility\game::isstrstart(self.cratetype, "juggernaut_")) {
         self.owner scripts\mp\hud_message::showsplash("giveaway_" + self.cratetype, undefined, var_01);
-      }
-      else {
+      } else {
         self.owner scripts\mp\hud_message::showsplash("giveaway_juggernaut", undefined, var_01);
       }
     }
@@ -2467,8 +2435,7 @@ sentrycratethink(var_00) {
       if(!level.teambased || var_1.team != self.team) {
         if(issubstr(var_00, "airdrop_sentry")) {
           var_01 thread hijacknotify(self, "sentry");
-        }
-        else {
+        } else {
           var_01 thread hijacknotify(self, "emergency_airdrop");
         }
       } else {
@@ -2561,8 +2528,7 @@ useholdthink(var_00, var_01, var_02, var_03) {
 
   if(isDefined(var_01)) {
     self.usetime = var_01;
-  }
-  else {
+  } else {
     self.usetime = 3000;
   }
 
@@ -2601,8 +2567,7 @@ useholdthinkloop(var_00) {
 
     if(isDefined(self.objectivescaler)) {
       self.userate = 1 * self.objectivescaler;
-    }
-    else {
+    } else {
       self.userate = 1;
     }
 

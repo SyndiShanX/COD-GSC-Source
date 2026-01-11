@@ -935,9 +935,7 @@ function get_closest_valid_player(origin, ignore_player) {
       continue;
     }
     if(isDefined(level.evaluate_zone_path_override)) {
-      if(![
-          [level.evaluate_zone_path_override]
-        ](player)) {
+      if(![[level.evaluate_zone_path_override]](player)) {
         array::add(ignore_player, player);
       }
     }
@@ -1015,9 +1013,7 @@ function update_valid_players(origin, ignore_player) {
       continue;
     }
     if(isDefined(level.evaluate_zone_path_override)) {
-      if(![
-          [level.evaluate_zone_path_override]
-        ](player)) {
+      if(![[level.evaluate_zone_path_override]](player)) {
         array::add(ignore_player, player);
       }
     }
@@ -3551,9 +3547,7 @@ function link_changes_internal_internal(list, func) {
           continue;
         }
         println((("" + keys[i]) + "") + node_keys[j]);
-        # / [
-          [func]
-        ](node, list[keys[i]].links[node_keys[j]]);
+        # / [[func]](node, list[keys[i]].links[node_keys[j]]);
       }
     }
   }

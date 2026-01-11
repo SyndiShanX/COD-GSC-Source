@@ -76,8 +76,7 @@ jail_traversal_fix() {
 
           if(is_true(self.has_legs)) {
             self setphysparams(15, 0, 72);
-          }
-          else {
+          } else {
             self setphysparams(15, 0, 24);
           }
         }
@@ -143,8 +142,7 @@ zgrief_respawn_override(revivee, return_struct) {
       for(j = 0; j < spawn_points.size; j++) {
         if(isDefined(spawn_points[j].script_int)) {
           ideal_distance = spawn_points[j].script_int;
-        }
-        else {
+        } else {
           ideal_distance = 1000;
         }
 

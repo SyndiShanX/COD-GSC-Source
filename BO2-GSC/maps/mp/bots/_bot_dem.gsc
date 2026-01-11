@@ -19,8 +19,7 @@ bot_dem_think() {
 
   if(self.team == game["attackers"]) {
     bot_dem_attack_think();
-  }
-  else {
+  } else {
     bot_dem_defend_think();
   }
 }
@@ -54,8 +53,7 @@ bot_dem_attack_think() {
       self bot_dem_guard(self.goal_flag, self.goal_flag.dem_nodes, self.goal_flag.trigger.origin);
     else if(self bot_dem_friend_interacting(self.goal_flag.trigger.origin)) {
       self bot_dem_guard(self.goal_flag, self.goal_flag.dem_nodes, self.goal_flag.trigger.origin);
-    }
-    else {
+    } else {
       self bot_dem_attack(self.goal_flag);
     }
   }
@@ -199,8 +197,7 @@ bot_dem_defuse(zone) {
 
   if(cointoss()) {
     self setstance("crouch");
-  }
-  else {
+  } else {
     self setstance("prone");
   }
 

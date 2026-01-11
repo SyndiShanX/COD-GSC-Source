@@ -803,8 +803,7 @@ church_runup() {
 
   if((!isDefined(var_1) || var_1.size == 0) && level.start_point != "church_x") {
     maps\_utility::delaythread(0.1, maps\scoutsniper_code::dynamic_run_speed);
-  }
-  else if(distance(var_0.origin, self.origin) > 512) {
+  } else if(distance(var_0.origin, self.origin) > 512) {
     level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_letsgo");
     maps\_utility::delaythread(0.1, maps\scoutsniper_code::dynamic_run_speed);
   }
@@ -920,8 +919,7 @@ church_holdup_dialogue(var_0) {
   if(!common_scripts\utility::flag("church_lookout_dead")) {
     if(common_scripts\utility::flag("church_patroller_dead")) {
       level maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_inthetower");
-    }
-    else {
+    } else {
       level maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_churchtower");
     }
 
@@ -930,8 +928,7 @@ church_holdup_dialogue(var_0) {
 
       if(common_scripts\utility::flag("church_lookout_dead")) {
         level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_niceshot");
-      }
-      else {
+      } else {
         level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_patrolnorth");
       }
     }
@@ -1346,17 +1343,14 @@ church_patroller_death() {
 
   if(common_scripts\utility::flag("church_lookout_dead")) {
     common_scripts\utility::flag_set("church_area_clear");
-  }
-  else {
+  } else {
     var_1 = maps\_utility::get_living_ai("church_lookout", "script_noteworthy");
 
     if(distance(var_0, var_1.origin) > level._stealth.logic.corpse.sight_dist + 150 && !common_scripts\utility::flag("_stealth_spotted")) {
       common_scripts\utility::flag_set("church_run_for_it");
-    }
-    else if(common_scripts\utility::flag("_stealth_spotted")) {
+    } else if(common_scripts\utility::flag("_stealth_spotted")) {
       return;
-    }
-    else {
+    } else {
       if(common_scripts\utility::flag("intro_patrol_guys_dead")) {
         level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_seethebody");
       }
@@ -1520,8 +1514,7 @@ graveyard_moveup() {
 
   if(getdvarint("use_old_heli_coming") == 1) {
     self.ref_node maps\_anim::anim_generic_reach_and_arrive(self, "stop_cornerR");
-  }
-  else {
+  } else {
     if(!isDefined(level.graveyard_price_hind_node)) {
       level.graveyard_price_hind_node = spawn("script_origin", (-8864, -4410, -167));
     }
@@ -1559,8 +1552,7 @@ graveyard_waithind() {
 
   if(getdvarint("use_old_heli_coming") == 1) {
     old_macmillan_heli_sequence();
-  }
-  else {
+  } else {
     h1_macmillan_heli_sequence();
   }
 
@@ -1673,8 +1665,7 @@ h1_macmillan_heli_sequence() {
 
   if(isDefined(self.did_not_get_to_wall)) {
     maps\_anim::anim_generic_custom_animmode(self, "gravity", "prone_2_stand");
-  }
-  else {
+  } else {
     self notify("stop_heli_loop");
     self.animname = "price";
     level.graveyard_price_hind_node thread maps\_anim::anim_single_solo(self, "heli_coming_cover_exit");
@@ -2243,8 +2234,7 @@ bmp_badplace(var_0) {
   for(;;) {
     if(var_2) {
       var_8 = anglesToForward(self gettagangles("tag_turret"));
-    }
-    else {
+    } else {
       var_8 = anglesToForward(self.angles);
     }
 
@@ -2292,8 +2282,7 @@ field_enemy_think() {
   if(getdvarint("field_patrol_original") == 0) {
     if(isDefined(self.export)) {
       self.patrol_walk_anim = field_enemy_custom_patrol_anim(self.export);
-    }
-    else {
+    } else {
       self.patrol_walk_anim = "patrol_walk";
     }
 
@@ -2508,11 +2497,9 @@ pond_main() {
 
     if(common_scripts\utility::flag("pond_enemies_dead")) {
       level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_moveup");
-    }
-    else if(distance(level.player.origin, level.price.origin) > 256) {
+    } else if(distance(level.player.origin, level.price.origin) > 256) {
       level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_ateam");
-    }
-    else {
+    } else {
       level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_moveup");
     }
   }
@@ -2783,8 +2770,7 @@ pond_inposition() {
     if(var_2) {
       if(distance(var_1.origin, self.origin) < 8) {
         var_3 = undefined;
-      }
-      else if(!common_scripts\utility::flag("_stealth_event")) {
+      } else if(!common_scripts\utility::flag("_stealth_event")) {
         level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_waitforme");
       }
 
@@ -3249,8 +3235,7 @@ cargo_waitmove() {
 
   if(!var_0) {
     level maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_observe");
-  }
-  else {
+  } else {
     level thread maps\_utility::function_stack(maps\_utility::radio_dialogue, "scoutsniper_mcm_go");
     return;
   }
@@ -3546,8 +3531,7 @@ dash_holdup() {
 
   if(getdvarint("use_old_container_dash") == 1) {
     maps\scoutsniper_code::scoutsniper_follow_path(var_0, 200);
-  }
-  else {
+  } else {
     level.price.animname = "price";
     var_1 maps\_anim::anim_reach_solo(self, "container_runin");
     var_1 maps\_anim::anim_single_solo(self, "container_runin");
@@ -3982,14 +3966,11 @@ dogs_eater() {
   for(;;) {
     if(distance(self.origin, level.player.origin) > 500) {
       thread maps\scoutsniper_code::dogs_eater_eat();
-    }
-    else if(distance(self.origin, level.player.origin) > 350) {
+    } else if(distance(self.origin, level.player.origin) > 350) {
       thread maps\scoutsniper_code::dogs_eater_growl();
-    }
-    else if(distance(self.origin, level.player.origin) > 200) {
+    } else if(distance(self.origin, level.player.origin) > 200) {
       thread maps\scoutsniper_code::dogs_eater_bark();
-    }
-    else {
+    } else {
       break;
     }
 
@@ -4064,8 +4045,7 @@ dogs_backup() {
 
   if(randomint(100) > 65 && isalive(level.price)) {
     self.favoriteenemy = level.price;
-  }
-  else if(isalive(level.player)) {
+  } else if(isalive(level.player)) {
     self.favoriteenemy = level.player;
   }
 
@@ -4620,8 +4600,7 @@ monitor_macmellon() {
   for(;;) {
     if(level.melonhead_mode_enabled) {
       self.name = "Cpt. MacMellon";
-    }
-    else {
+    } else {
       self.name = "Cpt. MacMillan";
     }
 

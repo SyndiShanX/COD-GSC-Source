@@ -211,8 +211,7 @@ breacher_think(var_0, var_1, var_2) {
 
   if(self == var_0.closestai) {
     var_3 = "01";
-  }
-  else {
+  } else {
     var_3 = "02";
   }
 
@@ -224,8 +223,7 @@ breacher_think(var_0, var_1, var_2) {
     case "explosive_breach_left":
       if(isDefined(self.usebreachapproach) && self.usebreachapproach == 0) {
         var_4 = "detcord_stack_left_start_no_approach_" + var_3;
-      }
-      else {
+      } else {
         var_4 = "detcord_stack_left_start_" + var_3;
       }
 
@@ -259,8 +257,7 @@ breacher_think(var_0, var_1, var_2) {
 
   if(!isDefined(self.usebreachapproach) || self.usebreachapproach) {
     var_0.animent maps\_anim::anim_generic_reach(self, var_4);
-  }
-  else {
+  } else {
     self.scriptedarrivalent = var_0.animent;
     var_0.animent maps\_anim::anim_generic_reach_and_arrive(self, var_4);
   }
@@ -542,8 +539,7 @@ door_open(var_0, var_1, var_2) {
 door_connectpaths() {
   if(self.classname == "script_brushmodel") {
     self connectpaths();
-  }
-  else {
+  } else {
     var_0 = getent(self.target, "targetname");
     var_0 hide();
     var_0 notsolid();
@@ -556,11 +552,9 @@ door_fall_over(var_0) {
 
   if(self.classname == "script_model") {
     var_1 = anglesToForward(self.angles);
-  }
-  else if(self.classname == "script_brushmodel") {
+  } else if(self.classname == "script_brushmodel") {
     var_1 = self.vector;
-  }
-  else {}
+  } else {}
 
   var_2 = (var_1[0] * 20, var_1[1] * 20, var_1[2] * 20);
   self moveto(self.origin + var_2, 0.5, 0, 0.5);

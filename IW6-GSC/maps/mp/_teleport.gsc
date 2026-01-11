@@ -1059,12 +1059,12 @@ teleport_to_zone_killstreaks(zone_name) {
 
   array_thread_safe(level.air_start_nodes, ::teleport_self_add_delta, delta);
   foreach(loc in level.air_start_nodes) {
-  array_thread_safe(loc.neighbors, ::teleport_self_add_delta, delta);
+    array_thread_safe(loc.neighbors, ::teleport_self_add_delta, delta);
   }
 
   array_thread_safe(level.air_node_mesh, ::teleport_self_add_delta, delta);
   foreach(loc in level.air_node_mesh) {
-  array_thread_safe(loc.neighbors, ::teleport_self_add_delta, delta);
+    array_thread_safe(loc.neighbors, ::teleport_self_add_delta, delta);
   }
 
   array_thread_safe(level.littleBirds, ::teleport_notify_death);
@@ -1093,7 +1093,7 @@ teleport_to_zone_killstreaks(zone_name) {
 
   if(isDefined(level.uplinks)) {
     foreach(uplink in level.uplinks) {
-    uplink notify("death");
+      uplink notify("death");
     }
   }
 

@@ -48,8 +48,7 @@ friendly_state_spotted() {
 
   if(isDefined(self._stealth.behavior.oldgrenadeammo)) {
     self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
-  }
-  else {
+  } else {
     self.grenadeammo = 3;
   }
   //used to be ignore all - but that makes him not aim at enemies when exposed - which isn't good...also
@@ -117,7 +116,7 @@ friendly_init() {
 
 friendly_custom_state_behavior(array) {
   foreach(key, func in array) {
-  self ai_create_behavior_function("state", key, func);
+    self ai_create_behavior_function("state", key, func);
   }
 
   function = self._stealth.behavior.ai_functions["state"]["hidden"];

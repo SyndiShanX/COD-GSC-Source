@@ -69,8 +69,7 @@ func_707F(var_00, var_01, var_02, var_03) {
 
           if(var_03 == anim.running) {
             var_1.func_E87F[var_04] = -1;
-          }
-          else {
+          } else {
             func_0A0D::func_11704(var_04);
           }
 

@@ -43,8 +43,7 @@ func_A0F0() {
 
     if(getdvarint("E3", 0)) {
       scripts\sp\utility::func_15F5("jackals_salter_to_jackal_dps");
-    }
-    else {
+    } else {
       scripts\sp\utility::func_15F5("jackals_salter_to_jackal");
     }
 
@@ -186,8 +185,7 @@ func_376D(var_00, var_01) {
 
   if(!isDefined(level.func_10256)) {
     scripts\sp\anim::func_1F35(var_00, var_01);
-  }
-  else {
+  } else {
     thread scripts\sp\anim::func_1F35(var_00, var_01);
     var_02 = [var_00];
     scripts\sp\anim::func_1F2A(var_02, var_01, 1);

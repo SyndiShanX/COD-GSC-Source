@@ -501,8 +501,7 @@ build_assets() {
 
           if(isDefined(asset.trigger_thread_func)) {
             use_trigger thread[[asset.trigger_thread_func]]();
-          }
-          else {
+          } else {
             use_trigger thread use_trigger_thread();
           }
 
@@ -519,8 +518,7 @@ build_assets() {
 
           if(isDefined(asset.trigger_thread_func)) {
             damage_trigger thread[[asset.trigger_thread_func]]();
-          }
-          else {
+          } else {
             damage_trigger thread damage_trigger_thread();
           }
 
@@ -537,8 +535,7 @@ build_assets() {
 
           if(isDefined(asset.trigger_thread_func)) {
             radius_trigger thread[[asset.trigger_thread_func]]();
-          }
-          else {
+          } else {
             radius_trigger thread radius_trigger_thread();
           }
 
@@ -687,8 +684,7 @@ time_limited_stage(sidequest) {
 
   if(isDefined(self.time_limit_func)) {
     time_limit = [[self.time_limit_func]]() * 0.25;
-  }
-  else {
+  } else {
     time_limit = self.time_limit * 0.25;
   }
 
@@ -898,8 +894,7 @@ sidequest_stage_active(sidequest_name, stage_name) {
 
   if(sidequest.active_stage == stage.stage_number) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -924,8 +919,7 @@ sidequest_start_next_stage(sidequest_name) {
 
   if(last_completed == -1) {
     last_completed = 0;
-  }
-  else {
+  } else {
     last_completed++;
   }
 
@@ -969,9 +963,9 @@ fake_use(notify_string, qualifier_func) {
 
       if(isDefined(qualifier_func)) {
         qualifier_passed = players[i][
-      }
+          }
           [qualifier_func]
-        ]();
+      ]();
 
       if(qualifier_passed && distancesquared(self.origin, players[i].origin) < 4096) {
         if(players[i] is_facing(self)) {

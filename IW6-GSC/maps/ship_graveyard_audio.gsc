@@ -21,8 +21,7 @@ start_overhead_waves() {
 
     if(level.panfront == 1) {
       level.panfront = 0;
-    }
-    else {
+    } else {
       level.panfront = 1;
     }
 
@@ -33,8 +32,7 @@ start_overhead_waves() {
 start_individual_wave() {
   if(level.panfront == 1) {
     var_0 = randomintrange(350, 550);
-  }
-  else {
+  } else {
     var_0 = randomintrange(-600, -500);
   }
 

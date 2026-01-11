@@ -88,11 +88,9 @@ func_D367() {
   }
   if(scripts\mp\utility\game::func_9D48("archetype_scout")) {
     self playlocalsound("breathing_better_c6");
-  }
-  else if(scripts\mp\utility\game::isfemale()) {
+  } else if(scripts\mp\utility\game::isfemale()) {
     self playlocalsound("Fem_breathing_better");
-  }
-  else {
+  } else {
     self playlocalsound("breathing_better");
   }
 }
@@ -121,8 +119,7 @@ healthregeneration(var_00, var_01) {
 
   if(var_01 < 0.55) {
     var_02 = 1;
-  }
-  else {
+  } else {
     var_02 = 0;
   }
 
@@ -143,11 +140,9 @@ healthregeneration(var_00, var_01) {
 
     if(scripts\mp\utility\game::_hasperk("specialty_adrenaline") || scripts\mp\utility\game::_hasperk("specialty_adrenaline_lite")) {
       var_06 = scripts\mp\equipment\adrenaline::func_7EF5();
-    }
-    else if(scripts\mp\utility\game::_hasperk("specialty_regenfaster")) {
+    } else if(scripts\mp\utility\game::_hasperk("specialty_regenfaster")) {
       var_06 = var_03 * level.func_DE89;
-    }
-    else {
+    } else {
       var_06 = var_03;
     }
 
@@ -216,11 +211,9 @@ func_D368(var_00) {
     }
     if(scripts\mp\utility\game::func_9D48("archetype_scout")) {
       self playlocalsound("breathing_hurt_c6");
-    }
-    else if(scripts\mp\utility\game::isfemale()) {
+    } else if(scripts\mp\utility\game::isfemale()) {
       self playlocalsound("Fem_breathing_hurt");
-    }
-    else {
+    } else {
       self playlocalsound("breathing_hurt");
     }
 

@@ -5,7 +5,6 @@
 
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
-
 #namespace player_role;
 
 autoexec __init__system__() {
@@ -23,5 +22,5 @@ is_valid(index) {
     return (index >= 0 && index < getplayerroletemplatecount(currentsessionmode()));
   }
 
-    return index > 0 && index < getplayerroletemplatecount(currentsessionmode());
+  return index > 0 && index < getplayerroletemplatecount(currentsessionmode());
 }

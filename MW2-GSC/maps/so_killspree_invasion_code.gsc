@@ -354,11 +354,10 @@ btr80_register_death() {
 
   if(attacker_is_p1(attacker)) {
     thread pulse_kill_counter_hud(level.btr_kill_value, 0);
+  } else {
+    if(attacker_is_p2(attacker))
   }
-  else {
-  if(attacker_is_p2(attacker))
-  }
-    thread pulse_kill_counter_hud(0, level.btr_kill_value);
+  thread pulse_kill_counter_hud(0, level.btr_kill_value);
 
   if(self ent_flag("spotted_player")) {
     foreach(player in level.players) {
@@ -372,9 +371,9 @@ btr80_register_death() {
 
   assertex((level.btr80_count >= 0), "Somehow the BTR80 population counter dropped below 0. This should never happen.");
 
-    if(level.btr80_count <= 0) {
-      level notify("btr80s_all_down");
-    }
+  if(level.btr80_count <= 0) {
+    level notify("btr80s_all_down");
+  }
 }
 
 btr80_challenge_complete_behavior() {
@@ -704,8 +703,7 @@ hunter_register_long_death_finish(my_id) {
 
   if(melee_kill) {
     hunter_register_death_score(my_id, attacker, level.hunter_brutal_value);
-  }
-  else {
+  } else {
     hunter_register_death_score(my_id, attacker, level.hunter_finish_value);
   }
 
@@ -747,8 +745,7 @@ hunter_register_death_score(my_id, attacker, point_value, my_noteworthy, my_birt
     if((level.hunter_damage_p1[my_id] > 40) || (level.hunter_damage_p2[my_id] > 40)) {
       if(level.hunter_damage_p1[my_id] > level.hunter_damage_p2[my_id]) {
         thread pulse_kill_counter_hud(point_value, 0);
-      }
-      else {
+      } else {
         thread pulse_kill_counter_hud(0, point_value);
       }
     }
@@ -1104,8 +1101,7 @@ hud_create_kill_splash(points) {
     wait 0.05;
     if(self isreloading()) {
       timer -= 0.025;
-    }
-    else {
+    } else {
       timer -= 0.05;
     }
   }

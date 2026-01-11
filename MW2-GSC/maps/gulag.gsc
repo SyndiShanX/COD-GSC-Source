@@ -84,7 +84,7 @@ main() {
   start = create_start( "intro" );
   start.main = ::gulag_flyin;
   start.text = "Intro";
-	
+  	
   start = create_start( "approach" );
   start.main = ::gulag_approach;
   start.text = "Approach";
@@ -586,10 +586,10 @@ gulag_approach() {
     level.player SetOrigin(gulag_center.origin);
   }
 
-    // guys that ignore you at first then run over to fight	
-    //array_spawn_function_noteworthy( "exploding_ignore_spawner", ::exploding_ignore_spawner_think );
+  // guys that ignore you at first then run over to fight	
+  //array_spawn_function_noteworthy( "exploding_ignore_spawner", ::exploding_ignore_spawner_think );
 
-    flag_wait("display_introscreen_text");
+  flag_wait("display_introscreen_text");
 
   wait(2.2);
   // string not found for AUTOSAVE_AUTOSAVE
@@ -696,7 +696,7 @@ gulag_approach() {
   flag_wait("stabilize");
 
   /*
-	
+  	
   // On target.	
   radio_dialogue( "gulag_tco_ontarget" );
   */
@@ -903,10 +903,10 @@ gulag_perimeter() {
 
   /*
   flag_wait( "slamraam_killed_2" );
-	
+  	
   exploding_tower_spawners = getEntArray( "exploding_tower_spawner", "targetname" );
   //delaythread( 2.5, ::array_spawn, exploding_tower_spawners );
-	
+  	
   wait( 3 );
   flag_set( "move_to_boom_tower" );
 
@@ -914,7 +914,7 @@ gulag_perimeter() {
   level.player_heli SetNearGoalNotifyDist( 8 );
   level.player_heli waittill_any( "near_goal", "goal" );
 
-	
+  	
   flag_wait( "player_heli_backs_up" );
   */
 
@@ -929,56 +929,56 @@ gulag_perimeter() {
   thread radio_dialogue("gulag_rpt_tooclose");
 
   /*
-	level.friendlyFireDisabled = 0;
-	//level.stabilize_offset = 5; // how much the player heli rotates relative to the gulag center
-	flag_wait( "stabilize" );
+  	level.friendlyFireDisabled = 0;
+  	//level.stabilize_offset = 5; // how much the player heli rotates relative to the gulag center
+  	flag_wait( "stabilize" );
 
-	// Stabilize.	
-	thread radio_dialogue( "gulag_rpt_stabilize3" );
+  	// Stabilize.	
+  	thread radio_dialogue( "gulag_rpt_stabilize3" );
 
-	// Ready.	
-	thread radio_dialogue( "gulag_lbp1_ready2" );
+  	// Ready.	
+  	thread radio_dialogue( "gulag_lbp1_ready2" );
 
-	// On target.	
-	//radio_dialogue( "gulag_wrm_ontarget2" );
+  	// On target.	
+  	//radio_dialogue( "gulag_wrm_ontarget2" );
 
-	// On target.	
-	thread radio_dialogue( "gulag_tco_ontarget2" );
+  	// On target.	
+  	thread radio_dialogue( "gulag_tco_ontarget2" );
 
-	// Take 'em out.	
-	thread radio_dialogue( "gulag_rpt_takeemout" );
+  	// Take 'em out.	
+  	thread radio_dialogue( "gulag_rpt_takeemout" );
 
-//	delayThread( 8, ::kill_deathflag, "stab3_clear" );
-	wait( 6.15 );
-	thread radio_dialogue( "gulag_rpt_shiftright" );
-	wait( 1.5 );
-	//flag_set( "stab3_clear" );
+  //	delayThread( 8, ::kill_deathflag, "stab3_clear" );
+  	wait( 6.15 );
+  	thread radio_dialogue( "gulag_rpt_shiftright" );
+  	wait( 1.5 );
+  	//flag_set( "stab3_clear" );
 
-	flag_clear( "stabilize" );
+  	flag_clear( "stabilize" );
 
-	flag_wait( "stabilize" );
-	thread radio_dialogue( "gulag_rpt_stabilize" );
-	// First wave going in.	
-	thread radio_dialogue( "gulag_lbp2_firstwave" );
+  	flag_wait( "stabilize" );
+  	thread radio_dialogue( "gulag_rpt_stabilize" );
+  	// First wave going in.	
+  	thread radio_dialogue( "gulag_lbp2_firstwave" );
 
-	wait( 4 );
-	exploder( 40 );
-	delayThread( 0.25, ::exploder, 93 );
-	wait( 0.5 );
-	flag_set( "stab4_clear" );
+  	wait( 4 );
+  	exploder( 40 );
+  	delayThread( 0.25, ::exploder, 93 );
+  	wait( 0.5 );
+  	flag_set( "stab4_clear" );
 
-	tower_4_radius_damage = GetEnt( "tower_4_radius_damage", "targetname" );
-	RadiusDamage( tower_4_radius_damage.origin, tower_4_radius_damage.radius, 2000, 2000 );
+  	tower_4_radius_damage = GetEnt( "tower_4_radius_damage", "targetname" );
+  	RadiusDamage( tower_4_radius_damage.origin, tower_4_radius_damage.radius, 2000, 2000 );
 
-	//wait( 0.8 );
-	level notify( "stop_gulag_drones" );
-	// Hang on!	
-	thread radio_dialogue( "gulag_lbp1_hangon" );
+  	//wait( 0.8 );
+  	level notify( "stop_gulag_drones" );
+  	// Hang on!	
+  	thread radio_dialogue( "gulag_lbp1_hangon" );
 
-	// Command, we need those Russian naval vessels to cease fire immediately! That was too close!	
-	thread radio_dialogue( "gulag_rpt_tooclose" );
+  	// Command, we need those Russian naval vessels to cease fire immediately! That was too close!	
+  	thread radio_dialogue( "gulag_rpt_tooclose" );
 
-	*/
+  	*/
 
   thread bhd_heli_attack_setup();
 
@@ -1003,7 +1003,7 @@ gulag_perimeter() {
   /*	
   // Three-One, troops are on the deck.	
   thread radio_dialogue( "gulag_lbp2_ondeck";
-	
+  	
   // This is Three-One, troops are on the deck, going into holding pattern.	
   thread radio_dialogue( "gulag_lbp2_holdingpatt";
   */

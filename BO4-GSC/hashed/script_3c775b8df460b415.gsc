@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_9b24ce43;
 
 autoexec __init__system__() {
@@ -44,7 +43,7 @@ is_active() {
 }
 
 private movement_watcher() {
-  self endon(#"disconnect", #"hash_17c41292130032eb");
+  self endon(#"disconnect", # "hash_17c41292130032eb");
   wait zm_round_logic::get_delay_between_rounds() - 2;
 
   while(true) {

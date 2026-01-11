@@ -40,8 +40,7 @@ connectnewagent(var_0, var_1, var_2) {
 
     if(isDefined(var_1)) {
       var_3 maps\mp\agents\_agent_utility::set_agent_team(var_1);
-    }
-    else {
+    } else {
       var_3 maps\mp\agents\_agent_utility::set_agent_team(var_3.team);
     }
 

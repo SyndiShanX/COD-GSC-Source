@@ -143,11 +143,10 @@ mgTurret_auto(trigger) {
 
   spawners = getspawnerarray();
   for(i = 0; i < spawners.size; i++) {
-    if((isDefined(spawners[i].script_mg42auto)) && (trigger.script_mg42auto == spawners[i].script_mg42auto)) {
+    if((isDefined(spawners[i].script_mg42auto)) && (trigger.script_mg42auto == spawners[i].script_mg42auto)) {}
+    spawners[i].ai_mode = "auto_ai";
+    println("^aspawner ", i, " set to auto");
   }
-      spawners[i].ai_mode = "auto_ai";
-      println("^aspawner ", i, " set to auto");
-    }
 
   maps\_spawner::kill_trigger(trigger);
 }
@@ -180,29 +179,28 @@ manual_think(mg42) // For regular spawned guys that are told to use mg42s manual
   mg42 setmode("auto_ai"); // auto, auto_ai, manual
   mg42 settargetentity(level.player);
   /*
-	mg42 setmode("auto_ai"); // auto, auto_ai, manual
-	self useturret(mg42); // dude should be near the mg42
-	self.favoriteEnemy = level.player;
-//	self doDamage ( 25, self.origin );
-	*/
+  	mg42 setmode("auto_ai"); // auto, auto_ai, manual
+  	self useturret(mg42); // dude should be near the mg42
+  	self.favoriteEnemy = level.player;
+  //	self doDamage ( 25, self.origin );
+  	*/
 }
 
 burst_fire_settings(setting) {
   if(setting == "delay") {
     return 0.2;
+  } else {
+    if(setting == "delay_range")
   }
+  return 0.5;
   else {
-  if(setting == "delay_range")
+    if(setting == "burst")
   }
-    return 0.5;
-  else {
-  if(setting == "burst")
-  }
-    return 0.5;
+  return 0.5;
   else {
     //	if(setting == "burst_range")
   }
-    return 1.5;
+  return 1.5;
 }
 
 burst_fire_unmanned() {
@@ -211,29 +209,25 @@ burst_fire_unmanned() {
 
   if(isDefined(self.script_delay_min)) {
     mg42_delay = self.script_delay_min;
-  }
-  else {
+  } else {
     mg42_delay = burst_fire_settings("delay");
   }
 
   if(isDefined(self.script_delay_max)) {
     mg42_delay_range = self.script_delay_max - mg42_delay;
-  }
-  else {
+  } else {
     mg42_delay_range = burst_fire_settings("delay_range");
   }
 
   if(isDefined(self.script_burst_min)) {
     mg42_burst = self.script_burst_min;
-  }
-  else {
+  } else {
     mg42_burst = burst_fire_settings("burst");
   }
 
   if(isDefined(self.script_burst_max)) {
     mg42_burst_range = self.script_burst_max - mg42_burst;
-  }
-  else {
+  } else {
     mg42_burst_range = burst_fire_settings("burst_range");
   }
 
@@ -316,8 +310,7 @@ random_spread(ent) {
   while(1) {
     if(isplayer(ent)) {
       ent.origin = self.manual_target getorigin();
-    }
-    else {
+    } else {
       ent.origin = self.manual_target.origin;
     }
 
@@ -348,29 +341,25 @@ burst_fire(mg42, manual_target) {
 
   if(isDefined(mg42.script_delay_min)) {
     mg42_delay = mg42.script_delay_min;
-  }
-  else {
+  } else {
     mg42_delay = maps\_mgturret::burst_fire_settings("delay");
   }
 
   if(isDefined(mg42.script_delay_max)) {
     mg42_delay_range = mg42.script_delay_max - mg42_delay;
-  }
-  else {
+  } else {
     mg42_delay_range = maps\_mgturret::burst_fire_settings("delay_range");
   }
 
   if(isDefined(mg42.script_burst_min)) {
     mg42_burst = mg42.script_burst_min;
-  }
-  else {
+  } else {
     mg42_burst = maps\_mgturret::burst_fire_settings("burst");
   }
 
   if(isDefined(mg42.script_burst_max)) {
     mg42_burst_range = mg42.script_burst_max - mg42_burst;
-  }
-  else {
+  } else {
     mg42_burst_range = maps\_mgturret::burst_fire_settings("burst_range");
   }
 
@@ -447,8 +436,7 @@ _spawner_mg42_think() {
 
     if(excluders.size) {
       ai = maps\_utility::get_closest_ai_exclude(node.origin, undefined, excluders);
-    }
-    else {
+    } else {
       ai = maps\_utility::get_closest_ai(node.origin, undefined);
     }
     excluders = undefined;
@@ -504,11 +492,10 @@ mg42_think() {
     //		println ("gunner thought");
     if(isDefined(self.script_delay)) {
       wait(self.script_delay);
+    } else {
+      if((isDefined(self.script_delay_min)) && (isDefined(self.script_delay_max)))
     }
-    else {
-    if((isDefined(self.script_delay_min)) && (isDefined(self.script_delay_max)))
-    }
-      wait(self.script_delay_min + randomfloat(self.script_delay_max - self.script_delay_min));
+    wait(self.script_delay_min + randomfloat(self.script_delay_max - self.script_delay_min));
     else {
       wait(1);
     }
@@ -565,11 +552,10 @@ player_safe() {
 stance_num() {
   if(level.player getstance() == "prone") {
     return (0, 0, 5);
+  } else {
+    if(level.player getstance() == "crouch")
   }
-  else {
-  if(level.player getstance() == "crouch")
-  }
-    return (0, 0, 25);
+  return (0, 0, 25);
 
   return (0, 0, 50);
 }
@@ -777,8 +763,7 @@ move_use_turret(mg42, aitype, target) {
     mg42 setmode("auto_ai");
     if(isDefined(target)) {
       mg42 settargetentity(target);
-    }
-    else {
+    } else {
       mg42 cleartargetentity();
     }
   }
@@ -887,8 +872,7 @@ mg42_target_drones(nonai, team, fakeowner) {
   difficulty = getdifficulty();
   if(!isDefined(level.drones)) {
     waitfornewdrone = true;
-  }
-  else {
+  } else {
     waitfornewdrone = false;
   }
   while(1) {
@@ -930,8 +914,7 @@ mg42_target_drones(nonai, team, fakeowner) {
     }
     if(team == "allies") {
       targetteam = "axis";
-    }
-    else {
+    } else {
       targetteam = "allies";
     }
 
@@ -948,8 +931,7 @@ mg42_target_drones(nonai, team, fakeowner) {
       }
       if(nonai) {
         self setmode("manual");
-      }
-      else {
+      } else {
         self setmode("manual_ai");
       }
 
@@ -976,8 +958,7 @@ mg42_target_drones(nonai, team, fakeowner) {
     self stopfiring();
     if(level.drones[targetteam].lastindex) {
       waitfornewdrone = false;
-    }
-    else {
+    } else {
       waitfornewdrone = true;
     }
   }
@@ -1197,15 +1178,15 @@ auto_mgTurretLink(nodes) {
     assertEx(0, "Turrets failed to be linked to node_turrets, see list above.");
   }
 
-    /*
-    // logic that makes the node "call" for ai
-    if( isDefined( node.auto_mgTurret_target ) )
-    {
-    	thread maps\_mgturret::turret_think( node );
-    }
-    */
+  /*
+  // logic that makes the node "call" for ai
+  if( isDefined( node.auto_mgTurret_target ) )
+  {
+  	thread maps\_mgturret::turret_think( node );
+  }
+  */
 
-    nodes = undefined;
+  nodes = undefined;
 }
 
 save_turret_sharing_info() {
@@ -1732,33 +1713,33 @@ find_connected_turrets(connection_type) {
   for(i = 0; i < spot_exports.size; i++) {
     export = spot_exports[i];
     if(spots[
-        export] == self.turret)
+        export] == self.turret) {
       continue;
-
+    }
     keys = getArrayKeys(self.turret.shared_turrets[connection_type]);
     for(p = 0; p < keys.size; p++) {
       // go through each key that the turret the guy is currently on has,
       // and see if any turrets share keys.
       // cast export as a string because arraykeys returns strings
       if(spots[
-          export].export+"" != keys[p])
+          export].export+"" != keys[p]) {
         continue;
-
+      }
       // somebody else has this one or they're running to it
       if(isDefined(spots[
-          export].reserved))
+          export].reserved)) {
         continue;
-
+      }
       // some random AI has this node already, probably doing cover there
       if(isDefined(taken_nodes[spots[
-          export].node.origin + ""]))
+          export].node.origin + ""])) {
         continue;
-
+      }
       // don't pick one that is outside the goalradius
       if(distance(self.goalpos, spots[
-          export].origin) > self.goalradius)
+          export].origin) > self.goalradius) {
         continue;
-
+      }
       // this spot is usable				
       usable_spots[usable_spots.size] = spots[
         export];

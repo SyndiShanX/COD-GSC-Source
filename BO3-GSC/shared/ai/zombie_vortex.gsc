@@ -178,9 +178,7 @@ function start_timed_vortex(v_vortex_origin, n_vortex_radius, vortex_pull_durati
       if(!isDefined(zombie) || !isalive(zombie)) {
         continue;
       }
-      if(isDefined(level.vortexresetcondition) && [
-          [level.vortexresetcondition]
-        ](zombie)) {
+      if(isDefined(level.vortexresetcondition) && [[level.vortexresetcondition]](zombie)) {
         continue;
       }
       zombie.interdimensional_gun_kill = undefined;

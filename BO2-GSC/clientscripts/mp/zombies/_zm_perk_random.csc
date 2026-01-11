@@ -27,8 +27,7 @@ init_animtree() {
 turn_on_location_indicator(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self thread fx_location_indicator(localclientnum);
-  }
-  else {
+  } else {
     self notify("ball_departed");
     self thread fx_departure_steam(localclientnum);
   }
@@ -40,8 +39,7 @@ zone_captured_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
     self.mapped_const = 1;
   }
 
-  if(newval == 1) {
-  } else {
+  if(newval == 1) {} else {
     self.artifact_glow_setting = 1;
     self.machinery_glow_setting = 0.0;
     self setshaderconstant(localclientnum, 1, self.artifact_glow_setting, 0, self.machinery_glow_setting, 0);
@@ -81,8 +79,7 @@ turn_on_active_ball_light(localclientnum, oldval, newval, bnewent, binitialsnap,
 start_bottle_cycling(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self thread start_vortex_fx(localclientnum);
-  }
-  else {
+  } else {
     self thread stop_vortex_fx(localclientnum);
   }
 }

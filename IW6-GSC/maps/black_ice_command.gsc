@@ -16,7 +16,7 @@ start_outside() {
   var_1 = getglassarray("glass_command_center");
 
   foreach(var_3 in var_1) {
-  destroyglass(var_3);
+    destroyglass(var_3);
   }
 
   thread maps\black_ice_refinery::util_refinery_stack_cleanup();
@@ -37,7 +37,7 @@ start_inside() {
   var_1 = getglassarray("glass_command_center");
 
   foreach(var_3 in var_1) {
-  destroyglass(var_3);
+    destroyglass(var_3);
   }
 
   thread maps\black_ice_refinery::util_refinery_stack_cleanup();
@@ -331,11 +331,11 @@ player_disable_suppression_sequence() {
   thread player_input_console_animate(var_0, var_2, var_7);
 
   foreach(var_10 in var_3) {
-  var_10 thread maps\_anim::anim_single_solo(var_10, "command_shutoff_button");
+    var_10 thread maps\_anim::anim_single_solo(var_10, "command_shutoff_button");
   }
 
   foreach(var_16 in var_5) {
-  var_16 thread maps\_anim::anim_single_solo(var_16, "command_monitor_baker");
+    var_16 thread maps\_anim::anim_single_solo(var_16, "command_monitor_baker");
   }
 
   var_25 = 0;
@@ -360,7 +360,7 @@ player_disable_suppression_sequence() {
     var_1 thread maps\_anim::anim_single_solo(level._allies[0], "command_late");
 
     foreach(var_13 in var_4) {
-    var_13 thread maps\_anim::anim_single_solo(var_13, "command_baker_late");
+      var_13 thread maps\_anim::anim_single_solo(var_13, "command_baker_late");
     }
 
     level.player lerpviewangleclamp(2.0, 0, 0, 0, 0, 0, 0);
@@ -389,15 +389,15 @@ player_disable_suppression_sequence() {
     common_scripts\utility::flag_set("flag_start_lights");
 
     foreach(var_16 in var_5) {
-    var_16 thread maps\_anim::anim_single_solo(var_16, "command_monitor_baker_end");
+      var_16 thread maps\_anim::anim_single_solo(var_16, "command_monitor_baker_end");
     }
 
     foreach(var_16 in var_8) {
-    var_16 thread maps\_anim::anim_single_solo(var_16, "command_monitor_player_end");
+      var_16 thread maps\_anim::anim_single_solo(var_16, "command_monitor_player_end");
     }
 
     foreach(var_13 in var_4) {
-    var_13 thread maps\_anim::anim_single_solo(var_13, "command_baker_end");
+      var_13 thread maps\_anim::anim_single_solo(var_13, "command_baker_end");
     }
 
     common_scripts\utility::flag_set("flag_control_sequence_over");
@@ -509,15 +509,13 @@ display_lever_hint() {
   if(isDefined(level.ps3) && level.ps3 || isDefined(level.ps4) && level.ps4) {
     if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacysouthpaw") {
       maps\_utility::display_hint("pull_lever_no_glyph_reverse");
-    }
-    else {
+    } else {
       maps\_utility::display_hint("pull_lever_no_glyph");
     }
   } else if(level.console || level.player usinggamepad()) {
     if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacysouthpaw") {
       maps\_utility::display_hint("pull_lever_reverse");
-    }
-    else {
+    } else {
       maps\_utility::display_hint("pull_lever");
     }
   } else
@@ -720,8 +718,7 @@ monitor_controls_and_fx(var_0) {
 
     if(var_10 < 0.5) {
       var_19 = 1;
-    }
-    else {
+    } else {
       var_19 = 0;
     }
 
@@ -876,15 +873,13 @@ monitor_color_status(var_0, var_1) {
   if(var_1 < var_2[0]) {
     if(var_1 < var_3[0]) {
       var_0 = 2;
-    }
-    else {
+    } else {
       var_0 = 1;
     }
   } else if(var_1 > var_2[1]) {
     if(var_1 > var_3[1]) {
       var_0 = 2;
-    }
-    else {
+    } else {
       var_0 = 1;
     }
   } else
@@ -917,8 +912,7 @@ monitor_bar_drift(var_0) {
   if(var_0[2] < 0.0) {
     if(var_0[1] == 0) {
       var_0[1] = 1;
-    }
-    else {
+    } else {
       var_0[1] = 0;
     }
 
@@ -927,8 +921,7 @@ monitor_bar_drift(var_0) {
 
   if(var_0[1] == 0) {
     var_0[0] = lerp_value(var_0[0], level.bar_drift_rate, var_1);
-  }
-  else {
+  } else {
     var_0[0] = lerp_value(var_0[0], 0 - level.bar_drift_rate, var_1);
   }
 
@@ -990,7 +983,7 @@ command_light_change() {
   var_3 = getEntArray("emergency_red_exfil_light", "targetname");
 
   foreach(var_5 in var_2) {
-  var_5 setlightintensity(2);
+    var_5 setlightintensity(2);
   }
 
   var_7 = getEntArray("command_light_siren", "targetname");
@@ -1020,11 +1013,11 @@ command_light_change() {
   }
 
   foreach(var_14 in var_7) {
-  var_14 hide();
+    var_14 hide();
   }
 
   foreach(var_14 in var_8) {
-  var_14 hide();
+    var_14 hide();
   }
 
   if(level.start_point != "exfil") {
@@ -1050,31 +1043,31 @@ command_light_change() {
     }
 
     foreach(var_27 in var_11) {
-    playFXOnTag(level._effect["command_siren_red"], var_27, "tag_origin");
+      playFXOnTag(level._effect["command_siren_red"], var_27, "tag_origin");
     }
 
     foreach(var_27 in var_16) {
-    playFXOnTag(level._effect["command_siren_red_low"], var_27, "tag_origin");
+      playFXOnTag(level._effect["command_siren_red_low"], var_27, "tag_origin");
     }
 
     foreach(var_5 in var_3) {
-    var_5 setlightintensity(1.2);
+      var_5 setlightintensity(1.2);
     }
 
     foreach(var_14 in var_7) {
-    var_14 show();
+      var_14 show();
     }
 
     foreach(var_14 in var_8) {
-    var_14 show();
+      var_14 show();
     }
 
     foreach(var_14 in var_9) {
-    var_14 hide();
+      var_14 hide();
     }
 
     foreach(var_14 in var_10) {
-    var_14 hide();
+      var_14 hide();
     }
 
     wait(var_25);
@@ -1084,31 +1077,31 @@ command_light_change() {
     }
 
     foreach(var_27 in var_11) {
-    stopFXOnTag(level._effect["command_siren_red"], var_27, "tag_origin");
+      stopFXOnTag(level._effect["command_siren_red"], var_27, "tag_origin");
     }
 
     foreach(var_27 in var_16) {
-    stopFXOnTag(level._effect["command_siren_red_low"], var_27, "tag_origin");
+      stopFXOnTag(level._effect["command_siren_red_low"], var_27, "tag_origin");
     }
 
     foreach(var_5 in var_3) {
-    var_5 setlightintensity(0.0001);
+      var_5 setlightintensity(0.0001);
     }
 
     foreach(var_14 in var_7) {
-    var_14 hide();
+      var_14 hide();
     }
 
     foreach(var_14 in var_8) {
-    var_14 hide();
+      var_14 hide();
     }
 
     foreach(var_14 in var_9) {
-    var_14 show();
+      var_14 show();
     }
 
     foreach(var_14 in var_10) {
-    var_14 show();
+      var_14 show();
     }
 
     wait(level.timestep);
@@ -1225,7 +1218,7 @@ event_pipe_explosions() {
   var_0 = getEntArray("model_pipedeck_explosion3_old", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   var_4 = maps\black_ice_util::setup_tag_anim_rig("pipe_explosion2", "pipedeck_explosion2_rig");
@@ -1343,25 +1336,25 @@ shrink_pdeck_lights() {
   var_3 = [getent("escape_emergency_1", "targetname")];
 
   foreach(var_5 in var_0) {
-  var_5 setlightradius(12);
+    var_5 setlightradius(12);
   }
 
   foreach(var_5 in var_1) {
-  var_5 setlightradius(12);
+    var_5 setlightradius(12);
   }
 
   foreach(var_5 in var_2) {
-  var_5 setlightradius(12);
+    var_5 setlightradius(12);
   }
 
   foreach(var_5 in var_3) {
-  var_5 setlightradius(12);
+    var_5 setlightradius(12);
   }
 
   level waittill("flag_start_lights");
 
   foreach(var_5 in var_3) {
-  var_5 setlightradius(350);
+    var_5 setlightradius(350);
   }
 }
 
@@ -1381,8 +1374,7 @@ lerp_value(var_0, var_1, var_2) {
 cap_range(var_0, var_1, var_2) {
   if(var_0 > var_2) {
     var_0 = var_2;
-  }
-  else if(var_0 < var_1) {
+  } else if(var_0 < var_1) {
     var_0 = var_1;
   }
 

@@ -53,8 +53,7 @@ begin_smoke_grenade_tracking() {
 
   if(level.smokegrenades > 2 && getdvar(#"player_sustainAmmo") != "0") {
     grenade delete();
-  }
-  else {
+  } else {
     grenade thread smoke_grenade_death();
   }
 }
@@ -201,8 +200,7 @@ tc6_mine_detonation() {
     if(should_detonate) {
       if(isDefined(self.owner)) {
         self detonate(self.owner);
-      }
-      else {
+      } else {
         self detonate(undefined);
       }
 
@@ -255,8 +253,7 @@ claymore_detonation() {
 
       if(isDefined(self.owner)) {
         self detonate(self.owner);
-      }
-      else {
+      } else {
         self detonate(undefined);
       }
 
@@ -320,8 +317,7 @@ satchel_damage() {
 
   if(level.satchelexplodethisframe) {
     wait(0.1 + randomfloat(0.4));
-  }
-  else {
+  } else {
     wait 0.05;
   }
 
@@ -432,8 +428,7 @@ weapondamagetracepassed(from, to, startradius, ignore) {
   if(getdvarint(#"_id_0A1C40B1") != 0) {
     if(trace["fraction"] == 1) {
       thread debugline(midpos, to, (1, 1, 1));
-    }
-    else {
+    } else {
       thread debugline(midpos, trace["position"], (1, 0.9, 0.8));
       thread debugline(trace["position"], to, (1, 0.4, 0.3));
     }
@@ -547,8 +542,7 @@ proximity_grenade_detonation() {
 
     if(isDefined(self.owner)) {
       self detonate(self.owner);
-    }
-    else {
+    } else {
       self detonate(undefined);
     }
 

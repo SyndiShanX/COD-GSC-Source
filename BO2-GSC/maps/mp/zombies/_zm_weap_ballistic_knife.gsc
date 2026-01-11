@@ -37,8 +37,7 @@ on_spawn(watcher, player) {
     if(isDefined(prey)) {
       if(isplayer(prey) && player.team == prey.team) {
         isfriendly = 1;
-      }
-      else if(isai(prey) && player.team == prey.team) {
+      } else if(isai(prey) && player.team == prey.team) {
         isfriendly = 1;
       }
 
@@ -61,8 +60,7 @@ on_spawn(watcher, player) {
 
     if(isfriendly) {
       player notify("ballistic_knife_stationary", retrievable_model, normal);
-    }
-    else {
+    } else {
       player notify("ballistic_knife_stationary", retrievable_model, normal, prey);
     }
 
@@ -113,8 +111,7 @@ on_spawn_retrieve_trigger(watcher, player) {
 
   if(isDefined(hint_string)) {
     pickup_trigger sethintstring(hint_string);
-  }
-  else {
+  } else {
     pickup_trigger sethintstring(&"GENERIC_PICKUP");
   }
 
@@ -124,8 +121,7 @@ on_spawn_retrieve_trigger(watcher, player) {
 
   if(isDefined(prey)) {
     pickup_trigger linkto(prey);
-  }
-  else {
+  } else {
     pickup_trigger linkto(retrievable_model);
   }
 
@@ -206,8 +202,7 @@ pick_up(weapon, model, trigger) {
 
       if(!clip_ammo) {
         self setweaponammoclip(weapon, 1);
-      }
-      else {
+      } else {
         new_ammo_stock = self getweaponammostock(weapon) + 1;
         self setweaponammostock(weapon, new_ammo_stock);
       }

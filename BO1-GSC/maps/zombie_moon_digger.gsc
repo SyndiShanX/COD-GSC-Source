@@ -145,24 +145,21 @@ send_clientnotify(digger_name, pause) {
     case "hangar":
       if(!pause) {
         clientnotify("Dz3");
-      }
-      else {
+      } else {
         clientnotify("Dz3e");
       }
       break;
     case "teleporter":
       if(!pause) {
         clientnotify("Dz2");
-      }
-      else {
+      } else {
         clientnotify("Dz2e");
       }
       break;
     case "biodome":
       if(!pause) {
         clientnotify("Dz5");
-      }
-      else {
+      } else {
         clientnotify("Dz5e");
       }
       break;

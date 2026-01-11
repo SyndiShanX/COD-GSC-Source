@@ -84,8 +84,7 @@ updateinpartywithotherplayers() {
   if(!isai(self) && maps\mp\_utility::matchmakinggame()) {
     var_0 = inpartywithotherplayers(self.xuid);
 
-    if(!isDefined(self.inpartywithotherplayers) || var_0 != self.inpartywithotherplayers) {
-    }
+    if(!isDefined(self.inpartywithotherplayers) || var_0 != self.inpartywithotherplayers) {}
 
     self.inpartywithotherplayers = var_0;
   }
@@ -130,7 +129,7 @@ updateplayertimes() {
     maps\mp\gametypes\_hostmigration::waittillhostmigrationdone();
 
     foreach(var_1 in level.players) {
-    var_1 updateplayedtime();
+      var_1 updateplayedtime();
     }
 
     wait 1.0;
@@ -246,8 +245,7 @@ getteambalance() {
 
   if(level.team["allies"] > level.team["axis"] + level.teambalance || level.team["axis"] > level.team["allies"] + level.teambalance) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -395,8 +393,7 @@ verifycostume() {
   if(!validcostume(self.costume)) {
     if(isDefined(self.sessioncostume) && validcostume(self.sessioncostume)) {
       self.costume = self.sessioncostume;
-    }
-    else {
+    } else {
       self.costume = getdefaultcostume();
 
       if(isplayer(self)) {
@@ -541,17 +538,13 @@ getjointeampermissions(var_0) {
 
   if(var_1 < level.teamlimit) {
     return 1;
-  }
-  else if(var_2 > 0) {
+  } else if(var_2 > 0) {
     return 1;
-  }
-  else if(level.gametype == "infect") {
+  } else if(level.gametype == "infect") {
     return 1;
-  }
-  else if(maps\mp\_utility::ishodgepodgemm()) {
+  } else if(maps\mp\_utility::ishodgepodgemm()) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

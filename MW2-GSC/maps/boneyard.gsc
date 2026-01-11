@@ -123,7 +123,7 @@ flags_setup() {
 
   /*************************
   ***	FLAGS FROM RADIANT ***
- **************************
+  **************************
 
   	blow_tanker_first
   	blow_tanker_second
@@ -175,7 +175,7 @@ flags_setup() {
   	where_is_nikolai
   	wing_fall
 
- *************************/
+  *************************/
 
 }
 
@@ -746,7 +746,7 @@ road() {
 
   triggers = getEntArray("middle_road", "targetname");
   foreach(trigger in triggers) {
-  level waittill_stack_add("trigger", trigger);
+    level waittill_stack_add("trigger", trigger);
   }
 
   level waittill("waittill_stack", msg, trigger);
@@ -972,7 +972,7 @@ start_higround() {
   ent = getent("higround_heli_path", "script_noteworthy");
   thread mark_heli_path(ent);
 
-    trigger = getent("higround_start_trigger_off", "script_noteworthy");
+  trigger = getent("higround_start_trigger_off", "script_noteworthy");
   trigger trigger_off();
 
   activate_trigger_with_targetname("higround_start_color_trigger");
@@ -1200,8 +1200,7 @@ higround_btr80_target_littlebird() {
     // addes the heli as a target.
     if(self.main_turret_enemies.size == 0) {
       self.main_turret_enemies = array_add(self.main_turret_enemies, level.heli);
-    }
-    else {
+    } else {
       self.main_turret_enemies = array_insert(self.main_turret_enemies, level.heli, 0);
     }
 

@@ -20,7 +20,6 @@
 #include scripts\zm_common\zm_devgui;
 #include scripts\zm_common\zm_maptable;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_characters;
 
 autoexec __init__system__() {
@@ -55,8 +54,7 @@ private function_9436b105(cmd) {
   }
 }
 
-  function precachecustomcharacters() {
-  }
+function precachecustomcharacters() {}
 
 initcharacterstartindex() {
   level.characterstartindex = randomint(4);
@@ -115,11 +113,11 @@ set_character(character) {
       self.characterindex = getdvarint(#"force_char", 0);
     }
 
-      if(self.characterindex == 0) {
-        self.characterindex = function_b04c6f1f();
-      }
+    if(self.characterindex == 0) {
+      self.characterindex = function_b04c6f1f();
+    }
 
-    self.pers[#"characterindex"] = self.characterindex;
+    self.pers[# "characterindex"] = self.characterindex;
   }
 
   player_role::set(self.characterindex);
@@ -147,63 +145,63 @@ set_character(character) {
 }
 
 setup_personality_character_exerts() {
-  level.exert_sounds[1][#"burp"][0] = "vox_plr_0_exert_burp_0";
-  level.exert_sounds[1][#"burp"][1] = "vox_plr_0_exert_burp_1";
-  level.exert_sounds[1][#"burp"][2] = "vox_plr_0_exert_burp_2";
-  level.exert_sounds[1][#"burp"][3] = "vox_plr_0_exert_burp_3";
-  level.exert_sounds[1][#"burp"][4] = "vox_plr_0_exert_burp_4";
-  level.exert_sounds[1][#"burp"][5] = "vox_plr_0_exert_burp_5";
-  level.exert_sounds[1][#"burp"][6] = "vox_plr_0_exert_burp_6";
-  level.exert_sounds[2][#"burp"][0] = "vox_plr_1_exert_burp_0";
-  level.exert_sounds[2][#"burp"][1] = "vox_plr_1_exert_burp_1";
-  level.exert_sounds[2][#"burp"][2] = "vox_plr_1_exert_burp_2";
-  level.exert_sounds[2][#"burp"][3] = "vox_plr_1_exert_burp_3";
-  level.exert_sounds[3][#"burp"][0] = "vox_plr_2_exert_burp_0";
-  level.exert_sounds[3][#"burp"][1] = "vox_plr_2_exert_burp_1";
-  level.exert_sounds[3][#"burp"][2] = "vox_plr_2_exert_burp_2";
-  level.exert_sounds[3][#"burp"][3] = "vox_plr_2_exert_burp_3";
-  level.exert_sounds[3][#"burp"][4] = "vox_plr_2_exert_burp_4";
-  level.exert_sounds[3][#"burp"][5] = "vox_plr_2_exert_burp_5";
-  level.exert_sounds[3][#"burp"][6] = "vox_plr_2_exert_burp_6";
-  level.exert_sounds[4][#"burp"][0] = "vox_plr_3_exert_burp_0";
-  level.exert_sounds[4][#"burp"][1] = "vox_plr_3_exert_burp_1";
-  level.exert_sounds[4][#"burp"][2] = "vox_plr_3_exert_burp_2";
-  level.exert_sounds[4][#"burp"][3] = "vox_plr_3_exert_burp_3";
-  level.exert_sounds[4][#"burp"][4] = "vox_plr_3_exert_burp_4";
-  level.exert_sounds[4][#"burp"][5] = "vox_plr_3_exert_burp_5";
-  level.exert_sounds[4][#"burp"][6] = "vox_plr_3_exert_burp_6";
-  level.exert_sounds[1][#"hitmed"][0] = "vox_plr_0_exert_pain_medium_0";
-  level.exert_sounds[1][#"hitmed"][1] = "vox_plr_0_exert_pain_medium_1";
-  level.exert_sounds[1][#"hitmed"][2] = "vox_plr_0_exert_pain_medium_2";
-  level.exert_sounds[1][#"hitmed"][3] = "vox_plr_0_exert_pain_medium_3";
-  level.exert_sounds[2][#"hitmed"][0] = "vox_plr_1_exert_pain_medium_0";
-  level.exert_sounds[2][#"hitmed"][1] = "vox_plr_1_exert_pain_medium_1";
-  level.exert_sounds[2][#"hitmed"][2] = "vox_plr_1_exert_pain_medium_2";
-  level.exert_sounds[2][#"hitmed"][3] = "vox_plr_1_exert_pain_medium_3";
-  level.exert_sounds[3][#"hitmed"][0] = "vox_plr_2_exert_pain_medium_0";
-  level.exert_sounds[3][#"hitmed"][1] = "vox_plr_2_exert_pain_medium_1";
-  level.exert_sounds[3][#"hitmed"][2] = "vox_plr_2_exert_pain_medium_2";
-  level.exert_sounds[3][#"hitmed"][3] = "vox_plr_2_exert_pain_medium_3";
-  level.exert_sounds[4][#"hitmed"][0] = "vox_plr_3_exert_pain_medium_0";
-  level.exert_sounds[4][#"hitmed"][1] = "vox_plr_3_exert_pain_medium_1";
-  level.exert_sounds[4][#"hitmed"][2] = "vox_plr_3_exert_pain_medium_2";
-  level.exert_sounds[4][#"hitmed"][3] = "vox_plr_3_exert_pain_medium_3";
-  level.exert_sounds[1][#"hitlrg"][0] = "vox_plr_0_exert_pain_high_0";
-  level.exert_sounds[1][#"hitlrg"][1] = "vox_plr_0_exert_pain_high_1";
-  level.exert_sounds[1][#"hitlrg"][2] = "vox_plr_0_exert_pain_high_2";
-  level.exert_sounds[1][#"hitlrg"][3] = "vox_plr_0_exert_pain_high_3";
-  level.exert_sounds[2][#"hitlrg"][0] = "vox_plr_1_exert_pain_high_0";
-  level.exert_sounds[2][#"hitlrg"][1] = "vox_plr_1_exert_pain_high_1";
-  level.exert_sounds[2][#"hitlrg"][2] = "vox_plr_1_exert_pain_high_2";
-  level.exert_sounds[2][#"hitlrg"][3] = "vox_plr_1_exert_pain_high_3";
-  level.exert_sounds[3][#"hitlrg"][0] = "vox_plr_2_exert_pain_high_0";
-  level.exert_sounds[3][#"hitlrg"][1] = "vox_plr_2_exert_pain_high_1";
-  level.exert_sounds[3][#"hitlrg"][2] = "vox_plr_2_exert_pain_high_2";
-  level.exert_sounds[3][#"hitlrg"][3] = "vox_plr_2_exert_pain_high_3";
-  level.exert_sounds[4][#"hitlrg"][0] = "vox_plr_3_exert_pain_high_0";
-  level.exert_sounds[4][#"hitlrg"][1] = "vox_plr_3_exert_pain_high_1";
-  level.exert_sounds[4][#"hitlrg"][2] = "vox_plr_3_exert_pain_high_2";
-  level.exert_sounds[4][#"hitlrg"][3] = "vox_plr_3_exert_pain_high_3";
+  level.exert_sounds[1][# "burp"][0] = "vox_plr_0_exert_burp_0";
+  level.exert_sounds[1][# "burp"][1] = "vox_plr_0_exert_burp_1";
+  level.exert_sounds[1][# "burp"][2] = "vox_plr_0_exert_burp_2";
+  level.exert_sounds[1][# "burp"][3] = "vox_plr_0_exert_burp_3";
+  level.exert_sounds[1][# "burp"][4] = "vox_plr_0_exert_burp_4";
+  level.exert_sounds[1][# "burp"][5] = "vox_plr_0_exert_burp_5";
+  level.exert_sounds[1][# "burp"][6] = "vox_plr_0_exert_burp_6";
+  level.exert_sounds[2][# "burp"][0] = "vox_plr_1_exert_burp_0";
+  level.exert_sounds[2][# "burp"][1] = "vox_plr_1_exert_burp_1";
+  level.exert_sounds[2][# "burp"][2] = "vox_plr_1_exert_burp_2";
+  level.exert_sounds[2][# "burp"][3] = "vox_plr_1_exert_burp_3";
+  level.exert_sounds[3][# "burp"][0] = "vox_plr_2_exert_burp_0";
+  level.exert_sounds[3][# "burp"][1] = "vox_plr_2_exert_burp_1";
+  level.exert_sounds[3][# "burp"][2] = "vox_plr_2_exert_burp_2";
+  level.exert_sounds[3][# "burp"][3] = "vox_plr_2_exert_burp_3";
+  level.exert_sounds[3][# "burp"][4] = "vox_plr_2_exert_burp_4";
+  level.exert_sounds[3][# "burp"][5] = "vox_plr_2_exert_burp_5";
+  level.exert_sounds[3][# "burp"][6] = "vox_plr_2_exert_burp_6";
+  level.exert_sounds[4][# "burp"][0] = "vox_plr_3_exert_burp_0";
+  level.exert_sounds[4][# "burp"][1] = "vox_plr_3_exert_burp_1";
+  level.exert_sounds[4][# "burp"][2] = "vox_plr_3_exert_burp_2";
+  level.exert_sounds[4][# "burp"][3] = "vox_plr_3_exert_burp_3";
+  level.exert_sounds[4][# "burp"][4] = "vox_plr_3_exert_burp_4";
+  level.exert_sounds[4][# "burp"][5] = "vox_plr_3_exert_burp_5";
+  level.exert_sounds[4][# "burp"][6] = "vox_plr_3_exert_burp_6";
+  level.exert_sounds[1][# "hitmed"][0] = "vox_plr_0_exert_pain_medium_0";
+  level.exert_sounds[1][# "hitmed"][1] = "vox_plr_0_exert_pain_medium_1";
+  level.exert_sounds[1][# "hitmed"][2] = "vox_plr_0_exert_pain_medium_2";
+  level.exert_sounds[1][# "hitmed"][3] = "vox_plr_0_exert_pain_medium_3";
+  level.exert_sounds[2][# "hitmed"][0] = "vox_plr_1_exert_pain_medium_0";
+  level.exert_sounds[2][# "hitmed"][1] = "vox_plr_1_exert_pain_medium_1";
+  level.exert_sounds[2][# "hitmed"][2] = "vox_plr_1_exert_pain_medium_2";
+  level.exert_sounds[2][# "hitmed"][3] = "vox_plr_1_exert_pain_medium_3";
+  level.exert_sounds[3][# "hitmed"][0] = "vox_plr_2_exert_pain_medium_0";
+  level.exert_sounds[3][# "hitmed"][1] = "vox_plr_2_exert_pain_medium_1";
+  level.exert_sounds[3][# "hitmed"][2] = "vox_plr_2_exert_pain_medium_2";
+  level.exert_sounds[3][# "hitmed"][3] = "vox_plr_2_exert_pain_medium_3";
+  level.exert_sounds[4][# "hitmed"][0] = "vox_plr_3_exert_pain_medium_0";
+  level.exert_sounds[4][# "hitmed"][1] = "vox_plr_3_exert_pain_medium_1";
+  level.exert_sounds[4][# "hitmed"][2] = "vox_plr_3_exert_pain_medium_2";
+  level.exert_sounds[4][# "hitmed"][3] = "vox_plr_3_exert_pain_medium_3";
+  level.exert_sounds[1][# "hitlrg"][0] = "vox_plr_0_exert_pain_high_0";
+  level.exert_sounds[1][# "hitlrg"][1] = "vox_plr_0_exert_pain_high_1";
+  level.exert_sounds[1][# "hitlrg"][2] = "vox_plr_0_exert_pain_high_2";
+  level.exert_sounds[1][# "hitlrg"][3] = "vox_plr_0_exert_pain_high_3";
+  level.exert_sounds[2][# "hitlrg"][0] = "vox_plr_1_exert_pain_high_0";
+  level.exert_sounds[2][# "hitlrg"][1] = "vox_plr_1_exert_pain_high_1";
+  level.exert_sounds[2][# "hitlrg"][2] = "vox_plr_1_exert_pain_high_2";
+  level.exert_sounds[2][# "hitlrg"][3] = "vox_plr_1_exert_pain_high_3";
+  level.exert_sounds[3][# "hitlrg"][0] = "vox_plr_2_exert_pain_high_0";
+  level.exert_sounds[3][# "hitlrg"][1] = "vox_plr_2_exert_pain_high_1";
+  level.exert_sounds[3][# "hitlrg"][2] = "vox_plr_2_exert_pain_high_2";
+  level.exert_sounds[3][# "hitlrg"][3] = "vox_plr_2_exert_pain_high_3";
+  level.exert_sounds[4][# "hitlrg"][0] = "vox_plr_3_exert_pain_high_0";
+  level.exert_sounds[4][# "hitlrg"][1] = "vox_plr_3_exert_pain_high_1";
+  level.exert_sounds[4][# "hitlrg"][2] = "vox_plr_3_exert_pain_high_2";
+  level.exert_sounds[4][# "hitlrg"][3] = "vox_plr_3_exert_pain_high_3";
 }
 
 get_characters() {
@@ -238,7 +236,7 @@ get_characters() {
       return arraycopy(level.characters);
     }
 
-      assert(isDefined(fields));
+    assert(isDefined(fields));
     assert(isDefined(fields.zmcharacters));
 
     for(i = 0; i < fields.zmcharacters.size; i++) {
@@ -342,7 +340,7 @@ is_character(character) {
 }
 
 function_50b1ae32() {
-  if(is_character(array(#"hash_68255d9ce2a09382", #"hash_1a427f842f175b3c"))) {
+  if(is_character(array(#"hash_68255d9ce2a09382", # "hash_1a427f842f175b3c"))) {
     self.revivevox = "scar";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_scar";
@@ -351,7 +349,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_7180c6cf382f6010", #"hash_14e91ceb9a7b3eb6"))) {
+  if(is_character(array(#"hash_7180c6cf382f6010", # "hash_14e91ceb9a7b3eb6"))) {
     self.talks_in_danger = 1;
     level.rich_sq_player = self;
     self.revivevox = "brun";
@@ -362,7 +360,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_f531a8c2df891cc", #"hash_26072a3b34719d22"))) {
+  if(is_character(array(#"hash_f531a8c2df891cc", # "hash_26072a3b34719d22"))) {
     self.revivevox = "dieg";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_dieg";
@@ -371,7 +369,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_3e63362aea484e09", #"hash_5a906d7137467771"))) {
+  if(is_character(array(#"hash_3e63362aea484e09", # "hash_5a906d7137467771"))) {
     self.revivevox = "shaw";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_shaw";
@@ -380,7 +378,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_59f3598ad57dadd8", #"hash_2bcebdf1bef33311", #"hash_5a715cb0a6e071ae"))) {
+  if(is_character(array(#"hash_59f3598ad57dadd8", # "hash_2bcebdf1bef33311", # "hash_5a715cb0a6e071ae"))) {
     self.revivevox = "rich";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_rich";
@@ -389,7 +387,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_1aa57ef704f24fa5", #"hash_36bc80636f0fdac4"))) {
+  if(is_character(array(#"hash_1aa57ef704f24fa5", # "hash_36bc80636f0fdac4"))) {
     self.talks_in_danger = 1;
     level.rich_sq_player = self;
     self.revivevox = "demp";
@@ -400,7 +398,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_22e6f7e13c3a99ef", #"hash_46b92e1337b43236"))) {
+  if(is_character(array(#"hash_22e6f7e13c3a99ef", # "hash_46b92e1337b43236"))) {
     self.revivevox = "niko";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_niko";
@@ -409,7 +407,7 @@ function_50b1ae32() {
     return;
   }
 
-  if(is_character(array(#"hash_305f156156d37e34", #"hash_6df0037e3f390b15"))) {
+  if(is_character(array(#"hash_305f156156d37e34", # "hash_6df0037e3f390b15"))) {
     self.revivevox = "take";
     self.var_ff5f8752 = "self";
     self.var_c107ed3 = "support_take";

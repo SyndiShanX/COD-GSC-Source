@@ -38,8 +38,7 @@ init() {
 init_stage() {
   if(flag("sq_is_max_tower_built")) {
     level thread stage_vo_max();
-  }
-  else {
+  } else {
     level thread stage_vo_ric();
   }
 
@@ -76,11 +75,9 @@ stage_logic() {
 
   if(flag("sq_is_ric_tower_built")) {
     stage_logic_richtofen();
-  }
-  else if(flag("sq_is_max_tower_built")) {
+  } else if(flag("sq_is_max_tower_built")) {
     stage_logic_maxis();
-  }
-  else {
+  } else {
     assertmsg("SQ TPO: no sidequest side picked!");
 
   }
@@ -155,8 +152,7 @@ sq_tpo_check_players_in_time_bomb_volume(e_volume) {
 
     if(b_players_ready) {
       flag_set("sq_tpo_players_in_position_for_time_warp");
-    }
-    else {
+    } else {
       flag_clear("sq_tpo_players_in_position_for_time_warp");
     }
 
@@ -203,7 +199,7 @@ special_round_start() {
   a_players = get_players();
 
   foreach(player in a_players) {
-  vsmgr_activate("visionset", "cheat_bw", player);
+    vsmgr_activate("visionset", "cheat_bw", player);
   }
 
   level setclientfield("sq_tpo_special_round_active", 1);
@@ -285,8 +281,7 @@ _delete_unitrigger() {
   if(isDefined(self.unitrigger.trigger)) {
     if(isDefined(self.unitrigger.trigger.stub)) {
       self.unitrigger.trigger maps\mp\zombies\_zm_unitrigger::unregister_unitrigger(self.unitrigger.trigger.stub);
-    }
-    else {
+    } else {
       self.trigger notify("kill_trigger");
       self.trigger delete();
     }
@@ -302,8 +297,7 @@ start_item_hunt_with_timeout(n_timeout) {
   level waittill("sq_tpo_item_hunt_done");
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 debug_give_piece() {
   while(true) {
@@ -572,8 +566,7 @@ ondrop_switch(player) {
   maps\mp\zm_buried_buildables::ondrop_common(player);
 }
 
-onspawn_switch(player) {
-}
+onspawn_switch(player) {}
 
 triggerthink_switch() {
   if(isDefined(getent("guillotine_trigger", "targetname"))) {

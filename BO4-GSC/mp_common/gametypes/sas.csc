@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\struct;
-
 #namespace sas;
 
 event_handler[gametype_init] main(eventstruct) {

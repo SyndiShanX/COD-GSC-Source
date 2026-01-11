@@ -26,8 +26,7 @@ moverun() {
 
       if(animscripts\utility::isincombat()) {
         standrun_combatnormal();
-      }
-      else {
+      } else {
         standrun_noncombatnormal();
       }
 
@@ -38,8 +37,7 @@ moverun() {
       }
       if(isDefined(self.crouchrun_combatanim)) {
         crouchrun_runoverride();
-      }
-      else {
+      } else {
         crouchrun_runnormal();
       }
 
@@ -66,8 +64,7 @@ getrunanim() {
 
   if(self.stairsstate == "up") {
     return animscripts\utility::getmoveanim("stairs_up");
-  }
-  else if(self.stairsstate == "down") {
+  } else if(self.stairsstate == "down") {
     return animscripts\utility::getmoveanim("stairs_down");
   }
 
@@ -164,11 +161,9 @@ runngun(var_0) {
 
     if(abs(var_8) < var_5 * 0.7) {
       self.runngunweight = var_7;
-    }
-    else if(var_8 > 0) {
+    } else if(var_8 > 0) {
       self.runngunweight = self.runngunweight + var_6;
-    }
-    else {
+    } else {
       self.runngunweight = self.runngunweight - var_6;
     }
   }
@@ -373,14 +368,12 @@ standrun_combatnormal() {
 
     if(!self.facemotion) {
       thread faceenemyaimtracking();
-    }
-    else if(self.shootstyle != "none" && !isDefined(self.norunngun)) {
+    } else if(self.shootstyle != "none" && !isDefined(self.norunngun)) {
       endfaceenemyaimtracking();
 
       if(canshootwhilerunningforward()) {
         var_1 = runngun(1);
-      }
-      else if(canshootwhilerunningbackward()) {
+      } else if(canshootwhilerunningbackward()) {
         runngun_backward();
         return;
       }
@@ -407,8 +400,7 @@ standrun_combatnormal() {
 
     if(shouldsprintforvariation()) {
       var_4 = animscripts\utility::getmoveanim("sprint_short");
-    }
-    else {
+    } else {
       var_4 = getrunanim();
     }
 
@@ -432,14 +424,11 @@ getstairstransitionanim(var_0, var_1) {
 
   if(var_0 == "up") {
     return animscripts\utility::getmoveanim("stairs_up_out");
-  }
-  else if(var_0 == "down") {
+  } else if(var_0 == "down") {
     return animscripts\utility::getmoveanim("stairs_down_out");
-  }
-  else if(var_1 == "up") {
+  } else if(var_1 == "up") {
     return animscripts\utility::getmoveanim("stairs_up_in");
-  }
-  else if(var_1 == "down") {
+  } else if(var_1 == "down") {
     return animscripts\utility::getmoveanim("stairs_down_in");
   }
 }
@@ -574,8 +563,7 @@ move_checkstairstransition() {
   if(self.stairsstate == "none" && self.lookaheadhitsstairs) {
     if(animscripts\utility::shouldcqb()) {
       var_2 = 32;
-    }
-    else {
+    } else {
       var_2 = 48;
     }
 
@@ -667,15 +655,13 @@ standrun_noncombatnormal() {
 
   if(shouldsprint()) {
     var_1 = getsprintanim();
-  }
-  else {
+  } else {
     var_1 = getrunanim();
   }
 
   if(self.stairsstate == "none") {
     var_2 = 0.3;
-  }
-  else {
+  } else {
     var_2 = 0.1;
   }
 
@@ -687,8 +673,7 @@ standrun_noncombatnormal() {
 
   if(self.leanamount > 0 && self.leanamount < 0.998) {
     var_3 = 1;
-  }
-  else if(self.leanamount < 0 && self.leanamount > -0.998) {
+  } else if(self.leanamount < 0 && self.leanamount > -0.998) {
     var_3 = -1;
   }
 
@@ -760,8 +745,7 @@ standrun_checkreload() {
 
   if(animscripts\utility::shouldcqb()) {
     animscripts\cqb::cqb_reloadinternal();
-  }
-  else {
+  } else {
     standrun_reloadinternal();
   }
 
@@ -796,8 +780,7 @@ runloopisnearbeginning() {
 
   if(var_0 > 3) {
     var_0 = var_0 - 2.0;
-  }
-  else if(var_0 > 2) {
+  } else if(var_0 > 2) {
     var_0 = var_0 - 1.0;
   }
 
@@ -918,8 +901,7 @@ standrun_checkchangeweapon() {
 
   if(var_0) {
     shotgunswitchstandruninternal("shotgunPullout", animscripts\utility::lookupanim("cqb", "shotgun_pullout"), "gun_2_chest", "none", self.secondaryweapon, "shotgun_pickup");
-  }
-  else {
+  } else {
     shotgunswitchstandruninternal("shotgunPutaway", animscripts\utility::lookupanim("cqb", "shotgun_putaway"), "gun_2_back", "back", self.primaryweapon, "shotgun_pickup");
   }
 

@@ -91,8 +91,7 @@ debug_enemyposreplay() {
     if(isDefined(var_1.goodshootpos)) {
       if(var_1 isbadguy()) {
         var_3 = (1, 0, 0);
-      }
-      else {
+      } else {
         var_3 = (0, 0, 1);
       }
 
@@ -747,15 +746,13 @@ updateminimapsetting() {
 
         if(var_4[1].origin[0] > var_4[0].origin[0]) {
           var_6 = (var_4[1].origin[0], var_6[1], var_6[2]);
-        }
-        else {
+        } else {
           var_7 = (var_4[1].origin[0], var_7[1], var_7[2]);
         }
 
         if(var_4[1].origin[1] > var_4[0].origin[1]) {
           var_6 = (var_6[0], var_4[1].origin[1], var_6[2]);
-        }
-        else {
+        } else {
           var_7 = (var_7[0], var_4[1].origin[1], var_7[2]);
         }
 
@@ -806,8 +803,7 @@ updateminimapsetting() {
 
         if(var_18 > var_19) {
           var_20 = var_18;
-        }
-        else {
+        } else {
           var_20 = var_19;
         }
 
@@ -916,8 +912,7 @@ islookingatorigin(var_0) {
 
   if(var_5 > var_3) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

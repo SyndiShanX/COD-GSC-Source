@@ -172,7 +172,7 @@ custom_eog_summary() {
     infinite_percent = int((level.infinite_time / total_time) * 100);
   }
   foreach(player in level.players) {
-  player add_custom_eog_summary_line("@SO_DEMO_SO_BRIDGE_INFINITE_AMMO_PERCENT", infinite_percent + "%");
+    player add_custom_eog_summary_line("@SO_DEMO_SO_BRIDGE_INFINITE_AMMO_PERCENT", infinite_percent + "%");
   }
 
   if(!is_coop()) {
@@ -181,7 +181,7 @@ custom_eog_summary() {
 
   total_damage = 0;
   foreach(player in level.players) {
-  total_damage += player.vehicle_damage;
+    total_damage += player.vehicle_damage;
   }
 
   p1_percent = 0;
@@ -194,8 +194,7 @@ custom_eog_summary() {
     if(p1_percent + p2_percent < 100) {
       if(p1_percent < p2_percent) {
         p1_percent++;
-      }
-      else {
+      } else {
         p2_percent++;
       }
     }

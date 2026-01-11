@@ -8,7 +8,6 @@
 #include scripts\zm_common\zm_customgame;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_trial;
-
 #namespace namespace_e87f6502;
 
 autoexec __init__system__() {

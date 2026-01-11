@@ -26,8 +26,7 @@ main() {
   self OrientMode("face enemy");
   if(randomint(100) > 50) {
     nextaction = ("stand");
-  }
-  else {
+  } else {
     nextaction = ("crouch");
   }
   for(;;) {
@@ -108,8 +107,7 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
       self setFlaggedAnimKnobRestart("shootdone", anim_semiautofire, 1, 0, 1);
       if(isDefined(posOverrideEntity)) {
         self shoot(1, posOverrideEntity.origin);
-      }
-      else {
+      } else {
         self shoot();
       }
       self.bulletsInClip--;
@@ -129,8 +127,7 @@ LocalShootVolley(completeLastShot, forceShoot, posOverrideEntity) {
     self setFlaggedAnimKnobRestart("shootdone", anim_boltfire, 1, 0, 1);
     if(isDefined(posOverrideEntity)) {
       self shoot(1, posOverrideEntity.origin);
-    }
-    else {
+    } else {
       self shoot();
     }
     self.a.needsToRechamber = 1;

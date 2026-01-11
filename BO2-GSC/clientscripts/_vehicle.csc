@@ -87,11 +87,9 @@ get_throttle_effect(throttle) {
   if(isDefined(self.throttlefx)) {
     if(throttle < 0.3) {
       return self.throttlefx[0];
-    }
-    else if(throttle < 0.7) {
+    } else if(throttle < 0.7) {
       return self.throttlefx[1];
-    }
-    else {
+    } else {
       return self.throttlefx[2];
     }
   }
@@ -144,17 +142,13 @@ wake(localclientnum, tagname) {
 
       if(speed > 150 && self getthrottle() < 0) {
         newstate = 0;
-      }
-      else if(speed < 70) {
+      } else if(speed < 70) {
         newstate = 1;
-      }
-      else if(speed < 300) {
+      } else if(speed < 300) {
         newstate = 2;
-      }
-      else if(speed < 600) {
+      } else if(speed < 600) {
         newstate = 3;
-      }
-      else {
+      } else {
         newstate = 4;
       }
 
@@ -282,11 +276,9 @@ tread(localclientnum, tagname, side) {
 
     if(speed > 350) {
       waittime = 0.1;
-    }
-    else if(speed < 166) {
+    } else if(speed < 166) {
       waittime = 0.3;
-    }
-    else {
+    } else {
       waittime = 35 / speed;
     }
 
@@ -355,11 +347,9 @@ boat_tread(localclientnum, tagname, side) {
 
     if(speed > 350) {
       waittime = 0.1;
-    }
-    else if(speed < 166) {
+    } else if(speed < 166) {
       waittime = 0.3;
-    }
-    else {
+    } else {
       waittime = 35 / speed;
     }
 
@@ -503,8 +493,7 @@ aircraft_dustkick() {
   }
   if(self is_mig()) {
     numframespertrace = 1;
-  }
-  else {
+  } else {
     numframespertrace = 3;
   }
 
@@ -537,8 +526,7 @@ aircraft_dustkick() {
 
       if(d > 350) {
         repeatrate = (d - 350) / (1200 - 350) * (0.2 - 0.1) + 0.1;
-      }
-      else {
+      } else {
         repeatrate = 0.1;
       }
     }
@@ -555,8 +543,7 @@ aircraft_dustkick() {
 
       if(isDefined(self.treadfx[trace["surfacetype"]])) {
         playFX(0, self.treadfx[trace["surfacetype"]], trace["position"]);
-      }
-      else {
+      } else {
         println("SCRIPT PRINT: Unknown surface type " + trace["surfacetype"] + " for vehicle type " + self.vehicletype);
 
         return;
@@ -644,8 +631,7 @@ vehicle_flag_toggle_sounds(localclientnum, set, newent) {
       self notify("play_heli_sounds");
       self.should_not_play_sounds = 0;
     }
-  } else {
-  }
+  } else {}
 }
 
 vehicle_flag_turn_off_treadfx(localclientnum, set, newent) {
@@ -655,8 +641,7 @@ vehicle_flag_turn_off_treadfx(localclientnum, set, newent) {
     if(set) {
       if(isDefined(newent) && newent) {
         self.csf_no_tread = 1;
-      }
-      else {
+      } else {
         self vehicle_kill_treads_forever();
       }
     } else {
@@ -704,9 +689,7 @@ vehicle_flag_start_use_engine_damage_low_sounds(localclientnum, set, newent) {
 vehicle_flag_3_handler(localclientnum, set, newent) {
   if(self is_helicopter()) {
     vehicle_flag_start_use_engine_damage_low_sounds(localclientnum, set, newent);
-  }
-  else {
-  }
+  } else {}
 }
 
 vehicle_flag_start_use_engine_damage_high_sounds(localclientnum, set, newent) {
@@ -722,17 +705,14 @@ vehicle_flag_start_use_engine_damage_high_sounds(localclientnum, set, newent) {
 vehicle_flag_4_handler(localclientnum, set, newent) {
   if(self is_helicopter()) {
     vehicle_flag_start_use_engine_damage_high_sounds(localclientnum, set, newent);
-  }
-  else {
-  }
+  } else {}
 }
 
 vehicle_flag_toggle_exhaustfx_handler(localclientnum, set, newent) {
   if(set) {
     if(isDefined(newent) && newent) {
       self.csf_no_exhaust = 1;
-    }
-    else {
+    } else {
       self stop_exhaust(localclientnum);
     }
   } else {
@@ -750,8 +730,7 @@ vehicle_flag_toggle_exhaustfx_handler(localclientnum, set, newent) {
 vehicle_flag_toggle_lights_handler(localclientnum, set, newent) {
   if(set) {
     self lights_off(localclientnum);
-  }
-  else {
+  } else {
     self lights_on(localclientnum);
   }
 }
@@ -759,8 +738,7 @@ vehicle_flag_toggle_lights_handler(localclientnum, set, newent) {
 vehicle_flag_toggle_lockon_handler(localclientnum, set, newent) {
   if(set) {
     self setvehiclelockedon(1);
-  }
-  else {
+  } else {
     self setvehiclelockedon(0);
   }
 }

@@ -15,8 +15,7 @@ init() {
 screecher_render_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
     self setrenderinthirdpersonspectate(1);
-  }
-  else {
+  } else {
     self setrenderinthirdpersonspectate(0);
   }
 }

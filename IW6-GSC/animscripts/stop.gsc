@@ -55,8 +55,7 @@ main() {
   if(!var_0) {
     if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none") {
       var_0 = 1;
-    }
-    else if(angleclamp180(self getmuzzleangle()[0]) > 20) {
+    } else if(angleclamp180(self getmuzzleangle()[0]) > 20) {
       var_0 = 1;
     }
   }
@@ -110,14 +109,11 @@ turntoangle(var_0) {
 
   if(var_2 < -80) {
     var_4 = var_3[2];
-  }
-  else if(var_2 < -20) {
+  } else if(var_2 < -20) {
     var_4 = var_3[3];
-  }
-  else if(var_2 < 80) {
+  } else if(var_2 < 80) {
     var_4 = var_3[5];
-  }
-  else {
+  } else {
     var_4 = var_3[6];
   }
 
@@ -174,11 +170,9 @@ getdesiredidlepose() {
 
   if(var_2 == "Cover Stand" || var_2 == "Conceal Stand") {
     var_3 = animscripts\utility::choosepose("stand");
-  }
-  else if(var_2 == "Cover Crouch" || var_2 == "Conceal Crouch") {
+  } else if(var_2 == "Cover Crouch" || var_2 == "Conceal Crouch") {
     var_3 = animscripts\utility::choosepose("crouch");
-  }
-  else if(var_2 == "Cover Prone" || var_2 == "Conceal Prone") {
+  } else if(var_2 == "Cover Prone" || var_2 == "Conceal Prone") {
     var_3 = animscripts\utility::choosepose("prone");
   }
 
@@ -209,8 +203,7 @@ playidle(var_0, var_1) {
   if(isDefined(self.customidleanimset) && isDefined(self.customidleanimset[var_0])) {
     if(isarray(self.customidleanimset[var_0])) {
       var_3 = animscripts\utility::anim_array(self.customidleanimset[var_0], self.customidleanimweights[var_0]);
-    }
-    else {
+    } else {
       var_3 = self.customidleanimset[var_0];
       var_4 = var_0 + "_add";
 

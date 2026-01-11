@@ -123,8 +123,7 @@ func_73B1(var_00) {
 
     if(isDefined(var_0.type) && var_0.type == "civilian") {
       var_11 = 1;
-    }
-    else {
+    } else {
       var_11 = issubstr(var_0.classname, "civilian");
     }
 
@@ -149,8 +148,7 @@ func_73B1(var_00) {
       if(var_12) {
         if(isDefined(var_0.func_738F)) {
           level.player.func_C929 = level.player.func_C929 + var_0.func_738F;
-        }
-        else {
+        } else {
           level.player.func_C929 = level.player.func_C929 + level.friendlyfire["friend_kill_points"];
         }
       } else
@@ -161,16 +159,13 @@ func_73B1(var_00) {
       if(func_3DA1(var_00, var_05) && func_EB68()) {
         if(var_12) {
           return;
-        }
-        else {
+        } else {
           continue;
         }
       }
 
       if(isDefined(level.func_73B0)) {
-        [
-          [level.func_73B0]
-        ](var_00, var_01, var_02, var_03, var_04, var_05, var_06);
+        [[level.func_73B0]](var_00, var_01, var_02, var_03, var_04, var_05, var_06);
         continue;
       }
 
@@ -225,8 +220,7 @@ func_EB68() {
 
   if(var_00 < 4500) {
     return 1;
-  }
-  else if(var_00 - level.func_2668.func_A943 < 4500) {
+  } else if(var_00 - level.func_2668.func_A943 < 4500) {
     return 1;
   }
 
@@ -249,8 +243,7 @@ func_C92B() {
   for(;;) {
     if(level.player.func_C929 > 0) {
       level.player.func_C929--;
-    }
-    else if(level.player.func_C929 < 0) {
+    } else if(level.player.func_C929 < 0) {
       level.player.func_C929++;
     }
 
@@ -296,11 +289,9 @@ func_B8CF(var_00) {
   }
   if(var_00) {
     setomnvar("ui_death_hint", 9);
-  }
-  else if(isDefined(level.func_4C51)) {
+  } else if(isDefined(level.func_4C51)) {
     func_0B60::func_F32D(level.func_4C51);
-  }
-  else {
+  } else {
     setomnvar("ui_death_hint", 12);
   }
 

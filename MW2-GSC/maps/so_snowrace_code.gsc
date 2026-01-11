@@ -57,7 +57,7 @@ init_snow_race(skipDialog) {
 
   if(is_coop()) {
     foreach(player in level.players) {
-    player thread maps\_coop::createFriendlyHudIcon_Normal();
+      player thread maps\_coop::createFriendlyHudIcon_Normal();
     }
   }
 
@@ -209,7 +209,7 @@ slow_down_vehicle() {
 
 start_race() {
   foreach(player in level.players) {
-  player freezeControls(true);
+    player freezeControls(true);
   }
 
   wait 1;
@@ -311,7 +311,7 @@ end_race_cleanup() {
   }
 
   foreach(player in level.players) {
-  array_thread(player.snowmobile.riders, ::stop_magic_bullet_shield_if_shielded);
+    array_thread(player.snowmobile.riders, ::stop_magic_bullet_shield_if_shielded);
   }
 }
 
@@ -558,8 +558,7 @@ custom_eog_summary() {
     if(is_coop() && isDefined(level.raceWinner)) {
       if(player == level.raceWinner) {
         player set_eog_success_heading("@SO_SNOWRACE1_CLIFFHANGER_YOUWIN");
-      }
-      else {
+      } else {
         player set_eog_success_heading("@SO_SNOWRACE1_CLIFFHANGER_YOULOSE");
       }
     } else {
@@ -580,11 +579,9 @@ custom_eog_summary() {
       if(isDefined(level.show_time_to_beat)) {
         if(finish_time_in_seconds <= level.race_times["veteran"]) {
           starsThisPlaythrough = 3;
-        }
-        else if(finish_time_in_seconds <= level.race_times["hard"]) {
+        } else if(finish_time_in_seconds <= level.race_times["hard"]) {
           starsThisPlaythrough = 2;
-        }
-        else {
+        } else {
           starsThisPlaythrough = 1;
         }
       }
@@ -617,8 +614,7 @@ custom_eog_summary() {
       time_to_beat = convert_to_time_string(level.race_times["veteran"]);
       if(earned_stars < 1) {
         time_to_beat = convert_to_time_string(level.race_times["normal"]);
-      }
-      else if(earned_stars < 2) {
+      } else if(earned_stars < 2) {
         time_to_beat = convert_to_time_string(level.race_times["hard"]);
       }
 

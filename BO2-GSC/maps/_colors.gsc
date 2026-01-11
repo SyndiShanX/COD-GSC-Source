@@ -226,8 +226,7 @@ trigger_auto_disable() {
   if(!isDefined(self.color_enabled)) {
     if(is_true(self.script_color_stay_on)) {
       self.color_enabled = 1;
-    }
-    else {
+    } else {
       self.color_enabled = 0;
     }
   }
@@ -236,8 +235,7 @@ trigger_auto_disable() {
 activate_color_trigger(team) {
   if(team == "allies") {
     self thread get_colorcodes_and_activate_trigger(self.script_color_allies, team);
-  }
-  else {
+  } else {
     self thread get_colorcodes_and_activate_trigger(self.script_color_axis, team);
   }
 }
@@ -310,8 +308,7 @@ same_color_code_as_last_time(team, color) {
 process_cover_node_with_last_in_mind_allies(node, lastcolor) {
   if(issubstr(node.script_color_allies, lastcolor)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
-  }
-  else {
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = node;
   }
 }
@@ -319,8 +316,7 @@ process_cover_node_with_last_in_mind_allies(node, lastcolor) {
 process_cover_node_with_last_in_mind_axis(node, lastcolor) {
   if(issubstr(node.script_color_axis, lastcolor)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
-  }
-  else {
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = node;
   }
 }
@@ -543,8 +539,7 @@ set_goal_and_volume(node) {
 
   if(isDefined(node.script_forcegoal) && node.script_forcegoal) {
     self thread color_force_goal(node);
-  }
-  else {
+  } else {
     self set_goal_node(node);
   }
 
@@ -558,15 +553,13 @@ set_goal_and_volume(node) {
 
   if(isDefined(volume)) {
     self setfixednodesafevolume(volume);
-  }
-  else {
+  } else {
     self clearfixednodesafevolume();
   }
 
   if(isDefined(node.fixednodesaferadius)) {
     self.fixednodesaferadius = node.fixednodesaferadius;
-  }
-  else {
+  } else {
     self.fixednodesaferadius = 64;
   }
 }
@@ -1064,8 +1057,7 @@ get_color_spawner(classname, fromcolor) {
   if(!isDefined(classname)) {
     if(isDefined(fromcolor) && specificfromcolor) {
       return level.respawn_spawners_specific[fromcolor];
-    }
-    else {
+    } else {
       return level.respawn_spawner;
     }
   }
@@ -1091,16 +1083,14 @@ get_color_spawner(classname, fromcolor) {
   if(!isDefined(spawner)) {
     if(isDefined(fromcolor) && specificfromcolor) {
       return level.respawn_spawners_specific[fromcolor];
-    }
-    else {
+    } else {
       return level.respawn_spawner;
     }
   }
 
   if(isDefined(fromcolor) && specificfromcolor) {
     spawner.origin = level.respawn_spawners_specific[fromcolor].origin;
-  }
-  else {
+  } else {
     spawner.origin = level.respawn_spawner.origin;
   }
 

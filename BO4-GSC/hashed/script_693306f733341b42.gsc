@@ -44,7 +44,6 @@
 #using scripts\mp_common\util;
 #namespace namespace_ec746226;
 
-event_handler[gametype_init] main(eventstruct) {
-}
+event_handler[gametype_init] main(eventstruct) {}
 
 # /

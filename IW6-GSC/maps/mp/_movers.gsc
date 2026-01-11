@@ -366,8 +366,7 @@ script_mover_move_to_target(current) {
     if(isDefined(mover.params["solid"])) {
       if(mover.params["solid"]) {
         mover solid();
-      }
-      else {
+      } else {
         mover notsolid();
       }
     }

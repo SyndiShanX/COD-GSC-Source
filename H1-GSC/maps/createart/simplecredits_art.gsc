@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\simplecredits_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\simplecredits_fog::main();
   }
 }

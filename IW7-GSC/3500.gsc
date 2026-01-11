@@ -137,8 +137,7 @@ func_1107B() {
 
   if(scripts\mp\utility\game::isreallyalive(self)) {
     self notify("killstreak_finished_with_weapon_ks_remote_map_mp");
-  }
-  else {
+  } else {
     self.pers["startedMapSelect"] = 0;
   }
 }

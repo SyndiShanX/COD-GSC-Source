@@ -16,7 +16,7 @@ spawn_smoke(smoke_tag, smoke_trigger, smoke_pause) {
 
   smoke_spots = getstructarray(smoke_tag, "targetname");
   foreach(spot in smoke_spots) {
-  MagicGrenadeManual("smoke_grenade_american", spot.origin, (0, 0, -1), randomfloat(smoke_pause));
+    MagicGrenadeManual("smoke_grenade_american", spot.origin, (0, 0, -1), randomfloat(smoke_pause));
   }
 }
 
@@ -172,8 +172,7 @@ enemy_move_to_struct_wakeup(seek_goal_radius, stay, duration) {
     //only structs don't have types, nodes do
     if(!isDefined(node.type)) {
       goal_type = "struct";
-    }
-    else {
+    } else {
       goal_type = "node";
     }
   } else {
@@ -189,8 +188,7 @@ enemy_move_to_struct_wakeup(seek_goal_radius, stay, duration) {
 
   if(isDefined(stay) && stay && isDefined(duration)) {
     thread enemy_seek_player(seek_goal_radius, duration);
-  }
-  else {
+  } else {
     thread enemy_seek_player(seek_goal_radius);
   }
 }
@@ -248,8 +246,7 @@ enemy_prone_to_stand_wakeup(seek_goal_radius, stay, duration) {
 
   if(isDefined(stay) && stay && isDefined(duration)) {
     thread enemy_seek_player(seek_goal_radius, duration);
-  }
-  else {
+  } else {
     thread enemy_seek_player(seek_goal_radius);
   }
 }
@@ -260,9 +257,9 @@ past_enemy_remove(enemy_group, num) {
   enemy_array = getaiarray("axis");
   guys_to_delete = [];
   foreach(guy in enemy_array) {
-  if(isDefined(guy.script_noteworthy) && guy.script_noteworthy == enemy_group)
+    if(isDefined(guy.script_noteworthy) && guy.script_noteworthy == enemy_group)
   }
-    guys_to_delete[guys_to_delete.size] = guy;
+  guys_to_delete[guys_to_delete.size] = guy;
 
   if(isDefined(num) && (num > 0) && (num < guys_to_delete.size)) {
     random_guys_to_delete = array_randomize(guys_to_delete);
@@ -298,7 +295,7 @@ hide_destroyed_parts() {
     pieces = getEntArray(pole.target, "targetname");
 
     foreach(piece in pieces) {
-    piece hide();
+      piece hide();
     }
 
     pole hide();
@@ -319,7 +316,7 @@ sign_departure_status_eratic() {
   while(!flag("stop_board_flipping")) {
     snds = getEntArray("snd_departure_board", "targetname");
     foreach(member in snds) {
-    member playSound(member.script_soundalias);
+      member playSound(member.script_soundalias);
     }
 
     array = array_randomize(level.departure_status_array);

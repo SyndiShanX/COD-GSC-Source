@@ -12,11 +12,10 @@
 #include scripts\mp_common\teams\teams;
 #include scripts\wz_common\character_unlock;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_mason;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_mason", &__init__, undefined, #"character_unlock_mason_fixup");
+  system::register(#"character_unlock_mason", &__init__, undefined, # "character_unlock_mason_fixup");
 }
 
 __init__() {
@@ -31,9 +30,9 @@ function_2613aeec(enabled) {
     callback::add_callback(#"on_team_eliminated", &function_4ac25840);
 
     if(isDefined(getgametypesetting(#"hash_17f17e92c2654659")) && getgametypesetting(#"hash_17f17e92c2654659")) {
-      item_world_fixup::function_e70fa91c(#"wz_escape_supply_stash_parent", #"supply_stash_cu19", 1);
+      item_world_fixup::function_e70fa91c(#"wz_escape_supply_stash_parent", # "supply_stash_cu19", 1);
     } else {
-      item_world_fixup::function_e70fa91c(#"supply_stash_parent_dlc1", #"supply_stash_cu19", 6);
+      item_world_fixup::function_e70fa91c(#"supply_stash_parent_dlc1", # "supply_stash_cu19", 6);
     }
 
     dynent = getdynent(#"array_broadcast");
@@ -47,12 +46,12 @@ function_2613aeec(enabled) {
 function_1c4b5097(item) {
   itementry = item.itementry;
 
-  if(isDefined(itementry) && itementry.name === #"cu19_item") {
+  if(isDefined(itementry) && itementry.name === # "cu19_item") {
     var_c503939b = globallogic::function_e9e52d05();
 
     if(var_c503939b <= function_c816ea5b()) {
       if(self character_unlock::function_f0406288(#"mason_unlock")) {
-        self character_unlock::function_c8beca5e(#"mason_unlock", #"hash_7334980069e5e2fa", 1);
+        self character_unlock::function_c8beca5e(#"mason_unlock", # "hash_7334980069e5e2fa", 1);
       }
     }
   }
@@ -66,7 +65,7 @@ function_1e224132(activator, laststate, state) {
       level clientfield::set("array_broadcast", 1);
       activator clientfield::set_to_player("array_effects", 1);
       activator thread function_e3abcf2();
-      activator character_unlock::function_c8beca5e(#"mason_unlock", #"hash_7334970069e5e147", 1);
+      activator character_unlock::function_c8beca5e(#"mason_unlock", # "hash_7334970069e5e147", 1);
     }
 
     activator stats::function_d40764f3(#"activation_count_broadcast", 1);
@@ -74,7 +73,7 @@ function_1e224132(activator, laststate, state) {
 }
 
 function_e3abcf2() {
-  self endon(#"disconnect", #"game_ended");
+  self endon(#"disconnect", # "game_ended");
   var_70f6f8c = 1;
 
   while(isplayer(self) && isalive(self) && var_70f6f8c) {
@@ -99,7 +98,7 @@ function_4ac25840(dead_team) {
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"mason_unlock")) {
-            player character_unlock::function_c8beca5e(#"mason_unlock", #"hash_7334980069e5e2fa", 1);
+            player character_unlock::function_c8beca5e(#"mason_unlock", # "hash_7334980069e5e2fa", 1);
           }
         }
       }

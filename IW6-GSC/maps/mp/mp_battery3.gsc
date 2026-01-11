@@ -432,7 +432,9 @@ debugEvents() {
 checkDbgDvar(dvarName, callback, notifyStr) {
   if(GetDvarInt(dvarName) > 0) {
     if(isDefined(callback)) {
-      [[callback]](GetDvarInt(dvarName));
+      [
+        [callback]
+      ](GetDvarInt(dvarName));
     }
 
     if(isDefined(notifyStr)) {

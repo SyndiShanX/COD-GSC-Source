@@ -9,7 +9,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\draft;
-
 #namespace mp_icebreaker_scripted;
 
 autoexec __init__system__() {
@@ -23,7 +22,7 @@ __init__() {
 __main__() {
   init_devgui();
 
-    function_2cdcf5c3();
+  function_2cdcf5c3();
 }
 
 on_game_playing() {

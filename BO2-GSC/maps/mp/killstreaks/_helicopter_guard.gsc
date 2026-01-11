@@ -83,8 +83,7 @@ createheliguardsupport(lifeid, killstreak_id) {
 
   if(isDefined(closeststartnode.angles)) {
     startang = closeststartnode.angles;
-  }
-  else {
+  } else {
     startang = (0, 0, 0);
   }
 
@@ -605,7 +604,7 @@ heliguardsupport_setairstartnodes() {
   level.air_start_nodes = getstructarray("chopper_boss_path_start", "targetname");
 
   foreach(loc in level.air_start_nodes) {
-  loc.neighbors = loc heliguardsupport_getlinkedstructs();
+    loc.neighbors = loc heliguardsupport_getlinkedstructs();
   }
 }
 

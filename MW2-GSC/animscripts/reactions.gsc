@@ -180,8 +180,7 @@ bulletWhizbyReaction() {
 
     if(enemyNear) {
       waitTime = 1 + randomfloat(0.5);
-    }
-    else {
+    } else {
       waitTime = 0.2 + randomfloat(0.5);
     }
 
@@ -214,8 +213,7 @@ bulletWhizbyReaction() {
 
     if(isDefined(self.whizbyEnemy)) {
       dirToEnemy = vectorNormalize(self.whizbyEnemy.origin - self.origin);
-    }
-    else {
+    } else {
       dirToEnemy = forward;
     }
 
@@ -306,8 +304,7 @@ getNewEnemyReactionAnim() {
 
     if(isDefined(self.enemy) && distanceSquared(self.enemy.origin, self.reactionTargetPos) < 256 * 256) {
       self orientmode("face enemy");
-    }
-    else {
+    } else {
       self orientmode("face point", self.reactionTargetPos);
     }
 

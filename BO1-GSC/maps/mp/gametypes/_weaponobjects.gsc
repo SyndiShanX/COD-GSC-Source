@@ -282,8 +282,7 @@ addWeaponObject(watcher, weapon) {
   }
   if(isDefined(watcher.deploySound) && !weapon isHacked()) {
     self playSound(watcher.deploySound);
-  }
-  else if(isDefined(watcher.deploySoundPlayer) && !weapon isHacked()) {
+  } else if(isDefined(watcher.deploySoundPlayer) && !weapon isHacked()) {
     self playLocalSound(watcher.deploySoundPlayer);
   }
   if(watcher.hackable) {
@@ -381,8 +380,7 @@ weaponObjectDamage(watcher) {
   }
   if(level.weaponobjectexplodethisframe) {
     wait .1 + randomfloat(.4);
-  }
-  else {
+  } else {
     wait .05;
   }
   if(!isDefined(self)) {
@@ -571,8 +569,7 @@ commonOnSpawnUseWeaponObject(watcher, owner) {
   if(watcher.detectable) {
     if(isDefined(watcher.isMovable) && watcher.isMovable) {
       self thread weaponObjectDetectionMovable(owner.pers["team"]);
-    }
-    else {
+    } else {
       self thread weaponObjectDetectionTrigger_wait(owner.pers["team"]);
     }
     if(watcher.headIcon && level.teamBased) {

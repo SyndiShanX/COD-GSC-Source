@@ -5,7 +5,6 @@
 
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
-
 #namespace status_effect_slowed;
 
 autoexec __init__system__() {

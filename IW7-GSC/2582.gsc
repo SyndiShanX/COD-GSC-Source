@@ -149,9 +149,7 @@ func_17BA(param_00, param_01, param_02) {
   var_03 = spawnStruct();
   var_03.alias = undefined;
   var_03.type = param_00;
-  [
-    [self.var_3135.var_EB89.var_71CE]
-  ](var_03);
+  [[self.var_3135.var_EB89.var_71CE]](var_03);
   if(!isDefined(var_03.alias)) {
     return undefined;
   }

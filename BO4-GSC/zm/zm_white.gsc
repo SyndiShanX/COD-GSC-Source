@@ -71,7 +71,6 @@
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_white;
 
 autoexec opt_in() {
@@ -87,7 +86,7 @@ event_handler[level_init] main(eventstruct) {
   setclearanceceiling(17);
   level thread lui::add_luimenu("full_screen_movie", &full_screen_movie::register, "full_screen_movie");
   level thread function_d0f18ffe();
-  level.custom_spawner_entry[#"crawl"] = &zm_white_special_rounds::function_45bb11e4;
+  level.custom_spawner_entry[# "crawl"] = &zm_white_special_rounds::function_45bb11e4;
   level.var_ddcd74c6 = &zm_white_special_rounds::function_f79e10f9;
   level.var_c02e63 = &zm_white_util::function_5d7d0c85;
   level._no_vending_machine_auto_collision = 1;
@@ -103,7 +102,7 @@ event_handler[level_init] main(eventstruct) {
   zm_white_perk_pap::init_fx();
   level.var_ef785c4c = 0;
   level thread init_pap();
-  clientfield::register("scriptmover", "" + #"hash_28b770e7e782837", 1, 1, "int");
+  clientfield::register("scriptmover", "" + # "hash_28b770e7e782837", 1, 1, "int");
   clientfield::register("world", "portal_map_magicbox_lights_init", 1, 1, "int");
   clientfield::register("world", "portal_map_start_chest1", 1, 1, "int");
   clientfield::register("world", "portal_map_start_chest2", 1, 1, "int");
@@ -116,16 +115,16 @@ event_handler[level_init] main(eventstruct) {
   clientfield::register("world", "power_pbg_control", 1, 1, "int");
   zm::init_fx();
   clientfield::register("clientuimodel", "player_lives", 1, 2, "int");
-  level._effect[#"headshot"] = "_t6/impacts/fx_flesh_hit";
-  level._effect[#"headshot_nochunks"] = "_t6/misc/fx_zombie_bloodsplat";
-  level._effect[#"bloodspurt"] = "_t6/misc/fx_zombie_bloodspurt";
-  level._effect[#"animscript_gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"animscript_gibtrail_fx"] = "_t6/trail/fx_trail_blood_streak";
-  level._effect[#"switch_sparks"] = "_t6/env/electrical/fx_elec_wire_spark_burst";
+  level._effect[# "headshot"] = "_t6/impacts/fx_flesh_hit";
+  level._effect[# "headshot_nochunks"] = "_t6/misc/fx_zombie_bloodsplat";
+  level._effect[# "bloodspurt"] = "_t6/misc/fx_zombie_bloodspurt";
+  level._effect[# "animscript_gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
+  level._effect[# "animscript_gibtrail_fx"] = "_t6/trail/fx_trail_blood_streak";
+  level._effect[# "switch_sparks"] = "_t6/env/electrical/fx_elec_wire_spark_burst";
   level.default_game_mode = "zclassic";
   level.var_22fda912 = &function_9f50079d;
   level.zombiemode_offhand_weapon_give_override = &offhand_weapon_give_override;
-  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_white_weapons.csv";
+  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_white_weapons.csv";
   level._allow_melee_weapon_switching = 1;
   level.var_161cb00c = 1;
   level.registerobjective_qzonejukeinit = 0;
@@ -191,9 +190,9 @@ event_handler[level_init] main(eventstruct) {
 
   level thread zm_white_devgui::init();
 
-    if(!zm_utility::is_standard()) {
-      level thread zm_white_door_powerup::init();
-    }
+  if(!zm_utility::is_standard()) {
+    level thread zm_white_door_powerup::init();
+  }
 
   if(level.round_number == 1 && isDefined(level.enable_magic) && level.enable_magic && level.gamedifficulty != 0) {
     level thread zm_white_mee::function_c4fbad3();
@@ -212,7 +211,7 @@ event_handler[level_init] main(eventstruct) {
 
   level thread white_devgui();
 
-    level thread function_f684d327();
+  level thread function_f684d327();
 }
 
 function_f684d327() {
@@ -627,7 +626,7 @@ function_1f712bb1() {
   wait 3;
   level.var_af3a53b2 = util::spawn_model("tag_origin", level.chests[level.chest_index].origin + (0, 0, -75));
   level.var_af3a53b2.angles = level.chests[level.chest_index].angles + (-90, 0, -90);
-  playFXOnTag(level._effect[#"hash_572a14944ad27060"], level.var_af3a53b2, "tag_origin");
+  playFXOnTag(level._effect[# "hash_572a14944ad27060"], level.var_af3a53b2, "tag_origin");
 }
 
 function_2336a7c8() {
@@ -654,7 +653,7 @@ function_da0655c7() {
     wait 0.1;
     level.var_3caf613d[i] = util::spawn_model("tag_origin", level.chests[i].origin + (0, 0, -75));
     level.var_3caf613d[i].angles = level.chests[level.chest_index].angles + (-90, 0, -90);
-    playFXOnTag(level._effect[#"hash_572a14944ad27060"], level.var_3caf613d[i], "tag_origin");
+    playFXOnTag(level._effect[# "hash_572a14944ad27060"], level.var_3caf613d[i], "tag_origin");
   }
 
   level waittill(#"fire_sale_off");
@@ -689,7 +688,7 @@ function_cf95fbb7() {
     wait 0.1;
     level.var_3caf613d[i] = util::spawn_model("tag_origin", level.chests[i].origin + (0, 0, -75));
     level.var_3caf613d[i].angles = level.chests[level.chest_index].angles + (-90, 0, -90);
-    playFXOnTag(level._effect[#"hash_572a14944ad27060"], level.var_3caf613d[i], "tag_origin");
+    playFXOnTag(level._effect[# "hash_572a14944ad27060"], level.var_3caf613d[i], "tag_origin");
   }
 }
 
@@ -706,15 +705,15 @@ function_e5c88b7b() {
 }
 
 function_785cadc4() {
-  level.var_678333a6 = #"hash_11347f5077a17dcb";
-  level._effect[#"chest_light"] = #"hash_1e8cb303d3103833";
-  level._effect[#"chest_light_closed"] = #"hash_602f075818a2fb2e";
-  level._effect[#"hash_2ff87d61167ea531"] = #"hash_1eb426cfbfef7486";
-  level._effect[#"hash_4048cb4967032c4a"] = #"hash_7e272f1a9f143051";
-  level._effect[#"lght_marker"] = #"hash_7dec2fde8393c0f4";
-  level._effect[#"lght_marker_flare"] = #"hash_11347f5077a17dcb";
-  level._effect[#"poltergeist_magicbox"] = #"hash_11347f5077a17dcb";
-  level._effect[#"hash_572a14944ad27060"] = #"zombie/fx_weapon_box_marker_zmb";
+  level.var_678333a6 = # "hash_11347f5077a17dcb";
+  level._effect[# "chest_light"] = # "hash_1e8cb303d3103833";
+  level._effect[# "chest_light_closed"] = # "hash_602f075818a2fb2e";
+  level._effect[# "hash_2ff87d61167ea531"] = # "hash_1eb426cfbfef7486";
+  level._effect[# "hash_4048cb4967032c4a"] = # "hash_7e272f1a9f143051";
+  level._effect[# "lght_marker"] = # "hash_7dec2fde8393c0f4";
+  level._effect[# "lght_marker_flare"] = # "hash_11347f5077a17dcb";
+  level._effect[# "poltergeist_magicbox"] = # "hash_11347f5077a17dcb";
+  level._effect[# "hash_572a14944ad27060"] = # "zombie/fx_weapon_box_marker_zmb";
 }
 
 function_d574cfc6() {
@@ -804,30 +803,30 @@ setupmusic() {
 }
 
 setup_personality_character_exerts() {
-  level.exert_sounds[5][#"hitmed"] = "vox_plr_5_exert_pain";
-  level.exert_sounds[6][#"hitmed"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[7][#"hitmed"] = "vox_plr_7_exert_pain";
-  level.exert_sounds[8][#"hitmed"] = "vox_plr_8_exert_pain";
-  level.exert_sounds[13][#"hitmed"] = "vox_plr_5_exert_pain";
-  level.exert_sounds[14][#"hitmed"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[15][#"hitmed"] = "vox_plr_7_exert_pain";
-  level.exert_sounds[16][#"hitmed"] = "vox_plr_8_exert_pain";
-  level.exert_sounds[5][#"hitlrg"] = "vox_plr_5_exert_pain";
-  level.exert_sounds[6][#"hitlrg"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[7][#"hitlrg"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[8][#"hitlrg"] = "vox_plr_7_exert_pain";
-  level.exert_sounds[13][#"hitlrg"] = "vox_plr_5_exert_pain";
-  level.exert_sounds[14][#"hitlrg"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[15][#"hitlrg"] = "vox_plr_6_exert_pain";
-  level.exert_sounds[16][#"hitlrg"] = "vox_plr_7_exert_pain";
-  level.exert_sounds[5][#"cough"] = "vox_plr_5_exert_gas_cough";
-  level.exert_sounds[6][#"cough"] = "vox_plr_6_exert_gas_cough";
-  level.exert_sounds[7][#"cough"] = "vox_plr_7_exert_gas_cough";
-  level.exert_sounds[8][#"cough"] = "vox_plr_8_exert_gas_cough";
-  level.exert_sounds[13][#"cough"] = "vox_plr_5_exert_gas_cough";
-  level.exert_sounds[14][#"cough"] = "vox_plr_6_exert_gas_cough";
-  level.exert_sounds[15][#"cough"] = "vox_plr_7_exert_gas_cough";
-  level.exert_sounds[16][#"cough"] = "vox_plr_8_exert_gas_cough";
+  level.exert_sounds[5][# "hitmed"] = "vox_plr_5_exert_pain";
+  level.exert_sounds[6][# "hitmed"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[7][# "hitmed"] = "vox_plr_7_exert_pain";
+  level.exert_sounds[8][# "hitmed"] = "vox_plr_8_exert_pain";
+  level.exert_sounds[13][# "hitmed"] = "vox_plr_5_exert_pain";
+  level.exert_sounds[14][# "hitmed"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[15][# "hitmed"] = "vox_plr_7_exert_pain";
+  level.exert_sounds[16][# "hitmed"] = "vox_plr_8_exert_pain";
+  level.exert_sounds[5][# "hitlrg"] = "vox_plr_5_exert_pain";
+  level.exert_sounds[6][# "hitlrg"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[7][# "hitlrg"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[8][# "hitlrg"] = "vox_plr_7_exert_pain";
+  level.exert_sounds[13][# "hitlrg"] = "vox_plr_5_exert_pain";
+  level.exert_sounds[14][# "hitlrg"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[15][# "hitlrg"] = "vox_plr_6_exert_pain";
+  level.exert_sounds[16][# "hitlrg"] = "vox_plr_7_exert_pain";
+  level.exert_sounds[5][# "cough"] = "vox_plr_5_exert_gas_cough";
+  level.exert_sounds[6][# "cough"] = "vox_plr_6_exert_gas_cough";
+  level.exert_sounds[7][# "cough"] = "vox_plr_7_exert_gas_cough";
+  level.exert_sounds[8][# "cough"] = "vox_plr_8_exert_gas_cough";
+  level.exert_sounds[13][# "cough"] = "vox_plr_5_exert_gas_cough";
+  level.exert_sounds[14][# "cough"] = "vox_plr_6_exert_gas_cough";
+  level.exert_sounds[15][# "cough"] = "vox_plr_7_exert_gas_cough";
+  level.exert_sounds[16][# "cough"] = "vox_plr_8_exert_gas_cough";
 }
 
 function_e120ae98(a_s_respawn_points) {
@@ -978,42 +977,42 @@ private white_devgui() {
     str_command = getdvarstring(#"zm_white_devgui_cmd", "<dev string:x413>");
 
     switch (str_command) {
-      case #"hash_1535ec651f8ba226":
+      case # "hash_1535ec651f8ba226":
         level.var_e8d9c0d1 = 1;
         break;
-      case #"start_lgt_exp":
+      case # "start_lgt_exp":
         level flag::set("<dev string:x416>");
         break;
-      case #"hash_121e505482adfe21":
+      case # "hash_121e505482adfe21":
         level flag::set("<dev string:x427>");
         break;
-      case #"hash_51413ff43d5ac5eb":
+      case # "hash_51413ff43d5ac5eb":
         level flag::set("<dev string:x437>");
         break;
-      case #"hash_3a77444633569cdc":
+      case # "hash_3a77444633569cdc":
         level flag::clear("<dev string:x437>");
         break;
-      case #"hash_75c01ef1f8005214":
+      case # "hash_75c01ef1f8005214":
         iprintln("<dev string:x444>");
         level flag::set(#"soul_fill");
         break;
-      case #"hash_7db70cb23b9d2739":
+      case # "hash_7db70cb23b9d2739":
         iprintln("<dev string:x462>");
         level flag::clear(#"soul_fill");
         break;
-      case #"hash_708994ac8f2d6d5":
+      case # "hash_708994ac8f2d6d5":
         if(zm_utility::is_ee_enabled()) {
-          zm_sq::function_87306f8a(#"insanity_mode", #"step_6");
+          zm_sq::function_87306f8a(#"insanity_mode", # "step_6");
         } else {
           level thread zm_white_insanity_mode::function_1541f1c9();
         }
 
         break;
-      case #"hash_ab401b43ac65b13":
+      case # "hash_ab401b43ac65b13":
         iprintln("<dev string:x481>");
         level flag::set(#"keypad_debug");
         break;
-      case #"hash_310aefbe028b9475":
+      case # "hash_310aefbe028b9475":
         iprintln("<dev string:x49e>");
         zm_white_population_count::function_3134b684();
         break;

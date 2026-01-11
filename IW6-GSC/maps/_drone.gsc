@@ -74,8 +74,7 @@ drone_init() {
   if(isDefined(self.target)) {
     if(!isDefined(self.script_moveoverride)) {
       thread drone_move();
-    }
-    else {
+    } else {
       thread drone_wait_move();
     }
   }
@@ -93,8 +92,7 @@ drone_array_handling(var_0) {
 
   if(isDefined(var_0) && isDefined(var_0.struct_array_index)) {
     maps\_utility::structarray_remove_index(level.drones[var_1], var_0.struct_array_index);
-  }
-  else {
+  } else {
     maps\_utility::structarray_remove_undefined(level.drones[var_1]);
   }
 }
@@ -127,8 +125,7 @@ drone_death_thread() {
   if(!(isDefined(self.noragdoll) && isDefined(self.skipdeathanim))) {
     if(isDefined(self.noragdoll)) {
       drone_play_scripted_anim(var_1, "deathplant");
-    }
-    else if(isDefined(self.skipdeathanim)) {
+    } else if(isDefined(self.skipdeathanim)) {
       self startragdoll();
       drone_play_scripted_anim(var_1, "deathplant");
     } else {
@@ -184,8 +181,7 @@ drone_thermal_draw_disable(var_0) {
 drone_play_looping_anim(var_0, var_1) {
   if(isDefined(self.drone_loop_custom)) {
     self[[self.drone_loop_override]](var_0, var_1);
-  }
-  else {
+  } else {
     self clearanim( % body, 0.2);
     self stopanimscripted();
     self setflaggedanimknoballrestart("drone_anim", var_0, % body, 1, 0.2, var_1);
@@ -235,11 +231,9 @@ drone_drop_real_weapon_on_death() {
 drone_idle(var_0, var_1) {
   if(isDefined(self.drone_idle_custom)) {
     [[self.drone_idle_override]]();
-  }
-  else if(isDefined(var_0) && isDefined(var_0["script_noteworthy"]) && isDefined(level.drone_anims[self.team][var_0["script_noteworthy"]])) {
+  } else if(isDefined(var_0) && isDefined(var_0["script_noteworthy"]) && isDefined(level.drone_anims[self.team][var_0["script_noteworthy"]])) {
     thread drone_fight(var_0["script_noteworthy"], var_0, var_1);
-  }
-  else {
+  } else {
     if(isDefined(self.idleanim)) {
       drone_play_looping_anim(self.idleanim, 1);
       return;
@@ -272,8 +266,7 @@ drone_fight(var_0, var_1, var_2) {
   if(self.team == "axis") {
     if(var_3 == 1) {
       self.weaponsound = "drone_ak12_fire_npc";
-    }
-    else if(var_3 == 2) {
+    } else if(var_3 == 2) {
       self.weaponsound = "drone_cz805_fire_npc";
     }
 
@@ -283,8 +276,7 @@ drone_fight(var_0, var_1, var_2) {
   } else {
     if(var_3 == 1) {
       self.weaponsound = "drone_r5rgp_fire_npc";
-    }
-    else if(var_3 == 2) {
+    } else if(var_3 == 2) {
       self.weaponsound = "drone_fad_fire_npc";
     }
 
@@ -328,8 +320,7 @@ drone_fight(var_0, var_1, var_2) {
       if(isDefined(var_4["fire"])) {
         if(var_0 == "coverprone" && var_6 == 1) {
           thread drone_play_looping_anim(var_4["fire_exposed"], 1);
-        }
-        else {
+        } else {
           thread drone_play_looping_anim(var_4["fire"], 1);
         }
 
@@ -564,8 +555,7 @@ drone_move() {
 
           if(!var_4) {
             thread drone_move_z(var_3);
-          }
-          else {
+          } else {
             self notify("drone_move_z");
           }
 
@@ -643,8 +633,7 @@ drone_move_z(var_0) {
 
         if(var_2 >= var_5) {
           self.origin = (self.origin[0], self.origin[1], self.origin[2] + var_6);
-        }
-        else if(var_2 <= var_5 * -1) {
+        } else if(var_2 <= var_5 * -1) {
           self.origin = (self.origin[0], self.origin[1], self.origin[2] - var_6);
         }
       }
@@ -671,11 +660,9 @@ getpatharray(var_0, var_1) {
 
   if(var_7.size) {
     var_6 = "entity";
-  }
-  else if(var_8.size) {
+  } else if(var_8.size) {
     var_6 = "node";
-  }
-  else if(var_9.size) {
+  } else if(var_9.size) {
     var_6 = "struct";
   }
 
@@ -742,8 +729,7 @@ getpatharray(var_0, var_1) {
 
   if(isDefined(self.script_parameters) && self.script_parameters == "use_last_node_angles" && isDefined(var_3[var_10]["angles"])) {
     var_3[var_10]["vec"] = anglesToForward(var_3[var_10]["angles"]);
-  }
-  else {
+  } else {
     var_3[var_10]["vec"] = var_3[var_10 - 1]["vec"];
   }
 

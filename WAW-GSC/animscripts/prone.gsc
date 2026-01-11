@@ -55,8 +55,7 @@ ProneTurningThread(threadToSpawn, killmeString) {
           amount = yawDelta / 45.0;
           if(amount < 0.01) {
             amount = 0.01;
-          }
-          else if(amount > 0.99) {
+          } else if(amount > 0.99) {
             amount = 0.99;
           }
           self SetAnimKnob( % prone_straight, 1.0 - amount, 0.1, 1);
@@ -77,8 +76,7 @@ ProneTurningThread(threadToSpawn, killmeString) {
           amount = yawDelta / -45;
           if(amount < 0.01) {
             amount = 0.01;
-          }
-          else if(amount > 0.99) {
+          } else if(amount > 0.99) {
             amount = 0.99;
           }
           self SetAnimKnob( % prone_straight, 1.0 - amount, 0.1, 1);

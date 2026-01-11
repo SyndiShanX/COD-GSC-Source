@@ -97,8 +97,7 @@ uploadGlobalStatCounters() {
       for(index = 0; index < level.bombZones.size; index++) {
         if(!isDefined(level.bombZones[index].bombExploded) || !level.bombZones[index].bombExploded) {
           level.globalDemBombsProtected++;
-        }
-        else {
+        } else {
           level.globalDemBombsDestroyed++;
         }
       }
@@ -620,8 +619,7 @@ setAfterActionReportStat(statName, value, index) {
   if(level.rankedMatch || level.wagerMatch) {
     if(isDefined(index)) {
       self setdstat("AfterActionReportStats", statName, index, value);
-    }
-    else {
+    } else {
       self setdstat("AfterActionReportStats", statName, value);
     }
   }

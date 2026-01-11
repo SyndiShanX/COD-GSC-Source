@@ -7,11 +7,9 @@
 #include clientscripts\mp\createfx\mp_dockside_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_light_flour_dbl_oval_street_wrm"] = loadfx("light/fx_light_flour_dbl_oval_street_wrm");

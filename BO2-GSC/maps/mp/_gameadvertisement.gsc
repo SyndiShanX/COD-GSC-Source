@@ -447,8 +447,7 @@ sessionadvertismentupdatedebughud() {
       } else {
         if(level.sessionadvertstatus == 1) {
           sessionadverthud_0.color = (1, 1, 1);
-        }
-        else {
+        } else {
           sessionadverthud_0.color = vectorscale((1, 0, 0), 0.9);
         }
 

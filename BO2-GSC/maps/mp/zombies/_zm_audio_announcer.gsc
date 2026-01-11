@@ -163,8 +163,7 @@ init_racevox(prefix, location) {
 createvox(type, alias, gametype) {
   if(!isDefined(gametype)) {
     gametype = "";
-  }
-  else {
+  } else {
     gametype = gametype + "_";
   }
 
@@ -305,8 +304,7 @@ leaderdialogonplayer(dialog, group, queue, waittime) {
 
   if(!self.zmbdialogactive) {
     self thread playleaderdialogonplayer(dialog, team, waittime);
-  }
-  else if(isDefined(queue) && queue) {
+  } else if(isDefined(queue) && queue) {
     self.zmbdialogqueue[self.zmbdialogqueue.size] = dialog;
   }
 }
@@ -339,8 +337,7 @@ playleaderdialogonplayer(dialog, team, waittime) {
 
     if(!isDefined(variant)) {
       full_alias = alias;
-    }
-    else {
+    } else {
       full_alias = alias + "_" + variant;
     }
 
@@ -349,8 +346,7 @@ playleaderdialogonplayer(dialog, team, waittime) {
 
   if(isDefined(waittime)) {
     wait(waittime);
-  }
-  else {
+  } else {
     wait 4.0;
   }
 
@@ -417,8 +413,7 @@ getroundswitchdialog(switchtype) {
 getotherteam(team) {
   if(team == "allies") {
     return "axis";
-  }
-  else {
+  } else {
     return "allies";
   }
 }

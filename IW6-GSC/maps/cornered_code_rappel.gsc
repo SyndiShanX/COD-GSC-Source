@@ -144,8 +144,7 @@ cnd_plyr_rpl_move_setup(var_0, var_1, var_2, var_3) {
 
   if(var_3.rappel_type == "inverted") {
     level.player playerlinkto(var_7, "tag_origin", 1, var_3.right_arc, var_3.left_arc, var_3.top_arc, var_3.bottom_arc, 0);
-  }
-  else {
+  } else {
     level.player playerlinktodelta(var_7, "tag_origin", 1, var_3.right_arc, var_3.left_arc, var_3.top_arc, var_3.bottom_arc, 1);
   }
 
@@ -203,8 +202,7 @@ cnd_rpl_rope_setup(var_0, var_1) {
 
   if(var_1.rappel_type == "stealth") {
     level.cnd_rappel_player_rope linkto(level.cnd_rappel_tele_rope, "J_Tele_50", (0, 0, 0), var_2);
-  }
-  else {
+  } else {
     thread cnd_delay_rope_link();
   }
 
@@ -218,8 +216,7 @@ cnd_rpl_rope_setup(var_0, var_1) {
 
   if(var_1.rappel_type == "combat") {
     level.rpl_physical_rope_origin.angles = level.rpl_physical_rope_origin.angles + (-1.2, 0, 0);
-  }
-  else {}
+  } else {}
 }
 
 cnd_delay_rope_link() {
@@ -333,11 +330,9 @@ cnd_plyr_rpl_setup_globals(var_0, var_1, var_2) {
 
   if(var_2 == "rope_ref_stealth") {
     var_3 = getent("player_rappel_ground_ref_stealth", "targetname");
-  }
-  else if(var_2 == "rope_ref_combat") {
+  } else if(var_2 == "rope_ref_combat") {
     var_3 = getent("player_rappel_ground_ref_combat", "targetname");
-  }
-  else {
+  } else {
     var_3 = getent("player_rappel_ground_ref_stealth", "targetname");
   }
 
@@ -376,8 +371,7 @@ cnd_plyr_rpl_setup_player(var_0, var_1) {
 
   if(isDefined(var_1.allow_sprint) && var_1.allow_sprint) {
     level.player allowsprint(1);
-  }
-  else {
+  } else {
     level.player allowsprint(0);
   }
 
@@ -440,11 +434,9 @@ cnd_rpl_calc_move(var_0, var_1) {
 
     if(var_25) {
       var_0.right_move_strength = 0;
-    }
-    else if(abs(var_22) > var_24 - 0.1) {
+    } else if(abs(var_22) > var_24 - 0.1) {
       var_0.right_move_strength = var_0.right_move_strength * 0.5;
-    }
-    else if(abs(var_22) > var_24 - 0.2) {
+    } else if(abs(var_22) > var_24 - 0.2) {
       var_0.right_move_strength = var_0.right_move_strength * 0.75;
     }
   }
@@ -469,8 +461,7 @@ cnd_rpl_plyr_too_close_to_allies(var_0) {
   foreach(var_10 in level.allies) {
     if(var_10.animname == "rorke") {
       var_10.player_moving_toward_me = var_0.right_move_strength != 0 && common_scripts\utility::sign(var_0.right_move_strength) > 0 || var_8 != 0 && common_scripts\utility::sign(var_8) > 0;
-    }
-    else {
+    } else {
       var_10.player_moving_toward_me = var_0.right_move_strength != 0 && common_scripts\utility::sign(var_0.right_move_strength) < 0 || var_8 != 0 && common_scripts\utility::sign(var_8) < 0;
     }
 
@@ -481,17 +472,13 @@ cnd_rpl_plyr_too_close_to_allies(var_0) {
 
     if(isDefined(var_0.jumping) && var_0.jumping) {
       var_7 = var_6;
-    }
-    else if(var_10.move_type == "idle" || issubstr(var_10.move_type, "move_away")) {
+    } else if(var_10.move_type == "idle" || issubstr(var_10.move_type, "move_away")) {
       var_7 = var_2;
-    }
-    else if(issubstr(var_10.move_type, "move_back")) {
+    } else if(issubstr(var_10.move_type, "move_back")) {
       var_7 = var_3;
-    }
-    else if(var_10.move_type == "turn_away") {
+    } else if(var_10.move_type == "turn_away") {
       var_7 = var_4;
-    }
-    else {
+    } else {
       var_7 = var_5;
     }
 
@@ -513,8 +500,7 @@ cnd_rpl_plyr_too_close_to_allies(var_0) {
 cnd_rpl_do_vertical_move(var_0, var_1) {
   if(!common_scripts\utility::flag("player_allow_rappel_down")) {
     common_scripts\utility::flag_clear("player_moving_down");
-  }
-  else {
+  } else {
     var_2 = var_0.vertical_change_this_update;
     var_0.vertical_change_this_update = 0;
     var_0.glass_broken_under_player = 0;
@@ -564,15 +550,13 @@ cnd_rpl_do_vertical_move(var_0, var_1) {
     if(isDefined(level.rappel_lower_limit) && var_0.vertical_change_this_update < 0) {
       if(var_0.player_at_lower_limit) {
         var_0.vertical_change_this_update = 0;
-      }
-      else {
+      } else {
         var_0.vertical_change_this_update = max(var_0.vertical_change_this_update, var_0.dist_player_to_top - level.rappel_lower_limit);
       }
     } else if(isDefined(level.rappel_upper_limit) && var_0.vertical_change_this_update > 0) {
       if(var_0.player_at_upper_limit) {
         var_0.vertical_change_this_update = 0;
-      }
-      else {
+      } else {
         var_0.vertical_change_this_update = min(var_0.vertical_change_this_update, var_0.dist_player_to_top - level.rappel_upper_limit);
       }
     }
@@ -658,8 +642,7 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
 
       if(var_0.on_right_side) {
         var_0.player_percent_toward_max_yaw = var_22 / (var_20 - var_4);
-      }
-      else {
+      } else {
         var_0.player_percent_toward_max_yaw = var_22 / (abs(var_21) - var_4);
       }
 
@@ -682,11 +665,9 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
 
     if(var_29) {
       var_31 = var_0.rope_start_rot + var_21;
-    }
-    else if(var_30) {
+    } else if(var_30) {
       var_31 = var_0.rope_start_rot + var_20;
-    }
-    else {
+    } else {
       var_31 = var_5 + var_0.move_vel * var_0.time_slice;
       var_31 = min(var_31, var_0.rope_start_rot + var_20);
       var_31 = max(var_31, var_0.rope_start_rot + var_21);
@@ -701,14 +682,11 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
 
       if(var_0.right_move_strength == 0 && var_32 <= var_33) {
         var_34 = var_32;
-      }
-      else if(var_0.right_move_strength == 0) {
+      } else if(var_0.right_move_strength == 0) {
         var_34 = var_33;
-      }
-      else if(common_scripts\utility::sign(var_0.right_move_strength) == 1) {
+      } else if(common_scripts\utility::sign(var_0.right_move_strength) == 1) {
         var_34 = var_32;
-      }
-      else {
+      } else {
         var_34 = var_33;
       }
 
@@ -729,8 +707,7 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
 
           if(var_0.lateral_change_this_update == 0) {
             var_0.at_edge_sign = 0;
-          }
-          else {
+          } else {
             var_0.at_edge_sign = common_scripts\utility::sign(var_0.lateral_change_this_update);
           }
         }
@@ -751,8 +728,7 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
 
       if(var_0.dist_player_to_top == 0) {
         var_39 = var_38;
-      }
-      else {
+      } else {
         var_39 = asin(var_38 / var_0.dist_player_to_top);
       }
 
@@ -769,8 +745,7 @@ cnd_rpl_do_lateral_move(var_0, var_1) {
 
     if(!var_40 && var_41) {
       var_0.last_player_angles_worldspace = var_0.player_angles_worldspace;
-    }
-    else {
+    } else {
       var_0.last_player_angles_worldspace = undefined;
     }
   }
@@ -867,16 +842,14 @@ cnd_rpl_do_wind(var_0, var_1) {
 
   if(var_0.wind_state == "strong") {
     var_0.wind_state = "down";
-  }
-  else if(var_0.wind_state == "stop" || var_0.wind_state == "calm") {
+  } else if(var_0.wind_state == "stop" || var_0.wind_state == "calm") {
     var_0.wind_state = "up";
     common_scripts\utility::exploder("6111");
   }
 
   if(var_0.wind_state == "up") {
     var_0.wind_strength = var_0.wind_strength + var_4;
-  }
-  else if(var_0.wind_state == "down") {
+  } else if(var_0.wind_state == "down") {
     var_0.wind_strength = var_0.wind_strength - var_5;
   }
 
@@ -953,8 +926,7 @@ cnd_rpl_do_rope(var_0, var_1) {
   if(var_5) {
     if(var_0.stop_anim_direction == "left") {
       level.cnd_rappel_player_rope setanimknobrestart( % cnd_rappel_lag_l_rope_player, 1, 0.2, 1);
-    }
-    else {
+    } else {
       level.cnd_rappel_player_rope setanimknobrestart( % cnd_rappel_lag_r_rope_player, 1, 0.2, 1);
     }
   } else if(var_6)
@@ -965,17 +937,13 @@ cnd_rpl_do_rope(var_0, var_1) {
     }
     if(var_8) {
       level.cnd_rappel_player_rope setanimknob( % cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_0.wind_strength);
-    }
-    else if(var_7) {
+    } else if(var_7) {
       level.cnd_rappel_player_rope setanimknob( % cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_0.wind_strength);
-    }
-    else if(var_10) {
+    } else if(var_10) {
       level.cnd_rappel_player_rope setanimknob( % cnd_rappel_idle_rope_player_add, 1.0, 0.2, 1.0);
-    }
-    else if(var_9) {
+    } else if(var_9) {
       level.cnd_rappel_player_rope setanimknob( % cnd_rappel_wind_shake_rope_player, 1.0, 0.2, var_11);
-    }
-    else {}
+    } else {}
   }
 }
 
@@ -985,8 +953,7 @@ cnd_rpl_do_weapon_bob(var_0, var_1) {
 
   if(var_0.max_rotation_speed > 0) {
     var_0.horz_leg_move_percent = abs(var_0.lateral_change_this_update) / (var_0.max_rotation_speed * var_0.time_slice);
-  }
-  else {
+  } else {
     var_0.horz_leg_move_percent = 0;
   }
 
@@ -1017,22 +984,19 @@ cnd_rpl_do_weapon_bob(var_0, var_1) {
 
     if(var_1.rappel_type == "inverted") {
       var_10 = var_0.down_leg_move_percent;
-    }
-    else {
+    } else {
       var_9 = var_0.horz_leg_move_percent;
     }
 
     if(abs(var_0.vertical_change_this_update) == 0) {
       var_9 = 1.0;
-    }
-    else if(abs(var_0.lateral_change_this_update) == 0) {
+    } else if(abs(var_0.lateral_change_this_update) == 0) {
       var_9 = 0.0;
     }
 
     if(var_1.rappel_type == "inverted") {
       var_9 = 1 - var_10;
-    }
-    else {
+    } else {
       var_10 = 1 - var_9;
     }
 
@@ -1098,8 +1062,7 @@ cnd_rpl_do_move_bob(var_0, var_1) {
 
     if(var_0.max_rotation_speed > 0) {
       var_11 = abs(var_0.lateral_change_this_update) / (var_0.max_rotation_speed * var_0.time_slice);
-    }
-    else {
+    } else {
       var_11 = 0;
     }
 
@@ -1115,8 +1078,7 @@ cnd_rpl_do_move_bob(var_0, var_1) {
 
     if(var_15 > 0) {
       var_0.player_anim_origin setflaggedanim("bobanim", var_8, var_14, 0.15, var_15);
-    }
-    else {
+    } else {
       var_0.player_anim_origin clearanim(var_8, 0.2);
     }
 
@@ -1142,8 +1104,7 @@ cnd_rpl_legs_notetracks(var_0, var_1, var_2) {
     }
     if(var_3 == var_1) {
       var_0.current_foot = "left";
-    }
-    else if(var_3 == var_2) {
+    } else if(var_3 == var_2) {
       var_0.current_foot = "right";
     }
 
@@ -1180,8 +1141,7 @@ cnd_rpl_do_legs(var_0, var_1) {
 
     if(var_4 && var_3) {
       var_0.move_state = var_0.move_state_loop;
-    }
-    else if(!var_3) {
+    } else if(!var_3) {
       var_0.move_state = var_0.move_state_idle;
     }
   } else if(var_0.move_state == var_0.move_state_stop) {
@@ -1189,8 +1149,7 @@ cnd_rpl_do_legs(var_0, var_1) {
 
     if(var_4 && !var_3) {
       var_0.move_state = var_0.move_state_idle;
-    }
-    else if(var_3) {
+    } else if(var_3) {
       var_0.move_state = var_0.move_state_loop;
     }
   } else if(var_0.move_state == var_0.move_state_loop_run) {
@@ -1200,11 +1159,9 @@ cnd_rpl_do_legs(var_0, var_1) {
 
     if(!var_3) {
       var_0.move_state = var_0.move_state_stop;
-    }
-    else if(var_5) {
+    } else if(var_5) {
       var_0.move_state = var_0.move_state_idle;
-    }
-    else if(!var_6 || !var_7) {
+    } else if(!var_6 || !var_7) {
       var_0.move_state = var_0.move_state_loop;
     }
   } else {
@@ -1214,11 +1171,9 @@ cnd_rpl_do_legs(var_0, var_1) {
 
     if(!var_3) {
       var_0.move_state = var_0.move_state_stop;
-    }
-    else if(var_5) {
+    } else if(var_5) {
       var_0.move_state = var_0.move_state_idle;
-    }
-    else if(var_6 && var_7) {
+    } else if(var_6 && var_7) {
       var_0.move_state = var_0.move_state_loop_run;
     }
   }
@@ -1293,8 +1248,7 @@ rpl_legs_process_state(var_0) {
 
     if(var_0.move_state == var_0.move_state_stop) {
       var_4 = var_0.stop_anim_direction;
-    }
-    else {
+    } else {
       var_4 = rpl_legs_get_start_move_direction(var_0);
       var_0.last_start_anim_direction = var_4;
       var_0.stop_anim_direction = var_4;
@@ -1453,14 +1407,11 @@ rpl_legs_get_animation_rate(var_0, var_1, var_2) {
 
   if(var_1 == "down") {
     return var_0.down_leg_move_percent * var_5;
-  }
-  else if(var_1 == "up") {
+  } else if(var_1 == "up") {
     return var_0.up_leg_move_percent * var_4;
-  }
-  else if(var_1 == "left" || var_1 == "right") {
+  } else if(var_1 == "left" || var_1 == "right") {
     return var_0.horz_leg_move_percent * var_3;
-  }
-  else if(var_1 == "left_down" || var_1 == "right_down") {
+  } else if(var_1 == "left_down" || var_1 == "right_down") {
     var_6 = length((var_0.horz_leg_move_percent, var_0.down_leg_move_percent, 0));
     var_7 = var_5;
     return var_6 * var_7;
@@ -1476,13 +1427,13 @@ rpl_legs_get_direction_weights(var_0) {
   var_2 = 0;
 
   foreach(var_4 in var_1) {
-  var_2 = var_2 + var_0[var_4];
+    var_2 = var_2 + var_0[var_4];
   }
 
   var_6 = [];
 
   foreach(var_4 in var_1) {
-  var_6[var_4] = var_0[var_4] / var_2;
+    var_6[var_4] = var_0[var_4] / var_2;
   }
 
   return var_6;
@@ -1563,8 +1514,7 @@ rpl_legs_get_move_directions(var_0, var_1) {
 
     if(common_scripts\utility::array_contains(var_3, "left") && common_scripts\utility::array_contains(var_3, "left_down")) {
       var_2["left_down"] = undefined;
-    }
-    else if(common_scripts\utility::array_contains(var_3, "right") && common_scripts\utility::array_contains(var_3, "right_down")) {
+    } else if(common_scripts\utility::array_contains(var_3, "right") && common_scripts\utility::array_contains(var_3, "right_down")) {
       var_2["right_down"] = undefined;
     }
   }
@@ -1592,8 +1542,7 @@ rpl_legs_get_blend_time(var_0, var_1, var_2) {
 rpl_legs_get_clear_blend_time(var_0, var_1, var_2) {
   if(var_0.move_state == var_0.move_state_jump) {
     return var_0.leg_jump_anim_blend_time;
-  }
-  else if(var_1 == var_0.animtype_start) {
+  } else if(var_1 == var_0.animtype_start) {
     if(var_0.move_state == var_0.move_state_start) {
       return var_0.leg_clear_anim_blend_time_fast;
     }
@@ -1750,14 +1699,11 @@ rpl_legs_set_anim(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_6 && var_7) {
     level.rappel_player_legs setflaggedanimrestart(var_5, var_0, var_1, var_2, var_3);
-  }
-  else if(var_6) {
+  } else if(var_6) {
     level.rappel_player_legs setanimrestart(var_0, var_1, var_2, var_3);
-  }
-  else if(var_7) {
+  } else if(var_7) {
     level.rappel_player_legs setflaggedanim(var_5, var_0, var_1, var_2, var_3);
-  }
-  else {
+  } else {
     level.rappel_player_legs setanim(var_0, var_1, var_2, var_3);
   }
 }
@@ -1769,51 +1715,37 @@ rpl_legs_clear_anim(var_0, var_1) {
 rpl_legs_get_anim_type(var_0) {
   if(var_0.move_state == var_0.move_state_start) {
     return var_0.animtype_start;
-  }
-  else if(var_0.move_state == var_0.move_state_idle) {
+  } else if(var_0.move_state == var_0.move_state_idle) {
     return var_0.animtype_idle;
-  }
-  else if(var_0.move_state == var_0.move_state_stop && isDefined(var_0.was_running) && var_0.was_running) {
+  } else if(var_0.move_state == var_0.move_state_stop && isDefined(var_0.was_running) && var_0.was_running) {
     return var_0.animtype_run_stop;
-  }
-  else if(var_0.move_state == var_0.move_state_stop) {
+  } else if(var_0.move_state == var_0.move_state_stop) {
     return var_0.animtype_stop;
-  }
-  else if(var_0.move_state == var_0.move_state_loop) {
+  } else if(var_0.move_state == var_0.move_state_loop) {
     return var_0.animtype_loop;
-  }
-  else if(var_0.move_state == var_0.move_state_loop_run) {
+  } else if(var_0.move_state == var_0.move_state_loop_run) {
     return var_0.animtype_loop_run;
-  }
-  else if(var_0.move_state == var_0.move_state_idle_shift) {
+  } else if(var_0.move_state == var_0.move_state_idle_shift) {
     return var_0.animtype_idle_shift;
-  }
-  else if(var_0.move_state == var_0.move_state_shift_back) {
+  } else if(var_0.move_state == var_0.move_state_shift_back) {
     return var_0.animtype_shift_back;
-  }
-  else {}
+  } else {}
 }
 
 rpl_get_state_anim(var_0, var_1, var_2) {
   if(var_1 == var_0.animtype_start) {
     return rpl_get_walk_start_anim(var_2);
-  }
-  else if(var_1 == var_0.animtype_loop) {
+  } else if(var_1 == var_0.animtype_loop) {
     return rpl_get_walk_loop_anim(var_2);
-  }
-  else if(var_1 == var_0.animtype_loop_run) {
+  } else if(var_1 == var_0.animtype_loop_run) {
     return rpl_get_run_loop_anim(var_2);
-  }
-  else if(var_1 == var_0.animtype_stop) {
+  } else if(var_1 == var_0.animtype_stop) {
     return rpl_get_walk_stop_anim(var_2);
-  }
-  else if(var_1 == var_0.animtype_run_stop) {
+  } else if(var_1 == var_0.animtype_run_stop) {
     return rpl_get_run_stop_anim(var_2, var_0.current_foot);
-  }
-  else if(var_1 == var_0.animtype_idle) {
+  } else if(var_1 == var_0.animtype_idle) {
     return rpl_get_idle_anim(var_2);
-  }
-  else {}
+  } else {}
 }
 
 #using_animtree("player");
@@ -1908,8 +1840,7 @@ rpl_get_legs_idle_anim() {
 rpl_get_legs_jump_anim() {
   if(isDefined(level.rappel_legs_jump_anim)) {
     return level.rappel_legs_jump_anim;
-  }
-  else {
+  } else {
     return % cnd_rappel_jump_playerlegs;
   }
 }
@@ -2100,8 +2031,7 @@ cnd_plyr_rpl_handle_jump(var_0, var_1) {
 
       if(!var_5) {
         wait(var_9);
-      }
-      else {
+      } else {
         wait(var_7);
       }
 
@@ -2203,8 +2133,7 @@ rpl_get_jump_percent_considered_complete(var_0) {
 
   if(isDefined(level.rappel_rotate_jump_anim) || var_1 == "jump_small") {
     return 1.0;
-  }
-  else {
+  } else {
     return 0.65;
   }
 }
@@ -2214,11 +2143,9 @@ rpl_get_rotate_jump_anim(var_0) {
 
   if(isDefined(level.rappel_rotate_jump_anim)) {
     return level.rappel_rotate_jump_anim;
-  }
-  else if(var_1 == "jump_small") {
+  } else if(var_1 == "jump_small") {
     return % rappel_movement_player_jump_rotate_sm;
-  }
-  else {
+  } else {
     return % rappel_movement_player_jump_rotate;
   }
 }
@@ -2326,8 +2253,7 @@ plyr_rappel_jump_down(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = % rappel_movement_player_jump_rotate;
-  }
-  else {
+  } else {
     var_2 = % rappel_movement_player_jump_rotate2;
   }
 

@@ -2089,9 +2089,7 @@ handleworlddeath(param_00, param_01, param_02, param_03) {
   if((level.teambased && param_00.team != self.team) || !level.teambased) {
     if(isDefined(level.onnormaldeath) && isplayer(param_00) || isagent(param_00) && param_00.team != "spectator") {
       if(!level.gameended) {
-        [
-          [level.onnormaldeath]
-        ](self, param_00, param_01, param_02);
+        [[level.onnormaldeath]](self, param_00, param_01, param_02);
         return;
       }
     }

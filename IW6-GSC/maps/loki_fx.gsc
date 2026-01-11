@@ -577,8 +577,7 @@ ai_space_headshot_death_fxnow() {
 
       if(gettimescale() < 0.5) {
         self playSound("space_npc_helmet_shatter_slomo");
-      }
-      else {
+      } else {
         self playSound("space_npc_helmet_shatter");
       }
     }

@@ -8,7 +8,6 @@
 #include scripts\core_common\ai\systems\blackboard;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\spawner_shared;
-
 #namespace archetype_human_rpg;
 
 autoexec main() {
@@ -36,7 +35,7 @@ private archetypehumanrpgonanimscriptedcallback(entity) {
 }
 
 private function_daf99f58() {
-  if(self.subarchetype === #"human_rpg") {
+  if(self.subarchetype === # "human_rpg") {
     self.var_b3aacd00 = getweapon(#"hash_3b5610f58856b4ea");
     self.var_2fcec084 = getweapon(#"hash_1d8ec79043d16eb");
     self.var_b999a026 = 0;
@@ -65,7 +64,7 @@ private function_567e5a33() {
       }
 
       self.var_b999a026 = 1;
-      self waittill(#"weapon_fired", #"enemy", #"missile_fire");
+      self waittill(#"weapon_fired", # "enemy", # "missile_fire");
     }
 
     if(!(isDefined(var_70a33a38) && var_70a33a38) && isDefined(self.var_b999a026) && self.var_b999a026) {

@@ -14,7 +14,6 @@
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
 #include scripts\core_common\values_shared;
-
 #namespace load;
 
 autoexec __init__system__() {
@@ -225,7 +224,7 @@ map_is_early_in_the_game() {
 }
 
 player_throwgrenade_timer() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
   self.lastgrenadetime = 0;
 
   while(true) {
@@ -337,7 +336,7 @@ calculate_map_center() {
     }
 
     for(index = 0; index < nodes.size; index++) {
-      if(nodes[index].type == #"bad node") {
+      if(nodes[index].type == # "bad node") {
         println("<dev string:xb4>", nodes[index].origin);
         continue;
       }
@@ -432,7 +431,7 @@ all_players_spawned() {
 }
 
 shock_onpain() {
-  self endon(#"death", #"disconnect", #"killonpainmonitor");
+  self endon(#"death", # "disconnect", # "killonpainmonitor");
 
   if(getdvarstring(#"blurpain") == "") {
     setdvar(#"blurpain", "on");

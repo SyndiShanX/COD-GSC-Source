@@ -16,8 +16,7 @@ monitor_potus_health() {
   while(true) {
     if(!isDefined(level.convoy.vh_potus) || level.convoy.vh_potus.armor <= 0) {
       str_text = "DEAD";
-    }
-    else {
+    } else {
       n_health = level.convoy.vh_potus.armor;
       n_health_max = level.convoy.vh_potus.armor_max;
       str_text = n_health + " / " + n_health_max;
@@ -32,8 +31,7 @@ monitor_g20_1_health() {
   while(true) {
     if(!isDefined(level.convoy.vh_g20_1) || level.convoy.vh_g20_1.armor <= 0) {
       str_text = "DEAD";
-    }
-    else {
+    } else {
       n_health = level.convoy.vh_g20_1.armor;
       n_health_max = level.convoy.vh_g20_1.armor_max;
       str_text = n_health + " / " + n_health_max;
@@ -48,8 +46,7 @@ monitor_g20_2_health() {
   while(true) {
     if(!isDefined(level.convoy.vh_g20_2) || level.convoy.vh_g20_2.armor <= 0) {
       str_text = "DEAD";
-    }
-    else {
+    } else {
       n_health = level.convoy.vh_g20_2.armor;
       n_health_max = level.convoy.vh_g20_2.armor_max;
       str_text = n_health + " / " + n_health_max;
@@ -64,8 +61,7 @@ monitor_lead_vehicle() {
   while(true) {
     if(!isDefined(level.convoy.leader)) {
       str_text = "UNDEFINED";
-    }
-    else {
+    } else {
       str_text = level.convoy.leader.targetname;
     }
 
@@ -80,8 +76,7 @@ monitor_f35_health() {
   while(true) {
     if(!isDefined(level.f35) || level.f35.health <= 0) {
       str_text = "DEAD";
-    }
-    else {
+    } else {
       n_health = level.f35.health_regen.health;
       n_health_max = level.f35.health_regen.health_max;
       str_text = n_health + " / " + n_health_max;

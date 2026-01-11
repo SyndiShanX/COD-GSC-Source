@@ -156,7 +156,7 @@ emp_players(origin, radius) {
 
 unemp_players(players_emped) {
   foreach(player in players_emped) {
-  player player_emp_off();
+    player player_emp_off();
   }
 }
 

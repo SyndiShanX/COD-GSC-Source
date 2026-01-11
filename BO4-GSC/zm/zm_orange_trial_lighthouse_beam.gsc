@@ -19,7 +19,6 @@
 #include scripts\zm_common\zm_pack_a_punch;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
-
 #namespace zm_orange_trial_lighthouse_beam;
 
 autoexec __init__system__() {
@@ -102,7 +101,7 @@ private setup_lighthouse() {
 
     if(isDefined(level.var_ab11c23d.vh_target)) {
       level.var_ab11c23d.vh_target.b_moving = 0;
-      level.var_ab11c23d.vh_target clientfield::set("" + #"hash_19bce46b8ab82440", 0);
+      level.var_ab11c23d.vh_target clientfield::set("" + # "hash_19bce46b8ab82440", 0);
       waitframe(1);
       level.var_ab11c23d.vh_target delete();
     }
@@ -119,7 +118,7 @@ private setup_lighthouse() {
 }
 
 function_dbad2f5a() {
-  self endon(#"death", #"hash_2b53ed06a97eb26c");
+  self endon(#"death", # "hash_2b53ed06a97eb26c");
   level.var_ab11c23d notify(#"hash_78fc5bbd712046b0");
 
   for(vh_target = spawner::simple_spawn_single(getent("virgil", "targetname")); !isDefined(vh_target); vh_target = spawner::simple_spawn_single(getent("virgil", "targetname"))) {
@@ -137,7 +136,7 @@ function_dbad2f5a() {
   self.vh_target.e_spotlight linkto(self.vh_target, "tag_origin", (0, 0, 390), (90, 0, 0));
   self waittill(#"rotatedone");
   level.var_ab11c23d clientfield::set("lighthouse_on", 3);
-  self.vh_target.e_spotlight clientfield::set("" + #"trials_lighthouse_beam", 2);
+  self.vh_target.e_spotlight clientfield::set("" + # "trials_lighthouse_beam", 2);
   self.vh_target thread zm_orange_lighthouse::function_18f63949();
   self zm_orange_lighthouse::function_2b2f2a7f();
   wait 1;
@@ -145,7 +144,7 @@ function_dbad2f5a() {
 }
 
 private function_b502c51(nd_start) {
-  self endon(#"death", #"hash_2b53ed06a97eb26c");
+  self endon(#"death", # "hash_2b53ed06a97eb26c");
 
   while(true) {
     self thread vehicle::get_on_and_go_path(nd_start);
@@ -159,7 +158,7 @@ function_f223e16f(round_reset) {
   self endon(#"death");
   self.vh_target.b_moving = 0;
   wait 2;
-  self.vh_target clientfield::set("" + #"hash_19bce46b8ab82440", 0);
+  self.vh_target clientfield::set("" + # "hash_19bce46b8ab82440", 0);
   self.vh_target.e_spotlight delete();
   self.vh_target delete();
 

@@ -125,8 +125,7 @@ run_defend_sparrow() {
 
   if(level.console || level.player common_scripts\utility::is_player_gamepad_enabled()) {
     var_2 sethintstring(&"CARRIER_USE_SPARROW_CONSOLE");
-  }
-  else {
+  } else {
     var_2 sethintstring(&"CARRIER_USE_SPARROW");
   }
 
@@ -179,8 +178,7 @@ sparrow_fire_hint() {
 
   if(var_1) {
     level.player thread maps\_utility::display_hint("fire_sparrow");
-  }
-  else {
+  } else {
     level.player thread maps\_utility::display_hint("fire_sparrow_pc");
   }
 }
@@ -569,27 +567,21 @@ heli_combat_respawn() {
   if(isDefined(level.sam_launchers) && level.sam_launchers[level.sam_launcher_index].angles[1] >= 17.5 && level.sam_launchers[level.sam_launcher_index].angles[1] < 105) {
     if(issubstr(var_0, "_1")) {
       thread spawn_repeating_heli("ds_helis_right_1");
-    }
-    else if(issubstr(var_0, "_2")) {
+    } else if(issubstr(var_0, "_2")) {
       thread spawn_repeating_heli("ds_helis_right_2");
-    }
-    else if(issubstr(var_0, "_3")) {
+    } else if(issubstr(var_0, "_3")) {
       thread spawn_repeating_heli("ds_helis_right_3");
-    }
-    else {}
+    } else {}
 
     maps\_utility::delaythread(0.4, ::run_incoming_vo, 0, 1);
   } else {
     if(issubstr(var_0, "_1")) {
       thread spawn_repeating_heli("ds_helis_left_1", 1);
-    }
-    else if(issubstr(var_0, "_2")) {
+    } else if(issubstr(var_0, "_2")) {
       thread spawn_repeating_heli("ds_helis_left_2", 1);
-    }
-    else if(issubstr(var_0, "_3")) {
+    } else if(issubstr(var_0, "_3")) {
       thread spawn_repeating_heli("ds_helis_left_3", 1);
-    }
-    else {}
+    } else {}
 
     maps\_utility::delaythread(0.4, ::run_incoming_vo, 1, 0);
   }
@@ -667,8 +659,7 @@ heli_attack_mg(var_0, var_1) {
       for(var_8 = 0; var_8 < 35; var_8++) {
         if(isDefined(level.sam_damage_dummy)) {
           common_scripts\utility::array_call(self.mgturret, ::settargetentity, var_4);
-        }
-        else {
+        } else {
           common_scripts\utility::array_call(self.mgturret, ::settargetentity, var_3);
         }
 
@@ -1045,8 +1036,7 @@ ac130_missile_take_hit() {
 
     if(var_2 == var_0[0]) {
       var_3 = anglestoright(var_2.angles) * -12;
-    }
-    else {
+    } else {
       var_3 = anglestoright(var_2.angles) * 12;
     }
 

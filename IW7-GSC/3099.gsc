@@ -10,8 +10,7 @@ func_13CC4() {
 
   if(self.func_9B4C) {
     func_0BDC::func_19AA("spaceship_ai_energy_projectile");
-  }
-  else {
+  } else {
     func_0BDC::func_19AA("spaceship_ai_30mm_projectile");
   }
 }
@@ -90,8 +89,7 @@ func_6D54() {
 
   if(func_65F1(var_00)) {
     self.var_1198.func_6D83 = "jackal_gatling_fire_at_plr";
-  }
-  else {
+  } else {
     self.var_1198.func_6D83 = "jackal_gatling_fire";
   }
 
@@ -123,8 +121,7 @@ func_6D54() {
 func_65F1(var_00) {
   if(isDefined(level.func_D127) && isDefined(var_00) && var_00 == level.func_D127) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -135,8 +132,7 @@ func_6D55() {
 
   if(func_65F1(func_7912())) {
     self.var_1198.func_6D83 = "jackal_gatling_fire_at_plr";
-  }
-  else {
+  } else {
     self.var_1198.func_6D83 = "jackal_gatling_fire";
   }
 
@@ -166,8 +162,7 @@ func_6D55() {
 func_79CF() {
   if(isDefined(self.var_1198.shootparams) && isDefined(self.var_1198.shootparams.func_0148)) {
     var_00 = self.var_1198.shootparams.func_0148;
-  }
-  else {
+  } else {
     var_00 = 1.0;
   }
 
@@ -246,8 +241,7 @@ func_7912() {
 
   if(isDefined(self.var_1198.func_E1AD)) {
     return self.var_1198.func_E1AD;
-  }
-  else if(isDefined(self.enemy)) {
+  } else if(isDefined(self.enemy)) {
     return self.enemy;
   }
 }
@@ -346,8 +340,7 @@ func_36D8(var_00) {
 func_7AAC() {
   if(self.var_1198.shootparams.func_32AF) {
     var_00 = func_79CF();
-  }
-  else {
+  } else {
     var_00 = 1;
   }
 
@@ -361,8 +354,7 @@ func_6D2F() {
   if(isDefined(var_00)) {
     if(self.var_1198.shootparams.func_32AF) {
       var_01 = func_36D3(var_00);
-    }
-    else {
+    } else {
       var_01 = func_36D6(var_00);
     }
 
@@ -420,8 +412,7 @@ func_6EAC() {
 
       if(func_0BDC::func_9C06()) {
         var_04 = self.func_6E9C.func_3C38;
-      }
-      else {
+      } else {
         var_04 = self.func_6E9C.func_3C37;
       }
 
@@ -472,8 +463,7 @@ func_6EA2(var_00) {
 
   if(func_0BDC::func_9C06()) {
     wait(randomfloatrange(self.func_6E9C.func_50CF, self.func_6E9C.func_50CE));
-  }
-  else {
+  } else {
     wait(randomfloatrange(self.func_6E9C.func_50D1, self.func_6E9C.func_50D0));
   }
 
@@ -551,8 +541,7 @@ func_6EA1(var_00, var_01) {
 
   if(level.func_241D) {
     var_04 = 3;
-  }
-  else {
+  } else {
     var_04 = 0;
   }
 
@@ -665,14 +654,11 @@ func_12E3A() {
     var_01 = self.var_1198.func_11577;
   else if(isDefined(self.var_1198.func_90EE)) {
     var_01 = self.var_1198.func_90EE;
-  }
-  else if(isDefined(self.var_1198.func_7002)) {
+  } else if(isDefined(self.var_1198.func_7002)) {
     var_01 = self.var_1198.func_7002;
-  }
-  else if(isDefined(self.var_1198.func_2534)) {
+  } else if(isDefined(self.var_1198.func_2534)) {
     var_01 = self.var_1198.func_2534;
-  }
-  else {
+  } else {
     var_02 = self _meth_8493() == "follow";
     var_03 = vehicle_getarray();
 
@@ -794,8 +780,7 @@ func_12D7B() {
 
     if(!var_01) {
       var_03 = var_03 * func_7941(var_00);
-    }
-    else if(var_02) {
+    } else if(var_02) {
       var_03 = var_03 * func_7941(var_00);
       var_03 = var_03 * func_7AF2(var_00);
       var_03 = var_03 * func_7AF9(var_00);
@@ -859,8 +844,7 @@ func_12E1A() {
 
     if(isDefined(var_4.owner) && isplayer(var_4.owner) && isDefined(var_4.func_DB07.target) && var_4.func_DB07.target == self) {
       var_05 = min((gettime() - var_4.func_DB07.starttime) / 1000 * 1.5, 2.0);
-    }
-    else if(isDefined(var_4.enemy) && var_4.enemy == self && isDefined(var_4.func_6577)) {
+    } else if(isDefined(var_4.enemy) && var_4.enemy == self && isDefined(var_4.func_6577)) {
       var_05 = min((gettime() - var_4.func_6577) / 1000 * 1.0, 1.0);
     }
 

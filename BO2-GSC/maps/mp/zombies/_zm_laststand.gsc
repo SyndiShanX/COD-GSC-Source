@@ -57,8 +57,7 @@ init() {
 player_is_in_laststand() {
   if(!(isDefined(self.no_revive_trigger) && self.no_revive_trigger)) {
     return isDefined(self.revivetrigger);
-  }
-  else {
+  } else {
     return isDefined(self.laststand) && self.laststand;
   }
 }
@@ -93,8 +92,7 @@ player_last_stand_stats(einflictor, attacker, idamage, smeansofdeath, sweapon, v
     if("zcleansed" == level.gametype) {
       if(isDefined(attacker.is_zombie) && !attacker.is_zombie) {
         attacker.kills++;
-      }
-      else {
+      } else {
         attacker.downs++;
       }
     } else
@@ -174,8 +172,7 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
 
   if(!(isDefined(self.no_revive_trigger) && self.no_revive_trigger)) {
     self revive_trigger_spawn();
-  }
-  else {
+  } else {
     self undolaststand();
   }
 
@@ -202,8 +199,7 @@ playerlaststand(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shi
 
   if(level.laststandgetupallowed) {
     self thread laststand_getup();
-  }
-  else {
+  } else {
     bleedout_time = getdvarfloat(#"player_lastStandBleedoutTime");
     self thread laststand_bleedout(bleedout_time);
   }
@@ -315,8 +311,7 @@ laststand_enable_player_weapons() {
 
   if(isDefined(self.lastactiveweapon) && self.lastactiveweapon != "none" && self hasweapon(self.lastactiveweapon) && !is_placeable_mine(self.lastactiveweapon) && !is_equipment(self.lastactiveweapon)) {
     self switchtoweapon(self.lastactiveweapon);
-  }
-  else {
+  } else {
     primaryweapons = self getweaponslistprimaries();
 
     if(isDefined(primaryweapons) && primaryweapons.size > 0) {
@@ -363,8 +358,7 @@ laststand_give_pistol() {
 
   if(isDefined(level.zombie_last_stand)) {
     [[level.zombie_last_stand]]();
-  }
-  else {
+  } else {
     self giveweapon(self.laststandpistol);
     self givemaxammo(self.laststandpistol);
     self switchtoweapon(self.laststandpistol);
@@ -432,11 +426,9 @@ bleed_out() {
 
   if(isDefined(level.is_zombie_level) && level.is_zombie_level) {
     self thread[[level.player_becomes_zombie]]();
-  }
-  else if(isDefined(level.is_specops_level) && level.is_specops_level) {
+  } else if(isDefined(level.is_specops_level) && level.is_specops_level) {
     self thread[[level.spawnspectator]]();
-  }
-  else {
+  } else {
     self.ignoreme = 0;
   }
 }
@@ -647,8 +639,7 @@ is_suiciding(revivee) {
 revive_trigger_spawn() {
   if(isDefined(level.revive_trigger_spawn_override_link)) {
     [[level.revive_trigger_spawn_override_link]](self);
-  }
-  else {
+  } else {
     radius = getdvarint(#"_id_A17166B0");
     self.revivetrigger = spawn("trigger_radius", (0, 0, 0), 0, radius, radius);
     self.revivetrigger sethintstring("");
@@ -731,8 +722,7 @@ revive_give_back_weapons(gun) {
   }
   if(gun != "none" && !is_placeable_mine(gun) && gun != "equip_gasmask_zm" && gun != "lower_equip_gasmask_zm" && self hasweapon(gun)) {
     self switchtoweapon(gun);
-  }
-  else {
+  } else {
     primaryweapons = self getweaponslistprimaries();
 
     if(isDefined(primaryweapons) && primaryweapons.size > 0) {
@@ -922,8 +912,7 @@ revive_do_revive(playerbeingrevived, revivergun) {
     self.revivetexthud destroy();
   }
 
-  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {
-  } else if(!revived) {
+  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived) {
     if(isplayer(playerbeingrevived)) {
       playerbeingrevived stoprevive(self);
     }
@@ -1046,8 +1035,7 @@ revive_success(reviver, b_track_stats) {
     reviver thread check_for_sacrifice();
   }
 
-  if(isDefined(level.missioncallbacks)) {
-  }
+  if(isDefined(level.missioncallbacks)) {}
 
   setclientsysstate("lsm", "0", self);
   self.revivetrigger delete();

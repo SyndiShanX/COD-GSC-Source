@@ -180,8 +180,7 @@ spawnTacticalInsertion() {
   self.tacticalInsertion thread watchUseTrigger(self.tacticalInsertion.enemyTrigger, ::fizzle);
   if(isDefined(self.tacticalInsertionCount)) {
     self.tacticalInsertionCount++;
-  }
-  else {
+  } else {
     self.tacticalInsertionCount = 1;
   }
   self.tacticalInsertion setCanDamage(true);

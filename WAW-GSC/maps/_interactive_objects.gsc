@@ -311,8 +311,7 @@ explodable_barrel_explode() {
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
   if(randomint(2) == 0) {
     self setModel("exploding_barrel_test_d");
-  }
-  else {
+  } else {
     self setModel("exploding_barrel_test_d");
   }
   if(dot < .5) {
@@ -437,8 +436,7 @@ explodable_oiltank_explode() {
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
   if(randomint(2) == 0) {
     self setModel("static_peleliu_oiltanker_d");
-  }
-  else {
+  } else {
     self setModel("static_peleliu_oiltanker_d");
   }
   if(dot < .5) {
@@ -561,8 +559,7 @@ explodable_oiltank_small_explode() {
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
   if(randomint(2) == 0) {
     self setModel("static_peleliu_propane_d");
-  }
-  else {
+  } else {
     self setModel("static_peleliu_propane_d");
   }
   if(dot < .5) {
@@ -682,8 +679,7 @@ explodable_bagofbarrels_explode() {
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
   if(randomint(2) == 0) {
     self setModel("dest_merchantship_net_barrels_dmg1");
-  }
-  else {
+  } else {
     self setModel("dest_merchantship_net_barrels_dmg1");
   }
   if(dot < .5) {
@@ -802,8 +798,7 @@ explodable_bagofcrates_explode() {
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
   if(randomint(2) == 0) {
     self setModel("dest_merchantship_net_crates_dmg1");
-  }
-  else {
+  } else {
     self setModel("dest_merchantship_net_crates_dmg1");
   }
   if(dot < .5) {
@@ -922,8 +917,7 @@ explodable_liferaft_explode() {
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
   if(randomint(2) == 0) {
     self setModel("dest_merchantship_lifeboat_dmg1");
-  }
-  else {
+  } else {
     self setModel("dest_merchantship_lifeboat_dmg1");
   }
   if(dot < .5) {
@@ -1042,8 +1036,7 @@ explodable_tarpcrate_explode() {
   self radiusDamage(self.origin + (0, 0, 30), blastRadius, maxDamage, minDamage, attacker);
   if(randomint(2) == 0) {
     self setModel("static_peleliu_crate_tarp_d");
-  }
-  else {
+  } else {
     self setModel("static_peleliu_crate_tarp_d");
   }
   if(dot < .5) {
@@ -1164,8 +1157,7 @@ flammable_crate_explode() {
   }
   if(randomint(2) == 0) {
     self setModel("global_flammable_crate_jap_piece01_d");
-  }
-  else {
+  } else {
     self setModel("global_flammable_crate_jap_piece01_d");
   }
   if(dot < .5) {
@@ -1214,8 +1206,7 @@ shuddering_entity_think() {
     self waittill("damage", other, damage, direction_vec, point);
     if(helmet) {
       self vibrate(direction_vec, 20, 0.6, 0.75);
-    }
-    else {
+    } else {
       self vibrate(direction_vec, 0.4, 0.4, 0.4);
     }
     self waittill("rotatedone");
@@ -1230,8 +1221,7 @@ tincan_think() {
   self waittill("damage", damage, ent);
   if(isSentient(ent)) {
     direction_org = ((ent getEye()) - (0, 0, (randomint(50) + 50)));
-  }
-  else {
+  } else {
     direction_org = ent.origin;
   }
   direction_vec = vectornormalize(self.origin - direction_org);
@@ -1254,8 +1244,7 @@ helmet_logic() {
   self waittill("damage", damage, ent);
   if(isSentient(ent)) {
     direction_org = ent getEye();
-  }
-  else {
+  } else {
     direction_org = ent.origin;
   }
   direction_vec = vectornormalize(self.origin - direction_org);
@@ -1279,8 +1268,7 @@ allowBreak(ent) {
   }
   if(level.breakingEnts.size == 0) {
     return false;
-  }
-  else {
+  } else {
     for(i = 0; i < level.breakingEnts.size; i++) {
       if(ent == level.breakingEnts[i]) {
         return true;
@@ -1472,8 +1460,7 @@ breakable_logic(type) {
     case "wood box":
       if(isDefined(level.crateImpactSound)) {
         soundAlias = level.crateImpactSound;
-      }
-      else {
+      } else {
         soundAlias = "bullet_large_vase";
       }
       fx = level.breakables_fx["box"][randomint(level.breakables_fx["box"].size)];
@@ -1512,8 +1499,7 @@ breakable_logic(type) {
   }
   if(!isDefined(self.dontremove)) {
     self delete();
-  }
-  else {
+  } else {
     self.dontremove = false;
   }
   self notify("ok_remove");
@@ -1778,8 +1764,7 @@ pieces_move(origin) {
     vec = vectorScale(vec, 125 + randomfloat(25));
     if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(4000)) * -1, 5, 0, 0);
-    }
-    else {
+    } else {
       org rotateroll(800 + randomfloat(4000), 5, 0, 0);
     }
   } else {
@@ -1787,8 +1772,7 @@ pieces_move(origin) {
     vec = vectorScale(vec, 60 + randomfloat(50));
     if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(1000)) * -1, 5, 0, 0);
-    }
-    else {
+    } else {
       org rotateroll(800 + randomfloat(1000), 5, 0, 0);
     }
   }

@@ -13,8 +13,7 @@ scriptstruct_debug_render() {
 
     if(isDefined(selected_struct)) {
       level thread render_struct(selected_struct);
-    }
-    else {
+    } else {
       level notify("stop_struct_render");
     }
   }

@@ -66,8 +66,7 @@ main() {
 getNodeStanceYawOffset(approachtype) {
   if(approachtype == "left" || approachtype == "left_crouch") {
     return 90.0;
-  }
-  else if(approachtype == "right" || approachtype == "right_crouch") {
+  } else if(approachtype == "right" || approachtype == "right_crouch") {
     return -90.0;
   }
   return 0;
@@ -105,8 +104,7 @@ determineNodeApproachType(node) {
     }
     if(node.type == "Cover Crouch") {
       node.approachtype = "crouch_saw";
-    }
-    else if(node.type == "Cover Prone") {
+    } else if(node.type == "Cover Prone") {
       node.approachtype = "prone_saw";
     }
     assert(isDefined(node.approachtype));
@@ -231,8 +229,7 @@ setupApproachNode(firstTime) {
     angle = AngleClamp180(vectortoangles(approach_dir)[1] - approachNodeYaw + 180);
     if(angle < 0) {
       println(" (Angle of " + (0 - angle) + " right from node forward.)");
-    }
-    else {
+    } else {
       println(" (Angle of " + angle + " left from node forward.)");
     }
   }
@@ -240,8 +237,7 @@ setupApproachNode(firstTime) {
     if(isDefined(self.node)) {
       if(isDefined(self.node.approachtype)) {
         debug_arrival("Aborting cover approach: node approach type was " + self.node.approachtype);
-      }
-      else {
+      } else {
         debug_arrival("Aborting cover approach: node approach type was undefined");
       }
     } else {
@@ -673,8 +669,7 @@ startMoveTransition() {
   exitNode = undefined;
   if(isDefined(self.node) && (distanceSquared(self.origin, self.node.origin) < 225)) {
     exitNode = self.node;
-  }
-  else if(isDefined(self.prevNode)) {
+  } else if(isDefined(self.prevNode)) {
     exitNode = self.prevNode;
   }
   if(isDefined(exitNode)) {
@@ -695,8 +690,7 @@ startMoveTransition() {
     angle = AngleClamp180(vectortoangles(self.lookaheaddir)[1] - exityaw);
     if(angle < 0) {
       println(" (Angle of " + (0 - angle) + " right from node forward.)");
-    }
-    else {
+    } else {
       println(" (Angle of " + angle + " left from node forward.)");
     }
   }
@@ -1060,20 +1054,15 @@ decideMiniArrivalAnim(node, pos) {
   dir = -1;
   if(angle < -180 + 22.5) {
     dir = 2;
-  }
-  else if(angle < -180 + 67.5) {
+  } else if(angle < -180 + 67.5) {
     dir = 3;
-  }
-  else if(angle < 0) {
+  } else if(angle < 0) {
     dir = 6;
-  }
-  else if(angle < 180 - 67.5) {
+  } else if(angle < 180 - 67.5) {
     dir = 4;
-  }
-  else if(angle < 180 - 22.5) {
+  } else if(angle < 180 - 22.5) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = 2;
   }
   anims = [];

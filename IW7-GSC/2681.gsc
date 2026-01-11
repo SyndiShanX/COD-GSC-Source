@@ -105,8 +105,7 @@ powershud_finishpowercooldown(var_00, var_01) {
 
   if(var_00 == "primary") {
     self playlocalsound("mp_ability_ready_L1");
-  }
-  else {
+  } else {
     self playlocalsound("mp_ability_ready_R1");
   }
 

@@ -321,8 +321,7 @@ on_spawn_retrievable_weapon_object(watcher, player) {
   self.pickUpTrigger SetCursorHint("HINT_NOICON");
   if(isDefined(level.retrieveHints[watcher.name])) {
     self.pickUpTrigger SetHintString(level.retrieveHints[watcher.name].hint);
-  }
-  else {
+  } else {
     self.pickUpTrigger SetHintString(&"WEAPON_GENERIC_PICKUP");
   }
   player ClientClaimTrigger(self.pickUpTrigger);
@@ -487,8 +486,7 @@ weapon_object_damage(watcher) {
   }
   if(level.weaponobjectexplodethisframe) {
     wait .1 + randomfloat(.4);
-  }
-  else {
+  } else {
     wait .05;
   }
   if(!isDefined(self)) {

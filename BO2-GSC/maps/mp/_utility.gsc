@@ -154,8 +154,7 @@ brush_delete() {
 
   if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
-  }
-  else {
+  } else {
     wait 0.05;
   }
 
@@ -441,8 +440,7 @@ setlowermessage(text, time, combinemessageandtimer) {
   if(isDefined(time) && time > 0) {
     if(!isDefined(combinemessageandtimer) || !combinemessageandtimer) {
       self.lowertimer.label = &"";
-    }
-    else {
+    } else {
       self.lowermessage settext("");
       self.lowertimer.label = text;
     }
@@ -476,16 +474,14 @@ setlowermessagevalue(text, value, combinemessage) {
 
   if(!isDefined(combinemessage) || !combinemessage) {
     self.lowermessage settext(text);
-  }
-  else {
+  } else {
     self.lowermessage settext("");
   }
 
   if(isDefined(value) && value > 0) {
     if(!isDefined(combinemessage) || !combinemessage) {
       self.lowertimer.label = &"";
-    }
-    else {
+    } else {
       self.lowertimer.label = text;
     }
 
@@ -513,8 +509,7 @@ clearlowermessage(fadetime) {
 
   if(!isDefined(fadetime) || fadetime == 0) {
     setlowermessage(&"");
-  }
-  else {
+  } else {
     self endon("disconnect");
     self endon("lower_message_set");
     self.lowermessage fadeovertime(fadetime);
@@ -562,8 +557,7 @@ printboldonteamarg(text, team, arg) {
   }
 }
 
-printonteamarg(text, team, arg) {
-}
+printonteamarg(text, team, arg) {}
 
 printonplayers(text, team) {
   players = level.players;
@@ -699,11 +693,9 @@ dvarintvalue(dvar, defval, minval, maxval) {
 
   if(value > maxval) {
     value = maxval;
-  }
-  else if(value < minval) {
+  } else if(value < minval) {
     value = minval;
-  }
-  else {
+  } else {
     return value;
   }
 
@@ -723,11 +715,9 @@ dvarfloatvalue(dvar, defval, minval, maxval) {
 
   if(value > maxval) {
     value = maxval;
-  }
-  else if(value < minval) {
+  } else if(value < minval) {
     value = minval;
-  }
-  else {
+  } else {
     return value;
   }
 
@@ -783,15 +773,13 @@ loop_fx_sound(alias, origin, ender, timeout) {
 exploder_damage() {
   if(isDefined(self.v["delay"])) {
     delay = self.v["delay"];
-  }
-  else {
+  } else {
     delay = 0;
   }
 
   if(isDefined(self.v["damage_radius"])) {
     radius = self.v["damage_radius"];
-  }
-  else {
+  } else {
     radius = 128;
   }
 
@@ -864,8 +852,7 @@ activate_individual_exploder() {
 
     if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
       self thread cannon_effect();
-    }
-    else if(isDefined(self.v["soundalias"])) {
+    } else if(isDefined(self.v["soundalias"])) {
       self thread sound_effect();
     }
   }
@@ -880,11 +867,9 @@ activate_individual_exploder() {
 
   if(self.v["exploder_type"] == "exploder") {
     self thread brush_show();
-  }
-  else if(self.v["exploder_type"] == "exploderchunk" || self.v["exploder_type"] == "exploderchunk visible") {
+  } else if(self.v["exploder_type"] == "exploderchunk" || self.v["exploder_type"] == "exploderchunk visible") {
     self thread brush_throw();
-  }
-  else {
+  } else {
     self thread brush_delete();
   }
 }
@@ -900,8 +885,7 @@ trail_effect() {
 
   if(self.v["trailfxtag"] == "tag_origin") {
     playFXOnTag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
-  }
-  else {
+  } else {
     temp_ent = spawn("script_model", self.model.origin);
     temp_ent setModel("tag_origin");
     temp_ent linkto(self.model, self.v["trailfxtag"]);
@@ -911,8 +895,7 @@ trail_effect() {
   if(isDefined(self.v["trailfxsound"])) {
     if(!isDefined(temp_ent)) {
       self.model playLoopSound(self.v["trailfxsound"]);
-    }
-    else {
+    } else {
       temp_ent playLoopSound(self.v["trailfxsound"]);
     }
   }
@@ -1030,8 +1013,7 @@ play_sound_in_space(alias, origin, master) {
 
   if(isDefined(master) && master) {
     org playsoundasmaster(alias);
-  }
-  else {
+  } else {
     org playSound(alias);
   }
 
@@ -1110,11 +1092,9 @@ createexploder(fxid) {
 getotherteam(team) {
   if(team == "allies") {
     return "axis";
-  }
-  else if(team == "axis") {
+  } else if(team == "axis") {
     return "allies";
-  }
-  else {
+  } else {
     return "allies";
   }
 
@@ -1296,8 +1276,7 @@ setclientsysstate(ssysname, ssysstate, player) {
 
   if(isDefined(player)) {
     player clientsyssetstate(level._clientsys[ssysname].sysid, ssysstate);
-  }
-  else {
+  } else {
     clientsyssetstate(level._clientsys[ssysname].sysid, ssysstate);
     level._clientsys[ssysname].sysstate = ssysstate;
   }
@@ -1327,8 +1306,7 @@ clientnotify(event) {
   if(level.clientscripts) {
     if(isplayer(self)) {
       maps\mp\_utility::setclientsysstate("levelNotify", event, self);
-    }
-    else {
+    } else {
       maps\mp\_utility::setclientsysstate("levelNotify", event);
     }
   }
@@ -1557,7 +1535,7 @@ combinearrays(array1, array2) {
   }
 
   foreach(elem in array2) {
-  array1[array1.size] = elem;
+    array1[array1.size] = elem;
   }
 
   return array1;
@@ -1588,9 +1566,7 @@ comparesizesfx(org, array, dist, comparefunc) {
     for(i = 0; i < keys.size; i++) {
       newdistsqr = distancesquared(array[keys[i]].v["origin"], org);
 
-      if([
-          [comparefunc]
-        ](newdistsqr, distsqr)) {
+      if([[comparefunc]](newdistsqr, distsqr)) {
         continue;
       }
       distsqr = newdistsqr;
@@ -1635,9 +1611,7 @@ comparesizes(org, array, dist, comparefunc) {
       }
       newdistsqr = distancesquared(array[keys[i]].origin, org);
 
-      if([
-          [comparefunc]
-        ](newdistsqr, distsqr)) {
+      if([[comparefunc]](newdistsqr, distsqr)) {
         continue;
       }
       distsqr = newdistsqr;
@@ -2105,8 +2079,7 @@ waittillnotmoving() {
 
   if(self.classname == "grenade") {
     self waittill("stationary");
-  }
-  else {
+  } else {
     for(prevorigin = self.origin; 1; prevorigin = self.origin) {
       wait 0.15;
 
@@ -2149,8 +2122,7 @@ closestpointonline(point, linestart, lineend) {
 
   if(t < 0.0) {
     return linestart;
-  }
-  else if(t > 1.0) {
+  } else if(t > 1.0) {
     return lineend;
   }
 
@@ -2205,8 +2177,7 @@ freeze_player_controls(boolean) {
 
   if(boolean && isDefined(self)) {
     self freezecontrols(boolean);
-  }
-  else if(!boolean && isDefined(self) && !level.gameended) {
+  } else if(!boolean && isDefined(self) && !level.gameended) {
     self freezecontrols(boolean);
   }
 }
@@ -2270,8 +2241,7 @@ playsoundinspace(alias, origin, master) {
 
   if(isDefined(master) && master) {
     org playsoundasmaster(alias);
-  }
-  else {
+  } else {
     org playSound(alias);
   }
 
@@ -2345,8 +2315,7 @@ getlastweapon() {
 
   if(self hasweapon(self.lastnonkillstreakweapon)) {
     last_weapon = self.lastnonkillstreakweapon;
-  }
-  else if(self hasweapon(self.lastdroppableweapon)) {
+  } else if(self hasweapon(self.lastdroppableweapon)) {
     last_weapon = self.lastdroppableweapon;
   }
 
@@ -2445,8 +2414,7 @@ getplayerfromclientnum(clientnum) {
 setclientfield(field_name, value) {
   if(self == level) {
     codesetworldclientfield(field_name, value);
-  }
-  else {
+  } else {
     codesetclientfield(self, field_name, value);
   }
 }
@@ -2458,8 +2426,7 @@ setclientfieldtoplayer(field_name, value) {
 getclientfield(field_name) {
   if(self == level) {
     return codegetworldclientfield(field_name);
-  }
-  else {
+  } else {
     return codegetclientfield(self, field_name);
   }
 }
@@ -2530,8 +2497,7 @@ domaxdamage(origin, attacker, inflictor, headshot, mod) {
   }
   if(isDefined(self.maxhealth)) {
     damage = self.maxhealth + 1;
-  }
-  else {
+  } else {
     damage = self.health + 1;
   }
 

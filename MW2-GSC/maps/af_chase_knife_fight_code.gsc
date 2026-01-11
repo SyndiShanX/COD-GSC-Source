@@ -189,8 +189,7 @@ eq_changes(val, fade_time) {
 
   if(fade_time) {
     level.eq_ent MoveTo((val, 0, 0), fade_time);
-  }
-  else {
+  } else {
     level.eq_ent.origin = (val, 0, 0);
   }
 }
@@ -411,7 +410,7 @@ spawn_fake_wrestlers() {
   wait( 1.2 );
 
   blend_to_knife_dof( 1.2 );
-	
+  	
   */
 
   time = 1.2;
@@ -635,95 +634,95 @@ shepherd_stumbles() {
 
     if(trace_passed && flag("shepherd_can_run")) // && see_moment_spot )// && !flag( "dont_spawn_shepherd_stumble" ) ) {
       break;
-    }
-
-    wait 0.05;
   }
 
-  level notify("run_shep_run");
+  wait 0.05;
+}
 
-  self AllowedStances("stand");
-  //	self thread anim_custom_animmode_solo( self, "gravity", "prone_stand" );
-  //	wait 50;
-  ////	wait 0.05;
-  //	animation = self getanim( "prone_stand" );
-  //	self SetAnim( animation, 1, 0, 2 );
-  //	wait 1.2;
-  //	self notify( "stopanimscripted" );
+level notify("run_shep_run");
 
-  thread play_helicopter_exit_sound();
+self AllowedStances("stand");
+//	self thread anim_custom_animmode_solo( self, "gravity", "prone_stand" );
+//	wait 50;
+////	wait 0.05;
+//	animation = self getanim( "prone_stand" );
+//	self SetAnim( animation, 1, 0, 2 );
+//	wait 1.2;
+//	self notify( "stopanimscripted" );
 
-  struct = getstruct(self.target, "targetname");
-  struct anim_reach_solo(self, "flee");
+thread play_helicopter_exit_sound();
 
-  level notify("shepherd_runs");
-  //SetSavedDvar( "compass", 1 );
-  goal_struct = getstruct("start_player_turnbuckle", "targetname");
-  self SetGoalPos(goal_struct.origin);
-  thread make_clouds_near_goal_struct(goal_struct);
+struct = getstruct(self.target, "targetname");
+struct anim_reach_solo(self, "flee");
 
-  delayThread(3, ::flag_set, "fog_out_stumble_shepherd");
+level notify("shepherd_runs");
+//SetSavedDvar( "compass", 1 );
+goal_struct = getstruct("start_player_turnbuckle", "targetname");
+self SetGoalPos(goal_struct.origin);
+thread make_clouds_near_goal_struct(goal_struct);
 
-  animation = self getanim("flee");
-  time = GetAnimLength(animation);
-  start_time = GetTime();
-  struct thread anim_custom_animmode_solo(self, "gravity", "flee");
-  self playSound("scn_afchase_shepherd_runoff");
+delayThread(3, ::flag_set, "fog_out_stumble_shepherd");
 
-  wait_for_buffer_time_to_pass(start_time, time - 2.4);
+animation = self getanim("flee");
+time = GetAnimLength(animation);
+start_time = GetTime();
+struct thread anim_custom_animmode_solo(self, "gravity", "flee");
+self playSound("scn_afchase_shepherd_runoff");
 
-  wait_for_buffer_time_to_pass(start_time, time - 2.0);
+wait_for_buffer_time_to_pass(start_time, time - 2.4);
 
-  stumble_path = getstruct("stumble_path", "targetname");
-  self thread maps\_spawner::go_to_node(stumble_path, "struct");
+wait_for_buffer_time_to_pass(start_time, time - 2.0);
 
-  // safer than changing the map at this point
-  path = stumble_path;
-  for(;;) {
-    if(!isDefined(path.target)) {
-      break;
-    }
-    path = getstruct(path.target, "targetname");
+stumble_path = getstruct("stumble_path", "targetname");
+self thread maps\_spawner::go_to_node(stumble_path, "struct");
+
+// safer than changing the map at this point
+path = stumble_path;
+for(;;) {
+  if(!isDefined(path.target)) {
+    break;
   }
-  path.radius = 86.7;
+  path = getstruct(path.target, "targetname");
+}
+path.radius = 86.7;
 
-  wait_for_buffer_time_to_pass(start_time, time - 0.8);
-  self notify("stop_animmode");
-  self anim_stopanimscripted();
+wait_for_buffer_time_to_pass(start_time, time - 0.8);
+self notify("stop_animmode");
+self anim_stopanimscripted();
 
-  level notify("stop_random_breathing_sounds");
+level notify("stop_random_breathing_sounds");
 
-  flag_set("stop_being_stunned");
+flag_set("stop_being_stunned");
 
-  self waittill("reached_path_end");
-  /*
-  self.goalradius = 600;
-  self waittill( "goal" );	// need nodes first
+self waittill("reached_path_end");
+/*
+self.goalradius = 600;
+self waittill( "goal" );	// need nodes first
 
-  self.goalradius = 64;
-  self waittill( "goal" );	// need nodes first
-  */
-  //	level.sandstorm_min_dist = 2500;
+self.goalradius = 64;
+self waittill( "goal" );	// need nodes first
+*/
+//	level.sandstorm_min_dist = 2500;
 
-  animation = level.scr_anim["shepherd"]["turn_buckle_idle"][0];
+animation = level.scr_anim["shepherd"]["turn_buckle_idle"][0];
 
-  self SetAnimKnobAll(animation, level.ai_root_anim, 1, 0.8, 1);
-  self animcustom(::forever);
+self SetAnimKnobAll(animation, level.ai_root_anim, 1, 0.8, 1);
+self animcustom(::forever);
 
-  ent = spawn_tag_origin();
-  ent.origin = self.origin;
-  ent.angles = self.angles;
+ent = spawn_tag_origin();
+ent.origin = self.origin;
+ent.angles = self.angles;
 
-  self LinkTo(ent);
-  time = 1.1;
-  ent MoveTo(level.shepherd.origin, time, 0, time);
-  wait time;
-  Objective_OnEntity(obj("get_shepherd"), level.shepherd);
-  level.compass_ent = level.shepherd;
+self LinkTo(ent);
+time = 1.1;
+ent MoveTo(level.shepherd.origin, time, 0, time);
+wait time;
+Objective_OnEntity(obj("get_shepherd"), level.shepherd);
+level.compass_ent = level.shepherd;
 
-  level.shepherd show();
-  ent Delete();
-  self Delete();
+level.shepherd show();
+ent Delete();
+self Delete();
 }
 
 forever() {
@@ -792,8 +791,7 @@ make_clouds() {
 
     if(IsAlive(self)) {
       count = count - 0.3;
-    }
-    else {
+    } else {
       count = count + 0.6;
     }
     if(count >= 6) {
@@ -954,7 +952,7 @@ restore_dof() {
   // no lerping. just meant ot turn it off at the end since we have harsh sky edges that it doesn't do well.
   level notify("kill_dof_management");
   foreach(index, value in level.dof_normal) {
-  level.dofdefault[index] = value;
+    level.dofdefault[index] = value;
   }
 }
 
@@ -1580,8 +1578,7 @@ player_fails_if_does_not_occumulate() {
     pressed_enough = level.occumulator.presses.size >= 2;
     if(pressed_enough) {
       fail_count += 2;
-    }
-    else {
+    } else {
       fail_count -= 1;
     }
 
@@ -2221,8 +2218,7 @@ crawl_breath_recover() {
   level.player thread play_sound_on_entity("breathing_better");
 }
 
-crawl_hurt_pulse_clear() {
-}
+crawl_hurt_pulse_clear() {}
 
 button_needs_to_release(button_track, index) {
   timediff = GetTime() - button_track.button_last_release[index];
@@ -3020,15 +3016,15 @@ shep_blood() {
   playFX(fx, self.origin, up, forward);
 
   /*
-//	if( trace[ "normal" ][2] > 0.9 )
-	for( i = 0; i < 50; i++ )
-	{
-		vec = randomvector( 100 );
-		org = trace[ "position" ] + vec;
-		playFX( level._effect[ "deathfx_bloodpool_generic" ], org );
-		Print3d( org, "x", (1,0,0), 1, 1, 500 );
-	}
-	*/
+  //	if( trace[ "normal" ][2] > 0.9 )
+  	for( i = 0; i < 50; i++ )
+  	{
+  		vec = randomvector( 100 );
+  		org = trace[ "position" ] + vec;
+  		playFX( level._effect[ "deathfx_bloodpool_generic" ], org );
+  		Print3d( org, "x", (1,0,0), 1, 1, 500 );
+  	}
+  	*/
 
   //	level.shepherd thread animscripts\death::play_blood_pool();
 
@@ -3081,25 +3077,25 @@ scoot_rocks() {
   thread scoot_rocks_tags("j_ball_ri", "j_ankle_ri");
 
   /*
-	tags = [];
-	tags[ tags.size ] = "j_ball_le";
-	tags[ tags.size ] = "j_ball_ri";
-	
-	//MagicGrenadeManual( "fraggrenade", level.price.origin + (0,0,64), (0,0,5), 1 );
-	for( ;; )
-	{
-		foreach ( tag in tags )
-		{
-			org = self GetTagOrigin( tag );
-			//PhysicsJitter( org, 20, 10, 1, 2 );
-			//PhysicsJolt( org, 200, 100, (0,0,100) );
-			PhysicsExplosionSphere( org, 10, 5, 0.5 );
-			
-//			Print3d( org, ".", (1,0,0), 1, 0.75, 10 );
-			wait RandomFloatRange( 0.1, 0.3 );
-		}
-	}
-	*/
+  	tags = [];
+  	tags[ tags.size ] = "j_ball_le";
+  	tags[ tags.size ] = "j_ball_ri";
+  	
+  	//MagicGrenadeManual( "fraggrenade", level.price.origin + (0,0,64), (0,0,5), 1 );
+  	for( ;; )
+  	{
+  		foreach ( tag in tags )
+  		{
+  			org = self GetTagOrigin( tag );
+  			//PhysicsJitter( org, 20, 10, 1, 2 );
+  			//PhysicsJolt( org, 200, 100, (0,0,100) );
+  			PhysicsExplosionSphere( org, 10, 5, 0.5 );
+  			
+  //			Print3d( org, ".", (1,0,0), 1, 0.75, 10 );
+  			wait RandomFloatRange( 0.1, 0.3 );
+  		}
+  	}
+  	*/
 }
 
 get_pos_from_tags(tag1, tag2) {
@@ -3326,11 +3322,11 @@ ending_fade_out() {
 
   max_time = 16.5;
   max_value = 1;
-	
+  	
   max_time *= 1000;
-	
+  	
   start_time = gettime();
-	
+  	
   for( ;; )
   {
   	time = gettime();

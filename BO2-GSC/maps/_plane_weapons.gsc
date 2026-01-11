@@ -187,8 +187,7 @@ drop_bombs(amount, delay, delay_trace, trace_dist) {
 
     if(isDefined(user_delay)) {
       delay = user_delay;
-    }
-    else {
+    } else {
       delay = 0.1 + randomfloat(0.5);
     }
 

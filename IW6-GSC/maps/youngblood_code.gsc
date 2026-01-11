@@ -798,8 +798,7 @@ exp14_sounds() {
 mansion_exit_door_handler(var_0) {
   if(common_scripts\utility::flag("hesh_middle_room_in_position")) {
     var_0 maps\_anim::anim_generic(level.hesh, "youngblood_house_knockdown_friendly");
-  }
-  else {
+  } else {
     wait 1.2;
   }
 
@@ -845,8 +844,7 @@ chaos_a() {
 
   if(isDefined(level.prologue) && level.prologue) {
     common_scripts\utility::flag_wait("prologue_transient_ground_tr_loaded");
-  }
-  else {
+  } else {
     maps\_hud_util::fade_out(0, "white");
   }
 
@@ -1034,8 +1032,7 @@ chaos_cull_think() {
 
   if(level.xb3) {
     maps\_utility::vision_set_fog_changes("ygb_chaos_a_durango", var_0);
-  }
-  else {
+  } else {
     maps\_utility::vision_set_fog_changes("", var_0);
   }
 
@@ -1047,8 +1044,7 @@ chaos_cull_think() {
 
     if(level.xb3) {
       setculldist(3000);
-    }
-    else {
+    } else {
       setculldist(3000);
     }
   } else
@@ -1060,8 +1056,7 @@ chaos_cull_more() {
 
   if(level.xb3) {
     maps\_utility::vision_set_fog_changes("ygb_chaos_a_nearfog_durango", var_0);
-  }
-  else {
+  } else {
     maps\_utility::vision_set_fog_changes("ygb_chaos_a_nearfog", var_0);
   }
 
@@ -1071,8 +1066,7 @@ chaos_cull_more() {
   if(maps\_utility::is_gen4()) {
     if(level.xb3) {
       setculldist(1500);
-    }
-    else {
+    } else {
       setculldist(1500);
     }
   } else
@@ -1296,8 +1290,7 @@ chaos_b() {
 
   if(level.start_point == "start_chaos_b") {
     level.hesh maps\_utility::follow_path_and_animate(common_scripts\utility::get_target_ent("chaos_b_run"), 0);
-  }
-  else {
+  } else {
     level.hesh waittill("path_end_reached");
   }
 
@@ -1327,7 +1320,7 @@ chaos_b() {
   var_1 delete();
 
   foreach(var_3 in level.a_debris) {
-  var_3 show();
+    var_3 show();
   }
 }
 
@@ -1457,7 +1450,7 @@ chaos_b_hide_debris() {
   level.a_debris = common_scripts\utility::array_combine(level.a_debris, getEntArray("tanker_debris", "targetname"));
 
   foreach(var_1 in level.a_debris) {
-  var_1 hide();
+    var_1 hide();
   }
 }
 
@@ -1537,8 +1530,7 @@ player_chaos_breathing() {
 
     if(!isDefined(level.player.better)) {
       level.player maps\_utility::play_sound_on_entity("breathing_hurt");
-    }
-    else {
+    } else {
       level.player maps\_utility::play_sound_on_entity("breathing_better");
     }
 
@@ -1750,7 +1742,7 @@ trigger_threads_after_chaos() {
   var_0 = getEntArray("church_pieces", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   var_4 = common_scripts\utility::get_target_ent("animate_cab");
@@ -2309,7 +2301,7 @@ chaos_hide_on_start() {
   var_0 = getEntArray("ygb_roadcrack_street_1", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   var_0 = [];
@@ -2318,19 +2310,19 @@ chaos_hide_on_start() {
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("house_roof_pieces", "script_noteworthy"));
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   var_0 = getEntArray("street_crack_2_pieces", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   var_0 = getEntArray("church_pieces", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   var_10 = common_scripts\utility::get_target_ent("animate_cab");

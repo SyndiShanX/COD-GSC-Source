@@ -8,8 +8,7 @@
 main() {
   if(self.vehicletype == "jeep_ultimate") {
     build_aianims(::setanims, ::set_vehicle_anims_ultimate);
-  }
-  else {
+  } else {
     build_aianims(::setanims, ::set_vehicle_anims);
   }
 

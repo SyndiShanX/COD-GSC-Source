@@ -51,8 +51,7 @@ special_gun_detonate_hint_watcher() {
     if(var_2 == "iw6_aliendlc11_mp") {
       if(!isDefined(self.projectile_time_out_num)) {
         self.projectile_time_out_num = 1;
-      }
-      else if(self.projectile_time_out_num > var_0) {
+      } else if(self.projectile_time_out_num > var_0) {
         var_0 = 3;
         self.projectile_time_out_num = 0;
         thread show_specialweapon_hint_repeat();
@@ -244,8 +243,7 @@ cloud_melt_alien(var_0, var_1, var_2, var_3, var_4, var_5) {
   while(var_6 < var_2) {
     if(isDefined(var_3)) {
       self dodamage(var_0, self.origin, var_1, var_1, "MOD_UNKNOWN");
-    }
-    else {
+    } else {
       self dodamage(var_0, self.origin, var_1);
     }
 
@@ -302,7 +300,7 @@ disable_special_gun_purchase() {
   var_0 = getEntArray("anti_alien_gun", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 disableplayeruse(self);
+    var_2 disableplayeruse(self);
   }
 }
 

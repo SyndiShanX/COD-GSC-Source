@@ -503,9 +503,7 @@ function _cloneselectweapon(player) {
       weapon = playerweapon;
     } else {
       if(isDefined(level.var_7ce7fbed)) {
-        weapon = [
-          [level.var_7ce7fbed]
-        ](player);
+        weapon = [[level.var_7ce7fbed]](player);
       } else {
         weapon = undefined;
       }

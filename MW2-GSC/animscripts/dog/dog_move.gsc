@@ -64,8 +64,7 @@ moveLoop() {
   while(1) {
     if(self.disableArrivals) {
       self.stopAnimDistSq = 0;
-    }
-    else {
+    } else {
       self.stopAnimDistSq = anim.dogStoppingDistSq;
     }
 
@@ -76,8 +75,7 @@ moveLoop() {
 
     if(isDefined(self.moveLoopOverrideFunc)) {
       self[[self.moveLoopOverrideFunc]]();
-    }
-    else {
+    } else {
       self moveLoopStep();
     }
   }
@@ -212,21 +210,17 @@ playMoveStartAnim() {
     if(angle >= 0) {
       if(angle < 45) {
         index = 8;
-      }
-      else if(angle < 135) {
+      } else if(angle < 135) {
         index = 6;
-      }
-      else {
+      } else {
         index = 3;
       }
     } else {
       if(angle > -45) {
         index = 8;
-      }
-      else if(angle > -135) {
+      } else if(angle > -135) {
         index = 4;
-      }
-      else {
+      } else {
         index = 1;
       }
     }
@@ -301,11 +295,10 @@ randomSoundDuringRunLoop() {
       iprintln("dog " + (self getentnum()) + " bark start " + getTime());
     }
 
-      sound = undefined;
+    sound = undefined;
     if(isDefined(self.script_growl)) {
       sound = "anml_dog_growl";
-    }
-    else if(!isDefined(self.script_nobark)) {
+    } else if(!isDefined(self.script_nobark)) {
       sound = "anml_dog_bark";
     }
 
@@ -320,7 +313,7 @@ randomSoundDuringRunLoop() {
       iprintln("dog " + (self getentnum()) + " bark end " + getTime());
     }
 
-      wait(randomfloatrange(0.1, 0.3));
+    wait(randomfloatrange(0.1, 0.3));
   }
 }
 
@@ -340,8 +333,7 @@ getRunAnimWeights() {
 
     if(weights["right"] > 1) {
       weights["right"] = 1;
-    }
-    else if(weights["right"] < 0) {
+    } else if(weights["right"] < 0) {
       weights["right"] = 0;
     }
 

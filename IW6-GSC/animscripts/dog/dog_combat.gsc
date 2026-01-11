@@ -15,8 +15,7 @@ main() {
 
   if(!isalive(self.enemy)) {
     combatidle();
-  }
-  else {
+  } else {
     if(isplayer(self.enemy)) {
       meleebiteattackplayer();
       return;
@@ -94,8 +93,7 @@ dog_player_kill(var_0) {
 
   if(isalive(var_0)) {
     self kill(self.origin, var_0);
-  }
-  else {
+  } else {
     self kill(self.origin);
   }
 }
@@ -112,8 +110,7 @@ dog_death_hud(var_0, var_1) {
 
   if(var_1) {
     var_2 setshader("hud_hyena_melee", 96, 96);
-  }
-  else {
+  } else {
     var_2 setshader("hud_dog_melee", 96, 96);
   }
 
@@ -154,15 +151,13 @@ attackmiss() {
 
     if(vectordot(var_2, var_1) > 0.707 || vectordot(var_3, var_1) > 0) {
       thread animscripts\dog\dog_stop::lookattarget("normal");
-    }
-    else {
+    } else {
       self.skipstartmove = 1;
       thread attackmisstracktargetthread();
 
       if(var_2[0] * var_1[1] - var_2[1] * var_1[0] > 0) {
         var_0 = % german_shepherd_attack_player_miss_turnr;
-      }
-      else {
+      } else {
         var_0 = % german_shepherd_attack_player_miss_turnl;
       }
     }
@@ -257,8 +252,7 @@ removesafetyhealth() {
 
   if(var_0 > 0.25) {
     self.meleeingplayer setnormalhealth(var_0 - 0.25);
-  }
-  else {
+  } else {
     self.meleeingplayer setnormalhealth(0.01);
   }
 }
@@ -469,8 +463,7 @@ meleestrugglevsai() {
 
   if(isDefined(self.enemy.syncedmeleetarget) || shouldwaitincombatidle() || !isai(self.enemy)) {
     combatidle();
-  }
-  else {
+  } else {
     self.in_melee = 1;
     self.enemy setnextdogattackallowtime(500);
     self.enemy.dog_attacking_me = self;
@@ -500,9 +493,7 @@ meleestrugglevsai() {
     self.enemy notify("dog_attacks_ai", self, var_1);
 
     if(isDefined(level.dog_alt_melee_func)) {
-      if([
-          [level.dog_alt_melee_func]
-        ](var_1))
+      if([[level.dog_alt_melee_func]](var_1))
         return 1;
     }
 
@@ -538,8 +529,7 @@ meleestrugglevsai() {
 
       if(isDefined(self.controlling_dog) && self.controlling_dog) {
         thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short");
-      }
-      else {
+      } else {
         thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short_npc");
       }
     } else if(isDefined(self.enemy.a.doinglongdeath) || self.enemy.a.pose == "prone" || self.enemy isdoingtraversal()) {
@@ -557,8 +547,7 @@ meleestrugglevsai() {
 
           if(isDefined(self.controlling_dog) && self.controlling_dog) {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short");
-          }
-          else {
+          } else {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short_npc");
           }
 
@@ -570,8 +559,7 @@ meleestrugglevsai() {
 
           if(isDefined(self.controlling_dog) && self.controlling_dog) {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short");
-          }
-          else {
+          } else {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short_npc");
           }
 
@@ -583,8 +571,7 @@ meleestrugglevsai() {
 
           if(isDefined(self.controlling_dog) && self.controlling_dog) {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_quick_back_plr");
-          }
-          else {
+          } else {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_quick_back_npc");
           }
 
@@ -592,8 +579,7 @@ meleestrugglevsai() {
         default:
           if(isDefined(self.controlling_dog) && self.controlling_dog) {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_plr");
-          }
-          else {
+          } else {
             thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_npc");
           }
 
@@ -720,11 +706,9 @@ meleestrugglevsai_traverse(var_0) {
 
   if(self.enemy isdoingtraversal()) {
     thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_short_npc");
-  }
-  else if(isDefined(self.controlling_dog) && self.controlling_dog) {
+  } else if(isDefined(self.controlling_dog) && self.controlling_dog) {
     thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_plr");
-  }
-  else {
+  } else {
     thread maps\_utility::play_sound_on_entity("scn_nml_dog_attack_front_npc");
   }
 
@@ -838,11 +822,9 @@ handlestartaipart(var_0) {
 
   if(self.enemy isdoingtraversal()) {
     self.enemy meleestrugglevsdog_justdie();
-  }
-  else if(isDefined(self.enemy.fndogmeleevictim)) {
+  } else if(isDefined(self.enemy.fndogmeleevictim)) {
     self.enemy animcustom(self.enemy.fndogmeleevictim);
-  }
-  else {
+  } else {
     self.enemy animcustom(::meleestrugglevsdog);
   }
 }
@@ -1414,8 +1396,7 @@ playerview_startsequence(var_0) {
 
   if(isDefined(var_4)) {
     self.origin = var_4;
-  }
-  else {
+  } else {
     self.origin = var_1.origin;
   }
 
@@ -1601,8 +1582,7 @@ handlevxnotetrack(var_0) {
 
       if(issubstr(var_0, "right")) {
         var_1 = "right";
-      }
-      else if(issubstr(var_0, "left")) {
+      } else if(issubstr(var_0, "left")) {
         var_1 = "left";
       }
 

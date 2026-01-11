@@ -179,21 +179,21 @@ hide_end_bridge_geo() {
   var_2 = getEntArray("bridge_end_2", "script_noteworthy");
 
   foreach(var_4 in var_0) {
-  var_4 hide();
+    var_4 hide();
   }
 
   level waittill("notify_swap_bridge_geo");
 
   foreach(var_4 in var_0) {
-  var_4 show();
+    var_4 show();
   }
 
   foreach(var_4 in var_1) {
-  var_4 hide();
+    var_4 hide();
   }
 
   foreach(var_4 in var_2) {
-  var_4 hide();
+    var_4 hide();
   }
 }
 
@@ -485,8 +485,7 @@ end_breach_rpg_guy_fire(var_0, var_1, var_2, var_3, var_4) {
 
   if(common_scripts\utility::flag(var_4)) {
     return;
-  }
-  else {
+  } else {
     level endon(var_4);
   }
 
@@ -717,8 +716,7 @@ train_sync_end_stop_anim() {
 
     if(var_2 > var_1) {
       level._train.cars["train_loco"].body setanim(level.scr_anim["train_loco_body"]["end_stop"], 1, var_2 / var_0, 0.8);
-    }
-    else if(var_2 < var_1) {
+    } else if(var_2 < var_1) {
       level._train.cars["train_loco"].body setanim(level.scr_anim["train_loco_body"]["end_stop"], 1, var_2 / var_0, 1.2);
     }
 
@@ -799,11 +797,11 @@ loco_bridge_rog_strike() {
   common_scripts\utility::flag_set("flag_bridge_rog");
 
   foreach(var_3 in var_0) {
-  var_3 setanim(level.scr_anim["end_bridge"]["bridge_rog_1"]);
+    var_3 setanim(level.scr_anim["end_bridge"]["bridge_rog_1"]);
   }
 
   foreach(var_3 in var_1) {
-  var_3 setanim(level.scr_anim["end_bridge"]["bridge_rog_2"]);
+    var_3 setanim(level.scr_anim["end_bridge"]["bridge_rog_2"]);
   }
 
   level waittill("notify_shockwave_start");
@@ -820,11 +818,11 @@ loco_bridge_rog_strike() {
   playFXOnTag(common_scripts\utility::getfx("bridge_shockwave_oriented"), level._train.cars["train_loco"].body, "tag_shockwave_oriented2");
 
   foreach(var_12 in var_0) {
-  var_12 hide();
+    var_12 hide();
   }
 
   foreach(var_12 in var_1) {
-  var_12 hide();
+    var_12 hide();
   }
 
   thread maps\skyway_util::player_rumble_bump(level.player_rumble_rog_ent, 0.0, 0.0, 0.1, 0.0, 0.5);
@@ -913,7 +911,7 @@ loco_standoff() {
   var_5 delete();
 
   foreach(var_21 in var_15) {
-  var_21 delete();
+    var_21 delete();
   }
 
   var_16 delete();
@@ -1102,8 +1100,7 @@ slowmo_difficulty_dvars() {
 slowmo_player_cleanup() {
   if(isDefined(level.playerspeed)) {
     self setmovespeedscale(level.playerspeed);
-  }
-  else {
+  } else {
     self setmovespeedscale(1);
   }
 }
@@ -1191,8 +1188,7 @@ loco_standoff_struggle_lerp_anims() {
 
     if(var_14 < var_15) {
       var_13 = 0;
-    }
-    else {
+    } else {
       self.jerk_check = 0;
     }
   }
@@ -1357,7 +1353,7 @@ hide_loco_exterior() {
   var_0 = getEntArray("loco_exterior", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 }
 

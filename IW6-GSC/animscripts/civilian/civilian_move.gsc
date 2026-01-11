@@ -20,8 +20,7 @@ civilian_noncombatmoveturn(var_0, var_1) {
 
   if(isDefined(var_2) && animscripts\move::pathchange_candoturnanim(var_2)) {
     return var_2;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -34,35 +33,28 @@ civilian_combatmoveturn(var_0, var_1) {
   if(var_0 < -22.5) {
     if(var_0 > -45) {
       var_2 = % civilian_run_upright_turnl45;
-    }
-    else if(var_0 > -112.5) {
+    } else if(var_0 > -112.5) {
       var_2 = % civilian_run_upright_turnl90;
-    }
-    else if(var_0 > -157.5) {
+    } else if(var_0 > -157.5) {
       var_2 = % civilian_run_upright_turnl135;
-    }
-    else {
+    } else {
       var_2 = % civilian_run_upright_turn180;
     }
   } else if(var_0 > 22.5) {
     if(var_0 < 45) {
       var_2 = % civilian_run_upright_turnr45;
-    }
-    else if(var_0 < 112.5) {
+    } else if(var_0 < 112.5) {
       var_2 = % civilian_run_upright_turnr90;
-    }
-    else if(var_0 < 157.5) {
+    } else if(var_0 < 157.5) {
       var_2 = % civilian_run_upright_turnr135;
-    }
-    else {
+    } else {
       var_2 = % civilian_run_upright_turn180;
     }
   }
 
   if(isDefined(var_2) && animscripts\move::pathchange_candoturnanim(var_2)) {
     return var_2;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -74,8 +66,7 @@ civilian_combathunchedmoveturn(var_0, var_1) {
   if(var_0 < -22.5) {
     if(var_0 > -45) {
       var_2 = % civilian_run_hunched_turnl45;
-    }
-    else if(var_0 > -112.5) {
+    } else if(var_0 > -112.5) {
       var_2 = % civilian_run_hunched_turnl90;
       var_3 = animscripts\utility::randomanimoftwo( % civilian_run_hunched_turnl90_slide, % civilian_run_hunched_turnl90_stumble);
     } else if(var_0 > -157.5)
@@ -86,8 +77,7 @@ civilian_combathunchedmoveturn(var_0, var_1) {
   } else if(var_0 > 22.5) {
     if(var_0 < 45) {
       var_2 = % civilian_run_hunched_turnr45;
-    }
-    else if(var_0 < 112.5) {
+    } else if(var_0 < 112.5) {
       var_2 = % civilian_run_hunched_turnr90;
       var_3 = animscripts\utility::randomanimoftwo( % civilian_run_hunched_turnr90_slide, % civilian_run_hunched_turnr90_stumble);
     } else if(var_0 < 157.5)
@@ -103,8 +93,7 @@ civilian_combathunchedmoveturn(var_0, var_1) {
 
   if(isDefined(var_2) && animscripts\move::pathchange_candoturnanim(var_2)) {
     return var_2;
-  }
-  else {
+  } else {
     return undefined;
   }
 }

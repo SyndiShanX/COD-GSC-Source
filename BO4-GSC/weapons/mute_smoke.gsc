@@ -10,7 +10,6 @@
 #include scripts\core_common\sound_shared;
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\util_shared;
-
 #namespace mute_smoke;
 
 init_shared() {
@@ -35,11 +34,11 @@ on_player_spawned() {
 
 function_3c893ac6(owner, statweapon, grenadeweaponname, duration, totaltime) {
   if(isplayer(owner)) {
-    owner stats::function_e24eec31(statweapon, #"used", 1);
+    owner stats::function_e24eec31(statweapon, # "used", 1);
   }
 
   owner_origin = owner.origin;
-  waitresult = self waittill(#"explode", #"death");
+  waitresult = self waittill(#"explode", # "death");
 
   if(!isDefined(self)) {
     return;
@@ -85,10 +84,10 @@ function_15263a60(radius) {
     self thread function_9cf45892(var_1ec8a7f0);
   }
 
-    while(true) {
-      fxblocksight(self, radius);
-      wait 0.75;
-    }
+  while(true) {
+    fxblocksight(self, radius);
+    wait 0.75;
+  }
 }
 
 function_9cf45892(stop_notify) {
@@ -96,23 +95,23 @@ function_9cf45892(stop_notify) {
   level notify(stop_notify);
 }
 
-  function function_2ece9391(owner, duration) {
-    team = self.team;
-    trigger = spawn("trigger_radius", self.origin, 0, 250, 120);
-    trigger.team = team;
-    trigger.owner = owner;
+function function_2ece9391(owner, duration) {
+  team = self.team;
+  trigger = spawn("trigger_radius", self.origin, 0, 250, 120);
+  trigger.team = team;
+  trigger.owner = owner;
 
-    if(!isDefined(level.var_438f1f83)) {
-      level.var_438f1f83 = [];
-    } else if(!isarray(level.var_438f1f83)) {
-      level.var_438f1f83 = array(level.var_438f1f83);
-    }
-
-    level.var_438f1f83[level.var_438f1f83.size] = trigger;
-    self waittilltimeout(duration, #"death");
-    arrayremovevalue(level.var_438f1f83, trigger);
-    trigger delete();
+  if(!isDefined(level.var_438f1f83)) {
+    level.var_438f1f83 = [];
+  } else if(!isarray(level.var_438f1f83)) {
+    level.var_438f1f83 = array(level.var_438f1f83);
   }
+
+  level.var_438f1f83[level.var_438f1f83.size] = trigger;
+  self waittilltimeout(duration, # "death");
+  arrayremovevalue(level.var_438f1f83, trigger);
+  trigger delete();
+}
 
 function_e2288bb6() {
   foreach(trigger in level.var_438f1f83) {
@@ -165,14 +164,14 @@ private function_b3862968() {
 }
 
 function_7033488b(notifyhash) {
-  if(notifyhash == #"death") {
+  if(notifyhash == # "death") {
     self function_40abb79a(0, undefined);
   }
 }
 
 function_c2e7fcb4() {
   player = self;
-  player endoncallback(&function_7033488b, #"death", #"disconnect");
+  player endoncallback(&function_7033488b, # "death", # "disconnect");
   player.in_enemy_mute_smoke = player clientfield::get("in_enemy_mute_smoke") == 1;
   player.var_2118ca55 = player clientfield::get("inFriendlyMuteSmoke") == 1;
   wait randomfloatrange(0.1, 0.6);
@@ -204,10 +203,10 @@ function_c2e7fcb4() {
 
 function_40abb79a(in_enemy_mute_smoke, applicant) {
   player = self;
-  var_65ce58a2 = #"deaf";
+  var_65ce58a2 = # "deaf";
 
   if(player getplayerresistance(0) > 0) {
-    var_65ce58a2 = #"hash_74cdcf6548f09fcd";
+    var_65ce58a2 = # "hash_74cdcf6548f09fcd";
   }
 
   var_56d6af0e = getstatuseffect(var_65ce58a2);
@@ -222,7 +221,7 @@ function_40abb79a(in_enemy_mute_smoke, applicant) {
 }
 
 function_41470017(var_56d6af0e, applicant) {
-  self endon(#"hash_2d871144da153bc1", #"death", #"disconnect");
+  self endon(#"hash_2d871144da153bc1", # "death", # "disconnect");
   self thread status_effect::status_effect_apply(var_56d6af0e, undefined, applicant, 0, 1200);
 
   while(true) {
@@ -262,7 +261,7 @@ function_783a1c07(weapon) {
 function_a4998ccd(grenade_origin, player_origin, weapon) {
   function_783a1c07(weapon);
 
-    settings = level.mute_smoke_custom_settings;
+  settings = level.mute_smoke_custom_settings;
   var_a19445f = self playerads() >= 1;
   var_de0fa6f1 = isDefined(settings.var_de0fa6f1) ? settings.var_de0fa6f1 : var_a19445f ? isDefined(settings.fx_done) ? settings.fx_done : 0 : 0;
   var_46f48578 = max(isDefined(settings.var_46f48578) ? settings.var_46f48578 : var_a19445f ? isDefined(settings.var_bdb59983) ? settings.var_bdb59983 : 0 : 0, 0.1);
@@ -273,7 +272,7 @@ function_a4998ccd(grenade_origin, player_origin, weapon) {
 
   function_9dddd194(grenade_origin, (0, 0.9, 0));
 
-    facing_angles = self getplayerangles();
+  facing_angles = self getplayerangles();
   forward = anglesToForward(facing_angles);
   up = anglestoup(facing_angles);
   velocity = function_711c258(forward, up, weapon);
@@ -297,27 +296,27 @@ function_9dddd194(position, color) {
   }
 }
 
-  function function_20c7dcdc(position, duration, startsound, stopsound, loopsound) {
-    smokesound = spawn("script_origin", (0, 0, 1));
-    smokesound.origin = position;
+function function_20c7dcdc(position, duration, startsound, stopsound, loopsound) {
+  smokesound = spawn("script_origin", (0, 0, 1));
+  smokesound.origin = position;
 
-    if(isDefined(startsound)) {
-      smokesound playSound(startsound);
-    }
-
-    if(isDefined(loopsound)) {
-      smokesound playLoopSound(loopsound);
-    }
-
-    if(duration > 0.5) {
-      wait duration - 0.5;
-    }
-
-    if(isDefined(stopsound)) {
-      thread sound::play_in_space(stopsound, position);
-    }
-
-    smokesound stoploopsound(0.5);
-    wait 0.5;
-    smokesound delete();
+  if(isDefined(startsound)) {
+    smokesound playSound(startsound);
   }
+
+  if(isDefined(loopsound)) {
+    smokesound playLoopSound(loopsound);
+  }
+
+  if(duration > 0.5) {
+    wait duration - 0.5;
+  }
+
+  if(isDefined(stopsound)) {
+    thread sound::play_in_space(stopsound, position);
+  }
+
+  smokesound stoploopsound(0.5);
+  wait 0.5;
+  smokesound delete();
+}

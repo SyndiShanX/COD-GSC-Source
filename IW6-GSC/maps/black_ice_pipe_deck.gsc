@@ -43,7 +43,7 @@ section_post_inits() {
     var_0 = getEntArray("turret_command", "script_noteworthy");
 
     foreach(var_2 in var_0) {
-    var_2 makeunusable();
+      var_2 makeunusable();
     }
   } else
     iprintln("black_ice_pipe_deck.gsc: Warning - Pipe Deck boats struct missing (compiled out?)");
@@ -305,8 +305,7 @@ spawnfunc_enemies_balcony() {
 
   if(issubstr(self.classname, "rpg")) {
     maps\black_ice_util_ai::add_to_group("derrick_balcony_rpg", 0);
-  }
-  else {
+  } else {
     maps\black_ice_util_ai::add_to_group("derrick_balcony", 0);
   }
 
@@ -599,7 +598,7 @@ event_boat_drop() {
   var_1 = getEntArray("model_lifeboat", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 maps\_utility::assign_animtree(var_3.script_parameters);
+    var_3 maps\_utility::assign_animtree(var_3.script_parameters);
   }
 
   var_5 = maps\_utility::spawn_anim_model("lifeboat_crates");
@@ -780,44 +779,44 @@ pipedecklights() {
   var_3 = [getent("escape_emergency_1", "targetname")];
 
   foreach(var_5 in var_1) {
-  var_5 setlightradius(12);
+    var_5 setlightradius(12);
   }
 
   foreach(var_5 in var_2) {
-  var_5 setlightradius(12);
+    var_5 setlightradius(12);
   }
 
   maps\_utility::trigger_wait("trig_lights_pipedeck_b", "targetname");
 
   foreach(var_5 in var_1) {
-  var_5 setlightradius(400);
+    var_5 setlightradius(400);
   }
 
   foreach(var_5 in var_2) {
-  var_5 setlightradius(550);
+    var_5 setlightradius(550);
   }
 
   maps\_utility::trigger_wait("trig_lights_pipedeck_a", "targetname");
 
   foreach(var_5 in var_0) {
-  var_5 setlightradius(12);
+    var_5 setlightradius(12);
   }
 
   foreach(var_5 in var_1) {
-  var_5 setlightradius(12);
+    var_5 setlightradius(12);
   }
 
   foreach(var_5 in var_2) {
-  var_5 setlightradius(12);
+    var_5 setlightradius(12);
   }
 
   foreach(var_5 in var_3) {
-  var_5 setlightradius(12);
+    var_5 setlightradius(12);
   }
 
   level waittill("flag_start_lights");
 
   foreach(var_5 in var_3) {
-  var_5 setlightradius(350);
+    var_5 setlightradius(350);
   }
 }

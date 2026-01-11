@@ -51,8 +51,7 @@ dowalkanimoverride(var_0) {
   if(isarray(self.walk_overrideanim)) {
     if(isDefined(self.walk_override_weights)) {
       var_1 = common_scripts\utility::choose_from_weighted_array(self.walk_overrideanim, self.walk_override_weights);
-    }
-    else {
+    } else {
       var_1 = self.walk_overrideanim[randomint(self.walk_overrideanim.size)];
     }
   } else
@@ -78,8 +77,7 @@ getwalkanim(var_0) {
 
       if(var_4 == "Left") {
         var_3 = animscripts\utility::getmoveanim("straight_twitch_l");
-      }
-      else if(var_4 == "Right") {
+      } else if(var_4 == "Right") {
         var_3 = animscripts\utility::getmoveanim("straight_twitch_r");
       }
     }
@@ -122,8 +120,7 @@ dowalkanim(var_0) {
 
       if(animscripts\stairs_utility::isonstairs()) {
         var_2 = % body;
-      }
-      else {
+      } else {
         var_2 = % walk_and_run_loops;
       }
 

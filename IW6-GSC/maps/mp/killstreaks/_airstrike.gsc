@@ -715,8 +715,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   }
   if(streakName == "harrier_airstrike") {
     plane PlaySoundOnMovingEnt("harrier_sonic_boom");
-  }
-  else {
+  } else {
     plane PlaySoundOnMovingEnt("veh_mig29_sonic_boom");
   }
 
@@ -761,8 +760,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   bombAngles = newBomb.angles;
   if(level.splitscreen) {
     playFXOnTag(level.airstrikessfx, newBomb, "tag_origin");
-  }
-  else {
+  } else {
     playFXOnTag(level.airstrikefx, newBomb, "tag_origin");
   }
 
@@ -961,8 +959,7 @@ getFlightPath(coord, direction, planeHalfDistance, heightEnt, planeFlyHeight, pl
 
   if(streakName == "stealth_airstrike") {
     endPoint = coord + (anglesToForward(direction) * (planeHalfDistance * 4));
-  }
-  else {
+  } else {
     endPoint = coord + (anglesToForward(direction) * planeHalfDistance);
   }
 
@@ -1002,8 +999,7 @@ targetGetDist(other, target) {
   infront = targetisinfront(other, target);
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
   a = flat_origin(other.origin);
@@ -1022,8 +1018,7 @@ targetisclose(other, target, closeDist) {
   infront = targetisinfront(other, target);
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
   a = flat_origin(other.origin);
@@ -1032,8 +1027,7 @@ targetisclose(other, target, closeDist) {
   dist = distance(a, point);
   if(dist < closeDist) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -1044,8 +1038,7 @@ targetisinfront(other, target) {
   dot = vectordot(forwardvec, normalvec);
   if(dot > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -1096,8 +1089,7 @@ selectAirstrikeLocation(lifeId, streakname) {
 
     if(playerPositions.size) {
       strikePos = AveragePoint(playerPositions);
-    }
-    else {
+    } else {
       strikePos = (0, 0, 0);
     }
 

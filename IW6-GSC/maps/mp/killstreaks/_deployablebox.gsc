@@ -109,8 +109,7 @@ markerActivate(lifeId, boxType, usedCallback) {
 
     if(isDefined(grandParent)) {
       data.linkParent = grandParent;
-    }
-    else {
+    } else {
       data.linkParent = undefined;
     }
   }
@@ -136,11 +135,9 @@ markerActivate(lifeId, boxType, usedCallback) {
 DeployableExclusion(parentModel) {
   if(parentModel == "mp_satcom") {
     return true;
-  }
-  else if(IsSubStr(parentModel, "paris_catacombs_iron")) {
+  } else if(IsSubStr(parentModel, "paris_catacombs_iron")) {
     return true;
-  }
-  else if(IsSubStr(parentModel, "mp_warhawk_iron_gate")) {
+  } else if(IsSubStr(parentModel, "mp_warhawk_iron_gate")) {
     return true;
   }
 
@@ -201,8 +198,7 @@ box_setActive(skipOwnerUse) {
 
   if(!isDefined(self GetLinkedParent())) {
     Objective_Position(curObjID, self.origin);
-  }
-  else {
+  } else {
     Objective_OnEntity(curObjID, self);
   }
 
@@ -636,8 +632,7 @@ useHoldThinkLoop(player) {
 
     if(isDefined(player.objectiveScaler)) {
       config.useRate = 1 * player.objectiveScaler;
-    }
-    else {
+    } else {
       config.useRate = 1;
     }
 

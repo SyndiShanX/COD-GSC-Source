@@ -133,14 +133,12 @@ onPrecacheGameType() {
   game["flagmodels"]["neutral"] = "prop_flag_neutral";
   if(game["allies"] == "marines") {
     game["flagmodels"]["allies"] = "prop_flag_american";
-  }
-  else {
+  } else {
     game["flagmodels"]["allies"] = "prop_flag_russian";
   }
   if(game["axis"] == "german") {
     game["flagmodels"]["axis"] = "prop_flag_german";
-  }
-  else {
+  } else {
     game["flagmodels"]["axis"] = "prop_flag_japanese";
   }
   precacheModel(game["flagmodels"]["neutral"]);
@@ -423,24 +421,21 @@ onTeamOutcomeNotify(winner, isRound, endReasonText) {
   } else if(winner == "tie") {
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_draw"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["draw"]);
     }
     outcomeTitle.color = (1, 1, 1);
   } else if(isDefined(self.pers["team"]) && winner == team) {
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_win"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["victory"]);
     }
     outcomeTitle.color = (0.6, 0.9, 0.6);
   } else {
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_loss"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["defeat"]);
     }
     outcomeTitle.color = (0.7, 0.3, 0.2);
@@ -917,8 +912,7 @@ updateMomentum(team, amount) {
     if(game["war_momentum"][team + "_multiplier"] == momentumMaxMultiplier) {
       if(team == "allies") {
         level thread alliesBlitzkriegCountdown();
-      }
-      else {
+      } else {
         level thread axisBlitzkriegCountdown();
       }
     }
@@ -1048,8 +1042,7 @@ onSpawnPlayer() {
       team = level.flags[i] getFlagTeam();
       if(team == myTeam) {
         flagsOwned++;
-      }
-      else if(team == enemyTeam) {
+      } else if(team == enemyTeam) {
         enemyFlagsOwned++;
       }
     }
@@ -1073,8 +1066,7 @@ onSpawnPlayer() {
   if(!isDefined(spawnpoint)) {
     if(self.pers["team"] == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
     }
   }
@@ -1528,8 +1520,7 @@ onUse(player) {
       updateMomentum(team, getDvarInt("twar_momentumFlagCap"));
       if(team == "allies") {
         nextFlag = level.twarFlags[level.flagOrder[self.label] + 1];
-      }
-      else {
+      } else {
         nextFlag = level.twarFlags[level.flagOrder[self.label] - 1];
       }
       nextFlag setFlagOwner("neutral");
@@ -1564,8 +1555,7 @@ onUse(player) {
 checkIfLastFlag(team) {
   if(getTeamFlagCount(team) == 1) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -1573,8 +1563,7 @@ checkIfLastFlag(team) {
 checkIfLastFlagCaptured(team) {
   if(getTeamFlagCount(team) == 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2101,8 +2090,7 @@ hud_beginUseHudFlagProgressBarsForPlayers(captureTeam) {
 hud_beginUseHudFlagProgressBars(captureTeam) {
   if(self.pers["team"] == captureTeam) {
     self.waypointProgress.bar.color = (1, 1, 1);
-  }
-  else {
+  } else {
     self.waypointProgress.bar.color = (1, 0, 0);
   }
 }

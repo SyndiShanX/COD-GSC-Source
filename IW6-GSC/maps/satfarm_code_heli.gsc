@@ -154,8 +154,7 @@ heli_fire_missiles(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(self.defaultweapon)) {
     var_5 = self.defaultweapon;
-  }
-  else {
+  } else {
     var_5 = "minigun_littlebird_quickspin";
   }
 
@@ -401,7 +400,7 @@ heli_ai_next_loc_func(var_0, var_1, var_2) {
     }
   } else {
     foreach(var_6 in var_3) {
-    var_6.dist2d = distance2d(var_6.heli_target.origin, var_6.origin);
+      var_6.dist2d = distance2d(var_6.heli_target.origin, var_6.origin);
     }
   }
 
@@ -430,8 +429,7 @@ heli_ai_next_loc_func(var_0, var_1, var_2) {
 
   if(isDefined(var_26) && var_26 != self.loc_current) {
     return var_26;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -454,11 +452,9 @@ _heli_ai_pre_move_func_internal() {
 heli_set_look_at_ent() {
   if(isDefined(maps\_chopperboss_utility::chopper_boss_forced_target_get())) {
     self setlookatent(maps\_chopperboss_utility::chopper_boss_forced_target_get());
-  }
-  else if(isDefined(self.heli_target)) {
+  } else if(isDefined(self.heli_target)) {
     self setlookatent(self.heli_target);
-  }
-  else {
+  } else {
     self clearlookatent();
   }
 }
@@ -468,8 +464,7 @@ heli_ai_stop_func() {}
 heli_attempt_fire() {
   if(isDefined(self.heli_target)) {
     self.fired_weapons = maps\_chopperboss::chopper_boss_attempt_firing(self.heli_target);
-  }
-  else {
+  } else {
     self.fired_weapons = 0;
   }
 }

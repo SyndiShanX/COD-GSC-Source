@@ -225,24 +225,19 @@ getspawnpoint() {
   if(level.usestartspawns) {
     if(var_0 == game["attackers"]) {
       var_1 = maps\mp\gametypes\_spawnlogic::getrandomstartspawn("mp_dd_spawn_attacker_start");
-    }
-    else {
+    } else {
       var_1 = maps\mp\gametypes\_spawnlogic::getrandomstartspawn("mp_dd_spawn_defender_start");
     }
   } else if(var_0 == game["attackers"]) {
     if(maps\mp\_utility::inovertime()) {
       var_2 = level.spawn_attackers;
-    }
-    else if(!level.aplanted && !level.bplanted) {
+    } else if(!level.aplanted && !level.bplanted) {
       var_2 = level.spawn_attackers;
-    }
-    else if(level.aplanted && !level.bplanted) {
+    } else if(level.aplanted && !level.bplanted) {
       var_2 = level.spawn_attackers_a;
-    }
-    else if(level.bplanted && !level.aplanted) {
+    } else if(level.bplanted && !level.aplanted) {
       var_2 = level.spawn_attackers_b;
-    }
-    else {
+    } else {
       var_2 = level.spawn_attackers;
     }
 
@@ -250,17 +245,13 @@ getspawnpoint() {
   } else {
     if(maps\mp\_utility::inovertime()) {
       var_2 = level.spawn_defenders;
-    }
-    else if(!level.aplanted && !level.bplanted) {
+    } else if(!level.aplanted && !level.bplanted) {
       var_2 = level.spawn_defenders;
-    }
-    else if(level.aplanted && !level.bplanted) {
+    } else if(level.aplanted && !level.bplanted) {
       var_2 = level.spawn_defenders_a;
-    }
-    else if(level.bplanted && !level.aplanted) {
+    } else if(level.bplanted && !level.aplanted) {
       var_2 = level.spawn_defenders_b;
-    }
-    else {
+    } else {
       var_2 = level.spawn_defenders;
     }
 
@@ -300,8 +291,7 @@ onspawnplayer() {
 dd_endgame(var_0, var_1) {
   if(var_0 == "tie") {
     level.finalkillcam_winner = "none";
-  }
-  else {
+  } else {
     level.finalkillcam_winner = var_0;
   }
 
@@ -315,8 +305,7 @@ ondeadevent(var_0) {
   if(var_0 == "all") {
     if(level.bombplanted) {
       dd_endgame(game["attackers"], game["end_reason"][game["defenders"] + "_eliminated"]);
-    }
-    else {
+    } else {
       dd_endgame(game["defenders"], game["end_reason"][game["attackers"] + "_eliminated"]);
     }
   } else if(var_0 == game["attackers"]) {
@@ -352,8 +341,7 @@ onnormaldeath(var_0, var_1, var_2) {
 ontimelimit() {
   if(maps\mp\_utility::inovertime()) {
     dd_endgame("tie", game["end_reason"]["time_limit_reached"]);
-  }
-  else {
+  } else {
     dd_endgame(game["defenders"], game["end_reason"]["time_limit_reached"]);
   }
 }
@@ -449,8 +437,7 @@ bombs() {
 
       if(game["defenders"] == "allies") {
         maps\mp\_utility::setmlgicons(var_7, "waypoint_esports_sab_target_axis");
-      }
-      else {
+      } else {
         maps\mp\_utility::setmlgicons(var_7, "waypoint_esports_sab_target_allies");
       }
     }
@@ -472,8 +459,7 @@ onuseobject(var_0) {
 
     if(game["defenders"] == "allies") {
       maps\mp\_utility::setmlgicons(self, "waypoint_esports_sab_planted_axis");
-    }
-    else {
+    } else {
       maps\mp\_utility::setmlgicons(self, "waypoint_esports_sab_planted_allies");
     }
 
@@ -483,8 +469,7 @@ onuseobject(var_0) {
 
     if(game["defenders"] == "allies") {
       maps\mp\_utility::setmlgicons(self, "waypoint_esports_sab_target_axis");
-    }
-    else {
+    } else {
       maps\mp\_utility::setmlgicons(self, "waypoint_esports_sab_target_allies");
     }
 
@@ -541,8 +526,7 @@ bombplanted(var_0, var_1) {
 
   if(var_0.label == "_a") {
     level.aplanted = 1;
-  }
-  else {
+  } else {
     level.bplanted = 1;
   }
 
@@ -561,8 +545,7 @@ bombplanted(var_0, var_1) {
 
   if(var_0.label == "_a") {
     level.aplanted = 0;
-  }
-  else {
+  } else {
     level.bplanted = 0;
   }
 
@@ -588,7 +571,7 @@ bombplanted(var_0, var_1) {
       maps\mp\_utility::setoverridewatchdvar("timelimit", maps\mp\_utility::getwatcheddvar("timelimit") + level.ddtimetoadd);
 
       foreach(var_7 in level.players) {
-      var_7 thread maps\mp\gametypes\_hud_message::splashnotify("time_added");
+        var_7 thread maps\mp\gametypes\_hud_message::splashnotify("time_added");
       }
 
       var_4 = 1;
@@ -606,8 +589,7 @@ bombplanted(var_0, var_1) {
 
   if(var_9) {
     dd_endgame(var_2, game["end_reason"]["target_destroyed"]);
-  }
-  else if(var_4) {
+  } else if(var_4) {
     level thread maps\mp\_utility::teamplayercardsplash("callout_time_added", var_1);
   }
 }
@@ -615,11 +597,9 @@ bombplanted(var_0, var_1) {
 setbombtimerdvar() {
   if(level.bombsplanted == 1) {
     setomnvar("ui_bomb_timer", 2);
-  }
-  else if(level.bombsplanted == 2) {
+  } else if(level.bombsplanted == 2) {
     setomnvar("ui_bomb_timer", 3);
-  }
-  else {
+  } else {
     setomnvar("ui_bomb_timer", 0);
   }
 }
@@ -649,8 +629,7 @@ bombtimerwait(var_0) {
 
   if(maps\mp\_utility::inovertime()) {
     var_0.waittime = level.bombtimer;
-  }
-  else {
+  } else {
     var_0.waittime = level.bombtimer;
   }
 
@@ -703,8 +682,7 @@ bombdefused(var_0) {
 setuibombtimer(var_0, var_1) {
   if(var_0 == "_a") {
     setomnvar("ui_bomb_timer_endtime", var_1);
-  }
-  else {
+  } else {
     setomnvar("ui_bomb_timer_endtime_2", var_1);
   }
 }

@@ -14,7 +14,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\vehicle_shared;
 #include scripts\core_common\vehicles\driving_fx;
-
 #namespace wz_vehicle;
 
 autoexec __init__system__() {
@@ -229,15 +228,15 @@ private function_8411122e(localclientnum, owner) {
   surfaces = [];
 
   if(isDefined(self.trace)) {
-    if(self.trace[#"fraction"] != 1) {
+    if(self.trace[# "fraction"] != 1) {
       if(!isDefined(surfaces)) {
         surfaces = [];
       } else if(!isarray(surfaces)) {
         surfaces = array(surfaces);
       }
 
-      if(!isinarray(surfaces, driving_fx::function_73e08cca(self.trace[#"surfacetype"]))) {
-        surfaces[surfaces.size] = driving_fx::function_73e08cca(self.trace[#"surfacetype"]);
+      if(!isinarray(surfaces, driving_fx::function_73e08cca(self.trace[# "surfacetype"]))) {
+        surfaces[surfaces.size] = driving_fx::function_73e08cca(self.trace[# "surfacetype"]);
       }
     }
   }
@@ -341,9 +340,9 @@ private function_732976d8(localclientnum, vehicle) {
     }
 
     trace = bulletTrace(vehicle.origin, vehicle.origin - offsetorigin, 0, vehicle, 1);
-    distsqr = distancesquared(vehicle.origin, trace[#"position"]);
+    distsqr = distancesquared(vehicle.origin, trace[# "position"]);
 
-    if(trace[#"fraction"] == 1) {
+    if(trace[# "fraction"] == 1) {
       self function_d1731820(localclientnum);
       wait 1;
       continue;
@@ -422,7 +421,7 @@ private function_8fd2e04f(localclientnum) {
 
         if(playfx && vehicle.scriptvehicletype === "player_muscle" && var_5d188f8a) {
           if(!isDefined(vehicle.var_2dc49011)) {
-            vehicle.var_2dc49011 = vehicle util::playFXOnTag(localclientnum, #"hash_77086882cbd57674", vehicle, "tag_origin");
+            vehicle.var_2dc49011 = vehicle util::playFXOnTag(localclientnum, # "hash_77086882cbd57674", vehicle, "tag_origin");
           }
 
           continue;

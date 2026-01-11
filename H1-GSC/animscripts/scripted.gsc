@@ -37,15 +37,13 @@ init(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(var_4)) {
     self.codescripted["animMode"] = var_4;
-  }
-  else {
+  } else {
     self.codescripted["animMode"] = "normal";
   }
 
   if(isDefined(var_5)) {
     self.codescripted["root"] = var_5;
-  }
-  else {
+  } else {
     self.codescripted["root"] = % body;
   }
 

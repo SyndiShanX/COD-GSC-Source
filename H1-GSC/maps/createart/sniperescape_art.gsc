@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\sniperescape_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\sniperescape_fog::main();
   }
 }

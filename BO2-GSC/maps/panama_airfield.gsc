@@ -498,7 +498,7 @@ turn_off_hotel_lights() {
     a_hotel_lights = getEntArray("hotel_floor_" + a_floor_numbers[i], "targetname");
 
     foreach(m_hotel_light in a_hotel_lights) {
-    m_hotel_light delete();
+      m_hotel_light delete();
     }
   }
 
@@ -508,7 +508,7 @@ turn_off_hotel_lights() {
     a_hotel_lights = getEntArray("hotel_floor_" + a_floor_numbers[i], "targetname");
 
     foreach(m_hotel_light in a_hotel_lights) {
-    m_hotel_light delete();
+      m_hotel_light delete();
     }
   }
 }
@@ -574,20 +574,19 @@ clean_up_christmas_lights() {
   }
 }
 
-zodiac_jet_flyover() {
-}
+zodiac_jet_flyover() {}
 
 invasion_read() {
   a_zodiac_littlebird_armada = spawn_vehicles_from_targetname_and_drive("zodiac_littlebird_armada");
 
   foreach(heli in a_zodiac_littlebird_armada) {
-  heli thread delete_vehicle_after_opening();
+    heli thread delete_vehicle_after_opening();
   }
 
   a_intro_building_jets = spawn_vehicles_from_targetname_and_drive("intro_building_jet");
 
   foreach(jet in a_intro_building_jets) {
-  jet thread delete_vehicle_after_opening();
+    jet thread delete_vehicle_after_opening();
   }
 
   level.player playSound("evt_zodiac_flyby_f");
@@ -709,7 +708,7 @@ beach_main() {
   a_beach_intro_trucks = spawn_vehicles_from_targetname_and_drive("intro_civ_trucks");
 
   foreach(vh_truck in a_beach_intro_trucks) {
-  vh_truck thread intro_truck_behaviour();
+    vh_truck thread intro_truck_behaviour();
   }
 
   level thread mason_contextual_kill();
@@ -760,11 +759,9 @@ beach_walk_speed_adjustment() {
 
     if(n_dist < 128) {
       self setmovespeedscale(self.n_speed_scale_min);
-    }
-    else if(n_dist > 256) {
+    } else if(n_dist > 256) {
       self setmovespeedscale(self.n_speed_scale_max);
-    }
-    else {
+    } else {
       n_speed_scale = linear_map(n_dist, 128, 256, self.n_speed_scale_min, self.n_speed_scale_max);
       self setmovespeedscale(n_speed_scale);
     }
@@ -829,8 +826,7 @@ melee_guard_03() {
 
   if(flag("contextual_melee_success")) {
     run_scene("flare_guy_killed");
-  }
-  else {
+  } else {
     run_scene("flare_guy_lives");
     nd_flareguy = getnode("nd_flareguy", "targetname");
     ai_flare_guy setgoalnode(nd_flareguy);
@@ -874,8 +870,7 @@ player_contextual_kill() {
 
   if(flag("contextual_melee_success")) {
     run_scene("player_knife_kill");
-  }
-  else {
+  } else {
     run_scene("player_knife_no_kill");
   }
 
@@ -1043,7 +1038,7 @@ parking_lot_backup() {
   a_parking_lot_guys = get_ai_group_ai("parking_lot_guys");
 
   foreach(guy in a_parking_lot_guys) {
-  guy set_spawner_targets("parking_lot_laststand");
+    guy set_spawner_targets("parking_lot_laststand");
   }
 
   v_parking_lot_backup_truck = spawn_vehicle_from_targetname_and_drive("parking_lot_backup_truck");
@@ -1055,7 +1050,7 @@ spin_rooftop_fans() {
 
   while(true) {
     foreach(fan in fan_array) {
-    fan rotatevelocity((0, randomintrange(400, 450), 0), 0.5);
+      fan rotatevelocity((0, randomintrange(400, 450), 0), 0.5);
     }
 
     wait 0.5;
@@ -1296,8 +1291,7 @@ learjet_turret_truck() {
 
   if(getdifficulty() == "easy") {
     vh_learjet_truck maps\_turret::set_turret_burst_parameters(1, 2, 3, 4, 1);
-  }
-  else {
+  } else {
     vh_learjet_truck maps\_turret::set_turret_burst_parameters(3.0, 5.0, 1.0, 2.0, 1);
   }
 
@@ -1637,7 +1631,7 @@ cleanup_seals() {
 
   if(isDefined(a_ai_seal1)) {
     foreach(ai_seal1 in a_ai_seal1) {
-    ai_seal1 die();
+      ai_seal1 die();
     }
   }
 
@@ -1645,7 +1639,7 @@ cleanup_seals() {
 
   if(isDefined(a_ai_seal2)) {
     foreach(ai_seal2 in a_ai_seal2) {
-    ai_seal2 die();
+      ai_seal2 die();
     }
   }
 
@@ -1655,7 +1649,7 @@ cleanup_seals() {
 
   if(isDefined(a_ai_hangar_seals)) {
     foreach(ai_hangar_seal in a_ai_hangar_seals) {
-    ai_hangar_seal delete();
+      ai_hangar_seal delete();
     }
   }
 
@@ -1663,7 +1657,7 @@ cleanup_seals() {
 
   if(isDefined(a_ai_foreshadow)) {
     foreach(ai_foreshadow in a_ai_foreshadow) {
-    ai_foreshadow die();
+      ai_foreshadow die();
     }
   }
 
@@ -1671,7 +1665,7 @@ cleanup_seals() {
 
   if(isDefined(a_ai_rescue_seals)) {
     foreach(ai_rescue_seals in a_ai_rescue_seals) {
-    ai_rescue_seals die();
+      ai_rescue_seals die();
     }
   }
 
@@ -1679,7 +1673,7 @@ cleanup_seals() {
 
   if(isDefined(a_ai_standoff_seals)) {
     foreach(ai_standoff_seals in a_ai_standoff_seals) {
-    ai_standoff_seals die();
+      ai_standoff_seals die();
     }
   }
 }
@@ -1921,7 +1915,7 @@ temp_cleanup_func() {
   ai = getaiarray();
 
   foreach(guy in ai) {
-  guy die();
+    guy die();
   }
 }
 
@@ -1992,7 +1986,7 @@ seals_destroy_learjet() {
   createthreatbiasgroup("learjet_intro_pdfs");
 
   foreach(ai_seal in a_learjet_rpg_seals) {
-  ai_seal setthreatbiasgroup("learjet_runway_seals");
+    ai_seal setthreatbiasgroup("learjet_runway_seals");
   }
 
   foreach(ai_intro_pdf in a_learjet_intro_pdfs) {
@@ -2009,7 +2003,7 @@ seals_destroy_learjet() {
   trigger_wait("trig_learjet_truck");
 
   foreach(ai_intro_pdf in a_learjet_intro_pdfs) {
-  ai_intro_pdf stop_magic_bullet_shield();
+    ai_intro_pdf stop_magic_bullet_shield();
   }
 
   trigger_wait("seal_shoot_learjet");
@@ -2038,7 +2032,7 @@ seals_destroy_learjet() {
   wait 3;
 
   foreach(seal in a_learjet_rpg_seals) {
-  seal.ignoreme = 1;
+    seal.ignoreme = 1;
   }
 }
 
@@ -2388,7 +2382,7 @@ runway_seals() {
   a_runway_cessnas = spawn_vehicles_from_targetname("runway_cessnas");
 
   foreach(cessna in a_runway_cessnas) {
-  cessna thread setup_runway_cessnas();
+    cessna thread setup_runway_cessnas();
   }
 
   a_runway_hangar_cessna = spawn_vehicles_from_targetname("runway_hangar_cessna");
@@ -2428,7 +2422,7 @@ runway_seals() {
   standoff_seals = get_ai_group_ai("standoff_seals");
 
   foreach(seal in standoff_seals) {
-  seal thread kill_off_standoff_seals();
+    seal thread kill_off_standoff_seals();
   }
 }
 
@@ -2479,14 +2473,11 @@ airfield_littlebird_logic(v_offset) {
 
   if(self.targetname == "littlebird_airfield_1") {
     wait 1;
-  }
-  else if(self.targetname == "littlebird_airfield_2") {
+  } else if(self.targetname == "littlebird_airfield_2") {
     wait 2;
-  }
-  else if(self.targetname == "littlebird_airfield_3") {
+  } else if(self.targetname == "littlebird_airfield_3") {
     wait 2.6;
-  }
-  else {
+  } else {
     wait 3.7;
   }
 
@@ -2563,8 +2554,7 @@ ambient_aircraft_flightpath(s_start) {
 
     if(isDefined(s_goal.target)) {
       s_goal = getstruct(s_goal.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -2654,8 +2644,7 @@ littlebird_circle(s_start) {
 
     if(isDefined(s_goal.target)) {
       s_goal = getstruct(s_goal.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -2899,8 +2888,7 @@ vo_rooftop_battle() {
   level.mason say_dialog("mckn_focus_on_supporting_0", 2);
 }
 
-vo_nag_rooftop_approach() {
-}
+vo_nag_rooftop_approach() {}
 
 vo_skylight() {
   waittill_ai_group_cleared("rooftop_pdf");
@@ -2939,7 +2927,7 @@ rooftop_tracers() {
   a_ai_seals = getEntArray("hangar_seals_ai", "targetname");
 
   foreach(ai_seal in a_ai_seals) {
-  ai_seal thread fire_at_rooftop();
+    ai_seal thread fire_at_rooftop();
   }
 }
 
@@ -3242,7 +3230,7 @@ hangar_pdf_seals() {
   a_hangar_pdf = get_ai_group_ai("hangar_pdf");
 
   foreach(pdf in a_hangar_pdf) {
-  pdf thread pdf_hangar_fallback();
+    pdf thread pdf_hangar_fallback();
   }
 
   while(true) {
@@ -3262,11 +3250,11 @@ hangar_pdf_seals() {
   nd_delete_seal_group_2 = getnode("nd_delete_seal_group_2", "targetname");
 
   foreach(seal in a_seal_group_1) {
-  seal thread stack_up_and_delete(nd_delete_seal_group_1);
+    seal thread stack_up_and_delete(nd_delete_seal_group_1);
   }
 
   foreach(seal in a_seal_group_2) {
-  seal thread stack_up_and_delete(nd_delete_seal_group_2);
+    seal thread stack_up_and_delete(nd_delete_seal_group_2);
   }
 }
 
@@ -3279,7 +3267,7 @@ handle_pdf_hangar_movement() {
   a_ai_guys = get_ai_group_ai("hangar_pdf");
 
   foreach(ai_guy in a_ai_guys) {
-  ai_guy thread force_goal(undefined, 64, 1, undefined, 1);
+    ai_guy thread force_goal(undefined, 64, 1, undefined, 1);
   }
 }
 

@@ -671,8 +671,7 @@ ai_space_pain() {
 
     if(distance2dsquared(self.origin, self.goalpos) > var_0 && var_1 > 0.5) {
       var_2 = % space_pain_1;
-    }
-    else {
+    } else {
       var_2 = common_scripts\utility::random([ % space_firing_pain_1, % space_firing_pain_2]);
     }
 
@@ -720,14 +719,11 @@ ai_space_death() {
   if(!isDefined(self.deathanim) && var_0 && self.damagelocation == "none") {
     if(self.damageyaw > 135 || self.damageyaw <= -135) {
       self.deathanim = % space_explosion_death_b_1;
-    }
-    else if(self.damageyaw > 45 && self.damageyaw <= 135) {
+    } else if(self.damageyaw > 45 && self.damageyaw <= 135) {
       self.deathanim = % space_explosion_death_l_1;
-    }
-    else if(self.damageyaw > -45 && self.damageyaw <= 45) {
+    } else if(self.damageyaw > -45 && self.damageyaw <= 45) {
       self.deathanim = % space_explosion_death_f_1;
-    }
-    else {
+    } else {
       self.deathanim = % space_explosion_death_r_1;
     }
   }
@@ -735,20 +731,15 @@ ai_space_death() {
   if(!isDefined(self.deathanim)) {
     if(self.damageyaw > -60 && self.damageyaw <= 60) {
       self.deathanim = % space_idle_death_behind;
-    }
-    else if(self.a.movement == "run") {
+    } else if(self.a.movement == "run") {
       self.deathanim = % space_death_1;
-    }
-    else if(animscripts\utility::damagelocationisany("left_arm_upper")) {
+    } else if(animscripts\utility::damagelocationisany("left_arm_upper")) {
       self.deathanim = % space_firing_death_1;
-    }
-    else if(animscripts\utility::damagelocationisany("head", "helmet")) {
+    } else if(animscripts\utility::damagelocationisany("head", "helmet")) {
       self.deathanim = % space_firing_death_2;
-    }
-    else if(animscripts\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot")) {
+    } else if(animscripts\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot")) {
       self.deathanim = % space_firing_death_3;
-    }
-    else {
+    } else {
       self.deathanim = common_scripts\utility::random([ % space_firing_death_1, % space_firing_death_2, % space_firing_death_3]);
     }
   }
@@ -770,8 +761,7 @@ ai_space_headshot_death() {
 
       if(gettimescale() < 0.5) {
         self playSound("space_npc_helmet_shatter_slomo");
-      }
-      else {
+      } else {
         self playSound("space_npc_helmet_shatter");
       }
     }
@@ -946,14 +936,12 @@ force_actor_space_rotation_update(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_3 = var_2;
-  }
-  else if(isDefined(self.node)) {
+  } else if(isDefined(self.node)) {
     var_3 = animscripts\utility::gettruenodeangles(self.node);
 
     if((self.node.type == "Cover Right 3D" || self.node.type == "Cover Left 3D") && isDefined(self.hideyawoffset)) {
       var_3 = combineangles(var_3, (0, self.hideyawoffset, 0));
-    }
-    else if(!isDefined(self.hideyawoffset)) {
+    } else if(!isDefined(self.hideyawoffset)) {
       if(self.node.type == "Cover Left 3D") {
         var_4 = anim.archetypes["soldier"]["swim"]["arrival_cover_corner_l_angleDelta"][4][4];
         var_3 = combineangles(var_3, (0, var_4[1], 0));
@@ -967,8 +955,7 @@ force_actor_space_rotation_update(var_0, var_1, var_2) {
 
   if(isDefined(var_1) && var_1) {
     doing_in_space_rotation(self.angles, var_3, 1);
-  }
-  else {
+  } else {
     thread doing_in_space_rotation(self.angles, var_3, 1);
   }
 

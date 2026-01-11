@@ -149,8 +149,7 @@ watchweaponchange() {
   }
 }
 
-watchriotshielduse() {
-}
+watchriotshielduse() {}
 
 updatelastheldweapontimings(newtime) {
   if(isDefined(self.currentweapon) && isDefined(self.currentweaponstarttime)) {
@@ -778,8 +777,7 @@ begingrenadetracking() {
   self.throwinggrenade = 0;
 }
 
-beginothergrenadetracking() {
-}
+beginothergrenadetracking() {}
 
 checkstucktoplayer(deleteonteamchange, awardscoreevent, weaponname) {
   self endon("death");
@@ -791,8 +789,7 @@ checkstucktoplayer(deleteonteamchange, awardscoreevent, weaponname) {
     }
 
     if(awardscoreevent && isDefined(self.originalowner)) {
-      if(self.originalowner isenemyplayer(player)) {
-      }
+      if(self.originalowner isenemyplayer(player)) {}
     }
 
     self.stucktoplayer = player;
@@ -857,8 +854,7 @@ registergrenadelauncherduddvar(dvarstring, defaultvalue, minvalue, maxvalue) {
 
   if(getdvarint(dvarstring) > maxvalue) {
     setdvar(dvarstring, maxvalue);
-  }
-  else if(getdvarint(dvarstring) < minvalue) {
+  } else if(getdvarint(dvarstring) < minvalue) {
     setdvar(dvarstring, minvalue);
   }
 
@@ -877,8 +873,7 @@ registerthrowngrenadeduddvar(dvarstring, defaultvalue, minvalue, maxvalue) {
 
   if(getdvarint(dvarstring) > maxvalue) {
     setdvar(dvarstring, maxvalue);
-  }
-  else if(getdvarint(dvarstring) < minvalue) {
+  } else if(getdvarint(dvarstring) < minvalue) {
     setdvar(dvarstring, minvalue);
   }
 
@@ -897,8 +892,7 @@ registerkillstreakdelay(dvarstring, defaultvalue, minvalue, maxvalue) {
 
   if(getdvarint(dvarstring) > maxvalue) {
     setdvar(dvarstring, maxvalue);
-  }
-  else if(getdvarint(dvarstring) < minvalue) {
+  } else if(getdvarint(dvarstring) < minvalue) {
     setdvar(dvarstring, minvalue);
   }
 
@@ -1063,8 +1057,7 @@ weapondamagetrace(from, to, startradius, ignore) {
   if(getdvarint(#"_id_0A1C40B1") != 0) {
     if(trace["fraction"] == 1) {
       thread debugline(midpos, to, (1, 1, 1));
-    }
-    else {
+    } else {
       thread debugline(midpos, trace["position"], (1, 0.9, 0.8));
       thread debugline(trace["position"], to, (1, 0.4, 0.3));
     }
@@ -1165,8 +1158,7 @@ deleteentonownerdeath(owner) {
   self delete();
 }
 
-monitor_dog_special_grenades() {
-}
+monitor_dog_special_grenades() {}
 
 isprimaryweapon(weaponname) {
   return isDefined(level.primary_weapon_array[weaponname]);
@@ -1195,14 +1187,11 @@ isexplosivebulletweapon(weaponname) {
 getweaponclass_array(current) {
   if(isprimaryweapon(current)) {
     return level.primary_weapon_array;
-  }
-  else if(issidearm(current)) {
+  } else if(issidearm(current)) {
     return level.side_arm_array;
-  }
-  else if(isgrenade(current)) {
+  } else if(isgrenade(current)) {
     return level.grenade_array;
-  }
-  else {
+  } else {
     return level.inventory_array;
   }
 }
@@ -1366,8 +1355,7 @@ stow_on_back(current) {
 
       if(issubstr(index_weapon, self.pers["primaryWeapon"]) && issubstr(self.curclass, "CUSTOM")) {
         self.tag_stowed_back = getweaponmodel(index_weapon, self getloadoutitem(self.class_num, "primarycamo"));
-      }
-      else {
+      } else {
         stowedmodelindex = getweaponstowedmodel(index_weapon);
         self.tag_stowed_back = getweaponmodel(index_weapon, stowedmodelindex);
       }
@@ -1434,8 +1422,7 @@ weapons_get_dvar_int(dvar, def) {
 weapons_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }
@@ -1584,11 +1571,9 @@ scavenger_think() {
 
         if(isDefined(level.customloadoutscavenge)) {
           maxammo = self[[level.customloadoutscavenge]](weapon);
-        }
-        else if(weapon == loadout_primary) {
+        } else if(weapon == loadout_primary) {
           maxammo = loadout_primary_count;
-        }
-        else if(weapon == loadout_secondary) {
+        } else if(weapon == loadout_secondary) {
           maxammo = loadout_secondary_count;
         }
 
@@ -1684,8 +1669,7 @@ dropscavengerfordeath(attacker) {
   }
   if(level.gametype == "hack") {
     item = self dropscavengeritem("scavenger_item_hack_mp");
-  }
-  else {
+  } else {
     item = self dropscavengeritem("scavenger_item_mp");
   }
 

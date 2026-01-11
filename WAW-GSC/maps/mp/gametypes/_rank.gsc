@@ -87,8 +87,7 @@ init() {
 isRegisteredEvent(type) {
   if(isDefined(level.scoreInfo[type])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -333,8 +332,7 @@ giveRankXP(type, value) {
   self endon("disconnect");
   if(level.teamBased && (!level.playerCount["allies"] || !level.playerCount["axis"])) {
     return;
-  }
-  else if(!level.teamBased && (level.playerCount["allies"] + level.playerCount["axis"] < 2)) {
+  } else if(!level.teamBased && (level.playerCount["allies"] + level.playerCount["axis"] < 2)) {
     return;
   }
   if(!isDefined(value)) {
@@ -405,8 +403,7 @@ giveRankXP(type, value) {
   if(isDefined(self.enableText) && self.enableText && !level.hardcoreMode) {
     if(type == "teamkill") {
       self thread updateRankScoreHUD(0 - getScoreInfoValue("kill"));
-    }
-    else {
+    } else {
       self thread updateRankScoreHUD(value);
     }
   }
@@ -696,8 +693,7 @@ unlockChallenge(refString) {
   for(i = 0; i < Ref_Tok.size; i++) {
     if(getSubStr(Ref_Tok[i], 0, 3) == "ch_") {
       unlockChallengeSingular(Ref_Tok[i]);
-    }
-    else {
+    } else {
       unlockChallengeGroup(Ref_Tok[i]);
     }
   }
@@ -876,8 +872,7 @@ getRank() {
   rankId = self.pers["rank"];
   if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))) {
     return rankId;
-  }
-  else {
+  } else {
     return self getRankForXp(rankXp);
   }
 }
@@ -893,8 +888,7 @@ getRankForXp(xpVal) {
     rankId++;
     if(isDefined(level.rankTable[rankId])) {
       rankName = level.rankTable[rankId][1];
-    }
-    else {
+    } else {
       rankName = undefined;
     }
   }

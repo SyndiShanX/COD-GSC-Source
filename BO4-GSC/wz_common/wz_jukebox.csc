@@ -6,7 +6,6 @@
 #include scripts\core_common\array_shared;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_world;
-
 #namespace wz_jukebox;
 
 autoexec __init__system__() {
@@ -88,7 +87,7 @@ jukebox_on() {
     song = self.songs[random_num];
     arrayremoveindex(self.songs, random_num);
   } else {
-    songs = array(#"hash_38b88ac8a1bb9bca", #"hash_38b88bc8a1bb9d7d", #"hash_38b888c8a1bb9864", #"hash_38b889c8a1bb9a17", #"hash_38b886c8a1bb94fe", #"hash_38b887c8a1bb96b1");
+    songs = array(#"hash_38b88ac8a1bb9bca", # "hash_38b88bc8a1bb9d7d", # "hash_38b888c8a1bb9864", # "hash_38b889c8a1bb9a17", # "hash_38b886c8a1bb94fe", # "hash_38b887c8a1bb96b1");
     self.songs = array::randomize(songs);
     random_num = randomint(self.songs.size);
     song = self.songs[random_num];

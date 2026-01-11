@@ -7,8 +7,7 @@
 codecallback_handleinstantmessage(var_0) {
   if(isDefined(level.globalinstantmessagehandler)) {
     [[level.globalinstantmessagehandler]](var_0);
-  }
-  else {
+  } else {
     iprintlnbold("no level handler for: " + var_0);
   }
 }

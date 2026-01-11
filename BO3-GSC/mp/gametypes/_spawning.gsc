@@ -464,9 +464,7 @@ function onspawnplayer(predictedspawn = 0) {
         spawn_angles = spawnpoint.angles;
       }
       if(isDefined(level.var_e0d16266)) {
-        [
-          [level.var_e0d16266]
-        ](spawnpoint, predictedspawn);
+        [[level.var_e0d16266]](spawnpoint, predictedspawn);
       }
     } else {
       spawn_point = getspawnpoint(self, predictedspawn);

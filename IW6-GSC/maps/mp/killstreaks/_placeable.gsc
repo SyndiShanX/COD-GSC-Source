@@ -196,8 +196,7 @@ onPlaced(streakName) {
   foreach(player in level.players) {
     if(player == owner) {
       self EnablePlayerUse(player);
-    }
-    else {
+    } else {
       self DisablePlayerUse(player);
     }
   }

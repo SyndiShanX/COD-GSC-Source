@@ -7,11 +7,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\killstreaks\mp\killstreak_vehicle;
 #include scripts\killstreaks\ultimate_turret_shared;
-
 #namespace ultimate_turret;
 
 autoexec __init__system__() {
-  system::register(#"ultimate_turret", &__init__, undefined, #"killstreaks");
+  system::register(#"ultimate_turret", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {

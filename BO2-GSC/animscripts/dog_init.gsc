@@ -40,8 +40,7 @@ setmeleeattackdist() {
   while(true) {
     if(isDefined(self.enemy) && isplayer(self.enemy)) {
       self.meleeattackdist = anim.dogattackplayerdist;
-    }
-    else {
+    } else {
       self.meleeattackdist = anim.dogattackaidist;
     }
 

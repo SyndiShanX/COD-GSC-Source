@@ -135,8 +135,7 @@ setwaypoint(var_00, var_01) {
 
   if(isDefined(var_02)) {
     var_03 = var_02;
-  }
-  else {
+  } else {
     var_03 = func_AE1D(var_00);
     self setrankedplayerdata("mp", "activeMissionComplete", -1);
     var_3.func_B8D4 = var_01;

@@ -14,9 +14,7 @@ init_coop_challenge() {
 }
 
 func_C9B9() {
-  [
-    [level.challenge_pause_func]
-  ]();
+  [[level.challenge_pause_func]]();
 }
 
 func_956D() {
@@ -90,13 +88,12 @@ deactivate_current_challenge() {
     if(func_9F17(var_00)) {
       if(level.current_challenge_timer - level.storechallengetime <= 0.01) {
         scripts\cp\zombies\zombie_analytics::func_AF63(var_0.ref, level.wave_num, level.storechallengetime - level.current_challenge_timer);
-      }
-      else {
+      } else {
         scripts\cp\zombies\zombie_analytics::func_AF63(var_0.ref, level.wave_num, level.current_challenge_timer);
       }
 
       foreach(var_03 in level.players) {
-      var_03 thread scripts\cp\cp_vo::try_to_play_vo("challenge_success_generic", "zmb_comment_vo");
+        var_03 thread scripts\cp\cp_vo::try_to_play_vo("challenge_success_generic", "zmb_comment_vo");
       }
 
       level.func_C1E1++;
@@ -111,8 +108,7 @@ deactivate_current_challenge() {
 
       if(var_0.ref == "no_laststand" || var_0.ref == "no_bleedout" || var_0.ref == "protect_player") {
         scripts\cp\zombies\zombie_analytics::func_AF64(var_0.ref, level.wave_num, 0, level.func_3C2B[var_0.ref]);
-      }
-      else {
+      } else {
         scripts\cp\zombies\zombie_analytics::func_AF64(var_0.ref, level.wave_num, var_0.current_progress / var_0.goal * 100, level.func_3C2B[var_0.ref]);
       }
 
@@ -172,9 +168,7 @@ activate_new_challenge(var_00) {
 }
 
 func_7897(var_00) {
-  return [
-    [level.challenge_scalar_func]
-  ](var_00);
+  return [[level.challenge_scalar_func]](var_00);
 }
 
 func_3C15() {
@@ -182,14 +176,14 @@ func_3C15() {
   var_00 = int(gettime() + 5000);
 
   foreach(var_02 in level.players) {
-  var_02 setclientomnvar("ui_intel_title", 1);
+    var_02 setclientomnvar("ui_intel_title", 1);
   }
 
   level.current_challenge_title = 1;
   wait 5;
 
   foreach(var_02 in level.players) {
-  var_02 setclientomnvar("ui_intel_title", -1);
+    var_02 setclientomnvar("ui_intel_title", -1);
   }
 
   level.current_challenge_title = -1;
@@ -214,8 +208,7 @@ func_56AD(var_00, var_01, var_02) {
 
       if(var_00 == "next_challenge") {
         var_05 playlocalsound("zmb_challenge_config");
-      }
-      else {
+      } else {
         var_05 playlocalsound("zmb_challenge_start");
       }
 
@@ -252,7 +245,7 @@ func_100CB(var_00, var_01) {
   wait 3.0;
 
   foreach(var_03 in level.players) {
-  var_03 thread reset_omnvars();
+    var_03 thread reset_omnvars();
   }
 
   setomnvar("zm_challenge_progress", 0);
@@ -343,8 +336,7 @@ func_4FED() {}
 func_4FFA() {
   if(isDefined(self.success)) {
     return self.success;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -352,8 +344,7 @@ func_4FFA() {
 default_successfunc() {
   if(isDefined(self.success)) {
     return self.success;
-  }
-  else {
+  } else {
     return self.default_success;
   }
 }
@@ -387,8 +378,7 @@ func_F31A(var_00) {
 func_7B31() {
   if(!isDefined(level.func_C1E1)) {
     return 0;
-  }
-  else {
+  } else {
     return level.func_C1E1;
   }
 }

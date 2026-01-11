@@ -171,14 +171,14 @@ gettargetlist() {
         if(self.team != level.teamnamelist[var_4]) {
           if(level.uavmodels[level.teamnamelist[var_4]].size) {
             foreach(var_6 in level.uavmodels[level.teamnamelist[var_4]]) {
-            var_0[var_0.size] = var_6;
+              var_0[var_0.size] = var_6;
             }
           }
         }
       }
     } else if(level.uavmodels[level.otherteam[self.team]].size) {
       foreach(var_6 in level.uavmodels[level.otherteam[self.team]]) {
-      var_0[var_0.size] = var_6;
+        var_0[var_0.size] = var_6;
       }
     }
 

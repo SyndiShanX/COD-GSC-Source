@@ -28,8 +28,7 @@ func_BE56(var_00, var_01, var_02) {
   if(getdvarint("narrative_debug") == 1) {
     if(!isDefined(self.origin)) {
       return;
-    }
-    else {
+    } else {
       var_03 = self.origin;
     }
 

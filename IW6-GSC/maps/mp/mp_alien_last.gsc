@@ -96,8 +96,7 @@ main() {
 
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.base_player_count_multiplier = 1;
-  }
-  else {
+  } else {
     level.base_player_count_multiplier = 0.49;
   }
 
@@ -272,7 +271,7 @@ killfxonplayerdeath(var_0, var_1, var_2, var_3) {
   if(isDefined(var_0)) {
     if(isarray(var_0)) {
       foreach(var_5 in var_0) {
-      var_5 delete();
+        var_5 delete();
       }
     } else
       var_0 delete();
@@ -351,7 +350,7 @@ unlock_last_secret_intel() {
   wait 1;
 
   foreach(var_1 in level.players) {
-  thread maps\mp\alien\_pillage_intel::give_player_easter_egg_intel(var_1);
+    thread maps\mp\alien\_pillage_intel::give_player_easter_egg_intel(var_1);
   }
 }
 
@@ -359,7 +358,7 @@ wait_for_letter_shot(var_0) {
   level endon("stop_waiting");
 
   foreach(var_2 in level.easter_egg_trigs) {
-  var_2 common_scripts\utility::trigger_off();
+    var_2 common_scripts\utility::trigger_off();
   }
 
   foreach(var_6, var_5 in var_0) {
@@ -1185,8 +1184,7 @@ play_last_vignette_player_vo(var_0) {
     if(var_2 == self) {
       if(maps\mp\alien\_music_and_dialog::alias_2d_version_exists(var_2, var_0)) {
         var_2 playlocalsound(maps\mp\alien\_music_and_dialog::get_alias_2d_version(var_2, var_0));
-      }
-      else {
+      } else {
         var_2 playlocalsound(var_0);
       }
 
@@ -1432,7 +1430,7 @@ remove_conduit_vo_once_complete() {
 
 remove_conduit_vo_on_player(var_0) {
   foreach(var_3, var_2 in level.alien_vo_priority_level) {
-  maps\mp\alien\_music_and_dialog::remove_vo_data(var_0, var_2);
+    maps\mp\alien\_music_and_dialog::remove_vo_data(var_0, var_2);
   }
 }
 
@@ -1471,8 +1469,7 @@ dlc4_drill_damage_adjust_function(var_0, var_1, var_2) {
 set_spawn_table() {
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     set_chaos_spawn_table();
-  }
-  else {
+  } else {
     if(maps\mp\alien\_utility::is_hardcore_mode()) {
       set_hardcore_extinction_spawn_table();
       return;
@@ -1549,8 +1546,7 @@ set_chaos_spawn_table() {
 set_hardcore_extinction_spawn_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_last_hardcore_sp.csv";
-  }
-  else {
+  } else {
     level.alien_cycle_table_hardcore = "mp/alien/cycle_spawn_last_hardcore_mp.csv";
   }
 }
@@ -1558,8 +1554,7 @@ set_hardcore_extinction_spawn_table() {
 set_regular_extinction_spawn_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.alien_cycle_table = "mp/alien/cycle_spawn_last_sp.csv";
-  }
-  else {
+  } else {
     level.alien_cycle_table = "mp/alien/cycle_spawn_last_mp.csv";
   }
 }
@@ -1567,8 +1562,7 @@ set_regular_extinction_spawn_table() {
 set_container_spawn_table() {
   if(maps\mp\alien\_utility::is_hardcore_mode()) {
     set_hardcore_container_spawn_table();
-  }
-  else {
+  } else {
     set_regular_container_spawn_table();
   }
 }
@@ -1576,8 +1570,7 @@ set_container_spawn_table() {
 set_hardcore_container_spawn_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.container_spawn_table = "mp/alien/last_container_spawn_hardcore_sp.csv";
-  }
-  else {
+  } else {
     level.container_spawn_table = "mp/alien/last_container_spawn_hardcore.csv";
   }
 }
@@ -1585,8 +1578,7 @@ set_hardcore_container_spawn_table() {
 set_regular_container_spawn_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.container_spawn_table = "mp/alien/last_container_spawn_sp.csv";
-  }
-  else {
+  } else {
     level.container_spawn_table = "mp/alien/last_container_spawn.csv";
   }
 }
@@ -1594,8 +1586,7 @@ set_regular_container_spawn_table() {
 set_alien_definition_table() {
   if(maps\mp\alien\_utility::is_hardcore_mode()) {
     set_hardcore_alien_definition_table();
-  }
-  else {
+  } else {
     set_regular_alien_definition_table();
   }
 }
@@ -1603,8 +1594,7 @@ set_alien_definition_table() {
 set_regular_alien_definition_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.default_alien_definition = "mp/alien/last_alien_definition_sp.csv";
-  }
-  else {
+  } else {
     level.default_alien_definition = "mp/alien/last_alien_definition.csv";
   }
 }
@@ -1612,8 +1602,7 @@ set_regular_alien_definition_table() {
 set_hardcore_alien_definition_table() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     level.default_alien_definition = "mp/alien/last_alien_definition_hardcore_sp.csv";
-  }
-  else {
+  } else {
     level.default_alien_definition = "mp/alien/last_alien_definition_hardcore.csv";
   }
 }
@@ -1665,8 +1654,7 @@ register_egg_default_loc() {
 last_player_initial_spawn_loc_override() {
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     chaos_player_initial_spawn_loc_override();
-  }
-  else {
+  } else {
     regular_player_initial_spawn_loc_override();
   }
 }

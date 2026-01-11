@@ -39,8 +39,7 @@ useDog() {
     dog_type = self GetCommonPlayerDataReservedInt("mp_dog_type");
     if(dog_type == 1) {
       self iPrintLnBold(&"KILLSTREAKS_ALREADY_HAVE_WOLF");
-    }
-    else {
+    } else {
       self iPrintLnBold(&"KILLSTREAKS_ALREADY_HAVE_DOG");
     }
     return false;
@@ -197,8 +196,7 @@ spawn_dog(optional_spawnOrigin, optional_spawnAngles, optional_owner) {
   if(dog_type == 1) {
     if(wolf_type == 0) {
       dog_model = "mp_fullbody_wolf_b";
-    }
-    else {
+    } else {
       dog_model = "mp_fullbody_wolf_c";
     }
   }
@@ -231,8 +229,7 @@ spawn_dog(optional_spawnOrigin, optional_spawnAngles, optional_owner) {
 
   if(dog_type == 1) {
     animclass = "wolf_animclass";
-  }
-  else {
+  } else {
     animclass = "dog_animclass";
   }
 
@@ -266,8 +263,7 @@ spawn_dog(optional_spawnOrigin, optional_spawnAngles, optional_owner) {
   if(IsHairRunning()) {
     if(dog_type == 1) {
       furFX = level.wolfFurFX[wolf_type];
-    }
-    else {
+    } else {
       furFX = level.furFX;
     }
 

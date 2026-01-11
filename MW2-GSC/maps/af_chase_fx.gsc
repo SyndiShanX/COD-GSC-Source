@@ -161,8 +161,7 @@ main() {
 
   if(level.script == "ending") {
     level._effect["light_glow_white_bulb"] = LoadFX("dust/light_shaft_motes_afchase");
-  }
-  else {
+  } else {
     level._effect["light_glow_white_bulb"] = LoadFX("misc/light_glow_white_bulb");
   }
 
@@ -278,7 +277,7 @@ stop_sandstorm_effect() {
   for(;;) {
     if(level.sandstorm_time.min >= 1.5 && near_fx.size) {
       foreach(fx in near_fx) {
-      fx pauseeffect();
+        fx pauseeffect();
       }
 
       near_fx = [];

@@ -33,8 +33,7 @@ gpr_updated(localclientnum, op, data) {
 
       if(val == 0) {
         self set_bldg_orange(localclientnum);
-      }
-      else {
+      } else {
         self set_bldg_green(localclientnum);
       }
 

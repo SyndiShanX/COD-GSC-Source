@@ -24,8 +24,7 @@ add_buildable_to_pool(stub, poolname) {
 
   if(!isDefined(level.buildablepools[poolname].buildable_slot)) {
     level.buildablepools[poolname].buildable_slot = stub.buildablestruct.buildable_slot;
-  }
-  else {
+  } else {
     assert(level.buildablepools[poolname].buildable_slot == stub.buildablestruct.buildable_slot);
   }
 
@@ -48,8 +47,7 @@ reregister_unitrigger(unitrigger_stub, new_trigger_func) {
 
   if(static) {
     register_static_unitrigger(unitrigger_stub, new_trigger_func, 0);
-  }
-  else {
+  } else {
     register_unitrigger(unitrigger_stub, new_trigger_func);
   }
 }
@@ -107,8 +105,7 @@ pooledbuildabletrigger_update_prompt(player) {
   if(isDefined(self.stub.cursor_hint)) {
     if(self.stub.cursor_hint == "HINT_WEAPON" && isDefined(self.stub.cursor_hint_weapon)) {
       self setcursorhint(self.stub.cursor_hint, self.stub.cursor_hint_weapon);
-    }
-    else {
+    } else {
       self setcursorhint(self.stub.cursor_hint);
     }
   }
@@ -136,8 +133,7 @@ pooledbuildablestub_update_prompt(player, trigger) {
     if(!isDefined(player player_get_buildable_piece(slot))) {
       if(isDefined(level.zombie_buildables[self.equipname].hint_more)) {
         self.hint_string = level.zombie_buildables[self.equipname].hint_more;
-      }
-      else {
+      } else {
         self.hint_string = &"ZOMBIE_BUILD_PIECE_MORE";
       }
 
@@ -149,8 +145,7 @@ pooledbuildablestub_update_prompt(player, trigger) {
     } else if(isDefined(self.bound_to_buildable) && !self.bound_to_buildable.buildablezone buildable_has_piece(player player_get_buildable_piece(slot))) {
       if(isDefined(level.zombie_buildables[self.bound_to_buildable.equipname].hint_wrong)) {
         self.hint_string = level.zombie_buildables[self.bound_to_buildable.equipname].hint_wrong;
-      }
-      else {
+      } else {
         self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
       }
 
@@ -162,8 +157,7 @@ pooledbuildablestub_update_prompt(player, trigger) {
     } else if(!isDefined(self.bound_to_buildable) && !self.buildable_pool pooledbuildable_has_piece(player player_get_buildable_piece(slot))) {
       if(isDefined(level.zombie_buildables[self.equipname].hint_wrong)) {
         self.hint_string = level.zombie_buildables[self.equipname].hint_wrong;
-      }
-      else {
+      } else {
         self.hint_string = &"ZOMBIE_BUILD_PIECE_WRONG";
       }
 
@@ -173,8 +167,7 @@ pooledbuildablestub_update_prompt(player, trigger) {
 
       if(isDefined(level.zombie_buildables[self.equipname].hint)) {
         self.hint_string = level.zombie_buildables[self.equipname].hint;
-      }
-      else {
+      } else {
         self.hint_string = "Missing buildable hint";
       }
     } else {
@@ -182,8 +175,7 @@ pooledbuildablestub_update_prompt(player, trigger) {
 
       if(isDefined(level.zombie_buildables[self.equipname].hint)) {
         self.hint_string = level.zombie_buildables[self.equipname].hint;
-      }
-      else {
+      } else {
         self.hint_string = "Missing buildable hint";
       }
     }

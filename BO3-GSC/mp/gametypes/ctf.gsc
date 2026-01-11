@@ -269,9 +269,7 @@ function onroundendgame(winningteam) {
         if(team === winningteam) {
           score++;
         }
-        [
-          [level._setteamscore]
-        ](team, score);
+        [[level._setteamscore]](team, score);
       }
     } else {
       updateteamscorebyflagscaptured();

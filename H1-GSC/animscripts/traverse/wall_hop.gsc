@@ -7,8 +7,7 @@
 main() {
   if(self.type == "dog") {
     animscripts\traverse\shared::dog_wall_and_window_hop("wallhop", 40);
-  }
-  else {
+  } else {
     wall_hop_human();
   }
 }
@@ -23,8 +22,7 @@ wall_hop_human() {
 
   if(var_1 || randomint(100) < 30) {
     var_0["traverseAnim"] = % traverse_wallhop_3;
-  }
-  else {
+  } else {
     var_0["traverseAnim"] = % traverse_wallhop;
   }
 

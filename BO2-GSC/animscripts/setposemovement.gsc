@@ -20,8 +20,7 @@ setposemovement(desiredpose, desiredmovement) {
   if(desiredpose == "") {
     if(self.a.pose == "prone" && (desiredmovement == "walk" || desiredmovement == "run")) {
       desiredpose = "crouch";
-    }
-    else {
+    } else {
       desiredpose = self.a.pose;
     }
   }
@@ -565,14 +564,11 @@ blendintostandrun() {
 
   if(self animscripts\cqb::shouldcqb()) {
     playblendtransitionstandrun(animarray("start_cqb_run_f", "move"));
-  }
-  else if(self animscripts\utility::isincombat() && isDefined(self.run_combatanim)) {
+  } else if(self animscripts\utility::isincombat() && isDefined(self.run_combatanim)) {
     playblendtransitionstandrun(self.run_combatanim);
-  }
-  else if(isDefined(self.run_noncombatanim)) {
+  } else if(isDefined(self.run_noncombatanim)) {
     playblendtransitionstandrun(self.run_noncombatanim);
-  }
-  else {
+  } else {
     shouldshootwhilemoving = 0;
     runanimname = "start_stand_run_f";
     transitionanimparent = % combatrun;
@@ -599,8 +595,7 @@ blendintostandrun() {
 
     if(shouldshootwhilemoving && self.a.pose == "stand") {
       self thread animscripts\run::updaterunweights("BlendIntoStandRun", forwardrunanim, animarray("run_n_gun_b"));
-    }
-    else {
+    } else {
       self thread animscripts\run::updaterunweights("BlendIntoStandRun", forwardrunanim, animarray("combat_run_b"), animarray("combat_run_l"), animarray("combat_run_r"));
     }
 
@@ -639,8 +634,7 @@ crouchtostand() {
 
   if(self animscripts\utility::weaponanims() == "pistol" || self animscripts\utility::weaponanims() == "none") {
     playtransitionanimation(animarray("crouch_2_stand"), "stand", "stop", standspeed);
-  }
-  else {
+  } else {
     self randomizeidleset();
     playtransitionanimation(animarray("crouch_2_stand"), "stand", "stop", standspeed);
   }
@@ -844,8 +838,7 @@ crouchruntoprone() {
 
   if(self maymovetopoint(endpoint)) {
     playtransitionanimation(diveanim, "prone", "stop", 0.5);
-  }
-  else {
+  } else {
     playtransitionanimation(animarray("run_2_prone_gunsupport", "move"), "prone", "stop", 0.5);
   }
 }
@@ -946,8 +939,7 @@ transitiontotacticalwalk(newpose) {
 
   if(newpose == "stand") {
     rate = 2;
-  }
-  else {
+  } else {
     rate = 1;
   }
 

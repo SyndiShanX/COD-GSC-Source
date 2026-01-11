@@ -4162,8 +4162,7 @@ roaming_nodechain_nav(node, nodeLoiterTime, nodeInitRadius, nodeEndRadius, nodeC
 
     if(isDefined(node.target)) {
       node = getnode(node.target, "targetname");
-    }
-    else {
+    } else {
       break;
     }
   }

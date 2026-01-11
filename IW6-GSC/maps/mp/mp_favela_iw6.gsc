@@ -308,9 +308,7 @@ debugWatchDvars() {
     foreach(dvar, callback in level.dbgDvarCallback) {
       value = GetDvar(dvar);
       if(value != "") {
-        [
-          [callback]
-        ](value);
+        [[callback]](value);
         SetDvar(dvar, "");
       }
     }

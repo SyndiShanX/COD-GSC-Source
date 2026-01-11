@@ -18,8 +18,7 @@ setParent(element) {
 
   if(isDefined(self.point)) {
     self setPoint(self.point, self.relativePoint, self.xOffset, self.yOffset);
-  }
-  else {
+  } else {
     self setPoint("TOPLEFT");
   }
 }
@@ -141,16 +140,14 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     offsetX = int(element.width / 2);
     if(relativeX == "left_adjustable" || element.alignX == "right") {
       xFactor = -1;
-    }
-    else {
+    } else {
       xFactor = 1;
     }
   } else {
     offsetX = element.width;
     if(relativeX == "left_adjustable") {
       xFactor = -1;
-    }
-    else {
+    } else {
       xFactor = 1;
     }
   }
@@ -163,16 +160,14 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     offsetY = int(element.height / 2);
     if(relativeY == "top_adjustable" || element.alignY == "bottom") {
       yFactor = -1;
-    }
-    else {
+    } else {
       yFactor = 1;
     }
   } else {
     offsetY = element.height;
     if(relativeY == "top_adjustable") {
       yFactor = -1;
-    }
-    else {
+    } else {
       yFactor = 1;
     }
   }
@@ -200,18 +195,15 @@ setPointBar(point, relativePoint, xOffset, yOffset) {
 
   if(self.alignX == "left") {
     self.bar.x = self.x;
-  }
-  else if(self.alignX == "right") {
+  } else if(self.alignX == "right") {
     self.bar.x = self.x - self.width;
-  }
-  else {
+  } else {
     self.bar.x = self.x - int(self.width / 2);
   }
 
   if(self.alignY == "top") {
     self.bar.y = self.y;
-  }
-  else if(self.alignY == "bottom") {
+  } else if(self.alignY == "bottom") {
     self.bar.y = self.y;
   }
 
@@ -270,8 +262,7 @@ createFontString(font, fontScale) {
 createServerFontString(font, fontScale, team) {
   if(isDefined(team)) {
     fontElem = newTeamHudElem(team);
-  }
-  else {
+  } else {
     fontElem = newHudElem();
   }
 
@@ -295,8 +286,7 @@ createServerFontString(font, fontScale, team) {
 createServerTimer(font, fontScale, team) {
   if(isDefined(team)) {
     timerElem = newTeamHudElem(team);
-  }
-  else {
+  } else {
     timerElem = newHudElem();
   }
   timerElem.elemType = "timer";
@@ -361,8 +351,7 @@ createIcon(shader, width, height) {
 createServerIcon(shader, width, height, team) {
   if(isDefined(team)) {
     iconElem = newTeamHudElem(team);
-  }
-  else {
+  } else {
     iconElem = newHudElem();
   }
   iconElem.elemType = "icon";
@@ -389,8 +378,7 @@ createServerIcon(shader, width, height, team) {
 createServerBar(color, width, height, flashFrac, team, selected) {
   if(isDefined(team)) {
     barElem = newTeamHudElem(team);
-  }
-  else {
+  } else {
     barElem = newHudElem();
   }
   barElem.x = 0;
@@ -408,8 +396,7 @@ createServerBar(color, width, height, flashFrac, team, selected) {
 
   if(isDefined(team)) {
     barElemBG = newTeamHudElem(team);
-  }
-  else {
+  } else {
     barElemBG = newHudElem();
   }
   barElemBG.elemType = "bar";
@@ -777,8 +764,7 @@ transitionFadeIn(duration) {
   self fadeOverTime(duration);
   if(isDefined(self.maxAlpha)) {
     self.alpha = self.maxAlpha;
-  }
-  else {
+  } else {
     self.alpha = 1;
   }
 }
@@ -817,11 +803,9 @@ getDailyRef(chRef) {
 ch_getProgress(refString) {
   if(level.challengeInfo[refString]["type"] == 0) {
     return self GetRankedPlayerData("challengeProgress", refString);
-  }
-  else if(level.challengeInfo[refString]["type"] == 1) {
+  } else if(level.challengeInfo[refString]["type"] == 1) {
     return self GetRankedPlayerData("challengeProgress", getDailyRef(refString));
-  }
-  else if(level.challengeInfo[refString]["type"] == 2) {
+  } else if(level.challengeInfo[refString]["type"] == 2) {
     return self GetRankedPlayerData("challengeProgress", getWeeklyRef(refString));
   }
 }
@@ -829,11 +813,9 @@ ch_getProgress(refString) {
 ch_getState(refString) {
   if(level.challengeInfo[refString]["type"] == 0) {
     return self GetRankedPlayerData("challengeState", refString);
-  }
-  else if(level.challengeInfo[refString]["type"] == 1) {
+  } else if(level.challengeInfo[refString]["type"] == 1) {
     return self GetRankedPlayerData("challengeState", getDailyRef(refString));
-  }
-  else if(level.challengeInfo[refString]["type"] == 2) {
+  } else if(level.challengeInfo[refString]["type"] == 2) {
     return self GetRankedPlayerData("challengeState", getWeeklyRef(refString));
   }
 }
@@ -841,11 +823,9 @@ ch_getState(refString) {
 ch_setProgress(refString, value) {
   if(level.challengeInfo[refString]["type"] == 0) {
     return self setRankedPlayerData("challengeProgress", refString, value);
-  }
-  else if(level.challengeInfo[refString]["type"] == 1) {
+  } else if(level.challengeInfo[refString]["type"] == 1) {
     return self setRankedPlayerData("challengeProgress", getDailyRef(refString), value);
-  }
-  else if(level.challengeInfo[refString]["type"] == 2) {
+  } else if(level.challengeInfo[refString]["type"] == 2) {
     return self setRankedPlayerData("challengeProgress", getWeeklyRef(refString), value);
   }
 }
@@ -853,11 +833,9 @@ ch_setProgress(refString, value) {
 ch_setState(refString, value) {
   if(level.challengeInfo[refString]["type"] == 0) {
     return self setRankedPlayerData("challengeState", refString, value);
-  }
-  else if(level.challengeInfo[refString]["type"] == 1) {
+  } else if(level.challengeInfo[refString]["type"] == 1) {
     return self setRankedPlayerData("challengeState", getDailyRef(refString), value);
-  }
-  else if(level.challengeInfo[refString]["type"] == 2) {
+  } else if(level.challengeInfo[refString]["type"] == 2) {
     return self setRankedPlayerData("challengeState", getWeeklyRef(refString), value);
   }
 }
@@ -865,11 +843,9 @@ ch_setState(refString, value) {
 ch_getTarget(refString, state) {
   if(level.challengeInfo[refString]["type"] == 0) {
     return int(tableLookup("mp/allChallengesTable.csv", 0, refString, 9 + ((state - 1) * 2)));
-  }
-  else if(level.challengeInfo[refString]["type"] == 1) {
+  } else if(level.challengeInfo[refString]["type"] == 1) {
     return int(tableLookup("mp/dailyChallengesTable.csv", 0, refString, 9 + ((state - 1) * 2)));
-  }
-  else if(level.challengeInfo[refString]["type"] == 2) {
+  } else if(level.challengeInfo[refString]["type"] == 2) {
     return int(tableLookup("mp/weeklyChallengesTable.csv", 0, refString, 9 + ((state - 1) * 2)));
   }
 }

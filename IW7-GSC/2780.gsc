@@ -124,8 +124,7 @@ func_139CA() {
 
   if(var_00 > 0) {
     self setclientomnvar("ui_shoulder_cannon_timer_end_milliseconds", self.func_38D5 + var_00);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_shoulder_cannon_timer_end_milliseconds", self.func_38D5);
   }
 }
@@ -211,8 +210,7 @@ balldrone_burstfirestart(var_00) {
   while(self.func_1E2D > 0) {
     if(self.func_1E2D <= 20) {
       var_06 = self.func_1E2D;
-    }
-    else {
+    } else {
       var_06 = randomintrange(10, 20);
     }
 
@@ -340,8 +338,7 @@ func_1000B(var_00) {
   for(;;) {
     if(var_02 == "+frag") {
       self waittill("power_primary_used");
-    }
-    else {
+    } else {
       self waittill("power_secondary_used");
     }
 

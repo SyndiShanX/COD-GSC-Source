@@ -9,11 +9,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_hud;
 
 autoexec __init__system__() {
-  system::register(#"zm_hud", &__init__, &__main__, #"zm_crafting");
+  system::register(#"zm_hud", &__init__, &__main__, # "zm_crafting");
 }
 
 __init__() {

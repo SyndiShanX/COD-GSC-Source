@@ -9,8 +9,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\mp_carentan_fog_hdr::setupfog();
-  }
-  else {
+  } else {
     maps\createart\mp_carentan_fog_hdr::setupfog();
   }
 

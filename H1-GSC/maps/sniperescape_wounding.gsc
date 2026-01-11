@@ -275,8 +275,7 @@ player_boards_seaknight(var_0, var_1) {
   for(;;) {
     if(isalive(level.price)) {
       objective_position(getobj("seaknight"), level.price.origin);
-    }
-    else {
+    } else {
       objective_position(getobj("seaknight"), var_1.origin);
     }
 
@@ -384,8 +383,7 @@ price_complains_until_he_is_picked_up() {
   for(;;) {
     if(level.price istouching(var_0)) {
       maps\sniperescape_code::price_line("pick_me_up_and_move_me");
-    }
-    else {
+    } else {
       maps\sniperescape_code::price_line("over_there_behind_ferris_wheel");
     }
 
@@ -393,8 +391,7 @@ price_complains_until_he_is_picked_up() {
 
     if(level.price istouching(var_0)) {
       maps\sniperescape_code::price_line("a_bit_farther_north");
-    }
-    else {
+    } else {
       maps\sniperescape_code::price_line("over_to_that_hill");
     }
 
@@ -719,8 +716,7 @@ heli_shoots_targetnamed_rocket(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_3.units_per_second = 2000;
-  }
-  else {
+  } else {
     var_3 thread wall_explosion_rocket_acceleration(var_1);
   }
 
@@ -1422,7 +1418,7 @@ ferris_wheel_placement_objective() {
   var_0 = getEntArray("grass_obj", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 setModel("h1_sniperescape_grassobjective");
+    var_2 setModel("h1_sniperescape_grassobjective");
   }
 
   common_scripts\utility::flag_wait("put_price_near_wheel");

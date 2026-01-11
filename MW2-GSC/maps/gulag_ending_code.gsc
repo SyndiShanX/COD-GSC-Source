@@ -41,7 +41,7 @@ become_price() {
   	//maps\_utility::missionFailedWrapper();
   	return;
   }
-	
+  	
   */
   self notify("saved");
 
@@ -181,11 +181,10 @@ moderate_ai_moveplaybackrate() {
 
     if(scale < 0) {
       scale = 0;
+    } else {
+      if(scale > 1)
     }
-    else {
-    if(scale > 1)
-    }
-      scale = 1;
+    scale = 1;
     scale = 1 - scale;
     ai_playback = min_playback + range_playback * scale;
 
@@ -196,11 +195,10 @@ moderate_ai_moveplaybackrate() {
 
     if(scale < 0) {
       scale = 0;
+    } else {
+      if(scale > 1)
     }
-    else {
-    if(scale > 1)
-    }
-      scale = 1;
+    scale = 1;
 
     sprint_speed = min_sprint + range_sprint * scale;
 
@@ -632,14 +630,14 @@ fx_fall_around_player(angles) {
 
   fx_org = level.player.origin + forward * 35 + right * -10 + (0, 0, 32);
   /*
-	fx = getfx( "0_ceiling_rock_explosion" );
-//	thread player_ending_cavein();
-	//thread player_dies_to_cavein( 2 );
-	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
-	*/
+  	fx = getfx( "0_ceiling_rock_explosion" );
+  //	thread player_ending_cavein();
+  	//thread player_dies_to_cavein( 2 );
+  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
+  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
+  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
+  	noself_delaycall( 0.05, ::PlayFX, fx, fx_org );
+  	*/
 
   //	fx = getfx( "0_ceiling_rock" );
   fx = getfx("hallway_collapsing_huge");
@@ -1114,11 +1112,11 @@ pillar_anim_show() {
   /*
   models = getEntArray( "pillar_anim", "targetname" );
   array_thread( models, ::path_anim_setup );
-	
+  	
   models = array_index_by_parameters( models );
   //flag_wait( "reach_mound" );
   wait( 1 );
-	
+  	
   ents = [];
   foreach ( model in models )
   {
@@ -1137,7 +1135,7 @@ pillar_anim_show() {
   //fakeseys on the first one
   ents[ "1" ] path_anim( 0.1 );
   ents[ "2" ] path_anim( 0.1 );
-	
+  	
   // first grind in
   ents[ "1" ] path_anim( 2, 0.2, 0.2 );
   ents[ "2" ] path_anim( 2, 0.2, 0.2 );
@@ -1152,7 +1150,7 @@ pillar_anim_show() {
   ents[ "1" ] path_anim( 0.25 );
   ents[ "2" ] path_anim( 0.25 );
   wait( 0.25 );
-	
+  	
   // falling
   ents[ "1" ] path_anim( 0.25 );
   ents[ "2" ] path_anim( 0.25 );
@@ -1222,12 +1220,12 @@ eqtest() {
   db = -25;
   freq = 1100;
   a = 5;
-	
+  	
   foreach ( channel, _ in channels )
   {
   	level.player seteqbands( channel, mix_track, "highshelf", db, freq, 1, "lowshelf", 2, freq, 1 );
   }
-	
+  	
   */
 
   AmbientStop(0.5);
@@ -1340,7 +1338,7 @@ player_ending_cavein() {
   fx[ fx.size ] = "hallway_collapsing_huge";
 
   index = 0;
-	
+  	
   counts = [];
   counts[ 0 ] = 4;
   counts[ 1 ] = 80;
@@ -1440,11 +1438,10 @@ chase_train_chases(dist, starter) {
 
     if(scale < 0) {
       scale = 0;
+    } else {
+      if(scale > 1)
     }
-    else {
-    if(scale > 1)
-    }
-      scale = 1;
+    scale = 1;
 
     speed = min_speed + range_speed * scale;
 
@@ -1875,8 +1872,7 @@ ambient_flicker_light_think() {
 
   if(!isDefined(self.script_parameters)) {
     thread flicker_default(ent);
-  }
-  else {
+  } else {
     thread[[flicker_funcs[self.script_parameters]]](ent);
   }
 }
@@ -2317,21 +2313,21 @@ evac_slowmo() {
 
   /*
   //wait( 8 );
-	
+  	
   //wait( 1.75 );
   wait( 1.1 );
 
   slowmo_setspeed_slow( 0.8 );
   slowmo_setlerptime_in( 0.05 );
   slowmo_lerp_in();
-	
+  	
   wait( 0.5 );
   //wait( 3 );
 
   slowmo_setspeed_slow( 0.4 );
   slowmo_setlerptime_in( 0.05 );
   slowmo_lerp_in();
-	
+  	
   wait ( 3 - 1.6 );
   */
   wait(3);
@@ -2393,13 +2389,13 @@ soap_talks_to_heli() {
   /*
   // Viper Six-Four, this is Bravo Six Actual! We're trapped in the mess hall at the northeast corner of the gulag, depth 100 meters!!! I need a four-point SPIE rig for emergency extraction over!	
   level.soap anim_single_solo( level.soap, "gulag_cmt_depth100" );
-	
+  	
   // Roger on the SPIE rig - we're on the way, give us fifteen seconds.	
   radio_dialogue( "gulag_plp_15secs" );
   	
   // We'll be dead in five!!! Move your arse man!!!	
   level.soap dialogue_queue( "gulag_cmt_deadinfive" );
-	
+  	
   level waittill( "more_soap_dialogue" );	
   */
   wait(0.5);

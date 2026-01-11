@@ -37,7 +37,6 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_white;
 
 autoexec opt_in() {
@@ -48,15 +47,15 @@ autoexec opt_in() {
 event_handler[level_init] main(eventstruct) {
   full_screen_movie::register("full_screen_movie");
   clientfield::register("clientuimodel", "player_lives", 1, 2, "int", undefined, 0, 0);
-  level._effect[#"headshot"] = "_t6/impacts/fx_flesh_hit";
-  level._effect[#"headshot_nochunks"] = "_t6/misc/fx_zombie_bloodsplat";
-  level._effect[#"bloodspurt"] = "_t6/misc/fx_zombie_bloodspurt";
-  level._effect[#"animscript_gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
-  level._effect[#"animscript_gibtrail_fx"] = "_t6/trail/fx_trail_blood_streak";
-  level._effect[#"hash_4cee8d16fd03fab3"] = #"hash_d763bb85d068431";
-  level._effect[#"hash_b6fb18d53b3ba8f"] = #"hash_2a09c05622f43005";
-  level._effect[#"hash_50a4de8d221c0d88"] = #"hash_5088b0c20d6a9452";
-  clientfield::register("scriptmover", "" + #"hash_28b770e7e782837", 1, 1, "int", &function_61c6d401, 0, 0);
+  level._effect[# "headshot"] = "_t6/impacts/fx_flesh_hit";
+  level._effect[# "headshot_nochunks"] = "_t6/misc/fx_zombie_bloodsplat";
+  level._effect[# "bloodspurt"] = "_t6/misc/fx_zombie_bloodspurt";
+  level._effect[# "animscript_gib_fx"] = "zombie/fx_blood_torso_explo_zmb";
+  level._effect[# "animscript_gibtrail_fx"] = "_t6/trail/fx_trail_blood_streak";
+  level._effect[# "hash_4cee8d16fd03fab3"] = # "hash_d763bb85d068431";
+  level._effect[# "hash_b6fb18d53b3ba8f"] = # "hash_2a09c05622f43005";
+  level._effect[# "hash_50a4de8d221c0d88"] = # "hash_5088b0c20d6a9452";
+  clientfield::register("scriptmover", "" + # "hash_28b770e7e782837", 1, 1, "int", &function_61c6d401, 0, 0);
   clientfield::register("world", "portal_map_magicbox_lights_init", 1, 1, "int", &portal_map_magicbox_lights_init, 0, 0);
   clientfield::register("world", "portal_map_start_chest1", 1, 1, "int", &portal_map_start_chest1, 0, 0);
   clientfield::register("world", "portal_map_start_chest2", 1, 1, "int", &portal_map_start_chest2, 0, 0);
@@ -80,7 +79,7 @@ event_handler[level_init] main(eventstruct) {
   level.zombiemode_using_juggernaut_perk = 1;
   level.zombiemode_using_revive_perk = 1;
   level.zombiemode_using_sleightofhand_perk = 1;
-  level.var_d0ab70a2 = #"gamedata/weapons/zm/zm_white_weapons.csv";
+  level.var_d0ab70a2 = # "gamedata/weapons/zm/zm_white_weapons.csv";
   level zm_white_zstandard::main();
   level zm_white_computer_system::preload();
   level zm_white_special_rounds::register_clientfields();
@@ -98,19 +97,19 @@ event_handler[level_init] main(eventstruct) {
   level thread zm_white_special_rounds::init();
   level thread setup_personality_character_exerts();
   level thread function_b8da6f44();
-  zm_utility::function_beed5764("rob_zm_eyes_blue_light", #"hash_7fcc925775fa9101");
+  zm_utility::function_beed5764("rob_zm_eyes_blue_light", # "hash_7fcc925775fa9101");
   util::waitforclient(0);
 }
 
 function_b8da6f44() {
   level.var_4016a739 = (0, 90, 0);
-  level._effect[#"hash_2bba72fdcc5508b5"] = #"hash_1e8cb303d3103833";
-  level._effect[#"chest_light_closed"] = #"hash_602f075818a2fb2e";
-  level._effect[#"hash_19f4dd97cbb87594"] = #"hash_2f7533f7f5b59f7c";
-  level._effect[#"hash_246062f68a34e289"] = #"hash_61b9b9ada5bb46b1";
-  level._effect[#"hash_73c11d9bf55cbb6"] = #"hash_71e5e40c76a09b21";
-  level._effect[#"hash_5239f7431d4c72ca"] = #"hash_200de2be21c77806";
-  level._effect[#"hash_b6e7f724af1ad5b"] = #"hash_6e05ede771d9fb16";
+  level._effect[# "hash_2bba72fdcc5508b5"] = # "hash_1e8cb303d3103833";
+  level._effect[# "chest_light_closed"] = # "hash_602f075818a2fb2e";
+  level._effect[# "hash_19f4dd97cbb87594"] = # "hash_2f7533f7f5b59f7c";
+  level._effect[# "hash_246062f68a34e289"] = # "hash_61b9b9ada5bb46b1";
+  level._effect[# "hash_73c11d9bf55cbb6"] = # "hash_71e5e40c76a09b21";
+  level._effect[# "hash_5239f7431d4c72ca"] = # "hash_200de2be21c77806";
+  level._effect[# "hash_b6e7f724af1ad5b"] = # "hash_6e05ede771d9fb16";
 }
 
 function_bc7eec87(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -121,13 +120,13 @@ function_bc7eec87(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   switch (newval) {
     case 1:
-      fx_id = level._effect[#"hash_4cee8d16fd03fab3"];
+      fx_id = level._effect[# "hash_4cee8d16fd03fab3"];
       break;
     case 2:
-      fx_id = level._effect[#"hash_b6fb18d53b3ba8f"];
+      fx_id = level._effect[# "hash_b6fb18d53b3ba8f"];
       break;
     case 3:
-      fx_id = level._effect[#"hash_50a4de8d221c0d88"];
+      fx_id = level._effect[# "hash_50a4de8d221c0d88"];
       break;
   }
 
@@ -303,36 +302,36 @@ power_pbg_control(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 }
 
 setup_personality_character_exerts() {
-  level.exert_sounds[5][#"playerbreathinsound"] = "vox_plr_5_exert_sniper_hold";
-  level.exert_sounds[6][#"playerbreathinsound"] = "vox_plr_6_exert_sniper_hold";
-  level.exert_sounds[7][#"playerbreathinsound"] = "vox_plr_7_exert_sniper_hold";
-  level.exert_sounds[8][#"playerbreathinsound"] = "vox_plr_8_exert_sniper_hold";
-  level.exert_sounds[13][#"playerbreathinsound"] = "vox_plr_5_exert_sniper_hold";
-  level.exert_sounds[14][#"playerbreathinsound"] = "vox_plr_6_exert_sniper_hold";
-  level.exert_sounds[15][#"playerbreathinsound"] = "vox_plr_7_exert_sniper_hold";
-  level.exert_sounds[16][#"playerbreathinsound"] = "vox_plr_8_exert_sniper_hold";
-  level.exert_sounds[5][#"playerbreathoutsound"] = "vox_plr_5_exert_sniper_exhale";
-  level.exert_sounds[6][#"playerbreathoutsound"] = "vox_plr_6_exert_sniper_exhale";
-  level.exert_sounds[7][#"playerbreathoutsound"] = "vox_plr_7_exert_sniper_exhale";
-  level.exert_sounds[8][#"playerbreathoutsound"] = "vox_plr_8_exert_sniper_exhale";
-  level.exert_sounds[13][#"playerbreathoutsound"] = "vox_plr_5_exert_sniper_exhale";
-  level.exert_sounds[14][#"playerbreathoutsound"] = "vox_plr_6_exert_sniper_exhale";
-  level.exert_sounds[15][#"playerbreathoutsound"] = "vox_plr_7_exert_sniper_exhale";
-  level.exert_sounds[16][#"playerbreathoutsound"] = "vox_plr_8_exert_sniper_exhale";
-  level.exert_sounds[5][#"playerbreathgaspsound"] = "vox_plr_5_exert_sniper_gasp";
-  level.exert_sounds[6][#"playerbreathgaspsound"] = "vox_plr_6_exert_sniper_gasp";
-  level.exert_sounds[7][#"playerbreathgaspsound"] = "vox_plr_7_exert_sniper_gasp";
-  level.exert_sounds[8][#"playerbreathgaspsound"] = "vox_plr_8_exert_sniper_gasp";
-  level.exert_sounds[13][#"playerbreathgaspsound"] = "vox_plr_5_exert_sniper_gasp";
-  level.exert_sounds[14][#"playerbreathgaspsound"] = "vox_plr_6_exert_sniper_gasp";
-  level.exert_sounds[15][#"playerbreathgaspsound"] = "vox_plr_7_exert_sniper_gasp";
-  level.exert_sounds[16][#"playerbreathgaspsound"] = "vox_plr_8_exert_sniper_gasp";
-  level.exert_sounds[5][#"meleeswipesoundplayer"] = "vox_plr_5_exert_punch_give";
-  level.exert_sounds[6][#"meleeswipesoundplayer"] = "vox_plr_6_exert_punch_give";
-  level.exert_sounds[7][#"meleeswipesoundplayer"] = "vox_plr_7_exert_punch_give";
-  level.exert_sounds[8][#"meleeswipesoundplayer"] = "vox_plr_8_exert_punch_give";
-  level.exert_sounds[13][#"meleeswipesoundplayer"] = "vox_plr_5_exert_punch_give";
-  level.exert_sounds[14][#"meleeswipesoundplayer"] = "vox_plr_6_exert_punch_give";
-  level.exert_sounds[15][#"meleeswipesoundplayer"] = "vox_plr_7_exert_punch_give";
-  level.exert_sounds[16][#"meleeswipesoundplayer"] = "vox_plr_8_exert_punch_give";
+  level.exert_sounds[5][# "playerbreathinsound"] = "vox_plr_5_exert_sniper_hold";
+  level.exert_sounds[6][# "playerbreathinsound"] = "vox_plr_6_exert_sniper_hold";
+  level.exert_sounds[7][# "playerbreathinsound"] = "vox_plr_7_exert_sniper_hold";
+  level.exert_sounds[8][# "playerbreathinsound"] = "vox_plr_8_exert_sniper_hold";
+  level.exert_sounds[13][# "playerbreathinsound"] = "vox_plr_5_exert_sniper_hold";
+  level.exert_sounds[14][# "playerbreathinsound"] = "vox_plr_6_exert_sniper_hold";
+  level.exert_sounds[15][# "playerbreathinsound"] = "vox_plr_7_exert_sniper_hold";
+  level.exert_sounds[16][# "playerbreathinsound"] = "vox_plr_8_exert_sniper_hold";
+  level.exert_sounds[5][# "playerbreathoutsound"] = "vox_plr_5_exert_sniper_exhale";
+  level.exert_sounds[6][# "playerbreathoutsound"] = "vox_plr_6_exert_sniper_exhale";
+  level.exert_sounds[7][# "playerbreathoutsound"] = "vox_plr_7_exert_sniper_exhale";
+  level.exert_sounds[8][# "playerbreathoutsound"] = "vox_plr_8_exert_sniper_exhale";
+  level.exert_sounds[13][# "playerbreathoutsound"] = "vox_plr_5_exert_sniper_exhale";
+  level.exert_sounds[14][# "playerbreathoutsound"] = "vox_plr_6_exert_sniper_exhale";
+  level.exert_sounds[15][# "playerbreathoutsound"] = "vox_plr_7_exert_sniper_exhale";
+  level.exert_sounds[16][# "playerbreathoutsound"] = "vox_plr_8_exert_sniper_exhale";
+  level.exert_sounds[5][# "playerbreathgaspsound"] = "vox_plr_5_exert_sniper_gasp";
+  level.exert_sounds[6][# "playerbreathgaspsound"] = "vox_plr_6_exert_sniper_gasp";
+  level.exert_sounds[7][# "playerbreathgaspsound"] = "vox_plr_7_exert_sniper_gasp";
+  level.exert_sounds[8][# "playerbreathgaspsound"] = "vox_plr_8_exert_sniper_gasp";
+  level.exert_sounds[13][# "playerbreathgaspsound"] = "vox_plr_5_exert_sniper_gasp";
+  level.exert_sounds[14][# "playerbreathgaspsound"] = "vox_plr_6_exert_sniper_gasp";
+  level.exert_sounds[15][# "playerbreathgaspsound"] = "vox_plr_7_exert_sniper_gasp";
+  level.exert_sounds[16][# "playerbreathgaspsound"] = "vox_plr_8_exert_sniper_gasp";
+  level.exert_sounds[5][# "meleeswipesoundplayer"] = "vox_plr_5_exert_punch_give";
+  level.exert_sounds[6][# "meleeswipesoundplayer"] = "vox_plr_6_exert_punch_give";
+  level.exert_sounds[7][# "meleeswipesoundplayer"] = "vox_plr_7_exert_punch_give";
+  level.exert_sounds[8][# "meleeswipesoundplayer"] = "vox_plr_8_exert_punch_give";
+  level.exert_sounds[13][# "meleeswipesoundplayer"] = "vox_plr_5_exert_punch_give";
+  level.exert_sounds[14][# "meleeswipesoundplayer"] = "vox_plr_6_exert_punch_give";
+  level.exert_sounds[15][# "meleeswipesoundplayer"] = "vox_plr_7_exert_punch_give";
+  level.exert_sounds[16][# "meleeswipesoundplayer"] = "vox_plr_8_exert_punch_give";
 }

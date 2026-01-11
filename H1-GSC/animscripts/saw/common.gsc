@@ -15,29 +15,25 @@ main(var_0) {
 
   if(isDefined(var_0.script_delay_min)) {
     var_1 = var_0.script_delay_min;
-  }
-  else {
+  } else {
     var_1 = maps\_mgturret::burst_fire_settings("delay");
   }
 
   if(isDefined(var_0.script_delay_max)) {
     var_2 = var_0.script_delay_max - var_1;
-  }
-  else {
+  } else {
     var_2 = maps\_mgturret::burst_fire_settings("delay_range");
   }
 
   if(isDefined(var_0.script_burst_min)) {
     var_3 = var_0.script_burst_min;
-  }
-  else {
+  } else {
     var_3 = maps\_mgturret::burst_fire_settings("burst");
   }
 
   if(isDefined(var_0.script_burst_max)) {
     var_4 = var_0.script_burst_max - var_3;
-  }
-  else {
+  } else {
     var_4 = maps\_mgturret::burst_fire_settings("burst_range");
   }
 

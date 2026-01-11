@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\flagsys_shared;
-
 #namespace system;
 
 register(str_name, func_preinit, func_postinit, reqs) {

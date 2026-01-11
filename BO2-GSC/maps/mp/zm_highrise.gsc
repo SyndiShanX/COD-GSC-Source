@@ -204,8 +204,7 @@ main() {
 
   if(level.splitscreen && getdvarint(#"splitscreen_playerCount") > 2) {
     level.optimise_for_splitscreen = 1;
-  }
-  else {
+  } else {
     level.optimise_for_splitscreen = 0;
   }
 
@@ -514,8 +513,7 @@ watch_lightpower_devgui() {
     if(isDefined(powercmd) && powercmd != "") {
       if(powercmd == "on") {
         clientnotify("pwr");
-      }
-      else {
+      } else {
         clientnotify("pwo");
       }
 
@@ -532,8 +530,7 @@ setup_leapers() {
 
   if(b_disable_leapers) {
     flag_init("leaper_round");
-  }
-  else {
+  } else {
     maps\mp\zombies\_zm_ai_leaper::enable_leaper_rounds();
   }
 
@@ -952,8 +949,7 @@ setup_rex_starts() {
   add_gameloc("rooftop", ::dummy, "rooftop", ::dummy);
 }
 
-dummy() {
-}
+dummy() {}
 
 zombie_highrise_devgui(cmd) {
   cmd_strings = strtok(cmd, " ");
@@ -1639,17 +1635,13 @@ survivor_vox() {
     if(is_player_valid(player)) {
       if(sur_num == 1) {
         count = 7;
-      }
-      else if(sur_num == 2) {
+      } else if(sur_num == 2) {
         count = 5;
-      }
-      else if(sur_num == 3) {
+      } else if(sur_num == 3) {
         count = 6;
-      }
-      else if(sur_num == 4) {
+      } else if(sur_num == 4) {
         count = 4;
-      }
-      else if(sur_num == 5) {
+      } else if(sur_num == 5) {
         count = 1;
       }
 

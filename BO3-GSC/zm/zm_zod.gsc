@@ -1061,9 +1061,7 @@ function enemy_location_override(zombie, enemy) {
     if(!(isDefined(self.locked_in_train) && self.locked_in_train) && (!(isDefined(var_d3443466) && var_d3443466))) {
       touching = 0;
       if(isDefined(level.o_zod_train)) {
-        touching = [
-          [level.o_zod_train]
-        ] - > is_touching_train_volume(zombie);
+        touching = [[level.o_zod_train]] - > is_touching_train_volume(zombie);
       }
       if(!touching) {
         escape_position = zombie zod_cleanup::get_escape_position_in_current_zone();

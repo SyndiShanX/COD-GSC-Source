@@ -53,7 +53,7 @@ init_maze_clientfields() {
   blocker_locations = getstructarray("maze_blocker", "targetname");
 
   foreach(blocker in blocker_locations) {
-  registerclientfield("world", "maze_blocker_" + blocker.script_noteworthy, 12000, 1, "int");
+    registerclientfield("world", "maze_blocker_" + blocker.script_noteworthy, 12000, 1, "int");
   }
 }
 
@@ -331,8 +331,7 @@ maze_do_zombie_spawn(spot) {
 
     if(isDefined(favoritespots) && favoritespots.size >= 2) {
       spot = random(favoritespots);
-    }
-    else if(isDefined(closest_spots) && closest_spots.size > 0) {
+    } else if(isDefined(closest_spots) && closest_spots.size > 0) {
       spot = random(closest_spots);
     }
   }
@@ -401,8 +400,7 @@ maze_do_zombie_rise(spot) {
 
   if(self.zombie_move_speed == "walk") {
     substate = randomint(2);
-  }
-  else {
+  } else {
     substate = 1;
   }
 

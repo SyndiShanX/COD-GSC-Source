@@ -121,8 +121,7 @@ waitforstop() {
 
   if(!shoulddostopanim()) {
     thread waitforstop();
-  }
-  else {
+  } else {
     var_0 = self getpathgoalpos();
     playstopanimation(var_0, 1);
     maps\mp\agents\alien\_alien_anim_utils::turntowardsvector(self getlookaheaddir());
@@ -415,8 +414,7 @@ dorunstart() {
 
   if(isDefined(var_0)) {
     var_1 = var_0.origin;
-  }
-  else {
+  } else {
     var_1 = self getpathgoalpos();
   }
 
@@ -443,8 +441,7 @@ dostartmoveanim(var_0) {
 candostartmove() {
   if(!isDefined(self.skipstartmove)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -487,8 +484,7 @@ candoturnanim(var_0) {
 
   if(var_8) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

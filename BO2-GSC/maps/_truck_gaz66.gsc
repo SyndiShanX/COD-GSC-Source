@@ -8,8 +8,7 @@
 main(model, type) {
   if(self.vehicletype == "truck_gaz66_player_single50") {
     build_aianims(::set_gunner_anims, ::set_gunner_vehicle_anims);
-  }
-  else {
+  } else {
     build_aianims(::setanims, ::set_vehicle_anims);
     build_unload_groups(::unload_groups);
   }

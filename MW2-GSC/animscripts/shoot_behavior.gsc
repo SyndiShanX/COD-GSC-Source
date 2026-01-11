@@ -97,19 +97,18 @@ decideWhatAndHowToShoot(objective) {
     result = undefined;
     if(self.weapon == "none") {
       noGunShoot();
-    }
-    else if(usingRocketLauncher()) {
+    } else if(usingRocketLauncher()) {
       result = rpgShoot();
-    }
-    else if(usingSidearm()) {
+    } else if(usingSidearm()) {
       result = pistolShoot();
-    }
-    else {
+    } else {
       result = rifleShoot();
     }
 
     if(isDefined(self.a.specialShootBehavior)) {
-      [[self.a.specialShootBehavior]]();
+      [
+        [self.a.specialShootBehavior]
+      ]();
     }
 
     if(checkChanged(prevShootEnt, self.shootEnt) || (!isDefined(self.shootEnt) && checkChanged(prevShootPos, self.shootPos)) || checkChanged(prevShootStyle, self.shootStyle)) {
@@ -153,7 +152,7 @@ WaitABit() {
 noGunShoot() {
   println("^1Warning: AI at " + self.origin + ", entnum " + self getEntNum() + ", export " + self.export+" trying to shoot but has no gun");
 
-    self.shootEnt = undefined;
+  self.shootEnt = undefined;
   self.shootPos = undefined;
   self.shootStyle = "none";
   self.shootObjective = "normal";
@@ -197,8 +196,7 @@ rifleShootObjectiveNormal() {
 
       if((self.provideCoveringFire || randomint(5) > 0) && shouldSuppress()) {
         self.shootObjective = "suppress";
-      }
-      else {
+      } else {
         self.shootObjective = "ambush";
       }
       return "retry";
@@ -264,14 +262,11 @@ getAmbushShootPos() {
   if(!isDefined(likelyEnemyDir)) {
     if(isDefined(self.coverNode)) {
       likelyEnemyDir = self.coverNode.angles;
-    }
-    else if(isDefined(self.ambushNode)) {
+    } else if(isDefined(self.ambushNode)) {
       likelyEnemyDir = self.ambushNode.angles;
-    }
-    else if(isDefined(self.enemy)) {
+    } else if(isDefined(self.enemy)) {
       likelyEnemyDir = vectorToAngles(self lastKnownPos(self.enemy) - self.origin);
-    }
-    else {
+    } else {
       likelyEnemyDir = self.angles;
     }
   }
@@ -308,8 +303,7 @@ rifleShoot() {
 
     if(self.shootObjective == "suppress" || (self.team == "allies" && !isDefined(self.enemy) && !enemySuppressable)) {
       rifleShootObjectiveSuppress(enemySuppressable);
-    }
-    else {
+    } else {
       rifleShootObjectiveAmbush(enemySuppressable);
     }
   }
@@ -319,8 +313,7 @@ shouldStopAmbushing() {
   if(!isDefined(self.ambushEndTime)) {
     if(self isBadGuy()) {
       self.ambushEndTime = gettime() + randomintrange(10000, 60000);
-    }
-    else {
+    } else {
       self.ambushEndTime = gettime() + randomintrange(4000, 10000);
     }
   }
@@ -510,8 +503,7 @@ setShootStyleForVisibleEnemy() {
   if(isShotgun(self.weapon)) {
     if(weapon_pump_action_shotgun()) {
       return setShootStyle("single", false);
-    }
-    else {
+    } else {
       return setShootStyle("semi", false);
     }
   }
@@ -531,22 +523,19 @@ setShootStyleForVisibleEnemy() {
   if(distanceSq < fullAutoRangeSq) {
     if(isDefined(self.shootEnt) && isDefined(self.shootEnt.magic_bullet_shield)) {
       return setShootStyle("single", false);
-    }
-    else {
+    } else {
       return setShootStyle("full", false);
     }
   } else if(distanceSq < burstRangeSq || shouldBeAJerk()) {
     if(weaponIsSemiAuto(self.weapon) || shouldDoSemiForVariety()) {
       return setShootStyle("semi", true);
-    }
-    else {
+    } else {
       return setShootStyle("burst", true);
     }
   } else if(self.provideCoveringFire || isMG || distanceSq < singleShotRangeSq) {
     if(shouldDoSemiForVariety()) {
       return setShootStyle("semi", false);
-    }
-    else {
+    } else {
       return setShootStyle("burst", false);
     }
   }
@@ -576,8 +565,7 @@ setShootStyleForSuppression() {
   if(self.provideCoveringFire || distanceSq < singleShotRangeSq) {
     if(shouldDoSemiForVariety()) {
       return setShootStyle("semi", false);
-    }
-    else {
+    } else {
       return setShootStyle("burst", false);
     }
   }

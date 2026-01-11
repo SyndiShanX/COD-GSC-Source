@@ -150,7 +150,7 @@ cleanup_deck_transition() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2 kill();
+    var_2 kill();
   }
 
   wait 2;
@@ -705,8 +705,7 @@ osprey_intermission() {
 
   if(var_3 < 20 && !level.player istouching(var_2)) {
     thread intermission_climbover();
-  }
-  else {}
+  } else {}
 }
 
 intermission_climbover() {
@@ -939,8 +938,7 @@ run_jet_takeoff() {
 run_allies(var_0) {
   if(maps\carrier_code::eval(var_0)) {
     spawn_checkpoint_only_allies();
-  }
-  else {
+  } else {
     var_1 = getEntArray("defend_zodiac_ally", "targetname");
     maps\_utility::array_delete(var_1);
   }
@@ -1114,8 +1112,7 @@ ally_edge_think(var_0) {
   for(;;) {
     if(should_lean()) {
       lean_anim(var_0, 1);
-    }
-    else {
+    } else {
       thread ally_shoot_think(var_0, 1);
       return;
     }
@@ -1643,7 +1640,7 @@ gunship_damage() {
   var_0 = common_scripts\utility::getstructarray("deck_ac130_dmg_badplace", "targetname");
 
   foreach(var_3, var_2 in var_0) {
-  badplace_cylinder("deck_ac130_dmg_badplace" + var_3, -1, var_2.origin, var_2.radius, 100, "allies");
+    badplace_cylinder("deck_ac130_dmg_badplace" + var_3, -1, var_2.origin, var_2.radius, 100, "allies");
   }
 
   level.deck_ac130_dmg_badplace_size = var_0.size;
@@ -1656,7 +1653,7 @@ gunship_damage() {
   var_4 = getscriptablearray("scriptable_destructible_barrel", "targetname");
 
   foreach(var_6 in var_4) {
-  var_6 delete();
+    var_6 delete();
   }
 
   var_8 = getEntArray("deck_combat_weapons", "targetname");
@@ -1739,8 +1736,7 @@ hesh_gunship_run() {
   } else {
     if(maps\carrier_code::eval(level.hesh.leaning)) {
       level.hesh stop_lean();
-    }
-    else {
+    } else {
       wait 2;
     }
 
@@ -1752,8 +1748,7 @@ hesh_gunship_run() {
 
   if(!maps\carrier_code::eval(level.player.near_knockdown)) {
     wait 2;
-  }
-  else {
+  } else {
     wait 0.1;
   }
 
@@ -1816,8 +1811,7 @@ reset_player_speed() {
 teleport_hesh_post_osprey() {
   if(level.player.origin[2] > 1380) {
     var_0 = common_scripts\utility::getstructarray("hesh_post_osprey_teleport_deck", "targetname");
-  }
-  else {
+  } else {
     var_0 = common_scripts\utility::getstructarray("hesh_post_osprey_teleport", "targetname");
   }
 
@@ -1955,7 +1949,7 @@ elevator_105_guys(var_0) {
   var_1 = maps\_utility::array_spawn_targetname("dz_elevator_explode_guy");
 
   foreach(var_3 in var_1) {
-  var_3 maps\_utility::magic_bullet_shield(1);
+    var_3 maps\_utility::magic_bullet_shield(1);
   }
 
   return var_1;
@@ -2071,8 +2065,7 @@ defend_zodiac_autosave(var_0, var_1) {
   }
   if(maps\carrier_code::eval(var_0)) {
     maps\_utility::autosave_now_silent();
-  }
-  else {
+  } else {
     maps\_utility::autosave_now();
   }
 

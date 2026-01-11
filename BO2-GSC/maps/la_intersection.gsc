@@ -91,8 +91,7 @@ intersection_vo() {
 
   if(!flag("harper_dead")) {
     level.harper thread priority_dialog("harp_we_re_too_late_sect_0", 2, "intersect_vip_cougar_died", "intersect_vip_cougar_saved");
-  }
-  else {
+  } else {
     level.player thread priority_dialog("sect_dammit_into_radi_0", 2, "intersect_vip_cougar_died", "intersect_vip_cougar_saved");
   }
 
@@ -233,8 +232,7 @@ vip_cougar() {
 cougar_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, psoffsettime, b_damage_from_underneath, n_model_index, str_part_name) {
   if(str_means_of_death == "MOD_PROJECTILE") {
     n_damage = 1000;
-  }
-  else {
+  } else {
     n_damage = 0;
   }
 

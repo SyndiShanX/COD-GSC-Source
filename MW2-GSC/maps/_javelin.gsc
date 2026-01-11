@@ -100,8 +100,7 @@ SetTargetTooClose(ent) {
 
   if(dist < MINIMUM_JAV_DISTANCE) {
     self WeaponLockTargetTooClose(true);
-  }
-  else {
+  } else {
     self WeaponLockTargetTooClose(false);
   }
 }
@@ -124,8 +123,7 @@ SetNoClearance() {
 
   if(GetDVar("missileDebugDraw") == "1") {
     debug = true;
-  }
-  else {
+  } else {
     debug = false;
   }
 
@@ -145,8 +143,7 @@ SetNoClearance() {
       obstructed = true;
       if(debug) {
         line(origin, trace["position"], COLOR_FAILED, 1);
-      }
-      else {
+      } else {
         break;
       }
     } else {

@@ -414,8 +414,7 @@ do_damage_until_timeout(damage, duration, interval, attacker) {
 
     if(isplayer(self)) {
       self DoDamage(damage, self.origin, undefined, attacker.burn_trig);
-    }
-    else if(isDefined(attacker) && isDefined(attacker.owner)) {
+    } else if(isDefined(attacker) && isDefined(attacker.owner)) {
       self DoDamage(damage, self.origin, attacker.owner, attacker.burn_trig);
     }
 
@@ -694,8 +693,7 @@ run_electric_trap(play_trap_on_fx, play_trap_off_fx, play_ambient_shocks) {
     if(isDefined(self.owner) && isALive(self.owner)) {
       if(self.trap_type == "traps_fence") {
         self.owner setLowerMessage("electric_fence_offline", &"ALIEN_COLLECTIBLES_ELECTRIC_FENCE_OFFLINE", 3);
-      }
-      else {
+      } else {
         self.owner setLowerMessage("electric_fence_offline", &"ALIENS_PATCH_ELECTRIC_TRAP_OFFLINE", 3);
       }
     }
@@ -930,7 +928,7 @@ ambient_puddle_shocks() {
 
   sparks = [];
   foreach(contact_point in self.contact_points) {
-  sparks[sparks.size] = SpawnFx(self.shock_fx["sparks"], contact_point.origin);
+    sparks[sparks.size] = SpawnFx(self.shock_fx["sparks"], contact_point.origin);
   }
 
   ambient_on = false;
@@ -1400,8 +1398,7 @@ turret_overheat_monitor(player) {
 
     if(self.heatLevel >= CONST_TURRET_OVERHEAT_TIME) {
       barFrac = 1;
-    }
-    else {
+    } else {
       barFrac = self.heatLevel / CONST_TURRET_OVERHEAT_TIME;
     }
 
@@ -1495,8 +1492,7 @@ monitor_flare_use() {
     glowStick.owner = self;
     if(self maps\mp\alien\_persistence::is_upgrade_enabled("master_scavenger_upgrade")) {
       glowStick thread create_flare(level.spawnGlow["enemy"], self);
-    }
-    else {
+    } else {
       glowStick thread create_flare(level.spawnGlow["friendly"], self);
     }
     self TakeWeapon("alienflare_mp");
@@ -1585,8 +1581,7 @@ sfx_flare_lp(player) {
 
   if(player maps\mp\alien\_persistence::is_upgrade_enabled("master_scavenger_upgrade")) {
     FlareEndTime = GetTime() + ((CONST_UPGRADED_FLARE_TIME) - 1.4) * 1000;
-  }
-  else {
+  } else {
     FlareEndTime = GetTime() + ((CONST_FLARE_TIME) - 1.4) * 1000;
   }
 
@@ -1618,8 +1613,7 @@ flare_attract_aliens(flare_time, owner) {
     affectedAliens = currentAffectedAliens;
     if(isDefined(owner)) {
       focal_point = owner.origin;
-    }
-    else {
+    } else {
       focal_point = self.origin;
     }
 
@@ -1642,7 +1636,7 @@ flare_attract_aliens(flare_time, owner) {
   }
 
   foreach(alien in affectedAliens) {
-  alien maps\mp\agents\alien\_alien_think::handle_attractor_flare(self, false);
+    alien maps\mp\agents\alien\_alien_think::handle_attractor_flare(self, false);
   }
 }
 
@@ -1662,8 +1656,7 @@ get_possible_flare_victims(focal_point) {
     distanceToOwner = DistanceSquared(focal_point, victim.origin);
     if(distanceToOwner <= maxOwnerVictimsPriorityRangeSq) {
       possibleVictims[possibleVictims.size] = victim;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -1693,8 +1686,7 @@ get_possible_flare_victims(focal_point) {
       flareDistance = DistanceSquared(self.origin, flareVictim.origin);
       if(!isDefined(ownerDistance) || flareDistance < ownerDistance) {
         possibleVictims[possibleVictims.size] = flareVictim;
-      }
-      else {
+      } else {
         break;
       }
 

@@ -162,8 +162,7 @@ sotf_crate_can_use(crate) {
     if(isDefined(crate) && isDefined(crate.bots_used) && array_contains(crate.bots_used, self)) {
       if(self bot_out_of_ammo()) {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
     }

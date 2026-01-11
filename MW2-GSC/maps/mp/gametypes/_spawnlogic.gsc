@@ -89,12 +89,12 @@ placeSpawnPoints(spawnPointName) {
     level.extraspawnpointsused = [];
   }
 
-    if(!spawnPoints.size) {
-      println("^1Error: No " + spawnPointName + " spawnpoints found in level!");
-      maps\mp\gametypes\_callbacksetup::AbortLevel();
-      wait 1; // so we don't try to abort more than once before the frame ends
-      return;
-    }
+  if(!spawnPoints.size) {
+    println("^1Error: No " + spawnPointName + " spawnpoints found in level!");
+    maps\mp\gametypes\_callbacksetup::AbortLevel();
+    wait 1; // so we don't try to abort more than once before the frame ends
+    return;
+  }
 
   for(index = 0; index < spawnPoints.size; index++) {
     spawnPoints[index] spawnPointInit();
@@ -330,8 +330,7 @@ getBestWeightedSpawnpoint(spawnpoints) {
     sights = 0;
     if(level.teambased) {
       sights = bestspawnpoint.sights[otherteam];
-    }
-    else {
+    } else {
       sights = bestspawnpoint.sights;
     }
 
@@ -353,8 +352,7 @@ getBestWeightedSpawnpoint(spawnpoints) {
     sightValue = adjustSightValue(sightvalue);
     if(level.teambased) {
       bestspawnpoint.sights[otherteam] += sightValue;
-    }
-    else {
+    } else {
       bestspawnpoint.sights += sightValue;
     }
 
@@ -362,7 +360,7 @@ getBestWeightedSpawnpoint(spawnpoints) {
 
     bestspawnpoint.spawnData[bestspawnpoint.spawnData.size] = "Last minute sight trace: -" + penalty;
 
-      bestspawnpoint.weight -= penalty;
+    bestspawnpoint.weight -= penalty;
 
     bestspawnpoint.lastSightTraceTime = gettime();
   }
@@ -384,8 +382,7 @@ DumpSpawnData(spawnpoints, winnerspawnpoint) {
   foreach(player in level.players) {
     if(player.team == self.team) {
       println("spawndata.friends[ spawndata.friends.size ] = " + player.origin + ";");
-    }
-    else {
+    } else {
       println("spawndata.enemies[ spawndata.enemies.size ] = " + player.origin + ";");
     }
   }
@@ -481,36 +478,36 @@ drawSpawnData(spawndata) {
   }
 }
 
-  getSpawnpoint_Random(spawnpoints) {
-    //	level endon("game_ended");
+getSpawnpoint_Random(spawnpoints) {
+  //	level endon("game_ended");
 
-    // There are no valid spawnpoints in the map
-    if(!isDefined(spawnpoints)) {
-      return undefined;
-    }
+  // There are no valid spawnpoints in the map
+  if(!isDefined(spawnpoints)) {
+    return undefined;
+  }
 
-    // randomize order
-    for(i = 0; i < spawnpoints.size; i++) {
-      j = randomInt(spawnpoints.size);
-      spawnpoint = spawnpoints[i];
-      spawnpoints[i] = spawnpoints[j];
-      spawnpoints[j] = spawnpoint;
-    }
+  // randomize order
+  for(i = 0; i < spawnpoints.size; i++) {
+    j = randomInt(spawnpoints.size);
+    spawnpoint = spawnpoints[i];
+    spawnpoints[i] = spawnpoints[j];
+    spawnpoints[j] = spawnpoint;
+  }
 
-    if(isDefined(self.predictedSpawnPoint)) {
-      // if we predicted spawning at one of these spawnpoints already, favor that one.
-      for(i = 1; i < spawnpoints.size; i++) {
-        if(spawnpoints[i] == self.predictedSpawnPoint) {
-          temp = spawnpoints[0];
-          spawnpoints[0] = spawnpoints[i];
-          spawnpoints[i] = temp;
-          break;
-        }
+  if(isDefined(self.predictedSpawnPoint)) {
+    // if we predicted spawning at one of these spawnpoints already, favor that one.
+    for(i = 1; i < spawnpoints.size; i++) {
+      if(spawnpoints[i] == self.predictedSpawnPoint) {
+        temp = spawnpoints[0];
+        spawnpoints[0] = spawnpoints[i];
+        spawnpoints[i] = temp;
+        break;
       }
     }
-
-    return getSpawnpoint_Final(spawnpoints, false);
   }
+
+  return getSpawnpoint_Final(spawnpoints, false);
+}
 
 getAllOtherPlayers() {
   aliveplayers = [];
@@ -563,13 +560,13 @@ getSpawnpoint_NearTeam(spawnpoints, favoredspawnpoints) {
     return getSpawnpoint_Random(spawnpoints);
   }
 
-    prof_begin("spawn_basiclogic");
+  prof_begin("spawn_basiclogic");
 
   if(getdvarint("scr_spawnsimple") > 0) {
     return getSpawnpoint_Random(spawnpoints);
   }
 
-    Spawnlogic_Begin();
+  Spawnlogic_Begin();
 
   initWeights(spawnpoints);
 
@@ -643,7 +640,7 @@ getSpawnpoint_NearTeam(spawnpoints, favoredspawnpoints) {
     checkBad(result);
   }
 
-    return result;
+  return result;
 }
 
 getSpawnpoint_Safespawn(spawnpoints) {
@@ -817,8 +814,8 @@ init() {
 
   thread loopbotspawns();
 
-    // start keeping track of deaths
-    level.spawnlogic_deaths = [];
+  // start keeping track of deaths
+  level.spawnlogic_deaths = [];
   // DEBUG
   level.spawnlogic_spawnkills = [];
   level.players = [];
@@ -953,8 +950,7 @@ spawnProfile() {
     if(dvarString != "allies" && dvarString != "axis") {
       if(cointoss()) {
         dvarString = "allies";
-      }
-      else {
+      } else {
         dvarString = "axis";
       }
     }
@@ -1000,14 +996,12 @@ spawnGraph() {
   max = corners[0].origin;
   if(corners[1].origin[0] > max[0]) {
     max = (corners[1].origin[0], max[1], max[2]);
-  }
-  else {
+  } else {
     min = (corners[1].origin[0], min[1], min[2]);
   }
   if(corners[1].origin[1] > max[1]) {
     max = (max[0], corners[1].origin[1], max[2]);
-  }
-  else {
+  } else {
     min = (min[0], corners[1].origin[1], min[2]);
   }
 
@@ -1184,8 +1178,7 @@ loopbotspawns() {
 
     if(getdvarfloat("scr_killbottimer") > .05) {
       wait getdvarfloat("scr_killbottimer");
-    }
-    else {
+    } else {
       wait .05;
     }
   }
@@ -1293,12 +1286,12 @@ debugNearbyPlayers(players, origin) {
   }
 }
 
-  trackGrenades() {
-    while(1) {
-      level.grenades = getEntArray("grenade", "classname");
-      wait .05;
-    }
+trackGrenades() {
+  while(1) {
+    level.grenades = getEntArray("grenade", "classname");
+    wait .05;
   }
+}
 
 // used by spawning; needs to be fast.
 isPointVulnerable(playerorigin) {
@@ -1421,7 +1414,7 @@ spawnPointUpdate(spawnpoint) {
 
   spawnpoint notify("debug_stop_LOS");
 
-    spawnpoint.distSum["all"] = 0;
+  spawnpoint.distSum["all"] = 0;
   spawnpoint.distSum["allies"] = 0;
   spawnpoint.distSum["axis"] = 0;
 
@@ -1531,14 +1524,14 @@ spawnPointUpdate(spawnpoint) {
       continue;
     }
 
-      // do sight check
-      /*
-      prof_begin( " spawn_update_told" );
-      losExists = bullettracepassed(player.origin + (0,0,50), spawnpoint.sightTracePoint, false, undefined);
-      prof_end( " spawn_update_told" );
-      */
+    // do sight check
+    /*
+    prof_begin( " spawn_update_told" );
+    losExists = bullettracepassed(player.origin + (0,0,50), spawnpoint.sightTracePoint, false, undefined);
+    prof_end( " spawn_update_told" );
+    */
 
-      prof_begin(" spawn_update_trace");
+    prof_begin(" spawn_update_trace");
     sightValue = SpawnSightTrace(spawnpoint, spawnpoint.sightTracePoint, player.origin + (0, 0, 50));
     prof_end(" spawn_update_trace");
 
@@ -1549,8 +1542,7 @@ spawnPointUpdate(spawnpoint) {
       sightValue = adjustSightValue(sightvalue);
       if(teamBased) {
         spawnpoint.sights[team] += sightValue;
-      }
-      else {
+      } else {
         spawnpoint.sights += sightValue;
       }
 
@@ -1597,8 +1589,7 @@ spawnPointUpdate(spawnpoint) {
     sightValue = adjustSightValue(sightvalue);
     if(teamBased) {
       spawnpoint.sights[tank.team] += sightValue;
-    }
-    else {
+    } else {
       spawnpoint.sights += sightValue;
     }
 
@@ -1623,8 +1614,7 @@ spawnPointUpdate(spawnpoint) {
     sightValue = adjustSightValue(sightvalue);
     if(teamBased) {
       spawnpoint.sights[turret.team] += sightValue;
-    }
-    else {
+    } else {
       spawnpoint.sights += sightValue;
     }
 
@@ -1714,12 +1704,12 @@ spawnpointDebugLOS(point) {
   */
 }
 
-  getLosPenalty() {
-    if(getdvar("scr_spawnpointlospenalty") != "" && getdvar("scr_spawnpointlospenalty") != "0") {
-      return getdvarfloat("scr_spawnpointlospenalty");
-    }
-    return 100000;
+getLosPenalty() {
+  if(getdvar("scr_spawnpointlospenalty") != "" && getdvar("scr_spawnpointlospenalty") != "0") {
+    return getdvarfloat("scr_spawnpointlospenalty");
   }
+  return 100000;
+}
 
 lastMinuteSightTraces(spawnpoint) {
   prof_begin(" spawn_final_lastminsc");
@@ -1815,31 +1805,30 @@ avoidVisibleEnemies(spawnpoints, teambased) {
       spawnpoint.spawnData[spawnpoint.spawnData.size] = "Nearest enemy at " + int(spawnpoint.minDist[otherteam]) + " units: -" + int(spawnpoint.nearbyPenalty[otherteam]);
     }
 
-      if(positionWouldTelefrag(spawnpoint.origin)) {
-        telefragCount = 1;
+    if(positionWouldTelefrag(spawnpoint.origin)) {
+      telefragCount = 1;
 
-        foreach(alternate in spawnpoint.alternates) {
-          if(positionWouldTelefrag(alternate)) {
-            telefragCount++;
-          }
-          else {
-            break;
-          }
+      foreach(alternate in spawnpoint.alternates) {
+        if(positionWouldTelefrag(alternate)) {
+          telefragCount++;
+        } else {
+          break;
         }
-
-        penalty = 100000;
-        if(telefragCount < spawnpoint.alternates.size + 1) {
-          penalty = 1500 * telefragCount;
-          if(isDefined(self.forceSpawnNearTeammates)) {
-            penalty = 0;
-          }
-        }
-
-        spawnpoint.weight -= penalty;
-
-        spawnpoint.spawnData[spawnpoint.spawnData.size] = "Would telefrag " + telefragCount + " times: -" + penalty;
-
       }
+
+      penalty = 100000;
+      if(telefragCount < spawnpoint.alternates.size + 1) {
+        penalty = 1500 * telefragCount;
+        if(isDefined(self.forceSpawnNearTeammates)) {
+          penalty = 0;
+        }
+      }
+
+      spawnpoint.weight -= penalty;
+
+      spawnpoint.spawnData[spawnpoint.spawnData.size] = "Would telefrag " + telefragCount + " times: -" + penalty;
+
+    }
   }
 
   // DEBUG
@@ -1901,5 +1890,5 @@ avoidSamespawn() {
 
   spawnpoint.spawnData[spawnpoint.spawnData.size] = "Was last spawnpoint: -1000";
 
-    //prof_end(" spawn_complexsamespwn");
+  //prof_end(" spawn_complexsamespwn");
 }

@@ -266,8 +266,7 @@ startheadchopperdeploy(weapon, armed) {
 
     self thread headchopperthink(weapon, electricradius, armed);
 
-    if(!(isDefined(level.equipment_headchopper_needs_power) && level.equipment_headchopper_needs_power)) {
-    }
+    if(!(isDefined(level.equipment_headchopper_needs_power) && level.equipment_headchopper_needs_power)) {}
 
     self thread maps\mp\zombies\_zm_buildables::delete_on_disconnect(weapon);
     weapon waittill("death");
@@ -339,11 +338,11 @@ init_anim_slice_times() {
   animlength = getanimlength( % o_zmb_chopper_slice_slow);
 
   foreach(frac in slice_times) {
-  level.headchopper_slice_times[level.headchopper_slice_times.size] = animlength * frac;
+    level.headchopper_slice_times[level.headchopper_slice_times.size] = animlength * frac;
   }
 
   foreach(frac in retract_times) {
-  level.headchopper_slice_times[level.headchopper_slice_times.size] = animlength * frac;
+    level.headchopper_slice_times[level.headchopper_slice_times.size] = animlength * frac;
   }
 }
 
@@ -367,8 +366,7 @@ headchopper_animate(weapon, armed) {
   while(isDefined(weapon)) {
     if(!prearmed) {
       wait 0.1;
-    }
-    else {
+    } else {
       wait 0.05;
     }
 
@@ -401,7 +399,7 @@ watch_notetracks_slicing() {
   self endon("death");
 
   foreach(time in level.headchopper_slice_times) {
-  self thread watch_notetracks_slicing_times(time);
+    self thread watch_notetracks_slicing_times(time);
   }
 }
 
@@ -491,7 +489,7 @@ headchopperthink(weapon, electricradius, armed) {
         weapon.zombies_only = 1;
 
         foreach(ent in weapon.chop_targets) {
-        self thread headchopperattack(weapon, ent);
+          self thread headchopperattack(weapon, ent);
         }
 
         if(weapon.headchopper_kills >= 42) {
@@ -534,11 +532,9 @@ headchopperattack(weapon, ent) {
 
   if(isDefined(is_headchop) && is_headchop) {
     trace_point = eye_position;
-  }
-  else if(isDefined(is_torsochop) && is_torsochop) {
+  } else if(isDefined(is_torsochop) && is_torsochop) {
     trace_point = ent.origin + (0, 0, length_head_to_toe_25_percent * 2);
-  }
-  else {
+  } else {
     trace_point = ent.origin + (0, 0, length_head_to_toe_25_percent);
   }
 
@@ -554,14 +550,11 @@ headchopperattack(weapon, ent) {
     }
     if(isDefined(is_headchop) && is_headchop && !ent hasperk("specialty_armorvest")) {
       ent dodamage(ent.health, weapon.origin);
-    }
-    else if(isDefined(is_torsochop) && is_torsochop) {
+    } else if(isDefined(is_torsochop) && is_torsochop) {
       ent dodamage(50, weapon.origin);
-    }
-    else if(isDefined(is_footchop) && is_footchop) {
+    } else if(isDefined(is_footchop) && is_footchop) {
       ent dodamage(25, weapon.origin);
-    }
-    else {
+    } else {
       ent dodamage(10, weapon.origin);
     }
   } else {
@@ -741,7 +734,7 @@ destroyheadchopperstouching(usedestroyfx) {
   headchoppers = self getheadchopperstouching();
 
   foreach(headchopper in headchoppers) {
-  headchopper.owner thread headchopper_expired(headchopper, usedestroyfx);
+    headchopper.owner thread headchopper_expired(headchopper, usedestroyfx);
   }
 }
 
@@ -840,8 +833,7 @@ debugheadchopper(radius) {
 
       if(isDefined(self.headchopper_kills)) {
         text = "" + self.headchopper_kills + "";
-      }
-      else if(isDefined(self.owner.headchopper_kills)) {
+      } else if(isDefined(self.owner.headchopper_kills)) {
         text = "[ " + self.owner.headchopper_kills + " ]";
       }
 

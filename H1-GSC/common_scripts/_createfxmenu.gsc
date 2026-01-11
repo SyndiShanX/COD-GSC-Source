@@ -340,8 +340,7 @@ prepare_option_for_change(var_0, var_1) {
 
   if(isDefined(var_0["input_func"])) {
     thread[[var_0["input_func"]]](var_1 + 1);
-  }
-  else {
+  } else {
     common_scripts\_createfx::createfx_centerprint("To set " + var_0["description"] + ", type \fx newvalue. To remove " + var_0["description"] + ", type \fx del");
   }
 
@@ -355,8 +354,7 @@ menu_fx_option_set() {
   }
   if(getdvar("fx") == "del") {
     common_scripts\_createfx::remove_selected_option();
-  }
-  else {
+  } else {
     var_0 = get_selected_option();
     var_1 = undefined;
 
@@ -440,8 +438,7 @@ addoption(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(var_5) && var_5) {
     var_7["nowrite"] = 1;
-  }
-  else {
+  } else {
     var_7["nowrite"] = 0;
   }
 
@@ -472,8 +469,7 @@ input_reactive_radius(var_0) {
 
     if(level.player buttonpressed("-")) {
       var_1 = -10;
-    }
-    else if(level.player buttonpressed("=")) {
+    } else if(level.player buttonpressed("=")) {
       var_1 = 10;
     }
 
@@ -670,8 +666,7 @@ draw_effects_list(var_0) {
 increment_list_offset() {
   if(level.effect_list_offset >= level.effect_list_current_size - level.effect_list_offset_max) {
     level.effect_list_offset = 0;
-  }
-  else {
+  } else {
     level.effect_list_offset = level.effect_list_offset + level.effect_list_offset_max;
   }
 }
@@ -679,8 +674,7 @@ increment_list_offset() {
 decrement_list_offset() {
   if(level.effect_list_current_size < level.effect_list_offset_max) {
     level.effect_list_offset = 0;
-  }
-  else {
+  } else {
     level.effect_list_offset = level.effect_list_offset - level.effect_list_offset_max;
 
     if(level.effect_list_offset < 0) {
@@ -722,8 +716,7 @@ increment_help_list_offset() {
 
   if(level.help_list_offset >= var_0.size - level.help_list_offset_max) {
     level.help_list_offset = 0;
-  }
-  else {
+  } else {
     level.help_list_offset = level.help_list_offset + level.help_list_offset_max;
   }
 }

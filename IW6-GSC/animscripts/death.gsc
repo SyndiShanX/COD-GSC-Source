@@ -111,8 +111,7 @@ main() {
 
   if(self.damagelocation == "helmet" || self.damagelocation == "head") {
     helmetpop();
-  }
-  else if(var_2 && randomint(3) == 0) {
+  } else if(var_2 && randomint(3) == 0) {
     helmetpop();
   }
 
@@ -162,8 +161,7 @@ doimmediateragdolldeath() {
 
   if(isDefined(self.ragdoll_directionscale)) {
     var_5 = var_5 * self.ragdoll_directionscale;
-  }
-  else {
+  } else {
     var_5 = var_5 * var_3;
   }
 
@@ -190,8 +188,7 @@ meleegetattackercardinaldirection(var_0, var_1) {
   if(squared(var_2) < squared(var_3)) {
     if(cross2d(var_0, var_1) > 0) {
       return 1;
-    }
-    else {
+    } else {
       return 3;
     }
   } else if(var_2 < 0)
@@ -237,8 +234,7 @@ playdeathanim(var_0) {
   else if(!animhasnotetrack(var_0, "start_ragdoll")) {
     if(self.damagemod == "MOD_MELEE") {
       var_1 = 0.7;
-    }
-    else {
+    } else {
       var_1 = 0.35;
     }
 
@@ -354,8 +350,7 @@ specialdeath() {
 
         if(animscripts\utility::damagelocationisany("head", "neck")) {
           var_0 = animscripts\utility::lookupanim("death", "cover_right_crouch_head");
-        }
-        else {
+        } else {
           var_0 = animscripts\utility::lookupanim("death", "cover_right_crouch_default");
         }
 
@@ -394,11 +389,9 @@ specialdeath() {
     case "saw":
       if(self.a.pose == "stand") {
         dodeathfromarray(animscripts\utility::lookupanim("death", "saw_stand"));
-      }
-      else if(self.a.pose == "crouch") {
+      } else if(self.a.pose == "crouch") {
         dodeathfromarray(animscripts\utility::lookupanim("death", "saw_crouch"));
-      }
-      else {
+      } else {
         dodeathfromarray(animscripts\utility::lookupanim("death", "saw_prone"));
       }
 
@@ -595,8 +588,7 @@ getdeathanim() {
   if(isDefined(self.a.onback)) {
     if(self.a.pose == "crouch") {
       return getbackdeathanim();
-    }
-    else {
+    } else {
       animscripts\notetracks::stoponback();
     }
   }
@@ -604,8 +596,7 @@ getdeathanim() {
   if(self.a.pose == "stand") {
     if(shoulddorunningforwarddeath()) {
       return getrunningforwarddeathanim();
-    }
-    else {
+    } else {
       return getstanddeathanim();
     }
   } else if(self.a.pose == "crouch")
@@ -624,11 +615,9 @@ getstrongbulletdamagedeathanim() {
   if(var_0 > 150) {
     if(animscripts\utility::damagelocationisany("left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower", "left_foot", "right_foot")) {
       var_1 = animscripts\utility::lookupanim("death", "strong_legs");
-    }
-    else if(self.damagelocation == "torso_lower") {
+    } else if(self.damagelocation == "torso_lower") {
       var_1 = animscripts\utility::lookupanim("death", "strong_torso_lower");
-    }
-    else {
+    } else {
       var_1 = animscripts\utility::lookupanim("death", "strong_default");
     }
   } else if(self.damageyaw < 0)
@@ -712,16 +701,14 @@ getstandpistoldeathanim() {
 
   if(abs(self.damageyaw) < 50) {
     var_0 = animscripts\utility::lookupanim("death", "stand_pistol_forward");
-  }
-  else {
+  } else {
     if(abs(self.damageyaw) < 110) {
       var_0 = animscripts\utility::lookupanim("death", "stand_pistol_front");
     }
 
     if(self.damagelocation == "torso_upper") {
       var_0 = common_scripts\utility::array_combine(animscripts\utility::lookupanim("death", "stand_pistol_torso_upper"), var_0);
-    }
-    else if(animscripts\utility::damagelocationisany("torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower")) {
+    } else if(animscripts\utility::damagelocationisany("torso_lower", "left_leg_upper", "left_leg_lower", "right_leg_upper", "right_leg_lower")) {
       var_0 = common_scripts\utility::array_combine(animscripts\utility::lookupanim("death", "stand_pistol_torso_upper"), var_0);
     }
 
@@ -743,18 +730,14 @@ getstanddeathanim() {
 
   if(animscripts\utility::usingsidearm()) {
     var_0 = getstandpistoldeathanim();
-  }
-  else if(isDefined(self.attacker) && self shouldplaymeleedeathanim(self.attacker)) {
+  } else if(isDefined(self.attacker) && self shouldplaymeleedeathanim(self.attacker)) {
     if(self.damageyaw <= 120 || self.damageyaw > -120) {
       var_0 = animscripts\utility::lookupanim("death", "melee_standing_front");
-    }
-    else if(self.damageyaw <= -60 && self.damageyaw > 60) {
+    } else if(self.damageyaw <= -60 && self.damageyaw > 60) {
       var_0 = animscripts\utility::lookupanim("death", "melee_standing_back");
-    }
-    else if(self.damageyaw < 0) {
+    } else if(self.damageyaw < 0) {
       var_0 = animscripts\utility::lookupanim("death", "melee_standing_left");
-    }
-    else {
+    } else {
       var_0 = animscripts\utility::lookupanim("death", "melee_standing_right");
     }
   } else {
@@ -765,8 +748,7 @@ getstanddeathanim() {
       var_0 = animscripts\utility::lookupanim("death", "stand_head");
     else if(animscripts\utility::damagelocationisany("neck")) {
       var_0 = animscripts\utility::lookupanim("death", "stand_neck");
-    }
-    else if(animscripts\utility::damagelocationisany("torso_upper", "left_arm_upper")) {
+    } else if(animscripts\utility::damagelocationisany("torso_upper", "left_arm_upper")) {
       var_0 = animscripts\utility::lookupanim("death", "stand_left_shoulder");
     }
 
@@ -809,8 +791,7 @@ getstanddeathanim() {
 
     if(var_3 < var_0.size) {
       return var_0[var_3];
-    }
-    else {
+    } else {
       return var_1[var_3 - var_0.size];
     }
   }
@@ -824,14 +805,11 @@ getcrouchdeathanim() {
   if(isDefined(self.attacker) && self shouldplaymeleedeathanim(self.attacker)) {
     if(self.damageyaw <= 120 || self.damageyaw > -120) {
       var_0 = animscripts\utility::lookupanim("death", "melee_crouching_front");
-    }
-    else if(self.damageyaw <= -60 && self.damageyaw > 60) {
+    } else if(self.damageyaw <= -60 && self.damageyaw > 60) {
       var_0 = animscripts\utility::lookupanim("death", "melee_crouching_back");
-    }
-    else if(self.damageyaw < 0) {
+    } else if(self.damageyaw < 0) {
       var_0 = animscripts\utility::lookupanim("death", "melee_crouching_left");
-    }
-    else {
+    } else {
       var_0 = animscripts\utility::lookupanim("death", "melee_crouching_right");
     }
   } else {
@@ -858,8 +836,7 @@ getcrouchdeathanim() {
 getpronedeathanim() {
   if(isDefined(self.a.proneaiming)) {
     return % prone_death_quickdeath;
-  }
-  else {
+  } else {
     return % dying_crawl_death_v1;
   }
 }

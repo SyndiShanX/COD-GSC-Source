@@ -259,7 +259,7 @@ function_acc83382() {
   }
 
   owner notify(#"hash_616497f187c816cf");
-  owner endon(#"death", #"hash_616497f187c816cf");
+  owner endon(#"death", # "hash_616497f187c816cf");
   heightstart = owner getmaxs()[2];
 
   if(!isDefined(heightstart)) {

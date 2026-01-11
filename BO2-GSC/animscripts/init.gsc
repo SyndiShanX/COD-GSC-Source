@@ -34,8 +34,7 @@ initweapon(weapon) {
 
   if(getweaponclipmodel(weapon) != "") {
     self.weaponinfo[weapon].useclip = 1;
-  }
-  else {
+  } else {
     self.weaponinfo[weapon].useclip = 0;
   }
 }
@@ -164,8 +163,7 @@ main() {
 
   if(self.team == "axis" || self.team == "team3") {
     self thread maps\_gameskill::axisaccuracycontrol();
-  }
-  else if(self.team == "allies") {
+  } else if(self.team == "allies") {
     self thread maps\_gameskill::alliesaccuracycontrol();
   }
 
@@ -204,15 +202,13 @@ main() {
 
   if(self.team == "allies") {
     self.suppressionthreshold = 0.75;
-  }
-  else {
+  } else {
     self.suppressionthreshold = 0.5;
   }
 
   if(self.team == "allies") {
     self.randomgrenaderange = 0;
-  }
-  else {
+  } else {
     self.randomgrenaderange = 128;
   }
 
@@ -284,8 +280,7 @@ showlikelyenemypathdir() {
 
       if(isDefined(dir)) {
         print3d(printpos, "likelyEnemyPathDir: " + yaw, (1, 1, 1), 1, 0.5);
-      }
-      else {
+      } else {
         print3d(printpos, "likelyEnemyPathDir: undefined", (1, 1, 1), 1, 0.5);
       }
 
@@ -322,8 +317,7 @@ setweapondist() {
   }
 }
 
-donothing() {
-}
+donothing() {}
 
 setupuniqueanims() {
   if(!isDefined(self.animplaybackrate) || !isDefined(self.moveplaybackrate)) {
@@ -527,8 +521,7 @@ checkapproachangles(transtypes) {
 
       if(trans == "left" || trans == "left_crouch") {
         idealadd = 90;
-      }
-      else if(trans == "right" || trans == "right_crouch") {
+      } else if(trans == "right" || trans == "right_crouch") {
         idealadd = -90;
       }
 
@@ -550,8 +543,7 @@ checkapproachangles(transtypes) {
 
       if(trans == "left" || trans == "left_crouch") {
         idealadd = 90;
-      }
-      else if(trans == "right" || trans == "right_crouch") {
+      } else if(trans == "right" || trans == "right_crouch") {
         idealadd = -90;
       }
 
@@ -608,8 +600,7 @@ firstinit() {
 
   if(getdebugdvar("debug_noanimscripts") == "") {
     setdvar("debug_noanimscripts", "off");
-  }
-  else if(getdebugdvar("debug_noanimscripts") == "on") {
+  } else if(getdebugdvar("debug_noanimscripts") == "on") {
     anim.defaultexception = animscripts\init::infiniteloop;
   }
 

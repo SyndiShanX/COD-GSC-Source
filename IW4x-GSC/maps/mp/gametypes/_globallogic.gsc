@@ -58,8 +58,7 @@ init() {
 
   if(level.splitScreen) {
     precacheString(&"MP_ENDED_GAME");
-  }
-  else {
+  } else {
     precacheString(&"MP_HOST_ENDED_GAME");
   }
 

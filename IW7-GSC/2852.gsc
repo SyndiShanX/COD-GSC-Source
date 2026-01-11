@@ -9,8 +9,7 @@ func_5C21() {
 
   if(isDefined(self.func_EE2C)) {
     self.moveplaybackrate = self.func_EE2C;
-  }
-  else {
+  } else {
     self.moveplaybackrate = 1;
   }
 
@@ -167,8 +166,7 @@ func_23C7() {
   if(isDefined(self.type)) {
     if(self.type == "dog") {
       func_23B5();
-    }
-    else {
+    } else {
       func_23C9();
     }
   }

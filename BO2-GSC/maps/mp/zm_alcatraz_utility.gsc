@@ -40,8 +40,7 @@ is_team_on_golden_gate_bridge() {
   foreach(player in players) {
     if(player istouching(e_zone)) {
       continue;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -59,8 +58,7 @@ create_tutorial_message(str_msg) {
 
     if(self issplitscreen()) {
       self.client_hint.y = -140;
-    }
-    else {
+    } else {
       self.client_hint.y = -250;
     }
 
@@ -188,8 +186,7 @@ blundergat_upgrade_station() {
 
     if(player hasweapon("blundergat_zm")) {
       str_valid_weapon = "blundergat_zm";
-    }
-    else if(player hasweapon("blundergat_upgraded_zm")) {
+    } else if(player hasweapon("blundergat_upgraded_zm")) {
       str_valid_weapon = "blundergat_upgraded_zm";
     }
 
@@ -255,18 +252,15 @@ wait_for_player_to_take(player, str_valid_weapon) {
 
         if(str_valid_weapon == "blundergat_zm") {
           str_new_weapon = "blundersplat_zm";
-        }
-        else {
+        } else {
           str_new_weapon = "blundersplat_upgraded_zm";
         }
 
         if(player hasweapon("blundersplat_zm")) {
           player givemaxammo("blundersplat_zm");
-        }
-        else if(player hasweapon("blundersplat_upgraded_zm")) {
+        } else if(player hasweapon("blundersplat_upgraded_zm")) {
           player givemaxammo("blundersplat_upgraded_zm");
-        }
-        else {
+        } else {
           player giveweapon(str_new_weapon);
           player switchtoweapon(str_new_weapon);
         }
@@ -301,8 +295,7 @@ blundergat_upgrade_station_inject(str_weapon_model) {
 
   if(str_weapon_model == "blundergat_zm") {
     self.worldgun = spawn_weapon_model("blundersplat_zm", undefined, self.v_weapon_origin, self.v_weapon_angles);
-  }
-  else {
+  } else {
     self.worldgun = spawn_weapon_model("blundersplat_upgraded_zm", undefined, self.v_weapon_origin, self.v_weapon_angles);
   }
 
@@ -415,8 +408,7 @@ riotshield_tutorial_hint() {
 check_solo_status() {
   if(getnumexpectedplayers() == 1 && (!sessionmodeisonlinegame() || !sessionmodeisprivate())) {
     level.is_forever_solo_game = 1;
-  }
-  else {
+  } else {
     level.is_forever_solo_game = 0;
   }
 }
@@ -582,8 +574,7 @@ alcatraz_audio_get_mod_type_override(impact, mod, weapon, zombie, instakill, dis
       if(!(isDefined(player.soul_catcher_cooldown) && player.soul_catcher_cooldown)) {
         if(isDefined(zombie.my_soul_catcher.souls_received) && zombie.my_soul_catcher.souls_received > 0) {
           a_str_mod[a_str_mod.size] = "wolf_kill";
-        }
-        else if(isDefined(zombie.my_soul_catcher.souls_received) && zombie.my_soul_catcher.souls_received == 0) {
+        } else if(isDefined(zombie.my_soul_catcher.souls_received) && zombie.my_soul_catcher.souls_received == 0) {
           if(!(isDefined(level.wolf_encounter_vo_played) && level.wolf_encounter_vo_played)) {
             if(level.soul_catchers_charged == 0) {
               zombie.my_soul_catcher thread maps\mp\zm_alcatraz_weap_quest::first_wolf_encounter_vo();
@@ -622,8 +613,7 @@ alcatraz_audio_get_mod_type_override(impact, mod, weapon, zombie, instakill, dis
     if(!isinarray(a_str_mod, "retriever") && !isinarray(a_str_mod, "redeemer")) {
       if(!instakill) {
         a_str_mod[a_str_mod.size] = "explosive";
-      }
-      else {
+      } else {
         a_str_mod[a_str_mod.size] = "weapon_instakill";
       }
     }
@@ -633,8 +623,7 @@ alcatraz_audio_get_mod_type_override(impact, mod, weapon, zombie, instakill, dis
     if(dist > far_dist) {
       if(!instakill) {
         a_str_mod[a_str_mod.size] = "raygun";
-      }
-      else {
+      } else {
         a_str_mod[a_str_mod.size] = "weapon_instakill";
       }
     }
@@ -643,8 +632,7 @@ alcatraz_audio_get_mod_type_override(impact, mod, weapon, zombie, instakill, dis
   if(instakill) {
     if(mod == "MOD_MELEE") {
       a_str_mod[a_str_mod.size] = "melee_instakill";
-    }
-    else {
+    } else {
       a_str_mod[a_str_mod.size] = "weapon_instakill";
     }
   }
@@ -659,11 +647,9 @@ alcatraz_audio_get_mod_type_override(impact, mod, weapon, zombie, instakill, dis
 
   if(a_str_mod.size == 0) {
     str_mod_final = "default";
-  }
-  else if(a_str_mod.size == 1) {
+  } else if(a_str_mod.size == 1) {
     str_mod_final = a_str_mod[0];
-  }
-  else {
+  } else {
     for(i = 0; i < a_str_mod.size; i++) {
       if(cointoss()) {
         str_mod_final = a_str_mod[i];
@@ -834,7 +820,7 @@ alcatraz_first_magic_box_seen_vo() {
   a_players = getplayers();
 
   foreach(player in a_players) {
-  player thread wait_and_play_first_magic_box_seen_vo(magicbox.unitrigger_stub);
+    player thread wait_and_play_first_magic_box_seen_vo(magicbox.unitrigger_stub);
   }
 }
 
@@ -868,8 +854,7 @@ alcatraz_audio_custom_weapon_check(weapon, magic_box) {
 
   if(issubstr(weapon, "upgraded")) {
     self thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "wpck_pap");
-  }
-  else if(level.wallbuys_purchased == 0) {
+  } else if(level.wallbuys_purchased == 0) {
     self thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "discover_wall_buy");
     level.wallbuys_purchased++;
   } else
@@ -895,8 +880,7 @@ brutus_spawn_vo_watcher() {
 
     if(level.total_brutuses_spawned == 0) {
       str_vo_category = "brutus_encounter";
-    }
-    else {
+    } else {
       str_vo_category = "brutus_arrival";
     }
 
@@ -973,8 +957,7 @@ easter_egg_song_vo(player) {
 
   if(isalive(player)) {
     player thread maps\mp\zombies\_zm_audio::create_and_play_dialog("quest", "find_secret");
-  }
-  else {
+  } else {
     while(true) {
       a_players = getplayers();
 
@@ -1074,12 +1057,10 @@ setup_personality_character_exerts() {
 alcatraz_audio_custom_response_line(player, index, category, type) {
   if(type == "revive_up") {
     player thread play_vo_category_on_closest_player("general", "revive_player");
-  }
-  else if(type == "headshot") {
+  } else if(type == "headshot") {
     if(cointoss()) {
       player thread play_vo_category_on_closest_player("kill", "headshot_respond_to_plr_" + player.characterindex);
-    }
-    else {
+    } else {
       player thread play_vo_category_on_closest_player("kill", "headshot_respond_generic");
     }
   } else if(type == "oh_shit") {

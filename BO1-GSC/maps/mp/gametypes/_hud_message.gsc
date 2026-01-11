@@ -168,22 +168,19 @@ showNotifyMessage(notifyData, duration) {
   }
   if(isDefined(notifyData.glowColor)) {
     glowColor = notifyData.glowColor;
-  }
-  else {
+  } else {
     glowColor = (0.0, 0.0, 0.0);
   }
   anchorElem = self.notifyTitle;
   if(isDefined(notifyData.titleText)) {
     if(isDefined(notifyData.titleLabel)) {
       self.notifyTitle.label = notifyData.titleLabel;
-    }
-    else {
+    } else {
       self.notifyTitle.label = &"";
     }
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString)) {
       self.notifyTitle setValue(notifyData.titleText);
-    }
-    else {
+    } else {
       self.notifyTitle setText(notifyData.titleText);
     }
     self.notifyTitle setCOD7DecodeFX(200, int(duration * 1000), 600);
@@ -193,14 +190,12 @@ showNotifyMessage(notifyData, duration) {
   if(isDefined(notifyData.notifyText)) {
     if(isDefined(notifyData.textLabel)) {
       self.notifyText.label = notifyData.textLabel;
-    }
-    else {
+    } else {
       self.notifyText.label = &"";
     }
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString)) {
       self.notifyText setValue(notifyData.notifyText);
-    }
-    else {
+    } else {
       self.notifyText setText(notifyData.notifyText);
     }
     self.notifyText setCOD7DecodeFX(100, int(duration * 1000), 600);
@@ -212,16 +207,14 @@ showNotifyMessage(notifyData, duration) {
     if(self IsSplitscreen()) {
       if(isDefined(notifyData.text2Label)) {
         self iPrintLnBold(notifyData.text2Label, notifyData.notifyText2);
-      }
-      else {
+      } else {
         self iPrintLnBold(notifyData.notifyText2);
       }
     } else {
       self.notifyText2 setParent(anchorElem);
       if(isDefined(notifyData.text2Label)) {
         self.notifyText2.label = notifyData.text2Label;
-      }
-      else {
+      } else {
         self.notifyText2.label = &"";
       }
       self.notifyText2 setText(notifyData.notifyText2);
@@ -373,8 +366,7 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
   } else if(winner == "tie") {
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_draw"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["draw"]);
     }
     outcomeTitle.color = (0.29, 0.61, 0.7);
@@ -382,16 +374,14 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
   } else if(isDefined(self.pers["team"]) && winner == team) {
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_win"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["victory"]);
     }
     outcomeTitle.color = (0.42, 0.68, 0.46);
   } else {
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_loss"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["defeat"]);
     }
     outcomeTitle.color = (0.73, 0.29, 0.19);
@@ -630,8 +620,7 @@ wagerOutcomeNotify(winner, endReasonText) {
       secondCP.currentValue = 0;
       if(isDefined(players[i].wagerWinnings)) {
         secondCP.targetValue = players[i].wagerWinnings;
-      }
-      else {
+      } else {
         secondCP.targetValue = 0;
       }
       if(secondCP.targetValue > 0) {
@@ -714,8 +703,7 @@ teamWagerOutcomeNotify(winner, isRoundEnd, endReasonText) {
   if(winner == "tie") {
     if(isRoundEnd) {
       outcomeTitle setText(game["strings"]["round_draw"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["draw"]);
     }
     outcomeTitle.color = (1, 1, 1);
@@ -726,16 +714,14 @@ teamWagerOutcomeNotify(winner, isRoundEnd, endReasonText) {
   } else if(isDefined(self.pers["team"]) && winner == team) {
     if(isRoundEnd) {
       outcomeTitle setText(game["strings"]["round_win"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["victory"]);
     }
     outcomeTitle.color = (0.42, 0.68, 0.46);
   } else {
     if(isRoundEnd) {
       outcomeTitle setText(game["strings"]["round_loss"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["defeat"]);
     }
     outcomeTitle.color = (0.73, 0.29, 0.19);
@@ -852,20 +838,17 @@ updateOutcome(firstTitle, secondTitle, thirdTitle) {
     players = level.placement["all"];
     if(isDefined(firstTitle) && isDefined(players[0])) {
       firstTitle setPlayerNameString(players[0]);
-    }
-    else if(isDefined(firstTitle)) {
+    } else if(isDefined(firstTitle)) {
       firstTitle.alpha = 0;
     }
     if(isDefined(secondTitle) && isDefined(players[1])) {
       secondTitle setPlayerNameString(players[1]);
-    }
-    else if(isDefined(secondTitle)) {
+    } else if(isDefined(secondTitle)) {
       secondTitle.alpha = 0;
     }
     if(isDefined(thirdTitle) && isDefined(players[2])) {
       thirdTitle setPlayerNameString(players[2]);
-    }
-    else if(isDefined(thirdTitle)) {
+    } else if(isDefined(thirdTitle)) {
       thirdTitle.alpha = 0;
     }
   }
@@ -879,8 +862,7 @@ updateWagerOutcome(playerNameHudElems, playerCPHudElems) {
     for(i = 0; i < playerNameHudElems.size; i++) {
       if(isDefined(playerNameHudElems[i]) && isDefined(players[playerNameHudElems[i].playerNum])) {
         playerNameHudElems[i] SetPlayerNameString(players[playerNameHudElems[i].playerNum]);
-      }
-      else {
+      } else {
         if(isDefined(playerNameHudElems[i])) {
           playerNameHudElems[i].alpha = 0;
         }

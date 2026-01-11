@@ -510,8 +510,7 @@ cliffhanger_enemy_attack_behavior_sees_player() {
 
     if(animscripts\utility::isShotgun(self.weapon)) {
       radius = 250;
-    }
-    else {
+    } else {
       radius = max(500, player.maxVisibleDist);
     }
 
@@ -692,8 +691,7 @@ cliffhanger_prespotted_func_with_flag_wait() {
 
   if(level.gameskill < 2) {
     wait 3;
-  }
-  else {
+  } else {
     wait .25;
   }
 
@@ -857,8 +855,7 @@ unload_and_attack_if_stealth_broken_and_close() {
     level.player waittill_entity_in_range(self, 800);
     if(!flag("_stealth_spotted")) {
       continue;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -928,7 +925,7 @@ base_truck_guys_think() {
   self stealth_threat_behavior_custom(alert_array);
   self stealth_corpse_behavior_custom(corpse_array);
   foreach(key, value in awareness_array) {
-  self maps\_stealth_event_enemy::stealth_event_mod(key, value);
+    self maps\_stealth_event_enemy::stealth_event_mod(key, value);
   }
 
   self ent_flag_set("_stealth_behavior_reaction_anim");
@@ -1019,8 +1016,7 @@ truck_guys_reaction_behavior(type) {
   spotted_flag = self group_get_flagname("_stealth_spotted");
   if(flag(spotted_flag)) {
     self flag_waitopen(spotted_flag);
-  }
-  else {
+  } else {
     self waittill("normal");
   }
 }
@@ -1057,8 +1053,7 @@ truck_guys_no_enemy_reaction_behavior(type) {
   spotted_flag = self group_get_flagname("_stealth_spotted");
   if(flag(spotted_flag)) {
     self flag_waitopen(spotted_flag);
-  }
-  else {
+  } else {
     self waittill("normal");
   }
 }
@@ -1132,7 +1127,7 @@ alert_enemies_count() {
     if(guy ent_flag_exist("_stealth_normal")) {
       if(!guy ent_flag("_stealth_normal"))
     }
-        count++;
+    count++;
   }
   return count;
 }
@@ -1170,8 +1165,7 @@ price_should_snipe_me() {
 
     if(ai.alertLevel == "alert") {
       checkDistSq = MIN_ALERT_TEAMMATE_DIST_SQ;
-    }
-    else {
+    } else {
       checkDistSq = MIN_NON_ALERT_TEAMMATE_DIST_SQ;
     }
 

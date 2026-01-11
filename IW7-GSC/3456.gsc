@@ -51,8 +51,7 @@ gettargets() {
 
   if(isDefined(var_01) && var_1.size) {
     return var_1[0];
-  }
-  else if(isDefined(var_00) && var_0.size) {
+  } else if(isDefined(var_00) && var_0.size) {
     return var_0[0];
   }
 }
@@ -66,8 +65,7 @@ aa_missile_fire(var_00, var_01) {
 
   if(!isDefined(var_06)) {
     var_07 = (0, 0, 0);
-  }
-  else {
+  } else {
     var_07 = var_6.origin;
     var_03 = (0, 0, 1) * var_07 + (0, 0, 1000);
   }

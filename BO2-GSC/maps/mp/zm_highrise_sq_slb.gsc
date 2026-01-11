@@ -29,8 +29,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage_1(success) {
-}
+exit_stage_1(success) {}
 
 snipe_balls_wait() {
   a_balls = getEntArray("sq_dragon_lion_ball", "targetname");

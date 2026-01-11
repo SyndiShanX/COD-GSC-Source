@@ -119,8 +119,7 @@ giveSentry(sentryType) {
 
   if(isDefined(sentryGun)) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -608,8 +607,7 @@ turret_handleUse() {
 
       if(self.heatLevel >= level.sentrySettings[self.sentryType].overheatTime) {
         barFrac = 1;
-      }
-      else {
+      } else {
         barFrac = self.heatLevel / level.sentrySettings[self.sentryType].overheatTime;
       }
       player.turret_overheat_bar updateBar(barFrac);
@@ -626,8 +624,7 @@ turret_handleUse() {
         player.turret_overheat_bar.bar.color = colorUnstable;
         if(RandomIntRange(0, 10) < 6) {
           self TurretFireEnable();
-        }
-        else {
+        } else {
           self TurretFireDisable();
         }
         if(!playingHeatFX) {
@@ -786,8 +783,7 @@ sentry_setCarried(carrier) {
   assert(isPlayer(carrier));
   if(isDefined(self.originalOwner)) {
     assertEx(carrier == self.originalOwner, "sentry_setCarried() specified carrier does not own this sentry");
-  }
-  else {
+  } else {
     assertEx(carrier == self.owner, "sentry_setCarried() specified carrier does not own this sentry");
   }
 
@@ -872,8 +868,7 @@ sentry_onCarrierDeath(carrier) {
 
   if(self.canBePlaced) {
     self sentry_setPlaced();
-  }
-  else {
+  } else {
     self sentry_setCancelled(false);
   }
 }
@@ -913,8 +908,7 @@ sentry_setActive() {
   if(level.sentrySettings[self.sentryType].headIcon) {
     if(level.teamBased) {
       self maps\mp\_entityheadicons::setTeamHeadIcon(self.team, (0, 0, 65));
-    }
-    else {
+    } else {
       self maps\mp\_entityheadicons::setPlayerHeadIcon(self.owner, (0, 0, 65));
     }
   }
@@ -945,8 +939,7 @@ sentry_setActive() {
 
         if(player == self.owner) {
           self enablePlayerUse(player);
-        }
-        else {
+        } else {
           self disablePlayerUse(player);
         }
         break;
@@ -987,8 +980,7 @@ sentry_setInactive() {
 
   if(level.teamBased) {
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
   }
 }
@@ -1061,11 +1053,9 @@ sentry_timeOut() {
   if(isDefined(self.owner)) {
     if(self.sentryType == "sam_turret") {
       self.owner thread leaderDialogOnPlayer("sam_gone");
-    }
-    else if(self.sentryType == "scramble_turret") {
+    } else if(self.sentryType == "scramble_turret") {
       self.owner thread leaderDialogOnPlayer("sam_gone");
-    }
-    else {
+    } else {
       self.owner thread leaderDialogOnPlayer("sentry_gone");
     }
   }
@@ -1158,8 +1148,7 @@ sentry_heatMonitor() {
   for(;;) {
     if(self.heatLevel != lastHeatLevel) {
       wait(fireTime);
-    }
-    else {
+    } else {
       self.heatLevel = max(0, self.heatLevel - 0.05);
     }
 

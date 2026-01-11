@@ -13,8 +13,7 @@ preload() {
 attack_heli_fx() {
   if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
     level._effect["_attack_heli_spotlight"] = loadfx("fx/misc/hunted_spotlight_model");
-  }
-  else {
+  } else {
     level._effect["_attack_heli_spotlight"] = loadfx("fx/misc/spotlight_large");
   }
 }
@@ -98,8 +97,7 @@ begin_attack_heli_behavior(var_0, var_1) {
 
     if(level.gameskill == 0) {
       var_3 = 2800;
-    }
-    else {
+    } else {
       var_3 = 2200;
     }
 
@@ -169,7 +167,7 @@ begin_attack_heli_behavior(var_0, var_1) {
 
 detect_player_death() {
   foreach(var_1 in level.players) {
-  var_1 maps\_utility::add_wait(maps\_utility::waittill_msg, "death");
+    var_1 maps\_utility::add_wait(maps\_utility::waittill_msg, "death");
   }
 
   maps\_utility::do_wait_any();
@@ -277,8 +275,7 @@ kill_heli_logic(var_0, var_1) {
 
   if(!isDefined(var_0.script_airspeed)) {
     var_2 = 40;
-  }
-  else {
+  } else {
     var_2 = var_0.script_airspeed;
   }
 
@@ -357,8 +354,7 @@ kill_heli_logic(var_0, var_1) {
 
   if(var_0.circling) {
     var_0 thread heli_circling_think(var_1, var_2);
-  }
-  else {
+  } else {
     var_0 thread heli_goal_think(var_2);
   }
 }
@@ -433,11 +429,9 @@ heli_goal_think(var_0) {
 
     if(isDefined(self.etarget) && isDefined(self.etarget.classname) && self.etarget.classname == "script_origin") {
       var_5 = var_6;
-    }
-    else if(isDefined(self.etarget)) {
+    } else if(isDefined(self.etarget)) {
       var_5 = self.etarget;
-    }
-    else {
+    } else {
       var_5 = self.targetdefault;
     }
 
@@ -474,11 +468,9 @@ heli_goal_think(var_0) {
 
     if(var_8.size < 2) {
       var_3 = var_10;
-    }
-    else if(var_14 != var_9) {
+    } else if(var_14 != var_9) {
       var_3 = var_14;
-    }
-    else {
+    } else {
       var_15 = [];
       var_15[0] = var_14;
       var_8 = common_scripts\utility::get_array_of_closest(var_7, var_8, var_15, 2);
@@ -486,8 +478,7 @@ heli_goal_think(var_0) {
 
       if(randomint(100) > 50) {
         var_3 = var_8[var_16];
-      }
-      else {
+      } else {
         var_3 = var_9;
       }
     }
@@ -555,8 +546,7 @@ heli_shoot_think() {
 
     if(isDefined(self.heli_lastattacker) && isplayer(self.heli_lastattacker)) {
       self.etarget = self.heli_lastattacker;
-    }
-    else if(!heli_has_target()) {
+    } else if(!heli_has_target()) {
       var_1 = heli_get_target_ai_only();
       self.etarget = var_1;
     }
@@ -627,8 +617,7 @@ heli_has_player_target() {
 
   if(isplayer(self.etarget)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -644,8 +633,7 @@ heli_has_target() {
 
   if(self.etarget == self.targetdefault) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -766,8 +754,7 @@ heli_missiles_think() {
 player_is_good_missile_target(var_0) {
   if(self.moving) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -1007,8 +994,7 @@ minigun_spindown(var_0) {
 
   if(isplayer(var_0)) {
     wait(randomfloatrange(3, 4));
-  }
-  else {
+  } else {
     wait(randomfloatrange(1, 2));
   }
 
@@ -1049,15 +1035,13 @@ can_see_player(var_0) {
 
   if(isplayer(var_0)) {
     var_2 = var_0 getEye();
-  }
-  else {
+  } else {
     var_2 = var_0.origin;
   }
 
   if(sighttracepassed(var_1, var_2, 0, undefined)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -1327,8 +1311,7 @@ heli_spotlight_think(var_0) {
 
   if(isDefined(var_0)) {
     self thread[[var_0]]();
-  }
-  else {
+  } else {
     for(;;) {
       wait(randomfloatrange(1, 3));
 
@@ -1456,8 +1439,7 @@ heli_spotlight_on(var_0, var_1, var_2) {
 
   if(var_2) {
     self setturrettargetent(level.player);
-  }
-  else if(var_1) {
+  } else if(var_1) {
     self endon("death");
     self endon("heli_players_dead");
     var_3 = self gettagorigin("tag_origin");
@@ -1504,8 +1486,7 @@ heli_fire_missiles(var_0, var_1, var_2, var_3) {
 
   if(isDefined(self.defaultweapon)) {
     var_4 = self.defaultweapon;
-  }
-  else {
+  } else {
     var_4 = "turret_attackheli";
   }
 
@@ -1624,6 +1605,6 @@ boneyard_fire_at_targets(var_0, var_1) {
   wait 2;
 
   foreach(var_7 in var_3) {
-  var_7 delete();
+    var_7 delete();
   }
 }

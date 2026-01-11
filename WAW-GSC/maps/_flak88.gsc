@@ -89,8 +89,7 @@ flakcrew_animation_think(flak) {
   for(;;) {
     if(flak.turning != "none") {
       self thread flakcrew_playAnim(flak, flak.turning);
-    }
-    else {
+    } else {
       self thread flakcrew_playAnim(flak, "idle" + randomint(5));
     }
     self waittill("flakcrew animation done");
@@ -200,8 +199,7 @@ flak88_init() {
     for(i = 0; i < targeted.size; i++) {
       if(targeted[i].classname == "trigger_use") {
         triggerUse[triggerUse.size] = targeted[i];
-      }
-      else if(targeted[i].classname == "script_origin") {
+      } else if(targeted[i].classname == "script_origin") {
         self.customTarget = targeted[i];
       }
     }
@@ -241,11 +239,9 @@ flak_monitorTurretAngles() {
     newAngles = self getTagAngles("tag_turret");
     if(newAngles[1] < prevAngles[1]) {
       self.turning = "turnright";
-    }
-    else if(newAngles[1] > prevAngles[1]) {
+    } else if(newAngles[1] > prevAngles[1]) {
       self.turning = "turnleft";
-    }
-    else {
+    } else {
       self.turning = "none";
     }
     wait 0.1;
@@ -757,8 +753,7 @@ think() {
   self endon("newcrew");
   if(!isDefined(self.script_accuracy)) {
     self.script_accuracy = .4;
-  }
-  else if(self.script_accuracy >= 1.000) {
+  } else if(self.script_accuracy >= 1.000) {
     self.script_accuracy = .99;
   }
   if((!isDefined(self.script_delay_min)) || (!isDefined(self.script_delay_max))) {
@@ -847,8 +842,7 @@ Target_Kill_Using_Accuracy(flak, target, delay_difference) {
   if(isDefined(delay_difference)) {
     if(delay_difference <= 0) {
       wait flak.script_delay_min;
-    }
-    else {
+    } else {
       wait(flak.script_delay_min + randomfloat(delay_difference));
     }
   }
@@ -874,8 +868,7 @@ cone_check(flak88, target_org) {
     rightvecdot = vectordot(rightvec, normalvec);
     if(rightvecdot >= 0) {
       return (vecdot > cos(flak88.script_rightarc));
-    }
-    else {
+    } else {
       return (vecdot > cos(flak88.script_leftarc));
     }
   }

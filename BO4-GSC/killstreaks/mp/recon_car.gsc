@@ -15,11 +15,10 @@
 #include scripts\killstreaks\mp\killstreak_vehicle;
 #include scripts\killstreaks\remote_weapons;
 #include scripts\mp_common\player\player_utils;
-
 #namespace recon_car;
 
 autoexec __init__system__() {
-  system::register(#"recon_car", &__init__, undefined, #"killstreaks");
+  system::register(#"recon_car", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {

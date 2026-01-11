@@ -507,7 +507,7 @@ angola_jungle_wave_spawning() {
   triggers = getEntArray("player_escaping_village_trigger", "targetname");
 
   foreach(trigger in triggers) {
-  trigger trigger_on();
+    trigger trigger_on();
   }
 
   angola_init_rusher_distances();
@@ -629,7 +629,7 @@ kill_player_hut_for_not_advancing(b_wait_time) {
   level.player.overrideplayerdamage = ::hut_kill_player_override;
 
   foreach(trigger_string in a_trigger_strings) {
-  level thread disable_flag_for_hut_when_trigger_hit(trigger_string);
+    level thread disable_flag_for_hut_when_trigger_hit(trigger_string);
   }
 
   ai_array = simple_spawn("je_village_hut_kill_player", ::kill_player_regular_logic, "je_village_hut_kill_player", a_trigger_strings);
@@ -676,7 +676,7 @@ kill_player_battle_1_for_not_advancing(b_wait_time) {
   }
 
   foreach(trigger_string in a_trigger_strings) {
-  level thread disable_flag_for_wave1_when_trigger_hit(trigger_string);
+    level thread disable_flag_for_wave1_when_trigger_hit(trigger_string);
   }
 
   ai = simple_spawn_single("je_battle1_kill_player_launcher", ::kill_player_rpg_logic, "je_battle1_kill_player_launcher", a_trigger_strings);
@@ -1387,7 +1387,7 @@ tree_sniper_initialization() {
   a_sniper_tree_triggers = getEntArray("trig_sniper_tree", "targetname");
 
   foreach(t_sniper_tree in a_sniper_tree_triggers) {
-  t_sniper_tree thread is_player_on_sniper_tree_logic();
+    t_sniper_tree thread is_player_on_sniper_tree_logic();
   }
 }
 
@@ -1649,6 +1649,6 @@ delete_truck_riders_when_end_scene_starts() {
   level waittill("je_end_scene_started");
 
   foreach(guy in self.riders) {
-  guy delete();
+    guy delete();
   }
 }

@@ -25,8 +25,7 @@ main() {
 
   if(self.prevscript == "dog_stop") {
     var_0 = "idle_pain";
-  }
-  else {
+  } else {
     var_0 = "run_pain";
   }
 
@@ -34,8 +33,7 @@ main() {
 
   if(self isdogbeingdriven()) {
     self playSound("bullet_large_flesh");
-  }
-  else {
+  } else {
     self playSound("bullet_large_flesh_npc");
   }
 

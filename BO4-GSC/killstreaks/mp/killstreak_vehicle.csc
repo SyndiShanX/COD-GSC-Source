@@ -10,15 +10,14 @@
 #include scripts\core_common\visionset_mgr_shared;
 #include scripts\killstreaks\killstreak_bundles;
 #include scripts\mp_common\callbacks;
-
 #namespace killstreak_vehicle;
 
 init() {
-  level._effect[#"rcbomb_enemy_light"] = #"killstreaks/fx_rcxd_lights_blinky";
-  level._effect[#"rcbomb_friendly_light"] = #"killstreaks/fx_rcxd_lights_solid";
-  level._effect[#"rcbomb_enemy_light_blink"] = #"killstreaks/fx_rcxd_lights_red";
-  level._effect[#"rcbomb_friendly_light_blink"] = #"killstreaks/fx_rcxd_lights_grn";
-  level._effect[#"rcbomb_stunned"] = #"hash_622d3cdb93e01de5";
+  level._effect[# "rcbomb_enemy_light"] = # "killstreaks/fx_rcxd_lights_blinky";
+  level._effect[# "rcbomb_friendly_light"] = # "killstreaks/fx_rcxd_lights_solid";
+  level._effect[# "rcbomb_enemy_light_blink"] = # "killstreaks/fx_rcxd_lights_red";
+  level._effect[# "rcbomb_friendly_light_blink"] = # "killstreaks/fx_rcxd_lights_grn";
+  level._effect[# "rcbomb_stunned"] = # "hash_622d3cdb93e01de5";
   clientfield::register("vehicle", "stunned", 1, 1, "int", &callback::callback_stunned, 0, 0);
 }
 
@@ -50,7 +49,7 @@ demo_think(localclientnum) {
   }
 
   for(;;) {
-    level waittill(#"demo_jump", #"demo_player_switch");
+    level waittill(#"demo_jump", # "demo_player_switch");
     self vehicle::lights_off(localclientnum);
   }
 }
@@ -86,7 +85,7 @@ play_boost_fx(localclientnum) {
     speed = self getspeed();
 
     if(speed > 400) {
-      self playSound(localclientnum, #"mpl_veh_rc_boost");
+      self playSound(localclientnum, # "mpl_veh_rc_boost");
       return;
     }
 
@@ -119,7 +118,7 @@ play_stunned_fx_handler(localclientnum) {
   self endon(#"not_stunned");
 
   while(true) {
-    util::playFXOnTag(localclientnum, level._effect[#"rcbomb_stunned"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[# "rcbomb_stunned"], self, "tag_origin");
     wait 0.5;
   }
 }

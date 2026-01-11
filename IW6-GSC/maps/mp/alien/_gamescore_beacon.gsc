@@ -62,8 +62,7 @@ init_kraken_score_component() {
 init_kraken_score(var_0) {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     var_0.max_score_kraken = 6000;
-  }
-  else {
+  } else {
     var_0.max_score_kraken = 4500;
   }
 
@@ -107,8 +106,7 @@ calculate_kraken_score(var_0) {
 get_kraken_score_component_name_list() {
   if(maps\mp\alien\_utility::isplayingsolo()) {
     return ["kraken", "kraken_personal"];
-  }
-  else {
+  } else {
     return ["kraken", "kraken_team", "kraken_personal"];
   }
 }

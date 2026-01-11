@@ -60,8 +60,7 @@ registerMissionCallback(callback, func) {
 getChallengeStatus(name) {
   if(isDefined(self.challengeData[name])) {
     return self.challengeData[name];
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -91,8 +90,7 @@ processChallenge(baseName, progressInc, weaponNum, challengeType) {
   } else {
     if(numLevels > 1) {
       missionStatus = self getChallengeStatus((baseName + "1"));
-    }
-    else {
+    } else {
       missionStatus = self getChallengeStatus(baseName);
     }
   }
@@ -105,8 +103,7 @@ processChallenge(baseName, progressInc, weaponNum, challengeType) {
   assertex(missionStatus <= numLevels, "Mini challenge levels higher than max: " + missionStatus + " vs. " + numLevels);
   if(numLevels > 1) {
     refString = baseName + missionStatus;
-  }
-  else {
+  } else {
     refString = baseName;
   }
   if(isDefined(weaponNum) && isDefined(challengeType)) {
@@ -132,8 +129,7 @@ processChallenge(baseName, progressInc, weaponNum, challengeType) {
       missionStatus += 1;
     if(numLevels > 1) {
       self.challengeData[baseName + "1"] = missionStatus;
-    }
-    else {
+    } else {
       self.challengeData[baseName] = missionStatus;
     }
     if(isDefined(weaponNum) && isDefined(challengeType)) {
@@ -220,8 +216,7 @@ isHighestScoringPlayer(player) {
   players = level.players;
   if(level.teamBased) {
     team = player.pers["team"];
-  }
-  else {
+  } else {
     team = "all";
   }
   highScore = player.score;
@@ -327,8 +322,7 @@ ch_kills(data, time) {
   }
   if(data.sWeapon == "dog_bite_mp") {
     data.sMeansOfDeath = "MOD_DOGS";
-  }
-  else if(data.sWeapon == "artillery_mp") {
+  } else if(data.sWeapon == "artillery_mp") {
     data.sMeansOfDeath = "MOD_ARTILLERY";
   }
   if(!isDefined(data.victim.diedOnVehicle) && isDefined(data.victim.diedOnTurret)) {
@@ -337,14 +331,11 @@ ch_kills(data, time) {
   if(isStrStart(data.sWeapon, "panzer") || isStrStart(data.sWeapon, "t34")) {
     if(isSubStr(data.sWeapon, "_gunner_mp")) {
       player processChallenge("ch_expert_gunner_");
-    }
-    else if(data.sWeapon == "sherman_gunner_mp_FLM") {
+    } else if(data.sWeapon == "sherman_gunner_mp_FLM") {
       player processChallenge("ch_expert_turret_flame_");
-    }
-    else if(isSubStr(data.sWeapon, "_turret_mp")) {
+    } else if(isSubStr(data.sWeapon, "_turret_mp")) {
       player processChallenge("ch_behemouth_");
-    }
-    else if((data.sWeapon == "panzer4_mp_explosion_mp" || data.sWeapon == "t34_mp_explosion_mp") && !isDefined(data.victim.diedOnVehicle)) {
+    } else if((data.sWeapon == "panzer4_mp_explosion_mp" || data.sWeapon == "t34_mp_explosion_mp") && !isDefined(data.victim.diedOnVehicle)) {
       player processChallenge("ch_tankbomb");
     }
     if(isDefined(data.victim.explosiveInfo["damageTime"]) && data.victim.explosiveInfo["damageTime"] == time) {
@@ -374,11 +365,9 @@ ch_kills(data, time) {
   } else if(isSubStr(data.sMeansOfDeath, "MOD_GRENADE") || isSubStr(data.sMeansOfDeath, "MOD_EXPLOSIVE") || isSubStr(data.sMeansOfDeath, "MOD_PROJECTILE")) {
     if(isStrStart(data.sWeapon, "molotov_") || isStrStart(data.sWeapon, "napalmblob_")) {
       player processChallenge("ch_bartender_");
-    }
-    else if(isStrStart(data.sWeapon, "frag_grenade_short_")) {
+    } else if(isStrStart(data.sWeapon, "frag_grenade_short_")) {
       player processChallenge("ch_martyrdom_");
-    }
-    else if(isSubStr(data.sWeapon, "gl_")) {
+    } else if(isSubStr(data.sWeapon, "gl_")) {
       player processChallenge("ch_launchspecialist_");
     }
     if(isDefined(data.victim.explosiveInfo["damageTime"]) && data.victim.explosiveInfo["damageTime"] == time) {
@@ -475,14 +464,11 @@ ch_kills(data, time) {
   } else if(isSubStr(data.sMeansOfDeath, "MOD_IMPACT")) {
     if(isStrStart(data.sWeapon, "frag_")) {
       player processChallenge("ch_thinkfast");
-    }
-    else if(isSubStr(data.sWeapon, "gl_")) {
+    } else if(isSubStr(data.sWeapon, "gl_")) {
       player processChallenge("ch_launchspecialist_");
-    }
-    else if(isStrStart(data.sWeapon, "molotov_") || isStrStart(data.sWeapon, "napalmblob_")) {
+    } else if(isStrStart(data.sWeapon, "molotov_") || isStrStart(data.sWeapon, "napalmblob_")) {
       player processChallenge("ch_bartender_");
-    }
-    else if(isStrStart(data.sWeapon, "tabun_") || isStrStart(data.sWeapon, "signal_")) {
+    } else if(isStrStart(data.sWeapon, "tabun_") || isStrStart(data.sWeapon, "signal_")) {
       player processChallenge("ch_thinkfastspecial");
     }
   } else if(data.sMeansOfDeath == "MOD_HEAD_SHOT") {
@@ -532,8 +518,7 @@ ch_kills(data, time) {
 ch_bulletKillCommon(data, player, time, weaponClass) {
   if(player.pers["lastBulletKillTime"] == time) {
     player.pers["bulletStreak"]++;
-  }
-  else {
+  } else {
     player.pers["bulletStreak"] = 1;
   }
   player.pers["lastBulletKillTime"] = time;
@@ -973,14 +958,11 @@ monitorDestroyedTank() {
     if(game["dialog"]["gametype"] == "ffa_start" || occupantEnt.pers["team"] != self.pers["team"]) {
       if(weaponUsed == "tankGun") {
         self processChallenge("ch_tankvtank_");
-      }
-      else if(isStrStart(weaponUsed, "bazooka_")) {
+      } else if(isStrStart(weaponUsed, "bazooka_")) {
         self processChallenge("ch_antitankrockets_");
-      }
-      else if(isStrStart(weaponUsed, "satchel_charge")) {
+      } else if(isStrStart(weaponUsed, "satchel_charge")) {
         self processChallenge("ch_antitankdemolitions_");
-      }
-      else if(isStrStart(weaponUsed, "sticky_grenade")) {
+      } else if(isStrStart(weaponUsed, "sticky_grenade")) {
         self processChallenge("ch_tanksticker_");
       }
     }

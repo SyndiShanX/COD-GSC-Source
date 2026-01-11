@@ -119,8 +119,7 @@ player_combat_rappel_begin() {
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
     var_0 sethintstring(&"CORNERED_EXIT_BUILDING_CONSOLE");
-  }
-  else {
+  } else {
     var_0 sethintstring(&"CORNERED_EXIT_BUILDING");
   }
 
@@ -496,8 +495,7 @@ combat_rappel_garden_entry_grenades() {
 
     if(var_5 == "grenade_explode1") {
       var_6 = var_1;
-    }
-    else if(var_5 == "grenade_explode2") {
+    } else if(var_5 == "grenade_explode2") {
       var_6 = var_2;
     }
 
@@ -711,11 +709,11 @@ combat_rappel_garden_entry_slowmo() {
   var_1 = maps\_utility::get_living_ai_array("garden_entry_temp_fodder", "script_noteworthy");
 
   foreach(var_3 in var_0) {
-  var_3.health = 1;
+    var_3.health = 1;
   }
 
   foreach(var_3 in var_1) {
-  var_3.health = 1;
+    var_3.health = 1;
   }
 
   wait 2.0;
@@ -905,7 +903,7 @@ combat_rappel_garden_entry_blend_to_position(var_0, var_1) {
   level.player playerlinktoblend(level.rappel_player_arms, "tag_player", var_0);
 
   foreach(var_7 in level.allies) {
-  var_7 maps\cornered_code_rappel_allies::ally_rappel_stop_rope();
+    var_7 maps\cornered_code_rappel_allies::ally_rappel_stop_rope();
   }
 
   wait(var_0);
@@ -1123,8 +1121,7 @@ enemy_drone_anim(var_0, var_1, var_2) {
 
   if(isDefined(var_2) && var_2 == 1) {
     thread maps\_anim::anim_generic_loop(self, self.script_animation);
-  }
-  else {
+  } else {
     thread maps\_anim::anim_generic(self, self.script_animation);
   }
 
@@ -1161,8 +1158,7 @@ enemy_pt1_setup(var_0) {
 
   if(var_4 == 1) {
     var_5 = var_3[1];
-  }
-  else {
+  } else {
     var_5 = var_3[0];
   }
 
@@ -1209,8 +1205,7 @@ play_random_window_lean_anim(var_0) {
 
   if(var_1 == 5 || var_1 == 6 || var_1 == 7) {
     var_2 = randomfloatrange(1.0, 2.25);
-  }
-  else {
+  } else {
     var_2 = randomintrange(5, 10);
   }
 
@@ -1462,14 +1457,11 @@ send_to_death_volume() {
 
   if(isalive(self) && self.script_noteworthy == "p1_upper") {
     var_0 = getent("p1_upper_volume", "targetname");
-  }
-  else if(isalive(self) && self.script_noteworthy == "copymachine_ai" || isalive(self) && self.script_noteworthy == "p1_junction") {
+  } else if(isalive(self) && self.script_noteworthy == "copymachine_ai" || isalive(self) && self.script_noteworthy == "p1_junction") {
     var_0 = getent("p1_junction_volume", "targetname");
-  }
-  else if(isalive(self) && self.script_noteworthy == "p1_lower") {
+  } else if(isalive(self) && self.script_noteworthy == "p1_lower") {
     var_0 = getent("p1_lower_volume", "targetname");
-  }
-  else if(isalive(self) && self.script_noteworthy == "p1_ahead") {
+  } else if(isalive(self) && self.script_noteworthy == "p1_ahead") {
     var_1 = getEntArray("p1_ahead_volume", "targetname");
     var_1 = sortbydistance(var_1, self.origin);
     var_0 = var_1[0];

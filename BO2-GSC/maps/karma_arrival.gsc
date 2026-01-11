@@ -31,8 +31,7 @@ init_spawn_funcs() {
   add_spawn_function_veh("player_vtol", ::player_vtol_start);
 }
 
-skipto_arrival() {
-}
+skipto_arrival() {}
 
 arrival() {
   iprintln("Arrival");
@@ -103,8 +102,7 @@ arrival() {
 
   if(level.player get_story_stat("HARPER_SCARRED")) {
     run_scene_and_delete("landing_squad");
-  }
-  else {
+  } else {
     run_scene_and_delete("landing_squad_alt");
   }
 
@@ -128,7 +126,7 @@ deconstruct_fxanims() {
 
 flyin_hide_cells() {
   foreach(s_cell in getstructarray("intro_flyin_cell_pos", "targetname")) {
-  setcellinvisibleatpos(s_cell.origin);
+    setcellinvisibleatpos(s_cell.origin);
   }
 }
 
@@ -140,7 +138,7 @@ flyin_show_cells() {
   }
 
   foreach(s_cell in getstructarray("intro_flyin_cell_pos", "targetname")) {
-  setcellvisibleatpos(s_cell.origin);
+    setcellvisibleatpos(s_cell.origin);
   }
 }
 
@@ -149,8 +147,7 @@ run_landing_squad_lighting_scene() {
 
   if(level.player get_story_stat("HARPER_SCARRED")) {
     run_scene_and_delete("landing_squad_lighting");
-  }
-  else {
+  } else {
     run_scene_and_delete("landing_squad_alt_lighting");
   }
 }
@@ -167,11 +164,11 @@ init_ambient_boats() {
   flag_wait("trig_player_blocker_2");
 
   foreach(e_boat in getEntArray("tiny_boat", "targetname")) {
-  e_boat delete();
+    e_boat delete();
   }
 
   foreach(e_boat in getEntArray("karma_life_boat", "targetname")) {
-  e_boat delete();
+    e_boat delete();
   }
 }
 
@@ -365,8 +362,7 @@ lighting_alignment_cleanup_for_plane_exit(m_align_plane, m_lighting_org, m_align
 
   if(level.player get_story_stat("HARPER_SCARRED")) {
     end_scene("landing_squad_lighting");
-  }
-  else {
+  } else {
     end_scene("landing_squad_alt_lighting");
   }
 
@@ -507,11 +503,9 @@ adjust_player_speed(n_units) {
 
     if(n_dist >= 256) {
       n_speed = 80;
-    }
-    else if(n_dist <= 64) {
+    } else if(n_dist <= 64) {
       n_speed = 60;
-    }
-    else {
+    } else {
       n_percent = (n_dist - 64) / (256 - 64);
       n_speed = n_percent * (80 - 60) + 60;
     }
@@ -583,8 +577,7 @@ arrival_cleanup() {
 
   if(level.player get_story_stat("HARPER_SCARRED")) {
     delete_scene("landing_squad_alt");
-  }
-  else {
+  } else {
     delete_scene("landing_squad");
   }
 }

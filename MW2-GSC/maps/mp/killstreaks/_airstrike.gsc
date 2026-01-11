@@ -140,8 +140,7 @@ doAirstrike(lifeId, origin, yaw, owner, team) {
 
   if(isDefined(self.airStrikeType)) {
     airstrikeType = self.airStrikeType;
-  }
-  else {
+  } else {
     airstrikeType = "default";
   }
 
@@ -282,17 +281,17 @@ debugArtilleryDangerCenters(airstrikeType) {
   }
 }
 
-  getAirstrikeDanger(point) {
-    danger = 0;
-    for(i = 0; i < level.artilleryDangerCenters.size; i++) {
-      origin = level.artilleryDangerCenters[i].origin;
-      forward = level.artilleryDangerCenters[i].forward;
-      airstrikeType = level.artilleryDangerCenters[i].airstrikeType;
+getAirstrikeDanger(point) {
+  danger = 0;
+  for(i = 0; i < level.artilleryDangerCenters.size; i++) {
+    origin = level.artilleryDangerCenters[i].origin;
+    forward = level.artilleryDangerCenters[i].forward;
+    airstrikeType = level.artilleryDangerCenters[i].airstrikeType;
 
-      danger += getSingleAirstrikeDanger(point, origin, forward, airstrikeType);
-    }
-    return danger;
+    danger += getSingleAirstrikeDanger(point, origin, forward, airstrikeType);
   }
+  return danger;
+}
 
 getSingleAirstrikeDanger(point, origin, forward, airstrikeType) {
   center = origin + level.dangerForwardPush[airstrikeType] * level.dangerMaxRadius[airstrikeType] * forward;
@@ -469,41 +468,41 @@ traceBomb() {
   }
 }
 
-  doBomberStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint, bombTime, flyTime, direction, airStrikeType) {
-    // plane spawning randomness = up to 125 units, biased towards 0
-    // radius of bomb damage is 512
+doBomberStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint, bombTime, flyTime, direction, airStrikeType) {
+  // plane spawning randomness = up to 125 units, biased towards 0
+  // radius of bomb damage is 512
 
-    if(!isDefined(owner)) {
-      return;
-    }
-
-    startPathRandomness = 100;
-    endPathRandomness = 150;
-
-    pathStart = startPoint + ((randomfloat(2) - 1) * startPathRandomness, (randomfloat(2) - 1) * startPathRandomness, 0);
-    pathEnd = endPoint + ((randomfloat(2) - 1) * endPathRandomness, (randomfloat(2) - 1) * endPathRandomness, 0);
-
-    // Spawn the planes
-    plane = spawnplane(owner, "script_model", pathStart, "compass_objpoint_b2_airstrike_friendly", "compass_objpoint_b2_airstrike_enemy");
-
-    plane playLoopSound("veh_b2_dist_loop");
-    plane setModel("vehicle_b2_bomber");
-    plane thread handleEMP(owner);
-    plane.lifeId = lifeId;
-
-    plane.angles = direction;
-    forward = anglesToForward(direction);
-    plane moveTo(pathEnd, flyTime, 0, 0);
-
-    thread stealthBomber_killCam(plane, pathEnd, flyTime, airStrikeType);
-
-    thread bomberDropBombs(plane, bombsite, owner);
-
-    // Delete the plane after its flyby
-    wait(flyTime);
-    plane notify("delete");
-    plane delete();
+  if(!isDefined(owner)) {
+    return;
   }
+
+  startPathRandomness = 100;
+  endPathRandomness = 150;
+
+  pathStart = startPoint + ((randomfloat(2) - 1) * startPathRandomness, (randomfloat(2) - 1) * startPathRandomness, 0);
+  pathEnd = endPoint + ((randomfloat(2) - 1) * endPathRandomness, (randomfloat(2) - 1) * endPathRandomness, 0);
+
+  // Spawn the planes
+  plane = spawnplane(owner, "script_model", pathStart, "compass_objpoint_b2_airstrike_friendly", "compass_objpoint_b2_airstrike_enemy");
+
+  plane playLoopSound("veh_b2_dist_loop");
+  plane setModel("vehicle_b2_bomber");
+  plane thread handleEMP(owner);
+  plane.lifeId = lifeId;
+
+  plane.angles = direction;
+  forward = anglesToForward(direction);
+  plane moveTo(pathEnd, flyTime, 0, 0);
+
+  thread stealthBomber_killCam(plane, pathEnd, flyTime, airStrikeType);
+
+  thread bomberDropBombs(plane, bombsite, owner);
+
+  // Delete the plane after its flyby
+  wait(flyTime);
+  plane notify("delete");
+  plane delete();
+}
 
 bomberDropBombs(plane, bombSite, owner) {
   while(!targetIsClose(plane, bombsite, 5000)) {
@@ -620,16 +619,14 @@ doPlaneStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint,
   // Spawn the planes
   if(typeOfStrike == "harrier") {
     plane = spawnplane(owner, "script_model", pathStart, "hud_minimap_harrier_green", "hud_minimap_harrier_red");
-  }
-  else {
+  } else {
     plane = spawnplane(owner, "script_model", pathStart, "compass_objpoint_airstrike_friendly", "compass_objpoint_airstrike_busy");
   }
 
   if(typeOfStrike == "harrier") {
     if(owner.team == "allies") {
       plane setModel("vehicle_av8b_harrier_jet_mp");
-    }
-    else {
+    } else {
       plane setModel("vehicle_av8b_harrier_jet_opfor_mp");
     }
   } else
@@ -649,8 +646,8 @@ doPlaneStrike(lifeId, owner, requiredDeathCount, bombsite, startPoint, endPoint,
     thread airstrikeLine(pathStart, pathEnd, (1, 1, 1), 20);
   }
 
-    //thread callStrike_planeSound( plane, bombsite );
-    thread callStrike_bombEffect(plane, pathEnd, flyTime, bombTime - 1.0, owner, requiredDeathCount, typeOfStrike);
+  //thread callStrike_planeSound( plane, bombsite );
+  thread callStrike_bombEffect(plane, pathEnd, flyTime, bombTime - 1.0, owner, requiredDeathCount, typeOfStrike);
 
   // Delete the plane after its flyby
   wait flyTime;
@@ -685,7 +682,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
     bomb thread traceBomb();
   }
 
-    wait .4;
+  wait .4;
   //plane stoploopsound();
   killCamEnt moveTo(killCamEnt.origin + planedir * 4000, 1, 0, 0);
 
@@ -736,7 +733,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
       thread airstrikeLine(bombOrigin, traceHit, (1, 0, 0), 40);
     }
 
-      thread losRadiusDamage(traceHit + (0, 0, 16), 512, 200, 30, owner, bomb, "artillery_mp"); // targetpos, radius, maxdamage, mindamage, player causing damage, entity that player used to cause damage
+    thread losRadiusDamage(traceHit + (0, 0, 16), 512, 200, 30, owner, bomb, "artillery_mp"); // targetpos, radius, maxdamage, mindamage, player causing damage, entity that player used to cause damage
 
     if(i % 3 == 0) {
       thread playsoundinspace("exp_airstrike_bomb", traceHit);
@@ -836,8 +833,7 @@ callStrike(lifeId, owner, coord, yaw) {
 
   if(self.airStrikeType == "stealth") {
     endPoint = coord + vector_multiply(anglesToForward(direction), planeHalfDistance * 4);
-  }
-  else {
+  } else {
     endPoint = coord + vector_multiply(anglesToForward(direction), planeHalfDistance);
   }
 
@@ -915,8 +911,7 @@ targetGetDist(other, target) {
   infront = targetisinfront(other, target);
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
   a = flat_origin(other.origin);
@@ -935,8 +930,7 @@ targetisclose(other, target, closeDist) {
   infront = targetisinfront(other, target);
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
   a = flat_origin(other.origin);
@@ -945,8 +939,7 @@ targetisclose(other, target, closeDist) {
   dist = distance(a, point);
   if(dist < closeDist) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -957,8 +950,7 @@ targetisinfront(other, target) {
   dot = vectordot(forwardvec, normalvec);
   if(dot > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -975,8 +967,7 @@ selectAirstrikeLocation(lifeId, airStrikeType) {
 
   if(airStrikeType == "precision" || airStrikeType == "stealth") {
     chooseDirection = true;
-  }
-  else {
+  } else {
     chooseDirection = false;
   }
 

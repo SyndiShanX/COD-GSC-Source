@@ -2459,18 +2459,14 @@ function round_spawning() {
       continue;
     }
     if(isDefined(level.fn_custom_round_ai_spawn)) {
-      if([
-          [level.fn_custom_round_ai_spawn]
-        ]()) {
+      if([[level.fn_custom_round_ai_spawn]]()) {
         util::wait_network_frame();
         continue;
       }
     }
     if(isDefined(level.zombie_spawners)) {
       if(isDefined(level.fn_custom_zombie_spawner_selection)) {
-        spawner = [
-          [level.fn_custom_zombie_spawner_selection]
-        ]();
+        spawner = [[level.fn_custom_zombie_spawner_selection]]();
       } else {
         if(isDefined(level.use_multiple_spawns) && level.use_multiple_spawns) {
           if(isDefined(level.spawner_int) && (isDefined(level.zombie_spawn[level.spawner_int].size) && level.zombie_spawn[level.spawner_int].size)) {
@@ -2552,9 +2548,7 @@ function run_custom_ai_spawn_checks() {
         }
       }
       if(isDefined(s.func_get_locations)) {
-        a_locations = [
-          [s.func_get_locations]
-        ]();
+        a_locations = [[s.func_get_locations]]();
         level.zm_loc_types["zombie_location"] = arraycombine(level.zm_loc_types["zombie_location"], a_locations, 0, 0);
       }
       continue;
@@ -3915,9 +3909,7 @@ function end_game() {
       game_over[i] = newclienthudelem(players[i]);
       survived[i] = newclienthudelem(players[i]);
       if(isDefined(level.custom_game_over_hud_elem)) {
-        [
-          [level.custom_game_over_hud_elem]
-        ](players[i], game_over[i], survived[i]);
+        [[level.custom_game_over_hud_elem]](players[i], game_over[i], survived[i]);
       } else {
         game_over[i].alignx = "center";
         game_over[i].aligny = "middle";

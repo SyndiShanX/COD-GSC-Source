@@ -10,7 +10,6 @@
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\spawn;
-
 #namespace wave_spawn;
 
 autoexec __init__system__() {
@@ -58,13 +57,13 @@ function_ca1398a7() {
 
   self endon(#"disconnect");
 
-  if(!isDefined(self.pers) || !isDefined(self.pers[#"lives"])) {
+  if(!isDefined(self.pers) || !isDefined(self.pers[# "lives"])) {
     return;
   }
 
   weapon = getweapon(#"bare_hands");
   count = 0;
-  lives = self.pers[#"lives"] - 1;
+  lives = self.pers[# "lives"] - 1;
 
   while(count < lives && isDefined(self)) {
     count++;
@@ -94,8 +93,8 @@ function_832ecb3d(params) {
 function_a7ed6d54(params) {
   player = params.player;
 
-  if(isDefined(player) && isDefined(player.pers) && isDefined(player.pers[#"lives"])) {
-    player spawn::function_1390f875(player.pers[#"lives"]);
+  if(isDefined(player) && isDefined(player.pers) && isDefined(player.pers[# "lives"])) {
+    player spawn::function_1390f875(player.pers[# "lives"]);
   }
 }
 

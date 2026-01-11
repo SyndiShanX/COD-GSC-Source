@@ -58,8 +58,7 @@ onuse(var_00, var_01) {
     return 0;
   else if(getcsplinecount() < 2) {
     return 0;
-  }
-  else {
+  } else {
     thread dostrike(var_00, "a10_strafe");
     return 1;
   }

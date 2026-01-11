@@ -324,8 +324,7 @@ doPavelow() {
   if(isDefined(traceData["position"])) {
     if(cointoss()) {
       vehicleModel = "vehicle_pavelow";
-    }
-    else {
+    } else {
       vehicleModel = "vehicle_pavelow_opfor";
     }
     chopper = spawnHelicopter(self, traceData["position"] + (0, 0, 1000), (0, 0, 0), "pavelow_mp", vehicleModel);

@@ -67,12 +67,10 @@ dirteffect(var_0) {
 
   if(var_4 > 0 && var_4 > 0.5) {
     common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 2.0);
-  }
-  else if(abs(var_4) < 0.866) {
+  } else if(abs(var_4) < 0.866) {
     if(var_5 > 0) {
       common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 2.0);
-    }
-    else {
+    } else {
       common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 2.0);
     }
   }
@@ -95,12 +93,10 @@ bloodeffect(var_0) {
 
   if(var_4 > 0 && var_4 > 0.5) {
     common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 7.0);
-  }
-  else if(abs(var_4) < 0.866) {
+  } else if(abs(var_4) < 0.866) {
     if(var_5 > 0) {
       common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 7.0);
-    }
-    else {
+    } else {
       common_scripts\utility::waittill_any_in_array_or_timeout(var_6, 7.0);
     }
   }

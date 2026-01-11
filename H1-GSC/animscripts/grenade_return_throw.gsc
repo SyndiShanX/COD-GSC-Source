@@ -15,8 +15,7 @@ main() {
 
   if(level.h1_improved_grenade_returns) {
     var_0 = getgrenadereturnanim_h1();
-  }
-  else {
+  } else {
     var_0 = getgrenadereturnanim();
   }
 
@@ -63,8 +62,7 @@ getgrenadereturnanim() {
     if(var_1 < 300) {
       if(animscripts\utility::usingsmg()) {
         var_2 = animscripts\utility::lookupanim("grenade", "return_throw_short_smg");
-      }
-      else {
+      } else {
         var_2 = animscripts\utility::lookupanim("grenade", "return_throw_short");
       }
     } else if(animscripts\utility::usingsmg())
@@ -77,8 +75,7 @@ getgrenadereturnanim() {
   if(var_2.size == 0) {
     if(animscripts\utility::usingsmg()) {
       var_2 = animscripts\utility::lookupanim("grenade", "return_throw_default_smg");
-    }
-    else {
+    } else {
       var_2 = animscripts\utility::lookupanim("grenade", "return_throw_default");
     }
   }
@@ -117,15 +114,13 @@ getgrenadereturnanim_h1() {
     if(self.prevscript == "cover_left") {
       if(animscripts\corner::hasonekneeup()) {
         var_0 = animscripts\utility::lookupanim("grenade", "return_cornercrl_1knee_throw");
-      }
-      else {
+      } else {
         var_0 = animscripts\utility::lookupanim("grenade", "return_cornercrl_2knee_throw");
       }
     } else if(self.prevscript == "cover_right") {
       if(animscripts\corner::hasonekneeup()) {
         var_0 = animscripts\utility::lookupanim("grenade", "return_cornercrr_1knee_throw");
-      }
-      else {
+      } else {
         var_0 = animscripts\utility::lookupanim("grenade", "return_cornercrr_2knee_throw");
       }
     } else if(self.prevscript == "cover_crouch")

@@ -79,7 +79,7 @@ endgame_stub(var_0, var_1, var_2) {
 
     if(isDefined(level.finalkillcam_winner)) {
       foreach(var_5 in level.players) {
-      var_5 notify("reset_outcome");
+        var_5 notify("reset_outcome");
       }
 
       level notify("game_cleanup");
@@ -123,8 +123,7 @@ endgame_stub(var_0, var_1, var_2) {
 
     if(var_0 == "allies") {
       setomnvar("ui_game_victor", 2);
-    }
-    else if(var_0 == "axis") {
+    } else if(var_0 == "axis") {
       setomnvar("ui_game_victor", 1);
     }
   }
@@ -134,7 +133,7 @@ endgame_stub(var_0, var_1, var_2) {
 
   if(isDefined(level.finalkillcam_winner) && maps\mp\_utility::wasonlyround()) {
     foreach(var_5 in level.players) {
-    var_5 notify("reset_outcome");
+      var_5 notify("reset_outcome");
     }
 
     level notify("game_cleanup");
@@ -162,8 +161,7 @@ endgame_stub(var_0, var_1, var_2) {
   if(level.teambased) {
     if(var_0 == "axis" || var_0 == "allies") {
       setmatchdata("victor", var_0);
-    }
-    else {
+    } else {
       setmatchdata("victor", "none");
     }
 
@@ -206,12 +204,10 @@ endgame_stub(var_0, var_1, var_2) {
 
   if(isDefined(level.endgamewaitfunc)) {
     [[level.endgamewaitfunc]](var_2, level.postgamenotifies, var_22, var_0);
-  }
-  else if(!var_2 && !level.postgamenotifies) {
+  } else if(!var_2 && !level.postgamenotifies) {
     if(!maps\mp\_utility::wasonlyround()) {
       wait(6.0 + var_22);
-    }
-    else {
+    } else {
       wait(min(10.0, 4.0 + var_22 + level.postgamenotifies));
     }
   } else
@@ -313,50 +309,43 @@ endgame_stub(var_0, var_1, var_2) {
   } else {
     if(isDefined(level.matchdata["botJoinCount"])) {
       var_30 = level.matchdata["botJoinCount"];
-    }
-    else {
+    } else {
       var_30 = 0;
     }
 
     if(isDefined(level.matchdata["deathCount"])) {
       var_31 = level.matchdata["deathCount"];
-    }
-    else {
+    } else {
       var_31 = 0;
     }
 
     if(isDefined(level.matchdata["badSpawnDiedTooFastCount"])) {
       var_32 = level.matchdata["badSpawnDiedTooFastCount"];
-    }
-    else {
+    } else {
       var_32 = 0;
     }
 
     if(isDefined(level.matchdata["badSpawnKilledTooFastCount"])) {
       var_33 = level.matchdata["badSpawnKilledTooFastCount"];
-    }
-    else {
+    } else {
       var_33 = 0;
     }
 
     if(isDefined(level.matchdata["badSpawnDmgDealtCount"])) {
       var_34 = level.matchdata["badSpawnDmgDealtCount"];
-    }
-    else {
+    } else {
       var_34 = 0;
     }
 
     if(isDefined(level.matchdata["badSpawnDmgReceivedCount"])) {
       var_35 = level.matchdata["badSpawnDmgReceivedCount"];
-    }
-    else {
+    } else {
       var_35 = 0;
     }
 
     if(isDefined(level.matchdata["badSpawnByAnyMeansCount"])) {
       var_36 = level.matchdata["badSpawnByAnyMeansCount"];
-    }
-    else {
+    } else {
       var_36 = 0;
     }
   }
@@ -422,8 +411,7 @@ _setteamscore_stub(var_0, var_1) {
 
   if(maps\mp\_utility::inovertime() && !isDefined(level.overtimescorewinoverride) || isDefined(level.overtimescorewinoverride) && !level.overtimescorewinoverride) {
     thread maps\mp\gametypes\_gamelogic::onscorelimit();
-  }
-  else {
+  } else {
     thread maps\mp\gametypes\_gamelogic::checkteamscorelimitsoon(var_0);
     thread maps\mp\gametypes\_gamelogic::checkscorelimit();
   }

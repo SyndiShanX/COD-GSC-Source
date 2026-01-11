@@ -29,8 +29,7 @@ func_618B(var_00, var_01) {
 
   if(level.multiteambased) {
     thread func_6166(var_02);
-  }
-  else if(level.teambased) {
+  } else if(level.teambased) {
     var_03 = level.otherteam[var_02];
     thread func_6165(var_03);
   } else

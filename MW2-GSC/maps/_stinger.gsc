@@ -10,7 +10,7 @@ init() {
   precacherumble("stinger_lock_rumble");
 
   foreach(player in level.players) {
-  player ClearIRTarget();
+    player ClearIRTarget();
   }
 
   foreach(player in level.players) {

@@ -209,8 +209,7 @@ settweakablelastvalue(var_0, var_1, var_2) {
 registertweakable(var_0, var_1, var_2, var_3) {
   if(isstring(var_3)) {
     var_3 = getdvar(var_2, var_3);
-  }
-  else {
+  } else {
     var_3 = getdvarint(var_2, var_3);
   }
 

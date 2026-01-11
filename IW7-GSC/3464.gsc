@@ -99,8 +99,7 @@ tryuseshocksentry(var_00) {
 
   if(var_01) {
     scripts\mp\matchdata::logkillstreakevent(var_0.streakname, self.origin);
-  }
-  else {
+  } else {
     scripts\engine\utility::waitframe();
   }
 
@@ -139,8 +138,7 @@ givesentry(var_00, var_01, var_02) {
 
   if(isDefined(var_04)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -262,8 +260,7 @@ sentry_initsentry(var_00, var_01, var_02, var_03) {
 
   if(level.sentrysettings[var_00].shouldsplash) {
     self.shouldsplash = 1;
-  }
-  else {
+  } else {
     self.shouldsplash = 0;
   }
 
@@ -763,8 +760,7 @@ turret_handleuse() {
 
       if(self.heatlevel >= level.sentrysettings[self.sentrytype].overheattime) {
         var_05 = 1;
-      }
-      else {
+      } else {
         var_05 = self.heatlevel / level.sentrysettings[self.sentrytype].overheattime;
       }
 
@@ -783,8 +779,7 @@ turret_handleuse() {
 
         if(randomintrange(0, 10) < 6) {
           self turretfireenable();
-        }
-        else {
+        } else {
           self turretfiredisable();
         }
 
@@ -1011,8 +1006,7 @@ updatesentryplacement(var_00) {
 
     if(isDefined(var_2["entity"])) {
       var_0.moving_platform = var_2["entity"];
-    }
-    else {
+    } else {
       var_0.moving_platform = undefined;
     }
 
@@ -1039,8 +1033,7 @@ sentry_oncarrierdeathoremp(var_00, var_01) {
 
   if(self.canbeplaced && !scripts\mp\utility\game::istrue(var_01)) {
     sentry_setplaced(self.pickupenabled);
-  }
-  else {
+  } else {
     sentry_setcancelled(0);
   }
 }
@@ -1099,8 +1092,7 @@ sentry_setactive(var_00) {
 
         if(var_02 == self.owner && var_00) {
           self enableplayeruse(var_02);
-        }
-        else {
+        } else {
           self disableplayeruse(var_02);
         }
 
@@ -1313,8 +1305,7 @@ sentry_heatmonitor() {
   for(;;) {
     if(self.heatlevel != var_01) {
       wait(var_00);
-    }
-    else {
+    } else {
       self.heatlevel = max(0, self.heatlevel - 0.05);
     }
 
@@ -1384,8 +1375,7 @@ turret_coolmonitor() {
     if(self.heatlevel > 0) {
       if(self.cooldownwaittime <= 0) {
         self.heatlevel = max(0, self.heatlevel - 0.05);
-      }
-      else {
+      } else {
         self.cooldownwaittime = max(0, self.cooldownwaittime - 0.05);
       }
     }
@@ -1456,7 +1446,7 @@ sam_acquiretarget() {
         foreach(var_03 in level.teamnamelist) {
           if(var_03 != self.team) {
             foreach(var_05 in level.uavmodels[var_03]) {
-            var_1[var_1.size] = var_05;
+              var_1[var_1.size] = var_05;
             }
           }
         }

@@ -10,8 +10,7 @@ fake_death_over_time(var_0, var_1, var_2) {
   if(isDefined(self) && isai(self) && isalive(self)) {
     if(var_0 == "bullet") {
       fake_death_bullet();
-    }
-    else {
+    } else {
       fake_death_bullet();
     }
   }
@@ -129,12 +128,10 @@ dialogue_random_line(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
     if(isDefined(level.dialogue_random_last_line) && level.dialogue_random_last_line == var_10) {
       continue;
-    }
-    else {
+    } else {
       if(isDefined(self) && isai(self)) {
         dialogue_queue_single(var_10);
-      }
-      else {
+      } else {
         radio_dialogue_queue_single(var_10);
       }
 
@@ -156,7 +153,7 @@ setup_ignore_suppression_triggers() {
   var_0 = getEntArray("trigger_ignore_suppression", "targetname");
 
   foreach(var_2 in var_0) {
-  level thread ignore_suppression_trigger_think(var_2);
+    level thread ignore_suppression_trigger_think(var_2);
   }
 }
 
@@ -186,8 +183,7 @@ ignore_suppression_trigger_ai_think(var_0) {
 add_hint_background(var_0) {
   if(isDefined(var_0)) {
     level.hintbackground = maps\_hud_util::createicon("popmenu_bg", 650, 50);
-  }
-  else {
+  } else {
     level.hintbackground = maps\_hud_util::createicon("popmenu_bg", 650, 30);
   }
 
@@ -234,8 +230,7 @@ hint_with_background(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     wait(var_1);
-  }
-  else {
+  } else {
     return;
   }
 

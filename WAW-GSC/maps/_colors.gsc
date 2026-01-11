@@ -230,8 +230,7 @@ trigger_auto_disable() {
 activate_color_trigger(team) {
   if(team == "allies") {
     self thread get_colorcodes_and_activate_trigger(self.script_color_allies, team);
-  }
-  else {
+  } else {
     self thread get_colorcodes_and_activate_trigger(self.script_color_axis, team);
   }
 }
@@ -297,8 +296,7 @@ same_color_code_as_last_time(team, color) {
 process_cover_node_with_last_in_mind_allies(node, lastColor) {
   if(issubstr(node.script_color_allies, lastColor)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
-  }
-  else {
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = node;
   }
 }
@@ -306,8 +304,7 @@ process_cover_node_with_last_in_mind_allies(node, lastColor) {
 process_cover_node_with_last_in_mind_axis(node, lastColor) {
   if(issubstr(node.script_color_axis, lastColor)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = node;
-  }
-  else {
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = node;
   }
 }

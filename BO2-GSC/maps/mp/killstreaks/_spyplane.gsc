@@ -48,8 +48,7 @@ init() {
 
   if(minimaporigins.size) {
     uavorigin = maps\mp\gametypes\_spawnlogic::findboxcenter(minimaporigins[0].origin, minimaporigins[1].origin);
-  }
-  else {
+  } else {
     uavorigin = (0, 0, 0);
   }
 
@@ -508,8 +507,7 @@ generateplane(owner, timeinair, iscounter) {
 
   if(iscounter) {
     radiusoffset = randomint(1000) + 3000;
-  }
-  else {
+  } else {
     radiusoffset = randomint(1000) + 4000;
   }
 
@@ -520,8 +518,7 @@ generateplane(owner, timeinair, iscounter) {
 
   if(iscounter) {
     plane linkto(uavrig, "tag_origin", anglevector, (0, angle + attach_angle, -10));
-  }
-  else {
+  } else {
     plane linkto(uavrig, "tag_origin", anglevector, (0, angle + attach_angle, 0));
   }
 
@@ -534,8 +531,7 @@ play_light_fx(iscounter) {
 
   if(iscounter) {
     playFXOnTag(level.counteruavlight, self, "tag_origin");
-  }
-  else {
+  } else {
     playFXOnTag(level.uavlight, self, "tag_origin");
   }
 }
@@ -546,8 +542,7 @@ updatevisibility() {
   for(;;) {
     if(level.teambased) {
       self setvisibletoallexceptteam(self.team);
-    }
-    else {
+    } else {
       self setvisibletoall();
       self setinvisibletoplayer(self.owner);
     }
@@ -605,8 +600,7 @@ plane_damage_monitor(isspyplane) {
       case "MOD_RIFLE_BULLET":
         if(attacker hasperk("specialty_armorpiercing")) {
           self.damagetaken = self.damagetaken + int(damage * level.cac_armorpiercing_data);
-        }
-        else {
+        } else {
           self.damagetaken = self.damagetaken + damage;
         }
 
@@ -654,8 +648,7 @@ plane_damage_monitor(isspyplane) {
         if(!isDefined(self.owner) || self.owner isenemyplayer(attacker)) {
           thread maps\mp\_scoreevents::processscoreevent("destroyed_uav", attacker, self.owner, weapon);
           attacker maps\mp\_challenges::addflyswatterstat(weapon, self);
-        } else {
-        }
+        } else {}
 
         spyplane_death();
       } else {
@@ -668,8 +661,7 @@ plane_damage_monitor(isspyplane) {
         if(!isDefined(self.owner) || self.owner isenemyplayer(attacker)) {
           thread maps\mp\_scoreevents::processscoreevent("destroyed_counter_uav", attacker, self.owner, weapon);
           attacker maps\mp\_challenges::addflyswatterstat(weapon, self);
-        } else {
-        }
+        } else {}
 
         counteruavplane_death();
       }
@@ -869,8 +861,7 @@ plane_leave() {
       if(tries != 1) {
         if(tries % 2 == 1) {
           yaw = yaw * -1;
-        }
-        else {
+        } else {
           yaw = yaw + 10;
           yaw = yaw * -1;
         }
@@ -922,7 +913,7 @@ uavtracker() {
 
     if(level.teambased) {
       foreach(team in level.teams) {
-      updateteamuavstatus(team);
+        updateteamuavstatus(team);
       }
 
       continue;
@@ -986,8 +977,7 @@ updateplayersuavstatus() {
 
     if(activeuavs > 1) {
       spyplaneupdatespeed = 2;
-    }
-    else {
+    } else {
       spyplaneupdatespeed = 1;
     }
 

@@ -47,8 +47,7 @@ func_4D4C(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   if(isDefined(var_09)) {
     if(var_00 <= _weapongetdamagemin(var_09)) {
       var_11 = "low_damage";
-    }
-    else if(var_00 >= _weapongetdamagemax(var_09)) {
+    } else if(var_00 >= _weapongetdamagemax(var_09)) {
       var_11 = "high_damage";
     }
   }
@@ -139,15 +138,13 @@ updatehitmarker(var_00, var_01, var_02, var_03) {
 
   if(var_01) {
     setomnvar("damage_feedback_kill", 1);
-  }
-  else {
+  } else {
     setomnvar("damage_feedback_kill", 0);
   }
 
   if(var_02) {
     setomnvar("damage_feedback_headshot", 1);
-  }
-  else {
+  } else {
     setomnvar("damage_feedback_headshot", 0);
   }
 }

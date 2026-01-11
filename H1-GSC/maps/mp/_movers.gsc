@@ -25,7 +25,7 @@ main() {
   var_1 = script_mover_classnames();
 
   foreach(var_3 in var_1) {
-  var_0 = common_scripts\utility::array_combine(var_0, getEntArray(var_3, "classname"));
+    var_0 = common_scripts\utility::array_combine(var_0, getEntArray(var_3, "classname"));
   }
 
   common_scripts\utility::array_thread(var_0, ::script_mover_init);
@@ -168,7 +168,7 @@ script_mover_init() {
   script_mover_start();
 
   foreach(var_12 in self.use_triggers) {
-  script_mover_set_usable(var_12, 1);
+    script_mover_set_usable(var_12, 1);
   }
 
   self.script_mover_init = 1;
@@ -178,8 +178,7 @@ script_mover_init() {
 script_mover_start() {
   if(script_mover_is_animated()) {
     thread script_mover_animate();
-  }
-  else {
+  } else {
     thread script_mover_move_to_target();
   }
 }
@@ -259,7 +258,7 @@ script_mover_parse_targets() {
           var_4 = common_scripts\utility::getstructarray(var_3.target, "targetname");
 
           foreach(var_6 in var_4) {
-          var_0[var_0.size] = var_6;
+            var_0[var_0.size] = var_6;
           }
         }
 
@@ -441,13 +440,13 @@ script_mover_update_paths() {
   }
   for(;;) {
     foreach(var_5 in var_0) {
-    var_5 script_mover_disconnectpaths();
+      var_5 script_mover_disconnectpaths();
     }
 
     self waittill("move_start");
 
     foreach(var_5 in var_0) {
-    var_5 script_mover_connectpaths();
+      var_5 script_mover_connectpaths();
     }
 
     self waittill("move_end");
@@ -484,8 +483,7 @@ script_mover_play_animation(var_0, var_1) {
 
   if(isDefined(self.scripted_node)) {
     self scriptmodelplayanimdeltamotionfrompos(var_0.animname, self.scripted_node.origin, self.scripted_node.angles, "script_mover_anim");
-  }
-  else {
+  } else {
     self scriptmodelplayanimdeltamotion(var_0.animname, "script_mover_anim");
   }
 }
@@ -584,13 +582,11 @@ script_mover_move_to_target(var_0) {
 
     var_2 script_mover_allow_usable(0);
 
-    if(var_3 <= 0) {
-    } else if(var_6)
+    if(var_3 <= 0) {} else if(var_6)
       var_2 waittill("movedone");
     else if(var_7) {
       var_2 waittill("rotatedone");
-    }
-    else {
+    } else {
       wait(var_3);
     }
 
@@ -606,8 +602,7 @@ script_mover_move_to_target(var_0) {
     if(isDefined(var_2.params["solid"])) {
       if(var_2.params["solid"]) {
         var_2 solid();
-      }
-      else {
+      } else {
         var_2 notsolid();
       }
     }
@@ -707,15 +702,13 @@ script_mover_parse_range(var_0) {
 
   if(var_2.size == 1) {
     var_1 = float(var_2[0]);
-  }
-  else if(var_2.size == 2) {
+  } else if(var_2.size == 2) {
     var_3 = float(var_2[0]);
     var_4 = float(var_2[1]);
 
     if(var_3 >= var_4) {
       var_1 = var_3;
-    }
-    else {
+    } else {
       var_1 = randomfloatrange(var_3, var_4);
     }
   }
@@ -725,7 +718,7 @@ script_mover_parse_range(var_0) {
 
 script_mover_apply_move_parameters(var_0) {
   foreach(var_3, var_2 in var_0.params) {
-  script_mover_set_param(var_3, var_2);
+    script_mover_set_param(var_3, var_2);
   }
 
   script_mover_set_defaults();
@@ -752,7 +745,7 @@ script_mover_allow_usable(var_0) {
   }
 
   foreach(var_2 in self.use_triggers) {
-  script_mover_set_usable(var_2, var_0);
+    script_mover_set_usable(var_2, var_0);
   }
 }
 
@@ -769,7 +762,7 @@ script_mover_save_default_move_parameters() {
   self.params_default = [];
 
   foreach(var_2, var_1 in self.params) {
-  self.params_default[var_2] = var_1;
+    self.params_default[var_2] = var_1;
   }
 }
 
@@ -846,11 +839,9 @@ player_unresolved_collision_watch() {
       if(isDefined(var_0)) {
         if(isDefined(var_0.unresolved_collision_func)) {
           var_0[[var_0.unresolved_collision_func]](self);
-        }
-        else if(isDefined(var_0.unresolved_collision_kill) && var_0.unresolved_collision_kill) {
+        } else if(isDefined(var_0.unresolved_collision_kill) && var_0.unresolved_collision_kill) {
           var_0 unresolved_collision_owner_damage(self);
-        }
-        else {
+        } else {
           var_0 unresolved_collision_nearest_node(self);
         }
       } else
@@ -906,8 +897,7 @@ unresolved_collision_nearest_node(var_0, var_1) {
 
   if(isDefined(var_2)) {
     var_2 = sortbydistance(var_2, var_0.origin);
-  }
-  else {
+  } else {
     var_2 = getnodesinradius(var_0.origin, 300, 0, 200);
     var_2 = sortbydistance(var_2, var_0.origin);
   }
@@ -1001,8 +991,7 @@ process_moving_platform_death(var_0, var_1) {
 
   if(isDefined(var_0.deathoverridecallback)) {
     self thread[[var_0.deathoverridecallback]](var_0);
-  }
-  else {
+  } else {
     self delete();
   }
 }
@@ -1031,8 +1020,7 @@ handle_moving_platform_invalid(var_0) {
 
   if(isDefined(var_0.invalidparentoverridecallback)) {
     self thread[[var_0.invalidparentoverridecallback]](var_0);
-  }
-  else {
+  } else {
     thread process_moving_platform_death(var_0, var_1);
   }
 }

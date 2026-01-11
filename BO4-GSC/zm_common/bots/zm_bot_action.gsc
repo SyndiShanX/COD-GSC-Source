@@ -7,7 +7,6 @@
 #include scripts\core_common\bots\bot;
 #include scripts\core_common\bots\bot_action;
 #include scripts\core_common\system_shared;
-
 #namespace zm_bot_action;
 
 autoexec __init__system__() {
@@ -89,7 +88,7 @@ function_5f02aeee(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x38>";
 
-      return undefined;
+    return undefined;
   }
 
   if(!self gadgetisready(slot)) {
@@ -101,7 +100,7 @@ function_5f02aeee(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x5c>";
 
-      return undefined;
+    return undefined;
   }
 
   if(!self bot::in_combat()) {
@@ -113,7 +112,7 @@ function_5f02aeee(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x6f>";
 
-      return undefined;
+    return undefined;
   }
 
   if(!isDefined(self.enemy) || !isalive(self.enemy)) {
@@ -125,7 +124,7 @@ function_5f02aeee(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x7f>";
 
-      return undefined;
+    return undefined;
   }
 
   if(self getenemiesinradius(self.origin, 512).size < 8 && self getenemiesinradius(self.origin, 256).size < 5) {
@@ -137,7 +136,7 @@ function_5f02aeee(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x8a>";
 
-      return undefined;
+    return undefined;
   }
 
   return 100;
@@ -168,7 +167,7 @@ function_aa4daa54(actionparams) {
 
         actionparams.debug[actionparams.debug.size] = "<dev string:xa6>";
 
-          return undefined;
+        return undefined;
       }
     }
   }
@@ -182,7 +181,7 @@ function_aa4daa54(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:xc0>";
 
-      return undefined;
+    return undefined;
   }
 
   meleerange = actionparams.weapon.var_bfbec33f;
@@ -197,7 +196,7 @@ function_aa4daa54(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:xd3>";
 
-      return undefined;
+    return undefined;
   }
 
   return 100;
@@ -220,7 +219,7 @@ function_f4707540(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:xee>";
 
-      return undefined;
+    return undefined;
   }
 
   return 100;
@@ -236,7 +235,7 @@ function_ae19f70f(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x107>";
 
-      return undefined;
+    return undefined;
   }
 
   if(!self bot::function_914feddd()) {
@@ -248,7 +247,7 @@ function_ae19f70f(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x116>";
 
-      return undefined;
+    return undefined;
   }
 
   if(self haspath()) {
@@ -260,7 +259,7 @@ function_ae19f70f(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x133>";
 
-      return undefined;
+    return undefined;
   }
 
   zombie_weapon_upgrade = self bot::get_interact();
@@ -276,7 +275,7 @@ function_ae19f70f(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x145>";
 
-      return undefined;
+    return undefined;
   }
 
   if(!self function_f59547eb(trigger)) {
@@ -288,7 +287,7 @@ function_ae19f70f(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x152>";
 
-      return undefined;
+    return undefined;
   }
 
   return 100;
@@ -296,7 +295,7 @@ function_ae19f70f(actionparams) {
 
 function_99428ae2(actionparams) {
   self notify(#"hash_782d5f24975a7cd1");
-  self endon(#"hash_782d5f24975a7cd1", #"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start", #"hash_1728f8b5de3bde13");
+  self endon(#"hash_782d5f24975a7cd1", # "hash_5b4f399c08222e2", # "death", # "entering_last_stand", # "enter_vehicle", # "animscripted_start", # "hash_1728f8b5de3bde13");
   level endon(#"game_ended");
   self waittill(#"wallbuy_done");
   actionparams.var_d9c6fa12 = 1;
@@ -351,7 +350,7 @@ function_b4d8b7d6(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x107>";
 
-      return undefined;
+    return undefined;
   }
 
   if(!self bot::function_43a720c7()) {
@@ -363,7 +362,7 @@ function_b4d8b7d6(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x169>";
 
-      return undefined;
+    return undefined;
   }
 
   if(self haspath()) {
@@ -375,7 +374,7 @@ function_b4d8b7d6(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x133>";
 
-      return undefined;
+    return undefined;
   }
 
   interact = self bot::get_interact();
@@ -391,7 +390,7 @@ function_b4d8b7d6(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x145>";
 
-      return undefined;
+    return undefined;
   }
 
   if(!self function_f59547eb(trigger)) {
@@ -403,7 +402,7 @@ function_b4d8b7d6(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x152>";
 
-      return undefined;
+    return undefined;
   }
 
   return 100;
@@ -500,7 +499,7 @@ function_296516b4(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x107>";
 
-      return undefined;
+    return undefined;
   }
 
   if(!self ai::get_behavior_attribute("revive")) {
@@ -512,7 +511,7 @@ function_296516b4(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x17e>";
 
-      return undefined;
+    return undefined;
   }
 
   revivetarget = self bot::get_revive_target();
@@ -526,7 +525,7 @@ function_296516b4(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x19c>";
 
-      return undefined;
+    return undefined;
   }
 
   actionparams.revivetarget = revivetarget;
@@ -539,17 +538,17 @@ function_296516b4(actionparams) {
 
   actionparams.debug[actionparams.debug.size] = "<dev string:x1af>" + revivetarget.name;
 
-    if(!isDefined(revivetarget.revivetrigger)) {
-      if(!isDefined(actionparams.debug)) {
-        actionparams.debug = [];
-      } else if(!isarray(actionparams.debug)) {
-        actionparams.debug = array(actionparams.debug);
-      }
-
-      actionparams.debug[actionparams.debug.size] = "<dev string:x1ba>";
-
-        return undefined;
+  if(!isDefined(revivetarget.revivetrigger)) {
+    if(!isDefined(actionparams.debug)) {
+      actionparams.debug = [];
+    } else if(!isarray(actionparams.debug)) {
+      actionparams.debug = array(actionparams.debug);
     }
+
+    actionparams.debug[actionparams.debug.size] = "<dev string:x1ba>";
+
+    return undefined;
+  }
 
   if(!self istouching(revivetarget.revivetrigger)) {
     if(!isDefined(actionparams.debug)) {
@@ -560,7 +559,7 @@ function_296516b4(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x1ce>";
 
-      return undefined;
+    return undefined;
   }
 
   if(isDefined(revivetarget.revivetrigger.beingrevived) && revivetarget.revivetrigger.beingrevived) {
@@ -572,7 +571,7 @@ function_296516b4(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x1e5>";
 
-      return;
+    return;
   }
 
   pathenemyfightdist = self.bot.tacbundle.pathenemyfightdist;
@@ -586,7 +585,7 @@ function_296516b4(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x1f5>";
 
-      return undefined;
+    return undefined;
   }
 
   nearbyenemies = self getenemiesinradius(revivetarget.revivetrigger.origin, 256);
@@ -600,7 +599,7 @@ function_296516b4(actionparams) {
 
     actionparams.debug[actionparams.debug.size] = "<dev string:x203>";
 
-      return undefined;
+    return undefined;
   }
 
   return 100;

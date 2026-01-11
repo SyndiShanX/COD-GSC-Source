@@ -13,7 +13,6 @@
 #include scripts\zm\zm_office_teleporters;
 #include scripts\zm_common\zm_cleanup_mgr;
 #include scripts\zm_common\zm_spawner;
-
 #namespace zm_office_cleanup;
 
 init() {
@@ -104,12 +103,12 @@ private function_1969a102() {
     if(self zm_office_defcon::function_cacd3270() && zm_office_defcon::is_packroom_clear()) {
       self thread zm_office_teleporters::function_9d689cc4(level.portal_pack);
     } else if(isDefined(target) && zm_office_floors::function_35babccd(self) != zm_office_floors::function_35babccd(target)) {
-      if(level flag::get(#"portals_active") && level.zones[#"war_room_zone_north"].is_enabled) {
+      if(level flag::get(#"portals_active") && level.zones[# "war_room_zone_north"].is_enabled) {
         self thread zm_office_teleporters::function_9d689cc4();
       } else {
         self.favoriteenemy = undefined;
 
-        if(self.archetype === #"zombie_dog") {
+        if(self.archetype === # "zombie_dog") {
           target.hunted_by--;
           self thread function_29aabbb3();
         }
@@ -147,7 +146,7 @@ function_29aabbb3() {
 }
 
 function_fa5d232f() {
-  if(self.archetype !== #"zombie_dog") {
+  if(self.archetype !== # "zombie_dog") {
     return;
   }
 

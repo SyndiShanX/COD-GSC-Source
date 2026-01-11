@@ -1297,7 +1297,7 @@ dam_break_m880_shadows_init() {
   var_0 = getEntArray("m880_shadow_brush_after", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   dam_break_m880_shadows_switch();
@@ -1309,13 +1309,13 @@ dam_break_m880_shadows_switch() {
   var_0 = getEntArray("m880_shadow_brush_before", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   var_0 = getEntArray("m880_shadow_brush_after", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 show();
+    var_2 show();
   }
 }
 
@@ -1391,7 +1391,7 @@ dam_break(var_0, var_1) {
   level notify("dam_break_start");
 
   foreach(var_9 in level.allies) {
-  var_9 thread dam_break_ally(var_7);
+    var_9 thread dam_break_ally(var_7);
   }
 
   setsaveddvar("compass", 0);
@@ -1885,11 +1885,11 @@ wait_show_and_delete_debris(var_0, var_1, var_2) {
   wait(var_0);
 
   foreach(var_4 in var_1) {
-  var_4 show();
+    var_4 show();
   }
 
   foreach(var_4 in var_2) {
-  var_4 delete();
+    var_4 delete();
   }
 }
 
@@ -1917,7 +1917,7 @@ m880_crash_debris_collision_change() {
   var_0 = getEntArray("clip_before_m880_crash", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   var_0 = getEntArray("clip_after_m880_crash", "targetname");
@@ -2317,17 +2317,17 @@ skybridge_player_bridge_vignette() {
   self notify("player_bridge_restart");
 
   foreach(var_1 in level.skybridge_sections) {
-  var_1 stopanimscripted();
+    var_1 stopanimscripted();
   }
 
   foreach(var_4 in level.skybridge_sections) {
-  thread maps\_anim::anim_first_frame_solo(var_4, "skybridge_break");
+    thread maps\_anim::anim_first_frame_solo(var_4, "skybridge_break");
   }
 
   wait 0.866;
 
   foreach(var_4 in level.skybridge_sections) {
-  thread maps\_anim::anim_single_solo(var_4, "skybridge_break");
+    thread maps\_anim::anim_single_solo(var_4, "skybridge_break");
   }
 
   thread maps\flood_fx::fx_skybridge_event();
@@ -2346,7 +2346,7 @@ skybridge_restart_player_bridge_loop(var_0, var_1) {
 
   if(0 < level.skybridge_sections.size) {
     foreach(var_6 in level.skybridge_sections) {
-    var_6 stopanimscripted();
+      var_6 stopanimscripted();
     }
 
     var_4 thread maps\_anim::anim_loop(level.skybridge_sections, "skybridge_sway", "player_bridge_restart");
@@ -2439,8 +2439,7 @@ skybridge_ally_cross(var_0) {
 
   if(level.allies[0] istouching(var_3)) {
     var_2 thread maps\_anim::anim_single_solo(level.allies[0], "skybridge_cross_ahead");
-  }
-  else {
+  } else {
     var_2 thread maps\_anim::anim_single_solo(level.allies[0], "skybridge_cross_behind");
   }
 
@@ -2494,7 +2493,7 @@ rooftops_enemy_exfil_spawn() {
   var_0 notify("exfil_abort");
 
   foreach(var_2 in level.rooftops_exfil_anim_guys) {
-  var_2 stopanimscripted();
+    var_2 stopanimscripted();
   }
 
   if(!isalive(level.rooftop_heli_opfor[0])) {
@@ -2570,8 +2569,7 @@ rooftops_water_long_jump_spawn() {
 
   if(common_scripts\utility::flag("rooftops_water_player_followed")) {
     var_0 maps\_anim::anim_single_solo(level.allies[0], "rooftops_water_stumble_and_jump");
-  }
-  else {
+  } else {
     var_0 maps\_anim::anim_single_solo(level.allies[0], "rooftops_water_approach_stumble");
 
     if(!common_scripts\utility::flag("rooftops_water_player_followed")) {
@@ -2706,8 +2704,7 @@ debris_bridge_vign1_and_loop2(var_0) {
     if("debris_vangreen" == var_4 || "debris_01" == var_4) {
       if("debris_vangreen" == var_4) {
         var_5 = 14;
-      }
-      else {
+      } else {
         var_5 = 15;
       }
 
@@ -2774,7 +2771,7 @@ debris_bridge_vign2_and_loop3(var_0) {
   var_1 notify("bridge_crossing");
 
   foreach(var_3 in var_0) {
-  var_3 stopanimscripted();
+    var_3 stopanimscripted();
   }
 
   waittillframeend;
@@ -2980,13 +2977,13 @@ ending_animatic_setup() {
   var_1 = getEntArray("upper_garage_door_l", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(level.ending_door_l);
+    var_3 linkto(level.ending_door_l);
   }
 
   var_1 = getEntArray("upper_garage_door_r", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(level.ending_door_r);
+    var_3 linkto(level.ending_door_r);
   }
 
   common_scripts\utility::flag_set("ending_anims_ready");
@@ -3354,7 +3351,7 @@ ending_pt2_player_sequence_save() {
   thread maps\flood_audio::sfx_looping_rorke();
 
   foreach(var_7 in var_5) {
-  level.outro_node thread maps\_anim::anim_loop_solo(var_7, "outro_pt2_save_vargas_loop");
+    level.outro_node thread maps\_anim::anim_loop_solo(var_7, "outro_pt2_save_vargas_loop");
   }
 
   ending_pt2_player_reach();
@@ -3565,7 +3562,7 @@ building_01_debri_anim() {
   var_3 = spawn("script_model", (5827, -2574, 207));
 
   foreach(var_5 in var_0) {
-  var_5 retargetscriptmodellighting(var_3);
+    var_5 retargetscriptmodellighting(var_3);
   }
 
   var_2 hide();
@@ -3584,13 +3581,13 @@ setup_enemies_open_gate() {
   var_0 = getEntArray("garage_door_r", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 linkto(level.ending_gate_l);
+    var_2 linkto(level.ending_gate_l);
   }
 
   var_0 = getEntArray("garage_door_l", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 linkto(level.ending_gate_r);
+    var_2 linkto(level.ending_gate_r);
   }
 }
 

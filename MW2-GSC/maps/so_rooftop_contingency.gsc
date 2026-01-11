@@ -179,7 +179,7 @@ type_vehicle_special() {
     thread so_debug_print("vehicle[" + self.targetname + "] saved", 5);
   }
 
-    return result;
+  return result;
 }
 
 transform_vehicle_by_targetname(vehicle_name, targetname_string, target_string) {
@@ -542,7 +542,7 @@ start_so_rooftop() {
 
   test_vehicles();
 
-    wait so_standard_wait();
+  wait so_standard_wait();
 
   enable_challenge_timer("waves_start", "challenge_success");
   thread enable_countdown_timer(level.wave_delay);

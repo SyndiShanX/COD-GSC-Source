@@ -546,7 +546,7 @@ start_barge_sinking(guy) {
   wait 1;
 
   foreach(m_anim_model in a_actors) {
-  level.main_barge thread anim_single_aligned(m_anim_model, "barge_sink_fxanims");
+    level.main_barge thread anim_single_aligned(m_anim_model, "barge_sink_fxanims");
   }
 
   n_time = getanimlength(level.scr_anim["sinking_barge_barrels"]["barge_sink_fxanims"]);
@@ -1039,8 +1039,7 @@ woods_stealth_carry_anims() {
   level.scr_anim["generic"]["ai_beartrap_caught_loop"][0] = % ai_wounded_beartrap_pain_idle;
 }
 
-sndplayexplosionatposition(player) {
-}
+sndplayexplosionatposition(player) {}
 
 sndslowmosnapshoton(player) {
   rpc("clientscripts/angola_2_amb", "sndSlowMoSnapshotOn");

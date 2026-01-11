@@ -665,9 +665,7 @@ increaserkstage() {
 }
 
 runcurrentrkfightstage() {
-  [
-    [level.rk_fight_stage_func[level.rat_king_stage]]
-  ]();
+  [[level.rk_fight_stage_func[level.rat_king_stage]]]();
 }
 
 runrkstage1() {
@@ -2032,9 +2030,7 @@ restorerktuning() {
     return;
   }
 
-  [
-    [level.ratkingtuning]
-  ](level.agenttunedata["ratking"]);
+  [[level.ratkingtuning]](level.agenttunedata["ratking"]);
 }
 
 setstage2attackpriorities() {

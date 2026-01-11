@@ -64,8 +64,7 @@ think() {
 
   if(!ent_flag_exist("transitioning_positions")) {
     ent_flag_init("transitioning_positions");
-  }
-  else {
+  } else {
     ent_flag_clear("transitioning_positions");
   }
 
@@ -270,8 +269,7 @@ zodiacShootBehavior() {
 
   if(distSq < 4000 * 4000) {
     self.shootstyle = "burst";
-  }
-  else {
+  } else {
     self.shootstyle = "single";
   }
 }
@@ -299,8 +297,7 @@ idleAimDir() {
   for(;;) {
     if(self.a.boat_pose == "left") {
       self.idleAimYaw = randomfloatrange(-20, 40);
-    }
-    else {
+    } else {
       self.idleAimYaw = randomfloatrange(-40, 20);
     }
 
@@ -336,8 +333,7 @@ getDesiredBoatAimYaw() {
     aimYaw = getBoatAimYawToShootPos(.1);
     if(self.a.boat_pose == "left") {
       aimYaw = AngleClamp180(aimYaw + 40.5);
-    }
-    else {
+    } else {
       aimYaw = AngleClamp180(aimYaw - 36);
     }
   } else {
@@ -359,8 +355,7 @@ updateBoatAim() {
   if(abs(aimYaw - self.a.boatAimYaw) > maxTurn) {
     if(aimYaw < self.a.boatAimYaw) {
       aimYaw = self.a.boatAimYaw - maxTurn;
-    }
-    else {
+    } else {
       aimYaw = self.a.boatAimYaw + maxTurn;
     }
   }
@@ -480,9 +475,9 @@ needToChangePose() {
   if( !isDefined( self.shootPos ) ) {
   	return "none";
   }
-	
+  	
   aimYaw = getBoatAimYawToShootPos( 0.5 ); // half second prediction
-	
+  	
   if( self.a.boat_pose == "left" )
   {
   	if( aimYaw > 15 && aimYaw < 160 ) {
@@ -495,7 +490,7 @@ needToChangePose() {
   		return "left";
   	}
   }
-	
+  	
   return "none";
   */
 }

@@ -196,8 +196,7 @@ getweaponchoice(var_0) {
 
   if(var_1.size > 1) {
     return int(var_1[1]);
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -222,11 +221,9 @@ usevirtuallobbyfunction() {
 cac_getweapon(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction()) {
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "weaponSetups", var_1, "weapon");
-  }
-  else if(isDefined(level.forcecustomclassloc)) {
+  } else if(isDefined(level.forcecustomclassloc)) {
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "weaponSetups", var_1, "weapon");
-  }
-  else {
+  } else {
     return self getcacplayerdata(var_0, "weaponSetups", var_1, "weapon");
   }
 }
@@ -234,11 +231,9 @@ cac_getweapon(var_0, var_1, var_2) {
 cac_getweaponcamo(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction()) {
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "weaponSetups", var_1, "camo");
-  }
-  else if(isDefined(level.forcecustomclassloc)) {
+  } else if(isDefined(level.forcecustomclassloc)) {
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "weaponSetups", var_1, "camo");
-  }
-  else {
+  } else {
     return self getcacplayerdata(var_0, "weaponSetups", var_1, "camo");
   }
 }
@@ -246,11 +241,9 @@ cac_getweaponcamo(var_0, var_1, var_2) {
 cac_getweaponreticle(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction()) {
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "weaponSetups", var_1, "reticle");
-  }
-  else if(isDefined(level.forcecustomclassloc)) {
+  } else if(isDefined(level.forcecustomclassloc)) {
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "weaponSetups", var_1, "reticle");
-  }
-  else {
+  } else {
     return self getcacplayerdata(var_0, "weaponSetups", var_1, "reticle");
   }
 }
@@ -258,11 +251,9 @@ cac_getweaponreticle(var_0, var_1, var_2) {
 cac_getweaponattachkitid(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction()) {
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "weaponSetups", var_1, "kit", "attachKit");
-  }
-  else if(isDefined(level.forcecustomclassloc)) {
+  } else if(isDefined(level.forcecustomclassloc)) {
     var_3 = self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "weaponSetups", var_1, "kit", "attachKit");
-  }
-  else {
+  } else {
     var_3 = self getcacplayerdata(var_0, "weaponSetups", var_1, "kit", "attachKit");
   }
 
@@ -278,11 +269,9 @@ cac_getweaponattachkit(var_0, var_1, var_2) {
 cac_getweaponfurniturekitid(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction()) {
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "weaponSetups", var_1, "kit", "furnitureKit");
-  }
-  else if(isDefined(level.forcecustomclassloc)) {
+  } else if(isDefined(level.forcecustomclassloc)) {
     var_3 = self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "weaponSetups", var_1, "kit", "furnitureKit");
-  }
-  else {
+  } else {
     var_3 = self getcacplayerdata(var_0, "weaponSetups", var_1, "kit", "furnitureKit");
   }
 
@@ -298,11 +287,9 @@ cac_getweaponfurniturekit(var_0, var_1, var_2) {
 cac_getmeleeweapon(var_0, var_1) {
   if(usevirtuallobbyfunction()) {
     return getcacplayerdata(var_1, maps\mp\_utility::cac_getcustomclassloc(), var_0, "meleeWeapon");
-  }
-  else if(isDefined(level.forcecustomclassloc)) {
+  } else if(isDefined(level.forcecustomclassloc)) {
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "meleeWeapon");
-  }
-  else {
+  } else {
     return self getcacplayerdata(var_0, "meleeWeapon");
   }
 }
@@ -310,11 +297,9 @@ cac_getmeleeweapon(var_0, var_1) {
 cac_getperk(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction()) {
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "perkSlots", var_1);
-  }
-  else if(isDefined(level.forcecustomclassloc)) {
+  } else if(isDefined(level.forcecustomclassloc)) {
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "perkSlots", var_1);
-  }
-  else {
+  } else {
     return self getcacplayerdata(var_0, "perkSlots", var_1);
   }
 }
@@ -322,11 +307,9 @@ cac_getperk(var_0, var_1, var_2) {
 cac_getequipment(var_0, var_1, var_2) {
   if(usevirtuallobbyfunction()) {
     return getcacplayerdata(var_2, maps\mp\_utility::cac_getcustomclassloc(), var_0, "equipment", var_1);
-  }
-  else if(isDefined(level.forcecustomclassloc)) {
+  } else if(isDefined(level.forcecustomclassloc)) {
     return self getcacplayerdataforgroup(level.forcecustomclassloc, var_0, "equipment", var_1);
-  }
-  else {
+  } else {
     return self getcacplayerdata(var_0, "equipment", var_1);
   }
 }
@@ -342,8 +325,7 @@ cao_isglobalcostumecategory(var_0) {
 cao_getglobalcostumecategory(var_0, var_1) {
   if(maps\mp\_utility::invirtuallobby() && isDefined(var_1)) {
     return getcacplayerdataforgroup(var_1, common_scripts\utility::getstatsgroup_common(), "globalCostume", var_0);
-  }
-  else {
+  } else {
     return self getplayerdata(common_scripts\utility::getstatsgroup_common(), "globalCostume", var_0);
   }
 }
@@ -351,8 +333,7 @@ cao_getglobalcostumecategory(var_0, var_1) {
 cao_getpercostumecategory(var_0, var_1, var_2) {
   if(maps\mp\_utility::invirtuallobby() && isDefined(var_2)) {
     return getcacplayerdataforgroup(var_2, common_scripts\utility::getstatsgroup_common(), "costumes", var_1, var_0);
-  }
-  else {
+  } else {
     return self getplayerdata(common_scripts\utility::getstatsgroup_common(), "costumes", var_1, var_0);
   }
 }
@@ -368,8 +349,7 @@ cao_setpercostumecategory(var_0, var_1, var_2) {
 cao_getactivecostumeindex(var_0) {
   if(maps\mp\_utility::invirtuallobby() && isDefined(var_0)) {
     return getcacplayerdataforgroup(var_0, common_scripts\utility::getstatsgroup_common(), "activeCostume");
-  }
-  else {
+  } else {
     return self getplayerdata(common_scripts\utility::getstatsgroup_common(), "activeCostume");
   }
 }
@@ -377,8 +357,7 @@ cao_getactivecostumeindex(var_0) {
 cao_getcharactercamoindex(var_0) {
   if(maps\mp\_utility::invirtuallobby() && isDefined(var_0)) {
     return getcacplayerdataforgroup(var_0, common_scripts\utility::getstatsgroup_common(), "characterCamoIndex");
-  }
-  else {
+  } else {
     return self getplayerdata(common_scripts\utility::getstatsgroup_common(), "characterCamoIndex");
   }
 }
@@ -460,8 +439,7 @@ cac_setlastenvironment(var_0) {
 
   if(var_0 == "desert") {
     var_1 = 2;
-  }
-  else if(var_0 == "woodland") {
+  } else if(var_0 == "woodland") {
     var_1 = 1;
   }
 
@@ -473,8 +451,7 @@ cac_getlastteam(var_0) {
 
   if(var_1) {
     return "axis";
-  }
-  else {
+  } else {
     return "allies";
   }
 }
@@ -485,8 +462,7 @@ cac_getlastgroupstring(var_0) {
 
   if(var_2 == 0) {
     var_1 = "customClasses";
-  }
-  else {
+  } else {
     var_1 = "privateMatchCustomClasses";
   }
 
@@ -503,11 +479,9 @@ cac_getlastenvironment(var_0) {
 
   if(var_1 == 0) {
     return "urban";
-  }
-  else if(var_1 == 1) {
+  } else if(var_1 == 1) {
     return "woodland";
-  }
-  else {
+  } else {
     return "desert";
   }
 }
@@ -515,8 +489,7 @@ cac_getlastenvironment(var_0) {
 table_getweapon(var_0, var_1, var_2) {
   if(var_2 == 0) {
     return tablelookup(var_0, 0, "loadoutPrimary", var_1 + 1);
-  }
-  else {
+  } else {
     return tablelookup(var_0, 0, "loadoutSecondary", var_1 + 1);
   }
 }
@@ -524,8 +497,7 @@ table_getweapon(var_0, var_1, var_2) {
 table_getweaponbuff(var_0, var_1, var_2) {
   if(var_2 == 0) {
     return tablelookup(var_0, 0, "loadoutPrimaryBuff", var_1 + 1);
-  }
-  else {
+  } else {
     return tablelookup(var_0, 0, "loadoutSecondaryBuff", var_1 + 1);
   }
 }
@@ -533,8 +505,7 @@ table_getweaponbuff(var_0, var_1, var_2) {
 table_getweaponcamo(var_0, var_1, var_2) {
   if(var_2 == 0) {
     return tablelookup(var_0, 0, "loadoutPrimaryCamo", var_1 + 1);
-  }
-  else {
+  } else {
     return tablelookup(var_0, 0, "loadoutSecondaryCamo", var_1 + 1);
   }
 }
@@ -542,8 +513,7 @@ table_getweaponcamo(var_0, var_1, var_2) {
 table_getweaponreticle(var_0, var_1, var_2) {
   if(var_2 == 0) {
     return tablelookup(var_0, 0, "loadoutPrimaryReticle", var_1 + 1);
-  }
-  else {
+  } else {
     return tablelookup(var_0, 0, "loadoutSecondaryReticle", var_1 + 1);
   }
 }
@@ -551,8 +521,7 @@ table_getweaponreticle(var_0, var_1, var_2) {
 table_getweaponattachkit(var_0, var_1, var_2) {
   if(var_2 == 0) {
     return tablelookup(var_0, 0, "loadoutPrimaryAttachKit", var_1 + 1);
-  }
-  else {
+  } else {
     return tablelookup(var_0, 0, "loadoutSecondaryAttachKit", var_1 + 1);
   }
 }
@@ -560,8 +529,7 @@ table_getweaponattachkit(var_0, var_1, var_2) {
 table_getweaponfurniturekit(var_0, var_1, var_2) {
   if(var_2 == 0) {
     return tablelookup(var_0, 0, "loadoutPrimaryFurnitureKit", var_1 + 1);
-  }
-  else {
+  } else {
     return tablelookup(var_0, 0, "loadoutSecondaryFurnitureKit", var_1 + 1);
   }
 }
@@ -611,8 +579,7 @@ cloneloadout() {
 
   if(issubstr(var_1, "axis")) {
     var_0 = "axis";
-  }
-  else if(issubstr(var_1, "allies")) {
+  } else if(issubstr(var_1, "allies")) {
     var_0 = "allies";
   }
 
@@ -760,11 +727,9 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
 
   if(issubstr(var_1, "axis")) {
     var_13 = "axis";
-  }
-  else if(issubstr(var_1, "allies")) {
+  } else if(issubstr(var_1, "allies")) {
     var_13 = "allies";
-  }
-  else {
+  } else {
     var_13 = "none";
   }
 
@@ -1088,8 +1053,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
 
   if(maps\mp\_utility::invirtuallobby()) {
     var_46 = self.charactercamoloadout.camoindex;
-  }
-  else {
+  } else {
     var_46 = self getplayerdata(common_scripts\utility::getstatsgroup_common(), "characterCamoIndex");
   }
 
@@ -1124,8 +1088,7 @@ getloadout(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_28 != "none") {
     var_33.meleeweaponname = var_28 + "_mp_a#none_f#base";
-  }
-  else {
+  } else {
     var_33.meleeweaponname = var_28;
   }
 
@@ -1325,8 +1288,7 @@ applyloadout() {
     if(!isDefined(self.costume)) {
       if(isplayer(self)) {
         self.costume = cao_getactivecostume();
-      }
-      else if(isagent(self) && self.agent_type == "player") {
+      } else if(isagent(self) && self.agent_type == "player") {
         self.costume = maps\mp\gametypes\_teams::getdefaultcostume();
       }
     }
@@ -1610,8 +1572,7 @@ buildweaponname(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(issubstr(var_0, "h1_")) {
       var_6 = getsubstr(var_0, 3, var_8);
-    }
-    else {
+    } else {
       var_6 = getsubstr(var_0, 4, var_8);
     }
   } else {
@@ -1674,11 +1635,9 @@ buildweaponnamecamo(var_0, var_1) {
 
   if(var_1 < 10) {
     var_0 = var_0 + "_camo00";
-  }
-  else if(var_1 < 100) {
+  } else if(var_1 < 100) {
     var_0 = var_0 + "_camo0";
-  }
-  else {
+  } else {
     var_0 = var_0 + "_camo";
   }
 
@@ -2913,7 +2872,7 @@ isvalidweapon(var_0, var_1) {
     level.weaponrefs = [];
 
     foreach(var_3 in level.weaponlist) {
-    level.weaponrefs[var_3] = 1;
+      level.weaponrefs[var_3] = 1;
     }
   }
 

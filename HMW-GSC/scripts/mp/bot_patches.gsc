@@ -117,8 +117,7 @@ bot_think_killstreak_stub() {
 
             self.bot_killstreak_wait[var_0] = gettime() + 5000;
           }
-        } else {
-        }
+        } else {}
       }
     }
   }
@@ -159,8 +158,7 @@ bot_killstreak_choose_loc_enemies(var_0, var_1) {
   heightEnt = getent("airstrikeheight", "targetname");
   if(isDefined(heightEnt) || isDefined(level.airstrikeHeightScale)) {
     height = maps\mp\h2_killstreaks\_airdrop::getFlyHeightOffset(random_target.origin);
-  }
-  else {
+  } else {
     height = level.heli_leave_nodes[randomInt(level.heli_leave_nodes.size)].origin[2];
   }
 

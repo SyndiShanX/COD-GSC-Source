@@ -32,7 +32,7 @@ ending_start() {
   thread maps\loki_audio::audio_set_ending_ambience();
 
   foreach(var_1 in level.allies) {
-  var_1 maps\_utility::disable_ai_color();
+    var_1 maps\_utility::disable_ai_color();
   }
 
   thread maps\loki_space_breach::set_flags_on_input();

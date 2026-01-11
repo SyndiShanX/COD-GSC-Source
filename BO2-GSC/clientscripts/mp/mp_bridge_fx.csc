@@ -8,8 +8,7 @@
 #include clientscripts\mp\createfx\mp_bridge_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_mp_carrier_smoke_center"] = loadfx("maps/mp_maps/fx_mp_carrier_smoke_center");

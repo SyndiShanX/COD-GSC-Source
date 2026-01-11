@@ -49,8 +49,7 @@ main() {
 
           if(var_6 < var_5) {
             turntoangle(var_2.angles[1]);
-          }
-          else if(var_6 < var_4) {
+          } else if(var_6 < var_4) {
             var_3 = var_2.origin - self.origin;
             var_7 = vectortoyaw(var_3);
             turntoangle(var_7);
@@ -76,16 +75,14 @@ main() {
     if(var_9 == "casualidle") {
       if(isDefined(self.idlelookattargets)) {
         dolookatidle();
-      }
-      else {
+      } else {
         stoplookatidle();
         playidleanim("casualidle", getdogstopanim("casualidle"), 0, 0.5, 2);
       }
     } else if(var_9 == "attackidle") {
       if(isDefined(self.idlelookattargets) && isDefined(self.aggresivelookat)) {
         dolookatidle();
-      }
-      else {
+      } else {
         stopidlesound();
         stoplookatidle();
         var_10 = !isDefined(self.enemy) || distance2dsquared(self.origin, self.enemy.origin) > 589824;
@@ -137,15 +134,13 @@ playidleanim(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_2) {
     self setflaggedanimknobrestart("dog_idle", var_1, 1, var_3, self.animplaybackrate);
-  }
-  else {
+  } else {
     self setflaggedanimknob("dog_idle", var_1, 1, var_3, self.animplaybackrate);
   }
 
   if(var_4 > 0) {
     animscripts\notetracks::donotetracksfortime(var_4, "dog_idle");
-  }
-  else {
+  } else {
     animscripts\shared::donotetracks("dog_idle");
   }
 }
@@ -186,19 +181,16 @@ getturnanim(var_0) {
   if(var_1 == "casualidle" || var_1 == "sniffidle") {
     if(var_0 < -135 || var_0 > 135) {
       return getdogstopanim("casual_turn_180");
-    }
-    else if(var_0 < 0) {
+    } else if(var_0 < 0) {
       return getdogstopanim("casual_turn_right");
-    }
-    else {
+    } else {
       return getdogstopanim("casual_turn_left");
     }
   } else if(var_0 < -135 || var_0 > 135)
     return getdogstopanim("attack_turn_180");
   else if(var_0 < 0) {
     return getdogstopanim("attack_turn_right");
-  }
-  else {
+  } else {
     return getdogstopanim("attack_turn_left");
   }
 }
@@ -242,8 +234,7 @@ turntoangle(var_0, var_1) {
 
   if(isDefined(var_1) && var_1) {
     self animmode("zonly_physics");
-  }
-  else {
+  } else {
     self animmode("angle deltas");
   }
 
@@ -325,8 +316,7 @@ dodrivenidle() {
 dospecialidle() {
   if(isarray(self.specialidleanim)) {
     var_0 = self.specialidleanim[randomint(self.specialidleanim.size)];
-  }
-  else {
+  } else {
     var_0 = self.specialidleanim;
   }
 
@@ -338,8 +328,7 @@ docustomidle() {
   if(isarray(self.customidleanimset)) {
     if(isDefined(self.customidleanimweights)) {
       var_0 = animscripts\utility::anim_array(self.customidleanimset, self.customidleanimweights);
-    }
-    else {
+    } else {
       var_0 = self.customidleanimset[randomint(self.customidleanimset.size)];
     }
   } else
@@ -400,8 +389,7 @@ getlookattarget(var_0) {
   if(self.idlelookattargets.size == 1) {
     if(var_1) {
       return undefined;
-    }
-    else {
+    } else {
       return self.idlelookattargets[0];
     }
   }
@@ -499,15 +487,13 @@ idletrackloop() {
 
     if(var_10 > 0) {
       var_11 = clamp(var_10 / var_0, 0, 1);
-    }
-    else {
+    } else {
       var_12 = clamp(var_10 / var_1, 0, 1);
     }
 
     if(var_9 < 0) {
       var_13 = clamp(var_9 / var_2, 0, 1);
-    }
-    else {
+    } else {
       var_14 = clamp(var_9 / var_3, 0, 1);
     }
 
@@ -531,19 +517,16 @@ calctrackingyaw(var_0, var_1, var_2) {
   if(var_8 > var_1) {
     if(var_2 >= 0 && !needtodecelforarrival(var_9, var_2, var_6)) {
       var_10 = var_2 + var_5;
-    }
-    else if(var_2 >= 0) {
+    } else if(var_2 >= 0) {
       var_10 = var_2 - var_6;
-    }
-    else {
+    } else {
       var_10 = var_2 + var_6;
     }
   } else if(var_2 <= 0 && !needtodecelforarrival(var_9, var_2, var_6))
     var_10 = var_2 - var_5;
   else if(var_2 <= 0) {
     var_10 = var_2 + var_6;
-  }
-  else {
+  } else {
     var_10 = var_2 - var_6;
   }
 
@@ -551,8 +534,7 @@ calctrackingyaw(var_0, var_1, var_2) {
 
   if(var_8 >= var_1 && var_1 + var_10 > var_8) {
     var_10 = var_8 - var_1;
-  }
-  else if(var_8 <= var_1 && var_1 + var_10 < var_8) {
+  } else if(var_8 <= var_1 && var_1 + var_10 < var_8) {
     var_10 = var_8 - var_1;
   }
 
@@ -611,8 +593,7 @@ getdefaultidlestate(var_0) {
     if(var_3.type == "Guard") {
       if(var_2) {
         return "attackidle";
-      }
-      else {
+      } else {
         return "alertidle";
       }
     } else if(issubstr(var_3.type, "Cover"))
@@ -620,8 +601,7 @@ getdefaultidlestate(var_0) {
     else if(var_1) {
       if(var_2) {
         return "attackidle";
-      }
-      else {
+      } else {
         return "alertidle";
       }
     }
@@ -732,8 +712,7 @@ getdognexttwitchtime() {
 getdogstopanimbase() {
   if(isDefined(self.aggresivelookat)) {
     return getdogstopanim("attackidle_base");
-  }
-  else {
+  } else {
     return getdogstopanim("casualidle_base");
   }
 }
@@ -741,8 +720,7 @@ getdogstopanimbase() {
 getdogstopanimlook(var_0) {
   if(isDefined(self.aggresivelookat)) {
     return getdogstopanim("attackidle_look_" + var_0);
-  }
-  else {
+  } else {
     return getdogstopanim("casualidle_look_" + var_0);
   }
 }

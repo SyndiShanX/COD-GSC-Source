@@ -194,7 +194,7 @@ build_buildable_fx(table) {
 build_buildable_interrupt() {
   if(isDefined(self.pieces) && self.pieces.size > 0) {
     foreach(piece in self.pieces) {
-    piece maps\mp\zombies\_zm_buildables::piece_spawn_at();
+      piece maps\mp\zombies\_zm_buildables::piece_spawn_at();
     }
   }
 }
@@ -403,11 +403,9 @@ fetch_buildable_action(item) {
 
   if(isDefined(self.turbine)) {
     ground_pos = self.turbine.origin;
-  }
-  else if(isDefined(self.power_item)) {
+  } else if(isDefined(self.power_item)) {
     ground_pos = self.power_item.origin;
-  }
-  else {
+  } else {
     ground_pos = self.pi_origin;
   }
 
@@ -500,8 +498,7 @@ pickup_notetracks(note, stub) {
 
     if(self.buildable_item == "turbine") {
       self.buildable_model setModel(level.small_turbine);
-    }
-    else {
+    } else {
       self.buildable_model setModel(stub.model.model);
     }
 
@@ -514,8 +511,7 @@ destroy_item(note, item) {
     if(isDefined(item)) {
       if(isDefined(item.owner)) {
         item.owner thread maps\mp\zombies\_zm_equipment::player_damage_equipment(item.equipname, 1001, item.origin);
-      }
-      else {
+      } else {
         item thread maps\mp\zombies\_zm_equipment::dropped_equipment_destroy(1);
       }
     }
@@ -730,7 +726,7 @@ wallbuy_grab_pieces(note) {
 wallbuy_interrupt() {
   if(isDefined(self.wallbuy_pieces_taken) && self.wallbuy_pieces_taken.size > 0) {
     foreach(wallbuy in self.wallbuy_pieces_taken) {
-    wallbuy maps\mp\zm_buried_buildables::ondrop_chalk(self);
+      wallbuy maps\mp\zm_buried_buildables::ondrop_chalk(self);
     }
   }
 }

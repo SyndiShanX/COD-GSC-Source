@@ -151,9 +151,7 @@ activate_new_challenge(param_00, param_01) {
 }
 
 func_7897(param_00) {
-  return [
-    [level.challenge_scalar_func]
-  ](param_00);
+  return [[level.challenge_scalar_func]](param_00);
 }
 
 func_56AD(param_00, param_01, param_02, param_03) {

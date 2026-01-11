@@ -5,7 +5,6 @@
 
 #include scripts\core_common\entityheadicons_shared;
 #include scripts\core_common\system_shared;
-
 #namespace entityheadicons;
 
 autoexec __init__system__() {

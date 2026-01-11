@@ -60,8 +60,7 @@ bot_cache_entrances_to_other_zones(var_0) {
 
     if(isDefined(var_3) && common_scripts\utility::array_contains(var_1, var_3)) {
       var_2 = var_3;
-    }
-    else {
+    } else {
       var_2 = common_scripts\utility::random(var_1);
     }
 
@@ -157,18 +156,15 @@ bot_hp_think() {
 bot_should_cap_next_zone() {
   if(level.randomzonespawn) {
     return 0;
-  }
-  else {
+  } else {
     var_0 = self botgetdifficultysetting("strategyLevel");
     var_1 = 0;
 
     if(var_0 == 1) {
       var_1 = 0.1;
-    }
-    else if(var_0 == 2) {
+    } else if(var_0 == 2) {
       var_1 = 0.5;
-    }
-    else if(var_0 == 3) {
+    } else if(var_0 == 3) {
       var_1 = 0.8;
     }
 

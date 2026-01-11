@@ -7,8 +7,7 @@
 #include clientscripts\createfx\angola_2_fx;
 #include clientscripts\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_ango_heli_fire"] = loadfx("maps/angola/fx_ango_heli_fire");

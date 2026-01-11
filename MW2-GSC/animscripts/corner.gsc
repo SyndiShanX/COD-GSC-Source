@@ -117,10 +117,9 @@ mainLoopStart() {
     desiredStance = "crouch";
   }
 
-    if(self.haveGoneToCover) {
-      self transitionToStance(desiredStance);
-    }
-  else {
+  if(self.haveGoneToCover) {
+    self transitionToStance(desiredStance);
+  } else {
     if(self.a.pose == desiredStance) {
       GoToCover(animArray("alert_idle"), .3, .4);
     } else {
@@ -217,8 +216,7 @@ getCornerMode(node, point) {
     if(!noStepOut && yaw < 14) {
       if(yaw < 0 - self.ABangleCutoff) {
         modes[modes.size] = "A";
-      }
-      else {
+      } else {
         modes[modes.size] = "B";
       }
     }
@@ -233,8 +231,7 @@ getCornerMode(node, point) {
     if(!noStepOut && yaw > -12) {
       if(yaw > self.ABangleCutoff) {
         modes[modes.size] = "A";
-      }
-      else {
+      } else {
         modes[modes.size] = "B";
       }
     }
@@ -249,8 +246,7 @@ getBestStepOutPos() {
   yaw = 0;
   if(canSuppressEnemy()) {
     yaw = self.coverNode GetYawToOrigin(getEnemySightPos());
-  }
-  else if(self.doingAmbush && isDefined(self.shootPos)) {
+  } else if(self.doingAmbush && isDefined(self.shootPos)) {
     yaw = self.coverNode GetYawToOrigin(self.shootPos);
   }
 
@@ -259,13 +255,12 @@ getBestStepOutPos() {
     return dvarval;
   }
 
-    if(self.a.cornerMode == "lean") {
-      return "lean";
-    }
+  if(self.a.cornerMode == "lean") {
+    return "lean";
+  }
   if(self.a.cornerMode == "over") {
     return "over";
-  }
-  else if(self.a.cornerMode == "B") {
+  } else if(self.a.cornerMode == "B") {
     if(self.cornerDirection == "left") {
       if(yaw < 0 - self.ABangleCutoff) {
         return "A";
@@ -388,8 +383,7 @@ StartAiming(spot, fullbody, transtime) {
   self.cornerAiming = true;
   if(self.a.cornerMode == "lean") {
     self.a.leanAim = true;
-  }
-  else {
+  } else {
     self.a.leanAim = undefined;
   }
 
@@ -400,8 +394,7 @@ ChangeAiming(spot, fullbody, transtime) {
   assert(self.cornerAiming);
   if(self.a.cornerMode == "lean") {
     self.a.leanAim = true;
-  }
-  else {
+  } else {
     self.a.leanAim = undefined;
   }
 
@@ -502,8 +495,7 @@ stepOut() /* bool */ {
   newCornerMode = "none";
   if(hasEnemySightPos()) {
     newCornerMode = getCornerMode(self.coverNode, getEnemySightPos());
-  }
-  else {
+  } else {
     newCornerMode = getCornerMode(self.coverNode);
   }
 
@@ -532,11 +524,9 @@ stepOut() /* bool */ {
 
   if(newCornerMode == "A" || newCornerMode == "B") {
     self.a.special = "cover_" + self.cornerDirection + "_" + self.a.pose + "_" + newCornerMode;
-  }
-  else if(newCornerMode == "over") {
+  } else if(newCornerMode == "over") {
     self.a.special = "cover_crouch_aim";
-  }
-  else {
+  } else {
     self.a.special = "none";
   }
 
@@ -616,8 +606,7 @@ stepOutAndShootEnemy() {
     if(usingRocketLauncher() && (distSqToShootPos < squared(512) || self.a.rockets < 1)) {
       if(self.a.pose == "stand") {
         animscripts\shared::throwDownWeapon( % RPG_stand_throw);
-      }
-      else {
+      } else {
         animscripts\shared::throwDownWeapon( % RPG_crouch_throw);
       }
 
@@ -656,8 +645,7 @@ rambo() {
     angle = 45;
     if(self.cornerDirection == "left") {
       ramboAimOffset = 45;
-    }
-    else {
+    } else {
       ramboAimOffset = -45;
     }
   }
@@ -885,8 +873,7 @@ returnToCover() {
   self.changingCoverPos = false;
   if(self.cornerDirection == "left") {
     self.a.special = "cover_left";
-  }
-  else {
+  } else {
     self.a.special = "cover_right";
   }
 
@@ -986,8 +973,7 @@ lookForEnemy(lookTime) {
   lookanim = undefined;
   if(self isSuppressedWrapper()) {
     lookanim = animArray("look_to_alert_fast");
-  }
-  else {
+  } else {
     lookanim = animArray("look_to_alert");
   }
 
@@ -1010,8 +996,7 @@ isPeekOutPosClear() {
   rightDir = anglestoright(self.coverNode.angles);
   if(self.cornerDirection == "right") {
     eyePos = eyePos + (rightDir * PEEKOUT_OFFSET);
-  }
-  else {
+  } else {
     eyePos = eyePos - (rightDir * PEEKOUT_OFFSET);
   }
 
@@ -1065,10 +1050,10 @@ fastlook() {
   if( !isDefined( self.a.array["look"] ) ) {
   	return false;
   }
-	
+  	
   self setFlaggedAnimKnobAllRestart( "look", animArray( "look" ), %body, 1, .1 );
   self animscripts\shared::DoNoteTracks( "look" );
-	
+  	
   return true;
   */
 }
@@ -1132,8 +1117,7 @@ idle() {
     useTwitch = (randomint(2) == 0 && animArrayAnyExist("alert_idle_twitch"));
     if(useTwitch) {
       idleanim = animArrayPickRandom("alert_idle_twitch");
-    }
-    else {
+    } else {
       idleanim = animarray("alert_idle");
     }
 
@@ -1154,8 +1138,7 @@ flinch() {
 playIdleAnimation(idleAnim, needsRestart) {
   if(needsRestart) {
     self setFlaggedAnimKnobAllRestart("idle", idleAnim, % body, 1, .1, 1);
-  }
-  else {
+  } else {
     self setFlaggedAnimKnobAll("idle", idleAnim, % body, 1, .1, 1);
   }
 
@@ -1210,8 +1193,7 @@ GoToCover(coveranim, transTime, playTime) {
 
   if(self.cornerDirection == "left") {
     self.a.special = "cover_left";
-  }
-  else {
+  } else {
     self.a.special = "cover_right";
   }
 }
@@ -1265,8 +1247,7 @@ set_standing_animarray_aiming() {
 
     if(weapon_pump_action_shotgun()) {
       self.a.array["single"] = array( % shotgun_stand_fire_1A);
-    }
-    else {
+    } else {
       self.a.array["single"] = array( % exposed_shoot_semi1);
     }
 
@@ -1305,8 +1286,7 @@ set_crouching_animarray_aiming() {
 
     if(weapon_pump_action_shotgun()) {
       anim_array["single"] = array( % shotgun_crouch_fire);
-    }
-    else {
+    } else {
       anim_array["single"] = array( % exposed_shoot_semi1);
     }
 
@@ -1340,8 +1320,7 @@ set_crouching_animarray_aiming() {
 
     if(weapon_pump_action_shotgun()) {
       self.a.array["single"] = array( % shotgun_crouch_fire);
-    }
-    else {
+    } else {
       self.a.array["single"] = array( % exposed_crouch_shoot_semi1);
     }
 

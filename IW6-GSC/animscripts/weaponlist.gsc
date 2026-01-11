@@ -14,8 +14,7 @@ usingsemiautoweapon() {
 autoshootanimrate() {
   if(usingautomaticweapon()) {
     return 0.1 / weaponfiretime(self.weapon);
-  }
-  else {
+  } else {
     return 0.5;
   }
 }
@@ -23,8 +22,7 @@ autoshootanimrate() {
 burstshootanimrate() {
   if(usingautomaticweapon()) {
     return 0.1 / weaponfiretime(self.weapon);
-  }
-  else {
+  } else {
     return 0.2;
   }
 }
@@ -49,15 +47,13 @@ refillclip() {
 
   if(!isDefined(self.bulletsinclip)) {
     self.bulletsinclip = weaponclipsize(self.weapon);
-  }
-  else {
+  } else {
     self.bulletsinclip = weaponclipsize(self.weapon);
   }
 
   if(self.bulletsinclip <= 0) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }

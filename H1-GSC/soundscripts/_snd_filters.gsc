@@ -57,8 +57,7 @@ snd_load_dsp_buses() {
 
   if(isDefined(var_0)) {
     level._snd.dsp_buses = var_0;
-  }
-  else {
+  } else {
     level._snd.dsp_buses = [];
   }
 }
@@ -67,7 +66,7 @@ snd_get_dsp_buses() {
   var_0 = [];
 
   foreach(var_2 in level._snd.dsp_buses) {
-  var_0[var_0.size] = var_2.name;
+    var_0[var_0.size] = var_2.name;
   }
 
   return var_0;
@@ -188,7 +187,7 @@ snd_set_filter_threaded(var_0, var_1) {
       var_7 = snd_get_dsp_buses();
 
       foreach(var_9 in var_7) {
-      var_3[var_9] = sndx_get_dsp_filter_setting(var_0, var_9, var_5);
+        var_3[var_9] = sndx_get_dsp_filter_setting(var_0, var_9, var_5);
       }
 
       continue;
@@ -271,9 +270,7 @@ snd_set_occlusion_threaded(var_0) {
     } else {
       if(snd_is_dsp_bus(var_4)) {
         level.player setocclusion(var_4, var_3["freq"], var_3["type"], var_3["gain"], var_3["q"]);
-      }
-      else {
-      }
+      } else {}
 
       var_1 soundscripts\_snd::snd_throttle_wait();
     }

@@ -315,8 +315,7 @@ play_explosion_on_cougar_climb() {
   earthquake(0.5, 2, sam_explosion_struct.origin, 1000);
 }
 
-play_stylized_impact_audio() {
-}
+play_stylized_impact_audio() {}
 
 drone_explode_impact(m_fxanim_drone) {
   earthquake(0.8, 0.8, level.player.origin, 200);
@@ -349,8 +348,7 @@ after_the_attack() {
 
     if(!flag("harper_dead")) {
       run_scene_first_frame("cougar_crawl_harper");
-    }
-    else {
+    } else {
       run_scene_first_frame("cougar_crawl_noharper");
     }
 
@@ -368,8 +366,7 @@ after_the_attack() {
 
     if(!flag("harper_dead")) {
       level thread run_scene_and_delete("cougar_crawl_harper");
-    }
-    else {
+    } else {
       level thread run_scene_and_delete("cougar_crawl_noharper");
     }
 
@@ -473,8 +470,7 @@ get_on_sam() {
 
   if(level.skipto_point == "sam") {
     v_angles_to_use = level.sam_cougar.angles;
-  }
-  else {
+  } else {
     v_angles_to_use = level.sam_cougar gettagangles("tag_origin_animate_jnt");
   }
 
@@ -692,8 +688,7 @@ sam_vo() {
 
   if(!flag("harper_dead")) {
     level.player say_dialog("dont_let_them_get_007");
-  }
-  else {
+  } else {
     level.player say_dialog("samu_you_have_to_take_dow_0");
   }
 
@@ -706,8 +701,7 @@ sam_vo() {
 
   if(flag("harper_dead")) {
     level.player say_dialog("samu_they_re_all_over_us_0");
-  }
-  else {
+  } else {
     level.harper say_dialog("harp_section_beat_they_0");
   }
 
@@ -716,8 +710,7 @@ sam_vo() {
 
   if(!flag("harper_dead")) {
     level.harper say_dialog("get_the_hell_out_o_002");
-  }
-  else {
+  } else {
     level.player say_dialog("thats_your_window_001");
     level.player say_dialog("sect_go_now_0");
   }
@@ -729,8 +722,7 @@ sam_direction_vo_left() {
 
   if(flag("harper_dead")) {
     a_dialog[a_dialog.size] = "sect_radar_contact_left_0";
-  }
-  else {
+  } else {
     a_dialog[a_dialog.size] = "harp_left_side_left_side_0";
     a_dialog[a_dialog.size] = "come_around_90_deg_009";
   }
@@ -749,8 +741,7 @@ sam_direction_vo_right() {
 
   if(flag("harper_dead")) {
     a_dialog[a_dialog.size] = "sect_radar_contact_right_0";
-  }
-  else {
+  } else {
     a_dialog[a_dialog.size] = "harp_right_section_righ_0";
     a_dialog[a_dialog.size] = "watch_your_flank_008";
   }
@@ -834,8 +825,7 @@ drone_sam_attack() {
 
     if(angle_offset[i - 1] <= 180) {
       level notify("sam_drones_left");
-    }
-    else {
+    } else {
       level notify("sam_drones_right");
     }
 
@@ -939,14 +929,12 @@ death_cheat() {
 sam_wave_vo(v_player_angle, n_spawn_yaw) {
   if(abs(n_spawn_yaw - 80) < 30) {
     level.player say_dialog("more_drones_moving_013");
-  }
-  else {
+  } else {
     n_angle_diff = abs(n_spawn_yaw - v_player_angle);
 
     if(n_angle_diff > 70 && n_angle_diff < 110 || n_angle_diff > 250 && n_angle_diff < 290) {
       level.player say_dialog("come_around_90_deg_009");
-    }
-    else if(n_angle_diff >= 110 && n_angle_diff <= 290) {
+    } else if(n_angle_diff >= 110 && n_angle_diff <= 290) {
       level.player say_dialog("watch_your_flank_008");
     }
   }

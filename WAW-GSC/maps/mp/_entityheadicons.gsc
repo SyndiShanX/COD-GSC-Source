@@ -56,14 +56,13 @@ setEntityHeadIcon(team, offset) {
   self.entityHeadIconTeam = team;
   if(isDefined(offset)) {
     self.entityHeadIconOffset = offset;
-  }
-  else {
+  } else {
     self.entityHeadIconOffset = (0, 0, 0);
   }
   for(i = 0; i < self.entityHeadIcons.size; i++) {
     if(isDefined(self.entityHeadIcons[i]))
   }
-      self.entityHeadIcons[i] destroy();
+  self.entityHeadIcons[i] destroy();
   self.entityHeadIcons = [];
   self notify("kill_entity_headicon_thread");
   if(team != "none") {

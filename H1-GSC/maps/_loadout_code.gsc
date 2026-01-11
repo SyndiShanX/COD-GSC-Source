@@ -128,8 +128,7 @@ loadout(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(isDefined(var_1)) {
       level.player switchtoweapon(var_1);
-    }
-    else if(isDefined(var_2)) {
+    } else if(isDefined(var_2)) {
       level.player switchtoweapon(var_2);
     }
   }
@@ -301,8 +300,7 @@ loadout_launchfacility_b() {
 
     if(var_1) {
       level.player giveweapon("usp_silencer");
-    }
-    else {
+    } else {
       level.player giveweapon("m4m203_silencer_reflex");
     }
 

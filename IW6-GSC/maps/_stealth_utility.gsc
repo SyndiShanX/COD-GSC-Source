@@ -197,7 +197,7 @@ stealth_plugin_event_all(var_0) {
 
   if(isDefined(var_0)) {
     foreach(var_3, var_2 in var_0) {
-    maps\_stealth_event_enemy::stealth_event_mod(var_3, var_2);
+      maps\_stealth_event_enemy::stealth_event_mod(var_3, var_2);
     }
   }
 }
@@ -375,8 +375,7 @@ stealth_ai_idle_and_react(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_4)) {
     thread maps\_anim::anim_generic_custom_animmode_loop(var_0, "gravity", var_1, var_3);
-  }
-  else {
+  } else {
     thread maps\_anim::anim_generic_loop(var_0, var_1, var_3);
   }
 
@@ -520,7 +519,7 @@ enable_stealth_system() {
   var_0 = getaispeciesarray("all", "all");
 
   foreach(var_3, var_2 in var_0) {
-  var_2 enable_stealth_for_ai();
+    var_2 enable_stealth_for_ai();
   }
 
   foreach(var_5 in level.players) {
@@ -539,7 +538,7 @@ disable_stealth_system() {
   var_0 = getaispeciesarray("all", "all");
 
   foreach(var_3, var_2 in var_0) {
-  var_2 disable_stealth_for_ai();
+    var_2 disable_stealth_for_ai();
   }
 
   foreach(var_5 in level.players) {

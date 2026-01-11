@@ -56,8 +56,7 @@ registermeritcallback(var_00, var_01) {
 getmeritstatus(var_00) {
   if(isDefined(self.meritdata[var_00])) {
     return self.meritdata[var_00];
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -130,8 +129,7 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
   if(!isplayer(var_01)) {
     if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
       var_01 = var_1.owner;
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -153,8 +151,7 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
 
   if(isDefined(var_0.owner)) {
     var_23 = var_01 scripts\cp\utility::is_trap(var_00, var_04) && var_0.owner == var_01;
-  }
-  else {
+  } else {
     var_23 = var_01 scripts\cp\utility::is_trap(var_00, var_04);
   }
 
@@ -185,8 +182,7 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
   if(var_16) {
     if(issubstr(var_04, "shuriken")) {
       var_16 = 0;
-    }
-    else if(scripts\engine\utility::is_true(var_1.kung_fu_mode)) {
+    } else if(scripts\engine\utility::is_true(var_1.kung_fu_mode)) {
       var_16 = 0;
     }
   }
@@ -285,17 +281,13 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
     if(var_17) {
       if(var_04 == "iw7_golf_club_mp" || var_04 == "iw7_golf_club_mp_pap1" || var_04 == "iw7_golf_club_mp_pap2") {
         var_01 processmerit("mt_dlc1_golf_kills");
-      }
-      else if(var_04 == "iw7_spiked_bat_mp" || var_04 == "iw7_spiked_bat_mp_pap1" || var_04 == "iw7_spiked_bat_mp_pap2") {
+      } else if(var_04 == "iw7_spiked_bat_mp" || var_04 == "iw7_spiked_bat_mp_pap1" || var_04 == "iw7_spiked_bat_mp_pap2") {
         var_01 processmerit("mt_dlc1_bat_kills");
-      }
-      else if(var_04 == "iw7_machete_mp" || var_04 == "iw7_machete_mp_pap1" || var_04 == "iw7_machete_mp_pap2") {
+      } else if(var_04 == "iw7_machete_mp" || var_04 == "iw7_machete_mp_pap1" || var_04 == "iw7_machete_mp_pap2") {
         var_01 processmerit("mt_dlc1_machete_kills");
-      }
-      else if(var_04 == "iw7_two_headed_axe_mp" || var_04 == "iw7_two_headed_axe_mp_pap1" || var_04 == "iw7_two_headed_axe_mp_pap2") {
+      } else if(var_04 == "iw7_two_headed_axe_mp" || var_04 == "iw7_two_headed_axe_mp_pap1" || var_04 == "iw7_two_headed_axe_mp_pap2") {
         var_01 processmerit("mt_dlc1_axe_kills");
-      }
-      else if(var_04 == "iw7_lawnmower_zm") {
+      } else if(var_04 == "iw7_lawnmower_zm") {
         var_01 processmerit("mt_dlc1_lawnmower_kills");
       }
     }
@@ -312,11 +304,9 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
   if(getdvar("ui_mapname") == "cp_disco") {
     if(var_04 == "iw7_katana_zm_pap2+camo222" || var_04 == "iw7_katana_windforce_zm") {
       var_01 processmerit("mt_dlc2_pap2_katana");
-    }
-    else if(var_04 == "iw7_nunchucks_zm_pap2+camo222") {
+    } else if(var_04 == "iw7_nunchucks_zm_pap2+camo222") {
       var_01 processmerit("mt_dlc2_pap2_nunchucks");
-    }
-    else if(var_04 == "heart_cp") {
+    } else if(var_04 == "heart_cp") {
       var_01 processmerit("mt_dlc2_heart_kills");
     }
 
@@ -326,18 +316,14 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
 
     if(var_23) {
       var_01 processmerit("mt_dlc2_trap_kills");
-    }
-    else if(scripts\engine\utility::is_true(var_1.kung_fu_mode) && !is_crafted_trap_damage(var_04)) {
+    } else if(scripts\engine\utility::is_true(var_1.kung_fu_mode) && !is_crafted_trap_damage(var_04)) {
       if(var_1.kungfu_style == "dragon") {
         var_01 processmerit("mt_dlc2_dragon_kills");
-      }
-      else if(var_1.kungfu_style == "crane") {
+      } else if(var_1.kungfu_style == "crane") {
         var_01 processmerit("mt_dlc2_crane_kills");
-      }
-      else if(var_1.kungfu_style == "snake") {
+      } else if(var_1.kungfu_style == "snake") {
         var_01 processmerit("mt_dlc2_snake_kills");
-      }
-      else if(var_1.kungfu_style == "tiger") {
+      } else if(var_1.kungfu_style == "tiger") {
         var_01 processmerit("mt_dlc2_tiger_kills");
       }
     }
@@ -347,8 +333,7 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
     if(var_17) {
       if(var_04 == "iw7_knife_zm_cleaver") {
         var_01 processmerit("mt_dlc3_cleaver_kills");
-      }
-      else if(var_04 == "iw7_knife_zm_crowbar") {
+      } else if(var_04 == "iw7_knife_zm_crowbar") {
         var_01 processmerit("mt_dlc3_crowbar_kills");
       }
     } else if(issubstr(var_04, "cutie"))
@@ -361,14 +346,11 @@ process_agent_on_killed_merits(var_00, var_01, var_02, var_03, var_04, var_05, v
     if(isDefined(var_1.sub_perks) && isDefined(var_1.sub_perks["perk_machine_change"])) {
       if(var_1.sub_perks["perk_machine_change"] == "perk_machine_change1") {
         var_1.change_chew_1_merit = 1;
-      }
-      else if(var_1.sub_perks["perk_machine_change"] == "perk_machine_change2") {
+      } else if(var_1.sub_perks["perk_machine_change"] == "perk_machine_change2") {
         var_1.change_chew_2_merit = 1;
-      }
-      else if(var_1.sub_perks["perk_machine_change"] == "perk_machine_change3") {
+      } else if(var_1.sub_perks["perk_machine_change"] == "perk_machine_change3") {
         var_1.change_chew_3_merit = 1;
-      }
-      else if(var_1.sub_perks["perk_machine_change"] == "perk_machine_change4") {
+      } else if(var_1.sub_perks["perk_machine_change"] == "perk_machine_change4") {
         var_1.change_chew_4_merit = 1;
       }
 
@@ -426,8 +408,7 @@ processmerit(var_00, var_01, var_02) {
 
     if(var_05 && !var_06) {
       var_03 = level.meritinfo[var_00]["targetval"].size;
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -440,8 +421,7 @@ processmerit(var_00, var_01, var_02) {
   }
   if(isDefined(var_02) && var_02) {
     var_09 = var_01;
-  }
-  else {
+  } else {
     var_09 = var_07 + var_01;
   }
 
@@ -713,8 +693,7 @@ monitoradstime() {
   for(;;) {
     if(self playerads() == 1) {
       self.adstime = self.adstime + 0.05;
-    }
-    else {
+    } else {
       self.adstime = 0.0;
     }
 

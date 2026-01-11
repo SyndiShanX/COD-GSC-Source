@@ -106,8 +106,7 @@ specialFeaturesMenu() {
 tire_explosionMode(cheatValue) {
   if(cheatValue) {
     level.tire_explosion = true;
-  }
-  else {
+  } else {
     level.tire_explosion = false;
   }
 }
@@ -115,8 +114,7 @@ tire_explosionMode(cheatValue) {
 clustergrenadeMode(cheatValue) {
   if(cheatValue) {
     self thread wait_for_grenades();
-  }
-  else {
+  } else {
     level notify("end_cluster_grenades");
   }
 }
@@ -185,8 +183,7 @@ ignore_ammoMode(cheatValue) {
   }
   if(cheatValue) {
     setsaveddvar("player_sustainAmmo", 1);
-  }
-  else {
+  } else {
     setsaveddvar("player_sustainAmmo", 0);
   }
 }
@@ -194,8 +191,7 @@ ignore_ammoMode(cheatValue) {
 contrastMode(cheatValue) {
   if(cheatValue) {
     level.visionSets["contrast"] = true;
-  }
-  else {
+  } else {
     level.visionSets["contrast"] = false;
   }
   applyVisionSets();
@@ -204,8 +200,7 @@ contrastMode(cheatValue) {
 bwMode(cheatValue) {
   if(cheatValue) {
     level.visionSets["bw"] = true;
-  }
-  else {
+  } else {
     level.visionSets["bw"] = false;
   }
   applyVisionSets();
@@ -214,8 +209,7 @@ bwMode(cheatValue) {
 invertMode(cheatValue) {
   if(cheatValue) {
     level.visionSets["invert"] = true;
-  }
-  else {
+  } else {
     level.visionSets["invert"] = false;
   }
   applyVisionSets();
@@ -328,8 +322,7 @@ gamespeed_proc() {
     if(!flag("disable_slowmo_cheat")) {
       if(self.speed_current < level.slowmo.speed_norm) {
         self thread gamespeed_reset();
-      }
-      else {
+      } else {
         self thread gamespeed_slowmo();
       }
     }
@@ -472,8 +465,7 @@ chaplin_proc() {
     if(!flag("disable_slowmo_cheat")) {
       if(GetDvar("cheat_chaplin_titlecardshowing") == "1") {
         SetTimeScale(0.05);
-      }
-      else {
+      } else {
         SetTimeScale(1.7);
       }
     }
@@ -507,6 +499,6 @@ is_cheating() {
   for(i = 0; i < level.cheatDvars.size; i++) {
     if(level.cheatStates[level.cheatDvars[i]])
   }
-      return true;
+  return true;
   return false;
 }

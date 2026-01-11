@@ -8,8 +8,7 @@ init() {
 
   if(!func_B408(var_00)) {
     return;
-  }
-  else {
+  } else {
     level.matchrecording_type = var_00;
   }
 
@@ -24,8 +23,7 @@ init() {
 
   if(level.matchrecording_type == 1) {
     func_B3F5();
-  }
-  else if(level.matchrecording_type == 3) {
+  } else if(level.matchrecording_type == 3) {
     matchrecording_scriptdata_openfileaddheader(1);
   }
 
@@ -39,11 +37,9 @@ func_B408(var_00) {
 
   if(var_00 == 0) {
     var_01 = 0;
-  }
-  else if(var_00 < 0 || var_00 > 4) {
+  } else if(var_00 < 0 || var_00 > 4) {
     var_01 = 0;
-  }
-  else if(var_00 == 3 || var_00 == 4) {
+  } else if(var_00 == 3 || var_00 == 4) {
     var_02 = 0;
 
     if(!var_02) {
@@ -64,11 +60,9 @@ matchrecording_isenabled() {
 matchrecording_teammap(var_00) {
   if(isDefined(level.teambased) && !level.teambased) {
     var_01 = 2;
-  }
-  else if(!isDefined(var_00) || var_00 == "allies") {
+  } else if(!isDefined(var_00) || var_00 == "allies") {
     var_01 = 2;
-  }
-  else {
+  } else {
     var_01 = 3;
   }
 
@@ -214,8 +208,7 @@ matchrecording_logeventmsg(var_00, var_01, var_02) {
   if(var_02 != "") {
     if(!isDefined(var_02)) {
       var_02 = "";
-    }
-    else {
+    } else {
       var_02 = " \"" + var_02 + "\"";
     }
   }
@@ -278,7 +271,7 @@ matchrecording_glog_dump() {
   }
 
   foreach(var_01 in level.matchrecevents) {
-  logprint(var_01 + "\\n");
+    logprint(var_01 + "\\n");
   }
 
   level.matchrecevents = [];
@@ -288,7 +281,7 @@ func_B3F5() {
   var_00 = func_B3F4();
 
   foreach(var_02 in var_00) {
-  logprint(var_02);
+    logprint(var_02);
   }
 }
 

@@ -7,8 +7,7 @@
 #include clientscripts\mp\createfx\zm_tomb_fx;
 #include clientscripts\mp\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["eye_glow"] = loadfx("misc/fx_zombie_eye_single");
@@ -200,8 +199,7 @@ fxanim_props_wait_1(localclientnum) {
     if(isDefined(level.scr_anim["fxanim_props_dlc4"][self.fxanim_scene_1])) {
       if(issubstr(self.fxanim_scene_1, "chamber_rocks")) {
         self thread chamber_rocks_think();
-      }
-      else {
+      } else {
         self setflaggedanim("tomb_fxanim", level.scr_anim["fxanim_props_dlc4"][self.fxanim_scene_1], 1.0, 0.0, 1.0);
       }
     }

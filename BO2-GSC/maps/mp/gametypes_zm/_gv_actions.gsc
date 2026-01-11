@@ -182,11 +182,9 @@ getplayersplace(player) {
 
   if(place == 1) {
     return "first";
-  }
-  else if(place <= 3) {
+  } else if(place <= 3) {
     return "top3";
-  }
-  else if(place == level.placement["all"].size) {
+  } else if(place == level.placement["all"].size) {
     return "last";
   }
 
@@ -287,8 +285,7 @@ executegametypeeventrule(rule) {
   thread internalexecuterule(rule);
 }
 
-internalexecuterule(rule) {
-}
+internalexecuterule(rule) {}
 
 aregametypeeventruleconditionalsmet(rule) {
   if(!isDefined(rule.conditionals) || rule.conditionals.size == 0) {
@@ -366,8 +363,7 @@ gettargetsforgametypeeventrule(rule) {
 
   if(isDefined(rule.target[rule.targetname])) {
     targets[targets.size] = rule.target[rule.targetname];
-  }
-  else if(isDefined(level.targets[rule.targetname])) {
+  } else if(isDefined(level.targets[rule.targetname])) {
     targets = [[level.targets[rule.targetname]]](rule);
   }
 
@@ -495,8 +491,7 @@ displaytextonhudelem(target, texthudelem, text, secondstodisplay, notifyname, va
 
   if(isDefined(valueparam)) {
     texthudelem settext(text, valueparam);
-  }
-  else {
+  } else {
     texthudelem settext(text);
   }
 
@@ -623,8 +618,7 @@ dochangeteam(rule) {
 
     if(level.teambased) {
       target.sessionteam = team;
-    }
-    else {
+    } else {
       target.sessionteam = "none";
     }
 
@@ -704,8 +698,7 @@ doremoveperk(rule) {
   setorunsetperk(gettargetsforgametypeeventrule(rule), rule.params, 0);
 }
 
-giveorremovekillstreak(rule, shouldgive) {
-}
+giveorremovekillstreak(rule, shouldgive) {}
 
 dogivekillstreak(rule) {
   giveorremovekillstreak(rule, 1);
@@ -779,8 +772,7 @@ doscalemovespeed(rule) {
 
     if(target.movementspeedmodifier < 0.1) {
       target.movementspeedmodifier = 0.1;
-    }
-    else if(target.movementspeedmodifier > 4.0) {
+    } else if(target.movementspeedmodifier > 4.0) {
       target.movementspeedmodifier = 4.0;
     }
 

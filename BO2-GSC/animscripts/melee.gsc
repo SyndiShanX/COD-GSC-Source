@@ -63,8 +63,7 @@ melee_chooseaction() {
   if(melee_standard_chooseaction()) {
     if(isDefined(self.specialmelee_standard)) {
       self.melee.func = self.specialmelee_standard;
-    }
-    else {
+    } else {
       self.melee.func = ::melee_standard_main;
     }
 
@@ -158,11 +157,9 @@ melee_isvalid() {
 
   if(isDefined(self.meleechargedistsq)) {
     chargedistsq = self.meleechargedistsq;
-  }
-  else if(isplayer(target)) {
+  } else if(isplayer(target)) {
     chargedistsq = 40000;
-  }
-  else {
+  } else {
     chargedistsq = 25600;
   }
 
@@ -216,8 +213,7 @@ melee_isvalid() {
 
   if(isplayer(target)) {
     enemypose = target getstance();
-  }
-  else {
+  } else {
     enemypose = target.a.pose;
   }
 
@@ -235,8 +231,7 @@ melee_isvalid() {
 
   if(self.melee.inprogress) {
     yawthreshold = 110;
-  }
-  else {
+  } else {
     yawthreshold = 60;
   }
 
@@ -338,18 +333,15 @@ melee_standard_chooseaction() {
 melee_standard_resetgiveuptime() {
   if(isDefined(self.meleechargedistsq)) {
     chargedistsq = self.meleechargedistsq;
-  }
-  else if(isplayer(self.melee.target)) {
+  } else if(isplayer(self.melee.target)) {
     chargedistsq = 40000;
-  }
-  else {
+  } else {
     chargedistsq = 25600;
   }
 
   if(distancesquared(self.origin, self.melee.target.origin) > chargedistsq) {
     self.melee.giveuptime = gettime() + 3000;
-  }
-  else {
+  } else {
     self.melee.giveuptime = gettime() + 1000;
   }
 }
@@ -367,8 +359,7 @@ melee_standard_main() {
 
     if(self.animtype == "default" && animarrayanyexist("melee_2", "combat") && self weaponanims() == "rifle") {
       self.melee.meleeanimvarientindex = randomint(2);
-    }
-    else {
+    } else {
       self.melee.meleeanimvarientindex = 0;
     }
 
@@ -483,8 +474,7 @@ melee_standard_getinposition() {
 
   if(isplayer(self.melee.target) && isDefined(self.enemy) && self.melee.target == self.enemy) {
     self orientmode("face enemy");
-  }
-  else {
+  } else {
     self orientmode("face point", self.melee.target.origin);
   }
 
@@ -565,8 +555,7 @@ melee_endscript_checkdeath() {
   if(!isalive(self) && isDefined(self.melee.death)) {
     if(isDefined(self.melee.animateddeath)) {
       self.deathfunction = ::melee_deathhandler_delayed;
-    }
-    else {
+    } else {
       self.deathfunction = ::melee_deathhandler_regular;
     }
   }
@@ -587,8 +576,7 @@ melee_endscript_checkpositionandmovement() {
 
   if(isDefined(neworigin)) {
     self forceteleport(neworigin, self.angles);
-  }
-  else {
+  } else {
     println("Warning: Melee animation might have ended up in solid for entity #" + self getentnum());
 
   }
@@ -615,8 +603,7 @@ melee_endscript_checkstatechanges() {
     if(isDefined(self.melee.wasallowingpain)) {
       if(self.melee.wasallowingpain) {
         self enable_pain();
-      }
-      else {
+      } else {
         self disable_pain();
       }
     }
@@ -780,8 +767,7 @@ melee_aivsai_execute() {
 
   if(isDefined(self.melee.faceyaw)) {
     self orientmode("face angle", self.melee.faceyaw);
-  }
-  else {
+  } else {
     self orientmode("face current");
   }
 
@@ -844,8 +830,7 @@ melee_aivsai_getinposition_updateandvalidatetarget(initialtargetorigin, giveupti
 
   if(self.melee.precisepositioning) {
     positionthreshold = 256;
-  }
-  else {
+  } else {
     positionthreshold = 1296;
   }
 
@@ -983,8 +968,7 @@ melee_partnerendedmeleemonitorthread() {
 
       if(melee_partnerendedmeleemonitorthread_shouldanimsurvive()) {
         self.melee.survive = 1;
-      }
-      else {
+      } else {
         self notify("end_melee");
       }
     }
@@ -1051,8 +1035,7 @@ melee_handlenotetracks_death(interruptanimation) {
 
   if(isDefined(interruptanimation) && interruptanimation) {
     self.melee.interruptdeath = 1;
-  }
-  else {
+  } else {
     self.melee.animateddeath = 1;
   }
 }
@@ -1103,8 +1086,7 @@ melee_handlenotetracks(note) {
     if(isDefined(self.special_knife_attack_fx_name)) {
       if(isDefined(self.melee_weapon_ent)) {
         playFXOnTag(level._effect[self.special_knife_attack_fx_name], self.melee_weapon_ent, self.special_knife_attack_fx_tag);
-      }
-      else {
+      } else {
         playFXOnTag(level._effect[self.special_knife_attack_fx_name], self, self.special_knife_attack_fx_tag);
       }
     } else
@@ -1163,8 +1145,7 @@ melee_aivsai_chooseaction() {
     return false;
   else if(melee_aivsai_specialcover_canexecute() && melee_aivsai_specialcover_chooseanimationandposition()) {
     self.melee.precisepositioning = 1;
-  }
-  else {
+  } else {
     if(!melee_aivsai_exposed_chooseanimationandposition()) {
       return false;
     }
@@ -1281,16 +1262,14 @@ melee_aivsai_exposed_chooseanimationandposition_behind(anglediff) {
 melee_aivsai_exposed_chooseanimationandposition_buildexposedlist() {
   if(isDefined(self.meleesequenceoverride) && [[self.canexecutemeleesequenceoverride]]()) {
     exposedmelees[0] = self.meleesequenceoverride;
-  }
-  else if(isDefined(self.meleeforcedexposedflip)) {
+  } else if(isDefined(self.meleeforcedexposedflip)) {
     assert(!isDefined(self.meleeforcedexposedwrestle));
     exposedmelees[0] = ::melee_aivsai_exposed_chooseanimationandposition_flip;
   } else if(isDefined(self.meleeforcedexposedwrestle))
     exposedmelees[0] = ::melee_aivsai_exposed_chooseanimationandposition_wrestle;
   else if(isDefined(self.meleeforcedexposedbehind)) {
     exposedmelees[0] = ::melee_aivsai_exposed_chooseanimationandposition_behind;
-  }
-  else {
+  } else {
     flipindex = randomint(2);
     wrestleindex = 1 - flipindex;
     exposedmelees[flipindex] = ::melee_aivsai_exposed_chooseanimationandposition_flip;

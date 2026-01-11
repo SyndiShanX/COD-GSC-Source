@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\zm_common\zm_sq_modules;
-
 #namespace namespace_bd74bbd2;
 
 register(id, version, script_noteworthy, soul_fx, var_eb6d060d) {

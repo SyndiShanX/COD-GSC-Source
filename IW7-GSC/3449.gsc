@@ -27,8 +27,7 @@ func_2D5A() {
   for(;;) {
     if(var_00) {
       wait 0.05;
-    }
-    else {
+    } else {
       wait 0.5;
     }
 

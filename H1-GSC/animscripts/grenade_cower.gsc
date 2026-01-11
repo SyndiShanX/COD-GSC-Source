@@ -26,8 +26,7 @@ main() {
 
   if(isDefined(self.grenade)) {
     var_0 = angleclamp180(vectortoangles(self.grenade.origin - self.origin)[1] - self.angles[1]);
-  }
-  else {
+  } else {
     var_0 = self.angles[1];
   }
 
@@ -75,8 +74,7 @@ trydive(var_0) {
 
   if(abs(var_0) > 90) {
     var_1 = animscripts\utility::lookupanim("grenade", "cower_dive_back");
-  }
-  else {
+  } else {
     var_1 = animscripts\utility::lookupanim("grenade", "cower_dive_front");
   }
 

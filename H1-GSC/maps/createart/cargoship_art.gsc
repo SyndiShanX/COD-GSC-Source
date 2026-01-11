@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\cargoship_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\cargoship_fog::main();
   }
 }

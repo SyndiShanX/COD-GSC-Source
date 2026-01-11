@@ -38,8 +38,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 stage_vo_max() {
   level thread stage_vo_max_amp_broken();
@@ -86,8 +85,7 @@ mta_amplifier_found_watcher() {
 
   if(isDefined(level.rich_sq_player) && who == level.rich_sq_player) {
     level notify("mta_amp_found_by_sam");
-  }
-  else {
+  } else {
     level notify("mta_amp_found", self);
   }
 }
@@ -171,8 +169,7 @@ mta_check_all_amplifier_states() {
 
   if(is_all_filled) {
     flag_set("sq_amplifiers_on");
-  }
-  else if(is_all_broken) {
+  } else if(is_all_broken) {
     flag_set("sq_amplifiers_broken");
   }
 }

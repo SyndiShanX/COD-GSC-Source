@@ -323,8 +323,7 @@ updateLowerMessage() {
   self.lowerMessage setText(message.text);
   if(isDefined(message.time) && message.time > 0) {
     self.lowerTimer setTimer(max(message.time - ((getTime() - message.addTime) / 1000), 0.1));
-  }
-  else {
+  } else {
     self.lowerTimer setText("");
   }
 
@@ -418,8 +417,7 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
       if(isDefined(playerteam)) {
         if(playerteam == team && isDefined(printFriendly)) {
           player iprintln(printFriendly, printarg);
-        }
-        else if(playerteam == otherteam && isDefined(printEnemy)) {
+        } else if(playerteam == otherteam && isDefined(printEnemy)) {
           player iprintln(printEnemy, printarg);
         }
       }
@@ -503,11 +501,9 @@ dvarIntValue(dVar, defVal, minVal, maxVal) {
 
   if(value > maxVal) {
     value = maxVal;
-  }
-  else if(value < minVal) {
+  } else if(value < minVal) {
     value = minVal;
-  }
-  else {
+  } else {
     return value;
   }
 
@@ -526,11 +522,9 @@ dvarFloatValue(dVar, defVal, minVal, maxVal) {
 
   if(value > maxVal) {
     value = maxVal;
-  }
-  else if(value < minVal) {
+  } else if(value < minVal) {
     value = minVal;
-  }
-  else {
+  } else {
     return value;
   }
 
@@ -549,8 +543,7 @@ play_sound_on_tag(alias, tag) {
 getOtherTeam(team) {
   if(team == "allies") {
     return "axis";
-  }
-  else if(team == "axis") {
+  } else if(team == "axis") {
     return "allies";
   }
 
@@ -772,8 +765,7 @@ leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
 
       if(team == team1) {
         player leaderDialogOnPlayer(dialog1, group);
-      }
-      else if(team == team2) {
+      } else if(team == team2) {
         player leaderDialogOnPlayer(dialog2, group);
       }
     }
@@ -788,8 +780,7 @@ leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
 
       if(team == team1) {
         player leaderDialogOnPlayer(dialog1, group);
-      }
-      else if(team == team2) {
+      } else if(team == team2) {
         player leaderDialogOnPlayer(dialog2, group);
       }
     }
@@ -798,7 +789,7 @@ leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
 
 leaderDialogOnPlayers(dialog, players, group) {
   foreach(player in players) {
-  player leaderDialogOnPlayer(dialog, group);
+    player leaderDialogOnPlayer(dialog, group);
   }
 }
 
@@ -845,8 +836,7 @@ leaderDialogOnPlayer(dialog, group, groupOverride) {
 
   if(self.leaderDialogActive == "") {
     self thread playLeaderDialogOnPlayer(dialog, team);
-  }
-  else {
+  } else {
     self.leaderDialogQueue[self.leaderDialogQueue.size] = dialog;
   }
 }
@@ -908,8 +898,7 @@ updateObjectiveText() {
   if(getWatchedDvar("scorelimit") > 0 && !isObjectiveBased()) {
     if(level.splitScreen) {
       self setclientdvar("cg_objectiveText", getObjectiveScoreText(self.pers["team"]));
-    }
-    else {
+    } else {
       self setclientdvar("cg_objectiveText", getObjectiveScoreText(self.pers["team"]), getWatchedDvar("scorelimit"));
     }
   } else {
@@ -951,8 +940,7 @@ getTimePassed() {
 
   if(level.timerStopped) {
     return (level.timerPauseTime - level.startTime) - level.discardTime;
-  }
-  else {
+  } else {
     return (gettime() - level.startTime) - level.discardTime;
   }
 }
@@ -983,11 +971,9 @@ isValidClass(class) {
 getValueInRange(value, minValue, maxValue) {
   if(value > maxValue) {
     return maxValue;
-  }
-  else if(value < minValue) {
+  } else if(value < minValue) {
     return minValue;
-  }
-  else {
+  } else {
     return value;
   }
 }
@@ -1038,8 +1024,7 @@ registerRoundSwitchDvar(dvarString, defaultValue, minValue, maxValue) {
 
   if(level.roundswitch < minValue) {
     level.roundswitch = minValue;
-  }
-  else if(level.roundswitch > maxValue) {
+  } else if(level.roundswitch > maxValue) {
     level.roundswitch = maxValue;
   }
 }
@@ -1213,7 +1198,7 @@ restoreData() {
   }
 
   foreach(slotID, actionSlot in saveData.actionSlots) {
-  self _setActionSlot(slotID, actionSlot.type, actionSlot.item);
+    self _setActionSlot(slotID, actionSlot.type, actionSlot.item);
   }
 
   if(self getCurrentWeapon() == "none") {
@@ -1283,11 +1268,9 @@ updateWatchedDvars() {
     foreach(dvarString in watchDvars) {
       if(level.watchDvars[dvarString].type == "string") {
         dvarValue = getProperty(dvarString, level.watchDvars[dvarString].value);
-      }
-      else if(level.watchDvars[dvarString].type == "float") {
+      } else if(level.watchDvars[dvarString].type == "float") {
         dvarValue = getFloatProperty(dvarString, level.watchDvars[dvarString].value);
-      }
-      else {
+      } else {
         dvarValue = getIntProperty(dvarString, level.watchDvars[dvarString].value);
       }
 
@@ -1413,8 +1396,7 @@ getScoreLimit() {
   if(isRoundBased()) {
     if(getWatchedDvar("roundlimit")) {
       return (getWatchedDvar("roundlimit"));
-    }
-    else {
+    } else {
       return (getWatchedDvar("winlimit"));
     }
   } else {
@@ -1436,8 +1418,7 @@ getTimeLimit() {
 
     if(isDefined(timeLimit)) {
       return timeLimit;
-    }
-    else {
+    } else {
       return 1;
     }
   } else if(isDefined(level.dd) && level.dd && isDefined(level.bombexploded) && level.bombexploded > 0) //to handle extra time added by dd bombs
@@ -1451,11 +1432,9 @@ getTimeLimit() {
 getHalfTime() {
   if(inOvertime()) {
     return false;
-  }
-  else if(isDefined(game["inNukeOvertime"]) && game["inNukeOvertime"]) {
+  } else if(isDefined(game["inNukeOvertime"]) && game["inNukeOvertime"]) {
     return false;
-  }
-  else {
+  } else {
     return getWatchedDvar("halftime");
   }
 }
@@ -1467,8 +1446,7 @@ inOvertime() {
 gameHasStarted() {
   if(level.teamBased) {
     return (level.hasSpawned["axis"] && level.hasSpawned["allies"]);
-  }
-  else {
+  } else {
     return (level.maxPlayerCount > 1);
   }
 }
@@ -1481,7 +1459,7 @@ getAverageOrigin(ent_array) {
   }
 
   foreach(ent in ent_array) {
-  avg_origin += ent.origin;
+    avg_origin += ent.origin;
   }
 
   avg_x = int(avg_origin[0] / ent_array.size);
@@ -1593,8 +1571,7 @@ queueRemoveFirst(queueName) {
 
     if(!isDefined(first)) {
       first = element;
-    }
-    else {
+    } else {
       newQueue[newQueue.size] = element;
     }
   }
@@ -1611,8 +1588,7 @@ _giveWeapon(weapon, variant, dualWieldOverRide) {
 
   if(isSubstr(weapon, "_akimbo") || isDefined(dualWieldOverRide) && dualWieldOverRide == true) {
     self giveWeapon(weapon, variant, true);
-  }
-  else {
+  } else {
     self giveWeapon(weapon, variant, false);
   }
 }
@@ -1698,8 +1674,7 @@ swap(array, index1, index2) {
 _suicide() {
   if(self isUsingRemote() && !isDefined(self.fauxDead)) {
     self thread maps\mp\gametypes\_damage::PlayerKilled_internal(self, self, self, 10000, "MOD_SUICIDE", "frag_grenade_mp", (0, 0, 0), "none", 0, 1116, true);
-  }
-  else if(!self isUsingRemote() && !isDefined(self.fauxDead)) {
+  } else if(!self isUsingRemote() && !isDefined(self.fauxDead)) {
     self suicide();
   }
 }
@@ -1717,8 +1692,7 @@ playDeathSound() {
 
   if(self.team == "axis") {
     self playSound("generic_death_russian_" + rand);
-  }
-  else {
+  } else {
     self playSound("generic_death_american_" + rand);
   }
 }
@@ -1747,7 +1721,7 @@ setAltSceneObj(object, tagName, fov, forceLink) {
   if( !getDvarInt( "scr_pipmode" ) && !forceLink ) {
   	return;
   }
-	
+  	
   self endon ( "disconnect" );
 
   if( !isReallyAlive( self ) ) {
@@ -1759,24 +1733,24 @@ setAltSceneObj(object, tagName, fov, forceLink) {
   }
 
   self notify ( "altscene" );
-	
+  	
   self.altSceneObject = object;
 
   self AlternateSceneCameraLinkTo( object, tagName, fov );
   self setClientDvar( "ui_altscene", 1 );
-	
+  	
   self thread endSceneOnDeath( object );
   self thread endSceneOnDeath( self );
-	
+  	
   self waittill ( "end_altScene" );
-	
+  	
   self.altSceneObject = undefined;
   self AlternateSceneCameraUnlink();
-	
+  	
   if( !forceLink )
   {
   	self setClientDvar( "ui_altscene", 2 );
-	
+  	
   	self endon ( "altscene" );
   	wait ( 2.0 );
   }
@@ -1818,7 +1792,7 @@ giveAdrenaline(type) {
   printLn( "setting: " + type + " " + level.adrenalineInfo[type] );
 
   self setAdrenaline( self.adrenaline + level.adrenalineInfo[type] );
-	
+  	
   if( self.adrenaline == 1000 )
   {
   	giveCombatHigh( "specialty_endgame" );
@@ -1854,7 +1828,7 @@ getProperty(dvar, defValue) {
 
   setDevDvarIfUninitialized(dvar, defValue);
 
-    value = getDvar(dvar, defValue);
+  value = getDvar(dvar, defValue);
   return value;
 }
 
@@ -1863,7 +1837,7 @@ getIntProperty(dvar, defValue) {
 
   setDevDvarIfUninitialized(dvar, defValue);
 
-    value = getDvarInt(dvar, defValue);
+  value = getDvarInt(dvar, defValue);
   return value;
 }
 
@@ -1872,7 +1846,7 @@ getFloatProperty(dvar, defValue) {
 
   setDevDvarIfUninitialized(dvar, defValue);
 
-    value = getDvarFloat(dvar, defValue);
+  value = getDvarFloat(dvar, defValue);
   return value;
 }
 
@@ -1953,14 +1927,11 @@ getWeaponClass(weapon) {
 
   if(isMG(weapon)) {
     weaponClass = "weapon_mg";
-  }
-  else if(isKillstreakWeapon(weapon)) {
+  } else if(isKillstreakWeapon(weapon)) {
     weaponClass = "killstreak";
-  }
-  else if(isDeathStreakWeapon(weapon)) {
+  } else if(isDeathStreakWeapon(weapon)) {
     weaponClass = "deathstreak";
-  }
-  else if(weapon == "none") //airdrop crates
+  } else if(weapon == "none") //airdrop crates
     weaponClass = "other";
   else if(weaponClass == "") {
     weaponClass = "other";
@@ -1974,8 +1945,7 @@ getWeaponClass(weapon) {
 isDeathStreakWeapon(weapon) {
   if(weapon == "c4death_mp" || weapon == "frag_grenade_short_mp") {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2016,11 +1986,9 @@ roundDecimalPlaces(value, places, style) {
 
   if(style == "up") {
     roundedValue = ceil(newValue);
-  }
-  else if(style == "down") {
+  } else if(style == "down") {
     roundedValue = floor(newValue);
-  }
-  else {
+  } else {
     roundedValue = newvalue + 0.5;
   }
 
@@ -2070,8 +2038,7 @@ setSelfUsable(caller) {
   foreach(player in level.players) {
     if(player != caller) {
       self disablePlayerUse(player);
-    }
-    else {
+    } else {
       self enablePlayerUse(player);
     }
   }
@@ -2089,8 +2056,7 @@ _updateTeamUsable(team) {
     foreach(player in level.players) {
       if(player.team == team) {
         self enablePlayerUse(player);
-      }
-      else {
+      } else {
         self disablePlayerUse(player);
       }
     }
@@ -2119,8 +2085,7 @@ _updateEnemyUsable(owner) {
       foreach(player in level.players) {
         if(player.team != team) {
           self enablePlayerUse(player);
-        }
-        else {
+        } else {
           self disablePlayerUse(player);
         }
       }
@@ -2128,8 +2093,7 @@ _updateEnemyUsable(owner) {
       foreach(player in level.players) {
         if(player != owner) {
           self enablePlayerUse(player);
-        }
-        else {
+        } else {
           self disablePlayerUse(player);
         }
       }
@@ -2268,8 +2232,7 @@ isEMPed() {
 
   if(level.teamBased) {
     return (level.teamEMPed[self.team]);
-  }
-  else {
+  } else {
     return (isDefined(level.empPlayer) && level.empPlayer != self);
   }
 }
@@ -2390,8 +2353,7 @@ waitTillRecoveredHealth(time, interval) {
   while(1) {
     if(self.health != self.maxhealth) {
       fullHealthTime = 0;
-    }
-    else {
+    } else {
       fullHealthTime += interval;
     }
 
@@ -2437,8 +2399,7 @@ touchingBadTrigger() {
 setThirdPersonDOF(isEnabled) {
   if(isEnabled) {
     self setDepthOfField(0, 110, 512, 4096, 6, 1.8);
-  }
-  else {
+  } else {
     self setDepthOfField(0, 0, 512, 512, 4, 0);
   }
 }
@@ -2450,19 +2411,19 @@ killTrigger(pos, radius, height) {
     thread killTriggerDebug(pos, radius, height);
   }
 
-    for(;;) {
-      if(getdvar("scr_killtriggerradius") != "") {
-        radius = int(getdvar("scr_killtriggerradius"));
-      }
-
-        trig waittill("trigger", player);
-
-      if(!isPlayer(player)) {
-        continue;
-      }
-
-      player suicide();
+  for(;;) {
+    if(getdvar("scr_killtriggerradius") != "") {
+      radius = int(getdvar("scr_killtriggerradius"));
     }
+
+    trig waittill("trigger", player);
+
+    if(!isPlayer(player)) {
+      continue;
+    }
+
+    player suicide();
+  }
 }
 
 killTriggerDebug(pos, radius, height) {

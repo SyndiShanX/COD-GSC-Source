@@ -39,8 +39,7 @@ leapfrog_masterthread() {
   while(true) {
     if(!level.leap_delay_override) {
       wait(randomFloatRange(level.leap_delay_min, level.leap_delay_max));
-    }
-    else {
+    } else {
       wait .05;
     }
 
@@ -80,8 +79,7 @@ leapfrog_masterthread() {
     // reset future ai count
     if(isDefined(next_node.leapfrog_ai_count)) {
       next_node.leapfrog_future_ai_count = next_node.leapfrog_ai_count;
-    }
-    else {
+    } else {
       next_node.leapfrog_future_ai_count = 0;
     }
 
@@ -223,8 +221,7 @@ add_leap_node(node, weight) {
 
   if(isDefined(weight)) {
     node.leap_weight = weight;
-  }
-  else {
+  } else {
     node.leap_weight += 2;
   }
 

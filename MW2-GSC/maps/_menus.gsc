@@ -698,8 +698,7 @@ setSelected(transTime, isSelected) {
   if(isSelected) {
     if(self.parentDef == level.curMenu) {
       self setElemAlpha(1);
-    }
-    else {
+    } else {
       self setElemAlpha(0.5);
     }
 
@@ -709,8 +708,7 @@ setSelected(transTime, isSelected) {
   } else {
     if(self.parentDef == level.curMenu) {
       self setElemAlpha(0.5);
-    }
-    else {
+    } else {
       self setElemAlpha(0.25);
     }
 
@@ -787,16 +785,15 @@ onButtonA() {
 
   if(focusedItem.itemType == "subMenu") {
     pushMenu(focusedItem);
-  }
-  else if(focusedItem.itemType == "item") {
+  } else if(focusedItem.itemType == "item") {
     /*		if( isDefined( focusedItem.argument ) )
     			level thread [[focusedItem.callback]]( focusedItem.argument );
     		else {
     			level thread [[focusedItem.callback]]();*/
-    		}
-
-    focusedItem thread runAction();
   }
+
+  focusedItem thread runAction();
+}
 }
 
 onDPadLeft() {
@@ -914,8 +911,7 @@ runAction() {
   if(isDefined(self.action)) {
     if(isDefined(self.action.arg1)) {
       thread[[self.action.name]](self.action.arg1);
-    }
-    else {
+    } else {
       thread[[self.action.name]]();
     }
   }

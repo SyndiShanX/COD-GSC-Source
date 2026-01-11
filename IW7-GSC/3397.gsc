@@ -193,15 +193,14 @@ func_AF90(var_00, var_01, var_02, var_03) {
   scripts\cp\cp_analytics::func_AF6A("wave_complete", 1, [level.script, var_00, var_01, var_02, var_03], [level.script]);
 
   foreach(var_05 in level.players) {
-  var_5.logevent = "wave_complete";
+    var_5.logevent = "wave_complete";
   }
 }
 
 func_AF68(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   if(isDefined(var_04)) {
     var_08 = var_4.agent_type;
-  }
-  else {
+  } else {
     var_08 = "";
   }
 
@@ -275,15 +274,13 @@ log_purchasingaweapon(var_00, var_01, var_02, var_03, var_04, var_05, var_06, va
 
     if(isDefined(var_7[var_03])) {
       var_09 = var_7[var_03];
-    }
-    else {
+    } else {
       var_09 = 0;
     }
 
     if(isDefined(var_8[var_03])) {
       var_10 = var_8[var_03];
-    }
-    else {
+    } else {
       var_10 = 0;
     }
 
@@ -527,8 +524,7 @@ func_AF91(var_00, var_01) {
 
       if(!isDefined(var_1.aggregateweaponkills[var_04])) {
         var_01 setrankedplayerdata("cp", "DeadliestWeaponKills", var_04, var_10);
-      }
-      else {
+      } else {
         var_01 setrankedplayerdata("cp", "DeadliestWeaponKills", var_04, var_10);
       }
 
@@ -539,8 +535,7 @@ func_AF91(var_00, var_01) {
 
     if(!isDefined(var_1.aggregateweaponkills[var_09])) {
       var_01 setrankedplayerdata("cp", "DeadliestWeaponKills", var_09, var_11);
-    }
-    else {
+    } else {
       var_01 setrankedplayerdata("cp", "DeadliestWeaponKills", var_09, var_1.aggregateweaponkills[var_09] + var_11);
     }
 

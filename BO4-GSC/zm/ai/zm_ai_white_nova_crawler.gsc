@@ -22,11 +22,10 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_ai_white_nova_crawler;
 
 autoexec __init__system__() {
-  system::register(#"zm_ai_white_nova_crawler", &__init__, &__main__, #"zm_ai_nova_crawler");
+  system::register(#"zm_ai_white_nova_crawler", &__init__, &__main__, # "zm_ai_nova_crawler");
 }
 
 __init__() {
@@ -90,7 +89,7 @@ __init__() {
   adddebugcommand("<dev string:x86>");
   adddebugcommand("<dev string:xbb>");
 
-    clientfield::register("actor", "nova_buff_aura_clientfield", 8000, 1, "int");
+  clientfield::register("actor", "nova_buff_aura_clientfield", 8000, 1, "int");
   clientfield::register("actor", "white_nova_crawler_phase_end_clientfield", 8000, 1, "counter");
   clientfield::register("actor", "nova_gas_cloud_fx_clientfield", 8000, 1, "counter");
   clientfield::register("actor", "white_nova_crawler_spore_impact_clientfield", 8000, 1, "counter");
@@ -144,18 +143,18 @@ private function_582a3075() {
     self.can_shoot = 0;
     self.var_349e111e = 0;
     self.var_f1f44412 = 1;
-    self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_aura";
+    self._effect[# "nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_aura";
   }
 
   self thread function_536a70c5();
 }
 
 private function_2e8ceddd() {
-  return isDefined(self.subarchetype) && self.subarchetype == #"blue_nova_crawler";
+  return isDefined(self.subarchetype) && self.subarchetype == # "blue_nova_crawler";
 }
 
 private function_b06bbbba() {
-  return isDefined(self.subarchetype) && self.subarchetype == #"ranged_nova_crawler";
+  return isDefined(self.subarchetype) && self.subarchetype == # "ranged_nova_crawler";
 }
 
 private function_605e733f() {
@@ -166,7 +165,7 @@ private function_605e733f() {
   self.b_ignore_cleanup = 1;
   self.ignore_nuke = 1;
   self.ignoreme = 1;
-  self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_mq_aura";
+  self._effect[# "nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_mq_aura";
 }
 
 private function_ee3e7dc8() {
@@ -175,9 +174,9 @@ private function_ee3e7dc8() {
   self.can_phase = 1;
   self.var_349e111e = 0;
   self.var_f1f44412 = 0;
-  self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_elec_aura";
-  self._effect[#"hash_571a3bab8b805854"] = "zm_ai/fx8_nova_crawler_elec_teleport_flash";
-  self._effect[#"nova_crawler_phase_teleport_end_fx"] = "zm_ai/fx8_nova_crawler_elec_teleport_appear";
+  self._effect[# "nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_elec_aura";
+  self._effect[# "hash_571a3bab8b805854"] = "zm_ai/fx8_nova_crawler_elec_teleport_flash";
+  self._effect[# "nova_crawler_phase_teleport_end_fx"] = "zm_ai/fx8_nova_crawler_elec_teleport_appear";
   self playSound(#"hash_27b6a39054ad63ec");
 }
 
@@ -461,16 +460,16 @@ private function_3bd2bba5(entity) {
 private function_46660930() {
   self endon(#"death");
   origin = self gettagorigin("j_spine4");
-  playFX(self._effect[#"hash_571a3bab8b805854"], origin);
+  playFX(self._effect[# "hash_571a3bab8b805854"], origin);
   self hide();
   self collidewithactors(0);
-  self waittilltimeout(1, #"phase_end");
+  self waittilltimeout(1, # "phase_end");
   self show();
   self collidewithactors(1);
 
   if(self.health > 0) {
-    zm_net::network_safe_play_fx_on_tag("nova_crawler_aura", 2, self._effect[#"nova_crawler_aura_fx"], self, "j_spine4");
-    zm_net::network_safe_play_fx_on_tag("nova_crawler_phase_teleport_end_fx", 2, self._effect[#"nova_crawler_phase_teleport_end_fx"], self, "j_spine4");
+    zm_net::network_safe_play_fx_on_tag("nova_crawler_aura", 2, self._effect[# "nova_crawler_aura_fx"], self, "j_spine4");
+    zm_net::network_safe_play_fx_on_tag("nova_crawler_phase_teleport_end_fx", 2, self._effect[# "nova_crawler_phase_teleport_end_fx"], self, "j_spine4");
     playrumbleonposition("zm_nova_phase_exit_rumble", self.origin);
   }
 }
@@ -504,9 +503,9 @@ private function_9fcedb9c(entity, asmstatename) {
 }
 
 private function_ac651298(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
-  if(self.archetype == #"nova_crawler" && isDefined(self.var_b421bafe) && self.var_b421bafe && self.var_71841cf9 == -1) {
+  if(self.archetype == # "nova_crawler" && isDefined(self.var_b421bafe) && self.var_b421bafe && self.var_71841cf9 == -1) {
     self.var_71841cf9 = gettime() + randomfloatrange(1, 3) * 1000;
-  } else if(self.archetype == #"nova_crawler" && isDefined(self.subarchetype) && self.subarchetype == #"blue_nova_crawler" && !isplayer(attacker)) {
+  } else if(self.archetype == # "nova_crawler" && isDefined(self.subarchetype) && self.subarchetype == # "blue_nova_crawler" && !isplayer(attacker)) {
     return 0;
   }
 
@@ -601,7 +600,7 @@ private function_c708afa4(entity) {
   var_96820b80 = function_51e81aba(level.white_nova_crawler_sniper_escape_locations);
 
   if(isDefined(var_96820b80)) {
-    playFX(self._effect[#"hash_571a3bab8b805854"], entity.origin);
+    playFX(self._effect[# "hash_571a3bab8b805854"], entity.origin);
     entity forceteleport(var_96820b80.origin, var_96820b80.angles);
     function_c33d4387();
     entity.var_b421bafe = 0;
@@ -679,7 +678,7 @@ private function_270b3dee(entity) {
 private function_91582c6(entity, start_location, target_location) {
   weapon_name = "white_nova_crawler_projectile";
 
-  if(isDefined(entity.subarchetype) && entity.subarchetype == #"blue_nova_crawler") {
+  if(isDefined(entity.subarchetype) && entity.subarchetype == # "blue_nova_crawler") {
     weapon_name = "blue_nova_crawler_projectile";
   }
 
@@ -688,7 +687,7 @@ private function_91582c6(entity, start_location, target_location) {
 }
 
 private function_7d162bd0(projectile, entity) {
-  result = projectile waittill(#"projectile_impact_player", #"death");
+  result = projectile waittill(#"projectile_impact_player", # "death");
 
   if(isDefined(projectile.origin)) {
     level thread function_5c3c88fe(projectile.origin);
@@ -700,7 +699,7 @@ function_c36cef22(origin) {
   zombies = getaiteamarray(level.zombie_team);
 
   foreach(zombie in zombies) {
-    if(zombie != #"nova_crawler" && distancesquared(origin, zombie.origin) <= 6400) {
+    if(zombie != # "nova_crawler" && distancesquared(origin, zombie.origin) <= 6400) {
       zombie thread function_850768d1();
     }
   }
@@ -764,7 +763,7 @@ function_850768d1(b_respawn = 0) {
   self notify("4757156a6fd357df");
   self endon("4757156a6fd357df");
 
-  if(!isDefined(self.var_6e2628f7) && self.archetype == #"zombie") {
+  if(!isDefined(self.var_6e2628f7) && self.archetype == # "zombie") {
     if(!b_respawn) {
       self.health = int(self.health * 2);
     }
@@ -852,7 +851,7 @@ private function_1ded4b3e(entity) {
 
     if(ai_zombies.size > 0) {
       foreach(zombie in ai_zombies) {
-        if(zombie.archetype == #"zombie" && isalive(zombie) && !(isDefined(zombie.var_6e2628f7) && zombie.var_6e2628f7)) {
+        if(zombie.archetype == # "zombie" && isalive(zombie) && !(isDefined(zombie.var_6e2628f7) && zombie.var_6e2628f7)) {
           result = 1;
           break;
         }
@@ -873,7 +872,7 @@ private function_13d38964(entity) {
 
     if(ai_zombies.size > 0) {
       foreach(zombie in ai_zombies) {
-        if(zombie.archetype == #"zombie" && isalive(zombie) && !(isDefined(zombie.var_6e2628f7) && zombie.var_6e2628f7)) {
+        if(zombie.archetype == # "zombie" && isalive(zombie) && !(isDefined(zombie.var_6e2628f7) && zombie.var_6e2628f7)) {
           spore = function_d24f01d4();
 
           if(isDefined(spore)) {

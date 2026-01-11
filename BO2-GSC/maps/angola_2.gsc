@@ -267,8 +267,7 @@ init_flags() {
   flag_init("player_on_sniper_tree");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 setup_skiptos() {
   add_skipto("riverbed_intro", ::angola_skipto);

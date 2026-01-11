@@ -163,8 +163,7 @@ tirecheat_dogs_enemy_spawned() {
 tire_explosionmode(var_0) {
   if(var_0) {
     level.tire_explosion = 1;
-  }
-  else {
+  } else {
     level.tire_explosion = 0;
   }
 }
@@ -172,8 +171,7 @@ tire_explosionmode(var_0) {
 clustergrenademode(var_0) {
   if(var_0) {
     level.player thread wait_for_grenades();
-  }
-  else {
+  } else {
     level notify("end_cluster_grenades");
   }
 }
@@ -234,8 +232,7 @@ ignore_ammomode(var_0) {
   }
   if(var_0) {
     setsaveddvar("player_sustainAmmo", 1);
-  }
-  else {
+  } else {
     setsaveddvar("player_sustainAmmo", 0);
   }
 }
@@ -243,8 +240,7 @@ ignore_ammomode(var_0) {
 contrastmode(var_0) {
   if(var_0) {
     level.visionsets["contrast"] = 1;
-  }
-  else {
+  } else {
     level.visionsets["contrast"] = 0;
   }
 
@@ -254,8 +250,7 @@ contrastmode(var_0) {
 bwmode(var_0) {
   if(var_0) {
     level.visionsets["bw"] = 1;
-  }
-  else {
+  } else {
     level.visionsets["bw"] = 0;
   }
 
@@ -265,8 +260,7 @@ bwmode(var_0) {
 invertmode(var_0) {
   if(var_0) {
     level.visionsets["invert"] = 1;
-  }
-  else {
+  } else {
     level.visionsets["invert"] = 0;
   }
 
@@ -344,8 +338,7 @@ slowmo_hintprint() {
 
   if(level.console) {
     var_0 = 5;
-  }
-  else {
+  } else {
     var_0 = 6;
   }
 
@@ -426,8 +419,7 @@ gamespeed_proc() {
     if(!common_scripts\utility::flag("disable_slowmo_cheat")) {
       if(gettimescale() < level.slowmo.speed_norm) {
         thread gamespeed_reset();
-      }
-      else {
+      } else {
         thread gamespeed_slowmo();
       }
     }
@@ -658,8 +650,7 @@ melonhead_monitor() {
   for(;;) {
     if(level.melonhead_mode_enabled) {
       melonhead_add_melon();
-    }
-    else {
+    } else {
       melonhead_remove_melon();
     }
 
@@ -744,8 +735,7 @@ handgun_mode_update(var_0) {
 
   if(level.cheat_handgun) {
     givehandgun();
-  }
-  else {
+  } else {
     takehandgun();
   }
 }
@@ -757,8 +747,7 @@ handgun_monitor() {
   for(;;) {
     if(level.player weaponpickupenabled() == 1 && level.player getcurrentweapon() == level.cheat_handgun_weaponname) {
       level.player maps\_utility::playerallowweaponpickup(0, "cheat_handgun");
-    }
-    else if(level.player weaponpickupenabled() == 0 && level.player getcurrentweapon() != level.cheat_handgun_weaponname) {
+    } else if(level.player weaponpickupenabled() == 0 && level.player getcurrentweapon() != level.cheat_handgun_weaponname) {
       level.player maps\_utility::playerallowweaponpickup(1, "cheat_handgun");
     }
 
@@ -830,8 +819,7 @@ lemonade_mode_update(var_0) {
 
   if(level.cheat_lemonade) {
     givelemonade();
-  }
-  else {
+  } else {
     takelemonade();
   }
 }
@@ -897,8 +885,7 @@ tracksuit_monitor() {
   for(;;) {
     if(level.tracksuit_mode_enabled) {
       add_tracksuit();
-    }
-    else {
+    } else {
       remove_tracksuit();
     }
 

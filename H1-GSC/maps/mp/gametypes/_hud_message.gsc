@@ -183,8 +183,7 @@ dispatchnotify(var_0) {
 
   if(isDefined(var_1.name)) {
     actionnotify(var_1);
-  }
-  else {
+  } else {
     shownotifymessage(var_1);
   }
 }
@@ -236,11 +235,9 @@ shownotifymessage(var_0) {
 
   if(isDefined(var_0.duration)) {
     var_2 = var_0.duration;
-  }
-  else if(level.gameended) {
+  } else if(level.gameended) {
     var_2 = 2.0;
-  }
-  else {
+  } else {
     var_2 = 4.0;
   }
 
@@ -258,15 +255,13 @@ shownotifymessage(var_0) {
   if(isDefined(var_0.titletext)) {
     if(isDefined(var_0.titlelabel)) {
       self.notifytitle.label = var_0.titlelabel;
-    }
-    else {
+    } else {
       self.notifytitle.label = &"";
     }
 
     if(isDefined(var_0.titlelabel) && !isDefined(var_0.titleisstring)) {
       self.notifytitle setvalue(var_0.titletext);
-    }
-    else {
+    } else {
       self.notifytitle settext(var_0.titletext);
     }
 
@@ -286,15 +281,13 @@ shownotifymessage(var_0) {
   if(isDefined(var_0.notifytext)) {
     if(isDefined(var_0.textlabel)) {
       self.notifytext.label = var_0.textlabel;
-    }
-    else {
+    } else {
       self.notifytext.label = &"";
     }
 
     if(isDefined(var_0.textlabel) && !isDefined(var_0.textisstring)) {
       self.notifytext setvalue(var_0.notifytext);
-    }
-    else {
+    } else {
       self.notifytext settext(var_0.notifytext);
     }
 
@@ -313,8 +306,7 @@ shownotifymessage(var_0) {
 
     if(isDefined(var_0.text2label)) {
       self.notifytext2.label = var_0.text2label;
-    }
-    else {
+    } else {
       self.notifytext2.label = &"";
     }
 
@@ -335,8 +327,7 @@ shownotifymessage(var_0) {
 
     if(level.splitscreen || self issplitscreenplayer()) {
       self.notifyicon setshader(var_0.iconname, 30, 30);
-    }
-    else {
+    } else {
       self.notifyicon setshader(var_0.iconname, 60, 60);
     }
 
@@ -474,8 +465,7 @@ challengesplashnotify(var_0, var_1, var_2) {
 
     if(var_0 == "ch_longersprint_pro" || var_0 == "ch_longersprint_pro_daily" || var_0 == "ch_longersprint_pro_weekly") {
       var_4 = int(var_4 / 528);
-    }
-    else if(var_0 == "ch_exomech_frontier") {
+    } else if(var_0 == "ch_exomech_frontier") {
       var_4 = int(var_4 / 528);
     }
 
@@ -704,36 +694,31 @@ actionnotifymessage(var_0) {
 
         if(isDefined(var_0.playercardplayer) && var_0.playercardplayer != self) {
           self setclientomnvar("ui_splash_killstreak_clientnum", var_0.playercardplayer getentitynumber());
-        }
-        else {
+        } else {
           self setclientomnvar("ui_splash_killstreak_clientnum", -1);
         }
 
         if(isDefined(var_0.optionalnumber)) {
           self setclientomnvar("ui_splash_killstreak_optional_number", var_0.optionalnumber);
-        }
-        else {
+        } else {
           self setclientomnvar("ui_splash_killstreak_optional_number", 0);
         }
 
         if(isDefined(var_0.module1idx)) {
           self setclientomnvar("ui_splash_killstreak_mod_1", var_0.module1idx);
-        }
-        else {
+        } else {
           self setclientomnvar("ui_splash_killstreak_mod_1", -1);
         }
 
         if(isDefined(var_0.module2idx)) {
           self setclientomnvar("ui_splash_killstreak_mod_2", var_0.module2idx);
-        }
-        else {
+        } else {
           self setclientomnvar("ui_splash_killstreak_mod_2", -1);
         }
 
         if(isDefined(var_0.module3idx)) {
           self setclientomnvar("ui_splash_killstreak_mod_3", var_0.module3idx);
-        }
-        else {
+        } else {
           self setclientomnvar("ui_splash_killstreak_mod_3", -1);
         }
 
@@ -801,8 +786,7 @@ actionnotifymessage(var_0) {
     if(isDefined(var_0.leadersound)) {
       if(isDefined(var_0.leadersoundgroup)) {
         maps\mp\_utility::leaderdialogonplayer(var_0.leadersound, var_0.leadersoundgroup, 1);
-      }
-      else {
+      } else {
         maps\mp\_utility::leaderdialogonplayer(var_0.leadersound);
       }
     }
@@ -907,11 +891,9 @@ outcomeoverlay(var_0) {
   if(level.teambased) {
     if(var_0 == "tie") {
       matchoutcomenotify("draw");
-    }
-    else if(var_0 == self.team) {
+    } else if(var_0 == self.team) {
       matchoutcomenotify("victory");
-    }
-    else {
+    } else {
       matchoutcomenotify("defeat");
     }
   } else if(var_0 == self)
@@ -1029,8 +1011,7 @@ teamoutcomenotify(var_0, var_1, var_2, var_3) {
   } else if(var_0 == "tie") {
     if(var_1) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["round_draw"]);
-    }
-    else {
+    } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["draw"]);
     }
 
@@ -1040,8 +1021,7 @@ teamoutcomenotify(var_0, var_1, var_2, var_3) {
   else if(isDefined(self.pers["team"]) && var_0 == var_4) {
     if(var_1) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["round_win"]);
-    }
-    else {
+    } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["victory"]);
     }
   } else if(var_1)
@@ -1092,19 +1072,16 @@ outcomenotify(var_0, var_1) {
   if(isDefined(var_3) && self.score == var_3.score && self.deaths == var_3.deaths) {
     if(self != var_3) {
       var_6 = 1;
-    }
-    else if(isDefined(var_4) && var_4.score == var_3.score && var_4.deaths == var_3.deaths) {
+    } else if(isDefined(var_4) && var_4.score == var_3.score && var_4.deaths == var_3.deaths) {
       var_6 = 1;
     }
   }
 
   if(var_6) {
     self setclientomnvar("ui_round_end_title", game["round_end"]["tie"]);
-  }
-  else if(isDefined(var_3) && self == var_3) {
+  } else if(isDefined(var_3) && self == var_3) {
     self setclientomnvar("ui_round_end_title", game["round_end"]["victory"]);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_round_end_title", game["round_end"]["defeat"]);
   }
 

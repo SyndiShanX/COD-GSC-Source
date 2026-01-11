@@ -119,7 +119,7 @@ init() {
     }
 
     foreach(var_17 in var_12) {
-    level.weaponlist[level.weaponlist.size] = var_5 + "_" + var_17 + "_mp";
+      level.weaponlist[level.weaponlist.size] = var_5 + "_" + var_17 + "_mp";
     }
   }
 
@@ -318,8 +318,7 @@ onplayerspawned() {
     thread watchweaponinspection();
     thread maps\mp\_javelin::JavelinUsageLoop();
 
-    if(!isDefined(level.iszombiegame) || !level.iszombiegame) {
-    }
+    if(!isDefined(level.iszombiegame) || !level.iszombiegame) {}
 
     thread stancerecoiladjuster();
     thread maps\mp\_opticsthermal::opticsthermal_think();
@@ -876,8 +875,7 @@ handlescavengerbagpickup() {
 
     if(!isDefined(destPlayer) || !isPlayer(destPlayer) || !maps\mp\_utility::isReallyAlive(destPlayer) || !destPlayer maps\mp\_utility::_hasPerk("specialty_scavenger")) {
       continue;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -1202,8 +1200,7 @@ watchgrenadeusage() {
   if(maps\mp\_utility::getintproperty("scr_deleteexplosivesonspawn", 1) == 1) {
     if(isDefined(self.dont_delete_grenades_on_next_spawn)) {
       self.dont_delete_grenades_on_next_spawn = undefined;
-    }
-    else {
+    } else {
       delete_all_grenades();
     }
   } else {
@@ -1243,8 +1240,7 @@ watchgrenadeusage() {
 
     if(var_0 == "h1_c4_mp") {
       beginc4tracking();
-    }
-    else {
+    } else {
       begingrenadetracking();
     }
 
@@ -1538,8 +1534,7 @@ flashbangplayer(var_0, var_1, var_2) {
   }
   if(var_8 <= var_4) {
     var_9 = 1.0;
-  }
-  else {
+  } else {
     var_9 = 1.0 - (var_8 - var_4) / (var_3 - var_4);
   }
 
@@ -1580,7 +1575,7 @@ doninebang(var_0, var_1) {
       playsoundatpos(var_0, "null");
 
       foreach(var_5 in level.players) {
-      flashbangplayer(var_5, var_0, var_1);
+        flashbangplayer(var_5, var_0, var_1);
       }
     }
 
@@ -1736,8 +1731,7 @@ updateHudOutline(grn) {
       if(self.team == player.team) {
         if(self == player) {
           grn hudoutlineenableforclient(player, 1, 0);
-        }
-        else if(level.teamBased) {
+        } else if(level.teamBased) {
           grn hudoutlineenableforclient(player, 5, 0);
         }
       }
@@ -1823,8 +1817,7 @@ setmineteamheadicon(var_0) {
 
     if(level.teambased) {
       maps\mp\_entityheadicons::setteamheadicon(var_0, (0.0, 0.0, 20.0));
-    }
-    else if(isDefined(self.owner)) {
+    } else if(isDefined(self.owner)) {
       maps\mp\_entityheadicons::setplayerheadicon(self.owner, (0.0, 0.0, 20.0));
     }
   }
@@ -1851,8 +1844,7 @@ watchclaymores() {
       if(self.claymorearray.size >= level.maxperplayerexplosives) {
         if(!maps\mp\_utility::invirtuallobby()) {
           deleteequipment(self.claymorearray[0]);
-        }
-        else {
+        } else {
           self.claymorearray[0] detonate();
         }
       }
@@ -1904,11 +1896,9 @@ equipmentenableuse(var_0) {
 
   if(self.weaponname == "h1_c4_mp") {
     self.trigger sethintstring(&"LUA_C4_PICKUP");
-  }
-  else if(self.weaponname == "h1_claymore_mp") {
+  } else if(self.weaponname == "h1_claymore_mp") {
     self.trigger sethintstring(&"LUA_CLAYMORE_PICKUP");
-  }
-  else if(self.weaponname == "bouncingbetty_mp") {
+  } else if(self.weaponname == "bouncingbetty_mp") {
     self.trigger sethintstring(&"MP_PICKUP_BOUNCING_BETTY");
   }
 
@@ -2202,8 +2192,7 @@ manuallydetonateall(var_0) {
 
   if(var_1) {
     self.manuallydetonatedarray = manuallydetonated_removeundefined(self.manuallydetonatedarray);
-  }
-  else {
+  } else {
     self.manuallydetonatedarray = var_2;
     self notify("all_detonated");
   }
@@ -2216,8 +2205,7 @@ waitanddetonate(var_0, var_1) {
 
   if(var_1 == 2) {
     self detonatebydoubletap();
-  }
-  else {
+  } else {
     self detonate();
   }
 
@@ -2280,8 +2268,7 @@ c4damage(var_0) {
 
   if(level.c4explodethisframe) {
     wait(0.1 + randomfloat(0.4));
-  }
-  else {
+  } else {
     wait 0.05;
   }
 
@@ -2601,8 +2588,7 @@ weapondamagetracepassed(var_0, var_1, var_2, var_3) {
 
     if(var_7["fraction"] == 1) {
       thread debugline(var_4, var_1, (1.0, 1.0, 1.0));
-    }
-    else {
+    } else {
       thread debugline(var_4, var_7["position"], (1.0, 0.9, 0.8));
       thread debugline(var_7["position"], var_1, (1.0, 0.4, 0.3));
     }
@@ -2652,8 +2638,7 @@ debugcircle(var_0, var_1, var_2, var_3) {
 
     if(var_6 + 1 >= var_5.size) {
       var_14 = var_5[0];
-    }
-    else {
+    } else {
       var_14 = var_5[var_6 + 1];
     }
 
@@ -2683,8 +2668,7 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
 
   if(issubstr(var_1, "_uts19_")) {
     thread uts19shock(var_0);
-  }
-  else {
+  } else {
     var_12 = maps\mp\_utility::strip_suffix(var_1, "_lefthand");
 
     switch (var_12) {
@@ -2721,8 +2705,7 @@ onweapondamage(var_0, var_1, var_2, var_3, var_4) {
 
         if(isDefined(var_4) && var_4 != self) {
           self.concussionattacker = var_4;
-        }
-        else {
+        } else {
           self.concussionattacker = undefined;
         }
 
@@ -3025,8 +3008,7 @@ updateMoveSpeedScale(weaponType) {
 
   if(!isDefined(weaponType) || weaponType == "primary" || weaponType != "secondary") {
     weaponType = self.primaryWeapon;
-  }
-  else {
+  } else {
     weaponType = self.secondaryWeapon;
   }
 
@@ -3037,8 +3019,7 @@ updateMoveSpeedScale(weaponType) {
 
   if(!isDefined(weaponType)) {
     weapClass = "none";
-  }
-  else {
+  } else {
     weapClass = weaponClass(weaponType);
   }
 
@@ -3093,11 +3074,9 @@ stancerecoiladjuster() {
 
       if(var_1 == "weapon_lmg") {
         maps\mp\_utility::setrecoilscale(0, 40);
-      }
-      else if(var_1 == "weapon_sniper") {
+      } else if(var_1 == "weapon_sniper") {
         maps\mp\_utility::setrecoilscale(0, 60);
-      }
-      else {
+      } else {
         maps\mp\_utility::setrecoilscale();
       }
 
@@ -3110,11 +3089,9 @@ stancerecoiladjuster() {
 
       if(var_1 == "weapon_lmg") {
         maps\mp\_utility::setrecoilscale(0, 10);
-      }
-      else if(var_1 == "weapon_sniper") {
+      } else if(var_1 == "weapon_sniper") {
         maps\mp\_utility::setrecoilscale(0, 30);
-      }
-      else {
+      } else {
         maps\mp\_utility::setrecoilscale();
       }
 
@@ -3125,8 +3102,7 @@ stancerecoiladjuster() {
   }
 }
 
-buildweapondata(var_0) {
-}
+buildweapondata(var_0) {}
 
 isstucktofriendly(var_0) {
   return level.teambased && isDefined(var_0.team) && var_0.team == self.team;
@@ -3507,8 +3483,7 @@ minedamagedebug(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_1[2] < var_5) {
     var_7 = 0;
-  }
-  else {
+  } else {
     var_7 = 1;
   }
 
@@ -3519,8 +3494,7 @@ minedamagedebug(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_10 > var_2) {
     var_7 = 0;
-  }
-  else {
+  } else {
     var_7 = 1;
   }
 
@@ -3530,11 +3504,9 @@ minedamagedebug(var_0, var_1, var_2, var_3, var_4, var_5) {
 minedamageheightpassed(var_0, var_1) {
   if(isplayer(var_1) && isalive(var_1) && var_1.sessionstate == "playing") {
     var_2 = var_1 maps\mp\_utility::getstancecenter();
-  }
-  else if(var_1.classname == "misc_turret") {
+  } else if(var_1.classname == "misc_turret") {
     var_2 = var_1.origin + (0.0, 0.0, 32.0);
-  }
-  else {
+  } else {
     var_2 = var_1.origin;
   }
 
@@ -3576,8 +3548,7 @@ watchmineusage() {
     if(maps\mp\_utility::getintproperty("scr_deleteexplosivesonspawn", 1) == 1) {
       if(isDefined(self.dont_delete_mines_on_next_spawn)) {
         self.dont_delete_mines_on_next_spawn = undefined;
-      }
-      else {
+      } else {
         delete_all_mines();
       }
     }
@@ -3684,8 +3655,7 @@ minebeaconteamupdater() {
       if(level.teambased) {
         if(var_2.team == var_0) {
           self.effect["friendly"] showtoplayer(var_2);
-        }
-        else {
+        } else {
           self.effect["enemy"] showtoplayer(var_2);
         }
 
@@ -3768,48 +3738,43 @@ transfer_grenade_ownership(var_0) {
 
   if(isDefined(self.manuallydetonatedarray)) {
     var_0.manuallydetonatedarray = manuallydetonated_removeundefined(self.manuallydetonatedarray);
-  }
-  else {
+  } else {
     var_0.manuallydetonatedarray = undefined;
   }
 
   if(isDefined(self.claymorearray)) {
     var_0.claymorearray = common_scripts\utility::array_removeundefined(self.claymorearray);
-  }
-  else {
+  } else {
     var_0.claymorearray = undefined;
   }
 
   if(isDefined(self.bouncingbettyarray)) {
     var_0.bouncingbettyarray = common_scripts\utility::array_removeundefined(self.bouncingbettyarray);
-  }
-  else {
+  } else {
     var_0.bouncingbettyarray = undefined;
   }
 
   if(isDefined(self.equipmentmines)) {
     var_0.equipmentmines = common_scripts\utility::array_removeundefined(self.equipmentmines);
-  }
-  else {
+  } else {
     var_0.equipmentmines = undefined;
   }
 
   if(isDefined(self.killstreakmines)) {
     var_0.killstreakmines = common_scripts\utility::array_removeundefined(self.killstreakmines);
-  }
-  else {
+  } else {
     var_0.killstreakmines = undefined;
   }
 
   if(isDefined(var_0.manuallydetonatedarray)) {
     foreach(var_2 in var_0.manuallydetonatedarray) {
-    var_2[0].owner = var_0;
+      var_2[0].owner = var_0;
     }
   }
 
   if(isDefined(var_0.claymorearray)) {
     foreach(var_5 in var_0.claymorearray) {
-    var_5.owner = var_0;
+      var_5.owner = var_0;
     }
   }
 
@@ -3903,8 +3868,7 @@ stickymovingplatformdetonate(var_0) {
     if(isDefined(var_0.notifystring)) {
       if(var_0.notifystring == "detonate") {
         self detonate();
-      }
-      else {
+      } else {
         self notify(var_0.notifystring);
       }
     } else
@@ -4030,8 +3994,7 @@ getsavedweapon(var_0) {
 
   if(var_2 >= 0) {
     return self.saveweapons[var_2]["use"];
-  }
-  else {
+  } else {
     return "none";
   }
 }
@@ -4100,8 +4063,7 @@ watchweaponinspection() {
 
     if(isDefined(var_4)) {
       var_5 = var_4 == "h1_augsmg_mp";
-    }
-    else {
+    } else {
       var_5 = 0;
     }
 

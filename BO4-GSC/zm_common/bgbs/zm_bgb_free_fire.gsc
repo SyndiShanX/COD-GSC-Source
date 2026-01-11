@@ -7,11 +7,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_bgb_free_fire;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_free_fire", &__init__, undefined, #"bgb");
+  system::register(#"zm_bgb_free_fire", &__init__, undefined, # "bgb");
 }
 
 __init__() {
@@ -49,7 +48,7 @@ validation() {
 }
 
 function_1ff1beff() {
-  self endon(#"disconnect", #"player_downed", #"hash_1b878c77be2d017b");
+  self endon(#"disconnect", # "player_downed", # "hash_1b878c77be2d017b");
   w_current = self getcurrentweapon();
 
   if(!(isDefined(w_current.isheroweapon) && w_current.isheroweapon) && !zm_weapons::is_wonder_weapon(w_current)) {

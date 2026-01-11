@@ -208,8 +208,7 @@ trackSiegeEnable() {
 
     if(class == "pistol" || class == "smg") {
       self setSpreadOverride(1);
-    }
-    else {
+    } else {
       self setSpreadOverride(2);
     }
 
@@ -644,8 +643,7 @@ updateTISpawnPosition() {
 isValidTISpawnPosition() {
   if(Canspawn(self.origin) && self IsOnGround()) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -700,8 +698,7 @@ GlowStickSetupAndWaitForDeath(owner) {
   self setModel(level.spawnGlowModel["enemy"]);
   if(level.teamBased) {
     self maps\mp\_entityheadIcons::setTeamHeadIcon(self.team, (0, 0, 20));
-  }
-  else {
+  } else {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(owner, (0, 0, 20));
   }
 
@@ -881,5 +878,4 @@ setC4Death() {
   }
 }
 
-unsetC4Death() {
-}
+unsetC4Death() {}

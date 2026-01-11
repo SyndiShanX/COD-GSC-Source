@@ -51,8 +51,7 @@ init_flags() {
   flag_init("pa_or_maybe_just_take_t_0 ");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_checkin() {
   arrival_anims();
@@ -381,8 +380,7 @@ scanner_model_swap() {
 
     if(self.targetname == "checkin_security_ai") {
       self setModel("c_mul_jinan_guard_bscatter_fb");
-    }
-    else {
+    } else {
       self setModel("c_mul_jinan_demoworker_bscatter_fb");
     }
 
@@ -442,11 +440,11 @@ scanner_scenes(a_ai_explosives_workers, a_ai_security) {
   }
 
   foreach(gun in getEntArray("scanner_gun", "targetname")) {
-  gun thread cleanup_red_guns();
+    gun thread cleanup_red_guns();
   }
 
   foreach(ping in getEntArray("scanner_gun_ping", "targetname")) {
-  ping thread cleanup_gun_pings();
+    ping thread cleanup_gun_pings();
   }
 
   trigger_wait("trig_enter_scanner");
@@ -498,7 +496,7 @@ hide_scanner_gun() {
     }
 
     foreach(ping in getEntArray("scanner_gun_ping", "targetname")) {
-    ping delete();
+      ping delete();
     }
 
     getent("scanner_gun_trigger", "targetname") thread security_scanner_gun_think();
@@ -743,7 +741,7 @@ player_group_think() {
   level notify("inside_tower_lift");
 
   foreach(metalstorm in getEntArray("arrival_metalstorm", "targetname")) {
-  metalstorm delete();
+    metalstorm delete();
   }
 
   clientnotify("sbpv");
@@ -971,8 +969,7 @@ tarmac_nag_lines() {
     if(distance2dsquared(level.ai_harper.origin, level.player.origin) > 262144) {
       if(a_lines[n_current_line][1] == "harper") {
         level.ai_harper say_dialog(a_lines[n_current_line][0]);
-      }
-      else {
+      } else {
         level.ai_salazar say_dialog(a_lines[n_current_line][0]);
       }
 

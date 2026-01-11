@@ -71,8 +71,7 @@ player_getvelocity_pc() {
 
   if(!velocity) {
     self._stealth.logic.player_pc_velocity = 0;
-  }
-  else if(velocity > self._stealth.logic.player_pc_velocity) {
+  } else if(velocity > self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity += add[stance];
     if(self._stealth.logic.player_pc_velocity > velocity) {
       self._stealth.logic.player_pc_velocity = velocity;
@@ -208,8 +207,7 @@ friendly_compute_stances_player() {
     // never hit 0 - it will hit an incredibly small number, then go negative...ghey
     if(self._stealth.logic.stance_change > .05) {
       self._stealth.logic.stance_change -= .05;
-    }
-    else {
+    } else {
       self._stealth.logic.stance_change = 0;
       self._stealth.logic.stance = stance;
       self._stealth.logic.oldstance = stance;
@@ -245,8 +243,7 @@ friendly_init() {
     self._stealth.logic.getangles_func = ::friendly_getangles_player;
     if(level.Console) {
       self._stealth.logic.getvelocity_func = ::friendly_getvelocity;
-    }
-    else {
+    } else {
       self._stealth.logic.getvelocity_func = ::player_getvelocity_pc;
       self._stealth.logic.player_pc_velocity = 0;
     }

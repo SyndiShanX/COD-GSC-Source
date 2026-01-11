@@ -330,7 +330,7 @@ setup_pipe() {
   level.steam_bokeh_points[level.steam_bokeh_points.size] = self.origin + (0, 0, 30.0);
 
   foreach(fx_loc in fx_locs) {
-  level.steam_stream_points[level.steam_stream_points.size] = fx_loc.origin;
+    level.steam_stream_points[level.steam_stream_points.size] = fx_loc.origin;
   }
 
   self update_pipe();
@@ -345,7 +345,7 @@ bokeh_timer(loc) {
 
 play_bokeh() {
   foreach(loc in level.steam_bokeh_points) {
-  thread bokeh_timer(loc);
+    thread bokeh_timer(loc);
   }
 }
 
@@ -361,7 +361,7 @@ update_pipe() {
     array_thread(damage_models, ::burstpipe_damage_watcher, self);
 
     foreach(loc in fx_locs) {
-    self thread update_pipe_fx(loc);
+      self thread update_pipe_fx(loc);
     }
 
     self waittill("burstpipe_damage");

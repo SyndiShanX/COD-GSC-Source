@@ -240,8 +240,7 @@ _musicAlias(alias, fadein, fadeout, loop) {
   name = level.musicDeclareName;
   if(loop) {
     level.musicStates[name].loopalias = alias;
-  }
-  else {
+  } else {
     level.musicStates[name].oneshotalias = alias;
   }
   level.musicStates[name].fadein = fadein;

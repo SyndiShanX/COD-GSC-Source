@@ -138,8 +138,7 @@ basic_training_auto_assign() {
   self maps\mp\gametypes\_globallogic_ui::updateObjectiveText();
   if(level.teamBased) {
     self.sessionteam = assignment;
-  }
-  else {
+  } else {
     self.sessionteam = "none";
     self.ffateam = assignment;
   }

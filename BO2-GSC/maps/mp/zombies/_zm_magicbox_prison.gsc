@@ -62,7 +62,7 @@ wait_then_create_base_magic_box_fx() {
   }
 
   foreach(chest in level.chests) {
-  chest.zbarrier setclientfield("magicbox_initial_fx", 1);
+    chest.zbarrier setclientfield("magicbox_initial_fx", 1);
   }
 }
 

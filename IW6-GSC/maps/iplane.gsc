@@ -120,8 +120,7 @@ init_mainai() {
 
     if(!isDefined(var_3.script_noteworthy)) {
       continue;
-    }
-    else if(var_3.script_noteworthy == "vargas") {
+    } else if(var_3.script_noteworthy == "vargas") {
       level.vargas = var_3;
       level.vargas.animname = "vargas";
       level.vargas.name = "Rorke";
@@ -143,8 +142,7 @@ init_mainai() {
 
     if(!isDefined(var_9.script_friendname)) {
       continue;
-    }
-    else if(var_2.script_friendname == "Elias") {
+    } else if(var_2.script_friendname == "Elias") {
       level.elias = var_9;
       level.elias.animname = "elias";
       level.elias maps\_utility::gun_remove();
@@ -268,19 +266,19 @@ iplane_unload() {
   var_2 = common_scripts\utility::array_combine(var_0, var_1);
 
   foreach(var_4 in var_2) {
-  var_4 delete();
+    var_4 delete();
   }
 
   var_6 = getEntArray("link_me_tail", "script_noteworthy");
 
   foreach(var_8 in var_6) {
-  var_8 delete();
+    var_8 delete();
   }
 
   var_10 = getEntArray("iplane_bracket", "targetname");
 
   foreach(var_12 in var_10) {
-  var_12 delete();
+    var_12 delete();
   }
 }
 
@@ -469,13 +467,13 @@ setup() {
   var_1 = getEntArray("saf_c17_lower_backdoor_script_model", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(level.bay_door_lower);
+    var_3 linkto(level.bay_door_lower);
   }
 
   var_1 = getEntArray("saf_c17_lower_backdoor_top_script_model", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(level.bay_door_upper);
+    var_3 linkto(level.bay_door_upper);
   }
 
   level.chair_vargas = getent("vargas_chair", "targetname");
@@ -501,13 +499,13 @@ setup() {
   level.baddies = getEntArray("baddies_enter", "script_noteworthy");
 
   foreach(var_11 in level.baddies) {
-  var_11 linkto(level.plane_core);
+    var_11 linkto(level.plane_core);
   }
 
   var_13 = getEntArray("falling_spark_location", "targetname");
 
   foreach(var_15 in var_13) {
-  var_15 linkto(level.plane_core);
+    var_15 linkto(level.plane_core);
   }
 
   var_1 = getEntArray("plane_interior_debris", "targetname");
@@ -528,38 +526,38 @@ setup() {
   var_22 = common_scripts\utility::array_combine(var_20, var_21);
 
   foreach(var_24 in var_22) {
-  var_24 linkto(level.plane_core);
+    var_24 linkto(level.plane_core);
   }
 
   var_26 = common_scripts\utility::array_combine(level.enemies, level.heroes);
 
   foreach(var_28 in var_26) {
-  var_28 linkto(level.plane_core);
+    var_28 linkto(level.plane_core);
   }
 
   var_30 = getent("m_p_l_r_tracker", "targetname");
   var_31 = getEntArray("link_me_tail", "script_noteworthy");
 
   foreach(var_33 in var_31) {
-  var_33 linkto(level.plane_tail);
+    var_33 linkto(level.plane_tail);
   }
 
   var_35 = getEntArray("plane_core_tarp", "script_noteworthy");
 
   foreach(var_37 in var_35) {
-  var_37 linkto(level.plane_core);
+    var_37 linkto(level.plane_core);
   }
 
   var_1 = getEntArray("iplane_bracket", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(level.plane_tail);
+    var_3 linkto(level.plane_tail);
   }
 
   var_41 = getEntArray("destroy_plane_fx", "targetname");
 
   foreach(var_43 in var_41) {
-  var_43 linkto(level.plane_core);
+    var_43 linkto(level.plane_core);
   }
 
   level.kersey_anim_org = getent("kersey_anim_start", "targetname");
@@ -679,13 +677,13 @@ mid_dlight() {
     wait 0.1;
 
     foreach(var_4 in var_2) {
-    playFXOnTag(common_scripts\utility::getfx("red_large_glow"), var_4, "tag_origin");
+      playFXOnTag(common_scripts\utility::getfx("red_large_glow"), var_4, "tag_origin");
     }
 
     wait 0.3;
 
     foreach(var_4 in var_2) {
-    stopFXOnTag(common_scripts\utility::getfx("red_large_glow"), var_4, "tag_origin");
+      stopFXOnTag(common_scripts\utility::getfx("red_large_glow"), var_4, "tag_origin");
     }
 
     wait 0.3;
@@ -708,13 +706,13 @@ core_lights_red() {
     var_4++;
 
     foreach(var_2 in var_0) {
-    playFXOnTag(common_scripts\utility::getfx("red_small_front"), var_2, "tag_origin");
+      playFXOnTag(common_scripts\utility::getfx("red_small_front"), var_2, "tag_origin");
     }
 
     wait 0.3;
 
     foreach(var_2 in var_0) {
-    stopFXOnTag(common_scripts\utility::getfx("red_small_front"), var_2, "tag_origin");
+      stopFXOnTag(common_scripts\utility::getfx("red_small_front"), var_2, "tag_origin");
     }
 
     wait 0.3;
@@ -855,13 +853,13 @@ do_firework_fx() {
 
 remove_junk_behind_player() {
   foreach(var_1 in level.jeeps_plane) {
-  var_1 delete();
+    var_1 delete();
   }
 
   var_3 = getEntArray("cargo_falling_out", "script_noteworthy");
 
   foreach(var_5 in var_3) {
-  var_5 delete();
+    var_5 delete();
   }
 }
 
@@ -1029,29 +1027,29 @@ moving_jeeps_and_crates() {
   var_6 = common_scripts\utility::array_combine(var_0, var_1);
 
   foreach(var_8 in level.moving_crates_plane) {
-  var_8 linkto(level.plane_core);
+    var_8 linkto(level.plane_core);
   }
 
   foreach(var_11 in level.lights_on) {
-  var_11 linkto(level.plane_core);
+    var_11 linkto(level.plane_core);
   }
 
   foreach(var_14 in level.lights_off) {
-  var_14 linkto(level.plane_core);
+    var_14 linkto(level.plane_core);
   }
 
   thread jeep_offset_anims();
 
   foreach(var_17 in level.fire_ext_models) {
-  var_17 linkto(level.plane_core);
+    var_17 linkto(level.plane_core);
   }
 
   foreach(var_20 in level.tail_lights) {
-  var_20 linkto(level.plane_tail);
+    var_20 linkto(level.plane_tail);
   }
 
   foreach(var_23 in var_6) {
-  var_23 linkto(level.plane_core);
+    var_23 linkto(level.plane_core);
   }
 }
 
@@ -1194,7 +1192,7 @@ rotate_plane() {
   level notify("player_prompted_to_climb_out");
 
   foreach(var_1 in level.tail_lights) {
-  var_1 hide();
+    var_1 hide();
   }
 }
 
@@ -1358,7 +1356,7 @@ show_inplane_debris() {
   var_0 = getEntArray("plane_interior_debris", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -1666,17 +1664,17 @@ iplane_clean_up() {
   var_8 = getEntArray("little_lights", "script_noteworthy");
 
   foreach(var_10 in var_8) {
-  var_10 delete();
+    var_10 delete();
   }
 
   var_12 = getEntArray("lights_red_fuselage", "targetname");
 
   foreach(var_10 in var_12) {
-  var_10 delete();
+    var_10 delete();
   }
 
   foreach(var_16 in level.player_anim_origin.tags) {
-  var_16 delete();
+    var_16 delete();
   }
 
   level.player_anim_origin delete();
@@ -1950,8 +1948,7 @@ do_f15_raise_and_attack(var_0, var_1, var_2) {
 
   if(var_0.targetname == "f15_second_start_node_2" || var_0.targetname == "f15_start_attack_node_3") {
     var_6 moveto(var_4[0].origin, randomfloatrange(5, 6), 1);
-  }
-  else {
+  } else {
     var_6 moveto(var_4[0].origin, randomfloatrange(2, 3), 0.5);
   }
 
@@ -1968,8 +1965,7 @@ do_f15_raise_and_attack(var_0, var_1, var_2) {
 
   if(var_0.targetname == "f15_second_start_node_2" || var_0.targetname == "f15_start_attack_node_3") {
     var_6 moveto(var_4[0].origin, randomfloatrange(5, 6), 1);
-  }
-  else {
+  } else {
     var_6 moveto(var_4[0].origin, randomfloatrange(2, 3), 0.5);
   }
 
@@ -1985,19 +1981,19 @@ plane_ramp_light() {
   var_1 = getEntArray("lower_ramp_light", "script_noteworthy");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(level.bay_door_lower);
+    var_3 linkto(level.bay_door_lower);
   }
 
   common_scripts\utility::flag_wait("player_activated_ramps_open");
 
   foreach(var_6 in var_0) {
-  var_6 thread do_ramp_light();
+    var_6 thread do_ramp_light();
   }
 
   level waittill("iplane_done");
 
   foreach(var_3 in var_1) {
-  var_3 delete();
+    var_3 delete();
   }
 }
 
@@ -2025,7 +2021,7 @@ play_spark_fx_when_falling() {
   var_0 = getEntArray("falling_spark_location", "targetname");
 
   foreach(var_2 in var_0) {
-  playFXOnTag(level._effect["vfx_helicrash_sparkrain"], var_2, "tag_origin");
+    playFXOnTag(level._effect["vfx_helicrash_sparkrain"], var_2, "tag_origin");
   }
 }
 
@@ -2219,8 +2215,7 @@ light_fx() {
 
   if(maps\_utility::is_gen4()) {
     var_3 setlightcolor((0.25, 0, 0));
-  }
-  else {
+  } else {
     var_3 setlightcolor((0.5, 0, 0));
   }
 

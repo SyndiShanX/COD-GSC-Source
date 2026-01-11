@@ -72,8 +72,7 @@ registerMissionCallback(callback, func) {
 getChallengeStatus(name) {
   if(isDefined(self.challengeData[name])) {
     return self.challengeData[name];
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -103,8 +102,7 @@ processChallenge(baseName, progressInc) {
   }
   if(numLevels > 1) {
     missionStatus = self getChallengeStatus((baseName + "1"));
-  }
-  else {
+  } else {
     missionStatus = self getChallengeStatus(baseName);
   }
   if(!isDefined(progressInc)) {
@@ -129,8 +127,7 @@ processChallenge(baseName, progressInc) {
   assertex(missionStatus <= numLevels, "Mini challenge levels higher than max: " + missionStatus + " vs. " + numLevels);
   if(numLevels > 1) {
     refString = baseName + missionStatus;
-  }
-  else {
+  } else {
     refString = baseName;
   }
   progress = self getStat(level.challengeInfo[refString]["statid"]);
@@ -161,8 +158,7 @@ processChallenge(baseName, progressInc) {
       missionStatus += 1;
     if(numLevels > 1) {
       self.challengeData[baseName + "1"] = missionStatus;
-    }
-    else {
+    } else {
       self.challengeData[baseName] = missionStatus;
     }
     self setStat(level.challengeInfo[refString]["statid"], level.challengeInfo[refString]["maxval"]);
@@ -265,8 +261,7 @@ isHighestScoringPlayer(player) {
   players = level.players;
   if(level.teamBased) {
     team = player.pers["team"];
-  }
-  else {
+  } else {
     team = "all";
   }
   highScore = player.score;
@@ -365,8 +360,7 @@ ch_kills(data, time) {
   }
   if(data.sWeapon == "dog_bite_mp") {
     data.sMeansOfDeath = "MOD_DOGS";
-  }
-  else if(data.sWeapon == "artillery_mp") {
+  } else if(data.sWeapon == "artillery_mp") {
     data.sMeansOfDeath = "MOD_ARTILLERY";
   }
   if(!isDefined(data.victim.diedOnVehicle) && isDefined(data.victim.diedOnTurret)) {
@@ -385,11 +379,9 @@ ch_kills(data, time) {
       player processChallenge("ch_expert_gunner_");
     else if(data.sWeapon == "sherman_gunner_mp_FLM") {
       player processChallenge("ch_expert_turret_flame_");
-    }
-    else if(isSubStr(data.sWeapon, "_turret_mp")) {
+    } else if(isSubStr(data.sWeapon, "_turret_mp")) {
       player processChallenge("ch_behemouth_");
-    }
-    else if((data.sWeapon == "panzer4_mp_explosion_mp" || data.sWeapon == "t34_mp_explosion_mp") && !isDefined(data.victim.diedOnVehicle)) {
+    } else if((data.sWeapon == "panzer4_mp_explosion_mp" || data.sWeapon == "t34_mp_explosion_mp") && !isDefined(data.victim.diedOnVehicle)) {
       player processChallenge("ch_tankbomb");
     }
     if(isDefined(data.victim.explosiveInfo["damageTime"]) && data.victim.explosiveInfo["damageTime"] == time) {
@@ -415,81 +407,58 @@ ch_kills(data, time) {
     }
     if(isSubStr(data.sWeapon, "silenced_mp")) {
       player processChallenge("ch_supressor_");
-    }
-    else if(isSubStr(data.sWeapon, "flash_mp")) {
+    } else if(isSubStr(data.sWeapon, "flash_mp")) {
       player processChallenge("ch_invisible_");
     }
     if(isStrStart(data.sWeapon, "gewehr43_")) {
       player processChallenge("ch_marksman_g43_");
-    }
-    else if(isStrStart(data.sWeapon, "svt40_")) {
+    } else if(isStrStart(data.sWeapon, "svt40_")) {
       player processChallenge("ch_marksman_svt40_");
-    }
-    else if(isStrStart(data.sWeapon, "m1garand_")) {
+    } else if(isStrStart(data.sWeapon, "m1garand_")) {
       player processChallenge("ch_marksman_m1garand_");
-    }
-    else if(isStrStart(data.sWeapon, "m1carbine_")) {
+    } else if(isStrStart(data.sWeapon, "m1carbine_")) {
       player processChallenge("ch_marksman_m1a1_");
-    }
-    else if(isStrStart(data.sWeapon, "stg44_")) {
+    } else if(isStrStart(data.sWeapon, "stg44_")) {
       player processChallenge("ch_marksman_stg44_");
-    }
-    else if(isStrStart(data.sWeapon, "thompson_")) {
+    } else if(isStrStart(data.sWeapon, "thompson_")) {
       player processChallenge("ch_marksman_thompson_");
-    }
-    else if(isStrStart(data.sWeapon, "type100smg_")) {
+    } else if(isStrStart(data.sWeapon, "type100smg_")) {
       player processChallenge("ch_marksman_type100smg_");
-    }
-    else if(isStrStart(data.sWeapon, "mp40_")) {
+    } else if(isStrStart(data.sWeapon, "mp40_")) {
       player processChallenge("ch_marksman_mp40_");
-    }
-    else if(isStrStart(data.sWeapon, "ppsh_")) {
+    } else if(isStrStart(data.sWeapon, "ppsh_")) {
       player processChallenge("ch_marksman_ppsh_");
-    }
-    else if(isStrStart(data.sWeapon, "type99lmg_") || isStrStart(data.sWeapon, "type99_lmg_")) {
+    } else if(isStrStart(data.sWeapon, "type99lmg_") || isStrStart(data.sWeapon, "type99_lmg_")) {
       player processChallenge("ch_marksman_type99lmg_");
-    }
-    else if(isStrStart(data.sWeapon, "fg42_")) {
+    } else if(isStrStart(data.sWeapon, "fg42_")) {
       player processChallenge("ch_marksman_fg42_");
-    }
-    else if(isStrStart(data.sWeapon, "30cal_")) {
+    } else if(isStrStart(data.sWeapon, "30cal_")) {
       player processChallenge("ch_marksman_30cal");
-    }
-    else if(isStrStart(data.sWeapon, "mg42_")) {
+    } else if(isStrStart(data.sWeapon, "mg42_")) {
       player processChallenge("ch_marksman_mg42");
-    }
-    else if(isStrStart(data.sWeapon, "dp28_")) {
+    } else if(isStrStart(data.sWeapon, "dp28_")) {
       player processChallenge("ch_marksman_dp28");
-    }
-    else if(isStrStart(data.sWeapon, "bar_")) {
+    } else if(isStrStart(data.sWeapon, "bar_")) {
       player processChallenge("ch_marksman_bar");
-    }
-    else if(isStrStart(data.sWeapon, "shotgun")) {
+    } else if(isStrStart(data.sWeapon, "shotgun")) {
       player processChallenge("ch_marksman_shotgun_");
-    }
-    else if(isStrStart(data.sWeapon, "doublebarreledshotgun")) {
+    } else if(isStrStart(data.sWeapon, "doublebarreledshotgun")) {
       player processChallenge("ch_marksman_dbshotty_");
-    }
-    else if(isStrStart(data.sWeapon, "mosinrifle_")) {
+    } else if(isStrStart(data.sWeapon, "mosinrifle_")) {
       player processChallenge("ch_marksman_mosinrifle_");
-    }
-    else if(isStrStart(data.sWeapon, "springfield_")) {
+    } else if(isStrStart(data.sWeapon, "springfield_")) {
       player processChallenge("ch_marksman_springfield_");
-    }
-    else if(isStrStart(data.sWeapon, "kar98k_")) {
+    } else if(isStrStart(data.sWeapon, "kar98k_")) {
       player processChallenge("ch_marksman_kar98k_");
-    }
-    else if(isStrStart(data.sWeapon, "type99rifle_")) {
+    } else if(isStrStart(data.sWeapon, "type99rifle_")) {
       player processChallenge("ch_marksman_type99rifle_");
     }
   } else if(isSubStr(data.sMeansOfDeath, "MOD_GRENADE") || isSubStr(data.sMeansOfDeath, "MOD_EXPLOSIVE") || isSubStr(data.sMeansOfDeath, "MOD_PROJECTILE")) {
     if(isStrStart(data.sWeapon, "molotov_") || isStrStart(data.sWeapon, "napalmblob_")) {
       player processChallenge("ch_bartender_");
-    }
-    else if(isStrStart(data.sWeapon, "frag_grenade_short_")) {
+    } else if(isStrStart(data.sWeapon, "frag_grenade_short_")) {
       player processChallenge("ch_martyrdom_");
-    }
-    else if(isSubStr(data.sWeapon, "gl_")) {
+    } else if(isSubStr(data.sWeapon, "gl_")) {
       player processChallenge("ch_launchspecialist_");
     }
     if(isDefined(data.victim.explosiveInfo["damageTime"]) && data.victim.explosiveInfo["damageTime"] == time) {
@@ -568,8 +537,7 @@ ch_kills(data, time) {
   } else if(isStrStart(data.sMeansOfDeath, "MOD_MELEE") || isStrStart(data.sMeansOfDeath, "MOD_BAYONET")) {
     if(isStrStart(data.sMeansOfDeath, "MOD_BAYONET")) {
       player processChallenge("ch_bayonet_");
-    }
-    else {
+    } else {
       player processChallenge("ch_knifevet_");
     }
     if(data.attackerInLastStand) {
@@ -591,14 +559,11 @@ ch_kills(data, time) {
   } else if(isSubStr(data.sMeansOfDeath, "MOD_IMPACT")) {
     if(isStrStart(data.sWeapon, "frag_")) {
       player processChallenge("ch_thinkfast");
-    }
-    else if(isSubStr(data.sWeapon, "gl_")) {
+    } else if(isSubStr(data.sWeapon, "gl_")) {
       player processChallenge("ch_launchspecialist_");
-    }
-    else if(isStrStart(data.sWeapon, "molotov_") || isStrStart(data.sWeapon, "napalmblob_")) {
+    } else if(isStrStart(data.sWeapon, "molotov_") || isStrStart(data.sWeapon, "napalmblob_")) {
       player processChallenge("ch_bartender_");
-    }
-    else if(isStrStart(data.sWeapon, "tabun_") || isStrStart(data.sWeapon, "signal_")) {
+    } else if(isStrStart(data.sWeapon, "tabun_") || isStrStart(data.sWeapon, "signal_")) {
       player processChallenge("ch_thinkfastspecial");
     }
   } else if(data.sMeansOfDeath == "MOD_HEAD_SHOT") {
@@ -629,8 +594,7 @@ ch_kills(data, time) {
     }
     if(isSubStr(data.sWeapon, "silenced_mp")) {
       player processChallenge("ch_supressor_");
-    }
-    else if(isSubStr(data.sWeapon, "flash_mp")) {
+    } else if(isSubStr(data.sWeapon, "flash_mp")) {
       player processChallenge("ch_invisible_");
     }
     if(isStrStart(data.sWeapon, "gewehr43_")) {
@@ -723,8 +687,7 @@ ch_kills(data, time) {
 ch_bulletDamageCommon(data, player, time, weaponClass) {
   if(player.pers["lastBulletKillTime"] == time) {
     player.pers["bulletStreak"]++;
-  }
-  else {
+  } else {
     player.pers["bulletStreak"] = 1;
   }
   player.pers["lastBulletKillTime"] = time;
@@ -1237,14 +1200,11 @@ monitorDestroyedTank() {
       self setStatLBByName("tank", 1, "destroyed");
       if(weaponUsed == "tankGun") {
         self processChallenge("ch_tankvtank_");
-      }
-      else if(isStrStart(weaponUsed, "bazooka_")) {
+      } else if(isStrStart(weaponUsed, "bazooka_")) {
         self processChallenge("ch_antitankrockets_");
-      }
-      else if(isStrStart(weaponUsed, "satchel_charge")) {
+      } else if(isStrStart(weaponUsed, "satchel_charge")) {
         self processChallenge("ch_antitankdemolitions_");
-      }
-      else if(isStrStart(weaponUsed, "sticky_grenade")) {
+      } else if(isStrStart(weaponUsed, "sticky_grenade")) {
         self processChallenge("ch_tanksticker_");
       }
     }

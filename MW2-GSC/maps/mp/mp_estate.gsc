@@ -24,8 +24,7 @@ main() {
 
   if(level.ps3) {
     setdvar("sm_sunShadowScale", "0.5"); // ps3 optimization
-  }
-  else {
+  } else {
     setdvar("sm_sunShadowScale", "0.7"); // optimization
   }
 }

@@ -192,9 +192,8 @@ createPortal(trigger, team) {
 
     if(!isDefined(game["blitzPortalLogIDs"][team])) {
       game["blitzPortalLogIDs"][team] = [
-    }
-        [level.matchRecording_generateID]
-      ]();
+        }
+        [level.matchRecording_generateID]]();
 
     stateValue = ter_op(team == "allies", 0, 1);
 
@@ -826,8 +825,7 @@ teleport_player(origin, angles) {
 create_client_overlay(shader_name, start_alpha, player) {
   if(isDefined(player)) {
     overlay = newClientHudElem(player);
-  }
-  else {
+  } else {
     overlay = newHudElem();
   }
   overlay.x = 0;

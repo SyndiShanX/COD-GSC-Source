@@ -162,8 +162,7 @@ ai_ride_and_shoot() {
 
     if(self.bikerisarmed) {
       self ai_ride_and_shoot_aim_idle();
-    }
-    else {
+    } else {
       self ai_ride_and_shoot_idle();
     }
 
@@ -202,8 +201,7 @@ ai_ride_and_shoot_aiming_on(sideanimweight) {
 
     if(sideanimweight > 0.5) {
       self setflaggedanimlimited("fireAnim", % crew_bike_m72_l_fire, sideanimweight, 0);
-    }
-    else {
+    } else {
       self setanimlimited( % crew_bike_m72_l_fire, sideanimweight, 0);
     }
   } else {
@@ -214,8 +212,7 @@ ai_ride_and_shoot_aiming_on(sideanimweight) {
 
     if(sideanimweight > 0.5) {
       self setflaggedanimlimited("fireAnim", % crew_bike_m72_r_fire, sideanimweight, 0);
-    }
-    else {
+    } else {
       self setanimlimited( % crew_bike_m72_r_fire, sideanimweight, 0);
     }
   }
@@ -228,8 +225,7 @@ ai_ride_and_shoot_aiming_on(sideanimweight) {
   if(sideanimweight < 1) {
     if(sideanimweight < 0.5) {
       self setflaggedanimlimited("fireAnim", % crew_bike_m72_f_fire, 1 - sideanimweight, 0);
-    }
-    else {
+    } else {
       self setanimlimited( % crew_bike_m72_f_fire, 1 - sideanimweight, 0);
     }
   }
@@ -396,8 +392,7 @@ ai_ride_and_shoot_jump() {
 
   if(self.bikerisarmed && isDefined(self.shootent)) {
     self ai_ride_and_shoot_aim_idle();
-  }
-  else {
+  } else {
     self ai_ride_and_shoot_idle();
   }
 }

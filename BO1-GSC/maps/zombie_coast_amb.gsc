@@ -41,40 +41,35 @@ weapon_type_check_custom(weapon) {
     case 0:
       if(weapon == "spectre_zm") {
         return "favorite";
-      }
-      else if(weapon == "spectre_upgraded_zm") {
+      } else if(weapon == "spectre_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
     case 1:
       if(weapon == "rpk_zm") {
         return "favorite";
-      }
-      else if(weapon == "rpk_upgraded_zm") {
+      } else if(weapon == "rpk_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
     case 2:
       if(weapon == "ak74u_zm") {
         return "favorite";
-      }
-      else if(weapon == "ak74u_upgraded_zm") {
+      } else if(weapon == "ak74u_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
     case 3:
       if(weapon == "ithaca_zm") {
         return "favorite";
-      }
-      else if(weapon == "ithaca_upgraded_zm") {
+      } else if(weapon == "ithaca_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
   }
   if(IsSubStr(weapon, "upgraded")) {
     return "upgrade";
-  }
-  else {
+  } else {
     return level.zombie_weapons[weapon].vox;
   }
 }
@@ -233,8 +228,7 @@ director_behind_vox(director) {
         if(isDefined(level._audio_director_vox_play)) {
           if(director.is_activated) {
             director thread[[level._audio_director_vox_play]]("vox_director_slam");
-          }
-          else {
+          } else {
             director thread[[level._audio_director_vox_play]]("vox_director_behind_you");
           }
         }

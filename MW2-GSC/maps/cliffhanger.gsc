@@ -90,7 +90,7 @@ cave_main() {
     return;
   }
 
-    thread maps\_introscreen::cliffhanger_intro_text();
+  thread maps\_introscreen::cliffhanger_intro_text();
 
   climb_starts = getEntArray("player_climb", "targetname");
   climb_starts = array_randomize(climb_starts);
@@ -301,7 +301,7 @@ hangerpath_main() {
     wait(0.05); // so spawner will work
   }
 
-    price_hanger_start = getent("price_hanger_start", "targetname");
+  price_hanger_start = getent("price_hanger_start", "targetname");
   level.price_spawner.script_stealth = undefined;
   level.price_spawner.origin = price_hanger_start.origin;
   level.price = new_captain_price_spawns();
@@ -372,7 +372,7 @@ hangerpath_main() {
   if(surviving_enemies.size > 0) //someone is alive and broken stealth
   {
     foreach(mf in surviving_enemies) {
-    mf thread setup_stealth_enemy_cleanup();
+      mf thread setup_stealth_enemy_cleanup();
     }
 
     while(1) {

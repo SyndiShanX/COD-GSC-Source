@@ -274,8 +274,7 @@ delayplayFXOnTag(FX, tag, delayTime, intervalTime) {
 
     if(isDefined(intervalTime)) {
       wait(intervalTime);
-    }
-    else {
+    } else {
       break;
     }
   }

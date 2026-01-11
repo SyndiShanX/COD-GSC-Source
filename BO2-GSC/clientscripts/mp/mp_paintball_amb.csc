@@ -52,8 +52,6 @@ main() {
   thread snd_play_loopers();
 }
 
-snd_play_loopers() {
-}
+snd_play_loopers() {}
 
-snd_start_autofx_audio() {
-}
+snd_start_autofx_audio() {}

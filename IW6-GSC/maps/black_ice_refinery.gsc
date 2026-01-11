@@ -438,7 +438,7 @@ event_derrick_explode_stack_setup() {
     var_6 = var_5 common_scripts\utility::spawn_tag_origin();
 
     foreach(var_8 in var_4) {
-    var_8 linkto(var_6);
+      var_8 linkto(var_6);
     }
 
     thread event_derrick_explode_stack_motion(var_6, var_1[var_3], var_2[var_3]);
@@ -481,18 +481,18 @@ event_derrick_explode_debris_bomb() {
   var_1 = getEntArray("model_refinery_container_destroyed", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 hide();
+    var_3 hide();
   }
 
   var_5 = getent("origin_refinery_debris_explosion", "targetname");
   level waittill("notify_traveling_block_impact");
 
   foreach(var_7 in var_0) {
-  var_7 hide();
+    var_7 hide();
   }
 
   foreach(var_3 in var_1) {
-  var_3 show();
+    var_3 show();
   }
 
   setsaveddvar("phys_gravity_ragdoll", -400);
@@ -571,7 +571,7 @@ util_show_destroyed_derrick() {
   common_scripts\utility::exploder("oil_geyser_02");
 
   foreach(var_2 in var_0) {
-  var_2 show();
+    var_2 show();
   }
 }
 
@@ -642,7 +642,7 @@ event_derrick_explode_debris_oiltank(var_0) {
   }
 
   foreach(var_8 in level._refinery.scripted) {
-  var_8 show();
+    var_8 show();
   }
 
   level waittill("notify_refinery_explosion_start");
@@ -654,14 +654,14 @@ event_derrick_explode_debris_oiltank(var_0) {
 
   foreach(var_8 in level._refinery.scripted) {
     foreach(var_13 in var_8._col) {
-    var_13 disconnectpaths();
+      var_13 disconnectpaths();
     }
   }
 
   level waittill("notify_remove_derrick_model");
 
   foreach(var_5 in var_2) {
-  var_5 delete();
+    var_5 delete();
   }
 }
 
@@ -705,7 +705,7 @@ event_derrick_explode_debris_main(var_0) {
   var_15 = [var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10, var_11, var_12, var_13, var_14];
 
   foreach(var_17 in var_15) {
-  var_17 thread event_derrick_explode_debris_main_fx_runner(var_17, "refinery_debris_trail_small", "refinery_debris_smolder_small");
+    var_17 thread event_derrick_explode_debris_main_fx_runner(var_17, "refinery_debris_trail_small", "refinery_debris_smolder_small");
   }
 
   var_0 thread maps\_anim::anim_single_solo(var_1, "derrick_explosion");
@@ -778,7 +778,7 @@ event_derrick_explode_debris_setup_collision(var_0) {
     }
   } else {
     foreach(var_2 in self._col) {
-    var_2 linkto(self);
+      var_2 linkto(self);
     }
   }
 }
@@ -788,7 +788,7 @@ event_derrick_explode_debris_show_and_damage() {
 
   foreach(var_1 in level._refinery.scripted) {
     foreach(var_3 in var_1._col) {
-    var_3 thread event_derrick_explode_debris_damage();
+      var_3 thread event_derrick_explode_debris_damage();
     }
   }
 }
@@ -809,8 +809,7 @@ event_derrick_explode_debris_damage() {
         if(common_scripts\utility::flag("flag_refinery_player_started_encounter")) {
           if(var_2.v.active) {
             var_2 maps\black_ice_vignette::vignette_kill();
-          }
-          else {
+          } else {
             var_2 kill();
           }
 
@@ -866,7 +865,7 @@ util_debris_remove() {
     foreach(var_1 in level._refinery.scripted) {
       if(isDefined(var_1)) {
         foreach(var_3 in var_1._col) {
-        var_3 delete();
+          var_3 delete();
         }
 
         var_1 delete();
@@ -892,8 +891,7 @@ util_player_rubber_banding_solo(var_0) {
 
     if(var_4 > var_3) {
       var_4 = var_3;
-    }
-    else if(var_4 < 0) {
+    } else if(var_4 < 0) {
       var_4 = 0;
     }
 

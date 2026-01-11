@@ -5871,9 +5871,7 @@ func_2B76(param_00, param_01) {
 func_D2CE(param_00, param_01, param_02, param_03, param_04) {
   self notify(param_04);
   self endon(param_04);
-  var_05 = [
-    [param_02]
-  ]();
+  var_05 = [[param_02]]();
   var_06 = param_00;
   if(isDefined(param_01)) {
     var_07 = var_06 - var_05;
@@ -5889,9 +5887,7 @@ func_D2CE(param_00, param_01, param_02, param_03, param_04) {
     }
   }
 
-  [
-    [param_03]
-  ](var_06);
+  [[param_03]](var_06);
 }
 
 func_D2CA(param_00) {
@@ -9948,9 +9944,7 @@ func_E820(param_00, param_01, param_02, param_03, param_04) {
 
   var_05 = scripts\engine\utility::getstructarray(param_00, "targetname");
   scripts\engine\utility::array_thread(var_05, param_01, param_02, param_03, param_04);
-  var_05 = [
-    [level.getnodearrayfunction]
-  ](param_00, "targetname");
+  var_05 = [[level.getnodearrayfunction]](param_00, "targetname");
   scripts\engine\utility::array_thread(var_05, param_01, param_02, param_03, param_04);
   var_05 = getvehiclenodearray(param_00, "targetname");
   scripts\engine\utility::array_thread(var_05, param_01, param_02, param_03, param_04);
@@ -9970,9 +9964,7 @@ func_E81F(param_00, param_01, param_02, param_03, param_04) {
 
   var_05 = scripts\engine\utility::getstructarray(param_00, "script_noteworthy");
   scripts\engine\utility::array_thread(var_05, param_01, param_02, param_03, param_04);
-  var_05 = [
-    [level.getnodearrayfunction]
-  ](param_00, "script_noteworthy");
+  var_05 = [[level.getnodearrayfunction]](param_00, "script_noteworthy");
   scripts\engine\utility::array_thread(var_05, param_01, param_02, param_03, param_04);
   var_05 = getvehiclenodearray(param_00, "script_noteworthy");
   scripts\engine\utility::array_thread(var_05, param_01, param_02, param_03, param_04);
@@ -10035,11 +10027,7 @@ func_7EB4(param_00, param_01, param_02) {
 func_22C1(param_00, param_01) {
   for(var_02 = 0; var_02 < param_00.size - 1; var_02++) {
     for(var_03 = var_02 + 1; var_03 < param_00.size; var_03++) {
-      if(param_00[var_03][
-          [param_01]
-        ]() < param_00[var_02][
-          [param_01]
-        ]()) {
+      if(param_00[var_03][[param_01]]() < param_00[var_02][[param_01]]()) {
         var_04 = param_00[var_03];
         param_00[var_03] = param_00[var_02];
         param_00[var_02] = var_04;

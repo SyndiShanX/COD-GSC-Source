@@ -6,8 +6,7 @@
 #include maps\mp\_utility;
 #include common_scripts\utility;
 
-init() {
-}
+init() {}
 
 wait_until_first_player() {
   players = get_players();
@@ -62,8 +61,7 @@ monitor_player_movement() {
 
     if(distancemoved > 4096) {
       self.player_is_moving = 1;
-    }
-    else {
+    } else {
       self.player_is_moving = 0;
     }
   }

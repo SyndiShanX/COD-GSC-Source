@@ -12,7 +12,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
-
 #namespace wave_manager_sys;
 
 class cwavemanager {
@@ -122,7 +121,7 @@ private debug_think() {
           var_c708e6e1 += n_y_offset;
           debug2dtext((800, var_c708e6e1, 0), "<dev string:xf4>", (0, 1, 1), 1, (0, 0, 0), 0.9, 1, 1);
 
-            waitframe(1);
+          waitframe(1);
           continue;
         }
 
@@ -136,10 +135,9 @@ private debug_think() {
         var_c708e6e1 += n_y_offset;
         debug2dtext((800, var_c708e6e1, 0), "<dev string:xf4>", (0, 1, 1), 1, (0, 0, 0), 0.9, 1, 1);
 
-          if(isDefined(var_dcd6c23.var_f68bc980) && var_dcd6c23.var_f68bc980) {
-            str_status = "<dev string:x11e>";
-          }
-        else if(function_e43e16d2(var_dcd6c23)) {
+        if(isDefined(var_dcd6c23.var_f68bc980) && var_dcd6c23.var_f68bc980) {
+          str_status = "<dev string:x11e>";
+        } else if(function_e43e16d2(var_dcd6c23)) {
           str_status = "<dev string:x128>";
         } else {
           str_status = "<dev string:x133>";
@@ -151,10 +149,9 @@ private debug_think() {
         var_c708e6e1 += n_y_offset;
         debug2dtext((800, var_c708e6e1, 0), "<dev string:xf4>", (0, 1, 1), 1, (0, 0, 0), 0.9, 1, 1);
 
-          if(function_a2115dc4(var_dcd6c23, var_dcd6c23.var_4417045b)) {
-            str_status = "<dev string:x145>";
-          }
-        else if(function_e43e16d2(var_dcd6c23, var_dcd6c23.var_4417045b)) {
+        if(function_a2115dc4(var_dcd6c23, var_dcd6c23.var_4417045b)) {
+          str_status = "<dev string:x145>";
+        } else if(function_e43e16d2(var_dcd6c23, var_dcd6c23.var_4417045b)) {
           str_status = "<dev string:x128>";
         } else {
           str_status = "<dev string:x133>";
@@ -164,7 +161,7 @@ private debug_think() {
         var_c708e6e1 += n_y_offset;
         debug2dtext((800, var_c708e6e1, 0), str_text, (0, 1, 0), 1, (0, 0, 0), 0.9, 1, 1);
 
-          n_total_count = 0;
+        n_total_count = 0;
         var_a549e716 = 0;
 
         foreach(var_c21b798e in var_dcd6c23.var_376c2c29) {
@@ -178,26 +175,26 @@ private debug_think() {
         var_c708e6e1 += n_y_offset;
         debug2dtext((800, var_c708e6e1, 0), "<dev string:xf4>", (0, 1, 1), 1, (0, 0, 0), 0.9, 1, 1);
 
-          if(isDefined(var_dcd6c23.var_376c2c29)) {
-            var_c708e6e1 += n_y_offset;
-            var_1d3b29d6 = 1;
+        if(isDefined(var_dcd6c23.var_376c2c29)) {
+          var_c708e6e1 += n_y_offset;
+          var_1d3b29d6 = 1;
 
-            foreach(var_c21b798e in var_dcd6c23.var_376c2c29) {
-              if(function_f77ad8a3(var_c21b798e)) {
-                str_status = "<dev string:x145>";
-              } else if(function_9e2b33f4(var_c21b798e)) {
-                str_status = "<dev string:x19a>";
-              } else {
-                str_status = "<dev string:x133>";
-              }
-
-              str_text = "<dev string:x1ab>" + var_1d3b29d6 + "<dev string:x1b8>" + var_c21b798e.var_bcd4e683 + "<dev string:x1c5>" + var_c21b798e.var_23791f08 + "<dev string:x13d>" + str_status + "<dev string:x1cf>";
-              debug2dtext((800, var_c708e6e1, 0), str_text, (1, 1, 1), 1, (0, 0, 0), 0.9, 1, 1);
-              var_c708e6e1 += var_90fbd845;
-
-                var_1d3b29d6++;
+          foreach(var_c21b798e in var_dcd6c23.var_376c2c29) {
+            if(function_f77ad8a3(var_c21b798e)) {
+              str_status = "<dev string:x145>";
+            } else if(function_9e2b33f4(var_c21b798e)) {
+              str_status = "<dev string:x19a>";
+            } else {
+              str_status = "<dev string:x133>";
             }
+
+            str_text = "<dev string:x1ab>" + var_1d3b29d6 + "<dev string:x1b8>" + var_c21b798e.var_bcd4e683 + "<dev string:x1c5>" + var_c21b798e.var_23791f08 + "<dev string:x13d>" + str_status + "<dev string:x1cf>";
+            debug2dtext((800, var_c708e6e1, 0), str_text, (1, 1, 1), 1, (0, 0, 0), 0.9, 1, 1);
+            var_c708e6e1 += var_90fbd845;
+
+            var_1d3b29d6++;
           }
+        }
 
         if(isDefined(var_dcd6c23.var_376c2c29)) {
           var_1d3b29d6 = 1;
@@ -208,11 +205,11 @@ private debug_think() {
                 sphere(ai.origin, 4, (0, 0, 1), 1, 0, 8, 1);
                 print3d(ai.origin + (0, 0, 10), "<dev string:x1d4>" + var_dcd6c23.var_4417045b + "<dev string:x1dc>" + var_1d3b29d6, (0, 0, 1), 1, 0.5, 1);
 
-                  if(isDefined(var_dcd6c23.var_3844e966)) {
-                    line(ai.origin + (0, 0, 30), var_dcd6c23.var_3844e966.origin, (0, 0, 1), 1, 0, 1);
+                if(isDefined(var_dcd6c23.var_3844e966)) {
+                  line(ai.origin + (0, 0, 30), var_dcd6c23.var_3844e966.origin, (0, 0, 1), 1, 0, 1);
 
-                      continue;
-                  }
+                  continue;
+                }
 
                 if(isDefined(level.players[0])) {
                   origin = level.players[0].origin + vectorscale(anglesToForward(level.players[0].angles), 100);
@@ -233,11 +230,11 @@ private debug_think() {
                 sphere(ai.origin, 4, (1, 0, 0), 1, 0, 8, 1);
                 print3d(ai.origin + (0, 0, 10), "<dev string:x1d4>" + var_c082553f, (1, 0, 0), 1, 0.5, 1);
 
-                  if(isDefined(var_dcd6c23.var_3844e966)) {
-                    line(ai.origin + (0, 0, 30), var_dcd6c23.var_3844e966.origin, (1, 0, 0), 1, 0, 1);
+                if(isDefined(var_dcd6c23.var_3844e966)) {
+                  line(ai.origin + (0, 0, 30), var_dcd6c23.var_3844e966.origin, (1, 0, 0), 1, 0, 1);
 
-                      continue;
-                  }
+                  continue;
+                }
 
                 if(isDefined(level.players[0])) {
                   origin = level.players[0].origin + vectorscale(anglesToForward(level.players[0].angles), 100);
@@ -269,16 +266,16 @@ private debug_think() {
   }
 }
 
-  function private function_51ce850d() {
-    self namespace_2e6206f9::register_callback("script_enable_on_success", &wave_manager::start);
-    self namespace_2e6206f9::register_callback("script_enable_on_failure", &wave_manager::start);
-    self namespace_2e6206f9::register_callback("script_enable_no_specialist", &wave_manager::start);
-    self namespace_2e6206f9::register_callback("script_disable_on_success", &wave_manager::stop);
-    self namespace_2e6206f9::register_callback("script_disable_on_failure", &wave_manager::stop);
-    self namespace_2e6206f9::register_custom_callback("breadcrumb", "script_enable_on_success", &function_710cbc75);
-    self namespace_2e6206f9::register_custom_callback("breadcrumb", "script_enable_on_failure", &function_710cbc75);
-    self namespace_2e6206f9::register_custom_callback("breadcrumb", "script_enable_no_specialist", &function_710cbc75);
-  }
+function private function_51ce850d() {
+  self namespace_2e6206f9::register_callback("script_enable_on_success", &wave_manager::start);
+  self namespace_2e6206f9::register_callback("script_enable_on_failure", &wave_manager::start);
+  self namespace_2e6206f9::register_callback("script_enable_no_specialist", &wave_manager::start);
+  self namespace_2e6206f9::register_callback("script_disable_on_success", &wave_manager::stop);
+  self namespace_2e6206f9::register_callback("script_disable_on_failure", &wave_manager::stop);
+  self namespace_2e6206f9::register_custom_callback("breadcrumb", "script_enable_on_success", &function_710cbc75);
+  self namespace_2e6206f9::register_custom_callback("breadcrumb", "script_enable_on_failure", &function_710cbc75);
+  self namespace_2e6206f9::register_custom_callback("breadcrumb", "script_enable_no_specialist", &function_710cbc75);
+}
 
 private function_374e4d47() {
   foreach(var_7418aa09 in trigger::get_all()) {
@@ -534,9 +531,9 @@ private start_internal(s_wave_manager_struct, str_team, b_looping, str_wavemanag
 
   update_devgui();
 
-    if(isDefined(s_wave_manager_struct)) {
-      s_wave_manager_struct flag::set("wave_manager_started");
-    }
+  if(isDefined(s_wave_manager_struct)) {
+    s_wave_manager_struct flag::set("wave_manager_started");
+  }
 
   return var_dcd6c23;
 }
@@ -966,7 +963,7 @@ private function_8f5ed189(var_dcd6c23, var_c21b798e) {
         println("<dev string:x32b>" + var_dcd6c23.var_556afb3d + "<dev string:x36b>" + var_c21b798e.var_ef327d57 + 1 + "<dev string:x384>");
         iprintln("<dev string:x32b>" + var_dcd6c23.var_556afb3d + "<dev string:x36b>" + var_c21b798e.var_ef327d57 + 1 + "<dev string:x384>");
 
-          break;
+        break;
       }
 
       if(!(isDefined(var_393f60f2) && var_393f60f2) && isDefined(var_13027679)) {
@@ -974,7 +971,7 @@ private function_8f5ed189(var_dcd6c23, var_c21b798e) {
           println("<dev string:x39a>" + var_26413beb + "<dev string:x3ba>" + var_dcd6c23.var_556afb3d + "<dev string:x36b>" + var_c21b798e.var_ef327d57 + 1 + "<dev string:x3d7>");
           iprintln("<dev string:x39a>" + var_26413beb + "<dev string:x3ba>" + var_dcd6c23.var_556afb3d + "<dev string:x36b>" + var_c21b798e.var_ef327d57 + 1 + "<dev string:x3d7>");
 
-            break;
+          break;
         }
 
         var_aea390b6 = var_13027679;
@@ -985,14 +982,14 @@ private function_8f5ed189(var_dcd6c23, var_c21b798e) {
 
       spawner::global_spawn_throttle();
 
-      if(!isDefined(var_549391b8) || !isDefined(var_549391b8[#"spawner"]) || var_549391b8[#"spawner"].count < 1 && !(isDefined(var_549391b8[#"spawner"].spawnflags) && (var_549391b8[#"spawner"].spawnflags& 64) == 64)) {
+      if(!isDefined(var_549391b8) || !isDefined(var_549391b8[# "spawner"]) || var_549391b8[# "spawner"].count < 1 && !(isDefined(var_549391b8[# "spawner"].spawnflags) && (var_549391b8[# "spawner"].spawnflags & 64) == 64)) {
         s_spawn_point = aispawningutility::function_e312ad4d(var_dcd6c23.m_str_team, var_dcd6c23.var_27eacb34, var_82706add);
 
         if(!isDefined(s_spawn_point)) {
           println("<dev string:x3f9>" + var_82706add + "<dev string:x423>" + var_dcd6c23.var_556afb3d + "<dev string:x437>");
           iprintln("<dev string:x3f9>" + var_82706add + "<dev string:x423>" + var_dcd6c23.var_556afb3d + "<dev string:x437>");
 
-            arrayremoveindex(var_c165240a, var_82706add, 1);
+          arrayremoveindex(var_c165240a, var_82706add, 1);
 
           if(var_c165240a.size > 0 && isDefined(var_393f60f2) && var_393f60f2) {
             continue;
@@ -1002,24 +999,24 @@ private function_8f5ed189(var_dcd6c23, var_c21b798e) {
         }
       }
 
-      v_origin = isDefined(s_spawn_point) ? s_spawn_point[#"origin"] : (0, 0, 0);
-      v_angles = isDefined(s_spawn_point) ? s_spawn_point[#"angles"] : (0, 0, 0);
-      var_c8fa21da = isDefined(s_spawn_point) ? s_spawn_point[#"spawner"] : undefined;
+      v_origin = isDefined(s_spawn_point) ? s_spawn_point[# "origin"] : (0, 0, 0);
+      v_angles = isDefined(s_spawn_point) ? s_spawn_point[# "angles"] : (0, 0, 0);
+      var_c8fa21da = isDefined(s_spawn_point) ? s_spawn_point[# "spawner"] : undefined;
 
       if(n_group_size > 1) {
         var_549391b8 = s_spawn_point;
       }
 
       if(isDefined(var_c8fa21da)) {
-        b_infinite_spawn = isDefined(var_c8fa21da.spawnflags) && (var_c8fa21da.spawnflags& 64) == 64;
-        b_force_spawn = isDefined(var_c8fa21da.spawnflags) && (var_c8fa21da.spawnflags& 16) == 16;
+        b_infinite_spawn = isDefined(var_c8fa21da.spawnflags) && (var_c8fa21da.spawnflags & 64) == 64;
+        b_force_spawn = isDefined(var_c8fa21da.spawnflags) && (var_c8fa21da.spawnflags & 16) == 16;
       }
 
       var_ae2df0a1 = isDefined(var_c8fa21da.aitype) && function_e949cfd7(var_c8fa21da.aitype);
 
       if(var_ae2df0a1) {
         if(isDefined(var_c8fa21da)) {
-          ai = var_c8fa21da spawnfromspawner(s_spawn_point[#"spawner"].targetname, b_force_spawn, 0, b_infinite_spawn);
+          ai = var_c8fa21da spawnfromspawner(s_spawn_point[# "spawner"].targetname, b_force_spawn, 0, b_infinite_spawn);
 
           if(!isDefined(var_dcd6c23.var_246fb97f)) {
             var_dcd6c23.var_246fb97f = [];
@@ -1032,7 +1029,7 @@ private function_8f5ed189(var_dcd6c23, var_c21b798e) {
           }
         }
       } else if(isDefined(var_c8fa21da)) {
-        ai = var_c8fa21da spawnfromspawner(s_spawn_point[#"spawner"].targetname, b_force_spawn, 0, b_infinite_spawn);
+        ai = var_c8fa21da spawnfromspawner(s_spawn_point[# "spawner"].targetname, b_force_spawn, 0, b_infinite_spawn);
 
         if(!isDefined(var_dcd6c23.var_246fb97f)) {
           var_dcd6c23.var_246fb97f = [];

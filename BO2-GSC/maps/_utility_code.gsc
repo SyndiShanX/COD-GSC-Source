@@ -95,8 +95,7 @@ update_debug_friendlycolor(num) {
 
   if(isDefined(self.script_forcecolor)) {
     level.debug_color_friendlies[num] = self.script_forcecolor;
-  }
-  else {
+  } else {
     level.debug_color_friendlies[num] = undefined;
   }
 
@@ -194,9 +193,7 @@ hintprint(string, breakfunc) {
       hint.alpha = 0.4;
       hintprintwait(0.75, breakfunc);
 
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
 
@@ -204,9 +201,7 @@ hintprint(string, breakfunc) {
       hint.alpha = 0.95;
       hintprintwait(0.75);
 
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
     }
@@ -243,11 +238,9 @@ lerp_player_view_to_tag_internal(ent, tag, lerptime, fraction, right_arc, left_a
   }
   if(isDefined(right_arc)) {
     self playerlinkto(ent, tag, fraction, right_arc, left_arc, top_arc, bottom_arc);
-  }
-  else if(isDefined(fraction)) {
+  } else if(isDefined(fraction)) {
     self playerlinkto(ent, tag, fraction);
-  }
-  else {
+  } else {
     self playerlinkto(ent);
   }
 }
@@ -299,17 +292,13 @@ function_stack_proc(caller, func, param1, param2, param3, param4) {
   if(isDefined(caller)) {
     if(isDefined(param4)) {
       caller[[func]](param1, param2, param3, param4);
-    }
-    else if(isDefined(param3)) {
+    } else if(isDefined(param3)) {
       caller[[func]](param1, param2, param3);
-    }
-    else if(isDefined(param2)) {
+    } else if(isDefined(param2)) {
       caller[[func]](param1, param2);
-    }
-    else if(isDefined(param1)) {
+    } else if(isDefined(param1)) {
       caller[[func]](param1);
-    }
-    else {
+    } else {
       caller[[func]]();
     }
 
@@ -562,8 +551,7 @@ exploder_rumble() {
 
   if(isDefined(self.v["damage_radius"])) {
     n_rumble_threshold_squared = self.v["damage_radius"] * self.v["damage_radius"];
-  }
-  else {
+  } else {
     println("exploder #" + self.v["exploder"] + " missing script_radius KVP, using default.");
 
     n_rumble_threshold_squared = 16384;
@@ -624,8 +612,7 @@ trail_effect() {
 
   if(self.v["trailfxtag"] == "tag_origin") {
     playFXOnTag(level._effect[self.v["trailfx"]], self.model, self.v["trailfxtag"]);
-  }
-  else {
+  } else {
     temp_ent = spawn("script_model", self.model.origin);
     temp_ent setModel("tag_origin");
     temp_ent linkto(self.model, self.v["trailfxtag"]);
@@ -635,8 +622,7 @@ trail_effect() {
   if(isDefined(self.v["trailfxsound"])) {
     if(!isDefined(temp_ent)) {
       self.model playLoopSound(self.v["trailfxsound"]);
-    }
-    else {
+    } else {
       temp_ent playLoopSound(self.v["trailfxsound"]);
     }
   }
@@ -678,14 +664,11 @@ exec_func(func, endons) {
 
   if(func.parms.size == 0) {
     func.caller[[func.func]]();
-  }
-  else if(func.parms.size == 1) {
+  } else if(func.parms.size == 1) {
     func.caller[[func.func]](func.parms[0]);
-  }
-  else if(func.parms.size == 2) {
+  } else if(func.parms.size == 2) {
     func.caller[[func.func]](func.parms[0], func.parms[1]);
-  }
-  else if(func.parms.size == 3) {
+  } else if(func.parms.size == 3) {
     func.caller[[func.func]](func.parms[0], func.parms[1], func.parms[2]);
   }
 }
@@ -761,11 +744,7 @@ exchange_sort_by_handler(array, compare_func) {
 
   for(i = 0; i < array.size - 1; i++) {
     for(j = i + 1; j < array.size; j++) {
-      if(array[j][
-          [compare_func]
-        ]() < array[i][
-          [compare_func]
-        ]()) {
+      if(array[j][[compare_func]]() < array[i][[compare_func]]()) {
         ref = array[j];
         array[j] = array[i];
         array[i] = ref;

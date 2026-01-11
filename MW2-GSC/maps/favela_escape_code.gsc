@@ -750,9 +750,9 @@ radiotower_enemy_callout_rooftop() {
 
   /*
   startTime = GetTime();
-	
+  	
   flag_waitopen( "scripted_dialogue" );
-	
+  	
   if( seconds( GetTime() - startTime ) < 0.5 )
   {
   	wait( 2 );
@@ -2566,7 +2566,7 @@ player_bigjump_recovery_vfx(animtime, shockfile) {
   dof_see_hands[ "farBlur" ] = 2.5;
   thread blend_dof( dof_start, dof_see_hands, 3 );
   SetBlur( 0, 3 );
-	
+  	
 
   flag_wait( "notetrack_player_lowerhands" );
   /*-----------------------

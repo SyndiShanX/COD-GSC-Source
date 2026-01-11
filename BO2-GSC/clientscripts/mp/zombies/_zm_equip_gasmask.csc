@@ -29,8 +29,7 @@ map_material_helper(player, materialname) {
 
   if(isDefined(level.filter_matid[materialname])) {
     player map_material(level.filter_matid[materialname], materialname);
-  }
-  else {
+  } else {
     level.filter_matid[materialname] = level.filter_matcount;
     player map_material(level.filter_matcount, materialname);
     level.filter_matcount++;

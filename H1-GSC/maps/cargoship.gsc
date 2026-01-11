@@ -621,8 +621,7 @@ bridge_heli_2() {
 
   if(level.jumpto == "start") {
     level.heli maps\mo_fastrope::fastrope_heli_overtake();
-  }
-  else {
+  } else {
     level waittill("bridge_jumpto_done");
   }
 
@@ -901,8 +900,7 @@ quarters_sleeping() {
 
   if(randomint(100) > 50) {
     maps\_utility::radio_dialogue("cargoship_sas4_sweetdreams");
-  }
-  else {
+  } else {
     maps\_utility::radio_dialogue("cargoship_sas4_sleeptight");
   }
 
@@ -1117,8 +1115,7 @@ quarters_drunk_bottle(var_0) {
 
   if(var_2 == level.player) {
     common_scripts\utility::flag_set("vodka_falling");
-  }
-  else {
+  } else {
     level notify("drunk_guy_killed_by_ai");
     quarter_drunk_bottle_brokefx(self gettagorigin("tag_inhand"), var_0);
   }
@@ -1618,8 +1615,7 @@ deck_heroes(var_0, var_1) {
 
   if(isDefined(var_0.radius) && var_0.radius > 0) {
     self.goalradius = var_0.radius;
-  }
-  else {
+  } else {
     self.goalradius = 80;
   }
 
@@ -1642,8 +1638,7 @@ deck_heroes(var_0, var_1) {
 
     if(isDefined(var_0.radius) && var_0.radius > 0) {
       self.goalradius = var_0.radius;
-    }
-    else {
+    } else {
       self.goalradius = 80;
     }
 
@@ -2123,8 +2118,7 @@ hallways_breach_clip() {
 door_player_clip() {
   if(level.player istouching(self)) {
     self notsolid();
-  }
-  else {
+  } else {
     return;
   }
 
@@ -2216,8 +2210,7 @@ cargohold_main() {
 
       if(level.jumpto == "cargohold") {
         var_2["grigsby"] = undefined;
-      }
-      else {
+      } else {
         var_2["grigsby"] = "stand2run";
       }
 
@@ -3349,8 +3342,7 @@ package_doorsetup() {
 
   if(issubstr(self.target, "right")) {
     var_5 = var_4 - var_6;
-  }
-  else {
+  } else {
     var_5 = var_4 + var_6;
   }
 
@@ -3752,8 +3744,7 @@ end_mantle_angle() {
 
   if(vectordot(var_1, var_2) > 0.75) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -4058,8 +4049,7 @@ end_screen() {
 
   if(getdvar("limited_mode") == "1") {
     wait 0.5;
-  }
-  else {
+  } else {
     level.intro_offset = 0;
     var_1 = [];
     var_1[var_1.size] = &"CARGOSHIP_INFINITY_WARD_PRESENTS";
@@ -4323,7 +4313,7 @@ cargohold_lights_logic() {
   wait 1;
 
   foreach(var_1 in level.cargohold_lights) {
-  var_1.lamp_off_model show();
+    var_1.lamp_off_model show();
   }
 
   maps\cargoship_lighting::cargohold_lights_flickering();
@@ -4682,7 +4672,7 @@ boxes_in_the_wind() {
   var_0 = getEntArray("windboxes", "targetname");
 
   foreach(var_2 in var_0) {
-  thread movewindbox(var_2);
+    thread movewindbox(var_2);
   }
 
   var_4 = gettime();
@@ -4758,8 +4748,7 @@ start_physical_dof() {
 
     if(var_5 < 2.1) {
       var_12 = 0;
-    }
-    else if(var_12 < var_8) {
+    } else if(var_12 < var_8) {
       level.player setphysicaldepthoffield(var_4.fstop, var_4.focusdistance, var_4.focusspeed, var_4.aperturespeed);
       var_7 = 1;
     } else if(var_12 > var_9 && var_12 < var_10) {
@@ -4814,7 +4803,7 @@ items_sway_roll() {
   var_0 = getEntArray("item_sway_roll", "targetname");
 
   foreach(var_2 in var_0) {
-  thread roll_sway_item(var_2);
+    thread roll_sway_item(var_2);
   }
 }
 

@@ -45,8 +45,7 @@ combatidle() {
 
           if(isDefined(betternode) && (!isDefined(self.node) || betternode != self.node)) {
             self usecovernode(betternode);
-          }
-          else if(tryreacquire()) {
+          } else if(tryreacquire()) {
             return;
           }
         }
@@ -228,14 +227,11 @@ getidleanimname() {
 tryreacquire() {
   if(self reacquirestep(64)) {
     return true;
-  }
-  else if(self reacquirestep(128)) {
+  } else if(self reacquirestep(128)) {
     return true;
-  }
-  else if(self reacquirestep(192)) {
+  } else if(self reacquirestep(192)) {
     return true;
-  }
-  else if(self reacquirestep(256)) {
+  } else if(self reacquirestep(256)) {
     return true;
   }
 

@@ -37,8 +37,7 @@ main(model, type) {
 
   if(issubstr(model, "_low")) {
     build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun_low");
-  }
-  else {
+  } else {
     build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun");
   }
 

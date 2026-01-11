@@ -80,8 +80,7 @@ func_B35F() {
 
   if(isDefined(level.func_B833)) {
     thread scripts\sp\utility::func_56BA("jackal_supply_drop");
-  }
-  else {
+  } else {
     thread scripts\sp\utility::func_56BE("jackal_supply_drop", 4);
   }
 
@@ -293,8 +292,7 @@ func_5BFD(var_00, var_01) {
 
     if(var_13 > 0) {
       var_35 = 1;
-    }
-    else {
+    } else {
       if(!isDefined(var_15)) {
         var_15 = var_11;
       }
@@ -332,8 +330,7 @@ func_5BFC(var_00) {
 
   if(!isDefined(var_00)) {
     var_02 = level.player _meth_8473();
-  }
-  else {
+  } else {
     var_02 = level.func_D127;
   }
 
@@ -382,8 +379,7 @@ func_5BFC(var_00) {
 
     if(!isDefined(var_00)) {
       var_02 = level.player _meth_8473();
-    }
-    else {
+    } else {
       var_02 = level.func_D127;
     }
 
@@ -409,8 +405,7 @@ func_5BFC(var_00) {
 
     if(!isDefined(var_00)) {
       var_05 = var_05 - rotatevectorinverted(var_2.spaceship_vel, var_2.angles) * var_25;
-    }
-    else {
+    } else {
       var_05 = var_05 - rotatevectorinverted(var_2.angles * 100, var_2.angles) * var_25;
     }
 
@@ -903,8 +898,7 @@ func_5C9F(var_00) {
 
   if(!isDefined(var_00)) {
     func_0BDC::func_A387();
-  }
-  else {
+  } else {
     self unlink();
   }
 

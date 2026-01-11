@@ -85,8 +85,7 @@ aud_check(var_0) {
     }
     if(var_0 == "hvt") {
       maps\_utility::music_play("mus_hq_found_ajax");
-    }
-    else {
+    } else {
       if(var_0 == "finale") {
         return;
       }
@@ -111,16 +110,14 @@ aud_music(var_0) {
     }
     if(var_0 == "lookfordoor") {
       maps\_utility::music_play("mus_hq_breach_search");
-    }
-    else if(var_0 == "foundajax") {
+    } else if(var_0 == "foundajax") {
       wait 2;
       maps\_utility::music_play("mus_hq_found_ajax");
     } else if(var_0 == "combatprep")
       maps\_utility::music_crossfade("mus_hq_combat_prep", 1.0);
     else if(var_0 == "finalbattle") {
       maps\_utility::music_crossfade("mus_hq_final_battle", 1.0);
-    }
-    else {
+    } else {
       if(var_0 == "exfil") {
         return;
       }
@@ -205,11 +202,11 @@ aud_start_sniper(var_0) {
     var_2 = getaiarray("allies");
 
     foreach(var_4 in var_2) {
-    var_4 thread aud_handle_allies_remote_sniper(level.aud_vip_ally_locs);
+      var_4 thread aud_handle_allies_remote_sniper(level.aud_vip_ally_locs);
     }
 
     foreach(var_7 in var_1) {
-    var_7 thread aud_handle_remote_sniper_ai(level.aud_vip_combat);
+      var_7 thread aud_handle_remote_sniper_ai(level.aud_vip_combat);
     }
   } else if(var_0 == "enhq_stadium_large_room") {
     wait 2;
@@ -218,11 +215,11 @@ aud_start_sniper(var_0) {
     var_2 = getaiarray("allies");
 
     foreach(var_4 in var_2) {
-    var_4 thread aud_handle_allies_remote_sniper(level.aud_finale_ally_locs);
+      var_4 thread aud_handle_allies_remote_sniper(level.aud_finale_ally_locs);
     }
 
     foreach(var_7 in var_1) {
-    var_7 thread aud_handle_remote_sniper_ai(level.aud_finale_sniper);
+      var_7 thread aud_handle_remote_sniper_ai(level.aud_finale_sniper);
     }
 
     level.aud_finale_sniper linkto(level.player);
@@ -235,7 +232,7 @@ aud_start_sniper(var_0) {
     var_2 = getaiarray("allies");
 
     foreach(var_4 in var_2) {
-    var_4 thread aud_handle_allies_remote_sniper(level.aud_traverse_ally_locs);
+      var_4 thread aud_handle_allies_remote_sniper(level.aud_traverse_ally_locs);
     }
   }
 
@@ -346,16 +343,14 @@ aud_convoy_start(var_0) {
   } else if(level.aud_intro_convoy_counter == 6 || level.aud_intro_convoy_counter == 7) {
     if(var_0.vehicletype == "iveco_lynx") {
       var_0 playSound("enhq_convoy_intro_jeep_1");
-    }
-    else {
+    } else {
       wait 0.6;
       var_0 playSound("enhq_convoy_intro_half_4");
     }
   } else if(level.aud_intro_convoy_counter == 8 || level.aud_intro_convoy_counter == 9) {
     if(var_0.target == "pf251_auto120") {
       var_0 playSound("enhq_convoy_intro_jeep_1");
-    }
-    else {
+    } else {
       wait 4;
       var_0 playSound("enhq_convoy_intro_jeep_2");
     }
@@ -370,16 +365,14 @@ aud_convoy_start(var_0) {
   } else if(level.aud_intro_convoy_counter == 12 || level.aud_intro_convoy_counter == 13) {
     if(var_0.vehicletype == "iveco_lynx") {
       var_0 playSound("enhq_convoy_intro_jeep_4");
-    }
-    else {
+    } else {
       wait 2.05;
       var_0 playSound("enhq_convoy_intro_half_2");
     }
   } else if(level.aud_intro_convoy_counter == 14 || level.aud_intro_convoy_counter == 15) {
     if(var_0.unique_id == "ai41") {
       var_0 playSound("enhq_convoy_intro_jeep_1");
-    }
-    else {
+    } else {
       wait 2.45;
       var_0 playSound("enhq_convoy_intro_jeep_3");
     }
@@ -429,8 +422,7 @@ aud_listen_mk32_reload() {
   for(;;) {
     if(level.player isreloading()) {
       level.aud_player_reloading = 1;
-    }
-    else {
+    } else {
       wait 0.1;
       level.aud_player_reloading = 0;
     }
@@ -465,8 +457,7 @@ aud_mk32_dud_beep_hit(var_0, var_1, var_2) {
 
   if(var_1) {
     var_0 thread maps\_utility::play_sound_on_entity("enhq_mk203_impact");
-  }
-  else {
+  } else {
     var_0 thread maps\_utility::play_sound_on_entity("enhq_mk203_impact_stone");
   }
 }
@@ -622,7 +613,7 @@ aud_mute_field_guys() {
   var_0 = maps\_utility::get_ai_group_ai("field_chaos_guys");
 
   foreach(var_2 in var_0) {
-  var_2 thread aud_limit_weaps();
+    var_2 thread aud_limit_weaps();
   }
 }
 
@@ -635,8 +626,7 @@ aud_limit_weaps() {
 
     if(level.aud_bullet_count > level.aud_max_bullets) {
       self stopsounds();
-    }
-    else {
+    } else {
       wait 1.5;
     }
 
@@ -844,7 +834,7 @@ aud_player_slide() {
 
 aud_pre_sniper_rpg_listener() {
   foreach(var_1 in level.rpg_ambush_guys) {
-  var_1 thread aud_pre_sniper_rpg_gunner_listener();
+    var_1 thread aud_pre_sniper_rpg_gunner_listener();
   }
 }
 
@@ -1101,8 +1091,7 @@ aud_radio_chatter() {
   for(;;) {
     if(var_0) {
       thread common_scripts\utility::play_sound_in_space("enhq_radio_static_1", (4935, -4502, -921));
-    }
-    else {
+    } else {
       thread common_scripts\utility::play_sound_in_space("enhq_radio_static_2", (4935, -4502, -921));
     }
 
@@ -1146,14 +1135,11 @@ aud_handle_remote_sniper_ai(var_0) {
 
         if(var_1 == 0) {
           level.aud_finale_chopper1 playSound("weap_sc2010_fire_npc");
-        }
-        else if(var_1 == 1) {
+        } else if(var_1 == 1) {
           level.aud_finale_chopper2 playSound("weap_m27_fire_npc");
-        }
-        else if(var_1 == 2) {
+        } else if(var_1 == 2) {
           level.aud_finale_chopper3 playSound("weap_m27_fire_npc");
-        }
-        else if(var_1 == 3) {
+        } else if(var_1 == 3) {
           level.aud_finale_chopper4 playSound("weap_m27_fire_npc");
         }
 
@@ -1166,8 +1152,7 @@ aud_handle_remote_sniper_ai(var_0) {
     if(randomint(10) < 9) {
       if(randomint(2) == 0) {
         level.aud_finale_sniper playSound("weap_sc2010_fire_npc");
-      }
-      else {
+      } else {
         level.aud_finale_sniper2 playSound("weap_m27_fire_npc");
       }
 
@@ -1233,7 +1218,7 @@ aud_chopper_second(var_0) {
   level.aud_finale_chopper4 linkto(level.player);
 
   foreach(var_6 in var_4) {
-  var_6 thread aud_handle_remote_sniper_ai(level.aud_finale_chopper1);
+    var_6 thread aud_handle_remote_sniper_ai(level.aud_finale_chopper1);
   }
 
   thread aud_chopper_down(var_0, var_1, var_2, var_3);

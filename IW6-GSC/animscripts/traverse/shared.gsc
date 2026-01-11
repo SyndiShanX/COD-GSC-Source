@@ -34,8 +34,7 @@ advancedtraverse(var_0, var_1) {
 
     if(!animhasnotetrack(var_0, "blend")) {
       wait(var_5);
-    }
-    else {
+    } else {
       self waittillmatch("traverse", "blend");
     }
   }
@@ -150,11 +149,9 @@ dotraverse(var_0) {
 handletraversenotetracks(var_0) {
   if(var_0 == "traverse_death") {
     return handletraversedeathnotetrack();
-  }
-  else if(var_0 == "traverse_align") {
+  } else if(var_0 == "traverse_align") {
     return handletraversealignment();
-  }
-  else if(var_0 == "traverse_drop") {
+  } else if(var_0 == "traverse_drop") {
     return handletraversedrop();
   }
 }
@@ -190,8 +187,7 @@ handletraversedrop() {
 
   if(var_7 < var_3) {
     var_9 = var_7 / var_3;
-  }
-  else {
+  } else {
     var_9 = 1;
   }
 
@@ -231,8 +227,7 @@ dog_handle_traverse_notetracks(var_0) {
 
     if(var_4.size > 0) {
       var_1 = var_4;
-    }
-    else {
+    } else {
       var_1 = getnotetracktimes(self.traverseanim, "traverse_jump_end");
       var_3 = 1;
     }
@@ -333,8 +328,7 @@ dog_jump_down(var_0, var_1, var_2, var_3) {
 
   if(!var_3) {
     animscripts\shared::donotetracks("traverseAnim");
-  }
-  else {
+  } else {
     animscripts\notetracks::donotetracksintercept("traverseAnim", ::dog_handle_traverse_notetracks);
   }
 
@@ -374,8 +368,7 @@ dog_jump_up(var_0, var_1, var_2, var_3) {
 
   if(!var_3) {
     animscripts\shared::donotetracks("traverseAnim");
-  }
-  else {
+  } else {
     animscripts\notetracks::donotetracksintercept("traverseAnim", ::dog_handle_traverse_notetracks);
   }
 

@@ -79,8 +79,7 @@ bot_conf_think() {
         if(maps\mp\bots\_bots_personality::should_select_new_ambush_point()) {
           if(maps\mp\bots\_bots_personality::find_ambush_node(self.tag_getting.ground_pos, 1000)) {
             childthread bot_camp_tag(self.tag_getting, "camp");
-          }
-          else {
+          } else {
             self.conf_camping_tag = 0;
           }
         }
@@ -249,8 +248,7 @@ bot_find_visible_tags(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_3 = var_1;
-  }
-  else {
+  } else {
     var_3 = self getnearestnode();
   }
 
@@ -258,8 +256,7 @@ bot_find_visible_tags(var_0, var_1, var_2) {
 
   if(isDefined(var_2)) {
     var_4 = var_2;
-  }
-  else {
+  } else {
     var_4 = self botgetfovdot();
   }
 

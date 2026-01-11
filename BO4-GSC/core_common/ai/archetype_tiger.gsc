@@ -19,7 +19,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\zm_devgui;
 #include scripts\zm_common\zm_utility;
-
 #namespace tigerbehavior;
 
 class class_c40841ac {
@@ -205,7 +204,7 @@ private is_target_valid(tiger, target) {
     return 0;
   }
 
-  if(!(tiger.team == #"allies")) {
+  if(!(tiger.team == # "allies")) {
     if(!isplayer(target) && sessionmodeiszombiesgame()) {
       return 0;
     }
@@ -250,7 +249,7 @@ private get_favorite_enemy(tiger) {
   var_7c746996 = [];
 
   if(sessionmodeiszombiesgame()) {
-    if(self.team == #"allies") {
+    if(self.team == # "allies") {
       var_7c746996 = getaiteamarray(level.zombie_team);
     } else {
       var_7c746996 = getplayers();
@@ -355,7 +354,7 @@ tigertargetservice(behaviortreeentity) {
     return;
   }
 
-  if((!sessionmodeiszombiesgame() || behaviortreeentity.team == #"allies") && !is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy)) {
+  if((!sessionmodeiszombiesgame() || behaviortreeentity.team == # "allies") && !is_target_valid(behaviortreeentity, behaviortreeentity.favoriteenemy)) {
     behaviortreeentity.favoriteenemy = get_favorite_enemy(behaviortreeentity);
   }
 
@@ -583,8 +582,8 @@ private p8_usa_farm_tools_hoe_lod2_s1_geo_rigid_bs_7cqeqf2k2nw2binsrm67nqzdzf(en
 
   trace = physicstrace(eye_pos, enemy_eye_pos, (-15, -15, -15), (15, 15, 15), self);
 
-  if(trace[#"fraction"] < 1) {
-    hit_ent = trace[#"entity"];
+  if(trace[# "fraction"] < 1) {
+    hit_ent = trace[# "entity"];
   }
 
   entity.hit_ent = isDefined(hit_ent);
@@ -935,8 +934,8 @@ function_5ee65256(entity) {
   enemy_eye_pos = entity util::get_eye();
   trace = physicstrace(eye_pos, enemy_eye_pos, (-15, -15, -15), (15, 15, 15), self);
 
-  if(trace[#"fraction"] < 1) {
-    hit_ent = trace[#"entity"];
+  if(trace[# "fraction"] < 1) {
+    hit_ent = trace[# "entity"];
   }
 
   hit = isDefined(hit_ent);
@@ -1004,13 +1003,13 @@ private function_1e4eb5f0() {
 
     if(cmd.size > 0) {
       switch (cmd[0]) {
-        case #"spawn":
+        case # "spawn":
           zm_devgui::spawn_archetype("<dev string:x189>");
           break;
-        case #"kill":
+        case # "kill":
           function_21c73eb5();
           break;
-        case #"pounce":
+        case # "pounce":
           function_88b22921();
           break;
         default:

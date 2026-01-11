@@ -120,8 +120,7 @@ threat_dead() {
 
     if(threat_is_turret()) {
       return isDefined(ent.dead) && ent.dead;
-    }
-    else if(threat_is_qrdrone()) {
+    } else if(threat_is_qrdrone()) {
       return isDefined(ent.crash_accel) && ent.crash_accel;
     }
 
@@ -233,8 +232,7 @@ bot_combat_main() {
 
   if(ads) {
     self pressads(1);
-  }
-  else {
+  } else {
     self pressads(0);
   }
 
@@ -278,8 +276,7 @@ bot_combat_main() {
   if(difficulty == "hard" || difficulty == "fu") {
     if(bot_on_target(self.bot.threat.entity.origin, 30)) {
       self allowattack(1);
-    }
-    else {
+    } else {
       self allowattack(0);
     }
   } else if(bot_on_target(self.bot.threat.aim_target, 45))
@@ -291,8 +288,7 @@ bot_combat_main() {
   if(threat_is_equipment()) {
     if(bot_on_target(self.bot.threat.entity.origin, 3)) {
       self allowattack(1);
-    }
-    else {
+    } else {
       self allowattack(0);
     }
   }
@@ -315,8 +311,7 @@ bot_combat_main() {
 
   if(threat_using_riotshield()) {
     self bot_riotshield_think(self.bot.threat.entity);
-  }
-  else if(bot_has_shotgun()) {
+  } else if(bot_has_shotgun()) {
     self bot_shotgun_think();
   }
 }
@@ -684,8 +679,7 @@ threat_requires_rocket(enemy) {
   if(isDefined(enemy.targetname)) {
     if(enemy.targetname == "remote_mortar") {
       return true;
-    }
-    else if(enemy.targetname == "uav" || enemy.targetname == "counteruav") {
+    } else if(enemy.targetname == "uav" || enemy.targetname == "counteruav") {
       return true;
     }
   }
@@ -1162,8 +1156,7 @@ bot_patrol_near_enemy(damage, attacker, direction) {
   if(isDefined(node)) {
     if(isDefined(damage)) {
       self addgoal(node, 24, 4, "enemy_patrol");
-    }
-    else {
+    } else {
       self addgoal(node, 24, 2, "enemy_patrol");
     }
   }
@@ -1198,8 +1191,7 @@ bot_lookat_entity(entity) {
 
   if(isDefined(offset)) {
     self lookat(entity.origin + offset);
-  }
-  else {
+  } else {
     self lookat(entity getcentroid());
   }
 }
@@ -1577,8 +1569,7 @@ bot_riotshield_dangerous_think(enemy, goal) {
     if(dot < 0) {
       if(distancesquared(self.origin, enemy.origin) < 262144) {
         self addgoal(node, 24, 4, "cover");
-      }
-      else {
+      } else {
         self addgoal(node, 24, 3, "cover");
       }
 
@@ -1603,6 +1594,6 @@ bot_riotshield_dangerous_think(enemy, goal) {
   enemy wait_endon(5, "death");
 
   foreach(node in nodes) {
-  node setdangerous(self.team, 0);
+    node setdangerous(self.team, 0);
   }
 }

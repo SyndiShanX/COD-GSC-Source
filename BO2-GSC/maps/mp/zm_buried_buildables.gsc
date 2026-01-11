@@ -401,7 +401,7 @@ remove_all_ents(named) {
   ents = getEntArray(named, "targetname");
 
   foreach(ent in ents) {
-  ent delete();
+    ent delete();
   }
 }
 
@@ -464,8 +464,7 @@ sloth_in_armory_near_bench() {
   return true;
 }
 
-slothbuildable() {
-}
+slothbuildable() {}
 
 chalkbuildable() {
   level.chalk_builds = maps\mp\zombies\_zm_buildables::buildable_trigger_think_array("chalk_buildable_trigger", "chalk", "chalk", level.str_buildables_grab_part, 1, 0);
@@ -684,8 +683,7 @@ wait_respawn_booze_at_start(piece) {
 
   if(isDefined(level.jail_barricade_down) && level.jail_barricade_down) {
     level thread wait_respawn_candy_booze(piece, "booze");
-  }
-  else {
+  } else {
     piece piece_spawn_at(piece.start_origin, piece.start_angles);
   }
 }
@@ -707,8 +705,7 @@ piece_unspawn_booze() {
 piece_destroy_booze() {
   if(isDefined(level.jail_barricade_down) && level.jail_barricade_down) {
     level thread wait_respawn_candy_booze(self, "booze");
-  }
-  else {
+  } else {
     level thread wait_respawn_booze_at_start(self);
   }
 }
@@ -802,8 +799,7 @@ candy_bench(stub) {
   level notify("candy_bench", self);
 }
 
-onuseplantobject_sloth(player) {
-}
+onuseplantobject_sloth(player) {}
 
 piece_spawn_chalk() {
   if(!isDefined(self.first_origin)) {
@@ -863,8 +859,7 @@ piece_spawn_chalk_internal() {
 
     if(!(isDefined(level.chalk_buildable_pieces_hide) && level.chalk_buildable_pieces_hide)) {
       playFXOnTag(fx, self.model, "tag_origin");
-    }
-    else {
+    } else {
       self.model.origin = self.model.origin + vectorscale((0, 0, -1), 1000.0);
     }
 
@@ -1039,8 +1034,7 @@ oncantuse_chalk(player) {
 
       if(is_melee_weapon(weapon)) {
         player maps\mp\zombies\_zm_melee_weapon::give_melee_weapon_by_name(weapon);
-      }
-      else {
+      } else {
         if(is_lethal_grenade(weapon)) {
           player takeweapon(player get_player_lethal_grenade());
           player set_player_lethal_grenade(weapon);
@@ -1231,11 +1225,9 @@ piece_maker_unitrigger(name, prompt_fn, think_fn) {
 
   if(isDefined(self.script_angles)) {
     unitrigger_stub.angles = self.script_angles;
-  }
-  else if(isDefined(self.angles)) {
+  } else if(isDefined(self.angles)) {
     unitrigger_stub.angles = self.angles;
-  }
-  else {
+  } else {
     unitrigger_stub.angles = (0, 0, 0);
   }
 
@@ -1243,36 +1235,31 @@ piece_maker_unitrigger(name, prompt_fn, think_fn) {
 
   if(isDefined(self.script_length)) {
     unitrigger_stub.script_length = self.script_length;
-  }
-  else {
+  } else {
     unitrigger_stub.script_length = 32;
   }
 
   if(isDefined(self.script_width)) {
     unitrigger_stub.script_width = self.script_width;
-  }
-  else {
+  } else {
     unitrigger_stub.script_width = 32;
   }
 
   if(isDefined(self.script_height)) {
     unitrigger_stub.script_height = self.script_height;
-  }
-  else {
+  } else {
     unitrigger_stub.script_height = 64;
   }
 
   if(isDefined(self.radius)) {
     unitrigger_stub.radius = self.radius;
-  }
-  else {
+  } else {
     unitrigger_stub.radius = 32;
   }
 
   if(isDefined(self.script_unitrigger_type)) {
     unitrigger_stub.script_unitrigger_type = self.script_unitrigger_type;
-  }
-  else {
+  } else {
     unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
     unitrigger_stub.origin = unitrigger_stub.origin - anglestoright(unitrigger_stub.angles) * (unitrigger_stub.script_length / 2);
   }

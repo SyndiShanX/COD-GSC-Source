@@ -98,8 +98,7 @@ giveSentry(sentryType, lifeId) {
   // if we failed to place the sentry, it will have been deleted at this point
   if(isDefined(sentryGun)) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -401,8 +400,7 @@ sentry_onCarrierDeath(carrier) {
 
   if(self.canBePlaced) {
     self sentry_setPlaced();
-  }
-  else {
+  } else {
     self delete();
   }
 }
@@ -436,8 +434,7 @@ sentry_setActive() {
   foreach(player in level.players) {
     if(player == self.owner) {
       self enablePlayerUse(player);
-    }
-    else {
+    } else {
       self disablePlayerUse(player);
     }
   }
@@ -592,8 +589,7 @@ sentry_heatMonitor() {
   for(;;) {
     if(self.heatLevel != lastHeatLevel) {
       wait(fireTime);
-    }
-    else {
+    } else {
       self.heatLevel = max(0, self.heatLevel - 0.05);
     }
 

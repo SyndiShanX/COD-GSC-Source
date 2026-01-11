@@ -132,8 +132,7 @@ fountain_transport_think() {
 
       if(flag("fountain_transport_active")) {
         player thread transport_player_to_start_zone();
-      }
-      else {
+      } else {
         player thread delay_transport_check();
       }
     }
@@ -239,8 +238,7 @@ debug_warp_player_to_fountain() {
 
     if(str_notify == "warp_player_to_maze_fountain") {
       str_warp_point = "teleport_player_to_maze_fountain";
-    }
-    else if(str_notify == "warp_player_to_courtyard_fountain") {
+    } else if(str_notify == "warp_player_to_courtyard_fountain") {
       str_warp_point = "teleport_player_to_courtyard_fountain";
     }
 

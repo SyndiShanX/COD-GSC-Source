@@ -119,11 +119,9 @@ executepostroundevents() {
 getvalueinrange(value, minvalue, maxvalue) {
   if(value > maxvalue) {
     return maxvalue;
-  }
-  else if(value < minvalue) {
+  } else if(value < minvalue) {
     return minvalue;
-  }
-  else {
+  } else {
     return value;
   }
 }
@@ -235,8 +233,7 @@ gettimepassed() {
 
   if(level.timerstopped) {
     return level.timerpausetime - level.starttime - level.discardtime;
-  }
-  else {
+  } else {
     return gettime() - level.starttime - level.discardtime;
   }
 }
@@ -263,8 +260,7 @@ getscoreremaining(team) {
 
   if(isplayer(self)) {
     return scorelimit - maps\mp\gametypes\_globallogic_score::_getplayerscore(self);
-  }
-  else {
+  } else {
     return scorelimit - getteamscore(team);
   }
 }
@@ -285,8 +281,7 @@ getscoreperminute(team) {
 
   if(isplayer(self)) {
     return maps\mp\gametypes\_globallogic_score::_getplayerscore(self) / minutespassed;
-  }
-  else {
+  } else {
     return getteamscoreforround(team) / minutespassed;
   }
 }
@@ -419,7 +414,7 @@ logteamwinstring(wintype, winner) {
   }
 
   foreach(team in level.teams) {
-  log_string = log_string + ", " + team + ": " + game["teamScores"][team];
+    log_string = log_string + ", " + team + ": " + game["teamScores"][team];
   }
 
   logstring(log_string);

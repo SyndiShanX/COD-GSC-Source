@@ -366,8 +366,7 @@ onEndUse(team, player, success) {
   println("End Use");
 }
 
-onCantUse(player) {
-}
+onCantUse(player) {}
 
 spawnFxDelay(fxid, pos, forward, right, delay) {
   wait delay;

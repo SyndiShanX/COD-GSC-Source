@@ -797,8 +797,7 @@ ambush_caravan() {
 
     if(!isDefined(var_0[var_1].script_noteworthy)) {
       continue;
-    }
-    else if(var_0[var_1].script_noteworthy == "ambush_jeep") {
+    } else if(var_0[var_1].script_noteworthy == "ambush_jeep") {
       level.badguy_jeep = var_0[var_1];
       level.badguy_jeep thread maps\ambush_aud::aud_vehicle_engine_linear("snc_ambush_badguy_jeep_engine_distant", "badguyjeep_close_node", "snc_ambush_badguy_jeep_engine_close");
     } else if(var_0[var_1].script_noteworthy == "rear_truck") {
@@ -1013,8 +1012,7 @@ ambush_mark() {
 
   if(randomint(2)) {
     level.mark maps\_anim::anim_single_queue(level.mark, "ambush_grg_ohno2");
-  }
-  else {
+  } else {
     level.mark maps\_anim::anim_single_queue(level.mark, "ambush_grg_ohno2");
   }
 
@@ -1064,11 +1062,9 @@ h1_griggs_tower_idle_thread() {
 
     if(var_0 == 1) {
       var_1 = maps\_utility::array_remove_index(var_1, 0);
-    }
-    else if(var_0 == 2) {
+    } else if(var_0 == 2) {
       var_1 = maps\_utility::array_remove_index(var_1, 1);
-    }
-    else if(var_0 == 3) {
+    } else if(var_0 == 3) {
       var_1 = maps\_utility::array_remove_index(var_1, 2);
     }
 
@@ -1321,8 +1317,7 @@ ambush_tower_fall() {
 
   if(getdvarint("use_old_tower") == 1) {
     level.mark linkto(var_1);
-  }
-  else {
+  } else {
     thread ambush_tower_fall_player(var_1);
     thread ambush_tower_fall_mark(var_1);
   }
@@ -1490,8 +1485,7 @@ ambush_tower_blackout() {
 
   if(getdvarint("use_old_escapecam") == 1) {
     thread ambush_recover();
-  }
-  else {
+  } else {
     thread ambush_recover_h1();
   }
 
@@ -1700,8 +1694,7 @@ village_nag(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     level maps\_utility::radio_dialogue_queue(var_2);
-  }
-  else {
+  } else {
     maps\_anim::anim_single_queue(self, var_2);
   }
 }
@@ -2332,8 +2325,7 @@ apartment_helicopter_turret(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_3 linkto(level.helicopter, "tag_detach", (0, 120, 10), (0, 0, 0));
-  }
-  else {
+  } else {
     var_3 linkto(level.helicopter, "tag_detach", (0, 12, 10), (0, 180, 0));
   }
 
@@ -2371,8 +2363,7 @@ apartment_helicopter_turret_mg_nest(var_0, var_1, var_2) {
 
   if(!common_scripts\utility::flag("apartment_inside")) {
     var_5 = "fifthfloor_guy";
-  }
-  else {
+  } else {
     var_5 = "fourthfloor_guy";
   }
 
@@ -2541,8 +2532,7 @@ apartment_mg_nest_player_damage(var_0, var_1, var_2) {
     }
     if(var_4 < 150) {
       var_4 = 10;
-    }
-    else {
+    } else {
       var_4 = 150;
     }
 
@@ -2646,8 +2636,7 @@ apartment_suicide() {
 
   if(getdvarint("use_old_suicide") == 1) {
     level thread apartment_suicide_badguy();
-  }
-  else {
+  } else {
     level thread apartment_suicide_badguy_h1();
   }
 
@@ -2670,8 +2659,7 @@ apartment_suicide_price() {
 
   if(getdvarint("use_old_suicide") == 1) {
     common_scripts\utility::flag_wait_either("stage3", "timed_suicide");
-  }
-  else {
+  } else {
     common_scripts\utility::flag_wait_any("stage4", "h1_player_seen_zakhaev_outside", "timed_suicide");
   }
 
@@ -3306,8 +3294,7 @@ scripted_spawn(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     var_4 = var_3 stalingradspawn();
-  }
-  else {
+  } else {
     var_4 = var_3 dospawn();
   }
 
@@ -3408,8 +3395,7 @@ shoot_mg_targets() {
   for(;;) {
     if(isDefined(var_1)) {
       var_2[0] = var_1;
-    }
-    else {
+    } else {
       var_2 = undefined;
     }
 
@@ -3613,8 +3599,7 @@ heli_path_speed(var_0) {
 
     if(isDefined(var_0.script_accel)) {
       var_1 = var_0.script_accel;
-    }
-    else {
+    } else {
       var_4 = var_3 / 4;
 
       if(var_1 > var_4) {
@@ -3624,8 +3609,7 @@ heli_path_speed(var_0) {
 
     if(isDefined(var_2)) {
       self vehicle_setspeed(var_3, var_1, var_2);
-    }
-    else {
+    } else {
       self vehicle_setspeed(var_3, var_1);
     }
   }
@@ -3690,8 +3674,7 @@ vehicle_turret_think() {
 
     if(!isDefined(var_0)) {
       var_0 = vehicle_get_target_player_only();
-    }
-    else if(isDefined(var_0) && !isplayer(var_0)) {
+    } else if(isDefined(var_0) && !isplayer(var_0)) {
       var_0 = vehicle_get_target_player_only();
     }
 

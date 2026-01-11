@@ -657,16 +657,14 @@ handle_defend_saves(var_0) {
 
     if(var_3 < var_2) {
       wait((var_2 - var_3) / 1000);
-    }
-    else {
+    } else {
       wait 1;
     }
 
     if(level.defend_save_safe && !common_scripts\utility::flag("game_saving")) {
       if(!isDefined(level.curautosave)) {
         var_4 = 1;
-      }
-      else {
+      } else {
         var_4 = level.curautosave;
       }
 
@@ -700,8 +698,7 @@ handle_defend_waves() {
 
   if(!isDefined(level.override_check)) {
     thread defend_wave_1();
-  }
-  else {
+  } else {
     thread handle_backfill();
   }
 
@@ -784,7 +781,7 @@ setup_ai_for_end() {
   common_scripts\utility::array_thread(var_0, maps\_utility::set_baseaccuracy, 0.01);
 
   foreach(var_3 in var_0) {
-  var_3.health = 1;
+    var_3.health = 1;
   }
 
   common_scripts\utility::array_thread(level.allies, ::handle_accuracy);
@@ -969,7 +966,7 @@ neutralize_turret() {
   var_4 = getEntArray("defend_disable_on_finish", "script_noteworthy");
 
   foreach(var_6 in var_4) {
-  var_6 common_scripts\utility::trigger_off();
+    var_6 common_scripts\utility::trigger_off();
   }
 }
 
@@ -1197,12 +1194,10 @@ download_timer() {
 
   if(var_2 != 0) {
     var_1 = var_2;
-  }
-  else if(isDefined(level.timer_override_check)) {
+  } else if(isDefined(level.timer_override_check)) {
     if(level.timer_override_check == 3) {
       var_1 = 45;
-    }
-    else {
+    } else {
       var_1 = var_1 - 40 * level.timer_override_check;
     }
   }
@@ -1289,8 +1284,7 @@ watch_backfill() {
 
       if(common_scripts\utility::flag("defend_combat_finished")) {
         var_10 = getent("def_ground_middle_mid", "targetname");
-      }
-      else {
+      } else {
         var_10 = getent(var_7[var_9].target, "targetname");
       }
 
@@ -1310,8 +1304,7 @@ watch_backfill() {
       if(isDefined(var_11)) {
         if(common_scripts\utility::flag("defend_combat_finished")) {
           var_11 maps\_utility::set_baseaccuracy(0.2);
-        }
-        else {
+        } else {
           var_11 thread monitor_guy_moveup(var_2);
         }
       }
@@ -1353,8 +1346,7 @@ watch_backfill() {
 
           if(isDefined(var_16)) {
             var_15 = "defend_looking_north_doors";
-          }
-          else {
+          } else {
             var_15 = "defend_looking_south_doors";
           }
         }
@@ -1389,8 +1381,7 @@ watch_backfill() {
 
         if(level.fire_blocker_blown == 0) {
           var_7 = getEntArray("defend_south_pressure", "targetname");
-        }
-        else {
+        } else {
           var_7 = getEntArray("defend_north_pressure", "targetname");
         }
       } else
@@ -1476,8 +1467,7 @@ trickle_spawn(var_0, var_1, var_2, var_3) {
   for(var_8 = []; var_7 < var_5; var_7++) {
     if(!common_scripts\utility::flag("trickle_spawn_all")) {
       wait(var_6 - randomfloat(var_6) / 2);
-    }
-    else {
+    } else {
       wait(var_3 - randomfloat(var_3 / 2));
     }
 
@@ -1637,8 +1627,7 @@ cypher_defend_self() {
 
           if(var_3) {
             var_0 thread maps\_anim::anim_single_solo(self, "defend_shoot_left_cypher");
-          }
-          else {
+          } else {
             var_0 thread maps\_anim::anim_single_solo(self, "defend_shoot_right_cypher");
           }
 
@@ -1711,8 +1700,7 @@ watch_pod_blocker(var_0, var_1) {
 
       if(var_3[var_7] == -1) {
         maps\clockwork_code::radio_dialog_add_and_go(var_2[var_7]);
-      }
-      else {
+      } else {
         level.allies[var_3[var_7]] maps\clockwork_code::char_dialog_add_and_go(var_2[var_7]);
       }
     }
@@ -1787,8 +1775,7 @@ set_bag_objective_visibility(var_0) {
     for(;;) {
       if(level.player getstance() == "stand") {
         var_2.force_off = 0;
-      }
-      else if(level.player getstance() != "stand") {
+      } else if(level.player getstance() != "stand") {
         var_2.force_off = 1;
       }
 
@@ -2021,8 +2008,7 @@ shockwavedetonation() {
 
       if(isDefined(self.owner)) {
         self detonate(self.owner);
-      }
-      else {
+      } else {
         self detonate(undefined);
       }
 
@@ -2034,7 +2020,7 @@ shockwavedetonation() {
       wait 15;
 
       foreach(var_5 in var_3) {
-      var_5 notify("end_shockwave_watch");
+        var_5 notify("end_shockwave_watch");
       }
 
       return;
@@ -2194,8 +2180,7 @@ bag_trigger_off_if_player_has_weapon(var_0, var_1) {
   while(isDefined(var_2)) {
     if(level.player hasweapon(var_1)) {
       var_2.force_off = 1;
-    }
-    else {
+    } else {
       var_2.force_off = 0;
     }
 
@@ -2586,7 +2571,7 @@ setup_blockers() {
 
   foreach(var_1 in level.fire_blockers_hurt) {
     foreach(var_13 in var_1) {
-    var_13 common_scripts\utility::trigger_off();
+      var_13 common_scripts\utility::trigger_off();
     }
   }
 
@@ -2656,17 +2641,17 @@ handle_fire_blocker(var_0) {
   thread move_allies_from_fire_blocker(var_1);
 
   foreach(var_3 in level.fire_blockers_hurt[var_0]) {
-  var_3 common_scripts\utility::trigger_on();
+    var_3 common_scripts\utility::trigger_on();
   }
 
   radiusdamage(level.fire_radiusdamage[var_0].origin, 256, 200, 150);
 
   foreach(var_6 in level.fire_blockers_jet[var_0]) {
-  playFX(common_scripts\utility::getfx("throwbot_explode"), var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
+    playFX(common_scripts\utility::getfx("throwbot_explode"), var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
   }
 
   foreach(var_6 in level.fire_blockers_body[var_0]) {
-  playFX(common_scripts\utility::getfx("fx/fire/fire_gaz_clk"), var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
+    playFX(common_scripts\utility::getfx("fx/fire/fire_gaz_clk"), var_6.origin, anglesToForward(var_6.angles), anglestoup(var_6.angles));
   }
 
   var_6 = level.fire_blockers_jet[var_0][0];
@@ -2675,7 +2660,7 @@ handle_fire_blocker(var_0) {
   badplace_cylinder("", var_1, level.fire_blockers_body[var_0][0].origin - (0, 0, 40), 150, 150, "allies", "axis");
 
   foreach(var_11 in level.fire_blockers_brush[var_0]) {
-  badplace_brush("", var_1, var_11, "allies", "axis");
+    badplace_brush("", var_1, var_11, "allies", "axis");
   }
 
   wait(var_1);
@@ -2735,8 +2720,7 @@ ally_move_from_fire_blocker(var_0, var_1) {
 
   if(distance2dsquared(self.origin, var_2.origin) <= var_3) {
     wait(var_1);
-  }
-  else {
+  } else {
     var_4 = self.goalradius;
     self.goalradius = var_3;
     self setgoalnode(var_2);
@@ -2784,8 +2768,7 @@ allies_throw_smoke() {
 
   if(isDefined(level.allies[0].maxfaceenemydist)) {
     level.allies[0].old_maxfaceenemydist = level.allies[0].maxfaceenemydist;
-  }
-  else {
+  } else {
     level.allies[0].old_maxfaceenemydist = undefined;
   }
 
@@ -2793,8 +2776,7 @@ allies_throw_smoke() {
 
   if(isDefined(level.allies[1].maxfaceenemydist)) {
     level.allies[1].old_maxfaceenemydist = level.allies[0].maxfaceenemydist;
-  }
-  else {
+  } else {
     level.allies[1].old_maxfaceenemydist = undefined;
   }
 
@@ -2907,8 +2889,7 @@ updatesentrypositionclockwork(var_0) {
 
   if(self.canplaceentity) {
     var_0 setModel(level.sentry_settings[var_0.sentrytype].placementmodel);
-  }
-  else {
+  } else {
     var_0 setModel(level.sentry_settings[var_0.sentrytype].placementmodelfail);
   }
 }

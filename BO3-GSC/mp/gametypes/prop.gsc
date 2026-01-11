@@ -2083,9 +2083,7 @@ function function_b37cf698(eattacker, einflictor, weapon, meansofdeath, damage, 
     }
     default: {
       if(isDefined(level.shellshockonplayerdamage)) {
-        [
-          [level.shellshockonplayerdamage]
-        ](meansofdeath, damage, weapon);
+        [[level.shellshockonplayerdamage]](meansofdeath, damage, weapon);
       }
       break;
     }

@@ -180,7 +180,7 @@ hud_addtargets(var_0, var_1) {
     var_20.visibleto = [];
 
     foreach(var_22 in level.players) {
-    var_20.visibleto[var_22 getentitynumber()] = undefined;
+      var_20.visibleto[var_22 getentitynumber()] = undefined;
     }
 
     if(!isDefined(var_20.weapon)) {
@@ -242,7 +242,7 @@ hud_outlineenable() {
   }
   if(isDefined(self.mgturret)) {
     foreach(var_2 in self.mgturret) {
-    var_2 maps\_utility::set_hudoutline(var_0, 1);
+      var_2 maps\_utility::set_hudoutline(var_0, 1);
     }
   }
 
@@ -273,7 +273,7 @@ hud_outline_enable_withinview(var_0, var_1) {
 
         if(isDefined(self.mgturret)) {
           foreach(var_6 in self.mgturret) {
-          var_6 hudoutlinedisable();
+            var_6 hudoutlinedisable();
           }
         }
       }
@@ -287,7 +287,7 @@ hud_outline_enable_withinview(var_0, var_1) {
 
       if(isDefined(self.mgturret)) {
         foreach(var_6 in self.mgturret) {
-        var_6 maps\_utility::set_hudoutline(var_0, 1);
+          var_6 maps\_utility::set_hudoutline(var_0, 1);
         }
       }
     }
@@ -315,8 +315,7 @@ hud_hidetargets(var_0) {
 onteam(var_0) {
   if(maps\_vehicle::isvehicle()) {
     return isDefined(self.script_team) && self.script_team == var_0;
-  }
-  else {
+  } else {
     return isDefined(self.team) && self.team == var_0;
   }
 
@@ -372,7 +371,7 @@ _end() {
 
       if(isDefined(var_4._target)) {
         foreach(var_8 in var_4._target.weapon) {
-        var_8.islockedon[var_2] = undefined;
+          var_8.islockedon[var_2] = undefined;
         }
       }
     }

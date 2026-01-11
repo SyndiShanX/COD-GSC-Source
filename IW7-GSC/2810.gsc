@@ -168,8 +168,7 @@ validateattachments(var_00, var_01, var_02, var_03, var_04) {
 
         if(var_09 <= var_10) {
           var_0.func_D640++;
-        }
-        else {
+        } else {
           var_0.func_13D1E[var_04 + "_attachment_" + (var_09 + 1)] = 1;
           var_0.func_D640 = var_0.func_D640 + 2;
         }
@@ -252,8 +251,7 @@ func_13145(var_00, var_01, var_02) {
 
         if(var_3[var_06] == 1) {
           var_0.func_D640++;
-        }
-        else {
+        } else {
           var_0.func_13D1E["extra_perk_" + var_06] = 1;
           var_0.func_D640 = var_0.func_D640 + 2;
         }
@@ -375,8 +373,7 @@ fixweapon(var_00, var_01) {
 fixattachment(var_00, var_01, var_02) {
   if(var_01 == "primary") {
     var_0.loadoutprimaryattachments[var_02] = "none";
-  }
-  else {
+  } else {
     var_0.loadoutsecondaryattachments[var_02] = "none";
   }
 }
@@ -430,27 +427,25 @@ fixinvaliditems(var_00, var_01) {
 
   if(isDefined(var_1[1])) {
     fixweapon(var_00, "primary");
-  }
-  else if(isDefined(var_1[3])) {
+  } else if(isDefined(var_1[3])) {
     for(var_02 = 0; var_02 < scripts\mp\class::getmaxprimaryattachments(); var_2++) {
       fixattachment(var_00, "primary", var_02);
     }
   } else {
     foreach(var_02 in var_1[2]) {
-    fixattachment(var_00, "primary", var_02);
+      fixattachment(var_00, "primary", var_02);
     }
   }
 
   if(isDefined(var_1[4])) {
     fixweapon(var_00, "secondary");
-  }
-  else if(isDefined(var_1[6])) {
+  } else if(isDefined(var_1[6])) {
     for(var_02 = 0; var_02 < scripts\mp\class::getmaxsecondaryattachments(); var_2++) {
       fixattachment(var_00, "secondary", var_02);
     }
   } else {
     foreach(var_02 in var_1[5]) {
-    fixattachment(var_00, "secondary", var_02);
+      fixattachment(var_00, "secondary", var_02);
     }
   }
 
@@ -463,13 +458,12 @@ fixinvaliditems(var_00, var_01) {
   }
 
   foreach(var_08 in var_1[9]) {
-  fixperk(var_00, var_08);
+    fixperk(var_00, var_08);
   }
 
   if(isDefined(var_1[10])) {
     fixarchetype(var_00);
-  }
-  else if(isDefined(var_1[11])) {
+  } else if(isDefined(var_1[11])) {
     fixarchetype(var_00);
   }
 

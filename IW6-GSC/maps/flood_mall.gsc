@@ -103,7 +103,7 @@ mall() {
   var_0 = level.player getweaponslistprimaries();
 
   foreach(var_2 in var_0) {
-  level.player takeweapon(var_2);
+    level.player takeweapon(var_2);
   }
 
   maps\_utility::battlechatter_off("allies");
@@ -129,8 +129,7 @@ block_until_ground_collapse(var_0) {
     if(isDefined(var_4["entity"]) && isDefined(var_4["entity"].targetname)) {
       if(var_4["entity"].targetname == "flood_mallroof_center" || var_4["entity"].targetname == "flood_mallroof_back" || var_4["entity"].targetname == "acbox_obj") {
         var_2 = 1;
-      }
-      else {
+      } else {
         var_2 = 0;
       }
     } else
@@ -139,8 +138,7 @@ block_until_ground_collapse(var_0) {
     if(isDefined(var_5["entity"]) && isDefined(var_5["entity"].targetname)) {
       if(var_5["entity"].targetname == "flood_mallroof_center" || var_5["entity"].targetname == "flood_mallroof_back" || var_5["entity"].targetname == "acbox_obj") {
         var_3 = 1;
-      }
-      else {
+      } else {
         var_3 = 0;
       }
     } else
@@ -327,8 +325,7 @@ flood_spawner(var_0, var_1, var_2) {
     if(var_4.size <= var_1) {
       if(common_scripts\utility::flag("enemies_use_main")) {
         var_5 = var_3[randomint(var_3.size)];
-      }
-      else {
+      } else {
         var_5 = var_3[randomint(var_3.size - 2)];
       }
 
@@ -405,7 +402,7 @@ mall_rootop_event() {
   var_1 = getEntArray("mall_ware_brush_show", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 show();
+    var_3 show();
   }
 
   common_scripts\utility::flag_wait("mall_attack_player");
@@ -447,7 +444,7 @@ mall_rootop_event() {
   maps\flood_util::reassign_goal_volume(var_9, "mall_goalvolume_roofcollapse");
 
   foreach(var_11 in var_9) {
-  var_11 thread roofcollapse_retreat();
+    var_11 thread roofcollapse_retreat();
   }
 
   thread flood_spawner("swept_away", 4, "mall_goalvolume_roofcollapse");
@@ -501,13 +498,13 @@ mall_rootop_event() {
         var_32 = [];
 
         foreach(var_34 in var_27) {
-        var_32[var_32.size] = maps\_utility::get_closest_point(var_34, var_15);
+          var_32[var_32.size] = maps\_utility::get_closest_point(var_34, var_15);
         }
 
         var_36 = [];
 
         foreach(var_34 in var_27) {
-        var_36[var_36.size] = distance2d(var_34, var_32[var_36.size]);
+          var_36[var_36.size] = distance2d(var_34, var_32[var_36.size]);
         }
 
         var_39 = var_36[0];
@@ -546,7 +543,7 @@ mall_rootop_event() {
   var_47 = getEntArray("grenade", "classname");
 
   foreach(var_49 in var_47) {
-  var_49 delete();
+    var_49 delete();
   }
 
   level.player enableinvulnerability();
@@ -843,8 +840,7 @@ event_rumble_collapse() {
 
     if(var_1 > 666) {
       var_0.origin = var_0.origin + (0, 0, -2);
-    }
-    else {
+    } else {
       var_0.origin = var_0.origin + (0, 0, -8);
     }
 
@@ -887,8 +883,7 @@ mall_enemy_spawn_func(var_0, var_1) {
   if(!common_scripts\utility::flag("player_on_mall_roof")) {
     if(randomint(2) == 0) {
       var_2 = getent("mall_goalvolume_camper1", "targetname");
-    }
-    else {
+    } else {
       var_2 = getent("mall_goalvolume_camper2", "targetname");
     }
   } else
@@ -1189,7 +1184,7 @@ rooftop_door_outdoor(var_0) {
   var_1 = getEntArray("mall_roof_door", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 solid();
+    var_3 solid();
   }
 }
 
@@ -1404,7 +1399,7 @@ mall_roof_door_firstframe() {
   var_1 = getEntArray("mall_roof_door", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(level.flood_mall_roof_door_model);
+    var_3 linkto(level.flood_mall_roof_door_model);
   }
 }
 
@@ -1458,7 +1453,7 @@ mallroof_firstframe(var_0) {
 
   if(isDefined(var_0) && var_0 == "hide") {
     foreach(var_2 in level.mallroof_array) {
-    var_2 hide();
+      var_2 hide();
     }
 
     var_4 = getent("roof_collapse_faling_floor_vign1", "targetname");
@@ -1471,7 +1466,7 @@ mallroof_firstframe(var_0) {
 
 mallroof_firstframe_show_objects() {
   foreach(var_1 in level.mallroof_array) {
-  var_1 show();
+    var_1 show();
   }
 }
 

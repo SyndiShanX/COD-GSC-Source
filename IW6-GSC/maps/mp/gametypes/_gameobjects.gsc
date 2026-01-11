@@ -109,8 +109,7 @@ createCarryObject(ownerTeam, trigger, visuals, offset) {
 
   if(isSubStr(trigger.classname, "use")) {
     carryObject.triggerType = "use";
-  }
-  else {
+  } else {
     carryObject.triggerType = "proximity";
   }
 
@@ -780,8 +779,7 @@ createUseObject(ownerTeam, trigger, visuals, offset) {
 
   if(isSubStr(trigger.classname, "use")) {
     useObject.triggerType = "use";
-  }
-  else {
+  } else {
     useObject.triggerType = "proximity";
   }
 
@@ -947,8 +945,7 @@ getEarliestClaimPlayer() {
 
   if(isReallyAlive(self.claimPlayer)) {
     earliestPlayer = self.claimPlayer;
-  }
-  else {
+  } else {
     earliestPlayer = undefined;
   }
 
@@ -1110,8 +1107,7 @@ setClaimTeam(newTeam) {
 
   if(self.claimTeam == "none" && getTime() - self.lastClaimTime > 1000) {
     self.curProgress = 0;
-  }
-  else if(newTeam != "none" && newTeam != self.lastClaimTeam) {
+  } else if(newTeam != "none" && newTeam != self.lastClaimTeam) {
     self.curProgress = 0;
   }
 
@@ -1202,8 +1198,7 @@ updateProxBar(object, forceRemove) {
 
     if(isDefined(object.teamUseTexts[relativeTeam])) {
       self.proxBarText setText(object.teamUseTexts[relativeTeam]);
-    }
-    else {
+    } else {
       self.proxBarText setText(object.useText);
     }
   }
@@ -1215,8 +1210,7 @@ updateProxBar(object, forceRemove) {
 
     if(isDefined(object.teamUseTexts[relativeTeam])) {
       self.proxBarText setText(object.teamUseTexts[relativeTeam]);
-    }
-    else {
+    } else {
       self.proxBarText setText(object.useText);
     }
   }
@@ -1265,11 +1259,9 @@ updateUIProgress(object, securing) {
       domFlagIdx = 0;
       if(object.label == "_a") {
         domFlagIdx = 1;
-      }
-      else if(object.label == "_b") {
+      } else if(object.label == "_b") {
         domFlagIdx = 2;
-      }
-      else if(object.label == "_c") {
+      } else if(object.label == "_c") {
         domFlagIdx = 3;
       }
 
@@ -1321,8 +1313,7 @@ updateUIProgress(object, securing) {
           idx = 0;
           if(object.id == "bomb_zone") {
             idx = 1;
-          }
-          else if(object.id == "defuse_object") {
+          } else if(object.id == "defuse_object") {
             idx = 2;
           }
 
@@ -1467,8 +1458,7 @@ updateUseRate() {
 
   if(isDefined(self.isArena) && self.isArena && hasObjScale != 0) {
     self.useRate = 1 * hasObjScale;
-  }
-  else if(isDefined(self.isArena) && self.isArena) {
+  } else if(isDefined(self.isArena) && self.isArena) {
     self.useRate = 1;
   }
 }
@@ -1477,8 +1467,7 @@ useHoldThink(player) {
   player notify("use_hold");
   if(IsPlayer(player)) {
     player playerLinkTo(self.trigger);
-  }
-  else {
+  } else {
     player LinkTo(self.trigger);
   }
 
@@ -1531,8 +1520,7 @@ useHoldThink(player) {
     if(isDefined(useWeapon)) {
       if(lastWeapon != "none") {
         player switch_to_last_weapon(lastWeapon);
-      }
-      else {
+      } else {
         player takeWeapon(useWeapon);
       }
 
@@ -1650,8 +1638,7 @@ useHoldThinkLoop(player, lastWeapon) {
         player setWeaponAmmoClip(useWeapon, 1);
         if(lastWeapon != "none") {
           player switch_to_last_weapon(lastWeapon);
-        }
-        else {
+        } else {
           player takeWeapon(useWeapon);
         }
       } else {
@@ -1683,22 +1670,18 @@ updateTrigger() {
     self.trigger.origin = self.curOrigin;
     if(self.ownerTeam == "allies") {
       self.trigger setTeamForTrigger("allies");
-    }
-    else if(self.ownerTeam == "axis") {
+    } else if(self.ownerTeam == "axis") {
       self.trigger setTeamForTrigger("axis");
-    }
-    else {
+    } else {
       self.trigger.origin -= (0, 0, 50000);
     }
   } else if(self.interactTeam == "enemy") {
     self.trigger.origin = self.curOrigin;
     if(self.ownerTeam == "allies") {
       self.trigger setTeamForTrigger("axis");
-    }
-    else if(self.ownerTeam == "axis") {
+    } else if(self.ownerTeam == "axis") {
       self.trigger setTeamForTrigger("allies");
-    }
-    else {
+    } else {
       self.trigger setTeamForTrigger("none");
     }
   }
@@ -1742,16 +1725,14 @@ updateWorldIcon(relativeTeam, showIcon) {
 
       if(isDefined(self.compassIcons[relativeTeam])) {
         objPoint setWayPoint(true, true);
-      }
-      else {
+      } else {
         objPoint setWayPoint(true, false);
       }
 
       if(self.type == "carryObject") {
         if(isDefined(self.carrier) && !shouldPingObject(relativeTeam)) {
           objPoint SetTargetEnt(self.carrier);
-        }
-        else {
+        } else {
           objPoint ClearTargetEnt();
         }
       } else if(isDefined(self.objIconEnt)) {
@@ -1822,12 +1803,9 @@ updateCompassIcon(relativeTeam, showIcon) {
     if(self.type == "carryObject") {
       if(isReallyAlive(self.carrier) && !shouldPingObject(relativeTeam)) {
         Objective_OnEntity(objId, self.carrier);
-      }
-
-      else if(isDefined(self.visuals[0]) && isDefined(self.visuals[0] GetLinkedParent())) {
+      } else if(isDefined(self.visuals[0]) && isDefined(self.visuals[0] GetLinkedParent())) {
         Objective_OnEntity(objId, self.visuals[0]);
-      }
-      else {
+      } else {
         objective_position(objId, self.curOrigin);
       }
     } else if(isDefined(self.objIconEnt)) {
@@ -1839,8 +1817,7 @@ updateCompassIcon(relativeTeam, showIcon) {
 shouldPingObject(relativeTeam) {
   if(relativeTeam == "friendly" && self.objIDPingFriendly) {
     return true;
-  }
-  else if(relativeTeam == "enemy" && self.objIDPingEnemy) {
+  } else if(relativeTeam == "enemy" && self.objIDPingEnemy) {
     return true;
   }
 
@@ -2042,8 +2019,7 @@ enableObject() {
 getRelativeTeam(team) {
   if(team == self.ownerTeam) {
     return "friendly";
-  }
-  else {
+  } else {
     return "enemy";
   }
 }
@@ -2075,16 +2051,14 @@ canInteractWith(team, player) {
     case "friendly":
       if(team == self.ownerTeam) {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
 
     case "enemy":
       if(team != self.ownerTeam) {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
 
@@ -2144,11 +2118,9 @@ getEnemyTeam(team) {
 
   if(team == "neutral") {
     return "none";
-  }
-  else if(team == "allies") {
+  } else if(team == "allies") {
     return "axis";
-  }
-  else {
+  } else {
     return "allies";
   }
 }

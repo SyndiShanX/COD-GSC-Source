@@ -85,8 +85,7 @@ visionset_change() {
   level.player thread maps\createart\karma_2_art::vision_set_change("sp_karma2_mall_interior");
 }
 
-spawn_funcs() {
-}
+spawn_funcs() {}
 
 mall_ambient_effects() {
   exploder(331);
@@ -153,7 +152,7 @@ fxanim_mall_explosion() {
   a_ents = getEntArray("pokee_destruction", "targetname");
 
   foreach(ent in a_ents) {
-  ent hide();
+    ent hide();
   }
 
   trigger_wait("pokee_store_explosion", "targetname");
@@ -161,7 +160,7 @@ fxanim_mall_explosion() {
   level notify("fxanim_store_bomb_01_start");
 
   foreach(ent in a_ents) {
-  ent show();
+    ent show();
   }
 }
 
@@ -930,7 +929,7 @@ fxanim_aquarium_explosion() {
   a_ents = getEntArray("aquarium_bomb", "targetname");
 
   foreach(ent in a_ents) {
-  ent hide();
+    ent hide();
   }
 
   level waittill("fxanim_aquarium_pillar_start");
@@ -942,7 +941,7 @@ fxanim_aquarium_explosion() {
   wait 1;
 
   foreach(ent in a_ents) {
-  ent show();
+    ent show();
   }
 }
 
@@ -995,8 +994,7 @@ nag_move_foward(str_end_flag, n_wait_min, n_wait_max) {
   while(!flag(str_end_flag)) {
     if(cointoss()) {
       level.ai_harper say_dialog(a_harper_nag[randomint(a_harper_nag.size)]);
-    }
-    else {
+    } else {
       level.ai_salazar say_dialog(a_salazar_nag[randomint(a_salazar_nag.size)]);
     }
 

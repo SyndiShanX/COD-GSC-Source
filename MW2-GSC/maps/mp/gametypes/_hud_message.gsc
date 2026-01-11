@@ -190,8 +190,7 @@ dispatchNotify(slot) {
 
   if(isDefined(nextNotifyData.name)) {
     actionNotify(nextNotifyData);
-  }
-  else {
+  } else {
     showNotifyMessage(nextNotifyData);
   }
 }
@@ -234,11 +233,9 @@ showNotifyMessage(notifyData) {
 
   if(isDefined(notifyData.duration)) {
     duration = notifyData.duration;
-  }
-  else if(level.gameEnded) {
+  } else if(level.gameEnded) {
     duration = 2.0;
-  }
-  else {
+  } else {
     duration = 4.0;
   }
 
@@ -254,8 +251,7 @@ showNotifyMessage(notifyData) {
 
   if(isDefined(notifyData.glowColor)) {
     glowColor = notifyData.glowColor;
-  }
-  else {
+  } else {
     glowColor = (0.3, 0.6, 0.3);
   }
 
@@ -264,15 +260,13 @@ showNotifyMessage(notifyData) {
   if(isDefined(notifyData.titleText)) {
     if(isDefined(notifyData.titleLabel)) {
       self.notifyTitle.label = notifyData.titleLabel;
-    }
-    else {
+    } else {
       self.notifyTitle.label = &"";
     }
 
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString)) {
       self.notifyTitle setValue(notifyData.titleText);
-    }
-    else {
+    } else {
       self.notifyTitle setText(notifyData.titleText);
     }
     self.notifyTitle setPulseFX(int(25 * duration), int(duration * 1000), 1000);
@@ -287,15 +281,13 @@ showNotifyMessage(notifyData) {
   if(isDefined(notifyData.notifyText)) {
     if(isDefined(notifyData.textLabel)) {
       self.notifyText.label = notifyData.textLabel;
-    }
-    else {
+    } else {
       self.notifyText.label = &"";
     }
 
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString)) {
       self.notifyText setValue(notifyData.notifyText);
-    }
-    else {
+    } else {
       self.notifyText setText(notifyData.notifyText);
     }
     self.notifyText setPulseFX(100, int(duration * 1000), 1000);
@@ -309,8 +301,7 @@ showNotifyMessage(notifyData) {
 
     if(isDefined(notifyData.text2Label)) {
       self.notifyText2.label = notifyData.text2Label;
-    }
-    else {
+    } else {
       self.notifyText2.label = &"";
     }
 
@@ -384,8 +375,7 @@ killstreakSplashNotify(streakName, streakVal, appendString) {
 
   if(isDefined(appendString)) {
     actionData.name = streakName + "_" + appendString;
-  }
-  else {
+  } else {
     actionData.name = streakName;
   }
 
@@ -402,7 +392,7 @@ killstreakSplashNotify(streakName, streakVal, appendString) {
 defconSplashNotify(defconLevel, forceNotify) {
   /*
   actionData = spawnStruct();
-	
+  	
   actionData.name = "defcon_" + defconLevel;
   actionData.sound = tableLookup( "mp/splashTable.csv", 0, actionData.name, 9 );
   actionData.slot = 0;
@@ -590,8 +580,7 @@ actionNotifyMessage(actionData) {
 
     if(isDefined(actionData.optionalNumber)) {
       self ShowHudSplash(actionData.name, actionData.slot, actionData.optionalNumber);
-    }
-    else {
+    } else {
       self ShowHudSplash(actionData.name, actionData.slot);
     }
 
@@ -606,8 +595,7 @@ actionNotifyMessage(actionData) {
     if(isDefined(actionData.leaderSound)) {
       if(isDefined(actionData.leaderSoundGroup)) {
         self leaderDialogOnPlayer(actionData.leaderSound, actionData.leaderSoundGroup, true);
-      }
-      else {
+      } else {
         self leaderDialogOnPlayer(actionData.leaderSound);
       }
     }
@@ -721,18 +709,15 @@ outcomeOverlay(winner) {
   if(level.teamBased) {
     if(winner == "tie") {
       self matchOutcomeNotify("draw");
-    }
-    else if(winner == self.team) {
+    } else if(winner == self.team) {
       self matchOutcomeNotify("victory");
-    }
-    else {
+    } else {
       self matchOutcomeNotify("defeat");
     }
   } else {
     if(winner == self) {
       self matchOutcomeNotify("victory");
-    }
-    else {
+    } else {
       self matchOutcomeNotify("defeat");
     }
   }
@@ -888,8 +873,7 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
     outcomeTitle.glowColor = (0.2, 0.3, 0.7);
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_draw"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["draw"]);
     }
     outcomeTitle.color = (1, 1, 1);
@@ -899,8 +883,7 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
     outcomeTitle.glowColor = (0, 0, 0);
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_win"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["victory"]);
     }
     outcomeTitle.color = (0.6, 0.9, 0.6);
@@ -908,8 +891,7 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
     outcomeTitle.glowColor = (0, 0, 0);
     if(isRound) {
       outcomeTitle setText(game["strings"]["round_loss"]);
-    }
-    else {
+    } else {
       outcomeTitle setText(game["strings"]["defeat"]);
     }
     outcomeTitle.color = (0.7, 0.3, 0.2);
@@ -923,8 +905,7 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
 
   if(getIntProperty("useRelativeTeamColors", 0)) {
     leftIcon = createIcon(game["icons"][team] + "_blue", iconSize, iconSize);
-  }
-  else {
+  } else {
     leftIcon = createIcon(game["icons"][team], iconSize, iconSize);
   }
   leftIcon setParent(outcomeText);
@@ -938,8 +919,7 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
 
   if(getIntProperty("useRelativeTeamColors", 0)) {
     rightIcon = createIcon(game["icons"][level.otherTeam[team]] + "_red", iconSize, iconSize);
-  }
-  else {
+  } else {
     rightIcon = createIcon(game["icons"][level.otherTeam[team]], iconSize, iconSize);
   }
   rightIcon setParent(outcomeText);
@@ -956,15 +936,13 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
   leftScore setPoint("TOP", "BOTTOM", 0, scoreSpacing);
   if(getIntProperty("useRelativeTeamColors", 0)) {
     leftScore.glowColor = game["colors"]["blue"];
-  }
-  else {
+  } else {
     leftScore.glowColor = game["colors"][team];
   }
   leftScore.glowAlpha = 1;
   if(!isRoundBased() || !isObjectiveBased()) {
     leftScore setValue(maps\mp\gametypes\_gamescore::_getTeamScore(team));
-  }
-  else {
+  } else {
     leftScore setValue(game["roundsWon"][team]);
   }
   leftScore.foreground = true;
@@ -977,15 +955,13 @@ teamOutcomeNotify(winner, isRound, endReasonText) {
   rightScore setPoint("TOP", "BOTTOM", 0, scoreSpacing);
   if(getIntProperty("useRelativeTeamColors", 0)) {
     rightScore.glowColor = game["colors"]["red"];
-  }
-  else {
+  } else {
     rightScore.glowColor = game["colors"][level.otherTeam[team]];
   }
   rightScore.glowAlpha = 1;
   if(!isRoundBased() || !isObjectiveBased()) {
     rightScore setValue(maps\mp\gametypes\_gamescore::_getTeamScore(level.otherTeam[team]));
-  }
-  else {
+  } else {
     rightScore setValue(game["roundsWon"][level.otherTeam[team]]);
   }
   rightScore.foreground = true;
@@ -1193,26 +1169,22 @@ updateOutcome(firstTitle, secondTitle, thirdTitle) {
 
     if(isDefined(firstTitle) && isDefined(players[0])) {
       firstTitle setPlayerNameString(players[0]);
-    }
-    else if(isDefined(firstTitle)) {
+    } else if(isDefined(firstTitle)) {
       firstTitle.alpha = 0;
     }
 
     if(isDefined(secondTitle) && isDefined(players[1])) {
       secondTitle setPlayerNameString(players[1]);
-    }
-    else if(isDefined(secondTitle)) {
+    } else if(isDefined(secondTitle)) {
       secondTitle.alpha = 0;
     }
 
     if(isDefined(thirdTitle) && isDefined(players[2])) {
       thirdTitle setPlayerNameString(players[2]);
-    }
-    else if(isDefined(thirdTitle)) {
+    } else if(isDefined(thirdTitle)) {
       thirdTitle.alpha = 0;
     }
   }
 }
 
-canShowSplash(type) {
-}
+canShowSplash(type) {}

@@ -19,8 +19,7 @@ updatedevsettingszm() {
     if(getdvar(#"r_streamDumpDistance") == "3") {
       if(!isDefined(level.streamdumpteamindex)) {
         level.streamdumpteamindex = 0;
-      }
-      else {
+      } else {
         level.streamdumpteamindex++;
       }
 

@@ -94,7 +94,7 @@ initmissiondata() {
   var_0 = getarraykeys(level.killstreakfuncs);
 
   foreach(var_2 in var_0) {
-  self.pers[var_2] = 0;
+    self.pers[var_2] = 0;
   }
 
   self.pers["lastBulletKillTime"] = 0;
@@ -113,8 +113,7 @@ registermissioncallback(var_0, var_1) {
 getchallengestatus(var_0) {
   if(isDefined(self.challengedata[var_0])) {
     return self.challengedata[var_0];
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -124,8 +123,7 @@ ch_assists(var_0) {
   var_1 processchallenge("ch_assists");
 }
 
-ch_streak_kill(var_0) {
-}
+ch_streak_kill(var_0) {}
 
 ch_hardpoints(var_0) {
   if(isbot(var_0.player)) {
@@ -350,8 +348,7 @@ ishighestscoringplayer(var_0) {
 
   if(level.teambased) {
     var_2 = var_0.pers["team"];
-  }
-  else {
+  } else {
     var_2 = "all";
   }
 
@@ -380,8 +377,7 @@ ch_kills(var_0) {
 
   if(!isDefined(var_0.attacker) || !isplayer(var_0.attacker)) {
     return;
-  }
-  else {
+  } else {
     var_1 = var_0.attacker;
   }
 
@@ -545,8 +541,7 @@ ch_kills(var_0) {
 
   if(common_scripts\utility::string_starts_with(var_30, "iw5_")) {
     var_31 = getsubstr(var_30, 4);
-  }
-  else if(common_scripts\utility::string_starts_with(var_30, "h1_")) {
+  } else if(common_scripts\utility::string_starts_with(var_30, "h1_")) {
     var_31 = getsubstr(var_30, 3);
   }
 
@@ -583,8 +578,7 @@ ch_kills(var_0) {
       if(isDefined(var_33) && var_33 != var_1.pers["team"]) {
         if(ishighestscoringplayer(var_0.victim) && level.players.size >= 6) {
           var_1 killedbestenemyplayer(1);
-        }
-        else {
+        } else {
           var_1 killedbestenemyplayer(0);
         }
       }
@@ -599,11 +593,9 @@ ch_kills(var_0) {
 
   if(var_34 == "mp_crash_snow") {
     var_1 processchallenge("ch_wc_kills");
-  }
-  else if(var_34 == "mp_farm_spring") {
+  } else if(var_34 == "mp_farm_spring") {
     var_1 processchallenge("ch_stpatty_kills");
-  }
-  else if(var_34 == "mp_bog_summer") {
+  } else if(var_34 == "mp_bog_summer") {
     var_1 processchallenge("ch_summer_kills");
   }
 
@@ -663,8 +655,7 @@ ch_kills(var_0) {
     if(var_9 == "MOD_HEAD_SHOT") {
       if(var_32 == "weapon_pistol") {
         var_1 notify("increment_pistol_headshots");
-      }
-      else if(var_32 == "weapon_assault") {
+      } else if(var_32 == "weapon_assault") {
         var_1 notify("increment_ar_headshots");
       }
     }
@@ -721,11 +712,9 @@ ch_kills(var_0) {
 
       if(var_34 == "mp_crash_snow") {
         var_1 processchallenge("ch_wc_melee");
-      }
-      else if(var_34 == "mp_farm_spring") {
+      } else if(var_34 == "mp_farm_spring") {
         var_1 processchallenge("ch_stpatty_melee");
-      }
-      else if(var_34 == "mp_bog_summer") {
+      } else if(var_34 == "mp_bog_summer") {
         var_1 processchallenge("ch_summer_melee");
       }
 
@@ -766,11 +755,9 @@ ch_kills(var_0) {
   if(issubstr(var_9, "MOD_IMPACT") && !var_13 && !var_12) {
     if(maps\mp\_utility::isstrstart(var_0.sweapon, "h1_frag")) {
       var_1 processchallenge("ch_thinkfast");
-    }
-    else if(maps\mp\_utility::isstrstart(var_0.sweapon, "h1_concussion")) {
+    } else if(maps\mp\_utility::isstrstart(var_0.sweapon, "h1_concussion")) {
       var_1 processchallenge("ch_thinkfastconcussion");
-    }
-    else if(maps\mp\_utility::isstrstart(var_0.sweapon, "h1_flash")) {
+    } else if(maps\mp\_utility::isstrstart(var_0.sweapon, "h1_flash")) {
       var_1 processchallenge("ch_thinkfastflash");
     }
 
@@ -814,11 +801,9 @@ ch_kills(var_0) {
 
         if(var_34 == "mp_crash_snow") {
           var_1 processchallenge("ch_wc_grenade");
-        }
-        else if(var_34 == "mp_farm_spring") {
+        } else if(var_34 == "mp_farm_spring") {
           var_1 processchallenge("ch_stpatty_grenade");
-        }
-        else if(var_34 == "mp_bog_summer") {
+        } else if(var_34 == "mp_bog_summer") {
           var_1 processchallenge("ch_summer_grenade");
         }
 
@@ -1021,8 +1006,7 @@ ch_bulletdamagecommon(var_0, var_1, var_2, var_3) {
   }
   if(var_1.pers["lastBulletKillTime"] == var_2) {
     var_1.pers["bulletStreak"]++;
-  }
-  else {
+  } else {
     var_1.pers["bulletStreak"] = 1;
   }
 
@@ -1263,8 +1247,7 @@ playerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   if(isDefined(var_9.einflictor) && isDefined(var_9.einflictor.firedads)) {
     var_10 = var_9.einflictor.firedads;
-  }
-  else if(isDefined(var_1) && isplayer(var_1)) {
+  } else if(isDefined(var_1) && isplayer(var_1)) {
     var_10 = var_1 playerads();
   }
 
@@ -1737,8 +1720,7 @@ getchallengetiernumber(var_0) {
 
   if(getsubstr(var_1, 0, 1) == "_") {
     var_2 = int(getsubstr(var_1, 1, 2));
-  }
-  else {
+  } else {
     var_2 = 0;
   }
 
@@ -1941,14 +1923,11 @@ getweaponfromchallenge(var_0) {
 
   if(issubstr(var_0, "ch_marksman_")) {
     var_1 = "ch_marksman_";
-  }
-  else if(issubstr(var_0, "ch_expert_")) {
+  } else if(issubstr(var_0, "ch_expert_")) {
     var_1 = "ch_expert_";
-  }
-  else if(issubstr(var_0, "pr_marksman_")) {
+  } else if(issubstr(var_0, "pr_marksman_")) {
     var_1 = "pr_marksman_";
-  }
-  else if(issubstr(var_0, "pr_expert_")) {
+  } else if(issubstr(var_0, "pr_expert_")) {
     var_1 = "pr_expert_";
   }
 
@@ -1958,8 +1937,7 @@ getweaponfromchallenge(var_0) {
 
   if(var_3[0] == "iw5" || var_3[0] == "iw6" || var_3[0] == "h1" || var_3[0] == "h2") {
     var_2 = var_3[0] + "_" + var_3[1];
-  }
-  else {
+  } else {
     var_2 = var_3[0];
   }
 
@@ -1971,14 +1949,11 @@ getweaponattachmentfromchallenge(var_0) {
 
   if(issubstr(var_0, "ch_marksman_")) {
     var_1 = "ch_marksman_";
-  }
-  else if(issubstr(var_0, "ch_expert_")) {
+  } else if(issubstr(var_0, "ch_expert_")) {
     var_1 = "ch_expert_";
-  }
-  else if(issubstr(var_0, "pr_marksman_")) {
+  } else if(issubstr(var_0, "pr_marksman_")) {
     var_1 = "pr_marksman_";
-  }
-  else if(issubstr(var_0, "pr_expert_")) {
+  } else if(issubstr(var_0, "pr_expert_")) {
     var_1 = "pr_expert_";
   }
 
@@ -2170,8 +2145,7 @@ monitoradstime() {
   for(;;) {
     if(self playerads() == 1) {
       self.adstime += 0.05;
-    }
-    else {
+    } else {
       self.adstime = 0.0;
     }
 
@@ -2228,8 +2202,7 @@ monitormantle() {
 
     if(var_1 == "none") {
       self.mantling = 1;
-    }
-    else {
+    } else {
       self.mantling = 0;
     }
 

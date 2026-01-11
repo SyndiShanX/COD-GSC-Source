@@ -22,7 +22,7 @@ main() {
   level.debris = ["shpg_machinery_baggage_container_dmg"];
 
   foreach(var_1 in level.debris) {
-  precachemodel(var_1);
+    precachemodel(var_1);
   }
 
   precacheitem("remote_torpedo_tablet");
@@ -754,7 +754,7 @@ cave_setup() {
     var_0 = getaiarray("axis");
 
     foreach(var_2 in var_0) {
-    var_2 kill();
+      var_2 kill();
     }
   }
 
@@ -776,7 +776,7 @@ sonar_setup() {
   common_scripts\utility::flag_wait("start_sonar");
 
   foreach(var_1 in level.deadly_sharks) {
-  var_1 delete();
+    var_1 delete();
   }
 
   var_3 = maps\_utility::getvehiclearray();
@@ -837,7 +837,7 @@ big_wreck_setup() {
   common_scripts\utility::flag_wait("start_big_wreck");
 
   foreach(var_1 in level.deadly_sharks) {
-  var_1 delete();
+    var_1 delete();
   }
 
   level.deadly_sharks = [];

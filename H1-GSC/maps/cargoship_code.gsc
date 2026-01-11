@@ -100,8 +100,7 @@ escape_event() {
 
         if(tolower(var_15[var_16]) == "true") {
           var_6 = 1;
-        }
-        else if(tolower(var_15[var_16]) == "playeronly") {
+        } else if(tolower(var_15[var_16]) == "playeronly") {
           var_6 = 2;
         }
 
@@ -292,11 +291,9 @@ escape_event_rotate(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_1)) {
     self rotateto(var_3, var_4, var_2, var_1);
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     self rotateto(var_3, var_4, var_2);
-  }
-  else {
+  } else {
     self rotateto(var_3, var_4);
 
     if(isDefined(self.script_noteworthy)) {
@@ -359,8 +356,7 @@ escape_event_waterleak_blur() {
 escape_event_fx(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_4)) {
     common_scripts\_exploder::exploder(var_4);
-  }
-  else {
+  } else {
     playFXOnTag(level._effect[var_0], self, "tag_origin");
   }
 
@@ -600,11 +596,9 @@ escape_heroes_holdtheline_adjust_rate_vs_ai(var_0, var_1) {
     self.moveplaybackrate = self.aimaxsprintrate;
   else if(self.run_speed_state == "jog" && self.moveplaybackrate > self.aiminjograte) {
     self.moveplaybackrate = self.moveplaybackrate - 0.005;
-  }
-  else if(self.moveplaybackrate < 1) {
+  } else if(self.moveplaybackrate < 1) {
     self.moveplaybackrate = self.moveplaybackrate + 0.005;
-  }
-  else if(self.moveplaybackrate > 1) {
+  } else if(self.moveplaybackrate > 1) {
     self.moveplaybackrate = self.moveplaybackrate - 0.005;
   }
 }
@@ -618,8 +612,7 @@ escape_heroes_holdtheline_decide_jog_run_sprint(var_0, var_1) {
 
     if(isDefined(self.escape_run_section)) {
       maps\_utility::set_generic_run_anim(level.current_run[self.escape_run_section][self.run_speed_state]);
-    }
-    else {
+    } else {
       maps\_utility::clear_run_anim();
     }
 
@@ -634,8 +627,7 @@ escape_heroes_holdtheline_decide_jog_run_sprint(var_0, var_1) {
 
     if(isDefined(self.escape_run_section)) {
       maps\_utility::set_generic_run_anim(level.current_run[self.escape_run_section][self.run_speed_state]);
-    }
-    else {
+    } else {
       maps\_utility::clear_run_anim();
     }
 
@@ -648,8 +640,7 @@ escape_heroes_holdtheline_decide_jog_run_sprint(var_0, var_1) {
 
     if(isDefined(self.escape_run_section)) {
       maps\_utility::set_generic_run_anim(level.current_run[self.escape_run_section][self.run_speed_state]);
-    }
-    else {
+    } else {
       maps\_utility::clear_run_anim();
     }
 
@@ -681,8 +672,7 @@ escape_heroes_holdtheline(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_3)) {
     self.aimaxsprintrate = var_3;
-  }
-  else {
+  } else {
     self.aimaxsprintrate = 1.25;
   }
 
@@ -696,8 +686,7 @@ escape_heroes_holdtheline(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(isDefined(var_4)) {
       self.dist = var_2 - 5;
-    }
-    else {
+    } else {
       switch (self.position) {
         case "lead":
           var_8 = var_7["middle"];
@@ -1267,8 +1256,7 @@ execute_ai(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(var_2)) {
       var_5 = var_2;
-    }
-    else {
+    } else {
       var_5 = randomintrange(3, 6);
     }
 
@@ -1334,8 +1322,7 @@ patrol() {
 
       if(isDefined(var_2.radius) && var_2.radius > 0) {
         self.goalradius = var_2.radius;
-      }
-      else {
+      } else {
         self.radius = 16;
       }
 
@@ -2008,7 +1995,7 @@ deck_kill_lights() {
 
 deck_lights_off(var_0) {
   foreach(var_2 in var_0) {
-  var_2 maps\_utility::_setlightintensity(0);
+    var_2 maps\_utility::_setlightintensity(0);
   }
 }
 
@@ -2188,8 +2175,7 @@ heli_searchlight_bridge() {
 
     if(var_2 == var_0.size) {
       var_1 = -1;
-    }
-    else if(var_2 == -1) {
+    } else if(var_2 == -1) {
       var_1 = 1;
     }
 
@@ -2581,8 +2567,7 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
 
     if(isDefined(var_4.radius) && var_4.radius > 0) {
       self.goalradius = var_4.radius;
-    }
-    else {
+    } else {
       self.goalradius = 80;
     }
 
@@ -2598,14 +2583,11 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
 
       if(var_3 == "stand2run180") {
         var_6 = self;
-      }
-      else if(isDefined(self.node) && distance(self.node.origin, self.origin) < 4) {
+      } else if(isDefined(self.node) && distance(self.node.origin, self.origin) < 4) {
         var_6 = self.node;
-      }
-      else if(isDefined(self.goodnode) && distance(self.goodnode.origin, self.origin) < 4) {
+      } else if(isDefined(self.goodnode) && distance(self.goodnode.origin, self.origin) < 4) {
         var_6 = self.goodnode;
-      }
-      else {
+      } else {
         var_6 = self;
       }
 
@@ -2620,8 +2602,7 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
       if(var_6 != self) {
         if(issubstr(var_3, "cornerleft")) {
           var_7.angles = var_7.angles + (0, 90, 0);
-        }
-        else if(issubstr(var_3, "cornerright")) {
+        } else if(issubstr(var_3, "cornerright")) {
           var_7.angles = var_7.angles - (0, 90, 0);
         }
       }
@@ -2650,8 +2631,7 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
           case "disable_cqb":
             if(isDefined(var_4.target)) {
               maps\mo_tools::disable_cqbwalk_ign_demo_wrapper();
-            }
-            else {
+            } else {
               maps\_utility::delaythread(1.5, maps\mo_tools::disable_cqbwalk_ign_demo_wrapper);
             }
 
@@ -2659,8 +2639,7 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
           case "enable_cqb":
             if(isDefined(var_4.target)) {
               maps\mo_tools::enable_cqbwalk_ign_demo_wrapper();
-            }
-            else {
+            } else {
               maps\_utility::delaythread(1.5, maps\mo_tools::enable_cqbwalk_ign_demo_wrapper);
             }
 
@@ -2705,8 +2684,7 @@ cargohold_flashthrow(var_0, var_1, var_2) {
 
   if(isDefined(self.node)) {
     self.goodnode = self.node;
-  }
-  else {
+  } else {
     var_3 = getallnodes();
     var_4 = [];
 
@@ -3516,8 +3494,7 @@ escape_heroes_run(var_0) {
 
     if(self.script_noteworthy == "price") {
       var_7 = common_scripts\utility::ter_op(var_0 == "escape_hallway_lower", 1.5, 1.2);
-    }
-    else {
+    } else {
       var_7 = 2.1;
     }
 
@@ -3530,8 +3507,7 @@ escape_heroes_run(var_0) {
 
     if(self.script_noteworthy == "price" && var_6 == 1) {
       maps\_utility::set_generic_run_anim(level.current_run[var_0][self.run_speed_state]);
-    }
-    else {
+    } else {
       self animcustom(::escape_turn);
       maps\_utility::delaythread(self.turn_anim["wait"] - 0.2, maps\_utility::set_generic_run_anim, level.current_run[var_0][self.run_speed_state]);
       wait(self.turn_anim["wait"]);
@@ -3556,8 +3532,7 @@ escape_heroes_run(var_0) {
 
       if(isDefined(var_9.radius) && var_9.radius > 0) {
         self.goalradius = var_9.radius;
-      }
-      else {
+      } else {
         self.goalradius = 116;
       }
 
@@ -3710,8 +3685,7 @@ escape_heroes2() {
 
   if(self.script_noteworthy == "price" || self.script_noteworthy == "grigsby") {
     wait 5;
-  }
-  else {
+  } else {
     self waittillmatch("single anim", "end");
   }
 
@@ -3767,8 +3741,7 @@ escape_heroes() {
 
   if(self.script_noteworthy == "price") {
     level.heroes3["price"].moveplaybackrate = 1.0816;
-  }
-  else if(self.script_noteworthy == "alavi") {
+  } else if(self.script_noteworthy == "alavi") {
     level.heroes3["alavi"].moveplaybackrate = 1;
     wait 0.75;
   } else if(self.script_noteworthy == "grigsby") {
@@ -3813,8 +3786,7 @@ escape_heroes() {
 
     if(isDefined(var_3.radius) && var_3.radius > 0) {
       self.goalradius = var_3.radius;
-    }
-    else {
+    } else {
       self.goalradius = 80;
     }
 
@@ -4498,8 +4470,7 @@ centerlinethread(var_0, var_1, var_2) {
 
   if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  }
-  else {
+  } else {
     level.intro_offset++;
   }
 

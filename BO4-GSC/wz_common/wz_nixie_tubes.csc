@@ -10,7 +10,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace wz_nixie_tubes;
 
 autoexec __init__system__() {
@@ -38,8 +37,8 @@ function_fb0bd6b9(localclientnum) {
   var_679f0ee5 = struct::get_array("nixie_tubes", "script_noteworthy");
 
   foreach(s_tube in var_679f0ee5) {
-    var_790990d7 = util::spawn_model(localclientnum, #"p8_zm_esc_nixie_tubes", s_tube.origin, s_tube.angles);
-    var_8f21b4af = util::spawn_model(localclientnum, #"p8_zm_esc_nixie_tubes_on", s_tube.origin, s_tube.angles);
+    var_790990d7 = util::spawn_model(localclientnum, # "p8_zm_esc_nixie_tubes", s_tube.origin, s_tube.angles);
+    var_8f21b4af = util::spawn_model(localclientnum, # "p8_zm_esc_nixie_tubes_on", s_tube.origin, s_tube.angles);
     var_8f21b4af hide();
     var_790990d7.script_string = "mdl_nixie_tubes";
     var_8f21b4af.script_string = "mdl_nixie_tubes_on";
@@ -320,13 +319,13 @@ event_handler[event_9673dc9a] function_3981d015(eventstruct) {
           foreach(player in players) {
             if(isDefined(var_4da8e55e.targetname)) {
               switch (var_4da8e55e.targetname) {
-                case #"nixie_tube_1":
+                case # "nixie_tube_1":
                   player.tube1 = (player.tube1 + 1) % 10;
                   break;
-                case #"nixie_tube_2":
+                case # "nixie_tube_2":
                   player.tube2 = (player.tube2 + 1) % 10;
                   break;
-                case #"nixie_tube_3":
+                case # "nixie_tube_3":
                   player.tube3 = (player.tube3 + 1) % 10;
                   break;
               }
@@ -343,7 +342,7 @@ event_handler[event_9673dc9a] function_3981d015(eventstruct) {
 function_bbca669b(e_activator, dynent) {
   if(isDefined(e_activator) && isDefined(dynent)) {
     e_activator notify(#"hash_2f586f8df1e6596d");
-    e_activator endon(#"hash_2f586f8df1e6596d", #"hash_59db65b924f851e4", #"hash_f787bd652d7a4b", #"disconnect");
+    e_activator endon(#"hash_2f586f8df1e6596d", # "hash_59db65b924f851e4", # "hash_f787bd652d7a4b", # "disconnect");
     wait 5;
     e_activator thread function_c1cc29be(e_activator, dynent);
   }
@@ -351,7 +350,7 @@ function_bbca669b(e_activator, dynent) {
 
 function_c1cc29be(e_activator, dynent) {
   if(isDefined(e_activator) && isDefined(dynent)) {
-    e_activator endon(#"hash_59db65b924f851e4", #"disconnect");
+    e_activator endon(#"hash_59db65b924f851e4", # "disconnect");
     e_activator notify(#"hash_f787bd652d7a4b");
     localclientnum = e_activator.localclientnum;
     var_8171dd3a = e_activator.tube1;
@@ -397,7 +396,7 @@ function_c1cc29be(e_activator, dynent) {
       var_790990d7 thread function_b4231440(localclientnum);
     }
 
-    playSound(localclientnum, #"hash_6c0f63cd38c393e7", dynent.origin);
+    playSound(localclientnum, # "hash_6c0f63cd38c393e7", dynent.origin);
     dynent.canuse = 0;
     e_activator thread function_f451b137();
     dynent.canuse = 1;
@@ -410,13 +409,13 @@ function_a5d20d9b(str_code) {
   });
 
   switch (str_code) {
-    case #"115":
+    case # "115":
       self thread music_ee();
       break;
-    case #"872":
+    case # "872":
       self thread fireworks_ee();
       break;
-    case #"420":
+    case # "420":
       self thread function_1451e44e();
     default:
       break;
@@ -432,7 +431,7 @@ music_ee() {
     a_mdl_tubes = getEntArray(player.localclientnum, "mdl_nixie_tubes", "script_string");
 
     if(a_mdl_tubes.size > 0) {
-      a_mdl_tubes[0] playSound(player.localclientnum, #"hash_5ecaf6acf6be0b1f", a_mdl_tubes[0].origin);
+      a_mdl_tubes[0] playSound(player.localclientnum, # "hash_5ecaf6acf6be0b1f", a_mdl_tubes[0].origin);
     }
   }
 }
@@ -482,7 +481,7 @@ function_172e72fa() {
 }
 
 function_b4231440(localclientnum) {
-  self.var_3c43a180 = util::playFXOnTag(localclientnum, #"hash_1a61f16f38e7e93d", self, "tag_animate");
+  self.var_3c43a180 = util::playFXOnTag(localclientnum, # "hash_1a61f16f38e7e93d", self, "tag_animate");
   wait 1;
   stopfx(localclientnum, self.var_3c43a180);
 }

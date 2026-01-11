@@ -273,7 +273,7 @@ level_init() {
   a_escape_trigs = getEntArray("escape_trigs", "script_noteworthy");
 
   foreach(trig in a_escape_trigs) {
-  trig trigger_off();
+    trig trigger_off();
   }
 
   trig_briggs_player_use = getent("briggs_player_use", "targetname");

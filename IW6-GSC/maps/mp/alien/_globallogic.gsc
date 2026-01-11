@@ -67,8 +67,7 @@ init() {
   }
   if(getDvarInt("sv_maxclients") == 1) {
     mapLeaderboard += "_SOLO";
-  }
-  else {
+  } else {
     mapLeaderboard += "_COOP";
   }
 
@@ -82,8 +81,7 @@ init() {
     globalLeaderboard = "LB_GB_ALIEN_CHAOS";
     if(getDvarInt("sv_maxclients") == 1) {
       globalLeaderboard += "_SOLO";
-    }
-    else {
+    } else {
       globalLeaderboard += "_COOP";
     }
     precacheLeaderboards(globalLeaderboard + mapLeaderboard);

@@ -96,11 +96,9 @@ onstartgametype() {
 
   if(game["status"] == "halftime") {
     setomnvar("ui_current_round", 2);
-  }
-  else if(game["status"] == "overtime") {
+  } else if(game["status"] == "overtime") {
     setomnvar("ui_current_round", 3);
-  }
-  else if(game["status"] == "overtime_halftime") {
+  } else if(game["status"] == "overtime_halftime") {
     setomnvar("ui_current_round", 4);
   }
 
@@ -164,26 +162,22 @@ updatemlgobjectives() {
         if(var_1 istouching(var_3.levelflag)) {
           if(var_3.numtouching["axis"] * var_3.numtouching["allies"] > 0) {
             var_1.objective = 1;
-          }
-          else if(var_3.ownerteam == "neutral") {
+          } else if(var_3.ownerteam == "neutral") {
             if(var_1.team == "allies") {
               var_1.objective = 2;
-            }
-            else {
+            } else {
               var_1.objective = 3;
             }
           } else if(var_3.ownerteam == "allies") {
             if(var_1.team == "allies") {
               var_1.objective = 4;
-            }
-            else {
+            } else {
               var_1.objective = 5;
             }
           } else if(var_3.ownerteam == "axis") {
             if(var_1.team == "axis") {
               var_1.objective = 6;
-            }
-            else {
+            } else {
               var_1.objective = 7;
             }
           }
@@ -333,7 +327,7 @@ getprefereddompoints(var_0, var_1) {
 
   if(var_0.size > 0) {
     foreach(var_12 in var_0) {
-    var_2[var_12.dompointnumber] = 1;
+      var_2[var_12.dompointnumber] = 1;
     }
 
     return var_2;
@@ -398,8 +392,7 @@ domflags() {
 
     if(isDefined(var_6.target)) {
       var_7[0] = getent(var_6.target, "targetname");
-    }
-    else {
+    } else {
       var_7[0] = spawn("script_model", var_6.origin);
       var_7[0].angles = var_6.angles;
     }
@@ -457,8 +450,7 @@ domflags() {
 
   if(maps\mp\gametypes\_legacyspawnlogic::uselegacyspawning()) {
     flagsetuplegacy();
-  }
-  else {
+  } else {
     flagsetup();
   }
 }
@@ -528,8 +520,7 @@ updatedomicon() {
 
     if(self.numtouching["allies"]) {
       domseticon("mlg", "waypoint_esports_dom_blue_taking" + self.label);
-    }
-    else {
+    } else {
       domseticon("mlg", "waypoint_esports_dom_red_taking" + self.label);
     }
   }
@@ -567,8 +558,7 @@ onbeginuse(var_0) {
 
   if(var_1 == "neutral") {
     statusdialog("securing" + self.label, var_0.team);
-  }
-  else {
+  } else {
     if(var_1 == "allies") {
       level.alliescapturing[level.alliescapturing.size] = self.label;
       var_2 = "axis";
@@ -621,8 +611,7 @@ onenduse(var_0, var_1, var_2) {
 
   if(var_0 == "allies") {
     common_scripts\utility::array_remove(level.alliescapturing, self.label);
-  }
-  else {
+  } else {
     common_scripts\utility::array_remove(level.axiscapturing, self.label);
   }
 }
@@ -707,11 +696,9 @@ updateuiflagomnvars(var_0, var_1) {
 
   if(var_1 == "allies") {
     setomnvar(var_2, -1);
-  }
-  else if(var_1 == "axis") {
+  } else if(var_1 == "axis") {
     setomnvar(var_2, 1);
-  }
-  else {
+  } else {
     setomnvar(var_2, 0);
   }
 }
@@ -732,8 +719,7 @@ onuse(var_0) {
 
   if(isDefined(self.ownedtheentireround)) {
     self.ownedtheentireround = 0;
-  }
-  else {
+  } else {
     self.ownedtheentireround = 1;
   }
 
@@ -912,7 +898,7 @@ updatedomscores() {
       }
 
       foreach(var_6, var_11 in var_3) {
-      maps\mp\gametypes\_gamescore::giveteamscoreforobjective(var_6, var_11);
+        maps\mp\gametypes\_gamescore::giveteamscoreforobjective(var_6, var_11);
       }
 
       if(var_0.size == 3 && var_2 != "none" && level.players.size > 5) {
@@ -1149,8 +1135,7 @@ updatecpm() {
 getcapxpscale() {
   if(self.cpm < 4) {
     return 1;
-  }
-  else {
+  } else {
     return 0.25;
   }
 }
@@ -1273,7 +1258,7 @@ flagsetuplegacy() {
   var_0 = [];
 
   foreach(var_2 in level.flags) {
-  var_0[var_2.script_label] = var_2;
+    var_0[var_2.script_label] = var_2;
   }
 
   var_4 = [];
@@ -1317,7 +1302,7 @@ flagsetuplegacy() {
     var_6 = var_4[var_2.script_label];
 
     foreach(var_8 in var_6) {
-    var_2.adjflags[var_2.adjflags.size] = var_0[var_8];
+      var_2.adjflags[var_2.adjflags.size] = var_0[var_8];
     }
   }
 

@@ -65,8 +65,7 @@ ignore_triggers(timer) {
 
   if(isDefined(timer)) {
     wait(timer);
-  }
-  else {
+  } else {
     wait 0.5;
   }
 
@@ -76,8 +75,7 @@ ignore_triggers(timer) {
 clamp(val, val_min, val_max) {
   if(val < val_min) {
     val = val_min;
-  }
-  else if(val > val_max) {
+  } else if(val > val_max) {
     val = val_max;
   }
 
@@ -162,9 +160,7 @@ fog_vol_to_visionset_monitor() {
     players = getlocalplayers();
 
     for(localclientnum = 0; localclientnum < players.size; localclientnum++) {
-      if(isDefined(level.vsmgr_is_type_currently_default_func) && ![
-          [level.vsmgr_is_type_currently_default_func]
-        ](localclientnum, "visionset")) {
+      if(isDefined(level.vsmgr_is_type_currently_default_func) && ![[level.vsmgr_is_type_currently_default_func]](localclientnum, "visionset")) {
         level._fv2vs_prev_visionsets[localclientnum] = level._fv2vs_unset_visionset;
         continue;
       }
@@ -267,8 +263,7 @@ spawn_weapon_model(localclientnum, weapon, model, origin, angles, options) {
 
   if(isDefined(options)) {
     weapon_model useweaponmodel(weapon, model, options);
-  }
-  else {
+  } else {
     weapon_model useweaponmodel(weapon, model);
   }
 

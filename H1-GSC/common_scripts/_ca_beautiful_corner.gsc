@@ -31,7 +31,7 @@ cleanup() {
   var_0 = getEntArray("beautiful_guy", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -61,7 +61,7 @@ beautiful_player_ammo() {
 
   for(;;) {
     foreach(var_2 in var_0) {
-    self setweaponammostock(var_2, self.maintain_stock[var_2]);
+      self setweaponammostock(var_2, self.maintain_stock[var_2]);
     }
 
     wait 1;
@@ -262,8 +262,7 @@ beautiful_view_position(var_0) {
 
   if(level.beautiful_view_static) {
     beautiful_view_position_static(var_0 + "_static");
-  }
-  else {
+  } else {
     beautiful_view_position_dynamic(var_0);
   }
 }

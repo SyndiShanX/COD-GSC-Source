@@ -206,8 +206,7 @@ enemy_event_debug_print(type) {
 
   if(isDefined(subtype)) {
     self stealth_debug_print("Received an event: " + type + " " + subtype);
-  }
-  else {
+  } else {
     self stealth_debug_print("Received an event: " + type);
   }
 }
@@ -218,8 +217,7 @@ stealth_flag_debug_print(_flag) {
     {
       if(getdvarint("stealth_debug_prints") == 1) {
         iprintlnbold(_flag);
-      }
-      else {
+      } else {
         println(_flag);
       }
     }
@@ -228,8 +226,7 @@ stealth_flag_debug_print(_flag) {
     {
       if(getdvarint("stealth_debug_prints") == 1) {
         iprintlnbold("back to normal: " + _flag);
-      }
-      else {
+      } else {
         println("back to normal: " + _flag);
       }
     }
@@ -242,8 +239,7 @@ group_flag_init(_flag) {
 
   if(isDefined(self.script_stealthgroup)) {
     self.script_stealthgroup = string(self.script_stealthgroup);
-  }
-  else {
+  } else {
     self.script_stealthgroup = "default";
   }
 
@@ -422,8 +418,7 @@ enemy_go_back() {
   } else if(isDefined(spot)) {
     if(self.type != "dog") {
       self set_generic_run_anim("_stealth_patrol_cqb", true);
-    }
-    else {
+    } else {
       self set_dog_walk_anim();
       self.script_growl = undefined;
     }
@@ -526,14 +521,11 @@ enemy_find_original_goal() {
 
   if(isDefined(self.last_set_goalnode)) {
     self._stealth.behavior.last_spot = self.last_set_goalnode.origin;
-  }
-  else if(isDefined(self.last_set_goalent)) {
+  } else if(isDefined(self.last_set_goalent)) {
     self._stealth.behavior.last_spot = self.last_set_goalent.origin;
-  }
-  else if(isDefined(self.last_set_goalpos)) {
+  } else if(isDefined(self.last_set_goalpos)) {
     self._stealth.behavior.last_spot = self.last_set_goalpos;
-  }
-  else {
+  } else {
     self._stealth.behavior.last_spot = self.origin;
   }
 }
@@ -688,8 +680,7 @@ enemy_announce_spotted_acknowledge(spotterPos) {
 
   if(isDefined(self.npcID)) {
     num = self.npcID;
-  }
-  else {
+  } else {
     num = randomint(3);
   }
 
@@ -818,8 +809,7 @@ enemy_animation_custom(type) {
     // this is the reaction
     if(isDefined(tag) || isDefined(self.has_delta)) {
       node anim_generic(self, anime, tag);
-    }
-    else {
+    } else {
       node anim_generic_custom_animmode(self, "gravity", anime);
     }
   }
@@ -1008,7 +998,7 @@ event_awareness_enders(ender_array) {
     //want to add_wait and then kill this function without every calling
     //do_wait...cause that would cause some nasty bugs
     foreach(string in ender_array) {
-    add_wait(::waittill_msg, string);
+      add_wait(::waittill_msg, string);
     }
   }
 

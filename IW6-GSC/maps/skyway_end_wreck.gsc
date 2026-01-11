@@ -40,11 +40,11 @@ start() {
   var_1 = getEntArray("bridge_end_2", "script_noteworthy");
 
   foreach(var_3 in var_0) {
-  var_3 hide();
+    var_3 hide();
   }
 
   foreach(var_3 in var_1) {
-  var_3 hide();
+    var_3 hide();
   }
 
   common_scripts\utility::flag_set("flag_end_wreck_start");
@@ -242,8 +242,7 @@ wreck_enemy_setup() {
 
   if(!isDefined(level.end_enemies)) {
     level.end_enemies = [];
-  }
-  else {
+  } else {
     foreach(var_2 in level.end_enemies) {
       if(isalive(var_2)) {
         if(isDefined(var_2.magic_bullet_shield)) {
@@ -763,8 +762,7 @@ event_qte_bullet_catch() {
 
   if(var_0 < 0.6) {
     common_scripts\utility::flag_wait("flag_qte_end");
-  }
-  else {
+  } else {
     thread qte_bullet_catch_slomo();
     thread qte_bullet_catch_dof();
     thread link_player_for_catch();
@@ -1011,7 +1009,7 @@ destroy_qte_prompt() {
   level notify("stop_blink");
 
   foreach(var_1 in level.qte_prompt) {
-  var_1 destroy();
+    var_1 destroy();
   }
 
   level.qte_prompt = undefined;

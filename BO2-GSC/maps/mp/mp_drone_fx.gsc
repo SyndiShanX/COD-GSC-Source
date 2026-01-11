@@ -7,8 +7,7 @@
 #include maps\mp\createfx\mp_drone_fx;
 #include maps\mp\createart\mp_drone_art;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["fx_mp_drone_robot_sparks"] = loadfx("maps/mp_maps/fx_mp_drone_robot_sparks");

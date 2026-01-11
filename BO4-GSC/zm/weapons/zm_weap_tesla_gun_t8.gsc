@@ -9,7 +9,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm\zm_lightning_chain;
 #include scripts\zm_common\zm;
-
 #namespace zm_weap_tesla_gun_t8;
 
 autoexec __init__system__() {
@@ -27,7 +26,7 @@ __init__() {
   zm::function_84d343d(#"ww_tesla_gun_t8", &function_5ff12a45);
   zm::function_84d343d(#"ww_tesla_gun_t8_upgraded", &function_52d66433);
   callback::on_weapon_change(&on_weapon_change);
-  clientfield::register("toplayer", "" + #"hash_611f27e5d51d036f", 28000, 1, "int");
+  clientfield::register("toplayer", "" + # "hash_611f27e5d51d036f", 28000, 1, "int");
 }
 
 function_5ff12a45(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {
@@ -42,12 +41,12 @@ function_52d66433(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 
 on_weapon_change(s_params) {
   if(is_tesla_gun(s_params.weapon)) {
-    clientfield::set_to_player("" + #"hash_611f27e5d51d036f", 1);
+    clientfield::set_to_player("" + # "hash_611f27e5d51d036f", 1);
     return;
   }
 
   if(is_tesla_gun(s_params.last_weapon)) {
-    clientfield::set_to_player("" + #"hash_611f27e5d51d036f", 0);
+    clientfield::set_to_player("" + # "hash_611f27e5d51d036f", 0);
   }
 }
 

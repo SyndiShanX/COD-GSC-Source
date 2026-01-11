@@ -100,8 +100,7 @@ hacker_trigger_pool_think() {
     if(pool_active) {
       if(!any_hackers_active()) {
         destroy_pooled_items();
-      }
-      else {
+      } else {
         sweep_pooled_items();
         add_eligable_pooled_items();
       }
@@ -204,14 +203,11 @@ add_eligable_pooled_items() {
 get_hackable_trigger() {
   if(isDefined(self.door)) {
     return self.door;
-  }
-  else if(isDefined(self.perk)) {
+  } else if(isDefined(self.perk)) {
     return self.perk;
-  }
-  else if(isDefined(self.window)) {
+  } else if(isDefined(self.window)) {
     return self.window.unitrigger_stub.trigger;
-  }
-  else if(isDefined(self.classname) && getsubstr(self.classname, 0, 7) == "trigger_") {
+  } else if(isDefined(self.classname) && getsubstr(self.classname, 0, 7) == "trigger_") {
     return self;
   }
 }
@@ -323,8 +319,7 @@ deregister_hackable(noteworthy) {
   for(i = 0; i < level._hackable_objects.size; i++) {
     if(!isDefined(level._hackable_objects[i].script_noteworthy) || level._hackable_objects[i].script_noteworthy != noteworthy) {
       new_list[new_list.size] = level._hackable_objects[i];
-    }
-    else {
+    } else {
       level._hackable_objects[i] notify("hackable_deregistered");
 
       if(isDefined(level._hackable_objects[i]._trigger)) {
@@ -473,11 +468,9 @@ set_hack_hint_string() {
   if(isDefined(self._trigger)) {
     if(isDefined(self.custom_string)) {
       self._trigger sethintstring(self.custom_string);
-    }
-    else if(!isDefined(self.script_int) || self.script_int <= 0) {
+    } else if(!isDefined(self.script_int) || self.script_int <= 0) {
       self._trigger sethintstring(&"ZOMBIE_HACK_NO_COST");
-    }
-    else {
+    } else {
       self._trigger sethintstring(&"ZOMBIE_HACK", self.script_int);
     }
   }
@@ -554,8 +547,7 @@ hacker_do_hack(hackable) {
 
   if(hacked) {
     self playSound("vox_mcomp_hack_success");
-  }
-  else {
+  } else {
     self playSound("vox_mcomp_hack_fail");
   }
 
@@ -655,15 +647,13 @@ hackable_object_thread() {
         hack_success = hacker hacker_do_hack(self);
         self notify("kill_lowreadywatcher");
 
-        if(isDefined(hacker)) {
-        }
+        if(isDefined(hacker)) {}
 
         if(isDefined(hacker) && hack_success) {
           if(cost) {
             if(cost > 0) {
               hacker maps\mp\zombies\_zm_score::minus_to_player_score(cost);
-            }
-            else {
+            } else {
               hacker maps\mp\zombies\_zm_score::add_to_player_score(cost * -1);
             }
           }

@@ -40,8 +40,7 @@ start_light_fx(localclientnum) {
 
   if(friend) {
     self.fx = playFXOnTag(localclientnum, level._effect["crossbow_friendly_light"], self, "tag_origin");
-  }
-  else {
+  } else {
     self.fx = playFXOnTag(localclientnum, level._effect["crossbow_enemy_light"], self, "tag_origin");
   }
 }
@@ -59,8 +58,7 @@ fullscreen_fx(localclientnum) {
   if(isDefined(player)) {
     if(player getinkillcam(localclientnum)) {
       return;
-    }
-    else if(player isplayerviewlinkedtoentity(localclientnum)) {
+    } else if(player isplayerviewlinkedtoentity(localclientnum)) {
       return;
     }
   }

@@ -52,8 +52,7 @@ teleportthreadex(verticaloffset, delay, frames) {
 
   if(amount > 10.0) {
     amount = 10.0;
-  }
-  else if(amount < -10.0) {
+  } else if(amount < -10.0) {
     amount = -10.0;
   }
 
@@ -132,8 +131,7 @@ dotraverse(traversedata) {
 
   if(!isDefined(self.traversestance)) {
     self.desired_anim_pose = "stand";
-  }
-  else {
+  } else {
     self.desired_anim_pose = self.traversestance;
   }
 
@@ -216,8 +214,7 @@ dotraverse_animation() {
 
     if(traverseanim.size || isDefined(self.traverseanimtransout)) {
       self domaintraverse_notetracks("traverseAnim");
-    }
-    else {
+    } else {
       self thread domaintraverse_notetracks("traverseAnim");
       wait_anim_length(self.traverseanimtransin, 0.2, self.traverseanimrate);
     }
@@ -360,8 +357,7 @@ traversedeath() {
 
   if(isDefined(deathanim)) {
     animscripts\death::play_death_anim(deathanim);
-  }
-  else {
+  } else {
     traversestartragdolldeath();
   }
 

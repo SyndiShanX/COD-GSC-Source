@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_timed_round;
 
 autoexec __init__system__() {
@@ -53,7 +52,7 @@ private on_end(round_reset) {
 }
 
 private function_8b87e57c(var_6325d314, n_grace, n_time_limit) {
-  level endon(#"end_of_round", #"host_migration_begin");
+  level endon(#"end_of_round", # "host_migration_begin");
   wait n_grace;
   level thread function_14a98a41(var_6325d314, n_time_limit);
 
@@ -105,7 +104,7 @@ private function_31f197c2() {
 private function_14a98a41(str_label, n_time_limit) {
   self notify("6b2c93b0788dd738");
   self endon("6b2c93b0788dd738");
-  level endon(#"end_of_round", #"host_migration_begin");
+  level endon(#"end_of_round", # "host_migration_begin");
   level.var_489d6aa2 = str_label;
   level.var_869f4c31 = n_time_limit;
 

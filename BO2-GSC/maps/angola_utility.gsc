@@ -110,7 +110,7 @@ init_fight(str_node, str_friend, str_enemy) {
   level.a_nd_engage = getnodearray(str_node, "targetname");
 
   foreach(node in level.a_nd_engage) {
-  node.open = 1;
+    node.open = 1;
   }
 
   level.a_sp_friend = getEntArray(str_friend, "targetname");
@@ -125,8 +125,7 @@ create_fight(e_friend, e_enemy, b_start_spawn, str_noteworthy) {
   if(!isDefined(e_enemy)) {
     if(b_start_spawn) {
       n_allowed_fights = 9;
-    }
-    else {
+    } else {
       n_allowed_fights = 6;
     }
 
@@ -138,8 +137,7 @@ create_fight(e_friend, e_enemy, b_start_spawn, str_noteworthy) {
       if(distance2dsquared(sp_enemy.origin, level.player.origin) < 250000) {
         if(!within_fov(level.player.origin, level.player.angles, sp_enemy.origin, cos(100))) {
           e_enemy = sp_enemy spawn_ai(1);
-        }
-        else {
+        } else {
           return;
         }
       } else
@@ -238,15 +236,13 @@ enemy_melee_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_mean
 
   if(e_attacker == level.player) {
     return new_damage;
-  }
-  else if(self.a.pose != "back") {
+  } else if(self.a.pose != "back") {
     if(isai(e_inflictor)) {
       savimbi = getent("savimbi", "targetname");
 
       if(e_inflictor != savimbi) {
         n_damage = int(n_damage / 4);
-      }
-      else {
+      } else {
         return new_damage;
       }
     }
@@ -366,8 +362,7 @@ _fight_think(nd_goal) {
   if(!(isDefined(self.hunting_player) && self.hunting_player)) {
     if(isDefined(self.melee)) {
       self thread _random_death(6);
-    }
-    else {
+    } else {
       self thread _random_death();
     }
   }
@@ -416,14 +411,11 @@ _random_death(offset, b_short_death) {
   }
   if(isDefined(offset)) {
     wait(randomfloatrange(5.0, 7.0) + offset);
-  }
-  else if(isDefined(b_short_death) && b_short_death) {
+  } else if(isDefined(b_short_death) && b_short_death) {
     wait(randomfloatrange(1.0, 1.5));
-  }
-  else if(isDefined(self.team == "allies") && (isDefined(self.targetname) && issubstr(self.targetname, "brim_"))) {
+  } else if(isDefined(self.team == "allies") && (isDefined(self.targetname) && issubstr(self.targetname, "brim_"))) {
     wait 0.5;
-  }
-  else {
+  } else {
     wait(randomfloatrange(5.0, 7.0));
   }
 
@@ -488,8 +480,7 @@ load_buffel(b_less_full, real_gunner) {
 
   if(self.vehicletype == "apc_buffel") {
     n_vehicle_size = level.vehicle_aianims["apc_buffel"].size - 1;
-  }
-  else {
+  } else {
     n_vehicle_size = level.vehicle_aianims["apc_buffel"].size;
   }
 
@@ -562,7 +553,7 @@ unload_gaz66() {
     return;
   }
   foreach(m_rider in self.riders) {
-  m_rider delete();
+    m_rider delete();
   }
 }
 
@@ -653,14 +644,12 @@ player_convoy_watch(str_flag) {
       if(n_player_x > n_buffel_x + distx_max || n_player_x < n_buffel_x - 2050 || n_player_y > n_buffel_y + disty_max || n_player_y < n_buffel_y - disty_max) {
         if(n_player_x < n_buffel_x - 2050) {
           missionfailedwrapper_nodeath(&"ANGOLA_ABANDON_FAIL");
-        }
-        else {
+        } else {
           level.player dodamage(60, vh_lead_buffel.origin + vectorscale((1, 0, 0), 3000.0));
           wait(randomfloatrange(0.1, 0.2));
         }
       } else if(n_player_x > n_buffel_x + distx_death || n_player_x < n_buffel_x - distx_death || n_player_y > n_buffel_y + disty_death || n_player_y < n_buffel_y - disty_death) {
-        if(n_player_x < n_buffel_x - distx_death) {
-        } else if(n_player_x > n_buffel_x + distx_death) {
+        if(n_player_x < n_buffel_x - distx_death) {} else if(n_player_x > n_buffel_x + distx_death) {
           level.player dodamage(90, vh_lead_buffel.origin + vectorscale((1, 0, 0), 3000.0));
           wait(randomfloatrange(0.1, 0.2));
         } else
@@ -668,8 +657,7 @@ player_convoy_watch(str_flag) {
       } else if(n_player_x > n_buffel_x + 1600 || n_player_x < n_buffel_x - 1900 || n_player_y > n_buffel_y + disty_min || n_player_y < n_buffel_y - disty_min) {
         if(n_player_y > n_buffel_y + disty_min) {
           level thread set_fail_mortars(1);
-        }
-        else if(n_player_y < n_buffel_y - disty_min) {
+        } else if(n_player_y < n_buffel_y - disty_min) {
           level thread set_fail_mortars(0);
         }
 
@@ -718,8 +706,7 @@ savimbi_say_convoy_warning() {
 set_fail_mortars(n_side) {
   if(flag("fail_mortars")) {
     return;
-  }
-  else {
+  } else {
     flag_set("fail_mortars");
   }
 
@@ -856,8 +843,7 @@ _fight_vignette(align, scene, goal_array) {
 
   if(isDefined(align.angles)) {
     m_align.angles = (align.angles[0], randomint(360), align.angles[2]);
-  }
-  else {
+  } else {
     m_align.angles = (0, randomint(360), 0);
   }
 
@@ -899,8 +885,7 @@ _fight_vignette(align, scene, goal_array) {
 
       if(friend.animname == "hill_fight_unita_03") {
         friend kill();
-      }
-      else {
+      } else {
         friend thread _random_death();
 
         if(isDefined(goal_array)) {
@@ -975,13 +960,13 @@ stop_savannah_grass() {
   grass_array = getEntArray("fxanim_heli_grass_flyover", "targetname");
 
   foreach(grass in grass_array) {
-  grass notify("stop_loop");
+    grass notify("stop_loop");
   }
 
   grass_array = getEntArray("fxanim_heli_grass_flyover_2", "targetname");
 
   foreach(grass in grass_array) {
-  grass notify("stop_loop");
+    grass notify("stop_loop");
   }
 }
 
@@ -1005,13 +990,13 @@ victory_grass() {
   static_grass = getEntArray("static_heli_grass_land", "targetname");
 
   foreach(grass in static_grass) {
-  grass delete();
+    grass delete();
   }
 
   cloth_grass = getEntArray("fxanim_heli_grass_land", "targetname");
 
   foreach(grass in cloth_grass) {
-  grass show();
+    grass show();
   }
 }
 
@@ -1019,7 +1004,7 @@ hide_victory_grass() {
   cloth_grass = getEntArray("fxanim_heli_grass_land", "targetname");
 
   foreach(grass in cloth_grass) {
-  grass hide();
+    grass hide();
   }
 }
 
@@ -1027,7 +1012,7 @@ turn_on_convoy_headlights() {
   a_vh = getEntArray("convoy", "script_noteworthy");
 
   foreach(vehicle in a_vh) {
-  vehicle setclientflag(10);
+    vehicle setclientflag(10);
   }
 }
 
@@ -1066,8 +1051,7 @@ savannah_player_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_
   if(!flag("fail_stop_protection")) {
     if(str_means_of_death == "MOD_PROJECTILE_SPLASH" || str_means_of_death == "MOD_PROJECTILE") {
       n_damage = int(n_damage / (damage_modifier * 4));
-    }
-    else {
+    } else {
       n_damage = int(n_damage / damage_modifier);
     }
   } else
@@ -1098,11 +1082,9 @@ get_difficulty_damage_modifier() {
 enemy_rpg_damage_override(e_inflictor, e_attacker, n_damage, n_flags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
   if(e_inflictor == level.player) {
     return n_damage;
-  }
-  else if(isDefined(self.targetname) && issubstr(self.targetname, "final_launcher")) {
+  } else if(isDefined(self.targetname) && issubstr(self.targetname, "final_launcher")) {
     return 0;
-  }
-  else {
+  } else {
     n_damage = int(n_damage / 3);
     return n_damage;
   }
@@ -1129,8 +1111,7 @@ angola_challenge_actor_killed_callback(e_inflictor, e_attacker, n_damage, str_mo
   if(e_attacker == level.player) {
     if(str_weapon == "machete_sp") {
       level.player notify(level.machete_notify);
-    }
-    else if(str_weapon == "mortar_shell_dpad_sp") {
+    } else if(str_weapon == "mortar_shell_dpad_sp") {
       level.mortar_kills++;
 
       if(level.mortar_kills == 1) {
@@ -1145,8 +1126,7 @@ mortar_kill_timer() {
 
   if(level.mortar_kills > 4) {
     flag_set("mortar_challenge_complete");
-  }
-  else {
+  } else {
     level.mortar_kills = 0;
   }
 }
@@ -1177,8 +1157,7 @@ riverbed_fail_warning() {
 
     if(n_count % 2 != 0) {
       level.savimbi say_dialog("savi_i_would_not_wish_you_0", 0.5);
-    }
-    else {
+    } else {
       level.savimbi say_dialog("savi_stay_close_to_the_co_0", 0.5);
     }
 
@@ -1240,7 +1219,7 @@ riverbed_lockbreaker_perk() {
   mortar_array = getEntArray("pickup_mortar", "targetname");
 
   foreach(mortar in mortar_array) {
-  mortar delete();
+    mortar delete();
   }
 
   run_scene_first_frame("lockbreaker");
@@ -1251,7 +1230,7 @@ riverbed_lockbreaker_perk() {
   a_weapons = getEntArray("lockbreaker_weapon", "script_noteworthy");
 
   foreach(weapon in a_weapons) {
-  weapon trigger_off();
+    weapon trigger_off();
   }
 
   level.player waittill_player_has_brute_force_perk();
@@ -1263,7 +1242,7 @@ riverbed_lockbreaker_perk() {
   a_weapons = getEntArray("lockbreaker_weapon", "script_noteworthy");
 
   foreach(weapon in a_weapons) {
-  weapon trigger_on();
+    weapon trigger_on();
   }
 
   level thread run_scene("lockbreaker_interact");

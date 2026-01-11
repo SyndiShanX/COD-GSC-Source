@@ -5,7 +5,6 @@
 
 #include scripts\core_common\gameobjects_shared;
 #include scripts\mp_common\player\player_loadout;
-
 #namespace os;
 
 turn_back_time(basegametype) {

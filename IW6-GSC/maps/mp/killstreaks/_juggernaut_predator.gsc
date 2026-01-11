@@ -541,8 +541,7 @@ predatorCloakWaitForForceEnd() {
     self waittill("predator_force_uncloak");
 
     while(self IsMantling() {
-    ) {
-    }
+      ) {}
       wait 0.05;
     }
 
@@ -841,8 +840,7 @@ watchForPerkRemoval(targetPlayer) {
 
   if(self isEnemy(targetPlayer)) {
     self thread outlinePredatorTarget(targetPlayer, CONST_OUTLINE_COLOR_ENEMY);
-  }
-  else {
+  } else {
     self thread outlinePredatorTarget(targetPlayer, CONST_OUTLINE_COLOR_FRIENDLY);
   }
 }
@@ -944,16 +942,14 @@ Callback_PlayerLastStandPredator(eInflictor, attacker, iDamage, sMeansOfDeath, s
     lastStandParams.attackerPosition = attacker.origin;
     if(attacker == self) {
       lastStandParams.sMeansOfDeath = "MOD_SUICIDE";
-    }
-    else {
+    } else {
       lastStandParams.sMeansOfDeath = sMeansOfDeath;
     }
 
     lastStandParams.sWeapon = sWeapon;
     if(isDefined(attacker) && IsPlayer(attacker) && attacker getCurrentPrimaryWeapon() != "none") {
       lastStandParams.sPrimaryWeapon = attacker getCurrentPrimaryWeapon();
-    }
-    else {
+    } else {
       lastStandParams.sPrimaryWeapon = undefined;
     }
     lastStandParams.vDir = vDir;

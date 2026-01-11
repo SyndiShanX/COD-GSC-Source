@@ -99,7 +99,7 @@ setanims() {
   pickup_passenger_RR_idle
   pickup_passenger_RR_climb_out
   technical_passenger_climb_out
-	
+  	
   */
 
   positions[0].sittag = "tag_driver";

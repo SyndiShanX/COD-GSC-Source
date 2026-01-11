@@ -45,8 +45,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
   if(level.onlyheadshots) {
     if(smeansofdeath == "MOD_PISTOL_BULLET" || smeansofdeath == "MOD_RIFLE_BULLET") {
       return;
-    }
-    else if(smeansofdeath == "MOD_HEAD_SHOT") {
+    } else if(smeansofdeath == "MOD_HEAD_SHOT") {
       idamage = 150;
     }
   }
@@ -64,8 +63,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
   if(sweapon == "none" && isDefined(einflictor)) {
     if(isDefined(einflictor.targetname) && einflictor.targetname == "explodable_barrel") {
       sweapon = "explodable_barrel_mp";
-    }
-    else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
+    } else if(isDefined(einflictor.destructible_type) && issubstr(einflictor.destructible_type, "vehicle_")) {
       sweapon = "destructible_car_mp";
     }
   }
@@ -80,8 +78,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
     if(level.teambased && isplayer(eattacker) && self != eattacker && self.aiteam == eattacker.pers["team"]) {
       if(level.friendlyfire == 0) {
         return;
-      }
-      else if(level.friendlyfire == 1) {
+      } else if(level.friendlyfire == 1) {
         if(idamage < 1) {
           idamage = 1;
         }
@@ -119,8 +116,7 @@ callback_actordamage(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
 
       if(issubstr(smeansofdeath, "MOD_GRENADE") && isDefined(einflictor) && isDefined(einflictor.iscooked)) {
         self.wascooked = gettime();
-      }
-      else {
+      } else {
         self.wascooked = undefined;
       }
 

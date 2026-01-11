@@ -33,14 +33,11 @@ missile_fire(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 
   if(newval == 2) {
     self setanimrestart( % o_drone_tank_missile1_fire, 1.0, 0.0, 0.5);
-  }
-  else if(newval == 1) {
+  } else if(newval == 1) {
     self setanimrestart( % o_drone_tank_missile2_fire, 1.0, 0.0, 0.5);
-  }
-  else if(newval == 0) {
+  } else if(newval == 0) {
     self setanimrestart( % o_drone_tank_missile3_fire, 1.0, 0.0, 0.5);
-  }
-  else if(newval == 4) {
+  } else if(newval == 4) {
     self setanimrestart( % o_drone_tank_missile_full_reload, 1.0, 0.0, 1.0);
   }
 }
@@ -72,8 +69,7 @@ play_light_fx(localclientnum) {
       self stop_light_fx(localclientnum);
     else if(player getinkillcam(localclientnum)) {
       continue;
-    }
-    else if(self.friend != self friendnotfoe(localclientnum)) {
+    } else if(self.friend != self friendnotfoe(localclientnum)) {
       self stop_light_fx(localclientnum);
     }
 
@@ -202,8 +198,7 @@ rebooting(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwas
   }
   if(newval) {
     self thread start_reboot_fx(localclientnum);
-  }
-  else {
+  } else {
     self notify("reboot_disable");
     self stop_light_fx(localclientnum);
   }

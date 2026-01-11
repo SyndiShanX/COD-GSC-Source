@@ -98,7 +98,7 @@ func_5297() {
   var_00 = getEntArray("lot_script_car", "targetname");
 
   foreach(var_02 in var_00) {
-  var_02 thread func_DAF0();
+    var_02 thread func_DAF0();
   }
 }
 
@@ -133,8 +133,7 @@ func_436B(var_00) {
 
   if(scripts\engine\utility::is_true(var_00)) {
     var_01 scripts\sp\anim::func_1EC3(var_01, "statue_collapse");
-  }
-  else {
+  } else {
     var_01 scripts\sp\anim::func_1EE0(var_01, "statue_collapse");
   }
 
@@ -262,7 +261,7 @@ func_8A05() {
   wait 3.0;
 
   foreach(var_05 in level.func_923A) {
-  var_05 scripts\sp\utility::func_51E1("casual_gun");
+    var_05 scripts\sp\utility::func_51E1("casual_gun");
   }
 }
 
@@ -786,8 +785,7 @@ func_39F3(var_00, var_01) {
 
   if(self == level.func_12B67) {
     level.player playSound("scn_phspace_launch_retribution_thrusters_on");
-  }
-  else {
+  } else {
     level.player playSound("scn_phspace_launch_tigris_thrusters_on");
   }
 
@@ -1222,15 +1220,13 @@ func_CFDF(var_00, var_01, var_02, var_03) {
 
   if(self.func_11535 > var_15) {
     self.func_11535 = var_15;
-  }
-  else if(self.func_11535 < var_16) {
+  } else if(self.func_11535 < var_16) {
     self.func_11535 = var_16;
   }
 
   if(self.func_11533 < var_17) {
     self.func_11533 = var_17;
-  }
-  else if(self.func_11533 > var_18) {
+  } else if(self.func_11533 > var_18) {
     self.func_11533 = var_18;
   }
 
@@ -1378,7 +1374,7 @@ func_408A() {
   var_00 = scripts\sp\utility::func_77DA("jackals_hvr_marines");
 
   foreach(var_02 in var_00) {
-  var_02 delete();
+    var_02 delete();
   }
 
   if(isDefined(level.func_11323)) {
@@ -1578,7 +1574,7 @@ func_104EA(var_00, var_01, var_02) {
   var_03 func_0BDC::func_136A6(self);
 
   foreach(var_05 in var_00) {
-  scripts\sp\utility::func_75C4(var_01, var_05, var_02);
+    scripts\sp\utility::func_75C4(var_01, var_05, var_02);
   }
 }
 
@@ -1700,13 +1696,12 @@ func_E317(var_00) {
 
   if(var_00) {
     var_02 = scripts\sp\utility::func_75C4;
-  }
-  else {
+  } else {
     var_02 = scripts\sp\utility::func_75F8;
   }
 
   foreach(var_04 in var_01) {
-  self[[var_02]]("retribution_thrust_rear_launch", var_04);
+    self[[var_02]]("retribution_thrust_rear_launch", var_04);
   }
 }
 
@@ -1715,12 +1710,11 @@ func_118B9(var_00) {
 
   if(var_00) {
     var_02 = scripts\sp\utility::func_75C4;
-  }
-  else {
+  } else {
     var_02 = scripts\sp\utility::func_75F8;
   }
 
   foreach(var_04 in var_01) {
-  self[[var_02]]("un_thruster_rear_lrg_launch", var_04);
+    self[[var_02]]("un_thruster_rear_lrg_launch", var_04);
   }
 }

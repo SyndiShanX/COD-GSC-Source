@@ -107,8 +107,7 @@ setupagent() {
 func_85F6(var_00, var_01) {
   if(scripts\engine\utility::is_true(self.i_am_clone)) {
     scripts\asm\asm_bb::bb_requestcombatmovetype_facemotion();
-  }
-  else {
+  } else {
     scripts\asm\asm_bb::bb_requestcombatmovetype_strafe();
   }
 }
@@ -202,14 +201,11 @@ scriptedgoalwaitforarrival() {
 
     if(isDefined(self.func_EF7D)) {
       var_00 = self.func_EF7D;
-    }
-    else if(isDefined(self.func_EF7A)) {
+    } else if(isDefined(self.func_EF7A)) {
       var_00 = self.func_EF7A.origin;
-    }
-    else if(isDefined(self.func_EF7C)) {
+    } else if(isDefined(self.func_EF7C)) {
       var_00 = self.func_EF7C.origin;
-    }
-    else {
+    } else {
       continue;
     }
 
@@ -265,8 +261,7 @@ func_F832(var_00, var_01, var_02) {
 
   if(isDefined(var_02) && var_02) {
     self.func_EF7B = var_02;
-  }
-  else {
+  } else {
     self.func_EF7B = undefined;
   }
 }
@@ -285,7 +280,7 @@ func_C5D1(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
   scripts\mp\mp_agent::default_on_killed(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08);
 
   foreach(var_10 in level.players) {
-  var_10 scripts\cp\cp_persistence::give_player_xp(1000, 1);
+    var_10 scripts\cp\cp_persistence::give_player_xp(1000, 1);
   }
 
   if(isDefined(level.grey_on_killed_func)) {
@@ -530,11 +525,9 @@ func_8CAC(var_00) {
   for(;;) {
     if(var_0.health <= var_01) {
       var_00 setscriptablepartstate("health_light", "red");
-    }
-    else if(var_0.health <= var_02) {
+    } else if(var_0.health <= var_02) {
       var_00 setscriptablepartstate("health_light", "yellow");
-    }
-    else {
+    } else {
       var_00 setscriptablepartstate("health_light", "green");
     }
 

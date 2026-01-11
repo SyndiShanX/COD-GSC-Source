@@ -16,8 +16,7 @@ cover() {
 
   if(self animscripts\utility::IsInCombat()) {
     situation = "idle_combat";
-  }
-  else {
+  } else {
     situation = "idle_noncombat";
   }
 

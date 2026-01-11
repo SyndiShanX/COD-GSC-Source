@@ -7,7 +7,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\killstreaks\killstreaks_util;
-
 #namespace globallogic_player;
 
 autoexec __init__system__() {

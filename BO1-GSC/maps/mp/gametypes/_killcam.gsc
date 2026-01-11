@@ -504,8 +504,7 @@ addKillcamSkipText(respawn) {
   }
   if(respawn) {
     self.kc_skiptext setText(&"PLATFORM_PRESS_TO_RESPAWN");
-  }
-  else {
+  } else {
     self.kc_skiptext setText(&"PLATFORM_PRESS_TO_SKIP");
   }
   self.kc_skiptext.alpha = 1;
@@ -515,8 +514,7 @@ addKillcamTimer(camtime) {
     self.kc_timer = createFontString("extrabig", 3.0);
     if(level.console) {
       self.kc_timer setPoint("TOP", undefined, 0, 45);
-    }
-    else {
+    } else {
       self.kc_timer setPoint("TOP", undefined, 0, 55);
     }
     self.kc_timer.archived = false;

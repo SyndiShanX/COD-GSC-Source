@@ -1071,9 +1071,7 @@ func_1278D(param_00, param_01, param_02) {
 func_11A40(param_00, param_01) {
   self endon("death");
   self.ignoreme = 1;
-  [
-    [param_01]
-  ](1);
+  [[param_01]](1);
   self.precacheshader = 1;
   wait(1);
   self.precacheshader = 0;
@@ -1081,9 +1079,7 @@ func_11A40(param_00, param_01) {
     wait(1);
   }
 
-  [
-    [param_01]
-  ](0);
+  [[param_01]](0);
 }
 
 func_12787(param_00) {

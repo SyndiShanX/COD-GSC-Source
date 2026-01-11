@@ -95,7 +95,7 @@ main() {
   blockers = getEntArray("main_street_blocker", "targetname");
 
   foreach(blocker in blockers) {
-  blocker disconnectpaths();
+    blocker disconnectpaths();
   }
 
   level.insta_kill_triggers = getEntArray("instant_death", "targetname");
@@ -317,8 +317,7 @@ collapsing_holes() {
     if(isDefined(self.boards)) {
       if(isDefined(self.script_int)) {
         exploder(self.script_int);
-      }
-      else {
+      } else {
         playFX(level._effect["wood_chunk_destory"], self.boards.origin);
       }
 
@@ -341,11 +340,9 @@ sndcollapsing() {
   }
   if(self.script_noteworthy == "hole_small_2") {
     self playSound("zmb_floor_collapse");
-  }
-  else if(self.script_noteworthy == "hole_small_1") {
+  } else if(self.script_noteworthy == "hole_small_1") {
     self playSound("zmb_floor_collapse");
-  }
-  else if(self.script_noteworthy == "hole_large_1") {
+  } else if(self.script_noteworthy == "hole_large_1") {
     self playSound("zmb_floor_collapse");
   }
 }
@@ -377,8 +374,7 @@ tunnel_breach() {
 
       if(isDefined(self.script_int)) {
         exploder(self.script_int);
-      }
-      else {
+      } else {
         playFX(level._effect["wood_chunk_destory"], self.origin);
       }
 
@@ -461,7 +457,7 @@ sliding_bookcase_think() {
       continue;
     }
     foreach(piece in self.doors) {
-    piece thread sliding_bookcase_activate(1);
+      piece thread sliding_bookcase_activate(1);
     }
 
     while(isDefined(self.doors[0].door_moving) && self.doors[0].door_moving || self sliding_bookcase_occupied()) {
@@ -469,7 +465,7 @@ sliding_bookcase_think() {
     }
 
     foreach(piece in self.doors) {
-    piece thread sliding_bookcase_activate(0);
+      piece thread sliding_bookcase_activate(0);
     }
 
     self._door_open = 0;
@@ -488,9 +484,7 @@ sliding_bookcase_activate(open) {
   self.door_moving = 1;
 
   if(isDefined(self.script_sound)) {
-    if(open) {
-    } else {
-    }
+    if(open) {} else {}
   }
 
   scale = 1;
@@ -510,8 +504,7 @@ sliding_bookcase_activate(open) {
         if(open) {
           if(isDefined(self.startpos)) {
             movetopos = self.startpos + vector;
-          }
-          else {
+          } else {
             movetopos = self.origin + vector;
           }
 
@@ -519,8 +512,7 @@ sliding_bookcase_activate(open) {
         } else {
           if(isDefined(self.startpos)) {
             movetopos = self.startpos;
-          }
-          else {
+          } else {
             movetopos = self.origin - vector;
           }
 
@@ -572,7 +564,7 @@ sliding_bookcase_occupied() {
   if(is_occupied > 0) {
     if(isDefined(self.doors[0].startpos) && self.doors[0].startpos == self.doors[0].origin) {
       foreach(piece in self.doors) {
-      piece thread sliding_bookcase_activate(1);
+        piece thread sliding_bookcase_activate(1);
       }
 
       self._door_open = 1;
@@ -604,7 +596,7 @@ dart_game_init() {
     return;
   }
   foreach(piece in dart_board) {
-  piece thread dart_game_piece_think();
+    piece thread dart_game_piece_think();
   }
 }
 
@@ -759,7 +751,7 @@ setup_temp_sloth_triggers() {
   sloth_triggers = getEntArray("sloth_barricade", "targetname");
 
   foreach(trigger in sloth_triggers) {
-  trigger thread watch_opensesame();
+    trigger thread watch_opensesame();
   }
 
   level waittill_any("open_sesame", "open_sloth_barricades");
@@ -796,14 +788,12 @@ open_barricade(script_flag, target) {
 
   if(isDefined(self.func_no_delete)) {
     self[[self.func_no_delete]]();
-  }
-  else {
+  } else {
     self delete();
   }
 }
 
-perk_vulture_custom_scripts() {
-}
+perk_vulture_custom_scripts() {}
 
 zm_traversal_override(traversealias) {
   self.no_restart = 0;
@@ -943,7 +933,7 @@ give_default_minigame_loadout() {
   players = get_players();
 
   foreach(player in players) {
-  player give_player_minigame_loadout();
+    player give_player_minigame_loadout();
   }
 }
 
@@ -962,8 +952,7 @@ give_player_minigame_loadout() {
 
   if(self hasweapon(self get_player_lethal_grenade())) {
     self getweaponammoclip(self get_player_lethal_grenade());
-  }
-  else {
+  } else {
     self giveweapon(self get_player_lethal_grenade());
   }
 
@@ -971,7 +960,7 @@ give_player_minigame_loadout() {
   a_current_perks = self getperks();
 
   foreach(perk in a_current_perks) {
-  self notify(perk + "_stop");
+    self notify(perk + "_stop");
   }
 
   self.dontspeak = undefined;
@@ -988,7 +977,7 @@ minigame_blockers_disable() {
   a_models = get_minigame_blocker_models();
 
   foreach(model in a_models) {
-  model thread blocker_model_remove();
+    model thread blocker_model_remove();
   }
 
   toggle_doors_along_richtofen_street(0);
@@ -1023,7 +1012,7 @@ minigame_blockers_enable() {
   a_structs = get_minigame_blocker_structs();
 
   foreach(struct in a_structs) {
-  struct thread blocker_model_promote();
+    struct thread blocker_model_promote();
   }
 
   toggle_doors_along_richtofen_street(1);
@@ -1055,8 +1044,7 @@ get_minigame_sloth_barriers() {
 
     if(flag("richtofen_minigame_active") || flag("richtofen_game_complete")) {
       a_blocked_barrier_list = array("jail");
-    }
-    else {
+    } else {
       a_blocked_barrier_list = [];
     }
 
@@ -1074,8 +1062,7 @@ get_minigame_blocker_structs() {
   if(flag_exists("sq_minigame_active") && flag("sq_minigame_active")) {
     if(flag("richtofen_minigame_active") || flag("richtofen_game_complete")) {
       a_structs = getstructarray("minigame_richtofen_blocker", "targetname");
-    }
-    else {
+    } else {
       a_structs = getstructarray("minigame_maxis_blocker", "script_noteworthy");
     }
   } else {
@@ -1090,8 +1077,7 @@ get_minigame_blocker_models() {
   if(flag_exists("sq_minigame_active") && flag("sq_minigame_active")) {
     if(flag("richtofen_minigame_active") || flag("richtofen_game_complete")) {
       a_models = getEntArray("minigame_richtofen_blocker", "targetname");
-    }
-    else {
+    } else {
       a_models = getEntArray("minigame_maxis_blocker", "script_noteworthy");
     }
   } else {
@@ -1278,8 +1264,7 @@ squashed_death_init(kill_if_falling) {
     if(!(isDefined(who.insta_killed) && who.insta_killed)) {
       if(isplayer(who)) {
         who thread insta_kill_player(1, kill_if_falling);
-      }
-      else if(isai(who)) {
+      } else if(isai(who)) {
         who dodamage(who.health + 100, who.origin);
         who.insta_killed = 1;
 
@@ -1423,9 +1408,9 @@ get_insta_kill_spawn_point_from_nodes(v_origin, min_radius, max_radius, max_heig
 
             if(isDefined(level._chugabud_reject_node_override_func)) {
               override_abort = [
-            }
+                }
                 [level._chugabud_reject_node_override_func]
-              ](v_origin, n_node);
+            ](v_origin, n_node);
 
             if(!override_abort) {
               found_node = n_node;

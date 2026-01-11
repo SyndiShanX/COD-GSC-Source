@@ -44,7 +44,7 @@ init_firingrange() {
     var_0.lanelightsgreen[var_2] = getEntArray("green_light_0" + (var_2 + 1), "targetname");
 
     foreach(var_4 in var_0.lanelightsgreen[var_2]) {
-    var_4 setlightintensity(0);
+      var_4 setlightintensity(0);
     }
 
     var_0.lanelamps[var_2] = getent("lane_lamp_" + (var_2 + 1), "targetname");
@@ -168,8 +168,7 @@ monitorweaponammo(var_0) {
         continue;
       }
 
-      if(!maps\mp\gametypes\_class::isvalidmeleeweapon(var_4)) {
-      }
+      if(!maps\mp\gametypes\_class::isvalidmeleeweapon(var_4)) {}
     }
 
     var_0 waittill("applyLoadout");
@@ -247,7 +246,7 @@ turnonlightsforlane(var_0) {
         var_3 setlightintensity(10000);
 
         foreach(var_8 in var_4) {
-        var_8 setlightintensity(200);
+          var_8 setlightintensity(200);
         }
 
         activateclientexploder(var_6);
@@ -267,7 +266,7 @@ turnonlightsforlane(var_0) {
       var_3 setlightintensity(0);
 
       foreach(var_8 in var_4) {
-      var_8 setlightintensity(0);
+        var_8 setlightintensity(0);
       }
 
       stopclientexploder(var_6);
@@ -585,8 +584,7 @@ targetpopup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(maps\mp\_utility::is_true(var_5)) {
     thread targetattachedmoveonce();
-  }
-  else if(maps\mp\_utility::is_true(var_6)) {
+  } else if(maps\mp\_utility::is_true(var_6)) {
     thread targetmoveloop();
   }
 
@@ -611,8 +609,7 @@ targetpopup(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(maps\mp\_utility::is_true(var_5)) {
     thread targetattachedmoveback();
-  }
-  else if(maps\mp\_utility::is_true(var_6)) {
+  } else if(maps\mp\_utility::is_true(var_6)) {
     thread targetmoveback();
   }
 
@@ -760,11 +757,9 @@ targetdamagecallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 
   if(var_13 > 999) {
     level.firingrange.damagedone = 999;
-  }
-  else if(var_13 < 0) {
+  } else if(var_13 < 0) {
     level.firingrange.damagedone = 0;
-  }
-  else {
+  } else {
     level.firingrange.damagedone = var_13;
   }
 
@@ -773,11 +768,9 @@ targetdamagecallback(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 
     if(var_15 > 9999) {
       level.firingrange.shotshit = 0;
-    }
-    else if(var_15 < 0) {
+    } else if(var_15 < 0) {
       level.firingrange.shotshit = 0;
-    }
-    else {
+    } else {
       level.firingrange.shotshit = var_15;
     }
 
@@ -881,17 +874,13 @@ getmodifier(var_0, var_1, var_2) {
     if(maps\mp\gametypes\_class::isvalidprimary(var_6) || maps\mp\gametypes\_class::isvalidsecondary(var_6)) {
       if(var_1 == "j_head") {
         var_3 = "head";
-      }
-      else if(var_1 == "tag_chest") {
+      } else if(var_1 == "tag_chest") {
         var_3 = "torso_upper";
-      }
-      else if(var_1 == "tag_arms") {
+      } else if(var_1 == "tag_arms") {
         var_3 = "right_arm_upper";
-      }
-      else if(var_1 == "tag_legs") {
+      } else if(var_1 == "tag_legs") {
         var_3 = "torso_lower";
-      }
-      else {
+      } else {
         var_3 = "none";
       }
 
@@ -948,8 +937,7 @@ monitorhitpercent(var_0) {
       if(var_1 != level.firingrange.percent) {
         if(var_1 > 999) {
           var_1 = 999;
-        }
-        else if(var_1 < 0) {
+        } else if(var_1 < 0) {
           var_1 = 0;
         }
 
@@ -1018,12 +1006,11 @@ scalesoundsonexit() {
 
       if(level.in_firingrange == 1 || getdvarint("virtualLobbyInFiringRange", 0) == 1) {
         continue;
-      }
-      else {
+      } else {
         level.firingrange.soundents = common_scripts\utility::array_remove_duplicates(level.firingrange.soundents);
 
         foreach(var_1 in level.firingrange.soundents) {
-        var_1 scalevolume(0, 0.5);
+          var_1 scalevolume(0, 0.5);
         }
       }
     }
@@ -1098,8 +1085,7 @@ grenadecleanup(var_0) {
         if(!isDefined(self) || !isDefined(var_2.owner) || isremovedentity(var_2.owner)) {
           if(!isDefined(var_2.weaponname)) {
             continue;
-          }
-          else {
+          } else {
             var_2 notify("death");
             var_2 thread delaydelete();
           }
@@ -1110,8 +1096,7 @@ grenadecleanup(var_0) {
         if(var_2.owner == self) {
           if(!isDefined(var_2.weaponname)) {
             continue;
-          }
-          else {
+          } else {
             var_2 notify("death");
             var_2 thread delaydelete();
           }
@@ -1153,7 +1138,7 @@ firingrangecleanup() {
   var_1 = var_0 getweaponslistoffhands();
 
   foreach(var_3 in var_1) {
-  var_0 maps\mp\gametypes\_class::takeoffhand(var_3);
+    var_0 maps\mp\gametypes\_class::takeoffhand(var_3);
   }
 }
 
@@ -1173,8 +1158,7 @@ watermelonthink() {
 
   if(!isDefined(var_2.startorigin)) {
     var_2.startorigin = var_2.origin;
-  }
-  else {
+  } else {
     var_2.origin = var_2.startorigin;
   }
 

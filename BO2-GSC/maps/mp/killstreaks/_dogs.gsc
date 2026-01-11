@@ -280,7 +280,7 @@ dog_abort() {
   dogs = dog_manager_get_dogs();
 
   foreach(dog in dogs) {
-  dog notify("abort");
+    dog notify("abort");
   }
 
   level notify("dog_abort");
@@ -593,8 +593,7 @@ flash_dogs(area) {
       if(isplayer(self)) {
         if(level.teambased && dog.aiteam == self.team) {
           do_flash = 0;
-        }
-        else if(!level.teambased && isDefined(dog.script_owner) && self == dog.script_owner) {
+        } else if(!level.teambased && isDefined(dog.script_owner) && self == dog.script_owner) {
           do_flash = 0;
         }
       }
@@ -778,8 +777,7 @@ devgui_crate_delete() {
 devgui_spawn_show() {
   if(!isDefined(level.dog_spawn_show)) {
     level.dog_spawn_show = 1;
-  }
-  else {
+  } else {
     level.dog_spawn_show = !level.dog_spawn_show;
   }
 
@@ -799,8 +797,7 @@ devgui_spawn_show() {
 devgui_exit_show() {
   if(!isDefined(level.dog_exit_show)) {
     level.dog_exit_show = 1;
-  }
-  else {
+  } else {
     level.dog_exit_show = !level.dog_exit_show;
   }
 

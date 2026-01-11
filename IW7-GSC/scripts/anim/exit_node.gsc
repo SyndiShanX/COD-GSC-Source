@@ -360,9 +360,7 @@ custommovetransition() {
     self.custommovetransition = undefined;
   }
 
-  var_01 = [
-    [var_00]
-  ]();
+  var_01 = [[var_00]]();
   if(!isDefined(self.perm_on)) {
     self.var_10DCB = undefined;
   }

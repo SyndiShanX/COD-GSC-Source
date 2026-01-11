@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\airplane_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\airplane_fog::main();
   }
 }

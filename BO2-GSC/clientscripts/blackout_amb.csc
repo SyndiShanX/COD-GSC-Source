@@ -277,8 +277,7 @@ play_walla_vignettes(array_value, oneshot) {
 
   if(randomintrange(0, 100) <= 75) {
     playloopat("amb_walla_fighting_" + randomintrange(0, 2), array_value);
-  }
-  else {
+  } else {
     playloopat("amb_walla_stuck", array_value);
   }
 }

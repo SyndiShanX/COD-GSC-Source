@@ -22,8 +22,7 @@ track_infinite_ammo_time() {
     wait 0.05;
     if(!isDefined(level.infinite_ammo) || !level.infinite_ammo) {
       level.normal_time += 0.05;
-    }
-    else {
+    } else {
       level.infinite_time += 0.05;
     }
   }
@@ -49,7 +48,7 @@ register_bridge_enemy() {
   level.bridge_enemies--;
   level.enemy_list = array_remove(level.enemy_list, self);
   foreach(player in level.players) {
-  player.target_reminder_time = gettime();
+    player.target_reminder_time = gettime();
   }
 }
 
@@ -163,7 +162,7 @@ vehicle_alive_think() {
     attacker.target_reminder_time = gettime();
   } else {
     foreach(player in level.players) {
-    player.target_reminder_time = gettime();
+      player.target_reminder_time = gettime();
     }
   }
 
@@ -190,8 +189,7 @@ vehicle_track_damage() {
 
     if(isplayer(attacker)) {
       attacker.vehicle_damage += damage;
-    }
-    else {
+    } else {
       attacker.owner.vehicle_damage += damage;
     }
   }
@@ -301,7 +299,7 @@ hud_refresh_car_locations() {
     self notify("refresh_vehicle_locs");
     close_vehicles = get_array_of_closest(self.origin, level.vehicle_list, undefined, 3);
     foreach(vehicle in close_vehicles) {
-    thread hud_show_target_icon(vehicle);
+      thread hud_show_target_icon(vehicle);
     }
     wait 1;
   }
@@ -365,8 +363,7 @@ hud_show_target_objective(vehicle, index) {
 
   if(index == 0) {
     Objective_Position(1, vehicle.origin + (0, 0, 48));
-  }
-  else {
+  } else {
     Objective_AdditionalPosition(1, index, vehicle.origin + (0, 0, 48));
   }
 }
@@ -375,8 +372,7 @@ hud_hide_car_objectives() {
   for(i = 0; i < 3; i++) {
     if(i == 0) {
       Objective_Position(1, (0, 0, 0));
-    }
-    else {
+    } else {
       Objective_AdditionalPosition(1, i, (0, 0, 0));
     }
   }
@@ -477,7 +473,7 @@ hud_rebuild_time_bonus(timer) {
     if(!isDefined(level.infinite_ammo) || !level.infinite_ammo) {
       level.infinite_ammo = true;
       foreach(player in level.players) {
-      player.infinite_ammo_time = 0;
+        player.infinite_ammo_time = 0;
       }
     }
   }

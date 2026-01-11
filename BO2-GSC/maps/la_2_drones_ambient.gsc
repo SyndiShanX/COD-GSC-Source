@@ -261,18 +261,15 @@ _increment_plane_count() {
 
   if(str_team == "allies") {
     b_is_ally = 1;
-  }
-  else if(str_team == "axis") {
+  } else if(str_team == "axis") {
     b_is_axis = 1;
   }
 
   if(b_is_ally) {
     level.aerial_vehicles.allies[level.aerial_vehicles.allies.size] = self;
-  }
-  else if(b_is_axis) {
+  } else if(b_is_axis) {
     level.aerial_vehicles.axis[level.aerial_vehicles.axis.size] = self;
-  }
-  else {
+  } else {
     assertmsg("vehicle team " + str_team + " is not a valid team tracked by plane_counter()!");
 
   }
@@ -285,8 +282,7 @@ _decrement_plane_count(b_is_ally) {
 
   if(b_is_ally) {
     level.aerial_vehicles.allies = array_removedead(level.aerial_vehicles.allies);
-  }
-  else {
+  } else {
     level.aerial_vehicles.axis = array_removedead(level.aerial_vehicles.axis);
   }
 }

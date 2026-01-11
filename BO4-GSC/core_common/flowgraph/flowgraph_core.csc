@@ -52,29 +52,29 @@ private evaluate_constant(input_def) {
   val = input_def.constvalue;
 
   switch (input_def.type) {
-    case #"fx":
-    case #"float":
-    case #"weapon":
-    case #"int":
-    case #"variant":
-    case #"scriptbundle":
-    case #"xmodel":
-    case #"xanim":
-    case #"bool":
-    case #"soundalias":
-    case #"vector":
-    case #"string":
+    case # "fx":
+    case # "float":
+    case # "weapon":
+    case # "int":
+    case # "variant":
+    case # "scriptbundle":
+    case # "xmodel":
+    case # "xanim":
+    case # "bool":
+    case # "soundalias":
+    case # "vector":
+    case # "string":
       return val;
-    case #"entityarray":
+    case # "entityarray":
       assert(isstruct(val));
       assert(isDefined(val.value));
       assert(isDefined(val.key));
       return getEntArray(self.owner.localclientnum, val.value, val.key);
-    case #"pathnode":
-    case #"spawner":
-    case #"ai":
-    case #"entity":
-    case #"vehicle":
+    case # "pathnode":
+    case # "spawner":
+    case # "ai":
+    case # "entity":
+    case # "vehicle":
       assert(isstruct(val) || isstring(val));
 
       if(isstruct(val)) {
@@ -90,11 +90,11 @@ private evaluate_constant(input_def) {
           return self.target.target;
         }
       }
-    case #"struct":
-    case #"array":
-    case #"class":
-    case #"null":
-    case #"exec":
+    case # "struct":
+    case # "array":
+    case # "class":
+    case # "null":
+    case # "exec":
       assertmsg("<dev string:x74>");
       return undefined;
   }
@@ -126,9 +126,9 @@ private get_node_input_param_index(node_def, param_name) {
 }
 
 private is_auto_exec_node(node_def) {
-  if(node_def.nodeclass == #"event") {
+  if(node_def.nodeclass == # "event") {
     foreach(input_def in node_def.inputs) {
-      if(input_def.type == #"exec") {
+      if(input_def.type == # "exec") {
         if(isDefined(input_def.connections) && input_def.connections.size > 0) {
           return false;
         }
@@ -204,7 +204,7 @@ private get_graph_def(graph_name, force_refresh = 0) {
 }
 
 private collect_outputs() {
-  if(self.def.nodeclass == #"data" && self.evaluation_key != self.owner.evaluation_key) {
+  if(self.def.nodeclass == # "data" && self.evaluation_key != self.owner.evaluation_key) {
     self exec();
     self.evaluation_key = self.owner.evaluation_key;
   }
@@ -215,10 +215,10 @@ private collect_outputs() {
 private exec() {
   level endon(#"flowgraph_mychanges");
 
-    if(self.def.nodeclass != #"thread") {
-      self notify(#"kill_previous_exec");
-      self endon(#"kill_previous_exec");
-    }
+  if(self.def.nodeclass != # "thread") {
+    self notify(#"kill_previous_exec");
+    self endon(#"kill_previous_exec");
+  }
 
   inputs = self collect_inputs();
   outputs = self call_func(self.def.func, self.def.inputs.size, inputs);
@@ -242,33 +242,33 @@ private mychanges_watcher() {
   });
 }
 
-  function kick(outputs = [], block = 0) {
-    if(!isarray(outputs)) {
-      outputs = array(outputs);
-    }
+function kick(outputs = [], block = 0) {
+  if(!isarray(outputs)) {
+    outputs = array(outputs);
+  }
 
-    assert(isarray(outputs), "<dev string:xd5>" + self.def.uuid + "<dev string:xde>");
-    assert(outputs.size == self.def.outputs.size, "<dev string:xd5>" + self.def.uuid + "<dev string:xfe>" + self.def.outputs.size + "<dev string:x133>");
-    self.outputs = outputs;
+  assert(isarray(outputs), "<dev string:xd5>" + self.def.uuid + "<dev string:xde>");
+  assert(outputs.size == self.def.outputs.size, "<dev string:xd5>" + self.def.uuid + "<dev string:xfe>" + self.def.outputs.size + "<dev string:x133>");
+  self.outputs = outputs;
 
-    for(i = 0; i < self.def.outputs.size; i++) {
-      output_def = self.def.outputs[i];
+  for(i = 0; i < self.def.outputs.size; i++) {
+    output_def = self.def.outputs[i];
 
-      if(output_def.type == #"exec" && self.outputs[i] && isDefined(output_def.connections)) {
-        foreach(connection_def in output_def.connections) {
-          self.owner.evaluation_key++;
-          node_inst = self.owner.nodes[connection_def.node.uuid];
+    if(output_def.type == # "exec" && self.outputs[i] && isDefined(output_def.connections)) {
+      foreach(connection_def in output_def.connections) {
+        self.owner.evaluation_key++;
+        node_inst = self.owner.nodes[connection_def.node.uuid];
 
-          if(block) {
-            node_inst exec();
-            continue;
-          }
-
-          node_inst thread exec();
+        if(block) {
+          node_inst exec();
+          continue;
         }
+
+        node_inst thread exec();
       }
     }
   }
+}
 
 collect_inputs() {
   inputs = [];
@@ -278,7 +278,7 @@ collect_inputs() {
     if(isDefined(input_def.constvalue)) {
       inputs[input_index] = self evaluate_constant(input_def);
     } else if(isDefined(input_def.connections)) {
-      if(input_def.type == #"exec") {
+      if(input_def.type == # "exec") {
         result = 0;
 
         foreach(connection_def in input_def.connections) {
@@ -296,7 +296,7 @@ collect_inputs() {
         result = outputs[connection_def.paramindex];
         inputs[input_index] = result;
       }
-    } else if(input_def.type == #"exec" && self.def.is_auto_exec) {
+    } else if(input_def.type == # "exec" && self.def.is_auto_exec) {
       inputs[input_index] = 1;
     } else {
       inputs[input_index] = undefined;
@@ -341,5 +341,5 @@ event_handler[flowgraph_run] run(eventstruct) {
 
   graph_inst thread mychanges_watcher();
 
-    graph_inst notify(#"flowgraph_run");
+  graph_inst notify(#"flowgraph_run");
 }

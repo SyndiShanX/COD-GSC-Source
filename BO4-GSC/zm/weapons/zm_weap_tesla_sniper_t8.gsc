@@ -11,7 +11,6 @@
 #include scripts\zm\zm_lightning_chain;
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_weap_tesla_sniper_t8;
 
 autoexec __init__system__() {
@@ -32,12 +31,12 @@ __init__() {
   level.var_79959866.base.var_38cd3d0e.clientside_fx = 0;
   level.var_79959866.base.var_38cd3d0e.str_mod = "MOD_ELECTROCUTED";
   level.var_79959866.base.var_38cd3d0e.n_damage_max = 20000;
-  level.var_79959866.base.var_38cd3d0e.var_a9255d36 = #"hash_1003dc8cc0b680f2";
+  level.var_79959866.base.var_38cd3d0e.var_a9255d36 = # "hash_1003dc8cc0b680f2";
   level.var_79959866.upgraded.var_38cd3d0e = lightning_chain::create_lightning_chain_params();
   zm::function_84d343d(#"ww_tesla_sniper_t8", &function_5ff12a45);
   zm::function_84d343d(#"ww_tesla_sniper_upgraded_t8", &function_5ff12a45);
   callback::on_weapon_change(&on_weapon_change);
-  clientfield::register("toplayer", "" + #"hash_3aad9502fc3b54f2", 24000, 1, "int");
+  clientfield::register("toplayer", "" + # "hash_3aad9502fc3b54f2", 24000, 1, "int");
   clientfield::register("actor", "zm_weapons/fx8_ww_tesla_sniper_impact_lg", 24000, 1, "counter");
 }
 
@@ -57,12 +56,12 @@ function_5ff12a45(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoi
 
 on_weapon_change(s_params) {
   if(function_b7a6f208(s_params.weapon)) {
-    self clientfield::set_to_player("" + #"hash_3aad9502fc3b54f2", 1);
+    self clientfield::set_to_player("" + # "hash_3aad9502fc3b54f2", 1);
     return;
   }
 
   if(function_b7a6f208(s_params.last_weapon)) {
-    self clientfield::set_to_player("" + #"hash_3aad9502fc3b54f2", 0);
+    self clientfield::set_to_player("" + # "hash_3aad9502fc3b54f2", 0);
   }
 }
 
@@ -77,7 +76,7 @@ function_de59b16a(e_source, str_mod, var_8e05c280, weapon) {
 }
 
 function_fd1a163d(e_source, damage, meansofdeath, weapon, shitloc) {
-  if(isplayer(e_source) && (weapon == level.w_tesla_sniper_t8 || weapon == level.w_tesla_sniper_upgraded_t8) && self.archetype === #"zombie" && zm_utility::is_headshot(weapon, shitloc, meansofdeath, 1) && damage >= self.health && !self ai::is_stunned()) {
+  if(isplayer(e_source) && (weapon == level.w_tesla_sniper_t8 || weapon == level.w_tesla_sniper_upgraded_t8) && self.archetype === # "zombie" && zm_utility::is_headshot(weapon, shitloc, meansofdeath, 1) && damage >= self.health && !self ai::is_stunned()) {
     self clientfield::increment("zm_weapons/fx8_ww_tesla_sniper_impact_lg");
     self clientfield::set("zm_aat_kill_o_watt" + "_zap", 1);
 
@@ -165,11 +164,11 @@ function_bd5b7309(player, var_fb0999c0) {
     return;
   }
 
-  if(isDefined(level.aat[#"zm_aat_kill_o_watt"].immune_result_indirect[self.archetype]) && level.aat[#"zm_aat_kill_o_watt"].immune_result_indirect[self.archetype]) {
+  if(isDefined(level.aat[# "zm_aat_kill_o_watt"].immune_result_indirect[self.archetype]) && level.aat[# "zm_aat_kill_o_watt"].immune_result_indirect[self.archetype]) {
     return;
   }
 
-  if(self == var_fb0999c0 && isDefined(level.aat[#"zm_aat_kill_o_watt"].immune_result_direct[self.archetype]) && level.aat[#"zm_aat_kill_o_watt"].immune_result_direct[self.archetype]) {
+  if(self == var_fb0999c0 && isDefined(level.aat[# "zm_aat_kill_o_watt"].immune_result_direct[self.archetype]) && level.aat[# "zm_aat_kill_o_watt"].immune_result_direct[self.archetype]) {
     return;
   }
 

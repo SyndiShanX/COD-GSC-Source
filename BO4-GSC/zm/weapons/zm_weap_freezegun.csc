@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace zm_weap_freezegun;
 
 autoexec __init__system__() {
@@ -15,25 +14,25 @@ autoexec __init__system__() {
 }
 
 _init_() {
-  clientfield::register("actor", "" + #"hash_2f305a0bea20d6ed", 1, 1, "int", &function_16d503c6, 0, 0);
-  clientfield::register("actor", "" + #"hash_757f891a37d3db00", 1, 1, "int", &function_64927e54, 0, 0);
-  clientfield::register("actor", "" + #"hash_26d3eeef96a2291e", 1, 1, "int", &function_89a4ffa9, 0, 0);
-  clientfield::register("actor", "" + #"hash_32ec41222f58aa75", 1, 1, "int", &function_407434d9, 0, 0);
-  clientfield::register("actor", "" + #"hash_1aa3522b88c2b76f", 1, 1, "int", &function_7cdb7d7f, 0, 0);
-  clientfield::register("actor", "" + #"hash_259cdeffe60fe48f", 1, 1, "int", &function_bf0f2e8f, 0, 0);
-  clientfield::register("actor", "" + #"hash_5ad28d5f104a6e3b", 1, 1, "int", &function_3b23bb2f, 0, 0);
-  level._effect[#"hash_2f305a0bea20d6ed"] = #"hash_6910f1de979f539f";
-  level._effect[#"hash_757f891a37d3db00"] = #"hash_3da4857b4b1553dc";
-  level._effect[#"hash_26d3eeef96a2291e"] = #"hash_35e2193ab697e2f1";
-  level._effect[#"hash_32ec41222f58aa75"] = #"hash_3de16b7e3bd7e5ce";
-  level._effect[#"hash_4a12914ab0026a9d"] = #"hash_50599e96f376b4fa";
-  level._effect[#"hash_1aa3522b88c2b76f"] = #"hash_7bd6bc3aea3ff42f";
-  level._effect[#"hash_485f1b39da0ca6ca"] = #"hash_58c96eb815e5079c";
-  level._effect[#"hash_57c210bb97cf187c"] = #"hash_58c964b815e4f69e";
-  level._effect[#"hash_211384df1c05676c"] = #"hash_434ed0cd342c0caa";
-  level._effect[#"hash_3cf697eb0a408b2e"] = #"hash_432cd0cd340f2644";
-  level._effect[#"hash_390d70fef1885250"] = #"hash_7af6b9564f0fbeca";
-  level._effect[#"hash_3864bbc0912cb852"] = #"hash_6d51d7c934576ac8";
+  clientfield::register("actor", "" + # "hash_2f305a0bea20d6ed", 1, 1, "int", &function_16d503c6, 0, 0);
+  clientfield::register("actor", "" + # "hash_757f891a37d3db00", 1, 1, "int", &function_64927e54, 0, 0);
+  clientfield::register("actor", "" + # "hash_26d3eeef96a2291e", 1, 1, "int", &function_89a4ffa9, 0, 0);
+  clientfield::register("actor", "" + # "hash_32ec41222f58aa75", 1, 1, "int", &function_407434d9, 0, 0);
+  clientfield::register("actor", "" + # "hash_1aa3522b88c2b76f", 1, 1, "int", &function_7cdb7d7f, 0, 0);
+  clientfield::register("actor", "" + # "hash_259cdeffe60fe48f", 1, 1, "int", &function_bf0f2e8f, 0, 0);
+  clientfield::register("actor", "" + # "hash_5ad28d5f104a6e3b", 1, 1, "int", &function_3b23bb2f, 0, 0);
+  level._effect[# "hash_2f305a0bea20d6ed"] = # "hash_6910f1de979f539f";
+  level._effect[# "hash_757f891a37d3db00"] = # "hash_3da4857b4b1553dc";
+  level._effect[# "hash_26d3eeef96a2291e"] = # "hash_35e2193ab697e2f1";
+  level._effect[# "hash_32ec41222f58aa75"] = # "hash_3de16b7e3bd7e5ce";
+  level._effect[# "hash_4a12914ab0026a9d"] = # "hash_50599e96f376b4fa";
+  level._effect[# "hash_1aa3522b88c2b76f"] = # "hash_7bd6bc3aea3ff42f";
+  level._effect[# "hash_485f1b39da0ca6ca"] = # "hash_58c96eb815e5079c";
+  level._effect[# "hash_57c210bb97cf187c"] = # "hash_58c964b815e4f69e";
+  level._effect[# "hash_211384df1c05676c"] = # "hash_434ed0cd342c0caa";
+  level._effect[# "hash_3cf697eb0a408b2e"] = # "hash_432cd0cd340f2644";
+  level._effect[# "hash_390d70fef1885250"] = # "hash_7af6b9564f0fbeca";
+  level._effect[# "hash_3864bbc0912cb852"] = # "hash_6d51d7c934576ac8";
 }
 
 function_16d503c6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
@@ -42,7 +41,7 @@ function_16d503c6(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self thread function_9babbcd9(localclientnum);
   }
 
-  self thread util::playFXOnTag(localclientnum, level._effect[#"hash_2f305a0bea20d6ed"], self, "J_SpineLower");
+  self thread util::playFXOnTag(localclientnum, level._effect[# "hash_2f305a0bea20d6ed"], self, "J_SpineLower");
 
   if(!(getdvarint(#"splitscreen_playercount", 1) > 2)) {
     self function_3b6be5ed(localclientnum);
@@ -58,7 +57,7 @@ function_89a4ffa9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self thread function_9babbcd9(localclientnum);
   }
 
-  self thread util::playFXOnTag(localclientnum, level._effect[#"hash_26d3eeef96a2291e"], self, "J_SpineLower");
+  self thread util::playFXOnTag(localclientnum, level._effect[# "hash_26d3eeef96a2291e"], self, "J_SpineLower");
 
   if(!(getdvarint(#"splitscreen_playercount", 1) > 2)) {
     self function_3b6be5ed(localclientnum);
@@ -74,7 +73,7 @@ function_64927e54(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self thread function_9babbcd9(localclientnum);
   }
 
-  self thread util::playFXOnTag(localclientnum, level._effect[#"hash_757f891a37d3db00"], self, "J_SpineLower");
+  self thread util::playFXOnTag(localclientnum, level._effect[# "hash_757f891a37d3db00"], self, "J_SpineLower");
 
   if(!(getdvarint(#"splitscreen_playercount", 1) > 2)) {
     self function_f0236487(localclientnum);
@@ -87,7 +86,7 @@ function_407434d9(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
     self thread function_9babbcd9(localclientnum);
   }
 
-  self thread util::playFXOnTag(localclientnum, level._effect[#"hash_32ec41222f58aa75"], self, "J_SpineLower");
+  self thread util::playFXOnTag(localclientnum, level._effect[# "hash_32ec41222f58aa75"], self, "J_SpineLower");
 
   if(!(getdvarint(#"splitscreen_playercount", 1) > 2)) {
     self function_f0236487(localclientnum);
@@ -115,19 +114,19 @@ function_3022a1c2(localclientnum) {
   self.var_c2fa696b[localclientnum] = [];
 
   if(!self gibclientutils::isgibbed(localclientnum, self, 16)) {
-    function_ad4b7a78(localclientnum, level._effect[#"hash_1aa3522b88c2b76f"], "right_arm", "j_elbow_ri");
+    function_ad4b7a78(localclientnum, level._effect[# "hash_1aa3522b88c2b76f"], "right_arm", "j_elbow_ri");
   }
 
   if(!self gibclientutils::isgibbed(localclientnum, self, 32)) {
-    function_ad4b7a78(localclientnum, level._effect[#"hash_1aa3522b88c2b76f"], "left_arm", "j_elbow_le");
+    function_ad4b7a78(localclientnum, level._effect[# "hash_1aa3522b88c2b76f"], "left_arm", "j_elbow_le");
   }
 
   if(!self gibclientutils::isgibbed(localclientnum, self, 128)) {
-    function_ad4b7a78(localclientnum, level._effect[#"hash_1aa3522b88c2b76f"], "right_leg", "j_knee_ri");
+    function_ad4b7a78(localclientnum, level._effect[# "hash_1aa3522b88c2b76f"], "right_leg", "j_knee_ri");
   }
 
   if(!self gibclientutils::isgibbed(localclientnum, self, 256)) {
-    function_ad4b7a78(localclientnum, level._effect[#"hash_1aa3522b88c2b76f"], "left_leg", "j_knee_le");
+    function_ad4b7a78(localclientnum, level._effect[# "hash_1aa3522b88c2b76f"], "left_leg", "j_knee_le");
   }
 }
 
@@ -170,26 +169,26 @@ function_de5f3855(localclientnum) {
   }
 
   self.var_dc23481f[localclientnum] = [];
-  function_637a31ed(localclientnum, level._effect[#"hash_4a12914ab0026a9d"], "torso", "j_spinelower");
+  function_637a31ed(localclientnum, level._effect[# "hash_4a12914ab0026a9d"], "torso", "j_spinelower");
 
   if(!self gibclientutils::isgibbed(localclientnum, self, 8)) {
-    function_637a31ed(localclientnum, level._effect[#"hash_390d70fef1885250"], "chin", "j_head");
+    function_637a31ed(localclientnum, level._effect[# "hash_390d70fef1885250"], "chin", "j_head");
   }
 
   if(!self gibclientutils::isgibbed(localclientnum, self, 16)) {
-    function_637a31ed(localclientnum, level._effect[#"hash_57c210bb97cf187c"], "right_arm", "j_elbow_ri");
+    function_637a31ed(localclientnum, level._effect[# "hash_57c210bb97cf187c"], "right_arm", "j_elbow_ri");
   }
 
   if(!self gibclientutils::isgibbed(localclientnum, self, 32)) {
-    function_637a31ed(localclientnum, level._effect[#"hash_485f1b39da0ca6ca"], "left_arm", "j_elbow_le");
+    function_637a31ed(localclientnum, level._effect[# "hash_485f1b39da0ca6ca"], "left_arm", "j_elbow_le");
   }
 
   if(!self gibclientutils::isgibbed(localclientnum, self, 128)) {
-    function_637a31ed(localclientnum, level._effect[#"hash_3cf697eb0a408b2e"], "right_leg", "j_knee_ri");
+    function_637a31ed(localclientnum, level._effect[# "hash_3cf697eb0a408b2e"], "right_leg", "j_knee_ri");
   }
 
   if(!self gibclientutils::isgibbed(localclientnum, self, 256)) {
-    function_637a31ed(localclientnum, level._effect[#"hash_211384df1c05676c"], "left_leg", "j_knee_le");
+    function_637a31ed(localclientnum, level._effect[# "hash_211384df1c05676c"], "left_leg", "j_knee_le");
   }
 }
 
@@ -244,7 +243,7 @@ private function_3ab6779c(localclientnum, var_44146a38) {
 private function_3386e437(gibflag) {
   gib_model = undefined;
 
-  if(isDefined(self.archetype) && self.archetype == #"nova_crawler") {
+  if(isDefined(self.archetype) && self.archetype == # "nova_crawler") {
     switch (gibflag) {
       case 16:
         gib_model = "c_t8_zmb_ofc_quadcrawler_s_rarmspawn";
@@ -292,7 +291,7 @@ private function_c4fded40(localclientnum, tag_name, gibflag, var_44146a38) {
     gib_model = function_3386e437(gibflag);
 
     if(isDefined(gib_model)) {
-      createdynentandlaunch(localclientnum, gib_model, gib_origin, gib_angles, gib_origin, gib_force, level._effect[#"hash_3864bbc0912cb852"], 1);
+      createdynentandlaunch(localclientnum, gib_model, gib_origin, gib_angles, gib_origin, gib_force, level._effect[# "hash_3864bbc0912cb852"], 1);
     }
   }
 }

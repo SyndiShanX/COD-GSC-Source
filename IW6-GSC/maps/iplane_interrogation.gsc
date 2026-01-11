@@ -132,7 +132,7 @@ intro_logic(var_0, var_1, var_2) {
   level.vargas linkto(var_2);
 
   foreach(var_4 in var_0) {
-  var_4 thread create_node_and_idle(var_1, "int_intro_idle");
+    var_4 thread create_node_and_idle(var_1, "int_intro_idle");
   }
 
   level.chair_vargas_2 linkto(var_2);
@@ -185,7 +185,7 @@ drag_animation(var_0, var_1, var_2) {
   level endon("drop_vargas");
 
   foreach(var_4 in var_0) {
-  var_4.animnode notify("stop_loop");
+    var_4.animnode notify("stop_loop");
   }
 
   var_1 notify("stop_loop");
@@ -469,7 +469,7 @@ open_the_ramp() {
   var_2 = getEntArray("destroy_plane_debris02", "targetname");
 
   foreach(var_4 in var_2) {
-  var_4 linkto(level.bay_door_lower);
+    var_4 linkto(level.bay_door_lower);
   }
 
   thread maps\iplane::setup_plane_debris(var_2, var_1);
@@ -515,11 +515,11 @@ connect_and_start_tarps() {
   var_1 = getEntArray("crates02", "targetname");
 
   foreach(var_3 in var_0) {
-  var_3 linkto(level.bay_door_lower);
+    var_3 linkto(level.bay_door_lower);
   }
 
   foreach(var_6 in var_1) {
-  var_6 linkto(level.plane_tail);
+    var_6 linkto(level.plane_tail);
   }
 
   foreach(var_3 in var_0) {
@@ -534,7 +534,7 @@ connect_and_start_tarps() {
   wait 2;
 
   foreach(var_3 in var_0) {
-  var_3 show();
+    var_3 show();
   }
 
   foreach(var_6 in var_1) {
@@ -553,8 +553,7 @@ lower_bottom_bay_door(var_0) {
 
   if(isDefined(var_0)) {
     level.bay_door_lower_model rotatepitch(-30, 0.05);
-  }
-  else {
+  } else {
     level.bay_door_lower_model rotatepitch(-30, 10, 5, 1);
   }
 
@@ -570,8 +569,7 @@ raise_top_bay_door(var_0) {
 
   if(isDefined(var_0)) {
     level.bay_door_upper_model rotatepitch(-25, 0.05);
-  }
-  else {
+  } else {
     level.bay_door_upper_model rotatepitch(-25, 10, 5, 1);
   }
 

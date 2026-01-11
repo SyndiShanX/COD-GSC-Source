@@ -23,7 +23,7 @@ main() {
   var_01 = script_mover_classnames();
 
   foreach(var_03 in var_01) {
-  var_00 = scripts\engine\utility::array_combine(var_00, getEntArray(var_03, "classname"));
+    var_00 = scripts\engine\utility::array_combine(var_00, getEntArray(var_03, "classname"));
   }
 
   scripts\engine\utility::array_thread(var_00, ::script_mover_int);
@@ -128,7 +128,7 @@ script_mover_int() {
   thread script_mover_move_to_target();
 
   foreach(var_08 in self.use_triggers) {
-  script_mover_set_usable(var_08, 1);
+    script_mover_set_usable(var_08, 1);
   }
 }
 
@@ -189,7 +189,7 @@ script_mover_parse_targets() {
           var_04 = scripts\engine\utility::getstructarray(var_3.target, "targetname");
 
           foreach(var_06 in var_04) {
-          var_0[var_0.size] = var_06;
+            var_0[var_0.size] = var_06;
           }
         }
 
@@ -328,7 +328,7 @@ script_mover_move_to_target(var_00) {
       var_02 moveto(var_8["origin"], var_03, var_04, var_05);
 
       foreach(var_11 in var_1.level_notify) {
-      thread script_mover_run_notify(var_11.origin, var_11.script_parameters, self.origin, var_1.origin);
+        thread script_mover_run_notify(var_11.origin, var_11.script_parameters, self.origin, var_1.origin);
       }
 
       var_06 = 1;
@@ -340,7 +340,7 @@ script_mover_move_to_target(var_00) {
     }
 
     foreach(var_14 in var_2.movers) {
-    var_14 notify("trigger");
+      var_14 notify("trigger");
     }
 
     var_00 notify("depart");
@@ -349,14 +349,11 @@ script_mover_move_to_target(var_00) {
 
     if(isDefined(var_2.params["move_time_offset"]) && var_2.params["move_time_offset"] + var_03 > 0) {
       wait(var_2.params["move_time_offset"] + var_03);
-    }
-    else if(var_06) {
+    } else if(var_06) {
       self waittill("movedone");
-    }
-    else if(var_07) {
+    } else if(var_07) {
       self waittill("rotatedone");
-    }
-    else {
+    } else {
       wait(var_03);
     }
 
@@ -367,14 +364,13 @@ script_mover_move_to_target(var_00) {
     if(isDefined(var_2.params["solid"])) {
       if(var_2.params["solid"]) {
         var_02 solid();
-      }
-      else {
+      } else {
         var_02 notsolid();
       }
     }
 
     foreach(var_14 in var_1.movers) {
-    var_14 notify("trigger");
+      var_14 notify("trigger");
     }
 
     if(isDefined(var_2.params["wait_till"])) {
@@ -480,15 +476,13 @@ script_mover_parse_range(var_00) {
 
   if(var_2.size == 1) {
     var_01 = float(var_2[0]);
-  }
-  else if(var_2.size == 2) {
+  } else if(var_2.size == 2) {
     var_03 = float(var_2[0]);
     var_04 = float(var_2[1]);
 
     if(var_03 >= var_04) {
       var_01 = var_03;
-    }
-    else {
+    } else {
       var_01 = randomfloatrange(var_03, var_04);
     }
   }
@@ -498,7 +492,7 @@ script_mover_parse_range(var_00) {
 
 script_mover_apply_move_parameters(var_00) {
   foreach(var_03, var_02 in var_0.params) {
-  script_mover_set_param(var_03, var_02);
+    script_mover_set_param(var_03, var_02);
   }
 
   script_mover_set_defaults();
@@ -521,7 +515,7 @@ script_mover_allow_usable(var_00) {
   }
 
   foreach(var_02 in self.use_triggers) {
-  script_mover_set_usable(var_02, var_00);
+    script_mover_set_usable(var_02, var_00);
   }
 }
 
@@ -538,7 +532,7 @@ script_mover_save_default_move_parameters() {
   self.params_default = [];
 
   foreach(var_02, var_01 in self.params) {
-  self.params_default[var_02] = var_01;
+    self.params_default[var_02] = var_01;
   }
 }
 
@@ -592,11 +586,9 @@ player_unresolved_collision_watch() {
       if(isDefined(var_00)) {
         if(isDefined(var_0.unresolved_collision_func)) {
           var_00[[var_0.unresolved_collision_func]](self);
-        }
-        else if(isDefined(var_0.unresolved_collision_kill) && var_0.unresolved_collision_kill) {
+        } else if(isDefined(var_0.unresolved_collision_kill) && var_0.unresolved_collision_kill) {
           var_00 unresolved_collision_owner_damage(self);
-        }
-        else {
+        } else {
           var_00 unresolved_collision_nearest_node(self);
         }
       } else
@@ -657,8 +649,7 @@ unresolved_collision_nearest_node(var_00, var_01) {
 
   if(isDefined(var_02)) {
     var_02 = sortbydistance(var_02, var_0.origin);
-  }
-  else {
+  } else {
     var_02 = getnodesinradius(var_0.origin, 300, 0, 200);
     var_02 = sortbydistance(var_02, var_0.origin);
   }
@@ -804,11 +795,9 @@ script_mover_link_to_use_object(var_00) {
 
     if(isDefined(var_01)) {
       var_02 = var_01;
-    }
-    else if(!isDefined(script_mover_get_top_parent())) {
+    } else if(!isDefined(script_mover_get_top_parent())) {
       var_02 = self;
-    }
-    else {
+    } else {
       var_02 = spawn("script_model", var_0.origin);
       var_02 setModel("tag_origin");
       var_0.func_EF85 = var_02;
@@ -910,8 +899,7 @@ handle_moving_platform_invalid(var_00) {
 
   if(isDefined(var_0.invalidparentoverridecallback)) {
     self thread[[var_0.invalidparentoverridecallback]](var_00);
-  }
-  else {
+  } else {
     thread process_moving_platform_death(var_00, var_01);
   }
 }

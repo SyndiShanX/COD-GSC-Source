@@ -30,7 +30,7 @@ func_97A1() {
   var_01 = [];
 
   foreach(var_04, var_03 in level.vo_priority_level) {
-  var_1[var_03] = [];
+    var_1[var_03] = [];
   }
 
   var_0.vo_queue = var_01;
@@ -88,8 +88,7 @@ func_DEDE(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if(scripts\engine\utility::is_true(var_10)) {
     var_17.func_C555 = 1;
-  }
-  else {
+  } else {
     var_17.func_C555 = 0;
   }
 
@@ -292,8 +291,7 @@ set_vo_system_busy(var_00) {
 
   if(!var_00) {
     scripts\engine\utility::flag_clear("vo_system_busy");
-  }
-  else {
+  } else {
     scripts\engine\utility::flag_set("vo_system_busy");
   }
 }
@@ -411,8 +409,7 @@ play_vo(var_00, var_01) {
 
   if(isDefined(var_0.func_2896)) {
     var_04 = var_0.func_2896;
-  }
-  else {
+  } else {
     var_04 = var_02;
   }
 
@@ -427,17 +424,16 @@ play_vo(var_00, var_01) {
     if(var_06 == self) {
       if(isDefined(level.get_alias_2d_func)) {
         var_07 = [
-      }
+          }
           [level.get_alias_2d_func]
-        ](var_06, var_02, var_04);
+      ](var_06, var_02, var_04);
       else {
         var_07 = get_alias_2d_version(var_06, var_02, var_04);
       }
 
       if(isDefined(var_07)) {
         var_06 playlocalsound(var_07);
-      }
-      else {
+      } else {
         var_06 playlocalsound(var_02);
       }
 
@@ -455,13 +451,12 @@ play_vo(var_00, var_01) {
   }
 
   foreach(var_11 in var_0.func_3B94) {
-  level.func_134C0[var_11] = gettime();
+    level.func_134C0[var_11] = gettime();
   }
 
   if(!isDefined(self.func_C1F6[var_04])) {
     self.func_C1F6[var_04] = 1;
-  }
-  else {
+  } else {
     self.func_C1F6[var_04]++;
   }
 
@@ -488,8 +483,7 @@ get_alias_2d_version(var_00, var_01, var_02) {
 
   if(var_3[0] == "ww" || var_3[0] == "dj" || var_3[0] == "ks" || var_3[0] == "el") {
     return var_01;
-  }
-  else {
+  } else {
     var_04 = var_0.vo_prefix + "plr_" + var_02;
 
     if(soundexists(var_04)) {
@@ -536,11 +530,11 @@ try_to_play_vo_on_all_players(var_00, var_01) {
   }
   if(!scripts\engine\utility::is_true(var_01)) {
     foreach(var_03 in level.players) {
-    var_03 thread try_to_play_vo(var_00, "zmb_comment_vo", "highest", 10, 0, 0, 1, 100);
+      var_03 thread try_to_play_vo(var_00, "zmb_comment_vo", "highest", 10, 0, 0, 1, 100);
     }
   } else {
     foreach(var_03 in level.players) {
-    var_03 thread add_to_nag_vo(var_00, "zmb_comment_vo", 60, 45, 6, 1);
+      var_03 thread add_to_nag_vo(var_00, "zmb_comment_vo", 60, 45, 6, 1);
     }
   }
 }
@@ -576,7 +570,7 @@ try_to_play_vo(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, v
     var_10 = func_788D(var_00);
 
     foreach(var_12 in var_10) {
-    level.func_134C0[var_12] = gettime();
+      level.func_134C0[var_12] = gettime();
     }
 
     if(var_09 && isDefined(level.vo_alias_data[var_00].func_32A0)) {
@@ -602,9 +596,7 @@ func_FF79(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if(scripts\cp\zombies\zombie_afterlife_arcade::is_in_afterlife_arcade(self)) {
     if(isDefined(level.func_18E8)) {
-      if(![
-          [level.func_18E8]
-        ](var_00))
+      if(![[level.func_18E8]](var_00))
         return 0;
     }
   }
@@ -656,8 +648,7 @@ func_FF79(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
     if(self.func_C1F6[var_00] < level.vo_alias_data[var_00].func_B44F) {
       return 1;
-    }
-    else {
+    } else {
       return 0;
     }
   } else
@@ -684,8 +675,7 @@ func_788D(var_00) {
 should_append_player_prefix(var_00) {
   if(issubstr(var_00, "ww_") || issubstr(var_00, "dj_") || issubstr(var_00, "jaroslav_anc")) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -694,8 +684,7 @@ should_append_player_suffix(var_00, var_01) {
   if(scripts\engine\utility::is_true(var_01)) {
     if(issubstr(var_00, "ww_") && issubstr(var_00, "_p")) {
       return 1;
-    }
-    else {
+    } else {
       return 0;
     }
   }
@@ -712,8 +701,7 @@ func_1781(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
     if(isDefined(var_01) && isDefined(level.vo_functions[var_01])) {
       if(isDefined(var_07)) {
         self thread[[level.vo_functions[var_01]]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07);
-      }
-      else {
+      } else {
         self thread[[level.vo_functions[var_01]]](var_00, var_01, var_02, var_03, var_04, var_05, var_06);
       }
 
@@ -725,8 +713,7 @@ func_1781(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
   } else if(isDefined(var_01) && isDefined(level.vo_functions[var_01])) {
     if(isDefined(var_07)) {
       self thread[[level.vo_functions[var_01]]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07);
-    }
-    else {
+    } else {
       self thread[[level.vo_functions[var_01]]](var_00, var_01, var_02, var_03, var_04, var_05, var_06);
     }
 
@@ -739,7 +726,7 @@ func_1781(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 
 func_CE89(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
   foreach(var_08 in level.players) {
-  var_08 func_1782(var_00, var_01, var_02, var_03, var_04, var_05, var_06);
+    var_08 func_1782(var_00, var_01, var_02, var_03, var_04, var_05, var_06);
   }
 }
 
@@ -804,8 +791,7 @@ create_vo_data(var_00, var_01, var_02, var_03, var_04) {
 
   if(scripts\engine\utility::is_true(var_03)) {
     var_8.func_C551 = 1;
-  }
-  else {
+  } else {
     var_8.func_C551 = 0;
   }
 
@@ -869,21 +855,20 @@ func_E0A9(var_00, var_01) {
 func_C9CB(var_00) {
   if(var_0.size == 1) {
     var_0[0].func_C9CB = 1;
-  }
-  else {
+  } else {
     foreach(var_02 in var_00) {
-    var_2.func_C9CB = 1;
+      var_2.func_C9CB = 1;
     }
   }
 }
 
 func_12BE3(var_00) {
   foreach(var_02 in var_00) {
-  var_2.func_C9CB = 0;
+    var_2.func_C9CB = 0;
   }
 
   foreach(var_02 in var_00) {
-  var_02 notify("unpause_VO_system");
+    var_02 notify("unpause_VO_system");
   }
 }
 
@@ -909,8 +894,7 @@ func_BE3E() {
       if(var_01 > var_3.next_play_time) {
         if(isDefined(var_3.func_EC12)) {
           var_3.func_EC12 try_to_play_vo(var_04, var_3.func_1351C, "low", 3, 0, 0, var_3.func_C551);
-        }
-        else {
+        } else {
           level try_to_play_vo(var_04, var_3.func_1351C, "low", 3, 0, 0, var_3.func_C551);
         }
 
@@ -967,22 +951,19 @@ add_to_nag_vo(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_05)) {
     var_7.func_C551 = var_05;
-  }
-  else {
+  } else {
     var_7.func_C551 = 0;
   }
 
   if(isDefined(var_03)) {
     var_7.next_play_time = gettime() + var_03 * 1000;
-  }
-  else {
+  } else {
     var_7.next_play_time = 0;
   }
 
   if(isDefined(var_04)) {
     var_7.func_B468 = var_04;
-  }
-  else {
+  } else {
     var_7.func_B468 = -1;
   }
 

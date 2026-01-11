@@ -202,8 +202,7 @@ zone_init(zone_name) {
 
       if(!(isDefined(spots[i].is_blocked) && spots[i].is_blocked)) {
         spots[i].is_enabled = 1;
-      }
-      else {
+      } else {
         spots[i].is_enabled = 0;
       }
 
@@ -324,8 +323,7 @@ reinit_zone_spawners() {
 
         if(!(isDefined(spots[j].is_blocked) && spots[j].is_blocked)) {
           spots[j].is_enabled = 1;
-        }
-        else {
+        } else {
           spots[j].is_enabled = 0;
         }
 
@@ -420,8 +418,7 @@ make_zone_adjacent(main_zone_name, adj_zone_name, flag_name) {
 
     if(isarray(flag_name)) {
       adj_zone.flags = flag_name;
-    }
-    else {
+    } else {
       adj_zone.flags[0] = flag_name;
     }
   } else {
@@ -656,9 +653,9 @@ manage_zones(initial_zone) {
       }
       if(isDefined(level.zone_occupied_func)) {
         newzone.is_occupied = [
-      }
+          }
           [level.zone_occupied_func]
-        ](zkeys[z]);
+      ](zkeys[z]);
       else {
         newzone.is_occupied = player_in_zone(zkeys[z]);
       }
@@ -798,9 +795,9 @@ old_manage_zones(initial_zone) {
       }
       if(isDefined(level.zone_occupied_func)) {
         zone.is_occupied = [
-      }
+          }
           [level.zone_occupied_func]
-        ](zkeys[z]);
+      ](zkeys[z]);
       else {
         zone.is_occupied = player_in_zone(zkeys[z]);
       }
@@ -972,8 +969,7 @@ _init_debug_zones() {
 
       if(!j) {
         zone.debug_hud[j].alignx = "right";
-      }
-      else {
+      } else {
         zone.debug_hud[j].alignx = "left";
       }
 
@@ -1013,8 +1009,7 @@ _debug_zones() {
 
     if(enabled && !wasenabled) {
       _init_debug_zones();
-    }
-    else if(!enabled && wasenabled) {
+    } else if(!enabled && wasenabled) {
       _destroy_debug_zones();
     }
 

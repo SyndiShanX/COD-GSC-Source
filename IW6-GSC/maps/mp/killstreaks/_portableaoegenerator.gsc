@@ -140,8 +140,7 @@ spawnNewGenerator(generatorType, origin) {
 
   if(level.teamBased) {
     generator maps\mp\_entityheadIcons::setTeamHeadIcon(self.team, (0, 0, config.headIconHeight));
-  }
-  else {
+  } else {
     generator maps\mp\_entityheadicons::setPlayerHeadIcon(self, (0, 0, config.headIconHeight));
   }
 

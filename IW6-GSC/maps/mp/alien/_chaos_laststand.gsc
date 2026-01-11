@@ -46,8 +46,7 @@ chaos_dropIntoLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, v
 
   if(get_last_stand_count() > 0) {
     chaos_self_revive(gameShouldEnd);
-  }
-  else {
+  } else {
     wait_to_be_revived(self, self.origin, undefined, undefined, true, CONST_CHAOS_REVIVE_TIME, (0.33, 0.75, 0.24), undefined, false, gameShouldEnd, true);
   }
 
@@ -106,7 +105,7 @@ get_team_self_revive_count() {
   total_self_revive_count = 0;
 
   foreach(player in level.players) {
-  total_self_revive_count += player get_last_stand_count();
+    total_self_revive_count += player get_last_stand_count();
   }
 
   return total_self_revive_count;

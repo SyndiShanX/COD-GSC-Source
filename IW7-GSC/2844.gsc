@@ -28,22 +28,19 @@ func_7997(var_00, var_01) {
   foreach(var_05 in var_02) {
     if(!isDefined(var_5.classname)) {
       var_06 = "UNKNOWN?";
-    }
-    else {
+    } else {
       var_06 = var_5.classname;
     }
 
     if(var_00) {
       if(isai(var_05)) {
         var_06 = "actors";
-      }
-      else if(_isspawner(var_05)) {
+      } else if(_isspawner(var_05)) {
         var_07 = getsubstr(var_06, 0, 5);
 
         if(var_07 == "actor") {
           var_06 = "AI_spawners";
-        }
-        else {
+        } else {
           var_06 = "vehicle_spawners";
         }
       } else if(isDefined(var_5.func_49BD))
@@ -57,8 +54,7 @@ func_7997(var_00, var_01) {
 
         if(var_07 == "trigger_multiple_bcs_") {
           var_06 = "trigger_multiple_bcs";
-        }
-        else {
+        } else {
           var_06 = "trigger_multiple";
         }
       } else {
@@ -175,8 +171,7 @@ func_4ED4() {
     if(isDefined(var_1.goodshootpos)) {
       if(var_01 isbadguy()) {
         var_03 = (1, 0, 0);
-      }
-      else {
+      } else {
         var_03 = (0, 0, 1);
       }
 
@@ -585,8 +580,7 @@ func_C1A6() {
   if(!self.damageshield) {
     if(isDefined(self.unittype) && self.unittype == "c12") {
       self _meth_81D0((0, 0, -500), level.player);
-    }
-    else {
+    } else {
       self _meth_81D0((0, 0, -500), level.player, level.player);
     }
   }
@@ -746,15 +740,13 @@ func_12ED1() {
 
         if(var_4[1].origin[0] > var_4[0].origin[0]) {
           var_06 = (var_4[1].origin[0], var_6[1], var_6[2]);
-        }
-        else {
+        } else {
           var_07 = (var_4[1].origin[0], var_7[1], var_7[2]);
         }
 
         if(var_4[1].origin[1] > var_4[0].origin[1]) {
           var_06 = (var_6[0], var_4[1].origin[1], var_6[2]);
-        }
-        else {
+        } else {
           var_07 = (var_7[0], var_4[1].origin[1], var_7[2]);
         }
 
@@ -805,8 +797,7 @@ func_12ED1() {
 
         if(var_18 > var_19) {
           var_20 = var_18;
-        }
-        else {
+        } else {
           var_20 = var_19;
         }
 
@@ -1261,7 +1252,7 @@ func_13C26() {
   var_09 = [];
 
   foreach(var_11 in var_08) {
-  var_9[var_11.code_classname] = 1;
+    var_9[var_11.code_classname] = 1;
   }
 
   foreach(var_14, var_06 in var_09) {}
@@ -1277,8 +1268,7 @@ func_B514() {
     if(level.player usebuttonpressed() && gettime() > var_01) {
       if(var_0.size == 2) {
         var_00 = [];
-      }
-      else {
+      } else {
         var_02 = level.func_4EA1.func_4C23;
         var_0[var_0.size] = var_02;
       }

@@ -6,7 +6,6 @@
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace status_effect_blind;
 
 autoexec __init__system__() {

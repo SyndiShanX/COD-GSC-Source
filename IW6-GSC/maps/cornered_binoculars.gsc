@@ -258,7 +258,7 @@ binoculars_clear_hud() {
   if(isDefined(self.binoculars_face_scanning_models)) {
     foreach(var_5 in self.binoculars_face_scanning_models) {
       foreach(var_7 in var_5) {
-      var_7 delete();
+        var_7 delete();
       }
     }
 
@@ -266,7 +266,7 @@ binoculars_clear_hud() {
   }
 
   foreach(var_11 in target_getarray()) {
-  target_remove(var_11);
+    target_remove(var_11);
   }
 
   self.binocular_target delete();
@@ -383,14 +383,11 @@ binoculars_calculate_range() {
 
     if(var_1 > 1000.0) {
       self.binoculars_hud_item["range"] settext("1000+ M");
-    }
-    else if(var_1 - int(var_1) == 0.0) {
+    } else if(var_1 - int(var_1) == 0.0) {
       self.binoculars_hud_item["range"] settext(var_1 + ".00 M");
-    }
-    else if(var_1 * 10 - int(var_1 * 10) == 0.0) {
+    } else if(var_1 * 10 - int(var_1 * 10) == 0.0) {
       self.binoculars_hud_item["range"] settext(var_1 + "0 M");
-    }
-    else {
+    } else {
       self.binoculars_hud_item["range"] settext(var_1 + " M");
     }
 
@@ -685,8 +682,7 @@ binocular_face_scanning_lines(var_0) {
 
         if(var_6[var_4] >= var_5) {
           self.binoculars_face_scanning_models[var_1][var_4 + 1] hidepart(getpartname(self.binoculars_face_scanning_models[var_1][var_4 + 1].model, var_6[var_4] - var_5));
-        }
-        else {
+        } else {
           self.binoculars_face_scanning_models[var_1][var_4 + 1] hidepart(getpartname(self.binoculars_face_scanning_models[var_1][var_4 + 1].model, getnumparts(self.binoculars_face_scanning_models[var_1][var_4 + 1].model) + var_6[var_4] - var_5));
         }
 
@@ -740,7 +736,7 @@ binocular_face_scanning_lines_complete(var_0) {
   if(isDefined(self.binoculars_face_scanning_models)) {
     foreach(var_2 in self.binoculars_face_scanning_models) {
       foreach(var_4 in var_2) {
-      var_4 delete();
+        var_4 delete();
       }
     }
 
@@ -898,8 +894,7 @@ binoculars_monitor_scanning() {
 
         if(isDefined(var_0.binocular_facial_profile)) {
           self.binoculars_hud_item["profile"] setshader(var_0.binocular_facial_profile, self.binoculars_hud_item["profile"].width, self.binoculars_hud_item["profile"].height);
-        }
-        else {
+        } else {
           if(!isDefined(self.binoculars_hud_item["no"])) {
             self.binoculars_hud_item["no"] = maps\_hud_util::createclientfontstring("small", 1.3);
           }
@@ -955,7 +950,7 @@ binoculars_monitor_scanning() {
       if(isDefined(self.binoculars_face_scanning_models)) {
         foreach(var_4 in self.binoculars_face_scanning_models) {
           foreach(var_6 in var_4) {
-          var_6 delete();
+            var_6 delete();
           }
         }
 
@@ -1266,26 +1261,19 @@ binoculars_angles_display() {
 
     if(var_1 > 337.5 || var_1 < 22.5) {
       self.binoculars_hud_item["heading"] settext("N");
-    }
-    else if(var_1 < 67.5) {
+    } else if(var_1 < 67.5) {
       self.binoculars_hud_item["heading"] settext("NE");
-    }
-    else if(var_1 < 112.5) {
+    } else if(var_1 < 112.5) {
       self.binoculars_hud_item["heading"] settext("E");
-    }
-    else if(var_1 < 157.5) {
+    } else if(var_1 < 157.5) {
       self.binoculars_hud_item["heading"] settext("SE");
-    }
-    else if(var_1 < 202.5) {
+    } else if(var_1 < 202.5) {
       self.binoculars_hud_item["heading"] settext("S");
-    }
-    else if(var_1 < 247.5) {
+    } else if(var_1 < 247.5) {
       self.binoculars_hud_item["heading"] settext("SW");
-    }
-    else if(var_1 < 292.5) {
+    } else if(var_1 < 292.5) {
       self.binoculars_hud_item["heading"] settext("W");
-    }
-    else {
+    } else {
       self.binoculars_hud_item["heading"] settext("NW");
     }
 

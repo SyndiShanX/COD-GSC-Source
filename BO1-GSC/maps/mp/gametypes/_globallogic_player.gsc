@@ -34,8 +34,7 @@ Callback_PlayerConnect() {
     self maps\mp\gametypes\_persistence::setAfterActionReportStat("valid", 0);
     if(GetDvarInt(#"xblive_wagermatch") == 1 && !(self IsHost())) {
       self maps\mp\gametypes\_persistence::setAfterActionReportStat("wagerMatchFailed", 1);
-    }
-    else {
+    } else {
       self maps\mp\gametypes\_persistence::setAfterActionReportStat("wagerMatchFailed", 0);
     }
   }
@@ -256,9 +255,7 @@ Callback_PlayerConnect() {
       ]();
     } else {
       if((isDefined(level.forceAutoAssign) && level.forceAutoAssign) || level.allow_teamchange != "1") {
-        [
-          [level.autoassign]
-        ]();
+        [[level.autoassign]]();
       } else {
         self setclientdvar("g_scriptMainMenu", game["menu_team"]);
         self openMenu(game["menu_team"]);
@@ -454,8 +451,7 @@ figureOutAttacker(eAttacker) {
     }
     if(eAttacker.classname == "script_vehicle" && isDefined(eAttacker.owner)) {
       eAttacker = eAttacker.owner;
-    }
-    else if(eAttacker.classname == "auto_turret" && isDefined(eAttacker.owner)) {
+    } else if(eAttacker.classname == "auto_turret" && isDefined(eAttacker.owner)) {
       eAttacker = eAttacker.owner;
     }
   }
@@ -553,8 +549,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
   if(maps\mp\gametypes\_tweakables::getTweakableValue("game", "onlyheadshots")) {
     if(sMeansOfDeath == "MOD_PISTOL_BULLET" || sMeansOfDeath == "MOD_RIFLE_BULLET") {
       return;
-    }
-    else if(sMeansOfDeath == "MOD_HEAD_SHOT") {
+    } else if(sMeansOfDeath == "MOD_HEAD_SHOT") {
       iDamage = 150;
     }
   }
@@ -692,8 +687,7 @@ Callback_PlayerDamage(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, sW
       }
       if(issubstr(sMeansOfDeath, "MOD_GRENADE") && isDefined(eInflictor.isCooked)) {
         self.wasCooked = getTime();
-      }
-      else {
+      } else {
         self.wasCooked = undefined;
       }
       self.lastDamageWasFromEnemy = (isDefined(eAttacker) && (eAttacker != self));
@@ -957,8 +951,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
     self thread maps\mp\gametypes\_globallogic_score::trackLeaderBoardDeathStats(sWeapon, sMeansOfDeath);
     if(wasInLastStand && isDefined(lastWeaponBeforeDroppingIntoLastStand)) {
       weaponName = lastWeaponBeforeDroppingIntoLastStand;
-    }
-    else {
+    } else {
       weaponName = self.lastdroppableweapon;
     }
     if(isDefined(weaponName) && (isSubStr(weaponName, "gl_") || isSubStr(weaponName, "mk_") || isSubStr(weaponName, "ft_"))) {
@@ -1088,11 +1081,9 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
           }
           if(maps\mp\gametypes\_globallogic_utils::getTimePassed() < 5000) {
             teamKillDelay = 1;
-          }
-          else if(attacker.pers["teamkills_nostats"] > 1 && maps\mp\gametypes\_globallogic_utils::getTimePassed() < (8000 + (attacker.pers["teamkills_nostats"] * 1000))) {
+          } else if(attacker.pers["teamkills_nostats"] > 1 && maps\mp\gametypes\_globallogic_utils::getTimePassed() < (8000 + (attacker.pers["teamkills_nostats"] * 1000))) {
             teamKillDelay = 1;
-          }
-          else {
+          } else {
             teamKillDelay = attacker TeamKillDelay();
           }
           if(teamKillDelay > 0) {
@@ -1147,8 +1138,7 @@ Callback_PlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDi
         if(level.teamBased && attacker.team != "spectator") {
           if(isai(Attacker)) {
             maps\mp\gametypes\_globallogic_score::giveTeamScore("kill", attacker.aiteam, attacker, self);
-          }
-          else {
+          } else {
             maps\mp\gametypes\_globallogic_score::giveTeamScore("kill", attacker.team, attacker, self);
           }
         }
@@ -1645,8 +1635,7 @@ updateWeapon(eInflictor, sWeapon) {
   if(sWeapon == "none" && isDefined(eInflictor)) {
     if(isDefined(eInflictor.targetname) && eInflictor.targetname == "explodable_barrel") {
       sWeapon = "explodable_barrel_mp";
-    }
-    else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_")) {
+    } else if(isDefined(eInflictor.destructible_type) && isSubStr(eInflictor.destructible_type, "vehicle_")) {
       sWeapon = "destructible_car_mp";
     }
   }

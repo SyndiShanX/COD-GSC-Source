@@ -52,8 +52,7 @@ main(var_0) {
 
     if(animscripts\utility::isspaceai()) {
       self safeteleport(self.covernode.origin);
-    }
-    else {
+    } else {
       self safeteleport(self.covernode.origin, getcorrectcoverangles());
     }
 
@@ -188,8 +187,7 @@ attacksuppressableenemy(var_0, var_1) {
 
     if(!self.providecoveringfire && gettime() - self.lastsuppressiontime > 5000 && randomint(3) < 2) {
       var_2 = "ambush";
-    }
-    else if(!animscripts\shoot_behavior::shouldsuppress()) {
+    } else if(!animscripts\shoot_behavior::shouldsuppress()) {
       var_2 = "ambush";
     }
 
@@ -257,8 +255,7 @@ isenemyvisiblefromexposed() {
 
   if(distancesquared(self.enemy.origin, self.couldntseeenemypos) < 256) {
     return 0;
-  }
-  else {
+  } else {
     return animscripts\utility::canseeenemyfromexposed();
   }
 }
@@ -337,8 +334,7 @@ getpermutation(var_0) {
 
   if(var_0 == 1) {
     var_1[0] = 0;
-  }
-  else if(var_0 == 2) {
+  } else if(var_0 == 2) {
     var_1[0] = randomint(2);
     var_1[1] = 1 - var_1[0];
   } else {
@@ -368,21 +364,17 @@ calloptionalbehaviorcallback(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_6 = [[var_0]](var_2, var_3, var_4);
-  }
-  else if(isDefined(var_3)) {
+  } else if(isDefined(var_3)) {
     var_6 = [[var_0]](var_2, var_3);
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     var_6 = [[var_0]](var_2);
-  }
-  else {
+  } else {
     var_6 = [[var_0]]();
   }
 
   if(!var_6) {
     self notify("dont_end_idle");
-  }
-  else {}
+  } else {}
 
   return var_6;
 }
@@ -434,8 +426,7 @@ lookforenemy(var_0) {
 
   if(self.a.lastencountertime + 6000 > gettime()) {
     return lookfast(var_0);
-  }
-  else {
+  } else {
     var_1 = calloptionalbehaviorcallback(var_0.look, "look", 2 + randomfloat(2));
 
     if(var_1) {
@@ -475,8 +466,7 @@ idle(var_0, var_1) {
 
   if(isDefined(var_1)) {
     idlewait(var_1);
-  }
-  else {
+  } else {
     idlewaitabit();
   }
 
@@ -552,8 +542,7 @@ trythrowinggrenade(var_0, var_1) {
 
   if(animscripts\utility::ispartiallysuppressedwrapper()) {
     return calloptionalbehaviorcallback(var_0.grenadehidden, "grenadeHidden", var_1);
-  }
-  else {
+  } else {
     return calloptionalbehaviorcallback(var_0.grenade, "grenade", var_1);
   }
 }
@@ -627,8 +616,7 @@ resetlookforbettercovertime() {
 
   if(isDefined(self.didshufflemove) && var_0 > self.a.getboredofthisnodetime) {
     self.a.getboredofthisnodetime = var_0 + randomintrange(2000, 5000);
-  }
-  else if(isDefined(self.enemy)) {
+  } else if(isDefined(self.enemy)) {
     var_1 = distance2d(self.origin, self.enemy.origin);
 
     if(var_1 < self.engagemindist) {
@@ -651,8 +639,7 @@ resetlookforbettercovertime() {
 resetseekoutenemytime() {
   if(isDefined(self.aggressivemode)) {
     self.seekoutenemytime = gettime() + randomintrange(500, 1000);
-  }
-  else {
+  } else {
     self.seekoutenemytime = gettime() + randomintrange(3000, 5000);
   }
 }
@@ -699,7 +686,7 @@ copy_anim_array_to_a_array(var_0) {
   var_1 = animscripts\utility::lookupanimarray(var_0);
 
   foreach(var_4, var_3 in var_1) {
-  self.a.array[var_4] = var_3;
+    self.a.array[var_4] = var_3;
   }
 }
 
@@ -742,8 +729,7 @@ turntomatchnodedirection(var_0) {
     if(self.a.pose == "stand" && var_1 gethighestnodestance() != "stand") {
       if(var_2 > 45 && var_2 < 90) {
         self orientmode("face angle", self.angles[1]);
-      }
-      else {
+      } else {
         self orientmode("face current");
       }
 
@@ -773,14 +759,12 @@ turntomatchnodedirection(var_0) {
     if(abs(var_7) > 45) {
       if(self.swimmer) {
         set_swimming_turns();
-      }
-      else if(self.a.pose == "stand") {
+      } else if(self.a.pose == "stand") {
         if(isDefined(self.animarchetype) && self.animarchetype == "s1_soldier") {
           if(isDefined(self.covertype)) {
             if(self.covertype == "stand") {
               set_standing_cover_turns();
-            }
-            else {
+            } else {
               set_standing_turns();
             }
           } else
@@ -789,8 +773,7 @@ turntomatchnodedirection(var_0) {
           set_cqb_standing_turns();
         else if(animscripts\utility::is_in_casual_standing_stance()) {
           set_casual_standing_turns();
-        }
-        else {
+        } else {
           set_standing_turns();
         }
       } else

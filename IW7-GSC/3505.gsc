@@ -544,8 +544,7 @@ func_1399C() {
     if(gettime() >= self.odin_airdropusetime) {
       if(level.teambased) {
         scripts\mp\utility\game::leaderdialog(var_1.func_13521, self.team);
-      }
-      else {
+      } else {
         var_00 scripts\mp\utility\game::leaderdialogonplayer(var_1.func_13521);
       }
 
@@ -589,8 +588,7 @@ func_13B49() {
     if(gettime() >= self.odin_smokeusetime) {
       if(level.teambased) {
         scripts\mp\utility\game::leaderdialog(var_1.func_13551, self.team);
-      }
-      else {
+      } else {
         var_00 scripts\mp\utility\game::leaderdialogonplayer(var_1.func_13551);
       }
 
@@ -712,8 +710,7 @@ func_13AB1() {
     }
     if(gettime() >= self.odin_largerodusetime) {
       self.odin_largerodusetime = func_C2E6("large_rod");
-    }
-    else {
+    } else {
       var_00 scripts\mp\utility\game::func_13A7("odin_negative_action");
     }
 
@@ -750,8 +747,7 @@ func_13B47() {
     }
     if(gettime() >= self.odin_smallrodusetime) {
       self.odin_smallrodusetime = func_C2E6("small_rod");
-    }
-    else {
+    } else {
       var_00 scripts\mp\utility\game::func_13A7("odin_negative_action");
     }
 
@@ -948,8 +944,7 @@ func_58EE(var_00) {
     }
     if(var_10 <= var_03) {
       var_13 = 1.0;
-    }
-    else {
+    } else {
       var_13 = 1.0 - (var_10 - var_03) / (var_02 - var_03);
     }
 
@@ -964,8 +959,7 @@ func_58EE(var_00) {
     if(!func_6565(var_09)) {
       if(level.teambased) {
         var_18 = scripts\mp\utility\game::outlineenableforteam(var_09, "orange", self.team, 0, 0, "killstreak");
-      }
-      else {
+      } else {
         var_18 = scripts\mp\utility\game::outlineenableforplayer(var_09, "orange", self.owner, 0, 0, "killstreak");
       }
 
@@ -978,15 +972,13 @@ func_58EE(var_00) {
   if(var_07 == 1) {
     if(level.teambased) {
       scripts\mp\utility\game::leaderdialog(var_20.func_1354B, self.team);
-    }
-    else {
+    } else {
       var_01 scripts\mp\utility\game::leaderdialogonplayer(var_20.func_1354B);
     }
   } else if(var_07 > 1) {
     if(level.teambased) {
       scripts\mp\utility\game::leaderdialog(var_20.func_1354A, self.team);
-    }
-    else {
+    } else {
       var_01 scripts\mp\utility\game::leaderdialogonplayer(var_20.func_1354A);
     }
   }
@@ -1004,8 +996,7 @@ func_58EE(var_00) {
 func_20D2(var_00) {
   if(level.teambased && var_0.team == self.team) {
     return;
-  }
-  else if(!level.teambased && var_00 == self.owner) {
+  } else if(!level.teambased && var_00 == self.owner) {
     return;
   }
   if(func_6565(var_00)) {
@@ -1029,8 +1020,7 @@ removeoutline(var_00, var_01, var_02) {
 
   if(isDefined(var_02)) {
     scripts\engine\utility::waittill_any_in_array_or_timeout_no_endon_death(var_03, var_02);
-  }
-  else {
+  } else {
     scripts\engine\utility::waittill_any_in_array_return_no_endon_death(var_03);
   }
 
@@ -1044,7 +1034,7 @@ func_C31A() {
   level endon("game_ended");
 
   foreach(var_01 in level.participants) {
-  func_20D2(var_01);
+    func_20D2(var_01);
   }
 }
 
@@ -1072,8 +1062,7 @@ func_C2DD(var_00) {
 
     if(self.enemieskilledintimewindow > 1) {
       self.owner scripts\mp\utility\game::leaderdialogonplayer(var_1.func_1352C);
-    }
-    else {
+    } else {
       self.owner scripts\mp\utility\game::leaderdialogonplayer(var_1.func_1352D);
     }
 

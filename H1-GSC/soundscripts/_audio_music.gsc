@@ -18,8 +18,7 @@ mus_init() {
   level._audio.music.enable_auto_mix = 0;
   level._audio.music.env_threat_to_vol = [[0.0, 0.5],
     [0.9, 1.0],
-    [1.0, 1.0]
-  ];
+    [1.0, 1.0]];
   thread musx_monitor_game_vars();
 }
 
@@ -41,11 +40,9 @@ mus_play(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_6)) {
     if(isDefined(var_2)) {
       var_9 = var_2;
-    }
-    else if(isDefined(var_1)) {
+    } else if(isDefined(var_1)) {
       var_9 = var_1;
-    }
-    else if(isDefined(var_6["fade_out_time"])) {
+    } else if(isDefined(var_6["fade_out_time"])) {
       var_9 = var_6["fade_out_time"];
     }
   }
@@ -114,8 +111,7 @@ musx_start_cue(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_0 == level._audio.music.curr_cue_name && !var_5) {
     return;
-  }
-  else {
+  } else {
     var_6 = level._audio.music.prev_cue_name;
     var_7 = level._audio.music.curr_cue_name;
     level._audio.music.prev_cue_name = level._audio.music.curr_cue_name;

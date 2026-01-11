@@ -39,7 +39,7 @@ main() {
     for(i = 0; i < level.slide.size; i++) {
       if(isDefined(level.slide[i]["image"]))
     }
-        precacheshader(level.slide[i]["image"]);
+    precacheshader(level.slide[i]["image"]);
 
     player thread skipthebriefing();
     player dothebriefing();

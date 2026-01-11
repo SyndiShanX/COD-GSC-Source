@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_bgb_nowhere_but_there;
 
 autoexec __init__system__() {
@@ -29,9 +28,9 @@ __init__() {
     return;
   }
 
-  level._effect[#"hash_8393b410b8f909d"] = "zombie/fx_bgb_anywhere_but_here_teleport_zmb";
-  level._effect[#"hash_8b86393f63bb1ef"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_zmb";
-  level._effect[#"hash_1eae5969d11a8b16"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_kill_zmb";
+  level._effect[# "hash_8393b410b8f909d"] = "zombie/fx_bgb_anywhere_but_here_teleport_zmb";
+  level._effect[# "hash_8b86393f63bb1ef"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_zmb";
+  level._effect[# "hash_1eae5969d11a8b16"] = "zombie/fx_bgb_anywhere_but_here_teleport_aoe_kill_zmb";
   bgb::register(#"zm_bgb_nowhere_but_there", "activated", 1, undefined, undefined, &validation, &activation);
   bgb::function_72469efe(#"zm_bgb_nowhere_but_there", 1);
   bgb::function_8a5d8cfb(#"zm_bgb_nowhere_but_there", 1);
@@ -88,17 +87,17 @@ activation() {
   }
 
   self show();
-  playFX(level._effect[#"hash_8393b410b8f909d"], self.origin);
-  playFX(level._effect[#"hash_8b86393f63bb1ef"], self.origin);
+  playFX(level._effect[# "hash_8393b410b8f909d"], self.origin);
+  playFX(level._effect[# "hash_8b86393f63bb1ef"], self.origin);
   a_ai = getaiarray();
   a_aoe_ai = arraysortclosest(a_ai, self.origin, a_ai.size, 0, 200);
 
   foreach(ai in a_aoe_ai) {
     if(isactor(ai)) {
-      if(ai.archetype === #"zombie") {
-        playFX(level._effect[#"hash_1eae5969d11a8b16"], ai gettagorigin("j_spineupper"));
+      if(ai.archetype === # "zombie") {
+        playFX(level._effect[# "hash_1eae5969d11a8b16"], ai gettagorigin("j_spineupper"));
       } else {
-        playFX(level._effect[#"hash_1eae5969d11a8b16"], ai.origin);
+        playFX(level._effect[# "hash_1eae5969d11a8b16"], ai.origin);
       }
 
       ai.marked_for_recycle = 1;
@@ -139,7 +138,7 @@ is_valid_target(e_player) {
 }
 
 validation() {
-  if(level.var_2439365b === #"turret") {
+  if(level.var_2439365b === # "turret") {
     return 0;
   }
 
@@ -266,7 +265,7 @@ get_best_spawnpoint(e_player) {
     }
   }
 
-  foreach(var_e15a68a8 in level.zones[var_8666ff27].a_loc_types[#"wait_location"]) {
+  foreach(var_e15a68a8 in level.zones[var_8666ff27].a_loc_types[# "wait_location"]) {
     if(zm_utility::check_point_in_enabled_zone(var_e15a68a8.origin, 1)) {
       if(!isDefined(a_s_valid_respawn_points)) {
         a_s_valid_respawn_points = [];

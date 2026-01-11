@@ -351,8 +351,7 @@ melee_leap_internal(enemy, melee_type) {
 
     if(shouldExplode) {
       self maps\mp\agents\alien\_alien_minion::explode(self.enemy);
-    }
-    else {
+    } else {
       self move_back(enemy);
     }
   } else {
@@ -472,7 +471,7 @@ play_synch_attack(attack_index, anim_state, enemy, anim_label, synch_list) {
   level endon("game_ended");
 
   foreach(endNotify in enemy.synch_attack_setup.end_notifies) {
-  enemy endon(endNotify);
+    enemy endon(endNotify);
   }
 
   endAnim = self GetAnimEntry(anim_state, 2);
@@ -504,7 +503,7 @@ apply_synch_attack_damage(enemy) {
   enemy endon("death");
 
   foreach(endNotify in enemy.synch_attack_setup.end_notifies) {
-  enemy endon(endNotify);
+    enemy endon(endNotify);
   }
 
   damage_amount = 1.0;
@@ -565,7 +564,7 @@ enemy_process_synch_attack(attacker, attackIndex, endAnimTime, synchList) {
 enemy_wait_for_synch_attack_end(attacker, attackIndex) {
   self thread enemy_wait_for_synch_invalid_enemy(attacker);
   foreach(endNotify in self.synch_attack_setup.end_notifies) {
-  self thread enemy_wait_for_synch_end_notify(endNotify);
+    self thread enemy_wait_for_synch_end_notify(endNotify);
   }
 
   msg = self waittill_any_return("enemy_synch_end_notify", "synched_attack_over", "enemy_synch_invalid_enemy");
@@ -655,8 +654,7 @@ melee_DoDamage(enemy, melee_type) {
   if(isDefined(self.pet) && self.pet) {
     if(is_true(self.upgraded)) {
       damage_amount *= 10;
-    }
-    else {
+    } else {
       damage_amount *= 6;
     }
   }
@@ -697,8 +695,7 @@ set_damage_viewkick(damage_amount) {
   if(is_chaos_mode()) {
     if(maps\mp\alien\_utility::isPlayingSolo()) {
       viewkick_scale = (viewkick_scale / 1.6);
-    }
-    else {
+    } else {
       viewkick_scale = (viewkick_scale / 2.2);
     }
   }
@@ -909,8 +906,7 @@ check_for_player_meleeing(player) {
 
   if(player MeleeButtonPressed() && isDefined(player.meleeStrength) && player.meleeStrength == 1 && dotProduct > 0.5) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -1006,8 +1002,7 @@ check_for_block(player) {
 should_catch_fire(player) {
   if(player maps\mp\alien\_persistence::is_upgrade_enabled("riotshield_back_upgrade") && self.alien_type != "spider" && self.alien_type != "kraken_tentacle" && self.alien_type != "kraken") {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

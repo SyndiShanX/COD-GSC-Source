@@ -67,22 +67,14 @@ class vehiclewheelfx {
       if(trace["fraction"] < 1) {
         surface = trace["surfacetype"];
       } else {
-        [
-          [ground_fx["skid"]]
-        ] - > stop(localclientnum);
-        [
-          [ground_fx["tread"]]
-        ] - > stop(localclientnum);
+        [[ground_fx["skid"]]] - > stop(localclientnum);
+        [[ground_fx["tread"]]] - > stop(localclientnum);
         return;
       }
     } else {
       if(!vehicle iswheelcolliding(name)) {
-        [
-          [ground_fx["skid"]]
-        ] - > stop(localclientnum);
-        [
-          [ground_fx["tread"]]
-        ] - > stop(localclientnum);
+        [[ground_fx["skid"]]] - > stop(localclientnum);
+        [[ground_fx["tread"]]] - > stop(localclientnum);
         return;
       }
       peelingout = vehicle iswheelpeelingout(name);

@@ -80,8 +80,7 @@ activate() {
 
   if(isDefined(var_0["missile"].isavailable)) {
     var_0["missile"].alpha = 1.0;
-  }
-  else {
+  } else {
     var_0["missile"].alpha = 0;
   }
 
@@ -94,8 +93,7 @@ deactivate() {
 
   if(isDefined(var_0["missile"].isavailable)) {
     var_0["missile"].alpha = 0.2;
-  }
-  else {
+  } else {
     var_0["missile"].alpha = 0;
   }
 
@@ -107,15 +105,13 @@ hud_start() {
 
   if(isDefined(var_0["missile"].isavailable)) {
     var_0["missile"].alpha = common_scripts\utility::ter_op(isDefined(self.isactive), 1.0, 0.2);
-  }
-  else {
+  } else {
     var_0["missile"].alpha = 0;
   }
 
   if(isDefined(var_0["missile"].islockedontarget)) {
     var_0["missile"] setshader("apache_missile_icon_lock", 16, 16);
-  }
-  else {
+  } else {
     var_0["missile"] setshader("apache_missile_icon", 16, 16);
   }
 
@@ -277,8 +273,7 @@ target_islockedonbyanyweaponsystem(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_1;
-  }
-  else {
+  } else {
     var_2 = var_0 getentitynumber();
   }
 
@@ -296,8 +291,7 @@ target_unset_islockedon(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = var_1;
-  }
-  else {
+  } else {
     var_2 = var_0 getentitynumber();
   }
 
@@ -349,8 +343,7 @@ _fire() {
 
   if(var_7 < 0.05) {
     var_6 common_scripts\utility::missile_settargetandflightmode(var_1, "top");
-  }
-  else {
+  } else {
     var_6 maps\_utility::delaythread(var_7, common_scripts\utility::missile_settargetandflightmode, var_1, "top");
   }
 

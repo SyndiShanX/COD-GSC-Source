@@ -130,7 +130,7 @@ setallvehiclefx(var_0, var_1, var_2) {
   setvehiclefx(var_0, "none", undefined, var_2);
 
   foreach(var_5 in var_3) {
-  setvehiclefx(var_0, var_5, var_1, var_2);
+    setvehiclefx(var_0, var_5, var_1, var_2);
   }
 }
 

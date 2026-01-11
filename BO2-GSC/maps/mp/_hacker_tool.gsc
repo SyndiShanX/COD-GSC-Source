@@ -113,15 +113,12 @@ watchhackertoolfired() {
 
       if(isentityhackableweaponobject(hackertooltarget) || isDefined(hackertooltarget.hackertrigger)) {
         hackertooltarget.hackertrigger notify("trigger", self, 1);
-      }
-      else {
+      } else {
         if(isDefined(hackertooltarget.classname) && hackertooltarget.classname == "grenade") {
           damage = 1;
-        }
-        else if(isDefined(hackertooltarget.maxhealth)) {
+        } else if(isDefined(hackertooltarget.maxhealth)) {
           damage = hackertooltarget.maxhealth + 1;
-        }
-        else {
+        } else {
           damage = 999999;
         }
 
@@ -427,8 +424,7 @@ getweaponobjecthacktimems(entity) {
 isentityhackablecarepackage(entity) {
   if(isDefined(entity.model)) {
     return entity.model == "t6_wpn_supply_drop_ally";
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -493,15 +489,13 @@ registerwithhackertool(radius, hacktimems) {
 
   if(isDefined(radius)) {
     self.hackertoolradius = radius;
-  }
-  else {
+  } else {
     self.hackertoolradius = level.hackertoollockonradius;
   }
 
   if(isDefined(hacktimems)) {
     self.hackertooltimems = hacktimems;
-  }
-  else {
+  } else {
     self.hackertooltimems = level.hackertoolhacktimems;
   }
 
@@ -524,8 +518,7 @@ gethackertoolradius(target) {
     radius = getweaponobjecthackerradius(target);
   else if(isDefined(target.hackertoolradius)) {
     radius = target.hackertoolradius;
-  }
-  else {
+  } else {
     radius = level.vehiclehackertoolradius;
 
     switch (target.model) {
@@ -581,19 +574,16 @@ gethacktime(target) {
 
     if(isDefined(target.owner) && target.owner == self) {
       time = level.carepackageownerhackertooltimems;
-    }
-    else if(isDefined(target.owner) && target.owner.team == self.team) {
+    } else if(isDefined(target.owner) && target.owner.team == self.team) {
       time = level.carepackagefriendlyhackertooltimems;
-    }
-    else {
+    } else {
       time = level.carepackagehackertooltimems;
     }
   } else if(isentityhackableweaponobject(target))
     time = getweaponobjecthacktimems(target);
   else if(isDefined(target.hackertooltimems)) {
     time = target.hackertooltimems;
-  }
-  else {
+  } else {
     time = level.vehiclehackertooltimems;
 
     switch (target.model) {

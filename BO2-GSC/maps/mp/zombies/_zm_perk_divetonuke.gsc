@@ -124,8 +124,7 @@ divetonuke_explode(attacker, origin) {
 
   if(isDefined(level.flopper_network_optimized) && level.flopper_network_optimized) {
     attacker thread divetonuke_explode_network_optimized(origin, radius, max_damage, min_damage, "MOD_GRENADE_SPLASH");
-  }
-  else {
+  } else {
     radiusdamage(origin, radius, max_damage, min_damage, attacker, "MOD_GRENADE_SPLASH");
   }
 

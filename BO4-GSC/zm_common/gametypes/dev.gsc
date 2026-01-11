@@ -17,11 +17,10 @@
 #include scripts\zm_common\gametypes\globallogic_score;
 #include scripts\zm_common\gametypes\globallogic_utils;
 #include scripts\zm_common\util;
-
 #namespace dev;
 
 autoexec __init__system__() {
-  system::register(#"dev", &__init__, undefined, #"spawnlogic");
+  system::register(#"dev", &__init__, undefined, # "spawnlogic");
 }
 
 __init__() {
@@ -95,7 +94,7 @@ warpalltoplayer(team, player) {
 
   if(isDefined(target)) {
     origin = target.origin;
-    nodes = getnodesinradius(origin, 128, 32, 128, #"path");
+    nodes = getnodesinradius(origin, 128, 32, 128, # "path");
     angles = target getplayerangles();
     yaw = (0, angles[1], 0);
     forward = anglesToForward(yaw);
@@ -521,7 +520,7 @@ updatedevsettings() {
 
 devgui_spawn_think() {
   self notify(#"devgui_spawn_think");
-  self endon(#"devgui_spawn_think", #"disconnect");
+  self endon(#"devgui_spawn_think", # "disconnect");
   dpad_left = 0;
   dpad_right = 0;
 
@@ -549,7 +548,7 @@ devgui_spawn_think() {
 
 devgui_unlimited_ammo() {
   self notify(#"devgui_unlimited_ammo");
-  self endon(#"devgui_unlimited_ammo", #"disconnect");
+  self endon(#"devgui_unlimited_ammo", # "disconnect");
 
   for(;;) {
     wait 1;
@@ -612,13 +611,13 @@ devgui_increase_momentum(score) {
       continue;
     }
 
-    player globallogic_score::giveplayermomentumnotification(score, #"testplayerscorefortan", "<dev string:x309>", 0);
+    player globallogic_score::giveplayermomentumnotification(score, # "testplayerscorefortan", "<dev string:x309>", 0);
   }
 }
 
 devgui_health_debug() {
   self notify(#"devgui_health_debug");
-  self endon(#"devgui_health_debug", #"disconnect");
+  self endon(#"devgui_health_debug", # "disconnect");
   x = 80;
   y = 40;
   self.debug_health_bar = newdebughudelem(self);
@@ -832,14 +831,14 @@ showstartspawnpoints() {
   }
 
   team_colors = [];
-  team_colors[#"axis"] = (1, 0, 1);
-  team_colors[#"allies"] = (0, 1, 1);
-  team_colors[#"team3"] = (1, 1, 0);
-  team_colors[#"team4"] = (0, 1, 0);
-  team_colors[#"team5"] = (0, 0, 1);
-  team_colors[#"team6"] = (1, 0.7, 0);
-  team_colors[#"team7"] = (0.25, 0.25, 1);
-  team_colors[#"team8"] = (0.88, 0, 1);
+  team_colors[# "axis"] = (1, 0, 1);
+  team_colors[# "allies"] = (0, 1, 1);
+  team_colors[# "team3"] = (1, 1, 0);
+  team_colors[# "team4"] = (0, 1, 0);
+  team_colors[# "team5"] = (0, 0, 1);
+  team_colors[# "team6"] = (1, 0.7, 0);
+  team_colors[# "team7"] = (0.25, 0.25, 1);
+  team_colors[# "team8"] = (0.88, 0, 1);
 
   foreach(team, _ in level.teams) {
     color = team_colors[team];
@@ -1086,24 +1085,24 @@ devstraferunpathdebugdraw() {
           textscale = 10;
 
           switch (node.script_noteworthy) {
-            case #"strafe_start":
+            case # "strafe_start":
               textcolor = green;
               textalpha = 1;
               break;
-            case #"strafe_stop":
+            case # "strafe_stop":
               textcolor = red;
               textalpha = 1;
               break;
-            case #"strafe_leave":
+            case # "strafe_leave":
               textcolor = white;
               textalpha = 1;
               break;
           }
 
           switch (node.script_noteworthy) {
-            case #"strafe_stop":
-            case #"strafe_leave":
-            case #"strafe_start":
+            case # "strafe_stop":
+            case # "strafe_leave":
+            case # "strafe_start":
               sides = 10;
               radius = 100;
 
@@ -1159,22 +1158,22 @@ devhelipathdebugdraw() {
       foreach(ent in script_origins) {
         if(isDefined(ent.targetname)) {
           switch (ent.targetname) {
-            case #"heli_start":
+            case # "heli_start":
               textcolor = blue;
               textalpha = 1;
               textscale = 3;
               break;
-            case #"heli_loop_start":
+            case # "heli_loop_start":
               textcolor = green;
               textalpha = 1;
               textscale = 3;
               break;
-            case #"heli_attack_area":
+            case # "heli_attack_area":
               textcolor = red;
               textalpha = 1;
               textscale = 3;
               break;
-            case #"heli_leave":
+            case # "heli_leave":
               textcolor = white;
               textalpha = 1;
               textscale = 3;
@@ -1182,10 +1181,10 @@ devhelipathdebugdraw() {
           }
 
           switch (ent.targetname) {
-            case #"heli_leave":
-            case #"heli_attack_area":
-            case #"heli_start":
-            case #"heli_loop_start":
+            case # "heli_leave":
+            case # "heli_attack_area":
+            case # "heli_start":
+            case # "heli_loop_start":
               if(drawtime == maxdrawtime) {
                 ent thread drawpath(textcolor, white, textalpha, textscale, origintextoffset, drawtime, endonmsg);
               }

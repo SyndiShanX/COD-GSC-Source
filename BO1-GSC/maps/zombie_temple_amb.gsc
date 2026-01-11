@@ -55,40 +55,35 @@ weapon_type_check_custom(weapon) {
     case 0:
       if(weapon == "m16_zm") {
         return "favorite";
-      }
-      else if(weapon == "m16_gl_upgraded_zm") {
+      } else if(weapon == "m16_gl_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
     case 1:
       if(weapon == "fnfal_zm") {
         return "favorite";
-      }
-      else if(weapon == "hk21_upgraded_zm") {
+      } else if(weapon == "hk21_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
     case 2:
       if(weapon == "ak74u_zm") {
         return "favorite";
-      }
-      else if(weapon == "m14_upgraded_zm") {
+      } else if(weapon == "m14_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
     case 3:
       if(weapon == "spectre_zm") {
         return "favorite";
-      }
-      else if(weapon == "g11_lps_upgraded_zm") {
+      } else if(weapon == "g11_lps_upgraded_zm") {
         return "favorite_upgrade";
       }
       break;
   }
   if(IsSubStr(weapon, "upgraded")) {
     return "upgrade";
-  }
-  else {
+  } else {
     return level.zombie_weapons[weapon].vox;
   }
 }

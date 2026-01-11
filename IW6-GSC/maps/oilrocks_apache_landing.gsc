@@ -7,7 +7,7 @@ catchup_function() {
   var_0 = ["landing_zpus"];
 
   foreach(var_2 in var_0) {
-  maps\_utility::array_delete(getEntArray(var_2, "targetname"));
+    maps\_utility::array_delete(getEntArray(var_2, "targetname"));
   }
 
   maps\oilrocks_apache_code::spawn_apache_allies("apache_landing_ally_0");

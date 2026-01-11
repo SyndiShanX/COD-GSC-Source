@@ -28,11 +28,11 @@ getnames(num) {
   if(num == 0) {
     // Begin Game Autosave
   }
-    savedescription = &"AUTOSAVE_GAME";
+  savedescription = &"AUTOSAVE_GAME";
   else {
     // No Name Specified
   }
-    savedescription = &"AUTOSAVE_NOGAME";
+  savedescription = &"AUTOSAVE_NOGAME";
 
   return savedescription;
 }
@@ -113,10 +113,9 @@ autoSaveNameThink(trigger) {
   trigger waittill("trigger");
   if(isDefined(level.customautosavecheck)) {
     if(![
-  }
-        [level.customautosavecheck]
-      ]())
-      return;
+      }
+      [level.customautosavecheck]]())
+  return;
   name = trigger.script_autosavename;
   maps\_utility::autosave_by_name(name);
 
@@ -135,19 +134,17 @@ AutoSavePrint(msg, msg2) {
   if(GetDebugDvarInt("scr_autosave_debug") == 1) {
     if(isDefined(msg2)) {
       IPrintLn(msg + " [ localized description ]");
-    }
-    else {
+    } else {
       IPrintLn(msg);
     }
     return;
   }
 
-    if(isDefined(msg2)) {
-      PrintLn(msg, msg2);
-    }
-    else {
-      PrintLn(msg);
-    }
+  if(isDefined(msg2)) {
+    PrintLn(msg, msg2);
+  } else {
+    PrintLn(msg);
+  }
 }
 
 autosave_timeout(timeout) {
@@ -189,8 +186,7 @@ _autosave_game_now(suppress_print) {
 
   if(isDefined(suppress_print)) {
     saveId = SaveGameNoCommit(filename, descriptionString, "$default", true);
-  }
-  else {
+  } else {
     saveId = SaveGameNoCommit(filename, descriptionString);
   }
 

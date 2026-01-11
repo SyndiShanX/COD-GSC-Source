@@ -80,9 +80,7 @@ calculatefactorscore(var_00, var_01, var_02, var_03) {
 }
 
 critical_factor(var_00, var_01) {
-  var_02 = [
-    [var_00]
-  ](var_01);
+  var_02 = [[var_00]](var_01);
   var_02 = clamp(var_02, 0, 100);
   return var_02;
 }
@@ -135,8 +133,7 @@ func_26BC(var_00) {
 isexplosivedangeroustoplayer(var_00) {
   if(!level.teambased || level.friendlyfire || !isDefined(var_0.team)) {
     return 1;
-  }
-  else {
+  } else {
     var_01 = undefined;
 
     if(isDefined(self.owner)) {
@@ -149,8 +146,7 @@ isexplosivedangeroustoplayer(var_00) {
 
     if(isDefined(var_01)) {
       return var_01 != var_0.team;
-    }
-    else {
+    } else {
       return 1;
     }
   }
@@ -208,8 +204,7 @@ func_26AE(var_00) {
 
   if(level.teambased) {
     var_1[0] = ::scripts\mp\gameobjects::func_7E93(self.team);
-  }
-  else {
+  } else {
     var_1[var_1.size] = "all";
   }
 
@@ -355,11 +350,9 @@ updatefrontlineposition() {
 
   if(!isDefined(var_0.lastupdatetime)) {
     var_0.lastupdatetime = var_01;
-  }
-  else if(var_0.isactive["allies"] && var_0.isactive["axis"]) {
+  } else if(var_0.isactive["allies"] && var_0.isactive["axis"]) {
     var_0.func_12F92 = var_0.func_12F92 + var_0.func_AA37;
-  }
-  else {
+  } else {
     var_0.func_5AFE = var_0.func_5AFE + var_0.func_AA37;
   }
 
@@ -394,8 +387,7 @@ updatefrontlineposition() {
 
   if(var_08 > 180) {
     var_08 = var_08 - 360;
-  }
-  else if(var_08 < -180) {
+  } else if(var_08 < -180) {
     var_08 = 360 + var_08;
   }
 
@@ -467,8 +459,7 @@ updatefrontlinedebug() {
 
     if(var_2.isactive["allies"] && var_2.isactive["axis"]) {
       var_07 = "FRONT_LINE";
-    }
-    else {
+    } else {
       var_07 = scripts\engine\utility::ter_op(var_2.isactive["allies"], "FRONT_LINE_ALLIES", "FRONT_LINE_AXIS");
     }
 
@@ -543,8 +534,7 @@ runfrontlinespawntrapchecks(var_00) {
   if(var_04 < var_02 || var_09 < 0.0) {
     if(var_04 < var_02) {
       var_1.disabledreason[var_00] = 0;
-    }
-    else {
+    } else {
       var_1.disabledreason[var_00] = 1;
     }
 
@@ -597,8 +587,7 @@ func_26B4(var_00) {
 
   if(level.teambased) {
     var_1[0] = ::scripts\mp\gameobjects::func_7E93(self.team);
-  }
-  else {
+  } else {
     var_1[var_1.size] = "all";
   }
 
@@ -639,8 +628,7 @@ func_26B5(var_00) {
 
   if(level.teambased) {
     var_01 = scripts\mp\gameobjects::func_7E93(self.team);
-  }
-  else {
+  } else {
     var_01 = "all";
   }
 
@@ -659,8 +647,7 @@ func_26AF(var_00) {
 
   if(level.teambased) {
     var_1[0] = ::scripts\mp\gameobjects::func_7E93(self.team);
-  }
-  else {
+  } else {
     var_1[var_1.size] = "all";
   }
 
@@ -725,8 +712,7 @@ scoreeventalwaysshowassplash(var_00) {
 
   if(var_05 == "none") {
     return 100;
-  }
-  else {
+  } else {
     return 50.0;
   }
 }
@@ -805,8 +791,7 @@ func_26C5(var_00) {
 
   if(var_03 < 300) {
     return 0;
-  }
-  else {
+  } else {
     return 100;
   }
 }
@@ -853,8 +838,7 @@ func_26B0(var_00, var_01) {
 
   if(isDefined(var_03)) {
     var_02 = var_03;
-  }
-  else if(isDefined(var_04)) {
+  } else if(isDefined(var_04)) {
     var_02 = var_04;
   }
 

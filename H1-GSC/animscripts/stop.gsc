@@ -65,8 +65,7 @@ main() {
   if(!var_0) {
     if(self.a.weaponpos["right"] == "none" && self.a.weaponpos["left"] == "none") {
       var_0 = 1;
-    }
-    else if(angleclamp180(self getmuzzleangle()[0]) > 20) {
+    } else if(angleclamp180(self getmuzzleangle()[0]) > 20) {
       var_0 = 1;
     }
   }
@@ -121,14 +120,11 @@ turntoangle(var_0) {
 
   if(var_2 < -80) {
     var_4 = var_3[2];
-  }
-  else if(var_2 < -20) {
+  } else if(var_2 < -20) {
     var_4 = var_3[3];
-  }
-  else if(var_2 < 80) {
+  } else if(var_2 < 80) {
     var_4 = var_3[5];
-  }
-  else {
+  } else {
     var_4 = var_3[6];
   }
 
@@ -177,8 +173,7 @@ specialidleloop() {
 
     if(var_1[0] == var_2 && var_1.size > 1) {
       var_2 = var_1[1];
-    }
-    else {
+    } else {
       var_2 = var_1[0];
     }
 
@@ -209,11 +204,9 @@ getdesiredidlepose() {
 
   if(var_2 == "Cover Stand" || var_2 == "Conceal Stand") {
     var_3 = animscripts\utility::choosepose("stand");
-  }
-  else if(var_2 == "Cover Crouch" || var_2 == "Conceal Crouch") {
+  } else if(var_2 == "Cover Crouch" || var_2 == "Conceal Crouch") {
     var_3 = animscripts\utility::choosepose("crouch");
-  }
-  else if(var_2 == "Cover Prone" || var_2 == "Conceal Prone") {
+  } else if(var_2 == "Cover Prone" || var_2 == "Conceal Prone") {
     var_3 = animscripts\utility::choosepose("prone");
   }
 
@@ -235,14 +228,11 @@ transitiontoidle(var_0, var_1) {
 
   if(animscripts\utility::iscqbwalking() && self.a.pose == "stand" && (animscripts\utility::isincombat() || var_2)) {
     var_0 = "stand_cqb";
-  }
-  else if(animscripts\utility::usingsmg() && self.a.pose == "stand") {
+  } else if(animscripts\utility::usingsmg() && self.a.pose == "stand") {
     var_0 = "stand_smg";
-  }
-  else if(self.a.pose == "stand" && var_2) {
+  } else if(self.a.pose == "stand" && var_2) {
     var_0 = "stand_combat";
-  }
-  else if(self.a.pose == "crouch" && var_2) {
+  } else if(self.a.pose == "crouch" && var_2) {
     var_0 = "crouch_combat";
   }
 
@@ -270,11 +260,9 @@ playidle(var_0, var_1) {
 
   if(animscripts\utility::iscqbwalking() && self.a.pose == "stand" && (animscripts\utility::isincombat() || var_2)) {
     var_0 = "stand_cqb";
-  }
-  else if(self.a.pose == "stand" && var_2) {
+  } else if(self.a.pose == "stand" && var_2) {
     var_0 = "stand_combat";
-  }
-  else if(self.a.pose == "crouch" && var_2) {
+  } else if(self.a.pose == "crouch" && var_2) {
     var_0 = "crouch_combat";
   }
 
@@ -283,8 +271,7 @@ playidle(var_0, var_1) {
   if(isDefined(self.customidleanimset) && isDefined(self.customidleanimset[var_0])) {
     if(isarray(self.customidleanimset[var_0])) {
       var_4 = animscripts\utility::anim_array(self.customidleanimset[var_0], self.customidleanimweights[var_0]);
-    }
-    else {
+    } else {
       var_4 = self.customidleanimset[var_0];
       var_5 = var_0 + "_add";
 

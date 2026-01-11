@@ -16,8 +16,7 @@ autoexec __init__system__() {
   system::register(#"hash_f6d669c16956035", &__init__, &__main__, undefined);
 }
 
-__init__() {
-}
+__init__() {}
 
 __main__() {
   level flagsys::wait_till("radiant_gameobjects_initialized");
@@ -78,8 +77,7 @@ function_c12c0902() {
   }
 }
 
-function_b7ff7728(e_player) {
-}
+function_b7ff7728(e_player) {}
 
 function_24357980(team, player, success) {
   if(!isDefined(player)) {
@@ -96,8 +94,7 @@ function_24357980(team, player, success) {
   }
 }
 
-function_6a477b2b(e_player) {
-}
+function_6a477b2b(e_player) {}
 
 function_d62f7403(team, player, success) {
   if(!isDefined(player)) {
@@ -110,8 +107,7 @@ function_d62f7403(team, player, success) {
   }
 }
 
-function_85c6cdd4(e_player) {
-}
+function_85c6cdd4(e_player) {}
 
 function_e127fadc(team, player, success) {
   if(!isDefined(player)) {

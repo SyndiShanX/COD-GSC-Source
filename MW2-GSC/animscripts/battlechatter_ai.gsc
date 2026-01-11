@@ -66,8 +66,7 @@ addToSystem(squadName) {
   if(forceEnglish()) {
     if(self.team == "allies") {
       self.script_battlechatter = false;
-    }
-    else {
+    } else {
       self.voice = "american";
     }
   }
@@ -591,8 +590,7 @@ squadOfficerWaiter() {
 
     if(self.officers.size) {
       members = self.officers;
-    }
-    else {
+    } else {
       members = self.members;
     }
 
@@ -1218,7 +1216,7 @@ custom_battlechatter_internal(string) {
       if(!self nationalityOkForMoveOrder()) {
         println(badCountryIdStr);
 
-          return false;
+        return false;
       }
 
       self tryOrderTo(self.customChatPhrase, responder);
@@ -1229,7 +1227,7 @@ custom_battlechatter_internal(string) {
       if(!self nationalityOkForMoveOrderNoncombat()) {
         println(badCountryIdStr);
 
-          return false;
+        return false;
       }
 
       self addMoveNoncombatAliasEx();
@@ -1299,8 +1297,7 @@ endCustomEvent(eventDuration, typeOverride) {
 
   if(isDefined(typeOverride)) {
     chatEvent.type = typeOverride;
-  }
-  else {
+  } else {
     chatEvent.type = "custom";
   }
 

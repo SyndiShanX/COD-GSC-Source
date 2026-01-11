@@ -45,8 +45,7 @@ loop_local_sound(localClientNum, alias, interval, fx) {
           if((localPlayer == self.stuckToPlayer) && !(localPlayer IsDriving(localClientNum))) {
             if(IsSplitscreen()) {
               AnimateUI(localClientNum, "sticky_grenade_overlay" + localClientNum, "overlay", "pulse", 0);
-            }
-            else {
+            } else {
               AnimateUI(localClientNum, "sticky_grenade_overlay", "overlay", "pulse", 0);
             }
             if(!IsSplitscreen() && GetDvarInt(#"ui_hud_hardcore") == 0) {

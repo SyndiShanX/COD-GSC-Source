@@ -10,7 +10,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_perks;
-
 #namespace zm_perk_ethereal_razor;
 
 autoexec __init__system__() {
@@ -23,9 +22,9 @@ __init__() {
 
 enable_ethereal_razor_perk_for_level() {
   if(function_8b1a219a()) {
-    zm_perks::register_perk_basic_info(#"specialty_etherealrazor", #"perk_ethereal_razor", 4000, #"hash_1e8ce5bc6963fb34", getweapon("zombie_perk_bottle_ethereal_razor"), getweapon("zombie_perk_totem_ethereal_razor"), #"zmperksetherealrazor");
+    zm_perks::register_perk_basic_info(#"specialty_etherealrazor", # "perk_ethereal_razor", 4000, # "hash_1e8ce5bc6963fb34", getweapon("zombie_perk_bottle_ethereal_razor"), getweapon("zombie_perk_totem_ethereal_razor"), # "zmperksetherealrazor");
   } else {
-    zm_perks::register_perk_basic_info(#"specialty_etherealrazor", #"perk_ethereal_razor", 4000, #"zombie/perk_ethereal_razor", getweapon("zombie_perk_bottle_ethereal_razor"), getweapon("zombie_perk_totem_ethereal_razor"), #"zmperksetherealrazor");
+    zm_perks::register_perk_basic_info(#"specialty_etherealrazor", # "perk_ethereal_razor", 4000, # "zombie/perk_ethereal_razor", getweapon("zombie_perk_bottle_ethereal_razor"), getweapon("zombie_perk_totem_ethereal_razor"), # "zmperksetherealrazor");
   }
 
   zm_perks::register_perk_precache_func(#"specialty_etherealrazor", &function_ee114cab);
@@ -50,23 +49,23 @@ function_ee114cab() {
     return;
   }
 
-  level._effect[#"ethereal_razor_light"] = #"hash_1442db17b83460ad";
-  level.machine_assets[#"specialty_etherealrazor"] = spawnStruct();
-  level.machine_assets[#"specialty_etherealrazor"].weapon = getweapon("zombie_perk_bottle_ethereal_razor");
-  level.machine_assets[#"specialty_etherealrazor"].off_model = "p7_zm_vending_nuke";
-  level.machine_assets[#"specialty_etherealrazor"].on_model = "p7_zm_vending_nuke";
+  level._effect[# "ethereal_razor_light"] = # "hash_1442db17b83460ad";
+  level.machine_assets[# "specialty_etherealrazor"] = spawnStruct();
+  level.machine_assets[# "specialty_etherealrazor"].weapon = getweapon("zombie_perk_bottle_ethereal_razor");
+  level.machine_assets[# "specialty_etherealrazor"].off_model = "p7_zm_vending_nuke";
+  level.machine_assets[# "specialty_etherealrazor"].on_model = "p7_zm_vending_nuke";
 }
 
 function_f20b4260() {
-  clientfield::register("actor", "" + #"hash_29c26fb019da89f3", 13000, 1, "counter");
-  clientfield::register("allplayers", "" + #"hash_450d9f824068dcc2", 13000, 1, "counter");
-  clientfield::register("allplayers", "" + #"hash_4de2dbcd551f1fb7", 13000, 1, "counter");
+  clientfield::register("actor", "" + # "hash_29c26fb019da89f3", 13000, 1, "counter");
+  clientfield::register("allplayers", "" + # "hash_450d9f824068dcc2", 13000, 1, "counter");
+  clientfield::register("allplayers", "" + # "hash_4de2dbcd551f1fb7", 13000, 1, "counter");
 }
 
 function_f3043027(state) {}
 
 function_c38b0ce4() {
-  self endon(#"disconnect", #"specialty_etherealrazor" + "_take");
+  self endon(#"disconnect", # "specialty_etherealrazor" + "_take");
   self thread function_f86e4c3d();
   self function_5b0f2cc5();
   callback::on_ai_damage(&on_ai_damage);
@@ -81,21 +80,21 @@ function_6cedb75c(b_pause, str_perk, str_result, n_slot) {
 }
 
 function_f86e4c3d() {
-  self endon(#"disconnect", #"specialty_etherealrazor" + "_take");
+  self endon(#"disconnect", # "specialty_etherealrazor" + "_take");
 
   while(true) {
-    waitresult = self waittill(#"weapon_melee", #"weapon_melee_charge");
+    waitresult = self waittill(#"weapon_melee", # "weapon_melee_charge");
     w_melee = waitresult.weapon;
     var_c34665fc = waitresult._notify;
 
     if(self hasperk(#"specialty_etherealrazor") && function_866130c7(w_melee)) {
       if(w_melee === level.w_bowie_knife) {
-        self clientfield::increment("" + #"hash_4de2dbcd551f1fb7");
+        self clientfield::increment("" + # "hash_4de2dbcd551f1fb7");
       } else {
-        self clientfield::increment("" + #"hash_450d9f824068dcc2");
+        self clientfield::increment("" + # "hash_450d9f824068dcc2");
       }
 
-      if(var_c34665fc === #"weapon_melee_charge") {
+      if(var_c34665fc === # "weapon_melee_charge") {
         self function_1f7c6bb9(w_melee, 20, 40, 1);
         continue;
       }
@@ -154,7 +153,7 @@ function_1f7c6bb9(w_melee, var_2b9d3880, var_48e9b3cc, is_lunge = 0) {
     }
 
     if(is_lunge) {
-      if(self hasperk(#"specialty_mod_etherealrazor") && (e_target.zm_ai_category === #"basic" || e_target.zm_ai_category === #"popcorn" || e_target.zm_ai_category === #"enhanced")) {
+      if(self hasperk(#"specialty_mod_etherealrazor") && (e_target.zm_ai_category === # "basic" || e_target.zm_ai_category === # "popcorn" || e_target.zm_ai_category === # "enhanced")) {
         n_total_damage = e_target.health + 666;
       } else if(self hasperk(#"specialty_mod_etherealrazor")) {
         n_total_damage += 4000;
@@ -168,7 +167,7 @@ function_1f7c6bb9(w_melee, var_2b9d3880, var_48e9b3cc, is_lunge = 0) {
     e_target playSound(#"hash_444f738bd1d3fd8");
 
     if(isactor(e_target)) {
-      e_target clientfield::increment("" + #"hash_29c26fb019da89f3");
+      e_target clientfield::increment("" + # "hash_29c26fb019da89f3");
     }
 
     var_5f96a3db++;

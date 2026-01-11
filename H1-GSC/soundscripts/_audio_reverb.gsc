@@ -35,8 +35,7 @@ rvb_apply_reverb(var_0, var_1) {
 
     if(isDefined(var_1)) {
       var_2 = var_1;
-    }
-    else {
+    } else {
       var_2 = var_0.fadetime;
     }
 
@@ -99,8 +98,7 @@ rvbx_store_current_reverb_track(var_0, var_1) {
 
     if(var_0 == "none" && !isDefined(level.ambient_reverb["none"])) {
       level.ambient_reverb["none"] = 1;
-    }
-    else if(!isDefined(level.ambient_reverb[var_0])) {
+    } else if(!isDefined(level.ambient_reverb[var_0])) {
       level.ambient_reverb[var_0] = [];
       level.ambient_reverb[var_0]["priority"] = "snd_enveffectsprio_level";
       level.ambient_reverb[var_0]["roomtype"] = var_1.roomtype;
@@ -192,11 +190,9 @@ rvbx_get_reverb_preset(var_0) {
 
   if(isDefined(level._audio.level_audio_reverb_function)) {
     var_2 = [[level._audio.level_audio_reverb_function]](var_0, var_2);
-  }
-  else if(isDefined(level._audio.reverb.preset_cache[var_0])) {
+  } else if(isDefined(level._audio.reverb.preset_cache[var_0])) {
     var_2 = level._audio.reverb.preset_cache[var_0];
-  }
-  else if(level._audio.reverb.use_string_table_presets) {
+  } else if(level._audio.reverb.use_string_table_presets) {
     var_2 = rvbx_get_preset_from_string_table(var_0, 1);
 
     if(!isDefined(var_2)) {

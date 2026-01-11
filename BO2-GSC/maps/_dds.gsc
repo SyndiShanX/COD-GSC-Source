@@ -284,8 +284,7 @@ dds_main_process() {
 
     if(!dds_process_active_events()) {
       wait(level.dds.heartbeat);
-    }
-    else {
+    } else {
       wait 0.1;
     }
   }
@@ -316,8 +315,7 @@ dds_main_process_axis() {
 
     if(dds_process_active_events_axis()) {
       wait(level.dds.heartbeat);
-    }
-    else {
+    } else {
       wait 0.1;
     }
   }
@@ -423,8 +421,7 @@ dds_process_active_events() {
         if(dds_event_activate(level.dds.active_events[category.name][j], category.get_talker_func, category.speaker_distance, category.rspns_cat_name, category.should_squelch)) {
           if(!category.timeout_reset) {
             category.timeout = category.timeout_reset;
-          }
-          else {
+          } else {
             if(gettime() - category.last_time < category.last_timeout * 1.5 * 1000) {
               category.backoff_count++;
 
@@ -501,8 +498,7 @@ dds_process_active_events_axis() {
         if(dds_event_activate(level.dds.active_events_axis[category.name][j], category.get_talker_func, category.speaker_distance, category.rspns_cat_name, 0)) {
           if(!category.timeout_reset) {
             category.timeout = category.timeout_reset;
-          }
-          else {
+          } else {
             if(gettime() - category.last_time < category.last_timeout * 1.5 * 1000) {
               category.backoff_count++;
 
@@ -578,8 +574,7 @@ dds_event_activate(event, get_talker_func, distance, rspns_cat_name, should_sque
   if(isDefined(event.category_response_name)) {
     if(event.isalliesline) {
       wait(level.dds.response_wait);
-    }
-    else {
+    } else {
       wait(level.dds.response_wait_axis);
     }
   }
@@ -688,11 +683,9 @@ remove_all_actors_with_same_characterid(ai_array, talker_characterid) {
   while(i < ai_array.size) {
     if(!isDefined(ai_array[i].dds_characterid)) {
       arrayremovevalue(ai_array, ai_array[i]);
-    }
-    else if(ai_array[i].dds_characterid == talker_characterid) {
+    } else if(ai_array[i].dds_characterid == talker_characterid) {
       arrayremovevalue(ai_array, ai_array[i]);
-    }
-    else {
+    } else {
       i++;
     }
   }
@@ -936,17 +929,13 @@ dds_threat_notify(isalliesline) {
 
   if(distance < 200) {
     self dds_notify("thrt_dist10", isalliesline);
-  }
-  else if(distance < 500) {
+  } else if(distance < 500) {
     self dds_notify("thrt_dist20", isalliesline);
-  }
-  else if(distance < 1000) {
+  } else if(distance < 1000) {
     self dds_notify("thrt_dist30", isalliesline);
-  }
-  else if(randomint(100) > 50) {
+  } else if(randomint(100) > 50) {
     self dds_notify("thrt_open", isalliesline);
-  }
-  else {
+  } else {
     oclock = dds_getclock_position(aipos);
     self dds_notify("thrt_clock" + oclock, isalliesline);
   }
@@ -1144,8 +1133,7 @@ update_actor_damage(eattacker, damage_mod) {
 
     if(self.team == eattacker.team) {
       self notify("dds_friendly_fire");
-    }
-    else if(self.team == "neutral") {
+    } else if(self.team == "neutral") {
       self dds_notify("civ_fire", eattacker.team == "allies");
     }
   }
@@ -1171,8 +1159,7 @@ dds_notify_mod(isalliesline, category_name) {
   if(isDefined(self.dds_dmg_attacker) && isDefined(self.team)) {
     if(isDefined(self.dds_dmg_attacker.team) && (self.dds_dmg_attacker.team == self.team || self.team == "neutral")) {
       return;
-    }
-    else if(isDefined(self.dds_dmg_attacker.vteam) && self.dds_dmg_attacker.vteam == self.team) {
+    } else if(isDefined(self.dds_dmg_attacker.vteam) && self.dds_dmg_attacker.vteam == self.team) {
       return;
     }
   }
@@ -1716,8 +1703,7 @@ debug_sphere_draw_type(event_type, category_name, event, speaker) {
 debug_draw_info() {
   if(isDefined(self.ent_number)) {
     ent_print_text = "ent triggered: " + self.ent_number;
-  }
-  else {
+  } else {
     ent_print_text = "ent triggered: unknown";
   }
 

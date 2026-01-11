@@ -17,8 +17,7 @@ func_128E9(var_00, var_01) {
 func_DD18() {
   if(level.teambased) {
     return level.func_9264[self.team] >= 4;
-  }
-  else if(isDefined(self.func_9264)) {
+  } else if(isDefined(self.func_9264)) {
     return self.func_9264 >= 2;
   }
 
@@ -54,15 +53,13 @@ func_F745() {
 
   if(level.teambased) {
     scripts\mp\utility\game::leaderdialog("hvt_gone", var_00);
-  }
-  else {
+  } else {
     scripts\mp\utility\game::leaderdialogonplayer("hvt_gone");
   }
 
   if(level.teambased) {
     level func_4FBA(var_00);
-  }
-  else {
+  } else {
     func_4FBA();
   }
 }
@@ -77,8 +74,7 @@ func_93F0() {
   } else {
     if(!isDefined(self.func_9264)) {
       self.func_9264 = 1;
-    }
-    else {
+    } else {
       self.func_9264++;
     }
 
@@ -119,8 +115,7 @@ func_13AA6(var_00) {
 
   if(level.teambased) {
     level func_4FBA(var_00);
-  }
-  else if(isDefined(self) && var_01 != "disconnect") {
+  } else if(isDefined(self) && var_01 != "disconnect") {
     func_4FBA();
   }
 }

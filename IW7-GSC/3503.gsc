@@ -27,8 +27,7 @@ func_12906(var_00, var_01) {
 
   if(!isDefined(var_03) || !var_03) {
     return 0;
-  }
-  else {
+  } else {
     return 1;
   }
 }

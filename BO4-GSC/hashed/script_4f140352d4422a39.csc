@@ -171,7 +171,7 @@ init(targetname, displayname = # "", var_717ae355 = # "", var_19c57490, towerind
     level.var_7acdf658 = (isDefined(level.var_7acdf658) ? level.var_7acdf658 : 0) + 1;
     level.var_29a44241 = (isDefined(level.var_29a44241) ? level.var_29a44241 : "<dev string:x30>") + targetname + "<dev string:x31>";
 
-      return;
+    return;
   }
   var_5776c240 = createuimodel(var_7609462b, floorIndex);
   setuimodelvalue(createuimodel(var_5776c240, "floorIndex"), floorIndex);

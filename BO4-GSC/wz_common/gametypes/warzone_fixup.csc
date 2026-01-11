@@ -4,7 +4,6 @@
 *************************************************/
 
 #include scripts\mp_common\item_world_fixup;
-
 #namespace warzone_fixup;
 
 autoexec __init__() {
@@ -49,7 +48,7 @@ private function_9b8d4d02(prematch = 0) {
   var_3a1737b4 = getscriptbundles(#"itemspawnentry");
 
   foreach(var_1461de43, var_28f8f6a9 in var_3a1737b4) {
-    if(var_28f8f6a9.itemtype == #"quest") {
+    if(var_28f8f6a9.itemtype == # "quest") {
       if(prematch) {
         item_world_fixup::function_96ff7b88(var_1461de43);
         continue;

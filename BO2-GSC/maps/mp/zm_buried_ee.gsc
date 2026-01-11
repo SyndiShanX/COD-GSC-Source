@@ -184,8 +184,7 @@ devgui_support_ee() {
 
     if(str_notify == "ghost_piano_warp_to_mansion_piano") {
       get_players()[0] warp_to_struct("ee_warp_mansion_piano", "targetname");
-    }
-    else if(str_notify == "ghost_piano_warp_to_bar") {
+    } else if(str_notify == "ghost_piano_warp_to_bar") {
       get_players()[0] warp_to_struct("ee_warp_bar", "targetname");
     }
   }

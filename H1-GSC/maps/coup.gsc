@@ -612,8 +612,7 @@ h1_drive_roadrumble(var_0, var_1) {
 
     if(var_9 < var_2) {
       var_8 = 1;
-    }
-    else {
+    } else {
       var_6 = var_6 + var_5;
     }
 
@@ -1984,8 +1983,7 @@ passenger_event() {
 
       if(isDefined(var_1)) {
         level maps\_utility::delaythread(var_1, ::animthread, var_0);
-      }
-      else {
+      } else {
         thread animthread(var_0);
       }
     }
@@ -1996,8 +1994,7 @@ passenger_event() {
 
       if(isDefined(var_3)) {
         level maps\_utility::delaythread(var_3, ::dialogthread, var_2);
-      }
-      else {
+      } else {
         thread dialogthread(var_2);
       }
     }
@@ -2235,8 +2232,7 @@ initcredits() {
 
     if(var_3) {
       var_3 = 0;
-    }
-    else {
+    } else {
       var_3 = 1;
     }
 
@@ -2246,8 +2242,7 @@ initcredits() {
 
       if(var_0) {
         var_0 = 0;
-      }
-      else {
+      } else {
         var_0 = 1;
       }
 
@@ -2365,8 +2360,7 @@ displaypage(var_0) {
 
       if(var_0.alignment == "left") {
         var_1[var_2].x = var_0.x + var_2 * 46;
-      }
-      else if(var_0.alignment == "right") {
+      } else if(var_0.alignment == "right") {
         var_1[var_2].x = var_0.x + var_2 * 46 - 138;
       }
 
@@ -2660,8 +2654,7 @@ celebrate() {
   for(;;) {
     if(self.crowdstatus == "fire") {
       var_3 = var_0[var_2]["fire"][randomint(var_0[var_2]["fire"].size)];
-    }
-    else {
+    } else {
       var_3 = var_0[var_2][self.crowdstatus];
     }
 
@@ -2722,8 +2715,7 @@ addpassengerevent(var_0, var_1, var_2, var_3) {
 removeweapon() {
   if(isai(self)) {
     maps\_utility::gun_remove();
-  }
-  else {
+  } else {
     var_0 = self getattachsize();
 
     for(var_1 = 0; var_1 < var_0; var_1++) {
@@ -2892,6 +2884,6 @@ animvarietyforalleyrunners() {
   wait 20;
 
   foreach(var_2 in var_0) {
-  var_2 maps\_utility::delaythread(randomfloat(0.5), maps\_utility::clear_generic_run_anim);
+    var_2 maps\_utility::delaythread(randomfloat(0.5), maps\_utility::clear_generic_run_anim);
   }
 }

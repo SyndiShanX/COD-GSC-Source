@@ -36,7 +36,7 @@ hide_wall_pieces() {
   level.wall_array_damaged = getEntArray("mini_boss_wall_damaged", "targetname");
 
   foreach(var_1 in level.wall_array_damaged) {
-  var_1 hide();
+    var_1 hide();
   }
 
   var_3 = getent("miniboss_door_clip", "targetname");
@@ -54,7 +54,7 @@ hide_wall_pieces() {
   var_7 = getEntArray("cross_wall_swap_in", "targetname");
 
   foreach(var_9 in var_7) {
-  var_9 hide();
+    var_9 hide();
   }
 }
 
@@ -241,7 +241,7 @@ miniboss_wall_swap() {
   }
 
   foreach(var_3 in level.wall_array_damaged) {
-  var_3 show();
+    var_3 show();
   }
 
   foreach(var_3 in var_1) {
@@ -269,11 +269,9 @@ miniboss_wall_knockback(var_0) {
   foreach(var_6 in level.players) {
     if(distance2dsquared(var_6.origin, var_3) < var_2) {
       var_7 = var_3;
-    }
-    else if(distance2dsquared(var_6.origin, var_4) < var_2) {
+    } else if(distance2dsquared(var_6.origin, var_4) < var_2) {
       var_7 = var_4;
-    }
-    else {
+    } else {
       continue;
     }
 
@@ -506,7 +504,7 @@ play_tentacle_music() {
 
 outlineprep() {
   foreach(var_1 in level.players) {
-  var_1 thread miniboss_ountline_logic(self);
+    var_1 thread miniboss_ountline_logic(self);
   }
 }
 
@@ -645,7 +643,7 @@ lift_door_by_index(var_0) {
 
   if(isDefined(var_1)) {
     foreach(var_4, var_3 in var_1) {
-    var_3 thread lift_door();
+      var_3 thread lift_door();
     }
   }
 }
@@ -681,7 +679,7 @@ setup_gas_encounter() {
   level notify("all_players_using_gas");
 
   foreach(var_3 in level.players) {
-  var_3 forceusehintoff(&"MP_ALIEN_BEACON_GAS_HINT");
+    var_3 forceusehintoff(&"MP_ALIEN_BEACON_GAS_HINT");
   }
 
   thread gas_encounter_start_sfx();
@@ -697,7 +695,7 @@ players_use_gas_monitor(var_0) {
   level endon("all_players_using_gas");
 
   foreach(var_2 in level.players) {
-  var_2 thread watch_for_use_gas_trigger(var_0);
+    var_2 thread watch_for_use_gas_trigger(var_0);
   }
 
   for(;;) {
@@ -731,8 +729,7 @@ watch_for_use_gas_trigger(var_0) {
   for(;;) {
     if(self ismeleeing() || self isthrowinggrenade() || !self isonground() || self getstance() == "prone") {
       self forceusehintoff(var_1);
-    }
-    else if(player_looking_at(var_0.origin, 0.6)) {
+    } else if(player_looking_at(var_0.origin, 0.6)) {
       if(distancesquared(self getEye(), var_0.origin) < var_2) {
         self forceusehinton(var_1);
 
@@ -861,7 +858,7 @@ lab_gas_survival_encounter() {
   }
 
   foreach(var_5 in level.gas_ents) {
-  var_5 delete();
+    var_5 delete();
   }
 
   foreach(var_5 in level.gas_zones) {
@@ -879,7 +876,7 @@ lab_gas_survival_encounter() {
   level.encounter_name = undefined;
 
   foreach(var_13 in var_11) {
-  var_13 delete();
+    var_13 delete();
   }
 }
 
@@ -895,7 +892,7 @@ remove_back_wall(var_0) {
   var_5 = getEntArray("cross_wall_swap_in", "targetname");
 
   foreach(var_3 in var_5) {
-  var_3 show();
+    var_3 show();
   }
 }
 
@@ -927,7 +924,7 @@ cross_gas_anims() {
   var_2 = getEntArray("cross_chair_piece", "targetname");
 
   foreach(var_4 in var_2) {
-  var_4 delete();
+    var_4 delete();
   }
 }
 
@@ -955,8 +952,7 @@ prevent_friendly_fire() {
 
     if(self.origin[2] > 1350) {
       level notify("dlc_vo_notify", "warn_pipes", "warn_pipes_upper");
-    }
-    else {
+    } else {
       level notify("dlc_vo_notify", "warn_pipes", "warn_pipes_lower");
     }
 
@@ -980,11 +976,9 @@ gas_point_health_monitor() {
 
       if(self.progresshealth > var_0 * 0.75) {} else if(self.progresshealth > var_0 * 0.5) {
         maps\mp\alien\_outline_proto::enable_outline_for_players(self, level.players, 5, 1, "high");
-      }
-      else if(self.progresshealth > var_0 * 0.25) {
+      } else if(self.progresshealth > var_0 * 0.25) {
         maps\mp\alien\_outline_proto::enable_outline_for_players(self, level.players, 4, 1, "high");
-      }
-      else {
+      } else {
         maps\mp\alien\_outline_proto::enable_outline_for_players(self, level.players, 1, 1, "high");
 
         if(self.alarmed == 0) {
@@ -1178,7 +1172,7 @@ gas_intro_sounds_and_shakes(var_0, var_1) {
   earthquake(var_0, var_1, var_2, 1800);
 
   foreach(var_5 in level.players) {
-  playrumbleonposition("grenade_rumble", var_5.origin);
+    playrumbleonposition("grenade_rumble", var_5.origin);
   }
 
   play_sound_on_player("scn_beacon_cross_gas_quake");
@@ -1193,7 +1187,7 @@ buildup_tentacle_sounds_and_shakes(var_0, var_1) {
   playsoundatpos((-286, 6269, 1519), "scn_cross_smoke_hit1");
 
   foreach(var_5 in level.players) {
-  playrumbleonposition("grenade_rumble", var_5.origin);
+    playrumbleonposition("grenade_rumble", var_5.origin);
   }
 
   wait(var_1);
@@ -1207,7 +1201,7 @@ buildup_tentacle_sounds_and_shakes2(var_0, var_1) {
   playsoundatpos((-286, 6269, 1519), "scn_cross_smoke_hit2");
 
   foreach(var_5 in level.players) {
-  playrumbleonposition("grenade_rumble", var_5.origin);
+    playrumbleonposition("grenade_rumble", var_5.origin);
   }
 
   wait(var_1);
@@ -1223,7 +1217,7 @@ gas_finale_sfx_and_shakes() {
   playsoundatpos((-286, 6269, 1519), "scn_cross_smoke_hit3");
 
   foreach(var_3 in level.players) {
-  playrumbleonposition("artillery_rumble", var_3.origin);
+    playrumbleonposition("artillery_rumble", var_3.origin);
   }
 
   wait 2.5;
@@ -1232,7 +1226,7 @@ gas_finale_sfx_and_shakes() {
   thread create_smashedwall2_storm_sfx();
 
   foreach(var_3 in level.players) {
-  playrumbleonposition("artillery_rumble", var_3.origin);
+    playrumbleonposition("artillery_rumble", var_3.origin);
   }
 
   wait 2.5;
@@ -1688,7 +1682,7 @@ clean_up(var_0, var_1) {
   wait 0.05;
 
   foreach(var_3 in var_1) {
-  var_3 delete();
+    var_3 delete();
   }
 }
 
@@ -1800,8 +1794,7 @@ nag_bink_toggle() {
   while(!common_scripts\utility::flag("everyone_in_cargo_container")) {
     if(common_scripts\utility::flag("is_crane_nags") || isDefined(level.no_more_binks_archer)) {
       var_0 makeunusable();
-    }
-    else {
+    } else {
       var_0 makeusable();
       var_0 sethintstring(&"MP_ALIEN_BEACON_BINK_BUTTON");
     }
@@ -1859,8 +1852,7 @@ is_ps3_online_splitscreen() {
 
   if(var_0 && level.ps3 && level.onlinegame) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

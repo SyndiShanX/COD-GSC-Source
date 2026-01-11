@@ -401,7 +401,7 @@ moving_water() {
   var_0 = getEntArray("moving_water_flags", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  thread moving_water_flag(var_2);
+    thread moving_water_flag(var_2);
   }
 }
 
@@ -448,15 +448,13 @@ direction_change_smoothing() {
 
     if(var_0[0] > 0.15) {
       var_2 = "positive";
-    }
-    else {
+    } else {
       var_2 = "neutral";
     }
 
     if(var_0[1] > 0.15) {
       var_3 = "positive";
-    }
-    else {
+    } else {
       var_3 = "neutral";
     }
 
@@ -470,15 +468,13 @@ direction_change_smoothing() {
 
     if(var_1[0] > 0.15) {
       var_4 = "positive";
-    }
-    else {
+    } else {
       var_4 = "neutral";
     }
 
     if(var_1[1] > 0.15) {
       var_5 = "positive";
-    }
-    else {
+    } else {
       var_5 = "neutral";
     }
 
@@ -507,8 +503,7 @@ direction_change_smoothing() {
 
       if(var_13 != var_14) {
         var_6 = 1;
-      }
-      else {
+      } else {
         var_13 = var_12 + (var_7[0] * var_10, var_7[1] * var_10, var_7[2] * var_10);
         var_14 = level.player aiphysicstrace(var_12, var_13);
 
@@ -686,8 +681,7 @@ player_space_breathing() {
 
     if(!issplitscreen()) {
       thread player_space_breathe_sound();
-    }
-    else if(self == level.player) {
+    } else if(self == level.player) {
       thread player_space_breathe_sound();
     }
   }
@@ -705,14 +699,11 @@ player_space_breathe_sound() {
   for(;;) {
     if(level.space_intense_breathing == 1) {
       wait 0.75;
-    }
-    else if(level.space_intense_breathing == 2) {
+    } else if(level.space_intense_breathing == 2) {
       wait 0.01;
-    }
-    else if(level.space_intense_breathing == 3) {
+    } else if(level.space_intense_breathing == 3) {
       wait 0.25;
-    }
-    else {
+    } else {
       wait 2.75;
     }
 
@@ -720,11 +711,9 @@ player_space_breathe_sound() {
       if(level.pressurized == 0) {
         if(level.space_intense_breathing == 1 || level.space_intense_breathing == 2) {
           self playlocalsound("space_breathe_player_fast_inhale", "scuba_breathe_sound_done");
-        }
-        else if(level.space_intense_breathing == 3) {
+        } else if(level.space_intense_breathing == 3) {
           self playlocalsound("space_breathe_player_inhale_slomo", "scuba_breathe_sound_done");
-        }
-        else {
+        } else {
           self playlocalsound("space_breathe_player_inhale", "scuba_breathe_sound_done");
         }
 
@@ -734,11 +723,9 @@ player_space_breathe_sound() {
       if(level.pressurized == 0) {
         if(level.space_intense_breathing == 1 || level.space_intense_breathing == 2) {
           self playlocalsound("space_breathe_player_fast_exhale", "scuba_breathe_sound_done");
-        }
-        else if(level.space_intense_breathing == 3) {
+        } else if(level.space_intense_breathing == 3) {
           self playlocalsound("space_breathe_player_exhale_slomo", "scuba_breathe_sound_done");
-        }
-        else {
+        } else {
           self playlocalsound("space_breathe_player_exhale", "scuba_breathe_sound_done");
         }
 
@@ -819,8 +806,7 @@ thruster_audio_logic() {
 
     if("z_up" == var_1 || "z_down" == var_1) {
       level.bob_axis = "z";
-    }
-    else {
+    } else {
       level.bob_axis = var_1;
     }
 
@@ -996,20 +982,15 @@ debug_thruster_text(var_0, var_1) {
   if(isDefined(var_0)) {
     if(0 == var_0) {
       var_2[var_2.size] = "TOP";
-    }
-    else if(1 == var_0) {
+    } else if(1 == var_0) {
       var_2[var_2.size] = "BOTTOM";
-    }
-    else if(2 == var_0) {
+    } else if(2 == var_0) {
       var_2[var_2.size] = "FRONT";
-    }
-    else if(3 == var_0) {
+    } else if(3 == var_0) {
       var_2[var_2.size] = "LEFT";
-    }
-    else if(4 == var_0) {
+    } else if(4 == var_0) {
       var_2[var_2.size] = "RIGHT";
-    }
-    else if(5 == var_0) {
+    } else if(5 == var_0) {
       var_2[var_2.size] = "BACK";
     }
   } else
@@ -1018,14 +999,11 @@ debug_thruster_text(var_0, var_1) {
   if(isDefined(var_1)) {
     if(0 == var_1) {
       var_2[var_2.size] = "OFF";
-    }
-    else if(1 == var_1) {
+    } else if(1 == var_1) {
       var_2[var_2.size] = "LOW";
-    }
-    else if(2 == var_1) {
+    } else if(2 == var_1) {
       var_2[var_2.size] = "MEDIUM";
-    }
-    else {
+    } else {
       var_2[var_2.size] = "HIGH";
     }
   } else

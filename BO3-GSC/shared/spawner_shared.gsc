@@ -859,9 +859,7 @@ function crawl_target_and_init_flags(ent, get_func) {
         }
       }
       if(isDefined(ent.target)) {
-        new_targets = [
-          [get_func]
-        ](ent.target);
+        new_targets = [[get_func]](ent.target);
         array::add(targets, new_targets);
       }
     }
@@ -1527,9 +1525,7 @@ function spawn(b_force = 0, str_targetname, v_origin, v_angles, bignorespawningl
     } else {
       override_aitype = undefined;
       if(isDefined(level.override_spawned_aitype_func)) {
-        override_aitype = [
-          [level.override_spawned_aitype_func]
-        ](self);
+        override_aitype = [[level.override_spawned_aitype_func]](self);
       }
       if(isDefined(override_aitype)) {
         e_spawned = self spawnfromspawner(str_targetname, force_spawn, makeroom, infinitespawn, override_aitype);

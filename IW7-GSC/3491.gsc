@@ -26,8 +26,7 @@ func_128E8(var_00, var_01) {
 
   if(isDefined(self.isjuggernautlevelcustom) && self.isjuggernautlevelcustom == 1) {
     return 0;
-  }
-  else if(!isDefined(level.func_1A66) || !isDefined(var_02) || !isDefined(var_03)) {
+  } else if(!isDefined(level.func_1A66) || !isDefined(var_02) || !isDefined(var_03)) {
     self iprintlnbold(&"KILLSTREAKS_UNAVAILABLE_IN_LEVEL");
     return 0;
   }
@@ -165,11 +164,9 @@ func_7DFC(var_00) {
 
   if(isDefined(var_01)) {
     var_02 = var_1.origin[2];
-  }
-  else if(isDefined(level.airstrikeheightscale)) {
+  } else if(isDefined(level.airstrikeheightscale)) {
     var_02 = 850 * level.airstrikeheightscale;
-  }
-  else {
+  } else {
     var_02 = 850;
   }
 
@@ -244,8 +241,7 @@ helipathmemory(var_00, var_01) {
 
   if(isDefined(var_2.angles)) {
     var_03 = var_2.angles;
-  }
-  else {
+  } else {
     var_03 = (0, 0, 0);
   }
 
@@ -254,8 +250,7 @@ helipathmemory(var_00, var_01) {
 
   if(isDefined(var_2.neighbors[0])) {
     var_05 = var_2.neighbors[0];
-  }
-  else {
+  } else {
     var_05 = func_7E34(self.origin);
   }
 
@@ -699,11 +694,9 @@ func_8DB4(var_00) {
 
     if(isDefined(self.func_A667) && isDefined(self.func_A667.func_9E20)) {
       self.func_A667 radiusdamage(self.owner.origin, 200, 2600, 2600, self.func_A667);
-    }
-    else if(isDefined(var_02) && var_10 != 2) {
+    } else if(isDefined(var_02) && var_10 != 2) {
       radiusdamage(self.owner.origin, 200, 2600, 2600, var_02);
-    }
-    else if(var_10 == 2 && isDefined(var_02) && scripts\mp\utility\game::attackerishittingteam(var_02, self.owner)) {
+    } else if(var_10 == 2 && isDefined(var_02) && scripts\mp\utility\game::attackerishittingteam(var_02, self.owner)) {
       radiusdamage(self.owner.origin, 200, 2600, 2600, var_02);
       radiusdamage(self.owner.origin, 200, 2600, 2600);
     } else

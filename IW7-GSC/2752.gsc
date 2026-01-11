@@ -121,22 +121,19 @@ showsplashinternal(var_00, var_01, var_02, var_03, var_04) {
 
   if(isDefined(var_01)) {
     self setclientomnvar("ui_player_splash_param_" + self.nextsplashlistindex, var_01);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_player_splash_param_" + self.nextsplashlistindex, -1);
   }
 
   if(isDefined(var_03)) {
     self setclientomnvar("ui_player_splash_cardClientId_" + self.nextsplashlistindex, var_03);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_player_splash_cardClientId_" + self.nextsplashlistindex, -1);
   }
 
   if(isDefined(var_04)) {
     self setclientomnvar("ui_player_splash_use_alt_" + self.nextsplashlistindex, var_04);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_player_splash_use_alt_" + self.nextsplashlistindex, 0);
   }
 
@@ -144,8 +141,7 @@ showsplashinternal(var_00, var_01, var_02, var_03, var_04) {
 
   if(!isDefined(self.recentsplashcount)) {
     self.recentsplashcount = 1;
-  }
-  else {
+  } else {
     self.recentsplashcount++;
   }
 
@@ -261,8 +257,7 @@ teamoutcomenotify(var_00, var_01, var_02) {
   } else if(var_00 == "overtime") {
     if(scripts\mp\utility\game::iswinbytworulegametype() && game["teamScores"]["allies"] != game["teamScores"]["axis"]) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["match_point"]);
-    }
-    else {
+    } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["overtime"]);
     }
 
@@ -273,8 +268,7 @@ teamoutcomenotify(var_00, var_01, var_02) {
   } else if(var_00 == "tie") {
     if(var_01 && !scripts\mp\utility\game::waslastround()) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["round_draw"]);
-    }
-    else {
+    } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["draw"]);
     }
 
@@ -284,8 +278,7 @@ teamoutcomenotify(var_00, var_01, var_02) {
   else if(isDefined(self.pers["team"]) && var_00 == var_03) {
     if(var_01 && !scripts\mp\utility\game::waslastround()) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["round_win"]);
-    }
-    else {
+    } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["victory"]);
     }
   } else if(var_01 && !scripts\mp\utility\game::waslastround())
@@ -302,15 +295,13 @@ teamoutcomenotify(var_00, var_01, var_02) {
     if(level.gametype == "ctf") {
       if(isDefined(self.pers["team"]) && var_00 == var_03) {
         var_02 = game["end_reason"]["time_to_beat_ctf_win"];
-      }
-      else if(isDefined(self.pers["team"]) && var_00 == level.otherteam[self.pers["team"]]) {
+      } else if(isDefined(self.pers["team"]) && var_00 == level.otherteam[self.pers["team"]]) {
         var_02 = game["end_reason"]["time_to_beat_ctf_loss"];
       }
     } else if(level.gametype == "ball") {
       if(isDefined(self.pers["team"]) && var_00 == var_03) {
         var_02 = game["end_reason"]["time_to_beat_uplink_win"];
-      }
-      else if(isDefined(self.pers["team"]) && var_00 == level.otherteam[self.pers["team"]]) {
+      } else if(isDefined(self.pers["team"]) && var_00 == level.otherteam[self.pers["team"]]) {
         var_02 = game["end_reason"]["time_to_beat_uplink_loss"];
       }
     }
@@ -341,8 +332,7 @@ func_C752(var_00, var_01) {
   if(isstring(var_00) && var_00 == "tie") {
     if(isDefined(var_03) && self == var_03 || isDefined(var_04) && self == var_04 || isDefined(var_05) && self == var_05) {
       self setclientomnvar("ui_round_end_title", game["round_end"]["tie"]);
-    }
-    else {
+    } else {
       self setclientomnvar("ui_round_end_title", game["round_end"]["defeat"]);
     }
   } else if(isDefined(var_03) && self == var_03 || isDefined(var_04) && self == var_04 || isDefined(var_05) && self == var_05)
@@ -413,8 +403,7 @@ showerrormessage(var_00, var_01) {
 
   if(isDefined(var_01)) {
     self setclientomnvar("ui_mp_error_message_param", var_01);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_mp_error_message_param", -1);
   }
 
@@ -430,7 +419,7 @@ showerrormessage(var_00, var_01) {
 
 showerrormessagetoallplayers(var_00, var_01) {
   foreach(var_03 in level.players) {
-  showerrormessage(var_00, var_01);
+    showerrormessage(var_00, var_01);
   }
 }
 

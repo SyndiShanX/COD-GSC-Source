@@ -69,8 +69,7 @@ say_dialog(str_vo_line, n_delay, b_fake_ent, b_cleanup) {
   if(isDefined(str_vox_file)) {
     if(str_vox_file[0] == "v" && str_vox_file[1] == "o" && str_vox_file[2] == "x") {
       self anim_generic(self, str_vo_line);
-    }
-    else {
+    } else {
       add_temp_dialog_line_internal("TEMP VO", str_vox_file, 0);
     }
   } else
@@ -142,8 +141,7 @@ say_dialog_health_lost(percentage_health_lost, e_target_ent, str_vo_line, delay_
   while(true) {
     if(!isDefined(e_target_ent)) {
       health_lost = 100;
-    }
-    else {
+    } else {
       health_lost = 100 - e_target_ent.health / e_target_ent.maxhealth * 100;
     }
 
@@ -178,8 +176,7 @@ say_dialog_func(func_pointer, str_vo_line, delay_after_func) {
 kill_all_pending_dialog(e_ent) {
   if(isDefined(e_ent)) {
     e_ent notify("kill_pending_dialog");
-  }
-  else {
+  } else {
     level notify("kill_pending_dialog");
   }
 }
@@ -270,8 +267,7 @@ _start_vo_nag_group(str_group, vo_repeat_delay, start_delay, randomize_order, re
 
         if(vo_indexes[0] != last_index) {
           array_randomized = 1;
-        }
-        else {
+        } else {
           num_tries++;
 
           if(num_tries >= 20) {

@@ -93,8 +93,7 @@ initreadystand() {
       if(isDefined(anim.coverexit[var_3]) && isDefined(anim.coverexit[var_3][var_1])) {
         if(animhasnotetrack(anim.coverexit[var_3][var_1], "code_move")) {
           var_4 = getnotetracktimes(anim.coverexit[var_3][var_1], "code_move")[0];
-        }
-        else {
+        } else {
           var_4 = 1;
         }
 

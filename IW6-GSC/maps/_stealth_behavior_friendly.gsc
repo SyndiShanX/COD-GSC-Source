@@ -24,8 +24,7 @@ friendly_state_spotted() {
 
   if(isDefined(self._stealth.behavior.oldgrenadeammo)) {
     self.grenadeammo = self._stealth.behavior.oldgrenadeammo;
-  }
-  else {
+  } else {
     self.grenadeammo = 3;
   }
 
@@ -72,7 +71,7 @@ friendly_init() {
 
 friendly_custom_state_behavior(var_0) {
   foreach(var_3, var_2 in var_0) {
-  maps\_stealth_shared_utilities::ai_create_behavior_function("state", var_3, var_2);
+    maps\_stealth_shared_utilities::ai_create_behavior_function("state", var_3, var_2);
   }
 
   var_4 = self._stealth.behavior.ai_functions["state"]["hidden"];

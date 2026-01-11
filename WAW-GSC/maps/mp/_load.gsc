@@ -19,8 +19,7 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   level.bCSVgened = bCSVgened;
   if(!isDefined(bScriptgened)) {
     bScriptgened = false;
-  }
-  else {
+  } else {
     bScriptgened = true;
   }
   level.bScriptgened = bScriptgened;
@@ -49,7 +48,7 @@ main(bScriptgened, bCSVgened, bsgenabled) {
   if(isDefined(level.script_gen_dump_preload)) {
     for(i = 0; i < level.script_gen_dump_preload.size; i++)
   }
-      script_gen_dump_addline(level.script_gen_dump_preload[i].string, level.script_gen_dump_preload[i].signature);
+  script_gen_dump_addline(level.script_gen_dump_preload[i].string, level.script_gen_dump_preload[i].signature);
   if(getDvar("scr_RequiredMapAspectratio") == "") {
     setDvar("scr_RequiredMapAspectratio", "1");
   }
@@ -173,8 +172,7 @@ exploder_load(trigger) {
   if(isDefined(trigger.script_chance) && randomfloat(1) > trigger.script_chance) {
     if(isDefined(trigger.script_delay)) {
       wait trigger.script_delay;
-    }
-    else {
+    } else {
       wait 4;
     }
     level thread exploder_load(trigger);
@@ -197,8 +195,7 @@ setupExploders() {
     if(isDefined(ents[i].script_exploder)) {
       if((ents[i].model == "fx") && ((!isDefined(ents[i].targetname)) || (ents[i].targetname != "exploderchunk"))) {
         ents[i] hide();
-      }
-      else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
+      } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploder")) {
         ents[i] hide();
         ents[i] notsolid();
       } else if((isDefined(ents[i].targetname)) && (ents[i].targetname == "exploderchunk")) {
@@ -265,8 +262,7 @@ setupExploders() {
     ent.v["type"] = "exploder";
     if(!isDefined(exploder.script_fxid)) {
       ent.v["fxid"] = "No FX";
-    }
-    else {
+    } else {
       ent.v["fxid"] = exploder.script_fxid;
     }
     ent.v["exploder"] = exploder.script_exploder;
@@ -284,8 +280,7 @@ setupExploders() {
     }
     if(isDefined(exploder.targetname) && isDefined(acceptableTargetnames[exploder.targetname])) {
       ent.v["exploder_type"] = exploder.targetname;
-    }
-    else {
+    } else {
       ent.v["exploder_type"] = "normal";
     }
     ent maps\mp\_createfx::post_entity_creation_function();
@@ -302,11 +297,10 @@ lanterns() {
 script_gen_dump_checksaved() {
   signatures = getarraykeys(level.script_gen_dump);
   for(i = 0; i < signatures.size; i++) {
-    if(!isDefined(level.script_gen_dump2[signatures[i]])) {
+    if(!isDefined(level.script_gen_dump2[signatures[i]])) {}
+    level.script_gen_dump[signatures[i]] = undefined;
+    level.script_gen_dump_reasons[level.script_gen_dump_reasons.size] = "Signature unmatched( removed feature ): " + signatures[i];
   }
-      level.script_gen_dump[signatures[i]] = undefined;
-      level.script_gen_dump_reasons[level.script_gen_dump_reasons.size] = "Signature unmatched( removed feature ): " + signatures[i];
-    }
 }
 
 script_gen_dump() {
@@ -358,8 +352,7 @@ script_gen_dump() {
     csvfilename = "zone_source/" + level.script + ".csv";
     if(level.bScriptgened) {
       file = openfile(filename, "write");
-    }
-    else {
+    } else {
       file = 0;
     }
     assertex(file != -1, "File not writeable( check it and and restart the map ): " + filename);
@@ -368,64 +361,68 @@ script_gen_dump() {
       for(i = 0; i < signatures.size; i++) {
         if(!issubstr(level.script_gen_dump[signatures[i]], "nowrite"))
       }
-          script_gen_dumpprintln(file, "\t" + level.script_gen_dump[signatures[i]]);
+      script_gen_dumpprintln(file, "\t" + level.script_gen_dump[signatures[i]]);
       for(i = 0; i < signatures.size; i++) {
         if(!issubstr(level.script_gen_dump[signatures[i]], "nowrite"))
       }
-          script_gen_dumpprintln(file, "\tlevel.script_gen_dump[ " + "\"" + signatures[i] + "\"" + " ] = " + "\"" + signatures[i] + "\"" + ";");
-        else {
-          script_gen_dumpprintln(file, "\tlevel.script_gen_dump[ " + "\"" + signatures[i] + "\"" + " ] = " + "\"nowrite\"" + ";"); script_gen_dumpprintln(file, ""); keys1 = undefined; keys2 = undefined;
-        }
+      script_gen_dumpprintln(file, "\tlevel.script_gen_dump[ " + "\"" + signatures[i] + "\"" + " ] = " + "\"" + signatures[i] + "\"" + ";");
+      else {
+        script_gen_dumpprintln(file, "\tlevel.script_gen_dump[ " + "\"" + signatures[i] + "\"" + " ] = " + "\"nowrite\"" + ";");
+        script_gen_dumpprintln(file, "");
+        keys1 = undefined;
+        keys2 = undefined;
+      }
       if(isDefined(level.sg_precacheanims)) {
         keys1 = getarraykeys(level.sg_precacheanims);
       }
       if(isDefined(keys1)) {
         for(i = 0; i < keys1.size; i++)
       }
-          script_gen_dumpprintln(file, "\tanim_precach_" + keys1[i] + "();"); script_gen_dumpprintln(file, "\tmaps\\\_load::main( 1, " + level.bCSVgened + ", 1 );"); script_gen_dumpprintln(file, "}"); script_gen_dumpprintln(file, "");
+      script_gen_dumpprintln(file, "\tanim_precach_" + keys1[i] + "();"); script_gen_dumpprintln(file, "\tmaps\\\_load::main( 1, " + level.bCSVgened + ", 1 );"); script_gen_dumpprintln(file, "}"); script_gen_dumpprintln(file, "");
       if(isDefined(level.sg_precacheanims)) {
         keys1 = getarraykeys(level.sg_precacheanims);
       }
       if(isDefined(keys1)) {
-        for(i = 0; i < keys1.size; i++) {
-      }
-          script_gen_dumpprintln(file, "#using_animtree( \"" + keys1[i] + "\" );");
+        for(i = 0; i < keys1.size; i++) {}
+        script_gen_dumpprintln(file, "#using_animtree( \"" + keys1[i] + "\" );");
 
-          script_gen_dumpprintln(file, "anim_precach_" + keys1[i] + "()");
-          script_gen_dumpprintln(file, "{");
-          script_gen_dumpprintln(file, "\tlevel.sg_animtree[ \"" + keys1[i] + "\" ] = #animtree;");
-          keys2 = getarraykeys(level.sg_precacheanims[keys1[i]]);
-          if(isDefined(keys2)) {
-            for(j = 0; j < keys2.size; j++) {
-          }
-              script_gen_dumpprintln(file, "\tlevel.sg_anim[ \"" + keys2[j] + "\" ] = %" + keys2[j] + ";");
-            }
-          script_gen_dumpprintln(file, "}");
-          script_gen_dumpprintln(file, "");
+        script_gen_dumpprintln(file, "anim_precach_" + keys1[i] + "()");
+        script_gen_dumpprintln(file, "{");
+        script_gen_dumpprintln(file, "\tlevel.sg_animtree[ \"" + keys1[i] + "\" ] = #animtree;");
+        keys2 = getarraykeys(level.sg_precacheanims[keys1[i]]);
+        if(isDefined(keys2)) {
+          for(j = 0; j < keys2.size; j++) {}
+          script_gen_dumpprintln(file, "\tlevel.sg_anim[ \"" + keys2[j] + "\" ] = %" + keys2[j] + ";");
         }
+        script_gen_dumpprintln(file, "}");
+        script_gen_dumpprintln(file, "");
+      }
       if(level.bScriptgened) {
         saved = closefile(file);
-      }
-      else {
+      } else {
         saved = 1;
       }
       if(level.bCSVgened) {
         csvfile = openfile(csvfilename, "write");
-      }
-      else {
-        csvfile = 0; assertex(csvfile != -1, "File not writeable( check it and and restart the map ): " + csvfilename); signatures = getarraykeys(level.script_gen_dump);
+      } else {
+        csvfile = 0;
+        assertex(csvfile != -1, "File not writeable( check it and and restart the map ): " + csvfilename);
+        signatures = getarraykeys(level.script_gen_dump);
       }
       for(i = 0; i < signatures.size; i++) {
         script_gen_csvdumpprintln(csvfile, signatures[i]);
       }
       if(level.bCSVgened) {
         csvfilesaved = closefile(csvfile);
-      }
-      else {
-        csvfilesaved = 1; assertex(csvfilesaved == 1, "csv not saved( see above message? ): " + csvfilename); assertex(saved == 1, "map not saved( see above message? ): " + filename); assertex(!level.bScriptgened, "SCRIPTGEN generated: follow instructions listed above this error in the console");
+      } else {
+        csvfilesaved = 1;
+        assertex(csvfilesaved == 1, "csv not saved( see above message? ): " + csvfilename);
+        assertex(saved == 1, "map not saved( see above message? ): " + filename);
+        assertex(!level.bScriptgened, "SCRIPTGEN generated: follow instructions listed above this error in the console");
       }
       if(level.bScriptgened) {
-        assertmsg("SCRIPTGEN updated: Rebuild fast file and run map again"); flag_set("scriptgen_done");
+        assertmsg("SCRIPTGEN updated: Rebuild fast file and run map again");
+        flag_set("scriptgen_done");
       }
     }
     script_gen_csvdumpprintln(file, signature) {
@@ -435,34 +432,32 @@ script_gen_dump() {
       extension = "";
       if(issubstr(signature, "ignore")) {
         prefix = "ignore";
+      } else {
+        if(issubstr(signature, "col_map_sp"))
       }
+      prefix = "col_map_sp";
       else {
-      if(issubstr(signature, "col_map_sp"))
+        if(issubstr(signature, "gfx_map"))
       }
-        prefix = "col_map_sp";
+      prefix = "gfx_map";
       else {
-      if(issubstr(signature, "gfx_map"))
+        if(issubstr(signature, "rawfile"))
       }
-        prefix = "gfx_map";
+      prefix = "rawfile";
       else {
-      if(issubstr(signature, "rawfile"))
+        if(issubstr(signature, "sound"))
       }
-        prefix = "rawfile";
+      prefix = "sound";
       else {
-      if(issubstr(signature, "sound"))
+        if(issubstr(signature, "xmodel"))
       }
-        prefix = "sound";
+      prefix = "xmodel";
       else {
-      if(issubstr(signature, "xmodel"))
+        if(issubstr(signature, "xanim"))
       }
-        prefix = "xmodel";
+      prefix = "xanim";
       else {
-      if(issubstr(signature, "xanim"))
-      }
-        prefix = "xanim";
-      else {
-      if(issubstr(signature, "item")) {
-      }
+        if(issubstr(signature, "item")) {}
         prefix = "item";
         writtenprefix = "weapon";
         path = "sp/";
@@ -510,22 +505,19 @@ script_gen_dump() {
       }
       if(!isDefined(writtenprefix)) {
         string = prefix + ", " + getsubstr(signature, prefix.size + 1, signature.size);
-      }
-      else {
+      } else {
         string = writtenprefix + ", " + path + getsubstr(signature, prefix.size + 1, signature.size) + extension;
       }
       if(file == -1 || !level.bCSVgened) {
         println(string);
-      }
-      else {
+      } else {
         fprintln(file, string);
       }
     }
     script_gen_dumpprintln(file, string) {
       if(file == -1 || !level.bScriptgened) {
         println(string);
-      }
-      else {
+      } else {
         fprintln(file, string);
       }
     }

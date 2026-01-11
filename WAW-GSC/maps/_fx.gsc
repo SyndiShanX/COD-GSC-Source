@@ -100,15 +100,13 @@ create_loopsound() {
     if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
       if(isDefined(self.looper)) {
         self.looper thread maps\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"], "death");
-      }
-      else {
+      } else {
         thread maps\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"], "stop_loop");
       }
     } else {
       if(isDefined(self.looper)) {
         self.looper thread maps\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"]);
-      }
-      else {
+      } else {
         thread maps\_utility::loop_fx_sound(self.v["soundalias"], self.v["origin"]);
       }
     }
@@ -138,8 +136,7 @@ loopfxthread() {
     }
     if(isDefined(self.fxStop)) {
       level waittill("stop fx" + self.fxStop);
-    }
-    else {
+    } else {
       return;
     }
     if(isDefined(self.looper)) {
@@ -147,8 +144,7 @@ loopfxthread() {
     }
     if(isDefined(self.fxStart)) {
       level waittill("start fx" + self.fxStart);
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -287,11 +283,10 @@ setup_fx() {
     return;
   }
   if(isDefined(self.model)) {
-    if(self.model == "toilet") {
+    if(self.model == "toilet") {}
+    self thread burnville_paratrooper_hack();
+    return;
   }
-      self thread burnville_paratrooper_hack();
-      return;
-    }
   org = undefined;
   if(isDefined(self.target)) {
     ent = getent(self.target, "targetname");
@@ -343,8 +338,7 @@ script_print_fx() {
   }
   if(isDefined(self.target)) {
     org = getent(self.target).origin;
-  }
-  else {
+  } else {
     org = "undefined";
   }
   if(self.script_fxcommand == "OneShotfx") {
@@ -364,8 +358,7 @@ script_playFX(id, pos, pos2) {
   }
   if(isDefined(pos2)) {
     playFX(id, pos, pos2);
-  }
-  else {
+  } else {
     playFX(id, pos);
   }
 }

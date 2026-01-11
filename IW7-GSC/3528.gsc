@@ -106,8 +106,7 @@ func_4419() {
 
   if(!level.teambased) {
     level waittill("radar_status_change_players");
-  }
-  else {
+  } else {
     while(var_0.size < 2) {
       level waittill("radar_status_change", var_01);
       var_0[var_0.size] = var_01;
@@ -130,8 +129,7 @@ func_12F41(var_00) {
 
   if(var_04) {
     level.radarmode[var_00] = "fast_radar";
-  }
-  else {
+  } else {
     level.radarmode[var_00] = "normal_radar";
   }
 
@@ -193,8 +191,7 @@ func_12F09(var_00) {
 
   if(isDefined(var_00)) {
     var_01 = disableusability(var_00);
-  }
-  else {
+  } else {
     var_01 = _meth_80A7(self);
   }
 
@@ -204,8 +201,7 @@ func_12F09(var_00) {
 
   if(var_01 > 0) {
     self setclientomnvar("ui_satcom_active", 1);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_satcom_active", 0);
   }
 }

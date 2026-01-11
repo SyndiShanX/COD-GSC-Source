@@ -84,8 +84,7 @@ setsuppressiontime(var_00, var_01) {
 
   if(isDefined(var_02)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -125,8 +124,7 @@ func_F68A(var_00, var_01, var_02) {
 
       if(var_03 != "force_cancel_placement") {
         thread watch_dpad();
-      }
-      else if(var_01) {
+      } else if(var_01) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
       }
 
@@ -341,8 +339,7 @@ func_126AF() {
 
         if(scripts\engine\utility::is_true(var_3.dismember_crawl)) {
           var_03 thread scripts\cp\utility::damage_over_time(var_03, self, 1, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
-        }
-        else {
+        } else {
           var_03 thread scripts\cp\utility::damage_over_time(var_03, self, 3, var_3.health + 10, "MOD_RIFLE_BULLET", "zmb_imsprojectile_mp", undefined, "electrified");
         }
 

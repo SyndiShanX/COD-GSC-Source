@@ -21,8 +21,7 @@ main() {
 vehicle_wait(startinvehicle) {
   if(!isDefined(startinvehicle)) {
     startinvehicle = false;
-  }
-  else if(startinvehicle) {
+  } else if(startinvehicle) {
     if(getdvar("player_vehicle_dismountable") == "off") {
       self makevehicleunusable();
     }
@@ -32,8 +31,7 @@ vehicle_wait(startinvehicle) {
   while(self.health > 0) {
     if(!(startinvehicle)) {
       self waittill("trigger");
-    }
-    else {
+    } else {
       startinvehicle = false;
       players = get_players();
       self useby(players[0]);
@@ -87,17 +85,13 @@ vehicle_giveHealth() {
   skill = getdifficulty();
   if(skill == ("easy")) {
     self.health = 3000;
-  }
-  else if(skill == ("medium")) {
+  } else if(skill == ("medium")) {
     self.health = 2500;
-  }
-  else if(skill == ("hard")) {
+  } else if(skill == ("hard")) {
     self.health = 2000;
-  }
-  else if(skill == ("fu")) {
+  } else if(skill == ("fu")) {
     self.health = 1300;
-  }
-  else {
+  } else {
     self.health = 2000;
   }
   if(isDefined(self.healthbuffer)) {
@@ -177,8 +171,7 @@ vehicle_ridehandle() {
     if(self.health < self.maximumhealth && time > regentimer && time > regeninctimer) {
       if(self.health + health_regeninc > self.maximumhealth) {
         self.health = self.maximumhealth;
-      }
-      else {
+      } else {
         self.health += health_regeninc;
       }
       regeninctimer = gettime() + 250;

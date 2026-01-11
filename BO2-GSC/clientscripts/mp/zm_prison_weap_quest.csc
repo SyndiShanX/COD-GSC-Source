@@ -119,11 +119,9 @@ soul_catcher_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
 
     if(newval == 3) {
       level.wolf_heads[localclientnum][fieldname] thread wolfhead_eat_aligned(level.wolf_bodies[localclientnum][fieldname], localclientnum, "front");
-    }
-    else if(newval == 4) {
+    } else if(newval == 4) {
       level.wolf_heads[localclientnum][fieldname] thread wolfhead_eat_aligned(level.wolf_bodies[localclientnum][fieldname], localclientnum, "right");
-    }
-    else {
+    } else {
       level.wolf_heads[localclientnum][fieldname] thread wolfhead_eat_aligned(level.wolf_bodies[localclientnum][fieldname], localclientnum, "left");
     }
   } else if(newval == 6) {
@@ -227,11 +225,9 @@ pose_dead_body(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname,
 
     if(issubstr(self.model, "body2")) {
       m_body setModel("c_zom_inmate_body2");
-    }
-    else if(issubstr(self.model, "body1")) {
+    } else if(issubstr(self.model, "body1")) {
       m_body setModel("c_zom_inmate_body1");
-    }
-    else {
+    } else {
       m_body setModel("c_zom_guard_body");
     }
 
@@ -361,8 +357,7 @@ play_blood_fx_on_bite(localclientnum) {
 
     if(note == "blood") {
       playFXOnTag(localclientnum, level._effect["soul_charge_impact"], self, "TAG_MOUTH_FX");
-    }
-    else if(note == "blood_sm") {
+    } else if(note == "blood_sm") {
       playFXOnTag(localclientnum, level._effect["wolf_bite_blood"], self, "TAG_MOUTH_FX");
     }
   }

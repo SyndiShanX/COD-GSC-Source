@@ -160,8 +160,7 @@ getHighestScoringPlayer() {
   }
   if(tie || !isDefined(winner)) {
     return undefined;
-  }
-  else {
+  } else {
     return winner;
   }
 }
@@ -282,16 +281,14 @@ onTeamScore(score, team, player, victim) {
   otherTeam = level.otherTeam[team];
   if(game["teamScores"][team] > game["teamScores"][otherTeam]) {
     level.wasWinning = team;
-  }
-  else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
+  } else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
     level.wasWinning = otherTeam;
   }
   game["teamScores"][team] += score;
   isWinning = "none";
   if(game["teamScores"][team] > game["teamScores"][otherTeam]) {
     isWinning = team;
-  }
-  else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
+  } else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
     isWinning = otherTeam;
   }
   if(!level.splitScreen && isWinning != "none" && isWinning != level.wasWinning && getTime() - level.lastStatusTime > 5000) {
@@ -415,11 +412,9 @@ updateWinLossStats(winner) {
       }
       if(winner == "tie") {
         updateTieStats(players[i]);
-      }
-      else if(players[i].pers["team"] == winner) {
+      } else if(players[i].pers["team"] == winner) {
         updateWinStats(players[i]);
-      }
-      else {
+      } else {
         players[i] maps\mp\gametypes\_persistence::statSet("cur_win_streak", 0);
       }
     }
@@ -517,8 +512,7 @@ trackAttackeeDeath(attackerName, rank, xp, prestige, xuid) {
   }
   if(self.pers["nemesis_name"] == attackerName && self.pers["nemesis_tracking"][attackerName] >= 2) {
     self setClientUIVisibilityFlag("killcam_nemesis", 1);
-  }
-  else {
+  } else {
     self setClientUIVisibilityFlag("killcam_nemesis", 0);
   }
   pixendevent();

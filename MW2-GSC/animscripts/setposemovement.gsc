@@ -19,8 +19,7 @@ SetPoseMovement(desiredPose, desiredMovement) {
   if(desiredPose == "") {
     if((self.a.pose == "prone") && ((desiredMovement == "walk") || (desiredMovement == "run"))) {
       desiredPose = "crouch";
-    }
-    else {
+    } else {
       desiredPose = self.a.pose;
     }
   }
@@ -555,8 +554,7 @@ BlendIntoStandRun() {
 
   if(isDefined(self.sprint)) {
     self setAnimKnobLimited(moveAnim("sprint"), 1, runAnimTransTime, 1);
-  }
-  else {
+  } else {
     self setAnimKnobLimited(animscripts\run::GetRunAnim(), 1, runAnimTransTime, 1);
   }
 
@@ -939,10 +937,10 @@ PlayTransitionAnimationFunc(transAnim, endPose, endMovement, finalAnim, rate, wa
     }
   }
 
-    // Use a second thread to set the anim state halfway through the animation
-    if(waitSetStatesEnabled) {
-      self thread waitSetStates(getanimlength(transAnim) / 2.0, "killtimerscript", endPose);
-    }
+  // Use a second thread to set the anim state halfway through the animation
+  if(waitSetStatesEnabled) {
+    self thread waitSetStates(getanimlength(transAnim) / 2.0, "killtimerscript", endPose);
+  }
 
   // Play the anim
   // setflaggedanimknoball(notifyName, anim, rootAnim, goalWeight, goalTime, rate)

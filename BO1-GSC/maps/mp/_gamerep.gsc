@@ -135,8 +135,7 @@ gameRepUpdatePersistentPlayerInformation() {
   }
   if(game["gameRep"]["players"][name]["totalTimePlayed"] != 0) {
     timePlayed = game["gameRep"]["players"][name]["totalTimePlayed"];
-  }
-  else {
+  } else {
     timePlayed = 1;
   }
   game["gameRep"]["players"][name]["score"] += self.score;
@@ -145,8 +144,7 @@ gameRepUpdatePersistentPlayerInformation() {
   game["gameRep"]["players"][name]["deaths"] += self.deaths;
   if(game["gameRep"]["players"][name]["deaths"] != 0) {
     game["gameRep"]["players"][name]["killDeathRatio"] = int((game["gameRep"]["players"][name]["kills"] / game["gameRep"]["players"][name]["deaths"]) * 100);
-  }
-  else {
+  } else {
     game["gameRep"]["players"][name]["killDeathRatio"] = game["gameRep"]["players"][name]["kills"] * 100;
   }
   game["gameRep"]["players"][name]["plants"] += self.plants;
@@ -247,8 +245,7 @@ gameRepPrepareAndReportFilm(name) {
     }
     if(isDefined(game["gameRep"]["max"][paramName])) {
       reportFilm(columnIndex, game["gameRep"]["max"][paramName]);
-    }
-    else {
+    } else {
       reportFilm(columnIndex, 0);
     }
     columnIndex++;

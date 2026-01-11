@@ -53,7 +53,7 @@ water_trigger_init() {
   triggers = getEntArray("water_killbrush", "targetname");
 
   foreach(trigger in triggers) {
-  trigger thread player_splash_think();
+    trigger thread player_splash_think();
   }
 }
 

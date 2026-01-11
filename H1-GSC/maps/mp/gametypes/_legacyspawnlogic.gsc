@@ -48,8 +48,7 @@ getspawnpoint_final(var_0, var_1) {
 
   if(var_1) {
     var_2 = getbestweightedspawnpoint(var_0);
-  }
-  else {
+  } else {
     for(var_3 = 0; var_3 < var_0.size; var_3++) {
       if(isDefined(self.lastspawnpoint) && self.lastspawnpoint == var_0[var_3]) {
         continue;
@@ -76,8 +75,7 @@ getspawnpoint_final(var_0, var_1) {
   if(!isDefined(var_2)) {
     if(var_1) {
       var_2 = var_0[randomint(var_0.size)];
-    }
-    else {
+    } else {
       var_2 = var_0[0];
     }
   }
@@ -418,8 +416,7 @@ legacybullettracepassed(var_0, var_1, var_2) {
 
   if(var_3 >= 1.0) {
     return bullettracepassed(var_0, var_1, 0, undefined);
-  }
-  else {
+  } else {
     return spawnsighttrace(var_2, var_0, var_1, var_2.index) >= var_3;
   }
 }

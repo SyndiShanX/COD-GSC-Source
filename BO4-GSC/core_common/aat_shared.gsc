@@ -8,7 +8,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\spawner_shared;
 #include scripts\core_common\system_shared;
-
 #namespace aat;
 
 autoexec __init__system__() {
@@ -22,8 +21,8 @@ private __init__() {
 
   level.aat_initializing = 1;
   level.aat = [];
-  level.aat[#"none"] = spawnStruct();
-  level.aat[#"none"].name = "none";
+  level.aat[# "none"] = spawnStruct();
+  level.aat[# "none"].name = "none";
   level.aat_reroll = [];
   level.var_bdba6ee8 = [];
   callback::on_connect(&on_player_connect);
@@ -106,7 +105,7 @@ private aat_devgui_think() {
 
 private aat_set_debug_text(name, success, success_reroll, fail) {
   self notify(#"aat_set_debug_text_thread");
-  self endon(#"aat_set_debug_text_thread", #"disconnect");
+  self endon(#"aat_set_debug_text_thread", # "disconnect");
 
   if(!isDefined(self.aat_debug_text)) {
     return;
@@ -476,16 +475,16 @@ acquire(weapon, name, var_77cf85b7) {
   }
 
   switch (name) {
-    case #"zm_aat_brain_decay":
+    case # "zm_aat_brain_decay":
       self.var_b01de37[weapon] = 2;
       break;
-    case #"zm_aat_plasmatic_burst":
+    case # "zm_aat_plasmatic_burst":
       self.var_b01de37[weapon] = 3;
       break;
-    case #"zm_aat_kill_o_watt":
+    case # "zm_aat_kill_o_watt":
       self.var_b01de37[weapon] = 4;
       break;
-    case #"zm_aat_frostbite":
+    case # "zm_aat_frostbite":
       self.var_b01de37[weapon] = 1;
       break;
     default:

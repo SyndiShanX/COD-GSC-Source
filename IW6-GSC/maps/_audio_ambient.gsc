@@ -98,8 +98,7 @@ swap_ambient_event_zone_internal(var_0, var_1) {
   if(isDefined(var_0) && var_0 != "" && var_0 != "none") {
     if(var_1 == 0) {
       stop_ambient_event_zone(var_0);
-    }
-    else {
+    } else {
       start_ambient_event_zone(var_0);
     }
   }
@@ -192,8 +191,7 @@ get_elem_position(var_0) {
 
   if(isDefined(var_0["cone"])) {
     var_2 = randomfloatrange(var_0["cone"][0], var_0["cone"][1]);
-  }
-  else {
+  } else {
     var_2 = randomfloatrange(0, 360);
   }
 
@@ -204,8 +202,7 @@ get_elem_position(var_0) {
 set_next_play_time(var_0) {
   if(isDefined(var_0)) {
     var_1 = level._audio.ambient.cached_ambients[level._audio.ambient.current_zone].data;
-  }
-  else {
+  } else {
     var_1 = level._audio.ambient.cached_elems[self.elem];
   }
 
@@ -217,7 +214,7 @@ get_random_event() {
   var_0 = 0;
 
   foreach(var_2 in self.events) {
-  var_0 = var_0 + var_2.weight;
+    var_0 = var_0 + var_2.weight;
   }
 
   var_4 = randomfloat(var_0);

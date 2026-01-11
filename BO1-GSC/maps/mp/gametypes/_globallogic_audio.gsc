@@ -266,8 +266,7 @@ leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
       }
       if(team == team1) {
         player leaderDialogOnPlayer(dialog1, group);
-      }
-      else if(team == team2) {
+      } else if(team == team2) {
         player leaderDialogOnPlayer(dialog2, group);
       }
     }
@@ -280,8 +279,7 @@ leaderDialogBothTeams(dialog1, team1, dialog2, team2, group, excludeList) {
       }
       if(team == team1) {
         player leaderDialogOnPlayer(dialog1, group);
-      }
-      else if(team == team2) {
+      } else if(team == team2) {
         player leaderDialogOnPlayer(dialog2, group);
       }
     }
@@ -311,8 +309,7 @@ leaderDialogOnPlayer(dialog, group) {
   }
   if(!self.leaderDialogActive) {
     self thread playLeaderDialogOnPlayer(dialog, team);
-  }
-  else {
+  } else {
     self.leaderDialogQueue[self.leaderDialogQueue.size] = dialog;
   }
 }
@@ -328,8 +325,7 @@ playLeaderDialogOnPlayer(dialog, team) {
   if(level.allowAnnouncer) {
     if(level.wagerMatch) {
       faction = "vox_wm_";
-    }
-    else {
+    } else {
       faction = game["voice"][team];
     }
     self playLocalSound(faction + game["dialog"][dialog]);

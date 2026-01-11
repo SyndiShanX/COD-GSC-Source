@@ -67,8 +67,7 @@ do_bulletcam(player, end_point) {
   BULLET_MODEL = "p_glo_bullet_tip";
   if(isDefined(level.BULLET_ANIM_CAM)) {
     BULLET_ANIM_CAM = level.BULLET_ANIM_CAM;
-  }
-  else {
+  } else {
     BULLET_ANIM_CAM = % prop_meatshield_bullet_tip_cam;
   }
   BULLET_ANIM_SPIN = % prop_meatshield_bullet_tip_spin;

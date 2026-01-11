@@ -137,8 +137,7 @@ turn_to_zombie() {
 
   if(isDefined(level.custom_zombie_player_loadout)) {
     self[[level.custom_zombie_player_loadout]]();
-  }
-  else {
+  } else {
     self setModel("c_zom_player_zombie_fb");
     self.voice = "american";
     self.skeleton = "base";
@@ -150,8 +149,7 @@ turn_to_zombie() {
 
   if(isDefined(level.player_movement_suppressed)) {
     self freezecontrols(level.player_movement_suppressed);
-  }
-  else if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen)) {
+  } else if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen)) {
     self freezecontrols(0);
   }
 
@@ -229,8 +227,7 @@ turn_to_human() {
 
   if(isDefined(level.player_movement_suppressed)) {
     self freezecontrols(level.player_movement_suppressed);
-  }
-  else if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen)) {
+  } else if(!(isDefined(self.hostmigrationcontrolsfrozen) && self.hostmigrationcontrolsfrozen)) {
     self freezecontrols(0);
   }
 
@@ -362,8 +359,7 @@ turned_enable_player_weapons() {
 
   if(self hasweapon(self get_player_lethal_grenade())) {
     self getweaponammoclip(self get_player_lethal_grenade());
-  }
-  else {
+  } else {
     self giveweapon(self get_player_lethal_grenade());
   }
 

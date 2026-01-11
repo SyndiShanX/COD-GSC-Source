@@ -57,8 +57,7 @@ setup_player() {
 
     if(isDefined(var_1.angles)) {
       level.player setplayerangles(var_1.angles);
-    }
-    else {
+    } else {
       iprintlnbold("Your script_struct " + level.start_point + "_start has no angles! Set some.");
     }
   } else {}
@@ -77,8 +76,7 @@ spawn_ally(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_2 = level.start_point + "_" + var_0;
-  }
-  else {
+  } else {
     var_2 = var_1 + "_" + var_0;
   }
 
@@ -168,8 +166,7 @@ carrier_life_jet_takeoff_guys(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_4)) {
     var_7 maps\_utility::set_moveplaybackrate(var_4);
-  }
-  else {
+  } else {
     var_7 maps\_utility::set_moveplaybackrate(1);
   }
 
@@ -283,26 +280,26 @@ move_deck_props() {
   common_scripts\utility::array_thread(level.deck_damage, maps\_utility::show_entity);
 
   foreach(var_1 in level.deck_damage) {
-  var_1 movez(-4096, 0.05);
+    var_1 movez(-4096, 0.05);
   }
 
   var_3 = getEntArray("tower_damage", "targetname");
 
   foreach(var_1 in var_3) {
-  var_1 movez(-4096, 0.05);
+    var_1 movez(-4096, 0.05);
   }
 
   var_6 = getEntArray("tower_panel_clean", "targetname");
   common_scripts\utility::array_thread(var_6, maps\_utility::show_entity);
 
   foreach(var_1 in var_6) {
-  var_1 movez(-4096, 0.05);
+    var_1 movez(-4096, 0.05);
   }
 
   var_9 = getEntArray("deck_tilt_clip", "targetname");
 
   foreach(var_1 in var_9) {
-  var_1 movez(-4096, 0.05);
+    var_1 movez(-4096, 0.05);
   }
 
   var_12 = getent("blast_shield1", "targetname");
@@ -320,7 +317,7 @@ move_deck_props() {
   var_16 = getEntArray("sliding_crate_01b", "targetname");
 
   foreach(var_1 in var_16) {
-  var_1 movey(192, 0.05);
+    var_1 movey(192, 0.05);
   }
 
   var_19 = getweaponarray();
@@ -349,7 +346,7 @@ move_deck_props() {
   var_29 = getEntArray("rear_forklift1", "targetname");
 
   foreach(var_1 in var_29) {
-  var_1 delete();
+    var_1 delete();
   }
 
   var_32 = getEntArray("anim_tugger", "targetname");
@@ -388,7 +385,7 @@ move_deck_props() {
   var_43 = getscriptablearray("scriptable_destructible_barrel", "targetname");
 
   foreach(var_1 in var_43) {
-  var_1 setscriptablepartstate(0, 2, 1);
+    var_1 setscriptablepartstate(0, 2, 1);
   }
 
   thread maps\carrier_deck_tilt::tilt_props_large();
@@ -418,7 +415,7 @@ setup_front_elevator() {
   var_1 = getEntArray("carrier_elevator_front_scripted_attachments", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(var_0);
+    var_3 linkto(var_0);
   }
 
   var_5 = common_scripts\utility::getstruct("redshirt_forklift_stopper_ref", "targetname");
@@ -435,7 +432,7 @@ setup_front_elevator() {
     var_9 = level.front_elevator_vol maps\_utility::get_ai_touching_volume();
 
     foreach(var_11 in var_9) {
-    var_11 linkto(var_0);
+      var_11 linkto(var_0);
     }
 
     common_scripts\utility::waitframe();
@@ -460,7 +457,7 @@ setup_rear_elevator() {
   level.rear_elevator.attachments = getEntArray("carrier_elevator_rear_scripted_attachments", "targetname");
 
   foreach(var_1 in level.rear_elevator.attachments) {
-  var_1 linkto(level.rear_elevator);
+    var_1 linkto(level.rear_elevator);
   }
 
   if(level.start_point != "slow_intro" && level.start_point != "medbay" && level.start_point != "deck_combat") {
@@ -486,7 +483,7 @@ raise_rear_elevator() {
     var_0 = level.rear_elevator_vol maps\_utility::get_ai_touching_volume();
 
     foreach(var_2 in var_0) {
-    var_2 linkto(level.rear_elevator);
+      var_2 linkto(level.rear_elevator);
     }
 
     var_4 = level.rear_elevator.height;
@@ -570,7 +567,7 @@ setup_ocean_vista_tilt() {
   var_2 = getEntArray("vista_terrain", "targetname");
 
   foreach(var_4 in var_2) {
-  var_4 linkto(level.ocean_water);
+    var_4 linkto(level.ocean_water);
   }
 
   var_6 = common_scripts\utility::getstruct("deck_tilt_animnode", "targetname");
@@ -605,7 +602,7 @@ vista_boats() {
   thread setup_fed_destroyer_osprey();
 
   foreach(var_1 in level.boats) {
-  var_1 thread vista_boat_animate();
+    var_1 thread vista_boat_animate();
   }
 }
 
@@ -623,11 +620,9 @@ vista_boat_animate() {
 
   if(self.model == "crr_destroyer_01_left" || self.model == "crr_destroyer_01_right" || self.model == "crr_destroyer_01") {
     var_0.origin = (var_0.origin[0], var_0.origin[1], var_1);
-  }
-  else if(self.model == "crr_destroyer_02_fed") {
+  } else if(self.model == "crr_destroyer_02_fed") {
     var_0.origin = (var_0.origin[0], var_0.origin[1], var_1 - 1236);
-  }
-  else {
+  } else {
     var_0.origin = (var_0.origin[0], var_0.origin[1], -64);
   }
 
@@ -796,8 +791,7 @@ player_gravity_slide() {
 
     if(abs(var_0[0]) > 0.1) {
       level.x_slide_incr = 2;
-    }
-    else {
+    } else {
       level.x_slide_incr = 0;
     }
 
@@ -1360,8 +1354,7 @@ update_sun() {
 
     if(maps\_utility::is_gen4()) {
       var_0 = 2.8;
-    }
-    else {
+    } else {
       var_0 = 1.1;
     }
 
@@ -1373,8 +1366,7 @@ update_sun() {
 
     if(maps\_utility::is_gen4()) {
       var_0 = 2.8;
-    }
-    else {
+    } else {
       var_0 = 1.1;
     }
 
@@ -1391,8 +1383,7 @@ update_sun() {
 
     if(maps\_utility::is_gen4()) {
       var_0 = 2.8;
-    }
-    else {
+    } else {
       var_0 = 1.1;
     }
 
@@ -1406,8 +1397,7 @@ update_sun() {
   } else {
     if(maps\_utility::is_gen4()) {
       var_0 = 2.8;
-    }
-    else {
+    } else {
       var_0 = 1.1;
     }
 
@@ -1919,7 +1909,7 @@ fake_vehicles_loop_until_endon(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
     common_scripts\utility::array_call(var_10, ::hide);
 
     foreach(var_13 in var_10) {
-    var_13 notify("stop_goto_dest2");
+      var_13 notify("stop_goto_dest2");
     }
 
     if(eval(var_7)) {
@@ -2067,7 +2057,7 @@ heli_fast_explode(var_0) {
 drone_delete_on_unload() {
   if(isDefined(self.riders)) {
     foreach(var_1 in self.riders) {
-    var_1.drone_delete_on_unload = 1;
+      var_1.drone_delete_on_unload = 1;
     }
   }
 }
@@ -2094,7 +2084,7 @@ carrier_liferaft() {
   var_0 = getEntArray("liferaft_trigger", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread carrier_liferaft_think();
+    var_2 thread carrier_liferaft_think();
   }
 }
 
@@ -2152,7 +2142,7 @@ setup_edge_lean() {
   var_0 = getEntArray("edge_lean", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread edge_lean_natural();
+    var_2 thread edge_lean_natural();
   }
 }
 
@@ -2194,8 +2184,7 @@ bump_player() {
 
   if(isDefined(var_5.target)) {
     var_6 = getent(var_5.target, "targetname");
-  }
-  else {
+  } else {
     return;
   }
 
@@ -2269,8 +2258,7 @@ edge_lean_shield() {
 
     if(self.in_lean_vol && var_2 >= var_0) {
       level.player enabledeathshield(1);
-    }
-    else {
+    } else {
       level.player enabledeathshield(0);
     }
 
@@ -2388,8 +2376,7 @@ phalanx_gun_fire(var_0) {
     while(var_5 > 0 && !var_1.turret_target.on_target && (!isDefined(level.player.using_depth_charge) || !level.player.using_depth_charge)) {
       if(!var_2 && var_6 < randomfloat(0.5)) {
         var_1 phalanx_shoot();
-      }
-      else {
+      } else {
         var_1 phalanx_stop_shoot();
       }
 

@@ -98,7 +98,7 @@ func_1080F(var_00) {
   var_01 = func_1080E(var_00);
 
   foreach(var_03 in var_01) {
-  thread scripts\sp\vehicle_paths::setsuit(var_03);
+    thread scripts\sp\vehicle_paths::setsuit(var_03);
   }
 
   return var_01;

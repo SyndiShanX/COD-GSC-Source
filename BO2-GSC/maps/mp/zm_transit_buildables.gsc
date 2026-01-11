@@ -235,8 +235,7 @@ onpickup_common(player) {
   if(isDefined(self.buildablename)) {
     if(self.buildablename == "turbine") {
       check_for_buildable_turbine_vox(level.turbine_buildable, 0);
-    }
-    else if(self.buildablename == "jetgun_zm") {
+    } else if(self.buildablename == "jetgun_zm") {
       check_for_buildable_jetgun_vox(level.jetgun_buildable, 0);
     }
   }
@@ -343,8 +342,7 @@ check_for_buildable_jetgun_vox(stub, start_build_counter) {
 
   if(build_counter == 3 && piece_counter == 4) {
     level thread maps\mp\zm_transit_sq::richtofensay("vox_zmba_sidequest_jet_last_0");
-  }
-  else if(build_counter == 4) {
+  } else if(build_counter == 4) {
     level thread maps\mp\zm_transit_sq::richtofensay("vox_zmba_sidequest_jet_complete_0");
   }
 }

@@ -108,7 +108,7 @@ turnperkon(perk) {
 
 disableallzonesexcept(zones) {
   foreach(zone in zones) {
-  level thread maps\mp\zombies\_zm_zonemgr::enable_zone(zone);
+    level thread maps\mp\zombies\_zm_zonemgr::enable_zone(zone);
   }
 
   foreach(zoneindex, zone in level.zones) {
@@ -162,7 +162,7 @@ buildbuildable(buildable) {
         stub maps\mp\zombies\_zm_buildables::buildablestub_remove();
 
         foreach(piece in stub.buildablezone.pieces) {
-        piece maps\mp\zombies\_zm_buildables::piece_unspawn();
+          piece maps\mp\zombies\_zm_buildables::piece_unspawn();
         }
 
         stub.model notsolid();

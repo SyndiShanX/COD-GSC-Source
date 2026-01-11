@@ -22,8 +22,7 @@ main() {
 
     if(self.vehicletype == "heli_v78_rts" || self.vehicletype == "heli_osprey_rts_axis" || self.vehicletype == "heli_osprey_rts" || self.vehicletype == "heli_osprey") {
       self raise_gear();
-    }
-    else if(self.vehicletype == "heli_v78_yemen" || self.vehicletype == "heli_v78_low") {
+    } else if(self.vehicletype == "heli_v78_yemen" || self.vehicletype == "heli_v78_low") {
       self thread close_hatch();
       self raise_gear();
     }

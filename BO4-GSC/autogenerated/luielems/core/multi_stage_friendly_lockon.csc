@@ -4,7 +4,6 @@
 ***********************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace multi_stage_friendly_lockon;
 
 class cmulti_stage_friendly_lockon: cluielem {
@@ -17,7 +16,7 @@ class cmulti_stage_friendly_lockon: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"multi_stage_friendly_lockon");
+    cluielem::open(localclientnum, # "multi_stage_friendly_lockon");
   }
 
   function function_fa582112(localclientnum) {

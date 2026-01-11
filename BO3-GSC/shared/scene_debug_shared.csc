@@ -374,14 +374,8 @@ function debug_display() {
     if(isDefined(self.scenes)) {
       foreach(i, o_scene in self.scenes) {
         n_offset = 15 * (i + 1);
-        print3d(self.origin - (0, 0, n_offset), [
-          [o_scene]
-        ] - > get_name(), (0.8, 0.2, 0.8), 1, 0.3, debug_frames);
-        print3d(self.origin - (0, 0, n_offset + 5), ("" + (isDefined([
-          [o_scene]
-        ] - > get_state()) ? "" + ([
-          [o_scene]
-        ] - > get_state()) : "")) + "", (0.8, 0.2, 0.8), 1, 0.15, debug_frames);
+        print3d(self.origin - (0, 0, n_offset), [[o_scene]] - > get_name(), (0.8, 0.2, 0.8), 1, 0.3, debug_frames);
+        print3d(self.origin - (0, 0, n_offset + 5), ("" + (isDefined([[o_scene]] - > get_state()) ? "" + ([[o_scene]] - > get_state()) : "")) + "", (0.8, 0.2, 0.8), 1, 0.15, debug_frames);
       }
     } else {
       if(isDefined(self.scriptbundlename)) {

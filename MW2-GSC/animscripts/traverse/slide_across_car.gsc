@@ -11,8 +11,7 @@
 main() {
   if(self.type == "dog") {
     slide_across_car_dog();
-  }
-  else {
+  } else {
     slide_across_car_human();
   }
 }

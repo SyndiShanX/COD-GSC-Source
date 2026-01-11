@@ -7,11 +7,9 @@
 #include clientscripts\createfx\karma_fx;
 #include clientscripts\_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_kar_shrimp_crowd_neutral"] = loadfx("maps/karma/fx_kar_shrimp_crowd_neutral");

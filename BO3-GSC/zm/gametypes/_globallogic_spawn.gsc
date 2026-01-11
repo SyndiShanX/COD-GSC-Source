@@ -662,9 +662,7 @@ function waitandspawnclient(timealreadypassed) {
     if(!spawnedasspectator) {
       spawnorigin = self.origin + vectorscale((0, 0, 1), 60);
       spawnangles = self.angles;
-      if(isDefined(level.useintermissionpointsonwavespawn) && [
-          [level.useintermissionpointsonwavespawn]
-        ]() == 1) {
+      if(isDefined(level.useintermissionpointsonwavespawn) && [[level.useintermissionpointsonwavespawn]]() == 1) {
         spawnpoint = spawnlogic::getrandomintermissionpoint();
         if(isDefined(spawnpoint)) {
           spawnorigin = spawnpoint.origin;

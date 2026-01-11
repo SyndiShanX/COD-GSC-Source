@@ -74,11 +74,9 @@ randomAttackIdle() {
   rand = randomInt(100);
   if(rand < idleChance) {
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle, 1, 0.2, self.animplaybackrate);
-  }
-  else if(rand < barkChance) {
+  } else if(rand < barkChance) {
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_bark, 1, 0.2, self.animplaybackrate);
-  }
-  else {
+  } else {
     self setflaggedanimrestart("dog_idle", % german_shepherd_attackidle_growl, 1, 0.2, self.animplaybackrate);
   }
 }
@@ -122,5 +120,5 @@ lookAtTarget(lookPoseSet) {
   self.trackLoopThread = thisthread;
   self.trackLoopThreadType = "lookAtTarget";
 
-    self animscripts\shared::trackLoop( % german_shepherd_look_2, % german_shepherd_look_4, % german_shepherd_look_6, % german_shepherd_look_8);
+  self animscripts\shared::trackLoop( % german_shepherd_look_2, % german_shepherd_look_4, % german_shepherd_look_6, % german_shepherd_look_8);
 }

@@ -16,8 +16,7 @@ setparent(var_0) {
 
   if(isDefined(self.point)) {
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  }
-  else {
+  } else {
     setpoint("TOPLEFT");
   }
 }
@@ -144,8 +143,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_6 == "left" || var_5.alignx == "right") {
       var_9 = -1;
-    }
-    else {
+    } else {
       var_9 = 1;
     }
   } else {
@@ -153,8 +151,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_6 == "left") {
       var_9 = -1;
-    }
-    else {
+    } else {
       var_9 = 1;
     }
   }
@@ -169,8 +166,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_7 == "top" || var_5.aligny == "bottom") {
       var_11 = -1;
-    }
-    else {
+    } else {
       var_11 = 1;
     }
   } else {
@@ -178,8 +174,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_7 == "top") {
       var_11 = -1;
-    }
-    else {
+    } else {
       var_11 = 1;
     }
   }
@@ -206,11 +201,9 @@ setpointbar(var_0, var_1, var_2, var_3) {
 
   if(self.alignx == "left") {
     self.bar.x = self.x + self.xpadding;
-  }
-  else if(self.alignx == "right") {
+  } else if(self.alignx == "right") {
     self.bar.x = self.x - (self.width - self.xpadding);
-  }
-  else {
+  } else {
     self.bar.x = self.x - int((self.width - self.xpadding * 2) / 2);
   }
 
@@ -547,8 +540,7 @@ stance_carry_icon_enable(var_0) {
 
   if(level.console) {
     level.stance_carry.y = -20;
-  }
-  else {
+  } else {
     level.stance_carry.y = -10;
   }
 
@@ -606,11 +598,9 @@ get_countdown_hud(var_0, var_1, var_2, var_3) {
 
   if(!level.console) {
     var_4 = -250;
-  }
-  else if(!isDefined(var_0)) {
+  } else if(!isDefined(var_0)) {
     var_4 = -225;
-  }
-  else {
+  } else {
     var_4 = var_0;
   }
 
@@ -620,15 +610,13 @@ get_countdown_hud(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_1)) {
     var_5 = 100;
-  }
-  else {
+  } else {
     var_5 = var_1;
   }
 
   if(isDefined(var_2)) {
     var_6 = newclienthudelem(var_2);
-  }
-  else {
+  } else {
     var_6 = newhudelem();
   }
 
@@ -658,11 +646,9 @@ get_download_state_hud(var_0, var_1, var_2, var_3) {
 
   if(!level.console) {
     var_4 = -250;
-  }
-  else if(!isDefined(var_0)) {
+  } else if(!isDefined(var_0)) {
     var_4 = -170;
-  }
-  else {
+  } else {
     var_4 = var_0;
   }
 
@@ -672,15 +658,13 @@ get_download_state_hud(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_1)) {
     var_5 = 100;
-  }
-  else {
+  } else {
     var_5 = var_1;
   }
 
   if(isDefined(var_2)) {
     var_6 = newclienthudelem(var_2);
-  }
-  else {
+  } else {
     var_6 = newhudelem();
   }
 
@@ -704,8 +688,7 @@ get_download_state_hud(var_0, var_1, var_2, var_3) {
 create_client_overlay(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = newclienthudelem(var_2);
-  }
-  else {
+  } else {
     var_3 = newhudelem();
   }
 
@@ -817,8 +800,7 @@ start_overlay(var_0) {
 get_overlay(var_0) {
   if(isplayer(self)) {
     var_1 = self;
-  }
-  else {
+  } else {
     var_1 = level.player;
   }
 

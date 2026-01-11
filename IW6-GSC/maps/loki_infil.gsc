@@ -295,7 +295,7 @@ create_redshirts(var_0, var_1) {
   level.redshirts = var_2;
 
   foreach(var_4 in var_2) {
-  var_4 thread infil_redshirt(var_0, var_1);
+    var_4 thread infil_redshirt(var_0, var_1);
   }
 }
 

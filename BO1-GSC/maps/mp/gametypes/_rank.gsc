@@ -110,8 +110,7 @@ getCodPointsCapped(inCodPoints) {
 isRegisteredEvent(type) {
   if(isDefined(level.scoreInfo[type])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -122,8 +121,7 @@ getScoreInfoValue(type) {
   overrideDvar = "scr_" + level.gameType + "_score_" + type;
   if(getDvar(overrideDvar) != "") {
     return getDvarInt(overrideDvar);
-  }
-  else {
+  } else {
     return (level.scoreInfo[type]["value"]);
   }
 }
@@ -257,8 +255,7 @@ onPlayerSpawned() {
       self.hud_rankscroreupdate.x = 0;
       if(self IsSplitscreen()) {
         self.hud_rankscroreupdate.y = -15;
-      }
-      else {
+      } else {
         self.hud_rankscroreupdate.y = -60;
       }
       self.hud_rankscroreupdate.font = "default";
@@ -295,8 +292,7 @@ giveRankXP(type, value, devAdd) {
   self endon("disconnect");
   if(level.teamBased && (!level.playerCount["allies"] || !level.playerCount["axis"]) && !isDefined(devAdd)) {
     return;
-  }
-  else if(!level.teamBased && (level.playerCount["allies"] + level.playerCount["axis"] < 2) && !isDefined(devAdd)) {
+  } else if(!level.teamBased && (level.playerCount["allies"] + level.playerCount["axis"] < 2) && !isDefined(devAdd)) {
     return;
   }
   if(!isRankEnabled()) {
@@ -377,8 +373,7 @@ giveRankXP(type, value, devAdd) {
   if(isDefined(self.enableText) && self.enableText && !level.hardcoreMode) {
     if(type == "teamkill") {
       self thread updateRankScoreHUD(0 - getScoreInfoValue("kill"));
-    }
-    else {
+    } else {
       self thread updateRankScoreHUD(value);
     }
   }
@@ -546,8 +541,7 @@ getRank() {
   rankId = self.pers["rank"];
   if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))) {
     return rankId;
-  }
-  else {
+  } else {
     return self getRankForXp(rankXp);
   }
 }
@@ -562,8 +556,7 @@ getRankForXp(xpVal) {
     rankId++;
     if(isDefined(level.rankTable[rankId])) {
       rankName = level.rankTable[rankId][1];
-    }
-    else {
+    } else {
       rankName = undefined;
     }
   }

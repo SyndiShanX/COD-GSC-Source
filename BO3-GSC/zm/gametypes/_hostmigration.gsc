@@ -88,9 +88,7 @@ function callback_hostmigration() {
   for(i = 0; i < level.players.size; i++) {
     if(isDefined(level.hostmigration_link_entity_callback)) {
       if(!isDefined(level.players[i]._host_migration_link_entity)) {
-        level.players[i]._host_migration_link_entity = level.players[i][
-          [level.hostmigration_link_entity_callback]
-        ]();
+        level.players[i]._host_migration_link_entity = level.players[i][[level.hostmigration_link_entity_callback]]();
       }
     }
     level.players[i] thread hostmigrationtimerthink();

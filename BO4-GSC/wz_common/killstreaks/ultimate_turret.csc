@@ -6,7 +6,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\weapons\deployable;
-
 #namespace ultimate_turret;
 
 autoexec __init__system__() {

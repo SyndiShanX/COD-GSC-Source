@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_trial_util;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_trial_forced_reload;
 
 autoexec __init__system__() {
@@ -71,7 +70,7 @@ private function_33f0ddd3(s_event) {
 private on_weapon_fired(params) {
   self notify("3a8478a97b3babfa");
   self endon("3a8478a97b3babfa");
-  self endon(#"disconnect", #"hash_1fbfdb0105f48f89");
+  self endon(#"disconnect", # "hash_1fbfdb0105f48f89");
   n_clip_size = self getweaponammoclipsize(params.weapon);
   var_2cf11630 = self getweaponammoclip(params.weapon);
 
@@ -95,7 +94,7 @@ private function_29ee24dd(weapon) {
 
   if(n_stock_ammo > 0) {
     while(true) {
-      s_waitresult = self waittill(#"reload", #"zmb_max_ammo", #"hash_278526d0bbdb4ce7", #"hash_1fbfdb0105f48f89", #"player_downed", #"death");
+      s_waitresult = self waittill(#"reload", # "zmb_max_ammo", # "hash_278526d0bbdb4ce7", # "hash_1fbfdb0105f48f89", # "player_downed", # "death");
       w_current = self getcurrentweapon();
 
       if(s_waitresult._notify == "reload" && weapon != w_current) {

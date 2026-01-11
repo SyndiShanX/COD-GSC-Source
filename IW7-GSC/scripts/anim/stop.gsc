@@ -22,9 +22,7 @@ main() {
 
   self notify("stopScript");
   self endon("killanimscript");
-  [
-    [self.exception["stop_immediate"]]
-  ]();
+  [[self.exception["stop_immediate"]]]();
   thread func_50FE();
   scripts\anim\utility::func_9832("stop");
   if(isDefined(self.var_1095A)) {
@@ -199,7 +197,5 @@ func_12EF5() {
 func_50FE() {
   self endon("killanimscript");
   wait(0.05);
-  [
-    [self.exception["stop"]]
-  ]();
+  [[self.exception["stop"]]]();
 }

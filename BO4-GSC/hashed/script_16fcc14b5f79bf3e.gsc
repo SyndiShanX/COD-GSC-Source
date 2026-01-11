@@ -9,7 +9,6 @@
 #include scripts\zm\zm_red_main_quest;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_ui_inventory;
-
 #namespace namespace_efec71f7;
 
 autoexec __init__system__() {

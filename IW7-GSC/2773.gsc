@@ -35,14 +35,12 @@ init_agent(var_00) {
 
       if(var_09 == "0") {
         var_09 = 0;
-      }
-      else if(int(var_09) != 0) {
+      } else if(int(var_09) != 0) {
         var_10 = var_09 + "";
 
         if(issubstr(var_10, ".")) {
           var_09 = float(var_09);
-        }
-        else {
+        } else {
           var_09 = int(var_09);
         }
       }
@@ -96,8 +94,7 @@ spawnnewagent(var_00, var_01, var_02, var_03, var_04, var_05) {
 
     if(is_scripted_agent(var_00)) {
       var_06 = spawn_scripted_agent(var_06, var_00, var_02, var_03);
-    }
-    else {
+    } else {
       var_06 = spawn_regular_agent(var_06, var_02, var_03);
     }
 
@@ -195,8 +192,7 @@ is_agent_scripted(var_00) {
 agent_go_to_pos(var_00, var_01, var_02, var_03, var_04) {
   if(is_agent_scripted(self)) {
     self ghostskulls_complete_status(var_00);
-  }
-  else {
+  } else {
     self botsetscriptgoal(var_00, var_01, var_02, var_03, var_04);
   }
 }
@@ -239,8 +235,7 @@ assign_agent_func(var_00, var_01) {
   if(!isDefined(level.agent_funcs[var_02][var_00])) {
     if(!isDefined(level.species_funcs[self.species]) || !isDefined(level.species_funcs[self.species][var_00])) {
       level.agent_funcs[var_02][var_00] = var_01;
-    }
-    else {
+    } else {
       level.agent_funcs[var_02][var_00] = level.species_funcs[self.species][var_00];
     }
   }
@@ -449,7 +444,9 @@ default_on_damage_finished(var_00, var_01, var_02, var_03, var_04, var_05, var_0
     var_16 = level.agent_funcs[self.agent_type]["gametype_on_damage_finished"];
 
     if(isDefined(var_16)) {
-      [[var_16]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12);
+      [
+        [var_16]
+      ](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11, var_12);
     }
   }
 }
@@ -457,8 +454,7 @@ default_on_damage_finished(var_00, var_01, var_02, var_03, var_04, var_05, var_0
 default_on_killed(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08) {
   if(isDefined(level.func_C4BD)) {
     self[[level.func_C4BD]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, 0);
-  }
-  else {
+  } else {
     on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, 0);
   }
 
@@ -587,8 +583,7 @@ on_humanoid_agent_killed_common(var_00, var_01, var_02, var_03, var_04, var_05, 
 
   if(should_do_immediate_ragdoll(self)) {
     do_immediate_ragdoll(self.body);
-  }
-  else {
+  } else {
     thread delaystartragdoll(self.body, var_06, var_05, var_04, var_00, var_03);
   }
 }
@@ -652,8 +647,7 @@ delaystartragdoll(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(isDefined(var_00)) {
     if(isDefined(var_0.ragdollhitloc) && isDefined(var_0.ragdollimpactvector)) {
       var_00 giverankxp_regularmp(var_0.ragdollhitloc, var_0.ragdollimpactvector);
-    }
-    else {
+    } else {
       var_00 startragdoll();
     }
   }

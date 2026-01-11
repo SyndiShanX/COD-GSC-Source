@@ -68,8 +68,7 @@ onpickup(var_0) {
 
   if(var_0.team == "allies") {
     var_0.objective = 1;
-  }
-  else {
+  } else {
     var_0.objective = 2;
   }
 
@@ -108,8 +107,7 @@ bombs() {
 
     if(game["attackers"] == "allies") {
       maps\mp\_utility::setmlgicons(level.sdbomb, "waypoint_bomb_green");
-    }
-    else {
+    } else {
       maps\mp\_utility::setmlgicons(level.sdbomb, "waypoint_bomb_red");
     }
 
@@ -214,7 +212,7 @@ removebombzone(var_0) {
       var_8 = getEntArray(var_7.target, "targetname");
 
       foreach(var_10 in var_8) {
-      var_10 delete();
+        var_10 delete();
       }
     }
 
@@ -252,8 +250,7 @@ onuseplantobject(var_0) {
 onbeginuse(var_0) {
   if(maps\mp\gametypes\_gameobjects::isfriendlyteam(var_0.pers["team"])) {
     maps\mp\gametypes\common_bomb_gameobject::onbegindefusebomb(var_0, level.sdbombmodel);
-  }
-  else {
+  } else {
     maps\mp\gametypes\common_bomb_gameobject::onbeginplantbomb(var_0);
 
     if(level.multibomb) {
@@ -327,8 +324,7 @@ bombplanted(var_0, var_1) {
 
   if(var_2 == "_a" || var_2 == "_A") {
     setomnvar("ui_mlg_game_mode_status_1", 1);
-  }
-  else if(var_2 == "_b" || var_2 == "_B") {
+  } else if(var_2 == "_b" || var_2 == "_B") {
     setomnvar("ui_mlg_game_mode_status_1", 2);
   }
 
@@ -364,8 +360,7 @@ isbombsiteb() {
 setbombendtime(var_0, var_1) {
   if(var_1) {
     setomnvar("ui_bomb_timer_endtime_2", var_0);
-  }
-  else {
+  } else {
     setomnvar("ui_bomb_timer_endtime", var_0);
   }
 }
@@ -523,8 +518,7 @@ ondeadevent(var_0) {
   if(var_0 == "all") {
     if(level.bombplanted) {
       sd_endgame(game["attackers"], game["end_reason"][game["defenders"] + "_eliminated"]);
-    }
-    else {
+    } else {
       sd_endgame(game["defenders"], game["end_reason"][game["attackers"] + "_eliminated"]);
     }
   } else if(var_0 == game["attackers"]) {

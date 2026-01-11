@@ -175,7 +175,7 @@ destroy_corner() {
   var_0 = getEntArray("corner_exploder_trigger", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 notify("trigger");
+    var_2 notify("trigger");
   }
 }
 
@@ -336,8 +336,7 @@ fire_at_target(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(isDefined(var_4)) {
       magicbullet(var_4, var_16, var_22);
-    }
-    else {
+    } else {
       var_25 = level.player getcurrentweapon();
 
       if(isDefined(var_25) && var_25 != "none") {
@@ -405,8 +404,7 @@ turret_fire_at_target(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(var_4)) {
       magicbullet(var_4, var_15, var_21);
-    }
-    else {
+    } else {
       var_24 = level.player getcurrentweapon();
 
       if(isDefined(var_24) && var_24 != "none") {
@@ -643,8 +641,7 @@ find_teleport_spot_for_ally(var_0, var_1) {
       if(distance2d(level.player.origin, var_2.origin) > 32) {
         if(!maps\_utility::player_looking_at(var_2.origin + (0, 0, 16), 0.5, 1)) {
           return var_1;
-        }
-        else {}
+        } else {}
       } else {}
     } else {}
 
@@ -727,7 +724,7 @@ adjust_ally_movement() {
   level.allies[2] maps\_utility::set_force_color("r");
 
   foreach(var_1 in level.allies) {
-  var_1 ignore_everything(0.0);
+    var_1 ignore_everything(0.0);
   }
 
   common_scripts\utility::flag_wait("everyone_in_garage");
@@ -878,7 +875,7 @@ turn_off_cqb_if_player_too_far_forward(var_0) {
   }
 
   foreach(var_6 in level.allies) {
-  var_6 maps\_utility::disable_cqbwalk();
+    var_6 maps\_utility::disable_cqbwalk();
   }
 }
 
@@ -904,7 +901,7 @@ setup_allies_streets_to_dam() {
   var_0 = level.allies;
 
   foreach(var_2 in var_0) {
-  var_2 ally_think_streets_to_dam();
+    var_2 ally_think_streets_to_dam();
   }
 }
 
@@ -934,7 +931,7 @@ convoy_spawn_logic() {
   var_0 = getEntArray("enemy_convoy_vehicles", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 maps\_utility::add_spawn_function(::convoy_spawn_func);
+    var_2 maps\_utility::add_spawn_function(::convoy_spawn_func);
   }
 
   var_4 = [1, 2, 0, 1, 2, 1, 0];
@@ -1112,13 +1109,13 @@ connect_nodes_after_crash() {
   var_0 = getnodearray("connect_after_crash", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 connectnode();
+    var_2 connectnode();
   }
 
   var_0 = getnodearray("disconnect_after_crash", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 disconnectnode();
+    var_2 disconnectnode();
   }
 }
 
@@ -1266,7 +1263,7 @@ rotate_checkpoint_concrete_barrier_when_near_m880(var_0) {
   var_5 = getEntArray("checkpoint_concrete_barrier_1_clip", "targetname");
 
   foreach(var_7 in var_5) {
-  var_7 delete();
+    var_7 delete();
   }
 
   level waittill("player_failed_stab");
@@ -1330,7 +1327,7 @@ streets_to_dam_wave_1_init() {
     var_1 = getaiarray("axis");
 
     foreach(var_5 in var_1) {
-    var_5 maps\_utility::delaythread(randomfloatrange(0.1, 1.0), ::clear_ignore_everything);
+      var_5 maps\_utility::delaythread(randomfloatrange(0.1, 1.0), ::clear_ignore_everything);
     }
 
     level thread checkpoint_enemies_run_for_cover();
@@ -1344,7 +1341,7 @@ streets_to_dam_wave_1_init() {
   common_scripts\utility::array_thread(var_2, ::clear_ignore_everything);
 
   foreach(var_5 in var_2) {
-  var_5.ignoreme = 0;
+    var_5.ignoreme = 0;
   }
 
   level.player.ignoreme = 0;
@@ -1737,7 +1734,7 @@ watch_enemy_for_damage() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2 thread set_flag_if_damaged();
+    var_2 thread set_flag_if_damaged();
   }
 }
 
@@ -1766,7 +1763,7 @@ swap_nodes_init() {
   var_0 = getEntArray("swap_node_trigger", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread swap_nodes();
+    var_2 thread swap_nodes();
   }
 }
 
@@ -1869,14 +1866,14 @@ disable_combat_nodes() {
   var_0 = getnodearray("nodes_to_disconnect", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 disconnectnode();
+    var_2 disconnectnode();
   }
 
   common_scripts\utility::flag_wait("enemy_alerted");
   var_0 = getnodearray("nodes_to_disconnect", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 connectnode();
+    var_2 connectnode();
   }
 }
 
@@ -1884,14 +1881,14 @@ disable_ally_nag_nodes() {
   var_0 = getnodearray("nodes_to_disconnect_ally", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 disconnectnode();
+    var_2 disconnectnode();
   }
 
   common_scripts\utility::flag_wait_either("player_on_ladder", "streets_to_dam_enemies_dead");
   var_0 = getnodearray("nodes_to_disconnect_ally", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 connectnode();
+    var_2 connectnode();
   }
 }
 
@@ -1923,8 +1920,7 @@ streets_to_dam_wave_1_rpg_spawn_func() {
 
   if(self.script_noteworthy == "rpg_guy_1") {
     var_0 = getnode("rpg_node_1", "targetname");
-  }
-  else {
+  } else {
     var_0 = getnode("rpg_node_2", "targetname");
   }
 
@@ -1953,8 +1949,7 @@ streets_to_dam_wave_1_street_patrol_spawn_func() {
 
   if(common_scripts\utility::flag("convoy_gone")) {
     var_0 = getent("enemies_left_goal_volume", "targetname");
-  }
-  else {
+  } else {
     var_0 = getent("enemies_convoy_goal_volume", "targetname");
   }
 
@@ -2011,8 +2006,7 @@ streets_to_dam_wave_1_spawn_func() {
 
   if(common_scripts\utility::flag("convoy_gone")) {
     var_0 = getent("enemies_left_goal_volume", "targetname");
-  }
-  else {
+  } else {
     var_0 = getent("enemies_convoy_goal_volume", "targetname");
   }
 
@@ -2052,7 +2046,7 @@ m880_open_path_init() {
   var_0 = getEntArray("m880_show_to_open_path", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 }
 
@@ -2060,19 +2054,19 @@ m880_open_path() {
   var_0 = getEntArray("m880_delete_to_open_path", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   var_0 = getEntArray("m880_collision_brush", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   var_0 = getEntArray("m880_show_to_open_path", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 show();
+    var_2 show();
   }
 }
 
@@ -2390,8 +2384,7 @@ mlrs_start_qte(var_0) {
 mlrs_stop_qte_hint() {
   if(common_scripts\utility::flag("qte_window_closed")) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -2546,9 +2539,7 @@ play_ally_launcher_vignette(var_0, var_1, var_2, var_3, var_4) {
       wait(randomfloatrange(0.2, 1.0));
 
       if(isDefined(var_4)) {
-        [
-          [var_2]
-        ](self, var_1.origin, var_4);
+        [[var_2]](self, var_1.origin, var_4);
         continue;
       }
 
@@ -2693,7 +2684,7 @@ init_turn_off_lean_volumes() {
   var_0 = getEntArray("turn_off_lean", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 turn_off_lean();
+    var_2 turn_off_lean();
   }
 }
 
@@ -2799,7 +2790,7 @@ streets_to_dam_wave_2_sequence() {
   common_scripts\utility::array_thread(var_3, maps\_utility::spawn_ai);
 
   foreach(var_5 in level.side_guys) {
-  var_5 notify("stop_ignoring_player");
+    var_5 notify("stop_ignoring_player");
   }
 
   common_scripts\utility::flag_wait("missile_launcher_destruction_done");
@@ -2840,7 +2831,7 @@ streets_to_dam_wave_2_sequence() {
 
   if(var_3.size > 4) {
     foreach(var_5 in var_3) {
-    var_5.favoriteenemy = level.player;
+      var_5.favoriteenemy = level.player;
     }
   } else {
     foreach(var_5 in var_3) {
@@ -2861,7 +2852,7 @@ throw_grenade_if_player_behind_tank() {
     var_1 = getaiarray("axis");
 
     foreach(var_3 in var_1) {
-    var_3 thread maps\_utility::throwgrenadeatplayerasap();
+      var_3 thread maps\_utility::throwgrenadeatplayerasap();
     }
   }
 }
@@ -2955,8 +2946,7 @@ streets_to_dam_wave_2_first_spawn_func() {
 
   if(isDefined(self.script_noteworthy) && self.script_noteworthy == "exposed_guy") {
     thread exposed_guy_think();
-  }
-  else {
+  } else {
     self.favoriteenemy = level.player;
     common_scripts\utility::flag_wait("missile_launcher_destruction_done");
     self.favoriteenemy = level.player;
@@ -3317,7 +3307,7 @@ remove_streets_to_dam_ents() {
   var_0 = getweaponarray();
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   delete_ent_by_targetname("enemy_convoy_vehicles_launcher");
@@ -3409,8 +3399,7 @@ flood_shake_tree_internal() {
 
   if(randomfloat(1.0) < 0.3333) {
     playFXOnTag(level._effect["birds_flood_street_birds_01"], self, "J_Tip2_Tall2");
-  }
-  else if(self.script_noteworthy == "flood_shake_tree_right_4" || self.script_noteworthy == "flood_shake_tree_left_4" || self.script_noteworthy == "flood_shake_tree_right_5" || self.script_noteworthy == "flood_shake_tree_right_6") {
+  } else if(self.script_noteworthy == "flood_shake_tree_right_4" || self.script_noteworthy == "flood_shake_tree_left_4" || self.script_noteworthy == "flood_shake_tree_right_5" || self.script_noteworthy == "flood_shake_tree_right_6") {
     playFXOnTag(level._effect["birds_flood_street_birds_01"], self, "J_Tip2_Tall2");
   }
 
@@ -3500,7 +3489,7 @@ spawn_ml_drivers() {
   var_0 = getEntArray("dam_missile_drivers", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 maps\_utility::add_spawn_function(::ml_driver_spawn_func);
+    var_2 maps\_utility::add_spawn_function(::ml_driver_spawn_func);
   }
 
   maps\_utility::array_spawn(var_0);
@@ -3569,7 +3558,7 @@ manage_mantles() {
   var_0 = getEntArray("mantle_trigger", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread show_hide_mantle();
+    var_2 thread show_hide_mantle();
   }
 }
 
@@ -3738,7 +3727,7 @@ remove_allies() {
 
   if(var_0.size > 0) {
     foreach(var_2 in var_0) {
-    var_2 delete();
+      var_2 delete();
     }
   }
 }
@@ -3821,6 +3810,6 @@ dam_waterfall_hide() {
   var_0 = getEntArray("dam_waterfall_to_hide", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }

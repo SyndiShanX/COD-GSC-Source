@@ -200,93 +200,91 @@ playerWeather() {
 rainlevelRandomwait() {
   if(level.rainLevel == 0) {
     return (randomfloat(30));
+  } else {
+    if(level.rainLevel == 1)
   }
+  return (randomfloat(24));
   else {
-  if(level.rainLevel == 1)
+    if(level.rainLevel == 2)
   }
-    return (randomfloat(24));
+  return (randomfloat(20));
   else {
-  if(level.rainLevel == 2)
+    if(level.rainLevel == 3)
   }
-    return (randomfloat(20));
+  return (randomfloat(15));
   else {
-  if(level.rainLevel == 3)
+    if(level.rainLevel == 4)
   }
-    return (randomfloat(15));
+  return (randomfloat(12));
   else {
-  if(level.rainLevel == 4)
+    if(level.rainLevel == 5)
   }
-    return (randomfloat(12));
+  return (randomfloat(9));
   else {
-  if(level.rainLevel == 5)
+    if(level.rainLevel == 6)
   }
-    return (randomfloat(9));
+  return (randomfloat(8));
   else {
-  if(level.rainLevel == 6)
+    if(level.rainLevel == 7)
   }
-    return (randomfloat(8));
+  return (randomfloat(8));
   else {
-  if(level.rainLevel == 7)
+    if(level.rainLevel == 8)
   }
-    return (randomfloat(8));
+  return (randomfloat(7));
   else {
-  if(level.rainLevel == 8)
+    if(level.rainLevel == 9)
   }
-    return (randomfloat(7));
+  return (randomfloat(6));
   else {
-  if(level.rainLevel == 9)
+    if(level.rainLevel == 10)
   }
-    return (randomfloat(6));
-  else {
-  if(level.rainLevel == 10)
-  }
-    return (randomfloat(5));
+  return (randomfloat(5));
 }
 
 rainlevelwait() {
   if(level.rainLevel == 0) {
     return (20);
+  } else {
+    if(level.rainLevel == 1)
   }
+  return (18);
   else {
-  if(level.rainLevel == 1)
+    if(level.rainLevel == 2)
   }
-    return (18);
+  return (16);
   else {
-  if(level.rainLevel == 2)
+    if(level.rainLevel == 3)
   }
-    return (16);
+  return (14);
   else {
-  if(level.rainLevel == 3)
+    if(level.rainLevel == 4)
   }
-    return (14);
+  return (12);
   else {
-  if(level.rainLevel == 4)
+    if(level.rainLevel == 5)
   }
-    return (12);
+  return (10);
   else {
-  if(level.rainLevel == 5)
+    if(level.rainLevel == 6)
   }
-    return (10);
+  return (9);
   else {
-  if(level.rainLevel == 6)
+    if(level.rainLevel == 7)
   }
-    return (9);
+  return (8);
   else {
-  if(level.rainLevel == 7)
+    if(level.rainLevel == 8)
   }
-    return (8);
+  return (7);
   else {
-  if(level.rainLevel == 8)
+    if(level.rainLevel == 9)
   }
-    return (7);
+  return (6);
   else {
-  if(level.rainLevel == 9)
+    if(level.rainLevel == 10)
   }
-    return (6);
-  else {
-  if(level.rainLevel == 10)
-  }
-    return (5);
+  return (5);
 }
 
 lightningThink(normal, flash) {
@@ -369,55 +367,53 @@ lightningFlash(normal, flashfunc, flashType) {
 thunder() {
   if(level.rainLevel == 0) {
     wait(6 + randomfloat(2));
+  } else {
+    if(level.rainLevel == 1)
   }
+  wait(5 + randomfloat(1.8));
   else {
-  if(level.rainLevel == 1)
+    if(level.rainLevel == 2)
   }
-    wait(5 + randomfloat(1.8));
+  wait(4.5 + randomfloat(1.6));
   else {
-  if(level.rainLevel == 2)
+    if(level.rainLevel == 3)
   }
-    wait(4.5 + randomfloat(1.6));
+  wait(4 + randomfloat(1.6));
   else {
-  if(level.rainLevel == 3)
+    if(level.rainLevel == 4)
   }
-    wait(4 + randomfloat(1.6));
+  wait(3.5 + randomfloat(1.5));
   else {
-  if(level.rainLevel == 4)
+    if(level.rainLevel == 5)
   }
-    wait(3.5 + randomfloat(1.5));
+  wait(3 + randomfloat(1.5));
   else {
-  if(level.rainLevel == 5)
+    if(level.rainLevel == 6)
   }
-    wait(3 + randomfloat(1.5));
+  wait(2.5 + randomfloat(1.2));
   else {
-  if(level.rainLevel == 6)
+    if(level.rainLevel == 7)
   }
-    wait(2.5 + randomfloat(1.2));
+  wait(2 + randomfloat(1));
   else {
-  if(level.rainLevel == 7)
+    if(level.rainLevel == 8)
   }
-    wait(2 + randomfloat(1));
+  wait(1.9 + randomfloat(0.5));
   else {
-  if(level.rainLevel == 8)
+    if(level.rainLevel == 9)
   }
-    wait(1.9 + randomfloat(0.5));
+  wait(1.5);
   else {
-  if(level.rainLevel == 9)
+    if(level.rainLevel == 10)
   }
-    wait(1.5);
-  else {
-  if(level.rainLevel == 10)
-  }
-    wait(1);
+  wait(1);
 
   ent = spawn("script_origin", (0, 0, 0));
   ent.origin = level.player.origin + (0, 0, 60);
   ent linkto(level.player);
   if(level.rainlevel <= 8) {
     ent playSound("elm_thunder_distant", "sounddone");
-  }
-  else {
+  } else {
     ent playSound("elm_thunder_distant", "sounddone");
     ent thread play_sound_on_entity("elm_thunder_strike");
   }

@@ -36,7 +36,7 @@ init_class_table() {
     var_5 = [];
 
     foreach(var_7 in var_1) {
-    var_5[var_7] = tablelookup(var_0, 0, var_7, var_2);
+      var_5[var_7] = tablelookup(var_0, 0, var_7, var_2);
     }
 
     var_9 = strtok(var_3, "| ");
@@ -374,8 +374,7 @@ bot_validate_attachkit_for_weapon(var_0, var_1, var_2) {
         var_9 = 1;
 
         for(var_11 = 0; var_11 < var_8.size; var_11++) {
-          if(var_11 != var_10) {
-          }
+          if(var_11 != var_10) {}
         }
 
         break;
@@ -415,8 +414,7 @@ init_bot_weap_statstable() {
 
       if(maps\mp\gametypes\_class::isvalidsecondary(var_6)) {
         var_9 = "loadoutSecondary";
-      }
-      else if(!maps\mp\gametypes\_class::isvalidprimary(var_6)) {
+      } else if(!maps\mp\gametypes\_class::isvalidprimary(var_6)) {
         var_4++;
         continue;
       }
@@ -466,8 +464,7 @@ bot_loadout_choose_from_statstable(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_3 == "camper" || var_3 == "run_and_gun") {
       var_3 = "cqb";
-    }
-    else if(var_3 == "cqb") {
+    } else if(var_3 == "cqb") {
       var_3 = "run_and_gun";
     }
   }
@@ -527,8 +524,7 @@ bot_validate_perk(var_0, var_1, var_2) {
 
   if(var_1 == "loadoutPerk2") {
     var_3 = "Perk_Slot2";
-  }
-  else if(var_1 == "loadoutPerk3") {
+  } else if(var_1 == "loadoutPerk3") {
     var_3 = "Perk_Slot3";
   }
 
@@ -961,8 +957,7 @@ bot_loadout_choose_from_set(var_0, var_1, var_2, var_3, var_4) {
 
   if(common_scripts\utility::array_contains(var_0, "specialty_null")) {
     var_5 = "specialty_null";
-  }
-  else if(var_3 == "loadoutEquipment" || var_3 == "loadoutOffhand" || issubstr(var_3, "Perk")) {
+  } else if(var_3 == "loadoutEquipment" || var_3 == "loadoutOffhand" || issubstr(var_3, "Perk")) {
     var_5 = "specialty_null";
   }
 
@@ -1070,14 +1065,11 @@ bot_get_stored_launcher_class() {
 bot_allowed_to_try_last_loadout() {
   if(maps\mp\_utility::is_true(self.bot_pick_new_loadout_next_spawn)) {
     return 0;
-  }
-  else if(!isDefined(self.pers["botLastLoadout"])) {
+  } else if(!isDefined(self.pers["botLastLoadout"])) {
     return 0;
-  }
-  else if(maps\mp\_utility::is_true(self.respawn_with_launcher)) {
+  } else if(maps\mp\_utility::is_true(self.respawn_with_launcher)) {
     return 0;
-  }
-  else if(isDefined(self.hasdied) && !self.hasdied) {
+  } else if(isDefined(self.hasdied) && !self.hasdied) {
     return 0;
   }
 
@@ -1171,8 +1163,7 @@ bot_loadout_class_callback(var_0) {
 
   if(var_3 == "cqb") {
     self.bot_loadout_can_pick_silencer = randomfloat(1.0) < 0.5;
-  }
-  else {
+  } else {
     self.bot_loadout_can_pick_silencer = randomfloat(1.0) < 0.25;
   }
 
@@ -1212,8 +1203,7 @@ bot_loadout_class_callback(var_0) {
     if(isDefined(self.bot_fallback_personality)) {
       if(self.bot_fallback_personality == "weapon") {
         bot_pick_personality_from_weapon(var_1["loadoutPrimary"]);
-      }
-      else {
+      } else {
         maps\mp\bots\_bots_util::bot_set_personality(self.bot_fallback_personality);
       }
 

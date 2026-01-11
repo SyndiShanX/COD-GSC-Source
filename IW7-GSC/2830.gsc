@@ -46,8 +46,7 @@ func_7E6B() {
 func_7FD9(var_00) {
   if(var_00 == 0) {
     var_01 = &"AUTOSAVE_GAME";
-  }
-  else {
+  } else {
     var_01 = &"AUTOSAVE_NOGAME";
   }
 
@@ -79,11 +78,9 @@ immediatelevelstartsave() {
 
   if(isDefined(level.func_4A3A)) {
     var_02 = 1;
-  }
-  else if(level.func_B8D0) {
+  } else if(level.func_B8D0) {
     var_02 = 1;
-  }
-  else if(scripts\engine\utility::flag("game_saving")) {
+  } else if(scripts\engine\utility::flag("game_saving")) {
     var_02 = 1;
   }
 
@@ -108,8 +105,7 @@ immediatelevelstartsave() {
 func_2A6E() {
   if(isDefined(level.func_2A6F)) {
     wait(level.func_2A6F);
-  }
-  else {
+  } else {
     wait 2;
   }
 
@@ -251,8 +247,7 @@ func_1190(var_00, var_01) {
 
   if(isDefined(var_00)) {
     var_07 = _savegamenocommit(var_05, var_06, "$default", 1);
-  }
-  else {
+  } else {
     var_07 = _savegamenocommit(var_05, var_06);
   }
 
@@ -685,8 +680,7 @@ func_268A(var_00) {
 
   if(var_5["fraction"] < 1) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -799,11 +793,9 @@ func_2674(var_00) {
 
     if(var_03 < 40000) {
       return "return_even_if_low_accuracy";
-    }
-    else if(var_03 < 129600) {
+    } else if(var_03 < 129600) {
       return "return";
-    }
-    else if(var_03 < 1000000) {
+    } else if(var_03 < 1000000) {
       return "threat_exists";
     }
   }

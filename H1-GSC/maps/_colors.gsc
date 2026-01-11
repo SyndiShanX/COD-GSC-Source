@@ -235,8 +235,7 @@ trigger_issues_orders(var_0, var_1) {
 activate_color_trigger(var_0) {
   if(var_0 == "allies") {
     thread get_colorcodes_and_activate_trigger(self.script_color_allies, var_0);
-  }
-  else {
+  } else {
     thread get_colorcodes_and_activate_trigger(self.script_color_axis, var_0);
   }
 }
@@ -308,8 +307,7 @@ same_color_code_as_last_time(var_0, var_1) {
 process_cover_node_with_last_in_mind_allies(var_0, var_1) {
   if(issubstr(var_0.script_color_allies, var_1)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = var_0;
-  }
-  else {
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = var_0;
   }
 }
@@ -317,8 +315,7 @@ process_cover_node_with_last_in_mind_allies(var_0, var_1) {
 process_cover_node_with_last_in_mind_axis(var_0, var_1) {
   if(issubstr(var_0.script_color_axis, var_1)) {
     self.cover_nodes_last[self.cover_nodes_last.size] = var_0;
-  }
-  else {
+  } else {
     self.cover_nodes_first[self.cover_nodes_first.size] = var_0;
   }
 }
@@ -431,14 +428,14 @@ issue_color_order_to_ai(var_0, var_1, var_2, var_3) {
     var_20 = (0, 0, 0);
 
     foreach(var_15 in var_5) {
-    var_20 = var_20 + var_15.origin;
+      var_20 = var_20 + var_15.origin;
     }
 
     var_20 = var_20 / var_5.size;
     var_23 = (0, 0, 0);
 
     foreach(var_10 in var_3) {
-    var_23 = var_23 + var_10.origin;
+      var_23 = var_23 + var_10.origin;
     }
 
     var_23 = var_23 / var_3.size;
@@ -480,8 +477,7 @@ take_color_node(var_0, var_1, var_2, var_3) {
 assign_nodes_intelligently_for_squad(var_0) {
   if(var_0) {
     self.script_color_assign_intelligently = 1;
-  }
-  else {
+  } else {
     self.script_color_assign_intelligently = undefined;
   }
 }
@@ -626,8 +622,7 @@ set_goal_and_volume(var_0) {
 
   if(!self.fixednode) {
     self.goalradius = var_0.radius;
-  }
-  else if(isDefined(var_0.radius)) {
+  } else if(isDefined(var_0.radius)) {
     self.goalradius = var_0.radius;
   }
 
@@ -635,15 +630,13 @@ set_goal_and_volume(var_0) {
 
   if(isDefined(var_1)) {
     self setfixednodesafevolume(var_1);
-  }
-  else {
+  } else {
     self clearfixednodesafevolume();
   }
 
   if(isDefined(var_0.fixednodesaferadius)) {
     self.fixednodesaferadius = var_0.fixednodesaferadius;
-  }
-  else {
+  } else {
     self.fixednodesaferadius = 64;
   }
 }
@@ -908,8 +901,7 @@ nodethink() {
 
   if(isDefined(self.script_color_allies)) {
     var_0 = self.script_color_allies;
-  }
-  else if(isDefined(self.script_color_axis)) {
+  } else if(isDefined(self.script_color_axis)) {
     var_0 = self.script_color_axis;
     var_1 = "bg-";
   }
@@ -921,12 +913,9 @@ nodethink() {
     var_2 = maps\_utility::get_script_palette();
     var_3 = strtok(var_0, " ");
 
-    if(var_3.size > 1) {
-    } else {
-    }
+    if(var_3.size > 1) {} else {}
 
-    if(randomint(100) > 70) {
-    }
+    if(randomint(100) > 70) {}
 
     waitframe();
   }

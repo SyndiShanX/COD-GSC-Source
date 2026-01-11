@@ -11,7 +11,7 @@ init() {
   level.calloutglobals.areatriggers = getEntArray("callout_area", "targetname");
 
   foreach(var_01 in level.calloutglobals.areatriggers) {
-  var_01 thread calloutareathink();
+    var_01 thread calloutareathink();
   }
 
   thread monitorplayers();

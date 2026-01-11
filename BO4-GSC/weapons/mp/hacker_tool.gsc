@@ -5,7 +5,6 @@
 
 #include scripts\core_common\system_shared;
 #include scripts\weapons\hacker_tool;
-
 #namespace hacker_tool;
 
 autoexec __init__system__() {

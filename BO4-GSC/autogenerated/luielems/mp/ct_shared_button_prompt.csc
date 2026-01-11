@@ -4,7 +4,6 @@
 *****************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace ct_shared_button_prompt;
 
 class cct_shared_button_prompt: cluielem {
@@ -98,12 +97,12 @@ class cct_shared_button_prompt: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"ct_shared_button_prompt");
+    cluielem::open(localclientnum, # "ct_shared_button_prompt");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_state(localclientnum, #"defaultstate");
+    set_state(localclientnum, # "defaultstate");
   }
 
   function register_clientside(uid) {

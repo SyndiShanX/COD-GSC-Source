@@ -39,14 +39,11 @@ playpainoverlay(var_00, var_01, var_02) {
 
   if(is_spitter_spit(var_01)) {
     play_spitter_pain_overlay(var_03);
-  }
-  else if(is_spitter_gas(var_01)) {
+  } else if(is_spitter_gas(var_01)) {
     play_spitter_pain_overlay("center");
-  }
-  else if(is_elite_attack(var_00)) {
+  } else if(is_elite_attack(var_00)) {
     playfxontagforclients(level._effect["vfx_melee_blood_spray"], self, "tag_eye", self);
-  }
-  else {
+  } else {
     play_basic_pain_overlay(var_03);
   }
 }
@@ -72,8 +69,7 @@ get_damage_direction(var_00) {
 
   if(var_06 > 0) {
     return "right";
-  }
-  else {
+  } else {
     return "left";
   }
 }
@@ -108,14 +104,11 @@ play_spitter_pain_overlay(var_00) {
   }
   if(var_00 == "left") {
     playfxontagforclients(level._effect["vfx_alien_spitter_hit_left"], self, "tag_eye", self);
-  }
-  else if(var_00 == "center") {
+  } else if(var_00 == "center") {
     playfxontagforclients(level._effect["vfx_alien_spitter_hit_center"], self, "tag_eye", self);
-  }
-  else if(var_00 == "right") {
+  } else if(var_00 == "right") {
     playfxontagforclients(level._effect["vfx_alien_spitter_hit_right"], self, "tag_eye", self);
-  }
-  else {}
+  } else {}
 }
 
 play_basic_pain_overlay(var_00) {
@@ -129,14 +122,11 @@ play_basic_pain_overlay(var_00) {
   }
   if(var_00 == "left") {
     playfxontagforclients(level._effect["vfx_blood_hit_left"], var_01, "tag_eye", self);
-  }
-  else if(var_00 == "center") {
+  } else if(var_00 == "center") {
     playfxontagforclients(level._effect["vfx_melee_blood_spray"], var_01, "tag_eye", self);
-  }
-  else if(var_00 == "right") {
+  } else if(var_00 == "right") {
     playfxontagforclients(level._effect["vfx_blood_hit_right"], var_01, "tag_eye", self);
-  }
-  else {}
+  } else {}
 }
 
 zom_player_damage_flash() {
@@ -187,8 +177,7 @@ zom_player_health_overlay_watcher() {
 introscreen_corner_line(var_00, var_01) {
   if(!isDefined(level.intro_offset)) {
     level.intro_offset = 0;
-  }
-  else {
+  } else {
     level.intro_offset++;
   }
 

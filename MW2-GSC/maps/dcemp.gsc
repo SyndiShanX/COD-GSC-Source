@@ -447,7 +447,7 @@ iss_nag_dialogue() {
     if(!isDefined(level.player iss_wait_player_see_icbm(.5))) {
       //Sat1, rotate your view a little further to the right will ya?
     }
-      thread radio_dialogue("dcemp_iss_rotateview");
+    thread radio_dialogue("dcemp_iss_rotateview");
 
     if(isDefined(level.player iss_wait_player_see_icbm(13))) {
       break;
@@ -1319,7 +1319,7 @@ corner_main() {
   flag_wait("corner_main");
 
   foreach(member in level.team) {
-  member.walkDistFacingMotion = 0;
+    member.walkDistFacingMotion = 0;
   }
 
   array_thread(level.team, ::enable_arrivals);
@@ -2485,7 +2485,7 @@ office_bcs_fix() {
   wait 9.5;
 
   foreach(member in level.team) {
-  member._animActive = 0;
+    member._animActive = 0;
   }
 }
 
@@ -2735,10 +2735,8 @@ parking_open_fire() {
     vec2 = anglesToForward(self gettagAngles("TAG_FLASH"));
     if(vectordot(vec1, vec2) > .7) {
       self shoot();
-    }
-    else {
-    if(!player_looking_at(self getEye()) && distancesquared(self.origin, level.player.origin) > squared(512)) {
-    }
+    } else {
+      if(!player_looking_at(self getEye()) && distancesquared(self.origin, level.player.origin) > squared(512)) {}
       array = bulletTrace(self getEye(), node.origin, false, self);
       if(!isDefined(array["entity"]) || !isplayer(array["entity"])) {
         magicbullet(self.weapon, self getEye(), node.origin);
@@ -3249,7 +3247,7 @@ plaza_main2() {
   array_thread(level.team, ::set_moveplaybackrate, 1.0);
 
   foreach(member in level.team) {
-  member.grenadeammo = member.oldgrenade;
+    member.grenadeammo = member.oldgrenade;
   }
 
   thread plaza_kill_enemies();
@@ -3275,14 +3273,14 @@ plaza_main2() {
   array_thread(level.team, ::ent_flag_init, "plaza_moveout_exit2");
 
   foreach(member in level.team) {
-  member add_wait(::ent_flag_wait, "plaza_moveout_exit");
+    member add_wait(::ent_flag_wait, "plaza_moveout_exit");
   }
   add_wait(::flag_wait, "plaza_player_exit1");
   add_func(::flag_set, "plaza_moveout_exit");
   thread do_wait();
 
   foreach(member in level.team) {
-  member add_wait(::ent_flag_wait, "plaza_moveout_exit2");
+    member add_wait(::ent_flag_wait, "plaza_moveout_exit2");
   }
   add_wait(::flag_wait, "plaza_player_exit2");
   add_func(::flag_set, "plaza_moveout_exit2");
@@ -3314,7 +3312,7 @@ plaza_kill_enemies() {
 
   ai = getaiarray("axis");
   foreach(member in ai) {
-  member.diequietly = true;
+    member.diequietly = true;
   }
   array_call(ai, ::kill);
 }
@@ -3942,7 +3940,7 @@ start_corner() {
   glass = getglassarray("street_hide_glass");
   dir = anglesToForward((0, 345, 0));
   foreach(piece in glass) {
-  noself_delaycall(1, ::destroyglass, piece, dir * 200);
+    noself_delaycall(1, ::destroyglass, piece, dir * 200);
   }
 
   thread battlechatter_off();
@@ -3960,7 +3958,7 @@ start_corner() {
   emp_teleport_player();
 
   foreach(member in level.team) {
-  member.alertLevel = "alert";
+    member.alertLevel = "alert";
   }
 
   node = getnode("corner_macey_hide_node", "targetname");
@@ -4229,34 +4227,34 @@ dcemp_music() {
 
       println(" *** MUSIC: dc_emp_missile *** ");
 
-        flag_wait("dc_emp_missile_hit");
+      flag_wait("dc_emp_missile_hit");
       //	thread music_stop( 1.0 );
       //	level.player thread playlocalsoundwrapper( "dc_emp_missile_hit_sfx" );
       thread music_play("dc_emp_missile_hit");
 
       println(" *** MUSIC: dc_emp_missile_hit *** ");
 
-        case "emp":
-        case "street":
-        flag_wait("dc_emp_afternath");
+    case "emp":
+    case "street":
+      flag_wait("dc_emp_afternath");
       thread music_play("dc_emp_afternath");
 
       println(" *** MUSIC: dc_emp_afternath *** ");
 
-        case "corner":
-        case "meetup":
-        case "lobby":
-        case "office":
-        case "parking":
-        case "plaza":
-        case "tunnels":
-        flag_wait("dc_emp_bunker");
+    case "corner":
+    case "meetup":
+    case "lobby":
+    case "office":
+    case "parking":
+    case "plaza":
+    case "tunnels":
+      flag_wait("dc_emp_bunker");
       wait 2.5;
       thread music_play("dc_emp_bunker");
 
       println(" *** MUSIC: dc_emp_bunker *** ");
 
-        break;
+      break;
 
     default:
       AssertMsg("Unhandled start point " + level.start_point);

@@ -418,8 +418,7 @@ apply_iw4_costumes() {
       case "weapon_sniper":
         if(self.team == "allies") {
           allies_ghillie_setviewmodel();
-        }
-        else {
+        } else {
           axis_ghillie_setviewmodel();
         }
         break;
@@ -447,8 +446,7 @@ apply_iw4_costumes() {
     case "weapon_sniper":
       if(self.team == "allies") {
         allies_ghillie_setviewmodel();
-      }
-      else {
+      } else {
         axis_ghillie_setviewmodel();
       }
       break;
@@ -489,8 +487,7 @@ randomBotCostume() {
     case "weapon_sniper":
       if(self.team == "allies") {
         allies_ghillie_setviewmodel();
-      }
-      else {
+      } else {
         axis_ghillie_setviewmodel();
       }
       break;

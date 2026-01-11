@@ -46,8 +46,7 @@ monitorempgrenade() {
     if(level.teambased && isDefined(attacker) && isDefined(attacker.team) && attacker.team == self.team && attacker != self) {
       if(level.friendlyfire == 0) {
         continue;
-      }
-      else if(level.friendlyfire == 1) {
+      } else if(level.friendlyfire == 1) {
         hurtattacker = 0;
         hurtvictim = 1;
       } else if(level.friendlyfire == 2) {
@@ -82,8 +81,7 @@ applyemp(attacker) {
 
       if(emp_time_left_ms > 1000) {
         self.empduration = emp_time_left_ms / 1000;
-      }
-      else {
+      } else {
         self.empduration = 1;
       }
     } else
@@ -140,7 +138,7 @@ watchempexplosion(owner, weaponname) {
   ents = getdamageableentarray(origin, 512);
 
   foreach(ent in ents) {
-  ent dodamage(1, origin, owner, owner, "none", "MOD_GRENADE_SPLASH", 0, weaponname);
+    ent dodamage(1, origin, owner, owner, "none", "MOD_GRENADE_SPLASH", 0, weaponname);
   }
 }
 

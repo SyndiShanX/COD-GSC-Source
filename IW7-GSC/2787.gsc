@@ -128,8 +128,7 @@ func_2B48() {
 
       if(var_06 < 0) {
         var_06 = 0;
-      }
-      else if(var_06 > 1) {
+      } else if(var_06 > 1) {
         var_06 = 1;
       }
 

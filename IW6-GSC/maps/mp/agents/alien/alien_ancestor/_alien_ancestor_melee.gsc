@@ -99,8 +99,7 @@ fire_blast_projectile() {
   }
   if(!isDefined(self.blast_target.usingremote)) {
     var_0 = self.blast_target getEye();
-  }
-  else {
+  } else {
     var_0 = self.blast_target.origin + (0, 0, 32);
   }
 
@@ -110,8 +109,7 @@ fire_blast_projectile() {
 
   if(!isDefined(self.blast_target.usingremote)) {
     var_3 = self.blast_target getEye() - self.blast_target.origin;
-  }
-  else {
+  } else {
     var_3 = (0, 0, 32);
   }
 
@@ -170,8 +168,7 @@ blast_tracking_monitor(var_0) {
 
           if(!isDefined(var_1.usingremote)) {
             var_8 = var_1 getEye() - var_1.origin;
-          }
-          else {
+          } else {
             var_8 = (0, 0, 32);
           }
 
@@ -242,8 +239,7 @@ blast_projectile_proximity_monitor(var_0) {
 get_blast_fire_pos(var_0) {
   if(self.blast_anim_index == 0) {
     var_1 = "TAG_WEAPON_RIGHT";
-  }
-  else {
+  } else {
     var_1 = "TAG_WEAPON_LEFT";
   }
 
@@ -299,8 +295,7 @@ grab_attack() {
 
   if(self.grab_status == 3) {
     maps\mp\agents\_scriptedagents::playanimnuntilnotetrack("attack_grab", 4, "attack_melee", "end", ::handleattacknotetracks);
-  }
-  else if(self.grab_status == 4) {
+  } else if(self.grab_status == 4) {
     handle_post_grab_targets();
     maps\mp\agents\_scriptedagents::playanimnuntilnotetrack("attack_grab", 5, "attack_melee", "end");
   }
@@ -321,8 +316,7 @@ play_initial_grab_anims() {
 
   if(self.current_grab_victims.size > 0) {
     maps\mp\agents\_scriptedagents::playanimnuntilnotetrack(var_0, 2, var_1, var_2, ::handleattacknotetracks);
-  }
-  else {
+  } else {
     self.grab_status = 6;
     self notify("grab_finished");
   }
@@ -427,14 +421,11 @@ monitor_grab_status() {
 
   if(level.players.size == 4) {
     var_0 = 900;
-  }
-  else if(level.players.size == 3) {
+  } else if(level.players.size == 3) {
     var_0 = 800;
-  }
-  else if(level.players.size == 2) {
+  } else if(level.players.size == 2) {
     var_0 = 700;
-  }
-  else if(level.players.size == 1) {
+  } else if(level.players.size == 1) {
     var_0 = 600;
   }
 
@@ -612,8 +603,7 @@ grab_detect_stuck() {
 
   if(var_2 == "unresolved_collision") {
     var_1 = 1;
-  }
-  else if(var_2 == "grab_finished") {
+  } else if(var_2 == "grab_finished") {
     var_3 = self.origin;
     wait 0.5;
 
@@ -694,7 +684,7 @@ watch_for_death_during_spawn() {
 
 release_minions() {
   foreach(var_1 in self.minions) {
-  var_1 notify("minion_released");
+    var_1 notify("minion_released");
   }
 
   self notify("minion_released");
@@ -749,8 +739,7 @@ set_minion_enemy(var_0) {
 
   if(isalive(var_0)) {
     var_0 common_scripts\utility::waittill_any_timeout(var_1, "death");
-  }
-  else {
+  } else {
     wait(var_1);
   }
 
@@ -872,8 +861,7 @@ handleattacknotetracks(var_0, var_1, var_2, var_3) {
     case "ball_projectile_start":
       if(isDefined(self.forced_blast_position)) {
         fire_forced_blast_projectile();
-      }
-      else {
+      } else {
         fire_blast_projectile();
       }
 

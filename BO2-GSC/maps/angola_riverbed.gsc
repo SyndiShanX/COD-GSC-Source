@@ -50,7 +50,7 @@ riverbed_intro() {
   a_buffel_cracked_windshields[4] = spawn_model("veh_t6_mil_buffelapc_windshield_cracked05", m_buffel_windshield.origin - (1, 0, 0), m_buffel_windshield.angles);
 
   foreach(window in a_buffel_cracked_windshields) {
-  window hide();
+    window hide();
   }
 
   level thread animate_grass(1);
@@ -95,8 +95,7 @@ prep_intro_fx() {
 scripted_intro_fx() {
   if(!is_mature()) {
     player_body = get_model_or_models_from_scene("level_intro_player_censored", "player_body");
-  }
-  else {
+  } else {
     player_body = get_model_or_models_from_scene("level_intro_player", "player_body");
   }
 
@@ -135,8 +134,7 @@ riverbed_intro_player() {
 
   if(is_mature()) {
     level thread run_scene("level_intro_player");
-  }
-  else {
+  } else {
     level thread run_scene("level_intro_player_censored");
   }
 
@@ -151,8 +149,7 @@ riverbed_intro_player() {
 
   if(is_mature()) {
     scene_wait("level_intro_player");
-  }
-  else {
+  } else {
     scene_wait("level_intro_player_censored");
   }
 
@@ -244,7 +241,7 @@ riverbed_intro_buffel(m_pristine_window, a_buffel_cracked_windshields) {
   hack_windows = getEntArray("buffel_windshields", "targetname");
 
   foreach(window in hack_windows) {
-  window delete();
+    window delete();
   }
 }
 
@@ -323,7 +320,7 @@ riverbed() {
   a_convoy_trailers = get_ai_array("convoy_trailers", "script_noteworthy");
 
   foreach(guy in a_convoy_trailers) {
-  guy magic_bullet_shield();
+    guy magic_bullet_shield();
   }
 
   level thread prep_start_buffel_unload();
@@ -413,9 +410,7 @@ riverbed_ambient_scenes() {
 
     if(i == 3 || i == 8) {
       m_actor attach("t6_wpn_machete_prop", "tag_weapon_left");
-    }
-    else if(i == 4) {
-    } else if(i == 1 || i == 2)
+    } else if(i == 4) {} else if(i == 1 || i == 2)
       level thread fake_weapon(m_actor);
 
     level thread run_scene("riverbed_ambience_" + i);
@@ -472,13 +467,12 @@ riverbed_ambient_scenes() {
     a_soldiers = getEntArray("intro_soldier_" + i + "_ai", "targetname");
 
     foreach(soldier in a_soldiers) {
-    soldier delete();
+      soldier delete();
     }
   }
 }
 
-riverbed_soldiers_move_up() {
-}
+riverbed_soldiers_move_up() {}
 
 riverbed_convoy() {
   a_nd_starts_intro = getvehiclenodearray("start_convoy_intro_path", "script_noteworthy");
@@ -489,8 +483,7 @@ riverbed_convoy() {
     if(is_mature()) {
       if(!flag("level_intro_player_done")) {
         a_nd_random = array_randomize(a_nd_starts_intro);
-      }
-      else {
+      } else {
         a_nd_random = array_randomize(a_nd_starts);
       }
     } else if(!flag("level_intro_player_censored_done"))
@@ -585,8 +578,7 @@ vo_riverbed_savimbi_nag() {
 
     if(n_count % 2 != 0) {
       level.savimbi say_dialog("savi_i_would_not_wish_you_0", 0.5);
-    }
-    else {
+    } else {
       level.savimbi say_dialog("savi_stay_close_to_the_co_0", 0.5);
     }
 

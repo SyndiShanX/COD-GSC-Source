@@ -461,9 +461,7 @@ class careadefend {
       if(m_n_state != 1) {
         continue;
       }
-      if(isDefined(m_func_prereq) && [
-          [m_func_prereq]
-        ](m_arg1) == 0) {
+      if(isDefined(m_func_prereq) && [[m_func_prereq]](m_arg1) == 0) {
         continue;
       }
       m_n_state = 2;

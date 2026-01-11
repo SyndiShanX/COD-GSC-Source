@@ -24,8 +24,7 @@ getdescription() {
 getnames(var_0) {
   if(var_0 == 0) {
     var_1 = &"AUTOSAVE_GAME";
-  }
-  else {
+  } else {
     var_1 = &"AUTOSAVE_NOGAME";
   }
 
@@ -165,8 +164,7 @@ _autosave_game_now(var_0) {
 
   if(isDefined(var_0)) {
     var_5 = savegamenocommit(var_3, var_4, "$default", 1);
-  }
-  else {
+  } else {
     var_5 = savegamenocommit(var_3, var_4);
   }
 
@@ -587,11 +585,9 @@ autosave_proximity_threat_func(var_0) {
 
     if(var_3 < 200) {
       return "return_even_if_low_accuracy";
-    }
-    else if(var_3 < 360) {
+    } else if(var_3 < 360) {
       return "return";
-    }
-    else if(var_3 < 1000) {
+    } else if(var_3 < 1000) {
       return "threat_exists";
     }
   }

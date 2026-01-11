@@ -138,14 +138,12 @@ precache_createfx_fx() {
   level._effect["fx_smk_tin_hat_sm"] = loadfx("smoke/fx_smk_tin_hat_sm");
 }
 
-footsteps() {
-}
+footsteps() {}
 
 toggle_water_fx_actor(localclientnum, set, newent) {
   if(set) {
     self thread _play_water_fx_actor(localclientnum);
-  }
-  else {
+  } else {
     self _kill_water_fx_actor(localclientnum);
   }
 }
@@ -202,8 +200,7 @@ _kill_water_fx_actor(localclientnum) {
 toggle_water_fx_model(localclientnum, set, newent) {
   if(set) {
     self thread _play_water_fx_model(localclientnum);
-  }
-  else {
+  } else {
     self _kill_water_fx_model(localclientnum);
   }
 }
@@ -221,8 +218,7 @@ _play_water_fx_model(localclientnum) {
 
   if(isDefined(n_fx_id)) {
     self.n_water_fx_id = playFXOnTag(localclientnum, n_fx_id, self.e_water_fx, "tag_origin");
-  }
-  else {
+  } else {
     return;
   }
 
@@ -271,8 +267,7 @@ play_water_fx_audio() {
     while(isDefined(self)) {
       if(self getspeed() > 50) {
         self.e_water_fx playLoopSound("chr_swimming_swim_loop_npc", 0.1);
-      }
-      else {
+      } else {
         self.e_water_fx playLoopSound("chr_swimming_float_loop_npc", 0.1);
       }
 

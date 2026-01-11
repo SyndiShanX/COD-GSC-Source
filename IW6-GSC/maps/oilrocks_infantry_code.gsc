@@ -53,8 +53,7 @@ convert_old_spawners_to_structs(var_0) {
 
     if(isDefined(var_4.angles)) {
       var_5.angles = var_4.angles;
-    }
-    else {
+    } else {
       var_5.angles = (0, 0, 0);
     }
 

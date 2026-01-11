@@ -246,7 +246,7 @@ infil_flyin_allies() {
   var_0 waittill("unloaded");
 
   foreach(var_4 in var_2) {
-  var_4 thread chopper02_ally(var_1.origin);
+    var_4 thread chopper02_ally(var_1.origin);
   }
 }
 
@@ -308,11 +308,11 @@ infil_flyin_old() {
   var_12["heli_02_ally_04"] = var_6;
 
   foreach(var_14 in var_10) {
-  var_14 linkto(var_0, "tag_player", (0, 0, 0), (0, 0, 0));
+    var_14 linkto(var_0, "tag_player", (0, 0, 0), (0, 0, 0));
   }
 
   foreach(var_14 in var_12) {
-  var_14 linkto(var_1, "tag_player", (0, 0, 0), (0, 0, 0));
+    var_14 linkto(var_1, "tag_player", (0, 0, 0), (0, 0, 0));
   }
 
   var_7 thread maps\_anim::anim_single(var_8, "infil");
@@ -322,7 +322,7 @@ infil_flyin_old() {
   maps\_utility::delaythread(level.infil_global_offset + 13, ::helo_01_others);
 
   foreach(var_14 in var_12) {
-  var_14 maps\_utility::delaythread(level.infil_global_offset + 4.6, ::helo_02_dismount, var_7);
+    var_14 maps\_utility::delaythread(level.infil_global_offset + 4.6, ::helo_02_dismount, var_7);
   }
 
   wait(getanimlength(var_0 maps\_utility::getanim("infil")));
@@ -415,7 +415,7 @@ setup_dead_destroyed_and_misc() {
   var_0 = getEntArray("infil_start_destroyed_lynx", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 kill();
+    var_2 kill();
   }
 
   var_7 = maps\_vehicle::spawn_vehicle_from_targetname("tanks_burning_man7t");
@@ -540,7 +540,7 @@ infil_sidestreet() {
   var_3 = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("infil_flyin_jet");
 
   foreach(var_5 in var_3) {
-  var_5 maps\_vehicle::godon();
+    var_5 maps\_vehicle::godon();
   }
 
   var_1 = maps\_utility::delaythread(12, maps\_vehicle::spawn_vehicles_from_targetname_and_drive, "tanks_landing_chopper_flyby");
@@ -626,8 +626,7 @@ tank_damage_player(var_0, var_1) {
 
   if(isDefined(var_1)) {
     var_2 = spawn("trigger_radius", self.origin, 0, 90, 90);
-  }
-  else {
+  } else {
     var_2 = spawn("trigger_radius", self.origin + 130 * anglesToForward(self.angles), 0, 70, 70);
   }
 
@@ -639,16 +638,14 @@ tank_damage_player(var_0, var_1) {
 
     if(level.player.health <= 34) {
       var_3 = 999;
-    }
-    else {
+    } else {
       var_3 = level.player.health / level.player.damagemultiplier * 0.34;
     }
 
     while(level.player istouching(var_2) && isalive(level.player)) {
       if(isDefined(var_0)) {
         level.player dodamage(var_0, level.player.origin);
-      }
-      else {
+      } else {
         level.player dodamage(var_3, level.player.origin);
       }
 
@@ -661,7 +658,7 @@ tank_damage_player(var_0, var_1) {
       self stopanimscripted();
 
       foreach(var_5 in level.lynx_smash_array) {
-      var_5 stopanimscripted();
+        var_5 stopanimscripted();
       }
     }
   }
@@ -742,7 +739,7 @@ tank_battle() {
   var_8 = getnodearray("path_to_garage_node", "targetname");
 
   foreach(var_10 in var_8) {
-  var_10 disconnectnode();
+    var_10 disconnectnode();
   }
 
   var_12 = getvehiclenode("allied_tank_corner_start", "targetname");
@@ -823,7 +820,7 @@ tank_battle() {
   level.tank_ally_joel playrumbleonentity("heavy_1s");
 
   foreach(var_23 in level.allies) {
-  var_23.forcesuppression = 1;
+    var_23.forcesuppression = 1;
   }
 
   common_scripts\utility::flag_set("allied_tank_killed");
@@ -889,7 +886,7 @@ tank_battle() {
   var_27 connectpaths();
 
   foreach(var_10 in var_8) {
-  var_10 connectnode();
+    var_10 connectnode();
   }
 
   var_30 = garage_wave_get_furthest();
@@ -1094,7 +1091,7 @@ enemy_mg_pin_down_player(var_0, var_1) {
         var_3 = maps\_utility::get_ai_group_ai("streets_enemy_tank_soldiers");
 
         foreach(var_5 in var_3) {
-        var_5.baseaccuracy = 0;
+          var_5.baseaccuracy = 0;
         }
 
         if(isalive(level.infil_rpg_guy)) {
@@ -1201,11 +1198,9 @@ enemy_mg_get_untargeted_random_target() {
 
   if(isplayer(var_1)) {
     self settargetentity(var_1);
-  }
-  else if(isDefined(var_1.sprint) && var_1.sprint) {
+  } else if(isDefined(var_1.sprint) && var_1.sprint) {
     self settargetentity(var_1);
-  }
-  else {
+  } else {
     self settargetentity(var_1, (0, 0, randomintrange(16, 60)));
   }
 
@@ -1419,13 +1414,13 @@ infil_heli_outside_city() {
   var_1 = getEntArray("infil_blackhawk_outside_city", "targetname");
 
   foreach(var_3 in var_1) {
-  var_0[var_0.size] = var_3 thread maps\_utility::spawn_vehicle();
+    var_0[var_0.size] = var_3 thread maps\_utility::spawn_vehicle();
   }
 
   wait 3;
 
   foreach(var_3 in var_0) {
-  var_3 thread maps\_vehicle::gopath();
+    var_3 thread maps\_vehicle::gopath();
   }
 }
 
@@ -1634,7 +1629,7 @@ infil_flyin_battle() {
   var_9 = getent("infil_flyin_battle_tank_ally_bridge_r", "targetname");
 
   foreach(var_11 in var_0) {
-  var_11 kill();
+    var_11 kill();
   }
 
   var_4 thread enemy_tank_spawn_func(var_6);
@@ -1772,8 +1767,7 @@ kill_player_with_tanks(var_0) {
 
   if(isalive(level.enemy_tank_3)) {
     level.player kill(level.enemy_tank_3.origin, level.enemy_tank_3, level.enemy_tank_3);
-  }
-  else {
+  } else {
     wait 0.5;
     level.player kill();
   }
@@ -1817,8 +1811,7 @@ postspawn_crash_blackhawk_rocket() {
   if(isDefined(self.script_sound)) {
     if(isDefined(self.script_wait)) {
       common_scripts\utility::delaycall(self.script_wait, ::playsound, self.script_sound);
-    }
-    else {
+    } else {
       self playSound(self.script_sound);
     }
   } else
@@ -1828,8 +1821,7 @@ postspawn_crash_blackhawk_rocket() {
 
   if(isDefined(self.script_exploder)) {
     common_scripts\utility::exploder(self.script_exploder);
-  }
-  else if(isDefined(self.script_fxid)) {
+  } else if(isDefined(self.script_fxid)) {
     playFX(common_scripts\utility::getfx(self.script_fxid), self.origin, anglesToForward(self.angles));
   }
 
@@ -1938,7 +1930,7 @@ kill_infil_enemies() {
   var_0 = maps\_utility::get_ai_group_ai("streets_enemy_tank_soldiers");
 
   foreach(var_2 in var_0) {
-  var_2 kill();
+    var_2 kill();
   }
 
   if(isalive(level.infil_rpg_guy)) {

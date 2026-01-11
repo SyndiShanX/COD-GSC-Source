@@ -4,7 +4,6 @@
 ****************************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace zm_trial_weapon_locked;
 
 class czm_trial_weapon_locked: cluielem {
@@ -15,7 +14,7 @@ class czm_trial_weapon_locked: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"zm_trial_weapon_locked");
+    cluielem::open(localclientnum, # "zm_trial_weapon_locked");
   }
 
   function function_fa582112(localclientnum) {

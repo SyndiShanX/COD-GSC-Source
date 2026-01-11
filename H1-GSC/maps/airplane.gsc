@@ -98,8 +98,7 @@ main() {
 
   if(getdvar("use_old_intro_fade_in") == "1") {
     thread intro_fade_in();
-  }
-  else {
+  } else {
     thread intro_fade_in_h1();
   }
 
@@ -1134,8 +1133,7 @@ ai_freefall_think(var_0) {
 
   if(self == level.hostage) {
     self.disablearrivals = 1;
-  }
-  else {
+  } else {
     maps\_utility::disable_ai_color();
     self.disablearrivals = 1;
   }
@@ -1231,8 +1229,7 @@ freefall() {
 
   if(getdvarint("use_old_airplane_jump") != 1) {
     var_1 waittillmatch("single anim", "switchplane");
-  }
-  else {
+  } else {
     wait 0.5;
   }
 
@@ -1447,8 +1444,7 @@ sas_dialogue_random(var_0) {
 can_say_hostiledown() {
   if(level.hostiledownbeingspoken == 1) {
     return 0;
-  }
-  else {
+  } else {
     thread hostile_down_timer();
     return 1;
   }
@@ -1840,8 +1836,7 @@ hostage_timer(var_0) {
     level.timetoreachvip = (gettime() - level.start_time) / 1000;
     level.timetovipmessage = "Airplane - difficulty " + level.gameskill + ": Time to hostage sequence: (" + level.timetoreachvip + " seconds)";
 
-    if(getdvar("airplane_debug") == "1") {
-    }
+    if(getdvar("airplane_debug") == "1") {}
   }
 
   if(level.gameskill != 3) {
@@ -2268,8 +2263,7 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
 
     if(var_5.radius) {
       self.goalradius = var_5.radius;
-    }
-    else {
+    } else {
       self.goalradius = 80;
     }
 
@@ -2285,14 +2279,11 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
 
       if(var_3 == "stand2run180") {
         var_8 = self;
-      }
-      else if(isDefined(self.node) && distance(self.node.origin, self.origin) < 4) {
+      } else if(isDefined(self.node) && distance(self.node.origin, self.origin) < 4) {
         var_8 = self.node;
-      }
-      else if(isDefined(self.goodnode) && distance(self.goodnode.origin, self.origin) < 4) {
+      } else if(isDefined(self.goodnode) && distance(self.goodnode.origin, self.origin) < 4) {
         var_8 = self.goodnode;
-      }
-      else {
+      } else {
         var_8 = self;
       }
 
@@ -2307,8 +2298,7 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
       if(var_8 != self) {
         if(issubstr(var_3, "cornerleft")) {
           var_9.angles = var_9.angles + (0, 90, 0);
-        }
-        else if(issubstr(var_3, "cornerright")) {
+        } else if(issubstr(var_3, "cornerright")) {
           var_9.angles = var_9.angles - (0, 90, 0);
         }
       }
@@ -2336,8 +2326,7 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
           case "disable_cqb":
             if(isDefined(var_5.target)) {
               disable_cqbwalk_ign_demo_wrapper();
-            }
-            else {
+            } else {
               maps\_utility::delaythread(1.5, ::disable_cqbwalk_ign_demo_wrapper);
             }
 
@@ -2345,8 +2334,7 @@ hallways_heroes_solo(var_0, var_1, var_2, var_3) {
           case "enable_cqb":
             if(isDefined(var_5.target)) {
               enable_cqbwalk_ign_demo_wrapper();
-            }
-            else {
+            } else {
               maps\_utility::delaythread(1.5, ::enable_cqbwalk_ign_demo_wrapper);
             }
 
@@ -2401,8 +2389,7 @@ airplane_wibble_setup() {
   for(;;) {
     if(common_scripts\utility::flag("fuselage_breached")) {
       maps\_wibble::set_cloth_wibble(0.5);
-    }
-    else {
+    } else {
       maps\_wibble::set_cloth_wibble(0.0);
     }
 

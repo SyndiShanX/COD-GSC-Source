@@ -86,7 +86,7 @@ trackplayedtime() {
   self endon("disconnect");
 
   foreach(team in level.teams) {
-  self.timeplayed[team] = 0;
+    self.timeplayed[team] = 0;
   }
 
   self.timeplayed["free"] = 0;
@@ -164,7 +164,7 @@ updateplayedtime() {
     return;
   }
   foreach(team in level.teams) {
-  self.timeplayed[team] = 0;
+    self.timeplayed[team] = 0;
   }
 
   self.timeplayed["other"] = 0;
@@ -228,7 +228,7 @@ countplayers() {
   playercounts = [];
 
   foreach(team in level.teams) {
-  playercounts[team] = 0;
+    playercounts[team] = 0;
   }
 
   foreach(player in level.players) {
@@ -249,7 +249,7 @@ trackfreeplayedtime() {
   self endon("disconnect");
 
   foreach(team in level.teams) {
-  self.timeplayed[team] = 0;
+    self.timeplayed[team] = 0;
   }
 
   self.timeplayed["other"] = 0;

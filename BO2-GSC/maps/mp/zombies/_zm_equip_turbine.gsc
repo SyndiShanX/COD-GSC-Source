@@ -443,8 +443,7 @@ turbinefxonce(withaoe) {
     if(withaoe) {
       if(isDefined(self.buildableturbine.equipment_can_move) && self.buildableturbine.equipment_can_move && (isDefined(self.buildableturbine.move_parent.ismoving) && self.buildableturbine.move_parent.ismoving)) {
         value = value | 4;
-      }
-      else {
+      } else {
         value = value | 8;
       }
     }
@@ -552,8 +551,7 @@ turbinedecay() {
 
     if(isDefined(self.turbine_emped) && self.turbine_emped) {
       self.turbine_power_level = 0;
-    }
-    else if(isDefined(self.turbine_power_is_on) && self.turbine_power_is_on) {
+    } else if(isDefined(self.turbine_power_is_on) && self.turbine_power_is_on) {
       cost = 1;
 
       if(isDefined(self.localpower)) {
@@ -564,11 +562,9 @@ turbinedecay() {
 
       if(self.turbine_health < 200) {
         self.turbine_power_level = 1;
-      }
-      else if(self.turbine_health < 600) {
+      } else if(self.turbine_health < 600) {
         self.turbine_power_level = 2;
-      }
-      else {
+      } else {
         self.turbine_power_level = 4;
       }
     }
@@ -691,11 +687,9 @@ debugturbine(radius) {
       else if(isDefined(self.turbine_power_is_on) && self.turbine_power_is_on) {
         if(self.turbine_health < 200) {
           color = (1, 0, 0);
-        }
-        else if(self.turbine_health < 600) {
+        } else if(self.turbine_health < 600) {
           color = (1, 0.7, 0);
-        }
-        else {
+        } else {
           color = (1, 1, 0);
         }
       }

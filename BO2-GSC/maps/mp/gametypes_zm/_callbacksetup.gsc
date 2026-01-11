@@ -89,8 +89,7 @@ codecallback_vehicledamage(einflictor, eattacker, idamage, idflags, smeansofdeat
   [[level.callbackvehicledamage]](einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, timeoffset, damagefromunderneath, modelindex, partname);
 }
 
-codecallback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, fouterdamage, idflags, smeansofdeath, sweapon, vpoint, fradius, fconeanglecos, vconedir, timeoffset) {
-}
+codecallback_vehicleradiusdamage(einflictor, eattacker, idamage, finnerdamage, fouterdamage, idflags, smeansofdeath, sweapon, vpoint, fradius, fconeanglecos, vconedir, timeoffset) {}
 
 codecallback_faceeventnotify(notify_msg, ent) {
   if(isDefined(ent) && isDefined(ent.do_face_anims) && ent.do_face_anims) {
@@ -179,5 +178,4 @@ codecallback_glasssmash(pos, dir) {
   level notify("glass_smash", pos, dir);
 }
 
-callbackvoid() {
-}
+callbackvoid() {}

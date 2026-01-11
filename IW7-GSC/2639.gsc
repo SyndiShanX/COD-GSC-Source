@@ -15,11 +15,9 @@ updatedamagefeedback(var_00, var_01, var_02, var_03, var_04, var_05, var_06) {
 
   if(isDefined(var_01) && var_01) {
     self playlocalsound("cp_hit_alert_strong");
-  }
-  else if(scripts\engine\utility::is_true(self.deadeye_charge)) {
+  } else if(scripts\engine\utility::is_true(self.deadeye_charge)) {
     self playlocalsound("cp_hit_alert_perk");
-  }
-  else {
+  } else {
     self playlocalsound("cp_hit_alert");
   }
 
@@ -120,8 +118,7 @@ updatehitmarker(var_00, var_01, var_02, var_03, var_04) {
 
   if(var_04) {
     self setclientomnvar("damage_feedback_kill", 1);
-  }
-  else {
+  } else {
     self setclientomnvar("damage_feedback_kill", 0);
   }
 
@@ -151,8 +148,7 @@ func_1118C(var_00, var_01, var_02) {
 
   if(isDefined(self.agent_type) && scripts\cp\cp_agent_utils::get_agent_type(self) == "seeder_spore") {
     var_03 = self gettagorigin("J_Spore_46");
-  }
-  else if(isDefined(self) && isalive(self) && scripts\cp\utility::has_tag(self.model, "J_SpineUpper")) {
+  } else if(isDefined(self) && isalive(self) && scripts\cp\utility::has_tag(self.model, "J_SpineUpper")) {
     var_03 = self gettagorigin("J_SpineUpper");
   }
 
@@ -196,8 +192,7 @@ func_F29B(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
     if(var_01 == "alienthrowingknife_mp" && var_00 == "MOD_IMPACT") {
       if(can_hypno(var_03, 0, var_04, var_00, var_01, var_05, var_06, var_07, var_08, var_09)) {
         var_02 = 20000;
-      }
-      else if(scripts\cp\cp_agent_utils::get_agent_type(self) != "elite") {
+      } else if(scripts\cp\cp_agent_utils::get_agent_type(self) != "elite") {
         var_02 = 500;
       }
     }
@@ -236,8 +231,7 @@ scale_alien_damage_by_perks(var_00, var_01, var_02, var_03) {
   if(scripts\engine\utility::isbulletdamage(var_02) && !func_9D39(var_03) && !func_9DB8(var_03)) {
     if(!func_9D39(var_03)) {
       var_01 = int(var_01 * var_00 scripts\cp\perks\perk_utility::perk_getbulletdamagescalar());
-    }
-    else if(func_9D38(var_03)) {
+    } else if(func_9D38(var_03)) {
       var_01 = int(var_01 * var_00 scripts\cp\perks\perk_utility::func_CA43());
     }
 
@@ -365,8 +359,7 @@ scale_alien_damage_by_weapon_type(var_00, var_01, var_02, var_03, var_04) {
   if(isDefined(var_02) && var_02 == "MOD_EXPLOSIVE_BULLET" && var_04 != "none") {
     if(scripts\cp\utility::coop_getweaponclass(var_03) == "weapon_shotgun") {
       var_01 = var_01 + int(var_01 * level.shotgundamagemod);
-    }
-    else {
+    } else {
       var_01 = var_01 + int(var_01 * level.exploimpactmod);
     }
   }
@@ -421,11 +414,9 @@ check_for_special_damage(var_00, var_01, var_02) {
   if(!isDefined(var_0.is_burning) && isalive(var_00)) {
     if((scripts\cp\utility::player_has_special_ammo(self, "incendiary_ammo") || scripts\cp\utility::player_has_special_ammo(self, "combined_ammo")) && var_02 != "MOD_UNKNOWN") {
       var_00 thread catch_alien_on_fire(self, undefined, undefined, 1);
-    }
-    else if(var_01 == "iw5_alienriotshield4_mp" && self.fireshield == 1.0) {
+    } else if(var_01 == "iw5_alienriotshield4_mp" && self.fireshield == 1.0) {
       var_00 thread catch_alien_on_fire(self);
-    }
-    else if((scripts\engine\utility::is_true(self.func_8B86) || scripts\engine\utility::is_true(self.func_8BAC)) && var_02 != "MOD_UNKNOWN") {
+    } else if((scripts\engine\utility::is_true(self.func_8B86) || scripts\engine\utility::is_true(self.func_8BAC)) && var_02 != "MOD_UNKNOWN") {
       var_00 thread catch_alien_on_fire(self, undefined, undefined, 1);
     }
 
@@ -549,11 +540,9 @@ update_damage_score(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_
   if(!isDefined(level.func_24B8) || var_01 != level.func_24B8) {
     if(isDefined(var_01) && isDefined(var_1.owner)) {
       scripts\cp\cp_agent_utils::store_attacker_info(var_1.owner, var_02 * 0.75);
-    }
-    else if(isDefined(var_01) && isDefined(var_1.pet) && var_1.pet == 1) {
+    } else if(isDefined(var_01) && isDefined(var_1.pet) && var_1.pet == 1) {
       scripts\cp\cp_agent_utils::store_attacker_info(var_1.owner, var_02);
-    }
-    else {
+    } else {
       scripts\cp\cp_agent_utils::store_attacker_info(var_01, var_02);
     }
 
@@ -725,8 +714,7 @@ func_3343() {
 
   if(level.c4explodethisframe) {
     wait(0.1 + randomfloat(0.4));
-  }
-  else {
+  } else {
     wait 0.05;
   }
 
@@ -840,8 +828,7 @@ func_9BE5(var_00, var_01, var_02) {
 
   if(var_00 == "MOD_UNKNOWN" && var_01 != "none") {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

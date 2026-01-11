@@ -588,8 +588,7 @@ flanks_apartment() {
   }
   if(self getthreatbiasgroup() == "allies") {
     self setthreatbiasgroup("friendlies_flanking_apartment");
-  }
-  else {}
+  } else {}
 }
 
 friendly_bridge_flank_grabber() {

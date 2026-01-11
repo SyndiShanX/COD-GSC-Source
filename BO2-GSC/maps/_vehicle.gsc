@@ -93,8 +93,7 @@ setup_script_gatetrigger(trigger) {
 trigger_process(trigger) {
   if(isDefined(trigger.classname) && (trigger.classname == "trigger_multiple" || trigger.classname == "trigger_radius" || trigger.classname == "trigger_lookat" || trigger.classname == "trigger_box")) {
     btriggeronce = 1;
-  }
-  else {
+  } else {
     btriggeronce = 0;
   }
 
@@ -147,8 +146,7 @@ trigger_process(trigger) {
 
     if(isDefined(other) && script_vehicledetour) {
       other thread path_detour_script_origin(trigger);
-    }
-    else if(detoured && isDefined(other)) {
+    } else if(detoured && isDefined(other)) {
       other thread path_detour(trigger);
     }
 
@@ -276,8 +274,7 @@ spawn_array(spawners) {
 
     if(isDefined(spawners[i].script_drone)) {
       spawned = spawners[i] spawn_drone();
-    }
-    else {
+    } else {
       spawned = spawners[i] spawn_ai();
 
       if(!isalive(spawned)) {
@@ -400,8 +397,7 @@ vehicle_rider_walk_setup(vehicle) {
   }
   if(isDefined(self.script_followmode)) {
     self.followmode = self.script_followmode;
-  }
-  else {
+  } else {
     self.followmode = "cover nodes";
   }
 
@@ -515,11 +511,9 @@ vehicle_paths(node) {
     if(isDefined(currentpoint.script_noteworthy)) {
       if(currentpoint.script_noteworthy == "godon") {
         self godon();
-      }
-      else if(currentpoint.script_noteworthy == "godoff") {
+      } else if(currentpoint.script_noteworthy == "godoff") {
         self godoff();
-      }
-      else if(currentpoint.script_noteworthy == "deleteme") {
+      } else if(currentpoint.script_noteworthy == "deleteme") {
         if(isDefined(self.riders) && self.riders.size > 0) {
           array_delete(self.riders);
         }
@@ -536,8 +530,7 @@ vehicle_paths(node) {
         self drivepath();
       else if(currentpoint.script_noteworthy == "lockpath") {
         self startpath();
-      }
-      else if(currentpoint.script_noteworthy == "brake") {
+      } else if(currentpoint.script_noteworthy == "brake") {
         if(self.isphysicsvehicle) {
           self setbrake(1);
         }
@@ -573,8 +566,7 @@ vehicle_paths(node) {
     if(isDefined(currentpoint.script_deathroll)) {
       if(currentpoint.script_deathroll == 0) {
         self thread deathrolloff();
-      }
-      else {
+      } else {
         self thread deathrollon();
       }
     }
@@ -656,8 +648,7 @@ vehicle_paths(node) {
     if(isDefined(currentpoint.script_lights_on)) {
       if(currentpoint.script_lights_on) {
         self lights_on();
-      }
-      else {
+      } else {
         self lights_off();
       }
     }
@@ -693,8 +684,7 @@ vehicle_pause_path() {
     if(self.vehicleclass == "helicopter") {
       if(isDefined(self.drivepath) && self.drivepath) {
         self setvehgoalpos(self.origin, 1);
-      }
-      else {
+      } else {
         self setspeed(0, 100, 100);
       }
     } else
@@ -789,8 +779,7 @@ gopath() {
 
   if(isDefined(self.drivepath) && self.drivepath) {
     self drivepath(self.attachedpath);
-  }
-  else {
+  } else {
     self startpath();
   }
 
@@ -906,8 +895,7 @@ set_spawner_variables(vehicle) {
 
   if(isDefined(vehicle.targetname)) {
     self.targetname = vehicle.targetname;
-  }
-  else {
+  } else {
     self.targetname = "notdefined";
   }
 
@@ -1172,8 +1160,7 @@ set_spawner_variables(vehicle) {
 
   if(vehicle.count > 0) {
     self.count = vehicle.count;
-  }
-  else {
+  } else {
     self.count = 1;
   }
 
@@ -1894,8 +1881,7 @@ script_resumespeed(msg, rate) {
 
   if(type == "resumespeed") {
     self resumespeed(rate);
-  }
-  else if(type == "setspeed") {
+  } else if(type == "setspeed") {
     self vehicle_setspeed(fsetspeed, 15, "resume setspeed from attack");
   }
 
@@ -1932,8 +1918,7 @@ print_resumespeed(timer) {
   while(gettime() < timer && isDefined(self.resumemsgs)) {
     if(self.resumemsgs.size > 6) {
       start = self.resumemsgs.size - 5;
-    }
-    else {
+    } else {
       start = 0;
     }
 
@@ -2153,20 +2138,16 @@ setup_vehicles(allvehiclesprespawn) {
 vehicle_life() {
   if(isDefined(self.destructibledef)) {
     self.health = 99999;
-  }
-  else {
+  } else {
     type = self.vehicletype;
 
     if(isDefined(self.script_startinghealth)) {
       self.health = self.script_startinghealth;
-    }
-    else if(self.healthdefault == -1) {
+    } else if(self.healthdefault == -1) {
       return;
-    }
-    else if(isDefined(self.healthmin) && isDefined(self.healthmax) && self.healthmax - self.healthmin > 0) {
+    } else if(isDefined(self.healthmin) && isDefined(self.healthmax) && self.healthmax - self.healthmin > 0) {
       self.health = randomint(self.healthmax - self.healthmin) + self.healthmin;
-    }
-    else {
+    } else {
       self.health = self.healthdefault;
     }
   }
@@ -2629,8 +2610,7 @@ setup_levelvars() {
 attacker_isonmyteam(attacker) {
   if(isDefined(attacker) && isDefined(attacker.vteam) && isDefined(self.vteam) && attacker.vteam == self.vteam) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2638,11 +2618,9 @@ attacker_isonmyteam(attacker) {
 attacker_troop_isonmyteam(attacker) {
   if(isDefined(self.vteam) && self.vteam == "allies" && isDefined(attacker) && isDefined(level.player) && attacker == level.player) {
     return true;
-  }
-  else if(isai(attacker) && attacker.team == self.vteam) {
+  } else if(isai(attacker) && attacker.team == self.vteam) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2660,8 +2638,7 @@ bulletshielded(type) {
 
   if(self.script_bulletshield) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2700,8 +2677,7 @@ vehicle_dynamic_cover(s_spawner) {
   if(isDefined(e_dyn_path)) {
     if(isDefined(s_spawner)) {
       s_spawner.e_dyn_path = e_dyn_path;
-    }
-    else {
+    } else {
       self.e_dyn_path = e_dyn_path;
     }
   } else
@@ -2738,11 +2714,9 @@ vehicle_badplace() {
 
     if(speed < 5) {
       bp_radius = 200;
-    }
-    else if(speed > 5 && speed < 8) {
+    } else if(speed > 5 && speed < 8) {
       bp_radius = 350;
-    }
-    else {
+    } else {
       bp_radius = 500;
     }
 
@@ -2752,8 +2726,7 @@ vehicle_badplace() {
 
     if(hasturret) {
       bp_direction = anglesToForward(self gettagangles("tag_turret"));
-    }
-    else {
+    } else {
       bp_direction = anglesToForward(self.angles);
     }
 
@@ -2798,8 +2771,7 @@ get_vehiclenode_any_dynamic(target) {
 
   if(!isDefined(path_start)) {
     path_start = getent(target, "targetname");
-  }
-  else if(self.vehicleclass == "plane") {
+  } else if(self.vehicleclass == "plane") {
     println("helicopter node targetname: " + path_start.targetname);
     println("vehicletype: " + self.vehicletype);
 
@@ -2898,8 +2870,7 @@ unload_node(node) {
 
   if(self.vehicleclass == "plane") {
     waittill_stable();
-  }
-  else if(self.vehicleclass == "helicopter") {
+  } else if(self.vehicleclass == "helicopter") {
     self sethoverparams(0, 0, 10);
     waittill_stable();
   }
@@ -3212,8 +3183,7 @@ attackgroup_think() {
 
       if(valid_targets.size != 0) {
         current_target = self get_nearest_target(valid_targets);
-      }
-      else {
+      } else {
         self notify("killed all targets");
       }
 
@@ -3299,8 +3269,7 @@ debug_vehicle_paths() {
 get_dummy() {
   if(self.modeldummyon) {
     emodel = self.modeldummy;
-  }
-  else {
+  } else {
     emodel = self;
   }
 
@@ -3572,8 +3541,7 @@ vehicle_connectpaths_wrapper() {
 
   if(isDefined(self.e_dyn_path)) {
     self.e_dyn_path maps\_dynamic_nodes::entity_disconnect_dynamic_nodes_from_navigation_mesh();
-  }
-  else {
+  } else {
     self maps\_dynamic_nodes::entity_disconnect_dynamic_nodes_from_navigation_mesh();
   }
 }
@@ -3581,8 +3549,7 @@ vehicle_connectpaths_wrapper() {
 vehicle_disconnectpaths_wrapper() {
   if(isDefined(self.e_dyn_path)) {
     self.e_dyn_path thread maps\_dynamic_nodes::entity_connect_dynamic_nodes_to_navigation_mesh();
-  }
-  else {
+  } else {
     self thread maps\_dynamic_nodes::entity_connect_dynamic_nodes_to_navigation_mesh();
   }
 
@@ -3616,7 +3583,7 @@ vehicle_spawner_tool(allvehicles) {
   vehicletypes = [];
 
   foreach(veh in allvehicles) {
-  vehicletypes[veh.vehicletype] = veh.model;
+    vehicletypes[veh.vehicletype] = veh.model;
   }
 
   if(isassetloaded("vehicle", "civ_pickup_mini")) {

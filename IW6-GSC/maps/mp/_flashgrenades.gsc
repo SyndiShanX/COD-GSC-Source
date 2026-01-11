@@ -72,8 +72,7 @@ monitorFlash() {
     rumbleduration = undefined;
     if(duration > 2) {
       rumbleduration = 0.75;
-    }
-    else {
+    } else {
       rumbleduration = 0.25;
     }
 

@@ -135,8 +135,7 @@ melee_mpla_pain_override() {
     if(isDefined(self.damagelocation)) {
       if(issubstr(self.damagelocation, "right")) {
         painanim = % ai_digbat_melee_run_f_stumble_r;
-      }
-      else if(issubstr(self.damagelocation, "left")) {
+      } else if(issubstr(self.damagelocation, "left")) {
         painanim = % ai_digbat_melee_run_f_stumble_l;
       }
     }
@@ -144,8 +143,7 @@ melee_mpla_pain_override() {
     if(!isDefined(painanim)) {
       if(cointoss()) {
         painanim = % ai_digbat_melee_run_f_stumble_r;
-      }
-      else {
+      } else {
         painanim = % ai_digbat_melee_run_f_stumble_l;
       }
     }
@@ -156,8 +154,7 @@ melee_mpla_pain_override() {
   } else {
     if(cointoss()) {
       painanim = % ai_digbat_melee_idle_pain_01;
-    }
-    else {
+    } else {
       painanim = % ai_digbat_melee_idle_pain_02;
     }
 
@@ -275,8 +272,7 @@ mpla_melee_aivsai(anglediff) {
     if(disttotarget >= 115600) {
       if(cointoss()) {
         meleeseqs[meleeseqs.size] = "frontal_dodge_277";
-      }
-      else {
+      } else {
         meleeseqs[meleeseqs.size] = "frontal_dodge_210";
         meleeseqs[meleeseqs.size] = "frontal_dodge_140";
         meleeseqs[meleeseqs.size] = "frontal_dodge_70";
@@ -314,11 +310,9 @@ mpla_melee_aivsai_canexecute() {
 
   if(is_machete_mpla() && target is_rifle_mpla()) {
     return true;
-  }
-  else if(is_rifle_mpla() && target is_machete_mpla()) {
+  } else if(is_rifle_mpla() && target is_machete_mpla()) {
     return true;
-  }
-  else if(is_machete_mpla() && target is_machete_mpla()) {
+  } else if(is_machete_mpla() && target is_machete_mpla()) {
     return true;
   }
 

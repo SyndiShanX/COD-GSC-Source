@@ -7,11 +7,10 @@
 #include scripts\core_common\flagsys_shared;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_supply_drop;
-
 #namespace namespace_3d2704b3;
 
 autoexec __init__system__() {
-  system::register(#"hash_280fe2667ed2d300", &__init__, undefined, #"item_supply_drop");
+  system::register(#"hash_280fe2667ed2d300", &__init__, undefined, # "item_supply_drop");
 }
 
 private __init__() {
@@ -67,7 +66,7 @@ function_f0297225(var_2ab9d3bd, replacementcount, var_3afaa57b) {
 }
 
 function_d0178153(var_2ab9d3bd) {
-  level.var_ef5dbc90[var_2ab9d3bd] = #"supply_drop_stash_parent_dlc1";
+  level.var_ef5dbc90[var_2ab9d3bd] = # "supply_drop_stash_parent_dlc1";
 }
 
 start(supplydrops = 1, minwaittime = 20, var_fe6b2eab = 20) {

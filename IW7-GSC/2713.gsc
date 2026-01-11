@@ -103,8 +103,7 @@ onplayerconnect() {
 
   if(!isDefined(var_00)) {
     return;
-  }
-  else {
+  } else {
     level.func_C2C8 = var_00;
   }
 
@@ -299,7 +298,7 @@ button_sound(var_00, var_01) {
 
 func_5B5C(var_00) {
   foreach(var_02 in level.func_DBDF[var_00]) {
-  var_02 thread func_5B5B(var_00);
+    var_02 thread func_5B5B(var_00);
   }
 }
 
@@ -329,20 +328,18 @@ func_13FC9(var_00, var_01) {
 
   if(isDefined(level.func_DBDD) && level.func_DBDD != "") {
     level.func_DBE1 = level.func_DBDD;
-  }
-  else {
+  } else {
     level.func_DBE1 = "main";
     level.func_DBDD = "main";
   }
 
   foreach(var_03 in level.func_DBDF[level.func_DBE1]) {
-  var_03 notify("remove_button");
+    var_03 notify("remove_button");
   }
 
   if(isDefined(var_01) && var_01) {
     level.func_C2C8 _meth_83FD(level.radial_button_group[level.func_DBE1]["view_start"], var_00);
-  }
-  else {
+  } else {
     level.func_C2C8 _meth_83FC(level.radial_button_group[var_00]["view_start"]);
   }
 
@@ -387,8 +384,7 @@ func_9E4E(var_00, var_01) {
 
   if(var_00 > var_01) {
     var_04 = var_02 || var_03;
-  }
-  else {
+  } else {
     var_04 = level.func_E77B > var_00 && level.func_E77B < var_01;
   }
 
@@ -398,8 +394,7 @@ func_9E4E(var_00, var_01) {
 func_1576() {
   if(isDefined(level.func_DBDD) && level.func_DBDD != "main") {
     func_13FC9("main", 1);
-  }
-  else {
+  } else {
     return;
   }
 }

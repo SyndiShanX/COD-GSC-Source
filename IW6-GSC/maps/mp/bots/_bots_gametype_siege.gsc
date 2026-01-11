@@ -62,8 +62,7 @@ bot_siege_manager_think() {
       if(team != "neutral") {
         if(!isDefined(flagCounts[team])) {
           flagCounts[team] = 1;
-        }
-        else {
+        } else {
           flagCounts[team]++;
         }
       }

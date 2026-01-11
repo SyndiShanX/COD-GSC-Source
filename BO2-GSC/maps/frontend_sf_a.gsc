@@ -357,14 +357,14 @@ scene_drone_models() {
   holo_table_exploder_switch(undefined);
 
   foreach(model in model_list) {
-  model clearclientflag(15);
+    model clearclientflag(15);
   }
 
   level waittill("drone_fade_out");
   fade_out(1);
 
   foreach(model in model_list) {
-  model delete();
+    model delete();
   }
 }
 
@@ -440,7 +440,7 @@ scene_dockside_models() {
   dockside_base notify("hide_base");
 
   foreach(prop in dockside_props) {
-  prop clearclientflag(15);
+    prop clearclientflag(15);
   }
 
   fade_out(1.0);

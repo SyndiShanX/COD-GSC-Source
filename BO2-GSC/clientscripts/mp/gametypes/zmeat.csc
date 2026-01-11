@@ -24,8 +24,7 @@ init_animtree() {
   scriptmodelsuseanimtree(#animtree);
 }
 
-onprecachegametype() {
-}
+onprecachegametype() {}
 
 onstartgametype() {
   setsaveddvar("r_skyTransition", 1);

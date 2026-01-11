@@ -34,7 +34,7 @@ main() {
   nodes = getnodearray("classic_only_traversal", "targetname");
 
   foreach(node in nodes) {
-  unlink_nodes(node, getnode(node.target, "targetname"));
+    unlink_nodes(node, getnode(node.target, "targetname"));
   }
 
   level thread maps\mp\zombies\_zm_perks::perk_machine_removal("specialty_quickrevive", "p_glo_tools_chest_tall");

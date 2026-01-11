@@ -16,11 +16,10 @@ mainDebug() {
 
   if(GetDebugDvar("debug_corner") == "") {
     SetDvar("debug_corner", "off");
+  } else {
+    if(GetDebugDvar("debug_corner") == "on")
   }
-  else {
-  if(GetDebugDvar("debug_corner") == "on")
-  }
-    debug_corner();
+  debug_corner();
 
   if(GetDvar("chain") == "1") {
     thread debugchains();
@@ -49,53 +48,53 @@ mainDebug() {
   //	thread debuggoalpos();
 }
 
-  debugchains() {
-    nodes = GetAllNodes();
-    fnodenum = 0;
+debugchains() {
+  nodes = GetAllNodes();
+  fnodenum = 0;
 
-    fnodes = [];
-    for(i = 0; i < nodes.size; i++) {
-      if((!(nodes[i].spawnflags & 2)) &&
-        (
-          ((isDefined(nodes[i].target)) && ((GetNodeArray(nodes[i].target, "targetname")).size > 0)) ||
-          ((isDefined(nodes[i].targetname)) && ((GetNodeArray(nodes[i].targetname, "target")).size > 0))
-        )
-      ) {
-        fnodes[fnodenum] = nodes[i];
-        fnodenum++;
-      }
-    }
-
-    count = 0;
-
-    while(1) {
-      if(GetDvar("chain") == "1") {
-        for(i = 0; i < fnodes.size; i++) {
-          if(Distance(level.player GetOrigin(), fnodes[i].origin) < 1500) {
-            Print3d(fnodes[i].origin, "yo", (0.2, 0.8, 0.5), 0.45);
-            /*
-            count++;
-            if( count > 25 )
-            {
-            	count = 0;
-            	waitframe();
-            }
-            */
-          }
-        }
-
-        friends = GetAIArray("allies");
-        for(i = 0; i < friends.size; i++) {
-          node = friends[i] animscripts\utility::GetClaimedNode();
-          if(isDefined(node)) {
-            Line(friends[i].origin + (0, 0, 35), node.origin, (0.2, 0.5, 0.8), 0.5);
-          }
-        }
-
-      }
-      waitframe();
+  fnodes = [];
+  for(i = 0; i < nodes.size; i++) {
+    if((!(nodes[i].spawnflags & 2)) &&
+      (
+        ((isDefined(nodes[i].target)) && ((GetNodeArray(nodes[i].target, "targetname")).size > 0)) ||
+        ((isDefined(nodes[i].targetname)) && ((GetNodeArray(nodes[i].targetname, "target")).size > 0))
+      )
+    ) {
+      fnodes[fnodenum] = nodes[i];
+      fnodenum++;
     }
   }
+
+  count = 0;
+
+  while(1) {
+    if(GetDvar("chain") == "1") {
+      for(i = 0; i < fnodes.size; i++) {
+        if(Distance(level.player GetOrigin(), fnodes[i].origin) < 1500) {
+          Print3d(fnodes[i].origin, "yo", (0.2, 0.8, 0.5), 0.45);
+          /*
+          count++;
+          if( count > 25 )
+          {
+          	count = 0;
+          	waitframe();
+          }
+          */
+        }
+      }
+
+      friends = GetAIArray("allies");
+      for(i = 0; i < friends.size; i++) {
+        node = friends[i] animscripts\utility::GetClaimedNode();
+        if(isDefined(node)) {
+          Line(friends[i].origin + (0, 0, 35), node.origin, (0.2, 0.5, 0.8), 0.5);
+        }
+      }
+
+    }
+    waitframe();
+  }
+}
 
 debug_enemyPos(num) {
   ai = GetAIArray();
@@ -162,8 +161,7 @@ debug_enemyPosReplay() {
     if(isDefined(guy.goodShootPos)) {
       if(guy IsBadGuy()) {
         color = (1, 0, 0);
-      }
-      else {
+      } else {
         color = (0, 0, 1);
       }
 
@@ -574,8 +572,7 @@ debugMisstime() {
   for(;;) {
     if(self.a.misstime <= 0) {
       Print3d(self GetTagOrigin("TAG_EYE") + (0, 0, 15), "hit", (0.3, 1, 1), 1);
-    }
-    else {
+    } else {
       Print3d(self GetTagOrigin("TAG_EYE") + (0, 0, 15), self.a.misstime / 20, (0.3, 1, 1), 1);
     }
     wait(0.05);
@@ -1271,8 +1268,7 @@ debug_nuke() {
   SetDvar("debug_nuke", "off");
 }
 
-debug_missTime() {
-}
+debug_missTime() {}
 
 camera() {
   wait(0.05);
@@ -1291,7 +1287,7 @@ camera() {
       continue;
     }
 
-      ai = GetAIArray("axis");
+    ai = GetAIArray("axis");
     if(!ai.size) {
       freePlayer();
       wait(0.5);
@@ -1517,8 +1513,7 @@ deathspawnerPreview() {
       ent = array[p];
       if(isDefined(ent.truecount)) {
         Print3d(ent.origin, i + ": " + ent.truecount, (0, 0.8, 0.6), 5);
-      }
-      else {
+      } else {
         Print3d(ent.origin, i + ": " + ".", (0, 0.8, 0.6), 5);
       }
     }
@@ -1550,8 +1545,7 @@ lastSightPosWatch() {
 
     if(guy animscripts\utility::hasEnemySightPos()) {
       org = guy animscripts\utility::getEnemySightPos();
-    }
-    else {
+    } else {
       org = undefined;
     }
 
@@ -1619,14 +1613,12 @@ updateMinimapSetting() {
         mincorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
         if(corners[1].origin[0] > corners[0].origin[0]) {
           maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-        }
-        else {
+        } else {
           mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
         }
         if(corners[1].origin[1] > corners[0].origin[1]) {
           maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-        }
-        else {
+        } else {
           mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
         }
 
@@ -1677,8 +1669,7 @@ updateMinimapSetting() {
         }
         if(angleside > angletop) {
           angle = angleside;
-        }
-        else {
+        } else {
           angle = angletop;
         }
 
@@ -1796,8 +1787,7 @@ islookingatorigin(origin) {
   vectordot = VectorDot(anglevec, normalvec);
   if(vectordot > insidedot) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2039,7 +2029,7 @@ draw_color_friendlies() {
     return;
   }
 
-    x = 15;
+  x = 15;
   y = 365;
   offset_x = 25;
   offset_y = 25;
@@ -2278,8 +2268,7 @@ debug_animSound() {
 
   if(level.animsound_locked) {
     level.animsound_hud_locked.alpha = 1;
-  }
-  else {
+  } else {
     level.animsound_hud_locked.alpha = 0;
   }
 
@@ -2332,7 +2321,7 @@ debug_animSound() {
     /*
     soundalias = get_alias_from_stored( animSound );
     scale = 0.9;
-		
+    		
     if( is_tagged && level.animsound_tagged == animSound ) {
     	scale = 1;
     }

@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\killhouse_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\killhouse_fog::main();
   }
 }

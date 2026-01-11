@@ -70,8 +70,7 @@ func_A1E5(var_00, var_01, var_02) {
 
   if(level.func_241D) {
     var_03 = "";
-  }
-  else {
+  } else {
     var_03 = "_space";
   }
 

@@ -138,8 +138,7 @@ setCarryingIMS(imsForPlayer, allowCancel) {
   for(;;) {
     if(is_aliens()) {
       result = waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement", "player_action_slot_restart");
-    }
-    else {
+    } else {
       result = waittill_any_return("place_ims", "cancel_ims", "force_cancel_placement");
     }
 
@@ -601,8 +600,7 @@ ims_onCarrierDeath(carrier) {
 
   if(self.canBePlaced && carrier.team != "spectator") {
     self thread ims_setPlaced();
-  }
-  else {
+  } else {
     self ims_setCancelled();
   }
 }
@@ -647,8 +645,7 @@ ims_setActive() {
   if(!is_aliens()) {
     if(level.teamBased) {
       self maps\mp\_entityheadicons::setTeamHeadIcon(self.team, (0, 0, 60));
-    }
-    else {
+    } else {
       self maps\mp\_entityheadicons::setPlayerHeadIcon(owner, (0, 0, 60));
     }
   }
@@ -670,8 +667,7 @@ ims_setActive() {
   foreach(player in level.players) {
     if(player == owner) {
       self enablePlayerUse(player);
-    }
-    else {
+    } else {
       self disablePlayerUse(player);
     }
   }
@@ -689,8 +685,7 @@ ims_setActive() {
   for(i = 0; i < self.config.numExplosives; i++) {
     if(numExplosivesExceedModelCapacity()) {
       TagIndex = shiftIndexForward(i + 1, self.config.numExplosives - CONST_NUM_LID_ON_MODEL);
-    }
-    else {
+    } else {
       TagIndex = i + 1;
     }
 
@@ -727,7 +722,7 @@ ims_setActive() {
   self thread ims_WatchPlayerConnected();
 
   foreach(player in level.players) {
-  self thread ims_playerJoinedTeam(player);
+    self thread ims_playerJoinedTeam(player);
   }
 
   self thread debug_draw();
@@ -812,8 +807,7 @@ ims_setInactive() {
 
   if(level.teamBased) {
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
   }
 
@@ -826,8 +820,7 @@ ims_setInactive() {
       if(isDefined(ent)) {
         if(isDefined(self.owner) && isDefined(self.owner.imsKillCamEnt) && ent == self.owner.imsKillCamEnt) {
           continue;
-        }
-        else {
+        } else {
           ent Delete();
         }
       }

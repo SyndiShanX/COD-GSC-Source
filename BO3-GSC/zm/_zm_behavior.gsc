@@ -152,9 +152,7 @@ function zombiefindflesh(behaviortreeentity) {
   }
   if(!isDefined(player) && !isDefined(zombie_poi) && !isDefined(behaviortreeentity.attackable)) {
     if(isDefined(behaviortreeentity.ignore_player)) {
-      if(isDefined(level._should_skip_ignore_player_logic) && [
-          [level._should_skip_ignore_player_logic]
-        ]()) {
+      if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
         return;
       }
       behaviortreeentity.ignore_player = [];

@@ -10,7 +10,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\wz_common\wz_ai_utils;
-
 #namespace wz_ee_poster;
 
 autoexec __init__system__() {
@@ -118,8 +117,8 @@ function_7a1e21a9(v_loc) {
   self.angles += (0, randomint(360), 0);
   trace = bulletTrace(v_loc + (0, 0, 40), v_loc + (0, 0, -150), 0, undefined);
 
-  if(trace[#"fraction"] < 1) {
-    v_loc = trace[#"position"];
+  if(trace[# "fraction"] < 1) {
+    v_loc = trace[# "position"];
   }
 
   time = self wz_ai_utils::fake_physicslaunch(v_loc, 100);

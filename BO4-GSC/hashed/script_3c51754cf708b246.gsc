@@ -72,9 +72,9 @@ is_enabled() {
     return 0;
   }
 
-    if(getdvarint(#"mp_prototype", 0) == 0) {
-      return 0;
-    }
+  if(getdvarint(#"mp_prototype", 0) == 0) {
+    return 0;
+  }
   autoselectcharacter = getdvarint(#"force_char", -1);
   if(player_role::is_valid(autoselectcharacter)) {
     return 0;
@@ -139,7 +139,7 @@ function_2cfc07fc() {
     println("<dev string:xa7>" + player.name);
   }
 
-    return false;
+  return false;
 }
 
 can_select_character(characterindex) {
@@ -251,13 +251,13 @@ decrement(timeremaining) {
     return timeremaining;
   }
 
-    return timeremaining - 1;
+  return timeremaining - 1;
 }
 
 draft_run() {
   rat::function_98499d2();
 
-    timeremaining = getgametypesetting(#"drafttime");
+  timeremaining = getgametypesetting(#"drafttime");
   foreach(player in level.players) {
     if(isbot(player)) {
       player player_role::clear();
@@ -421,10 +421,10 @@ set_draft_stage(draftstage) {
     println("<dev string:x290>");
   }
 
-    if(draftstage == 1) {
-      draft_initialize();
-      return;
-    }
+  if(draftstage == 1) {
+    draft_initialize();
+    return;
+  }
   if(draftstage == 2) {
     wait_for_players();
     return;
@@ -484,7 +484,7 @@ open() {
     return;
   }
 
-    player player_role::clear();
+  player player_role::clear();
   level clientfield::set_world_uimodel("PositionDraft.timeRemaining", 0);
   player clientfield::set_player_uimodel("PositionDraft.stage", 3);
 }

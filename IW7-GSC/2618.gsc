@@ -163,8 +163,7 @@ setupexploders() {
 
     if(!isDefined(var_9.script_fxid)) {
       var_4.v["fxid"] = "No FX";
-    }
-    else {
+    } else {
       var_4.v["fxid"] = var_9.script_fxid;
     }
 
@@ -214,8 +213,7 @@ setupexploders() {
 
     if(isDefined(var_9.targetname) && isDefined(var_8[var_9.targetname])) {
       var_4.v["exploder_type"] = var_9.targetname;
-    }
-    else {
+    } else {
       var_4.v["exploder_type"] = "normal";
     }
 
@@ -253,7 +251,7 @@ setup_flag_exploders() {
   }
 
   foreach(var_07, var_06 in var_00) {
-  thread exploder_flag_wait(var_07);
+    thread exploder_flag_wait(var_07);
   }
 }
 
@@ -497,15 +495,13 @@ delete_exploder_proc(var_00) {
 exploder_damage() {
   if(isDefined(self.v["delay"])) {
     var_00 = self.v["delay"];
-  }
-  else {
+  } else {
     var_00 = 0;
   }
 
   if(isDefined(self.v["damage_radius"])) {
     var_01 = self.v["damage_radius"];
-  }
-  else {
+  } else {
     var_01 = 128;
   }
 
@@ -515,8 +511,7 @@ exploder_damage() {
 
   if(isDefined(level.custom_radius_damage_for_exploders)) {
     [[level.custom_radius_damage_for_exploders]](var_03, var_01, var_02);
-  }
-  else {
+  } else {
     radiusdamage(var_03, var_01, var_02, var_02);
   }
 }
@@ -528,8 +523,7 @@ activate_individual_exploder_proc() {
 
   if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
     thread cannon_effect();
-  }
-  else if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
+  } else if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
     thread sound_effect();
   }
 
@@ -551,11 +545,9 @@ activate_individual_exploder_proc() {
 
   if(self.v["exploder_type"] == "exploder") {
     thread brush_show();
-  }
-  else if(self.v["exploder_type"] == "exploderchunk" || self.v["exploder_type"] == "exploderchunk visible") {
+  } else if(self.v["exploder_type"] == "exploderchunk" || self.v["exploder_type"] == "exploderchunk visible") {
     thread brush_throw();
-  }
-  else {
+  } else {
     thread brush_delete();
   }
 }
@@ -565,8 +557,7 @@ brush_delete() {
 
   if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
-  }
-  else {
+  } else {
     wait 0.05;
   }
 
@@ -699,8 +690,7 @@ brush_show() {
   if(scripts\engine\utility::issp() && !isDefined(self.model.script_modelname) && self.model.spawnflags & 1) {
     if(!isDefined(self.model.disconnect_paths)) {
       self.model call[[level.func["connectPaths"]]]();
-    }
-    else {
+    } else {
       self.model call[[level.func["disconnectPaths"]]]();
     }
   }
@@ -912,8 +902,7 @@ shouldrunserversideeffects() {
 
   if(level.createfx_enabled) {
     return 1;
-  }
-  else {
+  } else {
     return getdvar("clientSideEffects") != "1";
   }
 }

@@ -19,27 +19,27 @@ autoexec _init_wounded_anims() {
   level._wounded_anims = [];
 
   foreach(animation in level.scr_anim["dead_male"]["floor"]) {
-  level._wounded_anims[string(animation)] = animation;
+    level._wounded_anims[string(animation)] = animation;
   }
 
   foreach(animation in level.scr_anim["dead_male"]["misc"]) {
-  level._wounded_anims[string(animation)] = animation;
+    level._wounded_anims[string(animation)] = animation;
   }
 
   foreach(animation in level.scr_anim["wounded_male"]["floor"]) {
-  level._wounded_anims[string(animation)] = animation;
+    level._wounded_anims[string(animation)] = animation;
   }
 
   foreach(animation in level.scr_anim["wounded_male"]["misc"]) {
-  level._wounded_anims[string(animation)] = animation;
+    level._wounded_anims[string(animation)] = animation;
   }
 
   foreach(animation in level.scr_anim["dead_female"]["floor"]) {
-  level._wounded_anims[string(animation)] = animation;
+    level._wounded_anims[string(animation)] = animation;
   }
 
   foreach(animation in level.scr_anim["dead_female"]["misc"]) {
-  level._wounded_anims[string(animation)] = animation;
+    level._wounded_anims[string(animation)] = animation;
   }
 }
 
@@ -66,8 +66,7 @@ _process_structs(a_structs) {
     if(isDefined(struct.script_animation)) {
       if(isDefined(level._wounded_anims[struct.script_animation])) {
         struct.animation = level._wounded_anims[struct.script_animation];
-      }
-      else {
+      } else {
         a_toks = strtok(struct.script_animation, ", ");
 
         if(isinarray(level._wounded_animnames, a_toks[0])) {
@@ -119,8 +118,7 @@ spawn_wounded(v_org, v_ang, str_animname, str_scene, str_anim_override, str_targ
 
   if(isDefined(str_anim_override)) {
     animation = level._wounded_anims[str_anim_override];
-  }
-  else {
+  } else {
     animation = getanim_from_animname(str_scene, str_animname);
 
     if(isarray(animation)) {
@@ -138,8 +136,7 @@ spawn_wounded(v_org, v_ang, str_animname, str_scene, str_anim_override, str_targ
 
   if(b_alive) {
     e_wounded.takedamage = 1;
-  }
-  else {
+  } else {
     e_wounded.takedamage = 0;
     e_wounded setlookattext("", &"");
     e_wounded notify("no_friendly_fire");
@@ -173,8 +170,7 @@ spawn_wounded_at_struct(b_sight_trace) {
 
     if(e_wounded sightconetrace(level.player getEye(), level.player) < 0.05) {
       e_wounded show();
-    }
-    else {
+    } else {
       e_wounded delete();
     }
   }

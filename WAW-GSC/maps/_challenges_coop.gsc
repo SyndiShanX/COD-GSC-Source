@@ -210,8 +210,7 @@ registerMissionCallback(callback, func) {
 getChallengeStatus(name) {
   if(isDefined(self.challengeData[name])) {
     return self.challengeData[name];
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -375,8 +374,7 @@ processChallenge(baseName, progressInc, levelEnd) {
   numLevels = getChallengeLevels(baseName);
   if(numLevels > 1) {
     missionStatus = self getChallengeStatus((baseName + "1"));
-  }
-  else {
+  } else {
     missionStatus = self getChallengeStatus(baseName);
   }
   if(!isDefined(progressInc)) {
@@ -391,8 +389,7 @@ processChallenge(baseName, progressInc, levelEnd) {
   assertex(missionStatus <= numLevels, "Mini challenge levels higher than max: " + missionStatus + " vs. " + numLevels);
   if(numLevels > 1) {
     refString = baseName + missionStatus;
-  }
-  else {
+  } else {
     refString = baseName;
   }
   progress = self getStat(level.challengeInfo[refString]["statid"]);
@@ -404,14 +401,12 @@ processChallenge(baseName, progressInc, levelEnd) {
     }
     if(missionStatus == numLevels) {
       missionStatus = 255;
-    }
-    else {
+    } else {
       missionStatus += 1;
     }
     if(numLevels > 1) {
       self.challengeData[baseName + "1"] = missionStatus;
-    }
-    else {
+    } else {
       self.challengeData[baseName] = missionStatus;
     }
     self setStat(level.challengeInfo[refString]["statid"], level.challengeInfo[refString]["maxval"]);
@@ -429,8 +424,7 @@ resetChallengeProgress(baseName, progress) {
   numLevels = getChallengeLevels(baseName);
   if(numLevels > 1) {
     missionStatus = self getChallengeStatus((baseName + "1"));
-  }
-  else {
+  } else {
     missionStatus = self getChallengeStatus(baseName);
   }
   if(!isDefined(progress)) {
@@ -445,8 +439,7 @@ resetChallengeProgress(baseName, progress) {
   assertex(missionStatus <= numLevels, "Mini challenge levels higher than max: " + missionStatus + " vs. " + numLevels);
   if(numLevels > 1) {
     refString = baseName + missionStatus;
-  }
-  else {
+  } else {
     refString = baseName;
   }
   prevprogress = self getStat(level.challengeInfo[refString]["statid"]);
@@ -556,8 +549,7 @@ getRank() {
   rankId = self.rank;
   if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))) {
     return rankId;
-  }
-  else {
+  } else {
     return self getRankForXp(rankXp);
   }
 }
@@ -577,8 +569,7 @@ getRankForXp(xpVal) {
     rankId++;
     if(isDefined(level.rankTable[rankId])) {
       rankName = level.rankTable[rankId][1];
-    }
-    else {
+    } else {
       rankName = undefined;
     }
   }
@@ -740,8 +731,7 @@ unlockChallenge(refString) {
   for(i = 0; i < Ref_Tok.size; i++) {
     if(getSubStr(Ref_Tok[i], 0, 3) == "ch_") {
       unlockChallengeSingular(Ref_Tok[i]);
-    }
-    else {
+    } else {
       unlockChallengeGroup(Ref_Tok[i]);
     }
   }

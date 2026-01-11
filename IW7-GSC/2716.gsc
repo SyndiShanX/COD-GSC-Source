@@ -49,8 +49,7 @@ func_17C1(var_00, var_01, var_02, var_03) {
 
   if(level.splitscreen) {
     var_05 setshader("hud_icon_death", 14, 14);
-  }
-  else {
+  } else {
     var_05 setshader("hud_icon_death", 7, 7);
   }
 

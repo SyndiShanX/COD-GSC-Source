@@ -10,8 +10,7 @@ main() {
 
   if(isDefined(self.drivingvehicle)) {
     main_driver();
-  }
-  else {
+  } else {
     main_passenger();
   }
 }
@@ -130,8 +129,7 @@ snowmobile_loop_passenger() {
 
     if(var_0 >= 0) {
       self setanimknoblimited(animscripts\utility::animarray("lean_right"), 1, 0.05);
-    }
-    else {
+    } else {
       self setanimknoblimited(animscripts\utility::animarray("lean_left"), 1, 0.05);
     }
 
@@ -338,11 +336,9 @@ snowmobileshootbehavior() {
 
   if(var_0 < 1000000) {
     self.shootstyle = "full";
-  }
-  else if(var_0 < 4000000) {
+  } else if(var_0 < 4000000) {
     self.shootstyle = "burst";
-  }
-  else {
+  } else {
     self.shootstyle = "single";
   }
 
@@ -365,15 +361,13 @@ snowmobileshootbehavior() {
 
         if(var_9 > 128) {
           var_9 = 128;
-        }
-        else if(var_9 < -128) {
+        } else if(var_9 < -128) {
           var_9 = -128;
         }
 
         if(var_9 > 0) {
           var_9 = 128 - var_9;
-        }
-        else {
+        } else {
           var_9 = -128 - var_9;
         }
 
@@ -500,8 +494,7 @@ snowmobile_trackshootentorpos_driver() {
 
     if(var_4) {
       var_4 = 0;
-    }
-    else {
+    } else {
       var_10 = var_3 - var_2;
 
       if(abs(var_10) > var_1) {
@@ -560,8 +553,7 @@ snowmobile_trackshootentorpos_passenger() {
 
     if(var_8) {
       var_8 = 0;
-    }
-    else {
+    } else {
       if(var_6 < -180 + var_4 && var_7 > 180 - var_5) {
         var_7 = -179;
       }

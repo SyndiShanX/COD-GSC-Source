@@ -180,8 +180,7 @@ show_betty_hint(string) {
   self endon("disconnect");
   if(string == "betty_purchased") {
     text = &"ZOMBIE_BETTY_HOWTO";
-  }
-  else {
+  } else {
     text = &"ZOMBIE_BETTY_ALREADY_PURCHASED";
   }
   self setup_client_hintelem();

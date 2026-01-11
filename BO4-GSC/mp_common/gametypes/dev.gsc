@@ -28,20 +28,18 @@
 #include scripts\mp_common\gametypes\globallogic_utils;
 #include scripts\mp_common\player\player_loadout;
 #include scripts\mp_common\util;
-
 #namespace dev;
 
 autoexec __init__system__() {
-  system::register(#"dev", &__init__, undefined, #"spawning_shared");
+  system::register(#"dev", &__init__, undefined, # "spawning_shared");
 }
 
-  function __init__() {
-    callback::on_start_gametype(&init);
-    callback::on_connect(&on_player_connected);
+function __init__() {
+  callback::on_start_gametype(&init);
+  callback::on_connect(&on_player_connected);
 
-    level.devongetormakebot = &getormakebot;
-
-  }
+  level.devongetormakebot = &getormakebot;
+}
 
 init() {
   if(getdvarstring(#"scr_show_hq_spawns") == "<dev string:x38>") {
@@ -122,8 +120,8 @@ updatehardpoints() {
         }
 
         if(isbot(player)) {
-          player.bot[#"killstreaks"] = [];
-          player.bot[#"killstreaks"][0] = killstreaks::get_menu_name(keys[i]);
+          player.bot[# "killstreaks"] = [];
+          player.bot[# "killstreaks"][0] = killstreaks::get_menu_name(keys[i]);
           killstreakweapon = killstreaks::get_killstreak_weapon(keys[i]);
           player killstreaks::give_weapon(killstreakweapon, 1);
           globallogic_score::_setplayermomentum(player, 2000);
@@ -209,7 +207,7 @@ function_e8b29265(player) {
 function_30d59c86(team, target, players) {
   if(isDefined(target)) {
     origin = target.origin;
-    nodes = getnodesinradius(origin, 128, 32, 128, #"path");
+    nodes = getnodesinradius(origin, 128, 32, 128, # "path");
     angles = target getplayerangles();
     yaw = (0, angles[1], 0);
     forward = anglesToForward(yaw);
@@ -359,7 +357,7 @@ updatedevsettings() {
       }
 
       player = util::gethostplayer();
-      spawns = level.spawn_start[player.pers[#"team"]];
+      spawns = level.spawn_start[player.pers[# "team"]];
 
       if(!isDefined(spawns) || spawns.size <= 0) {
         return;
@@ -384,7 +382,7 @@ updatedevsettings() {
       }
 
       player = util::gethostplayer();
-      spawns = level.spawn_start[player.pers[#"team"]];
+      spawns = level.spawn_start[player.pers[# "team"]];
 
       if(!isDefined(spawns) || spawns.size <= 0) {
         return;
@@ -899,11 +897,11 @@ function_48a6b85() {
     level.var_94f4ca81.dataset[0] = var_2e980658;
     var_bc7d1357 = spawnStruct();
     var_bc7d1357.name = "<dev string:x461>";
-    var_bc7d1357.spawns = level.spawn_start[#"allies"];
+    var_bc7d1357.spawns = level.spawn_start[# "allies"];
     level.var_94f4ca81.dataset[1] = var_bc7d1357;
     var_2a1cb802 = spawnStruct();
     var_2a1cb802.name = "<dev string:x479>";
-    var_2a1cb802.spawns = level.spawn_start[#"axis"];
+    var_2a1cb802.spawns = level.spawn_start[# "axis"];
     level.var_94f4ca81.dataset[2] = var_2a1cb802;
     var_c95c8eff = spawnStruct();
     var_c95c8eff.name = "<dev string:x48f>";
@@ -1124,7 +1122,7 @@ devgui_increase_momentum(score) {
       continue;
     }
 
-    player globallogic_score::giveplayermomentumnotification(score, #"kill", "<dev string:x51c>");
+    player globallogic_score::giveplayermomentumnotification(score, # "kill", "<dev string:x51c>");
   }
 }
 
@@ -1302,8 +1300,8 @@ addenemyheli() {
   team = "<dev string:xc0>";
   player = util::gethostplayer();
 
-  if(isDefined(player.pers[#"team"])) {
-    team = util::getotherteam(player.pers[#"team"]);
+  if(isDefined(player.pers[# "team"])) {
+    team = util::getotherteam(player.pers[# "team"]);
   }
 
   ent = getormakebot(team);
@@ -1365,14 +1363,14 @@ addtestcarepackage() {
   team = "<dev string:xc0>";
   player = util::gethostplayer();
 
-  if(isDefined(player.pers[#"team"])) {
+  if(isDefined(player.pers[# "team"])) {
     switch (supplydrop) {
       case 2:
-        team = util::getotherteam(player.pers[#"team"]);
+        team = util::getotherteam(player.pers[# "team"]);
         break;
       case 1:
       default:
-        team = player.pers[#"team"];
+        team = player.pers[# "team"];
         break;
     }
   }
@@ -1640,8 +1638,8 @@ debug_realtime_engage_dist() {
     eye = player getEye();
     eye = (eye[0], eye[1], eye[2] + 20);
     trace = bulletTrace(eye, eye + vectorscale(direction_vec, 100000), 1, player);
-    tracepoint = trace[#"position"];
-    tracenormal = trace[#"normal"];
+    tracepoint = trace[# "position"];
+    tracenormal = trace[# "normal"];
     tracedist = int(distance(eye, tracepoint));
 
     if(tracepoint != lasttracepos) {
@@ -1775,7 +1773,7 @@ larry_init(larry) {
     direction_vec = anglesToForward(direction);
     eye = self getEye();
     trace = bulletTrace(eye, eye + vectorscale(direction_vec, 8000), 0, undefined);
-    dist = distance(eye, trace[#"position"]);
+    dist = distance(eye, trace[# "position"]);
     position = eye + vectorscale(direction_vec, dist - 64);
     larry.model.origin = position;
     larry.model.angles = self.angles + (0, 180, 0);
@@ -2175,24 +2173,24 @@ devstraferunpathdebugdraw() {
           textscale = 10;
 
           switch (node.script_noteworthy) {
-            case #"strafe_start":
+            case # "strafe_start":
               textcolor = green;
               textalpha = 1;
               break;
-            case #"strafe_stop":
+            case # "strafe_stop":
               textcolor = red;
               textalpha = 1;
               break;
-            case #"strafe_leave":
+            case # "strafe_leave":
               textcolor = white;
               textalpha = 1;
               break;
           }
 
           switch (node.script_noteworthy) {
-            case #"strafe_stop":
-            case #"strafe_leave":
-            case #"strafe_start":
+            case # "strafe_stop":
+            case # "strafe_leave":
+            case # "strafe_start":
               sides = 10;
               radius = 100;
 
@@ -2248,22 +2246,22 @@ devhelipathdebugdraw() {
       foreach(ent in script_origins) {
         if(isDefined(ent.targetname)) {
           switch (ent.targetname) {
-            case #"heli_start":
+            case # "heli_start":
               textcolor = blue;
               textalpha = 1;
               textscale = 3;
               break;
-            case #"heli_loop_start":
+            case # "heli_loop_start":
               textcolor = green;
               textalpha = 1;
               textscale = 3;
               break;
-            case #"heli_attack_area":
+            case # "heli_attack_area":
               textcolor = red;
               textalpha = 1;
               textscale = 3;
               break;
-            case #"heli_leave":
+            case # "heli_leave":
               textcolor = white;
               textalpha = 1;
               textscale = 3;
@@ -2271,10 +2269,10 @@ devhelipathdebugdraw() {
           }
 
           switch (ent.targetname) {
-            case #"heli_leave":
-            case #"heli_attack_area":
-            case #"heli_start":
-            case #"heli_loop_start":
+            case # "heli_leave":
+            case # "heli_attack_area":
+            case # "heli_start":
+            case # "heli_loop_start":
               if(drawtime == maxdrawtime) {
                 ent thread drawpath(textcolor, white, textalpha, textscale, origintextoffset, drawtime, endonmsg);
               }

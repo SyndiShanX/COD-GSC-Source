@@ -34,8 +34,7 @@ main() {
 
   if(maps\_utility::is_gen4()) {
     setsaveddvar("fx_alphathreshold", 2);
-  }
-  else {
+  } else {
     setsaveddvar("fx_alphathreshold", 9);
   }
 
@@ -145,8 +144,7 @@ setup_common(var_0) {
 setup_player(var_0) {
   if(isDefined(var_0)) {
     var_1 = var_0 + "_start";
-  }
-  else {
+  } else {
     var_1 = level.start_point + "_start";
   }
 
@@ -177,7 +175,7 @@ spawn_allies(var_0) {
   level.allies[2].npcid = "hsh";
 
   foreach(var_2 in level.allies) {
-  self.goalradius = 25;
+    self.goalradius = 25;
   }
 
   var_4 = spawn_ally("dog", var_0);
@@ -215,8 +213,7 @@ spawn_ally(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_2 = level.start_point + "_" + var_0;
-  }
-  else {
+  } else {
     var_2 = var_1 + "_" + var_0;
   }
 
@@ -241,7 +238,7 @@ lights() {
   var_0 = getEntArray("flickerlight1", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread flareflicker();
+    var_2 thread flareflicker();
   }
 }
 

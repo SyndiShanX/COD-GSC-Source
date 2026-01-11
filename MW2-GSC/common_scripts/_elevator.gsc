@@ -91,7 +91,7 @@ elevator_think() {
 
 elevator_call() {
   foreach(callbutton in level.elevator_callbuttons) {
-  callbutton thread monitor_callbutton();
+    callbutton thread monitor_callbutton();
   }
 }
 
@@ -112,7 +112,7 @@ floor_override(inside_trig) {
 
 elevator_fsm(state) {
   /*				finite state machine
-	
+  	
   state A: 	rest
   state B: 	closing doors - interrupt threaded
   state C: 	opening doors
@@ -159,8 +159,7 @@ elevator_fsm(state) {
         // if elevator already has destination but interrupted, it should continue previous order
         if(self.moveto_floor == self get_curFloor()) {
           param = inside_trig discrete_waittill("trigger");
-        }
-        else {
+        } else {
           param = "elevator_called"; // as if called onto the destination floor
         }
 
@@ -486,8 +485,7 @@ elevator_move(floor_num) {
 
     if(!issubstr(part.classname, "trigger_")) {
       part moveTo(moveto_pos, moveTime, moveTime * level.elevator_accel, moveTime * level.elevator_decel);
-    }
-    else {
+    } else {
       part.origin = moveto_pos;
     }
   }
@@ -764,7 +762,7 @@ build_elevators() {
     elevator_bound_end delete();
   }
   foreach(elevator_doorset in elevator_doorsets) {
-  elevator_doorset delete();
+    elevator_doorset delete();
   }
 
   build_call_buttons();
@@ -778,7 +776,7 @@ build_elevators() {
     pLights = elevator get_housing_primarylight();
     if(isDefined(pLights) && pLights.size) {
       foreach(pLight in pLights) {
-      pLight setlightintensity(0.75);
+        pLight setlightintensity(0.75);
       }
     }
   }
@@ -829,11 +827,11 @@ setup_hints() {
     if(num_of_floors > 2) {
       // Press and hold && 1 to select floor.
     }
-      use_trig setHintString(&"ELEVATOR_FLOOR_SELECT_HINT");
+    use_trig setHintString(&"ELEVATOR_FLOOR_SELECT_HINT");
     else {
       // Press and hold && 1 to use elevator.
     }
-      use_trig setHintString(&"ELEVATOR_USE_HINT");
+    use_trig setHintString(&"ELEVATOR_USE_HINT");
   }
 
   // elevator call button hint
@@ -862,8 +860,7 @@ discrete_waittill(msg) {
 
   if(level.elevator_motion_detection) {
     self.motion_trigger waittill(msg, param);
-  }
-  else {
+  } else {
     self waittill(msg, param);
   }
 
@@ -959,13 +956,13 @@ get_housing_children() {
   // append script models as children of elevator moving body
   script_models = self get_housing_models();
   foreach(eModel in script_models) {
-  children[children.size] = eModel;
+    children[children.size] = eModel;
   }
 
   // append primary light(s) as children of elevator moving body
   primarylights = get_housing_primarylight();
   foreach(pLight in primarylights) {
-  children[children.size] = pLight;
+    children[children.size] = pLight;
   }
 
   return children;
@@ -1138,8 +1135,7 @@ elevator_get_dvar_int(dvar, def) {
 elevator_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }

@@ -84,8 +84,7 @@ precacheFX() {
 
   if(getdvarint("sm_enable") && getdvar("r_zfeather") != "0") {
     level._effect["spotlight"] = loadfx("misc/hunted_spotlight_model");
-  }
-  else {
+  } else {
     level._effect["spotlight"] = loadfx("misc/spotlight_large");
   }
 

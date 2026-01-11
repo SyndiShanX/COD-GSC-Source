@@ -35,7 +35,7 @@ swept_start() {
   var_0 = level.player getweaponslistprimaries();
 
   foreach(var_2 in var_0) {
-  level.player takeweapon(var_2);
+    level.player takeweapon(var_2);
   }
 
   level.player disableoffhandweapons();
@@ -103,8 +103,7 @@ swept() {
 swept_hint() {
   if(isDefined(level.ps3) && level.ps3 || isDefined(level.ps4) && level.ps4) {
     level.player maps\_utility::display_hint_timeout("swept_hint_no_glyph", 3);
-  }
-  else {
+  } else {
     level.player maps\_utility::display_hint_timeout("swept_hint", 3);
   }
 }
@@ -295,8 +294,7 @@ start_blend_to_endpos() {
 
     if(level.swept_path_rig.origin[0] - level.hands_rig.origin[0] > 0) {
       var_4 = level.hands_rig.origin + var_2 * -1 * var_3;
-    }
-    else {
+    } else {
       var_4 = level.hands_rig.origin + var_2 * var_3;
     }
 
@@ -453,11 +451,9 @@ watch_waterlevel() {
 
     if(var_2["surfacetype"] == "water" && var_0 != "water") {
       swept_underwater();
-    }
-    else if(var_2["surfacetype"] == "none" && var_0 != "none") {
+    } else if(var_2["surfacetype"] == "none" && var_0 != "none") {
       swept_abovewater();
-    }
-    else if(var_2["surfacetype"] == "water" && var_0 == "water") {} else if(var_2["surfacetype"] == "none" && var_0 == "none") {}
+    } else if(var_2["surfacetype"] == "water" && var_0 == "water") {} else if(var_2["surfacetype"] == "none" && var_0 == "none") {}
 
     var_0 = var_2["surfacetype"];
     common_scripts\utility::waitframe();
@@ -548,8 +544,7 @@ building_slide_control_hint() {
     if(isDefined(level.ps3) && level.ps3) {
       if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacy") {
         maps\_utility::display_hint_timeout("control_slide_gamepad_l_no_glyph", 3);
-      }
-      else {
+      } else {
         maps\_utility::display_hint_timeout("control_slide_gamepad_no_glyph", 3);
       }
     } else if(var_0 == "thumbstick_southpaw" || var_0 == "thumbstick_legacy")

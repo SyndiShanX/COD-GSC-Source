@@ -12,9 +12,9 @@
 #using_animtree("script_model");
 barrett_init() {
   /*
-	
+  	
   ADD TO YOUR CSV:!!!!!!!!!!!!!!
-	
+  	
   xmodel,weapon_m82_MG_Setup
   rawfile,animtrees/script_model.atr
   rawfile,maps/_barrett.gsc

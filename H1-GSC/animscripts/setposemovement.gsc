@@ -8,8 +8,7 @@ setposemovement(var_0, var_1) {
   if(var_0 == "") {
     if(self.a.pose == "prone" && (var_1 == "walk" || var_1 == "run")) {
       var_0 = "crouch";
-    }
-    else {
+    } else {
       var_0 = self.a.pose;
     }
   }
@@ -525,8 +524,7 @@ blendintostandrun() {
 
   if(isDefined(self.sprint)) {
     self setanimknoblimited(animscripts\utility::getmoveanim("sprint"), 1, var_2, 1);
-  }
-  else {
+  } else {
     self setanimknoblimited(animscripts\run::getrunanim(), 1, var_2, 1);
   }
 
@@ -560,8 +558,7 @@ crouchtostand() {
 
   if(animscripts\utility::usingsidearm()) {
     playtransitionanimation( % pistol_crouchaimstraight2stand, "stand", "stop", undefined, var_0);
-  }
-  else {
+  } else {
     animscripts\utility::randomizeidleset();
     playtransitionanimation( % crouch2stand, "stand", "stop", undefined, var_0);
   }
@@ -614,8 +611,7 @@ crouchtostandrun() {
 blendintocrouchrun() {
   if(isDefined(self.crouchrun_combatanim)) {
     playblendtransition(self.crouchrun_combatanim, 0.6, "crouch", "run");
-  }
-  else {
+  } else {
     var_0 = % crouchrun;
     var_1 = 0.4;
     var_2 = self.a.movement == "stop" && self.a.pose == "crouch";
@@ -778,8 +774,7 @@ crouchruntoprone() {
 
   if(self maymovetopoint(var_4)) {
     playtransitionanimation(var_2, "prone", "stop", undefined, var_0);
-  }
-  else {
+  } else {
     playtransitionanimation( % crouch_2_prone_firing, "prone", "stop", undefined, var_0);
   }
 }
@@ -837,8 +832,7 @@ playtransitionanimationfunc(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_3)) {
     self setanimknoball(var_3, % body, 1, 0.3, var_4);
-  }
-  else {
+  } else {
     self clearanim(var_0, 0.1);
   }
 }

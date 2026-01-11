@@ -4,7 +4,6 @@
 **********************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace wz_revive_prompt;
 
 class cwz_revive_prompt: cluielem {
@@ -25,7 +24,7 @@ class cwz_revive_prompt: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"wz_revive_prompt");
+    cluielem::open(localclientnum, # "wz_revive_prompt");
   }
 
   function function_fa582112(localclientnum) {

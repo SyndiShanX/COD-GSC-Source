@@ -21,7 +21,7 @@ Callback_HostMigration() {
   println("Migration starting at time " + gettime());
 
   foreach(character in level.characters) {
-  character.hostMigrationControlsFrozen = false;
+    character.hostMigrationControlsFrozen = false;
   }
 
   level.hostMigrationTimer = true;

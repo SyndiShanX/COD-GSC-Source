@@ -60,8 +60,7 @@ main(model, type) {
   build_radiusdamage((0, 0, 32), 300, 200, 0, false);
 }
 
-init_local() {
-}
+init_local() {}
 
 #using_animtree("vehicles");
 set_vehicle_anims(positions) {

@@ -44,8 +44,7 @@ func_13B5() {
 
   if(scripts\mp\utility\game::isreallyalive(self)) {
     thread func_1106A();
-  }
-  else {
+  } else {
     thread func_1106B();
   }
 

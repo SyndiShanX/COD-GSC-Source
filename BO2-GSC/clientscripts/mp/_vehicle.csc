@@ -38,36 +38,31 @@ vehicle_rumble(localclientnum) {
 
   if(isDefined(rumblestruct.scale)) {
     self.rumble_scale = rumblestruct.scale;
-  }
-  else {
+  } else {
     self.rumble_scale = 0.15;
   }
 
   if(isDefined(rumblestruct.duration)) {
     self.rumble_duration = rumblestruct.duration;
-  }
-  else {
+  } else {
     self.rumble_duration = 4.5;
   }
 
   if(isDefined(rumblestruct.radius)) {
     self.rumble_radius = rumblestruct.radius;
-  }
-  else {
+  } else {
     self.rumble_radius = 600;
   }
 
   if(isDefined(rumblestruct.basetime)) {
     self.rumble_basetime = rumblestruct.basetime;
-  }
-  else {
+  } else {
     self.rumble_basetime = 1;
   }
 
   if(isDefined(rumblestruct.randomaditionaltime)) {
     self.rumble_randomaditionaltime = rumblestruct.randomaditionaltime;
-  }
-  else {
+  } else {
     self.rumble_randomaditionaltime = 1;
   }
 
@@ -133,8 +128,7 @@ tread(localclientnum, tagname, side, relativeoffset) {
 
     if(waittime < 0.1) {
       waittime = 0.1;
-    }
-    else if(waittime > 0.3) {
+    } else if(waittime > 0.3) {
       waittime = 0.3;
     }
 
@@ -180,8 +174,7 @@ playtankexhaust(localclientnum) {
   for(;;) {
     if(!isDefined(self) || !self isalive()) {
       return;
-    }
-    else if(!isDefined(level.vehicle_exhaust) || !isDefined(level.vehicle_exhaust[self.model])) {
+    } else if(!isDefined(level.vehicle_exhaust) || !isDefined(level.vehicle_exhaust[self.model])) {
       println("clientside exhaustfx not set up for vehicle model: " + self.model);
 
       return;
@@ -216,8 +209,7 @@ build_exhaust(model, effect, one_exhaust) {
 
   if(isDefined(one_exhaust) && one_exhaust) {
     level.vehicle_exhaust[model].one_exhaust = 1;
-  }
-  else {
+  } else {
     level.vehicle_exhaust[model].one_exhaust = 0;
   }
 }
@@ -277,5 +269,4 @@ set_static_amount(staticamount) {
   }
 }
 
-vehicle_variants(localclientnum) {
-}
+vehicle_variants(localclientnum) {}

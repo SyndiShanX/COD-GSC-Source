@@ -17,7 +17,6 @@
 #include scripts\mp\mp_silo_sound;
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\load;
-
 #namespace mp_silo;
 
 event_handler[level_init] main(eventstruct) {
@@ -38,7 +37,7 @@ event_handler[level_init] main(eventstruct) {
 
   init_devgui();
 
-    load::main();
+  load::main();
   compass::setupminimap("");
   level.cleandepositpoints = array((-6170, -6350, 208), (-6860, -6720, 212), (-5050, -8000, 101), (-5670.5, -9229.5, 104), (-6186.5, -10457.5, 85));
   spawncollision("collision_clip_256x256x256", "collider", (-6016, -7016, 576), (0, 0, 0));
@@ -216,9 +215,9 @@ prematch_init() {
 
   if(util::isfirstround()) {
     level util::delay(0.4, undefined, &function_fffbeb7f);
-    level util::delay(3, undefined, &scene::play, #"p8_fxanim_mp_silo_missle_deploy_bundle");
+    level util::delay(3, undefined, &scene::play, # "p8_fxanim_mp_silo_missle_deploy_bundle");
     level scene::add_scene_func(#"p8_fxanim_mp_silo_helicopter_crash_bundle", &function_5c718249, "play");
-    level util::delay(0.2, undefined, &scene::play, #"p8_fxanim_mp_silo_helicopter_crash_bundle");
+    level util::delay(0.2, undefined, &scene::play, # "p8_fxanim_mp_silo_helicopter_crash_bundle");
     level notify(#"hash_771bf8874446d6f6");
     level notify(#"hash_388057c56b2acf4c");
     return;
@@ -238,8 +237,8 @@ prematch_init() {
 function_5c718249(a_ents) {
   waitframe(1);
 
-  if(isDefined(a_ents[#"prop 1"])) {
-    a_ents[#"prop 1"] clientfield::increment("helo_spawn_flavor_rope_pulse");
+  if(isDefined(a_ents[# "prop 1"])) {
+    a_ents[# "prop 1"] clientfield::increment("helo_spawn_flavor_rope_pulse");
   }
 }
 

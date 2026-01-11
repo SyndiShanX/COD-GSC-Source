@@ -86,8 +86,7 @@ cover_wall_think(covertype) {
 
   if(self.covertype == "stand") {
     self.a.special = "cover_stand";
-  }
-  else {
+  } else {
     self.a.special = "cover_crouch";
   }
 
@@ -235,8 +234,7 @@ idle() {
 
     if(usetwitch && !self.looking_at_entity) {
       idleanim = animarraypickrandom("hide_idle_twitch");
-    }
-    else {
+    } else {
       idleanim = animarray("hide_idle");
     }
 
@@ -271,8 +269,7 @@ flinch() {
 playidleanimation(idleanim, needsrestart) {
   if(needsrestart) {
     self setflaggedanimknoballrestart("idle", idleanim, % body, 1, 0.1, 1);
-  }
-  else {
+  } else {
     self setflaggedanimknoball("idle", idleanim, % body, 1, 0.1, 1);
   }
 
@@ -296,8 +293,7 @@ look(looktime) {
 
   if(self issuppressedwrapper()) {
     lookanim = animarray("look_to_hide_fast");
-  }
-  else {
+  } else {
     lookanim = animarray("look_to_hide");
   }
 
@@ -390,8 +386,7 @@ pop_up() {
 
   if(self.covertype == "crouch") {
     self setup_cover_crouch();
-  }
-  else {
+  } else {
     self setup_cover_stand();
   }
 
@@ -399,11 +394,9 @@ pop_up() {
 
   if(self.covertype == "stand") {
     self.a.special = "cover_stand_aim";
-  }
-  else if(newcovermode == "left" || newcovermode == "right") {
+  } else if(newcovermode == "left" || newcovermode == "right") {
     self.a.special = "cover_crouch_aim_" + newcovermode;
-  }
-  else {
+  } else {
     self.a.special = "cover_crouch_aim";
   }
 
@@ -443,8 +436,7 @@ donotetracksforpopup(animname) {
 setup_additive_aim(transtime) {
   if(self.a.covermode == "left" || self.a.covermode == "right") {
     aimcovermode = "crouch";
-  }
-  else {
+  } else {
     aimcovermode = self.a.covermode;
   }
 
@@ -478,8 +470,7 @@ go_to_hide() {
 
   if(self.covertype == "stand") {
     self.a.special = "cover_stand";
-  }
-  else {
+  } else {
     self.a.special = "cover_crouch";
   }
 
@@ -495,11 +486,9 @@ trythrowinggrenade(throwat, safe, forcethrow) {
 
   if(animarrayexist("grenade_rambo") && isDefined(self.rambochance) && randomfloat(1) < self.rambochance) {
     theanim = animarray("grenade_rambo");
-  }
-  else if(isDefined(safe) && safe) {
+  } else if(isDefined(safe) && safe) {
     theanim = animarraypickrandom("grenade_safe");
-  }
-  else {
+  } else {
     theanim = animarraypickrandom("grenade_exposed");
   }
 
@@ -605,8 +594,7 @@ needtochangecovermode() {
 
   if(self.a.covermode == "lean") {
     return pitch < 10;
-  }
-  else {
+  } else {
     return abs(pitch) > 45;
   }
 }
@@ -659,8 +647,7 @@ getbestcovermode() {
 resetweaponanims() {
   if(self.covertype == "crouch") {
     self setup_cover_crouch();
-  }
-  else {
+  } else {
     self setup_cover_stand();
   }
 }

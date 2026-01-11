@@ -22,8 +22,7 @@ getTargetAngleOffset(target) {
 getSniperBurstDelayTime() {
   if(isPlayer(self.enemy)) {
     return randomFloatRange(self.enemy.gs.min_sniper_burst_delay_time, self.enemy.gs.max_sniper_burst_delay_time);
-  }
-  else {
+  } else {
     return randomFloatRange(anim.min_sniper_burst_delay_time, anim.max_sniper_burst_delay_time);
   }
 }
@@ -40,17 +39,13 @@ getRemainingBurstDelayTime() {
 getBurstDelayTime() {
   if(self usingSidearm()) {
     return randomFloatRange(.15, .55);
-  }
-  else if(weapon_pump_action_shotgun()) {
+  } else if(weapon_pump_action_shotgun()) {
     return randomFloatRange(1.0, 1.7);
-  }
-  else if(self isSniper()) {
+  } else if(self isSniper()) {
     return getSniperBurstDelayTime();
-  }
-  else if(self.fastBurst) {
+  } else if(self.fastBurst) {
     return randomFloatRange(.1, .35);
-  }
-  else {
+  } else {
     return randomFloatRange(.4, .9);
   }
 }
@@ -126,8 +121,7 @@ aimButDontShoot() {
 
     if(isDefined(self.dontEverShoot) || (isDefined(self.enemy) && isDefined(self.enemy.dontAttackMe))) {
       wait dontShoot_interval;
-    }
-    else {
+    } else {
       return false;
     }
 
@@ -153,8 +147,7 @@ shootUntilShootBehaviorChange() {
 
   if(isDefined(self.enemy) && distanceSquared(self.origin, self.enemy.origin) > squared(400)) {
     burstCount = randomintrange(1, 5);
-  }
-  else {
+  } else {
     burstCount = 10;
   }
 
@@ -174,8 +167,7 @@ shootUntilShootBehaviorChange() {
 
       if(numShots == 1) {
         self FireUntilOutOfAmmo(animArrayPickRandom("single"), true, numShots);
-      }
-      else {
+      } else {
         self FireUntilOutOfAmmo(animArray(self.shootStyle + numShots), true, numShots);
       }
     } else if(self.shootStyle == "single") {
@@ -263,8 +255,7 @@ aimIdleThread(lean) {
 
     if(isDefined(self.a.leanAim)) {
       idleanim = animArrayPickRandom("lean_idle");
-    }
-    else {
+    } else {
       idleanim = animArrayPickRandom("exposed_idle");
     }
 
@@ -313,17 +304,13 @@ FireUntilOutOfAmmo(fireAnim, stopOnAnimationEnd, maxshots) {
   rate = 1.0;
   if(isDefined(self.shootRateOverride)) {
     rate = self.shootRateOverride;
-  }
-  else if(self.shootStyle == "full") {
+  } else if(self.shootStyle == "full") {
     rate = animscripts\weaponList::autoShootAnimRate() * randomfloatrange(0.5, 1.0);
-  }
-  else if(self.shootStyle == "burst") {
+  } else if(self.shootStyle == "burst") {
     rate = animscripts\weaponList::burstShootAnimRate();
-  }
-  else if(usingSidearm()) {
+  } else if(usingSidearm()) {
     rate = 3.0;
-  }
-  else if(usingShotgun()) {
+  } else if(usingShotgun()) {
     rate = shotgunFireRate();
   }
 
@@ -660,8 +647,7 @@ getGrenadeThrowOffset(throwAnim) {
   if(offset[2] == 64) {
     if(isDefined(throwAnim)) {
       println("^1Warning: undefined grenade throw animation used; hand offset unknown");
-    }
-    else {
+    } else {
       println("^1Warning: grenade throw animation ", throwAnim, " has no recorded hand offset");
     }
   }
@@ -980,8 +966,7 @@ grenadeDebug(state, duration, showMissReason) {
     print3d(self getShootAtPos() + (0, 0, 10), state);
     if(isDefined(showMissReason) && isDefined(self.grenadeMissReason)) {
       print3d(self getShootAtPos() + (0, 0, 0), "Failed: " + self.grenadeMissReason);
-    }
-    else if(isDefined(self.activeGrenadeTimer)) {
+    } else if(isDefined(self.activeGrenadeTimer)) {
       print3d(self getShootAtPos() + (0, 0, 0), "Timer: " + getGrenadeTimerDebugName(self.activeGrenadeTimer));
     }
     wait .05;
@@ -995,27 +980,26 @@ setGrenadeMissReason(reason) {
   self.grenadeMissReason = reason;
 }
 
-  TryGrenadePosProc(throwingAt, destination, optionalAnimation, armOffset) {
-    // Dont throw a grenade right near you or your buddies
-    if(!(self isGrenadePosSafe(throwingAt, destination))) {
-      return false;
-    }
-    else if(distanceSquared(self.origin, destination) < 200 * 200) {
-      return false;
-    }
-
-    //prof_begin( "TryGrenadePosProc" );	
-
-    trace = physicsTrace(destination + (0, 0, 1), destination + (0, 0, -500));
-    if(trace == destination + (0, 0, -500)) {
-      return false;
-    }
-    trace += (0, 0, .1); // ensure just above ground
-
-    //prof_end( "TryGrenadePosProc" );	
-
-    return TryGrenadeThrow(throwingAt, trace, optionalAnimation, armOffset);
+TryGrenadePosProc(throwingAt, destination, optionalAnimation, armOffset) {
+  // Dont throw a grenade right near you or your buddies
+  if(!(self isGrenadePosSafe(throwingAt, destination))) {
+    return false;
+  } else if(distanceSquared(self.origin, destination) < 200 * 200) {
+    return false;
   }
+
+  //prof_begin( "TryGrenadePosProc" );	
+
+  trace = physicsTrace(destination + (0, 0, 1), destination + (0, 0, -500));
+  if(trace == destination + (0, 0, -500)) {
+    return false;
+  }
+  trace += (0, 0, .1); // ensure just above ground
+
+  //prof_end( "TryGrenadePosProc" );	
+
+  return TryGrenadeThrow(throwingAt, trace, optionalAnimation, armOffset);
+}
 
 TryGrenade(throwingAt, optionalAnimation) {
   if(self.weapon == "mg42" || self.grenadeammo <= 0) {
@@ -1032,7 +1016,7 @@ TryGrenade(throwingAt, optionalAnimation) {
 
   self thread grenadeDebug("Tried grenade throw", 4, true);
 
-    armOffset = getGrenadeThrowOffset(optionalAnimation);
+  armOffset = getGrenadeThrowOffset(optionalAnimation);
 
   if(isDefined(self.enemy) && throwingAt == self.enemy) {
     if(!checkGrenadeThrowDist()) {
@@ -1117,8 +1101,7 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow
   {
     if(!isDefined(fastThrow)) {
       throwvel = self checkGrenadeThrowPos(armOffset, destination, withBounce, "min energy", "min time", "max time");
-    }
-    else {
+    } else {
       throwvel = self checkGrenadeThrowPos(armOffset, destination, withBounce, "min time", "min energy");
     }
   } else {
@@ -1128,8 +1111,7 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow
     if(dist < 800) {
       if(dist < 256) {
         randomRange = 0;
-      }
-      else {
+      } else {
         randomRange *= (dist - 256) / (800 - 256);
       }
     }
@@ -1137,8 +1119,7 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow
     assert(self.enemy == throwingAt);
     if(!isDefined(fastThrow)) {
       throwvel = self checkGrenadeThrow(armOffset, randomRange, "min energy", "min time", "max time");
-    }
-    else {
+    } else {
       throwvel = self checkGrenadeThrow(armOffset, randomRange, "min time", "min energy");
     }
   }
@@ -1156,10 +1137,10 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow
       thread animscripts\utility::debugPos(destination, "O");
     }
 
-      // remember the time we want to delay any future grenade throws to, to avoid throwing too many.
-      // however, for now, only set the timer far enough in the future that it will expire when we throw the grenade.
-      // that way, if the throw fails (maybe due to killanimscript), we'll try again soon.
-      nextGrenadeTimeToUse = self getDesiredGrenadeTimerValue();
+    // remember the time we want to delay any future grenade throws to, to avoid throwing too many.
+    // however, for now, only set the timer far enough in the future that it will expire when we throw the grenade.
+    // that way, if the throw fails (maybe due to killanimscript), we'll try again soon.
+    nextGrenadeTimeToUse = self getDesiredGrenadeTimerValue();
     setGrenadeTimer(self.activeGrenadeTimer, min(gettime() + 3000, nextGrenadeTimeToUse));
 
     secondGrenadeOfDouble = false;
@@ -1182,13 +1163,12 @@ TryGrenadeThrow(throwingAt, destination, optionalAnimation, armOffset, fastThrow
       nextGrenadeTimeToUse = 0;
     }
 
-      //prof_end( "TryGrenadeThrow" );
-      if(isDefined(throwInThread)) {
-        thread DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble);
-      }
-      else {
-        DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble);
-      }
+    //prof_end( "TryGrenadeThrow" );
+    if(isDefined(throwInThread)) {
+      thread DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble);
+    } else {
+      DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble);
+    }
 
     return true;
   } else {
@@ -1215,11 +1195,11 @@ DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble
 
   self thread grenadeDebug("Starting throw", 3);
 
-    //prof_begin( "DoGrenadeThrow" );
+  //prof_begin( "DoGrenadeThrow" );
 
-    if(self.script == "combat" || self.script == "move") {
-      self orientmode("face direction", throwVel);
-    }
+  if(self.script == "combat" || self.script == "move") {
+    self orientmode("face direction", throwVel);
+  }
 
   self animscripts\battleChatter_ai::evaluateAttackEvent(self.grenadeWeapon);
   self notify("stop_aiming_at_enemy");
@@ -1278,7 +1258,7 @@ DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble
 
   self thread grenadeDebug("Threw", 5);
 
-    self notify("dont_reduce_giptp_on_killanimscript");
+  self notify("dont_reduce_giptp_on_killanimscript");
 
   if(self usingPlayerGrenadeTimer()) {
     // give the grenade some time to get to the player.
@@ -1307,8 +1287,7 @@ DoGrenadeThrow(throw_anim, throwVel, nextGrenadeTimeToUse, secondGrenadeOfDouble
   //		assert (attachSide != "none");
   if(attachSide != "none") {
     self detach(model, attachside);
-  }
-  else {
+  } else {
     print("No grenade hand set: ");
     println(throw_anim);
     println("animation in console does not specify grenade hand");
@@ -1357,7 +1336,7 @@ watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
 
   grenade thread grenadeDebug("Incoming", 5);
 
-    goodRadiusSqrd = 250 * 250;
+  goodRadiusSqrd = 250 * 250;
   giveUpRadiusSqrd = 400 * 400;
   if(type == "flash_grenade") {
     goodRadiusSqrd = 900 * 900;
@@ -1379,15 +1358,15 @@ watchGrenadeTowardsPlayerInternal(nextGrenadeTimeToUse) {
     {
       grenade thread grenadeDebug("Landed", 5);
 
-        // grenade is stationary. check if it's near any players
-        newPlayersToCheck = [];
+      // grenade is stationary. check if it's near any players
+      newPlayersToCheck = [];
       for(i = 0; i < playersToCheck.size; i++) {
         player = playersToCheck[i];
         distSqrd = distanceSquared(grenade.origin, player.origin);
         if(distSqrd < goodRadiusSqrd) {
           grenade thread grenadeDebug("Landed near player", 5);
 
-            player grenadeLandedNearPlayer(activeGrenadeTimer, nextGrenadeTimeToUse);
+          player grenadeLandedNearPlayer(activeGrenadeTimer, nextGrenadeTimeToUse);
         } else if(distSqrd < giveUpRadiusSqrd) {
           newPlayersToCheck[newPlayersToCheck.size] = player;
         }
@@ -1577,41 +1556,41 @@ DebugFailedCoverUsage(node) {
   }
 }
 
-  // this function seems okish,
-  // but the idea behind FindReacquireNode() is that you call it once,
-  // and then call GetReacquireNode() many times until it returns undefined.
-  // if we're just taking the first node (the best), we might as well just be using
-  // FindBestCoverNode().
-  /*
-  tryReacquireNode()
-  {
-  	self FindReacquireNode();
-  	node = self GetReacquireNode();
-  	if(!isDefined(node)) {
-  		return false;
-  	}
-  	return (self UseReacquireNode(node));
-  }
-  */
+// this function seems okish,
+// but the idea behind FindReacquireNode() is that you call it once,
+// and then call GetReacquireNode() many times until it returns undefined.
+// if we're just taking the first node (the best), we might as well just be using
+// FindBestCoverNode().
+/*
+tryReacquireNode()
+{
+	self FindReacquireNode();
+	node = self GetReacquireNode();
+	if(!isDefined(node)) {
+		return false;
+	}
+	return (self UseReacquireNode(node));
+}
+*/
 
-  shouldHelpAdvancingTeammate() {
-    // if teammate advanced recently
-    if(level.advanceToEnemyGroup[self.team] > 0 && level.advanceToEnemyGroup[self.team] < level.advanceToEnemyGroupMax) {
-      if(gettime() - level.lastAdvanceToEnemyTime[self.team] > 4000) {
-        return false;
-      }
-
-      leadAttacker = level.lastAdvanceToEnemyAttacker[self.team];
-      nearLeadAttacker = isDefined(leadAttacker) && distanceSquared(self.origin, leadAttacker.origin) < 256 * 256;
-
-      if((nearLeadAttacker || distanceSquared(self.origin, level.lastAdvanceToEnemySrc[self.team]) < 256 * 256) &&
-        (!isDefined(self.enemy) || distanceSquared(self.enemy.origin, level.lastAdvanceToEnemyDest[self.team]) < 512 * 512)) {
-        return true;
-      }
+shouldHelpAdvancingTeammate() {
+  // if teammate advanced recently
+  if(level.advanceToEnemyGroup[self.team] > 0 && level.advanceToEnemyGroup[self.team] < level.advanceToEnemyGroupMax) {
+    if(gettime() - level.lastAdvanceToEnemyTime[self.team] > 4000) {
+      return false;
     }
 
-    return false;
+    leadAttacker = level.lastAdvanceToEnemyAttacker[self.team];
+    nearLeadAttacker = isDefined(leadAttacker) && distanceSquared(self.origin, leadAttacker.origin) < 256 * 256;
+
+    if((nearLeadAttacker || distanceSquared(self.origin, level.lastAdvanceToEnemySrc[self.team]) < 256 * 256) &&
+      (!isDefined(self.enemy) || distanceSquared(self.enemy.origin, level.lastAdvanceToEnemyDest[self.team]) < 512 * 512)) {
+      return true;
+    }
   }
+
+  return false;
+}
 
 checkAdvanceOnEnemyConditions() {
   if(!isDefined(level.lastAdvanceToEnemyTime[self.team])) {
@@ -1703,7 +1682,7 @@ delayedBadplace(org) {
     thread badplacer(5, org, 16);
   }
 
-    string = "" + anim.badPlaceInt;
+  string = "" + anim.badPlaceInt;
   badplace_cylinder(string, 5, org, 16, 64, self.team);
   anim.badPlaces[anim.badPlaces.size] = string;
   if(anim.badPlaces.size >= 10) // too many badplaces, delete the oldest one and then remove it from the array
@@ -1869,8 +1848,7 @@ monitorFlash() {
     minamountdist = 0.2;
     if(amount_distance > 1 - minamountdist) {
       amount_distance = 1.0;
-    }
-    else {
+    } else {
       amount_distance = amount_distance / (1 - minamountdist);
     }
 

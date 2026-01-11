@@ -311,8 +311,7 @@ pipebreakthink4() {
     default: {
       if(isDefined(self.master.firstsnd)) {
         thread play_sound_in_space("expl_gas_pipe_burst", self.fxnode.origin);
-      }
-      else {
+      } else {
         self.master.firstsnd = true;
         thread play_sound_in_space("expl_gas_pipe_burst_decay", self.fxnode.origin);
       }

@@ -140,9 +140,7 @@ function setup_menu(localclientnum, menu_data, previous_menu) {
           ](localclientnum, previous_menu_info);
         }
       } else {
-        [
-          [previous_menu_info.custom_close_fn]
-        ](localclientnum, previous_menu_info);
+        [[previous_menu_info.custom_close_fn]](localclientnum, previous_menu_info);
       }
     }
     if(isDefined(previous_menu_info.extra_cams)) {
@@ -195,9 +193,7 @@ function setup_menu(localclientnum, menu_data, previous_menu) {
           ](localclientnum, new_menu);
         }
       } else {
-        [
-          [new_menu.custom_open_fn]
-        ](localclientnum, new_menu);
+        [[new_menu.custom_open_fn]](localclientnum, new_menu);
       }
     }
     if(isDefined(new_menu.extra_cams)) {

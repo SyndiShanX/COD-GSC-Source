@@ -19,11 +19,10 @@
 #include scripts\zm_common\zm_vo;
 #include scripts\zm_common\zm_weapons;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_white_util;
 
 init() {
-  level.var_d2ed4be7 = array(#"zombie", #"mannequin");
+  level.var_d2ed4be7 = array(#"zombie", # "mannequin");
   callback::on_spawned(&function_ea6a4006);
   level.var_5dd0d3ff = spawn("script_origin", (0, 0, 0));
   level.var_5dd0d3ff.name = "rush";
@@ -61,11 +60,11 @@ init() {
 }
 
 function_ea6a4006() {
-  self zm_audio::function_6191af93(#"surrounded", #"self", #"oh", #"shit", 100);
-  self zm_audio::function_6191af93(#"magicbox", #"homunculus", #"magicbox", #"monkey", 100);
-  self zm_audio::function_6191af93(#"kill", #"homunculus", #"kill", #"monkey", 100);
-  self zm_audio::function_6191af93(#"kill", #"ray_gun_mk2", #"kill", #"raygun_mk2", 100);
-  self zm_audio::function_87714659(&function_e08cd7b, #"roundstart", #"special");
+  self zm_audio::function_6191af93(#"surrounded", # "self", # "oh", # "shit", 100);
+  self zm_audio::function_6191af93(#"magicbox", # "homunculus", # "magicbox", # "monkey", 100);
+  self zm_audio::function_6191af93(#"kill", # "homunculus", # "kill", # "monkey", 100);
+  self zm_audio::function_6191af93(#"kill", # "ray_gun_mk2", # "kill", # "raygun_mk2", 100);
+  self zm_audio::function_87714659(&function_e08cd7b, # "roundstart", # "special");
 }
 
 function_e08cd7b(category, subcategory) {
@@ -91,9 +90,9 @@ function_5d7d0c85(var_2753f06a) {
     e_player = a_players[0];
 
     if(var_2753f06a == 0) {
-      str_suffix = #"vox_solo_game_start_" + var_5316ea7d;
+      str_suffix = # "vox_solo_game_start_" + var_5316ea7d;
     } else {
-      str_suffix = #"vox_solo_end_round" + var_2753f06a + "_" + var_5316ea7d;
+      str_suffix = # "vox_solo_end_round" + var_2753f06a + "_" + var_5316ea7d;
     }
 
     b_played = e_player zm_vo::function_a2bd5a0c(str_suffix, 0, 1);
@@ -143,7 +142,7 @@ function_733a6ab7(e_player, player_alias, e_computer, var_21fd1ca8) {
 
 function_c2cc8e(e_player, player_alias, var_21fd1ca8) {
   level endon(#"end_game");
-  self endon(#"death", #"player_down", #"disconnect");
+  self endon(#"death", # "player_down", # "disconnect");
   zm_hms_util::function_3c173d37();
   e_player zm_hms_util::function_51b752a9(player_alias);
   zm_hms_util::function_3c173d37();
@@ -156,7 +155,7 @@ function_491673da(var_21fd1ca8) {
   }
 
   level endon(#"end_game");
-  self endon(#"death", #"player_down", #"disconnect");
+  self endon(#"death", # "player_down", # "disconnect");
   self zm_audio::do_player_or_npc_playvox(var_21fd1ca8, 1);
 }
 
@@ -221,14 +220,14 @@ function_e95d25() {
   }
 }
 
-  function function_6f635c39(str) {
-    assert(isDefined(str), "<dev string:x38>");
-    a_doors = getEntArray(str, "script_string");
+function function_6f635c39(str) {
+  assert(isDefined(str), "<dev string:x38>");
+  a_doors = getEntArray(str, "script_string");
 
-    foreach(door in a_doors) {
-      door function_20681be5();
-    }
+  foreach(door in a_doors) {
+    door function_20681be5();
   }
+}
 
 private function_20681be5() {
   if(self.b_open == 0) {
@@ -374,7 +373,7 @@ take_ray_gun_mk2() {
 }
 
 private on_ai_spawned() {
-  if(self.archetype === #"zombie") {
+  if(self.archetype === # "zombie") {
     self.var_8b59c468 = &function_ae18909c;
   }
 }
@@ -422,12 +421,12 @@ function_358da2a7(e_player) {
 
     if(isDefined(w_take)) {
       if(w_take == w_give) {
-        self sethintstring(zm_utility::function_d6046228(#"hash_1ee18bf56df7a29b", #"hash_39d6b1ad0b94f111"));
+        self sethintstring(zm_utility::function_d6046228(#"hash_1ee18bf56df7a29b", # "hash_39d6b1ad0b94f111"));
       } else {
-        self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", #"hash_71016e43b6fe0570"), w_give.displayname, w_take.displayname);
+        self sethintstring(zm_utility::function_d6046228(#"hash_172253c9314825fc", # "hash_71016e43b6fe0570"), w_give.displayname, w_take.displayname);
       }
     } else {
-      self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", #"hash_6831cfd35264e1"), w_give.displayname);
+      self sethintstring(zm_utility::function_d6046228(#"hash_314a7588b45256eb", # "hash_6831cfd35264e1"), w_give.displayname);
     }
 
     return 1;
@@ -473,8 +472,8 @@ function_8a4b7d4a(weapon) {
 }
 
 function_afbd7223(oldweapondata, newweapondata) {
-  w_current = oldweapondata[#"weapon"];
-  var_2153c223 = newweapondata[#"weapon"];
+  w_current = oldweapondata[# "weapon"];
+  var_2153c223 = newweapondata[# "weapon"];
 
   if(isinarray(level.var_65b6264d, w_current) && isinarray(level.var_65b6264d, var_2153c223)) {
     weapondata = [];
@@ -482,14 +481,14 @@ function_afbd7223(oldweapondata, newweapondata) {
 
     foreach(w_test in a_w_test) {
       if(w_current == w_test || var_2153c223 == w_test) {
-        weapondata[#"weapon"] = w_test;
+        weapondata[# "weapon"] = w_test;
         break;
       }
     }
 
-    var_a0bd414d = weapondata[#"weapon"];
-    weapondata[#"clip"] = int(min(newweapondata[#"clip"] + oldweapondata[#"clip"], var_a0bd414d.clipsize));
-    weapondata[#"stock"] = int(min(newweapondata[#"stock"] + oldweapondata[#"stock"], var_a0bd414d.maxammo));
+    var_a0bd414d = weapondata[# "weapon"];
+    weapondata[# "clip"] = int(min(newweapondata[# "clip"] + oldweapondata[# "clip"], var_a0bd414d.clipsize));
+    weapondata[# "stock"] = int(min(newweapondata[# "stock"] + oldweapondata[# "stock"], var_a0bd414d.maxammo));
     return weapondata;
   }
 }
@@ -501,7 +500,7 @@ function_c05cc102(s_params) {
     return;
   }
 
-  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", #"explode", #"death");
+  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", # "explode", # "death");
 
   if(isDefined(s_params.projectile) && s_waitresult._notify == "death") {
     level notify(#"hash_3042a9bf2f57ea0a", {

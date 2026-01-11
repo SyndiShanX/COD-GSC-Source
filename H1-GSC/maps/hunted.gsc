@@ -140,15 +140,13 @@ player_sprint_check() {
 
     if(int(distance2d(var_0, var_2)) > var_3) {
       var_1++;
-    }
-    else {
+    } else {
       var_1 = 0;
     }
 
     if(var_1 > 5) {
       common_scripts\utility::flag_set("player_sprint");
-    }
-    else {
+    } else {
       common_scripts\utility::flag_clear("player_sprint");
     }
 
@@ -595,8 +593,7 @@ crash_steve() {
 
   if(getdvarint("use_old_opening") == 1) {
     var_0 = getent("wounded_animent", "targetname");
-  }
-  else {
+  } else {
     var_0 = getent("start_animent", "targetname");
   }
 
@@ -685,8 +682,7 @@ crash_wakeup() {
 
   if(getdvarint("use_old_opening") == 1) {
     var_0 maps\_anim::anim_single_solo(var_1, "opening_player");
-  }
-  else {
+  } else {
     var_0 thread maps\_anim::anim_single_solo(level.steve, "hunted_opening_nikolai");
     var_0 maps\_anim::anim_single_solo(var_1, "opening_player");
   }
@@ -805,8 +801,7 @@ dirt_path_price() {
 
   if(common_scripts\utility::flag("player_interruption")) {
     var_0 maps\_anim::anim_single_solo(self, "hunted_tunnel_guy2_runout_interrupt");
-  }
-  else {
+  } else {
     var_0 maps\_anim::anim_single_solo(self, "hunted_tunnel_guy2_runout");
   }
 }
@@ -905,8 +900,7 @@ impact_trigger_attach() {
 
   if(isDefined(var_0.inuse)) {
     var_0 unlink();
-  }
-  else {
+  } else {
     var_0 enablelinkto();
   }
 
@@ -1034,7 +1028,7 @@ h1_first_frame_anim_guys_on_unload() {
     common_scripts\utility::flag_wait("player_interruption");
 
     foreach(var_3 in var_0) {
-    var_3 notify("stop_first_frame");
+      var_3 notify("stop_first_frame");
     }
   }
 }
@@ -1271,7 +1265,7 @@ front_door_linked_ent() {
   var_0 = getEntArray("doorknob", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 linkto(self);
+    var_2 linkto(self);
   }
 }
 
@@ -1292,8 +1286,7 @@ barn_interrogation_anim(var_0, var_1, var_2) {
 barn_interrogation_anim_door() {
   if(getdvarint("use_old_interrogation")) {
     self rotateyaw(95, 0.7, 0.5, 0.2);
-  }
-  else {
+  } else {
     common_scripts\utility::flag_wait("start_scene");
     wait 0.25;
     self rotateyaw(95, 1.5, 0.7, 0.5);
@@ -1432,8 +1425,7 @@ barn_price_open_door() {
 
   if(!common_scripts\utility::flag("player_interruption")) {
     var_1 = "hunted_open_barndoor";
-  }
-  else {
+  } else {
     var_1 = "hunted_open_barndoor_nodialogue";
   }
 
@@ -1443,8 +1435,7 @@ barn_price_open_door() {
 
   if(getdvarint("use_old_door_openings") == 1) {
     var_3 maps\_utility::hunted_style_door_open("door_wood_slow_creaky_open");
-  }
-  else {
+  } else {
     var_3 thread h1_play_door_sound(0, "door_wood_slow_creaky_open");
     var_0 thread maps\_anim::anim_single_solo(var_3, "open");
     wait(var_2 - 0.5);
@@ -1462,8 +1453,7 @@ h1_play_door_sound(var_0, var_1) {
 
   if(isDefined(var_1)) {
     self playSound(var_1);
-  }
-  else {
+  } else {
     self playSound("door_wood_slow_open");
   }
 }
@@ -1592,7 +1582,7 @@ field_dialgue() {
   }
 
   foreach(var_3 in var_1) {
-  var_3.ignoreall = 0;
+    var_3.ignoreall = 0;
   }
 
   level notify("kill_action_flag");
@@ -1800,8 +1790,7 @@ spot_target_path(var_0) {
 
     if(isDefined(var_0.radius)) {
       var_2.spot_radius = var_0.radius;
-    }
-    else {
+    } else {
       var_2.spot_radius = undefined;
     }
 
@@ -1874,8 +1863,7 @@ field_flyby_speed() {
 
   if(var_2 < 250) {
     var_3 = 9;
-  }
-  else {
+  } else {
     var_3 = 7;
   }
 
@@ -2380,8 +2368,7 @@ area_creek_init() {
 
   if(getdvarint("use_old_door_openings") == 1) {
     var_1 linkto(var_0);
-  }
-  else {
+  } else {
     var_0 linkto(var_1, "door_open_jnt");
     var_1 maps\_utility::assign_animtree("creekgate");
     var_2 maps\_anim::anim_first_frame_solo(var_1, "open");
@@ -3231,8 +3218,7 @@ evasion_path(var_0) {
 
   if(isDefined(self.currentnode.target)) {
     var_1 = common_scripts\utility::getstruct(self.currentnode.target, "targetname");
-  }
-  else {
+  } else {
     var_1 = self.currentnode;
   }
 
@@ -3519,8 +3505,7 @@ ac130_devastation() {
 
   if(getdvarint("use_old_price_talk_control") == 1) {
     level.price maps\_anim::anim_single_queue(level.price, "100metres");
-  }
-  else {
+  } else {
     if(distance(level.price.origin, level.price.goalpos) > level.price.goalradius) {
       level.price pushplayer(1);
       level.price waittill("goal");
@@ -3628,8 +3613,7 @@ gassstation_truck_add_dynamic_light(var_0) {
     if(isDefined(var_2.script_vehicle_lights_on) && var_2.script_vehicle_lights_on == "headlights") {
       if(var_2.classname == "script_vehicle_pickup_4door") {
         maps\_vehicle::build_light(var_2.classname, "headlight_truck_dynamic", "tag_headlight_left", "vfx\lights\hunted\hunted_headlight_omni_offset", "headlights");
-      }
-      else if(var_2.classname == "script_vehicle_bm21_mobile_cover") {
+      } else if(var_2.classname == "script_vehicle_bm21_mobile_cover") {
         if(var_2.script_noteworthy == "3") {
           maps\_vehicle::build_light(var_2.classname, "headlight_truck_dynamic", "tag_headlight_left", "vfx\lights\hunted\hunted_headlight_spotlight_offset", "headlights");
         }
@@ -4324,8 +4308,7 @@ helicopter_attack(var_0, var_1) {
       var_3 = var_3 + 0.2;
     else if(isalive(self.heli_guy) && !sighttracepassed(self.heli_guy getEye(), level.player getEye(), 0, self.heli_guy)) {
       var_3 = var_3 + 0.2;
-    }
-    else {
+    } else {
       var_3 = var_3 + 0.05;
     }
 
@@ -4417,11 +4400,9 @@ follow_path_hunted(var_0, var_1) {
 
     if(isDefined(var_1) && !var_1) {
       self.disablearrivals = 1;
-    }
-    else if(var_2 node_have_delay()) {
+    } else if(var_2 node_have_delay()) {
       self.disablearrivals = 0;
-    }
-    else {
+    } else {
       disablearrivals_delayed();
     }
 
@@ -4492,8 +4473,7 @@ scripted_spawn(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_2)) {
     var_4 = var_3 stalingradspawn();
-  }
-  else {
+  } else {
     var_4 = var_3 dospawn();
   }
 
@@ -4538,8 +4518,7 @@ heli_path_speed(var_0) {
 
     if(isDefined(var_0.script_accel)) {
       var_1 = var_0.script_accel;
-    }
-    else {
+    } else {
       var_4 = var_3 / 4;
 
       if(var_1 > var_4) {
@@ -4549,8 +4528,7 @@ heli_path_speed(var_0) {
 
     if(isDefined(var_2)) {
       self vehicle_setspeed(var_3, var_1, var_2);
-    }
-    else {
+    } else {
       self vehicle_setspeed(var_3, var_1);
     }
   }
@@ -4606,8 +4584,7 @@ helicopter_searchlight_effect() {
 
     if(isDefined(var_1.spot_radius)) {
       self.dlight.spot_radius = var_1.spot_radius;
-    }
-    else {
+    } else {
       self.dlight.spot_radius = 256;
     }
 
@@ -4719,8 +4696,7 @@ spawn_dead_body() {
 
   if(isDefined(self.script_index)) {
     var_0 = self.script_index;
-  }
-  else {
+  } else {
     level.dead_body_count++;
 
     if(level.dead_body_count > 3) {

@@ -210,9 +210,7 @@ function private margwatargetservice(entity) {
   player = zombie_utility::get_closest_valid_player(self.origin, self.ignore_player);
   if(!isDefined(player)) {
     if(isDefined(self.ignore_player)) {
-      if(isDefined(level._should_skip_ignore_player_logic) && [
-          [level._should_skip_ignore_player_logic]
-        ]()) {
+      if(isDefined(level._should_skip_ignore_player_logic) && [[level._should_skip_ignore_player_logic]]()) {
         return;
       }
       self.ignore_player = [];

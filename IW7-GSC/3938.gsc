@@ -80,8 +80,7 @@ func_899D() {
     for(;;) {
       if(isDefined(self.enemy)) {
         self.func_6571 = gettime() + 1000;
-      }
-      else if(isDefined(self.func_6571)) {
+      } else if(isDefined(self.func_6571)) {
         if(gettime() > self.func_6571) {
           self.func_6571 = undefined;
           break;
@@ -231,14 +230,11 @@ scriptedgoalwaitforarrival() {
 
     if(isDefined(self.func_EF7D)) {
       var_00 = self.func_EF7D;
-    }
-    else if(isDefined(self.func_EF7A)) {
+    } else if(isDefined(self.func_EF7A)) {
       var_00 = self.func_EF7A.origin;
-    }
-    else if(isDefined(self.func_EF7C)) {
+    } else if(isDefined(self.func_EF7C)) {
       var_00 = self.func_EF7C.origin;
-    }
-    else {
+    } else {
       continue;
     }
 
@@ -294,8 +290,7 @@ func_F832(var_00, var_01, var_02) {
 
   if(isDefined(var_02) && var_02) {
     self.func_EF7B = var_02;
-  }
-  else {
+  } else {
     self.func_EF7B = undefined;
   }
 }

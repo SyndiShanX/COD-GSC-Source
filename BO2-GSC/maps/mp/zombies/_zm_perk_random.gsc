@@ -59,8 +59,7 @@ wunderfizztrigger_update_prompt(player) {
   if(isDefined(self.hint_string)) {
     if(isDefined(self.hint_parm1)) {
       self sethintstring(self.hint_string, self.hint_parm1);
-    }
-    else {
+    } else {
       self sethintstring(self.hint_string);
     }
   }
@@ -179,8 +178,7 @@ machines_setup() {
 
   if(start_machines.size == 1) {
     level.random_perk_start_machine = start_machines[0];
-  }
-  else {
+  } else {
     level.random_perk_start_machine = start_machines[randomint(start_machines.size)];
   }
 
@@ -379,8 +377,7 @@ grab_check(player, random_perk) {
 
       if(player.num_perks < player get_player_perk_purchase_limit()) {
         perk_is_bought = 1;
-      }
-      else {
+      } else {
         self playSound("evt_perk_deny");
         player maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "sigh");
         self notify("time_out_or_perk_grab");
@@ -466,8 +463,7 @@ get_weighted_random_perk(player) {
   for(i = 0; i < keys.size; i++) {
     if(player hasperk(level._random_perk_machine_perk_list[keys[i]])) {
       continue;
-    }
-    else {
+    } else {
       return level._random_perk_machine_perk_list[keys[i]];
     }
   }
@@ -500,8 +496,7 @@ start_perk_bottle_cycling() {
     for(i = 0; i < array_key.size; i++) {
       if(isDefined(level.perk_bottle_weapon_array[array_key[i]].weapon)) {
         model = getweaponmodel(level.perk_bottle_weapon_array[array_key[i]].weapon);
-      }
-      else {
+      } else {
         model = getweaponmodel(level.perk_bottle_weapon_array[array_key[i]].perk_bottle);
       }
 
@@ -601,8 +596,7 @@ machine_sounds() {
 
     if(state_switch == "pmstop") {
       rndprk_ent playSound("zmb_rand_perk_stop");
-    }
-    else {
+    } else {
       rndprk_ent playSound("zmb_rand_perk_leave");
     }
 

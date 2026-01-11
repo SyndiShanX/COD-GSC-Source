@@ -57,7 +57,7 @@ spawnsolarpanels(var_0, var_1) {
 unhideallpanels() {
   foreach(var_1 in level.frames) {
     foreach(var_3 in var_1.panel_array) {
-    var_3 show();
+      var_3 show();
     }
   }
 }
@@ -65,7 +65,7 @@ unhideallpanels() {
 destructisolarpanelsinit(var_0, var_1, var_2) {
   if(isDefined(var_0)) {
     foreach(var_4 in level.frames[var_0].panel_array) {
-    level.frames[var_0] thread destructsolarpanels(var_4, level.frames[var_0].panel_time_array[var_4.my_name], 0.1, var_1, var_2);
+      level.frames[var_0] thread destructsolarpanels(var_4, level.frames[var_0].panel_time_array[var_4.my_name], 0.1, var_1, var_2);
     }
   }
 }

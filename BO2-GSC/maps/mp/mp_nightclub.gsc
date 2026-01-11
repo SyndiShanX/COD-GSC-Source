@@ -91,7 +91,7 @@ main() {
   destructibles = getEntArray("destructible", "targetname");
 
   foreach(destructible in destructibles) {
-  destructible thread car_sound_think();
+    destructible thread car_sound_think();
   }
 }
 

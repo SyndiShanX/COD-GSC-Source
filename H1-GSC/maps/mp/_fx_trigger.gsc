@@ -55,7 +55,7 @@ fx_trigger_fx_ent_think(var_0) {
     }
 
     foreach(var_2 in level.fx_trigger_info[var_0].players) {
-    self showtoplayer(var_2);
+      self showtoplayer(var_2);
     }
   }
 }

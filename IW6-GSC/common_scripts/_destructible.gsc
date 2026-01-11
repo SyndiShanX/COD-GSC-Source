@@ -52,7 +52,7 @@ init() {
 
   deletables = getEntArray("delete_on_load", "targetname");
   foreach(ent in deletables) {
-  ent Delete();
+    ent Delete();
   }
 
   init_destroyed_count();
@@ -99,10 +99,10 @@ find_destructibles() {
   dots = [];
 
   foreach(struct in level.struct) {
-  if(isDefined(struct.script_noteworthy) &&
-  }
+    if(isDefined(struct.script_noteworthy) &&
+    }
     struct.script_noteworthy == "destructible_dot")
-    dots[dots.size] = struct;
+  dots[dots.size] = struct;
 
   vehicles = getEntArray("destructible_vehicle", "targetname");
   foreach(vehicle in vehicles) {
@@ -235,17 +235,16 @@ setup_destructibles() {
     foreach(attachedModel in level.destructible_type[self.destructibleInfo].attachedModels) {
       if(isDefined(attachedModel.tag)) {
         self Attach(attachedModel.model, attachedModel.tag);
-      }
-      else {
+      } else {
         self Attach(attachedModel.model);
       }
       if(self.modeldummyon) {
         if(isDefined(attachedModel.tag))
       }
-          self.modeldummy Attach(attachedModel.model, attachedModel.tag);
-        else {
-          self.modeldummy Attach(attachedModel.model);
-        }
+      self.modeldummy Attach(attachedModel.model, attachedModel.tag);
+      else {
+        self.modeldummy Attach(attachedModel.model);
+      }
     }
   }
 
@@ -383,7 +382,7 @@ destructible_fx(tagName, fxName, useTagAngles, damageType, groupNum, fxCost) {
   if(isDefined(level.destructible_type[destructibleIndex].parts[partIndex][stateIndex].v["fx_filename"])) {
     if(isDefined(level.destructible_type[destructibleIndex].parts[partIndex][stateIndex].v["fx_filename"][groupNum]))
   }
-      fx_size = level.destructible_type[destructibleIndex].parts[partIndex][stateIndex].v["fx_filename"][groupNum].size;
+  fx_size = level.destructible_type[destructibleIndex].parts[partIndex][stateIndex].v["fx_filename"][groupNum].size;
 
   if(isDefined(damageType)) {
     level.destructible_type[destructibleIndex].parts[partIndex][stateIndex].v["fx_valid_damagetype"][groupNum][fx_size] = damageType;
@@ -898,8 +897,7 @@ destructible_explode(force_min, force_max, rangeSP, rangeMP, mindamage, maxdamag
 
   if(isSP()) {
     level.destructible_type[destructibleIndex].parts[partIndex][stateIndex].v["explode_range"] = rangeSP;
-  }
-  else {
+  } else {
     level.destructible_type[destructibleIndex].parts[partIndex][stateIndex].v["explode_range"] = rangeMP;
   }
 
@@ -1011,7 +1009,7 @@ precache_destructibles() {
   }
   if(isDefined(level.destructible_type[self.destructibleInfo].attachedModels)) {
     foreach(attachedModel in level.destructible_type[self.destructibleInfo].attachedModels) {
-    PreCacheModel(attachedModel.model);
+      PreCacheModel(attachedModel.model);
     }
   }
 
@@ -1147,8 +1145,7 @@ destructible_think() {
     }
     if(isSP()) {
       damage *= SP_DAMAGE_BIAS;
-    }
-    else {
+    } else {
       damage *= MP_DAMAGE_BIAS;
     }
 
@@ -1162,9 +1159,7 @@ destructible_think() {
     } else {
       if(isDefined(attacker) && IsPlayer(attacker)) {
         self.damageOwner = attacker;
-      }
-
-      else if(isDefined(attacker) && isDefined(attacker.gunner) && IsPlayer(attacker.gunner)) {
+      } else if(isDefined(attacker) && isDefined(attacker.gunner) && IsPlayer(attacker.gunner)) {
         self.damageOwner = attacker.gunner;
       }
     }
@@ -1175,8 +1170,7 @@ destructible_think() {
     if(is_shotgun_damage(attacker, type)) {
       if(isSP()) {
         damage *= SP_SHOTGUN_BIAS;
-      }
-      else {
+      } else {
         damage *= MP_SHOTGUN_BIAS;
       }
     }
@@ -1191,8 +1185,7 @@ destructible_think() {
       }
       if(isDefined(tagName)) {
         IPrintLn("hit model tag: " + tagName);
-      }
-      else {
+      } else {
         IPrintLn("hit model tag: ");
       }
     }
@@ -1204,8 +1197,7 @@ destructible_think() {
     if(isDefined(tagName) && tagName == "") {
       if(isDefined(partName) && partName != "" && partName != "tag_body" && partName != "body_animate_jnt") {
         tagName = partName;
-      }
-      else {
+      } else {
         tagName = undefined;
       }
 
@@ -1222,12 +1214,10 @@ destructible_think() {
 
       if(isDefined(level.destructible_type[self.destructibleInfo].parts[0][0].v["splash_damage_scaler"])) {
         damage *= level.destructible_type[self.destructibleInfo].parts[0][0].v["splash_damage_scaler"];
-      }
-      else {
+      } else {
         if(isSP()) {
           damage *= SP_EXPLOSIVE_DAMAGE_BIAS;
-        }
-        else {
+        } else {
           damage *= MP_EXPLOSIVE_DAMAGE_BIAS;
         }
       }
@@ -1432,8 +1422,7 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
 
       if(!isDefined(self.waiting_for_queue)) {
         self.waiting_for_queue = 1;
-      }
-      else {
+      } else {
         self.waiting_for_queue++;
       }
 
@@ -1667,8 +1656,7 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
           physTagAngles = undefined;
           if(isDefined(physTagName)) {
             physTagAngles = self GetTagAngles(physTagName);
-          }
-          else if(isDefined(tagName)) {
+          } else if(isDefined(tagName)) {
             physTagAngles = self GetTagAngles(tagName);
           }
           Assert(isDefined(physTagAngles));
@@ -1676,8 +1664,7 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
           physTagOrigin = undefined;
           if(isDefined(physTagName)) {
             physTagOrigin = self GetTagOrigin(physTagName);
-          }
-          else if(isDefined(tagName)) {
+          } else if(isDefined(tagName)) {
             physTagOrigin = self GetTagOrigin(tagName);
           }
           Assert(isDefined(physTagOrigin));
@@ -1722,15 +1709,13 @@ destructible_update_part(damage, modelName, tagName, point, direction_vec, attac
 
           if(isDefined(physTagOrigin)) {
             self thread physics_launch(physPartIndex, 0, physTagOrigin, initial_velocity);
-          }
-          else {
+          } else {
             self thread physics_launch(physPartIndex, 0, point, initial_velocity);
           }
         } else {
           if(isDefined(physTagOrigin)) {
             self thread physics_launch(partIndex, actionStateIndex, physTagOrigin, initial_velocity);
-          }
-          else {
+          } else {
             self thread physics_launch(partIndex, actionStateIndex, point, initial_velocity);
           }
 
@@ -1775,11 +1760,11 @@ damage_not(damageType) {
   new_string = "";
 
   foreach(idx, tok in toks) {
-  damages_tok = array_remove(damages_tok, tok);
+    damages_tok = array_remove(damages_tok, tok);
   }
 
   foreach(damages in damages_tok) {
-  new_string += damages + " ";
+    new_string += damages + " ";
   }
 
   return new_string;
@@ -1903,8 +1888,7 @@ getLowestPartDistance(partList) {
 isValidSoundCause(soundCauseVar, action_v, soundIndex, damageType, groupNum) {
   if(isDefined(groupNum)) {
     soundCause = action_v[soundCauseVar][groupNum][soundIndex];
-  }
-  else {
+  } else {
     soundCause = action_v[soundCauseVar][soundIndex];
   }
 
@@ -2109,8 +2093,7 @@ health_drain(amount, interval, partIndex, modelName, tagName, badplaceRadius, ba
       if(isSP() && isDefined(badplaceTeam)) {
         if(badplaceTeam == "both") {
           call[[level.badplace_cylinder_func]](uniqueName, 0, self.origin, badplaceRadius, 128, "allies", "bad_guys");
-        }
-        else {
+        } else {
           call[[level.badplace_cylinder_func]](uniqueName, 0, self.origin, badplaceRadius, 128, badplaceTeam);
         }
         self thread badplace_remove(uniqueName);
@@ -2233,8 +2216,7 @@ explode(partIndex, force_min, force_max, range, mindamage, maxdamage, continueDa
 
   if(isDefined(tagName)) {
     explosionOrigin = self GetTagOrigin(tagName);
-  }
-  else {
+  } else {
     explosionOrigin = self.origin;
   }
 
@@ -2314,8 +2296,7 @@ explode(partIndex, force_min, force_max, range, mindamage, maxdamage, continueDa
   if(isSP()) {
     if(level.gameskill == 0 && !self player_touching_post_clip()) {
       self RadiusDamage(damageLocation, range, maxdamage, mindamage, self, "MOD_RIFLE_BULLET");
-    }
-    else {
+    } else {
       self RadiusDamage(damageLocation, range, maxdamage, mindamage, self);
     }
 
@@ -2480,8 +2461,7 @@ get_dummy() {
 
   if(self.modeldummyon) {
     eModel = self.modeldummy;
-  }
-  else {
+  } else {
     eModel = self;
   }
   return eModel;
@@ -2493,8 +2473,7 @@ play_loop_sound_on_destructible(alias, tag) {
   org = spawn("script_origin", (0, 0, 0));
   if(isDefined(tag)) {
     org.origin = eModel GetTagOrigin(tag);
-  }
-  else {
+  } else {
     org.origin = eModel.origin;
   }
 
@@ -2530,8 +2509,7 @@ notifyDamageAfterFrame(damage, attacker, direction_vec, point, damageType, model
 
   if(isSP()) {
     damage /= SP_DAMAGE_BIAS;
-  }
-  else {
+  } else {
     damage /= MP_DAMAGE_BIAS;
   }
 
@@ -2897,8 +2875,7 @@ debug_circle_drawlines(circlepoints, duration, color, center) {
     start = circlepoints[i];
     if(i + 1 >= circlepoints.size) {
       end = circlepoints[0];
-    }
-    else {
+    } else {
       end = circlepoints[i + 1];
     }
 
@@ -3101,8 +3078,7 @@ destructible_animation_think(action_v, eModel, damageType, partIndex) {
   }
   if(animRateMin == animRateMax) {
     animRate = animRateMin;
-  }
-  else {
+  } else {
     animRate = RandomFloatRange(animRateMin, animRateMax);
   }
 
@@ -3155,8 +3131,7 @@ clear_anims(eModel) {
     foreach(animation in self.animsApplied) {
       if(isSP()) {
         eModel self_func("clearanim", animation, 0);
-      }
-      else {
+      } else {
         eModel self_func("scriptModelClearAnim");
       }
     }
@@ -3169,8 +3144,7 @@ init_destroyed_count() {
 
   if(isSP()) {
     level.maxDestructions = 20;
-  }
-  else {
+  } else {
     level.maxDestructions = 2;
   }
 }
@@ -3246,7 +3220,7 @@ handle_destructible_frame_queue() {
 sort_destructible_frame_queue(unsortedQueue) {
   sortedQueue = [];
   foreach(destructibleInfo in unsortedQueue) {
-  sortedQueue[sortedQueue.size] = destructibleInfo;
+    sortedQueue[sortedQueue.size] = destructibleInfo;
   }
 
   for(i = 1; i < sortedQueue.size; i++) {
@@ -3265,8 +3239,7 @@ sort_destructible_frame_queue(unsortedQueue) {
 get_better_destructible(destructibleInfo1, destructibleInfo2) {
   if(destructibleInfo1.totalDamage > destructibleInfo2.totalDamage) {
     return destructibleInfo1;
-  }
-  else {
+  } else {
     return destructibleInfo2;
   }
 }
@@ -3283,7 +3256,7 @@ get_part_FX_cost_for_action_state(partIndex, actionStateIndex) {
   if(isDefined(action_v["fx"])) {
     foreach(fxCostObj in action_v["fx_cost"]) {
       foreach(fxCostVal in fxCostObj) {
-      fxCost += fxCostVal;
+        fxCost += fxCostVal;
       }
     }
   }
@@ -3326,8 +3299,7 @@ setDOT_height(minHeight, maxHeight) {
 setDOT_onTick(delay, interval, duration, minDamage, maxDamage, falloff, type, affected) {
   if(isDefined(delay)) {
     AssertEx(delay >= 0, "Must specify a delay >= 0");
-  }
-  else {
+  } else {
     delay = 0;
   }
   AssertEx(isDefined(interval) && interval > 0, "Must specify an interval > 0");
@@ -3595,13 +3567,13 @@ startDOT_group(dots) {
     ticks = trigger.ticks;
 
     foreach(tick in ticks) {
-    tick.startTime = GetTime();
+      tick.startTime = GetTime();
     }
 
     foreach(tick in ticks) {
-    if(!tick.delay)
+      if(!tick.delay)
     }
-      tick.enable = 1;
+    tick.enable = 1;
 
     foreach(tick in ticks) {
       if(IsSubStr(tick.affected, "player")) {
@@ -3623,12 +3595,12 @@ startDOT_group(dots) {
   }
 
   foreach(trigger in triggers) {
-  if(trigger.onPlayer)
+    if(trigger.onPlayer)
   }
-    trigger thread startDOT_player();
+  trigger thread startDOT_player();
 
   foreach(trigger in triggers) {
-  trigger thread monitorDOT();
+    trigger thread monitorDOT();
   }
 }
 
@@ -3655,7 +3627,7 @@ monitorDOT() {
 
   if(isDefined(self)) {
     foreach(tick in self.ticks) {
-    self[[tick.onDeathFunc]]();
+      self[[tick.onDeathFunc]]();
     }
 
     self notify("death");
@@ -3671,14 +3643,14 @@ onEnterDOT_player(trigger) {
   self notify("LISTEN_enter_dot_" + entNum);
 
   foreach(i, tick in trigger.ticks) {
-  if(!tick.enable)
+    if(!tick.enable)
   }
-    self thread doDOT_delayFunc(i, trigger, tick.delay, tick.onEnterFunc);
+  self thread doDOT_delayFunc(i, trigger, tick.delay, tick.onEnterFunc);
 
   foreach(i, tick in trigger.ticks) {
-  if(tick.enable && tick.affected == "player")
+    if(tick.enable && tick.affected == "player")
   }
-    self thread[[tick.onEnterFunc]](i, trigger);
+  self thread[[tick.onEnterFunc]](i, trigger);
 }
 
 onExitDOT_player(trigger) {
@@ -3689,9 +3661,9 @@ onExitDOT_player(trigger) {
   self notify("LISTEN_exit_dot_" + entNum);
 
   foreach(i, tick in trigger.ticks) {
-  if(tick.enable && tick.affected == "player")
+    if(tick.enable && tick.affected == "player")
   }
-    self thread[[tick.onExitFunc]](i, trigger);
+  self thread[[tick.onExitFunc]](i, trigger);
 }
 
 doDOT_delayFunc(idx, trigger, delay, func) {
@@ -3883,8 +3855,7 @@ doDOT_poisonBlackout(idx, trigger) {
 
       if(fraction < 0) {
         fraction = 0;
-      }
-      else if(fraction > 1) {
+      } else if(fraction > 1) {
         fraction = 1;
       }
 
@@ -3973,8 +3944,7 @@ playerTouchTriggerThink(trigger, enterFunc, exitFunc) {
 
   if(!isSP()) {
     touchName = self.guid;
-  }
-  else {
+  } else {
     touchName = "player" + gettime();
   }
 
@@ -3989,7 +3959,7 @@ playerTouchTriggerThink(trigger, enterFunc, exitFunc) {
   doEnterExitFunc = true;
 
   foreach(trig in trigger.DOT_group) {
-  foreach(_trig in self.touchTriggers)
+    foreach(_trig in self.touchTriggers)
   }
   if(trig == _trig) {
     doEnterExitFunc = false;
@@ -4006,8 +3976,7 @@ playerTouchTriggerThink(trigger, enterFunc, exitFunc) {
 
     if(self IsTouching(trigger)) {
       wait 0.05;
-    }
-    else {
+    } else {
       if(!trigger.DOT_group.size) {
         touchingTrigger = false;
       }

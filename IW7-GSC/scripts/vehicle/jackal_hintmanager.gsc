@@ -43,9 +43,7 @@ hint_manager() {
   do_progression_specific_tutorials();
   for(;;) {
     foreach(var_01 in level.var_A056.hintmanager.hints) {
-      if((level.var_A056.hintmanager jackal_hint_common_conditions(var_01) && [
-          [var_01.hint_conditions]
-        ](var_01)) || var_01.var_7258) {
+      if((level.var_A056.hintmanager jackal_hint_common_conditions(var_01) && [[var_01.hint_conditions]](var_01)) || var_01.var_7258) {
         level.var_A056.hintmanager jackal_hint(var_01);
         jackal_hint_common_cooldown(var_01);
       }

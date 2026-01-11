@@ -11,8 +11,7 @@
 main() {
   if(self.type == "human") {
     jump_through_window_human();
-  }
-  else if(self.type == "dog") {
+  } else if(self.type == "dog") {
     dog_wall_and_window_hop("window_40", 40);
   }
 }

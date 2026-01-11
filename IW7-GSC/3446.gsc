@@ -59,7 +59,7 @@ bot_balance_personality() {
     var_1[var_07] = 0;
 
     foreach(var_05 in var_03) {
-    var_0[var_05] = 0;
+      var_0[var_05] = 0;
     }
   }
 
@@ -107,8 +107,7 @@ bot_balance_personality() {
 
   if(var_18 - var_16 >= 2) {
     var_14 = var_15;
-  }
-  else {
+  } else {
     var_14 = scripts\engine\utility::random(level.bot_personality[var_11]);
   }
 
@@ -259,8 +258,7 @@ clear_script_goal_on(var_00, var_01, var_02, var_03, var_04) {
     if(var_07 == "node_relinquished" || var_07 == "goal" || var_07 == "script_goal_changed") {
       if(!self bothasscriptgoal()) {
         var_08 = 0;
-      }
-      else {
+      } else {
         var_09 = self botgetscriptgoal();
         var_08 = scripts\mp\bots\bots_util::bot_vectors_are_equal(var_05, var_09);
       }
@@ -351,7 +349,7 @@ bot_monitor_watch_entrances_camp() {
 
   while(isDefined(self.watch_nodes)) {
     foreach(var_01 in self.watch_nodes) {
-    var_1.watch_node_chance[self.entity_number] = 1.0;
+      var_1.watch_node_chance[self.entity_number] = 1.0;
     }
 
     scripts\mp\bots\bots_strategy::prioritize_watch_nodes_toward_enemies(0.5);
@@ -561,8 +559,7 @@ find_camp_node_worker() {
 
       if(var_16 < 66 && var_16 >= 33) {
         var_03 = (var_3[0], var_3[1] + 45, 0);
-      }
-      else if(var_16 < 33) {
+      } else if(var_16 < 33) {
         var_03 = (var_3[0], var_3[1] - 45, 0);
       }
 
@@ -571,8 +568,7 @@ find_camp_node_worker() {
 
         if(var_14) {
           var_15 = self botnodepickmultiple(var_15, var_17, var_17, "node_camp", anglesToForward(var_03), "lenient");
-        }
-        else {
+        } else {
           var_15 = self botnodepickmultiple(var_15, var_17, var_17, "node_camp", anglesToForward(var_03));
         }
 
@@ -590,15 +586,12 @@ find_camp_node_worker() {
 
       if(isDefined(var_11)) {
         var_12 = 0;
-      }
-      else if(isDefined(self.camping_needs_fallback_camp_location)) {
+      } else if(isDefined(self.camping_needs_fallback_camp_location)) {
         if(var_13 == 1 && !var_14) {
           var_13 = 3;
-        }
-        else if(var_13 == 3 && !var_14) {
+        } else if(var_13 == 3 && !var_14) {
           var_14 = 1;
-        }
-        else if(var_13 == 3 && var_14) {
+        } else if(var_13 == 3 && var_14) {
           var_12 = 0;
         }
       } else
@@ -626,8 +619,7 @@ find_ambush_node(var_00, var_01) {
 
   if(isDefined(var_00)) {
     self.point_to_ambush = var_00;
-  }
-  else {
+  } else {
     var_02 = undefined;
     var_03 = getnodesinradius(self.origin, 5000, 0, 2000);
 
@@ -637,8 +629,7 @@ find_ambush_node(var_00, var_01) {
 
     if(isDefined(var_02)) {
       self.point_to_ambush = var_2.origin;
-    }
-    else {
+    } else {
       return 0;
     }
   }
@@ -717,8 +708,7 @@ bot_random_path_default() {
 bot_setup_callback_class() {
   if(scripts\mp\bots\bots_loadout::bot_setup_loadout_callback()) {
     return "callback";
-  }
-  else {
+  } else {
     return "class0";
   }
 }

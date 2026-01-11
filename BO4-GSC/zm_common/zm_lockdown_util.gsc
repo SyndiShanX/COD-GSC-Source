@@ -31,7 +31,6 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_lockdown_util;
 
 class class_6fde4e6 {
@@ -67,7 +66,7 @@ autoexec __init__system__() {
 __init__() {
   level thread function_b595044c();
   level thread function_ccf7ac87();
-  level.var_492142a5 = [#"lockdown_stub_type_boards":&function_8850974b, #"lockdown_stub_type_crafting_tables":&function_d0e1d38c, #"lockdown_stub_type_magic_box":&function_e6761711, #"lockdown_stub_type_pap":&function_165e2bd6, #"lockdown_stub_type_perks":&function_db989a2a, #"lockdown_stub_type_traps":&function_d2ce5ac1, #"lockdown_stub_type_wallbuys":&function_9c7d5271];
+  level.var_492142a5 = [# "lockdown_stub_type_boards": &function_8850974b, # "lockdown_stub_type_crafting_tables": &function_d0e1d38c, # "lockdown_stub_type_magic_box": &function_e6761711, # "lockdown_stub_type_pap": &function_165e2bd6, # "lockdown_stub_type_perks": &function_db989a2a, # "lockdown_stub_type_traps": &function_d2ce5ac1, # "lockdown_stub_type_wallbuys": &function_9c7d5271];
   level.var_85c076ab = [];
 
   level function_946bb116();
@@ -137,7 +136,7 @@ function_d67bafb5(stub, category) {
   }
 
   switch (category) {
-    case #"lockdown_stub_type_wallbuys":
+    case # "lockdown_stub_type_wallbuys":
       if(!isDefined(level.var_f17bdf53)) {
         level.var_f17bdf53 = [];
       }
@@ -153,7 +152,7 @@ function_d67bafb5(stub, category) {
       }
 
       break;
-    case #"lockdown_stub_type_pap":
+    case # "lockdown_stub_type_pap":
       if(!isDefined(level.pap_lockdown_stubs)) {
         level.pap_lockdown_stubs = [];
       }
@@ -169,7 +168,7 @@ function_d67bafb5(stub, category) {
       }
 
       break;
-    case #"lockdown_stub_type_perks":
+    case # "lockdown_stub_type_perks":
       if(!isDefined(level.var_9235b607)) {
         level.var_9235b607 = [];
       }
@@ -185,7 +184,7 @@ function_d67bafb5(stub, category) {
       }
 
       break;
-    case #"lockdown_stub_type_crafting_tables":
+    case # "lockdown_stub_type_crafting_tables":
       if(!isDefined(level.var_16cfe3ef)) {
         level.var_16cfe3ef = [];
       }
@@ -250,7 +249,7 @@ function_2bdb235d() {
 }
 
 private function_2bdff7e1(entity, stub, node) {
-  var_5bd89846 = groundtrace(node.origin + (0, 0, 8), node.origin + (0, 0, -100000), 0, entity)[#"position"];
+  var_5bd89846 = groundtrace(node.origin + (0, 0, 8), node.origin + (0, 0, -100000), 0, entity)[# "position"];
   var_66694b96 = {
     #origin: var_5bd89846,
     #angles: node.angles
@@ -289,10 +288,10 @@ function_dab6d796(entity, stub) {
     maxs = stub.maxs;
   } else {
     switch (stub.script_unitrigger_type) {
-      case #"unitrigger_box_use":
+      case # "unitrigger_box_use":
         maxs = (stub.script_width / 2, stub.script_height / 2, stub.script_length / 2);
         break;
-      case #"unitrigger_radius_use":
+      case # "unitrigger_radius_use":
         maxs = (stub.radius, stub.script_height / 2, stub.radius);
         break;
     }
@@ -349,7 +348,7 @@ private function_9f952db3(stub, entity, maxheight) {
       function_78eae22a(entity, stub, 7);
     }
 
-      return false;
+    return false;
   }
 
   if(stub.origin[2] - entity.origin[2] > maxheight) {
@@ -357,7 +356,7 @@ private function_9f952db3(stub, entity, maxheight) {
       function_78eae22a(entity, stub, 11, stub.origin[2] - entity.origin[2]);
     }
 
-      return false;
+    return false;
   }
 
   return true;
@@ -441,7 +440,7 @@ private function_d3fbb5ec(entity, stub, current_zone) {
   if(isDefined(current_zone) && isDefined(stub.in_zone) && stub.in_zone != current_zone) {
     function_78eae22a(entity, stub, 2);
 
-      return false;
+    return false;
   }
 
   return true;
@@ -455,13 +454,13 @@ private function_9c7d5271(entity, &registerlotus_right, range) {
     if(function_e1f6d06a(stub)) {
       function_78eae22a(entity, stub, 0);
 
-        continue;
+      continue;
     }
 
     if(function_55d2ad24(stub, entity)) {
       function_78eae22a(entity, stub, 1);
 
-        continue;
+      continue;
     }
 
     if(!function_d3fbb5ec(entity, stub, current_zone)) {
@@ -486,13 +485,13 @@ private function_fea6f0c0(entity, stub, current_zone) {
   if(isDefined(current_zone) && isDefined(stub.in_zone) && stub.in_zone != current_zone) {
     function_78eae22a(entity, stub, 2);
 
-      return false;
+    return false;
   }
 
   if(isDefined(stub.var_3468124) && stub.var_3468124.var_2977c27 !== "on") {
     function_78eae22a(entity, stub, 17);
 
-      return false;
+    return false;
   }
 
   return true;
@@ -506,13 +505,13 @@ private function_db989a2a(entity, &registerlotus_right, range) {
     if(function_e1f6d06a(stub)) {
       function_78eae22a(entity, stub, 0);
 
-        continue;
+      continue;
     }
 
     if(function_55d2ad24(stub, entity)) {
       function_78eae22a(entity, stub, 1);
 
-        continue;
+      continue;
     }
 
     if(!function_fea6f0c0(entity, stub, current_zone)) {
@@ -537,7 +536,7 @@ private function_ea677a9a(entity, stub, current_zone) {
   if(isDefined(current_zone) && isDefined(stub.in_zone) && stub.in_zone != current_zone) {
     function_78eae22a(entity, stub, 2);
 
-      return false;
+    return false;
   }
 
   return true;
@@ -551,13 +550,13 @@ private function_d0e1d38c(entity, &registerlotus_right, range) {
     if(function_e1f6d06a(stub)) {
       function_78eae22a(entity, stub, 0);
 
-        continue;
+      continue;
     }
 
     if(function_55d2ad24(stub, entity)) {
       function_78eae22a(entity, stub, 1);
 
-        continue;
+      continue;
     }
 
     if(!function_ea677a9a(entity, stub, current_zone)) {
@@ -582,25 +581,25 @@ private function_95250640(entity, stub) {
   if(level flag::get("moving_chest_now")) {
     function_78eae22a(entity, stub.trigger_target, 15);
 
-      return false;
+    return false;
   }
 
   if(isDefined(stub.trigger_target.hidden) && stub.trigger_target.hidden) {
     function_78eae22a(entity, stub.trigger_target, 3);
 
-      return false;
+    return false;
   }
 
   if(isDefined(stub.trigger_target._box_open) && stub.trigger_target._box_open) {
     function_78eae22a(entity, stub.trigger_target, 4);
 
-      return false;
+    return false;
   }
 
   if(isDefined(stub.trigger_target.was_temp) && stub.trigger_target.was_temp || isDefined(stub.trigger_target.being_removed) && stub.trigger_target.being_removed) {
     function_78eae22a(entity, stub.trigger_target, 13);
 
-      return false;
+    return false;
   }
 
   return true;
@@ -617,13 +616,13 @@ private function_e6761711(entity, &registerlotus_right, range) {
     if(function_e1f6d06a(chest.unitrigger_stub)) {
       function_78eae22a(entity, chest, 0);
 
-        continue;
+      continue;
     }
 
     if(function_55d2ad24(chest.unitrigger_stub, entity)) {
       function_78eae22a(entity, chest, 1);
 
-        continue;
+      continue;
     }
 
     chest.unitrigger_stub.lockdowntype = "lockdown_stub_type_magic_box";
@@ -644,13 +643,13 @@ private function_790e3eb0(entity, trigger) {
   if(trigger.pap_machine.state !== "powered") {
     function_78eae22a(entity, trigger, 5);
 
-      return false;
+    return false;
   }
 
   if(!trigger.pap_machine flag::get("pap_waiting_for_user")) {
     function_78eae22a(entity, trigger, 6);
 
-      return false;
+    return false;
   }
 
   return true;
@@ -665,7 +664,7 @@ private function_165e2bd6(entity, &registerlotus_right, range) {
     if(function_55d2ad24(stub, entity)) {
       function_78eae22a(entity, stub, 1);
 
-        continue;
+      continue;
     }
 
     if(!function_790e3eb0(entity, stub)) {
@@ -675,7 +674,7 @@ private function_165e2bd6(entity, &registerlotus_right, range) {
     if(function_e1f6d06a(stub)) {
       function_78eae22a(entity, stub, 0);
 
-        continue;
+      continue;
     }
 
     stub.lockdowntype = "lockdown_stub_type_pap";
@@ -696,7 +695,7 @@ private function_809ae5cb(entity, blocker) {
   if(zm_utility::all_chunks_destroyed(blocker, blocker.barrier_chunks)) {
     function_78eae22a(entity, blocker, 12);
 
-      return false;
+    return false;
   }
 
   return true;
@@ -709,19 +708,19 @@ private function_8850974b(entity, &registerlotus_right, range) {
     if(function_55d2ad24(blocker, entity)) {
       function_78eae22a(entity, blocker, 1);
 
-        continue;
+      continue;
     }
 
     if(function_e1f6d06a(blocker)) {
       function_78eae22a(entity, blocker, 0);
 
-        continue;
+      continue;
     }
 
     if(!function_809ae5cb(entity, blocker)) {
       function_78eae22a(entity, blocker, 12);
 
-        continue;
+      continue;
     }
 
     blocker.lockdowntype = "lockdown_stub_type_boards";
@@ -742,7 +741,7 @@ private function_387fd27e(entity, trap_trig) {
   if(!trap_trig._trap._trap_in_use || !trap_trig._trap istriggerenabled()) {
     function_78eae22a(entity, trap_trig, 16);
 
-      return false;
+    return false;
   }
 
   return true;
@@ -755,7 +754,7 @@ private function_d2ce5ac1(entity, &registerlotus_right, range) {
     if(function_55d2ad24(trap_trig, entity)) {
       function_78eae22a(entity, trap_trig, 1);
 
-        continue;
+      continue;
     }
 
     if(!function_387fd27e(entity, trap_trig)) {
@@ -778,19 +777,19 @@ private function_d2ce5ac1(entity, &registerlotus_right, range) {
 
 function_22aeb4e9(lockdowntype) {
   switch (lockdowntype) {
-    case #"lockdown_stub_type_pap":
+    case # "lockdown_stub_type_pap":
       return "PAP";
-    case #"lockdown_stub_type_magic_box":
+    case # "lockdown_stub_type_magic_box":
       return "MAGIC_BOX";
-    case #"lockdown_stub_type_boards":
+    case # "lockdown_stub_type_boards":
       return "BOARDS";
-    case #"lockdown_stub_type_wallbuys":
+    case # "lockdown_stub_type_wallbuys":
       return "WALLBUY";
-    case #"lockdown_stub_type_crafting_tables":
+    case # "lockdown_stub_type_crafting_tables":
       return "CRAFTING_TABLE";
-    case #"lockdown_stub_type_perks":
+    case # "lockdown_stub_type_perks":
       return "PERK";
-    case #"lockdown_stub_type_traps":
+    case # "lockdown_stub_type_traps":
       return "TRAP";
   }
 
@@ -835,7 +834,7 @@ function_9b84bb88(entity, stubtypes, var_d05e79c8, var_c7455683) {
     entity.var_d187874c = [];
   }
 
-    registerlotus_right = [];
+  registerlotus_right = [];
 
   foreach(stubtype in stubtypes) {
     [[level.var_492142a5[stubtype]]](entity, registerlotus_right, var_d05e79c8);
@@ -847,7 +846,7 @@ function_9b84bb88(entity, stubtypes, var_d05e79c8, var_c7455683) {
     function_6351d1c3(entity, registerlotus_right, var_d05e79c8);
   }
 
-    return arraysortclosest(registerlotus_right, entity.origin);
+  return arraysortclosest(registerlotus_right, entity.origin);
 }
 
 function_7258b5cc(entity, var_410a8c7, var_2baba799, unlockfunc) {
@@ -928,22 +927,22 @@ function_b5dd9241(stub) {
 
 function_c9105448(entity, stub) {
   switch (stub.lockdowntype) {
-    case #"lockdown_stub_type_boards":
+    case # "lockdown_stub_type_boards":
       return function_809ae5cb(entity, stub);
-    case #"lockdown_stub_type_crafting_tables":
+    case # "lockdown_stub_type_crafting_tables":
       current_zone = entity zm_utility::get_current_zone();
       return function_ea677a9a(entity, stub, current_zone);
-    case #"lockdown_stub_type_magic_box":
+    case # "lockdown_stub_type_magic_box":
       return function_95250640(entity, stub);
-    case #"lockdown_stub_type_pap":
+    case # "lockdown_stub_type_pap":
       return function_790e3eb0(entity, stub);
-    case #"lockdown_stub_type_perks":
+    case # "lockdown_stub_type_perks":
       current_zone = entity zm_utility::get_current_zone();
       return function_fea6f0c0(entity, stub, current_zone);
-    case #"lockdown_stub_type_wallbuys":
+    case # "lockdown_stub_type_wallbuys":
       current_zone = entity zm_utility::get_current_zone();
       return function_d3fbb5ec(entity, stub, current_zone);
-    case #"lockdown_stub_type_traps":
+    case # "lockdown_stub_type_traps":
       return function_387fd27e(entity, stub);
     default:
       return true;
@@ -1123,7 +1122,7 @@ private function_946bb116() {
 
 private function_2765c63(cmd) {
   switch (cmd) {
-    case #"hash_619d20b906a39230":
+    case # "hash_619d20b906a39230":
       level.var_cd20e41b = !(isDefined(level.var_cd20e41b) && level.var_cd20e41b);
 
       if(isDefined(level.var_cd20e41b) && level.var_cd20e41b) {

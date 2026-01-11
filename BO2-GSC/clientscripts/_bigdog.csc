@@ -50,8 +50,7 @@ bigdog_mount(localclientnum) {
   while(true) {
     if(self islocalclientdriver(localclientnum)) {
       user = getlocalplayer(localclientnum);
-    }
-    else {
+    } else {
       self waittill("enter_vehicle", user);
       playSound(0, "veh_claw_plr_enter");
     }

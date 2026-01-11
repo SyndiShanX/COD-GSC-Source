@@ -6,7 +6,6 @@
 #include scripts\core_common\ai\systems\fx_character;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\system_shared;
-
 #namespace archetype_blight_father;
 
 autoexec __init__system__() {

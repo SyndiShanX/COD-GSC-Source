@@ -193,8 +193,7 @@ get_weapon_name_with_attachments(weapon_name) {
 
     if(possible_alt_weapons.size == 0) {
       return weapon_name;
-    }
-    else {
+    } else {
       random_weapon_int = randomint(possible_alt_weapons.size);
       return possible_alt_weapons[random_weapon_int];
     }
@@ -204,38 +203,27 @@ get_weapon_name_with_attachments(weapon_name) {
 get_ai_class_for_weapon_drop(_classname) {
   if(issubstr(_classname, "Spetsnaz_e")) {
     return "Spetsnaz";
-  }
-  else if(issubstr(_classname, "NVA_e")) {
+  } else if(issubstr(_classname, "NVA_e")) {
     return "NVA";
-  }
-  else if(issubstr(_classname, "VC_e")) {
+  } else if(issubstr(_classname, "VC_e")) {
     return "VC";
-  }
-  else if(issubstr(_classname, "RU_e")) {
+  } else if(issubstr(_classname, "RU_e")) {
     return "RU";
-  }
-  else if(issubstr(_classname, "CU_e")) {
+  } else if(issubstr(_classname, "CU_e")) {
     return "CU";
-  }
-  else if(issubstr(_classname, "USMarines")) {
+  } else if(issubstr(_classname, "USMarines")) {
     return "Marines";
-  }
-  else if(issubstr(_classname, "USBlackops")) {
+  } else if(issubstr(_classname, "USBlackops")) {
     return "Blackops";
-  }
-  else if(issubstr(_classname, "USSpecs")) {
+  } else if(issubstr(_classname, "USSpecs")) {
     return "Specops";
-  }
-  else if(issubstr(_classname, "UWB")) {
+  } else if(issubstr(_classname, "UWB")) {
     return "UWB";
-  }
-  else if(issubstr(_classname, "CU_a")) {
+  } else if(issubstr(_classname, "CU_a")) {
     return "Rebels";
-  }
-  else if(issubstr(_classname, "Prisoner")) {
+  } else if(issubstr(_classname, "Prisoner")) {
     return "Prisoners";
-  }
-  else if(issubstr(_classname, "a_hazmat")) {
+  } else if(issubstr(_classname, "a_hazmat")) {
     return "hazmat";
   }
 
@@ -409,8 +397,7 @@ set_random_cammo_drop() {
             weapon itemweaponsetoptions(6);
           else if(issubstr(name, "law")) {
             weapon itemweaponsetoptions(1);
-          }
-          else if(issubstr(name, "rpg")) {
+          } else if(issubstr(name, "rpg")) {
             weapon itemweaponsetoptions(7);
           }
         } else if(weapon_class == "shotgun") {
@@ -480,8 +467,7 @@ set_random_cammo_drop() {
         } else if(weapon_class == "assault") {
           if(issubstr(name, "commando")) {
             weapon itemweaponsetoptions(13);
-          }
-          else if(issubstr(name, "ak74")) {
+          } else if(issubstr(name, "ak74")) {
             if(randomint(100) > 79) {
               weapon itemweaponsetoptions(9);
             }
@@ -556,8 +542,7 @@ set_random_cammo_drop() {
       case "rebirth":
         if(weapon_class == "launcher") {
           weapon itemweaponsetoptions(7);
-        }
-        else if(weapon_class == "assault") {
+        } else if(weapon_class == "assault") {
           if(issubstr(name, "enfield")) {
             weapon itemweaponsetoptions(7);
           }
@@ -587,20 +572,15 @@ get_weapon_type(weapon_name) {
 
   if(issubstr(_classname, "ks23") || issubstr(_classname, "rottweil") || issubstr(_classname, "ithaca") || issubstr(_classname, "spas")) {
     return "shotgun";
-  }
-  else if(issubstr(_classname, "m16") || issubstr(_classname, "fnfal") || issubstr(_classname, "ak47") || issubstr(_classname, "ak74") || issubstr(_classname, "mp5k") || issubstr(_classname, "m14") || issubstr(_classname, "commando") || issubstr(_classname, "g11") || issubstr(_classname, "aug") || issubstr(_classname, "famas") || issubstr(_classname, "galil") || issubstr(_classname, "enfield")) {
+  } else if(issubstr(_classname, "m16") || issubstr(_classname, "fnfal") || issubstr(_classname, "ak47") || issubstr(_classname, "ak74") || issubstr(_classname, "mp5k") || issubstr(_classname, "m14") || issubstr(_classname, "commando") || issubstr(_classname, "g11") || issubstr(_classname, "aug") || issubstr(_classname, "famas") || issubstr(_classname, "galil") || issubstr(_classname, "enfield")) {
     return "assault";
-  }
-  else if(issubstr(_classname, "skorpion") || issubstr(_classname, "pm63") || issubstr(_classname, "kiparis") || issubstr(_classname, "spectre") || issubstr(_classname, "uzi") || issubstr(_classname, "ppsh") || issubstr(_classname, "mp40") || issubstr(_classname, "sten") || issubstr(_classname, "mp44") || issubstr(_classname, "mac11")) {
+  } else if(issubstr(_classname, "skorpion") || issubstr(_classname, "pm63") || issubstr(_classname, "kiparis") || issubstr(_classname, "spectre") || issubstr(_classname, "uzi") || issubstr(_classname, "ppsh") || issubstr(_classname, "mp40") || issubstr(_classname, "sten") || issubstr(_classname, "mp44") || issubstr(_classname, "mac11")) {
     return "smg";
-  }
-  else if(issubstr(_classname, "rpk") || issubstr(_classname, "m60") || issubstr(_classname, "hk21") || issubstr(_classname, "mg42") || issubstr(_classname, "stoner")) {
+  } else if(issubstr(_classname, "rpk") || issubstr(_classname, "m60") || issubstr(_classname, "hk21") || issubstr(_classname, "mg42") || issubstr(_classname, "stoner")) {
     return "lmg";
-  }
-  else if(issubstr(_classname, "dragon") || issubstr(_classname, "wa2000") || issubstr(_classname, "psg")) {
+  } else if(issubstr(_classname, "dragon") || issubstr(_classname, "wa2000") || issubstr(_classname, "psg")) {
     return "sniper";
-  }
-  else if(issubstr(_classname, "tow") || issubstr(_classname, "rpg") || issubstr(_classname, "fhj18") || issubstr(_classname, "strela") || issubstr(_classname, "panzer") || issubstr(_classname, "china") || issubstr(_classname, "m202") || issubstr(_classname, "law")) {
+  } else if(issubstr(_classname, "tow") || issubstr(_classname, "rpg") || issubstr(_classname, "fhj18") || issubstr(_classname, "strela") || issubstr(_classname, "panzer") || issubstr(_classname, "china") || issubstr(_classname, "m202") || issubstr(_classname, "law")) {
     return "launcher";
   }
 }

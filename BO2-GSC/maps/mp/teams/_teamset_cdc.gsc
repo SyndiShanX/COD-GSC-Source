@@ -43,8 +43,6 @@ cdc() {
   axis();
 }
 
-allies() {
-}
+allies() {}
 
-axis() {
-}
+axis() {}

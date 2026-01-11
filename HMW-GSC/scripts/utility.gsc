@@ -221,8 +221,7 @@ _visionsetnaked(visionSet, time) {
 
   if(visionSet == "" && !issubstr(mapname, "mp_")) {
     visionsetnaked(mapname, time);
-  }
-  else {
+  } else {
     visionsetnaked(visionSet, time);
   }
 }
@@ -231,8 +230,7 @@ _visionsetnakedforplayer(visionset, time) {
   mapname = getdvar("mapname");
   if(visionset == "" && !issubstr(mapname, "mp_")) {
     self visionsetnakedforplayer(mapname, time);
-  }
-  else {
+  } else {
     self visionsetnakedforplayer(visionset, time);
   }
 }

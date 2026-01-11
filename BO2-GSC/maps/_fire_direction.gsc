@@ -75,8 +75,7 @@ rod_precache() {
 
     if(isDefined(level.wiiu)) {
       s_data.str_hint = &"SCRIPT_GOD_ROD_WIIU";
-    }
-    else {
+    } else {
       s_data.str_hint = &"SCRIPT_GOD_ROD";
     }
 
@@ -225,7 +224,7 @@ _fire_direction_disable() {
   a_str_weapon_keys = getarraykeys(level._fire_direction.a_weapons);
 
   foreach(str_weapon in a_str_weapon_keys) {
-  self takeweapon(str_weapon);
+    self takeweapon(str_weapon);
   }
 
   level notify("fire_direction_stop_hint");
@@ -257,7 +256,7 @@ _fire_direction_kill() {
     a_keys = getarraykeys(level._fire_direction.a_weapons);
 
     foreach(key in a_keys) {
-    clientnotify(level._fire_direction.a_weapons[key].notify_grid_off);
+      clientnotify(level._fire_direction.a_weapons[key].notify_grid_off);
     }
 
     self switchtoweapon(level.str_weapon_last);
@@ -281,7 +280,7 @@ _fire_direction_cleanup() {
   a_str_keys = getarraykeys(level._fire_direction.a_weapons);
 
   foreach(str_key in a_str_keys) {
-  level._fire_direction.a_weapons[str_key] = undefined;
+    level._fire_direction.a_weapons[str_key] = undefined;
   }
 
   level._fire_direction.a_weapons = undefined;
@@ -294,7 +293,7 @@ _fire_direction_remove_weapons() {
   a_str_weapon_keys = getarraykeys(level._fire_direction.a_weapons);
 
   foreach(str_weapon in a_str_weapon_keys) {
-  self takeweapon(str_weapon);
+    self takeweapon(str_weapon);
   }
 }
 
@@ -333,9 +332,7 @@ _switch_to_weapon() {
 
       if(b_pressed_attack) {
         weapon_info = level._fire_direction.a_weapons[str_weapon_current];
-        b_using_valid_area = [
-          [weapon_info.valid_target_func]
-        ]();
+        b_using_valid_area = [[weapon_info.valid_target_func]]();
 
         if(isDefined(v_aim_pos) && b_using_valid_area) {
           flag_set("fire_direction_target_confirmed");
@@ -366,8 +363,7 @@ cooldown_weapon(str_weapon_current) {
 
   if(str_weapon_current == "god_rod_glove_sp") {
     wait 15;
-  }
-  else {
+  } else {
     wait 4;
   }
 
@@ -400,8 +396,7 @@ _take_weapon(str_weapon_disable, b_immediate) {
 
   if(level.str_weapon_last == "quadrotor_glove_sp" || level.str_weapon_last == "claw_glove_sp" || level.str_weapon_last == "god_rod_glove_sp" || level.str_weapon_last == "data_glove_claw_sp") {
     wait 0.5;
-  }
-  else {
+  } else {
     self switchtoweapon(level.str_weapon_last);
 
     if(!b_immediate) {
@@ -417,8 +412,7 @@ _get_aim_position() {
 
   if(level.wiiu) {
     v_player_eye = level.player getgunangles();
-  }
-  else {
+  } else {
     v_player_eye = level.player getplayerangles();
   }
 
@@ -475,8 +469,7 @@ _hint_text(str_weapon) {
 
     if(n_hints < 1) {
       wait 4;
-    }
-    else {
+    } else {
       wait 1;
     }
   }
@@ -510,7 +503,7 @@ _quadrotor_attacks_player_target(v_shoot_pos, a_enemies) {
     e_enemy = random(a_enemies);
 
     foreach(temp_enemy in a_enemies) {
-    self thread _quadrotors_register_player_kills(temp_enemy);
+      self thread _quadrotors_register_player_kills(temp_enemy);
     }
   }
 

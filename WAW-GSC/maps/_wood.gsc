@@ -42,8 +42,7 @@ wood_think() {
   self waittill("trigger", other);
   if(isplayer(other)) {
     org = other getorigin();
-  }
-  else {
+  } else {
     org = other.origin;
   }
   for(i = 0; i < mainpiece.size; i++) {
@@ -73,15 +72,13 @@ splinter(org) {
     if((isDefined(self.script_noteworthy)) && (self.script_noteworthy == "dark")) {
       if(randomint(100) > 50) {
         splinter setModel("wood_plank2");
-      }
-      else {
+      } else {
         splinter setModel("gib_woodplank");
       }
     } else {
       if(randomint(100) > 50) {
         splinter setModel("woodgib_big");
-      }
-      else {
+      } else {
         splinter setModel("woodgib_medium");
       }
     }
@@ -102,8 +99,7 @@ go(org) {
   z = 200 + randomint(100);
   if(x > 0) {
     self rotateroll((1500 + randomfloat(2500)) * -1, 5, 0, 0);
-  }
-  else {
+  } else {
     self rotateroll(1500 + randomfloat(2500), 5, 0, 0);
   }
   self moveGravity((x, y, z), 12);
@@ -118,8 +114,7 @@ small_gibs(org, startorg) {
     splinter[i].origin += (randomfloat(10) - 5, 0, randomfloat(30) - 15);
     if(randomint(100) > 50) {
       splinter[i] setModel("woodgib_small1");
-    }
-    else {
+    } else {
       splinter[i] setModel("woodgib_small2");
     }
     startorg += (50 - randomint(100), 50 - randomint(100), 0);
@@ -131,8 +126,7 @@ small_gibs(org, startorg) {
     splinter[i] moveGravity((x, y, z), 12);
     if(x > 0) {
       splinter[i] rotateroll((1500 + randomfloat(2500)) * -1, 5, 0, 0);
-    }
-    else {
+    } else {
       splinter[i] rotateroll(1500 + randomfloat(2500), 5, 0, 0);
     }
   }

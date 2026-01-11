@@ -13,7 +13,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_behavior;
 #include scripts\zm_common\zm_devgui;
-
 #namespace namespace_3b9dec72;
 
 autoexec __init__system__() {
@@ -29,7 +28,7 @@ __init__() {
   adddebugcommand("<dev string:x43>");
   adddebugcommand("<dev string:x73>");
 
-    level thread function_2165e851();
+  level thread function_2165e851();
 }
 
 __main__() {}

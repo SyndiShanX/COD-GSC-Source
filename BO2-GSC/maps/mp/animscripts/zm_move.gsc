@@ -62,8 +62,7 @@ trysidestepthread() {
 trysidestep() {
   if(isDefined(self.shouldsidestepfunc)) {
     self.sidesteptype = self[[self.shouldsidestepfunc]]();
-  }
-  else {
+  } else {
     self.sidesteptype = shouldsidestep();
   }
 
@@ -103,14 +102,11 @@ getdesiredsidestepdir(sidesteptype) {
 
   if(self.a.steppeddir < 0) {
     self.desiredstepdir = "right";
-  }
-  else if(self.a.steppeddir > 0) {
+  } else if(self.a.steppeddir > 0) {
     self.desiredstepdir = "left";
-  }
-  else if(randomroll < 0.5) {
+  } else if(randomroll < 0.5) {
     self.desiredstepdir = "right";
-  }
-  else {
+  } else {
     self.desiredstepdir = "left";
   }
 
@@ -129,8 +125,7 @@ shouldsidestep() {
   if(cansidestep() && isplayer(self.enemy) && self.enemy islookingat(self)) {
     if(self.zombie_move_speed != "sprint" || randomfloat(1) < 0.7) {
       return "step";
-    }
-    else {
+    } else {
       return "roll";
     }
   }
@@ -237,8 +232,7 @@ dosidestep() {
 
   if(self.desiredstepdir == "left") {
     self.a.steppeddir--;
-  }
-  else {
+  } else {
     self.a.steppeddir++;
   }
 

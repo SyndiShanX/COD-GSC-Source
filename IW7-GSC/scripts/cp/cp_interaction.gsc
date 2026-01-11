@@ -1027,9 +1027,7 @@ _meth_8228(param_00) {
 
     default:
       if(isDefined(level.custom_weaponnamestring_func)) {
-        return [
-          [level.custom_weaponnamestring_func]
-        ](var_01, param_00);
+        return [[level.custom_weaponnamestring_func]](var_01, param_00);
       }
       return &"CP_ZMB_WEAPONS_GENERIC";
   }

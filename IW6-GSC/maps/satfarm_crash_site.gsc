@@ -48,8 +48,7 @@ intro_and_crash_site_ally_setup() {
   if(!isDefined(level.intro_and_crash_site_ally_tanks)) {
     if(level.start_point == "intro") {
       level.intro_and_crash_site_ally_tanks = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("intro_allies");
-    }
-    else if(level.start_point == "crash_site") {
+    } else if(level.start_point == "crash_site") {
       level.intro_and_crash_site_ally_tanks = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("crash_site_allies");
     }
 
@@ -86,7 +85,7 @@ a10_and_mig_scene() {
   level.crash_site_background_enemies = maps\_vehicle::spawn_vehicles_from_targetname_and_drive("crash_site_background_enemies");
 
   foreach(var_1 in level.crash_site_background_enemies) {
-  var_1 thread maps\satfarm_code::npc_tank_combat_init(undefined, 1);
+    var_1 thread maps\satfarm_code::npc_tank_combat_init(undefined, 1);
   }
 
   level.crash_site_a10_missile_dive_1 = maps\_vehicle::spawn_vehicle_from_targetname_and_drive("crash_site_a10_missile_dive_1");

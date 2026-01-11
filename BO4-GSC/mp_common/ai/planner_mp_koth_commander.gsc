@@ -11,7 +11,6 @@
 #include scripts\core_common\ai\systems\planner;
 #include scripts\mp_common\ai\planner_mp_commander_utility;
 #include scripts\mp_common\ai\planner_mp_koth_squad;
-
 #namespace plannermpkothcommander;
 
 private createcommanderplanner(team) {
@@ -27,7 +26,7 @@ createcommander(team) {
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreForceGoal");
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreKothZone");
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreTeam");
-  plannercommanderutility::addsquadevaluator(commander, "commanderScoreAge", [#"maxage": 15000]);
+  plannercommanderutility::addsquadevaluator(commander, "commanderScoreAge", [# "maxage": 15000]);
   plannercommanderutility::addsquadevaluator(commander, "commanderScoreAlive");
   return commander;
 }

@@ -61,14 +61,11 @@ load_gumps() {
 
   if(is_after_skipto("morals")) {
     load_gump("yemen_gump_outskirts");
-  }
-  else if(is_after_skipto("terrorist_hunt")) {
+  } else if(is_after_skipto("terrorist_hunt")) {
     load_gump("yemen_gump_morals");
-  }
-  else if(is_after_skipto("speech")) {
+  } else if(is_after_skipto("speech")) {
     load_gump("yemen_gump_speech");
-  }
-  else {
+  } else {
     load_gump("yemen_gump_speech");
   }
 
@@ -79,7 +76,7 @@ give_scene_models_guns(str_scene) {
   a_models = get_model_or_models_from_scene(str_scene);
 
   foreach(m_guy in a_models) {
-  m_guy attach("t6_wpn_ar_an94_world", "tag_weapon_right");
+    m_guy attach("t6_wpn_ar_an94_world", "tag_weapon_right");
   }
 }
 
@@ -193,11 +190,9 @@ detect_player_attacker() {
 
     if(isDefined(e_attacker.is_yemeni) && e_attacker.is_yemeni) {
       level thread yemeni_fire_at_player_flag();
-    }
-    else if(isDefined(e_attacker.classname) && e_attacker.classname == "script_vehicle") {
+    } else if(isDefined(e_attacker.classname) && e_attacker.classname == "script_vehicle") {
       level thread robot_fire_at_player_flag();
-    }
-    else if(!isDefined(e_attacker.team) && !isDefined("team3") || isDefined(e_attacker.team) && isDefined("team3") && e_attacker.team == "team3") {
+    } else if(!isDefined(e_attacker.team) && !isDefined("team3") || isDefined(e_attacker.team) && isDefined("team3") && e_attacker.team == "team3") {
       level thread terrorist_fire_at_player_flag();
     }
   }
@@ -319,8 +314,7 @@ spawn_quadrotors_at_structs(str_struct_name, str_noteworthy, b_copy_noteworthy) 
 
     if(isDefined(str_noteworthy)) {
       vh_qrotor.script_noteworthy = str_noteworthy;
-    }
-    else if(is_true(b_copy_noteworthy)) {
+    } else if(is_true(b_copy_noteworthy)) {
       vh_qrotor.script_noteworthy = s_spot.script_noteworthy;
     }
 
@@ -358,8 +352,7 @@ init_hero_startstruct(str_hero_name, str_struct_targetname) {
 
   if(isDefined(s_start_pos.angles)) {
     v_angles = s_start_pos.angles;
-  }
-  else {
+  } else {
     v_angles = (0, 0, 0);
   }
 
@@ -371,8 +364,7 @@ init_hero_startstruct(str_hero_name, str_struct_targetname) {
 teleport_ai_to_pos(v_teleport_pos, v_teleport_angles) {
   if(isDefined(v_teleport_angles)) {
     self forceteleport(v_teleport_pos, v_teleport_angles);
-  }
-  else {
+  } else {
     self forceteleport(v_teleport_pos);
   }
 
@@ -457,8 +449,7 @@ take_player_damage_only_for_scene(str_scene) {
 get_offset_scale(i) {
   if(i % 2 == 0) {
     return i / 2 * -1;
-  }
-  else {
+  } else {
     return i - i / 2 + 0.5;
   }
 }
@@ -524,7 +515,7 @@ array_delete_ai_from_noteworthy(noteworthy, b_los_check) {
 
   if(b_los_check) {
     foreach(dude in ai_dudes) {
-    dude thread ai_delete_when_offscreen();
+      dude thread ai_delete_when_offscreen();
     }
   } else
     array_delete(ai_dudes);

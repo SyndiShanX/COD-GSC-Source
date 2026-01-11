@@ -182,8 +182,7 @@ rotate_dead_piece() {
 
     if(ang_vel[2] < 500 * -1) {
       ang_vel = (ang_vel[0], ang_vel[1], 500 * -1);
-    }
-    else if(ang_vel[2] > 500) {
+    } else if(ang_vel[2] > 500) {
       ang_vel = (ang_vel[0], ang_vel[1], 500);
     }
 

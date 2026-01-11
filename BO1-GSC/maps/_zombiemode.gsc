@@ -1757,9 +1757,7 @@ spectators_respawn() {
     players = get_players();
     for(i = 0; i < players.size; i++) {
       if(players[i].sessionstate == "spectator") {
-        players[i][
-          [level.spawnPlayer]
-        ]();
+        players[i][[level.spawnPlayer]]();
         if(isDefined(level.script) && level.round_number > 6 && players[i].score < 1500) {
           players[i].old_score = players[i].score;
           players[i].score = 1500;
@@ -1851,8 +1849,7 @@ check_for_valid_spawn_near_team(revivee) {
       for(j = 0; j < spawn_points.size; j++) {
         if(isDefined(spawn_points[i].script_int)) {
           ideal_distance = spawn_points[i].script_int;
-        }
-        else {
+        } else {
           ideal_distance = 1000;
         }
         if(spawn_points[j].locked == false) {
@@ -2824,9 +2821,7 @@ player_damage_override(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfDeath, s
   if(sMeansOfDeath == "MOD_FALLING") {
     if(self HasPerk("specialty_flakjacket") && isDefined(self.divetoprone) && self.divetoprone == 1) {
       if(isDefined(level.zombiemode_divetonuke_perk_func)) {
-        [
-          [level.zombiemode_divetonuke_perk_func]
-        ](self, self.origin);
+        [[level.zombiemode_divetonuke_perk_func]](self, self.origin);
       }
       return 0;
     }
@@ -3464,14 +3459,11 @@ makeNMLRankNumberSolo(total_kills, total_score) {
   score_padding = "";
   if(total_score < 10) {
     score_padding += "0000";
-  }
-  else if(total_score < 100) {
+  } else if(total_score < 100) {
     score_padding += "000";
-  }
-  else if(total_score < 1000) {
+  } else if(total_score < 1000) {
     score_padding += "00";
-  }
-  else if(total_score < 10000) {
+  } else if(total_score < 10000) {
     score_padding += "0";
   }
   rankNumber = total_kills + score_padding + total_score;
@@ -3482,11 +3474,9 @@ nazizombies_upload_highscore() {
   playersRank = 1;
   if(level.players_playing == 1) {
     playersRank = 4;
-  }
-  else if(level.players_playing == 2) {
+  } else if(level.players_playing == 2) {
     playersRank = 3;
-  }
-  else if(level.players_playing == 3) {
+  } else if(level.players_playing == 3) {
     playersRank = 2;
   }
   map_name = getDvar(#"mapname");
@@ -3586,14 +3576,11 @@ makeRankNumber(wave, players, time) {
   padding = "";
   if(10 > time) {
     padding += "0000";
-  }
-  else if(100 > time) {
+  } else if(100 > time) {
     padding += "000";
-  }
-  else if(1000 > time) {
+  } else if(1000 > time) {
     padding += "00";
-  }
-  else if(10000 > time) {
+  } else if(10000 > time) {
     padding += "0";
   }
   rank = wave + "" + players + padding + time;

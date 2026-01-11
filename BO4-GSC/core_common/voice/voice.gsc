@@ -10,7 +10,6 @@
 #include scripts\core_common\math_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace voice;
 
 autoexec __init__system__() {
@@ -88,7 +87,7 @@ stop_all(team) {
   stop = [];
 
   foreach(speaker in level.var_3e8bd5c) {
-    if(isDefined(team) && team != #"any" && team != speaker.team) {
+    if(isDefined(team) && team != # "any" && team != speaker.team) {
       continue;
     }
 
@@ -152,7 +151,7 @@ play(scriptkey, var_17ee4803 = undefined, var_7f436309 = 0) {
 }
 
 private start_pending() {
-  self endoncallback(&function_9db28e7, #"death", #"entering_last_stand", #"disconnect", #"voice_stop");
+  self endoncallback(&function_9db28e7, # "death", # "entering_last_stand", # "disconnect", # "voice_stop");
   level endon(#"game_ended");
   level.var_3e8bd5c[level.var_3e8bd5c.size] = self;
 
@@ -168,7 +167,7 @@ private start_pending() {
 }
 
 private play_next() {
-  self endoncallback(&end_play_next, #"death", #"entering_last_stand", #"disconnect", #"voice_stop");
+  self endoncallback(&end_play_next, # "death", # "entering_last_stand", # "disconnect", # "voice_stop");
   level endon(#"game_ended");
   voice = function_777704ce();
 
@@ -180,7 +179,7 @@ private play_next() {
   self function_7924f3ca();
   self.var_47282775 = voice;
 
-  if(isDefined(self.archetype) && (self.archetype == #"human" || self.archetype == #"human_riotshield" || self.archetype == #"human_rpg" || self.archetype == #"civilian")) {
+  if(isDefined(self.archetype) && (self.archetype == # "human" || self.archetype == # "human_riotshield" || self.archetype == # "human_rpg" || self.archetype == # "civilian")) {
     self clientfield::set("facial_dial", 1);
   }
 
@@ -239,7 +238,7 @@ private function_9b502d8d(str_line, n_wait_time) {
     self openluimenu("TempDialog");
   }
 
-  self waittilltimeout(n_wait_time, #"death");
+  self waittilltimeout(n_wait_time, # "death");
 
   if(isDefined(self getluimenu("TempDialog"))) {
     self closeluimenu(self getluimenu("TempDialog"));
@@ -269,7 +268,7 @@ private end_play_next(notifyhash) {
 
   self.var_47282775 = undefined;
 
-  if(isactor(self) && isDefined(self.archetype) && (self.archetype == #"human" || self.archetype == #"human_riotshield" || self.archetype == #"human_rpg" || self.archetype == #"civilian")) {
+  if(isactor(self) && isDefined(self.archetype) && (self.archetype == # "human" || self.archetype == # "human_riotshield" || self.archetype == # "human_rpg" || self.archetype == # "civilian")) {
     self clientfield::set("facial_dial", 0);
   }
 
@@ -299,7 +298,7 @@ private clear_queue() {
 }
 
 private function_7924f3ca() {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   if(isDefined(self.var_556f910a)) {
     for(i = 0; i < self.var_556f910a.size; i++) {
@@ -316,9 +315,9 @@ private function_7924f3ca() {
 }
 
 private mask_sound(soundent, params, var_17ee4803) {
-  mask = isDefined(params) ? params.mask : #"all";
+  mask = isDefined(params) ? params.mask : # "all";
 
-  if(mask == #"all") {
+  if(mask == # "all") {
     if(isDefined(self.var_54d07407)) {
       foreach(player in getplayers()) {
         self show_portrait_to(player);
@@ -330,19 +329,19 @@ private mask_sound(soundent, params, var_17ee4803) {
 
   soundent hide();
 
-  if(mask == #"friendly") {
+  if(mask == # "friendly") {
     foreach(player in getplayers()) {
       if(player.team == self.team) {
         self play_to(soundent, player);
       }
     }
-  } else if(mask == #"enemy") {
+  } else if(mask == # "enemy") {
     foreach(player in getplayers()) {
       if(player.team != self.team) {
         self play_to(soundent, player);
       }
     }
-  } else if(mask == #"self") {
+  } else if(mask == # "self") {
     if(isplayer(self)) {
       self play_to(soundent, player);
     }
@@ -371,7 +370,7 @@ private show_portrait_to(player) {
 private close_portrait(speaker) {
   self endon(#"disconnect");
   level endon(#"game_ended");
-  speaker waittill(#"death", #"entering_last_stand", #"disconnect", #"voice_stop", #"voice_done");
+  speaker waittill(#"death", # "entering_last_stand", # "disconnect", # "voice_stop", # "voice_done");
   self luinotifyevent(#"offsite_comms_complete");
 }
 
@@ -398,7 +397,7 @@ play_notetrack(scriptid) {
     str_team = self._scene_object._str_team;
   }
 
-  if(isDefined(str_team) && str_team != #"any") {
+  if(isDefined(str_team) && str_team != # "any") {
     soundent hide();
 
     foreach(player in getplayers()) {
@@ -456,11 +455,11 @@ function_5f8e1b94(scriptkey) {
 }
 
 function_e2a07e55() {
-  return isDefined(level.handlers) && isDefined(level.handlers[#"allies"]) && isDefined(level.handlers[#"axis"]);
+  return isDefined(level.handlers) && isDefined(level.handlers[# "allies"]) && isDefined(level.handlers[# "axis"]);
 }
 
 function_42a109b9() {
-  return isDefined(level.commanders) && isDefined(level.commanders[#"allies"]) && isDefined(level.commanders[#"axis"]);
+  return isDefined(level.commanders) && isDefined(level.commanders[# "allies"]) && isDefined(level.commanders[# "axis"]);
 }
 
 function_a36ee9b7() {

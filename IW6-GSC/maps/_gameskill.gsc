@@ -230,8 +230,7 @@ solo_player_in_special_ops() {
 
   if(!maps\_utility::is_survival()) {
     level.difficultysettings["invulTime_onShield"]["normal"] = 2.5;
-  }
-  else {
+  } else {
     level.difficultysettings["invulTime_onShield"]["normal"] = 1.5;
   }
 
@@ -247,8 +246,7 @@ solo_player_in_special_ops() {
 
   if(!maps\_utility::is_survival()) {
     setsaveddvar("player_meleeDamageMultiplier", 0.5);
-  }
-  else {
+  } else {
     setsaveddvar("player_meleeDamageMultiplier", 0.26);
   }
 }
@@ -498,8 +496,7 @@ set_accuracy_based_on_situation() {
   if(self.script == "move") {
     if(animscripts\utility::iscqbwalkingorfacingenemy()) {
       self.accuracy = anim.walk_accuracy * self.baseaccuracy;
-    }
-    else {
+    } else {
       self.accuracy = anim.run_accuracy * self.baseaccuracy;
     }
 
@@ -1012,8 +1009,7 @@ default_door_node_flashbang_frequency() {
   if(self isbadguy()) {
     if(level.gameskill >= 2) {
       self.doorflashchance = 0.8;
-    }
-    else {
+    } else {
       self.doorflashchance = 0.6;
     }
   }
@@ -1029,8 +1025,7 @@ grenadeawareness() {
     if(level.gameskill >= 2) {
       if(randomint(100) < 33) {
         self.grenadeawareness = 0.2;
-      }
-      else {
+      } else {
         self.grenadeawareness = 0.5;
       }
     } else if(randomint(100) < 33)
@@ -1070,9 +1065,10 @@ playerbreathingsound(var_0) {
       continue;
     }
     if(isDefined(level.gameskill_breath_func)) {
-      [[level.gameskill_breath_func]]("breathing_hurt");
-    }
-    else {
+      [
+        [level.gameskill_breath_func]
+      ]("breathing_hurt");
+    } else {
       self playlocalsound("breathing_hurt");
     }
 
@@ -1141,8 +1137,7 @@ take_cover_warning_loop() {
 add_hudelm_position_internal(var_0) {
   if(level.console) {
     self.fontscale = 2;
-  }
-  else {
+  } else {
     self.fontscale = 1.6;
   }
 
@@ -1165,8 +1160,7 @@ add_hudelm_position_internal(var_0) {
 
   if(level.console) {
     self.background setshader("popmenu_bg", 650, 52);
-  }
-  else {
+  } else {
     self.background setshader("popmenu_bg", 650, 42);
   }
 
@@ -1181,8 +1175,7 @@ create_warning_elem() {
 
   if(maps\_utility::is_player_down(self)) {
     var_0 settext(level.strings["get_back_up"].text);
-  }
-  else {
+  } else {
     var_0 settext(level.strings["take_cover"].text);
   }
 
@@ -1387,9 +1380,10 @@ player_recovers_from_red_flashing() {
 
   if(!isDefined(self.disable_breathing_sound) || !self.disable_breathing_sound) {
     if(isDefined(level.gameskill_breath_func)) {
-      [[level.gameskill_breath_func]]("breathing_better");
-    }
-    else {
+      [
+        [level.gameskill_breath_func]
+      ]("breathing_better");
+    } else {
       self playlocalsound("breathing_better");
     }
   }

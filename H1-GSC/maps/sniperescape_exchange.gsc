@@ -291,11 +291,9 @@ exchange_player_fires() {
 
   if(price_thinks_you_are_insane(var_12)) {
     maps\sniperescape_code::price_line("are_you_insane");
-  }
-  else if(level.wind_setting == "end") {
+  } else if(level.wind_setting == "end") {
     maps\sniperescape_code::price_line("target_still_standing");
-  }
-  else {
+  } else {
     maps\sniperescape_code::price_line("went_wide");
   }
 
@@ -461,8 +459,7 @@ exchange_barrett_trigger() {
 
   if(!isDefined(level.barrett_intro_with_anim)) {
     player_attach_to_barret_with_script();
-  }
-  else {
+  } else {
     player_attach_to_barret_with_anim();
   }
 
@@ -577,8 +574,7 @@ h1_playergrabbarrettlogic() {
 
     if(var_2 < 12 && var_3 > -85) {
       level.player setphysicaldepthoffield(2.9, 1000, 3.0, 3.0);
-    }
-    else if(var_2 > 14 || var_3 < -87) {
+    } else if(var_2 > 14 || var_3 < -87) {
       level.player setphysicaldepthoffield(3.4, 32, 2.5, 2.5);
     }
 
@@ -657,8 +653,7 @@ sniper_text_init(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     var_6 = int(10000 + var_3 * 1000);
-  }
-  else {
+  } else {
     var_6 = 10000;
   }
 
@@ -670,8 +665,7 @@ sniper_text_init(var_0, var_1, var_2, var_3) {
 hudelem_destroyer(var_0) {
   if(getdvar("use_old_sniper_text_style") == "1") {
     wait 10;
-  }
-  else {
+  } else {
     level waittill("destroy_snipe_info_text");
   }
 
@@ -818,8 +812,7 @@ exchange_baddie_main_think() {
   if(!isDefined(self.zak_got_hit)) {
     if(isDefined(self.main_baddie)) {
       wait(level.exchanger_surprise_time);
-    }
-    else {
+    } else {
       wait(randomfloatrange(0.05, 0.5));
     }
 
@@ -865,8 +858,7 @@ exchange_baddie_runs_to_car() {
   if(common_scripts\utility::flag("player_attacks_exchange")) {
     if(is_zak() && isDefined(self.zak_got_hit)) {
       common_scripts\utility::flag_wait("wounded_zak_runs_for_car");
-    }
-    else {
+    } else {
       maps\_utility::ent_flag_wait("run_to_car");
     }
   } else {
@@ -874,8 +866,7 @@ exchange_baddie_runs_to_car() {
 
     if(is_zak()) {
       maps\_utility::set_generic_run_anim("patrol_jog");
-    }
-    else {
+    } else {
       self.run_overrideanim = maps\_utility::getanim_generic("stealth_walk");
       maps\_utility::set_generic_run_anim("stealth_walk");
     }
@@ -891,8 +882,7 @@ exchange_baddie_runs_to_car() {
 
   if(isDefined(self.script_vehicleride)) {
     var_2 = maps\_vehicle_aianim::get_my_vehicleride();
-  }
-  else {
+  } else {
     var_2 = get_shared_linkto();
     self.script_vehicleride = var_2.script_vehicleride;
   }
@@ -983,8 +973,7 @@ exchange_guy_patrol_path() {
 
     if(var_0.radius) {
       self.goalradius = var_0.radius;
-    }
-    else {
+    } else {
       self.goalradius = 16;
     }
 
@@ -1355,8 +1344,7 @@ exchange_dof() {
 
     if(getdvarint("use_old_turret_dof") == 1) {
       exchange_scale_dof_while_on_turret_preh1();
-    }
-    else {
+    } else {
       exchange_scale_dof_while_on_turret();
     }
 
@@ -1469,8 +1457,7 @@ exchange_scale_dof_while_on_turret_preh1() {
 
     if(var_2 > var_3) {
       var_2 = var_3;
-    }
-    else if(var_2 < var_4) {
+    } else if(var_2 < var_4) {
       var_2 = var_4;
     }
 
@@ -1649,8 +1636,7 @@ clear_path_speed(var_0) {
 
   if(isDefined(self.target)) {
     var_1 = getvehiclenode(self.target, "targetname");
-  }
-  else {
+  } else {
     var_2 = strtok(self.script_linkto, " ");
     var_1 = get_path_from_array(var_2);
   }
@@ -1726,8 +1712,7 @@ exchange_flag() {
 
     if(var_4 < 0) {
       var_4 = 0;
-    }
-    else if(var_4 > 0.99) {
+    } else if(var_4 > 0.99) {
       var_4 = 0.99;
     }
 
@@ -2031,8 +2016,7 @@ exchange_wind_flunctuates() {
 
       if(var_6 > var_5) {
         var_4 = randomfloatrange(var_5, var_6);
-      }
-      else {
+      } else {
         var_4 = var_6;
       }
     }
@@ -2102,8 +2086,7 @@ exchange_mission_failure() {
   }
   if(common_scripts\utility::flag("makarov_killed")) {
     exchange_mission_failure_paradox_deadquote();
-  }
-  else {
+  } else {
     setdvar("ui_deadquote", &"SNIPERESCAPE_ZAKHAEV_ESCAPED");
   }
 
@@ -2348,8 +2331,7 @@ guy_talk(var_0, var_1) {
 
   if(isDefined(var_2.talk_transition)) {
     do_flashback_anim(var_0, var_1, var_2.talk, var_2.sittag, 1, 0, var_2.talk_transition);
-  }
-  else {
+  } else {
     do_flashback_anim(var_0, var_1, var_2.talk, var_2.sittag, 1, 0);
   }
 }
@@ -2359,8 +2341,7 @@ guy_panic(var_0, var_1) {
 
   if(var_1 == 3) {
     do_flashback_anim(var_0, var_1, var_2.panic, var_2.sittag, 0, 1);
-  }
-  else {
+  } else {
     do_flashback_anim(var_0, var_1, var_2.panic, var_2.sittag, 0, 0);
   }
 }
@@ -2456,8 +2437,7 @@ can_display_flashback_guy_name() {
   if(isDefined(var_8["entity"]) && var_8["entity"] != self) {
     if(isDefined(var_5) && var_8["entity"] == var_5) {
       var_6 = 1;
-    }
-    else if(isDefined(var_8["entity"].team) && var_8["entity"].team == "axis") {
+    } else if(isDefined(var_8["entity"].team) && var_8["entity"].team == "axis") {
       var_6 = 1;
     }
   }

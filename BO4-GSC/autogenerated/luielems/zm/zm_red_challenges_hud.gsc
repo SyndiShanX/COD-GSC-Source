@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace zm_red_challenges_hud;
 
 class czm_red_challenges_hud: cluielem {

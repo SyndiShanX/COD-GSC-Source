@@ -225,9 +225,7 @@ function function_57863b20() {
     namespace_2f63e553::setupdevgui();
     if(isDefined(level.doa.var_52cccfb6)) {
       if(isDefined(level.doa.var_52cccfb6.host_migration)) {
-        [
-          [level.doa.var_52cccfb6.host_migration]
-        ](level.doa.var_52cccfb6);
+        [[level.doa.var_52cccfb6.host_migration]](level.doa.var_52cccfb6);
       }
     }
   }

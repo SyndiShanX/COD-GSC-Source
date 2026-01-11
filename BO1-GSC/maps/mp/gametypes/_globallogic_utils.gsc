@@ -83,8 +83,7 @@ registerRoundSwitchDvar(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.roundswitchDvar = dvarString;
@@ -99,8 +98,7 @@ registerRoundLimitDvar(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.roundLimitDvar = dvarString;
@@ -115,8 +113,7 @@ registerRoundWinLimitDvar(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.roundWinLimitDvar = dvarString;
@@ -131,8 +128,7 @@ registerScoreLimitDvar(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.scoreLimitDvar = dvarString;
@@ -148,8 +144,7 @@ registerTimeLimitDvar(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarFloat(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarFloat(dvarString) < minValue) {
+  } else if(getDvarFloat(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.timeLimitDvar = dvarString;
@@ -165,8 +160,7 @@ registerNumLivesDvar(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.numLivesDvar = dvarString;
@@ -191,11 +185,9 @@ executePostRoundEvents() {
 getValueInRange(value, minValue, maxValue) {
   if(value > maxValue) {
     return maxValue;
-  }
-  else if(value < minValue) {
+  } else if(value < minValue) {
     return minValue;
-  }
-  else {
+  } else {
     return value;
   }
 }
@@ -256,8 +248,7 @@ getTimePassed() {
   }
   if(level.timerStopped) {
     return (level.timerPauseTime - level.startTime) - level.discardTime;
-  }
-  else {
+  } else {
     return (gettime() - level.startTime) - level.discardTime;
   }
 }
@@ -280,8 +271,7 @@ getScoreRemaining(team) {
   scoreLimit = level.scoreLimit;
   if(IsPlayer(self)) {
     return scoreLimit - maps\mp\gametypes\_globallogic_score::_getPlayerScore(self);
-  }
-  else {
+  } else {
     return scoreLimit - GetTeamScore(team);
   }
 }
@@ -292,8 +282,7 @@ getScorePerMinute(team) {
   minutesPassed = (getTimePassed() / (60 * 1000)) + 0.0001;
   if(IsPlayer(self)) {
     return maps\mp\gametypes\_globallogic_score::_getPlayerScore(self) / minutesPassed;
-  }
-  else {
+  } else {
     return GetTeamScore(team) / minutesPassed;
   }
 }

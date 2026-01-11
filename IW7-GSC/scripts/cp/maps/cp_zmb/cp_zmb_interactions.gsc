@@ -318,9 +318,7 @@ zmb_player_interaction_monitor() {
         var_04 = var_05[0];
       }
 
-      if(isDefined(var_04) && ![
-          [level.should_allow_far_search_dist_func]
-        ](var_04)) {
+      if(isDefined(var_04) && ![[level.should_allow_far_search_dist_func]](var_04)) {
         var_04 = undefined;
       }
     } else if(!isDefined(var_04) && isDefined(var_05[0].custom_search_dist)) {
@@ -433,9 +431,7 @@ zmb_wait_for_interaction_triggered(param_00) {
     }
 
     if(isDefined(level.interactions[param_00.script_noteworthy].can_use_override_func)) {
-      if(![
-          [level.interactions[param_00.script_noteworthy].can_use_override_func]
-        ](param_00, var_01)) {
+      if(![[level.interactions[param_00.script_noteworthy].can_use_override_func]](param_00, var_01)) {
         wait(0.1);
         continue;
       }

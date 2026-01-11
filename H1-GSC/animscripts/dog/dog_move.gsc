@@ -54,8 +54,7 @@ moveloop() {
   for(;;) {
     if(self.disablearrivals) {
       self.stopanimdistsq = 0;
-    }
-    else {
+    } else {
       self.stopanimdistsq = anim.dogstoppingdistsq;
     }
 
@@ -143,14 +142,11 @@ pathchange_getdogturnanim(var_0) {
 
   if(var_0 < -135) {
     var_1 = % german_shepherd_run_start_180_l;
-  }
-  else if(var_0 > 135) {
+  } else if(var_0 > 135) {
     var_1 = % german_shepherd_run_start_180_r;
-  }
-  else if(var_0 < -60) {
+  } else if(var_0 < -60) {
     var_1 = % german_shepherd_run_start_l;
-  }
-  else if(var_0 > 60) {
+  } else if(var_0 > 60) {
     var_1 = % german_shepherd_run_start_r;
   }
 
@@ -203,8 +199,7 @@ playmovestartanim() {
 
   if(self.lookaheaddist == 0) {
     thread pathchangecheck2();
-  }
-  else {
+  } else {
     var_0 = self.origin;
     var_1 = anim.dogstartmovedist * 0.6;
     var_0 = var_0 + self.lookaheaddir * var_1;
@@ -217,19 +212,16 @@ playmovestartanim() {
       if(var_4 >= 0) {
         if(var_4 < 45) {
           var_5 = 8;
-        }
-        else if(var_4 < 135) {
+        } else if(var_4 < 135) {
           var_5 = 6;
-        }
-        else {
+        } else {
           var_5 = 3;
         }
       } else if(var_4 > -45)
         var_5 = 8;
       else if(var_4 > -135) {
         var_5 = 4;
-      }
-      else {
+      } else {
         var_5 = 1;
       }
 
@@ -256,8 +248,7 @@ playmovestartanim() {
     if(abs(var_9) > 20) {
       if(var_9 > 0) {
         var_10 = % german_shepherd_rotate_ccw;
-      }
-      else {
+      } else {
         var_10 = % german_shepherd_rotate_cw;
       }
 
@@ -315,8 +306,7 @@ randomsoundduringrunloop() {
 
     if(isDefined(self.script_growl)) {
       var_0 = "anml_dog_growl";
-    }
-    else if(!isDefined(self.script_nobark)) {
+    } else if(!isDefined(self.script_nobark)) {
       var_0 = "anml_dog_bark";
     }
 
@@ -346,8 +336,7 @@ getrunanimweights() {
 
     if(var_0["right"] > 1) {
       var_0["right"] = 1;
-    }
-    else if(var_0["right"] < 0) {
+    } else if(var_0["right"] < 0) {
       var_0["right"] = 0;
     }
 

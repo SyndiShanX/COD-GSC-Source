@@ -50,8 +50,7 @@ teleportthreadex(verticaloffset, delay, frames) {
 
   if(amount > 10.0) {
     amount = 10.0;
-  }
-  else if(amount < -10.0) {
+  } else if(amount < -10.0) {
     amount = -10.0;
   }
 

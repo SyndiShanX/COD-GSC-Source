@@ -21,8 +21,7 @@ setParent(element) {
 
   if(isDefined(self.point)) {
     self setPoint(self.point, self.relativePoint, self.xOffset, self.yOffset);
-  }
-  else {
+  } else {
     self setPoint("TOPLEFT");
   }
 }
@@ -124,16 +123,14 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     offsetX = int(element.width / 2);
     if(relativeX == "left" || element.alignX == "right") {
       xFactor = -1;
-    }
-    else {
+    } else {
       xFactor = 1;
     }
   } else {
     offsetX = element.width;
     if(relativeX == "left") {
       xFactor = -1;
-    }
-    else {
+    } else {
       xFactor = 1;
     }
   }
@@ -146,16 +143,14 @@ setPoint(point, relativePoint, xOffset, yOffset, moveTime) {
     offsetY = int(element.height / 2);
     if(relativeY == "top" || element.alignY == "bottom") {
       yFactor = -1;
-    }
-    else {
+    } else {
       yFactor = 1;
     }
   } else {
     offsetY = element.height;
     if(relativeY == "top") {
       yFactor = -1;
-    }
-    else {
+    } else {
       yFactor = 1;
     }
   }
@@ -183,11 +178,9 @@ setPointBar(point, relativePoint, xOffset, yOffset) {
 
   if(self.alignX == "left") {
     self.bar.x = self.x + self.padding;
-  }
-  else if(self.alignX == "right") {
+  } else if(self.alignX == "right") {
     self.bar.x = self.x - (self.width - self.padding);
-  }
-  else {
+  } else {
     self.bar.x = self.x - int((self.width - self.padding) / 2);
   }
 
@@ -551,8 +544,7 @@ stance_carry_icon_enable(bool) {
   level.stance_carry.x = 100;
   if(level.console) {
     level.stance_carry.y = 20;
-  }
-  else {
+  } else {
     level.stance_carry.y = 10;
   }
   level.stance_carry setshader("stance_carry", 64, 64);
@@ -623,11 +615,9 @@ get_countdown_hud(x, y, player, forceXPos) {
   xPos = undefined;
   if(!level.Console) {
     xPos = -250; //override x-position if this is PC or the timer will get cut off
-  }
-  else if(!isDefined(x)) {
+  } else if(!isDefined(x)) {
     xPos = -225;
-  }
-  else {
+  } else {
     xPos = x;
   }
 
@@ -637,15 +627,13 @@ get_countdown_hud(x, y, player, forceXPos) {
 
   if(!isDefined(y)) {
     yPos = 100;
-  }
-  else {
+  } else {
     yPos = y;
   }
 
   if(isDefined(player)) {
     hudelem = newClientHudElem(player);
-  }
-  else {
+  } else {
     hudelem = newHudElem();
   }
 
@@ -674,11 +662,9 @@ get_download_state_hud(x, y, player, forceXPos) {
   xPos = undefined;
   if(!level.Console) {
     xPos = -250; //override x-position if this is PC or the timer will get cut off
-  }
-  else if(!isDefined(x)) {
+  } else if(!isDefined(x)) {
     xPos = -170;
-  }
-  else {
+  } else {
     xPos = x;
   }
 
@@ -688,15 +674,13 @@ get_download_state_hud(x, y, player, forceXPos) {
 
   if(!isDefined(y)) {
     yPos = 100;
-  }
-  else {
+  } else {
     yPos = y;
   }
 
   if(isDefined(player)) {
     hudelem = newClientHudElem(player);
-  }
-  else {
+  } else {
     hudelem = newHudElem();
   }
 
@@ -734,8 +718,7 @@ get_download_state_hud(x, y, player, forceXPos) {
 create_client_overlay(shader_name, start_alpha, player) {
   if(isDefined(player)) {
     overlay = newClientHudElem(player);
-  }
-  else {
+  } else {
     overlay = newHudElem();
   }
   overlay.x = 0;

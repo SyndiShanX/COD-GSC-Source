@@ -10,7 +10,7 @@ start() {
   maps\oilrocks_apache_code::spawn_blackhawk_ally("blackhawk_ally_finale");
 
   foreach(var_1 in ["apache_chase_zpu", "apache_chase_additional_zpu", "apache_main_island_zpu"]) {
-  maps\_utility::array_delete(getEntArray(var_1, "targetname"));
+    maps\_utility::array_delete(getEntArray(var_1, "targetname"));
   }
 }
 
@@ -47,7 +47,7 @@ apache_chopper_enemies() {
   level.apache_chopper_hinds = [];
 
   foreach(var_2 in var_0) {
-  apache_chopper_hind_spawn(var_2);
+    apache_chopper_hind_spawn(var_2);
   }
 
   while(level.apache_chopper_hinds.size > 1) {
@@ -58,7 +58,7 @@ apache_chopper_enemies() {
   var_0 = common_scripts\utility::getstructarray("apache_chopper_enemy_hind_path_start_part_2", "targetname");
 
   foreach(var_2 in var_0) {
-  apache_chopper_hind_spawn(var_2);
+    apache_chopper_hind_spawn(var_2);
   }
 
   while(level.apache_chopper_hinds.size > 0) {

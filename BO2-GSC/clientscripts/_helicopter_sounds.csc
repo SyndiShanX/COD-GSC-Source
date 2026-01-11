@@ -163,8 +163,7 @@ command_parser() {
       if(!isDefined(tokens[0]) || !isDefined(level.helisoundvalues[tokens[0]])) {
         if(isDefined(tokens[0])) {
           println("helisounds Did not recognize helicopter type:" + tokens[0]);
-        }
-        else {
+        } else {
           println("helisounds Did not recognize helicopter type");
         }
 
@@ -173,8 +172,7 @@ command_parser() {
       } else if(!isDefined(tokens[1])) {
         if(isDefined(tokens[1])) {
           println("helisounds Did not recognize helicopter part:" + tokens[0] + " for heli: " + tokens[1]);
-        }
-        else {
+        } else {
           println("helisounds Did not recognize helicopter part for heli: " + tokens[0]);
         }
 
@@ -1251,8 +1249,7 @@ heli_idle_run_transition(heli_type, heli_part, updown, delay) {
     if(!isDefined(run_id)) {
       if(isDefined(heli_bone.run)) {
         run_id = heli_bone.run playLoopSound(heli_bone.run.alias, 0.5);
-      }
-      else {
+      } else {
         continue;
       }
     }
@@ -1610,8 +1607,7 @@ jet_down_transition(heli_type, heli_part) {
 
     if(jet_stick_down <= 0) {
       jet_stick_down = jet_stick_down * -1;
-    }
-    else {
+    } else {
       jet_stick_down = 0;
     }
 
@@ -2098,11 +2094,9 @@ playdrivesounds(sound, fadeinstart, startfullthreshold, endfullthreshold, fadeou
 
     if(throttle >= fadeinstart && throttle <= startfullthreshold) {
       fadevolume = sin(crossfadein * 90);
-    }
-    else if(throttle >= startfullthreshold && throttle <= endfullthreshold) {
+    } else if(throttle >= startfullthreshold && throttle <= endfullthreshold) {
       fadevolume = 1.0;
-    }
-    else if(throttle >= endfullthreshold && throttle <= fadeoutend) {
+    } else if(throttle >= endfullthreshold && throttle <= fadeoutend) {
       fadevolume = sin(crossfadeout * 90);
     }
 
@@ -2240,8 +2234,7 @@ flying_booster_rotate_update() {
 
     if(speed > 0) {
       anim_time = anim_time - speed / 1200 * 0.5;
-    }
-    else {
+    } else {
       anim_time = anim_time + speed * -1 / 1200 * 0.5;
     }
 

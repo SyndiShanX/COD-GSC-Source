@@ -22,9 +22,7 @@ main() {
   }
 
   self endon("killanimscript");
-  [
-    [self.exception["move"]]
-  ]();
+  [[self.exception["move"]]]();
   func_BCBE();
   makeportableradar();
   scripts\anim\utility::func_9832("move");

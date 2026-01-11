@@ -153,7 +153,7 @@ fail_player_if_he_backtracks() {
   triggers = getEntArray("trig_fail_backtrack_after_house", "targetname");
 
   foreach(trigger in triggers) {
-  trigger thread trig_fail_player_if_backtracks();
+    trigger thread trig_fail_player_if_backtracks();
   }
 }
 
@@ -228,7 +228,7 @@ stop_tall_grass_stealth() {
     a_enemies = getEntArray("patroller_extra_" + i + "_ai", "targetname");
 
     foreach(ai_enemy in a_enemies) {
-    ai_enemy.ignoreall = 1;
+      ai_enemy.ignoreall = 1;
     }
   }
 
@@ -236,7 +236,7 @@ stop_tall_grass_stealth() {
     a_enemies = getEntArray("perimeter_patroller_" + i + "_ai", "targetname");
 
     foreach(ai_enemy in a_enemies) {
-    ai_enemy delete();
+      ai_enemy delete();
     }
   }
 
@@ -373,8 +373,7 @@ right_path_blocker_stealth_logic() {
 
     if(!flag("tall_grass_moment_over")) {
       flag_set("_stealth_spotted");
-    }
-    else {
+    } else {
       level.player s3_player_fail(undefined, 3);
     }
   }
@@ -455,8 +454,7 @@ tall_grass_stealth_vo() {
   if(!is_mason_stealth_crouched()) {
     if(!level.console && !level.player gamepadusedlast()) {
       level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER_PC", 3, str_crouch_flag);
-    }
-    else {
+    } else {
       level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER", 3, str_crouch_flag);
     }
   }
@@ -486,7 +484,7 @@ turn_on_mission_fail_volumes() {
   volumes = getEntArray("vol_fail_post_grass_moment", "targetname");
 
   foreach(volume in volumes) {
-  volume thread monitor_player_failure_after_stealth();
+    volume thread monitor_player_failure_after_stealth();
   }
 }
 
@@ -788,8 +786,7 @@ fail_mission_if_player_visible(view_dot, vis_dist, fail_delay_time) {
         self thread shoot_at_target(level.player, undefined, 0.2, fail_delay_time + 1);
         wait(fail_delay_time);
         missionfailedwrapper(&"ANGOLA_2_PLAYER_COVER_BROKEN_SPOTTED");
-      } else {
-      }
+      } else {}
     }
 
     wait 0.01;
@@ -834,7 +831,7 @@ turn_off_jungle_escape_spawn_triggers() {
   triggers = getEntArray("player_escaping_village_trigger", "targetname");
 
   foreach(trigger in triggers) {
-  trigger trigger_off();
+    trigger trigger_off();
   }
 }
 

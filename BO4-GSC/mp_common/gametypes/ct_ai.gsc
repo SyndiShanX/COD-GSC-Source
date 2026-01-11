@@ -11,13 +11,12 @@
 #include scripts\core_common\vehicle_shared;
 #include scripts\mp_common\gametypes\ct_bots;
 #include scripts\mp_common\gametypes\ct_utils;
-
 #namespace ct_ai;
 
 function_4c8f915a(origin) {
-  team = #"axis";
+  team = # "axis";
   waittillframeend();
-  tankarchetype = #"archetype_mini_quadtank_ct";
+  tankarchetype = # "archetype_mini_quadtank_ct";
   drone = spawnvehicle(tankarchetype, origin, (0, 0, 0), "talon", undefined, 1);
   drone.team = team;
   drone.settings = struct::get_script_bundle("vehiclecustomsettings", drone.scriptbundlesettings);
@@ -299,7 +298,7 @@ function_8e0db9e6(s_loc, var_feefa8d9, var_ecf349de, var_3fc5d539) {
     waitframe(1);
   }
 
-  if(isDefined(s_loc.script_noteworthy) && s_loc.script_noteworthy == #"crouch") {
+  if(isDefined(s_loc.script_noteworthy) && s_loc.script_noteworthy == # "crouch") {
     self bot_stance::crouch();
   }
 

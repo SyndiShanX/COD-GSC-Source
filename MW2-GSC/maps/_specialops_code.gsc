@@ -77,8 +77,7 @@ pick_starting_location_pmc(return_placement) {
   foreach(player in level.players) {
     if(!excluders.size) {
       spawnEnt = random(startingLocations);
-    }
-    else {
+    } else {
       spawnEnt = get_closest_exclude(spawnEnt.origin, startingLocations, excluders);
     }
 
@@ -319,8 +318,7 @@ challenge_timer_wait_start(hud_msg, hud_time, start_flag) {
   hud_time.label = "";
   if(isDefined(level.challenge_time_limit)) {
     hud_time settenthstimer(level.challenge_time_limit);
-  }
-  else {
+  } else {
     hud_time settenthstimerup(0.00);
   }
 }
@@ -420,8 +418,7 @@ challenge_timer_give_alert() {
 
     if(level.so_challenge_time_beep < 0) {
       level.player playSound("arcademode_kill_streak_lost");
-    }
-    else {
+    } else {
       level.player playSound("so_countdown_beep");
     }
   }
@@ -485,8 +482,7 @@ challenge_timer_wait_passed(hud_msg, hud_time, passed_flag) {
 
   if(flag_exist("individual_timers") && flag("individual_timers")) {
     self ent_flag_wait(passed_flag);
-  }
-  else {
+  } else {
     flag_wait(passed_flag);
   }
 
@@ -584,13 +580,12 @@ specialops_mission_over_setup(was_success) {
   stream_origin = undefined;
   if(isDefined(level.pmc_game) && level.pmc_game) {
     stream_origin = pick_starting_location_pmc(true);
-  }
-  else {
+  } else {
     stream_origin = pick_starting_location_so(true);
   }
   if(isDefined(stream_origin)) {
     foreach(player in level.players) {
-    player PlayerSetStreamOrigin(stream_origin);
+      player PlayerSetStreamOrigin(stream_origin);
     }
   }
 
@@ -599,8 +594,7 @@ specialops_mission_over_setup(was_success) {
 
   if(was_success) {
     thread specialops_mission_over_setup_success();
-  }
-  else {
+  } else {
     thread specialops_mission_over_setup_failure();
   }
 
@@ -829,7 +823,7 @@ specialops_mission_over_stats(was_success) {
     if(!(player can_save_to_profile())) {
       PrintLn(">> UpdateGamerProfileAll():	[ PLAYER 2 SKIPPED ALL PROFILE UPDATES DUE TO LEVEL LOCKED ]");
 
-        player.eog_noreward = true;
+      player.eog_noreward = true;
     }
   }
 
@@ -933,8 +927,7 @@ specialops_mission_over_stats(was_success) {
     // round up or down
     if(int(completion_fraction * 100) % 100 >= 0.5) {
       completion_percentage = int(completion_fraction) + 1;
-    }
-    else {
+    } else {
       completion_percentage = int(completion_fraction);
     }
 
@@ -975,7 +968,7 @@ specialops_mission_over_stats(was_success) {
     PrintLn(">> SO STARS EARNED:	 		[" + specOpsSum + "]");
     PrintLn(">> SO MAX LEVELS: 			[" + level.specOpsSettings.levels.size + "]");
 
-      player SetLocalPlayerProfileData("percentCompleteSO", specOpsSum);
+    player SetLocalPlayerProfileData("percentCompleteSO", specOpsSum);
     //player SetLocalPlayerProfileData( "percentCompleteSO", completion_percentage );
   }
 

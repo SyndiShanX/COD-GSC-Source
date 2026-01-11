@@ -224,9 +224,7 @@ func_C4E0(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     return;
   }
 
-  [
-    [level.on_zombie_damaged_func]
-  ](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
+  [[level.on_zombie_damaged_func]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
 }
 
 should_spawn_karatemaster() {

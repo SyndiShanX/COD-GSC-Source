@@ -94,7 +94,7 @@ begin_interior_vault_scene() {
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("chaos_decals_delete", "targetname"));
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   if(level.woof) {
@@ -145,7 +145,7 @@ setup_vault_props() {
   maps\clockwork_code::setup_drill(0);
 
   foreach(var_1 in level.drill_pickup) {
-  var_1 linkto(level.drill_prop, "J_prop_1", (0, 0, 0), (0, 0, 0));
+    var_1 linkto(level.drill_prop, "J_prop_1", (0, 0, 0), (0, 0, 0));
   }
 
   level.vault_props = maps\_utility::make_array(level.thermite1, level.thermite2, level.charge1, level.charge2);
@@ -419,8 +419,7 @@ handle_drill_spot(var_0, var_1, var_2, var_3) {
 
         if(level.drill_bink) {
           reset_tablet_screen();
-        }
-        else {
+        } else {
           maps\clockwork_pip::pip_disable();
         }
 
@@ -457,8 +456,7 @@ handle_drill_spot(var_0, var_1, var_2, var_3) {
 
     if(level.drill_bink) {
       reset_tablet_screen();
-    }
-    else {
+    } else {
       thread maps\clockwork_pip::pip_disable();
     }
 
@@ -550,8 +548,7 @@ handle_drilling(var_0, var_1) {
 
   if(isDefined(level.drill_reset_pos)) {
     var_13 = level.drill_reset_pos;
-  }
-  else {
+  } else {
     var_13 = var_11.origin + (0, -900, 0);
     level.drill_reset_pos = var_13;
   }
@@ -873,11 +870,11 @@ animate_vault_door() {
   level.thermite3 delete();
 
   foreach(var_3 in level.vault_props) {
-  var_3 delete();
+    var_3 delete();
   }
 
   foreach(var_6 in level.chalk_mark) {
-  var_6 delete();
+    var_6 delete();
   }
 
   if(isDefined(level.spool_prop)) {
@@ -1324,7 +1321,7 @@ begin_interior_combat() {
   var_0 = common_scripts\utility::array_combine(var_0, getEntArray("chaos_decals_delete", "targetname"));
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   common_scripts\utility::flag_clear("player_dynamic_move_speed");
@@ -1425,7 +1422,7 @@ handle_combat_guys() {
   common_scripts\utility::flag_wait_either("combat_guys1", "end_discovery");
 
   foreach(var_1 in level.allies) {
-  var_1 maps\_utility::set_baseaccuracy(var_1.old_baseaccuracy);
+    var_1 maps\_utility::set_baseaccuracy(var_1.old_baseaccuracy);
   }
 
   maps\_utility::battlechatter_on("allies");
@@ -1450,7 +1447,7 @@ handle_combat_guys2() {
   var_1 = getEntArray("combat_guys2_waver", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 thread maps\clockwork_code::ambient_animate(0, "start_combat2", 0, 0);
+    var_3 thread maps\clockwork_code::ambient_animate(0, "start_combat2", 0, 0);
   }
 
   common_scripts\utility::flag_wait("combat_guys2");
@@ -1621,7 +1618,7 @@ spin_fans(var_0) {
 
   while(!common_scripts\utility::flag(var_0)) {
     foreach(var_4 in var_1) {
-    var_4 rotatepitch(30 + var_2, 0.25);
+      var_4 rotatepitch(30 + var_2, 0.25);
     }
 
     wait 0.25;
@@ -2029,8 +2026,7 @@ cqb_encounter(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(var_5)) {
     common_scripts\utility::flag_wait(var_5);
-  }
-  else {
+  } else {
     wait 1;
   }
 
@@ -2071,7 +2067,7 @@ handle_cqb_enemies() {
   var_0 = maps\_utility::get_ai_group_ai("roundroom_runners");
 
   foreach(var_2 in var_0) {
-  var_2.ignoreme = 0;
+    var_2.ignoreme = 0;
   }
 
   if(var_0.size < 3) {
@@ -2111,8 +2107,7 @@ attack_if_provoked() {
 
   if(!common_scripts\utility::flag("round_room_fight")) {
     maps\clockwork_code::reassign_goal_volume(self, "round_room_alerted_volume");
-  }
-  else {
+  } else {
     maps\clockwork_code::reassign_goal_volume(self, "round_room_combat_volume");
   }
 

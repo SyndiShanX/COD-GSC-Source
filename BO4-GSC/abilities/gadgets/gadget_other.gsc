@@ -5,7 +5,6 @@
 
 #include scripts\abilities\ability_player;
 #include scripts\core_common\system_shared;
-
 #namespace gadget_other;
 
 autoexec __init__system__() {

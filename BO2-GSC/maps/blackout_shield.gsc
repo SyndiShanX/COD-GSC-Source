@@ -29,8 +29,7 @@ shield_raise_or_lower_gun() {
 
   if(state == "standing") {
     shield_anim_stand();
-  }
-  else {
+  } else {
     shield_anim_move();
   }
 }
@@ -146,8 +145,7 @@ shield_run(e_victim, str_volume, str_scene_name) {
 
     if(level.m_shield.fwd == 0 || invalid_space_fwd) {
       shield_anim_stand();
-    }
-    else {
+    } else {
       shield_anim_move();
     }
 

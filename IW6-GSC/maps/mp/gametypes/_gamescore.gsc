@@ -12,8 +12,7 @@ getHighestScoringPlayer() {
 
   if(!level.placement["all"].size) {
     return (undefined);
-  }
-  else {
+  } else {
     return (level.placement["all"][0]);
   }
 }
@@ -37,8 +36,7 @@ getLosingPlayers() {
 givePlayerScore(event, player, victim, overrideCheckPlayerScoreLimitSoon, overridePointsPopup, bScaleDown) {
   if(is_aliens()) {
     return;
-  }
-  else {
+  } else {
     givePlayerScore_regularMP(event, player, victim, overrideCheckPlayerScoreLimitSoon, overridePointsPopup, bScaleDown);
   }
 }
@@ -85,16 +83,14 @@ givePlayerScore_regularMP(event, player, victim, overrideCheckPlayerScoreLimitSo
   if(!player rankingEnabled() && !level.hardcoreMode && !overridePointsPopup) {
     if(gameModeUsesDeathmatchScoring(level.gameType)) {
       player thread maps\mp\gametypes\_rank::xpPointsPopup(eventValue);
-    }
-    else {
+    } else {
       player thread maps\mp\gametypes\_rank::xpPointsPopup(score_change);
     }
   }
 
   if(gameModeUsesDeathmatchScoring(level.gameType)) {
     player maps\mp\gametypes\_persistence::statAdd("score", eventValue);
-  }
-  else if(!IsSquadsMode()) {
+  } else if(!IsSquadsMode()) {
     player maps\mp\gametypes\_persistence::statAdd("score", score_change);
   }
 
@@ -111,8 +107,7 @@ givePlayerScore_regularMP(event, player, victim, overrideCheckPlayerScoreLimitSo
 
   if(gameModeUsesDeathmatchScoring(level.gameType)) {
     player maps\mp\gametypes\_persistence::statSetChild("round", "score", scoreChildStat * eventValue);
-  }
-  else {
+  } else {
     player maps\mp\gametypes\_persistence::statSetChild("round", "score", scoreChildStat);
   }
 
@@ -244,8 +239,7 @@ _setTeamScore(team, teamScore) {
 
   if(game["status"] == "overtime" && !isDefined(level.overtimeScoreWinOverride) || (isDefined(level.overtimeScoreWinOverride) && !level.overtimeScoreWinOverride)) {
     thread maps\mp\gametypes\_gamelogic::onScoreLimit();
-  }
-  else {
+  } else {
     thread maps\mp\gametypes\_gamelogic::checkTeamScoreLimitSoon(team);
     thread maps\mp\gametypes\_gamelogic::checkScoreLimit();
   }
@@ -258,8 +252,7 @@ updateTeamScore(team) {
 
   if(!isRoundBased() || !isObjectiveBased() || level.gameType == "blitz") {
     teamScore = _getTeamScore(team);
-  }
-  else {
+  } else {
     teamScore = game["roundsWon"][team];
   }
 
@@ -278,7 +271,7 @@ sendUpdatedTeamScores() {
   WaitTillSlowProcessAllowed();
 
   foreach(player in level.players) {
-  player updateScores();
+    player updateScores();
   }
 }
 
@@ -384,8 +377,7 @@ getBetterPlayer(playerA, playerB) {
 
   if(cointoss()) {
     return playerA;
-  }
-  else {
+  } else {
     return playerB;
   }
 }
@@ -470,8 +462,7 @@ processAssist(killedplayer) {
   }
   if(is_aliens()) {
     return;
-  }
-  else {
+  } else {
     processAssist_regularMP(killedplayer);
   }
 }
@@ -513,8 +504,7 @@ processShieldAssist(killedPlayer) {
   }
   if(is_aliens()) {
     return;
-  }
-  else {
+  } else {
     processShieldAssist_regularMP(killedPlayer);
   }
 }

@@ -232,11 +232,9 @@ GetJumpInfo(startPos, startAngles, endPos, endAngles, nextPos) {
 
   if(isDefined(nextPos)) {
     jumpInfo.landVector = nextPos - endPos;
-  }
-  else if(isDefined(self.enemy)) {
+  } else if(isDefined(self.enemy)) {
     jumpInfo.landVector = self.enemy.origin - endPos;
-  }
-  else {
+  } else {
     jumpInfo.landVector = anglesToForward(self.angles);
   }
 

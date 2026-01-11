@@ -21,8 +21,7 @@ main() {
 
   if(var_1) {
     level.anim_prop_models[var_2]["self.wind"] = % tarp_tattered_thin_02_anim;
-  }
-  else {
+  } else {
     level.anim_prop_models[var_2]["self.wind"] = "tarp_tattered_thin_02_anim";
   }
 }

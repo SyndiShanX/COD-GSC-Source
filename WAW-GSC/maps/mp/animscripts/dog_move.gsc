@@ -70,8 +70,7 @@ moveLoop() {
   while(1) {
     if(self.disableArrivals) {
       self.stopAnimDistSq = 0;
-    }
-    else {
+    } else {
       self.stopAnimDistSq = level.dogStoppingDistSq;
     }
     if(self.a.movement == "run") {

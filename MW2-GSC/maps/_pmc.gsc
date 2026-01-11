@@ -145,8 +145,7 @@ initialize_gametype() {
 
   if(isDefined(level.pmc_enemies_alive)) {
     level.pmc.max_ai_alive = level.pmc_enemies_alive;
-  }
-  else {
+  } else {
     level.pmc.max_ai_alive = MAX_ENEMIES_ALIVE_ELIMINATION;
   }
 
@@ -320,7 +319,7 @@ set_gametype_vars() {
       assertMsg("Error selecting gametype");
   }
 
-    level.pmc.enemies_kills_to_win = level.pmc_enemies;
+  level.pmc.enemies_kills_to_win = level.pmc_enemies;
   assert(level.pmc.enemies_kills_to_win > 0);
 
   if(isDefendMatch()) {
@@ -522,11 +521,11 @@ pick_enemy_spawn_positions() {
 
   if(getdvar("pmc_debug") == "1") {
     foreach(spawner in spawnsToUse) {
-    thread draw_line(spawner.origin, spawner.origin + (0, 0, 250), color_green[0], color_green[1], color_green[2]);
+      thread draw_line(spawner.origin, spawner.origin + (0, 0, 250), color_green[0], color_green[1], color_green[2]);
     }
     if(isDefined(randomized)) {
       foreach(spawner in randomized) {
-      thread draw_line(spawner.origin, spawner.origin + (0, 0, 50), color_red[0], color_red[1], color_red[2]);
+        thread draw_line(spawner.origin, spawner.origin + (0, 0, 50), color_red[0], color_red[1], color_red[2]);
       }
     }
   }
@@ -657,7 +656,7 @@ get_spawnlist_defend() {
   if(getdvar("pmc_debug") == "1") {
     level notify("updated_spawn_list");
     foreach(spawner in spawners) {
-    thread draw_line_until_notify(spawner.origin, spawner.origin + (0, 0, 250), 0, 1, 0, level, "updated_spawn_list");
+      thread draw_line_until_notify(spawner.origin, spawner.origin + (0, 0, 250), 0, 1, 0, level, "updated_spawn_list");
     }
   }
 
@@ -716,9 +715,9 @@ init_enemy_combat_mode(spawnerIndex) {
     return;
   }
 
-    if(self animscripts\combat_utility::isLongRangeAI()) {
-      return;
-    }
+  if(self animscripts\combat_utility::isLongRangeAI()) {
+    return;
+  }
 
   if(self animscripts\combat_utility::isShotgunAI()) {
     return;
@@ -843,11 +842,9 @@ enemy_set_goal_when_player_spotted() {
 set_goal_height() {
   if(isDefined(self.juggernaut)) {
     self.goalheight = DEFAULT_ENEMY_GOAL_HEIGHT_JUGGERNAUT;
-  }
-  else if(self animscripts\combat_utility::isSniper()) {
+  } else if(self animscripts\combat_utility::isSniper()) {
     self.goalheight = DEFAULT_ENEMY_GOAL_HEIGHT_SNIPER;
-  }
-  else {
+  } else {
     self.goalheight = DEFAULT_ENEMY_GOAL_HEIGHT;
   }
 }
@@ -863,8 +860,7 @@ juggernaut_set_goal_when_player_spotted_loop() {
     self set_goal_height();
     if(isDefined(self.enemy)) {
       self setgoalpos(self.enemy.origin);
-    }
-    else {
+    } else {
       self setgoalpos(level.player.origin);
     }
     wait 4;
@@ -877,18 +873,15 @@ enemy_set_goal_when_player_spotted_loop() {
   while(1) {
     if(self.doingAmbush) {
       self.goalradius = 2048;
-    }
-    else if(self animscripts\combat_utility::isSniper()) {
+    } else if(self animscripts\combat_utility::isSniper()) {
       self.goalradius = 5000;
-    }
-    else {
+    } else {
       self.goalradius = randomintrange(1200, 1600);
     }
 
     if(isDefined(self.enemy)) {
       self setgoalpos(self.enemy.origin);
-    }
-    else {
+    } else {
       self setgoalpos(level.player.origin);
     }
 
@@ -925,8 +918,7 @@ enemy_seek_player(modScale) {
     self set_goal_height();
     if(isDefined(self.enemy) && self.enemy.classname == "player") {
       self setgoalpos(self.enemy.origin);
-    }
-    else {
+    } else {
       self setgoalpos(level.players[randomint(level.players.size)].origin);
     }
     wait 45;
@@ -1076,7 +1068,7 @@ setup_objective_entities() {
 
   // Delete unused objective location entities
   foreach(location in objectiveLocations) {
-  location.trigger delete();
+    location.trigger delete();
   }
 }
 
@@ -1117,7 +1109,7 @@ defend_setup_time_hint() {
   hint_defend_setup.string = &"PMC_START_ATTACK_HINT";
   hint_defend_setup.timeout = 5;
   foreach(player in level.players) {
-  player show_hint(hint_defend_setup);
+    player show_hint(hint_defend_setup);
   }
 
   flag_wait("pmc_defend_setup_time_finished");
@@ -1175,9 +1167,9 @@ defend_think(fill_time) {
     } else // no enemies in volume, if players are, empty the bar
     {
       foreach(player in level.players) {
-      if(player istouching(self))
+        if(player istouching(self))
       }
-        enemy_time = enemy_time - .1;
+      enemy_time = enemy_time - .1;
       if(enemy_time < 0) {
         enemy_time = 0;
       }
@@ -1204,15 +1196,15 @@ defend_think(fill_time) {
 
 show_remaining_enemy_count() {
   /*
-	"default"
-"bigfixed"
-"smallfixed"
-"objective"
-"big"
-"small"
-"hudbig"
-"hudsmall"
-*/
+  	"default"
+  "bigfixed"
+  "smallfixed"
+  "objective"
+  "big"
+  "small"
+  "hudbig"
+  "hudsmall"
+  */
 
   /*	level.pmc.hud.remainingEnemyCountHudElem = newHudElem();
   	level.pmc.hud.remainingEnemyCountHudElem.x = -10;
@@ -1247,7 +1239,7 @@ show_remaining_enemy_count() {
     if(isDefined(level.pmc.objective_enemies_index)) {
       // Kill all enemies in the level [ && 1 Remaining ].
     }
-      objective_String_NoMessage(level.pmc.objective_enemies_index, &"PMC_OBJECTIVE_KILL_ENEMIES_REMAINING", level.pmc.enemies_remaining);
+    objective_String_NoMessage(level.pmc.objective_enemies_index, &"PMC_OBJECTIVE_KILL_ENEMIES_REMAINING", level.pmc.enemies_remaining);
 
     if(level.pmc.enemies_remaining <= 0) {
       self.remainingEnemyCountHudelem thread so_hud_pulse_success();
@@ -1443,7 +1435,7 @@ add_player_objectives() {
   } else {
     objective_add_enemies(1);
     foreach(player in level.players) {
-    player thread show_remaining_enemy_count();
+      player thread show_remaining_enemy_count();
     }
   }
 
@@ -1755,8 +1747,7 @@ juggernaut_hunt_immediately_behavior() {
     self set_goal_height();
     if(isDefined(self.enemy)) {
       self setgoalpos(self.enemy.origin);
-    }
-    else {
+    } else {
       enemyPlayer = level.players[randomInt(level.players.size)];
       self setgoalpos(enemyPlayer.origin);
     }
@@ -1836,15 +1827,13 @@ should_spawn_juggernaut() {
   if(flag("staged_pacing_used")) {
     if(level.pmc.send_in_juggernaut) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
   if(randomint(10) > 0) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }

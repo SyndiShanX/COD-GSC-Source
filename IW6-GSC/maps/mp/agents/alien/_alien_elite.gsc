@@ -228,8 +228,7 @@ play_stop_anim(anim_index) {
 
   if(hit_geo(FORWARD_CLEARANCE)) {
     go_hit_geo();
-  }
-  else {
+  } else {
     self maps\mp\agents\_scriptedagents::SafelyPlayAnimNAtRateUntilNotetrack("charge_attack_stop", anim_index, 1.0, "charge_attack_stop", "end", ::chargeEndNotetrackHandler);
   }
 }
@@ -271,8 +270,7 @@ watch_charge_hit(enemy, anim_index) {
 
     if(self.charge_tracking_enemy) {
       lookAheadDistance = Distance(enemy.origin, self.origin);
-    }
-    else {
+    } else {
       lookAheadDistance = shortlookAheadDistance;
     }
 
@@ -514,8 +512,7 @@ deploy_health_regen_shield() {
 play_shield_impact_fx(vPoint, vDir) {
   if(isDefined(vDir)) {
     forward_vector = vDir * -1;
-  }
-  else {
+  } else {
     forward_vector = anglesToForward(self.angles);
   }
 

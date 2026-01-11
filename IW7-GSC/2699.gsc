@@ -107,8 +107,7 @@ giveaward(var_00, var_01, var_02) {
   if(isDefined(var_03)) {
     if(isDefined(var_02)) {
       var_04 = var_02;
-    }
-    else {
+    } else {
       var_04 = scripts\mp\rank::getscoreinfovalue(var_03);
     }
 
@@ -125,8 +124,7 @@ giveaward(var_00, var_01, var_02) {
 
   if(isDefined(self.awardsthislife[var_00])) {
     self.awardsthislife[var_00]++;
-  }
-  else {
+  } else {
     self.awardsthislife[var_00] = 1;
   }
 
@@ -141,7 +139,7 @@ queuemidmatchaward(var_00) {
 
 flushmidmatchawardqueue() {
   foreach(var_01 in self.awardqueue) {
-  givemidmatchaward(var_01);
+    givemidmatchaward(var_01);
   }
 
   self.awardqueue = [];

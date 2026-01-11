@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\math_shared;
-
 #namespace face;
 
 saygenericdialogue(typestring) {
@@ -13,20 +12,20 @@ saygenericdialogue(typestring) {
   }
 
   switch (typestring) {
-    case #"attack":
+    case # "attack":
       importance = 0.5;
       break;
-    case #"swing":
+    case # "swing":
       importance = 0.5;
       typestring = "attack";
       break;
-    case #"flashbang":
+    case # "flashbang":
       importance = 0.7;
       break;
-    case #"pain_small":
+    case # "pain_small":
       importance = 0.4;
       break;
-    case #"pain_bullet":
+    case # "pain_bullet":
       wait 0.01;
       importance = 0.4;
       break;
@@ -161,8 +160,8 @@ playfacethread(facialanim, str_script_alias, importance, notifystring, waitornot
   uniquenotify = notifystring + " " + level.talknotifyseed;
   level.talknotifyseed += 1;
 
-  if(isDefined(level.scr_sound) && isDefined(level.scr_sound[#"generic"])) {
-    str_vox_file = level.scr_sound[#"generic"][str_script_alias];
+  if(isDefined(level.scr_sound) && isDefined(level.scr_sound[# "generic"])) {
+    str_vox_file = level.scr_sound[# "generic"][str_script_alias];
   }
 
   if(!isDefined(str_vox_file) && soundexists(str_script_alias)) {
@@ -187,7 +186,7 @@ playfacethread(facialanim, str_script_alias, importance, notifystring, waitornot
     self thread _temp_dialog(str_script_alias, uniquenotify);
   }
 
-  self waittill(#"death", #"cancel speaking", uniquenotify);
+  self waittill(#"death", # "cancel speaking", uniquenotify);
 
   if(importance == 1) {
     level.numberofimportantpeopletalking -= 1;
@@ -242,19 +241,19 @@ private _temp_dialog(str_line, uniquenotify, b_missing_vo = 0) {
       player openluimenu("TempDialog");
     }
 
-    player setluimenudata(player getluimenu("TempDialog"), #"dialogtext", str_line);
+    player setluimenudata(player getluimenu("TempDialog"), # "dialogtext", str_line);
 
     if(b_missing_vo) {
-      player setluimenudata(player getluimenu("TempDialog"), #"title", "MISSING VO SOUND");
+      player setluimenudata(player getluimenu("TempDialog"), # "title", "MISSING VO SOUND");
       continue;
     }
 
-    player setluimenudata(player getluimenu("TempDialog"), #"title", "TEMP VO");
+    player setluimenudata(player getluimenu("TempDialog"), # "title", "TEMP VO");
   }
 
   n_wait_time = (strtok(str_line, " ").size - 1) / 2;
   n_wait_time = math::clamp(n_wait_time, 2, 5);
-  self waittilltimeout(n_wait_time, #"death", #"cancel speaking");
+  self waittilltimeout(n_wait_time, # "death", # "cancel speaking");
 
   foreach(player in level.players) {
     if(isDefined(player getluimenu("TempDialog"))) {

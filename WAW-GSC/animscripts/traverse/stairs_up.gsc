@@ -12,8 +12,7 @@ main() {
   self traverseMode("nogravity");
   if(self animscripts\utility::weaponAnims() == "none" || self animscripts\utility::weaponAnims() == "pistol") {
     climbAnim = % climbstairs_up;
-  }
-  else {
+  } else {
     climbAnim = % climbstairs_up_armed;
   }
   startnode = self getnegotiationstartnode();

@@ -25,7 +25,6 @@
 #include scripts\zm_common\gametypes\spectating;
 #include scripts\zm_common\util;
 #include scripts\zm_common\zm_utility;
-
 #namespace globallogic_spawn;
 
 autoexec init() {
@@ -90,7 +89,7 @@ mayspawn() {
       gamehasstarted = level.maxplayercount > 1 || !util::isoneround() && !util::isfirstround();
     }
 
-    if(!self.pers[#"lives"] && gamehasstarted) {
+    if(!self.pers[# "lives"] && gamehasstarted) {
       return false;
     } else if(gamehasstarted) {
       if(!level.ingraceperiod && !self.hasspawned && !isbot(self)) {
@@ -104,8 +103,8 @@ mayspawn() {
 
 timeuntilwavespawn(minimumwait) {
   earliestspawntime = gettime() + minimumwait * 1000;
-  lastwavetime = level.lastwave[self.pers[#"team"]];
-  wavedelay = level.wavedelay[self.pers[#"team"]] * 1000;
+  lastwavetime = level.lastwave[self.pers[# "team"]];
+  wavedelay = level.wavedelay[self.pers[# "team"]] * 1000;
 
   if(wavedelay == 0) {
     return 0;
@@ -131,7 +130,7 @@ stoppoisoningandflareonspawn() {
 }
 
 spawnplayerprediction() {
-  self endon(#"disconnect", #"end_respawn", #"game_ended", #"joined_spectators", #"spawned");
+  self endon(#"disconnect", # "end_respawn", # "game_ended", # "joined_spectators", # "spawned");
 
   while(true) {
     wait 0.5;
@@ -165,7 +164,7 @@ givestartloadout() {
 
 spawnplayer() {
   pixbeginevent(#"spawnplayer_preuts");
-  self endon(#"disconnect", #"joined_spectators");
+  self endon(#"disconnect", # "joined_spectators");
   hadspawned = self.hasspawned;
   self player::spawn_player();
 
@@ -218,8 +217,8 @@ spawnplayer() {
     pixbeginevent(#"sound");
     team = self.team;
 
-    if(isDefined(self.pers[#"music"].spawn) && self.pers[#"music"].spawn == 0) {
-      self.pers[#"music"].spawn = 1;
+    if(isDefined(self.pers[# "music"].spawn) && self.pers[# "music"].spawn == 0) {
+      self.pers[# "music"].spawn = 1;
     }
 
     if(level.splitscreen) {
@@ -243,23 +242,23 @@ spawnplayer() {
     pixendevent();
   }
 
-    if(isDefined(self.pers[#"momentum"])) {
-      self.momentum = self.pers[#"momentum"];
-    }
+  if(isDefined(self.pers[# "momentum"])) {
+    self.momentum = self.pers[# "momentum"];
+  }
 
   pixendevent();
   self thread _spawnplayer();
 }
 
 _spawnplayer() {
-  self endon(#"disconnect", #"joined_spectators");
+  self endon(#"disconnect", # "joined_spectators");
   waittillframeend();
   self notify(#"spawned_player");
   self callback::callback(#"on_player_spawned");
 
   print("<dev string:x43>" + self.origin[0] + "<dev string:x48>" + self.origin[1] + "<dev string:x48>" + self.origin[2] + "<dev string:x4c>");
 
-    setdvar(#"scr_selecting_location", "");
+  setdvar(#"scr_selecting_location", "");
   self zm_utility::set_max_health();
 
   if(game.state == "postgame") {
@@ -291,7 +290,7 @@ in_spawnspectator(origin, angles) {
   self.psoffsettime = 0;
   self.friendlydamage = undefined;
 
-  if(self.pers[#"team"] == "spectator") {
+  if(self.pers[# "team"] == "spectator") {
     self.statusicon = "";
   } else {
     self.statusicon = "hud_status_dead";
@@ -309,12 +308,12 @@ in_spawnspectator(origin, angles) {
 
 spectatorthirdpersonness() {
   self notify(#"spectator_thirdperson_thread");
-  self endon(#"disconnect", #"spawned", #"spectator_thirdperson_thread");
+  self endon(#"disconnect", # "spawned", # "spectator_thirdperson_thread");
   self.spectatingthirdperson = 0;
 }
 
 forcespawn(time) {
-  self endon(#"death", #"spawned");
+  self endon(#"death", # "spawned");
 
   if(!isDefined(time)) {
     time = 60;
@@ -326,13 +325,13 @@ forcespawn(time) {
     return;
   }
 
-  if(self.pers[#"team"] == "spectator") {
+  if(self.pers[# "team"] == "spectator") {
     return;
   }
 
-  if(!globallogic_utils::isvalidclass(self.pers[#"class"])) {
-    self.pers[#"class"] = "CLASS_CUSTOM1";
-    self.curclass = self.pers[#"class"];
+  if(!globallogic_utils::isvalidclass(self.pers[# "class"])) {
+    self.pers[# "class"] = "CLASS_CUSTOM1";
+    self.curclass = self.pers[# "class"];
   }
 
   self thread[[level.spawnclient]]();
@@ -343,15 +342,15 @@ kickifdontspawn() {
     return;
   }
 
-    if(self ishost()) {
-      return;
-    }
+  if(self ishost()) {
+    return;
+  }
 
   self kickifidontspawninternal();
 }
 
 kickifidontspawninternal() {
-  self endon(#"death", #"spawned");
+  self endon(#"death", # "spawned");
   waittime = 90;
 
   if(getdvarstring(#"scr_kick_time") != "") {
@@ -380,7 +379,7 @@ kickifidontspawninternal() {
     return;
   }
 
-  if(self.pers[#"team"] == "spectator") {
+  if(self.pers[# "team"] == "spectator") {
     return;
   }
 
@@ -510,7 +509,7 @@ allteamsnearscorelimit() {
   }
 
   foreach(team, _ in level.teams) {
-    if(!(game.stat[#"teamscores"][team] >= level.scorelimit - 1)) {
+    if(!(game.stat[# "teamscores"][team] >= level.scorelimit - 1)) {
       return false;
     }
   }
@@ -539,7 +538,7 @@ shouldshowrespawnmessage() {
 }
 
 default_spawnmessage() {
-  hud_message::setlowermessage(game.strings[#"spawn_next_round"]);
+  hud_message::setlowermessage(game.strings[# "spawn_next_round"]);
 }
 
 showspawnmessage() {
@@ -579,7 +578,7 @@ spawnclient(timealreadypassed) {
 }
 
 waitandspawnclient(timealreadypassed) {
-  self endon(#"disconnect", #"end_respawn");
+  self endon(#"disconnect", # "end_respawn");
   level endon(#"game_ended");
 
   if(!isDefined(timealreadypassed)) {
@@ -605,18 +604,16 @@ waitandspawnclient(timealreadypassed) {
 
   if(timeuntilspawn > 0) {
     if(level.playerqueuedrespawn) {
-      hud_message::setlowermessage(game.strings[#"you_will_spawn"], timeuntilspawn);
+      hud_message::setlowermessage(game.strings[# "you_will_spawn"], timeuntilspawn);
     } else {
-      hud_message::setlowermessage(game.strings[#"waiting_to_spawn"], timeuntilspawn);
+      hud_message::setlowermessage(game.strings[# "waiting_to_spawn"], timeuntilspawn);
     }
 
     if(!spawnedasspectator) {
       spawnorigin = self.origin + (0, 0, 60);
       spawnangles = self.angles;
 
-      if(isDefined(level.useintermissionpointsonwavespawn) && [
-          [level.useintermissionpointsonwavespawn]
-        ]() == 1) {
+      if(isDefined(level.useintermissionpointsonwavespawn) && [[level.useintermissionpointsonwavespawn]]() == 1) {
         spawnpoint = spawnlogic::getrandomintermissionpoint();
 
         if(isDefined(spawnpoint)) {
@@ -636,7 +633,7 @@ waitandspawnclient(timealreadypassed) {
   wavebased = level.waverespawndelay > 0;
 
   if(!level.playerforcerespawn && self.hasspawned && !wavebased && !self.wantsafespawn && !level.playerqueuedrespawn) {
-    hud_message::setlowermessage(game.strings[#"press_to_spawn"]);
+    hud_message::setlowermessage(game.strings[# "press_to_spawn"]);
 
     if(!spawnedasspectator) {
       self thread respawn_asspectator(self.origin + (0, 0, 60), self.angles);
@@ -654,7 +651,7 @@ waitandspawnclient(timealreadypassed) {
 }
 
 waitrespawnorsafespawnbutton() {
-  self endon(#"disconnect", #"end_respawn");
+  self endon(#"disconnect", # "end_respawn");
 
   while(true) {
     if(self usebuttonpressed()) {
@@ -666,7 +663,7 @@ waitrespawnorsafespawnbutton() {
 }
 
 waitinspawnqueue() {
-  self endon(#"disconnect", #"end_respawn");
+  self endon(#"disconnect", # "end_respawn");
 
   if(!level.ingraceperiod && !level.usestartspawns) {
     currentorigin = self.origin;

@@ -25,8 +25,7 @@ main() {
 wl_has_stored_weapondata() {
   if(level.weapon_locker_online) {
     return self has_stored_weapondata(level.weapon_locker_map);
-  }
-  else {
+  } else {
     return isDefined(self.stored_weapon_data);
   }
 }
@@ -34,8 +33,7 @@ wl_has_stored_weapondata() {
 wl_get_stored_weapondata() {
   if(level.weapon_locker_online) {
     return self get_stored_weapondata(level.weapon_locker_map);
-  }
-  else {
+  } else {
     return self.stored_weapon_data;
   }
 }
@@ -43,8 +41,7 @@ wl_get_stored_weapondata() {
 wl_clear_stored_weapondata() {
   if(level.weapon_locker_online) {
     self clear_stored_weapondata(level.weapon_locker_map);
-  }
-  else {
+  } else {
     self.stored_weapon_data = undefined;
   }
 }
@@ -52,8 +49,7 @@ wl_clear_stored_weapondata() {
 wl_set_stored_weapondata(weapondata) {
   if(level.weapon_locker_online) {
     self set_stored_weapondata(weapondata, level.weapon_locker_map);
-  }
-  else {
+  } else {
     self.stored_weapon_data = weapondata;
   }
 }
@@ -64,8 +60,7 @@ triggerweaponslockerwatch() {
 
   if(isDefined(self.script_angles)) {
     unitrigger_stub.angles = self.script_angles;
-  }
-  else {
+  } else {
     unitrigger_stub.angles = self.angles;
   }
 
@@ -73,22 +68,19 @@ triggerweaponslockerwatch() {
 
   if(isDefined(self.script_length)) {
     unitrigger_stub.script_length = self.script_length;
-  }
-  else {
+  } else {
     unitrigger_stub.script_length = 16;
   }
 
   if(isDefined(self.script_width)) {
     unitrigger_stub.script_width = self.script_width;
-  }
-  else {
+  } else {
     unitrigger_stub.script_width = 32;
   }
 
   if(isDefined(self.script_height)) {
     unitrigger_stub.script_height = self.script_height;
-  }
-  else {
+  } else {
     unitrigger_stub.script_height = 64;
   }
 
@@ -124,8 +116,7 @@ triggerweaponslockerisvalidweaponpromptupdate(player, weaponname) {
 
     if(!triggerweaponslockerisvalidweapon(weaponname)) {
       self sethintstring(&"ZOMBIE_WEAPON_LOCKER_DENY");
-    }
-    else {
+    } else {
       self sethintstring(&"ZOMBIE_WEAPON_LOCKER_STORE");
     }
   } else {
@@ -178,8 +169,7 @@ triggerweaponslockerthink() {
 
       if(isDefined(primaries[0])) {
         player switchtoweapon(primaries[0]);
-      }
-      else {
+      } else {
         player maps\mp\zombies\_zm_weapons::give_fallback_weapon();
       }
 

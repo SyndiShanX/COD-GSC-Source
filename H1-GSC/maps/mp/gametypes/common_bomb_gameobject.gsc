@@ -49,7 +49,7 @@ createbombcarryobject(var_0, var_1, var_2, var_3) {
   var_4.canuseobject = ::canusebomb;
 
   foreach(var_6 in var_3) {
-  var_6 notsolid();
+    var_6 notsolid();
   }
 
   return var_4;
@@ -81,8 +81,7 @@ oncarrybombpickup(var_0, var_1) {
 
   if(isDefined(var_1)) {
     maps\mp\_utility::playsoundonplayers(game["bomb_recovered_sound"], var_1);
-  }
-  else {
+  } else {
     maps\mp\_utility::playsoundonplayers(game["bomb_recovered_sound"]);
   }
 

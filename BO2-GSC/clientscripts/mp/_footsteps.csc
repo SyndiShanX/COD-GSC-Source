@@ -21,15 +21,13 @@ init() {
       for(index = 0; index < 4; index++) {
         if(index < 2) {
           firstperson = 0;
-        }
-        else {
+        } else {
           firstperson = 1;
         }
 
         if(index % 2 == 0) {
           islouder = 0;
-        }
-        else {
+        } else {
           islouder = 1;
         }
 
@@ -87,8 +85,7 @@ playerland(client_num, player, surfacetype, firstperson, quiet, damageplayer, is
   if(damageplayer) {
     if(isDefined(level.playerfalldamagesound)) {
       player[[level.playerfalldamagesound]](client_num, firstperson);
-    }
-    else {
+    } else {
       sound_alias = "fly_land_damage_npc";
 
       if(firstperson) {
@@ -131,8 +128,7 @@ buildandcachesoundalias(movementtype, surfacetype, firstperson, islouder) {
 
   if(firstperson) {
     sound_alias = sound_alias + "_plr_";
-  }
-  else {
+  } else {
     sound_alias = sound_alias + "_npc_";
   }
 

@@ -31,15 +31,13 @@ init(notifyname, origin, angles, theanim, animmode, root) {
 
   if(isDefined(animmode)) {
     self.codescripted["animMode"] = animmode;
-  }
-  else {
+  } else {
     self.codescripted["animMode"] = "normal";
   }
 
   if(isDefined(root)) {
     self.codescripted["root"] = root;
-  }
-  else {
+  } else {
     self.codescripted["root"] = % root;
   }
 }

@@ -17,8 +17,7 @@ main() {
   }
   if(IsPlayer(self.enemy)) {
     self meleeBiteAttackPlayer(self.enemy);
-  }
-  else {
+  } else {
     self meleeStruggleVsAI();
   }
 }
@@ -91,8 +90,7 @@ attackMiss() {
       self thread attackMissTrackTargetThread();
       if((dirToEnemy[0] * forward[1] - dirToEnemy[1] * forward[0]) > 0) {
         self setflaggedanimrestart("miss_anim", % german_shepherd_attack_player_miss_turnR, 1, 0, 1);
-      }
-      else {
+      } else {
         self setflaggedanimrestart("miss_anim", % german_shepherd_attack_player_miss_turnL, 1, 0, 1);
       }
     }
@@ -145,8 +143,7 @@ removeSafetyHealth(player) {
   healthFrac = player getnormalhealth();
   if(healthFrac > 0.25) {
     player setnormalhealth(healthFrac - 0.25);
-  }
-  else {
+  } else {
     player setnormalhealth(0.01);
   }
 }

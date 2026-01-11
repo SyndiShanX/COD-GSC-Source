@@ -98,7 +98,7 @@ cornered_intro_pre_load() {
   level.large_outside_lights_off = getEntArray("large_outside_lights_off", "targetname");
 
   foreach(var_1 in level.large_outside_lights_off) {
-  var_1 hide();
+    var_1 hide();
   }
 }
 
@@ -157,8 +157,7 @@ begin_zipline() {
 
   if(maps\cornered_code::is_e3()) {
     thread maps\_utility::autosave_by_name_silent("zipline");
-  }
-  else {
+  } else {
     thread maps\_utility::autosave_tactical();
   }
 }
@@ -211,8 +210,7 @@ intro_handler() {
 
   if(getdvar("intro_mask") == "0") {
     wait 8.5;
-  }
-  else {
+  } else {
     wait 11.5;
   }
 
@@ -371,8 +369,7 @@ merrick_handle_name_when_scanning() {
 
     if(var_0 && var_1) {
       self.name = "";
-    }
-    else {
+    } else {
       self.name = "Keegan";
     }
 
@@ -422,8 +419,7 @@ intro_rorke() {
   if(!maps\cornered_code::is_e3()) {
     if(getdvar("intro_mask") == "0") {
       level.intro_struct maps\_anim::anim_first_frame_solo(self, "cornered_intro_rorke_2_end");
-    }
-    else {
+    } else {
       level.intro_struct thread maps\_anim::anim_loop_solo(self, "cornered_level_intro_merrick_loop", "stop_loop");
     }
 
@@ -755,11 +751,11 @@ intro_enemy_scene() {
   var_5[1] = level.intro_enemy8;
 
   foreach(var_7 in var_4) {
-  level.intro_roof_node thread maps\_anim::anim_loop_solo(var_7, "cornered_roof_arrival_wait", "stop_loop");
+    level.intro_roof_node thread maps\_anim::anim_loop_solo(var_7, "cornered_roof_arrival_wait", "stop_loop");
   }
 
   foreach(var_7 in var_5) {
-  level.intro_roof_node thread maps\_anim::anim_loop_solo(var_7, "cornered_roof_arrival_wait", "stop_loop_guys_loop");
+    level.intro_roof_node thread maps\_anim::anim_loop_solo(var_7, "cornered_roof_arrival_wait", "stop_loop_guys_loop");
   }
 
   common_scripts\utility::flag_wait_all("intro_heli_landed", "looking_at_roof");
@@ -885,15 +881,13 @@ player_looking_at_hvt() {
 
   if(level.binoc_target == level.vip_heli) {
     var_0 = var_0 + (0, 0, -50);
-  }
-  else {
+  } else {
     var_1 = 1000;
   }
 
   if(self.current_binocular_zoom_level == 1) {
     return self worldpointinreticle_circle(var_0, 2, var_1);
-  }
-  else {
+  } else {
     return self worldpointinreticle_circle(var_0, 65, 100);
   }
 }
@@ -1190,8 +1184,7 @@ intro_save_check(var_0, var_1) {
     if(!common_scripts\utility::flag("off_start_building")) {
       if(maps\cornered_code::is_e3()) {
         thread maps\_utility::autosave_by_name_silent(var_0);
-      }
-      else {
+      } else {
         thread maps\_utility::autosave_by_name(var_0);
       }
 
@@ -1554,7 +1547,7 @@ zipline_rorke_anims() {
 
   if(common_scripts\utility::flag("player_is_starting_zipline")) {
     foreach(var_2 in var_0) {
-    var_2 stopanimscripted();
+      var_2 stopanimscripted();
     }
 
     if(isDefined(level.zipline_trolley_rorke.is_out)) {} else
@@ -1577,8 +1570,7 @@ zipline_rorke_anims() {
 zipline_rope_swap_ally(var_0) {
   if(var_0.animname == "rorke") {
     level.detach_rope_rorke delete();
-  }
-  else {
+  } else {
     level.detach_rope_baker delete();
   }
 
@@ -1632,7 +1624,7 @@ zipline_baker_anims() {
 
   if(common_scripts\utility::flag("player_is_starting_zipline")) {
     foreach(var_2 in var_0) {
-    var_2 stopanimscripted();
+      var_2 stopanimscripted();
     }
 
     if(isDefined(level.zipline_trolley_baker.is_out)) {} else
@@ -1664,11 +1656,9 @@ setup_launcher_baker() {
 front_left_anchor_impact(var_0) {
   if(var_0.targetname == "zipline_launcher_rorke") {
     common_scripts\utility::exploder("launcher_foot_R1");
-  }
-  else if(var_0.targetname == "zipline_launcher_baker") {
+  } else if(var_0.targetname == "zipline_launcher_baker") {
     common_scripts\utility::exploder("launcher_foot_L1");
-  }
-  else if(var_0.targetname == "zipline_launcher_player") {
+  } else if(var_0.targetname == "zipline_launcher_player") {
     common_scripts\utility::exploder("launcher_foot_C1");
   }
 }
@@ -1676,11 +1666,9 @@ front_left_anchor_impact(var_0) {
 front_right_anchor_impact(var_0) {
   if(var_0.targetname == "zipline_launcher_rorke") {
     common_scripts\utility::exploder("launcher_foot_R2");
-  }
-  else if(var_0.targetname == "zipline_launcher_baker") {
+  } else if(var_0.targetname == "zipline_launcher_baker") {
     common_scripts\utility::exploder("launcher_foot_L2");
-  }
-  else if(self.targetname == "zipline_launcher_player") {
+  } else if(self.targetname == "zipline_launcher_player") {
     common_scripts\utility::exploder("launcher_foot_C2");
   }
 }
@@ -1688,11 +1676,9 @@ front_right_anchor_impact(var_0) {
 rear_left_anchor_impact(var_0) {
   if(var_0.targetname == "zipline_launcher_rorke") {
     common_scripts\utility::exploder("launcher_foot_R3");
-  }
-  else if(var_0.targetname == "zipline_launcher_baker") {
+  } else if(var_0.targetname == "zipline_launcher_baker") {
     common_scripts\utility::exploder("launcher_foot_L3");
-  }
-  else if(self.targetname == "zipline_launcher_player") {
+  } else if(self.targetname == "zipline_launcher_player") {
     common_scripts\utility::exploder("launcher_foot_C3");
   }
 }
@@ -1700,11 +1686,9 @@ rear_left_anchor_impact(var_0) {
 rear_right_anchor_impact(var_0) {
   if(var_0.targetname == "zipline_launcher_rorke") {
     common_scripts\utility::exploder("launcher_foot_R4");
-  }
-  else if(var_0.targetname == "zipline_launcher_baker") {
+  } else if(var_0.targetname == "zipline_launcher_baker") {
     common_scripts\utility::exploder("launcher_foot_L4");
-  }
-  else if(var_0.targetname == "zipline_launcher_player") {
+  } else if(var_0.targetname == "zipline_launcher_player") {
     common_scripts\utility::exploder("launcher_foot_C4");
   }
 }
@@ -1712,11 +1696,9 @@ rear_right_anchor_impact(var_0) {
 anchor_line_impact(var_0) {
   if(var_0.targetname == "zipline_launcher_rorke") {
     common_scripts\utility::exploder("launcher_anchor_R");
-  }
-  else if(var_0.targetname == "zipline_launcher_baker") {
+  } else if(var_0.targetname == "zipline_launcher_baker") {
     common_scripts\utility::exploder("launcher_anchor_L");
-  }
-  else if(var_0.targetname == "zipline_launcher_player") {
+  } else if(var_0.targetname == "zipline_launcher_player") {
     common_scripts\utility::exploder("launcher_anchor_C");
   }
 }
@@ -1781,8 +1763,7 @@ spawn_trolley_ally(var_0) {
 delete_trolley_ally(var_0) {
   if(var_0.animname == "rorke") {
     level.zipline_trolley_rorke delete();
-  }
-  else {
+  } else {
     level.zipline_trolley_baker delete();
   }
 }
@@ -1790,8 +1771,7 @@ delete_trolley_ally(var_0) {
 detach_rope_ally(var_0) {
   if(var_0.animname == "rorke") {
     level.detach_rope_rorke show();
-  }
-  else {
+  } else {
     level.detach_rope_baker show();
   }
 }
@@ -1805,8 +1785,7 @@ zipline_player_anims() {
   if(!maps\cornered_code::is_e3()) {
     if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
       var_0 sethintstring(&"CORNERED_START_ZIPLINE_CONSOLE");
-    }
-    else {
+    } else {
       var_0 sethintstring(&"CORNERED_START_ZIPLINE");
     }
   }

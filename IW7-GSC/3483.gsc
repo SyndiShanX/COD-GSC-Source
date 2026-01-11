@@ -299,8 +299,7 @@ func_A72D(var_00) {
 
       if(var_04 > 0) {
         var_05 = 2;
-      }
-      else if(var_04 < 0) {
+      } else if(var_04 < 0) {
         var_05 = 3;
       }
 

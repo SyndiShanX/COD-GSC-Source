@@ -316,8 +316,7 @@ horse_death_nicaragua() {
     if(self.current_anim_speed == level.idle) {
       if(randomintrange(1, 100) < 50) {
         death_anim = level.horse_deaths[2].animation;
-      }
-      else {
+      } else {
         death_anim = level.horse_deaths[3].animation;
       }
     } else if(randomintrange(1, 100) < 50)
@@ -358,7 +357,7 @@ stables_trapped_horses() {
   a_horses_trapped = maps\_vehicle::spawn_vehicles_from_targetname("trapped_horse");
 
   foreach(vh_horse in a_horses_trapped) {
-  vh_horse thread trapped_horse_update();
+    vh_horse thread trapped_horse_update();
   }
 
   vh_horse = maps\_vehicle::spawn_vehicle_from_targetname("stables_charging_horse3_spawner");

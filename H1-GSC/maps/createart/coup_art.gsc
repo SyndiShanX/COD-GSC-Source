@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\coup_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\coup_fog::main();
   }
 }

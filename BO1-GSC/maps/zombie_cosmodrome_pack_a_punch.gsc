@@ -226,8 +226,7 @@ piece_crash_down(num) {
   if(isDefined(num)) {
     if(num == 0) {
       self playSound("zmb_rocket_top_crash");
-    }
-    else if(num == 1) {
+    } else if(num == 1) {
       self playSound("zmb_rocket_bottom_crash");
     }
   }

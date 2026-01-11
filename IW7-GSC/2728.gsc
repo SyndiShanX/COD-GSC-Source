@@ -210,7 +210,7 @@ preloadfinalkillcam() {
 
   if(isDefined(var_00)) {
     foreach(var_02 in level.players) {
-    var_02 gettweakablelastvalue(var_00);
+      var_02 gettweakablelastvalue(var_00);
     }
   }
 }
@@ -263,8 +263,7 @@ func_5853() {
   if(isDefined(var_03)) {
     if(level.teambased) {
       var_23 = var_3.team;
-    }
-    else {
+    } else {
       var_23 = var_3.guid;
     }
 
@@ -416,8 +415,7 @@ func_10266(var_00) {
 
     if(var_01 == "killcam_death_done_waiting") {
       return 0;
-    }
-    else {
+    } else {
       return 1;
     }
   }

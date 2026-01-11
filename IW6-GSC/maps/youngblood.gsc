@@ -418,7 +418,7 @@ youngblood_script_setup() {
   var_0 = getEntArray("fxchunknames", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 hide();
+    var_2 hide();
   }
 
   var_4 = common_scripts\utility::get_target_ent("campfire_player_blocker");

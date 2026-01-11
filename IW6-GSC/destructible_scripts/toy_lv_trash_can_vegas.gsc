@@ -112,8 +112,7 @@ interactive_fall_and_break(var_0) {
 
     if(isDefined(var_18)) {
       var_19 = fandb_findpartindex(var_0.type, var_18);
-    }
-    else {
+    } else {
       var_19 = 0;
     }
 
@@ -129,16 +128,14 @@ destructible_modifydamagetype(var_0) {
 destructible_modifydamageamount(var_0, var_1, var_2) {
   if(common_scripts\utility::issp()) {
     var_0 = var_0 * 0.5;
-  }
-  else {
+  } else {
     var_0 = var_0 * 1.0;
   }
 
   if(common_scripts\_destructible::is_shotgun_damage(var_2, var_1)) {
     if(common_scripts\utility::issp()) {
       var_0 = var_0 * 8.0;
-    }
-    else {
+    } else {
       var_0 = var_0 * 4.0;
     }
   }
@@ -146,8 +143,7 @@ destructible_modifydamageamount(var_0, var_1, var_2) {
   if(var_1 == "splash") {
     if(common_scripts\utility::issp()) {
       var_0 = var_0 * 9.0;
-    }
-    else {
+    } else {
       var_0 = var_0 * 13.0;
     }
   }
@@ -174,7 +170,7 @@ fandb_dodamage(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
     while(var_13 > 0 && isDefined(var_12.states[var_0.partstates[var_11]])) {
       if(isDefined(var_12.states[var_0.partstates[var_11]].damagecallback)) {
         foreach(var_15 in var_12.states[var_0.partstates[var_11]].damagecallback) {
-        var_0[[var_15]](var_2, var_3, var_4, var_5, var_6);
+          var_0[[var_15]](var_2, var_3, var_4, var_5, var_6);
         }
       }
 
@@ -228,8 +224,7 @@ fandb_hideshowtag(var_0, var_1, var_2) {
     if(isDefined(var_0) && var_0) {
       if(isDefined(var_2)) {
         self showpart(var_1, var_2);
-      }
-      else {
+      } else {
         self showpart(var_1);
       }
     } else if(isDefined(var_2))
@@ -248,15 +243,13 @@ fandb_throwphysicsmodel(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(isDefined(var_5)) {
       var_8 = var_5;
-    }
-    else {
+    } else {
       var_8 = var_7.origin;
     }
 
     if((!isDefined(var_6) || !isDefined(var_4)) && isDefined(var_3)) {
       var_9 = var_3;
-    }
-    else {
+    } else {
       var_9 = (0, 0, 0);
     }
 
@@ -316,8 +309,7 @@ serverphysicsobj(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_4 != "splash") {
     var_0 = var_0 * 10;
-  }
-  else {
+  } else {
     var_0 = var_0 * 2;
   }
 

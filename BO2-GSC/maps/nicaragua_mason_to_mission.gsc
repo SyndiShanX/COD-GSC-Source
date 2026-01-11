@@ -138,8 +138,7 @@ bruteforce_rumble_med(m_body) {
   level.player rumble_loop(1, 0.25, "damage_heavy");
 }
 
-bruteforce_mortar_pickup(m_body) {
-}
+bruteforce_mortar_pickup(m_body) {}
 
 mason_mission_setup() {
   add_spawn_function_group("mason_mission_cartel_shotgunners", "script_noteworthy", ::make_ai_aggressive);
@@ -151,7 +150,7 @@ mason_mission_setup() {
   a_nd_archway = getnodearray("mission_archway_cover", "script_noteworthy");
 
   foreach(node in a_nd_archway) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 
   a_e_entrance_clip = getEntArray("mission_entrance_clip", "targetname");
@@ -164,7 +163,7 @@ mason_mission_setup() {
   a_nd_nodes = getnodearray("mission_lockdown_nodes", "script_noteworthy");
 
   foreach(node in a_nd_nodes) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 
   m_clip = getent("traversal_to_other_side_clip", "targetname");
@@ -197,7 +196,7 @@ mason_mission_precourtyard() {
   e_goalvolume = getent("mason_mission_precourtyard_goalvolume", "targetname");
 
   foreach(guy in a_ai_cartel) {
-  guy setgoalvolumeauto(e_goalvolume);
+    guy setgoalvolumeauto(e_goalvolume);
   }
 
   a_ai_cartel[a_ai_cartel.size] = ai_sniper;
@@ -279,8 +278,7 @@ sniper_intro_kill() {
 
   if(isDefined(ai_redshirt)) {
     ai_redshirt endon("death");
-  }
-  else {
+  } else {
     return;
   }
 
@@ -334,7 +332,7 @@ arch_impacts_ground(e_chunks) {
   a_s_structs = getstructarray("archway_fxanim_rubble_spots", "targetname");
 
   foreach(struct in a_s_structs) {
-  radiusdamage(struct.origin, 56, 100, 100);
+    radiusdamage(struct.origin, 56, 100, 100);
   }
 
   e_archway_collision = getent("arch_rubble_collision", "targetname");
@@ -343,7 +341,7 @@ arch_impacts_ground(e_chunks) {
   a_nd_archway = getnodearray("mission_archway_cover", "script_noteworthy");
 
   foreach(node in a_nd_archway) {
-  setenablenode(node, 1);
+    setenablenode(node, 1);
   }
 }
 
@@ -365,7 +363,7 @@ precourtyard_pdf_reinforcements() {
   a_sp_spawn = get_ent_array("mason_pdf_precourtyard_reinforcements", "targetname");
 
   foreach(spawner in a_sp_spawn) {
-  spawner add_spawn_function(::mission_pdf_reinforcements_sprint);
+    spawner add_spawn_function(::mission_pdf_reinforcements_sprint);
   }
 
   spawn_manager_enable("mason_pdf_precourtyard_reinforcements_sm");
@@ -388,13 +386,13 @@ precourtyard_spawn_manager(a_enemies) {
 
 mission_precourtyard_spawnmanager_goalvolume(a_spawners) {
   foreach(spawner in a_spawners) {
-  spawner.script_goalvolume = "mason_mission_precourtyard_goalvolume";
+    spawner.script_goalvolume = "mason_mission_precourtyard_goalvolume";
   }
 
   flag_wait("begin_mason_mission_courtyard");
 
   foreach(spawner in a_spawners) {
-  spawner.script_goalvolume = "mason_mission_precourtyard_goalvolume";
+    spawner.script_goalvolume = "mason_mission_precourtyard_goalvolume";
   }
 }
 
@@ -424,7 +422,7 @@ friendlies_move_into_courtyard() {
   a_sp_pdf_reinforcements = getEntArray("mason_pdf_precourtyard_reinforcements", "targetname");
 
   foreach(spawner in a_sp_pdf_reinforcements) {
-  spawner set_force_color_spawner("g");
+    spawner set_force_color_spawner("g");
   }
 
   flag_waitopen("mason_mission_gunner_alive");
@@ -455,7 +453,7 @@ check_precourtyard_balcony_guys_kill() {
 
   if(a_ai.size > 0) {
     foreach(guy in a_ai) {
-    guy timebomb(3.0, 5.0);
+      guy timebomb(3.0, 5.0);
     }
   }
 }
@@ -641,7 +639,7 @@ mission_pdf_reinforcements() {
   a_sp_spawn = get_ent_array("mason_pdf_mission_reinforcements", "targetname");
 
   foreach(spawner in a_sp_spawn) {
-  spawner add_spawn_function(::mission_pdf_reinforcements_sprint);
+    spawner add_spawn_function(::mission_pdf_reinforcements_sprint);
   }
 
   spawn_manager_enable("mason_pdf_mission_reinforcements_sm");
@@ -678,8 +676,7 @@ check_courtyard_almost_clear(a_ai_enemies) {
 
   if(flag("mason_in_snipertower")) {
     waittill_dead(a_ai_enemies, a_ai_enemies.size - 5);
-  }
-  else {
+  } else {
     waittill_dead(a_ai_enemies, a_ai_enemies.size - 2);
   }
 
@@ -713,8 +710,7 @@ send_to_middle_of_courtyard(e_goalvolume) {
   if(isDefined(self.script_noteworthy)) {
     if(issubstr(self.script_noteworthy, "balcony") || issubstr(self.script_noteworthy, "turret")) {
       return;
-    }
-    else if(issubstr(self.script_noteworthy, "sniper")) {
+    } else if(issubstr(self.script_noteworthy, "sniper")) {
       self thread timebomb(3.0, 5.0);
       return;
     }
@@ -896,13 +892,13 @@ mission_lockdown() {
   a_e_entrance_clip = getEntArray("mission_entrance_clip", "targetname");
 
   foreach(clip in a_e_entrance_clip) {
-  clip trigger_on();
+    clip trigger_on();
   }
 
   a_nd_nodes = getnodearray("mission_lockdown_nodes", "script_noteworthy");
 
   foreach(node in a_nd_nodes) {
-  setenablenode(node, 1);
+    setenablenode(node, 1);
   }
 
   sp_lockdown = getent("mason_mission_lockdown_pdf", "targetname");
@@ -928,8 +924,7 @@ mason_mission_vo() {
 
   if(is_mature()) {
     level.woods queue_dialog("wood_let_s_fucking_go_0", 1, undefined, "begin_mason_mission_courtyard");
-  }
-  else {
+  } else {
     level.woods queue_dialog("wood_let_s_go_0", 1, undefined, "begin_mason_mission_courtyard");
   }
 
@@ -976,7 +971,7 @@ mason_mission_cleanup() {
   a_ai_enemies = getaiarray("axis");
 
   foreach(guy in a_ai_enemies) {
-  guy bloody_death();
+    guy bloody_death();
   }
 
   level waittill("mason_entered_bunker");

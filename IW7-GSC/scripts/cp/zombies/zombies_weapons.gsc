@@ -113,9 +113,7 @@ special_weapon_logic(param_00, param_01, param_02, param_03, param_04, param_05,
 
     if(self.health - param_02 < 1) {
       if(isDefined(level.medusa_check_func)) {
-        var_10 = [
-          [level.medusa_check_func]
-        ](self);
+        var_10 = [[level.medusa_check_func]](self);
         if(isDefined(var_10)) {
           self.nocorpse = 1;
           self.near_medusa = var_10;
@@ -156,9 +154,7 @@ special_weapon_logic(param_00, param_01, param_02, param_03, param_04, param_05,
       }
 
       if(param_01 scripts\cp\utility::has_zombie_perk("perk_machine_change")) {
-        [
-          [level.change_chew_explosion_func]
-        ](param_01, param_06, param_02, param_04, param_05, param_08);
+        [[level.change_chew_explosion_func]](param_01, param_06, param_02, param_04, param_05, param_08);
         return;
       }
 

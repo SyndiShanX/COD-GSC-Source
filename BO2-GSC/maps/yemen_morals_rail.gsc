@@ -371,11 +371,9 @@ fire_rpgs_from_structs(str_struct, v_target, n_min, n_max) {
   foreach(s_rpg in a_rpgs) {
     if(!isDefined(s_rpg.script_noteworthy)) {
       v_target = _get_target_position();
-    }
-    else if(s_rpg.script_noteworthy == "player") {
+    } else if(s_rpg.script_noteworthy == "player") {
       v_target = _get_target_position();
-    }
-    else {
+    } else {
       e_target_ent = getstruct(s_rpg.script_notewothy, "targetname");
       v_target = e_target_ent.origin;
     }
@@ -388,8 +386,7 @@ fire_rpgs_from_structs(str_struct, v_target, n_min, n_max) {
 _get_custom_wait(n_min, n_max) {
   if(isDefined(n_min) && isDefined(n_max)) {
     n_wait = randomfloatrange(n_min, n_max);
-  }
-  else {
+  } else {
     if(isDefined(n_min)) {
       n_wait = n_min;
     }

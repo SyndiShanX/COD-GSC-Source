@@ -192,8 +192,7 @@ onPlayerSpawned() {
 
   if(self.team == game["attackers"]) {
     self leaderDialogOnPlayer("offense_obj", "introboost");
-  }
-  else {
+  } else {
     self leaderDialogOnPlayer("defense_obj", "introboost");
   }
 }
@@ -215,17 +214,17 @@ onRoundSwitch() {
   switch (switchType) {
     case "halftime":
       foreach(player in level.players) {
-      player leaderDialogOnPlayer("halftime");
+        player leaderDialogOnPlayer("halftime");
       }
       break;
     case "overtime":
       foreach(player in level.players) {
-      player leaderDialogOnPlayer("overtime");
+        player leaderDialogOnPlayer("overtime");
       }
       break;
     default:
       foreach(player in level.players) {
-      player leaderDialogOnPlayer("side_switch");
+        player leaderDialogOnPlayer("side_switch");
       }
       break;
   }
@@ -240,8 +239,7 @@ onGameEnded() {
   if(isDefined(level.nukeDetonated)) {
     if(!level.splitScreen) {
       playSoundOnPlayers(game["music"]["nuke_music"]);
-    }
-    else {
+    } else {
       level.players[0] playLocalSound(game["music"]["nuke_music"]);
     }
 
@@ -252,11 +250,9 @@ onGameEnded() {
     if(level.splitscreen) {
       if(winner == "allies") {
         playSoundOnPlayers(game["music"]["victory_allies"], "allies");
-      }
-      else if(winner == "axis") {
+      } else if(winner == "axis") {
         playSoundOnPlayers(game["music"]["victory_axis"], "axis");
-      }
-      else {
+      } else {
         playSoundOnPlayers(game["music"]["nuke_music"]);
       }
     } else {
@@ -274,11 +270,9 @@ onGameEnded() {
     foreach(player in level.players) {
       if(player.pers["team"] != "allies" && player.pers["team"] != "axis") {
         player playLocalSound(game["music"]["nuke_music"]);
-      }
-      else if(isDefined(winner) && player == winner) {
+      } else if(isDefined(winner) && player == winner) {
         player playLocalSound(game["music"]["victory_" + player.pers["team"]]);
-      }
-      else if(!level.splitScreen) {
+      } else if(!level.splitScreen) {
         player playLocalSound(game["music"]["defeat_" + player.pers["team"]]);
       }
     }

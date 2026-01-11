@@ -12,7 +12,7 @@ autoexec _init_turrets() {
   a_turrets = getEntArray("misc_turret", "classname");
 
   foreach(e_turret in a_turrets) {
-  e_turret thread _auto_init_misc_turret();
+    e_turret thread _auto_init_misc_turret();
   }
 }
 
@@ -37,8 +37,7 @@ _auto_init_misc_turret() {
 get_turret_weapon_name(n_index) {
   if(isDefined(self.classname) && self.classname == "script_vehicle") {
     str_weapon = self seatgetweapon(n_index);
-  }
-  else {
+  } else {
     str_weapon = self.weaponinfo;
   }
 
@@ -177,8 +176,7 @@ is_turret_enabled(n_index) {
 does_turret_need_user(n_index) {
   if(isDefined(self.classname) && self.classname == "script_vehicle") {
     return isDefined(_get_turret_data(n_index).b_needs_user) && _get_turret_data(n_index).b_needs_user;
-  }
-  else {
+  } else {
     return isDefined(self.node);
   }
 }
@@ -205,8 +203,7 @@ get_turret_user(n_index) {
 
     if(isplayer(e_user)) {
       ai_current_user = e_user;
-    }
-    else {
+    } else {
       e_user = _get_turret_data(n_index).ai_user;
 
       if(isalive(e_user)) {
@@ -292,8 +289,7 @@ _use_turret(ai_user, b_stay_on, n_index, b_teleport) {
 
   if(isDefined(self.classname) && self.classname == "script_vehicle") {
     return false;
-  }
-  else {
+  } else {
     assert(isDefined(self.node), "Turret does not have node at " + self.origin);
     ai_user._turret_stay_on = is_true(b_stay_on);
     self setturretignoregoals(ai_user._turret_stay_on);
@@ -318,8 +314,7 @@ _use_turret(ai_user, b_stay_on, n_index, b_teleport) {
 
       if(b_teleport) {
         ai_user forceteleport(self.node.origin, self.node.angles);
-      }
-      else {
+      } else {
         ai_user force_goal(self.node, 16);
       }
 
@@ -373,15 +368,13 @@ _animscripts_init(ai_user) {
 }
 
 stop_use_turret() {
-  if(isDefined(self.classname) && self.classname == "script_vehicle") {
-  } else {
+  if(isDefined(self.classname) && self.classname == "script_vehicle") {} else {
     e_turret = self getturret();
 
     if(isDefined(e_turret)) {
       if(isplayer(self)) {
         self stopusingturret();
-      }
-      else if(isalive(self)) {
+      } else if(isalive(self)) {
         self stopuseturret();
       }
 
@@ -408,16 +401,14 @@ set_turret_on_target_angle(n_angle, n_index) {
   if(!isDefined(n_angle)) {
     if(s_turret.str_guidance_type != "none") {
       n_angle = 10;
-    }
-    else {
+    } else {
       n_angle = 2;
     }
   }
 
   if(n_index > 0) {
     self setontargetangle(n_angle, n_index - 1);
-  }
-  else {
+  } else {
     self setontargetangle(n_angle);
   }
 }
@@ -432,16 +423,14 @@ set_turret_target(e_target, v_offset, n_index) {
   if(!(isDefined(self.classname) && self.classname == "script_vehicle")) {
     if(isDefined(s_turret.ai_user)) {
       self setmode("manual_ai");
-    }
-    else {
+    } else {
       self setmode("manual");
     }
   }
 
   if(!isDefined(n_index) || n_index == 0) {
     self settargetentity(e_target, v_offset);
-  }
-  else {
+  } else {
     self settargetentity(e_target, v_offset, n_index - 1);
   }
 
@@ -456,8 +445,7 @@ _get_default_target_offset(e_target, n_index) {
     if(isDefined(e_target)) {
       if(isplayer(e_target)) {
         z_offset = randomintrange(40, 50);
-      }
-      else if(!isDefined(e_target.type) && !isDefined("human") || isDefined(e_target.type) && isDefined("human") && e_target.type == "human") {
+      } else if(!isDefined(e_target.type) && !isDefined("human") || isDefined(e_target.type) && isDefined("human") && e_target.type == "human") {
         z_offset = randomintrange(20, 60);
       }
 
@@ -502,8 +490,7 @@ clear_turret_target(n_index) {
   if(isDefined(self.classname) && self.classname == "script_vehicle") {
     if(!isDefined(n_index) || n_index == 0) {
       self clearturrettarget();
-    }
-    else {
+    } else {
       self cleargunnertarget(n_index - 1);
     }
   } else
@@ -534,8 +521,7 @@ fire_turret(n_index) {
     if(n_index == 0) {
       if(isDefined(s_turret.e_target)) {
         self fireweapon(s_turret.e_target);
-      }
-      else {
+      } else {
         self fireweapon();
       }
     } else {
@@ -580,8 +566,7 @@ fire_turret_for_time(n_time, n_index) {
 
   if(n_time < 0) {
     b_fire_forever = 1;
-  }
-  else {
+  } else {
     n_fire_time = weaponfiretime(get_turret_weapon_name(n_index));
     assert(n_time >= n_fire_time, "Fire time (" + n_time + ") must be greater than the weapon's fire time. weapon fire time = " + n_fire_time);
 
@@ -626,8 +611,7 @@ _shoot_turret_at_target(e_target, n_time, v_offset, n_index, b_just_once) {
 
   if(b_just_once) {
     fire_turret(n_index);
-  }
-  else {
+  } else {
     fire_turret_for_time(n_time, n_index);
   }
 }
@@ -684,8 +668,7 @@ pause_turret(time, n_index) {
 
   if(isDefined(s_turret.pause)) {
     s_turret.pause_time = s_turret.pause_time + time;
-  }
-  else {
+  } else {
     s_turret.pause = 1;
     s_turret.pause_time = time;
     stop_turret(n_index);
@@ -752,8 +735,7 @@ _turret_think(n_index, v_offset) {
 
       if(isDefined(s_turret.occupy_no_target_time)) {
         occupy_time = s_turret.occupy_no_target_time;
-      }
-      else {
+      } else {
         occupy_time = 3600;
       }
 
@@ -769,8 +751,7 @@ _turret_think(n_index, v_offset) {
 _did_turret_lose_target(n_time_now) {
   if(isDefined(self.b_target_out_of_range) && self.b_target_out_of_range) {
     return true;
-  }
-  else if(isDefined(self.n_time_lose_sight)) {
+  } else if(isDefined(self.n_time_lose_sight)) {
     return n_time_now - self.n_time_lose_sight > 3000;
   }
 
@@ -843,12 +824,10 @@ _turret_new_user_think(n_index) {
 
       if(isDefined(ai_user)) {
         ai_user thread use_turret(self, n_index);
-      }
-      else if(has_spawnflag(2)) {
+      } else if(has_spawnflag(2)) {
         str_team = get_turret_team(n_index);
 
-        if(isDefined(self.classname) && self.classname == "script_vehicle") {
-        } else {
+        if(isDefined(self.classname) && self.classname == "script_vehicle") {} else {
           a_users = getaiarray(str_team);
 
           if(a_users.size > 0) {
@@ -905,8 +884,7 @@ _user_check(n_index) {
 
   if(isDefined(self.classname) && self.classname == "script_vehicle") {
     b_has_user = isalive(s_turret.ai_user);
-  }
-  else {
+  } else {
     e_user = self getturretowner();
     b_has_user = isDefined(e_user);
 
@@ -947,8 +925,7 @@ _debug_turret_think(n_index) {
 
     if(does_turret_need_user(n_index) && !does_turret_have_user(n_index) || !has_target) {
       v_color = (1, 1, 0);
-    }
-    else {
+    } else {
       v_color = (0, 1, 0);
     }
 
@@ -964,17 +941,13 @@ _debug_turret_think(n_index) {
     if(isDefined(e_target)) {
       if(isai(e_target)) {
         str_target = str_target + "ai";
-      }
-      else if(isplayer(e_target)) {
+      } else if(isplayer(e_target)) {
         str_target = str_target + "player";
-      }
-      else if(isDefined(e_target.classname) && e_target.classname == "script_vehicle") {
+      } else if(isDefined(e_target.classname) && e_target.classname == "script_vehicle") {
         str_target = str_target + "vehicle";
-      }
-      else if(isDefined(e_target.targetname) && e_target.targetname == "drone") {
+      } else if(isDefined(e_target.targetname) && e_target.targetname == "drone") {
         str_target = str_target + "drone";
-      }
-      else if(isDefined(e_target.classname)) {
+      } else if(isDefined(e_target.classname)) {
         str_target = str_target + e_target.classname;
       }
     } else
@@ -1043,8 +1016,7 @@ _init_turret(n_index) {
 
   if(isDefined(self.classname) && self.classname == "script_vehicle") {
     s_turret = _init_vehicle_turret(n_index);
-  }
-  else {
+  } else {
     n_index = 0;
     s_turret = _init_misc_turret();
   }
@@ -1129,14 +1101,11 @@ _init_misc_turret() {
 
   if(isDefined(self gettagorigin("tag_barrel"))) {
     s_turret.str_tag_pivot = "tag_barrel";
-  }
-  else if(isDefined(self gettagorigin("mg01"))) {
+  } else if(isDefined(self gettagorigin("mg01"))) {
     s_turret.str_tag_pivot = "mg01";
-  }
-  else if(isDefined(self gettagorigin("tag_dummy"))) {
+  } else if(isDefined(self gettagorigin("tag_dummy"))) {
     s_turret.str_tag_pivot = "tag_dummy";
-  }
-  else {
+  } else {
     assertmsg("No pivot tag found for turret.");
 
   }
@@ -1258,8 +1227,7 @@ _get_burst_fire_time(n_index) {
   if(isDefined(s_turret.n_burst_fire_min) && isDefined(s_turret.n_burst_fire_max)) {
     if(s_turret.n_burst_fire_min == s_turret.n_burst_fire_max) {
       n_time = s_turret.n_burst_fire_min;
-    }
-    else {
+    } else {
       n_time = randomfloatrange(s_turret.n_burst_fire_min, s_turret.n_burst_fire_max);
     }
   } else if(isDefined(s_turret.n_burst_fire_max))
@@ -1275,8 +1243,7 @@ _get_burst_wait_time(n_index) {
   if(isDefined(s_turret.n_burst_wait_min) && isDefined(s_turret.n_burst_wait_max)) {
     if(s_turret.n_burst_wait_min == s_turret.n_burst_wait_max) {
       n_time = s_turret.n_burst_wait_min;
-    }
-    else {
+    } else {
       n_time = randomfloatrange(s_turret.n_burst_wait_min, s_turret.n_burst_wait_max);
     }
   } else if(isDefined(s_turret.n_burst_wait_max))
@@ -1288,8 +1255,7 @@ _get_burst_wait_time(n_index) {
 _index(n_index) {
   if(isDefined(n_index)) {
     return string(n_index);
-  }
-  else {
+  } else {
     return "";
   }
 }
@@ -1346,11 +1312,9 @@ _get_potential_targets(n_index) {
 
       if(is_true(e_target.ignoreme) || e_target.health <= 0) {
         ignore_target = 1;
-      }
-      else if(issentient(e_target) && (e_target isnotarget() || e_target is_dead_sentient())) {
+      } else if(issentient(e_target) && (e_target isnotarget() || e_target is_dead_sentient())) {
         ignore_target = 1;
-      }
-      else if(_is_target_within_range(e_target, s_turret) == 0) {
+      } else if(_is_target_within_range(e_target, s_turret) == 0) {
         ignore_target = 1;
       }
 
@@ -1418,14 +1382,11 @@ _get_any_priority_targets(n_index) {
 
         if(!isDefined(e_target)) {
           bad_index = i;
-        }
-        else if(!isalive(e_target)) {
+        } else if(!isalive(e_target)) {
           bad_index = i;
-        }
-        else if(e_target.health <= 0) {
+        } else if(e_target.health <= 0) {
           bad_index = i;
-        }
-        else if(issentient(e_target) && e_target is_dead_sentient()) {
+        } else if(issentient(e_target) && e_target is_dead_sentient()) {
           bad_index = i;
         }
 
@@ -1464,8 +1425,7 @@ _get_best_target_bullet(a_potential_targets, n_index) {
 
     if(self can_turret_hit_target(e_closest_target, n_index)) {
       e_best_target = e_closest_target;
-    }
-    else {
+    } else {
       arrayremovevalue(a_potential_targets, e_closest_target);
     }
   }
@@ -1637,8 +1597,7 @@ _get_turret_index_for_tag(str_tag) {
 }
 
 _init_animations(ai_user, n_index) {
-  if(isDefined(self.classname) && self.classname == "script_vehicle") {
-  } else if(isDefined(ai_user) && ai_user.desired_anim_pose == "stand") {
+  if(isDefined(self.classname) && self.classname == "script_vehicle") {} else if(isDefined(ai_user) && ai_user.desired_anim_pose == "stand") {
     self setanimknoblimitedrestart( % saw_gunner_idle_mg);
     self setanimknoblimitedrestart( % saw_gunner_firing_mg_add);
   } else {
@@ -1648,24 +1607,21 @@ _init_animations(ai_user, n_index) {
 }
 
 _animate_idle(n_index) {
-  if(isDefined(self.classname) && self.classname == "script_vehicle") {
-  } else if(_user_check(n_index)) {
+  if(isDefined(self.classname) && self.classname == "script_vehicle") {} else if(_user_check(n_index)) {
     self setanim( % additive_idle, 1, 0.1);
     self setanim( % additive_fire, 0, 0.1);
   }
 }
 
 _animate_fire(n_index) {
-  if(isDefined(self.classname) && self.classname == "script_vehicle") {
-  } else if(_user_check(n_index)) {
+  if(isDefined(self.classname) && self.classname == "script_vehicle") {} else if(_user_check(n_index)) {
     self setanim( % additive_idle, 0, 0.1);
     self setanim( % additive_fire, 1, 0.1);
   }
 }
 
 _clear_animations(n_index) {
-  if(isDefined(self.classname) && self.classname == "script_vehicle") {
-  } else {
+  if(isDefined(self.classname) && self.classname == "script_vehicle") {} else {
     self setanim( % additive_idle, 0, 0.1);
     self setanim( % additive_fire, 0, 0.1);
   }

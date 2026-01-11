@@ -157,8 +157,7 @@ tryUseHelicopter(lifeId, heliType) {
 
   if(isDefined(level.chopper)) {
     shouldQueue = true;
-  }
-  else {
+  } else {
     shouldQueue = false;
   }
 
@@ -167,8 +166,7 @@ tryUseHelicopter(lifeId, heliType) {
 
     if(isDefined(heliType) && heliType != "helicopter") {
       streakName = "helicopter_" + heliType;
-    }
-    else {
+    } else {
       streakName = "helicopter";
     }
 
@@ -265,8 +263,7 @@ spawn_helicopter(owner, origin, angles, vehicleType, modelName) {
 
   if(modelName == "vehicle_battle_hind") {
     chopper.heli_type = "cobra";
-  }
-  else {
+  } else {
     chopper.heli_type = level.heli_types[modelName];
   }
 
@@ -352,8 +349,7 @@ heli_think(lifeId, owner, startNode, heli_team, heliType) {
 
   if(heli_team == "allies") {
     level.alliesChopper = chopper;
-  }
-  else {
+  } else {
     level.axisChopper = chopper;
   }
 
@@ -471,8 +467,7 @@ heli_targeting() {
 
     if(isDefined(self.primaryTarget)) {
       self fireOnTarget(self.primaryTarget);
-    }
-    else {
+    } else {
       wait .25;
     }
   }
@@ -541,14 +536,12 @@ getBestPrimaryTarget(targets) {
       max = corners[0].origin;
       if(corners[1].origin[0] > max[0]) {
         max = (corners[1].origin[0], max[1], max[2]);
-      }
-      else {
+      } else {
         min = (corners[1].origin[0], min[1], min[2]);
       }
       if(corners[1].origin[1] > max[1]) {
         max = (max[0], corners[1].origin[1], max[2]);
-      }
-      else {
+      } else {
         min = (min[0], corners[1].origin[1], min[2]);
       }
 
@@ -1166,8 +1159,7 @@ fireMissile(missileTarget) {
 
   if(level.ps3) {
     roundsToFire = 1;
-  }
-  else {
+  } else {
     roundsToFire = 2;
   }
 
@@ -1610,8 +1602,7 @@ debug_print3d_simple(message, ent, offset, frames) {
   if(isDefined(level.heli_debug) && level.heli_debug == 1.0) {
     if(isDefined(frames)) {
       thread draw_text(message, (0.8, 0.8, 0.8), ent, offset, frames);
-    }
-    else {
+    } else {
       thread draw_text(message, (0.8, 0.8, 0.8), ent, offset, 0);
     }
   }

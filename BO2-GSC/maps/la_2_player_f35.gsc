@@ -149,8 +149,7 @@ f35_player_damage_watcher() {
 
         if(damage > 5) {
           level.f35_hud_damage_ent setclientflag(6);
-        }
-        else {
+        } else {
           level.f35_hud_damage_ent setclientflag(5);
         }
 
@@ -258,8 +257,7 @@ save_restored_function() {
 
   if(!flag("dogfights_story_done")) {
     level.player setclientdvar("cg_fov", 70);
-  }
-  else {
+  } else {
     level.player setclientdvar("cg_fov", 90);
   }
 
@@ -323,8 +321,7 @@ f35_fire_guns() {
     if(a_temp.size > 0) {
       if(isDefined(level.f35_lockon_target) && isinarray(a_temp, level.f35_lockon_target)) {
         e_target = level.f35_lockon_target;
-      }
-      else {
+      } else {
         e_target = get_closest_element(self.origin, a_temp);
       }
 
@@ -410,17 +407,13 @@ f35_guns_get_damage(e_target) {
   if(is_alive(e_target)) {
     if(n_distance < 3000) {
       n_damage = 125;
-    }
-    else if(n_distance > 3000 && n_distance < 13000) {
+    } else if(n_distance > 3000 && n_distance < 13000) {
       n_damage = linear_map(n_distance, 3000, 13000, 100, 125);
-    }
-    else if(n_distance > 13000 && n_distance < 20000) {
+    } else if(n_distance > 13000 && n_distance < 20000) {
       n_damage = linear_map(n_distance, 13000, 20000, 50, 75);
-    }
-    else if(n_distance > 20000 && n_distance < 30000) {
+    } else if(n_distance > 20000 && n_distance < 30000) {
       n_damage = linear_map(n_distance, 20000, 30000, 0, 50);
-    }
-    else {
+    } else {
       n_damage = 0;
     }
   }
@@ -486,8 +479,7 @@ f35_player_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapo
   if(self.health - idamage < 1) {
     if(self.health > 1) {
       idamage = self.health - 1;
-    }
-    else {
+    } else {
       idamage = 0;
     }
   }
@@ -561,14 +553,11 @@ missile_incoming_watcher() {
 
     if(n_index == 0) {
       self thread say_dialog("missile_warning_028");
-    }
-    else if(n_index == 1) {
+    } else if(n_index == 1) {
       self thread say_dialog("incoming_missile_029");
-    }
-    else if(n_index == 2) {
+    } else if(n_index == 2) {
       e_harper thread say_dialog("dammit_septic__th_011");
-    }
-    else {
+    } else {
       e_harper thread say_dialog("missiles_on_your_013");
     }
 
@@ -690,8 +679,7 @@ f35_get_available_approach_point() {
 
   if(level.f35.n_goal_ents_occupied >= n_max_occupants) {
     n_available_index = 20;
-  }
-  else {
+  } else {
     a_temp = level.f35.a_goal_index;
     a_pool = [];
 
@@ -758,8 +746,7 @@ f35_collision_detection() {
       b_collision_imminent = 1;
     }
 
-    if(b_collision_imminent) {
-    }
+    if(b_collision_imminent) {}
 
     self.is_collision_imminent = b_collision_imminent;
     wait(n_update_time);
@@ -921,8 +908,7 @@ f35_wait_until_path_clear(b_require_push_forward) {
   while(!b_jet_mode_ready) {
     if(!self.is_collision_imminent) {
       n_frame_counter_collision++;
-    }
-    else {
+    } else {
       n_frame_counter_collision = 0;
     }
 
@@ -930,8 +916,7 @@ f35_wait_until_path_clear(b_require_push_forward) {
 
     if(player_pressing_forward_on_throttle()) {
       n_frame_counter_forward++;
-    }
-    else {
+    } else {
       n_frame_counter_forward = 0;
     }
 
@@ -1028,8 +1013,7 @@ f35_death_blossom(target) {
 
   if(isDefined(self) && isDefined(self.origin)) {
     v_origin = self.origin;
-  }
-  else {
+  } else {
     v_origin = target.origin;
   }
 
@@ -1058,17 +1042,14 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
 
   if(isplayer(eattacker)) {
     idamage = 0;
-  }
-  else if(isDefined(type) && type == "MOD_CRUSH") {
+  } else if(isDefined(type) && type == "MOD_CRUSH") {
     idamage = 0;
-  }
-  else if(isai(eattacker)) {
+  } else if(isai(eattacker)) {
     str_team = eattacker.team;
 
     if(str_team == "allies") {
       return 0;
-    }
-    else if(str_team == "axis") {
+    } else if(str_team == "axis") {
       idamage = 1;
 
       if(issubstr(sweapon, "rpg")) {
@@ -1081,17 +1062,14 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
   else if(isDefined(eattacker.classname) && eattacker.classname == "script_vehicle") {
     if(eattacker.vteam == "allies") {
       idamage = 0;
-    }
-    else if(sweapon == "pegasus_missile_turret_doublesize") {
+    } else if(sweapon == "pegasus_missile_turret_doublesize") {
       idamage = 0;
 
       if(flag("missile_can_damage_player")) {
         idamage = 2500;
         level.f35 notify("missile_hit_player");
       }
-    } else if(eattacker.vehicletype == "drone_pegasus_fast_la2" || eattacker.vehicletype == "drone_pegasus_fast_la2_2x") {
-    } else if(eattacker.vehicletype == "drone_avenger_fast_la2" || eattacker.vehicletype == "drone_avenger_fast_la2_2x" || eattacker.vehicletype == "drone_avenger") {
-    } else if(eattacker.vehicletype == "civ_pickup_red_wturret_la2")
+    } else if(eattacker.vehicletype == "drone_pegasus_fast_la2" || eattacker.vehicletype == "drone_pegasus_fast_la2_2x") {} else if(eattacker.vehicletype == "drone_avenger_fast_la2" || eattacker.vehicletype == "drone_avenger_fast_la2_2x" || eattacker.vehicletype == "drone_avenger") {} else if(eattacker.vehicletype == "civ_pickup_red_wturret_la2")
       idamage = 10;
     else {
       println("unhandled vehicle type on F35" + self.vehicletype);
@@ -1144,8 +1122,7 @@ f35_damage_callback(einflictor, eattacker, idamage, idflags, type, sweapon, vpoi
 
   if(type == "MOD_UNKNOWN") {
     level.player playSound("evt_collision_alarm");
-  }
-  else if(idamage > 0 && !issubstr(sweapon, "rpg") && sweapon != "pegasus_missile_turret_doublesize") {
+  } else if(idamage > 0 && !issubstr(sweapon, "rpg") && sweapon != "pegasus_missile_turret_doublesize") {
     level.player playSound("prj_bullet_impact_f35");
   }
 
@@ -1503,8 +1480,7 @@ _f35_conventional_flight_mode_throttle() {
   while(!b_using_throttle) {
     if(player_pressing_forward_on_throttle()) {
       n_counter++;
-    }
-    else {
+    } else {
       n_counter = 0;
     }
 
@@ -1559,8 +1535,7 @@ _f35_set_vtol_mode(b_is_first_time, b_use_force_protection_vo) {
 
     if(b_use_force_protection_vo) {
       level.f35 thread say_dialog("switching_to_vtol_071");
-    }
-    else {
+    } else {
       self thread say_dialog("vtol_flight_mode_e_033");
     }
   }
@@ -1580,8 +1555,7 @@ _f35_set_vtol_mode(b_is_first_time, b_use_force_protection_vo) {
   setheliheightpatchenabled("ground_section_height_mesh", 1);
   self setheliheightlock(1);
 
-  if(flag("convoy_at_dogfight") && !flag("dogfight_done")) {
-  }
+  if(flag("convoy_at_dogfight") && !flag("dogfight_done")) {}
 
   level.player setclientdvar("vehHelicopterMaxHeightLockOffset", n_height_mesh_max_dist);
   level.player setclientdvar("vehHelicopterMinHeightLockOffset", n_height_mesh_min_dist);
@@ -1712,8 +1686,7 @@ f35_tutorial(b_show_move_prompt, b_show_hover_prompt, b_show_weapon_prompt, b_sh
 
     if(stick_layout == 2 || stick_layout == 3) {
       self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE_LEGACY", &"LA_2_FLIGHT_CONTROL_LOOK_LEGACY", ::f35_control_check_movement);
-    }
-    else {
+    } else {
       self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_MOVE", &"LA_2_FLIGHT_CONTROL_LOOK", ::f35_control_check_movement);
     }
   }
@@ -1726,8 +1699,7 @@ f35_tutorial(b_show_move_prompt, b_show_hover_prompt, b_show_weapon_prompt, b_sh
     self f35_tutorial_func(&"LA_2_FLIGHT_CONTROL_GUN", &"LA_2_FLIGHT_CONTROL_MISSILE", ::f35_control_check_weapons);
   }
 
-  if(b_show_ads_prompt) {
-  }
+  if(b_show_ads_prompt) {}
 
   if(b_show_speed_boost_prompt) {
     wait 2;

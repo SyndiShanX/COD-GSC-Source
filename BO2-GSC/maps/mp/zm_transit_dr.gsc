@@ -271,17 +271,14 @@ setup_rex_starts() {
   add_gameloc("diner", ::dummy, "diner", ::dummy);
 }
 
-dummy() {
-}
+dummy() {}
 
-init_clientflags() {
-}
+init_clientflags() {}
 
 set_player_in_fog(onoff) {
   if(onoff) {
     self setclientfield("playerinfog", 1);
-  }
-  else {
+  } else {
     self setclientfield("playerinfog", 0);
   }
 }
@@ -688,8 +685,7 @@ custom_add_weapons() {
   add_zombie_weapon("hk416_zm", "hk416_upgraded_zm", &"ZOMBIE_WEAPON_HK416", 100, "", "", undefined);
 }
 
-include_game_modules() {
-}
+include_game_modules() {}
 
 initial_round_wait_func() {
   flag_wait("initial_blackscreen_passed");
@@ -782,8 +778,7 @@ less_time() {
 
   if(!isDefined(level.time_to_remove)) {
     level.time_to_remove = 60000;
-  }
-  else {
+  } else {
     level.time_to_remove = level.time_to_remove * 2;
   }
 
@@ -799,8 +794,7 @@ more_time() {
 
   if(!isDefined(level.time_to_add)) {
     level.time_to_add = 60000;
-  }
-  else {
+  } else {
     level.time_to_add = level.time_to_add * 2;
   }
 

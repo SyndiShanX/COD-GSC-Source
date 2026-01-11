@@ -98,8 +98,7 @@ PlayerLastStand(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHi
   self thread watchForInvalidWeaponSwitch();
   if(self isThrowingGrenade()) {
     self thread waittillGrenadeThrown();
-  }
-  else {
+  } else {
     grenadeTypePrimary = "frag_grenade_mp";
     self GiveWeapon(grenadeTypePrimary);
     self SetWeaponAmmoClip(grenadeTypePrimary, 0);

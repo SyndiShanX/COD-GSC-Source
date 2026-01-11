@@ -98,13 +98,13 @@ func_1105E(var_00) {
 
 func_1105F(var_00) {
   foreach(var_02 in var_00) {
-  var_2.var_1198.func_90EE = undefined;
+    var_2.var_1198.func_90EE = undefined;
   }
 }
 
 func_1105D(var_00) {
   foreach(var_02 in var_00) {
-  var_2.var_1198.func_7002 = undefined;
+    var_2.var_1198.func_7002 = undefined;
   }
 }
 
@@ -231,8 +231,7 @@ func_11ADE() {
 
     if(var_06 == "hover") {
       var_07 = 2000;
-    }
-    else {
+    } else {
       var_07 = 300;
     }
 
@@ -247,8 +246,7 @@ func_11ADE() {
 
     if(level.func_D127.spaceship_boosting) {
       var_08 = -1000;
-    }
-    else if(var_02 == "hover") {
+    } else if(var_02 == "hover") {
       var_08 = level.func_A48E.func_A3F5;
 
       if(level.func_90E2.func_90E0 < 0.25) {
@@ -262,8 +260,7 @@ func_11ADE() {
 
     if(var_08 != 0) {
       var_09 = var_00 * (1000 / var_08);
-    }
-    else {
+    } else {
       var_09 = 0;
     }
 

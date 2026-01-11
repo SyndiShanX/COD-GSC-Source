@@ -315,9 +315,7 @@ shootenemywrapper(param_00) {
     param_00 = 1;
   }
 
-  [
-    [level.shootenemywrapper_func]
-  ](param_00);
+  [[level.shootenemywrapper_func]](param_00);
 }
 
 getnodeyawtoorigin(param_00) {

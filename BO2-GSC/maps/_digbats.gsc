@@ -65,8 +65,7 @@ melee_digbat_pain_override() {
     if(isDefined(self.damagelocation)) {
       if(issubstr(self.damagelocation, "right")) {
         painanim = % ai_digbat_melee_run_f_stumble_r;
-      }
-      else if(issubstr(self.damagelocation, "left")) {
+      } else if(issubstr(self.damagelocation, "left")) {
         painanim = % ai_digbat_melee_run_f_stumble_l;
       }
     }
@@ -74,8 +73,7 @@ melee_digbat_pain_override() {
     if(!isDefined(painanim)) {
       if(cointoss()) {
         painanim = % ai_digbat_melee_run_f_stumble_r;
-      }
-      else {
+      } else {
         painanim = % ai_digbat_melee_run_f_stumble_l;
       }
     }
@@ -86,8 +84,7 @@ melee_digbat_pain_override() {
   } else {
     if(cointoss()) {
       painanim = % ai_digbat_melee_idle_pain_01;
-    }
-    else {
+    } else {
       painanim = % ai_digbat_melee_idle_pain_02;
     }
 

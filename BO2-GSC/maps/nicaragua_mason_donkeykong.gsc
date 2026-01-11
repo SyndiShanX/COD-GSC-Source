@@ -21,7 +21,7 @@ skipto_mason_donkeykong() {
   a_nd_nodes = getnodearray("mason_truck_exposed_nodes", "script_noteworthy");
 
   foreach(node in a_nd_nodes) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 
   exploder(10);
@@ -87,7 +87,7 @@ donkeykong_setup() {
   a_nd_nodes = getnodearray("mason_donkeykong_exposed_nodes", "script_noteworthy");
 
   foreach(node in a_nd_nodes) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 
   level thread run_scene("woods_freakout_doors");
@@ -206,7 +206,7 @@ mason_donkeykong_player_uses_turret(vh_truck) {
   a_nd_nodes = getnodearray("mason_donkeykong_exposed_nodes", "script_noteworthy");
 
   foreach(node in a_nd_nodes) {
-  setenablenode(node, 1);
+    setenablenode(node, 1);
   }
 
   spawn_manager_enable("donkeykong_turret_targets_sm");
@@ -257,7 +257,7 @@ donkeykong_kill_off_balcony_cartel() {
   a_ai_cartel = get_ai_group_ai("donkeykong_balcony_cartel");
 
   foreach(guy in a_ai_cartel) {
-  guy thread timebomb(0.25, 5.0);
+    guy thread timebomb(0.25, 5.0);
   }
 }
 
@@ -320,8 +320,7 @@ donkeykong_vo() {
 
   if(is_mature()) {
     level.woods queue_dialog("wood_shit_they_re_gonna_0");
-  }
-  else {
+  } else {
     level.woods queue_dialog("wood_they_re_gonna_light_0");
   }
 

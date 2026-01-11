@@ -25,7 +25,6 @@
 #include scripts\zm_common\zm_traps;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_a5b1b1d7;
 
 autoexec __init__system__() {
@@ -94,7 +93,7 @@ function_8fe2d903() {
     }
   }
 
-  self waittilltimeout(self._trap_duration, #"trap_deactivate");
+  self waittilltimeout(self._trap_duration, # "trap_deactivate");
 
   foreach(t_trap in level.var_5f47f17d) {
     if(t_trap.script_string === self.script_string) {
@@ -172,11 +171,11 @@ deactivate_trap(e_trap) {
 }
 
 damage(e_trap) {
-  if(!isalive(self) || self.archetype === #"tiger" || isvehicle(self)) {
+  if(!isalive(self) || self.archetype === # "tiger" || isvehicle(self)) {
     return;
   }
 
-  if(self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"heavy") {
+  if(self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "heavy") {
     e_trap.soul_whale deactivate_trap(e_trap);
 
     if(isDefined(e_trap.activated_by_player)) {

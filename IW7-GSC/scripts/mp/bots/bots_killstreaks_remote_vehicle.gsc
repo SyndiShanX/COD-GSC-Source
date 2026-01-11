@@ -834,18 +834,14 @@ vanguard_control_aiming() {
 
 vanguard_pick_node(param_00) {
   param_00.bot_visited_times[self.entity_number]++;
-  var_01 = [
-    [level.bot_ks_funcs["heli_node_get_origin"]["vanguard"]]
-  ](param_00);
+  var_01 = [[level.bot_ks_funcs["heli_node_get_origin"]["vanguard"]]](param_00);
   var_02 = bot_vanguard_find_unvisited_nodes(param_00);
   var_03 = var_02;
   var_02 = [];
   foreach(var_05 in var_03) {
     if(var_05.valid_for_vanguard) {
       if(param_00.origin[2] != param_00.vanguard_origin[2] || var_05.origin[2] != var_05.vanguard_origin[2]) {
-        var_06 = [
-          [level.bot_ks_funcs["heli_node_get_origin"]["vanguard"]]
-        ](var_05);
+        var_06 = [[level.bot_ks_funcs["heli_node_get_origin"]["vanguard"]]](var_05);
         var_07 = playerphysicstrace(var_01, var_06);
         if(distancesquared(var_07, var_06) < 1) {
           var_02 = scripts\engine\utility::array_add(var_02, var_05);
@@ -1757,9 +1753,7 @@ bot_control_heli_main_move_loop(param_00, param_01) {
       ](var_05);
       var_06 = undefined;
       if(isDefined(var_05)) {
-        var_0D = [
-          [level.bot_ks_funcs["heli_node_get_origin"][param_00]]
-        ](var_05);
+        var_0D = [[level.bot_ks_funcs["heli_node_get_origin"][param_00]]](var_05);
         if(param_01) {
           var_0E = var_05.origin + scripts\mp\utility::gethelipilotmeshoffset() + level.bot_heli_pilot_traceoffset;
           var_0F = var_05.origin + scripts\mp\utility::gethelipilotmeshoffset() - level.bot_heli_pilot_traceoffset;

@@ -225,8 +225,7 @@ get_collision_chopper_in_position(str_target_struct) {
 
   if(is_player_in_drone()) {
     speed = 20;
-  }
-  else {
+  } else {
     speed = 15;
   }
 
@@ -375,8 +374,7 @@ apache_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of
   if(e_attacker != level.player) {
     if(isDefined(e_attacker.vteam) && e_attacker.vteam == "allies") {
       n_damage = 1;
-    }
-    else {
+    } else {
       n_damage = 0;
     }
   } else if(level.player.vehicle_state == 1)

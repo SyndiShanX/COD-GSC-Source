@@ -112,8 +112,7 @@ setup_bot_dom() {
     var_3 thread monitor_flag_control();
     var_3 thread monitor_flag_ownership();
 
-    if(var_3.script_label != "_a" && var_3.script_label != "_b" && var_3.script_label != "_c") {
-    }
+    if(var_3.script_label != "_a" && var_3.script_label != "_b" && var_3.script_label != "_c") {}
 
     var_3.nodes = maps\mp\bots\_bots_gametype_common::bot_get_valid_nodes_in_trigger(var_3);
     var_3.last_time_secured["allies"] = 0;
@@ -133,7 +132,7 @@ bot_wait_for_event_flag_swap(var_0) {
   bot_cache_flag_distances(var_0);
 
   foreach(var_2 in var_0) {
-  var_2.nodes = maps\mp\bots\_bots_gametype_common::bot_get_valid_nodes_in_trigger(var_2);
+    var_2.nodes = maps\mp\bots\_bots_gametype_common::bot_get_valid_nodes_in_trigger(var_2);
   }
 
   foreach(var_5 in level.participants) {
@@ -146,8 +145,7 @@ bot_wait_for_event_flag_swap(var_0) {
 bot_get_all_possible_flags() {
   if(isDefined(level.all_dom_flags)) {
     return level.all_dom_flags;
-  }
-  else {
+  } else {
     return level.flags;
   }
 }
@@ -175,8 +173,7 @@ should_start_cautious_approach_dom(var_0) {
 
       if(var_1 == self.current_flag) {
         return 0;
-      }
-      else {
+      } else {
         var_2 = get_other_flag(var_1, self.current_flag);
         var_3 = distancesquared(var_1.origin, self.current_flag.origin);
         var_4 = distancesquared(var_2.origin, self.current_flag.origin);
@@ -229,8 +226,7 @@ bot_dom_think() {
     if(var_0 > self.new_goal_time || self.force_new_goal) {
       if(should_delay_flag_decision()) {
         self.new_goal_time = var_0 + 5000;
-      }
-      else {
+      } else {
         self.force_new_goal = 0;
         bot_choose_flag();
         self.new_goal_time = var_0 + randomintrange(30000, 45000);
@@ -295,8 +291,7 @@ bot_choose_flag() {
 
   if(var_4.size > 0) {
     var_5 = var_4;
-  }
-  else {
+  } else {
     var_5 = level.flags;
   }
 
@@ -306,9 +301,7 @@ bot_choose_flag() {
     if(var_3) {
       if(flag_has_been_captured_before(var_5[var_6])) {
         var_3 = 0;
-      }
-      else {
-      }
+      } else {}
     }
 
     if(var_7 != self.team) {
@@ -323,13 +316,11 @@ bot_choose_flag() {
 
   if(var_1.size == 3) {
     var_8 = 1;
-  }
-  else if(var_1.size == 2) {
+  } else if(var_1.size == 2) {
     if(var_2.size == 1) {
       if(!bot_should_defend_flag(var_2[0], 1)) {
         var_8 = 1;
-      }
-      else {
+      } else {
         var_8 = !bot_should_defend(0.34);
       }
 
@@ -343,11 +334,9 @@ bot_choose_flag() {
       if(bot_allowed_to_3_cap()) {
         if(!bot_should_defend_flag(var_2[0], 2) && !bot_should_defend_flag(var_2[1], 2)) {
           var_8 = 1;
-        }
-        else if(self.strategy_level == 0) {
+        } else if(self.strategy_level == 0) {
           var_8 = !bot_should_defend(0.34);
-        }
-        else {
+        } else {
           var_8 = !bot_should_defend(0.5);
         }
       } else
@@ -355,8 +344,7 @@ bot_choose_flag() {
     } else if(var_2.size == 1) {
       if(!bot_should_defend_flag(var_2[0], 1)) {
         var_8 = 1;
-      }
-      else {
+      } else {
         var_8 = !bot_should_defend(0.34);
       }
     } else if(var_2.size == 0)
@@ -367,8 +355,7 @@ bot_choose_flag() {
   if(var_8) {
     if(var_1.size > 1) {
       var_9 = common_scripts\utility::get_array_of_closest(self.origin, var_1);
-    }
-    else {
+    } else {
       var_9 = var_1;
     }
 
@@ -377,8 +364,7 @@ bot_choose_flag() {
 
       if(var_10 < min_num_bots_assaulting_first_flag()) {
         var_11 = 0;
-      }
-      else {
+      } else {
         var_12 = 20;
         var_13 = 65;
         var_14 = 15;
@@ -397,11 +383,9 @@ bot_choose_flag() {
 
         if(var_15 < var_12) {
           var_11 = 0;
-        }
-        else if(var_15 < var_12 + var_13) {
+        } else if(var_15 < var_12 + var_13) {
           var_11 = 1;
-        }
-        else {
+        } else {
           var_11 = 2;
         }
       }
@@ -418,11 +402,9 @@ bot_choose_flag() {
 
     if(var_9.size == 1) {
       var_0 = var_9[0];
-    }
-    else if(distancesquared(var_9[0].origin, self.origin) < 102400) {
+    } else if(distancesquared(var_9[0].origin, self.origin) < 102400) {
       var_0 = var_9[0];
-    }
-    else {
+    } else {
       var_17 = [];
       var_18 = [];
 
@@ -445,11 +427,9 @@ bot_choose_flag() {
 
         if(var_15 < 50) {
           var_0 = var_9[0];
-        }
-        else if(var_15 < 50 + 50 / (var_9.size - 1)) {
+        } else if(var_15 < 50 + 50 / (var_9.size - 1)) {
           var_0 = var_9[1];
-        }
-        else {
+        } else {
           var_0 = var_9[2];
         }
       } else if(var_17.size == 2) {
@@ -477,8 +457,7 @@ bot_choose_flag() {
 
         if(var_15 < var_21[0]) {
           var_0 = var_9[0];
-        }
-        else {
+        } else {
           var_0 = var_9[1];
         }
       } else if(var_17.size == 3) {
@@ -513,11 +492,9 @@ bot_choose_flag() {
 
         if(var_15 < var_21[0]) {
           var_0 = var_9[0];
-        }
-        else if(var_15 < var_21[0] + var_21[1]) {
+        } else if(var_15 < var_21[0] + var_21[1]) {
           var_0 = var_9[1];
-        }
-        else {
+        } else {
           var_0 = var_9[2];
         }
       }
@@ -525,8 +502,7 @@ bot_choose_flag() {
   } else {
     if(var_2.size > 1) {
       var_24 = common_scripts\utility::get_array_of_closest(self.origin, var_2);
-    }
-    else {
+    } else {
       var_24 = var_2;
     }
 
@@ -540,16 +516,14 @@ bot_choose_flag() {
     if(!isDefined(var_0)) {
       if(self.strategy_level == 0) {
         var_0 = var_2[0];
-      }
-      else if(var_24.size == 2) {
+      } else if(var_24.size == 2) {
         var_28 = get_other_flag(var_24[0], var_24[1]);
         var_29 = common_scripts\utility::get_array_of_closest(var_28.origin, var_24);
         var_15 = randomint(100);
 
         if(var_15 < 70) {
           var_0 = var_29[0];
-        }
-        else {
+        } else {
           var_0 = var_29[1];
         }
       } else
@@ -559,8 +533,7 @@ bot_choose_flag() {
 
   if(var_8) {
     capture_flag(var_0);
-  }
-  else {
+  } else {
     defend_flag(var_0);
   }
 }
@@ -598,8 +571,7 @@ bot_should_defend(var_0) {
 
   if(var_1 == "stationary") {
     return 1;
-  }
-  else if(var_1 == "active") {
+  } else if(var_1 == "active") {
     return 0;
   }
 }
@@ -977,8 +949,7 @@ get_max_num_defenders_wanted_per_flag(var_0) {
 
   if(var_0 == 1) {
     return ceil(var_1 / 6);
-  }
-  else {
+  } else {
     return ceil(var_1 / 3);
   }
 }

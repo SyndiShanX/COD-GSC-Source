@@ -35,7 +35,7 @@ init_alcatraz_zipline() {
   a_t_gondola_triggers = arraycombine(t_move_triggers, t_call_triggers, 1, 0);
 
   foreach(trigger in a_t_gondola_triggers) {
-  trigger hint_string(&"ZM_PRISON_GONDOLA_REQUIRES_POWER");
+    trigger hint_string(&"ZM_PRISON_GONDOLA_REQUIRES_POWER");
   }
 
   a_gondola_doors = getEntArray("gondola_doors", "targetname");
@@ -57,13 +57,13 @@ init_alcatraz_zipline() {
   a_gondola_landing_doors = getEntArray("gondola_landing_doors", "targetname");
 
   foreach(m_door in a_gondola_landing_doors) {
-  e_gondola establish_gondola_landing_door_definition(m_door);
+    e_gondola establish_gondola_landing_door_definition(m_door);
   }
 
   a_gondola_landing_gates = getEntArray("gondola_landing_gates", "targetname");
 
   foreach(m_gate in a_gondola_landing_gates) {
-  e_gondola establish_gondola_landing_gate_definition(m_gate);
+    e_gondola establish_gondola_landing_gate_definition(m_gate);
   }
 
   m_chains = spawn("script_model", level.e_gondola.origin);
@@ -252,8 +252,7 @@ zipline_call_trigger_think() {
 
   if(self.script_string == "roof") {
     str_gondola_loc = "docks";
-  }
-  else if(self.script_string == "docks") {
+  } else if(self.script_string == "docks") {
     str_gondola_loc = "roof";
   }
 
@@ -339,13 +338,13 @@ move_gondola(b_suppress_doors_close) {
   a_t_move = getEntArray("gondola_move_trigger", "targetname");
 
   foreach(trigger in a_t_move) {
-  trigger sethintstring("");
+    trigger sethintstring("");
   }
 
   a_t_call = getEntArray("gondola_call_trigger", "targetname");
 
   foreach(trigger in a_t_call) {
-  trigger sethintstring(&"ZM_PRISON_GONDOLA_ACTIVE");
+    trigger sethintstring(&"ZM_PRISON_GONDOLA_ACTIVE");
   }
 
   check_when_gondola_moves_if_groundent_is_undefined(e_gondola);
@@ -445,7 +444,7 @@ gondola_doors_move(str_side, n_state) {
   a_doors_and_gates[3] = m_gate_right;
 
   foreach(m_model in a_doors_and_gates) {
-  m_model unlink();
+    m_model unlink();
   }
 
   m_door_left playSound("zmb_gondola_door");
@@ -475,7 +474,7 @@ gondola_doors_move(str_side, n_state) {
   }
 
   foreach(m_model in a_doors_and_gates) {
-  m_model linkto(self);
+    m_model linkto(self);
   }
 }
 
@@ -568,13 +567,13 @@ gondola_cooldown() {
   a_t_call = getEntArray("gondola_call_trigger", "targetname");
 
   foreach(trigger in a_t_call) {
-  trigger sethintstring(&"ZM_PRISON_GONDOLA_COOLDOWN");
+    trigger sethintstring(&"ZM_PRISON_GONDOLA_COOLDOWN");
   }
 
   a_t_move = getEntArray("gondola_move_trigger", "targetname");
 
   foreach(trigger in a_t_move) {
-  trigger sethintstring(&"ZM_PRISON_GONDOLA_COOLDOWN");
+    trigger sethintstring(&"ZM_PRISON_GONDOLA_COOLDOWN");
   }
 
   wait 10;
@@ -598,8 +597,7 @@ gondola_moving_vo() {
 hint_string(string, cost) {
   if(isDefined(cost)) {
     self sethintstring(string, cost);
-  }
-  else {
+  } else {
     self sethintstring(string);
   }
 
@@ -628,8 +626,7 @@ is_player_on_gondola() {
   if(isplayer(self)) {
     if(self istouching(level.e_gondola.t_ride)) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -663,18 +660,18 @@ gondola_hostmigration() {
     a_players = getplayers();
 
     foreach(player in a_players) {
-    player thread link_player_to_gondola();
+      player thread link_player_to_gondola();
     }
 
     level waittill("host_migration_end");
     a_players = getplayers();
 
     foreach(player in a_players) {
-    player unlink();
+      player unlink();
     }
 
     foreach(e_origin in level.hm_link_origins) {
-    e_origin delete();
+      e_origin delete();
     }
 
     if(!(isDefined(level.e_gondola.is_moving) && level.e_gondola.is_moving)) {

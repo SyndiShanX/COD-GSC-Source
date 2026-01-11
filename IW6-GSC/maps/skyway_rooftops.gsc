@@ -303,7 +303,7 @@ rt_helo_proc(var_0, var_1, var_2) {
 
   if(isDefined(var_3) && var_3.size > 0) {
     foreach(var_5 in var_3) {
-    var_5 linkto(self);
+      var_5 linkto(self);
     }
   }
 
@@ -323,7 +323,7 @@ rt_helo_proc(var_0, var_1, var_2) {
   var_7 = level.scr_anim["generic"]["helo_shooter_death"];
 
   foreach(var_10, var_9 in self.shooters) {
-  var_9.deathanim = var_7[common_scripts\utility::mod(var_10, var_7.size)];
+    var_9.deathanim = var_7[common_scripts\utility::mod(var_10, var_7.size)];
   }
 
   self.deathanims = var_7;
@@ -506,8 +506,7 @@ rt_player_helocrash_effect(var_0) {
 
   if(level.player.car == "train_rt1") {
     thread maps\skyway_util::player_view_roll_with_traincar("roll_R", 1);
-  }
-  else {
+  } else {
     thread maps\skyway_util::player_view_roll_with_traincar("roll_R", 0.4);
   }
 
@@ -986,8 +985,7 @@ helo_ai_handle_death() {
 
   if(self.vehicle_position > 1) {
     self.ridingvehicle.shooters = common_scripts\utility::array_remove(self.ridingvehicle.shooters, self);
-  }
-  else {
+  } else {
     self linkto(self.ridingvehicle, "tag_pilot1", (0, 0, -16), (16, 16, 0));
   }
 }
@@ -1020,7 +1018,7 @@ init_helo(var_0) {
 
   if(isDefined(level.vehicle_hide_list[var_1])) {
     foreach(var_3 in level.vehicle_hide_list[var_1]) {
-    var_0 hidepart(var_3);
+      var_0 hidepart(var_3);
     }
   }
 
@@ -1139,8 +1137,7 @@ temp_ref_check() {
 
     if(isDefined(distance(var_0 - var_1))) {
       iprintln("delta: " + distance(var_0 - var_1));
-    }
-    else {
+    } else {
       iprintln("delta: 0");
     }
 

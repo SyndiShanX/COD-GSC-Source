@@ -8,7 +8,6 @@
 #include maps\_vehicle;
 #include maps\_vehicle_aianim;
 #include maps\_anim;
-
 #using_animtree("vehicles");
 main(model, type, no_death) {
   //precachemodel( "fastrope_arms" );

@@ -147,8 +147,7 @@ remote_turret_activate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(isDefined(level.sniper_vision_override)) {
     self visionsetnakedforplayer(level.sniper_vision_override, 0.25);
-  }
-  else {
+  } else {
     self visionsetnakedforplayer("enemyhq_sniper_view", 0.25);
   }
 
@@ -157,8 +156,7 @@ remote_turret_activate(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
   if(!isDefined(self.allow_dry_fire) || self.allow_dry_fire == 0) {
     thread remote_turret_monitor_ammo(var_0);
-  }
-  else {
+  } else {
     self setweaponammoclip(var_0, 0);
     thread remote_turret_monitor_dryfire(var_0);
   }
@@ -581,8 +579,7 @@ remote_turret_hud() {
 
   if(isDefined(level.player.allow_dry_fire) && level.player.allow_dry_fire) {
     level.remote_turret_hud["weapon_name_bar"].alpha = 0;
-  }
-  else {
+  } else {
     level.remote_turret_hud["weapon_name_bar"].alpha = 0.5;
   }
 
@@ -837,8 +834,7 @@ remote_turret_update_status() {
 
           if(level.remote_turret_hud["weapon_status_txt"].alpha > 0.0) {
             level.remote_turret_hud["weapon_status_txt"].alpha = 0.0;
-          }
-          else {
+          } else {
             level.remote_turret_hud["weapon_status_txt"].alpha = 0.5;
           }
         }
@@ -865,8 +861,7 @@ remote_turret_update_status() {
 
     if(var_1 == 0) {
       level.remote_turret_hud["weapon_name_bar"].alpha = 0;
-    }
-    else {
+    } else {
       level.remote_turret_hud["weapon_name_bar"].alpha = 0.5;
     }
 
@@ -983,50 +978,35 @@ remote_turret_update_compass() {
 
     if(var_5 < 11.25 || var_5 > 348.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_NORTH");
-    }
-    else if(var_5 < 33.75) {
+    } else if(var_5 < 33.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_NORTH_BY_NORTHEAST");
-    }
-    else if(var_5 < 56.25) {
+    } else if(var_5 < 56.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_NORTHEAST");
-    }
-    else if(var_5 < 78.75) {
+    } else if(var_5 < 78.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_EAST_BY_NORTHEAST");
-    }
-    else if(var_5 < 101.25) {
+    } else if(var_5 < 101.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_EAST");
-    }
-    else if(var_5 < 123.75) {
+    } else if(var_5 < 123.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_EAST_BY_SOUTHEAST");
-    }
-    else if(var_5 < 146.25) {
+    } else if(var_5 < 146.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_SOUTHEAST");
-    }
-    else if(var_5 < 168.75) {
+    } else if(var_5 < 168.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_SOUTH_BY_SOUTHEAST");
-    }
-    else if(var_5 < 191.25) {
+    } else if(var_5 < 191.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_SOUTH");
-    }
-    else if(var_5 < 213.75) {
+    } else if(var_5 < 213.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_SOUTH_BY_SOUTHWEST");
-    }
-    else if(var_5 < 236.25) {
+    } else if(var_5 < 236.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_SOUTHWEST");
-    }
-    else if(var_5 < 258.75) {
+    } else if(var_5 < 258.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_WEST_BY_SOUTHWEST");
-    }
-    else if(var_5 < 281.25) {
+    } else if(var_5 < 281.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_WEST");
-    }
-    else if(var_5 < 303.75) {
+    } else if(var_5 < 303.75) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_WEST_BY_NORTHWEST");
-    }
-    else if(var_5 < 326.25) {
+    } else if(var_5 < 326.25) {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_NORTHWEST");
-    }
-    else {
+    } else {
       level.remote_turret_hud["compass_heading"] settext(&"ENEMY_HQ_NORTH_BY_NORTHWEST");
     }
 
@@ -1157,8 +1137,7 @@ create_outofrange_hud() {
 
       if(level.remote_turret_hud["out_range_txt"].alpha > 0.0) {
         level.remote_turret_hud["out_range_txt"].alpha = 0.0;
-      }
-      else {
+      } else {
         level.remote_turret_hud["out_range_txt"].alpha = 0.5;
       }
     }

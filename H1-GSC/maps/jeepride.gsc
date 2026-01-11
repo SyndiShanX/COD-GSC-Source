@@ -1282,8 +1282,7 @@ blow_up_at_end_node() {
 
   if(common_scripts\utility::isdestructible()) {
     common_scripts\_destructible::force_explosion();
-  }
-  else {
+  } else {
     self notify("death");
   }
 }
@@ -1723,8 +1722,7 @@ bridge_zakhaev() {
 
   if(getdvar("chaplincheat") == "1") {
     thread bridge_zak_slomo_script_timed_chaplincheat();
-  }
-  else {
+  } else {
     thread bridge_zak_slomo_script_timed();
   }
 
@@ -1778,8 +1776,7 @@ bridge_zakhaev() {
 
     if(getdvar("jeepride_multi_shot") == "off") {
       var_18[var_19].health = 1;
-    }
-    else {
+    } else {
       var_18[var_19] thread stop_animscripted_on_damage();
     }
 
@@ -2187,14 +2184,11 @@ lerp_player_view_to_position_oldstyle_loc(var_0, var_1, var_2, var_3, var_4, var
 
   if(isDefined(var_8)) {
     level.player playerlinktodelta(var_9, "", var_3, var_4, var_5, var_6, var_7, var_8);
-  }
-  else if(isDefined(var_4)) {
+  } else if(isDefined(var_4)) {
     level.player playerlinktodelta(var_9, "", var_3, var_4, var_5, var_6, var_7);
-  }
-  else if(isDefined(var_3)) {
+  } else if(isDefined(var_3)) {
     level.player playerlinktodelta(var_9, "", var_3);
-  }
-  else {
+  } else {
     level.player playerlinktodelta(var_9);
   }
 
@@ -2979,7 +2973,7 @@ reconnect_bridge_paths() {
   var_0 = getEntArray("reconnect_path", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 connectpaths();
+    var_2 connectpaths();
   }
 }
 

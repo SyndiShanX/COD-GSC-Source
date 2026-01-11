@@ -31,8 +31,7 @@ main(var_0, var_1, var_2) {
 
   if(issubstr(var_0, "_low")) {
     maps\_vehicle::build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun_low");
-  }
-  else {
+  } else {
     maps\_vehicle::build_turret("bmp_turret2", "tag_turret2", "vehicle_bmp_machine_gun");
   }
 

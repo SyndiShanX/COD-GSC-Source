@@ -342,9 +342,7 @@ func_12E30() {
         continue;
       }
 
-      if([
-          [var_02["changeFunc"]]
-        ]()) {
+      if([[var_02["changeFunc"]]]()) {
         func_3C4D(var_02);
         break;
       }

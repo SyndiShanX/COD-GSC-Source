@@ -77,7 +77,7 @@ chill_resetscriptable() {
   self setscriptablepartstate("chilled", "neutral", 0);
 
   foreach(var_01 in level.chill_data.blindparts) {
-  self setscriptablepartstate(var_01, "neutral", 0);
+    self setscriptablepartstate(var_01, "neutral", 0);
   }
 }
 

@@ -221,7 +221,7 @@ fx_set_spider_fog_1() {
   level.spider_fog_setting = var_0;
 
   foreach(var_2 in level.players) {
-  var_2 fx_set_spider_fog(3);
+    var_2 fx_set_spider_fog(3);
   }
 }
 
@@ -273,6 +273,6 @@ fx_set_spider_fog_3() {
   level.spider_fog_setting = var_0;
 
   foreach(var_2 in level.players) {
-  var_2 fx_set_spider_fog(6);
+    var_2 fx_set_spider_fog(6);
   }
 }

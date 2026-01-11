@@ -22,7 +22,6 @@
 #include scripts\core_common\values_shared;
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\trophy_system;
-
 #namespace weaponobjects;
 
 init_shared() {
@@ -74,11 +73,11 @@ start_gametype() {
   }
 
   level.deleteexplosivesonspawn = getdvarint(#"scr_deleteexplosivesonspawn", 0);
-  level._equipment_spark_fx = #"explosions/fx8_exp_equipment_lg";
-  level._equipment_fizzleout_fx = #"explosions/fx8_exp_equipment_lg";
-  level._equipment_emp_destroy_fx = #"killstreaks/fx_emp_explosion_equip";
-  level._equipment_explode_fx = #"_t6/explosions/fx_exp_equipment";
-  level._equipment_explode_fx_lg = #"explosions/fx8_exp_equipment_lg";
+  level._equipment_spark_fx = # "explosions/fx8_exp_equipment_lg";
+  level._equipment_fizzleout_fx = # "explosions/fx8_exp_equipment_lg";
+  level._equipment_emp_destroy_fx = # "killstreaks/fx_emp_explosion_equip";
+  level._equipment_explode_fx = # "_t6/explosions/fx_exp_equipment";
+  level._equipment_explode_fx_lg = # "explosions/fx8_exp_equipment_lg";
   level.weaponobjects_hacker_trigger_width = 32;
   level.weaponobjects_hacker_trigger_height = 32;
   function_db765b94();
@@ -149,8 +148,8 @@ function_dcc8b5d5(name, var_80e51919, var_7bd83b52) {
 
 event_handler[player_loadoutchanged] loadout_changed(eventstruct) {
   switch (eventstruct.event) {
-    case #"give_weapon":
-    case #"give_weapon_dual":
+    case # "give_weapon":
+    case # "give_weapon_dual":
       weapon = eventstruct.weapon;
       self snipinterfaceattributes(weapon);
       break;
@@ -257,7 +256,7 @@ deleteent(attacker, emp, target) {
 
 clearfxondeath(fx) {
   fx endon(#"death");
-  self waittill(#"death", #"hacked");
+  self waittill(#"death", # "hacked");
   fx delete();
 }
 
@@ -317,7 +316,7 @@ weapondetonate(attacker, weapon) {
 
 detonatewhenstationary(object, delay, attacker, weapon) {
   level endon(#"game_ended");
-  object endon(#"death", #"hacked", #"detonating");
+  object endon(#"death", # "hacked", # "detonating");
 
   if(object isonground() == 0) {
     object waittill(#"stationary");
@@ -327,7 +326,7 @@ detonatewhenstationary(object, delay, attacker, weapon) {
 }
 
 waitanddetonate(object, delay, attacker, weapon) {
-  object endon(#"death", #"hacked");
+  object endon(#"death", # "hacked");
 
   if(!isDefined(attacker) && !isDefined(weapon) && object.weapon.proximityalarmactivationdelay > 0) {
     if(isDefined(object.armed_detonation_wait) && object.armed_detonation_wait) {
@@ -380,9 +379,9 @@ waitanddetonate(object, delay, attacker, weapon) {
     wait delay;
   }
 
-  if(isDefined(attacker) && isplayer(attacker) && isDefined(attacker.pers[#"team"]) && isDefined(object.owner) && isDefined(object.owner.pers) && isDefined(object.owner.pers[#"team"])) {
+  if(isDefined(attacker) && isplayer(attacker) && isDefined(attacker.pers[# "team"]) && isDefined(object.owner) && isDefined(object.owner.pers) && isDefined(object.owner.pers[# "team"])) {
     if(level.teambased) {
-      if(util::function_fbce7263(attacker.pers[#"team"], object.owner.pers[#"team"])) {
+      if(util::function_fbce7263(attacker.pers[# "team"], object.owner.pers[# "team"])) {
         attacker notify(#"destroyed_explosive");
       }
     } else if(attacker != object.owner) {
@@ -394,7 +393,7 @@ waitanddetonate(object, delay, attacker, weapon) {
 }
 
 waitandfizzleout(object, delay) {
-  object endon(#"death", #"hacked");
+  object endon(#"death", # "hacked");
 
   if(isDefined(object.detonated) && object.detonated == 1) {
     return;
@@ -534,8 +533,8 @@ addweaponobject(watcher, weapon_instance, weapon, endonnotify) {
 }
 
 function_6d8aa6a0(player, watcher) {
-  self endon(#"death", #"hacked");
-  player waittill(#"joined_team", #"joined_spectators", #"disconnect", #"changed_specialist", #"changed_specialist_death");
+  self endon(#"death", # "hacked");
+  player waittill(#"joined_team", # "joined_spectators", # "disconnect", # "changed_specialist", # "changed_specialist_death");
   self[[watcher.var_994b472b]](player);
 }
 
@@ -562,7 +561,7 @@ cleanupwatcherondeath(watcher) {
 
 weapon_object_timeout(watcher, timeoutoverride) {
   weapon_instance = self;
-  weapon_instance endon(#"death", #"cancel_timeout");
+  weapon_instance endon(#"death", # "cancel_timeout");
   timeoutval = isDefined(timeoutoverride) ? timeoutoverride : watcher.timeout;
   wait timeoutval;
 
@@ -612,7 +611,7 @@ weapon_object_do_damagefeedback(weapon, attacker) {
 }
 
 weaponobjectdamage(watcher) {
-  self endon(#"death", #"hacked", #"detonating");
+  self endon(#"death", # "hacked", # "detonating");
   self setCanDamage(1);
   self.maxhealth = 100000;
   self.health = self.maxhealth;
@@ -643,7 +642,7 @@ weaponobjectdamage(watcher) {
     }
 
     if(!level.weaponobjectdebug && level.teambased && isplayer(attacker) && isDefined(self.owner)) {
-      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, attacker.pers[#"team"]) && self.owner != attacker) {
+      if(!level.hardcoremode && !util::function_fbce7263(self.owner.team, attacker.pers[# "team"]) && self.owner != attacker) {
         continue;
       }
     }
@@ -677,7 +676,7 @@ weaponobjectdamage(watcher) {
     self.waschained = 1;
   }
 
-  if(isDefined(idflags) && idflags& 8) {
+  if(isDefined(idflags) && idflags & 8) {
     self.wasdamagedfrombulletpenetration = 1;
   }
 
@@ -699,7 +698,7 @@ playdialogondeath(owner) {
 
 watchobjectdamage(owner) {
   owner endon(#"death");
-  self endon(#"hacked", #"death");
+  self endon(#"hacked", # "death");
 
   while(true) {
     waitresult = self waittill(#"damage");
@@ -750,7 +749,7 @@ stunstop() {
 }
 
 weaponstun() {
-  self endon(#"death", #"not_stunned");
+  self endon(#"death", # "not_stunned");
   origin = self gettagorigin("tag_fx");
 
   if(!isDefined(origin)) {
@@ -766,7 +765,7 @@ weaponstun() {
 
 stunfxthink(fx) {
   fx endon(#"death");
-  self waittill(#"death", #"not_stunned");
+  self waittill(#"death", # "not_stunned");
   fx delete();
 }
 
@@ -985,7 +984,7 @@ setstate(newstate) {
 
 proximityalarmloop(watcher, owner) {
   level endon(#"game_ended");
-  self endon(#"death", #"hacked", #"detonating");
+  self endon(#"death", # "hacked", # "detonating");
 
   if(self.weapon.proximityalarminnerradius <= 0) {
     return;
@@ -1067,7 +1066,7 @@ proximityalarmloop(watcher, owner) {
         owner = entity.owner;
       }
 
-      if(entity.team == #"spectator") {
+      if(entity.team == # "spectator") {
         continue;
       }
 
@@ -1131,13 +1130,13 @@ commononspawnuseweaponobjectproximityalarm(watcher, owner) {
     self thread proximityalarmweaponobjectdebug(watcher);
   }
 
-    if(isDefined(watcher.var_82aa8ec4) && watcher.var_82aa8ec4) {
-      curstate = self.owner clientfield::get_to_player("proximity_alarm");
+  if(isDefined(watcher.var_82aa8ec4) && watcher.var_82aa8ec4) {
+    curstate = self.owner clientfield::get_to_player("proximity_alarm");
 
-      if(curstate != 5) {
-        self setstate(0);
-      }
+    if(curstate != 5) {
+      self setstate(0);
     }
+  }
 
   self proximityalarmloop(watcher, owner);
   self proximityalarmactivate(0, watcher);
@@ -1183,13 +1182,13 @@ watchweaponobjectspawn(notify_type, endonnotify = undefined) {
 
   self endon(#"death");
   self notify(#"watchweaponobjectspawn");
-  self endon(#"watchweaponobjectspawn", #"disconnect");
+  self endon(#"watchweaponobjectspawn", # "disconnect");
 
   while(true) {
     if(isDefined(notify_type)) {
       waitresult = self waittill(notify_type);
     } else {
-      waitresult = self waittill(#"grenade_fire", #"grenade_launcher_fire", #"missile_fire", #"placeables_plant");
+      waitresult = self waittill(#"grenade_fire", # "grenade_launcher_fire", # "missile_fire", # "placeables_plant");
     }
 
     weapon_instance = waitresult.projectile;
@@ -1200,7 +1199,7 @@ watchweaponobjectspawn(notify_type, endonnotify = undefined) {
     }
 
     if(isplayer(self) && weapon.setusedstat && !self util::ishacked()) {
-      self stats::function_e24eec31(weapon, #"used", 1);
+      self stats::function_e24eec31(weapon, # "used", 1);
     }
 
     watcher = getweaponobjectwatcherbyweapon(weapon);
@@ -1315,16 +1314,16 @@ showcone(angle, range, color) {
   }
 }
 
-  function weaponobjectdetectionmovable(ownerteam) {
-    self endon(#"end_detection", #"death", #"hacked");
-    level endon(#"game_ended");
+function weaponobjectdetectionmovable(ownerteam) {
+  self endon(#"end_detection", # "death", # "hacked");
+  level endon(#"game_ended");
 
-    if(!level.teambased) {
-      return;
-    }
-
-    self.detectid = "rcBomb" + gettime() + randomint(1000000);
+  if(!level.teambased) {
+    return;
   }
+
+  self.detectid = "rcBomb" + gettime() + randomint(1000000);
+}
 
 seticonpos(item, icon, heightincrease) {
   icon.x = item.origin[0];
@@ -1333,7 +1332,7 @@ seticonpos(item, icon, heightincrease) {
 }
 
 weaponobjectdetectiontrigger_wait(ownerteam) {
-  self endon(#"death", #"hacked", #"detonating");
+  self endon(#"death", # "hacked", # "detonating");
   util::waittillnotmoving();
   self thread weaponobjectdetectiontrigger(ownerteam);
 }
@@ -1342,20 +1341,20 @@ weaponobjectdetectiontrigger(ownerteam) {
   trigger = spawn("trigger_radius", self.origin - (0, 0, 128), 0, 512, 256);
   trigger.detectid = "trigger" + gettime() + randomint(1000000);
   trigger sethintlowpriority(1);
-  self waittill(#"death", #"hacked", #"detonating");
+  self waittill(#"death", # "hacked", # "detonating");
   trigger notify(#"end_detection");
 
   if(isDefined(trigger.bombsquadicon)) {
     trigger.bombsquadicon destroy();
   }
 
-    trigger delete();
+  trigger delete();
 }
 
 hackertriggersetvisibility(owner) {
   self endon(#"death");
   assert(isplayer(owner));
-  ownerteam = owner.pers[#"team"];
+  ownerteam = owner.pers[# "team"];
 
   for(;;) {
     if(level.teambased) {
@@ -1370,7 +1369,7 @@ hackertriggersetvisibility(owner) {
       self setinvisibletoplayer(owner);
     }
 
-    level waittill(#"player_spawned", #"joined_team");
+    level waittill(#"player_spawned", # "joined_team");
   }
 }
 
@@ -1391,7 +1390,7 @@ private set_hint_string(hint_string, default_string) {
 
 hackerinit(watcher) {
   self thread hackernotmoving();
-  event = self waittill(#"death", #"landed");
+  event = self waittill(#"death", # "landed");
 
   if(event._notify == "death") {
     return;
@@ -1408,12 +1407,12 @@ hackerinit(watcher) {
   }
 
   self.hackertrigger = function_c7cdf243(triggerorigin, level.weaponobjects_hacker_trigger_width, level.weaponobjects_hacker_trigger_height);
-  self.hackertrigger set_hint_string(self.weapon.var_2f3ca476, #"mp/generic_hacking");
+  self.hackertrigger set_hint_string(self.weapon.var_2f3ca476, # "mp/generic_hacking");
   self.hackertrigger setignoreentfortrigger(self);
   self.hackertrigger setperkfortrigger(#"specialty_disarmexplosive");
   self.hackertrigger thread hackertriggersetvisibility(self.owner);
 
-    self thread hackerthink(self.hackertrigger, watcher);
+  self thread hackerthink(self.hackertrigger, watcher);
 }
 
 hackerthink(trigger, watcher) {
@@ -1450,13 +1449,13 @@ itemhacked(watcher, player) {
 
   self.hacked = 1;
   self setmissileowner(player);
-  self setteam(player.pers[#"team"]);
+  self setteam(player.pers[# "team"]);
   self.owner = player;
   self clientfield::set("retrievable", 0);
 
   if(self.weapon.dohackedstats) {
     scoreevents::processscoreevent(#"hacked", player, undefined, undefined);
-    player stats::function_e24eec31(getweapon(#"pda_hack"), #"combatrecordstat", 1);
+    player stats::function_e24eec31(getweapon(#"pda_hack"), # "combatrecordstat", 1);
     player challenges::hackedordestroyedequipment();
   }
 
@@ -1467,9 +1466,9 @@ itemhacked(watcher, player) {
     player.lowermessage.alpha = 0;
   }
 
-    self notify(#"hacked", {
-      #player: player
-    });
+  self notify(#"hacked", {
+    #player: player
+  });
   level notify(#"hacked", {
     #target: self,
     #player: player
@@ -1481,7 +1480,7 @@ itemhacked(watcher, player) {
     });
   }
 
-    waitframe(1);
+  waitframe(1);
 
   if(isDefined(player) && player.sessionstate == "playing") {
     player notify(#"grenade_fire", {
@@ -1546,7 +1545,7 @@ hackerresult(player, owner) {
       player playlocalsound(#"evt_hacker_hacking");
     }
 
-      waitframe(1);
+    waitframe(1);
   }
 
   if(isDefined(player)) {
@@ -1559,9 +1558,9 @@ hackerresult(player, owner) {
     self.progresstext hud::destroyelem();
   }
 
-    if(isDefined(self)) {
-      self notify(#"hack_done");
-    }
+  if(isDefined(self)) {
+    self notify(#"hack_done");
+  }
 
   return success;
 }
@@ -1739,7 +1738,7 @@ proximityweaponobject_validtriggerentity(watcher, ent) {
 
 proximityweaponobject_removespawnprotectondeath(ent) {
   self endon(#"death");
-  ent waittill(#"death", #"disconnect");
+  ent waittill(#"death", # "disconnect");
   arrayremovevalue(self.protected_entities, ent);
 }
 
@@ -1786,7 +1785,7 @@ proximityweaponobject_isspawnprotected(watcher, ent) {
 }
 
 proximityweaponobject_dodetonation(watcher, ent, traceorigin) {
-  self endon(#"death", #"hacked");
+  self endon(#"death", # "hacked");
   self notify(#"kill_target_detection");
 
   if(isDefined(watcher.activatesound)) {
@@ -1841,7 +1840,7 @@ proximityweaponobject_waittillframeendanddodetonation(watcher, ent, traceorigin)
 }
 
 proximityweaponobjectdetonation(s_watcher) {
-  self endon(#"death", #"hacked", #"kill_target_detection");
+  self endon(#"death", # "hacked", # "kill_target_detection");
   proximityweaponobject_activationdelay(s_watcher);
   var_6e4025f7 = proximityweaponobject_createdamagearea(s_watcher);
 
@@ -1894,7 +1893,7 @@ shouldaffectweaponobject(object, watcher) {
 }
 
 deleteondeath(ent) {
-  self waittill(#"death", #"hacked");
+  self waittill(#"death", # "hacked");
   waitframe(1);
 
   if(isDefined(ent)) {
@@ -1913,7 +1912,7 @@ testkillbrushonstationary(a_killbrushes, player) {
         continue;
       }
 
-      if(!(isDefined(self.spawnflags) && (self.spawnflags& 8) == 8) && !(isDefined(self.spawnflags) && (self.spawnflags& 512) == 512) && !(isDefined(self.spawnflags) && (self.spawnflags& 32768) == 32768)) {
+      if(!(isDefined(self.spawnflags) && (self.spawnflags & 8) == 8) && !(isDefined(self.spawnflags) && (self.spawnflags & 512) == 512) && !(isDefined(self.spawnflags) && (self.spawnflags & 32768) == 32768)) {
         continue;
       }
 
@@ -1932,7 +1931,7 @@ testkillbrushonstationary(a_killbrushes, player) {
 
 deleteonkillbrush(player) {
   player endon(#"disconnect");
-  self endon(#"death", #"stationary");
+  self endon(#"death", # "stationary");
   a_killbrushes = getEntArray("trigger_hurt_new", "classname");
   self thread testkillbrushonstationary(a_killbrushes, player);
 
@@ -1945,7 +1944,7 @@ deleteonkillbrush(player) {
           continue;
         }
 
-        if(!(isDefined(self.spawnflags) && (self.spawnflags& 8) == 8) && !(isDefined(self.spawnflags) && (self.spawnflags& 512) == 512) && !(isDefined(self.spawnflags) && (self.spawnflags& 32768) == 32768)) {
+        if(!(isDefined(self.spawnflags) && (self.spawnflags & 8) == 8) && !(isDefined(self.spawnflags) && (self.spawnflags & 512) == 512) && !(isDefined(self.spawnflags) && (self.spawnflags & 32768) == 32768)) {
           continue;
         }
 
@@ -2028,26 +2027,26 @@ saydamaged(orig, amount) {
   }
 }
 
-  function private function_c9fc5521(player, weapon) {
-    maxammo = 0;
-    loadout = player loadout::find_loadout_slot(weapon);
+function private function_c9fc5521(player, weapon) {
+  maxammo = 0;
+  loadout = player loadout::find_loadout_slot(weapon);
 
-    if(isDefined(loadout)) {
-      if(loadout.count > 0) {
-        maxammo = loadout.count;
-      } else {
-        maxammo = weapon.maxammo + weapon.clipsize;
-      }
-    } else if(isDefined(player.grenadetypeprimary) && weapon == player.grenadetypeprimary && isDefined(player.grenadetypeprimarycount) && player.grenadetypeprimarycount > 0) {
-      maxammo = player.grenadetypeprimarycount;
-    } else if(isDefined(player.grenadetypesecondary) && weapon == player.grenadetypesecondary && isDefined(player.grenadetypesecondarycount) && player.grenadetypesecondarycount > 0) {
-      maxammo = player.grenadetypesecondarycount;
+  if(isDefined(loadout)) {
+    if(loadout.count > 0) {
+      maxammo = loadout.count;
     } else {
       maxammo = weapon.maxammo + weapon.clipsize;
     }
-
-    return maxammo;
+  } else if(isDefined(player.grenadetypeprimary) && weapon == player.grenadetypeprimary && isDefined(player.grenadetypeprimarycount) && player.grenadetypeprimarycount > 0) {
+    maxammo = player.grenadetypeprimarycount;
+  } else if(isDefined(player.grenadetypesecondary) && weapon == player.grenadetypesecondary && isDefined(player.grenadetypesecondarycount) && player.grenadetypesecondarycount > 0) {
+    maxammo = player.grenadetypesecondarycount;
+  } else {
+    maxammo = weapon.maxammo + weapon.clipsize;
   }
+
+  return maxammo;
+}
 
 private get_ammo(player, weapon) {
   ammo = player getweaponammoclip(weapon);
@@ -2076,7 +2075,7 @@ private function_e0093db1(player, weapon) {
 }
 
 function_d831baf0(trigger, callback, playersoundonuse, npcsoundonuse) {
-  self endon(#"death", #"explode", #"hacked");
+  self endon(#"death", # "explode", # "hacked");
   trigger endon(#"death");
 
   while(true) {
@@ -2208,7 +2207,7 @@ private function_d5e8c3d0(origin, width, height) {
 function_23b0aea9(watcher, player) {
   self endon(#"death");
   self setowner(player);
-  self setteam(player.pers[#"team"]);
+  self setteam(player.pers[# "team"]);
   self.owner = player;
   self.oldangles = self.angles;
   self util::waittillnotmoving();
@@ -2218,7 +2217,7 @@ function_23b0aea9(watcher, player) {
     return;
   }
 
-  if(player.pers[#"team"] == #"spectator") {
+  if(player.pers[# "team"] == # "spectator") {
     return;
   }
 
@@ -2277,15 +2276,15 @@ function_23b0aea9(watcher, player) {
 
   thread switch_team(self, watcher, player);
 
-    self thread watchshutdown(player);
+  self thread watchshutdown(player);
 }
 
 function_ac27aef5(watcher, player, origin) {
   self.pickuptrigger = function_c7cdf243(origin);
   self.pickuptrigger setinvisibletoall();
   self.pickuptrigger setvisibletoplayer(player);
-  self.pickuptrigger setteamfortrigger(player.pers[#"team"]);
-  self.pickuptrigger set_hint_string(self.weapon.var_8a03df2b, #"mp/generic_pickup");
+  self.pickuptrigger setteamfortrigger(player.pers[# "team"]);
+  self.pickuptrigger set_hint_string(self.weapon.var_8a03df2b, # "mp/generic_pickup");
   self thread watchusetrigger(self.pickuptrigger, watcher.pickup, watcher.pickupsoundplayer, watcher.pickupsound, watcher.weapon);
 
   if(isDefined(watcher.pickup_trigger_listener)) {
@@ -2328,7 +2327,7 @@ function_9dbd349e(watcher, player, origin) {
     self.enemytrigger.triggerteamignore = self.team;
   }
 
-  self.enemytrigger set_hint_string(self.weapon.var_5c29f743, #"mp_generic_destroy");
+  self.enemytrigger set_hint_string(self.weapon.var_5c29f743, # "mp_generic_destroy");
   self thread watchusetrigger(self.enemytrigger, watcher.ondestroyed);
 }
 
@@ -2416,7 +2415,7 @@ function_d9219ce2(player, weapon) {
 }
 
 ondestroyed(attacker, data) {
-  playFX(level._effect[#"tacticalinsertionfizzle"], self.origin);
+  playFX(level._effect[# "tacticalinsertionfizzle"], self.origin);
   self playSound(#"dst_tac_insert_break");
 
   if(isDefined(self.owner) && isDefined(level.playequipmentdestroyedonplayer)) {
@@ -2427,7 +2426,7 @@ ondestroyed(attacker, data) {
 }
 
 watchshutdown(player) {
-  self waittill(#"death", #"hacked", #"detonating");
+  self waittill(#"death", # "hacked", # "detonating");
   pickuptrigger = self.pickuptrigger;
   hackertrigger = self.hackertrigger;
   enemytrigger = self.enemytrigger;
@@ -2442,7 +2441,7 @@ watchshutdown(player) {
       hackertrigger.progresstext hud::destroyelem();
     }
 
-      hackertrigger delete();
+    hackertrigger delete();
   }
 
   if(isDefined(enemytrigger)) {
@@ -2451,7 +2450,7 @@ watchshutdown(player) {
 }
 
 watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse, callback_data) {
-  self endon(#"death", #"delete");
+  self endon(#"death", # "delete");
   trigger endon(#"death");
 
   while(true) {
@@ -2470,7 +2469,7 @@ watchusetrigger(trigger, callback, playersoundonuse, npcsoundonuse, callback_dat
       continue;
     }
 
-    if(isDefined(trigger.triggerteam) && player.pers[#"team"] != trigger.triggerteam) {
+    if(isDefined(trigger.triggerteam) && player.pers[# "team"] != trigger.triggerteam) {
       continue;
     }
 
@@ -2623,7 +2622,7 @@ function_d9c08e94(var_2f190eaf, var_46f3f2d3) {
 
 switch_team(entity, watcher, owner) {
   self notify(#"stop_disarmthink");
-  self endon(#"stop_disarmthink", #"death");
+  self endon(#"stop_disarmthink", # "death");
   setdvar(#"scr_switch_team", "<dev string:x6f>");
 
   while(true) {
@@ -2634,15 +2633,11 @@ switch_team(entity, watcher, owner) {
       team = "<dev string:x72>";
 
       if(isDefined(level.getenemyteam) && isDefined(owner) && isDefined(owner.team)) {
-        team = [
-          [level.getenemyteam]
-        ](owner.team);
+        team = [[level.getenemyteam]](owner.team);
       }
 
       if(isDefined(level.devongetormakebot)) {
-        player = [
-          [level.devongetormakebot]
-        ](team);
+        player = [[level.devongetormakebot]](team);
       }
 
       if(!isDefined(player)) {

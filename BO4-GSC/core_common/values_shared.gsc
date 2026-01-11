@@ -10,7 +10,6 @@
 #include scripts\core_common\string_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
-
 #namespace val;
 
 autoexec __init__system__() {

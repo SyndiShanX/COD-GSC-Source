@@ -112,8 +112,7 @@ get_all_ents_in_chain(var_0) {
 
   if(var_1.size > 0) {
     return var_1;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -126,8 +125,7 @@ wait_for_level_notify_or_timeout(var_0, var_1) {
 get_ai_within_radius(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = getaiarray(var_2);
-  }
-  else {
+  } else {
     var_3 = getaiarray();
   }
 
@@ -249,8 +247,7 @@ print3dthread(var_0, var_1, var_2, var_3) {
     self endon("death");
 
     for(;;) {
-      if(isDefined(self)) {
-      }
+      if(isDefined(self)) {}
 
       wait 0.05;
     }
@@ -290,8 +287,7 @@ trigarraywait(var_0) {
 
   if(var_1.size == 1) {
     trigwait(var_0);
-  }
-  else {
+  } else {
     for(var_2 = 0; var_2 < var_1.size; var_2++) {
       var_1[var_2] thread trigarraywait2(var_1);
     }
@@ -320,8 +316,7 @@ triggersenable(var_0, var_1, var_2) {
 
   if(var_2 == 1) {
     common_scripts\utility::array_thread(var_3, common_scripts\utility::trigger_on);
-  }
-  else {
+  } else {
     common_scripts\utility::array_thread(var_3, common_scripts\utility::trigger_off);
   }
 }
@@ -422,8 +417,7 @@ reset_threatbiasgroup() {
     self.threatbiasgroupname = self.old_threatbiasgroupname;
     self setthreatbiasgroup(self.old_threatbiasgroupname);
 
-    if(!threatbiasgroupexists(self.old_threatbiasgroupname)) {
-    }
+    if(!threatbiasgroupexists(self.old_threatbiasgroupname)) {}
   } else {
     self.threatbiasgroupname = undefined;
     self setthreatbiasgroup();
@@ -485,15 +479,13 @@ get_closest_ally(var_0) {
 
   if(!isDefined(var_0)) {
     var_2 = level.player getorigin();
-  }
-  else {
+  } else {
     var_2 = var_0 getorigin();
   }
 
   if(isDefined(level.excludedai)) {
     var_1 = maps\_utility::get_closest_ai_exclude(var_2, "allies", level.excludedai);
-  }
-  else {
+  } else {
     var_1 = maps\_utility::get_closest_ai(var_2, "allies");
   }
 
@@ -522,8 +514,7 @@ getaiarraytouchingvolume(var_0, var_1, var_2) {
 
   if(var_0 == "all") {
     var_3 = getaiarray();
-  }
-  else {
+  } else {
     var_3 = getaiarray(var_0);
   }
 
@@ -554,8 +545,7 @@ npcdelete(var_0, var_1, var_2, var_3) {
 
   if(var_1 == "all") {
     var_5 = getaiarray();
-  }
-  else {
+  } else {
     var_5 = getaiarray(var_1);
   }
 
@@ -606,8 +596,7 @@ getdudesfromarray(var_0, var_1) {
 
   if(var_2.size > 0) {
     return var_2;
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -666,8 +655,7 @@ forcetonode(var_0) {
 setposture(var_0) {
   if(var_0 == "all") {
     self allowedstances("stand", "crouch", "prone");
-  }
-  else {
+  } else {
     self allowedstances(var_0);
   }
 }
@@ -711,8 +699,7 @@ aa_spawning_functions() {}
 spawndude(var_0, var_1) {
   if(isDefined(var_1)) {
     var_2 = var_0 stalingradspawn();
-  }
-  else {
+  } else {
     var_2 = var_0 dospawn();
   }
 
@@ -737,8 +724,7 @@ door_open(var_0, var_1, var_2) {
 
   if(self.classname == "script_brushmodel") {
     var_3 = getent(self.target, "targetname");
-  }
-  else {
+  } else {
     var_4 = getent(self.target, "targetname");
     var_3 = getent(var_4.script_linkto, "script_linkname");
   }
@@ -772,8 +758,7 @@ door_open(var_0, var_1, var_2) {
 door_connectpaths(var_0) {
   if(self.classname == "script_brushmodel") {
     self connectpaths();
-  }
-  else {
+  } else {
     var_1 = getent(self.target, "targetname");
     var_1 hide();
     var_1 notsolid();
@@ -828,8 +813,7 @@ debug_circle_drawlines(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_5 + 1 >= var_0.size) {
       var_7 = var_0[0];
-    }
-    else {
+    } else {
       var_7 = var_0[var_5 + 1];
     }
 

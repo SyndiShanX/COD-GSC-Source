@@ -6,8 +6,7 @@
 main() {
   if(self.type == "dog") {
     animscripts\traverse\shared::dog_jump_up(72.0, 5);
-  }
-  else {
+  } else {
     low_wall_human();
   }
 }
@@ -87,8 +86,7 @@ dotraversegravity(var_0) {
 handletraversenotetracksgravity(var_0) {
   if(var_0 == "traverse_death") {
     return animscripts\traverse\shared::handletraversedeathnotetrack();
-  }
-  else if(var_0 == "traverse_align") {
+  } else if(var_0 == "traverse_align") {
     self.traversestartz = self.origin[2];
     return animscripts\traverse\shared::handletraversealignment();
   } else if(var_0 == "traverse_drop")

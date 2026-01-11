@@ -91,8 +91,7 @@ createfx() {
 fx_init() {
   if(ismp()) {
     init_client_mp_variables();
-  }
-  else {
+  } else {
     init_client_sp_variables();
   }
 
@@ -273,8 +272,7 @@ createfxlogic() {
 
   if(getdvar(#"createfx_map") == "") {
     setdvar("createfx_map", level.script);
-  }
-  else if(getdvar(#"createfx_map") == level.script) {
+  } else if(getdvar(#"createfx_map") == level.script) {
     if(!ismp()) {
       playerpos = [];
       playerpos[0] = getdvarint(#"_id_274F266C");
@@ -291,8 +289,7 @@ createfxlogic() {
 
   if(file == -1) {
     level.write_error = filename;
-  }
-  else {
+  } else {
     closefile(file);
   }
 
@@ -467,8 +464,7 @@ createfxlogic() {
 
     if(button_is_held("BUTTON_RTRIG") && level.is_camera_on) {
       axismode = 1;
-    }
-    else if(!button_is_held("BUTTON_RTRIG") && level.is_camera_on) {
+    } else if(!button_is_held("BUTTON_RTRIG") && level.is_camera_on) {
       axismode = 0;
     }
 
@@ -489,8 +485,7 @@ createfxlogic() {
     if(isDefined(level.cfx_selected_prop)) {
       if(ctrlheld) {
         select_ents_by_property(level.cfx_selected_prop, 1);
-      }
-      else {
+      } else {
         select_ents_by_property(level.cfx_selected_prop);
       }
 
@@ -520,8 +515,7 @@ createfxlogic() {
     }
 
     if(button_is_clicked("z")) {
-      if(shiftheld) {
-      } else
+      if(shiftheld) {} else
         undo();
     }
 
@@ -542,8 +536,7 @@ createfxlogic() {
     if(button_is_clicked("BUTTON_RSTICK")) {
       if(ctrlheld) {
         paste_ents_onto_ents();
-      }
-      else {
+      } else {
         paste_ents();
       }
     }
@@ -561,8 +554,7 @@ createfxlogic() {
     if(menu("none")) {
       if(button_is_clicked("rightarrow")) {
         move_player_to_next_same_effect(1, lastselectentity);
-      }
-      else if(button_is_clicked("leftarrow")) {
+      } else if(button_is_clicked("leftarrow")) {
         move_player_to_next_same_effect(0, lastselectentity);
       }
     }
@@ -721,8 +713,7 @@ manipulate_createfx_ents(highlightedent, leftclick, leftheld, ctrlheld, colors, 
     }
     if(isDefined(highlightedent) && ent == highlightedent) {
       continue;
-    }
-    else {
+    } else {
       colorindex = "default";
 
       if(index_is_selected(i)) {
@@ -826,8 +817,7 @@ button_is_clicked(name, name2) {
 toggle_entity_selection(index, ent) {
   if(isDefined(level.selected_fx[index])) {
     deselect_entity(index, ent);
-  }
-  else {
+  } else {
     select_entity(index, ent);
   }
 }
@@ -1218,11 +1208,9 @@ set_anglemod_move_vector() {
 
     if(newmovement[1] <= -0.3) {
       level.selectedrotate_yaw = level.selectedrotate_yaw - 1;
-    }
-    else if(newmovement[1] >= 0.3) {
+    } else if(newmovement[1] >= 0.3) {
       level.selectedrotate_yaw = level.selectedrotate_yaw + 1;
-    }
-    else if(buttondown("kp_leftarrow", "DPAD_LEFT")) {
+    } else if(buttondown("kp_leftarrow", "DPAD_LEFT")) {
       if(level.selectedrotate_yaw < 0) {
         level.selectedrotate_yaw = 0;
       }
@@ -1239,11 +1227,9 @@ set_anglemod_move_vector() {
 
     if(dolly_movement[0] <= -0.2) {
       level.selectedrotate_pitch = level.selectedrotate_pitch + 1;
-    }
-    else if(dolly_movement[0] >= 0.2) {
+    } else if(dolly_movement[0] >= 0.2) {
       level.selectedrotate_pitch = level.selectedrotate_pitch - 1;
-    }
-    else if(buttondown("kp_uparrow", "DPAD_UP")) {
+    } else if(buttondown("kp_uparrow", "DPAD_UP")) {
       if(level.selectedrotate_pitch < 0) {
         level.selectedrotate_pitch = 0;
       }
@@ -1376,8 +1362,7 @@ generate_fx_log(type, autosave) {
   if(type == "server") {
     if(!autosave) {
       filename = level.cfx_server_scriptdata + level.script + "_fx.gsc";
-    }
-    else {
+    } else {
       filename = level.cfx_server_scriptdata + "backup.gsc";
     }
 
@@ -1388,8 +1373,7 @@ generate_fx_log(type, autosave) {
   } else if(type == "client") {
     if(!autosave) {
       filename = level.cfx_client_scriptdata + level.script + "_fx.csc";
-    }
-    else {
+    } else {
       filename = level.cfx_client_scriptdata + "backup.csc";
     }
 
@@ -1409,11 +1393,9 @@ generate_fx_log(type, autosave) {
 
     if(type == "server") {
       return 1;
-    }
-    else if(type == "client") {
+    } else if(type == "client") {
       return 2;
-    }
-    else {
+    } else {
       return 3;
     }
   } else {
@@ -1452,8 +1434,7 @@ generate_fx_log(type, autosave) {
 
     if(autosave) {
       breather_pause = 1;
-    }
-    else {
+    } else {
       breather_pause = 5;
     }
 
@@ -1639,11 +1620,9 @@ process_fx_rotater() {
 
     if(level.selectedrotate_pitch != 0) {
       rotater devaddpitch(level.selectedrotate_pitch);
-    }
-    else if(level.selectedrotate_yaw != 0) {
+    } else if(level.selectedrotate_yaw != 0) {
       rotater devaddyaw(level.selectedrotate_yaw);
-    }
-    else {
+    } else {
       rotater devaddroll(level.selectedrotate_roll);
     }
 
@@ -1661,11 +1640,9 @@ rotate_over_time(org, rotater) {
   for(p = 0; p < 2; p++) {
     if(level.selectedrotate_pitch != 0) {
       org devaddpitch(level.selectedrotate_pitch);
-    }
-    else if(level.selectedrotate_yaw != 0) {
+    } else if(level.selectedrotate_yaw != 0) {
       org devaddyaw(level.selectedrotate_yaw);
-    }
-    else {
+    } else {
       org devaddroll(level.selectedrotate_roll);
     }
 
@@ -2072,8 +2049,7 @@ last_selected_entity_has_changed(lastselectentity) {
   return lastselectentity != level.selected_fx_ents[level.selected_fx_ents.size - 1];
 }
 
-createfx_showorigin(id, org, delay, org2, type, exploder, id2, firefx, firefxdelay, firefxsound, fxsound, fxquake, fxdamage, soundalias, repeat, delay_min, delay_max, damage_radius, firefxtimeout) {
-}
+createfx_showorigin(id, org, delay, org2, type, exploder, id2, firefx, firefxdelay, firefxsound, fxsound, fxquake, fxdamage, soundalias, repeat, delay_min, delay_max, damage_radius, firefxtimeout) {}
 
 drop_selection_to_ground() {
   if(level.cfx_last_action != "drop_to_ground") {
@@ -2151,8 +2127,7 @@ draw_distance() {
 
       if(ent_is_selected(ent)) {
         ent.drawn = 1;
-      }
-      else {
+      } else {
         ent.drawn = distancesquared(player.origin, ent.v["origin"]) <= maxdistsqr;
       }
 
@@ -2181,8 +2156,7 @@ createfx_save(autosave) {
 
   if(isDefined(autosave)) {
     savemode = "AUTOSAVE";
-  }
-  else {
+  } else {
     savemode = "USER SAVE";
   }
 
@@ -2280,8 +2254,7 @@ move_player_to_next_same_effect(forward_search, lastselectentity) {
   if(level.selected_fx_ents.size <= 0) {
     if(forward_search) {
       ent = level.cfx_next_ent;
-    }
-    else {
+    } else {
       ent = level.cfx_previous_ent;
     }
 
@@ -2496,8 +2469,7 @@ dot_changed(old, new) {
   return false;
 }
 
-damage_void(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, timeoffset, boneindex) {
-}
+damage_void(einflictor, eattacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, timeoffset, boneindex) {}
 
 handle_camera() {
   level notify("new_camera");
@@ -2537,8 +2509,7 @@ handle_camera() {
           newmovement = players[0] getnormalizedmovement();
           dolly_movement = players[0] getnormalizedcameramovement();
 
-          if(button_is_held("BUTTON_LTRIG") || button_is_held("BUTTON_RTRIG")) {
-          } else {
+          if(button_is_held("BUTTON_LTRIG") || button_is_held("BUTTON_RTRIG")) {} else {
             if(newmovement[1] <= -0.4) {
               n_y_vector = n_y_vector + -0.2;
               b_changes_y = 1;
@@ -2624,20 +2595,15 @@ camera_hud_toggle(text) {
   level.camera_hud.color = (1, 1, 1);
 }
 
-init_sp_paths() {
-}
+init_sp_paths() {}
 
-make_sp_player_invulnerable(player) {
-}
+make_sp_player_invulnerable(player) {}
 
-delete_arrays_in_sp() {
-}
+delete_arrays_in_sp() {}
 
-used_in_animation(sp) {
-}
+used_in_animation(sp) {}
 
-init_client_sp_variables() {
-}
+init_client_sp_variables() {}
 
 init_mp_paths() {
   level.cfx_server_scriptdata = "mpcreatefx/";
@@ -2716,7 +2682,7 @@ delete_spawns() {
     spawns = getEntArray(class, "classname");
 
     foreach(spawn in spawns) {
-    spawn delete();
+      spawn delete();
     }
   }
 }

@@ -32,8 +32,7 @@ skipto_menendez_sees_noriega() {
   level.player setclientdvar("cg_aggressiveCullRadius", 495);
 }
 
-init_flags() {
-}
+init_flags() {}
 
 mason_intro() {
   convert_mason_models();

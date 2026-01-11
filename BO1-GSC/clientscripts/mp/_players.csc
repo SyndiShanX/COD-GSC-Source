@@ -58,8 +58,7 @@ dtp_effects() {
     if(!IsSplitscreen() && isDefined(localPlayer) && localPlayer == self) {
       if(isDefined(level.isWinter) && level.isWinter) {
         AnimateUI(localClientNum, "fullscreen_snow", "dirt", "in", 0);
-      }
-      else {
+      } else {
         AnimateUI(localClientNum, "fullscreen_dirt", "dirt", "in", 0);
       }
     }

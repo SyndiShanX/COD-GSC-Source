@@ -106,8 +106,7 @@ load_unlock_from_table() {
 
   if(isDefined(level.alien_unlock_table)) {
     unlock_table = level.alien_unlock_table;
-  }
-  else {
+  } else {
     unlock_table = ALIEN_UNLOCK_TABLE;
   }
 

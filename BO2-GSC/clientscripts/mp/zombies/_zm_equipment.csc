@@ -72,8 +72,7 @@ play_fx_for_all_clients(fx, tag, storehandles, forward) {
       if(storehandles) {
         if(isDefined(forward)) {
           self._equipment_activated_fx[i][self._equipment_activated_fx[i].size] = playFX(i, fx, self.origin, forward);
-        }
-        else {
+        } else {
           self._equipment_activated_fx[i][self._equipment_activated_fx[i].size] = playFX(i, fx, self.origin);
         }
 

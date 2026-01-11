@@ -53,8 +53,7 @@ lightning_vision() {
 camo_vision_set_naked(str_vision, n_time) {
   if(level.player ent_flag_exist("camo_suit_on") && level.player ent_flag("camo_suit_on")) {
     self.str_old_vision = str_vision;
-  }
-  else {
+  } else {
     self visionsetnaked(str_vision, n_time);
   }
 }
@@ -79,17 +78,13 @@ intro_dof_look_rhand(m_player_body) {
   level.player depth_of_field_off(0.5);
 }
 
-intro_dof_rhand_plant(m_player_body) {
-}
+intro_dof_rhand_plant(m_player_body) {}
 
-intro_dof_look_left(m_player_body) {
-}
+intro_dof_look_left(m_player_body) {}
 
-intro_dof_lhand_plant(m_player_body) {
-}
+intro_dof_lhand_plant(m_player_body) {}
 
-intro_dof_grab_rope(m_player_body) {
-}
+intro_dof_grab_rope(m_player_body) {}
 
 treefall_dof_look_down(m_player_body) {
   iprintlnbold("DOF:treefall_DOF_look_down");
@@ -145,8 +140,7 @@ treefall_dof_get_up(m_player_body) {
   level.player depth_of_field_off(0.5);
 }
 
-treefall_dof_look_harper_2(m_player_body) {
-}
+treefall_dof_look_harper_2(m_player_body) {}
 
 chamber_dof_chamber_center(m_player_body) {
   iprintlnbold("DOF:chamber_DOF_chamber_center");
@@ -210,8 +204,7 @@ briggs_ending_dof() {
   level.player depth_of_field_tween(8, 10, 150, 300, 4, 3, 2);
 }
 
-dof_reset(m_player_body) {
-}
+dof_reset(m_player_body) {}
 
 _lightning() {
   level endon("_rain_lightning");

@@ -789,8 +789,7 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
   if(is_placeable_mine(weapon)) {
     if(!instakill) {
       return "claymore";
-    }
-    else {
+    } else {
       return "weapon_instakill";
     }
   }
@@ -801,8 +800,7 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
     if(!instakill) {
       if(player hasWeapon("sickle_knife_zm")) {
         return "sickle";
-      }
-      else {
+      } else {
         return "melee";
       }
     } else
@@ -811,8 +809,7 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
   if(isDefined(zombie.damageweapon) && zombie.damageweapon == "zombie_nesting_doll_single") {
     if(!instakill) {
       return "dolls";
-    }
-    else {
+    } else {
       return "weapon_instakill";
     }
   }
@@ -823,8 +820,7 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
     weapon != "ray_gun_zm") {
     if(!instakill) {
       return "explosive";
-    }
-    else {
+    } else {
       return "weapon_instakill";
     }
   }
@@ -836,8 +832,7 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
       mod == "MOD_GRENADE_SPLASH")) {
     if(!instakill) {
       return "flame";
-    }
-    else {
+    } else {
       return "weapon_instakill";
     }
   }
@@ -845,8 +840,7 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
     dist > far_dist) {
     if(!instakill) {
       return "raygun";
-    }
-    else {
+    } else {
       return "weapon_instakill";
     }
   }
@@ -884,8 +878,7 @@ get_mod_type(impact, mod, weapon, zombie, instakill, dist, player) {
     mod == "MOD_PISTOL_BULLET") {
     if(!instakill) {
       return "bullet";
-    }
-    else {
+    } else {
       return "weapon_instakill";
     }
   }

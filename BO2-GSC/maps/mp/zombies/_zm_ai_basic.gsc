@@ -50,8 +50,7 @@ find_flesh() {
 
     if(!isDefined(self.ignore_player) || players.size == 1) {
       self.ignore_player = [];
-    }
-    else if(!isDefined(level._should_skip_ignore_player_logic) || ![
+    } else if(!isDefined(level._should_skip_ignore_player_logic) || ![
         [level._should_skip_ignore_player_logic]
       ]()) {
       i = 0;
@@ -119,9 +118,8 @@ find_flesh() {
 
     if(isDefined(level._zombie_path_timer_override)) {
       self.zombie_path_timer = [
-    }
-        [level._zombie_path_timer_override]
-      ]();
+        }
+        [level._zombie_path_timer_override]]();
     else {
       self.zombie_path_timer = gettime() + randomfloatrange(1, 3) * 1000;
     }
@@ -297,8 +295,7 @@ inert_think(in_place) {
 
       if(substate == "inert3" || substate == "inert4" || substate == "inert5" || substate == "inert6") {
         self thread inert_watch_goal();
-      }
-      else {
+      } else {
         self.in_place = 1;
       }
     }
@@ -320,8 +317,7 @@ inert_think(in_place) {
 
   if(isDefined(self.inert_wakeup_override)) {
     self[[self.inert_wakeup_override]]();
-  }
-  else if(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) {
+  } else if(isDefined(self.completed_emerging_into_playable_area) && self.completed_emerging_into_playable_area) {
     self.ignoreall = 0;
 
     if(isDefined(level.ignore_find_flesh) && !self[[level.ignore_find_flesh]]()) {
@@ -454,7 +450,7 @@ grenade_watcher(grenade) {
     return;
   }
   foreach(zombie in zombies) {
-  zombie stop_inert();
+    zombie stop_inert();
   }
 }
 
@@ -478,8 +474,7 @@ inert_transition() {
   if(self.zombie_move_speed == "run") {
     if(self.has_legs) {
       trans_set = level.inert_trans_run;
-    }
-    else {
+    } else {
       trans_set = level.inert_crawl_trans_run;
     }
 
@@ -487,8 +482,7 @@ inert_transition() {
   } else if(self.zombie_move_speed == "sprint") {
     if(self.has_legs) {
       trans_set = level.inert_trans_sprint;
-    }
-    else {
+    } else {
       trans_set = level.inert_crawl_trans_sprint;
     }
 
@@ -509,8 +503,7 @@ inert_eye_glow() {
 
     if(note == "end") {
       return;
-    }
-    else if(note == "zmb_awaken") {
+    } else if(note == "zmb_awaken") {
       self maps\mp\zombies\_zm_spawner::zombie_eye_glow();
       return;
     }

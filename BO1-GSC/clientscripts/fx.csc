@@ -94,8 +94,7 @@ trail_effect() {
     }
     if(isDefined(org)) {
       self.v["angles"] = VectorToAngles(org - self.v["origin"]);
-    }
-    else {
+    } else {
       println("*** Client : Exploder " + self.v["trailfx"] + " Failed to find target " + self.v["target"]);
     }
   } else {
@@ -173,10 +172,8 @@ activate_individual_exploder() {
   }
   if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
     self thread cannon_effect();
-  }
-  else {
-  if(isDefined(self.v["soundalias"])) {
-  }
+  } else {
+    if(isDefined(self.v["soundalias"])) {}
     println("** Client : missing sound_effect");
   }
   if(isDefined(self.v["earthquake"])) {
@@ -373,8 +370,7 @@ loopfxthread(clientNum) {
     }
     if(isDefined(self.fxStop)) {
       level waittill("stop fx" + self.fxStop);
-    }
-    else {
+    } else {
       return;
     }
     if(isDefined(self.looperFX)) {
@@ -382,8 +378,7 @@ loopfxthread(clientNum) {
     }
     if(isDefined(self.fxStart)) {
       level waittill("start fx" + self.fxStart);
-    }
-    else {
+    } else {
       return;
     }
   }

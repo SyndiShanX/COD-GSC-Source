@@ -42,8 +42,7 @@ init() {
 
     if(var_3 == "win" || var_3 == "loss" || var_3 == "tie") {
       var_6 = float(var_6);
-    }
-    else {
+    } else {
       var_6 = int(var_6);
     }
 
@@ -95,8 +94,7 @@ killedplayer(var_0, var_1, var_2, var_3, var_4) {
   if(maps\mp\_utility::isbulletdamage(var_3)) {
     if(self.lastkilltime == var_8) {
       self.bulletstreak++;
-    }
-    else {
+    } else {
       self.bulletstreak = 1;
     }
   } else
@@ -631,8 +629,7 @@ multikillevent(var_0, var_1, var_2, var_3) {
 
   if(common_scripts\utility::string_starts_with(var_5, "iw5_")) {
     var_6 = getsubstr(var_5, 4);
-  }
-  else if(common_scripts\utility::string_starts_with(var_5, "h1_")) {
+  } else if(common_scripts\utility::string_starts_with(var_5, "h1_")) {
     var_6 = getsubstr(var_5, 3);
   }
 

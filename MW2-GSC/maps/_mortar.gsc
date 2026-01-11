@@ -16,7 +16,7 @@ main() {
   if( !(isdefined (level.mortar) ) ) {
   	error ("level.mortar not defined. define in level script");
   }
-	
+  	
   thread generic_style_init();
   */
 }
@@ -49,8 +49,7 @@ hurtgen_style() {
       d2 = undefined;
       if(isDefined(level.foley)) {
         d2 = distance(level.foley.origin, mortars[c].origin);
-      }
-      else {
+      } else {
         d2 = 360;
       }
       if((d < 1600) && (d > 400) && (d2 > 350) && (c != lastmortar)) {
@@ -142,28 +141,27 @@ script_mortargroup_style() {
   level.mortars = [];
   models = getEntArray("script_model", "classname");
   for(i = 0; i < models.size; i++) {
-    if(isDefined(models[i].script_mortargroup)) {
-  }
-      if(!isDefined(level.mortars[models[i].script_mortargroup])) {
-        level.mortars[models[i].script_mortargroup] = [];
-      }
-
-      mortar = spawnStruct();
-      mortar.origin = models[i].origin;
-      mortar.angles = models[i].angles;
-      if(isDefined(models[i].targetname)) {
-        mortar.targetname = models[i].targetname;
-      }
-      if(isDefined(models[i].target)) {
-        mortar.target = models[i].target;
-      }
-      level.mortars[models[i].script_mortargroup]
-        [level.mortars[models[i].script_mortargroup].size] = mortar;
-      models[i] delete();
-
-      //			mortars[mortars.size] = models[i];
-
+    if(isDefined(models[i].script_mortargroup)) {}
+    if(!isDefined(level.mortars[models[i].script_mortargroup])) {
+      level.mortars[models[i].script_mortargroup] = [];
     }
+
+    mortar = spawnStruct();
+    mortar.origin = models[i].origin;
+    mortar.angles = models[i].angles;
+    if(isDefined(models[i].targetname)) {
+      mortar.targetname = models[i].targetname;
+    }
+    if(isDefined(models[i].target)) {
+      mortar.target = models[i].target;
+    }
+    level.mortars[models[i].script_mortargroup]
+      [level.mortars[models[i].script_mortargroup].size] = mortar;
+    models[i] delete();
+
+    //			mortars[mortars.size] = models[i];
+
+  }
   for(i = 0; i < mortars.size; i++) {
     mortars[i] hide();
     //		mortars[i] setup_mortar_terrain(); 		// this was commented out going to run it and find out just why
@@ -175,14 +173,13 @@ script_mortargroup_style() {
 
   triggers = array_combine(getEntArray("trigger_multiple", "classname"), getEntArray("trigger_radius", "classname"));
   for(i = 0; i < triggers.size; i++) {
-    if(isDefined(triggers[i].script_mortargroup)) {
-  }
-      if(!isDefined(level.mortars[triggers[i].script_mortargroup])) {
-        level.mortars[triggers[i].script_mortargroup] = [];
-      }
-      mortartrigs[mortartrigs.size] = triggers[i];
-
+    if(isDefined(triggers[i].script_mortargroup)) {}
+    if(!isDefined(level.mortars[triggers[i].script_mortargroup])) {
+      level.mortars[triggers[i].script_mortargroup] = [];
     }
+    mortartrigs[mortartrigs.size] = triggers[i];
+
+  }
   for(i = 0; i < mortartrigs.size; i++) {
     mortartrigs[i].mortargroup = 0;
     mortartrigs[i] thread script_mortargroup_mortar_group();
@@ -212,15 +209,13 @@ script_mortargroup_mortarzone() {
   }
   if(isDefined(self.script_radius)) {
     mortar_radius = self.script_radius;
-  }
-  else {
+  } else {
     mortar_radius = 0;
   }
 
   if(isDefined(self.script_delay_min) && isDefined(self.script_delay_max)) {
     customdelay = true;
-  }
-  else {
+  } else {
     customdelay = false;
   }
 
@@ -303,15 +298,14 @@ is_lastblast(mortar, lastblast) {
   for(i = 0; i < lastblast.size; i++) {
     if(mortar == lastblast[i])
   }
-      return true;
+  return true;
   return false;
 }
 
 script_mortargroup_domortar() {
   if(isDefined(self.targetname) && isDefined(level.mortarthread[self.targetname])) {
     level thread[[level.mortarthread[self.targetname]]](self);
-  }
-  else {
+  } else {
     self thread activate_mortar(undefined, undefined, undefined, undefined, undefined, undefined, true);
   }
   self waittill("mortar");
@@ -390,8 +384,7 @@ bunker_style_mortar() {
   trigs = getEntArray("mortar_bunker", "targetname");
   if((isDefined(trigs)) && (trigs.size > 0)) {
     ents = array_merge(structs, trigs);
-  }
-  else {
+  } else {
     ents = structs;
   }
   assert(isDefined(ents));
@@ -437,14 +430,12 @@ bunker_style_mortar_think(mortar_bunker_array, structs) {
   max = undefined;
   if(isDefined(level.mortarMinInterval)) {
     min = level.mortarMinInterval;
-  }
-  else {
+  } else {
     min = 4;
   }
   if(isDefined(level.mortarMaxInterval)) {
     max = level.mortarMaxInterval;
-  }
-  else {
+  } else {
     max = 6;
   }
   groupNum = int(mortar_bunker_array[0].script_mortargroup);
@@ -471,8 +462,7 @@ bunker_style_mortar_activate(mortar_bunker_array, min, max, groupNum, structs) {
     if(!isDefined(level.mortarNoQuake)) {
       if(cointoss()) {
         earthquake(0.20, 1.5, sound_org.origin, 1250);
-      }
-      else {
+      } else {
         earthquake(0.35, 2.75, sound_org.origin, 1250);
       }
     }
@@ -499,8 +489,7 @@ bunker_style_mortar_explode(min, max) {
   -------------------------*/
   if(isDefined(level.mortar_min_dist)) {
     min_dist = level.mortar_min_dist;
-  }
-  else {
+  } else {
     min_dist = 1024;
   }
 
@@ -586,14 +575,12 @@ bog_style_mortar_think(mortars, groupNum) {
   max = undefined;
   if(isDefined(level.mortarMinInterval)) {
     min = level.mortarMinInterval;
-  }
-  else {
+  } else {
     min = 0.5;
   }
   if(isDefined(level.mortarMaxInterval)) {
     max = level.mortarMaxInterval;
-  }
-  else {
+  } else {
     max = 3;
   }
   groupNum = int(mortars[0].script_mortargroup);
@@ -609,8 +596,7 @@ bog_style_mortar_activate(mortars, groupNum, min, max) {
 
   if(isDefined(level.mortar_min_dist)) {
     min_dist = level.mortar_min_dist;
-  }
-  else {
+  } else {
     min_dist = 300;
   }
 
@@ -707,8 +693,7 @@ bog_style_mortar_explode(instant, customExploSound) {
   }
   if(isDefined(customExploSound)) {
     self thread play_sound_in_space(customExploSound);
-  }
-  else {
+  } else {
     self thread play_sound_in_space(level.scr_sound["mortar"][self.script_fxid]);
   }
 
@@ -744,8 +729,7 @@ bog_style_mortar_trigger(value) {
 
   if(value == "on") {
     bog_style_mortar_on(self.script_mortargroup);
-  }
-  else if(value == "off") {
+  } else if(value == "off") {
     bog_style_mortar_off(self.script_mortargroup);
   }
 }
@@ -785,8 +769,7 @@ bunker_style_mortar_trigger(value) {
 
   if(value == "on") {
     bunker_style_mortar_on(self.script_mortargroup);
-  }
-  else if(value == "off") {
+  } else if(value == "off") {
     bunker_style_mortar_off(self.script_mortargroup);
   }
 }
@@ -836,8 +819,7 @@ setup_mortar_terrain() {
   if(isDefined(self.script_hidden)) {
     if(isDefined(self.script_hidden)) {
       self.hidden_terrain = getent(self.script_hidden, "targetname");
-    }
-    else if((isDefined(self.terrain)) && (isDefined(self.terrain[0].target))) {
+    } else if((isDefined(self.terrain)) && (isDefined(self.terrain[0].target))) {
       self.hidden_terrain = getent(self.terrain[0].target, "targetname");
     }
 
@@ -911,8 +893,7 @@ mortar_boom(origin, fPower, iTime, iRadius, effect, bIsstruct) {
 
   if(isDefined(effect)) {
     playFX(effect, origin);
-  }
-  else {
+  } else {
     playFX(level.mortar, origin);
   }
 
@@ -965,8 +946,7 @@ mortar_sound(bIsstruct) {
 
   if(!bIsstruct) {
     self playSound("mortar_explosion" + soundnum);
-  }
-  else {
+  } else {
     play_sound_in_space("mortar_explosion" + soundnum, self.origin);
   }
 }
@@ -989,8 +969,7 @@ incoming_sound(soundnum, bIsstruct) {
   if(soundnum == 1) {
     if(bIsstruct) {
       thread play_sound_in_space("mortar_incoming1", self.origin);
-    }
-    else {
+    } else {
       self playSound("mortar_incoming1");
     }
     wait(1.07 - 0.25);
@@ -998,16 +977,14 @@ incoming_sound(soundnum, bIsstruct) {
   if(soundnum == 2) {
     if(bIsstruct) {
       thread play_sound_in_space("mortar_incoming2", self.origin);
-    }
-    else {
+    } else {
       self playSound("mortar_incoming2");
     }
     wait(0.67 - 0.25);
   } else {
     if(bIsstruct) {
       thread play_sound_in_space("mortar_incoming3", self.origin);
-    }
-    else {
+    } else {
       self playSound("mortar_incoming3");
     }
     wait(1.55 - 0.25);
@@ -1117,9 +1094,8 @@ generic_style(strExplosion, fDelay, iBarrageSize, fBarrageDelay, iMinRange, iMax
           iCur = (i + iRand) % aeExplosions.size;
           fDist = distance(level.player getorigin(), aeExplosions[iCur].origin);
           if((fDist < iMaxRangeLocal) && (fDist > iMinRangeLocal) && (iCur != iLastExplosion)) {
-          //				if( (fDist < iMaxRangeLocal) && (fDist > iMinRangeLocal))
-          }
-          {
+            //				if( (fDist < iMaxRangeLocal) && (fDist > iMinRangeLocal))
+          } {
             aeExplosions[iCur].iMinRange = iMinRangeLocal;
             aeExplosions[iCur] explosion_activate(strExplosion);
             iLastExplosion = iCur;
@@ -1129,15 +1105,13 @@ generic_style(strExplosion, fDelay, iBarrageSize, fBarrageDelay, iMinRange, iMax
         iLastExplosion = -1;
         if(isDefined(level.explosion_delay) && isDefined(level.explosion_delay[strExplosion])) {
           wait(level.explosion_delay[strExplosion]);
-        }
-        else {
+        } else {
           wait(randomfloat(fDelay) + randomFloat(fDelay));
         }
       }
       if(isDefined(level.explosion_barrage_delay) && isDefined(level.explosion_barrage_delay[strExplosion])) {
         wait(level.explosion_barrage_delay[strExplosion]);
-      }
-      else {
+      } else {
         wait(randomfloat(fBarrageDelay) + randomFloat(fBarrageDelay));
       }
     }

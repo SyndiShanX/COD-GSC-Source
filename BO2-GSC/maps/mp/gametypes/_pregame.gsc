@@ -58,8 +58,7 @@ onstartgametype() {
 
     if(level.splitscreen) {
       setobjectivescoretext(team, &"OBJECTIVES_PREGAME");
-    }
-    else {
+    } else {
       setobjectivescoretext(team, &"OBJECTIVES_PREGAME_SCORE");
     }
 
@@ -107,8 +106,7 @@ onspawnplayer(predictedspawn) {
 
   if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "dm");
   }
 }
@@ -260,8 +258,7 @@ ontimelimit() {
 
     if(isDefined(winner)) {
       logstring("time limit, win: " + winner.name);
-    }
-    else {
+    } else {
       logstring("time limit, tie");
     }
   }
@@ -276,8 +273,7 @@ get_pregame_class() {
 
   if(isDefined(pclass) && pclass[0] != "") {
     return pclass;
-  }
-  else {
+  } else {
     return "smg_mp,0";
   }
 }

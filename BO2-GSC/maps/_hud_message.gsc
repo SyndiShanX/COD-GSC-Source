@@ -121,11 +121,9 @@ shownotifymessageinternal(notifydata) {
 
   if(isDefined(notifydata.duration)) {
     duration = notifydata.duration;
-  }
-  else if(level.gameended) {
+  } else if(level.gameended) {
     duration = 2.0;
-  }
-  else {
+  } else {
     duration = 4.0;
   }
 
@@ -137,8 +135,7 @@ shownotifymessageinternal(notifydata) {
 
   if(isDefined(notifydata.glowcolor)) {
     glowcolor = notifydata.glowcolor;
-  }
-  else {
+  } else {
     glowcolor = (0, 0, 0);
   }
 
@@ -148,22 +145,19 @@ shownotifymessageinternal(notifydata) {
     if(level.splitscreen) {
       if(isDefined(notifydata.titlelabel)) {
         self iprintlnbold(notifydata.titlelabel, notifydata.titletext);
-      }
-      else {
+      } else {
         self iprintlnbold(notifydata.titletext);
       }
     } else {
       if(isDefined(notifydata.titlelabel)) {
         self.notifytitle.label = notifydata.titlelabel;
-      }
-      else {
+      } else {
         self.notifytitle.label = &"";
       }
 
       if(isDefined(notifydata.titlelabel) && !isDefined(notifydata.titleisstring)) {
         self.notifytitle setvalue(notifydata.titletext);
-      }
-      else {
+      } else {
         self.notifytitle settext(notifydata.titletext);
       }
 
@@ -177,22 +171,19 @@ shownotifymessageinternal(notifydata) {
     if(level.splitscreen) {
       if(isDefined(notifydata.textlabel)) {
         self iprintlnbold(notifydata.textlabel, notifydata.notifytext);
-      }
-      else {
+      } else {
         self iprintlnbold(notifydata.notifytext);
       }
     } else {
       if(isDefined(notifydata.textlabel)) {
         self.notifytext.label = notifydata.textlabel;
-      }
-      else {
+      } else {
         self.notifytext.label = &"";
       }
 
       if(isDefined(notifydata.textlabel) && !isDefined(notifydata.textisstring)) {
         self.notifytext setvalue(notifydata.notifytext);
-      }
-      else {
+      } else {
         self.notifytext settext(notifydata.notifytext);
       }
 
@@ -207,8 +198,7 @@ shownotifymessageinternal(notifydata) {
     if(level.splitscreen) {
       if(isDefined(notifydata.text2label)) {
         self iprintlnbold(notifydata.text2label, notifydata.notifytext2);
-      }
-      else {
+      } else {
         self iprintlnbold(notifydata.notifytext2);
       }
     } else {
@@ -216,15 +206,13 @@ shownotifymessageinternal(notifydata) {
 
       if(isDefined(notifydata.text2label)) {
         self.notifytext2.label = notifydata.text2label;
-      }
-      else {
+      } else {
         self.notifytext2.label = &"";
       }
 
       if(isDefined(notifydata.text2label) && !isDefined(notifydata.textisstring)) {
         self.notifytext2 setvalue(notifydata.notifytext2);
-      }
-      else {
+      } else {
         self.notifytext2 settext(notifydata.notifytext2);
       }
 
@@ -240,8 +228,7 @@ shownotifymessageinternal(notifydata) {
     if(level.splitscreen) {
       if(isDefined(notifydata.text3label)) {
         self iprintlnbold(notifydata.text3label, notifydata.notifytext3);
-      }
-      else {
+      } else {
         self iprintlnbold(notifydata.notifytext3);
       }
     } else {
@@ -249,15 +236,13 @@ shownotifymessageinternal(notifydata) {
 
       if(isDefined(notifydata.text3label)) {
         self.notifytext3.label = notifydata.text3label;
-      }
-      else {
+      } else {
         self.notifytext3.label = &"";
       }
 
       if(isDefined(notifydata.text3label) && !isDefined(notifydata.textisstring)) {
         self.notifytext3 setvalue(notifydata.notifytext3);
-      }
-      else {
+      } else {
         self.notifytext3 settext(notifydata.notifytext3);
       }
 

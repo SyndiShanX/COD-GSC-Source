@@ -13,10 +13,10 @@ player_viewhands_minigun(turret) {
   viewhands = spawn_anim_model( "suburban_hands", turret getTagOrigin( "tag_player" ) );
   viewhands.angles = turret getTagAngles( "tag_player" );
   viewhands linkto( turret, "tag_player" );
-	
+  	
   viewhands setAnim( viewhands getanim( "idle_L" ), 1, 0, 1 );
   viewhands setAnim( viewhands getanim( "idle_R" ), 1, 0, 1 );
-	
+  	
   viewhands thread player_viewhands_minigun_hand( "LEFT" );
   viewhands thread player_viewhands_minigun_hand( "RIGHT" );
   */
@@ -51,8 +51,7 @@ player_viewhands_minigun_hand(hand) {
   checkFunc = undefined;
   if(hand == "LEFT") {
     checkFunc = ::spinButtonPressed;
-  }
-  else if(hand == "RIGHT") {
+  } else if(hand == "RIGHT") {
     checkFunc = ::fireButtonPressed;
   }
   assert(isDefined(checkFunc));
@@ -90,8 +89,7 @@ player_viewhands_minigun_idle(hand) {
   animHand = undefined;
   if(hand == "LEFT") {
     animHand = "L";
-  }
-  else if(hand == "RIGHT") {
+  } else if(hand == "RIGHT") {
     animHand = "R";
   }
   assert(isDefined(animHand));
@@ -107,8 +105,7 @@ player_viewhands_minigun_presed(hand) {
   animHand = undefined;
   if(hand == "LEFT") {
     animHand = "L";
-  }
-  else if(hand == "RIGHT") {
+  } else if(hand == "RIGHT") {
     animHand = "R";
   }
   assert(isDefined(animHand));

@@ -174,7 +174,7 @@ func_BC88(var_00) {
       var_07 = scripts\engine\utility::get_array_of_closest(var_0.origin, level.current_interaction_structs, undefined, 10, 750, 1);
 
       foreach(var_09 in var_0.disabled_interactions) {
-      var_07 = scripts\engine\utility::array_remove(var_07, var_09);
+        var_07 = scripts\engine\utility::array_remove(var_07, var_09);
       }
 
       foreach(var_09 in var_07) {
@@ -249,8 +249,7 @@ func_7A4A(var_00, var_01) {
 
       if(isDefined(var_04)) {
         var_03 = var_4.origin;
-      }
-      else {
+      } else {
         var_03 = var_0.origin;
       }
     }
@@ -259,8 +258,7 @@ func_7A4A(var_00, var_01) {
 
   if(isDefined(level.guided_interaction_offset_func)) {
     var_02 = [[level.guided_interaction_offset_func]](var_00, var_01);
-  }
-  else {
+  } else {
     var_05 = get_area_for_power(var_00);
 
     if(isDefined(var_0.name)) {
@@ -286,8 +284,7 @@ func_7A4A(var_00, var_01) {
         case "iw7_sonic_zm":
           if(var_05 == "moon") {
             var_02 = (0, 0, 30);
-          }
-          else {
+          } else {
             var_02 = (0, 0, 56);
           }
 
@@ -313,8 +310,7 @@ func_7A48(var_00, var_01) {
 
       if(var_05 > 1) {
         var_03 = 4500;
-      }
-      else {
+      } else {
         var_02 = 0.5;
         var_03 = int(var_03 * var_02);
       }
@@ -335,18 +331,15 @@ func_7A48(var_00, var_01) {
   } else if(func_9CDB(var_00)) {
     if(isDefined(var_0.name) && !var_01 can_use_perk(var_00)) {
       var_03 = 0;
-    }
-    else if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && isDefined(var_0.name) && var_0.name == "perk_machine_revive") {
+    } else if((scripts\cp\utility::isplayingsolo() || level.only_one_player) && isDefined(var_0.name) && var_0.name == "perk_machine_revive") {
       var_03 = 500;
-    }
-    else {
+    } else {
       var_03 = get_perk_machine_cost(var_00);
     }
   } else if(interaction_is_fortune_teller(var_00)) {
     if(var_1.card_refills == 1) {
       var_03 = level.fortune_visit_cost_2;
-    }
-    else {
+    } else {
       var_03 = level.fortune_visit_cost_1;
     }
   }
@@ -403,8 +396,7 @@ func_9C64(var_00, var_01, var_02) {
 
   if(isDefined(var_1.name)) {
     var_03 = var_1.name;
-  }
-  else {
+  } else {
     return 0;
   }
 
@@ -446,8 +438,7 @@ func_9C64(var_00, var_01, var_02) {
   if(isDefined(level.active_volume_check)) {
     if(var_03 == "pap_upgrade" || var_03 == "weapon_upgrade") {
       return 1;
-    }
-    else if(!self[[level.active_volume_check]](var_1.origin)) {
+    } else if(!self[[level.active_volume_check]](var_1.origin)) {
       return 0;
     }
   }
@@ -484,8 +475,7 @@ func_9C64(var_00, var_01, var_02) {
 
   if(scripts\engine\trace::ray_trace_passed(var_00 getEye(), var_04, [var_00], var_13)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -495,7 +485,7 @@ func_77D3() {
     var_00 = [];
 
     foreach(var_02 in level.func_186E[self.basename]) {
-    var_0[var_0.size] = level.func_10817[var_02];
+      var_0[var_0.size] = level.func_10817[var_02];
     }
 
     return var_00;
@@ -544,8 +534,7 @@ get_spawn_volumes_player_is_in(var_00, var_01, var_02) {
     }
     if(var_02 istouching(var_06)) {
       var_07 = 1;
-    }
-    else if(scripts\engine\utility::is_true(var_00) && var_02 func_9C0F(var_06)) {
+    } else if(scripts\engine\utility::is_true(var_00) && var_02 func_9C0F(var_06)) {
       var_07 = 1;
     }
 
@@ -667,8 +656,7 @@ register_interaction(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var
 
   if(isDefined(var_06)) {
     var_9.requires_power = var_06;
-  }
-  else {
+  } else {
     var_9.requires_power = 0;
   }
 
@@ -729,8 +717,7 @@ flash_inventory() {
 
   if(!isDefined(self.func_BF46)) {
     self.func_BF46 = gettime() + 2500;
-  }
-  else if(gettime() < self.func_BF46) {
+  } else if(gettime() < self.func_BF46) {
     return;
   }
   self.func_BF46 = gettime() + 2500;
@@ -848,12 +835,10 @@ set_interaction_point(var_00, var_01) {
     self.interaction_trigger.origin = (var_0.origin[0], var_0.origin[1], var_2[2] - 15);
   else if(func_9A15(var_00) && var_0.script_noteworthy == "atm_withdrawal") {
     self.interaction_trigger sethintstringparams(level.atm_amount_deposited);
-  }
-  else if(interaction_is_fortune_teller(var_00)) {
+  } else if(interaction_is_fortune_teller(var_00)) {
     if(self.card_refills == 1) {
       self.interaction_trigger sethintstringparams(level.fortune_visit_cost_2);
-    }
-    else {
+    } else {
       self.interaction_trigger sethintstringparams(level.fortune_visit_cost_1);
     }
   } else if(var_0.script_noteworthy == "spawned_essence")
@@ -985,9 +970,7 @@ _meth_8228(var_00) {
       return &"CP_ZMB_WEAPONS_MAD";
     default:
       if(isDefined(level.custom_weaponnamestring_func)) {
-        return [
-          [level.custom_weaponnamestring_func]
-        ](var_01, var_00);
+        return [[level.custom_weaponnamestring_func]](var_01, var_00);
         return;
       }
 
@@ -1015,8 +998,7 @@ func_F422(var_00, var_01) {
 
       if(var_04 > 1) {
         self.interaction_trigger sethintstringparams(int(4500), var_05);
-      }
-      else {
+      } else {
         self.interaction_trigger sethintstringparams(int(0.5 * level.interactions[var_1.script_noteworthy].cost), var_05);
       }
     }
@@ -1143,8 +1125,7 @@ play_weapon_purchase_vo(var_00, var_01) {
     case "iw7_katana_zm":
       if(randomint(100) > 50) {
         var_01 thread scripts\cp\cp_vo::try_to_play_vo("player_purchase_wonder", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
-      }
-      else {
+      } else {
         var_01 thread scripts\cp\cp_vo::try_to_play_vo("magicwheel_katana", "zmb_comment_vo", "low", 10, 0, 1, 0, 40);
       }
 
@@ -1305,11 +1286,9 @@ can_purchase_ammo(var_00) {
 
     if(var_08 < var_11) {
       return 1;
-    }
-    else if(weaponmaxammo(var_02) == weaponclipsize(var_02) && self getweaponammoclip(var_02) < weaponclipsize(var_02)) {
+    } else if(weaponmaxammo(var_02) == weaponclipsize(var_02) && self getweaponammoclip(var_02) < weaponclipsize(var_02)) {
       return 1;
-    }
-    else {
+    } else {
       return 0;
     }
   }
@@ -1370,8 +1349,7 @@ can_purchase_interaction(var_00, var_01, var_02, var_03) {
 
   if(isDefined(var_01)) {
     var_04 = var_01;
-  }
-  else {
+  } else {
     var_04 = level.interactions[var_0.script_noteworthy].cost;
   }
 
@@ -1387,8 +1365,7 @@ can_purchase_interaction(var_00, var_01, var_02, var_03) {
   } else if(interaction_is_weapon_upgrade(var_00) && !scripts\cp\cp_weapon::can_upgrade(self getcurrentweapon())) {
     if(scripts\engine\utility::is_true(level.has_picked_up_fuses) && !isDefined(level.placed_alien_fuses)) {
       return 1;
-    }
-    else {
+    } else {
       return 0;
     }
   } else if(interaction_is_perk(var_00)) {
@@ -1582,14 +1559,11 @@ func_9A3D() {
       case "purchase_denied":
         if(var_1.name == "jaroslav_machine" && soundexists("ui_consumable_purchase_deny")) {
           var_02 playlocalsound("ui_consumable_purchase_deny");
-        }
-        else if(var_1.name == "lost_and_found" && soundexists("lost_and_found_deny")) {
+        } else if(var_1.name == "lost_and_found" && soundexists("lost_and_found_deny")) {
           var_02 playlocalsound("lost_and_found_deny");
-        }
-        else if(soundexists("trap_control_panel_deny") && var_1.name == "beamtrap" || var_1.name == "interaction_discoballtrap" || var_1.name == "scrambler" || var_1.name == "blackhole_trap" || var_1.name == "rockettrap") {
+        } else if(soundexists("trap_control_panel_deny") && var_1.name == "beamtrap" || var_1.name == "interaction_discoballtrap" || var_1.name == "scrambler" || var_1.name == "blackhole_trap" || var_1.name == "rockettrap") {
           var_02 playlocalsound("trap_control_panel_deny");
-        }
-        else if(soundexists("purchase_deny")) {
+        } else if(soundexists("purchase_deny")) {
           var_02 playlocalsound("purchase_deny");
         }
 
@@ -1803,8 +1777,7 @@ interaction_is_valid(var_00, var_01) {
 
     if(isDefined(var_0.perk_type) && soundexists("perk_machine_deny")) {
       var_01 playlocalsound("perk_machine_deny");
-    }
-    else {
+    } else {
       var_01 playlocalsound("purchase_deny");
     }
 
@@ -1830,8 +1803,7 @@ interaction_is_weapon_upgrade(var_00) {
 interaction_is_weapon_buy(var_00) {
   if(isDefined(var_0.name)) {
     return var_0.name == "wall_buy";
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -1863,11 +1835,9 @@ func_D0C3(var_00) {
 can_use_perk(var_00) {
   if(scripts\cp\utility::has_zombie_perk(var_0.perk_type)) {
     return 0;
-  }
-  else if(self.self_revives_purchased >= self.max_self_revive_machine_use && var_0.perk_type == "perk_machine_revive") {
+  } else if(self.self_revives_purchased >= self.max_self_revive_machine_use && var_0.perk_type == "perk_machine_revive") {
     return 0;
-  }
-  else if(isDefined(self.zombies_perks) && self.zombies_perks.size > 4) {
+  } else if(isDefined(self.zombies_perks) && self.zombies_perks.size > 4) {
     return 0;
   }
 
@@ -1939,8 +1909,7 @@ interaction_cooldown(var_00, var_01) {
 
   if(scripts\engine\utility::is_true(level.func_4614)) {
     wait 1;
-  }
-  else {
+  } else {
     level scripts\engine\utility::waittill_any_timeout(var_01, "override_cooldowns");
   }
 

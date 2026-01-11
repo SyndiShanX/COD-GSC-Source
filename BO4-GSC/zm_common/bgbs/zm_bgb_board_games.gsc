@@ -10,11 +10,10 @@
 #include scripts\zm_common\zm_blockers;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_bgb_board_games;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_board_games", &__init__, undefined, #"bgb");
+  system::register(#"zm_bgb_board_games", &__init__, undefined, # "bgb");
 }
 
 __init__() {
@@ -32,7 +31,7 @@ enable() {
 disable() {}
 
 function_202a3d22() {
-  self endon(#"disconnect", #"bled_out", #"bgb_update");
+  self endon(#"disconnect", # "bled_out", # "bgb_update");
 
   while(true) {
     waitresult = self waittill(#"boarding_window");

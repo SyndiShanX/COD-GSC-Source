@@ -1044,7 +1044,7 @@ setup_crane_beam() {
   var_1 = getEntArray(var_0.target, "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(var_0);
+    var_3 linkto(var_0);
   }
 
   var_5 = getent("beam_light_01", "script_noteworthy");
@@ -1159,7 +1159,7 @@ conveyor_system_link_crates(var_0, var_1) {
   common_scripts\utility::flag_wait("presat_revolving_door_closed");
 
   foreach(var_9 in var_2) {
-  var_9 delete();
+    var_9 delete();
   }
 }
 
@@ -1426,8 +1426,7 @@ ambush_loop_flashbang_react(var_0, var_1) {
 
     if(!isDefined(self.flashendtime)) {
       continue;
-    }
-    else {
+    } else {
       var_7 = self.flashendtime - gettime();
       var_6 = var_7 / 1000 + 0.25;
 
@@ -1684,7 +1683,7 @@ ambush_props(var_0) {
   var_1 = getEntArray("ambush_window_mantle", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 movez(100, 0.1);
+    var_3 movez(100, 0.1);
   }
 
   var_5 = maps\_utility::spawn_anim_model("factory_ambush_usb_stick");
@@ -1714,7 +1713,7 @@ ambush_props(var_0) {
   var_14 = getEntArray("ambush_breach_wall_screen", "targetname");
 
   foreach(var_16 in var_14) {
-  var_16 delete();
+    var_16 delete();
   }
 
   level.factory_ambush_props["factory_ambush_monitor01"] setModel("com_pc_monitor_a");
@@ -1789,7 +1788,7 @@ ambush_notify_start_slomo(var_0) {
   var_1 = getEntArray("ambush_breach_prop_pre", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 delete();
+    var_3 delete();
   }
 
   var_5 = getent("ambush_breach_physics_push", "targetname");
@@ -1942,8 +1941,7 @@ ambush_enemy_force_smoke_reaction(var_0, var_1, var_2, var_3) {
   while(var_5 > 0) {
     if(var_6.size == 0) {
       var_7 = maps\_utility::get_closest_ai(var_4.origin, "axis");
-    }
-    else {
+    } else {
       var_7 = maps\_utility::get_closest_ai(var_4.origin, "axis", var_6);
     }
 
@@ -2026,7 +2024,7 @@ factory_assembly_line_delete() {
   var_0 = getEntArray("assembly_line_anim_model", "script_noteworthy");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -2644,7 +2642,7 @@ factory_car_chase(var_0, var_1, var_2, var_3, var_4, var_5) {
   var_6 = getEntArray("static_smokestack", "targetname");
 
   foreach(var_8 in var_6) {
-  var_8 delete();
+    var_8 delete();
   }
 
   var_10 = getent("car_chase_intro", "script_noteworthy");
@@ -2756,7 +2754,7 @@ factory_car_chase_delete_early(var_0) {
   maps\factory_chase::chase_wait_for_semi_touch("chase_spawn_skybridge_drones_1");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -2797,7 +2795,7 @@ factory_car_chase_link_boxes(var_0) {
   maps\factory_chase::chase_wait_for_semi_touch("chase_delete_warehouse_boxes");
 
   foreach(var_6 in var_1) {
-  var_6 delete();
+    var_6 delete();
   }
 }
 

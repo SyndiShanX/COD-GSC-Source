@@ -445,11 +445,9 @@ create_loader_platform(var_0, var_1) {
     if(isDefined(var_5.script_noteworthy)) {
       if(var_5.script_noteworthy == "connector_node") {
         var_2.connector_node = var_5;
-      }
-      else if(var_5.script_noteworthy == "disconnector_node") {
+      } else if(var_5.script_noteworthy == "disconnector_node") {
         var_2.disconnector_node = var_5;
-      }
-      else if(var_5.script_noteworthy == "platform_collision_detection_volume") {
+      } else if(var_5.script_noteworthy == "platform_collision_detection_volume") {
         var_5 enablelinkto();
         var_2.platform_collision_detection_volume = var_5;
       }
@@ -595,7 +593,7 @@ platform_lights(var_0, var_1) {
   var_3 delete();
 
   foreach(var_10 in var_5) {
-  var_10 delete();
+    var_10 delete();
   }
 }
 
@@ -1011,7 +1009,7 @@ sat_cleanup(var_0) {
 
   if(!isDefined(var_0)) {
     foreach(var_2 in level.squad) {
-    var_2.moveplaybackrate = 1.0;
+      var_2.moveplaybackrate = 1.0;
     }
   }
 
@@ -1045,7 +1043,7 @@ delete_jumpsuits() {
       var_3 = getEntArray(var_2.target, "targetname");
 
       foreach(var_5 in var_3) {
-      var_5 delete();
+        var_5 delete();
       }
     }
 
@@ -1073,7 +1071,7 @@ sat_automated_bridge() {
   var_1 = getEntArray("sat_automated_bridge_right", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(var_0);
+    var_3 linkto(var_0);
   }
 
   thread sat_automated_bridge_struts();
@@ -1092,7 +1090,7 @@ sat_automated_bridge_struts() {
   var_1 = getEntArray("sat_automated_bridge_right_lifts", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 linkto(var_0);
+    var_3 linkto(var_0);
   }
 
   common_scripts\utility::flag_wait("sat_drawbridge_up");
@@ -1110,8 +1108,7 @@ sat_interact_activate_hint(var_0, var_1, var_2) {
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
     if(var_3 == "thumbstick_southpaw" || var_3 == "thumbstick_legacy") {
       var_4 = var_0["gamepad_l"];
-    }
-    else {
+    } else {
       var_4 = var_0["gamepad"];
     }
   } else if(var_3 == "thumbstick_southpaw" || var_3 == "thumbstick_legacy")
@@ -1143,67 +1140,67 @@ sat_room_move_pieces() {
   var_11 = getEntArray(var_0.target, "targetname");
 
   foreach(var_13 in var_11) {
-  var_13 linkto(var_0);
+    var_13 linkto(var_0);
   }
 
   var_15 = getEntArray(var_1.target, "targetname");
 
   foreach(var_13 in var_15) {
-  var_13 linkto(var_1);
+    var_13 linkto(var_1);
   }
 
   var_18 = getEntArray(var_2.target, "targetname");
 
   foreach(var_13 in var_18) {
-  var_13 linkto(var_2);
+    var_13 linkto(var_2);
   }
 
   var_21 = getEntArray(var_3.target, "targetname");
 
   foreach(var_13 in var_21) {
-  var_13 linkto(var_3);
+    var_13 linkto(var_3);
   }
 
   var_24 = getEntArray(var_4.target, "targetname");
 
   foreach(var_13 in var_24) {
-  var_13 linkto(var_4);
+    var_13 linkto(var_4);
   }
 
   var_27 = getEntArray(var_5.target, "targetname");
 
   foreach(var_13 in var_27) {
-  var_13 linkto(var_5);
+    var_13 linkto(var_5);
   }
 
   var_30 = getEntArray(var_6.target, "targetname");
 
   foreach(var_13 in var_30) {
-  var_13 linkto(var_6);
+    var_13 linkto(var_6);
   }
 
   var_33 = getEntArray(var_7.target, "targetname");
 
   foreach(var_13 in var_33) {
-  var_13 linkto(var_7);
+    var_13 linkto(var_7);
   }
 
   var_36 = getEntArray(var_8.target, "targetname");
 
   foreach(var_13 in var_36) {
-  var_13 linkto(var_8);
+    var_13 linkto(var_8);
   }
 
   var_39 = getEntArray(var_9.target, "targetname");
 
   foreach(var_13 in var_39) {
-  var_13 linkto(var_9);
+    var_13 linkto(var_9);
   }
 
   var_42 = getEntArray(var_10.target, "targetname");
 
   foreach(var_13 in var_42) {
-  var_13 linkto(var_10);
+    var_13 linkto(var_10);
   }
 
   var_5 linkto(var_4);
@@ -1269,8 +1266,7 @@ rog_move_and_rotate(var_0, var_1, var_2, var_3, var_4, var_5) {
 
     if(var_2 != var_0) {
       var_0 linkto(var_2);
-    }
-    else {
+    } else {
       var_5 linkto(var_2);
     }
 

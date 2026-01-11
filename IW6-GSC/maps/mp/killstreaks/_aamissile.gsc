@@ -56,8 +56,7 @@ getTargets() {
 
   if(isDefined(heliTargets) && heliTargets.size) {
     return heliTargets[0];
-  }
-  else if(isDefined(lbTargets) && lbTargets.size) {
+  } else if(isDefined(lbTargets) && lbTargets.size) {
     return lbTargets[0];
   }
 }
@@ -73,8 +72,7 @@ aa_missile_fire(lifeId, player) {
 
   if(!isDefined(bestTarget)) {
     targetPos = (0, 0, 0);
-  }
-  else {
+  } else {
     targetPos = bestTarget.origin;
     upVector = (0, 0, 1) * (targetPos) + (0, 0, 1000);
   }

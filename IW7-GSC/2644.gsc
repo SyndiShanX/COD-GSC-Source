@@ -29,9 +29,7 @@ register_eog_score_component(param_00, param_01) {
 
 register_encounter_score_component(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {
   var_08 = spawnStruct();
-  var_08 = [
-    [param_01]
-  ](var_08);
+  var_08 = [[param_01]](var_08);
   var_08.reset_team_performance_func = param_02;
   var_08.reset_player_performance_func = param_03;
   var_08.calculate_func = param_04;

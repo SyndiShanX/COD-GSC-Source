@@ -141,14 +141,10 @@ function killstreak_switch_team(owner) {
     if(devgui_int != 0) {
       team = "";
       if(isDefined(level.getenemyteam) && isDefined(owner) && isDefined(owner.team)) {
-        team = [
-          [level.getenemyteam]
-        ](owner.team);
+        team = [[level.getenemyteam]](owner.team);
       }
       if(isDefined(level.devongetormakebot)) {
-        player = [
-          [level.devongetormakebot]
-        ](team);
+        player = [[level.devongetormakebot]](team);
       }
       if(!isDefined(player)) {
         println("");

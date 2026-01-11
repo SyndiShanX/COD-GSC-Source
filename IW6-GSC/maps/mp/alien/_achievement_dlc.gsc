@@ -71,7 +71,7 @@ update_boss_achievements(var_0, var_1) {
       maps\mp\alien\_achievement::update_achievement_all_players("COMPLETE_ALL_CHALLENGE", 1);
 
       foreach(var_3 in level.players) {
-      var_3 maps\mp\alien\_achievement::update_achievement("KILLBOSS_WITH_RELIC", 1, var_3);
+        var_3 maps\mp\alien\_achievement::update_achievement("KILLBOSS_WITH_RELIC", 1, var_3);
       }
 
       break;

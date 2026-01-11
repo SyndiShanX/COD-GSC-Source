@@ -11,7 +11,6 @@
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_trial;
 #include scripts\zm_common\zm_utility;
-
 #namespace namespace_a476311c;
 
 autoexec __init__system__() {
@@ -58,7 +57,7 @@ private on_end(round_reset) {
 }
 
 private function_e997bb0b(var_73d6ae36) {
-  level endon(#"hash_7646638df88a3656", #"end_game");
+  level endon(#"hash_7646638df88a3656", # "end_game");
 
   if(isDefined(var_73d6ae36)) {
     wait var_73d6ae36;
@@ -73,23 +72,23 @@ private function_e997bb0b(var_73d6ae36) {
         continue;
       }
 
-        if(player.health > 0 && !player laststand::player_is_in_laststand() && !(isDefined(player.var_eb319d10) && player.var_eb319d10) && !(isDefined(level.intermission) && level.intermission)) {
-          if(player.health <= self.var_6633a592) {
-            if(zm_utility::is_magic_bullet_shield_enabled(player)) {
-              player util::stop_magic_bullet_shield();
-            }
-
-            player dodamage(player.health + 1000, player.origin);
-            continue;
+      if(player.health > 0 && !player laststand::player_is_in_laststand() && !(isDefined(player.var_eb319d10) && player.var_eb319d10) && !(isDefined(level.intermission) && level.intermission)) {
+        if(player.health <= self.var_6633a592) {
+          if(zm_utility::is_magic_bullet_shield_enabled(player)) {
+            player util::stop_magic_bullet_shield();
           }
 
-          if(isDefined(player.armor) && player.armor > 0) {
-            player dodamage(self.var_6633a592 + 5, player.origin);
-            continue;
-          }
-
-          player dodamage(self.var_6633a592, player.origin);
+          player dodamage(player.health + 1000, player.origin);
+          continue;
         }
+
+        if(isDefined(player.armor) && player.armor > 0) {
+          player dodamage(self.var_6633a592 + 5, player.origin);
+          continue;
+        }
+
+        player dodamage(self.var_6633a592, player.origin);
+      }
     }
 
     wait self.var_ead3a0f2;

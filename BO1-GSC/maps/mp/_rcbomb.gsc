@@ -91,8 +91,7 @@ useKillstreakRCBomb(hardpointType) {
   ret = self useRCBomb(placement);
   if(!isDefined(ret) && level.gameEnded) {
     ret = true;
-  }
-  else if(!isDefined(ret)) {
+  } else if(!isDefined(ret)) {
     ret = false;
   }
   return ret;

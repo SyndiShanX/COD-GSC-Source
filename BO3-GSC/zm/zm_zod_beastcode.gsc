@@ -65,11 +65,7 @@ class cbeastcode {
       if(player zm_utility::in_revive_trigger()) {
         continue;
       }
-      if(!(isDefined([
-          [o_beastcode]
-        ] - > get_keycode_device_state()) && [
-          [o_beastcode]
-        ] - > get_keycode_device_state())) {
+      if(!(isDefined([[o_beastcode]] - > get_keycode_device_state()) && [[o_beastcode]] - > get_keycode_device_state())) {
         continue;
       }
       [
@@ -210,9 +206,7 @@ class cbeastcode {
         playsoundatposition("zmb_zod_sword_symbol_right", (2624, -5104, -312));
         m_n_device_state = 3;
         hide_readout(1);
-        [
-          [m_a_funcs[i]]
-        ]();
+        [[m_a_funcs[i]]]();
         return;
       }
     }

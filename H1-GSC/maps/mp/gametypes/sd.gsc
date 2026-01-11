@@ -154,8 +154,7 @@ onspawnplayer() {
   if(isplayer(self) && !var_0) {
     if(level.multibomb && self.pers["team"] == game["attackers"]) {
       self setclientomnvar("ui_carrying_bomb", 1);
-    }
-    else {
+    } else {
       self setclientomnvar("ui_carrying_bomb", 0);
     }
   }

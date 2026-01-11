@@ -73,8 +73,7 @@ event_7_anims() {
   add_actor_anim("di_scaffolding_8", % ch_pakistan_7_1_drone_tutorial_scafold_guy08);
 }
 
-event_8_anims() {
-}
+event_8_anims() {}
 
 #using_animtree("player");
 #using_animtree("vehicles");

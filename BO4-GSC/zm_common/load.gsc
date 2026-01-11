@@ -44,7 +44,6 @@
 #include scripts\zm_common\zm_traps;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace load;
 
 main() {

@@ -34,8 +34,7 @@ showchallengesplash(var_00, var_01) {
 
   if(isDefined(var_01)) {
     var_02 = var_01;
-  }
-  else {
+  } else {
     var_02 = scripts\cp\cp_hud_util::mt_getstate(var_00) - 1;
   }
 
@@ -92,15 +91,13 @@ showsplashinternal(var_00, var_01, var_02) {
 
   if(isDefined(var_01)) {
     self setclientomnvar("ui_player_splash_param_" + self.nextsplashlistindex, var_01);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_player_splash_param_" + self.nextsplashlistindex, -1);
   }
 
   if(isDefined(var_02)) {
     self setclientomnvar("ui_player_splash_cardClientId_" + self.nextsplashlistindex, var_02 getentitynumber());
-  }
-  else {
+  } else {
     self setclientomnvar("ui_player_splash_cardClientId_" + self.nextsplashlistindex, -1);
   }
 
@@ -108,8 +105,7 @@ showsplashinternal(var_00, var_01, var_02) {
 
   if(!isDefined(self.recentsplashcount)) {
     self.recentsplashcount = 1;
-  }
-  else {
+  } else {
     self.recentsplashcount++;
   }
 
@@ -238,8 +234,7 @@ showerrormessage(var_00, var_01) {
 
   if(isDefined(var_01)) {
     self setclientomnvar("ui_mp_error_message_param", var_01);
-  }
-  else {
+  } else {
     self setclientomnvar("ui_mp_error_message_param", -1);
   }
 
@@ -255,7 +250,7 @@ showerrormessage(var_00, var_01) {
 
 showerrormessagetoallplayers(var_00, var_01) {
   foreach(var_03 in level.players) {
-  showerrormessage(var_00, var_01);
+    showerrormessage(var_00, var_01);
   }
 }
 
@@ -376,8 +371,7 @@ wait_for_tutorial_unpause() {
 shouldshowtutorial(var_00) {
   if(isDefined(level.should_show_tutorial_func)) {
     return [[level.should_show_tutorial_func]](var_00);
-  }
-  else {
+  } else {
     return 1;
   }
 }

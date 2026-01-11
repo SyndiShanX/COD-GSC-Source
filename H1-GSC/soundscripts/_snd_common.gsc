@@ -19,8 +19,7 @@ snd_common_init() {
     ["wpn_int_med", 0],
     ["bullet_metal_vehicle", 0],
     ["bullet_whizby_glass", 0],
-    ["finale_handgun", 0]
-  ];
+    ["finale_handgun", 0]];
   soundsettimescalefactor("interface", 0);
   soundsettimescalefactor("notimescale", 0);
 
@@ -47,20 +46,17 @@ create_common_envelop_arrays() {
     [0.25, 0.65],
     [0.35, 0.5],
     [0.75, 0.2],
-    [1.0, 0.1]
-  ];
+    [1.0, 0.1]];
   level._snd.envs["veh_crash_intensity_to_pitch"] = [[0.0, 0.7],
     [0.1, 0.7],
     [0.5, 0.8],
     [0.9, 1.0],
-    [1.0, 1.1]
-  ];
+    [1.0, 1.1]];
   level._snd.envs["veh_crash_vel_to_lfe_vol"] = [[0.0, 0.0],
     [200, 0.05],
     [500, 0.25],
     [850, 0.35],
-    [1000, 0.6]
-  ];
+    [1000, 0.6]];
   level._snd.envs["aud_mute_device_falloff"] = [[0.0, 1.0],
     [0.1, 0.9],
     [0.2, 0.88],
@@ -71,8 +67,7 @@ create_common_envelop_arrays() {
     [0.7, 0.5],
     [0.8, 0.35],
     [0.9, 0.15],
-    [1.0, 0.0]
-  ];
+    [1.0, 0.0]];
 }
 
 apply_common_globalmix() {
@@ -83,8 +78,9 @@ apply_common_globalmix() {
 
 init_ambient_explosion_arrays() {
   if(level.currentgen) {
-    level._snd.ambientexp["exp_generic_explo_shot"] = [["exp_generic_explo_shot_04", 0.17],
-  }
+    level._snd.ambientexp["exp_generic_explo_shot"] = [
+        ["exp_generic_explo_shot_04", 0.17],
+      }
       ["exp_generic_explo_shot_07", 0.11],
       ["exp_generic_explo_shot_10", 0.22],
       ["exp_generic_explo_shot_12", 0.15],
@@ -92,8 +88,9 @@ init_ambient_explosion_arrays() {
       ["exp_generic_explo_shot_20", 0.15],
       ["exp_generic_explo_shot_22", 0.25]];
   else {
-    level._snd.ambientexp["exp_generic_explo_shot"] = [["exp_generic_explo_shot_01", 0.13],
-  }
+    level._snd.ambientexp["exp_generic_explo_shot"] = [
+        ["exp_generic_explo_shot_01", 0.13],
+      }
       ["exp_generic_explo_shot_02", 0.25],
       ["exp_generic_explo_shot_03", 0.12],
       ["exp_generic_explo_shot_04", 0.17],
@@ -383,8 +380,7 @@ snd_ads_mix() {
 
     if(weaponclass(level.player getcurrentweapon()) == "sniper") {
       soundscripts\_audio_mix_manager::mm_add_submix("sniper_ads_mix");
-    }
-    else {
+    } else {
       soundscripts\_audio_mix_manager::mm_add_submix("ads_mix");
     }
 
@@ -411,8 +407,7 @@ snd_mute_device(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_2)) {
     var_6 = var_2;
-  }
-  else {
+  } else {
     var_6 = var_1 + 250;
   }
 
@@ -580,15 +575,13 @@ sndx_mute_device_bubble_off_fx() {
 playfxontag_safe(var_0) {
   if(isDefined(self) && isDefined(level._effect[var_0])) {
     playFXOnTag(common_scripts\utility::getfx(var_0), self, "tag_origin");
-  }
-  else {}
+  } else {}
 }
 
 killfxontag_safe(var_0) {
   if(isDefined(self) && isDefined(level._effect[var_0])) {
     killfxontag(common_scripts\utility::getfx(var_0), self, "tag_origin");
-  }
-  else {}
+  } else {}
 }
 
 aud_sonar_vision_on() {
@@ -718,11 +711,9 @@ sndx_boost_land_get_impact_vol(var_0, var_1, var_2) {
 sndx_boost_land_get_impact_size(var_0, var_1, var_2) {
   if(var_0 <= var_2) {
     var_3 = "lt";
-  }
-  else if(var_0 <= var_1) {
+  } else if(var_0 <= var_1) {
     var_3 = "med";
-  }
-  else {
+  } else {
     var_3 = "hvy";
   }
 
@@ -734,8 +725,7 @@ boost_jump_npc() {
 
   if(level.script == "recovery") {
     soundscripts\_audio::deprecated_aud_play_linked_sound("npc_boost_jump_rec", var_0);
-  }
-  else {
+  } else {
     soundscripts\_audio::deprecated_aud_play_linked_sound("npc_boost_jump", var_0);
   }
 }
@@ -745,8 +735,7 @@ boost_land_npc() {
 
   if(level.script == "recovery") {
     soundscripts\_audio::deprecated_aud_play_linked_sound("npc_boost_land_med_rec", var_0);
-  }
-  else {
+  } else {
     soundscripts\_audio::deprecated_aud_play_linked_sound("npc_boost_land_med", var_0);
   }
 }
@@ -912,8 +901,7 @@ anml_doberman(var_0) {
 
   if(var_0 == "death") {
     soundscripts\_snd_playsound::snd_play_at(var_1, self.origin, self.snd_guid, 0, 0.1);
-  }
-  else {
+  } else {
     soundscripts\_snd_playsound::snd_play_linked(var_1, self.snd_guid, 0, 0.15);
   }
 }
@@ -961,8 +949,7 @@ exo_cloak_battery_low() {
 
     if(var_2 <= 0.26 && var_0 > 0.26) {
       var_1 = soundscripts\_audio::deprecated_aud_play_linked_sound("exo_cloak_battery_low", level.player, "loop", "notify_stop_exo_cloak_battery_low");
-    }
-    else if(var_2 >= 0.26 && var_0 < 0.26) {
+    } else if(var_2 >= 0.26 && var_0 < 0.26) {
       level notify("notify_stop_exo_cloak_battery_low");
     }
 
@@ -1062,8 +1049,7 @@ sonic_blast() {
 sonic_blast_aftershock() {
   if(isDefined(level.aud.sonic_blast_started) && level.aud.sonic_blast_started == 1) {
     level.aud.sonic_blast_started = 0;
-  }
-  else {
+  } else {
     soundscripts\_snd_playsound::snd_play_2d("sonic_attack_aftershock");
   }
 }
@@ -1183,8 +1169,7 @@ snd_air_vehicle_smart_flyby(var_0, var_1, var_2, var_3, var_4) {
   while(isDefined(self)) {
     if(var_6) {
       var_7 = distance(self.origin, level.player.origin);
-    }
-    else {
+    } else {
       var_7 = distance2d(self.origin, level.player.origin);
     }
 
@@ -1281,7 +1266,7 @@ snd_advanced_flyby_system(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
 
   if(isarray(var_1)) {
     foreach(var_16, var_15 in var_1) {
-    thread sndx_advanced_flyby_spawn_sound(var_16, var_15, var_10);
+      thread sndx_advanced_flyby_spawn_sound(var_16, var_15, var_10);
     }
   }
 
@@ -1341,8 +1326,7 @@ sndx_advanced_flyby_dist_check(var_0) {
 
   if(var_1) {
     var_2 = distance(self.origin, level.player.origin);
-  }
-  else {
+  } else {
     var_2 = distance2d(self.origin, level.player.origin);
   }
 
@@ -1372,24 +1356,19 @@ sndx_advanced_flyby_construct_alias(var_0, var_1, var_2, var_3) {
 
     if(var_4 == 0) {
       var_11 = "fast";
-    }
-    else if(var_4 == 1) {
+    } else if(var_4 == 1) {
       var_11 = "med";
-    }
-    else {
+    } else {
       var_11 = "slow";
     }
 
     if(var_1 == 0) {
       var_12 = "close";
-    }
-    else if(var_1 == 1) {
+    } else if(var_1 == 1) {
       var_12 = "mid";
-    }
-    else if(var_1 == 2) {
+    } else if(var_1 == 2) {
       var_12 = "far";
-    }
-    else {
+    } else {
       return undefined;
     }
 
@@ -1397,8 +1376,7 @@ sndx_advanced_flyby_construct_alias(var_0, var_1, var_2, var_3) {
 
     if(var_1 == 0) {
       self.audio.flying_over = 1;
-    }
-    else {
+    } else {
       self.audio.flying_by = 1;
     }
 
@@ -1491,16 +1469,14 @@ sndx_ambient_explosion_args_validation(var_0) {
   if(isDefined(var_0.duck_alias_)) {
     if(isDefined(var_0.duck_dist_threshold_)) {
       var_0.duck_dist_threshold_ = max(var_0.duck_dist_threshold_, 0);
-    }
-    else {
+    } else {
       var_0.duck_dist_threshold_ = 1000;
     }
   }
 
   if(isDefined(var_0.explo_delay_chance_)) {
     var_0.explo_delay_chance_ = max(var_0.explo_delay_chance_, 0);
-  }
-  else {
+  } else {
     var_0.explo_delay_chance_ = 50;
   }
 
@@ -1514,16 +1490,14 @@ sndx_ambient_explosion_args_validation(var_0) {
 
   if(isDefined(var_0.shake_durration_)) {
     var_0.shake_durration_ = max(var_0.shake_durration_, 0);
-  }
-  else {
+  } else {
     var_0.shake_durration_ = 0.5;
   }
 
   if(isDefined(var_0.ground_zero_alias_)) {
     if(isDefined(var_0.ground_zero_dist_threshold_)) {
       var_0.ground_zero_dist_threshold_ = max(var_0.ground_zero_dist_threshold_, 0);
-    }
-    else {
+    } else {
       var_0.ground_zero_dist_threshold_ = 500;
     }
   }
@@ -1607,8 +1581,7 @@ snd_impact(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     var_6 = soundscripts\_audio::deprecated_aud_play_linked_sound(var_5, var_4, undefined, undefined, undefined, undefined, var_3);
-  }
-  else {
+  } else {
     var_6 = soundscripts\_audio::deprecated_aud_play_sound_at(var_5, var_3);
   }
 
@@ -1768,8 +1741,7 @@ sndx_play_vehicle_collision_internal(var_0) {
 
           if(!level._snd.veh_collision.is_scraping) {
             thread sndx_vehicle_collision_scrape(var_13);
-          }
-          else {
+          } else {
             return;
           }
         } else if(level._snd.veh_collision.is_scraping)
@@ -1802,11 +1774,9 @@ sndx_play_vehicle_collision_internal(var_0) {
 sndx_vehicle_collision_get_impact_size(var_0, var_1, var_2) {
   if(var_0 <= var_1) {
     var_3 = "sml";
-  }
-  else if(var_0 <= var_2) {
+  } else if(var_0 <= var_2) {
     var_3 = "med";
-  }
-  else {
+  } else {
     var_3 = "lrg";
   }
 
@@ -1816,8 +1786,7 @@ sndx_vehicle_collision_get_impact_size(var_0, var_1, var_2) {
 sndx_vehicle_collision_get_impact_vol(var_0, var_1, var_2, var_3) {
   if(var_0 <= var_1) {
     var_4 = var_0 / var_1;
-  }
-  else if(var_0 <= self.audio.pv_maxmedvelocity) {
+  } else if(var_0 <= self.audio.pv_maxmedvelocity) {
     var_4 = var_0 / var_2;
 
     if(var_4 < self.audio.medvolmin) {
@@ -1909,8 +1878,7 @@ sndx_vehicle_collision_print_stats(var_0, var_1, var_2, var_3) {
       if(isDefined(var_0)) {
         return;
       }
-    } else {
-    }
+    } else {}
   }
 }
 

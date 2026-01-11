@@ -42,8 +42,7 @@ magicbox_open_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 
   if(newval == 0) {
     stopfx(localclientnum, self.fx_obj.curr_open_fx);
-  }
-  else if(newval == 1) {
+  } else if(newval == 1) {
     self.fx_obj.curr_open_fx = playFXOnTag(localclientnum, level._effect["box_is_open"], self.fx_obj, "tag_origin");
   }
 }

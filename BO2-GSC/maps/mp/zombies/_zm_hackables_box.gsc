@@ -31,8 +31,7 @@ box_hacks() {
 custom_check_firesale_loc_valid_func() {
   if(isDefined(self.unitrigger_stub)) {
     box = self.unitrigger_stub.trigger_target;
-  }
-  else if(isDefined(self.stub)) {
+  } else if(isDefined(self.stub)) {
     box = self.stub.trigger_target;
   }
 
@@ -196,8 +195,7 @@ fake_weapon_powerup_thread(weapon1, weapon2) {
 
     if(yaw > 300) {
       yaw = 300;
-    }
-    else if(yaw < 60) {
+    } else if(yaw < 60) {
       yaw = 60;
     }
 

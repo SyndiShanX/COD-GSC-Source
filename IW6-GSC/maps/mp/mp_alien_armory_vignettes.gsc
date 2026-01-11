@@ -144,8 +144,7 @@ play_sound_alien(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_3)) {
     playsoundatpos(var_2, var_1);
-  }
-  else {
+  } else {
     var_3 playsoundonmovingent(var_1);
   }
 }
@@ -315,7 +314,7 @@ sfx_intro() {
   wait 3.3;
 
   foreach(var_1 in level.players) {
-  var_1 playSound("scn_intro_spider");
+    var_1 playSound("scn_intro_spider");
   }
 
   wait 15;

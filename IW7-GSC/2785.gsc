@@ -161,8 +161,7 @@ func_7FC7(var_00, var_01) {
       default:
         if(_isvector(var_01)) {
           return var_01 * float(1.15);
-        }
-        else {
+        } else {
           return float(var_01) * float(1.15);
         }
     }

@@ -219,8 +219,7 @@ ancestor_attack_conduits(var_0) {
 
   if(level.current_hive_name == "conduit_parking_1") {
     var_0 maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_path_to_node("ancestor_garage_attack_02");
-  }
-  else {
+  } else {
     var_0 maps\mp\agents\alien\alien_ancestor\_alien_ancestor_think::ancestor_path_to_node("ancestor_garage_attack_01");
   }
 
@@ -267,7 +266,7 @@ do_rooftops_blocker() {
 
 give_blocker_awards() {
   foreach(var_1 in level.players) {
-  var_1 maps\mp\alien\_persistence::try_award_bonus_pool_token();
+    var_1 maps\mp\alien\_persistence::try_award_bonus_pool_token();
   }
 }
 

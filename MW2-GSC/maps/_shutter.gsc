@@ -48,7 +48,7 @@ main() {
   leftShutters = array_combine(leftShutters, array);
 
   foreach(shutter in leftShutters) {
-  shutter AddYaw(180);
+    shutter AddYaw(180);
   }
 
   rightShutters = [];

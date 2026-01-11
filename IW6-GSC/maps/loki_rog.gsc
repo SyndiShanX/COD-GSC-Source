@@ -353,13 +353,13 @@ script_shooting_tanks_01() {
   var_1 = getEntArray("targets_spaceport_firing01_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (6880, -23728, -127675));
+    var_3 notify("update_firing_position", (6880, -23728, -127675));
   }
 
   wait 30;
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position");
+    var_3 notify("update_firing_position");
   }
 }
 
@@ -370,13 +370,13 @@ script_shooting_tanks_04() {
   var_1 = getEntArray("targets_spaceport_firing04_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (7896, -13914, -127675));
+    var_3 notify("update_firing_position", (7896, -13914, -127675));
   }
 
   wait 34;
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position");
+    var_3 notify("update_firing_position");
   }
 }
 
@@ -387,13 +387,13 @@ script_shooting_tanks_02() {
   var_1 = getEntArray("targets_spaceport_firing02_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (6555, -575, -127565));
+    var_3 notify("update_firing_position", (6555, -575, -127565));
   }
 
   wait 34;
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position");
+    var_3 notify("update_firing_position");
   }
 }
 
@@ -404,13 +404,13 @@ script_shooting_tanks_03() {
   var_1 = getEntArray("targets_spaceport_firing03_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (4109, 9387, -127565));
+    var_3 notify("update_firing_position", (4109, 9387, -127565));
   }
 
   wait 35;
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position");
+    var_3 notify("update_firing_position");
   }
 }
 
@@ -421,13 +421,13 @@ script_shooting_tanks_05() {
   var_1 = getEntArray("targets_spaceport_firing05_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (4109, 9387, -127565));
+    var_3 notify("update_firing_position", (4109, 9387, -127565));
   }
 
   wait 35;
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position");
+    var_3 notify("update_firing_position");
   }
 }
 
@@ -438,13 +438,13 @@ script_shooting_tanks_06() {
   var_1 = getEntArray("targets_spaceport_firing06_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (-12067, 5129, -127565));
+    var_3 notify("update_firing_position", (-12067, 5129, -127565));
   }
 
   wait 35;
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position");
+    var_3 notify("update_firing_position");
   }
 }
 
@@ -455,13 +455,13 @@ script_shooting_tanks_07() {
   var_1 = getEntArray("targets_spaceport_firing07_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (-12067, 5129, -127565));
+    var_3 notify("update_firing_position", (-12067, 5129, -127565));
   }
 
   wait 35;
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position");
+    var_3 notify("update_firing_position");
   }
 }
 
@@ -472,7 +472,7 @@ script_shooting_tanks_08() {
   var_1 = getEntArray("targets_west_firing01_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (-10551, 3849, -127565));
+    var_3 notify("update_firing_position", (-10551, 3849, -127565));
   }
 }
 
@@ -483,7 +483,7 @@ script_shooting_tanks_09() {
   var_1 = getEntArray("targets_airfield_north_firing01_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (-6665, 10065, -127565));
+    var_3 notify("update_firing_position", (-6665, 10065, -127565));
   }
 }
 
@@ -494,7 +494,7 @@ script_shooting_tanks_10() {
   var_1 = getEntArray("targets_airfield_north_firing02_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (10671, 9063, -127565));
+    var_3 notify("update_firing_position", (10671, 9063, -127565));
   }
 }
 
@@ -624,21 +624,21 @@ script_missile_attacks01() {
   var_0 = getEntArray("targets_missile_launcher_area_01_model", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 notify("update_firing_position", (-8108, -2642, -127714));
+    var_2 notify("update_firing_position", (-8108, -2642, -127714));
   }
 
   wait 10;
   var_0 = getEntArray("targets_missile_launcher_area_01_model", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 notify("update_firing_position", (-1196, -3108, -127730));
+    var_2 notify("update_firing_position", (-1196, -3108, -127730));
   }
 
   wait 6;
   var_0 = getEntArray("targets_missile_launcher_area_01_model", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 notify("update_firing_position", (-6274, 574, -127730));
+    var_2 notify("update_firing_position", (-6274, 574, -127730));
   }
 
   wait 2;
@@ -652,14 +652,14 @@ script_missile_attacks02() {
   var_1 = getEntArray("targets_missile_launcher_area_02_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (7206, -10192, -127728));
+    var_3 notify("update_firing_position", (7206, -10192, -127728));
   }
 
   wait 7;
   var_1 = getEntArray("targets_missile_launcher_area_02_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (6952, -7622, -127728));
+    var_3 notify("update_firing_position", (6952, -7622, -127728));
   }
 
   common_scripts\utility::flag_wait("ROG_look_at_airfield");
@@ -673,14 +673,14 @@ script_missile_attacks03() {
   var_1 = getEntArray("targets_missile_launcher_area_03_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (-12860, 2976, -127728));
+    var_3 notify("update_firing_position", (-12860, 2976, -127728));
   }
 
   wait 7;
   var_1 = getEntArray("targets_missile_launcher_area_03_model", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 notify("update_firing_position", (-7074, 12432, -127728));
+    var_3 notify("update_firing_position", (-7074, 12432, -127728));
   }
 }
 
@@ -718,8 +718,7 @@ rog_audio_hook_group(var_0) {
 
   if("vehicle_jet_spaceport_02" == var_0) {
     var_1 = level.jet_passby_09b;
-  }
-  else if("vehicle_jet_airstrip_01" == var_0) {
+  } else if("vehicle_jet_airstrip_01" == var_0) {
     var_1 = level.jet_passby_10;
   }
 
@@ -800,7 +799,7 @@ script_delete_vehicles(var_0, var_1) {
   level waittill(var_1);
 
   foreach(var_3 in var_0) {
-  var_3 delete();
+    var_3 delete();
   }
 }
 
@@ -913,8 +912,7 @@ wait_for_player_to_use_chair() {
 
   if(level.console || level.player usinggamepad()) {
     maps\loki_util::waittill_trigger_activate_looking_at(self, "activate_console_hint", 100, 0.5, undefined, 1, var_0);
-  }
-  else {
+  } else {
     maps\loki_util::waittill_trigger_activate_looking_at(self, "activate_console_hint_pc", 100, 0.5, undefined, 1, var_0);
   }
 }
@@ -933,8 +931,7 @@ manage_use_region() {
   for(;;) {
     if(level.player istouching(var_0)) {
       self makeusable();
-    }
-    else {
+    } else {
       self makeunusable();
     }
 
@@ -987,8 +984,7 @@ launch_rogs(var_0) {
   for(var_3 = 0; var_3 < 6; var_3++) {
     if(var_3 < 6) {
       var_4 = "tag_rogfx_0" + var_2[var_3];
-    }
-    else {
+    } else {
       var_4 = "tag_rogfx_" + var_2[var_3];
     }
 
@@ -1001,8 +997,7 @@ launch_rogs(var_0) {
   for(var_3 = 0; var_3 < 6; var_3++) {
     if(var_3 < 6) {
       var_4 = "tag_rogfx_0" + var_2[var_3];
-    }
-    else {
+    } else {
       var_4 = "tag_rogfx_" + var_2[var_3];
     }
 
@@ -1243,15 +1238,15 @@ script_retreating_allies04_firing() {
 
     if(var_1 == 0) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (-17315, -12647, -127565));
+        var_4 notify("update_firing_position", (-17315, -12647, -127565));
       }
     } else if(var_1 == 1) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (-5171, -7815, -127565));
+        var_4 notify("update_firing_position", (-5171, -7815, -127565));
       }
     } else if(var_1 == 2) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (-2531, -12535, -127565));
+        var_4 notify("update_firing_position", (-2531, -12535, -127565));
       }
     }
 
@@ -1266,15 +1261,15 @@ script_airfield_allies_west_firing01() {
 
     if(var_1 == 0) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (-27907, 13705, -127565));
+        var_4 notify("update_firing_position", (-27907, 13705, -127565));
       }
     } else if(var_1 == 1) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (-24515, 8857, -127565));
+        var_4 notify("update_firing_position", (-24515, 8857, -127565));
       }
     } else if(var_1 == 2) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (-30675, 6313, -127565));
+        var_4 notify("update_firing_position", (-30675, 6313, -127565));
       }
     }
 
@@ -1289,15 +1284,15 @@ script_airfield_allies_north_firing01() {
 
     if(var_1 == 0) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (-16963, 20105, -127565));
+        var_4 notify("update_firing_position", (-16963, 20105, -127565));
       }
     } else if(var_1 == 1) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (-15011, 24633, -127565));
+        var_4 notify("update_firing_position", (-15011, 24633, -127565));
       }
     } else if(var_1 == 2) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (-9859, 20857, -127565));
+        var_4 notify("update_firing_position", (-9859, 20857, -127565));
       }
     }
 
@@ -1312,15 +1307,15 @@ script_airfield_allies_north_firing02() {
 
     if(var_1 == 0) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (-1827, 21161, -127565));
+        var_4 notify("update_firing_position", (-1827, 21161, -127565));
       }
     } else if(var_1 == 1) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (2413, 22585, -127565));
+        var_4 notify("update_firing_position", (2413, 22585, -127565));
       }
     } else if(var_1 == 2) {
       foreach(var_4 in var_2) {
-      var_4 notify("update_firing_position", (5661, 21369, -127565));
+        var_4 notify("update_firing_position", (5661, 21369, -127565));
       }
     }
 
@@ -1428,15 +1423,13 @@ rog_target_handle_rod_impact(var_0) {
     if(var_2 < var_3 * var_5[var_6]) {
       if(self.script_team == "allies") {
         level.rog_pass_fail["allies"]["targets"]++;
-      }
-      else if(!self.is_dead) {
+      } else if(!self.is_dead) {
         level.rog_num_enemy_targets_killed++;
       }
 
       if(var_6 < 2) {
         thread rog_target_overkill_death(0, 0);
-      }
-      else if(!self.is_dead) {
+      } else if(!self.is_dead) {
         self.is_dead = 1;
         thread rog_target_normal_death(0, self.origin - (var_0 - (0, 0, 384)));
       }
@@ -1458,8 +1451,7 @@ rog_vehicle_handle_rod_impact(var_0) {
     if(var_5 < var_1 * var_3[var_4]) {
       if(var_4 < 1) {
         childthread vehicle_overkill_from_rog();
-      }
-      else {
+      } else {
         childthread vehicle_blow_up_from_rog();
       }
 
@@ -1512,8 +1504,7 @@ rog_target_move_along_path() {
 
       if(isDefined(var_1.target)) {
         var_1 = getvehiclenode(var_1.target, "targetname");
-      }
-      else {
+      } else {
         var_1 = undefined;
       }
 
@@ -2217,8 +2208,7 @@ rog_uav_explosion_effects(var_0) {
 
   if(var_3 > 2) {
     return;
-  }
-  else {
+  } else {
     var_4 = 0.0;
     level thread rog_uav_initial_blur(4 * var_3);
     wait(var_3);
@@ -2283,21 +2273,21 @@ rog_tag_train() {
 
   for(var_2 = 0; var_2 < 5; var_2++) {
     foreach(var_4 in level.rog_train) {
-    var_4 hudoutlineenable(3, 0);
+      var_4 hudoutlineenable(3, 0);
     }
 
     level.player playSound("scn_loki_rog_target_on");
     wait 0.2;
 
     foreach(var_4 in level.rog_train) {
-    var_4 hudoutlinedisable();
+      var_4 hudoutlinedisable();
     }
 
     wait 0.25;
   }
 
   foreach(var_4 in level.rog_train) {
-  var_4 hudoutlineenable(3, 0);
+    var_4 hudoutlineenable(3, 0);
   }
 
   var_10 = [];
@@ -2308,13 +2298,13 @@ rog_tag_train() {
   wait 13.0;
 
   foreach(var_4 in level.rog_train) {
-  var_4 hudoutlinedisable();
+    var_4 hudoutlinedisable();
   }
 
   common_scripts\utility::flag_wait("ROG_look_at_airfield");
 
   foreach(var_14 in var_10) {
-  var_14 destroy();
+    var_14 destroy();
   }
 }
 
@@ -2599,8 +2589,7 @@ get_ent_array_with_prefix(var_0, var_1, var_2) {
 
     if(isDefined(var_5)) {
       var_3[var_4] = var_5;
-    }
-    else {
+    } else {
       break;
     }
 
@@ -2642,8 +2631,7 @@ rog_scriptable_radius_damage(var_0) {
 
     if(var_7 < var_1) {
       var_3 = common_scripts\utility::array_add(var_3, var_6);
-    }
-    else {
+    } else {
       var_4 = common_scripts\utility::array_add(var_4, var_6);
     }
 
@@ -2887,19 +2875,19 @@ space_cleanup() {
   var_0 = getweaponarray();
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   var_4 = getscriptablearray();
 
   foreach(var_6 in var_4) {
-  var_6 delete();
+    var_6 delete();
   }
 
   var_8 = getaiarray("axis");
 
   foreach(var_10 in var_8) {
-  var_10 delete();
+    var_10 delete();
   }
 
   if(isDefined(level.player.hud_space_helmet_rim)) {
@@ -3074,8 +3062,7 @@ vehicle_blow_up_from_rog() {
 
     if(issubstr(self.classname, "hind")) {
       thread rog_kill_helicopter();
-    }
-    else {
+    } else {
       self kill();
     }
   }
@@ -3093,7 +3080,7 @@ spawn_stage1_missile_trucks() {
   var_0 = getEntArray("ROG_missile_truck_area01", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread create_single_missile_truck(1, var_2.origin, var_2.angles, "ROG_look_at_sat_farm");
+    var_2 thread create_single_missile_truck(1, var_2.origin, var_2.angles, "ROG_look_at_sat_farm");
   }
 }
 
@@ -3101,7 +3088,7 @@ spawn_stage2_missile_trucks() {
   var_0 = getEntArray("ROG_missile_truck_area02", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread create_single_missile_truck(2, var_2.origin, var_2.angles, "ROG_look_at_main_base");
+    var_2 thread create_single_missile_truck(2, var_2.origin, var_2.angles, "ROG_look_at_main_base");
   }
 }
 
@@ -3109,7 +3096,7 @@ spawn_stage3_missile_trucks() {
   var_0 = getEntArray("ROG_missile_truck_area03", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread create_single_missile_truck(3, var_2.origin, var_2.angles, "ROG_look_at_main_base");
+    var_2 thread create_single_missile_truck(3, var_2.origin, var_2.angles, "ROG_look_at_main_base");
   }
 }
 
@@ -3333,8 +3320,7 @@ spawn_single_ground_vehicle(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_4)) {
     common_scripts\utility::flag_wait(var_4);
-  }
-  else {
+  } else {
     wait(randomfloatrange(0, 2));
   }
 
@@ -3433,8 +3419,7 @@ spawn_bombing_run(var_0, var_1, var_2) {
   for(var_5 = 0; var_5 < var_4; var_5++) {
     if(var_4 < 4) {
       thread single_bomb_run_script(var_0 + (var_3, 0 - abs(var_3), 0), var_1 + (var_3, 0 - abs(var_3), 0), var_2, "large");
-    }
-    else {
+    } else {
       thread single_bomb_run_script(var_0 + (var_3, 0 - abs(var_3), 0), var_1 + (var_3, 0 - abs(var_3), 0), var_2, "small");
     }
 
@@ -3554,8 +3539,7 @@ debug_wait(var_0) {
 
     if(1.0 < var_0) {
       wait 1.0;
-    }
-    else {
+    } else {
       wait(var_0);
     }
 
@@ -3771,11 +3755,9 @@ rog_fail_wrapper() {
   if(!common_scripts\utility::flag("ROG_no_fail")) {
     if(level.rog_ff_fail) {
       setdvar("ui_deadquote", &"LOKI_ROG_FAIL_FF");
-    }
-    else if(level.rog_track_fail) {
+    } else if(level.rog_track_fail) {
       setdvar("ui_deadquote", &"LOKI_ROG_FAIL_TRAINTRACK");
-    }
-    else {
+    } else {
       setdvar("ui_deadquote", &"LOKI_ROG_FAIL");
     }
 
@@ -3843,8 +3825,7 @@ rog_vo_section_a() {
   if(var_1 == "rog_strike" || level.rog_strike_active > 0) {
     if(var_1 == "rog_strike") {
       wait 1.15;
-    }
-    else {
+    } else {
       level waittill("rog_strike");
       wait 1.15;
     }
@@ -3871,8 +3852,7 @@ rog_vo_section_a() {
     if(var_1 == "rog_strike" || level.rog_strike_active > 0) {
       if(var_1 == "rog_strike") {
         wait 1.15;
-      }
-      else {
+      } else {
         level waittill("rog_strike");
         wait 1.15;
       }

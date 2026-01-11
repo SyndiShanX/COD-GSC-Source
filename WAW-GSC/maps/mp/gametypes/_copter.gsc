@@ -38,8 +38,7 @@ vectorAngle(v1, v2) {
   dot = vectordot(v1, v2);
   if(dot >= 1) {
     return 0;
-  }
-  else if(dot <= -1) {
+  } else if(dot <= -1) {
     return 180;
   }
   return acos(dot);
@@ -161,8 +160,7 @@ copterAI() {
       trace = bulletTrace(enemyTargets[i].origin + (0, 0, 10), enemyTargets[i].origin + (0, 0, 10000), false, undefined);
       if(trace["position"][2] >= skyheight) {
         outsideTargets[outsideTargets.size] = enemyTargets[i];
-      }
-      else {
+      } else {
         insideTargets[insideTargets.size] = enemyTargets[i];
       }
     }
@@ -176,8 +174,7 @@ copterAI() {
         descendingEnt = result["descendEnt"];
         if(isDefined(descendingEnt)) {
           goToPos = result["position"];
-        }
-        else {
+        } else {
           flying = true;
         }
       }
@@ -189,8 +186,7 @@ copterAI() {
         if(outsideTargets.size > 0) {
           if(!isDefined(descendingEnt)) {
             flying = true;
-          }
-          else {
+          } else {
             calcedGoToPos = true;
             goToPos = determineBestPos(insideTargets, descendingEnt, self.origin);
             if(!isDefined(goToPos)) {
@@ -213,8 +209,7 @@ copterAI() {
             if(isDefined(descendingEnt)) {
               if(isDefined(self.finalDest)) {
                 goToPos = self.finalDest;
-              }
-              else {
+              } else {
                 goToPos = descendingEnt.origin;
               }
             } else
@@ -231,8 +226,7 @@ copterAI() {
       distToArea = distance((self.origin[0], self.origin[1], self.areaEnt.origin[2]), self.areaEnt.origin);
       if(outsideTargets.size == 0 && distToArea > self.areaEnt.radius + desireddist * .25) {
         returningToArea = true;
-      }
-      else if(distToArea < self.areaEnt.radius * .5) {
+      } else if(distToArea < self.areaEnt.radius * .5) {
         returningToArea = false;
       }
       if(outsideTargets.size == 0 && !returningToArea) {
@@ -368,8 +362,7 @@ determineBestAttackPos(targetpos, curpos, desireddist) {
     dist = distance(targetposcopterheight, curpos);
     if(dist > desireddist) {
       goToPos = self.origin + vecscale(vectornormalize(attackdirx), 0 - (dist - desireddist));
-    }
-    else {
+    } else {
       goToPos = self.origin;
     }
   }
@@ -445,8 +438,7 @@ setCopterDest(newlocation, descend, dontascend) {
   self.finalDest = getAboveBuildingsLocation(newlocation);
   if(isDefined(descend) && descend) {
     self.finalZDest = newlocation[2];
-  }
-  else {
+  } else {
     self.finalZDest = self.finalDest[2];
   }
   self.intransit = true;
@@ -493,8 +485,7 @@ copterMove() {
       movingVertically = false;
       if(self.dontascend) {
         movingVertically = true;
-      }
-      else {
+      } else {
         if(!nearDest) {
           desiredZ = getAboveBuildingsLocation(self.origin)[2];
           movingHorizontally = (abs(self.origin[2] - desiredZ) <= 256);
@@ -505,8 +496,7 @@ copterMove() {
       if(movingHorizontally) {
         if(movingVertically) {
           thisDest = (self.finalDest[0], self.finalDest[1], self.finalZDest);
-        }
-        else {
+        } else {
           thisDest = self.finalDest;
         }
       } else {

@@ -9,7 +9,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_player;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_bgb_shields_up;
 
 autoexec __init__system__() {

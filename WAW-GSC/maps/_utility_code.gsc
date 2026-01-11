@@ -181,19 +181,18 @@ delayThread_proc(func, timer, param1, param2, param3, param4) {
   wait(timer);
   if(isDefined(param4)) {
     thread[[func]](param1, param2, param3, param4);
+  } else {
+    if(isDefined(param3))
   }
+  thread[[func]](param1, param2, param3);
   else {
-  if(isDefined(param3))
+    if(isDefined(param2))
   }
-    thread[[func]](param1, param2, param3);
+  thread[[func]](param1, param2);
   else {
-  if(isDefined(param2))
+    if(isDefined(param1))
   }
-    thread[[func]](param1, param2);
-  else {
-  if(isDefined(param1))
-  }
-    thread[[func]](param1);
+  thread[[func]](param1);
   else {
     thread[[func]]();
   }
@@ -258,17 +257,13 @@ HintPrint(string, breakfunc) {
       Hint FadeOverTime(MYFLASHTIME);
       Hint.alpha = MYALPHALOW;
       HintPrintWait(MYFLASHTIME, breakfunc);
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
       Hint FadeOverTime(MYFLASHTIME);
       Hint.alpha = MYALPHAHIGH;
       HintPrintWait(MYFLASHTIME);
-      if([
-          [breakfunc]
-        ]()) {
+      if([[breakfunc]]()) {
         break;
       }
     }
@@ -341,19 +336,18 @@ function_stack_proc(caller, func, param1, param2, param3, param4) {
   if(isDefined(caller)) {
     if(isDefined(param4)) {
       caller[[func]](param1, param2, param3, param4);
+    } else {
+      if(isDefined(param3))
     }
+    caller[[func]](param1, param2, param3);
     else {
-    if(isDefined(param3))
+      if(isDefined(param2))
     }
-      caller[[func]](param1, param2, param3);
+    caller[[func]](param1, param2);
     else {
-    if(isDefined(param2))
+      if(isDefined(param1))
     }
-      caller[[func]](param1, param2);
-    else {
-    if(isDefined(param1))
-    }
-      caller[[func]](param1);
+    caller[[func]](param1);
     else {
       caller[[func]]();
     }
@@ -641,8 +635,7 @@ array_waitlogic2(ent, msg, timeout) {
   ent endon("death");
   if(isDefined(timeout)) {
     wait timeout;
-  }
-  else {
+  } else {
     ent waittill(msg);
   }
 }

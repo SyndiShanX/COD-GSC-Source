@@ -292,8 +292,7 @@ ghettotag_generate_sparks(var_0) {
 getspark() {
   if(level.sparksclaimed > 3) {
     return "tunnelspark";
-  }
-  else {
+  } else {
     thread claimspark();
     return "tunnelspark_dl";
   }
@@ -349,7 +348,7 @@ remove_light_group_from_vehicle(var_0, var_1) {
     var_3 = level.vehicle_lights_group[var_0]["all"];
 
     foreach(var_5 in var_2) {
-    var_3 = common_scripts\utility::array_remove(var_3, var_5);
+      var_3 = common_scripts\utility::array_remove(var_3, var_5);
     }
 
     level.vehicle_lights_group[var_0]["all"] = var_3;
@@ -393,7 +392,7 @@ init_collapsing_bridge_parts() {
   }
 
   foreach(var_9, var_12 in var_1) {
-  thread show_bridge_parts_with_exploder(var_12, int(var_9));
+    thread show_bridge_parts_with_exploder(var_12, int(var_9));
   }
 }
 

@@ -82,8 +82,7 @@ onstartgametype() {
 getspawnpoint() {
   if(level.ingraceperiod) {
     var_0 = maps\mp\gametypes\_spawnlogic::getstartspawnffa(self.team);
-  }
-  else {
+  } else {
     var_1 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(self.team);
     var_0 = maps\mp\gametypes\_spawnscoring::getspawnpoint_freeforall(var_1);
   }
@@ -113,8 +112,7 @@ onplayerscore(var_0, var_1, var_2) {
 
   if(isscoringevent(var_0)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

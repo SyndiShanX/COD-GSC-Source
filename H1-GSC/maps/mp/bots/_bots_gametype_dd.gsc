@@ -25,7 +25,7 @@ setup_bot_dd() {
 
   if(var_0) {
     foreach(var_2 in level.bombzones) {
-    var_2 thread maps\mp\bots\_bots_gametype_common::monitor_bombzone_control();
+      var_2 thread maps\mp\bots\_bots_gametype_common::monitor_bombzone_control();
     }
 
     thread bot_dd_ai_director_update();
@@ -60,8 +60,7 @@ bot_dd_think() {
 
     if(maps\mp\_utility::inovertime()) {
       var_0 = level.bombzones[0].ownerteam != self.team;
-    }
-    else {
+    } else {
       var_0 = self.team == game["attackers"];
     }
 
@@ -179,8 +178,7 @@ defuse_bomb() {
 
           if(isDefined(var_4)) {
             self botsetscriptgoal(var_4, 20, "critical");
-          }
-          else {
+          } else {
             break;
           }
         } else
@@ -329,8 +327,7 @@ bot_pick_dd_zone_with_fewer_defenders(var_0, var_1) {
 
   if(var_2[0] > var_2[1] + var_1) {
     return var_0[1];
-  }
-  else if(var_2[0] + var_1 < var_2[1]) {
+  } else if(var_2[0] + var_1 < var_2[1]) {
     return var_0[0];
   }
 }
@@ -340,8 +337,7 @@ bot_pick_new_zone(var_0) {
 
   if(var_0 == "attack") {
     var_1 = bot_choose_attack_zone();
-  }
-  else if(var_0 == "defend") {
+  } else if(var_0 == "defend") {
     var_1 = bot_choose_defend_zone();
   }
 
@@ -357,8 +353,7 @@ bot_choose_defend_zone() {
 
   if(var_0.size == 1) {
     var_1 = var_0[0];
-  }
-  else if(var_0.size == 2) {
+  } else if(var_0.size == 2) {
     var_2[0] = get_players_at_zone(var_0[0], game["defenders"]).size;
     var_2[1] = get_players_at_zone(var_0[1], game["defenders"]).size;
     var_3[0] = is_bomb_planted_on(var_0[0]);
@@ -382,15 +377,12 @@ bot_choose_defend_zone() {
 
       if(var_2[var_5] > var_2[var_6] + 2) {
         var_1 = var_0[var_6];
-      }
-      else if(var_2[var_5] <= var_2[var_6]) {
+      } else if(var_2[var_5] <= var_2[var_6]) {
         var_1 = var_0[var_5];
-      }
-      else if(!isDefined(self.current_bombzone)) {
+      } else if(!isDefined(self.current_bombzone)) {
         if(var_2[var_5] >= var_2[var_6] + 2) {
           var_1 = var_0[var_6];
-        }
-        else if(var_2[var_5] < var_2[var_6] + 2) {
+        } else if(var_2[var_5] < var_2[var_6] + 2) {
           var_1 = var_0[var_5];
         }
       }
@@ -459,14 +451,12 @@ bot_choose_attack_role() {
 
   if(is_bomb_planted_on(self.current_bombzone)) {
     var_0 = "defend_zone";
-  }
-  else {
+  } else {
     var_1 = get_player_planting_zone(self.current_bombzone);
 
     if(!isDefined(var_1) || var_1 == self) {
       var_0 = "atk_bomber";
-    }
-    else if(isai(var_1)) {
+    } else if(isai(var_1)) {
       var_2 = distance(self.origin, self.current_bombzone.curorigin);
       var_3 = distance(var_1.origin, self.current_bombzone.curorigin);
 
@@ -498,8 +488,7 @@ bot_choose_defend_role() {
 
     if(!isDefined(var_1) || var_1 == self) {
       var_0 = "defuser";
-    }
-    else if(isai(var_1)) {
+    } else if(isai(var_1)) {
       var_2 = distance(self.origin, self.current_bombzone.curorigin);
       var_3 = distance(var_1.origin, self.current_bombzone.curorigin);
 

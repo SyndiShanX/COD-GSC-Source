@@ -165,8 +165,7 @@ enemy_corpse_saw_behavior() {
 
   if(self.type != "dog") {
     self set_generic_run_anim("_stealth_combat_jog");
-  }
-  else {
+  } else {
     self clear_run_anim();
     self.script_growl = 1;
     self.script_nobark = 1;
@@ -252,14 +251,13 @@ enemy_corpse_logic() {
         if(!isDefined(level.corpse_behavior_doesnt_require_player_sight)) {
           if(!player_can_see_corpse(corpse.origin))
         }
-            continue;
+        continue;
 
         distsqrd = distancesquared(self.origin, corpse.origin);
 
         if(self.type != "dog") {
           dist = level._stealth.logic.corpse.found_distsqrd;
-        }
-        else {
+        } else {
           dist = level._stealth.logic.corpse.found_dog_distsqrd;
         }
 
@@ -320,8 +318,7 @@ enemy_corpse_logic() {
       if(found) {
         if(!ent_flag("_stealth_found_corpse")) {
           self ent_flag_set("_stealth_found_corpse");
-        }
-        else {
+        } else {
           self notify("_stealth_found_corpse");
         }
 
@@ -337,8 +334,7 @@ enemy_corpse_logic() {
 
         if(!ent_flag("_stealth_saw_corpse")) {
           self ent_flag_set("_stealth_saw_corpse");
-        }
-        else {
+        } else {
           self notify("_stealth_saw_corpse");
         }
 
@@ -372,8 +368,7 @@ remove_corpse_loop_while_stealth_broken() {
 
       if(self.type != "dog") {
         dist = level._stealth.logic.corpse.found_distsqrd;
-      }
-      else {
+      } else {
         dist = level._stealth.logic.corpse.found_dog_distsqrd;
       }
 
@@ -410,8 +405,7 @@ enemy_corpse_alert_level() {
 
   if(isDefined(self.enemy)) {
     enemy = self.enemy;
-  }
-  else {
+  } else {
     enemy = random(level.players);
   }
 
@@ -451,8 +445,7 @@ enemy_corpse_found(corpse) {
   corpse_flag = self group_get_flagname("_stealth_found_corpse");
   if(!self stealth_group_corpse_flag()) {
     self group_flag_set("_stealth_found_corpse");
-  }
-  else {
+  } else {
     level notify(corpse_flag);
   }
 
@@ -512,6 +505,6 @@ enemy_default_corpse_behavior() {
 
 enemy_custom_corpse_behavior(array) {
   foreach(key, function in array) {
-  self ai_create_behavior_function("corpse", key, function);
+    self ai_create_behavior_function("corpse", key, function);
   }
 }

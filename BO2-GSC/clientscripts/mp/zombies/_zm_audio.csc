@@ -47,8 +47,7 @@ charindex_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, b
 isspeaking_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(!bnewent) {
     self.isspeaking = newval;
-  }
-  else {
+  } else {
     self.isspeaking = 0;
   }
 }
@@ -104,8 +103,7 @@ playerexert(localclientnum, exert) {
   if(isDefined(self.player_exert_id)) {
     if(isarray(level.exert_sounds[self.player_exert_id][exert])) {
       id = random(level.exert_sounds[self.player_exert_id][exert]);
-    }
-    else {
+    } else {
       id = level.exert_sounds[self.player_exert_id][exert];
     }
   }
@@ -206,8 +204,7 @@ gameover_snapshot() {
 sndsetzombiecontext(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self setsoundentcontext("grass", "no_grass");
-  }
-  else {
+  } else {
     self setsoundentcontext("grass", "in_grass");
   }
 }

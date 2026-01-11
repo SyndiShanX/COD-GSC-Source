@@ -49,8 +49,7 @@ floatmyboat(clientnum, startleft, randomize) {
 
   if(startleft) {
     rollsign = -1;
-  }
-  else {
+  } else {
     rollsign = 1;
   }
 

@@ -81,7 +81,7 @@ mason_truck_setup() {
   a_nd_nodes = getnodearray("mason_truck_exposed_nodes", "script_noteworthy");
 
   foreach(node in a_nd_nodes) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 
   level thread run_scene("mason_truck_pdf_corpse");
@@ -136,7 +136,7 @@ mason_truck_player_uses_turret(vh_truck) {
   a_nd_nodes = getnodearray("mason_truck_exposed_nodes", "script_noteworthy");
 
   foreach(node in a_nd_nodes) {
-  setenablenode(node, 1);
+    setenablenode(node, 1);
   }
 
   spawn_manager_enable("mason_truck_turret_enemies_sm");
@@ -252,7 +252,7 @@ trough_1_break(e_truck) {
   a_nd_nodes = getnodearray("mason_truck_trough1_nodes", "script_noteworthy");
 
   foreach(node in a_nd_nodes) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 }
 
@@ -265,7 +265,7 @@ trough_2_break(e_truck) {
   a_nd_nodes = getnodearray("mason_truck_trough2_nodes", "script_noteworthy");
 
   foreach(node in a_nd_nodes) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 }
 
@@ -357,8 +357,7 @@ mason_truck_damage_override(einflictor, eattacker, idamage, idflags, smeansofdea
       if(n_delta <= 40) {
         if(sweapon == "molotov_dpad_sp") {
           n_damage = idamage;
-        }
-        else {
+        } else {
           n_damage = int(idamage / 2.0);
         }
 
@@ -411,8 +410,7 @@ mason_truck_vo() {
 
   if(is_mature()) {
     level.woods queue_dialog("wood_shoot_the_fucking_dr_0", 0.5);
-  }
-  else {
+  } else {
     level.woods queue_dialog("wood_shoot_the_driver_ma_0", 0.5);
   }
 }

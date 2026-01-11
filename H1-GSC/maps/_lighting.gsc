@@ -207,8 +207,7 @@ setup_scriptable_primary_light(var_0, var_1, var_2, var_3, var_4, var_5, var_6, 
 
     if(isDefined(var_9) && isDefined(var_11.attach_ent)) {
       var_11.attach_bone = var_9;
-    }
-    else {
+    } else {
       var_11.attach_bone = undefined;
     }
 
@@ -389,7 +388,7 @@ model_animation_light(var_0) {
 
     if(isDefined(var_8)) {
       foreach(var_18 in var_8) {
-      playFXOnTag(level._effect[var_18], var_14, var_5);
+        playFXOnTag(level._effect[var_18], var_14, var_5);
       }
     }
 
@@ -416,8 +415,7 @@ light_setup_global_dvars() {
 
     if(level.ps4) {
       setsaveddvar("r_tonemapShoulder", 0.4);
-    }
-    else {
+    } else {
       setsaveddvar("r_tonemapShoulder", 0.94);
     }
 
@@ -468,7 +466,7 @@ screen_effect_base(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isarray(var_1)) {
     foreach(var_10 in var_1) {
-    var_8 setshader(var_10, 640, 480);
+      var_8 setshader(var_10, 640, 480);
     }
   } else
     var_8 setshader(var_1, 640, 480);
@@ -874,8 +872,7 @@ dyn_flickerlight(var_0, var_1, var_2, var_3) {
 
     if(var_2 != var_3) {
       var_5 = var_5 + randomfloatrange(var_2, var_3);
-    }
-    else {
+    } else {
       var_5 = var_5 + var_2;
     }
 
@@ -971,7 +968,7 @@ light_object_set_intensity(var_0, var_1, var_2) {
     common_scripts\_exploder::exploder(self.fxid);
 
     foreach(var_7 in self.modelents) {
-    var_7 show();
+      var_7 show();
     }
 
     self.was_on = 1;
@@ -979,7 +976,7 @@ light_object_set_intensity(var_0, var_1, var_2) {
     maps\_utility::stop_exploder(self.fxid);
 
     foreach(var_7 in self.modelents) {
-    var_7 hide();
+      var_7 hide();
     }
 
     self.was_on = undefined;
@@ -997,8 +994,7 @@ flickering_light(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(var_5 != var_6) {
       var_8 = var_8 + randomfloatrange(var_5, var_6);
-    }
-    else {
+    } else {
       var_8 = var_8 + var_6;
     }
 
@@ -1314,8 +1310,7 @@ model_flicker_preset(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 
     if(isDefined(var_12)) {
       var_29 = var_12;
-    }
-    else {
+    } else {
       var_29 = 0.05;
     }
 
@@ -1323,15 +1318,13 @@ model_flicker_preset(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
 
     if(isDefined(var_6) && isDefined(var_7)) {
       var_31 = randomfloatrange(var_6, var_7);
-    }
-    else {
+    } else {
       var_31 = randomfloatrange(0.1, 0.8);
     }
 
     if(isDefined(var_8) && isDefined(var_9)) {
       var_32 = randomfloatrange(var_8, var_9);
-    }
-    else {
+    } else {
       var_32 = randomfloatrange(0.1, 0.8);
     }
 
@@ -1354,7 +1347,7 @@ model_flicker_preset(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
     }
 
     foreach(var_37 in var_15) {
-    var_37 hide();
+      var_37 hide();
     }
 
     foreach(var_40 in var_14) {
@@ -1395,11 +1388,11 @@ model_flicker_preset(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var
     }
 
     foreach(var_37 in var_15) {
-    var_37 show();
+      var_37 show();
     }
 
     foreach(var_40 in var_14) {
-    var_40 setlightintensity(var_28);
+      var_40 setlightintensity(var_28);
     }
 
     wait(var_31);
@@ -1447,9 +1440,7 @@ blend_dof_presets(var_0, var_1, var_2) {
 
     if(isDefined(var_3) && isDefined(var_4)) {
       maps\_art::dof_enable_script(var_4["nearStart"], var_4["nearEnd"], var_4["nearBlur"], var_4["farStart"], var_4["farEnd"], var_4["farBlur"], var_2, var_4["bias"]);
-    }
-    else {
-    }
+    } else {}
   }
 }
 
@@ -1484,9 +1475,7 @@ blend_dof_viewmodel_presets(var_0, var_1, var_2) {
 
     if(isDefined(var_3) && isDefined(var_4)) {
       blend_viewmodel_dof(var_3, var_4, var_2);
-    }
-    else {
-    }
+    } else {}
   }
 }
 
@@ -1545,14 +1534,11 @@ light_message(var_0, var_1, var_2, var_3) {
   if(isDefined(level._light.messages[var_0])) {
     if(isDefined(var_3)) {
       thread[[level._light.messages[var_0]]](var_1, var_2, var_3);
-    }
-    else if(isDefined(var_2)) {
+    } else if(isDefined(var_2)) {
       thread[[level._light.messages[var_0]]](var_1, var_2);
-    }
-    else if(isDefined(var_1)) {
+    } else if(isDefined(var_1)) {
       thread[[level._light.messages[var_0]]](var_1);
-    }
-    else {
+    } else {
       thread[[level._light.messages[var_0]]]();
     }
   }
@@ -1570,31 +1556,31 @@ setup_emissive_modifiers() {
   var_0 = getEntArray("emissive_intensity_0", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 setmaterialscriptparam(0.0, 0.0);
+    var_2 setmaterialscriptparam(0.0, 0.0);
   }
 
   var_4 = getEntArray("emissive_intensity_25", "targetname");
 
   foreach(var_2 in var_4) {
-  var_2 setmaterialscriptparam(0.25, 0.0);
+    var_2 setmaterialscriptparam(0.25, 0.0);
   }
 
   var_7 = getEntArray("emissive_intensity_50", "targetname");
 
   foreach(var_2 in var_7) {
-  var_2 setmaterialscriptparam(0.5, 0.0);
+    var_2 setmaterialscriptparam(0.5, 0.0);
   }
 
   var_10 = getEntArray("emissive_intensity_75", "targetname");
 
   foreach(var_2 in var_10) {
-  var_2 setmaterialscriptparam(0.75, 0.0);
+    var_2 setmaterialscriptparam(0.75, 0.0);
   }
 
   var_13 = getEntArray("emissive_intensity_100", "targetname");
 
   foreach(var_2 in var_13) {
-  var_2 setmaterialscriptparam(1.0, 0.0);
+    var_2 setmaterialscriptparam(1.0, 0.0);
   }
 
   var_16 = getEntArray("emissive_intensity", "targetname");

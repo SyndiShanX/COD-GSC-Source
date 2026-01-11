@@ -970,9 +970,7 @@ func_C0A8(param_00, param_01, param_02, param_03, param_04, param_05) {
     return;
   }
 
-  [
-    [param_00]
-  ]();
+  [[param_00]]();
 }
 
 func_5128(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07) {

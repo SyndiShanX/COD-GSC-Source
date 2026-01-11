@@ -289,8 +289,7 @@ lgt_init() {
   if(isDefined(var_0)) {
     if(maps\_utility::is_gen4()) {
       var_0 lgt_sun_intensity_ng();
-    }
-    else {
+    } else {
       var_0 lgt_sun_intensity_cg();
     }
   }
@@ -459,7 +458,7 @@ setup_volumetric_lights() {
 
   for(;;) {
     foreach(var_2 in level.recruits_godrays) {
-    var_2 rotateto(level.recruits_anim_light_smodel.angles, 0.1);
+      var_2 rotateto(level.recruits_anim_light_smodel.angles, 0.1);
     }
 
     if(isDefined(level.recruits_anim_light)) {}

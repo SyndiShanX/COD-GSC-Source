@@ -100,8 +100,7 @@ drone_init() {
   level thread maps\_friendlyfire::friendly_fire_think(self);
   if(isDefined(level.droneCustomDeath)) {
     self thread[[level.droneCustomDeath]]();
-  }
-  else {
+  } else {
     level thread drone_death_thread(self);
   }
   if(isDefined(self.target) && !isDefined(self.script_moveoverride)) {
@@ -385,11 +384,9 @@ drone_scripted_spawn(classname, spawn_script_origin) {
   }
   if(issubstr(classname, "ally")) {
     drone.team = "allies";
-  }
-  else if(issubstr(classname, "enemy") || issubstr(classname, "axis")) {
+  } else if(issubstr(classname, "enemy") || issubstr(classname, "axis")) {
     drone.team = "axis";
-  }
-  else {
+  } else {
     drone.team = "neutral";
   }
   if(isDefined(spawn_script_origin.target)) {
@@ -398,8 +395,7 @@ drone_scripted_spawn(classname, spawn_script_origin) {
   assert(isDefined(drone));
   if(isDefined(spawn_script_origin.script_noteworthy) && spawn_script_origin.script_noteworthy == "drone_delete_on_unload") {
     drone.drone_delete_on_unload = true;
-  }
-  else {
+  } else {
     drone.drone_delete_on_unload = false;
   }
   if(isDefined(spawn_script_origin.script_friendname)) {
@@ -630,14 +626,12 @@ trackLoop(aim2, aim4, aim6, aim8) {
     } else {
       if(yawDelta > self.rightAimLimit) {
         yawDelta = self.rightAimLimit;
-      }
-      else if(yawDelta < self.leftAimLimit) {
+      } else if(yawDelta < self.leftAimLimit) {
         yawDelta = self.leftAimLimit;
       }
       if(pitchDelta > self.upAimLimit) {
         pitchDelta = self.upAimLimit;
-      }
-      else if(pitchDelta < self.downAimLimit) {
+      } else if(pitchDelta < self.downAimLimit) {
         pitchDelta = self.downAimLimit;
       }
     }

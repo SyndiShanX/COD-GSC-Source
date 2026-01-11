@@ -110,8 +110,7 @@ func_128EF(var_00, var_01) {
 
   if(!isDefined(var_02)) {
     return 0;
-  }
-  else {
+  } else {
     thread scripts\mp\utility\game::func_11079(0);
   }
 
@@ -234,8 +233,7 @@ func_49F1(var_00, var_01) {
     for(var_07 = 1; var_07 < level.spawnpoints.size; var_7++) {
       if(level.spawnpoints[var_07].origin[0] < var_5.func_B0ED) {
         var_5.func_B0ED = level.spawnpoints[var_07].origin[0];
-      }
-      else if(level.spawnpoints[var_07].origin[0] > var_5.func_8EF9) {
+      } else if(level.spawnpoints[var_07].origin[0] > var_5.func_8EF9) {
         var_5.func_8EF9 = level.spawnpoints[var_07].origin[0];
       }
 
@@ -295,8 +293,7 @@ func_BD1E(var_00) {
 
   if(var_00 == "entrance") {
     var_01 = self.origin + anglesToForward(self.angles) * 1000;
-  }
-  else {
+  } else {
     self notify("leaving");
     var_01 = self.origin + anglesToForward(self.angles) * -1000;
   }
@@ -307,8 +304,7 @@ func_BD1E(var_00) {
 
   if(var_00 == "entrance") {
     thread func_BB64();
-  }
-  else {
+  } else {
     stopFXOnTag(level.func_114DA, self.fxent, "tag_origin");
     stopFXOnTag(level.func_114DB, self.fxent, "tag_origin");
     self.fxent delete();
@@ -494,8 +490,7 @@ firemortar(var_00, var_01, var_02) {
 
   if(isDefined(var_03)) {
     var_08 = scripts\mp\utility\game::_magicbullet("javelin_mp", var_01 + (0, 0, 200), var_02, var_03);
-  }
-  else {
+  } else {
     var_08 = scripts\mp\utility\game::_magicbullet("javelin_mp", var_01 + (0, 0, 200), var_02);
   }
 

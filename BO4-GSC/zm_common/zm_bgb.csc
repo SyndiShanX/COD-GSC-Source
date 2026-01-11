@@ -10,7 +10,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\zm_common\load;
 #include scripts\zm_common\zm_bgb_pack;
-
 #namespace bgb;
 
 autoexec __init__system__() {
@@ -33,7 +32,7 @@ __init__() {
   clientfield::register("clientuimodel", "zmhud.bgb_invalid_use", 1, 1, "counter", undefined, 0, 0);
   clientfield::register("clientuimodel", "zmhud.bgb_one_shot_use", 1, 1, "counter", undefined, 0, 0);
   clientfield::register("toplayer", "bgb_blow_bubble", 1, 1, "counter", &bgb_blow_bubble, 0, 0);
-  level._effect[#"bgb_blow_bubble"] = "zombie/fx_bgb_bubble_blow_zmb";
+  level._effect[# "bgb_blow_bubble"] = "zombie/fx_bgb_bubble_blow_zmb";
 }
 
 private __main__() {
@@ -112,7 +111,7 @@ private bgb_finalize() {
 
 register(name, limit_type) {
   assert(isDefined(name), "<dev string:x79>");
-  assert(#"none" != name, "<dev string:xa1>" + #"none" + "<dev string:xc5>");
+  assert(#"none" != name, "<dev string:xa1>" + # "none" + "<dev string:xc5>");
   assert(!isDefined(level.bgb[name]), "<dev string:xfe>" + name + "<dev string:x117>");
   assert(isDefined(limit_type), "<dev string:xfe>" + name + "<dev string:x137>");
   level.bgb[name] = spawnStruct();
@@ -132,16 +131,16 @@ private function_5e7b3f16(localclientnum, time) {
   }
 
   switch (level.bgb[self.bgb].limit_type) {
-    case #"activated":
+    case # "activated":
       color = (25, 0, 50) / 255;
       break;
-    case #"event":
+    case # "event":
       color = (100, 50, 0) / 255;
       break;
-    case #"rounds":
+    case # "rounds":
       color = (1, 149, 244) / 255;
       break;
-    case #"time":
+    case # "time":
       color = (19, 244, 20) / 255;
       break;
     default:
@@ -172,6 +171,6 @@ private function_f4763ffe(localclientnum, fx) {
 }
 
 private bgb_blow_bubble(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
-  function_f4763ffe(localclientnum, level._effect[#"bgb_blow_bubble"]);
+  function_f4763ffe(localclientnum, level._effect[# "bgb_blow_bubble"]);
   self thread function_5e7b3f16(localclientnum, 0.5);
 }

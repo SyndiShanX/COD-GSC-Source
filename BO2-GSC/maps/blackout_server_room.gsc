@@ -177,7 +177,7 @@ hide_super_kill_bodies() {
   a_guys = _get_all_super_kill_actors();
 
   foreach(guy in a_guys) {
-  guy hide();
+    guy hide();
   }
 }
 
@@ -185,7 +185,7 @@ show_super_kill_bodies(a_guys) {
   a_guys = _get_all_super_kill_actors();
 
   foreach(guy in a_guys) {
-  guy show();
+    guy show();
   }
 }
 
@@ -327,8 +327,7 @@ player_kick_grate() {
 setup_aftermath_scene() {
   if(level.is_briggs_alive) {
     run_scene_first_frame("briggs_alive_first_frame");
-  }
-  else {
+  } else {
     run_scene_first_frame("briggs_dead_pose");
   }
 
@@ -407,8 +406,7 @@ karma_alive_or_not() {
 redshirt_checks_on_briggs() {
   if(level.is_briggs_alive) {
     run_scene_then_loop("aftermath_briggs_enter", "aftermath_briggs_wait");
-  }
-  else {
+  } else {
     run_scene_then_loop("redshirt_02_briggs_dead_enter", "redshirt_02_briggs_dead_loop");
   }
 }
@@ -423,15 +421,13 @@ aftermath_player() {
 
   if(level.is_karma_alive) {
     run_scene_and_delete("aftermath_karma_alive", 0.3);
-  }
-  else {
+  } else {
     run_scene_and_delete("aftermath_karma_dead", 0.3);
   }
 
   if(level.is_briggs_alive) {
     run_scene_and_delete("aftermath_briggs_alive");
-  }
-  else {
+  } else {
     level.player startcameratween(0.1);
     level thread run_scene("aftermath_console_look_loop");
     ai_briggs_redshirt = get_ent("redshirt2_ai", "targetname");
@@ -447,8 +443,7 @@ aftermath_player() {
 
   if(level.is_harper_alive) {
     run_scene_and_delete("aftermath_harper_alive");
-  }
-  else {
+  } else {
     level thread run_scene("aftermath_console_look_loop");
     delay_thread(4, ::run_scene_and_delete, "aftermath_harper_dead");
   }

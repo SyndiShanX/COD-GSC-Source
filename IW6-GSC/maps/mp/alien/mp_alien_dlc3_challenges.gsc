@@ -154,7 +154,7 @@ activate_kill_nodamage() {
   level thread fail_kill_nodamage(self);
 
   foreach(var_1 in level.players) {
-  var_1 thread kill_nodamage_monitor();
+    var_1 thread kill_nodamage_monitor();
   }
 }
 
@@ -229,7 +229,7 @@ watch_rhino_deaths(var_0) {
       var_1 = int(gettime() + 20000);
 
       foreach(var_3 in level.players) {
-      var_3 setclientomnvar("ui_intel_timer", var_1);
+        var_3 setclientomnvar("ui_intel_timer", var_1);
       }
 
       level.current_challenge_timer = 20;
@@ -402,8 +402,7 @@ dlc3_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
     case "kill_marked":
       if(isDefined(self.marked_for_challenge)) {
         maps\mp\alien\_challenge::update_challenge("kill_marked", 1);
-      }
-      else {
+      } else {
         maps\mp\alien\_challenge::update_challenge("kill_marked", 0, 1);
       }
 
@@ -448,8 +447,7 @@ dlc3_death_challenge_func(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7
       if(isDefined(var_1) && isplayer(var_1)) {
         if(maps\mp\alien\_utility::get_alien_type() == "bomber" && var_3 != "MOD_SUICIDE") {
           maps\mp\alien\_challenge::update_challenge("flying_aliens", 1);
-        }
-        else if(maps\mp\alien\_utility::get_alien_type() == "gargoyle" && maps\mp\alien\_utility::is_true(self.in_air)) {
+        } else if(maps\mp\alien\_utility::get_alien_type() == "gargoyle" && maps\mp\alien\_utility::is_true(self.in_air)) {
           maps\mp\alien\_challenge::update_challenge("flying_aliens", 1);
         }
       }
@@ -603,7 +601,7 @@ activate_2_weapons_only_challenge() {
 deactivate_2_weapons_only() {
   if(isDefined(self) && isDefined(self.waypoints)) {
     foreach(var_1 in self.waypoints) {
-    var_1 destroy();
+      var_1 destroy();
     }
   }
 

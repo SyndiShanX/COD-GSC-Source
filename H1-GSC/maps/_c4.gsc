@@ -15,8 +15,7 @@ main(var_0, var_1, var_2) {
 
   if(!isDefined(var_0)) {
     level.c4_weaponname = "c4";
-  }
-  else {
+  } else {
     level.c4_weaponname = var_0;
   }
 
@@ -26,8 +25,7 @@ main(var_0, var_1, var_2) {
 
   if(isDefined(level.c4_explosion_fx_override)) {
     level._effect["c4_explosion"] = level.c4_explosion_fx_override;
-  }
-  else {
+  } else {
     level._effect["c4_explosion"] = loadfx("fx\explosions\grenadeExp_metal");
   }
 }
@@ -53,19 +51,16 @@ c4_location(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_0)) {
     var_6 = self gettagorigin(var_0);
-  }
-  else if(isDefined(var_3)) {
+  } else if(isDefined(var_3)) {
     var_6 = var_3;
-  }
-  else {}
+  } else {}
 
   var_7 = spawn("script_model", var_6 + var_1);
   var_7 setModel(var_5);
 
   if(isDefined(var_0)) {
     var_7 linkto(self, var_0, var_1, var_2);
-  }
-  else {
+  } else {
     var_7.angles = self.angles;
   }
 
@@ -73,8 +68,7 @@ c4_location(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(level.c4_hintstring)) {
     var_7.trigger sethintstring(level.c4_hintstring);
-  }
-  else {
+  } else {
     var_7.trigger sethintstring(&"SCRIPT_PLATFORM_HINT_PLANTEXPLOSIVES");
   }
 

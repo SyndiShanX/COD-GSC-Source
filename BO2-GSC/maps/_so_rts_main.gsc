@@ -26,7 +26,7 @@ freezecontrolonconnect() {
   flag_wait("all_players_connected");
 
   foreach(player in getplayers()) {
-  player freezecontrols(1);
+    player freezecontrols(1);
   }
 }
 
@@ -135,8 +135,7 @@ anim_init() {
   precache_assets();
 }
 
-checkpoint_save_restored() {
-}
+checkpoint_save_restored() {}
 
 set_uimapname() {
   cur_level = level.player getdstat("PlayerStatsList", "HIGHESTLEVELCOMPLETED", "statValue");
@@ -172,8 +171,7 @@ main() {
 
   if(isDefined(level.rts.allied_base) && isDefined(level.rts.allied_base.entity)) {
     level.rts.player_startpos = level.rts.allied_base.entity.origin;
-  }
-  else {
+  } else {
     level.rts.player_startpos = getplayers()[0].origin;
   }
 
@@ -195,7 +193,7 @@ node_disconnects() {
     nodes = getnodesinradius(spot.origin, spot.radius, 0);
 
     foreach(node in nodes) {
-    deletepathnode(node);
+      deletepathnode(node);
     }
   }
 
@@ -389,8 +387,7 @@ eyeinthesky_controls() {
 
         if(pitch > 0) {
           pitch = clamp((pitch - deadzoneheight) / (1.0 - deadzoneheight), 0.0, 1.0);
-        }
-        else {
+        } else {
           pitch = clamp((pitch + deadzoneheight) / (1.0 - deadzoneheight), -1.0, 0.0);
         }
 
@@ -398,8 +395,7 @@ eyeinthesky_controls() {
 
         if(yaw > 0) {
           yaw = clamp((yaw - deadzonewidth) / (1.0 - deadzonewidth), 0.0, 1.0);
-        }
-        else {
+        } else {
           yaw = clamp((yaw + deadzonewidth) / (1.0 - deadzonewidth), -1.0, 0.0);
         }
       }
@@ -460,8 +456,7 @@ player_switch_lockswitch() {
   while(true) {
     if(self.ai_ref.species == "human" || self.ai_ref.species == "dog" || self.ai_ref.species == "robot_actor") {
       self forceteleport(curorigin, curangles);
-    }
-    else if(self.ai_ref.species == "vehicle") {
+    } else if(self.ai_ref.species == "vehicle") {
       self.origin = curorigin;
       self.angles = curangles;
     }
@@ -518,8 +513,7 @@ player_in_control(lockswitch, nostatic) {
 
   if(isDefined(targetent.classname) && targetent.classname == "script_vehicle") {
     targetent veh_magic_bullet_shield(1);
-  }
-  else {
+  } else {
     targetent.takedamage = 0;
   }
 
@@ -730,8 +724,7 @@ callback_playerdamage(einflictor, eattacker, idamage, idflags, smeansofdeath, sw
 
     if(self.armor > 0) {
       idamage = 0;
-    }
-    else {
+    } else {
       idamage = self.armor * -1;
       self.armor = undefined;
     }
@@ -816,8 +809,7 @@ player_deathshieldwatch() {
 
       if(level.rts.squads[self.ally.squadid].members.size == 0) {
         nextsquad = maps\_so_rts_squad::getnextvalidsquad(self.ally.squadid);
-      }
-      else {
+      } else {
         numvalid = 0;
 
         foreach(guy in level.rts.squads[self.ally.squadid].members) {
@@ -832,8 +824,7 @@ player_deathshieldwatch() {
 
         if(numvalid > 0) {
           nextsquad = self.ally.squadid;
-        }
-        else {
+        } else {
           nextsquad = maps\_so_rts_squad::getnextvalidsquad(self.ally.squadid);
         }
       }
@@ -886,8 +877,7 @@ player_nextavailunit(nextsquad, playerdied) {
 
   if(!isDefined(nextsquad)) {
     nextsquad = maps\_so_rts_squad::getnextvalidsquad();
-  }
-  else {
+  } else {
     maps\_so_rts_squad::removedeadfromsquad(nextsquad);
 
     if(!(isDefined(level.rts.squads[nextsquad].selectable) && level.rts.squads[nextsquad].selectable)) {
@@ -897,8 +887,7 @@ player_nextavailunit(nextsquad, playerdied) {
 
   if(nextsquad != -1) {
     level thread squadselectnextaiandtakeover(nextsquad, playerdied);
-  }
-  else {
+  } else {
     maps\_so_rts_event::trigger_event("died_all_pkgs");
     level.rts.lastfpspoint = level.rts.player.origin;
     level thread rts_go_rts();
@@ -984,7 +973,7 @@ main_think() {
   update_reticle_icon(0);
 
   foreach(squad in level.rts.squads) {
-  luinotifyevent(&"rts_remove_squad", 1, squad.id);
+    luinotifyevent(&"rts_remove_squad", 1, squad.id);
   }
 
   rpc("clientscripts/_so_rts", "toggle_satellite_RemoteMissile", 0, 0);

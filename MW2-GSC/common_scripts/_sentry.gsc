@@ -232,8 +232,7 @@ sentry_init(team, sentryType, owner) {
   } else {
     if(self.weaponinfo == "sentry_gun") {
       self.bullet_armor = shielded_sentry_bullet_armor_mp;
-    }
-    else {
+    } else {
       self.bullet_armor = minigun_sentry_bullet_armor_mp;
     }
   }
@@ -962,8 +961,7 @@ spawn_and_place_sentry(sentryType) {
   // wait until the turret placement has been finished or canceled
   if(!isSP()) {
     self waittill_any("sentry_placement_finished", "sentry_placement_canceled", "death");
-  }
-  else {
+  } else {
     self waittill_any("sentry_placement_finished", "sentry_placement_canceled");
   }
 
@@ -990,8 +988,7 @@ sentry_placement_cancel_monitor(sentry_gun) {
 
   if(!isSP()) {
     self waittill_any("sentry_placement_canceled", "death", "disconnect");
-  }
-  else {
+  } else {
     self waittill_any("sentry_placement_canceled");
   }
 
@@ -1069,25 +1066,25 @@ sentry_placement_initial_wait(sentry_gun) {
 
   if(!isSP()) //&& isAlive( self ) ) {
     self notify("restock_reset");
-  }
+}
 
-  if(!isSP()) {
-    sentry_gun.lifeId = self.lifeId;
-    self sentry_team_setup(sentry_gun);
-  }
+if(!isSP()) {
+  sentry_gun.lifeId = self.lifeId;
+  self sentry_team_setup(sentry_gun);
+}
 
-  thread play_sound_in_space("sentry_gun_plant", sentry_gun.origin);
+thread play_sound_in_space("sentry_gun_plant", sentry_gun.origin);
 
-  assert(isDefined(self.team));
-  sentry_gun setModel(level.sentry_settings[sentry_gun.sentryType].model);
-  sentry_gun thread sentry_init(self.team, sentry_gun.sentryType, self);
+assert(isDefined(self.team));
+sentry_gun setModel(level.sentry_settings[sentry_gun.sentryType].model);
+sentry_gun thread sentry_init(self.team, sentry_gun.sentryType, self);
 
-  self notify("sentry_placement_finished", sentry_gun);
-  waittillframeend; // wait so self.placingSentry can get cleared before notifying script that we can give the player another turret
+self notify("sentry_placement_finished", sentry_gun);
+waittillframeend; // wait so self.placingSentry can get cleared before notifying script that we can give the player another turret
 
-  if(!isSP()) {
-    sentry_gun thread sentry_die_on_batteryout();
-  }
+if(!isSP()) {
+  sentry_gun thread sentry_die_on_batteryout();
+}
 }
 
 updateSentryPositionThread(sentry_entity) {
@@ -1120,8 +1117,7 @@ updateSentryPosition(sentry_entity) {
 
   if(self.canPlaceEntity) {
     sentry_entity setModel(level.sentry_settings[sentry_entity.sentryType].placementmodel);
-  }
-  else {
+  } else {
     sentry_entity setModel(level.sentry_settings[sentry_entity.sentryType].placementmodelfail);
   }
 }
@@ -1139,8 +1135,7 @@ sentry_placement_hint_show(hint_valid) {
 
   if(self.forced_hint) {
     self ForceUseHintOn(&"SENTRY_PLACE");
-  }
-  else {
+  } else {
     self ForceUseHintOn(&"SENTRY_CANNOT_PLACE");
   }
 }
@@ -1255,8 +1250,7 @@ sentry_hit_bullet_armor(type) {
   }
   if(!issubstr(type, "BULLET")) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }

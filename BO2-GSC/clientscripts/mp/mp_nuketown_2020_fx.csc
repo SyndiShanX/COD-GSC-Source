@@ -52,8 +52,7 @@ precache_createfx_fx() {
   level._effect["fx_mp_nuke_steam_sm_fast"] = loadfx("maps/mp_maps/fx_mp_nuke_steam_sm_fast");
 }
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 #using_animtree("fxanim_props");
 

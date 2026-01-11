@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\lui_shared;
-
 #namespace ct_firebreak_multi_kill;
 
 class cct_firebreak_multi_kill: cluielem {

@@ -31,7 +31,6 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_orange_fasttravel_flinger;
 
 init() {
@@ -144,7 +143,7 @@ function_a913e7bc(e_player) {
     t_crafting = self;
   }
 
-  if(t_crafting.blueprint.name == #"zblueprint_orange_heat_pack") {
+  if(t_crafting.blueprint.name == # "zblueprint_orange_heat_pack") {
     var_7c0185ab = t_crafting.var_4f749ffe;
     var_7c0185ab show();
     var_7c0185ab zm_unitrigger::create(&function_96dcf25a, 64);
@@ -212,7 +211,7 @@ function_26384c47() {
   level endon(#"end_game");
 
   if(zm_utility::is_classic() || zm_utility::is_trials()) {
-    level flag::wait_till_all(array(#"hash_3028604821838259", #"hash_5a3d0402a5557739"));
+    level flag::wait_till_all(array(#"hash_3028604821838259", # "hash_5a3d0402a5557739"));
     self thread function_d8d2ddc6();
   }
 }
@@ -273,7 +272,7 @@ function_67769412() {
 }
 
 function_b5fc069b() {
-  self endon(#"hash_1a5c6352ea49c8ff", #"launcher_activated");
+  self endon(#"hash_1a5c6352ea49c8ff", # "launcher_activated");
   level endon(#"end_game");
   self.var_cd75ce36 = 3;
   self thread function_ac9a3646();
@@ -373,7 +372,7 @@ function_1036f994() {
 }
 
 function_4578fdfd() {
-  self endon(#"hash_1a5c6352ea49c8ff", #"launcher_activated");
+  self endon(#"hash_1a5c6352ea49c8ff", # "launcher_activated");
   self.var_cd75ce36 = 3;
   self thread function_ac9a3646();
 
@@ -461,7 +460,7 @@ function_2b2e8766() {
 fling_player(v_flinger) {
   self notify("3b76e3952b019122");
   self endon("3b76e3952b019122");
-  self endoncallback(&function_22f94688, #"bled_out", #"disconnect");
+  self endoncallback(&function_22f94688, # "bled_out", # "disconnect");
   self.var_c1d4f4d9 = spawn("script_origin", self.origin);
   self function_6cbea0ea();
 
@@ -500,7 +499,7 @@ fling_player(v_flinger) {
   if(v_flinger.str_location === "island_return") {
     self thread zm_orange_util::function_51b752a9("vox_flinger_react");
   } else {
-    self thread zm_audio::create_and_play_dialog(#"flinger", #"react");
+    self thread zm_audio::create_and_play_dialog(#"flinger", # "react");
   }
 
   wait var_cef149e8;
@@ -582,10 +581,10 @@ function_6cbea0ea() {
     str_stance = self getstance();
 
     switch (str_stance) {
-      case #"crouch":
+      case # "crouch":
         self setstance("stand");
         break;
-      case #"prone":
+      case # "prone":
         self setstance("stand");
         break;
     }
@@ -595,7 +594,7 @@ function_6cbea0ea() {
 }
 
 function_4a54c378() {
-  self endoncallback(&function_9d729023, #"bled_out", #"disconnect");
+  self endoncallback(&function_9d729023, # "bled_out", # "disconnect");
   self.var_e63ac5c = 0;
   self.var_f22c83f5 = 0;
   self.var_e75517b1 = 0;
@@ -657,7 +656,7 @@ function_57806638(v_flinger) {
 }
 
 function_8bf0a961(e_player) {
-  str_hint = zm_utility::function_d6046228(#"hash_2f95fd18fc037b20", #"hash_7f5464b25d90d8c");
+  str_hint = zm_utility::function_d6046228(#"hash_2f95fd18fc037b20", # "hash_7f5464b25d90d8c");
   self sethintstring(str_hint);
   return true;
 }
@@ -697,7 +696,7 @@ function_27469421() {
 }
 
 function_9b789e22(e_player) {
-  str_hint = zm_utility::function_d6046228(#"hash_49ef4d8e3753ac8d", #"hash_b80e393ce68873");
+  str_hint = zm_utility::function_d6046228(#"hash_49ef4d8e3753ac8d", # "hash_b80e393ce68873");
   self sethintstring(str_hint);
   return true;
 }
@@ -813,7 +812,7 @@ function_9b196e4f() {
 flinger_init() {
   self thread scene::play("init");
   self flagsys::wait_till(#"scene_ents_ready");
-  self.var_9d07d8dd = self.scene_ents[#"prop 1"];
+  self.var_9d07d8dd = self.scene_ents[# "prop 1"];
 
   if(self.targetname != "flinger_island") {
     self thread function_e468b4be();
@@ -866,7 +865,7 @@ function_ac9a3646() {
   playsoundatposition(#"hash_5474570f37d75aa7", self.origin);
   e_snd = spawn("script_origin", self.origin);
   e_snd playSound(#"hash_5913634c5007a95");
-  self waittill(#"launcher_activated", #"hash_1a5c6352ea49c8ff");
+  self waittill(#"launcher_activated", # "hash_1a5c6352ea49c8ff");
   playsoundatposition(#"hash_3db70e71d59b6393", self.origin);
   e_snd stopsounds();
   waitframe(1);

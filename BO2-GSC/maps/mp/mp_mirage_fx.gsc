@@ -13,8 +13,7 @@ main() {
   maps\mp\createfx\mp_mirage_fx::main();
 }
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_mp_distortion_md"] = loadfx("maps/mp_maps/fx_mp_mirage_distortion_md");

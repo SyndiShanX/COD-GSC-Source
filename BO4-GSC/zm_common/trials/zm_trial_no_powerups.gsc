@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm_round_logic;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_trial;
-
 #namespace zm_trial_no_powerups;
 
 autoexec __init__system__() {

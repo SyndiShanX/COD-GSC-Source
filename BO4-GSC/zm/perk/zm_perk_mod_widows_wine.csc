@@ -6,7 +6,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\zm_common\zm_perks;
-
 #namespace zm_perk_mod_widows_wine;
 
 autoexec __init__system__() {

@@ -510,7 +510,7 @@ gun_drop() {
   wait .05;
 
   foreach(guy in guys) {
-  guy LinkTo(anim_node_ent);
+    guy LinkTo(anim_node_ent);
   }
 
   wait wait_to_blendout - .05;

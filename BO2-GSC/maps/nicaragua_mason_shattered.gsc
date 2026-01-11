@@ -49,8 +49,7 @@ main() {
   flag_wait("nicaragua_mason_shattered_compelte");
 }
 
-nicaragua_mason_shattered_objectives() {
-}
+nicaragua_mason_shattered_objectives() {}
 
 shattered_part_two() {
   flag_set("shattered_part_two_scene_started");
@@ -58,13 +57,13 @@ shattered_part_two() {
   a_ai_pdf = get_ai_group_ai("mason_finalpush_factionfight_pdf");
 
   foreach(guy in a_ai_pdf) {
-  guy delete();
+    guy delete();
   }
 
   a_ai_cartel = get_ai_group_ai("mason_finalpush_factionfight_cartel");
 
   foreach(guy in a_ai_cartel) {
-  guy delete();
+    guy delete();
   }
 
   scene_wait("mason_shattered_part2");

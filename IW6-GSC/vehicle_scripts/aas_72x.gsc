@@ -36,8 +36,7 @@ main_common(var_0, var_1, var_2) {
 
   if(isDefined(var_1) && var_1 == "aas_72x_nonheli") {
     maps\_vehicle::build_is_airplane();
-  }
-  else {
+  } else {
     maps\_vehicle::build_is_helicopter();
   }
 }

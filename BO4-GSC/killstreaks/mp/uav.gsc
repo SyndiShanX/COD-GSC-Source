@@ -21,11 +21,10 @@
 #include scripts\mp_common\teams\teams;
 #include scripts\mp_common\util;
 #include scripts\weapons\heatseekingmissile;
-
 #namespace uav;
 
 autoexec __init__system__() {
-  system::register(#"uav", &__init__, undefined, #"killstreaks");
+  system::register(#"uav", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {
@@ -103,7 +102,7 @@ fx_flesh_hit_neck_fatal(params) {
 
           if(isDefined(scoregiven)) {
             player challenges::earneduavassistscore(scoregiven);
-            killstreakindex = level.killstreakindices[#"uav"];
+            killstreakindex = level.killstreakindices[# "uav"];
             killstreaks::killstreak_assist(player, self, killstreakindex);
           }
         }
@@ -205,7 +204,7 @@ activateuav() {
   }
 
   level.spawneduavs[level.spawneduavs.size] = uav;
-  uav setModel(level.killstreakbundle[#"uav"].ksmodel);
+  uav setModel(level.killstreakbundle[# "uav"].ksmodel);
   uav.weapon = getweapon("uav");
   uav setweapon(uav.weapon);
   uav.targetname = "uav";
@@ -232,7 +231,7 @@ activateuav() {
   anglevector *= zoffset;
   anglevector = (anglevector[0], anglevector[1], zoffset - rotator.origin[2]);
   uav linkto(rotator, "tag_origin", anglevector, (0, angle + attach_angle, 0));
-  self stats::function_e24eec31(getweapon("uav"), #"used", 1);
+  self stats::function_e24eec31(getweapon("uav"), # "used", 1);
   uav thread killstreaks::waitfortimeout("uav", 30000, &ontimeout, "delete", "death", "crashing");
   uav thread killstreaks::waitfortimecheck(30000 / 2, &ontimecheck, "delete", "death", "crashing");
   uav thread startuavfx();
@@ -244,7 +243,7 @@ activateuav() {
 
 onlowhealth(attacker, weapon) {
   self.is_damaged = 1;
-  params = level.killstreakbundle[#"uav"];
+  params = level.killstreakbundle[# "uav"];
 
   if(isDefined(params.fxlowhealth)) {
     playFXOnTag(params.fxlowhealth, self, "tag_origin");
@@ -261,7 +260,7 @@ destroyuav(attacker, weapon) {
   if(isDefined(attacker) && (!isDefined(self.owner) || self.owner util::isenemyplayer(attacker))) {
     attacker battlechatter::function_dd6a6012("uav", weapon);
     challenges::destroyedaircraft(attacker, weapon, 0, 0);
-    luinotifyevent(#"player_callout", 2, #"hash_7f902a0b5852fe90", attacker.entnum);
+    luinotifyevent(#"player_callout", 2, # "hash_7f902a0b5852fe90", attacker.entnum);
     attacker challenges::addflyswatterstat(weapon, self);
   }
 
@@ -272,7 +271,7 @@ destroyuav(attacker, weapon) {
 
   self notify(#"crashing");
   self playSound(#"exp_veh_large");
-  params = level.killstreakbundle[#"uav"];
+  params = level.killstreakbundle[# "uav"];
 
   if(isDefined(params.ksexplosionfx)) {
     playFXOnTag(params.ksexplosionfx, self, "tag_origin");

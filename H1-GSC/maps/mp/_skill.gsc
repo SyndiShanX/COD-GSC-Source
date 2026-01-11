@@ -40,7 +40,7 @@ initsosproxy(var_0) {
 
 process() {
   foreach(var_1 in level.players) {
-  var_1 _updateskill();
+    var_1 _updateskill();
   }
 }
 
@@ -187,7 +187,7 @@ _normalize_assoc(var_0) {
   var_2 = 0;
 
   foreach(var_4 in var_0) {
-  var_1 = var_1 + abs(var_4);
+    var_1 = var_1 + abs(var_4);
   }
 
   if(var_1 != 0) {
@@ -195,7 +195,7 @@ _normalize_assoc(var_0) {
   }
 
   foreach(var_7, var_4 in var_0) {
-  var_0[var_7] = var_0[var_7] * var_2;
+    var_0[var_7] = var_0[var_7] * var_2;
   }
 
   return var_0;
@@ -253,8 +253,7 @@ _updatesosproxy(var_0) {
 
   if(var_1 > level.skill_rdur_min_sec && isDefined(var_0.pers) && isDefined(var_0.pers["score"])) {
     level.sos_players[var_0.sos_id].score_per_second = var_0.pers["score"] / var_1;
-  }
-  else {
+  } else {
     level.sos_players[var_0.sos_id].score_per_second = undefined;
   }
 }
@@ -272,7 +271,7 @@ _updateskill() {
     return;
   }
   foreach(var_1 in level.players) {
-  _updatesosproxy(var_1);
+    _updatesosproxy(var_1);
   }
 
   var_3 = level.sos_players[self.sos_id];
@@ -311,8 +310,7 @@ _updateskill() {
 
     if(var_15.begin_gdf_variance) {
       var_17 = var_17 + var_15.begin_gdf_variance;
-    }
-    else {
+    } else {
       var_17 = var_17 + min(max(abs(var_15.begin_gdf_rating) * -0.18397 + 0.8596, 0.05), 1.0);
     }
 

@@ -52,7 +52,7 @@ ghillie_enemies_init() {
   }
 
   foreach(player in level.players) {
-  player thread ghillie_player_damage_tracker();
+    player thread ghillie_player_damage_tracker();
   }
 
   level.ghillie_enemies_initialized = true;
@@ -121,11 +121,10 @@ ghillie_enemy_register_death() {
 
   if(array_contains(level.ghillies_unaware, my_id)) {
     death_register_unaware(attacker, undefined, true);
+  } else {
+    if(array_contains(level.ghillies_nofire, my_id))
   }
-  else {
-  if(array_contains(level.ghillies_nofire, my_id))
-  }
-    death_register_nofire(attacker, undefined, true);
+  death_register_nofire(attacker, undefined, true);
   else {
     death_register_basic(attacker, undefined, true);
   }
@@ -144,14 +143,13 @@ ghillie_enemy_behavior(activate_id) {
 
   if(isDefined(activate_id)) {
     flag_wait(activate_id);
-  }
-  else {
+  } else {
     wait 1;
   }
 
   thread ghillie_enemy_quit_when_sidearm();
   foreach(player in level.players) {
-  thread ghillie_enemy_detect_player_looking(player);
+    thread ghillie_enemy_detect_player_looking(player);
   }
 
   ghillie_enemy_resume_moving("stand");
@@ -171,8 +169,7 @@ ghillie_enemy_behavior(activate_id) {
     crouch = randomfloat(1.0) < level.ghillie_crouch_chance;
     if(crouch) {
       thread ghillie_enemy_resume_moving("crouch", move_time);
-    }
-    else {
+    } else {
       thread ghillie_enemy_resume_moving("prone", move_time);
     }
 
@@ -195,8 +192,7 @@ ghillie_enemy_behavior(activate_id) {
       if(new_move_time > 0) {
         if(crouch) {
           thread ghillie_enemy_resume_moving("crouch", new_move_time);
-        }
-        else {
+        } else {
           thread ghillie_enemy_resume_moving("prone", new_move_time);
         }
       }
@@ -477,8 +473,7 @@ ghillie_enemy_can_be_seen(check_for_flub, check_offset) {
   if(isDefined(check_for_flub) && check_for_flub) {
     if(can_see_me) {
       can_see_me = ghillie_enemy_check_flub();
-    }
-    else {
+    } else {
       ghillie_enemy_clear_flub_time();
     }
   }
@@ -605,7 +600,7 @@ create_patrol_enemies(enemy_id, wait_id, spawn_delay) {
 
   array_thread(patrol_spawners, ::add_spawn_function, ::patrol_enemy_init);
   foreach(spawner in patrol_spawners) {
-  spawner patrol_enemy_spawn();
+    spawner patrol_enemy_spawn();
   }
 }
 
@@ -694,8 +689,7 @@ patrol_enemy_register_death() {
     current_time = gettime();
     if(current_time == level.patrol_death_time) {
       level.patrol_multi_kills++;
-    }
-    else {
+    } else {
       patrol_enemy_reset_multi_kill();
     }
   } else {
@@ -718,11 +712,10 @@ patrol_enemy_register_death() {
 
   if(array_contains(level.patrols_unaware, my_id)) {
     thread death_register_unaware(attacker, false, special_dialog);
+  } else {
+    if(array_contains(level.patrols_nofire, my_id))
   }
-  else {
-  if(array_contains(level.patrols_nofire, my_id))
-  }
-    thread death_register_nofire(attacker, false, special_dialog);
+  thread death_register_nofire(attacker, false, special_dialog);
   else {
     thread death_register_basic(attacker, false, special_dialog);
   }
@@ -887,7 +880,7 @@ turn_on_stealth() {
   maps\_stealth::main();
 
   foreach(player in level.players) {
-  player maps\_stealth_utility::stealth_default();
+    player maps\_stealth_utility::stealth_default();
   }
 
   init_prone_DOF();
@@ -930,7 +923,7 @@ stealth_disable() {
 
   if(isDefined(level.patrols)) {
     foreach(patrol in level.patrols) {
-    patrol thread patrol_enemy_silent_remove();
+      patrol thread patrol_enemy_silent_remove();
     }
   }
 }
@@ -1156,7 +1149,7 @@ script_chatgroups() {
         if(closest_talker ent_flag_exist("_stealth_normal")) {
           if(!closest_talker ent_flag("_stealth_normal"))
         }
-            continue;
+        continue;
 
         //find next closest member of same chat group
         next_closest = find_next_member(closest_enemies, i, closest_chat_group);
@@ -1169,7 +1162,7 @@ script_chatgroups() {
         if(next_closest ent_flag_exist("_stealth_normal")) {
           if(!next_closest ent_flag("_stealth_normal"))
         }
-            continue;
+        continue;
         d = Distance(next_closest.origin, closest_talker.origin);
         if(d > 220) {
           //println( d );
@@ -1184,8 +1177,7 @@ script_chatgroups() {
       if(isDefined(level.last_talker)) {
         if(level.last_talker == closest_talker) {
           talker = next_closest;
-        }
-        else {
+        } else {
           talker = closest_talker;
         }
       } else
@@ -1331,8 +1323,7 @@ player_prone_DOF() {
     my_stance = self getstance();
     if(my_stance == "prone") {
       self set_prone_DOF();
-    }
-    else {
+    } else {
       self set_default_DOF();
     }
 

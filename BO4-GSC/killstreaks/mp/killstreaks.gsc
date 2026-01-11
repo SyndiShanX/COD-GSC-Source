@@ -11,11 +11,10 @@
 #include scripts\killstreaks\mp\killstreakrules;
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\mp_common\gametypes\globallogic_score;
-
 #namespace killstreaks;
 
 autoexec __init__system__() {
-  system::register(#"killstreaks", &__init__, undefined, #"weapons");
+  system::register(#"killstreaks", &__init__, undefined, # "weapons");
 }
 
 __init__() {
@@ -31,7 +30,7 @@ init() {
   level.killstreak_init_start_time = getmillisecondsraw();
   thread debug_ricochet_protection();
 
-    function_447e6858();
+  function_447e6858();
   level.var_b0dc03c7 = &function_395f82d0;
   level.play_killstreak_firewall_being_hacked_dialog = &function_427f6a2e;
   level.play_killstreak_firewall_hacked_dialog = &function_6fa91236;

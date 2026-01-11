@@ -130,8 +130,7 @@ usecarriedkillstreakweapon(hardpointtype) {
 
   if(issubstr(hardpointtype, "inventory")) {
     isfrominventory = 1;
-  }
-  else {
+  } else {
     isfrominventory = 0;
   }
 
@@ -140,8 +139,7 @@ usecarriedkillstreakweapon(hardpointtype) {
   if((hardpointtype == "minigun_mp" || hardpointtype == "inventory_minigun_mp") && (!isDefined(self.minigunstart) || self.minigunstart == 0) || (hardpointtype == "m32_mp" || hardpointtype == "inventory_m32_mp") && (!isDefined(self.m32start) || self.m32start == 0)) {
     if(hardpointtype == "minigun_mp" || hardpointtype == "inventory_minigun_mp") {
       self.minigunstart = 1;
-    }
-    else {
+    } else {
       self.m32start = 1;
     }
 
@@ -154,8 +152,7 @@ usecarriedkillstreakweapon(hardpointtype) {
     if(isfrominventory == 0) {
       if(self.pers["killstreak_quantity"][hardpointtype] > 0) {
         ammopool = weaponmaxammo(hardpointtype);
-      }
-      else {
+      } else {
         ammopool = self.pers["held_killstreak_ammo_count"][hardpointtype];
       }
 
@@ -228,8 +225,7 @@ usekillstreakweaponfromcrate(hardpointtype) {
 
   if(issubstr(hardpointtype, "inventory")) {
     isfrominventory = 1;
-  }
-  else {
+  } else {
     isfrominventory = 0;
   }
 
@@ -450,32 +446,23 @@ checkifswitchableweapon(currentweapon, newweapon, killstreakweapon, currentkills
 
   if(self hasweapon(killstreakweapon) && !self getammocount(killstreakweapon)) {
     switchableweapon = 1;
-  }
-  else if(self.firedkillstreakweapon && newweapon == killstreakweapon && isheldkillstreakweapon(currentweapon)) {
+  } else if(self.firedkillstreakweapon && newweapon == killstreakweapon && isheldkillstreakweapon(currentweapon)) {
     switchableweapon = 1;
-  }
-  else if(isweaponequipment(newweapon)) {
+  } else if(isweaponequipment(newweapon)) {
     switchableweapon = 1;
-  }
-  else if(isDefined(level.grenade_array[newweapon])) {
+  } else if(isDefined(level.grenade_array[newweapon])) {
     switchableweapon = 0;
-  }
-  else if(isheldkillstreakweapon(newweapon) && isheldkillstreakweapon(currentweapon) && (!isDefined(currentkillstreakid) || currentkillstreakid != killstreakid)) {
+  } else if(isheldkillstreakweapon(newweapon) && isheldkillstreakweapon(currentweapon) && (!isDefined(currentkillstreakid) || currentkillstreakid != killstreakid)) {
     switchableweapon = 1;
-  }
-  else if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(newweapon)) {
+  } else if(maps\mp\killstreaks\_killstreaks::iskillstreakweapon(newweapon)) {
     switchableweapon = 0;
-  }
-  else if(isgameplayweapon(newweapon)) {
+  } else if(isgameplayweapon(newweapon)) {
     switchableweapon = 0;
-  }
-  else if(self.firedkillstreakweapon) {
+  } else if(self.firedkillstreakweapon) {
     switchableweapon = 1;
-  }
-  else if(self.lastnonkillstreakweapon == killstreakweapon) {
+  } else if(self.lastnonkillstreakweapon == killstreakweapon) {
     switchableweapon = 0;
-  }
-  else if(isDefined(topkillstreak) && topkillstreak == killstreakweapon && currentkillstreakid == killstreakid) {
+  } else if(isDefined(topkillstreak) && topkillstreak == killstreakweapon && currentkillstreakid == killstreakid) {
     switchableweapon = 0;
   }
 

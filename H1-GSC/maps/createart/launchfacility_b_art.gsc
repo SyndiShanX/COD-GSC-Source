@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\launchfacility_b_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\launchfacility_b_fog::main();
   }
 }

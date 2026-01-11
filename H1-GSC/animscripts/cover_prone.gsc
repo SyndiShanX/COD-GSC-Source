@@ -67,8 +67,7 @@ main() {
 
   if(isDefined(self.a.arrivaltype) && self.a.arrivaltype == "prone_saw") {
     animscripts\cover_wall::useselfplacedturret("saw_bipod_prone", "weapon_saw_MG_Setup", 0);
-  }
-  else if(isDefined(self.node.turret)) {
+  } else if(isDefined(self.node.turret)) {
     animscripts\cover_wall::usestationaryturret();
   }
 
@@ -167,11 +166,9 @@ doturn(var_0, var_1) {
 
     if(var_3 > 2) {
       var_4 = 0.05;
-    }
-    else if(var_3 > 1.3) {
+    } else if(var_3 > 1.3) {
       var_4 = 0.1;
-    }
-    else {
+    } else {
       var_4 = 0.15;
     }
   }
@@ -180,11 +177,9 @@ doturn(var_0, var_1) {
 
   if(var_1 > 157.5) {
     var_7 = 180;
-  }
-  else if(var_1 > 67.5) {
+  } else if(var_1 > 67.5) {
     var_7 = 90;
-  }
-  else {
+  } else {
     var_7 = 45;
   }
 
@@ -193,14 +188,11 @@ doturn(var_0, var_1) {
 
   if(isDefined(self.turntomatchnode)) {
     self animmode("angle deltas", 0);
-  }
-  else if(isDefined(self.node) && isDefined(anim.iscombatpathnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256) {
+  } else if(isDefined(self.node) && isDefined(anim.iscombatpathnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256) {
     self animmode("angle deltas", 0);
-  }
-  else if(animscripts\combat::isanimdeltaingoal(var_9)) {
+  } else if(animscripts\combat::isanimdeltaingoal(var_9)) {
     animscripts\combat::resetanimmode();
-  }
-  else {
+  } else {
     self animmode("angle deltas", 0);
   }
 
@@ -356,8 +348,7 @@ trythrowinggrenade(var_0, var_1) {
 
   if(isDefined(var_1) && var_1) {
     var_2 = animscripts\utility::animarraypickrandom("grenade_safe");
-  }
-  else {
+  } else {
     var_2 = animscripts\utility::animarraypickrandom("grenade_exposed");
   }
 
@@ -408,8 +399,7 @@ prone_transitionto(var_0) {
 
   if(shouldfirewhilechangingpose()) {
     var_1 = animscripts\utility::animarray(self.a.pose + "_2_" + var_0 + "_firing");
-  }
-  else {
+  } else {
     var_1 = animscripts\utility::animarray(self.a.pose + "_2_" + var_0);
   }
 
@@ -441,8 +431,7 @@ proneto(var_0, var_1, var_2) {
   if(shouldfirewhilechangingpose()) {
     if(var_0 == "crouch") {
       var_3 = % prone_2_crouch_firing;
-    }
-    else if(var_0 == "stand") {
+    } else if(var_0 == "stand") {
       var_3 = % prone_2_stand_firing;
     }
   } else if(var_0 == "crouch")

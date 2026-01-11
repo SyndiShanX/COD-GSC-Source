@@ -162,8 +162,7 @@ wait_trigger_activate(var_0, var_1) {
 
     if(randomintrange(0, 100) <= var_4) {
       return;
-    }
-    else {
+    } else {
       wait(var_2);
     }
   }
@@ -219,7 +218,7 @@ deactivate_container_spawners_in_area(var_0) {
   var_1 = select_container_structs_in_area(var_0);
 
   foreach(var_3 in var_1) {
-  deactivate_container(var_3);
+    deactivate_container(var_3);
   }
 }
 
@@ -252,8 +251,7 @@ get_activation_method(var_0) {
 
   if(at_max_damage_based_container()) {
     var_4 = 0;
-  }
-  else {
+  } else {
     var_4 = get_damage_weight(var_0);
   }
 
@@ -350,7 +348,7 @@ is_higher_priority(var_0, var_1) {
 
 assign_spawn_priority(var_0, var_1, var_2) {
   foreach(var_4 in var_0) {
-  var_4.priority = get_spawn_priority(var_4, var_1, var_2);
+    var_4.priority = get_spawn_priority(var_4, var_1, var_2);
   }
 
   return var_0;
@@ -452,7 +450,7 @@ get_container_info_array(var_0, var_1, var_2) {
 
   if(var_2) {
     foreach(var_6, var_5 in var_3) {
-    var_3[var_6] = int(var_5);
+      var_3[var_6] = int(var_5);
     }
   }
 
@@ -489,7 +487,7 @@ activate_container_spawn_for_hive(var_0, var_1) {
   var_2 = get_container_id_list_for_hive(var_0, var_1);
 
   foreach(var_4 in var_2) {
-  activate_container_spawner_by_id(var_4);
+    activate_container_spawner_by_id(var_4);
   }
 }
 

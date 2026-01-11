@@ -13,8 +13,7 @@ cover() {
 
   if(animscripts\utility::isincombat()) {
     var_0 = "idle_combat";
-  }
-  else {
+  } else {
     var_0 = "idle_noncombat";
   }
 

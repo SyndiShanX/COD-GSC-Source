@@ -90,7 +90,7 @@ nightVision_On() {
     playFXOnTag(level.nightVision_DLight_Effect, level.nightVision_DLight, "tag_origin");
   }
 
-    ai = getaiarray("allies");
+  ai = getaiarray("allies");
   array_thread(ai, ::enable_ir_beacon);
 
   if(!exists_global_spawn_function("allies", ::enable_ir_beacon)) {

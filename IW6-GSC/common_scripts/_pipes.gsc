@@ -96,8 +96,7 @@ pipe_logic(direction_vec, P, type, damageOwner) {
 
   if(!isDefined(level._pipes._pipe_methods[type])) {
     P = self pipe_calc_nofx(P, type);
-  }
-  else {
+  } else {
     P = self[[level._pipes._pipe_methods[type]]](P, type);
   }
 
@@ -118,8 +117,7 @@ pipe_logic(direction_vec, P, type, damageOwner) {
   E = undefined;
   if(IsAI(damageOwner)) {
     E = damageOwner getEye();
-  }
-  else {
+  } else {
     E = damageOwner.origin;
   }
 

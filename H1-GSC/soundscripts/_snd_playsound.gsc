@@ -142,8 +142,7 @@ sndx_play_alias_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
   if(var_11 > 0) {
     if(var_12) {
       soundscripts\_audio::aud_slomo_wait(var_11);
-    }
-    else {
+    } else {
       wait(var_11);
     }
   }
@@ -222,8 +221,7 @@ snd_play_loop(var_0) {
       self playLoopSound(var_0);
       self.guid = soundscripts\_snd::snd_new_guid();
       self.snd_is_loop = 1;
-    } else {
-    }
+    } else {}
   } else {}
 }
 

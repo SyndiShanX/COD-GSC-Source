@@ -198,8 +198,7 @@ elevator_level_for_floor(floor) {
 
   if(isDefined(self.floors["" + (floor + 1)])) {
     flevel = "" + (floor + 1);
-  }
-  else {
+  } else {
     flevel = "0";
   }
 
@@ -249,8 +248,7 @@ elevator_enable_paths(floor) {
 
   if(!isDefined(floor) || !isDefined(self.floors[floor].paths)) {
     return;
-  }
-  else {
+  } else {
     paths = self.floors[floor].paths;
   }
 
@@ -503,8 +501,7 @@ predict_floor(elevator, next, speed) {
 
   if(isDefined(elevator.floors["" + (next + 1)])) {
     elevator.body.next_level = "" + (next + 1);
-  }
-  else {
+  } else {
     start_location = 1;
     elevator.body.next_level = "0";
   }
@@ -516,8 +513,7 @@ predict_floor(elevator, next, speed) {
 
   if(elevator.body.next_level == elevator.body.starting_floor || isDefined(cur_level_start_pos) && isDefined(start_level_start_pos) && cur_level_start_pos == start_level_start_pos) {
     floor_goal = cur_level_start_pos;
-  }
-  else {
+  } else {
     floor_goal = floor_stop.origin;
   }
 
@@ -527,8 +523,7 @@ predict_floor(elevator, next, speed) {
   if(dist > 0) {
     if(elevator.body.origin[2] > floor_goal[2]) {
       clientnotify(elevator.name + "_d");
-    }
-    else {
+    } else {
       clientnotify(elevator.name + "_u");
     }
   }
@@ -562,8 +557,7 @@ elevator_think(elevator) {
     elevator thread quick_revive_solo_watch();
   }
 
-  if(elevator.body.perk_type == "vending_revive" && flag("solo_game")) {
-  } else
+  if(elevator.body.perk_type == "vending_revive" && flag("solo_game")) {} else
     flag_wait("power_on");
 
   elevator.body perkelevatordoor(1);
@@ -596,8 +590,7 @@ elevator_think(elevator) {
 
     if(isDefined(elevator.floors["" + (next + 1)])) {
       elevator.body.next_level = "" + (next + 1);
-    }
-    else {
+    } else {
       start_location = 1;
       elevator.body.next_level = "0";
     }
@@ -609,8 +602,7 @@ elevator_think(elevator) {
 
     if(elevator.body.next_level == elevator.body.starting_floor || isDefined(cur_level_start_pos) && isDefined(start_level_start_pos) && cur_level_start_pos == start_level_start_pos) {
       floor_goal = cur_level_start_pos;
-    }
-    else {
+    } else {
       floor_goal = floor_stop.origin;
     }
 
@@ -620,8 +612,7 @@ elevator_think(elevator) {
     if(dist > 0) {
       if(elevator.body.origin[2] > floor_goal[2]) {
         clientnotify(elevator.name + "_d");
-      }
-      else {
+      } else {
         clientnotify(elevator.name + "_u");
       }
     }
@@ -983,8 +974,7 @@ elevator_sparks_fx(elevator) {
 
     if(is_true(elevator.body.departing)) {
       playFXOnTag(level._effect["perk_elevator_departing"], elevator.body, "tag_origin");
-    }
-    else {
+    } else {
       playFXOnTag(level._effect["perk_elevator_idle"], elevator.body, "tag_origin");
     }
 
@@ -1170,8 +1160,7 @@ watch_elevator_devgui(name, global) {
     if(isDefined(stopcmd) && stopcmd == name) {
       if(global) {
         level.elevators_stop = 1;
-      }
-      else if(isDefined(self)) {
+      } else if(isDefined(self)) {
         self.body.elevator_stop = 1;
       }
 
@@ -1184,8 +1173,7 @@ watch_elevator_devgui(name, global) {
     if(isDefined(gocmd) && gocmd == name) {
       if(global) {
         level.elevators_stop = 0;
-      }
-      else if(isDefined(self)) {
+      } else if(isDefined(self)) {
         self.body.elevator_stop = 0;
 
         if(gofloor >= 0) {
@@ -1218,15 +1206,13 @@ show_elevator_floor(name) {
       if(isDefined(level.elevators_stop) && level.elevators_stop || isDefined(self.body.elevator_stop) && self.body.elevator_stop) {
         if(forced) {
           color = vectorscale((1, 0, 1), 0.7);
-        }
-        else {
+        } else {
           color = vectorscale((1, 0, 0), 0.7);
         }
       } else if(self.body.is_moving) {
         if(forced) {
           color = vectorscale((0, 0, 1), 0.7);
-        }
-        else {
+        } else {
           color = vectorscale((0, 1, 0), 0.7);
         }
       }

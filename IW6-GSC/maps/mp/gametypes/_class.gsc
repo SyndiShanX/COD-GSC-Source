@@ -80,8 +80,7 @@ getWeaponChoice(response) {
   tokens = strtok(response, ",");
   if(tokens.size > 1) {
     return int(tokens[1]);
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -181,8 +180,7 @@ recipe_getKillstreak(teamName, classIndex, streakType, streakIndex) {
 table_getWeapon(tableName, classIndex, weaponIndex) {
   if(weaponIndex == 0) {
     return TableLookup(tableName, 0, "loadoutPrimary", classIndex + 1);
-  }
-  else {
+  } else {
     return TableLookup(tableName, 0, "loadoutSecondary", classIndex + 1);
   }
 }
@@ -193,26 +191,22 @@ table_getWeaponAttachment(tableName, classIndex, weaponIndex, attachmentIndex) {
   if(weaponIndex == 0) {
     if(!isDefined(attachmentIndex) || attachmentIndex == 0) {
       tempName = TableLookup(tableName, 0, "loadoutPrimaryAttachment", classIndex + 1);
-    }
-    else if(attachmentIndex == 1) {
+    } else if(attachmentIndex == 1) {
       tempName = TableLookup(tableName, 0, "loadoutPrimaryAttachment2", classIndex + 1);
-    }
-    else if(attachmentIndex == 2) {
+    } else if(attachmentIndex == 2) {
       tempName = TableLookup(tableName, 0, "loadoutPrimaryAttachment3", classIndex + 1);
     }
   } else {
     if(!isDefined(attachmentIndex) || attachmentIndex == 0) {
       tempName = TableLookup(tableName, 0, "loadoutSecondaryAttachment", classIndex + 1);
-    }
-    else {
+    } else {
       tempName = TableLookup(tableName, 0, "loadoutSecondaryAttachment2", classIndex + 1);
     }
   }
 
   if(tempName == "" || tempName == "none") {
     return "none";
-  }
-  else {
+  } else {
     return tempName;
   }
 }
@@ -220,8 +214,7 @@ table_getWeaponAttachment(tableName, classIndex, weaponIndex, attachmentIndex) {
 table_getWeaponBuff(tableName, classIndex, weaponIndex) {
   if(weaponIndex == 0) {
     return TableLookup(tableName, 0, "loadoutPrimaryBuff", classIndex + 1);
-  }
-  else {
+  } else {
     return TableLookup(tableName, 0, "loadoutSecondaryBuff", classIndex + 1);
   }
 }
@@ -840,11 +833,9 @@ giveLoadout(team, class, setPrimarySpawnWeapon) {
       foreach(killstreak in self.killstreaks) {
         if(!isDefined(loadoutKillstreak1)) {
           loadoutKillstreak1 = killstreak;
-        }
-        else if(!isDefined(loadoutKillstreak2)) {
+        } else if(!isDefined(loadoutKillstreak2)) {
           loadoutKillstreak2 = killstreak;
-        }
-        else if(!isDefined(loadoutKillstreak3)) {
+        } else if(!isDefined(loadoutKillstreak3)) {
           loadoutKillstreak3 = killstreak;
         }
       }
@@ -992,8 +983,7 @@ giveLoadout(team, class, setPrimarySpawnWeapon) {
 
   if(loadoutSecondary == "none") {
     secondaryName = "none";
-  }
-  else {
+  } else {
     attachments = [loadoutSecondaryAttachment];
     if(perksEnabled() && self _hasPerk("specialty_extra_attachment")) {
       attachments[attachments.size] = loadoutSecondaryAttachment2;
@@ -1556,8 +1546,7 @@ getPerkForClass(perkSlot, className) {
 
   if(isSubstr(className, "custom")) {
     return cac_getPerk(class_num, perkSlot);
-  }
-  else {
+  } else {
     return table_getPerk(level.classTableName, class_num, perkSlot);
   }
 }
@@ -1625,8 +1614,7 @@ isValidPrimary(refString, showAssert) {
     case "iw6_mariachimagnum":
       if(self isJuggernaut()) {
         result = true;
-      }
-      else {
+      } else {
         result = false;
       }
       break;
@@ -2120,7 +2108,7 @@ isValidWeapon(refString, shouldAssert) {
     level.weaponRefs = [];
 
     foreach(weaponRef in level.weaponList) {
-    level.weaponRefs[weaponRef] = true;
+      level.weaponRefs[weaponRef] = true;
     }
   }
 

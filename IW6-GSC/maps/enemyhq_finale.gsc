@@ -233,8 +233,7 @@ dog_ride_chopper(var_0) {
 
   if(isDefined(var_0) && var_0 == "right") {
     wait 3.0;
-  }
-  else {
+  } else {
     level.finale_chopper maps\_anim::anim_single_solo(level.dog, "get_in_chopper", "tag_origin");
   }
 
@@ -400,7 +399,7 @@ butchdance_combat() {
   var_0 = getEntArray("exfil_guys1", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread spawn_lockdown_guy();
+    var_2 thread spawn_lockdown_guy();
   }
 
   thread maps\enemyhq_code::toggle_ally_outlines(0);
@@ -429,7 +428,7 @@ butchdance_combat() {
   thread maps\enemyhq_code::ai_array_killcount_flag_set(var_4, var_4.size - 1, "ghosts_exfil2");
 
   foreach(var_8 in var_4) {
-  var_8 thread maps\enemyhq_audio::aud_handle_remote_sniper_ai(level.aud_finale_sniper);
+    var_8 thread maps\enemyhq_audio::aud_handle_remote_sniper_ai(level.aud_finale_sniper);
   }
 
   common_scripts\utility::flag_wait("ghost_timer_start");
@@ -546,7 +545,7 @@ butchdance_combat() {
   var_17 = get_vehicle_turret_ai(var_16);
 
   foreach(var_8 in var_17) {
-  var_8 getenemyinfo(level.allies[0]);
+    var_8 getenemyinfo(level.allies[0]);
   }
 
   common_scripts\utility::array_thread(var_16, ::flyaway_lynx_death_watcher);
@@ -630,7 +629,7 @@ handle_ghost_chopper_removal() {
   level.ghost_chopper waittill("reached_dynamic_path_end");
 
   foreach(var_1 in level.ghost_chopper.riders) {
-  var_1 maps\enemyhq_code::die_quietly();
+    var_1 maps\enemyhq_code::die_quietly();
   }
 
   level.ghost_chopper delete();

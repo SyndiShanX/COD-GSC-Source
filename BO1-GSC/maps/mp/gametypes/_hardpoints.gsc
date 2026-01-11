@@ -133,8 +133,7 @@ allowKillstreakAssists(killstreakType, allow) {
 isKillstreakAvailable(killstreak) {
   if(isDefined(level.menuReferenceForKillStreak[killstreak])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -169,8 +168,7 @@ giveKillstreakIfStreakCountMatches(index, killstreak, streakCount) {
   pixbeginevent("giveKillstreakIfStreakCountMatches");
   if(self.pers["killstreaksEarnedThisKillstreak"] > index && isRoundBased()) {
     hasAlreadyEarnedKillstreak = true;
-  }
-  else {
+  } else {
     hasAlreadyEarnedKillstreak = false;
   }
   if(isDefined(killstreak) && isKillstreakAvailable(killstreak) && !hasAlreadyEarnedKillstreak) {
@@ -407,11 +405,9 @@ changeWeaponAfterKillstreak(killstreak) {
   self waittill("killstreak_done");
   if(isDefined(self.lastStand) && self.lastStand && isDefined(self.laststandpistol) && self hasWeapon(self.laststandpistol)) {
     self switchToWeapon(self.laststandpistol);
-  }
-  else if(self hasWeapon(self.lastNonKillstreakWeapon)) {
+  } else if(self hasWeapon(self.lastNonKillstreakWeapon)) {
     self switchToWeapon(self.lastNonKillstreakWeapon);
-  }
-  else if(self hasWeapon(self.lastDroppableWeapon)) {
+  } else if(self hasWeapon(self.lastDroppableWeapon)) {
     self switchToWeapon(self.lastDroppableWeapon);
   }
 }

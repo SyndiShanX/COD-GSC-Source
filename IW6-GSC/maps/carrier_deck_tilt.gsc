@@ -84,7 +84,7 @@ deck_tilt_pre_load() {
   var_6 = getEntArray("barrel_alpha", "targetname");
 
   foreach(var_8 in var_6) {
-  var_8 movez(-4096, 0.05);
+    var_8 movez(-4096, 0.05);
   }
 
   common_scripts\utility::array_thread(var_6, maps\_utility::hide_entity);
@@ -398,8 +398,7 @@ tilt_player_rog_stumble() {
 
   if(isDefined(var_2) && var_2 == 1) {
     var_4 thread maps\_anim::anim_single_solo(var_5, "carrier_deck_tilt_stumble_knockback_player");
-  }
-  else {
+  } else {
     var_4 thread maps\_anim::anim_single_solo(var_5, "carrier_deck_tilt_stumble_knockdown_player");
   }
 
@@ -486,7 +485,7 @@ tilt_player_vault() {
     var_10 = getEntArray("sliding_jet2", "targetname");
 
     foreach(var_12 in var_10) {
-    var_12 notsolid();
+      var_12 notsolid();
     }
 
     level.player hideviewmodel();
@@ -537,7 +536,7 @@ tilt_player_vault() {
     level.hesh_tugger_clip solid();
 
     foreach(var_12 in var_10) {
-    var_12 solid();
+      var_12 solid();
     }
   } else {
     var_8 delete();
@@ -617,8 +616,7 @@ vault_anim_vol_check(var_0, var_1) {
 
       if(isDefined(var_0) && var_0 == 1) {
         level.vault = "alt";
-      }
-      else {
+      } else {
         level.vault = "main";
       }
 
@@ -753,8 +751,7 @@ tilt_drone_anim() {
 
     if(self.script_noteworthy == "dt_start_drone_path_3") {
       self.script_noteworthy = "die_on_goal";
-    }
-    else {
+    } else {
       self.script_noteworthy = "delete_on_goal";
     }
   } else {
@@ -837,7 +834,7 @@ tilt_odin_strike() {
   var_0 = getEntArray("deck_intact_odin", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 
   common_scripts\utility::flag_wait("rog_impacts_deck");
@@ -892,7 +889,7 @@ tilt_island_glass() {
   maps\_utility::array_delete(var_11);
 
   foreach(var_13 in var_6) {
-  var_13 setlightintensity(0.01);
+    var_13 setlightintensity(0.01);
   }
 
   wait 0.1;
@@ -901,7 +898,7 @@ tilt_island_glass() {
   maps\_utility::array_delete(var_10);
 
   foreach(var_13 in var_7) {
-  var_13 setlightintensity(0.01);
+    var_13 setlightintensity(0.01);
   }
 
   wait 0.1;
@@ -910,7 +907,7 @@ tilt_island_glass() {
   maps\_utility::array_delete(var_9);
 
   foreach(var_13 in var_8) {
-  var_13 setlightintensity(0.01);
+    var_13 setlightintensity(0.01);
   }
 }
 
@@ -1018,11 +1015,11 @@ tilt_props_elevator() {
   level.dmg_rear_elevator linkto(var_0, "j_prop_1");
 
   foreach(var_3 in level.elevator_dmg_models) {
-  var_3 linkto(var_0, "j_prop_1");
+    var_3 linkto(var_0, "j_prop_1");
   }
 
   foreach(var_3 in level.elevator_ac130_dmg_02) {
-  var_3 linkto(var_0, "j_prop_1");
+    var_3 linkto(var_0, "j_prop_1");
   }
 
   common_scripts\utility::flag_wait("start_main_odin_strike");
@@ -1049,7 +1046,7 @@ tilt_props_impact_barrels() {
   var_0 = common_scripts\utility::array_removeundefined(var_0);
 
   foreach(var_2 in var_0) {
-  var_2 thread tilt_anim_solo("barrels", "carrier_deck_tilt_prop_sim_pallet" + var_2.script_parameters, "start_main_odin_strike", "deck_tilt_animnode", undefined, undefined, undefined, undefined);
+    var_2 thread tilt_anim_solo("barrels", "carrier_deck_tilt_prop_sim_pallet" + var_2.script_parameters, "start_main_odin_strike", "deck_tilt_animnode", undefined, undefined, undefined, undefined);
   }
 }
 
@@ -1085,8 +1082,7 @@ tilt_props_impact_x30() {
     if(var_5.script_noteworthy == "clip" || var_5.script_noteworthy == "mantle") {
       if(isDefined(var_5.script_parameters) && var_5.script_parameters == "12") {
         continue;
-      }
-      else {
+      } else {
         var_5 delete();
       }
 
@@ -1235,8 +1231,7 @@ tilt_props_barrels_x3(var_0, var_1) {
     if(var_12.script_parameters == "1") {
       if(var_12.script_noteworthy == "item") {
         var_5 = var_12;
-      }
-      else {
+      } else {
         var_8 = var_12;
       }
 
@@ -1246,8 +1241,7 @@ tilt_props_barrels_x3(var_0, var_1) {
     if(var_12.script_parameters == "2") {
       if(var_12.script_noteworthy == "item") {
         var_6 = var_12;
-      }
-      else {
+      } else {
         var_9 = var_12;
       }
 
@@ -1658,7 +1652,7 @@ tilt_props_medium() {
   var_1 = getEntArray("sliding_cart_01b", "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 movey(-512, 0.05);
+    var_3 movey(-512, 0.05);
   }
 
   var_5 = getEntArray("sliding_crate_01b", "targetname");
@@ -1671,25 +1665,25 @@ tilt_props_medium() {
   var_8 = getEntArray("sliding_crate_03a", "targetname");
 
   foreach(var_3 in var_8) {
-  var_3 movey(160, 0.05);
+    var_3 movey(160, 0.05);
   }
 
   var_11 = getEntArray("sliding_barrel_01a", "targetname");
 
   foreach(var_3 in var_11) {
-  var_3 movey(244, 0.05);
+    var_3 movey(244, 0.05);
   }
 
   var_14 = getEntArray("sliding_barrel_01b", "targetname");
 
   foreach(var_3 in var_14) {
-  var_3 movey(244, 0.05);
+    var_3 movey(244, 0.05);
   }
 
   var_17 = getEntArray("sliding_barrel_01c", "targetname");
 
   foreach(var_3 in var_17) {
-  var_3 movey(244, 0.05);
+    var_3 movey(244, 0.05);
   }
 
   wait 0.15;
@@ -2051,8 +2045,7 @@ tilt_anim_solo(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
 
   if(isDefined(var_3)) {
     var_10 = common_scripts\utility::getstruct(var_3, "targetname");
-  }
-  else {
+  } else {
     var_10 = common_scripts\utility::spawn_tag_origin();
   }
 

@@ -24,8 +24,7 @@ doorenterexitcheck() {
 
   if(var_1) {
     doorenter(var_0);
-  }
-  else {
+  } else {
     doorexit(var_0);
   }
 
@@ -96,8 +95,7 @@ doorenter_trygrenade(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_13 > 20) {
       var_13 = 20;
-    }
-    else if(var_13 < -20) {
+    } else if(var_13 < -20) {
       var_13 = -20;
     }
 
@@ -167,8 +165,7 @@ indoorcqbtogglecheck() {
   for(;;) {
     if(self isindoor() && !self.doingambush) {
       doorenter_enable_cqbwalk();
-    }
-    else if(!isDefined(self.minindoortime) || self.minindoortime < gettime()) {
+    } else if(!isDefined(self.minindoortime) || self.minindoortime < gettime()) {
       self.minindoortime = undefined;
       doorexit_disable_cqbwalk();
     }

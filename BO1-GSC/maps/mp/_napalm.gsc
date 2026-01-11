@@ -216,8 +216,7 @@ callStrike_bombEffect(plane, pathEnd, flyTime, launchTime, owner, requiredDeathC
   wait 0.05;
   if(!isDefined(bomb) || !isDefined(bomb.origin)) {
     bombOrigin = originalBombOrigin;
-  }
-  else {
+  } else {
     bombOrigin = bomb.origin;
   }
   bombAngles = fakeBomb.angles;
@@ -469,8 +468,7 @@ doNapalm(origin, yaw, owner, team) {
   ownerEntNum = owner GetEntityNumber();
   if(level.teambased) {
     teamType = owner.team;
-  }
-  else {
+  } else {
     teamType = "free";
   }
   burnNapalmDuration = getDvarFloatDefault("scr_burnNapalmDuration", level.burnNapalmDuration);
@@ -483,8 +481,7 @@ targetisclose(other, target) {
   infront = targetisinfront(other, target);
   if(infront) {
     dir = 1;
-  }
-  else {
+  } else {
     dir = -1;
   }
   a = flat_origin(other.origin);
@@ -493,8 +490,7 @@ targetisclose(other, target) {
   dist = distance(a, point);
   if(dist < 3000) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -504,8 +500,7 @@ targetisinfront(other, target) {
   dot = vectordot(forwardvec, normalvec);
   if(dot > 0) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -576,8 +571,7 @@ planeTurnSimple(plane, startPoint, endPoint, moveTime, isTurningRight) {
   rightTurn = 1;
   if(isTurningRight) {
     turnDirection = rightTurn;
-  }
-  else {
+  } else {
     turnDirection = leftTurn;
   }
   radius = 25000;

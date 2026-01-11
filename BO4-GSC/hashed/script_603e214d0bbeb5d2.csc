@@ -251,8 +251,7 @@ function_bd9af109(localclientnum, draftcharacter) {
   return true;
 }
 
-function_2263ff6(localclientnum, draftcharacter, oldweapon, newweapon) {
-}
+function_2263ff6(localclientnum, draftcharacter, oldweapon, newweapon) {}
 
 update_player_weapon(localclientnum, draftcharacter) {
   changed = 0;
@@ -381,18 +380,10 @@ setup_team(localclientnum) {
         model = util::spawn_model(localclientnum, "tag_origin", level.playerscriptstructs[localplayer.team][i].origin, level.playerscriptstructs[localplayer.team][i].angles);
         model.targetname = level.playerscriptstructs[localplayer.team][i].targetname;
         level.draftcharacters[i] = character_customization::function_9de1b403(model, localclientnum, 0);
-        [
-          [level.draftcharacters[i]]
-        ] - > function_e5bdd4ae().var_34de0799 = var_caf8b806[i % var_caf8b806.size];
-        [
-          [level.draftcharacters[i]]
-        ] - > function_e5bdd4ae().var_49d2d833 = array("pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle")[i % array("pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle").size];
-        [
-          [level.draftcharacters[i]]
-        ] - > function_e5bdd4ae().params = spawnStruct();
-        [
-          [level.draftcharacters[i]]
-        ] - > function_e5bdd4ae().params.sessionmode = currentsessionmode();
+        [[level.draftcharacters[i]]] - > function_e5bdd4ae().var_34de0799 = var_caf8b806[i % var_caf8b806.size];
+        [[level.draftcharacters[i]]] - > function_e5bdd4ae().var_49d2d833 = array("pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle")[i % array("pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle", "pb_rifle_endgame_1stplace_idle").size];
+        [[level.draftcharacters[i]]] - > function_e5bdd4ae().params = spawnStruct();
+        [[level.draftcharacters[i]]] - > function_e5bdd4ae().params.sessionmode = currentsessionmode();
       }
     }
   }

@@ -21,16 +21,10 @@ class cscriptbundleobjectbase {
 
   function error(condition, str_msg) {
     if(condition) {
-      if([
-          [_o_bundle]
-        ] - > is_testing()) {
+      if([[_o_bundle]] - > is_testing()) {
         scriptbundle::error_on_screen(str_msg);
       } else {
-        assertmsg((((([
-          [_o_bundle]
-        ] - > get_type()) + "") + ([
-          [_o_bundle]
-        ] - > get_name()) + "") + (isDefined(_s.name) ? "" + _s.name : (isDefined("") ? "" + "" : "")) + "") + str_msg);
+        assertmsg((((([[_o_bundle]] - > get_type()) + "") + ([[_o_bundle]] - > get_name()) + "") + (isDefined(_s.name) ? "" + _s.name : (isDefined("") ? "" + "" : "")) + "") + str_msg);
       }
       thread[[_o_bundle]] - > on_error();
       return true;

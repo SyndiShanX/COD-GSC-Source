@@ -23,8 +23,7 @@ main() {
 
   if(isDefined(level.prologue) && level.prologue == 1) {
     level.space_breathing_enabled = 1;
-  }
-  else {
+  } else {
     level.space_breathing_enabled = 1;
   }
 
@@ -54,8 +53,7 @@ audio_set_initial_ambience() {
 
   if(level.start_point == "odin_intro") {
     level.player setclienttriggeraudiozone("odin_title", 3.0);
-  }
-  else {
+  } else {
     level.player setclienttriggeraudiozone("odin_intro", 0);
   }
 
@@ -343,8 +341,7 @@ sfx_dist_odin_fire() {
   if(!common_scripts\utility::flag("sfx_odin_ending")) {
     if(level.play_shake_sound == 0) {
       thread common_scripts\utility::play_sound_in_space("scn_odin_dist_fire_moment", (108, 44645, -15751));
-    }
-    else if(level.play_shake_sound == 3) {
+    } else if(level.play_shake_sound == 3) {
       thread common_scripts\utility::play_sound_in_space("scn_odin_dist_fire_moment", (-11686, 46111, -16126));
     }
   }

@@ -77,8 +77,7 @@ moveto_volume_think(var_0) {
 
   if(isDefined(var_11.target)) {
     var_11 = var_11 common_scripts\utility::get_target_ent();
-  }
-  else {
+  } else {
     var_11 = undefined;
   }
 

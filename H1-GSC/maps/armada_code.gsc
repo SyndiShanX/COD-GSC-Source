@@ -140,11 +140,9 @@ pickup_technical_custombadplace() {
 
     if(var_6 < 5) {
       var_7 = 200;
-    }
-    else if(var_6 > 5 && var_6 < 8) {
+    } else if(var_6 > 5 && var_6 < 8) {
       var_7 = 350;
-    }
-    else {
+    } else {
       var_7 = 500;
     }
 
@@ -154,8 +152,7 @@ pickup_technical_custombadplace() {
 
     if(var_2) {
       var_8 = anglesToForward(self gettagangles("tag_turret"));
-    }
-    else {
+    } else {
       var_8 = anglesToForward(self.angles);
     }
 

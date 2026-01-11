@@ -67,8 +67,7 @@ set_objective_perk(n_objective, ent_or_pos, n_fade_radius, e_volume) {
 
   if(isvec(ent_or_pos)) {
     v_pos = ent_or_pos;
-  }
-  else {
+  } else {
     v_pos = ent_or_pos.origin;
   }
 
@@ -212,8 +211,7 @@ objectives() {
       } else if(n_current_obj != n_objective) {
         if(isDefined(level.str_objective_type)) {
           objective_type();
-        }
-        else if(level.a_obj_addstate[n_objective] != 1) {
+        } else if(level.a_obj_addstate[n_objective] != 1) {
           objective_add(n_objective, "current", level.a_objectives[n_objective], undefined, undefined, level.b_show_objective_message);
           level.a_obj_addstate[n_objective] = 1;
         }
@@ -223,8 +221,7 @@ objectives() {
     if(isDefined(level.objective_pos) || isDefined(level.target_id)) {
       if(isDefined(level.str_objective_type)) {
         objective_type(s_info.n_timer);
-      }
-      else {
+      } else {
         objective_set3d_prethink(n_objective, 1, (1, 1, 1));
       }
     } else if(!isDefined(level.n_objective_targets)) {
@@ -291,14 +288,11 @@ objective_type(n_timer) {
     case "remove":
       if(isDefined(level.target_id)) {
         objective_additionalposition(n_objective, level.target_id, (0, 0, 0));
-      }
-      else if(isDefined(level.objective_pos) && isDefined(level.objective_pos.is_breadcrumb)) {
+      } else if(isDefined(level.objective_pos) && isDefined(level.objective_pos.is_breadcrumb)) {
         objective_set3d_prethink(n_objective, 0);
-      }
-      else if(isDefined(level.objective_pos) && isvec(level.objective_pos)) {
+      } else if(isDefined(level.objective_pos) && isvec(level.objective_pos)) {
         objective_additionalposition(n_objective, get_target_id(level.objective_pos), (0, 0, 0));
-      }
-      else {
+      } else {
         objective_set3d_prethink(n_objective, 0);
       }
 
@@ -348,26 +342,19 @@ set_target_id(n_target_id) {
 is_objective_pos_the_same(pos1, pos2) {
   if(!isDefined(pos1) && !isDefined(pos2)) {
     return true;
-  }
-  else if(isDefined(pos1) && !isDefined(pos2)) {
+  } else if(isDefined(pos1) && !isDefined(pos2)) {
     return false;
-  }
-  else if(!isDefined(pos1) && isDefined(pos2)) {
+  } else if(!isDefined(pos1) && isDefined(pos2)) {
     return false;
-  }
-  else if(issentient(pos1) && !issentient(pos2)) {
+  } else if(issentient(pos1) && !issentient(pos2)) {
     return false;
-  }
-  else if(!issentient(pos1) && issentient(pos2)) {
+  } else if(!issentient(pos1) && issentient(pos2)) {
     return false;
-  }
-  else if(isvec(pos1) && !isvec(pos2)) {
+  } else if(isvec(pos1) && !isvec(pos2)) {
     return false;
-  }
-  else if(!isvec(pos1) && isvec(pos2)) {
+  } else if(!isvec(pos1) && isvec(pos2)) {
     return false;
-  }
-  else if(pos1 != pos2) {
+  } else if(pos1 != pos2) {
     return false;
   }
 
@@ -384,8 +371,7 @@ objective_breadcrumb(n_obj_index, str_trig_targetname) {
 
         if(isDefined(s_current)) {
           set_objective(n_obj_index, s_current, "breadcrumb");
-        }
-        else {
+        } else {
           set_objective(n_obj_index, t_current, "breadcrumb");
         }
       } else
@@ -444,8 +430,7 @@ objective_breadcrumb_area(n_obj_index, str_area_name, str_endon) {
 
       if(isDefined(s_dest)) {
         set_objective(n_obj_index, s_dest, "breadcrumb");
-      }
-      else {
+      } else {
         e_dest = getent(e_curr_area.target, "targetname");
 
         if(isDefined(e_dest)) {
@@ -552,8 +537,7 @@ _objective_set_position(b_use_pos_origin) {
 
   if(b_use_pos_origin) {
     objective_pos = level.objective_pos.origin;
-  }
-  else {
+  } else {
     objective_pos = level.objective_pos;
   }
 
@@ -571,8 +555,7 @@ _objective_set_position(b_use_pos_origin) {
 
       if(!isvec(objective_pos)) {
         objective_pos.n_obj_id = n_target_id;
-      }
-      else {
+      } else {
         level notify("multi_objective_set", n_target_id);
       }
     } else

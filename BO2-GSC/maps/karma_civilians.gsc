@@ -51,11 +51,9 @@ set_civilian_run_cycle(str_state, anim_override) {
 
   if(isDefined(anim_override)) {
     anime = anim_override;
-  }
-  else if(isarray(level.scr_anim[self.script_string][self.anim_set][str_state])) {
+  } else if(isarray(level.scr_anim[self.script_string][self.anim_set][str_state])) {
     anime = random(level.scr_anim[self.script_string][self.anim_set][str_state]);
-  }
-  else {
+  } else {
     anime = level.scr_anim[self.script_string][self.anim_set][str_state];
   }
 
@@ -100,8 +98,7 @@ spawn_civs(str_spawn_loc, n_max_spawns, str_starter_loc, n_initial_spawns, str_e
       if(isDefined(ai_civ)) {
         if(level.ai_civs.size < n_initial_spawns && isDefined(a_nd_initial_locs)) {
           nd_start = a_nd_initial_locs[level.ai_civs.size];
-        }
-        else {
+        } else {
           nd_start = random(a_nd_spawn_locs);
         }
 
@@ -114,8 +111,7 @@ spawn_civs(str_spawn_loc, n_max_spawns, str_starter_loc, n_initial_spawns, str_e
 
     if(level.ai_civs.size <= n_initial_spawns) {
       wait 0.1;
-    }
-    else {
+    } else {
       wait(randomfloatrange(n_min_spawn_delay, n_max_spawn_delay));
     }
   }
@@ -135,8 +131,7 @@ pick_a_civ(str_type) {
 
     if(level.a_sp_civs[str_type][0] == sp_last && level.a_sp_civs[str_type].size > 1) {
       level.n_curr_sp_civ[str_type] = 1;
-    }
-    else {
+    } else {
       level.n_curr_sp_civ[str_type] = 0;
     }
   }
@@ -220,8 +215,7 @@ wander(start_target) {
 
     if(start_target.type == "Path") {
       str_goal_type = "node";
-    }
-    else {
+    } else {
       str_goal_type = "ent";
     }
   }
@@ -350,8 +344,7 @@ civ_spawn_props() {
   if(isDefined(self.anim_set) && isDefined(level.a_str_civ_props[self.anim_set])) {
     if(self.script_string == "civ_male") {
       self attach(random(level.a_str_civ_props[self.anim_set]), "TAG_WEAPON_LEFT");
-    }
-    else {
+    } else {
       self attach(random(level.a_str_civ_props[self.anim_set]), "TAG_WEAPON_RIGHT");
     }
   }
@@ -359,8 +352,7 @@ civ_spawn_props() {
   if(randomint(100) > 60 && self.anim_set != "phone") {
     if(self.script_string == "civ_female") {
       self attach("p6_anim_bluetooth_female", "J_Head");
-    }
-    else {
+    } else {
       self attach("p6_anim_bluetooth_male", "J_Head");
     }
   }
@@ -419,8 +411,7 @@ wander_to_goal(str_goal_type, currentgoal) {
 
   if(isDefined(currentgoal.radius) && currentgoal.radius > 0) {
     self.goalradius = currentgoal.radius;
-  }
-  else {
+  } else {
     self.goalradius = 32;
   }
 
@@ -572,15 +563,14 @@ assign_civ_drone_spawners(str_spawnername, script_string) {
   a_sp_civs = getEntArray(str_spawnername, "targetname");
 
   foreach(sp_civ in a_sp_civs) {
-  maps\_drones::drones_assign_spawner(script_string, sp_civ);
+    maps\_drones::drones_assign_spawner(script_string, sp_civ);
   }
 }
 
 assign_civ_drone_spawners_by_type(type, script_string) {
   if(!isarray(type)) {
     a_str_type[0] = type;
-  }
-  else {
+  } else {
     a_str_type = type;
   }
 
@@ -589,7 +579,7 @@ assign_civ_drone_spawners_by_type(type, script_string) {
     a_sp_civs = level.a_sp_civs[str_type];
 
     foreach(sp_civ in a_sp_civs) {
-    maps\_drones::drones_assign_spawner(script_string, sp_civ);
+      maps\_drones::drones_assign_spawner(script_string, sp_civ);
     }
   }
 }
@@ -664,7 +654,7 @@ spawn_static_civs(str_structnames, n_delay_max) {
   }
 
   foreach(s_struct in a_s_static_locs) {
-  s_struct structdelete();
+    s_struct structdelete();
   }
 
   a_sp_group = [];
@@ -675,15 +665,13 @@ spawn_static_civs(str_structnames, n_delay_max) {
     }
     if(isDefined(a_static_locs[i]["script_string"]) && isDefined(level.a_sp_civs[a_static_locs[i]["script_string"]])) {
       a_sp_group = level.a_sp_civs[a_static_locs[i]["script_string"]];
-    }
-    else {
+    } else {
       a_sp_group = level.a_sp_civs[a_civ_types_keys[randomint(a_civ_types_keys.size)]];
     }
 
     if(a_sp_group.size > 1) {
       sp_spawner = a_sp_group[randomint(a_sp_group.size)];
-    }
-    else {
+    } else {
       sp_spawner = a_sp_group[0];
     }
 
@@ -729,7 +717,7 @@ spawn_static_club_civs(str_structnames, n_delay_max, str_male_spawners, str_fema
   }
 
   foreach(s_struct in a_s_static_locs) {
-  s_struct structdelete();
+    s_struct structdelete();
   }
 
   n_male_index_head = 0;
@@ -795,8 +783,7 @@ spawn_static_club_civs(str_structnames, n_delay_max, str_male_spawners, str_fema
       if(isDefined(m_drone.script_float)) {
         if(a_static_locs[i]["script_string"] == str_male_spawners) {
           m_head = "c_mul_civ_club_male_head" + int(m_drone.script_float);
-        }
-        else if(a_static_locs[i]["script_string"] == str_female_spawners) {
+        } else if(a_static_locs[i]["script_string"] == str_female_spawners) {
           m_head = "c_mul_civ_club_female_head" + int(m_drone.script_float);
         }
       }

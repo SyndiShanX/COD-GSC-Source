@@ -157,8 +157,7 @@ _fire(lifeid, player, team, killstreak_id) {
 
   if(remotemissilespawnarray.size > 0) {
     remotemissilespawn = player getbestspawnpoint(remotemissilespawnarray);
-  }
-  else {
+  } else {
     remotemissilespawn = undefined;
   }
 
@@ -366,8 +365,7 @@ handledamage() {
       if(self.owner isenemyplayer(attacker)) {
         maps\mp\_scoreevents::processscoreevent("destroyed_remote_missile", attacker, self.owner, weapon);
         attacker addweaponstat(weapon, "destroyed_controlled_killstreak", 1);
-      } else {
-      }
+      } else {}
 
       self.owner sendkillstreakdamageevent(int(damage));
     }
@@ -747,7 +745,7 @@ targeting_hud_think(rocket) {
 
   while(true) {
     foreach(icon in self.missile_target_icons) {
-    icon.alpha = 0;
+      icon.alpha = 0;
     }
 
     framessincetargetscan++;

@@ -21,8 +21,7 @@ shellshockondamage(var_00, var_01) {
       }
       if(isDefined(self.shellshockreduction) && self.shellshockreduction) {
         self shellshock("frag_grenade_mp", self.shellshockreduction);
-      }
-      else {
+      } else {
         self shellshock("frag_grenade_mp", 0.5);
       }
     }
@@ -44,8 +43,7 @@ grenade_earthquake(var_00, var_01) {
 
   if(!isDefined(var_01) || var_01) {
     self waittill("explode", var_02);
-  }
-  else {
+  } else {
     var_02 = self.origin;
   }
 
@@ -203,8 +201,7 @@ func_DAF3(var_00) {
 
   if(!isDefined(var_00) || var_00) {
     self waittill("explode", var_01);
-  }
-  else {
+  } else {
     var_01 = self.origin;
   }
 
@@ -231,8 +228,7 @@ func_65C4(var_00) {
 
   if(!isDefined(var_00) || var_00) {
     self waittill("explode", var_01);
-  }
-  else {
+  } else {
     var_01 = self.origin;
   }
 

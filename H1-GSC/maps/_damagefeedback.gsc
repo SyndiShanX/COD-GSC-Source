@@ -70,8 +70,7 @@ updatedamagefeedback(var_0, var_1) {
 
   if(isDefined(var_0.team)) {
     var_2 = var_0.team;
-  }
-  else if(isDefined(var_0.script_team)) {
+  } else if(isDefined(var_0.script_team)) {
     var_2 = var_0.script_team;
   }
 

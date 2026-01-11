@@ -416,7 +416,7 @@ ascend_logic() {
   level.ascend_anim_node notify("stop_loop");
 
   foreach(var_9 in var_3) {
-  var_9 linkto(level.player_ascend_anim_node);
+    var_9 linkto(level.player_ascend_anim_node);
   }
 
   thread maps\black_ice_audio::sfx_rig_ascend_logic("go");
@@ -505,15 +505,13 @@ ascend_aim_lerp_anims() {
   if(var_1) {
     if(!var_6) {
       var_9 = var_0[0];
-    }
-    else {
+    } else {
       var_10 = -1.0 * var_0[0];
     }
   } else if(var_2) {
     if(!var_5) {
       var_10 = -1.0 * var_0[0];
-    }
-    else {
+    } else {
       var_9 = var_0[0];
     }
   }
@@ -521,15 +519,13 @@ ascend_aim_lerp_anims() {
   if(var_3) {
     if(!var_8) {
       var_11 = -1.0 * var_0[1];
-    }
-    else {
+    } else {
       var_12 = var_0[1];
     }
   } else if(var_4) {
     if(!var_7) {
       var_12 = var_0[1];
-    }
-    else {
+    } else {
       var_11 = -1.0 * var_0[1];
     }
   }
@@ -549,8 +545,7 @@ ascend_aim_lerp_anims() {
 
   if(!(var_1 || var_2 || var_3 || var_4)) {
     var_13 = level.static_damping_factor;
-  }
-  else {
+  } else {
     var_13 = level.kinetic_damping_factor;
   }
 

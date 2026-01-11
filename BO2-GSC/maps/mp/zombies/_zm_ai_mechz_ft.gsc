@@ -228,8 +228,7 @@ player_flame_damage() {
 
     if(!self hasperk("specialty_armorvest")) {
       self dodamage(n_player_dmg, self.origin);
-    }
-    else {
+    } else {
       self dodamage(n_jugga_dmg, self.origin);
     }
 
@@ -348,8 +347,7 @@ explode_on_death() {
 
   if(isDefined(self.isdog) && self.isdog) {
     self hide();
-  }
-  else {
+  } else {
     self delay_thread(1, ::self_delete);
   }
 }
@@ -473,8 +471,7 @@ mechz_do_flamethrower_attack(tank_sweep) {
 
   if(isDefined(self.doing_ft_sweep) && self.doing_ft_sweep) {
     self.doing_ft_sweep = 0;
-  }
-  else {
+  } else {
     self.cant_melee = 1;
     self waittill("stop_ft");
     self mechz_flamethrower_cleanup();

@@ -64,8 +64,7 @@ pers_check_for_pers_headshot(time_of_death, zombie) {
   if(maps\mp\zombies\_zm_pers_upgrades::is_pers_system_active()) {
     if(self.pers["last_headshot_kill_time"] == time_of_death) {
       self.pers["zombies_multikilled"]++;
-    }
-    else {
+    } else {
       self.pers["zombies_multikilled"] = 1;
     }
 
@@ -163,8 +162,7 @@ pers_upgrade_insta_kill_upgrade_check() {
 
       if(num_killed > 0) {
         self maps\mp\zombies\_zm_stats::zero_client_stat("pers_insta_kill", 0);
-      }
-      else {
+      } else {
         self maps\mp\zombies\_zm_stats::increment_client_stat("pers_insta_kill", 0);
       }
     }
@@ -316,8 +314,7 @@ pers_upgrade_flopper_watcher() {
   while(true) {
     if(maps\mp\zombies\_zm_pers_upgrades::is_pers_system_disabled()) {
       wait 0.01;
-    }
-    else {
+    } else {
       self waittill("dtp_start");
       self.pers_flopper_active = 1;
       self thread pers_flopper_dtn();
@@ -344,8 +341,7 @@ pers_flopper_explode(attacker, origin) {
 
   if(isDefined(level.pers_flopper_network_optimized) && level.pers_flopper_network_optimized) {
     attacker thread pers_flopper_damage_network_optimized(origin, radius, max_damage, min_damage, "MOD_GRENADE_SPLASH");
-  }
-  else {
+  } else {
     radiusdamage(origin, radius, max_damage, min_damage, attacker, "MOD_GRENADE_SPLASH");
   }
 
@@ -450,8 +446,7 @@ pers_upgrade_double_points_pickup_start() {
 
   if(isDefined(self.account_value)) {
     bank_account_value_start = self.account_value;
-  }
-  else {
+  } else {
     bank_account_value_start = 0;
   }
 
@@ -479,8 +474,7 @@ pers_upgrade_double_points_pickup_start() {
 
   if(isDefined(self.account_value)) {
     bank_account_value_end = self.account_value;
-  }
-  else {
+  } else {
     bank_account_value_end = 0;
   }
 
@@ -605,8 +599,7 @@ pers_upgrade_perk_lose_restore() {
 
       if(discard_quickrevive == 1) {
         size = self.a_saved_perks.size;
-      }
-      else {
+      } else {
         size = self.a_saved_perks.size - 1;
       }
 
@@ -675,8 +668,7 @@ pers_upgrade_sniper_kill_check(zombie, attacker) {
   }
   if(isDefined(self.pers_upgrades_awarded["sniper"]) && self.pers_upgrades_awarded["sniper"]) {
     self thread pers_sniper_score_reward();
-  }
-  else {
+  } else {
     dist = distance(zombie.origin, attacker.origin);
 
     if(dist < level.pers_sniper_kill_distance) {
@@ -732,8 +724,7 @@ pers_sniper_player_fires(weapon, hit) {
 
         if(hit) {
           self.num_sniper_misses = 0;
-        }
-        else {
+        } else {
           self.num_sniper_misses++;
 
           if(self.num_sniper_misses >= level.pers_sniper_misses) {
@@ -905,8 +896,7 @@ pers_magic_box_set_teddy_location(box_index) {
 
   if(dp > 0) {
     v_angles_offset = vectorscale((0, 1, 0), 90.0);
-  }
-  else {
+  } else {
     v_angles_offset = (0, -90, -10);
   }
 
@@ -924,9 +914,10 @@ pers_treasure_chest_choosespecialweapon(player) {
     player.pers_magic_box_weapon_count++;
 
     if(isDefined(level.pers_treasure_chest_get_weapons_array_func)) {
-      [[level.pers_treasure_chest_get_weapons_array_func]]();
-    }
-    else {
+      [
+        [level.pers_treasure_chest_get_weapons_array_func]
+      ]();
+    } else {
       pers_treasure_chest_get_weapons_array();
     }
 
@@ -1058,8 +1049,7 @@ pers_nube_unlock_watcher() {
 
     if(num_melee_kills == self.pers["melee_kills"] && num_headshot_kills == self.pers["headshots"] && num_boards == self.pers["boards"]) {
       self.pers_num_nube_kills++;
-    }
-    else {
+    } else {
       self.pers_num_nube_kills = 0;
       num_melee_kills = self.pers["melee_kills"];
       num_headshot_kills = self.pers["headshots"];
@@ -1137,11 +1127,9 @@ pers_nube_should_we_give_raygun(player_has_weapon, player, weapon_buy) {
 
   if(player_has_olympia && player_has_raygun) {
     player_has_weapon = 1;
-  }
-  else if(pers_nube_player_ranked_as_nube(player) && player_has_olympia && player_has_raygun == 0) {
+  } else if(pers_nube_player_ranked_as_nube(player) && player_has_olympia && player_has_raygun == 0) {
     player_has_weapon = 0;
-  }
-  else if(isDefined(player.pers_upgrades_awarded["nube"]) && player.pers_upgrades_awarded["nube"] && player_has_raygun) {
+  } else if(isDefined(player.pers_upgrades_awarded["nube"]) && player.pers_upgrades_awarded["nube"] && player_has_raygun) {
     player_has_weapon = 1;
   }
 

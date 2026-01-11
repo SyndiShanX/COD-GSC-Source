@@ -12,11 +12,10 @@
 #include scripts\zm_common\zm_item_pickup;
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_orange_audiologs;
 
 preload() {
-  clientfield::register("scriptmover", "" + #"hash_4a18e1ea1950215d", 24000, 1, "int");
+  clientfield::register("scriptmover", "" + # "hash_4a18e1ea1950215d", 24000, 1, "int");
 }
 
 init() {
@@ -35,7 +34,7 @@ init_records() {
   level.s_audiologs.s_records = spawnStruct();
   level.s_audiologs.s_records.n_collected = 0;
   level.s_audiologs.s_records.n_played = 0;
-  level.s_audiologs.s_records.a_str_vox = array(#"hash_30b1f52eee1181a1", #"hash_30b1f22eee117c88", #"hash_30b1f32eee117e3b", #"hash_30b1f82eee1186ba", #"hash_15353a598abe2499");
+  level.s_audiologs.s_records.a_str_vox = array(#"hash_30b1f52eee1181a1", # "hash_30b1f22eee117c88", # "hash_30b1f32eee117e3b", # "hash_30b1f82eee1186ba", # "hash_15353a598abe2499");
   var_f9d547ec = getEntArray("audiolog_record", "targetname");
   array::run_all(var_f9d547ec, &zm_item_pickup::create_item_pickup, &pickup_record, "", undefined, 96);
   level.s_audiologs.s_records.s_playback = struct::get("audiolog_record_player");
@@ -48,7 +47,7 @@ init_records() {
 pickup_record(e_item, e_player) {
   iprintln("<dev string:x38>" + level.s_audiologs.s_records.n_collected);
 
-    e_item playSound(#"hash_760800881cd94dd1");
+  e_item playSound(#"hash_760800881cd94dd1");
   level.s_audiologs.s_records.n_collected++;
 }
 
@@ -59,7 +58,7 @@ function_6ad87fb1() {
 
   iprintln("<dev string:x53>" + n_id);
 
-    level.s_audiologs.s_records.var_d9a8e3e4 show();
+  level.s_audiologs.s_records.var_d9a8e3e4 show();
   wait 1;
   level.s_audiologs.s_records.var_d9a8e3e4 rotatevelocity((0, 200, 0), 600);
   zm_hms_util::function_e308175e(level.s_audiologs.s_records.a_str_vox[n_id], self.origin);
@@ -85,7 +84,7 @@ function_d6fec498() {
   level.s_audiologs.s_reels = spawnStruct();
   level.s_audiologs.s_reels.n_collected = 0;
   level.s_audiologs.s_reels.n_played = 0;
-  level.s_audiologs.s_reels.a_str_vox = array(#"hash_6fce75e5c4fe6210", #"hash_172aa60779a37741", #"hash_2388426b6c075d62", #"hash_1a1854072d6b2453", #"hash_23883c6b6c075330", #"hash_23883f6b6c075849");
+  level.s_audiologs.s_reels.a_str_vox = array(#"hash_6fce75e5c4fe6210", # "hash_172aa60779a37741", # "hash_2388426b6c075d62", # "hash_1a1854072d6b2453", # "hash_23883c6b6c075330", # "hash_23883f6b6c075849");
   var_d1c55c66 = getEntArray("audiolog_reel", "targetname");
   array::run_all(var_d1c55c66, &zm_item_pickup::create_item_pickup, &pickup_reel, "", undefined, 96);
   level.s_audiologs.s_reels.s_playback = struct::get("audiolog_reel_player");
@@ -96,7 +95,7 @@ function_d6fec498() {
 pickup_reel(e_item, e_player) {
   iprintln("<dev string:x6c>" + level.s_audiologs.s_reels.n_collected);
 
-    e_item playSound(#"hash_760800881cd94dd1");
+  e_item playSound(#"hash_760800881cd94dd1");
   level.s_audiologs.s_reels.n_collected++;
 }
 
@@ -107,7 +106,7 @@ doa_streak_udem() {
 
   iprintln("<dev string:x85>" + n_id);
 
-    exploder::exploder("fxexp_script_projector_off");
+  exploder::exploder("fxexp_script_projector_off");
   exploder::exploder("fxexp_script_projector_on");
   zm_hms_util::function_e308175e(level.s_audiologs.s_reels.a_str_vox[n_id], self.origin);
   exploder::stop_exploder("fxexp_script_projector_off");
@@ -128,7 +127,7 @@ function_62fea2fe() {
 }
 
 function_ecba80df() {
-  level.s_audiologs.var_29f70993 = array(#"hash_4e502bf48420789b", #"hash_36a4134f1eed7a5e", #"hash_36a4144f1eed7c11", #"hash_3b6e2bba7d44fa78", #"hash_45a63a79ad46af7");
+  level.s_audiologs.var_29f70993 = array(#"hash_4e502bf48420789b", # "hash_36a4134f1eed7a5e", # "hash_36a4144f1eed7c11", # "hash_3b6e2bba7d44fa78", # "hash_45a63a79ad46af7");
   var_311159c3 = getEntArray("audiolog_russian", "targetname");
   array::run_all(var_311159c3, &zm_unitrigger::create, "", 96);
   array::thread_all(var_311159c3, &function_4a547e41);
@@ -141,13 +140,13 @@ function_4a547e41() {
 
   iprintln("<dev string:x9c>" + self.script_int);
 
-    self showpart("tag_light");
+  self showpart("tag_light");
   self zm_hms_util::function_e308175e(level.s_audiologs.var_29f70993[self.script_int], self.origin);
   self hidepart("tag_light");
 }
 
 function_922ff46a() {
-  level.s_audiologs.var_bc136840 = array(#"hash_5f4b3985abc17212", #"hash_5f4b3885abc1705f", #"hash_5f4b3785abc16eac", #"hash_5f4b3685abc16cf9", #"hash_5f4b3585abc16b46");
+  level.s_audiologs.var_bc136840 = array(#"hash_5f4b3985abc17212", # "hash_5f4b3885abc1705f", # "hash_5f4b3785abc16eac", # "hash_5f4b3685abc16cf9", # "hash_5f4b3585abc16b46");
   var_b41e84c = struct::get_array("audiolog_pablo");
   array::run_all(var_b41e84c, &zm_unitrigger::create, "", 96);
   array::thread_all(var_b41e84c, &function_a8be9b98);
@@ -159,14 +158,14 @@ function_a8be9b98() {
 
   iprintln("<dev string:xb9>" + self.script_int);
 
-    s_scene = struct::get(self.target);
+  s_scene = struct::get(self.target);
   s_scene thread scene::play();
   self zm_hms_util::function_e308175e(level.s_audiologs.var_bc136840[self.script_int], self.origin);
   s_scene thread scene::stop();
 }
 
 init_orbs() {
-  level.s_audiologs.var_7ab3422d = array(#"hash_60d74e6165b011e6", #"hash_60d74d6165b01033", #"hash_60d74c6165b00e80", #"hash_60d7536165b01a65");
+  level.s_audiologs.var_7ab3422d = array(#"hash_60d74e6165b011e6", # "hash_60d74d6165b01033", # "hash_60d74c6165b00e80", # "hash_60d7536165b01a65");
   a_e_orbs = getEntArray("audiolog_orb", "targetname");
   array::run_all(a_e_orbs, &setup_orb);
 }
@@ -175,7 +174,7 @@ setup_orb() {
   self setCanDamage(1);
   self.allowdeath = 0;
   self thread function_530a6195();
-  self clientfield::set("" + #"hash_4a18e1ea1950215d", 1);
+  self clientfield::set("" + # "hash_4a18e1ea1950215d", 1);
 }
 
 function_530a6195() {
@@ -186,6 +185,6 @@ function_530a6195() {
 
   iprintln("<dev string:xd4>" + self.script_int);
 
-    self zm_hms_util::function_e308175e(level.s_audiologs.var_7ab3422d[self.script_int], self.origin);
+  self zm_hms_util::function_e308175e(level.s_audiologs.var_7ab3422d[self.script_int], self.origin);
   self delete();
 }

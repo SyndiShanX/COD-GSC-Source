@@ -17,8 +17,7 @@ func_E3C6(var_00, var_01, var_02, var_03, var_04) {
 
   if(getdvarint("skip_nextmission", 0)) {
     var_00 = 0;
-  }
-  else if(!isDefined(var_00)) {
+  } else if(!isDefined(var_00)) {
     var_00 = 1;
   }
 
@@ -110,8 +109,7 @@ func_973A(var_00, var_01) {
 
   if(isDefined(var_01)) {
     var_02 = func_0EFB::func_7994(var_00 + "_shipcrib", "script_noteworthy", var_01);
-  }
-  else {
+  } else {
     var_01 = "_ignore_last_sparam";
   }
 
@@ -355,8 +353,7 @@ func_10635() {
 
   if(isDefined(self.func_E505)) {
     var_00 = self.func_E505;
-  }
-  else {
+  } else {
     var_00 = self.model;
   }
 
@@ -414,8 +411,7 @@ func_10635() {
     if(isDefined(scripts\engine\utility::array_find(var_13, var_12))) {
       if(getsubstr(var_12, 0, 1) == "a") {
         self.func_747F[var_11].func_EB9C = "_small";
-      }
-      else {
+      } else {
         self.func_747F[var_11].func_EB9C = "_large";
       }
 
@@ -425,8 +421,7 @@ func_10635() {
 
     if(getsubstr(var_12, 0, 1) == "a") {
       self.func_747F[var_11].func_EB9C = "_small";
-    }
-    else {
+    } else {
       self.func_747F[var_11].func_EB9C = "_large";
     }
 
@@ -537,7 +532,7 @@ func_10C56() {
   var_00 = getarraykeys(self.func_747E);
 
   foreach(var_02 in var_00) {
-  thread func_747B(var_02);
+    thread func_747B(var_02);
   }
 }
 
@@ -579,7 +574,7 @@ stop_func() {
   var_00 = getarraykeys(self.func_747E);
 
   foreach(var_02 in var_00) {
-  thread func_747A(var_02);
+    thread func_747A(var_02);
   }
 }
 

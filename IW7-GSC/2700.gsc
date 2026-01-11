@@ -66,8 +66,7 @@ onbegincarrying() {
 
       if(var_02) {
         finalkillcam_victim();
-      }
-      else {
+      } else {
         func_AB2B();
       }
 
@@ -137,11 +136,9 @@ func_136AE() {
 
   if(var_1.status == 0) {
     self.battlebuddy setclientomnvar("ui_battlebuddy_status", "incoming");
-  }
-  else if(var_1.status == -1 || var_1.status == -3) {
+  } else if(var_1.status == -1 || var_1.status == -3) {
     self.battlebuddy setclientomnvar("ui_battlebuddy_status", "err_combat");
-  }
-  else {
+  } else {
     self.battlebuddy setclientomnvar("ui_battlebuddy_status", "err_pos");
   }
 
@@ -257,8 +254,7 @@ motionblurhqenable() {
 func_1848(var_00) {
   if(!isDefined(level.func_28CE[var_0.team])) {
     level.func_28CE[var_0.team] = var_00;
-  }
-  else if(level.func_28CE[var_0.team] != var_00) {
+  } else if(level.func_28CE[var_0.team] != var_00) {
     return;
   }
 }
@@ -287,8 +283,7 @@ finalkillcam_victim() {
 
     if(isDefined(var_01) && func_9FD1(var_01)) {
       func_C88C(var_01);
-    }
-    else {
+    } else {
       func_1848(self);
       self setclientomnvar("ui_battlebuddy_idx", -1);
     }

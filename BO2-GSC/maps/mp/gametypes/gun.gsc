@@ -163,8 +163,7 @@ givecustomloadout(takeallweapons, alreadyspawned) {
 
   if(isDefined(takeallweapons) && !takeallweapons) {
     self thread takeoldweapons(currentweapon);
-  }
-  else {
+  } else {
     self enableweaponcycling();
   }
 
@@ -269,8 +268,7 @@ onplayerkilled(einflictor, attacker, idamage, smeansofdeath, sweapon, vdir, shit
     if(smeansofdeath == "MOD_MELEE") {
       if(maps\mp\gametypes\_globallogic::istopscoringplayer(self)) {
         maps\mp\_scoreevents::processscoreevent("knife_leader_gun", attacker, self, sweapon);
-      }
-      else {
+      } else {
         maps\mp\_scoreevents::processscoreevent("humiliation_gun", attacker, self, sweapon);
       }
 
@@ -337,8 +335,7 @@ onspawnplayer(predictedspawn) {
 
   if(predictedspawn) {
     self predictspawnpoint(spawnpoint.origin, spawnpoint.angles);
-  }
-  else {
+  } else {
     self spawn(spawnpoint.origin, spawnpoint.angles, "gun");
     self thread infiniteammo();
   }

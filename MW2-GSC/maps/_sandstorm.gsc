@@ -10,8 +10,7 @@ blizzard_main() {
   blizzard_flags();
   if(isDefined(level.blizzard_fx_override_thread)) {
     [[level.blizzard_fx_override_thread]]();
-  }
-  else {
+  } else {
     fx_init();
   }
   blizzard_level_set("none");
@@ -358,11 +357,11 @@ pause_blizzard_ground_fx() {
     flag_wait("pause_blizzard_ground_fx");
     //iprintlnbold( "Stop Ground FX" );
     foreach(oneshot in fx) {
-    oneshot pauseEffect();
+      oneshot pauseEffect();
     }
     flag_waitopen("pause_blizzard_ground_fx");
     foreach(oneshot in fx) {
-    oneshot restartEffect();
+      oneshot restartEffect();
     }
   }
 }

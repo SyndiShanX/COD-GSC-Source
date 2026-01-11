@@ -110,7 +110,7 @@ menendez_chickens_cleanup() {
   a_chickens = getEntArray("menendez_chicken", "targetname");
 
   foreach(m_chicken in a_chickens) {
-  m_chicken thread chicken_cleanup();
+    m_chicken thread chicken_cleanup();
   }
 }
 

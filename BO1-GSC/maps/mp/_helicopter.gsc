@@ -157,8 +157,7 @@ heli_path_graph() {
     assertex((isDefined(startnode_array) && startnode_array.size > 0), "No path(s) to destination");
     if(isPrimaryDest) {
       level.heli_primary_path = startnode_array;
-    }
-    else {
+    } else {
       level.heli_paths[level.heli_paths.size] = startnode_array;
     }
   }
@@ -266,8 +265,7 @@ heli_get_dvar_int(dvar, def) {
 heli_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }
@@ -345,8 +343,7 @@ heli_think(owner, startnode, heli_team, missilesEnabled, protectLocation, hardpo
   chopper thread SAMTurretWatcher();
   if(hardpointType == "helicopter_comlink_mp") {
     chopper.defaultWeapon = "cobra_20mm_comlink_mp";
-  }
-  else {
+  } else {
     chopper.defaultWeapon = "cobra_20mm_mp";
   }
   chopper.requiredDeathCount = owner.deathCount;
@@ -370,8 +367,7 @@ heli_think(owner, startnode, heli_team, missilesEnabled, protectLocation, hardpo
   chopper.reached_dest = false;
   if(armored) {
     chopper.maxhealth = level.heli_amored_maxhealth;
-  }
-  else {
+  } else {
     chopper.maxhealth = level.heli_maxhealth;
   }
   chopper.rocketDamageOneShot = level.heli_maxhealth + 1;
@@ -422,15 +418,12 @@ heli_missile_regen() {
     debug_print3d("Missile Ammo: " + self.missile_ammo, (0.5, 0.5, 1), self, (0, 0, -100), 0);
     if(self.missile_ammo >= level.heli_missile_max) {
       self waittill("missile fired");
-    }
-    else {
+    } else {
       if(self.currentstate == "heavy smoke") {
         wait(level.heli_missile_regen_time / 4);
-      }
-      else if(self.currentstate == "light smoke") {
+      } else if(self.currentstate == "light smoke") {
         wait(level.heli_missile_regen_time / 2);
-      }
-      else {
+      } else {
         wait(level.heli_missile_regen_time);
       }
     }
@@ -922,8 +915,7 @@ heli_damage_monitor(hardpointtype) {
       }
       if(level.teamBased) {
         isValidAttacker = (isDefined(attacker.team) && attacker.team != self.team);
-      }
-      else {
+      } else {
         isValidAttacker = true;
       }
       if(!isValidAttacker) {
@@ -1079,8 +1071,7 @@ heli_health(hardpointType, player, playerNotify) {
     }
     if(self.damageTaken <= level.heli_armor) {
       debug_print3d_simple("Armor: " + (level.heli_armor - self.damageTaken), self, (0, 0, 100), 20);
-    }
-    else {
+    } else {
       debug_print3d_simple("Health: " + (self.maxhealth - self.damageTaken), self, (0, 0, 100), 20);
     }
     wait 1;
@@ -1351,8 +1342,7 @@ heli_fly(currentnode, startwait, hardpointType) {
     }
     if(!isDefined(nextnode.target)) {
       stop = 1;
-    }
-    else {
+    } else {
       stop = 0;
     }
     debug_line(currentnode.origin, nextnode.origin, (1, 0.5, 0.5), 200);
@@ -1605,8 +1595,7 @@ attack_secondary(hardpointType) {
       while(isDefined(self.missileTarget) && isalive(self.missileTarget)) {
         if(self target_cone_check(self.missileTarget, level.heli_missile_target_cone)) {
           self thread missile_support(self.missileTarget, level.heli_missile_rof, true, undefined);
-        }
-        else {
+        } else {
           break;
         }
         antithreat += 100;
@@ -1637,8 +1626,7 @@ turret_target_check(turretTarget, attackAngle) {
   chopperYaw = int(chopperYaw) % 360;
   if(chopperYaw > targetYaw) {
     difference = chopperYaw - targetYaw;
-  }
-  else {
+  } else {
     difference = targetYaw - chopperYaw;
   }
   return (difference <= attackAngle);
@@ -1814,8 +1802,7 @@ debug_print_target() {
     if(isDefined(self.primaryTarget) && isDefined(self.primaryTarget.threatlevel)) {
       if(isDefined(self.primaryTarget.type) && self.primaryTarget.type == "dog") {
         name = "dog";
-      }
-      else {
+      } else {
         name = self.primaryTarget.name;
       }
       primary_msg = "Primary: " + name + " : " + self.primaryTarget.threatlevel;
@@ -1824,8 +1811,7 @@ debug_print_target() {
     if(isDefined(self.secondaryTarget) && isDefined(self.secondaryTarget.threatlevel)) {
       if(isDefined(self.secondaryTarget.type) && self.secondaryTarget.type == "dog") {
         name = "dog";
-      }
-      else {
+      } else {
         name = self.secondaryTarget.name;
       }
       secondary_msg = "Secondary: " + name + " : " + self.secondaryTarget.threatlevel;

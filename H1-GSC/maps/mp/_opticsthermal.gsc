@@ -25,8 +25,7 @@ opticsthermal_think() {
 
     if(var_1) {
       opticsthermal_blur_off(self);
-    }
-    else {
+    } else {
       opticsthermal_blur(self, 0.05);
     }
 

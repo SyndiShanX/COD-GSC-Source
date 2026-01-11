@@ -64,8 +64,7 @@ setdefaultdroppitch(var_00, var_01) {
 
   if(isDefined(var_02)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -105,8 +104,7 @@ func_F683(var_00, var_01, var_02) {
 
       if(var_03 != "force_cancel_placement") {
         thread watch_dpad();
-      }
-      else if(var_01) {
+      } else if(var_01) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
       }
 
@@ -293,8 +291,7 @@ func_76C2() {
         }
         if(distancesquared(var_12.origin, self.origin) > var_00) {
           continue;
-        }
-        else {
+        } else {
           var_12 notify("damage", var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10);
         }
       }
@@ -436,17 +433,13 @@ func_12EA0(var_00, var_01) {
 
         if(!isDefined(var_0.func_8C16)) {
           self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_CANCELABLE");
-        }
-        else if(var_0.func_8C16 == 1) {
+        } else if(var_0.func_8C16 == 1) {
           self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_80");
-        }
-        else if(var_0.func_8C16 == 2) {
+        } else if(var_0.func_8C16 == 2) {
           self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_60");
-        }
-        else if(var_0.func_8C16 == 3) {
+        } else if(var_0.func_8C16 == 3) {
           self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_40");
-        }
-        else if(var_0.func_8C16 == 4) {
+        } else if(var_0.func_8C16 == 4) {
           self forceusehinton(&"ZOMBIE_CRAFTING_SOUVENIRS_POUR_20");
         }
       } else {
@@ -470,8 +463,7 @@ func_3831(var_00) {
 
   if(isDefined(var_0.func_9F05)) {
     var_0.carriedgascan.angles = var_1["angles"] + (35, 0, 0);
-  }
-  else {
+  } else {
     var_0.carriedgascan.angles = var_1["angles"];
   }
 

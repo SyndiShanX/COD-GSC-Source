@@ -55,11 +55,9 @@ covermulti_think() {
 
   if(var_6 > 12) {
     var_8 = ["left", "over", "right"];
-  }
-  else if(var_6 < -12) {
+  } else if(var_6 < -12) {
     var_8 = ["right", "over", "left"];
-  }
-  else if(var_6 > 5) {
+  } else if(var_6 > 5) {
     var_8 = [["left", "over"], "right"
     ];
     var_7 = 15000;
@@ -136,8 +134,7 @@ covermulti_getnonrandomvaliddir(var_0) {
   if(var_0[0] == "over") {
     if(self doesnodeallowstance("stand")) {
       return "stand";
-    }
-    else {
+    } else {
       return "crouch";
     }
   }
@@ -162,8 +159,7 @@ covermulti_setdir(var_0, var_1) {
       }
 
       return 1;
-    } else {
-    }
+    } else {}
   } else {
     covermulti_setstate(var_0, var_1);
     return 1;
@@ -204,17 +200,13 @@ covermulti_setstateinternal(var_0) {
 covermulti_enterstate(var_0) {
   if(var_0 == "left") {
     animscripts\cover_left::main();
-  }
-  else if(var_0 == "right") {
+  } else if(var_0 == "right") {
     animscripts\cover_right::main();
-  }
-  else if(var_0 == "stand") {
+  } else if(var_0 == "stand") {
     animscripts\cover_stand::main();
-  }
-  else if(var_0 == "crouch") {
+  } else if(var_0 == "crouch") {
     animscripts\cover_crouch::main();
-  }
-  else {}
+  } else {}
 }
 
 covermulti_exitstate(var_0) {
@@ -258,8 +250,7 @@ covermulti_choosehidestate() {
 
   if(common_scripts\utility::cointoss()) {
     return "forward";
-  }
-  else {
+  } else {
     return "back";
   }
 }
@@ -279,11 +270,9 @@ covermulti_getstatefromdir(var_0, var_1) {
 covermulti_getanimtransition(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(var_2 == "back") {
     var_6 = var_1 + "_back";
-  }
-  else if(var_0 == "stand" || var_0 == "crouch") {
+  } else if(var_0 == "stand" || var_0 == "crouch") {
     var_6 = var_0 + "_forward";
-  }
-  else {
+  } else {
     var_6 = var_0 + "_" + var_1;
   }
 
@@ -291,11 +280,9 @@ covermulti_getanimtransition(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(var_5 == "back") {
     var_6 = var_6 + (var_4 + "_back");
-  }
-  else if(var_3 == "stand" || var_3 == "crouch") {
+  } else if(var_3 == "stand" || var_3 == "crouch") {
     var_6 = var_6 + (var_3 + "_forward");
-  }
-  else {
+  } else {
     var_6 = var_6 + (var_3 + "_" + var_4);
   }
 

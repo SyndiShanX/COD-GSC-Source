@@ -16,7 +16,7 @@ init() {
   level._effect["emp_flash"] = loadfx("weapon/emp/fx_emp_explosion");
 
   foreach(team in level.teams) {
-  level.teamemping[team] = 0;
+    level.teamemping[team] = 0;
   }
 
   level.empplayer = undefined;
@@ -25,8 +25,7 @@ init() {
 
   if(level.teambased) {
     level thread emp_teamtracker();
-  }
-  else {
+  } else {
     level thread emp_playertracker();
   }
 
@@ -85,8 +84,7 @@ emp_use(lifeid) {
 
   if(level.teambased) {
     self thread emp_jamotherteams(myteam, killstreak_id);
-  }
-  else {
+  } else {
     self thread emp_jamplayers(self, killstreak_id);
   }
 
@@ -121,8 +119,7 @@ emp_jamotherteams(teamname, killstreak_id) {
 
   if(isDefined(level.nukedetonated)) {
     visionsetnaked(level.nukevisionset, 5.0);
-  }
-  else {
+  } else {
     visionsetnaked(getdvar(#"mapname"), 5.0);
   }
 
@@ -161,8 +158,7 @@ emp_jamplayers(owner, killstreak_id) {
 
   if(isDefined(level.nukedetonated)) {
     visionsetnaked(level.nukevisionset, 5.0);
-  }
-  else {
+  } else {
     visionsetnaked(getdvar(#"mapname"), 5.0);
   }
 
@@ -275,8 +271,7 @@ destroyequipment(attacker, teamemped) {
     }
     if(isDefined(teamemped) && item.owner.team != teamemped) {
       continue;
-    }
-    else if(item.owner == attacker) {
+    } else if(item.owner == attacker) {
       continue;
     }
     if(!isweaponequipment(item.name) && item.name != "proximity_grenade_mp") {

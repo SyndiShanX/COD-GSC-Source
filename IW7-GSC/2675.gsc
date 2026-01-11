@@ -104,8 +104,7 @@ func_F684(var_00, var_01, var_02) {
 
       if(var_03 != "force_cancel_placement") {
         thread watch_dpad();
-      }
-      else if(var_01) {
+      } else if(var_01) {
         scripts\cp\utility::remove_crafted_item_from_inventory(self);
       }
 
@@ -166,8 +165,7 @@ func_48EA(var_00, var_01) {
 
   if(isDefined(var_01)) {
     var_04 thread scripts\cp\utility::item_timeout(var_01);
-  }
-  else {
+  } else {
     var_04 thread scripts\cp\utility::item_timeout(undefined, level.func_6DA3[self.func_6DA4].lifespan);
   }
 
@@ -341,11 +339,9 @@ func_6D9E() {
 
   if(self.func_2514[2] < 250) {
     self.func_AA7B = "launch_low";
-  }
-  else if(self.func_2514[2] < 450) {
+  } else if(self.func_2514[2] < 450) {
     self.func_AA7B = "launch_med";
-  }
-  else {
+  } else {
     self.func_AA7B = "launch_high";
   }
 
@@ -437,8 +433,7 @@ func_AA75(var_00, var_01) {
 
   if(isDefined(var_04)) {
     magicbullet(var_03, var_2.origin, var_0.origin, var_04);
-  }
-  else {
+  } else {
     magicbullet(var_03, var_2.origin, var_0.origin, level.players[0]);
   }
 

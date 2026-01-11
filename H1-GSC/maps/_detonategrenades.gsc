@@ -89,8 +89,7 @@ track_semtex_grenade(var_0) {
 
   if(!isDefined(level.thrown_semtex_grenades)) {
     level.thrown_semtex_grenades = 1;
-  }
-  else {
+  } else {
     level.thrown_semtex_grenades++;
   }
 
@@ -159,8 +158,7 @@ begingrenadetracking() {
 
   if(var_1 == "fraggrenade") {
     var_0 thread maps\_utility::grenade_earthquake();
-  }
-  else if(var_1 == "ninebang_grenade") {
+  } else if(var_1 == "ninebang_grenade") {
     self.threw_ninebang = 1;
   }
 
@@ -264,8 +262,7 @@ claymoredetonation() {
 
       if(isDefined(self.owner)) {
         self detonate(self.owner);
-      }
-      else {
+      } else {
         self detonate(undefined);
       }
 
@@ -350,8 +347,7 @@ c4damage(var_0) {
 
   if(level.c4explodethisframe) {
     wait(0.1 + randomfloat(0.4));
-  }
-  else {
+  } else {
     wait 0.05;
   }
 
@@ -368,8 +364,7 @@ c4damage(var_0) {
 
   if(isplayer(var_1)) {
     self detonate(var_1);
-  }
-  else {
+  } else {
     self detonate();
   }
 }
@@ -481,8 +476,7 @@ weapondamagetracepassed(var_0, var_1, var_2, var_3) {
   if(getdvarint("scr_damage_debug") != 0) {
     if(var_7["fraction"] == 1) {
       thread debugline(var_4, var_1, (1, 1, 1));
-    }
-    else {
+    } else {
       thread debugline(var_4, var_7["position"], (1, 0.9, 0.8));
       thread debugline(var_7["position"], var_1, (1, 0.4, 0.3));
     }

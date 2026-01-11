@@ -174,8 +174,7 @@ guy_deathimate_me(guy, animpos) {
   thread animontag(guy, animpos.sittag, animpos.death);
   if(!isDefined(animpos.death_delayed_ragdoll)) {
     guy waittillmatch("animontagdone", "start_ragdoll");
-  }
-  else {
+  } else {
     guy unlink();
     guy startragdoll();
     wait animpos.death_delayed_ragdoll;
@@ -270,8 +269,7 @@ handle_detached_guys_check() {
 vehicle_hasavailablespots() {
   if(level.vehicle_aianims[self.vehicletype].size - self.runningtovehicle.size) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -613,8 +611,7 @@ driver_idle_speed(driver, pos) {
   while(1) {
     if(self getspeedmph() == 0) {
       driver.vehicle_idle = animpos.idle_animstop;
-    }
-    else {
+    } else {
       driver.vehicle_idle = animpos.idle_anim;
     }
     wait .25;
@@ -688,8 +685,7 @@ guy_idle(guy, pos, ignoredeath) {
     guy notify("idle");
     if(isDefined(guy.vehicle_idle_override)) {
       animontag(guy, animpos.sittag, guy.vehicle_idle_override);
-    }
-    else if(isDefined(animpos.idleoccurrence)) {
+    } else if(isDefined(animpos.idleoccurrence)) {
       theanim = randomoccurrance(guy, animpos.idleoccurrence);
       animontag(guy, animpos.sittag, guy.vehicle_idle[theanim]);
     } else if(isDefined(guy.playerpiggyback) && isDefined(animpos.player_idle))
@@ -718,7 +714,7 @@ randomoccurrance(guy, occurrences) {
   for(i = 0; i < occurrences.size; i++) {
     if(pick < range[i])
   }
-      return i;
+  return i;
 }
 
 guy_duck_once_check(guy, pos) {
@@ -829,7 +825,7 @@ check_unloadgroup(pos, unload_group) {
   for(i = 0; i < group.size; i++) {
     if(pos == group[i])
   }
-      return true;
+  return true;
   return false;
 }
 
@@ -945,8 +941,7 @@ getout_rigspawn(animatemodel, pos, bIdletillunload) {
   animpos = anim_pos(self, pos);
   if(isDefined(self.attach_model_override) && isDefined(self.attach_model_override[animpos.getoutrig])) {
     overrridegetoutrig = true;
-  }
-  else {
+  } else {
     overrridegetoutrig = false;
   }
   if(!isDefined(animpos.getoutrig) || isDefined(self.getoutrig[animpos.getoutrig]) || overrridegetoutrig) {
@@ -973,8 +968,7 @@ check_sound_tag_dupe(soundtag) {
   duped = false;
   if(!isDefined(self.sound_tag_dupe[soundtag])) {
     self.sound_tag_dupe[soundtag] = true;
-  }
-  else {
+  } else {
     duped = true;
   }
   thread check_sound_tag_dupe_reset(soundtag);
@@ -991,7 +985,7 @@ check_sound_tag_dupe_reset(soundtag) {
   for(i = 0; i < keys.size; i++) {
     if(self.sound_tag_dupe[keys[i]])
   }
-      return;
+  return;
   self.sound_tag_dupe = undefined;
 }
 
@@ -1029,8 +1023,7 @@ guy_unload(guy, pos) {
       origin = animatemodel.origin;
     if(isDefined(animpos.vehicle_getoutsound)) {
       sound = animpos.vehicle_getoutsound;
-    }
-    else {
+    } else {
       sound = "veh_truck_door_open";
     }
     if(!sound_tag_dupped) {
@@ -1055,8 +1048,7 @@ guy_unload(guy, pos) {
   hascombatjumpout = isDefined(animpos.getout_combat);
   if(!hascombatjumpout && guy.standing) {
     guy_stand_down(guy, pos);
-  }
-  else if(!hascombatjumpout && !guy.vehicle_idling && isDefined(guy.vehicle_idle)) {
+  } else if(!hascombatjumpout && !guy.vehicle_idling && isDefined(guy.vehicle_idle)) {
     guy waittill("idle");
   }
   guy.deathanim = undefined;
@@ -1206,8 +1198,7 @@ animontag(guy, tag, animation, notetracks, sthreads, flag) {
   }
   if(isDefined(self.modeldummy)) {
     animatemodel = self.modeldummy;
-  }
-  else {
+  } else {
     animatemodel = self;
   }
   if(!isDefined(tag)) {
@@ -1798,8 +1789,7 @@ GetNewNodePositionAheadofVehicle(guy) {
   if(!isDefined(nextNode)) {
     if(isDefined(guy.NodeAfterVehicleWalk)) {
       return guy.NodeAfterVehicleWalk.origin;
-    }
-    else {
+    } else {
       return self.origin;
     }
   }
@@ -1817,8 +1807,7 @@ GetNewNodePositionAheadofVehicle(guy) {
   }
   if(isDefined(guy.NodeAfterVehicleWalk)) {
     return guy.NodeAfterVehicleWalk.origin;
-  }
-  else {
+  } else {
     return self.origin;
   }
 }
@@ -1860,8 +1849,7 @@ vehiclewalker_updateGoalPos(tank, option) {
 getanimatemodel() {
   if(isDefined(self.modeldummy)) {
     return self.modeldummy;
-  }
-  else {
+  } else {
     return self;
   }
 }

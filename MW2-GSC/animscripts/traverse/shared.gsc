@@ -44,8 +44,7 @@ advancedTraverse(traverseAnim, normalHeight) {
     self traverseMode("gravity");
     if(!animHasNotetrack(traverseAnim, "blend")) {
       wait(gravityToBlendTime);
-    }
-    else {
+    } else {
       self waittillmatch("traverse", "blend");
     }
   }
@@ -175,11 +174,9 @@ DoTraverse(traverseData) {
 handleTraverseNotetracks(note) {
   if(note == "traverse_death") {
     return handleTraverseDeathNotetrack();
-  }
-  else if(note == "traverse_align") {
+  } else if(note == "traverse_align") {
     return handleTraverseAlignment();
-  }
-  else if(note == "traverse_drop") {
+  } else if(note == "traverse_drop") {
     return handleTraverseDrop();
   }
 }
@@ -221,12 +218,11 @@ handleTraverseDrop() {
     thread animscripts\utility::drawStringTime("drop offset: " + dropOffset, endpos, (1, 1, 1), 2);
   }
 
-    if(animDropHeight < realDropHeight) {
-      animRate = animDropHeight / realDropHeight;
-    }
-    else {
-      animRate = 1;
-    }
+  if(animDropHeight < realDropHeight) {
+    animRate = animDropHeight / realDropHeight;
+  } else {
+    animRate = 1;
+  }
 
   teleportLength = (traverseAnimLength - traverseAnimPos) / 3.0; // let's make the teleport take 1/3 of the animation time roughly
   numFrames = ceil(teleportLength * 20); // 0.05 per frame. Maximum number of frames we can use

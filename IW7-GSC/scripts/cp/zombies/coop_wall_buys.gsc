@@ -781,9 +781,7 @@ get_wall_buy_hint_func(param_00, param_01) {
     return &"COOP_INTERACTIONS_CANNOT_BUY";
   }
 
-  var_06 = [
-    [level.weapon_hint_func]
-  ](param_00, param_01);
+  var_06 = [[level.weapon_hint_func]](param_00, param_01);
   if(isDefined(var_06)) {
     return var_06;
   }

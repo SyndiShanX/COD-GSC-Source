@@ -43,8 +43,7 @@ saygenericdialoguewithimportance(typestring, importance) {
 
   if(isDefined(self.dds_characterid)) {
     soundalias = soundalias + self.dds_characterid;
-  }
-  else {
+  } else {
     println("this AI does not have a dds_characterID");
 
     return;
@@ -73,8 +72,7 @@ sayspecificdialogue(facialanim, soundalias, importance, notifystring, waitornot,
   self thread playfacethread(facialanim, soundalias, importance, notifystring, waitornot, timetowait);
 }
 
-playidleface() {
-}
+playidleface() {}
 
 playfacethread(facialanim, soundalias, importance, notifystring, waitornot, timetowait) {
   if(!isDefined(soundalias)) {
@@ -175,8 +173,7 @@ playfacethread(facialanim, soundalias, importance, notifystring, waitornot, time
   if(play_sound) {
     if(isDefined(self.type) && self.type == "human") {
       self playsoundontag(soundalias, "J_Head", uniquenotify);
-    }
-    else {
+    } else {
       self playSound(soundalias, uniquenotify);
     }
   }

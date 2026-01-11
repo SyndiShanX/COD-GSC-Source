@@ -22,7 +22,7 @@ autoexec _scene_init() {
       a_scenes = strtok(trig.script_run_scene, " ,;");
 
       foreach(str_scene in a_scenes) {
-      add_trigger_function(trig, ::run_scene, str_scene);
+        add_trigger_function(trig, ::run_scene, str_scene);
       }
     }
   }
@@ -136,7 +136,7 @@ run_scene(str_scene, n_lerp_time, b_test_run, clientside_linkto) {
 
   if(isDefined(level.a_scenes[str_scene].a_start_funcs)) {
     foreach(callback in level.a_scenes[str_scene].a_start_funcs) {
-    single_thread(level, callback.func, callback.arg1, callback.arg2, callback.arg3, callback.arg4, callback.arg5, callback.arg6);
+      single_thread(level, callback.func, callback.arg1, callback.arg2, callback.arg3, callback.arg4, callback.arg5, callback.arg6);
     }
   }
 
@@ -185,7 +185,7 @@ run_scene_first_frame(str_scene, b_skip_ai, b_clear_anim, clientside_linkto) {
   flag_set(str_scene + "_first_frame");
 
   foreach(e_asset in a_active_anims) {
-  e_asset _run_anim_first_frame_on_asset(str_scene, align_object, b_clear_anim);
+    e_asset _run_anim_first_frame_on_asset(str_scene, align_object, b_clear_anim);
   }
 }
 
@@ -213,7 +213,7 @@ end_scene(str_scene) {
       s_scene_info.a_ai_anims = __new;
 
       foreach(ai_anim in s_scene_info.a_ai_anims) {
-      ai_anim anim_stopanimscripted(0.2);
+        ai_anim anim_stopanimscripted(0.2);
       }
     }
 
@@ -234,7 +234,7 @@ end_scene(str_scene) {
       s_scene_info.a_model_anims = __new;
 
       foreach(m_anim in s_scene_info.a_model_anims) {
-      m_anim anim_stopanimscripted(0.2);
+        m_anim anim_stopanimscripted(0.2);
       }
     }
 
@@ -534,8 +534,7 @@ _get_align_object(str_scene) {
 
   if(isDefined(self.align_object)) {
     align_object = self.align_object;
-  }
-  else if(isDefined(self.str_align_targetname)) {
+  } else if(isDefined(self.str_align_targetname)) {
     align_object = getstruct(self.str_align_targetname, "targetname");
 
     if(!isDefined(align_object)) {
@@ -543,8 +542,7 @@ _get_align_object(str_scene) {
 
       if(isDefined(align_object)) {
         align_object.is_node = 1;
-      }
-      else {
+      } else {
         align_object = getent(self.str_align_targetname, "targetname");
       }
     } else {
@@ -553,8 +551,7 @@ _get_align_object(str_scene) {
 
       if(isDefined(align_object.angles)) {
         s_align.angles = align_object.angles;
-      }
-      else {
+      } else {
         s_align.angles = (0, 0, 0);
       }
 
@@ -646,8 +643,7 @@ _assemble_assets(str_scene, clientside_linkto, b_test_run, b_skip_ai, b_first_fr
 _assemble_non_existent_model(str_scene, b_first_frame, clientside_linkto) {
   if(isDefined(self.str_vehicletype)) {
     m_ready = _spawn_vehicle_for_anim();
-  }
-  else {
+  } else {
     if(isDefined(self.n_player_number)) {
       level.scr_model[self.str_name] = level.player_interactive_model;
     }
@@ -661,8 +657,7 @@ _assemble_non_existent_model(str_scene, b_first_frame, clientside_linkto) {
 
   if(clientside_linkto) {
     m_ready enableclientlinkto();
-  }
-  else {
+  } else {
     m_ready disableclientlinkto();
   }
 
@@ -698,20 +693,17 @@ _setup_asset_for_scene(s_asset_info, s_scene_info, b_first_frame) {
 
   if(isDefined(s_asset_info.a_parts)) {
     foreach(str_part in s_asset_info.a_parts) {
-    self hidepart(str_part);
+      self hidepart(str_part);
     }
   }
 
   if(isDefined(s_asset_info.is_weapon) && s_asset_info.is_weapon) {
     self useweaponhidetags(self.str_weapon_name);
-  }
-  else if(isai(self)) {
+  } else if(isai(self)) {
     _setup_ai_for_scene(s_asset_info, s_scene_info);
-  }
-  else if(self isvehicle()) {
+  } else if(self isvehicle()) {
     _setup_vehicle_for_scene(s_asset_info, s_scene_info);
-  }
-  else if(isDefined(s_asset_info.n_player_number)) {
+  } else if(isDefined(s_asset_info.n_player_number)) {
     player = get_players()[s_asset_info.n_player_number];
     player _setup_player_for_scene(s_asset_info, s_scene_info, self);
   } else if(isDefined(s_asset_info.is_model) && s_asset_info.is_model)
@@ -734,15 +726,13 @@ _setup_ai_for_scene(s_asset_info, s_scene_info) {
 _setup_vehicle_for_scene(s_asset_info, s_scene_info) {
   if(isDefined(s_asset_info.do_not_allow_death) && s_asset_info.do_not_allow_death) {
     self.takedamage = 0;
-  }
-  else if(!(isDefined(self.script_godmode) && self.script_godmode)) {
+  } else if(!(isDefined(self.script_godmode) && self.script_godmode)) {
     self.takedamage = 1;
   }
 
   if(isDefined(s_asset_info.b_animate_origin) && !s_asset_info.b_animate_origin) {
     self.supportsanimscripted = undefined;
-  }
-  else {
+  } else {
     self.supportsanimscripted = 1;
   }
 }
@@ -812,8 +802,7 @@ _link_to_player_model(player, m_player_model, s_scene_info, b_first_link) {
   if(b_first_link) {
     if(!(isDefined(level.era) && (level.era == "twentytwenty" || level.era == ""))) {
       player hide_hud();
-    }
-    else {
+    } else {
       player._scene_old_draw_friendly_names = int(getdvar(#"cg_drawFriendlyNames"));
       setsaveddvar("cg_drawFriendlyNames", 0);
     }
@@ -865,8 +854,7 @@ _assemble_already_exist_model(str_scene, b_first_frame, clientside_linkto) {
   if(isDefined(level.scene_sys.a_active_anim_models[self.str_name])) {
     if(isarray(level.scene_sys.a_active_anim_models[self.str_name])) {
       a_models = level.scene_sys.a_active_anim_models[self.str_name];
-    }
-    else {
+    } else {
       m_model = level.scene_sys.a_active_anim_models[self.str_name];
       a_models[a_models.size] = m_model;
 
@@ -884,7 +872,7 @@ _assemble_already_exist_model(str_scene, b_first_frame, clientside_linkto) {
         a_models = maps\_vehicle::spawn_vehicles_from_targetname(self.str_name, 1);
 
         foreach(veh in a_models) {
-        veh._radiant_ent = 1;
+          veh._radiant_ent = 1;
         }
       } else {
         sp_model = _get_spawner(self.str_name, str_scene, self.str_spawner);
@@ -902,7 +890,7 @@ _assemble_already_exist_model(str_scene, b_first_frame, clientside_linkto) {
 
     if(isDefined(self.is_vehicle) && self.is_vehicle && (isDefined(self.not_usable) && self.not_usable)) {
       foreach(e_model in a_models) {
-      e_model makevehicleunusable();
+        e_model makevehicleunusable();
       }
     }
   }
@@ -923,8 +911,7 @@ _assemble_already_exist_model(str_scene, b_first_frame, clientside_linkto) {
 
     if(clientside_linkto) {
       m_exist enableclientlinkto();
-    }
-    else {
+    } else {
       m_exist disableclientlinkto();
     }
 
@@ -932,8 +919,7 @@ _assemble_already_exist_model(str_scene, b_first_frame, clientside_linkto) {
 
     if(n_models_array_size > 1) {
       level.scene_sys.a_active_anim_models[self.str_name][i] = m_exist;
-    }
-    else {
+    } else {
       level.scene_sys.a_active_anim_models[self.str_name] = m_exist;
     }
 
@@ -982,8 +968,7 @@ _assemble_multiple_ais(str_scene, b_test_run, clientside_linkto) {
     foreach(ai_spawned in a_ai_spawned) {
       if(clientside_linkto) {
         ai_spawned enableclientlinkto();
-      }
-      else {
+      } else {
         ai_spawned disableclientlinkto();
       }
 
@@ -1016,8 +1001,7 @@ _assemble_single_ai(str_scene, str_anim_key, b_test_run, clientside_linkto) {
     if(isDefined(sp_guy)) {
       if(isDefined(sp_guy.script_hero) && sp_guy.script_hero) {
         ai_found = init_hero(sp_guy.targetname);
-      }
-      else {
+      } else {
         if(isDefined(b_test_run) && b_test_run) {
           sp_guy.count++;
         }
@@ -1045,8 +1029,7 @@ _assemble_single_ai(str_scene, str_anim_key, b_test_run, clientside_linkto) {
   if(isalive(ai_found)) {
     if(clientside_linkto) {
       ai_found enableclientlinkto();
-    }
-    else {
+    } else {
       ai_found disableclientlinkto();
     }
 
@@ -1074,8 +1057,7 @@ _get_spawner(str_name, str_scene, str_name_override) {
   if(a_spawners.size > 0) {
     if(a_spawners.size == 1) {
       return a_spawners[0];
-    }
-    else {
+    } else {
       assertmsg("More than one spawner in Radiant has the same name, '" + str_name + "', for scene, '" + str_scene + "'.");
 
     }
@@ -1140,8 +1122,7 @@ _animate_asset(str_scene, align_object, n_lerp_time, b_test_run) {
   if(isai(self)) {
     if(isDefined(self.do_hide_weapon) && self.do_hide_weapon) {
       self gun_remove();
-    }
-    else if(isDefined(self.species) && self.species == "human") {
+    } else if(isDefined(self.species) && self.species == "human") {
       self gun_recall();
     }
   }
@@ -1152,8 +1133,7 @@ _animate_asset(str_scene, align_object, n_lerp_time, b_test_run) {
 
   if(isDefined(s_scene_info.do_loop) && s_scene_info.do_loop) {
     self _run_anim_loop_on_asset(str_scene, align_object, n_lerp_time);
-  }
-  else {
+  } else {
     self _run_anim_single_on_asset(str_scene, align_object, n_lerp_time);
   }
 
@@ -1169,8 +1149,7 @@ _run_anim_reach_on_asset(str_scene, align_object) {
     if(isDefined(s_scene_info.do_not_align) && s_scene_info.do_not_align) {
       if(isDefined(s_scene_info.do_generic) && s_scene_info.do_generic) {
         align_object thread anim_generic_reach(self, str_scene);
-      }
-      else {
+      } else {
         align_object thread anim_reach(self, str_scene);
       }
     } else if(isDefined(s_scene_info.do_generic) && s_scene_info.do_generic)
@@ -1191,8 +1170,7 @@ _run_anim_loop_on_asset(str_scene, align_object, n_lerp_time) {
   if(isDefined(s_scene_info.do_not_align) && s_scene_info.do_not_align) {
     if(isDefined(s_scene_info.do_generic) && s_scene_info.do_generic) {
       align_object anim_generic_loop(self, str_scene);
-    }
-    else {
+    } else {
       align_object anim_loop(self, str_scene);
     }
   } else {
@@ -1202,8 +1180,7 @@ _run_anim_loop_on_asset(str_scene, align_object, n_lerp_time) {
 
     if(isDefined(s_scene_info.do_generic) && s_scene_info.do_generic) {
       align_object anim_generic_loop_aligned(self, str_scene, self.str_tag, undefined, n_lerp_time);
-    }
-    else {
+    } else {
       align_object anim_loop_aligned(self, str_scene, self.str_tag, undefined, undefined, n_lerp_time);
     }
 
@@ -1233,8 +1210,7 @@ _run_anim_single_on_asset(str_scene, align_object, n_lerp_time) {
   if(isDefined(s_scene_info.do_not_align) && s_scene_info.do_not_align) {
     if(isDefined(s_scene_info.do_generic) && s_scene_info.do_generic) {
       align_object anim_generic(self, str_scene);
-    }
-    else {
+    } else {
       align_object anim_single(self, str_scene);
     }
   } else {
@@ -1248,8 +1224,7 @@ _run_anim_single_on_asset(str_scene, align_object, n_lerp_time) {
 
     if(isDefined(s_scene_info.do_generic) && s_scene_info.do_generic) {
       align_object anim_generic_aligned(self, str_scene, self.str_tag, n_lerp_time);
-    }
-    else {
+    } else {
       align_object anim_single_aligned(self, str_scene, self.str_tag, undefined, n_lerp_time);
     }
 
@@ -1281,8 +1256,7 @@ _scene_set_goal(align_object, str_scene) {
 
   if(isDefined(align_object.is_node) && align_object.is_node) {
     self setgoalnode(align_object);
-  }
-  else if(isDefined(self.b_scene_spawned) && self.b_scene_spawned) {
+  } else if(isDefined(self.b_scene_spawned) && self.b_scene_spawned) {
     if(!isDefined(self.target)) {
       if(!isDefined(self.script_spawner_targets)) {
         self setgoalpos(self.origin);
@@ -1313,8 +1287,7 @@ _run_anim_first_frame_on_asset(str_scene, align_object, b_clear_anim) {
 
   if(isDefined(s_scene_info.do_not_align) && s_scene_info.do_not_align) {
     self anim_first_frame(self, str_scene);
-  }
-  else {
+  } else {
     if(isDefined(self.str_tag) && self != align_object) {
       self linkto(align_object, self.str_tag);
     }
@@ -1339,8 +1312,7 @@ _get_models_from_radiant(str_scene) {
 
   if(isDefined(self.has_multiple_props) && self.has_multiple_props) {
     a_models = getEntArray(self.str_name, "targetname");
-  }
-  else {
+  } else {
     if(!isDefined(level.a_script_models) || !isDefined(level.a_script_models_time) || level.a_script_models_time != gettime()) {
       level.a_script_models = [];
       level.a_script_models["script_model"] = getEntArray("script_model", "classname");
@@ -1351,8 +1323,7 @@ _get_models_from_radiant(str_scene) {
 
     if(isDefined(self.is_vehicle) && self.is_vehicle) {
       m_exist = _get_models_from_radiant_internals("script_vehicle");
-    }
-    else {
+    } else {
       m_exist = _get_models_from_radiant_internals("script_model");
 
       if(!isDefined(m_exist)) {
@@ -1510,8 +1481,7 @@ _reset_player_after_anim() {
 
   if(!(isDefined(level.era) && (level.era == "twentytwenty" || level.era == ""))) {
     self show_hud();
-  }
-  else {
+  } else {
     setsaveddvar("cg_drawFriendlyNames", self._scene_old_draw_friendly_names);
   }
 }
@@ -1592,8 +1562,7 @@ add_scene(str_scene, str_align_targetname, do_reach, do_generic, do_loop, do_not
 
   if(isDefined(str_align_targetname)) {
     s_scene_info.str_align_targetname = str_align_targetname;
-  }
-  else {
+  } else {
     s_scene_info.do_not_align = 1;
   }
 
@@ -1802,8 +1771,7 @@ _basic_prop_setup(str_animname, animation, do_delete, is_simple_prop, str_functi
 
   if(isDefined(animtree)) {
     s_prop_anim.anim_tree = animtree;
-  }
-  else {
+  } else {
     s_prop_anim.anim_tree = #animtree;
   }
 
@@ -1946,8 +1914,7 @@ set_vehicle_unusable_in_scene(str_animname) {
   if(isDefined(level.a_scenes[level.scene_sys.str_current_scene].a_anim_info[str_animname])) {
     if(isDefined(level.a_scenes[level.scene_sys.str_current_scene].a_anim_info[str_animname].is_vehicle) && level.a_scenes[level.scene_sys.str_current_scene].a_anim_info[str_animname].is_vehicle) {
       level.a_scenes[level.scene_sys.str_current_scene].a_anim_info[str_animname].not_usable = 1;
-    }
-    else {
+    } else {
       assert(0, "Non vehicle made unusable in scene: " + level.scene_sys.str_current_scene + " with animname: " + str_animname);
     }
   } else
@@ -2013,8 +1980,7 @@ add_notetrack_custom_function(str_animname, str_notetrack, func_pointer, b_any_s
 
   if(isstring(b_any_scene)) {
     str_scene = b_any_scene;
-  }
-  else {
+  } else {
     str_scene = _get_scene_name_for_notetrack(b_any_scene);
   }
 
@@ -2106,8 +2072,7 @@ is_scene_defined(str_scene) {
 
   if(isDefined(level.a_scenes[str_scene])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -2385,8 +2350,7 @@ display_scene_menu() {
     if(get_players()[0] buttonpressed("kp_enter") || get_players()[0] buttonpressed("BUTTON_A") || get_players()[0] buttonpressed("enter")) {
       if(names[selected] == "exit") {
         exit_scene_menu();
-      }
-      else if(isinarray(a_selected_scenes, names[selected])) {
+      } else if(isinarray(a_selected_scenes, names[selected])) {
         arrayremovevalue(a_selected_scenes, names[selected]);
 
         if(!is_scene_deleted(names[selected])) {
@@ -2429,8 +2393,7 @@ scene_list_settext(hud_array, strings, num, a_selected_scenes) {
 
     if(isDefined(strings[index])) {
       text = strings[index];
-    }
-    else {
+    } else {
       text = "";
     }
 

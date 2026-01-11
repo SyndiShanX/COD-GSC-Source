@@ -23,8 +23,7 @@ main(var_0, var_1, var_2) {
 
     if(issubstr(var_2, "_factory")) {
       maps\_vehicle::build_turret("dshk_gaz_factory", "tag_turret", "weapon_dshk_turret", undefined, "auto_ai", 0.2, -20, -14);
-    }
-    else {
+    } else {
       maps\_vehicle::build_turret("dshk_gaz", "tag_turret", "weapon_dshk_turret", undefined, "auto_ai", 0.2, -20, -14);
     }
   } else
@@ -32,8 +31,7 @@ main(var_0, var_1, var_2) {
 
   if(var_2 == "script_vehicle_gaz_tigr_turret_physics_paris") {
     maps\_vehicle::build_destructible(var_0, "vehicle_gaz_harbor");
-  }
-  else {
+  } else {
     build_gaz_death(var_2, var_0);
   }
 

@@ -6,7 +6,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\dialog_shared;
 #include scripts\core_common\system_shared;
-
 #namespace grapple;
 
 autoexec __init__system__() {
@@ -50,7 +49,7 @@ function_664d0a50(localclientnum) {
           invalidhandle = undefined;
         }
 
-        var_e413b7c3 = playviewmodelfx(localclientnum, #"hash_2a3978ae302f2faf", "tag_fx1", 0);
+        var_e413b7c3 = playviewmodelfx(localclientnum, # "hash_2a3978ae302f2faf", "tag_fx1", 0);
         thread grapple_light_watch_end(localclientnum, var_e413b7c3, "valid");
       } else if(!var_6e521a44 && !isDefined(invalidhandle)) {
         if(isDefined(var_e413b7c3)) {
@@ -59,7 +58,7 @@ function_664d0a50(localclientnum) {
           var_e413b7c3 = undefined;
         }
 
-        invalidhandle = playviewmodelfx(localclientnum, #"hash_39ed4a0ecba806a2", "tag_fx1", 0);
+        invalidhandle = playviewmodelfx(localclientnum, # "hash_39ed4a0ecba806a2", "tag_fx1", 0);
         thread grapple_light_watch_end(localclientnum, invalidhandle, "invalid");
       }
     } else {

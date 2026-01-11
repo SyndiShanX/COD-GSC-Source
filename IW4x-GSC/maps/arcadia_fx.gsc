@@ -26,8 +26,7 @@ main() {
 
   if(getdvarint("r_arcadia_culldist") == 1) {
     level._effect["smoke_plume02"] = LoadFX("misc/no_effect");
-  }
-  else {
+  } else {
     level._effect["smoke_plume02"] = LoadFX("smoke/smoke_plume02");
   }
 

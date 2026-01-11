@@ -48,8 +48,7 @@ connectNewAgent(agent_type, team, class) {
 
     if(isDefined(team)) {
       agent set_agent_team(team);
-    }
-    else {
+    } else {
       agent set_agent_team(agent.team);
     }
 

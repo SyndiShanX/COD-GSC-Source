@@ -19,8 +19,7 @@ set_glass_zero_gravity() {
 player_space() {
   if(!issplitscreen()) {
     thread player_space_breathe_sound();
-  }
-  else if(self == level.player) {
+  } else if(self == level.player) {
     thread player_space_breathe_sound();
   }
 

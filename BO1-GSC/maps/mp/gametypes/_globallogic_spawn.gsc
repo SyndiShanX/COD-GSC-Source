@@ -15,8 +15,7 @@ TimeUntilspawn(includeTeamkillDelay) {
     result = self[[level.onRespawnDelay]]();
     if(isDefined(result)) {
       respawnDelay = result;
-    }
-    else {
+    } else {
       respawnDelay = GetDvarInt("scr_" + level.gameType + "_playerrespawndelay");
     }
     if(includeTeamkillDelay && self.teamKillPunish) {
@@ -39,8 +38,7 @@ mayspawn() {
   if(level.numLives) {
     if(level.teamBased) {
       gameHasStarted = (level.everExisted["axis"] && level.everExisted["allies"]);
-    }
-    else {
+    } else {
       gameHasStarted = (level.maxPlayerCount > 1) || (!isOneRound() && !isFirstRound());
     }
     if(!self.pers["lives"] && gameHasStarted) {
@@ -88,8 +86,7 @@ spawnPlayer() {
   }
   if(level.teamBased) {
     self.sessionteam = self.team;
-  }
-  else {
+  } else {
     self.sessionteam = "none";
     self.ffateam = self.team;
   }
@@ -103,8 +100,7 @@ spawnPlayer() {
   self.damagedPlayers = [];
   if(GetDvarInt(#"scr_csmode") > 0) {
     self.maxhealth = GetDvarInt(#"scr_csmode");
-  }
-  else {
+  } else {
     self.maxhealth = maps\mp\gametypes\_tweakables::getTweakableValue("player", "maxhealth");
   }
   self.health = self.maxhealth;
@@ -133,8 +129,7 @@ spawnPlayer() {
   self setDepthOfField(0, 0, 512, 512, 4, 0);
   if(level.console) {
     self setClientDvar("cg_fov", "65");
-  }
-  {
+  } {
     pixbeginevent("onSpawnPlayer");
     if(isDefined(level.onSpawnPlayerUnified) &&
       GetDvarInt(#"scr_disableunifiedspawning") == 0) {
@@ -172,8 +167,7 @@ spawnPlayer() {
     if(level.splitscreen) {
       if(isDefined(level.playedStartingMusic)) {
         music = undefined;
-      }
-      else {
+      } else {
         level.playedStartingMusic = true;
       }
     }
@@ -182,8 +176,7 @@ spawnPlayer() {
       if(!isDefined(level.inFinalFight) || !level.inFinalFight) {
         if(level.hardcoreMode) {
           self maps\mp\gametypes\_globallogic_audio::leaderDialogOnPlayer("gametype_hardcore");
-        }
-        else {
+        } else {
           self maps\mp\gametypes\_globallogic_audio::leaderDialogOnPlayer("gametype");
         }
       }
@@ -202,8 +195,7 @@ spawnPlayer() {
       if(level.splitscreen) {
         if(isDefined(level.playedStartingMusic)) {
           music = undefined;
-        }
-        else {
+        } else {
           level.playedStartingMusic = true;
         }
       }
@@ -212,14 +204,12 @@ spawnPlayer() {
         if(!isDefined(level.inFinalFight) || !level.inFinalFight) {
           if(level.hardcoreMode) {
             self maps\mp\gametypes\_globallogic_audio::leaderDialogOnPlayer("gametype_hardcore");
-          }
-          else {
+          } else {
             self maps\mp\gametypes\_globallogic_audio::leaderDialogOnPlayer("gametype");
           }
           if(team == game["attackers"]) {
             self maps\mp\gametypes\_globallogic_audio::leaderDialogOnPlayer("offense_obj", "introboost");
-          }
-          else {
+          } else {
             self maps\mp\gametypes\_globallogic_audio::leaderDialogOnPlayer("defense_obj", "introboost");
           }
         }
@@ -285,8 +275,7 @@ in_spawnSpectator(origin, angles) {
   self.friendlydamage = undefined;
   if(self.pers["team"] == "spectator") {
     self.statusicon = "";
-  }
-  else {
+  } else {
     self.statusicon = "hud_status_dead";
   }
   maps\mp\gametypes\_spectating::setSpectatePermissionsForMachine();
@@ -406,11 +395,9 @@ spawnIntermission(useDefaultCallback) {
     if((self.postGameMilestones || self.postGameContracts || self.postGamePromotion)) {
       if(self.postGamePromotion) {
         self playLocalSound("mus_level_up");
-      }
-      else if(self.postGameContracts) {
+      } else if(self.postGameContracts) {
         self playLocalSound("mus_challenge_complete");
-      }
-      else if(self.postGameMilestones) {
+      } else if(self.postGameMilestones) {
         self playLocalSound("mus_contract_complete");
       }
       self clearPopups();
@@ -433,8 +420,7 @@ spawnIntermission(useDefaultCallback) {
   self.friendlydamage = undefined;
   if(isDefined(useDefaultCallback) && useDefaultCallback) {
     maps\mp\gametypes\_globallogic_defaults::default_onSpawnIntermission();
-  }
-  else {
+  } else {
     [[level.onSpawnIntermission]]();
   }
   self setDepthOfField(0, 128, 512, 4000, 6, 1.8);
@@ -512,8 +498,7 @@ waitAndSpawnClient(timeAlreadyPassed) {
   if(timeUntilSpawn > 0) {
     if(self IsSplitscreen()) {
       setLowerMessage(game["strings"]["waiting_to_spawn_ss"], timeUntilSpawn, true);
-    }
-    else {
+    } else {
       setLowerMessage(game["strings"]["waiting_to_spawn"], timeUntilSpawn);
     }
     if(!spawnedAsSpectator) {

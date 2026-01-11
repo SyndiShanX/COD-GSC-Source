@@ -74,8 +74,7 @@ dofriendlyfirereaction() {
     }
     if(isDefined(self.a.array["surprise_stop"])) {
       var_0 = animscripts\utility::animarray("surprise_stop");
-    }
-    else if(self.swimmer) {
+    } else if(self.swimmer) {
       var_0 = animscripts\swim::getswimanim("surprise_stop");
 
       if(!isDefined(var_0)) {
@@ -177,8 +176,7 @@ transitiontocombat() {
 
     if(animscripts\utility::usingsmg()) {
       var_0 = animscripts\utility::lookupanim("combat", "smg_trans_to_combat");
-    }
-    else {
+    } else {
       var_0 = animscripts\utility::lookupanim("combat", "trans_to_combat");
     }
 
@@ -191,14 +189,11 @@ transitiontocombat() {
 setup_anim_array() {
   if(self.a.pose == "stand") {
     animscripts\animset::set_animarray_standing();
-  }
-  else if(self.a.pose == "crouch") {
+  } else if(self.a.pose == "crouch") {
     animscripts\animset::set_animarray_crouching();
-  }
-  else if(self.a.pose == "prone") {
+  } else if(self.a.pose == "prone") {
     animscripts\animset::set_animarray_prone();
-  }
-  else {}
+  } else {}
 }
 
 setup() {
@@ -250,8 +245,7 @@ set_default_swimmer_aim_limits() {
 set_default_aim_limits(var_0) {
   if(isDefined(var_0)) {
     self setdefaultaimlimits(var_0);
-  }
-  else {
+  } else {
     self setdefaultaimlimits();
   }
 
@@ -292,8 +286,7 @@ exposedcombatstopusingrpgcheck(var_0) {
 
     if(self.a.pose == "stand") {
       animscripts\shared::throwdownweapon(animscripts\utility::lookupanim("combat", "drop_rpg_stand"));
-    }
-    else {
+    } else {
       animscripts\shared::throwdownweapon(animscripts\utility::lookupanim("combat", "drop_rpg_crouch"));
     }
 
@@ -545,8 +538,7 @@ waitforstancechange() {
 
       transitionto(var_2);
       return 1;
-    } else {
-    }
+    } else {}
   }
 
   return 0;
@@ -580,11 +572,9 @@ cantseeenemybehavior() {
 
     if(isDefined(var_2)) {
       var_1 = angleclamp180(self.angles[1] - var_2[1]);
-    }
-    else if(isDefined(self.node)) {
+    } else if(isDefined(self.node)) {
       var_1 = angleclamp180(self.angles[1] - self.node.angles[1]);
-    }
-    else if(isDefined(self.enemy)) {
+    } else if(isDefined(self.enemy)) {
       var_2 = vectortoangles(self lastknownpos(self.enemy) - self.origin);
       var_1 = angleclamp180(self.angles[1] - var_2[1]);
     }
@@ -666,8 +656,7 @@ watchshootentvelocity() {
     } else {
       if(isDefined(self.shootent)) {
         var_1 = self.shootent.origin;
-      }
-      else {
+      } else {
         var_1 = self.origin;
       }
 
@@ -743,11 +732,9 @@ doturn(var_0, var_1) {
 
     if(var_3 > 2) {
       var_4 = 0.05;
-    }
-    else if(var_3 > 1.3) {
+    } else if(var_3 > 1.3) {
       var_4 = 0.1;
-    }
-    else {
+    } else {
       var_4 = 0.15;
     }
   }
@@ -756,14 +743,11 @@ doturn(var_0, var_1) {
 
   if(var_1 > 157.5) {
     var_7 = 180;
-  }
-  else if(var_1 > 112.5) {
+  } else if(var_1 > 112.5) {
     var_7 = 135;
-  }
-  else if(var_1 > 67.5) {
+  } else if(var_1 > 67.5) {
     var_7 = 90;
-  }
-  else {
+  } else {
     var_7 = 45;
   }
 
@@ -772,14 +756,11 @@ doturn(var_0, var_1) {
 
   if(isDefined(self.turntomatchnode)) {
     self animmode("angle deltas", 0);
-  }
-  else if(isDefined(self.node) && isDefined(anim.iscombatpathnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256) {
+  } else if(isDefined(self.node) && isDefined(anim.iscombatpathnode[self.node.type]) && distancesquared(self.origin, self.node.origin) < 256) {
     self animmode("angle deltas", 0);
-  }
-  else if(isanimdeltaingoal(var_9)) {
+  } else if(isanimdeltaingoal(var_9)) {
     resetanimmode();
-  }
-  else {
+  } else {
     self animmode("angle deltas", 0);
   }
 
@@ -793,8 +774,7 @@ doturn(var_0, var_1) {
 
   if(isDefined(self.heat)) {
     var_3 = min(1.0, var_3);
-  }
-  else if(isDefined(self.turntomatchnode)) {
+  } else if(isDefined(self.turntomatchnode)) {
     var_3 = max(1.5, var_3);
   }
 
@@ -964,8 +944,7 @@ tryexposedthrowgrenade(var_0, var_1) {
 
         if(var_2) {
           animscripts\track::setanimaimweight(1, 0.5);
-        }
-        else {
+        } else {
           animscripts\track::setanimaimweight(1, 0);
         }
       }
@@ -998,8 +977,7 @@ transitionto(var_0) {
 
   if(var_0 == "stand") {
     var_3 = 2;
-  }
-  else {
+  } else {
     var_3 = 1.5;
   }
 
@@ -1034,8 +1012,7 @@ keeptryingtomelee() {
     if(isDefined(self.enemy)) {
       if(isplayer(self.enemy)) {
         var_0 = 40000;
-      }
-      else {
+      } else {
         var_0 = 10000;
       }
 
@@ -1243,8 +1220,7 @@ switchtolastweapon(var_0, var_1) {
 
   if(isDefined(var_1)) {
     donotetrackspostcallbackwithendon("weapon swap", ::handlecleanupputaway, "end_weapon_swap");
-  }
-  else {
+  } else {
     donotetrackspostcallbackwithendon("weapon swap", ::handleputaway, "end_weapon_swap");
   }
 
@@ -1272,8 +1248,7 @@ handleputaway(var_0) {
 handlecleanupputaway(var_0) {
   if(var_0 == "pistol_putaway") {
     thread animscripts\combat_utility::putgunbackinhandonkillanimscript();
-  }
-  else if(issubstr(var_0, "anim_gunhand")) {
+  } else if(issubstr(var_0, "anim_gunhand")) {
     self notify("end_weapon_swap");
   }
 }
@@ -1285,8 +1260,7 @@ rpgdeath() {
 
   if(randomfloat(1) > 0.5) {
     var_0 = animscripts\utility::lookupanim("combat", "rpg_death");
-  }
-  else {
+  } else {
     var_0 = animscripts\utility::lookupanim("combat", "rpg_death_stagger");
   }
 
@@ -1416,8 +1390,7 @@ resetanimmode(var_0) {
 
   if(self.swimmer) {
     self animmode("nogravity", var_1);
-  }
-  else {
+  } else {
     self animmode("zonly_physics", var_1);
   }
 }

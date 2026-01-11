@@ -260,8 +260,7 @@ getbeststingertarget() {
 
   chosenent = targetsvalid[0];
 
-  if(targetsvalid.size > 1) {
-  }
+  if(targetsvalid.size > 1) {}
 
   return chosenent;
 }
@@ -449,8 +448,7 @@ missiletarget_lockonmonitor(player, endon1, endon2) {
   }
 
   for(;;) {
-    if(target_istarget(self)) {
-    }
+    if(target_istarget(self)) {}
 
     wait 0.1;
   }
@@ -501,7 +499,9 @@ missiletarget_handleincomingmissile(responsefunc, endon1, endon2) {
     _incomingmissile(missile);
 
     if(isDefined(responsefunc)) {
-      [[responsefunc]](missile, attacker, weap, endon1, endon2);
+      [
+        [responsefunc]
+      ](missile, attacker, weap, endon1, endon2);
     }
   }
 }
@@ -538,8 +538,7 @@ missiletarget_proximitydetonate(missile, attacker, weapon, endon1, endon2) {
   for(;;) {
     if(!isDefined(self)) {
       center = lastcenter;
-    }
-    else {
+    } else {
       center = self.origin;
     }
 
@@ -583,8 +582,7 @@ missiletarget_playflarefx() {
 
   if(isDefined(self.flare_ent)) {
     playFXOnTag(flare_fx, self.flare_ent, "tag_origin");
-  }
-  else {
+  } else {
     playFXOnTag(flare_fx, self, "tag_origin");
   }
 

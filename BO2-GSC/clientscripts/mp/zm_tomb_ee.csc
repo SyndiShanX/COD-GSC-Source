@@ -57,8 +57,7 @@ sndwagonfire(ison, fieldname) {
 
   if(ison) {
     playloopat("amb_fire_xlg", origin);
-  }
-  else {
+  } else {
     stoploopat("amb_fire_xlg", origin);
   }
 }

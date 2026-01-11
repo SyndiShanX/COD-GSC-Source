@@ -206,13 +206,13 @@ drone_geo_changes() {
   ents = getEntArray("rts_poi_LZ", "targetname");
 
   foreach(ent in ents) {
-  ent delete();
+    ent delete();
   }
 
   ents = getEntArray("rts_remove", "targetname");
 
   foreach(ent in ents) {
-  ent delete();
+    ent delete();
   }
 
   ents = getEntArray("script_model", "classname");
@@ -228,13 +228,13 @@ drone_geo_changes() {
   ents = getEntArray("delivery_van", "targetname");
 
   foreach(ent in ents) {
-  ent delete();
+    ent delete();
   }
 
   level.laser_doors = getEntArray("laser_door", "targetname");
 
   foreach(ent in level.laser_doors) {
-  ent disconnectpaths();
+    ent disconnectpaths();
   }
 
   roof = getent("rts_factory_roof", "targetname");
@@ -359,8 +359,7 @@ drone_magicmarker(startscale, desiredscale, timeinsec, show) {
 
     if(curscale <= 0) {
       self hide();
-    }
-    else {
+    } else {
       self setscale(curscale);
     }
 
@@ -384,8 +383,7 @@ nag_until_notify(interval, note) {
 
     if(thenote == "timeout") {
       maps\_so_rts_event::trigger_event("dlg_nag");
-    }
-    else {
+    } else {
       break;
     }
 
@@ -450,7 +448,7 @@ drone_tutorial() {
   tursquad.no_show_marker = 1;
 
   foreach(dog in dogsquad.members) {
-  dog.takedamage = 0;
+    dog.takedamage = 0;
   }
 
   foreach(guy in infsquad.members) {
@@ -649,8 +647,7 @@ drone_tutorial() {
 
     if(infsquad.id == infsquadid) {
       inf2squad.selectable = 0;
-    }
-    else {
+    } else {
       infsquad.selectable = 0;
     }
 
@@ -708,7 +705,7 @@ drone_tutorial() {
   dogsquad.members[0].no_takeover = 1;
 
   foreach(tur in tursquad.members) {
-  tur.no_takeover = 1;
+    tur.no_takeover = 1;
   }
 
   maps\_so_rts_event::trigger_event("dlg_switch_soldier_fps");
@@ -925,7 +922,7 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
     maps\_so_rts_squad::reissuesquadlastorders(squadid);
 
     foreach(guy in level.rts.squads[squadid].members) {
-    guy.allow_oob = 1;
+      guy.allow_oob = 1;
     }
   } else if(pkg_ref.ref == "infantry_ally_reg2_pkg") {
     spot = getent("squad_2_loc", "targetname");
@@ -933,7 +930,7 @@ dronecodespawner(pkg_ref, team, callback, squadid) {
     maps\_so_rts_squad::reissuesquadlastorders(squadid);
 
     foreach(guy in level.rts.squads[squadid].members) {
-    guy.allow_oob = 1;
+      guy.allow_oob = 1;
     }
   } else if(pkg_ref.ref == "bigdog_pkg") {
     spot = getstruct("bigdog_unit_start_point", "targetname");

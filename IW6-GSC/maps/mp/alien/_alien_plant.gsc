@@ -16,7 +16,7 @@ scriptable_init() {
   level.plants = getscriptablearray("spore_plant_spawn", "targetname");
 
   foreach(var_1 in level.plants) {
-  var_1 thread scriptable_crate_spore_plant();
+    var_1 thread scriptable_crate_spore_plant();
   }
 
   level thread run_plant_state_logic();
@@ -293,8 +293,7 @@ gas_damage_player(var_0) {
   while(is_in_array(self.gassed_players, var_0)) {
     if(maps\mp\alien\_utility::is_casual_mode()) {
       var_0 dodamage(2, self.origin, self, self);
-    }
-    else {
+    } else {
       var_0 dodamage(1, self.origin, self, self);
     }
 

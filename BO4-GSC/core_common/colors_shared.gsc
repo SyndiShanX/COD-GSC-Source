@@ -10,7 +10,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\trigger_shared;
 #include scripts\core_common\util_shared;
-
 #namespace colors;
 
 autoexec __init__system__() {
@@ -23,47 +22,47 @@ __init__() {
   level flag::init("friendly_spawner_locked");
   level flag::init("respawn_friendlies");
   level.arrays_of_colorcoded_nodes = [];
-  level.arrays_of_colorcoded_nodes[#"axis"] = [];
-  level.arrays_of_colorcoded_nodes[#"allies"] = [];
-  level.arrays_of_colorcoded_nodes[#"team3"] = [];
+  level.arrays_of_colorcoded_nodes[# "axis"] = [];
+  level.arrays_of_colorcoded_nodes[# "allies"] = [];
+  level.arrays_of_colorcoded_nodes[# "team3"] = [];
   level.colorcoded_volumes = [];
-  level.colorcoded_volumes[#"axis"] = [];
-  level.colorcoded_volumes[#"allies"] = [];
-  level.colorcoded_volumes[#"team3"] = [];
+  level.colorcoded_volumes[# "axis"] = [];
+  level.colorcoded_volumes[# "allies"] = [];
+  level.colorcoded_volumes[# "team3"] = [];
   volumes = getEntArray("info_volume", "classname");
 
   for(i = 0; i < nodes.size; i++) {
     if(isDefined(nodes[i].script_color_allies)) {
-      nodes[i] add_node_to_global_arrays(nodes[i].script_color_allies, #"allies");
+      nodes[i] add_node_to_global_arrays(nodes[i].script_color_allies, # "allies");
     }
 
     if(isDefined(nodes[i].script_color_axis)) {
-      nodes[i] add_node_to_global_arrays(nodes[i].script_color_axis, #"axis");
+      nodes[i] add_node_to_global_arrays(nodes[i].script_color_axis, # "axis");
     }
 
     if(isDefined(nodes[i].script_color_team3)) {
-      nodes[i] add_node_to_global_arrays(nodes[i].script_color_team3, #"team3");
+      nodes[i] add_node_to_global_arrays(nodes[i].script_color_team3, # "team3");
     }
   }
 
   for(i = 0; i < volumes.size; i++) {
     if(isDefined(volumes[i].script_color_allies)) {
-      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_allies, #"allies");
+      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_allies, # "allies");
     }
 
     if(isDefined(volumes[i].script_color_axis)) {
-      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_axis, #"axis");
+      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_axis, # "axis");
     }
 
     if(isDefined(volumes[i].script_color_team3)) {
-      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_team3, #"team3");
+      volumes[i] add_volume_to_global_arrays(volumes[i].script_color_team3, # "team3");
     }
   }
 
   level.colornodes_debug_array = [];
-  level.colornodes_debug_array[#"allies"] = [];
-  level.colornodes_debug_array[#"axis"] = [];
-  level.colornodes_debug_array[#"team3"] = [];
+  level.colornodes_debug_array[# "allies"] = [];
+  level.colornodes_debug_array[# "axis"] = [];
+  level.colornodes_debug_array[# "team3"] = [];
 
   level.color_node_type_function = [];
   add_cover_node(#"bad node");
@@ -96,36 +95,36 @@ __init__() {
   level.colorlist[level.colorlist.size] = "g";
   level.colorlist[level.colorlist.size] = "p";
   level.colorlist[level.colorlist.size] = "o";
-  level.colorchecklist[#"red"] = "r";
-  level.colorchecklist[#"r"] = "r";
-  level.colorchecklist[#"blue"] = "b";
-  level.colorchecklist[#"b"] = "b";
-  level.colorchecklist[#"yellow"] = "y";
-  level.colorchecklist[#"y"] = "y";
-  level.colorchecklist[#"cyan"] = "c";
-  level.colorchecklist[#"c"] = "c";
-  level.colorchecklist[#"green"] = "g";
-  level.colorchecklist[#"g"] = "g";
-  level.colorchecklist[#"purple"] = "p";
-  level.colorchecklist[#"p"] = "p";
-  level.colorchecklist[#"orange"] = "o";
-  level.colorchecklist[#"o"] = "o";
+  level.colorchecklist[# "red"] = "r";
+  level.colorchecklist[# "r"] = "r";
+  level.colorchecklist[# "blue"] = "b";
+  level.colorchecklist[# "b"] = "b";
+  level.colorchecklist[# "yellow"] = "y";
+  level.colorchecklist[# "y"] = "y";
+  level.colorchecklist[# "cyan"] = "c";
+  level.colorchecklist[# "c"] = "c";
+  level.colorchecklist[# "green"] = "g";
+  level.colorchecklist[# "g"] = "g";
+  level.colorchecklist[# "purple"] = "p";
+  level.colorchecklist[# "p"] = "p";
+  level.colorchecklist[# "orange"] = "o";
+  level.colorchecklist[# "o"] = "o";
   level.currentcolorforced = [];
-  level.currentcolorforced[#"allies"] = [];
-  level.currentcolorforced[#"axis"] = [];
-  level.currentcolorforced[#"team3"] = [];
+  level.currentcolorforced[# "allies"] = [];
+  level.currentcolorforced[# "axis"] = [];
+  level.currentcolorforced[# "team3"] = [];
   level.lastcolorforced = [];
-  level.lastcolorforced[#"allies"] = [];
-  level.lastcolorforced[#"axis"] = [];
-  level.lastcolorforced[#"team3"] = [];
+  level.lastcolorforced[# "allies"] = [];
+  level.lastcolorforced[# "axis"] = [];
+  level.lastcolorforced[# "team3"] = [];
 
   for(i = 0; i < level.colorlist.size; i++) {
-    level.arrays_of_colorforced_ai[#"allies"][level.colorlist[i]] = [];
-    level.arrays_of_colorforced_ai[#"axis"][level.colorlist[i]] = [];
-    level.arrays_of_colorforced_ai[#"team3"][level.colorlist[i]] = [];
-    level.currentcolorforced[#"allies"][level.colorlist[i]] = undefined;
-    level.currentcolorforced[#"axis"][level.colorlist[i]] = undefined;
-    level.currentcolorforced[#"team3"][level.colorlist[i]] = undefined;
+    level.arrays_of_colorforced_ai[# "allies"][level.colorlist[i]] = [];
+    level.arrays_of_colorforced_ai[# "axis"][level.colorlist[i]] = [];
+    level.arrays_of_colorforced_ai[# "team3"][level.colorlist[i]] = [];
+    level.currentcolorforced[# "allies"][level.colorlist[i]] = undefined;
+    level.currentcolorforced[# "axis"][level.colorlist[i]] = undefined;
+    level.currentcolorforced[# "team3"][level.colorlist[i]] = undefined;
   }
 
   thread debugdvars();
@@ -135,15 +134,15 @@ __init__() {
 __main__() {
   foreach(trig in trigger::get_all()) {
     if(isDefined(trig.script_color_allies)) {
-      trig thread trigger_issues_orders(trig.script_color_allies, #"allies");
+      trig thread trigger_issues_orders(trig.script_color_allies, # "allies");
     }
 
     if(isDefined(trig.script_color_axis)) {
-      trig thread trigger_issues_orders(trig.script_color_axis, #"axis");
+      trig thread trigger_issues_orders(trig.script_color_axis, # "axis");
     }
 
     if(isDefined(trig.script_color_team3)) {
-      trig thread trigger_issues_orders(trig.script_color_team3, #"team3");
+      trig thread trigger_issues_orders(trig.script_color_team3, # "team3");
     }
   }
 }
@@ -159,7 +158,7 @@ debugdvars() {
 }
 
 get_team_substr() {
-  if(self.team == #"allies") {
+  if(self.team == # "allies") {
     if(!isDefined(self.node.script_color_allies_old)) {
       return;
     }
@@ -167,7 +166,7 @@ get_team_substr() {
     return self.node.script_color_allies_old;
   }
 
-  if(self.team == #"axis") {
+  if(self.team == # "axis") {
     if(!isDefined(self.node.script_color_axis_old)) {
       return;
     }
@@ -201,26 +200,26 @@ try_to_draw_line_to_node() {
 
 _get_debug_color(str_color) {
   switch (str_color) {
-    case #"red":
-    case #"r":
+    case # "red":
+    case # "r":
       return (1, 0, 0);
-    case #"green":
-    case #"g":
+    case # "green":
+    case # "g":
       return (0, 1, 0);
-    case #"b":
-    case #"blue":
+    case # "b":
+    case # "blue":
       return (0, 0, 1);
-    case #"yellow":
-    case #"y":
+    case # "yellow":
+    case # "y":
       return (1, 1, 0);
-    case #"orange":
-    case #"o":
+    case # "orange":
+    case # "o":
       return (1, 0.5, 0);
-    case #"c":
-    case #"cyan":
+    case # "c":
+    case # "cyan":
       return (0, 1, 1);
-    case #"purple":
-    case #"p":
+    case # "purple":
+    case # "p":
       return (1, 0, 1);
     default:
       println("<dev string:x41>" + str_color + "<dev string:x50>");
@@ -230,9 +229,9 @@ _get_debug_color(str_color) {
 
 debug_colornodes() {
   array = [];
-  array[#"axis"] = [];
-  array[#"allies"] = [];
-  array[#"team3"] = [];
+  array[# "axis"] = [];
+  array[# "allies"] = [];
+  array[# "team3"] = [];
   aiarray = arraycombine(getplayers(), getaiarray(), 0, 0);
 
   foreach(ai in aiarray) {
@@ -252,9 +251,9 @@ debug_colornodes() {
     ai try_to_draw_line_to_node();
   }
 
-  draw_colornodes(array, #"allies");
-  draw_colornodes(array, #"axis");
-  draw_colornodes(array, #"team3");
+  draw_colornodes(array, # "allies");
+  draw_colornodes(array, # "axis");
+  draw_colornodes(array, # "team3");
 }
 
 draw_colornodes(array, team) {
@@ -314,13 +313,13 @@ debugcolorfriendliestogglewatch() {
 
 get_script_palette() {
   rgb = [];
-  rgb[#"r"] = (1, 0, 0);
-  rgb[#"o"] = (1, 0.5, 0);
-  rgb[#"y"] = (1, 1, 0);
-  rgb[#"g"] = (0, 1, 0);
-  rgb[#"c"] = (0, 1, 1);
-  rgb[#"b"] = (0, 0, 1);
-  rgb[#"p"] = (1, 0, 1);
+  rgb[# "r"] = (1, 0, 0);
+  rgb[# "o"] = (1, 0.5, 0);
+  rgb[# "y"] = (1, 1, 0);
+  rgb[# "g"] = (0, 1, 0);
+  rgb[# "c"] = (0, 1, 1);
+  rgb[# "b"] = (0, 0, 1);
+  rgb[# "p"] = (1, 0, 1);
   return rgb;
 }
 
@@ -471,18 +470,18 @@ get_colorcodes_from_trigger(color_team, team) {
 
   colorcodes = usable_colorcodes;
   array = [];
-  array[#"colorcodes"] = colorcodes;
-  array[#"colorcodesbycolorindex"] = colorcodesbycolorindex;
-  array[#"colors"] = colors;
+  array[# "colorcodes"] = colorcodes;
+  array[# "colorcodesbycolorindex"] = colorcodesbycolorindex;
+  array[# "colors"] = colors;
   return array;
 }
 
 trigger_issues_orders(color_team, team) {
   self endon(#"death");
   array = get_colorcodes_from_trigger(color_team, team);
-  colorcodes = array[#"colorcodes"];
-  colorcodesbycolorindex = array[#"colorcodesbycolorindex"];
-  colors = array[#"colors"];
+  colorcodes = array[# "colorcodes"];
+  colorcodesbycolorindex = array[# "colorcodesbycolorindex"];
+  colors = array[# "colors"];
 
   for(;;) {
     self waittill(#"trigger");
@@ -517,13 +516,13 @@ trigger_auto_disable() {
 
 activate_color_trigger(var_cc966c56) {
   switch (var_cc966c56) {
-    case #"allies":
+    case # "allies":
       str_color = self.script_color_allies;
       break;
-    case #"axis":
+    case # "axis":
       str_color = self.script_color_axis;
       break;
-    case #"team3":
+    case # "team3":
       str_color = self.script_color_team3;
       break;
     default:
@@ -535,9 +534,9 @@ activate_color_trigger(var_cc966c56) {
 
 get_colorcodes_and_activate_trigger(color_team, team) {
   array = get_colorcodes_from_trigger(color_team, team);
-  colorcodes = array[#"colorcodes"];
-  colorcodesbycolorindex = array[#"colorcodesbycolorindex"];
-  colors = array[#"colors"];
+  colorcodes = array[# "colorcodes"];
+  colorcodesbycolorindex = array[# "colorcodesbycolorindex"];
+  colors = array[# "colors"];
   activate_color_trigger_internal(colorcodes, colors, team, colorcodesbycolorindex);
 }
 
@@ -606,13 +605,13 @@ same_color_code_as_last_time(team, color) {
 
 function_f06ea88(node, var_f9350db6, var_cc966c56) {
   switch (var_cc966c56) {
-    case #"allies":
+    case # "allies":
       str_color = node.script_color_allies;
       break;
-    case #"axis":
+    case # "axis":
       str_color = node.script_color_axis;
       break;
-    case #"team3":
+    case # "team3":
       str_color = node.script_color_team3;
       break;
     default:
@@ -770,15 +769,15 @@ player_color_node() {
 
 color_node_finds_a_user() {
   if(isDefined(self.script_color_allies)) {
-    color_node_finds_user_from_colorcodes(self.script_color_allies, #"allies");
+    color_node_finds_user_from_colorcodes(self.script_color_allies, # "allies");
   }
 
   if(isDefined(self.script_color_axis)) {
-    color_node_finds_user_from_colorcodes(self.script_color_axis, #"axis");
+    color_node_finds_user_from_colorcodes(self.script_color_axis, # "axis");
   }
 
   if(isDefined(self.script_color_team3)) {
-    color_node_finds_user_from_colorcodes(self.script_color_team3, #"team3");
+    color_node_finds_user_from_colorcodes(self.script_color_team3, # "team3");
   }
 }
 
@@ -871,7 +870,7 @@ set_goal_and_volume(node) {
 color_force_goal(node) {
   self endon(#"death");
   self thread ai::force_goal(node, 1, "stop_color_forcegoal", 1);
-  self waittill(#"goal", #"stop_color_move");
+  self waittill(#"goal", # "stop_color_move");
   self notify(#"stop_color_forcegoal");
 }
 
@@ -885,7 +884,7 @@ my_current_node_delays() {
 
 process_color_order_to_ai(node, trigger, counter) {
   thread decrementcolorusers(node);
-  self endon(#"stop_color_move", #"death");
+  self endon(#"stop_color_move", # "death");
 
   if(isDefined(trigger)) {
     trigger util::script_delay();
@@ -930,7 +929,7 @@ process_color_order_to_ai(node, trigger, counter) {
 }
 
 get_best_available_colored_node() {
-  assert(self.team != #"neutral");
+  assert(self.team != # "neutral");
   assert(isDefined(self.script_forcecolor), "<dev string:x10c>" + self.export+"<dev string:x22c>");
   colorcode = level.currentcolorforced[self.team][self.script_forcecolor];
   nodes = get_prioritized_colorcoded_nodes(self.team, colorcode, self.script_forcecolor);
@@ -944,7 +943,7 @@ get_best_available_colored_node() {
 }
 
 get_best_available_new_colored_node() {
-  assert(self.team != #"neutral");
+  assert(self.team != # "neutral");
   assert(isDefined(self.script_forcecolor), "<dev string:x10c>" + self.export+"<dev string:x22c>");
   colorcode = level.currentcolorforced[self.team][self.script_forcecolor];
   nodes = get_prioritized_colorcoded_nodes(self.team, colorcode, self.script_forcecolor);
@@ -959,7 +958,7 @@ get_best_available_new_colored_node() {
 }
 
 process_stop_short_of_node(node) {
-  self endon(#"stopscript", #"death");
+  self endon(#"stopscript", # "death");
 
   if(isDefined(self.node)) {
     return;
@@ -1074,13 +1073,13 @@ left_color_node() {
 
 removespawnerfromcolornumberarray() {
   switch (self.team) {
-    case #"allies":
+    case # "allies":
       str_color = self.script_color_allies;
       break;
-    case #"axis":
+    case # "axis":
       str_color = self.script_color_axis;
       break;
-    case #"team3":
+    case # "team3":
       str_color = self.script_color_team3;
       break;
     default:
@@ -1182,7 +1181,7 @@ colornode_replace_on_death() {
   assert(isalive(self), "<dev string:x2ea>");
   self endon(#"_disable_reinforcement");
 
-  if(self.team == #"axis") {
+  if(self.team == # "axis") {
     return;
   }
 
@@ -1460,7 +1459,7 @@ new_color_being_set(color) {
   self notify(#"new_color_being_set");
   self.new_force_color_being_set = 1;
   left_color_node();
-  self endon(#"new_color_being_set", #"death");
+  self endon(#"new_color_being_set", # "death");
   waittillframeend();
   waittillframeend();
 
@@ -1504,11 +1503,11 @@ update_debug_friendlycolor() {
 }
 
 has_color() {
-  if(self.team == #"allies") {
+  if(self.team == # "allies") {
     return (isDefined(self.script_color_allies) || isDefined(self.script_forcecolor));
-  } else if(self.team == #"axis") {
+  } else if(self.team == # "axis") {
     return (isDefined(self.script_color_axis) || isDefined(self.script_forcecolor));
-  } else if(self.team == #"team3") {
+  } else if(self.team == # "team3") {
     return (isDefined(self.script_color_team3) || isDefined(self.script_forcecolor));
   }
 

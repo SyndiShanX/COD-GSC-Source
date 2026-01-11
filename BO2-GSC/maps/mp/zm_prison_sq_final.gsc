@@ -20,8 +20,7 @@
 #include maps\mp\zombies\_zm_stats;
 #include maps\mp\zombies\_zm;
 
-onplayerconnect_sq_final() {
-}
+onplayerconnect_sq_final() {}
 
 stage_one() {
   if(isDefined(level.gamedifficulty) && level.gamedifficulty == 0) {
@@ -64,7 +63,7 @@ stage_one() {
   players = getplayers();
 
   foreach(player in players) {
-  player.fq_client_hint destroy();
+    player.fq_client_hint destroy();
   }
 
   m_nixie_tube = getent("nixie_tube_1", "targetname");
@@ -314,7 +313,7 @@ play_sq_audio_log(num, a_vo, b_use_trig) {
   players = getplayers();
 
   foreach(player in players) {
-  maps\mp\_visionset_mgr::vsmgr_activate("visionset", "zm_audio_log", player);
+    maps\mp\_visionset_mgr::vsmgr_activate("visionset", "zm_audio_log", player);
   }
 
   for(i = 0; i < a_vo.size; i++) {
@@ -327,7 +326,7 @@ play_sq_audio_log(num, a_vo, b_use_trig) {
   players = getplayers();
 
   foreach(player in players) {
-  maps\mp\_visionset_mgr::vsmgr_deactivate("visionset", "zm_audio_log", player);
+    maps\mp\_visionset_mgr::vsmgr_deactivate("visionset", "zm_audio_log", player);
   }
 }
 
@@ -741,8 +740,7 @@ final_battle_vo(p_weasel, a_player_team) {
 
   if(isDefined(player_2)) {
     player_2 playsoundontag("vox_plr_" + player_2.characterindex + "_end_scenario_1", "J_Head");
-  }
-  else if(isDefined(player)) {
+  } else if(isDefined(player)) {
     player playsoundontag("vox_plr_" + player.characterindex + "_end_scenario_1", "J_Head");
   }
 
@@ -869,8 +867,7 @@ create_ending_message(str_msg) {
 
     if(self issplitscreen()) {
       self.client_hint.y = -140;
-    }
-    else {
+    } else {
       self.client_hint.y = -250;
     }
 
@@ -901,8 +898,7 @@ custom_game_over_hud_elem(player) {
 
   if(isDefined(level.winner)) {
     game_over settext(&"ZM_PRISON_LIFE_OVER");
-  }
-  else {
+  } else {
     game_over settext(&"ZOMBIE_GAME_OVER");
   }
 

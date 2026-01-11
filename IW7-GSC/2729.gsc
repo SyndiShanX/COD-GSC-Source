@@ -63,16 +63,14 @@ func_B9D9() {
 
     if(var_09 > 2) {
       var_10 = 0.75;
-    }
-    else {
+    } else {
       var_10 = 0.25;
     }
 
     if(level.teambased && isDefined(var_04) && isDefined(var_4.team) && var_4.team == self.team && var_04 != self) {
       if(level.friendlyfire == 0) {
         continue;
-      }
-      else if(level.friendlyfire == 1) {} else if(level.friendlyfire == 2) {
+      } else if(level.friendlyfire == 1) {} else if(level.friendlyfire == 2) {
         var_09 = var_09 * 0.5;
         var_10 = var_10 * 0.5;
         var_08 = 0;

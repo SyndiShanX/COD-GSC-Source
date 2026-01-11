@@ -1033,8 +1033,7 @@ turngrenadeintoadud(weapname, isthrowngrenade, player) {
       } else {
         if(isthrowngrenade) {
           player iprintlnbold(&"MP_GRENADE_UNAVAILABLE_FOR_N", " " + timeleft + " ", &"EXE_SECONDS");
-        }
-        else {
+        } else {
           player iprintlnbold(&"MP_LAUNCHER_UNAVAILABLE_FOR_N", " " + timeleft + " ", &"EXE_SECONDS");
         }
 
@@ -1197,8 +1196,7 @@ weapondamagetrace(from, to, startradius, ignore) {
   if(getdvarint(#"_id_0A1C40B1") != 0) {
     if(trace["fraction"] == 1) {
       thread debugline(midpos, to, (1, 1, 1));
-    }
-    else {
+    } else {
       thread debugline(midpos, trace["position"], (1, 0.9, 0.8));
       thread debugline(trace["position"], to, (1, 0.4, 0.3));
     }
@@ -1345,14 +1343,11 @@ isexplosivebulletweapon(weaponname) {
 getweaponclass_array(current) {
   if(isprimaryweapon(current)) {
     return level.primary_weapon_array;
-  }
-  else if(issidearm(current)) {
+  } else if(issidearm(current)) {
     return level.side_arm_array;
-  }
-  else if(isgrenade(current)) {
+  } else if(isgrenade(current)) {
     return level.grenade_array;
-  }
-  else {
+  } else {
     return level.inventory_array;
   }
 }
@@ -1510,8 +1505,7 @@ stow_on_back(current) {
 
       if(issubstr(index_weapon, self.pers["primaryWeapon"]) && issubstr(self.curclass, "CUSTOM")) {
         self.tag_stowed_back = getweaponmodel(index_weapon);
-      }
-      else {
+      } else {
         stowedmodelindex = getweaponstowedmodel(index_weapon);
         self.tag_stowed_back = getweaponmodel(index_weapon, stowedmodelindex);
       }
@@ -1578,8 +1572,7 @@ weapons_get_dvar_int(dvar, def) {
 weapons_get_dvar(dvar, def) {
   if(getdvar(dvar) != "") {
     return getdvarfloat(dvar);
-  }
-  else {
+  } else {
     setdvar(dvar, def);
     return def;
   }
@@ -1696,11 +1689,9 @@ scavenger_think() {
 
         if(isDefined(level.customloadoutscavenge)) {
           maxammo = self[[level.customloadoutscavenge]](weapon);
-        }
-        else if(weapon == loadout_primary) {
+        } else if(weapon == loadout_primary) {
           maxammo = loadout_primary_count;
-        }
-        else if(weapon == loadout_secondary) {
+        } else if(weapon == loadout_secondary) {
           maxammo = loadout_secondary_count;
         }
 
@@ -1783,11 +1774,9 @@ dropscavengerfordeath(attacker) {
   }
   if(level.gametype == "hack") {
     item = self dropscavengeritem("scavenger_item_hack_mp");
-  }
-  else if(isplayer(attacker) && attacker hasperk("specialty_scavenger")) {
+  } else if(isplayer(attacker) && attacker hasperk("specialty_scavenger")) {
     item = self dropscavengeritem("scavenger_item_mp");
-  }
-  else {
+  } else {
     return;
   }
 

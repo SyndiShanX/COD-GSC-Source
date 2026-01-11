@@ -149,8 +149,7 @@ initRideKillstreak_internal() {
 
   if(blackOutWait == "disconnect") {
     return ("disconnect");
-  }
-  else {
+  } else {
     return ("success");
   }
 }

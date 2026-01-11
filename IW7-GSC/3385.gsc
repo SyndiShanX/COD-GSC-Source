@@ -20,7 +20,7 @@ func_F945(var_00) {
   var_01 = scripts\engine\utility::getstructarray(var_00, "script_noteworthy");
 
   foreach(var_03 in var_01) {
-  set_nonstick(var_03);
+    set_nonstick(var_03);
   }
 }
 
@@ -49,8 +49,7 @@ func_102F3(var_00, var_01) {
 
   if(level.players.size > 1) {
     var_01 thread scripts\cp\cp_vo::try_to_play_vo("purchase_area", "zmb_comment_vo", "low", 10, 0, 0, 1, 40);
-  }
-  else {
+  } else {
     level.players[0] thread scripts\cp\cp_vo::try_to_play_vo("purchase_area", "zmb_comment_vo", "low", 10, 0, 1, 1, 40);
   }
 }
@@ -98,8 +97,7 @@ use_team_door_switch(var_00, var_01) {
   foreach(var_06 in var_04) {
     if(!isDefined(var_6.script_noteworthy)) {
       continue;
-    }
-    else if(var_6.script_noteworthy == "progress") {
+    } else if(var_6.script_noteworthy == "progress") {
       var_06 movez(4, 0.1);
       var_06 waittill("movedone");
     }
@@ -118,8 +116,7 @@ use_team_door_switch(var_00, var_01) {
 
   if(scripts\cp\utility::isplayingsolo() || scripts\engine\utility::is_true(level.only_one_player)) {
     var_01 scripts\cp\cp_persistence::give_player_xp(250, 1);
-  }
-  else {
+  } else {
     var_01 scripts\cp\cp_persistence::give_player_xp(75, 1);
   }
 
@@ -176,7 +173,7 @@ init_sliding_power_doors() {
   var_00 = scripts\engine\utility::getstructarray("power_door_sliding", "script_noteworthy");
 
   foreach(var_02 in var_00) {
-  var_02 thread sliding_power_door();
+    var_02 thread sliding_power_door();
   }
 }
 
@@ -213,8 +210,7 @@ clear_debris(var_00, var_01) {
   if(isDefined(level.script) && level.script == "cp_disco") {
     if(isDefined(var_00) && issubstr(var_0.name, "chi_")) {
       playLoopSound(var_0.origin, "cp_disco_doorbuy_chi_gongs");
-    }
-    else {
+    } else {
       playLoopSound(var_0.origin, "cp_disco_doorbuy_caution_tape");
     }
   } else

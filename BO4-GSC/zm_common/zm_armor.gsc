@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_net;
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_armor;
 
 autoexec __init__system__() {
@@ -59,7 +58,7 @@ function_49f4b6ee() {
   }
 }
 
-add(var_7c8fcded, var_3ed63752, var_28066539, var_df7ee5d1 = #"hash_2082da6662372184") {
+add(var_7c8fcded, var_3ed63752, var_28066539, var_df7ee5d1 = # "hash_2082da6662372184") {
   var_4812bba2 = 0;
 
   if(isDefined(var_28066539)) {
@@ -93,7 +92,7 @@ remove(var_7c8fcded, var_2cd89ceb = 0) {
       var_d42adc5 = 0;
 
       foreach(key in a_keys) {
-        if(key !== var_7c8fcded && (level.var_9555ebfb[key] || isDefined(self.var_bacee63b) && self.var_bacee63b && key == #"hero_weapon_armor")) {
+        if(key !== var_7c8fcded && (level.var_9555ebfb[key] || isDefined(self.var_bacee63b) && self.var_bacee63b && key == # "hero_weapon_armor")) {
           var_d42adc5 += get(key);
         }
       }

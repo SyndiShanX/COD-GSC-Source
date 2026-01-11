@@ -16,7 +16,6 @@
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\weapons\deployable;
 #include scripts\weapons\weaponobjects;
-
 #namespace spawn_beacon;
 
 init_shared() {
@@ -129,7 +128,7 @@ function_13ac856e() {
 }
 
 function_f8930fa1(time) {
-  self endon(#"death", #"end_timer");
+  self endon(#"death", # "end_timer");
 
   if(time == 0) {
     return;
@@ -204,7 +203,7 @@ beacon_spawned(watcher, owner) {
   }
 
   if(isDefined(owner)) {
-    owner stats::function_e24eec31(self.weapon, #"used", 1);
+    owner stats::function_e24eec31(self.weapon, # "used", 1);
   }
 
   self deployable::function_dd266e08(owner);
@@ -278,11 +277,11 @@ function_8892377a() {
     return;
   }
 
-  if(!isDefined(self.pers[#"hash_677f229433c8735b"])) {
-    self.pers[#"hash_677f229433c8735b"] = 0;
+  if(!isDefined(self.pers[# "hash_677f229433c8735b"])) {
+    self.pers[# "hash_677f229433c8735b"] = 0;
   }
 
-  if(getdvarint(#"hash_da55c6d97d1dc52", 1) && (isDefined(level.var_6cd68fbe) ? level.var_6cd68fbe : 0) && self.pers[#"hash_677f229433c8735b"] >= 1) {
+  if(getdvarint(#"hash_da55c6d97d1dc52", 1) && (isDefined(level.var_6cd68fbe) ? level.var_6cd68fbe : 0) && self.pers[# "hash_677f229433c8735b"] >= 1) {
     spawnbeaconslot = self gadgetgetslot(level.spawnbeaconsettings.beaconweapon);
     self thread function_9ede386f(spawnbeaconslot);
   }
@@ -563,7 +562,7 @@ destroyspawnbeacon(destroyedbyenemy) {
   playFX(#"hash_695b2e7e4b63a645", var_b0e81be9, var_8fec56c4, var_61753233);
 
   if(!(isDefined(spawnbeacon.var_4fc7245b) ? spawnbeacon.var_4fc7245b : 0) && (isDefined(level.var_6cd68fbe) ? level.var_6cd68fbe : 0) && isDefined(player)) {
-    player.pers[#"lives"]--;
+    player.pers[# "lives"]--;
   }
 
   self delete();
@@ -668,7 +667,7 @@ function_425d8006() {
   var_d7760961 = isDefined(level.spawnbeaconsettings.settingsbundle.var_26f4f5f0) ? level.spawnbeaconsettings.settingsbundle.var_26f4f5f0 : 0;
   var_f1c32a14 = "";
 
-  if(spawnbeacon.team == #"allies") {
+  if(spawnbeacon.team == # "allies") {
     var_f1c32a14 = "A";
   } else {
     var_f1c32a14 = "B";
@@ -684,7 +683,7 @@ function_425d8006() {
 
 watchfordeath() {
   level endon(#"game_ended");
-  self.owner endon(#"disconnect", #"joined_team", #"changed_specialist");
+  self.owner endon(#"disconnect", # "joined_team", # "changed_specialist");
   self endon(#"hash_523ddcbd662010e5");
   waitresult = self waittill(#"death");
 
@@ -803,7 +802,7 @@ retreatedstartmelee(var_a820f9, spawns) {
   placedspawnbeacon.victimsoundmod = "vehicle";
 
   if(isDefined(level.var_6cd68fbe) ? level.var_6cd68fbe : 0) {
-    player.pers[#"lives"]++;
+    player.pers[# "lives"]++;
   }
 
   placedspawnbeacon setweapon(level.spawnbeaconsettings.beaconweapon);
@@ -847,11 +846,11 @@ retreatedstartmelee(var_a820f9, spawns) {
   placedspawnbeacon callback::function_d8abfc3d(#"on_end_game", &function_438ca4e0);
   player deployable::function_6ec9ee30(placedspawnbeacon, level.spawnbeaconsettings.beaconweapon);
 
-  if(!isDefined(player.pers[#"hash_677f229433c8735b"])) {
-    player.pers[#"hash_677f229433c8735b"] = 0;
+  if(!isDefined(player.pers[# "hash_677f229433c8735b"])) {
+    player.pers[# "hash_677f229433c8735b"] = 0;
   }
 
-  player.pers[#"hash_677f229433c8735b"]++;
+  player.pers[# "hash_677f229433c8735b"]++;
 
   if(getdvarint(#"hash_da55c6d97d1dc52", 1) && (isDefined(level.var_6cd68fbe) ? level.var_6cd68fbe : 0)) {
     player function_19ed70ca(slot, 1);

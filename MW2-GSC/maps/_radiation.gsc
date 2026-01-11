@@ -137,11 +137,9 @@ updateRadiationShock() {
   for(;;) {
     if(self.radiation.ratepercent >= 75) {
       self shellshock("radiation_high", 5);
-    }
-    else if(self.radiation.ratepercent >= 50) {
+    } else if(self.radiation.ratepercent >= 50) {
       self shellshock("radiation_med", 5);
-    }
-    else if(self.radiation.ratepercent > 25) {
+    } else if(self.radiation.ratepercent > 25) {
       self shellshock("radiation_low", 5);
     }
 
@@ -155,17 +153,13 @@ updateRadiationSound() {
   for(;;) {
     if(self.radiation.ratepercent >= 75) {
       self.radiation.sound = "item_geigercouner_level4";
-    }
-    else if(self.radiation.ratepercent >= 50) {
+    } else if(self.radiation.ratepercent >= 50) {
       self.radiation.sound = "item_geigercouner_level3";
-    }
-    else if(self.radiation.ratepercent >= 25) {
+    } else if(self.radiation.ratepercent >= 25) {
       self.radiation.sound = "item_geigercouner_level2";
-    }
-    else if(self.radiation.ratepercent > 0) {
+    } else if(self.radiation.ratepercent > 0) {
       self.radiation.sound = "item_geigercouner_level1";
-    }
-    else {
+    } else {
       self.radiation.sound = "none";
     }
 
@@ -177,8 +171,7 @@ updateRadiationFlag() {
   for(;;) {
     if(self.radiation.ratepercent > 25) {
       self ent_flag_set("_radiation_poisoning");
-    }
-    else {
+    } else {
       self ent_flag_clear("_radiation_poisoning");
     }
 
@@ -343,8 +336,7 @@ updateRadiationBlackOut() {
 
       if(fraction < 0) {
         fraction = 0;
-      }
-      else if(fraction > 1) {
+      } else if(fraction > 1) {
         fraction = 1;
       }
 

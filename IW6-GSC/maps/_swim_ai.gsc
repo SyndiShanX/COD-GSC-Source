@@ -454,8 +454,7 @@ init_ai_swim_animsets() {
 ai_swim_pain() {
   if(self.a.movement == "run") {
     var_0 = % swimming_pain_1;
-  }
-  else {
+  } else {
     var_0 = common_scripts\utility::random([ % swimming_firing_pain_1, % swimming_firing_pain_2]);
   }
 
@@ -493,17 +492,13 @@ ai_swim_death() {
   if(!isDefined(self.deathanim)) {
     if(self.damageyaw > -60 && self.damageyaw <= 60) {
       self.deathanim = % swimming_idle_death_behind;
-    }
-    else if(self.a.movement == "run") {
+    } else if(self.a.movement == "run") {
       self.deathanim = % swimming_death_1;
-    }
-    else if(animscripts\utility::damagelocationisany("left_arm_upper")) {
+    } else if(animscripts\utility::damagelocationisany("left_arm_upper")) {
       self.deathanim = % swimming_firing_death_1;
-    }
-    else if(animscripts\utility::damagelocationisany("head", "helmet")) {
+    } else if(animscripts\utility::damagelocationisany("head", "helmet")) {
       self.deathanim = % swimming_firing_death_2;
-    }
-    else {
+    } else {
       self.deathanim = common_scripts\utility::random([ % swimming_firing_death_1, % swimming_firing_death_2, % swimming_firing_death_3]);
     }
   }

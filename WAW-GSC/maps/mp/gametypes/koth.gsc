@@ -132,8 +132,7 @@ onStartGameType() {
   }
   if(level.hqSpawnTime) {
     updateObjectiveHintMessages(level.objectiveHintPrepareHQ, level.objectiveHintPrepareHQ);
-  }
-  else {
+  } else {
     updateObjectiveHintMessages(level.objectiveHintCaptureHQ, level.objectiveHintCaptureHQ);
   }
   setClientNameMode("auto_change");
@@ -471,11 +470,9 @@ onSpawnPlayer() {
       hqOwningTeam = level.radio.gameobject maps\mp\gametypes\_gameobjects::getOwnerTeam();
       if(self.pers["team"] == hqOwningTeam) {
         spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, level.radio.gameobject.nearSpawns);
-      }
-      else if(level.spawnDelay >= level.hqAutoDestroyTime && gettime() > level.hqRevealTime + 10000) {
+      } else if(level.spawnDelay >= level.hqAutoDestroyTime && gettime() > level.hqRevealTime + 10000) {
         spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all);
-      }
-      else {
+      } else {
         spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_all, level.radio.gameobject.outerSpawns);
       }
     }
@@ -574,8 +571,7 @@ setUpNearbySpawns() {
     outer[outer.size] = spawns[i];
     if(i <= (thirdSize * 2)) {
       second[second.size] = spawns[i];
-    }
-    else {
+    } else {
       third[third.size] = spawns[i];
     }
   }
@@ -619,8 +615,7 @@ PickRadioTospawn() {
     if(isDefined(level.prevradio2) && radio == level.prevradio2) {
       if(level.radios.size > 2) {
         continue;
-      }
-      else {
+      } else {
         cost += 512;
       }
     }

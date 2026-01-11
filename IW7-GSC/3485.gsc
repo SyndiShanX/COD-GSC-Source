@@ -100,8 +100,7 @@ func_5D35(var_00, var_01) {
 
   if(level.splitscreen) {
     playFXOnTag(level.airstrikessfx, var_06, "tag_origin");
-  }
-  else {
+  } else {
     playFXOnTag(level.airstrikefx, var_06, "tag_origin");
   }
 
@@ -139,7 +138,7 @@ func_C4CD(var_00, var_01, var_02) {
 
   for(self.killcament = var_08; var_07 > 0.0; var_07 = var_07 - var_3.func_5FE7) {
     foreach(var_10 in level.characters) {
-    var_10 applygaseffect(var_00, var_01, var_04, self, var_3.func_5FE8);
+      var_10 applygaseffect(var_00, var_01, var_04, self, var_3.func_5FE8);
     }
 
     wait(var_3.func_5FE7);

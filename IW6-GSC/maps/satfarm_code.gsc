@@ -159,8 +159,7 @@ player_view_clamp() {
 
     if(var_2 <= -0.5) {
       level.player lerpviewangleclamp(0, 0, 0, 180, 180, 30, 5);
-    }
-    else {
+    } else {
       level.player lerpviewangleclamp(0, 0, 0, 180, 180, 30, 15);
     }
 
@@ -288,11 +287,9 @@ tank_health_monitor() {
 
   if(level.gameskill == 3) {
     self.max_hit_count = 4;
-  }
-  else if(level.gameskill == 2) {
+  } else if(level.gameskill == 2) {
     self.max_hit_count = 5;
-  }
-  else {
+  } else {
     self.max_hit_count = 6;
   }
 
@@ -309,11 +306,9 @@ tank_health_monitor() {
 
     if(!common_scripts\utility::flag("playerTankNoDeath")) {
       self.current_hit_count++;
-    }
-    else if(self.current_hit_count < self.max_hit_count - 1) {
+    } else if(self.current_hit_count < self.max_hit_count - 1) {
       self.current_hit_count++;
-    }
-    else {
+    } else {
       self.current_hit_count = self.max_hit_count - 1;
     }
 
@@ -457,7 +452,7 @@ tank_dynamic_zoom_monitor() {
       var_12 = (0, 0, 0);
 
       foreach(var_10 in var_8) {
-      var_12 = var_12 + var_10.origin;
+        var_12 = var_12 + var_10.origin;
       }
 
       var_12 = var_12 / var_8.size;
@@ -1317,15 +1312,13 @@ tank_hud_compass_movement() {
       if(modulus(var_13, var_1) == 0) {
         if(var_13 >= 360) {
           var_13 = var_13 - 360;
-        }
-        else if(var_13 < 0) {
+        } else if(var_13 < 0) {
           var_13 = var_13 + 360;
         }
 
         if(var_13 == 0) {
           var_16 = "00";
-        }
-        else {
+        } else {
           var_16 = "" + var_13;
         }
 
@@ -1748,8 +1741,7 @@ tank_update_speed(var_0, var_1) {
 
     if(var_5 == 0) {
       self.tank_hud_item["speed_bar"].alpha = 0.0;
-    }
-    else {
+    } else {
       self.tank_hud_item["speed_bar"].alpha = var_3;
       self.tank_hud_item["speed_bar"] setshader("green_block", var_5, self.tank_hud_item["speed_bar"].height);
     }
@@ -1876,15 +1868,13 @@ tank_compass(var_0) {
       if(modulus(var_14, var_2) == 0) {
         if(var_14 >= 360) {
           var_14 = var_14 - 360;
-        }
-        else if(var_14 < 0) {
+        } else if(var_14 < 0) {
           var_14 = var_14 + 360;
         }
 
         if(var_14 == 0) {
           var_17 = "00";
-        }
-        else {
+        } else {
           var_17 = "" + var_14;
         }
 
@@ -2231,8 +2221,7 @@ update_weapon_status(var_0, var_1) {
   if(!isDefined(level.player.tank_hud_item[var_0 + "_status"].loading) || !level.player.tank_hud_item[var_0 + "_status"].loading) {
     if(var_1 == &"SATFARM_READY" && level.player.tank_hud_item["current_weapon"].weap != var_0) {
       level.player.tank_hud_item[var_0 + "_status"] settext(&"SATFARM_IDLE");
-    }
-    else {
+    } else {
       level.player.tank_hud_item[var_0 + "_status"] settext(var_1);
     }
   }
@@ -2276,8 +2265,7 @@ tank_missile_targeting() {
         if(target_isinrect(var_6, self, getdvarfloat("cg_fov"), self.tank_hud_item["sabot_reticle_bottom_right"].x * 0.5, self.tank_hud_item["sabot_reticle_bottom_right"].y * 0.5) && sighttracepassed(self getEye(), var_6.origin + common_scripts\utility::ter_op(var_6 maps\_vehicle::ishelicopter(), (0, 0, 0), (0, 0, 72)), 0, var_6, level.playertank)) {
           if(var_6.script_team == "axis") {
             var_1 = var_6;
-          }
-          else if(var_6.script_team == "allies") {
+          } else if(var_6.script_team == "allies") {
             var_2 = var_6;
           }
 
@@ -2297,17 +2285,13 @@ tank_missile_targeting() {
 
       if(var_8 <= 200 * var_0) {
         self.tank_hud_item["sabot_range_highlight"].y = self.tank_hud_item["sabot_range_1"].y;
-      }
-      else if(var_8 <= 400 * var_0) {
+      } else if(var_8 <= 400 * var_0) {
         self.tank_hud_item["sabot_range_highlight"].y = self.tank_hud_item["sabot_range_2"].y;
-      }
-      else if(var_8 <= 600 * var_0) {
+      } else if(var_8 <= 600 * var_0) {
         self.tank_hud_item["sabot_range_highlight"].y = self.tank_hud_item["sabot_range_3"].y;
-      }
-      else if(var_8 <= 800 * var_0) {
+      } else if(var_8 <= 800 * var_0) {
         self.tank_hud_item["sabot_range_highlight"].y = self.tank_hud_item["sabot_range_4"].y;
-      }
-      else {
+      } else {
         self.tank_hud_item["sabot_range_highlight"].y = self.tank_hud_item["sabot_range_5"].y;
       }
     } else if(isDefined(var_2)) {
@@ -2573,7 +2557,7 @@ launch_smoke(var_0) {
   var_2 = vectornormalize(anglestoright(var_2));
 
   foreach(var_4 in var_1) {
-  thread launch_smoke_from_tag(var_4[0], var_0 + var_2 * var_4[1]);
+    thread launch_smoke_from_tag(var_4[0], var_0 + var_2 * var_4[1]);
   }
 
   return var_0;
@@ -2826,12 +2810,10 @@ manage_target_loc(var_0) {
 attempt_fire_loc() {
   if(!isDefined(self.tank_target)) {
     return 0;
-  }
-  else if(self.classname != "script_vehicle_corpse" && self.tank_target sightconetrace(self.origin + (0, 0, 32), self) && istank()) {
+  } else if(self.classname != "script_vehicle_corpse" && self.tank_target sightconetrace(self.origin + (0, 0, 32), self) && istank()) {
     if(getfxvisibility(self.origin + (0, 0, 32), self.tank_target.origin + (0, 0, 32)) < 0.5) {
       set_override_offset((0, 0, 192));
-    }
-    else {
+    } else {
       set_override_offset((0, 0, 0));
     }
 
@@ -2947,8 +2929,7 @@ tank_play_traced_effect() {
 
   if(common_scripts\utility::flag("player_in_tank") && isDefined(level.playertank) && common_scripts\utility::flag("ZOOM_ON") && distancesquared(var_2["position"], level.playertank.origin) < 4000000) {
     playFX(common_scripts\utility::getfx("tank_blast_" + var_3 + "_low"), var_2["position"], anglesToForward(var_6), anglestoup(var_6));
-  }
-  else {
+  } else {
     playFX(common_scripts\utility::getfx("tank_blast_" + var_3), var_2["position"], anglesToForward(var_6), anglestoup(var_6));
   }
 
@@ -3073,8 +3054,7 @@ handle_damage(var_0) {
 
   if(isDefined(self)) {
     var_8 = common_scripts\utility::distance_2d_squared(self.origin, var_4.origin);
-  }
-  else {
+  } else {
     return;
   }
 
@@ -3133,8 +3113,7 @@ handle_hit(var_0, var_1) {
       if(common_scripts\utility::cointoss()) {
         if(common_scripts\utility::cointoss()) {
           self playSound("satfarm_td1_friendlyfirefriendlyfire", "bc_done", 1);
-        }
-        else {
+        } else {
           self playSound("satfarm_td1_ceasefireonfriendlies", "bc_done", 1);
         }
       } else if(common_scripts\utility::cointoss())
@@ -3476,8 +3455,7 @@ play_chatter(var_0, var_1) {
 
   if(isplayer(self)) {
     self.bc_isspeaking = 1;
-  }
-  else {
+  } else {
     anim.tank_bc.bc_isspeaking = 1;
   }
 
@@ -3486,8 +3464,7 @@ play_chatter(var_0, var_1) {
 
   if(isplayer(self)) {
     self.bc_isspeaking = 0;
-  }
-  else {
+  } else {
     anim.tank_bc.bc_isspeaking = 0;
   }
 
@@ -3506,22 +3483,19 @@ can_say_event_type(var_0) {
 
   if(!isplayer(self) && anim.tank_bc.bc_isspeaking) {
     return 0;
-  }
-  else if(isplayer(self) && self.bc_isspeaking) {
+  } else if(isplayer(self) && self.bc_isspeaking) {
     return 0;
   }
 
   if(isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtimeplr[var_0])) {
     return 1;
-  }
-  else if(!isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtime[var_0])) {
+  } else if(!isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtime[var_0])) {
     return 1;
   }
 
   if(isplayer(self)) {
     var_1 = anim.tank_bc.bc_eventtypelastusedtimeplr[var_0];
-  }
-  else {
+  } else {
     var_1 = anim.tank_bc.bc_eventtypelastusedtime[var_0];
   }
 
@@ -3550,8 +3524,7 @@ can_say_soundalias(var_0) {
 update_event_type(var_0, var_1) {
   if(isplayer(self)) {
     anim.tank_bc.bc_eventtypelastusedtimeplr[var_0] = gettime();
-  }
-  else {
+  } else {
     anim.tank_bc.bc_eventtypelastusedtime[var_0] = gettime();
   }
 
@@ -3648,8 +3621,7 @@ enemy_callout_tracking_plr() {
 getthreatalias(var_0) {
   if(isplayer(self)) {
     var_1 = animscripts\battlechatter::getdirectionfacingclock(self getplayerangles(), self.origin, var_0.origin);
-  }
-  else {
+  } else {
     var_1 = animscripts\battlechatter::getdirectionfacingclock(self.angles, self.origin, var_0.origin);
   }
 
@@ -3715,11 +3687,9 @@ nav_mesh_build() {
       if(!isDefined(var_0[var_8].script_linkto)) {
         if(!isDefined(var_0[var_8].script_linkname)) {
           continue;
-        }
-        else if(isDefined(var_2.script_linkto) && var_0[var_8].script_linkname != var_2.script_linkto) {
+        } else if(isDefined(var_2.script_linkto) && var_0[var_8].script_linkname != var_2.script_linkto) {
           continue;
-        }
-        else if(isDefined(var_2.script_linkname) && var_0[var_8].script_linkname != var_2.script_linkname) {
+        } else if(isDefined(var_2.script_linkname) && var_0[var_8].script_linkname != var_2.script_linkname) {
           continue;
         }
       } else if(isDefined(var_2.script_linkname) && var_0[var_8].script_linkto != var_2.script_linkname)
@@ -3729,11 +3699,9 @@ nav_mesh_build() {
       }
       if(var_0[var_8] is_path_start_node()) {
         var_7.nodes_start[var_7.nodes_start.size] = var_0[var_8];
-      }
-      else if(var_0[var_8] is_path_end_node()) {
+      } else if(var_0[var_8] is_path_end_node()) {
         var_7.nodes_end[var_7.nodes_end.size] = var_0[var_8];
-      }
-      else {
+      } else {
         continue;
       }
 
@@ -3838,15 +3806,13 @@ nav_mesh_pathing(var_0, var_1) {
 
       if(var_8 && var_7) {
         self.veh_transmission = "reverse";
-      }
-      else {
+      } else {
         self.veh_transmission = "forward";
       }
 
       if(var_7) {
         self.veh_pathdir = "reverse";
-      }
-      else {
+      } else {
         self.veh_pathdir = "forward";
       }
 
@@ -3874,8 +3840,7 @@ nav_mesh_pathing(var_0, var_1) {
         if(!self.currentnode is_path_end_node() && isDefined(self.currentnode) && isDefined(self.currentnode.target)) {
           if(isDefined(var_9) && self.currentnode.target != var_9.targetname) {
             var_9 = getvehiclenode(self.currentnode.target, "targetname");
-          }
-          else if(!isDefined(var_9)) {
+          } else if(!isDefined(var_9)) {
             var_9 = getvehiclenode(self.currentnode.target, "targetname");
           }
 
@@ -3924,8 +3889,7 @@ same_path(var_0) {
   if(isDefined(self.attachedpath)) {
     if(self.attachedpath == var_0) {
       return 1;
-    }
-    else if(isDefined(self.attachedpath.script_linkname) && isDefined(var_0.script_linkname)) {
+    } else if(isDefined(self.attachedpath.script_linkname) && isDefined(var_0.script_linkname)) {
       var_1 = strtok(self.attachedpath.script_linkname, "_");
       var_2 = strtok(var_0.script_linkname, "_");
 
@@ -4364,8 +4328,7 @@ manage_position_in_use_loc(var_0) {
     foreach(var_2 in var_0.pos_info.nodes_end) {
       if(isDefined(var_2.pos_info.in_use) && var_2.pos_info.in_use != self) {
         return 0;
-      }
-      else {
+      } else {
         var_2.pos_info.in_use = self;
       }
     }
@@ -4384,7 +4347,7 @@ manage_position_in_use_loc(var_0) {
 
   if(isDefined(var_0.pos_info.nodes_end)) {
     foreach(var_2 in var_0.pos_info.nodes_end) {
-    var_2.pos_info.prev_in_use = undefined;
+      var_2.pos_info.prev_in_use = undefined;
     }
   }
 }
@@ -4410,8 +4373,7 @@ manage_switching_vehicle_speed_loc(var_0) {
 
   if(var_1 == 0) {
     self vehicle_setspeedimmediate(var_1, 1);
-  }
-  else {
+  } else {
     self vehicle_setspeedimmediate(var_1, var_1);
   }
 
@@ -4456,16 +4418,14 @@ tank_relative_speed(var_0, var_1, var_2, var_3, var_4) {
 
   if(!isDefined(var_0) || var_0 == "") {
     level.alliedtanktarget = level.playertank;
-  }
-  else {
+  } else {
     var_6 = common_scripts\utility::getstruct(var_0, "targetname");
     level.alliedtanktarget = var_6;
   }
 
   if(isDefined(var_1) && var_1 != "") {
     thread tank_relative_speed_stop(var_5, var_1);
-  }
-  else {
+  } else {
     var_1 = "nostopping";
   }
 
@@ -4508,8 +4468,7 @@ tank_relative_speed(var_0, var_1, var_2, var_3, var_4) {
     if(var_5.classname != "script_vehicle_corpse" && isDefined(var_5.currentnode) && isDefined(var_5.currentnode.target)) {
       if(isDefined(var_15) && self.currentnode.target != var_15.targetname) {
         var_15 = getvehiclenode(var_5.currentnode.target, "targetname");
-      }
-      else if(!isDefined(var_15)) {
+      } else if(!isDefined(var_15)) {
         var_15 = getvehiclenode(var_5.currentnode.target, "targetname");
       }
     }
@@ -4536,8 +4495,7 @@ tank_relative_speed(var_0, var_1, var_2, var_3, var_4) {
 
       if(var_25 < var_20 - var_21 && var_25 > 9000000) {
         var_24 = 0;
-      }
-      else {
+      } else {
         var_24 = 1;
       }
     } else if(var_20 > var_21 + var_10 * 2)
@@ -4545,8 +4503,7 @@ tank_relative_speed(var_0, var_1, var_2, var_3, var_4) {
 
     if(!isDefined(var_19)) {
       var_19 = distance2dsquared(var_7.origin, var_5.origin);
-    }
-    else {
+    } else {
       var_26 = distance2dsquared(var_7.origin, var_5.origin);
 
       if(var_26 < var_19) {
@@ -4576,8 +4533,7 @@ tank_relative_speed(var_0, var_1, var_2, var_3, var_4) {
         if(var_5.classname != "script_vehicle_corpse") {
           if(var_19 >= var_8 && var_24) {
             var_27 = 0;
-          }
-          else if(var_24) {
+          } else if(var_24) {
             var_28 = clamp(var_19, var_10, var_9);
             var_29 = 1 - (var_28 - var_10) / var_12;
             var_27 = 5 + (60 + var_4 - 5) * var_29;
@@ -4644,8 +4600,7 @@ proxmity_check_stop_loop(var_0, var_1, var_2) {
 
   if(!isDefined(var_1) || var_1 == "") {
     var_3 = level.playertank;
-  }
-  else {
+  } else {
     var_3 = var_1;
   }
 
@@ -4654,8 +4609,7 @@ proxmity_check_stop_loop(var_0, var_1, var_2) {
   }
   if(isDefined(var_2)) {
     var_4 = 0.7;
-  }
-  else {
+  } else {
     var_4 = 0.98;
   }
 
@@ -4674,8 +4628,7 @@ proxmity_check_stop_loop(var_0, var_1, var_2) {
     if(self.classname != "script_vehicle_corpse" && isDefined(self.currentnode) && isDefined(self.currentnode.target)) {
       if(isDefined(var_5) && self.currentnode.target != var_5.targetname) {
         var_5 = getvehiclenode(self.currentnode.target, "targetname");
-      }
-      else if(!isDefined(var_5)) {
+      } else if(!isDefined(var_5)) {
         var_5 = getvehiclenode(self.currentnode.target, "targetname");
       }
     }
@@ -4690,8 +4643,7 @@ proxmity_check_stop_loop(var_0, var_1, var_2) {
 
     if(var_8 == (0, 0, 0)) {
       var_9 = anglesToForward(self.angles);
-    }
-    else {
+    } else {
       var_9 = vectornormalize(var_8);
     }
 
@@ -4716,8 +4668,7 @@ proxmity_check_stop_loop(var_0, var_1, var_2) {
       } else if(var_12 < 5) {
         if(!isDefined(var_6)) {
           self resumespeed(10);
-        }
-        else if(common_scripts\utility::flag(var_6)) {
+        } else if(common_scripts\utility::flag(var_6)) {
           var_6 = undefined;
           self resumespeed(10);
         }
@@ -4842,16 +4793,14 @@ gaz_relative_speed(var_0, var_1) {
 
   if(!isDefined(var_0) || var_0 == "") {
     level.alliedtanktarget = level.player;
-  }
-  else {
+  } else {
     var_3 = common_scripts\utility::getstruct(var_0, "targetname");
     level.alliedtanktarget = var_3;
   }
 
   if(isDefined(var_1)) {
     thread gaz_relative_speed_stop(var_2, var_1);
-  }
-  else {
+  } else {
     var_1 = "nostopping";
   }
 
@@ -4895,8 +4844,7 @@ gaz_relative_speed(var_0, var_1) {
 
     if(!isDefined(var_16)) {
       var_16 = distance2dsquared(var_4.origin, var_2.origin);
-    }
-    else {
+    } else {
       var_20 = distance2dsquared(var_4.origin, var_2.origin);
 
       if(var_20 < var_16) {
@@ -4995,8 +4943,7 @@ gaz_kill() {
 
       if(isDefined(self.script_team) && self.script_team == "allies") {
         level thread maps\satfarm_audio::tank_death_allies(self.origin);
-      }
-      else {
+      } else {
         level thread maps\satfarm_audio::tank_death_player(self.origin);
       }
 
@@ -5086,8 +5033,7 @@ crush_mobile_gaz() {
 
   if(isDefined(level.animgaz) && level.animgaz == var_4) {
     var_5 delete();
-  }
-  else {
+  } else {
     var_4 thread crush_front_gaz();
     var_4 thread crush_rear_gaz();
   }
@@ -5101,8 +5047,7 @@ crush_front_gaz() {
   if(var_1 == level.playertank) {
     if(!common_scripts\utility::flag("aud_exfil")) {
       self playSound("satf_debris_crush_plr");
-    }
-    else {
+    } else {
       self playSound("satf_debris_crush_plr_small");
     }
   }
@@ -5120,8 +5065,7 @@ crush_rear_gaz() {
   if(var_1 == level.playertank) {
     if(!common_scripts\utility::flag("aud_exfil")) {
       self playSound("satf_debris_crush_plr");
-    }
-    else {
+    } else {
       self playSound("satf_debris_crush_plr_small");
     }
   }
@@ -5153,8 +5097,7 @@ satfarm_chainlink_fence_trigger_animate() {
 
     if(var_4 > 0) {
       var_0 rotatepitch(90, var_5);
-    }
-    else {
+    } else {
       var_0 rotatepitch(-90, var_5);
     }
   }
@@ -5178,8 +5121,7 @@ spawn_player_checkpoint(var_0, var_1) {
   } else {
     if(var_0 == "bridge_deploy" || var_0 == "ride_") {
       level.playertank = maps\_vehicle::spawn_vehicle_from_targetname_and_drive(var_0 + "playertank");
-    }
-    else {
+    } else {
       level.playertank = maps\_vehicle::spawn_vehicle_from_targetname(var_0 + "playertank");
     }
 
@@ -5348,8 +5290,7 @@ radio_dialog_add_and_go(var_0, var_1, var_2) {
 
   if(isDefined(var_2) && var_2 == 1) {
     maps\_utility::radio_dialogue_overlap(var_0);
-  }
-  else {
+  } else {
     maps\_utility::radio_dialogue(var_0, var_1);
   }
 }
@@ -5562,8 +5503,7 @@ uav_thermal_on(var_0, var_1) {
 
   if(isDefined(var_0)) {
     self visionsetthermalforplayer(var_1, var_0);
-  }
-  else {
+  } else {
     self visionsetthermalforplayer(var_1, 0.25);
   }
 
@@ -5586,8 +5526,7 @@ tank_thermal_effects(var_0, var_1) {
   for(;;) {
     if(isDefined(var_1)) {
       playfxontagforclients(level.friendly_thermal_reflector_effect, self, "tag_turret", var_1);
-    }
-    else {
+    } else {
       playFXOnTag(level.friendly_thermal_reflector_effect, self, "tag_turret");
     }
 
@@ -5677,8 +5616,7 @@ delayed_kill(var_0, var_1) {
   if(isDefined(self)) {
     if(istank()) {
       thread handle_tank_death();
-    }
-    else {
+    } else {
       self kill();
     }
   }
@@ -5705,7 +5643,7 @@ delete_all_vehicles() {
   var_0 = vehicle_getarray();
 
   foreach(var_2 in var_0) {
-  var_2 delete();
+    var_2 delete();
   }
 }
 
@@ -5788,8 +5726,7 @@ give_player_missile_control() {
 
   if(level.player usinggamepad()) {
     level.player thread maps\_utility::display_hint_timeout("HINT_GUIDED_ROUND_GUIDING", 8.0);
-  }
-  else {
+  } else {
     var_0 = 1;
     var_1 = 0;
     var_2 = getkeybinding("+speed_throw");
@@ -5805,8 +5742,7 @@ give_player_missile_control() {
 
     if(var_0) {
       level.player thread maps\_utility::display_hint_timeout("HINT_GUIDED_ROUND_GUIDING", 8.0);
-    }
-    else {
+    } else {
       level.player thread maps\_utility::display_hint_timeout("HINT_GUIDED_ROUND_GUIDING_TOGGLEADS_THROW", 8.0);
     }
   }
@@ -6100,8 +6036,7 @@ player_missile_control(var_0) {
 
       if(int(level.missile.missile_hud_item["sabot_fuel_range_bar"].start_width * var_3 / self.lifetime) < 1) {
         level.missile.missile_hud_item["sabot_fuel_range_bar"].alpha = 0;
-      }
-      else {
+      } else {
         level.missile.missile_hud_item["sabot_fuel_range_bar"] setshader("red_block", int(level.missile.missile_hud_item["sabot_fuel_range_bar"].start_width * var_3 / self.lifetime), level.missile.missile_hud_item["sabot_fuel_range_bar"].height);
       }
     }
@@ -6143,8 +6078,7 @@ player_missile_control(var_0) {
         if(target_isinrect(var_16, var_0, getdvarfloat("cg_fov"), 20, 20) && (var_16.script_team == "allies" || sighttracepassed(var_0 getEye(), var_16.origin + (0, 0, 60), 0, self))) {
           if(var_16.script_team == "axis") {
             var_11 = 1;
-          }
-          else if(var_16.script_team == "allies") {
+          } else if(var_16.script_team == "allies") {
             var_12 = 1;
           }
 
@@ -6245,8 +6179,7 @@ player_missile_roll_control(var_0) {
 
   if(var_3 > 0 && var_3 < 0.25) {
     var_3 = 0;
-  }
-  else if(var_3 < 0 && var_3 > -0.25) {
+  } else if(var_3 < 0 && var_3 > -0.25) {
     var_3 = 0;
   }
 
@@ -6259,8 +6192,7 @@ player_missile_roll_control(var_0) {
   if(var_3 == 0) {
     if(var_4 > 0) {
       var_1 = var_1 - 0.25 * self.roll_speed_max * 0.05;
-    }
-    else {
+    } else {
       var_1 = var_1 + 0.25 * self.roll_speed_max * 0.05;
     }
 
@@ -6303,11 +6235,9 @@ player_missile_yaw_control(var_0) {
 
   if(!level.console && !level.player common_scripts\utility::is_player_gamepad_enabled()) {
     var_1 = var_1 * -1;
-  }
-  else if(var_1 > 0 && var_1 < 0.25) {
+  } else if(var_1 > 0 && var_1 < 0.25) {
     var_1 = 0;
-  }
-  else if(var_1 < 0 && var_1 > -0.25) {
+  } else if(var_1 < 0 && var_1 > -0.25) {
     var_1 = 0;
   }
 
@@ -6327,8 +6257,7 @@ player_missile_pitch_control(var_0) {
   if(level.console || level.player common_scripts\utility::is_player_gamepad_enabled()) {
     if(var_2 > 0 && var_2 < 0.25) {
       var_2 = 0;
-    }
-    else if(var_2 < 0 && var_2 > -0.25) {
+    } else if(var_2 < 0 && var_2 > -0.25) {
       var_2 = 0;
     }
   }
@@ -6384,8 +6313,7 @@ spawn_ally(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_2 = level.start_point + "_" + var_0;
-  }
-  else {
+  } else {
     var_2 = var_1 + "_" + var_0;
   }
 
@@ -6894,21 +6822,21 @@ tank_ambient_deploy_chutes(var_0, var_1, var_2) {
   if(isDefined(var_2)) {}
 
   foreach(var_8 in var_5) {
-  var_8 show();
+    var_8 show();
   }
 
   var_0 maps\_anim::anim_single(var_5, "main_chute_deploy", "tag_origin");
   var_4 unlink();
 
   foreach(var_8 in var_5) {
-  var_8 unlink();
+    var_8 unlink();
   }
 
   wait 5.0;
   var_4 delete();
 
   foreach(var_8 in var_5) {
-  var_8 delete();
+    var_8 delete();
   }
 }
 
@@ -7108,8 +7036,7 @@ listen_player_jolt() {
 
         if(var_0[1] >= 0) {
           thread common_scripts\utility::play_sound_in_space("satf_tank_collision_plr", level.player.origin);
-        }
-        else {
+        } else {
           thread common_scripts\utility::play_sound_in_space("satf_tank_jolt_plr", level.player.origin);
         }
       } else {
@@ -7173,8 +7100,7 @@ screenshakefade(var_0, var_1, var_2, var_3) {
 
   if(var_5 > 0) {
     var_6 = var_0 / var_5;
-  }
-  else {
+  } else {
     var_6 = var_0;
   }
 
@@ -7183,8 +7109,7 @@ screenshakefade(var_0, var_1, var_2, var_3) {
 
   if(var_7 > 0) {
     var_9 = var_0 / var_7;
-  }
-  else {
+  } else {
     var_9 = var_0;
   }
 
@@ -7218,8 +7143,7 @@ heli_crash_kill() {
 is_player_locked_on() {
   if(isDefined(level.playertank.locked_on) && level.playertank.locked_on == 1) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -7284,8 +7208,7 @@ satfarm_timer(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_2)) {
     wait(var_0);
-  }
-  else {
+  } else {
     wait(var_2);
   }
 
@@ -7475,8 +7398,7 @@ follow_icon_manager() {
   while(!common_scripts\utility::flag("air_strip_take_off_mig_01_go")) {
     if(distancesquared(level.player.origin, level.badger.origin) <= 6250000 || distancesquared(level.player.origin, level.badger.origin) > 6250000 && common_scripts\utility::within_fov(level.player.origin, level.player getplayerangles(), level.badger.origin, cos(15))) {
       setsaveddvar("objectiveHide", 1);
-    }
-    else {
+    } else {
       setsaveddvar("objectiveHide", 0);
     }
 

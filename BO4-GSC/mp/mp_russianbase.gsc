@@ -16,7 +16,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\draft;
 #include scripts\mp_common\load;
-
 #namespace mp_russianbase;
 
 event_handler[level_init] main(eventstruct) {
@@ -78,7 +77,7 @@ function_3761a1bc(a_ents) {
 
 function_f55fb854(a_ents) {
   if(isDefined(self.t_hurt)) {
-    self.t_hurt linkto(a_ents[#"prop 1"]);
+    self.t_hurt linkto(a_ents[# "prop 1"]);
   }
 }
 
@@ -109,14 +108,14 @@ init_crane() {
   crane.startpoint = crane.origin;
   end_spot = struct::get(crane.target, "targetname");
   crane.endpoint = end_spot.origin;
-  crane.location = #"start";
+  crane.location = # "start";
 
   if(getgametypesetting(#"allowmapscripting") && draft::is_draft_this_round()) {
     while(!draft::function_d255fb3e()) {
       waitframe(1);
     }
 
-    waitresult = crane waittilltimeout(5, #"draftend");
+    waitresult = crane waittilltimeout(5, # "draftend");
 
     if(waitresult._notify !== "draftend") {
       crane moveto(crane.endpoint, 4);
@@ -153,13 +152,13 @@ init_crane() {
 function_80c5243b(e_activator) {
   crane = self.crane;
 
-  if(crane.location == #"end") {
+  if(crane.location == # "end") {
     b_kill = 0;
-    crane.location = #"start";
+    crane.location = # "start";
     destination = crane.startpoint;
   } else {
     b_kill = 1;
-    crane.location = #"end";
+    crane.location = # "end";
     destination = crane.endpoint;
   }
 

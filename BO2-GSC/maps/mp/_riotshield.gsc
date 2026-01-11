@@ -265,8 +265,7 @@ watchriotshielddeploy() {
       if(level.gametype != "shrp") {
         if(self.lastnonshieldweapon != "none" && self hasweapon(self.lastnonshieldweapon)) {
           self switchtoweapon(self.lastnonshieldweapon);
-        }
-        else {
+        } else {
           self switchtoweapon(primaries[0]);
         }
       }
@@ -359,17 +358,13 @@ watchdeployedriotshielddamage() {
 
     if(type == "MOD_MELEE") {
       damage = damage * getdvarfloat(#"riotshield_melee_damage_scale");
-    }
-    else if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
+    } else if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
       damage = damage * getdvarfloat(#"riotshield_bullet_damage_scale");
-    }
-    else if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
+    } else if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
       damage = damage * getdvarfloat(#"riotshield_explosive_damage_scale");
-    }
-    else if(type == "MOD_IMPACT") {
+    } else if(type == "MOD_IMPACT") {
       damage = damage * getdvarfloat(#"riotshield_projectile_damage_scale");
-    }
-    else if(type == "MOD_CRUSH") {
+    } else if(type == "MOD_CRUSH") {
       damage = damagemax;
     }
 

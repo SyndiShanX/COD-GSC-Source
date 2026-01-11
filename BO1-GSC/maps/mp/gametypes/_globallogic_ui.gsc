@@ -15,8 +15,7 @@ init() {
   precacheString(&"MP_FRIENDLY_FIRE_WILL_NOT");
   if(level.splitScreen) {
     precacheString(&"MP_ENDED_GAME");
-  }
-  else {
+  } else {
     precacheString(&"MP_HOST_ENDED_GAME");
   }
 }
@@ -170,8 +169,7 @@ menuAutoAssign() {
   self updateObjectiveText();
   if(level.teamBased) {
     self.sessionteam = assignment;
-  }
-  else {
+  } else {
     self.sessionteam = "none";
     self.ffateam = assignment;
   }
@@ -209,11 +207,9 @@ pickTeamFromScores(teams) {
   assignment = "allies";
   if(getTeamScore("allies") == getTeamScore("axis")) {
     assignment = teams[randomInt(2)];
-  }
-  else if(getTeamScore("allies") < getTeamScore("axis")) {
+  } else if(getTeamScore("allies") < getTeamScore("axis")) {
     assignment = "allies";
-  }
-  else {
+  } else {
     assignment = "axis";
   }
   return assignment;
@@ -244,8 +240,7 @@ updateObjectiveText() {
   if(level.scorelimit > 0) {
     if(level.splitScreen) {
       self setclientdvar("cg_objectiveText", getObjectiveScoreText(self.pers["team"]));
-    }
-    else {
+    } else {
       self setclientdvar("cg_objectiveText", getObjectiveScoreText(self.pers["team"]), level.scorelimit);
     }
   } else {
@@ -314,8 +309,7 @@ menuAllies() {
     self updateObjectiveText();
     if(level.teamBased) {
       self.sessionteam = "allies";
-    }
-    else {
+    } else {
       self.sessionteam = "none";
       self.ffateam = "allies";
     }
@@ -350,8 +344,7 @@ menuAxis() {
     self updateObjectiveText();
     if(level.teamBased) {
       self.sessionteam = "axis";
-    }
-    else {
+    } else {
       self.sessionteam = "none";
       self.ffateam = "axis";
     }

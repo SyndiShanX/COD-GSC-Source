@@ -12,11 +12,10 @@
 #include scripts\zm_common\aats\zm_aat_brain_decay;
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_stats;
-
 #namespace zm_bgb_ctrl_z;
 
 autoexec __init__system__() {
-  system::register(#"zm_bgb_ctrl_z", &__init__, undefined, #"bgb");
+  system::register(#"zm_bgb_ctrl_z", &__init__, undefined, # "bgb");
 }
 
 __init__() {
@@ -28,7 +27,7 @@ __init__() {
 }
 
 enable() {
-  self endon(#"disconnect", #"bled_out", #"bgb_update");
+  self endon(#"disconnect", # "bled_out", # "bgb_update");
   a_ai_targets = function_880a86b2();
   self.var_89221e7d = 0;
 
@@ -88,7 +87,7 @@ turn_z(player) {
     player.var_89221e7d++;
     self thread clientfield::set("zm_aat_brain_decay", 1);
     self thread zombie_death_time_limit(player);
-    self.team = #"allies";
+    self.team = # "allies";
     self.aat_turned = 1;
     self.n_aat_turned_zombie_kills = 0;
     self.takedamage = 0;
@@ -96,7 +95,7 @@ turn_z(player) {
     self.allowpain = 0;
     self.b_ignore_cleanup = 1;
 
-    if(self.archetype === #"zombie") {
+    if(self.archetype === # "zombie") {
       self zombie_utility::set_zombie_run_cycle("sprint");
 
       if(math::cointoss()) {
@@ -140,7 +139,7 @@ function_880a86b2() {
   var_c5e280bb = [];
 
   foreach(ai in a_ai_targets) {
-    if(ai.archetype === #"zombie") {
+    if(ai.archetype === # "zombie") {
       if(!isDefined(var_c5e280bb)) {
         var_c5e280bb = [];
       } else if(!isarray(var_c5e280bb)) {

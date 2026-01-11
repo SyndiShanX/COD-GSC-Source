@@ -184,8 +184,7 @@ drone_spawngroup(spawnpoint, qFakeDeath, spawnSize, qSightTrace, team) {
     } else {
       if(i > 0 && offsets[i - 1] == offsets[i]) {
         wait(randomfloat(.8, 1.1));
-      }
-      else {
+      } else {
         wait(randomfloat(.5, .9));
       }
       spawnpoint[spawnpoint.size - 1] thread drone_spawn(qFakeDeath, qSightTrace, team, offsets[i]);
@@ -217,8 +216,7 @@ drone_spawn(qFakeDeath, qSightTrace, team, offset, respawner) {
   }
   if(isDefined(offset)) {
     spawnoffset = offset * 2 - 1;
-  }
-  else {
+  } else {
     spawnoffset = 0;
   }
   spawnpos = self.origin;

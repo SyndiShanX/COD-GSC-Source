@@ -34,8 +34,7 @@ init() {
 
   if(level.splitscreen) {
     precachestring(&"MP_ENDED_GAME");
-  }
-  else {
+  } else {
     precachestring(&"MP_HOST_ENDED_GAME");
   }
 }
@@ -171,13 +170,11 @@ menuautoassign(comingfrommenu) {
 
   if(isDefined(level.forceallallies) && level.forceallallies) {
     assignment = "allies";
-  }
-  else if(level.teambased) {
+  } else if(level.teambased) {
     if(getdvarint(#"party_autoteams") == 1) {
       if(level.allow_teamchange == "1" && (self.hasspawned || comingfrommenu)) {
         assignment = "";
-      }
-      else {
+      } else {
         team = getassignedteam(self);
 
         switch (team) {
@@ -200,8 +197,7 @@ menuautoassign(comingfrommenu) {
 
             if(isDefined(level.teams[team])) {
               assignment = team;
-            }
-            else if(team == "spectator" && !level.forceautoassign) {
+            } else if(team == "spectator" && !level.forceautoassign) {
               self setclientscriptmainmenu(game["menu_class"]);
               return;
             }
@@ -212,8 +208,7 @@ menuautoassign(comingfrommenu) {
     if(assignment == "" || getdvarint(#"party_autoteams") == 0) {
       if(sessionmodeiszombiesgame()) {
         assignment = "allies";
-      }
-      else if(maps\mp\bots\_bot::is_bot_comp_stomp()) {
+      } else if(maps\mp\bots\_bot::is_bot_comp_stomp()) {
         host = gethostplayerforbots();
         assert(isDefined(host));
 
@@ -223,8 +218,7 @@ menuautoassign(comingfrommenu) {
 
         if(!self is_bot()) {
           assignment = host.team;
-        }
-        else {
+        } else {
           assignment = getotherteam(host.team);
         }
       } else {
@@ -254,8 +248,7 @@ menuautoassign(comingfrommenu) {
 
       if(isDefined(level.teams[team])) {
         assignment = team;
-      }
-      else if(team == "spectator" && !level.forceautoassign) {
+      } else if(team == "spectator" && !level.forceautoassign) {
         self setclientscriptmainmenu(game["menu_class"]);
         return;
       }
@@ -279,8 +272,7 @@ menuautoassign(comingfrommenu) {
 
   if(level.teambased) {
     self.sessionteam = assignment;
-  }
-  else {
+  } else {
     self.sessionteam = "none";
     self.ffateam = assignment;
   }
@@ -355,8 +347,7 @@ pickteamfromscores(teams) {
 
   if(teamscoresequal()) {
     assignment = teams[randomint(teams.size)];
-  }
-  else {
+  } else {
     assignment = teamwithlowestscore();
   }
 
@@ -392,8 +383,7 @@ updateobjectivetext() {
 
   if(level.scorelimit > 0) {
     self setclientcgobjectivetext(getobjectivescoretext(self.pers["team"]));
-  }
-  else {
+  } else {
     self setclientcgobjectivetext(getobjectivetext(self.pers["team"]));
   }
 }
@@ -422,11 +412,9 @@ beginclasschoice(forcenewchoice) {
 
   if(level.wagermatch) {
     self openmenu(game["menu_changeclass_wager"]);
-  }
-  else if(getdvarint(#"barebones_class_mode")) {
+  } else if(getdvarint(#"barebones_class_mode")) {
     self openmenu(game["menu_changeclass_barebones"]);
-  }
-  else {
+  } else {
     self openmenu(game["menu_changeclass_" + team]);
   }
 }
@@ -437,8 +425,7 @@ showmainmenuforteam() {
 
   if(level.wagermatch) {
     self openmenu(game["menu_changeclass_wager"]);
-  }
-  else {
+  } else {
     self openmenu(game["menu_changeclass_" + team]);
   }
 }
@@ -475,8 +462,7 @@ menuteam(team) {
 
     if(level.teambased) {
       self.sessionteam = team;
-    }
-    else {
+    } else {
       self.sessionteam = "none";
       self.ffateam = team;
     }

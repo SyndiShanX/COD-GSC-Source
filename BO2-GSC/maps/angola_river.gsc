@@ -505,8 +505,7 @@ boat_gunner_damage_override(einflictor, eattacker, idamage, idflags, type, sweap
   if(isDefined(self.is_driver)) {
     if(type == "MOD_EXPLOSIVE" || type == "MOD_PROJECTILE_SPLASH") {
       idamage = 0;
-    }
-    else {
+    } else {
       idamage = int(idamage * 0.33);
     }
   }
@@ -526,8 +525,7 @@ boat_damage_override(einflictor, eattacker, idamage, idflags, type, sweapon, vpo
 
   if(type == "MOD_EXPLOSIVE" || type == "MOD_PROJECTILE_SPLASH") {
     idamage = int(self.healthmax * 0.5);
-  }
-  else if(sweapon == "auto_gun_turret_sp_barge") {
+  } else if(sweapon == "auto_gun_turret_sp_barge") {
     self notify("signature_death");
     idamage = int(self.healthmax * 0.07);
   }
@@ -1140,19 +1138,19 @@ setup_barge(start_node, path_start_delay) {
   a_barge_model_names = array("hind_fly_path", "heli_destination_start", "chase_boat_goal", "woods_container", "barge_jumpto_obj_spot", "barge_ammo_obj_spot", "heli_jump_trigger", "woods_container_clip", "side_damage_clip", "rear_damage_clip", "barge_ladder_blocker_origin", "barge_gl_turret", "barge_barrel_top_trig", "crate_clips", "barrel_fxanim_parent", "barge_avoidance_linker", "barge_collectible", "barge_collectible_trig", "barge_ammo_cache", "bargeback_ammo_cache", "intruder_box", "intruder_box_trig", "barge_cover_back");
 
   foreach(str_name in a_barge_model_names) {
-  self barge_link_model(str_name);
+    self barge_link_model(str_name);
   }
 
   a_avoid_linker = getEntArray("barge_avoidance_linker", "targetname");
 
   foreach(vh_avoid in a_avoid_linker) {
-  vh_avoid setvehicleavoidance(1, 375, 100);
+    vh_avoid setvehicleavoidance(1, 375, 100);
   }
 
   a_turrets = getEntArray("barge_gl_turret", "targetname");
 
   foreach(vh_turret in a_turrets) {
-  vh_turret veh_magic_bullet_shield(1);
+    vh_turret veh_magic_bullet_shield(1);
   }
 
   level thread barge_intruder_box();
@@ -1175,7 +1173,7 @@ setup_barge(start_node, path_start_delay) {
   a_panel_tags = array("TAG_LEFT_SIDE_PANEL_02", "TAG_LEFT_SIDE_PANEL_03", "TAG_RIGHT_SIDE_PANEL_01", "TAG_RIGHT_SIDE_PANEL_02");
 
   foreach(str_tag in a_panel_tags) {
-  level thread setup_barge_side_panel(str_tag);
+    level thread setup_barge_side_panel(str_tag);
   }
 
   woods_truck_trigger = getent("woods_truck_trigger", "targetname");
@@ -1442,15 +1440,13 @@ fire_weapon_on_heli(str_notify, vh_heli) {
   while(true) {
     if(isalive(guards[0])) {
       self thread maps\_turret::fire_turret_for_time(1, 1);
-    }
-    else {
+    } else {
       self maps\_turret::clear_turret_target(1);
     }
 
     if(isalive(guards[1])) {
       self thread maps\_turret::fire_turret_for_time(1, 2);
-    }
-    else {
+    } else {
       self maps\_turret::clear_turret_target(2);
     }
 
@@ -1484,15 +1480,13 @@ fire_weapon_on_ent(str_notify, ent) {
   while(true) {
     if(isalive(guards[0])) {
       self thread maps\_turret::fire_turret_for_time(1, 1);
-    }
-    else {
+    } else {
       self maps\_turret::clear_turret_target(1);
     }
 
     if(isalive(guards[1])) {
       self thread maps\_turret::fire_turret_for_time(1, 2);
-    }
-    else {
+    } else {
       self maps\_turret::clear_turret_target(2);
     }
 
@@ -1745,11 +1739,9 @@ trigger_gun_flak() {
 
     if(type < 40) {
       playFX(level._effect["medium_flak"], flak_spot);
-    }
-    else if(type > 60) {
+    } else if(type > 60) {
       playFX(level._effect["small_flak"], flak_spot);
-    }
-    else {
+    } else {
       playFX(level._effect["large_flak"], flak_spot);
     }
 

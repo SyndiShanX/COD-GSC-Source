@@ -7,7 +7,6 @@
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
 #include scripts\weapons\heatseekingmissile;
-
 #namespace multilockap_guidance;
 
 autoexec __init__system__() {
@@ -115,7 +114,7 @@ on_weapon_change(params) {
 }
 
 aplockloop(weapon) {
-  self endon(#"disconnect", #"death", #"ap_off");
+  self endon(#"disconnect", # "death", # "ap_off");
   locklength = self getlockonspeed();
   self.multilocklist = [];
 
@@ -332,7 +331,7 @@ isstillvalidtarget(weapon, ent) {
 
 seekersound(alias, looping, id) {
   self notify("stop_sound" + id);
-  self endon("stop_sound" + id, #"disconnect", #"death");
+  self endon("stop_sound" + id, # "disconnect", # "death");
 
   if(isDefined(alias)) {
     self playrumbleonentity("stinger_lock_rumble");

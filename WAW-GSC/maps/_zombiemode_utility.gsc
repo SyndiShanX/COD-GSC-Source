@@ -451,8 +451,7 @@ string_to_float(string) {
   }
   if(whole >= 0) {
     return (whole + decimal);
-  }
-  else {
+  } else {
     return (whole - decimal);
   }
 }

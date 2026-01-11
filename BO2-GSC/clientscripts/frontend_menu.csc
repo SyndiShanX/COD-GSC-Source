@@ -29,8 +29,7 @@ setup_ui3d() {
   ui3dsetwindow(5, 0, 0, 0, 0);
 }
 
-menu_video_mapping() {
-}
+menu_video_mapping() {}
 
 menu_auto_start() {
   localclientnum = 0;
@@ -48,8 +47,7 @@ onsuimessage(localclientnum, param1, param2) {
       if(param2 == "down") {
         if(!isluienabled(localclientnum)) {
           luienable(localclientnum, "main");
-        }
-        else {
+        } else {
           luidisable(localclientnum);
         }
       }

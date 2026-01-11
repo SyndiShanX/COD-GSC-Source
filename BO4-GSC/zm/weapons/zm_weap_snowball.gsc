@@ -14,7 +14,6 @@
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_powerups;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_weap_snowball;
 
 autoexec __init__system__() {
@@ -35,8 +34,8 @@ __init__() {
   zm_loadout::register_lethal_grenade_for_level(#"snowball_upgraded");
   zm_loadout::register_lethal_grenade_for_level(#"snowball_yellow");
   zm_loadout::register_lethal_grenade_for_level(#"snowball_yellow_upgraded");
-  clientfield::register("toplayer", "" + #"hash_78aa1dc141a3e27", 24000, 1, "int");
-  clientfield::register("toplayer", "" + #"hash_2fafddfa9f85b8aa", 24000, 1, "int");
+  clientfield::register("toplayer", "" + # "hash_78aa1dc141a3e27", 24000, 1, "int");
+  clientfield::register("toplayer", "" + # "hash_2fafddfa9f85b8aa", 24000, 1, "int");
 }
 
 on_grenade_fired(s_params) {
@@ -47,7 +46,7 @@ on_grenade_fired(s_params) {
     return;
   }
 
-  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", #"explode");
+  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", # "explode");
   a_e_players = getplayers();
   a_e_players = arraysortclosest(a_e_players, s_waitresult.position, 4, 0, 64);
 
@@ -69,7 +68,7 @@ on_grenade_fired(s_params) {
       }
 
       if(isplayer(var_c006f5e9) && var_c006f5e9 != self) {
-        self thread zm_audio::create_and_play_dialog(#"snowball", #"friendly");
+        self thread zm_audio::create_and_play_dialog(#"snowball", # "friendly");
       }
     }
   }
@@ -83,16 +82,16 @@ on_grenade_fired(s_params) {
 
 private function_6e2124f7() {
   self endon(#"disconnect");
-  clientfield::set_to_player("" + #"hash_78aa1dc141a3e27", 1);
+  clientfield::set_to_player("" + # "hash_78aa1dc141a3e27", 1);
   wait 0.5;
-  clientfield::set_to_player("" + #"hash_78aa1dc141a3e27", 0);
+  clientfield::set_to_player("" + # "hash_78aa1dc141a3e27", 0);
 }
 
 private function_2291fc03() {
   self endon(#"disconnect");
-  clientfield::set_to_player("" + #"hash_2fafddfa9f85b8aa", 1);
+  clientfield::set_to_player("" + # "hash_2fafddfa9f85b8aa", 1);
   wait 0.5;
-  clientfield::set_to_player("" + #"hash_2fafddfa9f85b8aa", 0);
+  clientfield::set_to_player("" + # "hash_2fafddfa9f85b8aa", 0);
 }
 
 function_5ff12a45(inflictor, attacker, damage, flags, meansofdeath, weapon, vpoint, vdir, shitloc, psoffsettime, boneindex, surfacetype) {

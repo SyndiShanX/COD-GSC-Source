@@ -323,8 +323,7 @@ friendly_init() {
 
     if(level.console) {
       self._stealth.logic.getvelocity_func = ::friendly_getvelocity;
-    }
-    else {
+    } else {
       self._stealth.logic.getvelocity_func = ::player_getvelocity_pc;
       self._stealth.logic.player_pc_velocity = 0;
     }
@@ -360,15 +359,13 @@ friendly_init() {
 
   if(self ent_flag_exist("_stealth_in_shadow")) {
     self ent_flag_clear("_stealth_in_shadow");
-  }
-  else {
+  } else {
     self ent_flag_init("_stealth_in_shadow");
   }
 
   if(self ent_flag_exist("_stealth_in_foliage")) {
     self ent_flag_clear("_stealth_in_foliage");
-  }
-  else {
+  } else {
     self ent_flag_init("_stealth_in_foliage");
   }
 }
@@ -391,8 +388,7 @@ player_getvelocity_pc() {
 
   if(!velocity) {
     self._stealth.logic.player_pc_velocity = 0;
-  }
-  else if(velocity > self._stealth.logic.player_pc_velocity) {
+  } else if(velocity > self._stealth.logic.player_pc_velocity) {
     self._stealth.logic.player_pc_velocity = self._stealth.logic.player_pc_velocity + add[stance];
 
     if(self._stealth.logic.player_pc_velocity > velocity) {
@@ -423,8 +419,7 @@ friendly_movespeed_calc_loop() {
 
     if(self ent_flag("_stealth_in_shadow")) {
       score = 0;
-    }
-    else {
+    } else {
       score_move = self[[velocity_func]]();
       score_turn = length(oldangles - self[[angles_func]]());
 
@@ -468,9 +463,8 @@ friendly_compute_score(stance) {
   if(!isai(self) && isalive(self)) {
     if(self ent_flag("_stealth_in_foliage")) {
       score_range = [
-    }
-        [maps\_foliage_cover::calculate_foliage_cover]
-      ](stance);
+        }
+        [maps\_foliage_cover::calculate_foliage_cover]](stance);
   }
 
   score_move = self._stealth.logic.movespeed_multiplier[detection_level][stance];
@@ -529,8 +523,7 @@ friendly_compute_stances_player() {
 
     if(self._stealth.logic.stance_change > 0.05) {
       self._stealth.logic.stance_change = self._stealth.logic.stance_change - 0.05;
-    }
-    else {
+    } else {
       self._stealth.logic.stance_change = 0;
       self._stealth.logic.stance = stance;
       self._stealth.logic.oldstance = stance;
@@ -923,8 +916,7 @@ enemy_corpse_logic() {
       if(found) {
         if(!ent_flag("_stealth_found_corpse")) {
           self ent_flag_set("_stealth_found_corpse");
-        }
-        else {
+        } else {
           self notify("_stealth_found_corpse");
         }
 
@@ -936,8 +928,7 @@ enemy_corpse_logic() {
 
         if(!ent_flag("_stealth_saw_corpse")) {
           self ent_flag_set("_stealth_saw_corpse");
-        }
-        else {
+        } else {
           self notify("_stealth_saw_corpse");
         }
 
@@ -971,8 +962,7 @@ enemy_corpse_death() {
 
   if(isinarray(level._stealth.enviroment, "foliage") && isDefined(self maps\_foliage_cover::get_current_foliage_trigger())) {
     corpse.hidden_in_foliage = 1;
-  }
-  else {
+  } else {
     corpse.hidden_in_foliage = 0;
   }
 
@@ -1025,8 +1015,7 @@ enemy_corpse_found(corpse) {
 
   if(!flag("_stealth_found_corpse")) {
     flag_set("_stealth_found_corpse");
-  }
-  else {
+  } else {
     level notify("_stealth_found_corpse");
   }
 
@@ -1054,8 +1043,7 @@ enemy_corpse_alert_level() {
 
   if(isDefined(self.enemy)) {
     enemy = self.enemy;
-  }
-  else {
+  } else {
     enemy = get_closest_player(self.origin);
   }
 

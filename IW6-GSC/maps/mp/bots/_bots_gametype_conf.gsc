@@ -60,8 +60,7 @@ bot_conf_debug() {
                 lineColor = undefined;
                 if(player.team != tag.tag.victim.team) {
                   lineColor = (1, 0, 0);
-                }
-                else {
+                } else {
                   lineColor = (0, 0, 1);
                 }
                 line(tag.tag.curorigin, player.origin + (0, 0, 20), lineColor, 1.0, true);
@@ -311,16 +310,14 @@ bot_find_visible_tags(require_los, optional_nearest_node_self, optional_fov_self
   nearest_node_self = undefined;
   if(isDefined(optional_nearest_node_self)) {
     nearest_node_self = optional_nearest_node_self;
-  }
-  else {
+  } else {
     nearest_node_self = self GetNearestNode();
   }
 
   fov_self = undefined;
   if(isDefined(optional_fov_self)) {
     fov_self = optional_fov_self;
-  }
-  else {
+  } else {
     fov_self = self BotGetFovDot();
   }
 

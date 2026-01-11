@@ -43,7 +43,6 @@
 #include scripts\mp_common\teams\teams;
 #include scripts\mp_common\userspawnselection;
 #include scripts\mp_common\util;
-
 #namespace globallogic_spawn;
 
 autoexec __init__system__() {
@@ -61,23 +60,23 @@ __init__() {
     #entityname: "mp_t8_spawn_point"
   });
 
-  if(level.gametype == #"dom") {
+  if(level.gametype == # "dom") {
     array::add(level.spawnentitytypes, {
-      #team: #"allies",
+      #team: # "allies",
       #entityname: "mp_t8_spawn_point"
     });
     array::add(level.spawnentitytypes, {
-      #team: #"axis",
+      #team: # "axis",
       #entityname: "mp_t8_spawn_point"
     });
   }
 
   array::add(level.spawnentitytypes, {
-    #team: #"allies",
+    #team: # "allies",
     #entityname: "mp_t8_spawn_point_allies"
   });
   array::add(level.spawnentitytypes, {
-    #team: #"axis",
+    #team: # "axis",
     #entityname: "mp_t8_spawn_point_axis"
   });
   level.allspawnpoints = [];
@@ -94,75 +93,75 @@ getmpspawnpoints() {
 
 function_82ca1565(spawnpoint, gametype) {
   switch (gametype) {
-    case #"ffa":
+    case # "ffa":
       return (isDefined(spawnpoint.ffa) && spawnpoint.ffa);
-    case #"sd":
+    case # "sd":
       return (isDefined(spawnpoint.sd) && spawnpoint.sd);
-    case #"ctf":
+    case # "ctf":
       return (isDefined(spawnpoint.ctf) && spawnpoint.ctf);
-    case #"dom":
+    case # "dom":
       return (isDefined(spawnpoint.domination) && spawnpoint.domination);
-    case #"dem":
+    case # "dem":
       return (isDefined(spawnpoint.demolition) && spawnpoint.demolition);
-    case #"gg":
+    case # "gg":
       return (isDefined(spawnpoint.gg) && spawnpoint.gg);
-    case #"tdm":
+    case # "tdm":
       return (isDefined(spawnpoint.tdm) && spawnpoint.tdm);
-    case #"infil":
+    case # "infil":
       return (isDefined(spawnpoint.infiltration) && spawnpoint.infiltration);
-    case #"control":
+    case # "control":
       return (isDefined(spawnpoint.control) && spawnpoint.control);
-    case #"uplink":
+    case # "uplink":
       return (isDefined(spawnpoint.uplink) && spawnpoint.uplink);
-    case #"kc":
+    case # "kc":
       return (isDefined(spawnpoint.kc) && spawnpoint.kc);
-    case #"koth":
+    case # "koth":
       return (isDefined(spawnpoint.hardpoint) && spawnpoint.hardpoint);
-    case #"frontline":
+    case # "frontline":
       return (isDefined(spawnpoint.frontline) && spawnpoint.frontline);
-    case #"dom_flag_a":
+    case # "dom_flag_a":
       return (isDefined(spawnpoint.domination_flag_a) && spawnpoint.domination_flag_a);
-    case #"dom_flag_b":
+    case # "dom_flag_b":
       return (isDefined(spawnpoint.domination_flag_b) && spawnpoint.domination_flag_b);
-    case #"dom_flag_c":
+    case # "dom_flag_c":
       return (isDefined(spawnpoint.domination_flag_c) && spawnpoint.domination_flag_c);
-    case #"hash_6056c310624d5afd":
+    case # "hash_6056c310624d5afd":
       return (isDefined(spawnpoint.demolition_attacker_a) && spawnpoint.demolition_attacker_a);
-    case #"hash_6056c010624d55e4":
+    case # "hash_6056c010624d55e4":
       return (isDefined(spawnpoint.demolition_attacker_b) && spawnpoint.demolition_attacker_b);
-    case #"hash_6ef2d89ce8ee9a32":
+    case # "hash_6ef2d89ce8ee9a32":
       return (isDefined(spawnpoint.demolition_remove_a) && spawnpoint.demolition_remove_a);
-    case #"hash_6ef2d79ce8ee987f":
+    case # "hash_6ef2d79ce8ee987f":
       return (isDefined(spawnpoint.demolition_remove_b) && spawnpoint.demolition_remove_b);
-    case #"dem_overtime":
+    case # "dem_overtime":
       return (isDefined(spawnpoint.demolition_overtime) && spawnpoint.demolition_overtime);
-    case #"hash_7cb9d0a58715cebe":
+    case # "hash_7cb9d0a58715cebe":
       return (isDefined(spawnpoint.demolition_start_spawn) && spawnpoint.demolition_start_spawn);
-    case #"hash_6d83e5f1bdefa7dd":
+    case # "hash_6d83e5f1bdefa7dd":
       return (isDefined(spawnpoint.demolition_defender_a) && spawnpoint.demolition_defender_a);
-    case #"hash_6d83e2f1bdefa2c4":
+    case # "hash_6d83e2f1bdefa2c4":
       return (isDefined(spawnpoint.demolition_defender_b) && spawnpoint.demolition_defender_b);
-    case #"control_attack_add_0":
+    case # "control_attack_add_0":
       return (isDefined(spawnpoint.control_attack_add_a) && spawnpoint.control_attack_add_a);
-    case #"control_attack_add_1":
+    case # "control_attack_add_1":
       return (isDefined(spawnpoint.control_attack_add_b) && spawnpoint.control_attack_add_b);
-    case #"control_attack_remove_0":
+    case # "control_attack_remove_0":
       return (isDefined(spawnpoint.control_attack_remove_a) && spawnpoint.control_attack_remove_a);
-    case #"control_attack_remove_1":
+    case # "control_attack_remove_1":
       return (isDefined(spawnpoint.control_attack_remove_b) && spawnpoint.control_attack_remove_b);
-    case #"control_defend_add_0":
+    case # "control_defend_add_0":
       return (isDefined(spawnpoint.registerlast_mapshouldstun) && spawnpoint.registerlast_mapshouldstun);
-    case #"control_defend_add_1":
+    case # "control_defend_add_1":
       return (isDefined(spawnpoint.control_defend_add_b) && spawnpoint.control_defend_add_b);
-    case #"control_defend_remove_0":
+    case # "control_defend_remove_0":
       return (isDefined(spawnpoint.control_defend_remove_a) && spawnpoint.control_defend_remove_a);
-    case #"control_defend_remove_1":
+    case # "control_defend_remove_1":
       return (isDefined(spawnpoint.control_defend_remove_b) && spawnpoint.control_defend_remove_b);
-    case #"ct":
+    case # "ct":
       return (isDefined(spawnpoint.ct) && spawnpoint.ct);
-    case #"escort":
+    case # "escort":
       return (isDefined(spawnpoint.escort) && spawnpoint.escort);
-    case #"bounty":
+    case # "bounty":
       return (isDefined(spawnpoint.bounty) && spawnpoint.bounty);
     default:
       assertmsg("<dev string:x38>" + gametype + "<dev string:x46>" + spawnpoint.origin[0] + "<dev string:x71>" + spawnpoint.origin[1] + "<dev string:x78>" + spawnpoint.origin[2]);
@@ -377,11 +376,11 @@ function_8acd9309() {
     level.spawn_start = [];
   }
 
-  if(!isDefined(level.spawn_start[#"free"])) {
-    level.spawn_start[#"free"] = [];
+  if(!isDefined(level.spawn_start[# "free"])) {
+    level.spawn_start[# "free"] = [];
   }
 
-  level.spawn_start[#"free"] = arraycombine(level.spawn_start[#"free"], startspawns, 0, 0);
+  level.spawn_start[# "free"] = arraycombine(level.spawn_start[# "free"], startspawns, 0, 0);
 }
 
 addspawns() {
@@ -443,8 +442,8 @@ timeuntilspawn(includeteamkilldelay) {
       respawndelay = level.playerrespawndelay;
     }
 
-    if(isDefined(level.playerincrementalrespawndelay) && isDefined(self.pers[#"spawns"])) {
-      respawndelay += level.playerincrementalrespawndelay * self.pers[#"spawns"];
+    if(isDefined(level.playerincrementalrespawndelay) && isDefined(self.pers[# "spawns"])) {
+      respawndelay += level.playerincrementalrespawndelay * self.pers[# "spawns"];
     }
 
     if(isDefined(self.suicide) && self.suicide && level.suicidespawndelay > 0) {
@@ -493,7 +492,7 @@ allteamshaveexisted() {
 
 function_38527849() {
   if(level.numlives || level.numteamlives) {
-    if(level.numlives && !self.pers[#"lives"]) {
+    if(level.numlives && !self.pers[# "lives"]) {
       return false;
     } else if(!level.numlives && level.numteamlives && game.lives[self.team] <= 0) {
       return false;
@@ -551,8 +550,8 @@ function_ac5b273c(minimumwait) {
 
 timeuntilwavespawn(minimumwait) {
   earliestspawntime = gettime() + int(minimumwait * 1000);
-  lastwavetime = level.lastwave[self.pers[#"team"]];
-  wavedelay = int(level.wavedelay[self.pers[#"team"]] * 1000);
+  lastwavetime = level.lastwave[self.pers[# "team"]];
+  wavedelay = int(level.wavedelay[self.pers[# "team"]] * 1000);
 
   if(wavedelay == 0) {
     return 0;
@@ -578,9 +577,9 @@ stoppoisoningandflareonspawn() {
 }
 
 spawnplayerprediction() {
-  self endon(#"disconnect", #"end_respawn", #"game_ended", #"joined_spectators", #"spawned");
+  self endon(#"disconnect", # "end_respawn", # "game_ended", # "joined_spectators", # "spawned");
   plrs = teams::count_players();
-  nolivesleft = level.numlives && !self.pers[#"lives"] || level.numteamlives && game.lives[self.team] > 0;
+  nolivesleft = level.numlives && !self.pers[# "lives"] || level.numteamlives && game.lives[self.team] > 0;
 
   if(nolivesleft) {
     return;
@@ -599,7 +598,7 @@ playmatchstartaudio(team) {
     waitframe(1);
   }
 
-  if(self.pers[#"playedgamemode"] !== 1) {
+  if(self.pers[# "playedgamemode"] !== 1) {
     if(level.hardcoremode) {
       if(globallogic_utils::function_308e3379()) {
         self globallogic_audio::leader_dialog_on_player(level.leaderdialog.var_d04b3734);
@@ -612,7 +611,7 @@ playmatchstartaudio(team) {
       self globallogic_audio::leader_dialog_on_player(level.leaderdialog.startgamedialog);
     }
 
-    self.pers[#"playedgamemode"] = 1;
+    self.pers[# "playedgamemode"] = 1;
   }
 
   if(team == game.attackers) {
@@ -632,14 +631,14 @@ doinitialspawnmessaging(params = undefined) {
   }
 
   if(level.gametype !== "bounty") {
-    if(isDefined(self.pers[#"music"].spawn) && self.pers[#"music"].spawn == 0) {
+    if(isDefined(self.pers[# "music"].spawn) && self.pers[# "music"].spawn == 0) {
       if(game.roundsplayed == 0) {
         self thread globallogic_audio::set_music_on_player("spawnFull");
       } else {
         self thread globallogic_audio::set_music_on_player("spawnShort");
       }
 
-      self.pers[#"music"].spawn = 1;
+      self.pers[# "music"].spawn = 1;
     }
   }
 
@@ -654,7 +653,7 @@ doinitialspawnmessaging(params = undefined) {
   self.playleaderdialog = 1;
 
   if(isDefined(level.leaderdialog)) {
-    self thread playmatchstartaudio(self.pers[#"team"]);
+    self thread playmatchstartaudio(self.pers[# "team"]);
   }
 
   pixendevent();
@@ -666,7 +665,7 @@ resetattackersthisspawnlist() {
 
 spawnplayer() {
   pixbeginevent(#"spawnplayer_preuts");
-  self endon(#"disconnect", #"joined_spectators");
+  self endon(#"disconnect", # "joined_spectators");
   hadspawned = self.hasspawned;
   self player::spawn_player();
 
@@ -715,7 +714,7 @@ spawnplayer() {
   role = self player_role::get();
   assert(!loadout::function_87bcb1b() || globallogic_utils::isvalidclass(self.curclass));
   assert(player_role::is_valid(role));
-  self.pers[#"momentum_at_spawn_or_game_end"] = isDefined(self.pers[#"momentum"]) ? self.pers[#"momentum"] : 0;
+  self.pers[# "momentum_at_spawn_or_game_end"] = isDefined(self.pers[# "momentum"]) ? self.pers[# "momentum"] : 0;
 
   if(loadout::function_87bcb1b()) {
     self loadout::function_53b62db1(self.curclass);
@@ -740,15 +739,15 @@ spawnplayer() {
     var_f8e6b703 = self match_record::get_player_stat(#"hash_ec4aea1a8bbd82");
 
     if(isDefined(var_f8e6b703)) {
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_gender", gender);
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_decal_lootid", decallootid);
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_outfit_lootid", var_be574bd8);
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_warpaint_lootid", var_8fa79650);
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_outfit", outfitindex);
-      self match_record::set_stat(#"lives", var_f8e6b703, #"character_warpaint_outfit", warpaintoutfitindex);
+      self match_record::set_stat(#"lives", var_f8e6b703, # "character_gender", gender);
+      self match_record::set_stat(#"lives", var_f8e6b703, # "character_decal_lootid", decallootid);
+      self match_record::set_stat(#"lives", var_f8e6b703, # "character_outfit_lootid", var_be574bd8);
+      self match_record::set_stat(#"lives", var_f8e6b703, # "character_warpaint_lootid", var_8fa79650);
+      self match_record::set_stat(#"lives", var_f8e6b703, # "character_outfit", outfitindex);
+      self match_record::set_stat(#"lives", var_f8e6b703, # "character_warpaint_outfit", warpaintoutfitindex);
 
       for(i = 0; i < var_b3d9cfaa.size; i++) {
-        self match_record::set_stat(#"lives", var_f8e6b703, #"hash_20d6751cb2f9ca09", i, var_b3d9cfaa[i]);
+        self match_record::set_stat(#"lives", var_f8e6b703, # "hash_20d6751cb2f9ca09", i, var_b3d9cfaa[i]);
       }
     }
   }
@@ -778,12 +777,12 @@ spawnplayer() {
   }
 
   self.deathtime = 0;
-  self.pers[#"deathtime"] = 0;
+  self.pers[# "deathtime"] = 0;
 
   if(self hasperk(#"specialty_anteup")) {
     anteup_bonus = getdvarint(#"perk_killstreakanteupresetvalue", 0);
 
-    if(self.pers[#"momentum_at_spawn_or_game_end"] < anteup_bonus) {
+    if(self.pers[# "momentum_at_spawn_or_game_end"] < anteup_bonus) {
       globallogic_score::_setplayermomentum(self, anteup_bonus, 0);
     }
   }
@@ -806,9 +805,9 @@ spawnplayer() {
     pixendevent();
   }
 
-    if(isDefined(self.pers[#"momentum"])) {
-      self.momentum = self.pers[#"momentum"];
-    }
+  if(isDefined(self.pers[# "momentum"])) {
+    self.momentum = self.pers[# "momentum"];
+  }
 
   self callback::function_d8abfc3d(#"on_end_game", &on_end_game);
   self setsprintboost(0);
@@ -820,7 +819,7 @@ spawnplayer() {
 
   print("<dev string:xdb>" + self.origin[0] + "<dev string:xe0>" + self.origin[1] + "<dev string:xe0>" + self.origin[2] + "<dev string:xe4>");
 
-    setdvar(#"scr_selecting_location", "");
+  setdvar(#"scr_selecting_location", "");
 
   if(gamestate::is_game_over()) {
     assert(!level.intermission);
@@ -831,7 +830,7 @@ spawnplayer() {
 }
 
 on_end_game() {
-  self.pers[#"momentum_at_spawn_or_game_end"] = isDefined(self.pers[#"momentum"]) ? self.pers[#"momentum"] : 0;
+  self.pers[# "momentum_at_spawn_or_game_end"] = isDefined(self.pers[# "momentum"]) ? self.pers[# "momentum"] : 0;
 }
 
 spawnspectator(origin, angles) {
@@ -845,7 +844,7 @@ respawn_asspectator(origin, angles) {
 }
 
 function_3ee5119e() {
-  if(self.pers[#"team"] != #"spectator" && level.spectatetype == 4 && self.spectatorteam == #"invalid") {
+  if(self.pers[# "team"] != # "spectator" && level.spectatetype == 4 && self.spectatorteam == # "invalid") {
     team_players = getplayers(self.team);
 
     foreach(player in team_players) {
@@ -857,7 +856,7 @@ function_3ee5119e() {
     }
 
     foreach(player in team_players) {
-      if(player != self && player.spectatorteam != #"invalid") {
+      if(player != self && player.spectatorteam != # "invalid") {
         self.spectatorteam = player.spectatorteam;
         println("<dev string:xe8>" + player.spectatorteam + "<dev string:x105>" + self.name + "<dev string:x10d>" + self.team + "<dev string:x11f>" + player.name + "<dev string:x137>");
         return;
@@ -879,13 +878,13 @@ in_spawnspectator(origin, angles) {
   self.spectatekillcam = 0;
   self.friendlydamage = undefined;
 
-  if(self.pers[#"team"] == #"spectator") {
+  if(self.pers[# "team"] == # "spectator") {
     self.statusicon = "";
   } else {
     self.statusicon = "hud_status_dead";
   }
 
-  if(level.spectatetype != 4 || self.pers[#"team"] == #"spectator") {
+  if(level.spectatetype != 4 || self.pers[# "team"] == # "spectator") {
     self.spectatorclient = -1;
     spectating::set_permissions_for_machine();
   }
@@ -902,14 +901,14 @@ in_spawnspectator(origin, angles) {
 }
 
 spectatorthirdpersonness() {
-  self endon(#"disconnect", #"spawned");
+  self endon(#"disconnect", # "spawned");
   self notify(#"spectator_thirdperson_thread");
   self endon(#"spectator_thirdperson_thread");
   self.spectatingthirdperson = 0;
 }
 
 forcespawn(time) {
-  self endon(#"death", #"disconnect", #"spawned");
+  self endon(#"death", # "disconnect", # "spawned");
 
   if(!isDefined(time)) {
     time = 60;
@@ -921,13 +920,13 @@ forcespawn(time) {
     return;
   }
 
-  if(self.pers[#"team"] == #"spectator") {
+  if(self.pers[# "team"] == # "spectator") {
     return;
   }
 
-  if(!globallogic_utils::isvalidclass(self.pers[#"class"])) {
-    self.pers[#"class"] = "CLASS_CUSTOM1";
-    self.curclass = self.pers[#"class"];
+  if(!globallogic_utils::isvalidclass(self.pers[# "class"])) {
+    self.pers[# "class"] = "CLASS_CUSTOM1";
+    self.curclass = self.pers[# "class"];
   }
 
   if(!function_8b1a219a()) {
@@ -942,15 +941,15 @@ kickifdontspawn() {
     return;
   }
 
-    if(self ishost()) {
-      return;
-    }
+  if(self ishost()) {
+    return;
+  }
 
   self kickifidontspawninternal();
 }
 
 kickifidontspawninternal() {
-  self endon(#"death", #"disconnect", #"spawned");
+  self endon(#"death", # "disconnect", # "spawned");
 
   while(true) {
     if(!(isDefined(level.inprematchperiod) && level.inprematchperiod) && self isstreamerready()) {
@@ -988,11 +987,11 @@ kickifidontspawninternal() {
     return;
   }
 
-  if(self.pers[#"team"] == #"spectator") {
+  if(self.pers[# "team"] == # "spectator") {
     return;
   }
 
-  if(!mayspawn() && self.pers[#"time_played_total"] > 0) {
+  if(!mayspawn() && self.pers[# "time_played_total"] > 0) {
     return;
   }
 
@@ -1107,7 +1106,7 @@ allteamsnearscorelimit() {
   }
 
   foreach(team, _ in level.teams) {
-    if(!(game.stat[#"teamscores"][team] >= level.scorelimit - 1)) {
+    if(!(game.stat[# "teamscores"][team] >= level.scorelimit - 1)) {
       return false;
     }
   }
@@ -1137,7 +1136,7 @@ shouldshowrespawnmessage() {
 
 default_spawnmessage() {
   if(util::getroundsplayed() + 1 < level.roundlimit) {
-    hud_message::setlowermessage(game.strings[#"spawn_next_round"]);
+    hud_message::setlowermessage(game.strings[# "spawn_next_round"]);
     self thread globallogic_ui::removespawnmessageshortly(3);
   }
 }
@@ -1184,7 +1183,7 @@ spawnclient(timealreadypassed) {
 }
 
 waitandspawnclient(timealreadypassed) {
-  self endon(#"disconnect", #"end_respawn");
+  self endon(#"disconnect", # "end_respawn");
   level endon(#"game_ended");
 
   if(!isDefined(timealreadypassed)) {
@@ -1232,9 +1231,9 @@ waitandspawnclient(timealreadypassed) {
   if(timeuntilspawn > 0) {
     if(!sessionmodeiswarzonegame()) {
       if(level.playerqueuedrespawn) {
-        hud_message::setlowermessage(game.strings[#"you_will_spawn"], timeuntilspawn);
+        hud_message::setlowermessage(game.strings[# "you_will_spawn"], timeuntilspawn);
       } else {
-        hud_message::setlowermessage(game.strings[#"waiting_to_spawn"], timeuntilspawn);
+        hud_message::setlowermessage(game.strings[# "waiting_to_spawn"], timeuntilspawn);
       }
     }
 
@@ -1242,9 +1241,7 @@ waitandspawnclient(timealreadypassed) {
       spawnorigin = self.origin + (0, 0, 60);
       spawnangles = self.angles;
 
-      if(isDefined(level.useintermissionpointsonwavespawn) && [
-          [level.useintermissionpointsonwavespawn]
-        ]() == 1) {
+      if(isDefined(level.useintermissionpointsonwavespawn) && [[level.useintermissionpointsonwavespawn]]() == 1) {
         spawnpoint = spawning::get_random_intermission_point();
 
         if(isDefined(spawnpoint)) {
@@ -1270,7 +1267,7 @@ waitandspawnclient(timealreadypassed) {
   wavebased = level.waverespawndelay > 0;
 
   if(!level.playerforcerespawn && self.hasspawned && !wavebased && !self.wantsafespawn && !level.playerqueuedrespawn) {
-    hud_message::setlowermessage(game.strings[#"press_to_spawn"]);
+    hud_message::setlowermessage(game.strings[# "press_to_spawn"]);
 
     if(!spawnedasspectator) {
       self thread respawn_asspectator(self.origin + (0, 0, 60), self.angles);
@@ -1284,7 +1281,7 @@ waitandspawnclient(timealreadypassed) {
   self hud_message::clearlowermessage();
   self.wavespawnindex = undefined;
   self.respawntimerstarttime = undefined;
-  self.pers[#"spawns"]++;
+  self.pers[# "spawns"]++;
   self thread[[level.spawnplayer]]();
 }
 
@@ -1294,9 +1291,9 @@ function_6c23d45b(time, notifyname) {
 
   while(timeleft > 0) {
     if(level.playerqueuedrespawn) {
-      hud_message::setlowermessage(game.strings[#"you_will_spawn"], timeleft);
+      hud_message::setlowermessage(game.strings[# "you_will_spawn"], timeleft);
     } else {
-      hud_message::setlowermessage(game.strings[#"waiting_to_spawn"], timeleft);
+      hud_message::setlowermessage(game.strings[# "waiting_to_spawn"], timeleft);
     }
 
     if(timeleft > 0 && timeleft < 1) {
@@ -1310,7 +1307,7 @@ function_6c23d45b(time, notifyname) {
 }
 
 waitrespawnorsafespawnbutton() {
-  self endon(#"disconnect", #"end_respawn");
+  self endon(#"disconnect", # "end_respawn");
 
   while(true) {
     if(self usebuttonpressed()) {
@@ -1322,7 +1319,7 @@ waitrespawnorsafespawnbutton() {
 }
 
 waitinspawnqueue() {
-  self endon(#"disconnect", #"end_respawn");
+  self endon(#"disconnect", # "end_respawn");
 
   if(!level.ingraceperiod && !level.usestartspawns) {
     currentorigin = self.origin;

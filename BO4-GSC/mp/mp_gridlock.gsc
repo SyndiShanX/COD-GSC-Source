@@ -12,7 +12,6 @@
 #include scripts\mp\mp_gridlock_sound;
 #include scripts\mp_common\gametypes\globallogic_spawn;
 #include scripts\mp_common\load;
-
 #namespace mp_gridlock;
 
 event_handler[level_init] main(eventstruct) {

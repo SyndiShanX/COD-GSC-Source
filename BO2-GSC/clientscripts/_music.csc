@@ -198,8 +198,7 @@ transitionout(previous, next) {
       if(waittilldone) {
         samestate = waitwithstatechangecheck(fadeoutloop);
       }
-    } else {
-    }
+    } else {}
   }
 
   if(id != 0 && samestate) {

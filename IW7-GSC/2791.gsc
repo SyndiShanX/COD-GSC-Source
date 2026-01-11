@@ -5,14 +5,14 @@
 
 func_D9AB() {
   foreach(var_01 in level.placement["all"]) {
-  var_01 func_F7F8();
+    var_01 func_F7F8();
   }
 
   if(level.multiteambased) {
     func_3219("multiteam");
 
     foreach(var_01 in level.players) {
-    var_01 setrankedplayerdata("common", "round", "scoreboardType", "multiteam");
+      var_01 setrankedplayerdata("common", "round", "scoreboardType", "multiteam");
     }
 
     setclientmatchdata("alliesScore", -1);
@@ -42,8 +42,7 @@ func_D9AB() {
       } else {
         if("allies" == game["timeToBeatTeam"]) {
           var_5++;
-        }
-        else {
+        } else {
           var_6++;
         }
 
@@ -55,8 +54,7 @@ func_D9AB() {
       var_11 = "tied";
     else if(var_05 > var_06) {
       var_11 = "allies";
-    }
-    else {
+    } else {
       var_11 = "axis";
     }
 
@@ -86,14 +84,14 @@ func_D9AB() {
       func_3219(var_11);
 
       foreach(var_01 in level.players) {
-      var_01 setrankedplayerdata("common", "round", "scoreboardType", var_11);
+        var_01 setrankedplayerdata("common", "round", "scoreboardType", var_11);
       }
     }
   } else {
     func_3219("neutral");
 
     foreach(var_01 in level.players) {
-    var_01 setrankedplayerdata("common", "round", "scoreboardType", "neutral");
+      var_01 setrankedplayerdata("common", "round", "scoreboardType", "neutral");
     }
 
     setclientmatchdata("alliesScore", -1);
@@ -123,8 +121,7 @@ func_F7F8() {
 
     if(level.gametype == "dm" || level.gametype == "gun") {
       var_02 = self.assists;
-    }
-    else {
+    } else {
       var_02 = self.pers["assists"];
     }
 

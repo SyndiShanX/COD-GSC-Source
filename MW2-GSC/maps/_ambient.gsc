@@ -76,9 +76,9 @@ init() {
 
   create_ambience_hud();
 
-    if(!isDefined(level.ambientEventEnt)) {
-      level.ambientEventEnt = [];
-    }
+  if(!isDefined(level.ambientEventEnt)) {
+    level.ambientEventEnt = [];
+  }
 
   if(!isDefined(level.ambient_reverb)) {
     level.ambient_reverb = [];
@@ -157,7 +157,7 @@ create_ambient_event(track, min_time, max_time) {
 
   event thread assert_event_has_aliases();
 
-    return event;
+  return event;
 }
 
 assert_event_has_aliases() {
@@ -402,8 +402,7 @@ use_eq_settings(track, eqIndex) {
       for(band = 0; band < 3; band++) {
         if(isDefined(filter["type"][band])) {
           level.player seteq(channel, eqIndex, band, filter["type"][band], filter["gain"][band], filter["freq"][band], filter["q"][band]);
-        }
-        else {
+        } else {
           level.player deactivateeq(eqIndex, channel, band);
         }
       }
@@ -433,11 +432,10 @@ start_ambient_event(track) {
 
   set_hud_track("event_system", track);
 
-    if(!isDefined(level.player.soundEnt)) {
-      level.player.soundEnt = spawn("script_origin", (0, 0, 0));
-      level.player.soundEnt.playingSound = false;
-    }
-  else {
+  if(!isDefined(level.player.soundEnt)) {
+    level.player.soundEnt = spawn("script_origin", (0, 0, 0));
+    level.player.soundEnt.playingSound = false;
+  } else {
     if(level.player.soundEnt.playingSound) {
       level.player.soundEnt waittill("sounddone");
     }
@@ -576,7 +574,7 @@ ambient_trigger() {
   check_ambience(inner_ambience);
   check_ambience(outer_ambience);
 
-    cap = 0.5;
+  cap = 0.5;
   if(isDefined(self.targetname) && self.targetname == "ambient_exit") {
     cap = 0;
   }
@@ -606,8 +604,7 @@ ambient_trigger() {
 
     if(progress > cap) {
       progress = 1;
-    }
-    else {
+    } else {
       progress = 0;
     }
 
@@ -730,9 +727,9 @@ set_ambience_blend(progress, inner_ambience, outer_ambience) {
 
   ambience_hud(progress);
 
-    if(progress == 1 || progress == 0) {
-      level.nextmsg = 0;
-    }
+  if(progress == 1 || progress == 0) {
+    level.nextmsg = 0;
+  }
 
   if(!isDefined(level.nextmsg)) {
     level.nextmsg = 0;
@@ -970,9 +967,8 @@ set_ambience_blend_over_time(time, inner_ambience, outer_ambience) {
 
   // is progress 0 on the first iteration? it shouldn't be
   for(;;) {
-  // for( progress = 0; progress < 1; progress += update_amount )
-  }
-  {
+    // for( progress = 0; progress < 1; progress += update_amount )
+  } {
     progress = progress + update_amount;
 
     if(progress >= 1) {

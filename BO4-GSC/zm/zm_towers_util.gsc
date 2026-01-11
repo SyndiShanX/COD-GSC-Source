@@ -12,7 +12,6 @@
 #include scripts\zm_common\zm_magicbox;
 #include scripts\zm_common\zm_perks;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_towers_util;
 
 function_ae1b4f5b(var_6888276a = 75, var_7d866d50 = 75, var_aadd0545 = 75) {
@@ -176,12 +175,12 @@ private function_fcf197fa(targetname, b_show) {
           foreach(var_1d6a70e8 in var_6a2895e6) {
             if(isDefined(var_1d6a70e8.objectid) && !var_1d6a70e8 zm_utility::function_1a4d2910()) {
               switch (var_1d6a70e8.objectid) {
-                case #"symbol_back_debris":
-                case #"symbol_front_power":
-                case #"symbol_back":
-                case #"symbol_front":
-                case #"symbol_front_debris":
-                case #"symbol_back_power":
+                case # "symbol_back_debris":
+                case # "symbol_front_power":
+                case # "symbol_back":
+                case # "symbol_front":
+                case # "symbol_front_debris":
+                case # "symbol_back_power":
                   if(b_show) {
                     var_1d6a70e8 show();
                   } else {
@@ -225,7 +224,7 @@ function_c05cc102(s_params) {
     return;
   }
 
-  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", #"explode", #"death");
+  s_waitresult = s_params.projectile waittill(#"projectile_impact_explode", # "explode", # "death");
 
   if(isDefined(s_params.projectile) && s_waitresult._notify == "death") {
     level notify(#"hash_3042a9bf2f57ea0a", {

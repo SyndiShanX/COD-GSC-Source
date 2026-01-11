@@ -192,8 +192,7 @@ drone_target_search(hardpointtype) {
 
     if(searchcounter < searchdotprodminimums.size - 1) {
       searchcounter++;
-    }
-    else if(level.missile_drone_origin[2] != self.goal.origin[2]) {
+    } else if(level.missile_drone_origin[2] != self.goal.origin[2]) {
       currentangles = self.angles;
       direction = vectornormalize(anglesToForward(self.angles));
       direction = vecscale(direction, 1024);
@@ -279,11 +278,9 @@ projectile_find_target(owner, mincos) {
 
   if(isDefined(ks) && !isDefined(player)) {
     return ks;
-  }
-  else if(!isDefined(ks) && isDefined(player)) {
+  } else if(!isDefined(ks) && isDefined(player)) {
     return player;
-  }
-  else if(isDefined(ks) && isDefined(player)) {
+  } else if(isDefined(ks) && isDefined(player)) {
     if(player["dotprod"] < ks["dotprod"]) {
       return ks;
     }
@@ -336,8 +333,7 @@ projectile_find_target_killstreak(owner, mincos) {
 
       if(isDefined(target.sorteddotprod)) {
         ks["dotprod"] = target.sorteddotprod;
-      }
-      else {
+      } else {
         ks["dotprod"] = -1;
       }
 
@@ -422,8 +418,7 @@ projectile_find_target_player(owner, mincos) {
 
       if(isDefined(player.sorteddotprod)) {
         target["dotprod"] = player.sorteddotprod;
-      }
-      else {
+      } else {
         target["dotprod"] = -1;
       }
 
@@ -493,8 +488,7 @@ watchdamage() {
     if(self.owner isenemyplayer(attacker)) {
       maps\mp\_scoreevents::processscoreevent("destroyed_missile_drone", attacker, self.owner, weaponname);
       attacker maps\mp\_challenges::addflyswatterstat(weaponname, self);
-    } else {
-    }
+    } else {}
 
     self detonate();
   }

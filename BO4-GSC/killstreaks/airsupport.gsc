@@ -11,7 +11,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreakrules_shared;
 #include scripts\weapons\weapons;
-
 #namespace airsupport;
 
 init_shared() {
@@ -31,19 +30,19 @@ init_shared() {
       util::error("<dev string:x38>");
     }
 
-      airsupport_heights = getEntArray("air_support_height", "targetname");
+    airsupport_heights = getEntArray("air_support_height", "targetname");
 
     if(airsupport_heights.size > 0) {
       util::error("<dev string:x76>");
     }
 
-      heli_height_meshes = getEntArray("heli_height_lock", "classname");
+    heli_height_meshes = getEntArray("heli_height_lock", "classname");
 
     if(heli_height_meshes.size > 1) {
       util::error("<dev string:xdb>");
     }
 
-      callback::on_spawned(&clearmonitoredspeed);
+    callback::on_spawned(&clearmonitoredspeed);
     callback::on_finalize_initialization(&function_3675de8b);
   }
 }
@@ -74,7 +73,7 @@ function_83904681(location, usedcallback, killstreakname) {
         self[[level.var_1492d026]](killstreakname, team, killstreak_id);
       }
 
-      self stats::function_e24eec31(params.ksweapon, #"used", 1);
+      self stats::function_e24eec31(params.ksweapon, # "used", 1);
     }
 
     return self[[usedcallback]](location, killstreak_id);
@@ -84,13 +83,13 @@ function_83904681(location, usedcallback, killstreakname) {
 }
 
 endselectionongameend() {
-  self endon(#"death", #"disconnect", #"cancel_location", #"used", #"host_migration_begin");
+  self endon(#"death", # "disconnect", # "cancel_location", # "used", # "host_migration_begin");
   level waittill(#"game_ended");
   self notify(#"game_ended");
 }
 
 endselectiononhostmigration() {
-  self endon(#"death", #"disconnect", #"cancel_location", #"used", #"game_ended");
+  self endon(#"death", # "disconnect", # "cancel_location", # "used", # "game_ended");
   level waittill(#"host_migration_begin");
   self notify(#"cancel_location");
 }
@@ -102,7 +101,7 @@ endselectionthink() {
   assert(self.selectinglocation == 1);
   self thread endselectionongameend();
   self thread endselectiononhostmigration();
-  event = self waittill(#"delete", #"death", #"disconnect", #"cancel_location", #"game_ended", #"used", #"weapon_change", #"emp_jammed");
+  event = self waittill(#"delete", # "death", # "disconnect", # "cancel_location", # "game_ended", # "used", # "weapon_change", # "emp_jammed");
 
   if(event._notify != "disconnect") {
     self.selectinglocation = undefined;
@@ -115,7 +114,7 @@ endselectionthink() {
 }
 
 clearuplocationselection() {
-  event = self waittill(#"delete", #"death", #"disconnect", #"game_ended", #"used", #"weapon_change", #"emp_jammed", #"weapon_change_complete");
+  event = self waittill(#"delete", # "death", # "disconnect", # "game_ended", # "used", # "weapon_change", # "emp_jammed", # "weapon_change_complete");
 
   if(event._notify != "disconnect" && isDefined(self)) {
     self endlocationselection();
@@ -170,10 +169,10 @@ callstrike(flightplan) {
   assert(flightplan.distance != 0, "<dev string:x16a>");
   planehalfdistance = flightplan.distance / 2;
   path = getstrikepath(flightplan.target, flightplan.height, planehalfdistance);
-  startpoint = path[#"start"];
-  endpoint = path[#"end"];
-  flightplan.height = path[#"height"];
-  direction = path[#"direction"];
+  startpoint = path[# "start"];
+  endpoint = path[# "end"];
+  flightplan.height = path[# "height"];
+  direction = path[# "direction"];
   d = length(startpoint - endpoint);
   flytime = d / flightplan.speed;
   bombtime = calculatereleasetime(flytime, flightplan.height, flightplan.speed, flightplan.bombspeedscale);
@@ -209,9 +208,9 @@ planestrike(owner, requireddeathcount, pathstart, pathend, bombtime, flytime, fl
 
   thread debug_plane_line(flytime, flyspeed, pathstart, pathend);
 
-    if(isDefined(planespawnedfunction)) {
-      plane[[planespawnedfunction]](owner, requireddeathcount, pathstart, pathend, bombtime, bombspeedscale, flytime, flyspeed);
-    }
+  if(isDefined(planespawnedfunction)) {
+    plane[[planespawnedfunction]](owner, requireddeathcount, pathstart, pathend, bombtime, bombspeedscale, flytime, flyspeed);
+  }
 
   wait flytime;
   plane notify(#"delete");
@@ -221,7 +220,7 @@ planestrike(owner, requireddeathcount, pathstart, pathend, bombtime, flytime, fl
 determinegroundpoint(player, position) {
   ground = (position[0], position[1], player.origin[2]);
   trace = bulletTrace(ground + (0, 0, 10000), ground, 0, undefined);
-  return trace[#"position"];
+  return trace[# "position"];
 }
 
 determinetargetpoint(player, position) {
@@ -398,7 +397,7 @@ gethelipath(start, goal) {
 
   thread debug_line(start, goal, (1, 1, 1));
 
-    goalnoflyzones = insidenoflyzones(goal);
+  goalnoflyzones = insidenoflyzones(goal);
 
   if(goalnoflyzones.size) {
     goal = (goal[0], goal[1], getnoflyzoneheight(goal));
@@ -415,7 +414,7 @@ gethelipath(start, goal) {
 }
 
 function_a43d04ef(goalorigin) {
-  self endon(#"death", #"hash_41aaa8d75d168e0a");
+  self endon(#"death", # "hash_41aaa8d75d168e0a");
   distthresholdsq = 40000;
   wait 20;
 
@@ -432,7 +431,7 @@ function_a43d04ef(goalorigin) {
 }
 
 function_fabf8bc5(goalorigin) {
-  self endon(#"death", #"hash_41aaa8d75d168e0a");
+  self endon(#"death", # "hash_41aaa8d75d168e0a");
   distthresholdsq = 10000;
 
   if(isDefined(self.var_f766e12d)) {
@@ -452,7 +451,7 @@ function_fabf8bc5(goalorigin) {
 }
 
 function_e0e908c3(var_dbd23dc, path, stopatgoal) {
-  self endon(#"death", #"hash_78e76e8d9370e349");
+  self endon(#"death", # "hash_78e76e8d9370e349");
 
   if(var_dbd23dc) {
     while(true) {
@@ -524,11 +523,10 @@ function_f1b7b432(path, donenotify, stopatgoal, var_135dc5d1, var_96e5d7f = 0) {
 
   thread debug_line(self.origin, path[0], (1, 1, 0));
 
-    if(stopatgoal) {
-      self waittill(#"goal", #"fallback_goal");
-    }
-  else {
-    self waittill(#"near_goal", #"fallback_goal");
+  if(stopatgoal) {
+    self waittill(#"goal", # "fallback_goal");
+  } else {
+    self waittill(#"near_goal", # "fallback_goal");
   }
 
   if(isDefined(donenotify)) {
@@ -547,17 +545,16 @@ followpath(path, donenotify, stopatgoal) {
 
     thread debug_line(self.origin, path[i], (1, 1, 0));
 
-      self waittill(#"near_goal");
+    self waittill(#"near_goal");
   }
 
   self setgoal(path[path.size - 1], stopatgoal);
 
   thread debug_line(self.origin, path[i], (1, 1, 0));
 
-    if(stopatgoal) {
-      self waittill(#"goal");
-    }
-  else {
+  if(stopatgoal) {
+    self waittill(#"goal");
+  } else {
     self waittill(#"near_goal");
   }
 
@@ -630,13 +627,13 @@ calculatepath(start, end, startnoflyzones, goalnoflyzones) {
 
   debug_sphere(points[points.size - 1], 10, (1, 0, 0), 1, 1000);
 
-    point = start;
+  point = start;
 
   for(i = 0; i < points.size; i++) {
     thread debug_line(point, points[i], (0, 1, 0));
     debug_sphere(points[i], 10, (0, 0, 1), 1, 1000);
 
-      point = points[i];
+    point = points[i];
   }
 
   return points;
@@ -650,16 +647,16 @@ _getstrikepathstartandend(goal, yaw, halfdistance) {
   path = [];
 
   if(isDefined(noflyzone)) {
-    path[#"noflyzone"] = noflyzone;
+    path[# "noflyzone"] = noflyzone;
     startpoint = (startpoint[0], startpoint[1], level.noflyzones[noflyzone].origin[2] + level.noflyzones[noflyzone].height);
     endpoint = (endpoint[0], endpoint[1], startpoint[2]);
   } else {
-    path[#"noflyzone"] = undefined;
+    path[# "noflyzone"] = undefined;
   }
 
-  path[#"start"] = startpoint;
-  path[#"end"] = endpoint;
-  path[#"direction"] = direction;
+  path[# "start"] = startpoint;
+  path[# "end"] = endpoint;
+  path[# "direction"] = direction;
   return path;
 }
 
@@ -678,7 +675,7 @@ getstrikepath(target, height, halfdistance, yaw) {
     for(i = 0; i < 3; i++) {
       path = _getstrikepathstartandend(goal, randomint(360), halfdistance);
 
-      if(!isDefined(path[#"noflyzone"])) {
+      if(!isDefined(path[# "noflyzone"])) {
         break;
       }
     }
@@ -686,7 +683,7 @@ getstrikepath(target, height, halfdistance, yaw) {
     path = _getstrikepathstartandend(goal, yaw, halfdistance);
   }
 
-  path[#"height"] = worldheight - target[2];
+  path[# "height"] = worldheight - target[2];
   return path;
 }
 
@@ -704,20 +701,20 @@ entlosradiusdamage(ent, pos, radius, max, min, owner, einflictor) {
     head_height = eye_position[2];
     debug_display_time = 4000;
     trace = weapons::damage_trace(ent.entity.origin, ent.entity.origin + (0, 0, assumed_ceiling_height), 0, undefined);
-    indoors = trace[#"fraction"] != 1;
+    indoors = trace[# "fraction"] != 1;
 
     if(indoors) {
-      test_point = trace[#"position"];
+      test_point = trace[# "position"];
 
       debug_star(test_point, (0, 1, 0), debug_display_time);
 
-        trace = weapons::damage_trace((test_point[0], test_point[1], head_height), (pos[0], pos[1], head_height), 0, undefined);
-      indoors = trace[#"fraction"] != 1;
+      trace = weapons::damage_trace((test_point[0], test_point[1], head_height), (pos[0], pos[1], head_height), 0, undefined);
+      indoors = trace[# "fraction"] != 1;
 
       if(indoors) {
         debug_star((pos[0], pos[1], head_height), (0, 1, 0), debug_display_time);
 
-          dist *= 4;
+        dist *= 4;
 
         if(dist > radius) {
           return false;
@@ -725,13 +722,13 @@ entlosradiusdamage(ent, pos, radius, max, min, owner, einflictor) {
       } else {
         debug_star((pos[0], pos[1], head_height), (1, 0, 0), debug_display_time);
 
-          trace = weapons::damage_trace((pos[0], pos[1], head_height), pos, 0, undefined);
-        indoors = trace[#"fraction"] != 1;
+        trace = weapons::damage_trace((pos[0], pos[1], head_height), pos, 0, undefined);
+        indoors = trace[# "fraction"] != 1;
 
         if(indoors) {
           debug_star(pos, (0, 1, 0), debug_display_time);
 
-            dist *= 4;
+          dist *= 4;
 
           if(dist > radius) {
             return false;
@@ -924,7 +921,7 @@ getrandomhelicopterstartorigin() {
     }
   }
 
-    return start_origin;
+  return start_origin;
 }
 
 debug_no_fly_zones() {
@@ -936,7 +933,7 @@ debug_no_fly_zones() {
 debug_plane_line(flytime, flyspeed, pathstart, pathend) {
   thread debug_line(pathstart, pathend, (1, 1, 1));
 
-    delta = vectornormalize(pathend - pathstart);
+  delta = vectornormalize(pathend - pathstart);
 
   for(i = 0; i < flytime; i++) {
     thread debug_star(pathstart + vectorscale(delta, i * flyspeed), (1, 0, 0));
@@ -968,7 +965,7 @@ debug_draw_bomb_path(projectile, color, time) {
     while(isDefined(self.origin)) {
       thread debug_line(prevpos, self.origin, color, time);
 
-        prevpos = self.origin;
+      prevpos = self.origin;
 
       if(isDefined(projectile) && projectile) {
         thread debug_draw_bomb_explosion(prevpos);
@@ -1121,10 +1118,10 @@ debug_cylinder(origin, radius, height, color, mustrenderheight, time) {
   }
 }
 
-  function getpointonline(startpoint, endpoint, ratio) {
-    nextpoint = (startpoint[0] + (endpoint[0] - startpoint[0]) * ratio, startpoint[1] + (endpoint[1] - startpoint[1]) * ratio, startpoint[2] + (endpoint[2] - startpoint[2]) * ratio);
-    return nextpoint;
-  }
+function getpointonline(startpoint, endpoint, ratio) {
+  nextpoint = (startpoint[0] + (endpoint[0] - startpoint[0]) * ratio, startpoint[1] + (endpoint[1] - startpoint[1]) * ratio, startpoint[2] + (endpoint[2] - startpoint[2]) * ratio);
+  return nextpoint;
+}
 
 cantargetplayerwithspecialty() {
   if(self hasperk(#"specialty_nottargetedbyairsupport") || isDefined(self.specialty_nottargetedbyairsupport) && self.specialty_nottargetedbyairsupport) {
@@ -1137,7 +1134,7 @@ cantargetplayerwithspecialty() {
 }
 
 monitorspeed(spawnprotectiontime) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   if(self hasperk(#"specialty_nottargetedbyairsupport") == 0) {
     return;
@@ -1190,7 +1187,7 @@ function_9e2054b0(var_65885f89) {
 }
 
 waitforlocationselection() {
-  self endon(#"emp_jammed", #"emp_grenaded");
+  self endon(#"emp_jammed", # "emp_grenaded");
   waitresult = self waittill(#"confirm_location");
   locationinfo = spawnStruct();
   locationinfo.origin = waitresult.position;
@@ -1199,7 +1196,7 @@ waitforlocationselection() {
 }
 
 function_deb91ef4() {
-  self endon(#"emp_jammed", #"emp_grenaded", #"disconnect", #"confirm_location", #"cancel_location", #"enter_vehicle");
+  self endon(#"emp_jammed", # "emp_grenaded", # "disconnect", # "confirm_location", # "cancel_location", # "enter_vehicle");
 
   while(true) {
     waitresult = self waittill(#"menuresponse");

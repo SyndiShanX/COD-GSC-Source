@@ -14,8 +14,7 @@ flickerLight(color0, color1, minDelay, maxDelay) {
     toColor = color0 + (color1 - color0) * randomfloat(1.0);
     if(minDelay != maxDelay) {
       delay += randomfloatrange(minDelay, maxDelay);
-    }
-    else {
+    } else {
       delay += minDelay;
     }
     colorDeltaPerTime = (fromColor - toColor) * (1 / delay);
@@ -237,8 +236,7 @@ flickerLightIntensity(minDelay, maxDelay) {
       wait(randomfloatrange(.05, .1));
       if(curr > .2) {
         curr = randomfloatrange(0, .3);
-      }
-      else {
+      } else {
         curr = on;
       }
       self setLightIntensity(curr);

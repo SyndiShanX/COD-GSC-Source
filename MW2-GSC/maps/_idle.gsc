@@ -41,8 +41,7 @@ idle() {
 
   if(!isDefined(self.target)) {
     node = self;
-  }
-  else {
+  } else {
     node = getnode(self.target, "targetname");
     ent = getent(self.target, "targetname");
     struct = getstruct(self.target, "targetname");
@@ -50,11 +49,9 @@ idle() {
 
     if(isDefined(node)) {
       getfunc = ::get_node;
-    }
-    else if(isDefined(ent)) {
+    } else if(isDefined(ent)) {
       getfunc = ::get_ent;
-    }
-    else if(isDefined(struct)) {
+    } else if(isDefined(struct)) {
       getfunc = ::getstruct;
     }
 
@@ -62,9 +59,8 @@ idle() {
 
     while(isDefined(node.target)) {
       node = [
-    }
-        [getfunc]
-      ](node.target, "targetname");
+        }
+        [getfunc]](node.target, "targetname");
   }
 
   anime = node.script_animation;
@@ -104,8 +100,7 @@ idle_reach_node(node, idle_anim) {
 
   if(isDefined(self.script_patroller)) {
     self waittill("_patrol_reached_path_end");
-  }
-  else {
+  } else {
     node anim_generic_reach(self, idle_anim);
   }
 }
@@ -231,8 +226,7 @@ reaction_proc(node, ender, react_anim, tag) {
     // this is the reaction
     if(isDefined(tag) || isDefined(self.has_delta)) {
       node anim_generic(self, react_anim, tag);
-    }
-    else {
+    } else {
       node anim_generic_custom_animmode(self, "gravity", react_anim);
     }
   }

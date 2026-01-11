@@ -14,8 +14,7 @@ main(var_0, var_1, var_2) {
 
   if(var_3) {
     maps\_vehicle::build_drive( % silenthawk_doors_open, undefined, 0);
-  }
-  else {
+  } else {
     maps\_vehicle::build_drive( % bh_rotors, undefined, 0);
   }
 

@@ -84,8 +84,7 @@ playerplaysnowfx() {
 
   if(var_1 == "crouch") {
     var_0 = (0, 0, 20);
-  }
-  else if(var_1 == "prone") {
+  } else if(var_1 == "prone") {
     var_0 = (0, 0, 10);
   }
 

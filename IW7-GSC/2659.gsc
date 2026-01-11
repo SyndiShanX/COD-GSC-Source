@@ -84,8 +84,7 @@ give_player_currency(var_00, var_01, var_02, var_03, var_04) {
   if(var_07 >= var_06) {
     if(!isDefined(self.next_maxmoney_hint_time)) {
       self.next_maxmoney_hint_time = var_09 + var_08;
-    }
-    else if(var_09 < self.next_maxmoney_hint_time) {
+    } else if(var_09 < self.next_maxmoney_hint_time) {
       return;
     }
     if(!level.gameended) {
@@ -135,8 +134,7 @@ take_player_currency(var_00, var_01, var_02, var_03) {
 
   if(scripts\cp\utility::is_consumable_active("next_purchase_free") && var_00 >= 1 && var_02 != "atm" && var_02 != "laststand" && var_02 != "bleedoutPenalty") {
     scripts\cp\utility::notify_used_consumable("next_purchase_free");
-  }
-  else {
+  } else {
     set_player_currency(var_05);
   }
 
@@ -251,8 +249,7 @@ eog_player_tracking_init() {
 
   if(!level.console) {
     var_01 = getsubstr(var_01, 0, 19);
-  }
-  else if(have_clan_tag(var_01)) {
+  } else if(have_clan_tag(var_01)) {
     var_01 = remove_clan_tag(var_01);
   }
 
@@ -407,8 +404,7 @@ try_update_lb_playerdata(var_00, var_01, var_02) {
 lb_player_update_stat(var_00, var_01, var_02) {
   if(scripts\engine\utility::is_true(var_02)) {
     var_03 = var_01;
-  }
-  else {
+  } else {
     var_04 = self getrankedplayerdata("cp", "alienSession", var_00);
     var_03 = var_04 + var_01;
   }
@@ -766,8 +762,7 @@ get_scaled_xp(var_00, var_01) {
 get_level_xp_scale(var_00) {
   if(isDefined(var_0.xpscale)) {
     return var_0.xpscale;
-  }
-  else {
+  } else {
     return 1;
   }
 }
@@ -897,8 +892,7 @@ set_aliensession_stat(var_00, var_01) {
 update_deployable_box_performance(var_00) {
   if(isDefined(level.update_deployable_box_performance_func)) {
     var_00[[level.update_deployable_box_performance_func]]();
-  }
-  else {
+  } else {
     var_00 scripts\cp\cp_gamescore::update_personal_encounter_performance(scripts\cp\cp_gamescore::get_team_score_component_name(), "team_support_deploy");
   }
 }
@@ -915,7 +909,7 @@ update_lb_aliensession_challenge(var_00) {
 
 update_lb_aliensession_wave(var_00) {
   foreach(var_02 in level.players) {
-  var_02 lb_player_update_stat("waveNum", var_00, 1);
+    var_02 lb_player_update_stat("waveNum", var_00, 1);
   }
 }
 
@@ -999,8 +993,7 @@ record_player_kills(var_00, var_01, var_02, var_03) {
 increment_player_career_total_waves(var_00) {
   if(isDefined(var_0.wave_num_when_joined)) {
     increment_zombiecareerstats(var_00, "Total_Waves", level.wave_num - var_0.wave_num_when_joined);
-  }
-  else {
+  } else {
     increment_zombiecareerstats(var_00, "Total_Waves", level.wave_num);
   }
 }
@@ -1051,7 +1044,7 @@ increment_player_career_downs(var_00) {
 
 update_players_career_highest_wave(var_00, var_01) {
   foreach(var_03 in level.players) {
-  update_player_career_highest_wave(var_03, var_00, var_01, level.players.size);
+    update_player_career_highest_wave(var_03, var_00, var_01, level.players.size);
   }
 }
 

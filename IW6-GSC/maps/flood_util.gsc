@@ -34,8 +34,7 @@ spawn_ally(var_0, var_1) {
 
   if(!isDefined(var_1)) {
     var_2 = level.start_point + "_" + var_0;
-  }
-  else {
+  } else {
     var_2 = var_1 + "_" + var_0;
   }
 
@@ -98,7 +97,7 @@ reassign_goal_volume(var_0, var_1) {
   var_2 = getent(var_1, "targetname");
 
   foreach(var_4 in var_0) {
-  var_4 setgoalvolumeauto(var_2);
+    var_4 setgoalvolumeauto(var_2);
   }
 }
 
@@ -282,7 +281,7 @@ cleanup_triggers(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 delete();
+    var_3 delete();
   }
 }
 
@@ -391,8 +390,7 @@ wait_incremental_nag_timer(var_0, var_1) {
 
     if(isDefined(var_1)) {
       var_0[var_0.size] = 0.0;
-    }
-    else {
+    } else {
       var_0[var_0.size] = 5.0;
     }
 
@@ -407,8 +405,7 @@ wait_incremental_nag_timer(var_0, var_1) {
 
   if(1 < var_0.size) {
     return maps\_utility::array_remove_index(var_0, 0);
-  }
-  else {
+  } else {
     return var_0;
   }
 }
@@ -488,8 +485,7 @@ stop_enemy_dialogue_on_death_or_trigger(var_0) {
 smart_get_nag_line(var_0, var_1, var_2) {
   if(1 < var_0.size) {
     var_3 = common_scripts\utility::array_remove(var_0, var_0[var_2]);
-  }
-  else {
+  } else {
     var_3 = var_1;
   }
 
@@ -514,8 +510,7 @@ nag_end_on_notify(var_0, var_1, var_2) {
 
     if(var_5 < var_4) {
       var_6 = 0;
-    }
-    else {
+    } else {
       var_6 = randomintrange(0, var_3.size);
     }
 
@@ -558,14 +553,11 @@ notify_on_flag_open(var_0, var_1) {
 notify_on_function_finish(var_0, var_1, var_2, var_3, var_4) {
   if(!isDefined(var_2)) {
     self[[var_1]]();
-  }
-  else if(!isDefined(var_3)) {
+  } else if(!isDefined(var_3)) {
     self[[var_1]](var_2);
-  }
-  else if(!isDefined(var_4)) {
+  } else if(!isDefined(var_4)) {
     self[[var_1]](var_2, var_3);
-  }
-  else {
+  } else {
     self[[var_1]](var_2, var_3, var_4);
   }
 
@@ -576,7 +568,7 @@ setup_bokehdot_volume(var_0) {
   var_1 = getEntArray(var_0, "targetname");
 
   foreach(var_3 in var_1) {
-  var_3 thread do_bokehdot_volume();
+    var_3 thread do_bokehdot_volume();
   }
 }
 
@@ -598,8 +590,7 @@ do_bokehdot_volume() {
       while(common_scripts\utility::flag("do_bokehdot") && level.player istouching(self)) {
         if(distance2d(level.player.origin, var_0) < var_3 * var_2) {
           thread maps\flood_fx::fx_turn_on_bokehdots_64_player();
-        }
-        else {
+        } else {
           thread maps\flood_fx::fx_turn_on_bokehdots_16_player();
         }
 
@@ -659,8 +650,7 @@ earthquake_w_fade(var_0, var_1, var_2, var_3) {
 
   if(var_5 > 0) {
     var_6 = var_0 / var_5;
-  }
-  else {
+  } else {
     var_6 = var_0;
   }
 
@@ -669,8 +659,7 @@ earthquake_w_fade(var_0, var_1, var_2, var_3) {
 
   if(var_7 > 0) {
     var_9 = var_0 / var_7;
-  }
-  else {
+  } else {
     var_9 = var_0;
   }
 
@@ -781,8 +770,7 @@ block_until_at_struct(var_0, var_1) {
   if(isDefined(var_1)) {
     if(var_1 == 666) {
       self.goalradius = 88;
-    }
-    else {
+    } else {
       self.goalradius = var_1;
     }
   }
@@ -842,8 +830,7 @@ spawn_and_link_models_to_tags(var_0, var_1) {
 
       if(var_5 == "pb_weaponscase") {
         var_6 setModel("com_plasticcase_beige_big_iw6");
-      }
-      else {
+      } else {
         var_6 setModel(var_5);
       }
 
@@ -1063,8 +1050,7 @@ set_water_fog(var_0) {
 
   if(isDefined(var_1.sunfogenabled) && var_1.sunfogenabled) {
     self playersetwaterfog(var_1.startdist, var_1.halfwaydist, var_1.red, var_1.green, var_1.blue, var_1.hdrcolorintensity, var_1.maxopacity, 0, var_1.sunred, var_1.sungreen, var_1.sunblue, var_1.hdrsuncolorintensity, var_1.sundir, var_1.sunbeginfadeangle, var_1.sunendfadeangle, var_1.normalfogscale, var_1.skyfogintensity, var_1.skyfogminangle, var_1.skyfogmaxangle);
-  }
-  else {
+  } else {
     self playersetwaterfog(var_1.startdist, var_1.halfwaydist, var_1.red, var_1.green, var_1.blue, var_1.hdrcolorintensity, var_1.maxopacity, 0, var_1.skyfogintensity, var_1.skyfogminangle, var_1.skyfogmaxangle);
   }
 }

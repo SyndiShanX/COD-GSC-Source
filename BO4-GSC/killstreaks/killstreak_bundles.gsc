@@ -5,7 +5,6 @@
 
 #include scripts\core_common\struct;
 #include scripts\core_common\weapons_shared;
-
 #namespace killstreak_bundles;
 
 register_killstreak_bundle(type) {
@@ -23,7 +22,7 @@ register_bundle(type, bundle) {
 
 get_bundle(killstreak) {
   if(killstreak.archetype === "raps") {
-    return level.killstreakbundle[#"raps_drone"];
+    return level.killstreakbundle[# "raps_drone"];
   }
 
   if(killstreak.killstreaktype === "drone_squadron" && sessionmodeiscampaigngame()) {
@@ -130,21 +129,21 @@ get_shots_to_kill(weapon, meansofdeath, bundle) {
   }
 
   switch (weapon.rootweapon.name) {
-    case #"remote_missile_missile":
+    case # "remote_missile_missile":
       shotstokill = bundle.ksremote_missile_missile;
       break;
-    case #"hero_annihilator":
+    case # "hero_annihilator":
       shotstokill = bundle.kshero_annihilator;
       break;
-    case #"hero_bowlauncher2":
-    case #"hero_bowlauncher3":
-    case #"hero_bowlauncher4":
-    case #"sig_bow_quickshot3":
-    case #"sig_bow_quickshot2":
-    case #"sig_bow_quickshot5":
-    case #"sig_bow_quickshot4":
-    case #"sig_bow_quickshot":
-    case #"hero_bowlauncher":
+    case # "hero_bowlauncher2":
+    case # "hero_bowlauncher3":
+    case # "hero_bowlauncher4":
+    case # "sig_bow_quickshot3":
+    case # "sig_bow_quickshot2":
+    case # "sig_bow_quickshot5":
+    case # "sig_bow_quickshot4":
+    case # "sig_bow_quickshot":
+    case # "hero_bowlauncher":
       if(meansofdeath == "MOD_PROJECTILE_SPLASH" || meansofdeath == "MOD_PROJECTILE" || meansofdeath == "MOD_GRENADE_SPLASH") {
         shotstokill = bundle.kshero_bowlauncher;
       } else {
@@ -152,39 +151,39 @@ get_shots_to_kill(weapon, meansofdeath, bundle) {
       }
 
       break;
-    case #"eq_gravityslam":
+    case # "eq_gravityslam":
       shotstokill = bundle.kshero_gravityspikes;
       break;
-    case #"shock_rifle":
+    case # "shock_rifle":
       shotstokill = bundle.var_4be7d629;
       break;
-    case #"hero_minigun":
+    case # "hero_minigun":
       shotstokill = bundle.kshero_minigun;
       break;
-    case #"hero_pineapple_grenade":
-    case #"hero_pineapplegun":
+    case # "hero_pineapple_grenade":
+    case # "hero_pineapplegun":
       shotstokill = bundle.kshero_pineapplegun;
       break;
-    case #"hero_firefly_swarm":
+    case # "hero_firefly_swarm":
       shotstokill = (isDefined(bundle.kshero_firefly_swarm) ? bundle.kshero_firefly_swarm : 0) * 4;
       break;
-    case #"dart_blade":
-    case #"dart_turret":
+    case # "dart_blade":
+    case # "dart_turret":
       shotstokill = bundle.ksdartstokill;
       break;
-    case #"recon_car":
+    case # "recon_car":
       shotstokill = bundle.var_8eca21ba;
       break;
-    case #"ability_dog":
+    case # "ability_dog":
       shotstokill = bundle.var_a758f9e6;
       break;
-    case #"planemortar":
+    case # "planemortar":
       shotstokill = bundle.var_843b7bd3;
       break;
-    case #"gadget_heat_wave":
+    case # "gadget_heat_wave":
       shotstokill = bundle.kshero_heatwave;
       break;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       if(isDefined(bundle.var_2db988a0) && bundle.var_2db988a0) {
         shotstokill = 1;
       } else {
@@ -192,13 +191,13 @@ get_shots_to_kill(weapon, meansofdeath, bundle) {
       }
 
       break;
-    case #"eq_concertina_wire":
+    case # "eq_concertina_wire":
       if(isDefined(bundle.var_ab14c65a) && bundle.var_ab14c65a) {
         shotstokill = 1;
       }
 
       break;
-    case #"ability_smart_cover":
+    case # "ability_smart_cover":
       if(isDefined(bundle.var_4de0b9db) && bundle.var_4de0b9db) {
         shotstokill = 1;
       } else {
@@ -206,25 +205,25 @@ get_shots_to_kill(weapon, meansofdeath, bundle) {
       }
 
       break;
-    case #"hash_17df39d53492b0bf":
+    case # "hash_17df39d53492b0bf":
       shotstokill = bundle.var_605815a6;
       break;
-    case #"hash_7b24d0d0d2823bca":
+    case # "hash_7b24d0d0d2823bca":
       shotstokill = bundle.var_50c51e5;
       break;
-    case #"ac130_chaingun":
+    case # "ac130_chaingun":
       shotstokill = bundle.var_676a4c7;
       break;
-    case #"eq_tripwire":
+    case # "eq_tripwire":
       shotstokill = bundle.var_8f65bc5d;
       break;
-    case #"hatchet":
+    case # "hatchet":
       shotstokill = bundle.var_8ca2602b;
       break;
-    case #"eq_emp_grenade":
+    case # "eq_emp_grenade":
       shotstokill = bundle.ksempgrenadestokill;
       break;
-    case #"sig_blade":
+    case # "sig_blade":
       shotstokill = bundle.var_5789ac76;
       break;
   }
@@ -336,7 +335,7 @@ function_dd7587e4(bundle, maxhealth, attacker, weapon, type, damage, flags, char
         } else {
           weapon_damage = 0;
         }
-      } else if((type == "MOD_PROJECTILE" || type == "MOD_EXPLOSIVE" || type == "MOD_PROJECTILE_SPLASH" && bundle.var_38de4989 === 1) && (!isDefined(weapon.isempkillstreak) || !weapon.isempkillstreak) && (!isDefined(level.weaponpistolenergy) || weapon.statname != level.weaponpistolenergy.statname || level.weaponpistolenergy.statname == level.weaponnone.statname) && (!isDefined(level.weaponspecialcrossbow) || weapon.statname != level.weaponspecialcrossbow.statname || level.weaponspecialcrossbow.statname == level.weaponnone.statname) && weapon.rootweapon.name != #"trophy_system") {
+      } else if((type == "MOD_PROJECTILE" || type == "MOD_EXPLOSIVE" || type == "MOD_PROJECTILE_SPLASH" && bundle.var_38de4989 === 1) && (!isDefined(weapon.isempkillstreak) || !weapon.isempkillstreak) && (!isDefined(level.weaponpistolenergy) || weapon.statname != level.weaponpistolenergy.statname || level.weaponpistolenergy.statname == level.weaponnone.statname) && (!isDefined(level.weaponspecialcrossbow) || weapon.statname != level.weaponspecialcrossbow.statname || level.weaponspecialcrossbow.statname == level.weaponnone.statname) && weapon.rootweapon.name != # "trophy_system") {
         if(function_6bacfedc(weapon, level.weaponshotgunenergy)) {
           weapon_damage = function_daad16b8(maxhealth, weapon_damage, bundle.ksshotgunenergytokill);
         } else {

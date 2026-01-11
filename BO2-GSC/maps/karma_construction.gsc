@@ -130,8 +130,7 @@ crc_exit_event() {
 bloody_tarp_init() {
   if(is_mature()) {
     fxanim_delete("fxanim_bloody_tarp_clean");
-  }
-  else {
+  } else {
     fxanim_delete("fxanim_bloody_tarp_bloody");
   }
 }
@@ -143,7 +142,7 @@ clear_exit_victims_spawn_funcs() {
 
 remove_tarp_blockers() {
   foreach(blocker in getEntArray("tarp_blocker", "targetname")) {
-  blocker delete();
+    blocker delete();
   }
 
   bloody_tarp_blocker = getent("tarp_collision_bloody", "targetname");
@@ -160,7 +159,7 @@ escalator_doors_open() {
   trigger_wait("escalator_door_proximity_trigger");
 
   foreach(e_trigger in getEntArray("construction_battle_color_triggers", "script_noteworthy")) {
-  e_trigger delete();
+    e_trigger delete();
   }
 
   autosave_by_name("crc_exit_cleared");

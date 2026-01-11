@@ -68,8 +68,7 @@ main() {
 
   if(0) {
     flag_set("vehicle_can_switch");
-  }
-  else {
+  } else {
     flag_clear("vehicle_can_switch");
   }
 
@@ -294,8 +293,7 @@ slanted_building_drone_2() {
 
   if(level.player.vehicle_state == 1) {
     vh_drone dodamage(vh_drone.health, vh_drone.origin);
-  }
-  else {
+  } else {
     vh_drone setvehgoalpos((3072, -22528, 1024));
     vh_drone waittill("goal");
 
@@ -390,11 +388,9 @@ heli_crash_ai_spawn_func() {
 crash_ai_damage_override(e_inflictor, e_attacker, n_damage, n_dflags, str_means_of_death, str_weapon, v_point, v_dir, str_hit_loc, n_model_index, psoffsettime, str_bone_name) {
   if(isDefined(e_attacker.vteam) && e_attacker.vteam == "axis") {
     n_damage = 0;
-  }
-  else if(isDefined(e_attacker.vehicletype) && e_attacker.vehicletype == "boat_soct_axis") {
+  } else if(isDefined(e_attacker.vehicletype) && e_attacker.vehicletype == "boat_soct_axis") {
     n_damage = 0;
-  }
-  else if(str_weapon == "boat_gun_turret") {
+  } else if(str_weapon == "boat_gun_turret") {
     n_damage = 0;
   }
 
@@ -616,8 +612,7 @@ dukes_of_hazzard_trigger() {
 
   if(!level.console && !level.player gamepadusedlast()) {
     screen_message_create(&"PAKISTAN_SHARED_CHOOSE_VEHICLE_TO_FINISH_LEVEL_KEYBOARD");
-  }
-  else {
+  } else {
     screen_message_create(&"PAKISTAN_SHARED_CHOOSE_VEHICLE_TO_FINISH_LEVEL");
   }
 
@@ -668,8 +663,7 @@ dukes_of_hazzard_trigger() {
 
   if(isgodmode(level.player)) {
     flag_set("vehicle_can_switch");
-  }
-  else {
+  } else {
     flag_clear("vehicle_can_switch");
   }
 }

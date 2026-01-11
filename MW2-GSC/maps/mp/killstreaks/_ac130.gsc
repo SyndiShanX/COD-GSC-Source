@@ -259,8 +259,7 @@ add_context_sensative_timeout(name1, name2, groupNum, timeoutDuration) {
   createStruct = false;
   if(!isDefined(level.context_sensative_dialog_timeouts[name1])) {
     createStruct = true;
-  }
-  else if(!isDefined(level.context_sensative_dialog_timeouts[name1][name2])) {
+  } else if(!isDefined(level.context_sensative_dialog_timeouts[name1][name2])) {
     createStruct = true;
   }
   if(createStruct) {
@@ -323,7 +322,7 @@ array_remove_nokeys(ents, remover) {
   for(i = 0; i < ents.size; i++) {
     if(ents[i] != remover)
   }
-      newents[newents.size] = ents[i];
+  newents[newents.size] = ents[i];
   return newents;
 }
 
@@ -553,7 +552,7 @@ removeAC130Player(player, disconnected) {
 
     weaponList = player GetWeaponsListExclusives();
     foreach(weapon in weaponList) {
-    player takeWeapon(weapon);
+      player takeWeapon(weapon);
     }
 
     if(isDefined(player.darkScreenOverlay)) {
@@ -1042,7 +1041,7 @@ context_Sensative_Dialog_Guy_Crawling() {
       }
     }
 
-      thread context_Sensative_Dialog_Play_Random_Group_Sound("ai", "wounded_crawl");
+    thread context_Sensative_Dialog_Play_Random_Group_Sound("ai", "wounded_crawl");
   }
 }
 
@@ -1058,7 +1057,7 @@ context_Sensative_Dialog_Guy_Pain() {
       }
     }
 
-      thread context_Sensative_Dialog_Play_Random_Group_Sound("ai", "wounded_pain");
+    thread context_Sensative_Dialog_Play_Random_Group_Sound("ai", "wounded_pain");
   }
 }
 
@@ -1076,7 +1075,7 @@ context_Sensative_Dialog_Secondary_Explosion_Vehicle() {
       }
     }
 
-      thread context_Sensative_Dialog_Play_Random_Group_Sound("explosion", "secondary");
+    thread context_Sensative_Dialog_Play_Random_Group_Sound("explosion", "secondary");
   }
 }
 
@@ -1127,8 +1126,7 @@ context_Sensative_Dialog_Kill_Thread() {
 
     if(level.enemiesKilledInTimeWindow >= 2) {
       soundAlias2 = "small_group";
-    }
-    else {
+    } else {
       soundAlias2 = "single";
       if(randomint(3) != 1) {
         level.enemiesKilledInTimeWindow = 0;
@@ -1250,8 +1248,7 @@ context_Sensative_Dialog_Play_Random_Group_Sound(name1, name2, force_transmit_on
   if(!flag("allow_context_sensative_dialog")) {
     if(force_transmit_on_turn) {
       flag_wait("allow_context_sensative_dialog");
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -1439,8 +1436,7 @@ debug_circle_drawlines(circlepoints, duration, color, fillCenter, center) {
     start = circlepoints[i];
     if(i + 1 >= circlepoints.size) {
       end = circlepoints[0];
-    }
-    else {
+    } else {
       end = circlepoints[i + 1];
     }
 

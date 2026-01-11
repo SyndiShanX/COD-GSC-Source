@@ -135,8 +135,7 @@ is_radio_defined(alias) {
 should_break_available() {
   if(isDefined(level.uav_is_not_available)) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -144,8 +143,7 @@ should_break_available() {
 should_break_destroyed() {
   if(isDefined(level.uav_is_destroyed)) {
     return false;
-  }
-  else {
+  } else {
     return true;
   }
 }
@@ -277,9 +275,7 @@ remotemissile_weapon_change() {
 
       self thread cancel_on_player_damage();
       if(isDefined(level.remote_missile_hide_stuff_func)) {
-        [
-          [level.remote_missile_hide_stuff_func]
-        ]();
+        [[level.remote_missile_hide_stuff_func]]();
       }
 
       level.uav_user = self;
@@ -292,9 +288,7 @@ remotemissile_weapon_change() {
       self.using_uav = false;
 
       if(isDefined(level.remote_missile_show_stuff_func)) {
-        [
-          [level.remote_missile_show_stuff_func]
-        ]();
+        [[level.remote_missile_show_stuff_func]]();
       }
 
       thread remotemissile_reload();
@@ -1233,8 +1227,7 @@ FireMissileFromUAVPlayer(player) {
   } else {
     if(isDefined(level.remote_missile_invasion)) {
       missile = MagicBullet("remote_missile_invasion", start, end, player);
-    }
-    else {
+    } else {
       missile = MagicBullet("remote_missile", start, end, player);
     }
   }

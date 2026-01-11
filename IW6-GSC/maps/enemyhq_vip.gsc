@@ -136,8 +136,7 @@ animate_vip_enemies() {
 
     if(isDefined(level.scr_anim[var_5]["new_vip_enemy_intro"])) {
       var_6 thread vip_enemy_animate_intro(var_7);
-    }
-    else {
+    } else {
       var_6 thread maps\_anim::anim_loop_solo(var_7, "new_vip_enemy", "stop_loop");
     }
 

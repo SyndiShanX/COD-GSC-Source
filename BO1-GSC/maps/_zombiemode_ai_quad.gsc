@@ -294,8 +294,7 @@ check_wait() {
       cansee = SightTracePassed(self.origin, self.enemy.origin, false, undefined);
       if(cansee) {
         self set_leap_attack_properties();
-      }
-      else {
+      } else {
         self set_default_attack_properties();
       }
     } else {

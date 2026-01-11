@@ -35,8 +35,7 @@ playflarefx(localclientnum) {
 
   if(friendnotfoe(localclientnum)) {
     fx_handle = playFXOnTag(localclientnum, level._effect["fx_trophy_friendly_light"], self, "tag_light_fx");
-  }
-  else {
+  } else {
     fx_handle = playFXOnTag(localclientnum, level._effect["fx_trophy_enemy_light"], self, "tag_light_fx");
   }
 

@@ -8,7 +8,6 @@
 #include scripts\core_common\struct;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_world;
-
 #namespace namespace_21c59b5;
 
 autoexec __init__system__() {
@@ -134,7 +133,7 @@ private event_handler[grenade_fire] function_4776caf4(eventstruct) {
   }
 
   if(sessionmodeiswarzonegame() && isplayer(self) && isalive(self) && isDefined(eventstruct) && isDefined(eventstruct.weapon)) {
-    if(eventstruct.weapon.name === #"hatchet") {
+    if(eventstruct.weapon.name === # "hatchet") {
       if(isDefined(eventstruct.projectile)) {
         hatchet = eventstruct.projectile;
         dartboard = getdynent(#"buried_dartboard");
@@ -157,8 +156,8 @@ function_34f4460b(player) {
   }
 
   level endon(#"game_ended");
-  self endon(#"stationary", #"death");
-  player endon(#"disconnect", #"death");
+  self endon(#"stationary", # "death");
+  player endon(#"disconnect", # "death");
   var_3df14205 = getEntArray("trigger_buried_dartboard_bullseye", "targetname");
 
   if(!isDefined(var_3df14205)) {

@@ -321,8 +321,7 @@ tower_explode_anims() {
 
   if(getdvarint("use_old_fence_cutting") == 1) {
     level.scr_anim["fence"]["model_cut"] = % icbm_fence_cutting_guy1_fence;
-  }
-  else {
+  } else {
     level.scr_anim["fence"]["model_cut"] = % h1_icbm_fence_cutting_guy1_fence;
   }
 }

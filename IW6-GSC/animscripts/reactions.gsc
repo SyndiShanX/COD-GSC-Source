@@ -52,8 +52,7 @@ bulletwhizbyreaction() {
 
     if(var_0) {
       var_3 = 1 + randomfloat(0.5);
-    }
-    else {
+    } else {
       var_3 = 0.2 + randomfloat(0.5);
     }
 
@@ -81,8 +80,7 @@ bulletwhizbyreaction() {
 
     if(isDefined(self.whizbyenemy)) {
       var_7 = vectornormalize(self.whizbyenemy.origin - self.origin);
-    }
-    else {
+    } else {
       var_7 = var_6;
     }
 
@@ -162,8 +160,7 @@ getnewenemyreactionanim() {
 
     if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.reactiontargetpos) < 65536) {
       self orientmode("face enemy");
-    }
-    else {
+    } else {
       self orientmode("face point", self.reactiontargetpos);
     }
 
@@ -213,8 +210,7 @@ newenemyreactionanim() {
 
   if(isDefined(self._stealth) && self.alertlevel != "combat") {
     stealthnewenemyreactanim();
-  }
-  else {
+  } else {
     var_0 = getnewenemyreactionanim();
     self clearanim( % root, 0.2);
     self setflaggedanimknobrestart("reactanim", var_0, 1, 0.2, 1);

@@ -1071,8 +1071,7 @@ playsoundinspace(var_0, var_1, var_2) {
 
   if(isDefined(var_2) && var_2) {
     var_3 playsoundasmaster(var_0);
-  }
-  else {
+  } else {
     var_3 playSound(var_0);
   }
 
@@ -1166,8 +1165,7 @@ woods_animation_wrapper(var_0) {
 
   if(!isDefined(level.woods_pause)) {
     level.woods_pause = 0;
-  }
-  else {
+  } else {
     level.woods_pause = level.woods_pause + 0.2;
   }
 

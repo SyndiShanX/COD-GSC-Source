@@ -225,8 +225,7 @@ system_init_state_functions(state_functions) {
   if(isDefined(state_functions)) {
     if(isDefined(state_functions["hidden"]) && isDefined(state_functions["alert"]) && isDefined(state_functions["spotted"])) {
       custom_state_functions = 1;
-    }
-    else {
+    } else {
       assertmsg("you sent _stealth_behavior::main( <option_state_function_array> ) a variable but it was invalid.The variable needs to be an array of 3 indicies with values 'hidden', 'alert' and 'spotted'.These indicies must be function pointers to the system functions you wish to handle those 3 states.");
 
     }
@@ -466,8 +465,7 @@ enemy_state_spotted() {
 
   if(self._stealth.logic.dog) {
     self.favoriteenemy = get_closest_player(self.origin);
-  }
-  else if(randomint(100) > 25) {
+  } else if(randomint(100) > 25) {
     self.favoriteenemy = get_closest_player(self.origin);
   }
 
@@ -536,8 +534,7 @@ enemy_animation_custom(type) {
   if(type != "doFlashBanged") {
     if(isDefined(tag) || isDefined(self.has_delta)) {
       node anim_generic_aligned(self, anime, tag);
-    }
-    else {
+    } else {
       node anim_generic_custom_animmode(self, "gravity", anime);
     }
   }
@@ -600,8 +597,7 @@ enemy_animation_attack(type) {
 
   if(distancesquared(enemy.origin, self.origin) < 65536) {
     anime = "_stealth_behavior_spotted_short";
-  }
-  else {
+  } else {
     anime = "_stealth_behavior_spotted_long";
   }
 
@@ -611,8 +607,7 @@ enemy_animation_attack(type) {
   self notify("stop_animmode");
 }
 
-enemy_animation_nothing(type) {
-}
+enemy_animation_nothing(type) {}
 
 enemy_animation_generic(type) {
   self.allowdeath = 1;
@@ -620,8 +615,7 @@ enemy_animation_generic(type) {
 
   if(isDefined(self.enemy)) {
     target = self.enemy;
-  }
-  else if(isDefined(self.favoriteenemy)) {
+  } else if(isDefined(self.favoriteenemy)) {
     target = self.favoriteenemy;
   }
 
@@ -658,8 +652,7 @@ dog_animation_generic(type) {
 
   if(randomint(100) < 50) {
     anime = "_stealth_dog_wakeup_fast";
-  }
-  else {
+  } else {
     anime = "_stealth_dog_wakeup_slow";
   }
 
@@ -782,8 +775,7 @@ enemy_awareness_reaction_safety(type, msg) {
 
     if(type == _type) {
       continue;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -1155,8 +1147,7 @@ enemy_found_corpse_loop() {
     while(flag("_stealth_found_corpse")) {
       if(self ent_flag("_stealth_found_corpse")) {
         self thread enemy_announce_corpse();
-      }
-      else {
+      } else {
         self notify("heard_corpse", (0, 0, 0));
       }
 
@@ -1365,14 +1356,11 @@ friendly_stance_handler() {
 
       if(stances[self._stealth.logic.stance]) {
         self thread friendly_stance_handler_change_stance_down();
-      }
-      else if(self ent_flag("_stealth_stay_still")) {
+      } else if(self ent_flag("_stealth_stay_still")) {
         self thread friendly_stance_handler_resume_path();
-      }
-      else if(!stances[self._stealth.behavior.stance_up]) {
+      } else if(!stances[self._stealth.behavior.stance_up]) {
         self thread friendly_stance_handler_change_stance_up();
-      }
-      else if(self ent_flag("_stealth_stance_change")) {
+      } else if(self ent_flag("_stealth_stance_change")) {
         self notify("_stealth_stance_dont_change");
       }
 
@@ -1492,11 +1480,9 @@ friendly_stance_handler_return_ai_sight(ai, stance) {
 
   if(vecdot > 0.3) {
     return self._stealth.behavior.stance_handler[state]["looking_towards"][stance];
-  }
-  else if(vecdot < -0.7) {
+  } else if(vecdot < -0.7) {
     return self._stealth.behavior.stance_handler[state]["looking_away"][stance];
-  }
-  else {
+  } else {
     return self._stealth.behavior.stance_handler[state]["neutral"][stance];
   }
 }

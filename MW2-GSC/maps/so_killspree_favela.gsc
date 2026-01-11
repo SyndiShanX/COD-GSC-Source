@@ -61,7 +61,7 @@ delete_on_veteran() {
 
   delete_ents = getEntArray("delete_on_veteran", "script_noteworthy");
   foreach(ent in delete_ents) {
-  ent delete();
+    ent delete();
   }
 }
 
@@ -115,11 +115,11 @@ so_favela_init() {
   // Remove unwanted weapons
   sentries = getEntArray("misc_turret", "classname");
   foreach(sentry in sentries) {
-  sentry Delete();
+    sentry Delete();
   }
   stingers = getEntArray("weapon_stinger", "classname");
   foreach(stinger in stingers) {
-  stinger Delete();
+    stinger Delete();
   }
 
   assert(isDefined(level.gameskill));
@@ -209,7 +209,7 @@ start_so_favela() {
 
   thread enemy_type_monitor();
 
-    thread release_doggy();
+  thread release_doggy();
   thread doggy_attack();
   thread enemy_refill(10, seeker_spawn_trig, favela_spawn_ambush_trigger);
   thread enemy_remove_when_max(10);
@@ -219,7 +219,7 @@ start_so_favela() {
 // takes both array of triggers or just one
 spawn_wave_by_trigger(trigger) {
   foreach(trig in trigger) {
-  trig notify("trigger");
+    trig notify("trigger");
   }
 }
 
@@ -227,8 +227,7 @@ spawn_enemy_secondary_wave(trigger, max_spawned) {
   spawn_trig = [];
   if(!isArray(trigger)) {
     spawn_trig[0] = trigger;
-  }
-  else {
+  } else {
     spawn_trig = trigger;
   }
 

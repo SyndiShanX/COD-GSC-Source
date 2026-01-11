@@ -74,9 +74,7 @@ bt_getchildtaskid(param_00, param_01) {
 }
 
 func_0076(param_00) {
-  return [
-    [self.var_C9D9.var_1158E[param_00]]
-  ]();
+  return [[self.var_C9D9.var_1158E[param_00]]]();
 }
 
 bt_terminateprevrunningaction(param_00, param_01, param_02, param_03) {

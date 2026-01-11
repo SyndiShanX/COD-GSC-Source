@@ -138,8 +138,7 @@ processFaceEvents(localClientNum) {
   self SetAnimKnob(level.faceStates[self.face_curr_base]["animation"][self.face_curr_base_idx], 1.0, 0.0, 1.0);
   if(isDefined(self.face_disable) && self.face_disable) {
     state = "face_disable";
-  }
-  else if(isDefined(self.face_death) && self.face_death) {
+  } else if(isDefined(self.face_death) && self.face_death) {
     state = "face_death";
   }
   if(!isDefined(self)) {

@@ -401,7 +401,7 @@ loki_control_room_boundaries() {
   var_0 = getEntArray("control_room_boundary_collision", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 notsolid();
+    var_2 notsolid();
   }
 }
 

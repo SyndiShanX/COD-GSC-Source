@@ -61,19 +61,18 @@ decidewhatandhowtoshoot(var_0) {
 
     if(self.weapon == "none") {
       nogunshoot();
-    }
-    else if(animscripts\utility::usingrocketlauncher()) {
+    } else if(animscripts\utility::usingrocketlauncher()) {
       var_5 = rpgshoot();
-    }
-    else if(animscripts\utility::usingsidearm() || isDefined(self.alwaysusepistol)) {
+    } else if(animscripts\utility::usingsidearm() || isDefined(self.alwaysusepistol)) {
       var_5 = pistolshoot();
-    }
-    else {
+    } else {
       var_5 = rifleshoot();
     }
 
     if(isDefined(self.a.specialshootbehavior)) {
-      [[self.a.specialshootbehavior]]();
+      [
+        [self.a.specialshootbehavior]
+      ]();
     }
 
     if(checkchanged(var_2, self.shootent) || !isDefined(self.shootent) && checkchanged(var_3, self.shootpos) || checkchanged(var_4, self.shootstyle)) {
@@ -104,8 +103,7 @@ waitabit() {
     while(isDefined(self.shootent)) {
       if(common_scripts\utility::flag("_cloaked_stealth_enabled")) {
         self.shootpos = animscripts\combat_utility::get_last_known_shoot_pos(self.shootent);
-      }
-      else {
+      } else {
         self.shootpos = self.shootent getshootatpos();
       }
 
@@ -147,14 +145,12 @@ rifleshootobjectivenormal() {
 
     if(!isDefined(self.enemy)) {
       havenothingtoshoot();
-    }
-    else {
+    } else {
       markenemyposinvisible();
 
       if((self.providecoveringfire || randomint(5) > 0) && shouldsuppress()) {
         self.shootobjective = "suppress";
-      }
-      else {
+      } else {
         self.shootobjective = "ambush";
       }
 
@@ -169,8 +165,7 @@ rifleshootobjectivenormal() {
 rifleshootobjectivesuppress(var_0) {
   if(!var_0) {
     havenothingtoshoot();
-  }
-  else {
+  } else {
     self.shootent = undefined;
     self.shootpos = animscripts\utility::getenemysightpos();
     setshootstyleforsuppression();
@@ -220,11 +215,9 @@ getambushshootpos() {
   if(!isDefined(var_0)) {
     if(isDefined(self.covernode)) {
       var_0 = self.covernode.angles;
-    }
-    else if(isDefined(self.ambushnode)) {
+    } else if(isDefined(self.ambushnode)) {
       var_0 = self.ambushnode.angles;
-    }
-    else {
+    } else {
       var_0 = self.angles;
     }
   }
@@ -245,8 +238,7 @@ getambushshootpos() {
 rifleshoot() {
   if(self.shootobjective == "normal") {
     rifleshootobjectivenormal();
-  }
-  else {
+  } else {
     if(shouldshootenemyent()) {
       self.shootobjective = "normal";
       self.ambushendtime = undefined;
@@ -263,8 +255,7 @@ rifleshoot() {
 
     if(self.shootobjective == "suppress" || self.team == "allies" && !isDefined(self.enemy) && !var_0) {
       rifleshootobjectivesuppress(var_0);
-    }
-    else {
+    } else {
       rifleshootobjectiveambush(var_0);
     }
   }
@@ -274,8 +265,7 @@ shouldstopambushing() {
   if(!isDefined(self.ambushendtime)) {
     if(self isbadguy()) {
       self.ambushendtime = gettime() + randomintrange(10000, 60000);
-    }
-    else {
+    } else {
       self.ambushendtime = gettime() + randomintrange(4000, 10000);
     }
   }
@@ -415,8 +405,7 @@ setshootenttoenemy() {
   if(common_scripts\utility::flag("_cloaked_stealth_enabled")) {
     if(isDefined(self.enemy_who_surprised_me) && self.enemy_who_surprised_me == self.enemy) {
       self.shootpos = self.shootent getshootatpos();
-    }
-    else {
+    } else {
       self.shootpos = animscripts\combat_utility::get_last_known_shoot_pos(self.shootent);
     }
   } else
@@ -477,8 +466,7 @@ setshootstyleforvisibleenemy() {
   if(var_0 < 90000) {
     if(isDefined(self.shootent) && isDefined(self.shootent.magic_bullet_shield)) {
       return setshootstyle("single", 0);
-    }
-    else {
+    } else {
       return setshootstyle("full", 0);
     }
   } else if(var_0 < 810000 || shouldbeajerk())
@@ -486,8 +474,7 @@ setshootstyleforvisibleenemy() {
   else if(self.providecoveringfire || var_1 || var_0 < 2560000) {
     if(shoulddosemiforvariety()) {
       return setshootstyle("semi", 0);
-    }
-    else {
+    } else {
       return setshootstyle("burst", 0);
     }
   }
@@ -513,8 +500,7 @@ setshootstyleforsuppression() {
   if(self.providecoveringfire || var_0 < 1690000) {
     if(shoulddosemiforvariety()) {
       return setshootstyle("semi", 0);
-    }
-    else {
+    } else {
       return setshootstyle("burst", 0);
     }
   }

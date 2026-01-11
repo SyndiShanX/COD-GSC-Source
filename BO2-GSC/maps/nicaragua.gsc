@@ -83,8 +83,7 @@ on_saved_restored() {
 reset_client_dvars() {
   if(!flag("menendez_section_done")) {
     self setclientdvars("compass", "1", "hud_showStance", "1", "cg_cursorHints", "4", "hud_showobjectives", "1", "ammoCounterHide", "1", "miniscoreboardhide", "0", "ui_hud_hardcore", "0", "credits_active", "0", "hud_missionFailed", "0", "cg_cameraUseTagCamera", "1", "cg_drawCrosshair", "1", "r_heroLightScale", "1 1 1", "player_sprintUnlimited", "0", "r_bloomTweaks", "0", "r_exposureTweak", "0");
-  }
-  else {
+  } else {
     self setclientdvars("compass", "1", "hud_showStance", "1", "cg_cursorHints", "4", "hud_showobjectives", "1", "ammoCounterHide", "0", "miniscoreboardhide", "0", "ui_hud_hardcore", "0", "credits_active", "0", "hud_missionFailed", "0", "cg_cameraUseTagCamera", "1", "cg_drawCrosshair", "1", "r_heroLightScale", "1 1 1", "player_sprintUnlimited", "0", "r_bloomTweaks", "0", "r_exposureTweak", "0");
   }
 
@@ -153,8 +152,7 @@ level_precache() {
   precacheshader("overlay_cocaine");
 }
 
-init_spawn_funcs() {
-}
+init_spawn_funcs() {}
 
 skipto_setup() {
   skipto = level.skipto_point;

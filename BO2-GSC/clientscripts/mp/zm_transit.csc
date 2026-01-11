@@ -129,8 +129,7 @@ setup_morsecode() {
 power_rumble_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     self thread rumble_and_shake_the_player(localclientnum, fieldname);
-  }
-  else {
+  } else {
     self notify("stop_power_rumble");
   }
 }
@@ -171,8 +170,7 @@ infog_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
   if(newval == 1) {
     self thread lerp_infog_alpha(0);
-  }
-  else {
+  } else {
     self thread lerp_infog_alpha(1);
   }
 }
@@ -210,11 +208,9 @@ register_client_fields() {
   }
 }
 
-register_client_flags() {
-}
+register_client_flags() {}
 
-register_clientflag_callbacks() {
-}
+register_clientflag_callbacks() {}
 
 start_zombie_stuff() {
   level._uses_crossbow = 1;
@@ -413,15 +409,13 @@ transit_vision_change(ent_player) {
     }
     if(isDefined(self.script_float)) {
       trans_time = self.script_float;
-    }
-    else {
+    } else {
       trans_time = 2;
     }
 
     if(!isDefined(who._previous_vision)) {
       who._previous_vision = visionset;
-    }
-    else {
+    } else {
       who clientscripts\mp\zombies\_zm::zombie_vision_set_remove(who._previous_vision, trans_time, local_clientnum);
     }
 
@@ -626,8 +620,7 @@ safety_light_callback(localclientnum, oldval, newval, bnewent, binitialsnap, fie
   if(isDefined(safety)) {
     if(is_true(newval)) {
       safety notify("power_on");
-    }
-    else {
+    } else {
       safety notify("power_off");
     }
   } else {
@@ -656,8 +649,7 @@ find_safety_light(name) {
 sq_tower_watcher(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     level.sq_tower_complete = 1;
-  }
-  else {
+  } else {
     level.sq_tower_complete = undefined;
   }
 }
@@ -665,8 +657,7 @@ sq_tower_watcher(localclientnum, oldval, newval, bnewent, binitialsnap, fieldnam
 maxis_lights_watcher(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     level.light_max_sq = 1;
-  }
-  else {
+  } else {
     level.light_max_sq = undefined;
   }
 }
@@ -674,8 +665,7 @@ maxis_lights_watcher(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 screecher_light_watcher(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
     level.light_ric_sq = 1;
-  }
-  else {
+  } else {
     level.light_ric_sq = undefined;
   }
 }
@@ -709,8 +699,7 @@ power_controlled_or_turbine(on, off, on_sq, off_sq, name) {
 
     if(isDefined(lightstruct)) {
       lightstruct waittill("power_on");
-    }
-    else {
+    } else {
       level waittill_any("power_on", "pwr");
     }
 
@@ -739,8 +728,7 @@ power_controlled_or_turbine(on, off, on_sq, off_sq, name) {
 
     if(isDefined(lightstruct)) {
       lightstruct waittill("power_off");
-    }
-    else {
+    } else {
       level waittill("pwo");
     }
 

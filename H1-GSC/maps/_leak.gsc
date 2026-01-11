@@ -81,11 +81,9 @@ leak_drain(var_0) {
 
   if(var_1 == self.a) {
     var_2 = self.up * -1;
-  }
-  else if(var_1 == self.b) {
+  } else if(var_1 == self.b) {
     var_2 = self.up;
-  }
-  else {
+  } else {
     var_2 = vectorfromlinetopoint(self.a, self.b, var_0);
   }
 

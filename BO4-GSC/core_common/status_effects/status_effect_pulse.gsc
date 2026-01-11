@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\status_effects\status_effect_util;
 #include scripts\core_common\system_shared;
-
 #namespace status_effect_pulse;
 
 autoexec __init__system__() {
@@ -28,8 +27,8 @@ pulse_apply(var_756fda07, weapon, applicant) {
   self.owner clientfield::set_to_player("pulsed", 1);
   shutdownpulserebootindicatormenu();
   pulserebootmenu = self.owner openluimenu("EmpRebootIndicator");
-  self.owner setluimenudata(pulserebootmenu, #"endtime", int(self.endtime));
-  self.owner setluimenudata(pulserebootmenu, #"starttime", int(self.endtime - self.duration));
+  self.owner setluimenudata(pulserebootmenu, # "endtime", int(self.endtime));
+  self.owner setluimenudata(pulserebootmenu, # "starttime", int(self.endtime - self.duration));
   self thread pulse_rumble_loop(0.75);
   self.owner setempjammed(1);
 }

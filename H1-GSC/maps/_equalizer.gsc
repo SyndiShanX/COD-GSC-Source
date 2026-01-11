@@ -920,7 +920,7 @@ add_all_channels_to_filter(var_0) {
   var_1 = get_all_channels();
 
   foreach(var_4, var_3 in var_1) {
-  level.ambient_eq[var_0][var_4] = 1;
+    level.ambient_eq[var_0][var_4] = 1;
   }
 }
 
@@ -934,7 +934,7 @@ add_all_channels_but_music_and_mission(var_0) {
   var_1["mission"] = undefined;
 
   foreach(var_4, var_3 in var_1) {
-  level.ambient_eq[var_0][var_4] = 1;
+    level.ambient_eq[var_0][var_4] = 1;
   }
 }
 
@@ -947,7 +947,7 @@ add_all_channels_but_music(var_0) {
   var_1["music"] = undefined;
 
   foreach(var_4, var_3 in var_1) {
-  level.ambient_eq[var_0][var_4] = 1;
+    level.ambient_eq[var_0][var_4] = 1;
   }
 }
 

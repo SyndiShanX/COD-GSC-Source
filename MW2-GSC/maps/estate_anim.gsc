@@ -62,38 +62,38 @@ breach_anims() {
   //NOT USED
 
   /*
-	
+  	
   level.scr_anim[ "generic" ][ "breach_react_desk_v1" ] = %breach_react_desk_v1;	//cool
   level.scr_anim[ "generic" ][ "breach_react_desk_v2" ] = %breach_react_desk_v2;
   level.scr_anim[ "generic" ][ "breach_react_desk_v3" ] = %breach_react_desk_v3;
   level.scr_anim[ "generic" ][ "breach_react_desk_v4" ] = %breach_react_desk_v4;	//cool
   level.scr_anim[ "generic" ][ "breach_react_desk_v7" ] = %breach_react_desk_v7;
-	
+  	
   level.scr_anim[ "generic" ][ "patrol_bored_react_walkstop" ] = %patrol_bored_react_walkstop;
-	
+  	
   level.scr_anim[ "generic" ][ "heat_stand_turn_R" ] = %heat_stand_turn_R;
-	
+  	
   level.scr_anim[ "generic" ][ "favela_chaotic_crouchcover_fireC" ] = %favela_chaotic_crouchcover_fireC;
-	
+  	
   level.scr_anim[ "generic" ][ "favela_chaotic_standcover_fireA" ] = %favela_chaotic_standcover_fireA;
   level.scr_anim[ "generic" ][ "favela_chaotic_standcover_fireB" ] = %favela_chaotic_standcover_fireB;
   level.scr_anim[ "generic" ][ "favela_chaotic_standcover_fireC" ] = %favela_chaotic_standcover_fireC;
-	
+  	
   level.scr_anim[ "generic" ][ "favela_chaotic_cornerL_mid90" ] = %favela_chaotic_cornerL_mid90;
-	
+  	
   level.scr_anim[ "generic" ][ "breach_react_guntoss_v2_guy1" ] = %breach_react_guntoss_v2_guy1;
   level.scr_anim[ "generic" ][ "breach_react_guntoss_v2_guy2" ] = %breach_react_guntoss_v2_guy2;
-	
+  	
   level.scr_anim[ "generic" ][ "breach_react_push_guy1" ] = %breach_react_push_guy1;
   level.scr_anim[ "generic" ][ "breach_react_push_guy2" ] = %breach_react_push_guy2;
-	
+  	
   level.scr_anim[ "generic" ][ "breach_chair_hide_reaction_v1" ] = %breach_chair_hide_reaction_v1;
   level.scr_anim[ "generic" ][ "breach_chair_hide_reaction_v1_death" ] = %covercrouch_death_1;
   level.scr_anim[ "generic" ][ "breach_chair_hide_reaction_v1_death2" ] = %covercrouch_death_2;
-	
+  	
   level.scr_anim[ "generic" ][ "breach_chair_hide_reaction_v2" ] = %breach_chair_hide_reaction_v2;	//cool
   level.scr_anim[ "generic" ][ "breach_chair_hide_reaction_v2_death" ] = %breach_chair_hide_reaction_death_v2;
-	
+  	
   level.scr_anim[ "generic" ][ "takedown_room2A_soldier" ] = %takedown_room2A_soldier;
   level.scr_anim[ "generic" ][ "takedown_room2A_soldier_idle" ][ 0 ] = %takedown_room2A_soldier_end_idle;
   level.scr_anim[ "generic" ][ "takedown_room2B_soldier" ] = %takedown_room2B_soldier;
@@ -102,7 +102,7 @@ breach_anims() {
   level.scr_anim[ "generic" ][ "takedown_room1A_soldier_idle" ][ 0 ] = %takedown_room1A_soldier_idle;
   level.scr_anim[ "generic" ][ "takedown_room1B_soldier" ] = %takedown_room1B_soldier;
   level.scr_anim[ "generic" ][ "takedown_room1B_soldier_idle" ][ 0 ] = %takedown_room1B_soldier_idle;
-	
+  	
   */
 
 }
@@ -496,7 +496,7 @@ dialog() {
 
   //********* RPG Components**********/
 
-/
+  /
 
   //RPG team moving in from the east!!	
   level.scr_radio["est_snp1_rpgteameast"] = "est_snp1_rpgteameast";
@@ -518,7 +518,7 @@ dialog() {
 
   //********* FRIENDLY OBITUARIES***********/
 
-/
+  /
 
   //Aaagh! I'm hit!!! Need assis- (static hiss)	
   level.scr_radio["est_ozn_imhit"] = "est_ozn_imhit";
@@ -534,7 +534,7 @@ dialog() {
 
   //********* ABANDONMENT MECHANIC***********/
 
-/
+  /
 
   //Roach! Stay the close to the house!		
   level.scr_radio["est_gst_stayclose"] = "est_gst_stayclose";
@@ -556,7 +556,7 @@ dialog() {
 
   //********* GET THE DSM***********/
 
-/
+  /
 
   //Roach, the transfer's complete! I'll cover the main approach while you get the DSM! Move!	
   level.scr_radio["est_gst_dsmcomplete"] = "est_gst_dsmcomplete";
@@ -592,7 +592,7 @@ dialog() {
 
   //********* Ending - Player Drag*************/
 
-/
+  /
 
   //I've got you Roach, hang on!
   level.scr_radio["est_gst_gotyouroach"] = "est_gst_gotyouroach";
@@ -617,7 +617,7 @@ dialog() {
 
   //********* Ending - Final Walk*************/
 
-/
+  /
 
   //Come on, get up!	
   level.scr_sound["ghost_ending"]["est_gst_comeongetup"] = "est_gst_comeongetup";
@@ -642,7 +642,7 @@ dialog() {
 
   //********* Ending - Shepherd's Greeting*************/
 
-/
+  /
 
   //Do you have the DSM?	
   //level.scr_sound[ "shepherd_ending" ][ "est_shp_havethedsm" ]			= "est_shp_havethedsm";
@@ -667,7 +667,7 @@ dialog() {
 
   //********* Ending - Price on radio*************/
 
-/
+  /
 
   //Ghost, come in, this is Price! We're under attack by Shepherd's men at the boneyard! 	
   level.scr_radio["est_pri_comein"] = "est_pri_comein";

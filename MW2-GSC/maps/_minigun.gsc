@@ -85,15 +85,13 @@ player_on_minigun() {
     owner = self getvehicleowner();
     if(isDefined(owner) && isplayer(owner)) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   } else {
     if(isDefined(self getturretowner())) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   }
@@ -184,8 +182,7 @@ minigun_used() {
 
   if(level.console) {
     overheat_time = 6; // full usage to overheat( original 8 )
-  }
-  else {
+  } else {
     overheat_time = 10;
   }
 

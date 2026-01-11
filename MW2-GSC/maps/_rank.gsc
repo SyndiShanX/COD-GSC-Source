@@ -58,7 +58,7 @@ init() {
 
   thread xp_setup();
   foreach(player in level.players) {
-  player thread xp_player_init();
+    player thread xp_player_init();
   }
 }
 
@@ -118,15 +118,13 @@ hud_width_format() {
   if(getDvar("hiDef") == "1" || getDvar("wideScreen") == "1") {
     if(isSplitscreen()) {
       return 966; // customized to match hud's xpbar background
-    }
-    else {
+    } else {
       return 720;
     }
   } else {
     if(isSplitscreen()) {
       return 726; // customized to match hud's xpbar background
-    }
-    else {
+    } else {
       return 540;
     }
   }
@@ -135,8 +133,7 @@ hud_width_format() {
 xpbar_update() {
   if(!get_xpbarwidth()) {
     self.hud_xpbar.alpha = 0;
-  }
-  else {
+  } else {
     self.hud_xpbar.alpha = 0.65;
   }
 
@@ -146,8 +143,7 @@ xpbar_update() {
 get_xpbarwidth() {
   if(self == level.player) {
     player_num = "1";
-  }
-  else {
+  } else {
     player_num = "2";
   }
 
@@ -278,8 +274,7 @@ updatePlayerScore(type, value) {
   if(!isDefined(value)) {
     if(isDefined(level.scoreInfo[type])) {
       value = getScoreInfoValue(type);
-    }
-    else {
+    } else {
       value = getScoreInfoValue("kill");
     }
   }
@@ -386,8 +381,7 @@ updateRank() {
 
   if(self == level.player) {
     setdvar("player_1_rank", self.summary["rank"]);
-  }
-  else {
+  } else {
     setdvar("player_2_rank", self.summary["rank"]);
   }
 
@@ -462,8 +456,7 @@ showNotifyMessage(notifyData) {
 
   if(isDefined(notifyData.duration)) {
     duration = notifyData.duration;
-  }
-  else {
+  } else {
     duration = 4.0;
   }
 
@@ -475,8 +468,7 @@ showNotifyMessage(notifyData) {
 
   if(isDefined(notifyData.glowColor)) {
     glowColor = notifyData.glowColor;
-  }
-  else {
+  } else {
     glowColor = (0.3, 0.6, 0.3);
   }
 
@@ -485,16 +477,14 @@ showNotifyMessage(notifyData) {
   if(isDefined(notifyData.titleText)) {
     if(isDefined(notifyData.titleLabel)) {
       self.notifyTitle.label = notifyData.titleLabel;
-    }
-    else {
+    } else {
       // string not found for
     }
-      self.notifyTitle.label = &"";
+    self.notifyTitle.label = &"";
 
     if(isDefined(notifyData.titleLabel) && !isDefined(notifyData.titleIsString)) {
       self.notifyTitle setValue(notifyData.titleText);
-    }
-    else {
+    } else {
       self.notifyTitle setText(notifyData.titleText);
     }
     self.notifyTitle setPulseFX(100, int(duration * 1000), 1000);
@@ -505,16 +495,14 @@ showNotifyMessage(notifyData) {
   if(isDefined(notifyData.notifyText)) {
     if(isDefined(notifyData.textLabel)) {
       self.notifyText.label = notifyData.textLabel;
-    }
-    else {
+    } else {
       // string not found for
     }
-      self.notifyText.label = &"";
+    self.notifyText.label = &"";
 
     if(isDefined(notifyData.textLabel) && !isDefined(notifyData.textIsString)) {
       self.notifyText setValue(notifyData.notifyText);
-    }
-    else {
+    } else {
       self.notifyText setText(notifyData.notifyText);
     }
     self.notifyText setPulseFX(100, int(duration * 1000), 1000);
@@ -528,11 +516,10 @@ showNotifyMessage(notifyData) {
 
     if(isDefined(notifyData.text2Label)) {
       self.notifyText2.label = notifyData.text2Label;
-    }
-    else {
+    } else {
       // string not found for
     }
-      self.notifyText2.label = &"";
+    self.notifyText2.label = &"";
 
     self.notifyText2 setText(notifyData.notifyText2);
     self.notifyText2 setPulseFX(100, int(duration * 1000), 1000);
@@ -649,8 +636,7 @@ getRank() {
 
   if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))) {
     return rankId;
-  }
-  else {
+  } else {
     return self getRankForXp(rankXp);
   }
 }
@@ -668,8 +654,7 @@ getRankForXp(xpVal) {
     rankId++;
     if(isDefined(level.rankTable[rankId])) {
       rankName = level.rankTable[rankId][1];
-    }
-    else {
+    } else {
       rankName = undefined;
     }
   }

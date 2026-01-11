@@ -330,11 +330,9 @@ chase_player() {
 chase_update() {
   if(self check_bus_attack()) {
     self chase_bus();
-  }
-  else if(self check_phase()) {
+  } else if(self check_phase()) {
     self do_phase();
-  }
-  else if(self check_range_attack()) {
+  } else if(self check_range_attack()) {
     self range_attack();
   }
 
@@ -629,8 +627,7 @@ avogadro_exit(from) {
 
   if(isDefined(from) && from == "exit_idle") {
     self.return_round = level.round_number + 1;
-  }
-  else {
+  } else {
     self.return_round = level.round_number + randomintrange(2, 5);
   }
 
@@ -693,8 +690,7 @@ cloud_update_fx() {
       if(isDefined(player)) {
         if(isDefined(self._in_cloud) && self._in_cloud) {
           player thread do_player_general_vox("general", "avogadro_above", 90, 10);
-        }
-        else {
+        } else {
           player thread do_player_general_vox("general", "avogadro_arrive", 60, 40);
         }
       } else
@@ -817,7 +813,7 @@ cloud_find_spawn() {
       locations = level.zones[zone].avogadro_locations;
 
       foreach(loc in locations) {
-      use_points[use_points.size] = loc;
+        use_points[use_points.size] = loc;
       }
     }
   }
@@ -1138,8 +1134,7 @@ avogadro_pain(einflictor) {
 
     if(tag == "window_left_rear_jnt") {
       animstate = "zm_bus_back_pain";
-    }
-    else {
+    } else {
       animstate = "zm_bus_pain";
     }
 
@@ -1237,11 +1232,9 @@ avogadro_update_health_fx() {
 
   if(self.hit_by_melee == 0) {
     playFXOnTag(level._effect["avogadro_health_full"], self.health_fx, "tag_origin");
-  }
-  else if(self.hit_by_melee <= 2) {
+  } else if(self.hit_by_melee <= 2) {
     playFXOnTag(level._effect["avogadro_health_half"], self.health_fx, "tag_origin");
-  }
-  else {
+  } else {
     playFXOnTag(level._effect["avogadro_health_low"], self.health_fx, "tag_origin");
   }
 }
@@ -1253,8 +1246,7 @@ avogadro_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
 
   if(smeansofdeath == "MOD_MELEE") {
     if(isplayer(einflictor)) {
-      if(isDefined(einflictor.avogadro_melee_time)) {
-      }
+      if(isDefined(einflictor.avogadro_melee_time)) {}
 
       if(self.shield) {
         einflictor.avogadro_melee_time = gettime();
@@ -1275,8 +1267,7 @@ avogadro_damage_func(einflictor, eattacker, idamage, idflags, smeansofdeath, swe
 
       if(sweapon == "tazer_knuckles_zm") {
         self.hit_by_melee = self.hit_by_melee + 2;
-      }
-      else {
+      } else {
         self.hit_by_melee++;
       }
 
@@ -1345,11 +1336,9 @@ stun_avogadro() {
   }
 }
 
-fling_avogadro(player) {
-}
+fling_avogadro(player) {}
 
-drag_avogadro(vdir) {
-}
+drag_avogadro(vdir) {}
 
 avogadro_debug_axis() {
   self endon("death");

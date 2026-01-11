@@ -237,8 +237,7 @@ StartMove() {
   negStartNode = self GetNegotiationStartNode();
   if(isDefined(negStartNode)) {
     goalPos = negStartNode.origin;
-  }
-  else {
+  } else {
     goalPos = self GetPathGoalPos();
   }
 
@@ -271,8 +270,7 @@ StartMove() {
   self ScrAgentSetAnimMode("anim deltas");
   if(3 <= angleIndex && angleIndex <= 5) {
     self ScrAgentSetOrientMode("face angle abs", (0, AngleClamp180(lookaheadAngles[1] - startAnimAngles[1]), 0));
-  }
-  else {
+  } else {
     self ScrAgentSetOrientMode("face angle abs", self.angles);
   }
 
@@ -362,14 +360,11 @@ HandleFootstepNotetracks(note, animState, animIndex, animTime) {
 
       if(self.aiState == "traverse") {
         moveType = "land";
-      }
-      else if(self.moveMode == "sprint") {
+      } else if(self.moveMode == "sprint") {
         moveType = "sprint";
-      }
-      else if(self.moveMode == "fastwalk") {
+      } else if(self.moveMode == "fastwalk") {
         moveType = "walk";
-      }
-      else {
+      } else {
         moveType = "run";
       }
 
@@ -393,8 +388,7 @@ DoHitReaction(hitAngle) {
 
   if(angleDiff > 0) {
     animIndex = 1;
-  }
-  else {
+  } else {
     animIndex = 0;
   }
 

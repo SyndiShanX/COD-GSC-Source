@@ -379,8 +379,7 @@ loopfxthread(clientnum) {
 
     if(isDefined(self.fxstop)) {
       level waittill("stop fx" + self.fxstop);
-    }
-    else {
+    } else {
       return;
     }
 
@@ -390,8 +389,7 @@ loopfxthread(clientnum) {
 
     if(isDefined(self.fxstart)) {
       level waittill("start fx" + self.fxstart);
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -414,8 +412,7 @@ create_loopsound(clientnum) {
   if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil") {
     if(isDefined(self.v["stopable"]) && self.v["stopable"]) {
       thread clientscripts\_utility::loop_fx_sound(clientnum, self.v["soundalias"], self.v["origin"], "stop_loop");
-    }
-    else {
+    } else {
       thread clientscripts\_utility::loop_fx_sound(clientnum, self.v["soundalias"], self.v["origin"]);
     }
   }
@@ -466,8 +463,7 @@ fx_init(clientnum) {
   level._createfxforwardandupset = 1;
 }
 
-reportnumeffects() {
-}
+reportnumeffects() {}
 
 playlightloopexploder(exploderindex) {
   num = int(exploderindex);

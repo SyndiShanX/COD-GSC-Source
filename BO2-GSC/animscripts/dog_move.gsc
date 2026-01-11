@@ -57,8 +57,7 @@ moveloop() {
   while(true) {
     if(self.disablearrivals) {
       self.stopanimdistsq = 0;
-    }
-    else {
+    } else {
       self.stopanimdistsq = anim.dogstoppingdistsq;
     }
 
@@ -114,8 +113,7 @@ randomsoundduringrunloop() {
 
     if(isDefined(self.script_growl)) {
       self play_sound_on_tag("aml_dog_growl", "tag_eye");
-    }
-    else {
+    } else {
       self play_sound_on_tag("aml_dog_bark", "tag_eye");
     }
 
@@ -143,8 +141,7 @@ getrunanimweights() {
 
     if(weights["right"] > 1) {
       weights["right"] = 1;
-    }
-    else if(weights["right"] < 0) {
+    } else if(weights["right"] < 0) {
       weights["right"] = 0;
     }
 

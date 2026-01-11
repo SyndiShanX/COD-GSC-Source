@@ -143,7 +143,9 @@ function dog_round_spawning() {
     players = getplayers();
     favorite_enemy = get_favorite_enemy();
     if(isDefined(level.dog_spawn_func)) {
-      spawn_loc = [[level.dog_spawn_func]](level.dog_spawners, favorite_enemy);
+      spawn_loc = [
+        [level.dog_spawn_func]
+      ](level.dog_spawners, favorite_enemy);
       ai = zombie_utility::spawn_zombie(level.dog_spawners[0]);
       if(isDefined(ai)) {
         ai.favoriteenemy = favorite_enemy;
@@ -573,9 +575,7 @@ function special_dog_spawn(num_to_spawn, spawners, spawn_point) {
       }
     } else {
       if(isDefined(level.dog_spawn_func)) {
-        spawn_loc = [
-          [level.dog_spawn_func]
-        ](level.dog_spawners, favorite_enemy);
+        spawn_loc = [[level.dog_spawn_func]](level.dog_spawners, favorite_enemy);
         ai = zombie_utility::spawn_zombie(level.dog_spawners[0]);
         if(isDefined(ai)) {
           ai.favoriteenemy = favorite_enemy;

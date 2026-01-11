@@ -4,7 +4,6 @@
 ***********************************************/
 
 #include scripts\core_common\system_shared;
-
 #namespace wz_escape_ffotd_alt;
 
 autoexec __init__system__() {

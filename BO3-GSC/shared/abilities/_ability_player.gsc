@@ -382,9 +382,7 @@ function turn_gadget_on(slot, weapon) {
   if(weapon.gadget_type != 14) {
     if(isDefined(self.isneardeath) && self.isneardeath == 1) {
       if(isDefined(level.heroabilityactivateneardeath)) {
-        [
-          [level.heroabilityactivateneardeath]
-        ]();
+        [[level.heroabilityactivateneardeath]]();
       }
     }
     self.heroabilityactivatetime = gettime();

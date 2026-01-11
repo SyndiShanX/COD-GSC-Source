@@ -163,8 +163,7 @@ func_6CD4(var_00, var_01, var_02, var_03) {
 
         if(scripts\mp\killstreaks\utility::func_A69F(var_03, "passive_fast_launch")) {
           wait 0.1;
-        }
-        else {
+        } else {
           wait 0.2;
         }
       }
@@ -178,7 +177,7 @@ func_6CD4(var_00, var_01, var_02, var_03) {
 
   if(isDefined(var_06) && var_6.size > 0) {
     foreach(var_24 in var_06) {
-    var_24 delete();
+      var_24 delete();
     }
   }
 }
@@ -346,8 +345,7 @@ func_6D84(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07) {
 
   if(scripts\mp\killstreaks\utility::func_A69F(var_07, "passive_fast_launch")) {
     var_08 setscriptablepartstate("target", "active_fast");
-  }
-  else {
+  } else {
     var_08 setscriptablepartstate("target", "active");
   }
 

@@ -155,8 +155,7 @@ shouldSideStep() {
   if(canSideStep() && IsPlayer(self.enemy) && self.enemy IsLookingAt(self)) {
     if(self.zombie_move_speed != "sprint" || RandomFloat(1) < level.SIDE_STEP_CHANCE) {
       return "step";
-    }
-    else {
+    } else {
       return "roll";
     }
   }

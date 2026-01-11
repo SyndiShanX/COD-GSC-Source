@@ -7,7 +7,6 @@
 #include scripts\zm_common\zm_bgb;
 #include scripts\zm_common\zm_loadout;
 #include scripts\zm_common\zm_stats;
-
 #namespace zm_bgb_equip_mint;
 
 autoexec __init__system__() {

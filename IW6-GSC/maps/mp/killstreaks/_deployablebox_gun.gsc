@@ -84,9 +84,10 @@ onUseDeployable(boxEnt) {
     boxConfig = level.boxSettings[boxEnt.boxType];
 
     if(isDefined(level.deployableBoxGiveWeaponFunc)) {
-      [[level.deployableBoxGiveWeaponFunc]](true);
-    }
-    else {
+      [
+        [level.deployableBoxGiveWeaponFunc]
+      ](true);
+    } else {
       giveGun(self, boxConfig.minigunWeapon);
     }
 
@@ -210,8 +211,7 @@ canUseDeployable(boxEnt) {
   }
   if(!is_aliens()) {
     return (!self isJuggernaut());
-  }
-  else {
+  } else {
     return true;
   }
 }

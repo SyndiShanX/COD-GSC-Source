@@ -108,8 +108,7 @@ explodable_barrel_think() {
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
       self.damageowner = self;
-    }
-    else {
+    } else {
       self.damageowner = attacker;
     }
 
@@ -205,8 +204,7 @@ explodable_barrel_explode() {
 
   if(isDefined(self.removeexplodable)) {
     self hide();
-  }
-  else {
+  } else {
     self setModel("global_explosive_barrel");
   }
 
@@ -239,8 +237,7 @@ flammable_crate_think() {
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
       self.damageowner = self;
-    }
-    else {
+    } else {
       self.damageowner = attacker;
     }
 

@@ -5,7 +5,6 @@
 
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
-
 #namespace serverfaceanim;
 
 autoexec __init__system__() {
@@ -26,15 +25,15 @@ init_serverfaceanim() {
   if(!isDefined(level.face_event_handler)) {
     level.face_event_handler = spawnStruct();
     level.face_event_handler.events = [];
-    level.face_event_handler.events[#"death"] = "face_death";
-    level.face_event_handler.events[#"grenade danger"] = "face_alert";
-    level.face_event_handler.events[#"bulletwhizby"] = "face_alert";
-    level.face_event_handler.events[#"projectile_impact"] = "face_alert";
-    level.face_event_handler.events[#"explode"] = "face_alert";
-    level.face_event_handler.events[#"alert"] = "face_alert";
-    level.face_event_handler.events[#"shoot"] = "face_shoot_single";
-    level.face_event_handler.events[#"melee"] = "face_melee";
-    level.face_event_handler.events[#"damage"] = "face_pain";
+    level.face_event_handler.events[# "death"] = "face_death";
+    level.face_event_handler.events[# "grenade danger"] = "face_alert";
+    level.face_event_handler.events[# "bulletwhizby"] = "face_alert";
+    level.face_event_handler.events[# "projectile_impact"] = "face_alert";
+    level.face_event_handler.events[# "explode"] = "face_alert";
+    level.face_event_handler.events[# "alert"] = "face_alert";
+    level.face_event_handler.events[# "shoot"] = "face_shoot_single";
+    level.face_event_handler.events[# "melee"] = "face_melee";
+    level.face_event_handler.events[# "damage"] = "face_pain";
     level thread wait_for_face_event();
   }
 }

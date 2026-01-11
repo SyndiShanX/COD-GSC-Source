@@ -390,9 +390,7 @@ ghostexplosionradiusdamage(param_00, param_01, param_02) {
   if(isplayer(param_01)) {
     if(isDefined(var_03)) {
       param_01 thread scripts\cp\cp_damage::updatedamagefeedback("hitcritical");
-      if([
-          [level.should_moving_target_explode]
-        ](param_00, var_03)) {
+      if([[level.should_moving_target_explode]](param_00, var_03)) {
         if(isDefined(level.process_player_gns_combo_func)) {
           [
             [level.process_player_gns_combo_func]
@@ -404,9 +402,7 @@ ghostexplosionradiusdamage(param_00, param_01, param_02) {
       }
 
       if(isDefined(level.hit_wrong_moving_target_func)) {
-        [
-          [level.hit_wrong_moving_target_func]
-        ](param_01, var_03, param_00);
+        [[level.hit_wrong_moving_target_func]](param_01, var_03, param_00);
         return;
       }
 

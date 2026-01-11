@@ -67,8 +67,7 @@ init() {
 
   if(getdvar("scr_heli_hardpoint_interval") != "") {
     level.helicopterinterval = getdvarfloat("scr_heli_hardpoint_interval");
-  }
-  else {
+  } else {
     setdvar("scr_heli_hardpoint_interval", 180);
     level.helicopterinterval = 180;
   }
@@ -125,8 +124,7 @@ onplayerconnect() {
 adduavmodel() {
   if(level.teambased) {
     level.uavmodels[self.team][level.uavmodels[self.team].size] = self;
-  }
-  else {
+  } else {
     level.uavmodels[self.owner.guid + "_" + gettime()] = self;
   }
 }
@@ -162,8 +160,7 @@ addactiveuav() {
 
   if(level.teambased) {
     level.activeuavs[self.team]++;
-  }
-  else {
+  } else {
     level.activeuavs[self.owner.guid]++;
   }
 }
@@ -171,8 +168,7 @@ addactiveuav() {
 removeactiveuav() {
   if(level.teambased) {
     level.activeuavs[self.team]--;
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     level.activeuavs[self.owner.guid]--;
   }
 }
@@ -335,12 +331,10 @@ airstrikedamageentsthread() {
   self endon("airstrikeDamageEntsThread");
 
   while(level.airstrikedamagedentsindex < level.airstrikedamagedentscount) {
-    if(!isDefined(level.airstrikedamagedents[level.airstrikedamagedentsindex])) {
-    } else {
+    if(!isDefined(level.airstrikedamagedents[level.airstrikedamagedentsindex])) {} else {
       var_0 = level.airstrikedamagedents[level.airstrikedamagedentsindex];
 
-      if(!isDefined(var_0.entity)) {
-      } else if(!var_0.isplayer || isalive(var_0.entity)) {
+      if(!isDefined(var_0.entity)) {} else if(!var_0.isplayer || isalive(var_0.entity)) {
         var_0 maps\mp\gametypes\_weapons::damageent(var_0.einflictor, var_0.damageowner, var_0.damage, "MOD_PROJECTILE_SPLASH", "artillery_mp", var_0.pos, vectornormalize(var_0.damagecenter - var_0.pos));
         level.airstrikedamagedents[level.airstrikedamagedentsindex] = undefined;
 
@@ -416,8 +410,7 @@ doplanestrike(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7) {
 
   if(isDefined(level.airstrike_plane_fx_func)) {
     var_12 thread[[level.airstrike_plane_fx_func]](var_13);
-  }
-  else {
+  } else {
     var_12 thread playplanefx(var_13);
   }
 
@@ -601,8 +594,7 @@ targetisclose(var_0, var_1) {
 
   if(var_2) {
     var_3 = 1;
-  }
-  else {
+  } else {
     var_3 = -1;
   }
 
@@ -613,8 +605,7 @@ targetisclose(var_0, var_1) {
 
   if(var_7 < 3000) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -626,8 +617,7 @@ targetisinfront(var_0, var_1) {
 
   if(var_4 > 0) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -698,8 +688,7 @@ hardpointnotify(var_0, var_1) {
 killstreakearned(var_0) {
   if(var_0 == "radar_mp") {
     self.firstkillstreakearned = gettime();
-  }
-  else if(isDefined(self.firstkillstreakearned) && var_0 == "helicopter_mp") {
+  } else if(isDefined(self.firstkillstreakearned) && var_0 == "helicopter_mp") {
     if(gettime() - self.firstkillstreakearned < 20000) {
       thread maps\mp\gametypes\_missions::genericchallenge("wargasm");
     }

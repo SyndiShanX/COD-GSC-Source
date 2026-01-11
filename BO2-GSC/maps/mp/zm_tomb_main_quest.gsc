@@ -163,8 +163,7 @@ main_quest_init() {
   array_thread(level.dig_spawners, ::add_spawn_function, ::dug_zombie_spawn_init);
 }
 
-onplayerconnect() {
-}
+onplayerconnect() {}
 
 player_disconnect_callback(player) {
   n_player = player getentitynumber() + 1;
@@ -394,7 +393,7 @@ chamber_blocker() {
 
 watch_for_staff_upgrades() {
   foreach(staff in level.a_elemental_staffs) {
-  staff thread staff_upgrade_watch();
+    staff thread staff_upgrade_watch();
   }
 }
 
@@ -406,14 +405,11 @@ staff_upgrade_watch() {
 staff_get_pickup_message() {
   if(self.element == "air") {
     return &"ZM_TOMB_PUAS";
-  }
-  else if(self.element == "fire") {
+  } else if(self.element == "fire") {
     return &"ZM_TOMB_PUFS";
-  }
-  else if(self.element == "lightning") {
+  } else if(self.element == "lightning") {
     return &"ZM_TOMB_PULS";
-  }
-  else {
+  } else {
     return &"ZM_TOMB_PUIS";
   }
 }
@@ -421,14 +417,11 @@ staff_get_pickup_message() {
 staff_get_insert_message() {
   if(self.element == "air") {
     return &"ZM_TOMB_INAS";
-  }
-  else if(self.element == "fire") {
+  } else if(self.element == "fire") {
     return &"ZM_TOMB_INFS";
-  }
-  else if(self.element == "lightning") {
+  } else if(self.element == "lightning") {
     return &"ZM_TOMB_INLS";
-  }
-  else {
+  } else {
     return &"ZM_TOMB_INWS";
   }
 }
@@ -561,8 +554,7 @@ staff_crystal_wait_for_teleport(n_element_enum) {
 
     if(self.piecespawn.model any_player_looking_at_plinth(lookat_dot, dist_sq)) {
       lookat_time = lookat_time + 0.1;
-    }
-    else {
+    } else {
       lookat_time = 0.0;
     }
   }
@@ -661,7 +653,7 @@ biplane_clue() {
     a_players = getplayers();
 
     foreach(e_player in a_players) {
-    level notify("sam_clue_biplane", e_player);
+      level notify("sam_clue_biplane", e_player);
     }
   }
 }
@@ -742,7 +734,7 @@ zone_capture_clue(str_zone) {
     a_players = getplayers();
 
     foreach(e_player in a_players) {
-    level notify("sam_clue_zonecap", e_player);
+      level notify("sam_clue_zonecap", e_player);
     }
   }
 }
@@ -823,8 +815,7 @@ dig_spot_get_staff_piece(e_player) {
 
       if(randomint(100) > miss_chance || s_staff.num_misses > 3 && miss_chance < 100) {
         return s_staff;
-      }
-      else {
+      } else {
         s_staff.num_misses++;
         break;
       }
@@ -1028,8 +1019,7 @@ zombie_killed_override(einflictor, attacker, idamage, smeansofdeath, sweapon, vd
     }
 
     if(isDefined(s_nearest_staff)) {
-      if(s_nearest_staff.charger.is_charged) {
-      } else {
+      if(s_nearest_staff.charger.is_charged) {} else {
         s_nearest_staff.charger.charges_received++;
         s_nearest_staff.charger thread zombie_soul_to_charger(self, s_nearest_staff.enum);
       }

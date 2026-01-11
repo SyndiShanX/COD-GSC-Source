@@ -19,8 +19,7 @@ start_shrimp_path(shrimp_effect, str_path_start, min_speed, max_speed, min_respa
 
   if(!isDefined(activate_all_paths)) {
     only_one_path_required = randomint(a_all_path_starts.size);
-  }
-  else {
+  } else {
     only_one_path_required = undefined;
   }
 

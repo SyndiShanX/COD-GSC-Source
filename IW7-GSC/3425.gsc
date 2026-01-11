@@ -146,7 +146,7 @@ func_15FD() {
 
 func_A5BC() {
   foreach(var_01 in level.spawned_enemies) {
-  var_01 getrandomarmkillstreak(var_1.health + 990, var_1.origin, var_01, var_01, "MOD_SUICIDE");
+    var_01 getrandomarmkillstreak(var_1.health + 990, var_1.origin, var_01, var_01, "MOD_SUICIDE");
   }
 }
 
@@ -155,8 +155,7 @@ func_7859(var_00) {
 
   if(var_1.size < 2) {
     var_02 = var_1[0];
-  }
-  else if(scripts\engine\utility::string_starts_with(var_1[0], "pf")) {
+  } else if(scripts\engine\utility::string_starts_with(var_1[0], "pf")) {
     var_02 = var_1[1];
 
     for(var_03 = 2; var_03 < var_1.size; var_3++) {
@@ -182,8 +181,7 @@ init_event_waves() {
 
   if(isDefined(level.event_funcs_init)) {
     [[level.event_funcs_init]]();
-  }
-  else {
+  } else {
     level.event_funcs["goon"] = ::goon_spawn_event_func;
     func_9608();
   }
@@ -525,8 +523,7 @@ func_E82B() {
 func_1B99(var_00) {
   if(ispointinvolume(var_0.origin, level.func_10817["underground_route"])) {
     var_01 = level._effect["goon_spawn_bolt_underground"];
-  }
-  else {
+  } else {
     var_01 = level._effect["goon_spawn_bolt"];
   }
 
@@ -539,8 +536,7 @@ func_1B99(var_00) {
 func_3115(var_00) {
   if(ispointinvolume(var_0.origin, level.func_10817["underground_route"])) {
     var_01 = level._effect["brute_spawn_bolt_indoor"];
-  }
-  else {
+  } else {
     var_01 = level._effect["brute_spawn_bolt"];
   }
 
@@ -932,7 +928,7 @@ func_77D3() {
     var_00 = [];
 
     foreach(var_02 in level.func_186E[self.basename]) {
-    var_0[var_0.size] = level.func_10817[var_02];
+      var_0[var_0.size] = level.func_10817[var_02];
     }
 
     return var_00;
@@ -948,7 +944,7 @@ func_7C8E() {
     self.spawners = var_00;
 
     foreach(var_02 in self.spawners) {
-    var_02 func_10865(self);
+      var_02 func_10865(self);
     }
   }
 
@@ -976,8 +972,7 @@ enemy_spawning_run() {
 
   if(!scripts\cp\utility::is_escape_gametype()) {
     wait 15;
-  }
-  else {
+  } else {
     wait 1;
   }
 
@@ -1014,8 +1009,7 @@ func_10865(var_00) {
 
   if(!isDefined(self.script_noteworthy) || self.script_noteworthy != "static") {
     level.func_5F90[level.func_5F90.size] = self;
-  }
-  else {
+  } else {
     self.func_10E45 = 1;
     level.func_10E44[level.func_10E44.size] = self;
   }
@@ -1026,8 +1020,7 @@ func_10865(var_00) {
 
   if(ispointinvolume(self.origin, var_00)) {
     self.func_93A1 = 1;
-  }
-  else {
+  } else {
     self.func_93A1 = 0;
   }
 
@@ -1089,7 +1082,7 @@ func_106D8() {
   var_05 = getEntArray("escape_spawn_trigger", "targetname");
 
   foreach(var_03 in var_05) {
-  var_03 thread func_6730();
+    var_03 thread func_6730();
   }
 }
 
@@ -1104,7 +1097,7 @@ func_6730() {
   var_00 = scripts\engine\utility::getstructarray(self.target, "targetname");
 
   foreach(var_02 in var_00) {
-  var_02 thread func_6722(self.func_E6DB);
+    var_02 thread func_6722(self.func_E6DB);
   }
 }
 
@@ -1135,8 +1128,7 @@ func_6731(var_00) {
 
       if(!isplayer(var_03)) {
         continue;
-      }
-      else {
+      } else {
         break;
       }
     }
@@ -1236,8 +1228,7 @@ func_66D6() {
 
   if(scripts\engine\utility::is_true(self.isactive)) {
     self getrandomarmkillstreak(self.health + 1000, self.origin);
-  }
-  else {}
+  } else {}
 }
 
 func_10D2E() {
@@ -1265,8 +1256,7 @@ func_10927() {
 
   if(var_03 != var_04) {
     var_05 = randomintrange(var_03, var_04);
-  }
-  else {
+  } else {
     var_05 = var_03;
   }
 
@@ -1276,8 +1266,7 @@ func_10927() {
 
   if(var_07 != var_08) {
     var_06 = randomintrange(var_07, var_08);
-  }
-  else {
+  } else {
     var_06 = var_07;
   }
 
@@ -1356,11 +1345,9 @@ spawn_zombie() {
 
     if(isDefined(var_01)) {
       var_02 = var_01;
-    }
-    else if(!isDefined(level.static_enemy_types)) {
+    } else if(!isDefined(level.static_enemy_types)) {
       var_02 = "generic_zombie";
-    }
-    else {
+    } else {
       var_02 = scripts\engine\utility::random(level.static_enemy_types);
     }
 
@@ -1443,7 +1430,7 @@ killplayersifonhead(var_00) {
 func_CCBB() {
   if(level.func_311A == 1) {
     foreach(var_01 in level.players) {
-    var_01 thread scripts\cp\cp_vo::try_to_play_vo("brute_generic", "zmb_comment_vo", "highest", 20, 0, 0, 1);
+      var_01 thread scripts\cp\cp_vo::try_to_play_vo("brute_generic", "zmb_comment_vo", "highest", 20, 0, 0, 1);
     }
 
     wait 6;
@@ -1452,7 +1439,7 @@ func_CCBB() {
     level.func_311A = 1;
 
     foreach(var_01 in level.players) {
-    var_01 thread scripts\cp\cp_vo::try_to_play_vo("brute_first", "zmb_comment_vo", "highest", 20, 0, 0, 1);
+      var_01 thread scripts\cp\cp_vo::try_to_play_vo("brute_first", "zmb_comment_vo", "highest", 20, 0, 0, 1);
     }
 
     wait 6;
@@ -1482,8 +1469,7 @@ func_C212() {
   if(var_03 != 0) {
     if(level.wave_num > var_01) {
       var_02 = 2;
-    }
-    else {
+    } else {
       var_02 = 1;
     }
 
@@ -1506,8 +1492,7 @@ func_C212() {
 
       if(level.wave_num > var_01) {
         var_02 = 2;
-      }
-      else {
+      } else {
         var_02 = 1;
       }
 
@@ -1706,8 +1691,7 @@ func_1068A(var_00, var_01) {
 
   if(scripts\engine\utility::is_true(self.is_coaster_spawner)) {
     var_05 thread func_42EC(var_02);
-  }
-  else {
+  } else {
     var_05 thread func_64E7(var_02);
   }
 
@@ -1772,11 +1756,9 @@ spawn_wave_enemy(var_00, var_01, var_02, var_03) {
 
   if(scripts\engine\utility::is_true(self.is_coaster_spawner)) {
     var_06 thread func_42EC(var_00);
-  }
-  else if(var_00 == "zombie_brute") {
+  } else if(var_00 == "zombie_brute") {
     var_06 thread func_3114();
-  }
-  else {
+  } else {
     var_06 thread func_64E7(var_00);
   }
 
@@ -1824,23 +1806,17 @@ func_13F53(var_00, var_01, var_02, var_03, var_04) {
 
   if(var_00 == "karatemaster" && isDefined(level.zombie_karatemaster_vo_prefix)) {
     var_5.voprefix = level.zombie_karatemaster_vo_prefix;
-  }
-  else if(var_00 == "zombie_brute") {
+  } else if(var_00 == "zombie_brute") {
     var_5.voprefix = level.func_13F14;
-  }
-  else if(var_00 == "zombie_cop") {
+  } else if(var_00 == "zombie_cop") {
     var_5.voprefix = level.func_13F1A;
-  }
-  else if(var_00 == "zombie_clown") {
+  } else if(var_00 == "zombie_clown") {
     var_5.voprefix = level.func_13F18;
-  }
-  else if(issubstr(var_5.model, "female")) {
+  } else if(issubstr(var_5.model, "female")) {
     var_5.voprefix = level.func_13F24;
-  }
-  else if(randomint(100) > 50) {
+  } else if(randomint(100) > 50) {
     var_5.voprefix = level.func_13F39;
-  }
-  else {
+  } else {
     var_5.voprefix = level.func_13F3A;
   }
 
@@ -1927,8 +1903,7 @@ func_53A9() {
     if(!scripts\engine\utility::is_true(self.blaserattack)) {
       if(distancesquared(self.origin, var_02) < var_01) {
         var_0++;
-      }
-      else {
+      } else {
         var_00 = 0;
       }
     } else
@@ -1987,8 +1962,7 @@ func_8637() {
 
   if(var_03) {
     var_04 = scripts\engine\trace::ray_trace(self.spawner.origin - (0, 0, 100), self.spawner.origin + (0, 0, 50), self);
-  }
-  else {
+  } else {
     var_04 = scripts\engine\trace::ray_trace(self.spawner.origin + (0, 0, 50), self.spawner.origin - (0, 0, 100), self);
   }
 
@@ -2066,16 +2040,14 @@ calculatezombiehealth(var_00) {
 
   if(isDefined(level.func_8CBD) && isDefined(level.func_8CBD[var_00])) {
     var_01 = [[level.func_8CBD[var_00]]]();
-  }
-  else {
+  } else {
     if(isDefined(level.wave_num_override)) {
       var_02 = level.wave_num_override;
     }
 
     if(scripts\engine\utility::is_true(self.is_cop)) {
       var_02 = var_02 + 3;
-    }
-    else if(scripts\engine\utility::is_true(self.is_skeleton)) {
+    } else if(scripts\engine\utility::is_true(self.is_skeleton)) {
       var_02 = var_02 + 10;
     }
 
@@ -2083,11 +2055,9 @@ calculatezombiehealth(var_00) {
 
     if(var_02 == 1) {
       var_01 = var_03;
-    }
-    else if(var_02 <= 9) {
+    } else if(var_02 <= 9) {
       var_01 = var_03 + (var_02 - 1) * 100;
-    }
-    else {
+    } else {
       var_04 = 950;
       var_05 = var_02 - 9;
       var_01 = var_04 * _pow(1.1, var_05);
@@ -2160,8 +2130,7 @@ get_spawn_volumes_player_is_in(var_00, var_01, var_02) {
     }
     if(var_02 istouching(var_06)) {
       var_07 = 1;
-    }
-    else if(scripts\engine\utility::is_true(var_00) && var_02 func_9C0F(var_06)) {
+    } else if(scripts\engine\utility::is_true(var_00) && var_02 func_9C0F(var_06)) {
       var_07 = 1;
     }
 
@@ -2306,8 +2275,7 @@ make_volume_active() {
   if(scripts\cp\utility::is_escape_gametype()) {
     if(!scripts\engine\utility::is_true(self.active)) {
       level.active_spawners = [];
-    }
-    else {
+    } else {
       var_00 = 0;
     }
   }
@@ -2319,19 +2287,19 @@ make_volume_active() {
 
     if(isDefined(self.spawners) && var_00) {
       foreach(var_02 in self.spawners) {
-      var_02 make_spawner_active();
+        var_02 make_spawner_active();
       }
     }
 
     if(isDefined(self.goon_spawners)) {
       foreach(var_02 in self.goon_spawners) {
-      var_02 func_B26D();
+        var_02 func_B26D();
       }
     }
 
     if(isDefined(self.rotateyaw)) {
       foreach(var_02 in self.rotateyaw) {
-      var_02 func_B26D();
+        var_02 func_B26D();
       }
     }
   }
@@ -2357,19 +2325,19 @@ make_volume_inactive() {
 
     if(isDefined(self.spawners)) {
       foreach(var_01 in self.spawners) {
-      var_01 make_spawner_inactive();
+        var_01 make_spawner_inactive();
       }
     }
 
     if(isDefined(self.goon_spawners)) {
       foreach(var_01 in self.goon_spawners) {
-      var_01 func_B26E();
+        var_01 func_B26E();
       }
     }
 
     if(isDefined(self.func_D25E)) {
       foreach(var_01 in self.func_D25E) {
-      level.active_player_respawn_locs = scripts\engine\utility::array_remove(level.active_player_respawn_locs, var_01);
+        level.active_player_respawn_locs = scripts\engine\utility::array_remove(level.active_player_respawn_locs, var_01);
       }
     }
   }
@@ -2583,11 +2551,9 @@ func_12E29(var_00, var_01) {
 
   if(scripts\engine\utility::flag("pause_wave_progression")) {
     return;
-  }
-  else if(!self.died_poorly) {
+  } else if(!self.died_poorly) {
     level.current_enemy_deaths = level.current_enemy_deaths + var_02;
-  }
-  else {
+  } else {
     add_to_respawn_list();
     level.respawning_enemies++;
   }
@@ -2661,22 +2627,19 @@ func_A5B4() {
     if(distancesquared(self.origin, var_03) < var_06) {
       if(isDefined(self.is_suicide_bomber)) {
         var_2++;
-      }
-      else if(isDefined(self.curmeleetarget)) {
+      } else if(isDefined(self.curmeleetarget)) {
         var_07 = anglesdelta(var_04, self.angles);
         var_08 = distancesquared(self.origin, self.curmeleetarget.origin);
 
         if(var_08 > 10000 && var_07 < 45) {
           var_2++;
-        }
-        else {
+        } else {
           var_02 = 0;
         }
       } else if(isDefined(self.func_6658)) {
         if(!scripts\cp\zombies\zombie_entrances::entrance_has_barriers(self.func_6658)) {
           var_2++;
-        }
-        else {
+        } else {
           var_02 = 0;
         }
       } else
@@ -2758,11 +2721,9 @@ func_E81B() {
         if(isDefined(level.players[0])) {
           if(level.wave_num == 2) {
             level.players[0] thread scripts\cp\cp_hud_message::wait_and_play_tutorial_message("zombiehealth", 7);
-          }
-          else if(level.wave_num == 3) {
+          } else if(level.wave_num == 3) {
             level.players[0] thread scripts\cp\cp_hud_message::wait_and_play_tutorial_message("scenes", 7);
-          }
-          else if(level.wave_num == 4 && !level.players[0] scripts\cp\cp_hud_message::get_has_seen_tutorial("magic_wheel")) {
+          } else if(level.wave_num == 4 && !level.players[0] scripts\cp\cp_hud_message::get_has_seen_tutorial("magic_wheel")) {
             level.players[0] thread scripts\cp\cp_hud_message::wait_and_play_tutorial_message("magic_wheel", 7);
             level.players[0] notify("saw_wheel_tutorial");
           } else if(level.wave_num == 9 && !level.players[0] scripts\cp\cp_hud_message::get_has_seen_tutorial("pap"))
@@ -2829,7 +2790,9 @@ func_E81B() {
     level thread scripts\cp\gametypes\zombie::replace_grenades_between_waves();
 
     if(isDefined(level.wave_complete_dialogues_func)) {
-      [[level.wave_complete_dialogues_func]](level.wave_num);
+      [
+        [level.wave_complete_dialogues_func]
+      ](level.wave_num);
     }
 
     var_09 = (gettime() - level.func_13BDA) / 1000;
@@ -2941,7 +2904,7 @@ func_13BCB() {
   }
 
   foreach(var_01 in level.players) {
-  var_1.fortune_visit_this_round = 0;
+    var_1.fortune_visit_this_round = 0;
   }
 
   func_E21C();
@@ -2957,7 +2920,7 @@ func_E21C() {
   }
 
   foreach(var_02 in level.players) {
-  var_2.reboarding_points = 0;
+    var_2.reboarding_points = 0;
   }
 }
 
@@ -2993,20 +2956,16 @@ func_FF9D(var_00) {
 
   if(var_00 < 5) {
     return 0;
-  }
-  else if(scripts\engine\utility::flag_exist("defense_sequence_active") && scripts\engine\utility::flag("defense_sequence_active")) {
+  } else if(scripts\engine\utility::flag_exist("defense_sequence_active") && scripts\engine\utility::flag("defense_sequence_active")) {
     return 0;
-  }
-  else if(scripts\engine\utility::flag_exist("all_center_positions_used") && scripts\engine\utility::flag("all_center_positions_used")) {
+  } else if(scripts\engine\utility::flag_exist("all_center_positions_used") && scripts\engine\utility::flag("all_center_positions_used")) {
     return 0;
-  }
-  else {
+  } else {
     var_01 = var_00 - level.last_event_wave;
 
     if(var_01 < 5) {
       return 0;
-    }
-    else {
+    } else {
       var_01 = var_01 - 4;
       var_02 = var_01 / 3 * 100;
 
@@ -3026,8 +2985,7 @@ func_E7F0(var_00) {
 
   if(isDefined(level.event_funcs_start)) {
     [[level.event_funcs_start]](var_01);
-  }
-  else {
+  } else {
     level thread clown_wave_music();
     func_F604("cp_zmb_alien", 1.0);
     level.vision_set_override = "cp_zmb_alien";
@@ -3038,9 +2996,10 @@ func_E7F0(var_00) {
 
   if(isDefined(var_01)) {
     if(isDefined(level.event_funcs[var_01])) {
-      [[level.event_funcs[var_01]]]();
-    }
-    else {
+      [
+        [level.event_funcs[var_01]]
+      ]();
+    } else {
       var_02 = 1;
     }
   } else
@@ -3055,8 +3014,7 @@ func_E7F0(var_00) {
 
   if(isDefined(level.event_funcs_end)) {
     [[level.event_funcs_end]](var_01);
-  }
-  else {
+  } else {
     level.vision_set_override = undefined;
     func_F604("", 0);
 
@@ -3135,11 +3093,9 @@ get_total_spawned_enemies(var_00) {
 
   if(var_00 < 6) {
     var_02 = var_1[var_00];
-  }
-  else if(var_00 < 10) {
+  } else if(var_00 < 10) {
     var_03 = var_00 / 5;
-  }
-  else {
+  } else {
     var_03 = squared(var_00) * 0.03;
   }
 
@@ -3284,8 +3240,7 @@ func_4094() {
 
     if(level.wave_num <= 5 && var_04 < 30) {
       continue;
-    }
-    else if(level.wave_num > 5 && var_04 < 20) {
+    } else if(level.wave_num > 5 && var_04 < 20) {
       continue;
     }
     var_05 = undefined;
@@ -3367,8 +3322,7 @@ func_5773(var_00) {
   } else if(level.func_B789.size == 0) {
     if(isDefined(level.use_adjacent_volumes)) {
       var_02 = animmode(1, 0);
-    }
-    else {
+    } else {
       var_02 = animmode(0, 0);
     }
   } else {
@@ -3396,11 +3350,9 @@ func_5773(var_00) {
 
     if(isDefined(var_00)) {
       var_11 = var_00;
-    }
-    else if(isDefined(var_06) && func_CF4C(var_06)) {
+    } else if(isDefined(var_06) && func_CF4C(var_06)) {
       var_11 = 189225;
-    }
-    else {
+    } else {
       var_11 = 1000000;
     }
 
@@ -3408,8 +3360,7 @@ func_5773(var_00) {
       if(!var_04) {
         if(level.last_mini_zone_fail + 1000 > gettime()) {
           return;
-        }
-        else {
+        } else {
           level.last_mini_zone_fail = gettime();
         }
       }
@@ -3440,8 +3391,7 @@ func_51A5(var_00, var_01) {
   if(var_01) {
     if(scripts\engine\utility::is_true(self.isactive)) {
       func_EDF6();
-    }
-    else {}
+    } else {}
   } else {
     foreach(var_03 in level.players) {
       if(scripts\engine\utility::is_true(var_3.spectating)) {
@@ -3522,14 +3472,13 @@ animmode(var_00, var_01) {
 
   if(scripts\engine\utility::is_true(var_01)) {
     var_06 = var_06 + func_C1EB(var_02, 1);
-  }
-  else {
+  } else {
     var_06 = scripts\cp\zombies\func_0D60::allowedstances(var_02);
   }
 
   if(scripts\engine\utility::is_true(var_00) && var_06 == 0 && isDefined(var_2.func_186E)) {
     foreach(var_04 in var_2.func_186E) {
-    var_06 = var_06 + scripts\cp\zombies\func_0D60::allowedstances(var_04);
+      var_06 = var_06 + scripts\cp\zombies\func_0D60::allowedstances(var_04);
     }
   }
 
@@ -3542,7 +3491,7 @@ func_F5EC() {
   var_00 = getEntArray("mini_zone", "script_noteworthy");
 
   foreach(var_02 in var_00) {
-  level.func_B789[var_2.targetname] = var_02;
+    level.func_B789[var_2.targetname] = var_02;
   }
 
   if(level.func_B789.size == 0) {
@@ -3609,7 +3558,7 @@ func_C1EB(var_00, var_01) {
 
     if(scripts\engine\utility::is_true(var_01) && var_05 == 0 && isDefined(var_3.func_186E)) {
       foreach(var_08 in var_3.func_186E) {
-      var_05 = var_05 + scripts\cp\zombies\func_0D60::allowedstances(var_08);
+        var_05 = var_05 + scripts\cp\zombies\func_0D60::allowedstances(var_08);
       }
     }
   }
@@ -3624,8 +3573,7 @@ create_spawner(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_02)) {
     var_7.angles = var_02;
-  }
-  else {
+  } else {
     var_7.angles = (0, 0, 0);
   }
 
@@ -3720,7 +3668,7 @@ debug_idle_spots(var_00, var_01) {
   wait 15;
 
   foreach(var_03 in var_00) {
-  thread scripts\cp\utility::drawsphere(var_3.origin, 5, 1800, var_01);
+    thread scripts\cp\utility::drawsphere(var_3.origin, 5, 1800, var_01);
   }
 }
 

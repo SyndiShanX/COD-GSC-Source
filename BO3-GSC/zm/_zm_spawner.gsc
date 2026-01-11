@@ -1809,9 +1809,7 @@ function zombie_follow_enemy() {
     } else if(isDefined(self.favoriteenemy)) {
       self.ignoreall = 0;
       if(isDefined(level.enemy_location_override_func)) {
-        goalpos = [
-          [level.enemy_location_override_func]
-        ](self, self.favoriteenemy);
+        goalpos = [[level.enemy_location_override_func]](self, self.favoriteenemy);
         if(isDefined(goalpos)) {
           self setgoal(goalpos);
         } else {

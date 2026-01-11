@@ -12,8 +12,7 @@ getHighestScoringPlayer() {
 
   if(!level.placement["all"].size) {
     return (undefined);
-  }
-  else {
+  } else {
     return (level.placement["all"][0]);
   }
 }
@@ -110,8 +109,7 @@ giveTeamScoreForObjective(team, score) {
 
   if(game["teamScores"][team] > game["teamScores"][otherTeam]) {
     level.wasWinning = team;
-  }
-  else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
+  } else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
     level.wasWinning = otherTeam;
   }
 
@@ -120,8 +118,7 @@ giveTeamScoreForObjective(team, score) {
   isWinning = "none";
   if(game["teamScores"][team] > game["teamScores"][otherTeam]) {
     isWinning = team;
-  }
-  else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
+  } else if(game["teamScores"][otherTeam] > game["teamScores"][team]) {
     isWinning = otherTeam;
   }
 
@@ -141,8 +138,7 @@ giveTeamScoreForObjective(team, score) {
 getWinningTeam() {
   if(game["teamScores"]["allies"] > game["teamScores"]["axis"]) {
     return ("allies");
-  }
-  else if(game["teamScores"]["allies"] < game["teamScores"]["axis"]) {
+  } else if(game["teamScores"]["allies"] < game["teamScores"]["axis"]) {
     return ("axis");
   }
 
@@ -162,8 +158,7 @@ _setTeamScore(team, teamScore) {
 
   if(game["status"] == "overtime") {
     thread maps\mp\gametypes\_gamelogic::onScoreLimit();
-  }
-  else {
+  } else {
     thread maps\mp\gametypes\_gamelogic::checkTeamScoreLimitSoon(team);
     thread maps\mp\gametypes\_gamelogic::checkScoreLimit();
   }
@@ -175,8 +170,7 @@ updateTeamScore(team) {
   teamScore = 0;
   if(!isRoundBased() || !isObjectiveBased()) {
     teamScore = _getTeamScore(team);
-  }
-  else {
+  } else {
     teamScore = game["roundsWon"][team];
   }
 
@@ -195,7 +189,7 @@ sendUpdatedTeamScores() {
   WaitTillSlowProcessAllowed();
 
   foreach(player in level.players) {
-  player updateScores();
+    player updateScores();
   }
 }
 
@@ -293,8 +287,7 @@ getBetterPlayer(playerA, playerB) {
 
   if(cointoss()) {
     return playerA;
-  }
-  else {
+  } else {
     return playerB;
   }
 }

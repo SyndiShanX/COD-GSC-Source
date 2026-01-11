@@ -221,8 +221,7 @@ registertweakable(category, name, dvar, value) {
   if(isstring(value)) {
     if(getdvar(dvar) == "") {
       setdvar(dvar, value);
-    }
-    else {
+    } else {
       value = getdvar(dvar);
     }
   } else if(getdvar(dvar) == "")

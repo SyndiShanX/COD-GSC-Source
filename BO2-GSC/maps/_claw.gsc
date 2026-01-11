@@ -63,8 +63,7 @@ build_claw_anims() {
   level.claw_anims[level.jump][2] = % int_claw_idle;
 }
 
-precache_fx() {
-}
+precache_fx() {}
 
 claw_animating() {
   self endon("death");
@@ -76,16 +75,13 @@ claw_animating() {
     angular_velocity = self getangularvelocity();
     turning_speed = abs(angular_velocity[2]);
 
-    if(self ent_flag("playing_scripted_anim")) {
-    } else if(self.in_air) {
-    } else if(speed < 55 && speed > -20 && turning_speed > 0.2) {
+    if(self ent_flag("playing_scripted_anim")) {} else if(self.in_air) {} else if(speed < 55 && speed > -20 && turning_speed > 0.2) {
       anim_rate = turning_speed;
       anim_rate = clamp(anim_rate, 0.0, 3);
 
       if(angular_velocity[2] > 0) {
         self setanimknoball( % int_claw_turn_l, % root, 1, 0.2, anim_rate);
-      }
-      else {
+      } else {
         self setanimknoball( % int_claw_turn_r, % root, 1, 0.2, anim_rate);
       }
 
@@ -106,8 +102,7 @@ claw_animating() {
 
       if(speed > next_anim_speed) {
         self.current_anim_speed++;
-      }
-      else if(speed < prev_anim_speed) {
+      } else if(speed < prev_anim_speed) {
         self.current_anim_speed--;
       }
 

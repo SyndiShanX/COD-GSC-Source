@@ -24,7 +24,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_traps;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_escape_traps;
 
 autoexec __init__system__() {
@@ -144,7 +143,7 @@ function_ea490292() {
 }
 
 activate_zm_fan_trap() {
-  level.trapped_track[#"fan"] = 1;
+  level.trapped_track[# "fan"] = 1;
   self.in_use = 1;
   self thread zm_traps::trap_damage();
   self.mdl_fan thread scene::init(#"p8_fxanim_zm_esc_trap_fan_play", self.mdl_fan);
@@ -194,7 +193,7 @@ function_9c2d463d(t_damage) {
     return;
   }
 
-  if(self.zm_ai_category == #"miniboss" || self.zm_ai_category == #"boss") {
+  if(self.zm_ai_category == # "miniboss" || self.zm_ai_category == # "boss") {
     t_damage notify(#"trap_finished");
     return;
   }
@@ -311,7 +310,7 @@ fan_trap_rumble_think() {
 }
 
 fan_trap_rumble(e_player) {
-  e_player endon(#"death", #"disconnect");
+  e_player endon(#"death", # "disconnect");
   self endon(#"trap_finished");
 
   while(true) {
@@ -480,7 +479,7 @@ function_39f2d90f() {
 }
 
 activate_zm_acid_trap() {
-  level.trapped_track[#"acid"] = 1;
+  level.trapped_track[# "acid"] = 1;
 
   for(i = 0; i < self.var_28ea1870.size; i++) {
     self.var_28ea1870[i] thread acid_trap_fx(self);
@@ -489,7 +488,7 @@ activate_zm_acid_trap() {
 
   self.in_use = 1;
   self thread zm_traps::trap_damage();
-  self waittilltimeout(25, #"trap_finished");
+  self waittilltimeout(25, # "trap_finished");
   self.in_use = undefined;
   self notify(#"trap_done");
   self waittill(#"available");
@@ -502,7 +501,7 @@ function_6219e5ab(trap) {
 }
 
 function_efd61793(t_damage) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   if(!(isDefined(self.is_in_acid) && self.is_in_acid) && !self laststand::player_is_in_laststand()) {
     self.is_in_acid = 1;
@@ -534,7 +533,7 @@ function_9699194a(t_damage) {
     return;
   }
 
-  if(self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"boss") {
+  if(self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "boss") {
     return;
   }
 
@@ -602,7 +601,7 @@ function_9699194a(t_damage) {
 acid_trap_fx(e_trap) {
   mdl_fx = util::spawn_model("tag_origin", self.origin, self.angles);
   mdl_fx clientfield::set("acid_trap_fx", 1);
-  e_trap waittilltimeout(25, #"trap_finished");
+  e_trap waittilltimeout(25, # "trap_finished");
   mdl_fx clientfield::set("acid_trap_fx", 0);
   waitframe(1);
   mdl_fx delete();
@@ -617,7 +616,7 @@ stop_acid_death_fx() {
 }
 
 function_1a5df584(t_damage) {
-  self endon(#"bled_out", #"disconnect");
+  self endon(#"bled_out", # "disconnect");
 
   if(self clientfield::get_to_player("player_acid_trap_post_fx") === 1) {
     return;
@@ -713,7 +712,7 @@ function_dcd775a() {
 }
 
 activate_zm_spinning_trap() {
-  level.trapped_track[#"fan"] = 1;
+  level.trapped_track[# "fan"] = 1;
   self.in_use = 1;
   self.mdl_trap thread scene::init(#"p8_fxanim_zm_esc_trap_spinning_bundle", self.mdl_trap);
   var_a5fa009d = struct::get("spinning_trap_poi", "targetname");
@@ -743,7 +742,7 @@ function_ffe09b75() {
 }
 
 function_7e74aa5(t_damage) {
-  self endon(#"death", #"disconnect");
+  self endon(#"death", # "disconnect");
 
   if(zm_utility::is_standard()) {
     self dodamage(5, self.origin, undefined, t_damage);
@@ -764,7 +763,7 @@ function_1f7e661f(t_damage) {
     return;
   }
 
-  if(self.zm_ai_category === #"miniboss" || self.zm_ai_category === #"boss") {
+  if(self.zm_ai_category === # "miniboss" || self.zm_ai_category === # "boss") {
     t_damage notify(#"trap_finished");
     return;
   }
@@ -787,7 +786,7 @@ function_1f7e661f(t_damage) {
   v_hook = t_damage.mdl_trap gettagorigin("tag_weapon_3");
   n_dist = distance2d(self.origin, v_hook);
 
-  if(!(isDefined(t_damage.var_705682df) && t_damage.var_705682df) && self.zm_ai_category === #"basic" && n_dist <= 128 && self.team != #"allies") {
+  if(!(isDefined(t_damage.var_705682df) && t_damage.var_705682df) && self.zm_ai_category === # "basic" && n_dist <= 128 && self.team != # "allies") {
     t_damage.var_705682df = 1;
     self.var_bd4627e1 = 1;
     self clientfield::set("spinning_trap_eye_fx", 1);
@@ -797,7 +796,7 @@ function_1f7e661f(t_damage) {
     a_e_players = util::get_array_of_closest(self.origin, getplayers());
 
     if(isDefined(a_e_players[0]) && distance2dsquared(a_e_players[0].origin, self.origin) < 400 * 400) {
-      a_e_players[0] zm_audio::create_and_play_dialog(#"spin_trap", #"hook", undefined, 1);
+      a_e_players[0] zm_audio::create_and_play_dialog(#"spin_trap", # "hook", undefined, 1);
     }
 
     return;
@@ -807,7 +806,7 @@ function_1f7e661f(t_damage) {
     self thread a_a_arms();
   }
 
-  if(self.zm_ai_category === #"basic" && !isvehicle(self)) {
+  if(self.zm_ai_category === # "basic" && !isvehicle(self)) {
     str_tag = t_damage.mdl_trap get_closest_tag(self.origin);
 
     if(str_tag === "tag_weapon_1") {
@@ -840,7 +839,7 @@ function_1f7e661f(t_damage) {
     return;
   }
 
-  if(self.zm_ai_category === #"popcorn") {
+  if(self.zm_ai_category === # "popcorn") {
     level notify(#"hash_148b3ce521088846", {
       #e_player: t_damage.activated_by_player
     });
@@ -919,7 +918,7 @@ function_c3ac9950() {
 }
 
 spinning_trap_rumble(e_player) {
-  e_player endon(#"death", #"disconnect");
+  e_player endon(#"death", # "disconnect");
   self endon(#"trap_finished");
 
   while(true) {
@@ -992,7 +991,7 @@ private function_61791b8b(s_pos = self) {
   a_ai_zombies = getaiteamarray(level.zombie_team);
 
   foreach(ai_zombie in a_ai_zombies) {
-    if(ai_zombie.zm_ai_category == #"miniboss" || ai_zombie.zm_ai_category == #"boss") {
+    if(ai_zombie.zm_ai_category == # "miniboss" || ai_zombie.zm_ai_category == # "boss") {
       ai_zombie thread zm_utility::add_poi_to_ignore_list(var_dd239d21);
     }
   }
@@ -1048,15 +1047,15 @@ zapper_light_red() {
   level flag::wait_till("start_zombie_round_logic");
 
   switch (self.script_noteworthy) {
-    case #"zm_spinning_trap":
+    case # "zm_spinning_trap":
       exploder::exploder("fxexp_spinning_trap_light_red");
       exploder::kill_exploder("fxexp_spinning_trap_light_green");
       break;
-    case #"zm_fan_trap":
+    case # "zm_fan_trap":
       exploder::exploder("fxexp_fan_trap_light_red");
       exploder::kill_exploder("fxexp_fan_trap_light_green");
       break;
-    case #"zm_acid_trap":
+    case # "zm_acid_trap":
       exploder::exploder("fxexp_acid_trap_light_red");
       exploder::kill_exploder("fxexp_acid_trap_light_green");
       break;
@@ -1071,15 +1070,15 @@ zapper_light_green() {
   }
 
   switch (self.script_noteworthy) {
-    case #"zm_spinning_trap":
+    case # "zm_spinning_trap":
       exploder::kill_exploder("fxexp_spinning_trap_light_red");
       exploder::exploder("fxexp_spinning_trap_light_green");
       break;
-    case #"zm_fan_trap":
+    case # "zm_fan_trap":
       exploder::kill_exploder("fxexp_fan_trap_light_red");
       exploder::exploder("fxexp_fan_trap_light_green");
       break;
-    case #"zm_acid_trap":
+    case # "zm_acid_trap":
       exploder::kill_exploder("fxexp_acid_trap_light_red");
       exploder::exploder("fxexp_acid_trap_light_green");
       break;

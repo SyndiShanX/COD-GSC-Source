@@ -838,8 +838,7 @@ meat_shield_sequence() {
 
   if(level.is_defalco_alive) {
     anim_defalco = % ch_command_03_08_cctv_menendez_defalco;
-  }
-  else {
+  } else {
     anim_defalco = % ch_command_03_08_cctv_menendez_guy;
   }
 

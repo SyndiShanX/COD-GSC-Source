@@ -27,8 +27,7 @@ rotate_indefinitely(rotate_time, rotate_fwd) {
   while(true) {
     if(rotate_fwd) {
       self rotateyaw(360, rotate_time, 0, 0);
-    }
-    else {
+    } else {
       self rotateyaw(-360, rotate_time, 0, 0);
     }
 
@@ -67,8 +66,7 @@ holo_table_run_poi(allow_player_input) {
 
         if(level.player buttonpressed("DPAD_LEFT")) {
           index_change = -1;
-        }
-        else if(level.player buttonpressed("DPAD_RIGHT")) {
+        } else if(level.player buttonpressed("DPAD_RIGHT")) {
           index_change = 1;
         }
 
@@ -132,8 +130,7 @@ holo_table_change_poi(n_index_change, move_time_s, display_level_name) {
 
   if(!isDefined(self.cur_poi_index)) {
     self.cur_poi_index = 0;
-  }
-  else {
+  } else {
     n_index_change = n_index_change % self.poi_list.size;
     self.cur_poi_index = (self.cur_poi_index + n_index_change + self.poi_list.size) % self.poi_list.size;
   }

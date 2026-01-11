@@ -93,8 +93,7 @@ giveMedal(medalName, weapon) {
   if(isDefined(level.medalInfo[medalName])) {
     if(level.teambased) {
       xp = level.medalInfo[medalName]["xp"].team;
-    }
-    else {
+    } else {
       xp = level.medalInfo[medalName]["xp"].player;
     }
     if(!level.wagerMatch && level.onlineGame && (!GetDvarInt(#"xblive_privatematch") || GetDvarInt(#"xblive_basictraining"))) {
@@ -194,8 +193,7 @@ medal_kills(data, time) {
       if(is_weapon_valid(data.sMeansOfDeath, data.sWeapon)) {
         if(isDefined(victim.vAttackerOrigin)) {
           attackerOrigin = victim.vAttackerOrigin;
-        }
-        else {
+        } else {
           attackerOrigin = attacker.origin;
         }
         distToVictim = distanceSquared(victim.origin, attackerOrigin);
@@ -264,14 +262,11 @@ is_weapon_valid(meansOfDeath, weapon) {
   valid_weapon = false;
   if(weapon == "minigun_mp") {
     valid_weapon = false;
-  }
-  else if(meansOfDeath == "MOD_PISTOL_BULLET" || meansOfDeath == "MOD_RIFLE_BULLET") {
+  } else if(meansOfDeath == "MOD_PISTOL_BULLET" || meansOfDeath == "MOD_RIFLE_BULLET") {
     valid_weapon = true;
-  }
-  else if(meansOfDeath == "MOD_HEAD_SHOT") {
+  } else if(meansOfDeath == "MOD_HEAD_SHOT") {
     valid_weapon = true;
-  }
-  else if(get_distance_for_weapon(weapon)) {
+  } else if(get_distance_for_weapon(weapon)) {
     valid_weapon = true;
   }
   return valid_weapon;

@@ -160,8 +160,7 @@ logPlayerDeath(lifeId, attacker, iDamage, sMeansOfDeath, sWeapon, sPrimaryWeapon
   }
   if(IsPlayer(attacker) && canLogClient(attacker)) {
     self LogMatchDataDeath(lifeId, self.clientid, attacker, attacker.clientid, sWeapon, sMeansOfDeath, isKillstreakWeapon(sWeapon), attacker isJuggernaut());
-  }
-  else {
+  } else {
     self LogMatchDataDeath(lifeId, self.clientid, undefined, undefined, sWeapon, sMeansOfDeath, isKillstreakWeapon(sWeapon), false);
   }
 }
@@ -174,22 +173,19 @@ logPlayerData() {
 
   if(self getPersStat("assists") > 255) {
     setMatchData("players", self.clientid, "assists", 255);
-  }
-  else {
+  } else {
     setMatchData("players", self.clientid, "assists", self getPersStat("assists"));
   }
 
   if(self getPersStat("longestStreak") > 255) {
     setMatchData("players", self.clientid, "longestStreak", 255);
-  }
-  else {
+  } else {
     setMatchData("players", self.clientid, "longestStreak", self getPersStat("longestStreak"));
   }
 
   if(self getPersStat("validationInfractions") > 255) {
     setMatchData("players", self.clientid, "validationInfractions", 255);
-  }
-  else {
+  } else {
     setMatchData("players", self.clientid, "validationInfractions", self getPersStat("validationInfractions"));
   }
 }
@@ -242,8 +238,7 @@ endOfGameSummaryLogger() {
     for(i = 0; i < 5; i++) {
       if(isDefined(player.operationsCompleted) && isDefined(player.operationsCompleted[i]) && player.operationsCompleted[i] != "ch_prestige" && !IsSubStr(player.operationsCompleted[i], "_daily") && !IsSubStr(player.operationsCompleted[i], "_weekly")) {
         player setCommonPlayerData("round", "operationsCompleted", i, player.operationsCompleted[i]);
-      }
-      else {
+      } else {
         player setCommonPlayerData("round", "operationsCompleted", i, "");
       }
     }
@@ -257,8 +252,7 @@ endOfGameSummaryLogger() {
     for(i = 0; i < 20; i++) {
       if(isDefined(player.challengesCompleted) && isDefined(player.challengesCompleted[i]) && player.challengesCompleted[i] != "ch_prestige" && !IsSubStr(player.challengesCompleted[i], "_daily") && !IsSubStr(player.challengesCompleted[i], "_weekly")) {
         player setCommonPlayerData("round", "challengesCompleted", i, player.challengesCompleted[i]);
-      }
-      else {
+      } else {
         player setCommonPlayerData("round", "challengesCompleted", i, "");
       }
     }
@@ -333,8 +327,7 @@ logWeaponStat(weaponName, statName, incValue) {
   }
   if(weaponName == "iw6_pdwauto") {
     weaponName = "iw6_pdw";
-  }
-  else if(weaponName == "iw6_knifeonlyfast") {
+  } else if(weaponName == "iw6_knifeonlyfast") {
     weaponName = "iw6_knifeonly";
   }
 

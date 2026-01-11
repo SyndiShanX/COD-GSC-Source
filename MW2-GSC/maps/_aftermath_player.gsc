@@ -83,9 +83,7 @@ player_heartbeat() {
   while(true) {
     if(!flag("fall")) {
       if(isDefined(level.heartbeat_blood_func)) {
-        [
-          [level.heartbeat_blood_func]
-        ]();
+        [[level.heartbeat_blood_func]]();
       }
 
       if(flag("player_heartbeat_sound")) {
@@ -105,8 +103,7 @@ player_heartbeat() {
   }
 }
 
-get_player_speed() {
-}
+get_player_speed() {}
 
 player_wakeup() {
   level.player play_sound_on_entity("sprint_gasp");
@@ -308,8 +305,7 @@ adjust_roll_ent(roll_ent) {
 
     if(fast_enough && correct_limp_direction) {
       walking_count += 2;
-    }
-    else {
+    } else {
       walking_count -= 1;
     }
 

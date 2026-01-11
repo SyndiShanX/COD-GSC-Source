@@ -70,19 +70,19 @@ setup_deck_transition() {
   var_4 = maps\carrier_code::array_spawn_targetname_allow_fail("trans_orange_allies", 1);
 
   foreach(var_6 in var_4) {
-  var_6 thread maps\_utility::replace_on_death();
+    var_6 thread maps\_utility::replace_on_death();
   }
 
   var_8 = maps\carrier_code::array_spawn_targetname_allow_fail("trans_red_allies", 1);
 
   foreach(var_6 in var_8) {
-  var_6 thread maps\_utility::replace_on_death();
+    var_6 thread maps\_utility::replace_on_death();
   }
 
   var_11 = maps\carrier_code::array_spawn_targetname_allow_fail("trans_purple_allies", 1);
 
   foreach(var_6 in var_11) {
-  var_6 thread maps\_utility::replace_on_death();
+    var_6 thread maps\_utility::replace_on_death();
   }
 
   maps\_utility::activate_trigger_with_targetname("ally_transition_pos_move");
@@ -114,7 +114,7 @@ begin_deck_transition() {
   common_scripts\utility::array_add(maps\_utility::get_force_color_guys("allies", "o"), var_0);
 
   foreach(var_2 in var_0) {
-  var_2 maps\_utility::set_ignoreall(1);
+    var_2 maps\_utility::set_ignoreall(1);
   }
 
   common_scripts\utility::flag_set("obj_regroup_with_hesh_complete");
@@ -232,7 +232,7 @@ deck_transition_cleanup() {
   var_0 = ["flyby_missile_attack1", "flyby_missile_attack2", "trans_gun_run_heli1", "trans_attack_heli1", "trans_attack_heli2", "trans_attack_heli3"];
 
   foreach(var_2 in var_0) {
-  getent(var_2, "targetname") delete();
+    getent(var_2, "targetname") delete();
   }
 
   maps\_utility::array_delete(getEntArray("trans_attack_heli_riders", "script_noteworthy"));
@@ -410,8 +410,7 @@ osprey_control_pad() {
 
   if(level.player common_scripts\utility::is_player_gamepad_enabled()) {
     var_1 sethintstring(&"CARRIER_TAKE_DATAPAD_CONSOLE");
-  }
-  else {
+  } else {
     var_1 sethintstring(&"CARRIER_TAKE_DATAPAD");
   }
 
@@ -782,8 +781,7 @@ ally_jog_guys_logic() {
 
   if(common_scripts\utility::cointoss()) {
     var_0 = "run_gun_up";
-  }
-  else {
+  } else {
     var_0 = "patrol_jog";
   }
 
@@ -796,8 +794,7 @@ color_ally_jog_guys_logic() {
 
   if(common_scripts\utility::cointoss()) {
     var_0 = "run_gun_up";
-  }
-  else {
+  } else {
     var_0 = "patrol_jog";
   }
 

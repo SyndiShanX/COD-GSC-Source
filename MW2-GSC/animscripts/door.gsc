@@ -33,8 +33,7 @@ doorEnterExitCheck() {
 
   if(goingInDoor) {
     self doorEnter(doorNode);
-  }
-  else {
+  } else {
     self doorExit(doorNode);
   }
 
@@ -111,8 +110,7 @@ doorEnter_TryGrenade(node, grenadeType, ricochet, minDistSq, checkInterval) {
     projLength = vectordot(doorPlane, dirToDoor);
     if(projLength > 20) {
       projLength = 20;
-    }
-    else if(projLength < -20) {
+    } else if(projLength < -20) {
       projLength = -20;
     }
 

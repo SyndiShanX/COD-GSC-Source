@@ -142,7 +142,7 @@ get_verify_and_delete_ent_array(var_0, var_1) {
 
   if(isDefined(var_2)) {
     foreach(var_4 in var_2) {
-    var_4 delete();
+      var_4 delete();
     }
   }
 }
@@ -333,7 +333,7 @@ garden_enemies_delete() {
 
   if(var_1.size > 0) {
     foreach(var_3 in var_1) {
-    var_3 kill();
+      var_3 kill();
     }
   }
 }

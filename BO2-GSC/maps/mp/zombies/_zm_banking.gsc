@@ -106,8 +106,7 @@ onplayerconnect_bank_deposit_box() {
 
   if(!online_game) {
     self.account_value = 0;
-  }
-  else {
+  } else {
     self.account_value = self maps\mp\zombies\_zm_stats::get_map_stat("depositBox", level.banking_map);
   }
 }
@@ -137,8 +136,7 @@ bank_unitrigger(name, prompt_fn, think_fn, override_length, override_width, over
 
   if(isDefined(self.script_angles)) {
     unitrigger_stub.angles = self.script_angles;
-  }
-  else {
+  } else {
     unitrigger_stub.angles = self.angles;
   }
 
@@ -146,48 +144,39 @@ bank_unitrigger(name, prompt_fn, think_fn, override_length, override_width, over
 
   if(isDefined(override_length)) {
     unitrigger_stub.script_length = override_length;
-  }
-  else if(isDefined(self.script_length)) {
+  } else if(isDefined(self.script_length)) {
     unitrigger_stub.script_length = self.script_length;
-  }
-  else {
+  } else {
     unitrigger_stub.script_length = 32;
   }
 
   if(isDefined(override_width)) {
     unitrigger_stub.script_width = override_width;
-  }
-  else if(isDefined(self.script_width)) {
+  } else if(isDefined(self.script_width)) {
     unitrigger_stub.script_width = self.script_width;
-  }
-  else {
+  } else {
     unitrigger_stub.script_width = 32;
   }
 
   if(isDefined(override_height)) {
     unitrigger_stub.script_height = override_height;
-  }
-  else if(isDefined(self.script_height)) {
+  } else if(isDefined(self.script_height)) {
     unitrigger_stub.script_height = self.script_height;
-  }
-  else {
+  } else {
     unitrigger_stub.script_height = 64;
   }
 
   if(isDefined(override_radius)) {
     unitrigger_stub.script_radius = override_radius;
-  }
-  else if(isDefined(self.radius)) {
+  } else if(isDefined(self.radius)) {
     unitrigger_stub.radius = self.radius;
-  }
-  else {
+  } else {
     unitrigger_stub.radius = 32;
   }
 
   if(isDefined(self.script_unitrigger_type)) {
     unitrigger_stub.script_unitrigger_type = self.script_unitrigger_type;
-  }
-  else {
+  } else {
     unitrigger_stub.script_unitrigger_type = "unitrigger_box_use";
     unitrigger_stub.origin = unitrigger_stub.origin - anglestoright(unitrigger_stub.angles) * (unitrigger_stub.script_length / 2);
   }
@@ -268,8 +257,7 @@ trigger_withdraw_think() {
 
       if(isDefined(level.custom_bank_withdrawl_vo)) {
         player thread[[level.custom_bank_withdrawl_vo]]();
-      }
-      else {
+      } else {
         player thread do_player_general_vox("general", "exert_laugh", 10, 50);
       }
 

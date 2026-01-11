@@ -37,17 +37,13 @@ init() {
   makedvarserverinfo("ui_friendlyfire", "0");
   if(getdvar("scr_mapsize") == "") {
     setdvar("scr_mapsize", "64");
-  }
-  else if(getdvarFloat("scr_mapsize") >= 64) {
+  } else if(getdvarFloat("scr_mapsize") >= 64) {
     setdvar("scr_mapsize", "64");
-  }
-  else if(getdvarFloat("scr_mapsize") >= 32) {
+  } else if(getdvarFloat("scr_mapsize") >= 32) {
     setdvar("scr_mapsize", "32");
-  }
-  else if(getdvarFloat("scr_mapsize") >= 16) {
+  } else if(getdvarFloat("scr_mapsize") >= 16) {
     setdvar("scr_mapsize", "16");
-  }
-  else {
+  } else {
     setdvar("scr_mapsize", "8");
   }
   level.mapsize = getdvarFloat("scr_mapsize");

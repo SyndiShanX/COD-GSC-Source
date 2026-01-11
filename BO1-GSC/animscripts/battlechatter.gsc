@@ -671,9 +671,7 @@ filter(potentialThreats, isThreat) {
   for(i = 0; i < potentialThreats.size; i++) {
     players = GetPlayers();
     for(p = 0; p < players.size; p++) {
-      if(potentialThreats[i][
-          [isThreat]
-        ](players[p])) {
+      if(potentialThreats[i][[isThreat]](players[p])) {
         threats[threats.size] = potentialThreats[i];
         break;
       }

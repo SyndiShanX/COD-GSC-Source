@@ -84,14 +84,11 @@ enable_filter_hazmat(player, filterid, overlayid, stage, opacity) {
 
   if(stage == 1) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_1"], 1);
-  }
-  else if(stage == 2) {
+  } else if(stage == 2) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_2"], 1);
-  }
-  else if(stage == 3) {
+  } else if(stage == 3) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_3"], 1);
-  }
-  else if(stage == 4) {
+  } else if(stage == 4) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_hazmat_4"], 1);
   }
 
@@ -674,14 +671,11 @@ set_filter_oxygenmask_condensation_amount(player, filterid_condensation, amount)
 set_filter_oxygenmask_crack_state(player, overlayid, stage) {
   if(stage == 1) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_oxygenmask_1"], 1);
-  }
-  else if(stage == 2) {
+  } else if(stage == 2) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_oxygenmask_2"], 1);
-  }
-  else if(stage == 3) {
+  } else if(stage == 3) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_oxygenmask_3"], 1);
-  }
-  else if(stage == 4) {
+  } else if(stage == 4) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_oxygenmask_4"], 1);
   }
 }
@@ -695,14 +689,11 @@ enable_filter_oxygenmask(player, filterid_warp, filterid_condensation, overlayid
 
   if(stage == 1) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_oxygenmask_1"], 1);
-  }
-  else if(stage == 2) {
+  } else if(stage == 2) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_oxygenmask_2"], 1);
-  }
-  else if(stage == 3) {
+  } else if(stage == 3) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_oxygenmask_3"], 1);
-  }
-  else if(stage == 4) {
+  } else if(stage == 4) {
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_oxygenmask_4"], 1);
   }
 
@@ -725,8 +716,7 @@ init_filter_crackedglass_pakistan3(player) {
 set_filter_crackedglass_pakistan3_state(player, overlayid, stage) {
   if(stage == 0) {
     player set_overlay_enabled(overlayid, 0);
-  }
-  else if(stage == 1) {
+  } else if(stage == 1) {
     player set_overlay_enabled(overlayid, 1);
     player set_overlay_material(overlayid, level.filter_matid["generic_overlay_broken_glass_2"], 1);
   } else if(stage == 2) {

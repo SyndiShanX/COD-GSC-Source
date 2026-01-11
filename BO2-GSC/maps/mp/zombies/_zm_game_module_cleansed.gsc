@@ -9,11 +9,8 @@
 #include maps\mp\zombies\_zm_utility;
 #include maps\mp\zombies\_zm_turned;
 
-register_game_module() {
-}
+register_game_module() {}
 
-onstartgametype(name) {
-}
+onstartgametype(name) {}
 
-onstartcleansedgametype() {
-}
+onstartcleansedgametype() {}

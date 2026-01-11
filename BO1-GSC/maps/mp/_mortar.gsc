@@ -70,8 +70,7 @@ useMortar(positions) {
   }
   if(level.teambased) {
     teamType = self.team;
-  }
-  else {
+  } else {
     teamType = "none";
   }
   thread doMortar(positions, self, teamType, ownerDeathCount);

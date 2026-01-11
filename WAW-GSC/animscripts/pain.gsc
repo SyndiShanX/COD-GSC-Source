@@ -192,72 +192,63 @@ getStandPainAnim() {
     if(damageAmount > .4 && !damageLocationIsAny("left_hand", "right_hand", "left_foot", "right_foot", "helmet")) {
       if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
         painArray[painArray.size] = % exposed_pain_2_crouch;
-      }
-      else {
+      } else {
         painArray[painArray.size] = % exposed2_pain_2_crouch;
       }
     }
     if(self damageLocationIsAny("torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck")) {
       if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
         painArray[painArray.size] = % exposed_pain_back;
-      }
-      else {
+      } else {
         painArray[painArray.size] = % exposed2_pain_back;
       }
     }
     if(self damageLocationIsAny("right_hand", "right_arm_upper", "right_arm_lower", "torso_upper")) {
       if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
         painArray[painArray.size] = % exposed_pain_dropgun;
-      }
-      else {
+      } else {
         painArray[painArray.size] = % exposed2_pain_dropgun;
       }
     }
     if(self damageLocationIsAny("torso_lower", "left_leg_upper", "right_leg_upper")) {
       if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
         painArray[painArray.size] = % exposed_pain_groin;
-      }
-      else {
+      } else {
         painArray[painArray.size] = % exposed2_pain_groin;
       }
     }
     if(self damageLocationIsAny("left_hand", "left_arm_lower", "left_arm_upper")) {
       if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
         painArray[painArray.size] = % exposed_pain_left_arm;
-      }
-      else {
+      } else {
         painArray[painArray.size] = % exposed2_pain_left_arm;
       }
     }
     if(self damageLocationIsAny("right_hand", "right_arm_lower", "right_arm_upper")) {
       if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
         painArray[painArray.size] = % exposed_pain_right_arm;
-      }
-      else {
+      } else {
         painArray[painArray.size] = % exposed2_pain_right_arm;
       }
     }
     if(self damageLocationIsAny("left_foot", "right_foot", "left_leg_lower", "right_leg_lower", "left_leg_upper", "right_leg_upper")) {
       if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
         painArray[painArray.size] = % exposed_pain_leg;
-      }
-      else {
+      } else {
         painArray[painArray.size] = % exposed2_pain_leg;
       }
     }
     if(painArray.size < 2) {
       if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
         painArray[painArray.size] = % exposed_pain_back;
-      }
-      else {
+      } else {
         painArray[painArray.size] = % exposed2_pain_back;
       }
     }
     if(painArray.size < 2) {
       if(!isDefined(self.exposedSet) || self.exposedSet == 0) {
         painArray[painArray.size] = % exposed_pain_dropgun;
-      }
-      else {
+      } else {
         painArray[painArray.size] = % exposed2_pain_dropgun;
       }
     }
@@ -309,8 +300,7 @@ getCrouchPainAnim() {
 getPronePainAnim() {
   if(randomint(2) == 0) {
     return % prone_reaction_A;
-  }
-  else {
+  } else {
     return % prone_reaction_B;
   }
 }
@@ -318,8 +308,7 @@ getPronePainAnim() {
 playPainAnim(painAnim) {
   if(isDefined(self.magic_bullet_shield)) {
     rate = 1.5;
-  }
-  else {
+  } else {
     rate = self.animPlayBackRate;
   }
   self setFlaggedAnimKnobAllRestart("painanim", painAnim, % body, 1, .1, rate);
@@ -418,11 +407,9 @@ specialPain(anim_special) {
     case "saw":
       if(self.a.pose == "stand") {
         painAnim = % saw_gunner_pain;
-      }
-      else if(self.a.pose == "crouch") {
+      } else if(self.a.pose == "crouch") {
         painAnim = % saw_gunner_lowwall_pain_02;
-      }
-      else {
+      } else {
         painAnim = % saw_gunner_prone_pain;
       }
       self setflaggedanimknob("painanim", painAnim, 1, .3, 1);
@@ -530,8 +517,7 @@ PlayHitAnimation() {
   if(playHitAnim) {
     if(self.damageTaken > 200) {
       weight = 1;
-    }
-    else {
+    } else {
       weight = (self.damageTaken + 50.0) / 250;
     }
     self clearanim( % minor_pain, 0.1);
@@ -1101,8 +1087,7 @@ watchEnemyVelocity() {
     } else {
       if(isDefined(self.enemy)) {
         prevpos = self.enemy.origin;
-      }
-      else {
+      } else {
         prevpos = self.origin;
       }
       prevenemy = self.enemy;

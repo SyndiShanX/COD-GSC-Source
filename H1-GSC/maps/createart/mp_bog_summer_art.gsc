@@ -9,8 +9,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\mp_bog_summer_fog_hdr::setupfog();
-  }
-  else {
+  } else {
     maps\createart\mp_bog_summer_fog::setupfog();
   }
 

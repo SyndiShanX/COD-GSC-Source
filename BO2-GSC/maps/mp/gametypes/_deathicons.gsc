@@ -25,8 +25,7 @@ onplayerconnect() {
   }
 }
 
-updatedeathiconsenabled() {
-}
+updatedeathiconsenabled() {}
 
 adddeathicon(entity, dyingplayer, team, timeout) {
   if(!level.teambased) {
@@ -58,8 +57,7 @@ adddeathicon(entity, dyingplayer, team, timeout) {
 
   if(level.splitscreen) {
     newdeathicon setshader("headicon_dead", 14, 14);
-  }
-  else {
+  } else {
     newdeathicon setshader("headicon_dead", 7, 7);
   }
 

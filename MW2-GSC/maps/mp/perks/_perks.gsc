@@ -273,11 +273,9 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
 
     if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage") && victim _hasPerk("specialty_armorvest")) {
       damageAdd += 0;
-    }
-    else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage")) {
+    } else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage")) {
       damageAdd += damage * level.bulletDamageMod;
-    }
-    else if(victim _hasPerk("specialty_armorvest")) {
+    } else if(victim _hasPerk("specialty_armorvest")) {
       damageAdd -= damage * (1 - level.armorVestMod);
     }
 
@@ -287,11 +285,9 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
   } else if(isExplosiveDamage(meansOfDeath)) {
     if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage") && victim _hasPerk("_specialty_blastshield")) {
       damageAdd += 0;
-    }
-    else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage")) {
+    } else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage")) {
       damageAdd += damage * level.explosiveDamageMod;
-    }
-    else if(victim _hasPerk("_specialty_blastshield")) {
+    } else if(victim _hasPerk("_specialty_blastshield")) {
       damageAdd -= damage * (1 - level.blastShieldMod);
     }
 

@@ -6,11 +6,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\item_world_fixup;
 #include scripts\wz_common\character_unlock_fixup;
-
 #namespace character_unlock_seraph_fixup;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_seraph_fixup", &__init__, undefined, #"character_unlock_fixup");
+  system::register(#"character_unlock_seraph_fixup", &__init__, undefined, # "character_unlock_fixup");
 }
 
 autoexec function_f031a77f() {
@@ -19,7 +18,7 @@ autoexec function_f031a77f() {
 }
 
 __init__() {
-  character_unlock_fixup::register_character_unlock(#"seraph_unlock", #"hash_17c02481305f0e24", #"annihilator_wz_item", &function_d95e620c, #"hash_633d185cd2140f1a", #"hash_633d175cd2140d67");
+  character_unlock_fixup::register_character_unlock(#"seraph_unlock", # "hash_17c02481305f0e24", # "annihilator_wz_item", &function_d95e620c, # "hash_633d185cd2140f1a", # "hash_633d175cd2140d67");
 }
 
 function_d95e620c() {

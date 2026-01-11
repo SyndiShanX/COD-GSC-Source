@@ -5,7 +5,6 @@
 
 #include scripts\core_common\ai\archetype_utility;
 #include scripts\core_common\ai\systems\behavior_tree_utility;
-
 #namespace archetype_human_exposed;
 
 autoexec registerbehaviorscriptfunctions() {

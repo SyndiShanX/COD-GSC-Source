@@ -79,8 +79,7 @@ cover_prone_think() {
 
   if(stance == "prone") {
     dist = self thread set_modified_sight_dist("foliage_cover_prone");
-  }
-  else {
+  } else {
     dist = self thread set_modified_sight_dist("no_cover");
   }
 
@@ -92,8 +91,7 @@ cover_crouch_think() {
 
   if(stance == "prone" || stance == "crouch") {
     dist = self set_modified_sight_dist("foliage_cover_crouch");
-  }
-  else {
+  } else {
     dist = self set_modified_sight_dist("no_cover");
   }
 
@@ -105,8 +103,7 @@ cover_stand_think() {
 
   if(stance == "prone" || stance == "crouch" || stance == "stand") {
     dist = self set_modified_sight_dist("foliage_cover_stand");
-  }
-  else {
+  } else {
     dist = self set_modified_sight_dist("no_cover");
   }
 

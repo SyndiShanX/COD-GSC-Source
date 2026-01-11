@@ -891,8 +891,7 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     if(isDefined(node.script_requires_player)) {
       if(node.script_requires_player > 1) {
         player_wait_dist = node.script_requires_player;
-      }
-      else {
+      } else {
         player_wait_dist = 256;
       }
       node.script_requires_player = false;
@@ -1001,8 +1000,7 @@ go_to_node_wait_for_player(node, get_target_func, dist) {
     temp = [[get_target_func]](node.target);
     if(temp.size == 1) {
       vec = vectornormalize(temp[0].origin - node.origin);
-    }
-    else if(isDefined(node.angles)) {
+    } else if(isDefined(node.angles)) {
       vec = anglesToForward(node.angles);
     }
   } else if(isDefined(node.angles))
@@ -1078,9 +1076,7 @@ crawl_target_and_init_flags(ent, get_func) {
         }
       }
       if(isDefined(ent.target)) {
-        new_targets = [
-          [get_func]
-        ](ent.target);
+        new_targets = [[get_func]](ent.target);
         targets = add_to_array(targets, new_targets);
       }
     }

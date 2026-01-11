@@ -120,8 +120,7 @@ onPlayerConnect() {
 
     if(gameFlag("prematch_done")) {
       player.infect_joinedatstart = false;
-    }
-    else {
+    } else {
       player.infect_joinedatstart = true;
     }
 
@@ -142,8 +141,7 @@ getSpawnPoint() {
 
     if(isDefined(self.infect_rejoined)) {
       maps\mp\gametypes\_menus::addToTeam("axis", true);
-    }
-    else {
+    } else {
       maps\mp\gametypes\_menus::addToTeam("allies", true);
     }
 
@@ -200,8 +198,7 @@ onSpawnPlayer() {
 
   if(isDefined(self.isInitialInfected)) {
     self.pers["gamemodeLoadout"] = level.infect_loadouts["axis_initial"];
-  }
-  else {
+  } else {
     self.pers["gamemodeLoadout"] = level.infect_loadouts[self.pers["team"]];
   }
 
@@ -235,8 +232,7 @@ onSpawnFinished() {
       }
     }
 
-    if(self.pers["team"] == "allies")
-    {
+    if(self.pers["team"] == "allies") {
       if(!_hasPerk("specialty_scavenger")) {
         _setPerk("specialty_scavenger", 0);
         var_2 = tablelookup("mp/perktable.csv", 1, "specialty_scavenger", 8);
@@ -245,8 +241,7 @@ onSpawnFinished() {
           _setPerk(var_2, 0);
         }
       }
-    } else if(self.pers["team"] == "axis")
-    {
+    } else if(self.pers["team"] == "axis") {
       if(isDefined(self.isInitialInfected) && !_hasPerk("specialty_marathon")) {
         _setPerk("specialty_marathon", 0);
         var_2 = tablelookup("mp/perktable.csv", 1, "specialty_marathon", 8);
@@ -421,8 +416,7 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
   if(self.team == "allies" && isDefined(attacker)) {
     if(isPlayer(attacker) && attacker != self) {
       processKill = true;
-    }
-    else if(level.infect_allowSuicide && (attacker == self || !isPlayer(attacker))) {
+    } else if(level.infect_allowSuicide && (attacker == self || !isPlayer(attacker))) {
       processKill = true;
       wasSuicide = true;
     }
@@ -470,13 +464,9 @@ onPlayerKilled(eInflictor, attacker, iDamage, sMeansOfDeath, sWeapon, vDir, sHit
           }
         }
       }
-    }
-
-    else if(level.infect_teamScores["allies"] == 1) {
+    } else if(level.infect_teamScores["allies"] == 1) {
       onFinalSurvivor();
-    }
-
-    else if(level.infect_teamScores["allies"] == 0) {
+    } else if(level.infect_teamScores["allies"] == 0) {
       onSurvivorsEliminated();
     }
   }

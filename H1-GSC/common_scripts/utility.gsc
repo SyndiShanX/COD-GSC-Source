@@ -473,7 +473,7 @@ waittill_any_in_array_return_no_endon_death(var_0) {
   var_1 = spawnStruct();
 
   foreach(var_3 in var_0) {
-  childthread waittill_string_no_endon_death(var_3, var_1);
+    childthread waittill_string_no_endon_death(var_3, var_1);
   }
 
   var_1 waittill("returned", var_5);
@@ -507,7 +507,7 @@ waittill_any_in_array_or_timeout_no_endon_death(var_0, var_1) {
   var_2 = spawnStruct();
 
   foreach(var_4 in var_0) {
-  childthread waittill_string_no_endon_death(var_4, var_2);
+    childthread waittill_string_no_endon_death(var_4, var_2);
   }
 
   var_2 thread _timeout(var_1);
@@ -733,8 +733,7 @@ flag_set(var_0, var_1) {
 
   if(isDefined(var_1)) {
     level notify(var_0, var_1);
-  }
-  else {
+  } else {
     level notify(var_0);
   }
 }
@@ -780,12 +779,12 @@ waittill_either(var_0, var_1) {
 array_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10) {
   if(!isDefined(var_2)) {
     foreach(var_12 in var_0) {
-    var_12 thread[[var_1]]();
+      var_12 thread[[var_1]]();
     }
   } else {
     if(!isDefined(var_3)) {
       foreach(var_12 in var_0) {
-      var_12 thread[[var_1]](var_2);
+        var_12 thread[[var_1]](var_2);
       }
 
       return;
@@ -793,7 +792,7 @@ array_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
     if(!isDefined(var_4)) {
       foreach(var_12 in var_0) {
-      var_12 thread[[var_1]](var_2, var_3);
+        var_12 thread[[var_1]](var_2, var_3);
       }
 
       return;
@@ -801,7 +800,7 @@ array_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
     if(!isDefined(var_5)) {
       foreach(var_12 in var_0) {
-      var_12 thread[[var_1]](var_2, var_3, var_4);
+        var_12 thread[[var_1]](var_2, var_3, var_4);
       }
 
       return;
@@ -809,7 +808,7 @@ array_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
     if(!isDefined(var_6)) {
       foreach(var_12 in var_0) {
-      var_12 thread[[var_1]](var_2, var_3, var_4, var_5);
+        var_12 thread[[var_1]](var_2, var_3, var_4, var_5);
       }
 
       return;
@@ -817,7 +816,7 @@ array_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
     if(!isDefined(var_7)) {
       foreach(var_12 in var_0) {
-      var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6);
+        var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6);
       }
 
       return;
@@ -825,7 +824,7 @@ array_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
     if(!isDefined(var_8)) {
       foreach(var_12 in var_0) {
-      var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7);
+        var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7);
       }
 
       return;
@@ -833,7 +832,7 @@ array_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
     if(!isDefined(var_9)) {
       foreach(var_12 in var_0) {
-      var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8);
+        var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8);
       }
 
       return;
@@ -841,14 +840,14 @@ array_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 
     if(!isDefined(var_10)) {
       foreach(var_12 in var_0) {
-      var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
+        var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
       }
 
       return;
     }
 
     foreach(var_12 in var_0) {
-    var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
+      var_12 thread[[var_1]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
     }
   }
 }
@@ -856,7 +855,7 @@ array_thread(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_
 array_call(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4)) {
     foreach(var_6 in var_0) {
-    var_6 call[[var_1]](var_2, var_3, var_4);
+      var_6 call[[var_1]](var_2, var_3, var_4);
     }
 
     return;
@@ -864,7 +863,7 @@ array_call(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     foreach(var_6 in var_0) {
-    var_6 call[[var_1]](var_2, var_3);
+      var_6 call[[var_1]](var_2, var_3);
     }
 
     return;
@@ -872,21 +871,21 @@ array_call(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_2)) {
     foreach(var_6 in var_0) {
-    var_6 call[[var_1]](var_2);
+      var_6 call[[var_1]](var_2);
     }
 
     return;
   }
 
   foreach(var_6 in var_0) {
-  var_6 call[[var_1]]();
+    var_6 call[[var_1]]();
   }
 }
 
 noself_array_call(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4)) {
     foreach(var_6 in var_0) {
-    call[[var_1]](var_6, var_2, var_3, var_4);
+      call[[var_1]](var_6, var_2, var_3, var_4);
     }
 
     return;
@@ -894,7 +893,7 @@ noself_array_call(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     foreach(var_6 in var_0) {
-    call[[var_1]](var_6, var_2, var_3);
+      call[[var_1]](var_6, var_2, var_3);
     }
 
     return;
@@ -902,14 +901,14 @@ noself_array_call(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_2)) {
     foreach(var_6 in var_0) {
-    call[[var_1]](var_6, var_2);
+      call[[var_1]](var_6, var_2);
     }
 
     return;
   }
 
   foreach(var_6 in var_0) {
-  call[[var_1]](var_6);
+    call[[var_1]](var_6);
   }
 }
 
@@ -1046,7 +1045,7 @@ struct_class_init() {
   level.struct_class_names["script_linkname"] = [];
 
   foreach(var_1 in level.struct) {
-  add_struct_to_global_array(var_1);
+    add_struct_to_global_array(var_1);
   }
 }
 
@@ -1118,7 +1117,7 @@ array_remove(var_0, var_1) {
 
 array_remove_array(var_0, var_1) {
   foreach(var_3 in var_1) {
-  var_0 = array_remove(var_0, var_3);
+    var_0 = array_remove(var_0, var_3);
   }
 
   return var_0;
@@ -1164,7 +1163,7 @@ array_remove_duplicates(var_0) {
 array_levelthread(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4)) {
     foreach(var_6 in var_0) {
-    thread[[var_1]](var_6, var_2, var_3, var_4);
+      thread[[var_1]](var_6, var_2, var_3, var_4);
     }
 
     return;
@@ -1172,7 +1171,7 @@ array_levelthread(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     foreach(var_6 in var_0) {
-    thread[[var_1]](var_6, var_2, var_3);
+      thread[[var_1]](var_6, var_2, var_3);
     }
 
     return;
@@ -1180,21 +1179,21 @@ array_levelthread(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_2)) {
     foreach(var_6 in var_0) {
-    thread[[var_1]](var_6, var_2);
+      thread[[var_1]](var_6, var_2);
     }
 
     return;
   }
 
   foreach(var_6 in var_0) {
-  thread[[var_1]](var_6);
+    thread[[var_1]](var_6);
   }
 }
 
 array_levelcall(var_0, var_1, var_2, var_3, var_4) {
   if(isDefined(var_4)) {
     foreach(var_6 in var_0) {
-    call[[var_1]](var_6, var_2, var_3, var_4);
+      call[[var_1]](var_6, var_2, var_3, var_4);
     }
 
     return;
@@ -1202,7 +1201,7 @@ array_levelcall(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_3)) {
     foreach(var_6 in var_0) {
-    call[[var_1]](var_6, var_2, var_3);
+      call[[var_1]](var_6, var_2, var_3);
     }
 
     return;
@@ -1210,14 +1209,14 @@ array_levelcall(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_2)) {
     foreach(var_6 in var_0) {
-    call[[var_1]](var_6, var_2);
+      call[[var_1]](var_6, var_2);
     }
 
     return;
   }
 
   foreach(var_6 in var_0) {
-  call[[var_1]](var_6);
+    call[[var_1]](var_6);
   }
 }
 
@@ -1228,8 +1227,7 @@ add_to_array(var_0, var_1) {
 
   if(!isDefined(var_0)) {
     var_0[0] = var_1;
-  }
-  else {
+  } else {
     var_0[var_0.size] = var_1;
   }
 
@@ -1433,32 +1431,23 @@ delaycall_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
 
   if(isDefined(var_10)) {
     self call[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-  }
-  else if(isDefined(var_9)) {
+  } else if(isDefined(var_9)) {
     self call[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-  }
-  else if(isDefined(var_8)) {
+  } else if(isDefined(var_8)) {
     self call[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8);
-  }
-  else if(isDefined(var_7)) {
+  } else if(isDefined(var_7)) {
     self call[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7);
-  }
-  else if(isDefined(var_6)) {
+  } else if(isDefined(var_6)) {
     self call[[var_0]](var_2, var_3, var_4, var_5, var_6);
-  }
-  else if(isDefined(var_5)) {
+  } else if(isDefined(var_5)) {
     self call[[var_0]](var_2, var_3, var_4, var_5);
-  }
-  else if(isDefined(var_4)) {
+  } else if(isDefined(var_4)) {
     self call[[var_0]](var_2, var_3, var_4);
-  }
-  else if(isDefined(var_3)) {
+  } else if(isDefined(var_3)) {
     self call[[var_0]](var_2, var_3);
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     self call[[var_0]](var_2);
-  }
-  else {
+  } else {
     self call[[var_0]]();
   }
 }
@@ -1472,32 +1461,23 @@ delay_script_call_proc(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, v
 
   if(isDefined(var_10)) {
     self[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9, var_10);
-  }
-  else if(isDefined(var_9)) {
+  } else if(isDefined(var_9)) {
     self[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9);
-  }
-  else if(isDefined(var_8)) {
+  } else if(isDefined(var_8)) {
     self[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7, var_8);
-  }
-  else if(isDefined(var_7)) {
+  } else if(isDefined(var_7)) {
     self[[var_0]](var_2, var_3, var_4, var_5, var_6, var_7);
-  }
-  else if(isDefined(var_6)) {
+  } else if(isDefined(var_6)) {
     self[[var_0]](var_2, var_3, var_4, var_5, var_6);
-  }
-  else if(isDefined(var_5)) {
+  } else if(isDefined(var_5)) {
     self[[var_0]](var_2, var_3, var_4, var_5);
-  }
-  else if(isDefined(var_4)) {
+  } else if(isDefined(var_4)) {
     self[[var_0]](var_2, var_3, var_4);
-  }
-  else if(isDefined(var_3)) {
+  } else if(isDefined(var_3)) {
     self[[var_0]](var_2, var_3);
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     self[[var_0]](var_2);
-  }
-  else {
+  } else {
     self[[var_0]]();
   }
 }
@@ -1511,17 +1491,13 @@ noself_delaycall_proc(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_5)) {
     call[[var_0]](var_2, var_3, var_4, var_5);
-  }
-  else if(isDefined(var_4)) {
+  } else if(isDefined(var_4)) {
     call[[var_0]](var_2, var_3, var_4);
-  }
-  else if(isDefined(var_3)) {
+  } else if(isDefined(var_3)) {
     call[[var_0]](var_2, var_3);
-  }
-  else if(isDefined(var_2)) {
+  } else if(isDefined(var_2)) {
     call[[var_0]](var_2);
-  }
-  else {
+  } else {
     call[[var_0]]();
   }
 }
@@ -1570,14 +1546,12 @@ string_find(var_0, var_1) {
   for(var_3 = 0; var_2 < var_0.size; var_2++) {
     if(tolower(var_0[var_2]) == tolower(var_1[var_3])) {
       var_3++;
-    }
-    else {
+    } else {
       var_3 = 0;
 
       if(tolower(var_0[var_2]) == tolower(var_1[var_3])) {
         var_3++;
-      }
-      else if(var_2 > var_0.size - var_1.size) {
+      } else if(var_2 > var_0.size - var_1.size) {
         return -1;
       }
     }
@@ -1631,11 +1605,11 @@ table_combine(var_0, var_1) {
   var_2 = [];
 
   foreach(var_5, var_4 in var_0) {
-  var_2[var_5] = var_4;
+    var_2[var_5] = var_4;
   }
 
   foreach(var_5, var_4 in var_1) {
-  var_2[var_5] = var_4;
+    var_2[var_5] = var_4;
   }
 
   return var_2;
@@ -1688,11 +1662,11 @@ array_combine_non_integer_indices(var_0, var_1) {
   var_2 = [];
 
   foreach(var_5, var_4 in var_0) {
-  var_2[var_5] = var_4;
+    var_2[var_5] = var_4;
   }
 
   foreach(var_5, var_4 in var_1) {
-  var_2[var_5] = var_4;
+    var_2[var_5] = var_4;
   }
 
   return var_2;
@@ -1916,8 +1890,7 @@ draw_entity_bounds(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_3) {
     var_5 = int(var_4 / 0.05);
-  }
-  else {
+  } else {
     var_5 = int(var_1 / 0.05);
   }
 
@@ -1999,8 +1972,7 @@ _disableusability() {
 _enableusability() {
   if(!isDefined(self.disabledusability)) {
     self.disabledusability = 0;
-  }
-  else if(self.disabledusability > 0) {
+  } else if(self.disabledusability > 0) {
     self.disabledusability--;
 
     if(self.disabledusability == 0) {
@@ -2058,8 +2030,7 @@ _enableweaponswitch() {
   if(!self.disabledweaponswitch) {
     if(isDefined(level.hordeweaponsjammed) && level.hordeweaponsjammed == 1) {
       return;
-    }
-    else {
+    } else {
       self enableweaponswitch();
     }
   }
@@ -2105,8 +2076,7 @@ _enabledetonate(var_0, var_1) {
 
   if(var_1) {
     self notify("WeaponDetonateEnabled", var_0);
-  }
-  else {
+  } else {
     self notify("WeaponDetonateDisabled", var_0);
   }
 }
@@ -2115,7 +2085,7 @@ random(var_0) {
   var_1 = [];
 
   foreach(var_4, var_3 in var_0) {
-  var_1[var_1.size] = var_3;
+    var_1[var_1.size] = var_3;
   }
 
   if(!var_1.size) {
@@ -2129,7 +2099,7 @@ random_weight_sorted(var_0) {
   var_1 = [];
 
   foreach(var_4, var_3 in var_0) {
-  var_1[var_1.size] = var_3;
+    var_1[var_1.size] = var_3;
   }
 
   if(!var_1.size) {
@@ -2189,8 +2159,7 @@ fileprint_launcher_end_file(var_0, var_1) {
 
   if(var_1) {
     fileprint_launcher("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + var_0);
-  }
-  else {
+  } else {
     fileprint_launcher("GAMEPRINTENDFILE:" + var_0);
   }
 
@@ -2346,8 +2315,7 @@ play_sound_in_space_with_angles(var_0, var_1, var_2, var_3) {
   if(issp()) {
     if(isDefined(var_3) && var_3) {
       var_4 playsoundasmaster(var_0, "sounddone");
-    }
-    else {
+    } else {
       var_4 playSound(var_0, "sounddone");
     }
 
@@ -2375,8 +2343,7 @@ loop_fx_sound(var_0, var_1, var_2, var_3, var_4) {
 
   if(isDefined(var_2) && var_2 && (!isDefined(level.first_frame) || level.first_frame == 1)) {
     spawnloopingsound(var_0, var_1, (0, 0, 0));
-  }
-  else {
+  } else {
     var_5 = spawn("script_origin", (0, 0, 0));
 
     if(isDefined(var_3)) {
@@ -2401,8 +2368,7 @@ loop_fx_sound_with_angles(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
   } else {
     if(isDefined(level.createfx_enabled) && level.createfx_enabled && isDefined(var_5.loopsound_ent)) {
       var_7 = var_5.loopsound_ent;
-    }
-    else {
+    } else {
       var_7 = spawn("script_origin", (0, 0, 0));
     }
 
@@ -2417,8 +2383,7 @@ loop_fx_sound_with_angles(var_0, var_1, var_2, var_3, var_4, var_5, var_6) {
 
     if(isDefined(level.createfx_enabled) && level.createfx_enabled) {
       var_5.loopsound_ent = var_7;
-    }
-    else {
+    } else {
       var_7 willneverchange();
     }
   }
@@ -2751,8 +2716,7 @@ is_player_gamepad_enabled() {
 
     if(isDefined(var_0)) {
       return var_0;
-    }
-    else {
+    } else {
       return 0;
     }
   }
@@ -2831,8 +2795,7 @@ entity_path_disconnect_thread(var_0) {
     if(var_4 != var_1 || var_5) {
       if(var_4) {
         self disconnectpaths();
-      }
-      else {
+      } else {
         self connectpaths();
       }
 
@@ -2871,8 +2834,7 @@ set_basic_animated_model(var_0, var_1, var_2) {
 
   if(var_4) {
     level.anim_prop_models[var_0]["basic"] = var_1;
-  }
-  else {
+  } else {
     level.anim_prop_models[var_0]["basic"] = var_2;
   }
 }
@@ -2942,8 +2904,7 @@ evfromluminancenits(var_0) {
 lineartogamma_srgb(var_0) {
   if(var_0 <= 0.0031308) {
     return var_0 * 12.92;
-  }
-  else {
+  } else {
     return pow(var_0, 0.416667) * 1.055 - 0.055;
   }
 }
@@ -3025,8 +2986,7 @@ set_fog_to_ent_values_dfog(var_0, var_1) {
   if(isDefined(var_0.sunfogenabled) && var_0.sunfogenabled) {
     if(!isplayer(self)) {
       setexpfogext(var_0.startdist, var_0.halfwaydist, var_0.red, var_0.green, var_0.blue, var_0.hdrcolorintensity, var_0.maxopacity, var_1, var_0.sunred, var_0.sungreen, var_0.sunblue, var_0.hdrsuncolorintensity, var_0.sundir, var_0.sunbeginfadeangle, var_0.sunendfadeangle, var_0.normalfogscale, var_0.skyfogintensity, var_0.skyfogminangle, var_0.skyfogmaxangle, var_0.heightfogenabled, var_0.heightfogbaseheight, var_0.heightfoghalfplanedistance);
-    }
-    else {
+    } else {
       self playersetexpfog(var_0.startdist, var_0.halfwaydist, var_0.red, var_0.green, var_0.blue, var_0.hdrcolorintensity, var_0.maxopacity, var_1, var_0.sunred, var_0.sungreen, var_0.sunblue, var_0.hdrsuncolorintensity, var_0.sundir, var_0.sunbeginfadeangle, var_0.sunendfadeangle, var_0.normalfogscale, var_0.skyfogintensity, var_0.skyfogminangle, var_0.skyfogmaxangle, var_0.heightfogenabled, var_0.heightfogbaseheight, var_0.heightfoghalfplanedistance);
     }
   } else if(!isplayer(self))
@@ -3060,8 +3020,7 @@ set_fog_to_ent_values(var_0, var_1) {
     if(level.nextgen && var_0.atmosfogenabled) {
       if(isplayer(self)) {
         self playersetatmosfog(var_1, var_0.atmosfogsunfogcolor, var_0.atmosfoghazecolor, var_0.atmosfoghazestrength, var_0.atmosfoghazespread, var_0.atmosfogextinctionstrength, var_0.atmosfoginscatterstrength, var_0.atmosfoghalfplanedistance, var_0.atmosfogstartdistance, var_0.atmosfogdistancescale, int(var_0.atmosfogskydistance), var_0.atmosfogskyangularfalloffenabled, var_0.atmosfogskyfalloffstartangle, var_0.atmosfogskyfalloffanglerange, var_0.atmosfogsundirection, var_0.atmosfogheightfogenabled, var_0.atmosfogheightfogbaseheight, var_0.atmosfogheightfoghalfplanedistance);
-      }
-      else {
+      } else {
         setatmosfog(var_1, var_0.atmosfogsunfogcolor, var_0.atmosfoghazecolor, var_0.atmosfoghazestrength, var_0.atmosfoghazespread, var_0.atmosfogextinctionstrength, var_0.atmosfoginscatterstrength, var_0.atmosfoghalfplanedistance, var_0.atmosfogstartdistance, var_0.atmosfogdistancescale, int(var_0.atmosfogskydistance), var_0.atmosfogskyangularfalloffenabled, var_0.atmosfogskyfalloffstartangle, var_0.atmosfogskyfalloffanglerange, var_0.atmosfogsundirection, var_0.atmosfogheightfogenabled, var_0.atmosfogheightfogbaseheight, var_0.atmosfogheightfoghalfplanedistance);
       }
     } else
@@ -3081,11 +3040,7 @@ add_fx(var_0, var_1) {
 array_sort_by_handler(var_0, var_1) {
   for(var_2 = 0; var_2 < var_0.size - 1; var_2++) {
     for(var_3 = var_2 + 1; var_3 < var_0.size; var_3++) {
-      if(var_0[var_3][
-          [var_1]
-        ]() < var_0[var_2][
-          [var_1]
-        ]()) {
+      if(var_0[var_3][[var_1]]() < var_0[var_2][[var_1]]()) {
         var_4 = var_0[var_3];
         var_0[var_3] = var_0[var_2];
         var_0[var_2] = var_4;

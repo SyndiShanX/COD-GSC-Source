@@ -16,17 +16,13 @@ func_9640() {
 
   if(func_0BDC::func_9CF5()) {
     func_0BDC::func_F43D("player");
-  }
-  else if(isDefined(self.func_C0B0) && self.func_C0B0) {
+  } else if(isDefined(self.func_C0B0) && self.func_C0B0) {
     func_0BDC::func_F43D("null");
-  }
-  else if(self.model == "tag_origin") {
+  } else if(self.model == "tag_origin") {
     func_0BDC::func_F43D("null");
-  }
-  else if(issubstr(self.classname, "jackal_fake")) {
+  } else if(issubstr(self.classname, "jackal_fake")) {
     func_0BDC::func_F43D("fake");
-  }
-  else {
+  } else {
     func_0BDC::func_F43D("ai");
   }
 
@@ -441,8 +437,7 @@ func_104A8() {
 
   if(var_0.size == 0) {
     return;
-  }
-  else {
+  } else {
     level.func_A056.func_DE59 = var_0[0];
   }
 }
@@ -550,8 +545,7 @@ func_A20A() {
 
   if(level.func_D127.spaceship_mode == "hover") {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -563,8 +557,7 @@ func_A21F() {
 
   if(level.func_D127.spaceship_mode == "fly") {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }

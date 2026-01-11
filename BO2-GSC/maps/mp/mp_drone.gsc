@@ -99,6 +99,6 @@ geo_changes() {
   removes = getEntArray("rts_only", "targetname");
 
   foreach(removal in removes) {
-  removal delete();
+    removal delete();
   }
 }

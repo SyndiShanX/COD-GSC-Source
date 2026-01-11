@@ -24,8 +24,7 @@ vl_main() {
   replacefunc(maps\mp\_vl_base::resetvirtuallobbypresentable, ::resetvirtuallobbypresentable_stub);
 }
 
-resetvirtuallobbypresentable_stub() {
-}
+resetvirtuallobbypresentable_stub() {}
 
 updatemovespeedscale_stub(weaponType) {
   if(!isDefined(level.prematch_done_time)) {
@@ -34,8 +33,7 @@ updatemovespeedscale_stub(weaponType) {
 
   if(!isDefined(weaponType) || weaponType == "primary" || weaponType != "secondary") {
     weaponType = self.primaryWeapon;
-  }
-  else {
+  } else {
     weaponType = self.secondaryWeapon;
   }
 
@@ -46,8 +44,7 @@ updatemovespeedscale_stub(weaponType) {
 
   if(!isDefined(weaponType)) {
     weapClass = "none";
-  }
-  else {
+  } else {
     weapClass = weaponclass(weaponType);
   }
 
@@ -157,7 +154,7 @@ weapons_init_stub() {
     }
 
     foreach(var_17 in var_12) {
-    level.weaponlist[level.weaponlist.size] = var_5 + "_" + var_17 + "_mp";
+      level.weaponlist[level.weaponlist.size] = var_5 + "_" + var_17 + "_mp";
     }
   }
 
@@ -549,18 +546,15 @@ memberclasschanges_stub(var_0) {
 playercacprocesslui_stub(var_0, var_1) {
   if(var_0 == "reset_loadout") {
     maps\mp\_vl_cac::resetloadout(var_1);
-  }
-  else {
+  } else {
     if(maps\mp\_utility::is_true(level.in_depot)) {
       return;
     }
     if(var_0 == "cac") {
       maps\mp\_vl_cac::handlecacmodechange(var_1);
-    }
-    else if(var_0 == "classpreview" || issubstr(var_0, "preset_classpreview")) {
+    } else if(var_0 == "classpreview" || issubstr(var_0, "preset_classpreview")) {
       maps\mp\_vl_cac::handleclassselect(var_0, var_1);
-    }
-    else if(var_0 == "weapon_highlighted" && var_1 != "none") {
+    } else if(var_0 == "weapon_highlighted" && var_1 != "none") {
       if(maps\mp\_vl_cao::iscollectionsmenuactive()) {
         maps\mp\_vl_cao::turncollectionsmodeoff();
       }
@@ -688,8 +682,7 @@ handleweaponhighlighted_stub(var_0) {
 
     if(var_7 == "specialty_tacticalinsertion" || var_7 == "specialty_blastshield") {
       thread maps\mp\_vl_cac::setcacweapon("none");
-    }
-    else {
+    } else {
       thread maps\mp\_vl_cac::setcacweapon(var_7, var_3, var_8, var_9, var_10, var_11, var_17, var_1);
     }
   } else

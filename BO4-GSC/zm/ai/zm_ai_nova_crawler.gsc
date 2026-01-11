@@ -27,7 +27,6 @@
 #include scripts\zm_common\zm_score;
 #include scripts\zm_common\zm_spawner;
 #include scripts\zm_common\zm_utility;
-
 #namespace zm_ai_nova_crawler;
 
 autoexec __init__system__() {
@@ -48,7 +47,7 @@ __init__() {
 
   zm_devgui::function_c7dd7a17("<dev string:x38>");
 
-    clientfield::register("actor", "nova_crawler_burst_clientfield", 1, 1, "int");
+  clientfield::register("actor", "nova_crawler_burst_clientfield", 1, 1, "int");
   clientfield::register("toplayer", "nova_crawler_burst_postfx_clientfield", 1, 1, "int");
   clientfield::register("toplayer", "nova_crawler_gas_cloud_postfx_clientfield", 1, 1, "int");
 }
@@ -76,7 +75,7 @@ function_1d34f2b6() {
 
   if(!isDefined(self._effect)) {
     self._effect = [];
-    self._effect[#"nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_gas_trail";
+    self._effect[# "nova_crawler_aura_fx"] = "zm_ai/fx8_nova_crawler_gas_trail";
   }
 }
 
@@ -180,8 +179,8 @@ private function_99ac548f(entity) {
 
 private function_488c1ac2() {
   self endon(#"death");
-  self waittilltimeout(1, #"spawn_complete");
-  zm_net::network_safe_play_fx_on_tag("quad_trail", 2, self._effect[#"nova_crawler_aura_fx"], self, "j_spine4");
+  self waittilltimeout(1, # "spawn_complete");
+  zm_net::network_safe_play_fx_on_tag("quad_trail", 2, self._effect[# "nova_crawler_aura_fx"], self, "j_spine4");
 }
 
 private function_d79b3357(entity, origin) {
@@ -191,7 +190,7 @@ private function_d79b3357(entity, origin) {
   zombies = getaiteamarray(level.zombie_team);
 
   for(i = 0; i < zombies.size; i++) {
-    if(zombies[i].archetype != #"nova_crawler" && distance(origin, zombies[i].origin) <= 96) {
+    if(zombies[i].archetype != # "nova_crawler" && distance(origin, zombies[i].origin) <= 96) {
       zombies[i] dodamage(zombies[i].maxhealth * 1.05, origin, entity);
 
       if(zombies[i].health <= 0) {
@@ -254,7 +253,7 @@ private function_272fa9b5(entity) {
 }
 
 function_c5b157a6(einflictor, attacker, idamage, smeansofdeath, weapon, vdir, shitloc, psoffsettime) {
-  if(self.archetype == #"nova_crawler") {
+  if(self.archetype == # "nova_crawler") {
     self destructserverutils::togglespawngibs(self, 1);
     self destructserverutils::function_629a8d54(self, "tag_weapon_right");
   }

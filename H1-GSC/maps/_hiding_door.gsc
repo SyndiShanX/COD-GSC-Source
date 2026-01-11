@@ -35,8 +35,7 @@ hiding_door_spawner() {
 
   if(var_4.size == 1) {
     var_5 = var_4[0];
-  }
-  else {
+  } else {
     foreach(var_9 in var_4) {
       if(var_9.code_classname == "script_brushmodel") {
         var_6 = var_9;
@@ -132,8 +131,7 @@ hiding_door_guy(var_0, var_1, var_2, var_3, var_4) {
 
   if(var_5) {
     var_0 thread maps\_anim::anim_loop(var_6, "idle");
-  }
-  else {
+  } else {
     var_0 thread maps\_anim::anim_first_frame(var_6, "fire_3");
   }
 
@@ -176,8 +174,7 @@ hiding_door_guy(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_10 == "left" || var_10 == "front") {
       var_11 = "fire_3";
-    }
-    else if(var_10 == "right") {
+    } else if(var_10 == "right") {
       var_11 = "fire_1";
 
       if(common_scripts\utility::cointoss()) {
@@ -323,14 +320,11 @@ hiding_door_get_enemy_direction(var_0, var_1, var_2) {
 
   if(var_7 >= 90 && var_7 <= 270) {
     var_8 = "behind";
-  }
-  else if(var_7 >= 300 || var_7 <= 45) {
+  } else if(var_7 >= 300 || var_7 <= 45) {
     var_8 = "front";
-  }
-  else if(var_7 < 90) {
+  } else if(var_7 < 90) {
     var_8 = "right";
-  }
-  else if(var_7 > 270) {
+  } else if(var_7 > 270) {
     var_8 = "left";
   }
 
@@ -422,8 +416,7 @@ hiding_door_death(var_0, var_1, var_2, var_3, var_4) {
   if(isalive(var_2)) {
     if(isDefined(var_6)) {
       var_2 kill((0, 0, 0), var_6);
-    }
-    else {
+    } else {
       var_2 kill((0, 0, 0));
     }
   }

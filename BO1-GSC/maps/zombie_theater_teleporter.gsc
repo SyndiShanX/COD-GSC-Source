@@ -229,8 +229,7 @@ teleport_pad_player_fx(players) {
   inprojroom = false;
   if(!isDefined(players)) {
     players = getplayers();
-  }
-  else {
+  } else {
     inprojroom = true;
   }
   while(1) {
@@ -255,8 +254,7 @@ teleport_players(players_in_proj_room, loc) {
   start = undefined;
   if(loc == "projroom") {
     players = all_players;
-  }
-  else {
+  } else {
     players = players_in_proj_room;
   }
   dest_room = get_array_spots("teleport_room_", dest_room);
@@ -269,8 +267,7 @@ teleport_players(players_in_proj_room, loc) {
     if(isDefined(players[i])) {
       if(loc == "projroom" && (self player_is_near_pad(players[i]) == false)) {
         continue;
-      }
-      else if(loc == "projroom" && self player_is_near_pad(players[i])) {
+      } else if(loc == "projroom" && self player_is_near_pad(players[i])) {
         players_in_proj_room = array_add(players_in_proj_room, players[i]);
       }
       slot = i;

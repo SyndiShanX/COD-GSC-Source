@@ -17,8 +17,7 @@ setparent(var_0) {
 
   if(isDefined(self.point)) {
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  }
-  else {
+  } else {
     setpoint("TOPLEFT");
   }
 }
@@ -126,8 +125,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_6 == "left_adjustable" || var_5.alignx == "right") {
       var_9 = -1;
-    }
-    else {
+    } else {
       var_9 = 1;
     }
   } else {
@@ -135,8 +133,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_6 == "left_adjustable") {
       var_9 = -1;
-    }
-    else {
+    } else {
       var_9 = 1;
     }
   }
@@ -151,8 +148,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_7 == "top_adjustable" || var_5.aligny == "bottom") {
       var_11 = -1;
-    }
-    else {
+    } else {
       var_11 = 1;
     }
   } else {
@@ -160,8 +156,7 @@ setpoint(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_7 == "top_adjustable") {
       var_11 = -1;
-    }
-    else {
+    } else {
       var_11 = 1;
     }
   }
@@ -188,18 +183,15 @@ setpointbar(var_0, var_1, var_2, var_3) {
 
   if(self.alignx == "left") {
     self.bar.x = self.x;
-  }
-  else if(self.alignx == "right") {
+  } else if(self.alignx == "right") {
     self.bar.x = self.x - self.width;
-  }
-  else {
+  } else {
     self.bar.x = self.x - int(self.width / 2);
   }
 
   if(self.aligny == "top") {
     self.bar.y = self.y;
-  }
-  else if(self.aligny == "bottom") {
+  } else if(self.aligny == "bottom") {
     self.bar.y = self.y;
   }
 
@@ -225,8 +217,7 @@ updatebarscale(var_0, var_1) {
   if(isDefined(var_1) && var_2 < self.width) {
     if(var_1 > 0) {
       self.bar scaleovertime((1 - var_0) / var_1, self.width, self.height);
-    }
-    else if(var_1 < 0) {
+    } else if(var_1 < 0) {
       self.bar scaleovertime(var_0 / (-1 * var_1), 1, self.height);
     }
   }
@@ -256,8 +247,7 @@ createfontstring(var_0, var_1) {
 createserverfontstring(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = newteamhudelem(var_2);
-  }
-  else {
+  } else {
     var_3 = newhudelem();
   }
 
@@ -280,8 +270,7 @@ createserverfontstring(var_0, var_1, var_2) {
 createservertimer(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = newteamhudelem(var_2);
-  }
-  else {
+  } else {
     var_3 = newhudelem();
   }
 
@@ -345,8 +334,7 @@ createicon(var_0, var_1, var_2) {
 createservericon(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     var_4 = newteamhudelem(var_3);
-  }
-  else {
+  } else {
     var_4 = newhudelem();
   }
 
@@ -374,8 +362,7 @@ createservericon(var_0, var_1, var_2, var_3) {
 createserverbar(var_0, var_1, var_2, var_3, var_4, var_5) {
   if(isDefined(var_4)) {
     var_6 = newteamhudelem(var_4);
-  }
-  else {
+  } else {
     var_6 = newhudelem();
   }
 
@@ -394,8 +381,7 @@ createserverbar(var_0, var_1, var_2, var_3, var_4, var_5) {
 
   if(isDefined(var_4)) {
     var_7 = newteamhudelem(var_4);
-  }
-  else {
+  } else {
     var_7 = newhudelem();
   }
 
@@ -754,8 +740,7 @@ transitionfadein(var_0) {
 
   if(isDefined(self.maxalpha)) {
     self.alpha = self.maxalpha;
-  }
-  else {
+  } else {
     self.alpha = 1;
   }
 }
@@ -792,11 +777,9 @@ isweaponclasschallenge(var_0) {
 ch_getprogress(var_0) {
   if(isweaponclasschallenge(var_0)) {
     return processviaitemstatsprogress(var_0);
-  }
-  else if(maps\mp\_utility::isstrstart(var_0, "ch_daily_")) {
+  } else if(maps\mp\_utility::isstrstart(var_0, "ch_daily_")) {
     return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeProgress", "ch_daily");
-  }
-  else {
+  } else {
     return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeProgress", var_0);
   }
 }
@@ -804,11 +787,9 @@ ch_getprogress(var_0) {
 ch_getstate(var_0) {
   if(isweaponclasschallenge(var_0)) {
     return processviaitemstatsstate(var_0);
-  }
-  else if(maps\mp\_utility::isstrstart(var_0, "ch_daily_")) {
+  } else if(maps\mp\_utility::isstrstart(var_0, "ch_daily_")) {
     return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", "ch_daily");
-  }
-  else {
+  } else {
     return self getplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", var_0);
   }
 }
@@ -821,8 +802,7 @@ ch_setprogress(var_0, var_1) {
 
   if(maps\mp\_utility::isstrstart(var_0, "ch_daily_")) {
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeProgress", "ch_daily", var_2);
-  }
-  else {
+  } else {
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeProgress", var_0, var_2);
   }
 }
@@ -833,8 +813,7 @@ ch_setstate(var_0, var_1) {
   }
   if(maps\mp\_utility::isstrstart(var_0, "ch_daily_")) {
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", "ch_daily", var_1);
-  }
-  else {
+  } else {
     self setplayerdata(common_scripts\utility::getstatsgroup_ranked(), "challengeState", var_0, var_1);
   }
 }
@@ -867,11 +846,9 @@ displayclientstring(var_0, var_1, var_2, var_3) {
 processviaitemstatsprogress(var_0) {
   if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_hipfirekills")) {
     return totalallweaponvariants(var_0, "hipfirekills");
-  }
-  else if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_kills")) {
+  } else if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_kills")) {
     return totalallweaponvariants(var_0, "kills");
-  }
-  else if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_headShots")) {
+  } else if(common_scripts\utility::string_starts_with(var_0, "ch_attach_unlock_headShots")) {
     return totalallweaponvariants(var_0, "headShots");
   }
 }

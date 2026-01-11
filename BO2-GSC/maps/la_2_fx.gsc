@@ -8,8 +8,7 @@
 #include maps\_anim;
 #include maps\createfx\la_2_fx;
 
-precache_util_fx() {
-}
+precache_util_fx() {}
 
 precache_scripted_fx() {
   level._effect["f35_light"] = loadfx("maps/la/fx_light_f35_ignore_z");

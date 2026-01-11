@@ -60,8 +60,7 @@ initreacttimers() {
 playreactanim(reactanim) {
   self.nextallowedreacttime = gettime() + randomintrange(anim.nextreactiontimeforaimin, anim.nextreactiontimeforaimax);
 
-  if(isplayer(self.attacker) && self.team == "allies") {
-  } else
+  if(isplayer(self.attacker) && self.team == "allies") {} else
     anim.lastreactiontime = gettime();
 
   self.a.pose = "stand";
@@ -209,14 +208,11 @@ getrunningforwardreactanim(location, friendlyreaction) {
 
   if(is_true(friendlyreaction)) {
     reactarray[reactarray.size] = animarray(type + "_lower_torso_stop", "react");
-  }
-  else if(issubstr(location, "upper") || issubstr(location, "head")) {
+  } else if(issubstr(location, "upper") || issubstr(location, "head")) {
     reactarray[reactarray.size] = animarray(type + "_head", "react");
-  }
-  else if(cointoss()) {
+  } else if(cointoss()) {
     reactarray[reactarray.size] = animarray(type + "_lower_torso_fast", "react");
-  }
-  else {
+  } else {
     reactarray[reactarray.size] = animarray(type + "_lower_torso_stop", "react");
   }
 
@@ -224,8 +220,7 @@ getrunningforwardreactanim(location, friendlyreaction) {
 
   if(reactarray.size > 0) {
     return reactarray[randomint(reactarray.size)];
-  }
-  else {
+  } else {
     return undefined;
   }
 }
@@ -246,11 +241,9 @@ calculatelocationinfo(point) {
 
   if(point_dist < tag_main_root_dist) {
     location = direction + "_lower_torso";
-  }
-  else if(point_dist < tag_neck_dist) {
+  } else if(point_dist < tag_neck_dist) {
     location = direction + "_upper_torso";
-  }
-  else {
+  } else {
     location = direction + "_head";
   }
 
@@ -264,8 +257,7 @@ getpointdirection(point) {
 
   if(dotproduct > 0) {
     side = "right";
-  }
-  else {
+  } else {
     side = "left";
   }
 
@@ -346,8 +338,7 @@ getnewenemyreactionanim() {
 
     if(isDefined(self.enemy) && distancesquared(self.enemy.origin, self.newenemyreactionpos) < 65536) {
       self orientmode("face enemy");
-    }
-    else {
+    } else {
       self orientmode("face point", self.newenemyreactionpos);
     }
 

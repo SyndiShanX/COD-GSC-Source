@@ -24,11 +24,10 @@
 #include scripts\zm_common\zm_unitrigger;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_weapons;
-
 #namespace zm_wallbuy;
 
 autoexec __init__system__() {
-  system::register(#"zm_wallbuy", &__init__, &__main__, array(#"zm", #"zm_zonemgr", #"zm_unitrigger", #"zm_weapons"));
+  system::register(#"zm_wallbuy", &__init__, &__main__, array(#"zm", # "zm_zonemgr", # "zm_unitrigger", # "zm_weapons"));
 }
 
 __init__() {
@@ -111,7 +110,7 @@ init_spawnable_weapon_upgrade() {
     spawnable_weapon.weapon = getweapon(spawnable_weapon.zombie_weapon_upgrade);
     weapon_group = zm_utility::getweaponclasszm(spawnable_weapon.weapon);
 
-    if(weapon_group == #"weapon_pistol" && !zm_custom::function_901b751c(#"zmweaponspistol") || weapon_group == #"weapon_cqb" && !zm_custom::function_901b751c(#"zmweaponsshotgun") || weapon_group == #"weapon_smg" && !zm_custom::function_901b751c(#"zmweaponssmg") || weapon_group == #"weapon_assault" && !zm_custom::function_901b751c(#"zmweaponsar") || weapon_group == #"weapon_tactical" && !zm_custom::function_901b751c(#"zmweaponstr") || weapon_group == #"weapon_lmg" && !zm_custom::function_901b751c(#"zmweaponslmg") || weapon_group == #"weapon_sniper" && !zm_custom::function_901b751c(#"zmweaponssniper") || weapon_group == #"weapon_knife" && !zm_custom::function_901b751c(#"zmweaponsknife")) {
+    if(weapon_group == # "weapon_pistol" && !zm_custom::function_901b751c(#"zmweaponspistol") || weapon_group == # "weapon_cqb" && !zm_custom::function_901b751c(#"zmweaponsshotgun") || weapon_group == # "weapon_smg" && !zm_custom::function_901b751c(#"zmweaponssmg") || weapon_group == # "weapon_assault" && !zm_custom::function_901b751c(#"zmweaponsar") || weapon_group == # "weapon_tactical" && !zm_custom::function_901b751c(#"zmweaponstr") || weapon_group == # "weapon_lmg" && !zm_custom::function_901b751c(#"zmweaponslmg") || weapon_group == # "weapon_sniper" && !zm_custom::function_901b751c(#"zmweaponssniper") || weapon_group == # "weapon_knife" && !zm_custom::function_901b751c(#"zmweaponsknife")) {
       continue;
     }
 
@@ -401,9 +400,9 @@ wall_weapon_update_prompt(player) {
 
     if(player function_284616f8()) {
       if(function_8b1a219a()) {
-        self.stub.hint_string = #"hash_7778a99e3a7d47";
+        self.stub.hint_string = # "hash_7778a99e3a7d47";
       } else {
-        self.stub.hint_string = #"hash_18379e4e114fabf9";
+        self.stub.hint_string = # "hash_18379e4e114fabf9";
       }
 
       if(self.stub.var_8d306e51) {
@@ -413,9 +412,9 @@ wall_weapon_update_prompt(player) {
       }
     } else if(player bgb::is_enabled(#"zm_bgb_wall_to_wall_clearance")) {
       if(function_8b1a219a()) {
-        self.stub.hint_string = #"hash_7a24a147b8f09767";
+        self.stub.hint_string = # "hash_7a24a147b8f09767";
       } else {
-        self.stub.hint_string = #"hash_791fe9da17cf7059";
+        self.stub.hint_string = # "hash_791fe9da17cf7059";
       }
 
       if(self.stub.var_8d306e51) {
@@ -425,9 +424,9 @@ wall_weapon_update_prompt(player) {
       }
     } else {
       if(function_8b1a219a()) {
-        self.stub.hint_string = #"hash_2791ecebb85142c4";
+        self.stub.hint_string = # "hash_2791ecebb85142c4";
       } else {
-        self.stub.hint_string = #"hash_60606b68e93a29c8";
+        self.stub.hint_string = # "hash_60606b68e93a29c8";
       }
 
       if(self.stub.var_8d306e51) {
@@ -461,9 +460,9 @@ wall_weapon_update_prompt(player) {
         var_f7b97cc4 = 1;
 
         if(function_8b1a219a()) {
-          self.stub.hint_string = #"hash_4fc4a485b05c45ba";
+          self.stub.hint_string = # "hash_4fc4a485b05c45ba";
         } else {
-          self.stub.hint_string = #"hash_229abc68467e92ce";
+          self.stub.hint_string = # "hash_229abc68467e92ce";
         }
 
         if(self.stub.var_8d306e51) {
@@ -476,11 +475,11 @@ wall_weapon_update_prompt(player) {
 
     if(player function_284616f8()) {
       if(isDefined(self.stub.hacked) && self.stub.hacked) {
-        self.stub.hint_string = #"zombie_weaponammohacked_cfill_bgb_secret_shopper";
+        self.stub.hint_string = # "zombie_weaponammohacked_cfill_bgb_secret_shopper";
       } else if(function_8b1a219a()) {
-        self.stub.hint_string = #"hash_1299ea66da4a06b0";
+        self.stub.hint_string = # "hash_1299ea66da4a06b0";
       } else {
-        self.stub.hint_string = #"hash_4a6901dda0793d3c";
+        self.stub.hint_string = # "hash_4a6901dda0793d3c";
       }
 
       if(self.stub.var_8d306e51) {
@@ -491,14 +490,14 @@ wall_weapon_update_prompt(player) {
     } else if(player bgb::is_enabled(#"zm_bgb_wall_to_wall_clearance")) {
       if(player zm_weapons::has_upgrade(weapon)) {
         if(function_8b1a219a()) {
-          self.stub.hint_string = #"hash_5897b2e20dc09cfc";
+          self.stub.hint_string = # "hash_5897b2e20dc09cfc";
         } else {
-          self.stub.hint_string = #"hash_7d4f06d135499350";
+          self.stub.hint_string = # "hash_7d4f06d135499350";
         }
       } else if(function_8b1a219a()) {
-        self.stub.hint_string = #"hash_cb6a56ab3b14604";
+        self.stub.hint_string = # "hash_cb6a56ab3b14604";
       } else {
-        self.stub.hint_string = #"hash_43ab0adee9d55608";
+        self.stub.hint_string = # "hash_43ab0adee9d55608";
       }
 
       if(self.stub.var_8d306e51) {
@@ -508,11 +507,11 @@ wall_weapon_update_prompt(player) {
       }
     } else if(!var_f7b97cc4) {
       if(isDefined(self.stub.hacked) && self.stub.hacked) {
-        self.stub.hint_string = #"zombie_weaponammohacked_cfill";
+        self.stub.hint_string = # "zombie_weaponammohacked_cfill";
       } else if(function_8b1a219a()) {
-        self.stub.hint_string = #"hash_3f279e3e0f564e99";
+        self.stub.hint_string = # "hash_3f279e3e0f564e99";
       } else {
-        self.stub.hint_string = #"hash_382490a598f64833";
+        self.stub.hint_string = # "hash_382490a598f64833";
       }
 
       if(self.stub.var_8d306e51) {
@@ -592,10 +591,10 @@ reset_wallbuys() {
 
 get_weapon_hint_ammo() {
   if(function_8b1a219a()) {
-    return #"hash_2791ecebb85142c4";
+    return # "hash_2791ecebb85142c4";
   }
 
-  return #"hash_60606b68e93a29c8";
+  return # "hash_60606b68e93a29c8";
 }
 
 weapon_set_first_time_hint(cost, ammo_cost) {
@@ -742,8 +741,8 @@ weapon_spawn_think() {
         player zm_stats::increment_challenge_stat(#"hash_702d98df99af63d5", undefined, 1);
         player zm_stats::function_c0c6ab19(#"weapons_bought", 1, 1);
         player zm_stats::function_c0c6ab19(#"wallbuys", 1, 1);
-        player contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, #"zstandard");
-        player contracts::increment_zm_contract(#"contract_zm_wallbuys", 1, #"zstandard");
+        player contracts::increment_zm_contract(#"contract_zm_weapons_bought", 1, # "zstandard");
+        player contracts::increment_zm_contract(#"contract_zm_wallbuys", 1, # "zstandard");
 
         if(self.weapon.isriotshield) {
           player zm_equipment::give(self.weapon);
@@ -789,7 +788,7 @@ weapon_spawn_think() {
         }
       } else {
         zm_utility::play_sound_on_ent("no_purchase");
-        player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
+        player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
       }
     } else {
       weapon = self.weapon;
@@ -860,8 +859,8 @@ weapon_spawn_think() {
             player zm_stats::forced_attachment("boas_ammo_purchased");
           }
 
-          player contracts::increment_zm_contract(#"contract_zm_wallbuys", 1, #"zstandard");
-          player thread zm_audio::create_and_play_dialog(#"ammo", #"buy");
+          player contracts::increment_zm_contract(#"contract_zm_wallbuys", 1, # "zstandard");
+          player thread zm_audio::create_and_play_dialog(#"ammo", # "buy");
           player zm_score::minus_to_player_score(ammo_cost);
 
           if(isDefined(level.var_db463b5)) {
@@ -887,7 +886,7 @@ weapon_spawn_think() {
         if(isDefined(level.custom_generic_deny_vo_func)) {
           player[[level.custom_generic_deny_vo_func]]();
         } else {
-          player zm_audio::create_and_play_dialog(#"general", #"outofmoney");
+          player zm_audio::create_and_play_dialog(#"general", # "outofmoney");
         }
       }
     }

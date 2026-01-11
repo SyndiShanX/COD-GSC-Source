@@ -16,8 +16,7 @@ setparent(var_00) {
 
   if(isDefined(self.point)) {
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  }
-  else {
+  } else {
     setpoint("TOPLEFT");
   }
 }
@@ -144,8 +143,7 @@ setpoint(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_06 == "left_adjustable" || var_5.alignx == "right") {
       var_09 = -1;
-    }
-    else {
+    } else {
       var_09 = 1;
     }
   } else {
@@ -153,8 +151,7 @@ setpoint(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_06 == "left_adjustable") {
       var_09 = -1;
-    }
-    else {
+    } else {
       var_09 = 1;
     }
   }
@@ -169,8 +166,7 @@ setpoint(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_07 == "top_adjustable" || var_5.aligny == "bottom") {
       var_11 = -1;
-    }
-    else {
+    } else {
       var_11 = 1;
     }
   } else {
@@ -178,8 +174,7 @@ setpoint(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_07 == "top_adjustable") {
       var_11 = -1;
-    }
-    else {
+    } else {
       var_11 = 1;
     }
   }
@@ -206,18 +201,15 @@ setpointbar(var_00, var_01, var_02, var_03) {
 
   if(self.alignx == "left") {
     self.bar.x = self.x;
-  }
-  else if(self.alignx == "right") {
+  } else if(self.alignx == "right") {
     self.bar.x = self.x - self.width;
-  }
-  else {
+  } else {
     self.bar.x = self.x - int(self.width / 2);
   }
 
   if(self.aligny == "top") {
     self.bar.y = self.y;
-  }
-  else if(self.aligny == "bottom") {
+  } else if(self.aligny == "bottom") {
     self.bar.y = self.y;
   }
 
@@ -243,8 +235,7 @@ updatebarscale(var_00, var_01) {
   if(isDefined(var_01) && var_02 < self.width) {
     if(var_01 > 0) {
       self.bar scaleovertime((1 - var_00) / var_01, self.width, self.height);
-    }
-    else if(var_01 < 0) {
+    } else if(var_01 < 0) {
       self.bar scaleovertime(var_00 / (-1 * var_01), 1, self.height);
     }
   }
@@ -274,8 +265,7 @@ createfontstring(var_00, var_01) {
 func_4A15(var_00, var_01, var_02) {
   if(isDefined(var_02)) {
     var_03 = newteamhudelem(var_02);
-  }
-  else {
+  } else {
     var_03 = newhudelem();
   }
 
@@ -298,8 +288,7 @@ func_4A15(var_00, var_01, var_02) {
 createservertimer(var_00, var_01, var_02) {
   if(isDefined(var_02)) {
     var_03 = newteamhudelem(var_02);
-  }
-  else {
+  } else {
     var_03 = newhudelem();
   }
 
@@ -363,8 +352,7 @@ createicon(var_00, var_01, var_02) {
 func_4A16(var_00, var_01, var_02, var_03) {
   if(isDefined(var_03)) {
     var_04 = newteamhudelem(var_03);
-  }
-  else {
+  } else {
     var_04 = newhudelem();
   }
 
@@ -392,8 +380,7 @@ func_4A16(var_00, var_01, var_02, var_03) {
 func_4A14(var_00, var_01, var_02, var_03, var_04, var_05) {
   if(isDefined(var_04)) {
     var_06 = newteamhudelem(var_04);
-  }
-  else {
+  } else {
     var_06 = newhudelem();
   }
 
@@ -412,8 +399,7 @@ func_4A14(var_00, var_01, var_02, var_03, var_04, var_05) {
 
   if(isDefined(var_04)) {
     var_07 = newteamhudelem(var_04);
-  }
-  else {
+  } else {
     var_07 = newhudelem();
   }
 
@@ -791,8 +777,7 @@ transitionfadein(var_00) {
 
   if(isDefined(self.maxalpha)) {
     self.alpha = self.maxalpha;
-  }
-  else {
+  } else {
     self.alpha = 1;
   }
 }

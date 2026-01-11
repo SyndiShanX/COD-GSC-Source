@@ -381,17 +381,13 @@ healthoverlay_remove(overlay) {
   overlay.alpha = 0;
 }
 
-empty_kill_func(type, loc, point, attacker, amount) {
-}
+empty_kill_func(type, loc, point, attacker, amount) {}
 
-loghit(newhealth, invultime) {
-}
+loghit(newhealth, invultime) {}
 
-logregen(newhealth) {
-}
+logregen(newhealth) {}
 
-showhitlog() {
-}
+showhitlog() {}
 
 playerhealthdebug() {
   if(getdvar(#"scr_health_debug") == "") {
@@ -491,11 +487,9 @@ printhealthdebug() {
 
       if(i == 0) {
         width = player.health / player.maxhealth * 300;
-      }
-      else if(i == 1) {
+      } else if(i == 1) {
         width = (level.playerinvultimeend - gettime()) / 1000 * 40;
-      }
-      else if(i == 2) {
+      } else if(i == 2) {
         width = (level.player_deathinvulnerabletimeout - gettime()) / 1000 * 40;
       }
 

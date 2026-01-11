@@ -110,8 +110,7 @@ getrespawndelay() {
     if(level.spawndelay >= level.hqautodestroytime) {
       if(level.hqclassicmode) {
         maps\mp\_utility::setlowermessage("hq_respawn", &"MP_WAITING_FOR_HQ", undefined, 10);
-      }
-      else {
+      } else {
         maps\mp\_utility::setlowermessage("hq_respawn", &"MP_WAITING_FOR_HQ_CAPTURE", undefined, 10);
       }
 
@@ -124,8 +123,7 @@ getrespawndelay() {
 
     if(level.delayplayer) {
       return min(level.spawndelay, var_1);
-    }
-    else {
+    } else {
       self.respawntimerstarttime = undefined;
       return int(var_1) % level.spawndelay;
     }
@@ -162,8 +160,7 @@ onstartgametype() {
 
   if(level.hqspawntime) {
     updateobjectivehintmessages("prepare", "prepare");
-  }
-  else {
+  } else {
     updateobjectivehintmessages("capture", "capture");
   }
 
@@ -205,7 +202,7 @@ timerdisplayshow(var_0, var_1, var_2) {
   }
 
   foreach(var_4 in level.players) {
-  var_4 timerdisplaytoplayer();
+    var_4 timerdisplaytoplayer();
   }
 }
 
@@ -215,7 +212,7 @@ timerdisplayhide() {
   setomnvar("ui_bomb_timer_endtime", 0);
 
   foreach(var_1 in level.players) {
-  var_1 timerdisplaytoplayer();
+    var_1 timerdisplaytoplayer();
   }
 }
 
@@ -290,8 +287,7 @@ hqmainloop() {
 
     if(level.hqautodestroytime) {
       thread destroyhqaftertime(level.hqautodestroytime);
-    }
-    else {
+    } else {
       level.hqdestroyedbytimer = 0;
     }
 
@@ -301,8 +297,7 @@ hqmainloop() {
 
       if(var_4 == "allies") {
         updateobjectivehintmessages("defend", "destroy");
-      }
-      else {
+      } else {
         updateobjectivehintmessages("destroy", "defend");
       }
 
@@ -326,8 +321,7 @@ hqmainloop() {
 
         if(var_4 == "allies") {
           timerdisplayshow(level.hqdestroytime, var_6, var_7);
-        }
-        else {
+        } else {
           timerdisplayshow(level.hqdestroytime, var_7, var_6);
         }
       }
@@ -374,8 +368,7 @@ updateicons() {
 
       if(self.numtouching["allies"]) {
         var_2 = "waypoint_esports_koth_taking_blue";
-      }
-      else {
+      } else {
         var_2 = "waypoint_esports_koth_taking_red";
       }
     } else {
@@ -389,8 +382,7 @@ updateicons() {
 
     if(self.ownerteam == "allies") {
       var_2 = "waypoint_esports_koth_losing_blue";
-    }
-    else {
+    } else {
       var_2 = "waypoint_esports_koth_losing_red";
     }
   } else {
@@ -399,8 +391,7 @@ updateicons() {
 
     if(self.ownerteam == "allies") {
       var_2 = "waypoint_esports_koth_taken_blue";
-    }
-    else {
+    } else {
       var_2 = "waypoint_esports_koth_taken_red";
     }
   }
@@ -549,11 +540,9 @@ getspawnpoint() {
     if(maps\mp\gametypes\_legacyspawnlogic::uselegacyspawning()) {
       if(self.pers["team"] == var_1) {
         var_0 = maps\mp\gametypes\_legacyspawnlogic::getspawnpoint_nearteam(level.spawn_all, level.radioobject.nearspawns);
-      }
-      else if(level.spawndelay >= level.hqautodestroytime && gettime() > level.hqrevealtime + 10000) {
+      } else if(level.spawndelay >= level.hqautodestroytime && gettime() > level.hqrevealtime + 10000) {
         var_0 = maps\mp\gametypes\_legacyspawnlogic::getspawnpoint_nearteam(level.spawn_all);
-      }
-      else {
+      } else {
         var_0 = maps\mp\gametypes\_legacyspawnlogic::getspawnpoint_nearteam(level.spawn_all, level.radioobject.outerspawns);
       }
     } else if(self.pers["team"] == var_1) {
@@ -562,8 +551,7 @@ getspawnpoint() {
 
       if(var_2 == var_3) {
         var_0 = var_2;
-      }
-      else {
+      } else {
         var_0 = var_3;
       }
     } else {
@@ -572,8 +560,7 @@ getspawnpoint() {
 
       if(var_2 == var_3) {
         var_0 = var_2;
-      }
-      else {
+      } else {
         var_0 = var_3;
       }
     }
@@ -643,8 +630,7 @@ setupradios() {
   }
 
   if(var_0.size > 0) {
-    for(var_3 = 0; var_3 < var_0.size; var_3++) {
-    }
+    for(var_3 = 0; var_3 < var_0.size; var_3++) {}
 
     common_scripts\utility::error("Map errors. See above");
     maps\mp\gametypes\_callbacksetup::abortlevel();
@@ -747,8 +733,7 @@ pickradiotospawn() {
   }
 
   if(!var_0.size || !var_1.size) {
-    for(var_5 = level.radios[randomint(level.radios.size)]; isDefined(level.prevradio) && var_5 == level.prevradio; var_5 = level.radios[randomint(level.radios.size)]) {
-    }
+    for(var_5 = level.radios[randomint(level.radios.size)]; isDefined(level.prevradio) && var_5 == level.prevradio; var_5 = level.radios[randomint(level.radios.size)]) {}
 
     level.prevradio2 = level.prevradio;
     level.prevradio = var_5;
@@ -802,8 +787,7 @@ pickradiotospawn() {
     if(isDefined(level.prevradio2) && var_5 == level.prevradio2) {
       if(level.radios.size > 2) {
         continue;
-      }
-      else {
+      } else {
         var_17 = var_17 + 512;
       }
     }

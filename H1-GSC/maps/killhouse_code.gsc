@@ -72,7 +72,7 @@ ambient_trucks() {
     var_2 = maps\_vehicle::create_vehicle_from_spawngroup_and_gopath(var_1);
 
     foreach(var_4 in var_2) {
-    var_4.veh_pathtype = "constrained";
+      var_4.veh_pathtype = "constrained";
     }
 
     for(var_6 = 0; var_6 < var_2.size; var_6++) {
@@ -178,8 +178,7 @@ objective_hints(var_0) {
 
   if(level.console || level.player usinggamepad()) {
     keyhint("objectives", 6.0);
-  }
-  else {
+  } else {
     keyhint("objectives_pc", 6.0);
   }
 
@@ -197,8 +196,7 @@ objective_hints(var_0) {
 
     if(common_scripts\utility::flag("in_explosives_area") || common_scripts\utility::flag("in_obstacle_area") || common_scripts\utility::flag("in_NoReminder_Compass")) {
       var_1 = 0;
-    }
-    else {
+    } else {
       var_1 = var_1 + var_3;
     }
 
@@ -354,8 +352,7 @@ flashed_hud_elem() {
   for(;;) {
     if(level.player common_scripts\utility::isflashed()) {
       level notify("flashed");
-    }
-    else {
+    } else {
       level notify("not_flashed");
     }
 
@@ -392,8 +389,7 @@ ads_shoot_dialog() {
   if(!common_scripts\utility::flag("ADS_targets_shot")) {
     if(level.console) {
       thread keyhint("attack");
-    }
-    else {
+    } else {
       thread keyhint("pc_attack");
     }
 
@@ -539,8 +535,7 @@ jumpoff_monitor() {
 
   if(common_scripts\utility::flag("activate_rope")) {
     setdvar("ui_deadquote", &"KILLHOUSE_SHIP_JUMPED_OFF");
-  }
-  else {
+  } else {
     setdvar("ui_deadquote", &"KILLHOUSE_SHIP_JUMPED_TOO_EARLY");
   }
 
@@ -706,8 +701,7 @@ rope_triggercheck_playerisinvalidstate() {
   for(;;) {
     if(level.player isonground() && !level.player isleaning()) {
       var_0 common_scripts\utility::trigger_on();
-    }
-    else {
+    } else {
       var_0 common_scripts\utility::trigger_off();
     }
 
@@ -935,8 +929,7 @@ mission_failed_out_of_time() {
 
   if(!common_scripts\utility::flag("at_finish")) {
     setdvar("ui_deadquote", &"KILLHOUSE_SHIP_TOO_SLOW");
-  }
-  else {
+  } else {
     setdvar("ui_deadquote", &"KILLHOUSE_SHIP_DIDNT_SPRINT");
   }
 
@@ -1097,8 +1090,7 @@ killtimer(var_0, var_1) {
 
     if(var_1) {
       level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_8, 68, undefined, undefined, 1, &"KILLHOUSE_IW_DECK_TIME");
-    }
-    else {
+    } else {
       level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_8, 68, undefined, undefined, 1, &"KILLHOUSE_IW_BEST_TIME");
     }
 
@@ -1109,8 +1101,7 @@ killtimer(var_0, var_1) {
 
     if(var_1) {
       level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1, &"KILLHOUSE_IW_DECK_TIME");
-    }
-    else {
+    } else {
       level.iw_best_text = maps\_hud_util::get_stats_display_hud(var_7, 68, undefined, undefined, 1, &"KILLHOUSE_IW_BEST_TIME");
     }
   }
@@ -1169,8 +1160,7 @@ accuracy_bonus() {
 
   if(var_7 > var_8) {
     var_9 = var_7 - var_8;
-  }
-  else {
+  } else {
     var_9 = 0;
   }
 
@@ -1248,8 +1238,7 @@ getfreeactionnode(var_0) {
       if(var_2.inuse) {
         if(!isDefined(var_1)) {
           return var_0;
-        }
-        else {
+        } else {
           return var_1;
         }
       }
@@ -1572,8 +1561,7 @@ cargoship_targets() {
 
     if(var_0.script_noteworthy == "reverse") {
       var_0 rotatepitch(-90, 0.2);
-    }
-    else {
+    } else {
       var_0 rotatepitch(90, 0.2);
     }
 
@@ -1581,15 +1569,13 @@ cargoship_targets() {
 
     if(self.targetname == "friendly") {
       fail_if_damage_waiter();
-    }
-    else {
+    } else {
       for(;;) {
         self waittill("damage", var_4, var_5, var_6, var_7, var_8);
 
         if(var_8 == "MOD_IMPACT") {
           continue;
-        }
-        else {
+        } else {
           break;
         }
       }
@@ -1607,8 +1593,7 @@ cargoship_targets() {
 
     if(var_0.script_noteworthy == "reverse") {
       var_0 rotatepitch(90, 0.25);
-    }
-    else {
+    } else {
       var_0 rotatepitch(-90, 0.25);
     }
 
@@ -1643,8 +1628,7 @@ gettargetdummies(var_0, var_1, var_2) {
 set_ammo() {
   if(self.classname == "weapon_fraggrenade" || self.classname == "weapon_flash_grenade") {
     self itemweaponsetammo(1, 0);
-  }
-  else {
+  } else {
     self itemweaponsetammo(999, 999);
   }
 }
@@ -1666,8 +1650,7 @@ ammorespawnthink(var_0, var_1, var_2) {
 
   if(var_1 == "flash_grenade") {
     var_8 = 1;
-  }
-  else {
+  } else {
     var_8 = 0.2;
   }
 
@@ -1815,8 +1798,7 @@ setobjectiveremaining(var_0, var_1, var_2) {
 
   if(!var_2) {
     objective_string(var_3.id, var_1);
-  }
-  else {
+  } else {
     objective_string(var_3.id, var_1, var_2);
   }
 }
@@ -1872,14 +1854,11 @@ firearmdepot_guy_think() {
 
     if(var_5 == 0 && var_2 == 2) {
       continue;
-    }
-    else if(var_5 == 2 && var_2 == 0) {
+    } else if(var_5 == 2 && var_2 == 0) {
       continue;
-    }
-    else if(var_5 == 1 && var_2 == 3) {
+    } else if(var_5 == 1 && var_2 == 3) {
       continue;
-    }
-    else if(var_5 == 3 && var_2 == 1) {
+    } else if(var_5 == 3 && var_2 == 1) {
       continue;
     }
     if(var_5 != var_2) {
@@ -1889,8 +1868,7 @@ firearmdepot_guy_think() {
 
       if(var_4 != 0) {
         var_4 = 0;
-      }
-      else {
+      } else {
         while(var_4 == var_3) {
           var_4 = randomintrange(1, var_1.size);
         }
@@ -1982,16 +1960,14 @@ chair_guy_think(var_0) {
 
       if(var_7 < 20) {
         var_6 = "chair_typing_variation";
-      }
-      else if(var_7 < 40) {
+      } else if(var_7 < 40) {
         var_6 = "chair_typing_pause";
       }
     }
 
     if(var_6 == "chair_typing_variation" || var_6 == "chair_typing_pause") {
       var_3 = 0;
-    }
-    else {
+    } else {
       var_3++;
     }
 
@@ -2212,8 +2188,7 @@ killhouse_hint(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     wait(var_1);
-  }
-  else {
+  } else {
     return;
   }
 
@@ -2245,8 +2220,7 @@ keyhint(var_0, var_1, var_2) {
 
   if(var_0 == "melee" && level.xenon && var_3.key == "BUTTON_RSTICK") {
     maps\_utility::hint(&"KILLHOUSE_HINT_MELEE_CLICK");
-  }
-  else {
+  } else {
     maps\_utility::hint(var_3.hint, undefined, undefined, var_2);
   }
 
@@ -2846,7 +2820,7 @@ melontargetdummies() {
   var_4 = common_scripts\utility::array_combine(var_4, var_3);
 
   foreach(var_6 in var_4) {
-  var_6 thread melonhead_monitor_targetdummy();
+    var_6 thread melonhead_monitor_targetdummy();
   }
 }
 

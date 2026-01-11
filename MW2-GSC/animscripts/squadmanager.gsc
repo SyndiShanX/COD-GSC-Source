@@ -143,8 +143,7 @@ addPlayerToSquad(squadName) {
   if(!isDefined(squadName)) {
     if(isDefined(self.script_squadname)) {
       squadName = self.script_squadname;
-    }
-    else {
+    } else {
       squadName = self.team;
     }
   }
@@ -168,8 +167,7 @@ squadChange() {
 
   if(!isDefined(self.script_squadname)) {
     squadName = (self.team + self.script_flanker);
-  }
-  else {
+  } else {
     squadName = (self.script_squadname + self.script_flanker);
   }
 
@@ -197,8 +195,7 @@ addToSquad(squadName) {
 
     if(isDefined(self.script_squadname)) {
       squadName = self.script_squadname;
-    }
-    else {
+    } else {
       squadName = self.team;
     }
   }
@@ -211,8 +208,7 @@ addToSquad(squadName) {
   if(isDefined(self.squad)) {
     if(self.squad == squad) {
       return;
-    }
-    else {
+    } else {
       self removeFromSquad();
     }
   }
@@ -430,8 +426,7 @@ memberCombatWaiter() {
 
     if(!isDefined(self.enemy)) {
       self.squad notify("squadupdate", "combat");
-    }
-    else {
+    } else {
       self.squad.isInCombat = true;
     }
 
@@ -463,8 +458,7 @@ updateHeading() {
 
   if(numInfluences) {
     self.forward = (newHeading[0] / numInfluences, newHeading[1] / numInfluences, newHeading[2] / numInfluences);
-  }
-  else {
+  } else {
     self.forward = newHeading;
   }
 }
@@ -488,8 +482,7 @@ updateOrigin() {
 
   if(numInfluences) {
     self.origin = (newOrigin[0] / numInfluences, newOrigin[1] / numInfluences, newOrigin[2] / numInfluences);
-  }
-  else {
+  } else {
     self.origin = newOrigin;
   }
 
@@ -522,8 +515,7 @@ updateEnemy() {
     if(isDefined(self.members[i].enemy) && isDefined(self.members[i].enemy.squad)) {
       if(!isDefined(curEnemy)) {
         curEnemy = self.members[i].enemy.squad;
-      }
-      else if(self.members[i].enemy.squad.memberCount > curEnemy.memberCount) {
+      } else if(self.members[i].enemy.squad.memberCount > curEnemy.memberCount) {
         curEnemy = self.members[i].enemy.squad;
       }
     }
@@ -555,8 +547,7 @@ updateAll() {
     if(isDefined(self.members[i].enemy) && isDefined(self.members[i].enemy.squad)) {
       if(!isDefined(curEnemy)) {
         curEnemy = self.members[i].enemy.squad;
-      }
-      else if(self.members[i].enemy.squad.memberCount > curEnemy.memberCount) {
+      } else if(self.members[i].enemy.squad.memberCount > curEnemy.memberCount) {
         curEnemy = self.members[i].enemy.squad;
       }
     }
@@ -564,8 +555,7 @@ updateAll() {
 
   if(numInfluences) {
     self.origin = (newOrigin[0] / numInfluences, newOrigin[1] / numInfluences, newOrigin[2] / numInfluences);
-  }
-  else {
+  } else {
     self.origin = newOrigin;
   }
 
@@ -710,8 +700,7 @@ aiUpdateCombat(timeSlice) {
   if(isDefined(self.lastEnemySightPos)) {
     if(self.combatTime < 0) {
       self.combatTime = timeSlice;
-    }
-    else {
+    } else {
       self.combatTime += timeSlice;
     }
 
@@ -724,8 +713,7 @@ aiUpdateCombat(timeSlice) {
 
   if(self.combatTime > 0) {
     self.combatTime = (0 - timeSlice);
-  }
-  else {
+  } else {
     self.combatTime -= timeSlice;
   }
 }
@@ -734,8 +722,7 @@ aiUpdateSuppressed(timeSlice) {
   if(self.suppressed) {
     if(self.suppressedTime < 0) {
       self.suppressedTime = timeSlice;
-    }
-    else {
+    } else {
       self.suppressedTime += timeSlice;
     }
 
@@ -744,8 +731,7 @@ aiUpdateSuppressed(timeSlice) {
 
   if(self.suppressedTime > 0) {
     self.suppressedTime = (0 - timeSlice);
-  }
-  else {
+  } else {
     self.suppressedTime -= timeSlice;
   }
 }

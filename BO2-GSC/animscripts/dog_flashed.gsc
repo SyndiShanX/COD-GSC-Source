@@ -16,8 +16,7 @@ main() {
 
   if(duration > 2 && randomint(100) > 60) {
     self setflaggedanimrestart("flashed_anim", % german_shepherd_run_pain, 1, 0.2, self.animplaybackrate * 0.75);
-  }
-  else {
+  } else {
     self setflaggedanimrestart("flashed_anim", % german_shepherd_run_flashbang, 1, 0.2, self.animplaybackrate);
   }
 
@@ -25,8 +24,7 @@ main() {
 
   if(duration < animlength) {
     self animscripts\shared::donotetracksfortime(duration, "flashed_anim");
-  }
-  else {
+  } else {
     self animscripts\shared::donotetracks("flashed_anim");
   }
 

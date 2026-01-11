@@ -10,7 +10,6 @@
 #include scripts\zm_common\zm;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_white_trophies;
 
 init() {
@@ -45,12 +44,12 @@ shard_watcher() {
 
   iprintlnbold("<dev string:x38>" + "<dev string:x4b>");
 
-    self zm_utility::giveachievement_wrapper("zm_white_shard", 1);
+  self zm_utility::giveachievement_wrapper("zm_white_shard", 1);
 }
 
 function_e0aaa050() {
-  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
-  self endon(#"death", #"disconnect");
+  level endon(#"game_ended", # "hash_5aa1c9627e8626e0");
+  self endon(#"death", # "disconnect");
 
   for(i = 0; i < 20; i++) {
     level waittill(#"end_of_round");
@@ -62,11 +61,11 @@ function_e0aaa050() {
 
   iprintlnbold("<dev string:x38>" + "<dev string:x5c>");
 
-    self zm_utility::giveachievement_wrapper("zm_white_starting", 0);
+  self zm_utility::giveachievement_wrapper("zm_white_starting", 0);
 }
 
 function_f37ba127() {
-  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", # "hash_5aa1c9627e8626e0");
   self endon(#"disconnect");
 
   while(true) {
@@ -75,7 +74,7 @@ function_f37ba127() {
     if(waitresult.e_player === self) {
       iprintlnbold("<dev string:x38>" + "<dev string:x70>");
 
-        self zm_utility::giveachievement_wrapper("zm_white_unlock", 0);
+      self zm_utility::giveachievement_wrapper("zm_white_unlock", 0);
       return;
     }
 
@@ -84,7 +83,7 @@ function_f37ba127() {
 }
 
 function_9785ebce() {
-  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", # "hash_5aa1c9627e8626e0");
 
   for(i = 0; i < 4; i++) {
     level waittill(#"hash_13f3f231b45420ef");
@@ -92,7 +91,7 @@ function_9785ebce() {
 
   iprintlnbold("<dev string:x38>" + "<dev string:x82>");
 
-    self zm_utility::giveachievement_wrapper("zm_white_mod", 1);
+  self zm_utility::giveachievement_wrapper("zm_white_mod", 1);
 }
 
 function_2c104547(s_params) {
@@ -103,7 +102,7 @@ function_2c104547(s_params) {
   }
 
   switch (e_attacker._trap_type) {
-    case #"electric":
+    case # "electric":
       if(level.n_electric_trap_kills < 12) {
         level.n_electric_trap_kills++;
 
@@ -112,7 +111,7 @@ function_2c104547(s_params) {
       }
 
       break;
-    case #"rotating":
+    case # "rotating":
       if(level.var_36067f1f < 12) {
         level.var_36067f1f++;
 
@@ -121,7 +120,7 @@ function_2c104547(s_params) {
       }
 
       break;
-    case #"acid":
+    case # "acid":
       if(level.var_8265e44f < 12) {
         level.var_8265e44f++;
 
@@ -130,7 +129,7 @@ function_2c104547(s_params) {
       }
 
       break;
-    case #"fire":
+    case # "fire":
       if(level.var_4b81bb64 < 12) {
         level.var_4b81bb64++;
 
@@ -139,7 +138,7 @@ function_2c104547(s_params) {
       }
 
       break;
-    case #"soul":
+    case # "soul":
       if(level.var_9e22ff45 < 12) {
         level.var_9e22ff45++;
 
@@ -153,19 +152,19 @@ function_2c104547(s_params) {
   if(level.n_electric_trap_kills > 11 && level.var_36067f1f > 11 && level.var_8265e44f > 11 && level.var_4b81bb64 > 11 && level.var_9e22ff45 > 11) {
     iprintlnbold("<dev string:x38>" + "<dev string:xf9>");
 
-      self zm_utility::giveachievement_wrapper("zm_white_trap", 1);
+    self zm_utility::giveachievement_wrapper("zm_white_trap", 1);
     callback::remove_on_ai_killed(&function_2c104547);
   }
 }
 
 pap_watcher() {
-  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", # "hash_5aa1c9627e8626e0");
   level waittill(#"pap_power_ready");
 
   if(level.round_number <= 5) {
     iprintlnbold("<dev string:x38>" + "<dev string:x109>");
 
-      zm_utility::giveachievement_wrapper("zm_white_pap", 1);
+    zm_utility::giveachievement_wrapper("zm_white_pap", 1);
   }
 }
 
@@ -176,7 +175,7 @@ function_48f916b(params) {
     return;
   }
 
-  if(params.weapon.name != #"galvaknuckles_t8") {
+  if(params.weapon.name != # "galvaknuckles_t8") {
     return;
   }
 
@@ -184,12 +183,12 @@ function_48f916b(params) {
 
   iprintln("<dev string:x118>" + e_attacker.var_f50a2a9b);
 
-    if(e_attacker.var_f50a2a9b >= 115) {
-      iprintlnbold("<dev string:x38>" + "<dev string:x12f>");
+  if(e_attacker.var_f50a2a9b >= 115) {
+    iprintlnbold("<dev string:x38>" + "<dev string:x12f>");
 
-        e_attacker zm_utility::giveachievement_wrapper("zm_white_knuckles", 0);
-      e_attacker.var_f50a2a9b = undefined;
-    }
+    e_attacker zm_utility::giveachievement_wrapper("zm_white_knuckles", 0);
+    e_attacker.var_f50a2a9b = undefined;
+  }
 }
 
 function_5e1138a2() {
@@ -211,7 +210,7 @@ function_5e1138a2() {
 
           iprintlnbold("<dev string:x38>" + "<dev string:x154>");
 
-            self zm_utility::giveachievement_wrapper("zm_white_perk", 0);
+          self zm_utility::giveachievement_wrapper("zm_white_perk", 0);
           self notify(#"hash_1305a28597a2e439");
           return;
         }
@@ -224,7 +223,7 @@ function_5e1138a2() {
 }
 
 perk_watcher() {
-  self endon(#"hash_1305a28597a2e439", #"disconnect");
+  self endon(#"hash_1305a28597a2e439", # "disconnect");
 
   while(true) {
     waitresult = self waittill(#"perk_bought");
@@ -246,7 +245,7 @@ function_91cfddc4() {
 }
 
 function_df71a9b9() {
-  level endon(#"game_ended", #"hash_5aa1c9627e8626e0");
+  level endon(#"game_ended", # "hash_5aa1c9627e8626e0");
 
   while(true) {
     waitresults = level waittill(#"ray_gun_mk2v_stun_hit");
@@ -264,12 +263,12 @@ function_df71a9b9() {
 
       iprintln("<dev string:x164>" + e_attacker.var_5e47a087);
 
-        if(e_attacker.var_5e47a087 >= 10) {
-          iprintlnbold("<dev string:x38>" + "<dev string:x17e>");
+      if(e_attacker.var_5e47a087 >= 10) {
+        iprintlnbold("<dev string:x38>" + "<dev string:x17e>");
 
-            e_attacker zm_utility::giveachievement_wrapper("zm_white_stun", 0);
-          e_attacker.var_5e47a087 = undefined;
-        }
+        e_attacker zm_utility::giveachievement_wrapper("zm_white_stun", 0);
+        e_attacker.var_5e47a087 = undefined;
+      }
     }
   }
 }
@@ -290,11 +289,11 @@ function_bde94bdf(params) {
 
     iprintln("<dev string:x18e>" + e_attacker.var_31ce05fd);
 
-      if(e_attacker.var_31ce05fd >= 15) {
-        iprintlnbold("<dev string:x38>" + "<dev string:x1ad>");
+    if(e_attacker.var_31ce05fd >= 15) {
+      iprintlnbold("<dev string:x38>" + "<dev string:x1ad>");
 
-          e_attacker zm_utility::giveachievement_wrapper("zm_white_roof", 0);
-        e_attacker.var_31ce05fd = undefined;
-      }
+      e_attacker zm_utility::giveachievement_wrapper("zm_white_roof", 0);
+      e_attacker.var_31ce05fd = undefined;
+    }
   }
 }

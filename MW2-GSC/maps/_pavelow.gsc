@@ -103,8 +103,7 @@ unload_groups() {
   return unload_groups;
 }
 
-set_attached_models() {
-}
+set_attached_models() {}
 
 /*QUAKED script_vehicle_pavelow (1 0 0) (-16 -16 -24) (16 16 32) USABLE SPAWNER
 

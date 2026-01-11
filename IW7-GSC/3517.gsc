@@ -62,8 +62,7 @@ func_128FF(var_00, var_01) {
 
   if(isDefined(var_02)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -290,8 +289,7 @@ func_12A16(var_00) {
 
   if(self.canbeplaced) {
     func_12A2E();
-  }
-  else {
+  } else {
     self delete();
   }
 }
@@ -354,7 +352,7 @@ func_12A2A() {
 
   if(isDefined(var_0.func_DF89)) {
     foreach(var_02 in var_0.func_DF89) {
-    var_02 notify("death");
+      var_02 notify("death");
     }
   }
 
@@ -481,8 +479,7 @@ func_13AE5(var_00) {
 
     if(self.using_remote_turret) {
       self.func_13108 = 1;
-    }
-    else {
+    } else {
       self.func_13108 = 0;
     }
 
@@ -698,8 +695,7 @@ func_12A2D() {
 
   if(level.teambased) {
     scripts\mp\entityheadicons::setteamheadicon("none", (0, 0, 0));
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     scripts\mp\entityheadicons::setplayerheadicon(undefined, (0, 0, 0));
   }
 

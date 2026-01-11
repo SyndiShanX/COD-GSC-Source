@@ -40,14 +40,11 @@ main() {
 
   if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("camera_thirdPerson")) {
+  } else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_diehard")) {
+  } else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 
@@ -178,24 +175,21 @@ getSpawnPoint() {
   if(level.useStartSpawns) {
     if(spawnteam == "axis") {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_axis_start);
-    }
-    else {
+    } else {
       spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_Random(level.spawn_allies_start);
     }
   } else {
     if(isDefined(level.bombplanted) && level.bombplanted && (isDefined(level.bombOwner) && spawnTeam == level.bombOwner.team)) {
       if(spawnteam == "axis") {
         spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_axis_planted);
-      }
-      else {
+      } else {
         spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_allies_planted);
       }
 
     } else {
       if(spawnteam == "axis") {
         spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_axis);
-      }
-      else {
+      } else {
         spawnpoint = maps\mp\gametypes\_spawnlogic::getSpawnpoint_NearTeam(level.spawn_allies);
       }
     }
@@ -298,8 +292,7 @@ sabotage() {
 getClosestSite() {
   if(distance2d(self.origin, level.bombZones["allies"].trigger.origin) < distance2d(self.origin, level.bombZones["axis"].trigger.origin)) {
     return ("allies");
-  }
-  else {
+  } else {
     return ("axis");
   }
 }
@@ -324,8 +317,7 @@ scoreThread() {
   for(;;) {
     if(isDefined(level.sabBomb.carrier)) {
       bombEnt = level.sabBomb.carrier;
-    }
-    else {
+    } else {
       bombEnt = level.sabBomb.trigger;
     }
 
@@ -334,14 +326,11 @@ scoreThread() {
 
     if(bombEnt distanceToSite("allies") < threatDistance) {
       dangerTeam = level.bombZones["allies"] maps\mp\gametypes\_gameobjects::getOwnerTeam();
-    }
-    else if(bombEnt distanceToSite("axis") < threatDistance) {
+    } else if(bombEnt distanceToSite("axis") < threatDistance) {
       dangerTeam = level.bombZones["axis"] maps\mp\gametypes\_gameobjects::getOwnerTeam();
-    }
-    else if(bombEnt distanceToSite("allies") > level.bombDistance && bombEnt getClosestSite() != "allies") {
+    } else if(bombEnt distanceToSite("allies") > level.bombDistance && bombEnt getClosestSite() != "allies") {
       dangerTeam = level.bombZones["axis"] maps\mp\gametypes\_gameobjects::getOwnerTeam();
-    }
-    else if(bombEnt distanceToSite("axis") > level.bombDistance && bombEnt getClosestSite() != "axis") {
+    } else if(bombEnt distanceToSite("axis") > level.bombDistance && bombEnt getClosestSite() != "axis") {
       dangerTeam = level.bombZones["allies"] maps\mp\gametypes\_gameobjects::getOwnerTeam();
     }
 
@@ -384,8 +373,7 @@ createBombZone(team, trigger) {
 onBeginUse(player) {
   if(!self maps\mp\gametypes\_gameobjects::isFriendlyTeam(player.pers["team"])) {
     player.isPlanting = true;
-  }
-  else {
+  } else {
     player.isDefusing = true;
   }
 }
@@ -409,8 +397,7 @@ onPickup(player) {
 
   if(team == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
 
@@ -447,8 +434,7 @@ onPickup(player) {
 }
 
 onDrop(player) {
-  if(level.bombPlanted) {
-  } else {
+  if(level.bombPlanted) {} else {
     if(isDefined(player)) {
       printOnTeamArg(&"MP_EXPLOSIVES_DROPPED_BY", self maps\mp\gametypes\_gameobjects::getOwnerTeam(), player);
     }
@@ -469,8 +455,7 @@ abandonmentThink(delay) {
   }
   if(self maps\mp\gametypes\_gameobjects::getOwnerTeam() == "allies") {
     otherTeam = "axis";
-  }
-  else {
+  } else {
     otherTeam = "allies";
   }
 
@@ -518,8 +503,7 @@ onUse(player) {
     self.useWeapon = "briefcase_bomb_defuse_mp";
 
     self setUpForDefusing();
-  } else
-  {
+  } else {
     player notify("bomb_defused");
 
     leaderDialog("bomb_defused");
@@ -528,8 +512,7 @@ onUse(player) {
 
     if(isDefined(level.bombOwner) && (level.bombOwner.bombPlantedTime + 3000 + (level.defuseTime * 1000)) > getTime() && isReallyAlive(level.bombOwner)) {
       player thread maps\mp\gametypes\_hud_message::SplashNotify("ninja_defuse", (maps\mp\gametypes\_rank::getScoreInfoValue("defuse")));
-    }
-    else {
+    } else {
       player thread maps\mp\gametypes\_hud_message::SplashNotify("defuse", maps\mp\gametypes\_rank::getScoreInfoValue("defuse"));
     }
 
@@ -619,8 +602,7 @@ bombPlanted(destroyedObj, team) {
 
   if(level.scoreMode) {
     maps\mp\gametypes\_gamescore::_setTeamScore(team, int(max(getWatchedDvar("scorelimit"), maps\mp\gametypes\_gamescore::_getTeamScore(level.otherTeam[team]) + 1)));
-  }
-  else {
+  } else {
     maps\mp\gametypes\_gamescore::_setTeamScore(team, 1);
   }
   maps\mp\gametypes\_gamescore::updateTeamScore(team);
@@ -667,8 +649,7 @@ onTimeLimit() {
   } else if(game["teamScores"]["axis"] == game["teamScores"]["allies"]) {
     if(inOvertime()) {
       thread maps\mp\gametypes\_gamelogic::endGame("tie", game["strings"]["time_limit_reached"]);
-    }
-    else {
+    } else {
       thread maps\mp\gametypes\_gamelogic::endGame("overtime", game["strings"]["time_limit_reached"]);
     }
   }
@@ -688,16 +669,14 @@ bombDistanceThread() {
 
   if(cointoss()) {
     level.dangerTeam = "allies";
-  }
-  else {
+  } else {
     level.dangerTeam = "axis";
   }
 
   for(;;) {
     if(isDefined(level.sabBomb.carrier)) {
       bombEnt = level.sabBomb.carrier;
-    }
-    else {
+    } else {
       bombEnt = level.sabBomb.visuals[0];
     }
 

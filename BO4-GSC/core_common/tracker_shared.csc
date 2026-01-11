@@ -6,7 +6,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
-
 #namespace tracker;
 
 init_shared() {

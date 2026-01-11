@@ -14,8 +14,7 @@ move_player_to_start(var_0) {
 
   if(isDefined(var_2)) {
     level.player setplayerangles(vectortoangles(var_2.origin - var_1.origin));
-  }
-  else {
+  } else {
     level.player setplayerangles(var_1.angles);
   }
 }
@@ -396,8 +395,7 @@ dialogue_reminder(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(var_5) && var_7 == var_5) {
       continue;
-    }
-    else {
+    } else {
       var_5 = var_7;
       wait(var_6);
 
@@ -648,7 +646,7 @@ vision_change_multiple_init() {
   var_0 = getEntArray("shg_vision_multiple_trigger", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2 thread vision_change_multiple_internal();
+    var_2 thread vision_change_multiple_internal();
   }
 }
 
@@ -731,7 +729,7 @@ anim_single_end_early(var_0, var_1, var_2) {
   var_4 = [];
 
   foreach(var_7, var_6 in var_0) {
-  var_4[var_7] = var_6[0];
+    var_4[var_7] = var_6[0];
   }
 
   foreach(var_9 in var_4) {
@@ -807,8 +805,7 @@ anim_single_end_early(var_0, var_1, var_2) {
       } else if(isai(var_9)) {
         if(var_20) {
           var_9 animscripts\face::sayspecificdialogue(var_23, var_22, 1.0);
-        }
-        else {
+        } else {
           var_9 thread maps\_anim::anim_facialfiller("single dialogue");
           var_9 animscripts\face::sayspecificdialogue(var_23, var_22, 1.0, "single dialogue");
         }
@@ -909,8 +906,7 @@ dofacialdialogue(var_0, var_1, var_2, var_3) {
 
     if(!isarray(var_2)) {
       var_4[0] = var_2;
-    }
-    else {
+    } else {
       var_4 = var_2;
     }
 

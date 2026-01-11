@@ -466,11 +466,9 @@ func_7DFC(var_00) {
 
   if(isDefined(var_01)) {
     var_02 = var_1.origin[2];
-  }
-  else if(isDefined(level.airstrikeheightscale)) {
+  } else if(isDefined(level.airstrikeheightscale)) {
     var_02 = 850 * level.airstrikeheightscale;
-  }
-  else {
+  } else {
     var_02 = 850;
   }
 
@@ -739,8 +737,7 @@ func_1AE7(var_00, var_01, var_02, var_03, var_04) {
 
   if(var_13.size) {
     thread scripts\mp\killstreaks\helicopter::func_8D55(var_13);
-  }
-  else {
+  } else {
     thread scripts\mp\killstreaks\helicopter::heli_fly_loop_path(var_14);
   }
 

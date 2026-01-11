@@ -56,8 +56,7 @@ func_CBB5(var_00, var_01, var_02, var_03, var_04, var_05) {
 
     if(isDefined(level.player _meth_8473())) {
       setomnvar("ui_jackal_hide_follow_pip", 1);
-    }
-    else {
+    } else {
       setomnvar("ui_jackal_hide_follow_pip", 0);
     }
   }

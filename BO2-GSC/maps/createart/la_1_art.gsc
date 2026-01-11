@@ -17,7 +17,7 @@ main() {
   setsaveddvar("r_rimIntensity", 8);
 
   foreach(m_godray in getEntArray("godrays", "targetname")) {
-  m_godray hide();
+    m_godray hide();
   }
 
   level.map_default_sun_direction = getdvar(#"r_lightTweakSunDirection");
@@ -71,7 +71,7 @@ main() {
   setsaveddvar("sm_sunSampleSizeNear", n_sun_sample_size);
 
   foreach(m_godray in getEntArray("godrays", "targetname")) {
-  m_godray show();
+    m_godray show();
   }
 
   flag_wait("done_rappelling");
@@ -151,17 +151,17 @@ swap_vista() {
   a_skyline_1 = getEntArray("downtown_skyline_1", "targetname");
 
   foreach(model in a_skyline_2) {
-  model hide();
+    model hide();
   }
 
   flag_wait("la_1_vista_swap");
 
   foreach(model in a_skyline_1) {
-  model hide();
+    model hide();
   }
 
   foreach(model in a_skyline_2) {
-  model show();
+    model show();
   }
 }
 

@@ -52,8 +52,7 @@ elevator_update_global_dvars() {
 
     if(scripts\engine\utility::issp()) {
       level.elevator_motion_detection = elevator_get_dvar_int("scr_elevator_motion_detection", "0");
-    }
-    else {
+    } else {
       level.elevator_motion_detection = elevator_get_dvar_int("scr_elevator_motion_detection", "1");
     }
 
@@ -67,7 +66,7 @@ elevator_think() {
 
 elevator_call() {
   foreach(var_01 in level.elevator_callbuttons) {
-  var_01 thread monitor_callbutton();
+    var_01 thread monitor_callbutton();
   }
 }
 
@@ -109,8 +108,7 @@ elevator_fsm(var_00) {
       for(;;) {
         if(self.moveto_floor == get_curfloor()) {
           var_03 = var_02 discrete_waittill("trigger");
-        }
-        else {
+        } else {
           var_03 = "elevator_called";
         }
 
@@ -561,7 +559,7 @@ build_elevators() {
   }
 
   foreach(var_17 in var_02) {
-  var_17 delete();
+    var_17 delete();
   }
 
   build_call_buttons();
@@ -575,7 +573,7 @@ build_elevators() {
 
     if(isDefined(var_40) && var_40.size) {
       foreach(var_42 in var_40) {
-      var_42 setlightintensity(0.75);
+        var_42 setlightintensity(0.75);
       }
     }
   }
@@ -640,8 +638,7 @@ discrete_waittill(var_00) {
 
   if(level.elevator_motion_detection) {
     self.motion_trigger waittill(var_00, var_01);
-  }
-  else {
+  } else {
     self waittill(var_00, var_01);
   }
 
@@ -726,13 +723,13 @@ get_housing_children() {
   var_06 = get_housing_models();
 
   foreach(var_08 in var_06) {
-  var_0[var_0.size] = var_08;
+    var_0[var_0.size] = var_08;
   }
 
   var_10 = get_housing_primarylight();
 
   foreach(var_12 in var_10) {
-  var_0[var_0.size] = var_12;
+    var_0[var_0.size] = var_12;
   }
 
   return var_00;
@@ -879,8 +876,7 @@ elevator_get_dvar_int(var_00, var_01) {
 elevator_get_dvar(var_00, var_01) {
   if(getdvar(var_00) != "") {
     return getdvarfloat(var_00);
-  }
-  else {
+  } else {
     setdvar(var_00, var_01);
     return var_01;
   }

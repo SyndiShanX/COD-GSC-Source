@@ -36,8 +36,7 @@ main(behaviorCallbacks) {
   correctAngles = self.coverNode.angles;
   if(self.coverNode.type == "Cover Left" || self.coverNode.type == "Cover Left Wide") {
     correctAngles = (correctAngles[0], correctAngles[1] + 90, correctAngles[2]);
-  }
-  else if(self.coverNode.type == "Cover Right" || self.coverNode.type == "Cover Right Wide") {
+  } else if(self.coverNode.type == "Cover Right" || self.coverNode.type == "Cover Right Wide") {
     correctAngles = (correctAngles[0], correctAngles[1] - 90, correctAngles[2]);
   }
   if(getdvar("scr_coveridle") == "1") {
@@ -194,8 +193,7 @@ isEnemyVisibleFromExposed() {
   }
   if(distanceSquared(self.enemy.origin, self.couldntSeeEnemyPos) < 16 * 16) {
     return false;
-  }
-  else {
+  } else {
     return canSeeEnemyFromExposed();
   }
 }
@@ -295,21 +293,17 @@ callOptionalBehaviorCallback(callback, arg, arg2, arg3) {
   val = undefined;
   if(isDefined(arg3)) {
     val = [[callback]](arg, arg2, arg3);
-  }
-  else if(isDefined(arg2)) {
+  } else if(isDefined(arg2)) {
     val = [[callback]](arg, arg2);
-  }
-  else if(isDefined(arg)) {
+  } else if(isDefined(arg)) {
     val = [[callback]](arg);
-  }
-  else {
+  } else {
     val = [[callback]]();
   }
   assert(isDefined(val) && (val == true || val == false));
   if(val) {
     assert(gettime() != starttime);
-  }
-  else {
+  } else {
     assert(gettime() == starttime);
   }
   if(!val) {
@@ -383,9 +377,7 @@ idle(behaviorCallbacks, howLong) {
   self.flinching = false;
   if(isDefined(behaviorCallbacks.flinch)) {
     if(!self.a.idlingAtCover && gettime() - self.suppressionStart < 600) {
-      if([
-          [behaviorCallbacks.flinch]
-        ]())
+      if([[behaviorCallbacks.flinch]]())
         return true;
     } else {
       self thread flinchWhenSuppressed(behaviorCallbacks);
@@ -398,8 +390,7 @@ idle(behaviorCallbacks, howLong) {
   }
   if(isDefined(howLong)) {
     self idleWait(howLong);
-  }
-  else {
+  } else {
     self idleWaitABit();
   }
   if(self.flinching) {

@@ -126,16 +126,14 @@ bot_sentry_choose_target(var_00) {
   if(var_00 != "turret") {
     if(self botgetdifficultysetting("strategyLevel") == 1) {
       var_03 = 10;
-    }
-    else if(self botgetdifficultysetting("strategyLevel") == 0) {
+    } else if(self botgetdifficultysetting("strategyLevel") == 0) {
       var_03 = 15;
     }
   }
 
   if(var_00 == "turret_air") {
     var_04 = self botnodepick(var_02, var_03, "node_traffic", "ignore_no_sky");
-  }
-  else {
+  } else {
     var_04 = self botnodepick(var_02, var_03, "node_traffic");
   }
 
@@ -152,22 +150,18 @@ bot_sentry_choose_placement(var_00, var_01, var_02, var_03) {
   if(var_02 != "turret") {
     if(self botgetdifficultysetting("strategyLevel") == 1) {
       var_06 = 10;
-    }
-    else if(self botgetdifficultysetting("strategyLevel") == 0) {
+    } else if(self botgetdifficultysetting("strategyLevel") == 0) {
       var_06 = 15;
     }
   }
 
   if(var_02 == "turret_air") {
     var_07 = self botnodepick(var_05, var_06, "node_sentry", var_01, "ignore_no_sky");
-  }
-  else if(var_02 == "trap") {
+  } else if(var_02 == "trap") {
     var_07 = self botnodepick(var_05, var_06, "node_traffic");
-  }
-  else if(var_02 == "hide_nonlethal") {
+  } else if(var_02 == "hide_nonlethal") {
     var_07 = self botnodepick(var_05, var_06, "node_hide");
-  }
-  else {
+  } else {
     var_07 = self botnodepick(var_05, var_06, "node_sentry", var_01);
   }
 
@@ -177,8 +171,7 @@ bot_sentry_choose_placement(var_00, var_01, var_02, var_03) {
 
     if(var_01 != var_7.origin && var_02 != "hide_nonlethal") {
       var_4.yaw = vectortoyaw(var_01 - var_7.origin);
-    }
-    else {
+    } else {
       var_4.yaw = undefined;
     }
 

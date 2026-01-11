@@ -87,8 +87,7 @@ pers_upgrades_monitor() {
 
                 if(isDefined(level.pers_upgrade_vo_spoken) && level.pers_upgrade_vo_spoken) {
                   player delay_thread(1, maps\mp\zombies\_zm_audio::create_and_play_dialog, "general", type, undefined, level.snd_pers_upgrade_force_variant);
-                }
-                else {
+                } else {
                   player delay_thread(1, ::play_vox_to_player, "general", type, level.snd_pers_upgrade_force_variant);
                 }
 

@@ -180,8 +180,7 @@ sonar_fade(localclientnum, sonar_turning_on) {
 
       if(elapsedtime < delaydark) {
         set_filter_sonar_reveal_amount(level.localplayers[0], 0, elapsedtime / delaydark * 0.5);
-      }
-      else {
+      } else {
         println("csc " + localclientnum + " : turn sonar on");
 
         level.localplayers[0] setsonarenabled(1);
@@ -204,8 +203,7 @@ sonar_fade(localclientnum, sonar_turning_on) {
 
       if(elapsedtime < delaysonar) {
         set_filter_sonar_reveal_amount(level.localplayers[0], 0, 1 - elapsedtime / delaysonar * 0.5);
-      }
-      else {
+      } else {
         println("csc " + localclientnum + " : turn sonar off");
 
         level.localplayers[0] setsonarenabled(0);
@@ -219,8 +217,6 @@ sonar_fade(localclientnum, sonar_turning_on) {
   }
 }
 
-init_sam_hud_damage() {
-}
+init_sam_hud_damage() {}
 
-sam_damage() {
-}
+sam_damage() {}

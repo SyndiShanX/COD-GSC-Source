@@ -134,16 +134,14 @@ bot_sentry_choose_target(targetType) {
   if(targetType != "turret") {
     if(self BotGetDifficultySetting("strategyLevel") == 1) {
       nodes_to_select_from = 10;
-    }
-    else if(self BotGetDifficultySetting("strategyLevel") == 0) {
+    } else if(self BotGetDifficultySetting("strategyLevel") == 0) {
       nodes_to_select_from = 15;
     }
   }
 
   if(targetType == "turret_air") {
     targetNode = self BotNodePick(nodes, nodes_to_select_from, "node_traffic", "ignore_no_sky");
-  }
-  else {
+  } else {
     targetNode = self BotNodePick(nodes, nodes_to_select_from, "node_traffic");
   }
   if(isDefined(targetNode)) {
@@ -159,22 +157,18 @@ bot_sentry_choose_placement(killstreak_info, targetOrigin, targetType, killstrea
   if(targetType != "turret") {
     if(self BotGetDifficultySetting("strategyLevel") == 1) {
       nodes_to_select_from = 10;
-    }
-    else if(self BotGetDifficultySetting("strategyLevel") == 0) {
+    } else if(self BotGetDifficultySetting("strategyLevel") == 0) {
       nodes_to_select_from = 15;
     }
   }
 
   if(targetType == "turret_air") {
     placeNode = self BotNodePick(nodes, nodes_to_select_from, "node_sentry", targetOrigin, "ignore_no_sky");
-  }
-  else if(targetType == "trap") {
+  } else if(targetType == "trap") {
     placeNode = self BotNodePick(nodes, nodes_to_select_from, "node_traffic");
-  }
-  else if(targetType == "hide_nonlethal") {
+  } else if(targetType == "hide_nonlethal") {
     placeNode = self BotNodePick(nodes, nodes_to_select_from, "node_hide");
-  }
-  else {
+  } else {
     placeNode = self BotNodePick(nodes, nodes_to_select_from, "node_sentry", targetOrigin);
   }
 
@@ -183,8 +177,7 @@ bot_sentry_choose_placement(killstreak_info, targetOrigin, targetType, killstrea
     placement.node = placeNode;
     if(targetOrigin != placeNode.origin && targetType != "hide_nonlethal") {
       placement.yaw = VectorToYaw(targetOrigin - placeNode.origin);
-    }
-    else {
+    } else {
       placement.yaw = undefined;
     }
     placement.weapon = killstreak_info.weapon;

@@ -95,8 +95,7 @@ bot_infect_ai_director_update() {
         }
         if(player.team == "axis") {
           infected_players[infected_players.size] = player;
-        }
-        else if(player.team == "allies") {
+        } else if(player.team == "allies") {
           non_infected_players[non_infected_players.size] = player;
         }
       }

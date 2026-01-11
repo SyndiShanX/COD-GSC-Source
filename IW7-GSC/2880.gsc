@@ -137,9 +137,8 @@ func_DC81(var_00) {
 
     if(isDefined(var_0.func_1ED4)) {
       var_09 = [
-    }
-        [var_0.func_1ED4]
-      ]();
+        }
+        [var_0.func_1ED4]]();
 
     var_10 = getanimlength(var_03);
     var_11 = randomintrange(1, 4);
@@ -252,9 +251,9 @@ func_DC84(var_00) {
 
       if(isDefined(var_7.func_1ED4)) {
         var_14 = [
-      }
+          }
           [var_7.func_1ED4]
-        ]();
+      ]();
 
       var_15 = getanimlength(var_03);
       var_16 = randomintrange(1, 4);
@@ -266,7 +265,7 @@ func_DC84(var_00) {
     var_18 = [];
 
     foreach(var_07 in var_00) {
-    var_18 = scripts\engine\utility::array_add(var_18, level.func_EC85[var_7.func_1FBB]["idle_anims"][var_05][0]);
+      var_18 = scripts\engine\utility::array_add(var_18, level.func_EC85[var_7.func_1FBB]["idle_anims"][var_05][0]);
     }
 
     func_13597(var_03, var_18, var_00);
@@ -294,7 +293,7 @@ func_DC84(var_00) {
     var_18 = [];
 
     foreach(var_07 in var_00) {
-    var_18 = scripts\engine\utility::array_add(var_18, level.func_EC85[var_7.func_1FBB]["idle_anims"][var_05][2]);
+      var_18 = scripts\engine\utility::array_add(var_18, level.func_EC85[var_7.func_1FBB]["idle_anims"][var_05][2]);
     }
 
     func_13597(var_10[1], var_18, var_00);
@@ -400,9 +399,8 @@ func_DC82(var_00) {
 
     if(isDefined(var_0.func_1ED4)) {
       var_08 = [
-    }
-        [var_0.func_1ED4]
-      ]();
+        }
+        [var_0.func_1ED4]]();
 
     var_09 = getanimlength(var_02);
     var_10 = randomintrange(1, 4);
@@ -439,9 +437,8 @@ func_DC83(var_00) {
 
     if(isDefined(var_6.func_1ED4)) {
       var_10 = [
-    }
-        [var_6.func_1ED4]
-      ]();
+        }
+        [var_6.func_1ED4]]();
 
     var_06 animscripted("single anim", self.origin, self.angles, var_07, undefined, var_10, 0.0);
   }
@@ -479,9 +476,9 @@ func_DC83(var_00) {
 
       if(isDefined(var_6.func_1ED4)) {
         var_10 = [
-      }
+          }
           [var_6.func_1ED4]
-        ]();
+      ]();
 
       var_16 = getanimlength(var_07);
       var_13 = var_16;
@@ -502,9 +499,9 @@ func_DC83(var_00) {
 
       if(isDefined(var_6.func_1ED4)) {
         var_10 = [
-      }
+          }
           [var_6.func_1ED4]
-        ]();
+      ]();
 
       var_06 animscripted("single anim", self.origin, self.angles, var_20, undefined, var_10, 0.2);
       var_18 = getanimlength(var_20);

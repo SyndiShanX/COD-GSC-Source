@@ -53,8 +53,7 @@ debug_friendlyfire() {
   for(;;) {
     if(getdvar(#"_id_02C7E46E") == "1") {
       friendly_fire.alpha = 1;
-    }
-    else {
+    } else {
       friendly_fire.alpha = 0;
     }
 
@@ -91,8 +90,7 @@ friendly_fire_callback(entity, damage, attacker, method) {
 
   if(isplayer(attacker)) {
     bplayersdamage = 1;
-  }
-  else if(isDefined(attacker.classname) && attacker.classname == "script_vehicle") {
+  } else if(isDefined(attacker.classname) && attacker.classname == "script_vehicle") {
     owner = attacker getvehicleowner();
 
     if(isDefined(owner)) {
@@ -126,13 +124,10 @@ friendly_fire_callback(entity, damage, attacker, method) {
     if(killed) {
       attacker.participation = attacker.participation + level.friendlyfire["enemy_kill_points"];
       attacker participation_point_cap();
-    } else {
-    }
+    } else {}
 
     return;
-  } else if(killed) {
-  } else {
-  }
+  } else if(killed) {} else {}
 
   if(isDefined(entity.no_friendly_fire_penalty)) {
     return;
@@ -143,8 +138,7 @@ friendly_fire_callback(entity, damage, attacker, method) {
 
       if(attacker.participation <= 0) {
         attacker.participation = attacker.participation + level.friendlyfire["min_participation"];
-      }
-      else {
+      } else {
         attacker.participation = attacker.participation + level.friendlyfire["civ_kill_points"];
       }
     } else if(isDefined(entity) && isDefined(entity.ff_kill_penalty))
@@ -160,8 +154,7 @@ friendly_fire_callback(entity, damage, attacker, method) {
   if(check_grenade(entity, method) && savecommit_aftergrenade()) {
     if(killed) {
       return;
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -202,8 +195,7 @@ friendly_fire_think(entity) {
 
     if(isplayer(attacker)) {
       bplayersdamage = 1;
-    }
-    else if(isDefined(attacker.classname) && attacker.classname == "script_vehicle") {
+    } else if(isDefined(attacker.classname) && attacker.classname == "script_vehicle") {
       owner = attacker getvehicleowner();
 
       if(isDefined(owner)) {
@@ -251,8 +243,7 @@ friendly_fire_think(entity) {
 
         if(attacker.participation <= 0) {
           attacker.participation = attacker.participation + level.friendlyfire["min_participation"];
-        }
-        else {
+        } else {
           attacker.participation = attacker.participation + level.friendlyfire["civ_kill_points"];
         }
       } else if(isDefined(entity) && isDefined(entity.ff_kill_penalty))
@@ -268,8 +259,7 @@ friendly_fire_think(entity) {
     if(check_grenade(entity, method) && savecommit_aftergrenade()) {
       if(killed) {
         return;
-      }
-      else {
+      } else {
         continue;
       }
     }
@@ -342,8 +332,7 @@ participation_point_flattenovertime() {
   for(;;) {
     if(self.participation > 0) {
       self.participation--;
-    }
-    else if(self.participation < 0) {
+    } else if(self.participation < 0) {
       self.participation++;
     }
 
@@ -366,14 +355,11 @@ missionfail() {
 
   if(isDefined(self.last_hit_team) && self.last_hit_team == "neutral") {
     setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_NEUTRAL");
-  }
-  else if(level.campaign == "british") {
+  } else if(level.campaign == "british") {
     setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH");
-  }
-  else if(level.campaign == "russian") {
+  } else if(level.campaign == "russian") {
     setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN");
-  }
-  else {
+  } else {
     setdvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN");
   }
 

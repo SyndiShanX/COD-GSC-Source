@@ -35,8 +35,7 @@ monitorflash() {
     }
     if(amount_angle < 0.5) {
       amount_angle = 0.5;
-    }
-    else if(amount_angle > 0.8) {
+    } else if(amount_angle > 0.8) {
       amount_angle = 1;
     }
 
@@ -49,8 +48,7 @@ monitorflash() {
 
     if(duration > 2) {
       rumbleduration = 0.75;
-    }
-    else {
+    } else {
       rumbleduration = 0.25;
     }
 

@@ -182,8 +182,7 @@ getscoreinfolabel(type) {
 killstreakweaponsallowedscore(type) {
   if(isDefined(level.scoreinfo[type]["allowKillstreakWeapons"]) && level.scoreinfo[type]["allowKillstreakWeapons"] == 1) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -354,8 +353,7 @@ onplayerspawned() {
 
       if(self issplitscreen()) {
         self.hud_rankscroreupdate.y = -15;
-      }
-      else {
+      } else {
         self.hud_rankscroreupdate.y = -60;
       }
 
@@ -405,8 +403,7 @@ giverankxp(type, value, devadd) {
   }
   if(level.teambased && !atleastoneplayeroneachteam() && !isDefined(devadd)) {
     return;
-  }
-  else if(!level.teambased && maps\mp\gametypes\_globallogic::totalplayercount() < 2 && !isDefined(devadd)) {
+  } else if(!level.teambased && maps\mp\gametypes\_globallogic::totalplayercount() < 2 && !isDefined(devadd)) {
     return;
   }
   if(!isrankenabled()) {
@@ -473,8 +470,7 @@ giverankxp(type, value, devadd) {
   if(isDefined(self.enabletext) && self.enabletext && !level.hardcoremode) {
     if(type == "teamkill") {
       self thread updaterankscorehud(0 - getscoreinfovalue("kill"));
-    }
-    else {
+    } else {
       self thread updaterankscorehud(value);
     }
   }
@@ -695,8 +691,7 @@ getrank() {
 
   if(rankxp < getrankinfominxp(rankid) + getrankinfoxpamt(rankid)) {
     return rankid;
-  }
-  else {
+  } else {
     return self getrankforxp(rankxp);
   }
 }
@@ -715,8 +710,7 @@ getrankforxp(xpval) {
 
     if(isDefined(level.ranktable[rankid])) {
       rankname = level.ranktable[rankid][1];
-    }
-    else {
+    } else {
       rankname = undefined;
     }
   }

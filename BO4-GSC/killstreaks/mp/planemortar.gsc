@@ -13,11 +13,10 @@
 #include scripts\mp_common\gametypes\battlechatter;
 #include scripts\mp_common\gametypes\globallogic_audio;
 #include scripts\mp_common\util;
-
 #namespace planemortar;
 
 autoexec __init__system__() {
-  system::register(#"planemortar", &__init__, undefined, #"killstreaks");
+  system::register(#"planemortar", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {
@@ -31,7 +30,7 @@ __init__() {
 }
 
 function_269fec2() {
-  if(!isDefined(self.pers[#"mortarradarused"]) || !self.pers[#"mortarradarused"]) {
+  if(!isDefined(self.pers[# "mortarradarused"]) || !self.pers[# "mortarradarused"]) {
     otherteam = util::getotherteam(self.team);
     globallogic_audio::leader_dialog("enemyPlaneMortarUsed", otherteam);
   }

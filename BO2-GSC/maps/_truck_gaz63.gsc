@@ -10,14 +10,11 @@
 main(model, type) {
   if(self.vehicletype == "truck_gaz63_player_single50_physics") {
     build_aianims(::set_50cal_gunner_anims, ::set_50cal_vehicle_anims);
-  }
-  else if(self.vehicletype == "truck_gaz63_player_single50" || self.vehicletype == "truck_gaz63_player_single50_nodeath") {
+  } else if(self.vehicletype == "truck_gaz63_player_single50" || self.vehicletype == "truck_gaz63_player_single50_nodeath") {
     build_aianims(::set_gunner_anims, ::set_gunner_vehicle_anims);
-  }
-  else if(self.vehicletype == "truck_gaz63_player_single50_bulletdamage") {
+  } else if(self.vehicletype == "truck_gaz63_player_single50_bulletdamage") {
     build_aianims(::set_gunner_anims, ::set_gunner_vehicle_anims);
-  }
-  else {
+  } else {
     build_aianims(::setanims, ::set_vehicle_anims);
   }
 
@@ -25,8 +22,7 @@ main(model, type) {
 
   if(issubstr(self.vehicletype, "_low")) {
     self thread attach_truck_bed_low();
-  }
-  else {
+  } else {
     self thread attach_truck_bed();
   }
 

@@ -61,7 +61,7 @@ init() {
   level.ai_tank_crate_explode_fx = loadfx("weapon/talon/fx_talon_drop_box");
 
   foreach(spawn in spawns) {
-  level.ai_tank_valid_locations[level.ai_tank_valid_locations.size] = spawn.origin;
+    level.ai_tank_valid_locations[level.ai_tank_valid_locations.size] = spawn.origin;
   }
 
   anims = [];
@@ -170,8 +170,7 @@ ai_tank_killstreak_start(owner, origin, killstreak_id, weaponname) {
 
   if(level.teambased) {
     drone setteam(owner.team);
-  }
-  else {
+  } else {
     drone setteam("free");
   }
 
@@ -185,8 +184,7 @@ ai_tank_killstreak_start(owner, origin, killstreak_id, weaponname) {
 
   if(!isDefined(drone.owner.numtankdrones)) {
     drone.owner.numtankdrones = 1;
-  }
-  else {
+  } else {
     drone.owner.numtankdrones++;
   }
 
@@ -453,8 +451,7 @@ tank_death_think(hardpointname) {
       if(isDefined(self.wascontrollednowdead) && self.wascontrollednowdead) {
         attacker addweaponstat(weapon, "destroyed_controlled_killstreak", 1);
       }
-    } else {
-    }
+    } else {}
   }
 
   wait 2;
@@ -507,15 +504,13 @@ tank_move_think() {
 
     if(isDefined(avg_position)) {
       nodes = getnodesinradiussorted(avg_position, 256, 0);
-    }
-    else {
+    } else {
       nodes = getnodesinradiussorted(self.owner.origin, 1024, 256, 128);
     }
 
     if(nodes.size > 0) {
       node = nodes[0];
-    }
-    else {
+    } else {
       continue;
     }
 
@@ -560,8 +555,7 @@ tank_ground_abort_think() {
 
     if(nodes.size <= 0) {
       ground_trace_fail++;
-    }
-    else {
+    } else {
       ground_trace_fail = 0;
     }
 
@@ -1074,8 +1068,7 @@ tank_rocket_watch(player) {
 
     if(!self.controlled) {
       self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 50.0), 0);
-    }
-    else {
+    } else {
       self launchvehicle(dir * -30, self.origin + vectorscale((0, 0, 1), 50.0), 0);
       player playrumbleonentity("sniper_fire");
     }

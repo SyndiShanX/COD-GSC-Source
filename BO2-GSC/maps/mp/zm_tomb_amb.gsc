@@ -28,8 +28,7 @@ sndsetupendgamemusicstates() {
   level thread maps\mp\zombies\_zm_audio::setupmusicstate("game_over_ee", "mus_zombie_game_over_ee", 1, 0, undefined, "SILENCE");
 }
 
-sndtrackers() {
-}
+sndtrackers() {}
 
 sndstingersetup() {
   level.sndmusicstingerevent = ::sndplaystinger;
@@ -125,8 +124,7 @@ locationstingerwait(zone_name, type) {
     }
     if(is_true(level.sndroundwait)) {
       continue;
-    }
-    else if(is_true(level.sndstinger.isplaying)) {
+    } else if(is_true(level.sndstinger.isplaying)) {
       level thread sndlocationqueue(activezone);
       continue;
     }
@@ -138,8 +136,7 @@ locationstingerwait(zone_name, type) {
 
     if(numcut >= sndnorepeats) {
       numcut = 0;
-    }
-    else {
+    } else {
       numcut++;
     }
 
@@ -199,8 +196,7 @@ sndlocationshouldplay(array, activezone) {
 
   if(playersinlocal >= 1) {
     shouldplay = 1;
-  }
-  else {
+  } else {
     shouldplay = 0;
   }
 
@@ -311,8 +307,7 @@ playstinger(state, player, ignore) {
   if(is_true(ignore)) {
     if(isDefined(player)) {
       player playsoundtoplayer(s.states[state].alias, player);
-    }
-    else {
+    } else {
       s.ent playSound(s.states[state].alias);
       s.ent thread playstingerstop();
     }
@@ -332,8 +327,7 @@ sndqueuestinger(state, player) {
 
   if(is_true(s.queue)) {
     return;
-  }
-  else {
+  } else {
     s.queue = 1;
 
     while(true) {
@@ -408,8 +402,7 @@ sndmusicegg_wait(bottle_origin) {
 
   if(level.meteor_counter == 3) {
     level thread sndmuseggplay(temp_ent, "mus_zmb_secret_song", 310);
-  }
-  else {
+  } else {
     wait 1.5;
     temp_ent delete();
   }
@@ -481,7 +474,7 @@ snddoormusictrigs() {
   trigs = getEntArray("sndMusicDoor", "script_noteworthy");
 
   foreach(trig in trigs) {
-  trig thread snddoormusic();
+    trig thread snddoormusic();
   }
 }
 
@@ -543,11 +536,11 @@ snd115egg() {
   fiveorigin[1] = (-2792, 175, 243);
 
   foreach(origin in oneorigin) {
-  level thread snd115egg_wait(origin, 0);
+    level thread snd115egg_wait(origin, 0);
   }
 
   foreach(origin in fiveorigin) {
-  level thread snd115egg_wait(origin, 1);
+    level thread snd115egg_wait(origin, 1);
   }
 }
 
@@ -558,8 +551,7 @@ snd115egg_wait(origin, shouldwait) {
 
   if(shouldwait) {
     temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::snd115egg_5_override);
-  }
-  else {
+  } else {
     temp_ent thread maps\mp\zombies\_zm_sidequests::fake_use("main_music_egg_hit", ::snd115egg_1_override);
   }
 

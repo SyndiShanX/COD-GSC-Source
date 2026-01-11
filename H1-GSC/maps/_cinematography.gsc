@@ -285,9 +285,7 @@ dyndof_system_start(var_0) {
 
         if(isDefined(var_8.tag_name)) {
           if(!maps\_utility::hastag(var_8.reference_entity.model, var_8.tag_name)) {
-            if(!isDefined(var_8.reference_entity.headmodel)) {
-            } else {
-            }
+            if(!isDefined(var_8.reference_entity.headmodel)) {} else {}
           }
 
           var_8.reference_point = var_8.reference_entity gettagorigin(var_8.tag_name);
@@ -315,8 +313,7 @@ dyndof_system_start(var_0) {
 
         if(!isDefined(var_17["entity"])) {
           var_10 = 0;
-        }
-        else if(var_17["entity"] != var_8.reference_entity) {
+        } else if(var_17["entity"] != var_8.reference_entity) {
           var_18 = distancesquared(var_5, var_8.reference_point);
           var_19 = distancesquared(var_5, var_17["position"]);
 
@@ -400,8 +397,7 @@ __dyndof_bullet_trace_ignore_glass(var_0, var_1, var_2) {
     if(isDefined(var_2) && isDefined(var_9)) {
       if(common_scripts\utility::array_contains(var_2, var_9)) {
         var_4 = var_5["position"] + var_10 * 2;
-      }
-      else {
+      } else {
         var_3 = 0;
       }
 
@@ -474,7 +470,7 @@ cinseq_active() {
 cinseq_start_sequence() {
   if(!self.activated) {
     foreach(var_1 in self.keys) {
-    var_1.activated = undefined;
+      var_1.activated = undefined;
     }
 
     self.activated = 1;
@@ -513,7 +509,7 @@ __cinematic_sequence_run_sequence_internal() {
 __cinseq_activate_key(var_0) {
   if(isDefined(var_0.function_list)) {
     foreach(var_2 in var_0.function_list) {
-    __cinseq_call_custom_func(var_2);
+      __cinseq_call_custom_func(var_2);
     }
   }
 
@@ -533,8 +529,7 @@ __cinseq_activate_key(var_0) {
 
   if(isDefined(var_0.slowmo_slow_scale)) {
     setslowmotion(gettimescale(), var_0.slowmo_slow_scale, var_0.slowmo_in_duration);
-  }
-  else if(isDefined(var_0.slowmo_out_duration)) {
+  } else if(isDefined(var_0.slowmo_out_duration)) {
     setslowmotion(gettimescale(), level.slowmo.speed_norm, var_0.slowmo_out_duration);
   }
 
@@ -697,13 +692,13 @@ __cinseq_handle_dyndofs() {
 
   if(isDefined(self.remove_dyn_dof_list)) {
     foreach(var_1 in self.remove_dyn_dof_list) {
-    dyndof_remove(var_1);
+      dyndof_remove(var_1);
     }
   }
 
   if(isDefined(self.dyndof_list)) {
     foreach(var_4 in self.dyndof_list) {
-    __cinseq_set_dyn_dof_from_struct(var_4);
+      __cinseq_set_dyn_dof_from_struct(var_4);
     }
   }
 
@@ -782,8 +777,7 @@ cinseq_key_dyndof_ref_ent(var_0, var_1, var_2) {
 
   if(!isDefined(var_2)) {
     var_3.remove_ref_ent = 0;
-  }
-  else {
+  } else {
     var_3.remove_ref_ent = 1;
   }
 

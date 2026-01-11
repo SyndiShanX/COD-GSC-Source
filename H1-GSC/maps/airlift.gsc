@@ -457,8 +457,7 @@ h1_airlift_reloadm19() {
 
     if(var_2 >= 18) {
       level.player setphysicaldepthoffield(6.0, 26, 5.0, 4.0);
-    }
-    else if(var_2 <= 12) {
+    } else if(var_2 <= 12) {
       level.player setphysicaldepthoffield(3.0, 1500, 6.0, 5.0);
     }
 
@@ -1244,7 +1243,7 @@ smoketown_land() {
   common_scripts\utility::flag_wait("player_constrction_approach");
 
   foreach(var_3 in var_1) {
-  var_3 setisignoringgrenades(0);
+    var_3 setisignoringgrenades(0);
   }
 
   soundscripts\_snd::snd_message("aud_add_smoketown_operation_mix");
@@ -1287,7 +1286,7 @@ smoketown_land() {
   level.smokefriendlies = common_scripts\utility::array_remove(level.smokefriendlies, level.smokeat4dude);
 
   foreach(var_3 in level.smokefriendlies) {
-  level.friendliesnames_smoketown = common_scripts\utility::array_add(level.friendliesnames_smoketown, var_3.name);
+    level.friendliesnames_smoketown = common_scripts\utility::array_add(level.friendliesnames_smoketown, var_3.name);
   }
 
   var_18 = getent("smoketown_at4_hostile", "script_noteworthy");
@@ -1590,8 +1589,7 @@ h1_depthoffield_cobraflight() {
   for(var_2 = (0, 0, 0); var_1 <= 48.5; var_1 = var_1 + var_0) {
     if(var_1 > 17.0 && var_1 < 20.0 || var_1 > 27.0 && var_1 < 33.0) {
       level.player setphysicaldepthoffield(3.0, 1000, 0.5, 0.5);
-    }
-    else {
+    } else {
       if(isDefined(level.wingman.origin)) {
         var_2 = level.wingman.origin;
       }
@@ -2273,8 +2271,7 @@ h1_grabbingpilot_dofsystem() {
 
     if(var_5 > -140 && var_5 < -120) {
       level.player setphysicaldepthoffield(2.5, 53, 2.5, 2.5);
-    }
-    else if(var_5 < -145 || var_5 > 0) {
+    } else if(var_5 < -145 || var_5 > 0) {
       level.player setphysicaldepthoffield(2.5, 1500, 2.0, 2.0);
     }
 
@@ -2847,16 +2844,14 @@ nuke_chopper_spin_and_fx(var_0) {
 
   if(isDefined(var_0) && var_0 == 1) {
     playFXOnTag(common_scripts\utility::getfx("heli_aerial_explosion_large"), self, "tag_engine_left");
-  }
-  else {
+  } else {
     playFXOnTag(common_scripts\utility::getfx("nuked_chopper_explosion"), self, "tag_engine_left");
   }
 
   while(isDefined(self)) {
     if(isDefined(var_4)) {
       var_3 = self.angles[1] + 100;
-    }
-    else {
+    } else {
       var_3 = self.angles[1] - 100;
     }
 
@@ -2865,8 +2860,7 @@ nuke_chopper_spin_and_fx(var_0) {
 
     if(isDefined(var_0) && var_0 == 1) {
       playFXOnTag(common_scripts\utility::getfx("nuked_chopper_smoke_trail"), self, "tag_engine_left");
-    }
-    else {
+    } else {
       playFXOnTag(common_scripts\utility::getfx("nuked_chopper_smoke_trail"), self, "tag_engine_left");
     }
 
@@ -3034,8 +3028,7 @@ vehicle_think() {
 
   if(isDefined(var_0.script_noteworthy) && var_0.script_noteworthy == "nuke_choppers") {
     var_0 thread nuke_choppers_think();
-  }
-  else {
+  } else {
     switch (var_0.vehicletype) {
       case "zpu_antiair":
         var_0 thread vehicle_zpu_think();
@@ -3155,8 +3148,7 @@ vehicle_cobra_default_weapons_think() {
 
     if(isDefined(self.preferredtarget)) {
       var_0 = self.preferredtarget;
-    }
-    else {
+    } else {
       var_0 = maps\_helicopter_globals::getenemytarget(3000, level.cosine["20"], 1, 1, 1, 1, level.cobratargetexcluders);
     }
 
@@ -3182,8 +3174,7 @@ vehicle_cobra_default_weapons_think() {
 
           if(isDefined(level.smoketownmi17) && var_0 == level.smoketownmi17) {
             maps\_helicopter_globals::fire_missile("ffar_airlift_nofx", var_5, var_0);
-          }
-          else {
+          } else {
             maps\_helicopter_globals::fire_missile("ffar_airlift_map_overwrite", var_5, var_0);
           }
 
@@ -3286,8 +3277,7 @@ vehicle_turret_think() {
 
     if(distancesquared(level.player.origin, self.origin) > level.cannonrangesquared) {
       var_0 = undefined;
-    }
-    else {
+    } else {
       var_0 = level.player;
     }
 
@@ -3455,8 +3445,7 @@ vehicle_get_damage_type_and_attacker(var_0, var_1, var_2, var_3) {
 
   if(var_2 == level.player) {
     var_4 = "player";
-  }
-  else if(isDefined(var_2.code_classname) && var_2.code_classname == "script_vehicle") {
+  } else if(isDefined(var_2.code_classname) && var_2.code_classname == "script_vehicle") {
     switch (var_2.vehicletype) {
       case "cobra":
         var_4 = "cobra";
@@ -3481,11 +3470,9 @@ vehicle_get_damage_type_and_attacker(var_0, var_1, var_2, var_3) {
 
   if(!isDefined(var_4)) {
     return undefined;
-  }
-  else if(!isDefined(var_5)) {
+  } else if(!isDefined(var_5)) {
     return undefined;
-  }
-  else {
+  } else {
     return var_4 + "_" + var_5;
   }
 }
@@ -3538,8 +3525,7 @@ vehicle_animated_seaknight_land(var_0, var_1, var_2) {
 seaknight_plaza_event(var_0) {
   if(var_0.targetname == "seaknight_plaza_alt_landing") {
     thread maps\airlift_aud::aud_seaknight_audio_event("scn_airlift_left_plaza_seaknight", 1.0, 0, 0, 1.0, 0);
-  }
-  else {
+  } else {
     thread maps\airlift_aud::aud_seaknight_audio_event("scn_airlift_right_plaza_seaknight", 1.0, 0, 0, 1.0, 0);
   }
 }
@@ -3637,8 +3623,7 @@ seaknight_crewchief_think(var_0) {
 
   if(var_0 == "smoketown") {
     common_scripts\utility::flag_wait("player_exit_seaknight_smoketown");
-  }
-  else if(var_0 == "cobrastreets") {
+  } else if(var_0 == "cobrastreets") {
     common_scripts\utility::flag_wait("player_exit_seaknight_cobrastreets");
   }
 
@@ -3722,8 +3707,7 @@ vehicle_seaknight_unload_ai_think(var_0, var_1) {
 
   if(var_1 == level.seaknight) {
     var_2 = "tag_door_rear";
-  }
-  else {
+  } else {
     var_2 = "tag_detach";
   }
 
@@ -3759,8 +3743,7 @@ vehicle_canned_seaknight_fx(var_0, var_1) {
 
   if(var_1.targetname == "seaknight_plaza_alt_landing2") {
     var_2 = (-240, 0, 0);
-  }
-  else {
+  } else {
     var_2 = (0, 0, 0);
   }
 
@@ -3970,8 +3953,7 @@ destructibles_think() {
 badplace_volume_think() {
   if(self.script_noteworthy == "axis" || self.script_noteworthy == "allies") {
     badplace_brush(self getentitynumber(), 0, self, self.script_noteworthy);
-  }
-  else {}
+  } else {}
 }
 
 rpg_fake(var_0) {
@@ -5075,8 +5057,7 @@ ai_pilots_think(var_0) {
 
   if(var_0 == "pilot_idle") {
     var_1 = "tag_driver";
-  }
-  else {
+  } else {
     var_1 = "tag_passenger";
   }
 
@@ -5103,7 +5084,7 @@ remove_enemiesgrenades_cobrastreets() {
     var_0 = getaiarray("axis");
 
     foreach(var_2 in var_0) {
-    var_2.grenadeammo = 0;
+      var_2.grenadeammo = 0;
     }
 
     wait 2;
@@ -5214,7 +5195,7 @@ turn_off_lights(var_0, var_1) {
   var_2 = getEntArray(var_0, var_1);
 
   foreach(var_4 in var_2) {
-  var_4 dynamic_light_on_off(0);
+    var_4 dynamic_light_on_off(0);
   }
 }
 
@@ -5222,7 +5203,7 @@ turn_on_lights(var_0, var_1) {
   var_2 = getEntArray(var_0, var_1);
 
   foreach(var_4 in var_2) {
-  var_4 dynamic_light_on_off(1);
+    var_4 dynamic_light_on_off(1);
   }
 }
 
@@ -5280,7 +5261,7 @@ perf_optimize_seaknight_inflight() {
   common_scripts\utility::flag_wait("seaknight_set_up");
 
   foreach(var_1 in level.ch46_hidden_parts) {
-  level.seaknight hidepart(var_1, "vehicle_ch46e_opened_door_interior_mk19");
+    level.seaknight hidepart(var_1, "vehicle_ch46e_opened_door_interior_mk19");
   }
 
   var_3 = level.seaknight getlinkedchildren();
@@ -5296,7 +5277,7 @@ perf_reset_seaknight_optimizations() {
   common_scripts\utility::flag_wait("seaknight_set_up");
 
   foreach(var_1 in level.ch46_hidden_parts) {
-  level.seaknight showpart(var_1, "vehicle_ch46e_opened_door_interior_mk19");
+    level.seaknight showpart(var_1, "vehicle_ch46e_opened_door_interior_mk19");
   }
 
   var_3 = level.seaknight getlinkedchildren();

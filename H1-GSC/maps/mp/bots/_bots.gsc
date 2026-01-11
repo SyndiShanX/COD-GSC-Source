@@ -21,8 +21,7 @@ main() {
 
   if(isDefined(level.bot_killstreak_setup_func)) {
     [[level.bot_killstreak_setup_func]]();
-  }
-  else {
+  } else {
     maps\mp\bots\_bots_ks::bot_killstreak_setup();
   }
 
@@ -113,8 +112,7 @@ initbotlevelvariables() {
 initbotmapextents() {
   if(isDefined(level.teleportgetactivenodesfunc)) {
     var_0 = [[level.teleportgetactivenodesfunc]]();
-  }
-  else {
+  } else {
     var_0 = getallnodes();
   }
 
@@ -201,9 +199,9 @@ bot_set_loadout_class() {
 
       if(isDefined(self.override_class_function)) {
         self.bot_class = [
-      }
+          }
           [self.override_class_function]
-        ]();
+      ]();
       else {
         self.bot_class = maps\mp\bots\_bots_personality::bot_setup_callback_class();
       }
@@ -253,8 +251,7 @@ monitor_pause_spawning() {
   for(;;) {
     if(level.players_waiting_to_join.size > 0) {
       level.pausing_bot_connect_monitor = 1;
-    }
-    else {
+    } else {
       level.pausing_bot_connect_monitor = 0;
     }
 
@@ -374,8 +371,7 @@ bot_connect_monitor(var_0, var_1) {
     if(var_20 + var_21 < var_22) {
       if(var_20 < var_4) {
         var_20++;
-      }
-      else if(var_21 < var_5) {
+      } else if(var_21 < var_5) {
         var_21++;
       }
     }
@@ -449,8 +445,7 @@ bot_connect_monitor(var_0, var_1) {
     for(var_43 = [-1, -1]; var_41 < var_22 && var_41 < var_42; var_40 = !var_40) {
       if(var_40 && var_38 < var_4 && bot_can_join_team(var_11)) {
         var_38++;
-      }
-      else if(!var_40 && var_39 < var_5 && bot_can_join_team(var_12)) {
+      } else if(!var_40 && var_39 < var_5 && bot_can_join_team(var_12)) {
         var_39++;
       }
 
@@ -491,8 +486,7 @@ bot_connect_monitor(var_0, var_1) {
 
       if(var_53 == 0) {
         var_47 = 0;
-      }
-      else if(var_53 > 0) {
+      } else if(var_53 > 0) {
         var_45 = int(var_53 / 2) + var_53 % 2;
         var_46 = int(var_53 / 2);
       } else if(var_53 < 0) {
@@ -505,8 +499,7 @@ bot_connect_monitor(var_0, var_1) {
 
       if(var_45 > 0) {
         move_bots_from_team_to_team(var_55, var_12, var_11, var_6);
-      }
-      else if(var_46 > 0) {
+      } else if(var_46 > 0) {
         move_bots_from_team_to_team(var_55, var_11, var_12, var_7);
       }
 
@@ -532,11 +525,9 @@ bot_connect_monitor(var_0, var_1) {
 
       if(var_46 > 0 && var_45 > 0) {
         level common_scripts\utility::waittill_multiple("spawned_enemies", "spawned_allies");
-      }
-      else if(var_46 > 0) {
+      } else if(var_46 > 0) {
         level waittill("spawned_enemies");
-      }
-      else if(var_45 > 0) {
+      } else if(var_45 > 0) {
         level waittill("spawned_allies");
       }
     }
@@ -772,14 +763,11 @@ drop_bots(var_0, var_1) {
 bot_lui_convert_team_to_int(var_0) {
   if(var_0 == "axis") {
     return 0;
-  }
-  else if(var_0 == "allies") {
+  } else if(var_0 == "allies") {
     return 1;
-  }
-  else if(var_0 == "autoassign" || var_0 == "random") {
+  } else if(var_0 == "autoassign" || var_0 == "random") {
     return 2;
-  }
-  else {
+  } else {
     return 3;
   }
 }
@@ -881,11 +869,9 @@ spawn_bots(var_0, var_1, var_2, var_3, var_4, var_5) {
 bot_gametype_chooses_team() {
   if(maps\mp\_utility::matchmakinggame() && self.sessionteam != "none") {
     var_0 = 0;
-  }
-  else if(!maps\mp\_utility::matchmakinggame() && !maps\mp\_utility::forceautoassign() && maps\mp\_utility::allowteamchoice()) {
+  } else if(!maps\mp\_utility::matchmakinggame() && !maps\mp\_utility::forceautoassign() && maps\mp\_utility::allowteamchoice()) {
     var_0 = 1;
-  }
-  else {
+  } else {
     var_0 = 0;
   }
 
@@ -1048,8 +1034,7 @@ bot_get_rank_xp_and_prestige() {
 
   if(isDefined(var_4)) {
     var_0.rankxp = var_4;
-  }
-  else {
+  } else {
     if(!isDefined(var_6)) {
       var_6 = bot_random_ranks_for_difficulty(var_1);
     }
@@ -1064,8 +1049,7 @@ bot_get_rank_xp_and_prestige() {
 
   if(isDefined(var_5)) {
     var_0.prestige = var_5;
-  }
-  else {
+  } else {
     if(!isDefined(var_6)) {
       var_6 = bot_random_ranks_for_difficulty(var_1);
     }
@@ -1178,8 +1162,7 @@ bot_damage_callback(var_0, var_1, var_2, var_3, var_4, var_5) {
     if(level.teambased) {
       if(isDefined(var_4.team) && var_4.team == self.team) {
         return;
-      }
-      else if(isDefined(var_0) && isDefined(var_0.team) && var_0.team == self.team) {
+      } else if(isDefined(var_0) && isDefined(var_0.team) && var_0.team == self.team) {
         return;
       }
     }
@@ -1216,14 +1199,11 @@ bot_should_do_killcam() {
 
   if(var_6 == "recruit") {
     var_5 = 0.1;
-  }
-  else if(var_6 == "regular") {
+  } else if(var_6 == "regular") {
     var_5 = 0.4;
-  }
-  else if(var_6 == "hardened") {
+  } else if(var_6 == "hardened") {
     var_5 = 0.7;
-  }
-  else if(var_6 == "veteran") {
+  } else if(var_6 == "veteran") {
     var_5 = 1.0;
   }
 
@@ -1396,8 +1376,7 @@ bot_know_enemies_on_start() {
 bot_make_entity_sentient(var_0, var_1) {
   if(isDefined(var_1)) {
     return self makeentitysentient(var_0, var_1);
-  }
-  else {
+  } else {
     return self makeentitysentient(var_0);
   }
 }

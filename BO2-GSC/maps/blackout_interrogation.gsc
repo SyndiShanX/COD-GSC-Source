@@ -204,9 +204,7 @@ clean_up_mason_wakeup() {
 dialog_wakeup() {
   level endon("dialog_wakeup_kill");
 
-  if(level.is_harper_alive) {
-  } else {
-  }
+  if(level.is_harper_alive) {} else {}
 
   wait 4.5;
   level.player say_dialog("maso_what_1");
@@ -400,8 +398,7 @@ set_loadout_offset(str_weapon_full, s_anchor, str_origin) {
 
   if(str_origin == "player_primary_loadout_spot") {
     b_left_side = 1;
-  }
-  else {
+  } else {
     b_left_side = 0;
   }
 
@@ -679,8 +676,7 @@ set_loadout_offset(str_weapon_full, s_anchor, str_origin) {
 
     if(b_left_side) {
       v_debug_color = (1, 0, 0);
-    }
-    else {
+    } else {
       v_debug_color = (0, 0, 1);
     }
 
@@ -836,7 +832,7 @@ init_doors() {
   glass_list = getEntArray("interrogation_mirror_broken", "targetname");
 
   foreach(glass in glass_list) {
-  glass hide();
+    glass hide();
   }
 
   level thread run_masons_quarters();
@@ -857,7 +853,7 @@ interrogation_camera() {
   a_m_camera = getEntArray("security_intro_camera", "targetname");
 
   foreach(m_camera in a_m_camera) {
-  play_fx("camera_recording", m_camera.origin, m_camera.angles, "stop_record");
+    play_fx("camera_recording", m_camera.origin, m_camera.angles, "stop_record");
   }
 
   flag_wait("intro_disable_camera");
@@ -914,7 +910,7 @@ interrogation_break_mirror(ai_salazar) {
   broken_glass_brushes = getEntArray("interrogation_mirror_broken", "targetname");
 
   foreach(brush in broken_glass_brushes) {
-  brush show();
+    brush show();
   }
 
   exploder(999);
@@ -1050,8 +1046,7 @@ turn_off_intro_cam() {
   flag_clear("intro_camera_on");
 }
 
-turn_off_intro_cam_hud() {
-}
+turn_off_intro_cam_hud() {}
 
 room_cams_init() {
   s_right_mirror = getstruct("mirror_1_dir", "targetname");
@@ -1079,8 +1074,7 @@ get_mirror_cam_offset() {
 
   if(self.is_reflected_over_y) {
     v_reflection = (-1 * v_reflection[0], v_reflection[1], v_reflection[2]);
-  }
-  else {
+  } else {
     v_reflection = (v_reflection[0], -1 * v_reflection[1], v_reflection[2]);
   }
 

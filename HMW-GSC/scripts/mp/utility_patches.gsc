@@ -80,8 +80,7 @@ _setperk_stub(perk_name, var_1, var_2) {
 
   if(isDefined(var_2)) {
     self setperk(perk_name, !isDefined(level.scriptperks[var_3]), var_1, var_2);
-  }
-  else {
+  } else {
     self setperk(perk_name, !isDefined(level.scriptperks[var_3]), var_1);
   }
 }
@@ -149,11 +148,9 @@ getbaseweaponname_stub(var_0) {
 
   if(weapon_name_token[0] == "alt") {
     var_2 = weapon_name_token[1] + "_" + weapon_name_token[2];
-  }
-  else if(weapon_name_token.size > 1 && (weapon_name_token[1] == "grenade" || weapon_name_token[1] == "marker")) {
+  } else if(weapon_name_token.size > 1 && (weapon_name_token[1] == "grenade" || weapon_name_token[1] == "marker")) {
     var_2 = weapon_name_token[0] + "_" + weapon_name_token[1];
-  }
-  else {
+  } else {
     var_2 = weapon_name_token[0];
   }
 
@@ -260,8 +257,7 @@ reset_visionset_on_team_change_stub(var_0, var_1, var_2) {
     if(self.team != var_4 || !common_scripts\utility::array_contains(var_0 maps\mp\_utility::get_players_watching(), self)) {
       if(isDefined(var_2) && var_2) {
         self visionsetpostapplyforplayer("", 0.0);
-      }
-      else {
+      } else {
         self _visionsetnakedforplayer("", 0.0);
       }
 
@@ -279,8 +275,7 @@ reset_visionset_on_disconnect_stub(var_0, var_1) {
 
   if(isDefined(var_1) && var_1) {
     self visionsetpostapplyforplayer("", 0.0);
-  }
-  else {
+  } else {
     self _visionsetnakedforplayer("", 0.0);
   }
 }
@@ -330,8 +325,7 @@ leaderdialogonplayer_internal_stub(var_0, var_1, var_2) {
   if(isDefined(level.ishorde) && level.ishorde) {
     if(issubstr(var_0, "coop_gdn")) {
       var_4 = var_0;
-    }
-    else {
+    } else {
       var_4 = "AT_anr0_" + game["dialog"][var_0];
     }
   } else

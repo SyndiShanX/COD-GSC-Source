@@ -138,8 +138,7 @@ _nextmission() {
       if(IsSplitScreen()) {
         if(!arcadeMode()) {
           maps\_cooplogic::endGame();
-        }
-        else {
+        } else {
           exitLevel(false);
         }
         SetUINextLevel(level.missionSettings get_level_name(nextlevel_index));

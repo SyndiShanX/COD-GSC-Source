@@ -733,8 +733,7 @@ registerGrenadeLauncherDudDvar(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.grenadeLauncherDudTimeDvar = dvarString;
@@ -749,8 +748,7 @@ registerThrownGrenadeDudDvar(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.thrownGrenadeDudTimeDvar = dvarString;
@@ -765,8 +763,7 @@ registerKillstreakDelay(dvarString, defaultValue, minValue, maxValue) {
   }
   if(getDvarInt(dvarString) > maxValue) {
     setDvar(dvarString, maxValue);
-  }
-  else if(getDvarInt(dvarString) < minValue) {
+  } else if(getDvarInt(dvarString) < minValue) {
     setDvar(dvarString, minValue);
   }
   level.killstreakRoundDelay = getDvarInt(dvarString);
@@ -1056,14 +1053,11 @@ isGrenade(weaponname) {
 getWeaponClass_array(current) {
   if(isPrimaryWeapon(current)) {
     return level.primary_weapon_array;
-  }
-  else if(isSideArm(current)) {
+  } else if(isSideArm(current)) {
     return level.side_arm_array;
-  }
-  else if(isGrenade(current)) {
+  } else if(isGrenade(current)) {
     return level.grenade_array;
-  }
-  else {
+  } else {
     return level.inventory_array;
   }
 }
@@ -1095,17 +1089,13 @@ updateStowedWeapon() {
       }
       if(isPrimaryWeapon(weaponsList[idx])) {
         self.weapon_array_primary[self.weapon_array_primary.size] = weaponsList[idx];
-      }
-      else if(isSideArm(weaponsList[idx])) {
+      } else if(isSideArm(weaponsList[idx])) {
         self.weapon_array_sidearm[self.weapon_array_sidearm.size] = weaponsList[idx];
-      }
-      else if(isGrenade(weaponsList[idx])) {
+      } else if(isGrenade(weaponsList[idx])) {
         self.weapon_array_grenade[self.weapon_array_grenade.size] = weaponsList[idx];
-      }
-      else if(isInventory(weaponsList[idx])) {
+      } else if(isInventory(weaponsList[idx])) {
         self.weapon_array_inventory[self.weapon_array_inventory.size] = weaponsList[idx];
-      }
-      else if(IsWeaponPrimary(weaponsList[idx])) {
+      } else if(IsWeaponPrimary(weaponsList[idx])) {
         self.weapon_array_primary[self.weapon_array_primary.size] = weaponsList[idx];
       }
     }

@@ -10,7 +10,7 @@ main(var_0) {
     level.dynamic_run_speed_dialogue = var_0;
 
     foreach(var_2 in var_0) {
-    level.scr_radio[var_2] = var_2;
+      level.scr_radio[var_2] = var_2;
     }
   }
 

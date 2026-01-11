@@ -21,14 +21,11 @@ waittill_trigger_activate_looking_at(var_0, var_1, var_2, var_3, var_4, var_5) {
   for(;;) {
     if(isDefined(var_0.force_off) && var_0.force_off) {
       var_0 common_scripts\utility::trigger_off();
-    }
-    else if(level.player getstance() == "prone") {
+    } else if(level.player getstance() == "prone") {
       var_0 common_scripts\utility::trigger_off();
-    }
-    else if(level.player player_looking_at_relative(var_1.origin, var_2, var_6, level.player, var_5)) {
+    } else if(level.player player_looking_at_relative(var_1.origin, var_2, var_6, level.player, var_5)) {
       var_0 common_scripts\utility::trigger_on();
-    }
-    else {
+    } else {
       var_0 common_scripts\utility::trigger_off();
     }
 
@@ -57,8 +54,7 @@ _trigger_handle_triggering(var_0) {
 
   if(var_0) {
     self delete();
-  }
-  else {
+  } else {
     common_scripts\utility::trigger_off();
   }
 }

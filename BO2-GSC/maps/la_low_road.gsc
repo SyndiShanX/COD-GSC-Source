@@ -40,7 +40,7 @@ autoexec init_low_road() {
   m_platform = getent("sniper_platform", "targetname");
 
   foreach(m_piece in getEntArray("sniper_platform_linked", "targetname")) {
-  m_piece linkto(m_platform);
+    m_piece linkto(m_platform);
   }
 
   maps\_rusher::init_rusher();
@@ -68,8 +68,7 @@ g20_attackers_spawn_func() {
 g20_attackers_damage(einflictor, e_attacker, idamage, idflags, smeansofdeath, sweapon, vpoint, vdir, shitloc, modelindex, psoffsettime, bonename) {
   if(!isDefined(smeansofdeath) || smeansofdeath == "MOD_UNKNOWN") {
     return 0;
-  }
-  else if(smeansofdeath == "MOD_CRUSH") {
+  } else if(smeansofdeath == "MOD_CRUSH") {
     if(isplayer(e_attacker) && !isDefined(self.alreadylaunched)) {
       self.alreadylaunched = 1;
       self startragdoll(1);
@@ -415,8 +414,7 @@ regroup_vo() {
 sniper_rappel_vo() {
   if(flag("sniper_option")) {
     level.player queue_dialog("get_the_president_004");
-  }
-  else {
+  } else {
     level.player queue_dialog("rappel_down__go_001");
   }
 
@@ -497,8 +495,7 @@ harper_sniper_nag() {
 
   if(flag("sniper_option")) {
     wait 0.5;
-  }
-  else {
+  } else {
     wait 2;
   }
 
@@ -521,8 +518,7 @@ samu_sniper_nag() {
 
   if(flag("sniper_option")) {
     wait 0.5;
-  }
-  else {
+  } else {
     wait 2;
   }
 
@@ -541,8 +537,7 @@ sniper_exit_vo() {
 
   if(!flag("harper_dead")) {
     level.harper priority_dialog("harp_get_outta_there_sec_0", 0);
-  }
-  else {
+  } else {
     wait 2;
   }
 
@@ -550,8 +545,7 @@ sniper_exit_vo() {
 
   if(!flag("harper_dead")) {
     level.player priority_dialog("sect_shiiiiit_0", 0);
-  }
-  else {
+  } else {
     level.player priority_dialog("sect_shiiiiit_0", 2.5);
   }
 }
@@ -559,8 +553,7 @@ sniper_exit_vo() {
 last_stand_vo() {
   if(flag("sniper_option")) {
     flag_wait("exit_sniper_player_done");
-  }
-  else {
+  } else {
     flag_wait("low_road_move_up_4");
   }
 
@@ -646,8 +639,7 @@ last_stand_main() {
 
   if(flag("sniper_option")) {
     delay_thread(4, ::trigger_use, "last_stand_enemies_sm");
-  }
-  else {
+  } else {
     getent("last_stand_enemies_sm", "targetname") delete();
     getent("last_stand_enemies", "targetname") delete();
   }
@@ -855,9 +847,7 @@ hillary_think() {
   while(true) {
     if(isgodmode(level.player)) {
       self magic_bullet_shield();
-    }
-    else {
-    }
+    } else {}
 
     wait 1;
   }
@@ -910,8 +900,7 @@ battle_flow() {
     if(isDefined(right_side_flood_trigger)) {
       trigger_use("sm_low_road_right_side_flood");
     }
-  } else {
-  }
+  } else {}
 
   delay_thread(5, ::fxanim_sniper_drone_crash_start);
   level.hillary.ignoreme = 1;
@@ -944,8 +933,7 @@ battle_flow() {
 
   if(!flag("harper_dead")) {
     level thread harper_sniper_nag();
-  }
-  else {
+  } else {
     level thread samu_sniper_nag();
   }
 
@@ -967,8 +955,7 @@ change_cougar_team() {
 
   if(flag("grouprappel_tbone_started")) {
     vh_cougar = get_model_or_models_from_scene("grouprappel_tbone", "g20_group1_cougar4");
-  }
-  else if(flag("grouprappel_sniper_tbone_started")) {
+  } else if(flag("grouprappel_sniper_tbone_started")) {
     vh_cougar = get_model_or_models_from_scene("grouprappel_sniper_tbone", "g20_group1_cougar4");
   }
 
@@ -1198,7 +1185,7 @@ low_road_bigrig_enter() {
   a_ai_guys = get_ais_from_scene("freeway_bigrig_entry");
 
   foreach(ai_guy in a_ai_guys) {
-  ai_guy.aigroup = "group_bigrig";
+    ai_guy.aigroup = "group_bigrig";
   }
 
   waittill_ai_group_ai_count("group_bigrig", 1);
@@ -1214,7 +1201,7 @@ identify_low_road_snipers() {
   a_ai = get_ai_group_ai("low_road_snipers");
 
   foreach(ai_sniper in a_ai) {
-  ai_sniper setthreatbiasgroup("sniper");
+    ai_sniper setthreatbiasgroup("sniper");
   }
 
   while(get_ai_group_count("low_road_snipers")) {
@@ -1275,8 +1262,7 @@ grouprappel() {
 bigrig_trailer_ai_nag_vo(ai_list) {
   level waittill("bigrig_trailer_doors_open");
 
-  if(flag("harper_dead")) {
-  } else
+  if(flag("harper_dead")) {} else
     level.harper say_dialog("harp_several_mercs_inside_0");
 
   wait 2.0;
@@ -1430,7 +1416,7 @@ spawner_delete(str_option) {
   a_nodes = getnodearray(str_disable, "script_noteworthy");
 
   foreach(node in a_nodes) {
-  setenablenode(node, 0);
+    setenablenode(node, 0);
   }
 }
 
@@ -1542,8 +1528,7 @@ cover_3() {
 cover_3_optional_vo() {
   level endon("low_road_snipers_cleared");
 
-  if(flag("harper_dead") && !flag("low_road_complete")) {
-  }
+  if(flag("harper_dead") && !flag("low_road_complete")) {}
 }
 
 monitor_bigrig_guys() {
@@ -1551,7 +1536,7 @@ monitor_bigrig_guys() {
   a_ai_guys = get_ai_group_ai("low_road_choke_group1");
 
   foreach(ai_guy in a_ai_guys) {
-  ai_guy die();
+    ai_guy die();
   }
 }
 
@@ -1614,8 +1599,7 @@ get_rush_enemies() {
 }
 
 attack_potus() {
-  if(flag("sniper_option")) {
-  }
+  if(flag("sniper_option")) {}
 
   self setthreatbiasgroup("potus_rushers");
   self.aggressivemode = 1;
@@ -1634,8 +1618,7 @@ g20_group_meetup() {
     scene_wait("g20_group1_greet_harper");
     level thread harper_set_friendly_fire();
     run_scene_and_delete("harper_wait_in_cougar");
-  } else {
-  }
+  } else {}
 }
 
 harper_set_friendly_fire() {
@@ -1742,8 +1725,7 @@ rappel_option() {
 
   if(level.player player_has_sniper_weapon()) {
     set_objective(level.obj_rappel, t_rappel.origin, &"LA_SHARED_OBJ_RAPPEL");
-  }
-  else {
+  } else {
     set_objective(level.obj_rappel, t_rappel.origin, &"LA_SHARED_RAPPEL");
   }
 

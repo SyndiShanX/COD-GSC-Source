@@ -98,8 +98,7 @@ statadd(var_00, var_01, var_02) {
 statgetchild(var_00, var_01) {
   if(var_00 == "round") {
     return self getrankedplayerdata("common", var_00, var_01);
-  }
-  else {
+  } else {
     return self getrankedplayerdata("mp", var_00, var_01);
   }
 }
@@ -271,7 +270,7 @@ writebestscores() {
   foreach(var_01 in level.players) {
     if(isDefined(var_01) && var_01 scripts\mp\utility\game::rankingenabled()) {
       foreach(var_04, var_03 in var_1.bufferedbestscorestats) {
-      var_01 setrankedplayerdata("mp", "bestScores", var_04, var_03);
+        var_01 setrankedplayerdata("mp", "bestScores", var_04, var_03);
       }
     }
   }
@@ -282,12 +281,12 @@ writebufferedstats() {
 
   if(var_00) {
     foreach(var_03, var_02 in self.bufferedstats) {
-    self setrankedplayerdata("mp", var_03, var_02);
+      self setrankedplayerdata("mp", var_03, var_02);
     }
 
     if(!isai(self)) {
       foreach(var_03, var_02 in self.squadmemberbufferedstats) {
-      self setrankedplayerdata("rankedloadouts", "squadMembers", var_03, var_02);
+        self setrankedplayerdata("rankedloadouts", "squadMembers", var_03, var_02);
       }
     }
   }
@@ -316,7 +315,7 @@ func_13E05() {
 
   if(scripts\mp\utility\game::waslastround() || !scripts\mp\utility\game::isroundbased() && scripts\mp\utility\game::hittimelimit()) {
     foreach(var_01 in level.players) {
-    var_01 func_93FB(var_1.kills, var_1.deaths);
+      var_01 func_93FB(var_1.kills, var_1.deaths);
     }
   }
 }
@@ -510,7 +509,7 @@ func_12F85() {
   var_05 = 0;
 
   foreach(var_07 in level.players) {
-  var_05 = var_05 + var_7.timeplayed["total"];
+    var_05 = var_05 + var_7.timeplayed["total"];
   }
 
   incrementcounter("global_minutes", int(var_05 / 60));

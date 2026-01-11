@@ -81,7 +81,7 @@ chopper_boss_locs_monitor_disable_clean_up() {
 chopper_boss_locs_monitor_disable_reset() {
   if(isDefined(self.chopper_boss_locs_disabled) && self.chopper_boss_locs_disabled.size) {
     foreach(var_1 in self.chopper_boss_locs_disabled) {
-    var_1 chopper_boss_loc_enable();
+      var_1 chopper_boss_loc_enable();
     }
   }
 
@@ -277,8 +277,7 @@ chopper_boss_fire_mgturrets(var_0) {
   foreach(var_3 in self.mgturret) {
     if(isai(var_0)) {
       var_3 settargetentity(var_0, (var_0 getEye() - var_0.origin) * 0.7);
-    }
-    else if(isplayer(var_0)) {
+    } else if(isplayer(var_0)) {
       if(maps\_utility::is_player_down(var_0)) {
         var_1 = get_chopperboss_data("shot_count_long");
         var_3 settargetentity(var_0);
@@ -309,7 +308,7 @@ chopper_boss_fire_mgturrets(var_0) {
   wait(get_chopperboss_data("weapon_cooldown_time"));
 
   foreach(var_3 in self.mgturret) {
-  var_3 stopbarrelspin();
+    var_3 stopbarrelspin();
   }
 }
 
@@ -321,8 +320,7 @@ chopper_boss_fire_weapon(var_0) {
 
   if(isai(var_0)) {
     self setturrettargetent(var_0, var_0 getEye() - var_0.origin);
-  }
-  else if(isplayer(var_0)) {
+  } else if(isplayer(var_0)) {
     if(maps\_utility::is_player_down(var_0)) {
       var_1 = get_chopperboss_data("shot_count_long");
       self setturrettargetent(var_0);
@@ -337,8 +335,7 @@ chopper_boss_fire_weapon(var_0) {
   for(var_3 = 0; var_3 < var_1; var_3++) {
     if(isDefined(self.weapon)) {
       var_4 = weaponfiretime(self.weapon);
-    }
-    else {
+    } else {
       var_4 = 0.65;
     }
 
@@ -353,11 +350,9 @@ chopper_boss_fire_weapon(var_0) {
 chopper_boss_pre_move_func() {
   if(isDefined(chopper_boss_forced_target_get())) {
     self setlookatent(chopper_boss_forced_target_get());
-  }
-  else if(isDefined(self.heli_target)) {
+  } else if(isDefined(self.heli_target)) {
     self setlookatent(self.heli_target);
-  }
-  else {
+  } else {
     var_0 = common_scripts\utility::getclosest(self.origin, level.players);
 
     if(isDefined(var_0)) {
@@ -371,8 +366,7 @@ chopper_boss_post_move_func() {}
 chopper_boss_stop_func() {
   if(isDefined(self.heli_target)) {
     self.fired_weapons = maps\_chopperboss::chopper_boss_attempt_firing(self.heli_target);
-  }
-  else {
+  } else {
     self.fired_weapons = 0;
   }
 }

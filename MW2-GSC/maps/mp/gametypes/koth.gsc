@@ -95,14 +95,11 @@ main() {
 
   if(getDvarInt("g_hardcore")) {
     game["dialog"]["gametype"] = "hc_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("camera_thirdPerson")) {
+  } else if(getDvarInt("camera_thirdPerson")) {
     game["dialog"]["gametype"] = "thirdp_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_diehard")) {
+  } else if(getDvarInt("scr_diehard")) {
     game["dialog"]["gametype"] = "dh_" + game["dialog"]["gametype"];
-  }
-  else if(getDvarInt("scr_" + level.gameType + "_promode")) {
+  } else if(getDvarInt("scr_" + level.gameType + "_promode")) {
     game["dialog"]["gametype"] = game["dialog"]["gametype"] + "_pro";
   }
 }
@@ -183,8 +180,7 @@ onStartGameType() {
 
   if(level.hqSpawnTime) {
     updateObjectiveHintMessages(level.objectiveHintPrepareHQ, level.objectiveHintPrepareHQ);
-  }
-  else {
+  } else {
     updateObjectiveHintMessages(level.objectiveHintCaptureHQ, level.objectiveHintCaptureHQ);
   }
 
@@ -352,50 +348,50 @@ HQMainLoop() {
 
     thread scriptDestroyHQ();
 
-      while(1) {
-        ownerTeam = radioObject maps\mp\gametypes\_gameobjects::getOwnerTeam();
-        otherTeam = getOtherTeam(ownerTeam);
+    while(1) {
+      ownerTeam = radioObject maps\mp\gametypes\_gameobjects::getOwnerTeam();
+      otherTeam = getOtherTeam(ownerTeam);
 
-        if(ownerTeam == "allies") {
-          updateObjectiveHintMessages(level.objectiveHintDefendHQ, level.objectiveHintDestroyHQ);
-        } else {
-          updateObjectiveHintMessages(level.objectiveHintDestroyHQ, level.objectiveHintDefendHQ);
-        }
-
-        radioObject maps\mp\gametypes\_gameobjects::allowUse("enemy");
-        radioObject maps\mp\gametypes\_gameobjects::set2DIcon("friendly", "waypoint_defend");
-        radioObject maps\mp\gametypes\_gameobjects::set3DIcon("friendly", "waypoint_defend");
-        radioObject maps\mp\gametypes\_gameobjects::set2DIcon("enemy", "waypoint_capture");
-        radioObject maps\mp\gametypes\_gameobjects::set3DIcon("enemy", "waypoint_capture");
-
-        if(!level.kothMode) {
-          radioObject maps\mp\gametypes\_gameobjects::setUseText(&"MP_DESTROYING_HQ");
-        }
-
-        radioObject.onUse = ::onRadioDestroy;
-
-        if(level.hqAutoDestroyTime) {
-          timerDisplay[ownerTeam].label = hqDestroyedInFriendlyStr;
-          //if( !level.splitscreen )
-          timerDisplay[ownerTeam].alpha = 1;
-
-          timerDisplay[otherTeam].label = hqDestroyedInEnemyStr;
-          //if( !level.splitscreen )
-          timerDisplay[otherTeam].alpha = 1;
-        }
-
-        level waittill("hq_destroyed");
-
-        timerDisplay[otherTeam].alpha = 0;
-
-        if(!level.kothmode || level.hqDestroyedByTimer) {
-          break;
-        }
-
-        thread forceSpawnTeam(ownerTeam);
-
-        radioObject maps\mp\gametypes\_gameobjects::setOwnerTeam(getOtherTeam(ownerTeam));
+      if(ownerTeam == "allies") {
+        updateObjectiveHintMessages(level.objectiveHintDefendHQ, level.objectiveHintDestroyHQ);
+      } else {
+        updateObjectiveHintMessages(level.objectiveHintDestroyHQ, level.objectiveHintDefendHQ);
       }
+
+      radioObject maps\mp\gametypes\_gameobjects::allowUse("enemy");
+      radioObject maps\mp\gametypes\_gameobjects::set2DIcon("friendly", "waypoint_defend");
+      radioObject maps\mp\gametypes\_gameobjects::set3DIcon("friendly", "waypoint_defend");
+      radioObject maps\mp\gametypes\_gameobjects::set2DIcon("enemy", "waypoint_capture");
+      radioObject maps\mp\gametypes\_gameobjects::set3DIcon("enemy", "waypoint_capture");
+
+      if(!level.kothMode) {
+        radioObject maps\mp\gametypes\_gameobjects::setUseText(&"MP_DESTROYING_HQ");
+      }
+
+      radioObject.onUse = ::onRadioDestroy;
+
+      if(level.hqAutoDestroyTime) {
+        timerDisplay[ownerTeam].label = hqDestroyedInFriendlyStr;
+        //if( !level.splitscreen )
+        timerDisplay[ownerTeam].alpha = 1;
+
+        timerDisplay[otherTeam].label = hqDestroyedInEnemyStr;
+        //if( !level.splitscreen )
+        timerDisplay[otherTeam].alpha = 1;
+      }
+
+      level waittill("hq_destroyed");
+
+      timerDisplay[otherTeam].alpha = 0;
+
+      if(!level.kothmode || level.hqDestroyedByTimer) {
+        break;
+      }
+
+      thread forceSpawnTeam(ownerTeam);
+
+      radioObject maps\mp\gametypes\_gameobjects::setOwnerTeam(getOtherTeam(ownerTeam));
+    }
 
     level notify("hq_reset");
 
@@ -515,37 +511,37 @@ scriptDestroyHQ() {
   }
 }
 
-  onRadioDestroy(player) {
-    team = player.pers["team"];
-    otherTeam = "axis";
-    if(team == "axis") {
-      otherTeam = "allies";
-    }
-
-    //player logString( "radio destroyed" );
-    player thread[[level.onXPEvent]]("capture");
-    maps\mp\gametypes\_gamescore::givePlayerScore("capture", player);
-    player incPlayerStat("hqsdestroyed", 1);
-    player thread maps\mp\_matchdata::logGameEvent("destroy", player.origin);
-
-    if(level.kothmode) {
-      teamPlayerCardSplash("callout_capturedhq", player);
-      leaderDialog("hq_secured", team);
-      leaderDialog("hq_enemy_captured", otherTeam);
-    } else {
-      teamPlayerCardSplash("callout_destroyedhq", player);
-      leaderDialog("hq_secured", team);
-      leaderDialog("hq_enemy_destroyed", otherTeam);
-    }
-    thread playSoundOnPlayers("mp_war_objective_taken", team);
-    thread playSoundOnPlayers("mp_war_objective_lost", otherTeam);
-
-    level notify("hq_destroyed");
-
-    if(level.kothmode) {
-      level thread awardHQPoints(team);
-    }
+onRadioDestroy(player) {
+  team = player.pers["team"];
+  otherTeam = "axis";
+  if(team == "axis") {
+    otherTeam = "allies";
   }
+
+  //player logString( "radio destroyed" );
+  player thread[[level.onXPEvent]]("capture");
+  maps\mp\gametypes\_gamescore::givePlayerScore("capture", player);
+  player incPlayerStat("hqsdestroyed", 1);
+  player thread maps\mp\_matchdata::logGameEvent("destroy", player.origin);
+
+  if(level.kothmode) {
+    teamPlayerCardSplash("callout_capturedhq", player);
+    leaderDialog("hq_secured", team);
+    leaderDialog("hq_enemy_captured", otherTeam);
+  } else {
+    teamPlayerCardSplash("callout_destroyedhq", player);
+    leaderDialog("hq_secured", team);
+    leaderDialog("hq_enemy_destroyed", otherTeam);
+  }
+  thread playSoundOnPlayers("mp_war_objective_taken", team);
+  thread playSoundOnPlayers("mp_war_objective_lost", otherTeam);
+
+  level notify("hq_destroyed");
+
+  if(level.kothmode) {
+    level thread awardHQPoints(team);
+  }
+}
 
 DestroyHQAfterTime(time) {
   level endon("game_ended");
@@ -576,8 +572,7 @@ awardHQPoints(team) {
 
   if(level.proMode) {
     seconds = int(level.hqAutoDestroyTime / steps);
-  }
-  else {
+  } else {
     seconds = 5;
   }
 
@@ -585,8 +580,7 @@ awardHQPoints(team) {
   while(!level.gameEnded) {
     if(level.proMode && level.hqAutoDestroyTime) {
       maps\mp\gametypes\_gamescore::giveTeamScoreForObjective(team, int(5 * (curStep + 1)));
-    }
-    else {
+    } else {
       maps\mp\gametypes\_gamescore::giveTeamScoreForObjective(team, seconds);
     }
 
@@ -597,8 +591,7 @@ awardHQPoints(team) {
         if(level.proMode) {
           if(level.hqAutoDestroyTime) {
             player thread maps\mp\gametypes\_rank::giveRankXP("defend", int(baseLine + (delta * curStep)));
-          }
-          else {
+          } else {
             player thread maps\mp\gametypes\_rank::giveRankXP("defend", int(baseLine + delta));
           }
         } else {
@@ -703,7 +696,7 @@ SetupRadios() {
     radio.gameObject maps\mp\gametypes\_gameobjects::disableObject();
     radio.gameObject maps\mp\gametypes\_gameobjects::setModelVisibility( false );
     radio.trig.useObj = radio.gameObject;
-		
+    		
     radio setUpNearbySpawns();
     */
   }
@@ -728,7 +721,7 @@ SetupRadios() {
 
   thread kothDebug();
 
-    return true;
+  return true;
 }
 
 makeRadioActive() {
@@ -796,8 +789,7 @@ PickRadioTospawn() {
     player.dist = 0;
     if(player.team == "allies") {
       validAllies[validAllies.size] = player;
-    }
-    else {
+    } else {
       validAxis[validAxis.size] = player;
     }
   }
@@ -861,8 +853,7 @@ PickRadioTospawn() {
     if(isDefined(level.prevradio2) && radio == level.prevradio2) {
       if(level.radios.size > 2) {
         continue;
-      }
-      else {
+      } else {
         cost += 512;
       }
     }

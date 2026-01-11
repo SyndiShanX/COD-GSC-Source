@@ -222,8 +222,7 @@ introscreen_lui_typewriter_delay(level_prefix, number_of_lines, totaltime, delay
 
     if(isDefined(delay_after_text)) {
       wait(delay_after_text);
-    }
-    else {
+    } else {
       wait 2.5;
     }
   }
@@ -232,8 +231,7 @@ introscreen_lui_typewriter_delay(level_prefix, number_of_lines, totaltime, delay
 
   if(isDefined(level.introscreen_shader_fadeout_time)) {
     level.introblackbacking fadeovertime(level.introscreen_shader_fadeout_time);
-  }
-  else {
+  } else {
     level.introblackbacking fadeovertime(1.5);
   }
 
@@ -282,8 +280,7 @@ introscreen_create_redacted_line(string, redacted_line_time, start_rubout_time, 
   if(!isDefined(scale)) {
     if(level.splitscreen && !level.hidef) {
       fontscale = 2.5;
-    }
-    else {
+    } else {
       fontscale = 1.5;
     }
   } else
@@ -366,8 +363,7 @@ introscreen_create_typewriter_line(string, letter_time, decay_start_time, decay_
   if(!isDefined(scale)) {
     if(level.splitscreen && !level.hidef) {
       fontscale = 2.5;
-    }
-    else {
+    } else {
       fontscale = 1.5;
     }
   } else
@@ -440,8 +436,7 @@ introscreen_create_line(string, type, scale, font, color) {
   if(!isDefined(scale)) {
     if(level.splitscreen && !level.hidef) {
       fontscale = 2.75;
-    }
-    else {
+    } else {
       fontscale = 1.75;
     }
   } else
@@ -554,8 +549,7 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
 
     if(!isDefined(level.introscreen_shader)) {
       level.introblackbacking setshader("white", 640, 480);
-    }
-    else if(level.introscreen_shader != "none") {
+    } else if(level.introscreen_shader != "none") {
       level.introblackbacking setshader(level.introscreen_shader, 640, 480);
     }
   }
@@ -639,8 +633,7 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
 
     if(isDefined(delay_after_text)) {
       wait(delay_after_text);
-    }
-    else {
+    } else {
       wait 2.5;
     }
   }
@@ -649,8 +642,7 @@ introscreen_redact_delay(string1, string2, string3, string4, string5, pausetime,
 
   if(isDefined(level.introscreen_shader_fadeout_time)) {
     level.introblackbacking fadeovertime(level.introscreen_shader_fadeout_time);
-  }
-  else {
+  } else {
     level.introblackbacking fadeovertime(1.5);
   }
 
@@ -810,8 +802,7 @@ introscreen_typewriter_delay(string1, string2, string3, string4, string5, letter
 
     if(isDefined(delay_after_text)) {
       wait(delay_after_text);
-    }
-    else {
+    } else {
       wait 2.5;
     }
   }
@@ -820,8 +811,7 @@ introscreen_typewriter_delay(string1, string2, string3, string4, string5, letter
 
   if(isDefined(level.introscreen_shader_fadeout_time)) {
     level.introblackbacking fadeovertime(level.introscreen_shader_fadeout_time);
-  }
-  else {
+  } else {
     level.introblackbacking fadeovertime(1.5);
   }
 
@@ -896,8 +886,7 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
 
   if(!isDefined(level.introscreen_shader)) {
     level.introblackbacking setshader("black", 640, 480);
-  }
-  else if(level.introscreen_shader != "none") {
+  } else if(level.introscreen_shader != "none") {
     level.introblackbacking setshader(level.introscreen_shader, 640, 480);
   }
 
@@ -924,8 +913,7 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
 
   if(isDefined(pausetime1)) {
     wait(pausetime1);
-  }
-  else {
+  } else {
     wait 2;
   }
 
@@ -940,8 +928,7 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   if(isDefined(string4)) {
     if(isDefined(pausetime2)) {
       wait(pausetime2);
-    }
-    else {
+    } else {
       wait 2;
     }
 
@@ -951,8 +938,7 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
   if(isDefined(string5)) {
     if(isDefined(pausetime2)) {
       wait(pausetime2);
-    }
-    else {
+    } else {
       wait 2;
     }
 
@@ -968,8 +954,7 @@ introscreen_delay(string1, string2, string3, string4, string5, pausetime1, pause
 
   if(isDefined(timebeforefade)) {
     wait(timebeforefade);
-  }
-  else {
+  } else {
     wait 3;
   }
 

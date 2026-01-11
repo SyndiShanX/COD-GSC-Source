@@ -438,7 +438,7 @@ huditemsoff() {
       }
 
       foreach(var_3 in level.huditem[var_0[var_1]]) {
-      var_3 destroy();
+        var_3 destroy();
       }
     }
   }
@@ -930,8 +930,7 @@ weaponfiredthread() {
     }
     if(var_0[0] == "ac130_105mm") {
       level.player playSound("ac130_105mm_fire");
-    }
-    else if(var_0[0] == "ac130_40mm") {
+    } else if(var_0[0] == "ac130_40mm") {
       level.player playSound("ac130_40mm_fire");
     }
 
@@ -973,8 +972,7 @@ ac130_25mm_loop_rumble() {
 
     if(!var_1 && var_3) {
       var_0 playrumblelooponentity("ac130_25mm_fire");
-    }
-    else if(var_1 && !var_3) {
+    } else if(var_1 && !var_3) {
       var_0 stoprumble("ac130_25mm_fire");
     }
 
@@ -1044,8 +1042,7 @@ setammo() {
 
   if(common_scripts\utility::flag("clear_to_engage")) {
     var_0 = 1;
-  }
-  else {
+  } else {
     var_0 = 0;
   }
 
@@ -1507,11 +1504,9 @@ context_sensative_dialog_kill_thread() {
 
     if(level.enemieskilledintimewindow >= 3) {
       var_2 = "large_group";
-    }
-    else if(level.enemieskilledintimewindow == 2) {
+    } else if(level.enemieskilledintimewindow == 2) {
       var_2 = "small_group";
-    }
-    else {
+    } else {
       var_2 = "single";
 
       if(randomint(3) != 1) {
@@ -1611,8 +1606,7 @@ context_sensative_dialog_play_random_group_sound(var_0, var_1, var_2) {
   if(!common_scripts\utility::flag("allow_context_sensative_dialog")) {
     if(var_2) {
       common_scripts\utility::flag_wait("allow_context_sensative_dialog");
-    }
-    else {
+    } else {
       return;
     }
   }
@@ -1724,8 +1718,7 @@ playsoundoverradio(var_0, var_1, var_2) {
 
     var_4 = playaliasoverradio(level.radioforcedtransmissionqueue[0]);
 
-    if(!level.radio_in_use && !var_4) {
-    }
+    if(!level.radio_in_use && !var_4) {}
   }
 
   level.radioforcedtransmissionqueue = maps\_utility::array_remove_index(level.radioforcedtransmissionqueue, 0);
@@ -1827,8 +1820,7 @@ debug_circle_drawlines(var_0, var_1, var_2, var_3, var_4) {
 
     if(var_5 + 1 >= var_0.size) {
       var_7 = var_0[0];
-    }
-    else {
+    } else {
       var_7 = var_0[var_5 + 1];
     }
 

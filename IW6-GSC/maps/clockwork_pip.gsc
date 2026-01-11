@@ -108,8 +108,7 @@ pip_set_entity(var_0, var_1, var_2, var_3, var_4) {
 
     if(isDefined(var_1)) {
       level.pip.tag = var_1;
-    }
-    else {
+    } else {
       level.pip.tag = "tag_origin";
     }
   } else
@@ -121,8 +120,7 @@ pip_set_entity(var_0, var_1, var_2, var_3, var_4) {
 pip_static() {
   if(!isDefined(level.pip.static_overlay)) {
     var_0 = newhudelem();
-  }
-  else {
+  } else {
     var_0 = level.pip.static_overlay;
   }
 
@@ -224,7 +222,7 @@ pip_open() {
   var_0 = 0.1;
 
   foreach(var_3, var_2 in level.pip.borders) {
-  var_2 thread pip_open_l_corner(var_3, var_0);
+    var_2 thread pip_open_l_corner(var_3, var_0);
   }
 
   wait(var_0 + 0.05);
@@ -345,7 +343,7 @@ pip_disable() {
   var_0 = 0.1;
 
   foreach(var_3, var_2 in level.pip.borders) {
-  var_2 thread pip_close_l_corner(var_3, var_0);
+    var_2 thread pip_close_l_corner(var_3, var_0);
   }
 
   if(isDefined(level.pip.static_overlay)) {

@@ -4,7 +4,6 @@
 ********************************************************/
 
 #include scripts\core_common\lui_shared;
-
 #namespace zm_trial_timer;
 
 class czm_trial_timer: cluielem {
@@ -17,12 +16,12 @@ class czm_trial_timer: cluielem {
   }
 
   function open(localclientnum) {
-    cluielem::open(localclientnum, #"zm_trial_timer");
+    cluielem::open(localclientnum, # "zm_trial_timer");
   }
 
   function function_fa582112(localclientnum) {
     cluielem::function_fa582112(localclientnum);
-    set_data(localclientnum, "timer_text", #"");
+    set_data(localclientnum, "timer_text", # "");
     set_data(localclientnum, "under_round_rules", 0);
   }
 

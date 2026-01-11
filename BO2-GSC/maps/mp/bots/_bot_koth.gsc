@@ -219,8 +219,7 @@ bot_hill_grenade() {
 
   if(isDefined(enemy)) {
     origin = enemy.origin;
-  }
-  else {
+  } else {
     origin = level.zone.gameobject.curorigin;
   }
 
@@ -236,8 +235,7 @@ bot_hill_grenade() {
     if(gettime() > level.next_grenade_time) {
       if(!self maps\mp\bots\_bot_combat::bot_combat_throw_lethal(origin)) {
         self maps\mp\bots\_bot_combat::bot_combat_throw_tactical(origin);
-      }
-      else {
+      } else {
         level.next_grenade_time = gettime() + randomintrange(60000, 120000);
       }
     }

@@ -153,15 +153,13 @@ silenthawk_lands_and_unloads(var_0) {
 set_stage(var_0, var_1, var_2) {
   if(!maps\_utility::ent_flag_exist("staged_guy_" + var_2)) {
     maps\_utility::ent_flag_init("staged_guy_" + var_2);
-  }
-  else {
+  } else {
     maps\_utility::ent_flag_clear("staged_guy_" + var_2);
   }
 
   if(!maps\_utility::ent_flag_exist("guy2_in_" + var_2)) {
     maps\_utility::ent_flag_init("guy2_in_" + var_2);
-  }
-  else {
+  } else {
     maps\_utility::ent_flag_clear("guy2_in_" + var_2);
   }
 
@@ -172,8 +170,7 @@ set_stage(var_0, var_1, var_2) {
 
   if(isDefined(self.new_stage_heli_spawn)) {
     var_5.origin = self.origin;
-  }
-  else {
+  } else {
     var_5.origin = common_scripts\utility::drop_to_ground(var_4.origin) + (0, 0, self.originheightoffset);
   }
 

@@ -14,7 +14,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\core_common\weapons_shared;
 #include scripts\weapons\weaponobjects;
-
 #namespace gadget_tripwire;
 
 autoexec __init__system__() {
@@ -99,7 +98,7 @@ function_9f97e1a3(watcher) {
   watcher.ondestroyed = &function_9b3a657f;
   watcher.var_994b472b = &function_9a98f669;
   watcher.deleteonplayerspawn = 0;
-  watcher.activatesound = #"hash_3185e3ad37d8b947";
+  watcher.activatesound = # "hash_3185e3ad37d8b947";
   watcher.ontimeout = &function_9b3a657f;
   watcher.onfizzleout = &function_9b3a657f;
 }
@@ -262,7 +261,7 @@ function_6c66b650() {
 }
 
 function_a4b3da97(trace) {
-  if(trace[#"fraction"] < 1) {
+  if(trace[# "fraction"] < 1) {
     return false;
   }
 
@@ -428,7 +427,7 @@ function_d334c3fa(endpoint) {
 }
 
 function_15de8daf() {
-  self endoncallback(&function_84101bb5, #"death");
+  self endoncallback(&function_84101bb5, # "death");
   self.var_d33355ff = [];
 
   while(true) {
@@ -455,23 +454,23 @@ function_15de8daf() {
             tripwire.var_d33355ff[tripwire.var_d33355ff.size] = self;
             trace = beamtrace(tripwire.var_db7f2def, self.var_db7f2def, 1, self, 0, 0, tripwire, 1);
 
-            if(trace[#"fraction"] < 0.99) {
-              if(function_430b5b99(trace[#"entity"], self)) {
+            if(trace[# "fraction"] < 0.99) {
+              if(function_430b5b99(trace[# "entity"], self)) {
                 level notify(#"tripwire_detonation", {
-                  #entity: trace[#"entity"]
+                  #entity: trace[# "entity"]
                 });
-                self thread function_9e546fb3(undefined, self.weapon, undefined, tripwire, trace[#"entity"]);
+                self thread function_9e546fb3(undefined, self.weapon, undefined, tripwire, trace[# "entity"]);
               }
 
-              if(function_55e95173(trace[#"entity"])) {
+              if(function_55e95173(trace[# "entity"])) {
                 trace = beamtrace(self.var_db7f2def, tripwire.var_db7f2def, 1, self, 0, 0, tripwire, 1);
 
-                if(trace[#"fraction"] < 0.99) {
-                  if(function_430b5b99(trace[#"entity"], self)) {
+                if(trace[# "fraction"] < 0.99) {
+                  if(function_430b5b99(trace[# "entity"], self)) {
                     level notify(#"tripwire_detonation", {
-                      #entity: trace[#"entity"]
+                      #entity: trace[# "entity"]
                     });
-                    self thread function_9e546fb3(undefined, self.weapon, undefined, tripwire, trace[#"entity"]);
+                    self thread function_9e546fb3(undefined, self.weapon, undefined, tripwire, trace[# "entity"]);
                   }
                 }
               }
@@ -494,8 +493,8 @@ function_15de8daf() {
       if(dotrace) {
         trace = beamtrace(self.var_db7f2def - self.hitnormal * 5, endpos, 1, self);
 
-        if(trace[#"fraction"] < 0.95) {
-          if(function_430b5b99(trace[#"entity"], self)) {
+        if(trace[# "fraction"] < 0.95) {
+          if(function_430b5b99(trace[# "entity"], self)) {
             self thread function_9e546fb3(undefined, self.weapon, undefined, undefined);
           }
         }
@@ -575,10 +574,10 @@ function_9e546fb3(attacker, weapon, target, var_2f6adbe3, tripper) {
     }
 
     explosiondir = self.hitnormal;
-    explosionsound = #"exp_tripwire";
+    explosionsound = # "exp_tripwire";
 
     if(isDefined(var_2f6adbe3)) {
-      explosionsound = #"exp_tripwire";
+      explosionsound = # "exp_tripwire";
       explosiondir = self.origin - var_2f6adbe3.origin;
       explosiondir = vectornormalize(explosiondir);
       perpvec = perpendicularvector(explosiondir);
@@ -761,7 +760,7 @@ function_7a905654(watcher) {
     }
 
     if(level.teambased && isplayer(attacker)) {
-      if(!(isDefined(level.hardcoremode) && level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[#"team"]) && self.owner !== attacker) {
+      if(!(isDefined(level.hardcoremode) && level.hardcoremode) && !util::function_fbce7263(self.owner.team, attacker.pers[# "team"]) && self.owner !== attacker) {
         continue;
       }
     }

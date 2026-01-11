@@ -227,11 +227,9 @@ glass_logic() {
 
   if(isDefined(self.script_health)) {
     glasshealth = self.script_health;
-  }
-  else if(isDefined(cracked)) {
+  } else if(isDefined(cracked)) {
     glasshealth = 99;
-  }
-  else {
+  } else {
     glasshealth = 250;
   }
 
@@ -246,11 +244,9 @@ glass_logic() {
 
     if(!isDefined(damagetype)) {
       damage = 100000;
-    }
-    else if(damagetype == "MOD_GRENADE_SPLASH") {
+    } else if(damagetype == "MOD_GRENADE_SPLASH") {
       damage = damage * 1.75;
-    }
-    else if(damagetype == "MOD_IMPACT") {
+    } else if(damagetype == "MOD_IMPACT") {
       damage = 100000;
     }
 
@@ -276,11 +272,9 @@ glass_logic() {
 
       if(!isDefined(damagetype)) {
         damage = 100000;
-      }
-      else if(damagetype == "MOD_GRENADE_SPLASH") {
+      } else if(damagetype == "MOD_GRENADE_SPLASH") {
         damage = damage * 1.75;
-      }
-      else if(damagetype == "MOD_IMPACT") {
+      } else if(damagetype == "MOD_IMPACT") {
         break;
       }
 
@@ -324,8 +318,7 @@ oil_spill_think() {
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
       self.damageowner = self;
-    }
-    else {
+    } else {
       self.damageowner = attacker;
     }
 
@@ -359,8 +352,7 @@ oil_spill_burn_after() {
     }
     if(isDefined(self.barrel.script_selfisattacker) && self.barrel.script_selfisattacker) {
       self.damageowner = self.barrel;
-    }
-    else {
+    } else {
       self.damageowner = attacker;
     }
 
@@ -458,8 +450,7 @@ explodable_barrel_think() {
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
       self.damageowner = self;
-    }
-    else {
+    } else {
       self.damageowner = attacker;
     }
 
@@ -564,8 +555,7 @@ explodable_barrel_explode() {
 
   if(randomint(2) == 0) {
     self setModel("global_explosive_barrel_d");
-  }
-  else {
+  } else {
     self setModel("global_explosive_barrel_d");
   }
 
@@ -608,8 +598,7 @@ explodable_tarpcrate_think() {
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
       self.damageowner = self;
-    }
-    else {
+    } else {
       self.damageowner = attacker;
     }
 
@@ -704,8 +693,7 @@ explodable_tarpcrate_explode() {
 
   if(randomint(2) == 0) {
     self setModel("static_peleliu_crate_tarp_d");
-  }
-  else {
+  } else {
     self setModel("static_peleliu_crate_tarp_d");
   }
 
@@ -751,8 +739,7 @@ flammable_crate_think() {
     }
     if(isDefined(self.script_selfisattacker) && self.script_selfisattacker) {
       self.damageowner = self;
-    }
-    else {
+    } else {
       self.damageowner = attacker;
     }
 
@@ -845,8 +832,7 @@ flammable_crate_explode() {
 
   if(randomint(2) == 0) {
     self setModel("global_flammable_crate_jap_piece01_d");
-  }
-  else {
+  } else {
     self setModel("global_flammable_crate_jap_piece01_d");
   }
 
@@ -876,8 +862,7 @@ shuddering_entity_think() {
 
     if(helmet) {
       self vibrate(direction_vec, 20, 0.6, 0.75);
-    }
-    else {
+    } else {
       self vibrate(direction_vec, 0.4, 0.4, 0.4);
     }
 
@@ -894,8 +879,7 @@ tincan_think() {
 
   if(issentient(ent)) {
     direction_org = ent getEye() - (0, 0, randomint(50) + 50);
-  }
-  else {
+  } else {
     direction_org = ent.origin;
   }
 
@@ -920,8 +904,7 @@ helmet_logic() {
 
   if(issentient(ent)) {
     direction_org = ent getEye();
-  }
-  else {
+  } else {
     direction_org = ent.origin;
   }
 
@@ -949,8 +932,7 @@ allowbreak(ent) {
 
   if(level.breakingents.size == 0) {
     return false;
-  }
-  else {
+  } else {
     for(i = 0; i < level.breakingents.size; i++) {
       if(ent == level.breakingents[i]) {
         return true;
@@ -1167,8 +1149,7 @@ breakable_logic(type) {
     case "wood box":
       if(isDefined(level.crateimpactsound)) {
         soundalias = level.crateimpactsound;
-      }
-      else {
+      } else {
         soundalias = "bullet_large_vase";
       }
 
@@ -1216,8 +1197,7 @@ breakable_logic(type) {
 
   if(!isDefined(self.dontremove)) {
     self delete();
-  }
-  else {
+  } else {
     self.dontremove = 0;
     self notify("ok_remove");
   }
@@ -1548,8 +1528,7 @@ pieces_move(origin) {
 
     if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(4000)) * -1, 5, 0, 0);
-    }
-    else {
+    } else {
       org rotateroll(800 + randomfloat(4000), 5, 0, 0);
     }
   } else {
@@ -1558,8 +1537,7 @@ pieces_move(origin) {
 
     if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(1000)) * -1, 5, 0, 0);
-    }
-    else {
+    } else {
       org rotateroll(800 + randomfloat(1000), 5, 0, 0);
     }
   }

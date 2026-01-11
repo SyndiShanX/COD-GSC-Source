@@ -64,11 +64,9 @@ teleport_to_target() {
 
     if(isDefined(var_0.script_animation)) {
       maps\ship_graveyard_stealth::stealth_idle(var_0, var_0.script_animation);
-    }
-    else if(isDefined(var_0.script_idlereach)) {
+    } else if(isDefined(var_0.script_idlereach)) {
       stealth_idle_reach(var_0);
-    }
-    else {
+    } else {
       maps\_utility::follow_path_and_animate(var_0, 0);
     }
   }
@@ -112,8 +110,7 @@ boat_shoot_entity(var_0, var_1) {
 
     if(isplayer(var_0)) {
       var_4 = var_0 getEye() + var_3;
-    }
-    else {
+    } else {
       var_4 = var_0.origin + var_3;
     }
 
@@ -122,8 +119,7 @@ boat_shoot_entity(var_0, var_1) {
 
     if(var_6 < 0) {
       var_7 = common_scripts\utility::random([70, 90, 110]);
-    }
-    else {
+    } else {
       var_7 = common_scripts\utility::random([-70, -90, -110]);
     }
 
@@ -186,8 +182,7 @@ underwater_setup() {
 
   if(maps\_utility::is_gen4()) {
     maps\_art::dof_set_base(1, 200, 5, 700, 2500, 3, 0.0);
-  }
-  else {
+  } else {
     maps\_art::dof_set_base(0, 0, 5, 700, 2500, 3, 0.0);
   }
 }
@@ -362,7 +357,7 @@ salvage_cargo_show() {
   self show();
 
   foreach(var_1 in self.linked_ents) {
-  var_1 show();
+    var_1 show();
   }
 }
 
@@ -434,7 +429,7 @@ salvage_cargo_rise(var_0) {
   self hide();
 
   foreach(var_22 in self.delete_things) {
-  var_22 delete();
+    var_22 delete();
   }
 
   badplace_cylinder("balloon" + self.balloon_count, 5, self.bottom.origin, 128, 128);
@@ -647,8 +642,7 @@ spawn_tag_fx(var_0, var_1, var_2, var_3) {
 
   if(!maps\_vehicle::isvehicle() && !isDefined(self.script_parameters)) {
     var_4 thread headlamp_death_blink(common_scripts\utility::getfx(var_0));
-  }
-  else {
+  } else {
     var_4 delete();
   }
 }
@@ -832,8 +826,7 @@ paired_death_think(var_0) {
 
     if(var_2 != level.player) {
       return;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -1059,8 +1052,7 @@ anim_generic_reach_and_animate(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_3)) {
     maps\_anim::anim_generic_custom_animmode(var_0, var_3, var_1, var_2);
-  }
-  else {
+  } else {
     maps\_anim::anim_generic(var_0, var_1, var_2);
   }
 }
@@ -1143,8 +1135,7 @@ drop_depth_charge(var_0, var_1, var_2) {
     if(var_9 < 1900) {
       if(var_9 < 900) {
         thread common_scripts\utility::play_sound_in_space("depth_charge_explo_close_2d", var_6.origin);
-      }
-      else {
+      } else {
         thread common_scripts\utility::play_sound_in_space("depth_charge_explo_mid_2d", var_6.origin);
       }
     }
@@ -1401,7 +1392,7 @@ new_dyn_balloon_think() {
   self notify("stop_bob");
 
   foreach(var_17 in self.delete_things) {
-  var_17 delete();
+    var_17 delete();
   }
 
   badplace_cylinder("balloon" + self.balloon_count, 5, self.bottom.origin, 128, 128);
@@ -1537,7 +1528,7 @@ shark_go_trig() {
   var_1 = [];
 
   foreach(var_3 in var_0) {
-  var_1 = common_scripts\utility::array_add(var_1, var_3);
+    var_1 = common_scripts\utility::array_add(var_1, var_3);
   }
 
   common_scripts\utility::array_call(var_1, ::hide);
@@ -1813,11 +1804,9 @@ shark_kill_think() {
 
     if(distance(level.player.origin, self.origin) < var_1 * var_8) {
       shark_kill_player();
-    }
-    else if(distance(level.player.origin, var_5) < var_2 * var_8) {
+    } else if(distance(level.player.origin, var_5) < var_2 * var_8) {
       shark_kill_player();
-    }
-    else if(common_scripts\utility::within_fov(var_6, var_7, level.player.origin, 0.8) && distance(level.player.origin, var_6) < var_2 * var_8 * 2) {
+    } else if(common_scripts\utility::within_fov(var_6, var_7, level.player.origin, 0.8) && distance(level.player.origin, var_6) < var_2 * var_8 * 2) {
       shark_kill_player();
     }
 
@@ -1914,14 +1903,11 @@ getdirectionfacing(var_0, var_1, var_2) {
 
   if(var_7 >= 315 || var_7 <= 45) {
     var_8 = "F";
-  }
-  else if(var_7 < 135) {
+  } else if(var_7 < 135) {
     var_8 = "R";
-  }
-  else if(var_7 < 255) {
+  } else if(var_7 < 255) {
     var_8 = "B";
-  }
-  else {
+  } else {
     var_8 = "L";
   }
 
@@ -2130,8 +2116,7 @@ try_to_melee_player(var_0) {
 
         if(var_6 == "start_melee") {
           wait 90;
-        }
-        else {
+        } else {
           wait 0.5;
         }
 
@@ -2254,8 +2239,7 @@ enemy_melee_front(var_0, var_1) {
 
   if(level.player.health < 60) {
     melee_kill_stab(var_0, var_1, var_7, var_2);
-  }
-  else {
+  } else {
     melee_damage_stab(var_0, var_1, var_7, var_2);
   }
 }

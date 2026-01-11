@@ -55,8 +55,7 @@ hitWithIncendiary(attacker, inflictor, mod) {
   }
   if(isai(self)) {
     playFXOnTag(level._effect["character_fire_death_torso"], self, "J_Spine1");
-  }
-  else {
+  } else {
     playFXOnTag(level._effect["character_fire_death_torso"], self, "J_SpineLower");
   }
   if(!isalive(self)) {

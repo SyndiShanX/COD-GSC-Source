@@ -81,8 +81,7 @@ tryUseRemoteTurret(lifeId, turretType) {
 
   if(isDefined(turret)) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -325,8 +324,7 @@ turret_onCarrierDeath(carrier) {
 
   if(self.canBePlaced) {
     self turret_setPlaced();
-  }
-  else {
+  } else {
     self delete();
   }
 }
@@ -537,8 +535,7 @@ watchOwnerMessageOnDeath(turret) {
 
     if(self.using_remote_turret) {
       self.using_remote_turret_when_died = true;
-    }
-    else {
+    } else {
       self.using_remote_turret_when_died = false;
     }
 
@@ -546,8 +543,7 @@ watchOwnerMessageOnDeath(turret) {
 
     if(!self.using_remote_turret_when_died) {
       self setLowerMessage("enter_remote_turret", level.turretSettings[turret.turretType].hintEnter, undefined, undefined, undefined, true, ENTER_MESSAGE_ALPHA, ENTER_MESSAGE_FADE_TIME, true);
-    }
-    else {
+    } else {
       turret notify("death");
     }
   }
@@ -773,8 +769,7 @@ turret_setInactive() {
 
   if(level.teamBased) {
     self maps\mp\_entityheadicons::setTeamHeadIcon("none", (0, 0, 0));
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     self maps\mp\_entityheadicons::setPlayerHeadIcon(undefined, (0, 0, 0));
   }
 

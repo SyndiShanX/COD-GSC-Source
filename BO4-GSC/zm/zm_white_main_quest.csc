@@ -17,7 +17,6 @@
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_wallbuy;
 #include scripts\zm_common\zm_weapons;
-
 #namespace white_main_quest;
 
 init_clientfields() {
@@ -35,19 +34,19 @@ init_clientfields() {
 }
 
 init_fx() {
-  level._effect[#"pap_projectile"] = #"hash_59977c4c851916e0";
-  level._effect[#"pap_projectile_end"] = #"hash_1a06427eff8dfe13";
-  level._effect[#"fx_steam_lab_dry_ice"] = "_t7/steam/fx_steam_lab_dry_ice";
-  level._effect[#"hash_675f4b19e646ca6c"] = #"hash_4310e1cb3f897c7c";
-  level._effect[#"fx8_power_wisp_lg"] = "maps/zm_white/fx8_power_wisp_lg";
-  level._effect[#"fx8_quest_mannequin_initial_sparks"] = "maps/zm_white/fx8_quest_mannequin_initial_sparks";
-  level._effect[#"fx8_quest_mannequin_charging"] = "maps/zm_white/fx8_quest_mannequin_charging";
-  level._effect[#"fx8_quest_mannequin_explode_main"] = "maps/zm_white/fx8_quest_mannequin_explode_main";
+  level._effect[# "pap_projectile"] = # "hash_59977c4c851916e0";
+  level._effect[# "pap_projectile_end"] = # "hash_1a06427eff8dfe13";
+  level._effect[# "fx_steam_lab_dry_ice"] = "_t7/steam/fx_steam_lab_dry_ice";
+  level._effect[# "hash_675f4b19e646ca6c"] = # "hash_4310e1cb3f897c7c";
+  level._effect[# "fx8_power_wisp_lg"] = "maps/zm_white/fx8_power_wisp_lg";
+  level._effect[# "fx8_quest_mannequin_initial_sparks"] = "maps/zm_white/fx8_quest_mannequin_initial_sparks";
+  level._effect[# "fx8_quest_mannequin_charging"] = "maps/zm_white/fx8_quest_mannequin_charging";
+  level._effect[# "fx8_quest_mannequin_explode_main"] = "maps/zm_white/fx8_quest_mannequin_explode_main";
 }
 
 function_a4630e54(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    self.fx_sparks = util::playFXOnTag(localclientnum, level._effect[#"fx8_quest_mannequin_initial_sparks"], self, "tag_head");
+    self.fx_sparks = util::playFXOnTag(localclientnum, level._effect[# "fx8_quest_mannequin_initial_sparks"], self, "tag_head");
     return;
   }
 
@@ -56,7 +55,7 @@ function_a4630e54(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_a290f1b0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    self.fx_charge = util::playFXOnTag(localclientnum, level._effect[#"fx8_quest_mannequin_charging"], self, "tag_origin");
+    self.fx_charge = util::playFXOnTag(localclientnum, level._effect[# "fx8_quest_mannequin_charging"], self, "tag_origin");
     return;
   }
 
@@ -65,7 +64,7 @@ function_a290f1b0(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_ac3315e5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    self.fx = util::playFXOnTag(localclientnum, level._effect[#"fx8_quest_mannequin_explode_main"], self, "tag_origin");
+    self.fx = util::playFXOnTag(localclientnum, level._effect[# "fx8_quest_mannequin_explode_main"], self, "tag_origin");
     return;
   }
 
@@ -74,7 +73,7 @@ function_ac3315e5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
 function_4b104fc5(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    self.fx = util::playFXOnTag(localclientnum, level._effect[#"fx8_power_wisp_lg"], self, "tag_origin");
+    self.fx = util::playFXOnTag(localclientnum, level._effect[# "fx8_power_wisp_lg"], self, "tag_origin");
     return;
   }
 
@@ -113,20 +112,20 @@ server_carry_audio_feedback(localclientnum, oldval, newval, bnewent, binitialsna
 
 soul_release(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval) {
-    util::playFXOnTag(localclientnum, level._effect[#"pap_projectile"], self, "tag_origin");
+    util::playFXOnTag(localclientnum, level._effect[# "pap_projectile"], self, "tag_origin");
     return;
   }
 
-  util::playFXOnTag(localclientnum, level._effect[#"pap_projectile_end"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[# "pap_projectile_end"], self, "tag_origin");
 }
 
 function_9bc657a7(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-  util::playFXOnTag(localclientnum, level._effect[#"fx_steam_lab_dry_ice"], self, "tag_origin");
+  util::playFXOnTag(localclientnum, level._effect[# "fx_steam_lab_dry_ice"], self, "tag_origin");
 }
 
 registerooze_gate_colcontrolrobotmelee(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 1) {
-    self.fx = util::playFXOnTag(localclientnum, level._effect[#"hash_675f4b19e646ca6c"], self, "tag_origin");
+    self.fx = util::playFXOnTag(localclientnum, level._effect[# "hash_675f4b19e646ca6c"], self, "tag_origin");
     return;
   }
 

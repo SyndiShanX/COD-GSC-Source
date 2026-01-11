@@ -9,8 +9,7 @@ main() {
   flag_init("give_player_abilities");
   if(maps\mp\alien\_utility::is_chaos_mode()) {
     thread maps\mp\alien\_chaos::chaos_setup_op_weapons();
-  }
-  else {
+  } else {
     thread setup_op_weapons();
   }
 
@@ -167,8 +166,7 @@ tank_skill_setup(tank_skill, secondary) {
 
     if(isDefined(secondary)) {
       self wait_for_secondary_skill_button();
-    }
-    else {
+    } else {
       self wait_for_primary_skill_button();
     }
 
@@ -188,8 +186,7 @@ tank_skill_setup(tank_skill, secondary) {
 
       if(isDefined(secondary)) {
         skill_cooldown_secondary(tank_skill);
-      }
-      else {
+      } else {
         skill_cooldown_primary(tank_skill);
       }
     }
@@ -408,8 +405,7 @@ medic_skill_setup(medic_skill, secondary) {
 
     if(isDefined(secondary)) {
       self wait_for_secondary_skill_button();
-    }
-    else {
+    } else {
       self wait_for_primary_skill_button();
     }
 
@@ -422,8 +418,7 @@ medic_skill_setup(medic_skill, secondary) {
       self create_heal_ring(variables);
       if(isDefined(secondary)) {
         skill_cooldown_secondary(medic_skill);
-      }
-      else {
+      } else {
         skill_cooldown_primary(medic_skill);
       }
     }
@@ -576,8 +571,7 @@ engineer_skill_setup(engineer_skill, secondary) {
 
     if(isDefined(secondary)) {
       self wait_for_secondary_skill_button();
-    }
-    else {
+    } else {
       self wait_for_primary_skill_button();
     }
 
@@ -591,8 +585,7 @@ engineer_skill_setup(engineer_skill, secondary) {
 
       if(isDefined(secondary)) {
         skill_cooldown_secondary(engineer_skill);
-      }
-      else {
+      } else {
         skill_cooldown_primary(engineer_skill);
       }
     }
@@ -752,8 +745,7 @@ specialist_skill_setup(specialist_skill, secondary) {
 
     if(isDefined(secondary)) {
       self wait_for_secondary_skill_button();
-    }
-    else {
+    } else {
       self wait_for_primary_skill_button();
     }
 
@@ -776,8 +768,7 @@ specialist_skill_setup(specialist_skill, secondary) {
 
       if(isDefined(secondary)) {
         skill_cooldown_secondary(specialist_skill);
-      }
-      else {
+      } else {
         skill_cooldown_primary(specialist_skill);
       }
     }
@@ -1147,8 +1138,7 @@ ability_cost(amount, secondary) {
 
   if(isDefined(secondary)) {
     self SetClientOmnvar("ui_alien_class_skill_active_secondary", true);
-  }
-  else {
+  } else {
     self SetClientOmnvar("ui_alien_class_skill_active", true);
   }
   self notify("class_skill_used");
@@ -1184,8 +1174,7 @@ generic_skill_waiter(skill_array, omnvarNum, secondary) {
 
   if(isDefined(secondary)) {
     self SetClientOmnvar("ui_alien_class_skill_secondary", omnvarNum);
-  }
-  else {
+  } else {
     self SetClientOmnvar("ui_alien_class_skill", omnvarNum);
   }
 }

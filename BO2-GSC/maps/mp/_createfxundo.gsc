@@ -84,11 +84,9 @@ apply_state_change(type, revert_state) {
 
     if(revert_state.operation == "edit") {
       undo_edit(revert_state.ent_array);
-    }
-    else if(revert_state.operation == "add") {
+    } else if(revert_state.operation == "add") {
       undo_add(revert_state.ent_array);
-    }
-    else if(revert_state.operation == "delete") {
+    } else if(revert_state.operation == "delete") {
       undo_delete(revert_state.ent_array);
     }
   } else {
@@ -96,11 +94,9 @@ apply_state_change(type, revert_state) {
 
     if(revert_state.operation == "edit") {
       undo_edit(revert_state.ent_array);
-    }
-    else if(revert_state.operation == "add") {
+    } else if(revert_state.operation == "add") {
       undo_delete(revert_state.ent_array);
-    }
-    else if(revert_state.operation == "delete") {
+    } else if(revert_state.operation == "delete") {
       undo_add(revert_state.ent_array);
     }
   }
@@ -338,8 +334,7 @@ redo() {
 
     if(revert_state.operation == "edit") {
       move_redo_state_to_limbo();
-    }
-    else {
+    } else {
       move_redo_state_to_undo();
     }
   }
@@ -420,8 +415,7 @@ array_drop(array) {
 debug_print_ent_array(array, name) {
   if(isDefined(name)) {
     println("Printing out " + name);
-  }
-  else {
+  } else {
     println("Printing out some array");
   }
 

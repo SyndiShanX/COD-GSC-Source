@@ -181,15 +181,13 @@ doQuickMessage(soundalias, saytext) {
   if(self.pers["team"] == "allies") {
     if(game["allies"] == "russian") {
       prefix = "RU_";
-    }
-    else {
+    } else {
       prefix = "US_";
     }
   } else {
     if(game["axis"] == "japanese") {
       prefix = "JP_";
-    }
-    else {
+    } else {
       prefix = "GE_";
     }
   }
@@ -201,8 +199,7 @@ doQuickMessage(soundalias, saytext) {
   } else {
     if(self.sessionteam == "allies") {
       self.headiconteam = "allies";
-    }
-    else if(self.sessionteam == "axis") {
+    } else if(self.sessionteam == "axis") {
       self.headiconteam = "axis";
     }
     self.headicon = "talkingicon";

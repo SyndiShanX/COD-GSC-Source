@@ -8,7 +8,6 @@
 #include scripts\core_common\filter_shared;
 #include scripts\core_common\system_shared;
 #include scripts\core_common\vehicle_shared;
-
 #namespace recon_wz;
 
 autoexec __init__system__() {

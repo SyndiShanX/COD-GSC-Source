@@ -19,8 +19,7 @@ bot_hq_think() {
 
   if(bot_should_patrol_hq()) {
     self bot_patrol_hq();
-  }
-  else if(!bot_has_hq_goal()) {
+  } else if(!bot_has_hq_goal()) {
     self bot_move_to_hq();
   }
 
@@ -83,8 +82,7 @@ bot_patrol_hq() {
 
     if(node.type == "Path") {
       self setstance("crouch");
-    }
-    else {
+    } else {
       self setstance("stand");
     }
 
@@ -301,8 +299,7 @@ bot_hq_grenade() {
 
   if(isDefined(enemy)) {
     origin = enemy.origin;
-  }
-  else {
+  } else {
     origin = level.radio.baseorigin;
   }
 

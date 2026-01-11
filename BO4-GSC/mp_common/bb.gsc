@@ -6,7 +6,6 @@
 #include scripts\core_common\bb_shared;
 #include scripts\core_common\callbacks_shared;
 #include scripts\core_common\system_shared;
-
 #namespace bb;
 
 autoexec __init__system__() {
@@ -20,11 +19,11 @@ __init__() {
 
 on_player_spawned() {
   self._bbdata = [];
-  self._bbdata[#"score"] = 0;
-  self._bbdata[#"momentum"] = 0;
-  self._bbdata[#"spawntime"] = gettime();
-  self._bbdata[#"shots"] = 0;
-  self._bbdata[#"hits"] = 0;
+  self._bbdata[# "score"] = 0;
+  self._bbdata[# "momentum"] = 0;
+  self._bbdata[# "spawntime"] = gettime();
+  self._bbdata[# "shots"] = 0;
+  self._bbdata[# "hits"] = 0;
   callback::on_death(&on_player_death);
 }
 
@@ -179,7 +178,7 @@ function_6661621a() {
 
   mploadout.var_9911e1f2 = var_c0f05cbb.name;
   mploadout.specialistindex = isDefined(self getspecialistindex()) ? self getspecialistindex() : -1;
-  function_92d1707f(#"hash_30b542620e21966d", #"mploadouts", mploadout);
+  function_92d1707f(#"hash_30b542620e21966d", # "mploadouts", mploadout);
 }
 
 commit_spawn_data() {
@@ -201,9 +200,9 @@ commit_spawn_data() {
   mpplayerlives = {
     #gametime: function_f8d53445(),
     #spawnid: getplayerspawnid(self),
-    #lifescore: self._bbdata[#"score"],
-    #lifemomentum: self._bbdata[#"momentum"],
-    #lifetime: gettime() - self._bbdata[#"spawntime"],
+    #lifescore: self._bbdata[# "score"],
+    #lifemomentum: self._bbdata[# "momentum"],
+    #lifetime: gettime() - self._bbdata[# "spawntime"],
     #name: self.name,
     #specialist: specialistindex
   };

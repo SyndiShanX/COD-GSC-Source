@@ -78,8 +78,7 @@ watchforexplosion() {
           if(abs(fdot) < 0.866) {
             if(rdot > 0) {
               animateui(localclientnum, menuname, "dirt_right", "in", 0);
-            }
-            else {
+            } else {
               animateui(localclientnum, menuname, "dirt_left", "in", 0);
             }
           }

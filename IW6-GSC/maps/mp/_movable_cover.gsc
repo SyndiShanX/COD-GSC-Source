@@ -189,11 +189,9 @@ movable_cover_init() {
 movable_cover_set_user(user, trigger) {
   if(!isDefined(self.user) && isDefined(user)) {
     self notify("new_user");
-  }
-  else if(isDefined(self.user) && isDefined(user) && self.user != user) {
+  } else if(isDefined(self.user) && isDefined(user) && self.user != user) {
     self notify("new_user");
-  }
-  else if(isDefined(self.user) && !isDefined(user)) {
+  } else if(isDefined(self.user) && !isDefined(user)) {
     self notify("clear_user");
   }
 

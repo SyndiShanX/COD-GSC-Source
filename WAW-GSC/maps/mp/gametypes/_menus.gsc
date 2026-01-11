@@ -145,8 +145,7 @@ onMenuResponse() {
       self.enableText = !self.enableText;
       if(self.enableText) {
         self setClientDvar("ui_xpText", "1");
-      }
-      else {
+      } else {
         self setClientDvar("ui_xpText", "0");
       }
       continue;
@@ -155,8 +154,7 @@ onMenuResponse() {
       self.enable3DWaypoints = !self.enable3DWaypoints;
       if(self.enable3DWaypoints) {
         self setClientDvar("ui_3dwaypointtext", "1");
-      }
-      else {
+      } else {
         self setClientDvar("ui_3dwaypointtext", "0");
       }
       continue;
@@ -165,8 +163,7 @@ onMenuResponse() {
       self.enableDeathIcons = !self.enableDeathIcons;
       if(self.enableDeathIcons) {
         self setClientDvar("ui_deathicontext", "1");
-      }
-      else {
+      } else {
         self setClientDvar("ui_deathicontext", "0");
       }
       self maps\mp\gametypes\_deathicons::updateDeathIconsEnabled();
@@ -221,11 +218,9 @@ onMenuResponse() {
     } else if(!level.console) {
       if(menu == game["menu_quickcommands"]) {
         maps\mp\gametypes\_quickmessages::quickcommands(response);
-      }
-      else if(menu == game["menu_quickstatements"]) {
+      } else if(menu == game["menu_quickstatements"]) {
         maps\mp\gametypes\_quickmessages::quickstatements(response);
-      }
-      else if(menu == game["menu_quickresponses"]) {
+      } else if(menu == game["menu_quickresponses"]) {
         maps\mp\gametypes\_quickmessages::quickresponses(response);
       }
     }

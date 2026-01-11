@@ -5,7 +5,6 @@
 
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
-
 #namespace gadget_combat_efficiency;
 
 autoexec __init__system__() {
@@ -19,7 +18,7 @@ __init__() {
 function_24a1439f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwastimejump) {
   if(isDefined(newval) && newval > 0) {
     if(newval != oldval) {
-      self playSound(localclientnum, #"hash_3eea09f794eb0577");
+      self playSound(localclientnum, # "hash_3eea09f794eb0577");
     }
 
     if(!isDefined(self.var_8db0b9f5)) {
@@ -31,7 +30,7 @@ function_24a1439f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 
   if(isDefined(self.var_8db0b9f5)) {
     self stoploopsound(self.var_8db0b9f5);
-    self playSound(localclientnum, #"hash_529910b20b42ef5b");
+    self playSound(localclientnum, # "hash_529910b20b42ef5b");
     self.var_8db0b9f5 = undefined;
   }
 }

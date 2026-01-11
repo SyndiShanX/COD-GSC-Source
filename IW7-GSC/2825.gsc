@@ -13,7 +13,7 @@ func_952F() {
   var_00 = getEntArray("loot_room_volume", "targetname");
 
   foreach(var_02 in var_00) {
-  var_02 thread func_CF73();
+    var_02 thread func_CF73();
   }
 }
 
@@ -448,8 +448,7 @@ func_13C06(var_00, var_01) {
 
   if(var_00 == "iw7_sdflmg") {
     var_06 = 0.2;
-  }
-  else if(var_00 == "iw7_ar57") {
+  } else if(var_00 == "iw7_ar57") {
     if(var_07) {
       var_02 = "silenced_smg";
     }
@@ -465,11 +464,9 @@ func_13C06(var_00, var_01) {
     var_06 = 0.5;
   else if(var_00 == "iw7_m8") {
     var_06 = 0.2;
-  }
-  else if(var_00 == "iw7_kbs") {
+  } else if(var_00 == "iw7_kbs") {
     var_06 = 4.8;
-  }
-  else if(var_00 == "iw7_fmg") {
+  } else if(var_00 == "iw7_fmg") {
     if(var_07) {
       var_02 = "silenced_smg";
     }
@@ -674,16 +671,14 @@ func_116DD(var_00, var_01, var_02) {
 
   if(isDefined(self.func_92B9) && self.func_92B9 == 1) {
     func_F3F0("on");
-  }
-  else {
+  } else {
     func_F3F0("on", 1);
   }
 
   if(func_0A2F::func_DA44(var_01, var_02)) {
     if(isDefined(self.func_92B9) && self.func_92B9 == 1) {
       func_F3F0("hacked");
-    }
-    else {
+    } else {
       func_F3F0("hacked", 1);
     }
 
@@ -873,8 +868,7 @@ func_87EC() {
 func_8834(var_00) {
   if(isDefined(self.func_92B9) && self.func_92B9 == 1) {
     func_F3F0("hack");
-  }
-  else {
+  } else {
     func_F3F0("hack", 1);
   }
 
@@ -909,8 +903,7 @@ func_F3F0(var_00, var_01) {
 
       if(isDefined(var_01) && var_01) {
         setomnvar("ui_inworld_terminal_hack2", 0);
-      }
-      else {
+      } else {
         setomnvar("ui_inworld_terminal_hack", 0);
       }
 
@@ -922,8 +915,7 @@ func_F3F0(var_00, var_01) {
 
       if(isDefined(var_01) && var_01) {
         setomnvar("ui_inworld_terminal_hack2", 2);
-      }
-      else {
+      } else {
         setomnvar("ui_inworld_terminal_hack", 2);
       }
 
@@ -931,8 +923,7 @@ func_F3F0(var_00, var_01) {
     case "hack":
       if(isDefined(var_01) && var_01) {
         setomnvar("ui_inworld_terminal_hack2", 1);
-      }
-      else {
+      } else {
         setomnvar("ui_inworld_terminal_hack", 1);
       }
 
@@ -942,8 +933,7 @@ func_F3F0(var_00, var_01) {
 
       if(isDefined(var_01) && var_01) {
         setomnvar("ui_inworld_terminal_hack2", 0);
-      }
-      else {
+      } else {
         setomnvar("ui_inworld_terminal_hack", 0);
       }
 

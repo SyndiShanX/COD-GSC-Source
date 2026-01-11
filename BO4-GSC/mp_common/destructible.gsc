@@ -7,7 +7,6 @@
 #include scripts\core_common\clientfield_shared;
 #include scripts\core_common\system_shared;
 #include scripts\mp_common\gametypes\battlechatter;
-
 #namespace destructible;
 
 autoexec __init__system__() {
@@ -83,7 +82,7 @@ event_callback(destructible_event, attacker, weapon, piece_index, point, dir, mo
   }
 
   switch (destructible_event) {
-    case #"destructible_car_explosion":
+    case # "destructible_car_explosion":
       self car_explosion(attacker);
 
       if(isDefined(weapon)) {
@@ -91,7 +90,7 @@ event_callback(destructible_event, attacker, weapon, piece_index, point, dir, mo
       }
 
       break;
-    case #"destructible_car_fire":
+    case # "destructible_car_fire":
       level thread battlechatter::on_player_near_explodable(self, "car");
       self thread car_fire_think(attacker);
 
@@ -100,14 +99,14 @@ event_callback(destructible_event, attacker, weapon, piece_index, point, dir, mo
       }
 
       break;
-    case #"explode":
+    case # "explode":
       self thread simple_explosion(attacker);
       break;
-    case #"explode_complex":
+    case # "explode_complex":
       self thread complex_explosion(attacker, explosion_radius);
       break;
-    case #"destructible_explosive_incendiary_large":
-    case #"destructible_explosive_incendiary_small":
+    case # "destructible_explosive_incendiary_large":
+    case # "destructible_explosive_incendiary_small":
       self explosive_incendiary_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {
@@ -115,8 +114,8 @@ event_callback(destructible_event, attacker, weapon, piece_index, point, dir, mo
       }
 
       break;
-    case #"destructible_explosive_electrical_small":
-    case #"destructible_explosive_electrical_large":
+    case # "destructible_explosive_electrical_small":
+    case # "destructible_explosive_electrical_large":
       self explosive_electrical_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {
@@ -124,8 +123,8 @@ event_callback(destructible_event, attacker, weapon, piece_index, point, dir, mo
       }
 
       break;
-    case #"destructible_explosive_concussive_large":
-    case #"destructible_explosive_concussive_small":
+    case # "destructible_explosive_concussive_large":
+    case # "destructible_explosive_concussive_small":
       self explosive_concussive_explosion(attacker, explosion_radius, 0);
 
       if(isDefined(weapon)) {
@@ -234,7 +233,7 @@ car_explosion(attacker, physics_explosion) {
 }
 
 tank_grenade_stuck_think() {
-  self endon(#"destructible_base_piece_death", #"death");
+  self endon(#"destructible_base_piece_death", # "death");
 
   for(;;) {
     waitresult = self waittill(#"grenade_stuck");
@@ -251,11 +250,11 @@ tank_grenade_stuck_think() {
 }
 
 tank_grenade_stuck_explode(missile) {
-  self endon(#"destructible_base_piece_death", #"death");
+  self endon(#"destructible_base_piece_death", # "death");
   owner = getmissileowner(missile);
 
   if(isDefined(owner) && missile.model == "wpn_t7_c4_world") {
-    owner endon(#"disconnect", #"weapon_object_destroyed");
+    owner endon(#"disconnect", # "weapon_object_destroyed");
     missile endon(#"picked_up");
     missile thread tank_hacked_c4(self);
   }
@@ -271,7 +270,7 @@ tank_grenade_stuck_explode(missile) {
 }
 
 tank_hacked_c4(tank) {
-  tank endon(#"destructible_base_piece_death", #"death");
+  tank endon(#"destructible_base_piece_death", # "death");
   self endon(#"death");
   self waittill(#"hacked");
   self notify(#"picked_up");
@@ -290,7 +289,7 @@ car_death_think() {
 }
 
 car_grenade_stuck_think() {
-  self endon(#"destructible_base_piece_death", #"car_dead", #"death");
+  self endon(#"destructible_base_piece_death", # "car_dead", # "death");
 
   for(;;) {
     waitresult = self waittill(#"grenade_stuck");
@@ -307,11 +306,11 @@ car_grenade_stuck_think() {
 }
 
 car_grenade_stuck_explode(missile) {
-  self endon(#"destructible_base_piece_death", #"car_dead", #"death");
+  self endon(#"destructible_base_piece_death", # "car_dead", # "death");
   owner = getmissileowner(missile);
 
   if(isDefined(owner) && missile.model == "wpn_t7_c4_world") {
-    owner endon(#"disconnect", #"weapon_object_destroyed");
+    owner endon(#"disconnect", # "weapon_object_destroyed");
     missile endon(#"picked_up");
     missile thread car_hacked_c4(self);
   }
@@ -327,7 +326,7 @@ car_grenade_stuck_explode(missile) {
 }
 
 car_hacked_c4(car) {
-  car endon(#"destructible_base_piece_death", #"car_dead", #"death");
+  car endon(#"destructible_base_piece_death", # "car_dead", # "death");
   self endon(#"death");
   self waittill(#"hacked");
   self notify(#"picked_up");

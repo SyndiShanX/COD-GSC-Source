@@ -8,7 +8,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\visionset_mgr_shared;
 #include scripts\zm_common\zm_perks;
-
 #namespace zm_perk_mod_staminup;
 
 autoexec __init__system__() {

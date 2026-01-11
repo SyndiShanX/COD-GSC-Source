@@ -156,8 +156,7 @@ getxpscalewithparty() {
 isregisteredevent(var_0) {
   if(isDefined(level.xpeventinfo[var_0])) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -205,8 +204,7 @@ getrankinfominxp(var_0) {
 getrankinfoxpamt(var_0) {
   if(var_0 > level.maxrank) {
     return level.maxxponext;
-  }
-  else {
+  } else {
     return int(level.ranktable[var_0][3]);
   }
 }
@@ -222,8 +220,7 @@ getrankinfomaxxp(var_0) {
 getrankinfofull(var_0) {
   if(var_0 > level.maxrank) {
     return &"RANK_PARAGON_FULL";
-  }
-  else {
+  } else {
     return tablelookupistring("mp\rankTable.csv", 0, var_0, 16);
   }
 }
@@ -231,8 +228,7 @@ getrankinfofull(var_0) {
 getrankinfolevel(var_0) {
   if(var_0 > level.maxrank) {
     return var_0 + 1;
-  }
-  else {
+  } else {
     return int(tablelookup("mp\rankTable.csv", 0, var_0, 13));
   }
 }
@@ -319,8 +315,7 @@ giverankxp(var_0, var_1, var_2, var_3, var_4, var_5) {
       if(isDefined(level.nukedetonated) && level.nukedetonated) {
         if(level.teambased && level.nukeinfo.team == self.team) {
           var_6 = var_6 * level.nukeinfo.xpscalar;
-        }
-        else if(!level.teambased && level.nukeinfo.player == self) {
+        } else if(!level.teambased && level.nukeinfo.player == self) {
           var_6 = var_6 * level.nukeinfo.xpscalar;
         }
 
@@ -367,8 +362,7 @@ giverankxp(var_0, var_1, var_2, var_3, var_4, var_5) {
     default:
       if(isregisteredevent(var_0)) {
         self.pers["summary"]["score"] = self.pers["summary"]["score"] + var_6;
-      }
-      else {
+      } else {
         self.pers["summary"]["misc"] = self.pers["summary"]["misc"] + var_6;
       }
 
@@ -478,8 +472,7 @@ getrank() {
 
   if(var_0 < getrankinfominxp(var_1) + getrankinfoxpamt(var_1)) {
     return var_1;
-  }
-  else {
+  } else {
     return getrankforxp(var_0, var_2);
   }
 }
@@ -487,8 +480,7 @@ getrank() {
 getprestigelevel() {
   if(isai(self) && isDefined(self.pers["prestige_fake"])) {
     return self.pers["prestige_fake"];
-  }
-  else {
+  } else {
     return maps\mp\gametypes\_persistence::statget("prestige");
   }
 }
@@ -496,8 +488,7 @@ getprestigelevel() {
 getrankxp() {
   if(isDefined(self.pers["rankxp"])) {
     return self.pers["rankxp"];
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -505,8 +496,7 @@ getrankxp() {
 getredeemedxp() {
   if(isDefined(self.pers["redeemedxp"])) {
     return self.pers["redeemedxp"];
-  }
-  else {
+  } else {
     return 0;
   }
 }

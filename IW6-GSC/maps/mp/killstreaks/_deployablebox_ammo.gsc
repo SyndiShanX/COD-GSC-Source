@@ -143,8 +143,7 @@ canUseDeployable(boxEnt) {
   }
   if(!is_aliens()) {
     return (!self isJuggernaut());
-  }
-  else {
+  } else {
     return true;
   }
 }

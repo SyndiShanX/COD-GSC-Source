@@ -14,11 +14,10 @@
 #include scripts\wz_common\character_unlock_fixup;
 #include scripts\wz_common\character_unlock_seraph_fixup;
 #include scripts\wz_common\wz_firing_range;
-
 #namespace character_unlock_seraph;
 
 autoexec __init__system__() {
-  system::register(#"character_unlock_seraph", &__init__, undefined, #"character_unlock_seraph_fixup");
+  system::register(#"character_unlock_seraph", &__init__, undefined, # "character_unlock_seraph_fixup");
 }
 
 __init__() {
@@ -109,7 +108,7 @@ private event_handler[event_cf200f34] function_209450ae(eventstruct) {
 
   dynent = eventstruct.ent;
 
-  if(dynent.targetname !== #"hash_3af83a27a707345a") {
+  if(dynent.targetname !== # "hash_3af83a27a707345a") {
     return;
   }
 
@@ -166,7 +165,7 @@ on_player_killed() {
     return;
   }
 
-  if(weapon.name != #"hero_annihilator") {
+  if(weapon.name != # "hero_annihilator") {
     return;
   }
 
@@ -178,16 +177,16 @@ on_player_killed() {
     return;
   }
 
-  attacker character_unlock::function_c8beca5e(#"seraph_unlock", #"hash_633d185cd2140f1a", 1);
+  attacker character_unlock::function_c8beca5e(#"seraph_unlock", # "hash_633d185cd2140f1a", 1);
 }
 
 function_1c4b5097(item) {
-  if(isDefined(item.itementry) && item.itementry.name === #"annihilator_wz_item") {
+  if(isDefined(item.itementry) && item.itementry.name === # "annihilator_wz_item") {
     var_c503939b = globallogic::function_e9e52d05();
 
     if(var_c503939b <= function_c816ea5b()) {
       if(self character_unlock::function_f0406288(#"seraph_unlock")) {
-        self character_unlock::function_c8beca5e(#"seraph_unlock", #"hash_633d175cd2140d67", 1);
+        self character_unlock::function_c8beca5e(#"seraph_unlock", # "hash_633d175cd2140d67", 1);
       }
     }
   }
@@ -207,7 +206,7 @@ function_4ac25840(dead_team) {
 
         foreach(player in players) {
           if(player character_unlock::function_f0406288(#"seraph_unlock")) {
-            player character_unlock::function_c8beca5e(#"seraph_unlock", #"hash_633d175cd2140d67", 1);
+            player character_unlock::function_c8beca5e(#"seraph_unlock", # "hash_633d175cd2140d67", 1);
           }
         }
       }

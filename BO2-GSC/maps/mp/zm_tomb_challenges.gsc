@@ -139,8 +139,7 @@ box_footprint_think() {
   if(isDefined(player)) {
     if(level.n_soul_boxes_completed == 1) {
       player thread richtofenrespondvoplay("zm_box_complete");
-    }
-    else if(level.n_soul_boxes_completed == 4) {
+    } else if(level.n_soul_boxes_completed == 4) {
       player thread richtofenrespondvoplay("zm_box_final_complete", 1);
     }
   }
@@ -200,8 +199,7 @@ reward_packed_weapon(player, s_stat) {
 
   if(isDefined(primaries) && primaries.size >= weapon_limit) {
     player maps\mp\zombies\_zm_weapons::weapon_give(s_stat.str_reward_weapon);
-  }
-  else {
+  } else {
     player giveweapon(s_stat.str_reward_weapon, 0, player maps\mp\zombies\_zm_weapons::get_pack_a_punch_weapon_options(s_stat.str_reward_weapon));
     player givestartammo(s_stat.str_reward_weapon);
   }

@@ -18,8 +18,7 @@ init() {
 
   if(isDefined(level.tazer_cost)) {
     cost = level.tazer_cost;
-  }
-  else {
+  } else {
     cost = 6000;
   }
 
@@ -98,8 +97,7 @@ watchtazerknucklemelee() {
   }
 }
 
-tazerknuckle_melee() {
-}
+tazerknuckle_melee() {}
 
 tazer_flourish_fx() {
   self waittill("weapon_change", newweapon);

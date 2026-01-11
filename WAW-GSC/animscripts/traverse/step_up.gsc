@@ -9,8 +9,7 @@
 main() {
   if(self.type == "human") {
     step_up_human();
-  }
-  else if(self.type == "dog") {
+  } else if(self.type == "dog") {
     dog_jump_up(40, 3);
   }
 }

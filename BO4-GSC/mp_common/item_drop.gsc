@@ -13,11 +13,10 @@
 #include scripts\mp_common\item_inventory_util;
 #include scripts\mp_common\item_world;
 #include scripts\mp_common\item_world_util;
-
 #namespace item_drop;
 
 autoexec __init__system__() {
-  system::register(#"item_drop", &__init__, undefined, #"item_world");
+  system::register(#"item_drop", &__init__, undefined, # "item_world");
 }
 
 __init__() {
@@ -69,20 +68,20 @@ private function_60c9a9e1() {
   }
 }
 
-  function private function_3b2b6383(origin, angles, normal, itementry, var_ba40b4c1) {
-    angles = function_c1fa62a2(angles, normal);
-    angles = combineangles(angles, (0, angleclamp180(origin[0] + origin[1] + origin[2]), 0));
+function private function_3b2b6383(origin, angles, normal, itementry, var_ba40b4c1) {
+  angles = function_c1fa62a2(angles, normal);
+  angles = combineangles(angles, (0, angleclamp180(origin[0] + origin[1] + origin[2]), 0));
 
-    if(isDefined(itementry)) {
-      if(var_ba40b4c1 && isDefined(itementry.var_32ceba33) && itementry.var_32ceba33) {
-        angles = combineangles(angles, (isDefined(itementry.var_d1f348db) ? itementry.var_d1f348db : 0, isDefined(itementry.var_cc1bbd2c) ? itementry.var_cc1bbd2c : 0, isDefined(itementry.var_ae6581c0) ? itementry.var_ae6581c0 : 0));
-      } else {
-        angles = combineangles(angles, (isDefined(itementry.angleoffsetx) ? itementry.angleoffsetx : 0, isDefined(itementry.angleoffsety) ? itementry.angleoffsety : 0, isDefined(itementry.angleoffsetz) ? itementry.angleoffsetz : 0));
-      }
+  if(isDefined(itementry)) {
+    if(var_ba40b4c1 && isDefined(itementry.var_32ceba33) && itementry.var_32ceba33) {
+      angles = combineangles(angles, (isDefined(itementry.var_d1f348db) ? itementry.var_d1f348db : 0, isDefined(itementry.var_cc1bbd2c) ? itementry.var_cc1bbd2c : 0, isDefined(itementry.var_ae6581c0) ? itementry.var_ae6581c0 : 0));
+    } else {
+      angles = combineangles(angles, (isDefined(itementry.angleoffsetx) ? itementry.angleoffsetx : 0, isDefined(itementry.angleoffsety) ? itementry.angleoffsety : 0, isDefined(itementry.angleoffsetz) ? itementry.angleoffsetz : 0));
     }
-
-    return angles;
   }
+
+  return angles;
+}
 
 private function_feb1473(itementry, var_ba40b4c1) {
   origin = (0, 0, 0);
@@ -119,7 +118,7 @@ private function_44a6883c(&drop_item_id, &drop_items, &drop_count, &drop_amount,
     itementry = item.itementry;
     itemname = item_world_util::get_itemtype(itementry);
 
-    if(itementry.itemtype == #"weapon") {
+    if(itementry.itemtype == # "weapon") {
       continue;
     }
 
@@ -263,10 +262,10 @@ private function_23b6897(player, position) {
 
         debug_sphere(checkpoint, 2, (0, 1, 1));
 
-          var_d154a9ba = 0;
+        var_d154a9ba = 0;
 
         for(var_b7e54435 = 0; var_b7e54435 < var_f4b807cb.size; var_b7e54435++) {
-          if(isDefined(var_f4b807cb[var_b7e54435].itementry) && var_f4b807cb[var_b7e54435].itementry.itemtype == #"weapon" && distance2dsquared(var_f4b807cb[var_b7e54435].origin, checkpoint) < var_f24d242c) {
+          if(isDefined(var_f4b807cb[var_b7e54435].itementry) && var_f4b807cb[var_b7e54435].itementry.itemtype == # "weapon" && distance2dsquared(var_f4b807cb[var_b7e54435].origin, checkpoint) < var_f24d242c) {
             var_d154a9ba = 1;
             break;
           }
@@ -315,10 +314,10 @@ private function_23b6897(player, position) {
             eyepos = player getEye();
             sighttrace = physicstraceex(eyepos, checkpoint, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), player, 1);
 
-            if(sighttrace[#"fraction"] < 1) {
+            if(sighttrace[# "fraction"] < 1) {
               debug_line(eyepos, checkpoint, (1, 0, 0));
 
-                continue;
+              continue;
             }
 
             debug_line(eyepos, checkpoint, (0, 1, 1));
@@ -394,7 +393,7 @@ private function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0,
   var_96a432da = origin + (0, 0, zoffset);
   var_abe21f5c = origin - (0, 0, zoffset);
   starttrace = physicstraceex(origin, var_96a432da, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), ignoreent, 1);
-  var_96a432da = starttrace[#"position"];
+  var_96a432da = starttrace[# "position"];
   var_ed97e13a = 5;
   onground = 0;
   var_5a13db05 = 0;
@@ -404,11 +403,11 @@ private function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0,
     debug_sphere(var_abe21f5c, 1.5, (0, 1, 0));
     debug_line(var_96a432da, var_abe21f5c, (0, 1, 0));
 
-      var_708a2754 = physicstraceex(var_96a432da, var_abe21f5c, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), ignoreent, 1);
+    var_708a2754 = physicstraceex(var_96a432da, var_abe21f5c, (-0.5, -0.5, -0.5), (0.5, 0.5, 0.5), ignoreent, 1);
 
-    if(var_708a2754[#"fraction"] < 1) {
-      if(var_708a2754[#"position"][2] > -10000) {
-        origin = var_708a2754[#"position"];
+    if(var_708a2754[# "fraction"] < 1) {
+      if(var_708a2754[# "position"][2] > -10000) {
+        origin = var_708a2754[# "position"];
       }
 
       if(isDefined(itementry)) {
@@ -416,26 +415,26 @@ private function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0,
         origin += originoffset;
       }
 
-      normal = var_708a2754[#"normal"];
+      normal = var_708a2754[# "normal"];
       angles = function_3b2b6383(origin, angles, normal, itementry, var_ba40b4c1);
       self.origin = origin;
       self.angles = angles;
       var_5a13db05 = 1;
 
-      if(vectordot(var_708a2754[#"normal"], (0, 0, 1)) >= 0.5) {
-        parentent = var_708a2754[#"entity"];
+      if(vectordot(var_708a2754[# "normal"], (0, 0, 1)) >= 0.5) {
+        parentent = var_708a2754[# "entity"];
 
         if(isDefined(parentent) && parentent.model != "") {
           if(isplayer(parentent)) {
             ignoreent = parentent;
-            var_96a432da = var_708a2754[#"position"];
+            var_96a432da = var_708a2754[# "position"];
             continue;
           }
 
           if(parentent.classname == "script_vehicle") {
             var_fe7058af = 0;
 
-            foreach(vehicle in array(#"player_atv", #"helicopter_light", "recon_wz", "hawk")) {
+            foreach(vehicle in array(#"player_atv", # "helicopter_light", "recon_wz", "hawk")) {
               if(isDefined(parentent.scriptvehicletype) && vehicle == parentent.scriptvehicletype) {
                 var_fe7058af = 1;
                 break;
@@ -486,18 +485,18 @@ private function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0,
 
     debug_sphere(self.origin, 1, (1, 0.5, 0));
 
-      if(isplayer(player)) {
-        physicstrace = physicstraceex(self.origin, self.origin + (0, 0, -5), self.mins, self.maxs, ignoreent, 1);
+    if(isplayer(player)) {
+      physicstrace = physicstraceex(self.origin, self.origin + (0, 0, -5), self.mins, self.maxs, ignoreent, 1);
 
-        if(physicstrace[#"fraction"] < 1) {
-          self.origin = player.origin + (0, 0, 18);
+      if(physicstrace[# "fraction"] < 1) {
+        self.origin = player.origin + (0, 0, 18);
 
-          debug_sphere(self.origin, 0.6, (1, 0, 0));
+        debug_sphere(self.origin, 0.6, (1, 0, 0));
 
-        }
       }
+    }
 
-    self setcontents(self setcontents(0)&~(32768 | 67108864 | 8388608 | 33554432));
+    self setcontents(self setcontents(0) &~(32768 | 67108864 | 8388608 | 33554432));
     self physicslaunch();
     self thread function_10ececeb();
     return true;
@@ -505,7 +504,7 @@ private function_a938fba7(player, position, angles, itementry, var_74e79ee3 = 0,
 
   debug_sphere(self.origin, 1, (1, 1, 0));
 
-    return false;
+  return false;
 }
 
 function_10ececeb(var_e280bfe2 = 1, tracedistance = 24, originheightoffset = 0, min = (0, 0, 0), max = (0, 0, 0)) {
@@ -521,9 +520,9 @@ function_10ececeb(var_e280bfe2 = 1, tracedistance = 24, originheightoffset = 0, 
   while(true) {
     origin = self.origin + anglestoup(self.angles) * originheightoffset;
     var_708a2754 = physicstrace(origin + (0, 0, 1), origin - (0, 0, tracedistance), min, max, self, 32);
-    parentent = var_708a2754[#"entity"];
+    parentent = var_708a2754[# "entity"];
 
-    if(var_708a2754[#"startsolid"]) {
+    if(var_708a2754[# "startsolid"]) {
       self physicslaunch();
     } else if(!isDefined(parentent)) {
       if(isDefined(self.var_7b500c20)) {
@@ -551,7 +550,7 @@ function_10ececeb(var_e280bfe2 = 1, tracedistance = 24, originheightoffset = 0, 
       }
 
       if(!var_fe7058af && parentent.classname == "script_vehicle") {
-        foreach(vehicle in array(#"player_atv", #"helicopter_light", "recon_wz", "hawk")) {
+        foreach(vehicle in array(#"player_atv", # "helicopter_light", "recon_wz", "hawk")) {
           if(isDefined(parentent.scriptvehicletype) && vehicle == parentent.scriptvehicletype) {
             var_fe7058af = 1;
             break;
@@ -697,7 +696,7 @@ drop_inventory(player) {
     return items;
   }
 
-  if(isDefined(player.laststandparams) && isDefined(player.laststandparams.smeansofdeath) && player.laststandparams.smeansofdeath == #"mod_trigger_hurt" && player.laststandparams.sweapon.name === #"none") {
+  if(isDefined(player.laststandparams) && isDefined(player.laststandparams.smeansofdeath) && player.laststandparams.smeansofdeath == # "mod_trigger_hurt" && player.laststandparams.sweapon.name === # "none") {
     player.var_33a24f82 = 0;
     return items;
   }
@@ -798,7 +797,7 @@ drop_inventory(player) {
     count = isDefined(inventoryitem.count) ? inventoryitem.count : 1;
     amount = inventoryitem.amount;
 
-    if(isDefined(item_weapon) && inventoryitem.itementry.itemtype == #"weapon") {
+    if(isDefined(item_weapon) && inventoryitem.itementry.itemtype == # "weapon") {
       var_4f21d62e = item_inventory_util::function_2b83d3ff(inventoryitem);
       inventoryitem.weaponoptions = player item_inventory::function_fc04b237(var_4f21d62e, inventoryitem.weaponoptions);
       var_ca577a9c = player getweaponammoclip(var_4f21d62e);
@@ -846,7 +845,7 @@ drop_inventory(player) {
       if(isDefined(level.var_4afb8f5a[itemname])) {
         itemname = level.var_4afb8f5a[itemname];
 
-        if(itemname == #"") {
+        if(itemname == # "") {
           continue;
         }
       }
@@ -998,7 +997,7 @@ drop_item(weapon = undefined, count = 0, amount = 0, itemid, position, angles = 
   if(isDefined(level.var_4afb8f5a[item.itementry.name])) {
     item_name = level.var_4afb8f5a[item.itementry.name];
 
-    if(item_name == #"") {
+    if(item_name == # "") {
       return;
     }
 
@@ -1029,7 +1028,7 @@ drop_item(weapon = undefined, count = 0, amount = 0, itemid, position, angles = 
   dropitem.networkid = item_world_util::function_1f0def85(dropitem);
   dropitem.itementry = item.itementry;
 
-  if(item.itementry.name == #"sig_blade_wz_item" && isDefined(level.var_5b2a8d88)) {
+  if(item.itementry.name == # "sig_blade_wz_item" && isDefined(level.var_5b2a8d88)) {
     level.var_5b2a8d88[dropitem.networkid] = 1;
   }
 
@@ -1131,7 +1130,7 @@ function_4da960f6(origin, radius, time) {
         continue;
       }
 
-      if(isDefined(item.classname) && item.classname == #"grenade") {
+      if(isDefined(item.classname) && item.classname == # "grenade") {
         continue;
       }
 

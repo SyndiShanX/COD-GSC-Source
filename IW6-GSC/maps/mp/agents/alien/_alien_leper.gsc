@@ -148,7 +148,7 @@ get_direction_away_from_players() {
   centralLocation = (0, 0, 0);
 
   foreach(player in level.players) {
-  centralLocation += player.origin;
+    centralLocation += player.origin;
   }
 
   centralLocation = centralLocation / level.players.size;

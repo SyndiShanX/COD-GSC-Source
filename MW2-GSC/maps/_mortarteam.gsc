@@ -57,10 +57,8 @@ mortarSpawner(delayEnt) {
   delay_range = 0;
   if(isDefined(delayEnt.script_delay)) {
     delay_base = delayEnt.script_delay;
-  }
-  else {
-  if(isDefined(delayEnt.script_delay_min)) {
-  }
+  } else {
+    if(isDefined(delayEnt.script_delay_min)) {}
     delay_base = delayEnt.script_delay_min;
     delay_range = delayEnt.script_delay_max - delayEnt.script_delay_min;
   }
@@ -134,15 +132,13 @@ mortarTeamspawn(spawners, node, mortar_targets) {
     if(isalive(self.loadGuy)) {
       if(isalive(self.aimGuy) && self.aimGuy.ready) {
         dualMortarUntilDeath(node);
-      }
-      else {
+      } else {
         singleMortarOneRep(node);
       }
     } else
     if(isalive(self.aimGuy)) {
       aimGuyMortarsUntilDeath(node);
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -253,8 +249,7 @@ aimGuy(ent, node) {
   self setgoalnode(node);
   if(node.radius > 0) {
     self.goalradius = node.radius;
-  }
-  else {
+  } else {
     self.goalradius = 350;
   }
 

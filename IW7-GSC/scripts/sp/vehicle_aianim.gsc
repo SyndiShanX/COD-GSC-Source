@@ -200,9 +200,7 @@ func_8732(param_00, param_01) {
   var_03 = param_00.angles;
   var_04 = param_00.origin;
   param_00 = func_45EE(param_00);
-  [
-    [level.vehicle_canturrettargetpoint]
-  ]("MOD_RIFLE_BULLET", "torso_upper", var_04);
+  [[level.vehicle_canturrettargetpoint]]("MOD_RIFLE_BULLET", "torso_upper", var_04);
   func_538C(param_00, "weapon_");
   param_00 linkto(self);
   param_00 notsolid();
@@ -1593,9 +1591,7 @@ func_872D(param_00) {
     return;
   }
 
-  [
-    [level.vehicle_canturrettargetpoint]
-  ]("MOD_RIFLE_BULLET", "torso_upper", param_00.origin);
+  [[level.vehicle_canturrettargetpoint]]("MOD_RIFLE_BULLET", "torso_upper", param_00.origin);
   param_00.var_4E2A = var_02.var_69DF;
   var_03 = self.angles;
   var_04 = param_00.origin;

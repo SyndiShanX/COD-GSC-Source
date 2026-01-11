@@ -331,11 +331,9 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
 
     if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage") && victim _hasPerk("specialty_armorvest")) {
       damageAdd += 0;
-    }
-    else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage")) {
+    } else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_bulletdamage")) {
       damageAdd += damage * level.bulletDamageMod;
-    }
-    else if(victim _hasPerk("specialty_armorvest")) {
+    } else if(victim _hasPerk("specialty_armorvest")) {
       damageAdd -= damage * (level.armorVestMod * -1);
     }
 
@@ -345,14 +343,11 @@ cac_modified_damage(victim, attacker, damage, meansofdeath, weapon, impactPoint,
   } else if(isExplosiveDamage(meansofdeath)) {
     if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage") && isDefined(victim.blastShielded)) {
       damageAdd += 0;
-    }
-    else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage")) {
+    } else if(isPlayer(attacker) && weaponInheritsPerks(weapon) && attacker _hasPerk("specialty_explosivedamage")) {
       damageAdd += damage * level.explosiveDamageMod;
-    }
-    else if(isDefined(victim.blastShielded)) {
+    } else if(isDefined(victim.blastShielded)) {
       damageAdd -= damage * (level.blastShieldMod * -1);
-    }
-    else if(maps\mp\gametypes\_weapons::ingrenadegraceperiod()) // is this needed?
+    } else if(maps\mp\gametypes\_weapons::ingrenadegraceperiod()) // is this needed?
       damageAdd *= level.juggernautmod;
 
     if(isKillstreakWeapon(weapon) && isPlayer(attacker) && attacker _hasPerk("specialty_dangerclose")) {
@@ -410,8 +405,7 @@ initperkdvars() {
   level.armorPiercingMod = getIntProperty("perk_armorPiercingDamage", 40) / 100; // increased bullet damage by this %
 }
 
-cac_selector() {
-}
+cac_selector() {}
 
 giveblindeyeafterspawn() {
   self endon("death");
@@ -457,15 +451,13 @@ get_specialtydata(var_0, var_1, var_2) // iw3/h1 remnants? this sucks
     if(issubstr(var_3, "grenade")) {
       if(var_0 == "specialty_fraggrenade") {
         self.perkscustom["grenades_count"] = var_4;
-      }
-      else {
+      } else {
         self.perkscustom["grenades_count"] = 1;
       }
 
       if(var_0 == "specialty_specialgrenade" && isDefined(var_2.offhand) && var_2.offhand != "h1_smokegrenade_mp") {
         self.perkscustom["specialgrenades_count"] = var_4;
-      }
-      else {
+      } else {
         self.perkscustom["specialgrenades_count"] = 1;
       }
 
@@ -497,8 +489,7 @@ giveperkinventory() {
 setweaponammooverall(var_0, var_1) {
   if(isweaponcliponly(var_0)) {
     self setweaponammoclip(var_0, var_1);
-  }
-  else {
+  } else {
     self setweaponammoclip(var_0, var_1);
     var_2 = var_1 - self getweaponammoclip(var_0);
     self setweaponammostock(var_0, var_2);

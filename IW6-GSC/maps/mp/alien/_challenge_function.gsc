@@ -172,7 +172,7 @@ default_rewardFunc() {
   CHALLENGE_COMPLETE_SKILL_POINT = 1;
 
   foreach(player in level.players) {
-  player maps\mp\alien\_persistence::give_player_points(CHALLENGE_COMPLETE_SKILL_POINT);
+    player maps\mp\alien\_persistence::give_player_points(CHALLENGE_COMPLETE_SKILL_POINT);
   }
 }
 
@@ -360,7 +360,7 @@ update_take_no_damage(unused_1, unused_2, unused_3, unused_4, unused_5, unused_6
 nodamage_rewardFunc() {
   NODAMAGE_REWARD_POINT = 250;
   foreach(player in level.players) {
-  player thread maps\mp\alien\_persistence::give_player_currency(NODAMAGE_REWARD_POINT);
+    player thread maps\mp\alien\_persistence::give_player_currency(NODAMAGE_REWARD_POINT);
   }
 }
 
@@ -926,8 +926,7 @@ update_alien_death_challenges(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWe
         if(!inflictor_defined || inflictor_is_player || isArcDeath) {
           if(isArcDeath) {
             maps\mp\alien\_challenge::update_challenge(current_challenge, sWeapon, sMeansofDeath, isArcDeath);
-          }
-          else {
+          } else {
             maps\mp\alien\_challenge::update_challenge(current_challenge, sWeapon, sMeansofDeath);
           }
         }
@@ -955,11 +954,9 @@ update_alien_death_challenges(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWe
     case "kill_airborne_aliens":
       if(attacker_is_player && isDefined(self.trajectoryActive) && self.trajectoryActive) {
         maps\mp\alien\_challenge::update_challenge("kill_airborne_aliens", 1);
-      }
-      else if(attacker_is_player && (is_true(self.in_air) || alien_type == "bomber") && sMeansOfDeath != "MOD_SUICIDE") {
+      } else if(attacker_is_player && (is_true(self.in_air) || alien_type == "bomber") && sMeansOfDeath != "MOD_SUICIDE") {
         maps\mp\alien\_challenge::update_challenge("kill_airborne_aliens", 1);
-      }
-      else if(attacker_is_player && alien_type == "ancestor") {
+      } else if(attacker_is_player && alien_type == "ancestor") {
         maps\mp\alien\_challenge::update_challenge("kill_airborne_aliens", 1);
       }
       break;
@@ -973,8 +970,7 @@ update_alien_death_challenges(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWe
     case "kill_10_with_turrets":
       if(attacker_is_player && weapon_defined && maps\mp\alien\_damage::isAlienTurret(sWeapon)) {
         maps\mp\alien\_challenge::update_challenge("kill_10_with_turrets", 1);
-      }
-      else if(attacker_defined && isDefined(eAttacker.classname) && eAttacker.classname == "misc_turret" && weapon_defined && maps\mp\alien\_damage::isAlienTurret(sWeapon)) {
+      } else if(attacker_defined && isDefined(eAttacker.classname) && eAttacker.classname == "misc_turret" && weapon_defined && maps\mp\alien\_damage::isAlienTurret(sWeapon)) {
         maps\mp\alien\_challenge::update_challenge("kill_10_with_turrets", 1);
       }
       break;
@@ -994,8 +990,7 @@ update_alien_death_challenges(eInflictor, eAttacker, iDamage, sMeansOfDeath, sWe
     case "kill_10_with_propane":
       if(weapon_defined && sWeapon == "alienpropanetank_mp") {
         maps\mp\alien\_challenge::update_challenge("kill_10_with_propane", 1);
-      }
-      else if(inflictor_defined && isDefined(eInflictor.classname) && eInflictor.classname == "trigger_radius") {
+      } else if(inflictor_defined && isDefined(eInflictor.classname) && eInflictor.classname == "trigger_radius") {
         maps\mp\alien\_challenge::update_challenge("kill_10_with_propane", 1);
       }
       break;
@@ -1071,8 +1066,7 @@ update_alien_damage_challenge(eInflictor, eAttacker, iDamage, iDFlags, sMeansOfD
       if(isDefined(level.current_challenge)) {
         if(level.current_challenge == "75_percent_accuracy") {
           maps\mp\alien\_challenge::update_challenge("75_percent_accuracy", 1);
-        }
-        else if(level.current_challenge == "50_percent_accuracy") {
+        } else if(level.current_challenge == "50_percent_accuracy") {
           maps\mp\alien\_challenge::update_challenge("50_percent_accuracy", 1);
         }
       }

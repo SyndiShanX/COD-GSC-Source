@@ -105,8 +105,7 @@ patientZeroWaiter() {
 isRegisteredEvent(type) {
   if(isDefined(level.scoreInfo[type])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -122,8 +121,7 @@ getScoreInfoValue(type) {
   overrideDvar = "scr_" + level.gameType + "_score_" + type;
   if(getDvar(overrideDvar) != "") {
     return getDvarInt(overrideDvar);
-  }
-  else {
+  } else {
     return (level.scoreInfo[type]["value"]);
   }
 }
@@ -259,16 +257,14 @@ onPlayerConnect() {
       if(IsSquadsMode()) {
         if(player GetRankedPlayerData("prestigeDoubleXp")) {
           player.prestigeDoubleXp = true;
-        }
-        else {
+        } else {
           player.prestigeDoubleXp = false;
         }
       }
 
       if(player GetRankedPlayerData("prestigeDoubleWeaponXp")) {
         player.prestigeDoubleWeaponXp = true;
-      }
-      else {
+      } else {
         player.prestigeDoubleWeaponXp = false;
       }
     }
@@ -306,8 +302,7 @@ playerUpdateRank() {
   if(IsAI(self) || !isDefined(self.pers["prestige"])) {
     if(level.rankedMatch && isDefined(self.bufferedStats)) {
       prestige = self getPrestigeLevel();
-    }
-    else {
+    } else {
       prestige = 0;
     }
 
@@ -334,8 +329,7 @@ onPlayerGiveLoadout() {
       } else {
         if(IsAI(self)) {
           self.pers["rankxp"] = 0;
-        }
-        else {
+        } else {
           AssertEx(isDefined(self.class_num), "Player should have class_num here.");
 
         }
@@ -347,8 +341,7 @@ onPlayerGiveLoadout() {
 roundUp(floatVal) {
   if(int(floatVal) != floatVal) {
     return int(floatVal + 1);
-  }
-  else {
+  } else {
     return int(floatVal);
   }
 }
@@ -356,8 +349,7 @@ roundUp(floatVal) {
 giveRankXP(type, value, weapon, sMeansOfDeath, challengeName, victim) {
   if(is_aliens()) {
     return;
-  }
-  else {
+  } else {
     giveRankXP_regularMP(type, value, weapon, sMeansOfDeath, challengeName, victim);
   }
 }
@@ -389,8 +381,7 @@ giveRankXP_regularMP(type, value, weapon, sMeansOfDeath, challengeName, victim) 
     if(type == "assist") {
       if(isDefined(self.taggedAssist)) {
         self.taggedAssist = undefined;
-      }
-      else {
+      } else {
         event = "assist";
         if(level.gameType == "cranked") {
           if(isDefined(self.cranked)) {
@@ -557,8 +548,7 @@ giveRankXP_regularMP(type, value, weapon, sMeansOfDeath, challengeName, victim) 
       teamXPScale = 1;
       if(level.teamBased) {
         teamXPScale = level.teamXPScale[self.team];
-      }
-      else {
+      } else {
         if(isDefined(level.teamXPScale[self GetEntityNumber()])) {
           teamXPScale = level.teamXPScale[self GetEntityNumber()];
         }
@@ -569,8 +559,7 @@ giveRankXP_regularMP(type, value, weapon, sMeansOfDeath, challengeName, victim) 
       if(isDefined(level.nukeDetonated) && level.nukeDetonated) {
         if(level.teamBased && level.nukeInfo.team == self.team) {
           modifiedValue *= level.nukeInfo.xpScalar;
-        }
-        else if(!level.teamBased && level.nukeInfo.player == self) {
+        } else if(!level.teamBased && level.nukeInfo.player == self) {
           modifiedValue *= level.nukeInfo.xpScalar;
         }
 
@@ -638,8 +627,7 @@ giveRankXP_regularMP(type, value, weapon, sMeansOfDeath, challengeName, victim) 
 
     if(curRank < 5) {
       self giveUnlockPoints(5, false);
-    }
-    else {
+    } else {
       self giveUnlockPoints(2, false);
     }
   }
@@ -664,8 +652,7 @@ giveRankXP_regularMP(type, value, weapon, sMeansOfDeath, challengeName, victim) 
     if(type == "assist") {
       if(isDefined(self.taggedAssist)) {
         self.taggedAssist = undefined;
-      }
-      else {
+      } else {
         event = "assist";
         if(level.gameType == "cranked") {
           if(isDefined(self.cranked)) {
@@ -972,8 +959,7 @@ xpEventPopupFinalize(event) {
 xpEventPopup(event) {
   if(is_aliens()) {
     return;
-  }
-  else {
+  } else {
     xpEventPopup_regularMP(event);
   }
 }
@@ -995,8 +981,7 @@ getRank() {
 
   if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))) {
     return rankId;
-  }
-  else {
+  } else {
     return self getRankForXp(rankXp);
   }
 }
@@ -1036,8 +1021,7 @@ getRankForXp(xpVal) {
     rankId++;
     if(isDefined(level.rankTable[rankId])) {
       rankName = level.rankTable[rankId][1];
-    }
-    else {
+    } else {
       rankName = undefined;
     }
   }
@@ -1240,8 +1224,7 @@ createMultiplierText() {
   hud_multiplierText.x = 70;
   if(level.splitScreen) {
     hud_multiplierText.y = -55;
-  }
-  else {
+  } else {
     hud_multiplierText.y = -10;
   }
   hud_multiplierText.font = "default";
@@ -1312,11 +1295,9 @@ watchDevDvars() {
 
         if(weaponTokens[0] == "iw5" || weaponTokens[0] == "iw6") {
           weaponName = weaponTokens[0] + "_" + weaponTokens[1];
-        }
-        else if(weaponTokens[0] == "alt") {
+        } else if(weaponTokens[0] == "alt") {
           weaponName = weaponTokens[1] + "_" + weaponTokens[2];
-        }
-        else {
+        } else {
           weaponName = weaponTokens[0];
         }
 

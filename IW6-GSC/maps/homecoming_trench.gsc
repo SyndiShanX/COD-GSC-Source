@@ -95,8 +95,7 @@ beach_trenches_dialogue() {
 
   if(isDefined(var_1)) {
     var_1 maps\_utility::play_sound_on_tag("homcom_us2_sirthosetrenchesare", "j_head");
-  }
-  else {
+  } else {
     level.hesh maps\_utility::play_sound_on_tag("homcom_us2_sirthosetrenchesare", "j_head");
   }
 
@@ -111,8 +110,7 @@ beach_trenches_dialogue() {
 
   if(isDefined(var_1)) {
     var_1 maps\_utility::play_sound_on_tag("homcom_us2_enemytankpullingout", "j_head");
-  }
-  else {
+  } else {
     level.hesh maps\_utility::play_sound_on_tag("homcom_us2_enemytankpullingout", "j_head");
   }
 
@@ -155,7 +153,7 @@ beach_trenches_combat() {
   var_1 = getEntArray("trench_entrance_turret_targets", "targetname");
 
   foreach(var_3 in var_0) {
-  var_3 thread maps\homecoming_util::turret_shoot_targets(var_1, 1);
+    var_3 thread maps\homecoming_util::turret_shoot_targets(var_1, 1);
   }
 
   maps\_utility::activate_trigger("trench_start_friendlies", "targetname");
@@ -212,7 +210,7 @@ beach_trenches_combat() {
   var_1 = getEntArray("trench_hovercraft_turret_targets", "targetname");
 
   foreach(var_3 in var_0) {
-  var_3 thread maps\homecoming_util::turret_shoot_targets(var_1, 1);
+    var_3 thread maps\homecoming_util::turret_shoot_targets(var_1, 1);
   }
 
   maps\_utility::activate_trigger("trenches_rightpath_moveup_watcher", "script_noteworthy");
@@ -397,8 +395,7 @@ trench_main_friendlies() {
 
   if(common_scripts\utility::flag("FLAG_trench_respawner_2")) {
     var_1 = getent("trench_main_friendlies_respawner_2", "targetname");
-  }
-  else if(common_scripts\utility::flag("FLAG_trench_respawner_1")) {
+  } else if(common_scripts\utility::flag("FLAG_trench_respawner_1")) {
     var_1 = getent("trench_main_friendlies_respawner_1", "targetname");
   }
 
@@ -719,7 +716,7 @@ trench_hovercraft_over_moment() {
   var_9 = ["trench_hovercraft_fans_back", "trench_hovercraft_fans_middle", "trench_hovercraft_fans_front"];
 
   foreach(var_12, var_11 in var_8) {
-  thread maps\_utility::play_loop_sound_on_tag(var_9[var_12], var_11);
+    thread maps\_utility::play_loop_sound_on_tag(var_9[var_12], var_11);
   }
 
   common_scripts\utility::flag_wait_any("TRIGFLAG_start_tower_destruction_sequence", "FLAG_over_trench_hovercraft_gone");
@@ -768,8 +765,7 @@ trench_hovercraft_over_moment_stumblers() {
 
       if(self == level.hesh) {
         self.ignoreall = 0;
-      }
-      else {
+      } else {
         maps\homecoming_util::clear_ignore_everything();
       }
     }
@@ -787,8 +783,7 @@ trench_hovercraft_over_moment_stumblers() {
 
   if(self == level.hesh) {
     self.ignoreall = 0;
-  }
-  else {
+  } else {
     maps\homecoming_util::clear_ignore_everything();
   }
 
@@ -822,8 +817,7 @@ trench_tower_explode() {
 
     if(isDefined(var_3.script_delay)) {
       var_1 = var_1 + var_3.script_delay;
-    }
-    else {
+    } else {
       var_1 = 1.35;
     }
 
@@ -1197,7 +1191,7 @@ trench_beach_axis_ambient() {
   var_5 = common_scripts\utility::getstructarray("trench_beach_ambient_fire", "targetname");
 
   foreach(var_7 in var_5) {
-  thread maps\homecoming_util::ambient_smallarms_fire(var_7, "beach_ambient_stop");
+    thread maps\homecoming_util::ambient_smallarms_fire(var_7, "beach_ambient_stop");
   }
 
   if(isDefined(level.trench_beach_hovercrafts)) {

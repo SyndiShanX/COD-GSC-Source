@@ -12,11 +12,10 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreak_bundles;
-
 #namespace swat_team;
 
 autoexec __init__system__() {
-  system::register(#"swat_team", &__init__, undefined, #"killstreaks");
+  system::register(#"swat_team", &__init__, undefined, # "killstreaks");
 }
 
 __init__() {
@@ -31,8 +30,8 @@ __init__() {
 }
 
 spawned(local_client_num, bundle) {
-  if(self.subarchetype === #"human_lmg") {
-    if(self.team === #"free" && isDefined(level.var_fd6018ca) && level.var_fd6018ca) {
+  if(self.subarchetype === # "human_lmg") {
+    if(self.team === # "free" && isDefined(level.var_fd6018ca) && level.var_fd6018ca) {
       self killstreak_bundles::spawned(local_client_num, level.var_c80088b7);
       return;
     }
@@ -75,7 +74,7 @@ function_8fa6561f(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
 private function_d9dea06b(localclientnum, oldvalue, newvalue, bnewent, binitialsnap, fieldname, wasdemojump) {
   if(newvalue) {
     if(self flag::exists(#"friendly")) {
-      self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? #"rob_sonar_set_friendlyequip_cp" : #"rob_sonar_set_friendlyequip_mp", 0);
+      self renderoverridebundle::stop_bundle(#"friendly", sessionmodeiscampaigngame() ? # "rob_sonar_set_friendlyequip_cp" : # "rob_sonar_set_friendlyequip_mp", 0);
     }
   }
 }

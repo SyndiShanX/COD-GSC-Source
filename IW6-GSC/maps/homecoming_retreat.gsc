@@ -214,7 +214,7 @@ tower_entrance_attackers() {
   var_5 = maps\_utility::array_spawn(getEntArray("tower_entrance_attackers", "targetname"));
 
   foreach(var_7 in var_5) {
-  var_7 setentitytarget(var_4);
+    var_7 setentitytarget(var_4);
   }
 
   common_scripts\utility::flag_wait("TRIGFLAG_kill_tower_attackers");
@@ -315,11 +315,9 @@ tower_retreaters() {
 
   if(maps\homecoming_util::parameters_check("sprint")) {
     maps\_utility::enable_sprint();
-  }
-  else if(maps\homecoming_util::parameters_check("combat_jog")) {
+  } else if(maps\homecoming_util::parameters_check("combat_jog")) {
     maps\_utility::set_generic_run_anim("combat_jog");
-  }
-  else if(maps\homecoming_util::parameters_check("scared_run")) {
+  } else if(maps\homecoming_util::parameters_check("scared_run")) {
     maps\_utility::set_generic_run_anim("scared_run");
     maps\_utility::set_moveplaybackrate(0.9);
   }
@@ -397,7 +395,7 @@ tower_pickup_b() {
   var_1 maps\_anim::anim_single_run(var_8, "tower_pickup_b");
 
   foreach(var_6 in var_8) {
-  var_6 thread maps\_utility::follow_path_and_animate(var_6.movestruct, 0);
+    var_6 thread maps\_utility::follow_path_and_animate(var_6.movestruct, 0);
   }
 
   var_2.animname = "generic";
@@ -486,8 +484,7 @@ tower_explosion_guy() {
 
     if(var_7 maps\homecoming_util::parameters_check("left")) {
       var_10 = var_7.originalangles + (0, randomintrange(-10, 0), 0);
-    }
-    else {
+    } else {
       var_10 = var_7.originalangles + (0, randomintrange(0, 10), 0);
     }
 
@@ -881,8 +878,7 @@ elias_street_dialogue() {
 
     if(isDefined(var_1)) {
       var_1 maps\_utility::play_sound_on_tag("homcom_us1_wegotenemiesfast", "j_head");
-    }
-    else {
+    } else {
       level.hesh maps\_utility::play_sound_on_tag("homcom_us1_wegotenemiesfast", "j_head");
     }
 
@@ -908,7 +904,7 @@ elias_house_window_explosion() {
   destroyglass(var_0, var_2);
 
   foreach(var_4 in var_1) {
-  common_scripts\utility::noself_delaycall(0.1, ::destroyglass, var_4, var_2);
+    common_scripts\utility::noself_delaycall(0.1, ::destroyglass, var_4, var_2);
   }
 
   common_scripts\utility::flag_wait("FLAG_garage_door_closed");
@@ -1063,8 +1059,7 @@ dog_bark(var_0, var_1, var_2) {
   for(;;) {
     if(var_0) {
       maps\_utility::play_sound_on_entity("anml_dog_bark_attention_npc");
-    }
-    else {
+    } else {
       maps\_utility_dogs::dog_bark("anml_dog_bark_attention_npc");
     }
 
@@ -1241,7 +1236,7 @@ elias_street_dragging_wounded() {
   var_1 thread maps\_anim::anim_single(var_4, "elias_street_drag_wounded_drag");
 
   foreach(var_6 in var_4) {
-  var_6 setanimtime(var_6 maps\_utility::getanim("elias_street_drag_wounded_drag"), 0.2);
+    var_6 setanimtime(var_6 maps\_utility::getanim("elias_street_drag_wounded_drag"), 0.2);
   }
 
   var_1 waittill("elias_street_drag_wounded_drag");
@@ -1399,8 +1394,7 @@ elias_house_dog_logic() {
 
     if(common_scripts\utility::flag("FLAG_garage_door_open")) {
       self notify("new_anim_reach");
-    }
-    else {
+    } else {
       level.dog thread maps\_utility::play_sound_on_entity("scn_home_dog_scratching_door");
       level.dog thread maps\_utility::play_sound_on_entity("anml_dog_whine");
       var_0 maps\_anim::anim_single_solo(level.dog, "dog_scratch_door");
@@ -1613,11 +1607,9 @@ elias_house_lift_prone_hint(var_0) {
 
   if(isDefined(var_1) && var_1["count"] > 0) {
     maps\_utility::display_hint("prone_hint_hold");
-  }
-  else if(isDefined(var_2) && var_2["count"] > 0) {
+  } else if(isDefined(var_2) && var_2["count"] > 0) {
     maps\_utility::display_hint("prone_hint_toggle");
-  }
-  else if(isDefined(var_3) && var_3["count"] > 0) {
+  } else if(isDefined(var_3) && var_3["count"] > 0) {
     maps\_utility::display_hint("prone_hint");
   }
 }
@@ -1874,8 +1866,7 @@ elias_house_attack_knife_anim_logic(var_0, var_1) {
 
     if(isDefined(var_2) && var_2 == "timeout") {
       var_3 = 1;
-    }
-    else {
+    } else {
       thread elias_house_attack_knife_fail(var_0, var_1);
     }
 
@@ -1922,15 +1913,13 @@ elias_house_attack_knife_getvariable(var_0, var_1) {
 
   if(var_1) {
     var_3 = var_3 + var_2["increase"];
-  }
-  else {
+  } else {
     var_3 = var_3 - var_2["decrease"];
   }
 
   if(var_3 >= var_2["max"]) {
     var_3 = var_2["max"];
-  }
-  else if(var_3 <= var_2["min"]) {
+  } else if(var_3 <= var_2["min"]) {
     var_3 = var_2["min"];
   }
 
@@ -2097,7 +2086,7 @@ elias_house_attack_door() {
   }
 
   foreach(var_4 in var_2) {
-  var_4 linkto(var_1);
+    var_4 linkto(var_1);
   }
 
   wait 0.7;

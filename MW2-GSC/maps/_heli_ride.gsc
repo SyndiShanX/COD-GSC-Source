@@ -61,7 +61,7 @@ ride_setup(startnode, players_array) {
   }
 
   foreach(player in players_array) {
-  thread attach_player(player, 3);
+    thread attach_player(player, 3);
   }
 
   speed = 95;
@@ -121,8 +121,7 @@ attach_player(player, position, animfudgetime) {
 
   if(isDefined(level.little_bird)) {
     player playerlinkto(guy, "tag_player", 0.35, 120, 28, 30, 30, false);
-  }
-  else {
+  } else {
     player playerlinkto(guy, "tag_player", 0.35, 60, 28, 30, 30, false);
   }
 

@@ -34,8 +34,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage_1(success) {
-}
+exit_stage_1(success) {}
 
 sq_atd_dragon_icon_setup() {
   a_dragon_icons = getEntArray("elevator_dragon_icon", "targetname");

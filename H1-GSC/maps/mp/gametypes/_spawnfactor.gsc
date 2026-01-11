@@ -7,8 +7,7 @@
 score_factor(var_0, var_1, var_2, var_3) {
   if(isDefined(var_3)) {
     var_4 = [[var_1]](var_2, var_3);
-  }
-  else {
+  } else {
     var_4 = [[var_1]](var_2);
   }
 
@@ -22,8 +21,7 @@ score_factor(var_0, var_1, var_2, var_3) {
 critical_factor(var_0, var_1, var_2) {
   if(isDefined(var_2)) {
     var_3 = [[var_0]](var_1, var_2);
-  }
-  else {
+  } else {
     var_3 = [[var_0]](var_1);
   }
 
@@ -262,8 +260,7 @@ avoidenemiesbydistance(var_0) {
 avoidflagbydistance(var_0) {
   if(var_0.enemyflagdist > 0) {
     var_1 = var_0.friendlyflagdist / var_0.enemyflagdist / var_0.friendlyflag.highestspawndistratio * 1.33;
-  }
-  else {
+  } else {
     var_1 = 0;
   }
 
@@ -306,11 +303,9 @@ avoidzone(var_0, var_1) {
 
   if(var_3 >= var_5) {
     return 100 * (1.0 - 0.25 * (var_3 - var_5) / (var_4 - var_5));
-  }
-  else if(var_3 > 0) {
+  } else if(var_3 > 0) {
     return 100.0 * (var_3 / var_5);
-  }
-  else {
+  } else {
     return 0;
   }
 }

@@ -62,8 +62,7 @@ ambient_flak_rotate(point) {
 
   if(isDefined(point.angles)) {
     pointangles = point.angles;
-  }
-  else {
+  } else {
     pointangles = (0, 0, 0);
   }
 
@@ -139,8 +138,7 @@ ambient_fakefire_think(point) {
     case "allies_assault":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_bar_fire";
-      }
-      else {
+      } else {
         firesound = "weap_dp28_fire_plr";
       }
 
@@ -156,8 +154,7 @@ ambient_fakefire_think(point) {
     case "axis_assault":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_mp44_fire";
-      }
-      else {
+      } else {
         firesound = "weap_type99_fire";
       }
 
@@ -173,8 +170,7 @@ ambient_fakefire_think(point) {
     case "allies_rifle":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_m1garand_fire";
-      }
-      else {
+      } else {
         firesound = "weap_mosinnagant_fire";
       }
 
@@ -190,8 +186,7 @@ ambient_fakefire_think(point) {
     case "axis_rifle":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_kar98k_fire";
-      }
-      else {
+      } else {
         firesound = "weap_arisaka_fire";
       }
 
@@ -207,8 +202,7 @@ ambient_fakefire_think(point) {
     case "allies_smg":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_thompson_fire";
-      }
-      else {
+      } else {
         firesound = "weap_ppsh_fire";
       }
 
@@ -224,8 +218,7 @@ ambient_fakefire_think(point) {
     case "axis_smg":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_mp40_fire";
-      }
-      else {
+      } else {
         firesound = "weap_type100_fire";
       }
 
@@ -241,8 +234,7 @@ ambient_fakefire_think(point) {
     case "allies_turret":
       if(isDefined(level.allies_team) && level.allies_team == "marines") {
         firesound = "weap_30cal_fire";
-      }
-      else {
+      } else {
         firesound = "weap_dp28_fire_plr";
       }
 
@@ -258,8 +250,7 @@ ambient_fakefire_think(point) {
     case "axis_turret":
       if(isDefined(level.axis_team) && level.axis_team == "german") {
         firesound = "weap_bar_fire";
-      }
-      else {
+      } else {
         firesound = "weap_type92_fire";
       }
 
@@ -506,8 +497,7 @@ spoon_spin_func() {
 
   if(isDefined(self.script_float)) {
     model_speed = self.script_float;
-  }
-  else {
+  } else {
     model_speed = 2;
   }
 
@@ -523,15 +513,13 @@ arrow_spin_func() {
 
   if(isDefined(self.script_int)) {
     model_direction_change = self.script_int;
-  }
-  else {
+  } else {
     model_direction_change = 25;
   }
 
   if(isDefined(self.script_float)) {
     model_speed = self.script_float;
-  }
-  else {
+  } else {
     model_speed = 0.8;
   }
 

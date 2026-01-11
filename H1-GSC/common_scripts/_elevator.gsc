@@ -54,8 +54,7 @@ elevator_update_global_dvars() {
 
     if(common_scripts\utility::issp()) {
       level.elevator_motion_detection = elevator_get_dvar_int("scr_elevator_motion_detection", "0");
-    }
-    else {
+    } else {
       level.elevator_motion_detection = elevator_get_dvar_int("scr_elevator_motion_detection", "1");
     }
 
@@ -69,7 +68,7 @@ elevator_think() {
 
 elevator_call() {
   foreach(var_1 in level.elevator_callbuttons) {
-  var_1 thread monitor_callbutton();
+    var_1 thread monitor_callbutton();
   }
 }
 
@@ -111,8 +110,7 @@ elevator_fsm(var_0) {
       for(;;) {
         if(self.moveto_floor == get_curfloor()) {
           var_3 = var_2 discrete_waittill("trigger");
-        }
-        else {
+        } else {
           var_3 = "elevator_called";
         }
 
@@ -564,7 +562,7 @@ build_elevators() {
   }
 
   foreach(var_17 in var_2) {
-  var_17 delete();
+    var_17 delete();
   }
 
   build_call_buttons();
@@ -578,7 +576,7 @@ build_elevators() {
 
     if(isDefined(var_40) && var_40.size) {
       foreach(var_42 in var_40) {
-      var_42 setlightintensity(0.75);
+        var_42 setlightintensity(0.75);
       }
     }
   }
@@ -643,8 +641,7 @@ discrete_waittill(var_0) {
 
   if(level.elevator_motion_detection) {
     self.motion_trigger waittill(var_0, var_1);
-  }
-  else {
+  } else {
     self waittill(var_0, var_1);
   }
 
@@ -729,13 +726,13 @@ get_housing_children() {
   var_6 = get_housing_models();
 
   foreach(var_8 in var_6) {
-  var_0[var_0.size] = var_8;
+    var_0[var_0.size] = var_8;
   }
 
   var_10 = get_housing_primarylight();
 
   foreach(var_12 in var_10) {
-  var_0[var_0.size] = var_12;
+    var_0[var_0.size] = var_12;
   }
 
   return var_0;
@@ -883,8 +880,7 @@ elevator_get_dvar_int(var_0, var_1) {
 elevator_get_dvar(var_0, var_1) {
   if(getdvar(var_0) != "") {
     return getdvarfloat(var_0);
-  }
-  else {
+  } else {
     setdvar(var_0, var_1);
     return var_1;
   }
@@ -902,8 +898,7 @@ elevator_debug() {
       var_2 = var_1 get_housing_mainframe();
       var_3 = var_1 get_housing_musak_model();
 
-      foreach(var_6, var_5 in var_1.e["outer_doorset"]) {
-      }
+      foreach(var_6, var_5 in var_1.e["outer_doorset"]) {}
     }
 
     foreach(var_9 in level.elevator_callbuttons) {

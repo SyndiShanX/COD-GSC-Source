@@ -82,8 +82,7 @@ init() {
 
   if(var_1.size) {
     level.func_12AF6 = scripts\mp\spawnlogic::findboxcenter(var_1[0].origin, var_1[1].origin);
-  }
-  else {
+  } else {
     level.func_12AF6 = (0, 0, 0);
   }
 
@@ -330,8 +329,7 @@ launchuav(var_00, var_01, var_02) {
 
   if(isDefined(level.spawnpoints)) {
     var_12 = level.spawnpoints;
-  }
-  else {
+  } else {
     var_12 = level.func_10DF1;
   }
 
@@ -695,25 +693,21 @@ _getradarstrength(var_00) {
 
   if(var_00 == "axis") {
     level.axisactiveuavs = var_01;
-  }
-  else {
+  } else {
     level.alliesactiveuavs = var_01;
   }
 
   if(var_02 > 0) {
     var_16 = var_14;
-  }
-  else if(var_03 > 0) {
+  } else if(var_03 > 0) {
     var_16 = var_15;
-  }
-  else {
+  } else {
     var_16 = int(clamp(var_01 + getuavstrengthlevelneutral(), getuavstrengthlevelneutral(), getuavstrengthlevelshowenemyfastsweep()));
   }
 
   if(var_16 <= var_14) {
     var_16 = var_14;
-  }
-  else if(var_16 >= var_15) {
+  } else if(var_16 >= var_15) {
     var_16 = var_15;
   }
 
@@ -733,15 +727,13 @@ func_12F3F(var_00, var_01) {
 
   if(isDefined(var_01)) {
     var_07 = var_01;
-  }
-  else {
+  } else {
     var_07 = _getradarstrength(var_00);
   }
 
   if(var_00 == "axis") {
     var_08 = level.axisactiveuavs;
-  }
-  else {
+  } else {
     var_08 = level.alliesactiveuavs;
   }
 
@@ -763,8 +755,7 @@ func_12F3F(var_00, var_01) {
 
     if(var_11 <= var_02) {
       var_11 = var_02;
-    }
-    else if(var_11 >= var_03) {
+    } else if(var_11 >= var_03) {
       var_11 = var_03;
     }
 
@@ -772,8 +763,7 @@ func_12F3F(var_00, var_01) {
 
     if(var_11 >= var_05) {
       var_10.isradarblocked = 0;
-    }
-    else {
+    } else {
       var_10.isradarblocked = 1;
     }
 
@@ -819,8 +809,7 @@ func_12EF2() {
 
     if(var_06 <= var_00) {
       var_06 = var_00;
-    }
-    else if(var_06 >= var_01) {
+    } else if(var_06 >= var_01) {
       var_06 = var_01;
     }
 
@@ -828,8 +817,7 @@ func_12EF2() {
 
     if(var_06 >= getuavstrengthlevelneutral()) {
       var_5.isradarblocked = 0;
-    }
-    else {
+    } else {
       var_5.isradarblocked = 1;
     }
 
@@ -855,8 +843,7 @@ func_12EF2() {
 setradarmode(var_00, var_01, var_02) {
   if(var_00 >= var_01) {
     self.radarmode = "fast_radar";
-  }
-  else {
+  } else {
     self.radarmode = "normal_radar";
   }
 
@@ -865,8 +852,7 @@ setradarmode(var_00, var_01, var_02) {
 
     if(level.teambased) {
       var_03 = level.uavmodels[self.team];
-    }
-    else {
+    } else {
       var_03 = level.uavmodels;
     }
 
@@ -919,8 +905,7 @@ useplayeruav(var_00, var_01) {
 
   if(var_00) {
     self.radarmode = "fast_radar";
-  }
-  else {
+  } else {
     self.radarmode = "normal_radar";
   }
 
@@ -956,8 +941,7 @@ func_10FA8(var_00, var_01) {
   for(;;) {
     if(!isDefined(var_00)) {
       var_04 = var_03;
-    }
-    else {
+    } else {
       var_04 = var_00 getpointinbounds(0, 0, 0);
     }
 
@@ -988,8 +972,7 @@ func_10FA8(var_00, var_01) {
 func_1867() {
   if(level.teambased) {
     level.uavmodels[self.team][level.uavmodels[self.team].size] = self;
-  }
-  else {
+  } else {
     level.uavmodels[self.owner.guid + "_" + gettime()] = self;
   }
 }
@@ -1046,8 +1029,7 @@ func_179A() {
 func_1799() {
   if(level.teambased) {
     level.func_164F[self.team]++;
-  }
-  else {
+  } else {
     level.func_164F[self.owner.guid]++;
   }
 }
@@ -1073,8 +1055,7 @@ func_E0C1() {
 func_E0BF() {
   if(level.teambased) {
     level.func_164F[self.team]--;
-  }
-  else if(isDefined(self.owner)) {
+  } else if(isDefined(self.owner)) {
     level.func_164F[self.owner.guid]--;
   }
 }
@@ -1099,8 +1080,7 @@ func_13920(var_00, var_01) {
 
   if(level.teambased) {
     level.activeuavs[self.team]++;
-  }
-  else {
+  } else {
     level.activeuavs[self.guid]++;
   }
 
@@ -1346,8 +1326,7 @@ startemppulse() {
 
     if(scripts\mp\equipment\phase_shift::isentityphaseshifted(var_01)) {
       var_03 = 0;
-    }
-    else if(scripts\mp\utility\game::istrue(var_1.visionpulsevisionsetactive)) {
+    } else if(scripts\mp\utility\game::istrue(var_1.visionpulsevisionsetactive)) {
       var_03 = 0;
     }
 
@@ -1405,11 +1384,9 @@ func_52C5(var_00, var_01) {
 
   if(isDefined(var_03) && isDefined(var_04)) {
     var_05 = scripts\engine\utility::array_combine_unique(var_03, var_04);
-  }
-  else if(isDefined(var_03)) {
+  } else if(isDefined(var_03)) {
     var_05 = var_03;
-  }
-  else if(isDefined(var_04)) {
+  } else if(isDefined(var_04)) {
     var_05 = var_04;
   }
 

@@ -25,8 +25,7 @@ lasersight_think() {
 
       if(maps\mp\gametypes\_class::isexoxmg(self getcurrentweapon()) || maps\mp\gametypes\_class::issac3(self getcurrentweapon())) {
         self laseron("mp_attachment_lasersight_short");
-      }
-      else {
+      } else {
         self laseron("mp_attachment_lasersight");
       }
     }
@@ -54,8 +53,7 @@ lasersight_think() {
 
         if(maps\mp\gametypes\_class::isexoxmg(self getcurrentweapon()) || maps\mp\gametypes\_class::issac3(self getcurrentweapon())) {
           self laseron("mp_attachment_lasersight_short");
-        }
-        else {
+        } else {
           self laseron("mp_attachment_lasersight");
         }
 
@@ -71,8 +69,7 @@ lasersight_think() {
     } else if(!isDefined(self.laser_on) || !self.laser_on) {
       if(maps\mp\gametypes\_class::isexoxmg(self getcurrentweapon()) || maps\mp\gametypes\_class::issac3(self getcurrentweapon())) {
         self laseron("mp_attachment_lasersight_short");
-      }
-      else {
+      } else {
         self laseron("mp_attachment_lasersight");
       }
 

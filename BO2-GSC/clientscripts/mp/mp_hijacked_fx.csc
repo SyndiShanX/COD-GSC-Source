@@ -7,8 +7,7 @@
 #include clientscripts\mp\createfx\mp_hijacked_fx;
 #include clientscripts\mp\_fx;
 
-precache_scripted_fx() {
-}
+precache_scripted_fx() {}
 
 precache_createfx_fx() {
   level._effect["fx_fire_candle"] = loadfx("fire/fx_fire_candle");

@@ -10,7 +10,6 @@
 #include scripts\core_common\ai\systems\behavior_tree_utility;
 #include scripts\core_common\ai_shared;
 #include scripts\core_common\laststand_shared;
-
 #namespace archetype_human_cover;
 
 autoexec registerbehaviorscriptfunctions() {
@@ -99,7 +98,7 @@ shouldthrowgrenadeatcovercondition(entity, throwifpossible = 0) {
 
   entityangles = entity.angles;
 
-  if(isDefined(entity.node) && (entity.node.type == #"cover left" || entity.node.type == #"cover right" || entity.node.type == #"cover pillar" || entity.node.type == #"cover stand" || entity.node.type == #"conceal stand" || entity.node.type == #"cover crouch" || entity.node.type == #"cover crouch window" || entity.node.type == #"conceal crouch") && entity isatcovernodestrict()) {
+  if(isDefined(entity.node) && (entity.node.type == # "cover left" || entity.node.type == # "cover right" || entity.node.type == # "cover pillar" || entity.node.type == # "cover stand" || entity.node.type == # "conceal stand" || entity.node.type == # "cover crouch" || entity.node.type == # "cover crouch window" || entity.node.type == # "conceal crouch") && entity isatcovernodestrict()) {
     entityangles = entity.node.angles;
   }
 
@@ -226,7 +225,7 @@ private covercleanuptothrowgrenade(entity) {
       if(isDefined(grenade)) {
         grenade.owner = entity;
         grenade.team = entity.team;
-        grenade setcontents(grenade setcontents(0)&~(32768 | 67108864 | 8388608 | 33554432));
+        grenade setcontents(grenade setcontents(0) &~(32768 | 67108864 | 8388608 | 33554432));
       }
     }
   }
@@ -234,9 +233,9 @@ private covercleanuptothrowgrenade(entity) {
 
 private canchangestanceatcovercondition(entity) {
   switch (entity getblackboardattribute("_stance")) {
-    case #"stand":
+    case # "stand":
       return aiutility::isstanceallowedatnode("crouch", entity.node);
-    case #"crouch":
+    case # "crouch":
       return aiutility::isstanceallowedatnode("stand", entity.node);
   }
 
@@ -324,7 +323,7 @@ private shouldvantageatcovercondition(entity) {
   aimlimitsforcover = entity getaimlimitsfromentry("cover_vantage");
   legalaim = 0;
 
-  if(yawtoenemyposition < aimlimitsforcover[#"aim_left"] && yawtoenemyposition > aimlimitsforcover[#"aim_right"] && pitchtoenemyposition < 85 && pitchtoenemyposition > 25 && entity.node.origin[2] - entity.enemy.origin[2] >= 36) {
+  if(yawtoenemyposition < aimlimitsforcover[# "aim_left"] && yawtoenemyposition > aimlimitsforcover[# "aim_right"] && pitchtoenemyposition < 85 && pitchtoenemyposition > 25 && entity.node.origin[2] - entity.enemy.origin[2] >= 36) {
     legalaim = 1;
   }
 
@@ -377,10 +376,10 @@ private coverchangestanceactionstart(entity, asmstatename) {
   aiutility::keepclaimnode(entity);
 
   switch (entity getblackboardattribute("_stance")) {
-    case #"stand":
+    case # "stand":
       entity setblackboardattribute("_desired_stance", "crouch");
       break;
-    case #"crouch":
+    case # "crouch":
       entity setblackboardattribute("_desired_stance", "stand");
       break;
   }
@@ -397,23 +396,23 @@ temp_get_arm_offset(entity, throwposition) {
   }
 
   if(isDefined(entity.node) && entity isatcovernodestrict()) {
-    if(entity.node.type == #"cover left") {
+    if(entity.node.type == # "cover left") {
       if(stance == "crouch") {
         arm_offset = (-38, 15, 23);
       } else {
         arm_offset = (-45, 0, 40);
       }
-    } else if(entity.node.type == #"cover right") {
+    } else if(entity.node.type == # "cover right") {
       if(stance == "crouch") {
         arm_offset = (46, 12, 26);
       } else {
         arm_offset = (34, -21, 50);
       }
-    } else if(entity.node.type == #"cover stand" || entity.node.type == #"conceal stand") {
+    } else if(entity.node.type == # "cover stand" || entity.node.type == # "conceal stand") {
       arm_offset = (10, 7, 77);
-    } else if(entity.node.type == #"cover crouch" || entity.node.type == #"cover crouch window" || entity.node.type == #"conceal crouch") {
+    } else if(entity.node.type == # "cover crouch" || entity.node.type == # "cover crouch window" || entity.node.type == # "conceal crouch") {
       arm_offset = (19, 5, 60);
-    } else if(entity.node.type == #"cover pillar") {
+    } else if(entity.node.type == # "cover pillar") {
       leftoffset = undefined;
       rightoffset = undefined;
 
@@ -425,14 +424,14 @@ temp_get_arm_offset(entity, throwposition) {
         rightoffset = (24, 0, 76);
       }
 
-      if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags& 1024) == 1024) {
+      if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 1024) == 1024) {
         arm_offset = rightoffset;
-      } else if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags& 2048) == 2048) {
+      } else if(isDefined(entity.node.spawnflags) && (entity.node.spawnflags & 2048) == 2048) {
         arm_offset = leftoffset;
       } else {
         yawtoenemyposition = angleclamp180(vectortoangles(throwposition - entity.node.origin)[1] - entity.node.angles[1]);
         aimlimitsfordirectionright = entity getaimlimitsfromentry("pillar_right_lean");
-        legalrightdirectionyaw = yawtoenemyposition >= aimlimitsfordirectionright[#"aim_right"] - 10 && yawtoenemyposition <= 0;
+        legalrightdirectionyaw = yawtoenemyposition >= aimlimitsfordirectionright[# "aim_right"] - 10 && yawtoenemyposition <= 0;
 
         if(legalrightdirectionyaw) {
           arm_offset = rightoffset;

@@ -10,8 +10,7 @@ main() {
 
   if(isusinghdr()) {
     maps\createart\airlift_fog_hdr::main();
-  }
-  else {
+  } else {
     maps\createart\airlift_fog::main();
   }
 }

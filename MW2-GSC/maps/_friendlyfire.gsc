@@ -43,8 +43,7 @@ debug_friendlyfire() {
   for(;;) {
     if(GetDebugDvar("debug_friendlyfire") == "1") {
       friendly_fire.alpha = 1;
-    }
-    else {
+    } else {
       friendly_fire.alpha = 0;
     }
 
@@ -136,8 +135,7 @@ friendly_fire_think(entity) {
     civilianKilled = undefined;
     if(level.script != "airport") {
       civilianKilled = IsSubStr(entity.classname, "civilian");
-    }
-    else {
+    } else {
       civilianKilled = false;
     }
 
@@ -180,8 +178,7 @@ friendly_fire_think(entity) {
     if(check_grenade(entity, method) && savecommit_afterGrenade()) {
       if(killed) {
         return;
-      }
-      else {
+      } else {
         continue;
       }
     }
@@ -304,22 +301,21 @@ missionfail(civilianKilled) {
   if(civilianKilled) {
     // You shot a civilian. Watch your fire!
   }
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_CIVILIAN_KILLED"); // You shot a civilian. Watch your fire!
+  SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_CIVILIAN_KILLED"); // You shot a civilian. Watch your fire!
   else if(isDefined(level.custom_friendly_fire_message)) {
     SetDvar("ui_deadquote", level.custom_friendly_fire_message); // friendly fire will not be tolerated
-  }
-  else if(level.campaign == "british") {
+  } else if(level.campaign == "british") {
     // Friendly fire will not be tolerated!
   }
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH"); // Friendly fire will not be tolerated!
+  SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_BRITISH"); // Friendly fire will not be tolerated!
   else if(level.campaign == "russian") {
     // You are a traitor to the motherland!
   }
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN"); // You are a traitor to the motherland!
+  SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_RUSSIAN"); // You are a traitor to the motherland!
   else {
     // Friendly fire will not be tolerated!
   }
-    SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // Friendly fire will not be tolerated!
+  SetDvar("ui_deadquote", &"SCRIPT_MISSIONFAIL_KILLTEAM_AMERICAN"); // Friendly fire will not be tolerated!
 
   // shader if specified
   if(isDefined(level.custom_friendly_fire_shader)) {
@@ -358,7 +354,7 @@ detectFriendlyFireOnEntity(entity) {
   	return;
   }
   AssertEx( isDefined( entity.team ), "You must set .team to allies or axis for an entity calling detectFriendlyFire()" );
-	
+  	
   entity setCanDamage( true );
   level thread friendly_fire_think( entity );
   */

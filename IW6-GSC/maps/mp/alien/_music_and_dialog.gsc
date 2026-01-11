@@ -87,9 +87,7 @@ onGameEnded() {
     if(level.splitscreen) {
       if(winner == "allies") {
         wait .01;
-      }
-
-      else if(winner == "axis") {
+      } else if(winner == "axis") {
         foreach(player in level.players) {
           if(flag("alien_music_playing")) {
             player StopLocalSound("mp_suspense_01");
@@ -137,11 +135,9 @@ onGameEnded() {
       }
       if(player.pers["team"] != "allies" && player.pers["team"] != "axis") {
         player playLocalSound(game["music"]["nuke_music"]);
-      }
-      else if(isDefined(winner) && isPlayer(winner) && player == winner) {
+      } else if(isDefined(winner) && isPlayer(winner) && player == winner) {
         player playLocalSound(game["music"]["victory_" + player.pers["team"]]);
-      }
-      else if(!level.splitScreen) {
+      } else if(!level.splitScreen) {
         player playLocalSound(game["music"]["defeat_" + player.pers["team"]]);
       }
     }
@@ -236,8 +232,7 @@ alienPlayerPainBreathingSound() {
     if(shouldPlayPainBreathingSound()) {
       if(self hasFemaleCustomizationModel()) {
         self playLocalSound("Fem_breathing_hurt");
-      }
-      else {
+      } else {
         self playLocalSound("breathing_hurt_alien");
       }
       wait(.784);
@@ -857,8 +852,7 @@ playVOForPillage(player) {
 
   if(alias_2d_version_exists(player, alias)) {
     player playlocalsound(get_alias_2d_version(player, alias));
-  }
-  else if(SoundExists(alias)) {
+  } else if(SoundExists(alias)) {
     player playlocalsound(alias);
   }
 }
@@ -982,7 +976,7 @@ play_vo_on_player(alias, priority, timeout, interrupt, pause_time, only_local) {
 
 playVOToAllPlayers(alias, priority, timeout, interrupt, pause_time) {
   foreach(player in level.players) {
-  player add_to_VO_system(alias, priority, timeout, interrupt, pause_time);
+    player add_to_VO_system(alias, priority, timeout, interrupt, pause_time);
   }
 }
 
@@ -1112,8 +1106,7 @@ play_VO(VO_to_play) {
     if(player == self) {
       if(alias_2d_version_exists(player, alias)) {
         player playlocalsound(get_alias_2d_version(player, alias));
-      }
-      else {
+      } else {
         player playlocalsound(alias);
       }
     } else {
@@ -1149,8 +1142,7 @@ create_VO_data(alias, timeout, pause_time, only_local) {
 
   if(is_true(only_local)) {
     VO_data.only_local = true;
-  }
-  else {
+  } else {
     VO_data.only_local = false;
   }
 
@@ -1250,7 +1242,7 @@ is_VO_system_paused() {
 
 pause_VO_system(player_list) {
   foreach(player in player_list) {
-  player.pause_VO_system = true;
+    player.pause_VO_system = true;
   }
 }
 

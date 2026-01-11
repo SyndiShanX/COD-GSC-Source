@@ -10,9 +10,7 @@ func_BD2B() {
     var_00 = "stand";
   }
 
-  var_01 = [
-    [self.var_3EF3]
-  ](var_00);
+  var_01 = [[self.var_3EF3]](var_00);
   switch (var_01) {
     case "stand":
       if(scripts\anim\setposemovement::func_10B84()) {

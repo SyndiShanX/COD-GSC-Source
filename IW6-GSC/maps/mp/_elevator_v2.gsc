@@ -34,8 +34,7 @@ init_elevator(config) {
 
     if(isDefined(config.doorOpenTime)) {
       elevator.doorOpenTime = config.doorOpenTime;
-    }
-    else {
+    } else {
       elevator.doorOpenTime = ELEVATOR_DOOR_TIME;
     }
 
@@ -43,8 +42,7 @@ init_elevator(config) {
 
     if(isDefined(config.autoCloseTimeout)) {
       elevator.autoCloseTimeout = config.autoCloseTimeout;
-    }
-    else {
+    } else {
       elevator.autoCloseTimeout = ELEVATOR_AUTOCLOSE_TIMEOUT;
     }
 
@@ -53,8 +51,7 @@ init_elevator(config) {
 
     if(isDefined(config.autoCloseTimeout)) {
       elevator.autoCloseTimeout = config.autoCloseTimeout;
-    }
-    else {
+    } else {
       elevator.autoCloseTimeout = ELEVATOR_AUTOCLOSE_TIMEOUT;
     }
 
@@ -64,8 +61,7 @@ init_elevator(config) {
 
   if(isDefined(config.moveTime)) {
     elevator.moveTime = config.moveTime;
-  }
-  else {
+  } else {
     elevator.moveTime = ELEVATOR_FLOOR_MOVE_TIME;
   }
 

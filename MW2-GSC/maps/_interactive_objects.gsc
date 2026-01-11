@@ -348,11 +348,9 @@ glass_logic() {
 
   if(isDefined(self.script_health)) {
     glasshealth = self.script_health;
-  }
-  else if(isDefined(cracked)) {
+  } else if(isDefined(cracked)) {
     glasshealth = 99;
-  }
-  else {
+  } else {
     glasshealth = 250;
   }
 
@@ -366,11 +364,9 @@ glass_logic() {
     }
     if(!isDefined(damageType)) {
       damage = 100000; // scripted calls to break the glass
-    }
-    else if(damageType == "MOD_GRENADE_SPLASH") {
+    } else if(damageType == "MOD_GRENADE_SPLASH") {
       damage = damage * 1.75;
-    }
-    else if(damageType == "MOD_IMPACT") {
+    } else if(damageType == "MOD_IMPACT") {
       damage = 100000;
     }
 
@@ -399,11 +395,9 @@ glass_logic() {
       }
       if(!isDefined(damageType)) {
         damage = 100000; // scripted calls to break the glass
-      }
-      else if(damageType == "MOD_GRENADE_SPLASH") {
+      } else if(damageType == "MOD_GRENADE_SPLASH") {
         damage = damage * 1.75;
-      }
-      else if(damageType == "MOD_IMPACT") {
+      } else if(damageType == "MOD_IMPACT") {
         break;
       }
 
@@ -689,8 +683,7 @@ explodable_barrel_explode() {
 
   if(randomint(2) == 0) {
     self setModel("com_barrel_piece");
-  }
-  else {
+  } else {
     self setModel("com_barrel_piece2");
   }
 
@@ -717,8 +710,7 @@ shuddering_entity_think() {
     self waittill("damage", other, damage, direction_vec, point);
     if(helmet) {
       self vibrate(direction_vec, 20, 0.6, 0.75);
-    }
-    else {
+    } else {
       self vibrate(direction_vec, 0.4, 0.4, 0.4);
     }
     self waittill("rotatedone");
@@ -735,8 +727,7 @@ tincan_think() {
 
   if(isAI(ent) || isPlayer(ent)) {
     direction_org = ((ent getEye()) - (0, 0, (randomint(50) + 50)));
-  }
-  else {
+  } else {
     direction_org = ent.origin;
   }
 
@@ -763,8 +754,7 @@ helmet_logic() {
 
   if(isAI(ent)) {
     direction_org = ent getEye();
-  }
-  else {
+  } else {
     direction_org = ent.origin;
   }
 
@@ -793,8 +783,7 @@ allowBreak(ent) {
 
   if(level.breakingEnts.size == 0) {
     return false;
-  }
-  else {
+  } else {
     for(i = 0; i < level.breakingEnts.size; i++) {
       if(ent == level.breakingEnts[i]) {
         return true;
@@ -992,8 +981,7 @@ breakable_logic(type) {
     case "wood box":
       if(isDefined(level.crateImpactSound)) {
         soundAlias = level.crateImpactSound;
-      }
-      else {
+      } else {
         soundAlias = "bullet_large_vase";
       }
       fx = level.breakables_fx["box"][randomint(level.breakables_fx["box"].size)];
@@ -1039,9 +1027,7 @@ breakable_logic(type) {
 
   if(!isDefined(self.dontremove)) {
     self delete();
-  }
-
-  else {
+  } else {
     self.dontremove = false;
   }
   self notify("ok_remove");
@@ -1325,8 +1311,7 @@ pieces_move(origin) {
     vec = vector_multiply(vec, 125 + randomfloat(25));
     if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(4000)) * -1, 5, 0, 0);
-    }
-    else {
+    } else {
       org rotateroll(800 + randomfloat(4000), 5, 0, 0);
     }
   } else {
@@ -1334,8 +1319,7 @@ pieces_move(origin) {
     vec = vector_multiply(vec, 60 + randomfloat(50));
     if(randomint(100) > 50) {
       org rotateroll((800 + randomfloat(1000)) * -1, 5, 0, 0);
-    }
-    else {
+    } else {
       org rotateroll(800 + randomfloat(1000), 5, 0, 0);
     }
   }

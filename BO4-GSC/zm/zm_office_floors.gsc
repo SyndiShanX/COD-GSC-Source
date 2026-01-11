@@ -6,7 +6,6 @@
 #include scripts\core_common\flag_shared;
 #include scripts\core_common\laststand_shared;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_office_floors;
 
 init() {
@@ -85,27 +84,27 @@ function_cd2f24b2(zone_name) {
   }
 
   switch (zone_name) {
-    case #"offices_level1":
-    case #"file_room_level1":
-    case #"conference_level1":
-    case #"hallway_level1":
+    case # "offices_level1":
+    case # "file_room_level1":
+    case # "conference_level1":
+    case # "hallway_level1":
       return 1;
-    case #"war_room_zone_top":
-    case #"conference_level2":
-    case #"war_room_zone_south":
-    case #"war_room_server_room":
-    case #"war_room_zone_north":
-    case #"war_room_zone_elevator":
+    case # "war_room_zone_top":
+    case # "conference_level2":
+    case # "war_room_zone_south":
+    case # "war_room_server_room":
+    case # "war_room_zone_north":
+    case # "war_room_zone_elevator":
       return 2;
-    case #"labs_elevator":
-    case #"labs_hallway1":
-    case #"labs_hallway2":
-    case #"labs_zone1":
-    case #"labs_zone2":
-    case #"labs_zone3":
+    case # "labs_elevator":
+    case # "labs_hallway1":
+    case # "labs_hallway2":
+    case # "labs_zone1":
+    case # "labs_zone2":
+    case # "labs_zone3":
       return 3;
-    case #"cage_upper":
-    case #"cage":
+    case # "cage_upper":
+    case # "cage":
       return 4;
     default:
       assertmsg("<dev string:x8e>" + zone_name);

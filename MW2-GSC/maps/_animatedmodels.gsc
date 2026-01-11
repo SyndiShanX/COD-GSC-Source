@@ -41,8 +41,7 @@ main() {
 
     if(scriptedWind) {
       model thread animateTreeWind();
-    }
-    else {
+    } else {
       model thread animateModel();
     }
   }

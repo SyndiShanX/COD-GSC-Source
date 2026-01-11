@@ -531,9 +531,7 @@ function limited_weapon_below_quota(weapon, ignore_player, pap_triggers) {
     }
     if(isDefined(level.custom_limited_weapon_checks)) {
       foreach(check in level.custom_limited_weapon_checks) {
-        count = count + [
-          [check]
-        ](weapon);
+        count = count + [[check]](weapon);
       }
       if(count >= limit) {
         return false;

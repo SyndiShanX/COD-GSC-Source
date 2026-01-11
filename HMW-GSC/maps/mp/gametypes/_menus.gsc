@@ -67,8 +67,7 @@ onplayerconnect() {
   }
 }
 
-connectedmenus() {
-}
+connectedmenus() {}
 
 getclasschoice(choice) {
   if(choice <= 100) {
@@ -234,14 +233,11 @@ watchforteamchange() {
 
     if(var_1 == 0) {
       var_1 = "axis";
-    }
-    else if(var_1 == 1) {
+    } else if(var_1 == 1) {
       var_1 = "allies";
-    }
-    else if(var_1 == 2) {
+    } else if(var_1 == 2) {
       var_1 = "random";
-    }
-    else {
+    } else {
       var_1 = "spectator";
     }
 
@@ -319,11 +315,9 @@ autoassign() {
 
         if(var_2 > var_3 && !var_0) {
           thread setteam("axis");
-        }
-        else if(var_3 > var_2 && !var_1) {
+        } else if(var_3 > var_2 && !var_1) {
           thread setteam("allies");
-        }
-        else {
+        } else {
           thread setteam(common_scripts\utility::random(["allies", "axis"]));
         }
       }
@@ -552,8 +546,7 @@ watchhasdonecombat(var_0) {
 
     if(var_0) {
       self iprintlnbold(game["strings"]["change_team_cancel"]);
-    }
-    else {
+    } else {
       self iprintlnbold(game["strings"]["change_class_cancel"]);
     }
 
@@ -561,8 +554,7 @@ watchhasdonecombat(var_0) {
 
     if(var_0) {
       self iprintlnbold(game["strings"]["change_team"]);
-    }
-    else {
+    } else {
       self iprintlnbold(game["strings"]["change_class"]);
     }
   }
@@ -581,8 +573,7 @@ menugiveclass(var_0) {
 
       if(var_0) {
         self iprintlnbold(game["strings"]["change_team_wait"]);
-      }
-      else {
+      } else {
         self iprintlnbold(game["strings"]["change_class_wait"]);
       }
 
@@ -603,8 +594,7 @@ menugiveclass(var_0) {
 
     if(maps\mp\_utility::_hasperk("specialty_moreminimap")) {
       setomnvar("ui_minimap_extend_grace_period", 1);
-    }
-    else {
+    } else {
       setomnvar("ui_minimap_extend_grace_period", 0);
     }
 
@@ -614,8 +604,7 @@ menugiveclass(var_0) {
 
     if(var_0) {
       self iprintlnbold(game["strings"]["change_team"]);
-    }
-    else {
+    } else {
       self iprintlnbold(game["strings"]["change_class"]);
     }
   }
@@ -677,8 +666,7 @@ menuclass(var_0) {
 getuiteamindex(var_0) {
   if(var_0 == "allies") {
     return 2;
-  }
-  else if(var_0 == "axis") {
+  } else if(var_0 == "axis") {
     return 1;
   }
 }
@@ -706,11 +694,9 @@ addtoteam(var_0, var_1, var_2) {
   if(!getdvarint("party_playersCoop", 0) && (!maps\mp\_utility::matchmakinggame() || isbot(self) || istestclient(self) || !maps\mp\_utility::allowteamchoice() || getdvarint("force_ranking"))) {
     if(level.teambased) {
       self.sessionteam = var_0;
-    }
-    else if(var_0 == "spectator") {
+    } else if(var_0 == "spectator") {
       self.sessionteam = "spectator";
-    }
-    else {
+    } else {
       self.sessionteam = "none";
     }
   }

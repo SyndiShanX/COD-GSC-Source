@@ -232,8 +232,7 @@ fx_screen_bokehdots_grit01() {
   for(;;) {
     if(common_scripts\utility::flag("flag_fx_screen_bokehdots_grit01")) {
       playFXOnTag(common_scripts\utility::getfx("bokeh_splats_01"), level.view_particle_source_locked, "tag_origin");
-    }
-    else {
+    } else {
       stopFXOnTag(common_scripts\utility::getfx("bokeh_splats_01"), level.view_particle_source_locked, "tag_origin");
     }
 
@@ -402,7 +401,7 @@ fx_bridgefall(var_0, var_1) {
   wait(level.timestep);
 
   foreach(var_12 in var_10) {
-  var_12 delete();
+    var_12 delete();
   }
 }
 

@@ -194,7 +194,7 @@ convert_array_to_int(string_array) {
   int_array = [];
 
   foreach(string in string_array) {
-  int_array[int_array.size] = int(string);
+    int_array[int_array.size] = int(string);
   }
 
   return int_array;
@@ -332,7 +332,7 @@ record_highest_combo(combo_counter) {
   }
   level.highest_combo = combo_counter;
   foreach(player in level.players) {
-  player maps\mp\alien\_persistence::LB_player_update_stat("hits", combo_counter, true);
+    player maps\mp\alien\_persistence::LB_player_update_stat("hits", combo_counter, true);
   }
 }
 
@@ -444,7 +444,7 @@ get_current_num_bonus_package() {
   result = 0;
 
   foreach(package_type in level.chaos_bonus_package_type) {
-  result += level.deployable_box[package_type].size;
+    result += level.deployable_box[package_type].size;
   }
 
   return result;
@@ -489,7 +489,9 @@ should_process_alien_damaged_event(sWeapon) {
 unset_player_perks(player) {
   foreach(perk_info in level.perk_progression) {
     if(perk_info["is_activated"]) {
-      [[perk_info["deactivate_func"]]](player, perk_info["perk_ref"]);
+      [
+        [perk_info["deactivate_func"]]
+      ](player, perk_info["perk_ref"]);
     }
   }
   player PlayLocalSound("mp_splash_screen_default");
@@ -498,14 +500,16 @@ unset_player_perks(player) {
 give_activated_perks(player) {
   foreach(perk_info in level.perk_progression) {
     if(perk_info["is_activated"]) {
-      [[perk_info["activate_func"]]](player, perk_info["perk_ref"]);
+      [
+        [perk_info["activate_func"]]
+      ](player, perk_info["perk_ref"]);
     }
   }
 }
 
 set_all_perks_inactivated() {
   foreach(perk_info in level.perk_progression) {
-  perk_info["is_activated"] = false;
+    perk_info["is_activated"] = false;
   }
 }
 

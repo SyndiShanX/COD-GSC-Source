@@ -33,8 +33,7 @@ stage_logic() {
   stage_completed("sq", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 ts_sign_damage_watch() {
   level endon("sq_sign_damaged");
@@ -52,8 +51,7 @@ ts_sign_damage_watch() {
     if(ts_is_bowie_knife(str_weapon) || ts_is_galvaknuckles(str_weapon)) {
       if(self.ts_sign_activated) {
         self thread ts_sign_deactivate();
-      }
-      else {
+      } else {
         self thread ts_sign_activate();
       }
 

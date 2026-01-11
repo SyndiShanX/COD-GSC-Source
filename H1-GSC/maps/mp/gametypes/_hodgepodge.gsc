@@ -40,11 +40,9 @@ hodgepodgeonstartgametype() {
 
   if(level.hodgepodgemode == 2) {
     initmmmode();
-  }
-  else if(level.hodgepodgemode == 4) {
+  } else if(level.hodgepodgemode == 4) {
     initsnipersonly();
-  }
-  else if(level.hodgepodgemode == 6) {
+  } else if(level.hodgepodgemode == 6) {
     level.rpgonlyreload = 1;
     initrpgonly();
   } else if(level.hodgepodgemode == 7) {
@@ -205,7 +203,7 @@ onmmspawnplayer() {
   var_0 = self getweaponslistoffhands();
 
   foreach(var_2 in var_0) {
-  self setweaponammoclip(var_2, 0);
+    self setweaponammoclip(var_2, 0);
   }
 
   if(isai(self)) {
@@ -444,8 +442,7 @@ monitordisconnectmm() {
     if(level.mm_teamscores["axis"] && level.mm_teamscores["allies"]) {
       if(var_0 == "allies" && level.mm_teamscores["allies"] == 1) {
         onfinalsurvivor();
-      }
-      else if(var_0 == "axis" && level.mm_teamscores["axis"] == 1) {
+      } else if(var_0 == "axis" && level.mm_teamscores["axis"] == 1) {
         foreach(var_3 in level.players) {
           if(var_3 != self && var_3.team == "axis") {
             var_3 setasslasher();
@@ -457,8 +454,7 @@ monitordisconnectmm() {
     else if(level.mm_teamscores["axis"] == 0) {
       if(level.mm_teamscores["allies"] == 1) {
         onslashereliminated();
-      }
-      else if(level.mm_teamscores["allies"] > 1) {
+      } else if(level.mm_teamscores["allies"] > 1) {
         level.mm_choseslasher = 0;
         level thread chooseslasher();
       }
@@ -564,8 +560,7 @@ onmmplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, 
 getmmspawnpoint() {
   if(level.ingraceperiod) {
     var_0 = maps\mp\gametypes\_spawnlogic::getstartspawnffa(self.team);
-  }
-  else {
+  } else {
     var_1 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(self.team);
     var_0 = maps\mp\gametypes\_spawnscoring::getspawnpoint_freeforall(var_1);
   }
@@ -616,8 +611,7 @@ botslasheristargetingme() {
   if(isDefined(level.slasher)) {
     if(isai(level.slasher)) {
       return isDefined(level.slasher.enemy) && level.slasher.enemy == self && level.slasher botcanseeentity(self);
-    }
-    else {
+    } else {
       return common_scripts\utility::within_fov(level.slasher getEye(), level.slasher getplayerangles(), self getEye(), 0.422618) && sighttracepassed(level.slasher getEye(), self getEye(), 0, self);
     }
   }
@@ -864,8 +858,7 @@ updatekillindicator(var_0) {
 
   if(var_0 >= 150) {
     self.killindicator.color = (0, 1, 0);
-  }
-  else {
+  } else {
     var_1 = 0.01 * (100 - 0.67 * var_1);
     self.killindicator.color = (var_1, 1, var_1);
   }

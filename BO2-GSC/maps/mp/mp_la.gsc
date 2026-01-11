@@ -31,8 +31,7 @@ main() {
 
   if(gamemodeismode(level.gamemode_wager_match)) {
     maps\mp\_compass::setupminimap("compass_map_mp_la_wager");
-  }
-  else {
+  } else {
     maps\mp\_compass::setupminimap("compass_map_mp_la");
   }
 

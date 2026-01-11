@@ -7,7 +7,6 @@
 #include scripts\core_common\flagsys_shared;
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
-
 #namespace array;
 
 filter(&array, b_keep_keys, func_filter, ...) {
@@ -630,9 +629,7 @@ bubble_sort(&array, sort_func) {
     i = start;
 
     for(j = start + 1; j < end; j++) {
-      if([
-          [sort_func]
-        ](array[j], array[i])) {
+      if([[sort_func]](array[j], array[i])) {
         swap(array, j, i);
         var_f9038db1 = 1;
       }
@@ -746,9 +743,7 @@ quick_sort_mid(&array, start, end, compare_func) {
     i = start;
 
     for(k = start; k < end; k++) {
-      if([
-          [compare_func]
-        ](array[k], pivot)) {
+      if([[compare_func]](array[k], pivot)) {
         swap(array, i, k);
         i++;
       }

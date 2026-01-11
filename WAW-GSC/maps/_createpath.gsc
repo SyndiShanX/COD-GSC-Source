@@ -203,15 +203,13 @@ path_viewwait(index) {
     thread draw_arrow_time(self.origin, self.origin + vector_multiply(anglesToForward(self.angles), arrowlength), (0, 1, 1), frametime);
     if(level.path_selectindex == index) {
       thread plot_circle_star_fortime(level.path_selectrad, frametime, (1, 1, 0));
-    }
-    else {
+    } else {
       thread plot_circle_fortime(level.path_selectrad, frametime, (0, 1, 0));
     }
     if(isDefined(level.path_viewindex) && level.path_viewindex == index) {
       if(viewradexpandcount > viewradexpandmax) {
         viewraddir = -1;
-      }
-      else if(viewradexpandcount < 0) {
+      } else if(viewradexpandcount < 0) {
         viewraddir = 1;
       }
       viewradexpandcount += viewraddir;
@@ -413,7 +411,7 @@ path_delete() {
   for(i = 0; i < level.path_views[level.path_selectid].size; i++) {
     if(i != level.path_selectindex)
   }
-      newarray[newarray.size] = level.path_views[level.path_selectid][i];
+  newarray[newarray.size] = level.path_views[level.path_selectid][i];
   level.path_views = newarray;
   flag_set("path_refresh");
   setdvar("path_delete", "");
@@ -432,8 +430,7 @@ path_editmode_update() {
   }
   if(!level.path_editmode) {
     level.path_editmode = true;
-  }
-  else {
+  } else {
     level.path_editmode = false;
   }
   setdvar("path_editmode", "");
@@ -451,8 +448,7 @@ path_getcurrentview() {
   view = undefined;
   if(isDefined(level.path_views[level.path_selectid]) && isDefined(level.path_views[level.path_selectid][level.path_selectindex])) {
     view = level.path_views[level.path_selectindex][level.path_selectid];
-  }
-  else {
+  } else {
     view = path_newview(false);
   }
   return view;
@@ -561,8 +557,7 @@ islookingorg(view) {
   vectordot = vectordot(anglevec, normalvec);
   if(vectordot > insidedot) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

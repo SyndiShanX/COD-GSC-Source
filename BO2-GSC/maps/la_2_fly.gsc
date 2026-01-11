@@ -478,8 +478,7 @@ dogfights_manage_wave_count() {
   }
 }
 
-pip_dogfights_1() {
-}
+pip_dogfights_1() {}
 
 _setup_deathblossom_offsets(str_temp_planes, str_veh_pathnode) {
   level.a_death_blossom_offsets = [];
@@ -487,7 +486,7 @@ _setup_deathblossom_offsets(str_temp_planes, str_veh_pathnode) {
   veh_node = getvehiclenode(str_veh_pathnode, "targetname");
 
   foreach(e_plane in a_planes) {
-  level.a_death_blossom_offsets[level.a_death_blossom_offsets.size] = e_plane.origin - veh_node.origin;
+    level.a_death_blossom_offsets[level.a_death_blossom_offsets.size] = e_plane.origin - veh_node.origin;
   }
 
   array_delete(a_planes);
@@ -566,8 +565,7 @@ spawn_player_strafing_wave(n_scripted_count) {
 
   if(isDefined(n_scripted_count)) {
     n_flyby_count = n_scripted_count;
-  }
-  else {
+  } else {
     n_flyby_count = 2;
   }
 
@@ -633,8 +631,7 @@ spawn_convoy_strafing_wave(initial_path, n_count, n_wave_num) {
 
   if(!isDefined(n_count)) {
     n_flyby_count = 2;
-  }
-  else {
+  } else {
     n_flyby_count = n_count;
   }
 
@@ -643,8 +640,7 @@ spawn_convoy_strafing_wave(initial_path, n_count, n_wave_num) {
 
   if(!isDefined(level.a_convoy_planes)) {
     level.a_convoy_planes = [];
-  }
-  else {
+  } else {
     arrayremovevalue(level.a_convoy_planes, undefined);
   }
 
@@ -705,8 +701,7 @@ last_wave_vo() {
 
     if(a_drones.size == 4) {
       level.player thread queue_dialog("f38c_warning_structural_2");
-    }
-    else if(a_drones.size == 1) {
+    } else if(a_drones.size == 1) {
       level.player thread queue_dialog("sect_she_s_coming_apart_0");
     }
   }
@@ -718,11 +713,9 @@ convoy_strafing_exploders(n_wave) {
 
   if(n_wave == 1) {
     n_exploder = 510;
-  }
-  else if(n_wave == 2) {
+  } else if(n_wave == 2) {
     n_exploder = 520;
-  }
-  else if(n_wave == 3) {
+  } else if(n_wave == 3) {
     n_exploder = 530;
   }
 
@@ -746,8 +739,7 @@ convoy_strafing_fail_watcher() {
 
   if(flag("harper_dead")) {
     str_dialog_array = array("samu_we_re_taking_damage_0", "samu_dammit_we_re_under_0", "samu_keep_them_off_us_0", "samu_we_need_you_with_the_0");
-  }
-  else {
+  } else {
     str_dialog_array = array("harp_section_those_dron_0", "take_the_heat_off_009", "the_drones_are_tar_051", "harp_where_are_you_secti_0", "keep_them_off_us_015");
   }
 
@@ -828,8 +820,7 @@ spawn_convoy_f35_allies(initial_path, n_count, n_wave_num, b_blah, b_follow_obj,
 
   if(!isDefined(b_blah)) {
     level waittill("drone_spawn_done");
-  }
-  else if(!isDefined(level.drone_targets)) {
+  } else if(!isDefined(level.drone_targets)) {
     level.drone_targets = [];
     level.drone_targets[0] = level.player;
   }
@@ -988,8 +979,7 @@ attack_drone_fake_dot() {
 
     if(fire_time < 2) {
       level.f35 dodamage(5, self.origin, self);
-    }
-    else {
+    } else {
       wait 2;
       fire_time = 0;
     }
@@ -1134,8 +1124,7 @@ _plane_respect_path_width() {
 
         if(self.default_path_fixed_offset[1] < 0 && new_offset_y < self.default_path_fixed_offset[1]) {
           new_offset_y = self.default_path_fixed_offset[1];
-        }
-        else if(self.default_path_fixed_offset[1] > 0 && new_offset_y > self.default_path_fixed_offset[1]) {
+        } else if(self.default_path_fixed_offset[1] > 0 && new_offset_y > self.default_path_fixed_offset[1]) {
           new_offset_y = self.default_path_fixed_offset[1];
         }
 
@@ -1342,8 +1331,7 @@ dogfight_convoy_strafe(initial_path, vh_lead_plane, n_follower) {
 
   if(isDefined(initial_path)) {
     nd_best_start = getvehiclenode(initial_path, "targetname");
-  }
-  else {
+  } else {
     a_last_strafed_nodes = [];
     a_convoy_strafe_nodes = getvehiclenodearray("convoy_start_strafe_nodes", "script_noteworthy");
     a_convoy_strafe_nodes = array_randomize(a_convoy_strafe_nodes);
@@ -1352,8 +1340,7 @@ dogfight_convoy_strafe(initial_path, vh_lead_plane, n_follower) {
       for(i = 0; i < a_convoy_strafe_nodes.size; i++) {
         if(level.player is_looking_at(a_convoy_strafe_nodes[i].origin, 0.1, 1)) {
           continue;
-        }
-        else {
+        } else {
           nd_best_start = a_convoy_strafe_nodes[i];
           break;
         }
@@ -1477,8 +1464,7 @@ _dogfight_spawner_determine_type() {
 
   if(n_index == 0) {
     str_type = "avenger";
-  }
-  else {
+  } else {
     str_type = "pegasus";
   }
 
@@ -1518,8 +1504,7 @@ wave_speed_monitor(a_planes, n_ideal_dist, n_too_close) {
 
         if(n_distance_sq < n_dist_too_close) {
           should_speed_up = 1;
-        }
-        else if(n_distance_sq < n_ideal_dist_sq) {
+        } else if(n_distance_sq < n_ideal_dist_sq) {
           is_player_close = 1;
           v_plane_to_player = vectornormalize(level.f35.origin - e_plane.origin);
           v_plane_forward = vectornormalize(anglesToForward(e_plane.angles));
@@ -1574,8 +1559,7 @@ _dogfight_speed_monitor(str_path, n_path_index, ideal_dist, tolerance, dampening
 
       if(level.b_should_exceed_speed) {
         self setspeed(n_speed_max * 1.2);
-      }
-      else if(!level.b_should_match_speed) {
+      } else if(!level.b_should_match_speed) {
         is_slow = 1;
         n_speed_new = int(n_speed_max * dampening);
         n_speed_new = clamp(n_speed_new, n_speed_min, n_speed_max);
@@ -1618,8 +1602,7 @@ _dogfight_ally_speed_monitor() {
 
       if(n_dist < n_dist_too_close) {
         n_speed = n_speed * 0.8;
-      }
-      else if(n_dist > n_distance_ideal) {
+      } else if(n_dist > n_distance_ideal) {
         n_speed = n_speed * 3.0;
       }
 
@@ -1646,8 +1629,7 @@ _dogfight_fire_on_command(e_target) {
 
     if(e_target == "convoy") {
       e_my_target = get_array_of_closest(self.origin, level.convoy.vehicles)[0];
-    }
-    else if(e_target == "player") {
+    } else if(e_target == "player") {
       e_my_target = level.f35;
     }
 
@@ -1820,8 +1802,7 @@ _setup_plane_firing_by_type() {
 
     if(isDefined(self.is_dogfight_plane) && self.is_dogfight_plane) {
       a_indicies[a_indicies.size] = 0;
-    }
-    else {
+    } else {
       a_indicies[a_indicies.size] = 1;
     }
   } else if(self.vehicletype == "drone_avenger_fast_la2" || self.vehicletype == "drone_avenger_fast_la2_2x" || self.vehicletype == "drone_avenger") {
@@ -1839,8 +1820,7 @@ _setup_plane_firing_by_type() {
 
     if(n_weapon_select == 0) {
       a_indicies[a_indicies.size] = 0;
-    }
-    else {
+    } else {
       a_indicies[a_indicies.size] = 1;
       a_indicies[a_indicies.size] = 2;
     }
@@ -1853,8 +1833,7 @@ _setup_plane_firing_by_type() {
 
     if(n_weapon_select == 0) {
       a_indicies[a_indicies.size] = 0;
-    }
-    else {
+    } else {
       a_indicies[a_indicies.size] = 1;
       a_indicies[a_indicies.size] = 2;
     }
@@ -1867,8 +1846,7 @@ _setup_plane_firing_by_type() {
 
     if(n_weapon_select == 0) {
       a_indicies[a_indicies.size] = 0;
-    }
-    else {
+    } else {
       a_indicies[a_indicies.size] = 1;
       a_indicies[a_indicies.size] = 2;
     }
@@ -1941,8 +1919,7 @@ player_strafe_burst_firing() {
 
   if(cointoss()) {
     level.player playSound("evt_strafe_burst_front_00");
-  }
-  else {
+  } else {
     level.player playSound("evt_strafe_burst_front_01");
   }
 
@@ -1988,8 +1965,7 @@ _notify_target_died(e_target) {
 
   if(isDefined(e_target.locked_on) && e_target.locked_on) {
     level notify("snd_target_gone", "death_f38");
-  }
-  else {
+  } else {
     level notify("snd_target_gone", "death_player");
   }
 }
@@ -2023,8 +1999,7 @@ change_dogfights_fog_based_on_height() {
     if(b_should_change_fog_setting) {
       if(b_using_low_fog) {
         maps\createart\la_2_art::art_jet_mode_settings(n_fog_transition_time);
-      }
-      else {
+      } else {
         maps\createart\la_2_art::art_vtol_mode_settings(n_fog_transition_time);
       }
 
@@ -2085,8 +2060,7 @@ dogfight_ally_avoid_player() {
 
     if(dist_right < 1000 && dist_fwd < 2000) {
       self.player_avoid_offset = (self.player_avoid_offset[0], self.player_avoid_offset[1] + 25.0, self.player_avoid_offset[2]);
-    }
-    else {
+    } else {
       y = difftrack(0, self.player_avoid_offset[1], 1, 0.05);
       self.player_avoid_offset = (self.player_avoid_offset[0], y, self.player_avoid_offset[2]);
     }

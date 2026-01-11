@@ -37,8 +37,7 @@ init() {
 
   if(isDefined(level.afterlife_player_damage_override)) {
     maps\mp\zombies\_zm::register_player_damage_callback(level.afterlife_player_damage_override);
-  }
-  else {
+  } else {
     maps\mp\zombies\_zm::register_player_damage_callback(::afterlife_player_damage_callback);
   }
 
@@ -63,7 +62,7 @@ init() {
   a_afterlife_triggers = getstructarray("afterlife_trigger", "targetname");
 
   foreach(struct in a_afterlife_triggers) {
-  afterlife_trigger_create(struct);
+    afterlife_trigger_create(struct);
   }
 
   level.afterlife_interact_dist = 256;
@@ -189,8 +188,7 @@ init_player() {
 
   if(isDefined(level.is_forever_solo_game) && level.is_forever_solo_game) {
     self.lives = 3;
-  }
-  else {
+  } else {
     self.lives = 1;
   }
 
@@ -209,8 +207,7 @@ afterlife_remove(b_afterlife_death) {
 
   if(isDefined(b_afterlife_death) && b_afterlife_death) {
     self.lives = 0;
-  }
-  else if(self.lives > 0) {
+  } else if(self.lives > 0) {
     self.lives--;
   }
 
@@ -262,8 +259,7 @@ afterlife_player_damage_callback(einflictor, eattacker, idamage, idflags, smeans
     if(isDefined(eattacker.is_zombie) && eattacker.is_zombie) {
       if(isDefined(eattacker.custom_damage_func)) {
         idamage = eattacker[[eattacker.custom_damage_func]](self);
-      }
-      else if(isDefined(eattacker.meleedamage) && smeansofdeath != "MOD_GRENADE_SPLASH") {
+      } else if(isDefined(eattacker.meleedamage) && smeansofdeath != "MOD_GRENADE_SPLASH") {
         idamage = eattacker.meleedamage;
       }
 
@@ -337,8 +333,7 @@ afterlife_player_damage_callback(einflictor, eattacker, idamage, idflags, smeans
 
       if(self.health <= 1) {
         return 0;
-      }
-      else {
+      } else {
         idamage = self.health - 1;
       }
     } else
@@ -376,7 +371,7 @@ afterlife_enter() {
   a_afterlife_triggers = getstructarray("afterlife_trigger", "targetname");
 
   foreach(struct in a_afterlife_triggers) {
-  struct.unitrigger_stub maps\mp\zombies\_zm_unitrigger::run_visibility_function_for_all_triggers();
+    struct.unitrigger_stub maps\mp\zombies\_zm_unitrigger::run_visibility_function_for_all_triggers();
   }
 
   a_exterior_goals = getstructarray("exterior_goal", "targetname");
@@ -425,8 +420,7 @@ afterlife_leave(b_revived) {
 
   if(self.e_afterlife_corpse.revivetrigger.origin != self.e_afterlife_corpse.origin) {
     self setorigin(self.e_afterlife_corpse.revivetrigger.origin);
-  }
-  else {
+  } else {
     self setorigin(self.e_afterlife_corpse.origin);
   }
 
@@ -437,8 +431,7 @@ afterlife_leave(b_revived) {
       if(self.e_afterlife_corpse istouching(a_gondola_doors_gates[i])) {
         if(isDefined(level.e_gondola.is_moving) && level.e_gondola.is_moving) {
           str_location = level.e_gondola.destination;
-        }
-        else {
+        } else {
           str_location = level.e_gondola.location;
         }
 
@@ -595,8 +588,7 @@ afterlife_infinite_mana(b_infinite) {
 
   if(isDefined(b_infinite) && b_infinite) {
     self.infinite_mana = 1;
-  }
-  else {
+  } else {
     self.infinite_mana = 0;
   }
 }
@@ -777,8 +769,7 @@ is_weapon_available_in_afterlife_corpse(weapon, player_to_check) {
 afterlife_spawn_corpse() {
   if(isDefined(self.is_on_gondola) && self.is_on_gondola && level.e_gondola.destination == "roof") {
     corpse = maps\mp\zombies\_zm_clone::spawn_player_clone(self, self.origin, undefined);
-  }
-  else {
+  } else {
     trace_start = self.origin;
     trace_end = self.origin + vectorscale((0, 0, -1), 500.0);
     corpse_trace = playerphysicstrace(trace_start, trace_end);
@@ -1096,8 +1087,7 @@ afterlife_revive_do_revive(playerbeingrevived, revivergun) {
     self.revivetexthud destroy();
   }
 
-  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {
-  } else if(!revived) {
+  if(isDefined(playerbeingrevived.revivetrigger.auto_revive) && playerbeingrevived.revivetrigger.auto_revive == 1) {} else if(!revived) {
     if(isplayer(playerbeingrevived)) {
       playerbeingrevived stoprevive(self);
     }
@@ -1195,8 +1185,7 @@ afterlife_save_loadout() {
 
   if(self hasweapon(lethal_grenade)) {
     self.loadout.grenade = self getweaponammoclip(lethal_grenade);
-  }
-  else {
+  } else {
     self.loadout.grenade = 0;
   }
 
@@ -1211,7 +1200,7 @@ afterlife_give_loadout() {
 
   if(loadout.weapons.size > 1 || primaries.size > 1) {
     foreach(weapon in primaries) {
-    self takeweapon(weapon);
+      self takeweapon(weapon);
     }
   }
 
@@ -1305,8 +1294,7 @@ afterlife_give_loadout() {
 
     if(self hasweapon(self get_player_lethal_grenade())) {
       self getweaponammoclip(self get_player_lethal_grenade());
-    }
-    else {
+    } else {
       self giveweapon(self get_player_lethal_grenade());
     }
 
@@ -1417,8 +1405,7 @@ check_for_valid_spawn_in_zone(player) {
     if(player maps\mp\zm_alcatraz_travel::is_player_on_gondola()) {
       if(level.e_gondola.destination == "roof") {
         str_player_zone = "zone_cellblock_west_gondola";
-      }
-      else if(level.e_gondola.destination == "docks") {
+      } else if(level.e_gondola.destination == "docks") {
         str_player_zone = "zone_dock";
       }
     } else
@@ -1442,8 +1429,7 @@ check_for_valid_spawn_in_zone(player) {
 
         if(positionwouldtelefrag(s_spawn.origin) || distancesquared(player.origin, s_spawn.origin) < 250000) {
           continue;
-        }
-        else {
+        } else {
           return s_spawn;
         }
       }
@@ -1453,8 +1439,7 @@ check_for_valid_spawn_in_zone(player) {
       foreach(s_spawn in a_spawn_structs) {
         if(positionwouldtelefrag(s_spawn.origin)) {
           continue;
-        }
-        else {
+        } else {
           return s_spawn;
         }
       }
@@ -1468,7 +1453,7 @@ afterlife_save_perks(ent) {
   perk_array = ent get_perk_array(1);
 
   foreach(perk in perk_array) {
-  ent unsetperk(perk);
+    ent unsetperk(perk);
   }
 
   return perk_array;
@@ -1574,8 +1559,7 @@ afterlife_trigger_visibility(player) {
 
   if(player.lives == 0) {
     self sethintstring(&"ZM_PRISON_OUT_OF_LIVES");
-  }
-  else {
+  } else {
     self sethintstring(self.stub.hint_string);
 
     if(!isDefined(player.has_played_afterlife_trigger_hint) && player is_player_looking_at(self.stub.origin, 0.25)) {
@@ -1634,8 +1618,7 @@ afterlife_interact_object_think() {
 
   if(isDefined(self.script_int) && self.script_int > 0) {
     n_total_interact_count = self.script_int;
-  }
-  else if(!isDefined(self.script_int) || isDefined(self.script_int) && self.script_int <= 0) {
+  } else if(!isDefined(self.script_int) || isDefined(self.script_int) && self.script_int <= 0) {
     n_total_interact_count = 0;
   }
 
@@ -1655,8 +1638,7 @@ afterlife_interact_object_think() {
   if(self.model != "p6_anim_zm_al_nixie_tubes") {
     if(isDefined(self.script_string) && self.script_string == "intro_powerup_activate") {
       self.t_bump = spawn("trigger_radius", self.origin + vectorscale((0, 1, 0), 28.0), 0, 28, 64);
-    }
-    else {
+    } else {
       if(issubstr(self.model, "p6_zm_al_shock_box")) {
         trig_spawn_offset = (0, 11, 46);
         str_hint = &"ZM_PRISON_AFTERLIFE_INTERACT";
@@ -1672,8 +1654,7 @@ afterlife_interact_object_think() {
   while(true) {
     if(isDefined(self.unitrigger_stub)) {
       self.unitrigger_stub.is_activated_in_afterlife = 0;
-    }
-    else if(isDefined(self.t_bump)) {
+    } else if(isDefined(self.t_bump)) {
       self.t_bump setcursorhint("HINT_NOICON");
       self.t_bump sethintstring(&"ZM_PRISON_AFTERLIFE_INTERACT");
     }
@@ -1758,8 +1739,7 @@ afterlife_trigger_visible_in_afterlife(player) {
     if(player is_player_looking_at(self.origin, 0.25)) {
       if(cointoss()) {
         player thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "need_electricity");
-      }
-      else {
+      } else {
         player thread maps\mp\zombies\_zm_audio::create_and_play_dialog("general", "electric_zap");
       }
     }

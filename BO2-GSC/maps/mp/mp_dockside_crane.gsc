@@ -33,7 +33,7 @@ init() {
   }
 
   foreach(arm_y in arms_y) {
-  arm_y.parent = claw;
+    arm_y.parent = claw;
   }
 
   claw claw_link_arms("claw_arm_y");
@@ -444,7 +444,7 @@ claw_move_arms(dist, crate) {
   waittill_multiple_ents(arms[0], "movedone", arms[1], "movedone", arms[2], "movedone", arms[3], "movedone");
 
   foreach(arm in self.arms) {
-  arm.origin = arm.goal;
+    arm.origin = arm.goal;
   }
 
   self claw_link_arms("claw_arm_y");

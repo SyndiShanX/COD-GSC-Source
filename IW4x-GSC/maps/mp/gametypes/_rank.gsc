@@ -102,8 +102,7 @@ patientZeroWaiter() {
 isRegisteredEvent(type) {
   if(isDefined(level.scoreInfo[type])) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -116,8 +115,7 @@ getScoreInfoValue(type) {
   overrideDvar = "scr_" + level.gameType + "_score_" + type;
   if(getDvar(overrideDvar) != "") {
     return getDvarInt(overrideDvar);
-  }
-  else {
+  } else {
     return (level.scoreInfo[type]["value"]);
   }
 }
@@ -216,8 +214,7 @@ onPlayerConnect() {
     player.hud_scorePopup.x = 0;
     if(level.splitScreen) {
       player.hud_scorePopup.y = -40;
-    }
-    else {
+    } else {
       player.hud_scorePopup.y = -60;
     }
     player.hud_scorePopup.font = "hudbig";
@@ -264,8 +261,7 @@ onPlayerSpawned() {
 roundUp(floatVal) {
   if(int(floatVal) != floatVal) {
     return int(floatVal + 1);
-  }
-  else {
+  } else {
     return int(floatVal);
   }
 }
@@ -280,8 +276,7 @@ giveRankXP(type, value) {
   }
   if(level.teamBased && (!level.teamCount["allies"] || !level.teamCount["axis"])) {
     return;
-  }
-  else if(!level.teamBased && (level.teamCount["allies"] + level.teamCount["axis"] < 2)) {
+  } else if(!level.teamBased && (level.teamCount["allies"] + level.teamCount["axis"] < 2)) {
     return;
   }
   if(!isDefined(value)) {
@@ -471,8 +466,7 @@ scorePopup(amount, bonus, hudColor, glowAlpha) {
 
   if(self.xpUpdateTotal < 0) {
     self.hud_scorePopup.label = &"";
-  }
-  else {
+  } else {
     self.hud_scorePopup.label = &"MP_PLUS";
   }
 
@@ -588,8 +582,7 @@ getRank() {
 
   if(rankXp < (getRankInfoMinXP(rankId) + getRankInfoXPAmt(rankId))) {
     return rankId;
-  }
-  else {
+  } else {
     return self getRankForXp(rankXp);
   }
 }
@@ -611,8 +604,7 @@ getRankForXp(xpVal) {
     rankId++;
     if(isDefined(level.rankTable[rankId])) {
       rankName = level.rankTable[rankId][1];
-    }
-    else {
+    } else {
       rankName = undefined;
     }
   }

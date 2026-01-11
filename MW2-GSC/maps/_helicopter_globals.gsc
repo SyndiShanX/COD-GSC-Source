@@ -252,8 +252,7 @@ getEnemyTarget(fRadius, iFOVcos, getAITargets, doSightTrace, getVehicleTargets, 
       sightTracePassed = false;
       if(isAi(possibleTargets[i])) {
         TraceZoffset = 48;
-      }
-      else {
+      } else {
         TraceZoffset = 150;
       }
       sightTracePassed = sighttracepassed(self.origin, possibleTargets[i].origin + (0, 0, TraceZoffset), false, self);
@@ -299,8 +298,7 @@ shootEnemyTarget_Bullets(eTarget) {
   eTargetOffset = (0, 0, 0);
   if(isDefined(eTarget.script_targetoffset_z)) {
     eTargetOffset += (0, 0, eTarget.script_targetoffset_z);
-  }
-  else if(isSentient(eTarget)) {
+  } else if(isSentient(eTarget)) {
     eTargetOffset = (0, 0, 32);
   }
 

@@ -75,8 +75,7 @@ setriotshieldviewmodel(modelnum) {
   }
   if(isDefined(self.prev_shield_viewmodel)) {
     self setheldweaponmodel(self.prev_shield_viewmodel);
-  }
-  else {
+  } else {
     self setheldweaponmodel(0);
   }
 }
@@ -94,8 +93,7 @@ restoreriotshieldviewmodel() {
   }
   if(isDefined(self.prev_shield_viewmodel)) {
     self setheldweaponmodel(self.prev_shield_viewmodel);
-  }
-  else {
+  } else {
     self setheldweaponmodel(0);
   }
 }
@@ -122,8 +120,7 @@ updateriotshieldmodel() {
   if(update) {
     if(self.prev_shield_placement == 0) {
       self attachriotshield();
-    }
-    else if(self.prev_shield_placement == 1) {
+    } else if(self.prev_shield_placement == 1) {
       self attachriotshield(level.carriedshieldmodel[self.prev_shield_damage_level], "tag_weapon_left");
       self setriotshieldviewmodel(self.prev_shield_damage_level);
     } else if(self.prev_shield_placement == 2)
@@ -214,9 +211,7 @@ trackriotshield() {
       self.shield_placement = 1;
       self updateriotshieldmodel();
 
-      if(self.hasriotshield) {
-      } else {
-      }
+      if(self.hasriotshield) {} else {}
 
       self.hasriotshield = 1;
       self.hasriotshieldequipped = 1;
@@ -230,13 +225,11 @@ trackriotshield() {
       assert(self.hasriotshield);
       self.hasriotshield = self hasweapon(level.riotshield_name);
 
-      if(isDefined(self.riotshield_hidden) && self.riotshield_hidden) {
-      } else if(self.hasriotshield)
+      if(isDefined(self.riotshield_hidden) && self.riotshield_hidden) {} else if(self.hasriotshield)
         self.shield_placement = 2;
       else if(isDefined(self.shield_ent)) {
         assert(self.shield_placement == 3);
-      }
-      else {
+      } else {
         self.shield_placement = 0;
       }
 
@@ -330,8 +323,7 @@ watchriotshielddeploy() {
 
     if(placement["result"] && riotshielddistancetest(placement["origin"]) && self check_plant_position(placement["origin"], placement["angles"])) {
       self doriotshielddeploy(placement["origin"], placement["angles"]);
-    }
-    else {
+    } else {
       placement_hint = 1;
       clip_max_ammo = weaponclipsize(level.riotshield_name);
       self setweaponammoclip(level.riotshield_name, clip_max_ammo);
@@ -473,18 +465,14 @@ watchdeployedriotshielddamage() {
     }
     if(isDefined(level.riotshield_damage_callback)) {
       self.owner[[level.riotshield_damage_callback]](damage, 0);
-    }
-    else {
+    } else {
       if(type == "MOD_MELEE") {
         damage = damage * getdvarfloat(#"riotshield_melee_damage_scale");
-      }
-      else if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
+      } else if(type == "MOD_PISTOL_BULLET" || type == "MOD_RIFLE_BULLET") {
         damage = damage * getdvarfloat(#"riotshield_bullet_damage_scale");
-      }
-      else if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
+      } else if(type == "MOD_GRENADE" || type == "MOD_GRENADE_SPLASH" || type == "MOD_EXPLOSIVE" || type == "MOD_EXPLOSIVE_SPLASH" || type == "MOD_PROJECTILE" || type == "MOD_PROJECTILE_SPLASH") {
         damage = damage * getdvarfloat(#"riotshield_explosive_damage_scale");
-      }
-      else if(type == "MOD_IMPACT") {
+      } else if(type == "MOD_IMPACT") {
         damage = damage * getdvarfloat(#"riotshield_projectile_damage_scale");
       }
 
@@ -518,7 +506,9 @@ deleteshieldmodelonweaponpickup(shield_trigger) {
 
   if(self != player) {
     if(isDefined(level.transferriotshield)) {
-      [[level.transferriotshield]](self, player);
+      [
+        [level.transferriotshield]
+      ](self, player);
     }
   }
 }
@@ -544,17 +534,16 @@ watchshieldtriggervisibility(trigger) {
 
       if(isDefined(level.cantransferriotshield)) {
         pickup = [
-      }
+          }
           [level.cantransferriotshield]
-        ](self, player);
+      ](self, player);
 
       if(!isDefined(trigger)) {
         return;
       }
       if(pickup) {
         trigger setvisibletoplayer(player);
-      }
-      else {
+      } else {
         trigger setinvisibletoplayer(player);
       }
 

@@ -625,8 +625,7 @@ _meth_805C(var_00) {
 func_13144(var_00) {
   if(!scripts\mp\utility\game::perksenabled()) {
     var_00 = "specialty_null";
-  }
-  else {
+  } else {
     switch (var_00) {
       case "specialty_deadeye":
       case "specialty_scavenger":
@@ -753,8 +752,7 @@ giveperks(var_00, var_01) {
 _setperk(var_00) {
   if(!isDefined(self.perks[var_00])) {
     self.perks[var_00] = 1;
-  }
-  else {
+  } else {
     self.perks[var_00]++;
   }
 
@@ -777,7 +775,7 @@ _setextraperks(var_00) {
   foreach(var_06, var_02 in level.extraperkmap) {
     if(var_00 == var_06) {
       foreach(var_04 in var_02) {
-      _setperk(var_04);
+        _setperk(var_04);
       }
 
       break;
@@ -789,7 +787,7 @@ func_142F(var_00) {
   foreach(var_06, var_02 in level.extraperkmap) {
     if(var_00 == var_06) {
       foreach(var_04 in var_02) {
-      _unsetperk(var_04);
+        _unsetperk(var_04);
       }
 
       break;
@@ -859,8 +857,7 @@ giveperksafterspawn() {
 
   if(scripts\mp\utility\game::func_9EF0(self) && isDefined(self.playerproxyagent) && isalive(self.playerproxyagent)) {
     return;
-  }
-  else {
+  } else {
     scripts\mp\utility\game::removeperk("specialty_blindeye");
     scripts\mp\utility\game::removeperk("specialty_gpsjammer");
     scripts\mp\utility\game::removeperk("specialty_noscopeoutline");
@@ -928,7 +925,7 @@ func_F7C5(var_00, var_01) {
   for(var_05 = 1; var_05 < 4; var_5++) {
     if(isDefined(var_2[var_05])) {
       foreach(var_04 in var_2[var_05]) {
-      var_7[var_7.size] = var_04;
+        var_7[var_7.size] = var_04;
       }
     }
   }

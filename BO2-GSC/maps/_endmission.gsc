@@ -35,8 +35,7 @@ restartmissionlistener() {
 
     if(root_level == level.script) {
       fastrestart();
-    }
-    else {
+    } else {
       changelevel(root_level, 0, 0);
     }
   }

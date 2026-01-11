@@ -265,8 +265,7 @@ enemy_alert_level_warning2() {
 
   if(self.type != "dog") {
     self set_generic_run_anim("_stealth_patrol_cqb");
-  }
-  else {
+  } else {
     self clear_run_anim();
     self.script_nobark = 1;
     self.script_growl = 1;
@@ -341,8 +340,7 @@ enemy_alert_level_attack() {
 
   if(isDefined(self.script_goalvolume)) {
     self thread maps\_spawner::set_goal_volume();
-  }
-  else {
+  } else {
     self enemy_close_in_on_target();
   }
 }
@@ -365,8 +363,7 @@ enemy_close_in_on_target() {
 
     if(radius > 600) {
       radius *= .75;
-    }
-    else {
+    } else {
       return;
     }
 
@@ -458,7 +455,7 @@ enemy_set_threat_behavior(array) {
   }
 
   foreach(key, function in array) {
-  self ai_create_behavior_function("threat", key, function);
+    self ai_create_behavior_function("threat", key, function);
   }
 
   self._stealth.logic.alert_level.max_warnings = array.size - 3; // sub 2 for reset, normal, and attack
@@ -489,8 +486,7 @@ enemy_threat_anim_defaults() {
 
   if(self.type == "dog") {
     array["attack"] = ::dog_animation_generic;
-  }
-  else {
+  } else {
     array["attack"] = ::enemy_animation_attack;
   }
 
@@ -512,7 +508,7 @@ enemy_set_threat_anim_behavior(array) {
   }
 
   foreach(key, func in array) {
-  self ai_create_behavior_function("animation", key, func);
+    self ai_create_behavior_function("animation", key, func);
   }
 }
 

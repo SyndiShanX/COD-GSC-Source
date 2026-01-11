@@ -207,9 +207,7 @@ onUse(player) {
     if(isDefined(self.attacker)) {
       self.attacker thread maps\mp\gametypes\_rank::xpEventPopup(&"SPLASHES_DENIED_KILL", (1, 0.5, 0.5));
     }
-  }
-
-  else {
+  } else {
     self.trigger playSound("mp_killconfirm_tags_pickup");
 
     event = "kill_confirmed";

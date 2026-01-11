@@ -5,7 +5,6 @@
 
 #include scripts\core_common\compass;
 #include scripts\mp_common\load;
-
 #namespace mp_zombie_museum;
 
 event_handler[level_init] main(eventstruct) {

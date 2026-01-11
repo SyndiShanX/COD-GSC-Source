@@ -513,7 +513,7 @@ whitehouse_radio_broadcast(soundalias) {
 
   level.radios = [];
 
-    radio = undefined;
+  radio = undefined;
   for(i = 0; i < radio_array.size; i++) {
     // distance above or below player
     dist = abs(level.player getEye()[2] - radio_array[i].origin[2]);
@@ -534,10 +534,10 @@ whitehouse_radio_broadcast(soundalias) {
 
   level.radios = current_radios;
 
-    // sometimes no good radio is found.
-    foreach(radio in current_radios) {
-      radio add_wait(::waittill_msg, "sounddone");
-    }
+  // sometimes no good radio is found.
+  foreach(radio in current_radios) {
+    radio add_wait(::waittill_msg, "sounddone");
+  }
   do_wait();
 
   flag_clear("broadcast");
@@ -1278,11 +1278,9 @@ flare_spotted_think() {
   while(true) {
     if(player_looking_at(level.flare_guy getEye(), 0.75)) {
       flag_set("player_looking_at_flareguy");
-    }
-    else if(flag("flareguy_force")) {
+    } else if(flag("flareguy_force")) {
       flag_set("player_looking_at_flareguy");
-    }
-    else {
+    } else {
       flag_clear("player_looking_at_flareguy");
     }
     wait 0.05;

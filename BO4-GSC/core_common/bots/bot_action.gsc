@@ -11,7 +11,6 @@
 #include scripts\core_common\system_shared;
 #include scripts\core_common\util_shared;
 #include scripts\killstreaks\killstreaks_util;
-
 #namespace bot_action;
 
 autoexec __init__system__() {
@@ -205,7 +204,7 @@ register_action(name, rankfunc, weightfunc, executefunc) {
 register_weapon(weaponname, rankfunc) {
   weapon = getweapon(weaponname);
 
-  if(weapon.name == #"none") {
+  if(weapon.name == # "none") {
     return;
   }
 
@@ -221,13 +220,13 @@ function_36052a7f(weaponname) {
 
 register_bulletweapon(weaponname) {
   register_weapon(weaponname, &function_22991a48);
-  function_a2c83569(weaponname, #"hash_7aaeac32a4e1bf84");
-  function_a2c83569(weaponname, #"hash_434716893aa869f3");
+  function_a2c83569(weaponname, # "hash_7aaeac32a4e1bf84");
+  function_a2c83569(weaponname, # "hash_434716893aa869f3");
 }
 
 register_sniperweapon(weaponname) {
   register_weapon(weaponname, &function_22991a48);
-  function_a2c83569(weaponname, #"hash_4c707ba80bf09cec");
+  function_a2c83569(weaponname, # "hash_4c707ba80bf09cec");
 }
 
 function_f4302f2a(weaponname, rankfunc, activatefunc) {
@@ -388,7 +387,7 @@ function_9480d296() {
 }
 
 private execution_loop() {
-  self endon(#"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start");
+  self endon(#"hash_5b4f399c08222e2", # "death", # "entering_last_stand", # "enter_vehicle", # "animscripted_start");
   level endon(#"game_ended");
 
   while(self bot::initialized()) {
@@ -410,7 +409,7 @@ private execution_loop() {
 }
 
 private function_e7b123e8(actionparams) {
-  self endoncallback(&function_7a456ee0, #"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start");
+  self endoncallback(&function_7a456ee0, # "hash_5b4f399c08222e2", # "death", # "entering_last_stand", # "enter_vehicle", # "animscripted_start");
   level endon(#"game_ended");
   action = actionparams.action;
   self.bot.action = action;
@@ -442,7 +441,7 @@ private function_7a456ee0(notifyhash) {
 }
 
 private action_timeout(actionname) {
-  self endon(#"hash_5b4f399c08222e2", #"death", #"entering_last_stand", #"enter_vehicle", #"animscripted_start", #"hash_1728f8b5de3bde13");
+  self endon(#"hash_5b4f399c08222e2", # "death", # "entering_last_stand", # "enter_vehicle", # "animscripted_start", # "hash_1728f8b5de3bde13");
   level endon(#"game_ended");
   wait 10;
 
@@ -1491,7 +1490,7 @@ function_abf40e98(actionparams) {
   traceend = eye + forwarddir * actionparams.weapon.var_bfbec33f;
   trace = bulletTrace(eye, traceend, 0, self);
 
-  if(trace[#"fraction"] >= 1) {
+  if(trace[# "fraction"] >= 1) {
     if(!isDefined(actionparams.debug)) {
       actionparams.debug = [];
     } else if(!isarray(actionparams.debug)) {
@@ -1503,7 +1502,7 @@ function_abf40e98(actionparams) {
     return undefined;
   }
 
-  if(!isDefined(trace[#"surfacetype"]) || trace[#"surfacetype"] != "glass") {
+  if(!isDefined(trace[# "surfacetype"]) || trace[# "surfacetype"] != "glass") {
     if(!isDefined(actionparams.debug)) {
       actionparams.debug = [];
     } else if(!isarray(actionparams.debug)) {
@@ -1769,7 +1768,7 @@ function_e73c8946(actionparams) {
 function_22e2ba8c(actionparams) {
   weapon = actionparams.weapon;
   weaponclass = util::getweaponclass(weapon);
-  assert(weaponclass == #"weapon_sniper");
+  assert(weaponclass == # "weapon_sniper");
 
   while(!self function_cf788c22() && self is_target_enemy(actionparams) && self is_target_visible(actionparams) && self bot::weapon_loaded(weapon)) {
     self function_8a2b82ad(actionparams);
@@ -2053,7 +2052,7 @@ fire_locked_rocketlauncher(actionparams) {
     if(self function_55d5a581(actionparams)) {
       self bottapbutton(11);
 
-      if(self playerads() >= 1 && isDefined(self.stingertarget) && isDefined(self.stingertarget.locked_on) && self.stingertarget.locked_on&lockedflag) {
+      if(self playerads() >= 1 && isDefined(self.stingertarget) && isDefined(self.stingertarget.locked_on) && self.stingertarget.locked_on &lockedflag) {
         self bottapbutton(0);
       }
     }
@@ -2662,9 +2661,9 @@ function_43505382(actionparams) {
   }
 
   if(isentity(target)) {
-    return (target === bullettrace[#"entity"]);
+    return (target === bullettrace[# "entity"]);
   } else if(isvec(target)) {
-    return (bullettrace[#"fraction"] >= 1);
+    return (bullettrace[# "fraction"] >= 1);
   }
 
   return false;
@@ -2679,9 +2678,9 @@ function_ade341c(actionparams) {
   }
 
   if(isentity(target)) {
-    return (target === projectiletrace[#"entity"]);
+    return (target === projectiletrace[# "entity"]);
   } else if(isvec(target)) {
-    return (distancesquared(projectiletrace[#"position"], target) < 100);
+    return (distancesquared(projectiletrace[# "position"], target) < 100);
   }
 
   return false;
@@ -2787,8 +2786,8 @@ look_along_path() {
 }
 
 function_412e04fa(node) {
-  var_208965cf = node.spawnflags& 262144;
-  var_a26a51ba = node.spawnflags& 524288;
+  var_208965cf = node.spawnflags & 262144;
+  var_a26a51ba = node.spawnflags & 524288;
 
   if(!var_208965cf && !var_a26a51ba) {
     self botsetlookangles(node.angles);

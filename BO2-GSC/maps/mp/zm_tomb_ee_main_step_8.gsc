@@ -64,8 +64,7 @@ stage_logic() {
   stage_completed("little_girl_lost", level._cur_stage_name);
 }
 
-exit_stage(success) {
-}
+exit_stage(success) {}
 
 waittill_player_activates() {
   while(true) {

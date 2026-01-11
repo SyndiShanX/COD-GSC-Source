@@ -61,8 +61,7 @@ crawler_action() {
 
     if(height_check > 8) {
       self setanimstatefromasd("zm_player_idle");
-    }
-    else {
+    } else {
       self maps\mp\animscripts\zm_run::needsupdate();
       self setgoalpos(start_pos);
     }
@@ -267,8 +266,7 @@ sloth_move_to_same_side() {
 
   if(self maps\mp\zombies\_zm_ai_sloth::sloth_behind_mansion()) {
     self maps\mp\zombies\_zm_ai_sloth::action_navigate_mansion(level.courtyard_depart, level.courtyard_arrive);
-  }
-  else {
+  } else {
     self maps\mp\zombies\_zm_ai_sloth::action_navigate_mansion(level.maze_depart, level.maze_arrive);
   }
 

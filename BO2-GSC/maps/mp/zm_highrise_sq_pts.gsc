@@ -153,21 +153,18 @@ place_ball_think(t_place_ball, s_lion_spot) {
   self.t_putdown_ball delete();
 }
 
-delete_all_springpads() {
-}
+delete_all_springpads() {}
 
-exit_stage_1(success) {
-}
+exit_stage_1(success) {}
 
-exit_stage_2(success) {
-}
+exit_stage_2(success) {}
 
 watch_player_springpads(is_generator) {
   level thread springpad_count_watcher(is_generator);
   a_players = get_players();
 
   foreach(player in a_players) {
-  player thread pts_watch_springpad_use(is_generator);
+    player thread pts_watch_springpad_use(is_generator);
   }
 }
 
@@ -419,8 +416,7 @@ pts_putdown_trigs_remove_for_player(player) {
   foreach(s_lion_spot in a_lion_spots) {
     if(!isDefined(s_lion_spot.pts_putdown_trigs)) {
       continue;
-    }
-    else if(isDefined(s_lion_spot.pts_putdown_trigs[player.characterindex])) {
+    } else if(isDefined(s_lion_spot.pts_putdown_trigs[player.characterindex])) {
       s_lion_spot.pts_putdown_trigs[player.characterindex] delete();
       arrayremoveindex(s_lion_spot.pts_putdown_trigs, player.characterindex, 1);
     }
@@ -432,7 +428,7 @@ pts_putdown_trigs_remove_for_spot(s_lion_spot) {
     return;
   }
   foreach(t_putdown in s_lion_spot.pts_putdown_trigs) {
-  t_putdown delete();
+    t_putdown delete();
   }
 
   s_lion_spot.pts_putdown_trigs = [];

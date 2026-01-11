@@ -305,11 +305,9 @@ init_fog_vol_to_visionset() {
   level thread fog_vol_to_visionset_monitor();
 }
 
-init_clientflag_variables() {
-}
+init_clientflag_variables() {}
 
-register_clientflag_callbacks() {
-}
+register_clientflag_callbacks() {}
 
 include_weapons() {
   include_weapon("hamr_zm");
@@ -468,8 +466,7 @@ staff_charger_init(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
   if(newval != 0) {
     level.charger_origins[newval] = self.origin;
-  }
-  else {
+  } else {
     keys = getarraykeys(level.charger_origins);
 
     foreach(i in keys) {
@@ -607,11 +604,9 @@ central_crypt_disc_update_color(localclientnum, light_on) {
 
   if(isDefined(level.light_on_color) && light_on) {
     v_color = level.light_on_color;
-  }
-  else if(isDefined(level.light_off_color) && !light_on) {
+  } else if(isDefined(level.light_off_color) && !light_on) {
     v_color = level.light_off_color;
-  }
-  else if(light_on) {
+  } else if(light_on) {
     v_color = v_color * 10;
   }
 
@@ -622,8 +617,7 @@ central_crypt_disc_update_color(localclientnum, light_on) {
 init_central_crypt_disc(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   if(newval == 2) {
     self thread central_crypt_disc_update_color(localclientnum, 1);
-  }
-  else {
+  } else {
     self mapshaderconstant(localclientnum, 0, "ScriptVector3");
     self thread central_crypt_disc_update_color(localclientnum, 0);
   }
@@ -645,11 +639,9 @@ switch_cooldown_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldn
 
   if(newval == 1) {
     cooldown_struct = getstruct("cooldown_steam_1", "targetname");
-  }
-  else if(newval == 2) {
+  } else if(newval == 2) {
     cooldown_struct = getstruct("cooldown_steam_2", "targetname");
-  }
-  else if(newval == 3) {
+  } else if(newval == 3) {
     cooldown_struct = getstruct("cooldown_steam_3", "targetname");
   }
 
@@ -698,17 +690,13 @@ crystal_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwa
 
   if(newval == 1) {
     self.fx_element_glow = playFXOnTag(localclientnum, level._effect["fire_glow"], self, "tag_origin");
-  }
-  else if(newval == 2) {
+  } else if(newval == 2) {
     self.fx_element_glow = playFXOnTag(localclientnum, level._effect["air_glow"], self, "tag_origin");
-  }
-  else if(newval == 3) {
+  } else if(newval == 3) {
     self.fx_element_glow = playFXOnTag(localclientnum, level._effect["elec_glow"], self, "tag_origin");
-  }
-  else if(newval == 4) {
+  } else if(newval == 4) {
     self.fx_element_glow = playFXOnTag(localclientnum, level._effect["ice_glow"], self, "tag_origin");
-  }
-  else if(newval == 0) {
+  } else if(newval == 0) {
     stopfx(localclientnum, self.fx_element_glow);
   }
 }
@@ -747,8 +735,7 @@ sky_pillar_fade(localclientnum, fade_in, fade_time) {
 
     if(pct < 0.0) {
       pct = 0.0;
-    }
-    else if(pct > 1.0) {
+    } else if(pct > 1.0) {
       pct = 1.0;
     }
 
@@ -782,11 +769,9 @@ player_rumble_and_shake(localclientnum, oldval, newval, bnewent, binitialsnap, f
 
   if(newval == 4) {
     self thread player_continuous_rumble(localclientnum, 1);
-  }
-  else if(newval == 5) {
+  } else if(newval == 5) {
     self thread player_continuous_rumble(localclientnum, 2);
-  }
-  else if(newval == 3) {
+  } else if(newval == 3) {
     self earthquake(0.6, 1.5, self.origin, 100);
     self playrumbleonentity(localclientnum, "artillery_rumble");
     level thread clientscripts\mp\zm_tomb_amb::snd_shake_hvy();
@@ -845,16 +830,16 @@ toggle_lantern_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldna
   a_lanterns = [];
 
   foreach(str_name in a_lantern_names) {
-  a_lanterns = arraycombine(a_lanterns, getdynentarray(str_name), 0, 0);
+    a_lanterns = arraycombine(a_lanterns, getdynentarray(str_name), 0, 0);
   }
 
   if(newval) {
     foreach(lantern in a_lanterns) {
-    lantern lantern_fx_enable(localclientnum);
+      lantern lantern_fx_enable(localclientnum);
     }
   } else {
     foreach(lantern in a_lanterns) {
-    lantern lantern_fx_disable(localclientnum);
+      lantern lantern_fx_disable(localclientnum);
     }
   }
 }
@@ -940,8 +925,7 @@ set_player_weather_visionset(localclientnum, oldval, newval, bnewent, binitialsn
 
     if(getdvarint(#"splitscreen_playerCount") > 2) {
       setworldfogactivebank(localclientnum, 9);
-    }
-    else {
+    } else {
       setworldfogactivebank(localclientnum, 1);
     }
 
@@ -952,8 +936,7 @@ set_player_weather_visionset(localclientnum, oldval, newval, bnewent, binitialsn
 
     if(getdvarint(#"splitscreen_playerCount") > 2) {
       setworldfogactivebank(localclientnum, 10);
-    }
-    else {
+    } else {
       setworldfogactivebank(localclientnum, 2);
     }
 
@@ -964,8 +947,7 @@ set_player_weather_visionset(localclientnum, oldval, newval, bnewent, binitialsn
 
     if(getdvarint(#"splitscreen_playerCount") > 2) {
       setworldfogactivebank(localclientnum, 12);
-    }
-    else {
+    } else {
       setworldfogactivebank(localclientnum, 4);
     }
 
@@ -1128,14 +1110,12 @@ lerp_dvar(str_dvar, n_val, n_lerp_time, b_saved_dvar, localclientnum) {
 
   if(is_true(b_saved_dvar)) {
     setsaveddvar(str_dvar, n_val);
-  }
-  else {
+  } else {
     setdvar(str_dvar, n_val);
   }
 }
 
-player_tablet_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
-}
+player_tablet_state(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {}
 
 foot_print_box_fx(localclientnum, oldval, newval, bnewent, binitialsnap, fieldname, bwasdemojump) {
   a_structs = getstructarray("foot_box_pos", "targetname");

@@ -251,7 +251,7 @@ main() {
   var_6 = ["brick", "carpet", "foliage", "grass", "gravel", "ice", "metal", "painted metal", "mud", "plaster", "sand", "snow", "slush", "water", "wood", "ceramic"];
 
   foreach(var_8 in var_6) {
-  animscripts\utility::setnotetracksound(var_2, var_8, var_4, var_5);
+    animscripts\utility::setnotetracksound(var_2, var_8, var_4, var_5);
   }
 
   var_2 = "dog bodyfall small";
@@ -264,7 +264,7 @@ main() {
   animscripts\utility::setnotetrackeffect(var_2, var_3, "rock", loadfx("fx/impacts/bodyfall_default_large_runner"), var_4, var_5);
 
   foreach(var_8 in var_6) {
-  animscripts\utility::setnotetracksound(var_2, var_8, var_4, var_5);
+    animscripts\utility::setnotetracksound(var_2, var_8, var_4, var_5);
   }
 
   thread track_riley_kills();

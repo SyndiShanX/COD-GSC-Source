@@ -128,8 +128,7 @@ add_to_array(array, ent) {
   }
   if(!isDefined(array)) {
     array[0] = ent;
-  }
-  else {
+  } else {
     array[array.size] = ent;
   }
   return array;

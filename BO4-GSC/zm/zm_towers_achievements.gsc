@@ -12,7 +12,6 @@
 #include scripts\zm_common\zm_stats;
 #include scripts\zm_common\zm_utility;
 #include scripts\zm_common\zm_zonemgr;
-
 #namespace zm_towers_achievements;
 
 init() {
@@ -82,16 +81,16 @@ function_7b7ba154(s_params) {
   }
 
   switch (e_attacker.script_string) {
-    case #"hash_7ebf57684b9746dc":
+    case # "hash_7ebf57684b9746dc":
       var_378e29b9 = "towers_acid_trap_built_ra";
       break;
-    case #"hash_7eae57684b88d3a9":
+    case # "hash_7eae57684b88d3a9":
       var_378e29b9 = "towers_acid_trap_built_danu";
       break;
-    case #"hash_7ebf49684b972f12":
+    case # "hash_7ebf49684b972f12":
       var_378e29b9 = "towers_acid_trap_built_odin";
       break;
-    case #"hash_7eae45684b88b513":
+    case # "hash_7eae45684b88b513":
       var_378e29b9 = "towers_acid_trap_built_zeus";
       break;
     default:
@@ -164,14 +163,14 @@ function_5180cfce(s_params) {
 }
 
 function_b43c1bad(s_params) {
-  if(self.archetype !== #"tiger") {
+  if(self.archetype !== # "tiger") {
     return;
   }
 
   waitframe(1);
   var_328cd9eb = self.var_39ebb8cc;
 
-  if(!isDefined(var_328cd9eb) || var_328cd9eb.archetype !== #"tiger") {
+  if(!isDefined(var_328cd9eb) || var_328cd9eb.archetype !== # "tiger") {
     return;
   }
 
@@ -213,7 +212,7 @@ function_a24ba4fc() {
 
   self debug_notification("<dev string:x95>");
 
-    self zm_challenges::function_9a9ab6f6(#"hash_6d5340d9e43ed73d");
+  self zm_challenges::function_9a9ab6f6(#"hash_6d5340d9e43ed73d");
 
   if(isDefined(level.var_2d744147) && level.var_2d744147 <= 5940000) {
     self zm_challenges::function_979f4cc0(#"hash_69f53cb2579fba3e");
@@ -230,7 +229,7 @@ function_a87d82d1() {
 function_6fdb733f() {
   self notify("72218f31e92393e3");
   self endon("72218f31e92393e3");
-  level endon(#"door_opened", #"end_game", #"hash_6efaa75e1959aa0f");
+  level endon(#"door_opened", # "end_game", # "hash_6efaa75e1959aa0f");
   self endon(#"death");
 
   if(level.round_number > 1 || level flag::get(#"hash_6efaa75e1959aa0f")) {
@@ -263,7 +262,7 @@ function_cbdb5e70() {
 
   level waittill(#"start_of_round");
   a_e_players = level.players;
-  level flag::wait_till_timeout(300, #"hash_76692d6669cb0500");
+  level flag::wait_till_timeout(300, # "hash_76692d6669cb0500");
 
   if(level flag::get(#"hash_76692d6669cb0500")) {
     foreach(e_player in a_e_players) {

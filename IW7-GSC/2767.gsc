@@ -142,7 +142,7 @@ func_FAC7(var_00, var_01, var_02) {
   var_14.func_5D3C = 1;
 
   foreach(var_04 in var_14.func_AD31) {
-  func_56A7(var_04);
+    func_56A7(var_04);
   }
 
   wait 2;
@@ -266,8 +266,7 @@ func_5A5C() {
   if(isDefined(var_1["position"])) {
     if(scripts\engine\utility::cointoss()) {
       var_02 = "vehicle_pavelow";
-    }
-    else {
+    } else {
       var_02 = "vehicle_pavelow_opfor";
     }
 

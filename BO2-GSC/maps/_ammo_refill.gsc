@@ -146,8 +146,7 @@ _place_player_loadout() {
 
   if(!issubstr(str_primary_weapon, "+")) {
     str_primary_weapon_base = str_primary_weapon;
-  }
-  else {
+  } else {
     str_primary_weapon_base = strtok(str_primary_weapon, "+")[0];
   }
 
@@ -175,8 +174,7 @@ _place_player_loadout() {
 
   if(!issubstr(str_secondary_weapon, "+")) {
     str_secondary_weapon_base = str_secondary_weapon;
-  }
-  else {
+  } else {
     str_secondary_weapon_base = strtok(str_secondary_weapon, "+")[0];
   }
 
@@ -245,7 +243,7 @@ _debug_tags() {
   tag_array[tag_array.size] = "secondary_A";
 
   foreach(tag in tag_array) {
-  self thread _loop_text(tag);
+    self thread _loop_text(tag);
   }
 }
 

@@ -40,8 +40,7 @@ azm_use_string_table() {
 azm_start_zone(var_0, var_1, var_2) {
   if(level._audio.zone_mgr.current_zone == var_0) {
     return;
-  }
-  else if(level._audio.zone_mgr.current_zone != "") {
+  } else if(level._audio.zone_mgr.current_zone != "") {
     azm_stop_zone(level._audio.zone_mgr.current_zone, var_1);
   }
 
@@ -76,8 +75,7 @@ azm_start_zone(var_0, var_1, var_2) {
   if(isDefined(var_4["streamed_ambience"])) {
     if(var_4["streamed_ambience"] != "none") {
       soundscripts\_audio_stream_manager::sm_start_preset(var_4["streamed_ambience"], var_3, var_5, var_6);
-    }
-    else {
+    } else {
       soundscripts\_audio_stream_manager::sm_stop_ambience(var_3);
     }
   }
@@ -85,8 +83,7 @@ azm_start_zone(var_0, var_1, var_2) {
   if(isDefined(var_4["dynamic_ambience"])) {
     if(var_4["dynamic_ambience"] != "none") {
       soundscripts\_audio_dynamic_ambi::damb_zone_start_preset(var_4["dynamic_ambience"], 1.0);
-    }
-    else {
+    } else {
       soundscripts\_audio_dynamic_ambi::damb_stop_zone(1.0);
     }
   }
@@ -94,8 +91,7 @@ azm_start_zone(var_0, var_1, var_2) {
   if(isDefined(var_4["occlusion"]) && !azm_get_occlusion_bypass()) {
     if(var_4["occlusion"] != "none") {
       soundscripts\_snd_filters::snd_set_occlusion(var_4["occlusion"]);
-    }
-    else {
+    } else {
       soundscripts\_snd_filters::snd_set_occlusion(undefined);
     }
   }
@@ -108,8 +104,7 @@ azm_start_zone(var_0, var_1, var_2) {
   if(isDefined(var_4["reverb"]) && !azm_get_reverb_bypass()) {
     if(var_4["reverb"] != "none") {
       soundscripts\_audio_reverb::rvb_start_preset(var_4["reverb"]);
-    }
-    else {
+    } else {
       soundscripts\_audio_reverb::rvb_deactive_reverb();
     }
   }
@@ -117,8 +112,7 @@ azm_start_zone(var_0, var_1, var_2) {
   if(isDefined(var_4["mix"]) && !azm_get_mix_bypass()) {
     if(var_4["mix"] != "none") {
       soundscripts\_audio_mix_manager::mm_start_zone_preset(var_4["mix"]);
-    }
-    else {
+    } else {
       soundscripts\_audio_mix_manager::mm_clear_zone_mix(undefined, 1.0);
     }
   }
@@ -186,7 +180,7 @@ azm_stop_zones(var_0) {
   soundscripts\_audio::aud_print_zone("ZONE STOP ALL");
 
   foreach(var_3 in level._audio.zone_mgr.zones) {
-  azm_stop_zone(var_3["name"], var_1, 0);
+    azm_stop_zone(var_3["name"], var_1, 0);
   }
 }
 
@@ -336,8 +330,7 @@ azmx_load_zone(var_0) {
 
   if(isDefined(level._audio.zone_mgr.preset_cache[var_0])) {
     var_1 = level._audio.zone_mgr.preset_cache[var_0];
-  }
-  else {
+  } else {
     var_1 = azmx_get_preset_from_string_table(var_0, 1);
   }
 
@@ -350,8 +343,7 @@ azmx_load_zone(var_0) {
   if(azm_get_quad_enable() && isDefined(level._audio.zone_mgr.overrides.samb[var_0])) {
     if(level._audio.zone_mgr.overrides.samb[var_0] == "none") {
       var_1["streamed_ambience"] = undefined;
-    }
-    else {
+    } else {
       var_1["streamed_ambience"] = level._audio.zone_mgr.overrides.samb[var_0];
     }
 
@@ -362,8 +354,7 @@ azmx_load_zone(var_0) {
   if(azm_get_damb_enable() && isDefined(level._audio.zone_mgr.overrides.damb[var_0])) {
     if(level._audio.zone_mgr.overrides.damb[var_0] == "none") {
       var_1["dynamic_ambience"] = undefined;
-    }
-    else {
+    } else {
       var_1["dynamic_ambience"] = level._audio.zone_mgr.overrides.damb[var_0];
     }
 
@@ -374,8 +365,7 @@ azmx_load_zone(var_0) {
   if(azm_get_reverb_enable() && isDefined(level._audio.zone_mgr.overrides.rev[var_0])) {
     if(level._audio.zone_mgr.overrides.rev[var_0] == "none") {
       var_1["reverb"] = undefined;
-    }
-    else {
+    } else {
       var_1["reverb"] = level._audio.zone_mgr.overrides.rev[var_0];
     }
 
@@ -386,8 +376,7 @@ azmx_load_zone(var_0) {
   if(azm_get_occlusion_enable() && isDefined(level._audio.zone_mgr.overrides.occ[var_0])) {
     if(level._audio.zone_mgr.overrides.occ[var_0] == "none") {
       var_1["occlusion"] = undefined;
-    }
-    else {
+    } else {
       var_1["occlusion"] = level._audio.zone_mgr.overrides.occ[var_0];
     }
 
@@ -398,8 +387,7 @@ azmx_load_zone(var_0) {
   if(azm_get_filter_enable() && isDefined(level._audio.zone_mgr.overrides.mix[var_0])) {
     if(level._audio.zone_mgr.overrides.mix[var_0] == "none") {
       var_1["mix"] = undefined;
-    }
-    else {
+    } else {
       var_1["mix"] = level._audio.zone_mgr.overrides.mix[var_0];
     }
 
@@ -498,8 +486,7 @@ azmx_restart_stream(var_0, var_1) {
 
   if(isDefined(var_2)) {
     soundscripts\_audio_stream_manager::sm_start_preset(var_2, var_1);
-  }
-  else {
+  } else {
     soundscripts\_audio_stream_manager::sm_stop_ambience(var_1);
   }
 }
@@ -515,8 +502,7 @@ azmx_restart_damb(var_0, var_1) {
 
   if(isDefined(var_3)) {
     soundscripts\_audio_dynamic_ambi::damb_zone_start_preset(var_3, var_2);
-  }
-  else {
+  } else {
     soundscripts\_audio_dynamic_ambi::damb_zone_stop_preset(undefined, var_2);
   }
 }
@@ -543,8 +529,7 @@ azmx_restart_mix(var_0, var_1) {
   if(!azm_get_mix_bypass()) {
     if(isDefined(var_2)) {
       soundscripts\_audio_mix_manager::mm_start_zone_preset(var_2);
-    }
-    else {
+    } else {
       soundscripts\_audio_mix_manager::mm_clear_zone_mix(undefined, var_1);
     }
   }
@@ -555,8 +540,7 @@ azmx_set_param_internal(var_0, var_1, var_2, var_3, var_4) {
     if(isDefined(level._audio.zone_mgr.zones[var_0][var_1]) && level._audio.zone_mgr.zones[var_0][var_1] != var_2 || !isDefined(level._audio.zone_mgr.zones[var_0][var_1]) && (isDefined(var_2) && var_2 != "none")) {
       if(var_2 == "none") {
         level._audio.zone_mgr.zones[var_0][var_1] = undefined;
-      }
-      else {
+      } else {
         level._audio.zone_mgr.zones[var_0][var_1] = var_2;
       }
 
@@ -651,11 +635,9 @@ azmx_is_valid_mix_blend_request(var_0, var_1) {
 
   if(isDefined(var_0) && isDefined(var_1) && var_0 != var_1) {
     var_2 = 1;
-  }
-  else if(isDefined(var_1) && !isDefined(var_0)) {
+  } else if(isDefined(var_1) && !isDefined(var_0)) {
     var_2 = 1;
-  }
-  else if(isDefined(var_0) && !isDefined(var_1)) {
+  } else if(isDefined(var_0) && !isDefined(var_1)) {
     var_2 = 1;
   }
 
@@ -667,11 +649,9 @@ azmx_is_valid_damb_blend_request(var_0, var_1) {
 
   if(isDefined(var_0) && isDefined(var_1) && var_0 != var_1) {
     var_2 = 1;
-  }
-  else if(isDefined(var_1) && !isDefined(var_0)) {
+  } else if(isDefined(var_1) && !isDefined(var_0)) {
     var_2 = 1;
-  }
-  else if(isDefined(var_0) && !isDefined(var_1)) {
+  } else if(isDefined(var_0) && !isDefined(var_1)) {
     var_2 = 1;
   }
 
@@ -683,11 +663,9 @@ azmx_is_valid_samb_blend_request(var_0, var_1) {
 
   if(isDefined(var_0) && isDefined(var_1) && var_0 != var_1) {
     var_2 = 1;
-  }
-  else if(isDefined(var_1) && !isDefined(var_0)) {
+  } else if(isDefined(var_1) && !isDefined(var_0)) {
     var_2 = 1;
-  }
-  else if(isDefined(var_0) && !isDefined(var_1)) {
+  } else if(isDefined(var_0) && !isDefined(var_1)) {
     var_2 = 1;
   }
 
@@ -755,8 +733,7 @@ azmx_blend_zones(var_0, var_1, var_2) {
     if(isDefined(var_2.reverb1) && !azm_get_reverb_bypass()) {
       if(var_2.reverb1 == "none") {
         soundscripts\_audio_reverb::rvb_start_preset(undefined);
-      }
-      else {
+      } else {
         soundscripts\_audio_reverb::rvb_start_preset(var_2.reverb1);
       }
     }
@@ -764,8 +741,7 @@ azmx_blend_zones(var_0, var_1, var_2) {
     if(isDefined(var_2.occlusion1) && !azm_get_occlusion_bypass()) {
       if(var_2.occlusion1 == "none") {
         soundscripts\_snd_filters::snd_set_occlusion(undefined);
-      }
-      else {
+      } else {
         soundscripts\_snd_filters::snd_set_occlusion(var_2.occlusion1);
       }
     }
@@ -781,8 +757,7 @@ azmx_blend_zones(var_0, var_1, var_2) {
     if(isDefined(var_2.reverb2) && !azm_get_reverb_bypass()) {
       if(var_2.reverb2 == "none") {
         soundscripts\_audio_reverb::rvb_start_preset(undefined);
-      }
-      else {
+      } else {
         soundscripts\_audio_reverb::rvb_start_preset(var_2.reverb2);
       }
     }
@@ -790,8 +765,7 @@ azmx_blend_zones(var_0, var_1, var_2) {
     if(isDefined(var_2.occlusion2) && !azm_get_occlusion_bypass()) {
       if(var_2.occlusion2 == "none") {
         soundscripts\_snd_filters::snd_set_occlusion(undefined);
-      }
-      else {
+      } else {
         soundscripts\_snd_filters::snd_set_occlusion(var_2.occlusion2);
       }
     }

@@ -447,8 +447,7 @@ waiting_for_stealth_move_to_house() {
 
   if(!level.console && !level.player gamepadusedlast()) {
     level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER_PC", 6, str_crouch_flag);
-  }
-  else {
+  } else {
     level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER", 6, str_crouch_flag);
   }
 
@@ -721,8 +720,7 @@ in_house_dialog(delay) {
 
   if(is_mason_stealth_crouched()) {
     level.ai_hudson say_dialog("huds_i_ll_scout_ahead_w_0");
-  }
-  else {
+  } else {
     level.ai_hudson say_dialog("huds_dammit_mason_keep_0");
 
     while(!is_mason_stealth_crouched()) {
@@ -766,8 +764,7 @@ hudson_waiting_for_dense_foliage_move() {
   if(!is_mason_stealth_crouched()) {
     if(!level.console && !level.player gamepadusedlast()) {
       level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER_PC", 4, str_crouch_flag);
-    }
-    else {
+    } else {
       level thread helper_message(&"ANGOLA_2_STEALTH_MASON_USE_GRASS_AS_COVER", 4, str_crouch_flag);
     }
   }
@@ -925,7 +922,7 @@ fail_beach_action() {
   a_ledge_clips = getEntArray("ledge_clip", "targetname");
 
   foreach(m_ledge_clip in a_ledge_clips) {
-  m_ledge_clip delete();
+    m_ledge_clip delete();
   }
 
   set_objective(level.obj_escape_jungle, undefined, "delete");
@@ -1034,7 +1031,7 @@ clean_up_fail_valley() {
   a_spawners = getEntArray("enemy_fail_valley", "targetname");
 
   foreach(sp_enemy in a_spawners) {
-  sp_enemy delete();
+    sp_enemy delete();
   }
 }
 
@@ -1060,7 +1057,7 @@ clean_up_in_house() {
   a_spawners = getEntArray("enemy_fail_before_log", "targetname");
 
   foreach(sp_enemy in a_spawners) {
-  sp_enemy delete();
+    sp_enemy delete();
   }
 
   delete_scene("child_guards_a", 1);

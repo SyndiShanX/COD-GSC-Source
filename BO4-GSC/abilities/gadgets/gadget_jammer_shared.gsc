@@ -15,7 +15,6 @@
 #include scripts\core_common\values_shared;
 #include scripts\killstreaks\killstreaks_shared;
 #include scripts\weapons\weaponobjects;
-
 #namespace jammer;
 
 init_shared() {
@@ -148,7 +147,7 @@ private function_7d81a4ff(watcher, player) {
     return;
   }
 
-  if(waitresult._notify == #"explode" && isDefined(waitresult.position)) {
+  if(waitresult._notify == # "explode" && isDefined(waitresult.position)) {
     self thread function_87c540c0(self, waitresult.position, player);
   }
 }
@@ -233,7 +232,7 @@ private function_e27c41b4(jammer, entity, attackingplayer) {
 
 private function_b8c5ab9c(jammer, player, attackingplayer) {
   player notify(#"hash_4f2e183cc0ec68bd");
-  player endon(#"death", #"hash_4f2e183cc0ec68bd");
+  player endon(#"death", # "hash_4f2e183cc0ec68bd");
   player clientfield::set_to_player("isJammed", 1);
   player.isjammed = 1;
   player.var_fe1ebada = attackingplayer;
@@ -288,7 +287,7 @@ function_4a82368f(entity, owner) {
     owner clientfield::set_to_player("jammedvehpostfx", 1);
   }
 
-  entity waittill(#"death", #"remote_weapon_end", #"hash_2476803a0d5fa572");
+  entity waittill(#"death", # "remote_weapon_end", # "hash_2476803a0d5fa572");
 
   if(!isDefined(owner)) {
     return;
@@ -353,7 +352,7 @@ private function_b16c8865(entity, attackingplayer) {
     return false;
   }
 
-  if(!isplayer(entity) && (!isDefined(entity.model) || entity.model == #"")) {
+  if(!isplayer(entity) && (!isDefined(entity.model) || entity.model == # "")) {
     return false;
   }
 
@@ -382,7 +381,7 @@ private function_7b151daa(player) {
 
 function_5f86757d() {
   level endon(#"game_ended");
-  waitresult = self waittill(#"explode", #"death");
+  waitresult = self waittill(#"explode", # "death");
 
   if(!isDefined(self)) {
     return waitresult;
@@ -394,7 +393,7 @@ function_5f86757d() {
 
 private function_3a3a2ea9(jammer) {
   jammer endon(#"death");
-  waitresult = jammer waittilltimeout(2, #"hash_754a0aedf9f00e8d");
+  waitresult = jammer waittilltimeout(2, # "hash_754a0aedf9f00e8d");
 
   if(!isDefined(jammer)) {
     return;
@@ -419,19 +418,19 @@ function_2e6238c0(weapon, owner) {
   leaderdialog = undefined;
 
   switch (weapon.name) {
-    case #"tank_robot":
-    case #"inventory_tank_robot":
-    case #"ai_tank_marker":
+    case # "tank_robot":
+    case # "inventory_tank_robot":
+    case # "ai_tank_marker":
       taacomdialog = "aiTankJammedStart";
       leaderdialog = "aiTankJammedStart";
       break;
-    case #"ultimate_turret":
-    case #"inventory_ultimate_turret":
+    case # "ultimate_turret":
+    case # "inventory_ultimate_turret":
       taacomdialog = "ultTurretJammedStart";
       leaderdialog = "ultTurretJammedStart";
       break;
-    case #"ability_smart_cover":
-    case #"gadget_smart_cover":
+    case # "ability_smart_cover":
+    case # "gadget_smart_cover":
       taacomdialog = "smartCoverJammedStart";
       break;
   }
@@ -458,19 +457,19 @@ function_2eb0a933(weapon, owner) {
   leaderdialog = undefined;
 
   switch (weapon.name) {
-    case #"tank_robot":
-    case #"inventory_tank_robot":
-    case #"ai_tank_marker":
+    case # "tank_robot":
+    case # "inventory_tank_robot":
+    case # "ai_tank_marker":
       taacomdialog = "aiTankJammedEnd";
       leaderdialog = "aiTankJammedEnd";
       break;
-    case #"ultimate_turret":
-    case #"inventory_ultimate_turret":
+    case # "ultimate_turret":
+    case # "inventory_ultimate_turret":
       taacomdialog = "ultTurretJammedEnd";
       leaderdialog = "ultTurretJammedEnd";
       break;
-    case #"ability_smart_cover":
-    case #"gadget_smart_cover":
+    case # "ability_smart_cover":
+    case # "gadget_smart_cover":
       taacomdialog = "smartCoverJammedEnd";
       break;
   }

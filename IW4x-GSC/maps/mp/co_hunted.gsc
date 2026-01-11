@@ -29,9 +29,7 @@ main() {
 
   if(level.hunted_weather == 0) {
     ambientPlay("ambient_mp_rural", 0);
-  }
-
-  else if(level.hunted_weather == 1) {
+  } else if(level.hunted_weather == 1) {
     ambientPlay("ambient_mp_rain", 0);
   }
 

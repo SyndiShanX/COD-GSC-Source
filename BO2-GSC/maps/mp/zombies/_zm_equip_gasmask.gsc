@@ -20,8 +20,7 @@ init() {
   onplayerconnect_callback(::gasmask_on_player_connect);
 }
 
-gasmask_on_player_connect() {
-}
+gasmask_on_player_connect() {}
 
 gasmask_removed_watcher_thread() {
   self notify("only_one_gasmask_removed_thread");

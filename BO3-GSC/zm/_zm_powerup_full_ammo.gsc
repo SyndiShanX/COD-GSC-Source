@@ -45,9 +45,7 @@ function full_ammo_powerup(drop_item, player) {
       continue;
     }
     if(isDefined(level.check_player_is_ready_for_ammo)) {
-      if([
-          [level.check_player_is_ready_for_ammo]
-        ](players[i]) == 0) {
+      if([[level.check_player_is_ready_for_ammo]](players[i]) == 0) {
         continue;
       }
     }

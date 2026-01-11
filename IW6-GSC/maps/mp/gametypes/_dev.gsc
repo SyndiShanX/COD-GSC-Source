@@ -204,7 +204,7 @@ updateDevSettings() {
 
   if(GetDvar("scr_list_weapons") != "") {
     foreach(baseWeapon, _ in level.baseWeaponList) {
-    iPrintLn(baseWeapon);
+      iPrintLn(baseWeapon);
     }
 
     SetDevDvar("scr_list_weapons", "");
@@ -212,7 +212,7 @@ updateDevSettings() {
 
   if(getdvarint("scr_predatorme") == 1) {
     foreach(player in level.players) {
-    level thread maps\mp\killstreaks\_remotemissile::_fire_noplayer(0, player);
+      level thread maps\mp\killstreaks\_remotemissile::_fire_noplayer(0, player);
     }
 
     SetDevDvar("scr_predatorme", "");
@@ -344,8 +344,7 @@ updateDevSettings() {
 
       if(isDefined(tokens[1])) {
         slotId = int(tokens[1]);
-      }
-      else {
+      } else {
         slotId = 0;
       }
 
@@ -386,8 +385,7 @@ updateDevSettings() {
 
           if(isDefined(tokens[2])) {
             player thread maps\mp\killstreaks\_killstreaks::killstreakUsePressed();
-          }
-          else {
+          } else {
             player thread[[level.killstreakFuncs[streakName]]]();
           }
 
@@ -545,8 +543,7 @@ updateDevSettings() {
 
     if(level.teamBased && (!level.teamCount["allies"] || !level.teamCount["axis"])) {
       println("scr_set_rank may not work because there are not players on both teams");
-    }
-    else if(!level.teamBased && (level.teamCount["allies"] + level.teamCount["axis"] < 2)) {
+    } else if(!level.teamBased && (level.teamCount["allies"] + level.teamCount["axis"] < 2)) {
       println("scr_set_rank may not work because there are not at least two players");
     }
 
@@ -693,12 +690,12 @@ updateDevSettings() {
         case "splash":
         case "level_up_splash":
           foreach(player in level.players) {
-          player thread maps\mp\gametypes\_hud_message::splashNotify(splashName, splashValue);
+            player thread maps\mp\gametypes\_hud_message::splashNotify(splashName, splashValue);
           }
           break;
         case "killstreak":
           foreach(player in level.players) {
-          player thread maps\mp\gametypes\_hud_message::killstreakSplashNotify(splashName, splashValue);
+            player thread maps\mp\gametypes\_hud_message::killstreakSplashNotify(splashName, splashValue);
           }
           break;
         case "challenge_splash":
@@ -774,7 +771,7 @@ updateDevSettings() {
 
   if(GetDvar("scr_addlower") != "") {
     foreach(player in level.players) {
-    player thread testLowerMessage();
+      player thread testLowerMessage();
     }
 
     SetDevDvar("scr_addlower", "");
@@ -822,7 +819,7 @@ updateDevSettings() {
     promotion = (GetDvar("scr_show_endgameupdate") == "2");
 
     foreach(player in level.players) {
-    player thread testEndGameUpdate(promotion);
+      player thread testEndGameUpdate(promotion);
     }
 
     SetDevDvar("scr_show_endgameupdate", "");
@@ -831,8 +828,7 @@ updateDevSettings() {
   if(GetDvar("scr_goto_spawn") != "") {
     if(GetDvar("scr_goto_spawn") == "next") {
       gotoNextspawn();
-    }
-    else if(GetDvar("scr_goto_spawn") == "prev") {
+    } else if(GetDvar("scr_goto_spawn") == "prev") {
       gotoPrevspawn();
     }
 
@@ -844,15 +840,13 @@ updateDevSettings() {
 
     if(isDefined(level.player)) {
       ent = level.player;
-    }
-    else if(isDefined(level.players[0])) {
+    } else if(isDefined(level.players[0])) {
       ent = level.players[0];
     }
 
     if(isDefined(ent)) {
       println("Player origin - X: " + ent.origin[0] + ", Y: " + ent.origin[1] + ", Z: " + ent.origin[2]);
-    }
-    else {
+    } else {
       println("NO PLAYER");
     }
 
@@ -1010,8 +1004,7 @@ testEndGameUpdate(promotion) {
 
   if(isDefined(promotion) && promotion) {
     self setClientDvar("ui_promotion", 1);
-  }
-  else {
+  } else {
     self setClientDvar("ui_promotion", 0);
   }
 
@@ -1068,8 +1061,7 @@ xKillsY(attackerName, victimName) {
   for(index = 0; index < level.players.size; index++) {
     if(level.players[index].name == attackerName) {
       attacker = level.players[index];
-    }
-    else if(level.players[index].name == victimName) {
+    } else if(level.players[index].name == victimName) {
       victim = level.players[index];
     }
   }
@@ -1122,14 +1114,12 @@ updateMinimapSetting() {
           mincorner = (corners[0].origin[0], corners[0].origin[1], viewpos[2]);
           if(corners[1].origin[0] > corners[0].origin[0]) {
             maxcorner = (corners[1].origin[0], maxcorner[1], maxcorner[2]);
-          }
-          else {
+          } else {
             mincorner = (corners[1].origin[0], mincorner[1], mincorner[2]);
           }
           if(corners[1].origin[1] > corners[0].origin[1]) {
             maxcorner = (maxcorner[0], corners[1].origin[1], maxcorner[2]);
-          }
-          else {
+          } else {
             mincorner = (mincorner[0], corners[1].origin[1], mincorner[2]);
           }
 
@@ -1178,8 +1168,7 @@ updateMinimapSetting() {
           }
           if(angleside > angletop) {
             angle = angleside;
-          }
-          else {
+          } else {
             angle = angletop;
           }
 
@@ -1331,8 +1320,7 @@ addTestClients() {
 
   if(fullBots) {
     level thread[[level.bot_funcs["bots_spawn"]]](testclients, "autoassign");
-  }
-  else {
+  } else {
     level spawn_test_clients(testclients);
   }
 
@@ -2344,11 +2332,9 @@ getBot(notBot, spawn_ai_bots_normally) {
     if(isDefined(spawn_ai_bots_normally) && spawn_ai_bots_normally && BotAutoConnectEnabled() == 1 && testClients_SpawnFullBots()) {
       if(GetDvarInt("bot_MaxNumAllyBots") == 0) {
         SetDvar("bot_MaxNumAllyBots", 1);
-      }
-      else if(GetDvarInt("bot_MaxNumEnemyBots") == 0) {
+      } else if(GetDvarInt("bot_MaxNumEnemyBots") == 0) {
         SetDvar("bot_MaxNumAllyBots", 1);
-      }
-      else {
+      } else {
         Assert("unreachable");
       }
     } else {
@@ -2442,11 +2428,9 @@ devWatchWeaponXP() {
 
   if(weaponTokens[0] == "iw5" || weaponTokens[0] == "iw6") {
     weaponName = weaponTokens[0] + "_" + weaponTokens[1];
-  }
-  else if(weaponTokens[0] == "alt") {
+  } else if(weaponTokens[0] == "alt") {
     weaponName = weaponTokens[1] + "_" + weaponTokens[2];
-  }
-  else {
+  } else {
     weaponName = weaponTokens[0];
   }
 
@@ -2467,11 +2451,9 @@ devWatchWeaponXP() {
 
         if(weaponTokens[0] == "iw5" || weaponTokens[0] == "iw6") {
           weaponName = weaponTokens[0] + "_" + weaponTokens[1];
-        }
-        else if(weaponTokens[0] == "alt") {
+        } else if(weaponTokens[0] == "alt") {
           weaponName = weaponTokens[1] + "_" + weaponTokens[2];
-        }
-        else {
+        } else {
           weaponName = weaponTokens[0];
         }
 
@@ -2788,8 +2770,7 @@ drawPath(lineColor, textColor, textAlpha, textScale, textOffset, drawTime, endon
 
     if(ent.targetname == "heli_loop_start") {
       entFirstTarget = ent.target;
-    }
-    else if(ent.target == entFirstTarget) {
+    } else if(ent.target == entFirstTarget) {
       break;
     }
 

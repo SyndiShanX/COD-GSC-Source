@@ -12,7 +12,6 @@
 #include scripts\core_common\util_shared;
 #include scripts\mp_common\item_world;
 #include scripts\weapons\weaponobjects;
-
 #namespace item_world_cleanup;
 
 autoexec __init__system__() {
@@ -31,9 +30,7 @@ private _cleanup() {
     if(isDefined(level.deathcircle)) {
       foreach(func in var_314770d8) {
         util::wait_network_frame(1);
-        [
-          [func]
-        ](level.deathcircle, level.deathcircles[level.deathcircleindex - 1]);
+        [[func]](level.deathcircle, level.deathcircles[level.deathcircleindex - 1]);
       }
     }
 
@@ -64,7 +61,7 @@ private function_b465b436(deathcircle, var_898879a6) {
 
 private function_35e11623(deathcircle, var_898879a6) {
   players = getplayers();
-  excludelist = [#"eq_acid_bomb": 1, #"eq_cluster_semtex_grenade": 1, #"eq_molotov": 1, #"eq_slow_grenade": 1, #"eq_swat_grenade": 1, #"eq_wraith_fire": 1, #"frag_grenade": 1, #"willy_pete": 1];
+  excludelist = [# "eq_acid_bomb": 1, # "eq_cluster_semtex_grenade": 1, # "eq_molotov": 1, # "eq_slow_grenade": 1, # "eq_swat_grenade": 1, # "eq_wraith_fire": 1, # "frag_grenade": 1, # "willy_pete": 1];
 
   foreach(player in players) {
     if(!isplayer(player)) {
@@ -89,7 +86,7 @@ private function_35e11623(deathcircle, var_898879a6) {
               continue;
             }
 
-            if(weapon.name == #"hatchet" || weapon.name == #"tomahawk_t8") {
+            if(weapon.name == # "hatchet" || weapon.name == # "tomahawk_t8") {
               velocity = object getvelocity();
 
               if(velocity[0] > 0 || velocity[1] > 0 || velocity[2]) {
@@ -235,7 +232,7 @@ private function_ada16428(deathcircle, var_898879a6) {
 
   deleted = 0;
 
-    time = gettime();
+  time = gettime();
 
   foreach(vehicle in level.var_cd8f416a) {
     if(!isDefined(vehicle)) {
@@ -298,7 +295,7 @@ private function_ada16428(deathcircle, var_898879a6) {
 
         deleted++;
 
-          vehicle delete();
+        vehicle delete();
       }
     }
 

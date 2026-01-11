@@ -37,8 +37,7 @@ add_score_event(score, notify_string, client_notify_string) {
   if(level.scorelimit > 0) {
     if(level.teambased) {
       level thread score_team_event_monitor(score, notify_string, client_notify_string);
-    }
-    else {
+    } else {
       level thread score_event_monitor(score, notify_string, client_notify_string);
     }
   }

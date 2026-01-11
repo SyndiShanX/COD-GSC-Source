@@ -18,9 +18,7 @@ codecallback_agentadded() {
 }
 
 codecallback_agentdamaged(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B) {
-  param_01 = [
-    [level.agentvalidateattacker]
-  ](param_01);
+  param_01 = [[level.agentvalidateattacker]](param_01);
   var_0C = self[[level.agentfunc]]("on_damaged");
   if(isDefined(var_0C)) {
     self[[var_0C]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B);
@@ -34,9 +32,7 @@ codecallback_agentimpaled(param_00, param_01, param_02, param_03, param_04, para
 }
 
 codecallback_agentkilled(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09) {
-  param_01 = [
-    [level.agentvalidateattacker]
-  ](param_01);
+  param_01 = [[level.agentvalidateattacker]](param_01);
   var_0A = self[[level.agentfunc]]("on_killed");
   if(isDefined(var_0A)) {
     self thread[[var_0A]](param_00, param_01, param_02, param_04, param_05, param_06, param_07, param_08, param_09);
@@ -56,9 +52,7 @@ init() {
 }
 
 connectnewagent(param_00, param_01, param_02) {
-  var_03 = [
-    [level.getfreeagent]
-  ](param_00);
+  var_03 = [[level.getfreeagent]](param_00);
   if(isDefined(var_03)) {
     var_03.connecttime = gettime();
     if(isDefined(param_01)) {

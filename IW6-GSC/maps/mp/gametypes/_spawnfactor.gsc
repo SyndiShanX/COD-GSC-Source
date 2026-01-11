@@ -344,8 +344,7 @@ spawnFrontLineThink() {
       }
       if(player.team == "axis") {
         axisTeam[axisTeam.size] = player;
-      }
-      else {
+      } else {
         alliesTeam[alliesTeam.size] = player;
       }
 
@@ -376,8 +375,7 @@ spawnFrontLineThink() {
     yawDelta = idealTeamDiffYaw - frontLineTeamDiffYaw;
     if(yawDelta > 180) {
       yawDelta = yawDelta - 360;
-    }
-    else if(yawDelta < -180) {
+    } else if(yawDelta < -180) {
       yawDelta = 360 + yawDelta;
     }
     rotSpeed = clamp(yawDelta, rotSpeed * -1, rotSpeed);
@@ -437,15 +435,9 @@ spawnFrontLineThink() {
     if((useLog || useDebugDraw)) {
       if(useLog && !isDefined(level.frontlineLogIDs)) {
         level.frontlineLogIDs = [];
-        level.frontlineLogIDs["line"] = [
-          [level.matchRecording_generateID]
-        ]();
-        level.frontlineLogIDs["alliesCenter"] = [
-          [level.matchRecording_generateID]
-        ]();
-        level.frontlineLogIDs["axisCenter"] = [
-          [level.matchRecording_generateID]
-        ]();
+        level.frontlineLogIDs["line"] = [[level.matchRecording_generateID]]();
+        level.frontlineLogIDs["alliesCenter"] = [[level.matchRecording_generateID]]();
+        level.frontlineLogIDs["axisCenter"] = [[level.matchRecording_generateID]]();
       }
 
       if(isDefined(frontLineMidpoint) && isDefined(frontLineTeamDiffYaw)) {
@@ -460,7 +452,9 @@ spawnFrontLineThink() {
         }
 
         if(useLog) {
-          [[level.matchRecording_logEvent]](level.frontlineLogIDs["line"], "allies", "FRONT_LINE", bisectLineStart[0], bisectLineStart[1], GetTime(), undefined, bisectLineEnd[0], bisectLineEnd[1]);
+          [
+            [level.matchRecording_logEvent]
+          ](level.frontlineLogIDs["line"], "allies", "FRONT_LINE", bisectLineStart[0], bisectLineStart[1], GetTime(), undefined, bisectLineEnd[0], bisectLineEnd[1]);
         }
 
         drawMidpoint = (idealMidpoint[0], idealMidpoint[1], level.mapCenter[2]);
@@ -474,17 +468,15 @@ spawnFrontLineThink() {
 
       } else {
         if(useLog) {
-          [[level.matchRecording_logEvent]](level.frontlineLogIDs["line"], "allies", "FRONT_LINE", 0, 0, GetTime(), undefined, 0, 0);
+          [
+            [level.matchRecording_logEvent]
+          ](level.frontlineLogIDs["line"], "allies", "FRONT_LINE", 0, 0, GetTime(), undefined, 0, 0);
         }
       }
 
       if(useLog) {
-        [
-          [level.matchRecording_logEvent]
-        ](level.frontlineLogIDs["alliesCenter"], "axis", "ANCHOR", axisAverage[0], axisAverage[1], GetTime());
-        [
-          [level.matchRecording_logEvent]
-        ](level.frontlineLogIDs["axisCenter"], "allies", "ANCHOR", alliesAverage[0], alliesAverage[1], GetTime());
+        [[level.matchRecording_logEvent]](level.frontlineLogIDs["alliesCenter"], "axis", "ANCHOR", axisAverage[0], axisAverage[1], GetTime());
+        [[level.matchRecording_logEvent]](level.frontlineLogIDs["axisCenter"], "allies", "ANCHOR", alliesAverage[0], alliesAverage[1], GetTime());
       }
     }
   }
@@ -522,16 +514,14 @@ correctHomogenization() {
     foreach(point in level.spawnpoints) {
       if(point.origin[2] < 20000) {
         zoneOnePoints[zoneOnePoints.size] = point;
-      }
-      else {
+      } else {
         zoneTwoPoints[zoneTwoPoints.size] = point;
       }
     }
 
     if(level.teleport_zone_current == "start") {
       sortedPoints = SortByDistance(zoneOnePoints, level.mapCenter);
-    }
-    else {
+    } else {
       sortedPoints = SortByDistance(zoneTwoPoints, level.mapCenter);
     }
 
@@ -565,8 +555,7 @@ correctHomogenization() {
       }
       if(player.team == "axis") {
         axisTeam[axisTeam.size] = player;
-      }
-      else {
+      } else {
         alliesTeam[alliesTeam.size] = player;
       }
     }
@@ -633,8 +622,7 @@ detectHomogenization() {
       }
       if(player.team == "axis") {
         axisTeam[axisTeam.size] = player;
-      }
-      else {
+      } else {
         alliesTeam[alliesTeam.size] = player;
       }
     }
@@ -648,8 +636,7 @@ detectHomogenization() {
 
     if(distance_2d_squared(averageAlliesLocation, averageAxisLocation) < CONST_DIST_TO_HOMOGENIZATION) {
       return true;
-    }
-    else {
+    } else {
       return false;
     }
   } else {
@@ -768,8 +755,7 @@ scoreDomPoint(domPointNumber) {
   claimTeam = domFlag maps\mp\gametypes\_gameobjects::getClaimTeam();
   if(claimTeam == "none") {
     return CONST_SCORE_FACTOR_MAX;
-  }
-  else {
+  } else {
     return CONST_SCORE_FACTOR_MAX * CONST_DOM_CONTESTED_FLAG_PENALTY;
   }
 }

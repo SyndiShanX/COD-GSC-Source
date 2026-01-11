@@ -202,8 +202,7 @@ gamerepupdatepersistentplayerinformation() {
   }
   if(game["gameRep"]["players"][name]["totalTimePlayed"] != 0) {
     timeplayed = game["gameRep"]["players"][name]["totalTimePlayed"];
-  }
-  else {
+  } else {
     timeplayed = 1;
   }
 
@@ -214,8 +213,7 @@ gamerepupdatepersistentplayerinformation() {
 
   if(game["gameRep"]["players"][name]["deaths"] != 0) {
     game["gameRep"]["players"][name]["killDeathRatio"] = int(game["gameRep"]["players"][name]["kills"] / game["gameRep"]["players"][name]["deaths"] * 100);
-  }
-  else {
+  } else {
     game["gameRep"]["players"][name]["killDeathRatio"] = game["gameRep"]["players"][name]["kills"] * 100;
   }
 

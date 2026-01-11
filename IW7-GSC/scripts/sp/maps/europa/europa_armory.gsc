@@ -1790,9 +1790,7 @@ func_11B45(param_00) {
 
     if(isDefined(param_00.script_noteworthy)) {
       if(isDefined(var_01[param_00.script_noteworthy])) {
-        [
-          [var_01[param_00.script_noteworthy]]
-        ]();
+        [[var_01[param_00.script_noteworthy]]]();
       }
     }
 

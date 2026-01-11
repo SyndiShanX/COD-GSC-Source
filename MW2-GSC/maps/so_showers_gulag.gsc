@@ -60,7 +60,7 @@ main() {
   start = create_start( "intro" );
   start.main = ::gulag_flyin;
   start.text = "Intro";
-	
+  	
   start = create_start( "approach" );
   start.main = ::gulag_approach;
   start.text = "Approach";

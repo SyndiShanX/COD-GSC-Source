@@ -53,8 +53,7 @@ section_post_inits() {
 
           if(issubstr(var_5.model, "crane_1")) {
             common_scripts\utility::array_call(getEntArray(var_5.target, "targetname"), ::linkto, var_5, "j_spine4");
-          }
-          else {
+          } else {
             common_scripts\utility::array_call(getEntArray(var_5.target, "targetname"), ::linkto, var_5, "j_spine");
           }
 
@@ -105,8 +104,7 @@ section_post_inits() {
               } else if(issubstr(var_10.script_parameters, "lower")) {
                 if(var_10.classname == "script_model") {
                   var_10 linkto(var_5, "tag_sat2", (0, 0, 0), (0, resolve_link_yaw(var_5, var_10), 0));
-                }
-                else {
+                } else {
                   var_10 linkto(var_5, "j_elbow_le");
                 }
               } else if(issubstr(var_10.script_parameters, "weapon")) {
@@ -170,11 +168,9 @@ section_post_inits() {
       foreach(var_27 in var_25) {
         if(var_27.script_parameters == "ai") {
           var_24._ai_col = var_27;
-        }
-        else if(var_27.script_parameters == "player") {
+        } else if(var_27.script_parameters == "player") {
           var_24._player_col = var_27;
-        }
-        else if(var_27.script_parameters == "main_col") {
+        } else if(var_27.script_parameters == "main_col") {
           var_24._main_col = var_27;
         }
 
@@ -204,8 +200,7 @@ enableforcemantle() {
 resolve_link_yaw(var_0, var_1) {
   if(var_0.angles[1] != var_1.angles[1]) {
     return 0;
-  }
-  else {
+  } else {
     return 180;
   }
 }
@@ -424,7 +419,7 @@ cleanup_sat_enemies(var_0) {
     }
   } else {
     foreach(var_5 in level._enemies) {
-    cleanup_sat_enemies_solo(var_5);
+      cleanup_sat_enemies_solo(var_5);
     }
   }
 }

@@ -261,14 +261,11 @@ trigger_spawner_spawns_guys() {
   }
   if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn)) {
     spawned = self stalingradspawn(true);
-  }
-  else if(isDefined(self.script_noenemyinfo)) {
+  } else if(isDefined(self.script_noenemyinfo)) {
     spawned = self dospawn(true);
-  }
-  else if(isDefined(self.script_forcespawn)) {
+  } else if(isDefined(self.script_forcespawn)) {
     spawned = self stalingradspawn();
-  }
-  else {
+  } else {
     spawned = self dospawn();
   }
   level._numTriggerSpawned++;
@@ -576,19 +573,18 @@ run_spawn_functions() {
     func = self.spawn_funcs[i];
     if(isDefined(func["param4"])) {
       thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
+    } else {
+      if(isDefined(func["param3"]))
     }
+    thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
     else {
-    if(isDefined(func["param3"]))
+      if(isDefined(func["param2"]))
     }
-      thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
+    thread[[func["function"]]](func["param1"], func["param2"]);
     else {
-    if(isDefined(func["param2"]))
+      if(isDefined(func["param1"]))
     }
-      thread[[func["function"]]](func["param1"], func["param2"]);
-    else {
-    if(isDefined(func["param1"]))
-    }
-      thread[[func["function"]]](func["param1"]);
+    thread[[func["function"]]](func["param1"]);
     else {
       thread[[func["function"]]]();
     }
@@ -597,19 +593,18 @@ run_spawn_functions() {
     func = level.spawn_funcs[self.team][i];
     if(isDefined(func["param4"])) {
       thread[[func["function"]]](func["param1"], func["param2"], func["param3"], func["param4"]);
+    } else {
+      if(isDefined(func["param3"]))
     }
+    thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
     else {
-    if(isDefined(func["param3"]))
+      if(isDefined(func["param2"]))
     }
-      thread[[func["function"]]](func["param1"], func["param2"], func["param3"]);
+    thread[[func["function"]]](func["param1"], func["param2"]);
     else {
-    if(isDefined(func["param2"]))
+      if(isDefined(func["param1"]))
     }
-      thread[[func["function"]]](func["param1"], func["param2"]);
-    else {
-    if(isDefined(func["param1"]))
-    }
-      thread[[func["function"]]](func["param1"]);
+    thread[[func["function"]]](func["param1"]);
     else {
       thread[[func["function"]]]();
     }
@@ -627,24 +622,16 @@ deathFunctions() {
     array = self.deathFuncs[i];
     switch (array["params"]) {
       case 0:
-        [
-          [array["func"]]
-        ](other);
+        [[array["func"]]](other);
         break;
       case 1:
-        [
-          [array["func"]]
-        ](other, array["param1"]);
+        [[array["func"]]](other, array["param1"]);
         break;
       case 2:
-        [
-          [array["func"]]
-        ](other, array["param1"], array["param2"]);
+        [[array["func"]]](other, array["param1"], array["param2"]);
         break;
       case 3:
-        [
-          [array["func"]]
-        ](other, array["param1"], array["param2"], array["param3"]);
+        [[array["func"]]](other, array["param1"], array["param2"], array["param3"]);
         break;
     }
   }
@@ -1014,14 +1001,12 @@ go_to_node_using_funcs(node, get_target_func, set_goal_func_quits, optional_arri
     node = get_least_used_from_array(node);
     if(node_has_radius(node)) {
       self.goalradius = node.radius;
-    }
-    else {
+    } else {
       self.goalradius = level.default_goalradius;
     }
     if(isDefined(node.height)) {
       self.goalheight = node.height;
-    }
-    else {
+    } else {
       self.goalheight = level.default_goalheight;
     }
     [[set_goal_func_quits]](node);
@@ -1100,9 +1085,7 @@ crawl_target_and_init_flags(ent, get_func) {
         }
       }
       if(isDefined(ent.target)) {
-        new_targets = [
-          [get_func]
-        ](ent.target);
+        new_targets = [[get_func]](ent.target);
         targets = add_to_array(targets, new_targets);
       }
     }
@@ -1678,11 +1661,9 @@ friendly_wave_masterthread() {
         spawn[num].count = 1;
         if(isDefined(spawn[num].script_noenemyinfo) && isDefined(spawn[num].script_forcespawn)) {
           spawned = spawn[num] stalingradspawn(true);
-        }
-        else if(isDefined(spawn[num].script_noenemyinfo)) {
+        } else if(isDefined(spawn[num].script_noenemyinfo)) {
           spawned = spawn[num] dospawn(true);
-        }
-        else if(isDefined(spawn[num].script_forcespawn)) {
+        } else if(isDefined(spawn[num].script_forcespawn)) {
           spawned = spawn[num] Stalingradspawn();
         } else {
           spawned = spawn[num] Dospawn();
@@ -1998,14 +1979,11 @@ spawnWaypointFriendlies() {
   self.count = 1;
   if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn)) {
     spawn = self stalingradspawn(true);
-  }
-  else if(isDefined(self.script_noenemyinfo)) {
+  } else if(isDefined(self.script_noenemyinfo)) {
     spawn = self dospawn(true);
-  }
-  else if(isDefined(self.script_forcespawn)) {
+  } else if(isDefined(self.script_forcespawn)) {
     spawn = self stalingradspawn();
-  }
-  else {
+  } else {
     spawn = self dospawn();
   }
   if(spawn_failed(spawn)) {
@@ -2168,8 +2146,7 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
   self.count = 2;
   if(isDefined(self.script_delay)) {
     delay = self.script_delay;
-  }
-  else {
+  } else {
     delay = 0;
   }
   for(;;) {
@@ -2191,14 +2168,11 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
     wait(delay);
     if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn)) {
       spawn = self stalingradspawn(true);
-    }
-    else if(isDefined(self.script_noenemyinfo)) {
+    } else if(isDefined(self.script_noenemyinfo)) {
       spawn = self dospawn(true);
-    }
-    else if(isDefined(self.script_forcespawn)) {
+    } else if(isDefined(self.script_forcespawn)) {
       spawn = self stalingradspawn();
-    }
-    else {
+    } else {
       spawn = self dospawn();
     }
     if(spawn_failed(spawn)) {
@@ -2218,8 +2192,7 @@ flood_and_secure_spawner_think(ent, oneShot, instantRespawn) {
       self waittill("spawn_died", deleted, playerKill);
       if(delay > 2) {
         delay = randomint(4) + 2;
-      }
-      else {
+      } else {
         delay = 0.5 + randomfloat(0.5);
       }
     }
@@ -2844,8 +2817,7 @@ find_unclaimed_node(nodes) {
   for(i = 0; i < nodes.size; i++) {
     if(nodes[i].claimed) {
       continue;
-    }
-    else {
+    } else {
       return nodes[i];
     }
   }
@@ -2923,14 +2895,11 @@ flood_spawner_think(trigger) {
     }
     if(isDefined(self.script_noenemyinfo) && isDefined(self.script_forcespawn)) {
       soldier = self stalingradspawn(true);
-    }
-    else if(isDefined(self.script_noenemyinfo)) {
+    } else if(isDefined(self.script_noenemyinfo)) {
       soldier = self dospawn(true);
-    }
-    else if(isDefined(self.script_forcespawn)) {
+    } else if(isDefined(self.script_forcespawn)) {
       soldier = self stalingradspawn();
-    }
-    else {
+    } else {
       soldier = self dospawn();
     }
     if(spawn_failed(soldier)) {
@@ -2966,7 +2935,7 @@ player_saw_kill(guy, attacker) {
   if(isDefined(self.script_force_count)) {
     if(self.script_force_count)
   }
-      return true;
+  return true;
   if(!isDefined(guy)) {
     return false;
   }
@@ -3340,11 +3309,9 @@ spawner_dronespawn(spawner) {
   }
   if(issubstr(spawner.classname, "ally")) {
     drone.team = "allies";
-  }
-  else if(issubstr(spawner.classname, "enemy")) {
+  } else if(issubstr(spawner.classname, "enemy")) {
     drone.team = "axis";
-  }
-  else {
+  } else {
     drone.team = "neutral";
   }
   if(isDefined(spawner.target)) {
@@ -3354,8 +3321,7 @@ spawner_dronespawn(spawner) {
   assert(isDefined(drone));
   if(isDefined(spawner.script_noteworthy) && spawner.script_noteworthy == "drone_delete_on_unload") {
     drone.drone_delete_on_unload = true;
-  }
-  else {
+  } else {
     drone.drone_delete_on_unload = false;
   }
   spawner notify("drone_spawned", drone);

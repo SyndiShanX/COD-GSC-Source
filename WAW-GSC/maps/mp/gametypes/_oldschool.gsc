@@ -85,8 +85,7 @@ giveLoadout() {
     grenadeTypeSecondary = level.weapons[loadout.grenadeTypeSecondary];
     if(grenadeTypeSecondary == level.weapons["flash"]) {
       self setOffhandSecondaryClass("flash");
-    }
-    else {
+    } else {
       self setOffhandSecondaryClass("smoke");
     }
     self giveWeapon(grenadeTypeSecondary);

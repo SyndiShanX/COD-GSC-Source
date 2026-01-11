@@ -147,9 +147,7 @@ func_C4E0(param_00, param_01, param_02, param_03, param_04, param_05, param_06, 
     param_02 = 0;
   }
 
-  [
-    [level.agent_funcs["dlc4_boss"]["on_damaged_finished"]]
-  ](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, 0, param_0A, param_0B);
+  [[level.agent_funcs["dlc4_boss"]["on_damaged_finished"]]](param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, 0, param_0A, param_0B);
 }
 
 ondamagefinished(param_00, param_01, param_02, param_03, param_04, param_05, param_06, param_07, param_08, param_09, param_0A, param_0B, param_0C) {

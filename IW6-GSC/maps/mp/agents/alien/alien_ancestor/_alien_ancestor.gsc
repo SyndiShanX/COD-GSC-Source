@@ -62,8 +62,7 @@ getdefinitionvalue(var_0, var_1) {
   if(!isstring(var_0)) {
     if(!issubstr(var_2, ".")) {
       var_2 = int(var_2);
-    }
-    else {
+    } else {
       var_2 = float(var_2);
     }
   }
@@ -207,14 +206,11 @@ listen_for_shield_disable() {
 
     if(var_0 == "ancestor_disable_shield_weapon") {
       var_1 = 7;
-    }
-    else if(var_0 == "ancestor_disable_shield_grenade") {
+    } else if(var_0 == "ancestor_disable_shield_grenade") {
       var_1 = 9;
-    }
-    else if(var_0 == "ancestor_disable_shield_blast") {
+    } else if(var_0 == "ancestor_disable_shield_blast") {
       var_1 = 1.8;
-    }
-    else if(var_0 == "ancestor_disable_shield_grab") {
+    } else if(var_0 == "ancestor_disable_shield_grab") {
       var_1 = 1.8;
     }
 
@@ -391,8 +387,7 @@ handleshieldstateforattack(var_0) {
 
   if(isshieldup()) {
     self notify(var_2);
-  }
-  else if(isshielddown()) {
+  } else if(isshielddown()) {
     var_3 = gettime() + var_1;
     ensure_shield_stays_down_until_time(var_3);
   }
@@ -420,8 +415,7 @@ ondamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
 
   if(var_5 == "iw6_alienminigun_mp" || var_5 == "iw6_alienminigun1_mp" || var_5 == "iw6_alienminigun2_mp" || var_5 == "iw6_alienminigun3_mp") {
     var_2 = 27.5;
-  }
-  else if(var_5 == "iw6_alienminigun4_mp") {
+  } else if(var_5 == "iw6_alienminigun4_mp") {
     var_2 = 37.5;
   }
 
@@ -470,8 +464,7 @@ ondamaged(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, var_9) 
   if(isDefined(var_1)) {
     if(isDefined(var_1.owner) && isplayer(var_1.owner)) {
       var_1.owner thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_10);
-    }
-    else {
+    } else {
       var_1 thread maps\mp\gametypes\_damagefeedback::updatedamagefeedback(var_10);
     }
   }
@@ -602,7 +595,9 @@ onkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8) {
 
   if(var_9) {
     if(isDefined(level.add_cortex_charge_func)) {
-      [[level.add_cortex_charge_func]](10, 1);
+      [
+        [level.add_cortex_charge_func]
+      ](10, 1);
     }
   }
 
@@ -649,8 +644,7 @@ ancestor_death_nuke_fx() {
   foreach(var_1 in level.players) {
     if(isDefined(level.shell_shock_override)) {
       var_1[[level.shell_shock_override]](0.5);
-    }
-    else {
+    } else {
       var_1 shellshock("alien_spitter_gas_cloud", 0.5);
     }
 

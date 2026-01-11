@@ -26,8 +26,7 @@ statechange(clientnum, system, newstate) {
 
   if(isDefined(level._systemstates[system].callback)) {
     [[level._systemstates[system].callback]](clientnum, newstate);
-  }
-  else {
+  } else {
     println("*** Unhandled client system state change - " + system + " - has no registered callback function.");
 
   }
@@ -77,8 +76,7 @@ playerspawned(localclientnum) {
   self thread clientscripts\mp\_explode::playerspawned(localclientnum);
   self thread clientscripts\mp\zombies\_players::dtp_effects();
 
-  if(!sessionmodeiszombiesgame()) {
-  }
+  if(!sessionmodeiszombiesgame()) {}
 
   if(isDefined(level._faceanimcbfunc)) {
     self thread[[level._faceanimcbfunc]](localclientnum);
@@ -256,8 +254,7 @@ stunned_callback(localclientnum, set) {
 
   if(set) {
     self notify("stunned");
-  }
-  else {
+  } else {
     self notify("not_stunned");
   }
 }
@@ -269,8 +266,7 @@ emp_callback(localclientnum, set) {
 
   if(set) {
     self notify("emp");
-  }
-  else {
+  } else {
     self notify("not_emp");
   }
 }
@@ -311,8 +307,7 @@ client_flagasval_callback(localclientnum, val) {
 }
 
 codecallback_creatingcorpse(localclientnum, player) {
-  if(self isburning()) {
-  }
+  if(self isburning()) {}
 }
 
 codecallback_playerjump(client_num, player, ground_type, firstperson, quiet, islouder) {

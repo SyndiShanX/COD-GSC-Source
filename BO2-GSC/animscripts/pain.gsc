@@ -538,8 +538,7 @@ specialpain(anim_special) {
 
   if(self.team != "allies") {
     self thread specialpainblocker();
-  }
-  else {
+  } else {
     self.blockingpain = 1;
   }
 
@@ -658,14 +657,11 @@ specialpain(anim_special) {
 
       if(self.damageyaw > 135 || self.damageyaw <= -135) {
         painarray[painarray.size] = animarray("cover_crouch_front");
-      }
-      else if(self.damageyaw > 45 && self.damageyaw < 135) {
+      } else if(self.damageyaw > 45 && self.damageyaw < 135) {
         painarray[painarray.size] = animarray("cover_crouch_right");
-      }
-      else if(self.damageyaw > -135 && self.damageyaw < -45) {
+      } else if(self.damageyaw > -135 && self.damageyaw < -45) {
         painarray[painarray.size] = animarray("cover_crouch_left");
-      }
-      else {
+      } else {
         painarray[painarray.size] = animarray("cover_crouch_back");
       }
 
@@ -720,8 +716,7 @@ specialpain(anim_special) {
 
         if(self.cornerdirection == "left") {
           painarray[painarray.size] = animarraypickrandom("cover_pillar_l_return");
-        }
-        else if(self.cornerdirection == "right") {
+        } else if(self.cornerdirection == "right") {
           painarray[painarray.size] = animarraypickrandom("cover_pillar_r_return");
         }
 
@@ -783,8 +778,7 @@ specialpain(anim_special) {
 dopainfromarray(painanims, rate, usestopaimnotetrack) {
   if(isarray(painanims)) {
     painanim = painanims[randomint(painanims.size)];
-  }
-  else {
+  } else {
     painanim = painanims;
   }
 
@@ -831,12 +825,10 @@ getpainanim() {
 
     if(isDefined(self.damagemod) && self.damagemod == "MOD_BURNED") {
       return get_flamethrower_stand_pain();
-    }
-    else if(!closetonode && self.a.movement == "run" && abs(self getmotionangle()) < 60) {
+    } else if(!closetonode && self.a.movement == "run" && abs(self getmotionangle()) < 60) {
       if(iscrossbowexplosive(self.damageweapon)) {
         return get_explosive_crossbow_run_pain();
-      }
-      else {
+      } else {
         return getrunningforwardpainanim();
       }
     } else {
@@ -850,8 +842,7 @@ getpainanim() {
 
       if(iscrossbowexplosive(self.damageweapon)) {
         return get_explosive_crossbow_pain();
-      }
-      else {
+      } else {
         return getstandpainanim();
       }
     }
@@ -892,8 +883,7 @@ get_flamethrower_stand_pain() {
 
   if(self.team == "axis" && isDefined(level._effect["character_fire_pain_sm"])) {
     playFXOnTag(level._effect["character_fire_pain_sm"], self, tagarray[anim_num]);
-  }
-  else {
+  } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_pain_sm\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_sm\"");
 
   }
@@ -919,8 +909,7 @@ get_flamethrower_crouch_pain() {
 
   if(self.team == "axis" && isDefined(level._effect["character_fire_pain_sm"])) {
     playFXOnTag(level._effect["character_fire_pain_sm"], self, tagarray[anim_num]);
-  }
-  else {
+  } else {
     println("^3ANIMSCRIPT WARNING: You are missing level._effect[\"character_fire_pain_sm\"], please set it in your levelname_fx.gsc. Use \"env/fire/fx_fire_player_sm\"");
 
   }
@@ -1003,23 +992,17 @@ get_explosive_crossbow_run_pain() {
 
   if(damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
     painarray[painarray.size] = animarray("crossbow_run_l_leg_explode");
-  }
-  else if(damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
+  } else if(damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
     painarray[painarray.size] = animarray("crossbow_run_r_leg_explode");
-  }
-  else if(damagelocationisany("left_arm_upper", "left_arm_lower", "left_hand")) {
+  } else if(damagelocationisany("left_arm_upper", "left_arm_lower", "left_hand")) {
     painarray[painarray.size] = animarray("crossbow_run_l_arm_explode");
-  }
-  else if(damagelocationisany("right_arm_upper", "right_arm_lower", "right_arm")) {
+  } else if(damagelocationisany("right_arm_upper", "right_arm_lower", "right_arm")) {
     painarray[painarray.size] = animarray("crossbow_run_r_arm_explode");
-  }
-  else if(self.damageyaw > 135 || self.damageyaw <= -135) {
+  } else if(self.damageyaw > 135 || self.damageyaw <= -135) {
     painarray[painarray.size] = animarray("crossbow_run_front_explode");
-  }
-  else if(self.damageyaw > -45 && self.damageyaw <= 45) {
+  } else if(self.damageyaw > -45 && self.damageyaw <= 45) {
     painarray[painarray.size] = animarray("crossbow_run_back_explode");
-  }
-  else {
+  } else {
     return getrunningforwardpainanim();
   }
 
@@ -1054,8 +1037,7 @@ getstandpainanim() {
     if(self damagelocationisany("torso_lower", "left_leg_upper", "right_leg_upper")) {
       if(animarrayanyexist("leg")) {
         painarray[painarray.size] = animarraypickrandom("leg");
-      }
-      else {
+      } else {
         painarray[painarray.size] = animarray("groin");
       }
     }
@@ -1136,8 +1118,7 @@ getcrouchpainanim() {
 
   if(weaponisgasweapon(self.weapon)) {
     painarray[painarray.size] = animarray("chest");
-  }
-  else {
+  } else {
     if(damagelocationisany("torso_upper", "torso_lower", "left_arm_upper", "right_arm_upper", "neck")) {
       painarray[painarray.size] = animarray("chest");
     }
@@ -1170,8 +1151,7 @@ getpronepainanim() {
 playpainanim(painanim) {
   if(self.animplaybackrate > 1.5) {
     rate = 1.5;
-  }
-  else {
+  } else {
     rate = self.animplaybackrate;
   }
 
@@ -1259,14 +1239,11 @@ additive_pain() {
 
   if(self damagelocationisany("right_arm_lower", "right_arm_upper", "right_hand")) {
     painanim = % pain_add_standing_right_arm;
-  }
-  else if(self damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
+  } else if(self damagelocationisany("left_leg_upper", "left_leg_lower", "left_foot")) {
     painanim = % pain_add_standing_left_leg;
-  }
-  else if(self damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
+  } else if(self damagelocationisany("right_leg_upper", "right_leg_lower", "right_foot")) {
     painanim = % pain_add_standing_right_leg;
-  }
-  else {
+  } else {
     painanim = painanimarray[randomint(painanimarray.size)];
   }
 
@@ -1291,8 +1268,7 @@ isanyplayernearby(dist) {
 
   if(anybody_nearby) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }

@@ -178,8 +178,7 @@ createevent(var_0, var_1) {
 getthreatalias(var_0) {
   if(isplayer(self)) {
     var_1 = animscripts\battlechatter::getdirectionfacingclock(self getplayerangles(), self.origin, var_0.origin);
-  }
-  else {
+  } else {
     var_1 = animscripts\battlechatter::getdirectionfacingclock(self.angles, self.origin, var_0.origin);
   }
 
@@ -243,8 +242,7 @@ play_chatter(var_0, var_1) {
 
   if(isplayer(self)) {
     self.bc_isspeaking = 1;
-  }
-  else {
+  } else {
     anim.tank_bc.bc_isspeaking = 1;
   }
 
@@ -254,8 +252,7 @@ play_chatter(var_0, var_1) {
 
   if(isplayer(self)) {
     self.bc_isspeaking = 0;
-  }
-  else {
+  } else {
     anim.tank_bc.bc_isspeaking = 0;
   }
 
@@ -274,22 +271,19 @@ can_say_event_type(var_0) {
 
   if(!isplayer(self) && anim.tank_bc.bc_isspeaking) {
     return 0;
-  }
-  else if(isplayer(self) && self.bc_isspeaking) {
+  } else if(isplayer(self) && self.bc_isspeaking) {
     return 0;
   }
 
   if(isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtimeplr[var_0])) {
     return 1;
-  }
-  else if(!isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtime[var_0])) {
+  } else if(!isplayer(self) && !isDefined(anim.tank_bc.bc_eventtypelastusedtime[var_0])) {
     return 1;
   }
 
   if(isplayer(self)) {
     var_1 = anim.tank_bc.bc_eventtypelastusedtimeplr[var_0];
-  }
-  else {
+  } else {
     var_1 = anim.tank_bc.bc_eventtypelastusedtime[var_0];
   }
 
@@ -318,8 +312,7 @@ can_say_soundalias(var_0) {
 update_event_type(var_0, var_1) {
   if(isplayer(self)) {
     anim.tank_bc.bc_eventtypelastusedtimeplr[var_0] = gettime();
-  }
-  else {
+  } else {
     anim.tank_bc.bc_eventtypelastusedtime[var_0] = gettime();
   }
 

@@ -1268,15 +1268,9 @@ func_3232() {
 
 func_5982(param_00, param_01, param_02) {
   var_03 = self.var_5A18 + "_";
-  var_04 = [
-    [param_00]
-  ]();
-  var_05 = [
-    [param_01]
-  ]();
-  var_06 = [
-    [param_02]
-  ]();
+  var_04 = [[param_00]]();
+  var_05 = [[param_01]]();
+  var_06 = [[param_02]]();
   var_07 = [var_04, var_05, var_06];
   foreach(var_09 in var_07) {
     foreach(var_12, var_0B in var_09) {

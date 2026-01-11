@@ -544,7 +544,7 @@ dog_drive_indirect_disable(var_0) {
   var_1 = getaiarray("axis");
 
   foreach(var_3 in var_1) {
-  var_3 hudoutlinedisable();
+    var_3 hudoutlinedisable();
   }
 
   var_0 setdogcommand("attack");
@@ -569,7 +569,7 @@ dog_drive_indirect_disable(var_0) {
   self allowsprint(1);
 
   foreach(var_6 in self.overlays) {
-  var_6 destroy();
+    var_6 destroy();
   }
 
   if(isDefined(self.crt_plane)) {
@@ -633,8 +633,7 @@ sprint_check(var_0) {
 
   if(self usinggamepad() && var_1 == "thumbstick_legacy") {
     return var_0[0] >= 0.3;
-  }
-  else {
+  } else {
     return var_0[0] >= 0.98;
   }
 }
@@ -697,8 +696,7 @@ sound_on_stick_movement(var_0, var_1) {
     if(var_4 != var_2) {
       if(var_4) {
         var_1 playLoopSound("dog_cam_mvmnt");
-      }
-      else {
+      } else {
         var_1 stoploopsound("dog_cam_mvmnt");
       }
 
@@ -835,8 +833,7 @@ dog_indirect_control_input(var_0) {
 
         if(self attackbuttonpressed() || var_0.sprint) {
           var_7 = 1.5;
-        }
-        else {
+        } else {
           var_7 = 1;
         }
 
@@ -980,8 +977,7 @@ dog_command_goto(var_0) {
 
   if(isDefined(self.pathgoalpos)) {
     return;
-  }
-  else if(distance2d(self.origin, var_1) > self.goalradius) {
+  } else if(distance2d(self.origin, var_1) > self.goalradius) {
     var_5 = getnodesinradius(var_1, 96, 0, 96);
     var_5 = sortbydistance(var_5, self.origin);
 
@@ -1122,8 +1118,7 @@ find_nearby_enemy(var_0, var_1) {
   foreach(var_10 in var_3) {
     if(!isDefined(var_10.do_not_acquire) && distance(var_10.origin, var_7.controlled_dog.origin) < 64) {
       return var_10;
-    }
-    else {
+    } else {
       break;
     }
   }
@@ -1263,36 +1258,27 @@ getdirectioncompass(var_0) {
 
   if(var_0 < 0) {
     var_0 = var_0 + 360;
-  }
-  else if(var_0 > 360) {
+  } else if(var_0 > 360) {
     var_0 = var_0 - 360;
   }
 
   if(var_0 < 22.5 || var_0 > 337.5) {
     var_2 = &"NML_DOGCAM_NORTH";
-  }
-  else if(var_0 < 67.5) {
+  } else if(var_0 < 67.5) {
     var_2 = &"NML_DOGCAM_NORTHWEST";
-  }
-  else if(var_0 < 112.5) {
+  } else if(var_0 < 112.5) {
     var_2 = &"NML_DOGCAM_WEST";
-  }
-  else if(var_0 < 157.5) {
+  } else if(var_0 < 157.5) {
     var_2 = &"NML_DOGCAM_SOUTHWEST";
-  }
-  else if(var_0 < 202.5) {
+  } else if(var_0 < 202.5) {
     var_2 = &"NML_DOGCAM_SOUTH";
-  }
-  else if(var_0 < 247.5) {
+  } else if(var_0 < 247.5) {
     var_2 = &"NML_DOGCAM_SOUTHEAST";
-  }
-  else if(var_0 < 292.5) {
+  } else if(var_0 < 292.5) {
     var_2 = &"NML_DOGCAM_EAST";
-  }
-  else if(var_0 < 337.5) {
+  } else if(var_0 < 337.5) {
     var_2 = &"NML_DOGCAM_NORTHEAST";
-  }
-  else {
+  } else {
     var_2 = "";
   }
 

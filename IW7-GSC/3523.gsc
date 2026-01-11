@@ -14,11 +14,9 @@ _meth_819B(var_00, var_01) {
 
   if(var_0.streakname == "dronedrop") {
     var_02 = "deploy_dronepackage_mp";
-  }
-  else if(var_0.streakname == "remote_c8") {
+  } else if(var_0.streakname == "remote_c8") {
     var_02 = "deploy_rc8_mp";
-  }
-  else {
+  } else {
     var_02 = "deploy_warden_mp";
   }
 
@@ -43,13 +41,11 @@ _meth_819B(var_00, var_01) {
 
     if(var_3.string == "equip_deploy_failed") {
       continue;
-    }
-    else if(var_3.string == "equip_deploy_succeeded") {
+    } else if(var_3.string == "equip_deploy_succeeded") {
       if(isDefined(var_01)) {
         if(!self[[var_01]]()) {
           continue;
-        }
-        else {
+        } else {
           break;
         }
       } else

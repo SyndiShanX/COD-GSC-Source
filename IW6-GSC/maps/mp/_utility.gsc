@@ -112,15 +112,13 @@ endSelectionOnEndGame() {
 isAttachment(attachmentName) {
   if(is_aliens()) {
     attachment = tableLookup("mp/alien/alien_attachmentTable.csv", 4, attachmentName, 0);
-  }
-  else {
+  } else {
     attachment = tableLookup("mp/attachmentTable.csv", 4, attachmentName, 0);
   }
 
   if(isDefined(attachment) && attachment != "") {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -128,8 +126,7 @@ isAttachment(attachmentName) {
 getAttachmentType(attachmentName) {
   if(is_aliens()) {
     attachmentType = tableLookup("mp/alien/alien_attachmentTable.csv", 4, attachmentName, 2);
-  }
-  else {
+  } else {
     attachmentType = tableLookup("mp/attachmentTable.csv", 4, attachmentName, 2);
   }
 
@@ -176,9 +173,9 @@ array_contains_index(array, index) {
   AssertEx(isDefined(index), "array_contains_index() passed undefind index.");
 
   foreach(i, _ in array) {
-  if(i == index)
+    if(i == index)
   }
-    return true;
+  return true;
   return false;
 }
 
@@ -560,8 +557,7 @@ printAndSoundOnEveryone(team, otherteam, printFriendly, printEnemy, soundFriendl
       if(isDefined(playerteam)) {
         if(playerteam == team && isDefined(printFriendly)) {
           player iprintln(printFriendly, printarg);
-        }
-        else if(playerteam == otherteam && isDefined(printEnemy)) {
+        } else if(playerteam == otherteam && isDefined(printEnemy)) {
           player iprintln(printEnemy, printarg);
         }
       }
@@ -643,11 +639,9 @@ dvarIntValue(dVar, defVal, minVal, maxVal) {
 
   if(value > maxVal) {
     value = maxVal;
-  }
-  else if(value < minVal) {
+  } else if(value < minVal) {
     value = minVal;
-  }
-  else {
+  } else {
     return value;
   }
 
@@ -666,11 +660,9 @@ dvarFloatValue(dVar, defVal, minVal, maxVal) {
 
   if(value > maxVal) {
     value = maxVal;
-  }
-  else if(value < minVal) {
+  } else if(value < minVal) {
     value = minVal;
-  }
-  else {
+  } else {
     return value;
   }
 
@@ -693,11 +685,9 @@ getOtherTeam(team) {
 
   if(team == "allies") {
     return "axis";
-  }
-  else if(team == "axis") {
+  } else if(team == "axis") {
     return "allies";
-  }
-  else {
+  } else {
     return "none";
   }
 
@@ -873,7 +863,7 @@ leaderDialog(dialog, team, group, excludeList, location) {
 
 leaderDialogOnPlayers(dialog, players, group, location) {
   foreach(player in players) {
-  player leaderDialogOnPlayer(dialog, group, undefined, location);
+    player leaderDialogOnPlayer(dialog, group, undefined, location);
   }
 }
 
@@ -896,15 +886,13 @@ getNextRelevantDialog() {
       if(self.team == "allies") {
         if(isSubStr(level.axisCapturing, self.leaderDialogQueue[i])) {
           return self.leaderDialogQueue[i];
-        }
-        else {
+        } else {
           array_remove(self.leaderDialogQueue, self.leaderDialogQueue[i]);
         }
       } else {
         if(isSubStr(level.alliesCapturing, self.leaderDialogQueue[i])) {
           return self.leaderDialogQueue[i];
-        }
-        else {
+        } else {
           array_remove(self.leaderDialogQueue, self.leaderDialogQueue[i]);
         }
       }
@@ -957,8 +945,7 @@ updateObjectiveText() {
     if(isDefined(getObjectiveScoreText(self.pers["team"]))) {
       if(level.splitScreen) {
         self setclientdvar("cg_objectiveText", getObjectiveScoreText(self.pers["team"]));
-      }
-      else {
+      } else {
         self setclientdvar("cg_objectiveText", getObjectiveScoreText(self.pers["team"]), getWatchedDvar("scorelimit"));
       }
     }
@@ -1000,8 +987,7 @@ getTimePassed() {
 
   if(level.timerStopped) {
     return (level.timerPauseTime - level.startTime) - level.discardTime;
-  }
-  else {
+  } else {
     return (gettime() - level.startTime) - level.discardTime;
   }
 }
@@ -1038,11 +1024,9 @@ isValidClass(class) {
 getValueInRange(value, minValue, maxValue) {
   if(value > maxValue) {
     return maxValue;
-  }
-  else if(value < minValue) {
+  } else if(value < minValue) {
     return minValue;
-  }
-  else {
+  } else {
     return value;
   }
 }
@@ -1086,8 +1070,7 @@ registerRoundSwitchDvar(dvarString, defaultValue, minValue, maxValue) {
 
   if(level.roundswitch < minValue) {
     level.roundswitch = minValue;
-  }
-  else if(level.roundswitch > maxValue) {
+  } else if(level.roundswitch > maxValue) {
     level.roundswitch = maxValue;
   }
 }
@@ -1170,11 +1153,9 @@ get_damageable_player_pos(player) {
 getStanceCenter() {
   if(self GetStance() == "crouch") {
     center = self.origin + (0, 0, 24);
-  }
-  else if(self GetStance() == "prone") {
+  } else if(self GetStance() == "prone") {
     center = self.origin + (0, 0, 10);
-  }
-  else {
+  } else {
     center = self.origin + (0, 0, 32);
   }
 
@@ -1281,7 +1262,7 @@ restoreData() {
   }
 
   foreach(slotID, actionSlot in saveData.actionSlots) {
-  self _setActionSlot(slotID, actionSlot.type, actionSlot.item);
+    self _setActionSlot(slotID, actionSlot.type, actionSlot.item);
   }
 
   if(self getCurrentWeapon() == "none") {
@@ -1360,11 +1341,9 @@ updateWatchedDvars() {
     foreach(dvarString in watchDvars) {
       if(level.watchDvars[dvarString].type == "string") {
         dvarValue = getProperty(dvarString, level.watchDvars[dvarString].value);
-      }
-      else if(level.watchDvars[dvarString].type == "float") {
+      } else if(level.watchDvars[dvarString].type == "float") {
         dvarValue = getFloatProperty(dvarString, level.watchDvars[dvarString].value);
-      }
-      else {
+      } else {
         dvarValue = getIntProperty(dvarString, level.watchDvars[dvarString].value);
       }
 
@@ -1528,8 +1507,7 @@ getScoreLimit() {
   if(isRoundBased()) {
     if(getWatchedDvar("roundlimit")) {
       return (getWatchedDvar("roundlimit"));
-    }
-    else {
+    } else {
       return (getWatchedDvar("winlimit"));
     }
   } else {
@@ -1551,8 +1529,7 @@ getTimeLimit() {
 
     if(isDefined(timeLimit)) {
       return timeLimit;
-    }
-    else {
+    } else {
       return 1;
     }
   } else if(isDefined(level.dd) && level.dd && isDefined(level.bombexploded) && level.bombexploded > 0) {
@@ -1565,11 +1542,9 @@ getTimeLimit() {
 getHalfTime() {
   if(inOvertime()) {
     return false;
-  }
-  else if(isDefined(game["inNukeOvertime"]) && game["inNukeOvertime"]) {
+  } else if(isDefined(game["inNukeOvertime"]) && game["inNukeOvertime"]) {
     return false;
-  }
-  else {
+  } else {
     return getWatchedDvar("halftime");
   }
 }
@@ -1598,7 +1573,7 @@ getAverageOrigin(ent_array) {
   }
 
   foreach(ent in ent_array) {
-  avg_origin += ent.origin;
+    avg_origin += ent.origin;
   }
 
   avg_x = int(avg_origin[0] / ent_array.size);
@@ -1720,8 +1695,7 @@ queueRemoveFirst(queueName) {
     }
     if(!isDefined(first)) {
       first = element;
-    }
-    else {
+    } else {
       newQueue[newQueue.size] = element;
     }
   }
@@ -1738,8 +1712,7 @@ _giveWeapon(weapon, variant, dualWieldOverRide) {
 
   if(isSubstr(weapon, "_akimbo") || isDefined(dualWieldOverRide) && dualWieldOverRide == true) {
     self giveWeapon(weapon, variant, true);
-  }
-  else {
+  } else {
     self giveWeapon(weapon, variant, false);
   }
 }
@@ -2021,8 +1994,7 @@ swap(array, index1, index2) {
 _suicide() {
   if(self isUsingRemote() && !isDefined(self.fauxDead)) {
     self thread maps\mp\gametypes\_damage::PlayerKilled_internal(self, self, self, 10000, "MOD_SUICIDE", "frag_grenade_mp", (0, 0, 0), "none", 0, 1116, true);
-  }
-  else if(!self isUsingRemote() && !isDefined(self.fauxDead)) {
+  } else if(!self isUsingRemote() && !isDefined(self.fauxDead)) {
     self suicide();
   }
 }
@@ -2093,8 +2065,7 @@ playDeathSound() {
 
   if(self.team == "axis") {
     self playSound(type + "_death_russian_" + rand);
-  }
-  else {
+  } else {
     self playSound(type + "_death_american_" + rand);
   }
 }
@@ -2386,8 +2357,7 @@ getWeaponClass(weapon) {
 
   if(is_aliens()) {
     weaponClass = tablelookup("mp/alien/mode_string_tables/alien_statstable.csv", 4, baseName, 2);
-  }
-  else {
+  } else {
     weaponClass = tablelookup("mp/statstable.csv", 4, baseName, 2);
   }
 
@@ -2395,22 +2365,18 @@ getWeaponClass(weapon) {
     weaponName = strip_suffix(weapon, "_mp");
     if(is_aliens()) {
       weaponClass = tablelookup("mp/alien/mode_string_tables/alien_statstable.csv", 4, weaponName, 2);
-    }
-    else {
+    } else {
       weaponClass = tablelookup("mp/statstable.csv", 4, weaponName, 2);
     }
   }
 
   if(isEnvironmentWeapon(weapon)) {
     weaponClass = "weapon_mg";
-  }
-  else if(!is_aliens() && isKillstreakWeapon(weapon)) {
+  } else if(!is_aliens() && isKillstreakWeapon(weapon)) {
     weaponClass = "killstreak";
-  }
-  else if(weapon == "none") {
+  } else if(weapon == "none") {
     weaponClass = "other";
-  }
-  else if(weaponClass == "") {
+  } else if(weaponClass == "") {
     weaponClass = "other";
   }
 
@@ -2676,11 +2642,9 @@ roundDecimalPlaces(value, places, style) {
 
   if(style == "up") {
     roundedValue = ceil(newValue);
-  }
-  else if(style == "down") {
+  } else if(style == "down") {
     roundedValue = floor(newValue);
-  }
-  else {
+  } else {
     roundedValue = newvalue + 0.5;
   }
 
@@ -2730,8 +2694,7 @@ setSelfUsable(caller) {
   foreach(player in level.players) {
     if(player != caller) {
       self disablePlayerUse(player);
-    }
-    else {
+    } else {
       self enablePlayerUse(player);
     }
   }
@@ -2749,8 +2712,7 @@ _updateTeamUsable(team) {
     foreach(player in level.players) {
       if(player.team == team) {
         self enablePlayerUse(player);
-      }
-      else {
+      } else {
         self disablePlayerUse(player);
       }
     }
@@ -2774,8 +2736,7 @@ _updateEnemyUsable(owner) {
       foreach(player in level.players) {
         if(player.team != team) {
           self enablePlayerUse(player);
-        }
-        else {
+        } else {
           self disablePlayerUse(player);
         }
       }
@@ -2783,8 +2744,7 @@ _updateEnemyUsable(owner) {
       foreach(player in level.players) {
         if(player != owner) {
           self enablePlayerUse(player);
-        }
-        else {
+        } else {
           self disablePlayerUse(player);
         }
       }
@@ -2941,8 +2901,7 @@ isAirDenied() {
 
   if(level.teamBased) {
     return (level.teamAirDenied[self.team]);
-  }
-  else {
+  } else {
     return (isDefined(level.airDeniedPlayer) && level.airDeniedPlayer != self);
   }
 }
@@ -3057,8 +3016,7 @@ waitTillRecoveredHealth(time, interval) {
   while(1) {
     if(self.health != self.maxhealth) {
       fullHealthTime = 0;
-    }
-    else {
+    } else {
       fullHealthTime += interval;
     }
 
@@ -3197,8 +3155,7 @@ getAttachmentListBaseNames() {
   index = 0;
   if(is_aliens()) {
     attachmentName = TableLookup("mp/alien/alien_attachmentTable.csv", 0, index, 5);
-  }
-  else {
+  } else {
     attachmentName = TableLookup("mp/attachmentTable.csv", 0, index, 5);
   }
 
@@ -3210,8 +3167,7 @@ getAttachmentListBaseNames() {
     index++;
     if(is_aliens()) {
       attachmentName = TableLookup("mp/alien/alien_attachmentTable.csv", 0, index, 5);
-    }
-    else {
+    } else {
       attachmentName = TableLookup("mp/attachmentTable.csv", 0, index, 5);
     }
   }
@@ -3226,8 +3182,7 @@ getAttachmentListUniqeNames() {
 
   if(is_aliens()) {
     attachmentName = TableLookup("mp/alien/alien_attachmentTable.csv", 0, index, 4);
-  }
-  else {
+  } else {
     attachmentName = TableLookup("mp/attachmentTable.csv", 0, index, 4);
   }
 
@@ -3240,8 +3195,7 @@ getAttachmentListUniqeNames() {
 
     if(is_aliens()) {
       attachmentName = tableLookup("mp/alien/alien_attachmentTable.csv", 0, index, 4);
-    }
-    else {
+    } else {
       attachmentName = TableLookup("mp/attachmentTable.csv", 0, index, 4);
     }
   }
@@ -3259,8 +3213,7 @@ buildAttachmentMaps() {
   foreach(uniqueName in attachmentNamesUnique) {
     if(is_aliens()) {
       baseName = TableLookup("mp/alien/alien_attachmentTable.csv", 4, uniqueName, 5);
-    }
-    else {
+    } else {
       baseName = TableLookup("mp/attachmenttable.csv", 4, uniqueName, 5);
     }
 
@@ -3278,8 +3231,7 @@ buildAttachmentMaps() {
   idxRow = 1;
   if(is_aliens()) {
     classOrName = TableLookupByRow(ALIENS_ATTACHMAP_TABLE, idxRow, ALIENS_ATTACHMAP_COL_CLASS_OR_WEAP_NAME);
-  }
-  else {
+  } else {
     classOrName = TableLookupByRow(ATTACHMAP_TABLE, idxRow, ATTACHMAP_COL_CLASS_OR_WEAP_NAME);
   }
 
@@ -3289,8 +3241,7 @@ buildAttachmentMaps() {
     idxRow++;
     if(is_aliens()) {
       classOrName = TableLookupByRow(ALIENS_ATTACHMAP_TABLE, idxRow, ALIENS_ATTACHMAP_COL_CLASS_OR_WEAP_NAME);
-    }
-    else {
+    } else {
       classOrName = TableLookupByRow(ATTACHMAP_TABLE, idxRow, ATTACHMAP_COL_CLASS_OR_WEAP_NAME);
     }
   }
@@ -3300,8 +3251,7 @@ buildAttachmentMaps() {
   idxCol = 1;
   if(is_aliens()) {
     attachTitle = TableLookupByRow(ALIENS_ATTACHMAP_TABLE, ALIENS_ATTACHMAP_ROW_ATTACH_BASE_NAME, idxCol);
-  }
-  else {
+  } else {
     attachTitle = TableLookupByRow(ATTACHMAP_TABLE, ATTACHMAP_ROW_ATTACH_BASE_NAME, idxCol);
   }
 
@@ -3312,8 +3262,7 @@ buildAttachmentMaps() {
 
     if(is_aliens()) {
       attachTitle = TableLookupByRow(ALIENS_ATTACHMAP_TABLE, ALIENS_ATTACHMAP_ROW_ATTACH_BASE_NAME, idxCol);
-    }
-    else {
+    } else {
       attachTitle = TableLookupByRow(ATTACHMAP_TABLE, ATTACHMAP_ROW_ATTACH_BASE_NAME, idxCol);
     }
   }
@@ -3324,8 +3273,7 @@ buildAttachmentMaps() {
     foreach(attachment, column in attachmentNameColumns) {
       if(is_aliens()) {
         attachNameUnique = TableLookup(ALIENS_ATTACHMAP_TABLE, ALIENS_ATTACHMAP_COL_CLASS_OR_WEAP_NAME, classOrName, column);
-      }
-      else {
+      } else {
         attachNameUnique = TableLookup(ATTACHMAP_TABLE, ATTACHMAP_COL_CLASS_OR_WEAP_NAME, classOrName, column);
       }
 
@@ -3349,8 +3297,7 @@ buildAttachmentMaps() {
   foreach(attachName in attachmentNamesUnique) {
     if(is_aliens()) {
       perkName = TableLookup("mp/alien/alien_attachmenttable.csv", 4, attachName, 12);
-    }
-    else {
+    } else {
       perkName = TableLookup("mp/attachmenttable.csv", 4, attachName, 12);
     }
 
@@ -3439,8 +3386,7 @@ weaponHasIntegratedFireTypeBurst(weaponName) {
 
   if(baseWeapon == "iw6_pdw") {
     return true;
-  }
-  else if(baseWeapon == "iw6_msbs") {
+  } else if(baseWeapon == "iw6_msbs") {
     weaponAttachments = getWeaponAttachmentsBaseNames(weaponName);
     foreach(attachment in weaponAttachments) {
       if(attachment == "firetypeauto" || attachment == "firetypesingle") {
@@ -3512,8 +3458,8 @@ touchingBadTrigger(optionalEnt) {
   killTriggers = getEntArray("trigger_hurt", "classname");
   foreach(trigger in killTriggers) {
     if(self isTouching(trigger) {
-      &&
-    }
+        &&
+      }
       (level.mapName != "mp_mine" || trigger.dmg > 0)
     )
       return true;
@@ -3541,8 +3487,7 @@ touchingBadTrigger(optionalEnt) {
 setThirdPersonDOF(isEnabled) {
   if(isEnabled) {
     self setDepthOfField(0, 110, 512, 4096, 6, 1.8);
-  }
-  else {
+  } else {
     self setDepthOfField(0, 0, 512, 512, 4, 0);
   }
 }
@@ -3583,8 +3528,7 @@ findIsFacing(ent1, ent2, tolerance) {
 
   if(targetCosine >= facingCosine) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -3612,8 +3556,7 @@ setRecoilScale(scaler, scaleOverride) {
 
   if(!isDefined(self.recoilScale)) {
     self.recoilScale = scaler;
-  }
-  else {
+  } else {
     self.recoilScale += scaler;
   }
 
@@ -3915,8 +3858,7 @@ getKillstreakIndex(streakName) {
   indexString = TableLookup(level.global_tables["killstreakTable"].path, level.global_tables["killstreakTable"].ref_col, streakName, level.global_tables["killstreakTable"].index_col);
   if(indexString == "") {
     index = -1;
-  }
-  else {
+  } else {
     index = int(indexString);
   }
   return index;
@@ -4311,8 +4253,7 @@ recipeClassApplyJuggernaut(removeJuggernaut) {
 
   if(level.inGracePeriod && !self.hasDoneCombat) {
     self waittill("giveLoadout");
-  }
-  else {
+  } else {
     self waittill("spawned_player");
   }
 
@@ -4503,29 +4444,21 @@ isHeadShot(sWeapon, sHitLoc, sMeansOfDeath, attacker) {
 attackerIsHittingTeam(victim, attacker) {
   if(!level.teamBased) {
     return false;
-  }
-  else if(!isDefined(attacker) || !isDefined(victim)) {
+  } else if(!isDefined(attacker) || !isDefined(victim)) {
     return false;
-  }
-  else if(!isDefined(victim.team) || !isDefined(attacker.team)) {
+  } else if(!isDefined(victim.team) || !isDefined(attacker.team)) {
     return false;
-  }
-  else if(victim == attacker) {
+  } else if(victim == attacker) {
     return false;
-  }
-  else if(level.gametype == "infect" && victim.pers["team"] == attacker.team && isDefined(attacker.teamChangedThisFrame)) {
+  } else if(level.gametype == "infect" && victim.pers["team"] == attacker.team && isDefined(attacker.teamChangedThisFrame)) {
     return false;
-  }
-  else if(level.gametype == "infect" && victim.pers["team"] != attacker.team && isDefined(attacker.teamChangedThisFrame)) {
+  } else if(level.gametype == "infect" && victim.pers["team"] != attacker.team && isDefined(attacker.teamChangedThisFrame)) {
     return true;
-  }
-  else if(isDefined(attacker.scrambled) && attacker.scrambled) {
+  } else if(isDefined(attacker.scrambled) && attacker.scrambled) {
     return false;
-  }
-  else if(victim.team == attacker.team) {
+  } else if(victim.team == attacker.team) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -4585,15 +4518,13 @@ bot_israndom() {
 
     if(isDefined(self.bot_team)) {
       botTeam = self.bot_team;
-    }
-    else if(isDefined(self.pers["team"])) {
+    } else if(isDefined(self.pers["team"])) {
       botTeam = self.pers["team"];
     }
 
     if(isDefined(botTeam) && level.wargame_client.team == botTeam) {
       isRandom = false;
-    }
-    else {
+    } else {
       isRandom = true;
     }
   } else {
@@ -4706,36 +4637,31 @@ bot_is_fireteam_mode() {
 set_console_status() {
   if(!isDefined(level.Console)) {
     level.Console = GetDvar("consoleGame") == "true";
-  }
-  else {
+  } else {
     AssertEx(level.Console == (GetDvar("consoleGame") == "true"), "Level.console got set incorrectly.");
   }
 
   if(!isDefined(level.xenon)) {
     level.xenon = GetDvar("xenonGame") == "true";
-  }
-  else {
+  } else {
     AssertEx(level.xenon == (GetDvar("xenonGame") == "true"), "Level.xenon got set incorrectly.");
   }
 
   if(!isDefined(level.ps3)) {
     level.ps3 = GetDvar("ps3Game") == "true";
-  }
-  else {
+  } else {
     AssertEx(level.ps3 == (GetDvar("ps3Game") == "true"), "Level.ps3 got set incorrectly.");
   }
 
   if(!isDefined(level.xb3)) {
     level.xb3 = GetDvar("xb3Game") == "true";
-  }
-  else {
+  } else {
     AssertEx(level.xb3 == (GetDvar("xb3Game") == "true"), "Level.xb3 got set incorrectly.");
   }
 
   if(!isDefined(level.ps4)) {
     level.ps4 = GetDvar("ps4Game") == "true";
-  }
-  else {
+  } else {
     AssertEx(level.ps4 == (GetDvar("ps4Game") == "true"), "Level.ps4 got set incorrectly.");
   }
 }
@@ -4745,8 +4671,7 @@ is_gen4() {
 
   if(level.xb3 || level.ps4 || !level.console) {
     return true;
-  }
-  else {
+  } else {
     return false;
   }
 }
@@ -4759,8 +4684,7 @@ setdvar_cg_ng(dvar_name, current_gen_val, next_gen_val) {
 
   if(is_gen4()) {
     setdvar(dvar_name, next_gen_val);
-  }
-  else {
+  } else {
     setdvar(dvar_name, current_gen_val);
   }
 }
@@ -4852,8 +4776,7 @@ set_visionset_for_watching_players(new_visionset, new_visionset_transition_time,
     player notify("changing_watching_visionset");
     if(isDefined(is_missile_visionset) && is_missile_visionset) {
       player VisionSetMissilecamForPlayer(new_visionset, new_visionset_transition_time);
-    }
-    else {
+    } else {
       player VisionSetNakedForPlayer(new_visionset, new_visionset_transition_time);
     }
     if(new_visionset != "" && isDefined(time_in_new_visionset)) {
@@ -4899,8 +4822,7 @@ reset_visionset_on_disconnect(entity_watching) {
 _setPlayerData(data, value) {
   if(matchMakingGame()) {
     self SetRankedPlayerData(data, value);
-  }
-  else {
+  } else {
     self setPrivatePlayerData(data, value);
   }
 }
@@ -4908,8 +4830,7 @@ _setPlayerData(data, value) {
 _getPlayerData(data) {
   if(matchMakingGame()) {
     return self GetRankedPlayerData(data);
-  }
-  else {
+  } else {
     return self GetPrivatePlayerData(data);
   }
 }
@@ -5059,8 +4980,7 @@ getUniqueId() {
   if(playerGuid == "0000000000000000") {
     if(isDefined(level.guidGen)) {
       level.guidGen++;
-    }
-    else {
+    } else {
       level.guidGen = 1;
     }
 

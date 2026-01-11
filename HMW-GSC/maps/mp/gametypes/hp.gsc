@@ -152,8 +152,7 @@ onstartgametype() {
 
   if(level.initialzonedelay) {
     updateobjectivehintmessage(level.objectivehintpreparezone);
-  }
-  else {
+  } else {
     updateobjectivehintmessage(level.objectivehintcapturezone);
   }
 
@@ -225,8 +224,7 @@ getspawnpointh1() {
 
   if(level.usestartspawns && level.ingraceperiod) {
     var_1 = maps\mp\gametypes\_spawnlogic::getrandomstartspawn("mp_hp_spawn_" + var_0 + "_start");
-  }
-  else {
+  } else {
     var_2 = maps\mp\gametypes\_spawnlogic::getteamspawnpoints(var_0);
     var_1 = maps\mp\gametypes\_spawnscoring::getspawnpoint_hardpoint(var_2);
   }
@@ -244,8 +242,7 @@ hpupdateuserate() {
 spawn_next_zone() {
   if(level.randomzonespawn) {
     level.zone = getnextzonefromqueue();
-  }
-  else {
+  } else {
     level.zone = getnextzone();
   }
 
@@ -285,11 +282,9 @@ hpcaptureloop() {
 
     if(var_1 == "allies") {
       updateobjectivehintmessages(level.objectivehintdefendhq, level.objectivehintcapturezone);
-    }
-    else if(var_1 == "axis") {
+    } else if(var_1 == "axis") {
       updateobjectivehintmessages(level.objectivehintcapturezone, level.objectivehintdefendhq);
-    }
-    else {
+    } else {
       updateobjectivehintmessages(level.objectivehintcapturezone, level.objectivehintcapturezone);
     }
 
@@ -521,8 +516,7 @@ give_capture_credit(var_0, var_1, var_2, var_3) {
       }
 
       var_6 thread maps\mp\_events::securehardpointevent();
-    } else {
-    }
+    } else {}
 
     wait 0.05;
   }
@@ -919,8 +913,7 @@ setupnearbyspawns() {
 
     if(var_1 <= var_8 * 2) {
       var_5[var_5.size] = var_0[var_1];
-    }
-    else {
+    } else {
       var_6[var_6.size] = var_0[var_1];
     }
 
@@ -1006,8 +999,7 @@ onplayerkilled(var_0, var_1, var_2, var_3, var_4, var_5, var_6, var_7, var_8, va
     }
     if(self.team == var_10) {
       var_1 thread maps\mp\_events::assaultobjectiveevent(self, var_9);
-    }
-    else {
+    } else {
       var_1 maps\mp\gametypes\_missions::processchallenge("ch_hp_zoneDefense");
       var_1 thread maps\mp\_events::defendobjectiveevent(self, var_9);
       var_1 maps\mp\_utility::setextrascore1(var_1.pers["defends"]);

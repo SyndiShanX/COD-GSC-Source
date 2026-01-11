@@ -126,8 +126,7 @@ waitforfaceeventcomplete() {
 
   if(isDefined(level.facestates[self.face_anim_tree][self.face_curr_event]["timer"]) && level.facestates[self.face_anim_tree][self.face_curr_event]["timer"] > 0) {
     self.face_timer = level.facestates[self.face_anim_tree][self.face_curr_event]["timer"];
-  }
-  else {
+  } else {
     self.face_timer = getanimlength(level.facestates[self.face_anim_tree][self.face_curr_event]["animation"][self.face_curr_event_idx]);
   }
 
@@ -191,17 +190,13 @@ processfaceevents(localclientnum) {
     if(getdvarint(#"_id_B5C61264") != 0) {
       if(!isDefined(level.facestates)) {
         println("No face state array!\\n");
-      }
-      else if(!isDefined(self.face_anim_tree)) {
+      } else if(!isDefined(self.face_anim_tree)) {
         println("No face anim tree for entity " + self getentitynumber());
-      }
-      else if(!isDefined(state)) {
+      } else if(!isDefined(state)) {
         println("No face state for entity " + self getentitynumber());
-      }
-      else if(!isDefined(level.facestates[self.face_anim_tree])) {
+      } else if(!isDefined(level.facestates[self.face_anim_tree])) {
         println("No face state array for anim tree " + self.face_anim_tree + " used by entity " + self getentitynumber());
-      }
-      else if(!isDefined(level.facestates[self.face_anim_tree][state])) {
+      } else if(!isDefined(level.facestates[self.face_anim_tree][state])) {
         println("No face state array entry for state " + state + " in anim tree " + self.face_anim_tree + " for entity " + self getentitynumber());
       }
     }
@@ -236,8 +231,7 @@ processfaceevents(localclientnum) {
         case "nullstate":
           if(isDefined(self.face_curr_event)) {
             self setanimknob(level.facestates[self.face_anim_tree][self.face_curr_event]["animation"][self.face_curr_event_idx], 1.0, 0.1, 1.0);
-          }
-          else if(isDefined(self.face_curr_base)) {
+          } else if(isDefined(self.face_curr_base)) {
             self setanimknob(level.facestates[self.face_anim_tree][self.face_curr_base]["animation"][self.face_curr_base_idx], 1.0, 0.1, 1.0);
           }
 
@@ -291,8 +285,7 @@ processfaceevents(localclientnum) {
 
     if(isDefined(self.face_curr_event)) {
       state = self waitforanypriorityreturn(self.face_curr_event);
-    }
-    else {
+    } else {
       state = self waitforanypriorityreturn(self.face_curr_base);
     }
   }
@@ -312,15 +305,13 @@ showstate(state) {
 
         if(isDefined(self.face_disable) && self.face_disable) {
           disablechar = "-";
-        }
-        else {
+        } else {
           disablechar = "+";
         }
 
         if(isDefined(self.face_death) && self.face_death) {
           deathchar = "D";
-        }
-        else {
+        } else {
           deathchar = "A";
         }
 
@@ -337,8 +328,7 @@ setfacestate(state) {
   if(state == "face_advance") {
     if(isDefined(self.face_curr_event)) {
       self.face_state = self.face_curr_event;
-    }
-    else if(isDefined(self.face_curr_base)) {
+    } else if(isDefined(self.face_curr_base)) {
       self.face_state = self.face_curr_base;
     }
 

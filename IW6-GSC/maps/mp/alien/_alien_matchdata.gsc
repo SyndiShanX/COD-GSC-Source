@@ -43,11 +43,9 @@ get_alien_game_type() {
 
   if(maps\mp\alien\_utility::is_hardcore_mode()) {
     return CONST_HARDCORE_MODE;
-  }
-  else if(maps\mp\alien\_utility::is_casual_mode()) {
+  } else if(maps\mp\alien\_utility::is_casual_mode()) {
     return CONST_CASUAL_MODE;
-  }
-  else {
+  } else {
     return CONST_NORMAL_MODE;
   }
 }
@@ -257,7 +255,7 @@ EndGame(end_condition, play_time) {
   set_game_data(end_condition, play_time);
 
   foreach(player in level.players) {
-  player set_player_game_data();
+    player set_player_game_data();
   }
 
   sendMatchData();
@@ -299,14 +297,14 @@ copy_from_playerData() {
 
 set_perk_upgraded() {
   foreach(index, perk_name in self.alien_matchData.perk_upgraded) {
-  setMatchData("players", self.clientid, "aliensPerksBought", index, perk_name);
+    setMatchData("players", self.clientid, "aliensPerksBought", index, perk_name);
   }
 }
 
 set_lastStand_stats() {
   foreach(stat_type, info_array in self.alien_matchData.lastStand_record) {
     foreach(hive_index, counts in info_array) {
-    setMatchData("players", self.clientid, stat_type, hive_index, validate_byte(counts));
+      setMatchData("players", self.clientid, stat_type, hive_index, validate_byte(counts));
     }
   }
 }

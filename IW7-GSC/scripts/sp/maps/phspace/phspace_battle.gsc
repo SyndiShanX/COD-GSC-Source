@@ -102,7 +102,7 @@ func_104B6() {
   thread scripts\sp\maps\phspace\phspace::func_1062B();
 
   foreach(var_01 in level.func_1D0B) {
-  var_01 func_0BDC::func_19A9();
+    var_01 func_0BDC::func_19A9();
   }
 
   level.func_EA99 func_0BDC::func_6B4C("fly", 1);
@@ -168,8 +168,7 @@ func_1120E() {}
 func_28B8() {
   if(level.console || level.player global_fx()) {
     scripts\sp\utility::func_56BA("basic_controls");
-  }
-  else {
+  } else {
     scripts\sp\utility::func_56BA("basic_controls_pc");
   }
 
@@ -178,8 +177,7 @@ func_28B8() {
 
   if(level.console || level.player global_fx()) {
     scripts\sp\utility::func_56BA("basic_boosters");
-  }
-  else {
+  } else {
     scripts\sp\utility::func_56BA("basic_boosters_pc");
   }
 
@@ -197,8 +195,7 @@ func_8FF1() {
     if(abs(var_2[0]) > 0.3 || abs(var_2[1]) > 0.3 || abs(var_3[0]) > 0.3 || abs(var_3[1]) > 0.3) {
       if(var_01 == -1) {
         var_01 = gettime() / 1000;
-      }
-      else if(gettime() / 1000 - var_01 > var_00) {
+      } else if(gettime() / 1000 - var_01 > var_00) {
         break;
       }
     } else
@@ -218,8 +215,7 @@ func_8FF2() {
     if(level.player issprinting()) {
       if(var_01 == -1) {
         var_01 = gettime() / 1000;
-      }
-      else if(gettime() / 1000 - var_01 > var_00) {
+      } else if(gettime() / 1000 - var_01 > var_00) {
         break;
       }
     } else
@@ -239,8 +235,7 @@ func_8FF3() {
     if(level.player buttonpressed("BUTTON_A") || level.player buttonpressed("BUTTON_B")) {
       if(var_01 == -1) {
         var_01 = gettime() / 1000;
-      }
-      else if(gettime() / 1000 - var_01 > var_00) {
+      } else if(gettime() / 1000 - var_01 > var_00) {
         break;
       }
     } else
@@ -815,8 +810,7 @@ func_491E(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08
 
   if(var_08) {
     var_07 = anglesToForward(var_0.angles) * var_01 + anglestoright(var_0.angles) * var_02 + anglestoup(var_0.angles) * var_03;
-  }
-  else {
+  } else {
     var_07 = (var_01, var_02, var_03);
   }
 
@@ -851,7 +845,7 @@ func_A0AC() {
   thread scripts\sp\maps\phspace\phspace::func_1062B();
 
   foreach(var_00 in level.func_1D0B) {
-  var_00 thread func_1D75(1, 0, 1);
+    var_00 thread func_1D75(1, 0, 1);
   }
 
   thread func_FE2F();
@@ -1051,8 +1045,7 @@ func_A1CC() {
 
     if(var_11 > 0) {
       var_00 thread func_0BDC::func_19AB(1400);
-    }
-    else {
+    } else {
       var_00 thread func_0BDC::func_19AB(700);
 
       if(var_08 == 0) {
@@ -1263,18 +1256,16 @@ func_9ABF(var_00, var_01, var_02, var_03) {
 
     if(var_12 > var_04 && var_09 != var_07) {
       var_09 = var_07;
-    }
-    else if(var_12 < var_05 && var_09 != var_08) {
+    } else if(var_12 < var_05 && var_09 != var_08) {
       var_09 = var_08;
-    }
-    else if(var_12 < var_04 && var_12 > var_05 && var_09 != var_06) {
+    } else if(var_12 < var_04 && var_12 > var_05 && var_09 != var_06) {
       var_09 = var_06;
     }
 
     var_00 func_0BDC::func_19AB(var_09);
 
     foreach(var_14 in var_01) {
-    var_14 func_0BDC::func_19AB(var_09);
+      var_14 func_0BDC::func_19AB(var_09);
     }
 
     wait 0.2;
@@ -1440,18 +1431,15 @@ func_A33D(var_00) {
 
   if(var_0.script_noteworthy == "axis_jackal_s2") {
     var_01 = level.func_3663;
-  }
-  else if(var_0.script_noteworthy == "axis_jackal_s3") {
+  } else if(var_0.script_noteworthy == "axis_jackal_s3") {
     var_01 = level.func_3664;
-  }
-  else if(var_0.script_noteworthy == "axis_jackal_s4") {
+  } else if(var_0.script_noteworthy == "axis_jackal_s4") {
     var_01 = level.func_3665;
   }
 
   if(!isDefined(var_01) && isDefined(level.func_3665)) {
     var_01 = level.func_3665;
-  }
-  else if(!isDefined(var_01) && isDefined(level.func_3663)) {
+  } else if(!isDefined(var_01) && isDefined(level.func_3663)) {
     var_01 = level.func_3663;
   }
 
@@ -1525,7 +1513,7 @@ func_CB28(var_00, var_01) {
     level.func_134F6[var_00] = [];
 
     foreach(var_04, var_03 in var_01) {
-    level.func_134F6[var_00][var_04] = [var_03, 0];
+      level.func_134F6[var_00][var_04] = [var_03, 0];
     }
   }
 
@@ -1688,8 +1676,7 @@ func_FCF2(var_00) {
 func_FD10() {
   if(func_0BDC::func_9C1B(0.9) && func_0BDC::func_9C1A(25000)) {
     return 1;
-  }
-  else {
+  } else {
     return 0;
   }
 }
@@ -1826,8 +1813,7 @@ func_FD3C() {
 
     if(var_04 != level.func_D127) {
       var_03 = var_03 / 20;
-    }
-    else if(var_04 == level.func_D127) {
+    } else if(var_04 == level.func_D127) {
       var_03 = var_03 * var_02;
     }
 
@@ -1941,7 +1927,7 @@ func_12B7A(var_00) {
 
 func_FD1C() {
   foreach(var_01 in level.func_52D1) {
-  var_01 func_0BA9::func_3978();
+    var_01 func_0BA9::func_3978();
   }
 }
 
@@ -2051,8 +2037,7 @@ func_530A(var_00, var_01, var_02, var_03) {
 
     if(isDefined(var_01)) {
       wait(var_1.func_6D39);
-    }
-    else {
+    } else {
       wait 0.3;
     }
 
@@ -2097,8 +2082,7 @@ func_12A43() {
 
     if(scripts\sp\utility::func_7B9D() <= 0.1) {
       var_00 = 0;
-    }
-    else if(scripts\sp\utility::func_7B9D() >= 0.6) {
+    } else if(scripts\sp\utility::func_7B9D() >= 0.6) {
       var_00 = 1;
     }
 
@@ -2373,7 +2357,7 @@ func_23A3() {
   scripts\engine\utility::flag_wait("ship_assault_complete");
 
   foreach(var_07 in var_02) {
-  var_07 delete();
+    var_07 delete();
   }
 }
 

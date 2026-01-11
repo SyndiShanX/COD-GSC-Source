@@ -32,8 +32,7 @@ setvehiclefx(vehicletype, material, fx) {
   }
   if(!isDefined(fx)) {
     level._vehicle_effect[vehicletype][material] = -1;
-  }
-  else {
+  } else {
     level._vehicle_effect[vehicletype][material] = loadfx(fx);
   }
 }

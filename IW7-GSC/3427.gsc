@@ -114,9 +114,7 @@ special_weapon_logic(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var
 
     if(self.health - var_02 < 1) {
       if(isDefined(level.medusa_check_func)) {
-        var_16 = [
-          [level.medusa_check_func]
-        ](self);
+        var_16 = [[level.medusa_check_func]](self);
 
         if(isDefined(var_16)) {
           self.nocorpse = 1;
@@ -144,14 +142,15 @@ special_weapon_logic(var_00, var_01, var_02, var_03, var_04, var_05, var_06, var
 
   if(self.health - var_02 < 1) {
     if(isDefined(level.lethaldamage_func)) {
-      [[level.lethaldamage_func]](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
+      [
+        [level.lethaldamage_func]
+      ](var_00, var_01, var_02, var_03, var_04, var_05, var_06, var_07, var_08, var_09, var_10, var_11);
     }
 
     if(!var_12 && !var_15) {
       if(var_01 scripts\cp\utility::is_consumable_active("headshot_explosion")) {
         check_to_use_headshot_explosion(var_01, var_06, var_02, var_04, var_05, var_08, var_13);
-      }
-      else if(var_01 scripts\cp\utility::has_zombie_perk("perk_machine_change")) {
+      } else if(var_01 scripts\cp\utility::has_zombie_perk("perk_machine_change")) {
         [[level.change_chew_explosion_func]](var_01, var_06, var_02, var_04, var_05, var_08);
       }
     }
@@ -239,8 +238,7 @@ dischord_death_logic(var_00, var_01, var_02, var_03, var_04) {
 
   if(isDefined(var_00)) {
     var_00 radiusdamage(self.origin, var_08, 2000, 2000, var_00, "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
-  }
-  else {
+  } else {
     level.players[0] radiusdamage(self.origin, var_08, 2000, 2000, level.players[0], "MOD_GRENADE_SPLASH", "iw7_dischorddummy_zm");
   }
 
@@ -326,8 +324,7 @@ fling_zombie(var_00, var_01, var_02, var_03) {
 
     if(isDefined(var_02)) {
       self getrandomarmkillstreak(self.health + 1000, self.origin, var_02, var_02, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
-    }
-    else {
+    } else {
       self getrandomarmkillstreak(self.health + 1000, self.origin, level.players[0], level.players[0], "MOD_UNKNOWN", "iw7_dischorddummy_zm");
     }
   } else {
@@ -336,8 +333,7 @@ fling_zombie(var_00, var_01, var_02, var_03) {
 
     if(isDefined(var_02)) {
       self getrandomarmkillstreak(self.health + 1000, var_1.origin, var_02, var_01, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
-    }
-    else {
+    } else {
       self getrandomarmkillstreak(self.health + 1000, var_1.origin, var_01, var_01, "MOD_UNKNOWN", "iw7_dischorddummy_zm");
     }
   }
@@ -454,8 +450,7 @@ facemelter_death_logic(var_00, var_01, var_02, var_03, var_04) {
 
       if(var_13 == 0) {
         var_18 setscriptablepartstate("explosion", "active");
-      }
-      else {
+      } else {
         var_18 setscriptablepartstate("explosion", "neutral");
       }
 
@@ -492,8 +487,7 @@ turn_on_rocket_feet() {
 
   if(scripts\engine\utility::is_true(self.dismember_crawl)) {
     wait 0.3;
-  }
-  else {
+  } else {
     wait 0.1;
   }
 
@@ -728,8 +722,7 @@ explode_head_shards(var_00, var_01, var_02, var_03) {
     case "iw7_headcutter_zm":
       if(var_04) {
         var_06 = "iw7_headcutter2_zm+hcpap1";
-      }
-      else {
+      } else {
         var_06 = "iw7_headcutter2_zm";
       }
 
@@ -737,8 +730,7 @@ explode_head_shards(var_00, var_01, var_02, var_03) {
     case "iw7_headcutter2_zm":
       if(var_04) {
         var_06 = "iw7_headcutter3_zm+hcpap1";
-      }
-      else {
+      } else {
         var_06 = "iw7_headcutterdummy_zm";
       }
 
@@ -759,8 +751,7 @@ explode_head_shards(var_00, var_01, var_02, var_03) {
   foreach(var_13 in var_11) {
     if(isDefined(var_13.agent_type) && (var_13.agent_type == "zombie_grey" || var_13.agent_type == "zombie_brute")) {
       var_14 = 100;
-    }
-    else {
+    } else {
       var_14 = 100000;
     }
 
@@ -806,15 +797,13 @@ weapon_watch_hint() {
 updatecamoscripts(var_00, var_01) {
   if(isDefined(var_00)) {
     var_02 = getweaponcamoname(var_00);
-  }
-  else {
+  } else {
     var_02 = undefined;
   }
 
   if(isDefined(var_01)) {
     var_03 = getweaponcamoname(var_01);
-  }
-  else {
+  } else {
     var_03 = undefined;
   }
 
@@ -1470,8 +1459,7 @@ startdamageovertime(var_00, var_01, var_02, var_03, var_04) {
 
   if(isDefined(level.splash_grenade_victim_scriptable_state_func) && isalive(self) && isDefined(self.species) && self.species == "zombie") {
     self thread[[level.splash_grenade_victim_scriptable_state_func]](self);
-  }
-  else {}
+  } else {}
 
   thread standingdotdamage(var_00, var_01, var_02, var_03, var_04);
 }

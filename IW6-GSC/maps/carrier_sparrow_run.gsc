@@ -397,8 +397,7 @@ sparrow_run_enemy_logic(var_0, var_1, var_2, var_3) {
 
   if(isDefined(var_1)) {
     var_4 = common_scripts\utility::getstruct(var_1, "targetname");
-  }
-  else {
+  } else {
     var_4 = spawnStruct();
     var_4.origin = self.origin;
     var_4.angles = self.angles;
@@ -429,8 +428,7 @@ sparrow_run_enemy_03_logic(var_0, var_1, var_2) {
 
   if(isDefined(var_1)) {
     var_3 = common_scripts\utility::getstruct(var_1, "targetname");
-  }
-  else {
+  } else {
     var_3 = spawnStruct();
     var_3.origin = self.origin;
     var_3.angles = self.angles;
@@ -545,7 +543,7 @@ swap_destroyed_deck() {
   common_scripts\utility::array_thread(level.stern_corner_clean, maps\_utility::hide_entity);
 
   foreach(var_1 in level.stern_corner_dmg) {
-  var_1.origin = var_1.origin - (0, 0, 1024);
+    var_1.origin = var_1.origin - (0, 0, 1024);
   }
 
   common_scripts\utility::array_thread(level.stern_corner_dmg, maps\_utility::show_entity);
@@ -565,7 +563,7 @@ cleanup_zodiacs() {
   level.zodiacs = maps\_utility::array_removedead(level.zodiacs);
 
   foreach(var_1 in level.zodiacs) {
-  maps\_utility::deleteent(var_1);
+    maps\_utility::deleteent(var_1);
   }
 
   level.zodiacs = [];

@@ -14,7 +14,6 @@
 #include scripts\zm_common\gametypes\globallogic_player;
 #include scripts\zm_common\gametypes\spectating;
 #include scripts\zm_common\util;
-
 #namespace globallogic_ui;
 
 autoexec __init__system__() {
@@ -88,22 +87,22 @@ freegameplayhudelems() {
   }
 }
 
-  function teamplayercountsequal(playercounts) {
-    count = undefined;
+function teamplayercountsequal(playercounts) {
+  count = undefined;
 
-    foreach(team, _ in level.teams) {
-      if(!isDefined(count)) {
-        count = playercounts[team];
-        continue;
-      }
-
-      if(count != playercounts[team]) {
-        return false;
-      }
+  foreach(team, _ in level.teams) {
+    if(!isDefined(count)) {
+      count = playercounts[team];
+      continue;
     }
 
-    return true;
+    if(count != playercounts[team]) {
+      return false;
+    }
   }
+
+  return true;
+}
 
 teamwithlowestplayercount(playercounts, ignore_team) {
   count = 9999;
@@ -125,7 +124,7 @@ menuautoassign(comingfrommenu) {
   self closemenus();
 
   if(isDefined(level.forceallallies) && level.forceallallies) {
-    assignment = #"allies";
+    assignment = # "allies";
   } else if(level.teambased) {
     if(getdvarint(#"party_autoteams", 0) == 1) {
       if(level.allow_teamchange && (self.hasspawned || comingfrommenu)) {
@@ -162,10 +161,10 @@ menuautoassign(comingfrommenu) {
     }
 
     if(assignment == "" || getdvarint(#"party_autoteams", 0) == 0) {
-      assignment = #"allies";
+      assignment = # "allies";
     }
 
-    if(assignment == self.pers[#"team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
+    if(assignment == self.pers[# "team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
       self beginclasschoice();
       return;
     }
@@ -185,19 +184,19 @@ menuautoassign(comingfrommenu) {
     assignment = self.botteam;
   }
 
-  if(assignment != self.pers[#"team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
+  if(assignment != self.pers[# "team"] && (self.sessionstate == "playing" || self.sessionstate == "dead")) {
     self.switching_teams = 1;
     self.joining_team = assignment;
-    self.leaving_team = self.pers[#"team"];
+    self.leaving_team = self.pers[# "team"];
     self suicide();
   }
 
-  self.pers[#"team"] = assignment;
+  self.pers[# "team"] = assignment;
   self.team = assignment;
-  self.pers[#"class"] = undefined;
+  self.pers[# "class"] = undefined;
   self.curclass = undefined;
-  self.pers[#"weapon"] = undefined;
-  self.pers[#"savedmodel"] = undefined;
+  self.pers[# "weapon"] = undefined;
+  self.pers[# "savedmodel"] = undefined;
   self updateobjectivetext();
   self.sessionteam = assignment;
 
@@ -241,7 +240,7 @@ teamwithlowestscore() {
 }
 
 pickteamfromscores(teams) {
-  assignment = #"allies";
+  assignment = # "allies";
 
   if(teamscoresequal()) {
     assignment = teams[randomint(teams.size)];
@@ -285,11 +284,11 @@ closemenus() {
 }
 
 beginclasschoice(forcenewchoice) {
-  assert(isDefined(level.teams[self.pers[#"team"]]));
-  team = self.pers[#"team"];
+  assert(isDefined(level.teams[self.pers[# "team"]]));
+  team = self.pers[# "team"];
 
   if(level.disablecac == 1) {
-    self.pers[#"class"] = level.defaultclass;
+    self.pers[# "class"] = level.defaultclass;
     self.curclass = level.defaultclass;
 
     if(self.sessionstate != "playing" && game.state == "playing") {
@@ -304,15 +303,15 @@ beginclasschoice(forcenewchoice) {
 }
 
 showmainmenuforteam() {
-  assert(isDefined(level.teams[self.pers[#"team"]]));
-  team = self.pers[#"team"];
+  assert(isDefined(level.teams[self.pers[# "team"]]));
+  team = self.pers[# "team"];
   self openmenu(game.menu["menu_changeclass_" + level.teams[team]]);
 }
 
 menuautocontrolplayer() {
   self closemenus();
 
-  if(self.pers[#"team"] != "spectator") {
+  if(self.pers[# "team"] != "spectator") {
     toggleplayercontrol(self);
   }
 }
@@ -324,7 +323,7 @@ menuteam(team) {
     return;
   }
 
-  if(self.pers[#"team"] != team) {
+  if(self.pers[# "team"] != team) {
     if(level.ingraceperiod && (!isDefined(self.hasdonecombat) || !self.hasdonecombat)) {
       self.hasspawned = 0;
     }
@@ -332,16 +331,16 @@ menuteam(team) {
     if(self.sessionstate == "playing") {
       self.switching_teams = 1;
       self.joining_team = team;
-      self.leaving_team = self.pers[#"team"];
+      self.leaving_team = self.pers[# "team"];
       self suicide();
     }
 
-    self.pers[#"team"] = team;
+    self.pers[# "team"] = team;
     self.team = team;
-    self.pers[#"class"] = undefined;
+    self.pers[# "class"] = undefined;
     self.curclass = undefined;
-    self.pers[#"weapon"] = undefined;
-    self.pers[#"savedmodel"] = undefined;
+    self.pers[# "weapon"] = undefined;
+    self.pers[# "savedmodel"] = undefined;
     self updateobjectivetext();
     self.sessionteam = team;
     self player::function_466d8a4b(1);
@@ -354,20 +353,20 @@ menuteam(team) {
 menuspectator() {
   self closemenus();
 
-  if(self.pers[#"team"] != "spectator") {
+  if(self.pers[# "team"] != "spectator") {
     if(isalive(self)) {
       self.switching_teams = 1;
       self.joining_team = "spectator";
-      self.leaving_team = self.pers[#"team"];
+      self.leaving_team = self.pers[# "team"];
       self suicide();
     }
 
-    self.pers[#"team"] = "spectator";
+    self.pers[# "team"] = "spectator";
     self.team = "spectator";
-    self.pers[#"class"] = undefined;
+    self.pers[# "class"] = undefined;
     self.curclass = undefined;
-    self.pers[#"weapon"] = undefined;
-    self.pers[#"savedmodel"] = undefined;
+    self.pers[# "weapon"] = undefined;
+    self.pers[# "savedmodel"] = undefined;
     self updateobjectivetext();
     self.sessionteam = "spectator";
     [[level.spawnspectator]]();

@@ -204,8 +204,7 @@ function_25dd17ea() {
   globallogic_defaults::default_ontimelimit();
 }
 
-function_e1d7d235() {
-}
+function_e1d7d235() {}
 
 function_954bf69b() {
   if(level.teambased) {
@@ -366,9 +365,7 @@ onendgame(var_c3d87d03) {
     }
     if(level.scoreroundwinbased) {
       if(isDefined(winningteam)) {
-        [
-          [level._setteamscore]
-        ](winningteam, game.stat[# "roundswon"][winningteam] + 1);
+        [[level._setteamscore]](winningteam, game.stat[# "roundswon"][winningteam] + 1);
       }
     } else {
       if(isDefined(game.var_f3b50e28) && (!isDefined(game.var_ec37b672) || game.var_f3b50e28 > game.var_ec37b672)) {
@@ -381,9 +378,7 @@ onendgame(var_c3d87d03) {
         if(team === winningteam) {
           score += var_9dfe2c62;
         }
-        [
-          [level._setteamscore]
-        ](team, score);
+        [[level._setteamscore]](team, score);
       }
     }
     return winningteam;

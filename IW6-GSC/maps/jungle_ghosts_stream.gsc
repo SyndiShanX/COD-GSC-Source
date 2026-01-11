@@ -68,7 +68,7 @@ friendly_stream_navigation() {
           }
 
           foreach(var_5 in var_3) {
-          var_5.perfectaim = 1;
+            var_5.perfectaim = 1;
           }
 
           var_3 = undefined;
@@ -85,7 +85,7 @@ friendly_stream_navigation() {
           common_scripts\utility::array_thread(level.squad, maps\_utility::enable_ai_color);
 
           foreach(var_5 in level.squad) {
-          var_5.perfectaim = 0;
+            var_5.perfectaim = 0;
           }
         } else
           maps\_utility::activate_trigger_with_targetname("stream2_pos1");
@@ -203,8 +203,7 @@ stream_enemy_setup(var_0) {
 
       if(common_scripts\utility::flag("bridge_area_exit") && (common_scripts\utility::flag("_stealth_spotted") || common_scripts\utility::flag("stream_enemy_alert"))) {
         common_scripts\utility::flag_set("ambush_open_fire");
-      }
-      else {}
+      } else {}
 
       level.alpha2 maps\_utility::set_force_color("r");
     case "waterfall":
@@ -292,7 +291,7 @@ stream_fight_goes_hot() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2 thread maps\jungle_ghosts_util::manually_alert_me();
+    var_2 thread maps\jungle_ghosts_util::manually_alert_me();
   }
 
   var_4 = getEntArray("stream_color_trigs", "script_noteworthy");
@@ -329,8 +328,7 @@ stream_enemy_setup_on_going_hot() {
 
   if(common_scripts\utility::cointoss()) {
     var_0 = "upper_stream_left";
-  }
-  else {
+  } else {
     var_0 = "upper_stream_right";
   }
 
@@ -561,7 +559,7 @@ chopper_crash() {
   var_4 = getaiarray("axis");
 
   foreach(var_6 in var_4) {
-  var_6 thread maps\jungle_ghosts_util::manually_alert_me();
+    var_6 thread maps\jungle_ghosts_util::manually_alert_me();
   }
 
   var_8 = getanimlength( % jungle_ghost_helicrash_helicopter);
@@ -969,8 +967,7 @@ ambush_guy_change_sight_dist() {
   for(;;) {
     if(level.player istouching(var_0)) {
       self.maxsightdistsqrd = 1;
-    }
-    else {
+    } else {
       self.maxsightdistsqrd = self.oldmaxsight;
     }
 
@@ -1105,8 +1102,7 @@ backend_friendly_stealth_logic() {
 squad_save_old_color() {
   if(isDefined(self.script_forcecolor)) {
     self.old_color = self.script_forcecolor;
-  }
-  else if(isDefined(self.old_forcecolor)) {
+  } else if(isDefined(self.old_forcecolor)) {
     self.old_color = self.old_forcecolor;
   }
 }
@@ -1131,7 +1127,7 @@ check_death() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2 maps\jungle_ghosts_util::manually_alert_me();
+    var_2 maps\jungle_ghosts_util::manually_alert_me();
   }
 }
 
@@ -1144,28 +1140,28 @@ check_if_went_hot_late() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2 thread maps\jungle_ghosts_util::manually_alert_me();
+    var_2 thread maps\jungle_ghosts_util::manually_alert_me();
   }
 
   wait 5;
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2 thread maps\jungle_ghosts_util::manually_alert_me();
+    var_2 thread maps\jungle_ghosts_util::manually_alert_me();
   }
 
   wait 5;
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2 thread maps\jungle_ghosts_util::manually_alert_me();
+    var_2 thread maps\jungle_ghosts_util::manually_alert_me();
   }
 
   wait 5;
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2 thread maps\jungle_ghosts_util::manually_alert_me();
+    var_2 thread maps\jungle_ghosts_util::manually_alert_me();
   }
 }
 
@@ -1251,7 +1247,7 @@ pre_tall_grass_friendly_movement() {
   var_0 = common_scripts\utility::getstructarray("pre_grass_friendly_bad_places", "targetname");
 
   foreach(var_3, var_2 in var_0) {
-  badplace_cylinder("pre_tall_grass" + var_3, 0, var_2.origin, var_2.radius, 300, "allies");
+    badplace_cylinder("pre_tall_grass" + var_3, 0, var_2.origin, var_2.radius, 300, "allies");
   }
 
   var_4 = getent("pre_tall_grass_stealth_move_1", "script_noteworthy");
@@ -1618,7 +1614,7 @@ tall_grass_friendly_navigation() {
 
   if(var_4.size != 0 && !common_scripts\utility::flag("keep_tall_grass_alive_longer")) {
     foreach(var_2 in var_4) {
-    var_2 maps\jungle_ghosts_util::delete_if_player_cant_see_me();
+      var_2 maps\jungle_ghosts_util::delete_if_player_cant_see_me();
     }
   } else if(var_4.size != 0 && common_scripts\utility::flag("keep_tall_grass_alive_longer"))
     thread auto_spot_player();
@@ -1674,8 +1670,7 @@ get_latest_struct() {
     if(distancesquared(self.origin, self.goal_struct.origin) <= 22500) {
       if(isDefined(self.goal_struct.target)) {
         self.goal_struct = common_scripts\utility::getstruct(self.goal_struct.target, "targetname");
-      }
-      else {
+      } else {
         maps\_utility::ent_flag_set("end_of_spline");
       }
     }
@@ -1719,8 +1714,7 @@ stream_vo() {
         if(distance(level.alpha1.origin, level.player.origin) < var_1) {
           if(!common_scripts\utility::flag("player_about_to_break_stream_stealth")) {
             level.alpha1 thread maps\_utility::smart_dialogue("jungleg_els_waitforthemto");
-          }
-          else {
+          } else {
             level.alpha1 thread maps\_utility::smart_dialogue("jungleg_hsh_whereareyougoing");
           }
         }
@@ -1732,8 +1726,7 @@ stream_vo() {
         if(distance(level.alpha1.origin, level.player.origin) < var_1) {
           if(!common_scripts\utility::flag("player_about_to_break_stream_stealth")) {
             level.alpha1 thread maps\_utility::smart_dialogue("jungleg_els_waitforit");
-          }
-          else {
+          } else {
             level.merrick thread maps\_utility::smart_dialogue("jungleg_mrk_idontlikethe");
           }
         }

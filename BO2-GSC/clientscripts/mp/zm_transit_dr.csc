@@ -74,8 +74,7 @@ infog_clientfield_cb(localclientnum, oldval, newval, bnewent, binitialsnap, fiel
 
   if(newval == 1) {
     self thread lerp_infog_alpha(0);
-  }
-  else {
+  } else {
     self thread lerp_infog_alpha(1);
   }
 }
@@ -99,15 +98,12 @@ lerp_infog_alpha(up) {
 }
 
 register_client_fields() {
-  if(level.scr_zm_ui_gametype == "zclassic") {
-  }
+  if(level.scr_zm_ui_gametype == "zclassic") {}
 }
 
-register_client_flags() {
-}
+register_client_flags() {}
 
-register_clientflag_callbacks() {
-}
+register_clientflag_callbacks() {}
 
 start_zombie_stuff() {
   level._uses_crossbow = 1;
@@ -250,15 +246,13 @@ transit_vision_change(ent_player) {
     }
     if(isDefined(self.script_float)) {
       trans_time = self.script_float;
-    }
-    else {
+    } else {
       trans_time = 2;
     }
 
     if(!isDefined(who._previous_vision)) {
       who._previous_vision = visionset;
-    }
-    else {
+    } else {
       who clientscripts\mp\zombies\_zm::zombie_vision_set_remove(who._previous_vision, trans_time, local_clientnum);
     }
 

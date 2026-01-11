@@ -131,15 +131,13 @@ angle_dif(oldangle, newangle) {
 
   if(newangle > 180) {
     newdif = 360 - newangle;
-  }
-  else {
+  } else {
     newdif = newangle;
   }
 
   if(oldangle > 180) {
     olddif = 360 - oldangle;
-  }
-  else {
+  } else {
     olddif = oldangle;
   }
 
@@ -148,15 +146,13 @@ angle_dif(oldangle, newangle) {
 
   if(newangle > oldangle) {
     innerdif = newangle - oldangle;
-  }
-  else {
+  } else {
     innerdif = oldangle - newangle;
   }
 
   if(innerdif < outerdif) {
     return innerdif;
-  }
-  else {
+  } else {
     return outerdif;
   }
 }
@@ -583,69 +579,69 @@ waittill_either(msg1, msg2) {
 array_thread(entities, process, var1, var2, var3, var4, var5, var6, var7, var8, var9) {
   if(!isDefined(var1)) {
     foreach(ent in entities) {
-    ent thread[[process]]();
+      ent thread[[process]]();
     }
     return;
   }
 
   if(!isDefined(var2)) {
     foreach(ent in entities) {
-    ent thread[[process]](var1);
+      ent thread[[process]](var1);
     }
     return;
   }
 
   if(!isDefined(var3)) {
     foreach(ent in entities) {
-    ent thread[[process]](var1, var2);
+      ent thread[[process]](var1, var2);
     }
     return;
   }
 
   if(!isDefined(var4)) {
     foreach(ent in entities) {
-    ent thread[[process]](var1, var2, var3);
+      ent thread[[process]](var1, var2, var3);
     }
     return;
   }
 
   if(!isDefined(var5)) {
     foreach(ent in entities) {
-    ent thread[[process]](var1, var2, var3, var4);
+      ent thread[[process]](var1, var2, var3, var4);
     }
     return;
   }
 
   if(!isDefined(var6)) {
     foreach(ent in entities) {
-    ent thread[[process]](var1, var2, var3, var4, var5);
+      ent thread[[process]](var1, var2, var3, var4, var5);
     }
     return;
   }
 
   if(!isDefined(var7)) {
     foreach(ent in entities) {
-    ent thread[[process]](var1, var2, var3, var4, var5, var6);
+      ent thread[[process]](var1, var2, var3, var4, var5, var6);
     }
     return;
   }
 
   if(!isDefined(var8)) {
     foreach(ent in entities) {
-    ent thread[[process]](var1, var2, var3, var4, var5, var6, var7);
+      ent thread[[process]](var1, var2, var3, var4, var5, var6, var7);
     }
     return;
   }
 
   if(!isDefined(var9)) {
     foreach(ent in entities) {
-    ent thread[[process]](var1, var2, var3, var4, var5, var6, var7, var8);
+      ent thread[[process]](var1, var2, var3, var4, var5, var6, var7, var8);
     }
     return;
   }
 
   foreach(ent in entities) {
-  ent thread[[process]](var1, var2, var3, var4, var5, var6, var7, var8, var9);
+    ent thread[[process]](var1, var2, var3, var4, var5, var6, var7, var8, var9);
   }
   return;
 }
@@ -653,7 +649,7 @@ array_thread(entities, process, var1, var2, var3, var4, var5, var6, var7, var8, 
 array_call(entities, process, var1, var2, var3) {
   if(isDefined(var3)) {
     foreach(ent in entities) {
-    ent call[[process]](var1, var2, var3);
+      ent call[[process]](var1, var2, var3);
     }
 
     return;
@@ -661,7 +657,7 @@ array_call(entities, process, var1, var2, var3) {
 
   if(isDefined(var2)) {
     foreach(ent in entities) {
-    ent call[[process]](var1, var2);
+      ent call[[process]](var1, var2);
     }
 
     return;
@@ -669,14 +665,14 @@ array_call(entities, process, var1, var2, var3) {
 
   if(isDefined(var1)) {
     foreach(ent in entities) {
-    ent call[[process]](var1);
+      ent call[[process]](var1);
     }
 
     return;
   }
 
   foreach(ent in entities) {
-  ent call[[process]]();
+    ent call[[process]]();
   }
 }
 
@@ -926,7 +922,7 @@ array_remove(ents, remover) {
 
 array_remove_array(ents, remover_array) {
   foreach(remover in remover_array) {
-  ents = array_remove(ents, remover);
+    ents = array_remove(ents, remover);
   }
 
   return ents;
@@ -947,7 +943,7 @@ array_removeUndefined(array) {
 array_levelthread(array, process, var1, var2, var3) {
   if(isDefined(var3)) {
     foreach(ent in array) {
-    thread[[process]](ent, var1, var2, var3);
+      thread[[process]](ent, var1, var2, var3);
     }
 
     return;
@@ -955,7 +951,7 @@ array_levelthread(array, process, var1, var2, var3) {
 
   if(isDefined(var2)) {
     foreach(ent in array) {
-    thread[[process]](ent, var1, var2);
+      thread[[process]](ent, var1, var2);
     }
 
     return;
@@ -963,21 +959,21 @@ array_levelthread(array, process, var1, var2, var3) {
 
   if(isDefined(var1)) {
     foreach(ent in array) {
-    thread[[process]](ent, var1);
+      thread[[process]](ent, var1);
     }
 
     return;
   }
 
   foreach(ent in array) {
-  thread[[process]](ent);
+    thread[[process]](ent);
   }
 }
 
 array_levelcall(array, process, var1, var2, var3) {
   if(isDefined(var3)) {
     foreach(ent in array) {
-    call[[process]](ent, var1, var2, var3);
+      call[[process]](ent, var1, var2, var3);
     }
 
     return;
@@ -985,7 +981,7 @@ array_levelcall(array, process, var1, var2, var3) {
 
   if(isDefined(var2)) {
     foreach(ent in array) {
-    call[[process]](ent, var1, var2);
+      call[[process]](ent, var1, var2);
     }
 
     return;
@@ -993,14 +989,14 @@ array_levelcall(array, process, var1, var2, var3) {
 
   if(isDefined(var1)) {
     foreach(ent in array) {
-    call[[process]](ent, var1);
+      call[[process]](ent, var1);
     }
 
     return;
   }
 
   foreach(ent in array) {
-  call[[process]](ent);
+    call[[process]](ent);
   }
 }
 
@@ -1011,8 +1007,7 @@ add_to_array(array, ent) {
 
   if(!isDefined(array)) {
     array[0] = ent;
-  }
-  else {
+  } else {
     array[array.size] = ent;
   }
 
@@ -1205,19 +1200,18 @@ delayCall_proc(func, timer, param1, param2, param3, param4) {
   wait(timer);
   if(isDefined(param4)) {
     self call[[func]](param1, param2, param3, param4);
+  } else {
+    if(isDefined(param3))
   }
+  self call[[func]](param1, param2, param3);
   else {
-  if(isDefined(param3))
+    if(isDefined(param2))
   }
-    self call[[func]](param1, param2, param3);
+  self call[[func]](param1, param2);
   else {
-  if(isDefined(param2))
+    if(isDefined(param1))
   }
-    self call[[func]](param1, param2);
-  else {
-  if(isDefined(param1))
-  }
-    self call[[func]](param1);
+  self call[[func]](param1);
   else {
     self call[[func]]();
   }
@@ -1231,19 +1225,18 @@ noself_delayCall_proc(func, timer, param1, param2, param3, param4) {
   wait(timer);
   if(isDefined(param4)) {
     call[[func]](param1, param2, param3, param4);
+  } else {
+    if(isDefined(param3))
   }
+  call[[func]](param1, param2, param3);
   else {
-  if(isDefined(param3))
+    if(isDefined(param2))
   }
-    call[[func]](param1, param2, param3);
+  call[[func]](param1, param2);
   else {
-  if(isDefined(param2))
+    if(isDefined(param1))
   }
-    call[[func]](param1, param2);
-  else {
-  if(isDefined(param1))
-  }
-    call[[func]](param1);
+  call[[func]](param1);
   else {
     call[[func]]();
   }
@@ -1483,8 +1476,7 @@ getLastWeapon() {
 PlayerUnlimitedAmmoThread() {
   if(!isDefined(self) || self == level || self.code_classname != "player") {
     player = level.player;
-  }
-  else {
+  } else {
     player = self;
   }
 
@@ -1653,8 +1645,7 @@ fileprint_launcher_end_file(file_relative_to_game, bIsPerforceEnabled) {
 
   if(bIsPerforceEnabled) {
     fileprint_launcher("GAMEPRINTENDFILE:GAMEPRINTP4ENABLED:" + file_relative_to_game);
-  }
-  else {
+  } else {
     fileprint_launcher("GAMEPRINTENDFILE:" + file_relative_to_game);
   }
 
@@ -1708,11 +1699,10 @@ activate_individual_exploder() {
 
   if(isDefined(self.v["fxid"]) && self.v["fxid"] != "No FX") {
     self thread cannon_effect();
+  } else {
+    if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil")
   }
-  else {
-  if(isDefined(self.v["soundalias"]) && self.v["soundalias"] != "nil")
-  }
-    self thread sound_effect();
+  self thread sound_effect();
 
   if(isDefined(self.v["loopsound"]) && self.v["loopsound"] != "nil") {
     self thread effect_loopsound();
@@ -1732,11 +1722,10 @@ activate_individual_exploder() {
 
   if(self.v["exploder_type"] == "exploder") {
     self thread brush_show();
+  } else {
+    if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible"))
   }
-  else {
-  if((self.v["exploder_type"] == "exploderchunk") || (self.v["exploder_type"] == "exploderchunk visible"))
-  }
-    self thread brush_throw();
+  self thread brush_throw();
   else {
     self thread brush_delete();
   }
@@ -1750,8 +1739,7 @@ brush_delete() {
   num = self.v["exploder"];
   if(isDefined(self.v["delay"])) {
     wait(self.v["delay"]);
-  }
-  else {
+  } else {
     wait(.05);
   }
 
@@ -1905,8 +1893,7 @@ brush_show() {
   if(isSP() && (self.model.spawnflags & 1)) {
     if(!isDefined(self.model.disconnect_paths)) {
       self.model call[[level.connectPathsFunction]]();
-    }
-    else {
+    } else {
       self.model call[[level.disconnectPathsFunction]]();
     }
   }
@@ -1960,15 +1947,13 @@ exploder_delay() {
 exploder_damage() {
   if(isDefined(self.v["delay"])) {
     delay = self.v["delay"];
-  }
-  else {
+  } else {
     delay = 0;
   }
 
   if(isDefined(self.v["damage_radius"])) {
     radius = self.v["damage_radius"];
-  }
-  else {
+  } else {
     radius = 128;
   }
 
@@ -2024,15 +2009,13 @@ play_sound_in_space(alias, origin, master) {
   if(isSP()) {
     if(isDefined(master) && master) {
       org PlaySoundAsMaster(alias, "sounddone");
-    }
-    else {
+    } else {
       org playSound(alias, "sounddone");
     }
   } else {
     if(isDefined(master) && master) {
       org PlaySoundAsMaster(alias);
-    }
-    else {
+    } else {
       org playSound(alias);
     }
   }

@@ -16,8 +16,7 @@ setparent(var_00) {
 
   if(isDefined(self.point)) {
     setpoint(self.point, self.relativepoint, self.xoffset, self.yoffset);
-  }
-  else {
+  } else {
     setpoint("TOPLEFT");
   }
 }
@@ -144,8 +143,7 @@ setpoint(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_06 == "left" || var_5.alignx == "right") {
       var_09 = -1;
-    }
-    else {
+    } else {
       var_09 = 1;
     }
   } else {
@@ -153,8 +151,7 @@ setpoint(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_06 == "left") {
       var_09 = -1;
-    }
-    else {
+    } else {
       var_09 = 1;
     }
   }
@@ -169,8 +166,7 @@ setpoint(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_07 == "top" || var_5.aligny == "bottom") {
       var_11 = -1;
-    }
-    else {
+    } else {
       var_11 = 1;
     }
   } else {
@@ -178,8 +174,7 @@ setpoint(var_00, var_01, var_02, var_03, var_04) {
 
     if(var_07 == "top") {
       var_11 = -1;
-    }
-    else {
+    } else {
       var_11 = 1;
     }
   }
@@ -206,11 +201,9 @@ setpointbar(var_00, var_01, var_02, var_03) {
 
   if(self.alignx == "left") {
     self.bar.x = self.x + self.func_13E1E;
-  }
-  else if(self.alignx == "right") {
+  } else if(self.alignx == "right") {
     self.bar.x = self.x - (self.width - self.func_13E1E);
-  }
-  else {
+  } else {
     self.bar.x = self.x - int((self.width - self.func_13E1E * 2) / 2);
   }
 
@@ -547,8 +540,7 @@ func_10B56(var_00) {
 
   if(level.console) {
     level.func_10B54.y = -20;
-  }
-  else {
+  } else {
     level.func_10B54.y = -10;
   }
 
@@ -606,11 +598,9 @@ func_78E6(var_00, var_01, var_02, var_03) {
 
   if(!level.console) {
     var_04 = -250;
-  }
-  else if(!isDefined(var_00)) {
+  } else if(!isDefined(var_00)) {
     var_04 = -225;
-  }
-  else {
+  } else {
     var_04 = var_00;
   }
 
@@ -620,15 +610,13 @@ func_78E6(var_00, var_01, var_02, var_03) {
 
   if(!isDefined(var_01)) {
     var_05 = 100;
-  }
-  else {
+  } else {
     var_05 = var_01;
   }
 
   if(isDefined(var_02)) {
     var_06 = newclienthudelem(var_02);
-  }
-  else {
+  } else {
     var_06 = newhudelem();
   }
 
@@ -658,11 +646,9 @@ func_7956(var_00, var_01, var_02, var_03) {
 
   if(!level.console) {
     var_04 = -250;
-  }
-  else if(!isDefined(var_00)) {
+  } else if(!isDefined(var_00)) {
     var_04 = -170;
-  }
-  else {
+  } else {
     var_04 = var_00;
   }
 
@@ -672,15 +658,13 @@ func_7956(var_00, var_01, var_02, var_03) {
 
   if(!isDefined(var_01)) {
     var_05 = 100;
-  }
-  else {
+  } else {
     var_05 = var_01;
   }
 
   if(isDefined(var_02)) {
     var_06 = newclienthudelem(var_02);
-  }
-  else {
+  } else {
     var_06 = newhudelem();
   }
 
@@ -704,8 +688,7 @@ func_7956(var_00, var_01, var_02, var_03) {
 func_48B7(var_00, var_01, var_02) {
   if(isDefined(var_02)) {
     var_03 = newclienthudelem(var_02);
-  }
-  else {
+  } else {
     var_03 = newhudelem();
   }
 
@@ -817,8 +800,7 @@ func_10CCC(var_00) {
 func_7B5D(var_00) {
   if(isplayer(self)) {
     var_01 = self;
-  }
-  else {
+  } else {
     var_01 = level.player;
   }
 

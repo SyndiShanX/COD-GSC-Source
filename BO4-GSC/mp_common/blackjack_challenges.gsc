@@ -9,7 +9,6 @@
 #include scripts\core_common\player\player_stats;
 #include scripts\core_common\scoreevents_shared;
 #include scripts\core_common\system_shared;
-
 #namespace blackjack_challenges;
 
 autoexec __init__system__() {
@@ -47,18 +46,18 @@ on_player_connect() {
     if(isblackjack) {
       player thread track_blackjack_consumable();
 
-      if(!isDefined(self.pers[#"blackjack_challenge_active"])) {
+      if(!isDefined(self.pers[# "blackjack_challenge_active"])) {
         remaining_time = player consumableget("blackjack", "awarded") - player consumableget("blackjack", "consumed");
 
         if(remaining_time > 0) {
           special_card_earned = player get_challenge_stat("special_card_earned");
 
           if(!special_card_earned) {
-            player.pers[#"blackjack_challenge_active"] = 1;
-            player.pers[#"blackjack_unique_specialist_kills"] = 0;
-            player.pers[#"blackjack_specialist_kills"] = 0;
-            player.pers[#"blackjack_unique_weapon_mask"] = 0;
-            player.pers[#"blackjack_unique_ability_mask"] = 0;
+            player.pers[# "blackjack_challenge_active"] = 1;
+            player.pers[# "blackjack_unique_specialist_kills"] = 0;
+            player.pers[# "blackjack_specialist_kills"] = 0;
+            player.pers[# "blackjack_unique_weapon_mask"] = 0;
+            player.pers[# "blackjack_unique_ability_mask"] = 0;
           }
         }
       }
@@ -67,7 +66,7 @@ on_player_connect() {
 }
 
 is_challenge_active() {
-  return self.pers[#"blackjack_challenge_active"] === 1;
+  return self.pers[# "blackjack_challenge_active"] === 1;
 }
 
 on_hero_ability_kill(ability, victimability) {
@@ -82,14 +81,14 @@ on_hero_ability_kill(ability, victimability) {
   }
 
   if(player is_challenge_active()) {
-    player.pers[#"blackjack_specialist_kills"]++;
-    currentheroabilitymask = player.pers[#"blackjack_unique_ability_mask"];
+    player.pers[# "blackjack_specialist_kills"]++;
+    currentheroabilitymask = player.pers[# "blackjack_unique_ability_mask"];
     heroabilitymask = get_hero_ability_mask(ability);
     newheroabilitymask = heroabilitymask | currentheroabilitymask;
 
     if(newheroabilitymask != currentheroabilitymask) {
-      player.pers[#"blackjack_unique_specialist_kills"]++;
-      player.pers[#"blackjack_unique_ability_mask"] = newheroabilitymask;
+      player.pers[# "blackjack_unique_specialist_kills"]++;
+      player.pers[# "blackjack_unique_ability_mask"] = newheroabilitymask;
     }
 
     player check_blackjack_challenge();
@@ -110,7 +109,7 @@ debug_print_kill_info() {
   }
 
   player = self;
-  iprintln("<dev string:x67>" + player.pers[#"blackjack_specialist_kills"] + "<dev string:x84>" + player.pers[#"blackjack_unique_specialist_kills"]);
+  iprintln("<dev string:x67>" + player.pers[# "blackjack_specialist_kills"] + "<dev string:x84>" + player.pers[# "blackjack_unique_specialist_kills"]);
 }
 
 debug_print_earned() {
@@ -121,27 +120,27 @@ debug_print_earned() {
   iprintln("<dev string:x92>");
 }
 
-  function check_blackjack_challenge() {
-    player = self;
+function check_blackjack_challenge() {
+  player = self;
 
-    debug_print_kill_info();
+  debug_print_kill_info();
 
-      special_card_earned = player get_challenge_stat("special_card_earned");
+  special_card_earned = player get_challenge_stat("special_card_earned");
 
-    if(special_card_earned) {
-      debug_print_already_earned();
+  if(special_card_earned) {
+    debug_print_already_earned();
 
-        return;
-    }
-
-    if(player.pers[#"blackjack_specialist_kills"] >= 4 && player.pers[#"blackjack_unique_specialist_kills"] >= 2) {
-      player set_challenge_stat("special_card_earned", 1);
-      player stats::function_dad108fa(#"blackjack_challenge", 1);
-
-      debug_print_earned();
-
-    }
+    return;
   }
+
+  if(player.pers[# "blackjack_specialist_kills"] >= 4 && player.pers[# "blackjack_unique_specialist_kills"] >= 2) {
+    player set_challenge_stat("special_card_earned", 1);
+    player stats::function_dad108fa(#"blackjack_challenge", 1);
+
+    debug_print_earned();
+
+  }
+}
 
 challenge_kills(data) {
   attackeristhief = data.attackeristhief;
@@ -168,14 +167,14 @@ challenge_kills(data) {
   if(attackeristhief) {
     if(weapon.isheroweapon === 1) {
       if(player is_challenge_active()) {
-        player.pers[#"blackjack_specialist_kills"]++;
-        currentheroweaponmask = player.pers[#"blackjack_unique_weapon_mask"];
+        player.pers[# "blackjack_specialist_kills"]++;
+        currentheroweaponmask = player.pers[# "blackjack_unique_weapon_mask"];
         heroweaponmask = get_hero_weapon_mask(attacker, weapon);
         newheroweaponmask = heroweaponmask | currentheroweaponmask;
 
         if(newheroweaponmask != currentheroweaponmask) {
-          player.pers[#"blackjack_unique_specialist_kills"] += 1;
-          player.pers[#"blackjack_unique_weapon_mask"] = newheroweaponmask;
+          player.pers[# "blackjack_unique_specialist_kills"] += 1;
+          player.pers[# "blackjack_unique_weapon_mask"] = newheroweaponmask;
         }
 
         player check_blackjack_challenge();
@@ -198,27 +197,27 @@ get_hero_weapon_mask(attacker, weapon) {
   }
 
   switch (weapon.name) {
-    case #"hero_minigun":
+    case # "hero_minigun":
       return 1;
-    case #"hero_flamethrower":
+    case # "hero_flamethrower":
       return 2;
-    case #"hero_lightninggun":
-    case #"hero_lightninggun_arc":
+    case # "hero_lightninggun":
+    case # "hero_lightninggun_arc":
       return 4;
-    case #"hero_firefly_swarm":
-    case #"hero_chemicalgelgun":
+    case # "hero_firefly_swarm":
+    case # "hero_chemicalgelgun":
       return 8;
-    case #"hero_pineapple_grenade":
-    case #"hero_pineapplegun":
+    case # "hero_pineapple_grenade":
+    case # "hero_pineapplegun":
       return 16;
-    case #"hero_bowlauncher2":
-    case #"hero_bowlauncher3":
-    case #"hero_bowlauncher4":
-    case #"hero_bowlauncher":
+    case # "hero_bowlauncher2":
+    case # "hero_bowlauncher3":
+    case # "hero_bowlauncher4":
+    case # "hero_bowlauncher":
       return 64;
-    case #"hero_gravityspikes":
+    case # "hero_gravityspikes":
       return 128;
-    case #"hero_annihilator":
+    case # "hero_annihilator":
       return 256;
     default:
       return 0;
@@ -231,21 +230,21 @@ get_hero_ability_mask(ability) {
   }
 
   switch (ability.name) {
-    case #"gadget_clone":
+    case # "gadget_clone":
       return 1;
-    case #"gadget_heat_wave":
+    case # "gadget_heat_wave":
       return 2;
-    case #"gadget_resurrect":
+    case # "gadget_resurrect":
       return 8;
-    case #"gadget_armor":
+    case # "gadget_armor":
       return 16;
-    case #"gadget_camo":
+    case # "gadget_camo":
       return 32;
-    case #"gadget_vision_pulse":
+    case # "gadget_vision_pulse":
       return 64;
-    case #"gadget_speed_burst":
+    case # "gadget_speed_burst":
       return 128;
-    case #"gadget_combat_efficiency":
+    case # "gadget_combat_efficiency":
       return 256;
     default:
       return 0;
@@ -307,7 +306,7 @@ challenge_round_ended(data) {
 track_blackjack_consumable() {
   level endon(#"game_ended");
   self notify(#"track_blackjack_consumable_singleton");
-  self endon(#"track_blackjack_consumable_singleton", #"disconnect");
+  self endon(#"track_blackjack_consumable_singleton", # "disconnect");
   player = self;
 
   if(!isDefined(player.last_blackjack_consumable_time)) {
@@ -328,11 +327,11 @@ report_consumable() {
     return;
   }
 
-  if(!isDefined(player.timeplayed) || !isDefined(player.timeplayed[#"total"])) {
+  if(!isDefined(player.timeplayed) || !isDefined(player.timeplayed[# "total"])) {
     return;
   }
 
-  current_time_played = player.timeplayed[#"total"];
+  current_time_played = player.timeplayed[# "total"];
   time_to_report = current_time_played - player.last_blackjack_consumable_time;
 
   if(time_to_report > 0) {

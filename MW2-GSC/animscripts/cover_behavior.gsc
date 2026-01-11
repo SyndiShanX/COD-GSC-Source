@@ -77,7 +77,7 @@ main(behaviorCallbacks) {
     self.coverNode.script_onlyidle = true;
   }
 
-    self thread watchSuppression();
+  self thread watchSuppression();
 
   desynched = (gettime() > 2500);
 
@@ -105,9 +105,7 @@ main(behaviorCallbacks) {
     }
 
     if(isDefined(behaviorCallbacks.moveToNearByCover)) {
-      if([
-          [behaviorCallbacks.moveToNearByCover]
-        ]())
+      if([[behaviorCallbacks.moveToNearByCover]]())
         continue;
     }
 
@@ -205,14 +203,14 @@ doNonAttackCoverBehavior(behaviorCallbacks) {
     return true;
   }
 
-    // if we're suppressed, we do other things.
-    if(suppressedBehavior(behaviorCallbacks)) {
-      if(isEnemyVisibleFromExposed()) {
-        resetSeekOutEnemyTime();
-      }
-      self.a.lastEncounterTime = gettime();
-      return true;
+  // if we're suppressed, we do other things.
+  if(suppressedBehavior(behaviorCallbacks)) {
+    if(isEnemyVisibleFromExposed()) {
+      resetSeekOutEnemyTime();
     }
+    self.a.lastEncounterTime = gettime();
+    return true;
+  }
 
   // reload if we need to; everything in this loop involves shooting.
   if(coverReload(behaviorCallbacks, 0)) {
@@ -246,8 +244,7 @@ attackSuppressableEnemy(behaviorCallbacks, coverTimers) {
     preferredActivity = "suppress";
     if(!self.provideCoveringFire && (gettime() - self.lastSuppressionTime) > 5000 && randomint(3) < 2) {
       preferredActivity = "ambush";
-    }
-    else if(!self animscripts\shoot_behavior::shouldSuppress()) {
+    } else if(!self animscripts\shoot_behavior::shouldSuppress()) {
       preferredActivity = "ambush";
     }
 
@@ -319,8 +316,7 @@ isEnemyVisibleFromExposed() {
   // if we couldn't see our enemy last time we stepped out, and they haven't moved, assume we still can't see them.
   if(distanceSquared(self.enemy.origin, self.couldntSeeEnemyPos) < 16 * 16) {
     return false;
-  }
-  else {
+  } else {
     return canSeeEnemyFromExposed();
   }
 }
@@ -442,14 +438,11 @@ callOptionalBehaviorCallback(callback, arg, arg2, arg3) {
   val = undefined;
   if(isDefined(arg3)) {
     val = [[callback]](arg, arg2, arg3);
-  }
-  else if(isDefined(arg2)) {
+  } else if(isDefined(arg2)) {
     val = [[callback]](arg, arg2);
-  }
-  else if(isDefined(arg)) {
+  } else if(isDefined(arg)) {
     val = [[callback]](arg);
-  }
-  else {
+  } else {
     val = [[callback]]();
   }
 
@@ -461,14 +454,13 @@ callOptionalBehaviorCallback(callback, arg, arg2, arg3) {
   //but that's not so easy to enforce.)
   if(val) {
     assert(gettime() != starttime);
-  }
-  else {
+  } else {
     assert(gettime() == starttime);
   }
 
-    if(!val) {
-      self notify("dont_end_idle");
-    }
+  if(!val) {
+    self notify("dont_end_idle");
+  }
 
   //prof_end( "callOptionalBehaviorCallback" );
 
@@ -556,9 +548,7 @@ idle(behaviorCallbacks, howLong) {
   if(isDefined(behaviorCallbacks.flinch)) {
     // flinch if we just started getting shot at very recently
     if(!self.a.idlingAtCover && gettime() - self.suppressionStart < 600) {
-      if([
-          [behaviorCallbacks.flinch]
-        ]())
+      if([[behaviorCallbacks.flinch]]())
         return true;
     } else {
       // if bullets aren't already whizzing by, idle for now but flinch if we get incoming fire
@@ -574,8 +564,7 @@ idle(behaviorCallbacks, howLong) {
 
   if(isDefined(howLong)) {
     self idleWait(howLong);
-  }
-  else {
+  } else {
     self idleWaitABit();
   }
 
@@ -752,11 +741,9 @@ resetLookForBetterCoverTime() {
     dist = distance2D(self.origin, self.enemy.origin);
     if(dist < self.engageMinDist) {
       self.a.getBoredOfThisNodeTime = currentTime + randomintrange(5000, 10000);
-    }
-    else if(dist > self.engageMaxDist && dist < self.goalradius) {
+    } else if(dist > self.engageMaxDist && dist < self.goalradius) {
       self.a.getBoredOfThisNodeTime = currentTime + randomintrange(2000, 5000);
-    }
-    else {
+    } else {
       self.a.getBoredOfThisNodeTime = currentTime + randomintrange(10000, 15000);
     }
   } else {
@@ -769,8 +756,7 @@ resetSeekOutEnemyTime() {
   // however, we'll try to find better cover before seeking them out
   if(isDefined(self.aggressiveMode)) {
     self.seekOutEnemyTime = gettime() + randomintrange(500, 1000);
-  }
-  else {
+  } else {
     self.seekOutEnemyTime = gettime() + randomintrange(3000, 5000);
   }
 }
@@ -852,8 +838,7 @@ turnToMatchNodeDirection(nodeAngleOffset) {
     if(self.a.pose == "stand" && node getHighestNodeStance() != "stand") {
       if(absRelYaw > 45 && absRelYaw < 90) {
         self orientmode("face angle", self.angles[1]);
-      }
-      else {
+      } else {
         self orientmode("face current");
       }
 
@@ -874,8 +859,7 @@ turnToMatchNodeDirection(nodeAngleOffset) {
     if(abs(relYaw) > 45) {
       if(self.a.pose == "stand") {
         set_standing_turns();
-      }
-      else {
+      } else {
         set_crouching_turns();
       }
 

@@ -85,8 +85,7 @@ giveCustomLoadout(takeAllWeapons, alreadySpawned) {
   }
   if(isDefined(takeAllWeapons) && !takeAllWeapons) {
     self thread takeOldWeapons(currentWeapon);
-  }
-  else {
+  } else {
     self EnableWeaponCycling();
   }
   return currentWeapon;

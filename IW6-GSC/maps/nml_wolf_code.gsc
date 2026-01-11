@@ -187,7 +187,7 @@ ghost_town_end() {
   var_0 = getaiarray("axis");
 
   foreach(var_2 in var_0) {
-  var_2.ignoreme = 0;
+    var_2.ignoreme = 0;
   }
 }
 
@@ -227,8 +227,7 @@ ghost_town_sneak_end() {
 
   if(!common_scripts\utility::flag("merrick_done_talking")) {
     maps\_utility::smart_radio_dialogue_interrupt("nml_mrk_weaponsfree");
-  }
-  else {
+  } else {
     var_0 = getaiarray("axis");
 
     if(var_0.size > 0) {
@@ -539,7 +538,7 @@ wolfpack_pack() {
   var_0 = getEntArray("wolf_2", "targetname");
 
   foreach(var_2 in var_0) {
-  var_2.script_wait = 0.1;
+    var_2.script_wait = 0.1;
   }
 
   thread maps\_spawner::flood_spawner_scripted(var_0);
@@ -780,7 +779,7 @@ player_gets_pistol(var_0) {
   level.player.prevweapons = level.player getweaponslist("primary");
 
   foreach(var_2 in level.player.prevweapons) {
-  level.player takeweapon(var_2);
+    level.player takeweapon(var_2);
   }
 
   level.player disableoffhandweapons();
@@ -1053,8 +1052,7 @@ faster_baker() {
 
     if(var_2 > 0) {
       level.baker maps\nml_util::set_move_rate(1.15);
-    }
-    else {
+    } else {
       level.baker maps\nml_util::set_move_rate(1.0);
     }
   }
@@ -1433,8 +1431,7 @@ draw_x_hint() {
 
   if(!level.console && !level.player usinggamepad()) {
     var_2 settext(&"NML_HINT_X_KB");
-  }
-  else {
+  } else {
     var_2 settext(&"NML_HINT_X");
   }
 
@@ -1470,8 +1467,7 @@ x_hint_blinks() {
 
     if(!level.console && !level.player usinggamepad()) {
       var_5.fontscale = 2;
-    }
-    else {
+    } else {
       var_5.fontscale = 2 * var_6;
     }
 
@@ -1482,8 +1478,7 @@ x_hint_blinks() {
 
     if(!level.console && !level.player usinggamepad()) {
       var_5.fontscale = 0.25;
-    }
-    else {
+    } else {
       var_5.fontscale = 0.25 * var_6;
     }
 
@@ -1496,7 +1491,7 @@ x_hint_blinks() {
       }
 
       foreach(var_3 in level.x_hint) {
-      var_3.alpha = 0;
+        var_3.alpha = 0;
       }
 
       var_0 = 0.1;
@@ -1538,8 +1533,7 @@ set_default_hud_stuff() {
 use_pressed() {
   if(!level.console && !level.player usinggamepad()) {
     return level.player attackbuttonpressed();
-  }
-  else {
+  } else {
     return level.player usebuttonpressed();
   }
 }
@@ -1619,8 +1613,7 @@ keegan_snipes(var_0) {
 
           if(distance2d(level.player.origin, level.keegan.origin) < 300) {
             level.keegan maps\nml_stealth::magic_stealth_shot(var_4);
-          }
-          else {
+          } else {
             level.keegan maps\nml_stealth::magic_stealth_shot(var_4, 2);
           }
 
@@ -1655,8 +1648,7 @@ teammates_react(var_0) {
 guy_react(var_0) {
   if(var_0) {
     var_1 = ["exposed_dive_grenade_B", "exposed_dive_grenade_F"];
-  }
-  else {
+  } else {
     var_1 = ["_stealth_behavior_generic1", "_stealth_behavior_generic2"];
   }
 

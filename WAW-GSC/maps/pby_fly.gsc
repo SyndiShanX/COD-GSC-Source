@@ -8306,8 +8306,7 @@ turret_ads_reminder() {
   level.ads_remind_text.font = "default";
   if(level.console) {
     str_ref = &"PBY_FLY_ADS_HINT";
-  }
-  else {
+  } else {
     str_ref = &"SCRIPT_PLATFORM_PBY_FLY_ADS_HINT";
   }
   level.ads_remind_text SetText(str_ref);

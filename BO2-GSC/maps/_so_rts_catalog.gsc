@@ -157,7 +157,7 @@ package_populate() {
 
     if(pkg.delivery != "CODE") {
       foreach(unit in pkg.units) {
-      assert(isDefined(level.rts.ai[unit]), "Package is referencing undefined ai unit-->" + unit);
+        assert(isDefined(level.rts.ai[unit]), "Package is referencing undefined ai unit-->" + unit);
       }
     }
 
@@ -201,22 +201,19 @@ package_populate() {
 
     if(pkg.hot_key_buy != "") {
       maps\_so_rts_support::registerkeybinding(pkg.hot_key_buy, ::package_buyunitpressed, pkg);
-    }
-    else {
+    } else {
       pkg.hot_key_buy = undefined;
     }
 
     if(pkg.hot_key_command != "") {
       maps\_so_rts_support::registerkeybinding(pkg.hot_key_command, ::package_commandunitpressed, pkg);
-    }
-    else {
+    } else {
       pkg.hot_key_command = undefined;
     }
 
     if(pkg.hot_key_takeover != "") {
       maps\_so_rts_support::registerkeybinding(pkg.hot_key_takeover, ::package_takeoverunitpressed, pkg);
-    }
-    else {
+    } else {
       pkg.hot_key_takeover = undefined;
     }
 
@@ -277,8 +274,7 @@ package_commandunitfps(squadid) {
   if(isDefined(level.rts.player.ally) && isDefined(level.rts.player.ally.vehicle)) {
     if(isDefined(level.rts.player.ally.vehicle.ai_ref.cmd_tag)) {
       eye = level.rts.player.ally.vehicle gettagorigin(level.rts.player.ally.vehicle.ai_ref.cmd_tag);
-    }
-    else {
+    } else {
       eye = level.rts.player.origin;
     }
   } else
@@ -308,15 +304,13 @@ package_commandunitfps(squadid) {
   if(isDefined(hitent)) {
     if(isDefined(maps\_so_rts_poi::ispoient(hitent))) {
       level.rts.targetpoi = hitent;
-    }
-    else {
+    } else {
       if(!isDefined(hitent.team)) {
         return;
       }
       if(hitent.team != level.rts.player.team) {
         level.rts.targetteamenemy = hitent;
-      }
-      else {
+      } else {
         level.rts.targetteammate = hitent;
       }
     }
@@ -324,7 +318,9 @@ package_commandunitfps(squadid) {
 
   foreach(squad in squads) {
     if(isDefined(squad.package_commandunitfps_cb)) {
-      [[squad.package_commandunitfps_cb]](trace);
+      [
+        [squad.package_commandunitfps_cb]
+      ](trace);
     }
 
     if(isDefined(level.rts.targetteamenemy)) {
@@ -339,8 +335,7 @@ package_commandunitfps(squadid) {
 
       if(!isDefined(level.rts.targetpoi.ai_ref)) {
         maps\_so_rts_squad::ordersquaddefend(level.rts.targetpoi.origin, squad.id);
-      }
-      else {
+      } else {
         maps\_so_rts_squad::ordersquadfollowai(squad.id, level.rts.targetpoi);
       }
 
@@ -477,7 +472,7 @@ package_highlightunits(squadid, clear) {
     }
 
     foreach(squad in squads) {
-    rpc("clientscripts/_so_rts", "set_SquadIsHighlighted", squad.id);
+      rpc("clientscripts/_so_rts", "set_SquadIsHighlighted", squad.id);
     }
   } else if(level.rts.squads[squadid].selectable) {
     if(is_true(clear)) {
@@ -557,11 +552,9 @@ package_takeoverunitpressed(pkg_ref) {
 
       if(isDefined(hitent) && isDefined(hitent.squadid) && hitent.squadid == squad.id) {
         thread maps\_so_rts_squad::squadselectnextaiandtakeover(squad.id, undefined, hitent);
-      }
-      else if(isDefined(level.rts.squads[squad.id].primary_ai_switchtarget)) {
+      } else if(isDefined(level.rts.squads[squad.id].primary_ai_switchtarget)) {
         thread maps\_so_rts_squad::squadselectnextaiandtakeover(squad.id, undefined, level.rts.squads[squad.id].primary_ai_switchtarget);
-      }
-      else {
+      } else {
         thread maps\_so_rts_squad::squadselectnextaiandtakeover(squad.id);
       }
     }
@@ -576,8 +569,7 @@ package_buyunitpressed(pkg_ref) {
 
   if(isinarray(level.rts.packages_avail, pkg_ref) && pkg_ref.selectable) {
     package_select(pkg_ref.ref);
-  }
-  else {
+  } else {
     return;
   }
 }
@@ -588,8 +580,7 @@ package_getnumteamresources(team) {
   for(i = 0; i < level.rts.packages_avail.size; i++) {
     if(level.rts.packages_avail[i].selectable == 0) {
       continue;
-    }
-    else if(level.rts.packages_avail[i].cost[team] >= 0) {
+    } else if(level.rts.packages_avail[i].cost[team] >= 0) {
       resources = resources + level.rts.packages_avail[i].qty[team] == -1 ? 1 : level.rts.packages_avail[i].qty[team];
     }
   }
@@ -618,8 +609,7 @@ package_select(pkg_ref, initial, cb) {
   if(!isDefined(pkg_ref)) {
     if(level.rts.packages_avail[level.rts.package_index].selectable) {
       thread spawn_package(level.rts.packages_avail[level.rts.package_index].ref, "allies", initial, cb);
-    }
-    else {
+    } else {
       level thread maps\_so_rts_support::create_hud_message(&"SO_RTS_UNIT_NOTAVAIL");
     }
   } else {
@@ -771,8 +761,7 @@ candeliverpkg(team, delivery, pkg_ref) {
   if(pkg_ref.qty[team] != -1) {
     if(pkg_ref.qty[team] > 0) {
       return "ok";
-    }
-    else {
+    } else {
       return "not_ready";
     }
   }
@@ -962,8 +951,7 @@ getnumtransports(type, team, avail) {
 
   if(type == "helo") {
     transports = level.rts.transport.helo;
-  }
-  else if(type == "vtol") {
+  } else if(type == "vtol") {
     transports = level.rts.transport.vtol;
   }
 
@@ -1022,11 +1010,9 @@ istransportavailable(team, type) {
 
   if(type == "helo") {
     transports = level.rts.transport.helo;
-  }
-  else if(type == "vtol") {
+  } else if(type == "vtol") {
     transports = level.rts.transport.vtol;
-  }
-  else {
+  } else {
     assert(0, "bad type passed");
   }
 
@@ -1045,11 +1031,9 @@ allocatetransport(team, type, pkg_ref, cb, paramcb) {
 
   if(type == "helo") {
     transports = level.rts.transport.helo;
-  }
-  else if(type == "vtol") {
+  } else if(type == "vtol") {
     transports = level.rts.transport.vtol;
-  }
-  else {
+  } else {
     assert(0, "bad type passed");
   }
 
@@ -1089,8 +1073,7 @@ allocatetransport(team, type, pkg_ref, cb, paramcb) {
 
       println("**** transport - timeTo: (" + timeto + ") timeBack: (" + timeback + ")");
 
-      if(team == "allies" && isDefined(pkg_ref.hot_key_takeover)) {
-      }
+      if(team == "allies" && isDefined(pkg_ref.hot_key_takeover)) {}
     }
   }
 
@@ -1151,8 +1134,7 @@ pkg_ref_checkmaxspawn(pkg, team) {
 
   if(team == "allies") {
     max = pkg.max_friendly;
-  }
-  else {
+  } else {
     max = pkg.max_axis;
   }
 

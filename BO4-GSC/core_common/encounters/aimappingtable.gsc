@@ -5,7 +5,6 @@
 
 #include scripts\core_common\struct;
 #include scripts\core_common\util_shared;
-
 #namespace aimappingtableutility;
 
 setmappingtableforteam(str_team, aimappingtable) {
